@@ -1,0 +1,70 @@
+{
+  "independentCheckPassed": true,
+  "cases": [
+    {
+      "id": "manufactured-8",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-16",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-32",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-64",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-8",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-32",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-128",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-axial-couette",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-rigid",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-wall-work",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "radial-core-annulus",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "endwall-free",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "endwall-stationary",
+      "independentSparseReconstructionPassed": true
+    }
+  ],
+  "manufacturedErrors": [
+    0.0033023272953978315,
+    0.0008479264072042918,
+    0.00022798772529744208,
+    5.901188744282207e-05
+  ],
+  "continuumDecayErrors": [
+    0.022268056198975095,
+    0.005998100271120466,
+    0.0017347467683194173
+  ],
+  "matchedExperimentalValidation": false,
+  "scope": "Numerical constrained torsional transport only; no meridional flow or device qualification"
+}

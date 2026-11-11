@@ -1,0 +1,148 @@
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', '-m', 'unittest', 'discover', '-s', 'scientific/axial-v73', '-p', 'test_*.py', '-v']
+test_axial_face_weight_preserves_uniform_radial_mode (test_torsion.TorsionTests.test_axial_face_weight_preserves_uniform_radial_mode) ... ok
+test_independent_report_gates_and_corruption (test_torsion.TorsionTests.test_independent_report_gates_and_corruption) ... ok
+test_invalid_and_nonfinite_derived_states (test_torsion.TorsionTests.test_invalid_and_nonfinite_derived_states) ... ok
+test_rigid_rotation_exact_inertia_variable_properties (test_torsion.TorsionTests.test_rigid_rotation_exact_inertia_variable_properties) ... ok
+test_rotating_walls_and_body_torque_have_separate_work (test_torsion.TorsionTests.test_rotating_walls_and_body_torque_have_separate_work) ... ok
+test_stress_free_ends_retain_radial_solution (test_torsion.TorsionTests.test_stress_free_ends_retain_radial_solution) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 1.033s
+
+OK
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', '-m', 'unittest', 'discover', '-s', 'scientific/diagnostic-v72', '-p', 'test_*.py', '-v']
+test_absent_chords_and_domain (test_brightness.BrightnessTests.test_absent_chords_and_domain) ... ok
+test_brightness_is_projected_not_local (test_brightness.BrightnessTests.test_brightness_is_projected_not_local) ... ok
+test_independent_checker_accepts_report_rejects_corruption (test_brightness.BrightnessTests.test_independent_checker_accepts_report_rejects_corruption) ... ok
+test_rigid_rotation_arbitrary_signed_chords (test_brightness.BrightnessTests.test_rigid_rotation_arbitrary_signed_chords) ... ok
+test_split_no_holdout_fit_leakage (test_brightness.BrightnessTests.test_split_no_holdout_fit_leakage) ... ok
+test_stale_marker_extraction_rejected (test_brightness.BrightnessTests.test_stale_marker_extraction_rejected) ... ok
+test_uniform_local_retains_previous_failure (test_brightness.BrightnessTests.test_uniform_local_retains_previous_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.330s
+
+OK
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', 'scientific/axial-v73/run_report.py', 'scientific/axial-v73/accepted/report.json']
+Wrote 13 unqualified research controls
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', 'scientific/axial-v73/independent_check.py', 'scientific/axial-v73/accepted/report.json']
+{
+  "independentCheckPassed": true,
+  "cases": [
+    {
+      "id": "manufactured-8",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-16",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-32",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "manufactured-64",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-8",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-32",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "axial-decay-128",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-axial-couette",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-rigid",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "variable-wall-work",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "radial-core-annulus",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "endwall-free",
+      "independentSparseReconstructionPassed": true
+    },
+    {
+      "id": "endwall-stationary",
+      "independentSparseReconstructionPassed": true
+    }
+  ],
+  "manufacturedErrors": [
+    0.0033023272953978315,
+    0.0008479264072042918,
+    0.00022798772529744208,
+    5.901188744282207e-05
+  ],
+  "continuumDecayErrors": [
+    0.022268056198975095,
+    0.005998100271120466,
+    0.0017347467683194173
+  ],
+  "matchedExperimentalValidation": false,
+  "scope": "Numerical constrained torsional transport only; no meridional flow or device qualification"
+}
+
+COMMAND ['npm', 'run', 'typecheck']
+
+> typecheck
+> tsc --noEmit
+
+
+COMMAND ['npm', 'run', 'build']
+
+> build
+> node scripts/build.mjs
+
+vite v8.3.6 building client environment for production...
+transforming...
+✓ 146 modules transformed.
+rendering chunks...
+computing gzip size...
+release/index.html                                      36.49 kB │ gzip:  11.79 kB
+release/assets/worker-CmpBVYPV.js                      163.66 kB
+release/assets/index-DXW746fK.css                       69.47 kB │ gzip:  13.79 kB
+release/assets/engineering-geometry-C4NlIRBo.js         11.73 kB │ gzip:   5.18 kB
+release/assets/fuel-centrifuge-geometry-CEcsxNED.js     21.57 kB │ gzip:   8.97 kB
+release/assets/apparatus-viewer-djwhzNGx.js            372.98 kB │ gzip:  92.25 kB
+release/assets/index-ZJmfEZ4b.js                     1,435.58 kB │ gzip: 425.00 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 258ms
+
+COMMAND ['npm', 'run', 'check:site']
+
+> check:site
+> node scripts/check-site.mjs
+
+Built modules parse; HTML resources, physics worker and deployment assets exist. Not a browser runtime check.
+
+COMMAND ['npm', 'run', 'check:assets']
+
+> check:assets
+> python3 blender/check_assets.py
+
+GLB v2: 176 meshes; PNG 1600×1000; Blender scene present
+Authored centrifuge: nine SI modules, 261 selectable hardware meshes, no studio objects
+
