@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "baseManifestSha256": "48dc3482838b2a942415fd6886bdf6c6c1f4e3be5c4eb30e22c394ed3ce4d4c7",
+  "levels": {
+    "spatial": [36, 36, 256],
+    "radial": [36, 48, 256],
+    "axial": [48, 36, 256]
+  },
+  "limits": {"rms": 0.02, "local": 0.05, "observable": 0.02},
+  "rationale": "The isolated endwall control leaves 11.3 percent early torque error at the old 24-cell terminal level, versus 2.69 percent at 48 cells. If coupled terminal-grid gates fail, insert a 36-cell level without deleting any original comparison. Reuse only trajectories with exactly the same frozen physical source and inputs; this extends sampling, not the physical model or tolerances."
+}
