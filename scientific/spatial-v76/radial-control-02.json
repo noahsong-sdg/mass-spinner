@@ -1,0 +1,83 @@
+{
+  "rows": [
+    {
+      "grid": "wall",
+      "n": 24,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 121,
+      "minimumCellM": 0.0003974451219818931,
+      "axisCellM": 0.005174600902625278,
+      "normalizedRms": 0.018926246022879446,
+      "normalizedMax": 0.12075060368739486,
+      "axisError": 0.12075060368739486,
+      "massResidualKg": 1.1249656330721176e-22
+    },
+    {
+      "grid": "symmetric",
+      "n": 24,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 112,
+      "minimumCellM": 0.00043182685817827915,
+      "axisCellM": 0.00043182685817827915,
+      "normalizedRms": 0.0235510364522462,
+      "normalizedMax": 0.11770404392852198,
+      "axisError": 0.11770404392852198,
+      "massResidualKg": -2.1147389347800998e-22
+    },
+    {
+      "grid": "wall",
+      "n": 48,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 251,
+      "minimumCellM": 0.00019077029084062919,
+      "axisCellM": 0.0025917870985938548,
+      "normalizedRms": 0.007411840359982933,
+      "normalizedMax": 0.15120529500759775,
+      "axisError": 0.15120529500759775,
+      "massResidualKg": -2.3161057151484775e-23
+    },
+    {
+      "grid": "symmetric",
+      "n": 48,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 241,
+      "minimumCellM": 0.00019872256099094486,
+      "axisCellM": 0.00019872256099094486,
+      "normalizedRms": 0.004117773568194253,
+      "normalizedMax": 0.021482816170979486,
+      "axisError": 0.021482816170979486,
+      "massResidualKg": 2.4421861350774585e-22
+    },
+    {
+      "grid": "wall",
+      "n": 96,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 511,
+      "minimumCellM": 9.347270005733571e-05,
+      "axisCellM": 0.0012964558403873359,
+      "normalizedRms": 0.0018697740718363832,
+      "normalizedMax": 0.07224204587906388,
+      "axisError": 0.07224204587906388,
+      "massResidualKg": 6.131476290549318e-23
+    },
+    {
+      "grid": "symmetric",
+      "n": 96,
+      "timeS": 1e-05,
+      "amplitude": 0.0001,
+      "steps": 501,
+      "minimumCellM": 9.538514542031112e-05,
+      "axisCellM": 9.53851454203125e-05,
+      "normalizedRms": 0.0011330831839106207,
+      "normalizedMax": 0.00463776044096045,
+      "axisError": 0.00463776044096045,
+      "massResidualKg": 2.0949722261969235e-22
+    }
+  ],
+  "scope": "Linear acoustic control, not coupled qualification"
+}

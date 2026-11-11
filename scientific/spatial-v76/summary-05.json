@@ -1,0 +1,203 @@
+{
+  "cases": 24,
+  "steps": 5472,
+  "endpoints": 72,
+  "failures": [],
+  "commonSpacePassed": true,
+  "commonGateCount": 615,
+  "cellAveragePassed": false,
+  "originalFailedGates": {
+    "joint": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.003930990525052783,
+          0.007929039813252629,
+          0.001133411759579235,
+          0.00032285010094015154
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.009222515218662655,
+          0.011251666838917184,
+          0.0016973991913168216,
+          0.0004184975863164411
+        ],
+        "passed": false
+      }
+    ],
+    "spatial": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.00393720761433279,
+          0.007929030656596725,
+          0.0011336240221349108,
+          0.0003229556034765894
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.009229271784236158,
+          0.011252771054636545,
+          0.0016988089655292507,
+          0.0004191582716217137
+        ],
+        "passed": false
+      }
+    ],
+    "temporal": [],
+    "radial": [],
+    "axial": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.0015881009967591766,
+          0.00765240308966968,
+          0.0010667289897185923,
+          0.00030980256556878774
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.004730960389127746,
+          0.010618099943930906,
+          0.0015084458333505162,
+          0.0003768572293058256
+        ],
+        "passed": false
+      }
+    ]
+  },
+  "references": {
+    "linearTolerance": {
+      "passed": true,
+      "maximumRms": 1.6294036017691577e-13,
+      "maximumLocal": 7.595360864073635e-13,
+      "maximumObservable": 0.0
+    },
+    "thermalTolerance": {
+      "passed": true,
+      "maximumRms": 3.43958981567778e-11,
+      "maximumLocal": 3.583954924823535e-10,
+      "maximumObservable": 1.955921186302492e-12
+    },
+    "bothTolerances": {
+      "passed": true,
+      "maximumRms": 3.43958981567778e-11,
+      "maximumLocal": 3.583954924823535e-10,
+      "maximumObservable": 1.955921186302492e-12
+    },
+    "referenceSmallerDt": {
+      "passed": true,
+      "maximumRms": 0.00011876397128546335,
+      "maximumLocal": 0.0017823535735831718,
+      "maximumObservable": 0.00048226242828100746
+    },
+    "referenceSpatial": {
+      "passed": true,
+      "maximumRms": 0.003461580581189085,
+      "maximumLocal": 0.03703257656738579,
+      "maximumObservable": 0.013785475678689384
+    },
+    "referenceTransportCfl": {
+      "passed": true,
+      "maximumRms": 1.0285149373612005e-06,
+      "maximumLocal": 1.4123812237233676e-05,
+      "maximumObservable": 4.978480242352454e-08
+    }
+  },
+  "finalSeries": {
+    "joint": {
+      "maximumRms": 0.0034761528481025566,
+      "maximumLocal": 0.026837912909706736,
+      "maximumObservable": 0.014171101714708029
+    },
+    "spatial": {
+      "maximumRms": 0.003503239128827201,
+      "maximumLocal": 0.02781680236760274,
+      "maximumObservable": 0.014336978488732032
+    },
+    "temporal": {
+      "maximumRms": 0.00027425057968444354,
+      "maximumLocal": 0.0030544578513915554,
+      "maximumObservable": 0.0009780996603832783
+    },
+    "radial": {
+      "maximumRms": 0.0031944647745516383,
+      "maximumLocal": 0.02806812187189943,
+      "maximumObservable": 0.0013411896243487077
+    },
+    "axial": {
+      "maximumRms": 0.0014486936957276567,
+      "maximumLocal": 0.004003101835693674,
+      "maximumObservable": 0.014309232733001012
+    }
+  },
+  "rawSha256": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+  "sourceHashes": {
+    "package-lock.json": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "package.json": "6fdaedc3d1f3b19c205f034078b70795089fcb94681c296d6882f4fef840a975",
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "scientific/coupled-axial-v74/independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "scientific/coupled-axial-v74/thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "scientific/mixture-axial-v75/PROTOCOL.md": "0195a09c2da99e18b80cb2a73d74046ba74ec3891f7388c138f88256270567a9",
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/mixture-axial-v75/audit.py": "569313ae21d71b19729ca54caea001a2e75db34353537e6e7ab1f962f5322c70",
+    "scientific/mixture-axial-v75/controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "scientific/mixture-axial-v75/coupling.py": "33e026df77534855fd22356b55b36d817361e4d81ee4477ce10c689b24493575",
+    "scientific/mixture-axial-v75/diffusion.py": "71a942cc68d34cd33f5df3cf4cf727373213bc511e73fff19b026f1be4eba60f",
+    "scientific/mixture-axial-v75/diffusion_controls.py": "c2928540fe8b02520bc1eac57ea466af3cec1a9351d9465af09e1b920ee9dd03",
+    "scientific/mixture-axial-v75/endpoint_admission.py": "7479b8b3258c80b89f1fa4880d8d7b7cb4fd0977fd587ac33f78121e7a59c597",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/mixture-axial-v75/independent.py": "3b5b78d710e4c15b65fa56f1b675fb7dbbcdf59716b8737c0f3bb991a98e437e",
+    "scientific/mixture-axial-v75/magnetic.py": "d2bb771f7b47b48e9b989a1df9d9461841663bb6b28480ee34173d183c5cef6f",
+    "scientific/mixture-axial-v75/manifest.json": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999",
+    "scientific/mixture-axial-v75/mixcheck.py": "6cfc408b6dc3bfa20c3e92e98c7ff5b85511441a1f6e868442ecdf925152a579",
+    "scientific/mixture-axial-v75/plot.py": "85aa08e5af54048855a9be9dc5616620cc29a306e6ecc3c1bc06ae9d832e490c",
+    "scientific/mixture-axial-v75/requirements.txt": "30b1b720fd19eb77c3f32552f810ccb578ace30d50a3be0aab6ecb13944b3182",
+    "scientific/mixture-axial-v75/run.py": "d3d4f5b6361965cc96c3c1c2a80802b373f9826d80246123c309eb849c5ac43b",
+    "scientific/mixture-axial-v75/supplemental_admission.py": "578a0ed8107cb5650be4dec028a471c54ab3fd46377534131f6ea0cca9a2d07e",
+    "scientific/mixture-axial-v75/test_analyze.py": "2078a198864970b807219fc759badfcf86e28220c15e55ad4d87b7e42b45fbe6",
+    "scientific/mixture-axial-v75/test_audit.py": "c0246933d3be242d86872c955160f7d6c8056c5b43b6476c0ab89997193bc715",
+    "scientific/mixture-axial-v75/test_controls.py": "7de53936ad454382eb6a1dccd6e074b34c6f5da031a1f634458a23d90ecdd9a6",
+    "scientific/mixture-axial-v75/test_coupling.py": "0cd1b8023d603e58fae52691897fa0fe738d07f19a93ccdacca7b9d8a1deedf7",
+    "scientific/mixture-axial-v75/test_diffusion.py": "faf25584514bd321643ef5f288e5397666603c515d4e9102cd54e2775881e834",
+    "scientific/mixture-axial-v75/test_diffusion_controls.py": "3f3590f2d2aa505c5f99913f1ef5c48ce7810494c9608593ca3544bfdfee3050",
+    "scientific/mixture-axial-v75/test_endpoint_admission.py": "5a0843a5517f7f4af548a476908c5abeaeda4572878a95619f1a922bdcf10f58",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/mixture-axial-v75/test_independent.py": "7f99904073f2c265e3c28feea305bd069db2d8e19e036308d5193c29798ee592",
+    "scientific/mixture-axial-v75/test_initial_integrals.py": "c02805921eb866cb5dc61ec3041a1d8f92c023f15d40018b8dbf75be3e2823c0",
+    "scientific/mixture-axial-v75/test_magnetic.py": "24975f069a9a6067b90c57f60897a2f276bdd7fba1041f734abc7a1471d886d6",
+    "scientific/mixture-axial-v75/test_run.py": "4d869c43e425bd5c34ca6cb4cb7d61a036ed486213f0cc0e75870b1b3bf1d4d8",
+    "scientific/mixture-axial-v75/test_supplemental_admission.py": "6e2bb65ad93a20ce6ce3f07199ea8220eb5cbdce259441f2519f4d08f12d236d",
+    "scientific/mixture-axial-v75/test_verify.py": "b8dbd4117e48ad76fa37f5c2c5fbead64c707d59881dcdd68bc53372a7d07f28",
+    "scientific/mixture-axial-v75/test_wall_resolution.py": "8e79bbe9e35b51ae568aac8584594d5b65b2b14a40652fc254ddff0ab0547409",
+    "scientific/mixture-axial-v75/verify.py": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+    "scientific/mixture-axial-v75/wall_resolution.py": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b"
+  },
+  "preRunRuntime": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "fipy": "4.0.3"
+  },
+  "analysisSha256": "2b6bb1700fb64920e046446607bd56bf8a3888b24ffc25ef853a53d6faeaa3c8",
+  "planSha256": "afec183c1af82d629eb77ad483c4005caa43fd49004e823fad05a1f4cb2b1c2d",
+  "experimentalQualified": false,
+  "liveQualified": false
+}

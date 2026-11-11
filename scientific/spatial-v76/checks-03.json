@@ -1,0 +1,198 @@
+{
+  "sourceHashes": {
+    "package-lock.json": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "package.json": "6fdaedc3d1f3b19c205f034078b70795089fcb94681c296d6882f4fef840a975",
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "scientific/coupled-axial-v74/independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "scientific/coupled-axial-v74/thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "scientific/mixture-axial-v75/PROTOCOL.md": "cc6b10f82a41f0b49d5baf7966cb8ef80ec10f125d98589b524b7093259ffd1c",
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/mixture-axial-v75/audit.py": "569313ae21d71b19729ca54caea001a2e75db34353537e6e7ab1f962f5322c70",
+    "scientific/mixture-axial-v75/controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "scientific/mixture-axial-v75/coupling.py": "33e026df77534855fd22356b55b36d817361e4d81ee4477ce10c689b24493575",
+    "scientific/mixture-axial-v75/diffusion.py": "71a942cc68d34cd33f5df3cf4cf727373213bc511e73fff19b026f1be4eba60f",
+    "scientific/mixture-axial-v75/diffusion_controls.py": "c2928540fe8b02520bc1eac57ea466af3cec1a9351d9465af09e1b920ee9dd03",
+    "scientific/mixture-axial-v75/endpoint_admission.py": "72b5498b4f05fc406977c8d73b4c4556e65a0a6ace45b5d381de775aa2dc6688",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/mixture-axial-v75/independent.py": "3b5b78d710e4c15b65fa56f1b675fb7dbbcdf59716b8737c0f3bb991a98e437e",
+    "scientific/mixture-axial-v75/magnetic.py": "d2bb771f7b47b48e9b989a1df9d9461841663bb6b28480ee34173d183c5cef6f",
+    "scientific/mixture-axial-v75/manifest.json": "48dc3482838b2a942415fd6886bdf6c6c1f4e3be5c4eb30e22c394ed3ce4d4c7",
+    "scientific/mixture-axial-v75/mixcheck.py": "6cfc408b6dc3bfa20c3e92e98c7ff5b85511441a1f6e868442ecdf925152a579",
+    "scientific/mixture-axial-v75/plot.py": "85aa08e5af54048855a9be9dc5616620cc29a306e6ecc3c1bc06ae9d832e490c",
+    "scientific/mixture-axial-v75/requirements.txt": "30b1b720fd19eb77c3f32552f810ccb578ace30d50a3be0aab6ecb13944b3182",
+    "scientific/mixture-axial-v75/run.py": "229550dc157f51984755e59755e581a5300b7988fdc999d595e345cdcdda27d8",
+    "scientific/mixture-axial-v75/supplemental_admission.py": "578a0ed8107cb5650be4dec028a471c54ab3fd46377534131f6ea0cca9a2d07e",
+    "scientific/mixture-axial-v75/test_analyze.py": "2078a198864970b807219fc759badfcf86e28220c15e55ad4d87b7e42b45fbe6",
+    "scientific/mixture-axial-v75/test_audit.py": "c0246933d3be242d86872c955160f7d6c8056c5b43b6476c0ab89997193bc715",
+    "scientific/mixture-axial-v75/test_controls.py": "7de53936ad454382eb6a1dccd6e074b34c6f5da031a1f634458a23d90ecdd9a6",
+    "scientific/mixture-axial-v75/test_coupling.py": "0cd1b8023d603e58fae52691897fa0fe738d07f19a93ccdacca7b9d8a1deedf7",
+    "scientific/mixture-axial-v75/test_diffusion.py": "faf25584514bd321643ef5f288e5397666603c515d4e9102cd54e2775881e834",
+    "scientific/mixture-axial-v75/test_diffusion_controls.py": "3f3590f2d2aa505c5f99913f1ef5c48ce7810494c9608593ca3544bfdfee3050",
+    "scientific/mixture-axial-v75/test_endpoint_admission.py": "5a0843a5517f7f4af548a476908c5abeaeda4572878a95619f1a922bdcf10f58",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/mixture-axial-v75/test_independent.py": "7f99904073f2c265e3c28feea305bd069db2d8e19e036308d5193c29798ee592",
+    "scientific/mixture-axial-v75/test_magnetic.py": "24975f069a9a6067b90c57f60897a2f276bdd7fba1041f734abc7a1471d886d6",
+    "scientific/mixture-axial-v75/test_run.py": "4d869c43e425bd5c34ca6cb4cb7d61a036ed486213f0cc0e75870b1b3bf1d4d8",
+    "scientific/mixture-axial-v75/test_supplemental_admission.py": "6e2bb65ad93a20ce6ce3f07199ea8220eb5cbdce259441f2519f4d08f12d236d",
+    "scientific/mixture-axial-v75/test_verify.py": "b8dbd4117e48ad76fa37f5c2c5fbead64c707d59881dcdd68bc53372a7d07f28",
+    "scientific/mixture-axial-v75/test_wall_resolution.py": "8e79bbe9e35b51ae568aac8584594d5b65b2b14a40652fc254ddff0ab0547409",
+    "scientific/mixture-axial-v75/verify.py": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+    "scientific/mixture-axial-v75/wall_resolution.py": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b"
+  },
+  "sourceUnchanged": true,
+  "checks": [
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/mixture-axial-v75",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 13.962477589999999,
+      "stdout": "3x4/16 base t=1e-05 iter=2\n3x4/16 base t=2e-05 iter=2\n3x4/16 base t=4e-05 iter=2\n",
+      "stderr": "----------------------------------------------------------------------\nRan 105 tests in 13.590s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/spatial-v76",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 12.607779964999999,
+      "stdout": "6x6/32 base t=1e-05 iter=2\n6x6/32 base t=2e-05 iter=2\n6x6/32 base t=4e-05 iter=3\n6x6/32 base t=1e-05 iter=2\n6x6/32 base t=2e-05 iter=2\n6x6/32 base t=4e-05 iter=3\n",
+      "stderr": "----------------------------------------------------------------------\nRan 9 tests in 12.217s\n\nOK\n"
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/coupled-axial-v74",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "exitCode": 0,
+      "seconds": 32.647017598000005,
+      "stdout": "",
+      "stderr": "----------------------------------------------------------------------\nRan 61 tests in 32.298s\n\nOK\n"
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsx",
+        "--test",
+        "tests/fuel-current-precision-v74.test.ts",
+        "tests/fuel-current-v66.test.ts",
+        "tests/fuel-current-axis-v66.test.ts",
+        "tests/fuel-current-reuse-v68.test.ts",
+        "tests/fuel-spatial-operation-v66.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 0.6788802920000023,
+      "stdout": "TAP version 13\n# Subtest: regular-axis Lorentz torque integrates the full cell, including its axis half\nok 1 - regular-axis Lorentz torque integrates the full cell, including its axis half\n  ---\n  duration_ms: 6.233959\n  type: 'test'\n  ...\n# Subtest: tighter current precision preserves default and physical work identity\nok 2 - tighter current precision preserves default and physical work identity\n  ---\n  duration_ms: 2.567791\n  type: 'test'\n  ...\n# Subtest: precision cannot relax the established acceptance or demand subroundoff solves\nok 3 - precision cannot relax the established acceptance or demand subroundoff solves\n  ---\n  duration_ms: 0.303083\n  type: 'test'\n  ...\n# Subtest: compiled electrical setup owns all inputs and resolves each new rotation without stale fields\nok 4 - compiled electrical setup owns all inputs and resolves each new rotation without stale fields\n  ---\n  duration_ms: 3.8705\n  type: 'test'\n  ...\n# Subtest: a compiled grounded zero-RHS circuit remains exact between nonzero rotation solves\nok 5 - a compiled grounded zero-RHS circuit remains exact between nonzero rotation solves\n  ---\n  duration_ms: 0.72925\n  type: 'test'\n  ...\n# Subtest: abrupt rotation reduction retains the same physical solution as a fresh grounded solve\nok 6 - abrupt rotation reduction retains the same physical solution as a fresh grounded solve\n  ---\n  duration_ms: 0.724208\n  type: 'test'\n  ...\n# Subtest: trajectory stepper snapshots setup and matches fresh electrical solves on successive accepted states\nok 7 - trajectory stepper snapshots setup and matches fresh electrical solves on successive accepted states\n  ---\n  duration_ms: 355.291625\n  type: 'test'\n  ...\n# Subtest: coaxial resistance, motional EMF, Lorentz work and Joule heating satisfy exact circuit law\nok 8 - coaxial resistance, motional EMF, Lorentz work and Joule heating satisfy exact circuit law\n  ---\n  duration_ms: 11.78825\n  type: 'test'\n  ...\n# Subtest: open radial boundaries polarize against rigid-rotation motional EMF without spurious wall current\nok 9 - open radial boundaries polarize against rigid-rotation motional EMF without spurious wall current\n  ---\n  duration_ms: 1.324708\n  type: 'test'\n  ...\n# Subtest: axis electrodes and ungrounded current systems fail explicitly; zero voltage gives zero current\nok 10 - axis electrodes and ungrounded current systems fail explicitly; zero voltage gives zero current\n  ---\n  duration_ms: 2.55475\n  type: 'test'\n  ...\n# Subtest: voltage gauge shifts do not alter currents, heat or torque\nok 11 - voltage gauge shifts do not alter currents, heat or torque\n  ---\n  duration_ms: 2.270625\n  type: 'test'\n  ...\n# Subtest: regular-axis open circuit balances motional field without current or heating\nok 12 - regular-axis open circuit balances motional field without current or heating\n  ---\n  duration_ms: 0.921125\n  type: 'test'\n  ...\n# Subtest: coupled accepted species, local inertia, current, shear and heat close the total energy and angular ledgers\nok 13 - coupled accepted species, local inertia, current, shear and heat close the total energy and angular ledgers\n  ---\n  duration_ms: 42.646875\n  type: 'test'\n  ...\n# Subtest: zero step preserves canonical state and runtime property domains reject extrapolation\nok 14 - zero step preserves canonical state and runtime property domains reject extrapolation\n  ---\n  duration_ms: 1.002833\n  type: 'test'\n  ...\n# Subtest: local rotation SG force reduces exactly to the rigid closure for a constant field\nok 15 - local rotation SG force reduces exactly to the rigid closure for a constant field\n  ---\n  duration_ms: 0.515334\n  type: 'test'\n  ...\n1..15\n# tests 15\n# suites 0\n# pass 15\n# fail 0\n# cancelled 0\n# skipped 0\n# todo 0\n# duration_ms 575.155626\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 1.8372839170000006,
+      "stdout": "\n> typecheck\n> tsc --noEmit\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.7408009999999976,
+      "stdout": "\n> build\n> node scripts/build.mjs\n\nvite v8.3.6 building client environment for production...\ntransforming...\n\u2713 146 modules transformed.\nrendering chunks...\ncomputing gzip size...\nrelease/index.html                                      36.49 kB \u2502 gzip:  11.79 kB\nrelease/assets/worker-CmpBVYPV.js                      163.66 kB\nrelease/assets/index-DXW746fK.css                       69.47 kB \u2502 gzip:  13.79 kB\nrelease/assets/engineering-geometry-C4NlIRBo.js         11.73 kB \u2502 gzip:   5.18 kB\nrelease/assets/fuel-centrifuge-geometry-CEcsxNED.js     21.57 kB \u2502 gzip:   8.97 kB\nrelease/assets/apparatus-viewer-djwhzNGx.js            372.98 kB \u2502 gzip:  92.25 kB\nrelease/assets/index-ZJmfEZ4b.js                     1,435.58 kB \u2502 gzip: 425.00 kB\n\n\u2713 built in 480ms\n",
+      "stderr": "[plugin builtin:vite-reporter] \n(!) Some chunks are larger than 500 kB after minification. Consider:\n- Using dynamic import() to code-split the application\n- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting\n- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.\n"
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "seconds": 0.22160770800000051,
+      "stdout": "\n> check:site\n> node scripts/check-site.mjs\n\nBuilt modules parse; HTML resources, physics worker and deployment assets exist. Not a browser runtime check.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "seconds": 0.10368562499999712,
+      "stdout": "\n> check:assets\n> python3 blender/check_assets.py\n\nGLB v2: 176 meshes; PNG 1600\u00d71000; Blender scene present\nAuthored centrifuge: nine SI modules, 261 selectable hardware meshes, no studio objects\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/mixture-axial-v75/diffusion_controls.py",
+        "--output",
+        "scientific/mixture-axial-v75/diffusion-controls-03.json"
+      ],
+      "exitCode": 0,
+      "seconds": 6.6771303359999905,
+      "stdout": "{\"passed\": true, \"gates\": [{\"name\": \"tagged:finest\", \"passed\": true, \"value\": 4.296141502612699e-07}, {\"name\": \"tagged:decreasing\", \"passed\": true, \"values\": [0.00010776759089504928, 2.7357841376257493e-05, 6.865633020271755e-06, 1.7180467950618105e-06, 4.296141502612699e-07]}, {\"name\": \"rotating:finest\", \"passed\": true, \"value\": 3.0662169328405034e-08}, {\"name\": \"rotating:decreasing\", \"passed\": true, \"values\": [3.775815234316375e-07, 2.1849414625335094e-07, 1.1686050673414515e-07, 6.035522433522186e-08, 3.0662169328405034e-08]}, {\"name\": \"tagged:6:closedLedgers\", \"passed\": true}, {\"name\": \"tagged:12:closedLedgers\", \"passed\": true}, {\"name\": \"tagged:24:closedLedgers\", \"passed\": true}, {\"name\": \"tagged:48:closedLedgers\", \"passed\": true}, {\"name\": \"tagged:96:closedLedgers\", \"passed\": true}, {\"name\": \"rotating:6:noExtraRotationForce\", \"passed\": true}, {\"name\": \"rotating:12:noExtraRotationForce\", \"passed\": true}, {\"name\": \"rotating:24:noExtraRotationForce\", \"passed\": true}, {\"name\": \"rotating:48:noExtraRotationForce\", \"passed\": true}, {\"name\": \"rotating:96:noExtraRotationForce\", \"passed\": true}]}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/mixture-axial-v75/audit.py",
+        "--output",
+        "scientific/mixture-axial-v75/audit-03.json"
+      ],
+      "exitCode": 0,
+      "seconds": 0.6042332919999893,
+      "stdout": "{\"passed\": true, \"negativeControls\": [{\"name\": \"mass\", \"rejected\": true, \"reason\": \"Independent local endpoint mismatch: score 6.19399e+08\"}, {\"name\": \"species\", \"rejected\": true, \"reason\": \"Independent local endpoint mismatch: score 2.4782e+09\"}, {\"name\": \"angularMomentum\", \"rejected\": true, \"reason\": \"Independent local endpoint mismatch: score 3.18833e+09\"}, {\"name\": \"energy\", \"rejected\": true, \"reason\": \"Independent local endpoint mismatch: score 2.457e+09\"}, {\"name\": \"enthalpyFlux\", \"rejected\": true, \"reason\": \"Independent local endpoint mismatch: score 1.96373e+07\"}, {\"name\": \"sourceNumericalHeat\", \"rejected\": true, \"reason\": \"Mixture source local thermal residual\"}]}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/spatial-v76/radial_control.py",
+        "scientific/spatial-v76/radial-control-03.json"
+      ],
+      "exitCode": 0,
+      "seconds": 2.654836918000001,
+      "stdout": "{\"rows\": [{\"grid\": \"wall\", \"n\": 24, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 121, \"minimumCellM\": 0.0003974451219818931, \"axisCellM\": 0.005174600902625278, \"normalizedRms\": 0.018926246022879446, \"normalizedMax\": 0.12075060368739486, \"axisError\": 0.12075060368739486, \"massResidualKg\": 1.1249656330721176e-22}, {\"grid\": \"symmetric\", \"n\": 24, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 112, \"minimumCellM\": 0.00043182685817827915, \"axisCellM\": 0.00043182685817827915, \"normalizedRms\": 0.0235510364522462, \"normalizedMax\": 0.11770404392852198, \"axisError\": 0.11770404392852198, \"massResidualKg\": -2.1147389347800998e-22}, {\"grid\": \"wall\", \"n\": 48, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 251, \"minimumCellM\": 0.00019077029084062919, \"axisCellM\": 0.0025917870985938548, \"normalizedRms\": 0.007411840359982933, \"normalizedMax\": 0.15120529500759775, \"axisError\": 0.15120529500759775, \"massResidualKg\": -2.3161057151484775e-23}, {\"grid\": \"symmetric\", \"n\": 48, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 241, \"minimumCellM\": 0.00019872256099094486, \"axisCellM\": 0.00019872256099094486, \"normalizedRms\": 0.004117773568194253, \"normalizedMax\": 0.021482816170979486, \"axisError\": 0.021482816170979486, \"massResidualKg\": 2.4421861350774585e-22}, {\"grid\": \"wall\", \"n\": 96, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 511, \"minimumCellM\": 9.347270005733571e-05, \"axisCellM\": 0.0012964558403873359, \"normalizedRms\": 0.0018697740718363832, \"normalizedMax\": 0.07224204587906388, \"axisError\": 0.07224204587906388, \"massResidualKg\": 6.131476290549318e-23}, {\"grid\": \"symmetric\", \"n\": 96, \"timeS\": 1e-05, \"amplitude\": 0.0001, \"cfl\": 0.15, \"steps\": 501, \"minimumCellM\": 9.538514542031112e-05, \"axisCellM\": 9.53851454203125e-05, \"normalizedRms\": 0.0011330831839106207, \"normalizedMax\": 0.00463776044096045, \"axisError\": 0.00463776044096045, \"massResidualKg\": 2.0949722261969235e-22}], \"checks\": [{\"name\": \"halfAmplitude\", \"difference\": 8.404030141864749e-07, \"passed\": true}, {\"name\": \"halfCfl\", \"difference\": 1.8174935606171672e-07, \"passed\": true}]}\n",
+      "stderr": ""
+    }
+  ],
+  "passed": true
+}

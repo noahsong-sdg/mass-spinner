@@ -1,8 +1,9 @@
 # Evolving density and species: v75
 
 Research backend only. The public playground and experimental qualification
-are unchanged. See the [frozen protocol](../scientific/mixture-axial-v75/PROTOCOL.md)
-and [manifest](../scientific/mixture-axial-v75/manifest.json).
+are unchanged. The original protocol and manifest are preserved in
+[frozen-source-01](../scientific/mixture-axial-v75/frozen-source-01.tar.gz).
+The current code follows the [spatial-convergence revision](SPATIAL-CONVERGENCE-V76.md).
 
 ## What changed and why
 

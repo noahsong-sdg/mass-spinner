@@ -1,0 +1,164 @@
+{
+  "rows": [
+    {
+      "n": 24,
+      "beta": 0.0,
+      "nt": 256,
+      "minimumCellM": 0.005833333333333315,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -9.346036329554548e-07,
+          "relativeError": 2.507752102186484
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -9.606968853415963e-07,
+          "relativeError": 1.5504741379928968
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -1.0119784030486084e-06,
+          "relativeError": 0.9010212807819115
+        }
+      ]
+    },
+    {
+      "n": 48,
+      "beta": 0.0,
+      "nt": 256,
+      "minimumCellM": 0.0029166666666666508,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -5.081475712062935e-07,
+          "relativeError": 0.9071782392748177
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -5.587532913551302e-07,
+          "relativeError": 0.48338757090166884
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -6.5380959310263e-07,
+          "relativeError": 0.22819414556988474
+        }
+      ]
+    },
+    {
+      "n": 96,
+      "beta": 0.0,
+      "nt": 256,
+      "minimumCellM": 0.0014583333333333115,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -3.275210012599344e-07,
+          "relativeError": 0.22925103238338704
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -4.128395100172858e-07,
+          "relativeError": 0.09601322696737244
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -5.536782968775807e-07,
+          "relativeError": 0.040095541466618145
+        }
+      ]
+    },
+    {
+      "n": 24,
+      "beta": 2.5,
+      "nt": 256,
+      "minimumCellM": 0.00048593628532952906,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -2.9661562819612856e-07,
+          "relativeError": 0.1132570607029994
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -4.1058599435528935e-07,
+          "relativeError": 0.09003055594680368
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -5.720759351091493e-07,
+          "relativeError": 0.07465586576699651
+        }
+      ]
+    },
+    {
+      "n": 48,
+      "beta": 2.5,
+      "nt": 256,
+      "minimumCellM": 0.00021816521104067624,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -2.736139170725776e-07,
+          "relativeError": 0.026927093963647182
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -3.8491847337096396e-07,
+          "relativeError": 0.021887992505854624
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -5.420964621752351e-07,
+          "relativeError": 0.018338837792577483
+        }
+      ]
+    },
+    {
+      "n": 96,
+      "beta": 2.5,
+      "nt": 256,
+      "minimumCellM": 0.00010349061179345865,
+      "cases": [
+        {
+          "timeS": 1e-05,
+          "exactTorqueNm": -2.664394762597075e-07,
+          "torqueNm": -2.6784611453665053e-07,
+          "relativeError": 0.005279391390080377
+        },
+        {
+          "timeS": 2e-05,
+          "exactTorqueNm": -3.766738392013728e-07,
+          "torqueNm": -3.784606768071199e-07,
+          "relativeError": 0.0047437263217842175
+        },
+        {
+          "timeS": 4e-05,
+          "exactTorqueNm": -5.323340739417553e-07,
+          "torqueNm": -5.345804301471301e-07,
+          "relativeError": 0.004219824195624658
+        }
+      ]
+    }
+  ],
+  "sourceSha256": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+  "operatorSha256": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+  "experimentalQualified": false,
+  "liveQualified": false
+}

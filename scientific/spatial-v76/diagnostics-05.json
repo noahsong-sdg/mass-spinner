@@ -1,0 +1,2275 @@
+{
+  "inputHashes": {
+    "study-05.json": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+    "convergence-05.json": "2bab4743f16926e4b74813521e11784f4fb27e1e64c614f65741b6886731a4da"
+  },
+  "sourceHashes": {
+    "diagnostics.py": "1beae4759d2b2bd5a45d3ad9dc9ffa714e20eef9cdf3d9bfe619ae7995eae996",
+    "analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1"
+  },
+  "initialErrors": [
+    {
+      "mesh": [
+        48,
+        48,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.0,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 3.363129007025894e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 3.770917763504973e-17,
+          "maxNormalized": 1.2747168334772366e-16,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 1.203289446171641e-16,
+          "maxAbsolute": 4.440892098500626e-16,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 6.034471905063573e-17,
+          "maxNormalized": 2.227098283549495e-16,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 6.537092497404722e-17,
+          "maxAbsolute": 3.122502256758253e-16,
+          "scale": 1.0,
+          "rmsNormalized": 6.537092497404722e-17,
+          "maxNormalized": 3.122502256758253e-16,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 1.4133515948473095e-17,
+          "maxAbsolute": 5.551115123125783e-17,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 2.355637871206418e-16,
+          "maxNormalized": 9.252062302922205e-16,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        48,
+        48,
+        512
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.0,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 3.363129007025894e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 3.770917763504973e-17,
+          "maxNormalized": 1.2747168334772366e-16,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 1.203289446171641e-16,
+          "maxAbsolute": 4.440892098500626e-16,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 6.034471905063573e-17,
+          "maxNormalized": 2.227098283549495e-16,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 6.537092497404722e-17,
+          "maxAbsolute": 3.122502256758253e-16,
+          "scale": 1.0,
+          "rmsNormalized": 6.537092497404722e-17,
+          "maxNormalized": 3.122502256758253e-16,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 1.4133515948473095e-17,
+          "maxAbsolute": 5.551115123125783e-17,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 2.355637871206418e-16,
+          "maxNormalized": 9.252062302922205e-16,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        48,
+        36,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.7416560727698588e-09,
+          "maxAbsolute": 4.070597297276858e-09,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.354236078234475e-05,
+          "maxNormalized": 0.00010176717371977219,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0002868653222714684,
+          "maxAbsolute": 0.0007897858066030494,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.00014343401796782645,
+          "maxNormalized": 0.00039489663887583504,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.046923773556688e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 3.046923773556688e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.10464212160218483,
+          "maxAbsolute": 0.39664402379378316,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.00011733027021448661,
+          "maxNormalized": 0.0004447382161039265,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 9.114035401863278e-05,
+          "maxAbsolute": 0.00021402650149271452,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 4.570670070221292e-05,
+          "maxNormalized": 0.0001073338517433156,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 7.634992068968974e-05,
+          "maxAbsolute": 0.0002478993737221602,
+          "scale": 1.0,
+          "rmsNormalized": 7.634992068968974e-05,
+          "maxNormalized": 0.0002478993737221602,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 2.6314624455656644e-06,
+          "maxAbsolute": 6.447387930152981e-06,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 4.3858673355101114e-05,
+          "maxNormalized": 0.00010745883214054968,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        36,
+        48,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.6606473061070497e-09,
+          "maxAbsolute": 5.213904895719559e-09,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.15170970120097e-05,
+          "maxNormalized": 0.00013035049319077226,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.00013378094370335587,
+          "maxAbsolute": 0.0003901225035747302,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 6.68911046164761e-05,
+          "maxNormalized": 0.0001950630970112094,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 1.6425949224623245e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 1.6425949224623245e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.17196011006071982,
+          "maxAbsolute": 0.4283257238120086,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.000192810752215443,
+          "maxNormalized": 0.00048026141046464833,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00011630135934232202,
+          "maxAbsolute": 0.00048545434511265,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 5.832489329187016e-05,
+          "maxNormalized": 0.00024345435889042567,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 4.251326886231238e-05,
+          "maxAbsolute": 0.00013613860673550304,
+          "scale": 1.0,
+          "rmsNormalized": 4.251326886231238e-05,
+          "maxNormalized": 0.00013613860673550304,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 2.5007329011195713e-06,
+          "maxAbsolute": 8.566114321262308e-06,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 4.167979962753406e-05,
+          "maxNormalized": 0.00014277171637839444,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        48,
+        24,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.6997109941936305e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.249371072280382e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.001057355426278777,
+          "maxAbsolute": 0.0026130907019705774,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0005286827142798677,
+          "maxNormalized": 0.0013065577105319092,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 2.6262771477703723e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 2.6262771477703723e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.02752296163179387,
+          "maxAbsolute": 0.14867109090107533,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 3.086019736524434e-05,
+          "maxNormalized": 0.00016669787463618725,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00010309162446300779,
+          "maxAbsolute": 0.00025979263492681426,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 5.170023832990938e-05,
+          "maxNormalized": 0.00013028547383973937,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 3.571603051275703e-05,
+          "maxAbsolute": 9.358333069042768e-05,
+          "scale": 1.0,
+          "rmsNormalized": 3.571603051275703e-05,
+          "maxNormalized": 9.358333069042768e-05,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.285134596305506e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.5475565155936402e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        36,
+        36,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 2.404618966864764e-09,
+          "maxAbsolute": 5.994164814678016e-09,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 6.011679816485215e-05,
+          "maxNormalized": 0.0001498574207790996,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.00036959583696713537,
+          "maxAbsolute": 0.000872154097692146,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.00018479966661920426,
+          "maxNormalized": 0.0004360811740106616,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.457686064498278e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.457686064498278e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.195686559571691,
+          "maxAbsolute": 0.5844708798096008,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.00021941409979411535,
+          "maxNormalized": 0.0006553396014012715,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0001472402025099466,
+          "maxAbsolute": 0.0005067073361368912,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 7.384065971566767e-05,
+          "maxNormalized": 0.0002541126903203564,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 8.715546130811374e-05,
+          "maxAbsolute": 0.0002660533948511956,
+          "scale": 1.0,
+          "rmsNormalized": 8.715546130811374e-05,
+          "maxNormalized": 0.0002660533948511956,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 3.627432920204746e-06,
+          "maxAbsolute": 9.185617282247982e-06,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 6.0458546855910486e-05,
+          "maxNormalized": 0.00015309699312865716,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        36,
+        36,
+        192
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 2.404618966864764e-09,
+          "maxAbsolute": 5.994164814678016e-09,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 6.011679816485215e-05,
+          "maxNormalized": 0.0001498574207790996,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.00036959583696713537,
+          "maxAbsolute": 0.000872154097692146,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.00018479966661920426,
+          "maxNormalized": 0.0004360811740106616,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.457686064498278e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.457686064498278e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.195686559571691,
+          "maxAbsolute": 0.5844708798096008,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.00021941409979411535,
+          "maxNormalized": 0.0006553396014012715,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0001472402025099466,
+          "maxAbsolute": 0.0005067073361368912,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 7.384065971566767e-05,
+          "maxNormalized": 0.0002541126903203564,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 8.715546130811374e-05,
+          "maxAbsolute": 0.0002660533948511956,
+          "scale": 1.0,
+          "rmsNormalized": 8.715546130811374e-05,
+          "maxNormalized": 0.0002660533948511956,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 3.627432920204746e-06,
+          "maxAbsolute": 9.185617282247982e-06,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 6.0458546855910486e-05,
+          "maxNormalized": 0.00015309699312865716,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        24,
+        48,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.6624904231449545e-19,
+          "maxAbsolute": 6.505213034913027e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.1563175952785256e-15,
+          "maxNormalized": 1.6263390767025655e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0005135544965655876,
+          "maxAbsolute": 0.0015080176834203485,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0002567796773223743,
+          "maxNormalized": 0.0007540159744189044,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 2.0005064498159928e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 2.0005064498159928e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.6592625198513781,
+          "maxAbsolute": 1.6294465906215692,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0007391999360497533,
+          "maxNormalized": 0.0018270215268046603,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 4.888438451328326e-05,
+          "maxAbsolute": 0.00012830614356351688,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 2.451541862020571e-05,
+          "maxNormalized": 6.43452679689383e-05,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 3.4743393506137366e-05,
+          "maxAbsolute": 8.837276296701224e-05,
+          "scale": 1.0,
+          "rmsNormalized": 3.4743393506137366e-05,
+          "maxNormalized": 8.837276296701224e-05,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.045415494202053e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.507602451974566e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        48,
+        12,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.4667351615510077e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 3.666918662927304e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.004557826943615511,
+          "maxAbsolute": 0.01004089793627827,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0022789350296796487,
+          "maxNormalized": 0.005020496460155413,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.0,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.13549839508254133,
+          "maxAbsolute": 0.5954917383231759,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.00015192795277128537,
+          "maxNormalized": 0.0006676967696963608,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0004990564779644074,
+          "maxAbsolute": 0.001099731875333576,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.0002502758006311491,
+          "maxNormalized": 0.0005515132810245489,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.00017388448410153766,
+          "maxAbsolute": 0.00035780135968055404,
+          "scale": 1.0,
+          "rmsNormalized": 0.00017388448410153766,
+          "maxNormalized": 0.00035780135968055404,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.687038530303371e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.6145419798591328e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        24,
+        24,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.70985080143886e-19,
+          "maxAbsolute": 6.505213034913027e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.2747211486954725e-15,
+          "maxNormalized": 1.6263390767025655e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0013815098839376676,
+          "maxAbsolute": 0.0030467151447055585,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0006907614763137014,
+          "maxNormalized": 0.0015233719828812167,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.281548123662384e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.281548123662384e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.6583956909557668,
+          "maxAbsolute": 1.6026656708703513,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0007382280017369299,
+          "maxNormalized": 0.001796993345964171,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00010464490726178055,
+          "maxAbsolute": 0.0002543383480706207,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 5.247920646925727e-05,
+          "maxNormalized": 0.00012755016016267065,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 4.441271710397855e-05,
+          "maxAbsolute": 9.357060733283795e-05,
+          "scale": 1.0,
+          "rmsNormalized": 4.441271710397855e-05,
+          "maxNormalized": 9.357060733283795e-05,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.474103488201864e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.5790520245564372e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        48,
+        6,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.7526794093792508e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.381795026707467e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.021891265099076358,
+          "maxAbsolute": 0.0396356857183946,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.010945736092102304,
+          "maxNormalized": 0.01981803033034214,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.0097658087490346e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 3.0097658087490346e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.5988390610876306,
+          "maxAbsolute": 2.2932219565251444,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0006714499646663715,
+          "maxNormalized": 0.0025712815040561166,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0015785321801711576,
+          "maxAbsolute": 0.002720374216786281,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.0007916306523578398,
+          "maxNormalized": 0.0013642620929390666,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0008081972933191907,
+          "maxAbsolute": 0.0016172918283272608,
+          "scale": 1.0,
+          "rmsNormalized": 0.0008081972933191907,
+          "maxNormalized": 0.0016172918283272608,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.298694767139068e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.549816593841121e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        12,
+        48,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.7086839002883666e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.271803831569175e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0025033979304640765,
+          "maxAbsolute": 0.007274080733623123,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0012517108059474822,
+          "maxNormalized": 0.003637074772176779,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 2.83349253822232e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 2.83349253822232e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 3.19305300075215,
+          "maxAbsolute": 7.605723439873714,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0035802195679068196,
+          "maxNormalized": 0.008527938584517435,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00023676319418254339,
+          "maxAbsolute": 0.0005711184744419118,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.00011873625651694356,
+          "maxNormalized": 0.000286414744137204,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.00016917539559725678,
+          "maxAbsolute": 0.0003926017843362273,
+          "scale": 1.0,
+          "rmsNormalized": 0.00016917539559725678,
+          "maxNormalized": 0.0003926017843362273,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.17184071418394e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.5286737860396831e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        6,
+        48,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.9145071803428816e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.786373364421113e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.009491295136569928,
+          "maxAbsolute": 0.023287116932010576,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.004745692460758325,
+          "maxNormalized": 0.011643668610749655,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.0,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 11.884955109720739,
+          "maxAbsolute": 25.3632213000771,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.01332603900952886,
+          "maxNormalized": 0.028438582504674056,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0010562791317498944,
+          "maxAbsolute": 0.0023192192631125153,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.0005297218191956503,
+          "maxNormalized": 0.0011630837060411137,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0005954329474353623,
+          "maxAbsolute": 0.001096071055593173,
+          "scale": 1.0,
+          "rmsNormalized": 0.0005954329474353623,
+          "maxNormalized": 0.001096071055593173,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 1.0661200170238165e-16,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.7769058290296473e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        24,
+        24,
+        128
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.70985080143886e-19,
+          "maxAbsolute": 6.505213034913027e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.2747211486954725e-15,
+          "maxNormalized": 1.6263390767025655e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0013815098839376676,
+          "maxAbsolute": 0.0030467151447055585,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0006907614763137014,
+          "maxNormalized": 0.0015233719828812167,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.281548123662384e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.281548123662384e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.6583956909557668,
+          "maxAbsolute": 1.6026656708703513,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0007382280017369299,
+          "maxNormalized": 0.001796993345964171,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00010464490726178055,
+          "maxAbsolute": 0.0002543383480706207,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 5.247920646925727e-05,
+          "maxNormalized": 0.00012755016016267065,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 4.441271710397855e-05,
+          "maxAbsolute": 9.357060733283795e-05,
+          "scale": 1.0,
+          "rmsNormalized": 4.441271710397855e-05,
+          "maxNormalized": 9.357060733283795e-05,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.474103488201864e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.5790520245564372e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        12,
+        12,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.759857364771633e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.3997403104096404e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.006282859232132621,
+          "maxAbsolute": 0.011145401842327374,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0031414593330950885,
+          "maxNormalized": 0.0055727536373260346,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.3979221087731196e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.3979221087731196e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 3.1580748045439293,
+          "maxAbsolute": 6.872018268374745,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0035410001680142226,
+          "maxNormalized": 0.007705269618027914,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0004974060014603882,
+          "maxAbsolute": 0.0010134870515132177,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.00024944809004786764,
+          "maxNormalized": 0.0005082616786809119,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0002127026343035213,
+          "maxAbsolute": 0.0003576092467000025,
+          "scale": 1.0,
+          "rmsNormalized": 0.0002127026343035213,
+          "maxNormalized": 0.0003576092467000025,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.812233406287477e-17,
+          "maxAbsolute": 2.220446049250313e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.6354082520750716e-15,
+          "maxNormalized": 3.700824921168882e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        24,
+        24,
+        64
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.70985080143886e-19,
+          "maxAbsolute": 6.505213034913027e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.2747211486954725e-15,
+          "maxNormalized": 1.6263390767025655e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.0013815098839376676,
+          "maxAbsolute": 0.0030467151447055585,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0006907614763137014,
+          "maxNormalized": 0.0015233719828812167,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.281548123662384e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.281548123662384e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.6583956909557668,
+          "maxAbsolute": 1.6026656708703513,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0007382280017369299,
+          "maxNormalized": 0.001796993345964171,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00010464490726178055,
+          "maxAbsolute": 0.0002543383480706207,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 5.247920646925727e-05,
+          "maxNormalized": 0.00012755016016267065,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 4.441271710397855e-05,
+          "maxAbsolute": 9.357060733283795e-05,
+          "scale": 1.0,
+          "rmsNormalized": 4.441271710397855e-05,
+          "maxNormalized": 9.357060733283795e-05,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.474103488201864e-17,
+          "maxAbsolute": 3.3306690738754696e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.5790520245564372e-15,
+          "maxNormalized": 5.551237381753323e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        6,
+        6,
+        256
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 2.1227353562110802e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 5.3069552692218264e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.027824279736135885,
+          "maxAbsolute": 0.04577840628820695,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.013912271472945768,
+          "maxNormalized": 0.02288941966944119,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.009765808749034e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 3.009765808749034e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 11.192306907894011,
+          "maxAbsolute": 18.124408090578584,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.01254940528460435,
+          "maxNormalized": 0.020322043037598467,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0014599008114115682,
+          "maxAbsolute": 0.0023131107453231436,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.0007321372641197398,
+          "maxNormalized": 0.0011600202968922325,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0008100595140242196,
+          "maxAbsolute": 0.0016046139652187152,
+          "scale": 1.0,
+          "rmsNormalized": 0.0008100595140242196,
+          "maxNormalized": 0.0016046139652187152,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.837408672896956e-17,
+          "maxAbsolute": 2.220446049250313e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.6396042222539861e-15,
+          "maxNormalized": 3.700824921168882e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        12,
+        12,
+        64
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 1.759857364771633e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 4.3997403104096404e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.006282859232132621,
+          "maxAbsolute": 0.011145401842327374,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.0031414593330950885,
+          "maxNormalized": 0.0055727536373260346,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.3979221087731196e-14,
+          "maxAbsolute": 1.1368683772161603e-13,
+          "scale": 1.0,
+          "rmsNormalized": 3.3979221087731196e-14,
+          "maxNormalized": 1.1368683772161603e-13,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 3.1580748045439293,
+          "maxAbsolute": 6.872018268374745,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0035410001680142226,
+          "maxNormalized": 0.007705269618027914,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0004974060014603882,
+          "maxAbsolute": 0.0010134870515132177,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.00024944809004786764,
+          "maxNormalized": 0.0005082616786809119,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0002127026343035213,
+          "maxAbsolute": 0.0003576092467000025,
+          "scale": 1.0,
+          "rmsNormalized": 0.0002127026343035213,
+          "maxNormalized": 0.0003576092467000025,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.812233406287477e-17,
+          "maxAbsolute": 2.220446049250313e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.6354082520750716e-15,
+          "maxNormalized": 3.700824921168882e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        6,
+        6,
+        32
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 2.1227353562110802e-19,
+          "maxAbsolute": 4.336808689942018e-19,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 5.3069552692218264e-15,
+          "maxNormalized": 1.0842260511350436e-14,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.027824279736135885,
+          "maxAbsolute": 0.04577840628820695,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.013912271472945768,
+          "maxNormalized": 0.02288941966944119,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 3.009765808749034e-14,
+          "maxAbsolute": 5.684341886080802e-14,
+          "scale": 1.0,
+          "rmsNormalized": 3.009765808749034e-14,
+          "maxNormalized": 5.684341886080802e-14,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 11.192306907894011,
+          "maxAbsolute": 18.124408090578584,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.01254940528460435,
+          "maxNormalized": 0.020322043037598467,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.0014599008114115682,
+          "maxAbsolute": 0.0023131107453231436,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.0007321372641197398,
+          "maxNormalized": 0.0011600202968922325,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 0.0008100595140242196,
+          "maxAbsolute": 0.0016046139652187152,
+          "scale": 1.0,
+          "rmsNormalized": 0.0008100595140242196,
+          "maxNormalized": 0.0016046139652187152,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 9.837408672896956e-17,
+          "maxAbsolute": 2.220446049250313e-16,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 1.6396042222539861e-15,
+          "maxNormalized": 3.700824921168882e-15,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    },
+    {
+      "mesh": [
+        96,
+        96,
+        512
+      ],
+      "profiles": {
+        "density": {
+          "rmsAbsolute": 3.0670459045168305e-09,
+          "maxAbsolute": 8.28841752241287e-09,
+          "scale": 3.999911905272838e-05,
+          "rmsNormalized": 7.667783634118872e-05,
+          "maxNormalized": 0.00020721500169758135,
+          "weighting": "cylindrical volume"
+        },
+        "gas": {
+          "rmsAbsolute": 0.00037248156357429257,
+          "maxAbsolute": 0.0009503415500375922,
+          "scale": 1.9999810807490235,
+          "rmsNormalized": 0.00018624254357185846,
+          "maxNormalized": 0.0004751752699988916,
+          "weighting": "cylindrical volume"
+        },
+        "solid": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1.0,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "omega": {
+          "rmsAbsolute": 0.24137735480519878,
+          "maxAbsolute": 0.7662363656952493,
+          "scale": 891.8595466531604,
+          "rmsNormalized": 0.0002706450311722337,
+          "maxNormalized": 0.0008591446585627398,
+          "weighting": "cylindrical volume"
+        },
+        "vr": {
+          "rmsAbsolute": 0.00022107151841618074,
+          "maxAbsolute": 0.0033780016010696674,
+          "scale": 1.994026097233051,
+          "rmsNormalized": 0.00011086691328811785,
+          "maxNormalized": 0.0016940608780181199,
+          "weighting": "cylindrical volume"
+        },
+        "vz": {
+          "rmsAbsolute": 5.546418202573614e-05,
+          "maxAbsolute": 0.00014919491917597671,
+          "scale": 1.0,
+          "rmsNormalized": 5.546418202573614e-05,
+          "maxNormalized": 0.00014919491917597671,
+          "weighting": "cylindrical volume"
+        },
+        "Y": {
+          "rmsAbsolute": 4.630606012072915e-06,
+          "maxAbsolute": 1.2687206278116925e-05,
+          "scale": 0.05999867857972052,
+          "rmsNormalized": 7.717846662106412e-05,
+          "maxNormalized": 0.0002114580950521998,
+          "weighting": "mass"
+        },
+        "densityChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-09,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "cylindrical volume"
+        },
+        "YChange": {
+          "rmsAbsolute": 0.0,
+          "maxAbsolute": 0.0,
+          "scale": 1e-06,
+          "rmsNormalized": 0.0,
+          "maxNormalized": 0.0,
+          "weighting": "mass"
+        }
+      }
+    }
+  ],
+  "referenceErrorLocations": [
+    {
+      "timeS": 1e-05,
+      "field": "density",
+      "maxNormalized": 0.002846310940216866,
+      "signedError": 1.0832203173262618e-07,
+      "responseScale": 3.8056991666684495e-05,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.0010372873307068322,
+      "restrictedReferenceValue": 0.0010371790086750995
+    },
+    {
+      "timeS": 1e-05,
+      "field": "gas",
+      "maxNormalized": 0.013400690422655395,
+      "signedError": -0.01707229990495307,
+      "responseScale": 1.2739865907274748,
+      "cell": [
+        42,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13768923614600428,
+        0.13829092391413922
+      ],
+      "coarseValue": 349.7712918741433,
+      "restrictedReferenceValue": 349.78836417404824
+    },
+    {
+      "timeS": 1e-05,
+      "field": "solid",
+      "maxNormalized": 1.8308696780877654e-09,
+      "signedError": -1.8308696780877654e-09,
+      "responseScale": 1.0,
+      "cell": [
+        40,
+        0
+      ],
+      "radialIntervalM": [
+        0.06,
+        0.0601875
+      ],
+      "axialIntervalM": [
+        0.1360619582838507,
+        0.1369552916368197
+      ],
+      "coarseValue": 349.9999998264406,
+      "restrictedReferenceValue": 349.9999998282715
+    },
+    {
+      "timeS": 1e-05,
+      "field": "omega",
+      "maxNormalized": 0.00046024403131955774,
+      "signedError": -0.4129525812912789,
+      "responseScale": 897.2470106941086,
+      "cell": [
+        23,
+        24
+      ],
+      "radialIntervalM": [
+        0.03,
+        0.03258730045131264
+      ],
+      "axialIntervalM": [
+        0.06263602054909889,
+        0.07
+      ],
+      "coarseValue": 647.5486797452639,
+      "restrictedReferenceValue": 647.9616323265552
+    },
+    {
+      "timeS": 1e-05,
+      "field": "vr",
+      "maxNormalized": 0.0020531498319282322,
+      "signedError": 0.007944188247446221,
+      "responseScale": 3.869268634907844,
+      "cell": [
+        2,
+        46
+      ],
+      "radialIntervalM": [
+        0.059568173141821716,
+        0.05980127743900906
+      ],
+      "axialIntervalM": [
+        0.00048593628532952906,
+        0.0008143324007684561
+      ],
+      "coarseValue": 0.10875758036834111,
+      "restrictedReferenceValue": 0.10081339212089489
+    },
+    {
+      "timeS": 1e-05,
+      "field": "vz",
+      "maxNormalized": 0.000959722762232791,
+      "signedError": 0.0017769166985317497,
+      "responseScale": 1.8514895847606663,
+      "cell": [
+        25,
+        2
+      ],
+      "radialIntervalM": [
+        0.00043182685817827915,
+        0.0007049188855182342
+      ],
+      "axialIntervalM": [
+        0.07736397945090114,
+        0.08457099024808816
+      ],
+      "coarseValue": 1.8004496873379174,
+      "restrictedReferenceValue": 1.7986727706393857
+    },
+    {
+      "timeS": 1e-05,
+      "field": "Y",
+      "maxNormalized": 5.166771782001884e-05,
+      "signedError": 3.096845791361602e-06,
+      "responseScale": 0.059937731373180925,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.4401292766710329,
+      "restrictedReferenceValue": 0.44012617982524155
+    },
+    {
+      "timeS": 1e-05,
+      "field": "densityChange",
+      "maxNormalized": 0.031046663004670738,
+      "signedError": 1.0832203173250971e-07,
+      "responseScale": 3.489007231347648e-06,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": -2.711788345896235e-06,
+      "restrictedReferenceValue": -2.8201103776287447e-06
+    },
+    {
+      "timeS": 1e-05,
+      "field": "YChange",
+      "maxNormalized": 0.021021836301499484,
+      "signedError": 3.0968457914171132e-06,
+      "responseScale": 0.0001473156648639784,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.00012741302823887635,
+      "restrictedReferenceValue": 0.00012431618244745923
+    },
+    {
+      "timeS": 2e-05,
+      "field": "density",
+      "maxNormalized": 0.0059799146483379894,
+      "signedError": 2.1015737449543367e-07,
+      "responseScale": 3.514387526481555e-05,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.001033011367734454,
+      "restrictedReferenceValue": 0.0010328012103599585
+    },
+    {
+      "timeS": 2e-05,
+      "field": "gas",
+      "maxNormalized": 0.02288483295906636,
+      "signedError": -0.03170465136565781,
+      "responseScale": 1.385400165356998,
+      "cell": [
+        46,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13951406371467048,
+        0.13978183478895934
+      ],
+      "coarseValue": 349.5721468901421,
+      "restrictedReferenceValue": 349.60385154150777
+    },
+    {
+      "timeS": 2e-05,
+      "field": "solid",
+      "maxNormalized": 1.070935695679509e-08,
+      "signedError": -1.070935695679509e-08,
+      "responseScale": 1.0,
+      "cell": [
+        39,
+        0
+      ],
+      "radialIntervalM": [
+        0.06,
+        0.0601875
+      ],
+      "axialIntervalM": [
+        0.13497748736454437,
+        0.1360619582838507
+      ],
+      "coarseValue": 349.99999938225415,
+      "restrictedReferenceValue": 349.9999993929635
+    },
+    {
+      "timeS": 2e-05,
+      "field": "omega",
+      "maxNormalized": 0.000458537753576762,
+      "signedError": -0.4110702067978309,
+      "responseScale": 896.4806138454971,
+      "cell": [
+        24,
+        23
+      ],
+      "radialIntervalM": [
+        0.02741269954868736,
+        0.03
+      ],
+      "axialIntervalM": [
+        0.07,
+        0.07736397945090114
+      ],
+      "coarseValue": 685.541731865001,
+      "restrictedReferenceValue": 685.9528020717988
+    },
+    {
+      "timeS": 2e-05,
+      "field": "vr",
+      "maxNormalized": 0.0034804909039078285,
+      "signedError": 0.019223951780236392,
+      "responseScale": 5.523344927766399,
+      "cell": [
+        2,
+        46
+      ],
+      "radialIntervalM": [
+        0.059568173141821716,
+        0.05980127743900906
+      ],
+      "axialIntervalM": [
+        0.00048593628532952906,
+        0.0008143324007684561
+      ],
+      "coarseValue": 0.15892930970173685,
+      "restrictedReferenceValue": 0.13970535792150046
+    },
+    {
+      "timeS": 2e-05,
+      "field": "vz",
+      "maxNormalized": 0.0013230117684824203,
+      "signedError": 0.0034091732723484647,
+      "responseScale": 2.5768276243370125,
+      "cell": [
+        26,
+        3
+      ],
+      "radialIntervalM": [
+        0.0007049188855182342,
+        0.001024388889547655
+      ],
+      "axialIntervalM": [
+        0.08457099024808816,
+        0.09147716802092737
+      ],
+      "coarseValue": 2.376953364963666,
+      "restrictedReferenceValue": 2.3735441916913174
+    },
+    {
+      "timeS": 2e-05,
+      "field": "Y",
+      "maxNormalized": 8.379578481123056e-05,
+      "signedError": 5.017462231082792e-06,
+      "responseScale": 0.059877262828742395,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.4402548814838644,
+      "restrictedReferenceValue": 0.4402498640216333
+    },
+    {
+      "timeS": 2e-05,
+      "field": "densityChange",
+      "maxNormalized": 0.023428206604807215,
+      "signedError": 2.1015737449530747e-07,
+      "responseScale": 8.97027152100432e-06,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": -6.987751318274487e-06,
+      "restrictedReferenceValue": -7.1979086927697945e-06
+    },
+    {
+      "timeS": 2e-05,
+      "field": "YChange",
+      "maxNormalized": 0.014772903276562173,
+      "signedError": 5.017462231138303e-06,
+      "responseScale": 0.00033963955068322393,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.00025301784107034653,
+      "restrictedReferenceValue": 0.0002480003788392082
+    },
+    {
+      "timeS": 4e-05,
+      "field": "density",
+      "maxNormalized": 0.012951436262213251,
+      "signedError": 3.546001852176503e-07,
+      "responseScale": 2.7379217102910963e-05,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.0010213077934157295,
+      "restrictedReferenceValue": 0.001020953193230512
+    },
+    {
+      "timeS": 4e-05,
+      "field": "gas",
+      "maxNormalized": 0.01778674447981538,
+      "signedError": -0.06763926286339483,
+      "responseScale": 3.8027904960434284,
+      "cell": [
+        0,
+        45
+      ],
+      "radialIntervalM": [
+        0.05929508111448176,
+        0.059568173141821716
+      ],
+      "axialIntervalM": [
+        0.0,
+        0.00021816521104067624
+      ],
+      "coarseValue": 351.65346094857114,
+      "restrictedReferenceValue": 351.72110021143453
+    },
+    {
+      "timeS": 4e-05,
+      "field": "solid",
+      "maxNormalized": 4.3029615426348755e-08,
+      "signedError": 4.3029615426348755e-08,
+      "responseScale": 1.0,
+      "cell": [
+        1,
+        1
+      ],
+      "radialIntervalM": [
+        0.0601875,
+        0.060375
+      ],
+      "axialIntervalM": [
+        0.00021816521104067624,
+        0.00048593628532952906
+      ],
+      "coarseValue": 350.00000005713576,
+      "restrictedReferenceValue": 350.00000001410615
+    },
+    {
+      "timeS": 4e-05,
+      "field": "omega",
+      "maxNormalized": 0.0004864051591945511,
+      "signedError": -0.4352089484730186,
+      "responseScale": 894.7457489836057,
+      "cell": [
+        24,
+        21
+      ],
+      "radialIntervalM": [
+        0.022378267983231954,
+        0.024860922560587688
+      ],
+      "axialIntervalM": [
+        0.07,
+        0.07736397945090114
+      ],
+      "coarseValue": 750.3793979141378,
+      "restrictedReferenceValue": 750.8146068626108
+    },
+    {
+      "timeS": 4e-05,
+      "field": "vr",
+      "maxNormalized": 0.005283149415915536,
+      "signedError": 0.04143975357380689,
+      "responseScale": 7.843759528922132,
+      "cell": [
+        2,
+        46
+      ],
+      "radialIntervalM": [
+        0.059568173141821716,
+        0.05980127743900906
+      ],
+      "axialIntervalM": [
+        0.00048593628532952906,
+        0.0008143324007684561
+      ],
+      "coarseValue": 0.2323393714410369,
+      "restrictedReferenceValue": 0.19089961786723
+    },
+    {
+      "timeS": 4e-05,
+      "field": "vz",
+      "maxNormalized": 0.0017660065766744047,
+      "signedError": -0.006310674277283601,
+      "responseScale": 3.5734149355022975,
+      "cell": [
+        25,
+        20
+      ],
+      "radialIntervalM": [
+        0.019994703133710698,
+        0.022378267983231954
+      ],
+      "axialIntervalM": [
+        0.07736397945090114,
+        0.08457099024808816
+      ],
+      "coarseValue": 1.4275511693498335,
+      "restrictedReferenceValue": 1.433861843627117
+    },
+    {
+      "timeS": 4e-05,
+      "field": "Y",
+      "maxNormalized": 0.00013646002398511902,
+      "signedError": 8.15464310743863e-06,
+      "responseScale": 0.05975847628700326,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.4405041940824229,
+      "restrictedReferenceValue": 0.4404960394393155
+    },
+    {
+      "timeS": 4e-05,
+      "field": "densityChange",
+      "maxNormalized": 0.01448228495153887,
+      "signedError": 3.546001852175114e-07,
+      "responseScale": 2.4485099306089265e-05,
+      "cell": [
+        47,
+        47
+      ],
+      "radialIntervalM": [
+        0.05980127743900906,
+        0.06
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": -1.8691325636998853e-05,
+      "restrictedReferenceValue": -1.9045925822216364e-05
+    },
+    {
+      "timeS": 4e-05,
+      "field": "YChange",
+      "maxNormalized": 0.009654527495588284,
+      "signedError": 8.154643107494142e-06,
+      "responseScale": 0.0008446444542439258,
+      "cell": [
+        47,
+        0
+      ],
+      "radialIntervalM": [
+        0.0,
+        0.00019872256099094486
+      ],
+      "axialIntervalM": [
+        0.13978183478895934,
+        0.14
+      ],
+      "coarseValue": 0.0005023304396288841,
+      "restrictedReferenceValue": 0.00049417579652139
+    }
+  ],
+  "failedGates": {
+    "joint": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.003930990525052783,
+          0.007929039813252629,
+          0.001133411759579235,
+          0.00032285010094015154
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.009222515218662655,
+          0.011251666838917184,
+          0.0016973991913168216,
+          0.0004184975863164411
+        ],
+        "passed": false
+      }
+    ],
+    "spatial": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.00393720761433279,
+          0.007929030656596725,
+          0.0011336240221349108,
+          0.0003229556034765894
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.009229271784236158,
+          0.011252771054636545,
+          0.0016988089655292507,
+          0.0004191582716217137
+        ],
+        "passed": false
+      }
+    ],
+    "temporal": [],
+    "radial": [],
+    "axial": [
+      {
+        "name": "1e-05:vz:decreasing",
+        "values": [
+          0.0015881009967591766,
+          0.00765240308966968,
+          0.0010667289897185923,
+          0.00030980256556878774
+        ],
+        "passed": false
+      },
+      {
+        "name": "2e-05:vz:decreasing",
+        "values": [
+          0.004730960389127746,
+          0.010618099943930906,
+          0.0015084458333505162,
+          0.0003768572293058256
+        ],
+        "passed": false
+      }
+    ]
+  },
+  "scope": "Postprocessing only; qualification belongs to the convergence/admission reports",
+  "convergenceQualified": false,
+  "experimentalQualified": false,
+  "liveQualified": false
+}

@@ -1,0 +1,302 @@
+{
+  "manifest": {
+    "schemaVersion": 1,
+    "radialBeta": 2,
+    "axialBeta": 2.5,
+    "transportAudits": 1,
+    "status": "prospective full compressible binary mixture verification; no experimental or live qualification",
+    "radiusM": 0.06,
+    "lengthM": 0.14,
+    "linerThicknessM": 0.003,
+    "massesU": [
+      36,
+      40
+    ],
+    "densityKgM3": 0.001,
+    "initialGasK": 350,
+    "initialLinerK": 350,
+    "bathK": 350,
+    "contactH": 100,
+    "coolingH": 100,
+    "initialOmegaRadS": 900,
+    "magneticT": 0.2,
+    "outerVoltageV": 1,
+    "outerVoltageProfile": "sin(pi*z/L)",
+    "sigmaPerpSM": 0.03,
+    "sigmaParallelSM": 0.3,
+    "timesS": [
+      1e-05,
+      2e-05,
+      4e-05
+    ],
+    "joint": [
+      [
+        6,
+        6,
+        32
+      ],
+      [
+        12,
+        12,
+        64
+      ],
+      [
+        24,
+        24,
+        128
+      ],
+      [
+        36,
+        36,
+        192
+      ],
+      [
+        48,
+        48,
+        256
+      ]
+    ],
+    "spatial": [
+      [
+        6,
+        6,
+        256
+      ],
+      [
+        12,
+        12,
+        256
+      ],
+      [
+        24,
+        24,
+        256
+      ],
+      [
+        36,
+        36,
+        256
+      ]
+    ],
+    "temporal": [
+      [
+        24,
+        24,
+        64
+      ],
+      [
+        24,
+        24,
+        128
+      ],
+      [
+        24,
+        24,
+        256
+      ]
+    ],
+    "radial": [
+      [
+        6,
+        48,
+        256
+      ],
+      [
+        12,
+        48,
+        256
+      ],
+      [
+        24,
+        48,
+        256
+      ],
+      [
+        36,
+        48,
+        256
+      ]
+    ],
+    "axial": [
+      [
+        48,
+        6,
+        256
+      ],
+      [
+        48,
+        12,
+        256
+      ],
+      [
+        48,
+        24,
+        256
+      ],
+      [
+        48,
+        36,
+        256
+      ]
+    ],
+    "tighterTolerance": [
+      24,
+      24,
+      128
+    ],
+    "independentTolerances": [
+      "linear",
+      "thermal",
+      "both"
+    ],
+    "referenceSmallerDt": [
+      48,
+      48,
+      512
+    ],
+    "referenceSpatial": [
+      96,
+      96,
+      512
+    ],
+    "referenceTransportCfl": [
+      48,
+      48,
+      256
+    ],
+    "map": "r=R*(1+tanh(2*(2*x-1))/tanh(2))/2; z=L*(1+tanh(2.5*(2*x-1))/tanh(2.5))/2",
+    "linerCells": "max(2,nr/3), uniform physical radius",
+    "transportProperties": "natural argon viscosity/conductivity and self diffusion as explicit isotope approximations; gas 300\u2013418 K",
+    "splitting": "Lie MUSCL hydro SSPRK2 and binary diffusion SSPRK2 subcycled at CFL 0.3, exact magnetic, v74 implicit FiPy/current source; outer refinement includes splitting",
+    "initialization": "12-point tensor Gauss-Legendre cell integrals of all six conserved continuum fields, including full kinetic energy; independent 16-point admission",
+    "comparison": "independent conservative linear restriction in z and r squared; physical response scales and unchanged 2 percent RMS/observable, 5 percent local gates"
+  },
+  "positiveChecks": {
+    "hydro": {
+      "maxLocalScore": 3.5912276876655024e-05,
+      "massResidualKg": -3.556876633978019e-23,
+      "angularResidualKgM2S": 1.584244743495115e-23,
+      "energyResidualJ": 6.044427111606687e-18,
+      "speciesResidualKg": -8.478601278668534e-24,
+      "minimumDensityKgM3": 0.0009610916684763848,
+      "minimumInternalJ": 0.00013395940742635254,
+      "maxFaceRoundoffAllowance": 8.478170405723876e-20,
+      "maximumTemperatureChangeK": 0.03853511595337977
+    },
+    "diffusion": {
+      "maxLocalScore": 0.003096665681760758,
+      "massResidualKg": 0.0,
+      "angularResidualKgM2S": 0.0,
+      "energyResidualJ": -5.177065373618284e-18,
+      "speciesResidualKg": -1.8611563782443123e-23,
+      "minimumDensityKgM3": 0.0009610916684763848,
+      "minimumInternalJ": 0.00013395964901729402,
+      "maxFaceRoundoffAllowance": 3.2075435083541006e-22,
+      "maximumTemperatureChangeK": 0.00025124115677499503
+    },
+    "magnetic": {
+      "jouleJ": 6.478811295161064e-13,
+      "externalWorkJ": 0.0,
+      "angularImpulseKgM2S": 0.0,
+      "maxMomentumResidualKgMPS": 0.0,
+      "maxThermalResidualJ": 4.613421095436772e-18
+    },
+    "source": {
+      "energy": {
+        "residual": 3.7457460903262876e-12,
+        "exchangeScale": 3.273248358264764e-08,
+        "storageAllowance": 5.912117034728758e-10
+      },
+      "maxMomentumRowNm": 1.1488477270199526e-16,
+      "maxThermalRowW": 4.497085068940615e-06,
+      "numericalLossJ": 1.4522702414263161e-13,
+      "electrodeJ": 1.6364368918278657e-08,
+      "bathJ": 0.0,
+      "wallWorkJ": 0.0,
+      "angularImpulseKgM2S": -2.4058465127791037e-11
+    }
+  },
+  "negativeControls": [
+    {
+      "name": "mass",
+      "rejected": true,
+      "reason": "Independent local endpoint mismatch: score 5.86804e+08"
+    },
+    {
+      "name": "species",
+      "rejected": true,
+      "reason": "Independent local endpoint mismatch: score 3.94255e+09"
+    },
+    {
+      "name": "angularMomentum",
+      "rejected": true,
+      "reason": "Independent local endpoint mismatch: score 4.72359e+09"
+    },
+    {
+      "name": "energy",
+      "rejected": true,
+      "reason": "Independent local endpoint mismatch: score 3.63735e+09"
+    },
+    {
+      "name": "enthalpyFlux",
+      "rejected": true,
+      "reason": "Independent local endpoint mismatch: score 2.40853e+07"
+    },
+    {
+      "name": "sourceNumericalHeat",
+      "rejected": true,
+      "reason": "Mixture source local thermal residual"
+    }
+  ],
+  "sourceHashes": {
+    "package-lock.json": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "package.json": "6fdaedc3d1f3b19c205f034078b70795089fcb94681c296d6882f4fef840a975",
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "scientific/coupled-axial-v74/independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "scientific/coupled-axial-v74/thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "scientific/mixture-axial-v75/PROTOCOL.md": "0195a09c2da99e18b80cb2a73d74046ba74ec3891f7388c138f88256270567a9",
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/mixture-axial-v75/audit.py": "569313ae21d71b19729ca54caea001a2e75db34353537e6e7ab1f962f5322c70",
+    "scientific/mixture-axial-v75/controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "scientific/mixture-axial-v75/coupling.py": "33e026df77534855fd22356b55b36d817361e4d81ee4477ce10c689b24493575",
+    "scientific/mixture-axial-v75/diffusion.py": "71a942cc68d34cd33f5df3cf4cf727373213bc511e73fff19b026f1be4eba60f",
+    "scientific/mixture-axial-v75/diffusion_controls.py": "c2928540fe8b02520bc1eac57ea466af3cec1a9351d9465af09e1b920ee9dd03",
+    "scientific/mixture-axial-v75/endpoint_admission.py": "7479b8b3258c80b89f1fa4880d8d7b7cb4fd0977fd587ac33f78121e7a59c597",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/mixture-axial-v75/independent.py": "3b5b78d710e4c15b65fa56f1b675fb7dbbcdf59716b8737c0f3bb991a98e437e",
+    "scientific/mixture-axial-v75/magnetic.py": "d2bb771f7b47b48e9b989a1df9d9461841663bb6b28480ee34173d183c5cef6f",
+    "scientific/mixture-axial-v75/manifest.json": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999",
+    "scientific/mixture-axial-v75/mixcheck.py": "6cfc408b6dc3bfa20c3e92e98c7ff5b85511441a1f6e868442ecdf925152a579",
+    "scientific/mixture-axial-v75/plot.py": "85aa08e5af54048855a9be9dc5616620cc29a306e6ecc3c1bc06ae9d832e490c",
+    "scientific/mixture-axial-v75/requirements.txt": "30b1b720fd19eb77c3f32552f810ccb578ace30d50a3be0aab6ecb13944b3182",
+    "scientific/mixture-axial-v75/run.py": "d3d4f5b6361965cc96c3c1c2a80802b373f9826d80246123c309eb849c5ac43b",
+    "scientific/mixture-axial-v75/supplemental_admission.py": "578a0ed8107cb5650be4dec028a471c54ab3fd46377534131f6ea0cca9a2d07e",
+    "scientific/mixture-axial-v75/test_analyze.py": "2078a198864970b807219fc759badfcf86e28220c15e55ad4d87b7e42b45fbe6",
+    "scientific/mixture-axial-v75/test_audit.py": "c0246933d3be242d86872c955160f7d6c8056c5b43b6476c0ab89997193bc715",
+    "scientific/mixture-axial-v75/test_controls.py": "7de53936ad454382eb6a1dccd6e074b34c6f5da031a1f634458a23d90ecdd9a6",
+    "scientific/mixture-axial-v75/test_coupling.py": "0cd1b8023d603e58fae52691897fa0fe738d07f19a93ccdacca7b9d8a1deedf7",
+    "scientific/mixture-axial-v75/test_diffusion.py": "faf25584514bd321643ef5f288e5397666603c515d4e9102cd54e2775881e834",
+    "scientific/mixture-axial-v75/test_diffusion_controls.py": "3f3590f2d2aa505c5f99913f1ef5c48ce7810494c9608593ca3544bfdfee3050",
+    "scientific/mixture-axial-v75/test_endpoint_admission.py": "5a0843a5517f7f4af548a476908c5abeaeda4572878a95619f1a922bdcf10f58",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/mixture-axial-v75/test_independent.py": "7f99904073f2c265e3c28feea305bd069db2d8e19e036308d5193c29798ee592",
+    "scientific/mixture-axial-v75/test_initial_integrals.py": "c02805921eb866cb5dc61ec3041a1d8f92c023f15d40018b8dbf75be3e2823c0",
+    "scientific/mixture-axial-v75/test_magnetic.py": "24975f069a9a6067b90c57f60897a2f276bdd7fba1041f734abc7a1471d886d6",
+    "scientific/mixture-axial-v75/test_run.py": "4d869c43e425bd5c34ca6cb4cb7d61a036ed486213f0cc0e75870b1b3bf1d4d8",
+    "scientific/mixture-axial-v75/test_supplemental_admission.py": "6e2bb65ad93a20ce6ce3f07199ea8220eb5cbdce259441f2519f4d08f12d236d",
+    "scientific/mixture-axial-v75/test_verify.py": "b8dbd4117e48ad76fa37f5c2c5fbead64c707d59881dcdd68bc53372a7d07f28",
+    "scientific/mixture-axial-v75/test_wall_resolution.py": "8e79bbe9e35b51ae568aac8584594d5b65b2b14a40652fc254ddff0ab0547409",
+    "scientific/mixture-axial-v75/verify.py": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+    "scientific/mixture-axial-v75/wall_resolution.py": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b"
+  },
+  "passed": true,
+  "experimentalQualified": false,
+  "liveQualified": false
+}

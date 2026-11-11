@@ -153,3 +153,5 @@ not the app, and does not establish that the deployed site matches this build.
 Later research: [v74 axial shear/current/thermal coupling](AXIAL-CURRENT-THERMAL-V74.md)
 passes its bounded numerical refinement protocol. It does not change the
 experimental failures or qualification limits reported above.
+
+Latest numerical work: [evolving-mixture spatial convergence](SPATIAL-CONVERGENCE-V76.md).

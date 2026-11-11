@@ -1,0 +1,171 @@
+{
+  "rows": [
+    {
+      "nz": 6,
+      "integrated": false,
+      "vz": {
+        "rmsAbsolute": 0.03147156740987416,
+        "maxAbsolute": 0.11400722342622349,
+        "scale": 3.5289708083453406,
+        "rmsNormalized": 0.008918058300581554,
+        "maxNormalized": 0.03230608288303724,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092559e-06,
+        -9.533403375795289e-09,
+        -4.2685294087018295e-07,
+        4.512468865459859e-07,
+        0.18247023186147393,
+        7.925792739098327e-07
+      ]
+    },
+    {
+      "nz": 12,
+      "integrated": false,
+      "vz": {
+        "rmsAbsolute": 0.040261976666193064,
+        "maxAbsolute": 0.08877899382381926,
+        "scale": 3.5289708083453406,
+        "rmsNormalized": 0.01140898546708893,
+        "maxNormalized": 0.025157191330082394,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092559e-06,
+        -9.901493581414127e-09,
+        -4.1333085183803653e-07,
+        4.35613569858398e-07,
+        0.182472575370618,
+        7.92613943320156e-07
+      ]
+    },
+    {
+      "nz": 24,
+      "integrated": false,
+      "vz": {
+        "rmsAbsolute": 0.00672305252711268,
+        "maxAbsolute": 0.017387010081665988,
+        "scale": 3.5289708083453406,
+        "rmsNormalized": 0.0019051029017338277,
+        "maxNormalized": 0.004926935082758133,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092559e-06,
+        -1.0034144056731926e-08,
+        -4.0948006465235244e-07,
+        4.299797147387937e-07,
+        0.18247155431563156,
+        7.926264373058373e-07
+      ]
+    },
+    {
+      "nz": 36,
+      "integrated": false,
+      "vz": {
+        "rmsAbsolute": 0.0017633558254376224,
+        "maxAbsolute": 0.0042975213184826,
+        "scale": 3.5289708083453406,
+        "rmsNormalized": 0.0004996799127007861,
+        "maxNormalized": 0.0012177831871886795,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092559e-06,
+        -1.0059055867870843e-08,
+        -4.087524213691485e-07,
+        4.289216745441652e-07,
+        0.182471359582633,
+        7.926287836812341e-07
+      ]
+    },
+    {
+      "nz": 6,
+      "integrated": true,
+      "vz": {
+        "rmsAbsolute": 0.055523439946103384,
+        "maxAbsolute": 0.12093110983487376,
+        "scale": 3.5251956618511437,
+        "rmsNormalized": 0.015750456222037624,
+        "maxNormalized": 0.034304793672465445,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092563e-06,
+        -1.0079999999999783e-08,
+        -4.08527012445906e-07,
+        4.2750792830049923e-07,
+        0.1824710661675253,
+        7.926313663230737e-07
+      ]
+    },
+    {
+      "nz": 12,
+      "integrated": true,
+      "vz": {
+        "rmsAbsolute": 0.051177538671159595,
+        "maxAbsolute": 0.08634668470708595,
+        "scale": 3.5251956618511437,
+        "rmsNormalized": 0.014517644857274489,
+        "maxNormalized": 0.02449415379733667,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092563e-06,
+        -1.0079999999999995e-08,
+        -4.08527012445906e-07,
+        4.2750792830049923e-07,
+        0.1824710661675253,
+        7.926313663230737e-07
+      ]
+    },
+    {
+      "nz": 24,
+      "integrated": true,
+      "vz": {
+        "rmsAbsolute": 0.007943662028357123,
+        "maxAbsolute": 0.01598265886079986,
+        "scale": 3.5251956618511437,
+        "rmsNormalized": 0.0022533960637480654,
+        "maxNormalized": 0.004533835960868929,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092563e-06,
+        -1.0079999999999995e-08,
+        -4.085270124459059e-07,
+        4.275079283004992e-07,
+        0.1824710661675253,
+        7.926313663230737e-07
+      ]
+    },
+    {
+      "nz": 36,
+      "integrated": true,
+      "vz": {
+        "rmsAbsolute": 0.001739819794434188,
+        "maxAbsolute": 0.004439300888228193,
+        "scale": 3.5251956618511437,
+        "rmsNormalized": 0.0004935385043338495,
+        "maxNormalized": 0.0012593062383087796,
+        "weighting": "cylindrical volume"
+      },
+      "initialTotals": [
+        1.5833626974092563e-06,
+        -1.0079999999999995e-08,
+        -4.08527012445906e-07,
+        4.2750792830049923e-07,
+        0.1824710661675253,
+        7.926313663230737e-07
+      ]
+    }
+  ],
+  "sourceHashes": {
+    "initial_probe.py": "c33a5edb341a8c9573af7ce01d51bfa89e392c65f9f84dd50b630063bfeabd90",
+    "flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "run.py": "229550dc157f51984755e59755e581a5300b7988fdc999d595e345cdcdda27d8",
+    "analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1"
+  },
+  "scope": "Pure-hydro initialization ablation; no source/thermal/canonical qualification"
+}
