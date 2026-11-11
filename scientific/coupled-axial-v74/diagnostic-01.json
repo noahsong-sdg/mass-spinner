@@ -1,0 +1,159 @@
+{
+  "manifest": {
+    "status": "prospective, frozen before v74 runs",
+    "radiusM": 0.06,
+    "lengthM": 0.14,
+    "linerThicknessM": 0.003,
+    "densityKgM3": 0.001,
+    "initialGasK": 400,
+    "initialLinerK": 650,
+    "bathK": 400,
+    "contactH": 100,
+    "coolingH": 100,
+    "initialOmegaRadS": 900,
+    "magneticT": 0.2,
+    "outerVoltageV": 4,
+    "sigmaPerpSM": 0.03,
+    "sigmaParallelSM": 0.3,
+    "timesS": [
+      0.001,
+      0.004
+    ],
+    "joint": [
+      [
+        6,
+        4
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        48,
+        256
+      ]
+    ],
+    "spatial": [
+      [
+        6,
+        256
+      ],
+      [
+        12,
+        256
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "temporal": [
+      [
+        24,
+        4
+      ],
+      [
+        24,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "tighterTolerance": [
+      24,
+      64
+    ],
+    "independentTolerances": [
+      "linear",
+      "thermal"
+    ],
+    "radial": [
+      [
+        6,
+        48,
+        256
+      ],
+      [
+        12,
+        48,
+        256
+      ],
+      [
+        24,
+        48,
+        256
+      ]
+    ],
+    "axial": [
+      [
+        48,
+        6,
+        256
+      ],
+      [
+        48,
+        12,
+        256
+      ],
+      [
+        48,
+        24,
+        256
+      ]
+    ],
+    "referenceSmallerDt": [
+      48,
+      48,
+      512
+    ],
+    "referenceSpatial": [
+      96,
+      96,
+      256
+    ],
+    "gasRadialMap": "R*sin(pi*s/2)",
+    "axialMap": "L*(1-cos(pi*s))/2",
+    "linerCells": "max(2,n/3), uniform in physical radius",
+    "thermalEnds": "adiabatic",
+    "mechanicalWalls": "stationary no slip",
+    "comparison": "conservative physical-volume restriction; prospective PROTOCOL.md gates"
+  },
+  "cases": [],
+  "failures": [
+    {
+      "n": 24,
+      "nz": 24,
+      "nt": 4,
+      "tight": false,
+      "error": "AssertionError('Independent mechanical endpoint row residual: {\"cell\": 168, \"rowNm\": 1.4363080969789248e-18, \"toleranceNm\": 1.8640476145013028e-19, \"storageTorqueNm\": -1.8104769356575348e-12, \"electricalTorqueNm\": 7.5061346459201e-12, \"tsElectricalTorqueNm\": 7.506136082227983e-12, \"viscousTorqueNm\": -9.316613017885732e-12, \"rowUsingTsTorqueNm\": 2.1325750167382745e-25, \"storageRoundoffNm\": 7.251545549663619e-23, \"exchangeScaleNm\": 1.8633224599463365e-11, \"omegaRadS\": 899.3615879704092, \"oldOmegaRadS\": 900.0, \"omegaEndpointMismatchRadS\": -8.549250196665525e-11, \"dtS\": 0.001, \"matrixDiagonalNmS\": 2.3621283749374526e-11, \"linearFormViscousTorqueNm\": -9.316613017882992e-12}')"
+    }
+  ],
+  "sourceHashes": {
+    "ATTEMPTS.md": "ae793aac268672692d9d45b2b17c78ffcf65e748070fdaadc85dedd326027971",
+    "PROTOCOL.md": "c0c4c3475a18e0a46a3201098718cdcff3a86a327445ad17f7f3820d0fa9b672",
+    "analyze.py": "708c3899b962f3cab1dfb66dbe0b7fb8b677d174482c01875196c6e9938b02e0",
+    "attempt-01-independent.json": "3e22d1c52273436e870d4c6c12ad880aea1f206634df775b5fdbb2e17cac7a94",
+    "attempt-01.json": "f1e79fa8a18109718234c5debfcd999043d44a3ef207447d7b9bef598be66f3e",
+    "bridge.py": "411bac1f8dc331f2300c1b97028d054f884d8ad89304d99bd9871b8f1bd451bf",
+    "bridge.ts": "c38132724bdfc08df7a64a6f7697613f14fdb7116fe766283b891e823513c6a1",
+    "coupled.py": "d9dcc9cb85687e5e87e4f049213c68e8b62eeeb72c2b6227a7e34c3e95b33b34",
+    "independent_check.py": "76b3860f89a78e47d0e93e0ac9264234956bbb798d8ad5ec5abfee790bb98b5d",
+    "manifest.json": "8f651c40c8f808faa139fd48203f15b00d94e385ca151f05094a6fadabc0c357",
+    "run_report.py": "449cbfd6fdb7c3f0ab748067cc1f79c57188e086171f033907d0b3b948473ab8",
+    "study-01.json": "499db5b38433f60f8a25addbb5bd6318f597a741618509b6a730c4ce590a694d",
+    "test_analyze.py": "2f1b9a40afafdb6ad12d775d6112b21e0b33b42bd5acadd050629fe879f75388",
+    "test_coupled.py": "3965c3c55462d855c5d6ee149c8eab1c0b89637c389a4b1a2a0b7b57ad7c5920",
+    "test_thermal.py": "7ae7da5a109cdaeb1faf675848632712dd4ffc65198f3af325266c42cf474dba",
+    "thermal.py": "ee364c8f7390acb72b3bdd300d475e100fbaaf944c7b20c76dece62ed53858f3"
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "manifest": {
+    "status": "prospective study04: current precision fix and added early-transient refinement; failed studies retained",
+    "radiusM": 0.06,
+    "lengthM": 0.14,
+    "linerThicknessM": 0.003,
+    "densityKgM3": 0.001,
+    "initialGasK": 400,
+    "initialLinerK": 650,
+    "bathK": 400,
+    "contactH": 100,
+    "coolingH": 100,
+    "initialOmegaRadS": 900,
+    "magneticT": 0.2,
+    "outerVoltageV": 4,
+    "outerVoltageProfile": "sin(pi*z/L)",
+    "sigmaPerpSM": 0.03,
+    "sigmaParallelSM": 0.3,
+    "timesS": [
+      0.001,
+      0.002,
+      0.004
+    ],
+    "joint": [
+      [
+        6,
+        4
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        36,
+        144
+      ],
+      [
+        48,
+        256
+      ]
+    ],
+    "spatial": [
+      [
+        6,
+        256
+      ],
+      [
+        12,
+        256
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "temporal": [
+      [
+        24,
+        4
+      ],
+      [
+        24,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        24,
+        128
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "tighterTolerance": [
+      24,
+      64
+    ],
+    "independentTolerances": [
+      "linear",
+      "thermal"
+    ],
+    "radial": [
+      [
+        6,
+        48,
+        256
+      ],
+      [
+        12,
+        48,
+        256
+      ],
+      [
+        24,
+        48,
+        256
+      ]
+    ],
+    "axial": [
+      [
+        48,
+        6,
+        256
+      ],
+      [
+        48,
+        12,
+        256
+      ],
+      [
+        48,
+        24,
+        256
+      ]
+    ],
+    "referenceSmallerDt": [
+      48,
+      48,
+      512
+    ],
+    "referenceSpatial": [
+      96,
+      96,
+      256
+    ],
+    "gasRadialMap": "R*sin(pi*s/2)",
+    "axialMap": "L*(1-cos(pi*s))/2",
+    "linerCells": "max(2,n/3), uniform in physical radius",
+    "thermalEnds": "adiabatic",
+    "mechanicalWalls": "stationary no slip",
+    "comparison": "conservative physical-volume restriction; prospective PROTOCOL.md gates"
+  },
+  "cases": [],
+  "failures": [
+    {
+      "n": 96,
+      "nz": 96,
+      "nt": 256,
+      "tight": false,
+      "error": "ArithmeticError('Thermal endpoint line search failed')"
+    }
+  ],
+  "sourceHashes": {
+    "ATTEMPTS.md": "1fa39165ec0cf0e98a13b4ce29836429908d8c3c7fc97766d213a625a4972b1a",
+    "PROTOCOL.md": "409a5af9438ead4923723ff54e8c89478c4480be7f40d91bf35681f71ee94e52",
+    "RUN.md": "1c9c3e8f9c13146fa983217e2ac03dcf10d85d605693200f43034f022b75d446",
+    "analyze.py": "de02715b175efab115de9a7942074e3ffff733d657e118c13bd520b2736a6913",
+    "attempt-01-independent.json": "3e22d1c52273436e870d4c6c12ad880aea1f206634df775b5fdbb2e17cac7a94",
+    "attempt-01.json": "f1e79fa8a18109718234c5debfcd999043d44a3ef207447d7b9bef598be66f3e",
+    "bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "convergence-03.json": "6264bfd6d3bf63688e99099c42fe1ecff9ac002e06adf4e408fe27ac4ed70dea",
+    "coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "diagnostic-01.json": "d4cc3247b15af590c89a1d9142ecdb480ec8fa5f89e584724924b8b771e47e9c",
+    "failed-24-24-4-False-1.json": "d618472265a56123d3948647b3c449a0aa15121924d7b722cdc782daff43c452",
+    "failed-96-96-256-False-1.json": "682a395d49b44f7efd2d9df4e26e8d5da75a2e0fdecc92d67ed76fe8d70ebf5f",
+    "independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "manifest.json": "d07c8bb43097881217f06424dd782d14c91f94c49256c6b224b7d6ec7ba9a54d",
+    "plot.py": "dfdf91f713f87b5cfcaac3beba71dab2317e1da1080a05bd38c5efdc45e32cae",
+    "precision-03.json": "2171529e5c366ffd5fd89aa6fe57b4bca9726deaa7e28b8ebacbf994378d9969",
+    "run_report.py": "aad7a5de8f32e93f7e9aa63cf4bdcd3442ae25201ee12820d04b6d8539e2bcb7",
+    "static-current-03.json": "a0d569fd6e170f280d1ecc18d54a2e4dbb419da6ef80ea3cc52748ef30104430",
+    "static_current.py": "5bf6134ae8f08c02e1a32cf247143752155b82313f754197cd732ccafe810672",
+    "study-01.json": "499db5b38433f60f8a25addbb5bd6318f597a741618509b6a730c4ce590a694d",
+    "study-02.json": "76630d88e261e4242d49d9284b532796e677bee20ae832128a2749b438cc7802",
+    "study-03.json": "f8674ec50c733a6c4eaf218a65b681f0f6bab6d16eb070c66ff6890ad3c500c4",
+    "test_analyze.py": "0f6fa55a357ad0e4a27acb81d45dc67edca109eaba36735e2b6c30e9e3265bb1",
+    "test_checker.py": "10366fe4668bd6b61c1c307c675c3df891b9d667a07911d2d87f67a39c71ccec",
+    "test_coupled.py": "c5d5891926acb9ab20518ac03d6c6ba4ae05865805ebe619b87428bd33c4653e",
+    "test_provenance.py": "d84114038d0909b8c22a63e63a17157c5fa461499a743c5c70c58395700dcbaf",
+    "test_static_current.py": "497093764a414d4da2ad4a8e84378c68bbb1fb05450de2a1602d5c3c934c2f18",
+    "test_thermal.py": "bef8ed3a7fffbf6980aad20b2771c2e3838a814214e3669cb8fcddf5157c071c",
+    "test_wall_work.py": "13f2c58538733b59c689dbba025278240d54da5a27d4bd914f2539b6e7ca5e6c",
+    "test_workspace.py": "381a2fda41c32212a41022317d50c758f23591de247ace2b356bdf82dc0fe34d",
+    "thermal.py": "afd49063ee6926e0828b4be19f57aab4dfd04e130cc11f985fa82de644df964a",
+    "verify_results.py": "086d1514f2b9333059d4469399799f8db94bd5d60f9e33dd941124dd00bcde24",
+    "static-current-04.json": "ec4a57b5cba5674e83a8fcdb61509aaa2fc2039850c0e5ab4392c4b325ef29e5"
+  }
+}

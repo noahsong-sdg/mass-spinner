@@ -1,0 +1,3996 @@
+{
+  "manifest": {
+    "status": "prospective compatible-boundary study03; legacy study02 retained as singular negative control",
+    "radiusM": 0.06,
+    "lengthM": 0.14,
+    "linerThicknessM": 0.003,
+    "densityKgM3": 0.001,
+    "initialGasK": 400,
+    "initialLinerK": 650,
+    "bathK": 400,
+    "contactH": 100,
+    "coolingH": 100,
+    "initialOmegaRadS": 900,
+    "magneticT": 0.2,
+    "outerVoltageV": 4,
+    "outerVoltageProfile": "sin(pi*z/L)",
+    "sigmaPerpSM": 0.03,
+    "sigmaParallelSM": 0.3,
+    "timesS": [
+      0.001,
+      0.002,
+      0.004
+    ],
+    "joint": [
+      [
+        6,
+        4
+      ],
+      [
+        12,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        48,
+        256
+      ]
+    ],
+    "spatial": [
+      [
+        6,
+        256
+      ],
+      [
+        12,
+        256
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "temporal": [
+      [
+        24,
+        4
+      ],
+      [
+        24,
+        16
+      ],
+      [
+        24,
+        64
+      ],
+      [
+        24,
+        256
+      ]
+    ],
+    "tighterTolerance": [
+      24,
+      64
+    ],
+    "independentTolerances": [
+      "linear",
+      "thermal"
+    ],
+    "radial": [
+      [
+        6,
+        48,
+        256
+      ],
+      [
+        12,
+        48,
+        256
+      ],
+      [
+        24,
+        48,
+        256
+      ]
+    ],
+    "axial": [
+      [
+        48,
+        6,
+        256
+      ],
+      [
+        48,
+        12,
+        256
+      ],
+      [
+        48,
+        24,
+        256
+      ]
+    ],
+    "referenceSmallerDt": [
+      48,
+      48,
+      512
+    ],
+    "referenceSpatial": [
+      96,
+      96,
+      256
+    ],
+    "gasRadialMap": "R*sin(pi*s/2)",
+    "axialMap": "L*(1-cos(pi*s))/2",
+    "linerCells": "max(2,n/3), uniform in physical radius",
+    "thermalEnds": "adiabatic",
+    "mechanicalWalls": "stationary no slip",
+    "comparison": "conservative physical-volume restriction; prospective PROTOCOL.md gates"
+  },
+  "series": {
+    "joint": {
+      "reference": [
+        48,
+        48,
+        256,
+        false
+      ],
+      "comparisons": [
+        {
+          "nr": 6,
+          "nz": 6,
+          "nt": 4,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 21.517943687892746,
+                  "maxAbsolute": 35.70727270708062,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.08734930289562526,
+                  "maxNormalized": 0.14494904459771463
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00011415851221015482,
+                  "maxAbsolute": 0.00012781462021393963,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00011415851221015482,
+                  "maxNormalized": 0.00012781462021393963
+                },
+                "omega": {
+                  "rmsAbsolute": 91.1085254228435,
+                  "maxAbsolute": 196.9602805694649,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.10052304671153356,
+                  "maxNormalized": 0.21731278595621845
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.03594909433233681,
+                "wallPeakK": 4.2572009001717305e-07,
+                "shearHeatW": 0.45636892693348036,
+                "jouleHeatW": 0.0473084576451973,
+                "interfaceIntoGasW": 0.7668090863080725,
+                "totalCurrentA": 0.037600159823832205,
+                "torque_outer": 0.9660599289836844,
+                "torque_lower": 0.5490064099477033,
+                "torque_upper": 0.5490064099477079
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 15.387130861601529,
+                  "maxAbsolute": 24.545761840770638,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.0621272713031783,
+                  "maxNormalized": 0.09910627386878784
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0003636037094869057,
+                  "maxAbsolute": 0.00037359717032359185,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0003636037094869057,
+                  "maxNormalized": 0.00037359717032359185
+                },
+                "omega": {
+                  "rmsAbsolute": 62.33892871185184,
+                  "maxAbsolute": 111.55743037770569,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.06856565635529349,
+                  "maxNormalized": 0.12270035102003801
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.016149389423554702,
+                "wallPeakK": 9.030372604212808e-07,
+                "shearHeatW": 0.1538005398819206,
+                "jouleHeatW": 0.04562278406862358,
+                "interfaceIntoGasW": 0.2112621901431889,
+                "totalCurrentA": 0.03593323963532601,
+                "torque_outer": 0.2693407488255433,
+                "torque_lower": 0.3045184153791729,
+                "torque_upper": 0.30451841537917407
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 10.696486100577806,
+                  "maxAbsolute": 15.959591503684237,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.0430219658665762,
+                  "maxNormalized": 0.06419051962110371
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0011151367961190078,
+                  "maxAbsolute": 0.0011158070969941036,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0011151367961190078,
+                  "maxNormalized": 0.0011158070969941036
+                },
+                "omega": {
+                  "rmsAbsolute": 48.02391664749934,
+                  "maxAbsolute": 85.66502093894951,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.052960873628726333,
+                  "maxNormalized": 0.09447156052787588
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.008174761870119488,
+                "wallPeakK": 2.086725423639146e-06,
+                "shearHeatW": 0.05768352400964609,
+                "jouleHeatW": 0.04392321976578892,
+                "interfaceIntoGasW": 0.06803449342869937,
+                "totalCurrentA": 0.034603790955227726,
+                "torque_outer": 0.08803583832247437,
+                "torque_lower": 0.0829656991975879,
+                "torque_upper": 0.08296569919761075
+              }
+            }
+          ]
+        },
+        {
+          "nr": 12,
+          "nz": 12,
+          "nt": 16,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 6.04061152713199,
+                  "maxAbsolute": 11.091943978844938,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.024521079412208914,
+                  "maxNormalized": 0.045026308664176784
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0003725714017127458,
+                  "maxAbsolute": 0.0005324148954741759,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0003725714017127458,
+                  "maxNormalized": 0.0005324148954741759
+                },
+                "omega": {
+                  "rmsAbsolute": 28.268349635361975,
+                  "maxAbsolute": 78.39168518975475,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.03118940425898913,
+                  "maxNormalized": 0.08649213666397203
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.005355772823591183,
+                "wallPeakK": 6.781832942528842e-08,
+                "shearHeatW": 0.0928703165661949,
+                "jouleHeatW": 0.012397155525642191,
+                "interfaceIntoGasW": 0.1220261229698951,
+                "totalCurrentA": 0.00960795919646828,
+                "torque_outer": 0.15481008663232518,
+                "torque_lower": 0.13253443295892822,
+                "torque_upper": 0.1325344329589288
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 4.049375393920309,
+                  "maxAbsolute": 6.475631749080321,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.016349808549058955,
+                  "maxNormalized": 0.026146091441813762
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0008880624526015405,
+                  "maxAbsolute": 0.0013012657176432185,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0008880624526015405,
+                  "maxNormalized": 0.0013012657176432185
+                },
+                "omega": {
+                  "rmsAbsolute": 19.439993764453103,
+                  "maxAbsolute": 45.00914452532942,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.021381758710735214,
+                  "maxNormalized": 0.0495048856330884
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0030449701854382547,
+                "wallPeakK": 2.587958374474063e-07,
+                "shearHeatW": 0.03547149975897903,
+                "jouleHeatW": 0.011888756371275493,
+                "interfaceIntoGasW": 0.04133707312693891,
+                "totalCurrentA": 0.009145502703686434,
+                "torque_outer": 0.053978934686797674,
+                "torque_lower": 0.05943839273641621,
+                "torque_upper": 0.05943839273641576
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 2.6558571391319705,
+                  "maxAbsolute": 4.0466514048459885,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.010682030912943103,
+                  "maxNormalized": 0.016275896306153517
+                },
+                "solid": {
+                  "rmsAbsolute": 0.001468826874024285,
+                  "maxAbsolute": 0.0022932191449172024,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.001468826874024285,
+                  "maxNormalized": 0.0022932191449172024
+                },
+                "omega": {
+                  "rmsAbsolute": 13.983406267922462,
+                  "maxAbsolute": 32.479868950916625,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.015420929069373264,
+                  "maxNormalized": 0.035818865995734195
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0016989722249135053,
+                "wallPeakK": 6.304484940079422e-07,
+                "shearHeatW": 0.013972910887755116,
+                "jouleHeatW": 0.01145518375133508,
+                "interfaceIntoGasW": 0.014876458006273187,
+                "totalCurrentA": 0.008810677247454947,
+                "torque_outer": 0.019640035929137954,
+                "torque_lower": 0.020395272578409854,
+                "torque_upper": 0.02039527257843261
+              }
+            }
+          ]
+        },
+        {
+          "nr": 24,
+          "nz": 24,
+          "nt": 64,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.2701580621587583,
+                  "maxAbsolute": 2.3079907404919595,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.005156041994814369,
+                  "maxNormalized": 0.009368989211778787
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0003940698011101915,
+                  "maxAbsolute": 0.0008746079446382282,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0003940698011101915,
+                  "maxNormalized": 0.0008746079446382282
+                },
+                "omega": {
+                  "rmsAbsolute": 5.997033521620849,
+                  "maxAbsolute": 18.00795971193969,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.006616725251854159,
+                  "maxNormalized": 0.019868777009630488
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0009712338758638674,
+                "wallPeakK": 6.337434119403846e-09,
+                "shearHeatW": 0.017932756301438424,
+                "jouleHeatW": 0.002540035735574505,
+                "interfaceIntoGasW": 0.022124467696511208,
+                "totalCurrentA": 0.0019519552594915743,
+                "torque_outer": 0.02809895787997446,
+                "torque_lower": 0.029633055599113983,
+                "torque_upper": 0.029633055599117133
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.8362909213124374,
+                  "maxAbsolute": 1.3414046907107604,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.0033766186447676044,
+                  "maxNormalized": 0.005416072294225578
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0004592158418984241,
+                  "maxAbsolute": 0.0011002199697713877,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0004592158418984241,
+                  "maxNormalized": 0.0011002199697713877
+                },
+                "omega": {
+                  "rmsAbsolute": 4.169780548078846,
+                  "maxAbsolute": 11.181467904471731,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.004586279328893979,
+                  "maxNormalized": 0.0122983294985625
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0005777861846601374,
+                "wallPeakK": 6.275667011012406e-08,
+                "shearHeatW": 0.007143156327208507,
+                "jouleHeatW": 0.0024343139145568456,
+                "interfaceIntoGasW": 0.007930251704016742,
+                "totalCurrentA": 0.001859060243653407,
+                "torque_outer": 0.010372569837211557,
+                "torque_lower": 0.011050578178953227,
+                "torque_upper": 0.011050578178956622
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.5398016201939447,
+                  "maxAbsolute": 0.8277723195388944,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.002171117380076055,
+                  "maxNormalized": 0.0033293543451222924
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0004234093927839316,
+                  "maxAbsolute": 0.0010030472780044875,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0004234093927839316,
+                  "maxNormalized": 0.0010030472780044875
+                },
+                "omega": {
+                  "rmsAbsolute": 2.908340985609582,
+                  "maxAbsolute": 6.919709782818643,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.003207324395023805,
+                  "maxNormalized": 0.007631070119608876
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0003288054378038168,
+                "wallPeakK": 1.1228772379146291e-07,
+                "shearHeatW": 0.0028138016751456697,
+                "jouleHeatW": 0.002345576674018173,
+                "interfaceIntoGasW": 0.0029348604622358456,
+                "totalCurrentA": 0.0017916061962414017,
+                "torque_outer": 0.003871906430230697,
+                "torque_lower": 0.004167568270518292,
+                "torque_upper": 0.004167568270537735
+              }
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "name": "0.001:gas:rms",
+          "passed": true,
+          "value": 0.005156041994814369
+        },
+        {
+          "name": "0.001:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.08734930289562526,
+            0.024521079412208914,
+            0.005156041994814369
+          ]
+        },
+        {
+          "name": "0.001:gas:max",
+          "passed": true,
+          "value": 0.009368989211778787
+        },
+        {
+          "name": "0.001:solid:rms",
+          "passed": true,
+          "value": 0.0003940698011101915
+        },
+        {
+          "name": "0.001:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.00011415851221015482,
+            0.0003725714017127458,
+            0.0003940698011101915
+          ]
+        },
+        {
+          "name": "0.001:solid:max",
+          "passed": true,
+          "value": 0.0008746079446382282
+        },
+        {
+          "name": "0.001:omega:rms",
+          "passed": true,
+          "value": 0.006616725251854159
+        },
+        {
+          "name": "0.001:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.10052304671153356,
+            0.03118940425898913,
+            0.006616725251854159
+          ]
+        },
+        {
+          "name": "0.001:omega:max",
+          "passed": true,
+          "value": 0.019868777009630488
+        },
+        {
+          "name": "0.001:gasPeakK",
+          "passed": true,
+          "value": 0.0009712338758638674
+        },
+        {
+          "name": "0.001:wallPeakK",
+          "passed": true,
+          "value": 6.337434119403846e-09
+        },
+        {
+          "name": "0.001:shearHeatW",
+          "passed": true,
+          "value": 0.017932756301438424
+        },
+        {
+          "name": "0.001:jouleHeatW",
+          "passed": true,
+          "value": 0.002540035735574505
+        },
+        {
+          "name": "0.001:interfaceIntoGasW",
+          "passed": false,
+          "value": 0.022124467696511208
+        },
+        {
+          "name": "0.001:totalCurrentA",
+          "passed": true,
+          "value": 0.0019519552594915743
+        },
+        {
+          "name": "0.001:torque_outer",
+          "passed": false,
+          "value": 0.02809895787997446
+        },
+        {
+          "name": "0.001:torque_lower",
+          "passed": false,
+          "value": 0.029633055599113983
+        },
+        {
+          "name": "0.001:torque_upper",
+          "passed": false,
+          "value": 0.029633055599117133
+        },
+        {
+          "name": "0.002:gas:rms",
+          "passed": true,
+          "value": 0.0033766186447676044
+        },
+        {
+          "name": "0.002:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.0621272713031783,
+            0.016349808549058955,
+            0.0033766186447676044
+          ]
+        },
+        {
+          "name": "0.002:gas:max",
+          "passed": true,
+          "value": 0.005416072294225578
+        },
+        {
+          "name": "0.002:solid:rms",
+          "passed": true,
+          "value": 0.0004592158418984241
+        },
+        {
+          "name": "0.002:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0003636037094869057,
+            0.0008880624526015405,
+            0.0004592158418984241
+          ]
+        },
+        {
+          "name": "0.002:solid:max",
+          "passed": true,
+          "value": 0.0011002199697713877
+        },
+        {
+          "name": "0.002:omega:rms",
+          "passed": true,
+          "value": 0.004586279328893979
+        },
+        {
+          "name": "0.002:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.06856565635529349,
+            0.021381758710735214,
+            0.004586279328893979
+          ]
+        },
+        {
+          "name": "0.002:omega:max",
+          "passed": true,
+          "value": 0.0122983294985625
+        },
+        {
+          "name": "0.002:gasPeakK",
+          "passed": true,
+          "value": 0.0005777861846601374
+        },
+        {
+          "name": "0.002:wallPeakK",
+          "passed": true,
+          "value": 6.275667011012406e-08
+        },
+        {
+          "name": "0.002:shearHeatW",
+          "passed": true,
+          "value": 0.007143156327208507
+        },
+        {
+          "name": "0.002:jouleHeatW",
+          "passed": true,
+          "value": 0.0024343139145568456
+        },
+        {
+          "name": "0.002:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.007930251704016742
+        },
+        {
+          "name": "0.002:totalCurrentA",
+          "passed": true,
+          "value": 0.001859060243653407
+        },
+        {
+          "name": "0.002:torque_outer",
+          "passed": true,
+          "value": 0.010372569837211557
+        },
+        {
+          "name": "0.002:torque_lower",
+          "passed": true,
+          "value": 0.011050578178953227
+        },
+        {
+          "name": "0.002:torque_upper",
+          "passed": true,
+          "value": 0.011050578178956622
+        },
+        {
+          "name": "0.004:gas:rms",
+          "passed": true,
+          "value": 0.002171117380076055
+        },
+        {
+          "name": "0.004:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.0430219658665762,
+            0.010682030912943103,
+            0.002171117380076055
+          ]
+        },
+        {
+          "name": "0.004:gas:max",
+          "passed": true,
+          "value": 0.0033293543451222924
+        },
+        {
+          "name": "0.004:solid:rms",
+          "passed": true,
+          "value": 0.0004234093927839316
+        },
+        {
+          "name": "0.004:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0011151367961190078,
+            0.001468826874024285,
+            0.0004234093927839316
+          ]
+        },
+        {
+          "name": "0.004:solid:max",
+          "passed": true,
+          "value": 0.0010030472780044875
+        },
+        {
+          "name": "0.004:omega:rms",
+          "passed": true,
+          "value": 0.003207324395023805
+        },
+        {
+          "name": "0.004:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.052960873628726333,
+            0.015420929069373264,
+            0.003207324395023805
+          ]
+        },
+        {
+          "name": "0.004:omega:max",
+          "passed": true,
+          "value": 0.007631070119608876
+        },
+        {
+          "name": "0.004:gasPeakK",
+          "passed": true,
+          "value": 0.0003288054378038168
+        },
+        {
+          "name": "0.004:wallPeakK",
+          "passed": true,
+          "value": 1.1228772379146291e-07
+        },
+        {
+          "name": "0.004:shearHeatW",
+          "passed": true,
+          "value": 0.0028138016751456697
+        },
+        {
+          "name": "0.004:jouleHeatW",
+          "passed": true,
+          "value": 0.002345576674018173
+        },
+        {
+          "name": "0.004:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0029348604622358456
+        },
+        {
+          "name": "0.004:totalCurrentA",
+          "passed": true,
+          "value": 0.0017916061962414017
+        },
+        {
+          "name": "0.004:torque_outer",
+          "passed": true,
+          "value": 0.003871906430230697
+        },
+        {
+          "name": "0.004:torque_lower",
+          "passed": true,
+          "value": 0.004167568270518292
+        },
+        {
+          "name": "0.004:torque_upper",
+          "passed": true,
+          "value": 0.004167568270537735
+        }
+      ],
+      "passed": false
+    },
+    "spatial": {
+      "reference": [
+        48,
+        48,
+        256,
+        false
+      ],
+      "comparisons": [
+        {
+          "nr": 6,
+          "nz": 6,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 6.558880477309485,
+                  "maxAbsolute": 12.082164355026123,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.026624925029014927,
+                  "maxNormalized": 0.049045979912835054
+                },
+                "solid": {
+                  "rmsAbsolute": 6.193834671717288e-05,
+                  "maxAbsolute": 6.720773046708928e-05,
+                  "scale": 1.0,
+                  "rmsNormalized": 6.193834671717288e-05,
+                  "maxNormalized": 6.720773046708928e-05
+                },
+                "omega": {
+                  "rmsAbsolute": 39.54141107421808,
+                  "maxAbsolute": 104.34824979269433,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.04362734545429239,
+                  "maxNormalized": 0.11513087210549663
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.017546326195640498,
+                "wallPeakK": 3.6051085865255866e-07,
+                "shearHeatW": 0.04887209660701409,
+                "jouleHeatW": 0.043324853963587324,
+                "interfaceIntoGasW": 0.003078916868443745,
+                "totalCurrentA": 0.03450972524523643,
+                "torque_outer": 0.0583532069955272,
+                "torque_lower": 0.16318557732746175,
+                "torque_upper": 0.16318557732746403
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 5.6779400861403,
+                  "maxAbsolute": 9.80302584279292,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.022925321643629305,
+                  "maxNormalized": 0.03958081929666997
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0002529192097624411,
+                  "maxAbsolute": 0.0002570715970477977,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0002529192097624411,
+                  "maxNormalized": 0.0002570715970477977
+                },
+                "omega": {
+                  "rmsAbsolute": 27.399833853629126,
+                  "maxAbsolute": 54.81475882869216,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.03013666790592275,
+                  "maxNormalized": 0.06028993431085142
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.011309750125549564,
+                "wallPeakK": 7.419004255743701e-07,
+                "shearHeatW": 0.026594868977291637,
+                "jouleHeatW": 0.04286922069402911,
+                "interfaceIntoGasW": 0.005538817352326401,
+                "totalCurrentA": 0.03403373221214149,
+                "torque_outer": 0.023696851358361627,
+                "torque_lower": 0.027601488385684946,
+                "torque_upper": 0.027601488385683624
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 5.1199253045873565,
+                  "maxAbsolute": 8.35047171457802,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.020592674044748065,
+                  "maxNormalized": 0.0335861427478487
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0009034852531612683,
+                  "maxAbsolute": 0.0009064426158147398,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0009034852531612683,
+                  "maxNormalized": 0.0009064426158147398
+                },
+                "omega": {
+                  "rmsAbsolute": 28.290868135105555,
+                  "maxAbsolute": 60.94306196889988,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.031199227317255985,
+                  "maxNormalized": 0.06720813354673788
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.006707541726740865,
+                "wallPeakK": 1.7651164172212876e-06,
+                "shearHeatW": 0.018292349365004294,
+                "jouleHeatW": 0.04226539853903761,
+                "interfaceIntoGasW": 0.0050967358825707776,
+                "totalCurrentA": 0.03359220071416551,
+                "torque_outer": 0.016796351308593686,
+                "torque_lower": 0.014112183945216187,
+                "torque_upper": 0.01411218394519449
+              }
+            }
+          ]
+        },
+        {
+          "nr": 12,
+          "nz": 12,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.6273809893175197,
+                  "maxAbsolute": 3.123023552477548,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.006606142158577195,
+                  "maxNormalized": 0.01267750925424267
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0003020982160232971,
+                  "maxAbsolute": 0.00042942570416926173,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0003020982160232971,
+                  "maxNormalized": 0.00042942570416926173
+                },
+                "omega": {
+                  "rmsAbsolute": 14.616804802920827,
+                  "maxAbsolute": 47.58920845931158,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.016127203740353552,
+                  "maxNormalized": 0.05250674624266115
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.004159502338384389,
+                "wallPeakK": 5.1039089470875426e-08,
+                "shearHeatW": 0.01657763296104885,
+                "jouleHeatW": 0.011343158824758396,
+                "interfaceIntoGasW": 0.0013098593223612898,
+                "totalCurrentA": 0.008859297556551293,
+                "torque_outer": 0.014510619500206509,
+                "torque_lower": 0.0164568522354729,
+                "torque_upper": 0.016456852235475116
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.3991589375086506,
+                  "maxAbsolute": 2.3685171974539685,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.005649261560762418,
+                  "maxNormalized": 0.009563154550123229
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0007726991451192716,
+                  "maxAbsolute": 0.0011258584588631493,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0007726991451192716,
+                  "maxNormalized": 0.0011258584588631493
+                },
+                "omega": {
+                  "rmsAbsolute": 11.050990568252281,
+                  "maxAbsolute": 30.556814331630335,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.012154819425767875,
+                  "maxNormalized": 0.03360898356882967
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0026507848135572986,
+                "wallPeakK": 2.1199538664601828e-07,
+                "shearHeatW": 0.009293504752714435,
+                "jouleHeatW": 0.011223520990804028,
+                "interfaceIntoGasW": 0.0015072647754622581,
+                "totalCurrentA": 0.0087159636723744,
+                "torque_outer": 0.008580213627133909,
+                "torque_lower": 0.00853803728993602,
+                "torque_upper": 0.008538037289936034
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.252014581808536,
+                  "maxAbsolute": 2.070112723334148,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.005035684438473011,
+                  "maxNormalized": 0.008326128607640218
+                },
+                "solid": {
+                  "rmsAbsolute": 0.001307792723809232,
+                  "maxAbsolute": 0.002033288466918748,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.001307792723809232,
+                  "maxNormalized": 0.002033288466918748
+                },
+                "omega": {
+                  "rmsAbsolute": 8.02360107143684,
+                  "maxAbsolute": 22.895811559700746,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.00884844369339473,
+                  "maxNormalized": 0.02524954787717389
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0015652747648065063,
+                "wallPeakK": 6.118054645138826e-07,
+                "shearHeatW": 0.0048238954664173985,
+                "jouleHeatW": 0.01106619592635508,
+                "interfaceIntoGasW": 0.0013365388800161495,
+                "totalCurrentA": 0.008579634509737852,
+                "torque_outer": 0.00463260615441168,
+                "torque_lower": 0.0037272096092573685,
+                "torque_upper": 0.0037272096092806897
+              }
+            }
+          ]
+        },
+        {
+          "nr": 24,
+          "nz": 24,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.3289604894757088,
+                  "maxAbsolute": 0.6352403710529302,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.0013353724618247107,
+                  "maxNormalized": 0.002578675936114307
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00034864652654429545,
+                  "maxAbsolute": 0.0007708750684969345,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00034864652654429545,
+                  "maxNormalized": 0.0007708750684969345
+                },
+                "omega": {
+                  "rmsAbsolute": 3.130727992769917,
+                  "maxAbsolute": 10.823279477786855,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.0034542356469684367,
+                  "maxNormalized": 0.011941681894949874
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0008283441320512183,
+                "wallPeakK": 4.8404371469144205e-09,
+                "shearHeatW": 0.003347317118218669,
+                "jouleHeatW": 0.0023235076608552575,
+                "interfaceIntoGasW": 0.0002879588922659709,
+                "totalCurrentA": 0.0018030660831043852,
+                "torque_outer": 0.0029820998132150307,
+                "torque_lower": 0.0021815760721693037,
+                "torque_upper": 0.0021815760721733226
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.28174629100026755,
+                  "maxAbsolute": 0.4889055165205036,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.0011375823353344753,
+                  "maxNormalized": 0.001974011005670255
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0004080603930308623,
+                  "maxAbsolute": 0.0009763960242707981,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0004080603930308623,
+                  "maxNormalized": 0.0009763960242707981
+                },
+                "omega": {
+                  "rmsAbsolute": 2.3700587326681646,
+                  "maxAbsolute": 7.725350060779647,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.002606792191715872,
+                  "maxNormalized": 0.008496997116202575
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0005278804524634002,
+                "wallPeakK": 5.3782132489326375e-08,
+                "shearHeatW": 0.0019582365202484263,
+                "jouleHeatW": 0.002298939875824376,
+                "interfaceIntoGasW": 0.0003144281044454745,
+                "totalCurrentA": 0.0017735945796658707,
+                "torque_outer": 0.0017803666927073368,
+                "torque_lower": 0.0015896290895673361,
+                "torque_upper": 0.0015896290895707152
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.2519983472353693,
+                  "maxAbsolute": 0.5156682759640603,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.0010135538148932889,
+                  "maxNormalized": 0.002074051493022891
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00037535715700149025,
+                  "maxAbsolute": 0.000888438364427202,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00037535715700149025,
+                  "maxNormalized": 0.000888438364427202
+                },
+                "omega": {
+                  "rmsAbsolute": 1.647523981370977,
+                  "maxAbsolute": 4.766523518853319,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.0018168928206780865,
+                  "maxNormalized": 0.005256531898122211
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.000311374440373516,
+                "wallPeakK": 1.0027287568325988e-07,
+                "shearHeatW": 0.0009751473840302001,
+                "jouleHeatW": 0.002267016998381304,
+                "interfaceIntoGasW": 0.0002735500886311097,
+                "totalCurrentA": 0.0017455656808579066,
+                "torque_outer": 0.000943075564864018,
+                "torque_lower": 0.0009089459494768224,
+                "torque_upper": 0.0009089459494952113
+              }
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "name": "0.001:gas:rms",
+          "passed": true,
+          "value": 0.0013353724618247107
+        },
+        {
+          "name": "0.001:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.026624925029014927,
+            0.006606142158577195,
+            0.0013353724618247107
+          ]
+        },
+        {
+          "name": "0.001:gas:max",
+          "passed": true,
+          "value": 0.002578675936114307
+        },
+        {
+          "name": "0.001:solid:rms",
+          "passed": true,
+          "value": 0.00034864652654429545
+        },
+        {
+          "name": "0.001:solid:decreasing",
+          "passed": true,
+          "values": [
+            6.193834671717288e-05,
+            0.0003020982160232971,
+            0.00034864652654429545
+          ]
+        },
+        {
+          "name": "0.001:solid:max",
+          "passed": true,
+          "value": 0.0007708750684969345
+        },
+        {
+          "name": "0.001:omega:rms",
+          "passed": true,
+          "value": 0.0034542356469684367
+        },
+        {
+          "name": "0.001:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.04362734545429239,
+            0.016127203740353552,
+            0.0034542356469684367
+          ]
+        },
+        {
+          "name": "0.001:omega:max",
+          "passed": true,
+          "value": 0.011941681894949874
+        },
+        {
+          "name": "0.001:gasPeakK",
+          "passed": true,
+          "value": 0.0008283441320512183
+        },
+        {
+          "name": "0.001:wallPeakK",
+          "passed": true,
+          "value": 4.8404371469144205e-09
+        },
+        {
+          "name": "0.001:shearHeatW",
+          "passed": true,
+          "value": 0.003347317118218669
+        },
+        {
+          "name": "0.001:jouleHeatW",
+          "passed": true,
+          "value": 0.0023235076608552575
+        },
+        {
+          "name": "0.001:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0002879588922659709
+        },
+        {
+          "name": "0.001:totalCurrentA",
+          "passed": true,
+          "value": 0.0018030660831043852
+        },
+        {
+          "name": "0.001:torque_outer",
+          "passed": true,
+          "value": 0.0029820998132150307
+        },
+        {
+          "name": "0.001:torque_lower",
+          "passed": true,
+          "value": 0.0021815760721693037
+        },
+        {
+          "name": "0.001:torque_upper",
+          "passed": true,
+          "value": 0.0021815760721733226
+        },
+        {
+          "name": "0.002:gas:rms",
+          "passed": true,
+          "value": 0.0011375823353344753
+        },
+        {
+          "name": "0.002:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.022925321643629305,
+            0.005649261560762418,
+            0.0011375823353344753
+          ]
+        },
+        {
+          "name": "0.002:gas:max",
+          "passed": true,
+          "value": 0.001974011005670255
+        },
+        {
+          "name": "0.002:solid:rms",
+          "passed": true,
+          "value": 0.0004080603930308623
+        },
+        {
+          "name": "0.002:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0002529192097624411,
+            0.0007726991451192716,
+            0.0004080603930308623
+          ]
+        },
+        {
+          "name": "0.002:solid:max",
+          "passed": true,
+          "value": 0.0009763960242707981
+        },
+        {
+          "name": "0.002:omega:rms",
+          "passed": true,
+          "value": 0.002606792191715872
+        },
+        {
+          "name": "0.002:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.03013666790592275,
+            0.012154819425767875,
+            0.002606792191715872
+          ]
+        },
+        {
+          "name": "0.002:omega:max",
+          "passed": true,
+          "value": 0.008496997116202575
+        },
+        {
+          "name": "0.002:gasPeakK",
+          "passed": true,
+          "value": 0.0005278804524634002
+        },
+        {
+          "name": "0.002:wallPeakK",
+          "passed": true,
+          "value": 5.3782132489326375e-08
+        },
+        {
+          "name": "0.002:shearHeatW",
+          "passed": true,
+          "value": 0.0019582365202484263
+        },
+        {
+          "name": "0.002:jouleHeatW",
+          "passed": true,
+          "value": 0.002298939875824376
+        },
+        {
+          "name": "0.002:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0003144281044454745
+        },
+        {
+          "name": "0.002:totalCurrentA",
+          "passed": true,
+          "value": 0.0017735945796658707
+        },
+        {
+          "name": "0.002:torque_outer",
+          "passed": true,
+          "value": 0.0017803666927073368
+        },
+        {
+          "name": "0.002:torque_lower",
+          "passed": true,
+          "value": 0.0015896290895673361
+        },
+        {
+          "name": "0.002:torque_upper",
+          "passed": true,
+          "value": 0.0015896290895707152
+        },
+        {
+          "name": "0.004:gas:rms",
+          "passed": true,
+          "value": 0.0010135538148932889
+        },
+        {
+          "name": "0.004:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.020592674044748065,
+            0.005035684438473011,
+            0.0010135538148932889
+          ]
+        },
+        {
+          "name": "0.004:gas:max",
+          "passed": true,
+          "value": 0.002074051493022891
+        },
+        {
+          "name": "0.004:solid:rms",
+          "passed": true,
+          "value": 0.00037535715700149025
+        },
+        {
+          "name": "0.004:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0009034852531612683,
+            0.001307792723809232,
+            0.00037535715700149025
+          ]
+        },
+        {
+          "name": "0.004:solid:max",
+          "passed": true,
+          "value": 0.000888438364427202
+        },
+        {
+          "name": "0.004:omega:rms",
+          "passed": true,
+          "value": 0.0018168928206780865
+        },
+        {
+          "name": "0.004:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.031199227317255985,
+            0.00884844369339473,
+            0.0018168928206780865
+          ]
+        },
+        {
+          "name": "0.004:omega:max",
+          "passed": true,
+          "value": 0.005256531898122211
+        },
+        {
+          "name": "0.004:gasPeakK",
+          "passed": true,
+          "value": 0.000311374440373516
+        },
+        {
+          "name": "0.004:wallPeakK",
+          "passed": true,
+          "value": 1.0027287568325988e-07
+        },
+        {
+          "name": "0.004:shearHeatW",
+          "passed": true,
+          "value": 0.0009751473840302001
+        },
+        {
+          "name": "0.004:jouleHeatW",
+          "passed": true,
+          "value": 0.002267016998381304
+        },
+        {
+          "name": "0.004:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0002735500886311097
+        },
+        {
+          "name": "0.004:totalCurrentA",
+          "passed": true,
+          "value": 0.0017455656808579066
+        },
+        {
+          "name": "0.004:torque_outer",
+          "passed": true,
+          "value": 0.000943075564864018
+        },
+        {
+          "name": "0.004:torque_lower",
+          "passed": true,
+          "value": 0.0009089459494768224
+        },
+        {
+          "name": "0.004:torque_upper",
+          "passed": true,
+          "value": 0.0009089459494952113
+        }
+      ],
+      "passed": true
+    },
+    "temporal": {
+      "reference": [
+        24,
+        24,
+        256,
+        false
+      ],
+      "comparisons": [
+        {
+          "nr": 24,
+          "nz": 24,
+          "nt": 4,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 17.89497808489848,
+                  "maxAbsolute": 33.338224607357574,
+                  "scale": 245.80633478486914,
+                  "rmsNormalized": 0.07280112654769556,
+                  "maxNormalized": 0.13562801233961422
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0007585588783337085,
+                  "maxAbsolute": 0.001771762869907434,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0007585588783337085,
+                  "maxNormalized": 0.001771762869907434
+                },
+                "omega": {
+                  "rmsAbsolute": 62.8336326828185,
+                  "maxAbsolute": 156.66539149734018,
+                  "scale": 906.11576302743,
+                  "rmsNormalized": 0.06934393512025945,
+                  "maxNormalized": 0.1728977663669643
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.005636883970428045,
+                "wallPeakK": 4.384706898045688e-08,
+                "shearHeatW": 0.4093862102627954,
+                "jouleHeatW": 0.004229329474469525,
+                "interfaceIntoGasW": 0.8654089617481343,
+                "totalCurrentA": 0.0030755093366298947,
+                "torque_outer": 1.0680463632145747,
+                "torque_lower": 1.1123735142841242,
+                "torque_upper": 1.1123735142841198
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 11.692478483512625,
+                  "maxAbsolute": 18.79125045251567,
+                  "scale": 247.32872162896808,
+                  "rmsNormalized": 0.04727505324291927,
+                  "maxNormalized": 0.07597682278366964
+                },
+                "solid": {
+                  "rmsAbsolute": 0.000932822605864148,
+                  "maxAbsolute": 0.0022801080802992146,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.000932822605864148,
+                  "maxNormalized": 0.0022801080802992146
+                },
+                "omega": {
+                  "rmsAbsolute": 42.85549221086532,
+                  "maxAbsolute": 93.23080369685596,
+                  "scale": 908.9412595000706,
+                  "rmsNormalized": 0.04714880281090595,
+                  "maxNormalized": 0.10257076870746752
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0013925407063435761,
+                "wallPeakK": 8.566737133336344e-08,
+                "shearHeatW": 0.12222980373546626,
+                "jouleHeatW": 0.0027685512579616127,
+                "interfaceIntoGasW": 0.2136707865515051,
+                "totalCurrentA": 0.0018020112723033763,
+                "torque_outer": 0.24246882543118126,
+                "torque_lower": 0.26772365911117396,
+                "torque_upper": 0.2677236591111708
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 6.9327114115295325,
+                  "maxAbsolute": 10.282912596489155,
+                  "scale": 248.4265164714252,
+                  "rmsNormalized": 0.02790648723815662,
+                  "maxNormalized": 0.041392169976637444
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0009409699129455161,
+                  "maxAbsolute": 0.002280937960904339,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0009409699129455161,
+                  "maxNormalized": 0.002280937960904339
+                },
+                "omega": {
+                  "rmsAbsolute": 29.19518333560721,
+                  "maxAbsolute": 55.9773032339084,
+                  "scale": 905.1164584624116,
+                  "rmsNormalized": 0.03225572031382926,
+                  "maxNormalized": 0.061845415261811934
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.00041692560332930444,
+                "wallPeakK": 2.6850677568870075e-07,
+                "shearHeatW": 0.040043839483147124,
+                "jouleHeatW": 0.0016322743773250707,
+                "interfaceIntoGasW": 0.06391640653831342,
+                "totalCurrentA": 0.0009710799038397859,
+                "torque_outer": 0.07008111035195666,
+                "torque_lower": 0.0783613748370653,
+                "torque_upper": 0.07836137483707391
+              }
+            }
+          ]
+        },
+        {
+          "nr": 24,
+          "nz": 24,
+          "nt": 16,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 4.901019227737828,
+                  "maxAbsolute": 9.100582333798798,
+                  "scale": 245.80633478486914,
+                  "rmsNormalized": 0.01993853914313162,
+                  "maxNormalized": 0.03702338404648387
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00021586761222699389,
+                  "maxAbsolute": 0.0004945551150967731,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00021586761222699389,
+                  "maxNormalized": 0.0004945551150967731
+                },
+                "omega": {
+                  "rmsAbsolute": 17.42144657495495,
+                  "maxAbsolute": 47.643061490099115,
+                  "scale": 906.11576302743,
+                  "rmsNormalized": 0.019226513085643743,
+                  "maxNormalized": 0.05257944231200496
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0007946241489861542,
+                "wallPeakK": 9.429820570082895e-09,
+                "shearHeatW": 0.07605855167770383,
+                "jouleHeatW": 0.0010683900418141875,
+                "interfaceIntoGasW": 0.12169561753998165,
+                "totalCurrentA": 0.0007440664473295005,
+                "torque_outer": 0.1398006792135607,
+                "torque_lower": 0.15291482281074395,
+                "torque_upper": 0.15291482281074284
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 3.0024258794381327,
+                  "maxAbsolute": 4.787749661568455,
+                  "scale": 247.32872162896808,
+                  "rmsNormalized": 0.012139414539740528,
+                  "maxNormalized": 0.019357839356606676
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0002483531313750906,
+                  "maxAbsolute": 0.0006019109737280814,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0002483531313750906,
+                  "maxNormalized": 0.0006019109737280814
+                },
+                "omega": {
+                  "rmsAbsolute": 11.2063048144349,
+                  "maxAbsolute": 25.931017869323966,
+                  "scale": 908.9412595000706,
+                  "rmsNormalized": 0.012328964822873715,
+                  "maxNormalized": 0.028528815914447937
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0002617803788577994,
+                "wallPeakK": 2.698505198369976e-08,
+                "shearHeatW": 0.02618331370840943,
+                "jouleHeatW": 0.0006708862044746474,
+                "interfaceIntoGasW": 0.04006128213247879,
+                "totalCurrentA": 0.00042626200616757806,
+                "torque_outer": 0.04501759283028298,
+                "torque_lower": 0.04972120609138674,
+                "torque_upper": 0.049721206091386715
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.6948023753211314,
+                  "maxAbsolute": 2.5202606991002767,
+                  "scale": 248.4265164714252,
+                  "rmsNormalized": 0.00682214764910602,
+                  "maxNormalized": 0.010144894091408977
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00023688470174515862,
+                  "maxAbsolute": 0.0005671995721741041,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00023688470174515862,
+                  "maxNormalized": 0.0005671995721741041
+                },
+                "omega": {
+                  "rmsAbsolute": 7.478822514100973,
+                  "maxAbsolute": 14.563654588077611,
+                  "scale": 905.1164584624116,
+                  "rmsNormalized": 0.008262828991979445,
+                  "maxNormalized": 0.016090365446252045
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 8.897587511782085e-05,
+                "wallPeakK": 6.143700846111233e-08,
+                "shearHeatW": 0.00914983356624462,
+                "jouleHeatW": 0.0003901150849505906,
+                "interfaceIntoGasW": 0.013616558352336815,
+                "totalCurrentA": 0.00022931455282062046,
+                "torque_outer": 0.0149042875817352,
+                "torque_lower": 0.016630578626325006,
+                "torque_upper": 0.016630578626327604
+              }
+            }
+          ]
+        },
+        {
+          "nr": 24,
+          "nz": 24,
+          "nt": 64,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.0181347561552447,
+                  "maxAbsolute": 1.841701830064892,
+                  "scale": 245.80633478486914,
+                  "rmsNormalized": 0.004142020005490587,
+                  "maxNormalized": 0.007492491321172655
+                },
+                "solid": {
+                  "rmsAbsolute": 4.5568207779814175e-05,
+                  "maxAbsolute": 0.00010373287670972786,
+                  "scale": 1.0,
+                  "rmsNormalized": 4.5568207779814175e-05,
+                  "maxNormalized": 0.00010373287670972786
+                },
+                "omega": {
+                  "rmsAbsolute": 3.6474808001619605,
+                  "maxAbsolute": 10.125689013027227,
+                  "scale": 906.11576302743,
+                  "rmsNormalized": 0.004025402657134377,
+                  "maxNormalized": 0.011174829338799066
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.00014293424988471714,
+                "wallPeakK": 1.4969969797355447e-09,
+                "shearHeatW": 0.014536779970779784,
+                "jouleHeatW": 0.0002170200628908107,
+                "interfaceIntoGasW": 0.021830222597528134,
+                "totalCurrentA": 0.00014914952668228183,
+                "torque_outer": 0.02504217978709384,
+                "torque_lower": 0.027391722400779635,
+                "torque_upper": 0.027391722400778657
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.6131587228671648,
+                  "maxAbsolute": 0.9673147364493389,
+                  "scale": 247.32872162896808,
+                  "rmsNormalized": 0.0024791246193679,
+                  "maxNormalized": 0.0039110489476449194
+                },
+                "solid": {
+                  "rmsAbsolute": 5.12238194037118e-05,
+                  "maxAbsolute": 0.00012382394561427645,
+                  "scale": 1.0,
+                  "rmsNormalized": 5.12238194037118e-05,
+                  "maxNormalized": 0.00012382394561427645
+                },
+                "omega": {
+                  "rmsAbsolute": 2.3109176156636306,
+                  "maxAbsolute": 5.35033121800052,
+                  "scale": 908.9412595000706,
+                  "rmsNormalized": 0.002542427897854109,
+                  "maxNormalized": 0.0058863333159100625
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 4.992127640624089e-05,
+                "wallPeakK": 8.974537664238364e-09,
+                "shearHeatW": 0.005167622136920681,
+                "jouleHeatW": 0.000135681631296988,
+                "interfaceIntoGasW": 0.007613631186768604,
+                "totalCurrentA": 8.561511078668836e-05,
+                "torque_outer": 0.008566656519696954,
+                "torque_lower": 0.009440354238466451,
+                "torque_upper": 0.009440354238466429
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.3420399955378089,
+                  "maxAbsolute": 0.5095957864700722,
+                  "scale": 248.4265164714252,
+                  "rmsNormalized": 0.001376825631965706,
+                  "maxNormalized": 0.0020512938542479927
+                },
+                "solid": {
+                  "rmsAbsolute": 4.8064114157819326e-05,
+                  "maxAbsolute": 0.00011460892869763484,
+                  "scale": 1.0,
+                  "rmsNormalized": 4.8064114157819326e-05,
+                  "maxNormalized": 0.00011460892869763484
+                },
+                "omega": {
+                  "rmsAbsolute": 1.5358864409881328,
+                  "maxAbsolute": 3.001889815670097,
+                  "scale": 905.1164584624116,
+                  "rmsNormalized": 0.0016968937274627143,
+                  "maxNormalized": 0.0033165785326339436
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 1.7436426687902872e-05,
+                "wallPeakK": 1.201484816636015e-08,
+                "shearHeatW": 0.0018325202646640771,
+                "jouleHeatW": 7.87381764212376e-05,
+                "interfaceIntoGasW": 0.0026605442462307666,
+                "totalCurrentA": 4.612102265781247e-05,
+                "torque_outer": 0.0029201227678062394,
+                "torque_lower": 0.003251528863474945,
+                "torque_upper": 0.0032515288634759843
+              }
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "name": "0.001:gas:rms",
+          "passed": true,
+          "value": 0.004142020005490587
+        },
+        {
+          "name": "0.001:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.07280112654769556,
+            0.01993853914313162,
+            0.004142020005490587
+          ]
+        },
+        {
+          "name": "0.001:gas:max",
+          "passed": true,
+          "value": 0.007492491321172655
+        },
+        {
+          "name": "0.001:solid:rms",
+          "passed": true,
+          "value": 4.5568207779814175e-05
+        },
+        {
+          "name": "0.001:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0007585588783337085,
+            0.00021586761222699389,
+            4.5568207779814175e-05
+          ]
+        },
+        {
+          "name": "0.001:solid:max",
+          "passed": true,
+          "value": 0.00010373287670972786
+        },
+        {
+          "name": "0.001:omega:rms",
+          "passed": true,
+          "value": 0.004025402657134377
+        },
+        {
+          "name": "0.001:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.06934393512025945,
+            0.019226513085643743,
+            0.004025402657134377
+          ]
+        },
+        {
+          "name": "0.001:omega:max",
+          "passed": true,
+          "value": 0.011174829338799066
+        },
+        {
+          "name": "0.001:gasPeakK",
+          "passed": true,
+          "value": 0.00014293424988471714
+        },
+        {
+          "name": "0.001:wallPeakK",
+          "passed": true,
+          "value": 1.4969969797355447e-09
+        },
+        {
+          "name": "0.001:shearHeatW",
+          "passed": true,
+          "value": 0.014536779970779784
+        },
+        {
+          "name": "0.001:jouleHeatW",
+          "passed": true,
+          "value": 0.0002170200628908107
+        },
+        {
+          "name": "0.001:interfaceIntoGasW",
+          "passed": false,
+          "value": 0.021830222597528134
+        },
+        {
+          "name": "0.001:totalCurrentA",
+          "passed": true,
+          "value": 0.00014914952668228183
+        },
+        {
+          "name": "0.001:torque_outer",
+          "passed": false,
+          "value": 0.02504217978709384
+        },
+        {
+          "name": "0.001:torque_lower",
+          "passed": false,
+          "value": 0.027391722400779635
+        },
+        {
+          "name": "0.001:torque_upper",
+          "passed": false,
+          "value": 0.027391722400778657
+        },
+        {
+          "name": "0.002:gas:rms",
+          "passed": true,
+          "value": 0.0024791246193679
+        },
+        {
+          "name": "0.002:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.04727505324291927,
+            0.012139414539740528,
+            0.0024791246193679
+          ]
+        },
+        {
+          "name": "0.002:gas:max",
+          "passed": true,
+          "value": 0.0039110489476449194
+        },
+        {
+          "name": "0.002:solid:rms",
+          "passed": true,
+          "value": 5.12238194037118e-05
+        },
+        {
+          "name": "0.002:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.000932822605864148,
+            0.0002483531313750906,
+            5.12238194037118e-05
+          ]
+        },
+        {
+          "name": "0.002:solid:max",
+          "passed": true,
+          "value": 0.00012382394561427645
+        },
+        {
+          "name": "0.002:omega:rms",
+          "passed": true,
+          "value": 0.002542427897854109
+        },
+        {
+          "name": "0.002:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.04714880281090595,
+            0.012328964822873715,
+            0.002542427897854109
+          ]
+        },
+        {
+          "name": "0.002:omega:max",
+          "passed": true,
+          "value": 0.0058863333159100625
+        },
+        {
+          "name": "0.002:gasPeakK",
+          "passed": true,
+          "value": 4.992127640624089e-05
+        },
+        {
+          "name": "0.002:wallPeakK",
+          "passed": true,
+          "value": 8.974537664238364e-09
+        },
+        {
+          "name": "0.002:shearHeatW",
+          "passed": true,
+          "value": 0.005167622136920681
+        },
+        {
+          "name": "0.002:jouleHeatW",
+          "passed": true,
+          "value": 0.000135681631296988
+        },
+        {
+          "name": "0.002:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.007613631186768604
+        },
+        {
+          "name": "0.002:totalCurrentA",
+          "passed": true,
+          "value": 8.561511078668836e-05
+        },
+        {
+          "name": "0.002:torque_outer",
+          "passed": true,
+          "value": 0.008566656519696954
+        },
+        {
+          "name": "0.002:torque_lower",
+          "passed": true,
+          "value": 0.009440354238466451
+        },
+        {
+          "name": "0.002:torque_upper",
+          "passed": true,
+          "value": 0.009440354238466429
+        },
+        {
+          "name": "0.004:gas:rms",
+          "passed": true,
+          "value": 0.001376825631965706
+        },
+        {
+          "name": "0.004:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.02790648723815662,
+            0.00682214764910602,
+            0.001376825631965706
+          ]
+        },
+        {
+          "name": "0.004:gas:max",
+          "passed": true,
+          "value": 0.0020512938542479927
+        },
+        {
+          "name": "0.004:solid:rms",
+          "passed": true,
+          "value": 4.8064114157819326e-05
+        },
+        {
+          "name": "0.004:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0009409699129455161,
+            0.00023688470174515862,
+            4.8064114157819326e-05
+          ]
+        },
+        {
+          "name": "0.004:solid:max",
+          "passed": true,
+          "value": 0.00011460892869763484
+        },
+        {
+          "name": "0.004:omega:rms",
+          "passed": true,
+          "value": 0.0016968937274627143
+        },
+        {
+          "name": "0.004:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.03225572031382926,
+            0.008262828991979445,
+            0.0016968937274627143
+          ]
+        },
+        {
+          "name": "0.004:omega:max",
+          "passed": true,
+          "value": 0.0033165785326339436
+        },
+        {
+          "name": "0.004:gasPeakK",
+          "passed": true,
+          "value": 1.7436426687902872e-05
+        },
+        {
+          "name": "0.004:wallPeakK",
+          "passed": true,
+          "value": 1.201484816636015e-08
+        },
+        {
+          "name": "0.004:shearHeatW",
+          "passed": true,
+          "value": 0.0018325202646640771
+        },
+        {
+          "name": "0.004:jouleHeatW",
+          "passed": true,
+          "value": 7.87381764212376e-05
+        },
+        {
+          "name": "0.004:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0026605442462307666
+        },
+        {
+          "name": "0.004:totalCurrentA",
+          "passed": true,
+          "value": 4.612102265781247e-05
+        },
+        {
+          "name": "0.004:torque_outer",
+          "passed": true,
+          "value": 0.0029201227678062394
+        },
+        {
+          "name": "0.004:torque_lower",
+          "passed": true,
+          "value": 0.003251528863474945
+        },
+        {
+          "name": "0.004:torque_upper",
+          "passed": true,
+          "value": 0.0032515288634759843
+        }
+      ],
+      "passed": false
+    },
+    "radial": {
+      "reference": [
+        48,
+        48,
+        256,
+        false
+      ],
+      "comparisons": [
+        {
+          "nr": 6,
+          "nz": 48,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 6.548380128986101,
+                  "maxAbsolute": 11.935383868363374,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.026582300226221853,
+                  "maxNormalized": 0.048450143555298454
+                },
+                "solid": {
+                  "rmsAbsolute": 6.191804373630295e-05,
+                  "maxAbsolute": 6.720916530866816e-05,
+                  "scale": 1.0,
+                  "rmsNormalized": 6.191804373630295e-05,
+                  "maxNormalized": 6.720916530866816e-05
+                },
+                "omega": {
+                  "rmsAbsolute": 19.95889168328258,
+                  "maxAbsolute": 38.44657709708997,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.022021304720688736,
+                  "maxNormalized": 0.04241937894936388
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0175197300771599,
+                "wallPeakK": 3.6040156012670175e-07,
+                "shearHeatW": 0.029268270800392945,
+                "jouleHeatW": 0.02803732013604457,
+                "interfaceIntoGasW": 0.0037100676428436182,
+                "totalCurrentA": 0.027148155942217138,
+                "torque_outer": 0.03660827678671485,
+                "torque_lower": 0.03974504188358435,
+                "torque_upper": 0.03974504188358643
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 5.675153959075506,
+                  "maxAbsolute": 9.695852679618724,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.022914072342275046,
+                  "maxNormalized": 0.03914809559757159
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0002528712620245119,
+                  "maxAbsolute": 0.0002570754644466433,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0002528712620245119,
+                  "maxNormalized": 0.0002570754644466433
+                },
+                "omega": {
+                  "rmsAbsolute": 16.83043884233375,
+                  "maxAbsolute": 35.41625611505742,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.01851154823828154,
+                  "maxNormalized": 0.03895381098704082
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.01126741813049296,
+                "wallPeakK": 7.416344176132389e-07,
+                "shearHeatW": 0.02227576743568552,
+                "jouleHeatW": 0.02760669521336992,
+                "interfaceIntoGasW": 0.004850770623633308,
+                "totalCurrentA": 0.026700398594535307,
+                "torque_outer": 0.012160514840771443,
+                "torque_lower": 0.024337077934303387,
+                "torque_upper": 0.02433707793430315
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 5.130191791068623,
+                  "maxAbsolute": 8.258370763995629,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.020633966524055157,
+                  "maxNormalized": 0.03321570670792145
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0009033851928356021,
+                  "maxAbsolute": 0.0009057709154376425,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0009033851928356021,
+                  "maxNormalized": 0.0009057709154376425
+                },
+                "omega": {
+                  "rmsAbsolute": 13.15324593503116,
+                  "maxAbsolute": 25.681401312082357,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.01450542655414626,
+                  "maxNormalized": 0.028321501960807332
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.006656088873838326,
+                "wallPeakK": 1.7643347889038352e-06,
+                "shearHeatW": 0.012256900983458241,
+                "jouleHeatW": 0.02706677763189473,
+                "interfaceIntoGasW": 0.004409839242886102,
+                "totalCurrentA": 0.026282260636020547,
+                "torque_outer": 0.008766298241987453,
+                "torque_lower": 0.015128042599087673,
+                "torque_upper": 0.015128042599109326
+              }
+            }
+          ]
+        },
+        {
+          "nr": 12,
+          "nz": 48,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.6250200210480525,
+                  "maxAbsolute": 3.080569064073984,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.006596558113954349,
+                  "maxNormalized": 0.012505170762208775
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0003020984650458088,
+                  "maxAbsolute": 0.0004294257028050197,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0003020984650458088,
+                  "maxNormalized": 0.0004294257028050197
+                },
+                "omega": {
+                  "rmsAbsolute": 5.3991560070009585,
+                  "maxAbsolute": 12.752704492142357,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.0059570672335624705,
+                  "maxNormalized": 0.014070480269682764
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.004153924214577127,
+                "wallPeakK": 5.104146954855039e-08,
+                "shearHeatW": 0.00907660587993986,
+                "jouleHeatW": 0.007011089130645988,
+                "interfaceIntoGasW": 0.001152328740817173,
+                "totalCurrentA": 0.006792774196130704,
+                "torque_outer": 0.006706107568354508,
+                "torque_lower": 0.009591176775541253,
+                "torque_upper": 0.009591176775543093
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.3995503491416474,
+                  "maxAbsolute": 2.328527835947341,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.005650841929249119,
+                  "maxNormalized": 0.009401693005803553
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0007726993241735745,
+                  "maxAbsolute": 0.0011258584488587076,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0007726993241735745,
+                  "maxNormalized": 0.0011258584488587076
+                },
+                "omega": {
+                  "rmsAbsolute": 4.217948442867964,
+                  "maxAbsolute": 8.974894454719902,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.004639258476750923,
+                  "maxNormalized": 0.009871352327079055
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.002645658014826362,
+                "wallPeakK": 2.1199527348388896e-07,
+                "shearHeatW": 0.0055229712836301235,
+                "jouleHeatW": 0.0068964358734537835,
+                "interfaceIntoGasW": 0.001331587669735368,
+                "totalCurrentA": 0.00667538474677244,
+                "torque_outer": 0.004071606895352879,
+                "torque_lower": 0.0061061889807331425,
+                "torque_upper": 0.006106188980731692
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 1.2559240784619756,
+                  "maxAbsolute": 2.0387571953227734,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.005051408689409091,
+                  "maxNormalized": 0.008200014625613825
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0013077907571596094,
+                  "maxAbsolute": 0.0020332885063680806,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0013077907571596094,
+                  "maxNormalized": 0.0020332885063680806
+                },
+                "omega": {
+                  "rmsAbsolute": 3.352883731738354,
+                  "maxAbsolute": 6.443633087106946,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.0036975670458493036,
+                  "maxNormalized": 0.007106051764603846
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0015599275696213943,
+                "wallPeakK": 6.114452764523902e-07,
+                "shearHeatW": 0.0029992842276851967,
+                "jouleHeatW": 0.006754623106105817,
+                "interfaceIntoGasW": 0.0011531730067322235,
+                "totalCurrentA": 0.006565722622078236,
+                "torque_outer": 0.0021249759962032374,
+                "torque_lower": 0.003666408606009329,
+                "torque_upper": 0.0036664086060311444
+              }
+            }
+          ]
+        },
+        {
+          "nr": 24,
+          "nz": 48,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.32855452052975814,
+                  "maxAbsolute": 0.6235767249944502,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.001333724483516913,
+                  "maxNormalized": 0.0025313288769711613
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00034864656790410946,
+                  "maxAbsolute": 0.0007708750687243082,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00034864656790410946,
+                  "maxNormalized": 0.0007708750687243082
+                },
+                "omega": {
+                  "rmsAbsolute": 1.100470151611261,
+                  "maxAbsolute": 2.5319764102972613,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.001214185082478911,
+                  "maxNormalized": 0.0027936132407318792
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.0008277195346796334,
+                "wallPeakK": 4.840530894829896e-09,
+                "shearHeatW": 0.0018566616403966824,
+                "jouleHeatW": 0.0014190650726412994,
+                "interfaceIntoGasW": 0.00025616097897010665,
+                "totalCurrentA": 0.001375350896889221,
+                "torque_outer": 0.0013987857475863976,
+                "torque_lower": 0.0019413113762390358,
+                "torque_upper": 0.0019413113762406817
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.2818981060552969,
+                  "maxAbsolute": 0.47979167569064884,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.001138195305692403,
+                  "maxNormalized": 0.001937212848369639
+                },
+                "solid": {
+                  "rmsAbsolute": 0.0004080604491620023,
+                  "maxAbsolute": 0.0009763960248392323,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.0004080604491620023,
+                  "maxNormalized": 0.0009763960248392323
+                },
+                "omega": {
+                  "rmsAbsolute": 0.8559550269620451,
+                  "maxAbsolute": 1.7914321975715666,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.0009414521463072177,
+                  "maxNormalized": 0.0019703695103625955
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.000527133685108104,
+                "wallPeakK": 5.378169838050883e-08,
+                "shearHeatW": 0.0011363291791855058,
+                "jouleHeatW": 0.0013954977832209784,
+                "interfaceIntoGasW": 0.0002784218452075672,
+                "totalCurrentA": 0.0013512250084984968,
+                "torque_outer": 0.0008323156733620522,
+                "torque_lower": 0.0012856795019288473,
+                "torque_upper": 0.0012856795019304007
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.2528355899364507,
+                  "maxAbsolute": 0.5119145473859135,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.0010169212597316475,
+                  "maxNormalized": 0.0020589537514615103
+                },
+                "solid": {
+                  "rmsAbsolute": 0.00037535703368250084,
+                  "maxAbsolute": 0.0008884383657914441,
+                  "scale": 1.0,
+                  "rmsNormalized": 0.00037535703368250084,
+                  "maxNormalized": 0.0008884383657914441
+                },
+                "omega": {
+                  "rmsAbsolute": 0.6856630136697914,
+                  "maxAbsolute": 1.3161875790453905,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.0007561505756683916,
+                  "maxNormalized": 0.0014514943576379848
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 0.00031064684254176556,
+                "wallPeakK": 1.0026386031702267e-07,
+                "shearHeatW": 0.0006026787917266423,
+                "jouleHeatW": 0.0013667780931211231,
+                "interfaceIntoGasW": 0.00023560942543505195,
+                "totalCurrentA": 0.001328963518393499,
+                "torque_outer": 0.0004293939969181844,
+                "torque_lower": 0.0007362355892991625,
+                "torque_upper": 0.0007362355893248057
+              }
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "name": "0.001:gas:rms",
+          "passed": true,
+          "value": 0.001333724483516913
+        },
+        {
+          "name": "0.001:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.026582300226221853,
+            0.006596558113954349,
+            0.001333724483516913
+          ]
+        },
+        {
+          "name": "0.001:gas:max",
+          "passed": true,
+          "value": 0.0025313288769711613
+        },
+        {
+          "name": "0.001:solid:rms",
+          "passed": true,
+          "value": 0.00034864656790410946
+        },
+        {
+          "name": "0.001:solid:decreasing",
+          "passed": true,
+          "values": [
+            6.191804373630295e-05,
+            0.0003020984650458088,
+            0.00034864656790410946
+          ]
+        },
+        {
+          "name": "0.001:solid:max",
+          "passed": true,
+          "value": 0.0007708750687243082
+        },
+        {
+          "name": "0.001:omega:rms",
+          "passed": true,
+          "value": 0.001214185082478911
+        },
+        {
+          "name": "0.001:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.022021304720688736,
+            0.0059570672335624705,
+            0.001214185082478911
+          ]
+        },
+        {
+          "name": "0.001:omega:max",
+          "passed": true,
+          "value": 0.0027936132407318792
+        },
+        {
+          "name": "0.001:gasPeakK",
+          "passed": true,
+          "value": 0.0008277195346796334
+        },
+        {
+          "name": "0.001:wallPeakK",
+          "passed": true,
+          "value": 4.840530894829896e-09
+        },
+        {
+          "name": "0.001:shearHeatW",
+          "passed": true,
+          "value": 0.0018566616403966824
+        },
+        {
+          "name": "0.001:jouleHeatW",
+          "passed": true,
+          "value": 0.0014190650726412994
+        },
+        {
+          "name": "0.001:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.00025616097897010665
+        },
+        {
+          "name": "0.001:totalCurrentA",
+          "passed": true,
+          "value": 0.001375350896889221
+        },
+        {
+          "name": "0.001:torque_outer",
+          "passed": true,
+          "value": 0.0013987857475863976
+        },
+        {
+          "name": "0.001:torque_lower",
+          "passed": true,
+          "value": 0.0019413113762390358
+        },
+        {
+          "name": "0.001:torque_upper",
+          "passed": true,
+          "value": 0.0019413113762406817
+        },
+        {
+          "name": "0.002:gas:rms",
+          "passed": true,
+          "value": 0.001138195305692403
+        },
+        {
+          "name": "0.002:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.022914072342275046,
+            0.005650841929249119,
+            0.001138195305692403
+          ]
+        },
+        {
+          "name": "0.002:gas:max",
+          "passed": true,
+          "value": 0.001937212848369639
+        },
+        {
+          "name": "0.002:solid:rms",
+          "passed": true,
+          "value": 0.0004080604491620023
+        },
+        {
+          "name": "0.002:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0002528712620245119,
+            0.0007726993241735745,
+            0.0004080604491620023
+          ]
+        },
+        {
+          "name": "0.002:solid:max",
+          "passed": true,
+          "value": 0.0009763960248392323
+        },
+        {
+          "name": "0.002:omega:rms",
+          "passed": true,
+          "value": 0.0009414521463072177
+        },
+        {
+          "name": "0.002:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.01851154823828154,
+            0.004639258476750923,
+            0.0009414521463072177
+          ]
+        },
+        {
+          "name": "0.002:omega:max",
+          "passed": true,
+          "value": 0.0019703695103625955
+        },
+        {
+          "name": "0.002:gasPeakK",
+          "passed": true,
+          "value": 0.000527133685108104
+        },
+        {
+          "name": "0.002:wallPeakK",
+          "passed": true,
+          "value": 5.378169838050883e-08
+        },
+        {
+          "name": "0.002:shearHeatW",
+          "passed": true,
+          "value": 0.0011363291791855058
+        },
+        {
+          "name": "0.002:jouleHeatW",
+          "passed": true,
+          "value": 0.0013954977832209784
+        },
+        {
+          "name": "0.002:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.0002784218452075672
+        },
+        {
+          "name": "0.002:totalCurrentA",
+          "passed": true,
+          "value": 0.0013512250084984968
+        },
+        {
+          "name": "0.002:torque_outer",
+          "passed": true,
+          "value": 0.0008323156733620522
+        },
+        {
+          "name": "0.002:torque_lower",
+          "passed": true,
+          "value": 0.0012856795019288473
+        },
+        {
+          "name": "0.002:torque_upper",
+          "passed": true,
+          "value": 0.0012856795019304007
+        },
+        {
+          "name": "0.004:gas:rms",
+          "passed": true,
+          "value": 0.0010169212597316475
+        },
+        {
+          "name": "0.004:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.020633966524055157,
+            0.005051408689409091,
+            0.0010169212597316475
+          ]
+        },
+        {
+          "name": "0.004:gas:max",
+          "passed": true,
+          "value": 0.0020589537514615103
+        },
+        {
+          "name": "0.004:solid:rms",
+          "passed": true,
+          "value": 0.00037535703368250084
+        },
+        {
+          "name": "0.004:solid:decreasing",
+          "passed": true,
+          "values": [
+            0.0009033851928356021,
+            0.0013077907571596094,
+            0.00037535703368250084
+          ]
+        },
+        {
+          "name": "0.004:solid:max",
+          "passed": true,
+          "value": 0.0008884383657914441
+        },
+        {
+          "name": "0.004:omega:rms",
+          "passed": true,
+          "value": 0.0007561505756683916
+        },
+        {
+          "name": "0.004:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.01450542655414626,
+            0.0036975670458493036,
+            0.0007561505756683916
+          ]
+        },
+        {
+          "name": "0.004:omega:max",
+          "passed": true,
+          "value": 0.0014514943576379848
+        },
+        {
+          "name": "0.004:gasPeakK",
+          "passed": true,
+          "value": 0.00031064684254176556
+        },
+        {
+          "name": "0.004:wallPeakK",
+          "passed": true,
+          "value": 1.0026386031702267e-07
+        },
+        {
+          "name": "0.004:shearHeatW",
+          "passed": true,
+          "value": 0.0006026787917266423
+        },
+        {
+          "name": "0.004:jouleHeatW",
+          "passed": true,
+          "value": 0.0013667780931211231
+        },
+        {
+          "name": "0.004:interfaceIntoGasW",
+          "passed": true,
+          "value": 0.00023560942543505195
+        },
+        {
+          "name": "0.004:totalCurrentA",
+          "passed": true,
+          "value": 0.001328963518393499
+        },
+        {
+          "name": "0.004:torque_outer",
+          "passed": true,
+          "value": 0.0004293939969181844
+        },
+        {
+          "name": "0.004:torque_lower",
+          "passed": true,
+          "value": 0.0007362355892991625
+        },
+        {
+          "name": "0.004:torque_upper",
+          "passed": true,
+          "value": 0.0007362355893248057
+        }
+      ],
+      "passed": true
+    },
+    "axial": {
+      "reference": [
+        48,
+        48,
+        256,
+        false
+      ],
+      "comparisons": [
+        {
+          "nr": 48,
+          "nz": 6,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.07491816600705124,
+                  "maxAbsolute": 0.14997789420959862,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 0.0003041205827960559,
+                  "maxNormalized": 0.0006088158189731372
+                },
+                "solid": {
+                  "rmsAbsolute": 1.7467007355984247e-07,
+                  "maxAbsolute": 1.0466187632118817e-06,
+                  "scale": 1.0,
+                  "rmsNormalized": 1.7467007355984247e-07,
+                  "maxNormalized": 1.0466187632118817e-06
+                },
+                "omega": {
+                  "rmsAbsolute": 31.09266682001661,
+                  "maxAbsolute": 104.50974099774896,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.03430556673624991,
+                  "maxNormalized": 0.1153090506883885
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 7.549004065103037e-06,
+                "wallPeakK": 4.792337470162796e-14,
+                "shearHeatW": 0.018995696414026323,
+                "jouleHeatW": 0.01679422043384193,
+                "interfaceIntoGasW": 0.0007180350965437335,
+                "totalCurrentA": 0.007663641112468549,
+                "torque_outer": 0.020840040746657882,
+                "torque_lower": 0.11857154065799894,
+                "torque_upper": 0.11857154065797486
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.08872929088483561,
+                  "maxAbsolute": 0.13532766306946087,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 0.00035825449051695736,
+                  "maxNormalized": 0.0005464006587038554
+                },
+                "solid": {
+                  "rmsAbsolute": 3.407945381761495e-07,
+                  "maxAbsolute": 1.8125340375263477e-06,
+                  "scale": 1.0,
+                  "rmsNormalized": 3.407945381761495e-07,
+                  "maxNormalized": 1.8125340375263477e-06
+                },
+                "omega": {
+                  "rmsAbsolute": 17.172071948763264,
+                  "maxAbsolute": 34.51742550153449,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.018887305388092555,
+                  "maxNormalized": 0.03796520062363055
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 1.1067747699308701e-05,
+                "wallPeakK": 4.3674985024611374e-12,
+                "shearHeatW": 0.004320924753309382,
+                "jouleHeatW": 0.016762792385846045,
+                "interfaceIntoGasW": 0.0007599620632349555,
+                "totalCurrentA": 0.007635567637882894,
+                "torque_outer": 0.011223185505364917,
+                "torque_lower": 0.0025503889654096886,
+                "torque_upper": 0.002550388965363975
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.10308424125897683,
+                  "maxAbsolute": 0.16015518169069765,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.0004146115525346256,
+                  "maxNormalized": 0.0006441546032280927
+                },
+                "solid": {
+                  "rmsAbsolute": 6.372686533765155e-07,
+                  "maxAbsolute": 2.8971796837140573e-06,
+                  "scale": 1.0,
+                  "rmsNormalized": 6.372686533765155e-07,
+                  "maxNormalized": 2.8971796837140573e-06
+                },
+                "omega": {
+                  "rmsAbsolute": 21.451138982989626,
+                  "maxAbsolute": 57.174008661939524,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.023656360000981203,
+                  "maxNormalized": 0.06305161384104548
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 1.3461769023161015e-05,
+                "wallPeakK": 1.3768700376866991e-10,
+                "shearHeatW": 0.005864845804448667,
+                "jouleHeatW": 0.016690406139864913,
+                "interfaceIntoGasW": 0.0007545674726433298,
+                "totalCurrentA": 0.007594208435801355,
+                "torque_outer": 0.00774738495979461,
+                "torque_lower": 0.02782617842417007,
+                "torque_upper": 0.027826178424228607
+              }
+            }
+          ]
+        },
+        {
+          "nr": 48,
+          "nz": 12,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.02067808959128519,
+                  "maxAbsolute": 0.069160021026903,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 8.394002406597657e-05,
+                  "maxNormalized": 0.0002807461397134256
+                },
+                "solid": {
+                  "rmsAbsolute": 4.730453430973027e-08,
+                  "maxAbsolute": 2.453873548802221e-07,
+                  "scale": 1.0,
+                  "rmsNormalized": 4.730453430973027e-08,
+                  "maxNormalized": 2.453873548802221e-07
+                },
+                "omega": {
+                  "rmsAbsolute": 12.863387027954612,
+                  "maxAbsolute": 47.609958474459916,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.014192599968865348,
+                  "maxNormalized": 0.05252964042004291
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 3.4221514228238753e-06,
+                "wallPeakK": 6.121598958237148e-15,
+                "shearHeatW": 0.0074350996243396665,
+                "jouleHeatW": 0.004430608053408574,
+                "interfaceIntoGasW": 0.00016337478379527444,
+                "totalCurrentA": 0.002069765002686174,
+                "torque_outer": 0.007742728924969917,
+                "torque_lower": 0.006833688002991722,
+                "torque_upper": 0.006833688002992099
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.022513266920119467,
+                  "maxAbsolute": 0.04601105515502013,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 9.089984705059905e-05,
+                  "maxNormalized": 0.00018577480962970848
+                },
+                "solid": {
+                  "rmsAbsolute": 9.062036214232936e-08,
+                  "maxAbsolute": 4.4994578729529167e-07,
+                  "scale": 1.0,
+                  "rmsNormalized": 9.062036214232936e-08,
+                  "maxNormalized": 4.4994578729529167e-07
+                },
+                "omega": {
+                  "rmsAbsolute": 9.481292469020152,
+                  "maxAbsolute": 28.903123041284744,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.010428331937492423,
+                  "maxNormalized": 0.03179011322449504
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 2.9804889077732574e-06,
+                "wallPeakK": 8.862326263253608e-13,
+                "shearHeatW": 0.00373867614490357,
+                "jouleHeatW": 0.0044252107914509245,
+                "interfaceIntoGasW": 0.00018082529302303432,
+                "totalCurrentA": 0.0020445449748822705,
+                "torque_outer": 0.004469907174638638,
+                "torque_lower": 0.002391345922438391,
+                "torque_upper": 0.0023913459224644018
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.026294480122356897,
+                  "maxAbsolute": 0.05182773248088779,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 0.0001057581167933549,
+                  "maxNormalized": 0.00020845452579182531
+                },
+                "solid": {
+                  "rmsAbsolute": 1.7343010177363985e-07,
+                  "maxAbsolute": 7.024575552350143e-07,
+                  "scale": 1.0,
+                  "rmsNormalized": 1.7343010177363985e-07,
+                  "maxNormalized": 7.024575552350143e-07
+                },
+                "omega": {
+                  "rmsAbsolute": 6.559350511564564,
+                  "maxAbsolute": 25.518848168761792,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.007233665177277481,
+                  "maxNormalized": 0.028142238021455126
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 3.120979782507803e-06,
+                "wallPeakK": 2.099760913523555e-11,
+                "shearHeatW": 0.0018066235309745127,
+                "jouleHeatW": 0.004409139103716118,
+                "interfaceIntoGasW": 0.00018804087499702373,
+                "totalCurrentA": 0.0020181463648609225,
+                "torque_outer": 0.002484752894918414,
+                "torque_lower": 6.095524229683899e-05,
+                "torque_upper": 6.095524234930919e-05
+              }
+            }
+          ]
+        },
+        {
+          "nr": 48,
+          "nz": 24,
+          "nt": 256,
+          "cases": [
+            {
+              "timeS": 0.001,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.0039540224232668736,
+                  "maxAbsolute": 0.016677880491840824,
+                  "scale": 246.34362238247968,
+                  "rmsNormalized": 1.6050841442640446e-05,
+                  "maxNormalized": 6.770169379886078e-05
+                },
+                "solid": {
+                  "rmsAbsolute": 9.881061732317444e-09,
+                  "maxAbsolute": 5.784693257737672e-08,
+                  "scale": 1.0,
+                  "rmsNormalized": 9.881061732317444e-09,
+                  "maxNormalized": 5.784693257737672e-08
+                },
+                "omega": {
+                  "rmsAbsolute": 2.789485655145493,
+                  "maxAbsolute": 10.824132990550083,
+                  "scale": 906.3446483500795,
+                  "rmsNormalized": 0.003077731699771721,
+                  "maxNormalized": 0.01194262360378523
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 5.46089165848254e-07,
+                "wallPeakK": 9.794558333179436e-15,
+                "shearHeatW": 0.0014881119578158389,
+                "jouleHeatW": 0.0009085279697531799,
+                "interfaceIntoGasW": 3.2051103587724765e-05,
+                "totalCurrentA": 0.0004276164935105724,
+                "torque_outer": 0.0015807192591053526,
+                "torque_lower": 0.00023986827960227283,
+                "torque_upper": 0.00023986827963147397
+              }
+            },
+            {
+              "timeS": 0.002,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.004561212449355013,
+                  "maxAbsolute": 0.01030427773895326,
+                  "scale": 247.6711199259504,
+                  "rmsNormalized": 1.8416408221995122e-05,
+                  "maxNormalized": 4.160468019862013e-05
+                },
+                "solid": {
+                  "rmsAbsolute": 1.868614161233841e-08,
+                  "maxAbsolute": 9.962866442947416e-08,
+                  "scale": 1.0,
+                  "rmsNormalized": 1.868614161233841e-08,
+                  "maxNormalized": 9.962866442947416e-08
+                },
+                "omega": {
+                  "rmsAbsolute": 2.069643854149199,
+                  "maxAbsolute": 7.766008404178933,
+                  "scale": 909.1859106375939,
+                  "rmsNormalized": 0.0022763703549891125,
+                  "maxNormalized": 0.008541716620677488
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 6.55601828484775e-07,
+                "wallPeakK": 7.293447901671116e-14,
+                "shearHeatW": 0.0008204010945908224,
+                "jouleHeatW": 0.0009075100917305561,
+                "interfaceIntoGasW": 3.622521207916641e-05,
+                "totalCurrentA": 0.0004222887910042576,
+                "torque_outer": 0.000946384298932662,
+                "torque_lower": 0.0003034269062448779,
+                "torque_upper": 0.00030342690626395015
+              }
+            },
+            {
+              "timeS": 0.004,
+              "profiles": {
+                "gas": {
+                  "rmsAbsolute": 0.005324745763661891,
+                  "maxAbsolute": 0.01145455476364532,
+                  "scale": 248.62848280226808,
+                  "rmsNormalized": 2.141647531146547e-05,
+                  "maxNormalized": 4.607096755183524e-05
+                },
+                "solid": {
+                  "rmsAbsolute": 3.571011559965949e-08,
+                  "maxAbsolute": 1.5294233435270144e-07,
+                  "scale": 1.0,
+                  "rmsNormalized": 3.571011559965949e-08,
+                  "maxNormalized": 1.5294233435270144e-07
+                },
+                "omega": {
+                  "rmsAbsolute": 1.3569161989044312,
+                  "maxAbsolute": 5.190817076945109,
+                  "scale": 906.781050935135,
+                  "rmsNormalized": 0.0014964099630281045,
+                  "maxNormalized": 0.005724443702911503
+                }
+              },
+              "observablesNormalized": {
+                "gasPeakK": 6.358403026098292e-07,
+                "wallPeakK": 4.506196444572054e-12,
+                "shearHeatW": 0.0003717213482699123,
+                "jouleHeatW": 0.0009042836660385667,
+                "interfaceIntoGasW": 3.8137747979145483e-05,
+                "totalCurrentA": 0.0004165404866690332,
+                "torque_outer": 0.0005127248380907293,
+                "torque_lower": 0.00017220510940935615,
+                "torque_upper": 0.00017220510943221514
+              }
+            }
+          ]
+        }
+      ],
+      "gates": [
+        {
+          "name": "0.001:gas:rms",
+          "passed": true,
+          "value": 1.6050841442640446e-05
+        },
+        {
+          "name": "0.001:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.0003041205827960559,
+            8.394002406597657e-05,
+            1.6050841442640446e-05
+          ]
+        },
+        {
+          "name": "0.001:gas:max",
+          "passed": true,
+          "value": 6.770169379886078e-05
+        },
+        {
+          "name": "0.001:solid:rms",
+          "passed": true,
+          "value": 9.881061732317444e-09
+        },
+        {
+          "name": "0.001:solid:decreasing",
+          "passed": true,
+          "values": [
+            1.7467007355984247e-07,
+            4.730453430973027e-08,
+            9.881061732317444e-09
+          ]
+        },
+        {
+          "name": "0.001:solid:max",
+          "passed": true,
+          "value": 5.784693257737672e-08
+        },
+        {
+          "name": "0.001:omega:rms",
+          "passed": true,
+          "value": 0.003077731699771721
+        },
+        {
+          "name": "0.001:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.03430556673624991,
+            0.014192599968865348,
+            0.003077731699771721
+          ]
+        },
+        {
+          "name": "0.001:omega:max",
+          "passed": true,
+          "value": 0.01194262360378523
+        },
+        {
+          "name": "0.001:gasPeakK",
+          "passed": true,
+          "value": 5.46089165848254e-07
+        },
+        {
+          "name": "0.001:wallPeakK",
+          "passed": true,
+          "value": 9.794558333179436e-15
+        },
+        {
+          "name": "0.001:shearHeatW",
+          "passed": true,
+          "value": 0.0014881119578158389
+        },
+        {
+          "name": "0.001:jouleHeatW",
+          "passed": true,
+          "value": 0.0009085279697531799
+        },
+        {
+          "name": "0.001:interfaceIntoGasW",
+          "passed": true,
+          "value": 3.2051103587724765e-05
+        },
+        {
+          "name": "0.001:totalCurrentA",
+          "passed": true,
+          "value": 0.0004276164935105724
+        },
+        {
+          "name": "0.001:torque_outer",
+          "passed": true,
+          "value": 0.0015807192591053526
+        },
+        {
+          "name": "0.001:torque_lower",
+          "passed": true,
+          "value": 0.00023986827960227283
+        },
+        {
+          "name": "0.001:torque_upper",
+          "passed": true,
+          "value": 0.00023986827963147397
+        },
+        {
+          "name": "0.002:gas:rms",
+          "passed": true,
+          "value": 1.8416408221995122e-05
+        },
+        {
+          "name": "0.002:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.00035825449051695736,
+            9.089984705059905e-05,
+            1.8416408221995122e-05
+          ]
+        },
+        {
+          "name": "0.002:gas:max",
+          "passed": true,
+          "value": 4.160468019862013e-05
+        },
+        {
+          "name": "0.002:solid:rms",
+          "passed": true,
+          "value": 1.868614161233841e-08
+        },
+        {
+          "name": "0.002:solid:decreasing",
+          "passed": true,
+          "values": [
+            3.407945381761495e-07,
+            9.062036214232936e-08,
+            1.868614161233841e-08
+          ]
+        },
+        {
+          "name": "0.002:solid:max",
+          "passed": true,
+          "value": 9.962866442947416e-08
+        },
+        {
+          "name": "0.002:omega:rms",
+          "passed": true,
+          "value": 0.0022763703549891125
+        },
+        {
+          "name": "0.002:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.018887305388092555,
+            0.010428331937492423,
+            0.0022763703549891125
+          ]
+        },
+        {
+          "name": "0.002:omega:max",
+          "passed": true,
+          "value": 0.008541716620677488
+        },
+        {
+          "name": "0.002:gasPeakK",
+          "passed": true,
+          "value": 6.55601828484775e-07
+        },
+        {
+          "name": "0.002:wallPeakK",
+          "passed": true,
+          "value": 7.293447901671116e-14
+        },
+        {
+          "name": "0.002:shearHeatW",
+          "passed": true,
+          "value": 0.0008204010945908224
+        },
+        {
+          "name": "0.002:jouleHeatW",
+          "passed": true,
+          "value": 0.0009075100917305561
+        },
+        {
+          "name": "0.002:interfaceIntoGasW",
+          "passed": true,
+          "value": 3.622521207916641e-05
+        },
+        {
+          "name": "0.002:totalCurrentA",
+          "passed": true,
+          "value": 0.0004222887910042576
+        },
+        {
+          "name": "0.002:torque_outer",
+          "passed": true,
+          "value": 0.000946384298932662
+        },
+        {
+          "name": "0.002:torque_lower",
+          "passed": true,
+          "value": 0.0003034269062448779
+        },
+        {
+          "name": "0.002:torque_upper",
+          "passed": true,
+          "value": 0.00030342690626395015
+        },
+        {
+          "name": "0.004:gas:rms",
+          "passed": true,
+          "value": 2.141647531146547e-05
+        },
+        {
+          "name": "0.004:gas:decreasing",
+          "passed": true,
+          "values": [
+            0.0004146115525346256,
+            0.0001057581167933549,
+            2.141647531146547e-05
+          ]
+        },
+        {
+          "name": "0.004:gas:max",
+          "passed": true,
+          "value": 4.607096755183524e-05
+        },
+        {
+          "name": "0.004:solid:rms",
+          "passed": true,
+          "value": 3.571011559965949e-08
+        },
+        {
+          "name": "0.004:solid:decreasing",
+          "passed": true,
+          "values": [
+            6.372686533765155e-07,
+            1.7343010177363985e-07,
+            3.571011559965949e-08
+          ]
+        },
+        {
+          "name": "0.004:solid:max",
+          "passed": true,
+          "value": 1.5294233435270144e-07
+        },
+        {
+          "name": "0.004:omega:rms",
+          "passed": true,
+          "value": 0.0014964099630281045
+        },
+        {
+          "name": "0.004:omega:decreasing",
+          "passed": true,
+          "values": [
+            0.023656360000981203,
+            0.007233665177277481,
+            0.0014964099630281045
+          ]
+        },
+        {
+          "name": "0.004:omega:max",
+          "passed": true,
+          "value": 0.005724443702911503
+        },
+        {
+          "name": "0.004:gasPeakK",
+          "passed": true,
+          "value": 6.358403026098292e-07
+        },
+        {
+          "name": "0.004:wallPeakK",
+          "passed": true,
+          "value": 4.506196444572054e-12
+        },
+        {
+          "name": "0.004:shearHeatW",
+          "passed": true,
+          "value": 0.0003717213482699123
+        },
+        {
+          "name": "0.004:jouleHeatW",
+          "passed": true,
+          "value": 0.0009042836660385667
+        },
+        {
+          "name": "0.004:interfaceIntoGasW",
+          "passed": true,
+          "value": 3.8137747979145483e-05
+        },
+        {
+          "name": "0.004:totalCurrentA",
+          "passed": true,
+          "value": 0.0004165404866690332
+        },
+        {
+          "name": "0.004:torque_outer",
+          "passed": true,
+          "value": 0.0005127248380907293
+        },
+        {
+          "name": "0.004:torque_lower",
+          "passed": true,
+          "value": 0.00017220510940935615
+        },
+        {
+          "name": "0.004:torque_upper",
+          "passed": true,
+          "value": 0.00017220510943221514
+        }
+      ],
+      "passed": true
+    }
+  },
+  "failures": [
+    {
+      "n": 96,
+      "nz": 96,
+      "nt": 256,
+      "tight": false,
+      "error": "AssertionError('Independent mechanical endpoint row residual: {\"cell\": 7488, \"rowNm\": -3.810019632887927e-23, \"toleranceNm\": 3.0906688103205966e-24, \"storageTorqueNm\": -6.098466846518729e-19, \"electricalTorqueNm\": 5.6873957681677475e-18, \"tsElectricalTorqueNm\": 5.687357665299112e-18, \"viscousTorqueNm\": -6.297204352623292e-18, \"rowUsingTsTorqueNm\": 2.6723063757790207e-27, \"storageRoundoffNm\": 2.9647243422661676e-24, \"exchangeScaleNm\": 1.2594446805442913e-17, \"omegaRadS\": 899.999994738264, \"oldOmegaRadS\": 900.0, \"omegaEndpointMismatchRadS\": -3.4572167351143435e-10, \"dtS\": 1.5625e-05, \"matrixDiagonalNmS\": 2.7756693718371246e-13, \"linearFormViscousTorqueNm\": -6.297204345069069e-18}')"
+    }
+  ],
+  "requirementsGaps": [
+    "referenceSpatial self-refinement not completed"
+  ],
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "electricalBoundaryAdmissible": true,
+  "staticCurrentPassed": true,
+  "tighterTolerance": {
+    "cases": [
+      {
+        "timeS": 0.001,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 7.938749822225819e-09,
+            "maxAbsolute": 1.6503918232047e-08,
+            "scale": 245.71365242740774,
+            "rmsNormalized": 3.2308948826403524e-11,
+            "maxNormalized": 6.716728219618494e-11
+          },
+          "solid": {
+            "rmsAbsolute": 1.7357045353458183e-13,
+            "maxAbsolute": 5.684341886080801e-13,
+            "scale": 1.0,
+            "rmsNormalized": 1.7357045353458183e-13,
+            "maxNormalized": 5.684341886080801e-13
+          },
+          "omega": {
+            "rmsAbsolute": 1.862287537778569e-09,
+            "maxAbsolute": 6.326104085019324e-09,
+            "scale": 905.8266915441886,
+            "rmsNormalized": 2.0558982807228547e-12,
+            "maxNormalized": 6.983790767122388e-12
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 4.253513242151428e-13,
+          "wallPeakK": 1.749028284866394e-16,
+          "shearHeatW": 1.7767720039752633e-12,
+          "jouleHeatW": 1.8044118289447988e-13,
+          "interfaceIntoGasW": 6.481359094485719e-11,
+          "totalCurrentA": 7.378891355620124e-14,
+          "torque_outer": 4.230281165250402e-12,
+          "torque_lower": 4.238453964578044e-12,
+          "torque_upper": 4.239162973270672e-12
+        },
+        "passed": true
+      },
+      {
+        "timeS": 0.002,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 1.6511609976536212e-08,
+            "maxAbsolute": 3.228910827601794e-08,
+            "scale": 247.296351349544,
+            "rmsNormalized": 6.676851432068917e-11,
+            "maxNormalized": 1.3056847826427698e-10
+          },
+          "solid": {
+            "rmsAbsolute": 2.2132398582167602e-13,
+            "maxAbsolute": 5.684341886080801e-13,
+            "scale": 1.0,
+            "rmsNormalized": 2.2132398582167602e-13,
+            "maxNormalized": 5.684341886080801e-13
+          },
+          "omega": {
+            "rmsAbsolute": 2.595919333767913e-09,
+            "maxAbsolute": 6.9355792220449075e-09,
+            "scale": 908.6787174554195,
+            "rmsNormalized": 2.856806574096164e-12,
+            "maxNormalized": 7.632597846537738e-12
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 1.0204223853801035e-13,
+          "wallPeakK": 1.749028284866394e-16,
+          "shearHeatW": 2.618856348772112e-12,
+          "jouleHeatW": 1.0146213479050625e-13,
+          "interfaceIntoGasW": 1.5186344714597542e-11,
+          "totalCurrentA": 3.9870721936760184e-14,
+          "torque_outer": 3.0602818480482078e-12,
+          "torque_lower": 3.61975525416655e-12,
+          "torque_upper": 3.619843880253122e-12
+        },
+        "passed": true
+      },
+      {
+        "timeS": 0.004,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 5.117517696472913e-09,
+            "maxAbsolute": 7.907829058240168e-09,
+            "scale": 248.41521023016412,
+            "rmsNormalized": 2.060066165727686e-11,
+            "maxNormalized": 3.1833111390052676e-11
+          },
+          "solid": {
+            "rmsAbsolute": 3.10294404991054e-13,
+            "maxAbsolute": 9.094947017729282e-13,
+            "scale": 1.0,
+            "rmsNormalized": 3.10294404991054e-13,
+            "maxNormalized": 9.094947017729282e-13
+          },
+          "omega": {
+            "rmsAbsolute": 2.8362634874134264e-09,
+            "maxAbsolute": 5.4006932259653695e-09,
+            "scale": 903.4753563493418,
+            "rmsNormalized": 3.139281517178144e-12,
+            "maxNormalized": 5.977687369125222e-12
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 2.4037785057665323e-13,
+          "wallPeakK": 3.498056569732788e-16,
+          "shearHeatW": 2.143669364635401e-12,
+          "jouleHeatW": 3.934540170143211e-14,
+          "interfaceIntoGasW": 3.678953913866499e-11,
+          "totalCurrentA": 4.908029714468789e-14,
+          "torque_outer": 6.460298338083404e-13,
+          "torque_lower": 1.2356692121346894e-12,
+          "torque_upper": 1.2358464643078458e-12
+        },
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "independentTolerances": {
+    "linear": {
+      "cases": [
+        {
+          "timeS": 0.001,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 2.493465034580835e-13,
+              "maxAbsolute": 5.684341886080801e-13,
+              "scale": 245.71365242713193,
+              "rmsNormalized": 1.0147848969524757e-15,
+              "maxNormalized": 2.3134009160384493e-15
+            },
+            "solid": {
+              "rmsAbsolute": 0.0,
+              "maxAbsolute": 0.0,
+              "scale": 1.0,
+              "rmsNormalized": 0.0,
+              "maxNormalized": 0.0
+            },
+            "omega": {
+              "rmsAbsolute": 3.0272354936702933e-12,
+              "maxAbsolute": 6.480149750132114e-12,
+              "scale": 905.8266915442512,
+              "rmsNormalized": 3.341958811689982e-15,
+              "maxNormalized": 7.153851625949298e-15
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 0.0,
+            "wallPeakK": 0.0,
+            "shearHeatW": 5.625434985806038e-15,
+            "jouleHeatW": 2.1906597284315893e-13,
+            "interfaceIntoGasW": 1.8859636021525814e-15,
+            "totalCurrentA": 1.0321462946446348e-13,
+            "torque_outer": 5.975871322401225e-15,
+            "torque_lower": 7.090086926390107e-16,
+            "torque_upper": 8.86260865798762e-16
+          },
+          "passed": true
+        },
+        {
+          "timeS": 0.002,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 3.7187648696938693e-13,
+              "maxAbsolute": 6.821210263296962e-13,
+              "scale": 247.29635134961018,
+              "rmsNormalized": 1.5037685956136656e-15,
+              "maxNormalized": 2.7583141546854505e-15
+            },
+            "solid": {
+              "rmsAbsolute": 0.0,
+              "maxAbsolute": 0.0,
+              "scale": 1.0,
+              "rmsNormalized": 0.0,
+              "maxNormalized": 0.0
+            },
+            "omega": {
+              "rmsAbsolute": 4.7041987500852345e-12,
+              "maxAbsolute": 1.0800249583553523e-11,
+              "scale": 908.6787174554695,
+              "rmsNormalized": 5.176965917346653e-15,
+              "maxNormalized": 1.1885663630151872e-14
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 0.0,
+            "wallPeakK": 0.0,
+            "shearHeatW": 5.7336164278407695e-15,
+            "jouleHeatW": 1.5046373397911707e-13,
+            "interfaceIntoGasW": 1.6973672419373234e-15,
+            "totalCurrentA": 6.997030920169831e-14,
+            "torque_outer": 5.975871322401225e-15,
+            "torque_lower": 2.7474086839761667e-15,
+            "torque_upper": 2.8360347705560385e-15
+          },
+          "passed": true
+        },
+        {
+          "timeS": 0.004,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 3.959519333473534e-13,
+              "maxAbsolute": 7.389644451905042e-13,
+              "scale": 248.41521023000826,
+              "rmsNormalized": 1.5939117938098094e-15,
+              "maxNormalized": 2.9747149721882777e-15
+            },
+            "solid": {
+              "rmsAbsolute": 0.0,
+              "maxAbsolute": 0.0,
+              "scale": 1.0,
+              "rmsNormalized": 0.0,
+              "maxNormalized": 0.0
+            },
+            "omega": {
+              "rmsAbsolute": 5.935276847821891e-12,
+              "maxAbsolute": 1.7394086171407253e-11,
+              "scale": 903.4753563497339,
+              "rmsNormalized": 6.569384329199516e-15,
+              "maxNormalized": 1.9252419060641237e-14
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 0.0,
+            "wallPeakK": 0.0,
+            "shearHeatW": 4.1920308788458455e-15,
+            "jouleHeatW": 5.3901759107461474e-14,
+            "interfaceIntoGasW": 1.6030690618296942e-15,
+            "totalCurrentA": 3.481668676167974e-15,
+            "torque_outer": 3.941532148817829e-15,
+            "torque_lower": 2.570156510816414e-15,
+            "torque_upper": 2.4815304242365335e-15
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    },
+    "thermal": {
+      "cases": [
+        {
+          "timeS": 0.001,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 7.93893323461436e-09,
+              "maxAbsolute": 1.6504429822816746e-08,
+              "scale": 245.71365242740774,
+              "rmsNormalized": 3.2309695274094685e-11,
+              "maxNormalized": 6.716936425700938e-11
+            },
+            "solid": {
+              "rmsAbsolute": 1.7357045353458183e-13,
+              "maxAbsolute": 5.684341886080801e-13,
+              "scale": 1.0,
+              "rmsNormalized": 1.7357045353458183e-13,
+              "maxNormalized": 5.684341886080801e-13
+            },
+            "omega": {
+              "rmsAbsolute": 1.8612789451140915e-09,
+              "maxAbsolute": 6.326786206045654e-09,
+              "scale": 905.8266915441942,
+              "rmsNormalized": 2.054784830794845e-12,
+              "maxNormalized": 6.984543804135603e-12
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 4.253513242151428e-13,
+            "wallPeakK": 1.749028284866394e-16,
+            "shearHeatW": 1.7828301647291866e-12,
+            "jouleHeatW": 3.7327688793664447e-14,
+            "interfaceIntoGasW": 6.482207778106797e-11,
+            "totalCurrentA": 3.481668676167765e-14,
+            "torque_outer": 4.2361298903744045e-12,
+            "torque_lower": 4.23792220805857e-12,
+            "torque_upper": 4.238099460231722e-12
+          },
+          "passed": true
+        },
+        {
+          "timeS": 0.002,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 1.651178522875879e-08,
+              "maxAbsolute": 3.2289449336531106e-08,
+              "scale": 247.29635134954412,
+              "rmsNormalized": 6.676922299358959e-11,
+              "maxNormalized": 1.3056985742135426e-10
+            },
+            "solid": {
+              "rmsAbsolute": 2.2132398582167602e-13,
+              "maxAbsolute": 5.684341886080801e-13,
+              "scale": 1.0,
+              "rmsNormalized": 2.2132398582167602e-13,
+              "maxNormalized": 5.684341886080801e-13
+            },
+            "omega": {
+              "rmsAbsolute": 2.5938420456995046e-09,
+              "maxAbsolute": 6.936033969395794e-09,
+              "scale": 908.6787174554281,
+              "rmsNormalized": 2.8545205206995903e-12,
+              "maxNormalized": 7.633098295532618e-12
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 1.01866908231244e-13,
+            "wallPeakK": 1.749028284866394e-16,
+            "shearHeatW": 2.6246981466419614e-12,
+            "jouleHeatW": 4.9866333291922387e-14,
+            "interfaceIntoGasW": 1.5183892961914716e-11,
+            "totalCurrentA": 3.346894404832239e-14,
+            "torque_outer": 3.066003426973869e-12,
+            "torque_lower": 3.6173623498289053e-12,
+            "torque_upper": 3.6171850976557405e-12
+          },
+          "passed": true
+        },
+        {
+          "timeS": 0.004,
+          "profiles": {
+            "gas": {
+              "rmsAbsolute": 5.1177837780427765e-09,
+              "maxAbsolute": 7.908397492428776e-09,
+              "scale": 248.41521023016412,
+              "rmsNormalized": 2.0601732773532654e-11,
+              "maxNormalized": 3.183539963233897e-11
+            },
+            "solid": {
+              "rmsAbsolute": 3.10294404991054e-13,
+              "maxAbsolute": 9.094947017729282e-13,
+              "scale": 1.0,
+              "rmsNormalized": 3.10294404991054e-13,
+              "maxNormalized": 9.094947017729282e-13
+            },
+            "omega": {
+              "rmsAbsolute": 2.832500863004898e-09,
+              "maxAbsolute": 5.40001110493904e-09,
+              "scale": 903.4753563493595,
+              "rmsNormalized": 3.1351169050698662e-12,
+              "maxNormalized": 5.976932372299198e-12
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 2.4037785057665323e-13,
+            "wallPeakK": 3.498056569732788e-16,
+            "shearHeatW": 2.139315061593498e-12,
+            "jouleHeatW": 9.079708084945405e-14,
+            "interfaceIntoGasW": 3.679109505863718e-11,
+            "totalCurrentA": 5.6492882068141476e-14,
+            "torque_outer": 6.420247285603613e-13,
+            "torque_lower": 1.2381064295156264e-12,
+            "torque_upper": 1.2381507425589142e-12
+          },
+          "passed": true
+        }
+      ],
+      "passed": true
+    }
+  },
+  "referenceSmallerDt": {
+    "cases": [
+      {
+        "timeS": 0.001,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 0.17289003091305988,
+            "maxAbsolute": 0.3167841211651421,
+            "scale": 246.35685701232978,
+            "rmsNormalized": 0.0007017869646892232,
+            "maxNormalized": 0.0012858749904789033
+          },
+          "solid": {
+            "rmsAbsolute": 1.1308333271392089e-05,
+            "maxAbsolute": 3.817487197466107e-05,
+            "scale": 1.0,
+            "rmsNormalized": 1.1308333271392089e-05,
+            "maxNormalized": 3.817487197466107e-05
+          },
+          "omega": {
+            "rmsAbsolute": 0.621653576337232,
+            "maxAbsolute": 1.7125986660267358,
+            "scale": 906.4297802983987,
+            "rmsNormalized": 0.0006858265139221069,
+            "maxNormalized": 0.0018893892315220984
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 2.040396982515637e-05,
+          "wallPeakK": 7.76596537951297e-11,
+          "shearHeatW": 0.0024438097783705936,
+          "jouleHeatW": 3.6828377842367664e-05,
+          "interfaceIntoGasW": 0.0035692226126005115,
+          "totalCurrentA": 2.5057626556788702e-05,
+          "torque_outer": 0.004099163366622117,
+          "torque_lower": 0.0044718892261387385,
+          "torque_upper": 0.004471889226137457
+        },
+        "passed": true
+      },
+      {
+        "timeS": 0.002,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 0.10381435725883555,
+            "maxAbsolute": 0.1658885484731627,
+            "scale": 247.6758314090847,
+            "rmsNormalized": 0.000419154168851324,
+            "maxNormalized": 0.0006697809290853477
+          },
+          "solid": {
+            "rmsAbsolute": 9.89114069025307e-06,
+            "maxAbsolute": 2.987133143506071e-05,
+            "scale": 1.0,
+            "rmsNormalized": 9.89114069025307e-06,
+            "maxNormalized": 2.987133143506071e-05
+          },
+          "omega": {
+            "rmsAbsolute": 0.39282720602566534,
+            "maxAbsolute": 0.9065974679497231,
+            "scale": 909.2377309166528,
+            "rmsNormalized": 0.000432040150412186,
+            "maxNormalized": 0.0009970961797149927
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 7.263743738442992e-06,
+          "wallPeakK": 6.224760143397947e-10,
+          "shearHeatW": 0.0008783557269749691,
+          "jouleHeatW": 2.2966979370371558e-05,
+          "interfaceIntoGasW": 0.0012657543666814823,
+          "totalCurrentA": 1.4400717058298809e-05,
+          "torque_outer": 0.001426783786311745,
+          "torque_lower": 0.0015706484734464379,
+          "torque_upper": 0.001570648473446255
+        },
+        "passed": true
+      },
+      {
+        "timeS": 0.004,
+        "profiles": {
+          "gas": {
+            "rmsAbsolute": 0.057803776874649014,
+            "maxAbsolute": 0.08684926619889666,
+            "scale": 248.63014224742642,
+            "rmsNormalized": 0.00023248901501703317,
+            "maxNormalized": 0.0003493110908188592
+          },
+          "solid": {
+            "rmsAbsolute": 8.471852148810892e-06,
+            "maxAbsolute": 2.1981563804729376e-05,
+            "scale": 1.0,
+            "rmsNormalized": 8.471852148810892e-06,
+            "maxNormalized": 2.1981563804729376e-05
+          },
+          "omega": {
+            "rmsAbsolute": 0.26133819136220415,
+            "maxAbsolute": 0.5057128221059202,
+            "scale": 907.0614763631511,
+            "rmsNormalized": 0.00028811519193829683,
+            "maxNormalized": 0.0005575287180462871
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 2.5583842782713308e-06,
+          "wallPeakK": 2.421159200674824e-09,
+          "shearHeatW": 0.00031196395854525316,
+          "jouleHeatW": 1.3281501835308508e-05,
+          "interfaceIntoGasW": 0.00044655912946376384,
+          "totalCurrentA": 7.750962545733606e-06,
+          "torque_outer": 0.0004905496896555591,
+          "torque_lower": 0.0005451831553941454,
+          "torque_upper": 0.0005451831553942374
+        },
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "comparisonGatesPassed": false,
+  "numericallyQualified": false
+}
