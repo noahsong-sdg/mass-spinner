@@ -66,40 +66,44 @@ def hydro_rate(setup, q, with_scale=False):
     r, z, masses, volume, a2, area_r, area_z = geometry(setup)
     state = np.asarray(q, dtype=float)
     p = primitives(state, volume, a2, masses)
-    density = state/volume
     face_fluxes = []
-    # Full reflected ghost states independently reproduce wall Riemann fluxes;
-    # no boundary formula or production flux helper is reused.
-    for dim, axis, area in ((0, 2, area_r), (1, 1, area_z)):
-        take = lambda a, index: np.take(a, index, axis=axis)
-        lower, upper = np.expand_dims(take(density, 0), axis), np.expand_dims(take(density, -1), axis)
-        lower, upper = lower.copy(), upper.copy()
-        lower[dim+1] *= -1
-        upper[dim+1] *= -1
-        extended = np.concatenate((lower, density, upper), axis=axis)
-        before = np.take(extended, np.arange(extended.shape[axis]-1), axis=axis)
-        after = np.take(extended, np.arange(1, extended.shape[axis]), axis=axis)
-        # Pressure and acoustic speeds are unchanged under reflection.
-        cell_p = p['pressure']
-        ext_p = np.concatenate((np.take(cell_p, [0], axis=axis-1), cell_p,
-                                np.take(cell_p, [-1], axis=axis-1)), axis=axis-1)
-        ext_c = np.concatenate((np.take(p['sound'], [0], axis=axis-1), p['sound'],
-                                np.take(p['sound'], [-1], axis=axis-1)), axis=axis-1)
-        pa, pb = [np.take(ext_p, indices, axis=axis-1) for indices in
-                  (np.arange(ext_p.shape[axis-1]-1), np.arange(1, ext_p.shape[axis-1]))]
-        ca, cb = [np.take(ext_c, indices, axis=axis-1) for indices in
-                  (np.arange(ext_c.shape[axis-1]-1), np.arange(1, ext_c.shape[axis-1]))]
-        va, vb = before[dim+1]/before[0], after[dim+1]/after[0]
-        fa, fb = before*va, after*vb
-        fa[dim+1] += pa
-        fb[dim+1] += pb
-        fa[4] += pa*va
-        fb[4] += pb*vb
-        speed = np.maximum(abs(va)+ca, abs(vb)+cb)
-        flux = .5*(fa+fb)-.5*speed*(after-before)
-        # Conserved mass flux transports specific angular momentum and mass
-        # fraction from its donor. This differs from independent scalar LLF
-        # diffusion, which spuriously mixes L at zero mass transfer.
+    # Separate componentwise reconstruction, including reflected primitives;
+    # imports no production slope, face-state, or flux helper.
+    raw = (p['density'], p['pressure'], *p['velocity'], p['omega'], p['fraction'])
+    mean_r = 2*np.diff(r**3)/(3*np.diff(r*r))
+    for dim, area, positions, centers in ((1, area_r, r, mean_r),
+                                         (0, area_z, z, (z[:-1]+z[1:])/2)):
+        left, right = [], []
+        for component, field in enumerate(raw):
+            a = np.moveaxis(field, dim, 0)
+            sign = -1 if component == (2 if dim else 3) else 1
+            ghost = np.concatenate((sign*a[:1], a, sign*a[-1:]))
+            x = np.r_[2*positions[0]-centers[0], centers, 2*positions[-1]-centers[-1]]
+            candidates = np.array([(a-ghost[:-2])/(centers-positions[:-1])[:, None],
+                (ghost[2:]-a)/(positions[1:]-centers)[:, None],
+                (ghost[2:]-ghost[:-2])/(x[2:]-x[:-2])[:, None]])
+            same_sign = np.all(candidates > 0, axis=0) | np.all(candidates < 0, axis=0)
+            derivative = np.where(same_sign, np.sign(candidates[2])*np.min(abs(candidates), axis=0), 0.)
+            lo = a+derivative*(positions[:-1]-centers)[:, None]
+            hi = a+derivative*(positions[1:]-centers)[:, None]
+            left.append(np.moveaxis(np.concatenate((sign*lo[:1], hi)), 0, dim))
+            right.append(np.moveaxis(np.concatenate((lo, sign*hi[-1:])), 0, dim))
+        states, physical, speeds = [], [], []
+        rf2 = r[None, :]**2 if dim else a2[None, :]
+        for rho, pressure, ur, uz, omega, y in (left, right):
+            require(np.all(rho > 0) and np.all(pressure > 0) and np.all(y >= 0) and np.all(y <= 1),
+                    'Independent reconstructed face domain')
+            velocity = ur if dim else uz
+            energy = 1.5*pressure+.5*rho*(ur*ur+uz*uz+rf2*omega*omega)
+            conserved = np.array(np.broadcast_arrays(rho, rho*ur, rho*uz, rho*rf2*omega, energy, rho*y))
+            flux = conserved*velocity
+            flux[2-dim] += pressure
+            flux[4] += pressure*velocity
+            states.append(conserved)
+            physical.append(flux)
+            speeds.append(abs(velocity)+np.sqrt(GAMMA*pressure/rho))
+        before, after = states
+        flux = (physical[0]+physical[1]-(after-before)*np.maximum(*speeds))/2
         for component in (3, 5):
             donor = np.where(flux[0] >= 0, before[component]/before[0], after[component]/after[0])
             flux[component] = flux[0]*donor

@@ -39,6 +39,16 @@ class FlowTests(unittest.TestCase):
         self.assertLess(max(np.max(abs(p['vrMPS'])), np.max(abs(p['vzMPS']))),
                         rounding*np.max(p['soundMPS']))
 
+    def test_smooth_contact_has_no_first_order_acoustic_mass_diffusion(self):
+        # Constant pressure with linear density and uniform axial velocity.
+        # Reconstructed left/right states agree at interior faces exactly.
+        z = (self.flow.z[1:]+self.flow.z[:-1])/2
+        rho = .001*(1+.2*z[:, None]/.14)
+        q = self.flow.state(rho, 350*.001/rho, .4, 0., vz=3.)
+        _, flux = self.flow.fluxes(q)
+        expected = .001*(1+.2*self.flow.z[2:-2, None]/.14)*3*self.flow.axial_area[2:-2]
+        np.testing.assert_allclose(flux[0, 2:-2], expected, rtol=2e-13, atol=0)
+
     def test_eos_and_swirl_use_evolving_species_mass(self):
         rho = np.linspace(.001, .002, self.flow.count).reshape(6, 6)
         y = np.linspace(0., 1., self.flow.count).reshape(6, 6)

@@ -1,7 +1,7 @@
 import unittest
 from copy import deepcopy
 import numpy as np
-from analyze import analyze, compare_profiles, overlap, requested, response_scale
+from analyze import analyze, compare_profiles, overlap, requested, response_scale, restrict_linear
 
 KB, U = 1.380649e-23, 1.66053906892e-27
 
@@ -37,6 +37,26 @@ def raw():
 
 
 class AnalysisControls(unittest.TestCase):
+    def test_nonnested_restriction_preserves_linear_fields_and_integrals(self):
+        # Actual 48 -> 36 comparison: piecewise constants produce h/12 error.
+        c, f = np.linspace(0., .14, 37), np.linspace(0., .14, 49)
+        center = (f[1:]+f[:-1])/2
+        got = restrict_linear(center[:, None], c, f, [0., 1.], [0., 1.])
+        np.testing.assert_allclose(got[:, 0], (c[1:]+c[:-1])/2, atol=1e-16, rtol=0)
+        # Cylindrical volume coordinate is s=r², not r. Nonuniform grids and
+        # a bilinear field exercise both reconstructed moments.
+        sf, sc = np.linspace(0., 1., 9)**2, np.linspace(0., 1., 7)**2
+        zf, zc = np.linspace(0., 1., 12)**1.3, np.linspace(0., 1., 8)**1.2
+        s, z = np.meshgrid((sf[1:]+sf[:-1])/2, (zf[1:]+zf[:-1])/2)
+        field = 2+3*s-4*z+s*z
+        mapped = restrict_linear(field, zc, zf, sc, sf)
+        s, z = np.meshgrid((sc[1:]+sc[:-1])/2, (zc[1:]+zc[:-1])/2)
+        np.testing.assert_allclose(mapped, 2+3*s-4*z+s*z, atol=4e-15, rtol=0)
+        arbitrary = np.sin(9*field)
+        mapped = restrict_linear(arbitrary, zc, zf, sc, sf)
+        self.assertAlmostEqual(float(np.diff(zc)@mapped@np.diff(sc)),
+                               float(np.diff(zf)@arbitrary@np.diff(sf)), places=14)
+
     def test_complete_exact_profiles_pass_all_series_and_references(self):
         out = analyze(raw())
         self.assertTrue(out['numericallyQualified'])

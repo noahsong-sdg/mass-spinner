@@ -26,6 +26,8 @@ def requested(manifest):
     runs = {(*level, 'base') for name in SERIES for level in manifest[name]}
     runs.update((*manifest[name], 'base') for name in ('referenceSmallerDt', 'referenceSpatial'))
     runs.update((*manifest['tighterTolerance'], mode) for mode in ('base', 'linear', 'thermal', 'both'))
+    if 'referenceTransportCfl' in manifest:
+        runs.add((*manifest['referenceTransportCfl'], 'transport'))
     return runs
 
 
@@ -43,6 +45,31 @@ def overlap(coarse, fine):
     require(np.allclose(weights.sum(axis=1), np.diff(c), rtol=1e-12, atol=1e-18),
             'Reference grid does not cover comparison domain')
     return weights/np.diff(c)[:, None]
+
+
+def restrict_linear(field, coarse_z, fine_z, coarse_s, fine_s):
+    """Integrate conservative linear reconstructions in z and s=r².
+
+    Partial overlaps need first moments: piecewise-constant restriction is
+    only exact for whole fine cells and aliases nonnested smooth profiles.
+    This smooth-field comparison operator is not a positivity/TVD transport
+    scheme. Its cell-centered slopes integrate to zero in every donor cell.
+    """
+    out = np.asarray(field, dtype=float)
+    for axis, coarse, fine in ((1, coarse_s, fine_s), (0, coarse_z, fine_z)):
+        c, f = edges(coarse), edges(fine)
+        require(out.shape[axis] == len(f)-1, 'Restriction field/grid mismatch')
+        centers = (f[1:]+f[:-1])/2
+        width = np.diff(c)[:, None]
+        lo = np.maximum(c[:-1, None], f[None, :-1])
+        hi = np.maximum(lo, np.minimum(c[1:, None], f[None, 1:]))
+        moments = ((hi-centers)**2-(lo-centers)**2)/(2*width)
+        slope = (np.gradient(out, centers, axis=axis, edge_order=min(2, len(centers)-1))
+                 if len(centers) > 1 else np.zeros_like(out))
+        values, derivatives = [np.moveaxis(a, axis, -1) for a in (out, slope)]
+        out = np.moveaxis(values@overlap(c, f).T+derivatives@moments.T, -1, axis)
+    require(np.all(np.isfinite(out)), 'Nonfinite reconstructed restriction')
+    return out
 
 
 def primitives(trajectory, endpoint):
@@ -93,15 +120,15 @@ def compare_profiles(coarse, coarse_case, reference, reference_case, manifest):
         fields['densityChange'] = fields['density']-start['density']
         fields['YChange'] = fields['Y']-start['Y']
     result = {}
-    zmap = overlap(coarse['setup']['z'], reference['setup']['z'])
     for name in FIELDS:
         region = 'wall' if name == 'solid' else 'r'
         cr, rr = [np.asarray(t['setup'][region]) for t in (coarse, reference)]
-        radial = overlap(cr*cr, rr*rr)
-        restrict = lambda field: zmap@field@radial.T
+        restrict = lambda field: restrict_linear(field, coarse['setup']['z'],
+            reference['setup']['z'], cr*cr, rr*rr)
         volume = np.diff(coarse['setup']['z'])[:, None]*np.diff(cr*cr)[None, :]
         if name in ('Y', 'YChange'):
             rho = restrict(rf['density'])
+            require(np.all(rho > 0), 'Reconstructed reference density must be positive')
             target = restrict(rf['density']*rf['Y'])/rho
             if name == 'YChange':
                 target -= restrict(ri['density']*ri['Y'])/restrict(ri['density'])
@@ -192,7 +219,7 @@ def analyze(raw):
                 values = {}
                 for field in FIELDS:
                     ea, eb = [row['cases'][i]['profiles'][field]['rmsNormalized'] for row in (a, b)]
-                    values[field] = float(np.log(ea/eb)/np.log(refinement)) if ea > 0 and eb > 0 else None
+                    values[field] = float(np.log(ea/eb)/np.log(refinement)) if ea > 0 and eb > 0 and refinement > 1 else None
                 orders.append(dict(timeS=time, before=list(ka), after=list(kb), rmsOrders=values))
         result['series'][name] = dict(reference=list(ref_key), comparisons=comparisons,
                                      observedOrders=orders, gates=gates, passed=all(g['passed'] for g in gates))
@@ -210,6 +237,16 @@ def analyze(raw):
         rows = compare_rows(trajectories[base], trajectories[ref], manifest, limits)
         result[name] = dict(reference=list(ref), cases=rows, passed=all(row['passed'] for row in rows))
     required = ('linearTolerance', 'thermalTolerance', 'bothTolerances', 'referenceSmallerDt', 'referenceSpatial')
+    if 'referenceTransportCfl' in manifest:
+        base = (*manifest['referenceTransportCfl'], 'base')
+        ref = (*manifest['referenceTransportCfl'], 'transport')
+        required += ('referenceTransportCfl',)
+        if base not in trajectories or ref not in trajectories:
+            result['requirementsGaps'].append('Missing referenceTransportCfl')
+        else:
+            rows = compare_rows(trajectories[base], trajectories[ref], manifest, (.001,)*3)
+            result['referenceTransportCfl'] = dict(reference=list(ref), cases=rows,
+                passed=all(row['passed'] for row in rows))
     result['numericallyQualified'] = (not result['failures'] and not result['requirementsGaps']
         and set(result['series']) == set(SERIES) and all(s['passed'] for s in result['series'].values())
         and all(result.get(name, {}).get('passed') is True for name in required))

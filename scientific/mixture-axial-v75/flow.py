@@ -1,6 +1,6 @@
 """Conservative axisymmetric binary monatomic Euler flow with swirl.
 
-Rusanov face fluxes and SSPRK2, with reflecting closed walls. Cell state is
+Limited primitive MUSCL/Rusanov face fluxes and SSPRK2, with reflecting closed walls. Cell state is
 integrated [mass, radial momentum, axial momentum, angular momentum, total
 energy, species-1 mass]. Total energy includes meridional and swirl kinetic
 energy. This is an inviscid meridional operator, not a complete Navier–Stokes
@@ -86,42 +86,64 @@ class Flow:
             raise ValueError('State has nonpositive or unrepresentable thermal energy')
         return values
 
+    def _face_states(self, p, axis):
+        """Monotone linear reconstruction about cylindrical volume centroids.
+
+        Limit slopes by the actual center-to-face distances on graded grids.
+        Reflected ghost primitives impose impermeable slip Euler boundaries;
+        the separate viscous source supplies azimuthal no-slip braking.
+        """
+        values = np.array([p[k] for k in ('densityKgM3', 'pressurePa', 'vrMPS',
+                                         'vzMPS', 'omegaRadS', 'massFraction')])
+        a = np.moveaxis(values, axis, -1)
+        centers = self.mean_r if axis == 2 else (self.z[:-1]+self.z[1:])/2
+        edges = self.r if axis == 2 else self.z
+        ghost_lo, ghost_hi = a[..., :1].copy(), a[..., -1:].copy()
+        normal = 2 if axis == 2 else 3
+        ghost_lo[normal] *= -1
+        ghost_hi[normal] *= -1
+        extended = np.concatenate((ghost_lo, a, ghost_hi), axis=-1)
+        x = np.r_[2*edges[0]-centers[0], centers, 2*edges[-1]-centers[-1]]
+        back = (a-extended[..., :-2])/(centers-edges[:-1])
+        forward = (extended[..., 2:]-a)/(edges[1:]-centers)
+        centered = (extended[..., 2:]-extended[..., :-2])/(x[2:]-x[:-2])
+        slope = np.where(back*forward > 0, np.sign(centered)*np.minimum(
+            abs(centered), np.minimum(abs(back), abs(forward))), 0.)
+        lower = a+slope*(edges[:-1]-centers)
+        upper = a+slope*(edges[1:]-centers)
+        ghost_lo, ghost_hi = lower[..., :1].copy(), upper[..., -1:].copy()
+        ghost_lo[normal] *= -1
+        ghost_hi[normal] *= -1
+        left = np.concatenate((ghost_lo, upper), axis=-1)
+        right = np.concatenate((lower, ghost_hi), axis=-1)
+        return [np.moveaxis(v, -1, axis) for v in (left, right)]
+
     def _fluxes(self, q, p):
-        density = q/self.volume
-        pressure = p['pressurePa']
-        fluxes = []
-        for velocity, normal in ((p['vrMPS'], 1), (p['vzMPS'], 2)):
-            flux = density*velocity
-            flux[normal] += pressure
-            flux[4] += pressure*velocity
-            fluxes.append(flux)
-        radial = np.zeros((6, self.nz, self.nr+1))
-        axial = np.zeros((6, self.nz+1, self.nr))
-        speed_r = abs(p['vrMPS'])+p['soundMPS']
-        speed_z = abs(p['vzMPS'])+p['soundMPS']
-        alpha_r = np.maximum(speed_r[:, :-1], speed_r[:, 1:])
-        alpha_z = np.maximum(speed_z[:-1], speed_z[1:])
-        radial[:, :, 1:-1] = (.5*(fluxes[0][:, :, :-1]+fluxes[0][:, :, 1:])
-                                  -.5*alpha_r*(density[:, :, 1:]-density[:, :, :-1]))
-        axial[:, 1:-1] = (.5*(fluxes[1][:, :-1]+fluxes[1][:, 1:])
-                              -.5*alpha_z*(density[:, 1:]-density[:, :-1]))
-        # Angular momentum and composition share the actual numerical mass
-        # flux. Diffusing their conserved densities independently would mix
-        # species with zero mass transport and smear rigid rotation's r².
-        for field in (3, 5):
-            specific = q[field]/q[0]
-            radial[field, :, 1:-1] = radial[0, :, 1:-1]*np.where(
-                radial[0, :, 1:-1] >= 0, specific[:, :-1], specific[:, 1:])
-            axial[field, 1:-1] = axial[0, 1:-1]*np.where(
-                axial[0, 1:-1] >= 0, specific[:-1], specific[1:])
-        # Mirrored Riemann states impose exact zero mass, energy, angular and
-        # species flux. Their pressure/momentum flux includes acoustic braking.
-        rho, ur, uz = p['densityKgM3'], p['vrMPS'], p['vzMPS']
-        radial[1, :, 0] = pressure[:, 0]+rho[:, 0]*ur[:, 0]*(ur[:, 0]-speed_r[:, 0])
-        radial[1, :, -1] = pressure[:, -1]+rho[:, -1]*ur[:, -1]*(ur[:, -1]+speed_r[:, -1])
-        axial[2, 0] = pressure[0]+rho[0]*uz[0]*(uz[0]-speed_z[0])
-        axial[2, -1] = pressure[-1]+rho[-1]*uz[-1]*(uz[-1]+speed_z[-1])
-        return radial*self.radial_area, axial*self.axial_area
+        faces = []
+        for axis, normal, area in ((2, 1, self.radial_area), (1, 2, self.axial_area)):
+            pair = self._face_states(p, axis)
+            radius2 = self.r[None, :]**2 if axis == 2 else self.mean_r2[None, :]
+            states, fluxes, speeds = [], [], []
+            for rho, pressure, ur, uz, omega, y in pair:
+                if np.any(rho <= 0) or np.any(pressure <= 0) or np.any(y < 0) or np.any(y > 1):
+                    raise ValueError('Reconstructed face violates density/pressure/species domain')
+                velocity = ur if normal == 1 else uz
+                energy = pressure/(GAMMA-1)+.5*rho*(ur*ur+uz*uz+radius2*omega*omega)
+                state = np.array(np.broadcast_arrays(rho, rho*ur, rho*uz, rho*radius2*omega, energy, rho*y))
+                flux = state*velocity
+                flux[normal] += pressure
+                flux[4] += pressure*velocity
+                states.append(state)
+                fluxes.append(flux)
+                speeds.append(abs(velocity)+np.sqrt(GAMMA*pressure/rho))
+            flux = .5*(fluxes[0]+fluxes[1])-.5*np.maximum(*speeds)*(states[1]-states[0])
+            # L and species travel with the same mass flux, using reconstructed
+            # specific values at the SAME face radius. No artificial r² jump.
+            for component in (3, 5):
+                flux[component] = flux[0]*np.where(flux[0] >= 0,
+                    states[0][component]/states[0][0], states[1][component]/states[1][0])
+            faces.append(flux*area)
+        return faces
 
     def fluxes(self, q):
         return self._fluxes(q, self.primitive(q))
