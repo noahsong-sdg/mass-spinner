@@ -21,6 +21,27 @@ def configuration(n=4):
 
 
 class CouplingTests(unittest.TestCase):
+    def test_wall_mesh_subcycling_audits_each_real_transport_endpoint(self):
+        import json
+        from pathlib import Path
+        from run import configuration
+        from independent import check_hydro, check_diffusion
+        m = json.loads(Path(__file__).with_name('manifest.json').read_text())
+        f, c, q, wall = configuration(m, 12, 12)
+        dt = 3*f.stable_dt(q)
+        seen = {'hydro': [], 'diffusion': []}
+        def audit(kind, old, new, local_dt, *extra):
+            if kind in seen:
+                (check_hydro if kind == 'hydro' else check_diffusion)(c, old, new, local_dt)
+                seen[kind].append(local_dt)
+        with Coupled(f, c['wall'], c['electrical'], q) as model:
+            out, _, receipt = model.step(q, wall, dt, audit=audit)
+        self.assertGreater(len(seen['hydro']), 1)
+        for kind in seen:
+            self.assertAlmostEqual(sum(seen[kind]), dt, delta=1e-20)
+            self.assertEqual(receipt[kind]['substepCount'], len(seen[kind]))
+        np.testing.assert_allclose(out.sum(axis=(1, 2))[[0, 5]], q.sum(axis=(1, 2))[[0, 5]], rtol=1e-14)
+
     def test_constructor_rejects_unsourced_gas_before_starting_bridge(self):
         flow, c = configuration()
         for temperature in (299., 419.):

@@ -36,8 +36,34 @@ def hashes():
     return {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted(files)}
 
 
+def initial_integrals(flow, m, order=12):
+    """Project the continuum fields, including full kinetic energy, onto cells."""
+    nodes, weights = np.polynomial.legendre.leggauss(order)
+    r, z = flow.r, flow.z
+    rp = (r[:-1, None]+r[1:, None]+np.diff(r)[:, None]*nodes)/2
+    zp = (z[:-1, None]+z[1:, None]+np.diff(z)[:, None]*nodes)/2
+    rr, zz = rp[None, :, None, :]/r[-1], zp[:, None, :, None]/z[-1]
+    dv = (np.pi/2*np.diff(z)[:, None, None, None]*np.diff(r)[None, :, None, None]
+          *rp[None, :, None, :]*weights[None, None, :, None]*weights[None, None, None, :])
+    pattern = np.cos(np.pi*rr)*np.cos(np.pi*zz)
+    rho, y = m['densityKgM3']*(1+.04*pattern), .5+.06*pattern
+    temperature = m['initialGasK']+2*np.cos(np.pi*zz)*(1-rr*rr)
+    omega = m['initialOmegaRadS']*(1-rr*rr)*np.sin(np.pi*zz)**2
+    ur, uz = 2*np.sin(np.pi*rr)*np.cos(np.pi*zz), np.cos(np.pi*rr)*np.sin(np.pi*zz)
+    internal = 1.5*1.380649e-23*rho*temperature*(y/flow.masses[0]+(1-y)/flow.masses[1])
+    fields = (rho, rho*ur, rho*uz, rho*omega*(rr*r[-1])**2,
+              internal+.5*rho*(ur*ur+uz*uz+(rr*r[-1]*omega)**2), rho*y)
+    return np.array([np.sum(dv*v, axis=(-2, -1)) for v in fields])
+
+
 def configuration(m, nr, nz):
     r, z = np.linspace(0, m['radiusM'], nr+1), np.linspace(0, m['lengthM'], nz+1)
+    if m.get('radialBeta', 0):
+        beta = m['radialBeta']
+        r = r[-1]*(1+np.tanh(beta*(2*r/r[-1]-1))/np.tanh(beta))/2
+    if m.get('axialBeta', 0):
+        beta = m['axialBeta']
+        z = z[-1]*(1+np.tanh(beta*(2*z/z[-1]-1))/np.tanh(beta))/2
     wall = np.linspace(r[-1], r[-1]+m['linerThicknessM'], max(2, nr//3)+1)
     flow = Flow(r, z, np.asarray(m['massesU'])*U)
     c = dict(r=r.tolist(), z=z.tolist(), wall=wall.tolist(), masses=flow.masses.tolist(),
@@ -48,12 +74,7 @@ def configuration(m, nr, nz):
         magneticT=m['magneticT'], innerVoltageV=[None]*nz,
         outerVoltageV=(m['outerVoltageV']*np.sin(np.pi*(z[:-1]+z[1:])/(2*z[-1]))).tolist(),
         lowerVoltageV=[0.]*nr, upperVoltageV=[0.]*nr)
-    rr, zz = np.meshgrid((r[:-1]+r[1:])/(2*r[-1]), (z[:-1]+z[1:])/(2*z[-1]))
-    perturbation = np.cos(np.pi*rr)*np.cos(np.pi*zz)
-    q = flow.state(m['densityKgM3']*(1+.04*perturbation),
-        m['initialGasK']+2*np.cos(np.pi*zz)*(1-rr*rr), .5+.06*perturbation,
-        m['initialOmegaRadS']*(1-rr*rr)*np.sin(np.pi*zz)**2,
-        2*np.sin(np.pi*rr)*np.cos(np.pi*zz), np.cos(np.pi*rr)*np.sin(np.pi*zz))
+    q = initial_integrals(flow, m)
     return flow, c, q, np.full((len(wall)-1)*nz, float(m['initialLinerK']))
 
 
@@ -89,7 +110,7 @@ def trajectory(m, nr, nz, nt, mode='base'):
                  walls=c['walls'], thermal_rtol=1e-11 if mode in ('thermal', 'both') else 1e-9,
                  linear_rtol=2e-12 if mode in ('linear', 'both') else 2e-11) as model:
         for index in range(1, nt+1):
-            step_checks = {}
+            step_checks, transport_audits = {}, []
             def audit(kind, old, new, step_dt, *extra):
                 if kind == 'hydro':
                     metrics = check_hydro(c, old, new, step_dt)
@@ -99,15 +120,18 @@ def trajectory(m, nr, nz, nt, mode='base'):
                     metrics = check_magnetic(c, old, new, step_dt, *extra)
                 else:
                     metrics = check_source(c, old, new, step_dt, *extra)
+                if kind in ('hydro', 'diffusion'):
+                    transport_audits.append(dict(kind=kind, dtS=step_dt, metrics=metrics))
                 step_checks[kind] = metrics
             try:
-                q, wall, result = model.step(q, wall, dt, audit=audit)
+                q, wall, result = model.step(q, wall, dt, audit=audit,
+                    transport_cfl=.15 if mode == 'transport' else .3)
             except Exception:
                 (HERE/f'failed-{nr}-{nz}-{nt}-{mode}-{index}.json').write_text(
                     json.dumps(dict(setup=c, q=q, wall=wall, dtS=dt, step=index, checks=step_checks,
                                     traceback=traceback.format_exc()), default=serial, indent=2, allow_nan=False)+'\n')
                 raise
-            checks.append(dict(step=index, timeS=index*dt, checks=step_checks))
+            checks.append(dict(step=index, timeS=index*dt, checks=step_checks, transportAudits=transport_audits))
             for key in ('electrodeJ', 'wallWorkJ', 'bathJ', 'numericalLossJ'):
                 totals[key] += step_checks['source'][key]
             totals['radialMotionalJouleJ'] += result['magnetic']['jouleJ']
@@ -123,13 +147,26 @@ def requests(m):
     result = {(*v, 'base') for series in ('joint', 'spatial', 'temporal', 'radial', 'axial') for v in m[series]}
     result.update((*m[key], 'base') for key in ('referenceSmallerDt', 'referenceSpatial'))
     result.update((*m['tighterTolerance'], mode) for mode in m['independentTolerances'])
+    if 'referenceTransportCfl' in m:
+        result.add((*m['referenceTransportCfl'], 'transport'))
     return sorted(result, key=lambda row: (row[0]*row[1], row[2], row[3]))
+
+
+def admit_checkpoint(saved, expected):
+    if (any(saved[k] != expected[k] for k in ('manifest', 'sourceHashes', 'preRunRuntime'))
+            or saved['failures']):
+        raise ValueError('Checkpoint source, manifest, runtime or failure mismatch')
+    keys = [(t['nr'], t['nz'], t['nt'], t['mode']) for t in saved['cases']]
+    if len(keys) != len(set(keys)) or not set(keys) <= set(requests(expected['manifest'])):
+        raise ValueError('Checkpoint duplicate or unexpected trajectory')
+    return keys
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--only', help='nr:nz:nt[:base|linear|thermal|both] pilot')
+    parser.add_argument('--resume', action='store_true', help='Continue an identical source/manifest checkpoint')
     args = parser.parse_args()
     m = json.loads((HERE/'manifest.json').read_text())
     runs = requests(m)
@@ -140,6 +177,11 @@ def main():
                   preRunRuntime=dict(python=platform.python_version(), numpy=version('numpy'),
                                      scipy=version('scipy'), fipy=version('fipy')),
                   experimentalQualified=False, liveQualified=False)
+    if args.resume:
+        saved = json.loads(args.output.read_text())
+        keys = admit_checkpoint(saved, report)
+        report = saved
+        runs = [key for key in runs if key not in keys]
     for nr, nz, nt, mode in runs:
         try:
             report['cases'].append(trajectory(m, nr, nz, nt, mode))

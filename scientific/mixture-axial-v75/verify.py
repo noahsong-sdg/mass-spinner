@@ -51,6 +51,8 @@ def requested(m):
     runs = {(*level, 'base') for name in SERIES for level in m[name]}
     runs.update((*m[name], 'base') for name in ('referenceSmallerDt', 'referenceSpatial'))
     runs.update((*m['tighterTolerance'], mode) for mode in ('base', 'linear', 'thermal', 'both'))
+    if 'referenceTransportCfl' in m:
+        runs.add((*m['referenceTransportCfl'], 'transport'))
     return runs
 
 
@@ -59,6 +61,14 @@ def setup_grid(c, m, nr, nz):
     wall = np.asarray(c['wall'], dtype=float)
     expected = (np.linspace(0, m['radiusM'], nr+1), np.linspace(0, m['lengthM'], nz+1),
                 np.linspace(m['radiusM'], m['radiusM']+m['linerThicknessM'], max(2, nr//3)+1))
+    er, ez, ew = expected
+    if m.get('radialBeta', 0):
+        b = m['radialBeta']
+        er = er[-1]*(1+np.tanh(b*(2*er/er[-1]-1))/np.tanh(b))/2
+    if m.get('axialBeta', 0):
+        b = m['axialBeta']
+        ez = ez[-1]*(1+np.tanh(b*(2*ez/ez[-1]-1))/np.tanh(b))/2
+    expected = er, ez, ew
     require(all(np.array_equal(a, b) for a, b in zip((r, z, wall), expected)), 'Primitive grid differs from manifest')
     require(np.array_equal(masses, np.asarray(m['massesU'])*1.66053906892e-27), 'Primitive isotope masses differ')
     require(all(c[k] == m[k] for k in ('contactH', 'coolingH', 'bathK'))
@@ -112,6 +122,18 @@ def trajectory(t, m):
         for name in ('hydro', 'diffusion'):
             require(0 <= c[name]['maxLocalScore'] <= 1 and c[name]['minimumDensityKgM3'] > 0
                     and c[name]['minimumInternalJ'] > 0, 'Failed local transport audit')
+        if m.get('transportAudits') == 1:
+            inner = row.get('transportAudits', [])
+            require(bool(inner) and [s['kind'] for s in inner] == sorted(
+                [s['kind'] for s in inner], key=lambda k: ('hydro', 'diffusion').index(k)),
+                'Missing or unordered transport substeps')
+            for name in ('hydro', 'diffusion'):
+                stages = [s for s in inner if s['kind'] == name]
+                require(bool(stages) and all(finite(s['dtS']) and s['dtS'] > 0 and finite(s['metrics'])
+                    and 0 <= s['metrics']['maxLocalScore'] <= 1 and s['metrics']['minimumDensityKgM3'] > 0
+                    and s['metrics']['minimumInternalJ'] > 0 for s in stages), 'Failed transport substep audit')
+                require(abs(sum(s['dtS'] for s in stages)-dt) <= 128*EPS*dt
+                    and stages[-1]['metrics'] == c[name], 'Incomplete transport substep time/summary')
         source, ledger = c['source'], c['source']['energy']
         require(ledger['exchangeScale'] >= 0 and ledger['storageAllowance'] >= 0, 'Invalid source ledger allowance')
         allowed = 1e-8*ledger['exchangeScale']+ledger['storageAllowance']
@@ -196,12 +218,15 @@ def verify(raw_path, conv_path, controls_path, diffcontrols_path, audit_path, so
                         and (max(v) < .002 or all(b <= a+1e-12 for a, b in zip(v, v[1:]))), 'False monotonic refinement gate')
             else:
                 require(finite(g['value']) and 0 <= g['value'] < (.05 if g['name'].endswith(':max') else .02), 'False refinement threshold')
-    for name in ('linearTolerance', 'thermalTolerance', 'bothTolerances', 'referenceSmallerDt', 'referenceSpatial'):
+    reference_checks = ('linearTolerance', 'thermalTolerance', 'bothTolerances', 'referenceSmallerDt', 'referenceSpatial')
+    if 'referenceTransportCfl' in m:
+        reference_checks += ('referenceTransportCfl',)
+    for name in reference_checks:
         check = conv.get(name, {})
         require(check.get('passed') is True and [r['timeS'] for r in check.get('cases', [])] == m['timesS']
                 and all(r.get('passed') is True for r in check['cases']), 'Missing or failed tolerance/reference gate')
         for row in check['cases']:
-            tight = 'Tolerance' in name
+            tight = 'Tolerance' in name or name == 'referenceTransportCfl'
             require(set(row['profiles']) == set(FIELDS) and set(row['observablesNormalized']) == OBS
                     and all(finite(p['rmsNormalized']) and 0 <= p['rmsNormalized'] < (.001 if tight else .02)
                             and finite(p['maxNormalized']) and 0 <= p['maxNormalized'] < (.001 if tight else .05) for p in row['profiles'].values())

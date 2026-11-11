@@ -1,4 +1,40 @@
-# Prospective v75 qualification
+# Prospective mixture qualification: spatial revision v76
+
+The original uniform-grid study and protocol are preserved in frozen-source-01
+and study-01; their failure is not superseded by relabeling. This revision uses
+primitive MUSCL reconstruction about cylindrical volume centroids, a
+geometry-aware monotonized-central slope limiter, and the manifest's explicit
+tanh radial grid refined at both the axis and outer wall, with axial endwall
+refinement. Study02 and frozen-source02 retain the failed outer-wall-only
+radial grid. The independent J0 cylindrical acoustic control reproduces that
+axis error using exact initial cell integrals. This revision retains all
+physical equations and all
+2% RMS/observable and 5% local gates. It adds conservative linear comparison
+reconstruction in volume coordinates z,r² to remove nonnested overlap aliasing.
+This smooth-field remap is neither positivity preserving nor a transport method.
+
+Initialize all six conserved fields by 12-point tensor Gauss-Legendre cell
+integration of the unchanged continuum profiles, including the full kinetic
+energy. An independent 16-point SciPy projection admits the initial state.
+Study03 retains the previous midpoint initialization and its coarse axial
+nonmonotonicity; a pure-hydro initialization ablation reproduces and removes
+that defect. Add 36-cell spatial/radial/axial samples because the actual
+24-cell runs fail the unchanged accuracy thresholds. Retain every coarse
+sample and its monotonicity test; do not remove failed data or loosen gates.
+
+Hydro and binary diffusion subcycle independently at CFL 0.3 during each outer
+Lie step. Record every inner dt and independent audit, in order; require each
+operator's accumulated inner time to equal the outer dt. Source and magnetic
+stages retain the outer dt. The separate transport-CFL 0.15 study must change
+all profiles/observables by <0.1%; outer-time and joint studies still test
+splitting and backward-Euler source errors. Every physical output remains at
+10,20,40 microseconds. No new closure or fitted coefficient is introduced.
+
+Additional controls: exact smooth-contact mass flux, linear/bilinear remap
+exactness and conservation on nonnested cylindrical grids, and the isolated
+constant-property torsional endwall problem Omega_t=nu Omega_zz with initial
+900 sin²(pi z/L). Compare wall torque with its independent Fourier series;
+report uniform and graded-grid results without dropping the uniform failures.
 
 Freeze this protocol and the exact manifest before execution. This is a
 compressible, binary monatomic neutral mixture numerical verification, not an

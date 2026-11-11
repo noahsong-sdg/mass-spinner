@@ -1,10 +1,23 @@
 import unittest
+from copy import deepcopy
 import numpy as np
 from flow import Flow
-from run import endpoint
+from run import endpoint, admit_checkpoint
 
 
 class ReportControls(unittest.TestCase):
+    def test_resume_rejects_stale_manifest_source_runtime_and_failed_checkpoints(self):
+        from test_analyze import manifest
+        report = dict(manifest=manifest(), sourceHashes={'flow.py': 'new'},
+                      preRunRuntime={'numpy': 'pinned'}, failures=[], cases=[])
+        self.assertEqual(admit_checkpoint(deepcopy(report), report), [])
+        for key, value in (('manifest', {'schemaVersion': 0}), ('sourceHashes', {'flow.py': 'old'}),
+                           ('preRunRuntime', {'numpy': 'old'}), ('failures', [{'error': 'retained'}])):
+            saved = deepcopy(report)
+            saved[key] = value
+            with self.assertRaisesRegex(ValueError, 'Checkpoint'):
+                admit_checkpoint(saved, report)
+
     def test_uniform_cylinder_species_centroids_are_exact_inventory_moments(self):
         f = Flow(np.linspace(0, .06, 5), np.linspace(0, .14, 5), [36*1.66053906892e-27, 40*1.66053906892e-27])
         q = f.state(.001, 350, .4, 0)

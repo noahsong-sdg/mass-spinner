@@ -100,18 +100,35 @@ class Coupled:
         result.pop('payload')
         return out, new_t[m.solid_indices].copy(), result
 
-    def step(self, q, solid, dt, diffusion_scale=1., audit=None):
-        """Lie split; dt refinement includes splitting and source BE errors."""
+    def step(self, q, solid, dt, diffusion_scale=1., audit=None, transport_cfl=.3):
+        """Lie split, with CFL-resolved transport on wall-refined meshes.
+
+        Every inner SSPRK2 endpoint is audited. Source/splitting accuracy is
+        controlled separately by the outer timestep, not hidden by subcycling.
+        """
         self.checked_primitive(q)
-        before = q.copy()
-        transported, hydro = self.flow.advance_with_receipt(q, dt)
-        self.checked_primitive(transported)
-        if audit:
-            audit('hydro', before, transported, dt)
-        diffused, diff = diffusion.advance_with_receipt(self.flow, transported, dt, diffusion_scale)
-        self.checked_primitive(diffused)
-        if audit:
-            audit('diffusion', transported, diffused, dt)
+        if isinstance(dt, bool) or not np.isfinite(dt) or dt <= 0:
+            raise ValueError('Need a finite positive outer timestep')
+        self.flow.stable_dt(q, transport_cfl)  # Enforce the actual CFL domain.
+        current, receipts = q, {}
+        for kind in ('hydro', 'diffusion'):
+            elapsed, count = 0., 0
+            while elapsed < dt:
+                bound = (self.flow.stable_dt(current, transport_cfl) if kind == 'hydro'
+                         else diffusion.stable_dt(self.flow, current, diffusion_scale, cfl=transport_cfl))
+                local_dt = min(dt-elapsed, bound)
+                before = current
+                if kind == 'hydro':
+                    current, receipt = self.flow.advance_with_receipt(before, local_dt)
+                else:
+                    current, receipt = diffusion.advance_with_receipt(self.flow, before, local_dt, diffusion_scale)
+                self.checked_primitive(current)
+                if audit:
+                    audit(kind, before, current, local_dt)
+                elapsed += local_dt
+                count += 1
+            receipts[kind] = dict(receipt, substepCount=count)
+        diffused = current
         braked, motional = magnetic.advance(self.flow, diffused, dt, self.sigma, self.magnetic_t)
         self.checked_primitive(braked)
         if audit:
@@ -120,7 +137,7 @@ class Coupled:
         self.checked_primitive(out)
         if audit:
             audit('source', braked, out, dt, solid, wall, source)
-        return out, wall, dict(hydro=hydro, diffusion=diff, magnetic=motional, source=source)
+        return out, wall, dict(**receipts, magnetic=motional, source=source)
 
     def close(self):
         self.bridge.close()

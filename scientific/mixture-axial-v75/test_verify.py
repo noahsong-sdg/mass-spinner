@@ -83,10 +83,12 @@ class Admission(unittest.TestCase):
         # Fixed spatial mesh keeps this synthetic, static history's profile
         # differences zero. These fixtures exercise evidence admission, not
         # physical refinement; real coupled/analytic controls test the latter.
-        m.update(joint=[[4, 4, 4], [4, 4, 8], [4, 4, 16]],
+        m.update(radialBeta=0, axialBeta=0, transportAudits=0,
+                 joint=[[4, 4, 4], [4, 4, 8], [4, 4, 16]],
                  spatial=[[4, 4, 4], [4, 4, 8]], temporal=[[4, 4, 4], [4, 4, 8], [4, 4, 16]],
                  radial=[[4, 4, 4], [4, 4, 8]], axial=[[4, 4, 4], [4, 4, 8]],
-                 tighterTolerance=[4, 4, 8], referenceSmallerDt=[4, 4, 32], referenceSpatial=[4, 4, 64])
+                 tighterTolerance=[4, 4, 8], referenceSmallerDt=[4, 4, 32], referenceSpatial=[4, 4, 64],
+                 referenceTransportCfl=[4, 4, 16])
         (self.source/'manifest.json').write_text(json.dumps(m))
         self.raw = dict(manifest=m, failures=[], sourceHashes=source_hashes(self.source, self.root),
                         preRunRuntime={key: 'test fixture' for key in ('python', 'numpy', 'scipy', 'fipy')},
@@ -127,6 +129,26 @@ class Admission(unittest.TestCase):
         self.assertFalse(result['liveQualified'])
         self.assertEqual(set(result['artifactHashes']), {'raw', 'convergence', 'controls', 'diffusionControls', 'audit'})
         self.assertEqual(sum(len(s['gates']) for s in self.conv['series'].values()), 615)
+
+    def test_subcycling_requires_every_inner_audit_and_full_time_coverage(self):
+        from verify import trajectory as admit
+        m = deepcopy(self.raw['manifest'])
+        m['transportAudits'] = 1
+        t = deepcopy(self.raw['cases'][0])
+        dt = max(m['timesS'])/t['nt']
+        for row in t['stepChecks']:
+            row['transportAudits'] = [dict(kind=k, dtS=dt/2, metrics=deepcopy(row['checks'][k]))
+                for k in ('hydro', 'diffusion') for _ in range(2)]
+        admit(t, m)
+        saved = deepcopy(t['stepChecks'][0]['transportAudits'])
+        for failure in ('missing', 'time', 'earlierScore'):
+            t['stepChecks'][0]['transportAudits'] = deepcopy(saved)
+            stages = t['stepChecks'][0]['transportAudits']
+            if failure == 'missing': stages.pop(0)
+            if failure == 'time': stages[0]['dtS'] *= .5
+            if failure == 'earlierScore': stages[0]['metrics']['maxLocalScore'] = 2.
+            with self.assertRaisesRegex(AssertionError, 'transport substep'):
+                admit(t, m)
 
     def test_missing_density_or_species_evolution_gate_rejected(self):
         original = deepcopy(self.conv['series']['joint']['gates'])
