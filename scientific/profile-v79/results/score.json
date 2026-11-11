@@ -1,0 +1,1035 @@
+{
+  "sealedPredictionSHA256": "1a1e7e54974ed7e7e28be655e911b17d3cdd7bc55107b34474148702858ef128",
+  "measuredProfileAdmitted": true,
+  "qualification": false,
+  "points": [
+    {
+      "id": "ar-i-r1",
+      "radiusM": 0.009734789391575663,
+      "velocityMS": 282.3303457106274,
+      "extractionRadiusRangeM": [
+        0.008611544461778472,
+        0.010858034321372856
+      ],
+      "extractionVelocityRangeMS": [
+        259.2829705505762,
+        305.3777208706786
+      ],
+      "extractionUnderFivePercent": false,
+      "plottedBarRangeMS": [
+        211.26760563380282,
+        345.71062740076826
+      ]
+    },
+    {
+      "id": "ar-i-r2",
+      "radiusM": 0.01984399375975039,
+      "velocityMS": 526.2483994878361,
+      "extractionRadiusRangeM": [
+        0.0187207488299532,
+        0.02096723868954758
+      ],
+      "extractionVelocityRangeMS": [
+        503.20102432778486,
+        549.2957746478874
+      ],
+      "extractionUnderFivePercent": true,
+      "plottedBarRangeMS": [
+        459.0268886043534,
+        591.5492957746479
+      ]
+    },
+    {
+      "id": "ar-i-r3",
+      "radiusM": 0.02985959438377535,
+      "velocityMS": 699.1037131882202,
+      "extractionRadiusRangeM": [
+        0.028736349453978162,
+        0.030982839313572545
+      ],
+      "extractionVelocityRangeMS": [
+        676.056338028169,
+        722.1510883482714
+      ],
+      "extractionUnderFivePercent": true,
+      "plottedBarRangeMS": [
+        629.9615877080665,
+        768.2458386683738
+      ]
+    },
+    {
+      "id": "ar-i-r4",
+      "radiusM": 0.03968798751950078,
+      "velocityMS": 631.8822023047375,
+      "extractionRadiusRangeM": [
+        0.03856474258970359,
+        0.04081123244929797
+      ],
+      "extractionVelocityRangeMS": [
+        608.8348271446863,
+        654.9295774647887
+      ],
+      "extractionUnderFivePercent": true,
+      "plottedBarRangeMS": [
+        566.5813060179257,
+        699.1037131882202
+      ]
+    },
+    {
+      "id": "ar-i-r5",
+      "radiusM": 0.0500780031201248,
+      "velocityMS": 405.2496798975672,
+      "extractionRadiusRangeM": [
+        0.04895475819032761,
+        0.051201248049921995
+      ],
+      "extractionVelocityRangeMS": [
+        382.202304737516,
+        428.2970550576184
+      ],
+      "extractionUnderFivePercent": false,
+      "plottedBarRangeMS": [
+        339.94878361075547,
+        470.550576184379
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "beta": 3,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          149.19205542776572,
+          269.04946729741823,
+          323.34650396102876,
+          295.07588520841887,
+          172.56600212547468
+        ],
+        "errorRelative": [
+          0.4715691823624262,
+          0.48874054997741206,
+          0.5374842131986017,
+          0.5330207368839409,
+          0.5741736250869013
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.3660184407478223,
+            "worstRelative": 0.5660479372661023
+          },
+          {
+            "bestRelative": 0.4477975933903554,
+            "worstRelative": 0.5314482624052055
+          },
+          {
+            "bestRelative": 0.5210555781913961,
+            "worstRelative": 0.5571962081160841
+          },
+          {
+            "bestRelative": 0.5046008821339227,
+            "worstRelative": 0.5631473054232856
+          },
+          {
+            "bestRelative": 0.5041070508529877,
+            "worstRelative": 0.6374275367648621
+          }
+        ],
+        "worstRelative": 0.5741736250869013,
+        "rmsOverMeasuredPeak": 0.400845131017295,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          245.0271044149395,
+          438.9240432070535,
+          523.6712537268119,
+          475.93861304182315,
+          278.2949468479067
+        ],
+        "errorRelative": [
+          0.13212621973665423,
+          0.1659375237355017,
+          0.2509391041013918,
+          0.24679218483148144,
+          0.31327534442902005
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.0,
+            "worstRelative": 0.28377741120498345
+          },
+          {
+            "bestRelative": 0.09596987748775965,
+            "worstRelative": 0.23120354497649764
+          },
+          {
+            "bestRelative": 0.22234078334364604,
+            "worstRelative": 0.27875482759132464
+          },
+          {
+            "bestRelative": 0.1975377274463448,
+            "worstRelative": 0.2945630700150681
+          },
+          {
+            "bestRelative": 0.19791992203071518,
+            "worstRelative": 0.41727132237460196
+          }
+        ],
+        "worstRelative": 0.31327534442902005,
+        "rmsOverMeasuredPeak": 0.1811926235526218,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.031016124838541638,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 3,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          146.6118626887429,
+          264.83164151952843,
+          319.03783597363235,
+          292.1464279967026,
+          173.04342565087603
+        ],
+        "errorRelative": [
+          0.48070809632694694,
+          0.4967554451903851,
+          0.5436473445139068,
+          0.5376568181045092,
+          0.572995527856764
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.37708326734750575,
+            "worstRelative": 0.5736001051272851
+          },
+          {
+            "bestRelative": 0.45672486621786534,
+            "worstRelative": 0.5390140067278868
+          },
+          {
+            "bestRelative": 0.5273736147972808,
+            "worstRelative": 0.5635760674425956
+          },
+          {
+            "bestRelative": 0.5107415030011879,
+            "worstRelative": 0.5681951528661571
+          },
+          {
+            "bestRelative": 0.5063737853725288,
+            "worstRelative": 0.6404015342679867
+          }
+        ],
+        "worstRelative": 0.572995527856764,
+        "rmsOverMeasuredPeak": 0.40485630885316254,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          240.3470807525122,
+          431.16770320658316,
+          515.3292905700011,
+          468.9879196754281,
+          274.3535666653024
+        ],
+        "errorRelative": [
+          0.1487026300784035,
+          0.1806764569237434,
+          0.26287147264620714,
+          0.25779216764638424,
+          0.323001151451497
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.0,
+            "worstRelative": 0.2976784500016041
+          },
+          {
+            "bestRelative": 0.11274240895785725,
+            "worstRelative": 0.2453117300115476
+          },
+          {
+            "bestRelative": 0.23552119698979235,
+            "worstRelative": 0.2907857996972475
+          },
+          {
+            "bestRelative": 0.20947215486732584,
+            "worstRelative": 0.3054338164453717
+          },
+          {
+            "bestRelative": 0.2104937521227982,
+            "worstRelative": 0.4261874022248585
+          }
+        ],
+        "worstRelative": 0.323001151451497,
+        "rmsOverMeasuredPeak": 0.19002762853026942,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03150396800404672,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          145.64494826519245,
+          263.25005167229585,
+          317.41451182460594,
+          291.059141757655,
+          173.20843852508946
+        ],
+        "errorRelative": [
+          0.4841328589790689,
+          0.499760850715175,
+          0.545969352133668,
+          0.539377528444319,
+          0.5725883396900636
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.3811486529001451,
+            "worstRelative": 0.5764234156097576
+          },
+          {
+            "bestRelative": 0.45991685819283334,
+            "worstRelative": 0.5417978699505799
+          },
+          {
+            "bestRelative": 0.5297724228547853,
+            "worstRelative": 0.5658416351883535
+          },
+          {
+            "bestRelative": 0.5126577803552206,
+            "worstRelative": 0.5696938305586086
+          },
+          {
+            "bestRelative": 0.5063639739391798,
+            "worstRelative": 0.6395092804075548
+          }
+        ],
+        "worstRelative": 0.5725883396900636,
+        "rmsOverMeasuredPeak": 0.40636595339863063,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          238.56654314911603,
+          428.2397084257648,
+          512.1825158971286,
+          466.29377075999923,
+          272.8308491944456
+        ],
+        "errorRelative": [
+          0.15500920544462757,
+          0.1862403594147876,
+          0.26737262835960174,
+          0.262055856203527,
+          0.32675863121370613
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.0,
+            "worstRelative": 0.3030226799483653
+          },
+          {
+            "bestRelative": 0.11869750649158639,
+            "worstRelative": 0.25052386074673416
+          },
+          {
+            "bestRelative": 0.24013694531727503,
+            "worstRelative": 0.29518057042322887
+          },
+          {
+            "bestRelative": 0.21418452306281577,
+            "worstRelative": 0.30933609059131917
+          },
+          {
+            "bestRelative": 0.2148701203825104,
+            "worstRelative": 0.42937902603411293
+          }
+        ],
+        "worstRelative": 0.32675863121370613,
+        "rmsOverMeasuredPeak": 0.19341119404536156,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03125099998400051,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          206.0412741164198,
+          350.84244863115936,
+          396.10154653507755,
+          347.8387047280438,
+          205.33875195957904
+        ],
+        "errorRelative": [
+          0.2702120857826582,
+          0.3333139844746096,
+          0.4334151870990924,
+          0.4495196993057705,
+          0.4933031112782583
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.12981789384818654,
+            "worstRelative": 0.3991838884975383
+          },
+          {
+            "bestRelative": 0.285157674361846,
+            "worstRelative": 0.3851002834973174
+          },
+          {
+            "bestRelative": 0.41380074856586224,
+            "worstRelative": 0.4540603420192727
+          },
+          {
+            "bestRelative": 0.4137182426051399,
+            "worstRelative": 0.4857522448162521
+          },
+          {
+            "bestRelative": 0.41200073370289547,
+            "worstRelative": 0.5674564951674936
+          }
+        ],
+        "worstRelative": 0.4933031112782583,
+        "rmsOverMeasuredPeak": 0.31923483196513924,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          382.75813486428484,
+          624.0755695536468,
+          670.1201800139188,
+          564.909152357463,
+          327.7037152643917
+        ],
+        "errorRelative": [
+          0.3557102191791676,
+          0.18589542535619993,
+          0.04145813078595133,
+          0.10598977104117807,
+          0.19135354937917876
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.12766514100497206,
+            "worstRelative": 0.6188485818675529
+          },
+          {
+            "bestRelative": 0.10635012781045394,
+            "worstRelative": 0.2703062151150948
+          },
+          {
+            "bestRelative": 0.0032049379336821504,
+            "worstRelative": 0.07849182102493235
+          },
+          {
+            "bestRelative": 0.04193110007860423,
+            "worstRelative": 0.16716243782063733
+          },
+          {
+            "bestRelative": 0.05898805057113676,
+            "worstRelative": 0.31074171391952143
+          }
+        ],
+        "worstRelative": 0.3557102191791676,
+        "rmsOverMeasuredPeak": 0.11262042413782596,
+        "eligiblePointGate": true,
+        "allPointGate": false,
+        "peakRadiusM": 0.027018512172212586,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          205.57276403362567,
+          350.65462631378483,
+          396.74316198861226,
+          349.4425830288337,
+          208.8546535469358
+        ],
+        "errorRelative": [
+          0.2718715251235299,
+          0.33367089257648186,
+          0.4324974184741645,
+          0.44698144408202806,
+          0.4846272214213053
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.13217731435417113,
+            "worstRelative": 0.40066077551238477
+          },
+          {
+            "bestRelative": 0.28617258543480506,
+            "worstRelative": 0.38590467182525656
+          },
+          {
+            "bestRelative": 0.41273862676044426,
+            "worstRelative": 0.4539538131439199
+          },
+          {
+            "bestRelative": 0.41271607497414897,
+            "worstRelative": 0.48418511944011544
+          },
+          {
+            "bestRelative": 0.40623498384911305,
+            "worstRelative": 0.5647545979392098
+          }
+        ],
+        "worstRelative": 0.4846272214213053,
+        "rmsOverMeasuredPeak": 0.31759451622695456,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          381.518100433279,
+          622.3477738592308,
+          668.7713737770821,
+          564.2642659485955,
+          327.83973660544314
+        ],
+        "errorRelative": [
+          0.3513180790856731,
+          0.18261219314856264,
+          0.04338746717966831,
+          0.10701035115328648,
+          0.19101790114107078
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.12360650864354161,
+            "worstRelative": 0.6114916576884994
+          },
+          {
+            "bestRelative": 0.10250096790585839,
+            "worstRelative": 0.265193394607514
+          },
+          {
+            "bestRelative": 0.005806165376636918,
+            "worstRelative": 0.08120477633985279
+          },
+          {
+            "bestRelative": 0.04322548258366021,
+            "worstRelative": 0.16853409821520104
+          },
+          {
+            "bestRelative": 0.060129291237789984,
+            "worstRelative": 0.3110653315992663
+          }
+        ],
+        "worstRelative": 0.3513180790856731,
+        "rmsOverMeasuredPeak": 0.11182391322716935,
+        "eligiblePointGate": true,
+        "allPointGate": false,
+        "peakRadiusM": 0.02750454507895013,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "chord": {
+        "predictionMS": [
+          205.36489018891493,
+          350.5721079386169,
+          397.02020659017495,
+          350.1503567302512,
+          210.21584987125888
+        ],
+        "errorRelative": [
+          0.2726078039113716,
+          0.33382769756676445,
+          0.4321011330642369,
+          0.4458613402100786,
+          0.4812683135878256
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.13297692535695804,
+            "worstRelative": 0.4012904038333872
+          },
+          {
+            "bestRelative": 0.2862664604215751,
+            "worstRelative": 0.3860989615762611
+          },
+          {
+            "bestRelative": 0.4123206602576741,
+            "worstRelative": 0.453504745303405
+          },
+          {
+            "bestRelative": 0.41163736705349585,
+            "worstRelative": 0.48301727080680634
+          },
+          {
+            "bestRelative": 0.40289920322507966,
+            "worstRelative": 0.5612401705909409
+          }
+        ],
+        "worstRelative": 0.4812683135878256,
+        "rmsOverMeasuredPeak": 0.31692468632130993,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          380.8435300722504,
+          621.5391225718274,
+          668.2528944525133,
+          564.0509178810294,
+          327.8993889962491
+        ],
+        "errorRelative": [
+          0.34892878451894593,
+          0.18107555895035823,
+          0.04412910152488489,
+          0.10734799014167382,
+          0.19087070203453216
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.1212656556602012,
+            "worstRelative": 0.6087688866370715
+          },
+          {
+            "bestRelative": 0.10094792299367028,
+            "worstRelative": 0.26362479605326783
+          },
+          {
+            "bestRelative": 0.006653274021348632,
+            "worstRelative": 0.08186332591741308
+          },
+          {
+            "bestRelative": 0.043754738052379505,
+            "worstRelative": 0.1687535969300198
+          },
+          {
+            "bestRelative": 0.06002114043476947,
+            "worstRelative": 0.31088993086810446
+          }
+        ],
+        "worstRelative": 0.34892878451894593,
+        "rmsOverMeasuredPeak": 0.11138990042261764,
+        "eligiblePointGate": true,
+        "allPointGate": false,
+        "peakRadiusM": 0.027251146764861102,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "chord": {
+        "predictionMS": [
+          148.19838153347644,
+          267.5272217123322,
+          322.17591561059623,
+          295.3158666172568,
+          175.84381337120195
+        ],
+        "errorRelative": [
+          0.4750887257249655,
+          0.49163318696513025,
+          0.5391586262053559,
+          0.5326409486766411,
+          0.56608525041735
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.3703896439440052,
+            "worstRelative": 0.5689743081751082
+          },
+          {
+            "bestRelative": 0.4512307995627368,
+            "worstRelative": 0.534291936477324
+          },
+          {
+            "bestRelative": 0.5227256948618186,
+            "worstRelative": 0.5592768689304917
+          },
+          {
+            "bestRelative": 0.505525908680283,
+            "worstRelative": 0.5633884567726754
+          },
+          {
+            "bestRelative": 0.49890342468386073,
+            "worstRelative": 0.6340082953726855
+          }
+        ],
+        "worstRelative": 0.56608525041735,
+        "rmsOverMeasuredPeak": 0.4009756695914268,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          243.4586354290585,
+          435.9973981209667,
+          520.1710469998067,
+          473.02824537825586,
+          276.93151330677864
+        ],
+        "errorRelative": [
+          0.1376816586390264,
+          0.171498861478163,
+          0.2559458100607161,
+          0.25139805543988275,
+          0.31663977285120337
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.0,
+            "worstRelative": 0.28859777956292754
+          },
+          {
+            "bestRelative": 0.10300136500187007,
+            "worstRelative": 0.2367197491397548
+          },
+          {
+            "bestRelative": 0.22845260883439833,
+            "worstRelative": 0.28401945950089247
+          },
+          {
+            "bestRelative": 0.20280611566760443,
+            "worstRelative": 0.2993696520164093
+          },
+          {
+            "bestRelative": 0.20315810954799063,
+            "worstRelative": 0.4207376310274865
+          }
+        ],
+        "worstRelative": 0.31663977285120337,
+        "rmsOverMeasuredPeak": 0.18470848331730821,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03125099998400051,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "chord": {
+        "predictionMS": [
+          143.27863562126674,
+          259.2081436334347,
+          312.80914670081717,
+          286.89734484987633,
+          170.65039815702107
+        ],
+        "errorRelative": [
+          0.492514220316511,
+          0.5074414594216241,
+          0.552556879902311,
+          0.5459638777553122,
+          0.5789005972807789
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.39113992654722163,
+            "worstRelative": 0.5833214405805451
+          },
+          {
+            "bestRelative": 0.4681482307864654,
+            "worstRelative": 0.5488755177170603
+          },
+          {
+            "bestRelative": 0.5365903013176563,
+            "worstRelative": 0.572175665025135
+          },
+          {
+            "bestRelative": 0.5196259519497741,
+            "worstRelative": 0.5758578473754101
+          },
+          {
+            "bestRelative": 0.5136158058412559,
+            "worstRelative": 0.6448452549236707
+          }
+        ],
+        "worstRelative": 0.5789005972807789,
+        "rmsOverMeasuredPeak": 0.4115588875323832,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          234.19819885249547,
+          421.1197896392368,
+          504.5601150418,
+          459.70110395528457,
+          268.8395009306079
+        ],
+        "errorRelative": [
+          0.1704816630213199,
+          0.19976993744952812,
+          0.27827573287976964,
+          0.27248923568576033,
+          0.3366077401996689
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.0020664542165382827,
+            "worstRelative": 0.3158787458414246
+          },
+          {
+            "bestRelative": 0.1331618176676962,
+            "worstRelative": 0.2631439397869051
+          },
+          {
+            "bestRelative": 0.25133223590319687,
+            "worstRelative": 0.3057842340895315
+          },
+          {
+            "bestRelative": 0.2253080789531834,
+            "worstRelative": 0.31910141276144843
+          },
+          {
+            "bestRelative": 0.2262885485199806,
+            "worstRelative": 0.43777600632314595
+          }
+        ],
+        "worstRelative": 0.3366077401996689,
+        "rmsOverMeasuredPeak": 0.20175275037900003,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03125099998400051,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "chord": {
+        "predictionMS": [
+          206.20130314537164,
+          351.2549573304675,
+          396.82669319688443,
+          349.3496215592905,
+          209.58842656122485
+        ],
+        "errorRelative": [
+          0.26964527094541835,
+          0.33253011757884393,
+          0.4323779351890719,
+          0.447128562436057,
+          0.48281655246661415
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.12964884313628855,
+            "worstRelative": 0.39879870652522376
+          },
+          {
+            "bestRelative": 0.285083247135114,
+            "worstRelative": 0.38476213360545786
+          },
+          {
+            "bestRelative": 0.4126263046183266,
+            "worstRelative": 0.45389696550375236
+          },
+          {
+            "bestRelative": 0.41287213329202455,
+            "worstRelative": 0.4842619134596218
+          },
+          {
+            "bestRelative": 0.4046555874256259,
+            "worstRelative": 0.5625459051421202
+          }
+        ],
+        "worstRelative": 0.48281655246661415,
+        "rmsOverMeasuredPeak": 0.31721275234612506,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          384.0140072968533,
+          624.7037084022461,
+          669.110949508022,
+          563.0971091187073,
+          326.91939876404587
+        ],
+        "errorRelative": [
+          0.36015845668409274,
+          0.18708904200037524,
+          0.042901737059038096,
+          0.10885746256998899,
+          0.1932889401746609
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.13088508354096962,
+            "worstRelative": 0.6217074411535932
+          },
+          {
+            "bestRelative": 0.10701351382975743,
+            "worstRelative": 0.26952122596775974
+          },
+          {
+            "bestRelative": 0.004969955648825297,
+            "worstRelative": 0.08105190347952917
+          },
+          {
+            "bestRelative": 0.045116218511173534,
+            "worstRelative": 0.17036179386622508
+          },
+          {
+            "bestRelative": 0.06279472941750297,
+            "worstRelative": 0.31296132251107567
+          }
+        ],
+        "worstRelative": 0.36015845668409274,
+        "rmsOverMeasuredPeak": 0.1140733606738438,
+        "eligiblePointGate": true,
+        "allPointGate": false,
+        "peakRadiusM": 0.027251146764861102,
+        "outerDeclines": true
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "chord": {
+        "predictionMS": [
+          204.58765121638442,
+          349.8283611318091,
+          396.94489143719557,
+          350.5942621452599,
+          210.61022127464977
+        ],
+        "errorRelative": [
+          0.2753607455782484,
+          0.33524099745999286,
+          0.4322088640797624,
+          0.4451588272837933,
+          0.480295156981038
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.13609986364565196,
+            "worstRelative": 0.4035977165928579
+          },
+          {
+            "bestRelative": 0.28761719750651693,
+            "worstRelative": 0.38751206529142024
+          },
+          {
+            "bestRelative": 0.4124168448966238,
+            "worstRelative": 0.4535914986606625
+          },
+          {
+            "bestRelative": 0.4109819848154751,
+            "worstRelative": 0.48230991379348076
+          },
+          {
+            "bestRelative": 0.4018041059188914,
+            "worstRelative": 0.5604184870763058
+          }
+        ],
+        "worstRelative": 0.480295156981038,
+        "rmsOverMeasuredPeak": 0.31694019366666293,
+        "eligiblePointGate": false,
+        "allPointGate": false,
+        "peakRadiusM": 0.03,
+        "outerDeclines": true
+      },
+      "local": {
+        "predictionMS": [
+          378.13437133963953,
+          618.6742824269016,
+          667.1733925365529,
+          564.4848821518832,
+          328.51087235642547
+        ],
+        "errorRelative": [
+          0.33933307943881397,
+          0.17563166563360147,
+          0.04567322422885015,
+          0.10666120980623948,
+          0.18936179680768309
+        ],
+        "extractionIntervalErrors": [
+          {
+            "bestRelative": 0.11307026176261648,
+            "worstRelative": 0.5976745090258844
+          },
+          {
+            "bestRelative": 0.09551493743848871,
+            "worstRelative": 0.2582197780246098
+          },
+          {
+            "bestRelative": 0.008581190951039708,
+            "worstRelative": 0.08305458902865004
+          },
+          {
+            "bestRelative": 0.04322654280282512,
+            "worstRelative": 0.1679487888898391
+          },
+          {
+            "bestRelative": 0.058304437941982035,
+            "worstRelative": 0.30958960189159235
+          }
+        ],
+        "worstRelative": 0.33933307943881397,
+        "rmsOverMeasuredPeak": 0.10925833677420203,
+        "eligiblePointGate": true,
+        "allPointGate": false,
+        "peakRadiusM": 0.027751126103277318,
+        "outerDeclines": true
+      }
+    }
+  ],
+  "limitations": [
+    "Unknown local emissivity and Fabry-Perot estimator",
+    "Prescribed homogeneous transport properties and no meridional flow",
+    "First and outermost points fail conservative 5% extraction gate; retained in scores",
+    "Prior source exposure; only marker coordinates prospectively withheld"
+  ]
+}

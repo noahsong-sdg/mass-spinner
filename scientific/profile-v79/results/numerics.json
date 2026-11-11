@@ -1,0 +1,388 @@
+{
+  "rows": [
+    {
+      "beta": 3,
+      "refinement": 1,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.004446939830228067,
+        "branchCurrentRelative": 0.005404957940286304,
+        "electrodePowerRelative": 0.0054049579417567275,
+        "joulePowerRelative": 0.004156525065134347,
+        "viscousPowerRelative": 0.009246054114153853
+      },
+      "independentLocalMomentumResidualRelative": 5.653827685856918e-10
+    },
+    {
+      "beta": 3,
+      "refinement": 2,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.0012529060988423438,
+        "branchCurrentRelative": 0.0015045353010148374,
+        "electrodePowerRelative": 0.0015045352970596592,
+        "joulePowerRelative": 0.0011974472754785828,
+        "viscousPowerRelative": 0.0024993353703724685
+      },
+      "independentLocalMomentumResidualRelative": 3.139311531885161e-09,
+      "refinementChange": {
+        "maximumPointwiseChordRelative": 0.08025874654561439,
+        "sigmaRelative": 0.07871586222747669,
+        "electrodePowerWRelative": 6.058709570098269e-12,
+        "jouleWRelative": 0.01232187474167966,
+        "viscousWRelative": 0.039916247018862094
+      }
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.0003344736345643101,
+        "branchCurrentRelative": 0.000399163584615717,
+        "electrodePowerRelative": 0.0003991635945758114,
+        "joulePowerRelative": 0.0003251727262394327,
+        "viscousPowerRelative": 0.0006430444291981222
+      },
+      "independentLocalMomentumResidualRelative": 9.875688286339968e-09,
+      "refinementChange": {
+        "maximumPointwiseChordRelative": 0.012299138732987703,
+        "sigmaRelative": 0.03667542303596974,
+        "electrodePowerWRelative": 3.745028791580919e-12,
+        "jouleWRelative": 0.0040528020799600675,
+        "viscousWRelative": 0.013358419361366608
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 1,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.0055170091060213955,
+        "branchCurrentRelative": 0.006034272451434554,
+        "electrodePowerRelative": 0.00603427245285635,
+        "joulePowerRelative": 0.0047801355683209715,
+        "viscousPowerRelative": 0.010546383975954001
+      },
+      "independentLocalMomentumResidualRelative": 2.3743711672370265e-09
+    },
+    {
+      "beta": 9,
+      "refinement": 2,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.0014566470568111321,
+        "branchCurrentRelative": 0.001591277781376568,
+        "electrodePowerRelative": 0.0015912777752214943,
+        "joulePowerRelative": 0.0012682026377333114,
+        "viscousPowerRelative": 0.0027687802792961983
+      },
+      "independentLocalMomentumResidualRelative": 9.57317170675075e-09,
+      "refinementChange": {
+        "maximumPointwiseChordRelative": 0.061704551561757096,
+        "sigmaRelative": 0.04729772942322108,
+        "electrodePowerWRelative": 1.1531532485792711e-11,
+        "jouleWRelative": 0.0027980511675927506,
+        "viscousWRelative": 0.010197974323487949
+      }
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "sameSigma": {
+        "maximumPointwiseChordRelative": 0.00037445240517625404,
+        "branchCurrentRelative": 0.00040932416059980383,
+        "electrodePowerRelative": 0.00040932416071550885,
+        "joulePowerRelative": 0.0003284555278503328,
+        "viscousPowerRelative": 0.0007052808818426325
+      },
+      "independentLocalMomentumResidualRelative": 7.36001490251931e-08,
+      "refinementChange": {
+        "maximumPointwiseChordRelative": 0.01770698131261669,
+        "sigmaRelative": 0.023333762954027115,
+        "electrodePowerWRelative": 6.056374381090849e-12,
+        "jouleWRelative": 0.0008854807273987785,
+        "viscousWRelative": 0.003240613280044426
+      }
+    }
+  ],
+  "gates": [
+    {
+      "beta": 3,
+      "refinement": 1,
+      "metric": "independent/global ledgers",
+      "value": 2.7708851762625825e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 2,
+      "metric": "independent/global ledgers",
+      "value": 1.1435488214047219e-10,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "metric": "independent/global ledgers",
+      "value": 1.43865009110923e-10,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "sameSigma/maximumPointwiseChordRelative",
+      "value": 0.0003344736345643101,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "sameSigma/branchCurrentRelative",
+      "value": 0.000399163584615717,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "sameSigma/electrodePowerRelative",
+      "value": 0.0003991635945758114,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "sameSigma/joulePowerRelative",
+      "value": 0.0003251727262394327,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "sameSigma/viscousPowerRelative",
+      "value": 0.0006430444291981222,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "refinementChange/maximumPointwiseChordRelative",
+      "value": 0.012299138732987703,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "refinementChange/sigmaRelative",
+      "value": 0.03667542303596974,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "refinementChange/electrodePowerWRelative",
+      "value": 3.745028791580919e-12,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "refinementChange/jouleWRelative",
+      "value": 0.0040528020799600675,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "metric": "refinementChange/viscousWRelative",
+      "value": 0.013358419361366608,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 1,
+      "metric": "independent/global ledgers",
+      "value": 2.136493289452154e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 2,
+      "metric": "independent/global ledgers",
+      "value": 2.824568183176309e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "metric": "independent/global ledgers",
+      "value": 5.3134054293365856e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "sameSigma/maximumPointwiseChordRelative",
+      "value": 0.00037445240517625404,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "sameSigma/branchCurrentRelative",
+      "value": 0.00040932416059980383,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "sameSigma/electrodePowerRelative",
+      "value": 0.00040932416071550885,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "sameSigma/joulePowerRelative",
+      "value": 0.0003284555278503328,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "sameSigma/viscousPowerRelative",
+      "value": 0.0007052808818426325,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "refinementChange/maximumPointwiseChordRelative",
+      "value": 0.01770698131261669,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "refinementChange/sigmaRelative",
+      "value": 0.023333762954027115,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "refinementChange/electrodePowerWRelative",
+      "value": 6.056374381090849e-12,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "refinementChange/jouleWRelative",
+      "value": 0.0008854807273987785,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "metric": "refinementChange/viscousWRelative",
+      "value": 0.003240613280044426,
+      "limit": 0.05,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 2.6011548470705746e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 2.8018121156494334e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 9.666223377271997e-13,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 1.680433570072637e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 7.960778702940893e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "metric": "ledger/calibration maximum",
+      "value": 1.6819114989650413e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "metric": "ledger/calibration maximum",
+      "value": 7.745626362464857e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "metric": "ledger/calibration maximum",
+      "value": 2.1854873466520534e-12,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "metric": "ledger/calibration maximum",
+      "value": 1.0206976543435125e-11,
+      "limit": 1e-08,
+      "pass": true
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "metric": "ledger/calibration maximum",
+      "value": 2.90333446173463e-11,
+      "limit": 1e-08,
+      "pass": true
+    }
+  ],
+  "numericalPass": true,
+  "experimentalQualification": false,
+  "targetsRead": false,
+  "predictionSHA256": "1a1e7e54974ed7e7e28be655e911b17d3cdd7bc55107b34474148702858ef128"
+}

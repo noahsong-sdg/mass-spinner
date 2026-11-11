@@ -1,0 +1,80 @@
+{
+  "sourceSHA256": {
+    "scientific/profile-v79/PROTOCOL.md": "db254fb67778e2244121b80433323868b30825f2e2ed39a066a55f4fedb63508",
+    "scientific/profile-v79/audit_numerics.py": "a0a2aa1283c385ce8e787598102b8b3efb7f6ec8068043a8438e8efd49eea1e9",
+    "scientific/profile-v79/digitization-independent.json": "8bc1cf5f11e4c4a2b15ff2f31129d0b158a75b99b8daa90bdc994d804997de17",
+    "scientific/profile-v79/manifest.json": "932fe4b10b1c3e225dd27e09ecb92c62fd994b3546d9a823b30f0f6fea28bd38",
+    "scientific/profile-v79/reference.py": "aa36ef1c423e6bd1044abea7b20f0337d367c8da8eeb3718f6a55b4f0fcf1481",
+    "scientific/profile-v79/score.py": "60563c745aa136faafbb6343e776d003ff71b14f24c1bb5a322d9e200c7d85ad",
+    "scientific/profile-v79/solver.py": "4bf027b1704987ac6bb2563a1c57ae6a1d1e46f6d961c081525d6d0a019221bc",
+    "scientific/profile-v79/study.py": "c9f7961cc68865d7ab8fdcd3269c6a6b89d72a492f0ef1c1f97898574f06402d",
+    "scientific/profile-v79/test_reference.py": "e3876b9764e9708e055aabe8ec9db6eb06277da0e1018130bcd9e0019fda57b9",
+    "scientific/profile-v79/test_score.py": "bab73f99b3a23f0f0508fa79649d32515846a4e6c8fd285ad95942601b64a9a5",
+    "scientific/profile-v79/test_solver.py": "4ccabc1e27505e87e44e214e3f66386ff291232e7853d66e786078823f8fe4b1"
+  },
+  "commands": [
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/profile-v79",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/profile-v79/audit_numerics.py",
+        "/work/project/scientific/profile-v79/results/predictions.json",
+        "/work/project/scientific/profile-v79/results/numerics.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/profile-v79/score.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "packages": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "PyMuPDF": "1.26.7",
+    "matplotlib": "3.10.8"
+  },
+  "predictionSHA256": "1a1e7e54974ed7e7e28be655e911b17d3cdd7bc55107b34474148702858ef128",
+  "importedSnapshotSHA256": "e4a80b450ea169416986dda8cf3cbb6c15027d8fdbb0d2837c00a789e3bc6d7a",
+  "importedSnapshotFileCount": 1691
+}
