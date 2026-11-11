@@ -14,7 +14,11 @@ function edges(e:readonly number[],radial:boolean){
 }
 
 /** Own a copied, fixed conductance problem; only rotation varies between solves. */
-export function createFuelCurrentSolver(input:FuelCurrentSetup){
+export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance=1e-11){
+ // Research callers may tighten the global residual to resolve weak local
+ // torques. Retain the established default and never weaken its acceptance.
+ if(!Number.isFinite(relativeTolerance)||relativeTolerance<4*Number.EPSILON||relativeTolerance>1e-11)
+  throw new RangeError('Current relative tolerance must be between 4 epsilon and 1e-11.');
  const c=structuredClone(input);
  edges(c.radialEdgesM,true);edges(c.axialEdgesM,false);
  const nr=c.radialEdgesM.length-1,nz=c.axialEdgesM.length-1,n=nr*nz,r=c.radialEdgesM,z=c.axialEdgesM;
@@ -74,7 +78,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup){
   if(!Number.isFinite(emfs[i]))throw new RangeError('Current geometry exceeds the finite resistance domain.');
   rhs[e.a]-=g*emfs[i];if(e.b===null)rhs[e.a]+=g*e.voltage;else rhs[e.b]+=g*emfs[i];}
  // Reuse IC(0), retaining the original true residual and physical face ledgers.
- const scale=Math.hypot(...rhs),tolerance=1e-11*scale;
+ const scale=Math.hypot(...rhs),tolerance=relativeTolerance*scale;
  // A previous solution is only an initial guess; reconstruct its residual
  // against the new RHS. Zero forcing has the exact grounded zero solution.
  const priorResidual=previousPotential?apply(previousPotential).map((v,i)=>rhs[i]-v):undefined;
@@ -90,7 +94,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup){
   direction=pre.map((v,i)=>v+beta*direction[i]);
  }
  const trueResidual=apply(potentialV).map((v,i)=>v-rhs[i]);
- if(potentialV.some(v=>!Number.isFinite(v))||Math.hypot(...trueResidual)>2e-10*scale)throw new RangeError('Current solve did not converge; refine or improve the electrical conditioning.');
+ if(potentialV.some(v=>!Number.isFinite(v))||Math.hypot(...trueResidual)>20*relativeTolerance*scale)throw new RangeError('Current solve did not converge; refine or improve the electrical conditioning.');
  const torqueNm=Array<number>(n).fill(0),jouleByCellW=Array<number>(n).fill(0),cellCurrentResidualA=Array<number>(n).fill(0),boundaryCurrentsA:number[]=[];
  let electrodePowerW=0,mechanicalW=0,jouleW=0;
  for(let i=0;i<links.length;i++){const e=links[i],current=(potentialV[e.a]-(e.b===null?e.voltage:potentialV[e.b])+emfs[i])/e.resistance;
