@@ -1,0 +1,104 @@
+import copy
+import json
+import math
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+
+from brightness import OPERATORS, challenge, load_markers, projection
+
+MARKERS = Path(__file__).resolve().parents[1]/'experimental-v64/data/markers-corrected.json'
+
+
+class BrightnessTests(unittest.TestCase):
+    def test_rigid_rotation_arbitrary_signed_chords(self):
+        for operator in OPERATORS:
+            for b in [-.0599, -.02, 0, .02, .0599]:
+                self.assertAlmostEqual(projection(b, .06, lambda r: 2345, operator)['centroidMS'], b*2345)
+
+    def test_brightness_is_projected_not_local(self):
+        for b in [0, .02, .0599]:
+            flat = projection(b, .06, lambda r: 1, OPERATORS[1])
+            uniform = projection(b, .06, lambda r: 1, OPERATORS[0])
+            self.assertAlmostEqual(flat['brightness'], math.pi)
+            self.assertAlmostEqual(uniform['brightness'], 2*math.sqrt(.06**2-b*b))
+        # A sheared flow exposes the error that rigid rotation cannot detect.
+        flat = projection(.02, .06, lambda r: r*r, OPERATORS[1])['centroidMS']
+        uniform = projection(.02, .06, lambda r: r*r, OPERATORS[0])['centroidMS']
+        self.assertAlmostEqual(flat, .02*(.02**2+(.06**2-.02**2)/2), places=12)
+        self.assertAlmostEqual(uniform, .02*(.02**2+(.06**2-.02**2)/3), places=11)
+        self.assertNotAlmostEqual(flat, uniform, places=8)
+
+    def test_absent_chords_and_domain(self):
+        for operator in OPERATORS:
+            for b in [-.07, -.06, .06, .07]:
+                self.assertIsNone(projection(b, .06, lambda r: 1, operator))
+        for b, radius, operator, count in [(math.nan, .06, OPERATORS[0], 32),
+                                           (0, 0, OPERATORS[0], 32),
+                                           (0, .06, 'unknown', 32),
+                                           (0, .06, OPERATORS[0], True),
+                                           (0, .06, OPERATORS[0], 0)]:
+            with self.assertRaises(ValueError):
+                projection(b, radius, lambda r: 1, operator, count)
+        with self.assertRaises(ValueError):
+            projection(0, .06, lambda r: math.inf, OPERATORS[0])
+
+    def test_stale_marker_extraction_rejected(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder)/'markers.json'
+            path.write_bytes(MARKERS.read_bytes()+b' ')
+            with self.assertRaisesRegex(ValueError, 'stale'):
+                load_markers(path)
+        self.assertEqual(len(load_markers(MARKERS)['profile']), 8)
+
+    def test_split_no_holdout_fit_leakage(self):
+        markers = load_markers(MARKERS)
+        changed = copy.deepcopy(markers)
+        for p in changed['profile']:
+            if p['rCm'] > 3:
+                p['vMS'] *= 1.5
+        for operator in OPERATORS:
+            original = challenge(markers, operator)
+            altered = challenge(changed, operator)
+            self.assertEqual(original['fitScalePerS'], altered['fitScalePerS'])
+            self.assertEqual([p['split'] for p in original['points']], ['train']*3+['test']*5)
+            self.assertFalse(original['matchedExperimentalValidation'])
+            self.assertFalse(original['uncertaintyQualified'])
+
+    def test_uniform_local_retains_previous_failure(self):
+        result = challenge(load_markers(MARKERS), OPERATORS[0])
+        self.assertAlmostEqual(result['heldoutRmsOverPeak'], .3998, delta=.0001)
+        self.assertFalse(result['everyHeldoutWithin20Percent'])
+
+    def test_independent_checker_accepts_report_rejects_corruption(self):
+        from independent_check import check
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)/'report.json'
+            subprocess.run([sys.executable, str(Path(__file__).with_name('run_report.py')),
+                            str(MARKERS), str(output)], check=True, capture_output=True)
+            self.assertTrue(check(MARKERS, output)['independentCheckPassed'])
+            original = json.loads(output.read_text())
+            mutants = []
+            for field in ['matchedExperimentalValidation', 'uncertaintyQualified', 'liveChanged']:
+                changed = copy.deepcopy(original)
+                changed[field] = True
+                mutants.append(changed)
+            changed = copy.deepcopy(original)
+            changed['results'][-1]['points'][-1]['predictedMS'] *= 1.01
+            mutants.append(changed)
+            changed = copy.deepcopy(original)
+            changed['results'][-1]['quadratureCount'] = 4096
+            mutants.append(changed)
+            changed = copy.deepcopy(original)
+            changed['sourcesSHA256']['scientific/diagnostic-v72/brightness.py'] = '0'*64
+            mutants.append(changed)
+            for changed in mutants:
+                output.write_text(json.dumps(changed))
+                with self.assertRaises(ValueError):
+                    check(MARKERS, output)
+
+
+if __name__ == '__main__':
+    unittest.main()

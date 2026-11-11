@@ -10,11 +10,12 @@ Explore rotating ions, plasma centrifuges, beam–target neutron production, and
 
 Useful for learning mechanisms and exploring tradeoffs. **Not a calibrated Marathon Fusion machine or a qualified predictor of enrichment, throughput, or operating performance.** Hardware geometry is illustrative; outputs depend on each model's stated assumptions.
 
-The research backend includes spatial species, momentum, electrical, and thermal calculations. Selected conservation and numerical-refinement studies pass, but experimental validation remains incomplete. In the latest historical-argon comparison, worst nominal held-out speed error is 18.4%; a simpler comparator achieves 5.9%. Radial-profile and pressure-response failures remain. These research results do not qualify the live defaults, which were unchanged by those studies.
+The research backend includes spatial species, momentum, electrical, and thermal calculations. Selected conservation and numerical-refinement studies pass, but experimental validation remains incomplete. In a historical-argon field-scaling comparison, worst nominal held-out speed error is 18.4%; a simpler comparator achieves 5.9%. Radial-profile and pressure-response failures remain. These research results do not qualify the live defaults, which were unchanged by those studies.
 
 - [Experimental accuracy and remaining barriers](docs/FIRST-ORDER-ACCURACY-V70.md)
 - [Thermal refinement and independent checks](docs/LOCAL-THERMAL-REFINEMENT-V69.md)
 - [Optical diagnostic research](docs/DIAGNOSTIC-V71.md)
+- [Experimental profile and brightness sensitivity](docs/EXPERIMENTAL-DIAGNOSTICS-V72.md)
 - [Development history](docs/README-HISTORY.md)
 
 ## Development

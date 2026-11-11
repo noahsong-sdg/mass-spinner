@@ -1,0 +1,59 @@
+{
+  "independentCheckPassed": true,
+  "scipyVersion": "1.17.1",
+  "markerSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "numericalGate": 1e-06,
+  "refinement": [
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 32,
+      "fixedFitProjectionErrorOverObservedPeak": 5.859053664727396e-05,
+      "independentRefitErrorOverObservedPeak": 1.5639949144288468e-05
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 128,
+      "fixedFitProjectionErrorOverObservedPeak": 3.662091407359691e-06,
+      "independentRefitErrorOverObservedPeak": 9.774345153026945e-07
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 512,
+      "fixedFitProjectionErrorOverObservedPeak": 2.2888142715293101e-07,
+      "independentRefitErrorOverObservedPeak": 6.1089413835416e-08
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 2048,
+      "fixedFitProjectionErrorOverObservedPeak": 1.4305091951527771e-08,
+      "independentRefitErrorOverObservedPeak": 3.818087414263915e-09
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 32,
+      "fixedFitProjectionErrorOverObservedPeak": 2.8294532990322898e-11,
+      "independentRefitErrorOverObservedPeak": 2.279986384963803e-11
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 128,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 512,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 2048,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    }
+  ],
+  "matchedExperimentalValidation": false,
+  "uncertaintyQualified": false,
+  "caveat": "Conditional centroid sensitivity only; source intensity and historical estimator are not reconstructed"
+}

@@ -1,0 +1,143 @@
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', '-m', 'unittest', 'discover', '-s', 'scientific/diagnostic-v72', '-p', 'test_*.py', '-v']
+test_absent_chords_and_domain (test_brightness.BrightnessTests.test_absent_chords_and_domain) ... ok
+test_brightness_is_projected_not_local (test_brightness.BrightnessTests.test_brightness_is_projected_not_local) ... ok
+test_independent_checker_accepts_report_rejects_corruption (test_brightness.BrightnessTests.test_independent_checker_accepts_report_rejects_corruption) ... ok
+test_rigid_rotation_arbitrary_signed_chords (test_brightness.BrightnessTests.test_rigid_rotation_arbitrary_signed_chords) ... ok
+test_split_no_holdout_fit_leakage (test_brightness.BrightnessTests.test_split_no_holdout_fit_leakage) ... ok
+test_stale_marker_extraction_rejected (test_brightness.BrightnessTests.test_stale_marker_extraction_rejected) ... ok
+test_uniform_local_retains_previous_failure (test_brightness.BrightnessTests.test_uniform_local_retains_previous_failure) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.426s
+
+OK
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', '-m', 'unittest', 'discover', '-s', 'scientific/diagnostic-v71', '-p', 'test_*.py', '-v']
+test_annular_hole_path_and_signed_symmetry (test_chord.ChordTests.test_annular_hole_path_and_signed_symmetry) ... ok
+test_central_chord_has_no_pure_rotation_broadening (test_chord.ChordTests.test_central_chord_has_no_pure_rotation_broadening) ... ok
+test_emissivity_scaling_preserves_normalized_moments (test_chord.ChordTests.test_emissivity_scaling_preserves_normalized_moments) ... ok
+test_emitter_mass_scales_thermal_width_not_temperature (test_chord.ChordTests.test_emitter_mass_scales_thermal_width_not_temperature) ... ok
+test_instrument_variance_and_bulk_boost (test_chord.ChordTests.test_instrument_variance_and_bulk_boost) ... ok
+test_invalid_physical_inputs (test_chord.ChordTests.test_invalid_physical_inputs) ... ok
+test_joint_profile_refinement_against_independent_quadrature (test_chord.ChordTests.test_joint_profile_refinement_against_independent_quadrature) ... ok
+test_nonemitting_and_tangent_chords_are_unavailable (test_chord.ChordTests.test_nonemitting_and_tangent_chords_are_unavailable) ... ok
+test_rigid_rotation_arbitrary_emissivity_has_no_shear (test_chord.ChordTests.test_rigid_rotation_arbitrary_emissivity_has_no_shear) ... ok
+test_shear_is_not_local_temperature (test_chord.ChordTests.test_shear_is_not_local_temperature) ... ok
+test_thin_annulus_retains_positive_brightness (test_chord.ChordTests.test_thin_annulus_retains_positive_brightness) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.131s
+
+OK
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', 'scientific/diagnostic-v72/run_report.py', 'scientific/experimental-v64/data/markers-corrected.json', 'scientific/diagnostic-v72/accepted/report.json']
+uniform-local-emissivity RMS/peak 0.3998079850431323 maximum individual error 0.6260613582114822 every holdout passes False
+flat-projected-brightness RMS/peak 0.3885258016915548 maximum individual error 0.612509436115356 every holdout passes False
+
+COMMAND ['/work/home/diagnostic-v72-venv/bin/python', 'scientific/diagnostic-v72/independent_check.py', 'scientific/experimental-v64/data/markers-corrected.json', 'scientific/diagnostic-v72/accepted/report.json']
+{
+  "independentCheckPassed": true,
+  "scipyVersion": "1.17.1",
+  "markerSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "numericalGate": 1e-06,
+  "refinement": [
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 32,
+      "fixedFitProjectionErrorOverObservedPeak": 5.859053664727396e-05,
+      "independentRefitErrorOverObservedPeak": 1.5639949144288468e-05
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 128,
+      "fixedFitProjectionErrorOverObservedPeak": 3.662091407359691e-06,
+      "independentRefitErrorOverObservedPeak": 9.774345153026945e-07
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 512,
+      "fixedFitProjectionErrorOverObservedPeak": 2.2888142715293101e-07,
+      "independentRefitErrorOverObservedPeak": 6.1089413835416e-08
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 2048,
+      "fixedFitProjectionErrorOverObservedPeak": 1.4305091951527771e-08,
+      "independentRefitErrorOverObservedPeak": 3.818087414263915e-09
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 32,
+      "fixedFitProjectionErrorOverObservedPeak": 2.8294532990322898e-11,
+      "independentRefitErrorOverObservedPeak": 2.279986384963803e-11
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 128,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 512,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 2048,
+      "fixedFitProjectionErrorOverObservedPeak": 1.5248514190150523e-16,
+      "independentRefitErrorOverObservedPeak": 1.2779154076399635e-16
+    }
+  ],
+  "matchedExperimentalValidation": false,
+  "uncertaintyQualified": false,
+  "caveat": "Conditional centroid sensitivity only; source intensity and historical estimator are not reconstructed"
+}
+
+COMMAND ['npm', 'run', 'typecheck']
+
+> typecheck
+> tsc --noEmit
+
+
+COMMAND ['npm', 'run', 'build']
+
+> build
+> node scripts/build.mjs
+
+vite v8.3.6 building client environment for production...
+transforming...
+✓ 146 modules transformed.
+rendering chunks...
+computing gzip size...
+release/index.html                                      36.49 kB │ gzip:  11.79 kB
+release/assets/worker-CmpBVYPV.js                      163.66 kB
+release/assets/index-DXW746fK.css                       69.47 kB │ gzip:  13.79 kB
+release/assets/engineering-geometry-C4NlIRBo.js         11.73 kB │ gzip:   5.18 kB
+release/assets/fuel-centrifuge-geometry-CEcsxNED.js     21.57 kB │ gzip:   8.97 kB
+release/assets/apparatus-viewer-djwhzNGx.js            372.98 kB │ gzip:  92.25 kB
+release/assets/index-ZJmfEZ4b.js                     1,435.58 kB │ gzip: 425.00 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 317ms
+
+COMMAND ['npm', 'run', 'check:site']
+
+> check:site
+> node scripts/check-site.mjs
+
+Built modules parse; HTML resources, physics worker and deployment assets exist. Not a browser runtime check.
+
+COMMAND ['npm', 'run', 'check:assets']
+
+> check:assets
+> python3 blender/check_assets.py
+
+GLB v2: 176 meshes; PNG 1600×1000; Blender scene present
+Authored centrifuge: nine SI modules, 261 selectable hardware meshes, no studio objects
+

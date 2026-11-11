@@ -1,0 +1,43 @@
+"""Write a new v72 report, never overwrite earlier evidence. Run in safe-dev."""
+import hashlib
+import json
+from pathlib import Path
+import platform
+import sys
+
+from brightness import OPERATORS, challenge, load_markers
+
+
+def main():
+    markers_path, output = map(Path, sys.argv[1:])
+    markers_path = markers_path.resolve()
+    markers = load_markers(markers_path)
+    here = Path(__file__).resolve().parent
+    sources = [here/'brightness.py', here/'run_report.py', here/'test_brightness.py',
+               here/'PROTOCOL.md', here/'independent_check.py', markers_path]
+    results = [challenge(markers, operator, count)
+               for operator in OPERATORS for count in [32, 128, 512, 2048]]
+    report = {'schemaVersion': 1, 'pythonVersion': platform.python_version(),
+              'matchedExperimentalValidation': False, 'liveChanged': False,
+              'uncertaintyQualified': False,
+              'scope': 'Source-motivated ideal brightness sensitivity of a frozen conditional profile challenge',
+              'primaryQualitativeSource': 'https://www.degruyterbrill.com/document/doi/10.1515/zna-1980-0815/pdf',
+              'primaryFigureDigitizedInThisStage': False,
+              'sourcesSHA256': {str(p.relative_to(here.parent.parent)): hashlib.sha256(p.read_bytes()).hexdigest()
+                                for p in sources},
+              'results': results,
+              'notIncluded': ['Measured emissivity reconstruction', 'Actual Fabry-Perot fit estimator',
+                              'Extraction and reproducibility sensitivity rerun',
+                              'Predictive current, thermal, separation or Marathon performance validation']}
+    with output.open('x') as stream:
+        json.dump(report, stream, indent=2, allow_nan=False)
+        stream.write('\n')
+    for r in results:
+        if r['quadratureCount'] == 2048:
+            print(r['operator'], 'RMS/peak', r['heldoutRmsOverPeak'],
+                  'maximum individual error', r['maximumHeldoutRelativeError'],
+                  'every holdout passes', r['everyHeldoutWithin20Percent'])
+
+
+if __name__ == '__main__':
+    main()

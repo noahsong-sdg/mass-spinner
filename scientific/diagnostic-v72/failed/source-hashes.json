@@ -1,0 +1,8 @@
+{
+  "scientific/diagnostic-v72/brightness.py": "70d5ae3c2ee4e707bd95219826ee60e271a2ec1fffe623d2dc9243c89994f2d1",
+  "scientific/diagnostic-v72/run_report.py": "18019ec111c8839f8b78fbdf0f0166874ade89d0f574389fb42a0800abd4f3d0",
+  "scientific/diagnostic-v72/test_brightness.py": "68e69c6b00667198ea8e81458f34dfb8443b408e1fe217b21a6d81a6a3be9a76",
+  "scientific/diagnostic-v72/independent_check.py": "30864318c07588cdb5f3cae3ab48bf151faa114becc78e0bfa29dda281e3c2c9",
+  "scientific/diagnostic-v72/PROTOCOL.md": "2e209dada04316d93829244e4fc74caf813a64ad30c050a0615da01ec3b80a0b",
+  "scientific/experimental-v64/data/markers-corrected.json": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33"
+}

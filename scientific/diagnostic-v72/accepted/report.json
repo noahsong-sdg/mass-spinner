@@ -1,0 +1,1210 @@
+{
+  "schemaVersion": 1,
+  "pythonVersion": "3.11.2",
+  "matchedExperimentalValidation": false,
+  "liveChanged": false,
+  "uncertaintyQualified": false,
+  "scope": "Source-motivated ideal brightness sensitivity of a frozen conditional profile challenge",
+  "primaryQualitativeSource": "https://www.degruyterbrill.com/document/doi/10.1515/zna-1980-0815/pdf",
+  "primaryFigureDigitizedInThisStage": false,
+  "sourcesSHA256": {
+    "scientific/diagnostic-v72/brightness.py": "70d5ae3c2ee4e707bd95219826ee60e271a2ec1fffe623d2dc9243c89994f2d1",
+    "scientific/diagnostic-v72/run_report.py": "373881e626942c6a9ed6ca5323ec59f200a3ea63230fc799b13463a9df3bec30",
+    "scientific/diagnostic-v72/test_brightness.py": "96d4fe4e55ef4e90f30e25e3c13ae923bb07a466cbd7a364c15d4d29451cdb19",
+    "scientific/diagnostic-v72/PROTOCOL.md": "2e209dada04316d93829244e4fc74caf813a64ad30c050a0615da01ec3b80a0b",
+    "scientific/diagnostic-v72/independent_check.py": "30864318c07588cdb5f3cae3ab48bf151faa114becc78e0bfa29dda281e3c2c9",
+    "scientific/experimental-v64/data/markers-corrected.json": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33"
+  },
+  "results": [
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 32,
+      "fitScalePerS": 56354.64903046279,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.007058445497861392,
+          "predictedMS": 397.77621873262893,
+          "residualMS": 87.01623762864813,
+          "relativeError": 0.28001107903122296
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.01082254814207804,
+          "predictedMS": 609.900902162095,
+          "residualMS": 69.0771410829592,
+          "relativeError": 0.1277257880554762
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.011534729836945984,
+          "predictedMS": 650.0356516222981,
+          "residualMS": -118.05998708841639,
+          "relativeError": 0.15370480072844284
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.010909362835717112,
+          "predictedMS": 614.7933137528121,
+          "residualMS": -258.58832303431495,
+          "relativeError": 0.29607712383966894
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.009753494927373716,
+          "predictedMS": 549.6547834525448,
+          "residualMS": -339.97247232623397,
+          "relativeError": 0.3821515922740276
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.008051454872197047,
+          "predictedMS": 453.7369135072742,
+          "residualMS": -385.3362691140032,
+          "relativeError": 0.45924035840378885
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.00579944875745862,
+          "predictedMS": 326.825899296734,
+          "residualMS": -464.4637791296063,
+          "relativeError": 0.5869706022872664
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.003105503285114956,
+          "predictedMS": 175.00954769560255,
+          "residualMS": -292.98565234908096,
+          "relativeError": 0.6260441396003786
+        }
+      ],
+      "heldoutRmsOverPeak": 0.39979497662102914,
+      "maximumHeldoutRelativeError": 0.6260441396003786,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 128,
+      "fitScalePerS": 56358.24423492638,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.007058079260180811,
+          "predictedMS": 397.78095477473863,
+          "residualMS": 87.02097367075783,
+          "relativeError": 0.28002631922429055
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.010821882718687193,
+          "predictedMS": 609.9023093415019,
+          "residualMS": 69.0785482623661,
+          "relativeError": 0.1277283899740829
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.011533885562243907,
+          "predictedMS": 650.0295394946332,
+          "residualMS": -118.06609921608128,
+          "relativeError": 0.15371275823706135
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0109084957191496,
+          "predictedMS": 614.783665975482,
+          "residualMS": -258.59797081164504,
+          "relativeError": 0.2960881703019756
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.009752657927295239,
+          "predictedMS": 549.642677406196,
+          "residualMS": -339.98457837258286,
+          "relativeError": 0.38216520027251266
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.008050709802869264,
+          "predictedMS": 453.72386933462195,
+          "residualMS": -385.34931328665544,
+          "relativeError": 0.4592559043334198
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005798870680089887,
+          "predictedMS": 326.81417007525954,
+          "residualMS": -464.47550835108075,
+          "relativeError": 0.5869854252045801
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0031051711002407596,
+          "predictedMS": 175.0019912586038,
+          "residualMS": -292.9932087860798,
+          "relativeError": 0.6260602859988845
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3998071750379949,
+      "maximumHeldoutRelativeError": 0.6260602859988845,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 512,
+      "fitScalePerS": 56358.468954027354,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.007058056369300353,
+          "predictedMS": 397.781250764989,
+          "residualMS": 87.0212696610082,
+          "relativeError": 0.2800272716965147
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.010821841128687839,
+          "predictedMS": 609.9023972765699,
+          "residualMS": 69.0786361974341,
+          "relativeError": 0.12772855256876592
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.011533832795172,
+          "predictedMS": 650.0291575076437,
+          "residualMS": -118.0664812030708,
+          "relativeError": 0.15371325555402326
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.010908441525162073,
+          "predictedMS": 614.7830630326695,
+          "residualMS": -258.59857375445756,
+          "relativeError": 0.296088860656326
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.009752605616091951,
+          "predictedMS": 549.641920835391,
+          "residualMS": -339.9853349433878,
+          "relativeError": 0.38216605070824294
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.008050663237483515,
+          "predictedMS": 453.72305412904404,
+          "residualMS": -385.35012849223335,
+          "relativeError": 0.4592568758882195
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005798834551365978,
+          "predictedMS": 326.8134370327006,
+          "residualMS": -464.47624139363967,
+          "relativeError": 0.5869863515942182
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.003105150339127758,
+          "predictedMS": 175.00151898531925,
+          "residualMS": -292.9936810593643,
+          "relativeError": 0.6260612951401845
+        }
+      ],
+      "heldoutRmsOverPeak": 0.39980793739592985,
+      "maximumHeldoutRelativeError": 0.6260612951401845,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "uniform-local-emissivity",
+      "quadratureCount": 2048,
+      "fitScalePerS": 56358.48299904469,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.007058054938616319,
+          "predictedMS": 397.7812692643312,
+          "residualMS": 87.02128816035037,
+          "relativeError": 0.2800273312258727
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.010821838529308826,
+          "predictedMS": 609.9024027724582,
+          "residualMS": 69.07864169332242,
+          "relativeError": 0.12772856273083483
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.011533829497230386,
+          "predictedMS": 650.0291336335389,
+          "residualMS": -118.06650507717563,
+          "relativeError": 0.15371328663622663
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.01090843813804097,
+          "predictedMS": 614.7830253489127,
+          "residualMS": -258.59861143821433,
+          "relativeError": 0.29608890380327935
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.009752602346646832,
+          "predictedMS": 549.6418735499389,
+          "residualMS": -339.98538222883997,
+          "relativeError": 0.38216610386022526
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.00805066032715256,
+          "predictedMS": 453.7230031789111,
+          "residualMS": -385.3501794423663,
+          "relativeError": 0.4592569366101375
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005798832293325077,
+          "predictedMS": 326.8133912176727,
+          "residualMS": -464.4762872086676,
+          "relativeError": 0.5869864094934039
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0031051490415599198,
+          "predictedMS": 175.00148946825465,
+          "residualMS": -292.9937105764289,
+          "relativeError": 0.6260613582114822
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3998079850431323,
+      "maximumHeldoutRelativeError": 0.6260613582114822,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 32,
+      "fitScalePerS": 78199.7478063737,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.005013138207495235,
+          "predictedMS": 392.0261435446237,
+          "residualMS": 81.26616244064292,
+          "relativeError": 0.26150781111500687
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00778285419609243,
+          "predictedMS": 608.6172353482054,
+          "residualMS": 67.79347426906963,
+          "relativeError": 0.1253522480850278
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00839854078369637,
+          "predictedMS": 656.7637712266003,
+          "residualMS": -111.33186748411424,
+          "relativeError": 0.14494531914149406
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007988532516452804,
+          "predictedMS": 624.7012281296252,
+          "residualMS": -248.68040865750186,
+          "relativeError": 0.28473281115952037
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007179287428888673,
+          "predictedMS": 561.4184663685634,
+          "residualMS": -328.20878941021545,
+          "relativeError": 0.36892843297938505
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0059562345540663504,
+          "predictedMS": 465.77604000359736,
+          "residualMS": -373.29714261768004,
+          "relativeError": 0.4448922338948959
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.004311109423699699,
+          "predictedMS": 337.1276696989976,
+          "residualMS": -454.1620087273427,
+          "relativeError": 0.5739516401004336
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0023189809308257073,
+          "predictedMS": 181.34372395836007,
+          "residualMS": -286.65147608632344,
+          "relativeError": 0.6125094361201875
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3885258016973826,
+      "maximumHeldoutRelativeError": 0.6125094361201875,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 128,
+      "fitScalePerS": 78199.74780734879,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.005013138207173346,
+          "predictedMS": 392.0261435243403,
+          "residualMS": 81.26616242035948,
+          "relativeError": 0.2615078110497364
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00778285419609243,
+          "predictedMS": 608.6172353557944,
+          "residualMS": 67.79347427665857,
+          "relativeError": 0.12535224809905998
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00839854078369637,
+          "predictedMS": 656.7637712347895,
+          "residualMS": -111.33186747592504,
+          "relativeError": 0.14494531913083236
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007988532516452802,
+          "predictedMS": 624.7012281374145,
+          "residualMS": -248.6804086497125,
+          "relativeError": 0.28473281115060173
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007179287428888673,
+          "predictedMS": 561.4184663755638,
+          "residualMS": -328.20878940321506,
+          "relativeError": 0.3689284329715162
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005956234554066349,
+          "predictedMS": 465.77604000940505,
+          "residualMS": -373.29714261187235,
+          "relativeError": 0.44489223388797433
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0043111094236997,
+          "predictedMS": 337.1276697032013,
+          "residualMS": -454.16200872313897,
+          "relativeError": 0.5739516400951211
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0023189809308257056,
+          "predictedMS": 181.34372396062113,
+          "residualMS": -286.65147608406244,
+          "relativeError": 0.6125094361153562
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3885258016915548,
+      "maximumHeldoutRelativeError": 0.6125094361153562,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 512,
+      "fitScalePerS": 78199.74780734879,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.005013138207173346,
+          "predictedMS": 392.0261435243403,
+          "residualMS": 81.26616242035948,
+          "relativeError": 0.2615078110497364
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00778285419609243,
+          "predictedMS": 608.6172353557944,
+          "residualMS": 67.79347427665857,
+          "relativeError": 0.12535224809905998
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00839854078369637,
+          "predictedMS": 656.7637712347895,
+          "residualMS": -111.33186747592504,
+          "relativeError": 0.14494531913083236
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007988532516452802,
+          "predictedMS": 624.7012281374145,
+          "residualMS": -248.6804086497125,
+          "relativeError": 0.28473281115060173
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007179287428888673,
+          "predictedMS": 561.4184663755638,
+          "residualMS": -328.20878940321506,
+          "relativeError": 0.3689284329715162
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005956234554066349,
+          "predictedMS": 465.77604000940505,
+          "residualMS": -373.29714261187235,
+          "relativeError": 0.44489223388797433
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.004311109423699699,
+          "predictedMS": 337.12766970320126,
+          "residualMS": -454.162008723139,
+          "relativeError": 0.5739516400951211
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.0023189809308257064,
+          "predictedMS": 181.3437239606212,
+          "residualMS": -286.6514760840623,
+          "relativeError": 0.6125094361153559
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3885258016915548,
+      "maximumHeldoutRelativeError": 0.6125094361153559,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    },
+    {
+      "operator": "flat-projected-brightness",
+      "quadratureCount": 2048,
+      "fitScalePerS": 78199.74780734879,
+      "points": [
+        {
+          "rCm": 1.0034196422849777,
+          "vMS": 310.7599811039808,
+          "vectorRect": [
+            158.08569,
+            153.65338,
+            161.08369,
+            156.6532
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.005013138207173346,
+          "predictedMS": 392.0261435243403,
+          "residualMS": 81.26616242035948,
+          "relativeError": 0.2615078110497364
+        },
+        {
+          "rCm": 1.9915058702903605,
+          "vMS": 540.8237610791358,
+          "vectorRect": [
+            187.3817,
+            132.8938,
+            190.37981,
+            135.89355
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00778285419609243,
+          "predictedMS": 608.6172353557944,
+          "residualMS": 67.79347427665857,
+          "relativeError": 0.12535224809905998
+        },
+        {
+          "rCm": 2.9934092879089893,
+          "vMS": 768.0956387107145,
+          "vectorRect": [
+            217.08749,
+            112.38611,
+            220.08549,
+            115.38586
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "train",
+          "unitScaleProjectedMS": 0.00839854078369637,
+          "predictedMS": 656.7637712347895,
+          "residualMS": -111.33186747592504,
+          "relativeError": 0.14494531913083236
+        },
+        {
+          "rCm": 3.4942091381584044,
+          "vMS": 873.381636787127,
+          "vectorRect": [
+            231.93581,
+            102.88568,
+            234.9339,
+            105.8855
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007988532516452802,
+          "predictedMS": 624.7012281374145,
+          "residualMS": -248.6804086497125,
+          "relativeError": 0.28473281115060173
+        },
+        {
+          "rCm": 3.979505249702353,
+          "vMS": 889.6272557787788,
+          "vectorRect": [
+            246.32449,
+            101.4198,
+            249.3226,
+            104.41956
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.007179287428888673,
+          "predictedMS": 561.4184663755638,
+          "residualMS": -328.20878940321506,
+          "relativeError": 0.3689284329715162
+        },
+        {
+          "rCm": 4.477407561055404,
+          "vMS": 839.0731826212774,
+          "vectorRect": [
+            261.08701,
+            105.98151,
+            264.08499,
+            108.98126
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.005956234554066349,
+          "predictedMS": 465.77604000940505,
+          "residualMS": -373.29714261187235,
+          "relativeError": 0.44489223388797433
+        },
+        {
+          "rCm": 4.989228582125042,
+          "vMS": 791.2896784263403,
+          "vectorRect": [
+            276.26208,
+            110.29321,
+            279.26019,
+            113.29297
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.004311109423699699,
+          "predictedMS": 337.12766970320126,
+          "residualMS": -454.162008723139,
+          "relativeError": 0.5739516400951211
+        },
+        {
+          "rCm": 5.4959626365546566,
+          "vMS": 467.99520004468354,
+          "vectorRect": [
+            291.28641,
+            139.46539,
+            294.28448,
+            142.46521
+          ],
+          "rHalfWidthCm": 0.016863804541759838,
+          "vHalfWidthMS": 5.541137925129031,
+          "split": "test",
+          "unitScaleProjectedMS": 0.002318980930825706,
+          "predictedMS": 181.34372396062116,
+          "residualMS": -286.6514760840624,
+          "relativeError": 0.612509436115356
+        }
+      ],
+      "heldoutRmsOverPeak": 0.3885258016915548,
+      "maximumHeldoutRelativeError": 0.612509436115356,
+      "everyHeldoutWithin20Percent": false,
+      "matchedExperimentalValidation": false,
+      "uncertaintyQualified": false
+    }
+  ],
+  "notIncluded": [
+    "Measured emissivity reconstruction",
+    "Actual Fabry-Perot fit estimator",
+    "Extraction and reproducibility sensitivity rerun",
+    "Predictive current, thermal, separation or Marathon performance validation"
+  ]
+}
