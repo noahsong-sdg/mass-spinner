@@ -1,0 +1,50 @@
+{
+  "artifacts": {
+    "scientific/spatial-v77/checks-01.json": {
+      "sha256": "1e88ea376b1452c350dd1bff6bda3eb5f57b42fc9cf5ca33da77c37984dcc8cd",
+      "bytes": 15515
+    },
+    "scientific/spatial-v77/convergence-01.json": {
+      "sha256": "15ab4561794ab4a3d68cc37f5c93d3084db9a599c715f073aecfc60638396aaa",
+      "bytes": 172465
+    },
+    "scientific/spatial-v77/frozen-source-01.tar.gz": {
+      "sha256": "18706f7bdd43a1142e652c6ea7807be35a2b9f578cbf16852ea71840b8f9a329",
+      "bytes": 9532
+    },
+    "scientific/spatial-v77/plan-01.json": {
+      "sha256": "3eb35ecaeb3da095e43b48cbacfd8165f4b33588de6941a4017a0e97cd2f8c5e",
+      "bytes": 6608
+    },
+    "scientific/spatial-v77/study-01.json": {
+      "sha256": "5379ce3ee8f242da9e9c2483e567c789d962be2768faedbdfb9ee62346cf1f3e",
+      "bytes": 18405324
+    },
+    "scientific/spatial-v77/study-01.json.gz": {
+      "sha256": "73dc2463f0c538cae6758cf51cc79085593a9762fb1d9fd5f4f30ac730ab5fed",
+      "bytes": 3930190
+    },
+    "scientific/spatial-v77/study.py": {
+      "sha256": "625f29dedf5766ceb23f076fa4c0d2f6acf794965292b6e2ed7f10f9f19dc77d",
+      "bytes": 13847
+    },
+    "scientific/spatial-v77/summary-01.json": {
+      "sha256": "d9dce04b96d19bb449fe0bc083845f112e7ad9d1e9e111aa2a3ef0483562f412",
+      "bytes": 20170
+    },
+    "scientific/spatial-v77/test_study.py": {
+      "sha256": "68554ac6ee34eafa0448bed9bf6a8a99d9c78a6e01eb504fe7a871d8e19b234e",
+      "bytes": 5849
+    },
+    "scientific/spatial-v77/verification-01.png": {
+      "sha256": "08e13a15638e06ff932c10c6818f676611b47602c307c734bb3541bfa7689d2e",
+      "bytes": 266574
+    }
+  },
+  "snapshotSha256": "53d63424c15f1090f64e2963d0715542d69b8c6f208790e5e0c67554b4170c72",
+  "baseSourceArchiveSha256": "9ed42d01e5888215d778dbb2979bc31efa322c99c5d4d62b6278693dba87f171",
+  "baselineRawSha256": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+  "rawBackupGuestPath": "/work/home/mass-spinner-v77-study01.json",
+  "experimentalQualified": false,
+  "liveQualified": false
+}

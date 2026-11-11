@@ -1,0 +1,5429 @@
+{
+  "cellAverage": {
+    "spatial": [
+      [
+        {
+          "timeS": 1e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 9.652742341324705e-09,
+              "maxAbsolute": 1.0093524872053887e-07,
+              "scale": 3.8055734657236684e-05,
+              "rmsNormalized": 0.0002536475101128849,
+              "maxNormalized": 0.002652300622485684,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.0023327159820081744,
+              "maxAbsolute": 0.017225242332472135,
+              "scale": 1.273989898545267,
+              "rmsNormalized": 0.0018310317724432798,
+              "maxNormalized": 0.013520705581842644,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 3.528466405363682e-10,
+              "maxAbsolute": 1.6116814549604896e-09,
+              "scale": 1.0,
+              "rmsNormalized": 3.528466405363682e-10,
+              "maxNormalized": 1.6116814549604896e-09,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.1661888205851401,
+              "maxAbsolute": 0.412954170915782,
+              "scale": 897.2470207753372,
+              "rmsNormalized": 0.00018522081069885472,
+              "maxNormalized": 0.0004602457978171232,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0008841615534974284,
+              "maxAbsolute": 0.00795984337853202,
+              "scale": 3.8692713029790236,
+              "rmsNormalized": 0.0002285085444426438,
+              "maxNormalized": 0.0020571944315208885,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0005133530723731549,
+              "maxAbsolute": 0.0017752035657390142,
+              "scale": 1.8514913863022688,
+              "rmsNormalized": 0.00027726462902882034,
+              "maxNormalized": 0.0009587965565880304,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 2.0620283333357686e-07,
+              "maxAbsolute": 3.0971647873578867e-06,
+              "scale": 0.05993798479725598,
+              "rmsNormalized": 3.4402697059480887e-06,
+              "maxNormalized": 5.1672821464289165e-05,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 9.652742341326239e-09,
+              "maxAbsolute": 1.0093524872044485e-07,
+              "scale": 3.4890069801850592e-06,
+              "rmsNormalized": 0.002766615944349372,
+              "maxNormalized": 0.028929506101214843,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 2.0620283333495525e-07,
+              "maxAbsolute": 3.097164787413398e-06,
+              "scale": 0.00014731484709040732,
+              "rmsNormalized": 0.0013997423708990329,
+              "maxNormalized": 0.021024118400724833,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 8.43906312048635e-06,
+            "heavyAxialMomentM": 1.614292729295555e-05,
+            "torque_outer": 0.00024524457781231637,
+            "wallPeakK": 4.626092773327006e-10,
+            "currentA": 0.000868846863843003,
+            "radialMotionalJouleW": 0.00046419102515011986,
+            "shearW": 0.0033293539624808344,
+            "torque_upper": 0.010848576522273185,
+            "jouleW": 0.0011172288325487442,
+            "lightRadialMomentM": 1.8264935925580894e-07,
+            "lightAxialMomentM": 3.096889182529735e-05,
+            "torque_lower": 0.0106331752737613,
+            "heavyRadialMomentM": 1.6964435446576544e-07,
+            "meridionalKineticJ": 0.0004337005249593009
+          },
+          "passed": true
+        },
+        {
+          "timeS": 2e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 1.7904093275106457e-08,
+              "maxAbsolute": 1.973688296596967e-07,
+              "scale": 3.514236458227458e-05,
+              "rmsNormalized": 0.0005094732095556566,
+              "maxNormalized": 0.005616264927125802,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.004582710039570812,
+              "maxAbsolute": 0.031527282742445095,
+              "scale": 1.3853952468928128,
+              "rmsNormalized": 0.0033078719230840363,
+              "maxNormalized": 0.022756886753549213,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 2.1842919939180614e-09,
+              "maxAbsolute": 1.052995912687038e-08,
+              "scale": 1.0,
+              "rmsNormalized": 2.1842919939180614e-09,
+              "maxNormalized": 1.052995912687038e-08,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.16584942336565248,
+              "maxAbsolute": 0.41107167933046185,
+              "scale": 896.480629842419,
+              "rmsNormalized": 0.0001850005653717304,
+              "maxNormalized": 0.0004585393879650461,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0019684453044041613,
+              "maxAbsolute": 0.019098333234572135,
+              "scale": 5.523349855469383,
+              "rmsNormalized": 0.0003563861344859314,
+              "maxNormalized": 0.003457744617726941,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0009353030680877109,
+              "maxAbsolute": 0.0034060232778636568,
+              "scale": 2.5768311313312164,
+              "rmsNormalized": 0.0003629663801851556,
+              "maxNormalized": 0.0013217875383646392,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 4.336763268103451e-07,
+              "maxAbsolute": 5.018195364858702e-06,
+              "scale": 0.05987770382263402,
+              "rmsNormalized": 7.242701358337887e-06,
+              "maxNormalized": 8.380741151536614e-05,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 1.7904093275102755e-08,
+              "maxAbsolute": 1.9736882965954423e-07,
+              "scale": 8.970275053165428e-06,
+              "rmsNormalized": 0.0019959358179083664,
+              "maxNormalized": 0.02200253933015095,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 4.3367632681226464e-07,
+              "maxAbsolute": 5.018195364914213e-06,
+              "scale": 0.00033963732305014593,
+              "rmsNormalized": 0.0012768806529199804,
+              "maxNormalized": 0.014775158748301933,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 2.1224142098307953e-07,
+            "heavyAxialMomentM": 1.6142884643138565e-05,
+            "torque_outer": 0.0002840196998168837,
+            "wallPeakK": 1.562186896750221e-09,
+            "currentA": 0.0008688700338134369,
+            "radialMotionalJouleW": 0.0010163042962431223,
+            "shearW": 0.0033176472994949787,
+            "torque_upper": 0.012113188960926296,
+            "jouleW": 0.0011172320138929076,
+            "lightRadialMomentM": 1.9250385503964288e-07,
+            "lightAxialMomentM": 3.09702657122052e-05,
+            "torque_lower": 0.011891333073577707,
+            "heavyRadialMomentM": 1.3645466219879194e-07,
+            "meridionalKineticJ": 0.0009332242649768515
+          },
+          "passed": true
+        },
+        {
+          "timeS": 4e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 3.245139228301766e-08,
+              "maxAbsolute": 3.3227254433478015e-07,
+              "scale": 2.7377621480325297e-05,
+              "rmsNormalized": 0.0011853254785606042,
+              "maxNormalized": 0.012136647611026586,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.009279777059869238,
+              "maxAbsolute": 0.06717038447499135,
+              "scale": 3.8027316376406475,
+              "rmsNormalized": 0.002440292385614344,
+              "maxNormalized": 0.017663719366919694,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 8.839082122292132e-09,
+              "maxAbsolute": 4.293582378522842e-08,
+              "scale": 1.0,
+              "rmsNormalized": 8.839082122292132e-09,
+              "maxNormalized": 4.293582378522842e-08,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.16604361742719928,
+              "maxAbsolute": 0.4352093269667421,
+              "scale": 894.7457775164002,
+              "rmsNormalized": 0.00018557630737090102,
+              "maxNormalized": 0.00048640556670161535,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.005582241778231595,
+              "maxAbsolute": 0.04098399061663255,
+              "scale": 7.843768844444926,
+              "rmsNormalized": 0.0007116785169141008,
+              "maxNormalized": 0.005225038043498441,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0018223988016597993,
+              "maxAbsolute": 0.0063146679348540236,
+              "scale": 3.5733314983660622,
+              "rmsNormalized": 0.0005099999265372125,
+              "maxNormalized": 0.0017671654414770815,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 9.459498533661164e-07,
+              "maxAbsolute": 8.1566374510178e-06,
+              "scale": 0.05975926959574518,
+              "rmsNormalized": 1.582934095020243e-05,
+              "maxNormalized": 0.0001364915854259127,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 3.2451392283014556e-08,
+              "maxAbsolute": 3.322725443346819e-07,
+              "scale": 2.448512485055251e-05,
+              "rmsNormalized": 0.0013253513094617644,
+              "maxNormalized": 0.013570383911160009,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 9.459498533685861e-07,
+              "maxAbsolute": 8.156637451073312e-06,
+              "scale": 0.0008446383866930751,
+              "rmsNormalized": 0.0011199465573334469,
+              "maxNormalized": 0.009656958030297612,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 1.0479953672914157e-05,
+            "heavyAxialMomentM": 1.6112626907596636e-05,
+            "torque_outer": 0.0003341286941082131,
+            "wallPeakK": 5.461368149829743e-09,
+            "currentA": 0.0008689205198996067,
+            "radialMotionalJouleW": 0.0023113572968307596,
+            "shearW": 0.0032947031103725106,
+            "torque_upper": 0.014037780220457208,
+            "jouleW": 0.0011172273466478334,
+            "lightRadialMomentM": 2.8016076664776343e-07,
+            "lightAxialMomentM": 3.100188192601029e-05,
+            "torque_lower": 0.013784303904611696,
+            "heavyRadialMomentM": 5.037855926206492e-08,
+            "meridionalKineticJ": 0.002098520225652738
+          },
+          "passed": true
+        }
+      ],
+      [
+        {
+          "timeS": 1e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 4.130882405418348e-09,
+              "maxAbsolute": 5.4144597115730886e-08,
+              "scale": 3.8055734657236684e-05,
+              "rmsNormalized": 0.00010854822387807506,
+              "maxNormalized": 0.001422771038409969,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.0010169279844312444,
+              "maxAbsolute": 0.008364643726565646,
+              "scale": 1.273989898545267,
+              "rmsNormalized": 0.000798222957334627,
+              "maxNormalized": 0.00656570647547284,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 2.6592176420994635e-09,
+              "maxAbsolute": 1.3482178928825306e-08,
+              "scale": 1.0,
+              "rmsNormalized": 2.6592176420994635e-09,
+              "maxNormalized": 1.3482178928825306e-08,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.06937761993976914,
+              "maxAbsolute": 0.17617043522386666,
+              "scale": 897.2470207753372,
+              "rmsNormalized": 7.732276433731474e-05,
+              "maxNormalized": 0.00019634552263169698,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0004342861031991186,
+              "maxAbsolute": 0.0052727914601492926,
+              "scale": 3.8692713029790236,
+              "rmsNormalized": 0.00011223976536996868,
+              "maxNormalized": 0.0013627350080335986,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.00023653846285676887,
+              "maxAbsolute": 0.0008146269748108281,
+              "scale": 1.8514913863022688,
+              "rmsNormalized": 0.00012775563775599026,
+              "maxNormalized": 0.0004399842099388707,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 2.1446795839602765e-07,
+              "maxAbsolute": 1.3138217157537824e-06,
+              "scale": 0.05993798479725598,
+              "rmsNormalized": 3.5781643163593013e-06,
+              "maxNormalized": 2.1919684490525788e-05,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 4.151814925312767e-09,
+              "maxAbsolute": 5.414601526629508e-08,
+              "scale": 3.4890069801850592e-06,
+              "rmsNormalized": 0.0011899703694753148,
+              "maxNormalized": 0.015519033230315617,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 8.691147747848678e-08,
+              "maxAbsolute": 1.313364763888547e-06,
+              "scale": 0.00014731484709040732,
+              "rmsNormalized": 0.0005899709309350814,
+              "maxNormalized": 0.008915359108933082,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 1.1519591613157918e-06,
+            "heavyAxialMomentM": 6.731016898485104e-06,
+            "torque_outer": 0.0001033833483542816,
+            "wallPeakK": 3.13634696628451e-10,
+            "currentA": 0.0003625556553449908,
+            "radialMotionalJouleW": 0.00019110355018175137,
+            "shearW": 0.001391298168499972,
+            "torque_upper": 0.0045249552265532724,
+            "jouleW": 0.00046668386918333676,
+            "lightRadialMomentM": 7.66503278526813e-08,
+            "lightAxialMomentM": 1.291351411107061e-05,
+            "torque_lower": 0.00443551898087548,
+            "heavyRadialMomentM": 7.111842003217092e-08,
+            "meridionalKineticJ": 0.00017833984519062077
+          },
+          "passed": true
+        },
+        {
+          "timeS": 2e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 7.368200340315607e-09,
+              "maxAbsolute": 9.492549223294282e-08,
+              "scale": 3.514236458227458e-05,
+              "rmsNormalized": 0.00020966717601103162,
+              "maxNormalized": 0.0027011697522716554,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.001917346213325883,
+              "maxAbsolute": 0.014216392550338242,
+              "scale": 1.3853952468928128,
+              "rmsNormalized": 0.001383970543876297,
+              "maxNormalized": 0.010261614930629364,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 8.799636902545947e-09,
+              "maxAbsolute": 4.5861895614507375e-08,
+              "scale": 1.0,
+              "rmsNormalized": 8.799636902545947e-09,
+              "maxNormalized": 4.5861895614507375e-08,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.06922810787782989,
+              "maxAbsolute": 0.17482617086830032,
+              "scale": 896.480629842419,
+              "rmsNormalized": 7.722208999652187e-05,
+              "maxNormalized": 0.00019501388546346038,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0008860827106304474,
+              "maxAbsolute": 0.01106741995662186,
+              "scale": 5.523349855469383,
+              "rmsNormalized": 0.00016042487508790022,
+              "maxNormalized": 0.0020037513911349606,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.000434481577578722,
+              "maxAbsolute": 0.0015302114073585393,
+              "scale": 2.5768311313312164,
+              "rmsNormalized": 0.00016861080739670532,
+              "maxNormalized": 0.0005938345702025173,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 2.696575181171699e-07,
+              "maxAbsolute": 2.1136276271982446e-06,
+              "scale": 0.05987770382263402,
+              "rmsNormalized": 4.503471257280214e-06,
+              "maxNormalized": 3.52990761546084e-05,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 7.390514493850487e-09,
+              "maxAbsolute": 9.49269103835536e-08,
+              "scale": 8.970275053165428e-06,
+              "rmsNormalized": 0.0008238893958154074,
+              "maxNormalized": 0.010582385692850724,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 1.8417835364993355e-07,
+              "maxAbsolute": 2.1131706753330093e-06,
+              "scale": 0.00033963732305014593,
+              "rmsNormalized": 0.0005422794880017954,
+              "maxNormalized": 0.006221844691141347,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 3.291243654257126e-07,
+            "heavyAxialMomentM": 6.7305915577315715e-06,
+            "torque_outer": 0.00011956169238342101,
+            "wallPeakK": 1.0579133428151598e-09,
+            "currentA": 0.0003625652394178713,
+            "radialMotionalJouleW": 0.0004138423583832313,
+            "shearW": 0.0013862877759997134,
+            "torque_upper": 0.0050500146209743945,
+            "jouleW": 0.00046668605851669963,
+            "lightRadialMomentM": 8.178637806126907e-08,
+            "lightAxialMomentM": 1.2914394946044902e-05,
+            "torque_lower": 0.004958804010827376,
+            "heavyRadialMomentM": 5.779627990244411e-08,
+            "meridionalKineticJ": 0.0003791181863731541
+          },
+          "passed": true
+        },
+        {
+          "timeS": 4e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 1.3691020499868301e-08,
+              "maxAbsolute": 1.6199968744246007e-07,
+              "scale": 2.7377621480325297e-05,
+              "rmsNormalized": 0.0005000807140864023,
+              "maxNormalized": 0.005917230156713205,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.0039030073558790302,
+              "maxAbsolute": 0.031856856262777455,
+              "scale": 3.8027316376406475,
+              "rmsNormalized": 0.0010263693912149418,
+              "maxNormalized": 0.008377361144143898,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 3.0076236805129526e-08,
+              "maxAbsolute": 1.5844852896407247e-07,
+              "scale": 1.0,
+              "rmsNormalized": 3.0076236805129526e-08,
+              "maxNormalized": 1.5844852896407247e-07,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.06938798919634073,
+              "maxAbsolute": 0.1892818539589598,
+              "scale": 894.7457775164002,
+              "rmsNormalized": 7.75505075742801e-05,
+              "maxNormalized": 0.00021154819471108416,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.002298791076031914,
+              "maxAbsolute": 0.02307848031933224,
+              "scale": 7.843768844444926,
+              "rmsNormalized": 0.00029307226176864605,
+              "maxNormalized": 0.002942269306632712,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.000773793314595333,
+              "maxAbsolute": 0.002971152534541277,
+              "scale": 3.5733314983660622,
+              "rmsNormalized": 0.00021654674774762906,
+              "maxNormalized": 0.0008314796810483055,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 4.5199654918258086e-07,
+              "maxAbsolute": 3.4248814597681587e-06,
+              "scale": 0.05975926959574518,
+              "rmsNormalized": 7.563622384279655e-06,
+              "maxNormalized": 5.731130053858637e-05,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 1.3710947415597601e-08,
+              "maxAbsolute": 1.6200110559297937e-07,
+              "scale": 2.448512485055251e-05,
+              "rmsNormalized": 0.0005599704922594345,
+              "maxNormalized": 0.00661630710816342,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 4.0529836348473155e-07,
+              "maxAbsolute": 3.4244245079029234e-06,
+              "scale": 0.0008446383866930751,
+              "rmsNormalized": 0.0004798483823018678,
+              "maxNormalized": 0.0040543084020964485,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 5.472014305284286e-06,
+            "heavyAxialMomentM": 6.716666163051863e-06,
+            "torque_outer": 0.00014038737992600343,
+            "wallPeakK": 3.657459327189335e-09,
+            "currentA": 0.00036258596768680554,
+            "radialMotionalJouleW": 0.0009275109502548437,
+            "shearW": 0.0013763617239615086,
+            "torque_upper": 0.0058514598002222815,
+            "jouleW": 0.0004666865679882583,
+            "lightRadialMomentM": 1.204495449393461e-07,
+            "lightAxialMomentM": 1.2928632881798513e-05,
+            "torque_lower": 0.005749175556223139,
+            "heavyRadialMomentM": 2.2323599671857633e-08,
+            "meridionalKineticJ": 0.0008385146716461946
+          },
+          "passed": true
+        }
+      ]
+    ],
+    "temporal": [
+      {
+        "timeS": 1e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 4.988084800946963e-10,
+            "maxAbsolute": 1.0310714474272634e-08,
+            "scale": 3.8056991666684495e-05,
+            "rmsNormalized": 1.3106881501917521e-05,
+            "maxNormalized": 0.0002709282584545101,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 6.974016225663783e-05,
+            "maxAbsolute": 0.0005825021998475677,
+            "scale": 1.2739865907274748,
+            "rmsNormalized": 5.47416768467042e-05,
+            "maxNormalized": 0.0004572278892786037,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 4.534862747425245e-11,
+            "maxAbsolute": 3.689706318255048e-10,
+            "scale": 1.0,
+            "rmsNormalized": 4.534862747425245e-11,
+            "maxNormalized": 3.689706318255048e-10,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 4.565780458294843e-05,
+            "maxAbsolute": 0.0004251052318835491,
+            "scale": 897.2470106941086,
+            "rmsNormalized": 5.088654967780571e-08,
+            "maxNormalized": 4.737884070014215e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 6.854086334357573e-05,
+            "maxAbsolute": 0.0006978312587207144,
+            "scale": 3.869268634907844,
+            "rmsNormalized": 1.7714165081538256e-05,
+            "maxNormalized": 0.00018035223825634816,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 2.413320887656441e-06,
+            "maxAbsolute": 1.8578572865690646e-05,
+            "scale": 1.8514895847606663,
+            "rmsNormalized": 1.303448265396751e-06,
+            "maxNormalized": 1.0034392317736e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 1.0706471433596576e-08,
+            "maxAbsolute": 2.5689029253816997e-07,
+            "scale": 0.059937731373180925,
+            "rmsNormalized": 1.7862657108152036e-07,
+            "maxNormalized": 4.285952882312714e-06,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 4.988084800946137e-10,
+            "maxAbsolute": 1.031071447427094e-08,
+            "scale": 3.489007231347648e-06,
+            "rmsNormalized": 0.0001429657340956402,
+            "maxNormalized": 0.0029552000871859384,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 1.0706471433596332e-08,
+            "maxAbsolute": 2.5689029253816997e-07,
+            "scale": 0.0001473156648639784,
+            "rmsNormalized": 7.267707370755163e-05,
+            "maxNormalized": 0.0017438083911535517,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 9.364471789610016e-09,
+          "heavyAxialMomentM": 3.4066131470993514e-11,
+          "torque_outer": 3.237856605912071e-05,
+          "wallPeakK": 1.0529025142959114e-12,
+          "currentA": 3.414044373118189e-09,
+          "radialMotionalJouleW": 3.4842033400596733e-07,
+          "shearW": 1.470583194454814e-07,
+          "torque_upper": 0.0004882425107032878,
+          "jouleW": 9.521032661001503e-09,
+          "lightRadialMomentM": 3.5560355681905884e-10,
+          "lightAxialMomentM": 3.840466484383366e-11,
+          "torque_lower": 0.0004874045548604638,
+          "heavyRadialMomentM": 5.854036809668063e-11,
+          "meridionalKineticJ": 3.534177744877212e-07
+        },
+        "passed": true
+      },
+      {
+        "timeS": 2e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 8.992756770687226e-10,
+            "maxAbsolute": 1.796215435808171e-08,
+            "scale": 3.514387526481555e-05,
+            "rmsNormalized": 2.558840396207064e-05,
+            "maxNormalized": 0.0005111034062901026,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 0.00011388241620121289,
+            "maxAbsolute": 0.0009575659589700081,
+            "scale": 1.385400165356998,
+            "rmsNormalized": 8.220182085214852e-05,
+            "maxNormalized": 0.0006911836615258789,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 4.142977374493307e-11,
+            "maxAbsolute": 3.1400304578710347e-10,
+            "scale": 1.0,
+            "rmsNormalized": 4.142977374493307e-11,
+            "maxNormalized": 3.1400304578710347e-10,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 5.5652982632239325e-05,
+            "maxAbsolute": 0.0004355833375981888,
+            "scale": 896.4806138454971,
+            "rmsNormalized": 6.207940447648182e-08,
+            "maxNormalized": 4.858814913238702e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 0.00010757855218106535,
+            "maxAbsolute": 0.0012789942999089574,
+            "scale": 5.523344927766399,
+            "rmsNormalized": 1.947706572520166e-05,
+            "maxNormalized": 0.00023156154769174873,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 7.405374829417664e-06,
+            "maxAbsolute": 3.998114544856435e-05,
+            "scale": 2.5768276243370125,
+            "rmsNormalized": 2.87383399629728e-06,
+            "maxNormalized": 1.5515646087832912e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 1.910684344143395e-08,
+            "maxAbsolute": 4.4777367796955403e-07,
+            "scale": 0.059877262828742395,
+            "rmsNormalized": 3.191001481828299e-07,
+            "maxNormalized": 7.4781921687077e-06,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 8.992756770685708e-10,
+            "maxAbsolute": 1.7962154358078323e-08,
+            "scale": 8.97027152100432e-06,
+            "rmsNormalized": 0.00010025066409226006,
+            "maxNormalized": 0.002002409215375374,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 1.9106843441435942e-08,
+            "maxAbsolute": 4.4777367796955403e-07,
+            "scale": 0.00033963955068322393,
+            "rmsNormalized": 5.6256238129512106e-05,
+            "maxNormalized": 0.0013183790788464003,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 1.3901711275973176e-08,
+          "heavyAxialMomentM": 2.836889479183509e-10,
+          "torque_outer": 2.286367920435935e-05,
+          "wallPeakK": 4.883661669732848e-13,
+          "currentA": 4.801577673885877e-09,
+          "radialMotionalJouleW": 2.8987832094164853e-06,
+          "shearW": 2.0909451697495228e-07,
+          "torque_upper": 0.0003479242786363099,
+          "jouleW": 1.317692159090722e-08,
+          "lightRadialMomentM": 1.3812967470489388e-09,
+          "lightAxialMomentM": 2.870766422722606e-10,
+          "torque_lower": 0.00034746773998156914,
+          "heavyRadialMomentM": 3.013307303652547e-10,
+          "meridionalKineticJ": 2.897019147181936e-06
+        },
+        "passed": true
+      },
+      {
+        "timeS": 4e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 1.6696903610147078e-09,
+            "maxAbsolute": 3.175317028129669e-08,
+            "scale": 2.7379217102910963e-05,
+            "rmsNormalized": 6.098386066843329e-05,
+            "maxNormalized": 0.0011597545014506894,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 0.00020109021934288114,
+            "maxAbsolute": 0.0024481396698092794,
+            "scale": 3.8027904960434284,
+            "rmsNormalized": 5.287964707813992e-05,
+            "maxNormalized": 0.0006437745314543148,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 1.5899100131956408e-10,
+            "maxAbsolute": 1.124817572417669e-09,
+            "scale": 1.0,
+            "rmsNormalized": 1.5899100131956408e-10,
+            "maxNormalized": 1.124817572417669e-09,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 7.233334044239139e-05,
+            "maxAbsolute": 0.00046512312960800273,
+            "scale": 894.7457489836057,
+            "rmsNormalized": 8.084234043532375e-08,
+            "maxNormalized": 5.198383229385146e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 0.00017603958262466703,
+            "maxAbsolute": 0.0024151783025308238,
+            "scale": 7.843759528922132,
+            "rmsNormalized": 2.2443266137310803e-05,
+            "maxNormalized": 0.00030791080394871706,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 2.3675626694105508e-05,
+            "maxAbsolute": 9.646652221695362e-05,
+            "scale": 3.5734149355022975,
+            "rmsNormalized": 6.625490496187659e-06,
+            "maxNormalized": 2.6995611749015592e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 3.59497661657267e-08,
+            "maxAbsolute": 8.146211064596898e-07,
+            "scale": 0.05975847628700326,
+            "rmsNormalized": 6.015843843318565e-07,
+            "maxNormalized": 1.3631892194628461e-05,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 1.6696903610143815e-09,
+            "maxAbsolute": 3.1753170281289915e-08,
+            "scale": 2.4485099306089265e-05,
+            "rmsNormalized": 6.819210084229235e-05,
+            "maxNormalized": 0.0012968364916287325,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 3.594976616572167e-08,
+            "maxAbsolute": 8.146211064596898e-07,
+            "scale": 0.0008446444542439258,
+            "rmsNormalized": 4.256201054194064e-05,
+            "maxNormalized": 0.0009644544546129637,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 1.663593514863146e-07,
+          "heavyAxialMomentM": 2.36804847586339e-09,
+          "torque_outer": 1.6012901710214978e-05,
+          "wallPeakK": 2.437283361412732e-12,
+          "currentA": 6.5923745912639676e-09,
+          "radialMotionalJouleW": 1.802117107262901e-05,
+          "shearW": 2.881111831839117e-07,
+          "torque_upper": 0.0002488117767298289,
+          "jouleW": 1.7800762153453725e-08,
+          "lightRadialMomentM": 4.919751742794999e-09,
+          "lightAxialMomentM": 2.3186400788608504e-09,
+          "torque_lower": 0.0002490044751398013,
+          "heavyRadialMomentM": 1.8848565872568366e-09,
+          "meridionalKineticJ": 1.8282906919150827e-05
+        },
+        "passed": true
+      }
+    ],
+    "gates": [
+      {
+        "name": "spatial:0:1e-05:density:rms",
+        "value": 0.0002536475101128849,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:density:max",
+        "value": 0.002652300622485684,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gas:rms",
+        "value": 0.0018310317724432798,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gas:max",
+        "value": 0.013520705581842644,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:solid:rms",
+        "value": 3.528466405363682e-10,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:solid:max",
+        "value": 1.6116814549604896e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:omega:rms",
+        "value": 0.00018522081069885472,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:omega:max",
+        "value": 0.0004602457978171232,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vr:rms",
+        "value": 0.0002285085444426438,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vr:max",
+        "value": 0.0020571944315208885,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vz:rms",
+        "value": 0.00027726462902882034,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vz:max",
+        "value": 0.0009587965565880304,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:Y:rms",
+        "value": 3.4402697059480887e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:Y:max",
+        "value": 5.1672821464289165e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:densityChange:rms",
+        "value": 0.002766615944349372,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:densityChange:max",
+        "value": 0.028929506101214843,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:YChange:rms",
+        "value": 0.0013997423708990329,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:YChange:max",
+        "value": 0.021024118400724833,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gasPeakK",
+        "value": 8.43906312048635e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:heavyAxialMomentM",
+        "value": 1.614292729295555e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_outer",
+        "value": 0.00024524457781231637,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:wallPeakK",
+        "value": 4.626092773327006e-10,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:currentA",
+        "value": 0.000868846863843003,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:radialMotionalJouleW",
+        "value": 0.00046419102515011986,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:shearW",
+        "value": 0.0033293539624808344,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_upper",
+        "value": 0.010848576522273185,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:jouleW",
+        "value": 0.0011172288325487442,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:lightRadialMomentM",
+        "value": 1.8264935925580894e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:lightAxialMomentM",
+        "value": 3.096889182529735e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_lower",
+        "value": 0.0106331752737613,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:heavyRadialMomentM",
+        "value": 1.6964435446576544e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:meridionalKineticJ",
+        "value": 0.0004337005249593009,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:density:rms",
+        "value": 0.0005094732095556566,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:density:max",
+        "value": 0.005616264927125802,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gas:rms",
+        "value": 0.0033078719230840363,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gas:max",
+        "value": 0.022756886753549213,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:solid:rms",
+        "value": 2.1842919939180614e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:solid:max",
+        "value": 1.052995912687038e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:omega:rms",
+        "value": 0.0001850005653717304,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:omega:max",
+        "value": 0.0004585393879650461,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vr:rms",
+        "value": 0.0003563861344859314,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vr:max",
+        "value": 0.003457744617726941,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vz:rms",
+        "value": 0.0003629663801851556,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vz:max",
+        "value": 0.0013217875383646392,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:Y:rms",
+        "value": 7.242701358337887e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:Y:max",
+        "value": 8.380741151536614e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:densityChange:rms",
+        "value": 0.0019959358179083664,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:densityChange:max",
+        "value": 0.02200253933015095,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:YChange:rms",
+        "value": 0.0012768806529199804,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:YChange:max",
+        "value": 0.014775158748301933,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gasPeakK",
+        "value": 2.1224142098307953e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:heavyAxialMomentM",
+        "value": 1.6142884643138565e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_outer",
+        "value": 0.0002840196998168837,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:wallPeakK",
+        "value": 1.562186896750221e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:currentA",
+        "value": 0.0008688700338134369,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:radialMotionalJouleW",
+        "value": 0.0010163042962431223,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:shearW",
+        "value": 0.0033176472994949787,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_upper",
+        "value": 0.012113188960926296,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:jouleW",
+        "value": 0.0011172320138929076,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:lightRadialMomentM",
+        "value": 1.9250385503964288e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:lightAxialMomentM",
+        "value": 3.09702657122052e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_lower",
+        "value": 0.011891333073577707,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:heavyRadialMomentM",
+        "value": 1.3645466219879194e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:meridionalKineticJ",
+        "value": 0.0009332242649768515,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:density:rms",
+        "value": 0.0011853254785606042,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:density:max",
+        "value": 0.012136647611026586,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gas:rms",
+        "value": 0.002440292385614344,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gas:max",
+        "value": 0.017663719366919694,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:solid:rms",
+        "value": 8.839082122292132e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:solid:max",
+        "value": 4.293582378522842e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:omega:rms",
+        "value": 0.00018557630737090102,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:omega:max",
+        "value": 0.00048640556670161535,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vr:rms",
+        "value": 0.0007116785169141008,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vr:max",
+        "value": 0.005225038043498441,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vz:rms",
+        "value": 0.0005099999265372125,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vz:max",
+        "value": 0.0017671654414770815,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:Y:rms",
+        "value": 1.582934095020243e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:Y:max",
+        "value": 0.0001364915854259127,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:densityChange:rms",
+        "value": 0.0013253513094617644,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:densityChange:max",
+        "value": 0.013570383911160009,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:YChange:rms",
+        "value": 0.0011199465573334469,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:YChange:max",
+        "value": 0.009656958030297612,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gasPeakK",
+        "value": 1.0479953672914157e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:heavyAxialMomentM",
+        "value": 1.6112626907596636e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_outer",
+        "value": 0.0003341286941082131,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:wallPeakK",
+        "value": 5.461368149829743e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:currentA",
+        "value": 0.0008689205198996067,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:radialMotionalJouleW",
+        "value": 0.0023113572968307596,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:shearW",
+        "value": 0.0032947031103725106,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_upper",
+        "value": 0.014037780220457208,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:jouleW",
+        "value": 0.0011172273466478334,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:lightRadialMomentM",
+        "value": 2.8016076664776343e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:lightAxialMomentM",
+        "value": 3.100188192601029e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_lower",
+        "value": 0.013784303904611696,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:heavyRadialMomentM",
+        "value": 5.037855926206492e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:meridionalKineticJ",
+        "value": 0.002098520225652738,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:density:rms",
+        "value": 0.00010854822387807506,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:density:max",
+        "value": 0.001422771038409969,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gas:rms",
+        "value": 0.000798222957334627,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gas:max",
+        "value": 0.00656570647547284,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:solid:rms",
+        "value": 2.6592176420994635e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:solid:max",
+        "value": 1.3482178928825306e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:omega:rms",
+        "value": 7.732276433731474e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:omega:max",
+        "value": 0.00019634552263169698,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vr:rms",
+        "value": 0.00011223976536996868,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vr:max",
+        "value": 0.0013627350080335986,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vz:rms",
+        "value": 0.00012775563775599026,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vz:max",
+        "value": 0.0004399842099388707,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:Y:rms",
+        "value": 3.5781643163593013e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:Y:max",
+        "value": 2.1919684490525788e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:densityChange:rms",
+        "value": 0.0011899703694753148,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:densityChange:max",
+        "value": 0.015519033230315617,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:YChange:rms",
+        "value": 0.0005899709309350814,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:YChange:max",
+        "value": 0.008915359108933082,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gasPeakK",
+        "value": 1.1519591613157918e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:heavyAxialMomentM",
+        "value": 6.731016898485104e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_outer",
+        "value": 0.0001033833483542816,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:wallPeakK",
+        "value": 3.13634696628451e-10,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:currentA",
+        "value": 0.0003625556553449908,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:radialMotionalJouleW",
+        "value": 0.00019110355018175137,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:shearW",
+        "value": 0.001391298168499972,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_upper",
+        "value": 0.0045249552265532724,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:jouleW",
+        "value": 0.00046668386918333676,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:lightRadialMomentM",
+        "value": 7.66503278526813e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:lightAxialMomentM",
+        "value": 1.291351411107061e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_lower",
+        "value": 0.00443551898087548,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:heavyRadialMomentM",
+        "value": 7.111842003217092e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:meridionalKineticJ",
+        "value": 0.00017833984519062077,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:density:rms",
+        "value": 0.00020966717601103162,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:density:max",
+        "value": 0.0027011697522716554,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gas:rms",
+        "value": 0.001383970543876297,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gas:max",
+        "value": 0.010261614930629364,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:solid:rms",
+        "value": 8.799636902545947e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:solid:max",
+        "value": 4.5861895614507375e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:omega:rms",
+        "value": 7.722208999652187e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:omega:max",
+        "value": 0.00019501388546346038,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vr:rms",
+        "value": 0.00016042487508790022,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vr:max",
+        "value": 0.0020037513911349606,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vz:rms",
+        "value": 0.00016861080739670532,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vz:max",
+        "value": 0.0005938345702025173,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:Y:rms",
+        "value": 4.503471257280214e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:Y:max",
+        "value": 3.52990761546084e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:densityChange:rms",
+        "value": 0.0008238893958154074,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:densityChange:max",
+        "value": 0.010582385692850724,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:YChange:rms",
+        "value": 0.0005422794880017954,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:YChange:max",
+        "value": 0.006221844691141347,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gasPeakK",
+        "value": 3.291243654257126e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:heavyAxialMomentM",
+        "value": 6.7305915577315715e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_outer",
+        "value": 0.00011956169238342101,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:wallPeakK",
+        "value": 1.0579133428151598e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:currentA",
+        "value": 0.0003625652394178713,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:radialMotionalJouleW",
+        "value": 0.0004138423583832313,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:shearW",
+        "value": 0.0013862877759997134,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_upper",
+        "value": 0.0050500146209743945,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:jouleW",
+        "value": 0.00046668605851669963,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:lightRadialMomentM",
+        "value": 8.178637806126907e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:lightAxialMomentM",
+        "value": 1.2914394946044902e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_lower",
+        "value": 0.004958804010827376,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:heavyRadialMomentM",
+        "value": 5.779627990244411e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:meridionalKineticJ",
+        "value": 0.0003791181863731541,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:density:rms",
+        "value": 0.0005000807140864023,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:density:max",
+        "value": 0.005917230156713205,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gas:rms",
+        "value": 0.0010263693912149418,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gas:max",
+        "value": 0.008377361144143898,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:solid:rms",
+        "value": 3.0076236805129526e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:solid:max",
+        "value": 1.5844852896407247e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:omega:rms",
+        "value": 7.75505075742801e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:omega:max",
+        "value": 0.00021154819471108416,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vr:rms",
+        "value": 0.00029307226176864605,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vr:max",
+        "value": 0.002942269306632712,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vz:rms",
+        "value": 0.00021654674774762906,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vz:max",
+        "value": 0.0008314796810483055,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:Y:rms",
+        "value": 7.563622384279655e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:Y:max",
+        "value": 5.731130053858637e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:densityChange:rms",
+        "value": 0.0005599704922594345,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:densityChange:max",
+        "value": 0.00661630710816342,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:YChange:rms",
+        "value": 0.0004798483823018678,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:YChange:max",
+        "value": 0.0040543084020964485,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gasPeakK",
+        "value": 5.472014305284286e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:heavyAxialMomentM",
+        "value": 6.716666163051863e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_outer",
+        "value": 0.00014038737992600343,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:wallPeakK",
+        "value": 3.657459327189335e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:currentA",
+        "value": 0.00036258596768680554,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:radialMotionalJouleW",
+        "value": 0.0009275109502548437,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:shearW",
+        "value": 0.0013763617239615086,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_upper",
+        "value": 0.0058514598002222815,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:jouleW",
+        "value": 0.0004666865679882583,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:lightRadialMomentM",
+        "value": 1.204495449393461e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:lightAxialMomentM",
+        "value": 1.2928632881798513e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_lower",
+        "value": 0.005749175556223139,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:heavyRadialMomentM",
+        "value": 2.2323599671857633e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:meridionalKineticJ",
+        "value": 0.0008385146716461946,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:density:rms",
+        "value": 1.3106881501917521e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:density:max",
+        "value": 0.0002709282584545101,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gas:rms",
+        "value": 5.47416768467042e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gas:max",
+        "value": 0.0004572278892786037,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:solid:rms",
+        "value": 4.534862747425245e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:solid:max",
+        "value": 3.689706318255048e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:omega:rms",
+        "value": 5.088654967780571e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:omega:max",
+        "value": 4.737884070014215e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vr:rms",
+        "value": 1.7714165081538256e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vr:max",
+        "value": 0.00018035223825634816,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vz:rms",
+        "value": 1.303448265396751e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vz:max",
+        "value": 1.0034392317736e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:Y:rms",
+        "value": 1.7862657108152036e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:Y:max",
+        "value": 4.285952882312714e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:densityChange:rms",
+        "value": 0.0001429657340956402,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:densityChange:max",
+        "value": 0.0029552000871859384,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:YChange:rms",
+        "value": 7.267707370755163e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:YChange:max",
+        "value": 0.0017438083911535517,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gasPeakK",
+        "value": 9.364471789610016e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:heavyAxialMomentM",
+        "value": 3.4066131470993514e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_outer",
+        "value": 3.237856605912071e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:wallPeakK",
+        "value": 1.0529025142959114e-12,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:currentA",
+        "value": 3.414044373118189e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:radialMotionalJouleW",
+        "value": 3.4842033400596733e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:shearW",
+        "value": 1.470583194454814e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_upper",
+        "value": 0.0004882425107032878,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:jouleW",
+        "value": 9.521032661001503e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:lightRadialMomentM",
+        "value": 3.5560355681905884e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:lightAxialMomentM",
+        "value": 3.840466484383366e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_lower",
+        "value": 0.0004874045548604638,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:heavyRadialMomentM",
+        "value": 5.854036809668063e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:meridionalKineticJ",
+        "value": 3.534177744877212e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:density:rms",
+        "value": 2.558840396207064e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:density:max",
+        "value": 0.0005111034062901026,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gas:rms",
+        "value": 8.220182085214852e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gas:max",
+        "value": 0.0006911836615258789,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:solid:rms",
+        "value": 4.142977374493307e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:solid:max",
+        "value": 3.1400304578710347e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:omega:rms",
+        "value": 6.207940447648182e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:omega:max",
+        "value": 4.858814913238702e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vr:rms",
+        "value": 1.947706572520166e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vr:max",
+        "value": 0.00023156154769174873,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vz:rms",
+        "value": 2.87383399629728e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vz:max",
+        "value": 1.5515646087832912e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:Y:rms",
+        "value": 3.191001481828299e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:Y:max",
+        "value": 7.4781921687077e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:densityChange:rms",
+        "value": 0.00010025066409226006,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:densityChange:max",
+        "value": 0.002002409215375374,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:YChange:rms",
+        "value": 5.6256238129512106e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:YChange:max",
+        "value": 0.0013183790788464003,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gasPeakK",
+        "value": 1.3901711275973176e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:heavyAxialMomentM",
+        "value": 2.836889479183509e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_outer",
+        "value": 2.286367920435935e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:wallPeakK",
+        "value": 4.883661669732848e-13,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:currentA",
+        "value": 4.801577673885877e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:radialMotionalJouleW",
+        "value": 2.8987832094164853e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:shearW",
+        "value": 2.0909451697495228e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_upper",
+        "value": 0.0003479242786363099,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:jouleW",
+        "value": 1.317692159090722e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:lightRadialMomentM",
+        "value": 1.3812967470489388e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:lightAxialMomentM",
+        "value": 2.870766422722606e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_lower",
+        "value": 0.00034746773998156914,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:heavyRadialMomentM",
+        "value": 3.013307303652547e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:meridionalKineticJ",
+        "value": 2.897019147181936e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:density:rms",
+        "value": 6.098386066843329e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:density:max",
+        "value": 0.0011597545014506894,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gas:rms",
+        "value": 5.287964707813992e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gas:max",
+        "value": 0.0006437745314543148,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:solid:rms",
+        "value": 1.5899100131956408e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:solid:max",
+        "value": 1.124817572417669e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:omega:rms",
+        "value": 8.084234043532375e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:omega:max",
+        "value": 5.198383229385146e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vr:rms",
+        "value": 2.2443266137310803e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vr:max",
+        "value": 0.00030791080394871706,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vz:rms",
+        "value": 6.625490496187659e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vz:max",
+        "value": 2.6995611749015592e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:Y:rms",
+        "value": 6.015843843318565e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:Y:max",
+        "value": 1.3631892194628461e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:densityChange:rms",
+        "value": 6.819210084229235e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:densityChange:max",
+        "value": 0.0012968364916287325,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:YChange:rms",
+        "value": 4.256201054194064e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:YChange:max",
+        "value": 0.0009644544546129637,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gasPeakK",
+        "value": 1.663593514863146e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:heavyAxialMomentM",
+        "value": 2.36804847586339e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_outer",
+        "value": 1.6012901710214978e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:wallPeakK",
+        "value": 2.437283361412732e-12,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:currentA",
+        "value": 6.5923745912639676e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:radialMotionalJouleW",
+        "value": 1.802117107262901e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:shearW",
+        "value": 2.881111831839117e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_upper",
+        "value": 0.0002488117767298289,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:jouleW",
+        "value": 1.7800762153453725e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:lightRadialMomentM",
+        "value": 4.919751742794999e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:lightAxialMomentM",
+        "value": 2.3186400788608504e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_lower",
+        "value": 0.0002490044751398013,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:heavyRadialMomentM",
+        "value": 1.8848565872568366e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:meridionalKineticJ",
+        "value": 1.8282906919150827e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:density:decreasing",
+        "values": [
+          0.0002536475101128849,
+          0.00010854822387807506
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:gas:decreasing",
+        "values": [
+          0.0018310317724432798,
+          0.000798222957334627
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:solid:decreasing",
+        "values": [
+          3.528466405363682e-10,
+          2.6592176420994635e-09
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:omega:decreasing",
+        "values": [
+          0.00018522081069885472,
+          7.732276433731474e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:vr:decreasing",
+        "values": [
+          0.0002285085444426438,
+          0.00011223976536996868
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:vz:decreasing",
+        "values": [
+          0.00027726462902882034,
+          0.00012775563775599026
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:Y:decreasing",
+        "values": [
+          3.4402697059480887e-06,
+          3.5781643163593013e-06
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:densityChange:decreasing",
+        "values": [
+          0.002766615944349372,
+          0.0011899703694753148
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:YChange:decreasing",
+        "values": [
+          0.0013997423708990329,
+          0.0005899709309350814
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:density:decreasing",
+        "values": [
+          0.0005094732095556566,
+          0.00020966717601103162
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:gas:decreasing",
+        "values": [
+          0.0033078719230840363,
+          0.001383970543876297
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:solid:decreasing",
+        "values": [
+          2.1842919939180614e-09,
+          8.799636902545947e-09
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:omega:decreasing",
+        "values": [
+          0.0001850005653717304,
+          7.722208999652187e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:vr:decreasing",
+        "values": [
+          0.0003563861344859314,
+          0.00016042487508790022
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:vz:decreasing",
+        "values": [
+          0.0003629663801851556,
+          0.00016861080739670532
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:Y:decreasing",
+        "values": [
+          7.242701358337887e-06,
+          4.503471257280214e-06
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:densityChange:decreasing",
+        "values": [
+          0.0019959358179083664,
+          0.0008238893958154074
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:YChange:decreasing",
+        "values": [
+          0.0012768806529199804,
+          0.0005422794880017954
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:density:decreasing",
+        "values": [
+          0.0011853254785606042,
+          0.0005000807140864023
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:gas:decreasing",
+        "values": [
+          0.002440292385614344,
+          0.0010263693912149418
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:solid:decreasing",
+        "values": [
+          8.839082122292132e-09,
+          3.0076236805129526e-08
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:omega:decreasing",
+        "values": [
+          0.00018557630737090102,
+          7.75505075742801e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:vr:decreasing",
+        "values": [
+          0.0007116785169141008,
+          0.00029307226176864605
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:vz:decreasing",
+        "values": [
+          0.0005099999265372125,
+          0.00021654674774762906
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:Y:decreasing",
+        "values": [
+          1.582934095020243e-05,
+          7.563622384279655e-06
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:densityChange:decreasing",
+        "values": [
+          0.0013253513094617644,
+          0.0005599704922594345
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:YChange:decreasing",
+        "values": [
+          0.0011199465573334469,
+          0.0004798483823018678
+        ],
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "commonSpace": {
+    "spatial": [
+      [
+        {
+          "timeS": 1e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 1.0377700370868283e-08,
+              "maxAbsolute": 1.1892124548475158e-07,
+              "scale": 3.8055734657236684e-05,
+              "rmsNormalized": 0.0002726974124751224,
+              "maxNormalized": 0.0031249231306624504,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.002428949822005206,
+              "maxAbsolute": 0.02338755051306407,
+              "scale": 1.273989898545267,
+              "rmsNormalized": 0.0019065691374623578,
+              "maxNormalized": 0.01835772052805886,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 1.7716558059636437e-08,
+              "maxAbsolute": 1.006799834613048e-07,
+              "scale": 1.0,
+              "rmsNormalized": 1.7716558059636437e-08,
+              "maxNormalized": 1.006799834613048e-07,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.24077166312915108,
+              "maxAbsolute": 0.7656847892160386,
+              "scale": 897.2470207753372,
+              "rmsNormalized": 0.00026834490118573287,
+              "maxNormalized": 0.000853371224965883,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0010062837749727385,
+              "maxAbsolute": 0.008166162374819638,
+              "scale": 3.8692713029790236,
+              "rmsNormalized": 0.0002600706169655206,
+              "maxNormalized": 0.002110516873947908,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0005300855596983465,
+              "maxAbsolute": 0.0021580579943103473,
+              "scale": 1.8514913863022688,
+              "rmsNormalized": 0.00028630193130793554,
+              "maxNormalized": 0.001165578198351947,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 4.628295766965922e-06,
+              "maxAbsolute": 1.3030895464338776e-05,
+              "scale": 0.05993798479725598,
+              "rmsNormalized": 7.721807435837932e-05,
+              "maxNormalized": 0.0002174062993344972,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 1.0022449629297731e-08,
+              "maxAbsolute": 1.1889725914462468e-07,
+              "scale": 3.4890069801850592e-06,
+              "rmsNormalized": 0.0028725794147783945,
+              "maxNormalized": 0.03407767878364012,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 2.1112706141467582e-07,
+              "maxAbsolute": 3.161331144752033e-06,
+              "scale": 0.00014731484709040732,
+              "rmsNormalized": 0.0014331689275359112,
+              "maxNormalized": 0.02145969131551228,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 8.43906312048635e-06,
+            "heavyAxialMomentM": 1.614292729295555e-05,
+            "torque_outer": 0.00024524457781231637,
+            "wallPeakK": 4.626092773327006e-10,
+            "currentA": 0.000868846863843003,
+            "radialMotionalJouleW": 0.00046419102515011986,
+            "shearW": 0.0033293539624808344,
+            "torque_upper": 0.010848576522273185,
+            "jouleW": 0.0011172288325487442,
+            "lightRadialMomentM": 1.8264935925580894e-07,
+            "lightAxialMomentM": 3.096889182529735e-05,
+            "torque_lower": 0.0106331752737613,
+            "heavyRadialMomentM": 1.6964435446576544e-07,
+            "meridionalKineticJ": 0.0004337005249593009
+          },
+          "passed": true
+        },
+        {
+          "timeS": 2e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 1.866131520043736e-08,
+              "maxAbsolute": 2.3262236364561192e-07,
+              "scale": 3.514236458227458e-05,
+              "rmsNormalized": 0.0005310204769160559,
+              "maxNormalized": 0.006619428328478047,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.004736649087289903,
+              "maxAbsolute": 0.04327197127093996,
+              "scale": 1.3853952468928128,
+              "rmsNormalized": 0.003418987540135811,
+              "maxNormalized": 0.031234386986667556,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 5.853385835548302e-08,
+              "maxAbsolute": 3.358998696967319e-07,
+              "scale": 1.0,
+              "rmsNormalized": 5.853385835548302e-08,
+              "maxNormalized": 3.358998696967319e-07,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.2402494625085061,
+              "maxAbsolute": 0.7646258039222857,
+              "scale": 896.480629842419,
+              "rmsNormalized": 0.00026799180541216657,
+              "maxNormalized": 0.0008529194925903637,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0021003340647338304,
+              "maxAbsolute": 0.019264178928114578,
+              "scale": 5.523349855469383,
+              "rmsNormalized": 0.0003802645350545771,
+              "maxNormalized": 0.003487770905737326,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.000965749036580959,
+              "maxAbsolute": 0.00370601746298016,
+              "scale": 2.5768311313312164,
+              "rmsNormalized": 0.0003747816552037865,
+              "maxNormalized": 0.0014382073461933049,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 4.637263791094342e-06,
+              "maxAbsolute": 1.3661733901992879e-05,
+              "scale": 0.05987770382263402,
+              "rmsNormalized": 7.744558483455802e-05,
+              "maxNormalized": 0.00022816061788977096,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 1.8504543623317526e-08,
+              "maxAbsolute": 2.3259837730544225e-07,
+              "scale": 8.970275053165428e-06,
+              "rmsNormalized": 0.0020628736035008923,
+              "maxNormalized": 0.02592990470491348,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 4.4522615081046e-07,
+              "maxAbsolute": 5.086063773751537e-06,
+              "scale": 0.00033963732305014593,
+              "rmsNormalized": 0.0013108869979661345,
+              "maxNormalized": 0.014974984869376685,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 2.1224142098307953e-07,
+            "heavyAxialMomentM": 1.6142884643138565e-05,
+            "torque_outer": 0.0002840196998168837,
+            "wallPeakK": 1.562186896750221e-09,
+            "currentA": 0.0008688700338134369,
+            "radialMotionalJouleW": 0.0010163042962431223,
+            "shearW": 0.0033176472994949787,
+            "torque_upper": 0.012113188960926296,
+            "jouleW": 0.0011172320138929076,
+            "lightRadialMomentM": 1.9250385503964288e-07,
+            "lightAxialMomentM": 3.09702657122052e-05,
+            "torque_lower": 0.011891333073577707,
+            "heavyRadialMomentM": 1.3645466219879194e-07,
+            "meridionalKineticJ": 0.0009332242649768515
+          },
+          "passed": true
+        },
+        {
+          "timeS": 4e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 3.35088591838974e-08,
+              "maxAbsolute": 4.022411950691668e-07,
+              "scale": 2.7377621480325297e-05,
+              "rmsNormalized": 0.0012239507076236796,
+              "maxNormalized": 0.014692335320591459,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.00953620440757638,
+              "maxAbsolute": 0.07654216637951095,
+              "scale": 3.8027316376406475,
+              "rmsNormalized": 0.002507724792668511,
+              "maxNormalized": 0.02012820616155824,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 1.9382114641681867e-07,
+              "maxAbsolute": 1.1091253782069543e-06,
+              "scale": 1.0,
+              "rmsNormalized": 1.9382114641681867e-07,
+              "maxNormalized": 1.1091253782069543e-06,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.2398801774937925,
+              "maxAbsolute": 0.7596269084117466,
+              "scale": 894.7457775164002,
+              "rmsNormalized": 0.00026809869744190624,
+              "maxNormalized": 0.0008489863014724572,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.005714349470572195,
+              "maxAbsolute": 0.0416241808054536,
+              "scale": 7.843768844444926,
+              "rmsNormalized": 0.0007285208914104068,
+              "maxNormalized": 0.005306655720092066,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0018650435900864543,
+              "maxAbsolute": 0.007016650696115345,
+              "scale": 3.5733314983660622,
+              "rmsNormalized": 0.0005219341085312858,
+              "maxNormalized": 0.0019636159419644584,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 4.699654660065054e-06,
+              "maxAbsolute": 1.5723506868958737e-05,
+              "scale": 0.05975926959574518,
+              "rmsNormalized": 7.864310745189674e-05,
+              "maxNormalized": 0.00026311410723932674,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 3.34487710241392e-08,
+              "maxAbsolute": 4.0221720872932236e-07,
+              "scale": 2.448512485055251e-05,
+              "rmsNormalized": 0.0013660853774811127,
+              "maxNormalized": 0.016427002565202204,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 9.809515588774857e-07,
+              "maxAbsolute": 8.226058705096406e-06,
+              "scale": 0.0008446383866930751,
+              "rmsNormalized": 0.0011613864280051293,
+              "maxNormalized": 0.009739148533496137,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 1.0479953672914157e-05,
+            "heavyAxialMomentM": 1.6112626907596636e-05,
+            "torque_outer": 0.0003341286941082131,
+            "wallPeakK": 5.461368149829743e-09,
+            "currentA": 0.0008689205198996067,
+            "radialMotionalJouleW": 0.0023113572968307596,
+            "shearW": 0.0032947031103725106,
+            "torque_upper": 0.014037780220457208,
+            "jouleW": 0.0011172273466478334,
+            "lightRadialMomentM": 2.8016076664776343e-07,
+            "lightAxialMomentM": 3.100188192601029e-05,
+            "torque_lower": 0.013784303904611696,
+            "heavyRadialMomentM": 5.037855926206492e-08,
+            "meridionalKineticJ": 0.002098520225652738
+          },
+          "passed": true
+        }
+      ],
+      [
+        {
+          "timeS": 1e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 5.0069889693679505e-09,
+              "maxAbsolute": 5.905491802971237e-08,
+              "scale": 3.8055734657236684e-05,
+              "rmsNormalized": 0.00013156989385345688,
+              "maxNormalized": 0.0015518007617409766,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.001013970510018657,
+              "maxAbsolute": 0.009974810308619908,
+              "scale": 1.273989898545267,
+              "rmsNormalized": 0.0007959015304410822,
+              "maxNormalized": 0.007829583515544246,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 1.1141927354730021e-08,
+              "maxAbsolute": 7.216215180960717e-08,
+              "scale": 1.0,
+              "rmsNormalized": 1.1141927354730021e-08,
+              "maxNormalized": 7.216215180960717e-08,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.12432969609230021,
+              "maxAbsolute": 0.4328846246324929,
+              "scale": 897.2470207753372,
+              "rmsNormalized": 0.00013856796758696764,
+              "maxNormalized": 0.0004824586926557022,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0005560012569244572,
+              "maxAbsolute": 0.006233345932932885,
+              "scale": 3.8692713029790236,
+              "rmsNormalized": 0.00014369663261823526,
+              "maxNormalized": 0.0016109870424784421,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.00028921353250193336,
+              "maxAbsolute": 0.001132525090276948,
+              "scale": 1.8514913863022688,
+              "rmsNormalized": 0.0001562057132113048,
+              "maxNormalized": 0.0006116826136246768,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 3.7485921409435573e-06,
+              "maxAbsolute": 1.0145468795463852e-05,
+              "scale": 0.05993798479725598,
+              "rmsNormalized": 6.254117741234389e-05,
+              "maxNormalized": 0.00016926609778059008,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 4.240012279484176e-09,
+              "maxAbsolute": 5.9076138526013856e-08,
+              "scale": 3.4890069801850592e-06,
+              "rmsNormalized": 0.0012152490102668935,
+              "maxNormalized": 0.016932078055882944,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 9.003370361508868e-08,
+              "maxAbsolute": 1.3256548910267618e-06,
+              "scale": 0.00014731484709040732,
+              "rmsNormalized": 0.0006111651703363944,
+              "maxNormalized": 0.008998786729305062,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 1.1519591613157918e-06,
+            "heavyAxialMomentM": 6.731016898485104e-06,
+            "torque_outer": 0.0001033833483542816,
+            "wallPeakK": 3.13634696628451e-10,
+            "currentA": 0.0003625556553449908,
+            "radialMotionalJouleW": 0.00019110355018175137,
+            "shearW": 0.001391298168499972,
+            "torque_upper": 0.0045249552265532724,
+            "jouleW": 0.00046668386918333676,
+            "lightRadialMomentM": 7.66503278526813e-08,
+            "lightAxialMomentM": 1.291351411107061e-05,
+            "torque_lower": 0.00443551898087548,
+            "heavyRadialMomentM": 7.111842003217092e-08,
+            "meridionalKineticJ": 0.00017833984519062077
+          },
+          "passed": true
+        },
+        {
+          "timeS": 2e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 8.058663350563852e-09,
+              "maxAbsolute": 1.0486177887082324e-07,
+              "scale": 3.514236458227458e-05,
+              "rmsNormalized": 0.00022931477282062438,
+              "maxNormalized": 0.0029839135788749505,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.0019181064776455958,
+              "maxAbsolute": 0.01708594070015579,
+              "scale": 1.3853952468928128,
+              "rmsNormalized": 0.0013845193145765127,
+              "maxNormalized": 0.01233289975440324,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 3.614149770187515e-08,
+              "maxAbsolute": 2.351033003833436e-07,
+              "scale": 1.0,
+              "rmsNormalized": 3.614149770187515e-08,
+              "maxNormalized": 2.351033003833436e-07,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.1238497491813701,
+              "maxAbsolute": 0.44440821110845263,
+              "scale": 896.480629842419,
+              "rmsNormalized": 0.00013815105988752938,
+              "maxNormalized": 0.0004957253913969893,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.0010124851077549124,
+              "maxAbsolute": 0.012993484986265291,
+              "scale": 5.523349855469383,
+              "rmsNormalized": 0.00018330997207289341,
+              "maxNormalized": 0.0023524645959912827,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0005181759516821435,
+              "maxAbsolute": 0.002129870040131987,
+              "scale": 2.5768311313312164,
+              "rmsNormalized": 0.0002010903801113458,
+              "maxNormalized": 0.0008265462234739748,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 3.7425771175740667e-06,
+              "maxAbsolute": 1.0159745234161743e-05,
+              "scale": 0.05987770382263402,
+              "rmsNormalized": 6.250368465464364e-05,
+              "maxNormalized": 0.0001696749304925971,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 7.603268279214253e-09,
+              "maxAbsolute": 1.0488299936695108e-07,
+              "scale": 8.970275053165428e-06,
+              "rmsNormalized": 0.0008476070392658934,
+              "maxNormalized": 0.011692283541510803,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 1.9430492395022327e-07,
+              "maxAbsolute": 2.126076059705273e-06,
+              "scale": 0.00033963732305014593,
+              "rmsNormalized": 0.000572095322755606,
+              "maxNormalized": 0.006259842235864541,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 3.291243654257126e-07,
+            "heavyAxialMomentM": 6.7305915577315715e-06,
+            "torque_outer": 0.00011956169238342101,
+            "wallPeakK": 1.0579133428151598e-09,
+            "currentA": 0.0003625652394178713,
+            "radialMotionalJouleW": 0.0004138423583832313,
+            "shearW": 0.0013862877759997134,
+            "torque_upper": 0.0050500146209743945,
+            "jouleW": 0.00046668605851669963,
+            "lightRadialMomentM": 8.178637806126907e-08,
+            "lightAxialMomentM": 1.2914394946044902e-05,
+            "torque_lower": 0.004958804010827376,
+            "heavyRadialMomentM": 5.779627990244411e-08,
+            "meridionalKineticJ": 0.0003791181863731541
+          },
+          "passed": true
+        },
+        {
+          "timeS": 4e-05,
+          "profiles": {
+            "density": {
+              "rmsAbsolute": 1.4430250243437335e-08,
+              "maxAbsolute": 1.8237497372876332e-07,
+              "scale": 2.7377621480325297e-05,
+              "rmsNormalized": 0.0005270819546470652,
+              "maxNormalized": 0.006661461583133714,
+              "weighting": "cylindrical volume"
+            },
+            "gas": {
+              "rmsAbsolute": 0.003939435502575628,
+              "maxAbsolute": 0.031043428283624053,
+              "scale": 3.8027316376406475,
+              "rmsNormalized": 0.0010359488593888252,
+              "maxNormalized": 0.008163454916551651,
+              "weighting": "cylindrical volume"
+            },
+            "solid": {
+              "rmsAbsolute": 1.1504340401445233e-07,
+              "maxAbsolute": 7.526213039454888e-07,
+              "scale": 1.0,
+              "rmsNormalized": 1.1504340401445233e-07,
+              "maxNormalized": 7.526213039454888e-07,
+              "weighting": "cylindrical volume"
+            },
+            "omega": {
+              "rmsAbsolute": 0.12301961439496834,
+              "maxAbsolute": 0.4710817528816733,
+              "scale": 894.7457775164002,
+              "rmsNormalized": 0.00013749113713220452,
+              "maxNormalized": 0.0005264978776309885,
+              "weighting": "cylindrical volume"
+            },
+            "vr": {
+              "rmsAbsolute": 0.002421827980365253,
+              "maxAbsolute": 0.027086677087245048,
+              "scale": 7.843768844444926,
+              "rmsNormalized": 0.00030875820391882504,
+              "maxNormalized": 0.0034532732445867824,
+              "weighting": "cylindrical volume"
+            },
+            "vz": {
+              "rmsAbsolute": 0.0008600378908886837,
+              "maxAbsolute": 0.0036488800026694967,
+              "scale": 3.5733314983660622,
+              "rmsNormalized": 0.00024068236917899828,
+              "maxNormalized": 0.001021142316165735,
+              "weighting": "cylindrical volume"
+            },
+            "Y": {
+              "rmsAbsolute": 3.741539037796682e-06,
+              "maxAbsolute": 1.0109904589772345e-05,
+              "scale": 0.05975926959574518,
+              "rmsNormalized": 6.261018688995284e-05,
+              "maxNormalized": 0.0001691771780037312,
+              "weighting": "mass"
+            },
+            "densityChange": {
+              "rmsAbsolute": 1.4235801544796959e-08,
+              "maxAbsolute": 1.8239619422493183e-07,
+              "scale": 2.448512485055251e-05,
+              "rmsNormalized": 0.000581406124399473,
+              "maxNormalized": 0.007449265435165466,
+              "weighting": "cylindrical volume"
+            },
+            "YChange": {
+              "rmsAbsolute": 4.422848360321154e-07,
+              "maxAbsolute": 3.437657067228983e-06,
+              "scale": 0.0008446383866930751,
+              "rmsNormalized": 0.0005236380953081558,
+              "maxNormalized": 0.004069974940030946,
+              "weighting": "mass"
+            }
+          },
+          "observablesNormalized": {
+            "gasPeakK": 5.472014305284286e-06,
+            "heavyAxialMomentM": 6.716666163051863e-06,
+            "torque_outer": 0.00014038737992600343,
+            "wallPeakK": 3.657459327189335e-09,
+            "currentA": 0.00036258596768680554,
+            "radialMotionalJouleW": 0.0009275109502548437,
+            "shearW": 0.0013763617239615086,
+            "torque_upper": 0.0058514598002222815,
+            "jouleW": 0.0004666865679882583,
+            "lightRadialMomentM": 1.204495449393461e-07,
+            "lightAxialMomentM": 1.2928632881798513e-05,
+            "torque_lower": 0.005749175556223139,
+            "heavyRadialMomentM": 2.2323599671857633e-08,
+            "meridionalKineticJ": 0.0008385146716461946
+          },
+          "passed": true
+        }
+      ]
+    ],
+    "temporal": [
+      {
+        "timeS": 1e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 4.988084800946963e-10,
+            "maxAbsolute": 1.0310714474272634e-08,
+            "scale": 3.8056991666684495e-05,
+            "rmsNormalized": 1.3106881501917521e-05,
+            "maxNormalized": 0.0002709282584545101,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 6.974016225663783e-05,
+            "maxAbsolute": 0.0005825021998475677,
+            "scale": 1.2739865907274748,
+            "rmsNormalized": 5.47416768467042e-05,
+            "maxNormalized": 0.0004572278892786037,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 4.534862747425245e-11,
+            "maxAbsolute": 3.689706318255048e-10,
+            "scale": 1.0,
+            "rmsNormalized": 4.534862747425245e-11,
+            "maxNormalized": 3.689706318255048e-10,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 4.565780458357251e-05,
+            "maxAbsolute": 0.0004251052318835491,
+            "scale": 897.2470106941086,
+            "rmsNormalized": 5.0886549678501266e-08,
+            "maxNormalized": 4.737884070014215e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 6.854086334351268e-05,
+            "maxAbsolute": 0.0006978312587193579,
+            "scale": 3.869268634907844,
+            "rmsNormalized": 1.7714165081521962e-05,
+            "maxNormalized": 0.00018035223825599756,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 2.4133208876562882e-06,
+            "maxAbsolute": 1.8578572865690646e-05,
+            "scale": 1.8514895847606663,
+            "rmsNormalized": 1.3034482653966684e-06,
+            "maxNormalized": 1.0034392317736e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 1.0706471433557203e-08,
+            "maxAbsolute": 2.5689029253816997e-07,
+            "scale": 0.059937731373180925,
+            "rmsNormalized": 1.786265710808635e-07,
+            "maxNormalized": 4.285952882312714e-06,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 4.98808480094774e-10,
+            "maxAbsolute": 1.0310714474274328e-08,
+            "scale": 3.489007231347648e-06,
+            "rmsNormalized": 0.00014296573409568615,
+            "maxNormalized": 0.0029552000871869094,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 1.0706471433557448e-08,
+            "maxAbsolute": 2.5689029253816997e-07,
+            "scale": 0.0001473156648639784,
+            "rmsNormalized": 7.267707370728768e-05,
+            "maxNormalized": 0.0017438083911535517,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 9.364471789610016e-09,
+          "heavyAxialMomentM": 3.4066131470993514e-11,
+          "torque_outer": 3.237856605912071e-05,
+          "wallPeakK": 1.0529025142959114e-12,
+          "currentA": 3.414044373118189e-09,
+          "radialMotionalJouleW": 3.4842033400596733e-07,
+          "shearW": 1.470583194454814e-07,
+          "torque_upper": 0.0004882425107032878,
+          "jouleW": 9.521032661001503e-09,
+          "lightRadialMomentM": 3.5560355681905884e-10,
+          "lightAxialMomentM": 3.840466484383366e-11,
+          "torque_lower": 0.0004874045548604638,
+          "heavyRadialMomentM": 5.854036809668063e-11,
+          "meridionalKineticJ": 3.534177744877212e-07
+        },
+        "passed": true
+      },
+      {
+        "timeS": 2e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 8.992756770687226e-10,
+            "maxAbsolute": 1.796215435808171e-08,
+            "scale": 3.514387526481555e-05,
+            "rmsNormalized": 2.558840396207064e-05,
+            "maxNormalized": 0.0005111034062901026,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 0.00011388241620121289,
+            "maxAbsolute": 0.0009575659589700081,
+            "scale": 1.385400165356998,
+            "rmsNormalized": 8.220182085214852e-05,
+            "maxNormalized": 0.0006911836615258789,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 4.142977374493307e-11,
+            "maxAbsolute": 3.1400304578710347e-10,
+            "scale": 1.0,
+            "rmsNormalized": 4.142977374493307e-11,
+            "maxNormalized": 3.1400304578710347e-10,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 5.565298263345364e-05,
+            "maxAbsolute": 0.0004355833375981888,
+            "scale": 896.4806138454971,
+            "rmsNormalized": 6.207940447783636e-08,
+            "maxNormalized": 4.858814913238702e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 0.00010757855218101785,
+            "maxAbsolute": 0.001278994299907018,
+            "scale": 5.523344927766399,
+            "rmsNormalized": 1.947706572519306e-05,
+            "maxNormalized": 0.0002315615476913976,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 7.405374829414369e-06,
+            "maxAbsolute": 3.998114544856435e-05,
+            "scale": 2.5768276243370125,
+            "rmsNormalized": 2.8738339962960016e-06,
+            "maxNormalized": 1.5515646087832912e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 1.910684344146204e-08,
+            "maxAbsolute": 4.4777367796955403e-07,
+            "scale": 0.059877262828742395,
+            "rmsNormalized": 3.1910014818329904e-07,
+            "maxNormalized": 7.4781921687077e-06,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 8.992756770688627e-10,
+            "maxAbsolute": 1.79621543580851e-08,
+            "scale": 8.97027152100432e-06,
+            "rmsNormalized": 0.0001002506640922926,
+            "maxNormalized": 0.0020024092153761294,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 1.9106843441460046e-08,
+            "maxAbsolute": 4.4777367796955403e-07,
+            "scale": 0.00033963955068322393,
+            "rmsNormalized": 5.6256238129583074e-05,
+            "maxNormalized": 0.0013183790788464003,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 1.3901711275973176e-08,
+          "heavyAxialMomentM": 2.836889479183509e-10,
+          "torque_outer": 2.286367920435935e-05,
+          "wallPeakK": 4.883661669732848e-13,
+          "currentA": 4.801577673885877e-09,
+          "radialMotionalJouleW": 2.8987832094164853e-06,
+          "shearW": 2.0909451697495228e-07,
+          "torque_upper": 0.0003479242786363099,
+          "jouleW": 1.317692159090722e-08,
+          "lightRadialMomentM": 1.3812967470489388e-09,
+          "lightAxialMomentM": 2.870766422722606e-10,
+          "torque_lower": 0.00034746773998156914,
+          "heavyRadialMomentM": 3.013307303652547e-10,
+          "meridionalKineticJ": 2.897019147181936e-06
+        },
+        "passed": true
+      },
+      {
+        "timeS": 4e-05,
+        "profiles": {
+          "density": {
+            "rmsAbsolute": 1.6696903610147078e-09,
+            "maxAbsolute": 3.175317028129669e-08,
+            "scale": 2.7379217102910963e-05,
+            "rmsNormalized": 6.098386066843329e-05,
+            "maxNormalized": 0.0011597545014506894,
+            "weighting": "cylindrical volume"
+          },
+          "gas": {
+            "rmsAbsolute": 0.00020109021934288114,
+            "maxAbsolute": 0.0024481396698092794,
+            "scale": 3.8027904960434284,
+            "rmsNormalized": 5.287964707813992e-05,
+            "maxNormalized": 0.0006437745314543148,
+            "weighting": "cylindrical volume"
+          },
+          "solid": {
+            "rmsAbsolute": 1.5899100131956408e-10,
+            "maxAbsolute": 1.124817572417669e-09,
+            "scale": 1.0,
+            "rmsNormalized": 1.5899100131956408e-10,
+            "maxNormalized": 1.124817572417669e-09,
+            "weighting": "cylindrical volume"
+          },
+          "omega": {
+            "rmsAbsolute": 7.233334044510192e-05,
+            "maxAbsolute": 0.00046512312960800273,
+            "scale": 894.7457489836057,
+            "rmsNormalized": 8.084234043835315e-08,
+            "maxNormalized": 5.198383229385146e-07,
+            "weighting": "cylindrical volume"
+          },
+          "vr": {
+            "rmsAbsolute": 0.00017603958262455804,
+            "maxAbsolute": 0.0024151783025280205,
+            "scale": 7.843759528922132,
+            "rmsNormalized": 2.2443266137296908e-05,
+            "maxNormalized": 0.00030791080394835965,
+            "weighting": "cylindrical volume"
+          },
+          "vz": {
+            "rmsAbsolute": 2.367562669409985e-05,
+            "maxAbsolute": 9.646652221695362e-05,
+            "scale": 3.5734149355022975,
+            "rmsNormalized": 6.625490496186075e-06,
+            "maxNormalized": 2.6995611749015592e-05,
+            "weighting": "cylindrical volume"
+          },
+          "Y": {
+            "rmsAbsolute": 3.594976616577624e-08,
+            "maxAbsolute": 8.146211064596898e-07,
+            "scale": 0.05975847628700326,
+            "rmsNormalized": 6.015843843326854e-07,
+            "maxNormalized": 1.3631892194628461e-05,
+            "weighting": "mass"
+          },
+          "densityChange": {
+            "rmsAbsolute": 1.6696903610150186e-09,
+            "maxAbsolute": 3.175317028130347e-08,
+            "scale": 2.4485099306089265e-05,
+            "rmsNormalized": 6.819210084231837e-05,
+            "maxNormalized": 0.001296836491629286,
+            "weighting": "cylindrical volume"
+          },
+          "YChange": {
+            "rmsAbsolute": 3.594976616578126e-08,
+            "maxAbsolute": 8.146211064596898e-07,
+            "scale": 0.0008446444542439258,
+            "rmsNormalized": 4.2562010542011197e-05,
+            "maxNormalized": 0.0009644544546129637,
+            "weighting": "mass"
+          }
+        },
+        "observablesNormalized": {
+          "gasPeakK": 1.663593514863146e-07,
+          "heavyAxialMomentM": 2.36804847586339e-09,
+          "torque_outer": 1.6012901710214978e-05,
+          "wallPeakK": 2.437283361412732e-12,
+          "currentA": 6.5923745912639676e-09,
+          "radialMotionalJouleW": 1.802117107262901e-05,
+          "shearW": 2.881111831839117e-07,
+          "torque_upper": 0.0002488117767298289,
+          "jouleW": 1.7800762153453725e-08,
+          "lightRadialMomentM": 4.919751742794999e-09,
+          "lightAxialMomentM": 2.3186400788608504e-09,
+          "torque_lower": 0.0002490044751398013,
+          "heavyRadialMomentM": 1.8848565872568366e-09,
+          "meridionalKineticJ": 1.8282906919150827e-05
+        },
+        "passed": true
+      }
+    ],
+    "gates": [
+      {
+        "name": "spatial:0:1e-05:density:rms",
+        "value": 0.0002726974124751224,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:density:max",
+        "value": 0.0031249231306624504,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gas:rms",
+        "value": 0.0019065691374623578,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gas:max",
+        "value": 0.01835772052805886,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:solid:rms",
+        "value": 1.7716558059636437e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:solid:max",
+        "value": 1.006799834613048e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:omega:rms",
+        "value": 0.00026834490118573287,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:omega:max",
+        "value": 0.000853371224965883,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vr:rms",
+        "value": 0.0002600706169655206,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vr:max",
+        "value": 0.002110516873947908,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vz:rms",
+        "value": 0.00028630193130793554,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:vz:max",
+        "value": 0.001165578198351947,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:Y:rms",
+        "value": 7.721807435837932e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:Y:max",
+        "value": 0.0002174062993344972,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:densityChange:rms",
+        "value": 0.0028725794147783945,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:densityChange:max",
+        "value": 0.03407767878364012,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:YChange:rms",
+        "value": 0.0014331689275359112,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:YChange:max",
+        "value": 0.02145969131551228,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:gasPeakK",
+        "value": 8.43906312048635e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:heavyAxialMomentM",
+        "value": 1.614292729295555e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_outer",
+        "value": 0.00024524457781231637,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:wallPeakK",
+        "value": 4.626092773327006e-10,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:currentA",
+        "value": 0.000868846863843003,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:radialMotionalJouleW",
+        "value": 0.00046419102515011986,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:shearW",
+        "value": 0.0033293539624808344,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_upper",
+        "value": 0.010848576522273185,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:jouleW",
+        "value": 0.0011172288325487442,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:lightRadialMomentM",
+        "value": 1.8264935925580894e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:lightAxialMomentM",
+        "value": 3.096889182529735e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:torque_lower",
+        "value": 0.0106331752737613,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:heavyRadialMomentM",
+        "value": 1.6964435446576544e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:1e-05:meridionalKineticJ",
+        "value": 0.0004337005249593009,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:density:rms",
+        "value": 0.0005310204769160559,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:density:max",
+        "value": 0.006619428328478047,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gas:rms",
+        "value": 0.003418987540135811,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gas:max",
+        "value": 0.031234386986667556,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:solid:rms",
+        "value": 5.853385835548302e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:solid:max",
+        "value": 3.358998696967319e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:omega:rms",
+        "value": 0.00026799180541216657,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:omega:max",
+        "value": 0.0008529194925903637,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vr:rms",
+        "value": 0.0003802645350545771,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vr:max",
+        "value": 0.003487770905737326,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vz:rms",
+        "value": 0.0003747816552037865,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:vz:max",
+        "value": 0.0014382073461933049,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:Y:rms",
+        "value": 7.744558483455802e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:Y:max",
+        "value": 0.00022816061788977096,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:densityChange:rms",
+        "value": 0.0020628736035008923,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:densityChange:max",
+        "value": 0.02592990470491348,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:YChange:rms",
+        "value": 0.0013108869979661345,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:YChange:max",
+        "value": 0.014974984869376685,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:gasPeakK",
+        "value": 2.1224142098307953e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:heavyAxialMomentM",
+        "value": 1.6142884643138565e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_outer",
+        "value": 0.0002840196998168837,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:wallPeakK",
+        "value": 1.562186896750221e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:currentA",
+        "value": 0.0008688700338134369,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:radialMotionalJouleW",
+        "value": 0.0010163042962431223,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:shearW",
+        "value": 0.0033176472994949787,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_upper",
+        "value": 0.012113188960926296,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:jouleW",
+        "value": 0.0011172320138929076,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:lightRadialMomentM",
+        "value": 1.9250385503964288e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:lightAxialMomentM",
+        "value": 3.09702657122052e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:torque_lower",
+        "value": 0.011891333073577707,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:heavyRadialMomentM",
+        "value": 1.3645466219879194e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:2e-05:meridionalKineticJ",
+        "value": 0.0009332242649768515,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:density:rms",
+        "value": 0.0012239507076236796,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:density:max",
+        "value": 0.014692335320591459,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gas:rms",
+        "value": 0.002507724792668511,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gas:max",
+        "value": 0.02012820616155824,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:solid:rms",
+        "value": 1.9382114641681867e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:solid:max",
+        "value": 1.1091253782069543e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:omega:rms",
+        "value": 0.00026809869744190624,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:omega:max",
+        "value": 0.0008489863014724572,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vr:rms",
+        "value": 0.0007285208914104068,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vr:max",
+        "value": 0.005306655720092066,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vz:rms",
+        "value": 0.0005219341085312858,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:vz:max",
+        "value": 0.0019636159419644584,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:Y:rms",
+        "value": 7.864310745189674e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:Y:max",
+        "value": 0.00026311410723932674,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:densityChange:rms",
+        "value": 0.0013660853774811127,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:densityChange:max",
+        "value": 0.016427002565202204,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:YChange:rms",
+        "value": 0.0011613864280051293,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:YChange:max",
+        "value": 0.009739148533496137,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:gasPeakK",
+        "value": 1.0479953672914157e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:heavyAxialMomentM",
+        "value": 1.6112626907596636e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_outer",
+        "value": 0.0003341286941082131,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:wallPeakK",
+        "value": 5.461368149829743e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:currentA",
+        "value": 0.0008689205198996067,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:radialMotionalJouleW",
+        "value": 0.0023113572968307596,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:shearW",
+        "value": 0.0032947031103725106,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_upper",
+        "value": 0.014037780220457208,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:jouleW",
+        "value": 0.0011172273466478334,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:lightRadialMomentM",
+        "value": 2.8016076664776343e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:lightAxialMomentM",
+        "value": 3.100188192601029e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:torque_lower",
+        "value": 0.013784303904611696,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:heavyRadialMomentM",
+        "value": 5.037855926206492e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:0:4e-05:meridionalKineticJ",
+        "value": 0.002098520225652738,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:density:rms",
+        "value": 0.00013156989385345688,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:density:max",
+        "value": 0.0015518007617409766,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gas:rms",
+        "value": 0.0007959015304410822,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gas:max",
+        "value": 0.007829583515544246,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:solid:rms",
+        "value": 1.1141927354730021e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:solid:max",
+        "value": 7.216215180960717e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:omega:rms",
+        "value": 0.00013856796758696764,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:omega:max",
+        "value": 0.0004824586926557022,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vr:rms",
+        "value": 0.00014369663261823526,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vr:max",
+        "value": 0.0016109870424784421,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vz:rms",
+        "value": 0.0001562057132113048,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:vz:max",
+        "value": 0.0006116826136246768,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:Y:rms",
+        "value": 6.254117741234389e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:Y:max",
+        "value": 0.00016926609778059008,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:densityChange:rms",
+        "value": 0.0012152490102668935,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:densityChange:max",
+        "value": 0.016932078055882944,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:YChange:rms",
+        "value": 0.0006111651703363944,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:YChange:max",
+        "value": 0.008998786729305062,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:gasPeakK",
+        "value": 1.1519591613157918e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:heavyAxialMomentM",
+        "value": 6.731016898485104e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_outer",
+        "value": 0.0001033833483542816,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:wallPeakK",
+        "value": 3.13634696628451e-10,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:currentA",
+        "value": 0.0003625556553449908,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:radialMotionalJouleW",
+        "value": 0.00019110355018175137,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:shearW",
+        "value": 0.001391298168499972,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_upper",
+        "value": 0.0045249552265532724,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:jouleW",
+        "value": 0.00046668386918333676,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:lightRadialMomentM",
+        "value": 7.66503278526813e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:lightAxialMomentM",
+        "value": 1.291351411107061e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:torque_lower",
+        "value": 0.00443551898087548,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:heavyRadialMomentM",
+        "value": 7.111842003217092e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:1e-05:meridionalKineticJ",
+        "value": 0.00017833984519062077,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:density:rms",
+        "value": 0.00022931477282062438,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:density:max",
+        "value": 0.0029839135788749505,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gas:rms",
+        "value": 0.0013845193145765127,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gas:max",
+        "value": 0.01233289975440324,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:solid:rms",
+        "value": 3.614149770187515e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:solid:max",
+        "value": 2.351033003833436e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:omega:rms",
+        "value": 0.00013815105988752938,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:omega:max",
+        "value": 0.0004957253913969893,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vr:rms",
+        "value": 0.00018330997207289341,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vr:max",
+        "value": 0.0023524645959912827,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vz:rms",
+        "value": 0.0002010903801113458,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:vz:max",
+        "value": 0.0008265462234739748,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:Y:rms",
+        "value": 6.250368465464364e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:Y:max",
+        "value": 0.0001696749304925971,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:densityChange:rms",
+        "value": 0.0008476070392658934,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:densityChange:max",
+        "value": 0.011692283541510803,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:YChange:rms",
+        "value": 0.000572095322755606,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:YChange:max",
+        "value": 0.006259842235864541,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:gasPeakK",
+        "value": 3.291243654257126e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:heavyAxialMomentM",
+        "value": 6.7305915577315715e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_outer",
+        "value": 0.00011956169238342101,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:wallPeakK",
+        "value": 1.0579133428151598e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:currentA",
+        "value": 0.0003625652394178713,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:radialMotionalJouleW",
+        "value": 0.0004138423583832313,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:shearW",
+        "value": 0.0013862877759997134,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_upper",
+        "value": 0.0050500146209743945,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:jouleW",
+        "value": 0.00046668605851669963,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:lightRadialMomentM",
+        "value": 8.178637806126907e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:lightAxialMomentM",
+        "value": 1.2914394946044902e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:torque_lower",
+        "value": 0.004958804010827376,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:heavyRadialMomentM",
+        "value": 5.779627990244411e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:2e-05:meridionalKineticJ",
+        "value": 0.0003791181863731541,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:density:rms",
+        "value": 0.0005270819546470652,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:density:max",
+        "value": 0.006661461583133714,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gas:rms",
+        "value": 0.0010359488593888252,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gas:max",
+        "value": 0.008163454916551651,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:solid:rms",
+        "value": 1.1504340401445233e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:solid:max",
+        "value": 7.526213039454888e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:omega:rms",
+        "value": 0.00013749113713220452,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:omega:max",
+        "value": 0.0005264978776309885,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vr:rms",
+        "value": 0.00030875820391882504,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vr:max",
+        "value": 0.0034532732445867824,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vz:rms",
+        "value": 0.00024068236917899828,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:vz:max",
+        "value": 0.001021142316165735,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:Y:rms",
+        "value": 6.261018688995284e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:Y:max",
+        "value": 0.0001691771780037312,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:densityChange:rms",
+        "value": 0.000581406124399473,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:densityChange:max",
+        "value": 0.007449265435165466,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:YChange:rms",
+        "value": 0.0005236380953081558,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:YChange:max",
+        "value": 0.004069974940030946,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:gasPeakK",
+        "value": 5.472014305284286e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:heavyAxialMomentM",
+        "value": 6.716666163051863e-06,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_outer",
+        "value": 0.00014038737992600343,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:wallPeakK",
+        "value": 3.657459327189335e-09,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:currentA",
+        "value": 0.00036258596768680554,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:radialMotionalJouleW",
+        "value": 0.0009275109502548437,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:shearW",
+        "value": 0.0013763617239615086,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_upper",
+        "value": 0.0058514598002222815,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:jouleW",
+        "value": 0.0004666865679882583,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:lightRadialMomentM",
+        "value": 1.204495449393461e-07,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:lightAxialMomentM",
+        "value": 1.2928632881798513e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:torque_lower",
+        "value": 0.005749175556223139,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:heavyRadialMomentM",
+        "value": 2.2323599671857633e-08,
+        "passed": true
+      },
+      {
+        "name": "spatial:1:4e-05:meridionalKineticJ",
+        "value": 0.0008385146716461946,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:density:rms",
+        "value": 1.3106881501917521e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:density:max",
+        "value": 0.0002709282584545101,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gas:rms",
+        "value": 5.47416768467042e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gas:max",
+        "value": 0.0004572278892786037,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:solid:rms",
+        "value": 4.534862747425245e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:solid:max",
+        "value": 3.689706318255048e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:omega:rms",
+        "value": 5.0886549678501266e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:omega:max",
+        "value": 4.737884070014215e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vr:rms",
+        "value": 1.7714165081521962e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vr:max",
+        "value": 0.00018035223825599756,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vz:rms",
+        "value": 1.3034482653966684e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:vz:max",
+        "value": 1.0034392317736e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:Y:rms",
+        "value": 1.786265710808635e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:Y:max",
+        "value": 4.285952882312714e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:densityChange:rms",
+        "value": 0.00014296573409568615,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:densityChange:max",
+        "value": 0.0029552000871869094,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:YChange:rms",
+        "value": 7.267707370728768e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:YChange:max",
+        "value": 0.0017438083911535517,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:gasPeakK",
+        "value": 9.364471789610016e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:heavyAxialMomentM",
+        "value": 3.4066131470993514e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_outer",
+        "value": 3.237856605912071e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:wallPeakK",
+        "value": 1.0529025142959114e-12,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:currentA",
+        "value": 3.414044373118189e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:radialMotionalJouleW",
+        "value": 3.4842033400596733e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:shearW",
+        "value": 1.470583194454814e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_upper",
+        "value": 0.0004882425107032878,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:jouleW",
+        "value": 9.521032661001503e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:lightRadialMomentM",
+        "value": 3.5560355681905884e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:lightAxialMomentM",
+        "value": 3.840466484383366e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:torque_lower",
+        "value": 0.0004874045548604638,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:heavyRadialMomentM",
+        "value": 5.854036809668063e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:1e-05:meridionalKineticJ",
+        "value": 3.534177744877212e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:density:rms",
+        "value": 2.558840396207064e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:density:max",
+        "value": 0.0005111034062901026,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gas:rms",
+        "value": 8.220182085214852e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gas:max",
+        "value": 0.0006911836615258789,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:solid:rms",
+        "value": 4.142977374493307e-11,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:solid:max",
+        "value": 3.1400304578710347e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:omega:rms",
+        "value": 6.207940447783636e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:omega:max",
+        "value": 4.858814913238702e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vr:rms",
+        "value": 1.947706572519306e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vr:max",
+        "value": 0.0002315615476913976,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vz:rms",
+        "value": 2.8738339962960016e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:vz:max",
+        "value": 1.5515646087832912e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:Y:rms",
+        "value": 3.1910014818329904e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:Y:max",
+        "value": 7.4781921687077e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:densityChange:rms",
+        "value": 0.0001002506640922926,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:densityChange:max",
+        "value": 0.0020024092153761294,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:YChange:rms",
+        "value": 5.6256238129583074e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:YChange:max",
+        "value": 0.0013183790788464003,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:gasPeakK",
+        "value": 1.3901711275973176e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:heavyAxialMomentM",
+        "value": 2.836889479183509e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_outer",
+        "value": 2.286367920435935e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:wallPeakK",
+        "value": 4.883661669732848e-13,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:currentA",
+        "value": 4.801577673885877e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:radialMotionalJouleW",
+        "value": 2.8987832094164853e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:shearW",
+        "value": 2.0909451697495228e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_upper",
+        "value": 0.0003479242786363099,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:jouleW",
+        "value": 1.317692159090722e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:lightRadialMomentM",
+        "value": 1.3812967470489388e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:lightAxialMomentM",
+        "value": 2.870766422722606e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:torque_lower",
+        "value": 0.00034746773998156914,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:heavyRadialMomentM",
+        "value": 3.013307303652547e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:2e-05:meridionalKineticJ",
+        "value": 2.897019147181936e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:density:rms",
+        "value": 6.098386066843329e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:density:max",
+        "value": 0.0011597545014506894,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gas:rms",
+        "value": 5.287964707813992e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gas:max",
+        "value": 0.0006437745314543148,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:solid:rms",
+        "value": 1.5899100131956408e-10,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:solid:max",
+        "value": 1.124817572417669e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:omega:rms",
+        "value": 8.084234043835315e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:omega:max",
+        "value": 5.198383229385146e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vr:rms",
+        "value": 2.2443266137296908e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vr:max",
+        "value": 0.00030791080394835965,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vz:rms",
+        "value": 6.625490496186075e-06,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:vz:max",
+        "value": 2.6995611749015592e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:Y:rms",
+        "value": 6.015843843326854e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:Y:max",
+        "value": 1.3631892194628461e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:densityChange:rms",
+        "value": 6.819210084231837e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:densityChange:max",
+        "value": 0.001296836491629286,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:YChange:rms",
+        "value": 4.2562010542011197e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:YChange:max",
+        "value": 0.0009644544546129637,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:gasPeakK",
+        "value": 1.663593514863146e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:heavyAxialMomentM",
+        "value": 2.36804847586339e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_outer",
+        "value": 1.6012901710214978e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:wallPeakK",
+        "value": 2.437283361412732e-12,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:currentA",
+        "value": 6.5923745912639676e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:radialMotionalJouleW",
+        "value": 1.802117107262901e-05,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:shearW",
+        "value": 2.881111831839117e-07,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_upper",
+        "value": 0.0002488117767298289,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:jouleW",
+        "value": 1.7800762153453725e-08,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:lightRadialMomentM",
+        "value": 4.919751742794999e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:lightAxialMomentM",
+        "value": 2.3186400788608504e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:torque_lower",
+        "value": 0.0002490044751398013,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:heavyRadialMomentM",
+        "value": 1.8848565872568366e-09,
+        "passed": true
+      },
+      {
+        "name": "temporal:0:4e-05:meridionalKineticJ",
+        "value": 1.8282906919150827e-05,
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:density:decreasing",
+        "values": [
+          0.0002726974124751224,
+          0.00013156989385345688
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:gas:decreasing",
+        "values": [
+          0.0019065691374623578,
+          0.0007959015304410822
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:solid:decreasing",
+        "values": [
+          1.7716558059636437e-08,
+          1.1141927354730021e-08
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:omega:decreasing",
+        "values": [
+          0.00026834490118573287,
+          0.00013856796758696764
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:vr:decreasing",
+        "values": [
+          0.0002600706169655206,
+          0.00014369663261823526
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:vz:decreasing",
+        "values": [
+          0.00028630193130793554,
+          0.0001562057132113048
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:Y:decreasing",
+        "values": [
+          7.721807435837932e-05,
+          6.254117741234389e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:densityChange:decreasing",
+        "values": [
+          0.0028725794147783945,
+          0.0012152490102668935
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:YChange:decreasing",
+        "values": [
+          0.0014331689275359112,
+          0.0006111651703363944
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:density:decreasing",
+        "values": [
+          0.0005310204769160559,
+          0.00022931477282062438
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:gas:decreasing",
+        "values": [
+          0.003418987540135811,
+          0.0013845193145765127
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:solid:decreasing",
+        "values": [
+          5.853385835548302e-08,
+          3.614149770187515e-08
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:omega:decreasing",
+        "values": [
+          0.00026799180541216657,
+          0.00013815105988752938
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:vr:decreasing",
+        "values": [
+          0.0003802645350545771,
+          0.00018330997207289341
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:vz:decreasing",
+        "values": [
+          0.0003747816552037865,
+          0.0002010903801113458
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:Y:decreasing",
+        "values": [
+          7.744558483455802e-05,
+          6.250368465464364e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:densityChange:decreasing",
+        "values": [
+          0.0020628736035008923,
+          0.0008476070392658934
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:YChange:decreasing",
+        "values": [
+          0.0013108869979661345,
+          0.000572095322755606
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:density:decreasing",
+        "values": [
+          0.0012239507076236796,
+          0.0005270819546470652
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:gas:decreasing",
+        "values": [
+          0.002507724792668511,
+          0.0010359488593888252
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:solid:decreasing",
+        "values": [
+          1.9382114641681867e-07,
+          1.1504340401445233e-07
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:omega:decreasing",
+        "values": [
+          0.00026809869744190624,
+          0.00013749113713220452
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:vr:decreasing",
+        "values": [
+          0.0007285208914104068,
+          0.00030875820391882504
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:vz:decreasing",
+        "values": [
+          0.0005219341085312858,
+          0.00024068236917899828
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:Y:decreasing",
+        "values": [
+          7.864310745189674e-05,
+          6.261018688995284e-05
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:densityChange:decreasing",
+        "values": [
+          0.0013660853774811127,
+          0.000581406124399473
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:YChange:decreasing",
+        "values": [
+          0.0011613864280051293,
+          0.0005236380953081558
+        ],
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "passed": true,
+  "velocityProjection": {
+    "6": [
+      {
+        "timeS": 1e-05,
+        "normalizedResolvedRms": 0.001677622848290318,
+        "normalizedUnresolvedRms": 0.024018415270762265,
+        "normalizedTotalRms": 0.02397438591533061,
+        "crossTermM2S2": -1.67909467623348e-05,
+        "closureResidualM2S2": 2.1345230270808369e-19,
+        "normalizationMPS": 1.8459664864130603
+      },
+      {
+        "timeS": 2e-05,
+        "normalizedResolvedRms": 0.005249967391888154,
+        "normalizedUnresolvedRms": 0.024086810475699116,
+        "normalizedTotalRms": 0.02569845295537683,
+        "crossTermM2S2": 0.0003476741940501355,
+        "closureResidualM2S2": 7.589415207398531e-19,
+        "normalizationMPS": 2.5691445566448285
+      },
+      {
+        "timeS": 4e-05,
+        "normalizedResolvedRms": 0.01701708815409636,
+        "normalizedUnresolvedRms": 0.02491000660108251,
+        "normalizedTotalRms": 0.033033567109589025,
+        "crossTermM2S2": 0.00230529283665462,
+        "closureResidualM2S2": 2.6020852139652106e-18,
+        "normalizationMPS": 3.5675629725435494
+      }
+    ],
+    "12": [
+      {
+        "timeS": 1e-05,
+        "normalizedResolvedRms": 0.007987337265078918,
+        "normalizedUnresolvedRms": 0.005887686147429216,
+        "normalizedTotalRms": 0.010081069320532852,
+        "crossTermM2S2": 1.0786916957908215e-05,
+        "closureResidualM2S2": 2.1345230270808369e-19,
+        "normalizationMPS": 1.8459664864130603
+      },
+      {
+        "timeS": 2e-05,
+        "normalizedResolvedRms": 0.011071225560454416,
+        "normalizedUnresolvedRms": 0.005853983412225593,
+        "normalizedTotalRms": 0.01279233631485827,
+        "crossTermM2S2": 4.4901320748789876e-05,
+        "closureResidualM2S2": 1.8295911660692887e-19,
+        "normalizationMPS": 2.5691445566448285
+      },
+      {
+        "timeS": 4e-05,
+        "normalizedResolvedRms": 0.014910661732578826,
+        "normalizedUnresolvedRms": 0.005949086102404067,
+        "normalizedTotalRms": 0.016538860818489206,
+        "crossTermM2S2": 0.00020127860746838592,
+        "closureResidualM2S2": 9.215718466126788e-19,
+        "normalizationMPS": 3.5675629725435494
+      }
+    ]
+  },
+  "observableBudget": [
+    {
+      "timeS": 1e-05,
+      "observables": {
+        "currentA": {
+          "spatialNormalized": -0.0008688468581152391,
+          "temporalNormalized": -3.414044373118189e-09,
+          "combinedNormalized": -0.0008688502721596122,
+          "cancellationFraction": 0.0
+        },
+        "gasPeakK": {
+          "spatialNormalized": 8.439061716569282e-06,
+          "temporalNormalized": 9.364471789610016e-09,
+          "combinedNormalized": 8.448426188358892e-06,
+          "cancellationFraction": 0.0
+        },
+        "heavyAxialMomentM": {
+          "spatialNormalized": 1.6142927293505476e-05,
+          "temporalNormalized": 3.4066131470993514e-11,
+          "combinedNormalized": 1.6142961359636946e-05,
+          "cancellationFraction": 0.0
+        },
+        "heavyRadialMomentM": {
+          "spatialNormalized": 1.6964435414601018e-07,
+          "temporalNormalized": -5.854036809668063e-11,
+          "combinedNormalized": 1.695858137779135e-07,
+          "cancellationFraction": 0.000689915964772414
+        },
+        "jouleW": {
+          "spatialNormalized": -0.0011172288126612194,
+          "temporalNormalized": -9.521032661001503e-09,
+          "combinedNormalized": -0.0011172383336938805,
+          "cancellationFraction": 0.0
+        },
+        "lightAxialMomentM": {
+          "spatialNormalized": -3.09688918264867e-05,
+          "temporalNormalized": 3.840466484383366e-11,
+          "combinedNormalized": -3.096885342182186e-05,
+          "cancellationFraction": 2.4802061006079512e-06
+        },
+        "lightRadialMomentM": {
+          "spatialNormalized": -1.8264935932075972e-07,
+          "temporalNormalized": 3.5560355681905884e-10,
+          "combinedNormalized": -1.8229375576394065e-07,
+          "cancellationFraction": 0.0038862722761998647
+        },
+        "meridionalKineticJ": {
+          "spatialNormalized": -0.00043369259565297227,
+          "temporalNormalized": -3.534177744877212e-07,
+          "combinedNormalized": -0.00043404601342746,
+          "cancellationFraction": 0.0
+        },
+        "radialMotionalJouleW": {
+          "spatialNormalized": -0.0004641826598842453,
+          "temporalNormalized": -3.4842033400596733e-07,
+          "combinedNormalized": -0.0004645310802182512,
+          "cancellationFraction": 0.0
+        },
+        "shearW": {
+          "spatialNormalized": -0.003329354452090033,
+          "temporalNormalized": 1.470583194454814e-07,
+          "combinedNormalized": -0.0033292073937705876,
+          "cancellationFraction": 8.833653865947255e-05
+        },
+        "torque_lower": {
+          "spatialNormalized": -0.010630527565533187,
+          "temporalNormalized": 0.0004874045548604638,
+          "combinedNormalized": -0.010143123010672724,
+          "cancellationFraction": 0.08767899454367345
+        },
+        "torque_outer": {
+          "spatialNormalized": 0.0002452525184800797,
+          "temporalNormalized": -3.237856605912071e-05,
+          "combinedNormalized": 0.00021287395242095897,
+          "cancellationFraction": 0.2332488533325524
+        },
+        "torque_upper": {
+          "spatialNormalized": -0.010845877268673688,
+          "temporalNormalized": 0.0004882425107032878,
+          "combinedNormalized": -0.010357634757970401,
+          "cancellationFraction": 0.08615446460900655
+        },
+        "wallPeakK": {
+          "spatialNormalized": -4.626092773315731e-10,
+          "temporalNormalized": 1.0529025142959114e-12,
+          "combinedNormalized": -4.615563748172772e-10,
+          "cancellationFraction": 0.004541679524717401
+        }
+      }
+    },
+    {
+      "timeS": 2e-05,
+      "observables": {
+        "currentA": {
+          "spatialNormalized": -0.0008688700280855201,
+          "temporalNormalized": -4.801577673885877e-09,
+          "combinedNormalized": -0.000868874829663194,
+          "cancellationFraction": 0.0
+        },
+        "gasPeakK": {
+          "spatialNormalized": 2.1224138567473437e-07,
+          "temporalNormalized": -1.3901711275973176e-08,
+          "combinedNormalized": 1.983396743987612e-07,
+          "cancellationFraction": 0.12294614749176569
+        },
+        "heavyAxialMomentM": {
+          "spatialNormalized": 1.614288464368849e-05,
+          "temporalNormalized": 2.836889479183509e-10,
+          "combinedNormalized": 1.614316833263641e-05,
+          "cancellationFraction": 0.0
+        },
+        "heavyRadialMomentM": {
+          "spatialNormalized": 1.3645466194159446e-07,
+          "temporalNormalized": -3.013307303652547e-10,
+          "combinedNormalized": 1.361533312112292e-07,
+          "cancellationFraction": 0.004406837674573616
+        },
+        "jouleW": {
+          "spatialNormalized": -0.0011172319940053262,
+          "temporalNormalized": -1.317692159090722e-08,
+          "combinedNormalized": -0.0011172451709269172,
+          "cancellationFraction": 0.0
+        },
+        "lightAxialMomentM": {
+          "spatialNormalized": -3.09702657133946e-05,
+          "temporalNormalized": 2.870766422722606e-10,
+          "combinedNormalized": -3.096997863675233e-05,
+          "cancellationFraction": 1.853868377599266e-05
+        },
+        "lightRadialMomentM": {
+          "spatialNormalized": -1.9250385510809794e-07,
+          "temporalNormalized": 1.3812967470489388e-09,
+          "combinedNormalized": -1.91122558361049e-07,
+          "cancellationFraction": 0.014248607836467087
+        },
+        "meridionalKineticJ": {
+          "spatialNormalized": -0.0009332072029244803,
+          "temporalNormalized": -2.897019147181936e-06,
+          "combinedNormalized": -0.0009361042220716622,
+          "cancellationFraction": 1.1102230246251565e-16
+        },
+        "radialMotionalJouleW": {
+          "spatialNormalized": -0.0010162859812495378,
+          "temporalNormalized": -2.8987832094164853e-06,
+          "combinedNormalized": -0.0010191847644589543,
+          "cancellationFraction": 0.0
+        },
+        "shearW": {
+          "spatialNormalized": -0.0033176477873826152,
+          "temporalNormalized": 2.0909451697495228e-07,
+          "combinedNormalized": -0.00331743869286564,
+          "cancellationFraction": 0.0001260419146562608
+        },
+        "torque_lower": {
+          "spatialNormalized": -0.011888372078427007,
+          "temporalNormalized": 0.00034746773998156914,
+          "combinedNormalized": -0.01154090433844544,
+          "cancellationFraction": 0.05679507825181085
+        },
+        "torque_outer": {
+          "spatialNormalized": 0.0002840288959674963,
+          "temporalNormalized": -2.286367920435935e-05,
+          "combinedNormalized": 0.00026116521676313695,
+          "cancellationFraction": 0.14900118839014598
+        },
+        "torque_upper": {
+          "spatialNormalized": -0.012110175056859063,
+          "temporalNormalized": 0.0003479242786363099,
+          "combinedNormalized": -0.011762250778222752,
+          "cancellationFraction": 0.05585511389285702
+        },
+        "wallPeakK": {
+          "spatialNormalized": -1.5621868967464135e-09,
+          "temporalNormalized": 4.883661669732848e-13,
+          "combinedNormalized": -1.5616985305794402e-09,
+          "cancellationFraction": 0.0006250385842325734
+        }
+      }
+    },
+    {
+      "timeS": 4e-05,
+      "observables": {
+        "currentA": {
+          "spatialNormalized": -0.0008689205141713571,
+          "temporalNormalized": -6.5923745912639676e-09,
+          "combinedNormalized": -0.0008689271065459484,
+          "cancellationFraction": 0.0
+        },
+        "gasPeakK": {
+          "spatialNormalized": -1.047995192947586e-05,
+          "temporalNormalized": -1.663593514863146e-07,
+          "combinedNormalized": -1.0646311280962176e-05,
+          "cancellationFraction": 0.0
+        },
+        "heavyAxialMomentM": {
+          "spatialNormalized": 1.611262690814553e-05,
+          "temporalNormalized": 2.36804847586339e-09,
+          "combinedNormalized": 1.6114994956621393e-05,
+          "cancellationFraction": 0.0
+        },
+        "heavyRadialMomentM": {
+          "spatialNormalized": 5.0378559167108555e-08,
+          "temporalNormalized": -1.8848565872568366e-09,
+          "combinedNormalized": 4.849370257985172e-08,
+          "cancellationFraction": 0.07212910063573108
+        },
+        "jouleW": {
+          "spatialNormalized": -0.001117227326760335,
+          "temporalNormalized": -1.7800762153453725e-08,
+          "combinedNormalized": -0.0011172451275224887,
+          "cancellationFraction": -2.220446049250313e-16
+        },
+        "lightAxialMomentM": {
+          "spatialNormalized": -3.100188192720091e-05,
+          "temporalNormalized": 2.3186400788608504e-09,
+          "combinedNormalized": -3.099956328712205e-05,
+          "cancellationFraction": 0.00014956941552657366
+        },
+        "lightRadialMomentM": {
+          "spatialNormalized": -2.801607667473896e-07,
+          "temporalNormalized": 4.919751742794999e-09,
+          "combinedNormalized": -2.752410150045946e-07,
+          "cancellationFraction": 0.034514822470861906
+        },
+        "meridionalKineticJ": {
+          "spatialNormalized": -0.0020984818586027845,
+          "temporalNormalized": -1.8282906919150827e-05,
+          "combinedNormalized": -0.002116764765521935,
+          "cancellationFraction": 2.220446049250313e-16
+        },
+        "radialMotionalJouleW": {
+          "spatialNormalized": -0.0023113156434655035,
+          "temporalNormalized": -1.802117107262901e-05,
+          "combinedNormalized": -0.0023293368145381322,
+          "cancellationFraction": 2.220446049250313e-16
+        },
+        "shearW": {
+          "spatialNormalized": -0.0032947035948860132,
+          "temporalNormalized": 2.881111831839117e-07,
+          "combinedNormalized": -0.0032944154837028293,
+          "cancellationFraction": 0.000174878244854626
+        },
+        "torque_lower": {
+          "spatialNormalized": -0.01378087155125276,
+          "temporalNormalized": 0.0002490044751398013,
+          "combinedNormalized": -0.01353186707611296,
+          "cancellationFraction": 0.03549631866616387
+        },
+        "torque_outer": {
+          "spatialNormalized": 0.00033413951271620755,
+          "temporalNormalized": -1.6012901710214978e-05,
+          "combinedNormalized": 0.00031812661100599256,
+          "cancellationFraction": 0.09146246634595057
+        },
+        "torque_upper": {
+          "spatialNormalized": -0.014034287455419214,
+          "temporalNormalized": 0.0002488117767298289,
+          "combinedNormalized": -0.013785475678689384,
+          "cancellationFraction": 0.03484002633963257
+        },
+        "wallPeakK": {
+          "spatialNormalized": -5.461368149816432e-09,
+          "temporalNormalized": -2.437283361412732e-12,
+          "combinedNormalized": -5.463805433177845e-09,
+          "cancellationFraction": 0.0
+        }
+      }
+    }
+  ],
+  "producerSourceHashes": {
+    "package-lock.json": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "package.json": "6fdaedc3d1f3b19c205f034078b70795089fcb94681c296d6882f4fef840a975",
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "scientific/coupled-axial-v74/independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "scientific/coupled-axial-v74/thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "scientific/mixture-axial-v75/PROTOCOL.md": "0195a09c2da99e18b80cb2a73d74046ba74ec3891f7388c138f88256270567a9",
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/mixture-axial-v75/audit.py": "569313ae21d71b19729ca54caea001a2e75db34353537e6e7ab1f962f5322c70",
+    "scientific/mixture-axial-v75/controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "scientific/mixture-axial-v75/coupling.py": "33e026df77534855fd22356b55b36d817361e4d81ee4477ce10c689b24493575",
+    "scientific/mixture-axial-v75/diffusion.py": "71a942cc68d34cd33f5df3cf4cf727373213bc511e73fff19b026f1be4eba60f",
+    "scientific/mixture-axial-v75/diffusion_controls.py": "c2928540fe8b02520bc1eac57ea466af3cec1a9351d9465af09e1b920ee9dd03",
+    "scientific/mixture-axial-v75/endpoint_admission.py": "7479b8b3258c80b89f1fa4880d8d7b7cb4fd0977fd587ac33f78121e7a59c597",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/mixture-axial-v75/independent.py": "3b5b78d710e4c15b65fa56f1b675fb7dbbcdf59716b8737c0f3bb991a98e437e",
+    "scientific/mixture-axial-v75/magnetic.py": "d2bb771f7b47b48e9b989a1df9d9461841663bb6b28480ee34173d183c5cef6f",
+    "scientific/mixture-axial-v75/manifest.json": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999",
+    "scientific/mixture-axial-v75/mixcheck.py": "6cfc408b6dc3bfa20c3e92e98c7ff5b85511441a1f6e868442ecdf925152a579",
+    "scientific/mixture-axial-v75/plot.py": "85aa08e5af54048855a9be9dc5616620cc29a306e6ecc3c1bc06ae9d832e490c",
+    "scientific/mixture-axial-v75/requirements.txt": "30b1b720fd19eb77c3f32552f810ccb578ace30d50a3be0aab6ecb13944b3182",
+    "scientific/mixture-axial-v75/run.py": "d3d4f5b6361965cc96c3c1c2a80802b373f9826d80246123c309eb849c5ac43b",
+    "scientific/mixture-axial-v75/supplemental_admission.py": "578a0ed8107cb5650be4dec028a471c54ab3fd46377534131f6ea0cca9a2d07e",
+    "scientific/mixture-axial-v75/test_analyze.py": "2078a198864970b807219fc759badfcf86e28220c15e55ad4d87b7e42b45fbe6",
+    "scientific/mixture-axial-v75/test_audit.py": "c0246933d3be242d86872c955160f7d6c8056c5b43b6476c0ab89997193bc715",
+    "scientific/mixture-axial-v75/test_controls.py": "7de53936ad454382eb6a1dccd6e074b34c6f5da031a1f634458a23d90ecdd9a6",
+    "scientific/mixture-axial-v75/test_coupling.py": "0cd1b8023d603e58fae52691897fa0fe738d07f19a93ccdacca7b9d8a1deedf7",
+    "scientific/mixture-axial-v75/test_diffusion.py": "faf25584514bd321643ef5f288e5397666603c515d4e9102cd54e2775881e834",
+    "scientific/mixture-axial-v75/test_diffusion_controls.py": "3f3590f2d2aa505c5f99913f1ef5c48ce7810494c9608593ca3544bfdfee3050",
+    "scientific/mixture-axial-v75/test_endpoint_admission.py": "5a0843a5517f7f4af548a476908c5abeaeda4572878a95619f1a922bdcf10f58",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/mixture-axial-v75/test_independent.py": "7f99904073f2c265e3c28feea305bd069db2d8e19e036308d5193c29798ee592",
+    "scientific/mixture-axial-v75/test_initial_integrals.py": "c02805921eb866cb5dc61ec3041a1d8f92c023f15d40018b8dbf75be3e2823c0",
+    "scientific/mixture-axial-v75/test_magnetic.py": "24975f069a9a6067b90c57f60897a2f276bdd7fba1041f734abc7a1471d886d6",
+    "scientific/mixture-axial-v75/test_run.py": "4d869c43e425bd5c34ca6cb4cb7d61a036ed486213f0cc0e75870b1b3bf1d4d8",
+    "scientific/mixture-axial-v75/test_supplemental_admission.py": "6e2bb65ad93a20ce6ce3f07199ea8220eb5cbdce259441f2519f4d08f12d236d",
+    "scientific/mixture-axial-v75/test_verify.py": "b8dbd4117e48ad76fa37f5c2c5fbead64c707d59881dcdd68bc53372a7d07f28",
+    "scientific/mixture-axial-v75/test_wall_resolution.py": "8e79bbe9e35b51ae568aac8584594d5b65b2b14a40652fc254ddff0ab0547409",
+    "scientific/mixture-axial-v75/verify.py": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+    "scientific/mixture-axial-v75/wall_resolution.py": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b"
+  },
+  "runtime": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "fipy": "4.0.3"
+  },
+  "inputHashes": {
+    "study-05.json": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+    "plan-01.json": "3eb35ecaeb3da095e43b48cbacfd8165f4b33588de6941a4017a0e97cd2f8c5e",
+    "study-01.json": "5379ce3ee8f242da9e9c2483e567c789d962be2768faedbdfb9ee62346cf1f3e"
+  },
+  "extensionSourceSha256": "625f29dedf5766ceb23f076fa4c0d2f6acf794965292b6e2ed7f10f9f19dc77d",
+  "commonMetricSha256": "2b6bb1700fb64920e046446607bd56bf8a3888b24ffc25ef853a53d6faeaa3c8",
+  "admittedTrajectoryCount": 26,
+  "admittedEndpointCount": 78,
+  "maximumEndpointObservableError": 5.169833125605525e-13,
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "scope": "48/64/96 grids at 256 outer steps; separate 96-grid 256/512 timestep comparison. Both metrics required. No GCI or experimental qualification. Original v76 verdicts unchanged. Controls remain in frozen baseline evidence."
+}
