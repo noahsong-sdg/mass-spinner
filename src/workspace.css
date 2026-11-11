@@ -28,6 +28,7 @@ body.immersive{overflow:hidden;background:#101614}
 .world-dock button{min-height:44px;min-width:64px;white-space:nowrap;font-size:12px;padding:10px 16px;border-radius:7px;color:#bbc9bf}
 .world-dock button:hover{background:#2a3930;color:#eff3e9}
 .world-dock button[aria-expanded=true]{background:#d69a67;color:#172018}
+.world-dock .world-methods{display:grid;place-items:center;flex:none;min-width:44px;min-height:44px;font-size:16px;text-decoration:none;color:#bbc9bf;border-radius:7px}.world-dock .world-methods:hover{background:#2a3930;color:#eff3e9}
 .world-rail{position:absolute;z-index:4;top:calc(var(--world-top) + 72px);bottom:var(--world-bottom);display:flex;flex-direction:column;min-height:0}
 .world-rail-left{left:16px}.world-rail-right{right:16px}
 .world-window{position:relative;display:flex;flex:1 1 0px;flex-direction:column;min-height:0;min-width:0;background:#18211df5;border:1px solid #4a5a50;border-radius:10px;box-shadow:0 12px 50px #07110b55;overflow:hidden;animation:window-in .18s ease-out}

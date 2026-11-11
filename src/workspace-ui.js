@@ -99,6 +99,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right')};
  dock.append(reset);
+ const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);
  function group(parent,levels,selectors,context){
   const wrapper=make('div','world-group');wrapper.dataset.levels=levels.join(' ');if(context)wrapper.dataset.context=context;
   for(const selector of selectors){const node=doc.querySelector(selector);if(node)wrapper.append(node);}

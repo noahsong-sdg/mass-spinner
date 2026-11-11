@@ -14,7 +14,7 @@ for(const name of readdirSync('release/assets').filter(name=>name.endsWith('.js'
   const parsed=spawnSync(process.execPath,['--check',`release/assets/${name}`],{encoding:'utf8'});
   assert.equal(parsed.status,0,parsed.stderr);
 }
-for(const name of ['separator.glb','separator-cutaway.png','TUTORIAL-REVIEW.md','VALIDATION.md',
+for(const name of ['how-it-works.html','separator.glb','separator-cutaway.png','TUTORIAL-REVIEW.md','VALIDATION.md',
  'COUPLED-TARGET-V35.md','MARATHON-REALISM-V35.md','marathon-reference/neutrons-v35.json','marathon-reference/h1-endfb81-v35.json','marathon-reference/implantation-v35.json'])
   assert.ok(existsSync(`release/${name}`),`Missing deployment asset: ${name}`);
 const atlas=JSON.parse(readFileSync('release/reference-atlas/manifest.json','utf8'));
