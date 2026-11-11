@@ -1,0 +1,41 @@
+{
+  "sourceSHA256": "d94cd40803a45e819e8ad6907e576b6f37659673f46466aa3053fa1939344c26",
+  "predictionSHA256": "0b77555d37a70fd489a62714abe483d8e200cf01f63b81b8b42de79a4bbaa868",
+  "pairs": [
+    {
+      "coarseID": "r32-z4-w8-t128-u",
+      "fineID": "r32-z4-w16-t128-u",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-w16-t128-u",
+      "fineID": "r32-z4-w32-t128-u",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-w32-t128-u",
+      "fineID": "r32-z4-w64-t128-u",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-w64-t128-u",
+      "fineID": "r32-z4-w128-t128-u",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-w8-t128-u",
+      "fineID": "r32-z8-w8-t128-u",
+      "axis": "axial"
+    },
+    {
+      "coarseID": "r32-z8-w8-t128-u",
+      "fineID": "r32-z16-w8-t128-u",
+      "axis": "axial"
+    },
+    {
+      "coarseID": "r32-z4-w8-t128-q",
+      "fineID": "r32-z4-w8-t256-q",
+      "axis": "time"
+    }
+  ]
+}

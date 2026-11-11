@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "family": "h1-cylinder-ce-v38-r1",
+  "qualified": true,
+  "openmcVersion": "0.16.0",
+  "source": {
+    "energyMeV": 14.1,
+    "normalization": "per emitted isotropic source neutron"
+  },
+  "geometry": {
+    "radiusM": 0.1,
+    "frontM": 0.1,
+    "outerRadiusM": 1
+  },
+  "material": {
+    "nuclide": "H1",
+    "atomDensityM3": 6e+28,
+    "temperatureK": 293.6,
+    "rawSHA256": "3024d8f0db604b074e33ed8b05027eb9f5a738614041ba44c83f048e0d0bc1af",
+    "processedSHA256": "0feebfb7fdc52184b6d7c6aa1122cea01e1ebd0930c60a0a816b88cd8bb56b01"
+  },
+  "nodes": [
+    {
+      "thicknessM": 0.02,
+      "seed": 813810,
+      "scores": {
+        "absorption": {
+          "mean": 1.433385207543747e-06,
+          "stdError": 1.922746428526518e-07
+        },
+        "total": {
+          "mean": 0.016269578883257106,
+          "stdError": 0.00014261511098776083
+        }
+      }
+    },
+    {
+      "thicknessM": 0.04,
+      "seed": 813820,
+      "scores": {
+        "absorption": {
+          "mean": 2.2160778007639793e-05,
+          "stdError": 2.031616673732799e-06
+        },
+        "total": {
+          "mean": 0.03737058915438346,
+          "stdError": 0.0003725054892983289
+        }
+      }
+    },
+    {
+      "thicknessM": 0.06,
+      "seed": 813811,
+      "scores": {
+        "absorption": {
+          "mean": 0.00010836343401476932,
+          "stdError": 5.6467283539533105e-06
+        },
+        "total": {
+          "mean": 0.06590711207206176,
+          "stdError": 0.0008631779374306264
+        }
+      }
+    },
+    {
+      "thicknessM": 0.1,
+      "seed": 813812,
+      "scores": {
+        "absorption": {
+          "mean": 0.0004919858530324022,
+          "stdError": 1.6521335477758376e-05
+        },
+        "total": {
+          "mean": 0.14210082129358098,
+          "stdError": 0.002058588454104654
+        }
+      }
+    },
+    {
+      "thicknessM": 0.14,
+      "seed": 813813,
+      "scores": {
+        "absorption": {
+          "mean": 0.0009167566355370222,
+          "stdError": 2.2914035735462706e-05
+        },
+        "total": {
+          "mean": 0.21376050748229022,
+          "stdError": 0.002738637052014455
+        }
+      }
+    },
+    {
+      "thicknessM": 0.18,
+      "seed": 813814,
+      "scores": {
+        "absorption": {
+          "mean": 0.0014438013736198798,
+          "stdError": 3.431465002637518e-05
+        },
+        "total": {
+          "mean": 0.29067598913353576,
+          "stdError": 0.00405537979112929
+        }
+      }
+    }
+  ],
+  "holdouts": [
+    {
+      "thicknessM": 0.03,
+      "seed": 813830,
+      "scores": {
+        "absorption": {
+          "mean": 8.296138490202069e-06,
+          "stdError": 1.1231209963477488e-06
+        },
+        "total": {
+          "mean": 0.02641829415721567,
+          "stdError": 0.0002730097047091896
+        }
+      }
+    },
+    {
+      "thicknessM": 0.05,
+      "seed": 813831,
+      "scores": {
+        "absorption": {
+          "mean": 6.209500260915774e-05,
+          "stdError": 4.257334904464988e-06
+        },
+        "total": {
+          "mean": 0.05158758535597383,
+          "stdError": 0.0006773195723924177
+        }
+      }
+    },
+    {
+      "thicknessM": 0.08,
+      "seed": 813832,
+      "scores": {
+        "absorption": {
+          "mean": 0.0002605388876721208,
+          "stdError": 1.0121449977135572e-05
+        },
+        "total": {
+          "mean": 0.100484592460703,
+          "stdError": 0.0013575858422884928
+        }
+      }
+    },
+    {
+      "thicknessM": 0.12,
+      "seed": 813833,
+      "scores": {
+        "absorption": {
+          "mean": 0.0006830065762147734,
+          "stdError": 2.4266610232444082e-05
+        },
+        "total": {
+          "mean": 0.1758851199884732,
+          "stdError": 0.002982744109685542
+        }
+      }
+    },
+    {
+      "thicknessM": 0.16,
+      "seed": 813834,
+      "scores": {
+        "absorption": {
+          "mean": 0.0012126815517293711,
+          "stdError": 2.8728461692001372e-05
+        },
+        "total": {
+          "mean": 0.2550606471757153,
+          "stdError": 0.003298085869988915
+        }
+      }
+    }
+  ],
+  "qualification": {
+    "controlsPassed": true,
+    "absoluteTolerance": {
+      "absorption": 5e-06,
+      "total": 0.0005
+    },
+    "sigmaMultiplier": 4,
+    "scatterFloorCmInv": 1e-10
+  },
+  "historiesPerCase": 1000000,
+  "batches": 100,
+  "processing": {
+    "code": "NJOY2016",
+    "version": "2016.78",
+    "relativeTolerance": 0.001
+  },
+  "photonTransport": false,
+  "history": {
+    "initialQualified": false,
+    "initialFailedHoldoutM": 0.04,
+    "promotedTrainingNodeM": 0.04,
+    "allFinalHoldoutsFresh": true
+  }
+}

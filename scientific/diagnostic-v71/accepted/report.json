@@ -1,0 +1,209 @@
+{
+  "study": "v71-synthetic-optical-moments",
+  "sourcesSha256": {
+    "chord.py": "238b04bc2d45c1ec6410ddb5a246ff1efa45528fa1fb9dfc8461020e0395086d",
+    "test_chord.py": "4497089d4c482d5612c6dd272a163b0cdf7fc5e71f3e1cfb37b85329f38fd21b",
+    "PROTOCOL.md": "561c1d0736a0768bd54c2fb39fbd393cb0a13af6ed4ff4c001e10973acc8d981",
+    "run_report.py": "f4375a72a1fe0fe75978824a2ac5c08440176d2117d9c69ca1777e0bcffdd343"
+  },
+  "profileRelativeTolerance": 0.0005,
+  "referenceRelativeTolerance": 1e-07,
+  "syntheticRefinementPassed": true,
+  "matchedExperimentalValidation": false,
+  "liveQualified": false,
+  "cases": [
+    {
+      "impactM": 0.17,
+      "reference": {
+        "brightness": 3.0273625908034605,
+        "centroid_m_s": 204.04366219258438,
+        "thermal_variance_m2_s2": 99898.08017497679,
+        "shear_variance_m2_s2": 10198.338050105445
+      },
+      "referenceRefinementRelativeErrors": {
+        "brightness": 1.5805276593826877e-10,
+        "centroid_m_s": 1.21151073065041e-09,
+        "thermal_variance_m2_s2": 3.029586347150544e-10,
+        "shear_variance_m2_s2": 9.088483157503528e-09
+      },
+      "rows": [
+        {
+          "radialCells": 32,
+          "relativeErrors": {
+            "brightness": 0.00014317655771687132,
+            "centroid_m_s": 0.00019891126318365122,
+            "thermal_variance_m2_s2": 4.974112058547941e-05,
+            "shear_variance_m2_s2": 0.0012699334915975873
+          },
+          "maximumRelativeError": 0.0012699334915975873,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 128,
+          "relativeErrors": {
+            "brightness": 2.703217481660663e-05,
+            "centroid_m_s": 1.2629775739244851e-05,
+            "thermal_variance_m2_s2": 3.158288715907493e-06,
+            "shear_variance_m2_s2": 3.172557821743274e-05
+          },
+          "maximumRelativeError": 3.172557821743274e-05,
+          "withinOriginalTolerance": true
+        },
+        {
+          "radialCells": 512,
+          "relativeErrors": {
+            "brightness": 5.746974498728577e-06,
+            "centroid_m_s": 4.631036755934713e-07,
+            "thermal_variance_m2_s2": 1.1580689508323589e-07,
+            "shear_variance_m2_s2": 2.266917681518829e-05
+          },
+          "maximumRelativeError": 2.266917681518829e-05,
+          "withinOriginalTolerance": true
+        },
+        {
+          "radialCells": 2048,
+          "relativeErrors": {
+            "brightness": 4.0143120038878767e-07,
+            "centroid_m_s": 2.7376564650879967e-08,
+            "thermal_variance_m2_s2": 6.845972289471878e-09,
+            "shear_variance_m2_s2": 1.5321560885026578e-06
+          },
+          "maximumRelativeError": 1.5321560885026578e-06,
+          "withinOriginalTolerance": true
+        }
+      ],
+      "referenceResolved": true,
+      "maxErrorDecreases": true,
+      "finestWithinTolerance": true
+    },
+    {
+      "impactM": 0.43,
+      "reference": {
+        "brightness": 2.9834906025285273,
+        "centroid_m_s": 445.14237490799934,
+        "thermal_variance_m2_s2": 103333.13482085713,
+        "shear_variance_m2_s2": 45733.59747906983
+      },
+      "referenceRefinementRelativeErrors": {
+        "brightness": 1.233281372338131e-10,
+        "centroid_m_s": 1.0763900428425983e-09,
+        "thermal_variance_m2_s2": 2.2443954860984594e-10,
+        "shear_variance_m2_s2": 8.669757807752791e-09
+      },
+      "rows": [
+        {
+          "radialCells": 32,
+          "relativeErrors": {
+            "brightness": 0.0003650235970039644,
+            "centroid_m_s": 0.0007791815247365676,
+            "thermal_variance_m2_s2": 0.0001624683118579273,
+            "shear_variance_m2_s2": 0.0018283212618630342
+          },
+          "maximumRelativeError": 0.0018283212618630342,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 128,
+          "relativeErrors": {
+            "brightness": 7.318036918062495e-05,
+            "centroid_m_s": 0.0001236395906058963,
+            "thermal_variance_m2_s2": 2.5780277030189736e-05,
+            "shear_variance_m2_s2": 0.0009795278841103982
+          },
+          "maximumRelativeError": 0.0009795278841103982,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 512,
+          "relativeErrors": {
+            "brightness": 5.118185008384239e-06,
+            "centroid_m_s": 8.672655017532736e-06,
+            "thermal_variance_m2_s2": 1.808348344155116e-06,
+            "shear_variance_m2_s2": 6.738868615676046e-05
+          },
+          "maximumRelativeError": 6.738868615676046e-05,
+          "withinOriginalTolerance": true
+        },
+        {
+          "radialCells": 2048,
+          "relativeErrors": {
+            "brightness": 6.200312373644679e-07,
+            "centroid_m_s": 1.1502313006850926e-06,
+            "thermal_variance_m2_s2": 2.398364586365069e-07,
+            "shear_variance_m2_s2": 6.505024882820729e-06
+          },
+          "maximumRelativeError": 6.505024882820729e-06,
+          "withinOriginalTolerance": true
+        }
+      ],
+      "referenceResolved": true,
+      "maxErrorDecreases": true,
+      "finestWithinTolerance": true
+    },
+    {
+      "impactM": 0.81,
+      "reference": {
+        "brightness": 2.2003247484972492,
+        "centroid_m_s": 366.3294443190492,
+        "thermal_variance_m2_s2": 115466.32787505352,
+        "shear_variance_m2_s2": 28083.25171999465
+      },
+      "referenceRefinementRelativeErrors": {
+        "brightness": 4.582808624693369e-11,
+        "centroid_m_s": 8.564804703381006e-10,
+        "thermal_variance_m2_s2": 6.982129394292372e-11,
+        "shear_variance_m2_s2": 7.920651678860356e-09
+      },
+      "rows": [
+        {
+          "radialCells": 32,
+          "relativeErrors": {
+            "brightness": 0.00021679846342179015,
+            "centroid_m_s": 0.0026007715965561703,
+            "thermal_variance_m2_s2": 0.0002120180378070692,
+            "shear_variance_m2_s2": 0.012145685965519074
+          },
+          "maximumRelativeError": 0.012145685965519074,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 128,
+          "relativeErrors": {
+            "brightness": 8.222448463874715e-05,
+            "centroid_m_s": 0.0010281515329913938,
+            "thermal_variance_m2_s2": 8.381615320696611e-05,
+            "shear_variance_m2_s2": 0.004908511378691379
+          },
+          "maximumRelativeError": 0.004908511378691379,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 512,
+          "relativeErrors": {
+            "brightness": 9.761598513446256e-06,
+            "centroid_m_s": 0.0001217874029458902,
+            "thermal_variance_m2_s2": 9.928255997528067e-06,
+            "shear_variance_m2_s2": 0.0006040004730648718
+          },
+          "maximumRelativeError": 0.0006040004730648718,
+          "withinOriginalTolerance": false
+        },
+        {
+          "radialCells": 2048,
+          "relativeErrors": {
+            "brightness": 6.091416407327331e-07,
+            "centroid_m_s": 7.59830730865556e-06,
+            "thermal_variance_m2_s2": 6.19423177363973e-07,
+            "shear_variance_m2_s2": 3.772665863707122e-05
+          },
+          "maximumRelativeError": 3.772665863707122e-05,
+          "withinOriginalTolerance": true
+        }
+      ],
+      "referenceResolved": true,
+      "maxErrorDecreases": true,
+      "finestWithinTolerance": true
+    }
+  ],
+  "limits": "Specified single-transition optically thin synthetic profiles; no recovered spectral fit, emissivity or real-machine qualification. The retained 512-cell outer-chord failure motivated 2048-cell refinement."
+}

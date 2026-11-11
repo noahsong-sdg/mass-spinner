@@ -1,0 +1,12 @@
+{
+  "label": "axial-r64-z32-g128-t256",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/resolved-v68/campaign.ts",
+    "scientific/resolved-v68/specifications.json",
+    "/work/home/resolved68-campaign",
+    "[\"axial-r64-z32-g128-t256\"]"
+  ],
+  "exitCode": 0,
+  "seconds": 200.371370383
+}

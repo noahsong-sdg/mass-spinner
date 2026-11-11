@@ -1,0 +1,20 @@
+{
+  "label": "transient67-surface-uniform",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/surface.py",
+    "/work/home/transient67-spatial-probe.json",
+    "/work/home/transient67-spatial-assess/config.json",
+    "/work/home/transient67-surface-uniform.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 722,
+  "sourceSHA256": "cbf9ee9cbe614737ea830d3333d43b1caadff4e26079f13803b3e1ca1de72c26",
+  "exitCode": 1,
+  "seconds": 1.2599164589999998,
+  "sourceVerifiedBeforeAndAfter": true
+}

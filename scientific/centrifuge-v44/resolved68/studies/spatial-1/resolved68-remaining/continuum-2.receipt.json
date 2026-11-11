@@ -1,0 +1,11 @@
+{
+  "label": "continuum-2",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/reference_fipy.py",
+    "/work/home/resolved68-remaining/continuum/cases.json",
+    "/work/home/resolved68-remaining/continuum/fipy.json"
+  ],
+  "exitCode": 0,
+  "seconds": 1.1357690839999999
+}

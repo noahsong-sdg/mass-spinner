@@ -1,0 +1,7 @@
+[
+ {"id":"anchor-r64-z64-g128-t256","radial":64,"axial":64,"liner":128,"steps":256},
+ {"id":"radial-r32-z64-g128-t256","radial":32,"axial":64,"liner":128,"steps":256},
+ {"id":"axial-r64-z32-g128-t256","radial":64,"axial":32,"liner":128,"steps":256},
+ {"id":"liner-r64-z64-g64-t256","radial":64,"axial":64,"liner":64,"steps":256},
+ {"id":"time-r64-z64-g128-t128","radial":64,"axial":64,"liner":128,"steps":128}
+]

@@ -1,0 +1,649 @@
+{
+  "axis": "axial",
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "originalPacketsSHA256": {
+    "/work/home/resolved68-campaign/axial-r64-z32-g128-t256.json": "0a4ed066878cc0b290d2ec3b5512c7530b018bcf1a801cb0f1ef146580f7c241",
+    "/work/home/resolved68-campaign/anchor-r64-z64-g128-t256.json": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+  },
+  "combinedUncompressedSHA256": "2dae6696fa7f01b1a6fcfee8164866a99f9cb1423e755df64356aa9ce479c56a",
+  "combinedGzipSHA256": "f49eabed99f80a2aaf7199ab3ee33d7cb81d5674aa4b48b6a642329a93d01643",
+  "wholeHistoryPassed": true,
+  "physicalSurfacePassed": true,
+  "electricalIdentityPassed": true,
+  "electricalRefinementPassed": true,
+  "fixedPhysicalCheckpoints": [
+    {
+      "timeS": 9.765625e-07,
+      "history": {
+        "timeS": 9.765625e-07,
+        "omegaDifferenceRadS": 0.0001063207455445081,
+        "omegaWorstCell": 3,
+        "gasTemperatureDifferenceK": 2.5798908609431237e-07,
+        "gasTemperatureWorstCell": 0,
+        "linerTemperatureDifferenceK": 4.547473508864641e-13,
+        "linerTemperatureWorstCell": 0,
+        "speciesCdfError": 2.398081733190338e-14,
+        "cumulativeGasWallHeatDifferenceJ": 2.7548103365528445e-15,
+        "endpointGasWallPowerDifferenceW": 4.807239051274337e-09,
+        "intervalGasWallPowerDifferenceW": 4.807239051274337e-09
+      },
+      "surface": {
+        "timeS": 9.765625e-07,
+        "coarseSurfaceK": 1199.9999062262805,
+        "fineSurfaceK": 1199.9999062262807,
+        "rawDifferenceK": 2.2737367544323206e-13,
+        "fineCausalExcursionK": 9.377371929986111e-05,
+        "roundoffAllowanceK": 5.45696802330549e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 2.424705739954252e-09
+      },
+      "electrical": {
+        "timeS": 9.765625e-07,
+        "coarseIndex": 8,
+        "fineIndex": 8,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 1.024390782318623e-07,
+            "scale": 0.006137289604085695,
+            "relativeError": 1.6691257027152003e-05,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 2.0541369366040146e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0033469773615319403,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 2.0643808454073962e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0033636686201562065,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 2.305521765848254e-10,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.006312690132816083,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 2.7149997947229597e-05,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.008899213767210808,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 1.0243907755756254e-05,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.002875285592886745,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 1.0243907823187341e-05,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0028752856118134705,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "timeS": 3.90625e-06,
+      "history": {
+        "timeS": 3.90625e-06,
+        "omegaDifferenceRadS": 0.00042466711602173746,
+        "omegaWorstCell": 3,
+        "gasTemperatureDifferenceK": 1.0253158961859299e-06,
+        "gasTemperatureWorstCell": 0,
+        "linerTemperatureDifferenceK": 4.547473508864641e-13,
+        "linerTemperatureWorstCell": 0,
+        "speciesCdfError": 1.7388868123191514e-13,
+        "cumulativeGasWallHeatDifferenceJ": 3.95275717539334e-14,
+        "endpointGasWallPowerDifferenceW": 1.839501173606095e-08,
+        "intervalGasWallPowerDifferenceW": 1.839501173606095e-08
+      },
+      "surface": {
+        "timeS": 3.90625e-06,
+        "coarseSurfaceK": 1199.9998128575587,
+        "fineSurfaceK": 1199.999812857559,
+        "rawDifferenceK": 2.2737367544323206e-13,
+        "fineCausalExcursionK": 0.0001871424410637701,
+        "roundoffAllowanceK": 5.456967810967029e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 1.2149765395320076e-09
+      },
+      "electrical": {
+        "timeS": 3.90625e-06,
+        "coarseIndex": 16,
+        "fineIndex": 16,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 1.0164360838005925e-07,
+            "scale": 0.006137289604085695,
+            "relativeError": 1.6561644461488897e-05,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 2.0462025249006616e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0033340491599719697,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 2.0563668862931105e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0033506108053368592,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 2.2962505890209284e-10,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.006287304960858741,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 2.7041946536267552e-05,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.008863796725711618,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 1.016436084315701e-05,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.002852958166946512,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 1.0164360838006183e-05,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0028529581655007646,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "timeS": 1.5625e-05,
+      "history": {
+        "timeS": 1.5625e-05,
+        "omegaDifferenceRadS": 0.0016892380663193762,
+        "omegaWorstCell": 3,
+        "gasTemperatureDifferenceK": 3.9950779182618135e-06,
+        "gasTemperatureWorstCell": 0,
+        "linerTemperatureDifferenceK": 2.2737367544323206e-12,
+        "linerTemperatureWorstCell": 2,
+        "speciesCdfError": 2.633171458654715e-12,
+        "cumulativeGasWallHeatDifferenceJ": 5.660828251465022e-13,
+        "endpointGasWallPowerDifferenceW": 6.720136447313507e-08,
+        "intervalGasWallPowerDifferenceW": 6.720136447313507e-08
+      },
+      "surface": {
+        "timeS": 1.5625e-05,
+        "coarseSurfaceK": 1199.9996361562844,
+        "fineSurfaceK": 1199.999636156286,
+        "rawDifferenceK": 1.5916157281026244e-12,
+        "fineCausalExcursionK": 0.0003638437140125461,
+        "roundoffAllowanceK": 5.456967409069551e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 4.37444888232353e-09
+      },
+      "electrical": {
+        "timeS": 1.5625e-05,
+        "coarseIndex": 32,
+        "fineIndex": 32,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 9.865400681109739e-08,
+            "scale": 0.006137289604085695,
+            "relativeError": 1.6074523637506334e-05,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 2.015532556725458e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.003284076011964116,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 2.0253979573523883e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0033001505355133433,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 2.2609718786979658e-10,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.006190709227149715,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 2.662422336017156e-05,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.008726875616294894,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 9.86540067784503e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.002769045281682043,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 9.865400681109996e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.002769045282598462,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "timeS": 6.25e-05,
+      "history": {
+        "timeS": 6.25e-05,
+        "omegaDifferenceRadS": 0.006626800197409466,
+        "omegaWorstCell": 3,
+        "gasTemperatureDifferenceK": 1.42658714139543e-05,
+        "gasTemperatureWorstCell": 0,
+        "linerTemperatureDifferenceK": 1.2278178473934531e-11,
+        "linerTemperatureWorstCell": 2,
+        "speciesCdfError": 3.885419763705045e-11,
+        "cumulativeGasWallHeatDifferenceJ": 7.68718281304176e-12,
+        "endpointGasWallPowerDifferenceW": 2.2492245044247738e-07,
+        "intervalGasWallPowerDifferenceW": 2.2492245044247738e-07
+      },
+      "surface": {
+        "timeS": 6.25e-05,
+        "coarseSurfaceK": 1199.999338498045,
+        "fineSurfaceK": 1199.999338498057,
+        "rawDifferenceK": 1.2050804798491299e-11,
+        "fineCausalExcursionK": 0.0006615019428863889,
+        "roundoffAllowanceK": 5.45696673192695e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 1.8217338479625586e-08
+      },
+      "electrical": {
+        "timeS": 6.25e-05,
+        "coarseIndex": 64,
+        "fineIndex": 64,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 8.819570635204695e-08,
+            "scale": 0.006137289604085695,
+            "relativeError": 1.4370465146916582e-05,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 1.9025903780544532e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0031000498604267708,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 1.9114099488772886e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.00311442032587941,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 2.133915414025631e-10,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.005842819173484381,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 2.5083473397519793e-05,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.008221849306307299,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 8.819570583991918e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0024754990810367354,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 8.819570635205509e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.002475499095411494,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "timeS": 0.00025,
+      "history": {
+        "timeS": 0.00025,
+        "omegaDifferenceRadS": 0.025101319479290396,
+        "omegaWorstCell": 3,
+        "gasTemperatureDifferenceK": 3.8521272927027894e-05,
+        "gasTemperatureWorstCell": 20,
+        "linerTemperatureDifferenceK": 7.412381819449365e-11,
+        "linerTemperatureWorstCell": 0,
+        "speciesCdfError": 4.906661188464057e-10,
+        "cumulativeGasWallHeatDifferenceJ": 9.59563799945995e-11,
+        "endpointGasWallPowerDifferenceW": 6.746710194960315e-07,
+        "intervalGasWallPowerDifferenceW": 6.746710194960315e-07
+      },
+      "surface": {
+        "timeS": 0.00025,
+        "coarseSurfaceK": 1199.9989932322208,
+        "fineSurfaceK": 1199.998993232295,
+        "rawDifferenceK": 7.435119186993688e-11,
+        "fineCausalExcursionK": 0.0010067677048937185,
+        "roundoffAllowanceK": 5.456965946119699e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 7.385138747352442e-08
+      },
+      "electrical": {
+        "timeS": 0.00025,
+        "coarseIndex": 128,
+        "fineIndex": 128,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 5.8730507535284784e-08,
+            "scale": 0.006137289604085695,
+            "relativeError": 9.569453508628127e-06,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 1.535429754297461e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.002501804303442516,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 1.5413028050857355e-05,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0025113737570077593,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 1.7412301556338832e-10,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.00476761771901454,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 2.0062002290926067e-05,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.00657591382998399,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 5.873050777552291e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0016484625486303727,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 5.8730507535283225e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0016484625418872654,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    },
+    {
+      "timeS": 0.001,
+      "history": {
+        "timeS": 0.001,
+        "omegaDifferenceRadS": 0.08361830789363012,
+        "omegaWorstCell": 0,
+        "gasTemperatureDifferenceK": 5.318920079844247e-05,
+        "gasTemperatureWorstCell": 14,
+        "linerTemperatureDifferenceK": 2.5011104298755527e-10,
+        "linerTemperatureWorstCell": 0,
+        "speciesCdfError": 3.3756215322977567e-09,
+        "cumulativeGasWallHeatDifferenceJ": 7.746683164736035e-10,
+        "endpointGasWallPowerDifferenceW": 7.997687365701722e-07,
+        "intervalGasWallPowerDifferenceW": 7.997687365701722e-07
+      },
+      "surface": {
+        "timeS": 0.001,
+        "coarseSurfaceK": 1199.9989090744566,
+        "fineSurfaceK": 1199.998909074707,
+        "rawDifferenceK": 2.503384166629985e-10,
+        "fineCausalExcursionK": 0.0011029713859898038,
+        "roundoffAllowanceK": 5.45696575386155e-10,
+        "roundoffDominatedReferenceSignal": false,
+        "causalRelativeError": 2.2696728114877198e-07
+      },
+      "electrical": {
+        "timeS": 0.001,
+        "coarseIndex": 256,
+        "fineIndex": 256,
+        "gates": [
+          {
+            "name": "electrodePowerW",
+            "absoluteError": 1.6386115002478517e-08,
+            "scale": 0.006137289604085695,
+            "relativeError": 2.669926964432314e-06,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "jouleW",
+            "absoluteError": 6.718802558353175e-06,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.0010947507762841039,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "mechanicalW",
+            "absoluteError": 6.735188672807747e-06,
+            "scale": 0.006137289604085695,
+            "relativeError": 0.001097420703159261,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedTorqueNm",
+            "absoluteError": 9.38001444958355e-11,
+            "scale": 3.652201703776269e-08,
+            "relativeError": 0.002568317746493818,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "projectedJouleW",
+            "absoluteError": 8.590658959583403e-06,
+            "scale": 0.00305083107984931,
+            "relativeError": 0.0028158422196248646,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "innerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "outerCurrentA",
+            "absoluteError": 1.6386115042611683e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0004599295662237043,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "lowerCurrentA",
+            "absoluteError": 0.0,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.0,
+            "limit": 0.02,
+            "passed": true
+          },
+          {
+            "name": "upperCurrentA",
+            "absoluteError": 1.6386115002482108e-06,
+            "scale": 0.0035627444387086155,
+            "relativeError": 0.00045992956509733734,
+            "limit": 0.02,
+            "passed": true
+          }
+        ]
+      }
+    }
+  ],
+  "checkpointScope": "Additional fixed times; does not replace all-shared-time or startup diagnostics.",
+  "experimentalValidation": false,
+  "liveBackendChanged": false
+}

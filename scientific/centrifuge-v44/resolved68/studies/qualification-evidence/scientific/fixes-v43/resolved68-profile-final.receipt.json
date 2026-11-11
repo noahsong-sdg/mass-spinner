@@ -1,0 +1,19 @@
+{
+  "label": "resolved68-profile-final",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/resolved-v68/profile.ts",
+    "/work/home/transient67-graded-fixed.json",
+    "/work/home/resolved68-profile-final.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 734,
+  "sourceSHA256": "b86ae3d5c2e5f2f9c2a2abb967adc8261dfd11423880be4caa7585d9c8aedd37",
+  "exitCode": 0,
+  "seconds": 1.029017167,
+  "sourceVerifiedBeforeAndAfter": true
+}

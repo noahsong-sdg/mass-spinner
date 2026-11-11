@@ -1,0 +1,219 @@
+{
+  "failedRuns": [],
+  "comparisons": [
+    {
+      "axis": "time",
+      "coarse": "mixture-n8-t16",
+      "fine": "mixture-n8-t32",
+      "omegaErrorOverInitialPeak": 0.0020191488278141476,
+      "gasTemperatureDifferenceK": 1.092186407301142,
+      "gasHeatingScaleK": 91.30125097541395,
+      "gasTemperatureErrorOverHeating": 0.011962447344727525,
+      "speciesCdfError": 6.102244737946072e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n8-t32",
+      "fine": "mixture-n8-t64",
+      "omegaErrorOverInitialPeak": 0.001029455166729788,
+      "gasTemperatureDifferenceK": 0.5587659145667203,
+      "gasHeatingScaleK": 91.85243580799784,
+      "gasTemperatureErrorOverHeating": 0.006083299910899773,
+      "speciesCdfError": 3.109357231514953e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n16-t16",
+      "fine": "mixture-n16-t32",
+      "omegaErrorOverInitialPeak": 0.001964386049538791,
+      "gasTemperatureDifferenceK": 1.1209957527785264,
+      "gasHeatingScaleK": 92.31120857405881,
+      "gasTemperatureErrorOverHeating": 0.012143658068122697,
+      "speciesCdfError": 6.349952036602269e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n16-t32",
+      "fine": "mixture-n16-t64",
+      "omegaErrorOverInitialPeak": 0.0010020221531095975,
+      "gasTemperatureDifferenceK": 0.5727209172828225,
+      "gasHeatingScaleK": 92.86553861390553,
+      "gasTemperatureErrorOverHeating": 0.00616720611145052,
+      "speciesCdfError": 3.2376894012670077e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n32-t16",
+      "fine": "mixture-n32-t32",
+      "omegaErrorOverInitialPeak": 0.0019318951665236068,
+      "gasTemperatureDifferenceK": 1.1275535327954458,
+      "gasHeatingScaleK": 92.57234582520618,
+      "gasTemperatureErrorOverHeating": 0.012180241547777958,
+      "speciesCdfError": 6.405875133266847e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n32-t32",
+      "fine": "mixture-n32-t64",
+      "omegaErrorOverInitialPeak": 0.0009856721043523164,
+      "gasTemperatureDifferenceK": 0.5757466532379567,
+      "gasHeatingScaleK": 93.13361982539027,
+      "gasTemperatureErrorOverHeating": 0.006181942184974491,
+      "speciesCdfError": 3.2665009529919686e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n64-t16",
+      "fine": "mixture-n64-t32",
+      "omegaErrorOverInitialPeak": 0.0019160934919455477,
+      "gasTemperatureDifferenceK": 1.12954016655749,
+      "gasHeatingScaleK": 92.6286049150358,
+      "gasTemperatureErrorOverHeating": 0.01219429103562089,
+      "speciesCdfError": 6.420780069046894e-05
+    },
+    {
+      "axis": "time",
+      "coarse": "mixture-n64-t32",
+      "fine": "mixture-n64-t64",
+      "omegaErrorOverInitialPeak": 0.0009773364077640448,
+      "gasTemperatureDifferenceK": 0.5769264080342964,
+      "gasHeatingScaleK": 93.18873671278175,
+      "gasTemperatureErrorOverHeating": 0.0061909456913494705,
+      "speciesCdfError": 3.2746834567137784e-05
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n8-t16",
+      "fine": "mixture-n16-t16",
+      "omegaErrorOverInitialPeak": 0.08601219287791063,
+      "gasTemperatureDifferenceK": 0.8803630269612768,
+      "gasHeatingScaleK": 91.22220517039159,
+      "gasTemperatureErrorOverHeating": 0.009650753622068986,
+      "speciesCdfError": 0.00036245765377243555
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n8-t32",
+      "fine": "mixture-n16-t32",
+      "omegaErrorOverInitialPeak": 0.08669811035454573,
+      "gasTemperatureDifferenceK": 0.8977719870349574,
+      "gasHeatingScaleK": 92.31120857405881,
+      "gasTemperatureErrorOverHeating": 0.009725492720796728,
+      "speciesCdfError": 0.00036086042681648944
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n8-t64",
+      "fine": "mixture-n16-t64",
+      "omegaErrorOverInitialPeak": 0.08703952244934626,
+      "gasTemperatureDifferenceK": 0.9066620537128074,
+      "gasHeatingScaleK": 92.86553861390553,
+      "gasTemperatureErrorOverHeating": 0.009763170140888467,
+      "speciesCdfError": 0.00035997678963056723
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n16-t16",
+      "fine": "mixture-n32-t16",
+      "omegaErrorOverInitialPeak": 0.06790649086781704,
+      "gasTemperatureDifferenceK": 0.2113941308284666,
+      "gasHeatingScaleK": 91.47011848400894,
+      "gasTemperatureErrorOverHeating": 0.002311073105972013,
+      "speciesCdfError": 0.00011593713641476489
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n16-t32",
+      "fine": "mixture-n32-t32",
+      "omegaErrorOverInitialPeak": 0.06860877775145857,
+      "gasTemperatureDifferenceK": 0.21623748114211594,
+      "gasHeatingScaleK": 92.57234582520618,
+      "gasTemperatureErrorOverHeating": 0.0023358755707715622,
+      "speciesCdfError": 0.00011619715627694815
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n16-t64",
+      "fine": "mixture-n32-t64",
+      "omegaErrorOverInitialPeak": 0.06895987373998373,
+      "gasTemperatureDifferenceK": 0.2188039672253126,
+      "gasHeatingScaleK": 93.13361982539027,
+      "gasTemperatureErrorOverHeating": 0.002349355341664298,
+      "speciesCdfError": 0.00011630909137889944
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n32-t16",
+      "fine": "mixture-n64-t16",
+      "omegaErrorOverInitialPeak": 0.04643807808677527,
+      "gasTemperatureDifferenceK": 0.051340849310463454,
+      "gasHeatingScaleK": 91.52843744557867,
+      "gasTemperatureErrorOverHeating": 0.0005609278465066105,
+      "speciesCdfError": 3.154985223173187e-05
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n32-t32",
+      "fine": "mixture-n64-t32",
+      "omegaErrorOverInitialPeak": 0.04694344219103925,
+      "gasTemperatureDifferenceK": 0.05268473438741239,
+      "gasHeatingScaleK": 92.6286049150358,
+      "gasTemperatureErrorOverHeating": 0.0005687739163915705,
+      "speciesCdfError": 3.187140293759924e-05
+    },
+    {
+      "axis": "radial",
+      "coarse": "mixture-n32-t64",
+      "fine": "mixture-n64-t64",
+      "omegaErrorOverInitialPeak": 0.047193840849646694,
+      "gasTemperatureDifferenceK": 0.05337773377596022,
+      "gasHeatingScaleK": 93.18873671278175,
+      "gasTemperatureErrorOverHeating": 0.0005727916876958688,
+      "speciesCdfError": 3.203299942726098e-05
+    }
+  ],
+  "gates": [
+    {
+      "name": "time omegaErrorOverInitialPeak",
+      "value": 0.0009773364077640448,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "time gasTemperatureErrorOverHeating",
+      "value": 0.0061909456913494705,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "time speciesCdfError",
+      "value": 3.2746834567137784e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "radial omegaErrorOverInitialPeak",
+      "value": 0.047193840849646694,
+      "limit": 0.02,
+      "passed": false
+    },
+    {
+      "name": "radial gasTemperatureErrorOverHeating",
+      "value": 0.0005727916876958688,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "radial speciesCdfError",
+      "value": 3.203299942726098e-05,
+      "limit": 0.005,
+      "passed": true
+    }
+  ],
+  "allCoupledRefinementGatesPassed": false,
+  "spatialComparison": "Coarse cell-center r\u00b2 coordinates; fine field linearly interpolated. Species CDF at shared radial edges.",
+  "axialAndLinerGridsRefined": false,
+  "experimentalValidation": false,
+  "liveBackendChanged": false,
+  "predictionSHA256": "203c41b9ca106e155828b37a6c462ca99ec228ef2ef10c5b2d8c06a181d5ab1f"
+}

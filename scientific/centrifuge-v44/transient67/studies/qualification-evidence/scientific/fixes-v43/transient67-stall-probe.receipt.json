@@ -1,0 +1,20 @@
+{
+  "label": "transient67-stall-probe",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/probe_failure.py",
+    "/work/home/transient67-graded-probe.json",
+    "/work/home/transient67-stall-probe",
+    "r32-z4-g128-t128-q"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 725,
+  "sourceSHA256": "2f2bd160de982a57741d32981faf13e70b36b02e6528fa717ad475ebbfaeb41d",
+  "exitCode": 1,
+  "seconds": 1.112907751,
+  "sourceVerifiedBeforeAndAfter": true
+}

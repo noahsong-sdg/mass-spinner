@@ -1,0 +1,119 @@
+[
+  {
+    "label": "electrical",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/run_study.py",
+      "/work/home/current66-final-volume/electrical"
+    ],
+    "exitCode": 0,
+    "seconds": 1.6669861670000001
+  },
+  {
+    "label": "analysis-tests",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scientific/current-v66",
+      "-p",
+      "test_analysis.py"
+    ],
+    "exitCode": 0,
+    "seconds": 0.05056462499999981
+  },
+  {
+    "label": "q-momentum-fipy",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/reference_q_momentum.py",
+      "/work/home/current66-final-volume/q-momentum-fipy.json"
+    ],
+    "exitCode": 0,
+    "seconds": 0.3128231669999999
+  },
+  {
+    "label": "coupled",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/current-v66/coupled.ts",
+      "/work/home/current66-final-volume/coupled.json",
+      "[8,16,32,64]"
+    ],
+    "exitCode": 0,
+    "seconds": 99.470048713
+  },
+  {
+    "label": "coupled-independent",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/check_coupled.py",
+      "/work/home/current66-final-volume/coupled.json",
+      "/work/home/current66-final-volume/coupled-audit.json"
+    ],
+    "exitCode": 0,
+    "seconds": 2.621073002000003
+  },
+  {
+    "label": "coupled-refinement",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/coupled_convergence.py",
+      "/work/home/current66-final-volume/coupled.json",
+      "/work/home/current66-final-volume/coupled-convergence.json"
+    ],
+    "exitCode": 0,
+    "seconds": 0.146936709000002
+  },
+  {
+    "label": "tests",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exitCode": 0,
+    "seconds": 44.664570396
+  },
+  {
+    "label": "typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "seconds": 1.0651013760000012
+  },
+  {
+    "label": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 0.39849345800001856
+  },
+  {
+    "label": "site",
+    "command": [
+      "npm",
+      "run",
+      "check:site"
+    ],
+    "exitCode": 0,
+    "seconds": 0.185060749999991
+  },
+  {
+    "label": "assets",
+    "command": [
+      "npm",
+      "run",
+      "check:assets"
+    ],
+    "exitCode": 0,
+    "seconds": 0.05254437500002496
+  }
+]

@@ -1,0 +1,68 @@
+/* One source instrument, one primary operating point, then deeper explorations. */
+#fusion-lab .fusion-navigation{display:flex;gap:26px;overflow-x:auto;padding:12px 0;border-block:1px solid var(--line);margin:22px 0 0;scrollbar-width:thin}
+#fusion-lab .fusion-navigation a{flex:none;font-size:12px;color:var(--muted);text-decoration:none;line-height:1.8}
+#fusion-lab .fusion-navigation a:hover{color:var(--text)}
+#fusion-lab :is(#fusion-console,#fusion-response,#target-exposure,#blanket-explorer){scroll-margin-top:24px}
+#fusion-lab .fusion-console{grid-template-columns:minmax(0,1fr) 292px;grid-template-areas:"apparatus controls" "inspection controls" "output controls" "heat controls" "schematic controls" "response response" "geometry geometry";gap:0 28px;margin-top:26px;align-items:start}
+#fusion-apparatus{grid-area:apparatus}
+#fusion-lab #fusion-apparatus{border:0;border-radius:0}
+#fusion-lab .fusion-inputs{grid-area:controls;padding:20px;border:0;border-left:1px solid var(--line);background:transparent;min-width:0}
+#fusion-lab .beam-switches{display:flex;flex-wrap:wrap;gap:14px 18px;margin-top:18px;font-size:12px}
+#fusion-lab .fusion-console .instrument-controls{gap:23px;margin-block:24px}
+#fusion-lab .fusion-inputs>details>summary{font-size:12px;line-height:1.5;padding:14px 0}
+#fusion-lab .fusion-inputs p{font-size:11px;line-height:1.7}
+#fusion-lab .fusion-inputs .control label{font-size:12px;gap:12px}
+#fusion-lab .fusion-inputs .control output{font-size:17px}
+#fusion-lab #fusion-inspector{grid-area:inspection}
+/* The render already supplies the complete keyboard/mobile component list. */
+#fusion-lab #fusion-inspector .component-choices{display:none}
+#fusion-lab #fusion-inspector .component-inspector{padding:9px 0;border-top:0}
+#fusion-lab .apparatus figcaption{padding:10px 0;font-size:11px;line-height:1.65}
+#fusion-lab .apparatus-choices{padding:0;margin:3px 0 10px;gap:5px}
+#fusion-lab .apparatus-choices button{min-height:32px;padding:5px 9px;font-size:11px}
+#fusion-lab .fusion-monitor{grid-area:output;display:block;padding:20px 0 12px;border-block:1px solid var(--line)}
+#fusion-lab .fusion-monitor .fusion-readouts{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 18px}
+#fusion-lab .fusion-monitor .fusion-readouts>div{gap:7px}
+#fusion-lab .fusion-readouts strong{font-size:18px;line-height:1.4}
+#fusion-lab .fusion-heat-note{grid-area:heat;margin:10px 0 14px;font-size:10px}
+#fusion-lab .live-schematic{grid-area:schematic;margin:0;border-bottom:1px solid var(--line);padding-bottom:8px}
+#fusion-lab .live-schematic>summary{font-size:12px;padding:12px 0}
+#fusion-lab .live-schematic .spot-monitor{max-width:180px;margin:16px 0}
+#fusion-lab .sensitivity-panel{grid-area:response;padding-top:32px;min-width:0}
+#fusion-lab .sensitivity-panel .results-heading{margin-bottom:0}
+#fusion-lab .sensitivity-panel h3{font-size:16px}
+#fusion-lab .sensitivity-panel .results-heading .instrument-note{margin:0}
+#fusion-lab .sensitivity-panel .live-plots{margin-top:15px;gap:26px}
+#fusion-lab .sensitivity-panel .instrument-note{max-width:92ch;font-size:11px}
+#neutron-geometry{grid-area:geometry;min-width:0}
+#target-exposure:empty{display:none}
+#fusion-lab :is(.fusion-ledger,.fusion-model-notes){margin-top:16px}
+#fusion-lab :is(.fusion-ledger,.fusion-model-notes)>summary{font-size:13px;padding:15px 0;line-height:1.55}
+#fusion-lab #blanket-explorer{margin-top:36px;padding-top:4px;border-top:1px solid var(--line)}
+#fusion-lab #blanket-explorer>.fusion-model-notes{margin-top:0;border-top:0}
+#fusion-lab #blanket-explorer>.fusion-model-notes>summary{font-size:16px}
+@media(max-width:1100px){
+ #fusion-lab .fusion-console{grid-template-columns:minmax(0,1fr) 254px;column-gap:22px}
+ #fusion-lab .fusion-inputs{padding-inline:18px 0}
+ #fusion-lab .fusion-monitor .fusion-readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+ #fusion-lab .fusion-console{grid-template-columns:minmax(0,1fr);grid-template-areas:"apparatus" "inspection" "controls" "output" "heat" "schematic" "response" "geometry"}
+ #fusion-lab .fusion-inputs{padding:22px 0 10px;border-left:0;border-top:1px solid var(--line);margin-top:12px}
+ #fusion-lab .fusion-console .instrument-controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-block:20px}
+ #fusion-lab .fusion-inputs .control label{display:grid;gap:6px;align-items:start}
+ #fusion-lab .fusion-inputs .control output{font-size:18px}
+ #fusion-lab .fusion-inputs>details .instrument-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #fusion-lab .fusion-inputs #fusion-status{margin-top:8px}
+ #fusion-lab .fusion-monitor .fusion-readouts{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:560px){
+ #fusion-lab .fusion-navigation{gap:22px;margin-top:18px}
+ #fusion-lab .fusion-console{margin-top:18px}
+ #fusion-lab .fusion-console .instrument-controls{grid-template-columns:minmax(0,1fr)}
+ #fusion-lab .fusion-inputs .control label{display:flex;flex-direction:row;align-items:baseline}
+ #fusion-lab .fusion-inputs>details .instrument-controls{grid-template-columns:minmax(0,1fr)}
+ #fusion-lab .fusion-monitor .fusion-readouts{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px}
+ #fusion-lab .sensitivity-panel .results-heading{display:flex;gap:14px;align-items:baseline}
+ #fusion-lab .sensitivity-panel .results-heading .instrument-note{font-size:10px}
+}

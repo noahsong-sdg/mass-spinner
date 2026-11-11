@@ -1,0 +1,21 @@
+{
+  "label": "resolved68-current-tests",
+  "command": [
+    "node_modules/.bin/tsx",
+    "--test",
+    "tests/fuel-current-v66.test.ts",
+    "tests/fuel-current-axis-v66.test.ts",
+    "tests/fuel-spatial-operation-v66.test.ts",
+    "tests/fuel-graded-wall-v67.test.ts"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 728,
+  "sourceSHA256": "5bd87f6bcd3811f6aae2d0c55e6c2e77d4f618c61c1b0a52edafc888af76e2a3",
+  "exitCode": 0,
+  "seconds": 0.4299225419999999,
+  "sourceVerifiedBeforeAndAfter": true
+}

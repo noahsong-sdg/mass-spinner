@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-assess-2",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json,os,subprocess,sys;from pathlib import Path;env=dict(os.environ,OMP_NUM_THREADS=\"1\",OPENBLAS_NUM_THREADS=\"1\");out=Path(\"/work/home/thermal69-assess-2\");out.mkdir();p=\"/work/home/thermal69-campaign/\";a=\"scientific/thermal-local-v69/assess.py\";ids=[\"gas-q2048-w128\",\"gas-q4096-w128\",\"startup-e8-w64-s64\",\"startup-e8-w128-s64\",\"full-e8-w64-q256\",\"full-e8-w128-q256\"];jobs=[(i,[sys.executable,a,\"case\",p+i+\".json\",str(out/i)]) for i in ids];pairs=[(\"time1024-2048\",\"time\",\"gas-q1024-w128\",\"gas-q2048-w128\"),(\"time2048-4096\",\"time\",\"gas-q2048-w128\",\"gas-q4096-w128\"),(\"startup-wall\",\"liner\",\"startup-e8-w64-s64\",\"startup-e8-w128-s64\"),(\"full-wall\",\"liner\",\"full-e8-w64-q256\",\"full-e8-w128-q256\")];jobs += [(label,[sys.executable,a,axis,p+coarse+\".json\",p+fine+\".json\",str(out/label)]) for label,axis,coarse,fine in pairs];receipts=[]\nfor label,command in jobs:\n r=subprocess.run(command,capture_output=True,text=True,env=env);(out/(label+\".log\")).write_text(r.stdout+\"\\n\"+r.stderr);receipts.append({\"label\":label,\"exitCode\":r.returncode,\"command\":command});print(label,r.returncode,(r.stdout+\"\\n\"+r.stderr)[-2200:],flush=True)\n(out/\"receipts.json\").write_text(json.dumps(receipts,indent=2));s=json.loads((out/\"startup-wall/surface.json\").read_text())[\"comparisons\"][0];end=s[\"trace\"][-1];check={\"definition\":\"Declared fixed-time physical wall-surface difference / fine causal excursion; no floor.\",\"endpoint\":end,\"limit\":.02,\"passed\":end[\"causalRelativeError\"] is not None and end[\"causalRelativeError\"]<=.02,\"uniformAllTimeClaimed\":False};(out/\"startup-fixed-endpoint.json\").write_text(json.dumps(check,indent=2));print(\"startup-fixed-endpoint\",json.dumps(check));required=[r for r in receipts if r[\"label\"]!=\"time1024-2048\"];passed=all(r[\"exitCode\"]==0 for r in required) and check[\"passed\"];(out/\"acceptance.json\").write_text(json.dumps({\"requiredFineStudiesPass\":passed,\"retainedCoarsePair\":receipts[-4],\"receipts\":receipts},indent=2));raise SystemExit(0 if passed else 1)"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 280.84566225500004,
+  "sourceVerifiedBeforeAndAfter": true
+}

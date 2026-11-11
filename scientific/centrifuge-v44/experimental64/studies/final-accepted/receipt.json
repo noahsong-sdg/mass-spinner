@@ -1,0 +1,112 @@
+{
+  "commands": [
+    {
+      "name": "benchmark-tests",
+      "command": [
+        "node_modules/.bin/tsx",
+        "--test",
+        "tests/experimental-v64.test.ts",
+        "tests/fuel-centrifuge-independent-v44.test.ts",
+        "tests/fuel-centrifuge-scenario-v44.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 1.008479125
+    },
+    {
+      "name": "independent-tests",
+      "command": [
+        "/work/home/gas-regime-v56-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/experimental-v64",
+        "-p",
+        "test_*.py"
+      ],
+      "exitCode": 0,
+      "seconds": 0.02657129200000008
+    },
+    {
+      "name": "comparison",
+      "command": [
+        "node_modules/.bin/tsx",
+        "scientific/experimental-v64/compare.ts",
+        "/work/home/experimental-v64/extracted-corrected.json",
+        "/work/home/experimental-v64/final-accepted/primary"
+      ],
+      "exitCode": 0,
+      "seconds": 0.09157937500000002
+    },
+    {
+      "name": "independent-comparison",
+      "command": [
+        "/work/home/gas-regime-v56-venv/bin/python",
+        "scientific/experimental-v64/independent_check.py",
+        "/work/home/experimental-v64/final-accepted/primary/comparison.json",
+        "/work/home/experimental-v64/final-accepted/independent.json"
+      ],
+      "exitCode": 0,
+      "seconds": 0.009168041999999987
+    },
+    {
+      "name": "extraction-sensitivity",
+      "command": [
+        "node_modules/.bin/tsx",
+        "scientific/experimental-v64/extraction_sensitivity.ts",
+        "/work/home/experimental-v64/final-accepted/primary/comparison.json",
+        "/work/home/experimental-v64/final-accepted/extraction-sensitivity.json"
+      ],
+      "exitCode": 0,
+      "seconds": 0.1180368329999999
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 0.9352112510000001
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.3578703750000001
+    },
+    {
+      "name": "site",
+      "command": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "seconds": 0.10873416700000016
+    },
+    {
+      "name": "assets",
+      "command": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "seconds": 0.045292750000000215
+    }
+  ],
+  "releaseFiles": 151,
+  "extractedDataSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "releaseByteIdenticalToDeployedFinalD": true,
+  "releaseSHA256": "889256c3ef8ae80b934786f1dec45f4b5f1d9a06f39dd787d0245df11390a56d",
+  "matchedExperimentalValidation": false,
+  "newProductionLaw": false,
+  "freshBrowserTest": false,
+  "sourceSnapshot": "See matching control.py receipt/input manifest"
+}

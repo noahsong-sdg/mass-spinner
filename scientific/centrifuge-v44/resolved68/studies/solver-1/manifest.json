@@ -1,0 +1,38 @@
+{
+  "resolved68-profile-before.json": {
+    "sha256": "330b9274c55d923aec132d44cd6380cfb21390405e95bb71065bd4b2a6d18c28",
+    "bytes": 765561
+  },
+  "resolved68-profile-final.json": {
+    "sha256": "a6f5ab40308c13e7a3edf99d1243e0a4d8fb9e884905a27bc84a3b8ede8fa9dc",
+    "bytes": 765699
+  },
+  "resolved68-optimization-gates/after-coupled-audit.json": {
+    "sha256": "9b0c0a2eaaddd7f0067c8d42ad88c7c4bc448da0c9f8f4cb0565f0cd5afd02de",
+    "bytes": 14683
+  },
+  "resolved68-optimization-gates/analysis.json": {
+    "sha256": "7169e268499d020d572df8a556f76ce743f8d3ba2ce26e4d237d48213813ea9e",
+    "bytes": 5424
+  },
+  "resolved68-optimization-gates/before-coupled-audit.json": {
+    "sha256": "38f0d4d3b742d940f56f158a0cdfc3c8121ede82d88dbd2f3c8c82bad1b1816d",
+    "bytes": 14717
+  },
+  "resolved68-optimization-gates/production.json": {
+    "sha256": "9ee381fde0957cf184dd4306ca5d7d4d78d8f2e31214deb0a8c7281ee130d7f5",
+    "bytes": 4946728
+  },
+  "resolved68-optimization-gates/production.log": {
+    "sha256": "d73e35217949946f6803370be4a38ea60ed24284d59e23bd18bcffd8c14a05c1",
+    "bytes": 14
+  },
+  "resolved68-optimization-gates/static-analysis.json": {
+    "sha256": "5bb71fa8f3a8e9fa7df92632c48d0ed28a76d595827724e5601166cfc507d1dd",
+    "bytes": 321279
+  },
+  "resolved68-time-audit/conservation.json": {
+    "sha256": "2562208260a5be3eb02e69a16a9d6a808158662af00cdb18905eed9d5ba40b47",
+    "bytes": 1248936
+  }
+}

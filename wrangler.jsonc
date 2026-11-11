@@ -1,0 +1,6 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "fieldwork-plasma-lab",
+  "compatibility_date": "2026-11-06",
+  "assets": { "directory": "./release" }
+}

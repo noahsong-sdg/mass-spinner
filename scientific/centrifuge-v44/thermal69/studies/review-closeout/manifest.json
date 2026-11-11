@@ -1,0 +1,22 @@
+{
+  "README.md": {
+    "sha256": "e91b830bb98d91bd7995d8b38d771996a94e9552d76fd99b103b74cfe65bae99",
+    "bytes": 31832
+  },
+  "docs/LOCAL-THERMAL-REFINEMENT-V69.md": {
+    "sha256": "4bba734da590997aa54fa5ebb1c69c3960b144285944add4d1b40e12a6415db4",
+    "bytes": 16074
+  },
+  "docs/reviews/v69-method.md": {
+    "sha256": "d64b1b87ee195fdeddca3ba2cf4cf49b74bb93d71df0ee2bac911e23a96b2581",
+    "bytes": 23049
+  },
+  "docs/reviews/v69-thermal-physics.md": {
+    "sha256": "7bc7b5ce41168be301132988dd115bd5ac7ba50f5ecb6154f81f428107be6e11",
+    "bytes": 28401
+  },
+  "scientific/centrifuge-v44/thermal69/README.md": {
+    "sha256": "11845c0a1a9ca001dd5e2c31db67c006cbd1e3c5533d2385a2b8b1dbfbc2580a",
+    "bytes": 2448
+  }
+}

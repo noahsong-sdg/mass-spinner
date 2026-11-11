@@ -1,0 +1,13 @@
+{
+  "label": "continuum-3",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/analyze.py",
+    "/work/home/resolved68-remaining/continuum/cases.json",
+    "/work/home/resolved68-remaining/continuum/production.json",
+    "/work/home/resolved68-remaining/continuum/fipy.json",
+    "/work/home/resolved68-remaining/continuum/analysis.json"
+  ],
+  "exitCode": 0,
+  "seconds": 0.35951058300000005
+}

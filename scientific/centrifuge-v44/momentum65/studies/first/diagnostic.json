@@ -1,0 +1,506 @@
+{
+  "schemaVersion": 1,
+  "independentImplementation": "Analytical constant-mu solution + SciPy QUADPACK; no production imports",
+  "scipyVersion": "1.17.1",
+  "selfChecks": {
+    "analyticalVersusQuadMaxMSAtUnitScale": 6.938893903907228e-18,
+    "rigidProjectionMaxError": 2.7755575615628914e-17,
+    "analyticalWallLimitMS": 0.0
+  },
+  "spatialCases": [
+    {
+      "id": "couette-n16",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "couette-n32",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "couette-n64",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "couette-n128",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "core-annulus-n32",
+      "cells": 32,
+      "driveScalePerS": 1.0000000000000002,
+      "elapsedViscousScales": 2.0,
+      "steadyInterpretationWarning": "A finite-time deviation includes transient error; inspect elapsed scales and timestep/mesh refinement",
+      "omegaMaxErrorOverExactPeak": 0.006494790180715231,
+      "chordsM": [
+        0.010034196422849776,
+        0.019915058702903606,
+        0.029934092879089894,
+        0.034942091381584044,
+        0.03979505249702353,
+        0.04477407561055404,
+        0.04989228582125042,
+        0.05495962636554657
+      ],
+      "productionApparentMS": [
+        0.007077923573587124,
+        0.010864434753507355,
+        0.011539336879325377,
+        0.010968635533942176,
+        0.009745525240140156,
+        0.008104532760997742,
+        0.005893993286496313,
+        0.003132506045784357
+      ],
+      "independentPiecewiseApparentMS": [
+        0.0070779235735871264,
+        0.010864434753507356,
+        0.011539336879325382,
+        0.010968635533942176,
+        0.009745525240140152,
+        0.008104532760997738,
+        0.005893993286496312,
+        0.003132506045784358
+      ],
+      "analyticalSteadyApparentMS": [
+        0.0070580548432373665,
+        0.010821838356016876,
+        0.011533829277367617,
+        0.010908437912232914,
+        0.009752602128683847,
+        0.008050660133130522,
+        0.005798832142789036,
+        0.0031051489550554027
+      ],
+      "chordMaxErrorOverExactPeak": 0.008250611433447158,
+      "productionProjectionReconstructionPassed": true,
+      "matchedExperimentalValidation": false
+    },
+    {
+      "id": "core-annulus-n64",
+      "cells": 64,
+      "driveScalePerS": 1.0,
+      "elapsedViscousScales": 2.0,
+      "steadyInterpretationWarning": "A finite-time deviation includes transient error; inspect elapsed scales and timestep/mesh refinement",
+      "omegaMaxErrorOverExactPeak": 0.0018220727907753917,
+      "chordsM": [
+        0.010034196422849776,
+        0.019915058702903606,
+        0.029934092879089894,
+        0.034942091381584044,
+        0.03979505249702353,
+        0.04477407561055404,
+        0.04989228582125042,
+        0.05495962636554657
+      ],
+      "productionApparentMS": [
+        0.0070655775596816925,
+        0.010822568489698483,
+        0.01153989158652762,
+        0.010908704377948275,
+        0.009766041729604786,
+        0.008075784451536524,
+        0.005789080698934929,
+        0.0031505266203303273
+      ],
+      "independentPiecewiseApparentMS": [
+        0.00706557755968169,
+        0.010822568489698483,
+        0.011539891586527616,
+        0.010908704377948273,
+        0.009766041729604782,
+        0.008075784451536524,
+        0.005789080698934929,
+        0.0031505266203303286
+      ],
+      "analyticalSteadyApparentMS": [
+        0.007058054843237366,
+        0.010821838356016874,
+        0.011533829277367616,
+        0.010908437912232912,
+        0.009752602128683846,
+        0.00805066013313052,
+        0.005798832142789034,
+        0.003105148955055402
+      ],
+      "chordMaxErrorOverExactPeak": 0.003934310469114394,
+      "productionProjectionReconstructionPassed": true,
+      "matchedExperimentalValidation": false
+    },
+    {
+      "id": "core-annulus-n128",
+      "cells": 128,
+      "driveScalePerS": 0.9999999999999997,
+      "elapsedViscousScales": 2.0,
+      "steadyInterpretationWarning": "A finite-time deviation includes transient error; inspect elapsed scales and timestep/mesh refinement",
+      "omegaMaxErrorOverExactPeak": 0.00048363959796178817,
+      "chordsM": [
+        0.010034196422849776,
+        0.019915058702903606,
+        0.029934092879089894,
+        0.034942091381584044,
+        0.03979505249702353,
+        0.04477407561055404,
+        0.04989228582125042,
+        0.05495962636554657
+      ],
+      "productionApparentMS": [
+        0.0070595484025188626,
+        0.010824870209836161,
+        0.011537804310932365,
+        0.01091365603869166,
+        0.009756255003529083,
+        0.00805715048663933,
+        0.005804431005541032,
+        0.0031012198695709713
+      ],
+      "independentPiecewiseApparentMS": [
+        0.007059548402518859,
+        0.010824870209836156,
+        0.011537804310932355,
+        0.010913656038691667,
+        0.009756255003529089,
+        0.008057150486639332,
+        0.005804431005541033,
+        0.0031012198695709726
+      ],
+      "analyticalSteadyApparentMS": [
+        0.007058054843237363,
+        0.01082183835601687,
+        0.01153382927736761,
+        0.010908437912232909,
+        0.009752602128683842,
+        0.008050660133130518,
+        0.0057988321427890335,
+        0.003105148955055401
+      ],
+      "chordMaxErrorOverExactPeak": 0.0005627232164384376,
+      "productionProjectionReconstructionPassed": true,
+      "matchedExperimentalValidation": false
+    },
+    {
+      "id": "core-annulus-n256",
+      "cells": 256,
+      "driveScalePerS": 0.9999999999999993,
+      "elapsedViscousScales": 2.0,
+      "steadyInterpretationWarning": "A finite-time deviation includes transient error; inspect elapsed scales and timestep/mesh refinement",
+      "omegaMaxErrorOverExactPeak": 0.00012465992672905791,
+      "chordsM": [
+        0.010034196422849776,
+        0.019915058702903606,
+        0.029934092879089894,
+        0.034942091381584044,
+        0.03979505249702353,
+        0.04477407561055404,
+        0.04989228582125042,
+        0.05495962636554657
+      ],
+      "productionApparentMS": [
+        0.0070586383116920245,
+        0.010821527267245853,
+        0.011535639548741303,
+        0.010906054842997519,
+        0.009754773585467304,
+        0.008046308837509107,
+        0.005800978266857695,
+        0.003108712344758543
+      ],
+      "independentPiecewiseApparentMS": [
+        0.007058638311692026,
+        0.01082152726724585,
+        0.011535639548741306,
+        0.010906054842997528,
+        0.009754773585467306,
+        0.008046308837509097,
+        0.005800978266857697,
+        0.0031087123447585433
+      ],
+      "analyticalSteadyApparentMS": [
+        0.00705805484323736,
+        0.010821838356016866,
+        0.011533829277367607,
+        0.010908437912232906,
+        0.009752602128683839,
+        0.008050660133130515,
+        0.005798832142789031,
+        0.0031051489550554
+      ],
+      "chordMaxErrorOverExactPeak": 0.0003772637444829883,
+      "productionProjectionReconstructionPassed": true,
+      "matchedExperimentalValidation": false
+    },
+    {
+      "id": "core-annulus-n512",
+      "cells": 512,
+      "driveScalePerS": 0.9999999999999997,
+      "elapsedViscousScales": 2.0,
+      "steadyInterpretationWarning": "A finite-time deviation includes transient error; inspect elapsed scales and timestep/mesh refinement",
+      "omegaMaxErrorOverExactPeak": 3.16493644449616e-05,
+      "chordsM": [
+        0.010034196422849776,
+        0.019915058702903606,
+        0.029934092879089894,
+        0.034942091381584044,
+        0.03979505249702353,
+        0.04477407561055404,
+        0.04989228582125042,
+        0.05495962636554657
+      ],
+      "productionApparentMS": [
+        0.007058247091041323,
+        0.010821880832041079,
+        0.011534136442975818,
+        0.010907921321987517,
+        0.009753323974359029,
+        0.008049310834974378,
+        0.005800015922917654,
+        0.0031034319281921866
+      ],
+      "independentPiecewiseApparentMS": [
+        0.007058247091041325,
+        0.010821880832041088,
+        0.011534136442975821,
+        0.010907921321987521,
+        0.009753323974359029,
+        0.008049310834974373,
+        0.005800015922917651,
+        0.003103431928192187
+      ],
+      "analyticalSteadyApparentMS": [
+        0.007058054843237363,
+        0.01082183835601687,
+        0.01153382927736761,
+        0.010908437912232909,
+        0.009752602128683842,
+        0.008050660133130518,
+        0.0057988321427890335,
+        0.003105148955055401
+      ],
+      "chordMaxErrorOverExactPeak": 0.000148868760055573,
+      "productionProjectionReconstructionPassed": true,
+      "matchedExperimentalValidation": false
+    },
+    {
+      "id": "variable-n32",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "variable-n64",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "variable-n128",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "variable-n256",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "bessel-t100",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "bessel-t200",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "bessel-t400",
+      "status": "not-this-analytical-family"
+    },
+    {
+      "id": "bessel-t800",
+      "status": "not-this-analytical-family"
+    }
+  ],
+  "profileChallenge": {
+    "candidateFrozenBeforeScoring": "Constant-mu full-cylinder unforced core + annular Jr proportional to1/r, stationary outer wall",
+    "innerDriveRadiusM": 0.0075,
+    "radiusM": 0.06,
+    "fitScalePerS": 56358.48393537949,
+    "fitCount": 3,
+    "heldoutCount": 5,
+    "points": [
+      {
+        "rCm": 1.0034196422849777,
+        "vMS": 310.7599811039808,
+        "vectorRect": [
+          158.08569,
+          153.65338,
+          161.08369,
+          156.6532
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.010034196422849776,
+        "split": "train",
+        "unitScaleProjectedMS": 0.007058054843237366,
+        "predictedMS": 397.7812704976205,
+        "residualMS": 87.02128939363968,
+        "relativeError": 0.280027335194496
+      },
+      {
+        "rCm": 1.9915058702903605,
+        "vMS": 540.8237610791358,
+        "vectorRect": [
+          187.3817,
+          132.8938,
+          190.37981,
+          135.89355
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.019915058702903606,
+        "split": "train",
+        "unitScaleProjectedMS": 0.010821838356016874,
+        "predictedMS": 609.9024031388506,
+        "residualMS": 69.07864205971475,
+        "relativeError": 0.12772856340830566
+      },
+      {
+        "rCm": 2.9934092879089893,
+        "vMS": 768.0956387107145,
+        "vectorRect": [
+          217.08749,
+          112.38611,
+          220.08549,
+          115.38586
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.029934092879089894,
+        "split": "train",
+        "unitScaleProjectedMS": 0.011533829277367616,
+        "predictedMS": 650.0291320419324,
+        "residualMS": -118.06650666878215,
+        "relativeError": 0.15371328870837292
+      },
+      {
+        "rCm": 3.4942091381584044,
+        "vMS": 873.381636787127,
+        "vectorRect": [
+          231.93581,
+          102.88568,
+          234.9339,
+          105.8855
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.034942091381584044,
+        "split": "test",
+        "unitScaleProjectedMS": 0.010908437912232912,
+        "predictedMS": 614.7830228366631,
+        "residualMS": -258.5986139504639,
+        "relativeError": 0.2960889066797419
+      },
+      {
+        "rCm": 3.979505249702353,
+        "vMS": 889.6272557787788,
+        "vectorRect": [
+          246.32449,
+          101.4198,
+          249.3226,
+          104.41956
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.03979505249702353,
+        "split": "test",
+        "unitScaleProjectedMS": 0.009752602128683846,
+        "predictedMS": 549.6418703975763,
+        "residualMS": -339.9853853812025,
+        "relativeError": 0.38216610740368967
+      },
+      {
+        "rCm": 4.477407561055404,
+        "vMS": 839.0731826212774,
+        "vectorRect": [
+          261.08701,
+          105.98151,
+          264.08499,
+          108.98126
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.04477407561055404,
+        "split": "test",
+        "unitScaleProjectedMS": 0.00805066013313052,
+        "predictedMS": 453.7229997822365,
+        "residualMS": -385.3501828390409,
+        "relativeError": 0.4592569406582642
+      },
+      {
+        "rCm": 4.989228582125042,
+        "vMS": 791.2896784263403,
+        "vectorRect": [
+          276.26208,
+          110.29321,
+          279.26019,
+          113.29297
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.04989228582125042,
+        "split": "test",
+        "unitScaleProjectedMS": 0.005798832142789034,
+        "predictedMS": 326.813388163338,
+        "residualMS": -464.4762902630023,
+        "relativeError": 0.5869864133533489
+      },
+      {
+        "rCm": 5.4959626365546566,
+        "vMS": 467.99520004468354,
+        "vectorRect": [
+          291.28641,
+          139.46539,
+          294.28448,
+          142.46521
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.05495962636554657,
+        "split": "test",
+        "unitScaleProjectedMS": 0.003105148955055402,
+        "predictedMS": 175.00148750045028,
+        "residualMS": -292.9937125442333,
+        "relativeError": 0.6260613624162356
+      }
+    ],
+    "heldoutRmsMS": 355.6800833982476,
+    "observedPeakMS": 889.6272557787788,
+    "heldoutRmsOverPeak": 0.3998079882196118,
+    "prospectiveScreen": 0.2,
+    "profileShapeScreenPassed": false,
+    "maximumHeldoutRelativeError": 0.6260613624162356,
+    "everyHeldoutWithin20Percent": false,
+    "matchedExperimentalValidation": false,
+    "operatorAssumption": "Optically thin uniform-emissivity spectral centroid; no extra chord-dependent flow",
+    "emissivityExperimentallyEstablished": false,
+    "extractionCornerSensitivity": {
+      "membership": "Nominal three inner / five outer, frozen before perturbation",
+      "cornerCombinations": 65536,
+      "fitScalePerSRange": [
+        55565.36363932088,
+        57160.14218141708
+      ],
+      "heldoutRmsOverPeakRange": [
+        0.3830354391605435,
+        0.4167088926014246
+      ],
+      "everyCornerPasses20PercentScreen": false,
+      "anyCornerPasses20PercentScreen": false,
+      "warning": "Extraction rectangle corners only; not statistical or full continuous uncertainty bounds; excludes unknown reproduced-figure, emissivity and geometry errors"
+    },
+    "warning": "One fitted amplitude; not unfitted current-to-performance, temperature or separation validation"
+  },
+  "pressureChallenge": {
+    "predictedSteadyRatioAtFixedMuAndDrive": 1,
+    "reportedApproximateRatio": 0.6666666666666666,
+    "relativeRatioError": 0.5,
+    "prospectiveScreenPassed": false,
+    "matchedExperimentalValidation": false,
+    "warning": "Density drops out of prescribed constant-viscosity steady momentum; pressure trend remains unexplained"
+  },
+  "matchedExperimentalValidation": false,
+  "statesFileSHA256": "e82410b79facf632c968ca751d4abfa67fb4e49043332ab7decf40fffe5913fc",
+  "markersFileSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33"
+}

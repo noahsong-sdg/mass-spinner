@@ -1,0 +1,36 @@
+# Mass Spinner: what each view covers
+
+The interactive apparatus uses SI geometry for accepted numerical boundaries and material depths, with illustrative engineering construction. It is not as-built CAD and does not calibrate materials, field realization, power or performance. Component inspection distinguishes numerical dimensions and published material concepts from assumed construction.
+
+## 02 — Marathon concepts
+
+| Idea | What you can explore | Boundary |
+|---|---|---|
+| RF source, electrostatic acceleration, LiT target | D–T reaction probability versus beam energy and assumed column; source current, illuminated area and atomic stopping; initial energy/depth scans | Prescribed beam, not RF discharge or beam optics. The coupled target requires the Geant4-derived atomic Bragg stopping option; neither stopping choice is measured LiT transport |
+| Coupled target evolution | Live depth-resolved conduction in film/backing; temperature-dependent diffusion and release; D/T/vacancy replacement, boundary loss and renewal; recomputed composition-dependent stopping, D–T neutron history and atom/energy ledgers | Dimensions, thermal/chemical coefficients, conditional replacement weights and renewal supply are uncalibrated scenario inputs. No lateral hot spots, phase change, radiation damage or target lifetime; [coupled equations and scope](./COUPLED-TARGET-V35.md) |
+| Retained target references | Earlier exact bulk heating/cooldown and well-mixed loading calculations remain under References for comparison | These independent references are not the live coupled target. Their fixed stopping and omitted depth transport do not describe the current coupled calculation; [bulk thermal reference](./MARATHON-TARGET-EXPOSURE.md) |
+| Finite-film implantation reference | Inspect recorded RustBCA cases with thin/thick LiT films, optional W backing, incident-normalized retention/escape counts, sampling intervals and projectile energy transfers | Uncalibrated material assumptions; not a live retention law, measured LiT validation or a full recoil/binding/assembly thermal ledger. Changing the recorded case does not recalibrate live replacement |
+| Neutron source versus usable irradiation | Live first-flight diagnostic through a finite-radius slab driven by the selected target state; first absorption, uncollided escape and unresolved first scattering. Initial-source reference includes finite-disk solid angle and intercepted neutron current | Prescribed coefficients or evaluated H-1 data; later scattered paths, spectrum-resolved shielding, activation and calibrated sample flux remain unresolved. Recorded OpenMC cases/responses remain separate from live transport |
+| Target supply and recycling | Assumed external D/T renewal changes site inventories; released and replaced isotopes remain in export ledgers | Renewal is not tritium breeding or a closed plant fuel cycle. LiT retention, release and transport are not calibrated |
+| Lithium isotope separation | Li-6/Li-7 preset in 03; equilibrium enrichment versus rotation and temperature | Static column with equal assumed central fractions; not Marathon hardware, natural feed or extraction |
+| Hg(n,2n) multiplication, gold and tritium | Separate future-blanket render and frozen published OpenMC case | Not coupled to the compact beamline; sliders never change quoted TBR or annual yield |
+| Conversion versus inventory utilization | Analytic optical-depth reaction and utilization curves | Single reaction slab, no spectrum or multiplying transport |
+| Metastable feeding and product cooldown | Normalized Hg-197m/Hg-197/Au-197 chain, adjustable assumed initial mixture; separate Au-195 residual curve | No predicted initial isotope composition, purity, dose or release date |
+| Fuel cycle, wall loading and economics | Process explanations and references, Qbeam distinguished from Qplas | Tritium inventory, polarized/asymmetric transport, commercial yield and economics remain unsolved |
+| Broader neutron and beam applications | Materials irradiation, Ra-226→Ra-225→Ac-225 pathway, fuel purification/reinjection and future plasma heating are identified | Application-specific reaction networks, activation, fuel-cycle inventories and heating efficiencies are not calculated |
+
+The blanket case assumes 1500 MWth, a 210 mm inner channel, 85 atom% elemental Hg, both 90 atom% Hg-198 and Li-6 enrichment, and specified periodic extraction/replacement. Its TBR 1.19 and gold production are **published scenario results**, not validation of this browser engine.
+
+All live neutron rates and totals are **D–T-only**. D–D branches are omitted; a D-rich, zero-T case with zero D–T production is not a prediction of zero total neutron production. Temperature affects the coupled target through the declared composition/transport scenario; it does not add a plasma burn or measured hot-target reaction model. Surviving beam energy uses a zero-range backing-side interface source, not a resolved backing stopping range. Default diffusion, release and renewal rates are zero until changed explicitly.
+
+Primary sources: [Marathon architecture](https://www.marathonfusion.com/beam-driven-fusion/), [Marathon project descriptions](https://www.marathonfusion.com/), [Alchemy paper](https://www.marathonfusion.com/alchemy.pdf), [Isotope Production in Fusion Systems](https://arxiv.org/html/2512.09242v2).
+
+## 03 — Tutorial Section II A–D
+
+Seven selectable views cover gyromotion, ICR heating, curved-field drift, centrifugal equilibrium, the quadratic rotating filter, a quartic effective-potential landscape and its exploratory collisional dynamics. Each has a matching render, model-specific component descriptions, live numerical plots and an optional explanation of its central equation and tradeoff.
+
+Equal mass/charge fixes gyrofrequency and cold cutoff; equal-energy launches need not have identical trajectories. Curved drift is mass independent at equal kinetic energies but transit time changes deflection. Centrifugal equilibrium is not flowing separation. Cold stability is not finite-device collection. An energy landscape is not a population distribution. Prescribed RF amplitude is not coupled antenna power.
+
+Section III failure mechanisms are exposed as interactive sensitivities, independent diagnostic estimates or explicitly unresolved physics. The separate H-1 first-capture experiment follows a restricted first charge-exchange event in uniform B with E = 0, a stationary ground-state H bath, and explicit charged/neutral product inventories. It does not change the generic-ion separator or solve secondary reactions, differential nuclear scattering or generic charge-state evolution. Chemistry, dust, field penetration, electron response and turbulence are not solved merely because they appear in the failure directory. The advanced collision transport model remains unqualified under its retained convergence gates. The remaining Section II E–K concepts have illustrated reference cards, not predictive numerical engines.
+
+[Original tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf). Conservation and regression checks do not establish experimental validity, continuous throughput or real-device performance.

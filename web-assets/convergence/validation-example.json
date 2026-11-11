@@ -1,0 +1,25 @@
+{
+  "description": "SYNTHETIC CONTRACT EXAMPLE ONLY. Linear density data are invented to demonstrate file matching; not experimental data, a plasma solver, or evidence of convergence.",
+  "case": {
+    "schemaVersion": 1,
+    "id": "synthetic-validation-contract",
+    "source": {"kind": "synthetic", "citation": "Invented linear-profile example; no experiment or publication."},
+    "expectedModel": {"name": "synthetic-linear-demo", "version": "example-1", "sourceSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+    "acceptance": {"maxStandardizedResidual": 3, "maxNumericalErrorFraction": 0.25},
+    "conditions": [
+      {"id": "fit", "split": "calibration", "settings": {"rotationRadS": 1000}, "measurements": [{"observable": "density", "unit": "m^-3", "value": 1000000000000000000, "standardUncertainty": 10000000000000000}]},
+      {"id": "heldout", "split": "heldout", "settings": {"rotationRadS": 2000}, "measurements": [{"observable": "density", "unit": "m^-3", "value": 2000000000000000000, "standardUncertainty": 10000000000000000, "coordinate": {"name": "radius", "unit": "m", "value": 0.1}}]}
+    ]
+  },
+  "predictions": {
+    "schemaVersion": 1,
+    "caseId": "synthetic-validation-contract",
+    "model": {"name": "synthetic-linear-demo", "version": "example-1", "sourceSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"},
+    "convergence": {"established": false, "evidence": "No real model or convergence experiment; this is only a synthetic schema demonstration."},
+    "calibratedOn": ["fit"],
+    "conditions": [
+      {"id": "fit", "settings": {"rotationRadS": 1000}, "series": [{"observable": "density", "unit": "m^-3", "values": [1000000000000000000], "predictiveStandardUncertainty": [0], "numericalErrorBound": [1000000000000000]}]},
+      {"id": "heldout", "settings": {"rotationRadS": 2000}, "series": [{"observable": "density", "unit": "m^-3", "values": [1000000000000000000, 3000000000000000000], "predictiveStandardUncertainty": [0, 0], "numericalErrorBound": [1000000000000000, 1000000000000000], "coordinate": {"name": "radius", "unit": "m", "values": [0, 0.2]}}]}
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "thermal69-campaign/gas-q2048-w128.json": {
+    "sha256": "3b840ac22f8db9ab08435cf6b15d544a887514cfad3fea9cd48ab298c91190fb",
+    "bytes": 197562386
+  },
+  "thermal69-campaign/full-e8-w64-q256.json": {
+    "sha256": "a9ef2d3603f0dfab1d8456b86638a2ffeaee596e898f57f43a13f4ddca3aa552",
+    "bytes": 125842068
+  },
+  "thermal69-campaign/full-e8-w128-q256.json": {
+    "sha256": "bb29e03584b051a165cd111d471088db5882164c10862ec8d95d923bb07d42f2",
+    "bytes": 127380166
+  }
+}

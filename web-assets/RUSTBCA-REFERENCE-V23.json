@@ -1,0 +1,217 @@
+{
+  "upstreamCommit": "51bee889956147e3287491d0c68957967235a33c",
+  "scope": "Uncalibrated static amorphous atomic Li7/T3 mixture; no chemical binding, recoil cascade, target evolution, nuclear reaction or measured LiT qualification.",
+  "particlesPerCase": 256,
+  "assumedPairDensityM3": 5e+28,
+  "incidentMassAMU": 2.01410177812,
+  "targetMassesAMU": [
+    7.0160034366,
+    3.01604928199
+  ],
+  "targetAtomicNumbers": [
+    3,
+    1
+  ],
+  "seed": 0,
+  "cutoffEnergyEV": 10,
+  "surfaceBindingEnergyEV": 0,
+  "recoilCascadesTracked": false,
+  "highEnergyFreeFlightPaths": "enabled only for INTERPOLATED; LOW_ENERGY_NONLOCAL forbids it upstream",
+  "threadReplay": "100keV INTERPOLATED 1 vs 4 threads: exact endpoint statistics",
+  "classification": "INTERPOLATED is an uncalibrated modeled reference. LOW_ENERGY_NONLOCAL at100 and500keV is an out-of-regime negative control, not an uncertainty band.",
+  "cases": [
+    {
+      "case": "D_20000eV_INTERPOLATED_1threads",
+      "incidentEnergyEV": 20000,
+      "particles": 256,
+      "electronicStoppingMode": "INTERPOLATED",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 0.5644735360431823,
+      "meanDepthStandardErrorMicron": 0.0031547451054280743,
+      "implantedDepthQ10Q50Q90Micron": [
+        0.4999333610155581,
+        0.5775207830753548,
+        0.6107058908782519
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 2.822367680215911e+22,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 5120000,
+        "toNuclearCollisionsEV": 234494.53853885247,
+        "toElectronicStoppingEV": 4883633.533775806,
+        "finalIncidentKineticEnergyEV": 1871.9276853746007,
+        "residualEV": -3.3734295357135125e-08,
+        "relativeResidual": -6.588729561940454e-15,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    },
+    {
+      "case": "D_100000eV_INTERPOLATED_1threads",
+      "incidentEnergyEV": 100000,
+      "particles": 256,
+      "electronicStoppingMode": "INTERPOLATED",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 1.6743500638198887,
+      "meanDepthStandardErrorMicron": 0.0045897538456504215,
+      "implantedDepthQ10Q50Q90Micron": [
+        1.6067982736295225,
+        1.6879331016480728,
+        1.7321351052976146
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 8.371750319099441e+22,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 25600000,
+        "toNuclearCollisionsEV": 303743.3370795047,
+        "toElectronicStoppingEV": 25294373.401506748,
+        "finalIncidentKineticEnergyEV": 1883.261413770924,
+        "residualEV": -2.534193299652543e-08,
+        "relativeResidual": -9.899192576767745e-16,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    },
+    {
+      "case": "D_500000eV_INTERPOLATED_1threads",
+      "incidentEnergyEV": 500000,
+      "particles": 256,
+      "electronicStoppingMode": "INTERPOLATED",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 8.726656318008578,
+      "meanDepthStandardErrorMicron": 0.00534767333431718,
+      "implantedDepthQ10Q50Q90Micron": [
+        8.653921762939838,
+        8.742706518273824,
+        8.791988939549515
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 4.3633281590042885e+23,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 128000000,
+        "toNuclearCollisionsEV": 389996.81246891967,
+        "toElectronicStoppingEV": 127608094.67939813,
+        "finalIncidentKineticEnergyEV": 1908.5081323333047,
+        "residualEV": 6.161667442938779e-07,
+        "relativeResidual": 4.813802689795921e-15,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    },
+    {
+      "case": "D_20000eV_LOW_ENERGY_NONLOCAL_1threads",
+      "incidentEnergyEV": 20000,
+      "particles": 256,
+      "electronicStoppingMode": "LOW_ENERGY_NONLOCAL",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 0.5422487636344044,
+      "meanDepthStandardErrorMicron": 0.0035040607397138833,
+      "implantedDepthQ10Q50Q90Micron": [
+        0.47588158433753275,
+        0.5554359686419275,
+        0.5954605305601087
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 2.7112438181720217e+22,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 5120000,
+        "toNuclearCollisionsEV": 281045.33095207246,
+        "toElectronicStoppingEV": 4837037.850361772,
+        "finalIncidentKineticEnergyEV": 1916.8186862678394,
+        "residualEV": -1.1223710316698998e-07,
+        "relativeResidual": -2.192130921230273e-14,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    },
+    {
+      "case": "D_100000eV_LOW_ENERGY_NONLOCAL_1threads",
+      "incidentEnergyEV": 100000,
+      "particles": 256,
+      "electronicStoppingMode": "LOW_ENERGY_NONLOCAL",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 1.4337826064216055,
+      "meanDepthStandardErrorMicron": 0.004223331526366235,
+      "implantedDepthQ10Q50Q90Micron": [
+        1.363869105760283,
+        1.4501191229888861,
+        1.4917354525718696
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 7.1689130321080266e+22,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 25600000,
+        "toNuclearCollisionsEV": 336841.76682627643,
+        "toElectronicStoppingEV": 25261178.978337795,
+        "finalIncidentKineticEnergyEV": 1979.2548344022337,
+        "residualEV": 1.5274879388016416e-06,
+        "relativeResidual": 5.966749760943913e-14,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    },
+    {
+      "case": "D_500000eV_LOW_ENERGY_NONLOCAL_1threads",
+      "incidentEnergyEV": 500000,
+      "particles": 256,
+      "electronicStoppingMode": "LOW_ENERGY_NONLOCAL",
+      "seed": 0,
+      "threads": 1,
+      "implanted": 256,
+      "reflected": 0,
+      "implantedFraction": 1.0,
+      "reflectedFraction": 0.0,
+      "zeroReflectionOneSided95Upper": 0.011633876163163248,
+      "meanImplantedProjectedDepthMicron": 3.4458196847917004,
+      "meanDepthStandardErrorMicron": 0.004442749660037405,
+      "implantedDepthQ10Q50Q90Micron": [
+        3.3715822890157443,
+        3.4630205183081575,
+        3.504664218919096
+      ],
+      "meanImplantedProjectedLiPairColumnM2": 1.7229098423958502e+23,
+      "reflectedIncidentEnergyEV": 0,
+      "incidentEnergyTransferLedger": {
+        "inputEV": 128000000,
+        "toNuclearCollisionsEV": 402265.24798481155,
+        "toElectronicStoppingEV": 127595706.51478012,
+        "finalIncidentKineticEnergyEV": 2028.2372376226413,
+        "residualEV": -2.553366357460618e-06,
+        "relativeResidual": -1.994817466766108e-14,
+        "scope": "Incident kinetic transfer only. Nuclear recoil cascades, surface binding and heat are not resolved."
+      }
+    }
+  ],
+  "sources": [
+    "https://github.com/lcpp-org/RustBCA/tree/51bee889956147e3287491d0c68957967235a33c",
+    "https://doi.org/10.21105/joss.03298"
+  ],
+  "geometry": "Semi-infinite homogeneous half-space (upstream0D). No finite LiT film or backing boundary.",
+  "finiteFilmRetentionFractionQualified": false,
+  "implantationFractionScope": "Whole half-space stopping only; not a finite-film capture/retention coefficient."
+}

@@ -1,0 +1,588 @@
+{
+  "definition": "Fixed physical endpoint error / per-cell fine causal excursion; no floor.",
+  "timeS": 3.814697265625e-05,
+  "cells": [
+    {
+      "cell": 0,
+      "rawDifferenceK": 0.0005608179277487579,
+      "fineCausalExcursionK": 0.1234776162215212,
+      "relativeError": 0.004541859042230293,
+      "temperatureRoundoffAllowanceK": 5.688432630656571e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 1,
+      "rawDifferenceK": 0.000543578709311987,
+      "fineCausalExcursionK": 0.014718222647729817,
+      "relativeError": 0.036932360810279646,
+      "temperatureRoundoffAllowanceK": 5.697702348188515e-11,
+      "resolvedReferenceSignal": true,
+      "passed": false
+    },
+    {
+      "cell": 2,
+      "rawDifferenceK": 0.0005303425072042955,
+      "fineCausalExcursionK": 0.14890200897684736,
+      "relativeError": 0.0035616880581292765,
+      "temperatureRoundoffAllowanceK": 5.706970305198611e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 3,
+      "rawDifferenceK": 0.0005208380243857391,
+      "fineCausalExcursionK": 0.28451840173738674,
+      "relativeError": 0.0018305952135443165,
+      "temperatureRoundoffAllowanceK": 5.7162375208598336e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 4,
+      "rawDifferenceK": 0.0005148746059830955,
+      "fineCausalExcursionK": 0.42019473476182156,
+      "relativeError": 0.0012253237924909773,
+      "temperatureRoundoffAllowanceK": 5.725504911913688e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 5,
+      "rawDifferenceK": 0.0005122735615259444,
+      "fineCausalExcursionK": 0.5562355195879718,
+      "relativeError": 0.000920965208955746,
+      "temperatureRoundoffAllowanceK": 5.734773343580084e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 6,
+      "rawDifferenceK": 0.0005128606412654335,
+      "fineCausalExcursionK": 0.6929302955867342,
+      "relativeError": 0.000740133090632402,
+      "temperatureRoundoffAllowanceK": 5.7440436385317845e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 7,
+      "rawDifferenceK": 0.0005164670599242527,
+      "fineCausalExcursionK": 0.830554505912346,
+      "relativeError": 0.0006218340352713214,
+      "temperatureRoundoffAllowanceK": 5.7533165793854616e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 8,
+      "rawDifferenceK": 0.0005229305436387222,
+      "fineCausalExcursionK": 0.9693699597025898,
+      "relativeError": 0.0005394540427053891,
+      "temperatureRoundoffAllowanceK": 5.762592910016833e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 9,
+      "rawDifferenceK": 0.0005320957229741907,
+      "fineCausalExcursionK": 1.10962521182023,
+      "relativeError": 0.0004795274271943952,
+      "temperatureRoundoffAllowanceK": 5.771873336640515e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 10,
+      "rawDifferenceK": 0.0005438141458853352,
+      "fineCausalExcursionK": 1.2515559251772856,
+      "relativeError": 0.0004345104640915688,
+      "temperatureRoundoffAllowanceK": 5.7811585288398255e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 11,
+      "rawDifferenceK": 0.0005579441242389294,
+      "fineCausalExcursionK": 1.3953852288926782,
+      "relativeError": 0.00039984952734643136,
+      "temperatureRoundoffAllowanceK": 5.790449120584511e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 12,
+      "rawDifferenceK": 0.0005743505433883911,
+      "fineCausalExcursionK": 1.541324074817453,
+      "relativeError": 0.0003726345113089954,
+      "temperatureRoundoffAllowanceK": 5.7997457112437845e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 13,
+      "rawDifferenceK": 0.0005929046976689278,
+      "fineCausalExcursionK": 1.6895715927985293,
+      "relativeError": 0.0003509201386884515,
+      "temperatureRoundoffAllowanceK": 5.8090488665958084e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 14,
+      "rawDifferenceK": 0.0006134842249139183,
+      "fineCausalExcursionK": 1.8403154447157704,
+      "relativeError": 0.00033335818958399744,
+      "temperatureRoundoffAllowanceK": 5.818359119833838e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 15,
+      "rawDifferenceK": 0.0006359732185501343,
+      "fineCausalExcursionK": 1.993732177421407,
+      "relativeError": 0.00031898628399159917,
+      "temperatureRoundoffAllowanceK": 5.827676972569494e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 16,
+      "rawDifferenceK": 0.0006602626335734385,
+      "fineCausalExcursionK": 2.1499875749698276,
+      "relativeError": 0.00030710067409701403,
+      "temperatureRoundoffAllowanceK": 5.837002895834436e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 17,
+      "rawDifferenceK": 0.0006862511515919323,
+      "fineCausalExcursionK": 2.3092370109404783,
+      "relativeError": 0.0002971765775191885,
+      "temperatureRoundoffAllowanceK": 5.846337331082953e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 18,
+      "rawDifferenceK": 0.0007138467221921019,
+      "fineCausalExcursionK": 2.4716258023452156,
+      "relativeError": 0.0002888166653361381,
+      "temperatureRoundoffAllowanceK": 5.855680691200025e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 19,
+      "rawDifferenceK": 0.0007429690294884495,
+      "fineCausalExcursionK": 2.6372895677207,
+      "relativeError": 0.000281716895475595,
+      "temperatureRoundoffAllowanceK": 5.86503336152258e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 20,
+      "rawDifferenceK": 0.0007735531262369477,
+      "fineCausalExcursionK": 2.806354593692504,
+      "relativeError": 0.00027564340157710913,
+      "temperatureRoundoffAllowanceK": 5.874395700886497e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 21,
+      "rawDifferenceK": 0.0008055543778482388,
+      "fineCausalExcursionK": 2.9789382167739404,
+      "relativeError": 0.00027041661129871265,
+      "temperatureRoundoffAllowanceK": 5.883768042718779e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 22,
+      "rawDifferenceK": 0.0008389546123908076,
+      "fineCausalExcursionK": 3.155149230592997,
+      "relativeError": 0.00026590013691147333,
+      "temperatureRoundoffAllowanceK": 5.893150696203688e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 23,
+      "rawDifferenceK": 0.0008737689097415569,
+      "fineCausalExcursionK": 3.3350883331836485,
+      "relativeError": 0.0002619927337599074,
+      "temperatureRoundoffAllowanceK": 5.902543947563681e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 24,
+      "rawDifferenceK": 0.0009100517859224055,
+      "fineCausalExcursionK": 3.5188486343206478,
+      "relativeError": 0.00025862203251550235,
+      "temperatureRoundoffAllowanceK": 5.911948061510127e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 25,
+      "rawDifferenceK": 0.0009479005293542286,
+      "fineCausalExcursionK": 3.706516248716298,
+      "relativeError": 0.0002557389380614536,
+      "temperatureRoundoffAllowanceK": 5.921363282934012e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 26,
+      "rawDifferenceK": 0.000987452269100686,
+      "fineCausalExcursionK": 3.89817100629557,
+      "relativeError": 0.0002533116857895522,
+      "temperatureRoundoffAllowanceK": 5.930789838920504e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 27,
+      "rawDifferenceK": 0.0010288700655110006,
+      "fineCausalExcursionK": 4.093887314309995,
+      "relativeError": 0.000251318609067385,
+      "temperatureRoundoffAllowanceK": 5.940227941179452e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 28,
+      "rawDifferenceK": 0.0010723121581577288,
+      "fineCausalExcursionK": 4.293735205583971,
+      "relativeError": 0.000249738772144867,
+      "temperatureRoundoffAllowanceK": 5.949677788980986e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 29,
+      "rawDifferenceK": 0.001117877805199896,
+      "fineCausalExcursionK": 4.4977816000198345,
+      "relativeError": 0.0002485398146488408,
+      "temperatureRoundoffAllowanceK": 5.959139572663965e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 30,
+      "rawDifferenceK": 0.0011655232822249673,
+      "fineCausalExcursionK": 4.706091789380025,
+      "relativeError": 0.00024766267518520115,
+      "temperatureRoundoffAllowanceK": 5.9686134777366e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 31,
+      "rawDifferenceK": 0.0012149430019690044,
+      "fineCausalExcursionK": 4.918731124868145,
+      "relativeError": 0.00024700333706522185,
+      "temperatureRoundoffAllowanceK": 5.978099689503918e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 32,
+      "rawDifferenceK": 0.0012654136860419385,
+      "fineCausalExcursionK": 5.135766839792723,
+      "relativeError": 0.00024639235493272704,
+      "temperatureRoundoffAllowanceK": 5.987598398026637e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 33,
+      "rawDifferenceK": 0.0013156042948594404,
+      "fineCausalExcursionK": 5.357270065639341,
+      "relativeError": 0.000245573637083841,
+      "temperatureRoundoffAllowanceK": 5.997109803581073e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 34,
+      "rawDifferenceK": 0.0013633605731229181,
+      "fineCausalExcursionK": 5.583317210490122,
+      "relativeError": 0.00024418468837152774,
+      "temperatureRoundoffAllowanceK": 6.00663412027068e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 35,
+      "rawDifferenceK": 0.0014054809189474327,
+      "fineCausalExcursionK": 5.813990961037689,
+      "relativeError": 0.00024174115996502694,
+      "temperatureRoundoffAllowanceK": 6.016171578555421e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 36,
+      "rawDifferenceK": 0.0014375080936588347,
+      "fineCausalExcursionK": 6.049380393248384,
+      "relativeError": 0.00023762898019493274,
+      "temperatureRoundoffAllowanceK": 6.025722425270304e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 37,
+      "rawDifferenceK": 0.0014535686996168806,
+      "fineCausalExcursionK": 6.289579547939411,
+      "relativeError": 0.00023110745138649183,
+      "temperatureRoundoffAllowanceK": 6.035286919348804e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 38,
+      "rawDifferenceK": 0.0014462976794220594,
+      "fineCausalExcursionK": 6.5346838233861035,
+      "relativeError": 0.00022132634393818697,
+      "temperatureRoundoffAllowanceK": 6.044865321462753e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 39,
+      "rawDifferenceK": 0.0014068869738821377,
+      "fineCausalExcursionK": 6.784783468805699,
+      "relativeError": 0.0002073591560217893,
+      "temperatureRoundoffAllowanceK": 6.05445787559885e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 40,
+      "rawDifferenceK": 0.0013252945389012893,
+      "fineCausalExcursionK": 7.039953450462917,
+      "relativeError": 0.00018825330994399453,
+      "temperatureRoundoffAllowanceK": 6.064064780553429e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 41,
+      "rawDifferenceK": 0.0011906411000381922,
+      "fineCausalExcursionK": 7.300239031841784,
+      "relativeError": 0.00016309618011751655,
+      "temperatureRoundoffAllowanceK": 6.073686149512672e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 42,
+      "rawDifferenceK": 0.0009918067348735349,
+      "fineCausalExcursionK": 7.565636586723258,
+      "relativeError": 0.000131093626227571,
+      "temperatureRoundoffAllowanceK": 6.083321956367884e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 43,
+      "rawDifferenceK": 0.0007182178176208254,
+      "fineCausalExcursionK": 7.8360694719644925,
+      "relativeError": 9.1655366276477e-05,
+      "temperatureRoundoffAllowanceK": 6.092971968260126e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 44,
+      "rawDifferenceK": 0.0003607881762945908,
+      "fineCausalExcursionK": 8.111359240812817,
+      "relativeError": 4.4479373380390095e-05,
+      "temperatureRoundoffAllowanceK": 6.102635665100993e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 45,
+      "rawDifferenceK": 8.705106165507459e-05,
+      "fineCausalExcursionK": 8.39119308126942,
+      "relativeError": 1.0374098273270277e-05,
+      "temperatureRoundoffAllowanceK": 6.112312148490385e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 46,
+      "rawDifferenceK": 0.0006283266650370933,
+      "fineCausalExcursionK": 8.675089104396193,
+      "relativeError": 7.242884280216582e-05,
+      "temperatureRoundoffAllowanceK": 6.122000044516266e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 47,
+      "rawDifferenceK": 0.0012616480121323548,
+      "fineCausalExcursionK": 8.9623698961218,
+      "relativeError": 0.000140771696186998,
+      "temperatureRoundoffAllowanceK": 6.131697429828239e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 48,
+      "rawDifferenceK": 0.00198051611982919,
+      "fineCausalExcursionK": 9.252132906348152,
+      "relativeError": 0.00021406049176728767,
+      "temperatureRoundoffAllowanceK": 6.141401748460249e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 49,
+      "rawDifferenceK": 0.0027729710941457597,
+      "fineCausalExcursionK": 9.54322041163232,
+      "relativeError": 0.0002905697421350302,
+      "temperatureRoundoffAllowanceK": 6.1511097269604e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 50,
+      "rawDifferenceK": 0.0036216988062278688,
+      "fineCausalExcursionK": 9.834208705435685,
+      "relativeError": 0.0003682755689561519,
+      "temperatureRoundoffAllowanceK": 6.160817343516193e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 51,
+      "rawDifferenceK": 0.004504542419454083,
+      "fineCausalExcursionK": 10.123417055054233,
+      "relativeError": 0.00044496264403185267,
+      "temperatureRoundoffAllowanceK": 6.170519852684733e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 52,
+      "rawDifferenceK": 0.005395454718154724,
+      "fineCausalExcursionK": 10.408944529922564,
+      "relativeError": 0.0005183479172786851,
+      "temperatureRoundoffAllowanceK": 6.18021188871172e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 53,
+      "rawDifferenceK": 0.0062659899228947324,
+      "fineCausalExcursionK": 10.68874700276865,
+      "relativeError": 0.0005862230550757433,
+      "temperatureRoundoffAllowanceK": 6.189887682261903e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 54,
+      "rawDifferenceK": 0.0070876320401112025,
+      "fineCausalExcursionK": 10.9607720674328,
+      "relativeError": 0.0006466362037734854,
+      "temperatureRoundoffAllowanceK": 6.199541440569796e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 55,
+      "rawDifferenceK": 0.007835386712258696,
+      "fineCausalExcursionK": 11.223174299945413,
+      "relativeError": 0.0006981435468124919,
+      "temperatureRoundoffAllowanceK": 6.209167954144133e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 56,
+      "rawDifferenceK": 0.008492648801620817,
+      "fineCausalExcursionK": 11.47462968541322,
+      "relativeError": 0.0007401239982861358,
+      "temperatureRoundoffAllowanceK": 6.218763483505576e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 57,
+      "rawDifferenceK": 0.009055886343503516,
+      "fineCausalExcursionK": 11.714743000718045,
+      "relativeError": 0.000773033291720394,
+      "temperatureRoundoffAllowanceK": 6.228326910381686e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 58,
+      "rawDifferenceK": 0.009535504485938873,
+      "fineCausalExcursionK": 11.944483344889477,
+      "relativeError": 0.0007983187058499855,
+      "temperatureRoundoffAllowanceK": 6.23786097433096e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 59,
+      "rawDifferenceK": 0.009948543348400563,
+      "fineCausalExcursionK": 12.166496755550043,
+      "relativeError": 0.0008176999138114505,
+      "temperatureRoundoffAllowanceK": 6.247373171629181e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 60,
+      "rawDifferenceK": 0.010302743980673768,
+      "fineCausalExcursionK": 12.385074208888454,
+      "relativeError": 0.0008318677633178612,
+      "temperatureRoundoffAllowanceK": 6.256875686963491e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 61,
+      "rawDifferenceK": 0.010580041989669553,
+      "fineCausalExcursionK": 12.605575484281871,
+      "relativeError": 0.0008393144765871265,
+      "temperatureRoundoffAllowanceK": 6.266383779414147e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 62,
+      "rawDifferenceK": 0.010733844731021236,
+      "fineCausalExcursionK": 12.83328488315692,
+      "relativeError": 0.0008364066432522588,
+      "temperatureRoundoffAllowanceK": 6.275912534081248e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    },
+    {
+      "cell": 63,
+      "rawDifferenceK": 0.010708643108273463,
+      "fineCausalExcursionK": 13.071967222432022,
+      "relativeError": 0.0008192066982769816,
+      "temperatureRoundoffAllowanceK": 6.285472730101213e-11,
+      "resolvedReferenceSignal": true,
+      "passed": true
+    }
+  ],
+  "knownReversalCell": 1,
+  "knownReversalCellResolved": true,
+  "allResolvedEndpointGatesPassed": false,
+  "allCellsResolved": true,
+  "qualified": false,
+  "uniformAllTimeLocalAccuracyClaimed": false
+}

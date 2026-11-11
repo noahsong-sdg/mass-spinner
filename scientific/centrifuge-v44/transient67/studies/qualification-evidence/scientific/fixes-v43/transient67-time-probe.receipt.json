@@ -1,0 +1,20 @@
+{
+  "label": "transient67-time-probe",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/transient-v67/campaign.ts",
+    "scientific/transient-v67/specifications.json",
+    "/work/home/transient67-time-probe.json",
+    "[\"r32-z4-w8-t64-u\",\"r32-z4-w8-t128-u\",\"r32-z4-w8-t256-u\"]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 715,
+  "sourceSHA256": "a7ef7b49d273e9adeef6d43f117025ac5e39caef97dbccd7afef1c694a9fe678",
+  "exitCode": 0,
+  "seconds": 71.065757658,
+  "sourceVerifiedBeforeAndAfter": true
+}

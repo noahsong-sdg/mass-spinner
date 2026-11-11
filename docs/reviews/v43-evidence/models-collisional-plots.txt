@@ -1,0 +1,104 @@
+Browser tab: 923039329, Title: "Mass Spinner — Plasma separation laboratory", URL: "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=3".
+1 AXWebArea Mass Spinner — Plasma separation laboratory, URL: fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=3
+	2 container Models
+		3 heading Models, Value: 1, ID: level-title
+			114 text Models
+		5 container
+			6 link Description: Mass Spinner, Value: fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=3#
+			7 container Choose a simulator playground
+				8 checkbox Mass Spinner, Value: 0
+				9 checkbox Marathon, Value: 0
+				10 checkbox Models, Value: 1
+				11 checkbox Research, Value: 0
+			12 container Choose a playground
+				13 button Description: Reset this playground, ID: reset-playground
+					14 text Reset ↺
+					133 text ↺
+				16 button Copy link ↗, ID: share-playground
+		116 container
+			117 image 3D apparatus. Drag to rotate, scroll to zoom. Arrow keys rotate; plus and minus zoom.
+			134 button (collapsed) Surfaces · 0.0002 s, Secondary Actions: Expand
+				135 text Surfaces · 0.0002 s
+			118 button (collapsed) Description: Geometry and material fidelity, Help: Concept model, Secondary Actions: Expand
+				119 text Concept model
+		21 container Simulation windows
+			120 button (collapsed) Controls, Secondary Actions: Expand
+			23 button (expanded) Plots, Secondary Actions: Collapse
+			25 button (collapsed) Inspect, Secondary Actions: Expand
+			121 button (collapsed) Model info, Secondary Actions: Expand
+			113 button Reset window layout
+		136 container
+			137 splitter Description: Resize right windows, Help: Drag or use arrow keys to resize; Home and End set the bounds, Value: 518
+			138 container Plots, ID: window-plots
+				139 heading Plots, Value: 2, ID: window-title-plots
+					140 text Plots
+				141 button Close Plots
+				142 container
+					143 container reduced-view
+						144 heading Collisional double-well dynamics, Value: 2, ID: reduced-title
+							145 text Collisional double-well dynamics
+						146 button (collapsed) Model info, Secondary Actions: Expand
+							147 text Model info
+					148 text A · 40 u · +1
+					149 text B · 84 u · +1
+					150 heading Response, Value: 2
+						151 text Response
+					152 text Computed from the current settings · hover over curves to inspect values.
+					153 text Collisions: budget-exceeded · continuum unqualified
+					154 button Pin baseline
+					155 button (disabled) Restore
+					156 button (disabled) Clear
+					157 container live-plots
+						158 container
+							159 text Fraction of injected A representatives against Time (ms)
+							160 container Fraction of injected A representatives against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							161 text A active: 0, 1 · A wall: 0, 0 · A end: 0, 0 · A source: 0, 0
+						162 container
+							163 text Survivor mean radius (m) against Time (ms)
+							164 container Survivor mean radius (m) against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							165 text A: 0, 0.05482 · B: 0, 0.05201
+						166 container
+							167 text Survivor residual kinetic temperature (eV) against Time (ms)
+							168 container Survivor residual kinetic temperature (eV) against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							169 text A: 0, 5.121 · B: 0, 4.885
+						170 container
+							171 text Survivor fitted rigid rotation (rad/s) against Time (ms)
+							172 container Survivor fitted rigid rotation (rad/s) against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							173 text A: 0, -6.98e+4 · B: 0, -3.83e+4
+						174 container
+							175 text Survivor mean Pθ (kg m²/s) against Time (ms)
+							176 container Survivor mean Pθ (kg m²/s) against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							177 text A: 0, 5.57e-25 · B: 0, -1.66e-24
+						178 container
+							179 text Final axially averaged active density (m⁻³) against Radius (m)
+							180 container Final axially averaged active density (m⁻³) against Radius (m). Arrow keys inspect samples; Home and End select endpoints.
+							181 text A: 0.005, 0 · B: 0.005, 0
+						182 container
+							183 text Fraction of injected B representatives against Time (ms)
+							184 container Fraction of injected B representatives against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							185 text B active: 0, 1 · B wall: 0, 0 · B end: 0, 0 · B source: 0, 0
+						186 container
+							187 text Signed conservation residual / initial positive scale against Time (ms)
+							188 container Signed conservation residual / initial positive scale against Time (ms). Arrow keys inspect samples; Home and End select endpoints.
+							189 text H including exit flux: 0, 0 · Pθ including exit flux: 0, 0 · Accumulated collision-cell torque: 0, 0
+					190 text Physical ions per representative: 1.1781e+13 · Collision pairs: 272573.0000 · RMS pair separation: 0.0821 m · Maximum pair separation: 0.1985 m · RMS radial pair separation: 0.0297 m · Pairs with TA half-angle variance > 0.1 (resolution marker): 5.7232e-4 fraction · Unpaired representative exposure: 0.1134 fraction · Max sampled H balance residual including exits: 1.0862e-6 · Max sampled raw Pθ balance residual including exits: 0.0096 · Accumulated absolute cell-net torque / P scale: 0.4551 · Accumulated absolute pair torque / P scale: 1.0620 · Pair torque quadratic-variation scale / P scale: 0.0041 · Collision cell width / initial source radius: 1.6667 · Axial cell length / initial pulse length: 0.8000 · Pθ residual after measured cell torque: 1.0679e-6 · Initial electron Debye length: 1.6623e-5 m · Initial ion coupling parameter: 4.6424e-4 · Initial electrons per Debye sphere: 19239.8251 · Initial estimated lnΛ (supplied value is used): 12.0620 · Initial encounter magnetization: 3.2918e-4 · Regime snapshots outside supported local estimates: 0.0000 of 155 · Regime snapshots unresolved by local sampling: 155.0000 of 155 · A wall fraction (descriptive only; coupled particles): 0.0000 · A end fraction (descriptive only; coupled particles): 0.7734 · A source fraction (descriptive only; coupled particles): 0.0469 · A active fraction (descriptive only; coupled particles): 0.1797 · B wall fraction (descriptive only; coupled particles): 0.0313 · B end fraction (descriptive only; coupled particles): 0.6250 · B source fraction (descriptive only; coupled particles): 0.0781 · B active fraction (descriptive only; coupled particles): 0.2656
+					191 button (collapsed) Model info, Secondary Actions: Expand
+						192 text Model info
+					193 container Collection
+						194 heading Collection, Value: 2, ID: results-title
+							195 text Collection
+						196 button Export run ↓, ID: export
+						197 text Run an experiment to compare Δt with Δt/2.
+		122 container
+			123 text System
+			124 pop up button (collapsed, settable) Description: Separation mechanism, Value: Collisional double-well dynamics · §II D, ID: system, Secondary Actions: Expand
+				125 menu
+					126 Plasma centrifuge equilibria · §II C
+					127 Rotating orbit filter · §II D
+					128 Ion cyclotron resonance · §II A
+					129 Ion gyro-orbit separation · §II A
+					130 Ion drift-orbit separation · §II B
+					131 Double-well mass filter · §II D
+					132 (selected) Collisional double-well dynamics · §II D
+
+The focused UI element is 139 heading Plots, Value: 2, ID: window-title-plots

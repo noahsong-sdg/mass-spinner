@@ -1,0 +1,90 @@
+[
+  {
+    "label": "audit-anchor-r64-z64-g128-t256",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "case",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/audit-anchor-r64-z64-g128-t256",
+      "anchor-r64-z64-g128-t256"
+    ],
+    "exitCode": 0,
+    "seconds": 2.8230285850000003
+  },
+  {
+    "label": "audit-radial-r32-z64-g128-t256",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "case",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/audit-radial-r32-z64-g128-t256",
+      "radial-r32-z64-g128-t256"
+    ],
+    "exitCode": 0,
+    "seconds": 1.9363906669999995
+  },
+  {
+    "label": "audit-axial-r64-z32-g128-t256",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "case",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/audit-axial-r64-z32-g128-t256",
+      "axial-r64-z32-g128-t256"
+    ],
+    "exitCode": 0,
+    "seconds": 1.9258372929999998
+  },
+  {
+    "label": "audit-liner-r64-z64-g64-t256",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "case",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/audit-liner-r64-z64-g64-t256",
+      "liner-r64-z64-g64-t256"
+    ],
+    "exitCode": 0,
+    "seconds": 2.0143314180000003
+  },
+  {
+    "label": "radial",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "radial",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/radial"
+    ],
+    "exitCode": 0,
+    "seconds": 38.886859309
+  },
+  {
+    "label": "axial",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "axial",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/axial"
+    ],
+    "exitCode": 0,
+    "seconds": 39.316477977
+  },
+  {
+    "label": "liner",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/resolved-v68/assess.py",
+      "liner",
+      "/work/home/resolved68-campaign",
+      "/work/home/resolved68-assessment/liner"
+    ],
+    "exitCode": 0,
+    "seconds": 49.930658772000015
+  }
+]

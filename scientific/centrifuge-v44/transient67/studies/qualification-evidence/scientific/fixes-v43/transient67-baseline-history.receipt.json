@@ -1,0 +1,20 @@
+{
+  "label": "transient67-baseline-history",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/assess.py",
+    "/work/home/current66-final-volume/coupled.json",
+    "/work/home/transient67-baseline-history",
+    "[[\"mixture-n64-t32\",\"mixture-n64-t64\",\"time\"],[\"mixture-n32-t64\",\"mixture-n64-t64\",\"radial\"]]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 717,
+  "sourceSHA256": "97b665039d66eaab38e175b779af32162e280ebe579ad74b0adcccb0bea13401",
+  "exitCode": 1,
+  "seconds": 3.1878806689999997,
+  "sourceVerifiedBeforeAndAfter": true
+}

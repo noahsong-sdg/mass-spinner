@@ -1,0 +1,12 @@
+{
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "pairs": [
+    {
+      "coarseFile": "/work/home/resolved68-campaign/time-r64-z64-g128-t128.json",
+      "fineFile": "/work/home/resolved68-campaign/anchor-r64-z64-g128-t256.json",
+      "coarseSHA256": "e6d0b27f5bfa4c77b3fbd594b009ad246131acb69ec915f7cf34730ae28c4898",
+      "fineSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2",
+      "axis": "time"
+    }
+  ]
+}

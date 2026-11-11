@@ -1,0 +1,22 @@
+{
+  "README.md": {
+    "sha256": "8b60b9ec168bb6542547c096f6b5ed8f62f13c47a7bca376a0d3dd7908084b9c",
+    "bytes": 31814
+  },
+  "docs/RESOLVED-CURRENT-EVOLUTION-V68.md": {
+    "sha256": "546909b5fa887d8d6db311c6d2402cd69d9bca1d1a5e0bcdae2a45c5739f0080",
+    "bytes": 16562
+  },
+  "docs/reviews/v68-current-solver.md": {
+    "sha256": "be5af1081fff5c32822264dca7a7a919eeb0e795da22fc3eeaf07d68d70b8c71",
+    "bytes": 36706
+  },
+  "docs/reviews/v68-coupled-qualification.md": {
+    "sha256": "7d12e953df2dd790cc475b555c7ef696b20c896d8407cdc5f1c9aa62bb9c1928",
+    "bytes": 32959
+  },
+  "scientific/centrifuge-v44/resolved68/studies/qualification-evidence/host-source-verification.json": {
+    "sha256": "fa6013a5f1563cfe004c40bd1e84ac33d8eff39a7ef7b0d11e8d2a621bfaad57",
+    "bytes": 224
+  }
+}

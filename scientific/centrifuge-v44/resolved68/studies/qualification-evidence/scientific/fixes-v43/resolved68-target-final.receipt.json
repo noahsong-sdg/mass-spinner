@@ -1,0 +1,21 @@
+{
+  "label": "resolved68-target-final",
+  "command": [
+    "node_modules/.bin/tsx",
+    "--test",
+    "tests/fuel-current-reuse-v68.test.ts",
+    "tests/fuel-current-v66.test.ts",
+    "tests/fuel-current-axis-v66.test.ts",
+    "tests/fuel-spatial-operation-v66.test.ts"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 735,
+  "sourceSHA256": "69e77ffca10deda322b4879b809d4b4a6501046c518c9079998762f6390b2d2b",
+  "exitCode": 0,
+  "seconds": 0.5195176670000001,
+  "sourceVerifiedBeforeAndAfter": true
+}

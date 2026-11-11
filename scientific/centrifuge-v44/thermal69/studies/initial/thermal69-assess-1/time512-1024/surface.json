@@ -1,0 +1,3817 @@
+{
+  "study": "v67 physical inner-wall surface qualification",
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "predictionSHA256": "91b84d0a4da7d364b4bd85222052758882b408fcbcf7dc5215602484afc020b7",
+  "comparisons": [
+    {
+      "coarseID": "gas-q512-w128",
+      "fineID": "gas-q1024-w128",
+      "axis": "time",
+      "surfaceRadiusM": 0.01,
+      "surfaceErrorK": 5.490805961017031e-07,
+      "surfaceHeatingScaleK": 0.0005430588134913705,
+      "surfaceScaleInterpretation": "Total excursion from initialized solid surface, including initial boundary-reconstruction incompatibility; not a pure physical-heating scale.",
+      "relativeSurfaceError": 0.001011088638027285,
+      "worstTimeS": 3.814697265625e-05,
+      "sharedAcceptedTimes": 100,
+      "fineOnlyAcceptedTimesNotCompared": 100,
+      "gates": [
+        {
+          "name": "physicalSurfaceTemperatureErrorOverHeating",
+          "value": 0.001011088638027285,
+          "limit": 0.01,
+          "passed": true
+        },
+        {
+          "name": "physicalSurfaceTemperatureAbsoluteErrorK",
+          "value": 5.490805961017031e-07,
+          "limit": 0.05,
+          "passed": true
+        }
+      ],
+      "allSurfaceGatesPassed": true,
+      "causalPerTimeDiagnostics": {
+        "gated": false,
+        "resolvedComparisons": 100,
+        "unresolvedSignalComparisons": 0,
+        "unresolvedAboveRoundoffComparisons": 0,
+        "maximumResolvedRelativeError": 0.04534991965654341,
+        "maximumUnresolvedRawErrorK": 0.0,
+        "worstResolvedLocation": {
+          "timeS": 3.814697265625e-09,
+          "coarseSurfaceK": 1199.9999944742542,
+          "fineSurfaceK": 1199.999994211758,
+          "rawDifferenceK": 2.6249631446262356e-07,
+          "fineCausalExcursionK": 5.78824210606399e-06,
+          "roundoffAllowanceK": 5.456968223679902e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.04534991965654341
+        }
+      },
+      "initialBoundaryCompatibility": {
+        "coarse": {
+          "initializedUniformSolidSurfaceK": 1200.0,
+          "initialAlgebraicSurfaceK": 1199.9999995751048,
+          "initialBoundaryReconstructionMismatchK": -4.248951729278071e-07,
+          "maximumSubsequentChangeFromInitialAlgebraicSurfaceK": 0.000542084837661605,
+          "mismatchOverPrimaryExcursionScale": 0.0007824109698102872,
+          "initialMismatchDominatesSubsequentChange": false
+        },
+        "fine": {
+          "initializedUniformSolidSurfaceK": 1200.0,
+          "initialAlgebraicSurfaceK": 1199.9999995751048,
+          "initialBoundaryReconstructionMismatchK": -4.248951729278071e-07,
+          "maximumSubsequentChangeFromInitialAlgebraicSurfaceK": 0.0005426339182577067,
+          "mismatchOverPrimaryExcursionScale": 0.0007824109698102872,
+          "initialMismatchDominatesSubsequentChange": false
+        },
+        "interpretation": "Uniform initialized solid trace and finite-cell algebraic boundary reconstruction need not agree at t=0. Their mismatch is not resolved physical heating; it may contaminate the primary whole-history surface-excursion normalization. Inspect both spatial and time refinement."
+      },
+      "trace": [
+        {
+          "timeS": 0.0,
+          "coarseSurfaceK": 1200.0,
+          "fineSurfaceK": 1200.0,
+          "rawDifferenceK": 0.0,
+          "fineCausalExcursionK": 0.0,
+          "roundoffAllowanceK": 5.456968210637569e-10,
+          "roundoffDominatedReferenceSignal": true,
+          "causalRelativeError": 0.0
+        },
+        {
+          "timeS": 3.814697265625e-09,
+          "coarseSurfaceK": 1199.9999944742542,
+          "fineSurfaceK": 1199.999994211758,
+          "rawDifferenceK": 2.6249631446262356e-07,
+          "fineCausalExcursionK": 5.78824210606399e-06,
+          "roundoffAllowanceK": 5.456968223679902e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.04534991965654341
+        },
+        {
+          "timeS": 1.52587890625e-08,
+          "coarseSurfaceK": 1199.9999886328872,
+          "fineSurfaceK": 1199.9999882532275,
+          "rawDifferenceK": 3.796596956817666e-07,
+          "fineCausalExcursionK": 1.1746772543119732e-05,
+          "roundoffAllowanceK": 5.456968210264655e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.032320341122476164
+        },
+        {
+          "timeS": 3.4332275390625004e-08,
+          "coarseSurfaceK": 1199.999982692684,
+          "fineSurfaceK": 1199.9999822680716,
+          "rawDifferenceK": 4.2461238081159536e-07,
+          "fineCausalExcursionK": 1.7731928437569877e-05,
+          "roundoffAllowanceK": 5.456968196706573e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.02394620428942965
+        },
+        {
+          "timeS": 6.103515625e-08,
+          "coarseSurfaceK": 1199.9999767253619,
+          "fineSurfaceK": 1199.999976279196,
+          "rawDifferenceK": 4.4616581362788565e-07,
+          "fineCausalExcursionK": 2.3720803937976598e-05,
+          "roundoffAllowanceK": 5.456968183113241e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.018809051109502317
+        },
+        {
+          "timeS": 9.5367431640625e-08,
+          "coarseSurfaceK": 1199.9999707499437,
+          "fineSurfaceK": 1199.9999702914236,
+          "rawDifferenceK": 4.5852016228309367e-07,
+          "fineCausalExcursionK": 2.9708576448683743e-05,
+          "roundoffAllowanceK": 5.456968169511782e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.015433932456343214
+        },
+        {
+          "timeS": 1.3732910156250002e-07,
+          "coarseSurfaceK": 1199.9999647731947,
+          "fineSurfaceK": 1199.9999643066783,
+          "rawDifferenceK": 4.6651643970108125e-07,
+          "fineCausalExcursionK": 3.569332170627604e-05,
+          "roundoffAllowanceK": 5.456968155912088e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.01307013237770618
+        },
+        {
+          "timeS": 1.86920166015625e-07,
+          "coarseSurfaceK": 1199.999958798203,
+          "fineSurfaceK": 1199.9999583260617,
+          "rawDifferenceK": 4.7214120968419593e-07,
+          "fineCausalExcursionK": 4.1673938312669634e-05,
+          "roundoffAllowanceK": 5.456968142318938e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.011329411829086871
+        },
+        {
+          "timeS": 2.44140625e-07,
+          "coarseSurfaceK": 1199.9999528266803,
+          "fineSurfaceK": 1199.9999523503404,
+          "rawDifferenceK": 4.7633989197493065e-07,
+          "fineCausalExcursionK": 4.764965956383094e-05,
+          "roundoffAllowanceK": 5.456968128735164e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.009996711337188699
+        },
+        {
+          "timeS": 3.08990478515625e-07,
+          "coarseSurfaceK": 1199.999946859724,
+          "fineSurfaceK": 1199.9999463801073,
+          "rawDifferenceK": 4.796168013854185e-07,
+          "fineCausalExcursionK": 5.361989269658807e-05,
+          "roundoffAllowanceK": 5.456968115162697e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.00894475496434437
+        },
+        {
+          "timeS": 3.814697265625e-07,
+          "coarseSurfaceK": 1199.9999408981164,
+          "fineSurfaceK": 1199.999940415851,
+          "rawDifferenceK": 4.822654773306567e-07,
+          "fineCausalExcursionK": 5.95841490849125e-05,
+          "roundoffAllowanceK": 5.456968101602994e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.008093855240651121
+        },
+        {
+          "timeS": 4.61578369140625e-07,
+          "coarseSurfaceK": 1199.9999349424616,
+          "fineSurfaceK": 1199.9999344579926,
+          "rawDifferenceK": 4.844689556193771e-07,
+          "fineCausalExcursionK": 6.554200740538363e-05,
+          "roundoffAllowanceK": 5.456968088057229e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0073917320326014726
+        },
+        {
+          "timeS": 5.493164062500001e-07,
+          "coarseSurfaceK": 1199.9999289932548,
+          "fineSurfaceK": 1199.999928506907,
+          "rawDifferenceK": 4.863477442995645e-07,
+          "fineCausalExcursionK": 7.149309294618433e-05,
+          "roundoffAllowanceK": 5.4569680745264e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.006802723511565762
+        },
+        {
+          "timeS": 6.44683837890625e-07,
+          "coarseSurfaceK": 1199.9999230509227,
+          "fineSurfaceK": 1199.9999225629383,
+          "rawDifferenceK": 4.879843800154049e-07,
+          "fineCausalExcursionK": 7.743706169094366e-05,
+          "roundoffAllowanceK": 5.456968061011388e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.006301690293505482
+        },
+        {
+          "timeS": 7.476806640625e-07,
+          "coarseSurfaceK": 1199.999917115845,
+          "fineSurfaceK": 1199.9999166264083,
+          "rawDifferenceK": 4.894366156804608e-07,
+          "fineCausalExcursionK": 8.33735916785372e-05,
+          "roundoffAllowanceK": 5.456968047512996e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.005870403395448971
+        },
+        {
+          "timeS": 8.58306884765625e-07,
+          "coarseSurfaceK": 1199.9999111883692,
+          "fineSurfaceK": 1199.9999106976222,
+          "rawDifferenceK": 4.907469701720402e-07,
+          "fineCausalExcursionK": 8.930237777349248e-05,
+          "roundoffAllowanceK": 5.456968034031969e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0054953404646937406
+        },
+        {
+          "timeS": 9.765625e-07,
+          "coarseSurfaceK": 1199.999905268821,
+          "fineSurfaceK": 1199.9999047768747,
+          "rawDifferenceK": 4.919463663100032e-07,
+          "fineCausalExcursionK": 9.522312529952615e-05,
+          "roundoffAllowanceK": 5.456968020569016e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.005166248899755985
+        },
+        {
+          "timeS": 1.102447509765625e-06,
+          "coarseSurfaceK": 1199.9998993575086,
+          "fineSurfaceK": 1199.9998988644502,
+          "rawDifferenceK": 4.930584509565961e-07,
+          "fineCausalExcursionK": 0.00010113554981217021,
+          "roundoffAllowanceK": 5.456968007124814e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.004875223913572511
+        },
+        {
+          "timeS": 1.2359619140625e-06,
+          "coarseSurfaceK": 1199.9998934547273,
+          "fineSurfaceK": 1199.9998929606272,
+          "rawDifferenceK": 4.941000497638015e-07,
+          "fineCausalExcursionK": 0.00010703937277867226,
+          "roundoffAllowanceK": 5.456967993700016e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.004616058903721936
+        },
+        {
+          "timeS": 1.377105712890625e-06,
+          "coarseSurfaceK": 1199.9998875607619,
+          "fineSurfaceK": 1199.9998870656764,
+          "rawDifferenceK": 4.950854872731725e-07,
+          "fineCausalExcursionK": 0.00011293432362435851,
+          "roundoffAllowanceK": 5.456967980295256e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.004383835413225858
+        },
+        {
+          "timeS": 1.52587890625e-06,
+          "coarseSurfaceK": 1199.9998816758898,
+          "fineSurfaceK": 1199.9998811798644,
+          "rawDifferenceK": 4.960254500474548e-07,
+          "fineCausalExcursionK": 0.00011882013563990768,
+          "roundoffAllowanceK": 5.456967966911155e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.004174590841662502
+        },
+        {
+          "timeS": 1.682281494140625e-06,
+          "coarseSurfaceK": 1199.9998758003796,
+          "fineSurfaceK": 1199.999875303452,
+          "rawDifferenceK": 4.969276687916135e-07,
+          "fineCausalExcursionK": 0.00012469654802771402,
+          "roundoffAllowanceK": 5.456967953548315e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.003985095631365598
+        },
+        {
+          "timeS": 1.8463134765625e-06,
+          "coarseSurfaceK": 1199.9998699344942,
+          "fineSurfaceK": 1199.9998694366943,
+          "rawDifferenceK": 4.977998742106138e-07,
+          "fineCausalExcursionK": 0.00013056330567451369,
+          "roundoffAllowanceK": 5.456967940207327e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.003812708874357075
+        },
+        {
+          "timeS": 2.017974853515625e-06,
+          "coarseSurfaceK": 1199.99986407849,
+          "fineSurfaceK": 1199.9998635798438,
+          "rawDifferenceK": 4.986461590306135e-07,
+          "fineCausalExcursionK": 0.00013642015619552694,
+          "roundoffAllowanceK": 5.45696792688877e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0036552234870330953
+        },
+        {
+          "timeS": 2.1972656250000003e-06,
+          "coarseSurfaceK": 1199.9998582326186,
+          "fineSurfaceK": 1199.9998577331467,
+          "rawDifferenceK": 4.994719802198233e-07,
+          "fineCausalExcursionK": 0.00014226685334506328,
+          "roundoffAllowanceK": 5.456967913593213e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0035108106243720134
+        },
+        {
+          "timeS": 2.384185791015625e-06,
+          "coarseSurfaceK": 1199.9998523971258,
+          "fineSurfaceK": 1199.999851896846,
+          "rawDifferenceK": 5.002798388886731e-07,
+          "fineCausalExcursionK": 0.00014810315406066366,
+          "roundoffAllowanceK": 5.456967900321209e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.003377914819314087
+        },
+        {
+          "timeS": 2.5787353515625e-06,
+          "coarseSurfaceK": 1199.9998465722535,
+          "fineSurfaceK": 1199.9998460711797,
+          "rawDifferenceK": 5.010738277633209e-07,
+          "fineCausalExcursionK": 0.00015392882028208987,
+          "roundoffAllowanceK": 5.45696788707331e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0032552307413585917
+        },
+        {
+          "timeS": 2.780914306640625e-06,
+          "coarseSurfaceK": 1199.9998407582384,
+          "fineSurfaceK": 1199.9998402563826,
+          "rawDifferenceK": 5.018557658331702e-07,
+          "fineCausalExcursionK": 0.00015974361735970888,
+          "roundoffAllowanceK": 5.456967873850048e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0031416326619366393
+        },
+        {
+          "timeS": 2.99072265625e-06,
+          "coarseSurfaceK": 1199.9998349553125,
+          "fineSurfaceK": 1199.999834452685,
+          "rawDifferenceK": 5.026274720876245e-07,
+          "fineCausalExcursionK": 0.00016554731496398745,
+          "roundoffAllowanceK": 5.456967860651953e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0030361559907931108
+        },
+        {
+          "timeS": 3.208160400390625e-06,
+          "coarseSurfaceK": 1199.9998291637046,
+          "fineSurfaceK": 1199.9998286603131,
+          "rawDifferenceK": 5.033914476371137e-07,
+          "fineCausalExcursionK": 0.0001713396868581185,
+          "roundoffAllowanceK": 5.456967847479541e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0029379734308371754
+        },
+        {
+          "timeS": 3.4332275390625e-06,
+          "coarseSurfaceK": 1199.9998233836382,
+          "fineSurfaceK": 1199.99982287949,
+          "rawDifferenceK": 5.041481472289888e-07,
+          "fineCausalExcursionK": 0.00017712050998852646,
+          "roundoffAllowanceK": 5.456967834333322e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.002846356682586599
+        },
+        {
+          "timeS": 3.665924072265625e-06,
+          "coarseSurfaceK": 1199.9998176153342,
+          "fineSurfaceK": 1199.9998171104348,
+          "rawDifferenceK": 5.048993898526533e-07,
+          "fineCausalExcursionK": 0.00018288956516698818,
+          "roundoffAllowanceK": 5.456967821213796e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0027606790436165807
+        },
+        {
+          "timeS": 3.90625e-06,
+          "coarseSurfaceK": 1199.9998118590086,
+          "fineSurfaceK": 1199.9998113533622,
+          "rawDifferenceK": 5.056463123764843e-07,
+          "fineCausalExcursionK": 0.00018864663775275403,
+          "roundoffAllowanceK": 5.456967808121455e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0026803886801269132
+        },
+        {
+          "timeS": 4.154205322265625e-06,
+          "coarseSurfaceK": 1199.9998061148742,
+          "fineSurfaceK": 1199.9998056084853,
+          "rawDifferenceK": 5.063889148004819e-07,
+          "fineCausalExcursionK": 0.00019439151469669014,
+          "roundoffAllowanceK": 5.456967795056782e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0026049949535637013
+        },
+        {
+          "timeS": 4.4097900390625e-06,
+          "coarseSurfaceK": 1199.9998003831404,
+          "fineSurfaceK": 1199.9997998760116,
+          "rawDifferenceK": 5.071287887403741e-07,
+          "fineCausalExcursionK": 0.00020012398840663082,
+          "roundoffAllowanceK": 5.456967782020253e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0025340729653555672
+        },
+        {
+          "timeS": 4.673004150390625e-06,
+          "coarseSurfaceK": 1199.9997946640124,
+          "fineSurfaceK": 1199.9997941561467,
+          "rawDifferenceK": 5.078657068224857e-07,
+          "fineCausalExcursionK": 0.00020584385333677346,
+          "roundoffAllowanceK": 5.456967769012337e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0024672376589821485
+        },
+        {
+          "timeS": 4.94384765625e-06,
+          "coarseSurfaceK": 1199.9997889576928,
+          "fineSurfaceK": 1199.999788449092,
+          "rawDifferenceK": 5.086008059151936e-07,
+          "fineCausalExcursionK": 0.00021155090803404164,
+          "roundoffAllowanceK": 5.456967756033492e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0024041532633523478
+        },
+        {
+          "timeS": 5.222320556640625e-06,
+          "coarseSurfaceK": 1199.9997832643803,
+          "fineSurfaceK": 1199.999782755046,
+          "rawDifferenceK": 5.093343133921735e-07,
+          "fineCausalExcursionK": 0.00021724495400121668,
+          "roundoffAllowanceK": 5.45696774308417e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.002344516197091146
+        },
+        {
+          "timeS": 5.5084228515625e-06,
+          "coarseSurfaceK": 1199.9997775842703,
+          "fineSurfaceK": 1199.9997770742043,
+          "rawDifferenceK": 5.100660018797498e-07,
+          "fineCausalExcursionK": 0.0002229257956969377,
+          "roundoffAllowanceK": 5.456967730164819e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0022880528486401474
+        },
+        {
+          "timeS": 5.8021545410156255e-06,
+          "coarseSurfaceK": 1199.9997719175556,
+          "fineSurfaceK": 1199.9997714067586,
+          "rawDifferenceK": 5.107970082462998e-07,
+          "fineCausalExcursionK": 0.00022859324144519633,
+          "roundoffAllowanceK": 5.456967717275874e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.002234523667528289
+        },
+        {
+          "timeS": 6.103515625e-06,
+          "coarseSurfaceK": 1199.999766264425,
+          "fineSurfaceK": 1199.9997657528986,
+          "rawDifferenceK": 5.115264229971217e-07,
+          "fineCausalExcursionK": 0.00023424710138897353,
+          "roundoffAllowanceK": 5.456967704417767e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0021837043872219297
+        },
+        {
+          "timeS": 6.412506103515625e-06,
+          "coarseSurfaceK": 1199.9997606250647,
+          "fineSurfaceK": 1199.9997601128093,
+          "rawDifferenceK": 5.122553830005927e-07,
+          "fineCausalExcursionK": 0.0002398871906734712,
+          "roundoffAllowanceK": 5.456967691590921e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0021354011506927967
+        },
+        {
+          "timeS": 6.7291259765625e-06,
+          "coarseSurfaceK": 1199.999754999658,
+          "fineSurfaceK": 1199.9997544866746,
+          "rawDifferenceK": 5.129834335093619e-07,
+          "fineCausalExcursionK": 0.0002455133253533859,
+          "roundoffAllowanceK": 5.456967678795754e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0020894321429233468
+        },
+        {
+          "timeS": 7.053375244140625e-06,
+          "coarseSurfaceK": 1199.999749388385,
+          "fineSurfaceK": 1199.9997488746742,
+          "rawDifferenceK": 5.137108018971048e-07,
+          "fineCausalExcursionK": 0.000251125325803514,
+          "roundoffAllowanceK": 5.456967666032676e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0020456351833627625
+        },
+        {
+          "timeS": 7.38525390625e-06,
+          "coarseSurfaceK": 1199.9997437914226,
+          "fineSurfaceK": 1199.9997432769849,
+          "rawDifferenceK": 5.144377155374968e-07,
+          "fineCausalExcursionK": 0.000256723015127136,
+          "roundoffAllowanceK": 5.456967653302089e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.002003862860845311
+        },
+        {
+          "timeS": 7.724761962890625e-06,
+          "coarseSurfaceK": 1199.999738208945,
+          "fineSurfaceK": 1199.9997376937813,
+          "rawDifferenceK": 5.151637196831871e-07,
+          "fineCausalExcursionK": 0.00026230621870126924,
+          "roundoffAllowanceK": 5.45696764060439e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0019639782931333695
+        },
+        {
+          "timeS": 8.0718994140625e-06,
+          "coarseSurfaceK": 1199.9997326411235,
+          "fineSurfaceK": 1199.9997321252347,
+          "rawDifferenceK": 5.158888143341755e-07,
+          "fineCausalExcursionK": 0.00026787476531353605,
+          "roundoffAllowanceK": 5.45696762793997e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0019258582036659913
+        },
+        {
+          "timeS": 8.426666259765625e-06,
+          "coarseSurfaceK": 1199.9997270881265,
+          "fineSurfaceK": 1199.9997265715137,
+          "rawDifferenceK": 5.166127721167868e-07,
+          "fineCausalExcursionK": 0.00027342848625266925,
+          "roundoffAllowanceK": 5.456967615309214e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0018893889923356278
+        },
+        {
+          "timeS": 8.789062500000001e-06,
+          "coarseSurfaceK": 1199.9997215501203,
+          "fineSurfaceK": 1199.9997210327842,
+          "rawDifferenceK": 5.173360477783717e-07,
+          "fineCausalExcursionK": 0.00027896721576325945,
+          "roundoffAllowanceK": 5.456967602712498e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0018544689789548594
+        },
+        {
+          "timeS": 9.159088134765626e-06,
+          "coarseSurfaceK": 1199.9997160272674,
+          "fineSurfaceK": 1199.9997155092092,
+          "rawDifferenceK": 5.180581865715794e-07,
+          "fineCausalExcursionK": 0.00028449079081838136,
+          "roundoffAllowanceK": 5.456967590150193e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0018210016045908048
+        },
+        {
+          "timeS": 9.5367431640625e-06,
+          "coarseSurfaceK": 1199.9997105197278,
+          "fineSurfaceK": 1199.9997100009489,
+          "rawDifferenceK": 5.187789611227345e-07,
+          "fineCausalExcursionK": 0.0002899990511195938,
+          "roundoffAllowanceK": 5.456967577622665e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001788898822668193
+        },
+        {
+          "timeS": 9.922027587890625e-06,
+          "coarseSurfaceK": 1199.9997050276595,
+          "fineSurfaceK": 1199.999704508161,
+          "rawDifferenceK": 5.194985988055123e-07,
+          "fineCausalExcursionK": 0.00029549183909693966,
+          "roundoffAllowanceK": 5.456967565130271e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.00175808103666472
+        },
+        {
+          "timeS": 1.031494140625e-05,
+          "coarseSurfaceK": 1199.9996995512172,
+          "fineSurfaceK": 1199.9996990310008,
+          "rawDifferenceK": 5.202164174988866e-07,
+          "fineCausalExcursionK": 0.00030096899922682496,
+          "roundoffAllowanceK": 5.456967552673367e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0017284717656479499
+        },
+        {
+          "timeS": 1.0715484619140626e-05,
+          "coarseSurfaceK": 1199.9996940905532,
+          "fineSurfaceK": 1199.9996935696201,
+          "rawDifferenceK": 5.209330993238837e-07,
+          "fineCausalExcursionK": 0.0003064303798510082,
+          "roundoffAllowanceK": 5.456967540252297e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0017000047435804845
+        },
+        {
+          "timeS": 1.11236572265625e-05,
+          "coarseSurfaceK": 1199.999688645817,
+          "fineSurfaceK": 1199.999688124169,
+          "rawDifferenceK": 5.216479621594772e-07,
+          "fineCausalExcursionK": 0.0003118758309028635,
+          "roundoffAllowanceK": 5.456967527867403e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0016726142601346658
+        },
+        {
+          "timeS": 1.1539459228515625e-05,
+          "coarseSurfaceK": 1199.9996832171555,
+          "fineSurfaceK": 1199.999682694795,
+          "rawDifferenceK": 5.223605512583163e-07,
+          "fineCausalExcursionK": 0.0003173052050442493,
+          "roundoffAllowanceK": 5.456967515519022e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0016462400961417298
+        },
+        {
+          "timeS": 1.1962890625e-05,
+          "coarseSurfaceK": 1199.9996778047134,
+          "fineSurfaceK": 1199.9996772816423,
+          "rawDifferenceK": 5.230710939940764e-07,
+          "fineCausalExcursionK": 0.00032271835766550794,
+          "roundoffAllowanceK": 5.456967503207481e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0016208284455148058
+        },
+        {
+          "timeS": 1.2393951416015625e-05,
+          "coarseSurfaceK": 1199.9996724086327,
+          "fineSurfaceK": 1199.9996718848536,
+          "rawDifferenceK": 5.237791356194066e-07,
+          "fineCausalExcursionK": 0.0003281151464307186,
+          "roundoffAllowanceK": 5.456967490933103e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001596327208046162
+        },
+        {
+          "timeS": 1.28326416015625e-05,
+          "coarseSurfaceK": 1199.9996670290527,
+          "fineSurfaceK": 1199.999666504568,
+          "rawDifferenceK": 5.244846761343069e-07,
+          "fineCausalExcursionK": 0.00033349543195981823,
+          "roundoffAllowanceK": 5.456967478696208e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0015726892361077388
+        },
+        {
+          "timeS": 1.3278961181640625e-05,
+          "coarseSurfaceK": 1199.99966166611,
+          "fineSurfaceK": 1199.999661140923,
+          "rawDifferenceK": 5.251868060440756e-07,
+          "fineCausalExcursionK": 0.0003388590769191069,
+          "roundoffAllowanceK": 5.456967466497106e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0015498679003054987
+        },
+        {
+          "timeS": 1.373291015625e-05,
+          "coarseSurfaceK": 1199.9996563199397,
+          "fineSurfaceK": 1199.9996557940528,
+          "rawDifferenceK": 5.258868895907653e-07,
+          "fineCausalExcursionK": 0.00034420594715811603,
+          "roundoffAllowanceK": 5.456967454336105e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0015278262735803096
+        },
+        {
+          "timeS": 1.4194488525390625e-05,
+          "coarseSurfaceK": 1199.9996509906737,
+          "fineSurfaceK": 1199.99965046409,
+          "rawDifferenceK": 5.265835625323234e-07,
+          "fineCausalExcursionK": 0.0003495359098906192,
+          "roundoffAllowanceK": 5.456967442213506e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0015065220700703054
+        },
+        {
+          "timeS": 1.46636962890625e-05,
+          "coarseSurfaceK": 1199.9996456784413,
+          "fineSurfaceK": 1199.9996451511647,
+          "rawDifferenceK": 5.272765974950744e-07,
+          "fineCausalExcursionK": 0.0003548488352862478,
+          "roundoffAllowanceK": 5.456967430129603e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001485918918318369
+        },
+        {
+          "timeS": 1.5140533447265624e-05,
+          "coarseSurfaceK": 1199.99964038337,
+          "fineSurfaceK": 1199.999639855404,
+          "rawDifferenceK": 5.279659944790183e-07,
+          "fineCausalExcursionK": 0.00036014459601574345,
+          "roundoffAllowanceK": 5.456967418084689e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0014659833864505319
+        },
+        {
+          "timeS": 1.5625e-05,
+          "coarseSurfaceK": 1199.999635105585,
+          "fineSurfaceK": 1199.9996345769332,
+          "rawDifferenceK": 5.28651753484155e-07,
+          "fineCausalExcursionK": 0.00036542306679621106,
+          "roundoffAllowanceK": 5.456967406079046e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0014466841355118211
+        },
+        {
+          "timeS": 1.6117095947265624e-05,
+          "coarseSurfaceK": 1199.9996298452083,
+          "fineSurfaceK": 1199.9996293158747,
+          "rawDifferenceK": 5.293336471368093e-07,
+          "fineCausalExcursionK": 0.00037068412530061323,
+          "roundoffAllowanceK": 5.456967394112955e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0014279911412649147
+        },
+        {
+          "timeS": 1.66168212890625e-05,
+          "coarseSurfaceK": 1199.9996246023604,
+          "fineSurfaceK": 1199.9996240723494,
+          "rawDifferenceK": 5.300109933159547e-07,
+          "fineCausalExcursionK": 0.0003759276505661546,
+          "roundoffAllowanceK": 5.456967382186689e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001409874991950572
+        },
+        {
+          "timeS": 1.7124176025390625e-05,
+          "coarseSurfaceK": 1199.999619377159,
+          "fineSurfaceK": 1199.9996188464754,
+          "rawDifferenceK": 5.306835646479158e-07,
+          "fineCausalExcursionK": 0.0003811535245858977,
+          "roundoffAllowanceK": 5.456967370300517e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001392309215097707
+        },
+        {
+          "timeS": 1.763916015625e-05,
+          "coarseSurfaceK": 1199.9996141697202,
+          "fineSurfaceK": 1199.999613638368,
+          "rawDifferenceK": 5.313522706273943e-07,
+          "fineCausalExcursionK": 0.00038636163208138896,
+          "roundoffAllowanceK": 5.456967358454703e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0013752718347443526
+        },
+        {
+          "timeS": 1.8161773681640625e-05,
+          "coarseSurfaceK": 1199.9996089801568,
+          "fineSurfaceK": 1199.9996084481413,
+          "rawDifferenceK": 5.320155196386622e-07,
+          "fineCausalExcursionK": 0.0003915518586836697,
+          "roundoffAllowanceK": 5.456967346649507e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0013587357787732315
+        },
+        {
+          "timeS": 1.86920166015625e-05,
+          "coarseSurfaceK": 1199.9996038085806,
+          "fineSurfaceK": 1199.9996032759066,
+          "rawDifferenceK": 5.326739938027458e-07,
+          "fineCausalExcursionK": 0.0003967240934343863,
+          "roundoffAllowanceK": 5.45696733488518e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0013426812301503036
+        },
+        {
+          "timeS": 1.9229888916015626e-05,
+          "coarseSurfaceK": 1199.9995986550998,
+          "fineSurfaceK": 1199.9995981217728,
+          "rawDifferenceK": 5.333270109986188e-07,
+          "fineCausalExcursionK": 0.00040187822719417454,
+          "roundoffAllowanceK": 5.456967323161971e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001327086104470478
+        },
+        {
+          "timeS": 1.9775390625e-05,
+          "coarseSurfaceK": 1199.9995935198217,
+          "fineSurfaceK": 1199.999592985847,
+          "rawDifferenceK": 5.339747985999566e-07,
+          "fineCausalExcursionK": 0.00040701415309740696,
+          "roundoffAllowanceK": 5.456967311480125e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0013119317707661268
+        },
+        {
+          "timeS": 2.0328521728515624e-05,
+          "coarseSurfaceK": 1199.9995884028506,
+          "fineSurfaceK": 1199.9995878682341,
+          "rawDifferenceK": 5.346164471120574e-07,
+          "fineCausalExcursionK": 0.00041213176587007183,
+          "roundoffAllowanceK": 5.456967299839879e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012971978657927569
+        },
+        {
+          "timeS": 2.08892822265625e-05,
+          "coarseSurfaceK": 1199.9995833042888,
+          "fineSurfaceK": 1199.9995827690364,
+          "rawDifferenceK": 5.352524112822721e-07,
+          "fineCausalExcursionK": 0.00041723096364876255,
+          "roundoffAllowanceK": 5.456967288241466e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012828683820620358
+        },
+        {
+          "timeS": 2.1457672119140625e-05,
+          "coarseSurfaceK": 1199.9995782242365,
+          "fineSurfaceK": 1199.9995776883545,
+          "rawDifferenceK": 5.358820089895744e-07,
+          "fineCausalExcursionK": 0.00042231164547956723,
+          "roundoffAllowanceK": 5.456967276685116e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001268925483646181
+        },
+        {
+          "timeS": 2.203369140625e-05,
+          "coarseSurfaceK": 1199.999573162792,
+          "fineSurfaceK": 1199.9995726262866,
+          "rawDifferenceK": 5.365054676076397e-07,
+          "fineCausalExcursionK": 0.00042737371336443175,
+          "roundoffAllowanceK": 5.456967265171052e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012553543908540503
+        },
+        {
+          "timeS": 2.2617340087890626e-05,
+          "coarseSurfaceK": 1199.9995681200514,
+          "fineSurfaceK": 1199.9995675829293,
+          "rawDifferenceK": 5.371221050154418e-07,
+          "fineCausalExcursionK": 0.00043241707066954405,
+          "roundoffAllowanceK": 5.456967253699494e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012421389936890673
+        },
+        {
+          "timeS": 2.3208618164062502e-05,
+          "coarseSurfaceK": 1199.9995630961087,
+          "fineSurfaceK": 1199.9995625583763,
+          "rawDifferenceK": 5.377323759603314e-07,
+          "fineCausalExcursionK": 0.00043744162371694983,
+          "roundoffAllowanceK": 5.456967242270655e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012292665965145456
+        },
+        {
+          "timeS": 2.3807525634765627e-05,
+          "coarseSurfaceK": 1199.9995580910556,
+          "fineSurfaceK": 1199.9995575527198,
+          "rawDifferenceK": 5.383358256949577e-07,
+          "fineCausalExcursionK": 0.0004424472801929369,
+          "roundoffAllowanceK": 5.456967230884744e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012167230985355069
+        },
+        {
+          "timeS": 2.44140625e-05,
+          "coarseSurfaceK": 1199.999553104982,
+          "fineSurfaceK": 1199.99955256605,
+          "rawDifferenceK": 5.389319994719699e-07,
+          "fineCausalExcursionK": 0.00044743395005752973,
+          "roundoffAllowanceK": 5.456967219541968e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0012044950978857898
+        },
+        {
+          "timeS": 2.5028228759765625e-05,
+          "coarseSurfaceK": 1199.9995481379756,
+          "fineSurfaceK": 1199.9995475984547,
+          "rawDifferenceK": 5.395208972913679e-07,
+          "fineCausalExcursionK": 0.00045240154531711596,
+          "roundoffAllowanceK": 5.456967208242528e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011925708540919872
+        },
+        {
+          "timeS": 2.56500244140625e-05,
+          "coarseSurfaceK": 1199.9995431901223,
+          "fineSurfaceK": 1199.9995426500202,
+          "rawDifferenceK": 5.401020644058008e-07,
+          "fineCausalExcursionK": 0.0004573499797970726,
+          "roundoffAllowanceK": 5.456967196986616e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011809382054536123
+        },
+        {
+          "timeS": 2.6279449462890626e-05,
+          "coarseSurfaceK": 1199.9995382615064,
+          "fineSurfaceK": 1199.9995377208304,
+          "rawDifferenceK": 5.406759555626195e-07,
+          "fineCausalExcursionK": 0.0004622791695965134,
+          "roundoffAllowanceK": 5.456967185774427e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011695875374063088
+        },
+        {
+          "timeS": 2.691650390625e-05,
+          "coarseSurfaceK": 1199.999533352209,
+          "fineSurfaceK": 1199.9995328109671,
+          "rawDifferenceK": 5.412418886407977e-07,
+          "fineCausalExcursionK": 0.0004671890328609152,
+          "roundoffAllowanceK": 5.456967174606145e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011585072648782157
+        },
+        {
+          "timeS": 2.7561187744140627e-05,
+          "coarseSurfaceK": 1199.9995284623103,
+          "fineSurfaceK": 1199.999527920511,
+          "rawDifferenceK": 5.417994088929845e-07,
+          "fineCausalExcursionK": 0.00047207948909999686,
+          "roundoffAllowanceK": 5.456967163481955e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.00114768682267028
+        },
+        {
+          "timeS": 2.82135009765625e-05,
+          "coarseSurfaceK": 1199.9995235918882,
+          "fineSurfaceK": 1199.9995230495394,
+          "rawDifferenceK": 5.423487436928554e-07,
+          "fineCausalExcursionK": 0.00047695046055196144,
+          "roundoffAllowanceK": 5.456967152402034e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001137117559474018
+        },
+        {
+          "timeS": 2.8873443603515625e-05,
+          "coarseSurfaceK": 1199.9995187410193,
+          "fineSurfaceK": 1199.9995181981294,
+          "rawDifferenceK": 5.428898930404102e-07,
+          "fineCausalExcursionK": 0.0004818018705918803,
+          "roundoffAllowanceK": 5.456967141366554e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011267907539949668
+        },
+        {
+          "timeS": 2.9541015625e-05,
+          "coarseSurfaceK": 1199.9995139097775,
+          "fineSurfaceK": 1199.999513366355,
+          "rawDifferenceK": 5.434226295619737e-07,
+          "fineCausalExcursionK": 0.0004866336450959352,
+          "roundoffAllowanceK": 5.456967130375686e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0011166976123380106
+        },
+        {
+          "timeS": 3.0216217041015626e-05,
+          "coarseSurfaceK": 1199.9995090982345,
+          "fineSurfaceK": 1199.9995085542885,
+          "rawDifferenceK": 5.439460437628441e-07,
+          "fineCausalExcursionK": 0.0004914457115319237,
+          "roundoffAllowanceK": 5.456967119429595e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001106828345428567
+        },
+        {
+          "timeS": 3.08990478515625e-05,
+          "coarseSurfaceK": 1199.9995043064616,
+          "fineSurfaceK": 1199.9995037620008,
+          "rawDifferenceK": 5.444608177640475e-07,
+          "fineCausalExcursionK": 0.0004962379991866328,
+          "roundoffAllowanceK": 5.456967108528441e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001097176795522421
+        },
+        {
+          "timeS": 3.158950805664063e-05,
+          "coarseSurfaceK": 1199.999499534527,
+          "fineSurfaceK": 1199.9994989895604,
+          "rawDifferenceK": 5.449667241919087e-07,
+          "fineCausalExcursionK": 0.0005010104396205861,
+          "roundoffAllowanceK": 5.456967097672381e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010877352667633246
+        },
+        {
+          "timeS": 3.228759765625e-05,
+          "coarseSurfaceK": 1199.9994947824973,
+          "fineSurfaceK": 1199.9994942370347,
+          "rawDifferenceK": 5.454626261780504e-07,
+          "fineCausalExcursionK": 0.000505762965303802,
+          "roundoffAllowanceK": 5.456967086861567e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010784945984536483
+        },
+        {
+          "timeS": 3.299331665039063e-05,
+          "coarseSurfaceK": 1199.9994900504378,
+          "fineSurfaceK": 1199.999489504488,
+          "rawDifferenceK": 5.459496605908498e-07,
+          "fineCausalExcursionK": 0.0005104955118895305,
+          "roundoffAllowanceK": 5.456967076096148e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001069450461121765
+        },
+        {
+          "timeS": 3.37066650390625e-05,
+          "coarseSurfaceK": 1199.9994853384117,
+          "fineSurfaceK": 1199.9994847919845,
+          "rawDifferenceK": 5.464271453092806e-07,
+          "fineCausalExcursionK": 0.0005152080154857686,
+          "roundoffAllowanceK": 5.456967065376269e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010605951943392744
+        },
+        {
+          "timeS": 3.4427642822265626e-05,
+          "coarseSurfaceK": 1199.99948064648,
+          "fineSurfaceK": 1199.9994800995853,
+          "rawDifferenceK": 5.468946255859919e-07,
+          "fineCausalExcursionK": 0.000519900414701624,
+          "roundoffAllowanceK": 5.456967054702068e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010519218875789129
+        },
+        {
+          "timeS": 3.5156250000000004e-05,
+          "coarseSurfaceK": 1199.9994759747024,
+          "fineSurfaceK": 1199.9994754273503,
+          "rawDifferenceK": 5.473521014209837e-07,
+          "fineCausalExcursionK": 0.00052457264973782,
+          "roundoffAllowanceK": 5.456967044073683e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010434247795697103
+        },
+        {
+          "timeS": 3.589248657226563e-05,
+          "coarseSurfaceK": 1199.9994713231372,
+          "fineSurfaceK": 1199.9994707753374,
+          "rawDifferenceK": 5.477998001879314e-07,
+          "fineCausalExcursionK": 0.0005292246626140695,
+          "roundoffAllowanceK": 5.456967033491244e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010350987754087484
+        },
+        {
+          "timeS": 3.6636352539062504e-05,
+          "coarseSurfaceK": 1199.9994666918403,
+          "fineSurfaceK": 1199.999466143603,
+          "rawDifferenceK": 5.482372671394842e-07,
+          "fineCausalExcursionK": 0.000533856396941701,
+          "roundoffAllowanceK": 5.456967022954881e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001026937712613667
+        },
+        {
+          "timeS": 3.7387847900390626e-05,
+          "coarseSurfaceK": 1199.999462080866,
+          "fineSurfaceK": 1199.9994615322018,
+          "rawDifferenceK": 5.486640475282911e-07,
+          "fineCausalExcursionK": 0.0005384677981510322,
+          "roundoffAllowanceK": 5.456967012464718e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.0010189356715708355
+        },
+        {
+          "timeS": 3.814697265625e-05,
+          "coarseSurfaceK": 1199.999457490267,
+          "fineSurfaceK": 1199.9994569411865,
+          "rawDifferenceK": 5.490805961017031e-07,
+          "fineCausalExcursionK": 0.0005430588134913705,
+          "roundoffAllowanceK": 5.456967002020876e-10,
+          "roundoffDominatedReferenceSignal": false,
+          "causalRelativeError": 0.001011088638027285
+        }
+      ],
+      "coarseSurfaceHistory": [
+        {
+          "timeS": 0.0,
+          "surfaceK": 1200.0,
+          "cellCenterK": 1200.0,
+          "surfaceRoundoffAllowanceK": 1.3642420526593924e-10,
+          "powerGasToWallW": null,
+          "initialAlgebraicSurfaceK": 1199.9999995751048,
+          "initialAlgebraicPowerGasToWallW": -9.972823225726122,
+          "initialBoundaryReconstructionMismatchK": -4.248951729278071e-07
+        },
+        {
+          "timeS": 3.814697265625e-09,
+          "surfaceK": 1199.9999944742542,
+          "cellCenterK": 1199.9999948991338,
+          "powerGasToWallW": -9.97245400429892,
+          "solidHalfResistanceKW": 4.2605304720770875e-08,
+          "surfaceRoundoffAllowanceK": 1.364242059329771e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133491549070706e-11
+        },
+        {
+          "timeS": 1.52587890625e-08,
+          "surfaceK": 1199.9999886328872,
+          "cellCenterK": 1199.9999890577199,
+          "powerGasToWallW": -9.971359573742687,
+          "solidHalfResistanceKW": 4.2605304666873666e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420526887467e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133369445567035e-11
+        },
+        {
+          "timeS": 3.4332275390625004e-08,
+          "surfaceK": 1199.999982692684,
+          "cellCenterK": 1199.9999831174405,
+          "powerGasToWallW": -9.969568221201294,
+          "solidHalfResistanceKW": 4.260530461206426e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420459352593e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133169669995867e-11
+        },
+        {
+          "timeS": 6.103515625e-08,
+          "surfaceK": 1199.9999767253619,
+          "cellCenterK": 1199.999977150014,
+          "powerGasToWallW": -9.96711933712522,
+          "solidHalfResistanceKW": 4.260530455700438e-08,
+          "surfaceRoundoffAllowanceK": 1.364242039150846e-10,
+          "heatPowerConsistencyAllowanceW": 2.813289661378959e-11
+        },
+        {
+          "timeS": 9.5367431640625e-08,
+          "surfaceK": 1199.9999707499437,
+          "cellCenterK": 1199.9999711744656,
+          "powerGasToWallW": -9.964059477427918,
+          "solidHalfResistanceKW": 4.2605304501869563e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420323571402e-10,
+          "heatPowerConsistencyAllowanceW": 2.8132555465716352e-11
+        },
+        {
+          "timeS": 1.3732910156250002e-07,
+          "surfaceK": 1199.9999647731947,
+          "cellCenterK": 1199.9999651975622,
+          "powerGasToWallW": -9.960438381101966,
+          "solidHalfResistanceKW": 4.260530444672223e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420255618403e-10,
+          "heatPowerConsistencyAllowanceW": 2.813215176898774e-11
+        },
+        {
+          "timeS": 1.86920166015625e-07,
+          "surfaceK": 1199.999958798203,
+          "cellCenterK": 1199.9999592223944,
+          "powerGasToWallW": -9.956305496450884,
+          "solidHalfResistanceKW": 4.2605304391590916e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420187684647e-10,
+          "heatPowerConsistencyAllowanceW": 2.813169103432446e-11
+        },
+        {
+          "timeS": 2.44140625e-07,
+          "surfaceK": 1199.9999528266803,
+          "cellCenterK": 1199.9999532506758,
+          "powerGasToWallW": -9.951707329596408,
+          "solidHalfResistanceKW": 4.2605304336491436e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420119789655e-10,
+          "heatPowerConsistencyAllowanceW": 2.8131178444516146e-11
+        },
+        {
+          "timeS": 3.08990478515625e-07,
+          "surfaceK": 1199.999946859724,
+          "cellCenterK": 1199.9999472835057,
+          "powerGasToWallW": -9.94668572191514,
+          "solidHalfResistanceKW": 4.260530428143391e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420051945965e-10,
+          "heatPowerConsistencyAllowanceW": 2.813061866246924e-11
+        },
+        {
+          "timeS": 3.814697265625e-07,
+          "surfaceK": 1199.9999408981164,
+          "cellCenterK": 1199.9999413216676,
+          "powerGasToWallW": -9.941276996245847,
+          "solidHalfResistanceKW": 4.260530422642559e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419984162526e-10,
+          "heatPowerConsistencyAllowanceW": 2.813001573606346e-11
+        },
+        {
+          "timeS": 4.61578369140625e-07,
+          "surfaceK": 1199.9999349424616,
+          "cellCenterK": 1199.999935365767,
+          "powerGasToWallW": -9.935511806073777,
+          "solidHalfResistanceKW": 4.2605304171472054e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419916446243e-10,
+          "heatPowerConsistencyAllowanceW": 2.812937308134708e-11
+        },
+        {
+          "timeS": 5.493164062500001e-07,
+          "surfaceK": 1199.9999289932548,
+          "cellCenterK": 1199.9999294163006,
+          "powerGasToWallW": -9.929415478439216,
+          "solidHalfResistanceKW": 4.2605304116577887e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419848802794e-10,
+          "heatPowerConsistencyAllowanceW": 2.8128693520753693e-11
+        },
+        {
+          "timeS": 6.44683837890625e-07,
+          "surfaceK": 1199.9999230509227,
+          "cellCenterK": 1199.9999234736954,
+          "powerGasToWallW": -9.923008646930429,
+          "solidHalfResistanceKW": 4.2605304061747015e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419781237048e-10,
+          "heatPowerConsistencyAllowanceW": 2.812797935364681e-11
+        },
+        {
+          "timeS": 7.476806640625e-07,
+          "surfaceK": 1199.999917115845,
+          "cellCenterK": 1199.9999175383323,
+          "powerGasToWallW": -9.916308006886112,
+          "solidHalfResistanceKW": 4.260530400698297e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419713753353e-10,
+          "heatPowerConsistencyAllowanceW": 2.8127232440483928e-11
+        },
+        {
+          "timeS": 8.58306884765625e-07,
+          "surfaceK": 1199.9999111883692,
+          "cellCenterK": 1199.9999116105591,
+          "powerGasToWallW": -9.909327072917076,
+          "solidHalfResistanceKW": 4.260530395228896e-08,
+          "surfaceRoundoffAllowanceK": 1.364241964635568e-10,
+          "heatPowerConsistencyAllowanceW": 2.8126454287239165e-11
+        },
+        {
+          "timeS": 9.765625e-07,
+          "surfaceK": 1199.999905268821,
+          "cellCenterK": 1199.999905690702,
+          "powerGasToWallW": -9.90207686568077,
+          "solidHalfResistanceKW": 4.260530389766797e-08,
+          "surfaceRoundoffAllowanceK": 1.364241957904774e-10,
+          "heatPowerConsistencyAllowanceW": 2.8125646121941545e-11
+        },
+        {
+          "timeS": 1.102447509765625e-06,
+          "surfaceK": 1199.9998993575086,
+          "cellCenterK": 1199.9998997790697,
+          "powerGasToWallW": -9.894566493015578,
+          "solidHalfResistanceKW": 4.260530384312289e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419511833057e-10,
+          "heatPowerConsistencyAllowanceW": 2.812480895944027e-11
+        },
+        {
+          "timeS": 1.2359619140625e-06,
+          "surfaceK": 1199.9998934547273,
+          "cellCenterK": 1199.9998938759575,
+          "powerGasToWallW": -9.886803617372225,
+          "solidHalfResistanceKW": 4.260530378865642e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419444714994e-10,
+          "heatPowerConsistencyAllowanceW": 2.8123943653498262e-11
+        },
+        {
+          "timeS": 1.377105712890625e-06,
+          "surfaceK": 1199.9998875607619,
+          "cellCenterK": 1199.999887981651,
+          "powerGasToWallW": -9.878794817635521,
+          "solidHalfResistanceKW": 4.2605303734271194e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419377696805e-10,
+          "heatPowerConsistencyAllowanceW": 2.812305093711614e-11
+        },
+        {
+          "timeS": 1.52587890625e-06,
+          "surfaceK": 1199.9998816758898,
+          "cellCenterK": 1199.9998820964274,
+          "powerGasToWallW": -9.870545861227319,
+          "solidHalfResistanceKW": 4.260530367996976e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419310781647e-10,
+          "heatPowerConsistencyAllowanceW": 2.8122131452857334e-11
+        },
+        {
+          "timeS": 1.682281494140625e-06,
+          "surfaceK": 1199.9998758003796,
+          "cellCenterK": 1199.9998762205557,
+          "powerGasToWallW": -9.862061904516217,
+          "solidHalfResistanceKW": 4.260530362575462e-08,
+          "surfaceRoundoffAllowanceK": 1.364241924397258e-10,
+          "heatPowerConsistencyAllowanceW": 2.8121185775183226e-11
+        },
+        {
+          "timeS": 1.8463134765625e-06,
+          "surfaceK": 1199.9998699344942,
+          "cellCenterK": 1199.999870354299,
+          "powerGasToWallW": -9.853347638430293,
+          "solidHalfResistanceKW": 4.26053035716282e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419177272602e-10,
+          "heatPowerConsistencyAllowanceW": 2.8120214426681454e-11
+        },
+        {
+          "timeS": 2.017974853515625e-06,
+          "surfaceK": 1199.99986407849,
+          "cellCenterK": 1199.999864497914,
+          "powerGasToWallW": -9.844407393534162,
+          "solidHalfResistanceKW": 4.260530351759287e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419110684635e-10,
+          "heatPowerConsistencyAllowanceW": 2.8119217889776577e-11
+        },
+        {
+          "timeS": 2.1972656250000003e-06,
+          "surfaceK": 1199.9998582326186,
+          "cellCenterK": 1199.9998586516522,
+          "powerGasToWallW": -9.835245215810913,
+          "solidHalfResistanceKW": 4.260530346365094e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419044211546e-10,
+          "heatPowerConsistencyAllowanceW": 2.811819661517597e-11
+        },
+        {
+          "timeS": 2.384185791015625e-06,
+          "surfaceK": 1199.9998523971258,
+          "cellCenterK": 1199.9998528157598,
+          "powerGasToWallW": -9.82586492159846,
+          "solidHalfResistanceKW": 4.260530340980468e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418977856133e-10,
+          "heatPowerConsistencyAllowanceW": 2.811715102799241e-11
+        },
+        {
+          "timeS": 2.5787353515625e-06,
+          "surfaceK": 1199.9998465722535,
+          "cellCenterK": 1199.9998469904788,
+          "powerGasToWallW": -9.816270137826452,
+          "solidHalfResistanceKW": 4.2605303356056325e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418911621152e-10,
+          "heatPowerConsistencyAllowanceW": 2.811608153222858e-11
+        },
+        {
+          "timeS": 2.780914306640625e-06,
+          "surfaceK": 1199.9998407582384,
+          "cellCenterK": 1199.9998411760457,
+          "powerGasToWallW": -9.806464331909146,
+          "solidHalfResistanceKW": 4.2605303302408064e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418845509292e-10,
+          "heatPowerConsistencyAllowanceW": 2.8114988514108665e-11
+        },
+        {
+          "timeS": 2.99072265625e-06,
+          "surfaceK": 1199.9998349553125,
+          "cellCenterK": 1199.9998353726933,
+          "powerGasToWallW": -9.796450834342917,
+          "solidHalfResistanceKW": 4.260530324886205e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418779523208e-10,
+          "heatPowerConsistencyAllowanceW": 2.811387234459693e-11
+        },
+        {
+          "timeS": 3.208160400390625e-06,
+          "surfaceK": 1199.9998291637046,
+          "cellCenterK": 1199.99982958065,
+          "powerGasToWallW": -9.78623285612784,
+          "solidHalfResistanceKW": 4.260530319542038e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418713665497e-10,
+          "heatPowerConsistencyAllowanceW": 2.8112733381339414e-11
+        },
+        {
+          "timeS": 3.4332275390625e-06,
+          "surfaceK": 1199.9998233836382,
+          "cellCenterK": 1199.9998238001397,
+          "powerGasToWallW": -9.77581350247298,
+          "solidHalfResistanceKW": 4.26053031420851e-08,
+          "surfaceRoundoffAllowanceK": 1.364241864793871e-10,
+          "heatPowerConsistencyAllowanceW": 2.8111571970191535e-11
+        },
+        {
+          "timeS": 3.665924072265625e-06,
+          "surfaceK": 1199.9998176153342,
+          "cellCenterK": 1199.9998180313833,
+          "powerGasToWallW": -9.76519578380775,
+          "solidHalfResistanceKW": 4.2605303088858306e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418582345355e-10,
+          "heatPowerConsistencyAllowanceW": 2.8110388446445343e-11
+        },
+        {
+          "timeS": 3.90625e-06,
+          "surfaceK": 1199.9998118590086,
+          "cellCenterK": 1199.999812274597,
+          "powerGasToWallW": -9.754382624806725,
+          "solidHalfResistanceKW": 4.260530303574193e-08,
+          "surfaceRoundoffAllowanceK": 1.36424185168879e-10,
+          "heatPowerConsistencyAllowanceW": 2.8109183135835436e-11
+        },
+        {
+          "timeS": 4.154205322265625e-06,
+          "surfaceK": 1199.9998061148742,
+          "cellCenterK": 1199.9998065299937,
+          "powerGasToWallW": -9.743376871928387,
+          "solidHalfResistanceKW": 4.260530298273798e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418451568765e-10,
+          "heatPowerConsistencyAllowanceW": 2.810795635537928e-11
+        },
+        {
+          "timeS": 4.4097900390625e-06,
+          "surfaceK": 1199.9998003831404,
+          "cellCenterK": 1199.9998007977829,
+          "powerGasToWallW": -9.732181299828646,
+          "solidHalfResistanceKW": 4.260530292984836e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418386390332e-10,
+          "heatPowerConsistencyAllowanceW": 2.8106708414092043e-11
+        },
+        {
+          "timeS": 4.673004150390625e-06,
+          "surfaceK": 1199.9997946640124,
+          "cellCenterK": 1199.9997950781699,
+          "powerGasToWallW": -9.720798616896941,
+          "solidHalfResistanceKW": 4.2605302877074976e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418321354942e-10,
+          "heatPowerConsistencyAllowanceW": 2.8105439613603736e-11
+        },
+        {
+          "timeS": 4.94384765625e-06,
+          "surfaceK": 1199.9997889576928,
+          "cellCenterK": 1199.9997893713576,
+          "powerGasToWallW": -9.70923147010737,
+          "solidHalfResistanceKW": 4.26053028244197e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418256464902e-10,
+          "heatPowerConsistencyAllowanceW": 2.810415024869991e-11
+        },
+        {
+          "timeS": 5.222320556640625e-06,
+          "surfaceK": 1199.9997832643803,
+          "cellCenterK": 1199.9997836775444,
+          "powerGasToWallW": -9.697482449315308,
+          "solidHalfResistanceKW": 4.260530277188437e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418191722469e-10,
+          "heatPowerConsistencyAllowanceW": 2.8102840607800636e-11
+        },
+        {
+          "timeS": 5.5084228515625e-06,
+          "surfaceK": 1199.9997775842703,
+          "cellCenterK": 1199.9997779969262,
+          "powerGasToWallW": -9.685554091102379,
+          "solidHalfResistanceKW": 4.2605302719470785e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418127129876e-10,
+          "heatPowerConsistencyAllowanceW": 2.8101510973389117e-11
+        },
+        {
+          "timeS": 5.8021545410156255e-06,
+          "surfaceK": 1199.9997719175556,
+          "cellCenterK": 1199.9997723296958,
+          "powerGasToWallW": -9.673448882241894,
+          "solidHalfResistanceKW": 4.2605302667180735e-08,
+          "surfaceRoundoffAllowanceK": 1.364241806268931e-10,
+          "heatPowerConsistencyAllowanceW": 2.8100161622397984e-11
+        },
+        {
+          "timeS": 6.103515625e-06,
+          "surfaceK": 1199.999766264425,
+          "cellCenterK": 1199.999766676042,
+          "powerGasToWallW": -9.661169262841609,
+          "solidHalfResistanceKW": 4.2605302615015946e-08,
+          "surfaceRoundoffAllowanceK": 1.364241799840293e-10,
+          "heatPowerConsistencyAllowanceW": 2.8098792826559645e-11
+        },
+        {
+          "timeS": 6.412506103515625e-06,
+          "surfaceK": 1199.9997606250647,
+          "cellCenterK": 1199.9997610361513,
+          "powerGasToWallW": -9.64871762920849,
+          "solidHalfResistanceKW": 4.260530256297813e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417934272853e-10,
+          "heatPowerConsistencyAllowanceW": 2.8097404852725662e-11
+        },
+        {
+          "timeS": 6.7291259765625e-06,
+          "surfaceK": 1199.999754999658,
+          "cellCenterK": 1199.999755410207,
+          "powerGasToWallW": -9.636096336465116,
+          "solidHalfResistanceKW": 4.260530251106901e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417870301163e-10,
+          "heatPowerConsistencyAllowanceW": 2.8095997963158418e-11
+        },
+        {
+          "timeS": 7.053375244140625e-06,
+          "surfaceK": 1199.999749388385,
+          "cellCenterK": 1199.9997497983888,
+          "powerGasToWallW": -9.623307700946228,
+          "solidHalfResistanceKW": 4.2605302459290216e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417806489907e-10,
+          "heatPowerConsistencyAllowanceW": 2.8094572415798287e-11
+        },
+        {
+          "timeS": 7.38525390625e-06,
+          "surfaceK": 1199.9997437914226,
+          "cellCenterK": 1199.9997442008746,
+          "powerGasToWallW": -9.610354002397735,
+          "solidHalfResistanceKW": 4.2605302407643414e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417742841111e-10,
+          "heatPowerConsistencyAllowanceW": 2.8093128464508856e-11
+        },
+        {
+          "timeS": 7.724761962890625e-06,
+          "surfaceK": 1199.999738208945,
+          "cellCenterK": 1199.9997386178381,
+          "powerGasToWallW": -9.597237485992924,
+          "solidHalfResistanceKW": 4.260530235613019e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417679356752e-10,
+          "heatPowerConsistencyAllowanceW": 2.80916663593016e-11
+        },
+        {
+          "timeS": 8.0718994140625e-06,
+          "surfaceK": 1199.9997326411235,
+          "cellCenterK": 1199.999733049451,
+          "powerGasToWallW": -9.58396036418335,
+          "solidHalfResistanceKW": 4.260530230475213e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417616038783e-10,
+          "heatPowerConsistencyAllowanceW": 2.809018634654234e-11
+        },
+        {
+          "timeS": 8.426666259765625e-06,
+          "surfaceK": 1199.9997270881265,
+          "cellCenterK": 1199.9997274958816,
+          "powerGasToWallW": -9.570524818397105,
+          "solidHalfResistanceKW": 4.260530225351079e-08,
+          "surfaceRoundoffAllowanceK": 1.364241755288912e-10,
+          "heatPowerConsistencyAllowanceW": 2.8088688669140566e-11
+        },
+        {
+          "timeS": 8.789062500000001e-06,
+          "surfaceK": 1199.9997215501203,
+          "cellCenterK": 1199.9997219572963,
+          "powerGasToWallW": -9.556933000595313,
+          "solidHalfResistanceKW": 4.2605302202407695e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417489909657e-10,
+          "heatPowerConsistencyAllowanceW": 2.8087173566722947e-11
+        },
+        {
+          "timeS": 9.159088134765626e-06,
+          "surfaceK": 1199.9997160272674,
+          "cellCenterK": 1199.9997164338577,
+          "powerGasToWallW": -9.54318703469828,
+          "solidHalfResistanceKW": 4.260530215144437e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417427102242e-10,
+          "heatPowerConsistencyAllowanceW": 2.8085641275792418e-11
+        },
+        {
+          "timeS": 9.5367431640625e-06,
+          "surfaceK": 1199.9997105197278,
+          "cellCenterK": 1199.999710925726,
+          "powerGasToWallW": -9.529289017891893,
+          "solidHalfResistanceKW": 4.260530210062227e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417364468705e-10,
+          "heatPowerConsistencyAllowanceW": 2.8084092029873778e-11
+        },
+        {
+          "timeS": 9.922027587890625e-06,
+          "surfaceK": 1199.9997050276595,
+          "cellCenterK": 1199.9997054330593,
+          "powerGasToWallW": -9.515241021822389,
+          "solidHalfResistanceKW": 4.2605302049942856e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417302010838e-10,
+          "heatPowerConsistencyAllowanceW": 2.8082526059646972e-11
+        },
+        {
+          "timeS": 1.031494140625e-05,
+          "surfaceK": 1199.9996995512172,
+          "cellCenterK": 1199.9996999560121,
+          "powerGasToWallW": -9.501045093688683,
+          "solidHalfResistanceKW": 4.2605301999407554e-08,
+          "surfaceRoundoffAllowanceK": 1.36424172397304e-10,
+          "heatPowerConsistencyAllowanceW": 2.8080943593068866e-11
+        },
+        {
+          "timeS": 1.0715484619140626e-05,
+          "surfaceK": 1199.9996940905532,
+          "cellCenterK": 1199.999694494737,
+          "powerGasToWallW": -9.48670325724106,
+          "solidHalfResistanceKW": 4.2605301949017795e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417177629131e-10,
+          "heatPowerConsistencyAllowanceW": 2.8079344855484637e-11
+        },
+        {
+          "timeS": 1.11236572265625e-05,
+          "surfaceK": 1199.999688645817,
+          "cellCenterK": 1199.9996890493837,
+          "powerGasToWallW": -9.472217513691964,
+          "solidHalfResistanceKW": 4.260530189877494e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417115708738e-10,
+          "heatPowerConsistencyAllowanceW": 2.8077730069729332e-11
+        },
+        {
+          "timeS": 1.1539459228515625e-05,
+          "surfaceK": 1199.9996832171555,
+          "cellCenterK": 1199.999683620099,
+          "powerGasToWallW": -9.457589842549874,
+          "solidHalfResistanceKW": 4.260530184868033e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417053970882e-10,
+          "heatPowerConsistencyAllowanceW": 2.8076099456220893e-11
+        },
+        {
+          "timeS": 1.1962890625e-05,
+          "surfaceK": 1199.9996778047134,
+          "cellCenterK": 1199.9996782070277,
+          "powerGasToWallW": -9.44282220237899,
+          "solidHalfResistanceKW": 4.260530179873533e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416992417222e-10,
+          "heatPowerConsistencyAllowanceW": 2.807445323304486e-11
+        },
+        {
+          "timeS": 1.2393951416015625e-05,
+          "surfaceK": 1199.9996724086327,
+          "cellCenterK": 1199.999672810312,
+          "powerGasToWallW": -9.427916531494809,
+          "solidHalfResistanceKW": 4.260530174894124e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416931049367e-10,
+          "heatPowerConsistencyAllowanceW": 2.807279161603194e-11
+        },
+        {
+          "timeS": 1.28326416015625e-05,
+          "surfaceK": 1199.9996670290527,
+          "cellCenterK": 1199.999667430091,
+          "powerGasToWallW": -9.412874748597645,
+          "solidHalfResistanceKW": 4.2605301699299334e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416869868905e-10,
+          "heatPowerConsistencyAllowanceW": 2.8071114818828712e-11
+        },
+        {
+          "timeS": 1.3278961181640625e-05,
+          "surfaceK": 1199.99966166611,
+          "cellCenterK": 1199.9996620665017,
+          "powerGasToWallW": -9.397698753354488,
+          "solidHalfResistanceKW": 4.26053016498109e-08,
+          "surfaceRoundoffAllowanceK": 1.36424168088774e-10,
+          "heatPowerConsistencyAllowanceW": 2.8069423052962494e-11
+        },
+        {
+          "timeS": 1.373291015625e-05,
+          "surfaceK": 1199.9996563199397,
+          "cellCenterK": 1199.9996567196793,
+          "powerGasToWallW": -9.382390426932055,
+          "solidHalfResistanceKW": 4.2605301600477144e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416748076377e-10,
+          "heatPowerConsistencyAllowanceW": 2.8067716527900844e-11
+        },
+        {
+          "timeS": 1.4194488525390625e-05,
+          "surfaceK": 1199.9996509906737,
+          "cellCenterK": 1199.9996513897554,
+          "powerGasToWallW": -9.366951632482696,
+          "solidHalfResistanceKW": 4.2605301551299325e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416687467347e-10,
+          "heatPowerConsistencyAllowanceW": 2.8065995451105705e-11
+        },
+        {
+          "timeS": 1.46636962890625e-05,
+          "surfaceK": 1199.9996456784413,
+          "cellCenterK": 1199.9996460768598,
+          "powerGasToWallW": -9.351384215589775,
+          "solidHalfResistanceKW": 4.260530150227862e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416627051783e-10,
+          "heatPowerConsistencyAllowanceW": 2.8064260028083165e-11
+        },
+        {
+          "timeS": 1.5140533447265624e-05,
+          "surfaceK": 1199.99964038337,
+          "cellCenterK": 1199.99964078112,
+          "powerGasToWallW": -9.335690004685741,
+          "solidHalfResistanceKW": 4.2605301453416204e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416566831137e-10,
+          "heatPowerConsistencyAllowanceW": 2.8062510462430022e-11
+        },
+        {
+          "timeS": 1.5625e-05,
+          "surfaceK": 1199.999635105585,
+          "cellCenterK": 1199.9996355026608,
+          "powerGasToWallW": -9.319870811427025,
+          "solidHalfResistanceKW": 4.2605301404713226e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416506806825e-10,
+          "heatPowerConsistencyAllowanceW": 2.806074695587568e-11
+        },
+        {
+          "timeS": 1.6117095947265624e-05,
+          "surfaceK": 1199.9996298452083,
+          "cellCenterK": 1199.999630241605,
+          "powerGasToWallW": -9.303928431046936,
+          "solidHalfResistanceKW": 4.2605301356170826e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416446980253e-10,
+          "heatPowerConsistencyAllowanceW": 2.80589697083215e-11
+        },
+        {
+          "timeS": 1.66168212890625e-05,
+          "surfaceK": 1199.9996246023604,
+          "cellCenterK": 1199.9996249980727,
+          "powerGasToWallW": -9.287864642679388,
+          "solidHalfResistanceKW": 4.260530130779012e-08,
+          "surfaceRoundoffAllowanceK": 1.364241638735278e-10,
+          "heatPowerConsistencyAllowanceW": 2.8057178917876886e-11
+        },
+        {
+          "timeS": 1.7124176025390625e-05,
+          "surfaceK": 1199.999619377159,
+          "cellCenterK": 1199.9996197721819,
+          "powerGasToWallW": -9.271681209661942,
+          "solidHalfResistanceKW": 4.260530125957218e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416327925758e-10,
+          "heatPowerConsistencyAllowanceW": 2.805537478089316e-11
+        },
+        {
+          "timeS": 1.763916015625e-05,
+          "surfaceK": 1199.9996141697202,
+          "cellCenterK": 1199.9996145640484,
+          "powerGasToWallW": -9.255379879816514,
+          "solidHalfResistanceKW": 4.260530121151808e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416268700495e-10,
+          "heatPowerConsistencyAllowanceW": 2.8053557491994848e-11
+        },
+        {
+          "timeS": 1.8161773681640625e-05,
+          "surfaceK": 1199.9996089801568,
+          "cellCenterK": 1199.9996093737857,
+          "powerGasToWallW": -9.238962385710924,
+          "solidHalfResistanceKW": 4.260530116362887e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416209678291e-10,
+          "heatPowerConsistencyAllowanceW": 2.8051727244108842e-11
+        },
+        {
+          "timeS": 1.86920166015625e-05,
+          "surfaceK": 1199.9996038085806,
+          "cellCenterK": 1199.999604201505,
+          "powerGasToWallW": -9.222430444905648,
+          "solidHalfResistanceKW": 4.260530111590557e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416150860407e-10,
+          "heatPowerConsistencyAllowanceW": 2.804988422849203e-11
+        },
+        {
+          "timeS": 1.9229888916015626e-05,
+          "surfaceK": 1199.9995986550998,
+          "cellCenterK": 1199.999599047315,
+          "powerGasToWallW": -9.205785760183641,
+          "solidHalfResistanceKW": 4.26053010683492e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416092248082e-10,
+          "heatPowerConsistencyAllowanceW": 2.804802863475681e-11
+        },
+        {
+          "timeS": 1.9775390625e-05,
+          "surfaceK": 1199.9995935198217,
+          "cellCenterK": 1199.999593911323,
+          "powerGasToWallW": -9.189030019767058,
+          "solidHalfResistanceKW": 4.260530102096073e-08,
+          "surfaceRoundoffAllowanceK": 1.364241603384254e-10,
+          "heatPowerConsistencyAllowanceW": 2.8046160650895395e-11
+        },
+        {
+          "timeS": 2.0328521728515624e-05,
+          "surfaceK": 1199.9995884028506,
+          "cellCenterK": 1199.9995887936334,
+          "powerGasToWallW": -9.172164897524329,
+          "solidHalfResistanceKW": 4.260530097374114e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415975644965e-10,
+          "heatPowerConsistencyAllowanceW": 2.8044280463302846e-11
+        },
+        {
+          "timeS": 2.08892822265625e-05,
+          "surfaceK": 1199.9995833042888,
+          "cellCenterK": 1199.9995836943485,
+          "powerGasToWallW": -9.15519205316197,
+          "solidHalfResistanceKW": 4.260530092669135e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415917656525e-10,
+          "heatPowerConsistencyAllowanceW": 2.8042388256798502e-11
+        },
+        {
+          "timeS": 2.1457672119140625e-05,
+          "surfaceK": 1199.9995782242365,
+          "cellCenterK": 1199.9995786135687,
+          "powerGasToWallW": -9.138113132410794,
+          "solidHalfResistanceKW": 4.260530087981232e-08,
+          "surfaceRoundoffAllowanceK": 1.364241585987836e-10,
+          "heatPowerConsistencyAllowanceW": 2.8040484214646777e-11
+        },
+        {
+          "timeS": 2.203369140625e-05,
+          "surfaceK": 1199.999573162792,
+          "cellCenterK": 1199.9995735513921,
+          "powerGasToWallW": -9.120929767200499,
+          "solidHalfResistanceKW": 4.2605300833104926e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415802311591e-10,
+          "heatPowerConsistencyAllowanceW": 2.80385685185766e-11
+        },
+        {
+          "timeS": 2.2617340087890626e-05,
+          "surfaceK": 1199.9995681200514,
+          "cellCenterK": 1199.999568507915,
+          "powerGasToWallW": -9.103643575827236,
+          "solidHalfResistanceKW": 4.260530078657007e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415744957312e-10,
+          "heatPowerConsistencyAllowanceW": 2.8036641348800174e-11
+        },
+        {
+          "timeS": 2.3208618164062502e-05,
+          "surfaceK": 1199.9995630961087,
+          "cellCenterK": 1199.9995634832314,
+          "powerGasToWallW": -9.086256163114008,
+          "solidHalfResistanceKW": 4.260530074020861e-08,
+          "surfaceRoundoffAllowanceK": 1.364241568781659e-10,
+          "heatPowerConsistencyAllowanceW": 2.803470288403081e-11
+        },
+        {
+          "timeS": 2.3807525634765627e-05,
+          "surfaceK": 1199.9995580910556,
+          "cellCenterK": 1199.9995584774333,
+          "powerGasToWallW": -9.068769120563969,
+          "solidHalfResistanceKW": 4.260530069402141e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415630890478e-10,
+          "heatPowerConsistencyAllowanceW": 2.8032753301500084e-11
+        },
+        {
+          "timeS": 2.44140625e-05,
+          "surfaceK": 1199.999553104982,
+          "cellCenterK": 1199.9995534906104,
+          "powerGasToWallW": -9.05118402650906,
+          "solidHalfResistanceKW": 4.260530064800929e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415574179997e-10,
+          "heatPowerConsistencyAllowanceW": 2.8030792776974395e-11
+        },
+        {
+          "timeS": 2.5028228759765625e-05,
+          "surfaceK": 1199.9995481379756,
+          "cellCenterK": 1199.9995485228508,
+          "powerGasToWallW": -9.033502446250463,
+          "solidHalfResistanceKW": 4.260530060217305e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415517686146e-10,
+          "heatPowerConsistencyAllowanceW": 2.802882148477062e-11
+        },
+        {
+          "timeS": 2.56500244140625e-05,
+          "surfaceK": 1199.9995431901223,
+          "cellCenterK": 1199.99954357424,
+          "powerGasToWallW": -9.015725932196446,
+          "solidHalfResistanceKW": 4.2605300556513504e-08,
+          "surfaceRoundoffAllowanceK": 1.36424154614099e-10,
+          "heatPowerConsistencyAllowanceW": 2.8026839597771556e-11
+        },
+        {
+          "timeS": 2.6279449462890626e-05,
+          "surfaceK": 1199.9995382615064,
+          "cellCenterK": 1199.9995386448627,
+          "powerGasToWallW": -8.997856023995293,
+          "solidHalfResistanceKW": 4.260530051103143e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415405352222e-10,
+          "heatPowerConsistencyAllowanceW": 2.8024847287440694e-11
+        },
+        {
+          "timeS": 2.691650390625e-05,
+          "surfaceK": 1199.999533352209,
+          "cellCenterK": 1199.9995337348,
+          "powerGasToWallW": -8.979894248662237,
+          "solidHalfResistanceKW": 4.260530046572753e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415349514038e-10,
+          "heatPowerConsistencyAllowanceW": 2.802284472383638e-11
+        },
+        {
+          "timeS": 2.7561187744140627e-05,
+          "surfaceK": 1199.9995284623103,
+          "cellCenterK": 1199.9995288441323,
+          "powerGasToWallW": -8.961842120704041,
+          "solidHalfResistanceKW": 4.260530042060262e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415293896267e-10,
+          "heatPowerConsistencyAllowanceW": 2.8020832075625762e-11
+        },
+        {
+          "timeS": 2.82135009765625e-05,
+          "surfaceK": 1199.9995235918882,
+          "cellCenterK": 1199.9995239729374,
+          "powerGasToWallW": -8.943701142240227,
+          "solidHalfResistanceKW": 4.260530037565736e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415238499788e-10,
+          "heatPowerConsistencyAllowanceW": 2.801880951009824e-11
+        },
+        {
+          "timeS": 2.8873443603515625e-05,
+          "surfaceK": 1199.9995187410193,
+          "cellCenterK": 1199.9995191212918,
+          "powerGasToWallW": -8.925472803119959,
+          "solidHalfResistanceKW": 4.2605300330892474e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415183325476e-10,
+          "heatPowerConsistencyAllowanceW": 2.801677719317858e-11
+        },
+        {
+          "timeS": 2.9541015625e-05,
+          "surfaceK": 1199.9995139097775,
+          "cellCenterK": 1199.9995142892697,
+          "powerGasToWallW": -8.90715858103604,
+          "solidHalfResistanceKW": 4.260530028630865e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415128374172e-10,
+          "heatPowerConsistencyAllowanceW": 2.801473528943957e-11
+        },
+        {
+          "timeS": 3.0216217041015626e-05,
+          "surfaceK": 1199.9995090982345,
+          "cellCenterK": 1199.9995094769429,
+          "powerGasToWallW": -8.888759941635808,
+          "solidHalfResistanceKW": 4.260530024190656e-08,
+          "surfaceRoundoffAllowanceK": 1.36424150736467e-10,
+          "heatPowerConsistencyAllowanceW": 2.8012683962114408e-11
+        },
+        {
+          "timeS": 3.08990478515625e-05,
+          "surfaceK": 1199.9995043064616,
+          "cellCenterK": 1199.9995046843826,
+          "powerGasToWallW": -8.870278338631374,
+          "solidHalfResistanceKW": 4.2605300197686855e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415019143868e-10,
+          "heatPowerConsistencyAllowanceW": 2.8010623373108988e-11
+        },
+        {
+          "timeS": 3.158950805664063e-05,
+          "surfaceK": 1199.999499534527,
+          "cellCenterK": 1199.999499911657,
+          "powerGasToWallW": -8.851715213903734,
+          "solidHalfResistanceKW": 4.2605300153650155e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414964866448e-10,
+          "heatPowerConsistencyAllowanceW": 2.8008553683013537e-11
+        },
+        {
+          "timeS": 3.228759765625e-05,
+          "surfaceK": 1199.9994947824973,
+          "cellCenterK": 1199.999495158833,
+          "powerGasToWallW": -8.833071997607826,
+          "solidHalfResistanceKW": 4.260530010979707e-08,
+          "surfaceRoundoffAllowanceK": 1.364241491081521e-10,
+          "heatPowerConsistencyAllowanceW": 2.800647505111429e-11
+        },
+        {
+          "timeS": 3.299331665039063e-05,
+          "surfaceK": 1199.9994900504378,
+          "cellCenterK": 1199.9994904259759,
+          "powerGasToWallW": -8.814350108273658,
+          "solidHalfResistanceKW": 4.260530006612822e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414856990893e-10,
+          "heatPowerConsistencyAllowanceW": 2.8004387635404797e-11
+        },
+        {
+          "timeS": 3.37066650390625e-05,
+          "surfaceK": 1199.9994853384117,
+          "cellCenterK": 1199.9994857131487,
+          "powerGasToWallW": -8.795550952906405,
+          "solidHalfResistanceKW": 4.260530002264418e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414803394214e-10,
+          "heatPowerConsistencyAllowanceW": 2.8002291592597045e-11
+        },
+        {
+          "timeS": 3.4427642822265626e-05,
+          "surfaceK": 1199.99948064648,
+          "cellCenterK": 1199.9994810204128,
+          "powerGasToWallW": -8.776675927082573,
+          "solidHalfResistanceKW": 4.2605299979345525e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414750025873e-10,
+          "heatPowerConsistencyAllowanceW": 2.8000187078132206e-11
+        },
+        {
+          "timeS": 3.5156250000000004e-05,
+          "surfaceK": 1199.9994759747024,
+          "cellCenterK": 1199.999476347828,
+          "powerGasToWallW": -8.757726415047472,
+          "solidHalfResistanceKW": 4.2605299936232785e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414696886557e-10,
+          "heatPowerConsistencyAllowanceW": 2.7998074246191517e-11
+        },
+        {
+          "timeS": 3.589248657226563e-05,
+          "surfaceK": 1199.9994713231372,
+          "cellCenterK": 1199.9994716954523,
+          "powerGasToWallW": -8.738703789808259,
+          "solidHalfResistanceKW": 4.260529989330652e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414643976916e-10,
+          "heatPowerConsistencyAllowanceW": 2.799595324970659e-11
+        },
+        {
+          "timeS": 3.6636352539062504e-05,
+          "surfaceK": 1199.9994666918403,
+          "cellCenterK": 1199.9994670633419,
+          "powerGasToWallW": -8.71960941322599,
+          "solidHalfResistanceKW": 4.260529985056724e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414591297598e-10,
+          "heatPowerConsistencyAllowanceW": 2.799382424036973e-11
+        },
+        {
+          "timeS": 3.7387847900390626e-05,
+          "surfaceK": 1199.999462080866,
+          "cellCenterK": 1199.999462451551,
+          "powerGasToWallW": -8.700444636106562,
+          "solidHalfResistanceKW": 4.2605299808015436e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414538849219e-10,
+          "heatPowerConsistencyAllowanceW": 2.7991687368644042e-11
+        },
+        {
+          "timeS": 3.814697265625e-05,
+          "surfaceK": 1199.999457490267,
+          "cellCenterK": 1199.9994578601327,
+          "powerGasToWallW": -8.681210798290742,
+          "solidHalfResistanceKW": 4.26052997656516e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414486632383e-10,
+          "heatPowerConsistencyAllowanceW": 2.7989542783773456e-11
+        }
+      ],
+      "fineSurfaceHistory": [
+        {
+          "timeS": 0.0,
+          "surfaceK": 1200.0,
+          "cellCenterK": 1200.0,
+          "surfaceRoundoffAllowanceK": 1.3642420526593924e-10,
+          "powerGasToWallW": null,
+          "initialAlgebraicSurfaceK": 1199.9999995751048,
+          "initialAlgebraicPowerGasToWallW": -9.972823225726122,
+          "initialBoundaryReconstructionMismatchK": -4.248951729278071e-07
+        },
+        {
+          "timeS": 9.5367431640625e-10,
+          "surfaceK": 1199.9999971388854,
+          "cellCenterK": 1199.9999975637766,
+          "powerGasToWallW": -9.972730541171389,
+          "solidHalfResistanceKW": 4.260530474535683e-08,
+          "surfaceRoundoffAllowanceK": 1.364242062359145e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133522428756228e-11
+        },
+        {
+          "timeS": 3.814697265625e-09,
+          "surfaceK": 1199.999994211758,
+          "cellCenterK": 1199.9999946366372,
+          "powerGasToWallW": -9.972453716231263,
+          "solidHalfResistanceKW": 4.2605304718348884e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420590313463e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133491511002187e-11
+        },
+        {
+          "timeS": 8.583068847656251e-09,
+          "surfaceK": 1199.9999912396092,
+          "cellCenterK": 1199.999991664469,
+          "powerGasToWallW": -9.9719947070406,
+          "solidHalfResistanceKW": 4.2605304690925464e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420556523383e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133440288372454e-11
+        },
+        {
+          "timeS": 1.52587890625e-08,
+          "surfaceK": 1199.9999882532275,
+          "cellCenterK": 1199.9999886780602,
+          "powerGasToWallW": -9.9713563929908,
+          "solidHalfResistanceKW": 4.260530466337065e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420522571236e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133369082455942e-11
+        },
+        {
+          "timeS": 2.384185791015625e-08,
+          "surfaceK": 1199.999985261694,
+          "cellCenterK": 1199.999985686492,
+          "powerGasToWallW": -9.970542527849654,
+          "solidHalfResistanceKW": 4.2605304635768234e-08,
+          "surfaceRoundoffAllowanceK": 1.364242048856026e-10,
+          "heatPowerConsistencyAllowanceW": 2.81332783117914e-11
+        },
+        {
+          "timeS": 3.4332275390625004e-08,
+          "surfaceK": 1199.9999822680716,
+          "cellCenterK": 1199.9999826928276,
+          "powerGasToWallW": -9.969557633668762,
+          "solidHalfResistanceKW": 4.2605304608146476e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420454525293e-10,
+          "heatPowerConsistencyAllowanceW": 2.8133168480400515e-11
+        },
+        {
+          "timeS": 4.673004150390625e-08,
+          "surfaceK": 1199.9999792736799,
+          "cellCenterK": 1199.9999796983868,
+          "powerGasToWallW": -9.968406878985775,
+          "solidHalfResistanceKW": 4.2605304580517545e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420420481336e-10,
+          "heatPowerConsistencyAllowanceW": 2.813304016431152e-11
+        },
+        {
+          "timeS": 6.103515625e-08,
+          "surfaceK": 1199.999976279196,
+          "cellCenterK": 1199.9999767038473,
+          "powerGasToWallW": -9.967095947742433,
+          "solidHalfResistanceKW": 4.2605304552887714e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420386436107e-10,
+          "heatPowerConsistencyAllowanceW": 2.8132893996975967e-11
+        },
+        {
+          "timeS": 7.724761962890625e-08,
+          "surfaceK": 1199.9999732850222,
+          "cellCenterK": 1199.999973709611,
+          "powerGasToWallW": -9.965630904735994,
+          "solidHalfResistanceKW": 4.2605304525260676e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420352394174e-10,
+          "heatPowerConsistencyAllowanceW": 2.8132730654282448e-11
+        },
+        {
+          "timeS": 9.5367431640625e-08,
+          "surfaceK": 1199.9999702914236,
+          "cellCenterK": 1199.9999707159436,
+          "powerGasToWallW": -9.964018062891531,
+          "solidHalfResistanceKW": 4.26053044976389e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420318358571e-10,
+          "heatPowerConsistencyAllowanceW": 2.813255083976818e-11
+        },
+        {
+          "timeS": 1.1539459228515625e-07,
+          "surfaceK": 1199.9999672985925,
+          "cellCenterK": 1199.9999677230378,
+          "powerGasToWallW": -9.962263857010006,
+          "solidHalfResistanceKW": 4.260530447002413e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420284331486e-10,
+          "heatPowerConsistencyAllowanceW": 2.8132355270550396e-11
+        },
+        {
+          "timeS": 1.3732910156250002e-07,
+          "surfaceK": 1199.9999643066783,
+          "cellCenterK": 1199.999964731043,
+          "powerGasToWallW": -9.960374727837657,
+          "solidHalfResistanceKW": 4.260530444241778e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420250314632e-10,
+          "heatPowerConsistencyAllowanceW": 2.8132144664407305e-11
+        },
+        {
+          "timeS": 1.6117095947265626e-07,
+          "surfaceK": 1199.9999613158006,
+          "cellCenterK": 1199.9999617400795,
+          "powerGasToWallW": -9.958357019379473,
+          "solidHalfResistanceKW": 4.260530441482095e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420216309377e-10,
+          "heatPowerConsistencyAllowanceW": 2.8131919728334585e-11
+        },
+        {
+          "timeS": 1.86920166015625e-07,
+          "surfaceK": 1199.9999583260617,
+          "cellCenterK": 1199.9999587502493,
+          "powerGasToWallW": -9.956216891426502,
+          "solidHalfResistanceKW": 4.260530438723456e-08,
+          "surfaceRoundoffAllowanceK": 1.364242018231689e-10,
+          "heatPowerConsistencyAllowanceW": 2.8131681148797377e-11
+        },
+        {
+          "timeS": 2.1457672119140626e-07,
+          "surfaceK": 1199.9999553375492,
+          "cellCenterK": 1199.9999557616406,
+          "powerGasToWallW": -9.953960248316577,
+          "solidHalfResistanceKW": 4.2605304359659455e-08,
+          "surfaceRoundoffAllowanceK": 1.364242014833818e-10,
+          "heatPowerConsistencyAllowanceW": 2.8131429583791078e-11
+        },
+        {
+          "timeS": 2.44140625e-07,
+          "surfaceK": 1199.9999523503404,
+          "cellCenterK": 1199.9999527743312,
+          "powerGasToWallW": -9.951592684095859,
+          "solidHalfResistanceKW": 4.260530433209632e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420114374134e-10,
+          "heatPowerConsistencyAllowanceW": 2.8131165656730064e-11
+        },
+        {
+          "timeS": 2.7561187744140623e-07,
+          "surfaceK": 1199.9999493645055,
+          "cellCenterK": 1199.9999497883907,
+          "powerGasToWallW": -9.949119443502294,
+          "solidHalfResistanceKW": 4.2605304304545833e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420080425546e-10,
+          "heatPowerConsistencyAllowanceW": 2.8130889952099506e-11
+        },
+        {
+          "timeS": 3.08990478515625e-07,
+          "surfaceK": 1199.9999463801073,
+          "cellCenterK": 1199.999946803883,
+          "powerGasToWallW": -9.946545397606004,
+          "solidHalfResistanceKW": 4.260530427700856e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420046493152e-10,
+          "heatPowerConsistencyAllowanceW": 2.8130603012740646e-11
+        },
+        {
+          "timeS": 3.4427642822265624e-07,
+          "surfaceK": 1199.9999433972046,
+          "cellCenterK": 1199.9999438208663,
+          "powerGasToWallW": -9.943875032505,
+          "solidHalfResistanceKW": 4.2605304249485046e-08,
+          "surfaceRoundoffAllowanceK": 1.3642420012577615e-10,
+          "heatPowerConsistencyAllowanceW": 2.8130305338591028e-11
+        },
+        {
+          "timeS": 3.814697265625e-07,
+          "surfaceK": 1199.999940415851,
+          "cellCenterK": 1199.999940839395,
+          "powerGasToWallW": -9.941112449202919,
+          "solidHalfResistanceKW": 4.2605304221975784e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419978679564e-10,
+          "heatPowerConsistencyAllowanceW": 2.812999738667083e-11
+        },
+        {
+          "timeS": 4.2057037353515625e-07,
+          "surfaceK": 1199.9999374360975,
+          "cellCenterK": 1199.9999378595203,
+          "powerGasToWallW": -9.938261372664803,
+          "solidHalfResistanceKW": 4.260530419448127e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419944799575e-10,
+          "heatPowerConsistencyAllowanceW": 2.812967957209211e-11
+        },
+        {
+          "timeS": 4.61578369140625e-07,
+          "surfaceK": 1199.9999344579926,
+          "cellCenterK": 1199.99993488129,
+          "powerGasToWallW": -9.935325168045729,
+          "solidHalfResistanceKW": 4.260530416700191e-08,
+          "surfaceRoundoffAllowanceK": 1.36424199109382e-10,
+          "heatPowerConsistencyAllowanceW": 2.8129352269867415e-11
+        },
+        {
+          "timeS": 5.044937133789063e-07,
+          "surfaceK": 1199.999931481581,
+          "cellCenterK": 1199.99993190475,
+          "powerGasToWallW": -9.932306862182319,
+          "solidHalfResistanceKW": 4.260530413953815e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419877095961e-10,
+          "heatPowerConsistencyAllowanceW": 2.8129015817304862e-11
+        },
+        {
+          "timeS": 5.493164062500001e-07,
+          "surfaceK": 1199.999928506907,
+          "cellCenterK": 1199.999928929944,
+          "powerGasToWallW": -9.929209168612052,
+          "solidHalfResistanceKW": 4.26053041120904e-08,
+          "surfaceRoundoffAllowanceK": 1.364241984327336e-10,
+          "heatPowerConsistencyAllowanceW": 2.8128670516796428e-11
+        },
+        {
+          "timeS": 5.960464477539062e-07,
+          "surfaceK": 1199.9999255340128,
+          "cellCenterK": 1199.9999259569145,
+          "powerGasToWallW": -9.926034514608254,
+          "solidHalfResistanceKW": 4.2605304084659025e-08,
+          "surfaceRoundoffAllowanceK": 1.364241980947088e-10,
+          "heatPowerConsistencyAllowanceW": 2.8128316638830923e-11
+        },
+        {
+          "timeS": 6.44683837890625e-07,
+          "surfaceK": 1199.9999225629383,
+          "cellCenterK": 1199.9999229857017,
+          "powerGasToWallW": -9.922785068959016,
+          "solidHalfResistanceKW": 4.2605304057244426e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419775688987e-10,
+          "heatPowerConsistencyAllowanceW": 2.812795442508972e-11
+        },
+        {
+          "timeS": 6.952285766601562e-07,
+          "surfaceK": 1199.9999195937241,
+          "cellCenterK": 1199.9999200163459,
+          "powerGasToWallW": -9.91946276947813,
+          "solidHalfResistanceKW": 4.260530402984695e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419741928133e-10,
+          "heatPowerConsistencyAllowanceW": 2.8127584091512825e-11
+        },
+        {
+          "timeS": 7.476806640625e-07,
+          "surfaceK": 1199.9999166264083,
+          "cellCenterK": 1199.9999170488854,
+          "powerGasToWallW": -9.916069349474926,
+          "solidHalfResistanceKW": 4.260530400246697e-08,
+          "surfaceRoundoffAllowanceK": 1.364241970818876e-10,
+          "heatPowerConsistencyAllowanceW": 2.812720583124877e-11
+        },
+        {
+          "timeS": 8.020401000976562e-07,
+          "surfaceK": 1199.9999136610288,
+          "cellCenterK": 1199.9999140833584,
+          "powerGasToWallW": -9.912606362631093,
+          "solidHalfResistanceKW": 4.260530397510483e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419674471295e-10,
+          "heatPowerConsistencyAllowanceW": 2.8126819817427067e-11
+        },
+        {
+          "timeS": 8.58306884765625e-07,
+          "surfaceK": 1199.9999106976222,
+          "cellCenterK": 1199.9999111198015,
+          "powerGasToWallW": -9.909075205926367,
+          "solidHalfResistanceKW": 4.260530394776086e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419640776168e-10,
+          "heatPowerConsistencyAllowanceW": 2.8126426205713135e-11
+        },
+        {
+          "timeS": 9.164810180664062e-07,
+          "surfaceK": 1199.9999077362259,
+          "cellCenterK": 1199.9999081582516,
+          "powerGasToWallW": -9.905477140419437,
+          "solidHalfResistanceKW": 4.260530392043541e-08,
+          "surfaceRoundoffAllowanceK": 1.364241960710379e-10,
+          "heatPowerConsistencyAllowanceW": 2.812602513662433e-11
+        },
+        {
+          "timeS": 9.765625e-07,
+          "surfaceK": 1199.9999047768747,
+          "cellCenterK": 1199.9999051987445,
+          "powerGasToWallW": -9.901813309813111,
+          "solidHalfResistanceKW": 4.2605303893128815e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419573454577e-10,
+          "heatPowerConsistencyAllowanceW": 2.8125616737598888e-11
+        },
+        {
+          "timeS": 1.0385513305664062e-06,
+          "surfaceK": 1199.9999018196047,
+          "cellCenterK": 1199.9999022413156,
+          "powerGasToWallW": -9.898084756839193,
+          "solidHalfResistanceKW": 4.2605303865841384e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419539828925e-10,
+          "heatPowerConsistencyAllowanceW": 2.812520112482202e-11
+        },
+        {
+          "timeS": 1.102447509765625e-06,
+          "surfaceK": 1199.9998988644502,
+          "cellCenterK": 1199.9998992859996,
+          "powerGasToWallW": -9.894292437561992,
+          "solidHalfResistanceKW": 4.260530383857346e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419506227236e-10,
+          "heatPowerConsistencyAllowanceW": 2.8124778404819944e-11
+        },
+        {
+          "timeS": 1.1682510375976563e-06,
+          "surfaceK": 1199.9998959114464,
+          "cellCenterK": 1199.9998963328314,
+          "powerGasToWallW": -9.890437233753634,
+          "solidHalfResistanceKW": 4.2605303811325344e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419472649902e-10,
+          "heatPowerConsistencyAllowanceW": 2.8124348675839122e-11
+        },
+        {
+          "timeS": 1.2359619140625e-06,
+          "surfaceK": 1199.9998929606272,
+          "cellCenterK": 1199.9998933818454,
+          "powerGasToWallW": -9.886519963513265,
+          "solidHalfResistanceKW": 4.2605303784097364e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419439097316e-10,
+          "heatPowerConsistencyAllowanceW": 2.8123912029029715e-11
+        },
+        {
+          "timeS": 1.3055801391601562e-06,
+          "surfaceK": 1199.9998900120258,
+          "cellCenterK": 1199.9998904330746,
+          "powerGasToWallW": -9.882541390325127,
+          "solidHalfResistanceKW": 4.2605303756889826e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419405569858e-10,
+          "heatPowerConsistencyAllowanceW": 2.8123468549455055e-11
+        },
+        {
+          "timeS": 1.377105712890625e-06,
+          "surfaceK": 1199.9998870656764,
+          "cellCenterK": 1199.999887486553,
+          "powerGasToWallW": -9.878502230739224,
+          "solidHalfResistanceKW": 4.260530372970304e-08,
+          "surfaceRoundoffAllowanceK": 1.364241937206791e-10,
+          "heatPowerConsistencyAllowanceW": 2.8123018316947706e-11
+        },
+        {
+          "timeS": 1.4505386352539064e-06,
+          "surfaceK": 1199.9998841216116,
+          "cellCenterK": 1199.9998845423136,
+          "powerGasToWallW": -9.874403160859272,
+          "solidHalfResistanceKW": 4.2605303702537316e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419338591852e-10,
+          "heatPowerConsistencyAllowanceW": 2.8122561406832455e-11
+        },
+        {
+          "timeS": 1.52587890625e-06,
+          "surfaceK": 1199.9998811798644,
+          "cellCenterK": 1199.9998816003892,
+          "powerGasToWallW": -9.870244821806605,
+          "solidHalfResistanceKW": 4.260530367539295e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419305142056e-10,
+          "heatPowerConsistencyAllowanceW": 2.8122097890535304e-11
+        },
+        {
+          "timeS": 1.6031265258789063e-06,
+          "surfaceK": 1199.999878240467,
+          "cellCenterK": 1199.999878660812,
+          "powerGasToWallW": -9.866027824313065,
+          "solidHalfResistanceKW": 4.2605303648270245e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419271718885e-10,
+          "heatPowerConsistencyAllowanceW": 2.8121627836095304e-11
+        },
+        {
+          "timeS": 1.682281494140625e-06,
+          "surfaceK": 1199.999875303452,
+          "cellCenterK": 1199.9998757236149,
+          "powerGasToWallW": -9.86175275257715,
+          "solidHalfResistanceKW": 4.2605303621169485e-08,
+          "surfaceRoundoffAllowanceK": 1.364241923832272e-10,
+          "heatPowerConsistencyAllowanceW": 2.812115130859436e-11
+        },
+        {
+          "timeS": 1.7633438110351562e-06,
+          "surfaceK": 1199.9998723688504,
+          "cellCenterK": 1199.9998727888287,
+          "powerGasToWallW": -9.857420167502763,
+          "solidHalfResistanceKW": 4.260530359409098e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419204953907e-10,
+          "heatPowerConsistencyAllowanceW": 2.8120668370518126e-11
+        },
+        {
+          "timeS": 1.8463134765625e-06,
+          "surfaceK": 1199.9998694366943,
+          "cellCenterK": 1199.9998698564857,
+          "powerGasToWallW": -9.853030609423108,
+          "solidHalfResistanceKW": 4.2605303567035014e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419171612815e-10,
+          "heatPowerConsistencyAllowanceW": 2.812017908205964e-11
+        },
+        {
+          "timeS": 1.931190490722656e-06,
+          "surfaceK": 1199.999866507015,
+          "cellCenterK": 1199.999866926617,
+          "powerGasToWallW": -9.848584600395622,
+          "solidHalfResistanceKW": 4.260530354000188e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419138299802e-10,
+          "heatPowerConsistencyAllowanceW": 2.8119683501375052e-11
+        },
+        {
+          "timeS": 2.017974853515625e-06,
+          "surfaceK": 1199.9998635798438,
+          "cellCenterK": 1199.9998639992539,
+          "powerGasToWallW": -9.844082646139162,
+          "solidHalfResistanceKW": 4.2605303512991857e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419105015217e-10,
+          "heatPowerConsistencyAllowanceW": 2.811918168479954e-11
+        },
+        {
+          "timeS": 2.1066665649414063e-06,
+          "surfaceK": 1199.9998606552108,
+          "cellCenterK": 1199.9998610744267,
+          "powerGasToWallW": -9.839525237676051,
+          "solidHalfResistanceKW": 4.260530348600525e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419071759408e-10,
+          "heatPowerConsistencyAllowanceW": 2.811867368703032e-11
+        },
+        {
+          "timeS": 2.1972656250000003e-06,
+          "surfaceK": 1199.9998577331467,
+          "cellCenterK": 1199.999858152166,
+          "powerGasToWallW": -9.834912852729499,
+          "solidHalfResistanceKW": 4.260530345904231e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419038532728e-10,
+          "heatPowerConsistencyAllowanceW": 2.8118159561282376e-11
+        },
+        {
+          "timeS": 2.2897720336914065e-06,
+          "surfaceK": 1199.9998548136816,
+          "cellCenterK": 1199.9998552325023,
+          "powerGasToWallW": -9.830245956919258,
+          "solidHalfResistanceKW": 4.260530343210333e-08,
+          "surfaceRoundoffAllowanceK": 1.3642419005335517e-10,
+          "heatPowerConsistencyAllowanceW": 2.8117639359421718e-11
+        },
+        {
+          "timeS": 2.384185791015625e-06,
+          "surfaceK": 1199.999851896846,
+          "cellCenterK": 1199.9998523154654,
+          "powerGasToWallW": -9.825525004785737,
+          "solidHalfResistanceKW": 4.26053034051886e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418972168118e-10,
+          "heatPowerConsistencyAllowanceW": 2.8117113132079544e-11
+        },
+        {
+          "timeS": 2.4805068969726562e-06,
+          "surfaceK": 1199.999848982669,
+          "cellCenterK": 1199.999849401085,
+          "powerGasToWallW": -9.8207504406771,
+          "solidHalfResistanceKW": 4.260530337829836e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418939030867e-10,
+          "heatPowerConsistencyAllowanceW": 2.8116580928751082e-11
+        },
+        {
+          "timeS": 2.5787353515625e-06,
+          "surfaceK": 1199.9998460711797,
+          "cellCenterK": 1199.9998464893902,
+          "powerGasToWallW": -9.815922699514934,
+          "solidHalfResistanceKW": 4.260530335143292e-08,
+          "surfaceRoundoffAllowanceK": 1.36424189059241e-10,
+          "heatPowerConsistencyAllowanceW": 2.8116042797880927e-11
+        },
+        {
+          "timeS": 2.6788711547851564e-06,
+          "surfaceK": 1199.999843162408,
+          "cellCenterK": 1199.9998435804105,
+          "powerGasToWallW": -9.811042207466635,
+          "solidHalfResistanceKW": 4.260530332459252e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418872848147e-10,
+          "heatPowerConsistencyAllowanceW": 2.8115498786938006e-11
+        },
+        {
+          "timeS": 2.780914306640625e-06,
+          "surfaceK": 1199.9998402563826,
+          "cellCenterK": 1199.999840674175,
+          "powerGasToWallW": -9.806109382531996,
+          "solidHalfResistanceKW": 4.260530329777744e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418839803344e-10,
+          "heatPowerConsistencyAllowanceW": 2.8114948942480944e-11
+        },
+        {
+          "timeS": 2.884864807128906e-06,
+          "surfaceK": 1199.999837353132,
+          "cellCenterK": 1199.999837770712,
+          "powerGasToWallW": -9.80112463506315,
+          "solidHalfResistanceKW": 4.2605303270987946e-08,
+          "surfaceRoundoffAllowanceK": 1.364241880679001e-10,
+          "heatPowerConsistencyAllowanceW": 2.8114393310215988e-11
+        },
+        {
+          "timeS": 2.99072265625e-06,
+          "surfaceK": 1199.999834452685,
+          "cellCenterK": 1199.9998348700503,
+          "powerGasToWallW": -9.79608836822299,
+          "solidHalfResistanceKW": 4.260530324422429e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418773808473e-10,
+          "heatPowerConsistencyAllowanceW": 2.8113831935048146e-11
+        },
+        {
+          "timeS": 3.0984878540039064e-06,
+          "surfaceK": 1199.9998315550692,
+          "cellCenterK": 1199.9998319722179,
+          "powerGasToWallW": -9.791000978396315,
+          "solidHalfResistanceKW": 4.260530321748675e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418740859052e-10,
+          "heatPowerConsistencyAllowanceW": 2.8113264861126962e-11
+        },
+        {
+          "timeS": 3.208160400390625e-06,
+          "surfaceK": 1199.9998286603131,
+          "cellCenterK": 1199.9998290772428,
+          "powerGasToWallW": -9.785862855557617,
+          "solidHalfResistanceKW": 4.260530319077557e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418707942066e-10,
+          "heatPowerConsistencyAllowanceW": 2.8112692131887574e-11
+        },
+        {
+          "timeS": 3.319740295410156e-06,
+          "surfaceK": 1199.9998257684442,
+          "cellCenterK": 1199.9998261851529,
+          "powerGasToWallW": -9.78067438360274,
+          "solidHalfResistanceKW": 4.260530316409101e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418675057834e-10,
+          "heatPowerConsistencyAllowanceW": 2.8112113790087606e-11
+        },
+        {
+          "timeS": 3.4332275390625e-06,
+          "surfaceK": 1199.99982287949,
+          "cellCenterK": 1199.9998232959754,
+          "powerGasToWallW": -9.775435940648627,
+          "solidHalfResistanceKW": 4.2605303137433316e-08,
+          "surfaceRoundoffAllowanceK": 1.364241864220666e-10,
+          "heatPowerConsistencyAllowanceW": 2.8111529877840628e-11
+        },
+        {
+          "timeS": 3.5486221313476563e-06,
+          "surfaceK": 1199.999819993478,
+          "cellCenterK": 1199.999820409738,
+          "powerGasToWallW": -9.77014789930669,
+          "solidHalfResistanceKW": 4.2605303110802766e-08,
+          "surfaceRoundoffAllowanceK": 1.364241860938887e-10,
+          "heatPowerConsistencyAllowanceW": 2.8110940436646615e-11
+        },
+        {
+          "timeS": 3.665924072265625e-06,
+          "surfaceK": 1199.9998171104348,
+          "cellCenterK": 1199.9998175264675,
+          "powerGasToWallW": -9.764810626934235,
+          "solidHalfResistanceKW": 4.260530308419957e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418576604758e-10,
+          "heatPowerConsistencyAllowanceW": 2.8110345507419968e-11
+        },
+        {
+          "timeS": 3.785133361816406e-06,
+          "surfaceK": 1199.9998142303873,
+          "cellCenterK": 1199.9998146461905,
+          "powerGasToWallW": -9.759424485862807,
+          "solidHalfResistanceKW": 4.2605303057624006e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418543854636e-10,
+          "heatPowerConsistencyAllowanceW": 2.8109745130514963e-11
+        },
+        {
+          "timeS": 3.90625e-06,
+          "surfaceK": 1199.9998113533622,
+          "cellCenterK": 1199.999811768934,
+          "powerGasToWallW": -9.753989833611392,
+          "solidHalfResistanceKW": 4.260530303107631e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418511138802e-10,
+          "heatPowerConsistencyAllowanceW": 2.810913934574951e-11
+        },
+        {
+          "timeS": 4.029273986816406e-06,
+          "surfaceK": 1199.9998084793863,
+          "cellCenterK": 1199.9998088947243,
+          "powerGasToWallW": -9.748507023082412,
+          "solidHalfResistanceKW": 4.260530300455673e-08,
+          "surfaceRoundoffAllowanceK": 1.364241847845756e-10,
+          "heatPowerConsistencyAllowanceW": 2.8108528192427033e-11
+        },
+        {
+          "timeS": 4.154205322265625e-06,
+          "surfaceK": 1199.9998056084853,
+          "cellCenterK": 1199.9998060235878,
+          "powerGasToWallW": -9.742976402745997,
+          "solidHalfResistanceKW": 4.2605302978065503e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418445811213e-10,
+          "heatPowerConsistencyAllowanceW": 2.8107911709356954e-11
+        },
+        {
+          "timeS": 4.281044006347656e-06,
+          "surfaceK": 1199.999802740685,
+          "cellCenterK": 1199.99980315555,
+          "powerGasToWallW": -9.737398316808841,
+          "solidHalfResistanceKW": 4.260530295160286e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418413200047e-10,
+          "heatPowerConsistencyAllowanceW": 2.8107289934873553e-11
+        },
+        {
+          "timeS": 4.4097900390625e-06,
+          "surfaceK": 1199.9997998760116,
+          "cellCenterK": 1199.9998002906368,
+          "powerGasToWallW": -9.73177310537599,
+          "solidHalfResistanceKW": 4.260530292516906e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418380624358e-10,
+          "heatPowerConsistencyAllowanceW": 2.8106662906854028e-11
+        },
+        {
+          "timeS": 4.540443420410156e-06,
+          "surfaceK": 1199.9997970144902,
+          "cellCenterK": 1199.9997974288738,
+          "powerGasToWallW": -9.726101104600529,
+          "solidHalfResistanceKW": 4.2605302898764314e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418348084438e-10,
+          "heatPowerConsistencyAllowanceW": 2.8106030662735084e-11
+        },
+        {
+          "timeS": 4.673004150390625e-06,
+          "surfaceK": 1199.9997941561467,
+          "cellCenterK": 1199.9997945702864,
+          "powerGasToWallW": -9.720382646826144,
+          "solidHalfResistanceKW": 4.2605302872388866e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418315580577e-10,
+          "heatPowerConsistencyAllowanceW": 2.8105393239528952e-11
+        },
+        {
+          "timeS": 4.807472229003907e-06,
+          "surfaceK": 1199.9997913010054,
+          "cellCenterK": 1199.9997917148996,
+          "powerGasToWallW": -9.714618060720435,
+          "solidHalfResistanceKW": 4.260530284604296e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418283113056e-10,
+          "heatPowerConsistencyAllowanceW": 2.8104750673838143e-11
+        },
+        {
+          "timeS": 4.94384765625e-06,
+          "surfaceK": 1199.999788449092,
+          "cellCenterK": 1199.9997888627386,
+          "powerGasToWallW": -9.708807671402433,
+          "solidHalfResistanceKW": 4.26053028197268e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418250682165e-10,
+          "heatPowerConsistencyAllowanceW": 2.8104103001869727e-11
+        },
+        {
+          "timeS": 5.082130432128906e-06,
+          "surfaceK": 1199.9997856004306,
+          "cellCenterK": 1199.9997860138278,
+          "powerGasToWallW": -9.702951800563055,
+          "solidHalfResistanceKW": 4.260530279344065e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418218288183e-10,
+          "heatPowerConsistencyAllowanceW": 2.810345025944872e-11
+        },
+        {
+          "timeS": 5.222320556640625e-06,
+          "surfaceK": 1199.999782755046,
+          "cellCenterK": 1199.9997831681917,
+          "powerGasToWallW": -9.697050766579235,
+          "solidHalfResistanceKW": 4.2605302767184713e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418185931385e-10,
+          "heatPowerConsistencyAllowanceW": 2.8102792482030844e-11
+        },
+        {
+          "timeS": 5.364418029785156e-06,
+          "surfaceK": 1199.9997799129626,
+          "cellCenterK": 1199.999780325855,
+          "powerGasToWallW": -9.691104884623654,
+          "solidHalfResistanceKW": 4.260530274095921e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418153612053e-10,
+          "heatPowerConsistencyAllowanceW": 2.8102129704714726e-11
+        },
+        {
+          "timeS": 5.5084228515625e-06,
+          "surfaceK": 1199.9997770742043,
+          "cellCenterK": 1199.9997774868416,
+          "powerGasToWallW": -9.685114466768436,
+          "solidHalfResistanceKW": 4.2605302714764366e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418121330463e-10,
+          "heatPowerConsistencyAllowanceW": 2.8101461962253473e-11
+        },
+        {
+          "timeS": 5.6543350219726565e-06,
+          "surfaceK": 1199.9997742387952,
+          "cellCenterK": 1199.9997746511754,
+          "powerGasToWallW": -9.679079822084672,
+          "solidHalfResistanceKW": 4.260530268860042e-08,
+          "surfaceRoundoffAllowanceK": 1.364241808908688e-10,
+          "heatPowerConsistencyAllowanceW": 2.8100789289065776e-11
+        },
+        {
+          "timeS": 5.8021545410156255e-06,
+          "surfaceK": 1199.9997714067586,
+          "cellCenterK": 1199.9997718188797,
+          "powerGasToWallW": -9.673001256737392,
+          "solidHalfResistanceKW": 4.260530266246756e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418056881575e-10,
+          "heatPowerConsistencyAllowanceW": 2.810011171924646e-11
+        },
+        {
+          "timeS": 5.951881408691407e-06,
+          "surfaceK": 1199.9997685781186,
+          "cellCenterK": 1199.999768989979,
+          "powerGasToWallW": -9.666879074076782,
+          "solidHalfResistanceKW": 4.260530263636603e-08,
+          "surfaceRoundoffAllowanceK": 1.3642418024714824e-10,
+          "heatPowerConsistencyAllowanceW": 2.8099429286576722e-11
+        },
+        {
+          "timeS": 6.103515625e-06,
+          "surfaceK": 1199.9997657528986,
+          "cellCenterK": 1199.9997661644961,
+          "powerGasToWallW": -9.660713574724003,
+          "solidHalfResistanceKW": 4.260530261029604e-08,
+          "surfaceRoundoffAllowanceK": 1.364241799258689e-10,
+          "heatPowerConsistencyAllowanceW": 2.8098742024533617e-11
+        },
+        {
+          "timeS": 6.257057189941406e-06,
+          "surfaceK": 1199.999762931121,
+          "cellCenterK": 1199.9997633424541,
+          "powerGasToWallW": -9.654505056655626,
+          "solidHalfResistanceKW": 4.26053025842578e-08,
+          "surfaceRoundoffAllowanceK": 1.364241796049803e-10,
+          "heatPowerConsistencyAllowanceW": 2.8098049966299528e-11
+        },
+        {
+          "timeS": 6.412506103515625e-06,
+          "surfaceK": 1199.9997601128093,
+          "cellCenterK": 1199.9997605238761,
+          "powerGasToWallW": -9.648253815282661,
+          "solidHalfResistanceKW": 4.2605302558251503e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417928448511e-10,
+          "heatPowerConsistencyAllowanceW": 2.809735314477095e-11
+        },
+        {
+          "timeS": 6.5698623657226565e-06,
+          "surfaceK": 1199.9997572979867,
+          "cellCenterK": 1199.9997577087852,
+          "powerGasToWallW": -9.641960143527266,
+          "solidHalfResistanceKW": 4.26053025322774e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417896438594e-10,
+          "heatPowerConsistencyAllowanceW": 2.8096651592567063e-11
+        },
+        {
+          "timeS": 6.7291259765625e-06,
+          "surfaceK": 1199.9997544866746,
+          "cellCenterK": 1199.9997548972033,
+          "powerGasToWallW": -9.635624331895873,
+          "solidHalfResistanceKW": 4.2605302506335656e-08,
+          "surfaceRoundoffAllowanceK": 1.364241786446853e-10,
+          "heatPowerConsistencyAllowanceW": 2.809594534203784e-11
+        },
+        {
+          "timeS": 6.890296936035157e-06,
+          "surfaceK": 1199.9997516788965,
+          "cellCenterK": 1199.9997520891534,
+          "powerGasToWallW": -9.62924666854941,
+          "solidHalfResistanceKW": 4.2605302480426513e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417832538581e-10,
+          "heatPowerConsistencyAllowanceW": 2.809523442527195e-11
+        },
+        {
+          "timeS": 7.053375244140625e-06,
+          "surfaceK": 1199.9997488746742,
+          "cellCenterK": 1199.9997492846576,
+          "powerGasToWallW": -9.62282743937111,
+          "solidHalfResistanceKW": 4.260530245455016e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417800648998e-10,
+          "heatPowerConsistencyAllowanceW": 2.8094518874104246e-11
+        },
+        {
+          "timeS": 7.218360900878906e-06,
+          "surfaceK": 1199.9997460740296,
+          "cellCenterK": 1199.999746483738,
+          "powerGasToWallW": -9.616366928029638,
+          "solidHalfResistanceKW": 4.260530242870681e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417768800032e-10,
+          "heatPowerConsistencyAllowanceW": 2.8093798720122835e-11
+        },
+        {
+          "timeS": 7.38525390625e-06,
+          "surfaceK": 1199.9997432769849,
+          "cellCenterK": 1199.9997436864162,
+          "powerGasToWallW": -9.60986541604203,
+          "solidHalfResistanceKW": 4.260530240289664e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417736991929e-10,
+          "heatPowerConsistencyAllowanceW": 2.80930739946761e-11
+        },
+        {
+          "timeS": 7.5540542602539065e-06,
+          "surfaceK": 1199.9997404835615,
+          "cellCenterK": 1199.999740892714,
+          "powerGasToWallW": -9.603323182833101,
+          "solidHalfResistanceKW": 4.260530237711988e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417705224936e-10,
+          "heatPowerConsistencyAllowanceW": 2.8092344728879295e-11
+        },
+        {
+          "timeS": 7.724761962890625e-06,
+          "surfaceK": 1199.9997376937813,
+          "cellCenterK": 1199.9997381026533,
+          "powerGasToWallW": -9.596740505790798,
+          "solidHalfResistanceKW": 4.260530235137671e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417673499303e-10,
+          "heatPowerConsistencyAllowanceW": 2.8091610953620787e-11
+        },
+        {
+          "timeS": 7.897377014160157e-06,
+          "surfaceK": 1199.9997349076655,
+          "cellCenterK": 1199.9997353162553,
+          "powerGasToWallW": -9.590117660322493,
+          "solidHalfResistanceKW": 4.260530232566735e-08,
+          "surfaceRoundoffAllowanceK": 1.364241764181527e-10,
+          "heatPowerConsistencyAllowanceW": 2.809087269956822e-11
+        },
+        {
+          "timeS": 8.0718994140625e-06,
+          "surfaceK": 1199.9997321252347,
+          "cellCenterK": 1199.9997325335407,
+          "powerGasToWallW": -9.583454919904762,
+          "solidHalfResistanceKW": 4.2605302299991965e-08,
+          "surfaceRoundoffAllowanceK": 1.364241761017308e-10,
+          "heatPowerConsistencyAllowanceW": 2.8090129997174155e-11
+        },
+        {
+          "timeS": 8.248329162597657e-06,
+          "surfaceK": 1199.9997293465105,
+          "cellCenterK": 1199.999729754531,
+          "powerGasToWallW": -9.576752556135641,
+          "solidHalfResistanceKW": 4.260530227435075e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417578572965e-10,
+          "heatPowerConsistencyAllowanceW": 2.8089382876681884e-11
+        },
+        {
+          "timeS": 8.426666259765625e-06,
+          "surfaceK": 1199.9997265715137,
+          "cellCenterK": 1199.999726979247,
+          "powerGasToWallW": -9.57001083878017,
+          "solidHalfResistanceKW": 4.2605302248743924e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417547015175e-10,
+          "heatPowerConsistencyAllowanceW": 2.808863136813047e-11
+        },
+        {
+          "timeS": 8.606910705566407e-06,
+          "surfaceK": 1199.999723800265,
+          "cellCenterK": 1199.9997242077093,
+          "powerGasToWallW": -9.563230035817506,
+          "solidHalfResistanceKW": 4.260530222317167e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417515499932e-10,
+          "heatPowerConsistencyAllowanceW": 2.8087875501360032e-11
+        },
+        {
+          "timeS": 8.789062500000001e-06,
+          "surfaceK": 1199.9997210327842,
+          "cellCenterK": 1199.999721439938,
+          "powerGasToWallW": -9.55641041348317,
+          "solidHalfResistanceKW": 4.260530219763417e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417484027472e-10,
+          "heatPowerConsistencyAllowanceW": 2.8087115306016436e-11
+        },
+        {
+          "timeS": 8.973121643066407e-06,
+          "surfaceK": 1199.9997182690922,
+          "cellCenterK": 1199.9997186759538,
+          "powerGasToWallW": -9.549552236312717,
+          "solidHalfResistanceKW": 4.26053021721316e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417452598032e-10,
+          "heatPowerConsistencyAllowanceW": 2.8086350811556205e-11
+        },
+        {
+          "timeS": 9.159088134765626e-06,
+          "surfaceK": 1199.9997155092092,
+          "cellCenterK": 1199.999715915777,
+          "powerGasToWallW": -9.54265576717975,
+          "solidHalfResistanceKW": 4.2605302146664165e-08,
+          "surfaceRoundoffAllowanceK": 1.364241742121184e-10,
+          "heatPowerConsistencyAllowanceW": 2.80855820472507e-11
+        },
+        {
+          "timeS": 9.346961975097656e-06,
+          "surfaceK": 1199.9997127531549,
+          "cellCenterK": 1199.999713159427,
+          "powerGasToWallW": -9.535721267335145,
+          "solidHalfResistanceKW": 4.260530212123204e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417389869116e-10,
+          "heatPowerConsistencyAllowanceW": 2.8084809042190517e-11
+        },
+        {
+          "timeS": 9.5367431640625e-06,
+          "surfaceK": 1199.9997100009489,
+          "cellCenterK": 1199.9997104069241,
+          "powerGasToWallW": -9.528748996443086,
+          "solidHalfResistanceKW": 4.260530209583541e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417358570093e-10,
+          "heatPowerConsistencyAllowanceW": 2.8084031825289534e-11
+        },
+        {
+          "timeS": 9.728431701660157e-06,
+          "surfaceK": 1199.9997072526112,
+          "cellCenterK": 1199.9997076582877,
+          "powerGasToWallW": -9.521739212615842,
+          "solidHalfResistanceKW": 4.260530207047446e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417327314988e-10,
+          "heatPowerConsistencyAllowanceW": 2.808325042528876e-11
+        },
+        {
+          "timeS": 9.922027587890625e-06,
+          "surfaceK": 1199.999704508161,
+          "cellCenterK": 1199.9997049135372,
+          "powerGasToWallW": -9.514692172447857,
+          "solidHalfResistanceKW": 4.260530204514936e-08,
+          "surfaceRoundoffAllowanceK": 1.364241729610403e-10,
+          "heatPowerConsistencyAllowanceW": 2.808246487076012e-11
+        },
+        {
+          "timeS": 1.0117530822753906e-05,
+          "surfaceK": 1199.9997017676176,
+          "cellCenterK": 1199.9997021726922,
+          "powerGasToWallW": -9.507608131046302,
+          "solidHalfResistanceKW": 4.2605302019860296e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417264937432e-10,
+          "heatPowerConsistencyAllowanceW": 2.8081675190109918e-11
+        },
+        {
+          "timeS": 1.031494140625e-05,
+          "surfaceK": 1199.9996990310008,
+          "cellCenterK": 1199.9996994357718,
+          "powerGasToWallW": -9.500487342062033,
+          "solidHalfResistanceKW": 4.260530199460745e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417233815418e-10,
+          "heatPowerConsistencyAllowanceW": 2.808088141158223e-11
+        },
+        {
+          "timeS": 1.0514259338378907e-05,
+          "surfaceK": 1199.9996962983284,
+          "cellCenterK": 1199.9996967027946,
+          "powerGasToWallW": -9.493330057719035,
+          "solidHalfResistanceKW": 4.260530196939097e-08,
+          "surfaceRoundoffAllowanceK": 1.36424172027382e-10,
+          "heatPowerConsistencyAllowanceW": 2.808008356326222e-11
+        },
+        {
+          "timeS": 1.0715484619140626e-05,
+          "surfaceK": 1199.9996935696201,
+          "cellCenterK": 1199.9996939737798,
+          "powerGasToWallW": -9.486136528841305,
+          "solidHalfResistanceKW": 4.260530194421106e-08,
+          "surfaceRoundoffAllowanceK": 1.364241717170599e-10,
+          "heatPowerConsistencyAllowanceW": 2.8079281673079123e-11
+        },
+        {
+          "timeS": 1.0918617248535156e-05,
+          "surfaceK": 1199.999690844894,
+          "cellCenterK": 1199.9996912487459,
+          "powerGasToWallW": -9.478907004879412,
+          "solidHalfResistanceKW": 4.260530191906789e-08,
+          "surfaceRoundoffAllowanceK": 1.364241714071901e-10,
+          "heatPowerConsistencyAllowanceW": 2.8078475768809246e-11
+        },
+        {
+          "timeS": 1.11236572265625e-05,
+          "surfaceK": 1199.999688124169,
+          "cellCenterK": 1199.9996885277112,
+          "powerGasToWallW": -9.471641733935824,
+          "solidHalfResistanceKW": 4.2605301893961607e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417109777455e-10,
+          "heatPowerConsistencyAllowanceW": 2.8077665878078707e-11
+        },
+        {
+          "timeS": 1.1330604553222656e-05,
+          "surfaceK": 1199.9996854074634,
+          "cellCenterK": 1199.9996858106945,
+          "powerGasToWallW": -9.464340962789628,
+          "solidHalfResistanceKW": 4.260530186889239e-08,
+          "surfaceRoundoffAllowanceK": 1.3642417078881545e-10,
+          "heatPowerConsistencyAllowanceW": 2.8076852028366298e-11
+        },
+        {
+          "timeS": 1.1539459228515625e-05,
+          "surfaceK": 1199.999682694795,
+          "cellCenterK": 1199.9996830977136,
+          "powerGasToWallW": -9.457004936918585,
+          "solidHalfResistanceKW": 4.260530184386042e-08,
+          "surfaceRoundoffAllowanceK": 1.364241704803149e-10,
+          "heatPowerConsistencyAllowanceW": 2.8076034247005876e-11
+        },
+        {
+          "timeS": 1.1750221252441406e-05,
+          "surfaceK": 1199.9996799861822,
+          "cellCenterK": 1199.9996803887866,
+          "powerGasToWallW": -9.449633900521237,
+          "solidHalfResistanceKW": 4.2605301818865856e-08,
+          "surfaceRoundoffAllowanceK": 1.364241701722748e-10,
+          "heatPowerConsistencyAllowanceW": 2.8075212561188848e-11
+        },
+        {
+          "timeS": 1.1962890625e-05,
+          "surfaceK": 1199.9996772816423,
+          "cellCenterK": 1199.9996776839314,
+          "powerGasToWallW": -9.442228096538495,
+          "solidHalfResistanceKW": 4.260530179390886e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416986469734e-10,
+          "heatPowerConsistencyAllowanceW": 2.8074386997966553e-11
+        },
+        {
+          "timeS": 1.2177467346191406e-05,
+          "surfaceK": 1199.9996745811939,
+          "cellCenterK": 1199.9996749831657,
+          "powerGasToWallW": -9.434787766673129,
+          "solidHalfResistanceKW": 4.260530176898959e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416955758444e-10,
+          "heatPowerConsistencyAllowanceW": 2.8073557584252505e-11
+        },
+        {
+          "timeS": 1.2393951416015625e-05,
+          "surfaceK": 1199.9996718848536,
+          "cellCenterK": 1199.9996722865071,
+          "powerGasToWallW": -9.427313151409162,
+          "solidHalfResistanceKW": 4.260530174410823e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416925093817e-10,
+          "heatPowerConsistencyAllowanceW": 2.807272434682448e-11
+        },
+        {
+          "timeS": 1.2612342834472656e-05,
+          "surfaceK": 1199.9996691926392,
+          "cellCenterK": 1199.9996695939728,
+          "powerGasToWallW": -9.419804490029872,
+          "solidHalfResistanceKW": 4.260530171926491e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416894476042e-10,
+          "heatPowerConsistencyAllowanceW": 2.807188731232656e-11
+        },
+        {
+          "timeS": 1.28326416015625e-05,
+          "surfaceK": 1199.999666504568,
+          "cellCenterK": 1199.9996669055804,
+          "powerGasToWallW": -9.412262020635223,
+          "solidHalfResistanceKW": 4.260530169445981e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416863905325e-10,
+          "heatPowerConsistencyAllowanceW": 2.8071046507271076e-11
+        },
+        {
+          "timeS": 1.3054847717285156e-05,
+          "surfaceK": 1199.999663820657,
+          "cellCenterK": 1199.9996642213464,
+          "powerGasToWallW": -9.404685980159407,
+          "solidHalfResistanceKW": 4.2605301669693084e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416833381846e-10,
+          "heatPowerConsistencyAllowanceW": 2.807020195804056e-11
+        },
+        {
+          "timeS": 1.3278961181640625e-05,
+          "surfaceK": 1199.999661140923,
+          "cellCenterK": 1199.9996615412883,
+          "powerGasToWallW": -9.397076604385667,
+          "solidHalfResistanceKW": 4.260530164496488e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416802905814e-10,
+          "heatPowerConsistencyAllowanceW": 2.806935369088941e-11
+        },
+        {
+          "timeS": 1.3504981994628906e-05,
+          "surfaceK": 1199.9996584653827,
+          "cellCenterK": 1199.9996588654224,
+          "powerGasToWallW": -9.389434127962515,
+          "solidHalfResistanceKW": 4.260530162027537e-08,
+          "surfaceRoundoffAllowanceK": 1.364241677247741e-10,
+          "heatPowerConsistencyAllowanceW": 2.8068501731945677e-11
+        },
+        {
+          "timeS": 1.373291015625e-05,
+          "surfaceK": 1199.9996557940528,
+          "cellCenterK": 1199.9996561937655,
+          "powerGasToWallW": -9.381758784417967,
+          "solidHalfResistanceKW": 4.260530159562468e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416742096825e-10,
+          "heatPowerConsistencyAllowanceW": 2.8067646107212667e-11
+        },
+        {
+          "timeS": 1.3962745666503906e-05,
+          "surfaceK": 1199.9996531269499,
+          "cellCenterK": 1199.9996535263342,
+          "powerGasToWallW": -9.374050806173788,
+          "solidHalfResistanceKW": 4.260530157101299e-08,
+          "surfaceRoundoffAllowanceK": 1.364241671176425e-10,
+          "heatPowerConsistencyAllowanceW": 2.8066786842570543e-11
+        },
+        {
+          "timeS": 1.4194488525390625e-05,
+          "surfaceK": 1199.99965046409,
+          "cellCenterK": 1199.9996508631446,
+          "powerGasToWallW": -9.366310424558707,
+          "solidHalfResistanceKW": 4.260530154644042e-08,
+          "surfaceRoundoffAllowanceK": 1.364241668147986e-10,
+          "heatPowerConsistencyAllowanceW": 2.8065923963777767e-11
+        },
+        {
+          "timeS": 1.4428138732910156e-05,
+          "surfaceK": 1199.9996478054898,
+          "cellCenterK": 1199.9996482042131,
+          "powerGasToWallW": -9.35853786982127,
+          "solidHalfResistanceKW": 4.260530152190715e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416651243854e-10,
+          "heatPowerConsistencyAllowanceW": 2.806505749647256e-11
+        },
+        {
+          "timeS": 1.46636962890625e-05,
+          "surfaceK": 1199.9996451511647,
+          "cellCenterK": 1199.9996455495555,
+          "powerGasToWallW": -9.350733371142239,
+          "solidHalfResistanceKW": 4.260530149741332e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416621056401e-10,
+          "heatPowerConsistencyAllowanceW": 2.8064187466174276e-11
+        },
+        {
+          "timeS": 1.4901161193847656e-05,
+          "surfaceK": 1199.999642501131,
+          "cellCenterK": 1199.9996428991878,
+          "powerGasToWallW": -9.342897156646425,
+          "solidHalfResistanceKW": 4.260530147295906e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416590917693e-10,
+          "heatPowerConsistencyAllowanceW": 2.8063313898284723e-11
+        },
+        {
+          "timeS": 1.5140533447265624e-05,
+          "surfaceK": 1199.999639855404,
+          "cellCenterK": 1199.9996402531258,
+          "powerGasToWallW": -9.33502945341468,
+          "solidHalfResistanceKW": 4.260530144854453e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416560827905e-10,
+          "heatPowerConsistencyAllowanceW": 2.8062436818089505e-11
+        },
+        {
+          "timeS": 1.5381813049316408e-05,
+          "surfaceK": 1199.9996372139997,
+          "cellCenterK": 1199.999637611385,
+          "powerGasToWallW": -9.32713048749453,
+          "solidHalfResistanceKW": 4.260530142416988e-08,
+          "surfaceRoundoffAllowanceK": 1.364241653078721e-10,
+          "heatPowerConsistencyAllowanceW": 2.8061556250759213e-11
+        },
+        {
+          "timeS": 1.5625e-05,
+          "surfaceK": 1199.9996345769332,
+          "cellCenterK": 1199.9996349739806,
+          "powerGasToWallW": -9.319200483909896,
+          "solidHalfResistanceKW": 4.260530139983523e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416500795786e-10,
+          "heatPowerConsistencyAllowanceW": 2.8060672221350467e-11
+        },
+        {
+          "timeS": 1.5870094299316408e-05,
+          "surfaceK": 1199.9996319442198,
+          "cellCenterK": 1199.999632340928,
+          "powerGasToWallW": -9.311239666672483,
+          "solidHalfResistanceKW": 4.260530137554074e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416470853805e-10,
+          "heatPowerConsistencyAllowanceW": 2.805978475480726e-11
+        },
+        {
+          "timeS": 1.6117095947265624e-05,
+          "surfaceK": 1199.9996293158747,
+          "cellCenterK": 1199.9996297122425,
+          "powerGasToWallW": -9.303248258790358,
+          "solidHalfResistanceKW": 4.2605301351286536e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416440961447e-10,
+          "heatPowerConsistencyAllowanceW": 2.8058893875961875e-11
+        },
+        {
+          "timeS": 1.6366004943847658e-05,
+          "surfaceK": 1199.9996266919134,
+          "cellCenterK": 1199.9996270879392,
+          "powerGasToWallW": -9.295226482278427,
+          "solidHalfResistanceKW": 4.260530132707277e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416411118874e-10,
+          "heatPowerConsistencyAllowanceW": 2.8057999609536026e-11
+        },
+        {
+          "timeS": 1.66168212890625e-05,
+          "surfaceK": 1199.9996240723494,
+          "cellCenterK": 1199.9996244680324,
+          "powerGasToWallW": -9.287174558167273,
+          "solidHalfResistanceKW": 4.260530130289957e-08,
+          "surfaceRoundoffAllowanceK": 1.364241638132626e-10,
+          "heatPowerConsistencyAllowanceW": 2.8057101980141893e-11
+        },
+        {
+          "timeS": 1.6869544982910156e-05,
+          "surfaceK": 1199.9996214571988,
+          "cellCenterK": 1199.9996218525373,
+          "powerGasToWallW": -9.27909270651083,
+          "solidHalfResistanceKW": 4.2605301278767076e-08,
+          "surfaceRoundoffAllowanceK": 1.364241635158377e-10,
+          "heatPowerConsistencyAllowanceW": 2.8056201012282975e-11
+        },
+        {
+          "timeS": 1.7124176025390625e-05,
+          "surfaceK": 1199.9996188464754,
+          "cellCenterK": 1199.9996192414683,
+          "powerGasToWallW": -9.27098114639611,
+          "solidHalfResistanceKW": 4.2605301254675414e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416321891569e-10,
+          "heatPowerConsistencyAllowanceW": 2.8055296730355125e-11
+        },
+        {
+          "timeS": 1.7380714416503908e-05,
+          "surfaceK": 1199.9996162401935,
+          "cellCenterK": 1199.9996166348396,
+          "powerGasToWallW": -9.262840095951372,
+          "solidHalfResistanceKW": 4.2605301230624734e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416292249823e-10,
+          "heatPowerConsistencyAllowanceW": 2.8054389158647516e-11
+        },
+        {
+          "timeS": 1.763916015625e-05,
+          "surfaceK": 1199.999613638368,
+          "cellCenterK": 1199.999614032666,
+          "powerGasToWallW": -9.254669772352841,
+          "solidHalfResistanceKW": 4.2605301206615155e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416262658695e-10,
+          "heatPowerConsistencyAllowanceW": 2.8053478321343374e-11
+        },
+        {
+          "timeS": 1.7899513244628908e-05,
+          "surfaceK": 1199.9996110410125,
+          "cellCenterK": 1199.9996114349613,
+          "powerGasToWallW": -9.246470391833734,
+          "solidHalfResistanceKW": 4.26053011826468e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416233118346e-10,
+          "heatPowerConsistencyAllowanceW": 2.805256424252098e-11
+        },
+        {
+          "timeS": 1.8161773681640625e-05,
+          "surfaceK": 1199.9996084481413,
+          "cellCenterK": 1199.9996088417395,
+          "powerGasToWallW": -9.238242169690718,
+          "solidHalfResistanceKW": 4.260530115871982e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416203628934e-10,
+          "heatPowerConsistencyAllowanceW": 2.805164694615438e-11
+        },
+        {
+          "timeS": 1.8425941467285158e-05,
+          "surfaceK": 1199.999605859768,
+          "cellCenterK": 1199.9996062530145,
+          "powerGasToWallW": -9.229985320291597,
+          "solidHalfResistanceKW": 4.260530113483432e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416174190617e-10,
+          "heatPowerConsistencyAllowanceW": 2.805072645611428e-11
+        },
+        {
+          "timeS": 1.86920166015625e-05,
+          "surfaceK": 1199.9996032759066,
+          "cellCenterK": 1199.9996036687999,
+          "powerGasToWallW": -9.22170005708187,
+          "solidHalfResistanceKW": 4.260530111099044e-08,
+          "surfaceRoundoffAllowanceK": 1.364241614480355e-10,
+          "heatPowerConsistencyAllowanceW": 2.8049802796168724e-11
+        },
+        {
+          "timeS": 1.8959999084472656e-05,
+          "surfaceK": 1199.9996006965705,
+          "cellCenterK": 1199.9996010891095,
+          "powerGasToWallW": -9.21338659259124,
+          "solidHalfResistanceKW": 4.260530108718832e-08,
+          "surfaceRoundoffAllowanceK": 1.364241611546789e-10,
+          "heatPowerConsistencyAllowanceW": 2.8048875989983883e-11
+        },
+        {
+          "timeS": 1.9229888916015626e-05,
+          "surfaceK": 1199.9995981217728,
+          "cellCenterK": 1199.9995985139565,
+          "powerGasToWallW": -9.205045138442065,
+          "solidHalfResistanceKW": 4.260530106342804e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416086183785e-10,
+          "heatPowerConsistencyAllowanceW": 2.8047946061124928e-11
+        },
+        {
+          "timeS": 1.9501686096191408e-05,
+          "surfaceK": 1199.9995955515274,
+          "cellCenterK": 1199.9995959433545,
+          "powerGasToWallW": -9.196675905353395,
+          "solidHalfResistanceKW": 4.260530103970976e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416056951398e-10,
+          "heatPowerConsistencyAllowanceW": 2.8047013033056558e-11
+        },
+        {
+          "timeS": 1.9775390625e-05,
+          "surfaceK": 1199.999592985847,
+          "cellCenterK": 1199.9995933773164,
+          "powerGasToWallW": -9.188279103147975,
+          "solidHalfResistanceKW": 4.2605301016033596e-08,
+          "surfaceRoundoffAllowanceK": 1.3642416027770868e-10,
+          "heatPowerConsistencyAllowanceW": 2.8046076929143712e-11
+        },
+        {
+          "timeS": 2.0051002502441408e-05,
+          "surfaceK": 1199.999590424745,
+          "cellCenterK": 1199.9995908158555,
+          "powerGasToWallW": -9.179854940758712,
+          "solidHalfResistanceKW": 4.260530099239966e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415998642346e-10,
+          "heatPowerConsistencyAllowanceW": 2.8045137772652334e-11
+        },
+        {
+          "timeS": 2.0328521728515624e-05,
+          "surfaceK": 1199.9995878682341,
+          "cellCenterK": 1199.9995882589844,
+          "powerGasToWallW": -9.171403626234701,
+          "solidHalfResistanceKW": 4.2605300968808075e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415969565978e-10,
+          "heatPowerConsistencyAllowanceW": 2.8044195586750017e-11
+        },
+        {
+          "timeS": 2.0607948303222658e-05,
+          "surfaceK": 1199.999585316327,
+          "cellCenterK": 1199.9995857067163,
+          "powerGasToWallW": -9.162925366746082,
+          "solidHalfResistanceKW": 4.260530094525895e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415940541917e-10,
+          "heatPowerConsistencyAllowanceW": 2.804325039450658e-11
+        },
+        {
+          "timeS": 2.08892822265625e-05,
+          "surfaceK": 1199.9995827690364,
+          "cellCenterK": 1199.9995831590631,
+          "powerGasToWallW": -9.154420368589957,
+          "solidHalfResistanceKW": 4.2605300921752417e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415911570293e-10,
+          "heatPowerConsistencyAllowanceW": 2.8042302218894684e-11
+        },
+        {
+          "timeS": 2.1172523498535157e-05,
+          "surfaceK": 1199.9995802263747,
+          "cellCenterK": 1199.9995806160382,
+          "powerGasToWallW": -9.145888837196743,
+          "solidHalfResistanceKW": 4.2605300898288585e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415882651263e-10,
+          "heatPowerConsistencyAllowanceW": 2.8041351082790593e-11
+        },
+        {
+          "timeS": 2.1457672119140625e-05,
+          "surfaceK": 1199.9995776883545,
+          "cellCenterK": 1199.9995780776533,
+          "powerGasToWallW": -9.137330977134546,
+          "solidHalfResistanceKW": 4.260530087486756e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415853784957e-10,
+          "heatPowerConsistencyAllowanceW": 2.8040397008974616e-11
+        },
+        {
+          "timeS": 2.1744728088378908e-05,
+          "surfaceK": 1199.999575154988,
+          "cellCenterK": 1199.9995755439209,
+          "powerGasToWallW": -9.128746992114312,
+          "solidHalfResistanceKW": 4.2605300851489465e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415824971517e-10,
+          "heatPowerConsistencyAllowanceW": 2.80394400201317e-11
+        },
+        {
+          "timeS": 2.203369140625e-05,
+          "surfaceK": 1199.9995726262866,
+          "cellCenterK": 1199.9995730148528,
+          "powerGasToWallW": -9.12013708499502,
+          "solidHalfResistanceKW": 4.260530082815441e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415796211083e-10,
+          "heatPowerConsistencyAllowanceW": 2.8038480138851997e-11
+        },
+        {
+          "timeS": 2.2324562072753905e-05,
+          "surfaceK": 1199.9995701022633,
+          "cellCenterK": 1199.9995704904616,
+          "powerGasToWallW": -9.111501457790194,
+          "solidHalfResistanceKW": 4.260530080486251e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415767503792e-10,
+          "heatPowerConsistencyAllowanceW": 2.8037517387631642e-11
+        },
+        {
+          "timeS": 2.2617340087890626e-05,
+          "surfaceK": 1199.9995675829293,
+          "cellCenterK": 1199.9995679707586,
+          "powerGasToWallW": -9.102840311670448,
+          "solidHalfResistanceKW": 4.2605300781613866e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415738849778e-10,
+          "heatPowerConsistencyAllowanceW": 2.8036551788872964e-11
+        },
+        {
+          "timeS": 2.2912025451660158e-05,
+          "surfaceK": 1199.9995650682965,
+          "cellCenterK": 1199.9995654557556,
+          "powerGasToWallW": -9.09415384696944,
+          "solidHalfResistanceKW": 4.260530075840858e-08,
+          "surfaceRoundoffAllowanceK": 1.364241571024917e-10,
+          "heatPowerConsistencyAllowanceW": 2.8035583364885185e-11
+        },
+        {
+          "timeS": 2.3208618164062502e-05,
+          "surfaceK": 1199.9995625583763,
+          "cellCenterK": 1199.9995629454643,
+          "powerGasToWallW": -9.085442263189405,
+          "solidHalfResistanceKW": 4.260530073524677e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415681702105e-10,
+          "heatPowerConsistencyAllowanceW": 2.8034612137885046e-11
+        },
+        {
+          "timeS": 2.3507118225097657e-05,
+          "surfaceK": 1199.9995600531804,
+          "cellCenterK": 1199.9995604398962,
+          "powerGasToWallW": -9.07670575900374,
+          "solidHalfResistanceKW": 4.260530071212855e-08,
+          "surfaceRoundoffAllowanceK": 1.364241565320871e-10,
+          "heatPowerConsistencyAllowanceW": 2.8033638129997103e-11
+        },
+        {
+          "timeS": 2.3807525634765627e-05,
+          "surfaceK": 1199.9995575527198,
+          "cellCenterK": 1199.9995579390622,
+          "powerGasToWallW": -9.067944532263253,
+          "solidHalfResistanceKW": 4.260530068905401e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415624769117e-10,
+          "heatPowerConsistencyAllowanceW": 2.8032661363254366e-11
+        },
+        {
+          "timeS": 2.4109840393066405e-05,
+          "surfaceK": 1199.9995550570059,
+          "cellCenterK": 1199.999555442974,
+          "powerGasToWallW": -9.059158779999676,
+          "solidHalfResistanceKW": 4.2605300666023244e-08,
+          "surfaceRoundoffAllowanceK": 1.364241559638345e-10,
+          "heatPowerConsistencyAllowanceW": 2.8031681859598777e-11
+        },
+        {
+          "timeS": 2.44140625e-05,
+          "surfaceK": 1199.99955256605,
+          "cellCenterK": 1199.9995529516427,
+          "powerGasToWallW": -9.050348698430815,
+          "solidHalfResistanceKW": 4.2605300643036364e-08,
+          "surfaceRoundoffAllowanceK": 1.364241556805184e-10,
+          "heatPowerConsistencyAllowanceW": 2.803069964088171e-11
+        },
+        {
+          "timeS": 2.4720191955566406e-05,
+          "surfaceK": 1199.9995500798625,
+          "cellCenterK": 1199.999550465079,
+          "powerGasToWallW": -9.041514482963908,
+          "solidHalfResistanceKW": 4.26053006200935e-08,
+          "surfaceRoundoffAllowanceK": 1.364241553977441e-10,
+          "heatPowerConsistencyAllowanceW": 2.8029714728864383e-11
+        },
+        {
+          "timeS": 2.5028228759765625e-05,
+          "surfaceK": 1199.9995475984547,
+          "cellCenterK": 1199.9995479832937,
+          "powerGasToWallW": -9.03265632820052,
+          "solidHalfResistanceKW": 4.26053005971947e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415511551278e-10,
+          "heatPowerConsistencyAllowanceW": 2.8028727145218404e-11
+        },
+        {
+          "timeS": 2.5338172912597655e-05,
+          "surfaceK": 1199.999545121837,
+          "cellCenterK": 1199.9995455062976,
+          "powerGasToWallW": -9.023774427940305,
+          "solidHalfResistanceKW": 4.26053005743401e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415483382573e-10,
+          "heatPowerConsistencyAllowanceW": 2.8027736911526178e-11
+        },
+        {
+          "timeS": 2.56500244140625e-05,
+          "surfaceK": 1199.9995426500202,
+          "cellCenterK": 1199.9995430341014,
+          "powerGasToWallW": -9.01486897518543,
+          "solidHalfResistanceKW": 4.260530055152978e-08,
+          "surfaceRoundoffAllowanceK": 1.364241545526841e-10,
+          "heatPowerConsistencyAllowanceW": 2.8026744049281405e-11
+        },
+        {
+          "timeS": 2.5963783264160158e-05,
+          "surfaceK": 1199.9995401830145,
+          "cellCenterK": 1199.9995405667153,
+          "powerGasToWallW": -9.005940162143757,
+          "solidHalfResistanceKW": 4.260530052876385e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415427208913e-10,
+          "heatPowerConsistencyAllowanceW": 2.8025748579889418e-11
+        },
+        {
+          "timeS": 2.6279449462890626e-05,
+          "surfaceK": 1199.9995377208304,
+          "cellCenterK": 1199.9995381041497,
+          "powerGasToWallW": -8.996988180234277,
+          "solidHalfResistanceKW": 4.260530050604239e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415399204194e-10,
+          "heatPowerConsistencyAllowanceW": 2.802475052466786e-11
+        },
+        {
+          "timeS": 2.6597023010253906e-05,
+          "surfaceK": 1199.9995352634778,
+          "cellCenterK": 1199.9995356464149,
+          "powerGasToWallW": -8.98801322008955,
+          "solidHalfResistanceKW": 4.260530048336551e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415371254374e-10,
+          "heatPowerConsistencyAllowanceW": 2.8023749904846852e-11
+        },
+        {
+          "timeS": 2.691650390625e-05,
+          "surfaceK": 1199.9995328109671,
+          "cellCenterK": 1199.9995331935208,
+          "powerGasToWallW": -8.979015471560054,
+          "solidHalfResistanceKW": 4.2605300460733294e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415343359566e-10,
+          "heatPowerConsistencyAllowanceW": 2.802274674156955e-11
+        },
+        {
+          "timeS": 2.7237892150878906e-05,
+          "surfaceK": 1199.9995303633082,
+          "cellCenterK": 1199.9995307454776,
+          "powerGasToWallW": -8.969995123718103,
+          "solidHalfResistanceKW": 4.260530043814583e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415315519882e-10,
+          "heatPowerConsistencyAllowanceW": 2.8021741055892553e-11
+        },
+        {
+          "timeS": 2.7561187744140627e-05,
+          "surfaceK": 1199.999527920511,
+          "cellCenterK": 1199.999528302295,
+          "powerGasToWallW": -8.96095236486151,
+          "solidHalfResistanceKW": 4.260530041560322e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415287735436e-10,
+          "heatPowerConsistencyAllowanceW": 2.8020732868786333e-11
+        },
+        {
+          "timeS": 2.7886390686035156e-05,
+          "surfaceK": 1199.9995254825849,
+          "cellCenterK": 1199.9995258639826,
+          "powerGasToWallW": -8.951887382517107,
+          "solidHalfResistanceKW": 4.2605300393105535e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415260006336e-10,
+          "heatPowerConsistencyAllowanceW": 2.8019722201135614e-11
+        },
+        {
+          "timeS": 2.82135009765625e-05,
+          "surfaceK": 1199.9995230495394,
+          "cellCenterK": 1199.9995234305502,
+          "powerGasToWallW": -8.94280036344466,
+          "solidHalfResistanceKW": 4.260530037065288e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415232332696e-10,
+          "heatPowerConsistencyAllowanceW": 2.801870907373979e-11
+        },
+        {
+          "timeS": 2.8542518615722658e-05,
+          "surfaceK": 1199.9995206213846,
+          "cellCenterK": 1199.9995210020072,
+          "powerGasToWallW": -8.93369149363996,
+          "solidHalfResistanceKW": 4.2605300348245354e-08,
+          "surfaceRoundoffAllowanceK": 1.364241520471462e-10,
+          "heatPowerConsistencyAllowanceW": 2.801769350731331e-11
+        },
+        {
+          "timeS": 2.8873443603515625e-05,
+          "surfaceK": 1199.9995181981294,
+          "cellCenterK": 1199.999518578363,
+          "powerGasToWallW": -8.92456095833887,
+          "solidHalfResistanceKW": 4.260530032588301e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415177152214e-10,
+          "heatPowerConsistencyAllowanceW": 2.80166755224861e-11
+        },
+        {
+          "timeS": 2.9206275939941406e-05,
+          "surfaceK": 1199.9995157797832,
+          "cellCenterK": 1199.9995161596269,
+          "powerGasToWallW": -8.915408942020054,
+          "solidHalfResistanceKW": 4.260530030356597e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415149645587e-10,
+          "heatPowerConsistencyAllowanceW": 2.8015655139803892e-11
+        },
+        {
+          "timeS": 2.9541015625e-05,
+          "surfaceK": 1199.999513366355,
+          "cellCenterK": 1199.9995137458077,
+          "powerGasToWallW": -8.906235628409691,
+          "solidHalfResistanceKW": 4.260530028129429e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415122194838e-10,
+          "heatPowerConsistencyAllowanceW": 2.801463237972869e-11
+        },
+        {
+          "timeS": 2.9877662658691407e-05,
+          "surfaceK": 1199.9995109578538,
+          "cellCenterK": 1199.9995113369148,
+          "powerGasToWallW": -8.897041200483411,
+          "solidHalfResistanceKW": 4.260530025906805e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415094800077e-10,
+          "heatPowerConsistencyAllowanceW": 2.801360726263908e-11
+        },
+        {
+          "timeS": 3.0216217041015626e-05,
+          "surfaceK": 1199.9995085542885,
+          "cellCenterK": 1199.999508932957,
+          "powerGasToWallW": -8.887825840471002,
+          "solidHalfResistanceKW": 4.2605300236887355e-08,
+          "surfaceRoundoffAllowanceK": 1.36424150674614e-10,
+          "heatPowerConsistencyAllowanceW": 2.801257980883068e-11
+        },
+        {
+          "timeS": 3.055667877197266e-05,
+          "surfaceK": 1199.999506155668,
+          "cellCenterK": 1199.999506533943,
+          "powerGasToWallW": -8.87858972985805,
+          "solidHalfResistanceKW": 4.260530021475227e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415040178909e-10,
+          "heatPowerConsistencyAllowanceW": 2.8011550038516358e-11
+        },
+        {
+          "timeS": 3.08990478515625e-05,
+          "surfaceK": 1199.9995037620008,
+          "cellCenterK": 1199.9995041398813,
+          "powerGasToWallW": -8.869333049391692,
+          "solidHalfResistanceKW": 4.260530019266288e-08,
+          "surfaceRoundoffAllowanceK": 1.3642415012952696e-10,
+          "heatPowerConsistencyAllowanceW": 2.801051797182684e-11
+        },
+        {
+          "timeS": 3.124332427978516e-05,
+          "surfaceK": 1199.9995013732955,
+          "cellCenterK": 1199.9995017507808,
+          "powerGasToWallW": -8.860055979081231,
+          "solidHalfResistanceKW": 4.260530017061926e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414985782868e-10,
+          "heatPowerConsistencyAllowanceW": 2.8009483628810818e-11
+        },
+        {
+          "timeS": 3.158950805664063e-05,
+          "surfaceK": 1199.9994989895604,
+          "cellCenterK": 1199.9994993666496,
+          "powerGasToWallW": -8.850758698203123,
+          "solidHalfResistanceKW": 4.2605300148621506e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414958669516e-10,
+          "heatPowerConsistencyAllowanceW": 2.8008447029435497e-11
+        },
+        {
+          "timeS": 3.1937599182128904e-05,
+          "surfaceK": 1199.999496610804,
+          "cellCenterK": 1199.9994969874963,
+          "powerGasToWallW": -8.841441385303268,
+          "solidHalfResistanceKW": 4.260530012666967e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414931612733e-10,
+          "heatPowerConsistencyAllowanceW": 2.8007408193586825e-11
+        },
+        {
+          "timeS": 3.228759765625e-05,
+          "surfaceK": 1199.9994942370347,
+          "cellCenterK": 1199.999494613329,
+          "powerGasToWallW": -8.832104218201156,
+          "solidHalfResistanceKW": 4.260530010476384e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414904612617e-10,
+          "heatPowerConsistencyAllowanceW": 2.800636714106999e-11
+        },
+        {
+          "timeS": 3.263950347900391e-05,
+          "surfaceK": 1199.99949186826,
+          "cellCenterK": 1199.9994922441558,
+          "powerGasToWallW": -8.822747373991001,
+          "solidHalfResistanceKW": 4.26053000829041e-08,
+          "surfaceRoundoffAllowanceK": 1.364241487766926e-10,
+          "heatPowerConsistencyAllowanceW": 2.8005323891609533e-11
+        },
+        {
+          "timeS": 3.299331665039063e-05,
+          "surfaceK": 1199.999489504488,
+          "cellCenterK": 1199.9994898799844,
+          "powerGasToWallW": -8.8133710290476,
+          "solidHalfResistanceKW": 4.26053000610905e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414850782747e-10,
+          "heatPowerConsistencyAllowanceW": 2.8004278464849953e-11
+        },
+        {
+          "timeS": 3.334903717041016e-05,
+          "surfaceK": 1199.999487145727,
+          "cellCenterK": 1199.999487520823,
+          "powerGasToWallW": -8.803975359026975,
+          "solidHalfResistanceKW": 4.260530003932313e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414823953175e-10,
+          "heatPowerConsistencyAllowanceW": 2.8003230880355886e-11
+        },
+        {
+          "timeS": 3.37066650390625e-05,
+          "surfaceK": 1199.9994847919845,
+          "cellCenterK": 1199.9994851666795,
+          "powerGasToWallW": -8.794560538870488,
+          "solidHalfResistanceKW": 4.260530001760205e-08,
+          "surfaceRoundoffAllowanceK": 1.364241479718063e-10,
+          "heatPowerConsistencyAllowanceW": 2.8002181157612454e-11
+        },
+        {
+          "timeS": 3.406620025634766e-05,
+          "surfaceK": 1199.999482443268,
+          "cellCenterK": 1199.999482817561,
+          "powerGasToWallW": -8.785126742808165,
+          "solidHalfResistanceKW": 4.2605299995927346e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414770465193e-10,
+          "heatPowerConsistencyAllowanceW": 2.8001129316025713e-11
+        },
+        {
+          "timeS": 3.4427642822265626e-05,
+          "surfaceK": 1199.9994800995853,
+          "cellCenterK": 1199.9994804734756,
+          "powerGasToWallW": -8.775674144360568,
+          "solidHalfResistanceKW": 4.260529997429907e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414743806958e-10,
+          "heatPowerConsistencyAllowanceW": 2.80000753749228e-11
+        },
+        {
+          "timeS": 3.479099273681641e-05,
+          "surfaceK": 1199.9994777609436,
+          "cellCenterK": 1199.9994781344303,
+          "powerGasToWallW": -8.766202916342884,
+          "solidHalfResistanceKW": 4.26052999527173e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414717206006e-10,
+          "heatPowerConsistencyAllowanceW": 2.799901935355246e-11
+        },
+        {
+          "timeS": 3.5156250000000004e-05,
+          "surfaceK": 1199.9994754273503,
+          "cellCenterK": 1199.9994758004327,
+          "powerGasToWallW": -8.756713230866806,
+          "solidHalfResistanceKW": 4.2605299931182106e-08,
+          "surfaceRoundoffAllowanceK": 1.364241469066242e-10,
+          "heatPowerConsistencyAllowanceW": 2.799796127108517e-11
+        },
+        {
+          "timeS": 3.552341461181641e-05,
+          "surfaceK": 1199.9994730988126,
+          "cellCenterK": 1199.9994734714899,
+          "powerGasToWallW": -8.747205259344481,
+          "solidHalfResistanceKW": 4.260529990969356e-08,
+          "surfaceRoundoffAllowanceK": 1.364241466417628e-10,
+          "heatPowerConsistencyAllowanceW": 2.799690114661366e-11
+        },
+        {
+          "timeS": 3.589248657226563e-05,
+          "surfaceK": 1199.9994707753374,
+          "cellCenterK": 1199.9994711476088,
+          "powerGasToWallW": -8.737679172490532,
+          "solidHalfResistanceKW": 4.260529988825172e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414637747675e-10,
+          "heatPowerConsistencyAllowanceW": 2.799583899915308e-11
+        },
+        {
+          "timeS": 3.6263465881347655e-05,
+          "surfaceK": 1199.999468456932,
+          "cellCenterK": 1199.9994688287968,
+          "powerGasToWallW": -8.728135140325442,
+          "solidHalfResistanceKW": 4.260529986685663e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414611376678e-10,
+          "heatPowerConsistencyAllowanceW": 2.7994774847641424e-11
+        },
+        {
+          "timeS": 3.6636352539062504e-05,
+          "surfaceK": 1199.999466143603,
+          "cellCenterK": 1199.9994665150605,
+          "powerGasToWallW": -8.718573332177575,
+          "solidHalfResistanceKW": 4.260529984550838e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414585063365e-10,
+          "heatPowerConsistencyAllowanceW": 2.79937087109397e-11
+        },
+        {
+          "timeS": 3.7011146545410154e-05,
+          "surfaceK": 1199.9994638353576,
+          "cellCenterK": 1199.9994642064069,
+          "powerGasToWallW": -8.708993916687447,
+          "solidHalfResistanceKW": 4.2605299824207027e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414558807823e-10,
+          "heatPowerConsistencyAllowanceW": 2.7992640607832464e-11
+        },
+        {
+          "timeS": 3.7387847900390626e-05,
+          "surfaceK": 1199.9994615322018,
+          "cellCenterK": 1199.9994619028423,
+          "powerGasToWallW": -8.699397061808709,
+          "solidHalfResistanceKW": 4.260529980295264e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414532610118e-10,
+          "heatPowerConsistencyAllowanceW": 2.7991570557027887e-11
+        },
+        {
+          "timeS": 3.7766456604003905e-05,
+          "surfaceK": 1199.999459234143,
+          "cellCenterK": 1199.9994596043737,
+          "powerGasToWallW": -8.689782934812452,
+          "solidHalfResistanceKW": 4.260529978174526e-08,
+          "surfaceRoundoffAllowanceK": 1.364241450647033e-10,
+          "heatPowerConsistencyAllowanceW": 2.7990498577158256e-11
+        },
+        {
+          "timeS": 3.814697265625e-05,
+          "surfaceK": 1199.9994569411865,
+          "cellCenterK": 1199.999457311007,
+          "powerGasToWallW": -8.680151702288946,
+          "solidHalfResistanceKW": 4.260529976058495e-08,
+          "surfaceRoundoffAllowanceK": 1.3642414480388531e-10,
+          "heatPowerConsistencyAllowanceW": 2.7989424686780154e-11
+        }
+      ]
+    }
+  ],
+  "unpairedCaseIDs": [],
+  "allSurfaceGatesPassed": true,
+  "definition": "Accepted endpoint solid cell T plus signed gas-to-wall power times logarithmic solid half-cell resistance at common physical R.",
+  "normalization": "Raw maximum shared-time surface difference / maximum surface excursion from initialized uniform solid over BOTH complete histories; no signal floor or roundoff subtraction. Initial algebraic boundary mismatch reported separately and is not resolved physical heating.",
+  "causalAssessment": "Fine-reference causal excursion at each shared time; no floors, roundoff-dominated signals flagged; diagnostic only.",
+  "fineOnlyAcceptedTimesCompared": false,
+  "conservationAuditIncluded": false,
+  "experimentalValidation": false,
+  "liveBackendChanged": false
+}

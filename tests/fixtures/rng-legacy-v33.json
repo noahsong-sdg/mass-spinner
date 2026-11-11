@@ -1,0 +1,2825 @@
+{
+  "provenance": "Frozen v33 original source; generated offline only as a compatibility fixture, not physical validation.",
+  "config": {
+    "radius": 0.2,
+    "length": 0.6,
+    "magneticT": 0.06,
+    "voltage": 20,
+    "quadraticShape": 1.2,
+    "densityM3": 1000000000000000000,
+    "ionTemperatureEV": 5,
+    "electronTemperatureEV": 5,
+    "coulombLog": 10,
+    "particlesPerSpecies": 8,
+    "cellsAcross": 3,
+    "dt": 1e-7,
+    "duration": 2e-7,
+    "seed": 42,
+    "species": [
+      {
+        "massU": 40,
+        "chargeState": 1
+      },
+      {
+        "massU": 84,
+        "chargeState": 1
+      }
+    ],
+    "boundary": "open",
+    "initialState": "pulse",
+    "rotationMode": "zero-canonical",
+    "rotationRadS": -20000,
+    "beamEV": 5,
+    "sourceRadius": 0.08,
+    "pulseLengthFraction": 0.25,
+    "collisions": true
+  },
+  "trajectory": {
+    "config": {
+      "radius": 0.2,
+      "length": 0.6,
+      "magneticT": 0.06,
+      "voltage": 20,
+      "quadraticShape": 1.2,
+      "densityM3": 1000000000000000000,
+      "ionTemperatureEV": 5,
+      "electronTemperatureEV": 5,
+      "coulombLog": 10,
+      "particlesPerSpecies": 8,
+      "cellsAcross": 3,
+      "dt": 1e-7,
+      "duration": 2e-7,
+      "seed": 42,
+      "species": [
+        {
+          "massU": 40,
+          "chargeState": 1
+        },
+        {
+          "massU": 84,
+          "chargeState": 1
+        }
+      ],
+      "boundary": "open",
+      "initialState": "pulse",
+      "rotationMode": "zero-canonical",
+      "rotationRadS": -20000,
+      "beamEV": 5,
+      "sourceRadius": 0.08,
+      "pulseLengthFraction": 0.25,
+      "collisions": true
+    },
+    "curves": [
+      {
+        "label": "A active",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          1,
+          1,
+          1
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected A representatives"
+      },
+      {
+        "label": "A wall",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected A representatives"
+      },
+      {
+        "label": "A end",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected A representatives"
+      },
+      {
+        "label": "A source",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected A representatives"
+      },
+      {
+        "label": "A",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0.051872012068451705,
+          0.051887749078432785,
+          0.05190184105615688
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor mean radius (m)"
+      },
+      {
+        "label": "A",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          1.4046416971445759,
+          1.3976335229211285,
+          1.3554599016027187
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor residual kinetic temperature (eV)"
+      },
+      {
+        "label": "A",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          -68905.9027081064,
+          -69194.45959917243,
+          -69809.09066565442
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor fitted rigid rotation (rad/s)"
+      },
+      {
+        "label": "A",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          7.656142693682154e-25,
+          7.020934401103828e-25,
+          5.662089592470319e-25
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor mean Pθ (kg m²/s)"
+      },
+      {
+        "label": "A",
+        "x": [
+          0.005,
+          0.015000000000000003,
+          0.025,
+          0.035,
+          0.045,
+          0.05500000000000001,
+          0.065,
+          0.075,
+          0.085,
+          0.095,
+          0.10500000000000001,
+          0.11500000000000002,
+          0.125,
+          0.135,
+          0.14500000000000002,
+          0.155,
+          0.165,
+          0.175,
+          0.185,
+          0.195
+        ],
+        "y": [
+          999999999999999600,
+          333333333333333250,
+          0,
+          0,
+          0,
+          181818181818181800,
+          76923076923076910,
+          199999999999999970,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Radius (m)",
+        "yLabel": "Final axially averaged active density (m⁻³)"
+      },
+      {
+        "label": "B active",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          1,
+          1,
+          1
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected B representatives"
+      },
+      {
+        "label": "B wall",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected B representatives"
+      },
+      {
+        "label": "B end",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected B representatives"
+      },
+      {
+        "label": "B source",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Fraction of injected B representatives"
+      },
+      {
+        "label": "B",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0.04554659465339839,
+          0.04561262582956992,
+          0.04568561314181229
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor mean radius (m)"
+      },
+      {
+        "label": "B",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          6.7412277354990255,
+          6.724063298009736,
+          6.747069320752915
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor residual kinetic temperature (eV)"
+      },
+      {
+        "label": "B",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          -44693.46936330984,
+          -44853.41158045876,
+          -44461.90631090749
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor fitted rigid rotation (rad/s)"
+      },
+      {
+        "label": "B",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          -3.370971963098089e-24,
+          -3.431929729406583e-24,
+          -3.311678730843167e-24
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Survivor mean Pθ (kg m²/s)"
+      },
+      {
+        "label": "B",
+        "x": [
+          0.005,
+          0.015000000000000003,
+          0.025,
+          0.035,
+          0.045,
+          0.05500000000000001,
+          0.065,
+          0.075,
+          0.085,
+          0.095,
+          0.10500000000000001,
+          0.11500000000000002,
+          0.125,
+          0.135,
+          0.14500000000000002,
+          0.155,
+          0.165,
+          0.175,
+          0.185,
+          0.195
+        ],
+        "y": [
+          0,
+          333333333333333250,
+          199999999999999970,
+          142857142857142820,
+          0,
+          272727272727272700,
+          153846153846153820,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "xLabel": "Radius (m)",
+        "yLabel": "Final axially averaged active density (m⁻³)"
+      },
+      {
+        "label": "H including exit flux",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          -6.243273043597221e-10,
+          -1.2404185378173934e-9
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Signed conservation residual / initial positive scale"
+      },
+      {
+        "label": "Pθ including exit flux",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          -0.0009386595168613366,
+          -0.0010565473904813262
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Signed conservation residual / initial positive scale"
+      },
+      {
+        "label": "Accumulated collision-cell torque",
+        "x": [
+          0,
+          0.00009999999999999999,
+          0.00019999999999999998
+        ],
+        "y": [
+          0,
+          -0.0009386603652131712,
+          -0.0010565491296418996
+        ],
+        "xLabel": "Time (ms)",
+        "yLabel": "Signed conservation residual / initial positive scale"
+      }
+    ],
+    "metrics": [
+      {
+        "label": "Physical ions per representative",
+        "value": 188495559215387.56,
+        "unit": ""
+      },
+      {
+        "label": "Collision pairs",
+        "value": 31,
+        "unit": ""
+      },
+      {
+        "label": "RMS pair separation",
+        "value": 0.07822964918068658,
+        "unit": "m"
+      },
+      {
+        "label": "Maximum pair separation",
+        "value": 0.1503833096435031,
+        "unit": "m"
+      },
+      {
+        "label": "RMS radial pair separation",
+        "value": 0.02583428408400695,
+        "unit": "m"
+      },
+      {
+        "label": "Pairs with TA half-angle variance > 0.1 (resolution marker)",
+        "value": 0,
+        "unit": "fraction"
+      },
+      {
+        "label": "Unpaired representative exposure",
+        "value": 0.03125,
+        "unit": "fraction"
+      },
+      {
+        "label": "Max sampled H balance residual including exits",
+        "value": 1.2404185378173934e-9,
+        "unit": ""
+      },
+      {
+        "label": "Max sampled raw Pθ balance residual including exits",
+        "value": 0.0010565473904813262,
+        "unit": ""
+      },
+      {
+        "label": "Accumulated absolute cell-net torque / P scale",
+        "value": 0.003302832753674908,
+        "unit": ""
+      },
+      {
+        "label": "Accumulated absolute pair torque / P scale",
+        "value": 0.004907681067459816,
+        "unit": ""
+      },
+      {
+        "label": "Pair torque quadratic-variation scale / P scale",
+        "value": 0.0013769969210114454,
+        "unit": ""
+      },
+      {
+        "label": "Collision cell width / initial source radius",
+        "value": 1.6666666666666665,
+        "unit": ""
+      },
+      {
+        "label": "Axial cell length / initial pulse length",
+        "value": 0.8,
+        "unit": ""
+      },
+      {
+        "label": "Pθ residual after measured cell torque",
+        "value": 1.7391605733907267e-9,
+        "unit": ""
+      },
+      {
+        "label": "Initial electron Debye length",
+        "value": 0.000016622799640940616,
+        "unit": "m"
+      },
+      {
+        "label": "Initial ion coupling parameter",
+        "value": 0.0004642422530382363,
+        "unit": ""
+      },
+      {
+        "label": "Initial electrons per Debye sphere",
+        "value": 19239.825112182785,
+        "unit": ""
+      },
+      {
+        "label": "Initial estimated lnΛ (supplied value is used)",
+        "value": 12.061962211711215,
+        "unit": ""
+      },
+      {
+        "label": "Initial encounter magnetization",
+        "value": 0.00032918439859274296,
+        "unit": ""
+      },
+      {
+        "label": "Regime snapshots outside supported local estimates",
+        "value": 0,
+        "unit": "of 3"
+      },
+      {
+        "label": "Regime snapshots unresolved by local sampling",
+        "value": 3,
+        "unit": "of 3"
+      },
+      {
+        "label": "A wall fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "A end fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "A source fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "A active fraction (descriptive only; coupled particles)",
+        "value": 1,
+        "unit": ""
+      },
+      {
+        "label": "B wall fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "B end fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "B source fraction (descriptive only; coupled particles)",
+        "value": 0,
+        "unit": ""
+      },
+      {
+        "label": "B active fraction (descriptive only; coupled particles)",
+        "value": 1,
+        "unit": ""
+      }
+    ],
+    "history": [
+      {
+        "time": 0,
+        "energyResidual": 0,
+        "momentumResidual": 0,
+        "collisionTorque": 0,
+        "species": [
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.051872012068451705,
+            "temperatureEV": 1.4046416971445759,
+            "rotationRadS": -68905.9027081064,
+            "meanCanonicalMomentum": 7.656142693682154e-25
+          },
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.04554659465339839,
+            "temperatureEV": 6.7412277354990255,
+            "rotationRadS": -44693.46936330984,
+            "meanCanonicalMomentum": -3.370971963098089e-24
+          }
+        ]
+      },
+      {
+        "time": 1e-7,
+        "energyResidual": -6.243273043597221e-10,
+        "momentumResidual": -0.0009386595168613366,
+        "collisionTorque": -0.0009386603652131712,
+        "species": [
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.051887749078432785,
+            "temperatureEV": 1.3976335229211285,
+            "rotationRadS": -69194.45959917243,
+            "meanCanonicalMomentum": 7.020934401103828e-25
+          },
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.04561262582956992,
+            "temperatureEV": 6.724063298009736,
+            "rotationRadS": -44853.41158045876,
+            "meanCanonicalMomentum": -3.431929729406583e-24
+          }
+        ]
+      },
+      {
+        "time": 2e-7,
+        "energyResidual": -1.2404185378173934e-9,
+        "momentumResidual": -0.0010565473904813262,
+        "collisionTorque": -0.0010565491296418996,
+        "species": [
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.05190184105615688,
+            "temperatureEV": 1.3554599016027187,
+            "rotationRadS": -69809.09066565442,
+            "meanCanonicalMomentum": 5.662089592470319e-25
+          },
+          {
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "meanRadius": 0.04568561314181229,
+            "temperatureEV": 6.747069320752915,
+            "rotationRadS": -44461.90631090749,
+            "meanCanonicalMomentum": -3.311678730843167e-24
+          }
+        ]
+      }
+    ],
+    "species": [
+      {
+        "massU": 40,
+        "chargeState": 1,
+        "injected": 8,
+        "active": 8,
+        "wall": 0,
+        "end": 0,
+        "source": 0,
+        "impacts": []
+      },
+      {
+        "massU": 84,
+        "chargeState": 1,
+        "injected": 8,
+        "active": 8,
+        "wall": 0,
+        "end": 0,
+        "source": 0,
+        "impacts": []
+      }
+    ],
+    "conservation": {
+      "initialEnergyJ": 0.006019405468124312,
+      "initialCanonicalMomentum": -3.9287868434857995e-9,
+      "energyScaleJ": 0.0075319015457855154,
+      "canonicalMomentumScale": 1.9997591936277822e-7,
+      "energyOutJ": 0,
+      "canonicalMomentumOut": 0,
+      "maxEnergyResidual": 1.2404185378173934e-9,
+      "maxMomentumResidual": 0.0010565473904813262,
+      "maxCorrectedMomentumResidual": 1.7391605733907267e-9,
+      "collisionTorque": -2.1128438355208202e-10,
+      "absoluteCellTorque": 6.604870164176361e-10,
+      "absolutePairTorque": 9.814180334045776e-10,
+      "normalizedAbsoluteCellTorque": 0.003302832753674908,
+      "normalizedAbsolutePairTorque": 0.004907681067459816,
+      "localityQuadraticVariationScale": 0.0013769969210114454
+    },
+    "collisions": {
+      "pairs": 31,
+      "maxVariance": 0.006228585612613801,
+      "largeAnglePairs": 0,
+      "unpairedIonSteps": 2,
+      "activeIonSteps": 64,
+      "maxCellDensityM3": 706858347057703300,
+      "maxCellOccupancy": 8,
+      "pairSeparationSquaredSumM2": 0.18971621833893212,
+      "maxPairSeparationM": 0.1503833096435031,
+      "pairRadialSeparationSquaredSumM2": 0.02068971725812842,
+      "maxPairRadialSeparationM": 0.07239981802763416
+    },
+    "regime": {
+      "debyeM": 0.000016622799640940616,
+      "particlesPerDebyeSphere": 19239.825112182785,
+      "coupling": 0.0004642422530382363,
+      "estimatedCoulombLog": 12.061962211711215,
+      "encounterMagnetization": 0.00032918439859274296,
+      "initialPeakDensityM3": 1000000000000000000
+    },
+    "regimeHistory": [
+      {
+        "time": 0,
+        "assessment": {
+          "status": "unresolved",
+          "reasons": [
+            "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+          ],
+          "reference": {
+            "debyeM": 0.000016622799640940616,
+            "debyePopulation": 19239.825112182785,
+            "maxCoupling": 0.0004642422530382363,
+            "minEstimatedCoulombLog": 12.061962211711215,
+            "maxEncounterMagnetization": 0.00032918439859274296,
+            "reasons": []
+          },
+          "referenceDensityM3": 1000000000000000000,
+          "referenceDensityKind": "analytic initial peak",
+          "observed": {
+            "occupiedCells": 3,
+            "resolvedCells": 0,
+            "unresolvedRepresentativeFraction": 1,
+            "minTemperatureEV": null,
+            "maxCoupling": null,
+            "minDebyePopulation": 22884.157315471344,
+            "minEstimatedCoulombLog": null,
+            "maxEncounterMagnetization": null
+          }
+        }
+      },
+      {
+        "time": 1e-7,
+        "assessment": {
+          "status": "unresolved",
+          "reasons": [
+            "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+          ],
+          "reference": {
+            "debyeM": 0.000016622799640940616,
+            "debyePopulation": 19239.825112182785,
+            "maxCoupling": 0.0004642422530382363,
+            "minEstimatedCoulombLog": 12.061962211711215,
+            "maxEncounterMagnetization": 0.00032918439859274296,
+            "reasons": []
+          },
+          "referenceDensityM3": 1000000000000000000,
+          "referenceDensityKind": "analytic initial peak",
+          "observed": {
+            "occupiedCells": 3,
+            "resolvedCells": 0,
+            "unresolvedRepresentativeFraction": 1,
+            "minTemperatureEV": null,
+            "maxCoupling": null,
+            "minDebyePopulation": 22884.157315471344,
+            "minEstimatedCoulombLog": null,
+            "maxEncounterMagnetization": null
+          }
+        }
+      },
+      {
+        "time": 2e-7,
+        "assessment": {
+          "status": "unresolved",
+          "reasons": [
+            "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+          ],
+          "reference": {
+            "debyeM": 0.000016622799640940616,
+            "debyePopulation": 19239.825112182785,
+            "maxCoupling": 0.0004642422530382363,
+            "minEstimatedCoulombLog": 12.061962211711215,
+            "maxEncounterMagnetization": 0.00032918439859274296,
+            "reasons": []
+          },
+          "referenceDensityM3": 1000000000000000000,
+          "referenceDensityKind": "analytic initial peak",
+          "observed": {
+            "occupiedCells": 4,
+            "resolvedCells": 0,
+            "unresolvedRepresentativeFraction": 1,
+            "minTemperatureEV": null,
+            "maxCoupling": null,
+            "minDebyePopulation": 22884.157315471344,
+            "minEstimatedCoulombLog": null,
+            "maxEncounterMagnetization": null
+          }
+        }
+      }
+    ],
+    "regimeSummary": {
+      "status": "unresolved",
+      "outsideSnapshots": 0,
+      "unresolvedSnapshots": 3,
+      "reasons": [
+        "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+      ]
+    },
+    "scatteringMethod": "takizuka-abe",
+    "spatialCollision": {
+      "method": "fixed",
+      "target": 32,
+      "maxDepth": 15,
+      "separationCoordinates": "x-y-z",
+      "sourceInterfacesFitted": false,
+      "initial": {
+        "occupiedCells": 3,
+        "representedInventory": 3015928947446201,
+        "empiricalDensitySquaredIntegral": 1.7340530126699768e+33,
+        "selfExcludedDensitySquaredIntegral": 1.466604973701167e+33,
+        "markerMeanCellDensityM3": 574964809478791360,
+        "minimumOccupancy": 2,
+        "maximumOccupancy": 8
+      },
+      "final": {
+        "occupiedCells": 4,
+        "representedInventory": 3015928947446201,
+        "empiricalDensitySquaredIntegral": 1.567987798471293e+33,
+        "selfExcludedDensitySquaredIntegral": 1.3000553994327838e+33,
+        "markerMeanCellDensityM3": 519902101738510140,
+        "minimumOccupancy": 1,
+        "maximumOccupancy": 8
+      }
+    },
+    "assumptions": [
+      "Sampled local Coulomb-regime assessment: unresolved. Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved.",
+      "Exploratory equal-weight prescribed-field multispecies kinetic model. No self-consistent electrons, potential, magnetic field, source circuit, instability or calibrated apparatus prediction.",
+      "Open finite initial pulse: uniform disk and finite axial slug at t=0, then absorbing source/wall/end. This is not continuous injection or steady throughput.",
+      "Density is inferred from active equal-weight representatives and exact cylinder-cut Cartesian cell volumes. Finite cell occupancy and spatially separated collision partners bias relaxation and inject measured numerical torque. Refine cells together with particle count.",
+      "Takizuka–Abe small-angle pair rotations preserve pair energy and linear momentum. Finite timestep approximates Landau scattering; large angular variances are reported without a relative-speed floor. Time/seed convergence is required.",
+      "Absolute pair-torque sums reveal cancellation but can grow under time refinement for stochastic impulses. The torque quadratic-variation scale is a diagnostic, not a confidence bound; raw signed Pθ drift remains the measured conservation error.",
+      "Sampling errors are correlated by collisions. Outlet fractions are descriptive counts; independent seed ensembles are required for uncertainty, not independent-ion Wilson purity bands.",
+      "Initial screening uses a conservative species-peak/charge-density bound and declared temperatures. Sampled local checks remove each species mean drift and require four representatives per present species. Sparse cells are unresolved; violations flag the run rather than modifying trajectories. This is not proof between sampled times. Electron temperature and supplied Coulomb logarithm remain prescribed.",
+      "Survivor flow/temperature/radius are conditional on remaining particles; a fitted rigid-rotation subtraction is a diagnostic, not a local thermodynamic temperature. Empty survivor populations are undefined.",
+      "Species-specific zero-canonical mean rotation is only an initial flow; thermal velocity gives a distribution of Pθ. Interspecies collisions exchange angular momentum; no thermostat forces species toward their separate effective-well Boltzmann profiles."
+    ]
+  },
+  "seedRun": {
+    "level": "tiny",
+    "seed": 42,
+    "config": {
+      "radius": 0.2,
+      "length": 0.6,
+      "magneticT": 0.06,
+      "voltage": 20,
+      "quadraticShape": 1.2,
+      "densityM3": 1000000000000000000,
+      "ionTemperatureEV": 5,
+      "electronTemperatureEV": 5,
+      "coulombLog": 10,
+      "particlesPerSpecies": 8,
+      "cellsAcross": 3,
+      "dt": 1e-7,
+      "duration": 2e-7,
+      "seed": 42,
+      "species": [
+        {
+          "massU": 40,
+          "chargeState": 1
+        },
+        {
+          "massU": 84,
+          "chargeState": 1
+        }
+      ],
+      "boundary": "open",
+      "initialState": "pulse",
+      "rotationMode": "zero-canonical",
+      "rotationRadS": -20000,
+      "beamEV": 5,
+      "sourceRadius": 0.08,
+      "pulseLengthFraction": 0.25,
+      "collisions": true
+    },
+    "sourceHash": "same",
+    "executionMode": "interactive",
+    "durationMs": 1.0807499999999948,
+    "status": "complete",
+    "observables": {
+      "A.fraction.active": 1,
+      "A.fraction.wall": 0,
+      "A.fraction.end": 0,
+      "A.fraction.source": 0,
+      "A.radius": 0.2595092052807844,
+      "A.temperature": 1.3554599016027187,
+      "A.angularTransfer": -0.0015036616633275052,
+      "A.impactTime.0.1": null,
+      "A.impactTime.0.5": null,
+      "A.impactTime.0.9": null,
+      "A.impactHamiltonianEV": null,
+      "A.cdf.0": 0.12499999999999999,
+      "A.cdf.1": 0.24999999999999997,
+      "A.cdf.2": 0.24999999999999997,
+      "A.cdf.3": 0.24999999999999997,
+      "A.cdf.4": 0.24999999999999997,
+      "A.cdf.5": 0.5,
+      "A.cdf.6": 0.625,
+      "A.cdf.7": 1,
+      "A.cdf.8": 1,
+      "A.cdf.9": 1,
+      "A.cdf.10": 1,
+      "A.cdf.11": 1,
+      "A.cdf.12": 1,
+      "A.cdf.13": 1,
+      "A.cdf.14": 1,
+      "A.cdf.15": 1,
+      "A.cdf.16": 1,
+      "A.cdf.17": 1,
+      "A.cdf.18": 1,
+      "A.cdf.19": 1,
+      "B.fraction.active": 1,
+      "B.fraction.wall": 0,
+      "B.fraction.end": 0,
+      "B.fraction.source": 0,
+      "B.radius": 0.22842806570906143,
+      "B.temperature": 6.747069320752915,
+      "B.angularTransfer": 0.0004471142728461852,
+      "B.impactTime.0.1": null,
+      "B.impactTime.0.5": null,
+      "B.impactTime.0.9": null,
+      "B.impactHamiltonianEV": null,
+      "B.cdf.0": 0,
+      "B.cdf.1": 0.12499999999999999,
+      "B.cdf.2": 0.25,
+      "B.cdf.3": 0.375,
+      "B.cdf.4": 0.375,
+      "B.cdf.5": 0.7500000000000001,
+      "B.cdf.6": 1,
+      "B.cdf.7": 1,
+      "B.cdf.8": 1,
+      "B.cdf.9": 1,
+      "B.cdf.10": 1,
+      "B.cdf.11": 1,
+      "B.cdf.12": 1,
+      "B.cdf.13": 1,
+      "B.cdf.14": 1,
+      "B.cdf.15": 1,
+      "B.cdf.16": 1,
+      "B.cdf.17": 1,
+      "B.cdf.18": 1,
+      "B.cdf.19": 1
+    },
+    "numericalGeometry": {
+      "baseCellWidthM": 0.13333333333333333,
+      "baseAxialCells": 5,
+      "baseAxialLengthM": 0.12,
+      "coordinates": "Cartesian",
+      "uniformColumnMeanRepresentativesPerFullBaseCell": 0.45270739368361346
+    },
+    "diagnostics": {
+      "maxRawMomentumResidual": 0.0010565473904813262,
+      "maxEnergyResidual": 1.2404185378173934e-9,
+      "unresolvedExposure": 1,
+      "outsideSnapshots": 0,
+      "unpairedExposure": 0.03125,
+      "particleSteps": 32
+    },
+    "raw": {
+      "species": [
+        {
+          "massU": 40,
+          "chargeState": 1,
+          "injected": 8,
+          "active": 8,
+          "wall": 0,
+          "end": 0,
+          "source": 0,
+          "impacts": []
+        },
+        {
+          "massU": 84,
+          "chargeState": 1,
+          "injected": 8,
+          "active": 8,
+          "wall": 0,
+          "end": 0,
+          "source": 0,
+          "impacts": []
+        }
+      ],
+      "history": [
+        {
+          "time": 0,
+          "energyResidual": 0,
+          "momentumResidual": 0,
+          "collisionTorque": 0,
+          "species": [
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.051872012068451705,
+              "temperatureEV": 1.4046416971445759,
+              "rotationRadS": -68905.9027081064,
+              "meanCanonicalMomentum": 7.656142693682154e-25
+            },
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.04554659465339839,
+              "temperatureEV": 6.7412277354990255,
+              "rotationRadS": -44693.46936330984,
+              "meanCanonicalMomentum": -3.370971963098089e-24
+            }
+          ]
+        },
+        {
+          "time": 1e-7,
+          "energyResidual": -6.243273043597221e-10,
+          "momentumResidual": -0.0009386595168613366,
+          "collisionTorque": -0.0009386603652131712,
+          "species": [
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.051887749078432785,
+              "temperatureEV": 1.3976335229211285,
+              "rotationRadS": -69194.45959917243,
+              "meanCanonicalMomentum": 7.020934401103828e-25
+            },
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.04561262582956992,
+              "temperatureEV": 6.724063298009736,
+              "rotationRadS": -44853.41158045876,
+              "meanCanonicalMomentum": -3.431929729406583e-24
+            }
+          ]
+        },
+        {
+          "time": 2e-7,
+          "energyResidual": -1.2404185378173934e-9,
+          "momentumResidual": -0.0010565473904813262,
+          "collisionTorque": -0.0010565491296418996,
+          "species": [
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.05190184105615688,
+              "temperatureEV": 1.3554599016027187,
+              "rotationRadS": -69809.09066565442,
+              "meanCanonicalMomentum": 5.662089592470319e-25
+            },
+            {
+              "active": 8,
+              "wall": 0,
+              "end": 0,
+              "source": 0,
+              "meanRadius": 0.04568561314181229,
+              "temperatureEV": 6.747069320752915,
+              "rotationRadS": -44461.90631090749,
+              "meanCanonicalMomentum": -3.311678730843167e-24
+            }
+          ]
+        }
+      ],
+      "conservation": {
+        "initialEnergyJ": 0.006019405468124312,
+        "initialCanonicalMomentum": -3.9287868434857995e-9,
+        "energyScaleJ": 0.0075319015457855154,
+        "canonicalMomentumScale": 1.9997591936277822e-7,
+        "energyOutJ": 0,
+        "canonicalMomentumOut": 0,
+        "maxEnergyResidual": 1.2404185378173934e-9,
+        "maxMomentumResidual": 0.0010565473904813262,
+        "maxCorrectedMomentumResidual": 1.7391605733907267e-9,
+        "collisionTorque": -2.1128438355208202e-10,
+        "absoluteCellTorque": 6.604870164176361e-10,
+        "absolutePairTorque": 9.814180334045776e-10,
+        "normalizedAbsoluteCellTorque": 0.003302832753674908,
+        "normalizedAbsolutePairTorque": 0.004907681067459816,
+        "localityQuadraticVariationScale": 0.0013769969210114454
+      },
+      "collisions": {
+        "pairs": 31,
+        "maxVariance": 0.006228585612613801,
+        "largeAnglePairs": 0,
+        "unpairedIonSteps": 2,
+        "activeIonSteps": 64,
+        "maxCellDensityM3": 706858347057703300,
+        "maxCellOccupancy": 8,
+        "pairSeparationSquaredSumM2": 0.18971621833893212,
+        "maxPairSeparationM": 0.1503833096435031,
+        "pairRadialSeparationSquaredSumM2": 0.02068971725812842,
+        "maxPairRadialSeparationM": 0.07239981802763416
+      },
+      "regimeSummary": {
+        "status": "unresolved",
+        "outsideSnapshots": 0,
+        "unresolvedSnapshots": 3,
+        "reasons": [
+          "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+        ]
+      },
+      "regimeHistory": [
+        {
+          "time": 0,
+          "assessment": {
+            "status": "unresolved",
+            "reasons": [
+              "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+            ],
+            "reference": {
+              "debyeM": 0.000016622799640940616,
+              "debyePopulation": 19239.825112182785,
+              "maxCoupling": 0.0004642422530382363,
+              "minEstimatedCoulombLog": 12.061962211711215,
+              "maxEncounterMagnetization": 0.00032918439859274296,
+              "reasons": []
+            },
+            "referenceDensityM3": 1000000000000000000,
+            "referenceDensityKind": "analytic initial peak",
+            "observed": {
+              "occupiedCells": 3,
+              "resolvedCells": 0,
+              "unresolvedRepresentativeFraction": 1,
+              "minTemperatureEV": null,
+              "maxCoupling": null,
+              "minDebyePopulation": 22884.157315471344,
+              "minEstimatedCoulombLog": null,
+              "maxEncounterMagnetization": null
+            }
+          }
+        },
+        {
+          "time": 1e-7,
+          "assessment": {
+            "status": "unresolved",
+            "reasons": [
+              "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+            ],
+            "reference": {
+              "debyeM": 0.000016622799640940616,
+              "debyePopulation": 19239.825112182785,
+              "maxCoupling": 0.0004642422530382363,
+              "minEstimatedCoulombLog": 12.061962211711215,
+              "maxEncounterMagnetization": 0.00032918439859274296,
+              "reasons": []
+            },
+            "referenceDensityM3": 1000000000000000000,
+            "referenceDensityKind": "analytic initial peak",
+            "observed": {
+              "occupiedCells": 3,
+              "resolvedCells": 0,
+              "unresolvedRepresentativeFraction": 1,
+              "minTemperatureEV": null,
+              "maxCoupling": null,
+              "minDebyePopulation": 22884.157315471344,
+              "minEstimatedCoulombLog": null,
+              "maxEncounterMagnetization": null
+            }
+          }
+        },
+        {
+          "time": 2e-7,
+          "assessment": {
+            "status": "unresolved",
+            "reasons": [
+              "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+            ],
+            "reference": {
+              "debyeM": 0.000016622799640940616,
+              "debyePopulation": 19239.825112182785,
+              "maxCoupling": 0.0004642422530382363,
+              "minEstimatedCoulombLog": 12.061962211711215,
+              "maxEncounterMagnetization": 0.00032918439859274296,
+              "reasons": []
+            },
+            "referenceDensityM3": 1000000000000000000,
+            "referenceDensityKind": "analytic initial peak",
+            "observed": {
+              "occupiedCells": 4,
+              "resolvedCells": 0,
+              "unresolvedRepresentativeFraction": 1,
+              "minTemperatureEV": null,
+              "maxCoupling": null,
+              "minDebyePopulation": 22884.157315471344,
+              "minEstimatedCoulombLog": null,
+              "maxEncounterMagnetization": null
+            }
+          }
+        }
+      ],
+      "spatialCollision": {
+        "method": "fixed",
+        "target": 32,
+        "maxDepth": 15,
+        "separationCoordinates": "x-y-z",
+        "sourceInterfacesFitted": false,
+        "initial": {
+          "occupiedCells": 3,
+          "representedInventory": 3015928947446201,
+          "empiricalDensitySquaredIntegral": 1.7340530126699768e+33,
+          "selfExcludedDensitySquaredIntegral": 1.466604973701167e+33,
+          "markerMeanCellDensityM3": 574964809478791360,
+          "minimumOccupancy": 2,
+          "maximumOccupancy": 8
+        },
+        "final": {
+          "occupiedCells": 4,
+          "representedInventory": 3015928947446201,
+          "empiricalDensitySquaredIntegral": 1.567987798471293e+33,
+          "selfExcludedDensitySquaredIntegral": 1.3000553994327838e+33,
+          "markerMeanCellDensityM3": 519902101738510140,
+          "minimumOccupancy": 1,
+          "maximumOccupancy": 8
+        }
+      },
+      "radialDensity": [
+        {
+          "label": "A",
+          "x": [
+            0.005,
+            0.015000000000000003,
+            0.025,
+            0.035,
+            0.045,
+            0.05500000000000001,
+            0.065,
+            0.075,
+            0.085,
+            0.095,
+            0.10500000000000001,
+            0.11500000000000002,
+            0.125,
+            0.135,
+            0.14500000000000002,
+            0.155,
+            0.165,
+            0.175,
+            0.185,
+            0.195
+          ],
+          "y": [
+            999999999999999600,
+            333333333333333250,
+            0,
+            0,
+            0,
+            181818181818181800,
+            76923076923076910,
+            199999999999999970,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "xLabel": "Radius (m)",
+          "yLabel": "Final axially averaged active density (m⁻³)"
+        },
+        {
+          "label": "B",
+          "x": [
+            0.005,
+            0.015000000000000003,
+            0.025,
+            0.035,
+            0.045,
+            0.05500000000000001,
+            0.065,
+            0.075,
+            0.085,
+            0.095,
+            0.10500000000000001,
+            0.11500000000000002,
+            0.125,
+            0.135,
+            0.14500000000000002,
+            0.155,
+            0.165,
+            0.175,
+            0.185,
+            0.195
+          ],
+          "y": [
+            0,
+            333333333333333250,
+            199999999999999970,
+            142857142857142820,
+            0,
+            272727272727272700,
+            153846153846153820,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "xLabel": "Radius (m)",
+          "yLabel": "Final axially averaged active density (m⁻³)"
+        }
+      ]
+    }
+  },
+  "plan": {
+    "id": "rng",
+    "description": "small provenance test",
+    "seeds": [
+      11,
+      22
+    ],
+    "levels": [
+      {
+        "id": "tiny",
+        "config": {
+          "radius": 0.2,
+          "length": 0.6,
+          "magneticT": 0.06,
+          "voltage": 20,
+          "quadraticShape": 1.2,
+          "densityM3": 1000000000000000000,
+          "ionTemperatureEV": 5,
+          "electronTemperatureEV": 5,
+          "coulombLog": 10,
+          "particlesPerSpecies": 8,
+          "cellsAcross": 3,
+          "dt": 1e-7,
+          "duration": 2e-7,
+          "seed": 42,
+          "species": [
+            {
+              "massU": 40,
+              "chargeState": 1
+            },
+            {
+              "massU": 84,
+              "chargeState": 1
+            }
+          ],
+          "boundary": "open",
+          "initialState": "pulse",
+          "rotationMode": "zero-canonical",
+          "rotationRadS": -20000,
+          "beamEV": 5,
+          "sourceRadius": 0.08,
+          "pulseLengthFraction": 0.25,
+          "collisions": true
+        }
+      }
+    ],
+    "comparisons": [],
+    "tolerances": {
+      "fraction": 0.01,
+      "radiusFraction": 0.01,
+      "temperatureEV": 0.1,
+      "timeFraction": 0.02,
+      "normalizedAngularMomentum": 0.001,
+      "maxRawMomentumResidual": 0.001,
+      "maxUnresolvedExposure": 0.01,
+      "minimumSeeds": 2
+    }
+  },
+  "runs": [
+    {
+      "level": "tiny",
+      "seed": 11,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 8,
+        "cellsAcross": 3,
+        "dt": 1e-7,
+        "duration": 2e-7,
+        "seed": 11,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true
+      },
+      "sourceHash": "old",
+      "executionMode": "interactive",
+      "durationMs": 5.8161249999999995,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 1,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0,
+        "A.fraction.source": 0,
+        "A.radius": 0.27903124646748934,
+        "A.temperature": 3.630333063095932,
+        "A.angularTransfer": 0.0003772662738984335,
+        "A.impactTime.0.1": null,
+        "A.impactTime.0.5": null,
+        "A.impactTime.0.9": null,
+        "A.impactHamiltonianEV": null,
+        "A.cdf.0": 0,
+        "A.cdf.1": 0.12499999999999999,
+        "A.cdf.2": 0.12499999999999999,
+        "A.cdf.3": 0.12499999999999999,
+        "A.cdf.4": 0.12499999999999999,
+        "A.cdf.5": 0.5000000000000001,
+        "A.cdf.6": 0.8750000000000002,
+        "A.cdf.7": 1.0000000000000002,
+        "A.cdf.8": 1.0000000000000002,
+        "A.cdf.9": 1.0000000000000002,
+        "A.cdf.10": 1.0000000000000002,
+        "A.cdf.11": 1.0000000000000002,
+        "A.cdf.12": 1.0000000000000002,
+        "A.cdf.13": 1.0000000000000002,
+        "A.cdf.14": 1.0000000000000002,
+        "A.cdf.15": 1.0000000000000002,
+        "A.cdf.16": 1.0000000000000002,
+        "A.cdf.17": 1.0000000000000002,
+        "A.cdf.18": 1.0000000000000002,
+        "A.cdf.19": 1.0000000000000002,
+        "B.fraction.active": 1,
+        "B.fraction.wall": 0,
+        "B.fraction.end": 0,
+        "B.fraction.source": 0,
+        "B.radius": 0.29790100744300646,
+        "B.temperature": 4.3317793503993745,
+        "B.angularTransfer": 0.0015656399184756844,
+        "B.impactTime.0.1": null,
+        "B.impactTime.0.5": null,
+        "B.impactTime.0.9": null,
+        "B.impactHamiltonianEV": null,
+        "B.cdf.0": 0,
+        "B.cdf.1": 0,
+        "B.cdf.2": 0.25000000000000006,
+        "B.cdf.3": 0.25000000000000006,
+        "B.cdf.4": 0.25000000000000006,
+        "B.cdf.5": 0.25000000000000006,
+        "B.cdf.6": 0.6250000000000002,
+        "B.cdf.7": 1.0000000000000004,
+        "B.cdf.8": 1.0000000000000004,
+        "B.cdf.9": 1.0000000000000004,
+        "B.cdf.10": 1.0000000000000004,
+        "B.cdf.11": 1.0000000000000004,
+        "B.cdf.12": 1.0000000000000004,
+        "B.cdf.13": 1.0000000000000004,
+        "B.cdf.14": 1.0000000000000004,
+        "B.cdf.15": 1.0000000000000004,
+        "B.cdf.16": 1.0000000000000004,
+        "B.cdf.17": 1.0000000000000004,
+        "B.cdf.18": 1.0000000000000004,
+        "B.cdf.19": 1.0000000000000004
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.13333333333333333,
+        "baseAxialCells": 5,
+        "baseAxialLengthM": 0.12,
+        "coordinates": "Cartesian",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": 0.45270739368361346
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0019429061923740814,
+        "maxEnergyResidual": 5.719735092649335e-9,
+        "unresolvedExposure": 0.140625,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03125,
+        "particleSteps": 32
+      },
+      "raw": {
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1,
+            "injected": 8,
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "impacts": []
+          },
+          {
+            "massU": 84,
+            "chargeState": 1,
+            "injected": 8,
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "impacts": []
+          }
+        ],
+        "history": [
+          {
+            "time": 0,
+            "energyResidual": 0,
+            "momentumResidual": 0,
+            "collisionTorque": 0,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.0557301898396465,
+                "temperatureEV": 3.598834308882915,
+                "rotationRadS": -107742.92641926892,
+                "meanCanonicalMomentum": -8.033179085930077e-24
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.05961339682730909,
+                "temperatureEV": 4.293190550588888,
+                "rotationRadS": -36672.49043110207,
+                "meanCanonicalMomentum": -1.2203091158141387e-24
+              }
+            ]
+          },
+          {
+            "time": 1e-7,
+            "energyResidual": -2.7952237459235805e-9,
+            "momentumResidual": -0.00017528581978808509,
+            "collisionTorque": -0.0001752883206346932,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.05576580414876062,
+                "temperatureEV": 3.612024758299889,
+                "rotationRadS": -107655.63700279394,
+                "meanCanonicalMomentum": -8.042497202521225e-24
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.05959686309175759,
+                "temperatureEV": 4.2649789449442235,
+                "rotationRadS": -36698.79778511896,
+                "meanCanonicalMomentum": -1.2356829661655992e-24
+              }
+            ]
+          },
+          {
+            "time": 2e-7,
+            "energyResidual": -5.719735092649335e-9,
+            "momentumResidual": 0.0019429061923740814,
+            "collisionTorque": 0.0019429010139705763,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.05580624929349787,
+                "temperatureEV": 3.630333063095932,
+                "rotationRadS": -107246.2231728339,
+                "meanCanonicalMomentum": -7.980034762134096e-24
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.05958020148860129,
+                "temperatureEV": 4.3317793503993745,
+                "rotationRadS": -36269.82270493599,
+                "meanCanonicalMomentum": -9.997623017149159e-25
+              }
+            ]
+          }
+        ],
+        "conservation": {
+          "initialEnergyJ": 0.0072086386396052644,
+          "initialCanonicalMomentum": -1.3953931466246134e-8,
+          "energyScaleJ": 0.009142686404934304,
+          "canonicalMomentumScale": 2.1242225401242938e-7,
+          "energyOutJ": 0,
+          "canonicalMomentumOut": 0,
+          "maxEnergyResidual": 5.719735092649335e-9,
+          "maxMomentumResidual": 0.0019429061923740814,
+          "maxCorrectedMomentumResidual": 5.1784035049763795e-9,
+          "collisionTorque": 4.127154127106644e-10,
+          "absoluteCellTorque": 1.0502336760258836e-9,
+          "absolutePairTorque": 1.3885743677595794e-9,
+          "normalizedAbsoluteCellTorque": 0.004944084982566995,
+          "normalizedAbsolutePairTorque": 0.006536859210986106,
+          "localityQuadraticVariationScale": 0.0023258996486706257
+        },
+        "collisions": {
+          "pairs": 31,
+          "maxVariance": 0.0015185219275342865,
+          "largeAnglePairs": 0,
+          "unpairedIonSteps": 2,
+          "activeIonSteps": 64,
+          "maxCellDensityM3": 1237002107350980900,
+          "maxCellOccupancy": 14,
+          "pairSeparationSquaredSumM2": 0.26812154311790165,
+          "maxPairSeparationM": 0.16246252991906845,
+          "pairRadialSeparationSquaredSumM2": 0.019364469769490356,
+          "maxPairRadialSeparationM": 0.05032634927840435
+        },
+        "regimeSummary": {
+          "status": "unresolved",
+          "outsideSnapshots": 0,
+          "unresolvedSnapshots": 3,
+          "reasons": [
+            "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+          ]
+        },
+        "regimeHistory": [
+          {
+            "time": 0,
+            "assessment": {
+              "status": "unresolved",
+              "reasons": [
+                "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+              ],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 3,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0.1875,
+                "minTemperatureEV": 6.351842042230771,
+                "maxCoupling": 0.00038271624663764603,
+                "minDebyePopulation": 17951.809954417764,
+                "minEstimatedCoulombLog": 12.231977743079064,
+                "maxEncounterMagnetization": 0.00020762512396847166
+              }
+            }
+          },
+          {
+            "time": 1e-7,
+            "assessment": {
+              "status": "unresolved",
+              "reasons": [
+                "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+              ],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 2,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0.125,
+                "minTemperatureEV": 6.068296854325239,
+                "maxCoupling": 0.00041061801409946754,
+                "minDebyePopulation": 17298.79692000476,
+                "minEstimatedCoulombLog": 12.149256882342945,
+                "maxEncounterMagnetization": 0.00020477159822571083
+              }
+            }
+          },
+          {
+            "time": 2e-7,
+            "assessment": {
+              "status": "unresolved",
+              "reasons": [
+                "Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved."
+              ],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 2,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0.125,
+                "minTemperatureEV": 6.101697328449253,
+                "maxCoupling": 0.0004083703056969485,
+                "minDebyePopulation": 17298.79692000476,
+                "minEstimatedCoulombLog": 12.15474588381377,
+                "maxEncounterMagnetization": 0.00020491869873994013
+              }
+            }
+          }
+        ],
+        "spatialCollision": {
+          "method": "fixed",
+          "target": 32,
+          "maxDepth": 15,
+          "separationCoordinates": "x-y-z",
+          "sourceInterfacesFitted": false,
+          "initial": {
+            "occupiedCells": 3,
+            "representedInventory": 3015928947446201,
+            "empiricalDensitySquaredIntegral": 2.898446952339561e+33,
+            "selfExcludedDensitySquaredIntegral": 2.6314832734404493e+33,
+            "markerMeanCellDensityM3": 961046166155167400,
+            "minimumOccupancy": 1,
+            "maximumOccupancy": 13
+          },
+          "final": {
+            "occupiedCells": 2,
+            "representedInventory": 3015928947446201,
+            "empiricalDensitySquaredIntegral": 3.330991485367658e+33,
+            "selfExcludedDensitySquaredIntegral": 3.064512166538245e+33,
+            "markerMeanCellDensityM3": 1104466167277661400,
+            "minimumOccupancy": 2,
+            "maximumOccupancy": 14
+          }
+        },
+        "radialDensity": [
+          {
+            "label": "A",
+            "x": [
+              0.005,
+              0.015000000000000003,
+              0.025,
+              0.035,
+              0.045,
+              0.05500000000000001,
+              0.065,
+              0.075,
+              0.085,
+              0.095,
+              0.10500000000000001,
+              0.11500000000000002,
+              0.125,
+              0.135,
+              0.14500000000000002,
+              0.155,
+              0.165,
+              0.175,
+              0.185,
+              0.195
+            ],
+            "y": [
+              0,
+              333333333333333250,
+              0,
+              0,
+              0,
+              272727272727272700,
+              230769230769230750,
+              66666666666666650,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "xLabel": "Radius (m)",
+            "yLabel": "Final axially averaged active density (m⁻³)"
+          },
+          {
+            "label": "B",
+            "x": [
+              0.005,
+              0.015000000000000003,
+              0.025,
+              0.035,
+              0.045,
+              0.05500000000000001,
+              0.065,
+              0.075,
+              0.085,
+              0.095,
+              0.10500000000000001,
+              0.11500000000000002,
+              0.125,
+              0.135,
+              0.14500000000000002,
+              0.155,
+              0.165,
+              0.175,
+              0.185,
+              0.195
+            ],
+            "y": [
+              0,
+              0,
+              399999999999999940,
+              0,
+              0,
+              0,
+              230769230769230750,
+              199999999999999970,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "xLabel": "Radius (m)",
+            "yLabel": "Final axially averaged active density (m⁻³)"
+          }
+        ]
+      }
+    },
+    {
+      "level": "tiny",
+      "seed": 22,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 8,
+        "cellsAcross": 3,
+        "dt": 1e-7,
+        "duration": 2e-7,
+        "seed": 22,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true
+      },
+      "sourceHash": "old",
+      "executionMode": "interactive",
+      "durationMs": 1.5107500000000016,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 1,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0,
+        "A.fraction.source": 0,
+        "A.radius": 0.21563843458129925,
+        "A.temperature": 4.102008490725832,
+        "A.angularTransfer": 0.0009514928759645273,
+        "A.impactTime.0.1": null,
+        "A.impactTime.0.5": null,
+        "A.impactTime.0.9": null,
+        "A.impactHamiltonianEV": null,
+        "A.cdf.0": 0.12499999999999999,
+        "A.cdf.1": 0.24999999999999997,
+        "A.cdf.2": 0.5,
+        "A.cdf.3": 0.5,
+        "A.cdf.4": 0.5,
+        "A.cdf.5": 0.625,
+        "A.cdf.6": 0.75,
+        "A.cdf.7": 1,
+        "A.cdf.8": 1,
+        "A.cdf.9": 1,
+        "A.cdf.10": 1,
+        "A.cdf.11": 1,
+        "A.cdf.12": 1,
+        "A.cdf.13": 1,
+        "A.cdf.14": 1,
+        "A.cdf.15": 1,
+        "A.cdf.16": 1,
+        "A.cdf.17": 1,
+        "A.cdf.18": 1,
+        "A.cdf.19": 1,
+        "B.fraction.active": 1,
+        "B.fraction.wall": 0,
+        "B.fraction.end": 0,
+        "B.fraction.source": 0,
+        "B.radius": 0.3046246672146569,
+        "B.temperature": 4.059523918468693,
+        "B.angularTransfer": 0.0029046918790089317,
+        "B.impactTime.0.1": null,
+        "B.impactTime.0.5": null,
+        "B.impactTime.0.9": null,
+        "B.impactHamiltonianEV": null,
+        "B.cdf.0": 0,
+        "B.cdf.1": 0,
+        "B.cdf.2": 0,
+        "B.cdf.3": 0,
+        "B.cdf.4": 0.12500000000000003,
+        "B.cdf.5": 0.5000000000000001,
+        "B.cdf.6": 0.8750000000000002,
+        "B.cdf.7": 1.0000000000000002,
+        "B.cdf.8": 1.0000000000000002,
+        "B.cdf.9": 1.0000000000000002,
+        "B.cdf.10": 1.0000000000000002,
+        "B.cdf.11": 1.0000000000000002,
+        "B.cdf.12": 1.0000000000000002,
+        "B.cdf.13": 1.0000000000000002,
+        "B.cdf.14": 1.0000000000000002,
+        "B.cdf.15": 1.0000000000000002,
+        "B.cdf.16": 1.0000000000000002,
+        "B.cdf.17": 1.0000000000000002,
+        "B.cdf.18": 1.0000000000000002,
+        "B.cdf.19": 1.0000000000000002
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.13333333333333333,
+        "baseAxialCells": 5,
+        "baseAxialLengthM": 0.12,
+        "coordinates": "Cartesian",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": 0.45270739368361346
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.003856184754973447,
+        "maxEnergyResidual": 1.8057122389568868e-9,
+        "unresolvedExposure": 0,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0,
+        "particleSteps": 32
+      },
+      "raw": {
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1,
+            "injected": 8,
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "impacts": []
+          },
+          {
+            "massU": 84,
+            "chargeState": 1,
+            "injected": 8,
+            "active": 8,
+            "wall": 0,
+            "end": 0,
+            "source": 0,
+            "impacts": []
+          }
+        ],
+        "history": [
+          {
+            "time": 0,
+            "energyResidual": 0,
+            "momentumResidual": 0,
+            "collisionTorque": 0,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.04329600842579851,
+                "temperatureEV": 3.9919051684997626,
+                "rotationRadS": -72553.9274526737,
+                "meanCanonicalMomentum": -3.09660462640174e-26
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.061116100473157256,
+                "temperatureEV": 4.044617868904161,
+                "rotationRadS": -63471.29338559155,
+                "meanCanonicalMomentum": -1.5301112197452998e-23
+              }
+            ]
+          },
+          {
+            "time": 1e-7,
+            "energyResidual": 9.334585152247848e-10,
+            "momentumResidual": 0.0013614202655492637,
+            "collisionTorque": 0.0013614233546576026,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.04320917429403338,
+                "temperatureEV": 4.062323998704128,
+                "rotationRadS": -72024.20532631798,
+                "meanCanonicalMomentum": 5.517184857041388e-26
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.06101724121485222,
+                "temperatureEV": 4.019986568815251,
+                "rotationRadS": -63359.56353143336,
+                "meanCanonicalMomentum": -1.5194738159406936e-23
+              }
+            ]
+          },
+          {
+            "time": 2e-7,
+            "energyResidual": 1.8057122389568868e-9,
+            "momentumResidual": 0.003856184754973447,
+            "collisionTorque": 0.0038561907436737426,
+            "species": [
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.04312768691625985,
+                "temperatureEV": 4.102008490725832,
+                "rotationRadS": -71723.5645939996,
+                "meanCanonicalMomentum": 1.0358001369201615e-25
+              },
+              {
+                "active": 8,
+                "wall": 0,
+                "end": 0,
+                "source": 0,
+                "meanRadius": 0.06092493344293139,
+                "temperatureEV": 4.059523918468693,
+                "rotationRadS": -62862.7891705737,
+                "meanCanonicalMomentum": -1.4890373601737532e-23
+              }
+            ]
+          }
+        ],
+        "conservation": {
+          "initialEnergyJ": 0.006150142188052137,
+          "initialCanonicalMomentum": -2.3120229299868127e-8,
+          "energyScaleJ": 0.007803995704249471,
+          "canonicalMomentumScale": 2.132340489543306e-7,
+          "energyOutJ": 0,
+          "canonicalMomentumOut": 0,
+          "maxEnergyResidual": 1.8057122389568868e-9,
+          "maxMomentumResidual": 0.003856184754973447,
+          "maxCorrectedMomentumResidual": 5.988700295715483e-9,
+          "collisionTorque": 8.222711658137633e-10,
+          "absoluteCellTorque": 8.222711658137633e-10,
+          "absolutePairTorque": 1.4160421340774317e-9,
+          "normalizedAbsoluteCellTorque": 0.0038561907436737426,
+          "normalizedAbsolutePairTorque": 0.006640788096561035,
+          "localityQuadraticVariationScale": 0.0019638070020354605
+        },
+        "collisions": {
+          "pairs": 32,
+          "maxVariance": 0.08506737630892369,
+          "largeAnglePairs": 0,
+          "unpairedIonSteps": 0,
+          "activeIonSteps": 64,
+          "maxCellDensityM3": 1413716694115406600,
+          "maxCellOccupancy": 16,
+          "pairSeparationSquaredSumM2": 0.29734914694493675,
+          "maxPairSeparationM": 0.1491519963019187,
+          "pairRadialSeparationSquaredSumM2": 0.025280338497777777,
+          "maxPairRadialSeparationM": 0.06275236746430449
+        },
+        "regimeSummary": {
+          "status": "within-supported-domain",
+          "outsideSnapshots": 0,
+          "unresolvedSnapshots": 0,
+          "reasons": []
+        },
+        "regimeHistory": [
+          {
+            "time": 0,
+            "assessment": {
+              "status": "within-supported-domain",
+              "reasons": [],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 1,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0,
+                "minTemperatureEV": 6.158879876333879,
+                "maxCoupling": 0.0004229935367043446,
+                "minDebyePopulation": 16181.542819509526,
+                "minEstimatedCoulombLog": 12.097308127214662,
+                "maxEncounterMagnetization": 0.00021849180984563545
+              }
+            }
+          },
+          {
+            "time": 1e-7,
+            "assessment": {
+              "status": "within-supported-domain",
+              "reasons": [],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 1,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0,
+                "minTemperatureEV": 6.203707901719585,
+                "maxCoupling": 0.00041993698322023937,
+                "minDebyePopulation": 16181.542819509526,
+                "minEstimatedCoulombLog": 12.104560366416962,
+                "maxEncounterMagnetization": 0.000218265847093861
+              }
+            }
+          },
+          {
+            "time": 2e-7,
+            "assessment": {
+              "status": "within-supported-domain",
+              "reasons": [],
+              "reference": {
+                "debyeM": 0.000016622799640940616,
+                "debyePopulation": 19239.825112182785,
+                "maxCoupling": 0.0004642422530382363,
+                "minEstimatedCoulombLog": 12.061962211711215,
+                "maxEncounterMagnetization": 0.00032918439859274296,
+                "reasons": []
+              },
+              "referenceDensityM3": 1000000000000000000,
+              "referenceDensityKind": "analytic initial peak",
+              "observed": {
+                "occupiedCells": 1,
+                "resolvedCells": 1,
+                "unresolvedRepresentativeFraction": 0,
+                "minTemperatureEV": 6.244105710720278,
+                "maxCoupling": 0.00041722009551423323,
+                "minDebyePopulation": 16181.542819509526,
+                "minEstimatedCoulombLog": 12.11105113693919,
+                "maxEncounterMagnetization": 0.00021818393784828741
+              }
+            }
+          }
+        ],
+        "spatialCollision": {
+          "method": "fixed",
+          "target": 32,
+          "maxDepth": 15,
+          "separationCoordinates": "x-y-z",
+          "sourceInterfacesFitted": false,
+          "initial": {
+            "occupiedCells": 1,
+            "representedInventory": 3015928947446201,
+            "empiricalDensitySquaredIntegral": 4.2636691012706015e+33,
+            "selfExcludedDensitySquaredIntegral": 3.9971897824411886e+33,
+            "markerMeanCellDensityM3": 1413716694115406600,
+            "minimumOccupancy": 16,
+            "maximumOccupancy": 16
+          },
+          "final": {
+            "occupiedCells": 1,
+            "representedInventory": 3015928947446201,
+            "empiricalDensitySquaredIntegral": 4.2636691012706015e+33,
+            "selfExcludedDensitySquaredIntegral": 3.9971897824411886e+33,
+            "markerMeanCellDensityM3": 1413716694115406600,
+            "minimumOccupancy": 16,
+            "maximumOccupancy": 16
+          }
+        },
+        "radialDensity": [
+          {
+            "label": "A",
+            "x": [
+              0.005,
+              0.015000000000000003,
+              0.025,
+              0.035,
+              0.045,
+              0.05500000000000001,
+              0.065,
+              0.075,
+              0.085,
+              0.095,
+              0.10500000000000001,
+              0.11500000000000002,
+              0.125,
+              0.135,
+              0.14500000000000002,
+              0.155,
+              0.165,
+              0.175,
+              0.185,
+              0.195
+            ],
+            "y": [
+              999999999999999600,
+              333333333333333250,
+              399999999999999940,
+              0,
+              0,
+              90909090909090900,
+              76923076923076910,
+              133333333333333300,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "xLabel": "Radius (m)",
+            "yLabel": "Final axially averaged active density (m⁻³)"
+          },
+          {
+            "label": "B",
+            "x": [
+              0.005,
+              0.015000000000000003,
+              0.025,
+              0.035,
+              0.045,
+              0.05500000000000001,
+              0.065,
+              0.075,
+              0.085,
+              0.095,
+              0.10500000000000001,
+              0.11500000000000002,
+              0.125,
+              0.135,
+              0.14500000000000002,
+              0.155,
+              0.165,
+              0.175,
+              0.185,
+              0.195
+            ],
+            "y": [
+              0,
+              0,
+              0,
+              0,
+              111111111111111090,
+              272727272727272700,
+              230769230769230750,
+              66666666666666650,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "xLabel": "Radius (m)",
+            "yLabel": "Final axially averaged active density (m⁻³)"
+          }
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "status": "fail",
+    "checks": [
+      {
+        "name": "executed source identity",
+        "status": "pass",
+        "reason": "Every supplied run must match the declared executed-source hash."
+      },
+      {
+        "name": "tiny: sampled local coverage",
+        "status": "unknown",
+        "reason": "Local representative coverage is absent or exceeds the declared unresolved-exposure budget."
+      },
+      {
+        "name": "tiny: raw angular-momentum budget",
+        "status": "fail",
+        "reason": "Maximum raw residual is compared with the declared positive-scale diagnostic budget, not the torque-corrected ledger.",
+        "details": [
+          0.0019429061923740814,
+          0.003856184754973447
+        ]
+      },
+      {
+        "name": "timestep: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "particle: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "spatial: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "alignment: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "orientation: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "effect versus numerical error",
+        "status": "unknown",
+        "reason": "Collision-on/off differences are reported separately; this matrix does not establish a bound on continuum bias relative to the physical effect."
+      }
+    ],
+    "summaries": {
+      "tiny": {
+        "A.fraction.active": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "A.fraction.wall": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "A.fraction.end": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "A.fraction.source": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "A.radius": {
+          "n": 2,
+          "mean": 0.2473348405243943,
+          "standardError": 0.03169640594309504,
+          "halfWidth95": 0.40274103167618397
+        },
+        "A.temperature": {
+          "n": 2,
+          "mean": 3.8661707769108817,
+          "standardError": 0.2358377138149501,
+          "halfWidth95": 2.9966023384640885
+        },
+        "A.angularTransfer": {
+          "n": 2,
+          "mean": 0.0006643795749314805,
+          "standardError": 0.0002871133010330469,
+          "halfWidth95": 0.0036481204611526056
+        },
+        "A.impactTime.0.1": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "A.impactTime.0.5": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "A.impactTime.0.9": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "A.impactHamiltonianEV": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "A.cdf.0": {
+          "n": 2,
+          "mean": 0.06249999999999999,
+          "standardError": 0.06249999999999999,
+          "halfWidth95": 0.7941378124999999
+        },
+        "A.cdf.1": {
+          "n": 2,
+          "mean": 0.18749999999999997,
+          "standardError": 0.06249999999999999,
+          "halfWidth95": 0.7941378124999999
+        },
+        "A.cdf.2": {
+          "n": 2,
+          "mean": 0.3125,
+          "standardError": 0.1875,
+          "halfWidth95": 2.3824134375000003
+        },
+        "A.cdf.3": {
+          "n": 2,
+          "mean": 0.3125,
+          "standardError": 0.1875,
+          "halfWidth95": 2.3824134375000003
+        },
+        "A.cdf.4": {
+          "n": 2,
+          "mean": 0.3125,
+          "standardError": 0.1875,
+          "halfWidth95": 2.3824134375000003
+        },
+        "A.cdf.5": {
+          "n": 2,
+          "mean": 0.5625,
+          "standardError": 0.062499999999999944,
+          "halfWidth95": 0.7941378124999994
+        },
+        "A.cdf.6": {
+          "n": 2,
+          "mean": 0.8125000000000001,
+          "standardError": 0.06250000000000011,
+          "halfWidth95": 0.7941378125000015
+        },
+        "A.cdf.7": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.8": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.9": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.10": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.11": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.12": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.13": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.14": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.15": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.16": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.17": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.18": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "A.cdf.19": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.fraction.active": {
+          "n": 2,
+          "mean": 1,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.fraction.wall": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.fraction.end": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.fraction.source": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.radius": {
+          "n": 2,
+          "mean": 0.3012628373288317,
+          "standardError": 0.0033618298858252293,
+          "halfWidth95": 0.04271609970442196
+        },
+        "B.temperature": {
+          "n": 2,
+          "mean": 4.195651634434034,
+          "standardError": 0.1361277159653409,
+          "halfWidth95": 1.7296666652373944
+        },
+        "B.angularTransfer": {
+          "n": 2,
+          "mean": 0.002235165898742308,
+          "standardError": 0.0006695259802666236,
+          "halfWidth95": 0.008507134358093676
+        },
+        "B.impactTime.0.1": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "B.impactTime.0.5": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "B.impactTime.0.9": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "B.impactHamiltonianEV": {
+          "n": 0,
+          "mean": null,
+          "standardError": null,
+          "halfWidth95": null
+        },
+        "B.cdf.0": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.cdf.1": {
+          "n": 2,
+          "mean": 0,
+          "standardError": 0,
+          "halfWidth95": null
+        },
+        "B.cdf.2": {
+          "n": 2,
+          "mean": 0.12500000000000003,
+          "standardError": 0.12500000000000003,
+          "halfWidth95": 1.5882756250000005
+        },
+        "B.cdf.3": {
+          "n": 2,
+          "mean": 0.12500000000000003,
+          "standardError": 0.12500000000000003,
+          "halfWidth95": 1.5882756250000005
+        },
+        "B.cdf.4": {
+          "n": 2,
+          "mean": 0.18750000000000006,
+          "standardError": 0.06250000000000001,
+          "halfWidth95": 0.7941378125000003
+        },
+        "B.cdf.5": {
+          "n": 2,
+          "mean": 0.3750000000000001,
+          "standardError": 0.12500000000000003,
+          "halfWidth95": 1.5882756250000005
+        },
+        "B.cdf.6": {
+          "n": 2,
+          "mean": 0.7500000000000002,
+          "standardError": 0.125,
+          "halfWidth95": 1.588275625
+        },
+        "B.cdf.7": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.8": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.9": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.10": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.11": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.12": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.13": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.14": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.15": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.16": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.17": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.18": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        },
+        "B.cdf.19": {
+          "n": 2,
+          "mean": 1.0000000000000004,
+          "standardError": 1.5700924586837752e-16,
+          "halfWidth95": null
+        }
+      }
+    },
+    "comparisons": [],
+    "physicalEffect": null,
+    "inference": "Approximate pointwise 95% Student-t intervals across independent whole-run seeds; refinement differences are paired by seed. Intervals are withheld when no sampling spread is observed above floating resolution; identical finite samples cannot bound rare tails. No independent-ion confidence interval, simultaneous band or experimental validation is implied."
+  }
+}

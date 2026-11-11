@@ -1,0 +1,24 @@
+{
+  "pair": {
+    "coarseID": "gas-q1024-w128",
+    "fineID": "gas-q2048-w128",
+    "axis": "time"
+  },
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "originalPacketsSHA256": {
+    "/work/home/thermal69-campaign/gas-q1024-w128.json": "664ff93d21b0432eadd19fd1fdf9d59942968739cc3b1e8e7a7554efe603730a",
+    "/work/home/thermal69-campaign/gas-q2048-w128.json": "3b840ac22f8db9ab08435cf6b15d544a887514cfad3fea9cd48ab298c91190fb"
+  },
+  "combinedUncompressedSHA256": "fe23aaf746b9a1bb1847001bbd9dc711d68b204f2ec4bcf2115f0f7c79c23168",
+  "combinedGzipSHA256": "aba3b2f76cdafe704e38aa1f42c1403972daae707e1b0424a68fec396c0bd2fe",
+  "legacyGlobalGatesPassed": true,
+  "resolvedEndpointGasGatesPassed": false,
+  "allEndpointGasSignalsResolved": true,
+  "endpointGasQualified": false,
+  "endpointGateRequired": true,
+  "allRequiredGatesPassed": false,
+  "sharedInitialAndAcceptedTimes": 201,
+  "fineOnlyTimesNotCompared": 200,
+  "experimentalValidation": false,
+  "liveBackendChanged": false
+}

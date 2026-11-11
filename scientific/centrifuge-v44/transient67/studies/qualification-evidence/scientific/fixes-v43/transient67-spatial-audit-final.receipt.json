@@ -1,0 +1,19 @@
+{
+  "label": "transient67-spatial-audit-final",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/check_coupled.py",
+    "/work/home/transient67-spatial-probe.json",
+    "/work/home/transient67-spatial-audit-final.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "de14b293e4b256743d57848f26a6eef0567c64f0339d0ea283acf8462f379dd5",
+  "exitCode": 0,
+  "seconds": 11.136456213999999,
+  "sourceVerifiedBeforeAndAfter": true
+}

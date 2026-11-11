@@ -1,0 +1,146 @@
+{
+  "inputSeal": "c7c83609ce2f5c7feeea27d18cec7368367bd786664d793ecc7df9872e10a7cb",
+  "planSeal": "c85a9520def86f8c3811cded06b82ceb41f8586a32b1518f6615693f5ce37348",
+  "plannedCases": [
+    "noneq-n1024-a00078125",
+    "noneq-n1024-a00078125-dt2p5us"
+  ],
+  "selectedCases": [
+    "noneq-n1024-a00078125",
+    "noneq-n1024-a00078125-dt2p5us"
+  ],
+  "unreviewedCases": [],
+  "caseDiagnosticsOmitted": true,
+  "cases": [],
+  "crossIncrementRefinements": [
+    {
+      "kind": "fine_time_increment",
+      "left": "noneq-n1024-a00078125",
+      "right": "noneq-n1024-a00078125-dt2p5us",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00011917911303105377,
+          "integrationSensitivity": 2.220446049250334e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 5,
+              "l1": 0.00011917911303083173
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 5,
+              "l1": 0.00011917911303060968
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 5,
+              "l1": 0.00011917911303083173
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 5,
+              "l1": 0.00011917911303105377
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 7.01436527963395e-05,
+          "integrationSensitivity": 1.1102230246251772e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 4,
+              "l1": 7.01436527963395e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 4,
+              "l1": 7.01436527963395e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 4,
+              "l1": 7.014365279622847e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 4,
+              "l1": 7.01436527963395e-05
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "fine_time_increment",
+      "left": "noneq-n1024-a00078125",
+      "right": "noneq-n1024-a00078125-dt2p5us",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 6.682379367894953e-05,
+          "integrationSensitivity": 2.220446049250334e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 5,
+              "l1": 6.682379367894953e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 5,
+              "l1": 6.682379367939362e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 5,
+              "l1": 6.682379367872748e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 5,
+              "l1": 6.682379367894953e-05
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 4.8091012953666024e-05,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 2,
+              "l1": 4.8091012953555e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 2,
+              "l1": 4.8091012953777046e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 2,
+              "l1": 4.8091012953666024e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 2,
+              "l1": 4.8091012953666024e-05
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    }
+  ],
+  "wallS": 6.263309961
+}

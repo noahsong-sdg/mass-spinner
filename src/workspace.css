@@ -1,0 +1,113 @@
+/* The apparatus owns the viewport. Windows sit above it without trapping the scene. */
+body.immersive{overflow:hidden;background:#101614}
+.sim-workspace{position:fixed;inset:0;height:100dvh;max-width:none;margin:0;border:0;isolation:isolate;--world-top:64px;--world-bottom:86px}
+.sim-workspace [hidden]{display:none!important}
+.world-top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;height:var(--world-top);background:#141b18ee;border-bottom:1px solid #35413b}
+.world-top header.masthead{min-width:0;min-height:0;height:100%;padding:0 24px;gap:24px;flex:1;flex-wrap:nowrap;border:0;background:none}
+.world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
+.world-top .learning-path{flex:none;min-width:0;min-height:0;padding:0 24px 0 0;gap:0;border:0;background:none}
+.world-top .level-navigation{align-self:stretch;align-items:stretch;gap:0;margin:0;width:auto;flex-wrap:nowrap}
+.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 14px;font-size:12px}
+.world-top .level-actions{width:auto;border:0}
+.world-top .share-link-label{display:none}
+.world-top #share-link,.world-top #share-status:not(:empty){position:absolute;right:20px;top:64px;max-width:min(400px,90vw);background:#202b24;padding:12px;border:1px solid var(--line);z-index:6}
+.world-top #share-status:not(:empty){top:112px;font-size:12px}
+.world-stage{position:absolute;inset:0 var(--world-right-reserve,0px) 0 var(--world-left-reserve,0px);z-index:0}
+.world-stage>.world-group{position:absolute;inset:var(--world-top) 0 0}
+.world-stage #stage,.world-stage #model-apparatus,.world-stage #fusion-apparatus,.world-stage #blanket-render{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:0!important;max-height:none!important;aspect-ratio:auto!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;overflow:hidden!important}
+.world-stage .apparatus,.world-stage .apparatus-frame{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border:0;background:#101614}
+.world-stage #scene{width:100%;height:100%;display:block}
+.field-scale{position:absolute;left:24px;bottom:100px;max-width:calc(100% - 48px);font-size:11px;line-height:1.6;color:#d7ded7;background:#18211df5;padding:6px 10px;pointer-events:none}
+.world-stage #load-state{max-width:280px}
+.world-stage .apparatus-status{bottom:100px;left:24px;max-width:calc(100% - 48px)}
+.world-stage .apparatus-state{bottom:var(--world-bottom);max-height:calc(100dvh - var(--world-top) - var(--world-bottom) - 16px);overflow:auto;overscroll-behavior:contain}
+.world-stage .apparatus-state>div{max-height:none;overflow:visible}
+.world-context{position:absolute;top:calc(var(--world-top) + 16px);left:24px;z-index:2}
+.world-context select{font-size:12px;min-height:38px;background:#1a241eee;border:1px solid #4a5a50;box-shadow:0 4px 18px #080f0b40}
+.world-dock{position:absolute;z-index:6;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:3px;padding:5px;background:#1b2620f5;border:1px solid #4a5a50;border-radius:12px;box-shadow:0 10px 35px #06100966;max-width:calc(100% - 24px);overflow:auto}
+.world-dock button{min-height:44px;min-width:64px;white-space:nowrap;font-size:12px;padding:10px 16px;border-radius:7px;color:#bbc9bf}
+.world-dock button:hover{background:#2a3930;color:#eff3e9}
+.world-dock button[aria-expanded=true]{background:#d69a67;color:#172018}
+.world-rail{position:absolute;z-index:4;top:calc(var(--world-top) + 72px);bottom:var(--world-bottom);display:flex;flex-direction:column;min-height:0}
+.world-rail-left{left:16px}.world-rail-right{right:16px}
+.world-window{position:relative;display:flex;flex:1 1 0px;flex-direction:column;min-height:0;min-width:0;background:#18211df5;border:1px solid #4a5a50;border-radius:10px;box-shadow:0 12px 50px #07110b55;overflow:hidden;animation:window-in .18s ease-out}
+.world-right{order:0}.world-results-split{order:1}.world-window#window-target{order:2}
+.world-resizer{touch-action:none;flex:none;outline-offset:0;border-radius:4px}
+.world-resizer:focus-visible{outline:2px solid #d69a67;background:#d69a6740}
+.world-resizer-vertical{position:absolute;z-index:2;inset:0 auto 0 -12px;width:12px;cursor:col-resize}
+.world-rail-left>.world-resizer-vertical{left:auto;right:-12px}
+.world-resizer-horizontal{height:12px;cursor:row-resize}
+.world-resizer:after{content:'';position:absolute;background:#6b8171;border-radius:2px;opacity:.6}
+.world-resizer-vertical:after{width:2px;height:36px;top:calc(50% - 18px);left:5px}
+.world-resizer-horizontal:after{height:2px;width:36px;left:calc(50% - 18px);margin-top:5px}
+.world-dock .world-layout-reset{min-width:44px;font-size:18px;padding-inline:12px;border-left:1px solid #425449;border-radius:0 7px 7px 0}
+.world-window-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:4px 8px 4px 20px;border-bottom:1px solid #394b3f;flex:none}
+.world-window-bar h2{font:500 13px 'DM Sans',sans-serif;letter-spacing:0;margin:0}
+.world-close{font-size:23px;width:40px;height:40px;color:#b6c6bb}
+.world-window-body{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:20px}
+.world-window .world-group:empty{display:none}
+.world-window :is(.controls,.fusion-inputs){display:flex!important;flex-direction:column;gap:22px;padding:0!important;border:0!important;background:none;max-height:none;overflow:visible;min-width:0}
+.world-window :is(.instrument-controls,.fusion-readouts,.live-plots,.results-grid,.model-info-body,.method-panel,.atlas-grid,.research-status-grid){grid-template-columns:1fr}
+.world-window :is(.study-controls,.target-exposure-body,.target-exposure-controls,.target-loading-panel .loading-controls){grid-template-columns:minmax(0,1fr);gap:22px}
+.world-window .instrument-controls{gap:22px;margin-block:20px}
+.world-window :is(.live-plot-panel,.diagnostics,.method-panel,.method-directory,.reference-atlas,#failure-lab,#model,#tutorial-insights,#target-exposure,#target-loading,.study-panel,.comparison){padding:0!important;margin-block:0 24px;border:0;background:none}
+.world-window :is(#equilibrium-view,#reduced-view){position:static;inset:auto;margin:0 0 24px;padding:0;background:none}
+.world-window #equilibrium-chart{height:230px;max-height:none}
+.world-window .control output{font-size:19px}
+.world-window .control label{display:flex!important;justify-content:space-between;gap:12px}
+.world-window .range-ends{font-size:10px}
+.world-window input[type=range]{height:4px;margin-block:22px 10px}
+.world-window .cutoff-readout>div:first-of-type{font-size:28px!important}
+.world-window .cutoff-readout{display:block!important;margin:0}
+.world-window .cutoff-readout p{margin-block:10px}
+.world-window .species-legend{padding:0 0 16px;border:0;font-size:11px}
+.world-window .viewport-tools{display:flex!important;padding:0;min-height:0}
+.world-window .viewport-tools[hidden]{display:none!important}
+.world-window .segmented{flex-direction:column;width:100%}
+.world-window .segmented button{min-height:40px;text-align:left}
+.world-window .apparatus-toolbar{padding:0 0 16px;border:0}
+.world-window .component-description{padding:0;border:0;font-size:13px;line-height:1.7}
+.world-window .component-description p{margin-block:12px}
+.world-component-role{margin-top:20px;font-size:12px}
+.world-component-role>summary{cursor:pointer;color:var(--muted)}
+.world-window .system-bar{padding:0 0 20px;display:flex;flex-wrap:wrap;gap:12px}
+.world-window .system-bar label{display:none}
+.world-window .system-bar select{width:100%}
+.world-window .fusion-monitor{display:block;padding:0 0 20px}
+.world-window .fusion-readouts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.world-window .fusion-readouts strong{font-size:19px}
+.world-window .sensitivity-panel{padding-top:0}
+.world-window :is(h2,h3){font-size:14px}
+.world-window .component-inspector{margin:0;padding:0;border:0}
+.world-window .component-inspector>summary,.world-window #fusion-inspector .component-choices{display:none}
+.world-window .model-notes-list{padding-left:16px}
+.world-window .ledger{padding:0;border:0}
+.world-window :is(.deposition,.model-notes){display:block}
+.world-window .evidence-table{overflow:auto}
+.world-window pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.world-window .fusion-ledger{margin-top:20px}
+.world-window .live-schematic .beam-diagram-frame{overflow:auto}
+.world-window .beam-schematic{min-width:700px}
+.world-window #blanket-explorer>details{padding:0;margin:0;border:0}
+.world-window #blanket-explorer>details>summary{display:none}
+.immersive:not([data-view=render]) .model-inspect{display:none}
+.world-stage .research-bench{display:block!important;position:absolute;inset:0;max-width:none;padding:24px 5vw 110px;overflow:auto;background:#121a16}
+.world-stage .research-bench .research-player{margin:0}
+.world-stage .research-bench .live-plots{grid-template-columns:repeat(auto-fit,minmax(min(100%,450px),1fr))}
+@keyframes window-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1000px){.world-top header.masthead{padding-inline:16px}.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding-inline:10px}}
+@media(max-width:740px){
+ .sim-workspace{--world-bottom:80px}
+ .world-top header.masthead{padding-inline:16px;gap:12px}.world-top .brand{font-size:13px}.world-top .learning-path{padding-right:16px;flex-wrap:nowrap}.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 10px;font-size:11px}.world-top .level-actions .text-button{font-size:0;min-width:32px;min-height:44px}.world-top .level-actions .text-button:after{content:'↗';font-size:19px}
+ .world-context{left:16px}.world-context select{max-width:calc(100vw - 32px)}
+ .sim-workspace:is([data-level="2"],[data-level="3"]) .apparatus-provenance{top:72px}
+ .world-rail{top:auto;bottom:var(--world-bottom);left:10px;right:10px;width:auto!important;max-height:min(58dvh,calc(100dvh - var(--world-top) - var(--world-bottom) - 12px),620px)}
+ .world-window{flex:0 1 auto!important;max-height:inherit;border-radius:12px}
+ .world-stage{inset:0}.world-layout-reset{display:none}
+ .world-window-body{padding:16px}.world-dock{bottom:max(12px,env(safe-area-inset-bottom));gap:1px;padding:4px}.world-dock button{font-size:11px;min-width:46px;padding:10px 11px}
+ .world-stage .apparatus-status{bottom:84px;font-size:11px}.world-stage .research-bench{padding:16px 16px 100px}
+ .world-window .control label{font-size:12px}.world-window .run-button{min-height:44px}.world-window .apparatus-toolbar select{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){.world-window{animation:none}}
+/* Mode-specific controls and unavailable results retain the native hidden contract. */
+body.immersive .sim-workspace [hidden]{display:none!important}

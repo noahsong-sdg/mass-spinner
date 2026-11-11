@@ -1,0 +1,10 @@
+{
+  "coupledPacketSHA256": "a92320f3dd5fa7b043d82ced94bb0f0c504b78df8f72c44406174e38d706335d",
+  "sourceFilesSHA256": {
+    "scientific/transient-v67/electrical.py": "a6b8edeea3535865908b31991244bd5a0d22d84e31c78173d40c523a1ff4d065",
+    "scientific/current-v66/analyze.py": "04ec0221d9a03ee0376fefa02460990a6ede31c204187ce5af62fdbc36eea74a",
+    "scientific/current-v66/reference_fipy.py": "c1b44fd2112b31d797419a81ac9140c889c4790d8176f3e9461fe5ebf22de169",
+    "scientific/current-v66/campaign.ts": "4354aceaa41fcd2d98fb02f091d6bc577543cef496a4316b6743267ac3fc0305",
+    "src/fuel-current.ts": "6af76bca08bed69bdec70f46a0b862af42a04b593ca5813b195e5e891e4b859e"
+  }
+}

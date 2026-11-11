@@ -1,0 +1,15 @@
+{
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "inputsSHA256": {
+    "/work/home/thermal69-assess-1/time512-1024/endpoint-gas.json": "e606deabfdfbd5a3076993ad9d855e42f0b25f355872615118a228571b73e16f",
+    "/work/home/thermal69-assess-2/time1024-2048/endpoint-gas.json": "9ac5f4ae4f2b91babf56b6ba4aa2761ab8fc23eab496a86d5e93588ab7cb907c",
+    "/work/home/thermal69-assess-2/time2048-4096/endpoint-gas.json": "30c91cd8cb08cfa87d25cfafc8d37bd976afe878f152166c6d81e6161013d8c9",
+    "/work/home/thermal69-assess-1/reference.json": "17e435344bab14a8729b66b2fe2edfc2059e83d52fdcc2669605b29302a86b2a"
+  },
+  "gasErrorsPercent": [
+    3.6932360810279645,
+    1.8374767909986922,
+    0.9164632423115958
+  ],
+  "scope": "Plots of retained declared metrics; no simulation or tolerance change."
+}

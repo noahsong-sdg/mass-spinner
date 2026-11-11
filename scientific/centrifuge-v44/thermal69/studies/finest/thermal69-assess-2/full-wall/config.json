@@ -1,0 +1,11 @@
+{
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "predictionSHA256": "836755e03c6a5da4ff3ba254f0abf68b8ece65442aece5032bf8e5a58d6e1303",
+  "pairs": [
+    {
+      "coarseID": "full-e8-w64-q256",
+      "fineID": "full-e8-w128-q256",
+      "axis": "liner"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "cases.json": "810b672f60be5bb7363960349700b93e1295eb0455c67a17e81b6594be792bd0",
+  "production.json": "e82410b79facf632c968ca751d4abfa67fb4e49043332ab7decf40fffe5913fc",
+  "fipy.json": "1b77480a706a755fa28f34cf19d51834c210ba2313d4e5a9169e734be5290907",
+  "audit.json": "52eace65d3e7fc6b4700d1bf3f10975ca84530f901e32b35b860e68d9c6822cd",
+  "diagnostic.json": "e3d5e99d116ba788ea71aaa56847119202651d7f08554edd2a5e583609345baf",
+  "analysis.json": "44d5efc43c023d52e2a733c798a10629f05783c6ec46501efde6f6fc9018a911",
+  "momentum-profiles.png": "68111bf70f50759da218e35db6b482e2d445ee26d567d06c890b4f77ede8c78c",
+  "momentum-convergence.png": "3243f2ef4629513988683fd27e5fed48fc8e47839b1e551a27de73b959953981",
+  "historical-profile-challenge.png": "3c2bebdeda69c17b8dafc8b1a39296894f9e0479feaad980286f8f27922e7da0"
+}

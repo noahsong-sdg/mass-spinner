@@ -1,0 +1,18 @@
+{
+  "label": "resolved68-warm-scale-before",
+  "command": [
+    "node_modules/.bin/tsx",
+    "--test",
+    "tests/fuel-current-reuse-v68.test.ts"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 729,
+  "sourceSHA256": "e81a9385deffc5ffb97797420b7f76e00bc529927f15b8d04a9da4aefa3e9201",
+  "exitCode": 1,
+  "seconds": 0.641836292,
+  "sourceVerifiedBeforeAndAfter": true
+}

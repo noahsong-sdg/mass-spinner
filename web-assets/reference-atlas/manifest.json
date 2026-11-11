@@ -1,0 +1,297 @@
+[
+  {
+    "id": "mcmf",
+    "section": "II E",
+    "title": "Variable-field / magnetic centrifugal filter",
+    "image": "/reference-atlas/mcmf.png",
+    "alt": "Two panels contrast an inward centrifugal end plug favoring light-ion escape with an outward magnetic mirror where rotation can favor heavier-ion escape.",
+    "mechanism": "Rotation and magnetic-mirror barriers create different escape conditions at two ends.",
+    "pros": [
+      "Two end conditions can direct light and heavy fractions to different outlets.",
+      "The separation coordinate is axial, which can simplify product access."
+    ],
+    "cons": [
+      "Loss cones need collision-driven replenishment without excessive cross-field mixing.",
+      "Rotation, field geometry, end sheaths and collection must all be controlled."
+    ],
+    "limitations": "Endpoint sketch only. A complete field, pitch-angle scattering, replenishment and throughput are not calculated.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "poms",
+    "section": "II F",
+    "title": "Plasma-optical mass separation (POMS)",
+    "image": "/reference-atlas/poms.png",
+    "alt": "Energetic ions enter a strong magnetic core region with thermionic electron emission; conceptual deflected paths reach separate collector zones.",
+    "mechanism": "A strong magnetic core redirects energetic ions; electron emission and charge-separation fields participate in the optics.",
+    "pros": [
+      "The tutorial reports separation experiments with nitrogen, argon and krypton.",
+      "Collection may occur at different radial or axial locations."
+    ],
+    "cons": [
+      "The energetic source and nonuniform magnetic optics complicate the apparatus.",
+      "Electron emission and self-generated fields are needed for predictive optics."
+    ],
+    "limitations": "Original conceptual layout. It is not a reconstruction of a POMS experiment or a calculated field/trajectory map.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "azimuthal",
+    "section": "II F",
+    "title": "Azimuthal-B / radial-E geometry",
+    "image": "/reference-atlas/azimuthal.png",
+    "alt": "An annular transverse cross-section shows an axial conductor, counterclockwise azimuthal B and outward radial E, with the ideal inverse-radius B and logarithmic potential equations.",
+    "mechanism": "An axial central current creates Bθ∝1/r; a logarithmic radial potential alters ion orbits in an annular plasma.",
+    "pros": [
+      "Calculations reviewed in the tutorial suggested separation with little ion deposition on electrodes."
+    ],
+    "cons": [
+      "The cited concept requires a large central current and biased plasma electrodes.",
+      "Prescribed fields do not establish field penetration, sheaths or collection efficiency."
+    ],
+    "limitations": "Ideal geometry and field laws only. This is distinct from POMS and from a magnetic cusp.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "advection",
+    "section": "II G",
+    "title": "Radial advection",
+    "image": "/reference-atlas/advection.png",
+    "alt": "A local E-right, B-out-of-page force diagram shows downward E-cross-B flow, upward neutral drag and the chain from rotation through friction to radial advection.",
+    "mechanism": "Neutral friction on azimuthally rotating ions produces a cross-field radial drift; reduced mass and collision law affect species response.",
+    "pros": [
+      "It may use rotation already present in a linear plasma.",
+      "It is relevant to understanding competing radial transport in other separators."
+    ],
+    "cons": [
+      "The tutorial neutral-friction mass dependence is weak.",
+      "Spatial collision profiles, neutral composition and evolving density must be specified."
+    ],
+    "limitations": "Local force-direction sketch. No neutral-rate calibration, evolved density profile or collection fraction is implied.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "diffusion",
+    "section": "II H",
+    "title": "Radial diffusion",
+    "image": "/reference-atlas/diffusion.png",
+    "alt": "Mass scaling equations show gyroradius squared growing with heavy mass while collision frequency falls inversely; two identical radial cumulative diffusion curves illustrate the resulting null separation.",
+    "mechanism": "Randomized magnetized motion creates radial spread; in the tutorial heavy-on-light Coulomb limit the leading test-ion mass dependence cancels.",
+    "pros": [
+      "Collisional, relatively cool and dense plasmas may reduce auxiliary heating needs.",
+      "The conceptual geometry is simple."
+    ],
+    "cons": [
+      "The tutorial classical Coulomb benchmark gives little or no heavy-mass separation.",
+      "Fluctuations and other collision channels can dominate the classical coefficient."
+    ],
+    "limitations": "The overlaid curves intentionally coincide. Other collision operators require their own coefficients and applicability checks.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "mobility",
+    "section": "II I",
+    "title": "Ion mobility",
+    "image": "/reference-atlas/mobility.png",
+    "alt": "Two illustrative spreading ion profiles drift between bias electrodes; one has a faster mean at equal charge and collision frequency, beside the mobility equation.",
+    "mechanism": "Electric forcing and collisional drag set a mean drift, while thermal diffusion broadens the species distribution.",
+    "pros": [
+      "No applied magnetic field is required.",
+      "A collisional mass-dependent drift can provide a separation coordinate."
+    ],
+    "cons": [
+      "Diffusion broadens the output and competes with the directed flow.",
+      "Debye shielding can prevent the assumed field from reaching a neutralized plasma.",
+      "Collision frequencies are species dependent, so equal ν is not a universal gas law."
+    ],
+    "limitations": "Illustrative profiles assume equal positive charge and equal collision frequency; they are not calibrated output distributions.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "ionization",
+    "section": "II J",
+    "title": "Differential ionization energy",
+    "image": "/reference-atlas/ionization.png",
+    "alt": "A Maxwellian electron-energy curve crosses two hypothetical ionization thresholds; a process diagram separates an ionized product branch from neutral remainder.",
+    "mechanism": "Electron energy control changes species-specific ionization; extraction must then separate ions from the remaining neutrals.",
+    "pros": [
+      "Different ionization thresholds offer elemental or molecular selectivity.",
+      "Low-threshold species can be attractive targets."
+    ],
+    "cons": [
+      "Broad electron distributions and gradual cross sections limit sharp selectivity.",
+      "Measured cross sections, recombination and extraction history are required for predictive fractions."
+    ],
+    "limitations": "Hypothetical thresholds and a Maxwellian shape illustrate the mechanism; no measured atomic rates or product purities are plotted.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "transit",
+    "section": "II K",
+    "title": "Transit time / moving collector",
+    "image": "/reference-atlas/transit.png",
+    "alt": "A pulsed source sends equal-energy ions along a guide to a moving collector; exact ideal arrival markers for 40u and 250u at10eV over10m show time dispersion.",
+    "mechanism": "A narrow pulsed energy packet disperses in time; synchronized moving collectors convert arrival-time differences into deposition positions.",
+    "pros": [
+      "Arrival time is a direct separation coordinate.",
+      "Segmented collectors can make deposited fractions mechanically accessible."
+    ],
+    "cons": [
+      "Energy spread, scattering and pulse width blur arrivals.",
+      "Slits and pulsed duty cycle reduce useful throughput.",
+      "A rapidly moving collector must operate in vacuum."
+    ],
+    "limitations": "Arrival times are the exact ballistic fixed-energy limit; no source broadening, scattering, slit loss or collector efficiency is implied.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "rotatingmagnetic",
+    "section": "II E",
+    "title": "Rotating magnetic-field proposal",
+    "image": "/reference-atlas/rotatingmagnetic.png",
+    "alt": "Four colored magnetic vectors depict successive phases of a generic transverse rotating magnetic drive; a checklist identifies the missing induced electric field, plasma response and transport closures.",
+    "mechanism": "The tutorial identifies separation using rotating magnetic fields as a distinct proposal and directs the reader to external references.",
+    "pros": [
+      "[Inference] A time-dependent magnetic drive offers a different control mechanism from static electrode bias."
+    ],
+    "cons": [
+      "Section II does not specify a complete quantitative field, plasma-response or collector model.",
+      "The induced electric field and current response must be included in any predictive implementation."
+    ],
+    "limitations": "Generic rotating-field drive concept only. No separator geometry, mass selection, transport rate or performance is predicted.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "collisionality",
+    "section": "II G",
+    "title": "Collisionality-gradient advection",
+    "image": "/reference-atlas/collisionality.png",
+    "alt": "An illustrative increasing collision-frequency profile is linked to diamagnetic flow and a conditional species-dependent drift, with missing transport closures stated explicitly.",
+    "mechanism": "A collisionality gradient combined with ion diamagnetic flow can produce a radial drift depending on species mass and energy.",
+    "pros": [
+      "The tutorial cites a theoretical scheme with potentially substantial separation."
+    ],
+    "cons": [
+      "The spatial gradients and applicable magnetized collision regime must be established.",
+      "Section II does not give a closed numerical transport model for this variant."
+    ],
+    "limitations": "Illustrative collision-frequency gradient only. The direction, magnitude, collection and energetic cost of transport are not solved.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  },
+  {
+    "id": "ionwind",
+    "section": "II I",
+    "title": "Capillary discharge / ion-wind separation",
+    "image": "/reference-atlas/ionwind.png",
+    "alt": "A capillary between cathode and anode has a qualitative heavier-isotope enrichment region near the cathode; three competing explanations are listed without assigning a numerical enrichment.",
+    "mechanism": "The tutorial reports heavier-isotope enrichment near a capillary cathode; differential ion–neutral friction was considered the most probable of several proposed explanations.",
+    "pros": [
+      "The tutorial describes experimental isotope enrichment in neon and krypton discharges."
+    ],
+    "cons": [
+      "The process appears slow and unlikely to provide high throughput.",
+      "Thermal diffusion, differential wall losses and ion–neutral friction must be distinguished rather than assumed to be one mechanism."
+    ],
+    "limitations": "Qualitative report of enrichment and candidate mechanisms only. No isotope flux, discharge solution or enrichment factor is calculated.",
+    "sources": [
+      {
+        "title": "Zweben, Gueroult & Fisch — Plasma mass separation (2018)",
+        "url": "https://doi.org/10.1063/1.5042845"
+      },
+      {
+        "title": "Author-hosted tutorial PDF (PPPL)",
+        "url": "https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"
+      }
+    ]
+  }
+]

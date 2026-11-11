@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "createdUTC": "2026-11-07T04:22:25.827477+00:00",
+  "referenceKind": "external-formulary-only",
+  "separatorValidated": false,
+  "finiteTimeCollisionValidated": false,
+  "constants": {
+    "massUnitKg": 1.6605390666e-27,
+    "elementaryChargeC": 1.602176634e-19,
+    "epsilon0LibraryFm": 8.8541878188e-12,
+    "epsilon0ProductionFm": 8.8541878128e-12
+  },
+  "runtime": {
+    "python": "3.13.9 (main, Oct 31 2025, 23:01:48) [Clang 21.1.4 ]",
+    "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+    "architecture": "aarch64"
+  },
+  "versions": {
+    "plasmapy": "2026.2.0",
+    "astropy": "8.0.2",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "sourceHashes": {
+    "reference.py": "e7717d1d1c2f99bf273a7ee0eb8ec4003607ac2394a1ddad64710e8d2389af27",
+    "test_reference.py": "985c1a20468bafd76588ae11f07a86b55bcf16ab25215ca8034d2077b76f80ab",
+    "requirements.txt": "8ee3df1c2cb0a2895b822bb3e535de85dfe20d571ffbd084f039f8bb7a5b1737",
+    "requirements-lock.txt": "2b55366e411ff45188384b9f16bc47487eb6633602308b07e8eeffcb0c345240"
+  },
+  "conventions": {
+    "mass": "Exact declared abstract mass in kg, not a named atom/isotope or natural mass.",
+    "temperature": "Input eV means k_B*T energy per particle.",
+    "thermalSpeed": "sigma1d=sqrt(e*T/m); RMS3d=sqrt(3)*sigma; mostProbable3d=sqrt(2)*sigma.",
+    "screening": "Electron-only Debye length with quasi-neutral ne=sum(Z*n_i); no ion screening.",
+    "frequency": "gyroAngularRadS is rad/s; gyroFrequencyHz divides by 2*pi.",
+    "rates": "SingleParticle rates use a fixed Maxwellian field population, not two evolving distributions.",
+    "maxwellianLorentz": "Characteristic Lorentz rate, not averaged momentum/temperature exchange rate.",
+    "coulombLog": "Prescribed for matching. No fitted log or natural-element substitution.",
+    "constantTolerance": "Allow 3e-8 relative for epsilon0/CGS-derived rate checks: older production epsilon0, library CGS conversion, and default quad tolerances ~1.49e-8. Record epsilon0 values."
+  },
+  "cases": [
+    {
+      "id": "unequal-2-10eV",
+      "inputs": {
+        "electronTemperatureEV": 5,
+        "magneticT": 0.06,
+        "coulombLog": 12,
+        "totalIonDensityM3": 1e+18
+      },
+      "electronDebyeM": 1.66227996465728e-05,
+      "particlesPerDebyeSphere": 19239.825131739457,
+      "species": [
+        {
+          "massU": 40,
+          "massKg": 6.6421562664e-26,
+          "chargeState": 1,
+          "chargeC": 1.602176634e-19,
+          "densityM3": 5e+17,
+          "temperatureEV": 2,
+          "sigma1dMS": 2196.4213183796646,
+          "thermalRms3dMS": 3804.313318260996,
+          "thermalMostProbable3dMS": 3106.2088171379155,
+          "gyroAngularRadS": 144727.9982349799,
+          "gyroFrequencyHz": 23034.176322892155
+        },
+        {
+          "massU": 84,
+          "massKg": 1.394852815944e-25,
+          "chargeState": 1,
+          "chargeC": 1.602176634e-19,
+          "densityM3": 5e+17,
+          "temperatureEV": 10,
+          "sigma1dMS": 3389.1516735413666,
+          "thermalRms3dMS": 5870.1828931307355,
+          "thermalMostProbable3dMS": 4792.984261661673,
+          "gyroAngularRadS": 68918.09439760947,
+          "gyroFrequencyHz": 10968.655391853406
+        }
+      ],
+      "pairs": [
+        {
+          "testSpecies": 0,
+          "fieldSpecies": 0,
+          "relativeThermalRmsMS": 5380.111490201293,
+          "maxwellianLorentzS1": 10730.757624394022,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 5841.084607387897,
+            "momentumLossS1": 10378.319679119517,
+            "energyLossS1": 9241.59383611257,
+            "transverseDiffusionS1": 9785.325575606545,
+            "parallelDiffusionS1": 1729.7199465199194
+          }
+        },
+        {
+          "testSpecies": 0,
+          "fieldSpecies": 1,
+          "relativeThermalRmsMS": 6995.130236264563,
+          "maxwellianLorentzS1": 4882.213846505945,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 2657.540608686739,
+            "momentumLossS1": 3002.209401446748,
+            "energyLossS1": 896.7316370069015,
+            "transverseDiffusionS1": 4152.872726535061,
+            "parallelDiffusionS1": 954.814439351533
+          }
+        },
+        {
+          "testSpecies": 1,
+          "fieldSpecies": 0,
+          "relativeThermalRmsMS": 6995.130236264563,
+          "maxwellianLorentzS1": 1107.0779697292394,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 602.6169180695553,
+            "momentumLossS1": 1835.6259218589164,
+            "energyLossS1": 2467.7639269121823,
+            "transverseDiffusionS1": 1086.7284306356153,
+            "parallelDiffusionS1": 116.7594861700356
+          }
+        },
+        {
+          "testSpecies": 1,
+          "fieldSpecies": 1,
+          "relativeThermalRmsMS": 8301.69226107602,
+          "maxwellianLorentzS1": 662.3167396301026,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 360.5195689327853,
+            "momentumLossS1": 640.563797386258,
+            "energyLossS1": 570.403555160476,
+            "transverseDiffusionS1": 603.9634067143303,
+            "parallelDiffusionS1": 106.76063289770966
+          }
+        }
+      ]
+    },
+    {
+      "id": "common-5eV",
+      "inputs": {
+        "electronTemperatureEV": 5,
+        "magneticT": 0.06,
+        "coulombLog": 10,
+        "totalIonDensityM3": 1e+18
+      },
+      "electronDebyeM": 1.66227996465728e-05,
+      "particlesPerDebyeSphere": 19239.825131739457,
+      "species": [
+        {
+          "massU": 40,
+          "massKg": 6.6421562664e-26,
+          "chargeState": 1,
+          "chargeC": 1.602176634e-19,
+          "densityM3": 5e+17,
+          "temperatureEV": 5,
+          "sigma1dMS": 3472.847033714796,
+          "thermalRms3dMS": 6015.147509308892,
+          "thermalMostProbable3dMS": 4911.347375126638,
+          "gyroAngularRadS": 144727.9982349799,
+          "gyroFrequencyHz": 23034.176322892155
+        },
+        {
+          "massU": 84,
+          "massKg": 1.394852815944e-25,
+          "chargeState": 1,
+          "chargeC": 1.602176634e-19,
+          "densityM3": 5e+17,
+          "temperatureEV": 5,
+          "sigma1dMS": 2396.4921308308367,
+          "thermalRms3dMS": 4150.84613053801,
+          "thermalMostProbable3dMS": 3389.151673541367,
+          "gyroAngularRadS": 68918.09439760947,
+          "gyroFrequencyHz": 10968.655391853406
+        }
+      ],
+      "pairs": [
+        {
+          "testSpecies": 0,
+          "fieldSpecies": 0,
+          "relativeThermalRmsMS": 8506.703187339379,
+          "maxwellianLorentzS1": 2262.242340820182,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 1231.4087576730763,
+            "momentumLossS1": 2187.9418980910355,
+            "energyLossS1": 1948.2990488192397,
+            "transverseDiffusionS1": 2062.9277643476585,
+            "parallelDiffusionS1": 364.65698301517256
+          }
+        },
+        {
+          "testSpecies": 0,
+          "fieldSpecies": 1,
+          "relativeThermalRmsMS": 7308.318764130868,
+          "maxwellianLorentzS1": 3567.5537195515335,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 1941.9302761932136,
+            "momentumLossS1": 2793.3956950378524,
+            "energyLossS1": 1711.8308539870015,
+            "transverseDiffusionS1": 3468.014232961441,
+            "parallelDiffusionS1": 406.94630312726264
+          }
+        },
+        {
+          "testSpecies": 1,
+          "fieldSpecies": 0,
+          "relativeThermalRmsMS": 7308.318764130868,
+          "maxwellianLorentzS1": 808.969097403976,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 440.34700140435683,
+            "momentumLossS1": 1066.464397464166,
+            "energyLossS1": 1283.360347411739,
+            "transverseDiffusionS1": 694.2042272824793,
+            "parallelDiffusionS1": 155.36422023411365
+          }
+        },
+        {
+          "testSpecies": 1,
+          "fieldSpecies": 1,
+          "relativeThermalRmsMS": 5870.1828931307355,
+          "maxwellianLorentzS1": 1561.0955262860352,
+          "testParticleAtRelativeRms": {
+            "lorentzS1": 849.7527731427451,
+            "momentumLossS1": 1509.8233497147626,
+            "energyLossS1": 1344.4540728896252,
+            "transverseDiffusionS1": 1423.5554015874395,
+            "parallelDiffusionS1": 251.63722495246049
+          }
+        }
+      ]
+    }
+  ],
+  "coldBeamCases": [
+    {
+      "massAU": 40,
+      "massBU": 84,
+      "densityM3": 5e+17,
+      "coulombLog": 12,
+      "speedMS": 5000,
+      "backgroundTemperatureEV": 0.1,
+      "lorentzS1": 7277.082699981956,
+      "momentumLossS1": 10742.360176163493,
+      "energyLossS1": 6930.554952363543,
+      "transverseDiffusionS1": 14487.295710302567,
+      "parallelDiffusionS1": 66.86968966087348,
+      "expectedTaVarianceRateS1": 7928.884891930197
+    },
+    {
+      "massAU": 84,
+      "massBU": 40,
+      "densityM3": 5e+17,
+      "coulombLog": 12,
+      "speedMS": 5000,
+      "backgroundTemperatureEV": 0.1,
+      "lorentzS1": 1650.132131515183,
+      "momentumLossS1": 5115.409607696945,
+      "energyLossS1": 6930.554952363605,
+      "transverseDiffusionS1": 3268.4215536679667,
+      "parallelDiffusionS1": 31.842709362320978,
+      "expectedTaVarianceRateS1": 7928.884891930265
+    },
+    {
+      "massAU": 40,
+      "massBU": 40,
+      "densityM3": 5e+17,
+      "coulombLog": 10,
+      "speedMS": 10000,
+      "backgroundTemperatureEV": 0.1,
+      "lorentzS1": 758.0294479147872,
+      "momentumLossS1": 1516.0588958295384,
+      "energyLossS1": 1516.0588958295384,
+      "transverseDiffusionS1": 1512.4019596762093,
+      "parallelDiffusionS1": 3.65693615332905,
+      "expectedTaVarianceRateS1": 1516.0588958295384
+    },
+    {
+      "massAU": 84,
+      "massBU": 84,
+      "densityM3": 1e+18,
+      "coulombLog": 10,
+      "speedMS": 10000,
+      "backgroundTemperatureEV": 0.1,
+      "lorentzS1": 343.7775273989965,
+      "momentumLossS1": 687.5550547979708,
+      "energyLossS1": 687.5550547979708,
+      "transverseDiffusionS1": 686.765305061802,
+      "parallelDiffusionS1": 0.7897497361686684,
+      "expectedTaVarianceRateS1": 687.5550547979708
+    }
+  ],
+  "upstreamProbes": [
+    {
+      "id": "extreme-x-quadrature",
+      "backgroundTemperatureEV": 1e-08,
+      "massAU": 40,
+      "massBU": 84,
+      "densityM3": 5e+17,
+      "coulombLog": 12,
+      "speedMS": 5000,
+      "x": 1088248313.5314531,
+      "lorentzS1": 7277.082699981956,
+      "momentumLossS1": 0.0,
+      "energyLossS1": 0.0,
+      "transverseDiffusionS1": 0.0,
+      "parallelDiffusionS1": 0.0,
+      "coldLimitMomentumLossS1": 10742.36017330151,
+      "momentumLossRelativeError": 1.0,
+      "status": "FAIL",
+      "referenceAccepted": false,
+      "cause": "Upstream phi integrates sqrt(t)*exp(-t) from0 to huge x using quad; sampled nodes miss the localized weight."
+    }
+  ],
+  "limitations": [
+    "No finite-time distribution evolution, spatial locality, collector or experimental validation.",
+    "PlasmaPy2026.2 Coulomb_logarithm tuple decorator rejects CustomParticle; that estimate is deliberately omitted.",
+    "Maxwellian_avg_ii_collision_freq accesses is_ion unavailable on CustomParticle; no substitute particle or monkeypatch is used.",
+    "The library attempts a GitHub connectivity probe on import; offline safe-dev denies it. Formulary output needs no download.",
+    "Cold-beam TA comparison is infinitesimal; it does not qualify large finite angular variances or finite-N pairing.",
+    "The extreme-x probe reproduces an upstream quadrature failure. Its output is rejected, not patched or used as reference."
+  ],
+  "sources": [
+    "https://docs.plasmapy.org/en/stable/formulary/collisions.html",
+    "https://docs.plasmapy.org/en/stable/api/plasmapy.particles.particle_class.CustomParticle.html",
+    "https://docs.plasmapy.org/en/stable/api/plasmapy.formulary.collisions.frequencies.SingleParticleCollisionFrequencies.html",
+    "https://docs.plasmapy.org/en/stable/api/plasmapy.formulary.collisions.frequencies.MaxwellianCollisionFrequencies.html"
+  ]
+}

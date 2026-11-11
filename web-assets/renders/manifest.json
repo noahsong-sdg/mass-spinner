@@ -1,0 +1,885 @@
+{
+  "schemaVersion": "mass-spinner-apparatus-v1",
+  "renderEngine": "Blender Cycles CPU",
+  "hardwareOnly": true,
+  "assets": {
+    "beam-target": {
+      "image": "/renders/beam-target.webp",
+      "png": "/renders/beam-target.png",
+      "title": "Compact beam\u2013target source",
+      "caption": "Conceptual RF source, acceleration electrodes and LiT on a cooled substrate. Hardware only; layer thickness exaggerated. Unspecified alloys and dimensions are illustrative.",
+      "hotspots": [
+        {
+          "id": "rf-source",
+          "label": "RF ion source",
+          "xPct": 23.07,
+          "yPct": 55.51
+        },
+        {
+          "id": "accelerator",
+          "label": "Acceleration gap",
+          "xPct": 40.26,
+          "yPct": 48.95
+        },
+        {
+          "id": "beam",
+          "label": "Beam path - vacuum space",
+          "xPct": 56.88,
+          "yPct": 42.86
+        },
+        {
+          "id": "target",
+          "label": "LiT target",
+          "xPct": 70.32,
+          "yPct": 38.64
+        },
+        {
+          "id": "substrate",
+          "label": "Cooled substrate",
+          "xPct": 70.31,
+          "yPct": 28.25
+        },
+        {
+          "id": "neutrons",
+          "label": "Reaction region",
+          "xPct": 70.81,
+          "yPct": 51.27
+        }
+      ],
+      "model": "/models/beam-target.glb",
+      "modelBounds": {
+        "min": [
+          -3.35,
+          -0.935,
+          -0.775
+        ],
+        "max": [
+          3.35,
+          0.59,
+          0.855
+        ],
+        "center": [
+          0.0,
+          -0.17250000000000004,
+          0.03999999999999998
+        ],
+        "size": [
+          6.7,
+          1.525,
+          1.63
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.790789,
+          1.437448,
+          2.760209
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "accelerator",
+        "beam",
+        "beamline",
+        "neutrons",
+        "rf-source",
+        "substrate",
+        "support",
+        "target"
+      ],
+      "modelMeshComponentIds": [
+        "accelerator",
+        "beamline",
+        "rf-source",
+        "substrate",
+        "support",
+        "target"
+      ],
+      "modelRegionComponentIds": [
+        "beam",
+        "neutrons"
+      ],
+      "modelSHA256": "4eb4952ca1106b3384a23b550132e570f319d16e0d60fa4e606bea691c6dd1f5"
+    },
+    "gyro": {
+      "image": "/renders/gyro.webp",
+      "png": "/renders/gyro.png",
+      "title": "Gyro-orbit separation",
+      "caption": "Conceptual transverse injection across an axial magnetic field, with segmented collectors in the gyro plane. Hardware only; no calculated orbit or field is embedded. All apparatus dimensions and optical finishes are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Transverse ion source",
+          "xPct": 61.39,
+          "yPct": 46.46
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 24.66,
+          "yPct": 56.36
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum chamber",
+          "xPct": 64.47,
+          "yPct": 67.41
+        },
+        {
+          "id": "electrodes",
+          "label": "Injection slit",
+          "xPct": 54.29,
+          "yPct": 41.82
+        },
+        {
+          "id": "collectors",
+          "label": "Segmented gyro-plane collectors",
+          "xPct": 54.29,
+          "yPct": 64.09
+        }
+      ],
+      "model": "/models/gyro.glb",
+      "modelBounds": {
+        "min": [
+          -1.34,
+          -1.45,
+          -1.389853
+        ],
+        "max": [
+          1.34,
+          0.65,
+          1.65
+        ],
+        "center": [
+          0.0,
+          -0.39999999999999997,
+          0.13007349999999995
+        ],
+        "size": [
+          2.68,
+          2.1,
+          3.039853
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.69144,
+          1.406919,
+          2.837057
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [],
+      "modelSHA256": "e45793c58a574484991a3e24d8a5eff48c25db42828c6ae273fc07ce458d9f39"
+    },
+    "icr": {
+      "image": "/renders/icr.webp",
+      "png": "/renders/icr.png",
+      "title": "Resonant ion heating",
+      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Ion source",
+          "xPct": 21.14,
+          "yPct": 56.33
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 39.45,
+          "yPct": 47.04
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum column",
+          "xPct": 56.45,
+          "yPct": 58.68
+        },
+        {
+          "id": "electrodes",
+          "label": "Drive / bias region",
+          "xPct": 30.33,
+          "yPct": 55.83
+        },
+        {
+          "id": "collectors",
+          "label": "Collection / downstream region",
+          "xPct": 76.3,
+          "yPct": 35.22
+        }
+      ],
+      "model": "/models/icr.glb",
+      "modelBounds": {
+        "min": [
+          -2.55,
+          -1.125,
+          -0.815119
+        ],
+        "max": [
+          2.055,
+          0.69,
+          0.815119
+        ],
+        "center": [
+          -0.24749999999999983,
+          -0.21750000000000003,
+          0.0
+        ],
+        "size": [
+          4.605,
+          1.815,
+          1.630238
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.716725,
+          1.429446,
+          2.809185
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [],
+      "modelSHA256": "4dca79e7219e70949b4aaa9402b00de476cf88787d8b7c6e34e47ace72a70061"
+    },
+    "curved": {
+      "image": "/renders/curved.webp",
+      "png": "/renders/curved.png",
+      "title": "Curved magnetic guide",
+      "caption": "Conceptual bent magnetic guide and source/collector. No self-generated electric field or calculated drift track is drawn; the solver remains a guiding-centre diagnostic.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Slit source",
+          "xPct": 41.82,
+          "yPct": 61.7
+        },
+        {
+          "id": "coils",
+          "label": "Guide magnets",
+          "xPct": 60.1,
+          "yPct": 36.03
+        },
+        {
+          "id": "vessel",
+          "label": "Curved vacuum channel",
+          "xPct": 60.66,
+          "yPct": 55.14
+        },
+        {
+          "id": "collectors",
+          "label": "Collector",
+          "xPct": 54.64,
+          "yPct": 20.99
+        }
+      ],
+      "model": "/models/curved.glb",
+      "modelBounds": {
+        "min": [
+          -1.8,
+          -0.73,
+          -1.25
+        ],
+        "max": [
+          1.4,
+          0.435,
+          1.45
+        ],
+        "center": [
+          -0.20000000000000007,
+          -0.1475,
+          0.09999999999999998
+        ],
+        "size": [
+          3.2,
+          1.165,
+          2.7
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.9675,
+          1.338152,
+          2.712151
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "collectors",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [],
+      "modelSHA256": "7b649d0f0c3ecd2cbe12f39121cd2bb568e65540c653d573f7207a1fc51c262e"
+    },
+    "centrifuge": {
+      "image": "/renders/centrifuge.webp",
+      "png": "/renders/centrifuge.png",
+      "title": "Rotating plasma centrifuge",
+      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Ion source",
+          "xPct": 21.14,
+          "yPct": 56.33
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 39.45,
+          "yPct": 47.04
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum column",
+          "xPct": 56.45,
+          "yPct": 58.68
+        },
+        {
+          "id": "electrodes",
+          "label": "Drive / bias region",
+          "xPct": 30.33,
+          "yPct": 55.83
+        },
+        {
+          "id": "collectors",
+          "label": "Collection / downstream region",
+          "xPct": 76.3,
+          "yPct": 35.22
+        }
+      ],
+      "model": "/models/centrifuge.glb",
+      "modelBounds": {
+        "min": [
+          -2.55,
+          -1.125,
+          -0.789853
+        ],
+        "max": [
+          2.055,
+          0.69,
+          0.789853
+        ],
+        "center": [
+          -0.24749999999999983,
+          -0.21750000000000003,
+          0.0
+        ],
+        "size": [
+          4.605,
+          1.815,
+          1.579706
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.716725,
+          1.429446,
+          2.809185
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [
+        "collectors"
+      ],
+      "modelSHA256": "e455b37e446c0b0bc80470baee193e4e531ce7f1470754efe52f05c75ac719f9"
+    },
+    "rotating": {
+      "image": "/renders/rotating.webp",
+      "png": "/renders/rotating.png",
+      "title": "Uniform-field rotating filter",
+      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Ion source",
+          "xPct": 21.14,
+          "yPct": 56.33
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 39.45,
+          "yPct": 47.04
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum column",
+          "xPct": 56.45,
+          "yPct": 58.68
+        },
+        {
+          "id": "electrodes",
+          "label": "Drive / bias region",
+          "xPct": 30.33,
+          "yPct": 55.83
+        },
+        {
+          "id": "collectors",
+          "label": "Collection / downstream region",
+          "xPct": 76.3,
+          "yPct": 35.22
+        }
+      ],
+      "model": "/models/rotating.glb",
+      "modelBounds": {
+        "min": [
+          -2.55,
+          -1.125,
+          -0.789853
+        ],
+        "max": [
+          2.055,
+          0.69,
+          0.789853
+        ],
+        "center": [
+          -0.24749999999999983,
+          -0.21750000000000003,
+          0.0
+        ],
+        "size": [
+          4.605,
+          1.815,
+          1.579706
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.716725,
+          1.429446,
+          2.809185
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [
+        "collectors"
+      ],
+      "modelSHA256": "47153a1dec97df7bff46b3135b5b666d068b3f54f78fb8cd81cddf2ea9a3b045"
+    },
+    "doublewell": {
+      "image": "/renders/doublewell.webp",
+      "png": "/renders/doublewell.png",
+      "title": "Shaped-potential double-well filter",
+      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Ion source",
+          "xPct": 21.14,
+          "yPct": 56.33
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 39.45,
+          "yPct": 47.04
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum column",
+          "xPct": 56.45,
+          "yPct": 58.68
+        },
+        {
+          "id": "electrodes",
+          "label": "Drive / bias region",
+          "xPct": 30.33,
+          "yPct": 55.83
+        },
+        {
+          "id": "collectors",
+          "label": "Collection / downstream region",
+          "xPct": 76.3,
+          "yPct": 35.22
+        }
+      ],
+      "model": "/models/doublewell.glb",
+      "modelBounds": {
+        "min": [
+          -2.55,
+          -1.125,
+          -0.789853
+        ],
+        "max": [
+          2.055,
+          0.69,
+          0.789853
+        ],
+        "center": [
+          -0.24749999999999983,
+          -0.21750000000000003,
+          0.0
+        ],
+        "size": [
+          4.605,
+          1.815,
+          1.579706
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.716725,
+          1.429446,
+          2.809185
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [
+        "collectors"
+      ],
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+    },
+    "blanket": {
+      "image": "/renders/blanket.webp",
+      "png": "/renders/blanket.png",
+      "title": "Future power-plant blanket concept",
+      "caption": "Separate alchemy-paper concept, not the compact source. Paper-model material sequence with both inner/outer V-alloy walls. Relative radial layers only; not to scale, no neutronics/depletion result. Empty core denotes the plasma region; optical finishes are illustrative.",
+      "hotspots": [
+        {
+          "id": "plasma",
+          "label": "Plasma source region",
+          "xPct": 68.18,
+          "yPct": 60.9
+        },
+        {
+          "id": "armor",
+          "label": "Tungsten armor",
+          "xPct": 68.18,
+          "yPct": 52.97
+        },
+        {
+          "id": "structure",
+          "label": "V4Cr4Ti structure",
+          "xPct": 63.36,
+          "yPct": 57.55
+        },
+        {
+          "id": "multiplier",
+          "label": "Hg-Li multiplier",
+          "xPct": 68.18,
+          "yPct": 73.32
+        },
+        {
+          "id": "breeder",
+          "label": "FLiBe region",
+          "xPct": 77.82,
+          "yPct": 67.59
+        },
+        {
+          "id": "tank",
+          "label": "Eurofer97 tank",
+          "xPct": 68.18,
+          "yPct": 40.03
+        }
+      ],
+      "model": "/models/blanket.glb",
+      "modelBounds": {
+        "min": [
+          -3.24,
+          -1.24,
+          -3.24
+        ],
+        "max": [
+          3.239926,
+          1.24,
+          3.239926
+        ],
+        "center": [
+          -3.700000000006476e-05,
+          0.0,
+          -3.700000000006476e-05
+        ],
+        "size": [
+          6.479926000000001,
+          2.48,
+          6.479926000000001
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          6.0,
+          6.0,
+          8.0
+        ],
+        "target": [
+          1.902222,
+          1.833927,
+          2.536297
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "armor",
+        "breeder",
+        "multiplier",
+        "plasma",
+        "structure",
+        "tank"
+      ],
+      "modelMeshComponentIds": [
+        "armor",
+        "breeder",
+        "multiplier",
+        "structure",
+        "tank"
+      ],
+      "modelRegionComponentIds": [
+        "plasma"
+      ],
+      "modelSHA256": "61efc7c51ee32f4c8fc0496c0738cbee1a10f346bc6ae56794400b74ac711d6b"
+    },
+    "doublewell-dynamics": {
+      "image": "/renders/doublewell.webp",
+      "png": "/renders/doublewell.png",
+      "title": "Collisional double-well apparatus",
+      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "hotspots": [
+        {
+          "id": "source",
+          "label": "Ion source",
+          "xPct": 21.14,
+          "yPct": 56.33
+        },
+        {
+          "id": "coils",
+          "label": "Axial field coils",
+          "xPct": 39.45,
+          "yPct": 47.04
+        },
+        {
+          "id": "vessel",
+          "label": "Vacuum column",
+          "xPct": 56.45,
+          "yPct": 58.68
+        },
+        {
+          "id": "electrodes",
+          "label": "Drive / bias region",
+          "xPct": 30.33,
+          "yPct": 55.83
+        },
+        {
+          "id": "collectors",
+          "label": "Collection / downstream region",
+          "xPct": 76.3,
+          "yPct": 35.22
+        }
+      ],
+      "model": "/models/doublewell.glb",
+      "modelBounds": {
+        "min": [
+          -2.55,
+          -1.125,
+          -0.789853
+        ],
+        "max": [
+          2.055,
+          0.69,
+          0.789853
+        ],
+        "center": [
+          -0.24749999999999983,
+          -0.21750000000000003,
+          0.0
+        ],
+        "size": [
+          4.605,
+          1.815,
+          1.579706
+        ]
+      },
+      "modelCamera": {
+        "position": [
+          -5.5,
+          4.8,
+          9.0
+        ],
+        "target": [
+          -1.716725,
+          1.429446,
+          2.809185
+        ],
+        "up": [
+          0,
+          1,
+          0
+        ]
+      },
+      "componentIds": [
+        "coils",
+        "collectors",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelMeshComponentIds": [
+        "coils",
+        "electrodes",
+        "source",
+        "vessel"
+      ],
+      "modelRegionComponentIds": [
+        "collectors"
+      ],
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+    }
+  },
+  "sourceSHA256": "db29e522f560f3ffdeb02eb811c162a810a4d574f5e2eb3d25a1cbef189e2969",
+  "renderSettings": {
+    "width": 1600,
+    "height": 900,
+    "samples": 192,
+    "device": "CPU",
+    "threads": 4,
+    "denoising": false,
+    "viewTransform": "Filmic",
+    "look": "Medium High Contrast",
+    "exposure": -0.3
+  },
+  "modelFormat": "glTF 2.0 binary, PBR metallic roughness, Y up",
+  "modelExporterSHA256": "14deb881f1c3b65f295fa2b5c1e55d3f8d6bf32cc5d8b12a20272b77757d3cc8"
+}

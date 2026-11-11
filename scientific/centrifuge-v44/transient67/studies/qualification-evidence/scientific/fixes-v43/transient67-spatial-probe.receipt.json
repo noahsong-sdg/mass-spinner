@@ -1,0 +1,20 @@
+{
+  "label": "transient67-spatial-probe",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/transient-v67/campaign.ts",
+    "scientific/transient-v67/specifications.json",
+    "/work/home/transient67-spatial-probe.json",
+    "[\"r32-z4-w8-t128-u\",\"r32-z4-w16-t128-u\",\"r32-z4-w32-t128-u\",\"r32-z4-w64-t128-u\",\"r32-z4-w128-t128-u\",\"r32-z8-w8-t128-u\",\"r32-z16-w8-t128-u\",\"r32-z4-w8-t128-q\",\"r32-z4-w8-t256-q\"]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 720,
+  "sourceSHA256": "d94cd40803a45e819e8ad6907e576b6f37659673f46466aa3053fa1939344c26",
+  "exitCode": 0,
+  "seconds": 426.331350697,
+  "sourceVerifiedBeforeAndAfter": true
+}

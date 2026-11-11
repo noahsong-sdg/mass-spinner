@@ -1,0 +1,186 @@
+{
+  "thermal69-assess-1.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-assess-1.log": {
+    "sha256": "d236a6e0bd5d98f6d9886ec6faaf68597c5b155592e08d1c09bc79d4079958ee",
+    "bytes": 12554
+  },
+  "thermal69-assess-1.receipt.json": {
+    "sha256": "25e534fb4bb7ebefe82f9d3b7f98a72abf01104a4795aa7d92f5811222d60665",
+    "bytes": 2160
+  },
+  "thermal69-assess-1.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-assess-2.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-assess-2.log": {
+    "sha256": "bfdeef0523bd2b9db72af59f711ddc918607a543521722cde85e6eec40816325",
+    "bytes": 4857
+  },
+  "thermal69-assess-2.receipt.json": {
+    "sha256": "cb358b6ec395d19b4aafa0d24c2888663abf7ddcca604364d833118c2cd2d8dc",
+    "bytes": 2554
+  },
+  "thermal69-assess-2.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-batch-1.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-batch-1.log": {
+    "sha256": "d3cb953ffedbe110a471c71a004bfbef9a707b100836fa8eb120c99608142fd0",
+    "bytes": 695
+  },
+  "thermal69-batch-1.receipt.json": {
+    "sha256": "dccf7b0d4255bca342ebb2f673278b6a10983f38763b1d7a609794f96a52632f",
+    "bytes": 1546
+  },
+  "thermal69-batch-1.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-batch-2.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-batch-2.log": {
+    "sha256": "09c8f23f39942905f984a670468227c3dae51916a775205c764b23e6303e8d28",
+    "bytes": 3737
+  },
+  "thermal69-batch-2.receipt.json": {
+    "sha256": "68714ebeed0eb933f0bf93fad5849cd140b1338b2eb05c27d15878efb5a70cc1",
+    "bytes": 2364
+  },
+  "thermal69-batch-2.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-cli-diagnosis.inputs.json": {
+    "sha256": "ffeba4d90eb6af6515c768fa79f466e2b6a2e45cd403d1d92c03b070fc23516a",
+    "bytes": 81504
+  },
+  "thermal69-cli-diagnosis.log": {
+    "sha256": "98908d3324a7bb3a7775ad0d525379e6b3dc556ccc3db4b894c219ab2fae525c",
+    "bytes": 1218
+  },
+  "thermal69-cli-diagnosis.receipt.json": {
+    "sha256": "6089c058782c2bc9c3447f3bdc213ad23f0e2d251b6c236819626d1bf7a8024a",
+    "bytes": 703
+  },
+  "thermal69-cli-diagnosis.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-figure.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-figure.log": {
+    "sha256": "3f2aa85b751ac07e1c030ce8fcb903df519486cccc9c1ec12b8f6b7264da943d",
+    "bytes": 783
+  },
+  "thermal69-figure.receipt.json": {
+    "sha256": "300fa510bb08673501d7442df416a79b763e34300b2746f8a89d991a05fdd158",
+    "bytes": 3329
+  },
+  "thermal69-figure.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-final-checks.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-final-checks.log": {
+    "sha256": "a43aa806263de331604f8b997492d7029d85a40d2b3f23a6891677762931a9c8",
+    "bytes": 1587
+  },
+  "thermal69-final-checks.receipt.json": {
+    "sha256": "2e37f721e07c91cc33860f3e9f80a0fe4f5e283d65daf3016b9895cfa8f4e2ee",
+    "bytes": 1492
+  },
+  "thermal69-final-checks.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-seed.inputs.json": {
+    "sha256": "4cbbfe0716f9b6d3ea14c3127fa126a8ec5af5276d52d5c3ffe5a0448f8f4ae7",
+    "bytes": 81504
+  },
+  "thermal69-seed.log": {
+    "sha256": "c77e580c78f197ce540f8a8c42a40ecbbfa2fa0446644241cfbe89cdf8971535",
+    "bytes": 138
+  },
+  "thermal69-seed.receipt.json": {
+    "sha256": "264fba1249500cd3a27b15fe87608925930b7f56223aaf6f55265fc79316b1b9",
+    "bytes": 1302
+  },
+  "thermal69-seed.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-storage-check.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-storage-check.log": {
+    "sha256": "07bf437d609c118cfd3a19651fa78b2847f8a6e173c5e498d0843c60fd2818b4",
+    "bytes": 369
+  },
+  "thermal69-storage-check.receipt.json": {
+    "sha256": "24a169175b02cb8590fbf489eb62b0599d3269f4d4bb552717c3ae4b52ab10c1",
+    "bytes": 690
+  },
+  "thermal69-storage-check.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-unit-1.inputs.json": {
+    "sha256": "7c8183f01ce3c8c5bffc732d6a25773fef17c16c4f699f3e995515301a918df0",
+    "bytes": 81504
+  },
+  "thermal69-unit-1.log": {
+    "sha256": "328d14112ad58165f7544c5d0bb286187018c53a5bb392ed51c07d476e0bd88f",
+    "bytes": 1237
+  },
+  "thermal69-unit-1.receipt.json": {
+    "sha256": "14a9da6f5bf254c572c8cf5dd2f4e7b08a1c5b033fa39b240ac48a41c1cb61b2",
+    "bytes": 544
+  },
+  "thermal69-unit-1.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "thermal69-unit-2.inputs.json": {
+    "sha256": "e7a90c37347408c0bcd464937af7013d321251439b9263d4a499751666f2fea1",
+    "bytes": 81504
+  },
+  "thermal69-unit-2.log": {
+    "sha256": "9b8a2db407b2e5270f8eef717c6fca39071da58155b38d84458f5b41b6b28e8c",
+    "bytes": 114
+  },
+  "thermal69-unit-2.receipt.json": {
+    "sha256": "38b09fb17825375715bee641f74e45c78e78717883118194b60c0e3d3bb79787",
+    "bytes": 545
+  },
+  "thermal69-unit-2.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "control.py": {
+    "sha256": "eff3aca680d5c0572fb878d9ecdf7fb7e0d684a1c62032cd8126471d709ddd45",
+    "bytes": 6942
+  },
+  "export-transient67.py": {
+    "sha256": "9388cf3e23c11eef995ac7da03c94baca70320505c841e304f1141022ac1666c",
+    "bytes": 2702
+  }
+}

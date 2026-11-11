@@ -1,0 +1,2657 @@
+{
+  "cases": [
+    {
+      "id": "coaxial-n12",
+      "kind": "coaxial",
+      "radialCells": 12,
+      "axialCells": 6,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 36.25888113456038,
+          "powerScaleW": 36.258881134617525,
+          "maxCellChargeOverScale": 8.424270750296717e-12,
+          "powerResidualOverScale": 5.878913360195128e-16,
+          "exactCoaxialMaximumRelativeError": 1.175782672039025e-15
+        },
+        "fipy": {
+          "currentScaleA": 36.23621074489215,
+          "powerScaleW": 36.236210744892134,
+          "maxCellChargeOverScale": 1.790097057019518e-15,
+          "powerResidualOverScale": 2.9412956866368476e-15,
+          "exactCoaxialMaximumRelativeError": 0.0006252368803421744
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.00010496789489322644,
+      "potentialDifferenceOverScale": 0.0011364144795055486,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.00031261844017392885,
+        "mechanicalW": 0.0,
+        "electrodePowerW": 0.00031261844017314497
+      }
+    },
+    {
+      "id": "coaxial-n24",
+      "kind": "coaxial",
+      "radialCells": 24,
+      "axialCells": 12,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 36.258881134481555,
+          "powerScaleW": 36.25888113461748,
+          "maxCellChargeOverScale": 7.779600215810462e-12,
+          "powerResidualOverScale": 3.4293661267804956e-15,
+          "exactCoaxialMaximumRelativeError": 5.486985802848783e-15
+        },
+        "fipy": {
+          "currentScaleA": 36.25320719996574,
+          "powerScaleW": 36.2532071999657,
+          "maxCellChargeOverScale": 1.784993883381251e-15,
+          "powerResidualOverScale": 1.0681697452401424e-14,
+          "exactCoaxialMaximumRelativeError": 0.00015648399715288567
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 2.6387227720414685e-05,
+      "potentialDifferenceOverScale": 0.00029807708937244423,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 7.82419985660569e-05,
+        "mechanicalW": 0.0,
+        "electrodePowerW": 7.824199856850645e-05
+      }
+    },
+    {
+      "id": "coaxial-n48",
+      "kind": "coaxial",
+      "radialCells": 48,
+      "axialCells": 24,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 36.25888113485006,
+          "powerScaleW": 36.25888113461758,
+          "maxCellChargeOverScale": 1.1603205488874341e-11,
+          "powerResidualOverScale": 1.6656921187219503e-15,
+          "exactCoaxialMaximumRelativeError": 2.7434929014243915e-15
+        },
+        "fipy": {
+          "currentScaleA": 36.25746225376672,
+          "powerScaleW": 36.25746225376672,
+          "maxCellChargeOverScale": 3.671481529538825e-15,
+          "powerResidualOverScale": 1.8617287504780318e-15,
+          "exactCoaxialMaximumRelativeError": 3.913195350687419e-05
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 6.6047301636174005e-06,
+      "potentialDifferenceOverScale": 7.636058479034563e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 1.9565976754906804e-05,
+        "mechanicalW": 0.0,
+        "electrodePowerW": 1.9565976765390867e-05
+      }
+    },
+    {
+      "id": "coaxial-n96",
+      "kind": "coaxial",
+      "radialCells": 96,
+      "axialCells": 48,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 36.25888113484236,
+          "powerScaleW": 36.25888113461846,
+          "maxCellChargeOverScale": 9.908792467882193e-12,
+          "powerResidualOverScale": 2.5769236895521314e-14,
+          "exactCoaxialMaximumRelativeError": 5.0950582455024414e-14
+        },
+        "fipy": {
+          "currentScaleA": 36.2585263895627,
+          "powerScaleW": 36.258526389563144,
+          "maxCellChargeOverScale": 5.875554212205414e-15,
+          "powerResidualOverScale": 1.2737770235941176e-15,
+          "exactCoaxialMaximumRelativeError": 9.783673498569785e-06
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 1.6518566925971534e-06,
+      "potentialDifferenceOverScale": 1.932673033583441e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 4.8918367522242255e-06,
+        "mechanicalW": 0.0,
+        "electrodePowerW": 4.89183675349799e-06
+      }
+    },
+    {
+      "id": "motional-n12",
+      "kind": "motional",
+      "radialCells": 12,
+      "axialCells": 6,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 68.89187415570183,
+          "powerScaleW": 130.89456089596945,
+          "maxCellChargeOverScale": 5.0128086546374725e-12,
+          "powerResidualOverScale": 7.5997033280454e-16,
+          "exactCoaxialMaximumRelativeError": 6.188329852836973e-14
+        },
+        "fipy": {
+          "currentScaleA": 68.84880041529495,
+          "powerScaleW": 130.8127207890603,
+          "maxCellChargeOverScale": 8.742162878446181e-16,
+          "powerResidualOverScale": 3.530641175095024e-16,
+          "exactCoaxialMaximumRelativeError": 0.0006252368803462587
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.0006532135081704915,
+      "potentialDifferenceOverScale": 0.0013996863176366386,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0003126184401738728,
+        "mechanicalW": 0.00014808241904670425,
+        "electrodePowerW": 0.00016453602112752135
+      }
+    },
+    {
+      "id": "motional-n24",
+      "kind": "motional",
+      "radialCells": 24,
+      "axialCells": 12,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 68.89187415563043,
+          "powerScaleW": 130.8945608959694,
+          "maxCellChargeOverScale": 4.272778798463907e-12,
+          "powerResidualOverScale": 4.885523568029188e-16,
+          "exactCoaxialMaximumRelativeError": 2.8053761999527613e-14
+        },
+        "fipy": {
+          "currentScaleA": 68.88109367993533,
+          "powerScaleW": 130.8740779918773,
+          "maxCellChargeOverScale": 1.042000505876414e-15,
+          "powerResidualOverScale": 2.633166415621564e-15,
+          "exactCoaxialMaximumRelativeError": 0.00015648399713914758
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.00016344863033853455,
+      "potentialDifferenceOverScale": 0.00036521648457820587,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 7.824199856598561e-05,
+        "mechanicalW": 3.7061999313494594e-05,
+        "electrodePowerW": 4.117999925447237e-05
+      }
+    },
+    {
+      "id": "motional-n48",
+      "kind": "motional",
+      "radialCells": 48,
+      "axialCells": 24,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 68.89187415602248,
+          "powerScaleW": 130.8945608959684,
+          "maxCellChargeOverScale": 6.240508366742535e-12,
+          "powerResidualOverScale": 5.319792329631823e-15,
+          "exactCoaxialMaximumRelativeError": 3.795508976406677e-14
+        },
+        "fipy": {
+          "currentScaleA": 68.88917828215604,
+          "powerScaleW": 130.88943873609685,
+          "maxCellChargeOverScale": 1.5987559891020358e-15,
+          "powerResidualOverScale": 4.804286176332033e-15,
+          "exactCoaxialMaximumRelativeError": 3.913195352784231e-05
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 4.0870079678637826e-05,
+      "potentialDifferenceOverScale": 9.331709425603821e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 1.9565976754769084e-05,
+        "mechanicalW": 9.268094235635403e-06,
+        "electrodePowerW": 1.0297882517858017e-05
+      }
+    },
+    {
+      "id": "motional-n96",
+      "kind": "motional",
+      "radialCells": 96,
+      "axialCells": 48,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 68.89187415598938,
+          "powerScaleW": 130.89456089596897,
+          "maxCellChargeOverScale": 5.322127014814262e-12,
+          "powerResidualOverScale": 5.184083341630988e-15,
+          "exactCoaxialMaximumRelativeError": 2.35156534407805e-14
+        },
+        "fipy": {
+          "currentScaleA": 68.89120014016997,
+          "powerScaleW": 130.8932802663233,
+          "maxCellChargeOverScale": 2.27312087491689e-15,
+          "powerResidualOverScale": 6.02553801913261e-15,
+          "exactCoaxialMaximumRelativeError": 9.78367348277923e-06
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 1.02181932125575e-05,
+      "potentialDifferenceOverScale": 2.358773498444117e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 4.8918367501510014e-06,
+        "mechanicalW": 2.3171858176436253e-06,
+        "electrodePowerW": 2.574650920049291e-06
+      }
+    },
+    {
+      "id": "patch-n12",
+      "kind": "patch",
+      "radialCells": 12,
+      "axialCells": 6,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 12.53492977515725,
+          "powerScaleW": 10.240316310655272,
+          "maxCellChargeOverScale": 3.233888541687898e-11,
+          "powerResidualOverScale": 1.9081368817749347e-15
+        },
+        "fipy": {
+          "currentScaleA": 12.605447041859872,
+          "powerScaleW": 10.308966185248195,
+          "maxCellChargeOverScale": 6.548834841682889e-15,
+          "powerResidualOverScale": 4.4801076067643124e-15
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.0006756300238417965,
+      "potentialDifferenceOverScale": 0.0003629616164665237,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0010663018839072995,
+        "mechanicalW": 0.003329619738747154,
+        "electrodePowerW": 0.002263317854858723
+      }
+    },
+    {
+      "id": "patch-n24",
+      "kind": "patch",
+      "radialCells": 24,
+      "axialCells": 12,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 12.84424733918403,
+          "powerScaleW": 10.196281025763536,
+          "maxCellChargeOverScale": 3.365954040590549e-11,
+          "powerResidualOverScale": 1.8292695902137432e-14
+        },
+        "fipy": {
+          "currentScaleA": 12.864916720947495,
+          "powerScaleW": 10.213650509572366,
+          "maxCellChargeOverScale": 9.490138248656757e-15,
+          "powerResidualOverScale": 2.7827180305187466e-15
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.00017663786720784112,
+      "potentialDifferenceOverScale": 9.928282861605068e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0002623326273722693,
+        "mechanicalW": 0.0008503073309760195,
+        "electrodePowerW": 0.0005879747036275772
+      }
+    },
+    {
+      "id": "patch-n48",
+      "kind": "patch",
+      "radialCells": 48,
+      "axialCells": 24,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 13.150204221471775,
+          "powerScaleW": 10.146502549905621,
+          "maxCellChargeOverScale": 2.5651027327743717e-11,
+          "powerResidualOverScale": 5.024533433075557e-14
+        },
+        "fipy": {
+          "currentScaleA": 13.155660028489136,
+          "powerScaleW": 10.150867664062314,
+          "maxCellChargeOverScale": 1.0287692945785086e-14,
+          "powerResidualOverScale": 9.624756168667753e-15
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 4.5322000844297984e-05,
+      "potentialDifferenceOverScale": 2.6042810127025667e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 6.495467640904854e-05,
+        "mechanicalW": 0.00021501187389823888,
+        "electrodePowerW": 0.00015005719753250174
+      }
+    },
+    {
+      "id": "patch-n96",
+      "kind": "patch",
+      "radialCells": 96,
+      "axialCells": 48,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 13.223727077726323,
+          "powerScaleW": 10.114036962418284,
+          "maxCellChargeOverScale": 2.0382494849851145e-11,
+          "powerResidualOverScale": 1.17673989804522e-14
+        },
+        "fipy": {
+          "currentScaleA": 13.225099635654558,
+          "powerScaleW": 10.115130884718388,
+          "maxCellChargeOverScale": 3.014421686369782e-14,
+          "powerResidualOverScale": 2.081023843072003e-14
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 1.1478648947037784e-05,
+      "potentialDifferenceOverScale": 8.300640076790986e-06,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 1.6153958028190984e-05,
+        "mechanicalW": 5.4073561295796025e-05,
+        "electrodePowerW": 3.791960307921531e-05
+      }
+    },
+    {
+      "id": "axis-patch-n12",
+      "kind": "axis-patch",
+      "radialCells": 12,
+      "axialCells": 6,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 10.319279296122934,
+          "powerScaleW": 13.552366593419023,
+          "maxCellChargeOverScale": 1.0381334472898728e-11,
+          "powerResidualOverScale": 1.4418090817356776e-15
+        },
+        "fipy": {
+          "currentScaleA": 10.493605405901516,
+          "powerScaleW": 13.626221882206204,
+          "maxCellChargeOverScale": 7.68372204257427e-15,
+          "powerResidualOverScale": 9.777234225797608e-16
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.0021906722202768127,
+      "potentialDifferenceOverScale": 0.0012214577897664283,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0022104767930314394,
+        "mechanicalW": 0.0027100427919640197,
+        "electrodePowerW": 0.000499565998927887
+      }
+    },
+    {
+      "id": "axis-patch-n24",
+      "kind": "axis-patch",
+      "radialCells": 24,
+      "axialCells": 12,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 10.561832532909529,
+          "powerScaleW": 13.886887732344553,
+          "maxCellChargeOverScale": 3.1379981787112754e-11,
+          "powerResidualOverScale": 1.189619943995414e-14
+        },
+        "fipy": {
+          "currentScaleA": 10.62741682748921,
+          "powerScaleW": 13.907698296600584,
+          "maxCellChargeOverScale": 6.056521626794054e-15,
+          "powerResidualOverScale": 4.598089838779421e-15
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.0005936386740196515,
+      "potentialDifferenceOverScale": 0.0004966524003476348,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0005877557817078587,
+        "mechanicalW": 0.0007481670874765821,
+        "electrodePowerW": 0.00016041130576268834
+      }
+    },
+    {
+      "id": "axis-patch-n48",
+      "kind": "axis-patch",
+      "radialCells": 48,
+      "axialCells": 24,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 10.712887444636241,
+          "powerScaleW": 14.034938180415786,
+          "maxCellChargeOverScale": 2.4312313786514577e-11,
+          "powerResidualOverScale": 2.0883517599673408e-14
+        },
+        "fipy": {
+          "currentScaleA": 10.733822661466167,
+          "powerScaleW": 14.040383214387008,
+          "maxCellChargeOverScale": 1.0132801325966519e-14,
+          "powerResidualOverScale": 1.113355664730315e-14
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 0.00019535821298520428,
+      "potentialDifferenceOverScale": 0.0001721736502755327,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 0.0001499882737326207,
+        "mechanicalW": 0.0001939061736288569,
+        "electrodePowerW": 4.391789993207236e-05
+      }
+    },
+    {
+      "id": "axis-patch-n96",
+      "kind": "axis-patch",
+      "radialCells": 96,
+      "axialCells": 48,
+      "checks": {
+        "kernel": {
+          "currentScaleA": 10.77687491128099,
+          "powerScaleW": 14.103581879610413,
+          "maxCellChargeOverScale": 2.1226762508070167e-11,
+          "powerResidualOverScale": 1.0894740635374402e-14
+        },
+        "fipy": {
+          "currentScaleA": 10.782315619165503,
+          "powerScaleW": 14.104969942479816,
+          "maxCellChargeOverScale": 1.6077336545985734e-14,
+          "powerResidualOverScale": 1.322352822428166e-14
+        }
+      },
+      "nativeIndexPotentialDifferenceOverScale": 6.0562553172803205e-05,
+      "potentialDifferenceOverScale": 5.4901671249932e-05,
+      "potentialComparison": "FiPy linear interpolation in physical r to q-centred production points",
+      "powerDifferencesOverCombinedScale": {
+        "jouleW": 3.778563739954943e-05,
+        "mechanicalW": 4.9204743968935657e-05,
+        "electrodePowerW": 1.1419106549708355e-05
+      }
+    }
+  ],
+  "gates": [
+    {
+      "name": "coaxial-n12 kernel reconstructed jouleW",
+      "value": 9.798188933658547e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reconstructed electrodePowerW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel cell charge",
+      "value": 8.424270750296717e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel net boundary charge",
+      "value": 1.5753895599646052e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel power identity",
+      "value": 5.878913360195128e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reported charge maximum",
+      "value": 3.71809724795616e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reported net boundary",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy reconstructed electrodePowerW",
+      "value": 2.647166117973163e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy cell charge",
+      "value": 1.790097057019518e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy net boundary charge",
+      "value": 2.708443111444763e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy power identity",
+      "value": 2.9412956866368476e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy reported charge maximum",
+      "value": 6.446783094990327e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 fipy reported net boundary",
+      "value": 2.6594215166674822e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reconstructed torqueNm",
+      "value": 7.504995778959318e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 kernel reconstructed jouleByCellW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 FiPy exported radial current",
+      "value": 4.534497516898472e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 FiPy exported axial current",
+      "value": 8.707984516093031e-32,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n12 exact-log coaxial identity",
+      "value": 1.175782672039025e-15,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reconstructed jouleW",
+      "value": 5.878913360195135e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reconstructed electrodePowerW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel cell charge",
+      "value": 7.779600215810462e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel net boundary charge",
+      "value": 3.74531485282844e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel power identity",
+      "value": 3.4293661267804956e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reported charge maximum",
+      "value": 4.2774724426396816e-27,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reported net boundary",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy reconstructed jouleW",
+      "value": 9.799722433395802e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy reconstructed electrodePowerW",
+      "value": 5.291850114033733e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy cell charge",
+      "value": 1.784993883381251e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy net boundary charge",
+      "value": 1.1961786195263736e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy power identity",
+      "value": 1.0681697452401424e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy reported charge maximum",
+      "value": 1.0069369686223631e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 fipy reported net boundary",
+      "value": 5.2979749405545995e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reconstructed torqueNm",
+      "value": 1.1138993734807507e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 kernel reconstructed jouleByCellW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 FiPy exported radial current",
+      "value": 4.47112336023683e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 FiPy exported axial current",
+      "value": 8.703901984393339e-32,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n24 exact-log coaxial identity",
+      "value": 5.486985802848783e-15,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reconstructed jouleW",
+      "value": 3.9192755734634127e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reconstructed electrodePowerW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel cell charge",
+      "value": 1.1603205488874341e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel net boundary charge",
+      "value": 6.409886404271103e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel power identity",
+      "value": 1.6656921187219503e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reported charge maximum",
+      "value": 3.137997128942664e-19,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reported net boundary",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy reconstructed jouleW",
+      "value": 3.919428948374804e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy reconstructed electrodePowerW",
+      "value": 1.0680443884321341e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy cell charge",
+      "value": 3.671481529538825e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy net boundary charge",
+      "value": 1.7453707035731548e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy power identity",
+      "value": 1.8617287504780318e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy reported charge maximum",
+      "value": 6.653171763939387e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 fipy reported net boundary",
+      "value": 1.0686567992053177e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reconstructed torqueNm",
+      "value": 4.801625570370691e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 kernel reconstructed jouleByCellW",
+      "value": 9.56854388052591e-20,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 FiPy exported radial current",
+      "value": 4.470598644240011e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 FiPy exported axial current",
+      "value": 1.7405761047472285e-31,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n48 exact-log coaxial identity",
+      "value": 2.7434929014243915e-15,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reconstructed jouleW",
+      "value": 2.939456680097488e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reconstructed electrodePowerW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel cell charge",
+      "value": 9.908792467882193e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel net boundary charge",
+      "value": 6.149325003121722e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel power identity",
+      "value": 2.5769236895521314e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reported charge maximum",
+      "value": 4.975765256213824e-19,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reported net boundary",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy reconstructed jouleW",
+      "value": 1.4697427195316742e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy reconstructed electrodePowerW",
+      "value": 2.1360260857193666e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy cell charge",
+      "value": 5.875554212205414e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy net boundary charge",
+      "value": 1.11746376144394e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy power identity",
+      "value": 1.2737770235941176e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy reported charge maximum",
+      "value": 6.67827930607359e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 fipy reported net boundary",
+      "value": 2.1306676487211004e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reconstructed torqueNm",
+      "value": 7.552024470375195e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 kernel reconstructed jouleByCellW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 FiPy exported radial current",
+      "value": 4.455157618580443e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 FiPy exported axial current",
+      "value": 3.481050042665128e-31,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coaxial-n96 exact-log coaxial identity",
+      "value": 5.0950582455024414e-14,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reconstructed jouleW",
+      "value": 1.0856719040064857e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reconstructed mechanicalW",
+      "value": 1.6285078560097285e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reconstructed electrodePowerW",
+      "value": 1.0856719040064857e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel cell charge",
+      "value": 5.0128086546374725e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel net boundary charge",
+      "value": 9.762090342860459e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel power identity",
+      "value": 7.5997033280454e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reported charge maximum",
+      "value": 6.47847278547951e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reported net boundary",
+      "value": 2.449547233417178e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy reconstructed jouleW",
+      "value": 1.0863511307984688e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy reconstructed mechanicalW",
+      "value": 5.431755653992344e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy reconstructed electrodePowerW",
+      "value": 1.6295266961977033e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy cell charge",
+      "value": 8.742162878446181e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy net boundary charge",
+      "value": 5.031163674510406e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy power identity",
+      "value": 3.530641175095024e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy reported charge maximum",
+      "value": 7.379097997979266e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 fipy reported net boundary",
+      "value": 2.967096525993316e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reconstructed torqueNm",
+      "value": 7.899995556799161e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 kernel reconstructed jouleByCellW",
+      "value": 4.240905875025335e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 FiPy exported radial current",
+      "value": 9.030293774762266e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 FiPy exported axial current",
+      "value": 4.58314974531213e-32,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n12 exact-log coaxial identity",
+      "value": 6.188329852836973e-14,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reconstructed jouleW",
+      "value": 3.2570157120194586e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reconstructed electrodePowerW",
+      "value": 3.2570157120194586e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel cell charge",
+      "value": 4.272778798463907e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel net boundary charge",
+      "value": 2.1024463904441427e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel power identity",
+      "value": 4.885523568029188e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reported charge maximum",
+      "value": 3.867706157806001e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reported net boundary",
+      "value": 5.8660210063472155e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy reconstructed jouleW",
+      "value": 4.3433672834994874e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy reconstructed electrodePowerW",
+      "value": 3.8004463730620514e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy cell charge",
+      "value": 1.042000505876414e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy net boundary charge",
+      "value": 4.429216652462412e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy power identity",
+      "value": 2.633166415621564e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy reported charge maximum",
+      "value": 7.199323110952782e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 fipy reported net boundary",
+      "value": 6.382713953330114e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reconstructed torqueNm",
+      "value": 1.954209427178398e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 kernel reconstructed jouleByCellW",
+      "value": 2.120452937512668e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 FiPy exported radial current",
+      "value": 1.0960215879455752e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 FiPy exported axial current",
+      "value": 4.581001044417519e-32,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n24 exact-log coaxial identity",
+      "value": 2.8053761999527613e-14,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reconstructed jouleW",
+      "value": 1.0856719040064945e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reconstructed mechanicalW",
+      "value": 8.413957256050331e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reconstructed electrodePowerW",
+      "value": 1.6285078560097416e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel cell charge",
+      "value": 6.240508366742535e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel net boundary charge",
+      "value": 3.5786434690249143e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel power identity",
+      "value": 5.319792329631823e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reported charge maximum",
+      "value": 1.4604012952660434e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reported net boundary",
+      "value": 6.736254891865885e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy reconstructed mechanicalW",
+      "value": 3.5285717679274823e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy reconstructed electrodePowerW",
+      "value": 7.057143535854965e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy cell charge",
+      "value": 1.5987559891020358e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy net boundary charge",
+      "value": 8.770366914907857e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy power identity",
+      "value": 4.804286176332033e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy reported charge maximum",
+      "value": 8.722755548281893e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 fipy reported net boundary",
+      "value": 1.414991207513616e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reconstructed torqueNm",
+      "value": 6.220729484669896e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 kernel reconstructed jouleByCellW",
+      "value": 1.3782944093832449e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 FiPy exported radial current",
+      "value": 1.0636608165819893e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 FiPy exported axial current",
+      "value": 9.160926867090773e-32,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n48 exact-log coaxial identity",
+      "value": 3.795508976406677e-14,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reconstructed jouleW",
+      "value": 5.428359520032448e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reconstructed mechanicalW",
+      "value": 7.871121304047051e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reconstructed electrodePowerW",
+      "value": 1.139955499206814e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel cell charge",
+      "value": 5.322127014814262e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel net boundary charge",
+      "value": 3.1124897958765928e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel power identity",
+      "value": 5.184083341630988e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reported charge maximum",
+      "value": 9.883577667454347e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reported net boundary",
+      "value": 2.3012851640165327e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy reconstructed jouleW",
+      "value": 8.685460207758716e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy reconstructed mechanicalW",
+      "value": 1.0042563365221015e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy reconstructed electrodePowerW",
+      "value": 1.3028190311638074e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy cell charge",
+      "value": 2.27312087491689e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy net boundary charge",
+      "value": 1.468131159532188e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy power identity",
+      "value": 6.02553801913261e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy reported charge maximum",
+      "value": 9.482318491454621e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 fipy reported net boundary",
+      "value": 2.69130519914243e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reconstructed torqueNm",
+      "value": 8.240334789303729e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 kernel reconstructed jouleByCellW",
+      "value": 7.289056972699821e-19,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 FiPy exported radial current",
+      "value": 1.1119763996456747e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 FiPy exported axial current",
+      "value": 1.8321316014026762e-31,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "motional-n96 exact-log coaxial identity",
+      "value": 2.35156534407805e-14,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reconstructed jouleW",
+      "value": 6.505012096960005e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reconstructed mechanicalW",
+      "value": 8.67334946261334e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reconstructed electrodePowerW",
+      "value": 4.33667473130667e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel cell charge",
+      "value": 3.233888541687898e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel net boundary charge",
+      "value": 1.890746088720758e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel power identity",
+      "value": 1.9081368817749347e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reported charge maximum",
+      "value": 3.1829966871087667e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reported net boundary",
+      "value": 2.7589661719217553e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy reconstructed mechanicalW",
+      "value": 5.169354930881899e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy reconstructed electrodePowerW",
+      "value": 2.196975845624807e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy cell charge",
+      "value": 6.548834841682889e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy net boundary charge",
+      "value": 3.5229945306607664e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy power identity",
+      "value": 4.4801076067643124e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy reported charge maximum",
+      "value": 9.042498362408382e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 fipy reported net boundary",
+      "value": 1.8161036805556248e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reconstructed torqueNm",
+      "value": 1.092824081671325e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 kernel reconstructed jouleByCellW",
+      "value": 2.3038584510066684e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 FiPy exported radial current",
+      "value": 4.227593436792919e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 FiPy exported axial current",
+      "value": 6.517539881722417e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n12 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reconstructed jouleW",
+      "value": 4.3554037862231986e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reconstructed mechanicalW",
+      "value": 5.226484543467838e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reconstructed electrodePowerW",
+      "value": 2.613242271733919e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel cell charge",
+      "value": 3.365954040590549e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel net boundary charge",
+      "value": 3.3539131521745616e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel power identity",
+      "value": 1.8292695902137432e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reported charge maximum",
+      "value": 4.926930378440855e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reported net boundary",
+      "value": 5.319680201371393e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy reconstructed jouleW",
+      "value": 3.478397538148433e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy reconstructed mechanicalW",
+      "value": 1.3913590152593733e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy reconstructed electrodePowerW",
+      "value": 7.000275045523722e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy cell charge",
+      "value": 9.490138248656757e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy net boundary charge",
+      "value": 4.1334824371927206e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy power identity",
+      "value": 2.7827180305187466e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy reported charge maximum",
+      "value": 3.588309343507541e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 fipy reported net boundary",
+      "value": 3.6053356129196493e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reconstructed torqueNm",
+      "value": 3.858702203111134e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 kernel reconstructed jouleByCellW",
+      "value": 1.241970610915209e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 FiPy exported radial current",
+      "value": 4.314925034910716e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 FiPy exported axial current",
+      "value": 6.299790550969646e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n24 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reconstructed jouleW",
+      "value": 8.753542566333723e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reconstructed mechanicalW",
+      "value": 1.7507085132667447e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reconstructed electrodePowerW",
+      "value": 2.626062769900117e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel cell charge",
+      "value": 2.5651027327743717e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel net boundary charge",
+      "value": 5.450886348066623e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel power identity",
+      "value": 5.024533433075557e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reported charge maximum",
+      "value": 2.435170954550228e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reported net boundary",
+      "value": 3.0235166997990914e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy reconstructed mechanicalW",
+      "value": 8.749778335152502e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy reconstructed electrodePowerW",
+      "value": 3.3686646590337134e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy cell charge",
+      "value": 1.0287692945785086e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy net boundary charge",
+      "value": 6.822138549259439e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy power identity",
+      "value": 9.624756168667753e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy reported charge maximum",
+      "value": 2.845192282153946e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 fipy reported net boundary",
+      "value": 7.11582021307021e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reconstructed torqueNm",
+      "value": 1.2206377867183894e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 kernel reconstructed jouleByCellW",
+      "value": 1.0429025323171038e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 FiPy exported radial current",
+      "value": 4.33771193099817e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 FiPy exported axial current",
+      "value": 6.672185788804335e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n48 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reconstructed jouleW",
+      "value": 5.708066669622335e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reconstructed mechanicalW",
+      "value": 2.4588594884526986e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reconstructed electrodePowerW",
+      "value": 3.5126564120752835e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel cell charge",
+      "value": 2.0382494849851145e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel net boundary charge",
+      "value": 1.332245293646363e-10,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel power identity",
+      "value": 1.17673989804522e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reported charge maximum",
+      "value": 7.663690037679591e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reported net boundary",
+      "value": 1.88311373026167e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy reconstructed mechanicalW",
+      "value": 1.756138264195783e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy reconstructed electrodePowerW",
+      "value": 2.1885873117539944e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy cell charge",
+      "value": 3.014421686369782e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy net boundary charge",
+      "value": 2.5988388521868242e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy power identity",
+      "value": 2.081023843072003e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy reported charge maximum",
+      "value": 6.2501900037676974e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 fipy reported net boundary",
+      "value": 1.4079985248151142e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reconstructed torqueNm",
+      "value": 2.2487488773697287e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 kernel reconstructed jouleByCellW",
+      "value": 5.3813278773858406e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 FiPy exported radial current",
+      "value": 4.331726009550227e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 FiPy exported axial current",
+      "value": 6.841776546091928e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "patch-n96 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reconstructed jouleW",
+      "value": 1.310735528850616e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reconstructed mechanicalW",
+      "value": 1.310735528850616e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reconstructed electrodePowerW",
+      "value": 6.55367764425308e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel cell charge",
+      "value": 1.0381334472898728e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel net boundary charge",
+      "value": 1.5343450050177404e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel power identity",
+      "value": 1.4418090817356776e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reported charge maximum",
+      "value": 3.46968925994798e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reported net boundary",
+      "value": 1.9688469289007142e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy reconstructed jouleW",
+      "value": 1.6295390376329344e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy reconstructed mechanicalW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy reconstructed electrodePowerW",
+      "value": 7.365516450100864e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy cell charge",
+      "value": 7.68372204257427e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy net boundary charge",
+      "value": 9.794431230172985e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy power identity",
+      "value": 9.777234225797608e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy reported charge maximum",
+      "value": 3.89734217539241e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 fipy reported net boundary",
+      "value": 1.0765145856549837e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reconstructed torqueNm",
+      "value": 1.4862176575933747e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 kernel reconstructed jouleByCellW",
+      "value": 3.072036395743631e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 FiPy exported radial current",
+      "value": 1.6927993484500974e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 FiPy exported axial current",
+      "value": 1.2246345286443673e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n12 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reconstructed jouleW",
+      "value": 8.95412861071817e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reconstructed mechanicalW",
+      "value": 2.5583224602051913e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reconstructed electrodePowerW",
+      "value": 6.395806150512978e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel cell charge",
+      "value": 3.1379981787112754e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel net boundary charge",
+      "value": 1.3532459647483232e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel power identity",
+      "value": 1.189619943995414e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reported charge maximum",
+      "value": 6.208444149024929e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reported net boundary",
+      "value": 3.110134878463917e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy reconstructed jouleW",
+      "value": 9.579353830790462e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy reconstructed mechanicalW",
+      "value": 6.386235887193641e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy reconstructed electrodePowerW",
+      "value": 6.705547681553323e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy cell charge",
+      "value": 6.056521626794054e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy net boundary charge",
+      "value": 7.965670962363892e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy power identity",
+      "value": 4.598089838779421e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy reported charge maximum",
+      "value": 3.15016142540599e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 fipy reported net boundary",
+      "value": 2.6116953974963577e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reconstructed torqueNm",
+      "value": 1.2366765688026287e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 kernel reconstructed jouleByCellW",
+      "value": 8.244593865895637e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 FiPy exported radial current",
+      "value": 1.671485054397669e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 FiPy exported axial current",
+      "value": 1.415538905443026e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n24 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reconstructed jouleW",
+      "value": 3.1641693332838494e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reconstructed mechanicalW",
+      "value": 5.695504799910929e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reconstructed electrodePowerW",
+      "value": 6.328338666567699e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel cell charge",
+      "value": 2.4312313786514577e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel net boundary charge",
+      "value": 6.039583292747483e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel power identity",
+      "value": 2.0883517599673408e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reported charge maximum",
+      "value": 6.684414958935855e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reported net boundary",
+      "value": 6.408326598834459e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy reconstructed jouleW",
+      "value": 2.846648006412737e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy reconstructed mechanicalW",
+      "value": 3.7955306752169827e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy reconstructed electrodePowerW",
+      "value": 3.637383563749609e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy cell charge",
+      "value": 1.0132801325966519e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy net boundary charge",
+      "value": 4.6988930835509354e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy power identity",
+      "value": 1.113355664730315e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy reported charge maximum",
+      "value": 4.600301485315349e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 fipy reported net boundary",
+      "value": 4.3134464797927587e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reconstructed torqueNm",
+      "value": 3.143646741066844e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 kernel reconstructed jouleByCellW",
+      "value": 5.067614947837415e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 FiPy exported radial current",
+      "value": 2.22379256507862e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 FiPy exported axial current",
+      "value": 1.4011832513976478e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n48 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reconstructed jouleW",
+      "value": 3.148768969761388e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reconstructed mechanicalW",
+      "value": 1.7633106230663774e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reconstructed electrodePowerW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel cell charge",
+      "value": 2.1226762508070167e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel net boundary charge",
+      "value": 9.660551695637416e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel power identity",
+      "value": 1.0894740635374402e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reported charge maximum",
+      "value": 2.0193336366323565e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reported net boundary",
+      "value": 3.0485177290371496e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy reconstructed jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy reconstructed mechanicalW",
+      "value": 1.259383640407777e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy reconstructed electrodePowerW",
+      "value": 2.062240711167735e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy cell charge",
+      "value": 1.6077336545985734e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy net boundary charge",
+      "value": 2.7014365850459967e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy power identity",
+      "value": 1.322352822428166e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy reported charge maximum",
+      "value": 8.444319290903456e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 fipy reported net boundary",
+      "value": 1.277434726059509e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reconstructed torqueNm",
+      "value": 1.164083913934455e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 kernel reconstructed jouleByCellW",
+      "value": 3.966710909172061e-18,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 FiPy exported radial current",
+      "value": 2.368241708765236e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 FiPy exported axial current",
+      "value": 1.6950947448064213e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch-n96 FiPy insulating current",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "axis-patch finest potential convergence",
+      "value": 5.4901671249932e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "axis-patch finest jouleW convergence",
+      "value": 3.778563739954943e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "axis-patch finest mechanicalW convergence",
+      "value": 4.9204743968935657e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "axis-patch finest electrodePowerW convergence",
+      "value": 1.1419106549708355e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "coaxial finest potential convergence",
+      "value": 1.932673033583441e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "coaxial finest jouleW convergence",
+      "value": 4.8918367522242255e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "coaxial finest mechanicalW convergence",
+      "value": 0.0,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "coaxial finest electrodePowerW convergence",
+      "value": 4.89183675349799e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "coaxial finest FiPy exact continuum",
+      "value": 9.783673498569785e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "motional finest potential convergence",
+      "value": 2.358773498444117e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "motional finest jouleW convergence",
+      "value": 4.8918367501510014e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "motional finest mechanicalW convergence",
+      "value": 2.3171858176436253e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "motional finest electrodePowerW convergence",
+      "value": 2.574650920049291e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "motional finest FiPy exact continuum",
+      "value": 9.78367348277923e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "patch finest potential convergence",
+      "value": 8.300640076790986e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "patch finest jouleW convergence",
+      "value": 1.6153958028190984e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "patch finest mechanicalW convergence",
+      "value": 5.4073561295796025e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "patch finest electrodePowerW convergence",
+      "value": 3.791960307921531e-05,
+      "limit": 0.02,
+      "passed": true
+    }
+  ],
+  "allNumericalGatesPassed": true,
+  "discreteAudit": "Independent Python reconstruction from potentials; no production imports",
+  "conductivityPredicted": false,
+  "experimentalValidation": false,
+  "liveBackendChanged": false,
+  "inputsSHA256": {
+    "cases": "920cfab92fbbf630eb862ea4d2a626799e1500722ba610b32f8130369d700a4e",
+    "production": "cd09c4bb7736d7bb72297a2b21d8ffe0eac5bdd88c0db3140e3bdd153fa0afbe",
+    "fipy": "401fe1f9b042c842c4785892ffd667ed2b6f145ee8e4e24adfb6dd7711b672aa"
+  },
+  "versions": {
+    "fipy": "4.0.3",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  }
+}

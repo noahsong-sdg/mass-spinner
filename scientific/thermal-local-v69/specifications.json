@@ -1,0 +1,10 @@
+[
+ {"id":"gas-q512-w128","wall":128,"meshFamily":"quadratic","steps":100,"nominalSteps":512,"durationS":0.00003814697265625},
+ {"id":"gas-q1024-w128","wall":128,"meshFamily":"quadratic","steps":200,"nominalSteps":1024,"durationS":0.00003814697265625},
+ {"id":"gas-q2048-w128","wall":128,"meshFamily":"quadratic","steps":400,"nominalSteps":2048,"durationS":0.00003814697265625},
+ {"id":"gas-q4096-w128","wall":128,"meshFamily":"quadratic","steps":800,"nominalSteps":4096,"durationS":0.00003814697265625},
+ {"id":"startup-e8-w64-s64","wall":64,"meshFamily":"exponential-8","steps":64,"nominalSteps":null,"durationS":0.0000000152587890625},
+ {"id":"startup-e8-w128-s64","wall":128,"meshFamily":"exponential-8","steps":64,"nominalSteps":null,"durationS":0.0000000152587890625},
+ {"id":"full-e8-w64-q256","wall":64,"meshFamily":"exponential-8","steps":256,"nominalSteps":256,"durationS":0.001},
+ {"id":"full-e8-w128-q256","wall":128,"meshFamily":"exponential-8","steps":256,"nominalSteps":256,"durationS":0.001}
+]

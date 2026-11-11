@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-assess-1",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json,os,subprocess,sys;from pathlib import Path;env=dict(os.environ,OMP_NUM_THREADS=\"1\",OPENBLAS_NUM_THREADS=\"1\");out=Path(\"/work/home/thermal69-assess-1\");out.mkdir();p=\"/work/home/thermal69-campaign/\";a=\"scientific/thermal-local-v69/assess.py\";jobs=[(\"reference\",[sys.executable,\"scientific/thermal-local-v69/reference.py\",\"/work/home/thermal69-benchmark.json\",str(out/\"reference.json\")]),(\"gas512\",[sys.executable,a,\"case\",p+\"gas-q512-w128.json\",str(out/\"gas512\")]),(\"gas1024\",[sys.executable,a,\"case\",p+\"gas-q1024-w128.json\",str(out/\"gas1024\")]),(\"time512-1024\",[sys.executable,a,\"time\",p+\"gas-q512-w128.json\",p+\"gas-q1024-w128.json\",str(out/\"time512-1024\")])];receipts=[]\nfor label,command in jobs:\n r=subprocess.run(command,capture_output=True,text=True,env=env);(out/(label+\".log\")).write_text(r.stdout+\"\\n\"+r.stderr);receipts.append({\"label\":label,\"exitCode\":r.returncode,\"command\":command});print(label,r.returncode,(r.stdout+\"\\n\"+r.stderr)[-2500:],flush=True)\n(out/\"receipts.json\").write_text(json.dumps(receipts,indent=2));r=json.loads((out/\"reference.json\").read_text());print(json.dumps({\"benchmarkPassed\":r[\"pass\"],\"failedCases\":r[\"failedCases\"],\"auditFailures\":[c[\"id\"] for c in r[\"cases\"] if not c[\"allStepAuditsPass\"]],\"fine\":[{k:c[k] for k in (\"id\",\"surface\",\"gas\",\"maxRelativeCpVariation\",\"maxRelativeKVariation\")} for c in r[\"cases\"] if c[\"gridFamily\"]==\"exponential-8\" and c[\"wallCells\"]==128 and c[\"substeps\"]==64],\"pairs\":[{k:p[k] for k in (\"kind\",\"coarse\",\"fine\",\"pass\")} for p in r[\"successivePairs\"]]}));print(\"disk\",__import__(\"shutil\").disk_usage(\"/work/home\"))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 34.799568725,
+  "sourceVerifiedBeforeAndAfter": true
+}

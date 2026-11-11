@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-storage-check",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json,shutil;from pathlib import Path;p=Path(\"/work/home/thermal69-campaign\");print(json.dumps({\"files\":{a.name:a.stat().st_size for a in p.iterdir() if a.is_file()},\"free\":shutil.disk_usage(\"/work/home\").free},indent=2))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 0.05981545799999988,
+  "sourceVerifiedBeforeAndAfter": true
+}

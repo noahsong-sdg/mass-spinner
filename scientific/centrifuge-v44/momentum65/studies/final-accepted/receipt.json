@@ -1,0 +1,107 @@
+{
+  "commands": [
+    {
+      "name": "regression-tests",
+      "command": [
+        "node_modules/.bin/tsx",
+        "--test",
+        "tests/fuel-momentum-v65.test.ts",
+        "tests/experimental-v64.test.ts",
+        "tests/fuel-centrifuge-independent-v44.test.ts",
+        "tests/fuel-centrifuge-scenario-v44.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 1.031480376
+    },
+    {
+      "name": "momentum-independent-tests",
+      "command": [
+        "/work/home/thermal-v53-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/momentum-v65",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 0.45569545899999997
+    },
+    {
+      "name": "benchmark-independent-tests",
+      "command": [
+        "/work/home/thermal-v53-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/experimental-v64",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 0.01885420800000004
+    },
+    {
+      "name": "study",
+      "command": [
+        "/work/home/thermal-v53-venv/bin/python",
+        "scientific/momentum-v65/run_study.py",
+        "/work/home/momentum-v65-final-accepted/study"
+      ],
+      "exitCode": 0,
+      "seconds": 13.450183298
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 0.9506204999999994
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.35318983399999837
+    },
+    {
+      "name": "site",
+      "command": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "seconds": 0.10776408300000284
+    },
+    {
+      "name": "assets",
+      "command": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "seconds": 0.04644941699999805
+    }
+  ],
+  "sourceSHA256": "b87b950b42ef93aace9dac77eb9c281579042ae1a6738acf6ac780fe1d2e2386",
+  "inputs": 686,
+  "releaseFiles": 151,
+  "releaseSHA256": "889256c3ef8ae80b934786f1dec45f4b5f1d9a06f39dd787d0245df11390a56d",
+  "releaseByteIdenticalToDeployedFinalD": true,
+  "newLiveBackend": false,
+  "experimentalValidation": false,
+  "freshBrowserTest": false
+}

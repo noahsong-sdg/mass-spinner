@@ -1,0 +1,154 @@
+{
+  "thermal69-assess-2/time1024-2048/combined.json.gz": {
+    "sha256": "aba3b2f76cdafe704e38aa1f42c1403972daae707e1b0424a68fec396c0bd2fe",
+    "bytes": 126374637
+  },
+  "thermal69-assess-2/time1024-2048/config.json": {
+    "sha256": "059d956f6ae4890d5a5f09fe3b12faad51a50b67323ae7010d48d7a357cda5ad",
+    "bytes": 300
+  },
+  "thermal69-assess-2/time1024-2048/electrical-config.json": {
+    "sha256": "ca94b0225c957205a0571d1a9906010551b189d52d1ce63a26a35c882c961ba8",
+    "bytes": 462
+  },
+  "thermal69-assess-2/time1024-2048/electrical.json": {
+    "sha256": "48286465cf1a55c0adba123a1d224eb050f731011306f8b999c3b9f0be278ef1",
+    "bytes": 6323979
+  },
+  "thermal69-assess-2/time1024-2048/endpoint-gas.json": {
+    "sha256": "9ac5f4ae4f2b91babf56b6ba4aa2761ab8fc23eab496a86d5e93588ab7cb907c",
+    "bytes": 19278
+  },
+  "thermal69-assess-2/time1024-2048/history.json": {
+    "sha256": "c4a82dae229000cb84aa62ac61f58d063dda0444452469c2ce03fef01e0075f5",
+    "bytes": 129550
+  },
+  "thermal69-assess-2/time1024-2048/summary.json": {
+    "sha256": "ffdf9a77b2ddd9fb67ae98292530deb5c72d0f690a98c5912b523c5f96be20e9",
+    "bytes": 1026
+  },
+  "thermal69-assess-2/time1024-2048/surface.json": {
+    "sha256": "a421dcd5341bdbbb95020f6c361b4340a1d730267fd89935768c6d18df1ca083",
+    "bytes": 322277
+  },
+  "thermal69-assess-2/startup-wall/combined.json.gz": {
+    "sha256": "cf1461b0b86df1a3c9b4ccf6c375a11ffded3f3df596ea925e43fd0fa209c2e9",
+    "bytes": 27076848
+  },
+  "thermal69-assess-2/startup-wall/config.json": {
+    "sha256": "d0a0f58a11bbf2190d4ba7cb23b4011c48b995936b87a9b91f7a39074dd9caf8",
+    "bytes": 310
+  },
+  "thermal69-assess-2/startup-wall/electrical-config.json": {
+    "sha256": "3a141ecb90080c960b2c40fc1dd330618a89ead0bd6b66a6c0ae839e311e4829",
+    "bytes": 472
+  },
+  "thermal69-assess-2/startup-wall/electrical.json": {
+    "sha256": "ae9afa6dd25858f0dabc6d4cc2d50019b0d2d9f53159c721eb977afcf8add8d7",
+    "bytes": 1421637
+  },
+  "thermal69-assess-2/startup-wall/endpoint-gas.json": {
+    "sha256": "bc680ddebfc429728b6d62b2ee2b83d1965d1a4a8a7e3cfbc4cd9f2b2129a9f1",
+    "bytes": 17182
+  },
+  "thermal69-assess-2/startup-wall/history.json": {
+    "sha256": "d449fb05f7b38ccbbf70063019e76a86d59ee90f9192f49b5747ae88aaf148b9",
+    "bytes": 45218
+  },
+  "thermal69-assess-2/startup-wall/summary.json": {
+    "sha256": "932cb829ee2fc45ba935f7828bb152ef805d66ed23f181a5cb2d660aa9ba3b61",
+    "bytes": 1040
+  },
+  "thermal69-assess-2/startup-wall/surface.json": {
+    "sha256": "a06d2e667e237e4094523295509fb25d888ad875fd842599c4b994006c8838a4",
+    "bytes": 82062
+  },
+  "thermal69-assess-2/gas-q2048-w128/conservation.json": {
+    "sha256": "889b7f2ad58e68b42a1d29d003322d39b2e6055b2d355edb1d78061c646ac9ea",
+    "bytes": 3892143
+  },
+  "thermal69-assess-2/gas-q4096-w128/conservation.json": {
+    "sha256": "cf08098a73171c06d9a62c7ea0615e5013e1d60544bdc705e24827b44c4a958b",
+    "bytes": 7785820
+  },
+  "thermal69-assess-2/startup-e8-w64-s64/conservation.json": {
+    "sha256": "cc4fc93b036634ce0fc52670e6ec0d5536db723bf417c3bc449641a4f70e216f",
+    "bytes": 338027
+  },
+  "thermal69-assess-2/startup-e8-w128-s64/conservation.json": {
+    "sha256": "ea5f5b9d8dbda008ffa7923aa7cd8a3a6f69284104d9b49c7a982a7e52d4eed7",
+    "bytes": 627845
+  },
+  "thermal69-assess-2/full-e8-w64-q256/conservation.json": {
+    "sha256": "a0ea3e2b712ee5f3a3afd490186c1c0f02ea17660ea10662210c4f67fcba34b1",
+    "bytes": 1335928
+  },
+  "thermal69-assess-2/full-e8-w128-q256/conservation.json": {
+    "sha256": "7bb336ebabd7250aa99263091dd397d55983cecd3b4c1ea947d60b53e9638b6b",
+    "bytes": 2494262
+  },
+  "thermal69-assess-2/startup-fixed-endpoint.json": {
+    "sha256": "d849254b4ae080f76dda42487cc152c52ad5a48680ea3c7b2cf2c2bb9fb046a7",
+    "bytes": 553
+  },
+  "thermal69-assess-2/acceptance.json": {
+    "sha256": "8376aa30d6b555afe60477e414e6ecc44899406523a99416c5ff061e05b2321a",
+    "bytes": 3984
+  },
+  "thermal69-assess-2/receipts.json": {
+    "sha256": "678ecefe14bca90bf208425fa8f1e0a8a5bc50069d5a8c18b254ffe367c14569",
+    "bytes": 3318
+  },
+  "thermal69-batch-2/full-e8-w128-q256.log": {
+    "sha256": "17376139f341c39244255a3604c9f5b59bc1c9b1799bd2b71cd3335ec9d2f511",
+    "bytes": 98
+  },
+  "thermal69-batch-2/full-e8-w128-q256.receipt.json": {
+    "sha256": "2f5918dc3151ee4b27b004cdeb959f4f39c396dee1639b2167867e8ef17cdde9",
+    "bytes": 675
+  },
+  "thermal69-batch-2/full-e8-w64-q256.log": {
+    "sha256": "6beb3652a1de125ef95007bcaeee8d5dca6041b3a2cc6df2f362a9fcd191867b",
+    "bytes": 101
+  },
+  "thermal69-batch-2/full-e8-w64-q256.receipt.json": {
+    "sha256": "0f0d9e06807ea264701343c9a913386f7bf9b4b81abb147062d655453e230844",
+    "bytes": 672
+  },
+  "thermal69-batch-2/gas-q2048-w128.log": {
+    "sha256": "7368639a93085692e4d5b8be52442741afb5582d17b35a4424ef20b3ef6cdea5",
+    "bytes": 95
+  },
+  "thermal69-batch-2/gas-q2048-w128.receipt.json": {
+    "sha256": "86ca304c5b1b9a1d3454d55cd5301666a5bc1e39517ef911b159ebe1a0f2f7e4",
+    "bytes": 666
+  },
+  "thermal69-batch-2/gas-q4096-w128.log": {
+    "sha256": "f2fa355077d059e4e0196fe55f00e22200efe0ff444621a40f8da29dde3e1997",
+    "bytes": 95
+  },
+  "thermal69-batch-2/gas-q4096-w128.receipt.json": {
+    "sha256": "b2fac3dfd0c0c1ef625a6b670ccf929c0e3601f7d5cd0251619c98305d0cfee7",
+    "bytes": 667
+  },
+  "thermal69-batch-2/receipts.json": {
+    "sha256": "0ab6a68cabc360ffcd310fc9502f47364aa9a67e528e2c4ae14e3ac1ec224049",
+    "bytes": 4279
+  },
+  "thermal69-batch-2/startup-e8-w128-s64.log": {
+    "sha256": "bf7e0bf91d7a27d3ed19a86e6f14056cb781696fcf894cc90060bc25d2620d0d",
+    "bytes": 97
+  },
+  "thermal69-batch-2/startup-e8-w128-s64.receipt.json": {
+    "sha256": "f78e9fd09b348df1e9810183febd75e32701c8cbaec91d65caa8801aabfa4709",
+    "bytes": 680
+  },
+  "thermal69-batch-2/startup-e8-w64-s64.log": {
+    "sha256": "036e6fbb7db9760dcecc922e996132a1ed236bc4833829c7b4e1e78750409219",
+    "bytes": 96
+  },
+  "thermal69-batch-2/startup-e8-w64-s64.receipt.json": {
+    "sha256": "4c29a82f7b09e14d61bd70888595cd6bdcc8b02c026573e4802654f107f5113c",
+    "bytes": 677
+  }
+}

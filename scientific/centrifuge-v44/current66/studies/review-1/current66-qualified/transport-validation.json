@@ -1,0 +1,286 @@
+{
+  "study": "v66 neutral transport raw-data and independent-formula oracle",
+  "passed": true,
+  "relativeTolerance": 2e-12,
+  "qualification": "Implementation verification only; not neutral-plasma or experimental qualification.",
+  "sourceAccuracy": "Mutation++ estimated collision-integral accuracy 5%; not a confidence interval.",
+  "inputs": {
+    "rawXml": {
+      "path": "/work/home/current66-data/collisions.xml",
+      "sha256": "25e0ac6affa33361e9652d3fd3f43760f40f1a500c0a4993b1ace82c5ce501c2"
+    },
+    "sourceJson": {
+      "path": "/work/home/fix-v43-source/scientific/current-v66/transport-data.json",
+      "sha256": "27be9f221b3cd10dcfa8f5aee643096a97e0c93ccea82d89e340aec1e9df30cc"
+    },
+    "typescriptPredictions": {
+      "path": "/work/home/current66-qualified/transport.json",
+      "sha256": "0b245f8e9cb3d2652d6d1f3b8c44f42eac3e360a285b1238f5246d525aa701b8"
+    }
+  },
+  "sourceTranscriptionPassed": true,
+  "comparisons": [
+    {
+      "material": "argon",
+      "temperatureK": 300,
+      "field": "collisionIntegralM2",
+      "expectedSI": 4.0463713378236537e-19,
+      "actualSI": 4.0463713378236537e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 300,
+      "field": "viscosityPaS",
+      "expectedSI": 2.268995113788702e-05,
+      "actualSI": 2.268995113788702e-05,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 300,
+      "field": "conductivityWmK",
+      "expectedSI": 0.017709405071465133,
+      "actualSI": 0.017709405071465133,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 500,
+      "field": "collisionIntegralM2",
+      "expectedSI": 3.4934510307918494e-19,
+      "actualSI": 3.4934510307918494e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 500,
+      "field": "viscosityPaS",
+      "expectedSI": 3.392883996213605e-05,
+      "actualSI": 3.392883996213605e-05,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 500,
+      "field": "conductivityWmK",
+      "expectedSI": 0.02648130737889,
+      "actualSI": 0.02648130737889,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 1750,
+      "field": "collisionIntegralM2",
+      "expectedSI": 2.7850218874073515e-19,
+      "actualSI": 2.7850218874073515e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 1750,
+      "field": "viscosityPaS",
+      "expectedSI": 7.962126636882399e-05,
+      "actualSI": 7.962126636882399e-05,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 1750,
+      "field": "conductivityWmK",
+      "expectedSI": 0.06214404120395284,
+      "actualSI": 0.06214404120395284,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 8000,
+      "field": "collisionIntegralM2",
+      "expectedSI": 2.0514600027941348e-19,
+      "actualSI": 2.0514600027941348e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 8000,
+      "field": "viscosityPaS",
+      "expectedSI": 0.00023111099563794966,
+      "actualSI": 0.00023111099563794966,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 8000,
+      "field": "conductivityWmK",
+      "expectedSI": 0.18038109528530274,
+      "actualSI": 0.18038109528530274,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 10000,
+      "field": "collisionIntegralM2",
+      "expectedSI": 1.9477874452256716e-19,
+      "actualSI": 1.9477874452256716e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 10000,
+      "field": "viscosityPaS",
+      "expectedSI": 0.00027214296167415774,
+      "actualSI": 0.00027214296167415774,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 10000,
+      "field": "conductivityWmK",
+      "expectedSI": 0.21240636069896274,
+      "actualSI": 0.21240636069896274,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 12867,
+      "field": "collisionIntegralM2",
+      "expectedSI": 1.8397040915715685e-19,
+      "actualSI": 1.8397040915715682e-19,
+      "relativeError": 1.1102230246251565e-16,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 12867,
+      "field": "viscosityPaS",
+      "expectedSI": 0.00032683559249893526,
+      "actualSI": 0.00032683559249893526,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 12867,
+      "field": "conductivityWmK",
+      "expectedSI": 0.25509371369562867,
+      "actualSI": 0.25509371369562867,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 20000,
+      "field": "collisionIntegralM2",
+      "expectedSI": 1.624203401905923e-19,
+      "actualSI": 1.624203401905923e-19,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 20000,
+      "field": "viscosityPaS",
+      "expectedSI": 0.0004615441503451929,
+      "actualSI": 0.0004615441503451929,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "argon",
+      "temperatureK": 20000,
+      "field": "conductivityWmK",
+      "expectedSI": 0.360233138765119,
+      "actualSI": 0.360233138765119,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 100,
+      "field": "viscosityPaS",
+      "expectedSI": 1.6708199340977339e-06,
+      "actualSI": 1.6708199340977339e-06,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 100,
+      "field": "conductivityWmK",
+      "expectedSI": 0.0074388734645497835,
+      "actualSI": 0.0074388734645497835,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 500,
+      "field": "viscosityPaS",
+      "expectedSI": 6.701017649649026e-06,
+      "actualSI": 6.701017649649026e-06,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 500,
+      "field": "conductivityWmK",
+      "expectedSI": 0.02983446711531636,
+      "actualSI": 0.02983446711531636,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 1500,
+      "field": "viscosityPaS",
+      "expectedSI": 1.7294037829849446e-05,
+      "actualSI": 1.7294037829849446e-05,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 1500,
+      "field": "conductivityWmK",
+      "expectedSI": 0.07699702193034881,
+      "actualSI": 0.07699702193034881,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 3000,
+      "field": "viscosityPaS",
+      "expectedSI": 3.145468141883826e-05,
+      "actualSI": 3.145468141883826e-05,
+      "relativeError": 0.0,
+      "passed": true
+    },
+    {
+      "material": "lithium",
+      "temperatureK": 3000,
+      "field": "conductivityWmK",
+      "expectedSI": 0.14004345421508244,
+      "actualSI": 0.14004345421508244,
+      "relativeError": 0.0,
+      "passed": true
+    }
+  ],
+  "maxRelativeError": 1.1102230246251565e-16
+}

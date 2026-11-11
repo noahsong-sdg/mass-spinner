@@ -1,0 +1,11 @@
+{
+  "label": "continuum-1",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/current-v66/campaign.ts",
+    "/work/home/resolved68-remaining/continuum/cases.json",
+    "/work/home/resolved68-remaining/continuum/production.json"
+  ],
+  "exitCode": 0,
+  "seconds": 0.6127417500000001
+}

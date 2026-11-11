@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-seed",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import hashlib,json;from pathlib import Path;p=Path(\"/work/home/resolved68-campaign/anchor-r64-z64-g128-t256.json\");raw=p.read_bytes();h=hashlib.sha256(raw).hexdigest();assert h==\"286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2\";a=json.loads(raw);assert a[\"sourceSHA256\"]==\"4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631\";c=a[\"cases\"][0];assert c[\"failure\"] is None and len(c[\"steps\"])==c[\"requestedSteps\"]==256;seed={\"baselinePacketSHA256\":h,\"baselineSourceSHA256\":a[\"sourceSHA256\"],\"setup\":c[\"setup\"],\"initialState\":c[\"initialState\"]};out=Path(\"/work/home/thermal69-seed.json\");f=out.open(\"x\");json.dump(seed,f,separators=(\",\",\":\"),allow_nan=False);f.close();print(json.dumps({\"seed\":str(out),\"bytes\":out.stat().st_size,\"sha256\":hashlib.sha256(out.read_bytes()).hexdigest()}))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "0b06b01b54b5b9bebd73de7c5fe7441639ff6110f520efefeaf101e2882bcf3e",
+  "exitCode": 0,
+  "seconds": 0.9969883340000001,
+  "sourceVerifiedBeforeAndAfter": true
+}

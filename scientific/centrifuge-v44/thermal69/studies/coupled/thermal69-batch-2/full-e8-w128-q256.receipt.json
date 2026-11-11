@@ -1,0 +1,19 @@
+{
+  "id": "full-e8-w128-q256",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/thermal-local-v69/campaign.ts",
+    "/work/home/thermal69-seed.json",
+    "scientific/thermal-local-v69/specifications.json",
+    "/work/home/thermal69-campaign",
+    "[\"full-e8-w128-q256\"]"
+  ],
+  "exitCode": 0,
+  "losslessAcceptedNDJSONArchive": {
+    "path": "/work/home/thermal69-campaign/full-e8-w128-q256.steps.ndjson.gz",
+    "uncompressedSHA256": "69ad54032ad2765f80060edf1736ddef1cade5d47e6b3a5a6037771549d89154",
+    "uncompressedBytes": 126873145,
+    "compressedBytes": 56430828,
+    "gzipSHA256": "2f003153674a319897ccef87a08ed637e8ead0cbee0897f11cd1e2ca41646212"
+  }
+}

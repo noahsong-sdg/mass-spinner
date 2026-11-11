@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "artifact": "assets/convergence-confirmation-v10.json",
+  "sha256": "945710d81350812336b3fa4ebb649f6cc4788d94dea15bbec5d6fed8f83acec6",
+  "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+  "sourceFilesChecked": 13,
+  "wholeRunsChecked": 48,
+  "freshSeeds": 16,
+  "verifierCode": {
+    "path": "assets/verify-confirmation-v10.py",
+    "sha256": "8baf3230834e135aab11099cc03825d2c51ef9333e69c81446763c5dcb8ed670"
+  },
+  "levelSummaryIntervalsRecomputed": 186,
+  "pairedObservableIntervalsAndVerdictsRecomputed": 62,
+  "physicalEffectIntervalsRecomputed": 62,
+  "partsChecked": 4,
+  "declaredGate": "fail",
+  "verdict": "all checked provenance, source identity, run membership, original physical settings/budgets and independently recomputed arithmetic agree",
+  "limitation": "Pointwise approximate whole-run t intervals; no simultaneous interval, continuum-error bound or experimental validation established."
+}

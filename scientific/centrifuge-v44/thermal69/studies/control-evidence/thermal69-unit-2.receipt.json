@@ -1,0 +1,23 @@
+{
+  "label": "thermal69-unit-2",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "scientific/thermal-local-v69",
+    "-p",
+    "test_*.py"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 0.44192883299999997,
+  "sourceVerifiedBeforeAndAfter": true
+}

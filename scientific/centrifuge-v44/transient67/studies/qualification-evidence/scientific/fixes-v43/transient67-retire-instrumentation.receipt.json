@@ -1,0 +1,19 @@
+{
+  "label": "transient67-retire-instrumentation",
+  "command": [
+    "python3",
+    "-I",
+    "-c",
+    "from pathlib import Path;import hashlib;root=Path(\"/work/home/fix-v43-source\");saved=Path(\"/work/home/transient67-stall-probe\");names=[\"v67-thermal-probe.ts\",\"v67-operation-probe.ts\"];assert all(hashlib.sha256((root/\"src\"/name).read_bytes()).digest()==hashlib.sha256((saved/name).read_bytes()).digest() for name in names);[(root/\"src\"/name).unlink() for name in names];print(\"Retired two diagnostic source copies after verifying retained exact originals; exported originals also preserved.\")"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "b6dce3c7a7c46d56ad83c655e3b56b5232ff2cc28d5af868d36c0999b3da8dea",
+  "exitCode": 0,
+  "seconds": 0.060169666999999816,
+  "sourceVerifiedBeforeAndAfter": true
+}

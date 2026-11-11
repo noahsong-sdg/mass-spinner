@@ -1,0 +1,20 @@
+{
+  "label": "transient67-graded-fixed",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/transient-v67/campaign.ts",
+    "scientific/transient-v67/specifications.json",
+    "/work/home/transient67-graded-fixed.json",
+    "[\"r32-z4-g32-t128-q\",\"r32-z4-g64-t128-q\",\"r32-z4-g128-t128-q\",\"r32-z4-g128-t256-q\"]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "b6dce3c7a7c46d56ad83c655e3b56b5232ff2cc28d5af868d36c0999b3da8dea",
+  "exitCode": 0,
+  "seconds": 102.068907005,
+  "sourceVerifiedBeforeAndAfter": true
+}

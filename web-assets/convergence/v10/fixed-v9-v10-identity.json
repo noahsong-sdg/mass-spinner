@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "check": "released-fixed-v9-versus-fixed-v10-exact-overlapping-evidence",
+  "prior": "assets/convergence-default-200us-v1.json",
+  "current": "assets/convergence-default-200us-fixed-v10.json",
+  "priorSHA256": "a20d9a386d0fa6e7f396f91b50a2b52f79a11a95b3dc8575f509a337eef88f95",
+  "currentSHA256": "67f8b70ffa97c246ca3314ec41bb64f28a12c9b40224d42f01764cd779b69234",
+  "wholeRunPairs": 48,
+  "comparedLeaves": 447330,
+  "mismatches": [],
+  "exactMatch": true,
+  "excluded": "wall-clock timing, source/model version, and additive new keys; every pre-existing config/observation/diagnostic/geometry/raw history/impact/flux field is checked"
+}

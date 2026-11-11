@@ -1,0 +1,16 @@
+{
+  "definition": "Declared fixed-time physical wall-surface difference / fine causal excursion; no floor.",
+  "endpoint": {
+    "timeS": 1.52587890625e-08,
+    "coarseSurfaceK": 1199.999987999905,
+    "fineSurfaceK": 1199.9999880172272,
+    "rawDifferenceK": 1.732223608996719e-08,
+    "fineCausalExcursionK": 1.198277277580928e-05,
+    "roundoffAllowanceK": 5.456968197446845e-10,
+    "roundoffDominatedReferenceSignal": false,
+    "causalRelativeError": 0.0014455949732216549
+  },
+  "limit": 0.02,
+  "passed": true,
+  "uniformAllTimeClaimed": false
+}

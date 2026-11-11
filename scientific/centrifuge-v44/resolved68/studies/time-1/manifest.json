@@ -1,0 +1,30 @@
+{
+  "resolved68-time-refinement/combined.json.gz": {
+    "sha256": "ce3462605945605176f8bc5afd83b347673227844bb34c94ff18b9474cbbe983",
+    "bytes": 81425855
+  },
+  "resolved68-time-refinement/electrical-config.json": {
+    "sha256": "32587bbc54087bf10f4986c604852e8ec02047287f42caa260cd434acc41e4e9",
+    "bytes": 482
+  },
+  "resolved68-time-refinement/electrical.json": {
+    "sha256": "4e428bfa0dfa6257e33cf8f7651f61430a085920f98efdb034236d0553c74b3d",
+    "bytes": 4058042
+  },
+  "resolved68-time-refinement/history-config.json": {
+    "sha256": "be10e061cc8f7c4a83bd0b4312a9a9c14681345e01befe49c6ed9de911a2353d",
+    "bytes": 318
+  },
+  "resolved68-time-refinement/history.json": {
+    "sha256": "7a66dd6647eb5b744ab95c75eeef3589073ec31d013fc9c47ede832955d33286",
+    "bytes": 84412
+  },
+  "resolved68-time-refinement/summary.json": {
+    "sha256": "6288b7aa54814b4b85446f0bd256bd3cca6a2f4a081b28905d36882decd59727",
+    "bytes": 21758
+  },
+  "resolved68-time-refinement/surface.json": {
+    "sha256": "34ae38a37b4b033d18db10860788ad468149cb3173aa2821f0da7e293f77921d",
+    "bytes": 206887
+  }
+}

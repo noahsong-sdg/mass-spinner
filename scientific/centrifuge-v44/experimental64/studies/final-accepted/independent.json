@@ -1,0 +1,125 @@
+{
+  "sourceFileSHA256": "99dcf109eb6ff64a26614b459bc2860d5b5145e66a28666a6a06ad6f8c963b49",
+  "schemaVersion": 1,
+  "matchedExperimentalValidation": false,
+  "independentImplementation": "Python stdlib; no production/comparison imports",
+  "pressureScaling": {
+    "numericalReconstructionPassed": true,
+    "independentPredictedRatio": 0.3333333333333333,
+    "reportedRatio": 0.6666666666666666,
+    "relativeSpeedRatioError": 0.5,
+    "relativeSlowdownSignalError": 1.0,
+    "prospectiveRelativeSpeedTarget": 0.2,
+    "firstOrderSpeedScreenPassed": false,
+    "requiredTestToTrainDragRatioIfRefitted": 0.5,
+    "matchedExperimentalValidation": false,
+    "scope": "Structural pressure challenge under fixed rates, same drive/time and filling-pressure inventory proxy",
+    "uncertaintyStatus": "No probability distribution or experimental confidence level inferred",
+    "fitWarning": "Refitting pressure-dependent drag to this point is calibration, not held-out validation"
+  },
+  "profile": {
+    "numericalReconstructionPassed": true,
+    "independentFitOmegaRadS": 26469.410672482918,
+    "trainingCount": 3,
+    "heldoutCount": 5,
+    "heldoutRmsMS": 529.7351977651266,
+    "heldoutRmsOverPeak": 0.5954574731429478,
+    "heldoutSignedResidualMS": [
+      51.51492974744701,
+      163.7243314979537,
+      346.07021219527894,
+      529.3297243652337,
+      986.7537206311881
+    ],
+    "prospectiveProfileTarget": 0.2,
+    "profileShapeScreenPassed": false,
+    "matchedExperimentalValidation": false,
+    "scope": "Conditioned rigid Doppler chord profile shape; fitted inner markers, outer holdout",
+    "uncertaintyStatus": "Pixel bounds and correlated reproducibility sensitivity are not a confidence interval"
+  },
+  "mechanism": {
+    "numericalReconstructionPassed": true,
+    "conditionalLogDensityRatios": [
+      0.0,
+      0.004702444475948395,
+      0.4702444475948395,
+      0.0,
+      0.031230160287944658,
+      3.1230160287944657,
+      0.0,
+      0.10264096912699304,
+      10.264096912699303
+    ],
+    "maximaSensitivity": [
+      {
+        "B": 0.1300001337996698,
+        "lambda": 0.16098603643302953,
+        "coordinateSensitivityEnvelope": [
+          0.1011412272372729,
+          0.25047533315609594
+        ]
+      },
+      {
+        "B": 0.17000001605596038,
+        "lambda": 0.21807504480665774,
+        "coordinateSensitivityEnvelope": [
+          0.13700801728070452,
+          0.3392991138315351
+        ]
+      },
+      {
+        "B": 0.20999989831225097,
+        "lambda": 0.2660928138700282,
+        "coordinateSensitivityEnvelope": [
+          0.16717570262703946,
+          0.4140091133448379
+        ]
+      },
+      {
+        "B": 0.2549998892138734,
+        "lambda": 0.3378235295973271,
+        "coordinateSensitivityEnvelope": [
+          0.21224130446440767,
+          0.5256136681087824
+        ]
+      }
+    ],
+    "matchedExperimentalValidation": false,
+    "scope": "Synthetic radial-equilibrium operator plus measured-maxima coordinate sensitivity",
+    "uncertaintyStatus": "Independent Cartesian input bounds; maxima can occur at different locations; no joint confidence claim",
+    "observationWarning": "Single-species log density ratios are not isotope enrichment or outlet purity"
+  },
+  "magneticScaling": {
+    "numericalReconstructionPassed": true,
+    "points": [
+      {
+        "B": 0.1300001337996698,
+        "split": "test",
+        "independentPredictedMS": 630.4825274933256,
+        "relativeError": 0.15862875175345492
+      },
+      {
+        "B": 0.17000001605596038,
+        "split": "train",
+        "independentPredictedMS": 922.593351953212,
+        "relativeError": 0.0
+      },
+      {
+        "B": 0.20999989831225097,
+        "split": "test",
+        "independentPredictedMS": 1368.6536507584365,
+        "relativeError": 0.22549937143047527
+      },
+      {
+        "B": 0.2549998892138734,
+        "split": "test",
+        "independentPredictedMS": 1899.0477774030976,
+        "relativeError": 0.41177776438776104
+      }
+    ],
+    "heldoutFirstOrderScreenPassed": false,
+    "matchedExperimentalValidation": false,
+    "scope": "One-field calibrated fixed-rate B scaling with diagnostic Tmax as inverse-inventory proxy",
+    "observationWarning": "Diagnostic maximum temperature is not measured volume-mean gas temperature"
+  }
+}

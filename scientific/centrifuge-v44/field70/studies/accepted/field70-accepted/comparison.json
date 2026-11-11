@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 1,
+  "markersSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "protocolSHA256": "95333e12eae22489a7841fab18ffa86f403dee8a2c65194aa202f912db1033c6",
+  "matchedExperimentalValidation": false,
+  "liveQualified": false,
+  "unconditionalAccuracy": false,
+  "observable": "Maximum apparent neutral Doppler speed ratio, fixed100A and3Torr; central optical temperature is only a scalar proxy",
+  "sourceUrl": "https://www.degruyterbrill.com/document/doi/10.1515/zna-1980-0815/pdf",
+  "trainingFieldT": 0.17,
+  "heldoutFieldsT": [
+    0.13,
+    0.21,
+    0.255
+  ],
+  "target": 0.2,
+  "cases": [
+    {
+      "id": "nominal",
+      "temperatureScale": 1,
+      "candidate": "fixed-rate-inventory",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 8379.409792869894,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 630.4825274933256,
+          "relativeError": 0.15862875175345492
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 9376.603077779477,
+          "viscosityPaS": null,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11260.525270086302,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1368.6536507584365,
+          "relativeError": 0.22549937143047527
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 12867.082132999334,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1899.0477774030974,
+          "relativeError": 0.41177776438776087
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.41177776438776087,
+      "increasingTrend": true,
+      "conditionedScreenPassed": false,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.3340450308279609,
+          0.49399980493134
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 256,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.13832580645120784,
+          1.5841883645713686
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": null
+    },
+    {
+      "id": "nominal",
+      "temperatureScale": 1,
+      "candidate": "constant-viscosity",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 8379.409792869894,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 705.5132227583003,
+          "relativeError": 0.058501203440760076
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 9376.603077779477,
+          "viscosityPaS": null,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11260.525270086302,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1139.6734811481238,
+          "relativeError": 0.020469374417001748
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 12867.082132999334,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1383.8892959873733,
+          "relativeError": 0.02880199208094952
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.058501203440760076,
+      "increasingTrend": true,
+      "conditionedScreenPassed": true,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.031861107363125536,
+          0.09481208255702628
+        ],
+        "allAvailableCornersWithin20Percent": true,
+        "allCornersWithin20Percent": true,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 256,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.05850120344076012,
+          0.39190857752128483
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": null
+    },
+    {
+      "id": "nominal",
+      "temperatureScale": 1,
+      "candidate": "neutral-viscosity",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 8379.409792869894,
+          "viscosityPaS": 0.0002388173993294362,
+          "split": "test",
+          "predictedMS": 765.795942518163,
+          "relativeError": 0.021945351317395723
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 9376.603077779477,
+          "viscosityPaS": 0.00025922320023174996,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11260.525270086302,
+          "viscosityPaS": 0.00029600798165743,
+          "split": "test",
+          "predictedMS": 998.0467599160095,
+          "relativeError": 0.10634390500656563
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 12867.082132999334,
+          "viscosityPaS": 0.0003268371857185325,
+          "split": "test",
+          "predictedMS": 1097.5991342100494,
+          "relativeError": 0.1840299805368772
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.1840299805368772,
+      "increasingTrend": true,
+      "conditionedScreenPassed": true,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.14230454862470746,
+          0.22387464939863042
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 256,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.10661407853660713,
+          0.7245595468541487
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": {
+        "sourceAccuracyAnnotation": 5,
+        "cornerCount": 16,
+        "maximumErrorRange": [
+          0.09813839954075888,
+          0.2617414109619365
+        ],
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "interpretation": "Independent ±5% collision-integral coordinates; source correlation and confidence semantics unspecified"
+      }
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "temperatureScale": 1.4285714285714286,
+      "candidate": "fixed-rate-inventory",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11970.585418385563,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 630.4825274933256,
+          "relativeError": 0.15862875175345492
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 13395.147253970681,
+          "viscosityPaS": null,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 16086.464671551861,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1368.6536507584365,
+          "relativeError": 0.22549937143047527
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 18381.545904284765,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1899.0477774030974,
+          "relativeError": 0.41177776438776087
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.41177776438776087,
+      "increasingTrend": true,
+      "conditionedScreenPassed": false,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.3340450308279609,
+          0.49399980493134
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 256,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.13832580645120784,
+          1.5841883645713686
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": null
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "temperatureScale": 1.4285714285714286,
+      "candidate": "constant-viscosity",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11970.585418385563,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 705.5132227583003,
+          "relativeError": 0.058501203440760076
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 13395.147253970681,
+          "viscosityPaS": null,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 16086.464671551861,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1139.6734811481238,
+          "relativeError": 0.020469374417001748
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 18381.545904284765,
+          "viscosityPaS": null,
+          "split": "test",
+          "predictedMS": 1383.8892959873733,
+          "relativeError": 0.02880199208094952
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.058501203440760076,
+      "increasingTrend": true,
+      "conditionedScreenPassed": true,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.031861107363125536,
+          0.09481208255702628
+        ],
+        "allAvailableCornersWithin20Percent": true,
+        "allCornersWithin20Percent": true,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 256,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.05850120344076012,
+          0.39190857752128483
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": null
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "temperatureScale": 1.4285714285714286,
+      "candidate": "neutral-viscosity",
+      "points": [
+        {
+          "B": 0.1300001337996698,
+          "velocityMS": 749.3511678789584,
+          "temperatureK": 8379.409792869894,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 11970.585418385563,
+          "viscosityPaS": 0.0003095587620239388,
+          "split": "test",
+          "predictedMS": 768.3381257406559,
+          "relativeError": 0.025337863842182406
+        },
+        {
+          "B": 0.17000001605596038,
+          "velocityMS": 922.593351953212,
+          "temperatureK": 9376.603077779477,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 13395.147253970681,
+          "viscosityPaS": 0.0003371245092901026,
+          "split": "train",
+          "predictedMS": 922.593351953212,
+          "relativeError": 0
+        },
+        {
+          "B": 0.20999989831225097,
+          "velocityMS": 1116.8130173423615,
+          "temperatureK": 11260.525270086302,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985346,
+          "proxyTemperatureK": 16086.464671551861,
+          "viscosityPaS": 0.000388631865137425,
+          "split": "test",
+          "predictedMS": 988.6267636523892,
+          "relativeError": 0.11477861710012334
+        },
+        {
+          "B": 0.2549998892138734,
+          "velocityMS": 1345.1464000261037,
+          "temperatureK": 12867.082132999334,
+          "BHalfWidth": 0.000214079471651864,
+          "velocityHalfWidth": 15.088022580734604,
+          "temperatureHalfWidth": 146.16330251985528,
+          "proxyTemperatureK": 18381.545904284765,
+          "viscosityPaS": 0.0004308754860172237,
+          "split": "test",
+          "predictedMS": 1082.779166979389,
+          "relativeError": 0.19504734432001106
+        }
+      ],
+      "maximumHeldoutRelativeError": 0.19504734432001106,
+      "increasingTrend": true,
+      "conditionedScreenPassed": true,
+      "extraction": {
+        "kind": "extraction",
+        "cornerCount": 4096,
+        "availableCorners": 4096,
+        "outsidePropertyDomain": 0,
+        "maximumErrorRange": [
+          0.15313428378260177,
+          0.23503178439072675
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "reproducibility": {
+        "kind": "independent-reproducibility",
+        "cornerCount": 256,
+        "availableCorners": 128,
+        "outsidePropertyDomain": 128,
+        "maximumErrorRange": [
+          0.09223012389197512,
+          0.7401635816634914
+        ],
+        "allAvailableCornersWithin20Percent": false,
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "continuousExtremaBound": false
+      },
+      "transportSensitivity": {
+        "sourceAccuracyAnnotation": 5,
+        "cornerCount": 16,
+        "maximumErrorRange": [
+          0.11031548582738064,
+          0.2717095020038196
+        ],
+        "allCornersWithin20Percent": false,
+        "confidenceInterval": false,
+        "interpretation": "Independent ±5% collision-integral coordinates; source correlation and confidence semantics unspecified"
+      }
+    }
+  ],
+  "unresolved": [
+    "radial-profile",
+    "pressure-sweep",
+    "independent-current",
+    "radial-temperature",
+    "diagnostic-fit",
+    "predicted-heating",
+    "separation-products"
+  ]
+}

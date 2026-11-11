@@ -1,0 +1,11 @@
+.component-inspector{border-top:1px solid var(--line);padding:12px 20px;font-size:12px}
+.component-inspector>summary{cursor:pointer;color:var(--muted);width:fit-content;padding:6px 0}
+.component-choices{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.component-choices button{border:1px solid var(--line);border-radius:3px;padding:7px 10px;font-size:11px;color:var(--muted)}
+.component-choices button[aria-pressed=true]{border-color:var(--copper);color:var(--text)}
+.component-description{max-width:85ch;padding:5px 0 8px}
+.component-description h3{font-size:14px;margin-bottom:8px}.component-description p{font-size:12px;margin:7px 0;color:var(--muted)}
+.component-description strong{font-weight:500;color:var(--text)}.component-description .component-basis{font-size:11px}.component-description a{font-size:11px;text-underline-offset:4px}
+.component-hotspot{cursor:pointer;stroke:transparent;stroke-width:2;pointer-events:all}
+.component-hotspot:hover,.component-hotspot:focus-visible,.component-hotspot[aria-pressed=true]{stroke:var(--copper);outline:none;fill:#d79a6210}
+@media(max-width:500px){.component-inspector{padding-inline:16px}.component-choices{gap:5px}.component-choices button{padding:8px;font-size:11px}}

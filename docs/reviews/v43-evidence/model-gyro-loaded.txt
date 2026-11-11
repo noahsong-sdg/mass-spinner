@@ -1,0 +1,5 @@
+Browser tab: 923039329, Title: "Mass Spinner — Plasma separation laboratory", URL: "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=3".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
++			140 button (collapsed) Surfaces, Secondary Actions: Expand
++				141 text Surfaces
+The focused UI element is 23 button (collapsed) Plots, Secondary Actions: Expand

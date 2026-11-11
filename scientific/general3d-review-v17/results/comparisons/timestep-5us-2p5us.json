@@ -1,0 +1,349 @@
+{
+  "planSHA256": "eebf8413d4fe32a6239ed317809ee4651a95ac2ae85fff6ae4a9a757f65a9ceb",
+  "sourceSHA256": {
+    "aggregate.py": "7e8c0c40a6e850945a7b5052e6652a5a1c16cf521ec0f71c334b30e53290fc9e",
+    "campaign_review.py": "8fd5c126d5484eb04863b0482dfd3a68ca057b2ab9c0b762cb8acae3e7063966",
+    "case.py": "188f2c346e70d689dd9ab3fb5dc6df13d1bcd1e1ea49099e5467a8a1483000ff",
+    "case_process.py": "c4a5d1de871c1d2b995ede3d9bde63dd13858075383d67d1b14265283c219745",
+    "common_initial.py": "20caa6636102ef368b07c004c36aa24745542bdc180d5c98e0d92fc19e5f38cd",
+    "density.py": "b8fae4c1961bcf072b4580656d1baa3a8501f31704deacb05d4f48abaaf5ee0e",
+    "density_cost.py": "6db1231eb7c26946dec838a6e7d67f8ed2467158b13b493e4d0db022d10711da",
+    "figures.py": "d9c458623896a531da9a729990a0afb4bfd7ff90a473e29edb62fe07b6f9ac45",
+    "gaussian.py": "813e3e2358cb8bb54c084ec11bceec443a7f2426a7ccf6d4df54dda2a61094ff",
+    "geometry.py": "20a2b0bd55228e8eaa13bd30b8838af8e256165e1730719d20d8254cfe470eb7",
+    "initial_reference.py": "54148d866c2c2df09c6bd1cc9f299fee59a226c8687b1490b8031bb40603f012",
+    "main_compare.py": "92a48c5c33a8d87b2aa4e7c7fb6490901f823d3bda006f6023d01656280905a6",
+    "physics.py": "5527c3ec41fcad2fa1c62772a2912ace492a6c1fb16d6593763a92cc23f0ef32",
+    "pilot.py": "8bac39455c66637c65270a95ffbdbb8f4a052fb0575ca2504238f626122d5d1b",
+    "rate_compare.py": "860cc26e3363c78d44eaa91b554017c9d058234c1cc640775ceb4621a246d6c5",
+    "review.py": "0f0b24944be33f631ea1fb6330d68c202c4406f3a6f758bba7346647d497a251",
+    "run_checks.py": "a107be1bb47ba3c2c7577fec7bd4d31f18260fc6c2134044b0377ee4ffbf2a4c",
+    "seal.py": "5f5d4dd788f2eb326f8ec394e260fff4391d68af5c9336e2196fb05a45bb595b",
+    "shape.py": "34b8462b89429bf2753a35cf347f03ce80ecfdcf34a4da2082a9d7bff773c797",
+    "sobol_compare.py": "fc1af09f27302654933c2f953982bdcdbd8e3c70178bb6314b064f7eac07a603",
+    "sobol_review.py": "f7ddf361c02b3ff66aa817aaaa3c7d6f0c22b472d4fd1fb2363371a3d037d357",
+    "study.py": "788c3cc86dd49cf49f4133917d07fa77de7de3992ccdde29d3a90f585b967031",
+    "symmetry.py": "fe84ec22f1108dc06f9e7c3d98c646089967d75f16fdf84a5e8f19ca9929ae6a",
+    "test_case.py": "8318e661c7099d08e9fb67cb15813f966dd66c3cb0f45de661492c0618a45021",
+    "test_density.py": "398c4300497acf0b258e027bf4037d70579e95018f4a266b2e98b5aef163901d",
+    "test_gaussian.py": "3d6dcf47f6d53df9209796a36712004834ebb2649a06564cfd9af3c026af36e1",
+    "test_geometry.py": "5945deba1e260bec01cf5ff8faf803c3a8c23ab51b0a0f6fb14fcaaa9c0d468e",
+    "test_physics.py": "e06058191f5d056e87340032c2837606237a6960aa3a8cee8ca8153dd6d8d26e",
+    "test_rate_compare.py": "ca9c45543f68963b82acd3a2978bce6de82bd90329c40e619e22f09080f3bd1d",
+    "test_review.py": "763cdb663ad528a6a4bbdcc67aa559e6b78082b2a6237d5cacbb3115813289c2",
+    "test_seal.py": "57b51012b91bfec59a984d2b5a7b45c619e3018f792871bc5842785da4bcd433"
+  },
+  "inputManifestSHA256": "096b5774456ac3a9c48f953e5772de80561437c9769f9760867aba1b697a7999",
+  "comparison": {
+    "id": "timestep-5us-2p5us",
+    "left": "combined-n8-q5-a005",
+    "right": "combined-n8-q5-a005-dt2p5"
+  },
+  "status": "COMPLETE",
+  "records": [
+    {
+      "timeS": 5e-05,
+      "species": [
+        {
+          "gate": "UNKNOWN",
+          "quadratureGate": "UNKNOWN",
+          "characteristicLowerWitness": 0.00016426355909505126,
+          "controls": [
+            {
+              "power": 12,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0005437424262499081,
+                0.0005329270445850954,
+                0.0005320046894635523,
+                0.000540421469778637
+              ],
+              "mean": 0.0005372739075192982,
+              "standardError": 2.8636916592691254e-06,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 14,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0005363699477314344,
+                0.0005366835470029809,
+                0.0005373489338987728,
+                0.0005377382174095296
+              ],
+              "mean": 0.0005370351615106794,
+              "standardError": 3.107628842273004e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 16,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0005359639828711798,
+                0.0005366524651146245,
+                0.0005368672289376252,
+                0.0005372682795147741
+              ],
+              "mean": 0.000536687989109551,
+              "standardError": 2.729943311038348e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 18,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0005372753943336187,
+                0.0005370394862486154,
+                0.0005377612502416124,
+                0.0005368122203597455
+              ],
+              "mean": 0.000537222087795898,
+              "standardError": 2.0307477484099705e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            }
+          ],
+          "integrationSensitivityAndEmpiricalUncertainty": 2.43837511012635e-06,
+          "bound": {
+            "upperBound": 0.0014473436936882052,
+            "numerator": "7217321488528823717067769976432675398780",
+            "denominator": "4986598221281654400766453291195206802807191",
+            "decision": "UNKNOWN",
+            "scope": "Exact serialized-mixture coupling upper bound; exceeding it is not FAIL"
+          },
+          "scope": "Full-3D randomized mixture-importance integral; empirical uncertainty, not an interval certificate",
+          "species": 1
+        },
+        {
+          "gate": "FAIL",
+          "quadratureGate": "PASS",
+          "characteristicLowerWitness": 5.694924468127403e-05,
+          "controls": [
+            {
+              "power": 12,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00029866995358360015,
+                0.00029711376111460244,
+                0.00029917645482739315,
+                0.00029468055687674515
+              ],
+              "mean": 0.0002974101816005852,
+              "standardError": 1.0101758427140768e-06,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 14,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00030047577504320255,
+                0.0002987288093002489,
+                0.0002973397472013734,
+                0.0002962042178541005
+              ],
+              "mean": 0.0002981871373497313,
+              "standardError": 9.211094209177744e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 16,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00029859507366689905,
+                0.00029833358261476163,
+                0.0002982484559555164,
+                0.00029797664440248627
+              ],
+              "mean": 0.00029828843915991586,
+              "standardError": 1.2743536916899723e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 18,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.000298351320713262,
+                0.00029836993802485575,
+                0.0002982817963419613,
+                0.00029830276943188476
+              ],
+              "mean": 0.00029832645612799097,
+              "standardError": 2.0543610150735207e-08,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            }
+          ],
+          "integrationSensitivityAndEmpiricalUncertainty": 6.299328853540429e-07,
+          "bound": {
+            "upperBound": 0.0005533346502541514,
+            "numerator": "2538758169595734690874899409982574561559",
+            "denominator": "4588106254379083990623078385751264972760360",
+            "decision": "UNKNOWN",
+            "scope": "Exact serialized-mixture coupling upper bound; exceeding it is not FAIL"
+          },
+          "scope": "Full-3D randomized mixture-importance integral; empirical uncertainty, not an interval certificate",
+          "species": 2
+        }
+      ],
+      "gate": "FAIL"
+    },
+    {
+      "timeS": 0.0001,
+      "species": [
+        {
+          "gate": "UNKNOWN",
+          "quadratureGate": "UNKNOWN",
+          "characteristicLowerWitness": 9.788237847004415e-05,
+          "controls": [
+            {
+              "power": 12,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0006148594803248607,
+                0.0005856018551092375,
+                0.0005931068156522478,
+                0.0006061461229804739
+              ],
+              "mean": 0.000599928568516705,
+              "standardError": 6.54077684056141e-06,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 14,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0006083257351512483,
+                0.0005986038338095431,
+                0.0006023003599784602,
+                0.0006085135978060788
+              ],
+              "mean": 0.0006044358816863326,
+              "standardError": 2.4209496093770455e-06,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 16,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0006036881629374088,
+                0.0006049196272279816,
+                0.0006043796714262237,
+                0.0006026830645729178
+              ],
+              "mean": 0.000603917631541133,
+              "standardError": 4.825529030566673e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 18,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.0006036248366564232,
+                0.0006041878247426991,
+                0.0006040055500623698,
+                0.000604135924002123
+              ],
+              "mean": 0.0006039885338659038,
+              "standardError": 1.2715014646561403e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            }
+          ],
+          "integrationSensitivityAndEmpiricalUncertainty": 2.5097145228599263e-06,
+          "bound": {
+            "upperBound": 0.0016092902681694322,
+            "numerator": "116302666504051699452424985663235007828",
+            "denominator": "72269539438864556532847149147756620330539",
+            "decision": "UNKNOWN",
+            "scope": "Exact serialized-mixture coupling upper bound; exceeding it is not FAIL"
+          },
+          "scope": "Full-3D randomized mixture-importance integral; empirical uncertainty, not an interval certificate",
+          "species": 1
+        },
+        {
+          "gate": "FAIL",
+          "quadratureGate": "PASS",
+          "characteristicLowerWitness": 4.4004585316464595e-05,
+          "controls": [
+            {
+              "power": 12,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00022486174905477171,
+                0.00022184888402343304,
+                0.00022502881455649387,
+                0.00022125154641867525
+              ],
+              "mean": 0.00022324774851334347,
+              "standardError": 9.882155071003933e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 14,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00022474303853583288,
+                0.00022367054404781527,
+                0.00022357496548215084,
+                0.000221237470449469
+              ],
+              "mean": 0.000223306504628817,
+              "standardError": 7.387561635204721e-07,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 16,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00022404267834375422,
+                0.00022399265266115906,
+                0.0002240095860672683,
+                0.00022370090379583593
+              ],
+              "mean": 0.00022393645521700438,
+              "standardError": 7.920127243339897e-08,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            },
+            {
+              "power": 18,
+              "replicates": 4,
+              "seed": 1701,
+              "values": [
+                0.00022389636156190418,
+                0.00022394904816117303,
+                0.0002239901781913229,
+                0.00022385497090969748
+              ],
+              "mean": 0.0002239226397060244,
+              "standardError": 2.9620460769667937e-08,
+              "scope": "Full 3D positive-mixture importance integral; empirical randomized-QMC uncertainty"
+            }
+          ],
+          "integrationSensitivityAndEmpiricalUncertainty": 4.4910244379226304e-07,
+          "bound": {
+            "upperBound": 0.0004234756967077147,
+            "numerator": "1165770895585323597381793745536499508175",
+            "denominator": "2752863752627450394373847031450758983656216",
+            "decision": "UNKNOWN",
+            "scope": "Exact serialized-mixture coupling upper bound; exceeding it is not FAIL"
+          },
+          "scope": "Full-3D randomized mixture-importance integral; empirical uncertainty, not an interval certificate",
+          "species": 2
+        }
+      ],
+      "gate": "FAIL"
+    }
+  ]
+}

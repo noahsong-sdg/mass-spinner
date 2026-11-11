@@ -1,0 +1,30 @@
+{
+  "transient67-graded-fixed.json": {
+    "sha256": "1f10da5bc046cd149a024177e2e5c78c2536003e69e5b920c4e16ac4b44f2af2",
+    "bytes": 26611333
+  },
+  "transient67-graded-assess/analysis.json": {
+    "sha256": "34023d33cd693f496a58cb67406d9db6818ebadb35f0d81ca9b3fec3730f7b78",
+    "bytes": 253800
+  },
+  "transient67-graded-assess/config.json": {
+    "sha256": "8f9157f87edc60030afd9129f2d8de4b393cee6ee469f8fa537da1c6955ce551",
+    "bytes": 531
+  },
+  "transient67-graded-assess/conservation.log": {
+    "sha256": "4d54318ca4c75a12a7c4cafd8db09dd7689301d1cd7ba9540246b00f33895de5",
+    "bytes": 1556
+  },
+  "transient67-graded-assess/receipts.json": {
+    "sha256": "0e7a7be2751ef288d8d9da0d8ad4690cbd94a9a1cd338283c6756e1f4add13a3",
+    "bytes": 624
+  },
+  "transient67-graded-assess/refinement.log": {
+    "sha256": "54a8ae4876483a53dcbace2ecae19ea2dca67adda99860d62ff3264042aa8859",
+    "bytes": 16471
+  },
+  "transient67-surface-graded.json": {
+    "sha256": "c0db8ed4eef122bd85f7d9283646e70256a237145af0c53c960a871b0c7f8493",
+    "bytes": 519820
+  }
+}

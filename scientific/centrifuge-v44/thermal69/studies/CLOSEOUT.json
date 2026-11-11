@@ -1,0 +1,41 @@
+{
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "testedInputs": 744,
+  "hostInputs": 742,
+  "stageOnlyRecoveredFromV68": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "verifiedArtifactFiles": 148,
+  "exportManifestSHA256": {
+    "initial": "4677a27b00472f8c08c8ac7d7688441b38d2edac463b466b8943571f0bde8660",
+    "coupled": "7309805aec23f06f6d8f6b54b2d5008562a0ce36038ef5378fa06ab1b6cbe2b6",
+    "finest": "c8e02ed8e33c8a6f7932858f7f729f2aeccaf269c5b826aecf07537d9bd415bf",
+    "raw-fine": "c12727ed2c2ac827beda8a4a5da525634c2294587046ce761ed8b3f224862949",
+    "raw-full": "043fa414c844e5c32b309ae00c4477d979371b26d85353a82f8acdb67e97548e",
+    "raw-start": "00b3eca4cf68f1a22eadcdf117a7b28878a61c4555c88d4a466b00f724b9b8da",
+    "control-evidence": "412a5b83deb70c4d295217374f3ddeb55093e6e065ffc3120e5770410b10422e"
+  },
+  "sourceArchiveSHA256": "7d5da33cd7f3d86b773ddb3e7824a286016cc2c85a3e280d2b21dc3a6d64b3b5",
+  "packetIndexSHA256": "ded82378bb1eb7d33f1a6aeb390ec7462380b126d378ca6250485795dff768ea",
+  "reviewCloseoutManifestSHA256": "a667c187c56f0933bc7fbf8d39800d816d35a95ff3b5676d7be55e290b7005ee",
+  "checks": {
+    "newScientific": 14,
+    "v68Scientific": 9,
+    "v67Scientific": 28,
+    "application": 1231,
+    "applicationSkipped": 0,
+    "typecheck": true,
+    "build": true,
+    "site": true,
+    "assets": true
+  },
+  "claims": {
+    "targetedGasEndpointQualified": true,
+    "fixedStartupWallEndpointQualified": true,
+    "uniformLocalThermalAccuracy": false,
+    "experimentalAccuracy": false,
+    "deployedDefaultsChanged": false,
+    "browserGPUVerified": false
+  }
+}

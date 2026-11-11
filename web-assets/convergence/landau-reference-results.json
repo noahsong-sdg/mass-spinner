@@ -1,0 +1,1376 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": 9,
+  "createdUTC": "2026-11-07T01:56:38.815Z",
+  "sourceHashes": {
+    "src/landau-reference.ts": "eaf4cff23c07cb2feac762960768f1786dc1b8aa5c4865a4c642908e3151ba74",
+    "src/coulomb.ts": "116a8d0e9958de1337dcdc8ca0accbc45cf0a17e60f105832cc3a5c358d576a9",
+    "src/physics.ts": "ae14e254b428efbf9be7a8fa3117ae13a8e7d12b3ca923a920ba098fe79a8d88",
+    "scripts/run-landau-reference.ts": "ec8cce1a36f3a83ca414608b10ffcf82beebaf43004ab603051ace4dde0a71a5"
+  },
+  "runtime": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "architecture": "arm64"
+  },
+  "case": {
+    "species": [
+      {
+        "massU": 40,
+        "charge": 1,
+        "densityM3": 500000000000000000,
+        "temperatureEV": 2
+      },
+      {
+        "massU": 84,
+        "charge": 1,
+        "densityM3": 500000000000000000,
+        "temperatureEV": 10
+      }
+    ],
+    "coulombLog": 12,
+    "durationS": 0.001,
+    "description": "Closed homogeneous isotropic Maxwellian 40/84-u relaxation, no fields/drift/spatial cells. Second-moment temperatures, not drift-subtracted."
+  },
+  "declaredChecks": {
+    "maxReferenceEnergyDefect": 0.001,
+    "meshAndTimeTemperatureDifferenceEV": 0.01,
+    "selection": "Pilot-informed engineering targets fixed before the full reference/TA comparison campaign; not independent preregistration or a literature standard.",
+    "taComparison": "Use whole-run independent-seed variability; four seeds are exploratory. No acceptance from pair conservation or temperature direction alone."
+  },
+  "referenceAccepted": false,
+  "separatorTransportValidated": false,
+  "totalRuntimeMS": 16003.630209,
+  "references": [
+    {
+      "name": "mesh128",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 1.25e-7,
+        "bins": 128,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 530.481041,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.003304854781931,
+            10.006941966270846
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00010000000000000162,
+          "temperaturesEV": [
+            3.67928968038071,
+            8.327586425350734
+          ],
+          "energyResidual": -0.00028065329310494934,
+          "numberResidual": 4.440892098500626e-16
+        },
+        {
+          "timeS": 0.00024999999999999263,
+          "temperaturesEV": [
+            4.700014533081278,
+            7.305323260250079
+          ],
+          "energyResidual": -0.00040873662253181205,
+          "numberResidual": 1.9984014443252818e-15
+        },
+        {
+          "timeS": 0.0005000000000000258,
+          "temperaturesEV": [
+            5.392206510274738,
+            6.610885612683685
+          ],
+          "energyResidual": -0.0005957161581238545,
+          "numberResidual": 3.3306690738754696e-16
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.823784062942868,
+            6.174568427678146
+          ],
+          "energyResidual": -0.0009903485422908653,
+          "numberResidual": 2.4424906541753444e-15
+        }
+      ],
+      "maxEnergyResidual": 0.0009903485422908653,
+      "maxNumberResidual": 4.3298697960381105e-15,
+      "initialNormalizationDefect": [
+        -6.661338147750939e-16,
+        9.43689570931383e-15
+      ]
+    },
+    {
+      "name": "mesh256",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 1.25e-7,
+        "bins": 256,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 1056.462125,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.0008264864349634,
+            10.001735732403386
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00010000000000000162,
+          "temperaturesEV": [
+            3.6786941361736423,
+            8.320628817411547
+          ],
+          "energyResidual": -0.00026988114655056094,
+          "numberResidual": 9.992007221626409e-16
+        },
+        {
+          "timeS": 0.00024999999999999263,
+          "temperaturesEV": [
+            4.699354428845239,
+            7.298960968921955
+          ],
+          "energyResidual": -0.0003538262075820593,
+          "numberResidual": 9.992007221626409e-16
+        },
+        {
+          "timeS": 0.0005000000000000258,
+          "temperaturesEV": [
+            5.391322995253862,
+            6.6061794726547145
+          ],
+          "energyResidual": -0.0004215559009414148,
+          "numberResidual": 1.1102230246251565e-15
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.823404668794772,
+            6.172813995488933
+          ],
+          "energyResidual": -0.0005285166982673911,
+          "numberResidual": 6.661338147750939e-16
+        }
+      ],
+      "maxEnergyResidual": 0.0005285166982673911,
+      "maxNumberResidual": 3.552713678800501e-15,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        1.021405182655144e-14
+      ]
+    },
+    {
+      "name": "mesh512",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 1.25e-7,
+        "bins": 512,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 2002.274542,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.000206638680771,
+            10.000433948161117
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00010000000000000162,
+          "temperaturesEV": [
+            3.6785452163947316,
+            8.318887969342434
+          ],
+          "energyResidual": -0.00026726915796221844,
+          "numberResidual": 1.7319479184152442e-14
+        },
+        {
+          "timeS": 0.00024999999999999263,
+          "temperaturesEV": [
+            4.699189023156369,
+            7.2973689091869876
+          ],
+          "energyResidual": -0.00034020304739658055,
+          "numberResidual": 3.730349362740526e-14
+        },
+        {
+          "timeS": 0.0005000000000000258,
+          "temperaturesEV": [
+            5.391101374870144,
+            6.605001662364308
+          ],
+          "energyResidual": -0.00037810894962554236,
+          "numberResidual": 5.995204332975845e-14
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.823308683438983,
+            6.17237417845113
+          ],
+          "energyResidual": -0.0004131216925685963,
+          "numberResidual": 1.1102230246251565e-13
+        }
+      ],
+      "maxEnergyResidual": 0.0004131216925685963,
+      "maxNumberResidual": 1.1168843627729075e-13,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        1.021405182655144e-14
+      ]
+    },
+    {
+      "name": "time1us",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 0.000001,
+        "bins": 256,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 150.039084,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.0008264864349634,
+            10.001735732403386
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00009999999999999982,
+          "temperaturesEV": [
+            3.6647823053897013,
+            8.31249426854142
+          ],
+          "energyResidual": -0.0021066872594534916,
+          "numberResidual": 4.6629367034256575e-15
+        },
+        {
+          "timeS": 0.00024999999999999957,
+          "temperaturesEV": [
+            4.684525877728572,
+            7.285873091269981
+          ],
+          "energyResidual": -0.002679698655446886,
+          "numberResidual": 1.3322676295501878e-14
+        },
+        {
+          "timeS": 0.0005000000000000056,
+          "temperaturesEV": [
+            5.376395461336954,
+            6.590812450606827
+          ],
+          "energyResidual": -0.002945563309720648,
+          "numberResidual": 2.353672812205332e-14
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.8081772441008575,
+            6.156805961192993
+          ],
+          "energyResidual": -0.003130915954369939,
+          "numberResidual": 3.907985046680551e-14
+        }
+      ],
+      "maxEnergyResidual": 0.003130915954369939,
+      "maxNumberResidual": 3.9968028886505635e-14,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        1.021405182655144e-14
+      ]
+    },
+    {
+      "name": "time0.5us",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 5e-7,
+        "bins": 256,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 306.74974999999995,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.0008264864349634,
+            10.001735732403386
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00009999999999999977,
+          "temperaturesEV": [
+            3.6726982997282343,
+            8.317110069633
+          ],
+          "energyResidual": -0.0010625939065828267,
+          "numberResidual": 1.7763568394002505e-15
+        },
+        {
+          "timeS": 0.0002500000000000028,
+          "temperaturesEV": [
+            4.692975205304075,
+            7.29332079713524
+          ],
+          "energyResidual": -0.001355228667216851,
+          "numberResidual": 2.886579864025407e-15
+        },
+        {
+          "timeS": 0.0005000000000000076,
+          "temperaturesEV": [
+            5.384903968082409,
+            6.599565887471417
+          ],
+          "energyResidual": -0.0015073750883013663,
+          "numberResidual": 1.176836406102666e-14
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.816857070344374,
+            6.165928632327209
+          ],
+          "energyResidual": -0.0016476912017673966,
+          "numberResidual": 2.1316282072803006e-14
+        }
+      ],
+      "maxEnergyResidual": 0.0016476912017673966,
+      "maxNumberResidual": 2.2426505097428162e-14,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        1.021405182655144e-14
+      ]
+    },
+    {
+      "name": "time0.25us",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 2.5e-7,
+        "bins": 256,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 8,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 655.7543329999999,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.0008264864349634,
+            10.001735732403386
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.0001000000000000008,
+          "temperaturesEV": [
+            3.676689877536317,
+            8.319450429214275
+          ],
+          "energyResidual": -0.0005350450987608119,
+          "numberResidual": 6.661338147750939e-16
+        },
+        {
+          "timeS": 0.0002500000000000038,
+          "temperaturesEV": [
+            4.697223971016974,
+            7.29707568864099
+          ],
+          "energyResidual": -0.0006883996124940157,
+          "numberResidual": 8.881784197001252e-16
+        },
+        {
+          "timeS": 0.0004999999999999853,
+          "temperaturesEV": [
+            5.389179706246153,
+            6.603970285951751
+          ],
+          "energyResidual": -0.0007841847822856975,
+          "numberResidual": 1.1102230246251565e-15
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.821218512917787,
+            6.170514709638292
+          ],
+          "energyResidual": -0.0009022237156407526,
+          "numberResidual": 1.7763568394002505e-15
+        }
+      ],
+      "maxEnergyResidual": 0.0009022237156407526,
+      "maxNumberResidual": 3.3306690738754696e-15,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        1.021405182655144e-14
+      ]
+    },
+    {
+      "name": "cutoff10",
+      "config": {
+        "species": [
+          {
+            "massU": 40,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 2
+          },
+          {
+            "massU": 84,
+            "charge": 1,
+            "densityM3": 500000000000000000,
+            "temperatureEV": 10
+          }
+        ],
+        "coulombLog": 12,
+        "durationS": 0.001,
+        "dtS": 1.25e-7,
+        "bins": 640,
+        "velocityScaleMS": 3500,
+        "maximumScaledSpeed": 10,
+        "sampleEvery": 1
+      },
+      "runtimeMS": 2734.8406669999995,
+      "history": [
+        {
+          "timeS": 0,
+          "temperaturesEV": [
+            2.000206638680771,
+            10.000433948163376
+          ],
+          "energyResidual": 0,
+          "numberResidual": 0
+        },
+        {
+          "timeS": 0.00010000000000000162,
+          "temperaturesEV": [
+            3.6785452163947348,
+            8.318887969344697
+          ],
+          "energyResidual": -0.0002672691579621681,
+          "numberResidual": 1.4654943925052066e-14
+        },
+        {
+          "timeS": 0.00024999999999999263,
+          "temperaturesEV": [
+            4.699189023156367,
+            7.297368909189263
+          ],
+          "energyResidual": -0.00034020304739497664,
+          "numberResidual": 3.6415315207705135e-14
+        },
+        {
+          "timeS": 0.0005000000000000258,
+          "temperaturesEV": [
+            5.391101374870155,
+            6.605001662366558
+          ],
+          "energyResidual": -0.0003781089496230074,
+          "numberResidual": 6.217248937900877e-14
+        },
+        {
+          "timeS": 0.001,
+          "temperaturesEV": [
+            5.823308683439019,
+            6.172374178453354
+          ],
+          "energyResidual": -0.0004131216925663627,
+          "numberResidual": 1.1146639167236572e-13
+        }
+      ],
+      "maxEnergyResidual": 0.0004131216925663627,
+      "maxNumberResidual": 1.1191048088221578e-13,
+      "initialNormalizationDefect": [
+        -2.220446049250313e-16,
+        3.3306690738754696e-16
+      ]
+    }
+  ],
+  "stochastic": [
+    {
+      "dtS": 0.000001,
+      "runs": [
+        {
+          "seed": 9143,
+          "dtS": 0.000001,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 349.3967910000001,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9853898570329758,
+                9.999287405864205
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.4626846079719056,
+                8.52199265492521
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.580186711964756,
+                7.404490550932257
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.428108124419994,
+                6.556569138476855
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.710740821815287,
+                6.273936441081233
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 17389,
+          "dtS": 0.000001,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 309.060375,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9572307491563263,
+                9.449709981958064
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.5758085163392543,
+                7.831132214775074
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.376381006603776,
+                7.030559724510466
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.357952899897011,
+                6.048987831217062
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.608368876239836,
+                5.798571854873924
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 27077,
+          "dtS": 0.000001,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 301.9164580000006,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                2.0139692469275454,
+                9.376306995823201
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.4881261156036816,
+                7.902150127147007
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.461443474477016,
+                6.928832768273578
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                4.932235979095801,
+                6.458040263654631
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.591132138993943,
+                5.799144103756177
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 39041,
+          "dtS": 0.000001,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 304.3229169999995,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9374344214528971,
+                10.611393789530654
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.6936100824253044,
+                8.855218128558173
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.786208877101388,
+                7.762619333881986
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.59539361160318,
+                6.953434599380029
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                6.0554066982027,
+                6.493421512780153
+              ]
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "timeS": 0,
+          "species": [
+            {
+              "mean": 1.9735060686424362,
+              "standardError": 0.016694667259300664,
+              "seeds": 4
+            },
+            {
+              "mean": 9.85917454329403,
+              "standardError": 0.28668910339380876,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0001,
+          "species": [
+            {
+              "mean": 3.5550573305850364,
+              "standardError": 0.0521536065983294,
+              "seeds": 4
+            },
+            {
+              "mean": 8.277623281351365,
+              "standardError": 0.24726277525494547,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.00025,
+          "species": [
+            {
+              "mean": 4.551055017536734,
+              "standardError": 0.08882906432832655,
+              "seeds": 4
+            },
+            {
+              "mean": 7.281625594399571,
+              "standardError": 0.19016388198827222,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0005,
+          "species": [
+            {
+              "mean": 5.3284226537539965,
+              "standardError": 0.1411401791396287,
+              "seeds": 4
+            },
+            {
+              "mean": 6.504257958182144,
+              "standardError": 0.18572001291726745,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.001,
+          "species": [
+            {
+              "mean": 5.741412133812941,
+              "standardError": 0.1079420759305786,
+              "seeds": 4
+            },
+            {
+              "mean": 6.091268478122871,
+              "standardError": 0.17466697153342203,
+              "seeds": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dtS": 5e-7,
+      "runs": [
+        {
+          "seed": 9143,
+          "dtS": 5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 603.6703339999985,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9853898570329758,
+                9.999287405864205
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.5630307867450433,
+                8.421646476152013
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.6617311426320995,
+                7.322946120264744
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.283811739507534,
+                6.700865523388986
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.862498557758924,
+                6.122178705136931
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 17389,
+          "dtS": 5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 614.2634579999994,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9572307491563263,
+                9.449709981958064
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.4555952028553834,
+                7.951345528258884
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.766633810143415,
+                6.64030692097067
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.209278929146266,
+                6.197661801967496
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.615146037597805,
+                5.791794693515323
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 27077,
+          "dtS": 5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 602.3208749999994,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                2.0139692469275454,
+                9.376306995823201
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.504520288680994,
+                7.885755954069632
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.476045874105961,
+                6.91423036864447
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.180175065434467,
+                6.210101177315662
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.4451935782848,
+                5.9450826644646835
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 39041,
+          "dtS": 5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 605.3970840000002,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9374344214528971,
+                10.611393789530654
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.6286570019321536,
+                8.92017120905126
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.7296637908402275,
+                7.819164420142974
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.732247070353739,
+                6.816581140629104
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                6.225179387346439,
+                6.323648823635724
+              ]
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "timeS": 0,
+          "species": [
+            {
+              "mean": 1.9735060686424362,
+              "standardError": 0.016694667259300664,
+              "seeds": 4
+            },
+            {
+              "mean": 9.85917454329403,
+              "standardError": 0.28668910339380876,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0001,
+          "species": [
+            {
+              "mean": 3.5379508200533936,
+              "standardError": 0.0373682845384772,
+              "seeds": 4
+            },
+            {
+              "mean": 8.294729791882947,
+              "standardError": 0.24021815841295757,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.00025,
+          "species": [
+            {
+              "mean": 4.658518654430425,
+              "standardError": 0.06458660398346258,
+              "seeds": 4
+            },
+            {
+              "mean": 7.174161957505715,
+              "standardError": 0.2566986778984587,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0005,
+          "species": [
+            {
+              "mean": 5.351378201110501,
+              "standardError": 0.12881803673212847,
+              "seeds": 4
+            },
+            {
+              "mean": 6.481302410825312,
+              "standardError": 0.16192124914802494,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.001,
+          "species": [
+            {
+              "mean": 5.7870043902469925,
+              "standardError": 0.16932872909446614,
+              "seeds": 4
+            },
+            {
+              "mean": 6.045676221688165,
+              "standardError": 0.1146357606761433,
+              "seeds": 4
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "dtS": 2.5e-7,
+      "runs": [
+        {
+          "seed": 9143,
+          "dtS": 2.5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 1204.8850829999992,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9853898570329758,
+                9.999287405864205
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.7110176579996614,
+                8.273659604897242
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.692028984131415,
+                7.292648278765086
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.272408886929309,
+                6.712268375966535
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.6550505011277235,
+                6.329626761766792
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 17389,
+          "dtS": 2.5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 1211.343041,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9572307491563263,
+                9.449709981958064
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.6508090829035775,
+                7.756131648210556
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.665273514130945,
+                6.74166721698281
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.041689090258026,
+                6.365251640855095
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.258401035912692,
+                6.148539695199162
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 27077,
+          "dtS": 2.5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 1235.4506249999995,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                2.0139692469275454,
+                9.376306995823201
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.5732622067897344,
+                7.817014035960762
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.483479163098642,
+                6.9067970796514855
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.291835647473101,
+                6.098440595276395
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.376591400010498,
+                6.01368484273773
+              ]
+            }
+          ]
+        },
+        {
+          "seed": 39041,
+          "dtS": 2.5e-7,
+          "particlesPerSpecies": 512,
+          "runtimeMS": 1223.1023750000004,
+          "history": [
+            {
+              "timeS": 0,
+              "temperaturesEV": [
+                1.9374344214528971,
+                10.611393789530654
+              ]
+            },
+            {
+              "timeS": 0.0001,
+              "temperaturesEV": [
+                3.7585625513835446,
+                8.790265659599727
+              ]
+            },
+            {
+              "timeS": 0.00025,
+              "temperaturesEV": [
+                4.7862117603335355,
+                7.762616450649301
+              ]
+            },
+            {
+              "timeS": 0.0005,
+              "temperaturesEV": [
+                5.493218989508664,
+                7.055609221473491
+              ]
+            },
+            {
+              "timeS": 0.001,
+              "temperaturesEV": [
+                5.8621977884919545,
+                6.686630422488803
+              ]
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "timeS": 0,
+          "species": [
+            {
+              "mean": 1.9735060686424362,
+              "standardError": 0.016694667259300664,
+              "seeds": 4
+            },
+            {
+              "mean": 9.85917454329403,
+              "standardError": 0.28668910339380876,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0001,
+          "species": [
+            {
+              "mean": 3.6734128747691295,
+              "standardError": 0.040005910868244406,
+              "seeds": 4
+            },
+            {
+              "mean": 8.159267737167072,
+              "standardError": 0.23994794222318624,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.00025,
+          "species": [
+            {
+              "mean": 4.656748355423635,
+              "standardError": 0.06331165460957226,
+              "seeds": 4
+            },
+            {
+              "mean": 7.175932256512171,
+              "standardError": 0.22709044480891805,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.0005,
+          "species": [
+            {
+              "mean": 5.274788153542275,
+              "standardError": 0.09235054654409067,
+              "seeds": 4
+            },
+            {
+              "mean": 6.557892458392878,
+              "standardError": 0.20811863589488724,
+              "seeds": 4
+            }
+          ]
+        },
+        {
+          "timeS": 0.001,
+          "species": [
+            {
+              "mean": 5.538060181385717,
+              "standardError": 0.1363308867728915,
+              "seeds": 4
+            },
+            {
+              "mean": 6.294620430548122,
+              "standardError": 0.14581999826989542,
+              "seeds": 4
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "The deterministic FV algorithm is an independent reference candidate, not a published-code reproduction or exact energy-conserving DG scheme.",
+    "Energy/truncation/cutoff/time defects are recorded without projection. No general-purpose Coulomb or separator validation is claimed.",
+    "TA finite-N empirical self-exclusion differs from the continuum limit; raw second moments include finite-sample center-of-mass drift.",
+    "Only isotropic temperature relaxation is compared. Anisotropic distributions, drift friction, spatial locality and collector observables remain separate gates."
+  ]
+}

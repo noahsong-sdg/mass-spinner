@@ -1,0 +1,46 @@
+[
+  {
+    "label": "reference",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/reference.py",
+      "/work/home/thermal69-benchmark.json",
+      "/work/home/thermal69-assess-1/reference.json"
+    ]
+  },
+  {
+    "label": "gas512",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/gas-q512-w128.json",
+      "/work/home/thermal69-assess-1/gas512"
+    ]
+  },
+  {
+    "label": "gas1024",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/gas-q1024-w128.json",
+      "/work/home/thermal69-assess-1/gas1024"
+    ]
+  },
+  {
+    "label": "time512-1024",
+    "exitCode": 1,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "time",
+      "/work/home/thermal69-campaign/gas-q512-w128.json",
+      "/work/home/thermal69-campaign/gas-q1024-w128.json",
+      "/work/home/thermal69-assess-1/time512-1024"
+    ]
+  }
+]

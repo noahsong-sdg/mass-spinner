@@ -1,0 +1,38 @@
+{
+  "transient67-graded-audit-final.json": {
+    "sha256": "3fcaeebfa9d2a5356da21c6184051d5fc6b42f6e9b90363a6882ab42cbec32f1",
+    "bytes": 4787996
+  },
+  "transient67-spatial-audit-final.json": {
+    "sha256": "c28e80c8f05b467793e5ef4a141382fdc43cb442c0f0fc406b9bfc02431129a2",
+    "bytes": 3486788
+  },
+  "transient67-final-checks/application-tests.log": {
+    "sha256": "158c20818cdf1d64c3e7e4659bd1f9ed288febe91c3ad5100478f564f47f1457",
+    "bytes": 322870
+  },
+  "transient67-final-checks/assets.log": {
+    "sha256": "59b3f08a370f0ab96b685c44dbabc7b2d52d6e6d8da5d439ec265f7f04817467",
+    "bytes": 198
+  },
+  "transient67-final-checks/build.log": {
+    "sha256": "ad0fccb1695542003fc2f294697c04d0dac9e691bec9faa6c3da590c60287760",
+    "bytes": 1137
+  },
+  "transient67-final-checks/receipts.json": {
+    "sha256": "68d5a947e63f7c2ebf2d28c18b08d04e6141b17815c5578bdaf5f00a3f5e2bb5",
+    "bytes": 842
+  },
+  "transient67-final-checks/scientific-tests.log": {
+    "sha256": "1e2faa950ffa0568b9a85a20e157b90950fdc10e17a852ff3ef333b7b8fd4c51",
+    "bytes": 126
+  },
+  "transient67-final-checks/site.log": {
+    "sha256": "26531b4375ad52c64c4c0ae72bbbaf8336eede47fd4e8dc1d81a4dd7cb42b603",
+    "bytes": 156
+  },
+  "transient67-final-checks/typecheck.log": {
+    "sha256": "dcb958aba4a6c7cd6d75b2bd69cf76202671333241d3c5ce33569584459aa324",
+    "bytes": 30
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "label": "transient67-tests",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "scientific/transient-v67",
+    "-p",
+    "test_*.py"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 720,
+  "sourceSHA256": "d94cd40803a45e819e8ad6907e576b6f37659673f46466aa3053fa1939344c26",
+  "exitCode": 0,
+  "seconds": 0.19330966700000007,
+  "sourceVerifiedBeforeAndAfter": true
+}

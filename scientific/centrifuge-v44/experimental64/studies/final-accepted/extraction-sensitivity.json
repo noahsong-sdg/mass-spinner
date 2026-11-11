@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "corners": 65536,
+  "splitFrozen": true,
+  "heldoutRmsOverPeakCornerRange": [
+    0.5646937076495118,
+    0.627494291918141
+  ],
+  "fitOmegaCornerRange": [
+    26046.1360449909,
+    26897.764347998447
+  ],
+  "maximumScoreChange": 0.032036818775193154,
+  "commonReproducibilityScale": [
+    {
+      "scale": 0.85,
+      "heldoutRmsOverPeak": 0.5954574731429481
+    },
+    {
+      "scale": 1,
+      "heldoutRmsOverPeak": 0.5954574731429478
+    },
+    {
+      "scale": 1.15,
+      "heldoutRmsOverPeak": 0.595457473142948
+    }
+  ],
+  "confidenceInterval": false,
+  "warning": "Source-to-reproduction error unknown; finite corners do not certify an interior-extremum bound"
+}

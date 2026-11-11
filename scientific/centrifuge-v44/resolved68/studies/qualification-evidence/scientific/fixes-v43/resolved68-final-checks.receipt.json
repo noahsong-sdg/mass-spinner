@@ -1,0 +1,18 @@
+{
+  "label": "resolved68-final-checks",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/final.py",
+    "/work/home/resolved68-final-checks"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 736,
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "exitCode": 0,
+  "seconds": 43.765707479,
+  "sourceVerifiedBeforeAndAfter": true
+}

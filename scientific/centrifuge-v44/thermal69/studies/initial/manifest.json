@@ -1,0 +1,106 @@
+{
+  "thermal69-benchmark.json": {
+    "sha256": "2e0454fb495f0ec9b7ed2dca2ed418ada3b5cc95dcfffd90a87c59010ed25e30",
+    "bytes": 8930061
+  },
+  "thermal69-assess-1/gas1024/conservation.json": {
+    "sha256": "9d5b67a157d0aa466df30075ad87feec0924bf42358b46709709c08898097723",
+    "bytes": 1950516
+  },
+  "thermal69-assess-1/gas1024.log": {
+    "sha256": "d8b9c11c3722f8fbe854022fef57dea1a1d8968873e39033ba54fc1e6fb9b7c9",
+    "bytes": 43
+  },
+  "thermal69-assess-1/gas512/conservation.json": {
+    "sha256": "5a0522e4f495d200e075f350f1abc55768ce4e3af83baa44d28f79fa41553a4d",
+    "bytes": 978593
+  },
+  "thermal69-assess-1/gas512.log": {
+    "sha256": "dfa132c50faca56c06726eb5a86e8d8a997581edbcc3e3e4dcb628bef83f3912",
+    "bytes": 43
+  },
+  "thermal69-assess-1/receipts.json": {
+    "sha256": "32815a1966772da2a9154c54ff3eabc24a07d1216ec6e44d63d5df61a22d9b07",
+    "bytes": 1211
+  },
+  "thermal69-assess-1/reference.json": {
+    "sha256": "17e435344bab14a8729b66b2fe2edfc2059e83d52fdcc2669605b29302a86b2a",
+    "bytes": 1011902
+  },
+  "thermal69-assess-1/reference.log": {
+    "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "bytes": 1
+  },
+  "thermal69-assess-1/time512-1024/combined.json.gz": {
+    "sha256": "05738670305223a0fa85b1dac31ef94da26196539ef0916dea629a0f37972894",
+    "bytes": 63395052
+  },
+  "thermal69-assess-1/time512-1024/config.json": {
+    "sha256": "83a5946080d7293591ad75afb5a3f1545557a808c18e8c94ea204f81a179cce1",
+    "bytes": 299
+  },
+  "thermal69-assess-1/time512-1024/electrical-config.json": {
+    "sha256": "230b6f810f6528b9c0ec51735430bb509fcf0ca0f8673cb96ac66fe131a92ccc",
+    "bytes": 461
+  },
+  "thermal69-assess-1/time512-1024/electrical.json": {
+    "sha256": "872f6f4da2e27cfa93ea37a7b565ee7c74199b49305393be0c8a34cd01849e3f",
+    "bytes": 3174703
+  },
+  "thermal69-assess-1/time512-1024/endpoint-gas.json": {
+    "sha256": "e606deabfdfbd5a3076993ad9d855e42f0b25f355872615118a228571b73e16f",
+    "bytes": 19234
+  },
+  "thermal69-assess-1/time512-1024/history.json": {
+    "sha256": "241ac5a006abf27ebdd453889fb1ae355e6a5d254f039ec9ae9a1f8e90ffb4e9",
+    "bytes": 67915
+  },
+  "thermal69-assess-1/time512-1024/summary.json": {
+    "sha256": "f001a913de9c8bb6553df593643491658cc0c5f6ae14270dd8dd67c987d539b2",
+    "bytes": 1024
+  },
+  "thermal69-assess-1/time512-1024/surface.json": {
+    "sha256": "ddd07383bbb4314b3d4085bc2db9803522498cb2b192bc15f7da886bd623c069",
+    "bytes": 163455
+  },
+  "thermal69-assess-1/time512-1024.log": {
+    "sha256": "8e45db40376d47821ca97017f008b409e66d04b07054afede1775b849eab1c79",
+    "bytes": 965
+  },
+  "thermal69-batch-1/benchmark.log": {
+    "sha256": "33b224d6aab85b09ce09c7d8d11add45b7c4d572da87d5bbbdcb2f9d670213ce",
+    "bytes": 3569
+  },
+  "thermal69-batch-1/gas-q1024-w128.log": {
+    "sha256": "9d08706ed13a8d8d4bb9eaccdd84c83a16ec8aa7b079672a9bd728aa65074ff7",
+    "bytes": 95
+  },
+  "thermal69-batch-1/gas-q512-w128.log": {
+    "sha256": "e374847b2167e89a2ae149fac98107b5034d8b22304c8ff5cdc745452eb34a0e",
+    "bytes": 94
+  },
+  "thermal69-batch-1/receipts.json": {
+    "sha256": "d7dc842c21e5e7f443479396a472df39ec0523fff0312da4dc8514fe79b7782c",
+    "bytes": 861
+  },
+  "thermal69-seed.json": {
+    "sha256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+    "bytes": 57011
+  },
+  "thermal69-campaign/gas-q512-w128.request.json": {
+    "sha256": "bd6b548e4fc89a89ac820c261ffdd13f2027bfb72ffc7101859f699eca19baaa",
+    "bytes": 506576
+  },
+  "thermal69-campaign/gas-q1024-w128.request.json": {
+    "sha256": "29d8a4809cac6cab8f6a4e867baa3cee1e9bbf03d215c1ab8685206b82d036ea",
+    "bytes": 506579
+  },
+  "thermal69-campaign/gas-q512-w128.progress.json": {
+    "sha256": "dda06007c6f2929dcbaccdb6f6d7376719d4de15b5d2164c76ce9027ad4ade4d",
+    "bytes": 93
+  },
+  "thermal69-campaign/gas-q1024-w128.progress.json": {
+    "sha256": "14b2934cc3e2916897d59b92d3b443f1c13044df85da4246a38419e1990db404",
+    "bytes": 94
+  }
+}

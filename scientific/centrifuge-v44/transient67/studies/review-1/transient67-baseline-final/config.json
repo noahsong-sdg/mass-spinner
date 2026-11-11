@@ -1,0 +1,16 @@
+{
+  "sourceSHA256": "ad08c16e86729d6b94190e349de1c4117bf37844dca74540c32767569f1b517c",
+  "predictionSHA256": "a92320f3dd5fa7b043d82ced94bb0f0c504b78df8f72c44406174e38d706335d",
+  "pairs": [
+    {
+      "coarseID": "mixture-n64-t32",
+      "fineID": "mixture-n64-t64",
+      "axis": "time"
+    },
+    {
+      "coarseID": "mixture-n32-t64",
+      "fineID": "mixture-n64-t64",
+      "axis": "radial"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "modelVersion": 10,
+  "files": [
+    {
+      "rawName": "convergence-default-200us-fixed-v10.json",
+      "rawSHA256": "67f8b70ffa97c246ca3314ec41bb64f28a12c9b40224d42f01764cd779b69234",
+      "rawBytes": 26239372,
+      "gzipName": "convergence-default-200us-fixed-v10.json.gz",
+      "gzipSHA256": "0a986a94f37b858f1e21dc578b8fe0c63c16ea16558ef9ca71c2481cad335efa",
+      "gzipBytes": 3151430,
+      "runs": 48,
+      "gate": "fail"
+    },
+    {
+      "rawName": "convergence-default-200us-axisymmetric-v10.json",
+      "rawSHA256": "6deb45231d93e0b7aa35818ffca46cc81dc94724d64c975bd87e660153dff98d",
+      "rawBytes": 26257995,
+      "gzipName": "convergence-default-200us-axisymmetric-v10.json.gz",
+      "gzipSHA256": "bc816c17c316bcf5bf85511724bb95a2d88806258438b4ab80fabe325d458822",
+      "gzipBytes": 3145158,
+      "runs": 48,
+      "gate": "fail"
+    },
+    {
+      "rawName": "convergence-default-200us-axisymmetric-source-aligned-v10.json",
+      "rawSHA256": "e73fabe4cb6cc519ad1bc9b4a90dde26da1a7f7258f3e951b1c6d1fbe9db57b6",
+      "rawBytes": 26266576,
+      "gzipName": "convergence-default-200us-axisymmetric-source-aligned-v10.json.gz",
+      "gzipSHA256": "3b0aa2f2b77d5e7774d72cae5ac5f19c010196781f8be51d54679bd5a1808fb5",
+      "gzipBytes": 3149449,
+      "runs": 48,
+      "gate": "fail"
+    },
+    {
+      "rawName": "convergence-axisymmetric-refinement-v10.json",
+      "rawSHA256": "79d801bffc069ec04b33251cb37fcdd5b23f54ce2740cfc2fcb5bca8bd70dfc9",
+      "rawBytes": 37019211,
+      "gzipName": "convergence-axisymmetric-refinement-v10.json.gz",
+      "gzipSHA256": "5bb502b279ec1b10375975355d6a0270fb49ce4fafc11d2341c8612b53857b8e",
+      "gzipBytes": 5306262,
+      "runs": 24,
+      "gate": "fail"
+    },
+    {
+      "rawName": "convergence-axisymmetric-fine-dt-v10.json",
+      "rawSHA256": "a9dde0a222808e0607d1dc86c718a9229749e5fc8a541124bce94c73037fba8e",
+      "rawBytes": 37358448,
+      "gzipName": "convergence-axisymmetric-fine-dt-v10.json.gz",
+      "gzipSHA256": "975fc4dd0ae3f143aa8a2ba31d074dff44c919c72ce3212235e04f8d4d7bc1f6",
+      "gzipBytes": 5467138,
+      "runs": 18,
+      "gate": "unknown"
+    },
+    {
+      "rawName": "convergence-confirmation-v10.json",
+      "rawSHA256": "945710d81350812336b3fa4ebb649f6cc4788d94dea15bbec5d6fed8f83acec6",
+      "rawBytes": 85642455,
+      "gzipName": "convergence-confirmation-v10.json.gz",
+      "gzipSHA256": "596bac0102df856f542b4825555a9ce63c730bc7d3c816a01c487cb2fde8cbb9",
+      "gzipBytes": 12396242,
+      "runs": 48,
+      "gate": "fail"
+    },
+    {
+      "rawName": "ring-equilibrium-v10.json",
+      "rawSHA256": "c2aa0e8c0ee308fc54fb9b0c79ef945de471e50cfb108f84c61ba26f3b511423",
+      "rawBytes": 6548387,
+      "gzipName": "ring-equilibrium-v10.json.gz",
+      "gzipSHA256": "a8677aeb9ff08ca93529b9cadb8b3191deeef0f280c2532e7c7a84b46d4cfaba",
+      "gzipBytes": 632366,
+      "runs": 18,
+      "gate": "unknown"
+    }
+  ],
+  "totalPhysicsRuns": 252,
+  "sourceArchive": {
+    "name": "physics-source-v10.zip",
+    "sha256": "4ff606caacb0152a72efa87373c38425344e8a8e6a27b8c4ef45adcecfd77642",
+    "files": 31,
+    "scope": "executed physics graphs, plans, aggregation/audit code and selected tests; not full web assets"
+  },
+  "meaning": "failed/unknown gates retained; implementation checks are not continuum or experimental validation"
+}

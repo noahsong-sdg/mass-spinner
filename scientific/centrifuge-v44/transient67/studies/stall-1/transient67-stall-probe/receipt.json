@@ -1,0 +1,16 @@
+{
+  "command": [
+    "tsx",
+    "runner.ts"
+  ],
+  "exitCode": 1,
+  "packetSHA256": "b72126bd3d961e62207750263b4b6593b08e459531e7e51c9418e1bb09d91427",
+  "sourceSHA256": "cbf9ee9cbe614737ea830d3333d43b1caadff4e26079f13803b3e1ca1de72c26",
+  "caseID": "r32-z4-g128-t128-q",
+  "acceptedStepsBeforeFailure": 49,
+  "dtS": 6.04248046875e-06,
+  "instrumentedSHA256": {
+    "src/v67-thermal-probe.ts": "bea8c27e3bdd1523e4e768ad20d96619786b89e63b45b7e6285bbd6fa7214e8e",
+    "src/v67-operation-probe.ts": "aef69e15e7103a29e474aaca000771840235a72af013d17b9bbbb06cfb6276a3"
+  }
+}

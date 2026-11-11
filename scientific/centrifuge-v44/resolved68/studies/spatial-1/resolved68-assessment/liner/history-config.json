@@ -1,0 +1,11 @@
+{
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "predictionSHA256": "c4fbdb661583d3eefe15a599887063802736d662db97659c0e5f496ec0c7ec6f",
+  "pairs": [
+    {
+      "coarseID": "liner-r64-z64-g64-t256",
+      "fineID": "anchor-r64-z64-g128-t256",
+      "axis": "liner"
+    }
+  ]
+}

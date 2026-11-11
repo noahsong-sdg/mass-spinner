@@ -1,0 +1,25 @@
+[
+  {
+    "label": "v68-scientific",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scientific/resolved-v68",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "repository",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/transient-v67/final.py",
+      "/work/home/thermal69-final-checks/repository"
+    ],
+    "exitCode": 0
+  }
+]

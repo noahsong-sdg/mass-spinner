@@ -1,0 +1,18 @@
+{
+  "label": "resolved68-spatial-assessment",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json, pathlib, subprocess, sys, time\nfolder=pathlib.Path('/work/home/resolved68-assessment'); folder.mkdir(exist_ok=False)\nbase=[sys.executable,'scientific/resolved-v68/assess.py']\nids=['anchor-r64-z64-g128-t256','radial-r32-z64-g128-t256','axial-r64-z32-g128-t256','liner-r64-z64-g64-t256']\ncommands=[('audit-'+value,base+['case','/work/home/resolved68-campaign',str(folder/('audit-'+value)),value]) for value in ids]\ncommands += [(axis,base+[axis,'/work/home/resolved68-campaign',str(folder/axis)]) for axis in ('radial','axial','liner')]\nrecords=[]\nfor label,command in commands:\n started=time.monotonic()\n result=subprocess.run(command,capture_output=True,text=True,timeout=240)\n (folder/(label+'.log')).write_text(result.stdout+'\\n'+result.stderr)\n records.append({'label':label,'command':command,'exitCode':result.returncode,'seconds':time.monotonic()-started})\n (folder/'receipts.json').write_text(json.dumps(records,indent=2)+'\\n')\n print(label,result.returncode,result.stdout[-2000:],result.stderr[-1000:],flush=True)\nsys.exit(0 if all(row['exitCode']==0 for row in records) else 1)\n"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 736,
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "exitCode": 0,
+  "seconds": 136.956689479,
+  "sourceVerifiedBeforeAndAfter": true
+}

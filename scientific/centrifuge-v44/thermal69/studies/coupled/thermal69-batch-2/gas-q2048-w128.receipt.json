@@ -1,0 +1,19 @@
+{
+  "id": "gas-q2048-w128",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/thermal-local-v69/campaign.ts",
+    "/work/home/thermal69-seed.json",
+    "scientific/thermal-local-v69/specifications.json",
+    "/work/home/thermal69-campaign",
+    "[\"gas-q2048-w128\"]"
+  ],
+  "exitCode": 0,
+  "losslessAcceptedNDJSONArchive": {
+    "path": "/work/home/thermal69-campaign/gas-q2048-w128.steps.ndjson.gz",
+    "uncompressedSHA256": "59051448586b3c5e3106c09c7c76ef5965645292bab1a0a03d1290ff0316b357",
+    "uncompressedBytes": 197055779,
+    "compressedBytes": 87619290,
+    "gzipSHA256": "254996f71449637f7fcc44d89a9b9a4f32e51d0ebd7fb0c852ff34f32eda6f66"
+  }
+}

@@ -1,0 +1,924 @@
+{
+  "schemaVersion": 1,
+  "id": "browser-envelope-v38-2026-11-08",
+  "sourceHash": "7f9b350e8e0c8e573e521f245a061ae4f0016c12375420df3781f723c0324c24",
+  "protocolSha256": "6e15c6c87a676604221542af86f40d54ca195c6a1f02f5791a8945e089fb0fe4",
+  "artifactManifestSha256": "553628eab04812b2760ff7bff1b7fab0a45bc456c44cb00f878e3c4b23c5bfed",
+  "producerSha256": "3544bb2e86e4bbaffe9cf8edc2343094e0eb2352d5a224e304ed4d9a1ec1b5b9",
+  "qualification": "unqualified",
+  "continuum": "unknown",
+  "executionMode": "interactive",
+  "physicalInputs": {
+    "radius": 0.2,
+    "length": 0.6,
+    "magneticT": 0.06,
+    "voltage": 20,
+    "quadraticShape": 1.2,
+    "densityM3": 1e+18,
+    "ionTemperatureEV": 5,
+    "electronTemperatureEV": 0.5,
+    "coulombLog": 10,
+    "duration": 0.0002,
+    "species": [
+      {
+        "massU": 40,
+        "chargeState": 1
+      },
+      {
+        "massU": 84,
+        "chargeState": 1
+      }
+    ],
+    "boundary": "open",
+    "initialState": "pulse",
+    "rotationMode": "zero-canonical",
+    "rotationRadS": -20000,
+    "beamEV": 5,
+    "sourceRadius": 0.08,
+    "pulseLengthFraction": 0.25,
+    "collisions": true,
+    "collisionMethod": "axisymmetric",
+    "collisionSourceAligned": true,
+    "collisionScattering": "nanbu",
+    "randomSource": "philox4x32-10-u32-v1"
+  },
+  "terminalReconciliation": {
+    "expected": 66,
+    "recorded": 66,
+    "eligible": 66,
+    "statusCounts": {
+      "complete": 66,
+      "error": 0,
+      "timeout": 0,
+      "not-run-budget": 0
+    },
+    "seconds": 1040.261187563
+  },
+  "collisionalDiagnostics": {
+    "runs": 60,
+    "outsideRuns": 0,
+    "unresolvedExposureBudget": 0.01,
+    "runsExceedingUnresolvedExposure": 59,
+    "rawAngularBudget": 0.001,
+    "runsExceedingRawAngularBudget": 28
+  },
+  "numericalDecisions": {
+    "pass": 275,
+    "fail": 0,
+    "unknown": 265
+  },
+  "comparisons": [
+    {
+      "kind": "joint",
+      "coarse": "joint0",
+      "fine": "joint1",
+      "available": true,
+      "counts": {
+        "pass": 16,
+        "fail": 0,
+        "unknown": 44
+      }
+    },
+    {
+      "kind": "joint",
+      "coarse": "joint1",
+      "fine": "joint2",
+      "available": true,
+      "counts": {
+        "pass": 25,
+        "fail": 0,
+        "unknown": 35
+      }
+    },
+    {
+      "kind": "particle",
+      "coarse": "particle",
+      "fine": "joint2",
+      "available": true,
+      "counts": {
+        "pass": 20,
+        "fail": 0,
+        "unknown": 40
+      }
+    },
+    {
+      "kind": "timestep",
+      "coarse": "time",
+      "fine": "joint2",
+      "available": true,
+      "counts": {
+        "pass": 44,
+        "fail": 0,
+        "unknown": 16
+      }
+    },
+    {
+      "kind": "spatial",
+      "coarse": "space",
+      "fine": "joint2",
+      "available": true,
+      "counts": {
+        "pass": 39,
+        "fail": 0,
+        "unknown": 21
+      }
+    },
+    {
+      "kind": "alignment",
+      "coarse": "joint2",
+      "fine": "radial-phase",
+      "available": true,
+      "counts": {
+        "pass": 55,
+        "fail": 0,
+        "unknown": 5
+      }
+    },
+    {
+      "kind": "alignment",
+      "coarse": "joint2",
+      "fine": "axial-phase",
+      "available": true,
+      "counts": {
+        "pass": 52,
+        "fail": 0,
+        "unknown": 8
+      }
+    },
+    {
+      "kind": "orientation",
+      "coarse": "joint2",
+      "fine": "rotate-037",
+      "available": true,
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "unknown": 48
+      }
+    },
+    {
+      "kind": "orientation",
+      "coarse": "joint2",
+      "fine": "rotate-121",
+      "available": true,
+      "counts": {
+        "pass": 12,
+        "fail": 0,
+        "unknown": 48
+      }
+    }
+  ],
+  "levels": [
+    {
+      "id": "joint0",
+      "complete": true,
+      "statuses": [
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded"
+      ],
+      "maxRawMomentumResidual": 0.002474581970501226,
+      "unresolvedExposure": [
+        0.03193708592145355,
+        0.025048730597082767,
+        0.02510434434025264,
+        0.02367831034561104,
+        0.02029165766001129,
+        0.027115239670715576
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.011398180147152812
+    },
+    {
+      "id": "joint1",
+      "complete": true,
+      "statuses": [
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0017143457155571426,
+      "unresolvedExposure": [
+        0.018015731154119224,
+        0.012431422558536909,
+        0.01525519058725135,
+        0.012014796709974988,
+        0.016283664300440797,
+        0.014006472547735103
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.023808910457790107
+    },
+    {
+      "id": "joint2",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0012897427505523962,
+      "unresolvedExposure": [
+        0.02432179810714113,
+        0.01866705473815787,
+        0.018559621309072016,
+        0.017748908266469812,
+        0.02297849120332285,
+        0.020811048565222253
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.027929208153047842
+    },
+    {
+      "id": "particle",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved",
+        "unresolved",
+        "budget-exceeded"
+      ],
+      "maxRawMomentumResidual": 0.0011555795335458849,
+      "unresolvedExposure": [
+        0.03484985356051509,
+        0.039197788029856115,
+        0.03031069733247378,
+        0.026279543506831256,
+        0.02850964672575256,
+        0.040988309253486434
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.011149874334407266
+    },
+    {
+      "id": "time",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "unresolved",
+        "unresolved",
+        "unresolved",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0009306405692283941,
+      "unresolvedExposure": [
+        0.025374042555433685,
+        0.019638105518511938,
+        0.02112951594251289,
+        0.022042620701616458,
+        0.021565696348166585,
+        0.018252169937807088
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.024105586505629488
+    },
+    {
+      "id": "space",
+      "complete": true,
+      "statuses": [
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded",
+        "budget-exceeded"
+      ],
+      "maxRawMomentumResidual": 0.001431678161486921,
+      "unresolvedExposure": [
+        0.015028619177323087,
+        0.011671953964934331,
+        0.007483900434424869,
+        0.011359732636759289,
+        0.01222968511147518,
+        0.011726128901476961
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.03029901308890009
+    },
+    {
+      "id": "off",
+      "complete": true,
+      "statuses": [
+        "ideal-orbit",
+        "ideal-orbit",
+        "ideal-orbit",
+        "ideal-orbit",
+        "ideal-orbit",
+        "ideal-orbit"
+      ],
+      "maxRawMomentumResidual": 2.7386933481728904e-07,
+      "unresolvedExposure": [
+        0.026881321323474868,
+        0.02169315722102536,
+        0.02052423486751414,
+        0.020984899746718435,
+        0.020497179276124145,
+        0.021929432998082518
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.0355626302258937
+    },
+    {
+      "id": "radial-phase",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0013117089718205836,
+      "unresolvedExposure": [
+        0.03105327940237076,
+        0.026258019765635573,
+        0.024050518118023664,
+        0.020988014916581785,
+        0.02631297679716418,
+        0.024993455716434087
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.022483237951614422
+    },
+    {
+      "id": "axial-phase",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0011846333064831857,
+      "unresolvedExposure": [
+        0.024600132634541774,
+        0.029219123879221032,
+        0.021457627843198785,
+        0.027165006371812586,
+        0.02608184277341819,
+        0.02002403965389242
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.01849724640501682
+    },
+    {
+      "id": "rotate-037",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.0012897427505528733,
+      "unresolvedExposure": [
+        0.02432179810714113,
+        0.01866705473815787,
+        0.018559621309072016,
+        0.017748908266469812,
+        0.02297849120332285,
+        0.020811048565222253
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.027929208153042246
+    },
+    {
+      "id": "rotate-121",
+      "complete": true,
+      "statuses": [
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "budget-exceeded",
+        "unresolved",
+        "unresolved"
+      ],
+      "maxRawMomentumResidual": 0.001289742750552394,
+      "unresolvedExposure": [
+        0.02432179810714113,
+        0.01866705473815787,
+        0.018559621309072016,
+        0.017748908266469812,
+        0.02297849120332285,
+        0.020811048565222253
+      ],
+      "outsideSnapshots": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "maxEncounterMagnetization": 0.02792920815305177
+    }
+  ],
+  "numericalSettings": [
+    {
+      "id": "joint0",
+      "particlesPerSpecies": 1024,
+      "cellsAcross": 3,
+      "collisionAxialCells": 1,
+      "dt": 2e-07,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.06666666666666667,
+          0.08,
+          0.13333333333333333,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.6
+        ],
+        "nominalRadialCells": 3,
+        "nominalAxialCells": 1,
+        "maxRadialCellWidthM": 0.06666666666666668,
+        "maxAxialCellLengthM": 0.44999999999999996
+      }
+    },
+    {
+      "id": "joint1",
+      "particlesPerSpecies": 2048,
+      "cellsAcross": 4,
+      "collisionAxialCells": 2,
+      "dt": 1e-07,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.05,
+          0.08,
+          0.1,
+          0.15000000000000002,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.3,
+          0.6
+        ],
+        "nominalRadialCells": 4,
+        "nominalAxialCells": 2,
+        "maxRadialCellWidthM": 0.05000000000000002,
+        "maxAxialCellLengthM": 0.3
+      }
+    },
+    {
+      "id": "joint2",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "particle",
+      "particlesPerSpecies": 2048,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "time",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 1e-07,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "space",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 4,
+      "collisionAxialCells": 2,
+      "dt": 5e-08,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.05,
+          0.08,
+          0.1,
+          0.15000000000000002,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.3,
+          0.6
+        ],
+        "nominalRadialCells": 4,
+        "nominalAxialCells": 2,
+        "maxRadialCellWidthM": 0.05000000000000002,
+        "maxAxialCellLengthM": 0.3
+      }
+    },
+    {
+      "id": "off",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "collisions": false,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "radial-phase",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "researchRadialPhase": 0.5,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.016666666666666666,
+          0.05000000000000001,
+          0.08,
+          0.08333333333333333,
+          0.11666666666666668,
+          0.15,
+          0.18333333333333335,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "axial-phase",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "researchAxialPhase": 0.5,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.09999999999999999,
+          0.15,
+          0.3,
+          0.5,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "rotate-037",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "researchOrientation": 0.37,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    },
+    {
+      "id": "rotate-121",
+      "particlesPerSpecies": 4096,
+      "cellsAcross": 6,
+      "collisionAxialCells": 3,
+      "dt": 5e-08,
+      "researchOrientation": 1.21,
+      "geometry": {
+        "radialEdgesM": [
+          0,
+          0.03333333333333333,
+          0.06666666666666667,
+          0.08,
+          0.10000000000000002,
+          0.13333333333333333,
+          0.16666666666666666,
+          0.2
+        ],
+        "axialEdgesM": [
+          0,
+          0.15,
+          0.19999999999999998,
+          0.39999999999999997,
+          0.6
+        ],
+        "nominalRadialCells": 6,
+        "nominalAxialCells": 3,
+        "maxRadialCellWidthM": 0.033333333333333354,
+        "maxAxialCellLengthM": 0.2
+      }
+    }
+  ],
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606
+  ],
+  "matchedEffect": {
+    "available": true,
+    "observables": {
+      "A.fraction.active": {
+        "n": 6,
+        "mean": 0.0047607421875,
+        "standardError": 0.0014631473467094076,
+        "halfWidth95": 0.0037611402327989625
+      },
+      "A.fraction.wall": {
+        "n": 6,
+        "mean": 8.138020833333333e-05,
+        "standardError": 5.1469362958469715e-05,
+        "halfWidth95": 0.000132306217972509
+      },
+      "A.fraction.end": {
+        "n": 6,
+        "mean": -0.010498046875,
+        "standardError": 0.0011311556219983107,
+        "halfWidth95": 0.0029077282811076615
+      },
+      "A.fraction.source": {
+        "n": 6,
+        "mean": 0.005655924479166667,
+        "standardError": 0.0010907680491744707,
+        "halfWidth95": 0.0028039087133830093
+      },
+      "A.temperature": {
+        "n": 6,
+        "mean": -0.05318479928573017,
+        "standardError": 0.04670070986307204,
+        "halfWidth95": 0.12004800416123544
+      },
+      "A.angularTransfer": {
+        "n": 6,
+        "mean": 0.006780306675016526,
+        "standardError": 0.00012796462064301473,
+        "halfWidth95": 0.0003289435504617621
+      },
+      "B.fraction.active": {
+        "n": 6,
+        "mean": 0.0007731119791666666,
+        "standardError": 0.0019279553614065972,
+        "halfWidth95": 0.0049559673488352935
+      },
+      "B.fraction.wall": {
+        "n": 6,
+        "mean": 0.0022786458333333335,
+        "standardError": 0.0005410406946157116,
+        "halfWidth95": 0.0013907894708466452
+      },
+      "B.fraction.end": {
+        "n": 6,
+        "mean": -0.00244140625,
+        "standardError": 0.002744818227061562,
+        "halfWidth95": 0.007055780327756364
+      },
+      "B.fraction.source": {
+        "n": 6,
+        "mean": -0.0006103515625,
+        "standardError": 0.0007688168793819654,
+        "halfWidth95": 0.0019763068314354515
+      },
+      "B.temperature": {
+        "n": 6,
+        "mean": 0.01510145148405521,
+        "standardError": 0.015312838619336855,
+        "halfWidth95": 0.03936290732377217
+      },
+      "B.angularTransfer": {
+        "n": 6,
+        "mean": -0.005854521925395918,
+        "standardError": 8.735211654883708e-05,
+        "halfWidth95": 0.00022454577846234272
+      }
+    }
+  },
+  "interpretation": "Approximate pointwise paired whole-run Student-t intervals; no zero-spread acceptance. Numerical equivalence is separate from sampled model coverage and continuum bias.",
+  "limitations": [
+    "No qualified browser collision-transport envelope was found in this frozen campaign.",
+    "Te=0.5 eV is prescribed; electrons and screening response are not dynamically solved. Fixed supplied logΛ=10 remains separate.",
+    "Passing sampled encounter checks does not prove the continuum cold tail or states between saved frames are supported.",
+    "Half-phase alignment changes clipped boundary partitions and executed cell counts; all faces are retained.",
+    "No independent continuum-bias bound or apparatus calibration. This packet never certifies current sliders or a live realization."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-figure",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import hashlib,json;from pathlib import Path;import matplotlib;matplotlib.use(\"Agg\");import matplotlib.pyplot as plt;out=Path(\"/work/home/thermal69-figure\");out.mkdir();paths=[Path(\"/work/home/thermal69-assess-1/time512-1024/endpoint-gas.json\"),Path(\"/work/home/thermal69-assess-2/time1024-2048/endpoint-gas.json\"),Path(\"/work/home/thermal69-assess-2/time2048-4096/endpoint-gas.json\")];errors=[max(c[\"relativeError\"] for c in json.loads(p.read_text())[\"cells\"] if c[\"resolvedReferenceSignal\"])*100 for p in paths];refpath=Path(\"/work/home/thermal69-assess-1/reference.json\");ref=json.loads(refpath.read_text());pairs=[p for p in ref[\"successivePairs\"] if p[\"kind\"]==\"wall\"];fig,axes=plt.subplots(1,2,figsize=(10,4.2));plt.rcParams.update({\"font.family\":\"DejaVu Sans\"});a,b=axes;a.plot([0,1,2],errors,color=\"#16776d\",marker=\"o\",lw=2);a.axhline(1,color=\"#a44b36\",ls=\"--\",lw=1,label=\"1% target\");a.set_xticks([0,1,2],[\"100 / 200\",\"200 / 400\",\"400 / 800\"]);a.set(xlabel=\"Accepted coarse / fine steps\",ylabel=\"Relative discrepancy (%)\",title=\"Coupled gas at 38.15 \u03bcs\");a.legend(frameon=False)\nfor i,e in enumerate(errors):a.annotate(f\"{e:.3f}%\",(i,e),xytext=(0,8),textcoords=\"offset points\",ha=\"center\",fontsize=9)\nfor j,(family,color,label) in enumerate([(\"quadratic\",\"#8b939c\",\"Quadratic wall\"),(\"exponential-8\",\"#16776d\",\"Exponential wall\")]):\n selected=[p for p in pairs if p[\"fine\"].startswith(family)];v=[100*p[\"surface\"][\"relative\"] for p in selected];x=[i+(j-.5)*.34 for i in range(2)];b.bar(x,v,width=.32,color=color,label=label)\n for pos,value in zip(x,v):b.text(pos,value+.08,f\"{value:.3f}%\",ha=\"center\",fontsize=8)\nb.axhline(2,color=\"#a44b36\",ls=\"--\",lw=1,label=\"2% target\");b.set_xticks([0,1],[\"15.26 ns\",\"61.04 ns\"]);b.set(xlabel=\"Fixed physical endpoint\",title=\"Isolated wall mesh: 64 \u2192 128\",ylim=(0,6));b.legend(frameon=False,fontsize=8)\nfor ax in axes:ax.spines[[\"top\",\"right\"]].set_visible(False);ax.grid(axis=\"y\",alpha=.15);ax.set_axisbelow(True)\nfig.suptitle(\"Fixed-time thermal convergence\",fontsize=14,x=.08,ha=\"left\");fig.text(.08,.02,\"Numerical verification of declared fixtures; experimental accuracy remains unqualified.\",fontsize=9,color=\"#505a63\");fig.tight_layout(rect=(0,.06,1,.93));fig.savefig(out/\"convergence.png\",dpi=180);fig.savefig(out/\"convergence.svg\");m=json.loads(Path(\"v43-last-manifest.json\").read_text());meta={\"sourceSHA256\":hashlib.sha256(json.dumps(m,sort_keys=True,separators=(\",\",\":\")).encode()).hexdigest(),\"inputsSHA256\":{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths+[refpath]},\"gasErrorsPercent\":errors,\"scope\":\"Plots of retained declared metrics; no simulation or tolerance change.\"};(out/\"provenance.json\").write_text(json.dumps(meta,indent=2));print(json.dumps(meta))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 0.49169075000000007,
+  "sourceVerifiedBeforeAndAfter": true
+}

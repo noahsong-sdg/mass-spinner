@@ -1,0 +1,11 @@
+{
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "predictionSHA256": "0cbc4270e81932d40db4a6c5a1260084f0d03b132bc059a9047c053572f29a38",
+  "pairs": [
+    {
+      "coarseID": "radial-r32-z64-g128-t256",
+      "fineID": "anchor-r64-z64-g128-t256",
+      "axis": "radial"
+    }
+  ]
+}

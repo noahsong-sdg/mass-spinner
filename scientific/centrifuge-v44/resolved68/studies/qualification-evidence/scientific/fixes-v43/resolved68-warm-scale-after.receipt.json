@@ -1,0 +1,22 @@
+{
+  "label": "resolved68-warm-scale-after",
+  "command": [
+    "node_modules/.bin/tsx",
+    "--test",
+    "tests/fuel-current-reuse-v68.test.ts",
+    "tests/fuel-current-v66.test.ts",
+    "tests/fuel-current-axis-v66.test.ts",
+    "tests/fuel-spatial-operation-v66.test.ts",
+    "tests/fuel-graded-wall-v67.test.ts"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 729,
+  "sourceSHA256": "bfdfbf7e9e4d0488698480f1feb08f02f659167baa22ccdc0c0ba21d270511e3",
+  "exitCode": 0,
+  "seconds": 0.6328405419999998,
+  "sourceVerifiedBeforeAndAfter": true
+}

@@ -1,0 +1,18 @@
+{
+  "label": "current66-final-volume",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/final_gate.py",
+    "/work/home/current66-final-volume"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 711,
+  "sourceSHA256": "ad08c16e86729d6b94190e349de1c4117bf37844dca74540c32767569f1b517c",
+  "exitCode": 0,
+  "seconds": 150.705933528,
+  "sourceVerifiedBeforeAndAfter": true
+}

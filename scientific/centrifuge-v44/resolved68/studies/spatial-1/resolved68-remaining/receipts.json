@@ -1,0 +1,89 @@
+[
+  {
+    "label": "actual-fipy-continuum",
+    "commands": [
+      {
+        "label": "continuum-0",
+        "command": [
+          "/work/home/thermal-v53-venv/bin/python",
+          "scientific/current-v66/fixtures.py",
+          "/work/home/resolved68-remaining/continuum/cases.json"
+        ],
+        "exitCode": 0,
+        "seconds": 0.03833862499999996
+      },
+      {
+        "label": "continuum-1",
+        "command": [
+          "node_modules/.bin/tsx",
+          "scientific/current-v66/campaign.ts",
+          "/work/home/resolved68-remaining/continuum/cases.json",
+          "/work/home/resolved68-remaining/continuum/production.json"
+        ],
+        "exitCode": 0,
+        "seconds": 0.6127417500000001
+      },
+      {
+        "label": "continuum-2",
+        "command": [
+          "/work/home/thermal-v53-venv/bin/python",
+          "scientific/current-v66/reference_fipy.py",
+          "/work/home/resolved68-remaining/continuum/cases.json",
+          "/work/home/resolved68-remaining/continuum/fipy.json"
+        ],
+        "exitCode": 0,
+        "seconds": 1.1357690839999999
+      },
+      {
+        "label": "continuum-3",
+        "command": [
+          "/work/home/thermal-v53-venv/bin/python",
+          "scientific/current-v66/analyze.py",
+          "/work/home/resolved68-remaining/continuum/cases.json",
+          "/work/home/resolved68-remaining/continuum/production.json",
+          "/work/home/resolved68-remaining/continuum/fipy.json",
+          "/work/home/resolved68-remaining/continuum/analysis.json"
+        ],
+        "exitCode": 0,
+        "seconds": 0.35951058300000005
+      }
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "axial-r64-z32-g128-t256",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/resolved-v68/campaign.ts",
+      "scientific/resolved-v68/specifications.json",
+      "/work/home/resolved68-campaign",
+      "[\"axial-r64-z32-g128-t256\"]"
+    ],
+    "exitCode": 0,
+    "seconds": 200.371370383
+  },
+  {
+    "label": "radial-r32-z64-g128-t256",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/resolved-v68/campaign.ts",
+      "scientific/resolved-v68/specifications.json",
+      "/work/home/resolved68-campaign",
+      "[\"radial-r32-z64-g128-t256\"]"
+    ],
+    "exitCode": 0,
+    "seconds": 247.727847072
+  },
+  {
+    "label": "liner-r64-z64-g64-t256",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/resolved-v68/campaign.ts",
+      "scientific/resolved-v68/specifications.json",
+      "/work/home/resolved68-campaign",
+      "[\"liner-r64-z64-g64-t256\"]"
+    ],
+    "exitCode": 0,
+    "seconds": 560.504925049
+  }
+]

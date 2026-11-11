@@ -1,0 +1,116 @@
+{
+  "commands": [
+    {
+      "name": "narrow-tests",
+      "command": [
+        "node_modules/.bin/tsx",
+        "--test",
+        "tests/field-v70.test.ts",
+        "tests/experimental-v64.test.ts",
+        "tests/fuel-momentum-v65.test.ts",
+        "tests/fuel-momentum-volume-v66.test.ts"
+      ],
+      "exitCode": 0,
+      "seconds": 0.31584866700000025
+    },
+    {
+      "name": "independent-tests",
+      "command": [
+        "/work/home/thermal-v53-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/field-v70",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0,
+      "seconds": 1.2795346680000002
+    },
+    {
+      "name": "comparison",
+      "command": [
+        "node_modules/.bin/tsx",
+        "scientific/field-v70/compare.ts",
+        "scientific/experimental-v64/data/markers-corrected.json",
+        "/work/home/field70-accepted/comparison.json"
+      ],
+      "exitCode": 0,
+      "seconds": 0.1456264169999999
+    },
+    {
+      "name": "independent-reference",
+      "command": [
+        "/work/home/thermal-v53-venv/bin/python",
+        "scientific/field-v70/reference.py",
+        "/work/home/field70-accepted/comparison.json",
+        "scientific/experimental-v64/data/markers-corrected.json",
+        "scientific/field-v70/PROTOCOL.md",
+        "/work/home/field70-accepted/independent.json"
+      ],
+      "exitCode": 0,
+      "seconds": 0.10189099999999973
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "seconds": 1.3607595420000003
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "seconds": 0.5059487919999999
+    },
+    {
+      "name": "site",
+      "command": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "seconds": 0.2647937090000001
+    },
+    {
+      "name": "assets",
+      "command": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "seconds": 0.0506469169999999
+    }
+  ],
+  "releaseFiles": 161,
+  "releaseByteIdenticalToPreStudyBuild": true,
+  "releaseSHA256": "d058f6cee3714d66f579a07aa64e8507f83691e5ac00964e4978f30689c70742",
+  "markersSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "protocolSHA256": "95333e12eae22489a7841fab18ffa86f403dee8a2c65194aa202f912db1033c6",
+  "goalAchieved": false,
+  "matchedExperimentalValidation": false,
+  "liveQualified": false,
+  "freshBrowserTest": false,
+  "unresolved": [
+    "radial-profile",
+    "pressure-sweep",
+    "independent-current",
+    "radial-temperature",
+    "diagnostic-fit",
+    "predicted-heating",
+    "separation-products"
+  ],
+  "scope": "Conditional field-hypothesis comparison. Passing software/reference gates is not a device qualification."
+}

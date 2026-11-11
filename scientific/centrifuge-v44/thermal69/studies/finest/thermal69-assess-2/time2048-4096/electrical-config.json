@@ -1,0 +1,12 @@
+{
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "pairs": [
+    {
+      "axis": "time",
+      "coarseFile": "/work/home/thermal69-campaign/gas-q2048-w128.json",
+      "fineFile": "/work/home/thermal69-campaign/gas-q4096-w128.json",
+      "coarseSHA256": "3b840ac22f8db9ab08435cf6b15d544a887514cfad3fea9cd48ab298c91190fb",
+      "fineSHA256": "b34da301cd5e66f746f5e59f3e3a1776fb19ce41a9f3537f1e2c8bba295071e7"
+    }
+  ]
+}

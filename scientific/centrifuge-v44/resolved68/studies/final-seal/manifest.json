@@ -1,0 +1,806 @@
+{
+  "resolved68-seal/anchor-r64-z64-g128-t256.json.gz": {
+    "sha256": "e97e83f2d67bc170ba470dd8336c6117ebf0a1d20bbb723cb776bd78db435353",
+    "bytes": 54370954
+  },
+  "resolved68-seal/axial-r64-z32-g128-t256.json.gz": {
+    "sha256": "11f0070a180b9cc26782e030d694375888f7c169e7c2a5645db069c54a3e9433",
+    "bytes": 29931636
+  },
+  "resolved68-seal/index.json": {
+    "sha256": "887abe787df4cf40e149c162780343b249947fb549b27bf58733c1b1f10614b0",
+    "bytes": 22762
+  },
+  "resolved68-seal/liner-r64-z64-g64-t256.json.gz": {
+    "sha256": "b840811a6a9dbb848b353f98c12418b669b10d3a7fd2653b1623c62447d2f9e1",
+    "bytes": 53855008
+  },
+  "resolved68-seal/radial-r32-z64-g128-t256.json.gz": {
+    "sha256": "f7cef662440566a966788fba6436368d7b8379177574f0a8078e7446a6f599ab",
+    "bytes": 28311887
+  },
+  "resolved68-seal/source/package-lock.json": {
+    "sha256": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "bytes": 69513
+  },
+  "resolved68-seal/source/package.json": {
+    "sha256": "1944a009c9f3ededca775302e70642702c248b65d7c8cde3507b45c65585b029",
+    "bytes": 663
+  },
+  "resolved68-seal/source/run-final-gates-v38.py": {
+    "sha256": "b1818339d33ad3ce22c0e281b5730dbad215e4df55ce70b40fb6a510b66e45b8",
+    "bytes": 1827
+  },
+  "resolved68-seal/source/run-final-gates-v39.py": {
+    "sha256": "32422f26c488653f2962315c4ec03c74213c492fe2a8bb78946bdcea16926cfa",
+    "bytes": 2067
+  },
+  "resolved68-seal/source/scientific/current-v66/PROTOCOL.md": {
+    "sha256": "7b6ea53b9e1305854be6b9a640496906a913705217375f8bb359da373d6a55f7",
+    "bytes": 4101
+  },
+  "resolved68-seal/source/scientific/current-v66/THIRD-PARTY.md": {
+    "sha256": "4cc39adb3ad5a03269227bec4acef78e1a0c7ff6b8bea0e93545791169e1ff5e",
+    "bytes": 911
+  },
+  "resolved68-seal/source/scientific/current-v66/analyze.py": {
+    "sha256": "04ec0221d9a03ee0376fefa02460990a6ede31c204187ce5af62fdbc36eea74a",
+    "bytes": 15479
+  },
+  "resolved68-seal/source/scientific/current-v66/campaign.ts": {
+    "sha256": "4354aceaa41fcd2d98fb02f091d6bc577543cef496a4316b6743267ac3fc0305",
+    "bytes": 502
+  },
+  "resolved68-seal/source/scientific/current-v66/check_coupled.py": {
+    "sha256": "ed2865072aa40ff356027121fabeee3c61df4b2d9ec162f220602c1bc4625a63",
+    "bytes": 27547
+  },
+  "resolved68-seal/source/scientific/current-v66/check_transport.py": {
+    "sha256": "9b5d6ec914c99213cee39f62f559dada9d69384d847b6d460f05196fdf7fe5ea",
+    "bytes": 8022
+  },
+  "resolved68-seal/source/scientific/current-v66/coupled.ts": {
+    "sha256": "b289c8f851ecda1fcce8212aa58a227417bb561d6a5718c4f0a60c312f9365b4",
+    "bytes": 2462
+  },
+  "resolved68-seal/source/scientific/current-v66/coupled_convergence.py": {
+    "sha256": "0bc0cf07e6f0a54c0d67aa70ea70c282bb58cdbd48e1a926d8f5b79a78f6aec7",
+    "bytes": 4331
+  },
+  "resolved68-seal/source/scientific/current-v66/final_gate.py": {
+    "sha256": "b9d0c964ce3d5e899a0176bad06799ceaddfdf84701878d3da212e5359a7fe92",
+    "bytes": 1804
+  },
+  "resolved68-seal/source/scientific/current-v66/fixtures.py": {
+    "sha256": "b2be7a258115bab6eefc883e8faf7e8ce8f1b743cd6533326a487e3489e6fe85",
+    "bytes": 1414
+  },
+  "resolved68-seal/source/scientific/current-v66/reference_fipy.py": {
+    "sha256": "c1b44fd2112b31d797419a81ac9140c889c4790d8176f3e9461fe5ebf22de169",
+    "bytes": 9024
+  },
+  "resolved68-seal/source/scientific/current-v66/reference_q_momentum.py": {
+    "sha256": "768b90ae45022ed5789c9db7a5cba4544be50e3e31042949133ee8cd1ef91b45",
+    "bytes": 2611
+  },
+  "resolved68-seal/source/scientific/current-v66/run_study.py": {
+    "sha256": "d5e103ac808349f97226582c4337dd7fa15b22b51124899970dfd4b93f0c50e8",
+    "bytes": 1384
+  },
+  "resolved68-seal/source/scientific/current-v66/test_analysis.py": {
+    "sha256": "8455cfe60999cba41cd7868bb38014f108fd640e3dbd2afa51968d3a57553da6",
+    "bytes": 3120
+  },
+  "resolved68-seal/source/scientific/current-v66/transport-data.json": {
+    "sha256": "27be9f221b3cd10dcfa8f5aee643096a97e0c93ccea82d89e340aec1e9df30cc",
+    "bytes": 3486
+  },
+  "resolved68-seal/source/scientific/current-v66/transport.ts": {
+    "sha256": "61dc8e66a04675308a6a19691f63b75caceed6e7931ffe0bf7ff1e2361223c43",
+    "bytes": 524
+  },
+  "resolved68-seal/source/scientific/resolved-v68/PROTOCOL.md": {
+    "sha256": "902f5b4e1bfce5c6f395222bb5907bd6831e6713551cd8592a9bf78908d152d1",
+    "bytes": 3362
+  },
+  "resolved68-seal/source/scientific/resolved-v68/assess.py": {
+    "sha256": "b4aa774e82eb7f7b4b71b5ff8cfd8e70c171f94ce18799205cd5d75af46bad92",
+    "bytes": 6180
+  },
+  "resolved68-seal/source/scientific/resolved-v68/campaign.ts": {
+    "sha256": "df0f3f1a35acea0d8c496c1932cbbc3af7bbbbc4dd36d059c813b46c7a291c62",
+    "bytes": 4385
+  },
+  "resolved68-seal/source/scientific/resolved-v68/electrical_history.py": {
+    "sha256": "1373b3b2e093d0f534854ceff4954d771ecdf37dd5c8a76b17537a651d7b9cc6",
+    "bytes": 13524
+  },
+  "resolved68-seal/source/scientific/resolved-v68/profile.ts": {
+    "sha256": "11af6b52799e9bd4940b0545fbdc25607bdc70b513935e8fa8fa6824c71581ef",
+    "bytes": 2206
+  },
+  "resolved68-seal/source/scientific/resolved-v68/specifications.json": {
+    "sha256": "5bab5fa3fd41e4963fc28a0faa938ff271c7e2081167423177d8f0ee3ebde293",
+    "bytes": 412
+  },
+  "resolved68-seal/source/scientific/resolved-v68/test_electrical_history.py": {
+    "sha256": "b498be815d7d0b3d5690b3cdfb4b460b3230718f81806b74005c90cd5926abe5",
+    "bytes": 9862
+  },
+  "resolved68-seal/source/scientific/resolved-v68/validate_optimization.py": {
+    "sha256": "febc2aff3a6c508a1d95ddaba4d7a259fea9a9b4b46fb179b145a684e14f6a46",
+    "bytes": 5320
+  },
+  "resolved68-seal/source/scientific/transient-v67/PROTOCOL.md": {
+    "sha256": "f6461146d47d411bedf41fbb26ec3f381efa69fe694f92c5310702a967408956",
+    "bytes": 4863
+  },
+  "resolved68-seal/source/scientific/transient-v67/analyze.py": {
+    "sha256": "ff0831370ccde9ad2f6ce68dd3e7aa3fc886e3ccd25f7d4d73cdc616175df6ba",
+    "bytes": 22806
+  },
+  "resolved68-seal/source/scientific/transient-v67/assess.py": {
+    "sha256": "81faf04c6b10d225a784db9b3dc99a64657cf46133b9811991866c222a68b01b",
+    "bytes": 1372
+  },
+  "resolved68-seal/source/scientific/transient-v67/campaign.ts": {
+    "sha256": "070c667ae0e3635ca916f9343db049c78ad0983b605106b72c46964b1313bfc7",
+    "bytes": 3624
+  },
+  "resolved68-seal/source/scientific/transient-v67/electrical.py": {
+    "sha256": "a6b8edeea3535865908b31991244bd5a0d22d84e31c78173d40c523a1ff4d065",
+    "bytes": 15574
+  },
+  "resolved68-seal/source/scientific/transient-v67/final.py": {
+    "sha256": "315afe2196c85c2c0f0eb3e33c712a3f79b6c7f0c31a3ccd08ef1925b17ce28c",
+    "bytes": 1118
+  },
+  "resolved68-seal/source/scientific/transient-v67/probe_failure.py": {
+    "sha256": "d49a11617b98a47d670e1fb7af9978e577a8c73da68cc9154f4cef64a269683d",
+    "bytes": 3112
+  },
+  "resolved68-seal/source/scientific/transient-v67/specifications.json": {
+    "sha256": "6fb1246d1a219e376f4849a54e6930e6467de7384eed1bdc525e6ea1361c55b9",
+    "bytes": 2365
+  },
+  "resolved68-seal/source/scientific/transient-v67/summary.py": {
+    "sha256": "b0e5acf9d24765c62305c7f147a6cddf79b1f9a70e40ae4daffc9f49a9267ce3",
+    "bytes": 810
+  },
+  "resolved68-seal/source/scientific/transient-v67/surface.py": {
+    "sha256": "6cd36e65aef8c8b44189083bf1395fe6b45e960e8445a8b6f4a06fbcb4b3cce5",
+    "bytes": 13276
+  },
+  "resolved68-seal/source/scientific/transient-v67/test_analysis.py": {
+    "sha256": "0a84c1db4621d3f80993af3cebab2069bbd5174d73055b5d1e2f3b87e25502e6",
+    "bytes": 7751
+  },
+  "resolved68-seal/source/scientific/transient-v67/test_coupled_scale.py": {
+    "sha256": "1b0730de9e7b58695339c6682f5e7478fdeaf6e6b4c1a8bc99f84345b504260e",
+    "bytes": 3698
+  },
+  "resolved68-seal/source/scientific/transient-v67/test_electrical.py": {
+    "sha256": "928c33c203bcb147d131ce4f8bb8527fc36839381836b7d613b960717f29d185",
+    "bytes": 3882
+  },
+  "resolved68-seal/source/scientific/transient-v67/test_surface.py": {
+    "sha256": "bb46ccef6c12fc08bab4bdddd47be61b4e6479935434438a3c12841e2c35fd06",
+    "bytes": 9115
+  },
+  "resolved68-seal/source/src/apparatus-state-layer.js": {
+    "sha256": "9974b5de9ed6c56a5d442ac15cc3f49d98fb66e9c431f958c8f953aff880a8b3",
+    "bytes": 4274
+  },
+  "resolved68-seal/source/src/apparatus-state.ts": {
+    "sha256": "49707884d1e598541d0f96cd49fdaf24b0dce58ca3dfa25ce68e5f68cb5325c5",
+    "bytes": 2291
+  },
+  "resolved68-seal/source/src/apparatus-ui.js": {
+    "sha256": "24dba359ec1dd96849a9bde8df4738d0558ec17650cd0ffe2d22dbffc13c241d",
+    "bytes": 6046
+  },
+  "resolved68-seal/source/src/apparatus-viewer.js": {
+    "sha256": "4475b36d0231b3d09555c8b1a0fe3b59373d2b1f4c6e79a13de8d0fb0015c497",
+    "bytes": 20044
+  },
+  "resolved68-seal/source/src/apparatus.css": {
+    "sha256": "0239ada91386da411cb68b144d0c9b07962ff2eeb9d2ff9f5a91e26f10fe6790",
+    "bytes": 4192
+  },
+  "resolved68-seal/source/src/axisymmetric-collisions.ts": {
+    "sha256": "2e2c1da25716aa2e7486b9962986878d23c8dc4e9b1f69949a43469babc820b0",
+    "bytes": 5585
+  },
+  "resolved68-seal/source/src/baseline-state.js": {
+    "sha256": "50bd1debb144696ddd10b86391f0bbd4b51d03688f59646443bd22e5ae3394c3",
+    "bytes": 2629
+  },
+  "resolved68-seal/source/src/baseline-ui.js": {
+    "sha256": "b4b7682e82f085674294ef5c1319b3d8269d9d35a907f1bcbee2a1e7aa8d4903",
+    "bytes": 1933
+  },
+  "resolved68-seal/source/src/blanket-reference.ts": {
+    "sha256": "a86576ad40687d0ca54a53859b7f5567ecedacb0f73d8bd7bacaf9591beaa467",
+    "bytes": 4938
+  },
+  "resolved68-seal/source/src/blanket-ui.js": {
+    "sha256": "a40e291227eeb66e92192a2d459a1806484bd0bba3ec58ab53105246e8d20280",
+    "bytes": 10559
+  },
+  "resolved68-seal/source/src/centrifuge-bulk.ts": {
+    "sha256": "b5cc858b1e1f45dab15fc0c7136bf9642eab5522686d1e5674d718f0ead846ae",
+    "bytes": 3698
+  },
+  "resolved68-seal/source/src/centrifuge-diagnostics.ts": {
+    "sha256": "e1ff38403a38d14c30634258adc7a7c573f946c75d892387c8c0a6d11c9a8151",
+    "bytes": 4068
+  },
+  "resolved68-seal/source/src/centrifuge.ts": {
+    "sha256": "cfdc02f8d3fa10240a790588c15b3f03339e3454d2cbdc97ad94890db23b0edf",
+    "bytes": 5450
+  },
+  "resolved68-seal/source/src/collector-acceptance-ui.js": {
+    "sha256": "ef970e77ed28edfb266ca0617b289be273d6e57724abe78f675dd6db085b9c06",
+    "bytes": 3018
+  },
+  "resolved68-seal/source/src/collector-acceptance.ts": {
+    "sha256": "dc05db3487322e4eaf13d82b01965edea55ce364e0fa70eef4bb9b80cba5747a",
+    "bytes": 2839
+  },
+  "resolved68-seal/source/src/collision-locality.ts": {
+    "sha256": "3538ba2d76858decda0bfa56c5c440504e23f9b9c71e70b645985d0f61b6e4f0",
+    "bytes": 4315
+  },
+  "resolved68-seal/source/src/collisions.ts": {
+    "sha256": "129e76b125cb29840316188f6e9e4afd95190d2416523f6939b937712b903895",
+    "bytes": 2145
+  },
+  "resolved68-seal/source/src/component-actions.js": {
+    "sha256": "963400640a7d630d4627aa1441b0b1cd0bc2066558b78d16cc13eb9d2c768580",
+    "bytes": 2300
+  },
+  "resolved68-seal/source/src/component-catalog.ts": {
+    "sha256": "72e5265283d5d576308afa00f09aaa2d3a9104330f59a5877bd0c27048b175db",
+    "bytes": 7091
+  },
+  "resolved68-seal/source/src/component-inspector.css": {
+    "sha256": "0e97f0ddb445c1dc60b2e6ea53803ff0bafd1c34c000f05295dad71479cecdf4",
+    "bytes": 1226
+  },
+  "resolved68-seal/source/src/component-inspector.js": {
+    "sha256": "b67effe98d2694aed53130c2df7a7477e12536398d51927690fe19fb2ab1c6cf",
+    "bytes": 5262
+  },
+  "resolved68-seal/source/src/convergence-evidence.js": {
+    "sha256": "5af9565c19193daf01f98b342123303dd2ae628aeea2b3589f628c8ce8d81429",
+    "bytes": 1591
+  },
+  "resolved68-seal/source/src/convergence.ts": {
+    "sha256": "6bcdf3574eb5e26fe9b154a61a3a8548f4a5412f4ac7802d1a939828fd218d81",
+    "bytes": 21095
+  },
+  "resolved68-seal/source/src/coulomb.ts": {
+    "sha256": "3ae1013f33a6b719451b5314817769fa0b81ab4b817a521f0880d94b55f44cfc",
+    "bytes": 9156
+  },
+  "resolved68-seal/source/src/coupled-target-ui.js": {
+    "sha256": "f7dbff5772428d57a3db5c0c9c57677c93ffc26a12be7f7cf6d5c6a863a36d4f",
+    "bytes": 18589
+  },
+  "resolved68-seal/source/src/coupled-target.css": {
+    "sha256": "b8fa8d80cf1ef74ca644bfcb32242e837807f3be23fb0e274ce559ff1a688628",
+    "bytes": 3536
+  },
+  "resolved68-seal/source/src/coupled-target.ts": {
+    "sha256": "6246ef45afe2fc3f16f247455351cf3001878dbedc99364c7d5551c2a29fa021",
+    "bytes": 21286
+  },
+  "resolved68-seal/source/src/decay-network-ui.js": {
+    "sha256": "dc5b11502b588fe96367ce55e02c54804196f5595cf40d7565b60940c51f9fbc",
+    "bytes": 3095
+  },
+  "resolved68-seal/source/src/decay-network.ts": {
+    "sha256": "1668b1cf6f20b4227114fd58ad5087f86fca30d6d941146bc88f3279da1f9e7a",
+    "bytes": 4614
+  },
+  "resolved68-seal/source/src/deuteron-stopping.ts": {
+    "sha256": "a7ec7cb1026e7051e2a02297fd3d6ce345d8cdd38d343e6dcf6d311a4e4f4e42",
+    "bytes": 5461
+  },
+  "resolved68-seal/source/src/doublewell-dynamics.ts": {
+    "sha256": "e00c505ba6b63dc3517aa1593b1bf27f0af21cf9026de5f0b7bba27b29ec413d",
+    "bytes": 31089
+  },
+  "resolved68-seal/source/src/doublewell-orbits.ts": {
+    "sha256": "23df1715b5a3dbe2f17b87a2bb32289dad758c5cb150ffed1225a961dfaeafb0",
+    "bytes": 8568
+  },
+  "resolved68-seal/source/src/doublewell-regime.ts": {
+    "sha256": "e217e6b1039045aef827b52945f1a89274cc3e11147581ace33c201042ee4472",
+    "bytes": 7881
+  },
+  "resolved68-seal/source/src/doublewell-ui.js": {
+    "sha256": "3fca56b9cbd5c35e54873e313023824eb2e37810fa148002707deb53e142c021",
+    "bytes": 8152
+  },
+  "resolved68-seal/source/src/engineering-geometry.js": {
+    "sha256": "2cdf8ac750da7829564203cda3f495ae6fdf29fd1ea6fccbef272db95c25730d",
+    "bytes": 17349
+  },
+  "resolved68-seal/source/src/ensemble.ts": {
+    "sha256": "6b8b44fbaf1fc452ebdfcfe73923bb2ca3f772be598277c65088db86ef9fc54f",
+    "bytes": 8739
+  },
+  "resolved68-seal/source/src/equilibrium-controls.js": {
+    "sha256": "bf73d487f28301d1963e330241bb175a7a2a9b4f5c56c91bb1429c93b7c9097a",
+    "bytes": 971
+  },
+  "resolved68-seal/source/src/equilibrium-model.ts": {
+    "sha256": "74c06b1f46070c20193eb5f3aad3b5c76abacb8dbb0170152c51187021da6853",
+    "bytes": 2360
+  },
+  "resolved68-seal/source/src/experience-state.ts": {
+    "sha256": "01de6a00700fb06d449729e8e73b1f4c18113a76c8cec47fd193c89a6d59a989",
+    "bytes": 1526
+  },
+  "resolved68-seal/source/src/experience-ui.js": {
+    "sha256": "58cf08c0e57a359915f450f3af59e269cea4c111aa558049ce077d0491cb73b5",
+    "bytes": 6775
+  },
+  "resolved68-seal/source/src/experimental-validation.ts": {
+    "sha256": "13a27dabb294a4f8563f16591be3ce18b0adf9351c4ef8b11bdfca6eee2fc51c",
+    "bytes": 12271
+  },
+  "resolved68-seal/source/src/experiments.ts": {
+    "sha256": "33f56a58d9ddb4f204dddfebac45f2c2f0d49252e485d7409b262008837af679",
+    "bytes": 2889
+  },
+  "resolved68-seal/source/src/exploration.css": {
+    "sha256": "4e1ecc7b48a1029940516898152fd1f04f3f4b76353164f6d9740e7c69999c5d",
+    "bytes": 1139
+  },
+  "resolved68-seal/source/src/failure-budgets.ts": {
+    "sha256": "d6e4936e1579d7445dbf3e0e9a0685ae94dd8f39fd13f6acc3ae42f5dc03b3ef",
+    "bytes": 5988
+  },
+  "resolved68-seal/source/src/failure-catalog.js": {
+    "sha256": "7676d1487ec8457014bc84b4fea92f01e60d9528878212d60655ed7e0bd81ce2",
+    "bytes": 8163
+  },
+  "resolved68-seal/source/src/field-graphics.ts": {
+    "sha256": "fcf013ad331f93639239fb30e106c46d8b10cd85db9cbf42477abb389199e78e",
+    "bytes": 1336
+  },
+  "resolved68-seal/source/src/finite-film-ui.js": {
+    "sha256": "83cbd3964858ab839ccd5a8f4544fb1dae4966e27db15d6c15310d129170093d",
+    "bytes": 3853
+  },
+  "resolved68-seal/source/src/floating-playback.js": {
+    "sha256": "f8d1930aa41dd93a3ade09e37a749c5609a5a46d9b2c3b34ca435075f125cb1e",
+    "bytes": 4100
+  },
+  "resolved68-seal/source/src/focused-diagnostics.js": {
+    "sha256": "531aefde49f598b823470b993180aa96cda8018996a9a4fa61c37098ba3786b3",
+    "bytes": 6798
+  },
+  "resolved68-seal/source/src/fuel-assembly.js": {
+    "sha256": "af11b55210679ccafe3cd7b2c4f6aee82791304d616512c299ec42fc58059ab3",
+    "bytes": 2915
+  },
+  "resolved68-seal/source/src/fuel-centrifuge-geometry.js": {
+    "sha256": "c68e234ac6bb44face26982c0acc99047e62f352886d24bb05cca07be435c606",
+    "bytes": 14004
+  },
+  "resolved68-seal/source/src/fuel-centrifuge-ui.js": {
+    "sha256": "4d233b8ca03d060c9ea3a4605d56f7d140a02761ea26e0f4617c73e49a3f71e5",
+    "bytes": 63039
+  },
+  "resolved68-seal/source/src/fuel-centrifuge.ts": {
+    "sha256": "2fe2850c3538eb332ccebdd408b8ac2c8bedbe8f4f5b7dedd53a5d7b0d10ff7c",
+    "bytes": 17164
+  },
+  "resolved68-seal/source/src/fuel-circuit.js": {
+    "sha256": "6d32b7788992f135c1b35ff7c04e181954b5cbfb9c75e7ec1e1a5b9444d17828",
+    "bytes": 2186
+  },
+  "resolved68-seal/source/src/fuel-comparison-ui.js": {
+    "sha256": "df5247df301443d6192acdf19a6ad6d3ac2b765ec8abd5c25660a60c663cdd04",
+    "bytes": 9098
+  },
+  "resolved68-seal/source/src/fuel-comparison.css": {
+    "sha256": "5703a23bbfff4552bcf1ed8cdd88b1599fa570c78a124db135fc6a42c46c8919",
+    "bytes": 1785
+  },
+  "resolved68-seal/source/src/fuel-current.ts": {
+    "sha256": "35331f744f601425db921c671be238a6531cbf02788498ae931511e9bec3eb1d",
+    "bytes": 8866
+  },
+  "resolved68-seal/source/src/fuel-cut-faces.js": {
+    "sha256": "64312a40c85e0539deb9a89f0c5e06ee2a0e27387a7de550687c0a767daa22dc",
+    "bytes": 3313
+  },
+  "resolved68-seal/source/src/fuel-drive.js": {
+    "sha256": "51f78a60f893f3cb40ad3afbfdc5faf45a59821d5599d41eb18fe58fc7211f2b",
+    "bytes": 3533
+  },
+  "resolved68-seal/source/src/fuel-experiments.ts": {
+    "sha256": "46e8364321f7253d327fdda2c7cfa259518d25e53d35d5c035e808312aa08609",
+    "bytes": 8363
+  },
+  "resolved68-seal/source/src/fuel-export.js": {
+    "sha256": "10566eb8fd0631641389c35b6b83cde80f689d4425783222f475c60ce8f1c18c",
+    "bytes": 2956
+  },
+  "resolved68-seal/source/src/fuel-finishes.js": {
+    "sha256": "a1316ebdb46e4beafa39fd1189d3f0b076ee2b3cd4886a9de3d8162feacc91ba",
+    "bytes": 2471
+  },
+  "resolved68-seal/source/src/fuel-gas-thermal.ts": {
+    "sha256": "d2c6f179fc12d54f6396d5e862b21a7e4b74f8d05c07e2a8228f0919de088b00",
+    "bytes": 10470
+  },
+  "resolved68-seal/source/src/fuel-gas.ts": {
+    "sha256": "7bb1bbdd33f5cd6cb7d98c00e79c75bd4256d488a4e741df023a8e471fe7b896",
+    "bytes": 5751
+  },
+  "resolved68-seal/source/src/fuel-momentum.ts": {
+    "sha256": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "bytes": 9379
+  },
+  "resolved68-seal/source/src/fuel-motion.js": {
+    "sha256": "623f202bab2a33644ca753960af7d32a3e475d08142152ee8cbab2e284baa8f1",
+    "bytes": 9414
+  },
+  "resolved68-seal/source/src/fuel-neutral-transport.ts": {
+    "sha256": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "bytes": 1415
+  },
+  "resolved68-seal/source/src/fuel-operation.ts": {
+    "sha256": "ea2a8481443c88f0c6da54ab50a49dc4e579e98f1c094da17a3388a456e02f10",
+    "bytes": 27555
+  },
+  "resolved68-seal/source/src/fuel-playground.css": {
+    "sha256": "6b7fd0ca43b5b13a96be914d642670953c509e0a17e59b378351ab9e42769151",
+    "bytes": 3691
+  },
+  "resolved68-seal/source/src/fuel-scene-tools.js": {
+    "sha256": "4ffca4446fa017b38bc57dbd49edadabb227992de6857d3f97e8b926801faea9",
+    "bytes": 15547
+  },
+  "resolved68-seal/source/src/fuel-spatial-coupling.ts": {
+    "sha256": "9c6b6d17561f433572d87c2f8293c6b0d5260e88dd020070f0d7125e998dd35c",
+    "bytes": 6188
+  },
+  "resolved68-seal/source/src/fuel-spatial-operation.ts": {
+    "sha256": "94a194aa597a477eb3e722f52412e31fe45e02a8a1eca01508093c19c54abdf6",
+    "bytes": 7631
+  },
+  "resolved68-seal/source/src/fuel-thermal.ts": {
+    "sha256": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b",
+    "bytes": 12786
+  },
+  "resolved68-seal/source/src/fuel-time-control.ts": {
+    "sha256": "24d4e2c5d81bcb3a089ec17ffb2b1f52f877b558efd26d053a068abeb36b8df7",
+    "bytes": 1780
+  },
+  "resolved68-seal/source/src/fuel-transport.ts": {
+    "sha256": "b28ce92df5c89365ca7676545426958429ffb79f7b5d50eebf339ec83937b991",
+    "bytes": 25151
+  },
+  "resolved68-seal/source/src/fuel-view-ui.js": {
+    "sha256": "c2de4913a45ee60f02159620c908517687768f4f7e917375f27aafeffcc33291",
+    "bytes": 6222
+  },
+  "resolved68-seal/source/src/fusion-playground.ts": {
+    "sha256": "f830cbfc4fcc25957d305948995fa60d7ef0f89633e37b45e4d3cda23bb92b9a",
+    "bytes": 2159
+  },
+  "resolved68-seal/source/src/fusion-reactor.ts": {
+    "sha256": "53c402fe41db394df2fbe6e876c9d83b616f540222634d8a0b3cede68e981309",
+    "bytes": 9971
+  },
+  "resolved68-seal/source/src/fusion-ui.js": {
+    "sha256": "3837b59d81497fa0832d51f1408fe8af52e76e823d11fa1e89f35c98c89e87b9",
+    "bytes": 8096
+  },
+  "resolved68-seal/source/src/gaussian-centrifuge.ts": {
+    "sha256": "72bf3063a859ae3bac1c96fb2aa9281e27bab963cda5aaf0aa63292275051b49",
+    "bytes": 7695
+  },
+  "resolved68-seal/source/src/geometries.ts": {
+    "sha256": "8697c8743c9756b9d13652b6bf792410a4f02345980510f47fc688f6b550110c",
+    "bytes": 11490
+  },
+  "resolved68-seal/source/src/hydrogen-charge-exchange.ts": {
+    "sha256": "763dd176861feaf62306c1a92483c573c3bb7c2b0c9ec869383b56afc32c792d",
+    "bytes": 3503
+  },
+  "resolved68-seal/source/src/hydrogen-tracer-ui.js": {
+    "sha256": "9a2112df692749982d8aa28b9cb0daa23c906652c68c6c599a99341b9e826f1c",
+    "bytes": 5730
+  },
+  "resolved68-seal/source/src/hydrogen-tracer.ts": {
+    "sha256": "f52a29d88371784a343f85939a6b35265740bea250af268dacd539213e1d7eaf",
+    "bytes": 12525
+  },
+  "resolved68-seal/source/src/laboratory.js": {
+    "sha256": "69c6418303fb3d897b9184948aa4a2b6fd1f23986b03831abe497f2fbc1a1fb9",
+    "bytes": 19197
+  },
+  "resolved68-seal/source/src/landau-reference.ts": {
+    "sha256": "eaf4cff23c07cb2feac762960768f1786dc1b8aa5c4865a4c642908e3151ba74",
+    "bytes": 7843
+  },
+  "resolved68-seal/source/src/legacy-scene.ts": {
+    "sha256": "4bc758381578046b4349e5192a62bb5193e7e61b1a662c12adf5c4168a329d58",
+    "bytes": 797
+  },
+  "resolved68-seal/source/src/limitations-ui.js": {
+    "sha256": "fb5b2fa32b474645975feef68a1a24db47c7f33d8deb16246a11bee5662dfd51",
+    "bytes": 6409
+  },
+  "resolved68-seal/source/src/lithium-coating.ts": {
+    "sha256": "db3567ea9e94074194590f10fd94096144b22ae9a85684e7bb869107b37ae62a",
+    "bytes": 7434
+  },
+  "resolved68-seal/source/src/magnetic-centrifuge.ts": {
+    "sha256": "c3a14f4701d84292271218effd04bc6470e325309113c42d3c8e264ad1fecb9e",
+    "bytes": 6571
+  },
+  "resolved68-seal/source/src/main.js": {
+    "sha256": "75441bb85c5898472efbaefa843bc724a2417df807821d112ff5239d70029b02",
+    "bytes": 40550
+  },
+  "resolved68-seal/source/src/marathon-layout.css": {
+    "sha256": "ac45200d5c3bf59a78d70e0c16f2f65e9ff1cb162a094ce357e2e346a96adbf5",
+    "bytes": 5388
+  },
+  "resolved68-seal/source/src/marathon-ui.js": {
+    "sha256": "400e39ae2943eefff31d1c61c4b345cc5101b0d526c509100d034047468ab7bd",
+    "bytes": 2901
+  },
+  "resolved68-seal/source/src/material-realism-ui.js": {
+    "sha256": "c619813a1430744e5eefce5929f8bcd0929ea1ee2090559eef08a8cf0867e052",
+    "bytes": 7587
+  },
+  "resolved68-seal/source/src/material-realism.ts": {
+    "sha256": "bf32b8af09486dcba317b740ec4e2b32fb080e85a28507e5e1dc83d8ae17336a",
+    "bytes": 5278
+  },
+  "resolved68-seal/source/src/methods.ts": {
+    "sha256": "df667b9dfd0dbe7c7a68467b571621b63b104d2701ed81306b4b78d02cfad5af",
+    "bytes": 19525
+  },
+  "resolved68-seal/source/src/minimal.css": {
+    "sha256": "b60330259f4e3fe1ccd1c55e8a92a3488f2d9cb13d82aeef2460938d2a2eb99a",
+    "bytes": 4081
+  },
+  "resolved68-seal/source/src/neutron-data.ts": {
+    "sha256": "ab19df166543dbb6aa28c78c593f7ed209489f005f298024d68957904fff8652",
+    "bytes": 4335
+  },
+  "resolved68-seal/source/src/neutron-geometry-ui.js": {
+    "sha256": "852b9717cc6cd75478c359d01e91b2267b9dcb39df6eb089e0dbc5a87a2821a4",
+    "bytes": 3479
+  },
+  "resolved68-seal/source/src/neutron-geometry.ts": {
+    "sha256": "972cd928eed1e392b619b4a4ff61aab3f69fd52eaec12615b058d77bfff28f92",
+    "bytes": 1228
+  },
+  "resolved68-seal/source/src/neutron-response-ui.js": {
+    "sha256": "a79449ae5416e35bfef11f568df92b09a4b8d6bdb08dcfae57eb9bd7f2b5399a",
+    "bytes": 4575
+  },
+  "resolved68-seal/source/src/neutron-response.ts": {
+    "sha256": "609f5dc5a5f99613b5da8a720aed03a9cfccc56585787b73159a4e731abe63ea",
+    "bytes": 5873
+  },
+  "resolved68-seal/source/src/neutron-transport-ui.js": {
+    "sha256": "fb0bfb859e9787be083b4eea090f6368171f9ca324cf0268d6b2e364df96630e",
+    "bytes": 9760
+  },
+  "resolved68-seal/source/src/neutron-transport.ts": {
+    "sha256": "b4d0e8d9195ccae64dafd262d05d077015b7cad65b1013ef5eebc6e4a87d6694",
+    "bytes": 8110
+  },
+  "resolved68-seal/source/src/observable-evidence.ts": {
+    "sha256": "2a5a3f3436c6d200f6eb90b5631e9a7304051b7ee0a466414289ddd151275503",
+    "bytes": 4007
+  },
+  "resolved68-seal/source/src/orbit-events.ts": {
+    "sha256": "3a4369d602755bd2eb903249ec456b4b29738731808c6650ea451ebcd3bb872f",
+    "bytes": 4556
+  },
+  "resolved68-seal/source/src/physics.ts": {
+    "sha256": "a48f1cb57374c8a30c155837d2e91bdff605395ada3fec8911c1ead9ef6b370f",
+    "bytes": 17135
+  },
+  "resolved68-seal/source/src/polynomial-roots.ts": {
+    "sha256": "090190b5c47dce5368703853be5625e26d635b7fbf4893e1fc5567684d3952b5",
+    "bytes": 2343
+  },
+  "resolved68-seal/source/src/precise-controls.css": {
+    "sha256": "f0eedac52df2c4fdcde1e7c6e99121cd2e7ae2fb0dc52eb402159414e317b017",
+    "bytes": 988
+  },
+  "resolved68-seal/source/src/precise-controls.js": {
+    "sha256": "52df2bed63ff34b3aa80ba57784b2bfc944ebc4299ace15e6a992f75b46daaf2",
+    "bytes": 4838
+  },
+  "resolved68-seal/source/src/producing-code.ts": {
+    "sha256": "1aaf68299ecb017037161d27c5454395044a37465530d5115e5c09937f915d34",
+    "bytes": 997
+  },
+  "resolved68-seal/source/src/radial-refinement.ts": {
+    "sha256": "c463a5a878fdd85ac8e642b7af2ccf6f9d341526a4acb55da9053d76414dbbf3",
+    "bytes": 343
+  },
+  "resolved68-seal/source/src/random-stream.ts": {
+    "sha256": "e12ba434ee995c3125c9c0173c008c30cf69cd492c97fe48b9eed8106bd7c625",
+    "bytes": 4561
+  },
+  "resolved68-seal/source/src/reference-atlas.js": {
+    "sha256": "d8648dffde41934bb4e67b8e9c8519a724d9fb154785f2f2ab5237a967b20313",
+    "bytes": 1490
+  },
+  "resolved68-seal/source/src/research-distribution-ui.js": {
+    "sha256": "908aefada7d59e3b338dcedefedb5b5229e026fe115c6a2ea613194165ff8414",
+    "bytes": 4118
+  },
+  "resolved68-seal/source/src/research-distribution.ts": {
+    "sha256": "4446e3bfba0812c53057eb03ee6232d622fd514855600a99518fcda1f1d1cead",
+    "bytes": 4171
+  },
+  "resolved68-seal/source/src/research-ui.js": {
+    "sha256": "2741669739226026b522eb82be3c18245c97b913fb397f37abb93d1964fe9314",
+    "bytes": 3897
+  },
+  "resolved68-seal/source/src/rotating-diagnostics.ts": {
+    "sha256": "de212b2c5898625335352bec58a187d22145d28a7df6253899d59055580aa28a",
+    "bytes": 6187
+  },
+  "resolved68-seal/source/src/scenario-state.js": {
+    "sha256": "177d8ba650c33bd545f0a142f38bfc0ee1fb39c2c748986133bf4d7c2dffee90",
+    "bytes": 14446
+  },
+  "resolved68-seal/source/src/study-presentation.ts": {
+    "sha256": "e783642a09b5dd46a3467137167a260b6b365dcf0e6c8782f5af6c578bd6e44e",
+    "bytes": 1945
+  },
+  "resolved68-seal/source/src/study-ui.js": {
+    "sha256": "60798ed63b4a1a9fb52dcdb498de59474ddacd462abab1d4764a5c3e21d38fa8",
+    "bytes": 3967
+  },
+  "resolved68-seal/source/src/style.css": {
+    "sha256": "f21fbd0ca5ac693da4475377c37366178920c529062777934a8592e0d6a95039",
+    "bytes": 31220
+  },
+  "resolved68-seal/source/src/surface-layer.js": {
+    "sha256": "8282ed005a7d5b995dd175a9d88b461a18e27059844028b07079fbb533d792cc",
+    "bytes": 14032
+  },
+  "resolved68-seal/source/src/surface-state.ts": {
+    "sha256": "c60d505f45ea0020b4471badb3578057b2d655d3fa4aae62d4f47d3b6c9800da",
+    "bytes": 23268
+  },
+  "resolved68-seal/source/src/target-conduction.ts": {
+    "sha256": "9f9671a619e91524fe6016276aaae3aa3de2e57b86dcd033b6f60ded2950fcb2",
+    "bytes": 4636
+  },
+  "resolved68-seal/source/src/target-exposure-ui.js": {
+    "sha256": "5a27ef19ddf80192014245a9724d7b66b37d4515d9b7b8eebb68075134a14f1a",
+    "bytes": 6427
+  },
+  "resolved68-seal/source/src/target-exposure.css": {
+    "sha256": "a71e9a34f8f8563a5cf68ecb4cacbf049dca242c1352509d9cf5a1a776eff2c0",
+    "bytes": 1862
+  },
+  "resolved68-seal/source/src/target-exposure.ts": {
+    "sha256": "d27a0525def85e9abc274bcd832c005643b14d6366bdf08bf6b57aa81b9d19de",
+    "bytes": 5992
+  },
+  "resolved68-seal/source/src/target-loading-ui.js": {
+    "sha256": "d4e3ba89e2f9a62dc88b18bf3d242b8a6f60d00a3c9d9c60fce0add85d069d74",
+    "bytes": 5989
+  },
+  "resolved68-seal/source/src/target-loading.css": {
+    "sha256": "3d1a569802977319d912238d2f3e9acf1e36ce70f4fa15655873790b7e4fa518",
+    "bytes": 901
+  },
+  "resolved68-seal/source/src/target-loading.ts": {
+    "sha256": "4dd86b27ec8e14dccd540206c43532ccab590a2a859e52d2eb9014c079915de4",
+    "bytes": 11497
+  },
+  "resolved68-seal/source/src/target-material.ts": {
+    "sha256": "ec46ba4663aa8fabec57bdff00744a137693d6ba9bc8a31c36083e742f83d8d8",
+    "bytes": 3270
+  },
+  "resolved68-seal/source/src/transport.ts": {
+    "sha256": "223f6e1be3a176e8ebc9b049d17c5e516fbebd18faf3facc1ca45daaf853040d",
+    "bytes": 12204
+  },
+  "resolved68-seal/source/src/tutorial-insights-ui.js": {
+    "sha256": "164baf87be21103ca70f57b11d73feb9ff9d3e7e06a1348677612d1aeacbaa7a",
+    "bytes": 1859
+  },
+  "resolved68-seal/source/src/tutorial-insights.ts": {
+    "sha256": "4952c39d30515905d213034e0948ee4d1cabc6f64f73c14ac4097ae5f93bfa66",
+    "bytes": 13693
+  },
+  "resolved68-seal/source/src/view-state.ts": {
+    "sha256": "5e7b7c11fbe066b264bea4b57493b5f0dcb98d095b36b71fe01b46353eb7da63",
+    "bytes": 466
+  },
+  "resolved68-seal/source/src/worker-client.ts": {
+    "sha256": "0b275d372f424afb702c53e2c1b3ca48a1a500b2b6ba89f6a6ac8bc5de8bca7c",
+    "bytes": 1942
+  },
+  "resolved68-seal/source/src/worker-identity.ts": {
+    "sha256": "0651abcaef7a7e153f0ff872779c13aa307c0543605d09038d47bf13636cb2a2",
+    "bytes": 213
+  },
+  "resolved68-seal/source/src/worker.ts": {
+    "sha256": "940803fda1d1c354513773e2c1bf0247a6fd819d486114cb8b45249facf94692",
+    "bytes": 3675
+  },
+  "resolved68-seal/source/src/workspace-layout.js": {
+    "sha256": "920424b6a8957f7aabeb2dc725245018673cfbaa44479572d72cb12fdfbbe6d7",
+    "bytes": 1376
+  },
+  "resolved68-seal/source/src/workspace-ui.js": {
+    "sha256": "50552862ff441656ecbea6893288d6772edbbc20fec8710378d4d510bd50a6e7",
+    "bytes": 13439
+  },
+  "resolved68-seal/source/src/workspace.css": {
+    "sha256": "572e4e08cca24b288e9cbc8faba8e2dd6e1370c8d1ade6df328826039baf8a31",
+    "bytes": 10934
+  },
+  "resolved68-seal/source/tests/fixtures/graded-wall-v67-stall.json": {
+    "sha256": "99e217f6c08f7e299f93bea2ae3f4bea2c5b7938590ea22bfbfdf2aed7776c07",
+    "bytes": 19532
+  },
+  "resolved68-seal/source/tests/fuel-current-reuse-v68.test.ts": {
+    "sha256": "24bedac8b6fc8d52b580cd19758b1c8523a657f5c97e9fa235a20acd983379a9",
+    "bytes": 4092
+  },
+  "resolved68-seal/source/tsconfig.json": {
+    "sha256": "93f052fb4a7fb7dab8644ec2d0ff7e6459666993d710f6b2baf238e293d04626",
+    "bytes": 276
+  },
+  "resolved68-seal/tested-inputs.json": {
+    "sha256": "aed14a94edcd7e81c88fbdd5c119cb313910207951dfd6e70065a1ed8dd8e7e7",
+    "bytes": 79098
+  },
+  "resolved68-seal/time-r64-z64-g128-t128.json.gz": {
+    "sha256": "1b5383fb854467feab9d643f9c6d2328645acae6109cc6136ee9225e0cab1613",
+    "bytes": 27289733
+  },
+  "resolved68-final-checks/application-tests.log": {
+    "sha256": "78ee1d75612a24ec7bd060de9a740a74a64252f9f22082ce15e59793c324cfc7",
+    "bytes": 323768
+  },
+  "resolved68-final-checks/assets.log": {
+    "sha256": "59b3f08a370f0ab96b685c44dbabc7b2d52d6e6d8da5d439ec265f7f04817467",
+    "bytes": 198
+  },
+  "resolved68-final-checks/build.log": {
+    "sha256": "e8f9088e94c98cbaebed93f874dc4364ae7dbd900a66ab9228626574b2531144",
+    "bytes": 1137
+  },
+  "resolved68-final-checks/receipts.json": {
+    "sha256": "68d5a947e63f7c2ebf2d28c18b08d04e6141b17815c5578bdaf5f00a3f5e2bb5",
+    "bytes": 842
+  },
+  "resolved68-final-checks/scientific-tests.log": {
+    "sha256": "b0168b4a9f2e7074d0730a41b9aa2852b4df54696b94f45e6b92ddf1ad98223a",
+    "bytes": 128
+  },
+  "resolved68-final-checks/site.log": {
+    "sha256": "26531b4375ad52c64c4c0ae72bbbaf8336eede47fd4e8dc1d81a4dd7cb42b603",
+    "bytes": 156
+  },
+  "resolved68-final-checks/typecheck.log": {
+    "sha256": "dcb958aba4a6c7cd6d75b2bd69cf76202671333241d3c5ce33569584459aa324",
+    "bytes": 30
+  }
+}

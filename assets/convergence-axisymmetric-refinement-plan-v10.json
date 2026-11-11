@@ -1,0 +1,196 @@
+{
+  "seeds": [
+    101,
+    202,
+    303,
+    404,
+    505,
+    606
+  ],
+  "tolerances": {
+    "fraction": 0.01,
+    "radiusFraction": 0.01,
+    "temperatureEV": 0.1,
+    "timeFraction": 0.02,
+    "normalizedAngularMomentum": 0.001,
+    "maxRawMomentumResidual": 0.001,
+    "maxUnresolvedExposure": 0.01,
+    "minimumSeeds": 6
+  },
+  "id": "axisymmetric-pulse-200us-joint-N-rz-v10",
+  "description": "Prospective intended-horizon axisymmetric radial/axial locality refinement. Physical case, six seeds and all v9 budgets unchanged. N increases along the spatial path; not a fixed-N error estimate. Source-interface-aligned fixed r-z faces; interfaces remain fixed throughout the run.",
+  "levels": [
+    {
+      "id": "rz6-N1024",
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 1024,
+        "cellsAcross": 6,
+        "dt": 1e-07,
+        "duration": 0.0002,
+        "seed": 42,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      }
+    },
+    {
+      "id": "rz8-N2048",
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 2048,
+        "cellsAcross": 8,
+        "dt": 1e-07,
+        "duration": 0.0002,
+        "seed": 42,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      }
+    },
+    {
+      "id": "rz12-N4096",
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-07,
+        "duration": 0.0002,
+        "seed": 42,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      }
+    },
+    {
+      "id": "rz12-N4096-off",
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-07,
+        "duration": 0.0002,
+        "seed": 42,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": false,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "kind": "spatial",
+      "coarse": "rz6-N1024",
+      "fine": "rz8-N2048"
+    },
+    {
+      "kind": "spatial",
+      "coarse": "rz8-N2048",
+      "fine": "rz12-N4096"
+    }
+  ],
+  "physicalEffect": {
+    "control": "rz12-N4096-off",
+    "collisional": "rz12-N4096"
+  }
+}

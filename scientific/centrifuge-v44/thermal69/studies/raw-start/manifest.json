@@ -1,0 +1,74 @@
+{
+  "thermal69-campaign/gas-q512-w128.json": {
+    "sha256": "c328c122e269767d7d5be6537cf00e6290a686aaee8b08463aed7554d37674ba",
+    "bytes": 49800767
+  },
+  "thermal69-campaign/gas-q1024-w128.json": {
+    "sha256": "664ff93d21b0432eadd19fd1fdf9d59942968739cc3b1e8e7a7554efe603730a",
+    "bytes": 99061274
+  },
+  "thermal69-campaign/startup-e8-w64-s64.json": {
+    "sha256": "ea765cbf381e9d841a9b64a83875884b798dcfc6b63d123a470bda4217b8215d",
+    "bytes": 31713621
+  },
+  "thermal69-campaign/startup-e8-w128-s64.json": {
+    "sha256": "34452d04dc6980b9c95dad3b156e2d6af85a5956afe775d651f73af7edf8935f",
+    "bytes": 32032888
+  },
+  "thermal69-final-checks/receipts.json": {
+    "sha256": "ae84cee884ce093d1fa2984194796c1fc08a1749a2df0a107500a5387e91a99e",
+    "bytes": 477
+  },
+  "thermal69-final-checks/repository/application-tests.log": {
+    "sha256": "87c704ea704c4ef4d9c261580fe42cfb89436061acdd12315d33bc7f70b77bb0",
+    "bytes": 323882
+  },
+  "thermal69-final-checks/repository/assets.log": {
+    "sha256": "59b3f08a370f0ab96b685c44dbabc7b2d52d6e6d8da5d439ec265f7f04817467",
+    "bytes": 198
+  },
+  "thermal69-final-checks/repository/build.log": {
+    "sha256": "5a39957b44efaed9e02d40cedca1fca76d05dd24dc9c00513eca840673777508",
+    "bytes": 1137
+  },
+  "thermal69-final-checks/repository/receipts.json": {
+    "sha256": "68d5a947e63f7c2ebf2d28c18b08d04e6141b17815c5578bdaf5f00a3f5e2bb5",
+    "bytes": 842
+  },
+  "thermal69-final-checks/repository/scientific-tests.log": {
+    "sha256": "1ada01f597b771542da06e08c7493e977b33ebdcdf5dfd8bc0552b50a960ac28",
+    "bytes": 128
+  },
+  "thermal69-final-checks/repository/site.log": {
+    "sha256": "26531b4375ad52c64c4c0ae72bbbaf8336eede47fd4e8dc1d81a4dd7cb42b603",
+    "bytes": 156
+  },
+  "thermal69-final-checks/repository/typecheck.log": {
+    "sha256": "dcb958aba4a6c7cd6d75b2bd69cf76202671333241d3c5ce33569584459aa324",
+    "bytes": 30
+  },
+  "thermal69-final-checks/repository.log": {
+    "sha256": "cc46d1f91a7f267073d6946a53eab52ff8f417e505500e276aa82adb9fdf6699",
+    "bytes": 1446
+  },
+  "thermal69-final-checks/v68-scientific.log": {
+    "sha256": "ccfea7866d8891b364f181ffaec863cbe94f0b324c32241ef787a5127777e2e9",
+    "bytes": 108
+  },
+  "thermal69-final-checks/versions.json": {
+    "sha256": "c2e93b765f7c1a938a11605dab239264516aca46daa95ccf62742f35f8ab6698",
+    "bytes": 88
+  },
+  "thermal69-figure/convergence.png": {
+    "sha256": "74bffb565be586b6960e86652b732f64a3275868c66d57b993e4eb9971d6f3a8",
+    "bytes": 127104
+  },
+  "thermal69-figure/convergence.svg": {
+    "sha256": "856f8ed5280d37735f30e0b05f4811d15b992e74f9908c4dfcac80528d702093",
+    "bytes": 65926
+  },
+  "thermal69-figure/provenance.json": {
+    "sha256": "301236666edbf18257635bfae4eed76ce03eed100fb80ce36e251d420f5dc2f9",
+    "bytes": 827
+  }
+}

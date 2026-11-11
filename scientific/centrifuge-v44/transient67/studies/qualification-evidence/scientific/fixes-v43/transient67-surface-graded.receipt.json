@@ -1,0 +1,20 @@
+{
+  "label": "transient67-surface-graded",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/surface.py",
+    "/work/home/transient67-graded-fixed.json",
+    "/work/home/transient67-graded-assess/config.json",
+    "/work/home/transient67-surface-graded.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "b6dce3c7a7c46d56ad83c655e3b56b5232ff2cc28d5af868d36c0999b3da8dea",
+  "exitCode": 0,
+  "seconds": 1.3867851260000001,
+  "sourceVerifiedBeforeAndAfter": true
+}

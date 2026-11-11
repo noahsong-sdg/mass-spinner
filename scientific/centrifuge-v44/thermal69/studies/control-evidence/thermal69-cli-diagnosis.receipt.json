@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-cli-diagnosis",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import sys,json;sys.path.insert(0,\"scientific/thermal-local-v69\");from test_reference import fixture;from reference import assess;a=assess({\"sourceSHA256\":\"a\"*64,\"cases\":[fixture(1100.,1100.)]});print(json.dumps(a,indent=2,allow_nan=False))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "869a94863243dff40486163ac505ff4dd7e2a76aeb3a53bb75a283afbbc31ed5",
+  "exitCode": 1,
+  "seconds": 0.30256466699999995,
+  "sourceVerifiedBeforeAndAfter": true
+}

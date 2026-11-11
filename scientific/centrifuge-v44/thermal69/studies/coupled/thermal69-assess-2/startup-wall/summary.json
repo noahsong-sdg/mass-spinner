@@ -1,0 +1,24 @@
+{
+  "pair": {
+    "coarseID": "startup-e8-w64-s64",
+    "fineID": "startup-e8-w128-s64",
+    "axis": "liner"
+  },
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "originalPacketsSHA256": {
+    "/work/home/thermal69-campaign/startup-e8-w64-s64.json": "ea765cbf381e9d841a9b64a83875884b798dcfc6b63d123a470bda4217b8215d",
+    "/work/home/thermal69-campaign/startup-e8-w128-s64.json": "34452d04dc6980b9c95dad3b156e2d6af85a5956afe775d651f73af7edf8935f"
+  },
+  "combinedUncompressedSHA256": "13111ace5c2bfdfb5f3e921d12586b872b03c4bdd69eb6f8f551a64707afd35f",
+  "combinedGzipSHA256": "cf1461b0b86df1a3c9b4ccf6c375a11ffded3f3df596ea925e43fd0fa209c2e9",
+  "legacyGlobalGatesPassed": true,
+  "resolvedEndpointGasGatesPassed": true,
+  "allEndpointGasSignalsResolved": true,
+  "endpointGasQualified": true,
+  "endpointGateRequired": false,
+  "allRequiredGatesPassed": true,
+  "sharedInitialAndAcceptedTimes": 65,
+  "fineOnlyTimesNotCompared": 0,
+  "experimentalValidation": false,
+  "liveBackendChanged": false
+}

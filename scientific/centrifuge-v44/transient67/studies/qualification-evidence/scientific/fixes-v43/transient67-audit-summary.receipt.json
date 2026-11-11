@@ -1,0 +1,18 @@
+{
+  "label": "transient67-audit-summary",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json;from pathlib import Path;p=json.loads(Path(\"/work/home/transient67-graded-audit-final.json\").read_text());print(json.dumps({\"allPassed\":p[\"allPassed\"],\"rejectedControls\":sum(c[\"rejected\"] for c in p[\"negativeControls\"]),\"cases\":[{\"id\":c[\"id\"],\"acceptedSteps\":c[\"acceptedSteps\"],\"maximumGlobalEnergyResidualJ\":max(abs(s[\"globalEnergyResidualJ\"]) for s in c[\"steps\"]),\"maximumRowTemperatureRepresentationAllowanceJ\":max(max(s[\"solidRowFluxRoundoffAllowanceJ\"]) for s in c[\"steps\"]),\"minimumEntropyIncludingCoolantJK\":c[\"minimumTotalEntropyChangeIncludingCoolantJK\"]} for c in p[\"cases\"]]},indent=2))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "21ebe6218510aca9f80eb80232fdd287e44e3dcb3a6a507fb382ea250b94bb65",
+  "exitCode": 0,
+  "seconds": 0.09171779200000008,
+  "sourceVerifiedBeforeAndAfter": true
+}

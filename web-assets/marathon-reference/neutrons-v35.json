@@ -1,0 +1,146 @@
+{
+  "schemaVersion": 1,
+  "model": "recorded-openmc-one-group-reference",
+  "openmcVersion": "0.16.0",
+  "historiesPerCase": 500000,
+  "batches": 50,
+  "material": "synthetic one-group coefficients; not a measured shielding material or LiT",
+  "fullBrowserMonteCarlo": false,
+  "experimentalValidation": false,
+  "benchmarkPlanSHA256": "0093975c6be69850a6e681203fc9fa8ea4bb712b3ba5d546f11fd7fe98c0a4aa",
+  "openmcResultsSHA256": "48274869380fbf9ec0bd1b3bbdaf6e088e63a41739286d95a1bd4cde8ac9db8a",
+  "productionStudySHA256": "5f51555055815508c5b4e89c698cacbcfcf26d9b576db048dec6f6cdae3f182e",
+  "packageLockSHA256": "645d3d857d0165fda103d18ec260592958a3e26881caf53cfce7bb6490f48059",
+  "independentAbsorptionQuadrature": {
+    "coarse": 0.06638618319165435,
+    "fine": 0.06638618319165437,
+    "productionAbsoluteError": 8.470214252209729e-10
+  },
+  "gate": "Pure absorber: |MC mean - first-flight| \u2264 4 standard errors + 2e-6 absolute, declared before MC execution. Other cases demonstrate missing multiple scattering, not equivalence.",
+  "cases": [
+    {
+      "name": "pure-absorption",
+      "sourceRateNormalization": "per source neutron",
+      "sourceEnergyMeV": 14.1,
+      "source": "isotropic point at origin",
+      "geometry": {
+        "radiusM": 0.1,
+        "distanceM": 0.1,
+        "thicknessM": 0.1,
+        "outerVacuumSphereM": 1
+      },
+      "totalMInv": 10,
+      "absorptionMInv": 10,
+      "openmcAbsorption": {
+        "mean": 0.06635200000000001,
+        "stdError": 0.0003896229469838038
+      },
+      "openmcMeanCollisions": {
+        "mean": 0.06635200000000001,
+        "stdError": 0.0003896229469838038
+      },
+      "firstFlight": {
+        "missed": 0.8535533905932737,
+        "uncollidedEscaped": 0.08006042536805029,
+        "firstAbsorbed": 0.0663861840386758,
+        "firstScatteredUnresolved": 0
+      },
+      "absorptionDifference": -3.418403867579134e-05,
+      "pureAbsorberEquivalenceGate": "PASS",
+      "inputSHA256": {
+        "pure-absorption/geometry.xml": "5b9a24a4457cbee2fee8dd3ab02aec399c0d014f7417256ac59f3b119d97035d",
+        "pure-absorption/materials.xml": "c94359b6dda6ce567f83632b4ccff4cff3147a413045506090502bcea477f4ef",
+        "pure-absorption/mgxs.h5": "aa30522cd1f73c65d9414f5c3b0fcbdd6af5e8432f7504d1259642e45eeb8702",
+        "pure-absorption/settings.xml": "9a64d09426931b4ea34844abfdbdcf93e3787a0d199a906e0af1daf360ef6ebf",
+        "pure-absorption/tallies.out": "800a8998e501d09fc4f59cddf20fd3ab00dd834d3bbcc4aaaf95584048625cbc",
+        "pure-absorption/tallies.xml": "79f98e6c8d2fb07827e5bb40bff09149df7b43833b096191a7ff53d12bc0fa5b"
+      },
+      "statepointSHA256": "4b7c4aeb28a6bf84bc94c58085b3476ce95f0b171d81c4267dd917e92f0face3"
+    },
+    {
+      "name": "mixed",
+      "sourceRateNormalization": "per source neutron",
+      "sourceEnergyMeV": 14.1,
+      "source": "isotropic point at origin",
+      "geometry": {
+        "radiusM": 0.1,
+        "distanceM": 0.1,
+        "thicknessM": 0.1,
+        "outerVacuumSphereM": 1
+      },
+      "totalMInv": 10,
+      "absorptionMInv": 4,
+      "openmcAbsorption": {
+        "mean": 0.03561,
+        "stdError": 0.00031772469150481833
+      },
+      "openmcMeanCollisions": {
+        "mean": 0.08953600000000002,
+        "stdError": 0.0005668297804455951
+      },
+      "firstFlight": {
+        "missed": 0.8535533905932737,
+        "uncollidedEscaped": 0.08006042536805029,
+        "firstAbsorbed": 0.026554473615470434,
+        "firstScatteredUnresolved": 0.0398317104232056
+      },
+      "absorptionDifference": 0.00905552638452957,
+      "pureAbsorberEquivalenceGate": "NOT_APPLICABLE",
+      "inputSHA256": {
+        "mixed/geometry.xml": "15da2b3daf4d4e0a07a93685ec9478b5bbeab45fc848c8646661787c58f0cf7e",
+        "mixed/materials.xml": "bc037c92215cc074c577ef14779f1fe28b1c8395af99e14e8f464926673a12f4",
+        "mixed/mgxs.h5": "f110ae0ab9558f74faf1ac6496e1a18ef200941b29258182745ca8c68b9ff59d",
+        "mixed/settings.xml": "9a64d09426931b4ea34844abfdbdcf93e3787a0d199a906e0af1daf360ef6ebf",
+        "mixed/tallies.out": "13e719ced92b98fdb17467c69609f0fe5ee6f4d793c74cb98d20795c45cc9ec9",
+        "mixed/tallies.xml": "3c5a1da08f12b49bcdf354d1ae9eb92ab76bcc3778b6518d48b3ef687e67f798"
+      },
+      "statepointSHA256": "e084d1d0ac161be056978b9203ea3004826f3e8fcdf4daaf30e0146a43d2c370"
+    },
+    {
+      "name": "pure-scattering",
+      "sourceRateNormalization": "per source neutron",
+      "sourceEnergyMeV": 14.1,
+      "source": "isotropic point at origin",
+      "geometry": {
+        "radiusM": 0.1,
+        "distanceM": 0.1,
+        "thicknessM": 0.1,
+        "outerVacuumSphereM": 1
+      },
+      "totalMInv": 10,
+      "absorptionMInv": 0,
+      "openmcAbsorption": {
+        "mean": 0.0,
+        "stdError": 0.0
+      },
+      "openmcMeanCollisions": {
+        "mean": 0.117602,
+        "stdError": 0.0008249699561629065
+      },
+      "firstFlight": {
+        "missed": 0.8535533905932737,
+        "uncollidedEscaped": 0.08006042536805029,
+        "firstAbsorbed": 0,
+        "firstScatteredUnresolved": 0.0663861840386758
+      },
+      "absorptionDifference": 0.0,
+      "pureAbsorberEquivalenceGate": "NOT_APPLICABLE",
+      "inputSHA256": {
+        "pure-scattering/geometry.xml": "d57c268b51f229a0b920658838634f5edf9847f6aee4cb3d7493d61c245a6691",
+        "pure-scattering/materials.xml": "2fac0a20bb5270d943053bbe80d235aa0ae3307e7cbfc7a9ef0db632b50b1450",
+        "pure-scattering/mgxs.h5": "69da8d8c64a2748f330a02a807a4cc63b2ec37303c4f0a8f1a0165f4023f67cc",
+        "pure-scattering/settings.xml": "9a64d09426931b4ea34844abfdbdcf93e3787a0d199a906e0af1daf360ef6ebf",
+        "pure-scattering/tallies.out": "e7266178d97b222639b8b574b49cda07e707796c9f7c221f2888cc4878824e03",
+        "pure-scattering/tallies.xml": "537a55d4fccc60a8b82a1754e19f33a1405d54f43d86b9d66aa02e70b04fd15e"
+      },
+      "statepointSHA256": "d38937c433d69269c6ae5653219cb998d23a1b3deb43e8cdcbc297264fc55120"
+    }
+  ],
+  "limits": [
+    "OpenMC is actual external multiple-scattering transport with isotropic one-group scattering. The browser first-flight calculation is a separate limited model.",
+    "Cross sections are synthetic and energy independent within one broad group; there is no evaluated neutron spectrum or material calibration here.",
+    "Standard errors use OpenMC batch statistics; these are not material-data or model uncertainty intervals.",
+    "Mixed-case absorption includes collisions after scattering and can exceed the browser first-absorption result.",
+    "No detector-response calibration, dose, displacement damage, secondary photons or neutron multiplication is qualified."
+  ]
+}

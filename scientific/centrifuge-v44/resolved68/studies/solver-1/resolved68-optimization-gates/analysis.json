@@ -1,0 +1,217 @@
+{
+  "equivalenceGates": [
+    {
+      "name": "4 jouleW",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "4 mechanicalW",
+      "value": 5.070606630263533e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "4 electrodePowerW",
+      "value": 3.367199715409378e-17,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "4 torque L1",
+      "value": 4.487637476076236e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "4 Joule L1",
+      "value": 6.958550095264149e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "4 relative potential",
+      "value": 2.170077294616451e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 jouleW",
+      "value": 2.921747122569672e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 mechanicalW",
+      "value": 8.10784826513084e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 electrodePowerW",
+      "value": 8.147223372837345e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 torque L1",
+      "value": 1.800211900519853e-11,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 Joule L1",
+      "value": 5.505162666926569e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "16 relative potential",
+      "value": 1.185168354844055e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 jouleW",
+      "value": 1.4240868790235372e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 mechanicalW",
+      "value": 1.2745577567260657e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 electrodePowerW",
+      "value": 1.3101043003079423e-14,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 torque L1",
+      "value": 9.965261112965328e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 Joule L1",
+      "value": 4.0387796596829735e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "32 relative potential",
+      "value": 6.107732070283563e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 jouleW",
+      "value": 4.950817997146363e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 mechanicalW",
+      "value": 3.1119427410634284e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 electrodePowerW",
+      "value": 3.3401445081193933e-15,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 torque L1",
+      "value": 8.485713872677771e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 Joule L1",
+      "value": 2.4509164075834373e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "64 relative potential",
+      "value": 3.7373053158944315e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coupled lightMass",
+      "value": 2.219958112930926e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coupled heavyMass",
+      "value": 2.2198908143226735e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coupled omegaRadS",
+      "value": 2.9665447894244847e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coupled gasEnergyJ",
+      "value": 2.4333822761127554e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "coupled linerEnergyJ",
+      "value": 0.0,
+      "limit": 1e-09,
+      "passed": true
+    }
+  ],
+  "allEquivalenceGatesPassed": true,
+  "staticElectricalGates": 652,
+  "allStaticElectricalGatesPassed": true,
+  "actualFiPyReexecuted": false,
+  "actualFiPyCasesCompared": 20,
+  "coupledAudits": [
+    {
+      "label": "before",
+      "allPassed": true
+    },
+    {
+      "label": "after",
+      "allPassed": true
+    }
+  ],
+  "matchedStepSeconds": {
+    "before": 2.4561413350000003,
+    "after": 0.494605083
+  },
+  "inputSHA256": {
+    "/work/home/resolved68-profile-before.json": "330b9274c55d923aec132d44cd6380cfb21390405e95bb71065bd4b2a6d18c28",
+    "/work/home/resolved68-profile-final.json": "a6f5ab40308c13e7a3edf99d1243e0a4d8fb9e884905a27bc84a3b8ede8fa9dc",
+    "/work/home/transient67-electrical/cases.json": "0c81b8e24d77fb516d2b6ed4de73ea9426effb66e59b914dfa565a1d2ad97665",
+    "/work/home/transient67-electrical/fipy.json": "42094ae592c42b719f5338020069458e12edf0879a659188cd8cf8d52a2af8a3",
+    "/work/home/resolved68-optimization-gates/production.json": "9ee381fde0957cf184dd4306ca5d7d4d78d8f2e31214deb0a8c7281ee130d7f5"
+  },
+  "sourceFilesSHA256": {
+    "src/fuel-current.ts": "35331f744f601425db921c671be238a6531cbf02788498ae931511e9bec3eb1d",
+    "src/fuel-spatial-operation.ts": "94a194aa597a477eb3e722f52412e31fe45e02a8a1eca01508093c19c54abdf6",
+    "scientific/resolved-v68/profile.ts": "11af6b52799e9bd4940b0545fbdc25607bdc70b513935e8fa8fa6824c71581ef",
+    "scientific/resolved-v68/validate_optimization.py": "febc2aff3a6c508a1d95ddaba4d7a259fea9a9b4b46fb179b145a684e14f6a46"
+  },
+  "productionCommand": [
+    "node_modules/.bin/tsx",
+    "scientific/current-v66/campaign.ts",
+    "/work/home/transient67-electrical/cases.json",
+    "/work/home/resolved68-optimization-gates/production.json"
+  ],
+  "productionExitCode": 0
+}

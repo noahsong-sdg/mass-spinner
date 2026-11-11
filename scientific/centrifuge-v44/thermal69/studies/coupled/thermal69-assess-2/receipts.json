@@ -1,0 +1,116 @@
+[
+  {
+    "label": "gas-q2048-w128",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/gas-q2048-w128.json",
+      "/work/home/thermal69-assess-2/gas-q2048-w128"
+    ]
+  },
+  {
+    "label": "gas-q4096-w128",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/gas-q4096-w128.json",
+      "/work/home/thermal69-assess-2/gas-q4096-w128"
+    ]
+  },
+  {
+    "label": "startup-e8-w64-s64",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/startup-e8-w64-s64.json",
+      "/work/home/thermal69-assess-2/startup-e8-w64-s64"
+    ]
+  },
+  {
+    "label": "startup-e8-w128-s64",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/startup-e8-w128-s64.json",
+      "/work/home/thermal69-assess-2/startup-e8-w128-s64"
+    ]
+  },
+  {
+    "label": "full-e8-w64-q256",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/full-e8-w64-q256.json",
+      "/work/home/thermal69-assess-2/full-e8-w64-q256"
+    ]
+  },
+  {
+    "label": "full-e8-w128-q256",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "case",
+      "/work/home/thermal69-campaign/full-e8-w128-q256.json",
+      "/work/home/thermal69-assess-2/full-e8-w128-q256"
+    ]
+  },
+  {
+    "label": "time1024-2048",
+    "exitCode": 1,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "time",
+      "/work/home/thermal69-campaign/gas-q1024-w128.json",
+      "/work/home/thermal69-campaign/gas-q2048-w128.json",
+      "/work/home/thermal69-assess-2/time1024-2048"
+    ]
+  },
+  {
+    "label": "time2048-4096",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "time",
+      "/work/home/thermal69-campaign/gas-q2048-w128.json",
+      "/work/home/thermal69-campaign/gas-q4096-w128.json",
+      "/work/home/thermal69-assess-2/time2048-4096"
+    ]
+  },
+  {
+    "label": "startup-wall",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "liner",
+      "/work/home/thermal69-campaign/startup-e8-w64-s64.json",
+      "/work/home/thermal69-campaign/startup-e8-w128-s64.json",
+      "/work/home/thermal69-assess-2/startup-wall"
+    ]
+  },
+  {
+    "label": "full-wall",
+    "exitCode": 0,
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/thermal-local-v69/assess.py",
+      "liner",
+      "/work/home/thermal69-campaign/full-e8-w64-q256.json",
+      "/work/home/thermal69-campaign/full-e8-w128-q256.json",
+      "/work/home/thermal69-assess-2/full-wall"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "pairs": [
+    {
+      "coarseFile": "/work/home/resolved68-campaign/radial-r32-z64-g128-t256.json",
+      "fineFile": "/work/home/resolved68-campaign/anchor-r64-z64-g128-t256.json",
+      "coarseSHA256": "ea94d40d6fa7a8445ce20c84b5c16f6c4a1cd4368be938f95fd7471a8a9d386d",
+      "fineSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2",
+      "axis": "radial"
+    }
+  ]
+}

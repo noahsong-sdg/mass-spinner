@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-final-checks",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import importlib.metadata,json,os,subprocess,sys;from pathlib import Path;out=Path(\"/work/home/thermal69-final-checks\");out.mkdir();env=dict(os.environ,OMP_NUM_THREADS=\"1\",OPENBLAS_NUM_THREADS=\"1\");jobs=[(\"v68-scientific\",[sys.executable,\"-m\",\"unittest\",\"discover\",\"-s\",\"scientific/resolved-v68\",\"-p\",\"test_*.py\"]),(\"repository\",[sys.executable,\"scientific/transient-v67/final.py\",str(out/\"repository\")])];receipts=[]\nfor label,command in jobs:\n r=subprocess.run(command,capture_output=True,text=True,env=env);(out/(label+\".log\")).write_text(r.stdout+\"\\n\"+r.stderr);receipts.append({\"label\":label,\"command\":command,\"exitCode\":r.returncode});print(label,r.returncode,(r.stdout+\"\\n\"+r.stderr)[-5000:],flush=True)\n(out/\"receipts.json\").write_text(json.dumps(receipts,indent=2));(out/\"versions.json\").write_text(json.dumps({p:importlib.metadata.version(p) for p in [\"numpy\",\"scipy\",\"FiPy\",\"matplotlib\"]},indent=2));raise SystemExit(0 if all(r[\"exitCode\"]==0 for r in receipts) else 1)"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 52.108793440999996,
+  "sourceVerifiedBeforeAndAfter": true
+}

@@ -1,0 +1,20 @@
+{
+  "label": "resolved68-optimization-gates",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/resolved-v68/validate_optimization.py",
+    "/work/home/resolved68-optimization-gates",
+    "/work/home/resolved68-profile-before.json",
+    "/work/home/resolved68-profile-final.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 735,
+  "sourceSHA256": "69e77ffca10deda322b4879b809d4b4a6501046c518c9079998762f6390b2d2b",
+  "exitCode": 0,
+  "seconds": 1.060725334,
+  "sourceVerifiedBeforeAndAfter": true
+}

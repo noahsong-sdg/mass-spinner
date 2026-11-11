@@ -1,0 +1,60 @@
+[
+  {
+    "label": "scientific-tests",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scientific/transient-v67",
+      "-p",
+      "test_*.py"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "application-tests",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "site",
+    "command": [
+      "npm",
+      "run",
+      "check:site"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "assets",
+    "command": [
+      "npm",
+      "run",
+      "check:assets"
+    ],
+    "exitCode": 0
+  }
+]

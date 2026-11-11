@@ -1,0 +1,5106 @@
+{
+  "schemaVersion": 1,
+  "modelVersion": 10,
+  "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+  "sourceFiles": {
+    "package-lock.json": "443c63456b3c33b48c79f63272abe7b308d21ea9770d23c7a0ebdb94ac2e18e0",
+    "package.json": "1cb8b186b2a925cc4cb27ba86685f06484360f746de36b6fdee185d898436400",
+    "scripts/run-convergence.ts": "591fc0db706552f562ee1f42ca37bd48883d39983c4c7dcf4df072b63db5ed33",
+    "src/axisymmetric-collisions.ts": "ed90cc9c9822329cb3a4474265050e6e5c548568edc0e24d3001b86d780c7235",
+    "src/collision-locality.ts": "3538ba2d76858decda0bfa56c5c440504e23f9b9c71e70b645985d0f61b6e4f0",
+    "src/collisions.ts": "129e76b125cb29840316188f6e9e4afd95190d2416523f6939b937712b903895",
+    "src/convergence.ts": "28423e9c08868eceed1c919bb887955737246ea6441ef0c5fd12ea6de7cc3129",
+    "src/coulomb.ts": "116a8d0e9958de1337dcdc8ca0accbc45cf0a17e60f105832cc3a5c358d576a9",
+    "src/doublewell-dynamics.ts": "5523ac9cfedb20a1f09e68f9ad76600749a4062cc027756bf96fa203f0bed93d",
+    "src/doublewell-orbits.ts": "738a4508356946f7ee76db8f6f70d18f1acd8a388a5085472650928e27d5fda0",
+    "src/doublewell-regime.ts": "e217e6b1039045aef827b52945f1a89274cc3e11147581ace33c201042ee4472",
+    "src/ensemble.ts": "6b8b44fbaf1fc452ebdfcfe73923bb2ca3f772be598277c65088db86ef9fc54f",
+    "src/physics.ts": "ae14e254b428efbf9be7a8fa3117ae13a8e7d12b3ca923a920ba098fe79a8d88"
+  },
+  "startedAt": "2026-11-07T02:34:43.975Z",
+  "completedAt": "2026-11-07T02:42:15.722Z",
+  "environment": {
+    "node": "v22.23.1",
+    "platform": "darwin",
+    "architecture": "arm64",
+    "cpu": "Apple M5",
+    "logicalCpus": 10,
+    "totalMemoryBytes": 34359738368,
+    "runner": "Three concurrent sequential CLI chunks (two predeclared seeds each); external frozen-statistics aggregation."
+  },
+  "durationMs": 451747,
+  "plan": {
+    "seeds": [
+      101,
+      202,
+      303,
+      404,
+      505,
+      606
+    ],
+    "tolerances": {
+      "fraction": 0.01,
+      "radiusFraction": 0.01,
+      "temperatureEV": 0.1,
+      "timeFraction": 0.02,
+      "normalizedAngularMomentum": 0.001,
+      "maxRawMomentumResidual": 0.001,
+      "maxUnresolvedExposure": 0.01,
+      "minimumSeeds": 6
+    },
+    "id": "axisymmetric-pulse-200us-fine-dt-v10",
+    "description": "Prospective 100/50/25 ns refinement at 4096 markers/species and 12 radial cells; same 200 us physical case, seeds and all v9 budgets. Source-interface-aligned fixed r-z faces; interfaces remain fixed throughout the run.",
+    "levels": [
+      {
+        "id": "rz12-N4096-dt100",
+        "config": {
+          "radius": 0.2,
+          "length": 0.6,
+          "magneticT": 0.06,
+          "voltage": 20,
+          "quadraticShape": 1.2,
+          "densityM3": 1000000000000000000,
+          "ionTemperatureEV": 5,
+          "electronTemperatureEV": 5,
+          "coulombLog": 10,
+          "particlesPerSpecies": 4096,
+          "cellsAcross": 12,
+          "dt": 1e-7,
+          "duration": 0.0002,
+          "seed": 42,
+          "species": [
+            {
+              "massU": 40,
+              "chargeState": 1
+            },
+            {
+              "massU": 84,
+              "chargeState": 1
+            }
+          ],
+          "boundary": "open",
+          "initialState": "pulse",
+          "rotationMode": "zero-canonical",
+          "rotationRadS": -20000,
+          "beamEV": 5,
+          "sourceRadius": 0.08,
+          "pulseLengthFraction": 0.25,
+          "collisions": true,
+          "collisionMethod": "axisymmetric",
+          "collisionSourceAligned": true
+        }
+      },
+      {
+        "id": "rz12-N4096-dt50",
+        "config": {
+          "radius": 0.2,
+          "length": 0.6,
+          "magneticT": 0.06,
+          "voltage": 20,
+          "quadraticShape": 1.2,
+          "densityM3": 1000000000000000000,
+          "ionTemperatureEV": 5,
+          "electronTemperatureEV": 5,
+          "coulombLog": 10,
+          "particlesPerSpecies": 4096,
+          "cellsAcross": 12,
+          "dt": 5e-8,
+          "duration": 0.0002,
+          "seed": 42,
+          "species": [
+            {
+              "massU": 40,
+              "chargeState": 1
+            },
+            {
+              "massU": 84,
+              "chargeState": 1
+            }
+          ],
+          "boundary": "open",
+          "initialState": "pulse",
+          "rotationMode": "zero-canonical",
+          "rotationRadS": -20000,
+          "beamEV": 5,
+          "sourceRadius": 0.08,
+          "pulseLengthFraction": 0.25,
+          "collisions": true,
+          "collisionMethod": "axisymmetric",
+          "collisionSourceAligned": true
+        }
+      },
+      {
+        "id": "rz12-N4096-dt25",
+        "config": {
+          "radius": 0.2,
+          "length": 0.6,
+          "magneticT": 0.06,
+          "voltage": 20,
+          "quadraticShape": 1.2,
+          "densityM3": 1000000000000000000,
+          "ionTemperatureEV": 5,
+          "electronTemperatureEV": 5,
+          "coulombLog": 10,
+          "particlesPerSpecies": 4096,
+          "cellsAcross": 12,
+          "dt": 2.5e-8,
+          "duration": 0.0002,
+          "seed": 42,
+          "species": [
+            {
+              "massU": 40,
+              "chargeState": 1
+            },
+            {
+              "massU": 84,
+              "chargeState": 1
+            }
+          ],
+          "boundary": "open",
+          "initialState": "pulse",
+          "rotationMode": "zero-canonical",
+          "rotationRadS": -20000,
+          "beamEV": 5,
+          "sourceRadius": 0.08,
+          "pulseLengthFraction": 0.25,
+          "collisions": true,
+          "collisionMethod": "axisymmetric",
+          "collisionSourceAligned": true
+        }
+      }
+    ],
+    "comparisons": [
+      {
+        "kind": "timestep",
+        "coarse": "rz12-N4096-dt100",
+        "fine": "rz12-N4096-dt50"
+      },
+      {
+        "kind": "timestep",
+        "coarse": "rz12-N4096-dt50",
+        "fine": "rz12-N4096-dt25"
+      }
+    ]
+  },
+  "summary": {
+    "status": "unknown",
+    "checks": [
+      {
+        "name": "executed source identity",
+        "status": "pass",
+        "reason": "Every supplied run must match the declared executed-source hash."
+      },
+      {
+        "name": "rz12-N4096-dt100: sampled local coverage",
+        "status": "unknown",
+        "reason": "Local representative coverage is absent or exceeds the declared unresolved-exposure budget."
+      },
+      {
+        "name": "rz12-N4096-dt100: raw angular-momentum budget",
+        "status": "pass",
+        "reason": "Maximum raw residual is compared with the declared positive-scale diagnostic budget, not the torque-corrected ledger.",
+        "details": [
+          0.000407444163570223,
+          0.0005722605998090747,
+          0.0003424882639354966,
+          0.0003816294633270062,
+          0.0004902829166537652,
+          0.0004889012603987867
+        ]
+      },
+      {
+        "name": "rz12-N4096-dt50: sampled local coverage",
+        "status": "unknown",
+        "reason": "Local representative coverage is absent or exceeds the declared unresolved-exposure budget."
+      },
+      {
+        "name": "rz12-N4096-dt50: raw angular-momentum budget",
+        "status": "pass",
+        "reason": "Maximum raw residual is compared with the declared positive-scale diagnostic budget, not the torque-corrected ledger.",
+        "details": [
+          0.00026789818716083986,
+          0.00027027981720712516,
+          0.00014652563451525994,
+          0.000409411225752135,
+          0.0002810930336537293,
+          0.00013232015640574137
+        ]
+      },
+      {
+        "name": "rz12-N4096-dt25: sampled local coverage",
+        "status": "unknown",
+        "reason": "Local representative coverage is absent or exceeds the declared unresolved-exposure budget."
+      },
+      {
+        "name": "rz12-N4096-dt25: raw angular-momentum budget",
+        "status": "pass",
+        "reason": "Maximum raw residual is compared with the declared positive-scale diagnostic budget, not the torque-corrected ledger.",
+        "details": [
+          0.0003351254189452858,
+          0.0003665786151298722,
+          0.00027436994420584784,
+          0.000186017200905113,
+          0.0003982637337512645,
+          0.0001640213815832611
+        ]
+      },
+      {
+        "name": "timestep: rz12-N4096-dt100 → rz12-N4096-dt50",
+        "status": "unknown",
+        "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+      },
+      {
+        "name": "timestep: rz12-N4096-dt50 → rz12-N4096-dt25",
+        "status": "unknown",
+        "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+      },
+      {
+        "name": "particle: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "spatial: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "alignment: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "orientation: required coverage",
+        "status": "unknown",
+        "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+      },
+      {
+        "name": "effect versus numerical error",
+        "status": "unknown",
+        "reason": "Collision-on/off differences are reported separately; this matrix does not establish a bound on continuum bias relative to the physical effect."
+      }
+    ],
+    "summaries": {
+      "rz12-N4096-dt100": {
+        "A.fraction.active": {
+          "n": 6,
+          "mean": 0.19270833333333334,
+          "standardError": 0.0024370621073235405,
+          "halfWidth95": 0.006264667985967962
+        },
+        "A.fraction.wall": {
+          "n": 6,
+          "mean": 0.0005696614583333334,
+          "standardError": 0.00018557542726222947,
+          "halfWidth95": 0.00047703685296259635
+        },
+        "A.fraction.end": {
+          "n": 6,
+          "mean": 0.7283121744791666,
+          "standardError": 0.002125020968265179,
+          "halfWidth95": 0.0054625406506450406
+        },
+        "A.fraction.source": {
+          "n": 6,
+          "mean": 0.07840983072916667,
+          "standardError": 0.0016076453666291025,
+          "halfWidth95": 0.004132584241840171
+        },
+        "A.radius": {
+          "n": 6,
+          "mean": 0.303628085554917,
+          "standardError": 0.0007963993909261721,
+          "halfWidth95": 0.0020472099391257814
+        },
+        "A.temperature": {
+          "n": 6,
+          "mean": 2.6137035478949,
+          "standardError": 0.04537523039789247,
+          "halfWidth95": 0.11664075050667522
+        },
+        "A.angularTransfer": {
+          "n": 6,
+          "mean": 0.0075147078596007515,
+          "standardError": 0.0002597747183862347,
+          "halfWidth95": 0.000667772215138724
+        },
+        "A.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.23572790640341235,
+          "standardError": 0.0013413782246567629,
+          "halfWidth95": 0.0034481227194946306
+        },
+        "A.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.41710392075849806,
+          "standardError": 0.000703527646568118,
+          "halfWidth95": 0.0018084755047703658
+        },
+        "A.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.768877935893971,
+          "standardError": 0.0026000499627699806,
+          "halfWidth95": 0.0066836416333971825
+        },
+        "A.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.74486941553585,
+          "standardError": 0.07392054550051111,
+          "halfWidth95": 0.19001882369379483
+        },
+        "A.cdf.0": {
+          "n": 6,
+          "mean": 0.003173828125,
+          "standardError": 0.00026744265503181937,
+          "halfWidth95": 0.0006874832750570043
+        },
+        "A.cdf.1": {
+          "n": 6,
+          "mean": 0.013264973958333334,
+          "standardError": 0.0006165591446899678,
+          "halfWidth95": 0.0015849158392754268
+        },
+        "A.cdf.2": {
+          "n": 6,
+          "mean": 0.028320312500000003,
+          "standardError": 0.001225576210743274,
+          "halfWidth95": 0.003150444146964867
+        },
+        "A.cdf.3": {
+          "n": 6,
+          "mean": 0.0491943359375,
+          "standardError": 0.001118348840718738,
+          "halfWidth95": 0.002874807399672455
+        },
+        "A.cdf.4": {
+          "n": 6,
+          "mean": 0.07230631510416667,
+          "standardError": 0.0014599754534070258,
+          "halfWidth95": 0.003752986620969939
+        },
+        "A.cdf.5": {
+          "n": 6,
+          "mean": 0.09842936197916667,
+          "standardError": 0.002108124413272661,
+          "halfWidth95": 0.005419106670519263
+        },
+        "A.cdf.6": {
+          "n": 6,
+          "mean": 0.1243896484375,
+          "standardError": 0.0018037239794353422,
+          "halfWidth95": 0.00463662039450486
+        },
+        "A.cdf.7": {
+          "n": 6,
+          "mean": 0.14778645833333334,
+          "standardError": 0.0015830490124723734,
+          "halfWidth95": 0.0040693572965792586
+        },
+        "A.cdf.8": {
+          "n": 6,
+          "mean": 0.16512044270833334,
+          "standardError": 0.001509816719255444,
+          "halfWidth95": 0.0038811076818170975
+        },
+        "A.cdf.9": {
+          "n": 6,
+          "mean": 0.17728678385416666,
+          "standardError": 0.001823080146361883,
+          "halfWidth95": 0.004686377008795222
+        },
+        "A.cdf.10": {
+          "n": 6,
+          "mean": 0.1845703125,
+          "standardError": 0.002095441599867144,
+          "halfWidth95": 0.005386504458669683
+        },
+        "A.cdf.11": {
+          "n": 6,
+          "mean": 0.18733723958333334,
+          "standardError": 0.0021168242108044067,
+          "halfWidth95": 0.005441470213458013
+        },
+        "A.cdf.12": {
+          "n": 6,
+          "mean": 0.188232421875,
+          "standardError": 0.0020648774595440145,
+          "halfWidth95": 0.005307936829709572
+        },
+        "A.cdf.13": {
+          "n": 6,
+          "mean": 0.18924967447916666,
+          "standardError": 0.0021034068381820667,
+          "halfWidth95": 0.005406979756907733
+        },
+        "A.cdf.14": {
+          "n": 6,
+          "mean": 0.1900634765625,
+          "standardError": 0.0021706559307026595,
+          "halfWidth95": 0.005579849063657504
+        },
+        "A.cdf.15": {
+          "n": 6,
+          "mean": 0.19132486979166666,
+          "standardError": 0.0022960182258570773,
+          "halfWidth95": 0.005902103123060137
+        },
+        "A.cdf.16": {
+          "n": 6,
+          "mean": 0.19254557291666666,
+          "standardError": 0.0023751312576519436,
+          "halfWidth95": 0.006105469658557448
+        },
+        "A.cdf.17": {
+          "n": 6,
+          "mean": 0.19270833333333334,
+          "standardError": 0.0024370621073235405,
+          "halfWidth95": 0.006264667985967962
+        },
+        "A.cdf.18": {
+          "n": 6,
+          "mean": 0.19270833333333334,
+          "standardError": 0.0024370621073235405,
+          "halfWidth95": 0.006264667985967962
+        },
+        "A.cdf.19": {
+          "n": 6,
+          "mean": 0.19270833333333334,
+          "standardError": 0.0024370621073235405,
+          "halfWidth95": 0.006264667985967962
+        },
+        "B.fraction.active": {
+          "n": 6,
+          "mean": 0.3057454427083333,
+          "standardError": 0.002887105546204184,
+          "halfWidth95": 0.007421541549172643
+        },
+        "B.fraction.wall": {
+          "n": 6,
+          "mean": 0.029337565104166668,
+          "standardError": 0.001190072513440406,
+          "halfWidth95": 0.0030591789817446657
+        },
+        "B.fraction.end": {
+          "n": 6,
+          "mean": 0.608154296875,
+          "standardError": 0.0027721878603443103,
+          "halfWidth95": 0.0071261362144195975
+        },
+        "B.fraction.source": {
+          "n": 6,
+          "mean": 0.0567626953125,
+          "standardError": 0.0008706161033393061,
+          "halfWidth95": 0.0022379900841541602
+        },
+        "B.radius": {
+          "n": 6,
+          "mean": 0.43902417375367603,
+          "standardError": 0.0020775354614441127,
+          "halfWidth95": 0.00534047526154993
+        },
+        "B.temperature": {
+          "n": 6,
+          "mean": 2.436755895845852,
+          "standardError": 0.03834270331701505,
+          "halfWidth95": 0.09856306297805918
+        },
+        "B.angularTransfer": {
+          "n": 6,
+          "mean": -0.00707334092863244,
+          "standardError": 0.00026835351033163354,
+          "halfWidth95": 0.0006898247032953112
+        },
+        "B.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.29215910434174414,
+          "standardError": 0.0023613877625494914,
+          "halfWidth95": 0.006070140877429997
+        },
+        "B.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.5443176603069657,
+          "standardError": 0.0037824806524158153,
+          "halfWidth95": 0.00972317668044835
+        },
+        "B.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.8604429851948483,
+          "standardError": 0.0018033775234345816,
+          "halfWidth95": 0.004635729800945514
+        },
+        "B.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.880875415579633,
+          "standardError": 0.10822793505785165,
+          "halfWidth95": 0.2782087817568824
+        },
+        "B.cdf.0": {
+          "n": 6,
+          "mean": 0.0023193359375,
+          "standardError": 0.00033799739025545554,
+          "halfWidth95": 0.0008688500074376494
+        },
+        "B.cdf.1": {
+          "n": 6,
+          "mean": 0.0084228515625,
+          "standardError": 0.0006327278488745171,
+          "halfWidth95": 0.001626478819215554
+        },
+        "B.cdf.2": {
+          "n": 6,
+          "mean": 0.019816080729166668,
+          "standardError": 0.000832507996340952,
+          "halfWidth95": 0.002140030070250117
+        },
+        "B.cdf.3": {
+          "n": 6,
+          "mean": 0.035970052083333336,
+          "standardError": 0.0016554422708165617,
+          "halfWidth95": 0.004255450103400179
+        },
+        "B.cdf.4": {
+          "n": 6,
+          "mean": 0.0557861328125,
+          "standardError": 0.0009323274118969403,
+          "halfWidth95": 0.0023966240631288606
+        },
+        "B.cdf.5": {
+          "n": 6,
+          "mean": 0.079345703125,
+          "standardError": 0.0010566899634198862,
+          "halfWidth95": 0.0027163081995478177
+        },
+        "B.cdf.6": {
+          "n": 6,
+          "mean": 0.10477701822916667,
+          "standardError": 0.0020614266990533372,
+          "halfWidth95": 0.005299066366905926
+        },
+        "B.cdf.7": {
+          "n": 6,
+          "mean": 0.1312255859375,
+          "standardError": 0.001911742172856398,
+          "halfWidth95": 0.004914290018185545
+        },
+        "B.cdf.8": {
+          "n": 6,
+          "mean": 0.158447265625,
+          "standardError": 0.001927525924857912,
+          "halfWidth95": 0.004954863446973101
+        },
+        "B.cdf.9": {
+          "n": 6,
+          "mean": 0.1846923828125,
+          "standardError": 0.0021852518063726766,
+          "halfWidth95": 0.005617368958929087
+        },
+        "B.cdf.10": {
+          "n": 6,
+          "mean": 0.21248372395833334,
+          "standardError": 0.0018674940410055366,
+          "halfWidth95": 0.004800546566916094
+        },
+        "B.cdf.11": {
+          "n": 6,
+          "mean": 0.2415771484375,
+          "standardError": 0.002257695847328013,
+          "halfWidth95": 0.0058035923066161385
+        },
+        "B.cdf.12": {
+          "n": 6,
+          "mean": 0.2671712239583333,
+          "standardError": 0.002985888529522956,
+          "halfWidth95": 0.00767547130799818
+        },
+        "B.cdf.13": {
+          "n": 6,
+          "mean": 0.2847086588541667,
+          "standardError": 0.0026169147001339123,
+          "halfWidth95": 0.0067269938236996325
+        },
+        "B.cdf.14": {
+          "n": 6,
+          "mean": 0.2928059895833333,
+          "standardError": 0.0026659937645369526,
+          "halfWidth95": 0.0068531555832309285
+        },
+        "B.cdf.15": {
+          "n": 6,
+          "mean": 0.2956136067708333,
+          "standardError": 0.002791768181316845,
+          "halfWidth95": 0.007176469035065817
+        },
+        "B.cdf.16": {
+          "n": 6,
+          "mean": 0.29833984375,
+          "standardError": 0.0027076505142601117,
+          "halfWidth95": 0.006960237674247786
+        },
+        "B.cdf.17": {
+          "n": 6,
+          "mean": 0.3004150390625,
+          "standardError": 0.002634570341458781,
+          "halfWidth95": 0.006772379097487796
+        },
+        "B.cdf.18": {
+          "n": 6,
+          "mean": 0.3034261067708333,
+          "standardError": 0.002656100898497329,
+          "halfWidth95": 0.00682772515986106
+        },
+        "B.cdf.19": {
+          "n": 6,
+          "mean": 0.3057454427083333,
+          "standardError": 0.002887105546204184,
+          "halfWidth95": 0.007421541549172643
+        }
+      },
+      "rz12-N4096-dt50": {
+        "A.fraction.active": {
+          "n": 6,
+          "mean": 0.19596354166666666,
+          "standardError": 0.0028004725859718266,
+          "halfWidth95": 0.00719884442099263
+        },
+        "A.fraction.wall": {
+          "n": 6,
+          "mean": 0.0005289713541666666,
+          "standardError": 0.0001716717375466226,
+          "halfWidth95": 0.00044129627844607223
+        },
+        "A.fraction.end": {
+          "n": 6,
+          "mean": 0.7253824869791666,
+          "standardError": 0.0031076692453011106,
+          "halfWidth95": 0.007988518623924619
+        },
+        "A.fraction.source": {
+          "n": 6,
+          "mean": 0.078125,
+          "standardError": 0.0016570417323208836,
+          "halfWidth95": 0.004259561650352881
+        },
+        "A.radius": {
+          "n": 6,
+          "mean": 0.30310242604884785,
+          "standardError": 0.0010301346266138691,
+          "halfWidth95": 0.002648045528750333
+        },
+        "A.temperature": {
+          "n": 6,
+          "mean": 2.6661317979194616,
+          "standardError": 0.0323014246019991,
+          "halfWidth95": 0.08303346065625604
+        },
+        "A.angularTransfer": {
+          "n": 6,
+          "mean": 0.007655671741659165,
+          "standardError": 0.0002297608107665663,
+          "halfWidth95": 0.0005906190044619415
+        },
+        "A.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.23556447970619374,
+          "standardError": 0.001452392305549027,
+          "halfWidth95": 0.003733493517582829
+        },
+        "A.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.4182464197332647,
+          "standardError": 0.0009516499769594029,
+          "halfWidth95": 0.0024462943010722556
+        },
+        "A.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.7655211749706465,
+          "standardError": 0.002178950289604212,
+          "halfWidth95": 0.005601170393351374
+        },
+        "A.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.637421659450078,
+          "standardError": 0.09409914834697176,
+          "halfWidth95": 0.24188957695605537
+        },
+        "A.cdf.0": {
+          "n": 6,
+          "mean": 0.0034586588541666665,
+          "standardError": 0.00035890424920572816,
+          "halfWidth95": 0.0009225928027317591
+        },
+        "A.cdf.1": {
+          "n": 6,
+          "mean": 0.012858072916666666,
+          "standardError": 0.0005519474270121477,
+          "halfWidth95": 0.0014188261208237405
+        },
+        "A.cdf.2": {
+          "n": 6,
+          "mean": 0.029052734375000003,
+          "standardError": 0.0006759947805109108,
+          "halfWidth95": 0.0017377000148752978
+        },
+        "A.cdf.3": {
+          "n": 6,
+          "mean": 0.0498046875,
+          "standardError": 0.0010085894130748485,
+          "halfWidth95": 0.00259266179064077
+        },
+        "A.cdf.4": {
+          "n": 6,
+          "mean": 0.07430013020833334,
+          "standardError": 0.0011938229701101727,
+          "halfWidth95": 0.003068819838151748
+        },
+        "A.cdf.5": {
+          "n": 6,
+          "mean": 0.100341796875,
+          "standardError": 0.0021863880055896573,
+          "halfWidth95": 0.005620289652184672
+        },
+        "A.cdf.6": {
+          "n": 6,
+          "mean": 0.12674967447916666,
+          "standardError": 0.001734849683471684,
+          "halfWidth95": 0.004459573369038008
+        },
+        "A.cdf.7": {
+          "n": 6,
+          "mean": 0.15096028645833334,
+          "standardError": 0.0023524370619592773,
+          "halfWidth95": 0.006047132367605403
+        },
+        "A.cdf.8": {
+          "n": 6,
+          "mean": 0.16825358072916666,
+          "standardError": 0.002078702867006345,
+          "halfWidth95": 0.005343476173274905
+        },
+        "A.cdf.9": {
+          "n": 6,
+          "mean": 0.1805419921875,
+          "standardError": 0.002243571316290556,
+          "halfWidth95": 0.00576728404137281
+        },
+        "A.cdf.10": {
+          "n": 6,
+          "mean": 0.18758138020833334,
+          "standardError": 0.002270784896660651,
+          "halfWidth95": 0.00583723878122773
+        },
+        "A.cdf.11": {
+          "n": 6,
+          "mean": 0.190185546875,
+          "standardError": 0.002625694304183216,
+          "halfWidth95": 0.0067495625158359
+        },
+        "A.cdf.12": {
+          "n": 6,
+          "mean": 0.19112141927083334,
+          "standardError": 0.0026702754913517468,
+          "halfWidth95": 0.0068641621131099555
+        },
+        "A.cdf.13": {
+          "n": 6,
+          "mean": 0.19222005208333334,
+          "standardError": 0.002761896084864223,
+          "halfWidth95": 0.007099680361622444
+        },
+        "A.cdf.14": {
+          "n": 6,
+          "mean": 0.19344075520833334,
+          "standardError": 0.0028011819554903524,
+          "halfWidth95": 0.007200667913508301
+        },
+        "A.cdf.15": {
+          "n": 6,
+          "mean": 0.19466145833333334,
+          "standardError": 0.0027705150603107415,
+          "halfWidth95": 0.0071218361447637065
+        },
+        "A.cdf.16": {
+          "n": 6,
+          "mean": 0.19559733072916666,
+          "standardError": 0.0027995856213104903,
+          "halfWidth95": 0.0071965644055995625
+        },
+        "A.cdf.17": {
+          "n": 6,
+          "mean": 0.1959228515625,
+          "standardError": 0.00280690944431066,
+          "halfWidth95": 0.007215390893174985
+        },
+        "A.cdf.18": {
+          "n": 6,
+          "mean": 0.19596354166666666,
+          "standardError": 0.0028004725859718258,
+          "halfWidth95": 0.007198844420992627
+        },
+        "A.cdf.19": {
+          "n": 6,
+          "mean": 0.19596354166666666,
+          "standardError": 0.0028004725859718258,
+          "halfWidth95": 0.007198844420992627
+        },
+        "B.fraction.active": {
+          "n": 6,
+          "mean": 0.3061930338541667,
+          "standardError": 0.0024972588027841556,
+          "halfWidth95": 0.0064194085277785
+        },
+        "B.fraction.wall": {
+          "n": 6,
+          "mean": 0.0294189453125,
+          "standardError": 0.0011687342623978737,
+          "halfWidth95": 0.003004327257703251
+        },
+        "B.fraction.end": {
+          "n": 6,
+          "mean": 0.6087239583333334,
+          "standardError": 0.0024116568542013705,
+          "halfWidth95": 0.006199361699586668
+        },
+        "B.fraction.source": {
+          "n": 6,
+          "mean": 0.0556640625,
+          "standardError": 0.0006847553374987835,
+          "halfWidth95": 0.0017602197449782977
+        },
+        "B.radius": {
+          "n": 6,
+          "mean": 0.4401621619335648,
+          "standardError": 0.0016548704402887147,
+          "halfWidth95": 0.004253980166138245
+        },
+        "B.temperature": {
+          "n": 6,
+          "mean": 2.451310202252338,
+          "standardError": 0.03268590135761123,
+          "halfWidth95": 0.08402178968365098
+        },
+        "B.angularTransfer": {
+          "n": 6,
+          "mean": -0.007427661961009674,
+          "standardError": 0.0002394347772911666,
+          "halfWidth95": 0.0006154867286786817
+        },
+        "B.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.2927012936953756,
+          "standardError": 0.0025747552660188443,
+          "halfWidth95": 0.006618619541233253
+        },
+        "B.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.5441939002489139,
+          "standardError": 0.002619276017847116,
+          "halfWidth95": 0.006733063784509475
+        },
+        "B.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.8597238575228306,
+          "standardError": 0.002069537486521964,
+          "halfWidth95": 0.005319915811178603
+        },
+        "B.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.976360542047937,
+          "standardError": 0.07811651792079112,
+          "halfWidth95": 0.20080491486986307
+        },
+        "B.cdf.0": {
+          "n": 6,
+          "mean": 0.00146484375,
+          "standardError": 0.0001667797976230403,
+          "halfWidth95": 0.00042872114573343017
+        },
+        "B.cdf.1": {
+          "n": 6,
+          "mean": 0.0081787109375,
+          "standardError": 0.0003715966815374631,
+          "halfWidth95": 0.0009552197408199349
+        },
+        "B.cdf.2": {
+          "n": 6,
+          "mean": 0.01904296875,
+          "standardError": 0.0007538109490175408,
+          "halfWidth95": 0.001937732856947408
+        },
+        "B.cdf.3": {
+          "n": 6,
+          "mean": 0.034952799479166664,
+          "standardError": 0.0009547878969425928,
+          "halfWidth95": 0.002454360581698484
+        },
+        "B.cdf.4": {
+          "n": 6,
+          "mean": 0.0546875,
+          "standardError": 0.0011927129531615415,
+          "halfWidth95": 0.0030659664485639016
+        },
+        "B.cdf.5": {
+          "n": 6,
+          "mean": 0.0772705078125,
+          "standardError": 0.0012396799685639923,
+          "halfWidth95": 0.0031866990129511643
+        },
+        "B.cdf.6": {
+          "n": 6,
+          "mean": 0.10392252604166667,
+          "standardError": 0.0016005234074139999,
+          "halfWidth95": 0.004114276661677094
+        },
+        "B.cdf.7": {
+          "n": 6,
+          "mean": 0.130859375,
+          "standardError": 0.0014207781798694788,
+          "halfWidth95": 0.0036522268151652445
+        },
+        "B.cdf.8": {
+          "n": 6,
+          "mean": 0.15889485677083334,
+          "standardError": 0.002323330122527244,
+          "halfWidth95": 0.005972310593026328
+        },
+        "B.cdf.9": {
+          "n": 6,
+          "mean": 0.18575032552083334,
+          "standardError": 0.0022415040525615854,
+          "halfWidth95": 0.005761969970441865
+        },
+        "B.cdf.10": {
+          "n": 6,
+          "mean": 0.21435546875,
+          "standardError": 0.002685546875,
+          "halfWidth95": 0.006903418457031249
+        },
+        "B.cdf.11": {
+          "n": 6,
+          "mean": 0.24186197916666666,
+          "standardError": 0.0029260683664380513,
+          "halfWidth95": 0.007521698673535059
+        },
+        "B.cdf.12": {
+          "n": 6,
+          "mean": 0.267333984375,
+          "standardError": 0.003239504765153738,
+          "halfWidth95": 0.008327412638218425
+        },
+        "B.cdf.13": {
+          "n": 6,
+          "mean": 0.2853190104166667,
+          "standardError": 0.003106550218967429,
+          "halfWidth95": 0.007985642074973731
+        },
+        "B.cdf.14": {
+          "n": 6,
+          "mean": 0.2930094401041667,
+          "standardError": 0.002715283304150858,
+          "halfWidth95": 0.0069798583865507205
+        },
+        "B.cdf.15": {
+          "n": 6,
+          "mean": 0.2958170572916667,
+          "standardError": 0.003049749773388677,
+          "halfWidth95": 0.007839631871977011
+        },
+        "B.cdf.16": {
+          "n": 6,
+          "mean": 0.2985026041666667,
+          "standardError": 0.002900836309518943,
+          "halfWidth95": 0.007456837602195824
+        },
+        "B.cdf.17": {
+          "n": 6,
+          "mean": 0.3011474609375,
+          "standardError": 0.002628530338461786,
+          "halfWidth95": 0.006756852774503774
+        },
+        "B.cdf.18": {
+          "n": 6,
+          "mean": 0.3037516276041667,
+          "standardError": 0.0025725029163531487,
+          "halfWidth95": 0.00661282969172491
+        },
+        "B.cdf.19": {
+          "n": 6,
+          "mean": 0.3061930338541667,
+          "standardError": 0.0024972588027841556,
+          "halfWidth95": 0.0064194085277785
+        }
+      },
+      "rz12-N4096-dt25": {
+        "A.fraction.active": {
+          "n": 6,
+          "mean": 0.19694010416666666,
+          "standardError": 0.0013602915435157494,
+          "halfWidth95": 0.003496740956513802
+        },
+        "A.fraction.wall": {
+          "n": 6,
+          "mean": 0.00048828125,
+          "standardError": 0.00018911051495153403,
+          "halfWidth95": 0.00048612408574514427
+        },
+        "A.fraction.end": {
+          "n": 6,
+          "mean": 0.724609375,
+          "standardError": 0.0022107873872405804,
+          "halfWidth95": 0.005683010263467666
+        },
+        "A.fraction.source": {
+          "n": 6,
+          "mean": 0.07796223958333333,
+          "standardError": 0.0017431329082669648,
+          "halfWidth95": 0.0044808660775987105
+        },
+        "A.radius": {
+          "n": 6,
+          "mean": 0.30154659071646855,
+          "standardError": 0.0018462355583418963,
+          "halfWidth95": 0.004745899894033628
+        },
+        "A.temperature": {
+          "n": 6,
+          "mean": 2.5864406210467745,
+          "standardError": 0.01973419910650842,
+          "halfWidth95": 0.05072837700760663
+        },
+        "A.angularTransfer": {
+          "n": 6,
+          "mean": 0.007352582502370429,
+          "standardError": 0.00017224976421322265,
+          "halfWidth95": 0.0004427821433907543
+        },
+        "A.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.23530230464271398,
+          "standardError": 0.00047833568483739093,
+          "halfWidth95": 0.00122960110140067
+        },
+        "A.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.4175301184234654,
+          "standardError": 0.0007820219276167762,
+          "halfWidth95": 0.0020102514907369877
+        },
+        "A.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.76667911246223,
+          "standardError": 0.0035669171631229207,
+          "halfWidth95": 0.009169053055014843
+        },
+        "A.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.740919803426735,
+          "standardError": 0.07631921236561798,
+          "halfWidth95": 0.196184793561235
+        },
+        "A.cdf.0": {
+          "n": 6,
+          "mean": 0.0037027994791666665,
+          "standardError": 0.0002034505208333332,
+          "halfWidth95": 0.0005229862467447913
+        },
+        "A.cdf.1": {
+          "n": 6,
+          "mean": 0.013509114583333334,
+          "standardError": 0.0005696614583333336,
+          "halfWidth95": 0.0014643614908854173
+        },
+        "A.cdf.2": {
+          "n": 6,
+          "mean": 0.030354817708333332,
+          "standardError": 0.0012152656675673888,
+          "halfWidth95": 0.0031239400502667135
+        },
+        "A.cdf.3": {
+          "n": 6,
+          "mean": 0.0499267578125,
+          "standardError": 0.0013442522633198698,
+          "halfWidth95": 0.0034555106715493176
+        },
+        "A.cdf.4": {
+          "n": 6,
+          "mean": 0.07523600260416667,
+          "standardError": 0.0019757968255548616,
+          "halfWidth95": 0.0050789477554284675
+        },
+        "A.cdf.5": {
+          "n": 6,
+          "mean": 0.10343424479166667,
+          "standardError": 0.0010579427083333324,
+          "halfWidth95": 0.0027195284830729143
+        },
+        "A.cdf.6": {
+          "n": 6,
+          "mean": 0.12801106770833334,
+          "standardError": 0.0007686014943435927,
+          "halfWidth95": 0.001975753166532741
+        },
+        "A.cdf.7": {
+          "n": 6,
+          "mean": 0.15132649739583334,
+          "standardError": 0.0009712924750188598,
+          "halfWidth95": 0.0024967869530189307
+        },
+        "A.cdf.8": {
+          "n": 6,
+          "mean": 0.16874186197916666,
+          "standardError": 0.0009610103314237242,
+          "halfWidth95": 0.0024703558597718596
+        },
+        "A.cdf.9": {
+          "n": 6,
+          "mean": 0.18172200520833334,
+          "standardError": 0.0014912798275149117,
+          "halfWidth95": 0.0038334570815729365
+        },
+        "A.cdf.10": {
+          "n": 6,
+          "mean": 0.18851725260416666,
+          "standardError": 0.0015304023662937234,
+          "halfWidth95": 0.003934024775552052
+        },
+        "A.cdf.11": {
+          "n": 6,
+          "mean": 0.19144694010416666,
+          "standardError": 0.0012801549103166464,
+          "halfWidth95": 0.0032907431696715854
+        },
+        "A.cdf.12": {
+          "n": 6,
+          "mean": 0.19278971354166666,
+          "standardError": 0.0012538891794766534,
+          "halfWidth95": 0.0032232249547574543
+        },
+        "A.cdf.13": {
+          "n": 6,
+          "mean": 0.19352213541666666,
+          "standardError": 0.0013675749698958328,
+          "halfWidth95": 0.0035154636012647697
+        },
+        "A.cdf.14": {
+          "n": 6,
+          "mean": 0.19441731770833334,
+          "standardError": 0.0014048402100937554,
+          "halfWidth95": 0.003611256956943226
+        },
+        "A.cdf.15": {
+          "n": 6,
+          "mean": 0.19559733072916666,
+          "standardError": 0.001306272760625921,
+          "halfWidth95": 0.003357881245555301
+        },
+        "A.cdf.16": {
+          "n": 6,
+          "mean": 0.196533203125,
+          "standardError": 0.0014095465556387347,
+          "halfWidth95": 0.00362335500408693
+        },
+        "A.cdf.17": {
+          "n": 6,
+          "mean": 0.1968994140625,
+          "standardError": 0.0013427734374999998,
+          "halfWidth95": 0.0034517092285156242
+        },
+        "A.cdf.18": {
+          "n": 6,
+          "mean": 0.19694010416666666,
+          "standardError": 0.0013602915435157494,
+          "halfWidth95": 0.003496740956513802
+        },
+        "A.cdf.19": {
+          "n": 6,
+          "mean": 0.19694010416666666,
+          "standardError": 0.0013602915435157494,
+          "halfWidth95": 0.003496740956513802
+        },
+        "B.fraction.active": {
+          "n": 6,
+          "mean": 0.3039957682291667,
+          "standardError": 0.002153809891355893,
+          "halfWidth95": 0.005536544938141414
+        },
+        "B.fraction.wall": {
+          "n": 6,
+          "mean": 0.0306396484375,
+          "standardError": 0.0009554812796751871,
+          "halfWidth95": 0.0024561429788700017
+        },
+        "B.fraction.end": {
+          "n": 6,
+          "mean": 0.6075439453125,
+          "standardError": 0.002048212289153945,
+          "halfWidth95": 0.0052650976426779255
+        },
+        "B.fraction.source": {
+          "n": 6,
+          "mean": 0.057820638020833336,
+          "standardError": 0.0007575356588444165,
+          "halfWidth95": 0.0019473075289835977
+        },
+        "B.radius": {
+          "n": 6,
+          "mean": 0.43980853814375687,
+          "standardError": 0.003261531402217755,
+          "halfWidth95": 0.008384033914975721
+        },
+        "B.temperature": {
+          "n": 6,
+          "mean": 2.3939658564903183,
+          "standardError": 0.030388719143482065,
+          "halfWidth95": 0.0781166944332904
+        },
+        "B.angularTransfer": {
+          "n": 6,
+          "mean": -0.007090329316135814,
+          "standardError": 0.00016342899864724565,
+          "halfWidth95": 0.000420107642200634
+        },
+        "B.impactTime.0.1": {
+          "n": 6,
+          "mean": 0.29101197730630396,
+          "standardError": 0.0024954560090559557,
+          "halfWidth95": 0.006414774298671076
+        },
+        "B.impactTime.0.5": {
+          "n": 6,
+          "mean": 0.5427559012982424,
+          "standardError": 0.0034078207399183425,
+          "halfWidth95": 0.008760082653260772
+        },
+        "B.impactTime.0.9": {
+          "n": 6,
+          "mean": 0.8600536535852603,
+          "standardError": 0.003028139682001278,
+          "halfWidth95": 0.0077840813600382084
+        },
+        "B.impactHamiltonianEV": {
+          "n": 6,
+          "mean": 15.918452447629809,
+          "standardError": 0.08793575304719618,
+          "halfWidth95": 0.22604606393956767
+        },
+        "B.cdf.0": {
+          "n": 6,
+          "mean": 0.0018717447916666667,
+          "standardError": 0.00020587745183387886,
+          "halfWidth95": 0.000529224871890036
+        },
+        "B.cdf.1": {
+          "n": 6,
+          "mean": 0.00927734375,
+          "standardError": 0.0006013331120413791,
+          "halfWidth95": 0.0015457760738175523
+        },
+        "B.cdf.2": {
+          "n": 6,
+          "mean": 0.01973470052083334,
+          "standardError": 0.0009230467395385068,
+          "halfWidth95": 0.002372767333816374
+        },
+        "B.cdf.3": {
+          "n": 6,
+          "mean": 0.035725911458333336,
+          "standardError": 0.0011305699861205898,
+          "halfWidth95": 0.0029062228560618377
+        },
+        "B.cdf.4": {
+          "n": 6,
+          "mean": 0.056193033854166664,
+          "standardError": 0.0013511320493216226,
+          "halfWidth95": 0.0034731957256092755
+        },
+        "B.cdf.5": {
+          "n": 6,
+          "mean": 0.07779947916666667,
+          "standardError": 0.0014048402100937554,
+          "halfWidth95": 0.003611256956943226
+        },
+        "B.cdf.6": {
+          "n": 6,
+          "mean": 0.10302734375,
+          "standardError": 0.0021348930895538705,
+          "halfWidth95": 0.0054879177479315675
+        },
+        "B.cdf.7": {
+          "n": 6,
+          "mean": 0.1290283203125,
+          "standardError": 0.0025843181783755886,
+          "halfWidth95": 0.006643201791605077
+        },
+        "B.cdf.8": {
+          "n": 6,
+          "mean": 0.157470703125,
+          "standardError": 0.002643792353922828,
+          "halfWidth95": 0.006796085036731651
+        },
+        "B.cdf.9": {
+          "n": 6,
+          "mean": 0.183837890625,
+          "standardError": 0.0027273906335486212,
+          "halfWidth95": 0.007010981269568682
+        },
+        "B.cdf.10": {
+          "n": 6,
+          "mean": 0.212890625,
+          "standardError": 0.002158033729683232,
+          "halfWidth95": 0.005547402660916582
+        },
+        "B.cdf.11": {
+          "n": 6,
+          "mean": 0.2401123046875,
+          "standardError": 0.0021084385429738957,
+          "halfWidth95": 0.005419914166674923
+        },
+        "B.cdf.12": {
+          "n": 6,
+          "mean": 0.2646484375,
+          "standardError": 0.0023603066463929027,
+          "halfWidth95": 0.00606736177969796
+        },
+        "B.cdf.13": {
+          "n": 6,
+          "mean": 0.28271484375,
+          "standardError": 0.0021589541962338033,
+          "halfWidth95": 0.005549768795663082
+        },
+        "B.cdf.14": {
+          "n": 6,
+          "mean": 0.2902425130208333,
+          "standardError": 0.0023104670985467568,
+          "halfWidth95": 0.005939245135116519
+        },
+        "B.cdf.15": {
+          "n": 6,
+          "mean": 0.2933349609375,
+          "standardError": 0.0022471107723523206,
+          "halfWidth95": 0.005776382503414973
+        },
+        "B.cdf.16": {
+          "n": 6,
+          "mean": 0.2958984375,
+          "standardError": 0.002219756135577125,
+          "halfWidth95": 0.005706065166504117
+        },
+        "B.cdf.17": {
+          "n": 6,
+          "mean": 0.2982177734375,
+          "standardError": 0.002307311896815998,
+          "halfWidth95": 0.005931134430341062
+        },
+        "B.cdf.18": {
+          "n": 6,
+          "mean": 0.3019205729166667,
+          "standardError": 0.0022041871116185155,
+          "halfWidth95": 0.005666043713758546
+        },
+        "B.cdf.19": {
+          "n": 6,
+          "mean": 0.3039957682291667,
+          "standardError": 0.002153809891355893,
+          "halfWidth95": 0.005536544938141414
+        }
+      }
+    },
+    "comparisons": [
+      {
+        "kind": "timestep",
+        "coarse": "rz12-N4096-dt100",
+        "fine": "rz12-N4096-dt50",
+        "status": "unknown",
+        "observables": {
+          "A.fraction.active": {
+            "n": 6,
+            "mean": 0.0032552083333333335,
+            "standardError": 0.0030698789247819032,
+            "halfWidth95": 0.007891375506223715,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.fraction.wall": {
+            "n": 6,
+            "mean": -0.000040690104166666664,
+            "standardError": 0.00004069010416666667,
+            "halfWidth95": 0.00010459724934895834,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.fraction.end": {
+            "n": 6,
+            "mean": -0.0029296875,
+            "standardError": 0.001172552972286971,
+            "halfWidth95": 0.003014143564607387,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.fraction.source": {
+            "n": 6,
+            "mean": -0.0002848307291666667,
+            "standardError": 0.0025879034205986075,
+            "halfWidth95": 0.00665241795072921,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.radius": {
+            "n": 6,
+            "mean": -0.0005256595060691519,
+            "standardError": 0.0012467844973462268,
+            "halfWidth95": 0.0032049617867572584,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.temperature": {
+            "n": 6,
+            "mean": 0.052428250024562306,
+            "standardError": 0.03392964834365669,
+            "halfWidth95": 0.0872189432985337,
+            "tolerance": 0.1,
+            "status": "unknown"
+          },
+          "A.angularTransfer": {
+            "n": 6,
+            "mean": 0.00014096388205841172,
+            "standardError": 0.00031408789808872226,
+            "halfWidth95": 0.0008073886972447038,
+            "tolerance": 0.001,
+            "status": "pass"
+          },
+          "A.impactTime.0.1": {
+            "n": 6,
+            "mean": -0.0001634266972186151,
+            "standardError": 0.0008719251029469413,
+            "halfWidth95": 0.002241354974983554,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactTime.0.5": {
+            "n": 6,
+            "mean": 0.0011424989747667313,
+            "standardError": 0.0012353054213070024,
+            "halfWidth95": 0.0031754538805141967,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactTime.0.9": {
+            "n": 6,
+            "mean": -0.0033567609233244866,
+            "standardError": 0.004048364565068271,
+            "halfWidth95": 0.010406653080402327,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactHamiltonianEV": {
+            "n": 6,
+            "mean": -0.10744775608577051,
+            "standardError": 0.04768516164471393,
+            "halfWidth95": 0.12257861819099203,
+            "tolerance": null,
+            "status": "unknown"
+          },
+          "A.cdf.0": {
+            "n": 6,
+            "mean": 0.0002848307291666667,
+            "standardError": 0.00039070976185409504,
+            "halfWidth95": 0.0010043514810464233,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.1": {
+            "n": 6,
+            "mean": -0.0004069010416666667,
+            "standardError": 0.0007396202973633966,
+            "halfWidth95": 0.0019012546232369946,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.2": {
+            "n": 6,
+            "mean": 0.0007324218750000005,
+            "standardError": 0.0010453477033418898,
+            "halfWidth95": 0.0026871519899520015,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.3": {
+            "n": 6,
+            "mean": 0.0006103515625000012,
+            "standardError": 0.0009063943331432168,
+            "halfWidth95": 0.0023299609576799564,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.4": {
+            "n": 6,
+            "mean": 0.001993815104166669,
+            "standardError": 0.0012971147471380884,
+            "halfWidth95": 0.0033343398209277216,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.5": {
+            "n": 6,
+            "mean": 0.0019124348958333356,
+            "standardError": 0.0013198906439620287,
+            "halfWidth95": 0.0033928871313371996,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.6": {
+            "n": 6,
+            "mean": 0.002360026041666669,
+            "standardError": 0.001399171699240718,
+            "halfWidth95": 0.003596685584977603,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.7": {
+            "n": 6,
+            "mean": 0.0031738281250000048,
+            "standardError": 0.002362830589348628,
+            "halfWidth95": 0.006073849782028975,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.8": {
+            "n": 6,
+            "mean": 0.003133138020833338,
+            "standardError": 0.001920728084524528,
+            "halfWidth95": 0.00493738904097323,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.9": {
+            "n": 6,
+            "mean": 0.003255208333333338,
+            "standardError": 0.0018939047145558412,
+            "halfWidth95": 0.004868437368952383,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.10": {
+            "n": 6,
+            "mean": 0.003011067708333338,
+            "standardError": 0.002665993764536953,
+            "halfWidth95": 0.006853155583230929,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.11": {
+            "n": 6,
+            "mean": 0.0028483072916666713,
+            "standardError": 0.002930817562722837,
+            "halfWidth95": 0.0075339068720191955,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.12": {
+            "n": 6,
+            "mean": 0.002888997395833338,
+            "standardError": 0.0029272563878644524,
+            "halfWidth95": 0.0075247525800293796,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.13": {
+            "n": 6,
+            "mean": 0.0029703776041666713,
+            "standardError": 0.0029421505919928394,
+            "halfWidth95": 0.007563039353066137,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.14": {
+            "n": 6,
+            "mean": 0.003377278645833338,
+            "standardError": 0.003030634359828364,
+            "halfWidth95": 0.007790494133956316,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.15": {
+            "n": 6,
+            "mean": 0.0033365885416666713,
+            "standardError": 0.0029931990217110607,
+            "halfWidth95": 0.007694263527628062,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.16": {
+            "n": 6,
+            "mean": 0.0030517578125000048,
+            "standardError": 0.00305110670137407,
+            "halfWidth95": 0.007843119966631559,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.17": {
+            "n": 6,
+            "mean": 0.0032145182291666713,
+            "standardError": 0.0030684223822843863,
+            "halfWidth95": 0.007887631344297362,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.18": {
+            "n": 6,
+            "mean": 0.003255208333333338,
+            "standardError": 0.0030698789247819037,
+            "halfWidth95": 0.007891375506223715,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.19": {
+            "n": 6,
+            "mean": 0.003255208333333338,
+            "standardError": 0.0030698789247819037,
+            "halfWidth95": 0.007891375506223715,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "B.fraction.active": {
+            "n": 6,
+            "mean": 0.0004475911458333333,
+            "standardError": 0.002021524343950343,
+            "halfWidth95": 0.00519649409112056,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.wall": {
+            "n": 6,
+            "mean": 0.00008138020833333333,
+            "standardError": 0.0004442494812485736,
+            "halfWidth95": 0.0011419797200069208,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.end": {
+            "n": 6,
+            "mean": 0.0005696614583333334,
+            "standardError": 0.0017109209018252472,
+            "halfWidth95": 0.004398062473655748,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.source": {
+            "n": 6,
+            "mean": -0.0010986328125,
+            "standardError": 0.0006926885233940971,
+            "halfWidth95": 0.0017806126498434447,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.radius": {
+            "n": 6,
+            "mean": 0.001137988179888814,
+            "standardError": 0.001313998232840557,
+            "halfWidth95": 0.0033777402053717445,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.temperature": {
+            "n": 6,
+            "mean": 0.014554306406486361,
+            "standardError": 0.03795388865051446,
+            "halfWidth95": 0.09756358299501676,
+            "tolerance": 0.1,
+            "status": "unknown"
+          },
+          "B.angularTransfer": {
+            "n": 6,
+            "mean": -0.00035432103237723376,
+            "standardError": 0.00029377423921217785,
+            "halfWidth95": 0.0007551707713825185,
+            "tolerance": 0.001,
+            "status": "unknown"
+          },
+          "B.impactTime.0.1": {
+            "n": 6,
+            "mean": 0.0005421893536315577,
+            "standardError": 0.0008507144952252847,
+            "halfWidth95": 0.002186831368565203,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactTime.0.5": {
+            "n": 6,
+            "mean": -0.0001237600580518139,
+            "standardError": 0.0033881366619051075,
+            "halfWidth95": 0.008709483116633355,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactTime.0.9": {
+            "n": 6,
+            "mean": -0.0007191276720174833,
+            "standardError": 0.0029422062382096627,
+            "halfWidth95": 0.007563182396229471,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactHamiltonianEV": {
+            "n": 6,
+            "mean": 0.0954851264683052,
+            "standardError": 0.07488655817697999,
+            "halfWidth95": 0.19250203849169759,
+            "tolerance": null,
+            "status": "unknown"
+          },
+          "B.cdf.0": {
+            "n": 6,
+            "mean": -0.0008544921875000001,
+            "standardError": 0.00032602906289078994,
+            "halfWidth95": 0.0008380844405439325,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.1": {
+            "n": 6,
+            "mean": -0.000244140625,
+            "standardError": 0.0006520581257815797,
+            "halfWidth95": 0.0016761688810878646,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.2": {
+            "n": 6,
+            "mean": -0.0007731119791666661,
+            "standardError": 0.0005289713541666668,
+            "halfWidth95": 0.0013597642415364587,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.3": {
+            "n": 6,
+            "mean": -0.0010172526041666667,
+            "standardError": 0.0013062727606259214,
+            "halfWidth95": 0.0033578812455553023,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.4": {
+            "n": 6,
+            "mean": -0.001098632812499999,
+            "standardError": 0.0013158704080285027,
+            "halfWidth95": 0.0033825527852107246,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.5": {
+            "n": 6,
+            "mean": -0.0020751953125,
+            "standardError": 0.0011738231148932855,
+            "halfWidth95": 0.0030174085703286117,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.6": {
+            "n": 6,
+            "mean": -0.0008544921875,
+            "standardError": 0.001829969296362835,
+            "halfWidth95": 0.004704086133782969,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.7": {
+            "n": 6,
+            "mean": -0.0003662109375,
+            "standardError": 0.001524331898076655,
+            "halfWidth95": 0.003918420139221684,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.8": {
+            "n": 6,
+            "mean": 0.0004475911458333333,
+            "standardError": 0.0008396371197884855,
+            "halfWidth95": 0.0021583560666601246,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.9": {
+            "n": 6,
+            "mean": 0.0010579427083333333,
+            "standardError": 0.0014231069442250661,
+            "halfWidth95": 0.003658213094899959,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.10": {
+            "n": 6,
+            "mean": 0.0018717447916666667,
+            "standardError": 0.0016385536641245317,
+            "halfWidth95": 0.0042120365550325665,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.11": {
+            "n": 6,
+            "mean": 0.0002848307291666667,
+            "standardError": 0.0020939398026354095,
+            "halfWidth95": 0.005382643965738136,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.12": {
+            "n": 6,
+            "mean": 0.00016276041666666666,
+            "standardError": 0.0020712821816851633,
+            "halfWidth95": 0.0053244006931606105,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.13": {
+            "n": 6,
+            "mean": 0.0006103515625,
+            "standardError": 0.002229357298308488,
+            "halfWidth95": 0.00573074574260043,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.14": {
+            "n": 6,
+            "mean": 0.00020345052083333334,
+            "standardError": 0.0018767800535252307,
+            "halfWidth95": 0.004824417023550995,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.15": {
+            "n": 6,
+            "mean": 0.00020345052083333334,
+            "standardError": 0.0019145115608872945,
+            "halfWidth95": 0.004921408957208783,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.16": {
+            "n": 6,
+            "mean": 0.00016276041666666666,
+            "standardError": 0.001965967974502297,
+            "halfWidth95": 0.005053681887832063,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.17": {
+            "n": 6,
+            "mean": 0.000732421875,
+            "standardError": 0.0018731595649538228,
+            "halfWidth95": 0.004815110260798127,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.18": {
+            "n": 6,
+            "mean": 0.0003255208333333333,
+            "standardError": 0.0018770446931430332,
+            "halfWidth95": 0.0048250973013890044,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.19": {
+            "n": 6,
+            "mean": 0.0004475911458333333,
+            "standardError": 0.002021524343950343,
+            "halfWidth95": 0.00519649409112056,
+            "tolerance": 0.01,
+            "status": "pass"
+          }
+        }
+      },
+      {
+        "kind": "timestep",
+        "coarse": "rz12-N4096-dt50",
+        "fine": "rz12-N4096-dt25",
+        "status": "unknown",
+        "observables": {
+          "A.fraction.active": {
+            "n": 6,
+            "mean": 0.0009765625,
+            "standardError": 0.0031819557391400584,
+            "halfWidth95": 0.008179478147830129,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.fraction.wall": {
+            "n": 6,
+            "mean": -0.000040690104166666664,
+            "standardError": 0.00007502884486729239,
+            "halfWidth95": 0.00019286779809665422,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.fraction.end": {
+            "n": 6,
+            "mean": -0.0007731119791666666,
+            "standardError": 0.0015042135962212654,
+            "halfWidth95": 0.003866704394601653,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.fraction.source": {
+            "n": 6,
+            "mean": -0.00016276041666666666,
+            "standardError": 0.0019178813457751862,
+            "halfWidth95": 0.00493007126558547,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.radius": {
+            "n": 6,
+            "mean": -0.0015558353323792684,
+            "standardError": 0.0022993461396602927,
+            "halfWidth95": 0.005910657798380234,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.temperature": {
+            "n": 6,
+            "mean": -0.07969117687268727,
+            "standardError": 0.021009416842045582,
+            "halfWidth95": 0.05400642876465921,
+            "tolerance": 0.1,
+            "status": "unknown"
+          },
+          "A.angularTransfer": {
+            "n": 6,
+            "mean": -0.0003030892392887354,
+            "standardError": 0.00032511489214143906,
+            "halfWidth95": 0.0008357344896707246,
+            "tolerance": 0.001,
+            "status": "unknown"
+          },
+          "A.impactTime.0.1": {
+            "n": 6,
+            "mean": -0.00026217506347978964,
+            "standardError": 0.001033046269430634,
+            "halfWidth95": 0.002655530145365538,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactTime.0.5": {
+            "n": 6,
+            "mean": -0.0007163013097993923,
+            "standardError": 0.0008450504751584889,
+            "halfWidth95": 0.0021722715405338585,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactTime.0.9": {
+            "n": 6,
+            "mean": 0.0011579374915832903,
+            "standardError": 0.004712443674327659,
+            "halfWidth95": 0.012113722885240543,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "A.impactHamiltonianEV": {
+            "n": 6,
+            "mean": 0.10349814397665735,
+            "standardError": 0.026069110664910276,
+            "halfWidth95": 0.06701278663122638,
+            "tolerance": null,
+            "status": "unknown"
+          },
+          "A.cdf.0": {
+            "n": 6,
+            "mean": 0.00024414062500000005,
+            "standardError": 0.00044125786822024594,
+            "halfWidth95": 0.0011342895334053363,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.1": {
+            "n": 6,
+            "mean": 0.0006510416666666664,
+            "standardError": 0.0009553079811737759,
+            "halfWidth95": 0.002455697500861647,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.2": {
+            "n": 6,
+            "mean": 0.001302083333333331,
+            "standardError": 0.0013646662640790746,
+            "halfWidth95": 0.003507986534448916,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.3": {
+            "n": 6,
+            "mean": 0.00012207031249999538,
+            "standardError": 0.00216240245621147,
+            "halfWidth95": 0.005558632830692993,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.4": {
+            "n": 6,
+            "mean": 0.000935872395833331,
+            "standardError": 0.00290477189152391,
+            "halfWidth95": 0.007466954338457315,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.5": {
+            "n": 6,
+            "mean": 0.0030924479166666665,
+            "standardError": 0.002786247269191876,
+            "halfWidth95": 0.0071622770777337915,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.6": {
+            "n": 6,
+            "mean": 0.001261393229166669,
+            "standardError": 0.001908274785994129,
+            "halfWidth95": 0.00490537681593036,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.7": {
+            "n": 6,
+            "mean": 0.0003662109375000046,
+            "standardError": 0.0027337573125805624,
+            "halfWidth95": 0.007027347340087967,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.8": {
+            "n": 6,
+            "mean": 0.0004882812500000047,
+            "standardError": 0.0023484923809150684,
+            "halfWidth95": 0.006036992241517418,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.9": {
+            "n": 6,
+            "mean": 0.001180013020833338,
+            "standardError": 0.002720400507773731,
+            "halfWidth95": 0.006993012578074013,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.10": {
+            "n": 6,
+            "mean": 0.0009358723958333379,
+            "standardError": 0.0031457950850765732,
+            "halfWidth95": 0.008086524221386308,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.11": {
+            "n": 6,
+            "mean": 0.0012613932291666713,
+            "standardError": 0.003279985860494307,
+            "halfWidth95": 0.008431472613241175,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.12": {
+            "n": 6,
+            "mean": 0.001668294270833338,
+            "standardError": 0.0033005167938572077,
+            "halfWidth95": 0.008484249060987048,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.13": {
+            "n": 6,
+            "mean": 0.001302083333333338,
+            "standardError": 0.0033891705950053023,
+            "halfWidth95": 0.00871214092644992,
+            "tolerance": 0.01,
+            "status": "unknown"
+          },
+          "A.cdf.14": {
+            "n": 6,
+            "mean": 0.0009765625000000046,
+            "standardError": 0.0033764451312052585,
+            "halfWidth95": 0.008679429078263875,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.15": {
+            "n": 6,
+            "mean": 0.0009358723958333379,
+            "standardError": 0.0032225432199506844,
+            "halfWidth95": 0.00828381159542727,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.16": {
+            "n": 6,
+            "mean": 0.0009358723958333379,
+            "standardError": 0.003258106213367151,
+            "halfWidth95": 0.008375229186169758,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.17": {
+            "n": 6,
+            "mean": 0.0009765625000000046,
+            "standardError": 0.0032117872266275026,
+            "halfWidth95": 0.00825616243259858,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.18": {
+            "n": 6,
+            "mean": 0.0009765625000000046,
+            "standardError": 0.003181955739140056,
+            "halfWidth95": 0.008179478147830122,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "A.cdf.19": {
+            "n": 6,
+            "mean": 0.0009765625000000046,
+            "standardError": 0.003181955739140056,
+            "halfWidth95": 0.008179478147830122,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.active": {
+            "n": 6,
+            "mean": -0.002197265625,
+            "standardError": 0.0015311594826030908,
+            "halfWidth95": 0.003935971005108818,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.wall": {
+            "n": 6,
+            "mean": 0.001220703125,
+            "standardError": 0.0009003461384075085,
+            "halfWidth95": 0.0023144135771598503,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.end": {
+            "n": 6,
+            "mean": -0.0011800130208333333,
+            "standardError": 0.0015381720517118978,
+            "halfWidth95": 0.003953997389033673,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.fraction.source": {
+            "n": 6,
+            "mean": 0.0021565755208333335,
+            "standardError": 0.0008490495067231402,
+            "halfWidth95": 0.002182551379091383,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.radius": {
+            "n": 6,
+            "mean": -0.00035362378980797565,
+            "standardError": 0.003637902373435569,
+            "halfWidth95": 0.009351526358910752,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.temperature": {
+            "n": 6,
+            "mean": -0.0573443457620196,
+            "standardError": 0.02860565402979567,
+            "halfWidth95": 0.07353317934722021,
+            "tolerance": 0.1,
+            "status": "unknown"
+          },
+          "B.angularTransfer": {
+            "n": 6,
+            "mean": 0.00033733264487385996,
+            "standardError": 0.0002797121636873494,
+            "halfWidth95": 0.000719023053155754,
+            "tolerance": 0.001,
+            "status": "unknown"
+          },
+          "B.impactTime.0.1": {
+            "n": 6,
+            "mean": -0.0016893163890716878,
+            "standardError": 0.002201614733030665,
+            "halfWidth95": 0.005659431203663433,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactTime.0.5": {
+            "n": 6,
+            "mean": -0.001437998950671519,
+            "standardError": 0.0014521451950673075,
+            "halfWidth95": 0.0037328582998265095,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactTime.0.9": {
+            "n": 6,
+            "mean": 0.00032979606242953635,
+            "standardError": 0.001231123943461312,
+            "halfWidth95": 0.0031647050488306664,
+            "tolerance": 0.02,
+            "status": "pass"
+          },
+          "B.impactHamiltonianEV": {
+            "n": 6,
+            "mean": -0.0579080944181302,
+            "standardError": 0.035029290673840426,
+            "halfWidth95": 0.09004566407894207,
+            "tolerance": null,
+            "status": "unknown"
+          },
+          "B.cdf.0": {
+            "n": 6,
+            "mean": 0.0004069010416666666,
+            "standardError": 0.00024950699408782376,
+            "halfWidth95": 0.0006413781878762662,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.1": {
+            "n": 6,
+            "mean": 0.0010986328125000002,
+            "standardError": 0.000712483607767278,
+            "halfWidth95": 0.0018314975374216249,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.2": {
+            "n": 6,
+            "mean": 0.0006917317708333351,
+            "standardError": 0.0008537167860812279,
+            "halfWidth95": 0.002194549003398255,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.3": {
+            "n": 6,
+            "mean": 0.0007731119791666666,
+            "standardError": 0.00153558652465354,
+            "halfWidth95": 0.003947351079716947,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.4": {
+            "n": 6,
+            "mean": 0.0015055338541666654,
+            "standardError": 0.0009630755422541685,
+            "halfWidth95": 0.002475664653558805,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.5": {
+            "n": 6,
+            "mean": 0.0005289713541666644,
+            "standardError": 0.0013213950790749612,
+            "halfWidth95": 0.003396754405158672,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.6": {
+            "n": 6,
+            "mean": -0.000895182291666669,
+            "standardError": 0.0022203527640344985,
+            "halfWidth95": 0.005707598848877329,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.7": {
+            "n": 6,
+            "mean": -0.0018310546875,
+            "standardError": 0.002376037304205418,
+            "halfWidth95": 0.0061077987255189715,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.8": {
+            "n": 6,
+            "mean": -0.0014241536458333333,
+            "standardError": 0.0026305452137356305,
+            "halfWidth95": 0.006762032176614964,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.9": {
+            "n": 6,
+            "mean": -0.0019124348958333333,
+            "standardError": 0.0028613563625893824,
+            "halfWidth95": 0.007355351161257739,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.10": {
+            "n": 6,
+            "mean": -0.00146484375,
+            "standardError": 0.0021311672698042182,
+            "halfWidth95": 0.005478340222747867,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.11": {
+            "n": 6,
+            "mean": -0.0017496744791666667,
+            "standardError": 0.0026161553670972864,
+            "halfWidth95": 0.006725041895863677,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.12": {
+            "n": 6,
+            "mean": -0.002685546875,
+            "standardError": 0.0019500708542691267,
+            "halfWidth95": 0.00501281703670884,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.13": {
+            "n": 6,
+            "mean": -0.0026041666666666665,
+            "standardError": 0.0018696206243944895,
+            "halfWidth95": 0.004806013123897235,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.14": {
+            "n": 6,
+            "mean": -0.0027669270833333335,
+            "standardError": 0.0016697822695868482,
+            "halfWidth95": 0.0042923122461190994,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.15": {
+            "n": 6,
+            "mean": -0.0024820963541666665,
+            "standardError": 0.0018820657757462403,
+            "halfWidth95": 0.004838004405949322,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.16": {
+            "n": 6,
+            "mean": -0.0026041666666666665,
+            "standardError": 0.0020731997400483394,
+            "halfWidth95": 0.00532932993417294,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.17": {
+            "n": 6,
+            "mean": -0.0029296875,
+            "standardError": 0.0016558422810364424,
+            "halfWidth95": 0.00425647836247122,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.18": {
+            "n": 6,
+            "mean": -0.0018310546875,
+            "standardError": 0.0015844080774188832,
+            "halfWidth95": 0.004072850884467587,
+            "tolerance": 0.01,
+            "status": "pass"
+          },
+          "B.cdf.19": {
+            "n": 6,
+            "mean": -0.002197265625,
+            "standardError": 0.0015311594826030908,
+            "halfWidth95": 0.003935971005108818,
+            "tolerance": 0.01,
+            "status": "pass"
+          }
+        }
+      }
+    ],
+    "physicalEffect": null,
+    "inference": "Approximate pointwise 95% Student-t intervals across independent whole-run seeds; refinement differences are paired by seed. Intervals are withheld when no sampling spread is observed above floating resolution; identical finite samples cannot bound rare tails. No independent-ion confidence interval, simultaneous band or experimental validation is implied."
+  },
+  "runs": [
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 101,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 101,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28218.087917,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.190185546875,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0.7255859375,
+        "A.fraction.source": 0.084228515625,
+        "A.radius": 0.3038294505798338,
+        "A.temperature": 2.578715185203661,
+        "A.angularTransfer": 0.00808322323015827,
+        "A.impactTime.0.1": 0.23260159193219218,
+        "A.impactTime.0.5": 0.41812923181149353,
+        "A.impactTime.0.9": 0.7770427977055082,
+        "A.impactHamiltonianEV": 15.437959107263701,
+        "A.cdf.0": 0.00341796875,
+        "A.cdf.1": 0.012939453125,
+        "A.cdf.2": 0.027587890625000007,
+        "A.cdf.3": 0.04785156250000001,
+        "A.cdf.4": 0.06787109375000001,
+        "A.cdf.5": 0.09497070312500001,
+        "A.cdf.6": 0.12207031250000001,
+        "A.cdf.7": 0.144287109375,
+        "A.cdf.8": 0.163330078125,
+        "A.cdf.9": 0.177001953125,
+        "A.cdf.10": 0.18359375,
+        "A.cdf.11": 0.1865234375,
+        "A.cdf.12": 0.187255859375,
+        "A.cdf.13": 0.187744140625,
+        "A.cdf.14": 0.1884765625,
+        "A.cdf.15": 0.189208984375,
+        "A.cdf.16": 0.18994140625,
+        "A.cdf.17": 0.190185546875,
+        "A.cdf.18": 0.190185546875,
+        "A.cdf.19": 0.190185546875,
+        "B.fraction.active": 0.300048828125,
+        "B.fraction.wall": 0.023681640625,
+        "B.fraction.end": 0.61767578125,
+        "B.fraction.source": 0.05859375,
+        "B.radius": 0.4330286506397965,
+        "B.temperature": 2.3932807060033428,
+        "B.angularTransfer": -0.007686434244033259,
+        "B.impactTime.0.1": 0.2965585160669789,
+        "B.impactTime.0.5": 0.5388574227625079,
+        "B.impactTime.0.9": 0.8548187520616299,
+        "B.impactHamiltonianEV": 16.015048562710835,
+        "B.cdf.0": 0.001708984375,
+        "B.cdf.1": 0.010498046875,
+        "B.cdf.2": 0.021484375,
+        "B.cdf.3": 0.037841796875,
+        "B.cdf.4": 0.05859375,
+        "B.cdf.5": 0.079833984375,
+        "B.cdf.6": 0.10400390625,
+        "B.cdf.7": 0.1279296875,
+        "B.cdf.8": 0.155517578125,
+        "B.cdf.9": 0.182861328125,
+        "B.cdf.10": 0.212646484375,
+        "B.cdf.11": 0.240478515625,
+        "B.cdf.12": 0.26416015625,
+        "B.cdf.13": 0.28271484375,
+        "B.cdf.14": 0.289794921875,
+        "B.cdf.15": 0.292236328125,
+        "B.cdf.16": 0.29443359375,
+        "B.cdf.17": 0.295654296875,
+        "B.cdf.18": 0.298828125,
+        "B.cdf.19": 0.300048828125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.000407444163570223,
+        "maxEnergyResidual": 0.0000010468657054623424,
+        "unresolvedExposure": 0.2342955113172756,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03879294205059288,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 202,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 202,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28716.161125,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.185791015625,
+        "A.fraction.wall": 0.000244140625,
+        "A.fraction.end": 0.735107421875,
+        "A.fraction.source": 0.078857421875,
+        "A.radius": 0.30442370547687436,
+        "A.temperature": 2.4986530878306557,
+        "A.angularTransfer": 0.0076321416933169154,
+        "A.impactTime.0.1": 0.23750006897453865,
+        "A.impactTime.0.5": 0.41714329394625077,
+        "A.impactTime.0.9": 0.7621262434136528,
+        "A.impactHamiltonianEV": 15.817805586539182,
+        "A.cdf.0": 0.00244140625,
+        "A.cdf.1": 0.011474609375,
+        "A.cdf.2": 0.025146484375000007,
+        "A.cdf.3": 0.04541015625000001,
+        "A.cdf.4": 0.06982421875,
+        "A.cdf.5": 0.096435546875,
+        "A.cdf.6": 0.1201171875,
+        "A.cdf.7": 0.143310546875,
+        "A.cdf.8": 0.160400390625,
+        "A.cdf.9": 0.1708984375,
+        "A.cdf.10": 0.1767578125,
+        "A.cdf.11": 0.1796875,
+        "A.cdf.12": 0.181396484375,
+        "A.cdf.13": 0.1826171875,
+        "A.cdf.14": 0.18359375,
+        "A.cdf.15": 0.184814453125,
+        "A.cdf.16": 0.185791015625,
+        "A.cdf.17": 0.185791015625,
+        "A.cdf.18": 0.185791015625,
+        "A.cdf.19": 0.185791015625,
+        "B.fraction.active": 0.31298828125,
+        "B.fraction.wall": 0.03173828125,
+        "B.fraction.end": 0.599853515625,
+        "B.fraction.source": 0.055419921875,
+        "B.radius": 0.4432791002761488,
+        "B.temperature": 2.381024636248782,
+        "B.angularTransfer": -0.007070768951479616,
+        "B.impactTime.0.1": 0.2857327161349802,
+        "B.impactTime.0.5": 0.537245847836876,
+        "B.impactTime.0.9": 0.8569590238429644,
+        "B.impactHamiltonianEV": 16.28154840278216,
+        "B.cdf.0": 0.001220703125,
+        "B.cdf.1": 0.00830078125,
+        "B.cdf.2": 0.019775390625,
+        "B.cdf.3": 0.039794921875,
+        "B.cdf.4": 0.057861328125,
+        "B.cdf.5": 0.079833984375,
+        "B.cdf.6": 0.104736328125,
+        "B.cdf.7": 0.13134765625,
+        "B.cdf.8": 0.162353515625,
+        "B.cdf.9": 0.188720703125,
+        "B.cdf.10": 0.21240234375,
+        "B.cdf.11": 0.24365234375,
+        "B.cdf.12": 0.2705078125,
+        "B.cdf.13": 0.289306640625,
+        "B.cdf.14": 0.298095703125,
+        "B.cdf.15": 0.2998046875,
+        "B.cdf.16": 0.302734375,
+        "B.cdf.17": 0.305419921875,
+        "B.cdf.18": 0.30908203125,
+        "B.cdf.19": 0.31298828125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0005722605998090747,
+        "maxEnergyResidual": 0.0000010819992892344056,
+        "unresolvedExposure": 0.23762075867004104,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03877510119237847,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 303,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 303,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28599.728625,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.18994140625,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.728759765625,
+        "A.fraction.source": 0.080322265625,
+        "A.radius": 0.3007715959342296,
+        "A.temperature": 2.6582533488316997,
+        "A.angularTransfer": 0.008163616912745477,
+        "A.impactTime.0.1": 0.23199109456759465,
+        "A.impactTime.0.5": 0.4144136283219096,
+        "A.impactTime.0.9": 0.7621217273451942,
+        "A.impactHamiltonianEV": 15.989810339554948,
+        "A.cdf.0": 0.00341796875,
+        "A.cdf.1": 0.014648437500000003,
+        "A.cdf.2": 0.029052734375000007,
+        "A.cdf.3": 0.050292968750000014,
+        "A.cdf.4": 0.07470703125000001,
+        "A.cdf.5": 0.09448242187500001,
+        "A.cdf.6": 0.12133789062500001,
+        "A.cdf.7": 0.14794921875,
+        "A.cdf.8": 0.162841796875,
+        "A.cdf.9": 0.176025390625,
+        "A.cdf.10": 0.182861328125,
+        "A.cdf.11": 0.185546875,
+        "A.cdf.12": 0.18603515625,
+        "A.cdf.13": 0.186767578125,
+        "A.cdf.14": 0.187255859375,
+        "A.cdf.15": 0.1884765625,
+        "A.cdf.16": 0.18994140625,
+        "A.cdf.17": 0.18994140625,
+        "A.cdf.18": 0.18994140625,
+        "A.cdf.19": 0.18994140625,
+        "B.fraction.active": 0.311767578125,
+        "B.fraction.wall": 0.029296875,
+        "B.fraction.end": 0.602783203125,
+        "B.fraction.source": 0.05615234375,
+        "B.radius": 0.4352638266723412,
+        "B.temperature": 2.3444369190960397,
+        "B.angularTransfer": -0.007821737388836356,
+        "B.impactTime.0.1": 0.29203078163808316,
+        "B.impactTime.0.5": 0.5595394517233012,
+        "B.impactTime.0.9": 0.8676866844727116,
+        "B.impactHamiltonianEV": 15.565279973726758,
+        "B.cdf.0": 0.002929687500000001,
+        "B.cdf.1": 0.010009765625,
+        "B.cdf.2": 0.022460937500000007,
+        "B.cdf.3": 0.03906250000000001,
+        "B.cdf.4": 0.05688476562500001,
+        "B.cdf.5": 0.08227539062500001,
+        "B.cdf.6": 0.10937500000000001,
+        "B.cdf.7": 0.13525390625,
+        "B.cdf.8": 0.163330078125,
+        "B.cdf.9": 0.188720703125,
+        "B.cdf.10": 0.216552734375,
+        "B.cdf.11": 0.246337890625,
+        "B.cdf.12": 0.276123046875,
+        "B.cdf.13": 0.290771484375,
+        "B.cdf.14": 0.30029296875,
+        "B.cdf.15": 0.302978515625,
+        "B.cdf.16": 0.305419921875,
+        "B.cdf.17": 0.306884765625,
+        "B.cdf.18": 0.3095703125,
+        "B.cdf.19": 0.311767578125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0003424882639354966,
+        "maxEnergyResidual": 0.0000010813590633986918,
+        "unresolvedExposure": 0.2440606044711192,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.038818458994327135,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 404,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 404,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28656.614416000004,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.190185546875,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.732666015625,
+        "A.fraction.source": 0.076171875,
+        "A.radius": 0.3028380675529488,
+        "A.temperature": 2.6397490306507825,
+        "A.angularTransfer": 0.006699052148057953,
+        "A.impactTime.0.1": 0.2395345532360156,
+        "A.impactTime.0.5": 0.41596276234087537,
+        "A.impactTime.0.9": 0.7754185300917612,
+        "A.impactHamiltonianEV": 15.70965066317988,
+        "A.cdf.0": 0.004150390625,
+        "A.cdf.1": 0.011962890625,
+        "A.cdf.2": 0.025390625,
+        "A.cdf.3": 0.047607421875,
+        "A.cdf.4": 0.070556640625,
+        "A.cdf.5": 0.095947265625,
+        "A.cdf.6": 0.1240234375,
+        "A.cdf.7": 0.146728515625,
+        "A.cdf.8": 0.16552734375,
+        "A.cdf.9": 0.175048828125,
+        "A.cdf.10": 0.18359375,
+        "A.cdf.11": 0.185791015625,
+        "A.cdf.12": 0.186279296875,
+        "A.cdf.13": 0.1875,
+        "A.cdf.14": 0.18798828125,
+        "A.cdf.15": 0.18896484375,
+        "A.cdf.16": 0.190185546875,
+        "A.cdf.17": 0.190185546875,
+        "A.cdf.18": 0.190185546875,
+        "A.cdf.19": 0.190185546875,
+        "B.fraction.active": 0.294677734375,
+        "B.fraction.wall": 0.03125,
+        "B.fraction.end": 0.6142578125,
+        "B.fraction.source": 0.059814453125,
+        "B.radius": 0.44146403882855967,
+        "B.temperature": 2.5090416274786143,
+        "B.angularTransfer": -0.006320706839030657,
+        "B.impactTime.0.1": 0.28831559774903237,
+        "B.impactTime.0.5": 0.544628437146593,
+        "B.impactTime.0.9": 0.8612916376287089,
+        "B.impactHamiltonianEV": 15.889799789570388,
+        "B.cdf.0": 0.0019531249999999998,
+        "B.cdf.1": 0.006835937499999999,
+        "B.cdf.2": 0.01904296875,
+        "B.cdf.3": 0.0361328125,
+        "B.cdf.4": 0.0537109375,
+        "B.cdf.5": 0.074462890625,
+        "B.cdf.6": 0.095458984375,
+        "B.cdf.7": 0.12353515625,
+        "B.cdf.8": 0.152099609375,
+        "B.cdf.9": 0.1767578125,
+        "B.cdf.10": 0.20751953125,
+        "B.cdf.11": 0.23291015625,
+        "B.cdf.12": 0.256103515625,
+        "B.cdf.13": 0.2734375,
+        "B.cdf.14": 0.281982421875,
+        "B.cdf.15": 0.28369140625,
+        "B.cdf.16": 0.287109375,
+        "B.cdf.17": 0.2900390625,
+        "B.cdf.18": 0.292724609375,
+        "B.cdf.19": 0.294677734375
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0003816294633270062,
+        "maxEnergyResidual": 0.000001091365954903917,
+        "unresolvedExposure": 0.2432832003489289,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03881953182390565,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 505,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 505,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28433.886749999998,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.200927734375,
+        "A.fraction.wall": 0.000244140625,
+        "A.fraction.end": 0.720458984375,
+        "A.fraction.source": 0.078369140625,
+        "A.radius": 0.3032121065099126,
+        "A.temperature": 2.79745285340491,
+        "A.angularTransfer": 0.006772238148747108,
+        "A.impactTime.0.1": 0.23394257580900468,
+        "A.impactTime.0.5": 0.4193323800399499,
+        "A.impactTime.0.9": 0.7674381235839307,
+        "A.impactHamiltonianEV": 15.719026375742956,
+        "A.cdf.0": 0.00244140625,
+        "A.cdf.1": 0.015380859374999998,
+        "A.cdf.2": 0.033203125,
+        "A.cdf.3": 0.052978515625,
+        "A.cdf.4": 0.07763671875,
+        "A.cdf.5": 0.10791015625,
+        "A.cdf.6": 0.132080078125,
+        "A.cdf.7": 0.1533203125,
+        "A.cdf.8": 0.17041015625,
+        "A.cdf.9": 0.182861328125,
+        "A.cdf.10": 0.190185546875,
+        "A.cdf.11": 0.193115234375,
+        "A.cdf.12": 0.1943359375,
+        "A.cdf.13": 0.196044921875,
+        "A.cdf.14": 0.197265625,
+        "A.cdf.15": 0.19921875,
+        "A.cdf.16": 0.20068359375,
+        "A.cdf.17": 0.200927734375,
+        "A.cdf.18": 0.200927734375,
+        "A.cdf.19": 0.200927734375,
+        "B.fraction.active": 0.307861328125,
+        "B.fraction.wall": 0.02978515625,
+        "B.fraction.end": 0.6083984375,
+        "B.fraction.source": 0.053955078125,
+        "B.radius": 0.4455873891716869,
+        "B.temperature": 2.4008463009171006,
+        "B.angularTransfer": -0.006283283853414951,
+        "B.impactTime.0.1": 0.28908193619859135,
+        "B.impactTime.0.5": 0.5352977934871168,
+        "B.impactTime.0.9": 0.8607414175950333,
+        "B.impactHamiltonianEV": 15.920321663435502,
+        "B.cdf.0": 0.0026855468749999996,
+        "B.cdf.1": 0.008056640625,
+        "B.cdf.2": 0.01953125,
+        "B.cdf.3": 0.0341796875,
+        "B.cdf.4": 0.054443359375,
+        "B.cdf.5": 0.07958984375,
+        "B.cdf.6": 0.106201171875,
+        "B.cdf.7": 0.134521484375,
+        "B.cdf.8": 0.1552734375,
+        "B.cdf.9": 0.180908203125,
+        "B.cdf.10": 0.207275390625,
+        "B.cdf.11": 0.23828125,
+        "B.cdf.12": 0.263427734375,
+        "B.cdf.13": 0.283447265625,
+        "B.cdf.14": 0.292236328125,
+        "B.cdf.15": 0.296630859375,
+        "B.cdf.16": 0.299072265625,
+        "B.cdf.17": 0.30078125,
+        "B.cdf.18": 0.304931640625,
+        "B.cdf.19": 0.307861328125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0004902829166537652,
+        "maxEnergyResidual": 0.0000010637039052659001,
+        "unresolvedExposure": 0.24493904096077176,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03858840147315826,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt100",
+      "seed": 606,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 1e-7,
+        "duration": 0.0002,
+        "seed": 606,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 28879.909916,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.19921875,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.727294921875,
+        "A.fraction.source": 0.072509765625,
+        "A.radius": 0.3066935872757028,
+        "A.temperature": 2.509397781447688,
+        "A.angularTransfer": 0.007737975024578794,
+        "A.impactTime.0.1": 0.23879755390112842,
+        "A.impactTime.0.5": 0.417642228090509,
+        "A.impactTime.0.9": 0.7691201932237797,
+        "A.impactHamiltonianEV": 15.794964420934429,
+        "A.cdf.0": 0.0031738281249999996,
+        "A.cdf.1": 0.01318359375,
+        "A.cdf.2": 0.029541015625,
+        "A.cdf.3": 0.051025390625,
+        "A.cdf.4": 0.0732421875,
+        "A.cdf.5": 0.100830078125,
+        "A.cdf.6": 0.126708984375,
+        "A.cdf.7": 0.151123046875,
+        "A.cdf.8": 0.168212890625,
+        "A.cdf.9": 0.181884765625,
+        "A.cdf.10": 0.1904296875,
+        "A.cdf.11": 0.193359375,
+        "A.cdf.12": 0.194091796875,
+        "A.cdf.13": 0.19482421875,
+        "A.cdf.14": 0.19580078125,
+        "A.cdf.15": 0.197265625,
+        "A.cdf.16": 0.19873046875,
+        "A.cdf.17": 0.19921875,
+        "A.cdf.18": 0.19921875,
+        "A.cdf.19": 0.19921875,
+        "B.fraction.active": 0.30712890625,
+        "B.fraction.wall": 0.0302734375,
+        "B.fraction.end": 0.60595703125,
+        "B.fraction.source": 0.056640625,
+        "B.radius": 0.43552203693352287,
+        "B.temperature": 2.5919051853312305,
+        "B.angularTransfer": -0.0072571142949998035,
+        "B.impactTime.0.1": 0.3012350782627985,
+        "B.impactTime.0.5": 0.5503370088853994,
+        "B.impactTime.0.9": 0.8611603955680412,
+        "B.impactHamiltonianEV": 15.61325410125216,
+        "B.cdf.0": 0.00341796875,
+        "B.cdf.1": 0.0068359375,
+        "B.cdf.2": 0.0166015625,
+        "B.cdf.3": 0.02880859375,
+        "B.cdf.4": 0.05322265625,
+        "B.cdf.5": 0.080078125,
+        "B.cdf.6": 0.10888671875,
+        "B.cdf.7": 0.134765625,
+        "B.cdf.8": 0.162109375,
+        "B.cdf.9": 0.190185546875,
+        "B.cdf.10": 0.218505859375,
+        "B.cdf.11": 0.247802734375,
+        "B.cdf.12": 0.272705078125,
+        "B.cdf.13": 0.28857421875,
+        "B.cdf.14": 0.29443359375,
+        "B.cdf.15": 0.29833984375,
+        "B.cdf.16": 0.30126953125,
+        "B.cdf.17": 0.3037109375,
+        "B.cdf.18": 0.305419921875,
+        "B.cdf.19": 0.30712890625
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0004889012603987867,
+        "maxEnergyResidual": 0.0000010650721327919018,
+        "unresolvedExposure": 0.24399820657906734,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03821729740971737,
+        "particleSteps": 16392192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 101,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 101,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 61603.296708,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.201171875,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0.72119140625,
+        "A.fraction.source": 0.07763671875,
+        "A.radius": 0.3072141371444792,
+        "A.temperature": 2.651291779121664,
+        "A.angularTransfer": 0.007523564123335611,
+        "A.impactTime.0.1": 0.23458972978833292,
+        "A.impactTime.0.5": 0.42162940446668673,
+        "A.impactTime.0.9": 0.766543317365689,
+        "A.impactHamiltonianEV": 15.250878918842867,
+        "A.cdf.0": 0.002197265625,
+        "A.cdf.1": 0.010986328125,
+        "A.cdf.2": 0.026611328125000003,
+        "A.cdf.3": 0.04931640625,
+        "A.cdf.4": 0.07373046875,
+        "A.cdf.5": 0.100830078125,
+        "A.cdf.6": 0.129150390625,
+        "A.cdf.7": 0.154052734375,
+        "A.cdf.8": 0.169921875,
+        "A.cdf.9": 0.1845703125,
+        "A.cdf.10": 0.192626953125,
+        "A.cdf.11": 0.196044921875,
+        "A.cdf.12": 0.196533203125,
+        "A.cdf.13": 0.197021484375,
+        "A.cdf.14": 0.198486328125,
+        "A.cdf.15": 0.2001953125,
+        "A.cdf.16": 0.200927734375,
+        "A.cdf.17": 0.201171875,
+        "A.cdf.18": 0.201171875,
+        "A.cdf.19": 0.201171875,
+        "B.fraction.active": 0.3017578125,
+        "B.fraction.wall": 0.024169921875,
+        "B.fraction.end": 0.6162109375,
+        "B.fraction.source": 0.057861328125,
+        "B.radius": 0.4393650326935739,
+        "B.temperature": 2.318089009779745,
+        "B.angularTransfer": -0.007282098478602193,
+        "B.impactTime.0.1": 0.295822168867083,
+        "B.impactTime.0.5": 0.5332281767577458,
+        "B.impactTime.0.9": 0.8576291068171434,
+        "B.impactHamiltonianEV": 16.207273213498404,
+        "B.cdf.0": 0.0019531249999999998,
+        "B.cdf.1": 0.0078125,
+        "B.cdf.2": 0.0185546875,
+        "B.cdf.3": 0.03759765625,
+        "B.cdf.4": 0.052978515625,
+        "B.cdf.5": 0.07666015625,
+        "B.cdf.6": 0.10205078125,
+        "B.cdf.7": 0.12890625,
+        "B.cdf.8": 0.156005859375,
+        "B.cdf.9": 0.181884765625,
+        "B.cdf.10": 0.2109375,
+        "B.cdf.11": 0.236328125,
+        "B.cdf.12": 0.262939453125,
+        "B.cdf.13": 0.280517578125,
+        "B.cdf.14": 0.289306640625,
+        "B.cdf.15": 0.29248046875,
+        "B.cdf.16": 0.294921875,
+        "B.cdf.17": 0.297607421875,
+        "B.cdf.18": 0.2998046875,
+        "B.cdf.19": 0.3017578125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.00026789818716083986,
+        "maxEnergyResidual": 2.6155877253298417e-7,
+        "unresolvedExposure": 0.23665623003506295,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.038617528736052606,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 202,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 202,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 56381.64870800001,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.190673828125,
+        "A.fraction.wall": 0.000244140625,
+        "A.fraction.end": 0.7353515625,
+        "A.fraction.source": 0.07373046875,
+        "A.radius": 0.30449185735460665,
+        "A.temperature": 2.628043073938329,
+        "A.angularTransfer": 0.007174831672088352,
+        "A.impactTime.0.1": 0.23934119035658882,
+        "A.impactTime.0.5": 0.418138693468693,
+        "A.impactTime.0.9": 0.7752321701940436,
+        "A.impactHamiltonianEV": 15.664972416775758,
+        "A.cdf.0": 0.0031738281249999996,
+        "A.cdf.1": 0.014404296875000003,
+        "A.cdf.2": 0.027343750000000007,
+        "A.cdf.3": 0.04638671875000001,
+        "A.cdf.4": 0.0703125,
+        "A.cdf.5": 0.096435546875,
+        "A.cdf.6": 0.12353515625,
+        "A.cdf.7": 0.14794921875,
+        "A.cdf.8": 0.165283203125,
+        "A.cdf.9": 0.173583984375,
+        "A.cdf.10": 0.1826171875,
+        "A.cdf.11": 0.184326171875,
+        "A.cdf.12": 0.185302734375,
+        "A.cdf.13": 0.18701171875,
+        "A.cdf.14": 0.18896484375,
+        "A.cdf.15": 0.189697265625,
+        "A.cdf.16": 0.1904296875,
+        "A.cdf.17": 0.190673828125,
+        "A.cdf.18": 0.190673828125,
+        "A.cdf.19": 0.190673828125,
+        "B.fraction.active": 0.305908203125,
+        "B.fraction.wall": 0.031005859375,
+        "B.fraction.end": 0.6064453125,
+        "B.fraction.source": 0.056640625,
+        "B.radius": 0.4416743181241725,
+        "B.temperature": 2.529762193069492,
+        "B.angularTransfer": -0.00693009513968083,
+        "B.impactTime.0.1": 0.2883714691450897,
+        "B.impactTime.0.5": 0.5457990026448278,
+        "B.impactTime.0.9": 0.8635996100761416,
+        "B.impactHamiltonianEV": 16.084829806320055,
+        "B.cdf.0": 0.0009765624999999999,
+        "B.cdf.1": 0.006835937500000001,
+        "B.cdf.2": 0.019775390625000003,
+        "B.cdf.3": 0.033935546875,
+        "B.cdf.4": 0.054443359375,
+        "B.cdf.5": 0.077392578125,
+        "B.cdf.6": 0.10595703125,
+        "B.cdf.7": 0.133056640625,
+        "B.cdf.8": 0.1630859375,
+        "B.cdf.9": 0.186279296875,
+        "B.cdf.10": 0.21240234375,
+        "B.cdf.11": 0.24169921875,
+        "B.cdf.12": 0.2626953125,
+        "B.cdf.13": 0.2822265625,
+        "B.cdf.14": 0.290283203125,
+        "B.cdf.15": 0.29296875,
+        "B.cdf.16": 0.295654296875,
+        "B.cdf.17": 0.299072265625,
+        "B.cdf.18": 0.302490234375,
+        "B.cdf.19": 0.305908203125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.00027027981720712516,
+        "maxEnergyResidual": 2.7177273901393643e-7,
+        "unresolvedExposure": 0.24255102982022836,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.0388676895312749,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 303,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 303,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 62948.907332999996,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.19384765625,
+        "A.fraction.wall": 0.000732421875,
+        "A.fraction.end": 0.724609375,
+        "A.fraction.source": 0.080810546875,
+        "A.radius": 0.3004853819545988,
+        "A.temperature": 2.6151353550611622,
+        "A.angularTransfer": 0.007794331790155298,
+        "A.impactTime.0.1": 0.23281919862502767,
+        "A.impactTime.0.5": 0.41754443106171313,
+        "A.impactTime.0.9": 0.7643731645007454,
+        "A.impactHamiltonianEV": 15.895225120656082,
+        "A.cdf.0": 0.004638671874999999,
+        "A.cdf.1": 0.01416015625,
+        "A.cdf.2": 0.030273437500000007,
+        "A.cdf.3": 0.050781250000000014,
+        "A.cdf.4": 0.07348632812500003,
+        "A.cdf.5": 0.09570312500000003,
+        "A.cdf.6": 0.12573242187500003,
+        "A.cdf.7": 0.14843750000000003,
+        "A.cdf.8": 0.16674804687500003,
+        "A.cdf.9": 0.18066406250000003,
+        "A.cdf.10": 0.18676757812500003,
+        "A.cdf.11": 0.18969726562500003,
+        "A.cdf.12": 0.19067382812500003,
+        "A.cdf.13": 0.19140625000000003,
+        "A.cdf.14": 0.19189453125000003,
+        "A.cdf.15": 0.19238281250000003,
+        "A.cdf.16": 0.19335937500000003,
+        "A.cdf.17": 0.19360351562500003,
+        "A.cdf.18": 0.19384765625000003,
+        "A.cdf.19": 0.19384765625000003,
+        "B.fraction.active": 0.31689453125,
+        "B.fraction.wall": 0.030517578125,
+        "B.fraction.end": 0.598876953125,
+        "B.fraction.source": 0.0537109375,
+        "B.radius": 0.433320788497425,
+        "B.temperature": 2.4058556091409664,
+        "B.angularTransfer": -0.00766767160204051,
+        "B.impactTime.0.1": 0.29372719013987947,
+        "B.impactTime.0.5": 0.5498705662582611,
+        "B.impactTime.0.9": 0.8572725055476316,
+        "B.impactHamiltonianEV": 15.715985225845257,
+        "B.cdf.0": 0.001220703125,
+        "B.cdf.1": 0.009521484375,
+        "B.cdf.2": 0.021972656250000007,
+        "B.cdf.3": 0.03808593750000001,
+        "B.cdf.4": 0.06005859375000001,
+        "B.cdf.5": 0.0830078125,
+        "B.cdf.6": 0.11083984375,
+        "B.cdf.7": 0.135986328125,
+        "B.cdf.8": 0.166748046875,
+        "B.cdf.9": 0.193603515625,
+        "B.cdf.10": 0.22607421875,
+        "B.cdf.11": 0.254638671875,
+        "B.cdf.12": 0.281982421875,
+        "B.cdf.13": 0.299072265625,
+        "B.cdf.14": 0.30517578125,
+        "B.cdf.15": 0.308837890625,
+        "B.cdf.16": 0.31103515625,
+        "B.cdf.17": 0.312744140625,
+        "B.cdf.18": 0.314697265625,
+        "B.cdf.19": 0.31689453125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.00014652563451525994,
+        "maxEnergyResidual": 2.7155749322842985e-7,
+        "unresolvedExposure": 0.24082768366643495,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.038442508995450445,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 404,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 404,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 57439.235541999995,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.195556640625,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.730224609375,
+        "A.fraction.source": 0.0732421875,
+        "A.radius": 0.3028982517161471,
+        "A.temperature": 2.78021513105758,
+        "A.angularTransfer": 0.008082904073317224,
+        "A.impactTime.0.1": 0.23886287060642714,
+        "A.impactTime.0.5": 0.4202038450669516,
+        "A.impactTime.0.9": 0.7620357214346172,
+        "A.impactHamiltonianEV": 15.552152233385126,
+        "A.cdf.0": 0.004150390625,
+        "A.cdf.1": 0.011962890625,
+        "A.cdf.2": 0.030029296875000007,
+        "A.cdf.3": 0.051269531250000014,
+        "A.cdf.4": 0.07666015625000001,
+        "A.cdf.5": 0.10083007812500001,
+        "A.cdf.6": 0.12353515625000001,
+        "A.cdf.7": 0.14990234375,
+        "A.cdf.8": 0.16796875,
+        "A.cdf.9": 0.179443359375,
+        "A.cdf.10": 0.187744140625,
+        "A.cdf.11": 0.190185546875,
+        "A.cdf.12": 0.191162109375,
+        "A.cdf.13": 0.19189453125,
+        "A.cdf.14": 0.19287109375,
+        "A.cdf.15": 0.1943359375,
+        "A.cdf.16": 0.1953125,
+        "A.cdf.17": 0.195556640625,
+        "A.cdf.18": 0.195556640625,
+        "A.cdf.19": 0.195556640625,
+        "B.fraction.active": 0.2998046875,
+        "B.fraction.wall": 0.032470703125,
+        "B.fraction.end": 0.61083984375,
+        "B.fraction.source": 0.056884765625,
+        "B.radius": 0.4421862684747262,
+        "B.temperature": 2.5198616274700405,
+        "B.angularTransfer": -0.007682020043106853,
+        "B.impactTime.0.1": 0.2888752208815054,
+        "B.impactTime.0.5": 0.5401632562255992,
+        "B.impactTime.0.9": 0.8579596580282526,
+        "B.impactHamiltonianEV": 16.129036559229164,
+        "B.cdf.0": 0.0014648437500000004,
+        "B.cdf.1": 0.008056640625,
+        "B.cdf.2": 0.01953125,
+        "B.cdf.3": 0.033203125,
+        "B.cdf.4": 0.051513671875,
+        "B.cdf.5": 0.076416015625,
+        "B.cdf.6": 0.10107421875,
+        "B.cdf.7": 0.127197265625,
+        "B.cdf.8": 0.153564453125,
+        "B.cdf.9": 0.1826171875,
+        "B.cdf.10": 0.209228515625,
+        "B.cdf.11": 0.238037109375,
+        "B.cdf.12": 0.261474609375,
+        "B.cdf.13": 0.278564453125,
+        "B.cdf.14": 0.286376953125,
+        "B.cdf.15": 0.28759765625,
+        "B.cdf.16": 0.29150390625,
+        "B.cdf.17": 0.294921875,
+        "B.cdf.18": 0.297119140625,
+        "B.cdf.19": 0.2998046875
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.000409411225752135,
+        "maxEnergyResidual": 2.7517824468706187e-7,
+        "unresolvedExposure": 0.24181803609450883,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03889556408537831,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 505,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 505,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 62338.414832999995,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.20654296875,
+        "A.fraction.wall": 0.000244140625,
+        "A.fraction.end": 0.71337890625,
+        "A.fraction.source": 0.079833984375,
+        "A.radius": 0.3028842995614533,
+        "A.temperature": 2.7446088305368397,
+        "A.angularTransfer": 0.006926809824115905,
+        "A.impactTime.0.1": 0.23042100865567783,
+        "A.impactTime.0.5": 0.41673108499694467,
+        "A.impactTime.0.9": 0.7652115210188765,
+        "A.impactHamiltonianEV": 15.840987332310405,
+        "A.cdf.0": 0.003662109375,
+        "A.cdf.1": 0.013427734374999998,
+        "A.cdf.2": 0.030517578125,
+        "A.cdf.3": 0.05322265625,
+        "A.cdf.4": 0.07861328125,
+        "A.cdf.5": 0.1103515625,
+        "A.cdf.6": 0.13427734375,
+        "A.cdf.7": 0.160888671875,
+        "A.cdf.8": 0.17724609375,
+        "A.cdf.9": 0.188720703125,
+        "A.cdf.10": 0.195068359375,
+        "A.cdf.11": 0.19873046875,
+        "A.cdf.12": 0.2001953125,
+        "A.cdf.13": 0.202392578125,
+        "A.cdf.14": 0.203857421875,
+        "A.cdf.15": 0.204833984375,
+        "A.cdf.16": 0.2060546875,
+        "A.cdf.17": 0.20654296875,
+        "A.cdf.18": 0.20654296875,
+        "A.cdf.19": 0.20654296875,
+        "B.fraction.active": 0.303955078125,
+        "B.fraction.wall": 0.029541015625,
+        "B.fraction.end": 0.612060546875,
+        "B.fraction.source": 0.054443359375,
+        "B.radius": 0.44536925004491856,
+        "B.temperature": 2.446152864108334,
+        "B.angularTransfer": -0.006690334838832566,
+        "B.impactTime.0.1": 0.2861423918324611,
+        "B.impactTime.0.5": 0.5465074037658979,
+        "B.impactTime.0.9": 0.853977114758694,
+        "B.impactHamiltonianEV": 15.856289894578397,
+        "B.cdf.0": 0.001220703125,
+        "B.cdf.1": 0.008789062499999998,
+        "B.cdf.2": 0.017822265625,
+        "B.cdf.3": 0.034423828125,
+        "B.cdf.4": 0.05517578125,
+        "B.cdf.5": 0.073974609375,
+        "B.cdf.6": 0.100341796875,
+        "B.cdf.7": 0.127685546875,
+        "B.cdf.8": 0.152587890625,
+        "B.cdf.9": 0.179443359375,
+        "B.cdf.10": 0.20947265625,
+        "B.cdf.11": 0.235595703125,
+        "B.cdf.12": 0.263916015625,
+        "B.cdf.13": 0.282470703125,
+        "B.cdf.14": 0.29150390625,
+        "B.cdf.15": 0.293212890625,
+        "B.cdf.16": 0.29541015625,
+        "B.cdf.17": 0.29833984375,
+        "B.cdf.18": 0.30126953125,
+        "B.cdf.19": 0.303955078125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0002810930336537293,
+        "maxEnergyResidual": 2.643157684690312e-7,
+        "unresolvedExposure": 0.24294718456646694,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03857998899545117,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt50",
+      "seed": 606,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 5e-8,
+        "duration": 0.0002,
+        "seed": 606,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 56489.08716699999,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.18798828125,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.7275390625,
+        "A.fraction.source": 0.08349609375,
+        "A.radius": 0.30064062856180196,
+        "A.temperature": 2.577496617801196,
+        "A.angularTransfer": 0.008431588966942597,
+        "A.impactTime.0.1": 0.2373528802051081,
+        "A.impactTime.0.5": 0.41523105933859944,
+        "A.impactTime.0.9": 0.7597311553099082,
+        "A.impactHamiltonianEV": 15.620313934730236,
+        "A.cdf.0": 0.002929687500000001,
+        "A.cdf.1": 0.01220703125,
+        "A.cdf.2": 0.029541015625,
+        "A.cdf.3": 0.0478515625,
+        "A.cdf.4": 0.072998046875,
+        "A.cdf.5": 0.097900390625,
+        "A.cdf.6": 0.124267578125,
+        "A.cdf.7": 0.14453125,
+        "A.cdf.8": 0.162353515625,
+        "A.cdf.9": 0.17626953125,
+        "A.cdf.10": 0.1806640625,
+        "A.cdf.11": 0.18212890625,
+        "A.cdf.12": 0.182861328125,
+        "A.cdf.13": 0.18359375,
+        "A.cdf.14": 0.1845703125,
+        "A.cdf.15": 0.1865234375,
+        "A.cdf.16": 0.1875,
+        "A.cdf.17": 0.18798828125,
+        "A.cdf.18": 0.18798828125,
+        "A.cdf.19": 0.18798828125,
+        "B.fraction.active": 0.308837890625,
+        "B.fraction.wall": 0.02880859375,
+        "B.fraction.end": 0.60791015625,
+        "B.fraction.source": 0.054443359375,
+        "B.radius": 0.43905731376657264,
+        "B.temperature": 2.4881399099454504,
+        "B.angularTransfer": -0.008313751663795093,
+        "B.impactTime.0.1": 0.30326932130623513,
+        "B.impactTime.0.5": 0.5495949958411516,
+        "B.impactTime.0.9": 0.8679051499091213,
+        "B.impactHamiltonianEV": 15.864748552816357,
+        "B.cdf.0": 0.0019531249999999998,
+        "B.cdf.1": 0.008056640625,
+        "B.cdf.2": 0.0166015625,
+        "B.cdf.3": 0.032470703125,
+        "B.cdf.4": 0.05395507812500001,
+        "B.cdf.5": 0.07617187500000001,
+        "B.cdf.6": 0.10327148437500001,
+        "B.cdf.7": 0.13232421875,
+        "B.cdf.8": 0.161376953125,
+        "B.cdf.9": 0.190673828125,
+        "B.cdf.10": 0.218017578125,
+        "B.cdf.11": 0.244873046875,
+        "B.cdf.12": 0.27099609375,
+        "B.cdf.13": 0.2890625,
+        "B.cdf.14": 0.29541015625,
+        "B.cdf.15": 0.2998046875,
+        "B.cdf.16": 0.302490234375,
+        "B.cdf.17": 0.30419921875,
+        "B.cdf.18": 0.30712890625,
+        "B.cdf.19": 0.308837890625
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.00013232015640574137,
+        "maxEnergyResidual": 2.6733716576782403e-7,
+        "unresolvedExposure": 0.2454143975011609,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03851876758584277,
+        "particleSteps": 32776192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 101,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 101,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 155205.94683300002,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.192138671875,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0.724853515625,
+        "A.fraction.source": 0.0830078125,
+        "A.radius": 0.29825321492435414,
+        "A.temperature": 2.5479337718049817,
+        "A.angularTransfer": 0.007519154818316084,
+        "A.impactTime.0.1": 0.23491750819964957,
+        "A.impactTime.0.5": 0.4171268097179009,
+        "A.impactTime.0.9": 0.760858355743878,
+        "A.impactHamiltonianEV": 15.39868017706592,
+        "A.cdf.0": 0.00439453125,
+        "A.cdf.1": 0.015380859375,
+        "A.cdf.2": 0.03076171875,
+        "A.cdf.3": 0.0498046875,
+        "A.cdf.4": 0.07470703125,
+        "A.cdf.5": 0.104736328125,
+        "A.cdf.6": 0.12890625,
+        "A.cdf.7": 0.1494140625,
+        "A.cdf.8": 0.166015625,
+        "A.cdf.9": 0.177001953125,
+        "A.cdf.10": 0.18310546875,
+        "A.cdf.11": 0.18701171875,
+        "A.cdf.12": 0.188232421875,
+        "A.cdf.13": 0.1884765625,
+        "A.cdf.14": 0.18896484375,
+        "A.cdf.15": 0.19091796875,
+        "A.cdf.16": 0.19140625,
+        "A.cdf.17": 0.192138671875,
+        "A.cdf.18": 0.192138671875,
+        "A.cdf.19": 0.192138671875,
+        "B.fraction.active": 0.30517578125,
+        "B.fraction.wall": 0.027587890625,
+        "B.fraction.end": 0.610595703125,
+        "B.fraction.source": 0.056640625,
+        "B.radius": 0.4509085705074856,
+        "B.temperature": 2.321185221025516,
+        "B.angularTransfer": -0.0071864599668059765,
+        "B.impactTime.0.1": 0.2901263458330674,
+        "B.impactTime.0.5": 0.532164171250797,
+        "B.impactTime.0.9": 0.8555072526920942,
+        "B.impactHamiltonianEV": 16.075858914304526,
+        "B.cdf.0": 0.002197265625,
+        "B.cdf.1": 0.007080078124999999,
+        "B.cdf.2": 0.019531250000000003,
+        "B.cdf.3": 0.03173828125,
+        "B.cdf.4": 0.0517578125,
+        "B.cdf.5": 0.07275390625,
+        "B.cdf.6": 0.09423828125,
+        "B.cdf.7": 0.118896484375,
+        "B.cdf.8": 0.1484375,
+        "B.cdf.9": 0.175537109375,
+        "B.cdf.10": 0.20654296875,
+        "B.cdf.11": 0.2373046875,
+        "B.cdf.12": 0.263916015625,
+        "B.cdf.13": 0.282470703125,
+        "B.cdf.14": 0.291748046875,
+        "B.cdf.15": 0.29541015625,
+        "B.cdf.16": 0.298583984375,
+        "B.cdf.17": 0.2998046875,
+        "B.cdf.18": 0.30224609375,
+        "B.cdf.19": 0.30517578125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0003351254189452858,
+        "maxEnergyResidual": 6.541751827919173e-8,
+        "unresolvedExposure": 0.24389985530044236,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03862508947044212,
+        "particleSteps": 65544192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 202,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 202,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 118462.08245799999,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.19384765625,
+        "A.fraction.wall": 0,
+        "A.fraction.end": 0.73291015625,
+        "A.fraction.source": 0.0732421875,
+        "A.radius": 0.2982093080943611,
+        "A.temperature": 2.5832477914460665,
+        "A.angularTransfer": 0.007406467259255809,
+        "A.impactTime.0.1": 0.23674181724548982,
+        "A.impactTime.0.5": 0.4176230048667034,
+        "A.impactTime.0.9": 0.7592495472620473,
+        "A.impactHamiltonianEV": 15.826932219437976,
+        "A.cdf.0": 0.002929687500000001,
+        "A.cdf.1": 0.01220703125,
+        "A.cdf.2": 0.028076171875000003,
+        "A.cdf.3": 0.05322265625,
+        "A.cdf.4": 0.07958984375000001,
+        "A.cdf.5": 0.10424804687500001,
+        "A.cdf.6": 0.12792968750000003,
+        "A.cdf.7": 0.14892578125000003,
+        "A.cdf.8": 0.16748046875000003,
+        "A.cdf.9": 0.17871093750000003,
+        "A.cdf.10": 0.18505859375000003,
+        "A.cdf.11": 0.18872070312500003,
+        "A.cdf.12": 0.19042968750000003,
+        "A.cdf.13": 0.19067382812500003,
+        "A.cdf.14": 0.19189453125000003,
+        "A.cdf.15": 0.19262695312500003,
+        "A.cdf.16": 0.19335937500000003,
+        "A.cdf.17": 0.19384765625000003,
+        "A.cdf.18": 0.19384765625000003,
+        "A.cdf.19": 0.19384765625000003,
+        "B.fraction.active": 0.306640625,
+        "B.fraction.wall": 0.03466796875,
+        "B.fraction.end": 0.600830078125,
+        "B.fraction.source": 0.057861328125,
+        "B.radius": 0.4466926544625009,
+        "B.temperature": 2.357331022045995,
+        "B.angularTransfer": -0.007072664201274948,
+        "B.impactTime.0.1": 0.292302284314922,
+        "B.impactTime.0.5": 0.5399707637903648,
+        "B.impactTime.0.9": 0.8642452718448371,
+        "B.impactHamiltonianEV": 16.173372982283116,
+        "B.cdf.0": 0.00244140625,
+        "B.cdf.1": 0.010986328125,
+        "B.cdf.2": 0.019042968750000003,
+        "B.cdf.3": 0.03466796875,
+        "B.cdf.4": 0.054931640625,
+        "B.cdf.5": 0.07568359375,
+        "B.cdf.6": 0.099609375,
+        "B.cdf.7": 0.12744140625,
+        "B.cdf.8": 0.156005859375,
+        "B.cdf.9": 0.184326171875,
+        "B.cdf.10": 0.2138671875,
+        "B.cdf.11": 0.23779296875,
+        "B.cdf.12": 0.262939453125,
+        "B.cdf.13": 0.283203125,
+        "B.cdf.14": 0.289794921875,
+        "B.cdf.15": 0.2939453125,
+        "B.cdf.16": 0.296630859375,
+        "B.cdf.17": 0.299072265625,
+        "B.cdf.18": 0.304931640625,
+        "B.cdf.19": 0.306640625
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0003665786151298722,
+        "maxEnergyResidual": 6.72391008419486e-8,
+        "unresolvedExposure": 0.24294343612889802,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03889120092003274,
+        "particleSteps": 65544192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 303,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 303,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 156775.74862499998,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.19873046875,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.720458984375,
+        "A.fraction.source": 0.079833984375,
+        "A.radius": 0.303308214827261,
+        "A.temperature": 2.5548026220400724,
+        "A.angularTransfer": 0.007288945006468272,
+        "A.impactTime.0.1": 0.2338577841632744,
+        "A.impactTime.0.5": 0.41823132066683133,
+        "A.impactTime.0.9": 0.7645971253987731,
+        "A.impactHamiltonianEV": 15.920817244642048,
+        "A.cdf.0": 0.003662109375,
+        "A.cdf.1": 0.01318359375,
+        "A.cdf.2": 0.029541015625,
+        "A.cdf.3": 0.046630859375,
+        "A.cdf.4": 0.07177734375,
+        "A.cdf.5": 0.103759765625,
+        "A.cdf.6": 0.127197265625,
+        "A.cdf.7": 0.155029296875,
+        "A.cdf.8": 0.17138671875,
+        "A.cdf.9": 0.184814453125,
+        "A.cdf.10": 0.190185546875,
+        "A.cdf.11": 0.1923828125,
+        "A.cdf.12": 0.194580078125,
+        "A.cdf.13": 0.195556640625,
+        "A.cdf.14": 0.1962890625,
+        "A.cdf.15": 0.197021484375,
+        "A.cdf.16": 0.1982421875,
+        "A.cdf.17": 0.19873046875,
+        "A.cdf.18": 0.19873046875,
+        "A.cdf.19": 0.19873046875,
+        "B.fraction.active": 0.310791015625,
+        "B.fraction.wall": 0.029541015625,
+        "B.fraction.end": 0.602294921875,
+        "B.fraction.source": 0.057373046875,
+        "B.radius": 0.4369437696926033,
+        "B.temperature": 2.3095975965648496,
+        "B.angularTransfer": -0.007068613107836762,
+        "B.impactTime.0.1": 0.29925869773428315,
+        "B.impactTime.0.5": 0.5529525772706718,
+        "B.impactTime.0.9": 0.8582086750594698,
+        "B.impactHamiltonianEV": 15.68966094029326,
+        "B.cdf.0": 0.0019531249999999998,
+        "B.cdf.1": 0.0107421875,
+        "B.cdf.2": 0.023437500000000003,
+        "B.cdf.3": 0.039306640625,
+        "B.cdf.4": 0.060302734375,
+        "B.cdf.5": 0.082275390625,
+        "B.cdf.6": 0.108154296875,
+        "B.cdf.7": 0.132080078125,
+        "B.cdf.8": 0.162841796875,
+        "B.cdf.9": 0.186279296875,
+        "B.cdf.10": 0.21728515625,
+        "B.cdf.11": 0.244873046875,
+        "B.cdf.12": 0.271728515625,
+        "B.cdf.13": 0.2890625,
+        "B.cdf.14": 0.296630859375,
+        "B.cdf.15": 0.29931640625,
+        "B.cdf.16": 0.3017578125,
+        "B.cdf.17": 0.304931640625,
+        "B.cdf.18": 0.308349609375,
+        "B.cdf.19": 0.310791015625
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.00027436994420584784,
+        "maxEnergyResidual": 6.789942496971672e-8,
+        "unresolvedExposure": 0.24271348105470059,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.038277013193463105,
+        "particleSteps": 65544192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 404,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 404,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 117298.65158300003,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.19677734375,
+        "A.fraction.wall": 0.0009765625,
+        "A.fraction.end": 0.727783203125,
+        "A.fraction.source": 0.074462890625,
+        "A.radius": 0.30596835225457214,
+        "A.temperature": 2.6097379436158006,
+        "A.angularTransfer": 0.006549287994052808,
+        "A.impactTime.0.1": 0.23580833195775436,
+        "A.impactTime.0.5": 0.4207841750639877,
+        "A.impactTime.0.9": 0.7671384660045704,
+        "A.impactHamiltonianEV": 15.682403016456204,
+        "A.cdf.0": 0.0039062499999999996,
+        "A.cdf.1": 0.011718749999999998,
+        "A.cdf.2": 0.028564453125,
+        "A.cdf.3": 0.0458984375,
+        "A.cdf.4": 0.070068359375,
+        "A.cdf.5": 0.09912109375,
+        "A.cdf.6": 0.12548828125,
+        "A.cdf.7": 0.14990234375,
+        "A.cdf.8": 0.16650390625,
+        "A.cdf.9": 0.18017578125,
+        "A.cdf.10": 0.189697265625,
+        "A.cdf.11": 0.19189453125,
+        "A.cdf.12": 0.192626953125,
+        "A.cdf.13": 0.19384765625,
+        "A.cdf.14": 0.1943359375,
+        "A.cdf.15": 0.19580078125,
+        "A.cdf.16": 0.19677734375,
+        "A.cdf.17": 0.19677734375,
+        "A.cdf.18": 0.19677734375,
+        "A.cdf.19": 0.19677734375,
+        "B.fraction.active": 0.294921875,
+        "B.fraction.wall": 0.031005859375,
+        "B.fraction.end": 0.61279296875,
+        "B.fraction.source": 0.061279296875,
+        "B.radius": 0.44092670790268,
+        "B.temperature": 2.447615136144336,
+        "B.angularTransfer": -0.006364661111543494,
+        "B.impactTime.0.1": 0.2835666318752115,
+        "B.impactTime.0.5": 0.5364128175751433,
+        "B.impactTime.0.9": 0.8545391289766648,
+        "B.impactHamiltonianEV": 16.084214229051952,
+        "B.cdf.0": 0.001708984375,
+        "B.cdf.1": 0.009277343749999998,
+        "B.cdf.2": 0.016845703125,
+        "B.cdf.3": 0.034423828125,
+        "B.cdf.4": 0.053955078125,
+        "B.cdf.5": 0.077880859375,
+        "B.cdf.6": 0.1044921875,
+        "B.cdf.7": 0.126708984375,
+        "B.cdf.8": 0.151611328125,
+        "B.cdf.9": 0.176025390625,
+        "B.cdf.10": 0.2060546875,
+        "B.cdf.11": 0.232177734375,
+        "B.cdf.12": 0.2548828125,
+        "B.cdf.13": 0.273193359375,
+        "B.cdf.14": 0.27978515625,
+        "B.cdf.15": 0.282958984375,
+        "B.cdf.16": 0.28564453125,
+        "B.cdf.17": 0.287841796875,
+        "B.cdf.18": 0.292236328125,
+        "B.cdf.19": 0.294921875
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.000186017200905113,
+        "maxEnergyResidual": 6.752363420661419e-8,
+        "unresolvedExposure": 0.2443735374047947,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.038799681312890764,
+        "particleSteps": 65544192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 505,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 505,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 158640.55316700003,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.199951171875,
+        "A.fraction.wall": 0.000244140625,
+        "A.fraction.end": 0.717529296875,
+        "A.fraction.source": 0.082275390625,
+        "A.radius": 0.30713299092144347,
+        "A.temperature": 2.6722655683745846,
+        "A.angularTransfer": 0.007651811446179418,
+        "A.impactTime.0.1": 0.2341731121410919,
+        "A.impactTime.0.5": 0.41523205484038894,
+        "A.impactTime.0.9": 0.7835352296670686,
+        "A.impactHamiltonianEV": 15.859983507328142,
+        "A.cdf.0": 0.0039062499999999996,
+        "A.cdf.1": 0.014404296875,
+        "A.cdf.2": 0.029052734375000007,
+        "A.cdf.3": 0.05004882812500001,
+        "A.cdf.4": 0.07275390625000001,
+        "A.cdf.5": 0.10205078125000003,
+        "A.cdf.6": 0.12744140625000003,
+        "A.cdf.7": 0.15161132812500003,
+        "A.cdf.8": 0.17016601562500003,
+        "A.cdf.9": 0.18334960937500003,
+        "A.cdf.10": 0.18969726562500003,
+        "A.cdf.11": 0.19287109375000003,
+        "A.cdf.12": 0.19409179687500003,
+        "A.cdf.13": 0.19506835937500003,
+        "A.cdf.14": 0.19702148437500003,
+        "A.cdf.15": 0.19824218750000003,
+        "A.cdf.16": 0.19946289062500003,
+        "A.cdf.17": 0.19970703125000003,
+        "A.cdf.18": 0.19995117187500003,
+        "A.cdf.19": 0.19995117187500003,
+        "B.fraction.active": 0.302490234375,
+        "B.fraction.wall": 0.030029296875,
+        "B.fraction.end": 0.611572265625,
+        "B.fraction.source": 0.055908203125,
+        "B.radius": 0.433592342967256,
+        "B.temperature": 2.439032931700388,
+        "B.angularTransfer": -0.007281740160195076,
+        "B.impactTime.0.1": 0.28492256250959525,
+        "B.impactTime.0.5": 0.5431071970571816,
+        "B.impactTime.0.9": 0.8546027235370696,
+        "B.impactHamiltonianEV": 15.770193295188125,
+        "B.cdf.0": 0.0009765624999999999,
+        "B.cdf.1": 0.008300781250000002,
+        "B.cdf.2": 0.020996093750000007,
+        "B.cdf.3": 0.03588867187500001,
+        "B.cdf.4": 0.05664062500000001,
+        "B.cdf.5": 0.077392578125,
+        "B.cdf.6": 0.1044921875,
+        "B.cdf.7": 0.13134765625,
+        "B.cdf.8": 0.161865234375,
+        "B.cdf.9": 0.190673828125,
+        "B.cdf.10": 0.2158203125,
+        "B.cdf.11": 0.244384765625,
+        "B.cdf.12": 0.265625,
+        "B.cdf.13": 0.28271484375,
+        "B.cdf.14": 0.29052734375,
+        "B.cdf.15": 0.293212890625,
+        "B.cdf.16": 0.296142578125,
+        "B.cdf.17": 0.297607421875,
+        "B.cdf.18": 0.301025390625,
+        "B.cdf.19": 0.302490234375
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0003982637337512645,
+        "maxEnergyResidual": 6.632480892390248e-8,
+        "unresolvedExposure": 0.24283592763346376,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03862633131095321,
+        "particleSteps": 65544192
+      }
+    },
+    {
+      "level": "rz12-N4096-dt25",
+      "seed": 606,
+      "config": {
+        "radius": 0.2,
+        "length": 0.6,
+        "magneticT": 0.06,
+        "voltage": 20,
+        "quadraticShape": 1.2,
+        "densityM3": 1000000000000000000,
+        "ionTemperatureEV": 5,
+        "electronTemperatureEV": 5,
+        "coulombLog": 10,
+        "particlesPerSpecies": 4096,
+        "cellsAcross": 12,
+        "dt": 2.5e-8,
+        "duration": 0.0002,
+        "seed": 606,
+        "species": [
+          {
+            "massU": 40,
+            "chargeState": 1
+          },
+          {
+            "massU": 84,
+            "chargeState": 1
+          }
+        ],
+        "boundary": "open",
+        "initialState": "pulse",
+        "rotationMode": "zero-canonical",
+        "rotationRadS": -20000,
+        "beamEV": 5,
+        "sourceRadius": 0.08,
+        "pulseLengthFraction": 0.25,
+        "collisions": true,
+        "collisionMethod": "axisymmetric",
+        "collisionSourceAligned": true
+      },
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "durationMs": 116069.42458300001,
+      "status": "complete",
+      "observables": {
+        "A.fraction.active": 0.2001953125,
+        "A.fraction.wall": 0.000732421875,
+        "A.fraction.end": 0.72412109375,
+        "A.fraction.source": 0.074951171875,
+        "A.radius": 0.29640746327681955,
+        "A.temperature": 2.550656028999142,
+        "A.angularTransfer": 0.007699828489950184,
+        "A.impactTime.0.1": 0.2363152741490237,
+        "A.impactTime.0.5": 0.4161833453849799,
+        "A.impactTime.0.9": 0.7646959506970423,
+        "A.impactHamiltonianEV": 15.756702655630127,
+        "A.cdf.0": 0.00341796875,
+        "A.cdf.1": 0.014160156250000002,
+        "A.cdf.2": 0.0361328125,
+        "A.cdf.3": 0.053955078125,
+        "A.cdf.4": 0.08251953125,
+        "A.cdf.5": 0.106689453125,
+        "A.cdf.6": 0.131103515625,
+        "A.cdf.7": 0.153076171875,
+        "A.cdf.8": 0.1708984375,
+        "A.cdf.9": 0.186279296875,
+        "A.cdf.10": 0.193359375,
+        "A.cdf.11": 0.19580078125,
+        "A.cdf.12": 0.19677734375,
+        "A.cdf.13": 0.197509765625,
+        "A.cdf.14": 0.197998046875,
+        "A.cdf.15": 0.198974609375,
+        "A.cdf.16": 0.199951171875,
+        "A.cdf.17": 0.2001953125,
+        "A.cdf.18": 0.2001953125,
+        "A.cdf.19": 0.2001953125,
+        "B.fraction.active": 0.303955078125,
+        "B.fraction.wall": 0.031005859375,
+        "B.fraction.end": 0.607177734375,
+        "B.fraction.source": 0.057861328125,
+        "B.radius": 0.42978718333001514,
+        "B.temperature": 2.4890332314608257,
+        "B.angularTransfer": -0.007567837349158629,
+        "B.impactTime.0.1": 0.29589534157074443,
+        "B.impactTime.0.5": 0.551927880845296,
+        "B.impactTime.0.9": 0.8732188694014261,
+        "B.impactHamiltonianEV": 15.717414324657874,
+        "B.cdf.0": 0.0019531249999999998,
+        "B.cdf.1": 0.009277343750000002,
+        "B.cdf.2": 0.018554687500000003,
+        "B.cdf.3": 0.038330078125,
+        "B.cdf.4": 0.0595703125,
+        "B.cdf.5": 0.080810546875,
+        "B.cdf.6": 0.107177734375,
+        "B.cdf.7": 0.1376953125,
+        "B.cdf.8": 0.1640625,
+        "B.cdf.9": 0.190185546875,
+        "B.cdf.10": 0.2177734375,
+        "B.cdf.11": 0.244140625,
+        "B.cdf.12": 0.268798828125,
+        "B.cdf.13": 0.28564453125,
+        "B.cdf.14": 0.29296875,
+        "B.cdf.15": 0.295166015625,
+        "B.cdf.16": 0.296630859375,
+        "B.cdf.17": 0.300048828125,
+        "B.cdf.18": 0.302734375,
+        "B.cdf.19": 0.303955078125
+      },
+      "numericalGeometry": {
+        "baseCellWidthM": 0.016666666666666666,
+        "baseAxialCells": 36,
+        "baseAxialLengthM": 0.016666666666666666,
+        "coordinates": "annular-r-z",
+        "uniformColumnMeanRepresentativesPerFullBaseCell": null
+      },
+      "diagnostics": {
+        "maxRawMomentumResidual": 0.0001640213815832611,
+        "maxEnergyResidual": 6.650834578574102e-8,
+        "unresolvedExposure": 0.2391136624681321,
+        "outsideSnapshots": 0,
+        "unpairedExposure": 0.03843541496176962,
+        "particleSteps": 65544192
+      }
+    }
+  ],
+  "aggregation": {
+    "schemaVersion": 1,
+    "createdAt": "2026-11-07T02:42:27.320Z",
+    "originalPlan": {
+      "path": "assets/convergence-axisymmetric-fine-dt-plan-v10.json",
+      "sha256": "9004be7ad57a88bb30c18b8f7f1dc8bfee829b9d9a7fe2f6566b5871f1155d33"
+    },
+    "sourceCode": {
+      "path": "assets/convergence-fine-dt-aggregate-v10.mts",
+      "sha256": "8d61c3a196154fe0cdbf770c1becd5ee26d7add5987bb68205abe71b84f7d9ce"
+    },
+    "parts": [
+      {
+        "path": "assets/convergence-axisymmetric-fine-dt-v10-part1.json",
+        "sha256": "33bc596bb5f104f95d6f86f0849cf7cee620d3d9b04b1a2b28cf156ffb2e095d",
+        "plan": {
+          "seeds": [
+            101,
+            202
+          ],
+          "tolerances": {
+            "fraction": 0.01,
+            "radiusFraction": 0.01,
+            "temperatureEV": 0.1,
+            "timeFraction": 0.02,
+            "normalizedAngularMomentum": 0.001,
+            "maxRawMomentumResidual": 0.001,
+            "maxUnresolvedExposure": 0.01,
+            "minimumSeeds": 6
+          },
+          "id": "axisymmetric-pulse-200us-fine-dt-v10-part1",
+          "description": "Prospective 100/50/25 ns refinement at 4096 markers/species and 12 radial cells; same 200 us physical case, seeds and all v9 budgets. Source-interface-aligned fixed r-z faces; interfaces remain fixed throughout the run. Predeclared CPU chunk; acceptance requires aggregation of all three chunks.",
+          "levels": [
+            {
+              "id": "rz12-N4096-dt100",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 1e-7,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt50",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt25",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 2.5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            }
+          ],
+          "comparisons": [
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt100",
+              "fine": "rz12-N4096-dt50"
+            },
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt50",
+              "fine": "rz12-N4096-dt25"
+            }
+          ]
+        },
+        "startedAt": "2026-11-07T02:34:43.982Z",
+        "completedAt": "2026-11-07T02:42:12.604Z",
+        "durationMs": 448619.217958,
+        "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a"
+      },
+      {
+        "path": "assets/convergence-axisymmetric-fine-dt-v10-part2.json",
+        "sha256": "e0950a4d9400f14c465685044504eae74976417e1ca183d0b83cfb6ceca89cc3",
+        "plan": {
+          "seeds": [
+            303,
+            404
+          ],
+          "tolerances": {
+            "fraction": 0.01,
+            "radiusFraction": 0.01,
+            "temperatureEV": 0.1,
+            "timeFraction": 0.02,
+            "normalizedAngularMomentum": 0.001,
+            "maxRawMomentumResidual": 0.001,
+            "maxUnresolvedExposure": 0.01,
+            "minimumSeeds": 6
+          },
+          "id": "axisymmetric-pulse-200us-fine-dt-v10-part2",
+          "description": "Prospective 100/50/25 ns refinement at 4096 markers/species and 12 radial cells; same 200 us physical case, seeds and all v9 budgets. Source-interface-aligned fixed r-z faces; interfaces remain fixed throughout the run. Predeclared CPU chunk; acceptance requires aggregation of all three chunks.",
+          "levels": [
+            {
+              "id": "rz12-N4096-dt100",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 1e-7,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt50",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt25",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 2.5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            }
+          ],
+          "comparisons": [
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt100",
+              "fine": "rz12-N4096-dt50"
+            },
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt50",
+              "fine": "rz12-N4096-dt25"
+            }
+          ]
+        },
+        "startedAt": "2026-11-07T02:34:43.975Z",
+        "completedAt": "2026-11-07T02:42:15.722Z",
+        "durationMs": 451743.802875,
+        "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a"
+      },
+      {
+        "path": "assets/convergence-axisymmetric-fine-dt-v10-part3.json",
+        "sha256": "e397288b4918f6060d5c7279aaef737d636090ebe6017f9ebb4127c02eceb7b2",
+        "plan": {
+          "seeds": [
+            505,
+            606
+          ],
+          "tolerances": {
+            "fraction": 0.01,
+            "radiusFraction": 0.01,
+            "temperatureEV": 0.1,
+            "timeFraction": 0.02,
+            "normalizedAngularMomentum": 0.001,
+            "maxRawMomentumResidual": 0.001,
+            "maxUnresolvedExposure": 0.01,
+            "minimumSeeds": 6
+          },
+          "id": "axisymmetric-pulse-200us-fine-dt-v10-part3",
+          "description": "Prospective 100/50/25 ns refinement at 4096 markers/species and 12 radial cells; same 200 us physical case, seeds and all v9 budgets. Source-interface-aligned fixed r-z faces; interfaces remain fixed throughout the run. Predeclared CPU chunk; acceptance requires aggregation of all three chunks.",
+          "levels": [
+            {
+              "id": "rz12-N4096-dt100",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 1e-7,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt50",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            },
+            {
+              "id": "rz12-N4096-dt25",
+              "config": {
+                "radius": 0.2,
+                "length": 0.6,
+                "magneticT": 0.06,
+                "voltage": 20,
+                "quadraticShape": 1.2,
+                "densityM3": 1000000000000000000,
+                "ionTemperatureEV": 5,
+                "electronTemperatureEV": 5,
+                "coulombLog": 10,
+                "particlesPerSpecies": 4096,
+                "cellsAcross": 12,
+                "dt": 2.5e-8,
+                "duration": 0.0002,
+                "seed": 42,
+                "species": [
+                  {
+                    "massU": 40,
+                    "chargeState": 1
+                  },
+                  {
+                    "massU": 84,
+                    "chargeState": 1
+                  }
+                ],
+                "boundary": "open",
+                "initialState": "pulse",
+                "rotationMode": "zero-canonical",
+                "rotationRadS": -20000,
+                "beamEV": 5,
+                "sourceRadius": 0.08,
+                "pulseLengthFraction": 0.25,
+                "collisions": true,
+                "collisionMethod": "axisymmetric",
+                "collisionSourceAligned": true
+              }
+            }
+          ],
+          "comparisons": [
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt100",
+              "fine": "rz12-N4096-dt50"
+            },
+            {
+              "kind": "timestep",
+              "coarse": "rz12-N4096-dt50",
+              "fine": "rz12-N4096-dt25"
+            }
+          ]
+        },
+        "startedAt": "2026-11-07T02:34:43.982Z",
+        "completedAt": "2026-11-07T02:42:14.859Z",
+        "durationMs": 450874.581541,
+        "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a"
+      }
+    ],
+    "summedChunkWallDurationMs": 1351237.602374,
+    "summedRunWallDurationMs": 1351157.386289,
+    "interpretation": "Wall times include concurrent CPU contention; their sum is not measured CPU time. All original levels, seeds, physical settings and tolerances are retained. Chunk summaries are not acceptance certificates."
+  }
+}

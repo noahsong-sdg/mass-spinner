@@ -1,0 +1,20 @@
+{
+  "label": "transient67-spatial-assess",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/assess.py",
+    "/work/home/transient67-spatial-probe.json",
+    "/work/home/transient67-spatial-assess",
+    "[[\"r32-z4-w8-t128-u\",\"r32-z4-w16-t128-u\",\"liner\"],[\"r32-z4-w16-t128-u\",\"r32-z4-w32-t128-u\",\"liner\"],[\"r32-z4-w32-t128-u\",\"r32-z4-w64-t128-u\",\"liner\"],[\"r32-z4-w64-t128-u\",\"r32-z4-w128-t128-u\",\"liner\"],[\"r32-z4-w8-t128-u\",\"r32-z8-w8-t128-u\",\"axial\"],[\"r32-z8-w8-t128-u\",\"r32-z16-w8-t128-u\",\"axial\"],[\"r32-z4-w8-t128-q\",\"r32-z4-w8-t256-q\",\"time\"]]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 722,
+  "sourceSHA256": "c66a1f2400a52ff1006d2364a30bfd3a708b9ab0afa6e6ac4c1f78d0f2f88609",
+  "exitCode": 1,
+  "seconds": 3.3938677099999994,
+  "sourceVerifiedBeforeAndAfter": true
+}

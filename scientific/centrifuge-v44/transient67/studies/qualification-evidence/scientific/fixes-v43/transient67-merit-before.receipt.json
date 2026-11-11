@@ -1,0 +1,18 @@
+{
+  "label": "transient67-merit-before",
+  "command": [
+    "node_modules/.bin/tsx",
+    "--test",
+    "tests/fuel-graded-wall-v67.test.ts"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "20ca7b3cac78e86eb5885ded745d1d82899db52d62ee335b2ea58d2b7949ddde",
+  "exitCode": 1,
+  "seconds": 1.3530485839999997,
+  "sourceVerifiedBeforeAndAfter": true
+}

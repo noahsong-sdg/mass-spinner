@@ -1,0 +1,18 @@
+{
+  "label": "thermal69-batch-2",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import concurrent.futures,gzip,hashlib,json,os,shutil,subprocess;from pathlib import Path;env=dict(os.environ,OMP_NUM_THREADS=\"1\",OPENBLAS_NUM_THREADS=\"1\");ids=[\"gas-q2048-w128\",\"gas-q4096-w128\",\"startup-e8-w64-s64\",\"startup-e8-w128-s64\",\"full-e8-w64-q256\",\"full-e8-w128-q256\"];folder=Path(\"/work/home/thermal69-campaign\");out=Path(\"/work/home/thermal69-batch-2\");out.mkdir();base=[\"node_modules/.bin/tsx\",\"scientific/thermal-local-v69/campaign.ts\",\"/work/home/thermal69-seed.json\",\"scientific/thermal-local-v69/specifications.json\",str(folder)]\ndef digest(stream):return hashlib.file_digest(stream,\"sha256\").hexdigest()\ndef run(case):\n command=base+[json.dumps([case])];p=subprocess.run(command,capture_output=True,text=True,env=env);(out/(case+\".log\")).write_text(p.stdout+\"\\n\"+p.stderr);r={\"id\":case,\"command\":command,\"exitCode\":p.returncode}\n if p.returncode==0:\n  source=folder/(case+\".steps.ndjson\");target=source.with_suffix(source.suffix+\".gz\")\n  with source.open(\"rb\") as f:original=digest(f)\n  with source.open(\"rb\") as a,gzip.open(target,\"xb\",compresslevel=3) as b:shutil.copyfileobj(a,b)\n  with gzip.open(target,\"rb\") as f:assert digest(f)==original\n  r[\"losslessAcceptedNDJSONArchive\"]={\"path\":str(target),\"uncompressedSHA256\":original,\"uncompressedBytes\":source.stat().st_size,\"compressedBytes\":target.stat().st_size}\n  with target.open(\"rb\") as f:r[\"losslessAcceptedNDJSONArchive\"][\"gzipSHA256\"]=digest(f)\n  source.unlink()\n (out/(case+\".receipt.json\")).write_text(json.dumps(r,indent=2));print(json.dumps(r),flush=True);return r\nwith concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:receipts=list(pool.map(run,ids))\n(out/\"receipts.json\").write_text(json.dumps(receipts,indent=2));print(\"disk\",shutil.disk_usage(\"/work/home\"));raise SystemExit(0 if all(r[\"exitCode\"]==0 for r in receipts) else 1)"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 744,
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "exitCode": 0,
+  "seconds": 1125.0016732679999,
+  "sourceVerifiedBeforeAndAfter": true
+}

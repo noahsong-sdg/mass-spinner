@@ -1,0 +1,419 @@
+{
+  "schemaVersion": 1,
+  "sourceSHA256": "9402d8d19a6ba33a3a75e5c180ed84e941bff500fe6265ee16075c4e3553d03c",
+  "extractedDataSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "matchedExperimentalValidation": false,
+  "prospectiveSignalErrorTarget": 0.2,
+  "pressureScaling": {
+    "backend": "analytic-reference",
+    "trainPressureTorr": 3,
+    "testPressureTorr": 9,
+    "trainMS": 1,
+    "measuredTestRatio": 0.6666666666666666,
+    "predictedTestRatio": 0.33333333333333326,
+    "temperatureRatio": 1,
+    "constantDrag": true,
+    "pressureTimes": [
+      {
+        "timeS": 0.001,
+        "predictedTestRatio": 0.33333333333333487
+      },
+      {
+        "timeS": 0.01,
+        "predictedTestRatio": 0.3333333333333333
+      },
+      {
+        "timeS": 0.1,
+        "predictedTestRatio": 0.33333333333333337
+      },
+      {
+        "timeS": 1,
+        "predictedTestRatio": 0.33333333333333337
+      },
+      {
+        "timeS": 10,
+        "predictedTestRatio": 0.3333333333333332
+      },
+      {
+        "timeS": 100,
+        "predictedTestRatio": 0.33333333333333326
+      }
+    ],
+    "inventoryProxy": "Neutral inventory proportional to filling pressure / prescribed uniform temperature",
+    "measuredRatioConfidenceLevel": null,
+    "matchedExperimentalValidation": false
+  },
+  "profile": {
+    "radiusM": 0.06,
+    "fitOmegaRadS": 26469.410672482918,
+    "metricDenominatorMS": 889.6272557787788,
+    "heldoutRmsOverPeak": 0.5954574731429478,
+    "points": [
+      {
+        "rCm": 1.0034196422849777,
+        "vMS": 310.7599811039808,
+        "vectorRect": [
+          158.08569,
+          153.65338,
+          161.08369,
+          156.6532
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "train",
+        "predictedMS": 265.5992658847698
+      },
+      {
+        "rCm": 1.9915058702903605,
+        "vMS": 540.8237610791358,
+        "vectorRect": [
+          187.3817,
+          132.8938,
+          190.37981,
+          135.89355
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "train",
+        "predictedMS": 527.1398673737605
+      },
+      {
+        "rCm": 2.9934092879089893,
+        "vMS": 768.0956387107145,
+        "vectorRect": [
+          217.08749,
+          112.38611,
+          220.08549,
+          115.38586
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "train",
+        "predictedMS": 792.3377975248769
+      },
+      {
+        "rCm": 3.4942091381584044,
+        "vMS": 873.381636787127,
+        "vectorRect": [
+          231.93581,
+          102.88568,
+          234.9339,
+          105.8855
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "test",
+        "predictedMS": 924.896566534574
+      },
+      {
+        "rCm": 3.979505249702353,
+        "vMS": 889.6272557787788,
+        "vectorRect": [
+          246.32449,
+          101.4198,
+          249.3226,
+          104.41956
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "test",
+        "predictedMS": 1053.3515872767325
+      },
+      {
+        "rCm": 4.477407561055404,
+        "vMS": 839.0731826212774,
+        "vectorRect": [
+          261.08701,
+          105.98151,
+          264.08499,
+          108.98126
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "test",
+        "predictedMS": 1185.1433948165563
+      },
+      {
+        "rCm": 4.989228582125042,
+        "vMS": 791.2896784263403,
+        "vectorRect": [
+          276.26208,
+          110.29321,
+          279.26019,
+          113.29297
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "test",
+        "predictedMS": 1320.619402791574
+      },
+      {
+        "rCm": 5.4959626365546566,
+        "vMS": 467.99520004468354,
+        "vectorRect": [
+          291.28641,
+          139.46539,
+          294.28448,
+          142.46521
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "split": "test",
+        "predictedMS": 1454.748920675872
+      }
+    ],
+    "matchedExperimentalValidation": false,
+    "reproducibility": {
+      "relativeHalfWidth": 0.15,
+      "semantics": "common-scale-sensitivity-not-confidence"
+    },
+    "operator": "Rigid tangential velocity projects to line-of-sight centroid Omega*x for arbitrary emissivity, assuming no additional chord-dependent line flow",
+    "sourcePrecision": "0.5 PDF point extraction range; original-to-reproduction digitization error unknown"
+  },
+  "magneticScaling": {
+    "backend": "analytic-reference",
+    "trainingB": 0.17000001605596038,
+    "points": [
+      {
+        "B": 0.1300001337996698,
+        "velocityMS": 749.3511678789584,
+        "temperatureK": 8379.409792869894,
+        "lambda": 0.16098603643302956,
+        "lambdaEnvelope": [
+          0.10114122723727291,
+          0.25047533315609594
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false,
+        "split": "test",
+        "predictedMS": 630.4825274933257,
+        "relativeError": 0.15862875175345478
+      },
+      {
+        "B": 0.17000001605596038,
+        "velocityMS": 922.593351953212,
+        "temperatureK": 9376.603077779477,
+        "lambda": 0.21807504480665774,
+        "lambdaEnvelope": [
+          0.13700801728070452,
+          0.3392991138315351
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false,
+        "split": "train",
+        "predictedMS": 922.593351953212,
+        "relativeError": 0
+      },
+      {
+        "B": 0.20999989831225097,
+        "velocityMS": 1116.8130173423615,
+        "temperatureK": 11260.525270086302,
+        "lambda": 0.26609281387002814,
+        "lambdaEnvelope": [
+          0.16717570262703943,
+          0.41400911334483786
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false,
+        "split": "test",
+        "predictedMS": 1368.6536507584365,
+        "relativeError": 0.22549937143047527
+      },
+      {
+        "B": 0.2549998892138734,
+        "velocityMS": 1345.1464000261037,
+        "temperatureK": 12867.082132999334,
+        "lambda": 0.3378235295973271,
+        "lambdaEnvelope": [
+          0.21224130446440767,
+          0.5256136681087824
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false,
+        "split": "test",
+        "predictedMS": 1899.0477774030976,
+        "relativeError": 0.41177776438776104
+      }
+    ],
+    "matchedExperimentalValidation": false,
+    "inventoryProxy": "Filling pressure / measured diagnostic Tmax",
+    "warning": "Tmax is not a measured volume-mean gas temperature; rates and geometry held fixed"
+  },
+  "mechanism": {
+    "checks": [
+      {
+        "massU": 6.0151228874,
+        "velocityMS": 0,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0
+      },
+      {
+        "massU": 6.0151228874,
+        "velocityMS": 100,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0.004702444475948478
+      },
+      {
+        "massU": 6.0151228874,
+        "velocityMS": 1000,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0.4702444475948395
+      },
+      {
+        "massU": 39.948,
+        "velocityMS": 0,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0
+      },
+      {
+        "massU": 39.948,
+        "velocityMS": 100,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0.03123016028794504
+      },
+      {
+        "massU": 39.948,
+        "velocityMS": 1000,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 3.1230160287944657
+      },
+      {
+        "massU": 131.293,
+        "velocityMS": 0,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0
+      },
+      {
+        "massU": 131.293,
+        "velocityMS": 100,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 0.10264096912699326
+      },
+      {
+        "massU": 131.293,
+        "velocityMS": 1000,
+        "temperatureK": 500,
+        "raFraction": 0.4,
+        "rbFraction": 0.9,
+        "productionLogRatio": 10.264096912699305
+      }
+    ],
+    "maximaUncertainty": [
+      {
+        "B": 0.1300001337996698,
+        "velocityMS": 749.3511678789584,
+        "temperatureK": 8379.409792869894,
+        "lambda": 0.16098603643302956,
+        "lambdaEnvelope": [
+          0.10114122723727291,
+          0.25047533315609594
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false
+      },
+      {
+        "B": 0.17000001605596038,
+        "velocityMS": 922.593351953212,
+        "temperatureK": 9376.603077779477,
+        "lambda": 0.21807504480665774,
+        "lambdaEnvelope": [
+          0.13700801728070452,
+          0.3392991138315351
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false
+      },
+      {
+        "B": 0.20999989831225097,
+        "velocityMS": 1116.8130173423615,
+        "temperatureK": 11260.525270086302,
+        "lambda": 0.26609281387002814,
+        "lambdaEnvelope": [
+          0.16717570262703943,
+          0.41400911334483786
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false
+      },
+      {
+        "B": 0.2549998892138734,
+        "velocityMS": 1345.1464000261037,
+        "temperatureK": 12867.082132999334,
+        "lambda": 0.3378235295973271,
+        "lambdaEnvelope": [
+          0.21224130446440767,
+          0.5256136681087824
+        ],
+        "inputRelativeHalfWidth": 0.15,
+        "confidenceInterval": false,
+        "maximaAtSameLocation": false
+      }
+    ]
+  },
+  "unavailable": [
+    {
+      "id": "marathon-forward-performance",
+      "reason": "No complete public device dataset with matched inputs and measured outputs found"
+    },
+    {
+      "id": "kaneko-he-ar-separation",
+      "reportedOuterToFeed": 1.55,
+      "reason": "Mixture velocity/temperature, sampling/inventory map and uncertainty incomplete"
+    },
+    {
+      "id": "wijnakker-ar-xe-separation",
+      "reportedOddsRatio": 2.15,
+      "radiiM": [
+        0.04,
+        0.06
+      ],
+      "reason": "Matched mixture velocity/temperature profiles unavailable; pure-Ar profiles cannot substitute"
+    },
+    {
+      "id": "compact-ar-negative-control",
+      "reason": "Annular apparatus and unreported transport coefficients not matched by full-cylinder live model"
+    },
+    {
+      "id": "thermal-transient",
+      "reason": "Measured boundary thermocouple temperatures cannot directly validate gas energy; sensor/contact model missing"
+    }
+  ],
+  "sourceDiscrepancies": [
+    {
+      "id": "fig11-first-lambda",
+      "textValue": 0.21,
+      "plottedValue": 0.16097339347905096,
+      "reconstructedFromMaxima": 0.16098603643302956,
+      "action": "Retain discrepancy; use V/T markers, not prose value"
+    },
+    {
+      "id": "fig10-peak",
+      "textApproxMS": 950,
+      "plottedPeakMS": 889.6272557787788,
+      "action": "Do not overwrite marker extraction to match coarse prose"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "sourceSHA256": "b6dce3c7a7c46d56ad83c655e3b56b5232ff2cc28d5af868d36c0999b3da8dea",
+  "predictionSHA256": "1f10da5bc046cd149a024177e2e5c78c2536003e69e5b920c4e16ac4b44f2af2",
+  "pairs": [
+    {
+      "coarseID": "r32-z4-g32-t128-q",
+      "fineID": "r32-z4-g64-t128-q",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-g64-t128-q",
+      "fineID": "r32-z4-g128-t128-q",
+      "axis": "liner"
+    },
+    {
+      "coarseID": "r32-z4-g128-t128-q",
+      "fineID": "r32-z4-g128-t256-q",
+      "axis": "time"
+    }
+  ]
+}

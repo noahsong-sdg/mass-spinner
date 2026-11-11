@@ -1,0 +1,676 @@
+{
+  "schemaVersion": 1,
+  "versions": {
+    "fipy": "4.0.3",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "cases": [
+    {
+      "id": "couette-n16",
+      "kind": "couette",
+      "cells": 16,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 92.04162840526477,
+      "crossCodeAllTimesMaxOverPeak": 0.011325450816609253,
+      "kernelFinalErrorOverPeak": 1.4471033753667997e-09,
+      "fipyFinalErrorOverPeak": 0.0038536240240025833
+    },
+    {
+      "id": "couette-stretched-n16",
+      "kind": "couette-stretched",
+      "cells": 16,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 98.81144493617035,
+      "crossCodeAllTimesMaxOverPeak": 0.001266418550005112,
+      "kernelFinalErrorOverPeak": 1.4045983319581686e-09,
+      "fipyFinalErrorOverPeak": 0.0011469731986000755
+    },
+    {
+      "id": "couette-n32",
+      "kind": "couette",
+      "cells": 32,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 95.92899408284025,
+      "crossCodeAllTimesMaxOverPeak": 0.0035426617554880986,
+      "kernelFinalErrorOverPeak": 1.3160785667943167e-09,
+      "fipyFinalErrorOverPeak": 0.0009707184799340503
+    },
+    {
+      "id": "couette-stretched-n32",
+      "kind": "couette-stretched",
+      "cells": 32,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.63247675511148,
+      "crossCodeAllTimesMaxOverPeak": 0.00032585181697304097,
+      "kernelFinalErrorOverPeak": 1.2807022233088479e-09,
+      "fipyFinalErrorOverPeak": 0.00028577719401158276
+    },
+    {
+      "id": "couette-n64",
+      "kind": "couette",
+      "cells": 64,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 97.94082887646977,
+      "crossCodeAllTimesMaxOverPeak": 0.0009735674629254925,
+      "kernelFinalErrorOverPeak": 1.2720370977078161e-09,
+      "fipyFinalErrorOverPeak": 0.00024345719332067775
+    },
+    {
+      "id": "couette-stretched-n64",
+      "kind": "couette-stretched",
+      "cells": 64,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.88671929612768,
+      "crossCodeAllTimesMaxOverPeak": 8.195211184767143e-05,
+      "kernelFinalErrorOverPeak": 1.2503084768536114e-09,
+      "fipyFinalErrorOverPeak": 7.133320111445059e-05
+    },
+    {
+      "id": "couette-n128",
+      "kind": "couette",
+      "cells": 128,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 98.96440521431059,
+      "crossCodeAllTimesMaxOverPeak": 0.0002539234612482611,
+      "kernelFinalErrorOverPeak": 1.254632374245261e-09,
+      "fipyFinalErrorOverPeak": 6.095271869237907e-05
+    },
+    {
+      "id": "couette-stretched-n128",
+      "kind": "couette-stretched",
+      "cells": 128,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.96511838651465,
+      "crossCodeAllTimesMaxOverPeak": 2.0506064399286562e-05,
+      "kernelFinalErrorOverPeak": 1.242903991493784e-09,
+      "fipyFinalErrorOverPeak": 1.7824302359052432e-05
+    },
+    {
+      "id": "couette-material-n32",
+      "kind": "couette-material",
+      "cells": 32,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 98.09260766199232,
+      "crossCodeAllTimesMaxOverPeak": 0.0006761964317211839,
+      "kernelFinalErrorOverPeak": 7.7868603878299e-16,
+      "fipyFinalErrorOverPeak": 0.0004567883917090959
+    },
+    {
+      "id": "couette-material-n64",
+      "kind": "couette-material",
+      "cells": 64,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.22189156864879,
+      "crossCodeAllTimesMaxOverPeak": 0.00016903193778216026,
+      "kernelFinalErrorOverPeak": 8.59337863280096e-16,
+      "fipyFinalErrorOverPeak": 0.0001130223486529563
+    },
+    {
+      "id": "couette-material-n128",
+      "kind": "couette-material",
+      "cells": 128,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.683414830384,
+      "crossCodeAllTimesMaxOverPeak": 4.2241936295464775e-05,
+      "kernelFinalErrorOverPeak": 8.69615210416225e-15,
+      "fipyFinalErrorOverPeak": 2.813691416976711e-05
+    },
+    {
+      "id": "couette-material-n256",
+      "kind": "couette-material",
+      "cells": 256,
+      "dtS": 0.01,
+      "steps": 200,
+      "normalizingPeakRadS": 99.87133142139957,
+      "crossCodeAllTimesMaxOverPeak": 1.0549397769868935e-05,
+      "kernelFinalErrorOverPeak": 2.6039368614292202e-14,
+      "fipyFinalErrorOverPeak": 7.022000012223051e-06
+    },
+    {
+      "id": "core-annulus-n32",
+      "kind": "core-annulus",
+      "cells": 32,
+      "dtS": 3.6e-05,
+      "steps": 200,
+      "normalizingPeakRadS": 1.5872540416798362,
+      "crossCodeAllTimesMaxOverPeak": 0.004861004465918497,
+      "kernelFinalErrorOverPeak": 0.006494790180715231,
+      "fipyFinalErrorOverPeak": 0.006437989017531255
+    },
+    {
+      "id": "core-annulus-n64",
+      "kind": "core-annulus",
+      "cells": 64,
+      "dtS": 3.6e-05,
+      "steps": 200,
+      "normalizingPeakRadS": 1.5872540416798357,
+      "crossCodeAllTimesMaxOverPeak": 0.0016484659910708797,
+      "kernelFinalErrorOverPeak": 0.0018220727907752518,
+      "fipyFinalErrorOverPeak": 0.0016415403193566058
+    },
+    {
+      "id": "core-annulus-n128",
+      "kind": "core-annulus",
+      "cells": 128,
+      "dtS": 3.6e-05,
+      "steps": 200,
+      "normalizingPeakRadS": 1.5872540416798353,
+      "crossCodeAllTimesMaxOverPeak": 0.0005150461218861567,
+      "kernelFinalErrorOverPeak": 0.00048363959796178817,
+      "fipyFinalErrorOverPeak": 0.00041250471747655745
+    },
+    {
+      "id": "core-annulus-n256",
+      "kind": "core-annulus",
+      "cells": 256,
+      "dtS": 3.6e-05,
+      "steps": 200,
+      "normalizingPeakRadS": 1.5872540416798346,
+      "crossCodeAllTimesMaxOverPeak": 0.0001538866967015451,
+      "kernelFinalErrorOverPeak": 0.00012465992672905791,
+      "fipyFinalErrorOverPeak": 0.00010326067999476114
+    },
+    {
+      "id": "core-annulus-n512",
+      "kind": "core-annulus",
+      "cells": 512,
+      "dtS": 3.6e-05,
+      "steps": 200,
+      "normalizingPeakRadS": 1.5872540416798353,
+      "crossCodeAllTimesMaxOverPeak": 4.4696229819772805e-05,
+      "kernelFinalErrorOverPeak": 3.16493644449616e-05,
+      "fipyFinalErrorOverPeak": 2.5823611838779212e-05
+    },
+    {
+      "id": "variable-n32",
+      "kind": "variable",
+      "cells": 32,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9996988186962042,
+      "crossCodeAllTimesMaxOverPeak": 0.03175826020538946
+    },
+    {
+      "id": "variable-n64",
+      "kind": "variable",
+      "cells": 64,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999247018391445,
+      "crossCodeAllTimesMaxOverPeak": 0.015624722075686572
+    },
+    {
+      "id": "variable-n128",
+      "kind": "variable",
+      "cells": 128,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999811752826011,
+      "crossCodeAllTimesMaxOverPeak": 0.007686711775666885
+    },
+    {
+      "id": "variable-n256",
+      "kind": "variable",
+      "cells": 256,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999952938095762,
+      "crossCodeAllTimesMaxOverPeak": 0.0037983805710974485
+    },
+    {
+      "id": "variable-shifted-n31",
+      "kind": "variable-shifted",
+      "cells": 31,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9996790752964305,
+      "crossCodeAllTimesMaxOverPeak": 0.03330370320296617
+    },
+    {
+      "id": "variable-shifted-n63",
+      "kind": "variable-shifted",
+      "cells": 63,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999222924809749,
+      "crossCodeAllTimesMaxOverPeak": 0.015950037605785634
+    },
+    {
+      "id": "variable-shifted-n127",
+      "kind": "variable-shifted",
+      "cells": 127,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999808776641723,
+      "crossCodeAllTimesMaxOverPeak": 0.007758349762775126
+    },
+    {
+      "id": "variable-shifted-n255",
+      "kind": "variable-shifted",
+      "cells": 255,
+      "dtS": 0.002,
+      "steps": 50,
+      "normalizingPeakRadS": 0.9999952568259328,
+      "crossCodeAllTimesMaxOverPeak": 0.003814851288342719
+    },
+    {
+      "id": "bessel-t100",
+      "kind": "bessel",
+      "cells": 256,
+      "dtS": 0.001,
+      "steps": 100,
+      "normalizingPeakRadS": 0.9999929991071796,
+      "crossCodeAllTimesMaxOverPeak": 0.0001303579052641339,
+      "kernelFinalErrorOverPeak": 0.00252350587165115,
+      "fipyFinalErrorOverPeak": 0.0024777354198877023
+    },
+    {
+      "id": "bessel-t200",
+      "kind": "bessel",
+      "cells": 256,
+      "dtS": 0.0005,
+      "steps": 200,
+      "normalizingPeakRadS": 0.9999929991071796,
+      "crossCodeAllTimesMaxOverPeak": 0.0001308735780881893,
+      "kernelFinalErrorOverPeak": 0.0012901711948348198,
+      "fipyFinalErrorOverPeak": 0.0012445769676292294
+    },
+    {
+      "id": "bessel-t400",
+      "kind": "bessel",
+      "cells": 256,
+      "dtS": 0.00025,
+      "steps": 400,
+      "normalizingPeakRadS": 0.9999929991071796,
+      "crossCodeAllTimesMaxOverPeak": 0.00013112723830917467,
+      "kernelFinalErrorOverPeak": 0.0006714733007716424,
+      "fipyFinalErrorOverPeak": 0.0006259675000541323
+    },
+    {
+      "id": "bessel-t800",
+      "kind": "bessel",
+      "cells": 256,
+      "dtS": 0.000125,
+      "steps": 800,
+      "normalizingPeakRadS": 0.9999929991071796,
+      "crossCodeAllTimesMaxOverPeak": 0.00013125536699134933,
+      "kernelFinalErrorOverPeak": 0.0003616145300895842,
+      "fipyFinalErrorOverPeak": 0.000316153021065633
+    }
+  ],
+  "gates": [
+    {
+      "name": "couette finest cross-code, all shared times",
+      "value": 0.0002539234612482611,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette finest kernel analytical reference",
+      "value": 1.254632374245261e-09,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette finest fipy analytical reference",
+      "value": 6.095271869237907e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-stretched finest cross-code, all shared times",
+      "value": 2.0506064399286562e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-stretched finest kernel analytical reference",
+      "value": 1.242903991493784e-09,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-stretched finest fipy analytical reference",
+      "value": 1.7824302359052432e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-material finest cross-code, all shared times",
+      "value": 1.0549397769868935e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-material finest kernel analytical reference",
+      "value": 2.6039368614292202e-14,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "couette-material finest fipy analytical reference",
+      "value": 7.022000012223051e-06,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "core-annulus finest cross-code, all shared times",
+      "value": 4.4696229819772805e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "core-annulus finest kernel analytical reference",
+      "value": 3.16493644449616e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "core-annulus finest fipy analytical reference",
+      "value": 2.5823611838779212e-05,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "variable finest cross-code, all shared times",
+      "value": 0.0037983805710974485,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "variable-shifted finest cross-code, all shared times",
+      "value": 0.003814851288342719,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "bessel finest cross-code, all shared times",
+      "value": 0.00013125536699134933,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "bessel finest kernel analytical reference",
+      "value": 0.0003616145300895842,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "bessel finest fipy analytical reference",
+      "value": 0.000316153021065633,
+      "limit": 0.005,
+      "passed": true
+    },
+    {
+      "name": "independent omegaRelative",
+      "value": 1.6256522665937813e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "independent equationRelative",
+      "value": 1.9910269755371547e-16,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "independent ledgerRelative",
+      "value": 2.4570977567456587e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "independent angularRelative",
+      "value": 2.9718946267189726e-12,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "independent energyRelative",
+      "value": 2.4986781457382785e-13,
+      "limit": 1e-09,
+      "passed": true
+    },
+    {
+      "name": "finest analytical Doppler projection",
+      "value": 0.000148868760055573,
+      "limit": 0.005,
+      "passed": true
+    }
+  ],
+  "allNumericalGatesPassed": true,
+  "independentMaxima": {
+    "omegaRelative": 1.6256522665937813e-13,
+    "equationRelative": 1.9910269755371547e-16,
+    "ledgerRelative": 2.4570977567456587e-12,
+    "angularRelative": 2.9718946267189726e-12,
+    "energyRelative": 2.4986781457382785e-13
+  },
+  "besselTimestepDifferences": [
+    {
+      "coarse": "bessel-t100",
+      "fine": "bessel-t200",
+      "finalDifferenceOverInitialAmplitude": 0.0012333346768163298
+    },
+    {
+      "coarse": "bessel-t200",
+      "fine": "bessel-t400",
+      "finalDifferenceOverInitialAmplitude": 0.0006186978940631775
+    },
+    {
+      "coarse": "bessel-t400",
+      "fine": "bessel-t800",
+      "finalDifferenceOverInitialAmplitude": 0.00030985877068205814
+    }
+  ],
+  "profileChallenge": {
+    "candidateFrozenBeforeScoring": "Constant-mu full-cylinder unforced core + annular Jr proportional to1/r, stationary outer wall",
+    "innerDriveRadiusM": 0.0075,
+    "radiusM": 0.06,
+    "fitScalePerS": 56358.48393537949,
+    "fitCount": 3,
+    "heldoutCount": 5,
+    "points": [
+      {
+        "rCm": 1.0034196422849777,
+        "vMS": 310.7599811039808,
+        "vectorRect": [
+          158.08569,
+          153.65338,
+          161.08369,
+          156.6532
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.010034196422849776,
+        "split": "train",
+        "unitScaleProjectedMS": 0.007058054843237366,
+        "predictedMS": 397.7812704976205,
+        "residualMS": 87.02128939363968,
+        "relativeError": 0.280027335194496
+      },
+      {
+        "rCm": 1.9915058702903605,
+        "vMS": 540.8237610791358,
+        "vectorRect": [
+          187.3817,
+          132.8938,
+          190.37981,
+          135.89355
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.019915058702903606,
+        "split": "train",
+        "unitScaleProjectedMS": 0.010821838356016874,
+        "predictedMS": 609.9024031388506,
+        "residualMS": 69.07864205971475,
+        "relativeError": 0.12772856340830566
+      },
+      {
+        "rCm": 2.9934092879089893,
+        "vMS": 768.0956387107145,
+        "vectorRect": [
+          217.08749,
+          112.38611,
+          220.08549,
+          115.38586
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.029934092879089894,
+        "split": "train",
+        "unitScaleProjectedMS": 0.011533829277367616,
+        "predictedMS": 650.0291320419324,
+        "residualMS": -118.06650666878215,
+        "relativeError": 0.15371328870837292
+      },
+      {
+        "rCm": 3.4942091381584044,
+        "vMS": 873.381636787127,
+        "vectorRect": [
+          231.93581,
+          102.88568,
+          234.9339,
+          105.8855
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.034942091381584044,
+        "split": "test",
+        "unitScaleProjectedMS": 0.010908437912232912,
+        "predictedMS": 614.7830228366631,
+        "residualMS": -258.5986139504639,
+        "relativeError": 0.2960889066797419
+      },
+      {
+        "rCm": 3.979505249702353,
+        "vMS": 889.6272557787788,
+        "vectorRect": [
+          246.32449,
+          101.4198,
+          249.3226,
+          104.41956
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.03979505249702353,
+        "split": "test",
+        "unitScaleProjectedMS": 0.009752602128683846,
+        "predictedMS": 549.6418703975763,
+        "residualMS": -339.9853853812025,
+        "relativeError": 0.38216610740368967
+      },
+      {
+        "rCm": 4.477407561055404,
+        "vMS": 839.0731826212774,
+        "vectorRect": [
+          261.08701,
+          105.98151,
+          264.08499,
+          108.98126
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.04477407561055404,
+        "split": "test",
+        "unitScaleProjectedMS": 0.00805066013313052,
+        "predictedMS": 453.7229997822365,
+        "residualMS": -385.3501828390409,
+        "relativeError": 0.4592569406582642
+      },
+      {
+        "rCm": 4.989228582125042,
+        "vMS": 791.2896784263403,
+        "vectorRect": [
+          276.26208,
+          110.29321,
+          279.26019,
+          113.29297
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.04989228582125042,
+        "split": "test",
+        "unitScaleProjectedMS": 0.005798832142789034,
+        "predictedMS": 326.813388163338,
+        "residualMS": -464.4762902630023,
+        "relativeError": 0.5869864133533489
+      },
+      {
+        "rCm": 5.4959626365546566,
+        "vMS": 467.99520004468354,
+        "vectorRect": [
+          291.28641,
+          139.46539,
+          294.28448,
+          142.46521
+        ],
+        "rHalfWidthCm": 0.016863804541759838,
+        "vHalfWidthMS": 5.541137925129031,
+        "xM": 0.05495962636554657,
+        "split": "test",
+        "unitScaleProjectedMS": 0.003105148955055402,
+        "predictedMS": 175.00148750045028,
+        "residualMS": -292.9937125442333,
+        "relativeError": 0.6260613624162356
+      }
+    ],
+    "heldoutRmsMS": 355.6800833982476,
+    "observedPeakMS": 889.6272557787788,
+    "heldoutRmsOverPeak": 0.3998079882196118,
+    "prospectiveScreen": 0.2,
+    "profileShapeScreenPassed": false,
+    "maximumHeldoutRelativeError": 0.6260613624162356,
+    "everyHeldoutWithin20Percent": false,
+    "matchedExperimentalValidation": false,
+    "operatorAssumption": "Optically thin uniform-emissivity spectral centroid; no extra chord-dependent flow",
+    "emissivityExperimentallyEstablished": false,
+    "extractionCornerSensitivity": {
+      "membership": "Nominal three inner / five outer, frozen before perturbation",
+      "cornerCombinations": 65536,
+      "fitScalePerSRange": [
+        55565.36363932088,
+        57160.14218141708
+      ],
+      "heldoutRmsOverPeakRange": [
+        0.3830354391605435,
+        0.4167088926014246
+      ],
+      "everyCornerPasses20PercentScreen": false,
+      "anyCornerPasses20PercentScreen": false,
+      "warning": "Extraction rectangle corners only; not statistical or full continuous uncertainty bounds; excludes unknown reproduced-figure, emissivity and geometry errors"
+    },
+    "warning": "One fitted amplitude; not unfitted current-to-performance, temperature or separation validation"
+  },
+  "pressureChallenge": {
+    "predictedSteadyRatioAtFixedMuAndDrive": 1,
+    "reportedApproximateRatio": 0.6666666666666666,
+    "relativeRatioError": 0.5,
+    "prospectiveScreenPassed": false,
+    "matchedExperimentalValidation": false,
+    "warning": "Density drops out of prescribed constant-viscosity steady momentum; pressure trend remains unexplained"
+  },
+  "experimentalValidation": false,
+  "liveBackendChanged": false,
+  "scope": "Prescribed density and viscosity; standalone neutral momentum kernel. No coupled species or thermal evolution.",
+  "inputsSHA256": {
+    "cases": "eb365601aff51c8337499a0d3c14d4c43825e0749383736da9a8ec683905acb0",
+    "production": "8e104bc02f956f9a1381b227780f92f5cc1f37a8e7000f641dcce62fddb83021",
+    "fipy": "dd80ca751c9d01970eec227cc368089bcfdd5a4f7eee0637a5111b0ea52127fa",
+    "audit": "3a02d40109257fbd13bec89fadc43529dcc22a737d31b42053b72b77b01a5f9c",
+    "diagnostic": "d523b7a90b521b757d06d1567548ff77ca83cbedadc7cfc44d86733b232211c8"
+  }
+}

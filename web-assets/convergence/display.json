@@ -1,0 +1,218 @@
+{
+  "modelVersion": 9,
+  "sourceHash": "7a92e949261c0cb257d44d660d065559f07ffeef661c747fd7d9398ec9e79227",
+  "status": "fail",
+  "runCount": 48,
+  "seedCount": 6,
+  "horizonUS": 200.0,
+  "levels": [
+    {
+      "id": "default",
+      "particlesPerSpecies": 128,
+      "dtNS": 100.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.75390625,
+        "standardError": 0.011891093809198828,
+        "halfWidth95": 0.03056703170623794
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6145833333333334,
+        "standardError": 0.010416666666666666,
+        "halfWidth95": 0.02677689583333333
+      },
+      "maxRawMomentumResidual": 0.017309796095071734,
+      "maxUnresolvedExposure": 0.533944476557585
+    },
+    {
+      "id": "dt50ns",
+      "particlesPerSpecies": 128,
+      "dtNS": 50.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.7408854166666666,
+        "standardError": 0.013443655728271152,
+        "halfWidth95": 0.034558019429290716
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.5911458333333334,
+        "standardError": 0.02340854693150441,
+        "halfWidth95": 0.06017358938828047
+      },
+      "maxRawMomentumResidual": 0.018313130950237004,
+      "maxUnresolvedExposure": 0.5184014994523913
+    },
+    {
+      "id": "dt25ns",
+      "particlesPerSpecies": 128,
+      "dtNS": 25.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.7291666666666666,
+        "standardError": 0.007179192058380323,
+        "halfWidth95": 0.01845470187981541
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6145833333333334,
+        "standardError": 0.011704273465752204,
+        "halfWidth95": 0.03008679469414023
+      },
+      "maxRawMomentumResidual": 0.025274840381368197,
+      "maxUnresolvedExposure": 0.5013246519294023
+    },
+    {
+      "id": "N512",
+      "particlesPerSpecies": 512,
+      "dtNS": 100.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.7298177083333334,
+        "standardError": 0.007196882086164312,
+        "halfWidth95": 0.01850017554681643
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6025390625,
+        "standardError": 0.0053309937749828834,
+        "halfWidth95": 0.01370375664008305
+      },
+      "maxRawMomentumResidual": 0.020216102544937206,
+      "maxUnresolvedExposure": 0.1763179258216962
+    },
+    {
+      "id": "N1024",
+      "particlesPerSpecies": 1024,
+      "dtNS": 100.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.7267252604166666,
+        "standardError": 0.005707764386041775,
+        "halfWidth95": 0.014672276391000036
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6062825520833334,
+        "standardError": 0.005297595289900621,
+        "halfWidth95": 0.013617903095503318
+      },
+      "maxRawMomentumResidual": 0.01752268651761658,
+      "maxUnresolvedExposure": 0.0913982442176256
+    },
+    {
+      "id": "h4-N304",
+      "particlesPerSpecies": 304,
+      "dtNS": 100.0,
+      "cellsAcross": 4,
+      "endA": {
+        "n": 6,
+        "mean": 0.7439692982456142,
+        "standardError": 0.011439824932690731,
+        "halfWidth95": 0.029407008055126006
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6052631578947368,
+        "standardError": 0.01001355268143058,
+        "halfWidth95": 0.025740658278937185
+      },
+      "maxRawMomentumResidual": 0.013552672627699283,
+      "maxUnresolvedExposure": 0.36825809499731277
+    },
+    {
+      "id": "h6-N1024",
+      "particlesPerSpecies": 1024,
+      "dtNS": 100.0,
+      "cellsAcross": 6,
+      "endA": {
+        "n": 6,
+        "mean": 0.72900390625,
+        "standardError": 0.0034549708431502327,
+        "halfWidth95": 0.008881285859926811
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6048177083333334,
+        "standardError": 0.0069038049695603135,
+        "halfWidth95": 0.01774679678626229
+      },
+      "maxRawMomentumResidual": 0.009631680043439972,
+      "maxUnresolvedExposure": 0.3762071761736501
+    },
+    {
+      "id": "collision-off",
+      "particlesPerSpecies": 128,
+      "dtNS": 100.0,
+      "cellsAcross": 3,
+      "endA": {
+        "n": 6,
+        "mean": 0.7669270833333334,
+        "standardError": 0.013890245159473527,
+        "halfWidth95": 0.03570601418252978
+      },
+      "endB": {
+        "n": 6,
+        "mean": 0.6041666666666666,
+        "standardError": 0.013631512841981669,
+        "halfWidth95": 0.03504092154436692
+      },
+      "maxRawMomentumResidual": 1.1322079846024055e-06,
+      "maxUnresolvedExposure": 0.5201555679168888
+    }
+  ],
+  "checks": [
+    {
+      "name": "timestep: default \u2192 dt50ns",
+      "status": "unknown",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "timestep: dt50ns \u2192 dt25ns",
+      "status": "unknown",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "particle: default \u2192 N512",
+      "status": "unknown",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "particle: N512 \u2192 N1024",
+      "status": "unknown",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "spatial: default \u2192 h4-N304",
+      "status": "unknown",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "spatial: h4-N304 \u2192 h6-N1024",
+      "status": "fail",
+      "reason": "Paired whole-run seed difference intervals must lie entirely within predeclared observable budgets. Undefined populations remain unknown."
+    },
+    {
+      "name": "alignment: required coverage",
+      "status": "unknown",
+      "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+    },
+    {
+      "name": "orientation: required coverage",
+      "status": "unknown",
+      "reason": "This case has not supplied this independent refinement/sensitivity comparison."
+    },
+    {
+      "name": "effect versus numerical error",
+      "status": "unknown",
+      "reason": "Collision-on/off differences are reported separately; this matrix does not establish a bound on continuum bias relative to the physical effect."
+    }
+  ],
+  "inference": "Approximate pointwise 95% Student-t intervals across independent whole-run seeds; refinement differences are paired by seed. Intervals are withheld when no sampling spread is observed above floating resolution; identical finite samples cannot bound rare tails. No independent-ion confidence interval, simultaneous band or experimental validation is implied."
+}

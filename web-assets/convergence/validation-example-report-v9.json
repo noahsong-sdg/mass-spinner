@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "caseId": "synthetic-validation-contract",
+  "status": "blocked",
+  "reasons": [
+    "Synthetic source: comparison is not experimental evidence.",
+    "Model numerical convergence is not established."
+  ],
+  "residuals": [
+    {
+      "condition": "fit",
+      "split": "calibration",
+      "observable": "density",
+      "unit": "m^-3",
+      "measured": 1000000000000000000,
+      "predicted": 1000000000000000000,
+      "residual": 0,
+      "measurementUncertainty": 10000000000000000,
+      "predictiveUncertainty": 0,
+      "numericalErrorBound": 1000000000000000,
+      "standardizedResidual": 0,
+      "scoreLower": 0,
+      "scoreUpper": 0.1
+    },
+    {
+      "condition": "heldout",
+      "split": "heldout",
+      "observable": "density",
+      "unit": "m^-3",
+      "coordinate": {
+        "name": "radius",
+        "unit": "m",
+        "value": 0.1
+      },
+      "measured": 2000000000000000000,
+      "predicted": 2000000000000000000,
+      "residual": 0,
+      "measurementUncertainty": 10000000000000000,
+      "predictiveUncertainty": 0,
+      "numericalErrorBound": 1000000000000000,
+      "standardizedResidual": 0,
+      "scoreLower": 0,
+      "scoreUpper": 0.1
+    }
+  ],
+  "heldoutCount": 1,
+  "calibrationCount": 1,
+  "interpretation": "Consistency with supplied measurements only; provenance, model scope, uncertainty assumptions and independence require external review. No experimental validity follows from synthetic data or calibration fit."
+}

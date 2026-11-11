@@ -1,0 +1,68 @@
+{
+  "argon": [
+    {
+      "temperatureK": 300,
+      "viscosityPaS": 0.00002268995113788702,
+      "conductivityWmK": 0.017709405071465133,
+      "collisionIntegralM2": 4.0463713378236537e-19
+    },
+    {
+      "temperatureK": 500,
+      "viscosityPaS": 0.00003392883996213605,
+      "conductivityWmK": 0.02648130737889,
+      "collisionIntegralM2": 3.4934510307918494e-19
+    },
+    {
+      "temperatureK": 1750,
+      "viscosityPaS": 0.00007962126636882399,
+      "conductivityWmK": 0.06214404120395284,
+      "collisionIntegralM2": 2.7850218874073515e-19
+    },
+    {
+      "temperatureK": 8000,
+      "viscosityPaS": 0.00023111099563794966,
+      "conductivityWmK": 0.18038109528530274,
+      "collisionIntegralM2": 2.0514600027941348e-19
+    },
+    {
+      "temperatureK": 10000,
+      "viscosityPaS": 0.00027214296167415774,
+      "conductivityWmK": 0.21240636069896274,
+      "collisionIntegralM2": 1.9477874452256716e-19
+    },
+    {
+      "temperatureK": 12867,
+      "viscosityPaS": 0.00032683559249893526,
+      "conductivityWmK": 0.25509371369562867,
+      "collisionIntegralM2": 1.8397040915715682e-19
+    },
+    {
+      "temperatureK": 20000,
+      "viscosityPaS": 0.0004615441503451929,
+      "conductivityWmK": 0.360233138765119,
+      "collisionIntegralM2": 1.624203401905923e-19
+    }
+  ],
+  "lithium": [
+    {
+      "temperatureK": 100,
+      "viscosityPaS": 0.0000016708199340977339,
+      "conductivityWmK": 0.0074388734645497835
+    },
+    {
+      "temperatureK": 500,
+      "viscosityPaS": 0.000006701017649649026,
+      "conductivityWmK": 0.02983446711531636
+    },
+    {
+      "temperatureK": 1500,
+      "viscosityPaS": 0.000017294037829849446,
+      "conductivityWmK": 0.07699702193034881
+    },
+    {
+      "temperatureK": 3000,
+      "viscosityPaS": 0.00003145468141883826,
+      "conductivityWmK": 0.14004345421508244
+    }
+  ]
+}

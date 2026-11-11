@@ -1,0 +1,10 @@
+{
+  "label": "continuum-0",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/fixtures.py",
+    "/work/home/resolved68-remaining/continuum/cases.json"
+  ],
+  "exitCode": 0,
+  "seconds": 0.03833862499999996
+}

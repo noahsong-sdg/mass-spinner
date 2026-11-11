@@ -1,0 +1,35 @@
+[
+  {
+    "label": "benchmark",
+    "exitCode": 0,
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/benchmark.ts",
+      "/work/home/thermal69-benchmark.json"
+    ]
+  },
+  {
+    "label": "gas-q512-w128",
+    "exitCode": 0,
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"gas-q512-w128\"]"
+    ]
+  },
+  {
+    "label": "gas-q1024-w128",
+    "exitCode": 0,
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"gas-q1024-w128\"]"
+    ]
+  }
+]

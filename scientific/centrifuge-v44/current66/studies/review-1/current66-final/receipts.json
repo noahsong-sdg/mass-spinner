@@ -1,0 +1,109 @@
+[
+  {
+    "label": "electrical",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/run_study.py",
+      "/work/home/current66-final/electrical"
+    ],
+    "exitCode": 0,
+    "seconds": 1.741586168
+  },
+  {
+    "label": "analysis-tests",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scientific/current-v66",
+      "-p",
+      "test_analysis.py"
+    ],
+    "exitCode": 0,
+    "seconds": 0.051881666999999965
+  },
+  {
+    "label": "coupled",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/current-v66/coupled.ts",
+      "/work/home/current66-final/coupled.json",
+      "[8,16,32,64]"
+    ],
+    "exitCode": 0,
+    "seconds": 101.064286838
+  },
+  {
+    "label": "coupled-independent",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/check_coupled.py",
+      "/work/home/current66-final/coupled.json",
+      "/work/home/current66-final/coupled-audit.json"
+    ],
+    "exitCode": 0,
+    "seconds": 2.4287322509999996
+  },
+  {
+    "label": "coupled-refinement",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/coupled_convergence.py",
+      "/work/home/current66-final/coupled.json",
+      "/work/home/current66-final/coupled-convergence.json"
+    ],
+    "exitCode": 1,
+    "seconds": 0.14637624999998877
+  },
+  {
+    "label": "tests",
+    "command": [
+      "npm",
+      "test"
+    ],
+    "exitCode": 0,
+    "seconds": 45.109334270999994
+  },
+  {
+    "label": "typecheck",
+    "command": [
+      "npm",
+      "run",
+      "typecheck"
+    ],
+    "exitCode": 0,
+    "seconds": 1.0507452930000056
+  },
+  {
+    "label": "build",
+    "command": [
+      "npm",
+      "run",
+      "build"
+    ],
+    "exitCode": 0,
+    "seconds": 0.40152058399999646
+  },
+  {
+    "label": "site",
+    "command": [
+      "npm",
+      "run",
+      "check:site"
+    ],
+    "exitCode": 0,
+    "seconds": 0.19757325000000492
+  },
+  {
+    "label": "assets",
+    "command": [
+      "npm",
+      "run",
+      "check:assets"
+    ],
+    "exitCode": 0,
+    "seconds": 0.05224929199999906
+  }
+]

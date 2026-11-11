@@ -1,0 +1,18 @@
+{
+  "label": "resolved68-remaining-cases",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import concurrent.futures, json, os, pathlib, subprocess, sys, time\nfolder=pathlib.Path('/work/home/resolved68-remaining'); folder.mkdir(exist_ok=False)\npython=sys.executable\nbase=['node_modules/.bin/tsx','scientific/resolved-v68/campaign.ts','scientific/resolved-v68/specifications.json','/work/home/resolved68-campaign']\nids=['radial-r32-z64-g128-t256','axial-r64-z32-g128-t256','liner-r64-z64-g64-t256']\nenv=dict(os.environ,OPENBLAS_NUM_THREADS='1',OMP_NUM_THREADS='1')\ndef execute(label,command,timeout):\n started=time.monotonic()\n result=subprocess.run(command,capture_output=True,text=True,timeout=timeout,env=env)\n (folder/(label+'.log')).write_text(result.stdout+'\\n'+result.stderr)\n record={'label':label,'command':command,'exitCode':result.returncode,'seconds':time.monotonic()-started}\n (folder/(label+'.receipt.json')).write_text(json.dumps(record,indent=2)+'\\n')\n return record\ndef reference():\n target=folder/'continuum';target.mkdir()\n scripts=pathlib.Path('scientific/current-v66')\n commands=[\n [python,str(scripts/'fixtures.py'),str(target/'cases.json')],\n ['node_modules/.bin/tsx',str(scripts/'campaign.ts'),str(target/'cases.json'),str(target/'production.json')],\n [python,str(scripts/'reference_fipy.py'),str(target/'cases.json'),str(target/'fipy.json')],\n [python,str(scripts/'analyze.py'),str(target/'cases.json'),str(target/'production.json'),str(target/'fipy.json'),str(target/'analysis.json')]]\n records=[]\n for i,command in enumerate(commands):\n  row=execute('continuum-'+str(i),command,180);records.append(row)\n  if row['exitCode']:break\n return {'label':'actual-fipy-continuum','commands':records,'exitCode':max(row['exitCode'] for row in records)}\nrecords=[]\nwith concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:\n jobs=[pool.submit(execute,value,base+[json.dumps([value])],850) for value in ids]\n jobs.append(pool.submit(reference))\n for job in concurrent.futures.as_completed(jobs):\n  row=job.result();records.append(row)\n  (folder/'receipts.json').write_text(json.dumps(records,indent=2)+'\\n')\n  print(json.dumps(row),flush=True)\nsys.exit(0 if all(row['exitCode']==0 for row in records) else 1)\n"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 736,
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "exitCode": 0,
+  "seconds": 560.606850299,
+  "sourceVerifiedBeforeAndAfter": true
+}

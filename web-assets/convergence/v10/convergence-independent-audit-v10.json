@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "review": "independent Python re-evaluation of frozen TS artifacts; Student-t inverseCDF independently integrated then rounded to the existing table precision; not a simultaneous interval or experimental-validation certificate",
+  "auditorSourceSHA256": "ed2301a6de4451435b320785525c8a86d352e1cd22a38dc1bb222eddbe033e54",
+  "campaigns": [
+    {
+      "file": "assets/convergence-default-200us-fixed-v10.json",
+      "sha256": "67f8b70ffa97c246ca3314ec41bb64f28a12c9b40224d42f01764cd779b69234",
+      "runs": 48,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 372,
+      "declaredSummaryGate": "fail",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    },
+    {
+      "file": "assets/convergence-default-200us-axisymmetric-v10.json",
+      "sha256": "6deb45231d93e0b7aa35818ffca46cc81dc94724d64c975bd87e660153dff98d",
+      "runs": 48,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 372,
+      "declaredSummaryGate": "fail",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    },
+    {
+      "file": "assets/convergence-default-200us-axisymmetric-source-aligned-v10.json",
+      "sha256": "e73fabe4cb6cc519ad1bc9b4a90dde26da1a7f7258f3e951b1c6d1fbe9db57b6",
+      "runs": 48,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 372,
+      "declaredSummaryGate": "fail",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    },
+    {
+      "file": "assets/convergence-axisymmetric-refinement-v10.json",
+      "sha256": "79d801bffc069ec04b33251cb37fcdd5b23f54ce2740cfc2fcb5bca8bd70dfc9",
+      "runs": 24,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 124,
+      "declaredSummaryGate": "fail",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    },
+    {
+      "file": "assets/convergence-axisymmetric-fine-dt-v10.json",
+      "sha256": "a9dde0a222808e0607d1dc86c718a9229749e5fc8a541124bce94c73037fba8e",
+      "runs": 18,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 124,
+      "declaredSummaryGate": "unknown",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    },
+    {
+      "file": "assets/convergence-confirmation-v10.json",
+      "sha256": "945710d81350812336b3fa4ebb649f6cc4788d94dea15bbec5d6fed8f83acec6",
+      "runs": 48,
+      "sourceHash": "8fb6f995e56e9fe0e2f80a75e0c6cabf1b042a72efb432694cd52397afc5b11a",
+      "sourceFilesChecked": 13,
+      "pairedObservableIntervalsRecomputed": 62,
+      "declaredSummaryGate": "fail",
+      "checks": "all run membership, source hashes, physical settings, seeds, budgets, summary moments and paired intervals/verdicts matched"
+    }
+  ],
+  "wholeRunsChecked": 234
+}

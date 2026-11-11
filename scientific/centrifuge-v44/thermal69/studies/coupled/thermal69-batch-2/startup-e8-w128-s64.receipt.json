@@ -1,0 +1,19 @@
+{
+  "id": "startup-e8-w128-s64",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/thermal-local-v69/campaign.ts",
+    "/work/home/thermal69-seed.json",
+    "scientific/thermal-local-v69/specifications.json",
+    "/work/home/thermal69-campaign",
+    "[\"startup-e8-w128-s64\"]"
+  ],
+  "exitCode": 0,
+  "losslessAcceptedNDJSONArchive": {
+    "path": "/work/home/thermal69-campaign/startup-e8-w128-s64.steps.ndjson.gz",
+    "uncompressedSHA256": "b64c5d3c5e7e34367526f159cc8f31becf0762a17e854f12ba41982ee7d954b0",
+    "uncompressedBytes": 31525853,
+    "compressedBytes": 13977430,
+    "gzipSHA256": "5ae9befcca2633520ff9ed8790c3d3a3d389499163a392ab10b3be75fc2b7756"
+  }
+}

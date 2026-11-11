@@ -1,0 +1,93 @@
+{
+  "planSHA256": "eebf8413d4fe32a6239ed317809ee4651a95ac2ae85fff6ae4a9a757f65a9ceb",
+  "sourceSHA256": {
+    "aggregate.py": "7e8c0c40a6e850945a7b5052e6652a5a1c16cf521ec0f71c334b30e53290fc9e",
+    "campaign_review.py": "8fd5c126d5484eb04863b0482dfd3a68ca057b2ab9c0b762cb8acae3e7063966",
+    "case.py": "188f2c346e70d689dd9ab3fb5dc6df13d1bcd1e1ea49099e5467a8a1483000ff",
+    "case_process.py": "c4a5d1de871c1d2b995ede3d9bde63dd13858075383d67d1b14265283c219745",
+    "common_initial.py": "20caa6636102ef368b07c004c36aa24745542bdc180d5c98e0d92fc19e5f38cd",
+    "density.py": "b8fae4c1961bcf072b4580656d1baa3a8501f31704deacb05d4f48abaaf5ee0e",
+    "density_cost.py": "6db1231eb7c26946dec838a6e7d67f8ed2467158b13b493e4d0db022d10711da",
+    "figures.py": "d9c458623896a531da9a729990a0afb4bfd7ff90a473e29edb62fe07b6f9ac45",
+    "gaussian.py": "813e3e2358cb8bb54c084ec11bceec443a7f2426a7ccf6d4df54dda2a61094ff",
+    "geometry.py": "20a2b0bd55228e8eaa13bd30b8838af8e256165e1730719d20d8254cfe470eb7",
+    "initial_reference.py": "54148d866c2c2df09c6bd1cc9f299fee59a226c8687b1490b8031bb40603f012",
+    "main_compare.py": "92a48c5c33a8d87b2aa4e7c7fb6490901f823d3bda006f6023d01656280905a6",
+    "physics.py": "5527c3ec41fcad2fa1c62772a2912ace492a6c1fb16d6593763a92cc23f0ef32",
+    "pilot.py": "8bac39455c66637c65270a95ffbdbb8f4a052fb0575ca2504238f626122d5d1b",
+    "rate_compare.py": "860cc26e3363c78d44eaa91b554017c9d058234c1cc640775ceb4621a246d6c5",
+    "review.py": "0f0b24944be33f631ea1fb6330d68c202c4406f3a6f758bba7346647d497a251",
+    "run_checks.py": "a107be1bb47ba3c2c7577fec7bd4d31f18260fc6c2134044b0377ee4ffbf2a4c",
+    "seal.py": "5f5d4dd788f2eb326f8ec394e260fff4391d68af5c9336e2196fb05a45bb595b",
+    "shape.py": "34b8462b89429bf2753a35cf347f03ce80ecfdcf34a4da2082a9d7bff773c797",
+    "sobol_compare.py": "fc1af09f27302654933c2f953982bdcdbd8e3c70178bb6314b064f7eac07a603",
+    "sobol_review.py": "f7ddf361c02b3ff66aa817aaaa3c7d6f0c22b472d4fd1fb2363371a3d037d357",
+    "study.py": "788c3cc86dd49cf49f4133917d07fa77de7de3992ccdde29d3a90f585b967031",
+    "symmetry.py": "fe84ec22f1108dc06f9e7c3d98c646089967d75f16fdf84a5e8f19ca9929ae6a",
+    "test_case.py": "8318e661c7099d08e9fb67cb15813f966dd66c3cb0f45de661492c0618a45021",
+    "test_density.py": "398c4300497acf0b258e027bf4037d70579e95018f4a266b2e98b5aef163901d",
+    "test_gaussian.py": "3d6dcf47f6d53df9209796a36712004834ebb2649a06564cfd9af3c026af36e1",
+    "test_geometry.py": "5945deba1e260bec01cf5ff8faf803c3a8c23ab51b0a0f6fb14fcaaa9c0d468e",
+    "test_physics.py": "e06058191f5d056e87340032c2837606237a6960aa3a8cee8ca8153dd6d8d26e",
+    "test_rate_compare.py": "ca9c45543f68963b82acd3a2978bce6de82bd90329c40e619e22f09080f3bd1d",
+    "test_review.py": "763cdb663ad528a6a4bbdcc67aa559e6b78082b2a6237d5cacbb3115813289c2",
+    "test_seal.py": "57b51012b91bfec59a984d2b5a7b45c619e3018f792871bc5842785da4bcd433"
+  },
+  "inputManifestSHA256": "096b5774456ac3a9c48f953e5772de80561437c9769f9760867aba1b697a7999",
+  "comparison": {
+    "id": "width-a010-a005",
+    "left": "combined-n8-q5-a010",
+    "right": "combined-n8-q5-a005"
+  },
+  "status": "COMPLETE",
+  "records": [
+    {
+      "timeS": 5e-05,
+      "species": [
+        {
+          "gate": "FAIL",
+          "quadratureGate": "NOT_REQUIRED_SEPARATED_LOWER_WITNESS",
+          "characteristicLowerWitness": 0.039082245993980816,
+          "roundoffEnvelope": 1e-12,
+          "bound": null,
+          "scope": "Analytic full-3D L1 lower inequality evaluated in binary64; not an L1 integral value",
+          "species": 1
+        },
+        {
+          "gate": "FAIL",
+          "quadratureGate": "NOT_REQUIRED_SEPARATED_LOWER_WITNESS",
+          "characteristicLowerWitness": 0.023418312713092627,
+          "roundoffEnvelope": 1e-12,
+          "bound": null,
+          "scope": "Analytic full-3D L1 lower inequality evaluated in binary64; not an L1 integral value",
+          "species": 2
+        }
+      ],
+      "gate": "FAIL"
+    },
+    {
+      "timeS": 0.0001,
+      "species": [
+        {
+          "gate": "FAIL",
+          "quadratureGate": "NOT_REQUIRED_SEPARATED_LOWER_WITNESS",
+          "characteristicLowerWitness": 0.057569066071056184,
+          "roundoffEnvelope": 1e-12,
+          "bound": null,
+          "scope": "Analytic full-3D L1 lower inequality evaluated in binary64; not an L1 integral value",
+          "species": 1
+        },
+        {
+          "gate": "FAIL",
+          "quadratureGate": "NOT_REQUIRED_SEPARATED_LOWER_WITNESS",
+          "characteristicLowerWitness": 0.03780059631240526,
+          "roundoffEnvelope": 1e-12,
+          "bound": null,
+          "scope": "Analytic full-3D L1 lower inequality evaluated in binary64; not an L1 integral value",
+          "species": 2
+        }
+      ],
+      "gate": "FAIL"
+    }
+  ]
+}

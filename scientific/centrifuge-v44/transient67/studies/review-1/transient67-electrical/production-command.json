@@ -1,0 +1,9 @@
+{
+  "command": [
+    "/work/home/fix-v43-source/node_modules/.bin/tsx",
+    "/work/home/fix-v43-source/scientific/current-v66/campaign.ts",
+    "/work/home/transient67-electrical/cases.json",
+    "/work/home/transient67-electrical/production.json"
+  ],
+  "exitCode": 0
+}

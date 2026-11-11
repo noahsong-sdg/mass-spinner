@@ -1,0 +1,12 @@
+{
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "pairs": [
+    {
+      "axis": "liner",
+      "coarseFile": "/work/home/thermal69-campaign/full-e8-w64-q256.json",
+      "fineFile": "/work/home/thermal69-campaign/full-e8-w128-q256.json",
+      "coarseSHA256": "a9ef2d3603f0dfab1d8456b86638a2ffeaee596e898f57f43a13f4ddca3aa552",
+      "fineSHA256": "bb29e03584b051a165cd111d471088db5882164c10862ec8d95d923bb07d42f2"
+    }
+  ]
+}

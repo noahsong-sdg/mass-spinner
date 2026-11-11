@@ -1,0 +1,20 @@
+{
+  "label": "resolved68-anchor-case",
+  "command": [
+    "node_modules/.bin/tsx",
+    "scientific/resolved-v68/campaign.ts",
+    "scientific/resolved-v68/specifications.json",
+    "/work/home/resolved68-campaign",
+    "[\"anchor-r64-z64-g128-t256\"]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 736,
+  "sourceSHA256": "4d28113802de70f2624f3d5146f5e8f22508103e6ae8f255575d2ea62d935631",
+  "exitCode": 0,
+  "seconds": 558.081048256,
+  "sourceVerifiedBeforeAndAfter": true
+}

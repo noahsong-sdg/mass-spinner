@@ -1,0 +1,116 @@
+[
+  {
+    "id": "gas-q2048-w128",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"gas-q2048-w128\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/gas-q2048-w128.steps.ndjson.gz",
+      "uncompressedSHA256": "59051448586b3c5e3106c09c7c76ef5965645292bab1a0a03d1290ff0316b357",
+      "uncompressedBytes": 197055779,
+      "compressedBytes": 87619290,
+      "gzipSHA256": "254996f71449637f7fcc44d89a9b9a4f32e51d0ebd7fb0c852ff34f32eda6f66"
+    }
+  },
+  {
+    "id": "gas-q4096-w128",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"gas-q4096-w128\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/gas-q4096-w128.steps.ndjson.gz",
+      "uncompressedSHA256": "711d624f6da141d56c92dfbf0091c022ad976850ad598678eda4729b87212289",
+      "uncompressedBytes": 394059590,
+      "compressedBytes": 175207543,
+      "gzipSHA256": "c3575ee55e8a5a6659ca949d3ba484ffee7e0df2093bb664018a3066bc539d89"
+    }
+  },
+  {
+    "id": "startup-e8-w64-s64",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"startup-e8-w64-s64\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/startup-e8-w64-s64.steps.ndjson.gz",
+      "uncompressedSHA256": "c24c866a715e05ceb3ca2879b518722bef257b42865bbf0d099d34bb1631dc01",
+      "uncompressedBytes": 31213295,
+      "compressedBytes": 13875145,
+      "gzipSHA256": "f9eb5d9cbf65f409d77cb81866eff4f7c52961125fadb49b1f923b31139095d2"
+    }
+  },
+  {
+    "id": "startup-e8-w128-s64",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"startup-e8-w128-s64\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/startup-e8-w128-s64.steps.ndjson.gz",
+      "uncompressedSHA256": "b64c5d3c5e7e34367526f159cc8f31becf0762a17e854f12ba41982ee7d954b0",
+      "uncompressedBytes": 31525853,
+      "compressedBytes": 13977430,
+      "gzipSHA256": "5ae9befcca2633520ff9ed8790c3d3a3d389499163a392ab10b3be75fc2b7756"
+    }
+  },
+  {
+    "id": "full-e8-w64-q256",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"full-e8-w64-q256\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/full-e8-w64-q256.steps.ndjson.gz",
+      "uncompressedSHA256": "2d7ddbd9364555f8ea0c1ffaab96019d845999c42651ba23b3663af7b4014b55",
+      "uncompressedBytes": 125341756,
+      "compressedBytes": 55852308,
+      "gzipSHA256": "3f9cbe5e125e7224f6ee50b396f62c09549ed829ee15e4d261053b84f91d2d8c"
+    }
+  },
+  {
+    "id": "full-e8-w128-q256",
+    "command": [
+      "node_modules/.bin/tsx",
+      "scientific/thermal-local-v69/campaign.ts",
+      "/work/home/thermal69-seed.json",
+      "scientific/thermal-local-v69/specifications.json",
+      "/work/home/thermal69-campaign",
+      "[\"full-e8-w128-q256\"]"
+    ],
+    "exitCode": 0,
+    "losslessAcceptedNDJSONArchive": {
+      "path": "/work/home/thermal69-campaign/full-e8-w128-q256.steps.ndjson.gz",
+      "uncompressedSHA256": "69ad54032ad2765f80060edf1736ddef1cade5d47e6b3a5a6037771549d89154",
+      "uncompressedBytes": 126873145,
+      "compressedBytes": 56430828,
+      "gzipSHA256": "2f003153674a319897ccef87a08ed637e8ead0cbee0897f11cd1e2ca41646212"
+    }
+  }
+]

@@ -1,0 +1,691 @@
+{
+  "schema": 1,
+  "model": "recorded-RustBCA-finite-film-v38",
+  "upstreamCommit": "673bd3f2b907b14517a6b3cafa1c5372a5eb4ae2",
+  "binarySha256": "33dd9018c6f3e8a5e150d65a4fca95a0b71a73674c1d677f23800018cd26ff5b",
+  "materialAssumptions": "LiT values retained from v35 uncalibrated scenario; W n/m/Es/Ec from upstream example materials.py; W Ed=20 eV explicit scenario.",
+  "cases": [
+    {
+      "name": "LiT0.1_W0.0_N256_S3801",
+      "filmUm": 0.1,
+      "backingUm": 0.0,
+      "count": 256,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "eda09d0ae1fee16a713a1620628b6758bc6574c0a41da32e764775cafb14b677",
+      "partition": {
+        "filmRetained": 0,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 256
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.9852161435741286,
+          0.9999999999999999
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 2339325.2269061133,
+        "escapedProjectileEnergyEV": 23260674.77309389,
+        "unresolvedProjectileEnergyEV": -3.725290298461914e-09,
+        "stoppedResidualBoundEV": 0,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W0.0_N256_S3802",
+      "filmUm": 0.1,
+      "backingUm": 0.0,
+      "count": 256,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "6481ca7117c962929f452e5a9ded57b15d68a00be6a1c1eaf76395b6981f0206",
+      "partition": {
+        "filmRetained": 0,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 256
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.9852161435741286,
+          0.9999999999999999
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 2338787.5652008834,
+        "escapedProjectileEnergyEV": 23261212.43479912,
+        "unresolvedProjectileEnergyEV": -3.725290298461914e-09,
+        "stoppedResidualBoundEV": 0,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W0.0_N1024_S3801",
+      "filmUm": 0.1,
+      "backingUm": 0.0,
+      "count": 1024,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "8f6a65f0f5208fc4fdeb5876ab977bd785ffa26cd3a08df7828f01f806063e7b",
+      "partition": {
+        "filmRetained": 0,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 1024
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.9962625959599825,
+          1.0
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 9353942.511382615,
+        "escapedProjectileEnergyEV": 93046057.48861739,
+        "unresolvedProjectileEnergyEV": 0.0,
+        "stoppedResidualBoundEV": 0,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W0.0_N1024_S3802",
+      "filmUm": 0.1,
+      "backingUm": 0.0,
+      "count": 1024,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "15d79b00bfbb79fd26bf384fb25a327bee1d7736306084182766269dd9e449dc",
+      "partition": {
+        "filmRetained": 0,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 1024
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.9962625959599825,
+          1.0
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 9353153.112069067,
+        "escapedProjectileEnergyEV": 93046846.88793093,
+        "unresolvedProjectileEnergyEV": 0.0,
+        "stoppedResidualBoundEV": 0,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W10.0_N256_S3801",
+      "filmUm": 0.1,
+      "backingUm": 10.0,
+      "count": 256,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "1d785e6ca17af75e554026700ae8d5685d9d92200e5d34834e298124d3ba23fe",
+      "partition": {
+        "filmRetained": 0,
+        "backingRetained": 248,
+        "reflected": 8,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "backingRetained": [
+          0.9395583934922568,
+          0.9840817411084887
+        ],
+        "reflected": [
+          0.015918258891511296,
+          0.06044160650774316
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25404550.646628845,
+        "escapedProjectileEnergyEV": 195219.9850424922,
+        "unresolvedProjectileEnergyEV": 229.36832866232726,
+        "stoppedResidualBoundEV": 248,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W10.0_N256_S3802",
+      "filmUm": 0.1,
+      "backingUm": 10.0,
+      "count": 256,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "13181046d246d4be512f02e50b628b1dc96cf3ea37fc8d4ee6460c9450f6a2dd",
+      "partition": {
+        "filmRetained": 2,
+        "backingRetained": 248,
+        "reflected": 6,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.002145090367681417,
+          0.028032768301535768
+        ],
+        "backingRetained": [
+          0.9395583934922568,
+          0.9840817411084887
+        ],
+        "reflected": [
+          0.010784867555857603,
+          0.0501809956000511
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25518489.7039783,
+        "escapedProjectileEnergyEV": 81280.40969580565,
+        "unresolvedProjectileEnergyEV": 229.88632589425833,
+        "stoppedResidualBoundEV": 250,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W10.0_N1024_S3801",
+      "filmUm": 0.1,
+      "backingUm": 10.0,
+      "count": 1024,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "2eb98f790cf2f3af03a9e0d21492cc78f3dbe22c999f3e0b258825a14e2a63e8",
+      "partition": {
+        "filmRetained": 3,
+        "backingRetained": 990,
+        "reflected": 31,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0009968475014902937,
+          0.008578032686730406
+        ],
+        "backingRetained": [
+          0.9539609698563387,
+          0.9761435630906761
+        ],
+        "reflected": [
+          0.021408223753385185,
+          0.04264976715139706
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 101794095.91101518,
+        "escapedProjectileEnergyEV": 604985.6262716727,
+        "unresolvedProjectileEnergyEV": 918.4627131446032,
+        "stoppedResidualBoundEV": 993,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT0.1_W10.0_N1024_S3802",
+      "filmUm": 0.1,
+      "backingUm": 10.0,
+      "count": 1024,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "6f21f99660729b8e6d100976059f71b0571c4f58b4c24ce4e164ee564df06d91",
+      "partition": {
+        "filmRetained": 3,
+        "backingRetained": 980,
+        "reflected": 41,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.0009968475014902937,
+          0.008578032686730406
+        ],
+        "backingRetained": [
+          0.9428087957227077,
+          0.9678374833969637
+        ],
+        "reflected": [
+          0.029650034605617378,
+          0.053866210126508274
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 101695440.13401897,
+        "escapedProjectileEnergyEV": 703652.5457926267,
+        "unresolvedProjectileEnergyEV": 907.3201884008013,
+        "stoppedResidualBoundEV": 983,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W0.0_N256_S3801",
+      "filmUm": 2.0,
+      "backingUm": 0.0,
+      "count": 256,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "0a4d37fec12595cb855f8c234dab26312f76a9f251dd7c08aa7bb2bae01d3097",
+      "partition": {
+        "filmRetained": 256,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9852161435741286,
+          0.9999999999999999
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25599842.27334266,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 157.72665733844042,
+        "stoppedResidualBoundEV": 256,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W0.0_N256_S3802",
+      "filmUm": 2.0,
+      "backingUm": 0.0,
+      "count": 256,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "3ebc23e0f87b6abcad68fdaac50b5ad83edc0ffdecf1409217d306be8c9dd02a",
+      "partition": {
+        "filmRetained": 256,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9852161435741286,
+          0.9999999999999999
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25599844.632496912,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 155.36750308796763,
+        "stoppedResidualBoundEV": 256,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W0.0_N1024_S3801",
+      "filmUm": 2.0,
+      "backingUm": 0.0,
+      "count": 1024,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "7b8430ff3243a94d6ad2c338a884beda8e358886c7977ab72f4dd43e5d2e3082",
+      "partition": {
+        "filmRetained": 1024,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9962625959599825,
+          1.0
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 102399365.28500564,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 634.7149943560362,
+        "stoppedResidualBoundEV": 1024,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W0.0_N1024_S3802",
+      "filmUm": 2.0,
+      "backingUm": 0.0,
+      "count": 1024,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "21d06306d784abf912cd1c3add28281c75b2cbf6e858ee06a175be3f71a8f4d0",
+      "partition": {
+        "filmRetained": 1024,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9962625959599825,
+          1.0
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 102399379.91533397,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 620.0846660286188,
+        "stoppedResidualBoundEV": 1024,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W10.0_N256_S3801",
+      "filmUm": 2.0,
+      "backingUm": 10.0,
+      "count": 256,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "942fe4187e68daddbcf8067b8465874a51b00075cc9b2c31e249b7e8c4af9836",
+      "partition": {
+        "filmRetained": 256,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9852161435741286,
+          0.9999999999999999
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25599842.511748623,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 157.4882513768971,
+        "stoppedResidualBoundEV": 256,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W10.0_N256_S3802",
+      "filmUm": 2.0,
+      "backingUm": 10.0,
+      "count": 256,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "dedd0cf5edbffe05585641cd0cafd1175c8384f2c6f2bd8bf5024e0445408b18",
+      "partition": {
+        "filmRetained": 256,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9852161435741286,
+          0.9999999999999999
+        ],
+        "backingRetained": [
+          0.0,
+          0.01478385642587143
+        ],
+        "reflected": [
+          0.0,
+          0.01478385642587143
+        ],
+        "transmitted": [
+          0.0,
+          0.01478385642587143
+        ]
+      },
+      "energy": {
+        "incidentEV": 25600000.0,
+        "projectileTransferredEV": 25599841.213396505,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 158.78660349547863,
+        "stoppedResidualBoundEV": 256,
+        "numericalToleranceEV": 0.00256,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W10.0_N1024_S3801",
+      "filmUm": 2.0,
+      "backingUm": 10.0,
+      "count": 1024,
+      "seed": 3801,
+      "energyKeV": 100.0,
+      "inputSha256": "de5a06315b7942be0150cf49caa676fc8d888f83a8995593067d060c9fdf514a",
+      "partition": {
+        "filmRetained": 1024,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9962625959599825,
+          1.0
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 102399367.90426667,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 632.0957333296537,
+        "stoppedResidualBoundEV": 1024,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    },
+    {
+      "name": "LiT2.0_W10.0_N1024_S3802",
+      "filmUm": 2.0,
+      "backingUm": 10.0,
+      "count": 1024,
+      "seed": 3802,
+      "energyKeV": 100.0,
+      "inputSha256": "0e9879f82657211e57214d62c3ea58b72fabda6878087f85580eb13ad9135479",
+      "partition": {
+        "filmRetained": 1024,
+        "backingRetained": 0,
+        "reflected": 0,
+        "transmitted": 0
+      },
+      "intervals95": {
+        "filmRetained": [
+          0.9962625959599825,
+          1.0
+        ],
+        "backingRetained": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "reflected": [
+          0.0,
+          0.0037374040400176777
+        ],
+        "transmitted": [
+          0.0,
+          0.0037374040400176777
+        ]
+      },
+      "energy": {
+        "incidentEV": 102400000.0,
+        "projectileTransferredEV": 102399370.91239968,
+        "escapedProjectileEnergyEV": 0.0,
+        "unresolvedProjectileEnergyEV": 629.0876003205776,
+        "stoppedResidualBoundEV": 1024,
+        "numericalToleranceEV": 0.01024,
+        "passed": true
+      }
+    }
+  ],
+  "refinement": {
+    "passed": true,
+    "comparisonCount": 8,
+    "alpha": 0.01
+  },
+  "limitation": "Projectile-transfer ledger only: recoil transport, target binding and heat are not a full assembly energy ledger. No live retention kernel is qualified.",
+  "provenance": {
+    "protocolSha256": "f15c8770a567f545f0b40c52ad28e5d2622393e49e8b00f989ff0ee731e6c536",
+    "readoutSha256": "30f95fd2e5f7d520af465b9c1a0241979a6713d5b9d2ee1a79525d400792e927"
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "label": "refinement",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/transient-v67/analyze.py",
+      "/work/home/transient67-graded-fixed.json",
+      "/work/home/transient67-graded-assess/config.json",
+      "/work/home/transient67-graded-assess/analysis.json"
+    ],
+    "exitCode": 0
+  },
+  {
+    "label": "conservation",
+    "command": [
+      "/work/home/thermal-v53-venv/bin/python",
+      "scientific/current-v66/check_coupled.py",
+      "/work/home/transient67-graded-fixed.json",
+      "/work/home/transient67-graded-assess/audit.json"
+    ],
+    "exitCode": 1
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "label": "transient67-spatial-summary",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/summary.py",
+    "/work/home/transient67-spatial-assess/analysis.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 722,
+  "sourceSHA256": "c66a1f2400a52ff1006d2364a30bfd3a708b9ab0afa6e6ac4c1f78d0f2f88609",
+  "exitCode": 0,
+  "seconds": 0.06229604099999997,
+  "sourceVerifiedBeforeAndAfter": true
+}

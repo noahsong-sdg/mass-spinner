@@ -1,0 +1,1334 @@
+{
+  "inputSeal": "0d7fabf400c6de21ab91e1bd00a57048e6f31bc1cf793ae16015b343202ae931",
+  "planSeal": "65a61fdb68764056562fccce3af7a7f5e43d5adcec57bd2c660121416a23191b",
+  "plannedCases": [
+    "noneq-n128-a0015625",
+    "noneq-n256-a0015625",
+    "noneq-n512-a0015625",
+    "noneq-n512-a00625",
+    "noneq-n512-a003125",
+    "noneq-n512-q4096",
+    "noneq-n1024-a0015625",
+    "noneq-n1024-a00078125",
+    "noneq-n512-dt2p5us",
+    "noneq-n512-radius14",
+    "noneq-n512-tail10",
+    "common-n128",
+    "common-n512"
+  ],
+  "selectedCases": [
+    "noneq-n128-a0015625",
+    "noneq-n256-a0015625",
+    "noneq-n512-a0015625",
+    "noneq-n512-a00625",
+    "noneq-n512-a003125",
+    "noneq-n512-q4096",
+    "noneq-n1024-a0015625",
+    "noneq-n1024-a00078125",
+    "noneq-n512-dt2p5us",
+    "noneq-n512-radius14",
+    "noneq-n512-tail10",
+    "common-n128",
+    "common-n512"
+  ],
+  "unreviewedCases": [
+    "noneq-n128-a0015625",
+    "noneq-n256-a0015625",
+    "noneq-n512-a0015625",
+    "noneq-n512-a00625",
+    "noneq-n512-a003125",
+    "noneq-n512-q4096",
+    "noneq-n1024-a0015625",
+    "noneq-n1024-a00078125",
+    "noneq-n512-dt2p5us",
+    "noneq-n512-radius14",
+    "noneq-n512-tail10",
+    "common-n128",
+    "common-n512"
+  ],
+  "caseDiagnosticsOmitted": true,
+  "cases": [],
+  "crossIncrementRefinements": [
+    {
+      "kind": "particle",
+      "left": "noneq-n128-a0015625",
+      "right": "noneq-n256-a0015625",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00020325433886336786,
+          "integrationSensitivity": 5.551115123125803e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 7,
+              "l1": 0.00020325433886370092
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 7,
+              "l1": 0.00020325433886381195
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 7,
+              "l1": 0.00020325433886392297
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 7,
+              "l1": 0.00020325433886336786
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.026869474893646772,
+          "integrationSensitivity": 4.926614671774153e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 250,
+              "l1": 0.026869474893644836
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 250,
+              "l1": 0.026869474893646658
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 250,
+              "l1": 0.026869474893647265
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 250,
+              "l1": 0.026869474893646772
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "particle",
+      "left": "noneq-n128-a0015625",
+      "right": "noneq-n256-a0015625",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00016179050324059924,
+          "integrationSensitivity": 9.994175625971402e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 15,
+              "l1": 0.00016179050324159838
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 15,
+              "l1": 0.00016179050324104338
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 15,
+              "l1": 0.00016179050324159866
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 15,
+              "l1": 0.00016179050324059924
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.029993727699253583,
+          "integrationSensitivity": 2.3522850334245524e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 248,
+              "l1": 0.02999372769925247
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 248,
+              "l1": 0.02999372769925381
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 248,
+              "l1": 0.02999372769925123
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 248,
+              "l1": 0.029993727699253583
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "particle",
+      "left": "noneq-n256-a0015625",
+      "right": "noneq-n512-a0015625",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 4.1313054024363165e-06,
+          "integrationSensitivity": 3.131406267099792e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 67,
+              "l1": 4.131305401525377e-06
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 67,
+              "l1": 4.131305402255072e-06
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 67,
+              "l1": 4.13130539930491e-06
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 67,
+              "l1": 4.1313054024363165e-06
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 2.221603955795071e-06,
+          "integrationSensitivity": 1.4797284423706384e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 406,
+              "l1": 2.2213835485470533e-06
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 408,
+              "l1": 2.221603960226428e-06
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 408,
+              "l1": 2.2216039543153425e-06
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 408,
+              "l1": 2.221603955795071e-06
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "particle",
+      "left": "noneq-n256-a0015625",
+      "right": "noneq-n512-a0015625",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 3.3268270325561693e-06,
+          "integrationSensitivity": 2.8263659858709953e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 77,
+              "l1": 3.326827027193834e-06
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 77,
+              "l1": 3.326827029318694e-06
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 77,
+              "l1": 3.3268270297298033e-06
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 77,
+              "l1": 3.3268270325561693e-06
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 2.0196163613295014e-06,
+          "integrationSensitivity": 9.638430258454068e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 404,
+              "l1": 2.0196163674030855e-06
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 404,
+              "l1": 2.0196163640663966e-06
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 404,
+              "l1": 2.0196163622933444e-06
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 404,
+              "l1": 2.0196163613295014e-06
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "particle",
+      "left": "noneq-n512-q4096",
+      "right": "noneq-n1024-a0015625",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 1.894863554119386e-07,
+          "integrationSensitivity": 8.326672684688695e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 41,
+              "l1": 1.8948635719523432e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 41,
+              "l1": 1.8948635797239044e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 41,
+              "l1": 1.8948635624460586e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 41,
+              "l1": 1.894863554119386e-07
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 2.463814158547756e-07,
+          "integrationSensitivity": 1.5248354879107717e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 65,
+              "l1": 2.4638141091124735e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 67,
+              "l1": 2.4638141730630545e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 67,
+              "l1": 2.4638141737961107e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 67,
+              "l1": 2.463814158547756e-07
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "particle",
+      "left": "noneq-n512-q4096",
+      "right": "noneq-n1024-a0015625",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 3.1447208716814216e-07,
+          "integrationSensitivity": 6.953259582692682e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 47,
+              "l1": 3.1447208732405044e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 47,
+              "l1": 3.144720871405221e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 47,
+              "l1": 3.144720864728162e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 47,
+              "l1": 3.1447208716814216e-07
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 2.457796913035541e-07,
+          "integrationSensitivity": 4.246928329842972e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 72,
+              "l1": 2.4577969115079003e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 72,
+              "l1": 2.457796910407435e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 72,
+              "l1": 2.4577969555048245e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 72,
+              "l1": 2.457796913035541e-07
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n512-a00625",
+      "right": "noneq-n512-a003125",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.000677813747520295,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 4,
+              "l1": 0.000677813747520295
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 4,
+              "l1": 0.000677813747520295
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 4,
+              "l1": 0.000677813747520295
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 4,
+              "l1": 0.000677813747520295
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.0003887428105216473,
+          "integrationSensitivity": 2.775557561563099e-17,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.0003887428105221191
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.0003887428105218138
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.0003887428105216195
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.0003887428105216473
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n512-a00625",
+      "right": "noneq-n512-a003125",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.0004697386377432444,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 4,
+              "l1": 0.00046973863774346647
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 4,
+              "l1": 0.0004697386377430224
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 4,
+              "l1": 0.0004697386377432444
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 4,
+              "l1": 0.0004697386377432444
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.00048806151312558166,
+          "integrationSensitivity": 3.3306690738754903e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.00048806151312547064
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.00048806151312552615
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.0004880615131252486
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.00048806151312558166
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n512-a003125",
+      "right": "noneq-n512-a0015625",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00033427847073430605,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.0003342784707345281
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.000334278470734084
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.00033427847073430605
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.00033427847073430605
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.00019328217701305994,
+          "integrationSensitivity": 2.775557561563099e-17,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.00019328217701319872
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.00019328217701325423
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.00019328217701303219
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.00019328217701305994
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n512-a003125",
+      "right": "noneq-n512-a0015625",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.0002320516155134289,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.00023205161551365094
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.00023205161551409503
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.0002320516155134289
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.0002320516155134289
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.00024251973646843838,
+          "integrationSensitivity": 5.55111512312599e-17,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.00024251973646843838
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.00024251973646816083
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.0002425197364684939
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.00024251973646843838
+            }
+          ]
+        }
+      ],
+      "gate": "FAIL",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n1024-a0015625",
+      "right": "noneq-n1024-a00078125",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00016602722274838833,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 8,
+              "l1": 0.00016602722274905446
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 8,
+              "l1": 0.00016602722274861037
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 8,
+              "l1": 0.00016602722274838833
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 8,
+              "l1": 0.00016602722274838833
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 9.64084479246341e-05,
+          "integrationSensitivity": 2.775557561562912e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 9.640844792460634e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 9.640844792457859e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 9.640844792435654e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 9.64084479246341e-05
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "width",
+      "left": "noneq-n1024-a0015625",
+      "right": "noneq-n1024-a00078125",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00011536688358115832,
+          "integrationSensitivity": 4.440892098500647e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 8,
+              "l1": 0.00011536688358160241
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 8,
+              "l1": 0.00011536688358138036
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 8,
+              "l1": 0.00011536688358160241
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 8,
+              "l1": 0.00011536688358115832
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 0.00012090212433213399,
+          "integrationSensitivity": 1.6653345369377555e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 6,
+              "l1": 0.00012090212433257808
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 6,
+              "l1": 0.0001209021243321895
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 6,
+              "l1": 0.00012090212433230052
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 6,
+              "l1": 0.00012090212433213399
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "operator_quadrature",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-q4096",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 1.1378029594888428e-13,
+          "integrationSensitivity": 8.19765262616292e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 53,
+              "l1": 1.1547414500295838e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 53,
+              "l1": 1.1474621166435162e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 53,
+              "l1": 1.1460006121150057e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 53,
+              "l1": 1.1378029594888428e-13
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 1.1094944407652463e-13,
+          "integrationSensitivity": 5.776087073916546e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 114,
+              "l1": 1.1156827957152504e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 116,
+              "l1": 1.1198857054368905e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 116,
+              "l1": 1.1037183536913298e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 116,
+              "l1": 1.1094944407652463e-13
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "operator_quadrature",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-q4096",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 1.2051915455196793e-13,
+          "integrationSensitivity": 9.779503595819272e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 54,
+              "l1": 1.2044889825119087e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 54,
+              "l1": 1.2045442768227055e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 54,
+              "l1": 1.19541204192386e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 54,
+              "l1": 1.2051915455196793e-13
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 1.1058241453608397e-13,
+          "integrationSensitivity": 3.0495896606586233e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 114,
+              "l1": 1.0986738320332978e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 116,
+              "l1": 1.1022126679242905e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 116,
+              "l1": 1.1088737350214983e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 116,
+              "l1": 1.1058241453608397e-13
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "time_increment",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-dt2p5us",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 0.00011896075629747038,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 3,
+              "l1": 0.00011896075629747038
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 3,
+              "l1": 0.0001189607562970263
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 3,
+              "l1": 0.00011896075629747038
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 3,
+              "l1": 0.00011896075629747038
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 7.000608330332003e-05,
+          "integrationSensitivity": 1.1102230246251772e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 1,
+              "l1": 7.000608330343105e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 1,
+              "l1": 7.000608330343105e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 1,
+              "l1": 7.000608330343105e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 1,
+              "l1": 7.000608330332003e-05
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "time_increment",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-dt2p5us",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 6.678468482124167e-05,
+          "integrationSensitivity": 4.440892098500647e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 5,
+              "l1": 6.678468482124167e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 5,
+              "l1": 6.678468482146371e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 5,
+              "l1": 6.678468482168576e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 5,
+              "l1": 6.678468482124167e-05
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 4.809070467626242e-05,
+          "integrationSensitivity": 2.0747402431331507e-30,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 1,
+              "l1": 4.809070467637344e-05
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 1,
+              "l1": 4.809070467637344e-05
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 1,
+              "l1": 4.809070467626242e-05
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 1,
+              "l1": 4.809070467626242e-05
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "operator_domain",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-radius14",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 1.7020954957980283e-13,
+          "integrationSensitivity": 1.2472661792273265e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 48,
+              "l1": 1.7002046472092136e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 48,
+              "l1": 1.7070416261089072e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 48,
+              "l1": 1.7145681575903016e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 48,
+              "l1": 1.7020954957980283e-13
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 1.6406819479397594e-13,
+          "integrationSensitivity": 1.1492543028346554e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 116,
+              "l1": 1.6275013021288531e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 116,
+              "l1": 1.6340965039440825e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 116,
+              "l1": 1.6395326936369248e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 116,
+              "l1": 1.6406819479397594e-13
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "operator_domain",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-radius14",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 1.79995124707788e-13,
+          "integrationSensitivity": 4.863730945769994e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 50,
+              "l1": 1.7980690721064452e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 50,
+              "l1": 1.7938753781032712e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 50,
+              "l1": 1.80481497802365e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 50,
+              "l1": 1.79995124707788e-13
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 1.6387086999858358e-13,
+          "integrationSensitivity": 3.267785347871331e-16,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 114,
+              "l1": 1.62746281295173e-13
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 114,
+              "l1": 1.6454925529790776e-13
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 114,
+              "l1": 1.6354409146379645e-13
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 114,
+              "l1": 1.6387086999858358e-13
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "marker_tail",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-tail10",
+      "timeS": 5e-05,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 5.109631354789299e-07,
+          "integrationSensitivity": 2.4756130305447785e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 57,
+              "l1": 5.109631347209641e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 57,
+              "l1": 5.109631333582304e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 57,
+              "l1": 5.109631330033168e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 57,
+              "l1": 5.109631354789299e-07
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 4.611367490370017e-07,
+          "integrationSensitivity": 3.771288836773581e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 77,
+              "l1": 4.6113674713292585e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 77,
+              "l1": 4.611367479816393e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 77,
+              "l1": 4.6113675280829054e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 77,
+              "l1": 4.611367490370017e-07
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    },
+    {
+      "kind": "marker_tail",
+      "left": "noneq-n512-a0015625",
+      "right": "noneq-n512-tail10",
+      "timeS": 0.0001,
+      "species": [
+        {
+          "species": 1,
+          "incrementL1": 5.961926356031603e-07,
+          "integrationSensitivity": 1.4320752157910587e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 71,
+              "l1": 5.96192633743103e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 71,
+              "l1": 5.961926330618107e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 71,
+              "l1": 5.961926370352355e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 71,
+              "l1": 5.961926356031603e-07
+            }
+          ]
+        },
+        {
+          "species": 2,
+          "incrementL1": 4.030646879328661e-07,
+          "integrationSensitivity": 2.175739650294233e-15,
+          "rootSplits": [
+            {
+              "scoutPerSigma": 4,
+              "roots": 74,
+              "l1": 4.030646760344418e-07
+            },
+            {
+              "scoutPerSigma": 8,
+              "roots": 76,
+              "l1": 4.030646864409734e-07
+            },
+            {
+              "scoutPerSigma": 16,
+              "roots": 76,
+              "l1": 4.0306468575712645e-07
+            },
+            {
+              "scoutPerSigma": 32,
+              "roots": 76,
+              "l1": 4.030646879328661e-07
+            }
+          ]
+        }
+      ],
+      "gate": "PASS",
+      "quadratureGate": "PASS"
+    }
+  ],
+  "wallS": 33.919203349
+}

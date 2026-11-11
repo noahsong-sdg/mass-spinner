@@ -1,0 +1,19 @@
+{
+  "label": "transient67-graded-audit-final",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/current-v66/check_coupled.py",
+    "/work/home/transient67-graded-fixed.json",
+    "/work/home/transient67-graded-audit-final.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "21ebe6218510aca9f80eb80232fdd287e44e3dcb3a6a507fb382ea250b94bb65",
+  "exitCode": 0,
+  "seconds": 7.368608753,
+  "sourceVerifiedBeforeAndAfter": true
+}

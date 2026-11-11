@@ -1,0 +1,16 @@
+Browser tab: 923039329, Title: "Mass Spinner — Plasma separation laboratory", URL: "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=4".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 194, 200
++					203 pop up button (collapsed, settable) Description: Recorded velocity marginal axis, Value: Velocity x, Secondary Actions: Expand
++						204 menu
++							205 (selected) Velocity x
++							206 Velocity y
++							207 Velocity z
++					208 text Saved positive-mixture marginals · combined-n6-q5-a010, step 20. Physical entropy gate: UNKNOWN; integration: UNKNOWN. Integration sensitivity is an estimate, not a confidence interval or proof of an H theorem. Qualification withheld.
++					209 text Recorded marginal density against vx / V₀
++					210 container Recorded marginal density against vx / V₀. Arrow keys inspect samples; Home and End select endpoints.
++					211 text 40 u: -6.03, 4.79e-30 · 84 u: -6.568, 5.89e-30
++					212 text Recorded ΔH / initial number against Saved time (µs)
++					213 container Recorded ΔH / initial number against Saved time (µs). Arrow keys inspect samples; Home and End select endpoints.
++					214 text Physical H estimate: 100, -0.4771 · Integration sensitivity +: 100, -0.477 · Integration sensitivity −: 100, -0.4771
+The focused UI element is 1 AXWebArea Mass Spinner — Plasma separation laboratory, URL: fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=4

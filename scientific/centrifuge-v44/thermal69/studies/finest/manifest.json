@@ -1,0 +1,66 @@
+{
+  "thermal69-assess-2/time2048-4096/combined.json.gz": {
+    "sha256": "6b909a10b1b70ee71ba7243ef810348bd92a2b1bb0f80d0f83fe3134f83fe4d4",
+    "bytes": 252308728
+  },
+  "thermal69-assess-2/time2048-4096/config.json": {
+    "sha256": "1d3262972734001d5a0404341264427b0ab112059a26c4784c42039cf761d017",
+    "bytes": 300
+  },
+  "thermal69-assess-2/time2048-4096/electrical-config.json": {
+    "sha256": "44484eada85363f6e03b9c97f09d26366bea5b5edfff40d51b72f7c324a2a1e9",
+    "bytes": 462
+  },
+  "thermal69-assess-2/time2048-4096/electrical.json": {
+    "sha256": "906e7e2d7e8c10df5919473344ac5e8ddea775d4706d49f255d1d3f3e231f884",
+    "bytes": 12621970
+  },
+  "thermal69-assess-2/time2048-4096/endpoint-gas.json": {
+    "sha256": "30c91cd8cb08cfa87d25cfafc8d37bd976afe878f152166c6d81e6161013d8c9",
+    "bytes": 19282
+  },
+  "thermal69-assess-2/time2048-4096/history.json": {
+    "sha256": "90c0e810d65883557a9ce5c68dd6318f2b11d11ceb7deaa00c42cec64934e75a",
+    "bytes": 253050
+  },
+  "thermal69-assess-2/time2048-4096/summary.json": {
+    "sha256": "278d17c336940c60a23a93836dfe0f882798c2a524e7c5a6e881d7e71ef8fcc4",
+    "bytes": 1023
+  },
+  "thermal69-assess-2/time2048-4096/surface.json": {
+    "sha256": "f302bf0b3d7ab40289bcd18094642aa0cdae49ac5f57a3abb79fdb0e248671af",
+    "bytes": 640051
+  },
+  "thermal69-assess-2/full-wall/combined.json.gz": {
+    "sha256": "2a9d88d0b5d0b517f5e8de71ec05b39dc6ba8d4639a05e2303b208328ece188a",
+    "bytes": 107988453
+  },
+  "thermal69-assess-2/full-wall/config.json": {
+    "sha256": "b2964addd4963bea108f42b77aa3cafa19721f7323bcc43ebf302cd855d9685b",
+    "bytes": 306
+  },
+  "thermal69-assess-2/full-wall/electrical-config.json": {
+    "sha256": "03af112269bd1eea10797da6597a630b2d71b5b04d587ea20f0c40e993a2f53c",
+    "bytes": 468
+  },
+  "thermal69-assess-2/full-wall/electrical.json": {
+    "sha256": "d8aff262b5bf078d3f4d34292e16076b97ea67ec62e62c1c7ccafe959394ec53",
+    "bytes": 5623465
+  },
+  "thermal69-assess-2/full-wall/endpoint-gas.json": {
+    "sha256": "f29d245f1962e1f04d24a4e7f62d25248913d6ad42fc4258eddb08ee4e1cf061",
+    "bytes": 19250
+  },
+  "thermal69-assess-2/full-wall/history.json": {
+    "sha256": "9f7667afc73321f98df16451acc3f46e44b777015d9c6c4881b190e0c0374385",
+    "bytes": 164425
+  },
+  "thermal69-assess-2/full-wall/summary.json": {
+    "sha256": "361bd20a894a2dafdb18bf08bafe923f818243928782af84e500b4426e1be32c",
+    "bytes": 1033
+  },
+  "thermal69-assess-2/full-wall/surface.json": {
+    "sha256": "1c79b23368d65311258fd811322c10fc03b31bf6d01bbfd222be3e6cdb34b29d",
+    "bytes": 310871
+  }
+}

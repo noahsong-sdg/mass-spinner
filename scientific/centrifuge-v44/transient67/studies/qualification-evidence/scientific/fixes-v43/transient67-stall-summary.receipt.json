@@ -1,0 +1,18 @@
+{
+  "label": "transient67-stall-summary",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "-c",
+    "import json;from pathlib import Path;p=json.loads(Path(\"/work/home/transient67-stall-probe/stderr.log\").read_text().splitlines()[0]);r=p[\"residual\"];t=p[\"tolerance\"];s=p[\"scales\"];a=max(range(len(r)),key=lambda i:abs(r[i])/s[i]);b=max(range(len(r)),key=lambda i:abs(r[i])/t[i]);print(json.dumps({\"merit\":p[\"merit\"],\"meritRow\":{\"i\":a,\"residual\":r[a],\"tolerance\":t[a],\"scale\":s[a],\"ratio\":abs(r[a])/t[a],\"increment\":p[\"increment\"][a],\"T\":p[\"values\"][a]},\"worstToleranceRow\":{\"i\":b,\"residual\":r[b],\"tolerance\":t[b],\"scale\":s[b],\"ratio\":abs(r[b])/t[b],\"increment\":p[\"increment\"][b],\"T\":p[\"values\"][b]},\"lastTrials\":[v for v in p[\"trace\"] if v[\"iteration\"]==p[\"trace\"][-1][\"iteration\"]]},indent=2))"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 725,
+  "sourceSHA256": "2f2bd160de982a57741d32981faf13e70b36b02e6528fa717ad475ebbfaeb41d",
+  "exitCode": 0,
+  "seconds": 0.06316179099999997,
+  "sourceVerifiedBeforeAndAfter": true
+}

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "reviewDate": "2026-11-10",
+  "status": "primary-source transcription; runtime and independent benchmark validation pending",
+  "argonNeutral": {
+    "species": "Ar",
+    "collisionPair": ["Ar", "Ar"],
+    "model": "first-order dilute monatomic Chapman-Enskog",
+    "source": {
+      "code": "Mutation++",
+      "version": "v1.0.5",
+      "url": "https://raw.githubusercontent.com/mutationpp/Mutationpp/v1.0.5/data/transport/collisions.xml",
+      "lines": [719, 727],
+      "referenceIdentifier": "Wright2005",
+      "referenceDoi": "10.2514/1.16713",
+      "referenceTitle": "Recommended Collision Integrals for Transport Property Computations Part 1: Air Species",
+      "sourceChecksum": "25e0ac6affa33361e9652d3fd3f43760f40f1a500c0a4993b1ace82c5ce501c2",
+      "codeLicense": "LGPL-3.0-or-later"
+    },
+    "temperatureK": [300, 500, 1000, 2000, 4000, 5000, 6000, 8000, 10000, 15000, 20000],
+    "q22BeforePiAngstromSquared": [12.88, 11.12, 9.66, 8.60, 7.57, 7.23, 6.96, 6.53, 6.20, 5.60, 5.17],
+    "q11BeforePiAngstromSquared": [11.67, 10.05, 8.61, 7.50, 6.47, 6.16, 5.90, 5.51, 5.22, 4.72, 4.41],
+    "tableConversionToSquareMetres": "pi * value * 1e-20",
+    "interpolation": "linear q22 versus temperatureK",
+    "allowedTemperatureRangeK": [300, 20000],
+    "outOfRangePolicy": "unsupported; do not silently clip or extrapolate",
+    "massUForNaturalArgon": 39.948,
+    "viscosityFormulaSI": "(5 / 16) * sqrt(pi * massKg * kB * temperatureK) / q22SquareMetres",
+    "thermalConductivityFormulaSI": "15 * kB * viscosityPaS / (4 * massKg)",
+    "sourceEstimatedCollisionIntegralAccuracyPercent": 5,
+    "accuracyInterpretation": "source estimated collision-integral accuracy, not a statistical confidence interval and not total plasma model uncertainty",
+    "scope": "Neutral-component constitutive coefficients only; no electron heat conduction, ion-neutral mixture closure, ionization equilibrium or kinetic wall correction is implied."
+  },
+  "lithiumNeutral": {
+    "species": "Li",
+    "source": {
+      "author": "Moncef Bouledroua",
+      "year": 2006,
+      "title": "Second Virial Coefficients and Viscosity Property of Monatomic Alkali-Metal Gases",
+      "journal": "J. Plasma Fusion Res. SERIES 7, 217-219",
+      "url": "https://www.jspf.or.jp/JPFRS/PDF/Vol7/jpfr2006_07-217.pdf",
+      "location": "abstract and section 4"
+    },
+    "allowedTemperatureRangeK": [100, 3000],
+    "viscosityCoefficientSI": 3.14e-8,
+    "thermalConductivityCoefficientSI": 1.398e-4,
+    "temperaturePower": 0.863,
+    "sourceViscosityUnit": "micropoise = 1e-7 Pa s",
+    "sourceConductivityUnit": "1e-3 W/(m K)",
+    "outOfRangePolicy": "unsupported; do not silently clip or extrapolate",
+    "scope": "Calculated dilute ground-state monatomic neutral Li; not an isotope-resolved ion-neutral mixture or phase-equilibrium model."
+  },
+  "pendingIndependentReference": {
+    "authors": "Felix Sharipov and Victor J. Benites",
+    "year": 2019,
+    "title": "Transport coefficients of argon and its mixtures with helium and neon at low density based ab initio potentials",
+    "temperatureRangeK": [20, 10000],
+    "institutionalSource": "https://fisica.ufpr.br/sharipov/public.html",
+    "supplementUrls": [
+      "https://ars.els-cdn.com/content/image/1-s2.0-S0378381219302651-mmc1.xlsx",
+      "https://ars.els-cdn.com/content/image/1-s2.0-S0378381219302651-mmc2.xlsx"
+    ],
+    "status": "Links verified; XLSX contents not inspected or compared."
+  }
+}

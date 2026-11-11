@@ -1,0 +1,18 @@
+{
+  "label": "transient67-summary-initial",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/summary.py",
+    "/work/home/transient67-baseline-history/analysis.json"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 720,
+  "sourceSHA256": "75d0170aa701521c7a3df8f9bed1dc49dacdfb619d53645608415331151ed324",
+  "exitCode": 0,
+  "seconds": 0.05981820800000004,
+  "sourceVerifiedBeforeAndAfter": true
+}

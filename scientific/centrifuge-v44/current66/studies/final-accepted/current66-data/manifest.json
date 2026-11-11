@@ -1,0 +1,26 @@
+{
+  "collisions.xml": {
+    "sha256": "25e0ac6affa33361e9652d3fd3f43760f40f1a500c0a4993b1ace82c5ce501c2",
+    "bytes": 155227
+  },
+  "CollisionDB.cpp": {
+    "sha256": "6fcef938229cdd5b702620a862e8049568b6abc8d25b1cea5b3a0730def9fa6d",
+    "bytes": 10034
+  },
+  "CollisionIntegral.cpp": {
+    "sha256": "78aaa291fd296fb8fa06d718356e67ff0fdbd826fe0c25f2dd18b018a531e321",
+    "bytes": 24724
+  },
+  "CollisionIntegral.h": {
+    "sha256": "85dd3c243a2bfcd1284b3e165986b69e1f34cf4f3d4d7bfcb8b6489242aac2ff",
+    "bytes": 5173
+  },
+  "COPYING": {
+    "sha256": "0ae0485a5bd37a63e63603596417e4eb0e653334fa6c7f932ca3a0e85d4af227",
+    "bytes": 35148
+  },
+  "COPYING.LESSER": {
+    "sha256": "97628afebc60f026f5c2b25d7491c46a5c4ee61f693e7cfa07fbd2c03605979b",
+    "bytes": 7652
+  }
+}

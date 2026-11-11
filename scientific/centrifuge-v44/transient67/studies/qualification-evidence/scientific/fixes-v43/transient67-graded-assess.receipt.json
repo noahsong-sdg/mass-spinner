@@ -1,0 +1,20 @@
+{
+  "label": "transient67-graded-assess",
+  "command": [
+    "/work/home/thermal-v53-venv/bin/python",
+    "scientific/transient-v67/assess.py",
+    "/work/home/transient67-graded-fixed.json",
+    "/work/home/transient67-graded-assess",
+    "[[\"r32-z4-g32-t128-q\",\"r32-z4-g64-t128-q\",\"liner\"],[\"r32-z4-g64-t128-q\",\"r32-z4-g128-t128-q\",\"liner\"],[\"r32-z4-g128-t128-q\",\"r32-z4-g128-t256-q\",\"time\"]]"
+  ],
+  "hostMissingStageOnly": [
+    "run-final-gates-v38.py",
+    "run-final-gates-v39.py"
+  ],
+  "sourceRoot": "/work/home/fix-v43-source",
+  "inputs": 727,
+  "sourceSHA256": "b6dce3c7a7c46d56ad83c655e3b56b5232ff2cc28d5af868d36c0999b3da8dea",
+  "exitCode": 1,
+  "seconds": 3.2425817510000003,
+  "sourceVerifiedBeforeAndAfter": true
+}

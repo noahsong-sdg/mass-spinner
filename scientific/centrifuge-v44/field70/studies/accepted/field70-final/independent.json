@@ -1,0 +1,46 @@
+{
+  "independentImplementation": "Python standard-library transport/scaling/corner reconstruction; no TypeScript imports",
+  "markersSHA256": "0cfb21edd1debf57ce7d62351b11d4f628fac84f5e44cfc87f21d84f1554de33",
+  "protocolSHA256": "95333e12eae22489a7841fab18ffa86f403dee8a2c65194aa202f912db1033c6",
+  "allRequiredChecksPassed": true,
+  "matchedExperimentalValidation": false,
+  "liveQualified": false,
+  "cases": [
+    {
+      "id": "nominal",
+      "candidate": "fixed-rate-inventory",
+      "maximumHeldoutRelativeError": 0.41177776438776104,
+      "conditionedScreenPassed": false
+    },
+    {
+      "id": "nominal",
+      "candidate": "constant-viscosity",
+      "maximumHeldoutRelativeError": 0.058501203440760076,
+      "conditionedScreenPassed": true
+    },
+    {
+      "id": "nominal",
+      "candidate": "neutral-viscosity",
+      "maximumHeldoutRelativeError": 0.1840299805368772,
+      "conditionedScreenPassed": true
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "candidate": "fixed-rate-inventory",
+      "maximumHeldoutRelativeError": 0.4117777643877612,
+      "conditionedScreenPassed": false
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "candidate": "constant-viscosity",
+      "maximumHeldoutRelativeError": 0.058501203440760076,
+      "conditionedScreenPassed": true
+    },
+    {
+      "id": "common-central-temperature-sensitivity",
+      "candidate": "neutral-viscosity",
+      "maximumHeldoutRelativeError": 0.19504734432001106,
+      "conditionedScreenPassed": true
+    }
+  ]
+}

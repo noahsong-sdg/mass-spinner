@@ -1,0 +1,128 @@
+{
+  "scope": "Trusted stdlib lossless artifact archival only; no project code executed. Original export manifests describe pre-compression raw files; these gzip files recover those exact bytes.",
+  "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+  "packets": [
+    {
+      "originalExportPath": "raw-fine/thermal69-campaign/gas-q4096-w128.json",
+      "rawSHA256": "b34da301cd5e66f746f5e59f3e3a1776fb19ce41a9f3537f1e2c8bba295071e7",
+      "rawBytes": 394566197,
+      "gzipPath": "raw-fine/thermal69-campaign/gas-q4096-w128.json.gz",
+      "gzipSHA256": "daa0c163afe67fd9b20ae111c528a055948a75b6da75ff39ed2679d3411937a9",
+      "gzipBytes": 175415435,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-full/thermal69-campaign/gas-q2048-w128.json",
+      "rawSHA256": "3b840ac22f8db9ab08435cf6b15d544a887514cfad3fea9cd48ab298c91190fb",
+      "rawBytes": 197562386,
+      "gzipPath": "raw-full/thermal69-campaign/gas-q2048-w128.json.gz",
+      "gzipSHA256": "f2601539122c2790e72088bd6cf23e1d82e55c571a72c667c2438e0fac36a3e8",
+      "gzipBytes": 87828446,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-full/thermal69-campaign/full-e8-w64-q256.json",
+      "rawSHA256": "a9ef2d3603f0dfab1d8456b86638a2ffeaee596e898f57f43a13f4ddca3aa552",
+      "rawBytes": 125842068,
+      "gzipPath": "raw-full/thermal69-campaign/full-e8-w64-q256.json.gz",
+      "gzipSHA256": "afca2920504724ff065c335b12831dd5b4226666414af21b8fd1472535773ecf",
+      "gzipBytes": 56059061,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-full/thermal69-campaign/full-e8-w128-q256.json",
+      "rawSHA256": "bb29e03584b051a165cd111d471088db5882164c10862ec8d95d923bb07d42f2",
+      "rawBytes": 127380166,
+      "gzipPath": "raw-full/thermal69-campaign/full-e8-w128-q256.json.gz",
+      "gzipSHA256": "cffe1797cb70eba6274b341bd69a25905ce3806248554d054aef1fa7c40aeb25",
+      "gzipBytes": 56641330,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-start/thermal69-campaign/gas-q512-w128.json",
+      "rawSHA256": "c328c122e269767d7d5be6537cf00e6290a686aaee8b08463aed7554d37674ba",
+      "rawBytes": 49800767,
+      "gzipPath": "raw-start/thermal69-campaign/gas-q512-w128.json.gz",
+      "gzipSHA256": "445322313897068811727e3a1f15f9308413f37266fa18ee386be5f75c8fcaab",
+      "gzipBytes": 22123660,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-start/thermal69-campaign/gas-q1024-w128.json",
+      "rawSHA256": "664ff93d21b0432eadd19fd1fdf9d59942968739cc3b1e8e7a7554efe603730a",
+      "rawBytes": 99061274,
+      "gzipPath": "raw-start/thermal69-campaign/gas-q1024-w128.json.gz",
+      "gzipSHA256": "9dbcbf813d2f9b3f2f236268e4c4159f257e145a289d8f994f431f76052f5b3e",
+      "gzipBytes": 44029083,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-start/thermal69-campaign/startup-e8-w64-s64.json",
+      "rawSHA256": "ea765cbf381e9d841a9b64a83875884b798dcfc6b63d123a470bda4217b8215d",
+      "rawBytes": 31713621,
+      "gzipPath": "raw-start/thermal69-campaign/startup-e8-w64-s64.json.gz",
+      "gzipSHA256": "08d3422377b55ea53e84d112dc5c981def849d2a5ce4b2a20a27e821fca062b2",
+      "gzipBytes": 14082140,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    },
+    {
+      "originalExportPath": "raw-start/thermal69-campaign/startup-e8-w128-s64.json",
+      "rawSHA256": "34452d04dc6980b9c95dad3b156e2d6af85a5956afe775d651f73af7edf8935f",
+      "rawBytes": 32032888,
+      "gzipPath": "raw-start/thermal69-campaign/startup-e8-w128-s64.json.gz",
+      "gzipSHA256": "e5a28294c3f3a27a140f09337dc8406352eb43e310785f67d7d11176dbf919f0",
+      "gzipBytes": 14187369,
+      "producer": {
+        "sourceSHA256": "5134e97644469f1e82ec9b04a397a4c60090532237544e4b1e9902d0f4fc173d",
+        "specificationSHA256": "0a532e3724b3299f9dd7cb4d868434e15be367d708066d633451780e63312626",
+        "seedSHA256": "0fc09b3952683b2eaa0957a3da7d096a3c997ad0174106c3dba6fb037f118859",
+        "baselinePacketSHA256": "286543ae336ccc70cf37a24b960de015249000604108ceadd8070e43def2fad2"
+      },
+      "exactRecoveryVerified": true
+    }
+  ],
+  "rawBytes": 1057959367,
+  "gzipBytes": 470366524
+}
