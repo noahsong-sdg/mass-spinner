@@ -70,3 +70,16 @@ No qualification if source markers, optical mapping, independent property
 bounds or numerical gates are unavailable. Missing data is NOT a zero error.
 Preserve every failure; changing the model after looking at these targets
 turns this case into development data and requires a new confirmation set.
+
+## Source-recovery addendum, before target extraction
+
+The authors' two-page conference paper, DOI 10.1051/jphyscol:19797236,
+Fig. 2, reports the same diffuse neutral-Ar profile/condition and the same
+μ/β input argument. Its complete PDF is parsed by the web tool at
+https://www.researchgate.net/profile/Ernst-Granneman/publication/45703766_A_STUDY_OF_A_WEAKLY_IONIZED_ROTATING_PLASMA/links/00b7d530b34d0b4c69000000/A-STUDY-OF-A-WEAKLY-IONIZED-ROTATING-PLASMA.pdf
+This is an eligible source alias, not an independent second experiment. Prefer
+the full journal Fig. 9 if its graphic becomes recoverable. Do not score both
+as independent measurements. The conference bulk drop is rounded to 18±2 V;
+retain the frozen journal value 18.5±2 V rather than selecting a better match.
+Neither source's profile markers have yet been extracted. Source text alone
+cannot substitute for admitting an actual graphic and its extraction bounds.
