@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "trajectoryCount": 22,
+  "scheduledCaseCount": 66,
+  "stepCount": 3896,
+  "sourceHashes": {
+    "bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "run_report.py": "aad7a5de8f32e93f7e9aa63cf4bdcd3442ae25201ee12820d04b6d8539e2bcb7",
+    "independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/static_current.py": "5bf6134ae8f08c02e1a32cf247143752155b82313f754197cd732ccafe810672",
+    "scientific/coupled-axial-v74/manifest.json": "e6c93af543e18d7b86129799952bbecb46a40825cabeae22cffc2bc598807f51"
+  },
+  "primitiveAdmissionCases": 66,
+  "publicationSnapshotDependencyHashes": {
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad"
+  },
+  "publicationSnapshotScope": "Current dependency files at verification only; no pre-run dependency hash is recorded or matched by this receipt.",
+  "artifactHashes": {
+    "raw": "cb57006163950c2a37cb800b4cb4472540b37d816ea23b3816ca416bb4af5d16",
+    "static": "ba6745cfd21f61282f5f2c72665c01e37919439ff61781ffcd735f6945aa0698",
+    "independent": "f982ccba6d308e5fd2c54b778aa9b21388e4ae4b3e1b6a72577ae13eac01f607",
+    "convergence": "475b4437f424fbf7198b1b8565f09ba2e1adab3ed248f13642cb4108b63ff5f6"
+  },
+  "runtime": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  },
+  "experimentalQualified": false,
+  "liveQualified": false
+}

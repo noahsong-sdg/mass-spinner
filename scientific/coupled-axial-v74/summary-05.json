@@ -1,0 +1,144 @@
+{
+  "numericallyQualified": true,
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "trajectoryCount": 22,
+  "stepCount": 3896,
+  "scheduledCaseCount": 66,
+  "negativeControls": [
+    {
+      "name": "potential",
+      "rejected": true,
+      "reason": "current relativePotentialV: error 0.1, scale 3.99602"
+    },
+    {
+      "name": "localShear",
+      "rejected": true,
+      "reason": "local shear: error 1, scale 0.00015489"
+    },
+    {
+      "name": "temperature",
+      "rejected": true,
+      "reason": "property mu: error 5.58001e-08, scale 4.01232e-05"
+    },
+    {
+      "name": "numericalLoss",
+      "rejected": true,
+      "reason": "numerical loss: error 1, scale 1.30592e-08"
+    },
+    {
+      "name": "bathHeat",
+      "rejected": true,
+      "reason": "reservoir heat: error 1, scale 1385.18"
+    },
+    {
+      "name": "interfaceHeat",
+      "rejected": true,
+      "reason": "gas interface heat: error 1, scale 18.4285"
+    }
+  ],
+  "series": {
+    "joint": {
+      "passed": true,
+      "rmsPercent": {
+        "gas": 0.2565000749374007,
+        "solid": 0.06623804267247523,
+        "omega": 0.4079211412303467
+      },
+      "maxProfilePercent": {
+        "gas": 0.6628758055810775,
+        "solid": 0.16404646095224962,
+        "omega": 1.655990977077083
+      },
+      "worstObservablePercent": 0.7624955356491716
+    },
+    "spatial": {
+      "passed": true,
+      "rmsPercent": {
+        "gas": 0.13353724618251653,
+        "solid": 0.04080603930308623,
+        "omega": 0.3454235646967572
+      },
+      "maxProfilePercent": {
+        "gas": 0.25786759360702366,
+        "solid": 0.09763960242707981,
+        "omega": 1.1941681894867124
+      },
+      "worstObservablePercent": 0.3347317118222646
+    },
+    "temporal": {
+      "passed": true,
+      "rmsPercent": {
+        "gas": 0.13916585344197932,
+        "solid": 0.0017164395845474631,
+        "omega": 0.1355315283997826
+      },
+      "maxProfilePercent": {
+        "gas": 0.2526218454564929,
+        "solid": 0.004147291451772617,
+        "omega": 0.37750050045217143
+      },
+      "worstObservablePercent": 0.897791850544356
+    },
+    "radial": {
+      "passed": true,
+      "rmsPercent": {
+        "gas": 0.13337244835173398,
+        "solid": 0.04080604491620023,
+        "omega": 0.12141850824805482
+      },
+      "maxProfilePercent": {
+        "gas": 0.25313288769787784,
+        "solid": 0.09763960248392323,
+        "omega": 0.27936132407375325
+      },
+      "worstObservablePercent": 0.19413113762448864
+    },
+    "axial": {
+      "passed": true,
+      "rmsPercent": {
+        "gas": 0.0021416475311875614,
+        "solid": 3.571011559965949e-06,
+        "omega": 0.30777316997721016
+      },
+      "maxProfilePercent": {
+        "gas": 0.006770169374832691,
+        "solid": 1.5294233435270144e-05,
+        "omega": 1.1942623603484976
+      },
+      "worstObservablePercent": 0.15807192590922645
+    }
+  },
+  "referenceSmallerDt": {
+    "passed": true,
+    "maxRmsPercent": 0.07017869646891525,
+    "maxProfilePercent": 0.18893892315215388,
+    "worstObservablePercent": 0.4471889226138015
+  },
+  "referenceSpatial": {
+    "passed": true,
+    "maxRmsPercent": 0.0879272246025673,
+    "maxProfilePercent": 0.3050007044003948,
+    "worstObservablePercent": 0.08561691327775364
+  },
+  "tighterTolerance": {
+    "passed": true,
+    "maxRmsPercent": 6.676853406115553e-09,
+    "maxProfilePercent": 1.3056847826427698e-08,
+    "worstObservablePercent": 6.4816608486621015e-09
+  },
+  "independentToleranceMaxObservablePercent": {
+    "linear": 2.202189516475962e-11,
+    "thermal": 6.482226637742821e-09
+  },
+  "artifactsBytes": {
+    "static-current-05.json": 2514852,
+    "study-05.json": 64795608,
+    "independent-05.json": 85734,
+    "convergence-05.json": 160519,
+    "receipt-05.json": 2348,
+    "verification-05.png": 312471
+  },
+  "maxSavedEndpointEnergyResidualJ": 2.934688300679808e-11,
+  "maxStepEnergyResidualJ": 4.6681823317117847e-11
+}

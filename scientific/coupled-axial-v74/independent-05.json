@@ -1,0 +1,2156 @@
+{
+  "cases": [
+    {
+      "index": 0,
+      "name": "0",
+      "checks": {
+        "property_mu": 3.3777323990675597e-16,
+        "property_k": 2.215770568497388e-16,
+        "property_solidK": 2.1177494807384677e-16,
+        "property_solidCp": 2.0079354256824155e-16,
+        "property_solidH": 6.058926958665406e-16,
+        "current_potentialV": 1.037524499657169e-12,
+        "current_relativePotentialV": 1.0379612261093349e-12,
+        "current_torqueNm": 1.8719861327258554e-12,
+        "current_jouleByCellW": 2.657440800375633e-12,
+        "current_jouleW": 4.528475473247465e-15,
+        "current_mechanicalW": 4.581289356196832e-15,
+        "current_electrodePowerW": 5.811862624313891e-14,
+        "current_boundaryCurrentsA": 2.2560886628825783e-12,
+        "totalEnergy": {
+          "residual": -2.3486572675444255e-12,
+          "exchangeScale": 0.043286933806273215,
+          "storageAllowance": 4.265168944249861e-09
+        },
+        "angularMomentum": {
+          "residual": -1.6543612251060553e-24,
+          "exchangeScale": 1.52687959331085e-08,
+          "storageAllowance": 4.055565544371669e-20
+        },
+        "maxMechanicalRowResidual": 8.736466562825815e-19,
+        "maxThermalRowResidualW": 4.627709172463912e-09,
+        "interfaceOutGasW": -18.428548584605018
+      }
+    },
+    {
+      "index": 1,
+      "name": "1",
+      "checks": {
+        "property_mu": 3.3732178482349193e-16,
+        "property_k": 4.4256181048044756e-16,
+        "property_solidK": 2.117731745109032e-16,
+        "property_solidCp": 2.0079354285820957e-16,
+        "property_solidH": 6.058927114533434e-16,
+        "current_potentialV": 1.5189733419457087e-12,
+        "current_relativePotentialV": 1.519612725729805e-12,
+        "current_torqueNm": 1.7666084515017076e-12,
+        "current_jouleByCellW": 2.2423287838060924e-12,
+        "current_jouleW": 2.4631218085437566e-15,
+        "current_mechanicalW": 0.0,
+        "current_electrodePowerW": 5.709933621224991e-13,
+        "current_boundaryCurrentsA": 3.5294306871899073e-12,
+        "totalEnergy": {
+          "residual": -4.22559060597814e-12,
+          "exchangeScale": 0.043283580672402865,
+          "storageAllowance": 4.265129598611178e-09
+        },
+        "angularMomentum": {
+          "residual": -5.790264287871194e-24,
+          "exchangeScale": 9.140679146913874e-09,
+          "storageAllowance": 3.073329573361469e-20
+        },
+        "maxMechanicalRowResidual": 5.572781961218752e-19,
+        "maxThermalRowResidualW": 4.5578662927203695e-09,
+        "interfaceOutGasW": -11.762789719393373
+      }
+    },
+    {
+      "index": 2,
+      "name": "2",
+      "checks": {
+        "property_mu": 3.3699696756655245e-16,
+        "property_k": 4.4213565444851007e-16,
+        "property_solidK": 2.1177065404673034e-16,
+        "property_solidCp": 2.0079354828070458e-16,
+        "property_solidH": 4.544197521987692e-16,
+        "current_potentialV": 9.475635103098536e-13,
+        "current_relativePotentialV": 9.479623700024933e-13,
+        "current_torqueNm": 1.4612503262618938e-12,
+        "current_jouleByCellW": 2.0059830164730462e-12,
+        "current_jouleW": 2.0118313384194327e-15,
+        "current_mechanicalW": 3.924207856765329e-15,
+        "current_electrodePowerW": 6.679888671717049e-13,
+        "current_boundaryCurrentsA": 3.586744524150724e-12,
+        "totalEnergy": {
+          "residual": 1.8310163244140325e-12,
+          "exchangeScale": 0.04327883508871221,
+          "storageAllowance": 4.265050914958654e-09
+        },
+        "angularMomentum": {
+          "residual": 0.0,
+          "exchangeScale": 5.0852481366609245e-09,
+          "storageAllowance": 2.0055728955045486e-20
+        },
+        "maxMechanicalRowResidual": 3.483340277522055e-19,
+        "maxThermalRowResidualW": 4.516691909373094e-09,
+        "interfaceOutGasW": -6.967099597413578
+      }
+    },
+    {
+      "index": 3,
+      "name": "3",
+      "checks": {
+        "property_mu": 2.5336197519566263e-16,
+        "property_k": 3.3240762824780887e-16,
+        "property_solidK": 2.1177559890295512e-16,
+        "property_solidCp": 2.0079354257794859e-16,
+        "property_solidH": 6.058926963883275e-16,
+        "current_potentialV": 6.930186665028211e-14,
+        "current_relativePotentialV": 6.941887008982621e-14,
+        "current_torqueNm": 1.9738593322555845e-13,
+        "current_jouleByCellW": 2.952965674791284e-13,
+        "current_jouleW": 5.846452032867498e-16,
+        "current_mechanicalW": 2.660206534839159e-15,
+        "current_electrodePowerW": 1.4480068035445873e-13,
+        "current_boundaryCurrentsA": 6.51524811869562e-13,
+        "totalEnergy": {
+          "residual": -3.9223345937235035e-12,
+          "exchangeScale": 0.021643315541640507,
+          "storageAllowance": 4.265168791416728e-09
+        },
+        "angularMomentum": {
+          "residual": -7.444625512977249e-24,
+          "exchangeScale": 7.608476411920944e-09,
+          "storageAllowance": 4.050721825174094e-20
+        },
+        "maxMechanicalRowResidual": 2.4456537796028574e-18,
+        "maxThermalRowResidualW": 3.8861347279040004e-08,
+        "interfaceOutGasW": -18.364359365101446
+      }
+    },
+    {
+      "index": 4,
+      "name": "4",
+      "checks": {
+        "property_mu": 3.37350260333091e-16,
+        "property_k": 2.2129958499001984e-16,
+        "property_solidK": 2.1177387221913961e-16,
+        "property_solidCp": 2.0079354302805872e-16,
+        "property_solidH": 6.058927205833343e-16,
+        "current_potentialV": 1.0531801214126462e-13,
+        "current_relativePotentialV": 1.0549582274712494e-13,
+        "current_torqueNm": 2.5421223053270406e-13,
+        "current_jouleByCellW": 4.533110088411567e-13,
+        "current_jouleW": 3.0443859502263456e-15,
+        "current_mechanicalW": 1.977151678178844e-16,
+        "current_electrodePowerW": 1.4232538159592696e-13,
+        "current_boundaryCurrentsA": 6.352690089070353e-13,
+        "totalEnergy": {
+          "residual": 4.170413183187001e-12,
+          "exchangeScale": 0.021641687588880305,
+          "storageAllowance": 4.265129445988553e-09
+        },
+        "angularMomentum": {
+          "residual": 4.1359030627651384e-24,
+          "exchangeScale": 4.562712385374554e-09,
+          "storageAllowance": 3.0710474576004365e-20
+        },
+        "maxMechanicalRowResidual": 1.5663111576222358e-18,
+        "maxThermalRowResidualW": 4.1082358707630884e-08,
+        "interfaceOutGasW": -11.741016850621433
+      }
+    },
+    {
+      "index": 5,
+      "name": "5",
+      "checks": {
+        "property_mu": 3.3701411897307707e-16,
+        "property_k": 3.3161861765370945e-16,
+        "property_solidK": 2.1177138341599894e-16,
+        "property_solidCp": 2.0079354885891216e-16,
+        "property_solidH": 6.058930340124205e-16,
+        "current_potentialV": 1.4943863264427147e-13,
+        "current_relativePotentialV": 1.4969093384617203e-13,
+        "current_torqueNm": 3.257322119129082e-13,
+        "current_jouleByCellW": 4.022870506679949e-13,
+        "current_jouleW": 8.626943451575121e-16,
+        "current_mechanicalW": 1.5085268176675553e-16,
+        "current_electrodePowerW": 2.73450853636514e-13,
+        "current_boundaryCurrentsA": 1.1606216146774832e-12,
+        "totalEnergy": {
+          "residual": 7.502963755254581e-13,
+          "exchangeScale": 0.0216393461132114,
+          "storageAllowance": 4.265050762618202e-09
+        },
+        "angularMomentum": {
+          "residual": -3.7223127564886245e-24,
+          "exchangeScale": 2.5406379882298773e-09,
+          "storageAllowance": 2.0047134331867362e-20
+        },
+        "maxMechanicalRowResidual": 9.607041070313374e-19,
+        "maxThermalRowResidualW": 2.7902941068802534e-08,
+        "interfaceOutGasW": -6.96016970609806
+      }
+    },
+    {
+      "index": 6,
+      "name": "6",
+      "checks": {
+        "property_mu": 2.533654848266405e-16,
+        "property_k": 2.2160815522544802e-16,
+        "property_solidK": 2.1177560241824669e-16,
+        "property_solidCp": 2.0079354257962524e-16,
+        "property_solidH": 4.544195223588402e-16,
+        "current_potentialV": 1.986869089135111e-13,
+        "current_relativePotentialV": 1.9902235516616117e-13,
+        "current_torqueNm": 3.462137167964835e-13,
+        "current_jouleByCellW": 6.775695423439301e-13,
+        "current_jouleW": 2.4848351405088567e-15,
+        "current_mechanicalW": 5.904645942148011e-16,
+        "current_electrodePowerW": 6.290169091457652e-14,
+        "current_boundaryCurrentsA": 1.0335743468368525e-12,
+        "totalEnergy": {
+          "residual": 1.2619764853952155e-11,
+          "exchangeScale": 0.04328665084375214,
+          "storageAllowance": 4.265168944736977e-09
+        },
+        "angularMomentum": {
+          "residual": 0.0,
+          "exchangeScale": 1.5280190700001232e-08,
+          "storageAllowance": 4.0595263596442244e-20
+        },
+        "maxMechanicalRowResidual": 2.4589746961874113e-18,
+        "maxThermalRowResidualW": 1.825115803714278e-08,
+        "interfaceOutGasW": -18.42990585181326
+      }
+    },
+    {
+      "index": 7,
+      "name": "7",
+      "checks": {
+        "property_mu": 3.3735192156287865e-16,
+        "property_k": 3.319510121189954e-16,
+        "property_solidK": 2.1177387496989693e-16,
+        "property_solidCp": 2.0079354304149782e-16,
+        "property_solidH": 4.544195409793008e-16,
+        "current_potentialV": 1.0501199582276832e-13,
+        "current_relativePotentialV": 1.0518928977346382e-13,
+        "current_torqueNm": 2.5561286698467374e-13,
+        "current_jouleByCellW": 4.546067697214874e-13,
+        "current_jouleW": 0.0,
+        "current_mechanicalW": 1.777694583522656e-15,
+        "current_electrodePowerW": 1.9822590588576443e-13,
+        "current_boundaryCurrentsA": 8.46940869891121e-13,
+        "totalEnergy": {
+          "residual": -5.25285256237169e-12,
+          "exchangeScale": 0.0432833845152145,
+          "storageAllowance": 4.265129599296467e-09
+        },
+        "angularMomentum": {
+          "residual": -1.1580528575742387e-23,
+          "exchangeScale": 9.147468435109813e-09,
+          "storageAllowance": 3.0764909389967284e-20
+        },
+        "maxMechanicalRowResidual": 1.5677620324166538e-18,
+        "maxThermalRowResidualW": 1.686463502181823e-08,
+        "interfaceOutGasW": -11.764261618679148
+      }
+    },
+    {
+      "index": 8,
+      "name": "8",
+      "checks": {
+        "property_mu": 2.5276102717453433e-16,
+        "property_k": 3.316191922315156e-16,
+        "property_solidK": 2.1177138544030566e-16,
+        "property_solidCp": 2.0079354891118445e-16,
+        "property_solidH": 4.544197776166823e-16,
+        "current_potentialV": 1.4976899060708799e-13,
+        "current_relativePotentialV": 1.500218495598212e-13,
+        "current_torqueNm": 3.248454721832087e-13,
+        "current_jouleByCellW": 3.9794366386514403e-13,
+        "current_jouleW": 2.588117409558654e-15,
+        "current_mechanicalW": 3.9187739005636644e-15,
+        "current_electrodePowerW": 3.3996051594908475e-13,
+        "current_boundaryCurrentsA": 8.441175659218486e-13,
+        "totalEnergy": {
+          "residual": -2.3939974419626316e-13,
+          "exchangeScale": 0.0432786972182297,
+          "storageAllowance": 4.2650509159136705e-09
+        },
+        "angularMomentum": {
+          "residual": 7.858215819253763e-24,
+          "exchangeScale": 5.088866864689443e-09,
+          "storageAllowance": 2.0078261186137864e-20
+        },
+        "maxMechanicalRowResidual": 9.625023976830277e-19,
+        "maxThermalRowResidualW": 1.500125890174786e-08,
+        "interfaceOutGasW": -6.968370478429218
+      }
+    },
+    {
+      "index": 9,
+      "name": "9",
+      "checks": {
+        "property_mu": 3.3782077167873954e-16,
+        "property_k": 3.3241235607628216e-16,
+        "property_solidK": 2.1177560241824674e-16,
+        "property_solidCp": 2.00793542579625e-16,
+        "property_solidH": 6.058926964784422e-16,
+        "current_potentialV": 1.3661998497708893e-13,
+        "current_relativePotentialV": 1.3754998950949133e-13,
+        "current_torqueNm": 1.9003395440354858e-13,
+        "current_jouleByCellW": 2.8213358337116133e-13,
+        "current_jouleW": 3.3649435798824837e-15,
+        "current_mechanicalW": 2.508075591948574e-15,
+        "current_electrodePowerW": 1.7504456963576707e-13,
+        "current_boundaryCurrentsA": 4.300964826208629e-13,
+        "totalEnergy": {
+          "residual": 1.9701245046840248e-12,
+          "exchangeScale": 0.04328665089196068,
+          "storageAllowance": 4.265168944744935e-09
+        },
+        "angularMomentum": {
+          "residual": 1.4889251025954498e-23,
+          "exchangeScale": 1.5301232873018727e-08,
+          "storageAllowance": 4.066122892101374e-20
+        },
+        "maxMechanicalRowResidual": 4.910511384306746e-18,
+        "maxThermalRowResidualW": 3.2864260313125726e-08,
+        "interfaceOutGasW": -18.43049655063473
+      }
+    },
+    {
+      "index": 10,
+      "name": "10",
+      "checks": {
+        "property_mu": 3.3735207150049383e-16,
+        "property_k": 4.42601546208202e-16,
+        "property_solidK": 2.1177387496989693e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195409793642e-16,
+        "current_potentialV": 2.080813903117014e-13,
+        "current_relativePotentialV": 2.094978538487789e-13,
+        "current_torqueNm": 2.6759141565892413e-13,
+        "current_jouleByCellW": 3.6417754333739345e-13,
+        "current_jouleW": 1.4510689234313123e-15,
+        "current_mechanicalW": 1.973792868203747e-15,
+        "current_electrodePowerW": 2.2049645154633412e-13,
+        "current_boundaryCurrentsA": 6.639416069607079e-13,
+        "totalEnergy": {
+          "residual": -1.214975712540093e-11,
+          "exchangeScale": 0.04328338453489374,
+          "storageAllowance": 4.26512959928467e-09
+        },
+        "angularMomentum": {
+          "residual": -8.271806125530277e-24,
+          "exchangeScale": 9.160437334423792e-09,
+          "storageAllowance": 3.081606711002216e-20
+        },
+        "maxMechanicalRowResidual": 3.1159893674872553e-18,
+        "maxThermalRowResidualW": 2.2722306515510216e-08,
+        "interfaceOutGasW": -11.764929245927396
+      }
+    },
+    {
+      "index": 11,
+      "name": "11",
+      "checks": {
+        "property_mu": 3.370148480236835e-16,
+        "property_k": 4.4215911337656087e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 2.0079354891128178e-16,
+        "property_solidH": 6.058930368274727e-16,
+        "current_potentialV": 3.2820703865512665e-13,
+        "current_relativePotentialV": 3.304412357807624e-13,
+        "current_torqueNm": 2.8418367130544263e-13,
+        "current_jouleByCellW": 4.896575796059012e-13,
+        "current_jouleW": 4.3174332002532893e-16,
+        "current_mechanicalW": 0.0,
+        "current_electrodePowerW": 3.162651967263484e-13,
+        "current_boundaryCurrentsA": 7.941667303201453e-13,
+        "totalEnergy": {
+          "residual": -2.5187672975291895e-12,
+          "exchangeScale": 0.043278697224420744,
+          "storageAllowance": 4.265050915862433e-09
+        },
+        "angularMomentum": {
+          "residual": -5.790264287871194e-24,
+          "exchangeScale": 5.095911195150867e-09,
+          "storageAllowance": 2.0112376551096076e-20
+        },
+        "maxMechanicalRowResidual": 1.9187182227106524e-18,
+        "maxThermalRowResidualW": 3.423899230803329e-08,
+        "interfaceOutGasW": -6.969073353534028
+      }
+    },
+    {
+      "index": 12,
+      "name": "12",
+      "checks": {
+        "property_mu": 3.378214312928904e-16,
+        "property_k": 3.3241300513019593e-16,
+        "property_solidK": 2.1177560241824674e-16,
+        "property_solidCp": 2.0079354257962536e-16,
+        "property_solidH": 4.544195223588456e-16,
+        "current_potentialV": 2.992807182512715e-13,
+        "current_relativePotentialV": 3.076917971028326e-13,
+        "current_torqueNm": 5.7388243444567e-13,
+        "current_jouleByCellW": 7.167954367115689e-13,
+        "current_jouleW": 4.4048426984303007e-16,
+        "current_mechanicalW": 0.0,
+        "current_electrodePowerW": 2.8900523912186846e-13,
+        "current_boundaryCurrentsA": 7.032404762838926e-13,
+        "totalEnergy": {
+          "residual": 9.762914489428592e-12,
+          "exchangeScale": 0.043286651153838014,
+          "storageAllowance": 4.2651689447612085e-09
+        },
+        "angularMomentum": {
+          "residual": -1.9025154088719637e-23,
+          "exchangeScale": 1.5396391921232104e-08,
+          "storageAllowance": 4.0919880012926596e-20
+        },
+        "maxMechanicalRowResidual": 9.709412942922937e-18,
+        "maxThermalRowResidualW": 5.851709716786502e-08,
+        "interfaceOutGasW": -18.432916833697192
+      }
+    },
+    {
+      "index": 13,
+      "name": "13",
+      "checks": {
+        "property_mu": 1.6867630160424678e-16,
+        "property_k": 2.2130112190110376e-16,
+        "property_solidK": 2.1177387496989693e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195409785294e-16,
+        "current_potentialV": 1.8417713722936736e-13,
+        "current_relativePotentialV": 1.8935192343283698e-13,
+        "current_torqueNm": 3.43809644763823e-13,
+        "current_jouleByCellW": 2.717931146204494e-13,
+        "current_jouleW": 1.164990924179264e-15,
+        "current_mechanicalW": 1.5745478830242163e-15,
+        "current_electrodePowerW": 1.065300907941817e-13,
+        "current_boundaryCurrentsA": 4.355072458013099e-13,
+        "totalEnergy": {
+          "residual": -6.700272210294995e-12,
+          "exchangeScale": 0.043283384563906305,
+          "storageAllowance": 4.2651295992243275e-09
+        },
+        "angularMomentum": {
+          "residual": 2.5642598989143858e-23,
+          "exchangeScale": 9.21094600389148e-09,
+          "storageAllowance": 3.100687535730902e-20
+        },
+        "maxMechanicalRowResidual": 6.203364903225076e-18,
+        "maxThermalRowResidualW": 4.8738685979460294e-08,
+        "interfaceOutGasW": -11.767594211805136
+      }
+    },
+    {
+      "index": 14,
+      "name": "14",
+      "checks": {
+        "property_mu": 1.6850770761678735e-16,
+        "property_k": 2.2107992877429396e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 2.0079354891163778e-16,
+        "property_solidH": 4.544197776349587e-16,
+        "current_potentialV": 2.390814594095647e-13,
+        "current_relativePotentialV": 2.458036361527548e-13,
+        "current_torqueNm": 3.5954673457200263e-13,
+        "current_jouleByCellW": 3.909739121341975e-13,
+        "current_jouleW": 1.8774739507157814e-15,
+        "current_mechanicalW": 1.8005626704801533e-15,
+        "current_electrodePowerW": 2.436834272228478e-15,
+        "current_boundaryCurrentsA": 5.821954311676562e-13,
+        "totalEnergy": {
+          "residual": 4.064037568794884e-13,
+          "exchangeScale": 0.043278697236442246,
+          "storageAllowance": 4.2650509156492325e-09
+        },
+        "angularMomentum": {
+          "residual": 4.963083675318166e-24,
+          "exchangeScale": 5.121209749663999e-09,
+          "storageAllowance": 2.0243323392485436e-20
+        },
+        "maxMechanicalRowResidual": 3.77715152237844e-18,
+        "maxThermalRowResidualW": 5.1723029859118697e-08,
+        "interfaceOutGasW": -6.9718360540518
+      }
+    },
+    {
+      "index": 15,
+      "name": "15",
+      "checks": {
+        "property_mu": 2.533667833317793e-16,
+        "property_k": 2.216092909733916e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195223588819e-16,
+        "current_potentialV": 4.138895723632963e-13,
+        "current_relativePotentialV": 4.670327535873278e-13,
+        "current_torqueNm": 7.767470520141256e-13,
+        "current_jouleByCellW": 8.892267237015896e-13,
+        "current_jouleW": 1.4870554795724239e-16,
+        "current_mechanicalW": 1.604028044126447e-15,
+        "current_electrodePowerW": 4.623930030749205e-13,
+        "current_boundaryCurrentsA": 9.026212845379254e-13,
+        "totalEnergy": {
+          "residual": 7.414897402609438e-12,
+          "exchangeScale": 0.043286652397871,
+          "storageAllowance": 4.265168944552414e-09
+        },
+        "angularMomentum": {
+          "residual": -1.1580528575742387e-23,
+          "exchangeScale": 1.5825431737885912e-08,
+          "storageAllowance": 4.1491809033049164e-20
+        },
+        "maxMechanicalRowResidual": 1.8751377158299286e-17,
+        "maxThermalRowResidualW": 1.0921255522156059e-07,
+        "interfaceOutGasW": -18.44313917104111
+      }
+    },
+    {
+      "index": 16,
+      "name": "16",
+      "checks": {
+        "property_mu": 1.6867722639989197e-16,
+        "property_k": 1.1065116761050313e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195409831023e-16,
+        "current_potentialV": 2.489916055837911e-13,
+        "current_relativePotentialV": 2.8096210267970435e-13,
+        "current_torqueNm": 4.577976176277363e-13,
+        "current_jouleByCellW": 5.647565954596655e-13,
+        "current_jouleW": 5.89866091148541e-16,
+        "current_mechanicalW": 2.7243811865953096e-15,
+        "current_electrodePowerW": 5.297680400464824e-13,
+        "current_boundaryCurrentsA": 8.994162116243831e-13,
+        "totalEnergy": {
+          "residual": -8.986033849328287e-12,
+          "exchangeScale": 0.04328338449925157,
+          "storageAllowance": 4.265129598747187e-09
+        },
+        "angularMomentum": {
+          "residual": -1.5716431638507526e-23,
+          "exchangeScale": 9.298834942966363e-09,
+          "storageAllowance": 3.1375679544513363e-20
+        },
+        "maxMechanicalRowResidual": 1.1893202847287432e-17,
+        "maxThermalRowResidualW": 1.0899508440243011e-07,
+        "interfaceOutGasW": -11.778267647955689
+      }
+    },
+    {
+      "index": 17,
+      "name": "17",
+      "checks": {
+        "property_mu": 1.6850888772146267e-16,
+        "property_k": 2.210814770563355e-16,
+        "property_solidK": 2.1177138544030647e-16,
+        "property_solidCp": 2.0079354891415713e-16,
+        "property_solidH": 4.544197777365247e-16,
+        "current_potentialV": 2.6836550069199214e-13,
+        "current_relativePotentialV": 3.0282374138211043e-13,
+        "current_torqueNm": 2.68386436033263e-13,
+        "current_jouleByCellW": 3.375281539087555e-13,
+        "current_jouleW": 1.4622485271051666e-15,
+        "current_mechanicalW": 1.776608613701141e-15,
+        "current_electrodePowerW": 4.744940011063046e-13,
+        "current_boundaryCurrentsA": 7.679486898000818e-13,
+        "totalEnergy": {
+          "residual": -1.4138119182869648e-12,
+          "exchangeScale": 0.04327869723627704,
+          "storageAllowance": 4.265050914637003e-09
+        },
+        "angularMomentum": {
+          "residual": 9.098986738083304e-24,
+          "exchangeScale": 5.124697137000248e-09,
+          "storageAllowance": 2.058485816689753e-20
+        },
+        "maxMechanicalRowResidual": 7.183064385843081e-18,
+        "maxThermalRowResidualW": 8.292434316992114e-08,
+        "interfaceOutGasW": -6.982277085909176
+      }
+    },
+    {
+      "index": 18,
+      "name": "18",
+      "checks": {
+        "property_mu": 3.378774423712141e-16,
+        "property_k": 3.3246811948689883e-16,
+        "property_solidK": 2.1177597880458064e-16,
+        "property_solidCp": 2.0079354260218767e-16,
+        "property_solidH": 6.058926976912665e-16,
+        "current_potentialV": 3.8940301669643467e-14,
+        "current_relativePotentialV": 3.905750983266551e-14,
+        "current_torqueNm": 8.368054815125871e-14,
+        "current_jouleByCellW": 1.2589713123970985e-13,
+        "current_jouleW": 1.901447316645397e-15,
+        "current_mechanicalW": 1.4717813675956122e-16,
+        "current_electrodePowerW": 2.0178419420051513e-13,
+        "current_boundaryCurrentsA": 7.496614390334747e-13,
+        "totalEnergy": {
+          "residual": 3.926630054500125e-12,
+          "exchangeScale": 0.07695354664901644,
+          "storageAllowance": 4.265169183889686e-09
+        },
+        "angularMomentum": {
+          "residual": -2.8206858888058244e-21,
+          "exchangeScale": 2.736167573254762e-08,
+          "storageAllowance": 4.077341257612931e-20
+        },
+        "maxMechanicalRowResidual": 6.174971101518581e-18,
+        "maxThermalRowResidualW": 1.4542607951195663e-08,
+        "interfaceOutGasW": -18.534002550935888
+      }
+    },
+    {
+      "index": 19,
+      "name": "19",
+      "checks": {
+        "property_mu": 3.373858699560329e-16,
+        "property_k": 3.319844170079172e-16,
+        "property_solidK": 2.1177430516470543e-16,
+        "property_solidCp": 2.007935433385357e-16,
+        "property_solidH": 6.058927372725664e-16,
+        "current_potentialV": 4.400577292759116e-14,
+        "current_relativePotentialV": 4.41382285928533e-14,
+        "current_torqueNm": 1.2999118776022407e-13,
+        "current_jouleByCellW": 2.536964822379812e-13,
+        "current_jouleW": 2.321069830768658e-15,
+        "current_mechanicalW": 1.96968850675925e-16,
+        "current_electrodePowerW": 1.1344242188429541e-13,
+        "current_boundaryCurrentsA": 4.3599894736005854e-13,
+        "totalEnergy": {
+          "residual": -9.106925493395073e-12,
+          "exchangeScale": 0.07694789422779955,
+          "storageAllowance": 4.265129838644411e-09
+        },
+        "angularMomentum": {
+          "residual": -1.6841397271579643e-21,
+          "exchangeScale": 1.6335676720558296e-08,
+          "storageAllowance": 3.088221785723164e-20
+        },
+        "maxMechanicalRowResidual": 3.928044155359138e-18,
+        "maxThermalRowResidualW": 1.8948644653349334e-08,
+        "interfaceOutGasW": -11.801962320773137
+      }
+    },
+    {
+      "index": 20,
+      "name": "20",
+      "checks": {
+        "property_mu": 1.685170232368732e-16,
+        "property_k": 2.2109215074712942e-16,
+        "property_solidK": 2.1177184854156522e-16,
+        "property_solidCp": 2.007935498925646e-16,
+        "property_solidH": 4.544198171812048e-16,
+        "current_potentialV": 3.64324777454912e-14,
+        "current_relativePotentialV": 3.6542138728614937e-14,
+        "current_torqueNm": 7.36144224726768e-14,
+        "current_jouleByCellW": 1.071350995942064e-13,
+        "current_jouleW": 0.0,
+        "current_mechanicalW": 6.012219257167699e-16,
+        "current_electrodePowerW": 8.254087598344921e-14,
+        "current_boundaryCurrentsA": 1.1794803690686008e-12,
+        "totalEnergy": {
+          "residual": -3.8379926068309554e-12,
+          "exchangeScale": 0.07693966308481913,
+          "storageAllowance": 4.265051155527037e-09
+        },
+        "angularMomentum": {
+          "residual": -9.711100391372545e-22,
+          "exchangeScale": 9.074470834067123e-09,
+          "storageAllowance": 2.0149921334500773e-20
+        },
+        "maxMechanicalRowResidual": 2.411719522153482e-18,
+        "maxThermalRowResidualW": 1.3468758061976893e-08,
+        "interfaceOutGasW": -6.9824001291589095
+      }
+    },
+    {
+      "index": 21,
+      "name": "21",
+      "checks": {
+        "property_mu": 3.38010588357306e-16,
+        "property_k": 3.3259913384317702e-16,
+        "property_solidK": 2.117765490486803e-16,
+        "property_solidCp": 2.0079354268413124e-16,
+        "property_solidH": 4.544195265720138e-16,
+        "current_potentialV": 1.925899852864874e-14,
+        "current_relativePotentialV": 1.929160977741085e-14,
+        "current_torqueNm": 4.081241931608285e-14,
+        "current_jouleByCellW": 1.0627916350997865e-13,
+        "current_jouleW": 0.0,
+        "current_mechanicalW": 1.4703501202654049e-15,
+        "current_electrodePowerW": 3.8916686517776665e-14,
+        "current_boundaryCurrentsA": 1.3829562651122783e-13,
+        "totalEnergy": {
+          "residual": -3.3737914365168913e-13,
+          "exchangeScale": 0.04328540083397723,
+          "storageAllowance": 4.26516894644581e-09
+        },
+        "angularMomentum": {
+          "residual": -6.931773533194372e-22,
+          "exchangeScale": 1.5302823406919202e-08,
+          "storageAllowance": 4.068582228251532e-20
+        },
+        "maxMechanicalRowResidual": 2.0551037621083956e-18,
+        "maxThermalRowResidualW": 2.279213659472923e-08,
+        "interfaceOutGasW": -18.434626874538555
+      }
+    },
+    {
+      "index": 22,
+      "name": "22",
+      "checks": {
+        "property_mu": 3.3747252176275197e-16,
+        "property_k": 3.320696815435662e-16,
+        "property_solidK": 2.1177504192158006e-16,
+        "property_solidCp": 2.007935442026327e-16,
+        "property_solidH": 6.058927837208362e-16,
+        "current_potentialV": 2.1044944159860338e-14,
+        "current_relativePotentialV": 2.1080579974397096e-14,
+        "current_torqueNm": 3.836321686157638e-14,
+        "current_jouleByCellW": 5.389961009094146e-14,
+        "current_jouleW": 2.903567785527567e-16,
+        "current_mechanicalW": 1.5734484061956347e-15,
+        "current_electrodePowerW": 2.482949148623365e-14,
+        "current_boundaryCurrentsA": 1.32655114240771e-13,
+        "totalEnergy": {
+          "residual": 2.441573764726864e-12,
+          "exchangeScale": 0.04328254892564017,
+          "storageAllowance": 4.265129601891361e-09
+        },
+        "angularMomentum": {
+          "residual": -4.094544032137487e-22,
+          "exchangeScale": 9.161238443535718e-09,
+          "storageAllowance": 3.0839225435930824e-20
+        },
+        "maxMechanicalRowResidual": 1.311551109484479e-18,
+        "maxThermalRowResidualW": 3.0716577711920046e-08,
+        "interfaceOutGasW": -11.76939290707345
+      }
+    },
+    {
+      "index": 23,
+      "name": "23",
+      "checks": {
+        "property_mu": 1.6854281002063457e-16,
+        "property_k": 2.211259826732645e-16,
+        "property_solidK": 2.1177269559076393e-16,
+        "property_solidCp": 2.0079355107585908e-16,
+        "property_solidH": 6.058931531812673e-16,
+        "current_potentialV": 3.5341597452647315e-14,
+        "current_relativePotentialV": 3.540144285057686e-14,
+        "current_torqueNm": 6.509528648522768e-14,
+        "current_jouleByCellW": 1.3282875337163984e-13,
+        "current_jouleW": 0.0,
+        "current_mechanicalW": 2.4004704065945033e-15,
+        "current_electrodePowerW": 2.4294635288407953e-15,
+        "current_boundaryCurrentsA": 1.9237005420034514e-13,
+        "totalEnergy": {
+          "residual": 1.8358725591182193e-12,
+          "exchangeScale": 0.04327813113844419,
+          "storageAllowance": 4.265050919677344e-09
+        },
+        "angularMomentum": {
+          "residual": -2.514629062161204e-22,
+          "exchangeScale": 5.096140136777513e-09,
+          "storageAllowance": 2.0133843826876766e-20
+        },
+        "maxMechanicalRowResidual": 8.018854294211561e-19,
+        "maxThermalRowResidualW": 2.5974413730978085e-08,
+        "interfaceOutGasW": -6.972712737957904
+      }
+    },
+    {
+      "index": 24,
+      "name": "24",
+      "checks": {
+        "property_mu": 3.3801073176918117e-16,
+        "property_k": 3.3259927495906843e-16,
+        "property_solidK": 2.117765490486803e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 3.0294635104795476e-16,
+        "current_potentialV": 1.9933638885478432e-14,
+        "current_relativePotentialV": 2.0069733336431825e-14,
+        "current_torqueNm": 2.128883971578782e-14,
+        "current_jouleByCellW": 3.3234392178180434e-14,
+        "current_jouleW": 4.3953851223851357e-16,
+        "current_mechanicalW": 1.1756295250533939e-15,
+        "current_electrodePowerW": 1.8898774218183884e-14,
+        "current_boundaryCurrentsA": 2.4421017390481946e-13,
+        "totalEnergy": {
+          "residual": -7.97800829238182e-13,
+          "exchangeScale": 0.043285400872081124,
+          "storageAllowance": 4.26516894645391e-09
+        },
+        "angularMomentum": {
+          "residual": -6.849055471939069e-22,
+          "exchangeScale": 1.5323900123271534e-08,
+          "storageAllowance": 4.075193202084657e-20
+        },
+        "maxMechanicalRowResidual": 4.088330251375989e-18,
+        "maxThermalRowResidualW": 5.3046850467808326e-08,
+        "interfaceOutGasW": -18.4352129070869
+      }
+    },
+    {
+      "index": 25,
+      "name": "25",
+      "checks": {
+        "property_mu": 1.6873634633683887e-16,
+        "property_k": 2.213798998121707e-16,
+        "property_solidK": 2.117750419215801e-16,
+        "property_solidCp": 2.007935442026421e-16,
+        "property_solidH": 4.54419587791005e-16,
+        "current_potentialV": 5.883522629752504e-14,
+        "current_relativePotentialV": 5.923692135990127e-14,
+        "current_torqueNm": 6.524031622219398e-14,
+        "current_jouleByCellW": 1.1030914548965546e-13,
+        "current_jouleW": 2.906218842982019e-16,
+        "current_mechanicalW": 1.1792420795290923e-15,
+        "current_electrodePowerW": 7.728447717559127e-14,
+        "current_boundaryCurrentsA": 1.9957599765470566e-13,
+        "totalEnergy": {
+          "residual": -2.679794777873728e-13,
+          "exchangeScale": 0.04328254894115852,
+          "storageAllowance": 4.2651296018797965e-09
+        },
+        "angularMomentum": {
+          "residual": -3.9870105525055934e-22,
+          "exchangeScale": 9.174230155822537e-09,
+          "storageAllowance": 3.0890502232079416e-20
+        },
+        "maxMechanicalRowResidual": 2.6226125280463266e-18,
+        "maxThermalRowResidualW": 4.4970029478008655e-08,
+        "interfaceOutGasW": -11.770056499041338
+      }
+    },
+    {
+      "index": 26,
+      "name": "26",
+      "checks": {
+        "property_mu": 3.3708578617899743e-16,
+        "property_k": 3.316891374878068e-16,
+        "property_solidK": 2.117726955907647e-16,
+        "property_solidCp": 2.0079355107605369e-16,
+        "property_solidH": 4.544198648937974e-16,
+        "current_potentialV": 5.165438408796275e-14,
+        "current_relativePotentialV": 5.2007056894972836e-14,
+        "current_torqueNm": 4.9372193814580565e-14,
+        "current_jouleByCellW": 7.429725380529682e-14,
+        "current_jouleW": 8.646660157418273e-16,
+        "current_mechanicalW": 1.6488299809379034e-15,
+        "current_electrodePowerW": 7.32347591919695e-14,
+        "current_boundaryCurrentsA": 1.9876653184420448e-13,
+        "totalEnergy": {
+          "residual": 1.6638449617373523e-12,
+          "exchangeScale": 0.043278131142536064,
+          "storageAllowance": 4.265050919626509e-09
+        },
+        "angularMomentum": {
+          "residual": -2.419503291717606e-22,
+          "exchangeScale": 5.103198038560725e-09,
+          "storageAllowance": 2.0168046802017693e-20
+        },
+        "maxMechanicalRowResidual": 1.5996548081142483e-18,
+        "maxThermalRowResidualW": 5.2421993301798864e-08,
+        "interfaceOutGasW": -6.973411980808541
+      }
+    },
+    {
+      "index": 27,
+      "name": "27",
+      "checks": {
+        "property_mu": 1.6901075709018577e-16,
+        "property_k": 2.2173992316459088e-16,
+        "property_solidK": 2.1177655225934888e-16,
+        "property_solidCp": 2.0079354269443684e-16,
+        "property_solidH": 6.05892702649983e-16,
+        "current_potentialV": 1.9982657178963325e-14,
+        "current_relativePotentialV": 2.0119086284412703e-14,
+        "current_torqueNm": 2.2223312200774616e-14,
+        "current_jouleByCellW": 4.0233555433212546e-14,
+        "current_jouleW": 7.326184336112962e-16,
+        "current_mechanicalW": 5.864652891855149e-16,
+        "current_electrodePowerW": 3.000834273245946e-14,
+        "current_boundaryCurrentsA": 2.172813385623605e-13,
+        "totalEnergy": {
+          "residual": 4.799058082893305e-12,
+          "exchangeScale": 0.08657086789224112,
+          "storageAllowance": 4.265169253330763e-09
+        },
+        "angularMomentum": {
+          "residual": -1.4244050148163137e-21,
+          "exchangeScale": 3.09032963605138e-08,
+          "storageAllowance": 4.092861980443087e-20
+        },
+        "maxMechanicalRowResidual": 4.127174652941479e-18,
+        "maxThermalRowResidualW": 2.7824851311919474e-08,
+        "interfaceOutGasW": -18.567269815645684
+      }
+    },
+    {
+      "index": 28,
+      "name": "28",
+      "checks": {
+        "property_mu": 1.6873824182812234e-16,
+        "property_k": 2.2138238667217173e-16,
+        "property_solidK": 2.117750457406078e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195903642512e-16,
+        "current_potentialV": 5.936744633779077e-14,
+        "current_relativePotentialV": 5.977277508539325e-14,
+        "current_torqueNm": 6.301137327387583e-14,
+        "current_jouleByCellW": 1.118770071224588e-13,
+        "current_jouleW": 2.1797641348735833e-15,
+        "current_mechanicalW": 3.92325206760125e-16,
+        "current_electrodePowerW": 7.786090194779895e-14,
+        "current_boundaryCurrentsA": 2.3058179964190596e-13,
+        "totalEnergy": {
+          "residual": 1.60547522338691e-12,
+          "exchangeScale": 0.0865651291103821,
+          "storageAllowance": 4.26512990873613e-09
+        },
+        "angularMomentum": {
+          "residual": -8.404155023538761e-22,
+          "exchangeScale": 1.8436816571979117e-08,
+          "storageAllowance": 3.099936697463217e-20
+        },
+        "maxMechanicalRowResidual": 2.6249815733206784e-18,
+        "maxThermalRowResidualW": 3.770671952452176e-08,
+        "interfaceOutGasW": -11.816540844748024
+      }
+    },
+    {
+      "index": 29,
+      "name": "29",
+      "checks": {
+        "property_mu": 1.6854355671187355e-16,
+        "property_k": 2.2112696232249403e-16,
+        "property_solidK": 2.1177269911471243e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544198683764986e-16,
+        "current_potentialV": 5.256477654023249e-14,
+        "current_relativePotentialV": 5.292366508159689e-14,
+        "current_torqueNm": 5.1453268934473215e-14,
+        "current_jouleByCellW": 7.71434029636645e-14,
+        "current_jouleW": 1.585262849858441e-15,
+        "current_mechanicalW": 4.48914737482283e-16,
+        "current_electrodePowerW": 2.932290571260797e-14,
+        "current_boundaryCurrentsA": 1.1366084573470988e-13,
+        "totalEnergy": {
+          "residual": -9.893494074523666e-12,
+          "exchangeScale": 0.08655628033547776,
+          "storageAllowance": 4.265051226461076e-09
+        },
+        "angularMomentum": {
+          "residual": -4.731473103803318e-22,
+          "exchangeScale": 1.0236710541265152e-08,
+          "storageAllowance": 2.0230216387494564e-20
+        },
+        "maxMechanicalRowResidual": 1.6016400415843756e-18,
+        "maxThermalRowResidualW": 2.9110310606483836e-08,
+        "interfaceOutGasW": -6.9897363479307275
+      }
+    },
+    {
+      "index": 30,
+      "name": "30",
+      "checks": {
+        "property_mu": 1.690217717406037e-16,
+        "property_k": 2.2175437424320504e-16,
+        "property_solidK": 2.1177655860064047e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058927038332145e-16,
+        "current_potentialV": 2.0021169512004176e-14,
+        "current_relativePotentialV": 2.0157861532315406e-14,
+        "current_torqueNm": 2.2504936039936137e-14,
+        "current_jouleByCellW": 3.4290116071652453e-14,
+        "current_jouleW": 1.9050872191736395e-15,
+        "current_mechanicalW": 1.459528456152e-16,
+        "current_electrodePowerW": 1.1253966458946117e-14,
+        "current_boundaryCurrentsA": 1.284309995667604e-13,
+        "totalEnergy": {
+          "residual": -1.293646643258338e-11,
+          "exchangeScale": 0.17314200994592047,
+          "storageAllowance": 4.265169867432367e-09
+        },
+        "angularMomentum": {
+          "residual": -2.8752798092343242e-21,
+          "exchangeScale": 6.285243301067306e-08,
+          "storageAllowance": 4.1285805489347254e-20
+        },
+        "maxMechanicalRowResidual": 4.182350908521216e-18,
+        "maxThermalRowResidualW": 1.4502408093863828e-08,
+        "interfaceOutGasW": -18.837657707260306
+      }
+    },
+    {
+      "index": 31,
+      "name": "31",
+      "checks": {
+        "property_mu": 1.6874205744034472e-16,
+        "property_k": 2.2138739270596264e-16,
+        "property_solidK": 2.1177505332389066e-16,
+        "property_solidCp": 2.0079354439640035e-16,
+        "property_solidH": 4.544195956023994e-16,
+        "current_potentialV": 6.035485395905132e-14,
+        "current_relativePotentialV": 6.076692414060523e-14,
+        "current_torqueNm": 6.412962236662117e-14,
+        "current_jouleByCellW": 1.1171202847986103e-13,
+        "current_jouleW": 2.3252932009658424e-15,
+        "current_mechanicalW": 1.9541802958318073e-16,
+        "current_electrodePowerW": 8.461659525935792e-14,
+        "current_boundaryCurrentsA": 2.434611406944234e-13,
+        "totalEnergy": {
+          "residual": -6.172750577012904e-12,
+          "exchangeScale": 0.17313038440896708,
+          "storageAllowance": 4.265130522795756e-09
+        },
+        "angularMomentum": {
+          "residual": -1.7436967312617823e-21,
+          "exchangeScale": 3.7230146600863875e-08,
+          "storageAllowance": 3.121790138982716e-20
+        },
+        "maxMechanicalRowResidual": 2.638626744705353e-18,
+        "maxThermalRowResidualW": 1.0656525162300312e-08,
+        "interfaceOutGasW": -11.910415411251389
+      }
+    },
+    {
+      "index": 32,
+      "name": "32",
+      "checks": {
+        "property_mu": 1.6854488318770981e-16,
+        "property_k": 2.2112870264160193e-16,
+        "property_solidK": 2.117727061449671e-16,
+        "property_solidCp": 2.0079355133545164e-16,
+        "property_solidH": 7.573664589191269e-16,
+        "current_potentialV": 5.433654003566474e-14,
+        "current_relativePotentialV": 5.470752534855324e-14,
+        "current_torqueNm": 5.556936163891465e-14,
+        "current_jouleByCellW": 8.335325841007086e-14,
+        "current_jouleW": 2.305957608875021e-15,
+        "current_mechanicalW": 1.1930712229777867e-15,
+        "current_electrodePowerW": 4.849136866387595e-14,
+        "current_boundaryCurrentsA": 1.675979292677125e-13,
+        "totalEnergy": {
+          "residual": 1.6884051055594644e-12,
+          "exchangeScale": 0.1731126329418938,
+          "storageAllowance": 4.265051840476917e-09
+        },
+        "angularMomentum": {
+          "residual": -9.595295105615121e-22,
+          "exchangeScale": 2.0594865756737746e-08,
+          "storageAllowance": 2.0354614779682855e-20
+        },
+        "maxMechanicalRowResidual": 1.6106860887632555e-18,
+        "maxThermalRowResidualW": 1.55942174728807e-08,
+        "interfaceOutGasW": -7.022459679743449
+      }
+    },
+    {
+      "index": 33,
+      "name": "33",
+      "checks": {
+        "property_mu": 1.6902177174065254e-16,
+        "property_k": 2.217543742432691e-16,
+        "property_solidK": 2.1177655860064042e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058927038332144e-16,
+        "current_potentialV": 2.0042178084419705e-14,
+        "current_relativePotentialV": 2.017901353812056e-14,
+        "current_torqueNm": 2.1664502743842345e-14,
+        "current_jouleByCellW": 4.058830065625096e-14,
+        "current_jouleW": 2.3447227312912453e-15,
+        "current_mechanicalW": 1.0216699192982847e-15,
+        "current_electrodePowerW": 3.3329054513037446e-14,
+        "current_boundaryCurrentsA": 1.144077228573184e-13,
+        "totalEnergy": {
+          "residual": -4.232950144913983e-12,
+          "exchangeScale": 0.17314200993721698,
+          "storageAllowance": 4.265169867432367e-09
+        },
+        "angularMomentum": {
+          "residual": -2.8554274745330515e-21,
+          "exchangeScale": 6.285243301040647e-08,
+          "storageAllowance": 4.128580548942901e-20
+        },
+        "maxMechanicalRowResidual": 4.186407402245176e-18,
+        "maxThermalRowResidualW": 1.3767404993814125e-08,
+        "interfaceOutGasW": -18.837657708481476
+      }
+    },
+    {
+      "index": 34,
+      "name": "34",
+      "checks": {
+        "property_mu": 1.687420574403331e-16,
+        "property_k": 2.213873927059474e-16,
+        "property_solidK": 2.1177505332389066e-16,
+        "property_solidCp": 2.0079354439640035e-16,
+        "property_solidH": 4.544195956023995e-16,
+        "current_potentialV": 6.036185690085777e-14,
+        "current_relativePotentialV": 6.077397489469708e-14,
+        "current_torqueNm": 6.580256903706488e-14,
+        "current_jouleByCellW": 1.1153829282128537e-13,
+        "current_jouleW": 1.7439699007247384e-15,
+        "current_mechanicalW": 1.5633442366523476e-15,
+        "current_electrodePowerW": 7.700253830054352e-14,
+        "current_boundaryCurrentsA": 2.163330090423092e-13,
+        "totalEnergy": {
+          "residual": 3.927930165370866e-13,
+          "exchangeScale": 0.17313038440240155,
+          "storageAllowance": 4.265130522795755e-09
+        },
+        "angularMomentum": {
+          "residual": -1.730461841460934e-21,
+          "exchangeScale": 3.72301466006656e-08,
+          "storageAllowance": 3.121790138993135e-20
+        },
+        "maxMechanicalRowResidual": 2.652788076792261e-18,
+        "maxThermalRowResidualW": 1.427732954084604e-08,
+        "interfaceOutGasW": -11.910415410965465
+      }
+    },
+    {
+      "index": 35,
+      "name": "35",
+      "checks": {
+        "property_mu": 3.3708976637547455e-16,
+        "property_k": 4.4225740528327604e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 2.0079355133545164e-16,
+        "property_solidH": 6.058931671353012e-16,
+        "current_potentialV": 5.3727276086302323e-14,
+        "current_relativePotentialV": 5.409410162058258e-14,
+        "current_torqueNm": 5.4136208385338804e-14,
+        "current_jouleByCellW": 8.206029163019608e-14,
+        "current_jouleW": 3.1706917122036198e-15,
+        "current_mechanicalW": 2.9826780574166815e-16,
+        "current_electrodePowerW": 7.881635437698412e-14,
+        "current_boundaryCurrentsA": 1.4207890300062514e-13,
+        "totalEnergy": {
+          "residual": -8.827705344602484e-13,
+          "exchangeScale": 0.17311263294446502,
+          "storageAllowance": 4.2650518404769166e-09
+        },
+        "angularMomentum": {
+          "residual": -9.744187615874666e-22,
+          "exchangeScale": 2.059486575678362e-08,
+          "storageAllowance": 2.0354614779821988e-20
+        },
+        "maxMechanicalRowResidual": 1.6069472323945158e-18,
+        "maxThermalRowResidualW": 1.2077041589009241e-08,
+        "interfaceOutGasW": -7.022459680436626
+      }
+    },
+    {
+      "index": 36,
+      "name": "36",
+      "checks": {
+        "property_mu": 1.690217717406037e-16,
+        "property_k": 2.2175437424320504e-16,
+        "property_solidK": 2.1177655860064047e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058927038332145e-16,
+        "current_potentialV": 2.0042178084419705e-14,
+        "current_relativePotentialV": 2.017901353812056e-14,
+        "current_torqueNm": 2.1944647175874143e-14,
+        "current_jouleByCellW": 3.778910750754303e-14,
+        "current_jouleW": 5.861806828227881e-16,
+        "current_mechanicalW": 1.459528456142069e-16,
+        "current_electrodePowerW": 2.741350804102586e-14,
+        "current_boundaryCurrentsA": 1.1440772285731533e-13,
+        "totalEnergy": {
+          "residual": -1.2936460699864392e-11,
+          "exchangeScale": 0.17314200994592047,
+          "storageAllowance": 4.265169867432367e-09
+        },
+        "angularMomentum": {
+          "residual": -2.8818972541347484e-21,
+          "exchangeScale": 6.285243301067274e-08,
+          "storageAllowance": 4.1285805489347133e-20
+        },
+        "maxMechanicalRowResidual": 4.1794723199895314e-18,
+        "maxThermalRowResidualW": 1.4502408093863828e-08,
+        "interfaceOutGasW": -18.83765770726042
+      }
+    },
+    {
+      "index": 37,
+      "name": "37",
+      "checks": {
+        "property_mu": 1.6874205744034474e-16,
+        "property_k": 1.1069369635298132e-16,
+        "property_solidK": 2.1177505332389066e-16,
+        "property_solidCp": 2.0079354439640035e-16,
+        "property_solidH": 4.544195956023994e-16,
+        "current_potentialV": 6.036885984266423e-14,
+        "current_relativePotentialV": 6.078102564878893e-14,
+        "current_torqueNm": 6.431550533001021e-14,
+        "current_jouleByCellW": 1.1188576413848038e-13,
+        "current_jouleW": 4.3599247518116315e-16,
+        "current_mechanicalW": 1.95418029581921e-16,
+        "current_electrodePowerW": 1.091827035604676e-13,
+        "current_boundaryCurrentsA": 2.974405863287969e-13,
+        "totalEnergy": {
+          "residual": -6.172761900149343e-12,
+          "exchangeScale": 0.17313038440896708,
+          "storageAllowance": 4.265130522795756e-09
+        },
+        "angularMomentum": {
+          "residual": -1.7139182292098733e-21,
+          "exchangeScale": 3.723014660086355e-08,
+          "storageAllowance": 3.121790138982698e-20
+        },
+        "maxMechanicalRowResidual": 2.64231927895979e-18,
+        "maxThermalRowResidualW": 1.0656525162300312e-08,
+        "interfaceOutGasW": -11.910415411251492
+      }
+    },
+    {
+      "index": 38,
+      "name": "38",
+      "checks": {
+        "property_mu": 2.528173247815647e-16,
+        "property_k": 2.2112870264160193e-16,
+        "property_solidK": 2.117727061449671e-16,
+        "property_solidCp": 2.0079355133545164e-16,
+        "property_solidH": 7.573664589191269e-16,
+        "current_potentialV": 5.3741282154103766e-14,
+        "current_relativePotentialV": 5.4108203315478474e-14,
+        "current_torqueNm": 5.362767013406416e-14,
+        "current_jouleByCellW": 8.137070934758225e-14,
+        "current_jouleW": 3.026569361648628e-15,
+        "current_mechanicalW": 8.948034172302258e-16,
+        "current_electrodePowerW": 9.898533072390298e-14,
+        "current_boundaryCurrentsA": 1.954619471377475e-13,
+        "totalEnergy": {
+          "residual": 1.6884203589287786e-12,
+          "exchangeScale": 0.1731126329418938,
+          "storageAllowance": 4.265051840476917e-09
+        },
+        "angularMomentum": {
+          "residual": -9.711100391372545e-22,
+          "exchangeScale": 2.059486575673758e-08,
+          "storageAllowance": 2.035461477968267e-20
+        },
+        "maxMechanicalRowResidual": 1.6087537948523316e-18,
+        "maxThermalRowResidualW": 1.55942174728807e-08,
+        "interfaceOutGasW": -7.022459679743525
+      }
+    },
+    {
+      "index": 39,
+      "name": "39",
+      "checks": {
+        "property_mu": 1.6902177174065254e-16,
+        "property_k": 2.217543742432691e-16,
+        "property_solidK": 2.1177655860064042e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058927038332144e-16,
+        "current_potentialV": 2.003867665568379e-14,
+        "current_relativePotentialV": 2.0175488203819706e-14,
+        "current_torqueNm": 2.269169899462501e-14,
+        "current_jouleByCellW": 3.446506564344759e-14,
+        "current_jouleW": 2.930903414113408e-16,
+        "current_mechanicalW": 1.4595284561503397e-16,
+        "current_electrodePowerW": 9.378305382455244e-15,
+        "current_boundaryCurrentsA": 1.7994224371732035e-13,
+        "totalEnergy": {
+          "residual": -4.232928447318006e-12,
+          "exchangeScale": 0.17314200993721693,
+          "storageAllowance": 4.265169867432367e-09
+        },
+        "angularMomentum": {
+          "residual": -2.9182932010870816e-21,
+          "exchangeScale": 6.285243301040683e-08,
+          "storageAllowance": 4.128580548942913e-20
+        },
+        "maxMechanicalRowResidual": 4.182992800676557e-18,
+        "maxThermalRowResidualW": 1.3767404993814125e-08,
+        "interfaceOutGasW": -18.837657708481412
+      }
+    },
+    {
+      "index": 40,
+      "name": "40",
+      "checks": {
+        "property_mu": 1.687420574403331e-16,
+        "property_k": 2.213873927059474e-16,
+        "property_solidK": 2.1177505332389066e-16,
+        "property_solidCp": 2.0079354439640035e-16,
+        "property_solidH": 4.544195956023995e-16,
+        "current_potentialV": 6.037936425537396e-14,
+        "current_relativePotentialV": 6.079160177992672e-14,
+        "current_torqueNm": 6.245667569618992e-14,
+        "current_jouleByCellW": 1.1153829282126586e-13,
+        "current_jouleW": 8.719849503622354e-16,
+        "current_mechanicalW": 1.1725081774968183e-15,
+        "current_electrodePowerW": 9.725880304004449e-14,
+        "current_boundaryCurrentsA": 2.7058927234656676e-13,
+        "totalEnergy": {
+          "residual": 3.9277532371288434e-13,
+          "exchangeScale": 0.17313038440240155,
+          "storageAllowance": 4.265130522795755e-09
+        },
+        "angularMomentum": {
+          "residual": -1.7536228986124187e-21,
+          "exchangeScale": 3.723014660066591e-08,
+          "storageAllowance": 3.121790138993153e-20
+        },
+        "maxMechanicalRowResidual": 2.6518881042858033e-18,
+        "maxThermalRowResidualW": 1.427732954084604e-08,
+        "interfaceOutGasW": -11.910415410965372
+      }
+    },
+    {
+      "index": 41,
+      "name": "41",
+      "checks": {
+        "property_mu": 3.3708976637547455e-16,
+        "property_k": 3.31693053962457e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 2.0079355133545164e-16,
+        "property_solidH": 6.058931671353012e-16,
+        "current_potentialV": 5.435054610346616e-14,
+        "current_relativePotentialV": 5.4721627043449105e-14,
+        "current_torqueNm": 5.455228513637557e-14,
+        "current_jouleByCellW": 8.421523626333673e-14,
+        "current_jouleW": 1.7294682066564265e-15,
+        "current_mechanicalW": 2.98267805742707e-16,
+        "current_electrodePowerW": 5.3640894539687976e-14,
+        "current_boundaryCurrentsA": 1.675979292677174e-13,
+        "totalEnergy": {
+          "residual": -8.827721268821892e-13,
+          "exchangeScale": 0.17311263294446502,
+          "storageAllowance": 4.2650518404769166e-09
+        },
+        "angularMomentum": {
+          "residual": -9.644925942368303e-22,
+          "exchangeScale": 2.059486575678381e-08,
+          "storageAllowance": 2.0354614779822178e-20
+        },
+        "maxMechanicalRowResidual": 1.6070464940680222e-18,
+        "maxThermalRowResidualW": 1.2077041589009241e-08,
+        "interfaceOutGasW": -7.022459680436501
+      }
+    },
+    {
+      "index": 42,
+      "name": "42",
+      "checks": {
+        "property_mu": 3.3819322595808433e-16,
+        "property_k": 3.3277884746730134e-16,
+        "property_solidK": 2.1177659458842938e-16,
+        "property_solidCp": 2.0079354288771693e-16,
+        "property_solidH": 4.544195347796005e-16,
+        "current_potentialV": 1.9818067334608813e-14,
+        "current_relativePotentialV": 1.9953372567570763e-14,
+        "current_torqueNm": 1.9524283470655388e-14,
+        "current_jouleByCellW": 3.676545307648434e-14,
+        "current_jouleW": 5.866886087233284e-16,
+        "current_mechanicalW": 2.8430873771563647e-16,
+        "current_electrodePowerW": 2.771425575455775e-14,
+        "current_boundaryCurrentsA": 1.3568737246604592e-13,
+        "totalEnergy": {
+          "residual": -9.54983211650176e-12,
+          "exchangeScale": 0.6925759599800287,
+          "storageAllowance": 4.265173554249795e-09
+        },
+        "angularMomentum": {
+          "residual": -1.2864312886424686e-20,
+          "exchangeScale": 2.7994706203776327e-07,
+          "storageAllowance": 4.359037106763547e-20
+        },
+        "maxMechanicalRowResidual": 4.6015064859589866e-18,
+        "maxThermalRowResidualW": 3.5572611523093656e-09,
+        "interfaceOutGasW": -20.67869752629586
+      }
+    },
+    {
+      "index": 43,
+      "name": "43",
+      "checks": {
+        "property_mu": 1.6876629893877765e-16,
+        "property_k": 2.214191972377715e-16,
+        "property_solidK": 2.1177509734844388e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058928150382205e-16,
+        "current_potentialV": 6.494173485493374e-14,
+        "current_relativePotentialV": 6.538512145331522e-14,
+        "current_torqueNm": 6.563470997393844e-14,
+        "current_jouleByCellW": 1.164567153998763e-13,
+        "current_jouleW": 2.617367535412101e-15,
+        "current_mechanicalW": 3.8222406353071075e-16,
+        "current_electrodePowerW": 1.0087805304384808e-13,
+        "current_boundaryCurrentsA": 2.306321381640204e-13,
+        "totalEnergy": {
+          "residual": 3.3555558776477562e-12,
+          "exchangeScale": 0.6925247278873,
+          "storageAllowance": 4.265134209327235e-09
+        },
+        "angularMomentum": {
+          "residual": -7.30565917006834e-21,
+          "exchangeScale": 1.5800022653733167e-07,
+          "storageAllowance": 3.257592504057905e-20
+        },
+        "maxMechanicalRowResidual": 2.7730336680778696e-18,
+        "maxThermalRowResidualW": 3.6792879853919658e-09,
+        "interfaceOutGasW": -12.508594764484338
+      }
+    },
+    {
+      "index": 44,
+      "name": "44",
+      "checks": {
+        "property_mu": 1.685530488059331e-16,
+        "property_k": 2.2113941582689617e-16,
+        "property_solidK": 2.1177274782348433e-16,
+        "property_solidCp": 2.0079355240246515e-16,
+        "property_solidH": 4.544199183683426e-16,
+        "current_potentialV": 6.517720661125415e-14,
+        "current_relativePotentialV": 6.562220688552258e-14,
+        "current_torqueNm": 7.684922444704637e-14,
+        "current_jouleByCellW": 1.3312640957706992e-13,
+        "current_jouleW": 1.1533379555236014e-15,
+        "current_mechanicalW": 1.0234193566609706e-15,
+        "current_electrodePowerW": 5.093117898030994e-14,
+        "current_boundaryCurrentsA": 1.9548509911753572e-13,
+        "totalEnergy": {
+          "residual": -2.357953974218771e-12,
+          "exchangeScale": 0.6924522839831219,
+          "storageAllowance": 4.2650555267366686e-09
+        },
+        "angularMomentum": {
+          "residual": -4.056493723960048e-21,
+          "exchangeScale": 8.536967332783352e-08,
+          "storageAllowance": 2.1114402012156904e-20
+        },
+        "maxMechanicalRowResidual": 1.6526340719870446e-18,
+        "maxThermalRowResidualW": 3.4264107107162545e-09,
+        "interfaceOutGasW": -7.224436133095653
+      }
+    },
+    {
+      "index": 45,
+      "name": "45",
+      "checks": {
+        "property_mu": 1.6965481754220157e-16,
+        "property_k": 2.225849221315331e-16,
+        "property_solidK": 2.1177671219641515e-16,
+        "property_solidCp": 2.0079354363077766e-16,
+        "property_solidH": 4.544195647362026e-16,
+        "current_potentialV": 1.7818697388155608e-14,
+        "current_relativePotentialV": 1.79385891419376e-14,
+        "current_torqueNm": 2.7128764496529377e-14,
+        "current_jouleByCellW": 5.1956185327195035e-14,
+        "current_jouleW": 1.4714553641707182e-16,
+        "current_mechanicalW": 9.075107029132944e-16,
+        "current_electrodePowerW": 1.2867752498470682e-14,
+        "current_boundaryCurrentsA": 1.4311694108710904e-13,
+        "totalEnergy": {
+          "residual": 2.204586741025999e-11,
+          "exchangeScale": 2.7708319120164555,
+          "storageAllowance": 4.265188310890336e-09
+        },
+        "angularMomentum": {
+          "residual": -9.211483301390516e-20,
+          "exchangeScale": 2.0347929226617177e-06,
+          "storageAllowance": 5.88289479236446e-20
+        },
+        "maxMechanicalRowResidual": 9.285102375907736e-18,
+        "maxThermalRowResidualW": 8.039922061442439e-10,
+        "interfaceOutGasW": -34.38921136861474
+      }
+    },
+    {
+      "index": 46,
+      "name": "46",
+      "checks": {
+        "property_mu": 1.6889580291335482e-16,
+        "property_k": 2.2158910477423038e-16,
+        "property_solidK": 2.117752518846028e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544196623554838e-16,
+        "current_potentialV": 1.552546974447815e-14,
+        "current_relativePotentialV": 1.5631468865394274e-14,
+        "current_torqueNm": 1.972953037441752e-14,
+        "current_jouleByCellW": 3.83077792920225e-14,
+        "current_jouleW": 1.4571772828189509e-16,
+        "current_mechanicalW": 5.277674056115835e-16,
+        "current_electrodePowerW": 4.891100720446871e-15,
+        "current_boundaryCurrentsA": 1.8951324759472718e-13,
+        "totalEnergy": {
+          "residual": 6.569172072631857e-12,
+          "exchangeScale": 2.7701708456993734,
+          "storageAllowance": 4.2651489615774556e-09
+        },
+        "angularMomentum": {
+          "residual": -3.7851784830426546e-20,
+          "exchangeScale": 8.287060381452364e-07,
+          "storageAllowance": 3.925569167001271e-20
+        },
+        "maxMechanicalRowResidual": 3.510276586989232e-18,
+        "maxThermalRowResidualW": 1.026367990597521e-09,
+        "interfaceOutGasW": -15.709122941142997
+      }
+    },
+    {
+      "index": 47,
+      "name": "47",
+      "checks": {
+        "property_mu": 1.6859049171273962e-16,
+        "property_k": 2.2118854043541983e-16,
+        "property_solidK": 2.117729056391682e-16,
+        "property_solidCp": 2.0079355687305586e-16,
+        "property_solidH": 4.544200986011936e-16,
+        "current_potentialV": 3.5596341161271925e-14,
+        "current_relativePotentialV": 3.5839376323522694e-14,
+        "current_torqueNm": 4.497563753764612e-14,
+        "current_jouleByCellW": 7.216098230211933e-14,
+        "current_jouleW": 3.897358629468366e-15,
+        "current_mechanicalW": 1.35570850962861e-16,
+        "current_electrodePowerW": 3.435739550065549e-14,
+        "current_boundaryCurrentsA": 1.2780754671334593e-13,
+        "totalEnergy": {
+          "residual": -1.0635355443544547e-12,
+          "exchangeScale": 2.7698388757212307,
+          "storageAllowance": 4.26507027760628e-09
+        },
+        "angularMomentum": {
+          "residual": -1.852884572118782e-20,
+          "exchangeScale": 3.9656773645194566e-07,
+          "storageAllowance": 2.4494028398469372e-20
+        },
+        "maxMechanicalRowResidual": 1.8583505816065324e-18,
+        "maxThermalRowResidualW": 1.0336300704238965e-09,
+        "interfaceOutGasW": -8.151724543598256
+      }
+    },
+    {
+      "index": 48,
+      "name": "48",
+      "checks": {
+        "property_mu": 1.6938802982416624e-16,
+        "property_k": 2.222349001026581e-16,
+        "property_solidK": 2.1177740024388827e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195667850812e-16,
+        "current_potentialV": 3.105505808998694e-15,
+        "current_relativePotentialV": 3.1108267342674885e-15,
+        "current_torqueNm": 6.846547777110052e-15,
+        "current_jouleByCellW": 1.3030664148181169e-14,
+        "current_jouleW": 1.1777281600445865e-15,
+        "current_mechanicalW": 1.447833140122784e-16,
+        "current_electrodePowerW": 2.6084465677653356e-15,
+        "current_boundaryCurrentsA": 1.99298737515089e-14,
+        "totalEnergy": {
+          "residual": -6.970851144106065e-12,
+          "exchangeScale": 0.04328092857693008,
+          "storageAllowance": 4.2651689511388835e-09
+        },
+        "angularMomentum": {
+          "residual": 9.926167350636332e-24,
+          "exchangeScale": 1.5389356401663074e-08,
+          "storageAllowance": 4.10435648541179e-20
+        },
+        "maxMechanicalRowResidual": 3.1131107789555707e-19,
+        "maxThermalRowResidualW": 5.612700892942968e-08,
+        "interfaceOutGasW": -18.451143162016837
+      }
+    },
+    {
+      "index": 49,
+      "name": "49",
+      "checks": {
+        "property_mu": 2.534685669313154e-16,
+        "property_k": 2.2169831681580594e-16,
+        "property_solidK": 2.1177639775541612e-16,
+        "property_solidCp": 2.0079354761842869e-16,
+        "property_solidH": 4.54419725499001e-16,
+        "current_potentialV": 5.166664648711838e-15,
+        "current_relativePotentialV": 5.175517530069326e-15,
+        "current_torqueNm": 8.515757500126203e-15,
+        "current_jouleByCellW": 1.9418042079200612e-14,
+        "current_jouleW": 1.6058817887178175e-15,
+        "current_mechanicalW": 1.9341202183432552e-16,
+        "current_electrodePowerW": 1.4428754066269557e-16,
+        "current_boundaryCurrentsA": 2.0850332975854515e-14,
+        "totalEnergy": {
+          "residual": 7.400091137942425e-12,
+          "exchangeScale": 0.043279025685289525,
+          "storageAllowance": 4.265129610069046e-09
+        },
+        "angularMomentum": {
+          "residual": 1.3234889800848443e-23,
+          "exchangeScale": 9.214404771693203e-09,
+          "storageAllowance": 3.1134310252623587e-20
+        },
+        "maxMechanicalRowResidual": 1.9931744040077755e-19,
+        "maxThermalRowResidualW": 4.3878820354947834e-08,
+        "interfaceOutGasW": -11.78880265406581
+      }
+    },
+    {
+      "index": 50,
+      "name": "50",
+      "checks": {
+        "property_mu": 1.6868556079214116e-16,
+        "property_k": 2.2131326983563533e-16,
+        "property_solidK": 2.1177459433234698e-16,
+        "property_solidCp": 2.0079356211215358e-16,
+        "property_solidH": 4.544203098167421e-16,
+        "current_potentialV": 7.39745800098916e-15,
+        "current_relativePotentialV": 7.410133905204492e-15,
+        "current_torqueNm": 1.3079817384674114e-14,
+        "current_jouleByCellW": 2.0852927185545087e-14,
+        "current_jouleW": 2.750480166978449e-15,
+        "current_mechanicalW": 0.0,
+        "current_electrodePowerW": 3.5914834067737316e-15,
+        "current_boundaryCurrentsA": 2.231092005157447e-14,
+        "totalEnergy": {
+          "residual": 5.090233620621675e-12,
+          "exchangeScale": 0.04327562912341268,
+          "storageAllowance": 4.265050932985203e-09
+        },
+        "angularMomentum": {
+          "residual": -4.1359030627651384e-25,
+          "exchangeScale": 5.124913918160279e-09,
+          "storageAllowance": 2.0355275366320588e-20
+        },
+        "maxMechanicalRowResidual": 1.4819767854500044e-19,
+        "maxThermalRowResidualW": 5.798067104212379e-08,
+        "interfaceOutGasW": -6.989623348374261
+      }
+    },
+    {
+      "index": 51,
+      "name": "51",
+      "checks": {
+        "property_mu": 2.540830097347186e-16,
+        "property_k": 3.3335361621947377e-16,
+        "property_solidK": 2.1177740024388844e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 3.0294637785533967e-16,
+        "current_potentialV": 4.4682940218504365e-15,
+        "current_relativePotentialV": 4.591190840979643e-15,
+        "current_torqueNm": 6.912678674179023e-15,
+        "current_jouleByCellW": 1.2151825757339439e-14,
+        "current_jouleW": 8.872314027949841e-16,
+        "current_mechanicalW": 1.4439619349559274e-16,
+        "current_electrodePowerW": 3.056404071730952e-15,
+        "current_boundaryCurrentsA": 2.0664239127088834e-14,
+        "totalEnergy": {
+          "residual": 7.620657236693629e-12,
+          "exchangeScale": 0.04328092887306319,
+          "storageAllowance": 4.265168951165917e-09
+        },
+        "angularMomentum": {
+          "residual": 5.459392042849983e-23,
+          "exchangeScale": 1.5506432544737475e-08,
+          "storageAllowance": 4.137171298617186e-20
+        },
+        "maxMechanicalRowResidual": 9.95872517954642e-19,
+        "maxThermalRowResidualW": 1.9243297622040245e-07,
+        "interfaceOutGasW": -18.454046435803463
+      }
+    },
+    {
+      "index": 52,
+      "name": "52",
+      "checks": {
+        "property_mu": 1.68979633011814e-16,
+        "property_k": 2.2169908877709064e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544197254990994e-16,
+        "current_potentialV": 3.65539101153622e-15,
+        "current_relativePotentialV": 3.752317437525377e-15,
+        "current_torqueNm": 5.600062509071434e-15,
+        "current_jouleByCellW": 1.1449012916293771e-14,
+        "current_jouleW": 1.1730678331666296e-15,
+        "current_mechanicalW": 1.9274744264537086e-16,
+        "current_electrodePowerW": 1.2607252934719201e-14,
+        "current_boundaryCurrentsA": 3.672967679856586e-14,
+        "totalEnergy": {
+          "residual": -1.2636715507886019e-11,
+          "exchangeScale": 0.043279025753062715,
+          "storageAllowance": 4.265129610001851e-09
+        },
+        "angularMomentum": {
+          "residual": -1.2407709188295415e-23,
+          "exchangeScale": 9.278477860689119e-09,
+          "storageAllowance": 3.1379079422785355e-20
+        },
+        "maxMechanicalRowResidual": 4.676680660027806e-19,
+        "maxThermalRowResidualW": 2.0630444907965284e-07,
+        "interfaceOutGasW": -11.792040366584722
+      }
+    },
+    {
+      "index": 53,
+      "name": "53",
+      "checks": {
+        "property_mu": 1.6868617232229982e-16,
+        "property_k": 2.2131407215527892e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544203101302492e-16,
+        "current_potentialV": 2.223571324634819e-15,
+        "current_relativePotentialV": 2.2907377065726994e-15,
+        "current_torqueNm": 3.516840781550335e-15,
+        "current_jouleByCellW": 7.368564414618805e-15,
+        "current_jouleW": 1.4539325072998396e-16,
+        "current_mechanicalW": 1.4669035747756892e-16,
+        "current_electrodePowerW": 6.636698799871208e-15,
+        "current_boundaryCurrentsA": 2.1960861221897146e-14,
+        "totalEnergy": {
+          "residual": 8.655463652867935e-12,
+          "exchangeScale": 0.04327562913888594,
+          "storageAllowance": 4.265050932729978e-09
+        },
+        "angularMomentum": {
+          "residual": 8.68539643180679e-24,
+          "exchangeScale": 5.1575529256679425e-09,
+          "storageAllowance": 2.0522443779708383e-20
+        },
+        "maxMechanicalRowResidual": 4.478686708607113e-19,
+        "maxThermalRowResidualW": 2.1955017925900933e-07,
+        "interfaceOutGasW": -6.993002764155307
+      }
+    },
+    {
+      "index": 54,
+      "name": "54",
+      "checks": {
+        "property_mu": 8.47633775867834e-17,
+        "property_k": 0.0,
+        "property_solidK": 2.1177740972721642e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544195813875781e-16,
+        "current_potentialV": 5.288540264443977e-15,
+        "current_relativePotentialV": 5.435770886603737e-15,
+        "current_torqueNm": 6.718637899209945e-15,
+        "current_jouleByCellW": 1.3042852881716544e-14,
+        "current_jouleW": 5.921294467654642e-16,
+        "current_mechanicalW": 2.796243534155203e-16,
+        "current_electrodePowerW": 6.4074216840333314e-15,
+        "current_boundaryCurrentsA": 1.7708028323314313e-14,
+        "totalEnergy": {
+          "residual": -3.718377412616561e-12,
+          "exchangeScale": 0.6925034102239788,
+          "storageAllowance": 4.265173558442549e-09
+        },
+        "angularMomentum": {
+          "residual": -5.293955920339377e-23,
+          "exchangeScale": 2.8150444296374e-07,
+          "storageAllowance": 4.4200983531214317e-20
+        },
+        "maxMechanicalRowResidual": 1.8740603958001395e-19,
+        "maxThermalRowResidualW": 1.1547165890135602e-08,
+        "interfaceOutGasW": -20.678835809610177
+      }
+    },
+    {
+      "index": 55,
+      "name": "55",
+      "checks": {
+        "property_mu": 8.451244259471839e-17,
+        "property_k": 1.1087922952386411e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 3.0294651082267593e-16,
+        "current_potentialV": 4.605202123829558e-15,
+        "current_relativePotentialV": 4.74033791240974e-15,
+        "current_torqueNm": 4.91414172635003e-15,
+        "current_jouleByCellW": 1.0231126645976817e-14,
+        "current_jouleW": 4.401990761715402e-16,
+        "current_mechanicalW": 1.1253307884244114e-15,
+        "current_electrodePowerW": 1.594570991874085e-14,
+        "current_boundaryCurrentsA": 3.6882541420048123e-14,
+        "totalEnergy": {
+          "residual": 6.488771108967284e-14,
+          "exchangeScale": 0.6924672018305701,
+          "storageAllowance": 4.265134216995566e-09
+        },
+        "angularMomentum": {
+          "residual": -6.617444900424221e-23,
+          "exchangeScale": 1.5975913508944695e-07,
+          "storageAllowance": 3.307583522682751e-20
+        },
+        "maxMechanicalRowResidual": 1.4823076576950256e-19,
+        "maxThermalRowResidualW": 1.0859270815899436e-08,
+        "interfaceOutGasW": -12.526099984598142
+      }
+    },
+    {
+      "index": 56,
+      "name": "56",
+      "checks": {
+        "property_mu": 1.6870146404490243e-16,
+        "property_k": 2.2133413469717467e-16,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544203263571028e-16,
+        "current_potentialV": 2.2595464449367022e-15,
+        "current_relativePotentialV": 2.3249639577053325e-15,
+        "current_torqueNm": 3.3222613641716833e-15,
+        "current_jouleByCellW": 5.810209945530388e-15,
+        "current_jouleW": 4.3635138691031634e-16,
+        "current_mechanicalW": 2.8631025485630185e-16,
+        "current_electrodePowerW": 5.4835901187054726e-15,
+        "current_boundaryCurrentsA": 1.4642796464959265e-14,
+        "totalEnergy": {
+          "residual": 5.933929834046198e-12,
+          "exchangeScale": 0.692411408390333,
+          "storageAllowance": 4.265055539503605e-09
+        },
+        "angularMomentum": {
+          "residual": -2.6469779601696886e-23,
+          "exchangeScale": 8.625156706856609e-08,
+          "storageAllowance": 2.147328925987291e-20
+        },
+        "maxMechanicalRowResidual": 7.877406409464993e-20,
+        "maxThermalRowResidualW": 8.00926613919728e-09,
+        "interfaceOutGasW": -7.242542198893387
+      }
+    },
+    {
+      "index": 57,
+      "name": "57",
+      "checks": {
+        "property_mu": 1.7094390082392665e-16,
+        "property_k": 2.242761826924804e-16,
+        "property_solidK": 2.1177792214024863e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544198360507438e-16,
+        "current_potentialV": 8.286768821704538e-16,
+        "current_relativePotentialV": 8.301654324674975e-16,
+        "current_torqueNm": 2.2381469301968694e-15,
+        "current_jouleByCellW": 6.8191646752825346e-15,
+        "current_jouleW": 3.009100517429197e-16,
+        "current_mechanicalW": 5.477228523367731e-16,
+        "current_electrodePowerW": 5.916623012257302e-16,
+        "current_boundaryCurrentsA": 5.4533050377425865e-15,
+        "totalEnergy": {
+          "residual": 5.9434111820445834e-12,
+          "exchangeScale": 0.04326971406427096,
+          "storageAllowance": 4.265168961710123e-09
+        },
+        "angularMomentum": {
+          "residual": 6.617444900424222e-24,
+          "exchangeScale": 1.584685128163223e-08,
+          "storageAllowance": 4.238253874934485e-20
+        },
+        "maxMechanicalRowResidual": 3.4029548655941516e-19,
+        "maxThermalRowResidualW": 1.2154387718510407e-07,
+        "interfaceOutGasW": -18.361529654451765
+      }
+    },
+    {
+      "index": 58,
+      "name": "58",
+      "checks": {
+        "property_mu": 1.6997444901080616e-16,
+        "property_k": 1.1150213723818776e-16,
+        "property_solidK": 2.1177737002364945e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544201864950856e-16,
+        "current_potentialV": 7.695850274345811e-16,
+        "current_relativePotentialV": 7.709676099825129e-16,
+        "current_torqueNm": 1.5498777102207192e-15,
+        "current_jouleByCellW": 6.95328423880578e-15,
+        "current_jouleW": 1.491250329637087e-16,
+        "current_mechanicalW": 1.8189108465090865e-16,
+        "current_electrodePowerW": 3.2392549108685168e-15,
+        "current_boundaryCurrentsA": 5.970146464399077e-15,
+        "totalEnergy": {
+          "residual": -3.936236153510983e-12,
+          "exchangeScale": 0.04326865818274604,
+          "storageAllowance": 4.2651296300056454e-09
+        },
+        "angularMomentum": {
+          "residual": 4.1359030627651384e-24,
+          "exchangeScale": 9.361540089330395e-09,
+          "storageAllowance": 3.2260002566214026e-20
+        },
+        "maxMechanicalRowResidual": 3.306075472251941e-19,
+        "maxThermalRowResidualW": 9.805694034525914e-08,
+        "interfaceOutGasW": -11.853660864581474
+      }
+    },
+    {
+      "index": 59,
+      "name": "59",
+      "checks": {
+        "property_mu": 3.385408493199978e-16,
+        "property_k": 3.3312090547689793e-16,
+        "property_solidK": 2.1177629893077397e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 6.058950843886272e-16,
+        "current_potentialV": 7.105129125862046e-16,
+        "current_relativePotentialV": 7.1178959844100195e-16,
+        "current_torqueNm": 2.120252713772089e-15,
+        "current_jouleByCellW": 6.708987704530897e-15,
+        "current_jouleW": 1.4778434657731953e-16,
+        "current_mechanicalW": 9.631539374187672e-16,
+        "current_electrodePowerW": 5.862183479538195e-16,
+        "current_boundaryCurrentsA": 5.809282379564248e-15,
+        "totalEnergy": {
+          "residual": -2.3485448222266116e-12,
+          "exchangeScale": 0.043266638874497346,
+          "storageAllowance": 4.265050969598923e-09
+        },
+        "angularMomentum": {
+          "residual": -2.481541837659083e-24,
+          "exchangeScale": 5.237580499262534e-09,
+          "storageAllowance": 2.1224500093313308e-20
+        },
+        "maxMechanicalRowResidual": 1.7242414432545351e-19,
+        "maxThermalRowResidualW": 1.0434141861637158e-07,
+        "interfaceOutGasW": -7.049643400497342
+      }
+    },
+    {
+      "index": 60,
+      "name": "60",
+      "checks": {
+        "property_mu": 0.0,
+        "property_k": 0.0,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 3.0294655743058453e-16,
+        "current_potentialV": 1.2119646444704387e-15,
+        "current_relativePotentialV": 1.3692434561895775e-15,
+        "current_torqueNm": 2.5057302674876107e-15,
+        "current_jouleByCellW": 3.3051671333786042e-15,
+        "current_jouleW": 0.0,
+        "current_mechanicalW": 4.0644462418348687e-16,
+        "current_electrodePowerW": 5.108548290228197e-15,
+        "current_boundaryCurrentsA": 6.202704010287566e-15,
+        "totalEnergy": {
+          "residual": -2.934688300679808e-11,
+          "exchangeScale": 0.04326971571847851,
+          "storageAllowance": 4.265168961562023e-09
+        },
+        "angularMomentum": {
+          "residual": -1.5881867761018131e-22,
+          "exchangeScale": 1.6415116646618277e-08,
+          "storageAllowance": 4.331860426678492e-20
+        },
+        "maxMechanicalRowResidual": 2.6804357615862334e-18,
+        "maxThermalRowResidualW": 4.039290697477327e-07,
+        "interfaceOutGasW": -18.373161703802246
+      }
+    },
+    {
+      "index": 61,
+      "name": "61",
+      "checks": {
+        "property_mu": 0.0,
+        "property_k": 0.0,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 1.5147339557553939e-16,
+        "current_potentialV": 7.974596232783144e-16,
+        "current_relativePotentialV": 9.06931788281256e-16,
+        "current_torqueNm": 2.0394324003036646e-15,
+        "current_jouleByCellW": 2.4598808948001806e-15,
+        "current_jouleW": 7.576178289791183e-16,
+        "current_mechanicalW": 0.0,
+        "current_electrodePowerW": 1.0468596445404022e-15,
+        "current_boundaryCurrentsA": 4.008439977530257e-15,
+        "totalEnergy": {
+          "residual": -7.135909757584606e-12,
+          "exchangeScale": 0.043268658168518326,
+          "storageAllowance": 4.265129629525581e-09
+        },
+        "angularMomentum": {
+          "residual": 1.166324663699769e-22,
+          "exchangeScale": 9.518621855719891e-09,
+          "storageAllowance": 3.289908940901023e-20
+        },
+        "maxMechanicalRowResidual": 1.3497470014497276e-18,
+        "maxThermalRowResidualW": 6.270987000789319e-07,
+        "interfaceOutGasW": -11.866341501012942
+      }
+    },
+    {
+      "index": 62,
+      "name": "62",
+      "checks": {
+        "property_mu": 0.0,
+        "property_k": 0.0,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544213139718009e-16,
+        "current_potentialV": 5.104728208391213e-16,
+        "current_relativePotentialV": 5.8056395694292e-16,
+        "current_torqueNm": 1.1827879469667657e-15,
+        "current_jouleByCellW": 2.620522828877414e-15,
+        "current_jouleW": 4.503887621216854e-16,
+        "current_mechanicalW": 1.3543259489779522e-16,
+        "current_electrodePowerW": 1.786086992712844e-15,
+        "current_boundaryCurrentsA": 8.151072016851372e-15,
+        "totalEnergy": {
+          "residual": 1.4215945754215433e-11,
+          "exchangeScale": 0.04326663887238135,
+          "storageAllowance": 4.265050968456854e-09
+        },
+        "angularMomentum": {
+          "residual": -1.1580528575742387e-23,
+          "exchangeScale": 5.2737926309229576e-09,
+          "storageAllowance": 2.1756471161662132e-20
+        },
+        "maxMechanicalRowResidual": 1.2425973336220586e-18,
+        "maxThermalRowResidualW": 2.411612420871734e-07,
+        "interfaceOutGasW": -7.062302840896667
+      }
+    },
+    {
+      "index": 63,
+      "name": "63",
+      "checks": {
+        "property_mu": 8.656882356264876e-17,
+        "property_k": 1.1357717470603195e-16,
+        "property_solidK": 2.1177792772111472e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 1.5147329763458157e-16,
+        "current_potentialV": 1.0685356446349e-15,
+        "current_relativePotentialV": 1.2152106690102888e-15,
+        "current_torqueNm": 1.7688856409206826e-15,
+        "current_jouleByCellW": 2.2105158068879507e-15,
+        "current_jouleW": 1.5355142132972908e-16,
+        "current_mechanicalW": 2.4284050950747985e-16,
+        "current_electrodePowerW": 1.0540324697584402e-15,
+        "current_boundaryCurrentsA": 4.1972842258844806e-15,
+        "totalEnergy": {
+          "residual": 2.1974235907447348e-11,
+          "exchangeScale": 2.7697210088094737,
+          "storageAllowance": 4.265188318349341e-09
+        },
+        "angularMomentum": {
+          "residual": 2.117582368135751e-22,
+          "exchangeScale": 1.8607345028113765e-06,
+          "storageAllowance": 6.006382044735962e-20
+        },
+        "maxMechanicalRowResidual": 6.166399856011306e-19,
+        "maxThermalRowResidualW": 6.720654255332192e-09,
+        "interfaceOutGasW": -32.56212511878592
+      }
+    },
+    {
+      "index": 64,
+      "name": "64",
+      "checks": {
+        "property_mu": 0.0,
+        "property_k": 0.0,
+        "property_solidK": 2.117773807544107e-16,
+        "property_solidCp": 0.0,
+        "property_solidH": 3.0294688465316265e-16,
+        "current_potentialV": 9.250348905542145e-16,
+        "current_relativePotentialV": 1.0384135697214264e-15,
+        "current_torqueNm": 1.0212251516220671e-15,
+        "current_jouleByCellW": 1.8263377812706522e-15,
+        "current_jouleW": 4.558935981998157e-16,
+        "current_mechanicalW": 1.622285338869909e-16,
+        "current_electrodePowerW": 2.2465860027047224e-15,
+        "current_boundaryCurrentsA": 4.180014866332831e-15,
+        "totalEnergy": {
+          "residual": 1.3320409228759211e-12,
+          "exchangeScale": 2.769261161354652,
+          "storageAllowance": 4.265148982525933e-09
+        },
+        "angularMomentum": {
+          "residual": -2.6469779601696886e-22,
+          "exchangeScale": 8.5405945172536e-07,
+          "storageAllowance": 4.1543398574437427e-20
+        },
+        "maxMechanicalRowResidual": 8.046812998915853e-20,
+        "maxThermalRowResidualW": 8.072976953599209e-09,
+        "interfaceOutGasW": -15.657803893066012
+      }
+    },
+    {
+      "index": 65,
+      "name": "65",
+      "checks": {
+        "property_mu": 0.0,
+        "property_k": 0.0,
+        "property_solidK": 0.0,
+        "property_solidCp": 0.0,
+        "property_solidH": 4.544215939009649e-16,
+        "current_potentialV": 3.828433200331738e-16,
+        "current_relativePotentialV": 4.354083573009856e-16,
+        "current_torqueNm": 1.5222338405742211e-15,
+        "current_jouleByCellW": 1.5384078143159764e-15,
+        "current_jouleW": 7.519495479003961e-16,
+        "current_mechanicalW": 1.2342783979960513e-16,
+        "current_electrodePowerW": 1.6386901602486109e-15,
+        "current_boundaryCurrentsA": 2.164051902304001e-15,
+        "totalEnergy": {
+          "residual": -8.761178414695703e-12,
+          "exchangeScale": 2.769080842656068,
+          "storageAllowance": 4.265070320421949e-09
+        },
+        "angularMomentum": {
+          "residual": -7.940933880509066e-23,
+          "exchangeScale": 4.110275579286402e-07,
+          "storageAllowance": 2.6186241415881488e-20
+        },
+        "maxMechanicalRowResidual": 5.569241628197025e-20,
+        "maxThermalRowResidualW": 6.7949486037832685e-09,
+        "interfaceOutGasW": -8.222239786996054
+      }
+    }
+  ],
+  "failures": [],
+  "inputFailures": [],
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "passed": true,
+  "negativeControls": [
+    {
+      "name": "potential",
+      "rejected": true,
+      "reason": "current relativePotentialV: error 0.1, scale 3.99602"
+    },
+    {
+      "name": "localShear",
+      "rejected": true,
+      "reason": "local shear: error 1, scale 0.00015489"
+    },
+    {
+      "name": "temperature",
+      "rejected": true,
+      "reason": "property mu: error 5.58001e-08, scale 4.01232e-05"
+    },
+    {
+      "name": "numericalLoss",
+      "rejected": true,
+      "reason": "numerical loss: error 1, scale 1.30592e-08"
+    },
+    {
+      "name": "bathHeat",
+      "rejected": true,
+      "reason": "reservoir heat: error 1, scale 1385.18"
+    },
+    {
+      "name": "interfaceHeat",
+      "rejected": true,
+      "reason": "gas interface heat: error 1, scale 18.4285"
+    }
+  ],
+  "inputHashes": {
+    "study-05.json": "cb57006163950c2a37cb800b4cb4472540b37d816ea23b3816ca416bb4af5d16"
+  }
+}

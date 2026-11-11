@@ -149,3 +149,7 @@ not the app, and does not establish that the deployed site matches this build.
 [Independent model and evidence audit](reviews/v70-model.md) ·
 [Independent source admission review](reviews/v70-sources.md) ·
 [Evidence and source reconstruction](../scientific/centrifuge-v44/field70/README.md)
+
+Later research: [v74 axial shear/current/thermal coupling](AXIAL-CURRENT-THERMAL-V74.md)
+passes its bounded numerical refinement protocol. It does not change the
+experimental failures or qualification limits reported above.
