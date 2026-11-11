@@ -1,0 +1,49 @@
+{
+  "scope": "Receipt consistency attack only; not evidence that the physical producer skipped its independently checked stages or that published data are corrupt.",
+  "changed": "First new trajectory first outer-step hydro summary and all matching hydro transport-substep massResidualKg replaced by 1e20 kg; all states and observations unchanged.",
+  "reproducerScript": "/work/home/overfit_independence_repro01.py",
+  "command": [
+    "/work/home/diagnostic-v72-venv/bin/python",
+    "/work/home/overfit_independence_repro01.py"
+  ],
+  "originalAdmissionPassed": true,
+  "mutatedAdmissionPassed": true,
+  "cellAverageFailedGates": [],
+  "commonSpaceFailedGates": [],
+  "inputsAndArtifacts": {
+    "/work/home/mass-spinner-v76-study05.json": {
+      "sha256": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+      "bytes": 59659848
+    },
+    "/work/home/mass-spinner-v77-full01/scientific/spatial-v77/study-01.json": {
+      "sha256": "5379ce3ee8f242da9e9c2483e567c789d962be2768faedbdfb9ee62346cf1f3e",
+      "bytes": 18405324
+    },
+    "/work/home/mass-spinner-v77-full01/scientific/spatial-v77/plan-01.json": {
+      "sha256": "3eb35ecaeb3da095e43b48cbacfd8165f4b33588de6941a4017a0e97cd2f8c5e",
+      "bytes": 6608
+    },
+    "/work/home/mass-spinner-v77-full01/scientific/spatial-v77/study.py": {
+      "sha256": "625f29dedf5766ceb23f076fa4c0d2f6acf794965292b6e2ed7f10f9f19dc77d",
+      "bytes": 13847
+    },
+    "/work/home/mass-spinner-v77-full01/scientific/mixture-axial-v75/verify.py": {
+      "sha256": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+      "bytes": 17485
+    },
+    "/work/home/overfit_independence_mutant01.json": {
+      "sha256": "0cb190da0fb1f071f5bdd96b1968dbd8be8a27facf329937be13bc9b56f5b3d0",
+      "bytes": 11278427
+    },
+    "/work/home/overfit_independence_analysis01.json": {
+      "sha256": "51127e59a676858a6c3c54c466aba459c605423343d75a4b05fff48a688b655b",
+      "bytes": 172502
+    },
+    "/work/home/overfit_independence_repro01.py": {
+      "sha256": "a3b17b706c3f6e59251da6e2f2789c06b362bc574eb26e36f8854f32a8fcf7eb",
+      "bytes": 851
+    }
+  },
+  "projectSourceEdited": false,
+  "execution": "offline safe-dev AppleVM; no network, source sync or dependency install"
+}

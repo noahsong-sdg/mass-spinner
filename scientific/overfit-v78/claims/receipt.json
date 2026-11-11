@@ -1,0 +1,274 @@
+{
+  "scope": "Gate-accounting inspection, not a solver rerun or statistical independence assessment.",
+  "python": "3.11.2",
+  "inputSha256": {
+    "convergence": "15ab4561794ab4a3d68cc37f5c93d3084db9a599c715f073aecfc60638396aaa",
+    "raw": "5379ce3ee8f242da9e9c2483e567c789d962be2768faedbdfb9ee62346cf1f3e",
+    "studySource": "625f29dedf5766ceb23f076fa4c0d2f6acf794965292b6e2ed7f10f9f19dc77d",
+    "commonMetricSource": "2b6bb1700fb64920e046446607bd56bf8a3888b24ffc25ef853a53d6faeaa3c8",
+    "producerManifest": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999"
+  },
+  "inspectorSha256": "1eaaaeb382316f2a122edd09207730248bd2a1fd987d784a748cb8a1a8c28d4c",
+  "metrics": {
+    "cellAverage": {
+      "gateCount": 315,
+      "passedCount": 315,
+      "decreasingGateCount": 27,
+      "decreasingGatesUnderExistingExemption": 24,
+      "exemptGateNames": [
+        "spatial:1e-05:density:decreasing",
+        "spatial:1e-05:gas:decreasing",
+        "spatial:1e-05:solid:decreasing",
+        "spatial:1e-05:omega:decreasing",
+        "spatial:1e-05:vr:decreasing",
+        "spatial:1e-05:vz:decreasing",
+        "spatial:1e-05:Y:decreasing",
+        "spatial:1e-05:YChange:decreasing",
+        "spatial:2e-05:density:decreasing",
+        "spatial:2e-05:solid:decreasing",
+        "spatial:2e-05:omega:decreasing",
+        "spatial:2e-05:vr:decreasing",
+        "spatial:2e-05:vz:decreasing",
+        "spatial:2e-05:Y:decreasing",
+        "spatial:2e-05:densityChange:decreasing",
+        "spatial:2e-05:YChange:decreasing",
+        "spatial:4e-05:density:decreasing",
+        "spatial:4e-05:solid:decreasing",
+        "spatial:4e-05:omega:decreasing",
+        "spatial:4e-05:vr:decreasing",
+        "spatial:4e-05:vz:decreasing",
+        "spatial:4e-05:Y:decreasing",
+        "spatial:4e-05:densityChange:decreasing",
+        "spatial:4e-05:YChange:decreasing"
+      ]
+    },
+    "commonSpace": {
+      "gateCount": 315,
+      "passedCount": 315,
+      "decreasingGateCount": 27,
+      "decreasingGatesUnderExistingExemption": 23,
+      "exemptGateNames": [
+        "spatial:1e-05:density:decreasing",
+        "spatial:1e-05:gas:decreasing",
+        "spatial:1e-05:solid:decreasing",
+        "spatial:1e-05:omega:decreasing",
+        "spatial:1e-05:vr:decreasing",
+        "spatial:1e-05:vz:decreasing",
+        "spatial:1e-05:Y:decreasing",
+        "spatial:1e-05:YChange:decreasing",
+        "spatial:2e-05:density:decreasing",
+        "spatial:2e-05:solid:decreasing",
+        "spatial:2e-05:omega:decreasing",
+        "spatial:2e-05:vr:decreasing",
+        "spatial:2e-05:vz:decreasing",
+        "spatial:2e-05:Y:decreasing",
+        "spatial:2e-05:YChange:decreasing",
+        "spatial:4e-05:density:decreasing",
+        "spatial:4e-05:solid:decreasing",
+        "spatial:4e-05:omega:decreasing",
+        "spatial:4e-05:vr:decreasing",
+        "spatial:4e-05:vz:decreasing",
+        "spatial:4e-05:Y:decreasing",
+        "spatial:4e-05:densityChange:decreasing",
+        "spatial:4e-05:YChange:decreasing"
+      ]
+    }
+  },
+  "accounting": {
+    "displayedGateRows": 630,
+    "identicalObservableRowsInEachMetric": 126,
+    "observableRowsAcrossBothMetrics": 252,
+    "profileAndDecreasingRowsAcrossBothMetrics": 378,
+    "rowsAfterRemovingOnlyRepeatedObservableRows": 504,
+    "caution": "504 rows after this limited deduplication do not constitute 504 independent tests or 504 independent physical cases."
+  },
+  "newTrajectories": [
+    {
+      "nr": 64,
+      "nz": 64,
+      "nt": 256,
+      "mode": "base"
+    },
+    {
+      "nr": 96,
+      "nz": 96,
+      "nt": 256,
+      "mode": "base"
+    }
+  ],
+  "newPhysicalManifestCount": 1,
+  "physicalManifest": {
+    "schemaVersion": 1,
+    "radialBeta": 2,
+    "axialBeta": 2.5,
+    "transportAudits": 1,
+    "status": "prospective full compressible binary mixture verification; no experimental or live qualification",
+    "radiusM": 0.06,
+    "lengthM": 0.14,
+    "linerThicknessM": 0.003,
+    "massesU": [
+      36,
+      40
+    ],
+    "densityKgM3": 0.001,
+    "initialGasK": 350,
+    "initialLinerK": 350,
+    "bathK": 350,
+    "contactH": 100,
+    "coolingH": 100,
+    "initialOmegaRadS": 900,
+    "magneticT": 0.2,
+    "outerVoltageV": 1,
+    "outerVoltageProfile": "sin(pi*z/L)",
+    "sigmaPerpSM": 0.03,
+    "sigmaParallelSM": 0.3,
+    "timesS": [
+      1e-05,
+      2e-05,
+      4e-05
+    ],
+    "joint": [
+      [
+        6,
+        6,
+        32
+      ],
+      [
+        12,
+        12,
+        64
+      ],
+      [
+        24,
+        24,
+        128
+      ],
+      [
+        36,
+        36,
+        192
+      ],
+      [
+        48,
+        48,
+        256
+      ]
+    ],
+    "spatial": [
+      [
+        6,
+        6,
+        256
+      ],
+      [
+        12,
+        12,
+        256
+      ],
+      [
+        24,
+        24,
+        256
+      ],
+      [
+        36,
+        36,
+        256
+      ]
+    ],
+    "temporal": [
+      [
+        24,
+        24,
+        64
+      ],
+      [
+        24,
+        24,
+        128
+      ],
+      [
+        24,
+        24,
+        256
+      ]
+    ],
+    "radial": [
+      [
+        6,
+        48,
+        256
+      ],
+      [
+        12,
+        48,
+        256
+      ],
+      [
+        24,
+        48,
+        256
+      ],
+      [
+        36,
+        48,
+        256
+      ]
+    ],
+    "axial": [
+      [
+        48,
+        6,
+        256
+      ],
+      [
+        48,
+        12,
+        256
+      ],
+      [
+        48,
+        24,
+        256
+      ],
+      [
+        48,
+        36,
+        256
+      ]
+    ],
+    "tighterTolerance": [
+      24,
+      24,
+      128
+    ],
+    "independentTolerances": [
+      "linear",
+      "thermal",
+      "both"
+    ],
+    "referenceSmallerDt": [
+      48,
+      48,
+      512
+    ],
+    "referenceSpatial": [
+      96,
+      96,
+      512
+    ],
+    "referenceTransportCfl": [
+      48,
+      48,
+      256
+    ],
+    "map": "r=R*(1+tanh(2*(2*x-1))/tanh(2))/2; z=L*(1+tanh(2.5*(2*x-1))/tanh(2.5))/2",
+    "linerCells": "max(2,nr/3), uniform physical radius",
+    "transportProperties": "natural argon viscosity/conductivity and self diffusion as explicit isotope approximations; gas 300\u2013418 K",
+    "splitting": "Lie MUSCL hydro SSPRK2 and binary diffusion SSPRK2 subcycled at CFL 0.3, exact magnetic, v74 implicit FiPy/current source; outer refinement includes splitting",
+    "initialization": "12-point tensor Gauss-Legendre cell integrals of all six conserved continuum fields, including full kinetic energy; independent 16-point admission",
+    "comparison": "independent conservative linear restriction in z and r squared; physical response scales and unchanged 2 percent RMS/observable, 5 percent local gates"
+  },
+  "experimentalQualified": false,
+  "liveQualified": false
+}

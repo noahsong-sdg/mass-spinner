@@ -1,0 +1,368 @@
+{
+  "schemaVersion": 1,
+  "kind": "Read-only adversarial metric sensitivity; not new PDE solve",
+  "sourceHashes": {
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/spatial-v76/common_space.py": "2b6bb1700fb64920e046446607bd56bf8a3888b24ffc25ef853a53d6faeaa3c8",
+    "scientific/spatial-v77/study.py": "625f29dedf5766ceb23f076fa4c0d2f6acf794965292b6e2ed7f10f9f19dc77d",
+    "scientific/mixture-axial-v75/manifest.json": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999"
+  },
+  "inputHashes": {
+    "/work/home/mass-spinner-v76-study05.json": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+    "/work/home/mass-spinner-v77-full01/scientific/spatial-v77/study-01.json": "5379ce3ee8f242da9e9c2483e567c789d962be2768faedbdfb9ee62346cf1f3e"
+  },
+  "originalMetrics": {
+    "cellAverage": {
+      "passed": true,
+      "gateCount": 315
+    },
+    "commonSpace": {
+      "passed": true,
+      "gateCount": 315
+    }
+  },
+  "responseRelativeDiagnostics": [
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 1e-05,
+      "field": "solid",
+      "referencePeakResponse": 3.3632824170126696e-07,
+      "maximumErrorAbsolute": 1.006799827847722e-07,
+      "rmsErrorAbsolute": 1.7716557870390635e-08,
+      "maximumOverPeakResponse": 0.2993503675917827,
+      "rmsOverPeakResponse": 0.05267639072108257
+    },
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 1e-05,
+      "field": "omega",
+      "referencePeakResponse": 1.7640932822476998,
+      "maximumErrorAbsolute": 0.07980750604541442,
+      "rmsErrorAbsolute": 0.004265749916985675,
+      "maximumOverPeakResponse": 0.04523995802746246,
+      "rmsOverPeakResponse": 0.00241809770487336
+    },
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 2e-05,
+      "field": "solid",
+      "referencePeakResponse": 1.1686915399877762e-06,
+      "maximumErrorAbsolute": 3.3589986717998384e-07,
+      "rmsErrorAbsolute": 5.853385868039694e-08,
+      "maximumOverPeakResponse": 0.2874153321786664,
+      "rmsOverPeakResponse": 0.050084951142034595
+    },
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 2e-05,
+      "field": "omega",
+      "referencePeakResponse": 4.299205484452727,
+      "maximumErrorAbsolute": 0.18061909029997303,
+      "rmsErrorAbsolute": 0.010382681240864434,
+      "maximumOverPeakResponse": 0.04201220224368158,
+      "rmsOverPeakResponse": 0.0024150232591606657
+    },
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 4e-05,
+      "field": "solid",
+      "referencePeakResponse": 4.2455508832972555e-06,
+      "maximumErrorAbsolute": 1.1091253907307123e-06,
+      "rmsErrorAbsolute": 1.9382114577324181e-07,
+      "maximumOverPeakResponse": 0.2612441638832329,
+      "rmsOverPeakResponse": 0.04565276712046211
+    },
+    {
+      "coarse": [
+        48,
+        48,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 4e-05,
+      "field": "omega",
+      "referencePeakResponse": 11.164369418077058,
+      "maximumErrorAbsolute": 0.4148785747729695,
+      "rmsErrorAbsolute": 0.02598512051928923,
+      "maximumOverPeakResponse": 0.037160950093715894,
+      "rmsOverPeakResponse": 0.0023275045411176374
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 1e-05,
+      "field": "solid",
+      "referencePeakResponse": 3.3632824170126696e-07,
+      "maximumErrorAbsolute": 7.216213333053668e-08,
+      "rmsErrorAbsolute": 1.1141926735006154e-08,
+      "maximumOverPeakResponse": 0.21455864950714557,
+      "rmsOverPeakResponse": 0.033128133036483515
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 1e-05,
+      "field": "omega",
+      "referencePeakResponse": 1.7640932822476998,
+      "maximumErrorAbsolute": 0.030162612697341662,
+      "rmsErrorAbsolute": 0.001831874498000036,
+      "maximumOverPeakResponse": 0.017098082624582248,
+      "rmsOverPeakResponse": 0.0010384226936491553
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 2e-05,
+      "field": "solid",
+      "referencePeakResponse": 1.1686915399877762e-06,
+      "maximumErrorAbsolute": 2.351033196157723e-07,
+      "rmsErrorAbsolute": 3.614149833483472e-08,
+      "maximumOverPeakResponse": 0.20116798280086065,
+      "rmsOverPeakResponse": 0.030924753964773916
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 2e-05,
+      "field": "omega",
+      "referencePeakResponse": 4.299205484452727,
+      "maximumErrorAbsolute": 0.06624466804495843,
+      "rmsErrorAbsolute": 0.004399698714314945,
+      "maximumOverPeakResponse": 0.015408583814967645,
+      "rmsOverPeakResponse": 0.001023374837566065
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 4e-05,
+      "field": "solid",
+      "referencePeakResponse": 4.2455508832972555e-06,
+      "maximumErrorAbsolute": 7.526212829632706e-07,
+      "rmsErrorAbsolute": 1.1504340354447094e-07,
+      "maximumOverPeakResponse": 0.17727293904878522,
+      "rmsOverPeakResponse": 0.027097403071312122
+    },
+    {
+      "coarse": [
+        64,
+        64,
+        256,
+        "base"
+      ],
+      "reference": [
+        96,
+        96,
+        256,
+        "base"
+      ],
+      "timeS": 4e-05,
+      "field": "omega",
+      "referencePeakResponse": 11.164369418077058,
+      "maximumErrorAbsolute": 0.1432462603637319,
+      "rmsErrorAbsolute": 0.010726573912788178,
+      "maximumOverPeakResponse": 0.012830662888294547,
+      "rmsOverPeakResponse": 0.0009607863651860164
+    }
+  ],
+  "syntheticFrozenWallProfile": [
+    {
+      "timeS": 1e-05,
+      "fieldGatePassed": true,
+      "absoluteMetric": {
+        "rmsAbsolute": 4.1499136456975185e-08,
+        "maxAbsolute": 3.3632824170126696e-07,
+        "scale": 1.0,
+        "rmsNormalized": 4.1499136456975185e-08,
+        "maxNormalized": 3.3632824170126696e-07,
+        "weighting": "cylindrical volume"
+      },
+      "lostTemperatureResponseFraction": 1.0,
+      "scope": "Profile metric only. Modified state not PDE-generated, not ledger-admitted; observables are not compared."
+    },
+    {
+      "timeS": 2e-05,
+      "fieldGatePassed": true,
+      "absoluteMetric": {
+        "rmsAbsolute": 1.4423763172024192e-07,
+        "maxAbsolute": 1.1686915399877762e-06,
+        "scale": 1.0,
+        "rmsNormalized": 1.4423763172024192e-07,
+        "maxNormalized": 1.1686915399877762e-06,
+        "weighting": "cylindrical volume"
+      },
+      "lostTemperatureResponseFraction": 1.0,
+      "scope": "Profile metric only. Modified state not PDE-generated, not ledger-admitted; observables are not compared."
+    },
+    {
+      "timeS": 4e-05,
+      "fieldGatePassed": true,
+      "absoluteMetric": {
+        "rmsAbsolute": 5.206021681235988e-07,
+        "maxAbsolute": 4.2455508832972555e-06,
+        "scale": 1.0,
+        "rmsNormalized": 5.206021681235988e-07,
+        "maxNormalized": 4.2455508832972555e-06,
+        "weighting": "cylindrical volume"
+      },
+      "lostTemperatureResponseFraction": 1.0,
+      "scope": "Profile metric only. Modified state not PDE-generated, not ledger-admitted; observables are not compared."
+    }
+  ],
+  "risingErrorsAcceptedBySmallErrorExemption": {
+    "cellAverage": [
+      {
+        "name": "spatial:1e-05:solid:decreasing",
+        "values": [
+          3.528466405363682e-10,
+          2.6592176420994635e-09
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:1e-05:Y:decreasing",
+        "values": [
+          3.4402697059480887e-06,
+          3.5781643163593013e-06
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:2e-05:solid:decreasing",
+        "values": [
+          2.1842919939180614e-09,
+          8.799636902545947e-09
+        ],
+        "passed": true
+      },
+      {
+        "name": "spatial:4e-05:solid:decreasing",
+        "values": [
+          8.839082122292132e-09,
+          3.0076236805129526e-08
+        ],
+        "passed": true
+      }
+    ],
+    "commonSpace": []
+  },
+  "maximumInstantaneousObservableRelativeError": {
+    "level": 0,
+    "timeS": 1e-05,
+    "observable": "torque_upper",
+    "relativeToInstantaneousReference": 0.021629203406458034
+  },
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "interpretation": "Published absolute-temperature tolerance passes, but its 1 K scale floor does not establish convergence relative to a microKelvin wall-heating signal. Response-relative diagnostics use peak reference evolution, without changing existing gates. No threshold tuning or frozen source edits performed."
+}

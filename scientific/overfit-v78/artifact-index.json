@@ -1,0 +1,70 @@
+{
+  "scope": "Four read-only adversarial audits of frozen v75-v77. Artificial receipt mutation is separate from original production results; no PDE campaign or physics fix.",
+  "artifacts": {
+    "scientific/overfit-v78/metrics/audit_metrics.py": {
+      "sha256": "91f3a4bfa9c08a2f1bb2400786974f2c644aa6b4a5e86587da75a30f342ba292",
+      "bytes": 4945,
+      "guestSource": "/work/home/overfit-metrics-v78-20261111/audit_metrics.py"
+    },
+    "scientific/overfit-v78/metrics/result.json": {
+      "sha256": "7959b4c49811f4c85cb6f5fbe874fefa7a25a55735985fb069427fd396fd864b",
+      "bytes": 9838,
+      "guestSource": "/work/home/overfit-metrics-v78-20261111/result.json"
+    },
+    "scientific/overfit-v78/metrics/REPORT.md": {
+      "sha256": "59fca04f9bff46d1e2f859ce0d3a61d5fe1ae2e7a636c76ac2dabaa8a3601e0f",
+      "bytes": 4871,
+      "guestSource": "/work/home/overfit-metrics-v78-20261111/REPORT.md"
+    },
+    "scientific/overfit-v78/coverage/audit.py": {
+      "sha256": "65e9a786c1c22deefa6a9513ce6b78f40c7c4755007ef77fdf13527053cc0559",
+      "bytes": 4030,
+      "guestSource": "/work/home/overfit-coverage-v77-audit01/audit.py"
+    },
+    "scientific/overfit-v78/coverage/results.json": {
+      "sha256": "d86d634d325b37ee26446e63671626de6b25590db4cff6e542a3ab93c4b7be65",
+      "bytes": 15940,
+      "guestSource": "/work/home/overfit-coverage-v77-audit01/results.json"
+    },
+    "scientific/overfit-v78/claims/inspect.py": {
+      "sha256": "1eaaaeb382316f2a122edd09207730248bd2a1fd987d784a748cb8a1a8c28d4c",
+      "bytes": 2895,
+      "guestSource": "/work/home/overfit-v78-claims01/inspect.py"
+    },
+    "scientific/overfit-v78/claims/receipt.json": {
+      "sha256": "365a67a4d249669cecda5f4e4509e7e8c65e13b9c918eba05535c62143404a17",
+      "bytes": 6752,
+      "guestSource": "/work/home/overfit-v78-claims01/receipt.json"
+    },
+    "scientific/overfit-v78/independence/repro.py": {
+      "sha256": "a3b17b706c3f6e59251da6e2f2789c06b362bc574eb26e36f8854f32a8fcf7eb",
+      "bytes": 851,
+      "guestSource": "/work/home/overfit_independence_repro01.py"
+    },
+    "scientific/overfit-v78/independence/evidence.json": {
+      "sha256": "3adbfde50409bc499c9055b809e4bcb993084baf296db5584fa44ee0f5da0bad",
+      "bytes": 2259,
+      "guestSource": "/work/home/overfit_independence_evidence01.json"
+    },
+    "scientific/overfit-v78/independence/replayed-analysis.json": {
+      "sha256": "65a5237c66d6da8d248c29a5256ada0ecdca44f58643e07a78cdeaa772a26256",
+      "bytes": 172507,
+      "guestSource": "/work/home/overfit_independence_analysis_REPLAY.json"
+    },
+    "scientific/overfit-v78/final_checks.py": {
+      "sha256": "62127c6323af9dae36c8e824c8a636dd5c2ef63ad6b08c5d4f93507beb39f00d",
+      "bytes": 1634,
+      "guestSource": "/work/home/overfit-v78-parent-checks01.py"
+    },
+    "scientific/overfit-v78/final_checks.json": {
+      "sha256": "0e7a6ce4ef49d2ceb3e8c7dc4f23682a856a15d225addc8e978ff41b5247a770",
+      "bytes": 9060,
+      "guestSource": "/work/home/overfit-v78-parent-checks01.json"
+    }
+  },
+  "reviewedHead": "9e7e3f632a9bc51a382ad15d6373f8814b055b61",
+  "physicalProducerUnchanged": true,
+  "originalVerdictsUnchanged": true,
+  "experimentalQualified": false,
+  "liveQualified": false
+}

@@ -44,8 +44,9 @@ All execution is offline through safe-dev. The physical producer, supplementary
 source, imported metric, checkpoint helper, runtime, baseline and plan hashes
 are bound before production. Each completed trajectory is saved in persistent
 guest storage before the project checkpoint. Every recorded substep audit and
-all endpoint observables/ledgers are independently admitted; the PDE is not
-replayed by the admission checker.
+its reported score, minima and timing are inspected. Endpoint observables and
+ledgers are independently reconstructed; intermediate transport residuals are
+not reconstructed from saved stage states. The PDE is not replayed by admission.
 
 Both new trajectories complete without producer failures: 512 new outer steps
 and six new endpoints. All **630 supplemental gates pass**, 315 per metric.
@@ -54,6 +55,8 @@ the 24 reused trajectories; maximum reconstructed observable discrepancy is
 5.17e-13. This admission checks recorded audits and ledgers, not a second solve.
 
 Maximum normalized differences across scheduled times and fields/observables:
+Observable normalization uses the maximum absolute reference value over the
+scheduled times, not each instantaneous value.
 
 | Comparison | Metric | RMS | Local | Observable |
 |---|---|---:|---:|---:|
@@ -81,6 +84,11 @@ Verification: **194 Python tests and 15 TypeScript tests pass**; typecheck,
 build, site and asset checks exit zero. The existing large-bundle warning
 remains. The unchanged PDE retains the physical limitations listed in v76;
 experimental and live-playground qualification remain false.
+
+[The subsequent adversarial overfitting audit](OVERFITTING-AUDIT-V78.md)
+finds a relative wall-heating blind spot, missing untouched physical holdouts
+and a receipt-consistency weakness. The original numerical verdicts remain
+unchanged; the 630 gate rows are correlated checks of one physical condition.
 
 Evidence: [summary](../scientific/spatial-v77/summary-01.json),
 [all gates and budgets](../scientific/spatial-v77/convergence-01.json),

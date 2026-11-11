@@ -1,0 +1,327 @@
+{
+  "scope": "Read-only raw evidence and nominal dimensional scales; not a new solve or validation of omitted closures.",
+  "inputPath": "/work/home/mass-spinner-v76-study05.json",
+  "inputSha256": "8e951889c880d477afc81d474a8fd327908ce57eba24ad4c4fe339ae7d5c687d",
+  "sourceRoot": "/work/home/mass-spinner-v77-full01",
+  "sourceHashes": {
+    "package-lock.json": "c57d6ce8321fe63b664fb11f3794f1ac58b14c662930cfbe19076e9b55e425d9",
+    "package.json": "6fdaedc3d1f3b19c205f034078b70795089fcb94681c296d6882f4fef840a975",
+    "scientific/axial-v73/torsion.py": "327810b2f79700aa8a794511f1ec17bdddfabd91c98420e979c26ea7b446fd04",
+    "scientific/coupled-axial-v74/bridge.py": "155eeec9da0146fbb00b06b31b0bbc5aa7714b0634c3977b17982375a8cebd40",
+    "scientific/coupled-axial-v74/bridge.ts": "bc65b15510581b3511601b3a55f9bb32eb4bb0a5b8a8dc0d6510960a13186980",
+    "scientific/coupled-axial-v74/coupled.py": "a54b299dbb47b3f1d5410033fbf337d5d3f62529089eba654ffdbe175c2b859f",
+    "scientific/coupled-axial-v74/independent_check.py": "d3e49934eb8b42b7b1535abaa58efe22524dcda6811820c06bdcd5eb71d70ebe",
+    "scientific/coupled-axial-v74/thermal.py": "c7dd9fbd0b8a7dce1b14412a736a1df25802d7e5a48c418a990c8a18626bde7d",
+    "scientific/mixture-axial-v75/PROTOCOL.md": "0195a09c2da99e18b80cb2a73d74046ba74ec3891f7388c138f88256270567a9",
+    "scientific/mixture-axial-v75/analyze.py": "e36ff3e6c46705d96479238f0110da3d78a6f817edc24c8b914b9d954ef48ea1",
+    "scientific/mixture-axial-v75/audit.py": "569313ae21d71b19729ca54caea001a2e75db34353537e6e7ab1f962f5322c70",
+    "scientific/mixture-axial-v75/controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "scientific/mixture-axial-v75/coupling.py": "33e026df77534855fd22356b55b36d817361e4d81ee4477ce10c689b24493575",
+    "scientific/mixture-axial-v75/diffusion.py": "71a942cc68d34cd33f5df3cf4cf727373213bc511e73fff19b026f1be4eba60f",
+    "scientific/mixture-axial-v75/diffusion_controls.py": "c2928540fe8b02520bc1eac57ea466af3cec1a9351d9465af09e1b920ee9dd03",
+    "scientific/mixture-axial-v75/endpoint_admission.py": "7479b8b3258c80b89f1fa4880d8d7b7cb4fd0977fd587ac33f78121e7a59c597",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/mixture-axial-v75/independent.py": "3b5b78d710e4c15b65fa56f1b675fb7dbbcdf59716b8737c0f3bb991a98e437e",
+    "scientific/mixture-axial-v75/magnetic.py": "d2bb771f7b47b48e9b989a1df9d9461841663bb6b28480ee34173d183c5cef6f",
+    "scientific/mixture-axial-v75/manifest.json": "baf89c21ae596bdd3b207c48c7c78d2f701c94e97ee27049bfe2e1818f0b8999",
+    "scientific/mixture-axial-v75/mixcheck.py": "6cfc408b6dc3bfa20c3e92e98c7ff5b85511441a1f6e868442ecdf925152a579",
+    "scientific/mixture-axial-v75/plot.py": "85aa08e5af54048855a9be9dc5616620cc29a306e6ecc3c1bc06ae9d832e490c",
+    "scientific/mixture-axial-v75/requirements.txt": "30b1b720fd19eb77c3f32552f810ccb578ace30d50a3be0aab6ecb13944b3182",
+    "scientific/mixture-axial-v75/run.py": "d3d4f5b6361965cc96c3c1c2a80802b373f9826d80246123c309eb849c5ac43b",
+    "scientific/mixture-axial-v75/supplemental_admission.py": "578a0ed8107cb5650be4dec028a471c54ab3fd46377534131f6ea0cca9a2d07e",
+    "scientific/mixture-axial-v75/test_analyze.py": "2078a198864970b807219fc759badfcf86e28220c15e55ad4d87b7e42b45fbe6",
+    "scientific/mixture-axial-v75/test_audit.py": "c0246933d3be242d86872c955160f7d6c8056c5b43b6476c0ab89997193bc715",
+    "scientific/mixture-axial-v75/test_controls.py": "7de53936ad454382eb6a1dccd6e074b34c6f5da031a1f634458a23d90ecdd9a6",
+    "scientific/mixture-axial-v75/test_coupling.py": "0cd1b8023d603e58fae52691897fa0fe738d07f19a93ccdacca7b9d8a1deedf7",
+    "scientific/mixture-axial-v75/test_diffusion.py": "faf25584514bd321643ef5f288e5397666603c515d4e9102cd54e2775881e834",
+    "scientific/mixture-axial-v75/test_diffusion_controls.py": "3f3590f2d2aa505c5f99913f1ef5c48ce7810494c9608593ca3544bfdfee3050",
+    "scientific/mixture-axial-v75/test_endpoint_admission.py": "5a0843a5517f7f4af548a476908c5abeaeda4572878a95619f1a922bdcf10f58",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/mixture-axial-v75/test_independent.py": "7f99904073f2c265e3c28feea305bd069db2d8e19e036308d5193c29798ee592",
+    "scientific/mixture-axial-v75/test_initial_integrals.py": "c02805921eb866cb5dc61ec3041a1d8f92c023f15d40018b8dbf75be3e2823c0",
+    "scientific/mixture-axial-v75/test_magnetic.py": "24975f069a9a6067b90c57f60897a2f276bdd7fba1041f734abc7a1471d886d6",
+    "scientific/mixture-axial-v75/test_run.py": "4d869c43e425bd5c34ca6cb4cb7d61a036ed486213f0cc0e75870b1b3bf1d4d8",
+    "scientific/mixture-axial-v75/test_supplemental_admission.py": "6e2bb65ad93a20ce6ce3f07199ea8220eb5cbdce259441f2519f4d08f12d236d",
+    "scientific/mixture-axial-v75/test_verify.py": "b8dbd4117e48ad76fa37f5c2c5fbead64c707d59881dcdd68bc53372a7d07f28",
+    "scientific/mixture-axial-v75/test_wall_resolution.py": "8e79bbe9e35b51ae568aac8584594d5b65b2b14a40652fc254ddff0ab0547409",
+    "scientific/mixture-axial-v75/verify.py": "69e22d6f93afba2e728e55752cce158595603ae372ecf80fd6ce6032669ca4a2",
+    "scientific/mixture-axial-v75/wall_resolution.py": "611c59b86e600df1fc75a822773b86977c6c6942cd32c0433cd54a9834807b0d",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "src/fuel-neutral-transport.ts": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+    "src/fuel-thermal.ts": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b"
+  },
+  "sourceHashesMatched": true,
+  "trajectoryKey": [
+    48,
+    48,
+    256,
+    "base"
+  ],
+  "physicalConditionCount": 1,
+  "trajectoryCount": 24,
+  "scales": {
+    "pressurePa": 76.79330048969052,
+    "diffusivityM2S": 0.03224367571901349,
+    "viscosityPaS": 2.537478891238437e-05,
+    "conductivityWmK": 0.019804908909741455,
+    "soundSpeedMPS": 357.75527130915094,
+    "radialSoundS": 0.0001677124135178753,
+    "axialSoundS": 0.00039132896487504247,
+    "radialSpeciesDiffusionS": 0.11164980169668273,
+    "axialSpeciesDiffusionS": 0.6078711425708283,
+    "radialViscousS": 0.14187310138540665,
+    "axialViscousS": 0.7724202186538808,
+    "radialThermalS": 0.05982410357152238,
+    "rotationPeriodLowerBoundS": 0.006981317007977318,
+    "magneticRadialDampingS": 0.8333333333333333
+  },
+  "ratios": {
+    "diffusivityM2S": 0.001240553352185364,
+    "viscosityPaS": 1.576367793171185,
+    "soundSpeedMPS": 1.1180827567858355e-07,
+    "radialSoundS": 0.23850351420610066,
+    "axialSoundS": 0.10221579180261454,
+    "radialSpeciesDiffusionS": 0.00035826306354459433,
+    "axialSpeciesDiffusionS": 6.58034198347214e-05,
+    "radialViscousS": 0.000281942099026493,
+    "axialViscousS": 5.178528349466197e-05,
+    "radialThermalS": 0.0006686268178206501,
+    "rotationPeriodLowerBoundS": 0.005729577951308232,
+    "magneticRadialDampingS": 4.800000000000001e-05
+  },
+  "gasMassKg": 1.5833626974092563e-06,
+  "gasInitialThermalJ": 0.1823981114196812,
+  "integrals": {
+    "electrodeJ": 1.9151979124077544e-06,
+    "wallWorkJ": 0.0,
+    "bathJ": 0.0,
+    "numericalLossJ": 8.777433285915257e-12,
+    "radialMotionalJouleJ": 6.012571160419806e-10
+  },
+  "electrodeWorkOverInitialThermal": 1.0500097273491285e-05,
+  "radialMotionalHeatOverInitialThermal": 3.2963998988922834e-09,
+  "hypotheticalUniform900RadSSeparationFactor": 1.0020060905850763,
+  "rows": [
+    {
+      "timeS": 1e-05,
+      "fields": {
+        "density": {
+          "initialMin": 0.0009600008809472746,
+          "initialMax": 0.0010399991190527284,
+          "finalMin": 0.0009619497403244654,
+          "finalMax": 0.0010379316451550392,
+          "maxAbsoluteChange": 3.4697915894789464e-06
+        },
+        "gas": {
+          "initialMin": 348.0000189984327,
+          "initialMax": 351.999981080749,
+          "finalMin": 348.7210358311629,
+          "finalMax": 351.2687934789552,
+          "maxAbsoluteChange": 0.794954930442259
+        },
+        "solid": {
+          "initialMin": 350.0,
+          "initialMax": 350.0,
+          "finalMin": 349.9999998259256,
+          "finalMax": 350.000000173514,
+          "maxAbsoluteChange": 1.7407438690497656e-07
+        },
+        "omega": {
+          "initialMin": 2.3748120356329524e-05,
+          "initialMax": 891.8595466531604,
+          "finalMin": 0.00021134268761212755,
+          "finalMax": 891.2627216803089,
+          "maxAbsoluteChange": 1.7585789309694064
+        },
+        "vr": {
+          "initialMin": -1.994026097233051,
+          "initialMax": 1.9940097031815995,
+          "finalMin": -3.8428074195890605,
+          "finalMax": 3.862867661978184,
+          "maxAbsoluteChange": 1.8691064199506477
+        },
+        "vz": {
+          "initialMin": -0.9954446473041519,
+          "initialMax": 0.9954356511842176,
+          "finalMin": -1.7654774585394846,
+          "finalMax": 1.8459664864130603,
+          "maxAbsoluteChange": 0.8505587521360799
+        },
+        "Y": {
+          "initialMin": 0.4400013214215925,
+          "initialMax": 0.5599986785797205,
+          "finalMin": 0.4400708569996928,
+          "finalMax": 0.5599354121921621,
+          "maxAbsoluteChange": 0.00014701639959857626
+        }
+      },
+      "observables": {
+        "currentA": 0.06104821616875337,
+        "jouleW": 0.046913674938343516,
+        "shearW": 0.018584821025355844,
+        "gasPeakK": 351.2687934789552,
+        "wallPeakK": 350.000000173514,
+        "meridionalKineticJ": 3.613801297493003e-06,
+        "lightRadialMomentM": 0.040007057607778174,
+        "heavyRadialMomentM": 0.03999306739476377,
+        "lightAxialMomentM": 0.0718308148673194,
+        "heavyAxialMomentM": 0.06907732752162764,
+        "torque_outer": -6.999510556735233e-05,
+        "torque_lower": -9.256522677989509e-08,
+        "torque_upper": -9.021075256108684e-08,
+        "radialMotionalJouleW": 7.194076821340495e-06
+      }
+    },
+    {
+      "timeS": 2e-05,
+      "fields": {
+        "density": {
+          "initialMin": 0.0009600008809472746,
+          "initialMax": 0.0010399991190527284,
+          "finalMin": 0.0009648478850948912,
+          "finalMax": 0.0010349283682257891,
+          "maxAbsoluteChange": 8.930091860650255e-06
+        },
+        "gas": {
+          "initialMin": 348.0000189984327,
+          "initialMax": 351.999981080749,
+          "finalMin": 348.6357084356351,
+          "finalMax": 351.38547033848727,
+          "maxAbsoluteChange": 2.070646919103865
+        },
+        "solid": {
+          "initialMin": 350.0,
+          "initialMax": 350.0,
+          "finalMin": 349.99999937927396,
+          "finalMax": 350.0000006219261,
+          "maxAbsoluteChange": 6.219261194928549e-07
+        },
+        "omega": {
+          "initialMin": 2.3748120356329524e-05,
+          "initialMax": 891.8595466531604,
+          "finalMin": 0.0002923788656065005,
+          "finalMax": 890.6716831077933,
+          "maxAbsoluteChange": 4.285335623972287
+        },
+        "vr": {
+          "initialMin": -1.994026097233051,
+          "initialMax": 1.9940097031815995,
+          "finalMin": -5.483623150785577,
+          "finalMax": 5.517139130591535,
+          "maxAbsoluteChange": 3.5233909901706104
+        },
+        "vz": {
+          "initialMin": -0.9954446473041519,
+          "initialMax": 0.9954356511842176,
+          "finalMin": -2.4655121089398,
+          "finalMax": 2.5691445566448285,
+          "maxAbsoluteChange": 1.5737942646754237
+        },
+        "Y": {
+          "initialMin": 0.4400013214215925,
+          "initialMax": 0.5599986785797205,
+          "finalMin": 0.44013861688998934,
+          "finalMax": 0.5598740431135456,
+          "maxAbsoluteChange": 0.00033885905131486593
+        }
+      },
+      "observables": {
+        "currentA": 0.061050600778692794,
+        "jouleW": 0.04691767908504324,
+        "shearW": 0.01852406940225177,
+        "gasPeakK": 351.38547033848727,
+        "wallPeakK": 350.0000006219261,
+        "meridionalKineticJ": 7.3120911518655885e-06,
+        "lightRadialMomentM": 0.04000692186638303,
+        "heavyRadialMomentM": 0.03999388206846493,
+        "lightAxialMomentM": 0.07182541447523128,
+        "heavyAxialMomentM": 0.06907237698095116,
+        "torque_outer": -6.904848708104143e-05,
+        "torque_lower": -1.3030089281324028e-07,
+        "torque_upper": -1.269108005840999e-07,
+        "radialMotionalJouleW": 1.4672492317915521e-05
+      }
+    },
+    {
+      "timeS": 4e-05,
+      "fields": {
+        "density": {
+          "initialMin": 0.0009600008809472746,
+          "initialMax": 0.0010399991190527284,
+          "finalMin": 0.0009726062512747776,
+          "finalMax": 0.0010271146435065028,
+          "maxAbsoluteChange": 2.44440342431491e-05
+        },
+        "gas": {
+          "initialMin": 348.0000189984327,
+          "initialMax": 351.999981080749,
+          "finalMin": 346.4596757500965,
+          "finalMax": 353.7990238014037,
+          "maxAbsoluteChange": 5.7990048029709556
+        },
+        "solid": {
+          "initialMin": 350.0,
+          "initialMax": 350.0,
+          "finalMin": 349.999997712056,
+          "finalMax": 350.000002334072,
+          "maxAbsoluteChange": 2.334072007670329e-06
+        },
+        "omega": {
+          "initialMin": 2.3748120356329524e-05,
+          "initialMax": 891.8595466531604,
+          "finalMin": 0.0003998827230041702,
+          "finalMax": 889.4552124168895,
+          "maxAbsoluteChange": 11.14533067626553
+        },
+        "vr": {
+          "initialMin": -1.994026097233051,
+          "initialMax": 1.9940097031815995,
+          "finalMin": -7.783981983814628,
+          "finalMax": 7.831051273879729,
+          "maxAbsoluteChange": 5.837342192765427
+        },
+        "vz": {
+          "initialMin": -0.9954446473041519,
+          "initialMax": 0.9954356511842176,
+          "finalMin": -3.5675629725435494,
+          "finalMax": 3.4432733683792085,
+          "maxAbsoluteChange": 2.5721183252393973
+        },
+        "Y": {
+          "initialMin": 0.4400013214215925,
+          "initialMax": 0.5599986785797205,
+          "finalMin": 0.4402724260800843,
+          "finalMax": 0.5597539148714145,
+          "maxAbsoluteChange": 0.0008423329610134367
+        }
+      },
+      "observables": {
+        "currentA": 0.06105525057095526,
+        "jouleW": 0.0469254276950404,
+        "shearW": 0.01840522495247789,
+        "gasPeakK": 353.7990238014037,
+        "wallPeakK": 350.000002334072,
+        "meridionalKineticJ": 1.4662647309708225e-05,
+        "lightRadialMomentM": 0.04000698759393283,
+        "heavyRadialMomentM": 0.03999665385171807,
+        "lightAxialMomentM": 0.0718095565457556,
+        "heavyAxialMomentM": 0.06905740068271482,
+        "torque_outer": -6.773563801224285e-05,
+        "torque_lower": -1.835332303251009e-07,
+        "torque_upper": -1.7852001353632552e-07,
+        "radialMotionalJouleW": 2.9236173839486e-05
+      }
+    }
+  ],
+  "scriptSha256": "65e9a786c1c22deefa6a9513ce6b78f40c7c4755007ef77fdf13527053cc0559",
+  "notes": [
+    "All trajectory requests share the same physical manifest and continuum ICs; numerical resolutions and solver modes vary.",
+    "Nominal time scales use unperturbed rho,T and equimass composition, not measured relaxation times or rigorous modal bounds.",
+    "R^2/D and R^2/alpha omit geometric eigenvalue factors and are dimensional characteristic scales.",
+    "2pi/900 is the fastest-rotation lower period bound; the imposed differential profile rotates more slowly away from its maximum.",
+    "The hypothetical uniform-rotation isotope factor is not an equilibrium result of the actual differential-flow trajectory.",
+    "Primitive gas-temperature changes include compressional/acoustic work; do not label all deltaT Joule heating.",
+    "All physical and live qualifications remain false."
+  ]
+}
