@@ -3,6 +3,9 @@
 Research backend only. The original negative v75 study is retained. Numerical
 convergence does not establish experimental accuracy or qualify the playground.
 
+[v77 separately checks fine-grid spatial and outer-timestep refinement](ISOLATED-REFINEMENT-V77.md),
+without changing the original verdicts below.
+
 Study05 completes 24 trajectories, 5,472 outer steps and 72 independently
 admitted endpoints without producer failures. **All 615 common-space gates
 and all six reference checks pass.** The original cell-average report remains
