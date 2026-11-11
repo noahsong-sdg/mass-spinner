@@ -1,0 +1,135 @@
+{
+  "numericallyQualified": false,
+  "trajectoryCount": 20,
+  "stepCount": 4448,
+  "endpointCount": 60,
+  "failures": [],
+  "inputHashes": {
+    "study-01.json": "8d66b8ce7047c97356907d67650a0029f3b6b2b1bf08d3ced85db28b2dac3d80",
+    "convergence-01.json": "45e0fdade76942e79699514882a47ee64e4a3a89e520128f66e40c18585443e3"
+  },
+  "series": {
+    "joint": {
+      "passed": false,
+      "failedGateCount": 18,
+      "finest": [
+        36,
+        36,
+        192
+      ],
+      "maxRms": 0.013499729721904729,
+      "maxLocal": 0.09963241814135472,
+      "maxObservable": 0.17775574972511587
+    },
+    "spatial": {
+      "passed": false,
+      "failedGateCount": 29,
+      "finest": [
+        24,
+        24,
+        256
+      ],
+      "maxRms": 0.0385540924740247,
+      "maxLocal": 0.203502503233195,
+      "maxObservable": 0.5584742955676444
+    },
+    "temporal": {
+      "passed": true,
+      "failedGateCount": 0,
+      "finest": [
+        24,
+        24,
+        128
+      ],
+      "maxRms": 0.00019288134146542467,
+      "maxLocal": 0.0009950447141573607,
+      "maxObservable": 1.9140979374087078e-05
+    },
+    "radial": {
+      "passed": false,
+      "failedGateCount": 19,
+      "finest": [
+        24,
+        48,
+        256
+      ],
+      "maxRms": 0.033923593213873365,
+      "maxLocal": 0.1979917988524968,
+      "maxObservable": 0.059475858792452214
+    },
+    "axial": {
+      "passed": false,
+      "failedGateCount": 8,
+      "finest": [
+        48,
+        24,
+        256
+      ],
+      "maxRms": 0.014396569694065275,
+      "maxLocal": 0.039129925288636506,
+      "maxObservable": 0.5555200027689411
+    }
+  },
+  "references": {
+    "linearTolerance": {
+      "passed": true,
+      "maxRms": 1.0565331997193183e-13,
+      "maxLocal": 6.131832393091064e-13,
+      "maxObservable": 1.5221257423188037e-13
+    },
+    "thermalTolerance": {
+      "passed": true,
+      "maxRms": 3.259318616341938e-13,
+      "maxLocal": 2.340879275803855e-12,
+      "maxObservable": 3.9798461482116086e-16
+    },
+    "bothTolerances": {
+      "passed": true,
+      "maxRms": 3.2594384561949086e-13,
+      "maxLocal": 2.340879275803855e-12,
+      "maxObservable": 1.520642188963717e-13
+    },
+    "referenceSmallerDt": {
+      "passed": true,
+      "maxRms": 0.00015659290026023465,
+      "maxLocal": 0.0011261648229885953,
+      "maxObservable": 6.746500939708517e-05
+    },
+    "referenceSpatial": {
+      "passed": false,
+      "maxRms": 0.021336905286908913,
+      "maxLocal": 0.16116246465990994,
+      "maxObservable": 0.22953388410885323
+    }
+  },
+  "initialPrimitiveComparison": {
+    "[6, 6, 32]": {
+      "omegaRms": 0.011695405675891597,
+      "YRms": 0.013626342629955327
+    },
+    "[12, 12, 64]": {
+      "omegaRms": 0.002814393212677272,
+      "YRms": 0.003270341856397053
+    },
+    "[24, 24, 128]": {
+      "omegaRms": 0.0005643862526269282,
+      "YRms": 0.0006553743490021687
+    },
+    "[36, 36, 192]": {
+      "omegaRms": 0.0022315337551582913,
+      "YRms": 0.0031873680284933686
+    }
+  },
+  "linearRemapMaxErrorM": {
+    "24": 6.938893903907228e-18,
+    "36": 0.0002430555555555658
+  },
+  "postReviewPilot": {
+    "stepCount": 32,
+    "endpointFieldsBitwiseIdentical": true
+  },
+  "maxSourceEnergyResidualJ": 6.311754213756776e-12,
+  "maxTransportLocalScore": 0.0097487451661689,
+  "experimentalQualified": false,
+  "liveQualified": false
+}

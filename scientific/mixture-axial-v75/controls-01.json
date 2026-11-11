@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 1,
+  "timeS": 4e-05,
+  "epsilon": 1e-05,
+  "meshes": [
+    6,
+    12,
+    24,
+    48,
+    96
+  ],
+  "rotatingTemperatureScaleK": 4.477202395830452,
+  "acoustic": [
+    {
+      "n": 6,
+      "steps": 21,
+      "normalizedRms": {
+        "density": 0.049246137329820035,
+        "pressure": 0.04924613734616532,
+        "axialVelocity": 0.026050104395038118
+      },
+      "relativeLedgerResidual": {
+        "mass": 1.3373956400517714e-16,
+        "angularMomentum": 0.0,
+        "energy": 0.0,
+        "speciesMass": 3.3434891001294284e-16
+      }
+    },
+    {
+      "n": 12,
+      "steps": 41,
+      "normalizedRms": {
+        "density": 0.02649363929575151,
+        "pressure": 0.026493639296848247,
+        "axialVelocity": 0.011351284814729721
+      },
+      "relativeLedgerResidual": {
+        "mass": 0.0,
+        "angularMomentum": 0.0,
+        "energy": 1.5379810644893132e-16,
+        "speciesMass": 0.0
+      }
+    },
+    {
+      "n": 24,
+      "steps": 82,
+      "normalizedRms": {
+        "density": 0.01366254202363795,
+        "pressure": 0.013662542041847477,
+        "axialVelocity": 0.005182649029230765
+      },
+      "relativeLedgerResidual": {
+        "mass": 1.337395640051771e-16,
+        "angularMomentum": 0.0,
+        "energy": 0.0,
+        "speciesMass": 1.671744550064714e-16
+      }
+    },
+    {
+      "n": 48,
+      "steps": 163,
+      "normalizedRms": {
+        "density": 0.006927338294916565,
+        "pressure": 0.0069273382912387275,
+        "axialVelocity": 0.002459100191143429
+      },
+      "relativeLedgerResidual": {
+        "mass": 0.0,
+        "angularMomentum": 0.0,
+        "energy": 0.0,
+        "speciesMass": 0.0
+      }
+    },
+    {
+      "n": 96,
+      "steps": 326,
+      "normalizedRms": {
+        "density": 0.0034866156192239406,
+        "pressure": 0.0034866156235283524,
+        "axialVelocity": 0.0011954048957478931
+      },
+      "relativeLedgerResidual": {
+        "mass": 0.0,
+        "angularMomentum": 0.0,
+        "energy": 0.0,
+        "speciesMass": 0.0
+      }
+    }
+  ],
+  "rotating": [
+    {
+      "n": 6,
+      "steps": 21,
+      "normalizedRms": {
+        "density": 0.00120022028184149,
+        "radialVelocity": 0.008042573737697596,
+        "temperature": 0.061069356965699886,
+        "angularSpeed": 0.0018647286581827324
+      },
+      "relativeLedgerResidual": {
+        "mass": 0.0,
+        "angularMomentum": 1.6303329089923619e-16,
+        "energy": 4.540686805036568e-16,
+        "speciesMass": 0.0
+      }
+    },
+    {
+      "n": 12,
+      "steps": 41,
+      "normalizedRms": {
+        "density": 0.0007100978454165653,
+        "radialVelocity": 0.005059633108554946,
+        "temperature": 0.03615966225457959,
+        "angularSpeed": 0.0007856976338171161
+      },
+      "relativeLedgerResidual": {
+        "mass": 2.649142964094744e-16,
+        "angularMomentum": 3.260237777169342e-16,
+        "energy": 3.0271220031822707e-16,
+        "speciesMass": 0.0
+      }
+    },
+    {
+      "n": 24,
+      "steps": 82,
+      "normalizedRms": {
+        "density": 0.00038291215411480133,
+        "radialVelocity": 0.0029462170971421213,
+        "temperature": 0.01951551917906444,
+        "angularSpeed": 0.00035021080205999264
+      },
+      "relativeLedgerResidual": {
+        "mass": 2.649142964094744e-16,
+        "angularMomentum": 1.6300646765933199e-16,
+        "energy": 0.0,
+        "speciesMass": 3.313426938138773e-16
+      }
+    },
+    {
+      "n": 48,
+      "steps": 163,
+      "normalizedRms": {
+        "density": 0.00020071895086058012,
+        "radialVelocity": 0.001600261729994353,
+        "temperature": 0.01024281785113845,
+        "angularSpeed": 0.0001654260990522491
+      },
+      "relativeLedgerResidual": {
+        "mass": 0.0,
+        "angularMomentum": 0.0,
+        "energy": 0.0,
+        "speciesMass": 0.0
+      }
+    },
+    {
+      "n": 96,
+      "steps": 326,
+      "normalizedRms": {
+        "density": 0.00010389890571132106,
+        "radialVelocity": 0.0008373549961047784,
+        "temperature": 0.005307868219109313,
+        "angularSpeed": 8.056979964983363e-05
+      },
+      "relativeLedgerResidual": {
+        "mass": 1.324571482047372e-16,
+        "angularMomentum": 0.0,
+        "energy": 1.5135605800294488e-16,
+        "speciesMass": 3.313426938138773e-16
+      }
+    }
+  ],
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "gates": [
+    {
+      "name": "acoustic:density:finest",
+      "passed": true,
+      "value": 0.0034866156192239406
+    },
+    {
+      "name": "acoustic:density:decreasing",
+      "passed": true,
+      "values": [
+        0.049246137329820035,
+        0.02649363929575151,
+        0.01366254202363795,
+        0.006927338294916565,
+        0.0034866156192239406
+      ]
+    },
+    {
+      "name": "acoustic:pressure:finest",
+      "passed": true,
+      "value": 0.0034866156235283524
+    },
+    {
+      "name": "acoustic:pressure:decreasing",
+      "passed": true,
+      "values": [
+        0.04924613734616532,
+        0.026493639296848247,
+        0.013662542041847477,
+        0.0069273382912387275,
+        0.0034866156235283524
+      ]
+    },
+    {
+      "name": "acoustic:axialVelocity:finest",
+      "passed": true,
+      "value": 0.0011954048957478931
+    },
+    {
+      "name": "acoustic:axialVelocity:decreasing",
+      "passed": true,
+      "values": [
+        0.026050104395038118,
+        0.011351284814729721,
+        0.005182649029230765,
+        0.002459100191143429,
+        0.0011954048957478931
+      ]
+    },
+    {
+      "name": "acoustic:6:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "acoustic:12:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "acoustic:24:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "acoustic:48:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "acoustic:96:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "rotating:density:finest",
+      "passed": true,
+      "value": 0.00010389890571132106
+    },
+    {
+      "name": "rotating:density:decreasing",
+      "passed": true,
+      "values": [
+        0.00120022028184149,
+        0.0007100978454165653,
+        0.00038291215411480133,
+        0.00020071895086058012,
+        0.00010389890571132106
+      ]
+    },
+    {
+      "name": "rotating:radialVelocity:finest",
+      "passed": true,
+      "value": 0.0008373549961047784
+    },
+    {
+      "name": "rotating:radialVelocity:decreasing",
+      "passed": true,
+      "values": [
+        0.008042573737697596,
+        0.005059633108554946,
+        0.0029462170971421213,
+        0.001600261729994353,
+        0.0008373549961047784
+      ]
+    },
+    {
+      "name": "rotating:temperature:finest",
+      "passed": true,
+      "value": 0.005307868219109313
+    },
+    {
+      "name": "rotating:temperature:decreasing",
+      "passed": true,
+      "values": [
+        0.061069356965699886,
+        0.03615966225457959,
+        0.01951551917906444,
+        0.01024281785113845,
+        0.005307868219109313
+      ]
+    },
+    {
+      "name": "rotating:angularSpeed:finest",
+      "passed": true,
+      "value": 8.056979964983363e-05
+    },
+    {
+      "name": "rotating:angularSpeed:decreasing",
+      "passed": true,
+      "values": [
+        0.0018647286581827324,
+        0.0007856976338171161,
+        0.00035021080205999264,
+        0.0001654260990522491,
+        8.056979964983363e-05
+      ]
+    },
+    {
+      "name": "rotating:6:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "rotating:12:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "rotating:24:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "rotating:48:closedLedgers",
+      "passed": true
+    },
+    {
+      "name": "rotating:96:closedLedgers",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "sourceHashes": {
+    "controls.py": "42038dd88b828e59a88d5753bf3f0a279ec8302dc826d0b3afe1fec34e5f9fc2",
+    "flow.py": "aad522ba08fd3ac98a66a6fea0c37eeb28e8a4340c9ca422536023c53f5177ea"
+  }
+}

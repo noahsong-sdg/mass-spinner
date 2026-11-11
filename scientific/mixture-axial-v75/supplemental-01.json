@@ -1,0 +1,9 @@
+{
+  "passed": false,
+  "endpointAdmissionPassed": false,
+  "numericalQualificationAssessed": false,
+  "numericallyQualified": false,
+  "experimentalQualified": false,
+  "liveQualified": false,
+  "error": "Raw producer binding differs from frozen source tree"
+}
