@@ -1,0 +1,7 @@
+{
+  "experimentalQualification": false,
+  "anyAllPointPass": false,
+  "anyEligiblePointPass": false,
+  "opticalPredictionSHA256": "e656b3c1524eb3bbf53ed641bb7d68a89683a64b060a8bac03fdc195b02ff2d6",
+  "targetFileSHA256": "1e4f542dab2cdd777673f724ec3038e0223589797fa290765c0e1c8f047b4741"
+}

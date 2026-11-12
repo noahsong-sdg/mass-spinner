@@ -1,0 +1,10 @@
+{
+  "source": "V79 fixed extraction geometry: conference Fig. 2 / journal Fig. 9; no velocity targets",
+  "points": [
+    {"id": "ar-i-r1", "radiusM": 0.009734789391575663, "extractionRadiusRangeM": [0.008611544461778472, 0.010858034321372856]},
+    {"id": "ar-i-r2", "radiusM": 0.01984399375975039, "extractionRadiusRangeM": [0.0187207488299532, 0.02096723868954758]},
+    {"id": "ar-i-r3", "radiusM": 0.02985959438377535, "extractionRadiusRangeM": [0.028736349453978162, 0.030982839313572545]},
+    {"id": "ar-i-r4", "radiusM": 0.03968798751950078, "extractionRadiusRangeM": [0.03856474258970359, 0.04081123244929797]},
+    {"id": "ar-i-r5", "radiusM": 0.0500780031201248, "extractionRadiusRangeM": [0.04895475819032761, 0.051201248049921995]}
+  ]
+}

@@ -1,0 +1,927 @@
+{
+  "necessaryBoundsOnly": true,
+  "experimentalQualification": false,
+  "cases": [
+    {
+      "beta": 3,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            246.63184941517343
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            270.4687864281288
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            445.65105101020185
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            454.48780602455935
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0968066755593362,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            537.2756387037019
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            539.8020131803651
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.20154285550404327,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            492.6916622483284
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            496.5650243729221
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.1844010850993646,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            250.09818117035402
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            311.439615110149
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.1851445916213521,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 3,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            240.82767900475181
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            266.37852201506405
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            433.79894181146534
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            450.3865012259029
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.10495710570628447,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            520.8483600348545
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            524.6688052051484
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.223927392300718,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            473.4398694177293
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            488.1785675234385
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.19817568614972558,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            261.57339934327376
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            315.75128042559504
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.17386348404559548,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            238.5335174728669
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            263.7964476235157
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            428.94316624323585
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            445.26378700799165
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.11513735966096306,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            513.8403473495845
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            517.4446809677594
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.23461307606852255,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            464.8448072675825
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            479.6485871149843
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.2121860220046209,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            267.63732993387623
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            306.48290126538996
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.19811341410964967,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 9,
+      "refinement": 1,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            387.42858878964597
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            418.68412787079717
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            639.3984199673642
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            644.4251371054725
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            693.1634834833277
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            696.4228729040957
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            586.5847818859023
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            591.1962974667663
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.028970960417361802,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            295.5938563154927
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            365.43133426367547
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.04387982559487247,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 9,
+      "refinement": 2,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            382.9528158704934
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            420.4617319332349
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            628.4719005146131
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            645.5026077076202
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            678.2817028437169
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            684.4081392334384
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            570.1041613270487
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            591.0332475249115
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.02923876694646499,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            313.0954280550812
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            375.4054014398942
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.01778352253079607,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 18.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            380.74314259826576
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            417.9031654538098
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            623.1886374122766
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            639.9367656479177
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            671.1269329979124
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            677.3475981339294
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            562.1181609537471
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            583.0507424812671
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.04234988458912803,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            321.87612176808886
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            366.70990689110494
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.04053454846916926,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            243.42419704671417
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            269.15583567589084
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            436.7244914250527
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            453.2203319452608
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.09932549809351476,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            521.8660473263241
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            525.4238348455334
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.2228105776243151,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            471.55760571924003
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            486.5897140009158
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.20078534882289112,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            271.6647526856603
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            311.0487319346595
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.18616730438536322,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 3,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            234.16629858761016
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            259.00155879554563
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0010853460774264967,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            421.80392198130374
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            437.93752122379186
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.12969668174101412,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            506.18560253709273
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            509.8058824045168
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.2459121322766522,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            458.2729116730403
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            472.86108682622734
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.22333436632747938,
+          "twentyPercentRuledOut": true
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            263.7182984939982
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            302.0302546252531
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.20976338739590383,
+          "twentyPercentRuledOut": true
+        }
+      ]
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 16.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            383.9112097987043
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            421.2761118648429
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            626.3834897933815
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            642.9757993376
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            672.0148566018363
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            678.4917151652053
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            561.1593688995036
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            582.1934200346482
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.043758020931524255,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            320.9126887819823
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            365.63099784096073
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.04335742273437071,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    },
+    {
+      "beta": 9,
+      "refinement": 4,
+      "voltageV": 20.5,
+      "points": [
+        {
+          "id": "ar-i-r1",
+          "nominalCenterHullMS": [
+            0.0,
+            378.0359090175012
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            415.0120171907023
+          ],
+          "measuredExtractionRangeMS": [
+            259.2829705505762,
+            305.3777208706786
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r2",
+          "nominalCenterHullMS": [
+            0.0,
+            620.299139221182
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            637.1581758293452
+          ],
+          "measuredExtractionRangeMS": [
+            503.20102432778486,
+            549.2957746478874
+          ],
+          "minimumPossibleRelativeError": 0.0,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r3",
+          "nominalCenterHullMS": [
+            0.0,
+            670.022011792977
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            676.0359190023181
+          ],
+          "measuredExtractionRangeMS": [
+            676.056338028169,
+            722.1510883482714
+          ],
+          "minimumPossibleRelativeError": 3.0203142404428007e-05,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r4",
+          "nominalCenterHullMS": [
+            0.0,
+            562.5573494107257
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            583.3948288566215
+          ],
+          "measuredExtractionRangeMS": [
+            608.8348271446863,
+            654.9295774647887
+          ],
+          "minimumPossibleRelativeError": 0.04178472904937658,
+          "twentyPercentRuledOut": false
+        },
+        {
+          "id": "ar-i-r5",
+          "nominalCenterHullMS": [
+            0.0,
+            322.47794772137536
+          ],
+          "extractionCenterHullMS": [
+            0.0,
+            367.3766038261622
+          ],
+          "measuredExtractionRangeMS": [
+            382.202304737516,
+            428.2970550576184
+          ],
+          "minimumPossibleRelativeError": 0.03879019233422887,
+          "twentyPercentRuledOut": false
+        }
+      ]
+    }
+  ],
+  "predictionSHA256": "1a1e7e54974ed7e7e28be655e911b17d3cdd7bc55107b34474148702858ef128"
+}

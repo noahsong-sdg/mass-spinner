@@ -1,0 +1,16 @@
+test_annular_hole_path_and_signed_symmetry (test_chord.ChordTests.test_annular_hole_path_and_signed_symmetry) ... ok
+test_central_chord_has_no_pure_rotation_broadening (test_chord.ChordTests.test_central_chord_has_no_pure_rotation_broadening) ... ok
+test_emissivity_scaling_preserves_normalized_moments (test_chord.ChordTests.test_emissivity_scaling_preserves_normalized_moments) ... ok
+test_emitter_mass_scales_thermal_width_not_temperature (test_chord.ChordTests.test_emitter_mass_scales_thermal_width_not_temperature) ... ok
+test_instrument_variance_and_bulk_boost (test_chord.ChordTests.test_instrument_variance_and_bulk_boost) ... ok
+test_invalid_physical_inputs (test_chord.ChordTests.test_invalid_physical_inputs) ... ok
+test_joint_profile_refinement_against_independent_quadrature (test_chord.ChordTests.test_joint_profile_refinement_against_independent_quadrature) ... ok
+test_nonemitting_and_tangent_chords_are_unavailable (test_chord.ChordTests.test_nonemitting_and_tangent_chords_are_unavailable) ... ok
+test_rigid_rotation_arbitrary_emissivity_has_no_shear (test_chord.ChordTests.test_rigid_rotation_arbitrary_emissivity_has_no_shear) ... ok
+test_shear_is_not_local_temperature (test_chord.ChordTests.test_shear_is_not_local_temperature) ... ok
+test_thin_annulus_retains_positive_brightness (test_chord.ChordTests.test_thin_annulus_retains_positive_brightness) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.129s
+
+OK
