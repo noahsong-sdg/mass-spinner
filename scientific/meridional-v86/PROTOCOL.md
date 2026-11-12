@@ -72,6 +72,10 @@ report midpoint line values and density/temperature increments. Interpolation
 onto common fixed physical quadrature is explicit, not selected point pairing.
 Declared timestep slice requires <2% changes and contraction for nonzero fields.
 Report unresolved near-zero cases rather than manufacturing relative accuracy.
+Prospective full-campaign auditor detail, added after the pilot and before any
+full-campaign predictions: fixed physical tensor Gauss rules at 16,32,64 points
+per coordinate; require the 32-to-64 change in comparison metrics below 1% of
+their scale. This additional quadrature gate cannot waive a field-error gate.
 
 After prediction sealing, reuse independently extracted brightness and all 72
 V80 optical alternatives, with the necessary radial-velocity LOS extension.
