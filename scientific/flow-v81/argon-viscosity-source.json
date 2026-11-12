@@ -1,0 +1,40 @@
+{
+  "source": "Sotiriadou, Antoniadis, Assael and Huber (2025), Reference Correlation of the Viscosity of Argon",
+  "doi": "10.1007/s10765-025-03603-8",
+  "url": "https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=960065",
+  "equation": "Eq. 2, printed page 14; coefficients Table 3, printed page 15",
+  "formula": "mu0(T) = mu0(Tref) * exp(sum_i=1..12 a_i * log(T/Tref)^i)",
+  "temperatureRangeK": [84, 10000],
+  "referenceTemperatureK": 298.15,
+  "referenceViscosityPaS": 0.0000225666,
+  "coefficientsAscendingFromPower1": [0.8395115, -0.1062564, 0.01065796, 0.01879809, -0.008881774, -0.00009613779, 0.001404406, -0.0004321739, -0.00002544782, 0.00004398471, -0.000009997908, 0.0000007753453],
+  "publishedVerification": {"section": "3.2, printed page 30", "temperatureK": 300, "densityKgM3": 0, "viscosityMicroPaS": 22.6840, "roundingToleranceMicroPaS": 0.00005},
+  "propertyUncertainty": "0.12% at 95% confidence for dilute neutral argon, not an uncertainty on the plasma flow or its temperature map",
+  "scope": "Dilute-gas term only; the finite-density Helmholtz EOS range ending at 700 K is not extrapolated. No ion contribution, plasma turbulence or viscosity tensor is inferred.",
+  "experimentalTemperatureSource": "Wijnakker et al.1979 DOI10.1515/zna-1979-0602, Table1 and Fig7",
+  "apparentCoreTemperatureK": [5950, 1300],
+  "correctedProbeTemperatureK": [1800, 400],
+  "probeRadiusM": 0.05,
+  "collisionProfile": {
+    "source": "Wijnakker et al.1979, section4.7 endpoint estimates, printed pages684-685; definitions equations7-9, printed page675",
+    "endpointRadiusM": [0, 0.05],
+    "parallelConductivitySM": [1070, 950],
+    "electronHallParameter": [100, 38],
+    "ionHallParameter": [0.94, 0.18],
+    "reportedHallConductivitySM": [5.7, 24],
+    "neutralMassFractionAssumed": 1,
+    "caveats": [
+      "These are source-derived estimates using assumed electron temperature, collision cross-sections, interpolated heavy-particle temperature and extrapolated central pressure; not independent local transport measurements.",
+      "Linear/quadratic interpolation, constant continuation beyond 5 cm and axial uniformity are assumptions.",
+      "The weak-ionization leading-order neutral mass fraction of one makes the rounded endpoint estimates approximately, not exactly, reproduce reported Hall conductivity.",
+      "Scaling parallel conductivity electrically while holding the Hall-parameter profiles fixed is a phenomenological conditioning step, not a self-consistent collision closure. The absolute-source-conductivity current and gain must be reported separately."
+    ]
+  },
+  "profileCaveats": [
+    "Core value is an ArII Doppler-width temperature, not a calibrated local neutral temperature.",
+    "Intermediate temperatures are interpolated in the experimental paper.",
+    "Quadratic-in-radius continuation enforces zero derivative on the axis; linear-in-radius continuation preserves the V80 sensitivity but is not axis regular. Neither shape is recovered from the endpoints.",
+    "Temperature is continued constant beyond 5 cm and extended uniformly along z; both are unmeasured assumptions.",
+    "All four endpoint corners are sensitivity scenarios, not a joint statistical confidence region. None is chosen using measured rotation velocities."
+  ]
+}
