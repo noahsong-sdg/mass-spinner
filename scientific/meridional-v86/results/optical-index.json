@@ -1,0 +1,861 @@
+{
+  "predictionSHA256": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+  "targetVelocityRead": false,
+  "experimentalQualification": false,
+  "sourceSHA256": {
+    "scientific/meridional-v86/compare86.py": "ded3d111de1695a4296a3d582337a7d1d268e995861ba22491082e73f0c27ba1",
+    "scientific/meridional-v86/optical86.py": "547c3ee72eab266403ed9678b42ec40fdd88be67f21f466051d81d3862168d79",
+    "scientific/meridional-v86-independent/fourier86.py": "f5af090ba58fb549e00c938ef562edd32127a017d05553723346cbaee9253e6d",
+    "scientific/optical-v80/audit.py": "cb5009584602cfb59487fc15f835139aa1dfa2b6032807428d83a7ee73efdc07",
+    "scientific/optical-v80/compare.py": "75cfcc0ee62e0f80a986897b0e23b87e5d8846d81bda28afbd4ca4c996958bc4",
+    "scientific/optical-v80/emissivity.py": "342de7f162ee4e9eef593ff041722a4aaada7f035d580f7d85d39b2d0e4254e9",
+    "scientific/optical-v80/feasible.py": "ae300cabe0d0474a8aacecbaaa835c01eff8011c7b208a0da1a16a6c37630dec",
+    "scientific/optical-v80/independent_bound.py": "9d973f1bd1dba94d111994a450d1e76819615c4a5530c6e8b494683ec28d69c3",
+    "scientific/optical-v80/spectrum.py": "4293e2e18df87810d3fd0532e515abe62ac486383bdcfec121355789948bf2d4",
+    "scientific/optical-v80/study.py": "e442b93719fce9e88c65a67a4c004bfee4f980ab85f16a42cf5532016264e553",
+    "scientific/optical-v80/test_compare.py": "d049b3c171e214c81bead2459a997774374815fe6af4b4ca51b74510f299fa0a",
+    "scientific/optical-v80/test_emissivity.py": "615e5fe347e85f6e39cdafe8b907bbc5998ed619f4cc379224249322f8491aa7",
+    "scientific/optical-v80/test_feasible.py": "7bbc7b031774bbfbc771c683b8c5daa2af9c8b6178bff07f12ff65c8e5bce3e1",
+    "scientific/optical-v80/test_independent_bound.py": "367fa6ac386b9eac78dda7250a4e96147a562855c8f33ecda8eed41bafdd6d70",
+    "scientific/optical-v80/test_spectrum.py": "e1015cfb8d84e6ec39aa87d73c0c046b6d13a2dbe36525d926f2e898191ef508",
+    "scientific/optical-v80/test_study.py": "523974bbb8038f5af68311f33e98b344d696782bed997714553d417d3970a8e9"
+  },
+  "diagnosticSHA256": {
+    "brightness-independent.json": "091684a80eb612e7009e73a235e02e9c0a1020f5c7cbbc17b4016a77b754fcee",
+    "locations.json": "78b7c54a0f40034a2c08fbc8977563db1ba6ff29a75d9c0bcd4926e985b79170"
+  },
+  "groups": [
+    {
+      "label": "linear-finite-te1-a0.07-r32-dt1e-07-t0",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r32-dt1e-07-t0.json.gz",
+        "sha256": "4b083e3089993300651b52555f0ef5e870507ca29e4dd83c5a742e83fa288cd9",
+        "rawSHA256": "8a8cd5f6875780bd686644e42f234b36f12635aa577787b4c09146db8eb1b56a"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r32-dt1e-07-t1",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r32-dt1e-07-t1.json.gz",
+        "sha256": "54a4a70a2bf1ec643cd8f6a36c553065321af03338eda845875f66dfdbb6fa7a",
+        "rawSHA256": "8d3c01fe95a1e4d361111486b2a2360748154050141f4d978d5343c1d2166b89"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r32-dt1e-07-t2",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r32-dt1e-07-t2.json.gz",
+        "sha256": "a52c78b9f405f945577b4b21666a137a31bae671eb58cb523fcb0b8b15112ab6",
+        "rawSHA256": "cb0de81ec32f5c98121358e06fe01a6986aabb42b2ae1ddb74daa84cbc895288"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r32-dt1e-07-t3",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r32-dt1e-07-t3.json.gz",
+        "sha256": "cae21d65a89dc20870f589d72b251c12f88c205a56143637711744e91645cf0d",
+        "rawSHA256": "118b39ccd14f24418eb367ebc017f7a6442af1ff4a317b13a2507a035fa8fbf4"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt1e-07-t0",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r64-dt1e-07-t0.json.gz",
+        "sha256": "f92b83e59f44808a23968e6d38b0883c0e3cef41a040040d97005a9c38c15c72",
+        "rawSHA256": "2e123dc543e0da74e01d8a6c93dc15738afe2c043a7c989240606f65397eaee9"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt1e-07-t1",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r64-dt1e-07-t1.json.gz",
+        "sha256": "667c931dc6f8b6bf980d22012232f865aef14a1498cb3622385e804094373a38",
+        "rawSHA256": "17725cb76d80f51d3b1a4e8dcec444ac62e6b65238d934c350478535a51cc506"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt1e-07-t2",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r64-dt1e-07-t2.json.gz",
+        "sha256": "15305391429a9be68aff73c4acec482f6cb57d5e977174646006a3879f0e386f",
+        "rawSHA256": "edc11ea79681aa764267abb8662b196e9b4d97cfa3b191b420a05454d5423f84"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt1e-07-t3",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.07-r64-dt1e-07-t3.json.gz",
+        "sha256": "3493510b5d392a6e78b0796b2d3284f5e59caa96ebf1775b1d351a1d85c714cf",
+        "rawSHA256": "0a170030d42dde7f0745dc4b760489bac55f0524dac22bb77556810430582718"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r32-dt1e-07-t0",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r32-dt1e-07-t0.json.gz",
+        "sha256": "da209ac9a75c09963c4ee0f3949f26582a5367bb6c979159a422adc768c34e14",
+        "rawSHA256": "a5c5cf42a6a5295d1840302f4ee5b0f8168b20981f7bc60df840186f5cead7c2"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r32-dt1e-07-t1",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r32-dt1e-07-t1.json.gz",
+        "sha256": "f12503873bb869d86e9a12ae43ad34aea21041b41f72ba7207b5028dbbf26fce",
+        "rawSHA256": "eb952eeb002c25f5cb498c3ba696e73094afb6492136e6a18ee0e470688fc070"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r32-dt1e-07-t2",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r32-dt1e-07-t2.json.gz",
+        "sha256": "b06e6f3b224dac081f99a91cbcd38c46049eb21e96ad5b4c5c6855d51657557b",
+        "rawSHA256": "d928a60cc25036a24339a8db0947ede37615ba99781992ecc128d3811ebd5d13"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r32-dt1e-07-t3",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r32-dt1e-07-t3.json.gz",
+        "sha256": "2f787f511abb9c72a125b35a9383de75f3d1404556131fc09d4aaa229fee1363",
+        "rawSHA256": "01eda1b2bd7a2d5d22d0580e1aedb48d0405d702df09a48391e454b15aa91923"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r64-dt1e-07-t0",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r64-dt1e-07-t0.json.gz",
+        "sha256": "0fe87618294671b8f344ea646271e10a5c8dd400f3540df62474d90edcf0de17",
+        "rawSHA256": "a15638f456ce64d05dae7414674ef6f5ea20c0d4a5bb32c3a084ea4a9a875075"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r64-dt1e-07-t1",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r64-dt1e-07-t1.json.gz",
+        "sha256": "7819e662bfd88dc52224227f47a4f9e1bb40ccf885a725a4d4774a405770b000",
+        "rawSHA256": "369b2ca8843cd9d544ce0b17159a0bf8d145341230e458de8ee4481de98bb307"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r64-dt1e-07-t2",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r64-dt1e-07-t2.json.gz",
+        "sha256": "2d6b03c70e21c1cf8fabc96afede4b9d2e6bc88cbcfcfbfc5a81e71b0532e25e",
+        "rawSHA256": "02b68e111eca9868fb34f3050cdcac26aa1e64109004da312e88a2d28eab435a"
+      }
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r64-dt1e-07-t3",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te1-a0.08-r64-dt1e-07-t3.json.gz",
+        "sha256": "be1cf8b1f5bcd64c0e9298c184421aa17696937b9f52533c03945532399d8a85",
+        "rawSHA256": "c7bdd58dfa8896fe19e1c3f6fb662825084d1adbfc3768dbee70ddc02e8a8aba"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r32-dt1e-07-t0",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t0.json.gz",
+        "sha256": "fa174221e3bcbbe8fc34ea5ae360cffc16665d39d740f0a73e2c30857e7329ca",
+        "rawSHA256": "d7e841b10a7ebaeb5cc2f4e68b6cdb32f7787b052ca0684c00884c9d3e71ada1"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r32-dt1e-07-t1",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t1.json.gz",
+        "sha256": "5bf8b6a93ce4caa89b1791b91b2d46f06d3740ee4a5bd1a42aae4233200413ed",
+        "rawSHA256": "374d008e4851f42eb67e5a389c45e56f9982148cd91b93462b9a6d76e13e6f1b"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r32-dt1e-07-t2",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t2.json.gz",
+        "sha256": "aae29082e5c2c6960502e2ec58c5d552c9b6e832e25ff611a7c6a6cfeed5350b",
+        "rawSHA256": "41990bbfbf519619046eeecccb39724983e3d6949dbd73c25ef37a66919d1d7d"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r32-dt1e-07-t3",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t3.json.gz",
+        "sha256": "8bbfeaf38aa504c539164d3bf62a93e45877799814c8d5e68dd67fa605b89f75",
+        "rawSHA256": "98a166aeeaf00faceb24c860cdb75954de2ad4f027f35bb71286abf4f26650b8"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r64-dt1e-07-t0",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t0.json.gz",
+        "sha256": "2360adfda8d77cbfb0996a56d0b387e2be7c5f1e495dacd143cb299e355ee791",
+        "rawSHA256": "40ada4c33cf515ebd4a6d5e78369406e1ebb126660e92c6bf599bb1679e815ed"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r64-dt1e-07-t1",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t1.json.gz",
+        "sha256": "819e9273a78d194028928abaa182c5c067ca7eb3ba6e5713e211f80c3b9dde17",
+        "rawSHA256": "6a8601817244fafe0efa3273d82b796fcc6cb444ab03fb0c8b4cd13edc63ec13"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r64-dt1e-07-t2",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t2.json.gz",
+        "sha256": "ccd70c86cbb8dcefd2d189352dc947fb25d7573d4eed8263c8bb995cf0750e8c",
+        "rawSHA256": "16b35424a0956c613887a5e00f9efed2b6ff2709553c583cbb7a711cf7bb8b6d"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r64-dt1e-07-t3",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t3.json.gz",
+        "sha256": "6f35ac7cd21f2473b0d9c8ca72d712b922b8130b46e9158ffb64471feb9e0f13",
+        "rawSHA256": "93d3bf1ae89574e0d8715c873ad1d1d139beccccdef41e2881ec7022b8dadb66"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r32-dt1e-07-t0",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t0.json.gz",
+        "sha256": "1c372a50af1023d5a47677155565508a46152c9271f1cf4dbec359e3e1752a39",
+        "rawSHA256": "47f235ef6031bd3697a136bdb7f5298d1ff33c4b3e612f3d9fbace5b47251186"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r32-dt1e-07-t1",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t1.json.gz",
+        "sha256": "166d1ef3d18d4babb0ce1a4e232fbada2be1a4b24345c9ed3499198e1268752b",
+        "rawSHA256": "c35ee48e5609d450d5b3703f0fc0ea20758a8654272f7030a9760f41c8079ad1"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r32-dt1e-07-t2",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t2.json.gz",
+        "sha256": "764be2513dc911e85c85ad8623ca800495ac49fa7aad916e62df87a4b0604b2a",
+        "rawSHA256": "117d5e447463964a07bd6d871b785c79458b58095e8cb83815ac207a872381e4"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r32-dt1e-07-t3",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t3.json.gz",
+        "sha256": "cbf86c4b0136993b186260e72f8afe439b6e351edf41fbb9f44d2f9fbb84a960",
+        "rawSHA256": "f4f4cae9e6023ae307fb42024fbb1fbb92b9f72fa92fbcb2c882e3b3e2faabd7"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r64-dt1e-07-t0",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t0.json.gz",
+        "sha256": "17692257ed0e426dbc489341fb33e010962110f463cef23b0af70dff8f3a69ed",
+        "rawSHA256": "65b7864a12db399ffc492071f56783be4dcf4e6dd3fdc900af0a04efe631b0e3"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r64-dt1e-07-t1",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t1.json.gz",
+        "sha256": "9e165c49280065bd4f1d0ba2cafa34cded7c2a7d2046a721842236b7b6485f03",
+        "rawSHA256": "15d71d46dc987270414253c601838fba259d45e23abb26399af1b8b1a98ac1cc"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r64-dt1e-07-t2",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t2.json.gz",
+        "sha256": "a85da03dddd442d87287b151a33ba4e50a6447bf4f89b4b1b8594f954467142b",
+        "rawSHA256": "7624b7002b4044dd8d380ef6bd44f99cdefee493eb21c7734d16149c7969c160"
+      }
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r64-dt1e-07-t3",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t3.json.gz",
+        "sha256": "9437d05434318fb0aa81b69c27acec62164bf4d884c8236a5c01296cc8032f7b",
+        "rawSHA256": "13a09e9d5dc4ca9bc528dd67e5a9b4cd8264680ee0b67c54fc4c7b0c226568b0"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r32-dt1e-07-t0",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t0.json.gz",
+        "sha256": "64ed6dd28cbbcd6a1d05f9363730ab4b65f900ed424d1770dc6b955af922d83c",
+        "rawSHA256": "ad6cbf902f68abed78079a4f46113178efad0e5274289a110faf929a8962079b"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r32-dt1e-07-t1",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t1.json.gz",
+        "sha256": "c2b7f3f4f58e0058956bf54f3cfd4ba1ab08497df7a761c364e7e042bc3dec93",
+        "rawSHA256": "a9e18abe29de5f41c629644bc5416f355126fa6ea0cb5b3d0a53e1fb8d3a53a3"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r32-dt1e-07-t2",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t2.json.gz",
+        "sha256": "4e23b6806d58a1b441664cf1e8eb44f23c973ca3d3e38d3492fa1b0c7cf42aaf",
+        "rawSHA256": "9cbcace46c63b596b85250b6e32374989f67039abb2506e81efc9a8d2fa5db38"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r32-dt1e-07-t3",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t3.json.gz",
+        "sha256": "3d299c7f1037103511af91c8734684249232eb9a0d991102adc611618cbabd5d",
+        "rawSHA256": "ee16325e2e23c9356ea105d44d9850e5b2700b4eb4e2e2d284fed9b5c8aae286"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r64-dt1e-07-t0",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t0.json.gz",
+        "sha256": "9511dc08eb176d4f2f2b606983dffa77b35aac3839c144f5a2478cc5ab89a8d9",
+        "rawSHA256": "070e622e0b3ba8a63c0f13b8c4d9adf28150aca30580ced03502196e8f49f7aa"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r64-dt1e-07-t1",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t1.json.gz",
+        "sha256": "09ee77ac1cf017266a647310da24b0739fb847a76ca84b5eaa68d8fed4db1762",
+        "rawSHA256": "c30500eac3ed7fced82d2714386e0584a66575e280219aa4d792d386454d0ab9"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r64-dt1e-07-t2",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t2.json.gz",
+        "sha256": "628f5d0d12b0286139874c973ace1278b8fad84aec0f3b8387d92f962416afd4",
+        "rawSHA256": "05b89903b1dc2614980c3a786a0f0809d5c2356d0913e74f78a10aec7423c3ce"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r64-dt1e-07-t3",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t3.json.gz",
+        "sha256": "8976f2e0da81fb0483b964d30e3acfa181d05f863a08a7073c60c7689a511c84",
+        "rawSHA256": "e822915b74a704fb9059a9743c104e25fae3fcddc604b2efdfa6c229d23c2802"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r32-dt1e-07-t0",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t0.json.gz",
+        "sha256": "d264bed9811e327ca0ecadc35d518f23186555bc58733fa2905afe102fda6ac8",
+        "rawSHA256": "65f2767ca12ed0454e634eb0d1456c15259ff694779c4823c777d32b2db8e633"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r32-dt1e-07-t1",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t1.json.gz",
+        "sha256": "ed7fa4b99af2b33ab83c182db6b88700211d60ef49d7392e8ff2d710c0e735c3",
+        "rawSHA256": "cfa35262c4a2268c15a6bcfc5632de87bfa2a48449d4758cc55e75a7e582f9de"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r32-dt1e-07-t2",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t2.json.gz",
+        "sha256": "167d5503eede6d76c102c06fc11769d0fa4e45caed96e60e5ec6c2ba2ad86e5d",
+        "rawSHA256": "dcbbed872f92f52b3b9600244cb5cb521fb384f346ee5ac3e2be06a0f951735f"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r32-dt1e-07-t3",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t3.json.gz",
+        "sha256": "d4fa3ef466961dfc9301313d15aabbfc51388e75c9a603bf130cae1afbe9f867",
+        "rawSHA256": "68cbb83cd1ee86d2e89f67d9c3f377ad99753dc311957991411456bdc710a807"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r64-dt1e-07-t0",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t0.json.gz",
+        "sha256": "11c08f8e9a35843f1dfce75f6d5a0b7276f6caf74614ea66ce0812bc6e1f5910",
+        "rawSHA256": "69fea146ce5fe6258e0ce753f8499580347d6dc64700fd4244085dc9b4d3aadd"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r64-dt1e-07-t1",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t1.json.gz",
+        "sha256": "2f39cce7bb7c85f896a5029ef36b4d7abcfdea0d5a1b78b3c198e7ce664d5c3b",
+        "rawSHA256": "971a9657183bbeb8cb97ae6ce0ec3f4deb84d2921c7aaa32c384d0f7197c89a5"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r64-dt1e-07-t2",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t2.json.gz",
+        "sha256": "f599a5900c957b93958437199da19d210c3ff5e12385090f003a2485b3344b88",
+        "rawSHA256": "542b52c46e53979e9f710b61aa8cfbd3663dab60ed73e5aa5b1cca8d49f5712b"
+      }
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r64-dt1e-07-t3",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t3.json.gz",
+        "sha256": "ff11e035527438a601d29bf0c2e3f57eede84a4a7219190a0e61faf5bf9bb226",
+        "rawSHA256": "27052f6a9bdcdeef4256f4477d35d96e0a053cbf6902e787bd8698af5b99752b"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t0",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t0.json.gz",
+        "sha256": "e744b5b275d0f8fb168fe223cfd86dad36bd6a7c92e8606850cf56215cef90f3",
+        "rawSHA256": "e7a06347bd87af05ddcaf72fc136f6862aba8f1af9712440c22a15ef5f49b76e"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t1",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t1.json.gz",
+        "sha256": "0689793a24186a2c2060daf3fa8e194357968c3b188383d9e9a029e7f729e584",
+        "rawSHA256": "61546decc9c75177e4ff1fb28fa11a34e2941de64afc2824e99b4c7550bc71ff"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t2",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t2.json.gz",
+        "sha256": "0c6a7c61e0f30015ab21ddff0377dd6c57057204caf8fcc39cdfe89c1da5c086",
+        "rawSHA256": "50d028b5b73da1f6f45bdc9ae9fd5f85cf79de2ceb57864739fa7f95d6910aba"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t3",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t3.json.gz",
+        "sha256": "5a3b1c7fea2c7d4dacba88dc8142f441f389c4e11997a1de4716d4205cdac486",
+        "rawSHA256": "12ef7492a3937309777958496b92bdf81f73173548358a99558b0faba4e7f806"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t0",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t0.json.gz",
+        "sha256": "a1086efc1d0a6bbdbf432d7f3f3de3d08d86546e38718d4faf3dc3e4f371488b",
+        "rawSHA256": "6a78ee960c5244ce425ff05d9ff791b01f3bbf92481aa24ee5850f655ca02c6b"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t1",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t1.json.gz",
+        "sha256": "6bcd52700167a14e5bd4ec82684a9ce8620cf4197dd7f4833737e190f917c754",
+        "rawSHA256": "d43fe34376d0c21e7eade373db855f09e2b61e44093e761fdc9f4299b5042dfb"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t2",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t2.json.gz",
+        "sha256": "5e2fdb978cb99b221e5f5ac7a4687ca913826ae6719de653fb88d5ec73dc1538",
+        "rawSHA256": "0b5d1869fde4774574e264d1a6e990f4c9ed47881a2d0441181b5c6cfea6a51e"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t3",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t3.json.gz",
+        "sha256": "adc4e09da1fddc1679e7f12b71a6ae6506cd1df0d278219b2c3da47d923c6903",
+        "rawSHA256": "5e6a42f85bba49f62ece125bf86018f8ca112950d9ba08503432dad21735a80a"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t0",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t0.json.gz",
+        "sha256": "74095863bd0c565aead48f7daa4ca55083134b98628c4909214b5370e57352ce",
+        "rawSHA256": "41739be41f147bd5ce4903b440b489daabb08f029429fa684e2b7c5d5295f844"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t1",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t1.json.gz",
+        "sha256": "a5428bc3be01aba5e21b6b1271a5fac39315ad1770744231815ec549f4415a2f",
+        "rawSHA256": "3a56ceaee4c068cd22689aec619a1fe56acd0bf5f2e6a2d43f6eb925c2b1fbe7"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t2",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t2.json.gz",
+        "sha256": "c6f38e63dddc3cad393554281c1ed038de7ee05b5934a4c324cd0cce92ad75f0",
+        "rawSHA256": "178147e578b69442ffbd0bd4dee5d5e40c6cf42232b9905b8c157a1846288ad8"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t3",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t3.json.gz",
+        "sha256": "017cad6f7b4543d6720e6aba4b44c0f65bdf3a56966cd1d99ffd9bb4cc60036d",
+        "rawSHA256": "21073fa93d58045b9692a080d139911d0e87433ce4379c16f71e57b56678243a"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t0",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 0.0,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t0.json.gz",
+        "sha256": "b9b499b8430c4ab6f60e7af1bfd47f918acf179445bb88419c5beb03aaa5ef2d",
+        "rawSHA256": "aae613cb95ac36abe5ed94521393a4267c93930401de7d4883618bc2bf178456"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t1",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 1e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t1.json.gz",
+        "sha256": "572a7920a8d4c6bcf9bc5508c9902d80184c1daad8e30abbcfcba9e55ad7521f",
+        "rawSHA256": "0e3565ae7108d4d1703160ef283d1ab2142c61941162e759d1a6b84d469ef426"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t2",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 2e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t2.json.gz",
+        "sha256": "b80ab873728ddae22acd4be5e158a0059ac3ee71b2438d51e384cf1e05ba02b7",
+        "rawSHA256": "65af806558de0f14f0898afa4ee0437d499bc50dcb959b6d7430aef9b095be23"
+      }
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t3",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "timeS": 4e-06,
+      "completed": true,
+      "packet": {
+        "path": "optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t3.json.gz",
+        "sha256": "c44ede3ba227e97d33e51a50f00a5a838a83170e88d8a4e5d6833b5fe52517b2",
+        "rawSHA256": "e148ef3c1271c3a612f8fa8e2660378b975acf92ea7c3c537cc9a7a0aed3db12"
+      }
+    }
+  ]
+}

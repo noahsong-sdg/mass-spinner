@@ -1,0 +1,51 @@
+{
+  "predictionSHA256": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+  "opticalIndexSHA256": "b8508d27ad99ae26cca91785325ea98dcad767c92dd48ba825a9b775f33b2303",
+  "targetFileSHA256": "1e4f542dab2cdd777673f724ec3038e0223589797fa290765c0e1c8f047b4741",
+  "experimentalQualification": false,
+  "steadyComparison": false,
+  "previouslyViewedDevelopmentData": true,
+  "currentFitted": false,
+  "velocityFitted": false,
+  "scoredTimeSelected": false,
+  "alternatives": 2304,
+  "expectedOpticalGroups": 64,
+  "expectedAlternativesPerTime": 576,
+  "comparisonComplete": true,
+  "failedOpticalGroups": [],
+  "timeSummaries": [
+    {
+      "timeS": 0.0,
+      "alternatives": 576,
+      "expectedAlternatives": 576,
+      "unavailableAlternatives": 0,
+      "allPointMatches": 0,
+      "numericalOpticalFailures": 0
+    },
+    {
+      "timeS": 1e-06,
+      "alternatives": 576,
+      "expectedAlternatives": 576,
+      "unavailableAlternatives": 0,
+      "allPointMatches": 0,
+      "numericalOpticalFailures": 0
+    },
+    {
+      "timeS": 2e-06,
+      "alternatives": 576,
+      "expectedAlternatives": 576,
+      "unavailableAlternatives": 0,
+      "allPointMatches": 0,
+      "numericalOpticalFailures": 0
+    },
+    {
+      "timeS": 4e-06,
+      "alternatives": 576,
+      "expectedAlternatives": 576,
+      "unavailableAlternatives": 0,
+      "allPointMatches": 0,
+      "numericalOpticalFailures": 0
+    }
+  ],
+  "comparisonSHA256": "ca9d4e1e067e4387869e1752ad074877165d66657fae8f6889580d2b5c31ef98"
+}

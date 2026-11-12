@@ -1,0 +1,53 @@
+START linear-finite-te1-a0.07-r16-dt1e-07
+END linear-finite-te1-a0.07-r16-dt1e-07 555374.4614557414 1.17
+START linear-finite-te1-a0.07-r32-dt1e-07
+END linear-finite-te1-a0.07-r32-dt1e-07 610891.8193520637 8.88
+START linear-finite-te1-a0.07-r64-dt1e-07
+END linear-finite-te1-a0.07-r64-dt1e-07 594187.7283786391 102.9
+START linear-finite-te1-a0.08-r16-dt1e-07
+END linear-finite-te1-a0.08-r16-dt1e-07 555379.0314975398 1.18
+START linear-finite-te1-a0.08-r32-dt1e-07
+END linear-finite-te1-a0.08-r32-dt1e-07 610892.002217249 8.81
+START linear-finite-te1-a0.08-r64-dt1e-07
+END linear-finite-te1-a0.08-r64-dt1e-07 594187.7322098468 100.75
+START linear-finite-te2.5-source-a0.07-r16-dt1e-07
+END linear-finite-te2.5-source-a0.07-r16-dt1e-07 188340.94163333988 0.71
+START linear-finite-te2.5-source-a0.07-r32-dt1e-07
+END linear-finite-te2.5-source-a0.07-r32-dt1e-07 202318.9633419949 5.09
+START linear-finite-te2.5-source-a0.07-r64-dt1e-07
+END linear-finite-te2.5-source-a0.07-r64-dt1e-07 201348.40935313224 58.26
+START linear-finite-te2.5-source-a0.08-r16-dt1e-07
+END linear-finite-te2.5-source-a0.08-r16-dt1e-07 188341.3474400296 0.71
+START linear-finite-te2.5-source-a0.08-r32-dt1e-07
+END linear-finite-te2.5-source-a0.08-r32-dt1e-07 202318.97476983254 5.0
+START linear-finite-te2.5-source-a0.08-r64-dt1e-07
+END linear-finite-te2.5-source-a0.08-r64-dt1e-07 201348.3055713529 58.4
+START quadratic-finite-te1-a0.07-r16-dt1e-07
+END quadratic-finite-te1-a0.07-r16-dt1e-07 661903.5472869773 1.29
+START quadratic-finite-te1-a0.07-r32-dt1e-07
+END quadratic-finite-te1-a0.07-r32-dt1e-07 667784.0423884342 9.11
+START quadratic-finite-te1-a0.07-r64-dt1e-07
+END quadratic-finite-te1-a0.07-r64-dt1e-07 665033.8069865449 109.03
+START quadratic-finite-te1-a0.08-r16-dt1e-07
+END quadratic-finite-te1-a0.08-r16-dt1e-07 661906.7628906128 1.33
+START quadratic-finite-te1-a0.08-r32-dt1e-07
+END quadratic-finite-te1-a0.08-r32-dt1e-07 667784.212940347 9.44
+START quadratic-finite-te1-a0.08-r64-dt1e-07
+END quadratic-finite-te1-a0.08-r64-dt1e-07 665033.8869201858 112.52
+START quadratic-finite-te2.5-source-a0.07-r16-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r16-dt1e-07 215349.23689296024 0.84
+START quadratic-finite-te2.5-source-a0.07-r32-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r32-dt1e-07 219416.77757643443 5.69
+START quadratic-finite-te2.5-source-a0.07-r64-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r64-dt1e-07 219136.2228499631 65.98
+START quadratic-finite-te2.5-source-a0.08-r16-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r16-dt1e-07 215349.50763088907 0.84
+START quadratic-finite-te2.5-source-a0.08-r32-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r32-dt1e-07 219416.73002711215 5.65
+START quadratic-finite-te2.5-source-a0.08-r64-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r64-dt1e-07 219136.15751176528 67.28
+START linear-finite-te1-a0.07-r64-dt5e-08
+END linear-finite-te1-a0.07-r64-dt5e-08 594187.7283786391 111.37
+START linear-finite-te1-a0.07-r64-dt2.5e-08
+END linear-finite-te1-a0.07-r64-dt2.5e-08 594206.3750458943 118.3
+SEALED 70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7

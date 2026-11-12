@@ -1,0 +1,119 @@
+{
+  "manifest": {
+    "schemaVersion": 1,
+    "sourceDOI": "10.1515/zna-1979-0602",
+    "condition": "diffuse argon, Fig. 9 neutral rotation",
+    "radiusM": 0.06,
+    "halfLengthM": 0.24,
+    "cathodeRadiusM": 0.004,
+    "anodeCenterM": 0.07,
+    "anodeWidthM": 0.02,
+    "magneticT": 0.13,
+    "branchCurrentA": 100,
+    "bulkVoltageV": 18.5,
+    "bulkVoltageCasesV": [
+      16.5,
+      18.5,
+      20.5
+    ],
+    "viscosityPaS": 0.000114,
+    "effectiveBetaCases": [
+      3,
+      9
+    ],
+    "sigmaBracketSM": [
+      1,
+      100000
+    ],
+    "refinements": [
+      1,
+      2,
+      4
+    ],
+    "chordsM": [
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055
+    ],
+    "measuredProfileAdmitted": false,
+    "qualification": false
+  },
+  "scenarios": [
+    {
+      "name": "linear-finite-te1",
+      "shape": "linear",
+      "electronTemperatureEV": 1.0,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "linear-finite-te2.5-source",
+      "shape": "linear",
+      "electronTemperatureEV": 2.5,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "quadratic-finite-te1",
+      "shape": "quadratic",
+      "electronTemperatureEV": 1.0,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "quadratic-finite-te2.5-source",
+      "shape": "quadratic",
+      "electronTemperatureEV": 2.5,
+      "partition": "source",
+      "leadingWeakIonization": false
+    }
+  ],
+  "baselinePredictionSHA256": "f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74",
+  "sourceSHA256": {
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "622f62c14a725c12275eea6b6ffebe234c8e47d409ea1cd01fe63ece41ce0f29",
+    "scientific/meridional-v86/run86.py": "93310992b7c46e60935241ee5680d8d66f4fd81d3ffa5571052a9d1d9bcbeda0",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "6b0bc24e70c52b2d28d825ffdf7c76433c2587fe3706b18cb01041ef5ef36fd9",
+    "scientific/meridional-v86/PROTOCOL.md": "5331fc9c430efaccd7ee4eb1b0f43779bc9cbd7e6253f18e273be51ab976d01a",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072",
+    "scientific/flow-v81/transport.py": "98970f9aedb65de9d4738b35ba39ea0dcdd678324cc92441e96cda624ce18405",
+    "scientific/flow-v81/argon-viscosity-source.json": "583b67d3ece2c7f29d164bde80c4b3d7510b30b584ca947e1edb76652b10e00f"
+  },
+  "targetVelocityRead": false,
+  "currentFitted": false,
+  "velocityFitted": false,
+  "conditionalRelease": true,
+  "experimentalQualification": false,
+  "cases": [
+    {
+      "label": "linear-finite-te1-a0.07-r16-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r16-dt1e-07.json.gz",
+        "sha256": "5b1549f21181f47339bca3a19774dc1a75f8299718e98f5985d3bcf5ed9bc079",
+        "rawSHA256": "2917f54495bc8371529be6c7490dc85afe3769a61b97737fd374da1eb20c755a"
+      },
+      "maximumTemperatureK": 555374.4614557414,
+      "stepCount": 152
+    }
+  ]
+}

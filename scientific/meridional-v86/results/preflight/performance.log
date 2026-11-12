@@ -1,0 +1,13 @@
+{
+  "componentCount": 2992,
+  "binCount": 9600,
+  "kernelSeconds": 0.19139887499999997,
+  "centroidMS": 348.97240350947334,
+  "modeMS": 343.77409933995165,
+  "targetVelocityRead": false,
+  "predictionSHA256": "b211cfaffeacdea7207f210f7874f6aedd34d3d38c804cd18554b2bb679ae06e",
+  "sourceSHA256": {
+    "scientific/meridional-v86-independent/performance86.py": "1e761358e5252bf029adb2e29d1b5f2dea61ce0d4bf695b972a4a998c2f2ab31",
+    "scientific/meridional-v86/optical86.py": "622f62c14a725c12275eea6b6ffebe234c8e47d409ea1cd01fe63ece41ce0f29"
+  }
+}

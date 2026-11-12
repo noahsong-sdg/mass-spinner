@@ -1,0 +1,526 @@
+{
+  "manifest": {
+    "schemaVersion": 1,
+    "sourceDOI": "10.1515/zna-1979-0602",
+    "condition": "diffuse argon, Fig. 9 neutral rotation",
+    "radiusM": 0.06,
+    "halfLengthM": 0.24,
+    "cathodeRadiusM": 0.004,
+    "anodeCenterM": 0.07,
+    "anodeWidthM": 0.02,
+    "magneticT": 0.13,
+    "branchCurrentA": 100,
+    "bulkVoltageV": 18.5,
+    "bulkVoltageCasesV": [
+      16.5,
+      18.5,
+      20.5
+    ],
+    "viscosityPaS": 0.000114,
+    "effectiveBetaCases": [
+      3,
+      9
+    ],
+    "sigmaBracketSM": [
+      1,
+      100000
+    ],
+    "refinements": [
+      1,
+      2,
+      4
+    ],
+    "chordsM": [
+      0.005,
+      0.01,
+      0.015,
+      0.02,
+      0.025,
+      0.03,
+      0.035,
+      0.04,
+      0.045,
+      0.05,
+      0.055
+    ],
+    "measuredProfileAdmitted": false,
+    "qualification": false
+  },
+  "scenarios": [
+    {
+      "name": "linear-finite-te1",
+      "shape": "linear",
+      "electronTemperatureEV": 1.0,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "linear-finite-te2.5-source",
+      "shape": "linear",
+      "electronTemperatureEV": 2.5,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "quadratic-finite-te1",
+      "shape": "quadratic",
+      "electronTemperatureEV": 1.0,
+      "partition": "source",
+      "leadingWeakIonization": false
+    },
+    {
+      "name": "quadratic-finite-te2.5-source",
+      "shape": "quadratic",
+      "electronTemperatureEV": 2.5,
+      "partition": "source",
+      "leadingWeakIonization": false
+    }
+  ],
+  "baselinePredictionSHA256": "f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74",
+  "sourceSHA256": {
+    "scientific/meridional-v86/audit86.py": "448157c40bcc9c1113c43da9112291aad7fcf23ccc75d7e96dc77d137cad3936",
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/compare86.py": "cda4a4228b2eefd138096022a9a71f7c29f4c89fda77a45ad2c53ff6ddd86665",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "547c3ee72eab266403ed9678b42ec40fdd88be67f21f466051d81d3862168d79",
+    "scientific/meridional-v86/run86.py": "1cbf751b27eee9ce604402ebc335a34f3b3c87007ab623ec82024410e3e810f2",
+    "scientific/meridional-v86/summarize86.py": "6eab887f8a964fe7921b34a8d141ac31f4d3bfba88b0b45277a7db07009cbf6d",
+    "scientific/meridional-v86/test_audit86.py": "c38a1688dfc6eb8db12cbaba0462412b7171a671189b60622667ea4cd716ad48",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_compare86.py": "7ef21d7fdd9bf95dc1883bc47f703223db5b45f73f7c4ca72344cb38ebcaf0ee",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "bebf9d7576a5f7a7655fe2a7d6d2a952fba58ec1ae3f2411f40a500c97769088",
+    "scientific/meridional-v86/test_thermal_reference86.py": "2031c2c97b3dd62580216bfc25491aff2ff76bfdb84b78f3c4c65b438c5ac09a",
+    "scientific/meridional-v86/thermal_reference86.py": "943a38a16ee12002542c3cdc454f1000535fd4328895ea3298e65dc154416a6b",
+    "scientific/meridional-v86/PROTOCOL.md": "0ad33398cd741ea232a61625c1cc24905d9c3031a1a4fcf6c1bc08e194d5bcde",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072",
+    "scientific/flow-v81/transport.py": "98970f9aedb65de9d4738b35ba39ea0dcdd678324cc92441e96cda624ce18405",
+    "scientific/flow-v81/argon-viscosity-source.json": "583b67d3ece2c7f29d164bde80c4b3d7510b30b584ca947e1edb76652b10e00f"
+  },
+  "targetVelocityRead": false,
+  "currentFitted": false,
+  "velocityFitted": false,
+  "conditionalRelease": true,
+  "experimentalQualification": false,
+  "cases": [
+    {
+      "label": "linear-finite-te1-a0.07-r16-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r16-dt1e-07.json.gz",
+        "sha256": "5b1549f21181f47339bca3a19774dc1a75f8299718e98f5985d3bcf5ed9bc079",
+        "rawSHA256": "2917f54495bc8371529be6c7490dc85afe3769a61b97737fd374da1eb20c755a"
+      },
+      "maximumTemperatureK": 555374.4614557414,
+      "stepCount": 152
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r32-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r32-dt1e-07.json.gz",
+        "sha256": "81d8568401be7667bce3c5ce2078094be15192fde4235cf2fe848ca958724fd3",
+        "rawSHA256": "00dfe46254d1418c22a237ac95a277fd853dca7adfce2d44b4a283cd65451f93"
+      },
+      "maximumTemperatureK": 610891.8193520637,
+      "stepCount": 326
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r64-dt1e-07.json.gz",
+        "sha256": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+        "rawSHA256": "2f4b7ef9994029fe6469b853caaa47d5c353b26a06d42bf63884bb4f25a13418"
+      },
+      "maximumTemperatureK": 594187.7283786391,
+      "stepCount": 654
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r16-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.08-r16-dt1e-07.json.gz",
+        "sha256": "4ac267d7e60159a4dac7088d3b64396c6665da54d0a33100cf7781fcba17661b",
+        "rawSHA256": "8ebce1739a4e0becea7ff6add339ef118302dc4e3db94443eefa842a49056d94"
+      },
+      "maximumTemperatureK": 555379.0314975398,
+      "stepCount": 152
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r32-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.08-r32-dt1e-07.json.gz",
+        "sha256": "f4ddbd6ad53779c5d0bcf06bd1e3e7a2d82450240cb6407517720f0811d6514e",
+        "rawSHA256": "960adc3a50a651dbfcc1662f651dc7454574e3eed4891acb133cb15f02444780"
+      },
+      "maximumTemperatureK": 610892.002217249,
+      "stepCount": 326
+    },
+    {
+      "label": "linear-finite-te1-a0.08-r64-dt1e-07",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.08-r64-dt1e-07.json.gz",
+        "sha256": "97d3053637a495a974e05c68e16bcc344c2889349f433e4b4fe1345c4e83c680",
+        "rawSHA256": "b58acad4b2bfffd2f75c307cfc7f0ba05ea77668042024efb8ce7d59679c0f50"
+      },
+      "maximumTemperatureK": 594187.7322098468,
+      "stepCount": 654
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r16-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.07-r16-dt1e-07.json.gz",
+        "sha256": "feb9cc6aa54c69d1d8779649cf9da474094df35c249f2b22abe39c286e20425b",
+        "rawSHA256": "6c02d2a37d766a8953477dc209338c99c1290a6f457a9cb42befd259b2c3d93e"
+      },
+      "maximumTemperatureK": 188340.94163333988,
+      "stepCount": 92
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r32-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.07-r32-dt1e-07.json.gz",
+        "sha256": "9bfe89f4d2056a64b2dbbc72b32a0078562e53d64cf34a2861d77c70f32e2996",
+        "rawSHA256": "7e4d6e25a4ad185ee0d1acbd7f15402ad22b4ce155840e89df67d847b135d6e7"
+      },
+      "maximumTemperatureK": 202318.9633419949,
+      "stepCount": 192
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.07-r64-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.07-r64-dt1e-07.json.gz",
+        "sha256": "85084a198387da582ca4d4ab1f6acea6e3ca0c280adcc803625cf07e77101233",
+        "rawSHA256": "81519c51a7434c94a7b0cf1cb580963694315ef62d6127d82c9a9dac264cec24"
+      },
+      "maximumTemperatureK": 201348.40935313224,
+      "stepCount": 382
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r16-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.08-r16-dt1e-07.json.gz",
+        "sha256": "45287170fc0203bb4b2742a9fde6a4c2a012d5d22c2531ef1cc6a69651b70afb",
+        "rawSHA256": "1bd2404c96ee651b99fd0846dd3886205292296455aaa4051d026678660e945f"
+      },
+      "maximumTemperatureK": 188341.3474400296,
+      "stepCount": 92
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r32-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.08-r32-dt1e-07.json.gz",
+        "sha256": "a1554ede5c369ea96432b15e60c9195b4d96602a9244c1624bc53d4f3eedeedb",
+        "rawSHA256": "b6dfc0b48a5218103dba3791aae3d9318bdfd1970fcebd114f91d5a793fe0e63"
+      },
+      "maximumTemperatureK": 202318.97476983254,
+      "stepCount": 192
+    },
+    {
+      "label": "linear-finite-te2.5-source-a0.08-r64-dt1e-07",
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te2.5-source-a0.08-r64-dt1e-07.json.gz",
+        "sha256": "144076686601dd8686d403e7b543efbdc3cc0c7539f7e5a0af72634134698781",
+        "rawSHA256": "9a6a50246d5656effc464e0c717e3d98dc9780a131257f046ab3628cf4733bab"
+      },
+      "maximumTemperatureK": 201348.3055713529,
+      "stepCount": 382
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r16-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.07-r16-dt1e-07.json.gz",
+        "sha256": "fb5b58e1fedae480f5d81ea3daa28810852d596f7224a35512eb324cfc1df04b",
+        "rawSHA256": "13774fd6a3aef5d01eb91758b0ed66c170d834cd5c599ca32dd7ae37301b5957"
+      },
+      "maximumTemperatureK": 661903.5472869773,
+      "stepCount": 175
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r32-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.07-r32-dt1e-07.json.gz",
+        "sha256": "1db3c804f057138f69758edaed2c80384dc17d094abab18928ac2a4aab84f82d",
+        "rawSHA256": "d183425b553bb0ac211fd78cc35e38be142cf3d0c8d1f43b41f5673a0f5800b3"
+      },
+      "maximumTemperatureK": 667784.0423884342,
+      "stepCount": 357
+    },
+    {
+      "label": "quadratic-finite-te1-a0.07-r64-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.07-r64-dt1e-07.json.gz",
+        "sha256": "538344e2a9a63b9fc359fada9ac52d90e935bdf81f70202c847409d0a3f31525",
+        "rawSHA256": "f65a3b9c06fbcb06855572ffe0de602269ce8d041be6382e1b2813707657bbca"
+      },
+      "maximumTemperatureK": 665033.8069865449,
+      "stepCount": 714
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r16-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.08-r16-dt1e-07.json.gz",
+        "sha256": "895c43e0eb7837a87a7579cdad2c5812933b200b3ed1253eb87571aac006e314",
+        "rawSHA256": "4b9346006d0f18401b1781237e53753a27ad18ba5153c3e4da3e1f4015908ba1"
+      },
+      "maximumTemperatureK": 661906.7628906128,
+      "stepCount": 175
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r32-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.08-r32-dt1e-07.json.gz",
+        "sha256": "0e625caeb05136e36f899bc57d5ee207d51cbf5ccbeadea36d3f1a3222a8e409",
+        "rawSHA256": "650bf4d95881ca50b273c426fc996fd35a90b37b3f85bc51e0f8c1435347ef0b"
+      },
+      "maximumTemperatureK": 667784.212940347,
+      "stepCount": 357
+    },
+    {
+      "label": "quadratic-finite-te1-a0.08-r64-dt1e-07",
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te1-a0.08-r64-dt1e-07.json.gz",
+        "sha256": "6d230143b60d10df0734798c8a4803314e2b2b5d0286a72ff8d56ca89dafa068",
+        "rawSHA256": "786110b2a2e5b3b2b744caa439193754ed1a61f81926a8eb58972dce8962ba8c"
+      },
+      "maximumTemperatureK": 665033.8869201858,
+      "stepCount": 714
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r16-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.07-r16-dt1e-07.json.gz",
+        "sha256": "97d31a1b2a3fe4971835950568f788f4e55ec41ded5ac37822c1d090b18095c2",
+        "rawSHA256": "76308e8775e3c387afcfd343d611da7cec275ae64fdb34eb80396112b7c31037"
+      },
+      "maximumTemperatureK": 215349.23689296024,
+      "stepCount": 103
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r32-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07.json.gz",
+        "sha256": "3723adeeadba103fb938f39f2db100551ce1251d625c41ab1b40b7f807bf3c1d",
+        "rawSHA256": "cc33947c7f3737d5d0cc21e81725dacedb371d0894a67ff1cedf57ed092cf247"
+      },
+      "maximumTemperatureK": 219416.77757643443,
+      "stepCount": 206
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.07-r64-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07.json.gz",
+        "sha256": "e1a7d95b63d70b6e7ecb61d2e3527de9bc89f8050b6526b60af1a14719982377",
+        "rawSHA256": "ed33f3e3385f15ba9f98cc73597e66e5d491512783b78a4a1eca362b3c5a014c"
+      },
+      "maximumTemperatureK": 219136.2228499631,
+      "stepCount": 409
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r16-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 16,
+      "nz": 24,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.08-r16-dt1e-07.json.gz",
+        "sha256": "4e6060cc31cf7389efaa306e0fda99aca18ff5f4a3865119831a7dbcc27b6e3b",
+        "rawSHA256": "b082702ec021472a84b6fe53d29114b10712704f17dfce5a7d2eed147f5676cf"
+      },
+      "maximumTemperatureK": 215349.50763088907,
+      "stepCount": 103
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r32-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 32,
+      "nz": 48,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07.json.gz",
+        "sha256": "66ca76f6bdea805dc503bb3966625b8fbae528e3a2bee0829a2b3a8a4a8a68b3",
+        "rawSHA256": "7305f0dd45576e014ddc7c9deb4324c76416feeb93de5b2f2f05574c7ecc53c2"
+      },
+      "maximumTemperatureK": 219416.73002711215,
+      "stepCount": 206
+    },
+    {
+      "label": "quadratic-finite-te2.5-source-a0.08-r64-dt1e-07",
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 1e-07,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07.json.gz",
+        "sha256": "aab3cbf154c1d6a06e07c2920fb6797b89a7b1e89bc0c8b6f24299272501e365",
+        "rawSHA256": "e8257aea185a46b00fa908021fd0ab48716c62bcadc40f3bd59bc75535bf8467"
+      },
+      "maximumTemperatureK": 219136.15751176528,
+      "stepCount": 409
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt5e-08",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 5e-08,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r64-dt5e-08.json.gz",
+        "sha256": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+        "rawSHA256": "2f4b7ef9994029fe6469b853caaa47d5c353b26a06d42bf63884bb4f25a13418"
+      },
+      "maximumTemperatureK": 594187.7283786391,
+      "stepCount": 654
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-dt2.5e-08",
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "nr": 64,
+      "nz": 96,
+      "maxDtS": 2.5e-08,
+      "completed": true,
+      "fieldPacket": {
+        "path": "fields/linear-finite-te1-a0.07-r64-dt2.5e-08.json.gz",
+        "sha256": "bc4fa9b2ff79d4ba96c267a4806e3620f925b0f4a7adc64f4ae53836543d9ad4",
+        "rawSHA256": "a9d28d0113c5ceb817aefcdcf11a60a3b3a7f50504d78d3e0771eb35ffcae279"
+      },
+      "maximumTemperatureK": 594206.3750458943,
+      "stepCount": 655
+    }
+  ]
+}

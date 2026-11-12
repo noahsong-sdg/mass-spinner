@@ -1,0 +1,29 @@
+test_bimodal_near_tie_uses_exact_cdf_maximum (test_fourier86.FourierSpectrumControls.test_bimodal_near_tie_uses_exact_cdf_maximum) ... ok
+test_constant_gaussian_and_all_original_bin_refinements (test_fourier86.FourierSpectrumControls.test_constant_gaussian_and_all_original_bin_refinements) ... ok
+test_duplicate_components_match_grouped_blocked_v86_reference (test_fourier86.FourierSpectrumControls.test_duplicate_components_match_grouped_blocked_v86_reference) ... ok
+test_linear_radial_temperature_proxy_and_large_radial_motion (test_fourier86.FourierSpectrumControls.test_linear_radial_temperature_proxy_and_large_radial_motion) ... ok
+test_linewidth_domain_and_window_clipping (test_fourier86.FourierSpectrumControls.test_linewidth_domain_and_window_clipping) ... ok
+test_period_image_bound_uses_actual_weighted_tails (test_fourier86.FourierSpectrumControls.test_period_image_bound_uses_actual_weighted_tails) ... ok
+test_variable_temperature_and_instrument_mixtures (test_fourier86.FourierSpectrumControls.test_variable_temperature_and_instrument_mixtures) ... ok
+test_zero_mean_and_radial_sign_symmetry (test_fourier86.FourierSpectrumControls.test_zero_mean_and_radial_sign_symmetry) ... ok
+test_zero_weight_components_and_invalid_inputs (test_fourier86.FourierSpectrumControls.test_zero_weight_components_and_invalid_inputs) ... ok
+test_corrupt_field_or_raw_seal_rejected (test_panel86.PanelTests.test_corrupt_field_or_raw_seal_rejected) ... ok
+test_exact_bilinear_squared_times_cylindrical_weight (test_panel86.PanelTests.test_exact_bilinear_squared_times_cylindrical_weight) ... ok
+test_exact_zeros_and_tiny_flow_have_no_normalization_floor (test_panel86.PanelTests.test_exact_zeros_and_tiny_flow_have_no_normalization_floor) ... ok
+test_inactive_timestep_pair_cannot_manufacture_contraction (test_panel86.PanelTests.test_inactive_timestep_pair_cannot_manufacture_contraction) ... ok
+test_invalid_panels_or_nonfinite_field_rejected (test_panel86.PanelTests.test_invalid_panels_or_nonfinite_field_rejected) ... ok
+test_nonuniform_panels_integrate_actual_volume (test_panel86.PanelTests.test_nonuniform_panels_integrate_actual_volume) ... ok
+test_piecewise_bilinear_fields_have_roundoff_only_panel_order_change (test_panel86.PanelTests.test_piecewise_bilinear_fields_have_roundoff_only_panel_order_change) ... ok
+test_supplement_never_overrides_original_failed_qualification (test_panel86.PanelTests.test_supplement_never_overrides_original_failed_qualification) ... ok
+test_archived_mapping_rejects_parent_traversal (test_validate_fourier86.WitnessGates.test_archived_mapping_rejects_parent_traversal) ... ok
+test_archived_producer_is_explicit_and_external_sources_remain_live (test_validate_fourier86.WitnessGates.test_archived_producer_is_explicit_and_external_sources_remain_live) ... ok
+test_equivalent_spectra_pass (test_validate_fourier86.WitnessGates.test_equivalent_spectra_pass) ... ok
+test_failed_mode_cannot_hide_behind_matching_moments (test_validate_fourier86.WitnessGates.test_failed_mode_cannot_hide_behind_matching_moments) ... ok
+test_missing_archive_never_falls_back_to_matching_current_source (test_validate_fourier86.WitnessGates.test_missing_archive_never_falls_back_to_matching_current_source) ... ok
+test_nonfinite_and_renormalized_results_fail (test_validate_fourier86.WitnessGates.test_nonfinite_and_renormalized_results_fail) ... ok
+test_spectral_and_flux_failures_are_separate (test_validate_fourier86.WitnessGates.test_spectral_and_flux_failures_are_separate) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.649s
+
+OK

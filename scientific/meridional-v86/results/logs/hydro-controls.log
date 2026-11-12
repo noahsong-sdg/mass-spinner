@@ -1,0 +1,17 @@
+test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source (test_flow.FlowTests.test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source) ... ok
+test_closed_nonuniform_flow_conserves_all_inventories (test_flow.FlowTests.test_closed_nonuniform_flow_conserves_all_inventories) ... ok
+test_density_and_angular_momentum_actually_transport (test_flow.FlowTests.test_density_and_angular_momentum_actually_transport) ... ok
+test_eos_and_swirl_use_evolving_species_mass (test_flow.FlowTests.test_eos_and_swirl_use_evolving_species_mass) ... ok
+test_invalid_states_rejected_without_clipping (test_flow.FlowTests.test_invalid_states_rejected_without_clipping) ... ok
+test_pressure_gradient_accelerates_towards_low_pressure (test_flow.FlowTests.test_pressure_gradient_accelerates_towards_low_pressure) ... ok
+test_reflecting_faces_have_no_mass_energy_or_species_leak (test_flow.FlowTests.test_reflecting_faces_have_no_mass_energy_or_species_leak) ... ok
+test_rotational_source_is_even_in_spin_and_outward (test_flow.FlowTests.test_rotational_source_is_even_in_spin_and_outward) ... ok
+test_smooth_contact_has_no_first_order_acoustic_mass_diffusion (test_flow.FlowTests.test_smooth_contact_has_no_first_order_acoustic_mass_diffusion) ... ok
+test_uniform_composition_preserved_during_density_pressure_transport (test_flow.FlowTests.test_uniform_composition_preserved_during_density_pressure_transport) ... ok
+test_uniform_gas_stationary (test_flow.FlowTests.test_uniform_gas_stationary) ... ok
+test_zero_mass_flux_rigid_rotation_has_zero_angular_transport (test_flow.FlowTests.test_zero_mass_flux_rigid_rotation_has_zero_angular_transport) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.029s
+
+OK

@@ -1,0 +1,43 @@
+{
+  "sourceSHA256": {
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "622f62c14a725c12275eea6b6ffebe234c8e47d409ea1cd01fe63ece41ce0f29",
+    "scientific/meridional-v86/run86.py": "93310992b7c46e60935241ee5680d8d66f4fd81d3ffa5571052a9d1d9bcbeda0",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "6b0bc24e70c52b2d28d825ffdf7c76433c2587fe3706b18cb01041ef5ef36fd9"
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-fem": "12.0.2",
+    "fipy": "4.0.3"
+  },
+  "commands": [
+    {
+      "name": "controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*86.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "pilot",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "campaign86.py",
+        "pilot"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

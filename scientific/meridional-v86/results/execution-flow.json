@@ -1,0 +1,91 @@
+{
+  "sourceSHA256": {
+    "scientific/meridional-v86/audit86.py": "448157c40bcc9c1113c43da9112291aad7fcf23ccc75d7e96dc77d137cad3936",
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/compare86.py": "ded3d111de1695a4296a3d582337a7d1d268e995861ba22491082e73f0c27ba1",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "547c3ee72eab266403ed9678b42ec40fdd88be67f21f466051d81d3862168d79",
+    "scientific/meridional-v86/run86.py": "1cbf751b27eee9ce604402ebc335a34f3b3c87007ab623ec82024410e3e810f2",
+    "scientific/meridional-v86/summarize86.py": "6eab887f8a964fe7921b34a8d141ac31f4d3bfba88b0b45277a7db07009cbf6d",
+    "scientific/meridional-v86/test_audit86.py": "c38a1688dfc6eb8db12cbaba0462412b7171a671189b60622667ea4cd716ad48",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_compare86.py": "25bb1b3c49e7c46afcea82b47ce630fddaec5b344bd636c4878d38846e1df9ee",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "bebf9d7576a5f7a7655fe2a7d6d2a952fba58ec1ae3f2411f40a500c97769088",
+    "scientific/meridional-v86/test_thermal_reference86.py": "2031c2c97b3dd62580216bfc25491aff2ff76bfdb84b78f3c4c65b438c5ac09a",
+    "scientific/meridional-v86/thermal_reference86.py": "943a38a16ee12002542c3cdc454f1000535fd4328895ea3298e65dc154416a6b",
+    "scientific/meridional-v86-independent/fourier86.py": "f5af090ba58fb549e00c938ef562edd32127a017d05553723346cbaee9253e6d",
+    "scientific/meridional-v86-independent/panel86.py": "ca787e0ff29615aaf0ab0fe7ed4642ce834ef99fa19b8d668eb140213231e353",
+    "scientific/meridional-v86-independent/performance86.py": "1e761358e5252bf029adb2e29d1b5f2dea61ce0d4bf695b972a4a998c2f2ab31",
+    "scientific/meridional-v86-independent/preflight86.py": "0772b743c4db677a18c0f29f4ff232e0d94d1575aa3f37e00d4798dbbcead87c",
+    "scientific/meridional-v86-independent/replay_fields86.py": "ced783bc29390ea490f3608a0bdc260a139864179b91218a34aef6852591d43b",
+    "scientific/meridional-v86-independent/test_fourier86.py": "17b2e35c0597995c18cf70224bd5be89ff24785592040f3c6a3ad8e5cc04d7d9",
+    "scientific/meridional-v86-independent/test_panel86.py": "11e3b58464d5f57b9ea0ba547b2ce03f33d19e7bb131aca8d6e1b59b09cde00b",
+    "scientific/meridional-v86-independent/test_validate_fourier86.py": "982670f635c762ccfaf924f2e9bddfa55041149ebd3dcc2d32dbfdf169b66ee2",
+    "scientific/meridional-v86-independent/torque86.py": "107be1727eab9155dd7ddfd912e7a72b5272a358f568473b1a06de99862f8d63",
+    "scientific/meridional-v86-independent/validate_fourier86.py": "5e32bae29e99a2b1e53e546841c49df6575f95e2ab53a1d5a7238d56a912ee30"
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-fem": "12.0.2",
+    "fipy": "4.0.3"
+  },
+  "commands": [
+    {
+      "name": "controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*86.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "independent-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/scientific/meridional-v86-independent",
+        "-p",
+        "test_*86.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "fourier-validation",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "/work/project/scientific/meridional-v86-independent/validate_fourier86.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "flow",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "campaign86.py",
+        "flow"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "field-replay",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "/work/project/scientific/meridional-v86-independent/replay_fields86.py"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

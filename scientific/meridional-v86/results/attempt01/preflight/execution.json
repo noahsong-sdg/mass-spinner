@@ -1,0 +1,67 @@
+{
+  "sourceSHA256": {
+    "scientific/meridional-v86/audit86.py": "448157c40bcc9c1113c43da9112291aad7fcf23ccc75d7e96dc77d137cad3936",
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/compare86.py": "f799e660776990725c542926529b8951b639cf29b70cbaeb946e524a49dfe8fd",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "622f62c14a725c12275eea6b6ffebe234c8e47d409ea1cd01fe63ece41ce0f29",
+    "scientific/meridional-v86/run86.py": "c46323f6e4ad13bdf59d7c9a76cbec73b9bdd1f753b826079b717ec7d54c6ba9",
+    "scientific/meridional-v86/summarize86.py": "1a1c9afc0f1e33f1189ee2bf40209441164c61890897a853cb79ec6718f9e917",
+    "scientific/meridional-v86/test_audit86.py": "c38a1688dfc6eb8db12cbaba0462412b7171a671189b60622667ea4cd716ad48",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_compare86.py": "7ef21d7fdd9bf95dc1883bc47f703223db5b45f73f7c4ca72344cb38ebcaf0ee",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "6b0bc24e70c52b2d28d825ffdf7c76433c2587fe3706b18cb01041ef5ef36fd9",
+    "scientific/meridional-v86/test_thermal_reference86.py": "2031c2c97b3dd62580216bfc25491aff2ff76bfdb84b78f3c4c65b438c5ac09a",
+    "scientific/meridional-v86/thermal_reference86.py": "943a38a16ee12002542c3cdc454f1000535fd4328895ea3298e65dc154416a6b",
+    "scientific/meridional-v86-independent/performance86.py": "1e761358e5252bf029adb2e29d1b5f2dea61ce0d4bf695b972a4a998c2f2ab31",
+    "scientific/meridional-v86-independent/preflight86.py": "0772b743c4db677a18c0f29f4ff232e0d94d1575aa3f37e00d4798dbbcead87c",
+    "scientific/meridional-v86-independent/torque86.py": "107be1727eab9155dd7ddfd912e7a72b5272a358f568473b1a06de99862f8d63"
+  },
+  "commands": [
+    {
+      "name": "performance",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "/work/project/scientific/meridional-v86-independent/performance86.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "flow-audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit86.py",
+        "results/predictions.json",
+        "results/audit.json"
+      ],
+      "exitCode": 1
+    },
+    {
+      "name": "thermal-reference",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "thermal_reference86.py",
+        "results/thermal-reference.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "torque",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/scientific/meridional-v86-independent",
+        "-p",
+        "torque86.py",
+        "-v"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

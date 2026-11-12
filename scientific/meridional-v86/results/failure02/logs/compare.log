@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/work/project/scientific/meridional-v86/compare86.py", line 204, in <module>
+    if __name__=='__main__': {'optics':optics,'compare':compare}[sys.argv[1]]()
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/project/scientific/meridional-v86/compare86.py", line 169, in compare
+    scored=scoring.score(canonical(value,brightness,locations),points)['cases']; keyed(scored)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/project/scientific/meridional-v86/compare86.py", line 73, in canonical
+    if value['locations']!=locations or value['brightness']!=brightness: raise ValueError('Frozen optical fixture changed')
+                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: Frozen optical fixture changed
