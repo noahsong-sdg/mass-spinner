@@ -83,3 +83,23 @@ Keep the original 20% measured-speed criterion and all numerical optical gates.
 Report each fixed time separately. These are conditional transient comparisons
 on already viewed development data, never fresh held-out or steady validation.
 All source/prediction hashes, failures, test logs, build and typecheck retained.
+
+## Numerical acceleration after first flow seal, before optical predictions
+
+The first 26-case packet is preserved under results/attempt01, including its
+sources, fields and failed audit. A representative direct Gaussian-CDF kernel
+requires 0.1914 s for 2992 components and 9600 bins; the complete two-sided
+spectral campaign would multiply that work substantially. Add an explicitly
+selected Fourier Gaussian-mixture bin integrator, with four-period padding,
+analytic tail/truncation bounds, exact CDF captured flux and exact CDF mode
+candidate resolution. The original direct kernel remains the reference/default.
+No physical equations, parameter, timestamp or scoring criterion changes.
+Validate against direct CDF on analytic and actual sealed-state spectra before
+use; require max absolute bin-probability error <1e-10 and mode discrepancy
+<1e-6 m/s, with analytic moments and captured flux agreeing to floating-point
+accuracy. Retain unsupported-domain failures instead of switching methods.
+Replay all 26 flows with the final source seals and require every raw field
+packet (including all saved states/history) to be bitwise identical to attempt01.
+No measured velocity is read by either flow execution or acceleration checks.
+The panel-wise exact-integration assessment is a separately labeled post hoc
+supplement; it cannot replace any original failed numerical gate.
