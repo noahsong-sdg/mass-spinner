@@ -1,0 +1,31 @@
+{
+  "sourceSHA256": {
+    "scientific/regional-v83/campaign83.py": "f0db87de7a32389efd5a1ffeed32fe3877116edcb50bc8d41c32f5ad0d64346c",
+    "scientific/regional-v83/mesh83.py": "7053cf81c9136e88d2d8c9350aeaccd745c28001b1f7a4b4865da80aefa15c34",
+    "scientific/regional-v83/run83.py": "1bbb1785ee93d6a57c80bcc0f0da51e111532e7162314fed93b32f9b536f6362",
+    "scientific/regional-v83/test_mesh83.py": "60cc62d5d9414581ffdb6928c2a390943756914b87be9c02881d7c4d8ca7fee6",
+    "scientific/regional-v83/test_regions83.py": "15ece5604f859518feb25b9bb2db7e6a919781daf02f10120276f148db17a98d"
+  },
+  "commands": [
+    {
+      "name": "mesh-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_mesh83",
+        "test_regions83",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "campaign",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "campaign83.py"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

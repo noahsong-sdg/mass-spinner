@@ -1,0 +1,17 @@
+test_claimed_qualification_or_current_conditioning_rejected (test_audit83.SavedRegionalAudit.test_claimed_qualification_or_current_conditioning_rejected) ... ok
+test_cli_preserves_failed_reports_and_returns_nonzero_for_each_required_gate (test_audit83.SavedRegionalAudit.test_cli_preserves_failed_reports_and_returns_nonzero_for_each_required_gate) ... ok
+test_complete_conservative_fixture_and_directionals_pass (test_audit83.SavedRegionalAudit.test_complete_conservative_fixture_and_directionals_pass) ... ok
+test_compressed_and_raw_packet_seals_are_checked (test_audit83.SavedRegionalAudit.test_compressed_and_raw_packet_seals_are_checked) ... ok
+test_independent_reference_mismatch_is_retained (test_audit83.SavedRegionalAudit.test_independent_reference_mismatch_is_retained) ... ok
+test_missing_or_duplicate_case_rejected (test_audit83.SavedRegionalAudit.test_missing_or_duplicate_case_rejected) ... ok
+test_moving_access_and_region_cuts_rejected (test_audit83.SavedRegionalAudit.test_moving_access_and_region_cuts_rejected) ... ok
+test_rehashed_nonmonotone_grid_is_rejected (test_audit83.SavedRegionalAudit.test_rehashed_nonmonotone_grid_is_rejected) ... ok
+test_relative_error_keeps_zero_denominator_unavailable (test_audit83.SavedRegionalAudit.test_relative_error_keeps_zero_denominator_unavailable) ... ok
+test_roundoff_equivalent_access_label_keeps_independent_physical_check (test_audit83.SavedRegionalAudit.test_roundoff_equivalent_access_label_keeps_independent_physical_check) ... ok
+test_stale_source_and_frozen_packet_are_rejected (test_audit83.SavedRegionalAudit.test_stale_source_and_frozen_packet_are_rejected) ... ok
+test_unresolved_regions_can_fail_while_global_ledgers_pass (test_audit83.SavedRegionalAudit.test_unresolved_regions_can_fail_while_global_ledgers_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 11.603s
+
+OK

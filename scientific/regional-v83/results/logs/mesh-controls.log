@@ -1,0 +1,11 @@
+test_access_cut_depends_on_continuous_axis_not_mesh_sample (test_mesh83.FixedCuts.test_access_cut_depends_on_continuous_axis_not_mesh_sample) ... ok
+test_adapter_has_no_fallback_and_does_not_mutate_frozen_solver (test_mesh83.FixedCuts.test_adapter_has_no_fallback_and_does_not_mutate_frozen_solver) ... ok
+test_all_refinements_are_nested_with_identical_physical_cuts (test_mesh83.FixedCuts.test_all_refinements_are_nested_with_identical_physical_cuts) ... ok
+test_frozen_operators_keep_conservation_on_graded_mesh (test_regions83.FixedDomainBudgets.test_frozen_operators_keep_conservation_on_graded_mesh) ... ok
+test_same_physical_integral_on_every_mesh (test_regions83.FixedDomainBudgets.test_same_physical_integral_on_every_mesh) ... ok
+test_unaligned_cut_is_rejected_instead_of_moving (test_regions83.FixedDomainBudgets.test_unaligned_cut_is_rejected_instead_of_moving) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.048s
+
+OK

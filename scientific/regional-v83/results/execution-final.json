@@ -1,0 +1,69 @@
+{
+  "sourceSHA256": {
+    "scientific/regional-v83/audit83.py": "4bd516c07fd04e510d7e2c8fcafd98f9d4c29c9220aee58154e34ec13c9a706b",
+    "scientific/regional-v83/campaign83.py": "f0db87de7a32389efd5a1ffeed32fe3877116edcb50bc8d41c32f5ad0d64346c",
+    "scientific/regional-v83/mesh83.py": "7053cf81c9136e88d2d8c9350aeaccd745c28001b1f7a4b4865da80aefa15c34",
+    "scientific/regional-v83/run83.py": "e779079a695e86cfa3b81a3a9bdbf01a306d4abf2b92baabb95c220a73e7fce9",
+    "scientific/regional-v83/summarize83.py": "8d9d6fa36b7f02a5eb8c8c521379bbb41c07109aa14dcf7d4d76af3985481563",
+    "scientific/regional-v83/test_audit83.py": "50633813a97c95e03582d64bbd592be1c5c807a3951145670c64ad531a6159a4",
+    "scientific/regional-v83/test_mesh83.py": "60cc62d5d9414581ffdb6928c2a390943756914b87be9c02881d7c4d8ca7fee6",
+    "scientific/regional-v83/test_regions83.py": "15ece5604f859518feb25b9bb2db7e6a919781daf02f10120276f148db17a98d"
+  },
+  "commands": [
+    {
+      "name": "audit-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_audit83",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit83.py",
+        "results/predictions.json",
+        "results/audit.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "summary",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "summarize83.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "app-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

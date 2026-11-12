@@ -1,0 +1,743 @@
+{
+  "predictionSHA256": "a9cc96d31bf42f7039700dc5fae01f94ecaf12b98752c4dcf8c012fad39d3676",
+  "experimentalQualification": false,
+  "groups": [
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "shape": [
+        408,
+        256
+      ],
+      "accessDepthM": 0.05668520946379218,
+      "currentA": 20.031958846739165,
+      "required100AVoltage": 92.35242614833676,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0030417167963299315,
+        "jouleW": 0.002901768814114165,
+        "viscousW": 0.005829730994248387,
+        "current": 0.0030417168133465332,
+        "chords": 0.004000917043653243
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.060000000000000005
+          ],
+          "jouleRelative": 0.003982433630142521,
+          "workRelative": 0.0029651487105874573
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.060000000000000005,
+            0.08
+          ],
+          "jouleRelative": 0.005713027199014247,
+          "workRelative": 0.002674511789368698
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.08,
+            0.24
+          ],
+          "jouleRelative": 0.00018787135375874698,
+          "workRelative": 0.0027572934095043368
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0012306486473911075,
+          "workRelative": 0.0007458598649602543
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0015317655047479267,
+          "workRelative": 0.0014318892077170053
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.001201184351249157,
+          "workRelative": 0.002262983666704101
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0007480958388429638,
+          "workRelative": 0.0025833509576553373
+        },
+        {
+          "name": "endwall-0.05668520946379218",
+          "axialEdgesM": [
+            0.1833147905362078,
+            0.24
+          ],
+          "jouleRelative": 0.0009812489485186637,
+          "workRelative": 0.0024471071718008817
+        }
+      ]
+    },
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "shape": [
+        416,
+        256
+      ],
+      "accessDepthM": 0.05668520946379218,
+      "currentA": 20.05820839051287,
+      "required100AVoltage": 92.2315674452267,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0030449622137016697,
+        "jouleW": 0.002904761676195047,
+        "viscousW": 0.005836284844458075,
+        "current": 0.003044962200009051,
+        "chords": 0.004040397321288743
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.07
+          ],
+          "jouleRelative": 0.003869562622062328,
+          "workRelative": 0.0029842273994743966
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.07,
+            0.09000000000000001
+          ],
+          "jouleRelative": 0.005489841160013712,
+          "workRelative": 0.0026821785011573547
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.09000000000000001,
+            0.24
+          ],
+          "jouleRelative": 0.00022236315978245455,
+          "workRelative": 0.002743738183673643
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0012265575632555766,
+          "workRelative": 0.0007361627633762037
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0015271754108877886,
+          "workRelative": 0.0014369917173778478
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0011960779498321156,
+          "workRelative": 0.002266585736590517
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0007418115383297676,
+          "workRelative": 0.0025855106496191025
+        },
+        {
+          "name": "endwall-0.05668520946379218",
+          "axialEdgesM": [
+            0.1833147905362078,
+            0.24
+          ],
+          "jouleRelative": 0.0009757476188753743,
+          "workRelative": 0.0024501242973236125
+        }
+      ]
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "shape": [
+        416,
+        256
+      ],
+      "accessDepthM": 0.10026563158460239,
+      "currentA": 28.396313598675764,
+      "required100AVoltage": 65.14930163633187,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0024319605403640043,
+        "jouleW": 0.0022710856772907204,
+        "viscousW": 0.004665971694264761,
+        "current": 0.00243196057113798,
+        "chords": 0.003399297317865321
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.060000000000000005
+          ],
+          "jouleRelative": 0.0028877671023375866,
+          "workRelative": 0.0023196293510474152
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.060000000000000005,
+            0.08
+          ],
+          "jouleRelative": 0.005269556046628795,
+          "workRelative": 0.002146842441995406
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.08,
+            0.24
+          ],
+          "jouleRelative": 0.00021535992651766875,
+          "workRelative": 0.0022216584104446995
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0007810860597011809,
+          "workRelative": 0.000216771031685133
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0013701116482424886,
+          "workRelative": 0.001246316676933878
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0012668583721799206,
+          "workRelative": 0.0018928302801756705
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0008969882408927059,
+          "workRelative": 0.0021200654065045934
+        },
+        {
+          "name": "endwall-0.10026563158460239",
+          "axialEdgesM": [
+            0.1397343684153976,
+            0.24
+          ],
+          "jouleRelative": 0.0007308050323579604,
+          "workRelative": 0.0021649138738027767
+        }
+      ]
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "shape": [
+        424,
+        256
+      ],
+      "accessDepthM": 0.10026563158460239,
+      "currentA": 28.43431354197363,
+      "required100AVoltage": 65.06223536112809,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0024347230375511278,
+        "jouleW": 0.002273464741348956,
+        "viscousW": 0.004671850330407126,
+        "current": 0.002434723099100168,
+        "chords": 0.0034285494563659146
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.07
+          ],
+          "jouleRelative": 0.002795078245633644,
+          "workRelative": 0.002334552567580171
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.07,
+            0.09000000000000001
+          ],
+          "jouleRelative": 0.005128205024869309,
+          "workRelative": 0.002151960718341169
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.09000000000000001,
+            0.24
+          ],
+          "jouleRelative": 0.0002630364944281069,
+          "workRelative": 0.0022130845150009795
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0007772312676316248,
+          "workRelative": 0.00021262449202267913
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0013655817749421168,
+          "workRelative": 0.001248303232630821
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.001261716831330493,
+          "workRelative": 0.001894022418967785
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0008906380180724268,
+          "workRelative": 0.002120337153984403
+        },
+        {
+          "name": "endwall-0.10026563158460239",
+          "axialEdgesM": [
+            0.1397343684153976,
+            0.24
+          ],
+          "jouleRelative": 0.0007233048535023969,
+          "workRelative": 0.002164500579908799
+        }
+      ]
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "shape": [
+        408,
+        256
+      ],
+      "accessDepthM": 0.05668520946379218,
+      "currentA": 19.717288008748508,
+      "required100AVoltage": 93.82629087626859,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0030175464797687363,
+        "jouleW": 0.0028906798230428584,
+        "viscousW": 0.005804518071780058,
+        "current": 0.003017546483186811,
+        "chords": 0.0039390717444396355
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.060000000000000005
+          ],
+          "jouleRelative": 0.003931232987636375,
+          "workRelative": 0.0029618988898251703
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.060000000000000005,
+            0.08
+          ],
+          "jouleRelative": 0.005517998798075355,
+          "workRelative": 0.0026542384997406267
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.08,
+            0.24
+          ],
+          "jouleRelative": 0.00018113531458465292,
+          "workRelative": 0.0027573910453412512
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0012202541988617242,
+          "workRelative": 0.000849809155223804
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0015349466118199117,
+          "workRelative": 0.0014038172738846282
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0012043544246232807,
+          "workRelative": 0.0022488069927168886
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0007461497058573882,
+          "workRelative": 0.002579645875705064
+        },
+        {
+          "name": "endwall-0.05668520946379218",
+          "axialEdgesM": [
+            0.1833147905362078,
+            0.24
+          ],
+          "jouleRelative": 0.000982431833196714,
+          "workRelative": 0.0024388248683425737
+        }
+      ]
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "shape": [
+        416,
+        256
+      ],
+      "accessDepthM": 0.05668520946379218,
+      "currentA": 19.74273057114641,
+      "required100AVoltage": 93.70537643378148,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.003020722639993023,
+        "jouleW": 0.0028936449053306073,
+        "viscousW": 0.005810977730668174,
+        "current": 0.0030207225703238407,
+        "chords": 0.003978517968552488
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.07
+          ],
+          "jouleRelative": 0.0038204720356041473,
+          "workRelative": 0.002982235091394647
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.07,
+            0.09000000000000001
+          ],
+          "jouleRelative": 0.005292474390151479,
+          "workRelative": 0.0026611455689211816
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.09000000000000001,
+            0.24
+          ],
+          "jouleRelative": 0.00021629979446747286,
+          "workRelative": 0.002742968568124005
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0012162358589642376,
+          "workRelative": 0.0008389113833182988
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0015304327647731315,
+          "workRelative": 0.0014093620132661338
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0011993380499507836,
+          "workRelative": 0.002252559059832945
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.000739993606445507,
+          "workRelative": 0.0025816543865821665
+        },
+        {
+          "name": "endwall-0.05668520946379218",
+          "axialEdgesM": [
+            0.1833147905362078,
+            0.24
+          ],
+          "jouleRelative": 0.000977033966491003,
+          "workRelative": 0.002441868208495543
+        }
+      ]
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "shape": [
+        416,
+        256
+      ],
+      "accessDepthM": 0.10026563158460239,
+      "currentA": 28.750072214883126,
+      "required100AVoltage": 64.3476644570759,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.002408072033229154,
+        "jouleW": 0.002258106506957256,
+        "viscousW": 0.004639082462820563,
+        "current": 0.0024080720579845163,
+        "chords": 0.003333856297572855
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.060000000000000005
+          ],
+          "jouleRelative": 0.0028070233204850028,
+          "workRelative": 0.002310269637001882
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.060000000000000005,
+            0.08
+          ],
+          "jouleRelative": 0.005017472696559767,
+          "workRelative": 0.002128568206776012
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.08,
+            0.24
+          ],
+          "jouleRelative": 0.00021968961328403962,
+          "workRelative": 0.002222249793597049
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0007694831638234477,
+          "workRelative": 0.00020728751392341447
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0014025130197126813,
+          "workRelative": 0.0012467586474326378
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0013030870996168966,
+          "workRelative": 0.0018908490766682599
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0009282417410167478,
+          "workRelative": 0.002122257656296843
+        },
+        {
+          "name": "endwall-0.10026563158460239",
+          "axialEdgesM": [
+            0.1397343684153976,
+            0.24
+          ],
+          "jouleRelative": 0.0007565069879747274,
+          "workRelative": 0.002167598605883496
+        }
+      ]
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "shape": [
+        424,
+        256
+      ],
+      "accessDepthM": 0.10026563158460239,
+      "currentA": 28.789073418647185,
+      "required100AVoltage": 64.26049123212569,
+      "globalFinalRelativeChanges": {
+        "electrodePowerW": 0.0024108441561579846,
+        "jouleW": 0.002260521929775765,
+        "viscousW": 0.004645060092034067,
+        "current": 0.0024108441885325707,
+        "chords": 0.0033632027869186327
+      },
+      "regionalFinalRelativeChanges": [
+        {
+          "name": "midplane-side",
+          "axialEdgesM": [
+            0.0,
+            0.07
+          ],
+          "jouleRelative": 0.0027178806011310323,
+          "workRelative": 0.00232652719049915
+        },
+        {
+          "name": "anode-band",
+          "axialEdgesM": [
+            0.07,
+            0.09000000000000001
+          ],
+          "jouleRelative": 0.0048960298911689525,
+          "workRelative": 0.002134000328878316
+        },
+        {
+          "name": "cathode-side",
+          "axialEdgesM": [
+            0.09000000000000001,
+            0.24
+          ],
+          "jouleRelative": 0.00027009515752422563,
+          "workRelative": 0.0022133647631245256
+        },
+        {
+          "name": "endwall-0.004",
+          "axialEdgesM": [
+            0.236,
+            0.24
+          ],
+          "jouleRelative": 0.0007655459775583288,
+          "workRelative": 0.0002029801092450643
+        },
+        {
+          "name": "endwall-0.016",
+          "axialEdgesM": [
+            0.22399999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0013978507959213791,
+          "workRelative": 0.0012485859872638175
+        },
+        {
+          "name": "endwall-0.04",
+          "axialEdgesM": [
+            0.19999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0012977970846825239,
+          "workRelative": 0.0018917290640475765
+        },
+        {
+          "name": "endwall-0.08",
+          "axialEdgesM": [
+            0.15999999999999998,
+            0.24
+          ],
+          "jouleRelative": 0.0009217316979383511,
+          "workRelative": 0.0021220648211650213
+        },
+        {
+          "name": "endwall-0.10026563158460239",
+          "axialEdgesM": [
+            0.1397343684153976,
+            0.24
+          ],
+          "jouleRelative": 0.0007488348667574483,
+          "workRelative": 0.002166631903477342
+        }
+      ]
+    }
+  ],
+  "summarySourceSHA256": "8d9d6fa36b7f02a5eb8c8c521379bbb41c07109aa14dcf7d4d76af3985481563"
+}
