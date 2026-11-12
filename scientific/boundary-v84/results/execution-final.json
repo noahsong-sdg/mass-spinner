@@ -1,0 +1,88 @@
+{
+  "sourceSHA256": {
+    "scientific/boundary-v84/audit84.py": "a0586ac93f24703e17a836daaa177599eeaef90e16c3dba7ade0b8ae7b5637cb",
+    "scientific/boundary-v84/audit_optics84.py": "ddd0a720ecfdf0a407c066c7d0e581218dc51163b8cde68394a0e3a43a0ccd8c",
+    "scientific/boundary-v84/campaign84.py": "7635afaf83f0920ff457a2e18c270a2877e69578b86c71ce5704c49970a321fa",
+    "scientific/boundary-v84/compare84.py": "7c3deb4d587935c0d86e5f06a729c88c62d36f0ef642edddbec312d3ceede2cb",
+    "scientific/boundary-v84/mesh84.py": "1125cbf0dfd96c55eef66a8ef89802f0066459b73bc84695414c4eee68269b51",
+    "scientific/boundary-v84/model84.py": "84ed4bdda166b4a199a99fce04d1b8f143a69e9f7f0c13a226657ddd9cabfa23",
+    "scientific/boundary-v84/optics84.py": "d3f5c67a45840b8e69b302629eb1402b74ec2312b7d677b2c2fe1c4ecff798f7",
+    "scientific/boundary-v84/reference84.py": "808bf572495c6f9bdfb9ad5c0821fae7c63971a9b4b75678787f7f2db88ee8af",
+    "scientific/boundary-v84/run84.py": "b27fb12687510b6f205568657698a32663933742c0bde51dc747b41dea883379",
+    "scientific/boundary-v84/test_audit84.py": "589bc52da5c8690ef03c34ebbf84ab42c1c2605e175de453348be37e72f0ea24",
+    "scientific/boundary-v84/test_audit_optics84.py": "c7bd91c20dcf71c2940a7bc6e67a1eeb5d5bcefce41f185d5cac56843cdd29a9",
+    "scientific/boundary-v84/test_compare84.py": "01be64c3f9bc35fa50cf9600bbc0ef459af2159748311acc355166a07cd1cad6",
+    "scientific/boundary-v84/test_model84.py": "4a2442f4cf97210ce364493e7facdef833a61eceb18d43ffce8f5eb34c8d43f1",
+    "scientific/boundary-v84/test_optics84.py": "754f8c95c3dc9e4903abd9ff49334207d0a49f558c880897fdbcfe64e7a539bc",
+    "scientific/boundary-v84/test_reference84.py": "af92e5f20d14a7edb0f53ffbd8f6a3b7e8776431758251eb1451a204a7df0f16"
+  },
+  "commands": [
+    {
+      "name": "all-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*84.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit84.py",
+        "results/predictions.json",
+        "results/audit.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "compare",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "compare84.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "optical-audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit_optics84.py",
+        "results",
+        "results/optical-audit.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "app-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

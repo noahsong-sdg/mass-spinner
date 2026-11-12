@@ -1,0 +1,38 @@
+{
+  "sourceSHA256": {
+    "scientific/boundary-v84/audit84.py": "bf3e7bbdb3407a2d64fe963e390157d728a5f49e82297e8a3508cb5c0dbd2ef7",
+    "scientific/boundary-v84/campaign84.py": "7635afaf83f0920ff457a2e18c270a2877e69578b86c71ce5704c49970a321fa",
+    "scientific/boundary-v84/compare84.py": "9c7de7ee59ff5b0e9d4998a07dd20a95eb17dc797dcd31d0b86d7286d43860bd",
+    "scientific/boundary-v84/mesh84.py": "1125cbf0dfd96c55eef66a8ef89802f0066459b73bc84695414c4eee68269b51",
+    "scientific/boundary-v84/model84.py": "84ed4bdda166b4a199a99fce04d1b8f143a69e9f7f0c13a226657ddd9cabfa23",
+    "scientific/boundary-v84/optics84.py": "d3f5c67a45840b8e69b302629eb1402b74ec2312b7d677b2c2fe1c4ecff798f7",
+    "scientific/boundary-v84/reference84.py": "808bf572495c6f9bdfb9ad5c0821fae7c63971a9b4b75678787f7f2db88ee8af",
+    "scientific/boundary-v84/run84.py": "6da4449ab45b086b8cd2768342f59913a272bc5a830c04abd8d04c6767a8b1b2",
+    "scientific/boundary-v84/test_audit84.py": "9e60d811e13e69bd224269b627aff27f09f6fdb2478979f48cfc124a40e33403",
+    "scientific/boundary-v84/test_model84.py": "4a2442f4cf97210ce364493e7facdef833a61eceb18d43ffce8f5eb34c8d43f1",
+    "scientific/boundary-v84/test_optics84.py": "754f8c95c3dc9e4903abd9ff49334207d0a49f558c880897fdbcfe64e7a539bc",
+    "scientific/boundary-v84/test_reference84.py": "af92e5f20d14a7edb0f53ffbd8f6a3b7e8776431758251eb1451a204a7df0f16"
+  },
+  "commands": [
+    {
+      "name": "controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_model84",
+        "test_reference84",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "campaign",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "campaign84.py"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

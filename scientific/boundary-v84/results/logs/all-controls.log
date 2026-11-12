@@ -1,0 +1,50 @@
+test_claimed_work_residual_does_not_override_wrong_ledger (test_audit84.SavedRingAudit.test_claimed_work_residual_does_not_override_wrong_ledger) ... ok
+test_cli_preserves_failed_report_and_returns_failure (test_audit84.SavedRingAudit.test_cli_preserves_failed_report_and_returns_failure) ... ok
+test_complete_inventory_passes_without_qualifying_contact_voltage (test_audit84.SavedRingAudit.test_complete_inventory_passes_without_qualifying_contact_voltage) ... ok
+test_corrupt_compressed_field_rejected (test_audit84.SavedRingAudit.test_corrupt_compressed_field_rejected) ... ok
+test_false_independent_or_experimental_claim_rejected (test_audit84.SavedRingAudit.test_false_independent_or_experimental_claim_rejected) ... ok
+test_missing_boundary_half_face_torque_fails (test_audit84.SavedRingAudit.test_missing_boundary_half_face_torque_fails) ... ok
+test_missing_or_duplicated_case_rejected (test_audit84.SavedRingAudit.test_missing_or_duplicated_case_rejected) ... ok
+test_moving_support_rejected (test_audit84.SavedRingAudit.test_moving_support_rejected) ... ok
+test_nonconservative_source_quadrature_fails (test_audit84.SavedRingAudit.test_nonconservative_source_quadrature_fails) ... ok
+test_prescribed_current_must_not_change (test_audit84.SavedRingAudit.test_prescribed_current_must_not_change) ... ok
+test_resealed_but_moved_mesh_rejected (test_audit84.SavedRingAudit.test_resealed_but_moved_mesh_rejected) ... ok
+test_stale_source_or_previous_prediction_rejected (test_audit84.SavedRingAudit.test_stale_source_or_previous_prediction_rejected) ... ok
+test_unresolved_shear_fails_flow_gate (test_audit84.SavedRingAudit.test_unresolved_shear_fails_flow_gate) ... ok
+test_all_32_flows_16_groups_576_scores (test_audit_optics84.Optical84Tests.test_all_32_flows_16_groups_576_scores) ... ok
+test_alternatives_cannot_be_dropped (test_audit_optics84.Optical84Tests.test_alternatives_cannot_be_dropped) ... ok
+test_current_is_never_a_predicted_success (test_audit_optics84.Optical84Tests.test_current_is_never_a_predicted_success) ... ok
+test_field_seal_rejected (test_audit_optics84.Optical84Tests.test_field_seal_rejected) ... ok
+test_flow_refinement_score_cannot_be_forged (test_audit_optics84.Optical84Tests.test_flow_refinement_score_cannot_be_forged) ... ok
+test_forged_spectral_gate_rejected (test_audit_optics84.Optical84Tests.test_forged_spectral_gate_rejected) ... ok
+test_independent_centroid (test_audit_optics84.Optical84Tests.test_independent_centroid) ... ok
+test_independent_thermal_variance (test_audit_optics84.Optical84Tests.test_independent_thermal_variance) ... ok
+test_lp_constraints_and_missing_certificates_stay_visible (test_audit_optics84.Optical84Tests.test_lp_constraints_and_missing_certificates_stay_visible) ... ok
+test_missing_optical_group_rejected (test_audit_optics84.Optical84Tests.test_missing_optical_group_rejected) ... ok
+test_operator_adapter_and_brightness_seals (test_audit_optics84.Optical84Tests.test_operator_adapter_and_brightness_seals) ... ok
+test_original_twenty_percent_gate_reconstructed (test_audit_optics84.Optical84Tests.test_original_twenty_percent_gate_reconstructed) ... ok
+test_qualification_is_false_even_when_all_synthetic_points_match (test_audit_optics84.Optical84Tests.test_qualification_is_false_even_when_all_synthetic_points_match) ... ok
+test_stale_prediction_rejected (test_audit_optics84.Optical84Tests.test_stale_prediction_rejected) ... ok
+test_stale_raw_group_seal_rejected (test_audit_optics84.Optical84Tests.test_stale_raw_group_seal_rejected) ... ok
+test_all_alternatives_match_by_identity_not_position (test_compare84.AlternativeInventory.test_all_alternatives_match_by_identity_not_position) ... ok
+test_missing_duplicate_or_stale_alternative_rejected (test_compare84.AlternativeInventory.test_missing_duplicate_or_stale_alternative_rejected) ... ok
+test_charge_power_and_exact_torque (test_model84.SourceRing.test_charge_power_and_exact_torque) ... ok
+test_current_and_field_reversal (test_model84.SourceRing.test_current_and_field_reversal) ... ok
+test_gauge_preserves_power_and_flow (test_model84.SourceRing.test_gauge_preserves_power_and_flow) ... ok
+test_invalid_bracketing_and_refinement (test_model84.SourceRing.test_invalid_bracketing_and_refinement) ... ok
+test_nested_grids_and_shrinking_source_support (test_model84.SourceRing.test_nested_grids_and_shrinking_source_support) ... ok
+test_zero_field_has_no_rotation (test_model84.SourceRing.test_zero_field_has_no_rotation) ... ok
+test_graded_edges_and_angular_velocity_pass_without_resampling (test_optics84.ActualOpticalGrid.test_graded_edges_and_angular_velocity_pass_without_resampling) ... ok
+test_stale_or_invalid_flow_annuli_are_rejected (test_optics84.ActualOpticalGrid.test_stale_or_invalid_flow_annuli_are_rejected) ... ok
+test_current_reversal_and_linearity (test_reference84.IndependentReference.test_current_reversal_and_linearity) ... ok
+test_field_reversal_preserves_resistive_loss (test_reference84.IndependentReference.test_field_reversal_preserves_resistive_loss) ... ok
+test_flux_moments_and_conservation (test_reference84.IndependentReference.test_flux_moments_and_conservation) ... ok
+test_gauge_does_not_become_an_electrical_contact (test_reference84.IndependentReference.test_gauge_does_not_become_an_electrical_contact) ... ok
+test_source_quadrature_conserves_total_and_first_coordinate_moment (test_reference84.IndependentReference.test_source_quadrature_conserves_total_and_first_coordinate_moment) ... ok
+test_unphysical_transport_and_apparatus_are_rejected (test_reference84.IndependentReference.test_unphysical_transport_and_apparatus_are_rejected) ... ok
+test_zero_magnetic_field_and_zero_current (test_reference84.IndependentReference.test_zero_magnetic_field_and_zero_current) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 5.794s
+
+OK

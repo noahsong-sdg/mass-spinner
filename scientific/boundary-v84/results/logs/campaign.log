@@ -1,0 +1,65 @@
+START linear-finite-te1 0.07 1
+END linear-finite-te1 0.07 1 P/I 119.7865284174412 seconds 0.03
+START linear-finite-te1 0.07 2
+END linear-finite-te1 0.07 2 P/I 148.9399485371399 seconds 0.16
+START linear-finite-te1 0.07 4
+END linear-finite-te1 0.07 4 P/I 175.56342950440717 seconds 0.96
+START linear-finite-te1 0.07 8
+END linear-finite-te1 0.07 8 P/I 200.92378796800676 seconds 6.49
+START linear-finite-te1 0.08 1
+END linear-finite-te1 0.08 1 P/I 118.70441868847601 seconds 0.04
+START linear-finite-te1 0.08 2
+END linear-finite-te1 0.08 2 P/I 147.7299037096476 seconds 0.14
+START linear-finite-te1 0.08 4
+END linear-finite-te1 0.08 4 P/I 174.33281383004356 seconds 0.92
+START linear-finite-te1 0.08 8
+END linear-finite-te1 0.08 8 P/I 199.69135365410241 seconds 6.2
+START linear-finite-te2.5-source 0.07 1
+END linear-finite-te2.5-source 0.07 1 P/I 81.70629139683678 seconds 0.04
+START linear-finite-te2.5-source 0.07 2
+END linear-finite-te2.5-source 0.07 2 P/I 99.04929469915442 seconds 0.16
+START linear-finite-te2.5-source 0.07 4
+END linear-finite-te2.5-source 0.07 4 P/I 115.25917803186354 seconds 0.98
+START linear-finite-te2.5-source 0.07 8
+END linear-finite-te2.5-source 0.07 8 P/I 130.79479488647496 seconds 6.3
+START linear-finite-te2.5-source 0.08 1
+END linear-finite-te2.5-source 0.08 1 P/I 80.82918949316078 seconds 0.05
+START linear-finite-te2.5-source 0.08 2
+END linear-finite-te2.5-source 0.08 2 P/I 98.08325278088712 seconds 0.21
+START linear-finite-te2.5-source 0.08 4
+END linear-finite-te2.5-source 0.08 4 P/I 114.27971971252371 seconds 0.94
+START linear-finite-te2.5-source 0.08 8
+END linear-finite-te2.5-source 0.08 8 P/I 129.81443254355193 seconds 6.29
+START quadratic-finite-te1 0.07 1
+END quadratic-finite-te1 0.07 1 P/I 121.50049525772077 seconds 0.04
+START quadratic-finite-te1 0.07 2
+END quadratic-finite-te1 0.07 2 P/I 150.94673414415652 seconds 0.15
+START quadratic-finite-te1 0.07 4
+END quadratic-finite-te1 0.07 4 P/I 177.86852944771502 seconds 0.91
+START quadratic-finite-te1 0.07 8
+END quadratic-finite-te1 0.07 8 P/I 203.52263996399614 seconds 6.36
+START quadratic-finite-te1 0.08 1
+END quadratic-finite-te1 0.08 1 P/I 120.41833856799146 seconds 0.04
+START quadratic-finite-te1 0.08 2
+END quadratic-finite-te1 0.08 2 P/I 149.73663187116026 seconds 0.16
+START quadratic-finite-te1 0.08 4
+END quadratic-finite-te1 0.08 4 P/I 176.63785912289885 seconds 0.91
+START quadratic-finite-te1 0.08 8
+END quadratic-finite-te1 0.08 8 P/I 202.2901498613476 seconds 6.36
+START quadratic-finite-te2.5-source 0.07 1
+END quadratic-finite-te2.5-source 0.07 1 P/I 79.76954768195141 seconds 0.04
+START quadratic-finite-te2.5-source 0.07 2
+END quadratic-finite-te2.5-source 0.07 2 P/I 96.29983114873158 seconds 0.16
+START quadratic-finite-te2.5-source 0.07 4
+END quadratic-finite-te2.5-source 0.07 4 P/I 111.802690758522 seconds 0.94
+START quadratic-finite-te2.5-source 0.07 8
+END quadratic-finite-te2.5-source 0.07 8 P/I 126.67511558570938 seconds 6.52
+START quadratic-finite-te2.5-source 0.08 1
+END quadratic-finite-te2.5-source 0.08 1 P/I 78.89233556892052 seconds 0.05
+START quadratic-finite-te2.5-source 0.08 2
+END quadratic-finite-te2.5-source 0.08 2 P/I 95.3336773917624 seconds 0.19
+START quadratic-finite-te2.5-source 0.08 4
+END quadratic-finite-te2.5-source 0.08 4 P/I 110.82312144501171 seconds 1.09
+START quadratic-finite-te2.5-source 0.08 8
+END quadratic-finite-te2.5-source 0.08 8 P/I 125.69464218203146 seconds 7.29
+SEALED f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74

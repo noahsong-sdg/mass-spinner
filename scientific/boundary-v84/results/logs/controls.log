@@ -1,0 +1,18 @@
+test_charge_power_and_exact_torque (test_model84.SourceRing.test_charge_power_and_exact_torque) ... ok
+test_current_and_field_reversal (test_model84.SourceRing.test_current_and_field_reversal) ... ok
+test_gauge_preserves_power_and_flow (test_model84.SourceRing.test_gauge_preserves_power_and_flow) ... ok
+test_invalid_bracketing_and_refinement (test_model84.SourceRing.test_invalid_bracketing_and_refinement) ... ok
+test_nested_grids_and_shrinking_source_support (test_model84.SourceRing.test_nested_grids_and_shrinking_source_support) ... ok
+test_zero_field_has_no_rotation (test_model84.SourceRing.test_zero_field_has_no_rotation) ... ok
+test_current_reversal_and_linearity (test_reference84.IndependentReference.test_current_reversal_and_linearity) ... ok
+test_field_reversal_preserves_resistive_loss (test_reference84.IndependentReference.test_field_reversal_preserves_resistive_loss) ... ok
+test_flux_moments_and_conservation (test_reference84.IndependentReference.test_flux_moments_and_conservation) ... ok
+test_gauge_does_not_become_an_electrical_contact (test_reference84.IndependentReference.test_gauge_does_not_become_an_electrical_contact) ... ok
+test_source_quadrature_conserves_total_and_first_coordinate_moment (test_reference84.IndependentReference.test_source_quadrature_conserves_total_and_first_coordinate_moment) ... ok
+test_unphysical_transport_and_apparatus_are_rejected (test_reference84.IndependentReference.test_unphysical_transport_and_apparatus_are_rejected) ... ok
+test_zero_magnetic_field_and_zero_current (test_reference84.IndependentReference.test_zero_magnetic_field_and_zero_current) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.204s
+
+OK

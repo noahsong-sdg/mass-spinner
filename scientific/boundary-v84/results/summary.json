@@ -1,0 +1,20 @@
+{
+  "predictionSHA256": "f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74",
+  "opticalIndexSHA256": "2d2265f89778deacad7efa2abc80e381c2008bca66792a0ffe5b3846e30ab73d",
+  "targetFileSHA256": "1e4f542dab2cdd777673f724ec3038e0223589797fa290765c0e1c8f047b4741",
+  "experimentalQualification": false,
+  "currentFitted": false,
+  "absoluteCurrentPrediction": false,
+  "correctedVoltagePrediction": false,
+  "prescribedCurrent": true,
+  "alternatives": 576,
+  "anyAllPointPass": false,
+  "anyEligiblePointPass": false,
+  "anyResolvedOpticalPointMatch": false,
+  "scope": "Development-data source-ring diagnosis. Prescribed current is not predicted. Ring cutoff-dependent contact voltage is not compared with corrected experimental voltage.",
+  "comparisonSHA256": "cc2c259cafc8c3f199e8b07873be67947821758adec5d241ada6609a000ae9ab",
+  "comparisonRawSHA256": "82dbfd2e6d9ac7140e820cf414733ede23f7b6b3132b5775d2afed426a870cd1",
+  "flowNumericalPass": true,
+  "flowOpticalFailures": 0,
+  "numericalOpticalFailures": 0
+}
