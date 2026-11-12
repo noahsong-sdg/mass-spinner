@@ -1,0 +1,32 @@
+test_changed_target_geometry_is_rejected (test_compare.ScoringControls.test_changed_target_geometry_is_rejected) ... ok
+test_unchanged_extraction_mask_and_no_prediction_mutation (test_compare.ScoringControls.test_unchanged_extraction_mask_and_no_prediction_mutation) ... ok
+test_analytic_finite_radius_gaussian (test_emissivity.EmissivityControls.test_analytic_finite_radius_gaussian) ... ok
+test_brightness_scaling_preserves_relative_distribution (test_emissivity.EmissivityControls.test_brightness_scaling_preserves_relative_distribution) ... ok
+test_declared_axis_and_edge_continuations (test_emissivity.EmissivityControls.test_declared_axis_and_edge_continuations) ... ok
+test_flat_chord_brightness_means_edge_enhanced_emissivity (test_emissivity.EmissivityControls.test_flat_chord_brightness_means_edge_enhanced_emissivity) ... ok
+test_nonphysical_brightness_is_rejected_not_clipped (test_emissivity.EmissivityControls.test_nonphysical_brightness_is_rejected_not_clipped) ... ok
+test_uniform_volume_emission_and_signed_chords (test_emissivity.EmissivityControls.test_uniform_volume_emission_and_signed_chords) ... ok
+test_brightness_scale_invariance (test_feasible.FeasibleControls.test_brightness_scale_invariance) ... ok
+test_constraints_forbid_all_target_emission (test_feasible.FeasibleControls.test_constraints_forbid_all_target_emission) ... ok
+test_exact_brightness_fixes_one_shared_emissivity (test_feasible.FeasibleControls.test_exact_brightness_fixes_one_shared_emissivity) ... ok
+test_infeasible_constraints_are_unavailable_without_widening (test_feasible.FeasibleControls.test_infeasible_constraints_are_unavailable_without_widening) ... ok
+test_partial_brightness_constraint_preserves_full_signed_range (test_feasible.FeasibleControls.test_partial_brightness_constraint_preserves_full_signed_range) ... ok
+test_real_optical_domain_boundaries (test_feasible.FeasibleControls.test_real_optical_domain_boundaries) ... ok
+test_domain_rejects_nonintersecting_or_reversed_range (test_independent_bound.BoundControls.test_domain_rejects_nonintersecting_or_reversed_range) ... ok
+test_only_intersected_annuli_can_enlarge_hull (test_independent_bound.BoundControls.test_only_intersected_annuli_can_enlarge_hull) ... ok
+test_rigid_rotation_upper_bound_is_omega_times_largest_impact (test_independent_bound.BoundControls.test_rigid_rotation_upper_bound_is_omega_times_largest_impact) ... ok
+test_signal_and_falsification_threshold (test_independent_bound.BoundControls.test_signal_and_falsification_threshold) ... ok
+test_signed_rotation_lower_bound_is_omega_times_largest_impact (test_independent_bound.BoundControls.test_signed_rotation_lower_bound_is_omega_times_largest_impact) ... ok
+test_exact_outer_domain_avoids_floating_point_sliver (test_spectrum.SpectralControls.test_exact_outer_domain_avoids_floating_point_sliver) ... ok
+test_independent_v71_moments_for_nonuniform_fields (test_spectrum.SpectralControls.test_independent_v71_moments_for_nonuniform_fields) ... ok
+test_rigid_rotation_exact_paths_and_photon_scale (test_spectrum.SpectralControls.test_rigid_rotation_exact_paths_and_photon_scale) ... ok
+test_single_gaussian_flux_width_centroid_and_mode (test_spectrum.SpectralControls.test_single_gaussian_flux_width_centroid_and_mode) ... ok
+test_variable_temperature_shear_mixture_and_reversal (test_spectrum.SpectralControls.test_variable_temperature_shear_mixture_and_reversal) ... ok
+test_zero_flow_and_invalid_resolution (test_spectrum.SpectralControls.test_zero_flow_and_invalid_resolution) ... ok
+test_brightness_coordinates_and_axis_uncertainty (test_study.PredictionSeparationControls.test_brightness_coordinates_and_axis_uncertainty) ... ok
+test_measured_speed_mutation_leaves_prediction_bytes_identical (test_study.PredictionSeparationControls.test_measured_speed_mutation_leaves_prediction_bytes_identical) ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 1.009s
+
+OK

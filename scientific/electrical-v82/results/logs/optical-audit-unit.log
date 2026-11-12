@@ -1,0 +1,21 @@
+test_changed_new_prediction_seal_rejected (test_audit_optics82.OpticalAudit82Tests.test_changed_new_prediction_seal_rejected) ... ok
+test_compressed_velocity_packet_seal_is_checked (test_audit_optics82.OpticalAudit82Tests.test_compressed_velocity_packet_seal_is_checked) ... ok
+test_exact_common_annulus_signed_observer (test_audit_optics82.OpticalAudit82Tests.test_exact_common_annulus_signed_observer) ... ok
+test_forged_centroid_fails_independent_los (test_audit_optics82.OpticalAudit82Tests.test_forged_centroid_fails_independent_los) ... ok
+test_forged_variance_fails_independent_thermal_moment (test_audit_optics82.OpticalAudit82Tests.test_forged_variance_fails_independent_thermal_moment) ... ok
+test_full_20_group_80_case_campaign_passes (test_audit_optics82.OpticalAudit82Tests.test_full_20_group_80_case_campaign_passes) ... ok
+test_lp_certificate_cannot_hide_violated_brightness (test_audit_optics82.OpticalAudit82Tests.test_lp_certificate_cannot_hide_violated_brightness) ... ok
+test_missing_group_rejected (test_audit_optics82.OpticalAudit82Tests.test_missing_group_rejected) ... ok
+test_raw_group_seal_is_checked_separately (test_audit_optics82.OpticalAudit82Tests.test_raw_group_seal_is_checked_separately) ... ok
+test_stale_diagnostic_receipt_rejected (test_audit_optics82.OpticalAudit82Tests.test_stale_diagnostic_receipt_rejected) ... ok
+test_true_group_qualification_rejected (test_audit_optics82.OpticalAudit82Tests.test_true_group_qualification_rejected) ... ok
+test_unavailable_lp_stays_visible (test_audit_optics82.OpticalAudit82Tests.test_unavailable_lp_stays_visible) ... ok
+test_drive_label_cannot_select_a_different_electrical_solution (test_compare82.SealedComparison.test_drive_label_cannot_select_a_different_electrical_solution) ... ok
+test_point_match_cannot_hide_incompatible_voltage_or_unresolved_optics (test_compare82.SealedComparison.test_point_match_cannot_hide_incompatible_voltage_or_unresolved_optics) ... ok
+test_stale_prediction_and_compressed_packet_rejected (test_compare82.SealedComparison.test_stale_prediction_and_compressed_packet_rejected) ... ok
+test_sealed_campaign_never_reads_or_fits_measured_targets (test_campaign82.CampaignOrchestration.test_sealed_campaign_never_reads_or_fits_measured_targets) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 7.971s
+
+OK

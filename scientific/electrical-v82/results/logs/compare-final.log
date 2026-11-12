@@ -1,0 +1,23 @@
+{
+  "predictionSHA256": "8b4041c7db6ee606db57dca695da350919c7a6f0c29727f2dbd3ac010ecd857e",
+  "comparisonSHA256": "33bbc1fc47d2dd07f4e49f5d5d985a279461e9a8ef48cf2b1f4f58846cbd894c",
+  "comparisonRawSHA256": "0223bc302064ce950d1708038f93fc317c51e1e32be4a3aeba52dc3d981b7489",
+  "alternatives": 5760,
+  "experimentalQualification": false,
+  "anyEligiblePointPass": false,
+  "anyAllPointPass": false,
+  "anyOpticallyResolvedVoltageCompatiblePointMatch": false,
+  "scoreScope": "Original any*PointPass flags measure optical point matching only. Additional conjunction requires optical gates and voltage compatibility, not current agreement or flow qualification. Development-data diagnosis, not held-out validation.",
+  "driveSummaries": {
+    "absolute-voltage": {
+      "alternatives": 4320,
+      "anyEligiblePointPass": false,
+      "anyAllPointPass": false
+    },
+    "fixed-current": {
+      "alternatives": 1440,
+      "anyEligiblePointPass": false,
+      "anyAllPointPass": false
+    }
+  }
+}

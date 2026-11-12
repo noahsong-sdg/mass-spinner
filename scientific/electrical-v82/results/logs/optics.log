@@ -1,0 +1,100 @@
+Predict beta=absolute-voltage V=18.5
+Predict beta=absolute-voltage V=18.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=93.92217463084569
+Predict beta=fixed-current V=93.79322362112549
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-v81-leading-te1-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-v81-leading-te1-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=94.13335507889052
+Predict beta=fixed-current V=94.00404819814311
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te1-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te1-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=66.29378660765549
+Predict beta=fixed-current V=66.20491023242187
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-source-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-source-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=60.011023123259385
+Predict beta=fixed-current V=59.94970569742281
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-ei-only-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-ei-only-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=74.34884654056961
+Predict beta=fixed-current V=74.25870134781287
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-uniform20-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished linear-finite-te2.5-uniform20-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=95.43698793549248
+Predict beta=fixed-current V=95.30823029124
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-v81-leading-te1-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-v81-leading-te1-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=95.62689114556356
+Predict beta=fixed-current V=95.4977768475391
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-finite-te1-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-finite-te1-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=65.48394206943308
+Predict beta=fixed-current V=65.39524805920773
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-finite-te2.5-source-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-finite-te2.5-source-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=60.95596953839935
+Predict beta=fixed-current V=60.89465967131197
+Predict beta=absolute-voltage V=18.5
+Optical group finished quadratic-finite-te2.5-ei-only-anode-0.07
+Predict beta=absolute-voltage V=18.5
+Predict beta=absolute-voltage V=16.5
+Optical group finished quadratic-finite-te2.5-ei-only-anode-0.08
+Predict beta=absolute-voltage V=16.5
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=75.49429506220676
+Predict beta=absolute-voltage V=20.5
+Predict beta=fixed-current V=75.40418357401356
+Optical group finished quadratic-finite-te2.5-uniform20-anode-0.07
+Optical group finished quadratic-finite-te2.5-uniform20-anode-0.08

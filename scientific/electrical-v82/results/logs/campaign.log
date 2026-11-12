@@ -1,0 +1,201 @@
+Starting linear-v81-leading-te1-anode-0.07 1 18.5
+Finished linear-v81-leading-te1-anode-0.07 1 18.5 A 18.50205721317858 s 0.05
+Starting linear-v81-leading-te1-anode-0.07 2 18.5
+Finished linear-v81-leading-te1-anode-0.07 2 18.5 A 19.29086253928515 s 0.23
+Starting linear-v81-leading-te1-anode-0.07 4 18.5
+Finished linear-v81-leading-te1-anode-0.07 4 18.5 A 19.697158921961627 s 1.85
+Starting linear-v81-leading-te1-anode-0.07 4 16.5
+Finished linear-v81-leading-te1-anode-0.07 4 16.5 A 17.567736335803588 s 1.28
+Starting linear-v81-leading-te1-anode-0.07 4 20.5
+Finished linear-v81-leading-te1-anode-0.07 4 20.5 A 21.82658150811959 s 1.24
+Starting linear-v81-leading-te1-anode-0.08 1 18.5
+Finished linear-v81-leading-te1-anode-0.08 1 18.5 A 18.531325165244745 s 0.05
+Starting linear-v81-leading-te1-anode-0.08 2 18.5
+Finished linear-v81-leading-te1-anode-0.08 2 18.5 A 19.31866597371503 s 0.24
+Starting linear-v81-leading-te1-anode-0.08 4 18.5
+Finished linear-v81-leading-te1-anode-0.08 4 18.5 A 19.724239434108924 s 1.82
+Starting linear-v81-leading-te1-anode-0.08 4 16.5
+Finished linear-v81-leading-te1-anode-0.08 4 16.5 A 17.591889225016068 s 1.23
+Starting linear-v81-leading-te1-anode-0.08 4 20.5
+Finished linear-v81-leading-te1-anode-0.08 4 20.5 A 21.856589643201815 s 1.23
+Starting linear-finite-te1-anode-0.07 1 18.5
+Finished linear-finite-te1-anode-0.07 1 18.5 A 18.460021813409472 s 0.06
+Starting linear-finite-te1-anode-0.07 2 18.5
+Finished linear-finite-te1-anode-0.07 2 18.5 A 19.24748248008664 s 0.24
+Starting linear-finite-te1-anode-0.07 4 18.5
+Finished linear-finite-te1-anode-0.07 4 18.5 A 19.652969964255146 s 1.87
+Starting linear-finite-te1-anode-0.07 4 16.5
+Finished linear-finite-te1-anode-0.07 4 16.5 A 17.52832456271402 s 1.24
+Starting linear-finite-te1-anode-0.07 4 20.5
+Finished linear-finite-te1-anode-0.07 4 20.5 A 21.777615365796233 s 1.21
+Starting linear-finite-te1-anode-0.08 1 18.5
+Finished linear-finite-te1-anode-0.08 1 18.5 A 18.48921173684112 s 0.06
+Starting linear-finite-te1-anode-0.08 2 18.5
+Finished linear-finite-te1-anode-0.08 2 18.5 A 19.27522920500129 s 0.24
+Starting linear-finite-te1-anode-0.08 4 18.5
+Finished linear-finite-te1-anode-0.08 4 18.5 A 19.680003526024144 s 1.84
+Starting linear-finite-te1-anode-0.08 4 16.5
+Finished linear-finite-te1-anode-0.08 4 16.5 A 17.55243557726476 s 1.38
+Starting linear-finite-te1-anode-0.08 4 20.5
+Finished linear-finite-te1-anode-0.08 4 20.5 A 21.807571474783508 s 1.25
+Starting linear-finite-te2.5-source-anode-0.07 1 18.5
+Finished linear-finite-te2.5-source-anode-0.07 1 18.5 A 26.269267215188734 s 0.07
+Starting linear-finite-te2.5-source-anode-0.07 2 18.5
+Finished linear-finite-te2.5-source-anode-0.07 2 18.5 A 27.36048502480675 s 0.26
+Starting linear-finite-te2.5-source-anode-0.07 4 18.5
+Finished linear-finite-te2.5-source-anode-0.07 4 18.5 A 27.90608433560748 s 1.91
+Starting linear-finite-te2.5-source-anode-0.07 4 16.5
+Finished linear-finite-te2.5-source-anode-0.07 4 16.5 A 24.88921035337965 s 1.24
+Starting linear-finite-te2.5-source-anode-0.07 4 20.5
+Finished linear-finite-te2.5-source-anode-0.07 4 20.5 A 30.922958317835317 s 1.24
+Starting linear-finite-te2.5-source-anode-0.08 1 18.5
+Finished linear-finite-te2.5-source-anode-0.08 1 18.5 A 26.304285302946855 s 0.06
+Starting linear-finite-te2.5-source-anode-0.08 2 18.5
+Finished linear-finite-te2.5-source-anode-0.08 2 18.5 A 27.39720677905939 s 0.25
+Starting linear-finite-te2.5-source-anode-0.08 4 18.5
+Finished linear-finite-te2.5-source-anode-0.08 4 18.5 A 27.94354668717635 s 1.84
+Starting linear-finite-te2.5-source-anode-0.08 4 16.5
+Finished linear-finite-te2.5-source-anode-0.08 4 16.5 A 24.922622720995143 s 1.24
+Starting linear-finite-te2.5-source-anode-0.08 4 20.5
+Finished linear-finite-te2.5-source-anode-0.08 4 20.5 A 30.9644706533576 s 1.22
+Starting linear-finite-te2.5-ei-only-anode-0.07 1 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.07 1 18.5 A 28.921140202089866 s 0.07
+Starting linear-finite-te2.5-ei-only-anode-0.07 2 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.07 2 18.5 A 30.18943921315242 s 0.25
+Starting linear-finite-te2.5-ei-only-anode-0.07 4 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.07 4 18.5 A 30.827669713282514 s 1.84
+Starting linear-finite-te2.5-ei-only-anode-0.07 4 16.5
+Finished linear-finite-te2.5-ei-only-anode-0.07 4 16.5 A 27.494948663197892 s 1.29
+Starting linear-finite-te2.5-ei-only-anode-0.07 4 20.5
+Finished linear-finite-te2.5-ei-only-anode-0.07 4 20.5 A 34.16039076336714 s 1.27
+Starting linear-finite-te2.5-ei-only-anode-0.08 1 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.08 1 18.5 A 28.949418911442812 s 0.07
+Starting linear-finite-te2.5-ei-only-anode-0.08 2 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.08 2 18.5 A 30.22005915603249 s 0.26
+Starting linear-finite-te2.5-ei-only-anode-0.08 4 18.5
+Finished linear-finite-te2.5-ei-only-anode-0.08 4 18.5 A 30.859200699621283 s 1.89
+Starting linear-finite-te2.5-ei-only-anode-0.08 4 16.5
+Finished linear-finite-te2.5-ei-only-anode-0.08 4 16.5 A 27.52307089425685 s 1.25
+Starting linear-finite-te2.5-ei-only-anode-0.08 4 20.5
+Finished linear-finite-te2.5-ei-only-anode-0.08 4 20.5 A 34.19533050498583 s 1.26
+Starting linear-finite-te2.5-uniform20-anode-0.07 1 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.07 1 18.5 A 23.364761117667005 s 0.07
+Starting linear-finite-te2.5-uniform20-anode-0.07 2 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.07 2 18.5 A 24.372221823538226 s 0.26
+Starting linear-finite-te2.5-uniform20-anode-0.07 4 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.07 4 18.5 A 24.882699410683106 s 1.85
+Starting linear-finite-te2.5-uniform20-anode-0.07 4 16.5
+Finished linear-finite-te2.5-uniform20-anode-0.07 4 16.5 A 22.192677852771453 s 1.27
+Starting linear-finite-te2.5-uniform20-anode-0.07 4 20.5
+Finished linear-finite-te2.5-uniform20-anode-0.07 4 20.5 A 27.572720968594822 s 1.35
+Starting linear-finite-te2.5-uniform20-anode-0.08 1 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.08 1 18.5 A 23.394301800704675 s 0.08
+Starting linear-finite-te2.5-uniform20-anode-0.08 2 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.08 2 18.5 A 24.402255206787487 s 0.28
+Starting linear-finite-te2.5-uniform20-anode-0.08 4 18.5
+Finished linear-finite-te2.5-uniform20-anode-0.08 4 18.5 A 24.912905375694233 s 1.92
+Starting linear-finite-te2.5-uniform20-anode-0.08 4 16.5
+Finished linear-finite-te2.5-uniform20-anode-0.08 4 16.5 A 22.219618308051587 s 1.28
+Starting linear-finite-te2.5-uniform20-anode-0.08 4 20.5
+Finished linear-finite-te2.5-uniform20-anode-0.08 4 20.5 A 27.606192443336838 s 1.3
+Starting quadratic-v81-leading-te1-anode-0.07 1 18.5
+Finished quadratic-v81-leading-te1-anode-0.07 1 18.5 A 18.210413247496902 s 0.09
+Starting quadratic-v81-leading-te1-anode-0.07 2 18.5
+Finished quadratic-v81-leading-te1-anode-0.07 2 18.5 A 18.985875578755987 s 0.26
+Starting quadratic-v81-leading-te1-anode-0.07 4 18.5
+Finished quadratic-v81-leading-te1-anode-0.07 4 18.5 A 19.384517889965757 s 1.84
+Starting quadratic-v81-leading-te1-anode-0.07 4 16.5
+Finished quadratic-v81-leading-te1-anode-0.07 4 16.5 A 17.288894334293765 s 1.29
+Starting quadratic-v81-leading-te1-anode-0.07 4 20.5
+Finished quadratic-v81-leading-te1-anode-0.07 4 20.5 A 21.48014144563772 s 1.27
+Starting quadratic-v81-leading-te1-anode-0.08 1 18.5
+Finished quadratic-v81-leading-te1-anode-0.08 1 18.5 A 18.23854695619991 s 0.08
+Starting quadratic-v81-leading-te1-anode-0.08 2 18.5
+Finished quadratic-v81-leading-te1-anode-0.08 2 18.5 A 19.012710605415513 s 0.27
+Starting quadratic-v81-leading-te1-anode-0.08 4 18.5
+Finished quadratic-v81-leading-te1-anode-0.08 4 18.5 A 19.410705605872927 s 2.04
+Starting quadratic-v81-leading-te1-anode-0.08 4 16.5
+Finished quadratic-v81-leading-te1-anode-0.08 4 16.5 A 17.312250945778544 s 1.27
+Starting quadratic-v81-leading-te1-anode-0.08 4 20.5
+Finished quadratic-v81-leading-te1-anode-0.08 4 20.5 A 21.509160265967306 s 1.27
+Starting quadratic-finite-te1-anode-0.07 1 18.5
+Finished quadratic-finite-te1-anode-0.07 1 18.5 A 18.17360175800444 s 0.08
+Starting quadratic-finite-te1-anode-0.07 2 18.5
+Finished quadratic-finite-te1-anode-0.07 2 18.5 A 18.9480155185052 s 0.3
+Starting quadratic-finite-te1-anode-0.07 4 18.5
+Finished quadratic-finite-te1-anode-0.07 4 18.5 A 19.346022628550415 s 1.86
+Starting quadratic-finite-te1-anode-0.07 4 16.5
+Finished quadratic-finite-te1-anode-0.07 4 16.5 A 17.25456072276117 s 1.28
+Starting quadratic-finite-te1-anode-0.07 4 20.5
+Finished quadratic-finite-te1-anode-0.07 4 20.5 A 21.43748453433964 s 1.27
+Starting quadratic-finite-te1-anode-0.08 1 18.5
+Finished quadratic-finite-te1-anode-0.08 1 18.5 A 18.201676188770673 s 0.08
+Starting quadratic-finite-te1-anode-0.08 2 18.5
+Finished quadratic-finite-te1-anode-0.08 2 18.5 A 18.97481021453983 s 0.27
+Starting quadratic-finite-te1-anode-0.08 4 18.5
+Finished quadratic-finite-te1-anode-0.08 4 18.5 A 19.372178715254282 s 1.88
+Starting quadratic-finite-te1-anode-0.08 4 16.5
+Finished quadratic-finite-te1-anode-0.08 4 16.5 A 17.277889124415964 s 1.32
+Starting quadratic-finite-te1-anode-0.08 4 20.5
+Finished quadratic-finite-te1-anode-0.08 4 20.5 A 21.466468306092594 s 1.27
+Starting quadratic-finite-te2.5-source-anode-0.07 1 18.5
+Finished quadratic-finite-te2.5-source-anode-0.07 1 18.5 A 26.586529164061453 s 0.09
+Starting quadratic-finite-te2.5-source-anode-0.07 2 18.5
+Finished quadratic-finite-te2.5-source-anode-0.07 2 18.5 A 27.696257034165356 s 0.27
+Starting quadratic-finite-te2.5-source-anode-0.07 4 18.5
+Finished quadratic-finite-te2.5-source-anode-0.07 4 18.5 A 28.25120085223996 s 1.88
+Starting quadratic-finite-te2.5-source-anode-0.07 4 16.5
+Finished quadratic-finite-te2.5-source-anode-0.07 4 16.5 A 25.197016976322146 s 1.31
+Starting quadratic-finite-te2.5-source-anode-0.07 4 20.5
+Finished quadratic-finite-te2.5-source-anode-0.07 4 20.5 A 31.30538472815776 s 1.3
+Starting quadratic-finite-te2.5-source-anode-0.08 1 18.5
+Finished quadratic-finite-te2.5-source-anode-0.08 1 18.5 A 26.621928068687463 s 0.09
+Starting quadratic-finite-te2.5-source-anode-0.08 2 18.5
+Finished quadratic-finite-te2.5-source-anode-0.08 2 18.5 A 27.733677845851865 s 0.28
+Starting quadratic-finite-te2.5-source-anode-0.08 4 18.5
+Finished quadratic-finite-te2.5-source-anode-0.08 4 18.5 A 28.289517279987102 s 1.91
+Starting quadratic-finite-te2.5-source-anode-0.08 4 16.5
+Finished quadratic-finite-te2.5-source-anode-0.08 4 16.5 A 25.23119108755603 s 1.26
+Starting quadratic-finite-te2.5-source-anode-0.08 4 20.5
+Finished quadratic-finite-te2.5-source-anode-0.08 4 20.5 A 31.34784347241815 s 1.27
+Starting quadratic-finite-te2.5-ei-only-anode-0.07 1 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.07 1 18.5 A 28.481621461078195 s 0.09
+Starting quadratic-finite-te2.5-ei-only-anode-0.07 2 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.07 2 18.5 A 29.724669706707957 s 0.28
+Starting quadratic-finite-te2.5-ei-only-anode-0.07 4 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.07 4 18.5 A 30.349775649693967 s 1.9
+Starting quadratic-finite-te2.5-ei-only-anode-0.07 4 16.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.07 4 16.5 A 27.06871882270003 s 1.29
+Starting quadratic-finite-te2.5-ei-only-anode-0.07 4 20.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.07 4 20.5 A 33.630832476687864 s 1.28
+Starting quadratic-finite-te2.5-ei-only-anode-0.08 1 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.08 1 18.5 A 28.508957546389922 s 0.09
+Starting quadratic-finite-te2.5-ei-only-anode-0.08 2 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.08 2 18.5 A 29.754325192617102 s 0.27
+Starting quadratic-finite-te2.5-ei-only-anode-0.08 4 18.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.08 4 18.5 A 30.380332363883 s 1.86
+Starting quadratic-finite-te2.5-ei-only-anode-0.08 4 16.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.08 4 16.5 A 27.095972108328127 s 1.29
+Starting quadratic-finite-te2.5-ei-only-anode-0.08 4 20.5
+Finished quadratic-finite-te2.5-ei-only-anode-0.08 4 20.5 A 33.664692619437915 s 1.36
+Starting quadratic-finite-te2.5-uniform20-anode-0.07 1 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.07 1 18.5 A 23.013950068719474 s 0.1
+Starting quadratic-finite-te2.5-uniform20-anode-0.07 2 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.07 2 18.5 A 24.004089682827363 s 0.28
+Starting quadratic-finite-te2.5-uniform20-anode-0.07 4 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.07 4 18.5 A 24.505162919603574 s 1.86
+Starting quadratic-finite-te2.5-uniform20-anode-0.07 4 16.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.07 4 16.5 A 21.855956117484233 s 1.27
+Starting quadratic-finite-te2.5-uniform20-anode-0.07 4 20.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.07 4 20.5 A 27.154369721722887 s 1.28
+Starting quadratic-finite-te2.5-uniform20-anode-0.08 1 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.08 1 18.5 A 23.04247440996984 s 0.1
+Starting quadratic-finite-te2.5-uniform20-anode-0.08 2 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.08 2 18.5 A 24.033173009496423 s 0.28
+Starting quadratic-finite-te2.5-uniform20-anode-0.08 4 18.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.08 4 18.5 A 24.53444772310436 s 1.92
+Starting quadratic-finite-te2.5-uniform20-anode-0.08 4 16.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.08 4 16.5 A 21.882074996282242 s 1.29
+Starting quadratic-finite-te2.5-uniform20-anode-0.08 4 20.5
+Finished quadratic-finite-te2.5-uniform20-anode-0.08 4 20.5 A 27.18682044992646 s 1.26
+SEALED 8b4041c7db6ee606db57dca695da350919c7a6f0c29727f2dbd3ac010ecd857e

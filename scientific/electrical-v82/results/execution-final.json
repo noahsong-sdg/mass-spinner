@@ -1,0 +1,151 @@
+{
+  "phase": "final",
+  "sourceSHA256": {
+    "scientific/electrical-v82/access82.py": "bb9b73b7596c59e360ddd5139c8e3de6bd28f10e3d7c3aba4f46db24b0ca0305",
+    "scientific/electrical-v82/audit82.py": "253b14806f43b1d0876576a37268177de8ba963299b7f23ea7dbe871e6784bdd",
+    "scientific/electrical-v82/audit_optics82.py": "a31275262879466d0a3fa1bc1e57131de3686a2e1f1860479214b84afb9a11db",
+    "scientific/electrical-v82/budget82.py": "4f512a1c6e510d5a662c0d694fe61b2a43a6c92a83f3e88eda6fe63ed793882c",
+    "scientific/electrical-v82/campaign82.py": "363a8064b6ad13d4eff69ecd85b4bfcf1081b9a69d5e015cfc4d754aa55eb8ac",
+    "scientific/electrical-v82/compare82.py": "9777991b6409a886d7827c11bc1d3708249365beb6a0138bdb0b22129930ae96",
+    "scientific/electrical-v82/model82.py": "108741feca2e4711b6b6af9598a550667d9223208e3525541b7273db5bf50409",
+    "scientific/electrical-v82/optics82.py": "7f1f95370470b8ecc3ff1ff1298e25e12ef92dccd0b4adba5818a6fd04e51b4e",
+    "scientific/electrical-v82/run82.py": "d20c0bc833fa64cf29c08196b0ac51caf32444c48cde7bafb22fae8a8f0f305c",
+    "scientific/electrical-v82/test_access82.py": "b7b4f31211b20198a7493c86140977bebef0ad87db2c37c2e32231d6d5b32f81",
+    "scientific/electrical-v82/test_audit82.py": "388c1916c834bafc31cfd134ce554db3812f8dbc13e79b24c33ae231513b82d1",
+    "scientific/electrical-v82/test_audit_optics82.py": "8931a0e2aab7c7d46ef5f7ef5c2d6d95f9d56cbe4788f8fe78e1811db72a761d",
+    "scientific/electrical-v82/test_campaign82.py": "2c52af62097f976bc901e29d07bc4f03f77e6364adac9f95f422a14caf825ede",
+    "scientific/electrical-v82/test_compare82.py": "8854853bd22a4a0d7abf481acfef6c2172845ed3b5db41f1dea7675bcfefb403",
+    "scientific/electrical-v82/test_model82.py": "57244aefded6e3c0d2da83731cc2cf2cd00d796199eda1dc3144a416d154554a",
+    "scientific/electrical-v82/test_transport82.py": "e351ba37f19af64f66b326b1c29fdea77464a4ea9bd32b5e9b3c10c72d20607e",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072"
+  },
+  "commands": [
+    {
+      "name": "electrical-controls-final",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_access82",
+        "test_transport82",
+        "test_model82",
+        "test_audit82",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "electrical-audit-final",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit82.py",
+        "results/predictions.json",
+        "results/access-results.json",
+        "results/electrical-audit.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "optical-audit-unit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_audit_optics82",
+        "test_compare82",
+        "test_campaign82",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "compare-final",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "compare82.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "optical-audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit_optics82.py",
+        "results",
+        "results/optical-audit.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "v79-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "../profile-v79",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "v80-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "../optical-v80",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "v81-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "../flow-v81",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "app-test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0
+    }
+  ]
+}

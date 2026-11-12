@@ -1,0 +1,27 @@
+FiPy disk access 16 22.364325705383077 0.008909227074285724
+FiPy disk access 32 22.506120556004618 0.0026254888587596147
+FiPy disk access 64 22.54832952612025 0.00075496875601268
+FiPy disk access 128 22.560552312566596 0.0002133074054314399
+Traceback (most recent call last):
+  File "/work/project/scientific/electrical-v82/access82.py", line 106, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/work/project/scientific/electrical-v82/access82.py", line 103, in main
+    Path(sys.argv[1]).write_text(json.dumps(output,indent=2,allow_nan=False)+'\n')
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/usr/lib/python3.11/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/usr/lib/python3.11/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/usr/lib/python3.11/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable

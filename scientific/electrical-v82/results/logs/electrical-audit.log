@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/work/project/scientific/electrical-v82/audit82.py", line 221, in <module>
+    result=audit(sys.argv[1],sys.argv[2]); Path(sys.argv[3]).write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/project/scientific/electrical-v82/audit82.py", line 63, in audit
+    path,access_path=Path(path),Path(access_path); root=Path(root) if root else path.parents[3]
+                                                                                ~~~~~~~~~~~~^^^
+  File "/usr/lib/python3.11/pathlib.py", line 446, in __getitem__
+    raise IndexError(idx)
+IndexError: 3

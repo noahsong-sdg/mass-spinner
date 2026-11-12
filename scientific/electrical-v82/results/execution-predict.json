@@ -1,0 +1,78 @@
+{
+  "phase": "predict",
+  "sourceSHA256": {
+    "scientific/electrical-v82/access82.py": "bb9b73b7596c59e360ddd5139c8e3de6bd28f10e3d7c3aba4f46db24b0ca0305",
+    "scientific/electrical-v82/audit82.py": "3622e54191ffe96455c85a4c1ca5de6875821e3925d5bf138e9ced22760178b8",
+    "scientific/electrical-v82/budget82.py": "4f512a1c6e510d5a662c0d694fe61b2a43a6c92a83f3e88eda6fe63ed793882c",
+    "scientific/electrical-v82/campaign82.py": "363a8064b6ad13d4eff69ecd85b4bfcf1081b9a69d5e015cfc4d754aa55eb8ac",
+    "scientific/electrical-v82/compare82.py": "8ff49ca07609e8d018a4fedf05b917ee067a199707df6e7e0b7157e0f53176a6",
+    "scientific/electrical-v82/model82.py": "108741feca2e4711b6b6af9598a550667d9223208e3525541b7273db5bf50409",
+    "scientific/electrical-v82/optics82.py": "7f1f95370470b8ecc3ff1ff1298e25e12ef92dccd0b4adba5818a6fd04e51b4e",
+    "scientific/electrical-v82/run82.py": "bb86b8cb7df51d0f7ed5d72cec5a08653e41763243c14d7c8003d0212345addc",
+    "scientific/electrical-v82/test_access82.py": "b7b4f31211b20198a7493c86140977bebef0ad87db2c37c2e32231d6d5b32f81",
+    "scientific/electrical-v82/test_audit82.py": "6521218116da5a7adb0a4e46766499d487c40dad4d18ff277d3667b2eac59f61",
+    "scientific/electrical-v82/test_model82.py": "57244aefded6e3c0d2da83731cc2cf2cd00d796199eda1dc3144a416d154554a",
+    "scientific/electrical-v82/test_transport82.py": "e351ba37f19af64f66b326b1c29fdea77464a4ea9bd32b5e9b3c10c72d20607e",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072"
+  },
+  "commands": [
+    {
+      "name": "unit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "test_access82",
+        "test_transport82",
+        "test_model82",
+        "test_audit82",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "access",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "access82.py",
+        "results/access-results.json"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "campaign",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "campaign82.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "optics",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "optics82.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "compare",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "compare82.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "electrical-audit",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "audit82.py",
+        "results/predictions.json",
+        "results/access-results.json",
+        "results/electrical-audit.json"
+      ],
+      "exitCode": 1
+    }
+  ]
+}

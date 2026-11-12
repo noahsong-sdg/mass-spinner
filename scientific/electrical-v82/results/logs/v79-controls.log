@@ -1,0 +1,21 @@
+test_balances_and_passivity (test_reference.ReferenceControls.test_balances_and_passivity) ... ok
+test_magnetic_reversal (test_reference.ReferenceControls.test_magnetic_reversal) ... ok
+test_no_experimental_velocity_input (test_reference.ReferenceControls.test_no_experimental_velocity_input) ... ok
+test_voltage_reversal_and_linearity (test_reference.ReferenceControls.test_voltage_reversal_and_linearity) ... ok
+test_zero_magnetic_field_has_no_rotation (test_reference.ReferenceControls.test_zero_magnetic_field_has_no_rotation) ... ok
+test_axis_calibration_and_extraction_masks_ignore_predictions (test_score.ScoringControls.test_axis_calibration_and_extraction_masks_ignore_predictions) ... ok
+test_radius_interval_includes_internal_prediction_peak (test_score.ScoringControls.test_radius_interval_includes_internal_prediction_peak) ... ok
+test_target_mutation_changes_scores_but_not_predictions (test_score.ScoringControls.test_target_mutation_changes_scores_but_not_predictions) ... ok
+test_electrical_conditioning_ignores_target_velocity_mutation (test_solver.SolverControls.test_electrical_conditioning_ignores_target_velocity_mutation) ... ok
+test_mesh_resolves_fixed_electrode_edges (test_solver.SolverControls.test_mesh_resolves_fixed_electrode_edges) ... ok
+test_nonzero_drive_closes_charge_torque_and_power (test_solver.SolverControls.test_nonzero_drive_closes_charge_torque_and_power) ... ok
+test_reversing_field_reverses_rotation_not_charge_or_dissipation (test_solver.SolverControls.test_reversing_field_reverses_rotation_not_charge_or_dissipation) ... ok
+test_solid_body_observation_is_signed_omega_times_chord (test_solver.SolverControls.test_solid_body_observation_is_signed_omega_times_chord) ... ok
+test_unbracketed_electrical_condition_is_unavailable (test_solver.SolverControls.test_unbracketed_electrical_condition_is_unavailable) ... ok
+test_voltage_reversal_and_scaling_are_linear (test_solver.SolverControls.test_voltage_reversal_and_scaling_are_linear) ... ok
+test_zero_field_keeps_electric_current_but_removes_rotation (test_solver.SolverControls.test_zero_field_keeps_electric_current_but_removes_rotation) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.523s
+
+OK

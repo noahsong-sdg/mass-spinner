@@ -1,0 +1,147 @@
+{
+  "predictionSHA256": "8b4041c7db6ee606db57dca695da350919c7a6f0c29727f2dbd3ac010ecd857e",
+  "experimentalQualification": false,
+  "targetVelocityRead": false,
+  "groups": [
+    {
+      "group": "linear-v81-leading-te1-anode-0.07",
+      "path": "optics/linear-v81-leading-te1-anode-0.07.json.gz",
+      "sha256": "e6e9bf76247562cc6d0bf13bd2d0683b733410a6d5e4742d7500b53de7818766",
+      "rawSHA256": "563cf4d56956f8b206daf7eb08f1d65607be757f51c5b927e26e7e52347520d0"
+    },
+    {
+      "group": "linear-v81-leading-te1-anode-0.08",
+      "path": "optics/linear-v81-leading-te1-anode-0.08.json.gz",
+      "sha256": "86bb69c8ec9c12ef0efb88569abeb2d234464f4a03e2345301d0ae9512fb5c82",
+      "rawSHA256": "81325da0d220c9920f71e4cd8fafeb1139daf7161c7cb4ed45388ab3cb2e75e7"
+    },
+    {
+      "group": "linear-finite-te1-anode-0.07",
+      "path": "optics/linear-finite-te1-anode-0.07.json.gz",
+      "sha256": "5620331ee3503f8b10288e63554305c6839271239deeae8513ecf0c291a0f20d",
+      "rawSHA256": "a4d7eaccc3d70e77fd8af729c54378e91cd74bfc53a18fa5f4bd09b3fd06f10e"
+    },
+    {
+      "group": "linear-finite-te1-anode-0.08",
+      "path": "optics/linear-finite-te1-anode-0.08.json.gz",
+      "sha256": "f950b501b610cf0b72e3fab98a0bceccb2f39eb5c9ff10944962938b9eb718a3",
+      "rawSHA256": "24ff966d0318bbd803a7b51d69a4222dd18073cc2aa8ae243fb0b5d464a10c94"
+    },
+    {
+      "group": "linear-finite-te2.5-source-anode-0.07",
+      "path": "optics/linear-finite-te2.5-source-anode-0.07.json.gz",
+      "sha256": "13a91ea085e090d741eed7f714b3444b976480f142cd779fbef875b0fa50a356",
+      "rawSHA256": "5c83896cca8ea98ddf807303b9c2094cd8687c254821a924fc210e29f6072f5e"
+    },
+    {
+      "group": "linear-finite-te2.5-source-anode-0.08",
+      "path": "optics/linear-finite-te2.5-source-anode-0.08.json.gz",
+      "sha256": "068c003572d36f59c8031278e8f382c2c2f9e47963ed998d94f8011a85363eb9",
+      "rawSHA256": "ff933bf67337416930502ed148db412c18441ded004601bafc090caacfe02d2b"
+    },
+    {
+      "group": "linear-finite-te2.5-ei-only-anode-0.07",
+      "path": "optics/linear-finite-te2.5-ei-only-anode-0.07.json.gz",
+      "sha256": "f24a5d94d2a12dab5d6f79eb6e2887cf9c9c7cdcbd7f6cf545ef590df3514e1c",
+      "rawSHA256": "cf7f2d9654849193e1c2f8390e58b93517242a96ded668b68450f4f6c1f0e7ec"
+    },
+    {
+      "group": "linear-finite-te2.5-ei-only-anode-0.08",
+      "path": "optics/linear-finite-te2.5-ei-only-anode-0.08.json.gz",
+      "sha256": "f45ca6306d4ca8a95ce47f96bf02c7764f6f0799314638315173fe17f3967a0b",
+      "rawSHA256": "c9b3d944749ff2ef5fdf66a5f4df191bd3dad158215fcf22514e41adf0eedc99"
+    },
+    {
+      "group": "linear-finite-te2.5-uniform20-anode-0.07",
+      "path": "optics/linear-finite-te2.5-uniform20-anode-0.07.json.gz",
+      "sha256": "dc2f577a4fcb364b9ef8eeb0e3aa7c5e9c9f064889e7c3a1977430f6ca280435",
+      "rawSHA256": "d6f829bd765b950da24d4f032ea897e5ba63325266d2bf7a3acbd295a5aa5410"
+    },
+    {
+      "group": "linear-finite-te2.5-uniform20-anode-0.08",
+      "path": "optics/linear-finite-te2.5-uniform20-anode-0.08.json.gz",
+      "sha256": "9aebc915beeea4c047d4bf6a128c6ed50f80932a322e16c8ccdd22872b921e2b",
+      "rawSHA256": "a92db6cfd23fbba6ae75af5dc1937a2e006f4ac659f3285ff6512699189c0c7f"
+    },
+    {
+      "group": "quadratic-v81-leading-te1-anode-0.07",
+      "path": "optics/quadratic-v81-leading-te1-anode-0.07.json.gz",
+      "sha256": "83fb66b94b4350740ed88d3ca744f54a60ba90befd119f5cb74d94f5ee245a32",
+      "rawSHA256": "c0ecdfca0b35b47dd8122acf5e87b3c13fc00c743b423f2ad8c0dd3edb3c8367"
+    },
+    {
+      "group": "quadratic-v81-leading-te1-anode-0.08",
+      "path": "optics/quadratic-v81-leading-te1-anode-0.08.json.gz",
+      "sha256": "b75ecf4fee2a5b304e798e379ec01dab8d1fb13865fcb2a38b8ffe92979f5689",
+      "rawSHA256": "b605215b5e509a0f105aacb4a8b100e4ef51a0725cda23f3ef0173c5d707c6dd"
+    },
+    {
+      "group": "quadratic-finite-te1-anode-0.07",
+      "path": "optics/quadratic-finite-te1-anode-0.07.json.gz",
+      "sha256": "ebf8e7cf66a32ca6e68dfec1ed514d1887391ab1c80c7dffc9e9e251aded2d49",
+      "rawSHA256": "da9ae63cdcfd75fb7effd39cb3cb1597fcb2025626f3449d16a76c0809e754d9"
+    },
+    {
+      "group": "quadratic-finite-te1-anode-0.08",
+      "path": "optics/quadratic-finite-te1-anode-0.08.json.gz",
+      "sha256": "177995e47f3b59f9c106c8edf8b7206da3067bbb9ac5a563dab8abd9acee2cd1",
+      "rawSHA256": "9a51e74c8089ee981f70777fc6670ecb992a060145216c70697751fae5680318"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-anode-0.07",
+      "path": "optics/quadratic-finite-te2.5-source-anode-0.07.json.gz",
+      "sha256": "2531c550d96cc6e6dc39a90e2c2bda6189e7a4c9f3fd3a42aff2d590971c8857",
+      "rawSHA256": "15563e034465936733ca44f8f107e2bf56b5ccb5ff43a2f575a3f1b0dd045ca9"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-anode-0.08",
+      "path": "optics/quadratic-finite-te2.5-source-anode-0.08.json.gz",
+      "sha256": "0839ea508da8a7608a21296b9ed474f8493d4bf8ee4eb65e44812d4e9297fdf5",
+      "rawSHA256": "db5c4088ca2a159ecc6146b0fa21098ee6d91745a3800de32d2a8de0c212f854"
+    },
+    {
+      "group": "quadratic-finite-te2.5-ei-only-anode-0.07",
+      "path": "optics/quadratic-finite-te2.5-ei-only-anode-0.07.json.gz",
+      "sha256": "1e00b42aae77c524b06b4e7f54b2f6d2cd58cc4cf8376f19a8998d11042044fb",
+      "rawSHA256": "0a5442a02eac6146b599119faa24f431f97e76afe2fc7b8d713df72a6091d6d0"
+    },
+    {
+      "group": "quadratic-finite-te2.5-ei-only-anode-0.08",
+      "path": "optics/quadratic-finite-te2.5-ei-only-anode-0.08.json.gz",
+      "sha256": "75f69175498e49ea681be8eb3e77867106c951a56531571c021f1874a7222e00",
+      "rawSHA256": "d1f0f430918605e2482709baea58e29f9866b673e9228bab70ab4c316f5d4bbd"
+    },
+    {
+      "group": "quadratic-finite-te2.5-uniform20-anode-0.07",
+      "path": "optics/quadratic-finite-te2.5-uniform20-anode-0.07.json.gz",
+      "sha256": "83e36a49c108dfa59672146e5f727b2cbd52f37cb25d3d75fa314a8d40817f2f",
+      "rawSHA256": "e6714a716eeb37466dcf42a7934fcf4026384895da5057e4696e2aeda69fd0b7"
+    },
+    {
+      "group": "quadratic-finite-te2.5-uniform20-anode-0.08",
+      "path": "optics/quadratic-finite-te2.5-uniform20-anode-0.08.json.gz",
+      "sha256": "8ef67b1249161da8f440202bdf3e88e8e55feb275d30a4528961b0d349f28480",
+      "rawSHA256": "8ea96693504b732f91398977037b64f6726aacb0a993bb27e174080a5bd2383e"
+    }
+  ],
+  "operatorSHA256": {
+    "audit.py": "cb5009584602cfb59487fc15f835139aa1dfa2b6032807428d83a7ee73efdc07",
+    "compare.py": "75cfcc0ee62e0f80a986897b0e23b87e5d8846d81bda28afbd4ca4c996958bc4",
+    "emissivity.py": "342de7f162ee4e9eef593ff041722a4aaada7f035d580f7d85d39b2d0e4254e9",
+    "feasible.py": "ae300cabe0d0474a8aacecbaaa835c01eff8011c7b208a0da1a16a6c37630dec",
+    "independent_bound.py": "9d973f1bd1dba94d111994a450d1e76819615c4a5530c6e8b494683ec28d69c3",
+    "spectrum.py": "4293e2e18df87810d3fd0532e515abe62ac486383bdcfec121355789948bf2d4",
+    "study.py": "e442b93719fce9e88c65a67a4c004bfee4f980ab85f16a42cf5532016264e553",
+    "test_compare.py": "d049b3c171e214c81bead2459a997774374815fe6af4b4ca51b74510f299fa0a",
+    "test_emissivity.py": "615e5fe347e85f6e39cdafe8b907bbc5998ed619f4cc379224249322f8491aa7",
+    "test_feasible.py": "7bbc7b031774bbfbc771c683b8c5daa2af9c8b6178bff07f12ff65c8e5bce3e1",
+    "test_independent_bound.py": "367fa6ac386b9eac78dda7250a4e96147a562855c8f33ecda8eed41bafdd6d70",
+    "test_spectrum.py": "e1015cfb8d84e6ec39aa87d73c0c046b6d13a2dbe36525d926f2e898191ef508",
+    "test_study.py": "523974bbb8038f5af68311f33e98b344d696782bed997714553d417d3970a8e9"
+  },
+  "diagnosticSHA256": {
+    "brightness-independent.json": "091684a80eb612e7009e73a235e02e9c0a1020f5c7cbbc17b4016a77b754fcee",
+    "locations.json": "78b7c54a0f40034a2c08fbc8977563db1ba6ff29a75d9c0bcd4926e985b79170"
+  },
+  "legacyBetaKey": "V80 beta key contains drive label, never a numerical Hall parameter; actual spatial tensor remains in V82 predictions."
+}

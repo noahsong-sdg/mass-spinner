@@ -135,3 +135,44 @@ dissertation, but exposes no downloadable full text. No additional V–I estimat
 or contact-voltage definition was recovered from it. Missing apparatus inputs
 remain missing; neither electrical conditioning nor benchmark agreement supplies
 them.
+
+## Independent V82 implementation review
+
+Read-only review of `budget82.py`, `model82.py`, `campaign82.py`, `optics82.py`,
+`compare82.py`, the imported V81 solvers and V80 scoring path. The campaign was
+already frozen/running; no producer code or inputs were changed by this reviewer.
+
+The face laws preserve the original half-cell resistances and EMF integrals.
+Their signed electrical inflow and split Joule/work terms implement the regional
+identity above. Fixed-current scaling is mathematically exact for this linear,
+fixed-property system: potential, speed and current scale by gain; powers scale
+by its square. It is a declared current-driven calculation, not a conductivity
+fit. Its physical applicability still depends on prescribed properties and the
+required voltage; it is not a self-consistent new discharge.
+
+Two material interpretation issues require attention:
+
+1. **Nested-region refinement changes the integration domain.**
+   `budget82.py:53` selects whole cells by center depth, while
+   `audit82.py:185–188` compares their totals as a 5% refinement measure. For the
+   7 cm anode-center geometry, the 4 mm endwall region spans 5 mm on refinement 2
+   and 3.75 mm on refinement 4. Its change therefore mixes domain movement with
+   solution discretization. The saved `axialEdgesM` exposes this directly. Keep
+   a failure visible, but do not attribute it solely to physical boundary-layer
+   resolution. A subsequent diagnostic must compare the same physical cut,
+   either with mesh-aligned frozen boundaries or an explicitly reconstructed
+   subcell balance; increasing the tolerance would hide the cause.
+2. **Optical point-match flags are not admissibility flags.**
+   `compare82.py:36–38,57–60` aggregates point-error gates without requiring
+   optical mesh/spectral convergence or the reported voltage range. A
+   fixed-current prediction outside 16.5–20.5 V, or an unresolved spectral mode,
+   can set these flags true. Raw point-error flags are useful diagnostics and
+   may remain, but must be labelled as such. A separate admissibility summary
+   must conjoin the applicable numerical and electrical tests. Absolute-voltage
+   optical agreement alone also does not validate the independently predicted
+   branch current. Preserve `experimentalQualification=False` regardless.
+
+These findings are source-traced static review, not execution evidence. The
+existing optical operator retains every alternative and explicitly calls the
+comparison development-data diagnosis; no evidence of velocity fitting was
+found in the reviewed execution path.
