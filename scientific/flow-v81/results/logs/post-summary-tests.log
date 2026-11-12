@@ -1,0 +1,6 @@
+test_failed_assessment_is_never_labeled_failed_flow (test_summarize.SummaryControls.test_failed_assessment_is_never_labeled_failed_flow) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+OK

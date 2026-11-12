@@ -1,0 +1,96 @@
+{
+  "flowPredictionSHA256": "1cda6cc3b87e1cffefde611d55122855911391e8ccab538b59b27a72a904ab1d",
+  "experimentalQualification": false,
+  "groups": [
+    {
+      "transportCase": "legacy",
+      "path": "optics/legacy.json",
+      "sha256": "8526820a1fdb96c7f67985db3b251e63189c59778198edbe866dfa9de4e1f832"
+    },
+    {
+      "transportCase": "nist-2900",
+      "path": "optics/nist-2900.json",
+      "sha256": "255b8c5cb819fe2ca61ff0e52b80f9f971fb248e80351416d6d91221f70e506f"
+    },
+    {
+      "transportCase": "quadratic-nominal",
+      "path": "optics/quadratic-nominal.json",
+      "sha256": "7ccd971e8a7aa021ce8850ac3f95d591cab312d60bb0730afad9f4a2a3663091"
+    },
+    {
+      "transportCase": "quadratic-low-low",
+      "path": "optics/quadratic-low-low.json",
+      "sha256": "47d31a853200093dc8bcc5a496d4ae601bc2fc1a436a34f66a2424fda209951e"
+    },
+    {
+      "transportCase": "quadratic-low-high",
+      "path": "optics/quadratic-low-high.json",
+      "sha256": "3434a390b12494138031002c7f395d1d5d696996a34d43aac96e8afebfa1ceaf"
+    },
+    {
+      "transportCase": "quadratic-high-low",
+      "path": "optics/quadratic-high-low.json",
+      "sha256": "03975beaf0a854b3367a19b6a79bc7e33ba8d5cfe4583d021d8a804ab668244b"
+    },
+    {
+      "transportCase": "quadratic-high-high",
+      "path": "optics/quadratic-high-high.json",
+      "sha256": "3dbfda511887cec262d486c031fc002b8d93d97f13ed7c071c04c13be5be0305"
+    },
+    {
+      "transportCase": "linear-nominal",
+      "path": "optics/linear-nominal.json",
+      "sha256": "1647d2ca5e48cded304d90c03960de699401ae5e5dd8846cc789b2bc6167836a"
+    },
+    {
+      "transportCase": "linear-low-low",
+      "path": "optics/linear-low-low.json",
+      "sha256": "6b6e4fe5e906326e811ee7e24b536596703b4e93273076b2de8330feef1087da"
+    },
+    {
+      "transportCase": "linear-low-high",
+      "path": "optics/linear-low-high.json",
+      "sha256": "fab3e49db16ab80a453638d6e97d7ae68ede07dea9df3176591a05e6d49770c9"
+    },
+    {
+      "transportCase": "linear-high-low",
+      "path": "optics/linear-high-low.json",
+      "sha256": "cfa9c0eff94a658d4ce35b926f0d740c8055979b8573a420f5eeecf4b0a90f9e"
+    },
+    {
+      "transportCase": "linear-high-high",
+      "path": "optics/linear-high-high.json",
+      "sha256": "ac9ce904c929912f6cdd42e72f46ba83281989a54eb5e256059fa87c696ec843"
+    },
+    {
+      "transportCase": "source-linear",
+      "path": "optics/source-linear.json",
+      "sha256": "455fef13a084bb3dc13bbb24a74b67c59e3c743c13c530a13836cd0f72d3e8a3"
+    },
+    {
+      "transportCase": "source-quadratic",
+      "path": "optics/source-quadratic.json",
+      "sha256": "8e0f39382a854aeeea14bd93c6b00b88c5a61cc94b7c21277357519d4bda8db0"
+    }
+  ],
+  "betaConvention": "For source-* cases beta=0 is an unused case key; the supplied spatial effectiveBeta field sets transport. See flow prediction propertyRanges.effectiveBeta.",
+  "operatorSHA256": {
+    "audit.py": "cb5009584602cfb59487fc15f835139aa1dfa2b6032807428d83a7ee73efdc07",
+    "compare.py": "75cfcc0ee62e0f80a986897b0e23b87e5d8846d81bda28afbd4ca4c996958bc4",
+    "emissivity.py": "342de7f162ee4e9eef593ff041722a4aaada7f035d580f7d85d39b2d0e4254e9",
+    "feasible.py": "ae300cabe0d0474a8aacecbaaa835c01eff8011c7b208a0da1a16a6c37630dec",
+    "independent_bound.py": "9d973f1bd1dba94d111994a450d1e76819615c4a5530c6e8b494683ec28d69c3",
+    "spectrum.py": "4293e2e18df87810d3fd0532e515abe62ac486383bdcfec121355789948bf2d4",
+    "study.py": "e442b93719fce9e88c65a67a4c004bfee4f980ab85f16a42cf5532016264e553",
+    "test_compare.py": "d049b3c171e214c81bead2459a997774374815fe6af4b4ca51b74510f299fa0a",
+    "test_emissivity.py": "615e5fe347e85f6e39cdafe8b907bbc5998ed619f4cc379224249322f8491aa7",
+    "test_feasible.py": "7bbc7b031774bbfbc771c683b8c5daa2af9c8b6178bff07f12ff65c8e5bce3e1",
+    "test_independent_bound.py": "367fa6ac386b9eac78dda7250a4e96147a562855c8f33ecda8eed41bafdd6d70",
+    "test_spectrum.py": "e1015cfb8d84e6ec39aa87d73c0c046b6d13a2dbe36525d926f2e898191ef508",
+    "test_study.py": "523974bbb8038f5af68311f33e98b344d696782bed997714553d417d3970a8e9"
+  },
+  "diagnosticInputSHA256": {
+    "brightness-independent.json": "091684a80eb612e7009e73a235e02e9c0a1020f5c7cbbc17b4016a77b754fcee",
+    "locations.json": "78b7c54a0f40034a2c08fbc8977563db1ba6ff29a75d9c0bcd4926e985b79170"
+  }
+}

@@ -1,0 +1,2224 @@
+{
+  "flowCases": 130,
+  "opticalAlternatives": 5616,
+  "eligiblePassCount": 0,
+  "allPointPassCount": 0,
+  "flowNumericalPass": true,
+  "meridionalAssessmentNumericalPass": false,
+  "opticalNumericalPass": true,
+  "finalFlowFailures": [],
+  "finalAssessmentFailures": [
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.14204177797578177,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07000759103125193,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1062.0780985223212,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.08531381076800928,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.06678554780984826,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.284562711431774,
+      "limit": 0.05,
+      "context": [
+        "legacy",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.14206758551792956,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.070002552152165,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1105.5669395916668,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.08530577898318158,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.06678899308108226,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.2845615679553909,
+      "limit": 0.05,
+      "context": [
+        "nist-2900",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.0992681972825578,
+      "limit": 0.05,
+      "context": [
+        "quadratic-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.0722640637332038,
+      "limit": 0.05,
+      "context": [
+        "quadratic-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.5542810672020506,
+      "limit": 0.05,
+      "context": [
+        "quadratic-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.11741455535668788,
+      "limit": 0.05,
+      "context": [
+        "quadratic-nominal",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.11430702769679024,
+      "limit": 0.05,
+      "context": [
+        "quadratic-nominal",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.10885057051030671,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07300088336313869,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.505532960506919,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.11524251150439004,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.11710514874516648,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.11301818630267481,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.0733195970403547,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 3.0686900704362166,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.10700705042355425,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.05246512309467117,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.15911290976867828,
+      "limit": 0.05,
+      "context": [
+        "quadratic-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.08852772817644723,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.0698118761084712,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.9011308677220469,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.1266765658333918,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.08323244325889716,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.09295322974903623,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07140747580245944,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.6010363735409407,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.11875758213622437,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.11230339772689123,
+      "limit": 0.05,
+      "context": [
+        "quadratic-high-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.08178005246766955,
+      "limit": 0.05,
+      "context": [
+        "linear-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07507304223507794,
+      "limit": 0.05,
+      "context": [
+        "linear-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.4988024117608745,
+      "limit": 0.05,
+      "context": [
+        "linear-nominal",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.1385884075831076,
+      "limit": 0.05,
+      "context": [
+        "linear-nominal",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.1134150587526399,
+      "limit": 0.05,
+      "context": [
+        "linear-nominal",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.09283874987769025,
+      "limit": 0.05,
+      "context": [
+        "linear-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07643348023336576,
+      "limit": 0.05,
+      "context": [
+        "linear-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.4496948605589106,
+      "limit": 0.05,
+      "context": [
+        "linear-low-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.1359209192086306,
+      "limit": 0.05,
+      "context": [
+        "linear-low-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.11626341983365805,
+      "limit": 0.05,
+      "context": [
+        "linear-low-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.10148799842066591,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07587449825883977,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 2.9695980026560536,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.12135403133564673,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.05117896675496663,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.158228114983572,
+      "limit": 0.05,
+      "context": [
+        "linear-low-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.06621702032215698,
+      "limit": 0.05,
+      "context": [
+        "linear-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07232470851767892,
+      "limit": 0.05,
+      "context": [
+        "linear-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.8719113109440868,
+      "limit": 0.05,
+      "context": [
+        "linear-high-low",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.15332096333796627,
+      "limit": 0.05,
+      "context": [
+        "linear-high-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.0828553595475114,
+      "limit": 0.05,
+      "context": [
+        "linear-high-low",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.07447007922406468,
+      "limit": 0.05,
+      "context": [
+        "linear-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlVolumeRmsS2",
+      "value": 0.07371421899434913,
+      "limit": 0.05,
+      "context": [
+        "linear-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 1.546460000551742,
+      "limit": 0.05,
+      "context": [
+        "linear-high-high",
+        3,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.14027812474036794,
+      "limit": 0.05,
+      "context": [
+        "linear-high-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.11142850209865383,
+      "limit": 0.05,
+      "context": [
+        "linear-high-high",
+        9,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.15401971599774392,
+      "limit": 0.05,
+      "context": [
+        "source-linear",
+        0,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/midToLastCellLoopM2S2",
+      "value": 0.05169122017719725,
+      "limit": 0.05,
+      "context": [
+        "source-linear",
+        0,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    },
+    {
+      "group": "assessment",
+      "metric": "mesh/centrifugalCurlMaxS2",
+      "value": 0.14930265735032452,
+      "limit": 0.05,
+      "context": [
+        "source-quadratic",
+        0,
+        4,
+        18.5
+      ],
+      "final": true,
+      "passed": false
+    }
+  ],
+  "finalOpticalFailureCounts": {},
+  "opticalLPUnavailable": 0,
+  "nominalCentroids": [
+    {
+      "transportCase": "legacy",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        134.51114288038465,
+        226.6600606108146,
+        281.61683154755906,
+        282.9738405001763,
+        184.3553027523622
+      ],
+      "errorRelative": [
+        0.5235682422241251,
+        0.5692907364062135,
+        0.5971744589035831,
+        0.5521731115893865,
+        0.5450821755147081
+      ],
+      "worstRelative": 0.5971744589035831,
+      "rmsOverMeasuredPeak": 0.432176003976506,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022737909549357108,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "legacy",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        190.0633285968619,
+        297.61767571170327,
+        349.8266792918408,
+        340.32554484585256,
+        223.67998445219058
+      ],
+      "errorRelative": [
+        0.32680517172721474,
+        0.4344540030879799,
+        0.49960689280782483,
+        0.4614098266978503,
+        0.4480440194086545
+      ],
+      "worstRelative": 0.49960689280782483,
+      "rmsOverMeasuredPeak": 0.3508148823432322,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023341446543766902,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "nist-2900",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        134.5624407941255,
+        226.74559001343164,
+        281.72235240385527,
+        283.07967718834686,
+        184.42453580127946
+      ],
+      "errorRelative": [
+        0.5233865475727346,
+        0.5691282097311676,
+        0.5970235215615184,
+        0.5520056172561318,
+        0.5449113350369692
+      ],
+      "worstRelative": 0.5970235215615184,
+      "rmsOverMeasuredPeak": 0.4320534041340732,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022737938870615507,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "nist-2900",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        190.12827775884082,
+        297.7171713717382,
+        349.9415502682423,
+        340.4358947674654,
+        223.75210853660582
+      ],
+      "errorRelative": [
+        0.32657512503557967,
+        0.4342649371257238,
+        0.49944258102656186,
+        0.46123518984115397,
+        0.4478660449697025
+      ],
+      "worstRelative": 0.49944258102656186,
+      "rmsOverMeasuredPeak": 0.3506817542034253,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023341446460256726,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-nominal",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        140.32630596580677,
+        250.6812259369933,
+        330.99483075389236,
+        358.0259650634023,
+        249.48419480660172
+      ],
+      "errorRelative": [
+        0.5029712246743987,
+        0.5236446777207012,
+        0.5265440241414104,
+        0.43339761152073514,
+        0.3843691749006131
+      ],
+      "worstRelative": 0.5265440241414104,
+      "rmsOverMeasuredPeak": 0.36795940811357153,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002281621810073379,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-nominal",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        189.4211580612361,
+        321.35167366175403,
+        408.0945560669242,
+        430.5939966310879,
+        302.039194981576
+      ],
+      "errorRelative": [
+        0.329079707728683,
+        0.38935363228751846,
+        0.4162603511203886,
+        0.31855337108636333,
+        0.25468369263630064
+      ],
+      "worstRelative": 0.4162603511203886,
+      "rmsOverMeasuredPeak": 0.2762348134175098,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023391430426439335,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-low-low",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        168.5318233822483,
+        300.821950804039,
+        397.05623915063956,
+        429.69196418415197,
+        300.00112626374244
+      ],
+      "errorRelative": [
+        0.40306868906332916,
+        0.4283651007835658,
+        0.43204959198415843,
+        0.31998090369235516,
+        0.2597128606256466
+      ],
+      "worstRelative": 0.43204959198415843,
+      "rmsOverMeasuredPeak": 0.2910144229536555,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002284584690050027,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-low-low",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        224.1532431224077,
+        379.2529217386677,
+        480.6188293075201,
+        506.4083211197886,
+        355.1304037450804
+      ],
+      "errorRelative": [
+        0.20606039510838814,
+        0.2793271730464733,
+        0.3125214181516974,
+        0.1985716336483183,
+        0.12367505426569414
+      ],
+      "worstRelative": 0.3125214181516974,
+      "rmsOverMeasuredPeak": 0.1929544384950044,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023398640135672893,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-low-high",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        136.40385653324105,
+        238.80602266978,
+        308.5948309395554,
+        324.45423774966116,
+        219.514115726284
+      ],
+      "errorRelative": [
+        0.516864344886797,
+        0.5462104532722672,
+        0.558585049516863,
+        0.48652733600306913,
+        0.4583237776232929
+      ],
+      "worstRelative": 0.558585049516863,
+      "rmsOverMeasuredPeak": 0.3971394665802075,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022783981027952856,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-low-high",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        187.437342717995,
+        309.30888077110524,
+        382.1719986857102,
+        390.7890238857296,
+        266.35913084710796
+      ],
+      "errorRelative": [
+        0.3361062827085982,
+        0.4122378688996759,
+        0.45334005316201526,
+        0.3815476643267379,
+        0.342728337467326
+      ],
+      "worstRelative": 0.45334005316201526,
+      "rmsOverMeasuredPeak": 0.30939694989195327,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023370606698460146,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-high-low",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        149.40980957680787,
+        271.8058818604432,
+        365.9888875770296,
+        407.05197834941345,
+        293.6072814347165
+      ],
+      "errorRelative": [
+        0.47079790802953764,
+        0.48350269164718696,
+        0.47648842271490827,
+        0.3558103442940386,
+        0.27549040505366945
+      ],
+      "worstRelative": 0.48350269164718696,
+      "rmsOverMeasuredPeak": 0.32390779077968507,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002285629601418266,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-high-low",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        197.78010301389048,
+        343.95287442865833,
+        447.7776394782823,
+        487.16648549031004,
+        353.3698167814487
+      ],
+      "errorRelative": [
+        0.29947274170590266,
+        0.3464058517547879,
+        0.3594975523213581,
+        0.22902325193934717,
+        0.1280195042454614
+      ],
+      "worstRelative": 0.3594975523213581,
+      "rmsOverMeasuredPeak": 0.22812963211118878,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002341663030718956,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-high-high",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        120.89484888333807,
+        216.0739118446032,
+        285.35930415382353,
+        308.56984313618926,
+        214.75883716118594
+      ],
+      "errorRelative": [
+        0.5717964762907618,
+        0.5894069947673111,
+        0.5918212151206297,
+        0.5116655572657268,
+        0.47005797212358225
+      ],
+      "worstRelative": 0.5918212151206297,
+      "rmsOverMeasuredPeak": 0.4215549167442841,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002279575535296718,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "quadratic-high-high",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        165.35094209922383,
+        281.0631806793467,
+        357.48602860426644,
+        377.6210646733607,
+        264.98140698585786
+      ],
+      "errorRelative": [
+        0.4143352118843818,
+        0.4659115715071295,
+        0.4886509371063515,
+        0.4023869270316216,
+        0.3461280288911375
+      ],
+      "worstRelative": 0.4886509371063515,
+      "rmsOverMeasuredPeak": 0.33535340143100667,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.0002338765170157066,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-nominal",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        152.76072673315718,
+        269.90285478809113,
+        351.43730258123185,
+        371.94862462988806,
+        252.74845718554388
+      ],
+      "errorRelative": [
+        0.4589291266276836,
+        0.48711890610827446,
+        0.49730305253490464,
+        0.411363980069012,
+        0.37631423361165944
+      ],
+      "worstRelative": 0.49730305253490464,
+      "rmsOverMeasuredPeak": 0.34696948983090276,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022809599418968738,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-nominal",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        206.28493530342746,
+        345.14728117889223,
+        430.5425315067476,
+        443.0304362889521,
+        302.8380916098035
+      ],
+      "errorRelative": [
+        0.26934905001371046,
+        0.3441361883194286,
+        0.3841507012696523,
+        0.2988717918101892,
+        0.2527123237053506
+      ],
+      "worstRelative": 0.3841507012696523,
+      "rmsOverMeasuredPeak": 0.2533539997328397,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023381562452663365,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-low-low",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        183.55572415957738,
+        323.9166850566279,
+        421.47640636461074,
+        446.21303828792435,
+        303.76297144727704
+      ],
+      "errorRelative": [
+        0.3498547820016783,
+        0.3844794865468944,
+        0.3971189132403645,
+        0.29383509036905986,
+        0.25043007677622947
+      ],
+      "worstRelative": 0.3971189132403645,
+      "rmsOverMeasuredPeak": 0.2657194813247973,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022838232496428374,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-low-low",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        244.2241988609536,
+        407.39861137472053,
+        506.9697520471708,
+        520.812578345658,
+        355.8607587366647
+      ],
+      "errorRelative": [
+        0.1349700711546269,
+        0.22584351463830474,
+        0.2748289810460799,
+        0.17577583852490586,
+        0.12187281967350665
+      ],
+      "worstRelative": 0.2748289810460799,
+      "rmsOverMeasuredPeak": 0.1659126035967854,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023389011172746533,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-low-high",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        144.7555958573178,
+        251.25944198922343,
+        321.20260409581283,
+        332.5264793842272,
+        221.57170649356732
+      ],
+      "errorRelative": [
+        0.4872829008409742,
+        0.5225459265362932,
+        0.540550853848297,
+        0.47375242067055434,
+        0.45324643674099185
+      ],
+      "worstRelative": 0.540550853848297,
+      "rmsOverMeasuredPeak": 0.38419378333420157,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022778058023703045,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-low-high",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        198.9493145897522,
+        324.79043806954326,
+        395.8248438716386,
+        397.65781629517346,
+        266.8554970425114
+      ],
+      "errorRelative": [
+        0.2953314526322156,
+        0.3828191432303813,
+        0.43381098339972574,
+        0.37067729579223807,
+        0.34150349702937943
+      ],
+      "worstRelative": 0.43381098339972574,
+      "rmsOverMeasuredPeak": 0.2955987733327616,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023363666852936857,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-high-low",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        165.54438789126868,
+        297.5232190409798,
+        394.5615289783058,
+        427.8416575396773,
+        298.1476559113972
+      ],
+      "errorRelative": [
+        0.4136500365393159,
+        0.43463349374451277,
+        0.4356180327251707,
+        0.32290914987135155,
+        0.26428651100536743
+      ],
+      "worstRelative": 0.4356180327251707,
+      "rmsOverMeasuredPeak": 0.29440145543022267,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022851024230529025,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-high-low",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        219.31319287400862,
+        375.57947047813116,
+        479.4041707970011,
+        506.4343381116976,
+        354.4968304183629
+      ],
+      "errorRelative": [
+        0.22320361163446378,
+        0.2863076242252544,
+        0.3142588692445827,
+        0.19853045984754633,
+        0.125238469015035
+      ],
+      "worstRelative": 0.3142588692445827,
+      "rmsOverMeasuredPeak": 0.19534632672161453,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023404694823322766,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-high-high",
+      "beta": 3,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        131.55699675134935,
+        232.6051828595517,
+        302.9870056562667,
+        320.59171708057704,
+        217.5878164331682
+      ],
+      "errorRelative": [
+        0.534031680440799,
+        0.5579935576318494,
+        0.5666064992352668,
+        0.49264005868301786,
+        0.4630771417557524
+      ],
+      "worstRelative": 0.5666064992352668,
+      "rmsOverMeasuredPeak": 0.40355929691454534,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00022789982555168465,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "linear-high-high",
+      "beta": 9,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        180.01835874244557,
+        301.8439109682041,
+        377.1850497302078,
+        388.6179083007447,
+        265.76213170543184
+      ],
+      "errorRelative": [
+        0.36238395384195016,
+        0.426423127819544,
+        0.4604733995617357,
+        0.3849836142190848,
+        0.3442015012260908
+      ],
+      "worstRelative": 0.4604733995617357,
+      "rmsOverMeasuredPeak": 0.31539722008528076,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023377908707325172,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "source-linear",
+      "beta": 0,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        225.1186240786709,
+        364.1903469609018,
+        444.8983556388283,
+        451.5898278573107,
+        307.2678765313348
+      ],
+      "errorRelative": [
+        0.20264106392089806,
+        0.30794972998427167,
+        0.36361608836277487,
+        0.2853259259238912,
+        0.2417813220506398
+      ],
+      "worstRelative": 0.36361608836277487,
+      "rmsOverMeasuredPeak": 0.23613533426003083,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023567755395393462,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    },
+    {
+      "transportCase": "source-quadratic",
+      "beta": 0,
+      "voltageV": 18.5,
+      "edgeClosure": "linear",
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "estimator": "centroidMS",
+      "predictionMS": [
+        207.9917237815407,
+        340.38015610679645,
+        423.07078124396384,
+        440.29353384114006,
+        307.2407227683901
+      ],
+      "errorRelative": [
+        0.2633036903701438,
+        0.35319488584085634,
+        0.394838314740777,
+        0.3032031409727854,
+        0.24184832707073398
+      ],
+      "worstRelative": 0.394838314740777,
+      "rmsOverMeasuredPeak": 0.2579325375619075,
+      "eligiblePointGate": false,
+      "allPointGate": false,
+      "opticalCentroidMeshChange": 0.00023565295120291357,
+      "opticalCentroidMeshGate": true,
+      "spectralGate": true,
+      "opticalSpectrumMeshGate": true
+    }
+  ],
+  "sourceAbsoluteElectrical": [
+    {
+      "context": [
+        "source-linear",
+        0,
+        1,
+        18.5
+      ],
+      "conductivityGain": 6.748694250844161,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 18.50205721317858,
+          "anode": -18.502057213154345
+        },
+        "electrodePowerW": 342.28805844335534,
+        "jouleW": 327.06582079826154,
+        "viscousW": 15.222237645454733
+      },
+      "absoluteCurrentRelativeMismatch": 0.8149794278682143
+    },
+    {
+      "context": [
+        "source-linear",
+        0,
+        2,
+        18.5
+      ],
+      "conductivityGain": 6.4524474288555576,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 19.29086253928515,
+          "anode": -19.29086253926596
+        },
+        "electrodePowerW": 356.8809569764203,
+        "jouleW": 340.4053984444564,
+        "viscousW": 16.475558532338383
+      },
+      "absoluteCurrentRelativeMismatch": 0.8070913746071485
+    },
+    {
+      "context": [
+        "source-linear",
+        0,
+        4,
+        18.5
+      ],
+      "conductivityGain": 6.310742870491179,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 19.697158921961627,
+          "anode": -19.697158921597364
+        },
+        "electrodePowerW": 364.39744004955116,
+        "jouleW": 347.2494912829152,
+        "viscousW": 17.14794877282953
+      },
+      "absoluteCurrentRelativeMismatch": 0.8030284107803837
+    },
+    {
+      "context": [
+        "source-quadratic",
+        0,
+        1,
+        18.5
+      ],
+      "conductivityGain": 6.731603668715519,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 18.210413247496902,
+          "anode": -18.210413247542633
+        },
+        "electrodePowerW": 336.8926450795387,
+        "jouleW": 323.25055366575,
+        "viscousW": 13.642091412944179
+      },
+      "absoluteCurrentRelativeMismatch": 0.817895867525031
+    },
+    {
+      "context": [
+        "source-quadratic",
+        0,
+        2,
+        18.5
+      ],
+      "conductivityGain": 6.438900349251699,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 18.985875578755987,
+          "anode": -18.985875578736156
+        },
+        "electrodePowerW": 351.2386982066189,
+        "jouleW": 336.47109174884673,
+        "viscousW": 14.767606457954043
+      },
+      "absoluteCurrentRelativeMismatch": 0.8101412442124402
+    },
+    {
+      "context": [
+        "source-quadratic",
+        0,
+        4,
+        18.5
+      ],
+      "conductivityGain": 6.298853079347055,
+      "absoluteSourceElectrical": {
+        "currentsA": {
+          "cathode": 19.384517889965757,
+          "anode": -19.384517889646723
+        },
+        "electrodePowerW": 358.6135809584643,
+        "jouleW": 343.24410595447483,
+        "viscousW": 15.369475009641306
+      },
+      "absoluteCurrentRelativeMismatch": 0.8061548211003423
+    }
+  ],
+  "nominalMeridional": [
+    {
+      "transportCase": "legacy",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 505294646.7533279,
+      "centrifugalCurlMaxS2": 178682999244.78503,
+      "centrifugalCurlVolumeRmsS2": 2221289400.650955,
+      "midToLastCellLoopM2S2": -784.3127259617322,
+      "midToStationaryWallLoopM2S2": 314005.1770208541,
+      "prescribedTemperatureMachMax": 1.6412057090100707,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "legacy",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 179016681.95097724,
+      "centrifugalCurlMaxS2": 36965103901.40964,
+      "centrifugalCurlVolumeRmsS2": 658145059.8582481,
+      "midToLastCellLoopM2S2": 551587.7469493193,
+      "midToStationaryWallLoopM2S2": 609824.4715843264,
+      "prescribedTemperatureMachMax": 1.0245778598142707,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "nist-2900",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 505602746.40028036,
+      "centrifugalCurlMaxS2": 178798500244.91656,
+      "centrifugalCurlVolumeRmsS2": 2222628315.4066234,
+      "midToLastCellLoopM2S2": -753.953329942613,
+      "midToStationaryWallLoopM2S2": 314243.91669971123,
+      "prescribedTemperatureMachMax": 1.6416828055589456,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "nist-2900",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 179130427.50819978,
+      "centrifugalCurlMaxS2": 36989634804.745316,
+      "centrifugalCurlVolumeRmsS2": 658563575.4037633,
+      "midToLastCellLoopM2S2": 551964.1623671676,
+      "midToStationaryWallLoopM2S2": 610240.5293886355,
+      "prescribedTemperatureMachMax": 1.0248930639137093,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-nominal",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 212864856.66652238,
+      "centrifugalCurlMaxS2": 70281681563.2598,
+      "centrifugalCurlVolumeRmsS2": 1004180949.9115304,
+      "midToLastCellLoopM2S2": 219166.83327609062,
+      "midToStationaryWallLoopM2S2": 346507.3542008258,
+      "prescribedTemperatureMachMax": 0.7923438690121178,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-nominal",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 78624719.16232781,
+      "centrifugalCurlMaxS2": 14495986909.943762,
+      "centrifugalCurlVolumeRmsS2": 339980988.0235953,
+      "midToLastCellLoopM2S2": 586091.5609080868,
+      "midToStationaryWallLoopM2S2": 610567.8751064141,
+      "prescribedTemperatureMachMax": 0.640781276491483,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-low-low",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 293320929.5684362,
+      "centrifugalCurlMaxS2": 98553073130.60764,
+      "centrifugalCurlVolumeRmsS2": 1375990944.712101,
+      "midToLastCellLoopM2S2": 319172.143133061,
+      "midToStationaryWallLoopM2S2": 499230.9800790618,
+      "prescribedTemperatureMachMax": 1.0418691694902116,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-low-low",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 109756979.41583037,
+      "centrifugalCurlMaxS2": 20476220121.91471,
+      "centrifugalCurlVolumeRmsS2": 473881302.2565495,
+      "midToLastCellLoopM2S2": 818852.4012180615,
+      "midToStationaryWallLoopM2S2": 853894.5711545439,
+      "prescribedTemperatureMachMax": 0.8497339453864089,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-low-high",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 287797283.2492658,
+      "centrifugalCurlMaxS2": 97321642107.30768,
+      "centrifugalCurlVolumeRmsS2": 1320415341.5811796,
+      "midToLastCellLoopM2S2": 151502.1463450567,
+      "midToStationaryWallLoopM2S2": 325826.9896573819,
+      "prescribedTemperatureMachMax": 1.0167338542074926,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-low-high",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 104540455.5226677,
+      "centrifugalCurlMaxS2": 20071326327.88797,
+      "centrifugalCurlVolumeRmsS2": 420585798.65503794,
+      "midToLastCellLoopM2S2": 562822.5940877083,
+      "midToStationaryWallLoopM2S2": 595768.383748895,
+      "prescribedTemperatureMachMax": 0.6937548327735624,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-high-low",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 167415477.23755616,
+      "centrifugalCurlMaxS2": 54007183292.23784,
+      "centrifugalCurlVolumeRmsS2": 812768401.2325695,
+      "midToLastCellLoopM2S2": 295358.7179666298,
+      "midToStationaryWallLoopM2S2": 394612.1950134213,
+      "prescribedTemperatureMachMax": 0.7911040763492145,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-high-low",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 62836173.5303277,
+      "centrifugalCurlMaxS2": 11161792478.151423,
+      "centrifugalCurlVolumeRmsS2": 298523037.8811233,
+      "midToLastCellLoopM2S2": 648833.8767665998,
+      "midToStationaryWallLoopM2S2": 668352.5555781096,
+      "prescribedTemperatureMachMax": 0.7789590335491349,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-high-high",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 163861366.8330885,
+      "centrifugalCurlMaxS2": 53419028162.56401,
+      "centrifugalCurlVolumeRmsS2": 776403365.2564363,
+      "midToLastCellLoopM2S2": 161091.61208461705,
+      "midToStationaryWallLoopM2S2": 257366.69175121008,
+      "prescribedTemperatureMachMax": 0.6350180683230768,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "quadratic-high-high",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 59936670.29787561,
+      "centrifugalCurlMaxS2": 10964940961.1394,
+      "centrifugalCurlVolumeRmsS2": 259729035.8108948,
+      "midToLastCellLoopM2S2": 447318.6455899727,
+      "midToStationaryWallLoopM2S2": 465671.8131725645,
+      "prescribedTemperatureMachMax": 0.5104887221130734,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-nominal",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 246770790.88587576,
+      "centrifugalCurlMaxS2": 79110863108.24368,
+      "centrifugalCurlVolumeRmsS2": 1187744430.5302792,
+      "midToLastCellLoopM2S2": 263536.56697393797,
+      "midToStationaryWallLoopM2S2": 410681.16844308295,
+      "prescribedTemperatureMachMax": 0.9340330921143234,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-nominal",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 93317605.96246694,
+      "centrifugalCurlMaxS2": 16424224852.53994,
+      "centrifugalCurlVolumeRmsS2": 415268886.1415496,
+      "midToLastCellLoopM2S2": 696741.1290185046,
+      "midToStationaryWallLoopM2S2": 725547.5869782909,
+      "prescribedTemperatureMachMax": 0.7805384606934069,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-low-low",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 338188583.4125472,
+      "centrifugalCurlMaxS2": 110768582319.10498,
+      "centrifugalCurlVolumeRmsS2": 1618113267.807955,
+      "midToLastCellLoopM2S2": 384092.65038716805,
+      "midToStationaryWallLoopM2S2": 592133.4206659572,
+      "prescribedTemperatureMachMax": 1.2161973262026469,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-low-low",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 129884850.91035563,
+      "centrifugalCurlMaxS2": 23188751038.541557,
+      "centrifugalCurlVolumeRmsS2": 576774317.7955384,
+      "midToLastCellLoopM2S2": 974388.5590469697,
+      "midToStationaryWallLoopM2S2": 1015706.8553625303,
+      "prescribedTemperatureMachMax": 1.0270763488647823,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-low-high",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 318166585.4614863,
+      "centrifugalCurlMaxS2": 106033063259.79404,
+      "centrifugalCurlVolumeRmsS2": 1482559591.3476539,
+      "midToLastCellLoopM2S2": 173813.823587363,
+      "midToStationaryWallLoopM2S2": 366892.0939828645,
+      "prescribedTemperatureMachMax": 1.1307601550680355,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-low-high",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 117950552.67859675,
+      "centrifugalCurlMaxS2": 21965938500.24433,
+      "centrifugalCurlVolumeRmsS2": 482309518.4139461,
+      "midToLastCellLoopM2S2": 635250.0783944745,
+      "midToStationaryWallLoopM2S2": 672150.1347008997,
+      "prescribedTemperatureMachMax": 0.8064531948807622,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-high-low",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 200325076.93294948,
+      "centrifugalCurlMaxS2": 62220328783.42078,
+      "centrifugalCurlVolumeRmsS2": 1002375659.2433631,
+      "midToLastCellLoopM2S2": 366005.08557421924,
+      "midToStationaryWallLoopM2S2": 484532.78955662786,
+      "prescribedTemperatureMachMax": 0.8290985470066876,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-high-low",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 77890020.13227308,
+      "centrifugalCurlMaxS2": 12967977728.874655,
+      "centrifugalCurlVolumeRmsS2": 383196596.6140439,
+      "midToLastCellLoopM2S2": 799499.5660296873,
+      "midToStationaryWallLoopM2S2": 823424.7782478402,
+      "prescribedTemperatureMachMax": 0.8559890406807305,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-high-high",
+      "beta": 3,
+      "centrifugalAccelerationMaxMS2": 190582435.87466097,
+      "centrifugalCurlMaxS2": 60208357545.64392,
+      "centrifugalCurlVolumeRmsS2": 922611630.6986578,
+      "midToLastCellLoopM2S2": 193539.93456106895,
+      "midToStationaryWallLoopM2S2": 304843.0953351103,
+      "prescribedTemperatureMachMax": 0.7542358319096271,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "linear-high-high",
+      "beta": 9,
+      "centrifugalAccelerationMaxMS2": 71305573.09047803,
+      "centrifugalCurlMaxS2": 12431709362.783394,
+      "centrifugalCurlVolumeRmsS2": 318194852.0825421,
+      "midToLastCellLoopM2S2": 531431.9579655865,
+      "midToStationaryWallLoopM2S2": 553015.7116450159,
+      "prescribedTemperatureMachMax": 0.625420030263987,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "source-linear",
+      "beta": 0,
+      "centrifugalAccelerationMaxMS2": 61711719.42935151,
+      "centrifugalCurlMaxS2": 8558592644.781729,
+      "centrifugalCurlVolumeRmsS2": 295400852.51298976,
+      "midToLastCellLoopM2S2": 837826.76739855,
+      "midToStationaryWallLoopM2S2": 853266.4551788617,
+      "prescribedTemperatureMachMax": 0.7799229771204365,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    },
+    {
+      "transportCase": "source-quadratic",
+      "beta": 0,
+      "centrifugalAccelerationMaxMS2": 49667962.84801071,
+      "centrifugalCurlMaxS2": 7123249299.947797,
+      "centrifugalCurlVolumeRmsS2": 234437304.74510685,
+      "midToLastCellLoopM2S2": 712660.0737881387,
+      "midToStationaryWallLoopM2S2": 725125.0810276303,
+      "prescribedTemperatureMachMax": 0.6500170299738329,
+      "circulationVelocityPredicted": false,
+      "scope": "Centrifugal-only; omits density/baroclinic and Hall radial force. Not experimental qualification."
+    }
+  ],
+  "maximaByGateMetric": {
+    "mesh/electrodePowerW": 5.578693014937732e-11,
+    "mesh/midToStationaryWallLoopM2S2": 0.03590695825292694,
+    "independent/chargeResidualRelative": 1.2121440362664482e-12,
+    "mesh/jouleW": 0.014356712407861995,
+    "primary/boundaryResidualRelative": 3.680312943316143e-11,
+    "mesh/viscousW": 0.0399236063931155,
+    "primary/torqueMomentResidualRelative": 2.7023460342412072e-11,
+    "mesh/centrifugalCurlMaxS2": 0.6328696044529731,
+    "saved diagnostic/midToStationaryWallLoopM2S2": 0.0,
+    "independent/momentumResidualRelative": 4.653850874984629e-13,
+    "saved diagnostic/centrifugalCurlMaxS2": 9.809520046487342e-16,
+    "primary/angularResidualRelative": 6.170437244287487e-14,
+    "mesh/conductivity": 0.07927695474737965,
+    "independent/torqueResidualRelative": 6.485533603907358e-14,
+    "independent same sigma/electrode power": 0.0004263411815186806,
+    "independent/powerResidualRelative": 2.99977241100771e-11,
+    "primary/chargeResidualRelative": 4.059153013720314e-13,
+    "electrical-only current conditioning": 3.6258427371649305e-11,
+    "mesh/uniform chords": 0.08025986837305528,
+    "mesh/centrifugalCurlVolumeRmsS2": 0.29202151362194734,
+    "mesh/midToLastCellLoopM2S2": 1105.5669395916668,
+    "saved diagnostic/midToLastCellLoopM2S2": 0.0,
+    "saved uniform-chord observer": 0.0,
+    "source conductivity gain receipt": 0.0,
+    "independent same sigma/uniform chords": 0.000388111986909129,
+    "saved diagnostic/centrifugalCurlVolumeRmsS2": 5.063607502054457e-16,
+    "independent same sigma/shear power": 0.0007470239671746777,
+    "independent same sigma/Joule power": 0.00036096868793313003,
+    "independent same sigma/current": 0.00042634121894628585,
+    "primary/linearResidualRelative": 1.4306508723442008e-13,
+    "primary/powerResidualRelative": 3.4172322424675844e-11
+  },
+  "experimentalQualification": false
+}

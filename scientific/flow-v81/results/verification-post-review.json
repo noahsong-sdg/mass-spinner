@@ -1,0 +1,80 @@
+{
+  "priorVerificationSHA256": "7eee0d6dd5fb29fa31aa31707bb6a85908c28ae288894e3b3ea619233fe7a37e",
+  "flowPredictionSHA256": "1cda6cc3b87e1cffefde611d55122855911391e8ccab538b59b27a72a904ab1d",
+  "opticalIndexSHA256": "daf6727bf8ada12efc36c2dbff6884cc2b5547075f002042c736ed7badbbd54b",
+  "sourceSHA256": {
+    "scientific/flow-v81/audit_flow.py": "0d80a9f18ec41f5e56facdbe335184239050fc875023d968b9330a361babe9ff",
+    "scientific/flow-v81/audit_optics.py": "f9d9c97a4bc4b531826378568b59d0f24615b4ea5aafa769a259f8ed75215595",
+    "scientific/flow-v81/campaign.py": "f171b59434100d1bacbf8a9916ea4129888baa186dbdf88e227ada359d5be46a",
+    "scientific/flow-v81/compare.py": "5e1930ff7a7388996ef7a92b4057f6989dc3908e080f0e958e80d9373dcbbb3a",
+    "scientific/flow-v81/meridional.py": "f4838429e25c679ca71639e37fe6a8a54cbc3c469ccdd38d1e69fc4ff800b350",
+    "scientific/flow-v81/optics.py": "4f32865a31c280321ec359637fb128ff0841deb61ad8cd82ce4102cc6ff4f708",
+    "scientific/flow-v81/reference.py": "efad3c3e4aeabe67eb78440e4ef2bd64f70896c87fbaf1ec5ec32e74b0b16168",
+    "scientific/flow-v81/solver.py": "67df1dce83a7bb4441d55a44e948e5796ae61bd6d1d40580fc6bea97e099304c",
+    "scientific/flow-v81/summarize.py": "0ea9cbe0006233c1eabe1ad07249dfa9fae78dae40727d0b4044d81287f4c8aa",
+    "scientific/flow-v81/test_audit_flow.py": "06cbc09fc1dc2a346f0d335216ab47114641802765133807559c9904d5d132da",
+    "scientific/flow-v81/test_audit_optics.py": "32047c522a4ef7f0c5cf8a08ee9153e2c2276f34e6635814f9bccc402f01e395",
+    "scientific/flow-v81/test_campaign.py": "a0536b4a063b9b784bb607ce7a8a301af663499d43f9c86697c961a2e2d19c0f",
+    "scientific/flow-v81/test_compare.py": "86c7f431e5a192c9a89f0d50cb423fb6e5604a869c9750bc5ea0454862d7712f",
+    "scientific/flow-v81/test_meridional.py": "a9e04e0b0e429f82413c8f1fafb0c78e54293c3c6b44b508357911499504b1e8",
+    "scientific/flow-v81/test_reference.py": "be342886f2ae5b14b1a6a358d3c4a4fc99e88305e495703c5274ae85f16cd870",
+    "scientific/flow-v81/test_solver.py": "6ea3ca72bc516018bbe6635af119a5a349477d82a35ddacbf0e531c34a41f378",
+    "scientific/flow-v81/test_summarize.py": "d8844bc64e695135045d2d5085c0e8756510e2621b62e53fc0434233a3c415d7",
+    "scientific/flow-v81/test_transport.py": "d6759aa4350965e2bf3c75158ac4a4f86a8a86334891a05f673105b6f212e6a5",
+    "scientific/flow-v81/transport.py": "98970f9aedb65de9d4738b35ba39ea0dcdd678324cc92441e96cda624ce18405",
+    "scientific/flow-v81/verify.py": "384e3f0f5f80e067e333fcb4b944a535c5197c3256e854e94fa256c4d8c4f4bb",
+    "scientific/flow-v81/MERIDIONAL-ASSESSMENT.md": "e6ab5a36003ccdb745353db6cb8b50e4634cd5f6cc83d71fa7096446142d5403",
+    "scientific/flow-v81/PROTOCOL.md": "05d9d6462a457b5b425d17a63d8f322259e8cb0791faf36d00a085d076ead693",
+    "scientific/flow-v81/SOURCE-TRANSPORT-ADDENDUM.md": "b1487ef9eb9ec96bc87df96698eb2f5b5a0a35f1902be25244ca3f7484ff87d5",
+    "scientific/flow-v81/argon-viscosity-source.json": "583b67d3ece2c7f29d164bde80c4b3d7510b30b584ca947e1edb76652b10e00f",
+    "FLOW-MODEL-V81.md": "2424eaea7f77514cd08a1986f977d4edeebf9b3abbafdac2f1fce581a1090182"
+  },
+  "checks": [
+    {
+      "name": "post-compare-tests",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/flow-v81",
+        "-p",
+        "test_compare.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "post-summary-tests",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/flow-v81",
+        "-p",
+        "test_summarize.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "post-comparison",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/flow-v81/compare.py"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "post-summary",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "scientific/flow-v81/summarize.py"
+      ],
+      "exitCode": 0
+    }
+  ]
+}
