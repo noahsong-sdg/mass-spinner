@@ -1,0 +1,50 @@
+{
+  "predictionSHA256": "5654356e7fca335d0bc66c35420eeb2665134e39c84f23a78c7cc625c9d5fc92",
+  "baselinePredictionSHA256": "f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74",
+  "experimentalQualification": false,
+  "currentFitted": false,
+  "circulationVelocityPredicted": false,
+  "flowAndDiagnosticNumericalPass": false,
+  "families": {
+    "radial-viscosity": {
+      "alternatives": 576,
+      "allPointMatches": 0,
+      "resolvedMatches": 0,
+      "worstRelativeErrorRange": [
+        0.3263769916540212,
+        0.5179409645792623
+      ]
+    },
+    "published-uniform": {
+      "alternatives": 576,
+      "allPointMatches": 0,
+      "resolvedMatches": 0,
+      "worstRelativeErrorRange": [
+        0.45628882526023146,
+        0.5992482658619298
+      ]
+    }
+  },
+  "identityAssessment": {
+    "passed": true,
+    "maxFinalRelative": 2.5228103765457003e-11,
+    "finalFailures": 0
+  },
+  "partitionAssessment": {
+    "passed": false,
+    "maxFinalRelative": 3.000384162730439,
+    "finalFailures": 32
+  },
+  "pressureAssessment": {
+    "passed": true,
+    "maxFinalRelative": 0.0010549073728908737,
+    "finalFailures": 0
+  },
+  "postHocFixedDomainAssessment": {
+    "passed": true,
+    "maxRelative": 0.0007978987540141736,
+    "maxFineHalfCellWorkShare": 0.00018470081898237358,
+    "maxHalfCellChangeOverTotalWork": 0.000545433871928422,
+    "scope": "Post hoc fixed-whole-domain directional shear-work assessment and shrinking boundary-half-cell diagnostics. Original partition gates, their failures and allRequiredNumericalPass are unchanged. Not experimental qualification."
+  }
+}

@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/work/project/scientific/axial-v85/summarize85.py", line 73, in <module>
+    if __name__=='__main__': main()
+                             ^^^^^^
+  File "/work/project/scientific/axial-v85/summarize85.py", line 32, in main
+    families={'radial-viscosity':scores(original),'published-uniform':scores(out)}
+                                 ^^^^^^^^^^^^^^^^
+  File "/work/project/scientific/axial-v85/summarize85.py", line 18, in scores
+    summary=json.loads((directory/'summary.json').read_text()); raw=(directory/'comparison.json.gz').read_bytes()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1059, in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/work/project/scientific/boundary-v84/results/summary.json'

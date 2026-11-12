@@ -1,0 +1,25 @@
+676 
+M. M. B. Wijnakker et al. • A Study of a Weakly Ionized Rotating Plasma 676 
+radial drift velocities inwards. This can lead to a 
+radial fluid velocity (in this one-fluid model being 
+the weighted average of the radial ion, electron and 
+neutral particle velocities) no longer negligible in 
+comparison with the rotational velocities. Janssen 
+et al. [14] showed that for plasmas with an appre-
+ciable degree of ionization the radial fluid velocities 
+have to be taken into account. However in the 
+present experiment the degree of ionization is of 
+the order of a few percent which means that the ions 
+have a small weight in the total fluid velocity. 
+Besides that in the regions in the experiment where 
+the ion conduction is found to be important (the 
+central region, see Sect. 4), the radial currents are 
+relatively small and consequently the ion drift 
+velocity will also be small. 
+Because the azimuthal velocity vg and the poten-
+tial cp are functions of z and r, Eq. (3 c) shows that 
+i 
+Fig. 4. Potential distribution (a) and azimuthal velocity distribution (b) in one half of the (symmetrical) experiment. 
+The parameters used in this calculation are: c/Ro — 4, parallel conductivity or = 700 Q'1 m - 1 , Hartmann number H — 25 
+and effective Hall parameter ß eu = 8 (see 
+text). 

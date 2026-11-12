@@ -1,0 +1,146 @@
+M. M. B. Wijnakker et al. • A Study of a Weakly Ionized Rotating Plasma 
+675 
+The plasma is characterized by the following 
+parameters: an electrical conductivity along the 
+magnetic field a; an electrical conductivity per-
+pendicular to the magnetic field in radial direction 
+a x; a "Hall" electrical conductivity in azimuthal 
+direction O,H; AN isotropic viscosity /u and electron 
+and ion collision frequencies ve and i>i. The plasma 
+is assumed to be homogeneous, which means that 
+all these parameters have to be independent of the 
+spatial coordinates, i.e. the formalism is only valid 
+as long as the radial pressure gradients are small. 
+We will show in Sect. 4 that this is at least partly 
+the case under certain experimental conditions. 
+With the above mentioned quantities a number of 
+non-dimensional parameters can be defined: the 
+Hartmann number H which is a measure of the 
+strength of the Lorentz force relative to the 
+viscous force: 
+H=(olp)V*BoRo 
+(1) 
+and the electron and ion Hall parameters ße and ß\: 
+ße = Melve\ ßi = (Oi/vi 
+(2) 
+in which coe and a>i are the electron and ion gyro 
+frequencies. 
+In the magnetogasdynamic approximation the 
+equation of conservation of electric charge density 
+(V • j = 0) and the Navier-Stokes equation both 
+combined with the generalized Ohm's law give rise 
+to the following set of differential equations: 
+1 6 
+r dr 
+dcp 
+dr 
+a 
+cr, 
+d2(p 
+Yz2 
+l e 
+-BQ-—(rve) 
+= 0 , 
+r or 
+(3a) 
+ß* 
+8 
+dr 
+1 0 
+(r ve) 
+r or 
+d2ve 
+dz2 
+d(p 
+- a± B0 ( - 
++ ve B0) = 0 , 
+(3 b) 
+dp 
+c)r 
+dp 
+Hi 
+= Q 
+ve 2 
+/ 
+d(f 
+— on Bo \ 
+•=—b ve Bo 
+dr 
+— jr Be — je Br — 0 . 
+(3c) 
+(3d) 
+In these equations cp and ve are the potential and 
+the azimuthal velocity, respectively; p and q stand 
+for the pressure and the density, p and q being 
+related via: 
+pig — kTjm 
+(4) 
+in which T is the temperature, k the Boltzmann 
+constant and m the mass of the particles. Equations 
+(3 c) and (4) give 
+dp 
+m ve2 
+/ 
+dcp 
++ veBo . 
+(5) 
+In principle the temperature can be found via 
+the energy equation; however, we will insert 
+experimentally determined temperature values. 
+Before solving the set of equations (see Appendix) 
+we first make a few general remarks. Equations (3 a) 
+and (3 b) fully determine the potential cp and the 
+rotational velocity Ve as functions of z and r. 
+W & H show that in case or, ox and CH are deter-
+mined only by electron conduction (i.e. ße > 1; 
+ßi 
+1) solutions for (p and Ve can be expressed in 
+terms of the Hartmann number H and the electron 
+Hall parameter ße. In that case the electrical 
+conductivities can be written as: 
+1 
+cr, = 
+1 +ße or; o H 
+ße 
+1 +ße 
+o. 
+(6) 
+However, in the present experimental situation the 
+plasma is only weakly ionized. It will be shown that 
+the ion-Hall parameter in this case in at least part 
+of the cylinder is of the order of unity which means 
+that the ion conduction can be important in that 
+part and has to be included. Mitchner and Kruger 
+[13] give the following modified expressions for ax 
+and (TH in case the conduction is due to both 
+electron and ion drifts: 
+(1 + «) 
+(1 +s)2 
++ ße* 
+o; 
+(TH = 
+ße 
+(1 +*) 2 + £e2 
+in which s is the so-called ion-slip factor: 
+ße ßi-
+Q n 
+Qn + 
+a (7) 
+(8) 
+On and 
+are the neutral particle and ion densities 
+respectively. A value s > 1 implies that the major 
+part of the radial current is carried by the ions. 
+Note that the expression for o± in Eq. (7) reduces 
+to that for a 
+replaced by 
+equal to: 
+x in (6) provided that in (6) ße is 
+an effective Hall-parameter ßeu, 
+ßett 
+S(1 +s) + ße* 
+(1+5) 
+1/2 
+(9) 
+In cases where the ion conduction is important 
+this means that the ions can have non negligible 

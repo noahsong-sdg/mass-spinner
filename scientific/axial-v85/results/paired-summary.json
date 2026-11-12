@@ -1,0 +1,260 @@
+{
+  "predictionSHA256": "5654356e7fca335d0bc66c35420eeb2665134e39c84f23a78c7cc625c9d5fc92",
+  "baselinePredictionSHA256": "f328e73864378179280f14495fa0963613b9954ddce576dabe91c052f4ea6d74",
+  "experimentalQualification": false,
+  "currentFitted": false,
+  "circulationVelocityPredicted": false,
+  "flowAndDiagnosticNumericalPass": false,
+  "families": {
+    "radial-viscosity": {
+      "alternatives": 576,
+      "allPointMatches": 0,
+      "resolvedMatches": 0,
+      "worstRelativeErrorRange": [
+        0.3263769916540212,
+        0.5179409645792623
+      ]
+    },
+    "published-uniform": {
+      "alternatives": 576,
+      "allPointMatches": 0,
+      "resolvedMatches": 0,
+      "worstRelativeErrorRange": [
+        0.45628882526023146,
+        0.5992482658619298
+      ]
+    }
+  },
+  "cases": [
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9261397494870897,
+      "endWallTorqueFraction": 0.0738602505129221,
+      "axialShearWorkFraction": 0.05511208322916056,
+      "pressureLoopPa": {
+        "centrifugalPa": 18.336636872521805,
+        "hallPa": -2.0194372245879686,
+        "totalPa": 16.317199647933837
+      }
+    },
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.9324090132296445,
+      "endWallTorqueFraction": 0.06759098677037431,
+      "axialShearWorkFraction": 0.05132009303928042,
+      "pressureLoopPa": {
+        "centrifugalPa": 19.531424255150867,
+        "hallPa": -2.006719823533413,
+        "totalPa": 17.524704431617458
+      }
+    },
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9257209187135303,
+      "endWallTorqueFraction": 0.07427908128648841,
+      "axialShearWorkFraction": 0.05547864906492763,
+      "pressureLoopPa": {
+        "centrifugalPa": 21.19054340116899,
+        "hallPa": -2.1107222636196425,
+        "totalPa": 19.07982113754935
+      }
+    },
+    {
+      "scenario": "linear-finite-te1",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.9320099106017522,
+      "endWallTorqueFraction": 0.06799008939826073,
+      "axialShearWorkFraction": 0.05160194094164938,
+      "pressureLoopPa": {
+        "centrifugalPa": 21.383265576910926,
+        "hallPa": -2.1162245808147353,
+        "totalPa": 19.267040996096195
+      }
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9291108968267069,
+      "endWallTorqueFraction": 0.07088910317333297,
+      "axialShearWorkFraction": 0.04669784616321673,
+      "pressureLoopPa": {
+        "centrifugalPa": 7.719468783893069,
+        "hallPa": -0.760075785717831,
+        "totalPa": 6.959392998175235
+      }
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.935242108268831,
+      "endWallTorqueFraction": 0.06475789173117348,
+      "axialShearWorkFraction": 0.04161414958135194,
+      "pressureLoopPa": {
+        "centrifugalPa": 9.085820655553382,
+        "hallPa": -0.7425803044313121,
+        "totalPa": 8.34324035112207
+      }
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9288538964606237,
+      "endWallTorqueFraction": 0.07114610353937305,
+      "axialShearWorkFraction": 0.04687639387126424,
+      "pressureLoopPa": {
+        "centrifugalPa": 9.17656988704971,
+        "hallPa": -0.7703172806166024,
+        "totalPa": 8.406252606433108
+      }
+    },
+    {
+      "scenario": "linear-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.9349947840571413,
+      "endWallTorqueFraction": 0.06500521594286233,
+      "axialShearWorkFraction": 0.04175059374029582,
+      "pressureLoopPa": {
+        "centrifugalPa": 10.030038592070106,
+        "hallPa": -0.762427744105021,
+        "totalPa": 9.267610847965084
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9248433473128004,
+      "endWallTorqueFraction": 0.07515665268720885,
+      "axialShearWorkFraction": 0.05460639921459312,
+      "pressureLoopPa": {
+        "centrifugalPa": 7.307678413377013,
+        "hallPa": -1.5410681944887412,
+        "totalPa": 5.766610218888272
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.9329661641181776,
+      "endWallTorqueFraction": 0.06703383588183297,
+      "axialShearWorkFraction": 0.05007525048696083,
+      "pressureLoopPa": {
+        "centrifugalPa": 9.948524829370013,
+        "hallPa": -1.5039174910349713,
+        "totalPa": 8.444607338335043
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9244013908570948,
+      "endWallTorqueFraction": 0.07559860914292271,
+      "axialShearWorkFraction": 0.05501479244137139,
+      "pressureLoopPa": {
+        "centrifugalPa": 9.31499627015199,
+        "hallPa": -1.6283597419725546,
+        "totalPa": 7.686636528179433
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te1",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.932560219411608,
+      "endWallTorqueFraction": 0.06743978058840529,
+      "axialShearWorkFraction": 0.05036041037255624,
+      "pressureLoopPa": {
+        "centrifugalPa": 11.302652794990106,
+        "hallPa": -1.6057926673697183,
+        "totalPa": 9.696860127620388
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9278253362398814,
+      "endWallTorqueFraction": 0.07217466376013923,
+      "axialShearWorkFraction": 0.046544010036091474,
+      "pressureLoopPa": {
+        "centrifugalPa": 1.9270174948126826,
+        "hallPa": -0.4210752599108041,
+        "totalPa": 1.5059422349018787
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.07,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.9357796186790911,
+      "endWallTorqueFraction": 0.06422038132090666,
+      "axialShearWorkFraction": 0.040308451962025704,
+      "pressureLoopPa": {
+        "centrifugalPa": 3.5389880762851345,
+        "hallPa": -0.3951857437179844,
+        "totalPa": 3.143802332567148
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "radial-viscosity",
+      "radialWallTorqueFraction": 0.9275564092004163,
+      "endWallTorqueFraction": 0.07244359079959803,
+      "axialShearWorkFraction": 0.04674363921656979,
+      "pressureLoopPa": {
+        "centrifugalPa": 2.950879518880869,
+        "hallPa": -0.4340067103123363,
+        "totalPa": 2.516872808568532
+      }
+    },
+    {
+      "scenario": "quadratic-finite-te2.5-source",
+      "anodeCenterM": 0.08,
+      "viscosityModel": "published-uniform",
+      "radialWallTorqueFraction": 0.935529099200281,
+      "endWallTorqueFraction": 0.06447090079973422,
+      "axialShearWorkFraction": 0.04044564472799808,
+      "pressureLoopPa": {
+        "centrifugalPa": 4.226040810696822,
+        "hallPa": -0.41593304145099724,
+        "totalPa": 3.810107769245825
+      }
+    }
+  ],
+  "identityAssessment": {
+    "passed": true,
+    "maxFinalRelative": 2.5228103765457003e-11,
+    "finalFailures": 0
+  },
+  "partitionAssessment": {
+    "passed": false,
+    "maxFinalRelative": 3.000384162730439,
+    "finalFailures": 32
+  },
+  "pressureAssessment": {
+    "passed": true,
+    "maxFinalRelative": 0.0010549073728908737,
+    "finalFailures": 0
+  },
+  "postHocFixedDomainAssessment": {
+    "passed": true,
+    "maxRelative": 0.0007978987540141736,
+    "maxFineHalfCellWorkShare": 0.00018470081898237358,
+    "maxHalfCellChangeOverTotalWork": 0.000545433871928422,
+    "scope": "Post hoc fixed-whole-domain directional shear-work assessment and shrinking boundary-half-cell diagnostics. Original partition gates, their failures and allRequiredNumericalPass are unchanged. Not experimental qualification."
+  }
+}

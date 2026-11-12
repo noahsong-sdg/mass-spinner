@@ -1,0 +1,124 @@
+{
+  "predictionSHA256": "5654356e7fca335d0bc66c35420eeb2665134e39c84f23a78c7cc625c9d5fc92",
+  "experimentalQualification": false,
+  "targetVelocityRead": false,
+  "groups": [
+    {
+      "group": "linear-finite-te1-a0.07-n4",
+      "path": "optics/linear-finite-te1-a0.07-n4.json.gz",
+      "sha256": "8b6d2342bc34523ca7025c13dc31fe6f69aeff3b7ff50593a804ff4b45d1bb7e",
+      "rawSHA256": "d11d4882e44c27486ffa702109693935bb16a588801bc5800595a2a871dcb400"
+    },
+    {
+      "group": "linear-finite-te1-a0.07-n8",
+      "path": "optics/linear-finite-te1-a0.07-n8.json.gz",
+      "sha256": "f71d5dc425856c17b637f82d0d307df5ad8aaa5fcde53d5b07a5f9f6932aeec8",
+      "rawSHA256": "75031e1df413e1046835b1400adbb0f111f0a1cbc985dda100a85a1fccf2661e"
+    },
+    {
+      "group": "linear-finite-te1-a0.08-n4",
+      "path": "optics/linear-finite-te1-a0.08-n4.json.gz",
+      "sha256": "7045d0492fcb32aa3e7ba3675778627d6d01c99ad9c0407b7e3e738f41f25840",
+      "rawSHA256": "2ff3e952e2d6a19faf13b73c14bbe85560a6e1a6b286a99cf380085e8f283563"
+    },
+    {
+      "group": "linear-finite-te1-a0.08-n8",
+      "path": "optics/linear-finite-te1-a0.08-n8.json.gz",
+      "sha256": "bc9d50714744f29958a9f6e288a89bf1f847baa1856dd1f3022704f8844ef5eb",
+      "rawSHA256": "f29cfe0598174795dc035e6bb67e75aab68f649b7daf607045af140fbbce2e6f"
+    },
+    {
+      "group": "linear-finite-te2.5-source-a0.07-n4",
+      "path": "optics/linear-finite-te2.5-source-a0.07-n4.json.gz",
+      "sha256": "ecfdad3a37dcad414da7419cabb5a6bab3fd5290c08980813d4e04b7bd6dfede",
+      "rawSHA256": "095e9680db7003f37852048cb64e35af63b611e0a086224271058e6dd29b4e7b"
+    },
+    {
+      "group": "linear-finite-te2.5-source-a0.07-n8",
+      "path": "optics/linear-finite-te2.5-source-a0.07-n8.json.gz",
+      "sha256": "4942ad306ec6822e136e45df1f059311b260d77b6da93bde41f3b93a6d8f89f1",
+      "rawSHA256": "ab04f15cd6da2a8c3521f11c1e728eb48d8d6965a7965c332d51903b62ceb5f4"
+    },
+    {
+      "group": "linear-finite-te2.5-source-a0.08-n4",
+      "path": "optics/linear-finite-te2.5-source-a0.08-n4.json.gz",
+      "sha256": "ee08ad56e3a0fa372319d9361a8988cceba742e4c8cb183db4e8b83ac7021a37",
+      "rawSHA256": "5c66bd0c74dae31444c17b73871fca3f88f0be8f093d3fb12f81fd3a50d9a243"
+    },
+    {
+      "group": "linear-finite-te2.5-source-a0.08-n8",
+      "path": "optics/linear-finite-te2.5-source-a0.08-n8.json.gz",
+      "sha256": "57de607033a2046c4252cf4033ad218744d8d1198f202cd99495d1218ae7dd49",
+      "rawSHA256": "34431ae01f1fd0d60d165817b4c003b492474d8ef995a1997aa67e68e69645ba"
+    },
+    {
+      "group": "quadratic-finite-te1-a0.07-n4",
+      "path": "optics/quadratic-finite-te1-a0.07-n4.json.gz",
+      "sha256": "b65a4117a817ff3f16eca0b796887a2ff526eb2413e86650dc6833d0db371044",
+      "rawSHA256": "d993ba71dcf8813cf449540ccb10ec2f6c78ffb6af9961fdb7b5a6ed38e4d8d7"
+    },
+    {
+      "group": "quadratic-finite-te1-a0.07-n8",
+      "path": "optics/quadratic-finite-te1-a0.07-n8.json.gz",
+      "sha256": "8f2b670003f1fd6e879a1e0d8f685605847f3ae94b340ef13b5de78c522c9b58",
+      "rawSHA256": "6d47db74dd6c42ff49acd51c99953bcd6ed98cf3f18c6f4604dbe6df0f53701d"
+    },
+    {
+      "group": "quadratic-finite-te1-a0.08-n4",
+      "path": "optics/quadratic-finite-te1-a0.08-n4.json.gz",
+      "sha256": "183fdeeabba8b7d4c84540b9432b6aa2fd5bbdcd3781f91ec898de8edd325f43",
+      "rawSHA256": "d307f9ad8854e4204272b98cd1d6d987be6ebd23c18e17c6c941dc9e4310a0e7"
+    },
+    {
+      "group": "quadratic-finite-te1-a0.08-n8",
+      "path": "optics/quadratic-finite-te1-a0.08-n8.json.gz",
+      "sha256": "45cab01871a6a667884facb3b166c74ad15865fe385d88f7ebf94ecdaa65a232",
+      "rawSHA256": "89ca4cabb2104543283e9e7807db4f995d4e582be0f07010c17c1b1cddf9a0c9"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-a0.07-n4",
+      "path": "optics/quadratic-finite-te2.5-source-a0.07-n4.json.gz",
+      "sha256": "ee4c668b715c750ae2f2050ef77740ce36bac65fb0d08599a3b92b79b47139a5",
+      "rawSHA256": "1c685e6c3ae0ee521296df18b895aff48c286c3831921f24952d7b791cb961af"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-a0.07-n8",
+      "path": "optics/quadratic-finite-te2.5-source-a0.07-n8.json.gz",
+      "sha256": "8f83ab7ab5d79432d2d233d43827237ac5135066f65b9c875ca26751e0246bd9",
+      "rawSHA256": "69f8c358b0b9deda56fae0c4049caaf441d44c0bdda5514cfcfbc522d541e597"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-a0.08-n4",
+      "path": "optics/quadratic-finite-te2.5-source-a0.08-n4.json.gz",
+      "sha256": "f1fc9c14357a572050a32a1c803382598441c34f87ed1420eac8c8548c486314",
+      "rawSHA256": "5fe43320fe201cf5387f55c375d53e17a56180bde6057f3c885ab24370f814dc"
+    },
+    {
+      "group": "quadratic-finite-te2.5-source-a0.08-n8",
+      "path": "optics/quadratic-finite-te2.5-source-a0.08-n8.json.gz",
+      "sha256": "5264d89bdeb1d0cb7a074b25305011a11ac034ffb3db1c96cff6f3b328cf48c7",
+      "rawSHA256": "6326e166e3eb52421e37bd5c0365606f855f1bce9a4cf2adc968e8caa90ee307"
+    }
+  ],
+  "operatorSHA256": {
+    "audit.py": "cb5009584602cfb59487fc15f835139aa1dfa2b6032807428d83a7ee73efdc07",
+    "compare.py": "75cfcc0ee62e0f80a986897b0e23b87e5d8846d81bda28afbd4ca4c996958bc4",
+    "emissivity.py": "342de7f162ee4e9eef593ff041722a4aaada7f035d580f7d85d39b2d0e4254e9",
+    "feasible.py": "ae300cabe0d0474a8aacecbaaa835c01eff8011c7b208a0da1a16a6c37630dec",
+    "independent_bound.py": "9d973f1bd1dba94d111994a450d1e76819615c4a5530c6e8b494683ec28d69c3",
+    "spectrum.py": "4293e2e18df87810d3fd0532e515abe62ac486383bdcfec121355789948bf2d4",
+    "study.py": "e442b93719fce9e88c65a67a4c004bfee4f980ab85f16a42cf5532016264e553",
+    "test_compare.py": "d049b3c171e214c81bead2459a997774374815fe6af4b4ca51b74510f299fa0a",
+    "test_emissivity.py": "615e5fe347e85f6e39cdafe8b907bbc5998ed619f4cc379224249322f8491aa7",
+    "test_feasible.py": "7bbc7b031774bbfbc771c683b8c5daa2af9c8b6178bff07f12ff65c8e5bce3e1",
+    "test_independent_bound.py": "367fa6ac386b9eac78dda7250a4e96147a562855c8f33ecda8eed41bafdd6d70",
+    "test_spectrum.py": "e1015cfb8d84e6ec39aa87d73c0c046b6d13a2dbe36525d926f2e898191ef508",
+    "test_study.py": "523974bbb8038f5af68311f33e98b344d696782bed997714553d417d3970a8e9"
+  },
+  "adapterSHA256": "d3f5c67a45840b8e69b302629eb1402b74ec2312b7d677b2c2fe1c4ecff798f7",
+  "diagnosticSHA256": {
+    "brightness-independent.json": "091684a80eb612e7009e73a235e02e9c0a1020f5c7cbbc17b4016a77b754fcee",
+    "locations.json": "78b7c54a0f40034a2c08fbc8977563db1ba6ff29a75d9c0bcd4926e985b79170"
+  },
+  "interfaceScope": "Legacy refinement=4 and beta=ring-current are adapter tags; actualFlowRefinement records resolution. Actual flow edges/omega are passed without regridding. No numerical Hall parameter or drive voltage is inferred from these tags."
+}

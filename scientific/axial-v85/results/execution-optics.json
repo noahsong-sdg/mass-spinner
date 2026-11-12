@@ -1,0 +1,23 @@
+{
+  "sourceSHA256": {
+    "scientific/axial-v85/audit85.py": "60882999ade32bfe56900482e9d2eac0efae8bc054a729fd359f4e1e150c01ce",
+    "scientific/axial-v85/campaign85.py": "4230a3ce376ca92b12fedfaed3380dfa19ad89b766f9a02ccc736f768983d7c7",
+    "scientific/axial-v85/diagnostics85.py": "83c75c3a918b2976f3c0fc903042c5253baa7a2f8a7d0be43d05566b8dcee083",
+    "scientific/axial-v85/replay85.py": "7f1c15ff7e11bcf86c1e1e4480e79bf18f7d70996dc8e969081beba1f19d7d19",
+    "scientific/axial-v85/run85.py": "b39a6fb9414e6f18a016cec7e9d91f33947ecbd11a9a0016e59638068f9f398c",
+    "scientific/axial-v85/test_audit85.py": "af2b50f9f15709233edd3c671b8236d44746152b74f2ab30db01d8f1e621d673",
+    "scientific/axial-v85/test_campaign85.py": "5a5efad889a3ca96264d8ef36cbe9125fdd80f3a34345157d5d177588689e51c",
+    "scientific/axial-v85/test_diagnostics85.py": "86b47f72e4402dfeda6623dbd11a60aa10f020c1f98a9f206ff10ea85e188e99"
+  },
+  "commands": [
+    {
+      "name": "optics",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "replay85.py",
+        "optics"
+      ],
+      "exitCode": 0
+    }
+  ]
+}
