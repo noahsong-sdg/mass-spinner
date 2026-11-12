@@ -47,3 +47,14 @@ scores without winner selection or target-based parameter choice.
 Independent reviewers check sources, diagnostic identities and scoring. Run
 all scientific/project execution only in an explicitly synced safe-dev VM.
 Final gates: scientific regressions, flow/optical audits, app tests,typecheck,build.
+
+## Pre-prediction Hall-sign erratum
+
+Independent review and visual inspection of original printed p675 found that
+Eq7 defines the paper's signed sigma_H NEGATIVE. V82's hallSM instead stores
+its positive magnitude for B>0. Therefore the diagnostic in our convention is
+Fr=ρrΩ²+B(hallSM/pedersenSM)Jr, not the minus sign written above. This agrees
+with conventional-current electron Drude balance and J×B in our cylindrical
+basis. Only the new diagnostic is corrected; no previous solver used this Hall
+radial-force term. Record this correction before any V85 prediction or score;
+retain the original protocol wording and regression-test both sign conventions.
