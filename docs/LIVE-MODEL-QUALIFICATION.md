@@ -103,3 +103,7 @@ Require independently justified inputs, a defined diagnostic operator, numerical
 refinement and an additional experimental condition whose outputs are withheld
 before model selection. Closed-vessel inventory cuts do not validate extraction
 throughput, target physics or the complete fusion fuel cycle.
+
+The [non-rigid argon reference](../NONRIGID-FLOW-V98.md) now independently
+cross-checks steady spatial charge/torsional-flow numerics. Its conditional
+angular solution does not change live-model or experimental qualification.
