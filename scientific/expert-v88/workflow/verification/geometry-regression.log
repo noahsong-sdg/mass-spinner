@@ -1,0 +1,6 @@
+test_resealed_invalid_field_arrays_are_rejected (test_workflow.WorkflowTests.test_resealed_invalid_field_arrays_are_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.960s
+
+OK

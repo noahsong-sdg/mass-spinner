@@ -1,0 +1,10 @@
+["/work/home/workflow-v88-venv/bin/python", "qualify.py", "/tmp/tmp6tcmxs1d/results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json", "rejected.json"]
+Traceback (most recent call last):
+  File "/tmp/tmp6tcmxs1d/qualify.py", line 19, in <module>
+    main()
+  File "/tmp/tmp6tcmxs1d/qualify.py", line 8, in main
+    report, digest = read(sys.argv[1])
+                     ^^^^^^^^^^^^^^^^^
+  File "/tmp/tmp6tcmxs1d/seals.py", line 15, in read
+    raise ValueError('Corrupt sealed artifact: '+str(path))
+ValueError: Corrupt sealed artifact: /tmp/tmp6tcmxs1d/results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json

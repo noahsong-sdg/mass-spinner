@@ -1,0 +1,12 @@
+test_cached_qualification_is_still_admitted (test_workflow.WorkflowTests.test_cached_qualification_is_still_admitted) ... ok
+test_completed_scientific_failure_is_reported_and_rejected (test_workflow.WorkflowTests.test_completed_scientific_failure_is_reported_and_rejected) ... ok
+test_execution_error_does_not_become_scientific_failure (test_workflow.WorkflowTests.test_execution_error_does_not_become_scientific_failure) ... ok
+test_physical_input_invalidates_descendants (test_workflow.WorkflowTests.test_physical_input_invalidates_descendants) ... ok
+test_real_case_and_checker_cache (test_workflow.WorkflowTests.test_real_case_and_checker_cache) ... ok
+test_real_interruption_resumes_completed_physics (test_workflow.WorkflowTests.test_real_interruption_resumes_completed_physics) ... ok
+test_stale_artifact_admission (test_workflow.WorkflowTests.test_stale_artifact_admission) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 17.284s
+
+OK

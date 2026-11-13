@@ -1,0 +1,45 @@
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+PYTHON = sys.executable
+PHYSICAL = ['producer.py','seals.py','config.json','PROTOCOL.md','requirements-lock.txt']
+def key(paths):
+    values = {p: hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in paths}
+    return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()[:20]
+CASE = key(PHYSICAL)
+AUDIT = key(['assess.py'])
+REPORT = key(['assess.py','report.py'])
+QUALIFY = key(['assess.py','report.py','qualify.py'])
+FIELD = f'results/{CASE}/field.json'
+ASSESSMENT = f'results/{CASE}/assessment-{AUDIT}.json'
+REPORT_FILE = f'results/{CASE}/report-{REPORT}.json'
+QUALIFICATION = f'results/{CASE}/qualification-{QUALIFY}.json'
+
+rule all:
+    input: FIELD, FIELD+'.sha256', ASSESSMENT, ASSESSMENT+'.sha256',
+           REPORT_FILE, REPORT_FILE+'.sha256', QUALIFICATION, QUALIFICATION+'.sha256', 'admit.py'
+    shell: '{PYTHON:q} admit.py {FIELD:q} {ASSESSMENT:q} {REPORT_FILE:q} {QUALIFICATION:q}'
+
+rule solve:
+    input: PHYSICAL
+    output: field=FIELD, seal=FIELD+'.sha256'
+    shell: '{PYTHON:q} producer.py config.json {output.field:q}'
+
+rule assess:
+    input: field=FIELD, seal=FIELD+'.sha256', code='assess.py', helper='seals.py'
+    output: assessment=ASSESSMENT, seal=ASSESSMENT+'.sha256'
+    shell: '{PYTHON:q} assess.py {input.field:q} {output.assessment:q}'
+
+rule report:
+    input: field=FIELD, fieldseal=FIELD+'.sha256', assessment=ASSESSMENT,
+           auditseal=ASSESSMENT+'.sha256', code='report.py', auditcode='assess.py', helper='seals.py'
+    output: report=REPORT_FILE, seal=REPORT_FILE+'.sha256'
+    shell: '{PYTHON:q} report.py {input.field:q} {input.assessment:q} {output.report:q}'
+
+rule qualification:
+    input: report=REPORT_FILE, seal=REPORT_FILE+'.sha256', code='qualify.py',
+           reportcode='report.py', helper='seals.py'
+    output: qualification=QUALIFICATION, seal=QUALIFICATION+'.sha256'
+    shell: '{PYTHON:q} qualify.py {input.report:q} {output.qualification:q}'

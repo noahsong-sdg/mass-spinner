@@ -1,0 +1,64 @@
+["/work/home/workflow-v88-venv/bin/python", "-m", "snakemake", "--cores", "1", "--executor", "local", "--scheduler", "greedy", "--printshellcmds"]
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-13 01:01:31
+  Workflow ID: d777c6df-3564-4150-97c5-7325619e10eb
+  Platform: Linux-6.18.35-aarch64-with-glibc2.36
+  Host: 1f5d1da8-9f01-467e-ad97-2090dc0dc4d4
+  User: node
+  Snakemake version: 9.27.1
+  Python version: 3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]
+  Command: /work/home/workflow-v88-venv/lib/python3.11/site-packages/snakemake/__main__.py --cores 1 --executor local --scheduler greedy --printshellcmds
+  Snakefile: /tmp/tmpxue4o4to/Snakefile
+  Base directory: /tmp/tmpxue4o4to
+  Run directory: /tmp/tmpxue4o4to
+  Working directory: /tmp/tmpxue4o4to
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:31 2026]
+localrule all:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256, admit.py
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+Traceback (most recent call last):
+  File "/tmp/tmpxue4o4to/admit.py", line 11, in <module>
+    qualification, q = read(sys.argv[4])
+                       ^^^^^^^^^^^^^^^^^
+  File "/tmp/tmpxue4o4to/seals.py", line 15, in read
+    raise ValueError('Corrupt sealed artifact: '+str(path))
+ValueError: Corrupt sealed artifact: results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+RuleException:
+CalledProcessError in file "/tmp/tmpxue4o4to/Snakefile", line 23:
+Command 'set -euo pipefail;  /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json' returned non-zero exit status 1.
+[Fri Nov 13 01:01:31 2026]
+Error in rule all:
+    message: None
+    jobid: 0
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256, admit.py
+    shell:
+        /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+        (command exited with non-zero exit code)
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error messages
+Complete log(s): /tmp/tmpxue4o4to/.snakemake/log/2026-11-13T010131.924449.snakemake.log
+Elapsed time: 0:00:00.045345
+WorkflowError:
+At least one job did not complete successfully.

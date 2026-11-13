@@ -1,0 +1,106 @@
+["/work/home/workflow-v88-venv/bin/python", "-m", "snakemake", "--cores", "1", "--executor", "local", "--scheduler", "greedy", "--printshellcmds"]
+{"cachedInputsAdmitted": true, "fieldSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a", "assessmentSHA256": "4ff16f3c658e9a4e7b6589967336f9d00763985812cf12993654e4c95ed9cf70", "reportSHA256": "2dbafe587c8a9068aae8df0fd47e954d245112c909ed4a936c67686936810da2", "qualificationSHA256": "2f7f272597ddf003e8ccfc72afc18bd779a0667252e5b8bcf95d0c236db278d1", "globalQualification": false}
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-13 01:01:39
+  Workflow ID: 15ae4348-c105-483a-af6c-b10012bbc011
+  Platform: Linux-6.18.35-aarch64-with-glibc2.36
+  Host: 1f5d1da8-9f01-467e-ad97-2090dc0dc4d4
+  User: node
+  Snakemake version: 9.27.1
+  Python version: 3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]
+  Command: /work/home/workflow-v88-venv/lib/python3.11/site-packages/snakemake/__main__.py --cores 1 --executor local --scheduler greedy --printshellcmds
+  Snakefile: /tmp/tmpccgg8a81/Snakefile
+  Base directory: /tmp/tmpccgg8a81
+  Run directory: /tmp/tmpccgg8a81
+  Working directory: /tmp/tmpccgg8a81
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+solve                1
+assess               1
+report               1
+qualification        1
+all                  1
+total                5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:39 2026]
+localrule solve:
+    input: producer.py, seals.py, config.json, PROTOCOL.md, requirements-lock.txt
+    output: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256
+    jobid: 1
+    reason: Missing output files: results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/field.json
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python producer.py config.json results/595e2e2812a1dc964d85/field.json
+[Fri Nov 13 01:01:39 2026]
+Finished jobid: 1 (Rule: solve)
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:39 2026]
+localrule assess:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, assess.py, seals.py
+    output: results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256
+    jobid: 2
+    reason: Missing output files: results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256; Input files updated by another job: results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/field.json
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python assess.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json
+[Fri Nov 13 01:01:39 2026]
+Finished jobid: 2 (Rule: assess)
+2 of 5 steps (40%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:39 2026]
+localrule report:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, report.py, assess.py, seals.py
+    output: results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256
+    jobid: 3
+    reason: Missing output files: results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json; Input files updated by another job: results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, results/595e2e2812a1dc964d85/field.json
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python report.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json
+[Fri Nov 13 01:01:39 2026]
+Finished jobid: 3 (Rule: report)
+3 of 5 steps (60%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:39 2026]
+localrule qualification:
+    input: results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, qualify.py, report.py, seals.py
+    output: results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256
+    jobid: 4
+    reason: Missing output files: results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256; Input files updated by another job: results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python qualify.py results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+[Fri Nov 13 01:01:39 2026]
+Finished jobid: 4 (Rule: qualification)
+4 of 5 steps (80%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 01:01:39 2026]
+localrule all:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256, admit.py
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+[Fri Nov 13 01:01:39 2026]
+Finished jobid: 0 (Rule: all)
+5 of 5 steps (100%) done
+Complete log(s): /tmp/tmpccgg8a81/.snakemake/log/2026-11-13T010139.544001.snakemake.log
+Elapsed time: 0:00:00.351937

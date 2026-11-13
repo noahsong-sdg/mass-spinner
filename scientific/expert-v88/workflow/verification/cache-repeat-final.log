@@ -1,0 +1,45 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-13 00:51:38
+  Workflow ID: 29694be2-1658-4218-a570-9089eac041a1
+  Platform: Linux-6.18.35-aarch64-with-glibc2.36
+  Host: cc28ca01-da69-4024-8aed-f07382105937
+  User: node
+  Snakemake version: 9.27.1
+  Python version: 3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]
+  Command: /work/home/workflow-v88-venv/lib/python3.11/site-packages/snakemake/__main__.py --cores 1 --executor local --scheduler greedy --printshellcmds
+  Snakefile: /work/project/Snakefile
+  Base directory: /work/project
+  Run directory: /work/project
+  Working directory: /work/project
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 00:51:38 2026]
+localrule all:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-1825e7793e28590b8ca0.json, results/595e2e2812a1dc964d85/assessment-1825e7793e28590b8ca0.json.sha256, results/595e2e2812a1dc964d85/report-002734707f2e38f90594.json, results/595e2e2812a1dc964d85/report-002734707f2e38f90594.json.sha256, results/595e2e2812a1dc964d85/qualification-288cc45417daa1f1ef33.json, results/595e2e2812a1dc964d85/qualification-288cc45417daa1f1ef33.json.sha256, admit.py
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-1825e7793e28590b8ca0.json results/595e2e2812a1dc964d85/report-002734707f2e38f90594.json results/595e2e2812a1dc964d85/qualification-288cc45417daa1f1ef33.json
+{"cachedInputsAdmitted": true, "fieldSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a", "assessmentSHA256": "2e6bdf0dae952cd323c11818975fab9584240715cb3bc955765bbbdb5b303f6c", "reportSHA256": "4c9a8e6d996e900298e5306a41d30c6b92912ad798200cf48db839682e0b00aa", "qualificationSHA256": "a423ca5eaf9e0ab0b0eb2d17243d7bf8cb36415d0887b929cce556fa59e0cbdd", "globalQualification": false}
+[Fri Nov 13 00:51:38 2026]
+Finished jobid: 0 (Rule: all)
+1 of 1 steps (100%) done
+Complete log(s): /work/project/.snakemake/log/2026-11-13T005138.564268.snakemake.log
+Elapsed time: 0:00:00.068019
