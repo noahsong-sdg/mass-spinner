@@ -1,0 +1,170 @@
+{
+  "role": "upstream installation smoke only; no physics validation",
+  "downloads": {
+    "foundation.asc": {
+      "url": "https://dl.openfoam.org/gpg.key",
+      "sha256": "fbaacfe37e704494f6e65ab424e67b031191769e84c31185acb701f9e74fe0a9",
+      "bytes": 1710
+    },
+    "Release": {
+      "url": "https://dl.openfoam.org/ubuntu/dists/jammy/Release",
+      "sha256": "51b292b23dc4ab60124a51ffe902cd20f3eb6cea841f6f7adbfb71acdda34008",
+      "bytes": 8508
+    },
+    "Release.gpg": {
+      "url": "https://dl.openfoam.org/ubuntu/dists/jammy/Release.gpg",
+      "sha256": "ee4403269dae2eaf800cde44cc26b9d4693964aa8da461ab7d39a03b1b7302b4",
+      "bytes": 488
+    },
+    "Packages": {
+      "url": "https://dl.openfoam.org/ubuntu/dists/jammy/main/binary-arm64/Packages",
+      "sha256": "70a5efa830a62e38df25e77153f28f5889fe74e3d287ffde9371922dca9f0b42",
+      "bytes": 24653
+    },
+    "openfoam14.deb": {
+      "url": "https://dl.openfoam.org/ubuntu/dists/jammy/main/binary-arm64/openfoam14_20261008_arm64.deb",
+      "sha256": "a0867f4f6509460315921629cea44620f9f9ca3f59591d93009d5e9cd2927ea6",
+      "bytes": 122097302
+    }
+  },
+  "environment": {
+    "command": [
+      "sh",
+      "-c",
+      "uname -a; cat /etc/os-release; ldd --version; df -h .; id"
+    ],
+    "exitCode": 0
+  },
+  "download-foundation.asc": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "2",
+      "--connect-timeout",
+      "20",
+      "-o",
+      "/work/project/downloads/foundation.asc",
+      "https://dl.openfoam.org/gpg.key"
+    ],
+    "exitCode": 0
+  },
+  "download-Release": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "2",
+      "--connect-timeout",
+      "20",
+      "-o",
+      "/work/project/downloads/Release",
+      "https://dl.openfoam.org/ubuntu/dists/jammy/Release"
+    ],
+    "exitCode": 0
+  },
+  "download-Release.gpg": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "2",
+      "--connect-timeout",
+      "20",
+      "-o",
+      "/work/project/downloads/Release.gpg",
+      "https://dl.openfoam.org/ubuntu/dists/jammy/Release.gpg"
+    ],
+    "exitCode": 0
+  },
+  "repository-signature": {
+    "command": [
+      "gpgv",
+      "--status-fd",
+      "1",
+      "--keyring",
+      "/work/project/downloads/foundation.gpg",
+      "/work/project/downloads/Release.gpg",
+      "/work/project/downloads/Release"
+    ],
+    "exitCode": 0
+  },
+  "download-Packages": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "2",
+      "--connect-timeout",
+      "20",
+      "-o",
+      "/work/project/downloads/Packages",
+      "https://dl.openfoam.org/ubuntu/dists/jammy/main/binary-arm64/Packages"
+    ],
+    "exitCode": 0
+  },
+  "officialPackage": {
+    "Package": "openfoam14",
+    "Version": "20261008",
+    "Architecture": "arm64",
+    "Maintainer": "OpenFOAM Foundation <noreply@openfoam.org>",
+    "Installed-Size": "642773",
+    "Depends": "g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 9), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make",
+    "Recommends": "paraview",
+    "Filename": "dists/jammy/main/binary-arm64/openfoam14_20261008_arm64.deb",
+    "Size": "122097302",
+    "MD5sum": "4bb816788560d3515161ae0af272c8b0",
+    "SHA1": "669f8f484f1f291c00287ae6b8c21d1b37b77975",
+    "SHA256": "a0867f4f6509460315921629cea44620f9f9ca3f59591d93009d5e9cd2927ea6",
+    "Section": "science",
+    "Priority": "optional",
+    "Homepage": "https://openfoam.org",
+    "Description": "OpenFOAM is the leading free, open source software for"
+  },
+  "download-openfoam14.deb": {
+    "command": [
+      "curl",
+      "-fL",
+      "--retry",
+      "2",
+      "--connect-timeout",
+      "20",
+      "-o",
+      "/work/project/downloads/openfoam14.deb",
+      "https://dl.openfoam.org/ubuntu/dists/jammy/main/binary-arm64/openfoam14_20261008_arm64.deb"
+    ],
+    "exitCode": 0
+  },
+  "extract-rootless": {
+    "command": [
+      "dpkg-deb",
+      "-x",
+      "/work/project/downloads/openfoam14.deb",
+      "/work/project/tools"
+    ],
+    "exitCode": 0
+  },
+  "installed-paths": {
+    "command": [
+      "sh",
+      "-c",
+      "find \"/work/project/tools\" -name foamRun -o -name blockMesh -o -path \"*/etc/bashrc\""
+    ],
+    "exitCode": 0
+  },
+  "elf-dependencies-0": {
+    "command": [
+      "ldd",
+      "/work/project/tools/opt/openfoam14/applications/solvers/foamRun"
+    ],
+    "exitCode": 1
+  },
+  "elf-dependencies-1": {
+    "command": [
+      "ldd",
+      "/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/bin/foamRun"
+    ],
+    "exitCode": 0
+  },
+  "status": "authenticated package extracted; inspect dependency logs before execution"
+}

@@ -1,0 +1,18 @@
+Linux 930b7651-84c9-4afe-bfa2-0e16ed9002ba 6.18.35 #1 SMP Mon Jun 15 12:55:27 UTC 2026 aarch64 GNU/Linux
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+VERSION_ID="12"
+VERSION="12 (bookworm)"
+VERSION_CODENAME=bookworm
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+ldd (Debian GLIBC 2.36-9+deb12u14) 2.36
+Copyright (C) 2022 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+Written by Roland McGrath and Ulrich Drepper.
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/vdc         12G   36K   12G   1% /work
+uid=1000(node) gid=1000(node) groups=1000(node)

@@ -1,0 +1,32 @@
+tools/opt/openfoam14/etc/bashrc: line 162: /opt/openfoam14/etc/config.sh/functions: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 165: /opt/openfoam14/bin/foamEtcFile: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 165: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 170: _foamParams: command not found
+tools/opt/openfoam14/etc/bashrc: line 196: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 199: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 203: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 210: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 211: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 216: /opt/openfoam14/bin/foamEtcFile: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 216: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 217: /opt/openfoam14/bin/foamEtcFile: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 217: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 218: /opt/openfoam14/bin/foamEtcFile: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 218: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 219: /opt/openfoam14/bin/foamEtcFile: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 219: _foamSource: command not found
+tools/opt/openfoam14/etc/bashrc: line 225: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 228: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 231: /opt/openfoam14/bin/foamCleanPath: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 249: /opt/openfoam14/etc/config.sh/functions: No such file or directory
+tools/opt/openfoam14/etc/bashrc: line 253: /opt/openfoam14/etc/config.sh/bash_completion: No such file or directory
+bash: line 1: foamRun: command not found
+bash: line 1: blockMesh: command not found
+	linux-vdso.so.1 (0x0000ffff9242e000)
+	libfiniteVolume.so => not found
+	libOpenFOAM.so => not found
+	libstdc++.so.6 => /lib/aarch64-linux-gnu/libstdc++.so.6 (0x0000ffff921a0000)
+	libm.so.6 => /lib/aarch64-linux-gnu/libm.so.6 (0x0000ffff920f0000)
+	libgcc_s.so.1 => /lib/aarch64-linux-gnu/libgcc_s.so.1 (0x0000ffff920b0000)
+	libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffff91f00000)
+	/lib/ld-linux-aarch64.so.1 (0x0000ffff923e0000)

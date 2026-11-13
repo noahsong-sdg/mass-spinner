@@ -1,0 +1,85 @@
+{
+  "role": "unchanged upstream compressible air RAS cavity installation smoke",
+  "parallelQualified": false,
+  "matchedPlasmaOrArgonValidated": false,
+  "upstreamCase": "tutorials/fluid/cavity",
+  "initialSHA256": {
+    "0/T": "298742b7dbf19288692d593fd90f52584cf6a3b3c2448fd5ad6b68e82c349675",
+    "0/U": "9f759a2ecdb9ae5d680b9d36fe7b029b7cdd0846ef694a11171d7f35fffdbf60",
+    "0/alphat": "5251ef6db607b1385996f1f8218f357fe3d18319952b7d956777b2dcf534737f",
+    "0/epsilon": "4e42a7fed6aca32e8ce0ef131a5f3b080848b9f6eb0f01843f4f76c2400df5c1",
+    "0/k": "d7fa26ade3cd4b3b52ebd56baecf0e7085e1211010dee5ae44f96b1560c6955c",
+    "0/nut": "0acc76392c33bf8d41162b72397f40e1b32e6f6d2b8497731189294cb7d288b7",
+    "0/omega": "25331d069e1afcf734f541a165087c1cf66e23a43ae4033a0b86ef3178913620",
+    "0/p": "e2ccb614dff274449523e32382b0ea659dc60b56504649a47c2384be3e40d585",
+    "constant/momentumTransport": "9a5a21f0304694baa42af85a649551b71e29738a065df7b99aad5af6c1b81c66",
+    "constant/physicalProperties": "fb59066f2f64075eed315858fe7f687816d9e776f5d5c6c4314f14e397f50370",
+    "constant/thermophysicalTransport": "a95e3c7b25ee6beade3f9644db6b5a1384cfa6a31570667b65c470fa109c7a21",
+    "system/blockMeshDict": "6370d940a730c92bb0c40b34108bbf058d5c549509071a757cdae5a1a81aa063",
+    "system/controlDict": "308c5bee8d1623f59386e9d64239f497fc5555aef0de9712a3a643b19422271c",
+    "system/fvConstraints": "8afb8c59ca87c8a8fd5a44f6d43f3389506af24770a2509eab7d957e7c005dc0",
+    "system/fvSchemes": "f8c84fc2ef98761a500a95df382a175c512e72190efdb516a7109080571c434f",
+    "system/fvSolution": "d391320730ffc0a7babf76a04da17f76e2ff9b70979db0471c724524fb1906dc"
+  },
+  "environment": {
+    "WM_PROJECT_DIR": "/work/project/tools/opt/openfoam14",
+    "WM_PROJECT_VERSION": "14",
+    "FOAM_ETC": "/work/project/tools/opt/openfoam14/etc",
+    "FOAM_LIBBIN": "/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/lib",
+    "LD_LIBRARY_PATH": "/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/lib/dummy:/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/lib",
+    "PATH": "/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/bin:/work/project/tools/opt/openfoam14/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+  "commands": [
+    {
+      "args": [
+        "foamRun",
+        "-help"
+      ],
+      "exitCode": 0,
+      "log": "smoke-0.log",
+      "wallSeconds": 0.032996417
+    },
+    {
+      "args": [
+        "blockMesh",
+        "-help"
+      ],
+      "exitCode": 0,
+      "log": "smoke-1.log",
+      "wallSeconds": 0.020465208999999984
+    },
+    {
+      "args": [
+        "blockMesh",
+        "-case",
+        "/work/project/fluid-cavity"
+      ],
+      "exitCode": 0,
+      "log": "smoke-2.log",
+      "wallSeconds": 0.021929624999999953
+    },
+    {
+      "args": [
+        "checkMesh",
+        "-case",
+        "/work/project/fluid-cavity"
+      ],
+      "exitCode": 0,
+      "log": "smoke-3.log",
+      "wallSeconds": 0.02214624999999998
+    },
+    {
+      "args": [
+        "foamRun",
+        "-case",
+        "/work/project/fluid-cavity"
+      ],
+      "exitCode": 0,
+      "log": "smoke-4.log",
+      "wallSeconds": 0.172837291
+    }
+  ],
+  "allPassed": true,
+  "peakChildRSSKiB": 128600,
+  "pythonVersion": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]"
+}

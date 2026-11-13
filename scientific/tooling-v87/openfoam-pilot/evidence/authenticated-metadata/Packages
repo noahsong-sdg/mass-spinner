@@ -1,0 +1,452 @@
+Package: openfoam11
+Version: 20240704
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 449264
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam11_20240704_arm64.deb
+Size: 97776098
+MD5sum: 95e4a8fc6a5d44187026265d5ecce543
+SHA1: b86790ffa129dfc5a452743eaea9a3e5d6b81e33
+SHA256: 9bead089ba061ce9a28df1136210b8d1340f0eddbd1da38b2e4183ea534d2213
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam-nopv-deps
+Version: 20240705
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Depends: libopenmpi-dev, zlib1g-dev, gnuplot, gnuplot-x11, libxt-dev, build-essential, cmake, flex
+Filename: dists/jammy/main/binary-arm64/openfoam-nopv-deps.deb
+Size: 630
+MD5sum: 6e96a07e4387bee9cf6f8e5fc54213b0
+SHA1: 05c3aa37dc1d8adc048550122fa7b63e988ccaa7
+SHA256: 3386f68eb9b6cbaa72f0c64467d032adfa3cb7c44232b61a0b5afffd831ce360
+Homepage: https://openfoam.org
+Description: Installs dependent software to compile OpenFOAM but not including
+ the reader modules for ParaView.
+
+Package: openfoam-deps
+Version: 20240705
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Depends: libxml2-dev, libhdf5-dev, libavfilter-dev, libtheora-dev, libgl2ps-dev,
+ libx11-dev, libqt5x11extras5-dev, libglew-dev, libutfcpp-dev,
+ libdouble-conversion-dev, libfreetype-dev, libqt5svg5-dev,
+ qtxmlpatterns5-dev-tools, qttools5-dev, python3-dev, libpdal-dev,
+ openfoam-nopv-deps
+Filename: dists/jammy/main/binary-arm64/openfoam-deps.deb
+Size: 692
+MD5sum: 261eacd920a3529d244fa92884267b2f
+SHA1: 601f09732f6f57b61237de039e0558d734bafaaa
+SHA256: e73b859666529dfed8ad7ce72a93c4bcb0c9be0cdc1d81db0e890ce862f28e3f
+Homepage: https://openfoam.org
+Description: Installs dependent software to compile OpenFOAM including the
+ reader modules for ParaView.
+
+Package: openfoam12
+Version: 20240709
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 544130
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam12_20240709_arm64.deb
+Size: 109455810
+MD5sum: 51e3558b12c8c2378a203e90be82db99
+SHA1: 58a010ee4cacaf04be35708669f30a8de5a9bc8f
+SHA256: 486ac4ed3751fc9851d4d361a69e6bef172e2d3bd2fbb7f32655d64af6d68b93
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam12
+Version: 20240728
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 544166
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam12_20240728_arm64.deb
+Size: 109504592
+MD5sum: 1ddfaf019b70ec06ce0afa977ba4c5e8
+SHA1: 3fdd7864820cd1078718948ff2aaf56cd6bbb99c
+SHA256: a37ee3a996e7546627da1c839c9fe93a299ec4a42946407d8d3c9857fa14f9e8
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam12
+Version: 20240902
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 544211
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam12_20240902_arm64.deb
+Size: 109356828
+MD5sum: 138bb38a2b3104d8e2bb0047b93bae19
+SHA1: 758e3951314f0808b2b2b9e76e7c85e6e0153d8c
+SHA256: ca1a16d7afb41779f9f2727aa316a839d19da9d92d90734e3348a8a1b732ba73
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam12
+Version: 20250102
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 544233
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam12_20250102_arm64.deb
+Size: 109487010
+MD5sum: b747141bbdc14c4427fcee8d7c64f8dd
+SHA1: f3d03a99433e3842a316820a53b1151ccdc97d93
+SHA256: 73ddd9d7e2ea94e7a7f4e62c69db1a382dcd5a20b495d741ddc61293f6913a64
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam12
+Version: 20250206
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 544336
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam12_20250206_arm64.deb
+Size: 109724310
+MD5sum: b23c04e0f07de1e477f6df2c7087d5eb
+SHA1: eec67cfaae2cf0d312bb9c98433060074428d331
+SHA256: c52e09a556bdcac45250595d5618980180b1ca6583fd3e4743f43848613abb09
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam13
+Version: 20250708
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 576262
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam13_20250708_arm64.deb
+Size: 113740676
+MD5sum: 837409cbdd82a4bd2bd7e38e73d7af0f
+SHA1: 4789cc484dd0df856ec0264283741be83eb17473
+SHA256: c3f8cfbb363f3bb04f7d9b6ecfc6fa1dea595b1c1e88bfd27b0652c2b80bb474
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam13
+Version: 20250911
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 582271
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam13_20250911_arm64.deb
+Size: 115252770
+MD5sum: e7c508dd7a824485ac29be0e079e7ade
+SHA1: c3c24e01fde221ac0942bcc7e659b9b59878cb7c
+SHA256: b739f8427f029a31bfa07674a2e8c9294cf38f566535e589d13573fff7430b62
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam13
+Version: 20260212
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 581811
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam13_20260212_arm64.deb
+Size: 115192728
+MD5sum: f4ca065724b5df4b0d7796c400aff7f1
+SHA1: bf61e6c0def3e48e9b7eb65dc51e8cbbd39bd6d7
+SHA256: 70518d67d7885b7955cb7f677da679b5de269b7c8e2a5bb8cc90b0eb4538d297
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam13
+Version: 20260407
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 581811
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam13_20260407_arm64.deb
+Size: 115199048
+MD5sum: 3bee1698a53018f4dece0bd9e7b36e25
+SHA1: dde8e79637153fa777f8b5307c475ca8b6b88dea
+SHA256: 9f1b2434b28fd3d56e5d2f64ad93b10e71a76078737e6fde830a9536928a9ecc
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam13
+Version: 20260624
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 581815
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 6), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam13_20260624_arm64.deb
+Size: 115146316
+MD5sum: 34ecc4515eee9b549eebed7a4548a7c0
+SHA1: d206c4ad4c553615384b7f5718d78ba58dba7878
+SHA256: 425c2ecc9ab6018ff565dce57605242c76ed93c35bd4c4146a15a29469ac3ace
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam14
+Version: 20260714
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 642828
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 9), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam14_20260714_arm64.deb
+Size: 122423398
+MD5sum: 3119161ac713fd662787f6408b084738
+SHA1: ad8adff74528b315db949483c189639c1dead917
+SHA256: e727450e3611422d1a805663307e951fe6db9dee44f507faa2c7e9e6cd60fb8a
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam14
+Version: 20260724
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 642777
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 9), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam14_20260724_arm64.deb
+Size: 121951544
+MD5sum: d912f8c56426e493503ee671f8b43eff
+SHA1: 19c3ac439b0df0cefb4ba454799d1f4404c6bbd8
+SHA256: f6620323d7064b40a33ed37d7f43df349739b10c9a0aaf36cafb0ad5adbeddee
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
+Package: openfoam14
+Version: 20261008
+Architecture: arm64
+Maintainer: OpenFOAM Foundation <noreply@openfoam.org>
+Installed-Size: 642773
+Depends: g++, libreadline-dev, libc6 (>= 2.35), libgcc-s1 (>= 3.0), libopenmpi3 (>= 4.1.2), libstdc++6 (>= 9), zlib1g (>= 1:1.1.4), binutils-dev, flex, libopenmpi-dev, libxt-dev, openmpi-bin, gnuplot, gnuplot-x11, make
+Recommends: paraview
+Filename: dists/jammy/main/binary-arm64/openfoam14_20261008_arm64.deb
+Size: 122097302
+MD5sum: 4bb816788560d3515161ae0af272c8b0
+SHA1: 669f8f484f1f291c00287ae6b8c21d1b37b77975
+SHA256: a0867f4f6509460315921629cea44620f9f9ca3f59591d93009d5e9cd2927ea6
+Section: science
+Priority: optional
+Homepage: https://openfoam.org
+Description: OpenFOAM is the leading free, open source software for
+ computational fluid dynamics (CFD), owned by the OpenFOAM Foundation
+ (https://openfoam.org) and distributed exclusively under the General
+ Public Licence (GPL).  It is produced, maintained and developed primarily
+ by CFD Direct Ltd (https://cfd.direct).  OpenFOAM has has a large user
+ base across most areas of engineering and science, from both commercial
+ and academic organisations.  It has an extensive range of features to
+ simulate fluid flow, heat transfer, thermodynamics, chemical reactions,
+ discrete particles, fluid films, and more.  It includes tools for meshing
+ in and around complex geometries, data processing and visualisation. The
+ OpenFOAM's environment supports customised development, with compilation
+ tools and a modular structure. Almost all computations can be executed
+ in parallel as standard to take full advantage of multi-core processors
+ and multi-processor computers.
+
