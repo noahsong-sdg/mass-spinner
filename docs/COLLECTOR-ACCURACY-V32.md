@@ -121,7 +121,8 @@ Release aggregate SHA256:
 Cloudflare version ff2867d3-c494-4636-b9c7-f647ffc2793e was independently read
 back from provider status at 100% at 2026-11-08T16:52:32.884317Z.
 Deployment scripts, locked tooling and receipt are in scientific/deployment-v32.
-The prior release is preserved as release-before-v32.
+The prior release was originally preserved as `release-before-v32`; V89 moved
+its complete contents into the verified [local recovery archive](../scientific/cleanup-v89/SECONDARY-CLEANUP.md).
 No live browser/GPU/mobile observations were made in this iteration; provider
 rollout, static checks and Blender asset validation are distinct evidence.
 

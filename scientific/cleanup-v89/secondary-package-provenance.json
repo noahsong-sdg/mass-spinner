@@ -1,0 +1,155 @@
+{
+  "archivePath": "/Users/noahs/.codex/archives/mass-spinner-v89-secondary-20261112/preserved-content.zip",
+  "archiveSHA256": "65a914bdf554b6c42607a8875b47037dc81ba93c6416d8e449530b75118fbf35",
+  "pythonPackages": [
+    {
+      "name": "autopep8",
+      "version": "2.3.1",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/autopep8-2.3.1.dist-info/METADATA",
+      "sha256": "4c2008d98c18e89e5027e61fe419d45f2c2251613fdfc544867087bfc179afa3"
+    },
+    {
+      "name": "certifi",
+      "version": "2025.4.26",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/certifi-2025.4.26.dist-info/METADATA",
+      "sha256": "4354831646392ce4002660e5b59cf6c14dd54efd4a8795feae3188e0a88f1cd3"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.4.1",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/charset_normalizer-3.4.1.dist-info/METADATA",
+      "sha256": "a3d4977f45d882a4e5449d02e33236e1b5baa59a442efeb0736bc615b9606292"
+    },
+    {
+      "name": "idna",
+      "version": "3.10",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/idna-3.10.dist-info/METADATA",
+      "sha256": "0aa7e2b0819e35e547431bb1502ae33b58e6c38f438b5733de94dd4a8244b935"
+    },
+    {
+      "name": "pip",
+      "version": "24.0",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/pip-24.0.dist-info/METADATA",
+      "sha256": "90d11f277fd5868da679ee257c97656dde511c8aac7d025231407e6ce90839e2"
+    },
+    {
+      "name": "pycodestyle",
+      "version": "2.13.0",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/pycodestyle-2.13.0.dist-info/METADATA",
+      "sha256": "9840627815722a912e0a47cf50e68797c8628136495120db9d2fd3f4bfee1322"
+    },
+    {
+      "name": "requests",
+      "version": "2.32.3",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/requests-2.32.3.dist-info/METADATA",
+      "sha256": "634f6775df8716b842752d30b5a74f384a428329575d7a0c7da6a0442ab5ec38"
+    },
+    {
+      "name": "setuptools",
+      "version": "63.2.0",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/setuptools-63.2.0.dist-info/METADATA",
+      "sha256": "682a4ec1284bc765d26bd02a3f7e3feb02a8e53a1ad9fb152d67282f38a37172"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.4.0",
+      "metadataPath": ".tools/blender-app/Blender/Blender.app/Contents/Resources/4.5/python/lib/python3.11/site-packages/urllib3-2.4.0.dist-info/METADATA",
+      "sha256": "e41561069c7970dd7135f51efac43406f05b31f684b10d3d2c3abdad2413658a"
+    },
+    {
+      "name": "bpy",
+      "version": "4.5.15",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/bpy-4.5.15.dist-info/METADATA",
+      "sha256": "84ae3e1b9829ccffdde6c2620995632c4c2242487fb87de7ca21897658b1b2c7"
+    },
+    {
+      "name": "certifi",
+      "version": "2026.10.23",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/certifi-2026.10.23.dist-info/METADATA",
+      "sha256": "e463e38f7fe7da36a11e6d3fecc5dfa5b97be8c8022620400750d79ae7d842bc"
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "3.5.2",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/charset_normalizer-3.5.2.dist-info/METADATA",
+      "sha256": "89ce6362bb7be88558f4be99a98f5d1b4da93d19cd0323e5ee0bac05cf883dfb"
+    },
+    {
+      "name": "Cython",
+      "version": "3.3.1",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/cython-3.3.1.dist-info/METADATA",
+      "sha256": "48107ce596e5dcb461b1d8cc7f751f98f95bea99b0d0394db1596ffec27ff5d0"
+    },
+    {
+      "name": "idna",
+      "version": "3.20",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/idna-3.20.dist-info/METADATA",
+      "sha256": "dbd8c14c1e4ca1e0c9824a6dbc7cbbf78884f38eb52d91148cd3025f671e4b85"
+    },
+    {
+      "name": "numpy",
+      "version": "1.26.4",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/numpy-1.26.4.dist-info/METADATA",
+      "sha256": "c7e07fd91847cb89b28c262e481e5656b4cd417b34d121a056b817b10b66fc01"
+    },
+    {
+      "name": "requests",
+      "version": "2.34.2",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/requests-2.34.2.dist-info/METADATA",
+      "sha256": "8c384ba3e979480faae2859d3c5e6c1276dd2c3616e322e124d52c8cfc556f27"
+    },
+    {
+      "name": "urllib3",
+      "version": "2.8.0",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/urllib3-2.8.0.dist-info/METADATA",
+      "sha256": "10898c620e8007c030e07fa5622b68358a43010025dfbd78a1cb797699de2bb4"
+    },
+    {
+      "name": "zstandard",
+      "version": "0.25.0",
+      "metadataPath": ".tools/blender-python/lib/python3.11/site-packages/zstandard-0.25.0.dist-info/METADATA",
+      "sha256": "03d37736b26b9ae48451dd17026d93dffbd252fb708c1a2a9ae1be0c0966de92"
+    }
+  ],
+  "reinstallEvidence": [
+    {
+      "path": ".tools/7zip/License.txt",
+      "sha256": "99df5a516035baca9f2e8095977599d4a4340f58ba900f870238943996014f53",
+      "bytes": 6029
+    },
+    {
+      "path": ".tools/7zip/readme.txt",
+      "sha256": "0de4163cd6a2f96ea112c41d8b6821b0c0034e54ffb60b3a3668026a4f5e7dc2",
+      "bytes": 3872
+    },
+    {
+      "path": ".tools/blender-app/Blender/Blender.app/Contents/Info.plist",
+      "sha256": "097a2482cc57cba09818acf9d0b3b73a6c6fa1cc72f8b3b4b15240dc1a941a27",
+      "bytes": 2300,
+      "version": "4.5.15"
+    },
+    {
+      "path": ".tools/blender-app/Blender/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/Info.plist",
+      "sha256": "4f686ebbc89a62e36db9e0373b54da5cd1e5f2c101307d6cbf9b539ef3c9fd8e",
+      "bytes": 1653,
+      "version": "4.5.15"
+    },
+    {
+      "path": ".tools/blender-python/pyvenv.cfg",
+      "sha256": "cf9a1fa6d8d5ddfbe579d63b015dee494e9ddfb8236b61e01c3ea8a8f9c37110",
+      "bytes": 176
+    },
+    {
+      "path": "downloads/blender-3.6.23.sha256",
+      "sha256": "6c20a148ab8d4177c81856b275a6b111442ca7d1374bf7be47c70a05fdc2b4ff",
+      "bytes": 582,
+      "text": "ecbeaef4abbeb045de8465e78b3f97aec9b67faf2fc71b20e5eca37bf1caf874  blender-3.6.23-macos-arm64.dmg\n910bd19e4d0f87be301df380a4fb03a08b9dcdb2b164dd0cabfb889a8dac03c2  blender-3.6.23-macos-x64.dmg\n0e9a18af4d0060b825e9617e24a775f759e0f9f67271c062f3d53a539030af00  blender-3.6.23-linux-x64.tar.xz\n459888a070da5b3755b73245b7d3b8da9d0ff5cdb23124588ea4a34da091f72c  blender-3.6.23-windows-x64.msi\nbf816f10dd29575148233219a9a98fce249abb40a03d75a4b14ee413050c99bf  blender-3.6.23-windows-x64.msix\ne3296eba7eab32c2e5182459ec7614af32224eee2bd32c9d0a08ffd751c54f3b  blender-3.6.23-windows-x64.zip\n"
+    },
+    {
+      "path": "downloads/blender-4.5.15.sha256",
+      "sha256": "513b7a1a9c7f21b6cba3a5f544f5e1bd2c979dcdf9ea3a45e68e717d0187c0b9",
+      "bytes": 880,
+      "text": "bfbc0bda099d1ab7aef0992a584f872f58bed9bb491210ad45f9ca071aa2e688  blender-4.5.15-macos-arm64.dmg\n3801a97619292a012ede0e855ee705ae872a680474845297b777254f7f21ed78  blender-4.5.15-macos-x64.dmg\n0d2b8bb2efe97e6c8eb57de6b7322f8800e1984e3125b60decca5f6771e4773e  blender-4.5.15-linux-x64.tar.xz\n5fc1b35452e1ecc68fd55cd250179598a6a239a3e368a51774dfefbb67e498ae  blender-4.5.15-windows-x64.msi\nc2a2ae80c946cf03029fe4d904bc09298aff10dc1c5f0227df10c36803fd2c75  blender-4.5.15-windows-x64.msix\n52dd02fd74877fa08e74b67d7854cf32468a232c02aaa19b6844c91285574f8d  blender-4.5.15-windows-x64.zip\neb5fd32b73e9916ae82d16b38a1d8f2292148b4a1df4c09f35de113acaa9bc43  blender-4.5.15-windows-arm64.msi\n5e4c8b6a0183917b89cafdbf444bc169d4aa61b283105bdab995e10a06822845  blender-4.5.15-windows-arm64.msix\na095662a0c0063ccfb3d50760462d4a3cc74e6ee20880e85f639c28bc323db93  blender-4.5.15-windows-arm64.zip\n"
+    }
+  ]
+}

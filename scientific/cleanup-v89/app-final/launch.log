@@ -1,0 +1,11 @@
+RUN test
+EXIT test 0
+RUN typecheck
+EXIT typecheck 0
+RUN build
+EXIT build 0
+RUN site
+EXIT site 0
+RUN assets
+EXIT assets 0
+Evidence payload transferred and independently SHA256 verified.

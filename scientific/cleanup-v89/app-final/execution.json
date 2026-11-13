@@ -1,0 +1,69 @@
+{
+  "startedUTC": "2026-11-13T02:33:31.601322+00:00",
+  "uid": 1000,
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "sourceTreeSHA256": "b066b4388152183e1714bbe5b4dedac2ca106adf0a57f43e960db893e9340b6e",
+  "sourceFiles": 2666,
+  "overlayControlsPassed": 3,
+  "commands": [
+    {
+      "name": "test",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 40.61270768599999,
+      "logSHA256": "2da6148fcdcb8714cfe62e6d8cc7187788dd6b302d0d1ebde28a5b0cbb7989de"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.970271750000002,
+      "logSHA256": "8fa1cf5506304e8abac55868e7f1a136c9b1dde57a3981a382da4c21ea129a6f"
+    },
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.36965974999999673,
+      "logSHA256": "a2a5d554ce77722163c9c343b621c4fbceb94dc8313510243631080934ff3d13"
+    },
+    {
+      "name": "site",
+      "command": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.1110045839999998,
+      "logSHA256": "96472b54a03d1daec401b59e23742b598cddf88e8db93d63f9551009efda5cc8"
+    },
+    {
+      "name": "assets",
+      "command": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.047984792000001164,
+      "logSHA256": "0a0ae3f8a5d62f28963222bf2d12624204dd4a7d59d1db5042b8a6cff85b6fa3"
+    }
+  ],
+  "finishedUTC": "2026-11-13T02:34:13.945504+00:00",
+  "allPassed": true,
+  "sourceUnchanged": true,
+  "nodeVersion": "v22.23.4",
+  "npmVersion": "10.9.9"
+}

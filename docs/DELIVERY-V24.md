@@ -129,8 +129,9 @@ are retained in `scientific/verification-v24/`.
 
 The exact checked release was copied to the isolated deployment guest
 `safe-dev-f5e3965510847418`. Its deployment script checks complete membership
-and every release hash before Wrangler 4.158.0 uploads. The previous release is
-preserved as `release-before-v24`.
+and every release hash before Wrangler 4.158.0 uploads. The previous release was
+originally preserved as `release-before-v24`. V89 moved its complete contents
+into the verified [local recovery archive](../scientific/cleanup-v89/SECONDARY-CLEANUP.md).
 
 Cloudflare reports version **9214b0ff-9ec3-4dc1-b48d-e17b7f593496** at **100%**,
 deployment `3f78fbb1-9801-4fb3-9b6d-5dd718016a11`, created

@@ -1,0 +1,13 @@
+{
+  "additionalPayloadBytes": 1210386864,
+  "allAdditionalPayloadsRestored": true,
+  "beforeAfterInventoriesEqual": true,
+  "guestOwnershipReleased": false,
+  "restoreManifestSHA256": "5d152fcc7cde55833d40ca1b16f1440a9c7a6da0dd84d02c7564407dd3d077a4",
+  "restoredBytes": 6542419673,
+  "restoredFiles": 3744,
+  "stage": "/private/tmp/mass-spinner-material-v38-agent",
+  "verifiedUTC": "2026-11-13T02:33:17.114811+00:00",
+  "volume": "safe-dev-91df66bcebf94022",
+  "volumeRetired": false
+}

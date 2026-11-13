@@ -1,0 +1,607 @@
+{
+  "schemaVersion": 1,
+  "startedUTC": "2026-11-13T01:42:43.055906+00:00",
+  "projectRoot": "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6",
+  "archivePath": "/Users/noahs/.codex/archives/mass-spinner-v89-secondary-20261112/preserved-content.zip",
+  "targets": [
+    "public",
+    "release-before-v21",
+    "release-before-v22",
+    "release-before-v23",
+    "release-before-v24",
+    "release-before-v25",
+    "release-before-v28",
+    "release-before-v29",
+    "release-before-v30",
+    "release-before-v31",
+    "release-before-v32",
+    "release-before-v33",
+    "release-before-v34",
+    "downloads",
+    ".tools/blender-app",
+    ".tools/blender-python",
+    ".tools/7zip",
+    "separator-lab.html"
+  ],
+  "scope": "Only 18 explicitly authorized obsolete host trees/files. No project code, native tool, Git or VM operation.",
+  "filesystemAvailableBefore": 4550590464,
+  "initialOpenChecks": [
+    {
+      "path": "public",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/public"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:43.967309+00:00"
+    },
+    {
+      "path": "release-before-v21",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v21"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:44.784627+00:00"
+    },
+    {
+      "path": "release-before-v22",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v22"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:45.657826+00:00"
+    },
+    {
+      "path": "release-before-v23",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v23"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:46.473320+00:00"
+    },
+    {
+      "path": "release-before-v24",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v24"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:47.293320+00:00"
+    },
+    {
+      "path": "release-before-v25",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v25"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:48.129292+00:00"
+    },
+    {
+      "path": "release-before-v28",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v28"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:48.981595+00:00"
+    },
+    {
+      "path": "release-before-v29",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v29"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:49.843581+00:00"
+    },
+    {
+      "path": "release-before-v30",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v30"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:50.659512+00:00"
+    },
+    {
+      "path": "release-before-v31",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v31"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:51.499401+00:00"
+    },
+    {
+      "path": "release-before-v32",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v32"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:52.400260+00:00"
+    },
+    {
+      "path": "release-before-v33",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v33"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:53.207487+00:00"
+    },
+    {
+      "path": "release-before-v34",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v34"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:54.039001+00:00"
+    },
+    {
+      "path": "downloads",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/downloads"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:54.847118+00:00"
+    },
+    {
+      "path": ".tools/blender-app",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/blender-app"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:55.734031+00:00"
+    },
+    {
+      "path": ".tools/blender-python",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/blender-python"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:56.596642+00:00"
+    },
+    {
+      "path": ".tools/7zip",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/7zip"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:57.410824+00:00"
+    },
+    {
+      "path": "separator-lab.html",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/separator-lab.html"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:42:58.224300+00:00"
+    }
+  ],
+  "finalOpenChecks": [
+    {
+      "path": "public",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/public"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:37.122798+00:00"
+    },
+    {
+      "path": "release-before-v21",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v21"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:37.980003+00:00"
+    },
+    {
+      "path": "release-before-v22",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v22"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:38.892841+00:00"
+    },
+    {
+      "path": "release-before-v23",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v23"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:39.814860+00:00"
+    },
+    {
+      "path": "release-before-v24",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v24"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:40.689825+00:00"
+    },
+    {
+      "path": "release-before-v25",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v25"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:41.573658+00:00"
+    },
+    {
+      "path": "release-before-v28",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v28"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:42.468085+00:00"
+    },
+    {
+      "path": "release-before-v29",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v29"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:43.372420+00:00"
+    },
+    {
+      "path": "release-before-v30",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v30"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:44.289316+00:00"
+    },
+    {
+      "path": "release-before-v31",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v31"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:45.187797+00:00"
+    },
+    {
+      "path": "release-before-v32",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v32"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:46.085213+00:00"
+    },
+    {
+      "path": "release-before-v33",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v33"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:47.007950+00:00"
+    },
+    {
+      "path": "release-before-v34",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/release-before-v34"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:47.931617+00:00"
+    },
+    {
+      "path": "downloads",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/downloads"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:49.055915+00:00"
+    },
+    {
+      "path": ".tools/blender-app",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/blender-app"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:51.301596+00:00"
+    },
+    {
+      "path": ".tools/blender-python",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/blender-python"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:53.376985+00:00"
+    },
+    {
+      "path": ".tools/7zip",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "+D",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/.tools/7zip"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:54.532805+00:00"
+    },
+    {
+      "path": "separator-lab.html",
+      "command": [
+        "/usr/sbin/lsof",
+        "-n",
+        "-P",
+        "-F",
+        "pcn",
+        "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/separator-lab.html"
+      ],
+      "exitCode": 1,
+      "openHandles": false,
+      "checkedUTC": "2026-11-13T01:43:55.383901+00:00"
+    }
+  ],
+  "removed": [
+    "public",
+    "release-before-v21",
+    "release-before-v22",
+    "release-before-v23",
+    "release-before-v24",
+    "release-before-v25",
+    "release-before-v28",
+    "release-before-v29",
+    "release-before-v30",
+    "release-before-v31",
+    "release-before-v32",
+    "release-before-v33",
+    "release-before-v34",
+    "downloads",
+    ".tools/blender-app",
+    ".tools/blender-python",
+    ".tools/7zip",
+    "separator-lab.html"
+  ],
+  "archiveSHA256": "65a914bdf554b6c42607a8875b47037dc81ba93c6416d8e449530b75118fbf35",
+  "archiveBytes": 1169014311,
+  "archiveAllocatedBytes": 1169014784,
+  "manifestSHA256": "ab9a5386613a16b0f5eb86838193244cf1a604fa8aa3ee6a7a6c6b62ce4f87a0",
+  "uniqueBlobs": 6270,
+  "entries": 12193,
+  "originalFileCount": 10700,
+  "originalPayloadBytes": 3002018234,
+  "originalAllocatedBytes": 3029250048,
+  "archiveVerified": true,
+  "completedUTC": "2026-11-13T01:43:55.814834+00:00",
+  "filesystemAvailableAfter": 6396841984,
+  "allTargetsAbsent": true,
+  "status": "completed",
+  "externalReceiptSHA256": "849ab8e4e9f7f447d01af842bb69967b4d9e603293b8ebe54e1ca7e2ab447d0c",
+  "maintenanceSourcePath": "/Users/noahs/.codex/archives/mass-spinner-v89-secondary-20261112/maintenance.py",
+  "maintenanceSourceSHA256": "7593fc07ed3dea550cb7b52338ac315104f88c98a9043570b68b3dae44cd11d5"
+}

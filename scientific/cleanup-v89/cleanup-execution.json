@@ -1,0 +1,213 @@
+{
+  "startedUTC": "2026-11-13T01:39:08.513768+00:00",
+  "admissionSHA256": "a2a1cdba62b9b6ef8ef93a4fd510762cbffdca9c534e55df44d3c9161bed8159",
+  "freeBytesBefore": 2198700032,
+  "removed": [
+    {
+      "path": "scientific/centrifuge-v44/adaptive61c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/adaptive61c/checked-release.tar",
+      "archiveSHA256": "7659deae23fc905a55f0af90fbcff31ee10e31563ec2bf2a89ab54f69fb4df14",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/adaptive61d/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/adaptive61d/checked-release.tar",
+      "archiveSHA256": "91df1ad5561cc9eaca3a535d2119ee608ac5dedfdd3950d4bb31e2594c39f58f",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/audit52c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/audit52c/checked-release.tar",
+      "archiveSHA256": "e5d1aa04c30aac470e513886d4a494d99540e65583be3346bced1dae122f863e",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/audit52e/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/audit52e/checked-release.tar",
+      "archiveSHA256": "3acb0d2f72064f9277117b3af06a2c80f8d97a88f96eb3eafedd965f5f0931fb",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/boundary60/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/boundary60/checked-release.tar",
+      "archiveSHA256": "74de58b9c3139970e97671c8e9e95388bdb5e007b77d44887c65e413978bcc07",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/checked-release.tar",
+      "archiveSHA256": "e62c37240eb190d9607038102e49561c5cf33e35d3449ed5601794b0ab92a81c",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/coupled48/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/coupled48/checked-release.tar",
+      "archiveSHA256": "28f53561e0ad189c9718b1607a38f25661fd38248e17ad8eb232954e7ea09e82",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/coupled48b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/coupled48b/checked-release.tar",
+      "archiveSHA256": "55351fe4d35adc59afa61732745fe675a23e5ef75697bd66f4e4123a2983f2d3",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/drive49b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/drive49b/checked-release.tar",
+      "archiveSHA256": "61730943457e7a669b6850c7b01790620ab35967b34df9f59a8a378e7a267723",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/drive49c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/drive49c/checked-release.tar",
+      "archiveSHA256": "33cc09b1f2c42edfcefb1e47117ab21a434330071335d36a5e062a4d15290e86",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/drive49d/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/drive49d/checked-release.tar",
+      "archiveSHA256": "1feefd478b76abf43c1c8a2cd3ccaf4d2c013fc5207c3db6e5febf03908797ee",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/exact/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/exact/checked-release.tar",
+      "archiveSHA256": "fe144bf189790206385676f3a3b7fb34a235621765cef615b4bffe688ccc5703",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/hotwall59/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/hotwall59/checked-release.tar",
+      "archiveSHA256": "ef56764efb49533c2b727b461f2d3d47a1ba4ddae1aa154f671de9a804e3b2d8",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/mixture58/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/mixture58/checked-release.tar",
+      "archiveSHA256": "0de451443943bd7f083efb6602454bb9755b77387b62281010121d0af870046d",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/motion46c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/motion46c/checked-release.tar",
+      "archiveSHA256": "f80012166af4e4a90b71bb5ed7173df7568cb65cd0739907fafeb00c83afce4e",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/motion46d/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/motion46d/checked-release.tar",
+      "archiveSHA256": "6348d909a5c96ed82d7708535bd4784ab4019cbf37ab94f5568729db3505b52d",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/motion46e/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/motion46e/checked-release.tar",
+      "archiveSHA256": "df3ac98c647b5a96ea27c3556e3ce5ca7216084917087b65bb2a5b7e4ad23d47",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/operate51b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/operate51b/checked-release.tar",
+      "archiveSHA256": "d6ad6490d547aaccf95f4e9858b7bfc042f9422bedc03a7d14bf174d285dc268",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/operate51c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/operate51c/checked-release.tar",
+      "archiveSHA256": "766f0ad46964d0b687b37ea5d8bbffb785c4d56ee20bae36510883abf2893dec",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/playground47b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/playground47b/checked-release.tar",
+      "archiveSHA256": "2f2308e8256d033dca28cae4062a4d7a6fb149eb7127879ea3149284105f91bf",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/playground47f/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/playground47f/checked-release.tar",
+      "archiveSHA256": "2d3dbc6e8ba299c80f3359abdbb419316b74029777568d534b067f0785fa6458",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/render45/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render45/checked-release.tar",
+      "archiveSHA256": "24a69b1d024d2913b69ce1d6281344bc76dcbc968babaa9fb60868abc0c19dfb",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/render45b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render45b/checked-release.tar",
+      "archiveSHA256": "2dc239414f8cb3718c1d29482b735d649e2575259e12c20fa4a5de91524dec1c",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/render45c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render45c/checked-release.tar",
+      "archiveSHA256": "3096f5b6ac01f816d40472291f1387630a7f6122d847bb2039cd7bc7e0169aa4",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/render50b/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render50b/checked-release.tar",
+      "archiveSHA256": "2cf857c99c9d562221bdb0dee1a28dd5855cf57bebd1cc9278a3af5546318115",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/render50c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render50c/checked-release.tar",
+      "archiveSHA256": "735f7fccc89b32d806df3f77e8c3be56d5997448f574d1bd373228f2d7b223d1",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/render50d/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render50d/checked-release.tar",
+      "archiveSHA256": "25aba9d49935d4c3e651dd83ffa8410e5fe164090d5ab7a71246ef8fc260bf31",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/render50e/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/render50e/checked-release.tar",
+      "archiveSHA256": "3c23f491bd9e05ae048c59d4a58e4cd151a29703ed644aa110de75f4b28442af",
+      "files": 151
+    },
+    {
+      "path": "scientific/centrifuge-v44/scan/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/scan/checked-release.tar",
+      "archiveSHA256": "72d66a1d0a9d1c822a2fcaabc4127d37aeb2579c394bc31cc2014db5e93bf4ea",
+      "files": 150
+    },
+    {
+      "path": "scientific/centrifuge-v44/thermal53c/checked-release",
+      "retainedArchive": "scientific/centrifuge-v44/thermal53c/checked-release.tar",
+      "archiveSHA256": "0670e227042e34065d4d67cca7a4094d970bbdcdd1fdb114d0962d1d99b3661e",
+      "files": 151
+    },
+    {
+      "path": "scientific/fixes-v43/checked-release-camera",
+      "retainedArchive": "scientific/fixes-v43/checked-release-camera.tar",
+      "archiveSHA256": "e68447357205a008ed0f6deb5beffbd1ee0515af4367a9ba6c649249ab65fd1f",
+      "files": 148
+    },
+    {
+      "path": "scientific/fixes-v43/checked-release-live",
+      "retainedArchive": "scientific/fixes-v43/checked-release-live.tar",
+      "archiveSHA256": "56bbf7de49d928d7a547d889bdb9aa8173e6734ec99a085bc110d9854142ed6e",
+      "files": 148
+    },
+    {
+      "path": "scientific/fixes-v43/checked-release-zoom",
+      "retainedArchive": "scientific/fixes-v43/checked-release-zoom.tar",
+      "archiveSHA256": "21b08acb8473714f8e15a87f6c21761630bbeebaa7d1394f516d75e63f7b7cbd",
+      "files": 148
+    },
+    {
+      "path": "scientific/fixes-v43/checked-release",
+      "retainedArchive": "scientific/fixes-v43/checked-release.tar",
+      "archiveSHA256": "f1580a5bb2c4f80cde5e0f8670737de37c8a9e581c497114ed46d0be3a93b1ba",
+      "files": 148
+    }
+  ],
+  "finishedUTC": "2026-11-13T01:39:45.621156+00:00",
+  "freeBytesAfter": 5077430272
+}

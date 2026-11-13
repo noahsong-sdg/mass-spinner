@@ -1,0 +1,8 @@
+{
+  "project": "/private/tmp/mass-spinner-material-v38-agent",
+  "volume": "safe-dev-91df66bcebf94022",
+  "files": 229,
+  "bytes": 3527565,
+  "source_sha256": "f50ae199ef879238abd60b1e4fd978f856b9151868b4cbbb74fa98355fac5f04",
+  "image": "docker.io/library/safe-dev:2026-10-29"
+}
