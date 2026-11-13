@@ -1,0 +1,37 @@
+{
+  "cases": [
+    {
+      "case": "beam-off-two",
+      "maximumStateChangeOverDeclaredScale": 5.093170329928398e-11,
+      "maximumAbsolutePopulationChange": 5.551115123125783e-16,
+      "maximumAbsoluteTemperatureChangeK": 1.1368683772161603e-13,
+      "maximumAbsoluteLedgerChange": 5.093170329928398e-11,
+      "radauStatsEqual": true,
+      "qualificationUnchanged": true,
+      "passed": false
+    },
+    {
+      "case": "continuous-two",
+      "maximumStateChangeOverDeclaredScale": 1.7053025658242404e-15,
+      "maximumAbsolutePopulationChange": 4.996003610813204e-16,
+      "maximumAbsoluteTemperatureChangeK": 6.821210263296962e-13,
+      "maximumAbsoluteLedgerChange": 3.4924596548080444e-10,
+      "radauStatsEqual": true,
+      "qualificationUnchanged": true,
+      "passed": false
+    },
+    {
+      "case": "pulsed-four",
+      "maximumStateChangeOverDeclaredScale": 1.4210854715202005e-15,
+      "maximumAbsolutePopulationChange": 1.1102230246251565e-15,
+      "maximumAbsoluteTemperatureChangeK": 5.684341886080801e-13,
+      "maximumAbsoluteLedgerChange": 2.0372681319713593e-10,
+      "radauStatsEqual": true,
+      "qualificationUnchanged": true,
+      "passed": true
+    }
+  ],
+  "experimentalQualification": false,
+  "interpretation": "Descriptive replay differences with the original declared coordinate scales; no original gate or normalization is changed.",
+  "explanation": "Observed tiny state differences are consistent with floating-point execution differences. Their precise platform/library cause has not been isolated."
+}

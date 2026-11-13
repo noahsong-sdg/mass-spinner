@@ -1,0 +1,110 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "Snakefile",
+      "expectedSHA256": "21d4ce9c302664f760e4a5499449957631df0548c3974bbc97223452bfaba151",
+      "actualSHA256": "21d4ce9c302664f760e4a5499449957631df0548c3974bbc97223452bfaba151",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/Snakefile",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "producer.py",
+      "expectedSHA256": "4687f4dbacef7e978543e25793cda64456bcb4d29598ed206630401e31c21e23",
+      "actualSHA256": "4687f4dbacef7e978543e25793cda64456bcb4d29598ed206630401e31c21e23",
+      "proof": "scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json#sourceSHA256.producer.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "assess.py",
+      "expectedSHA256": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd",
+      "actualSHA256": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/assess.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "report.py",
+      "expectedSHA256": "92f973d523c863b646f04ebddc2c3bd5bf5ac8050c662d42a4ee30846a949d1c",
+      "actualSHA256": "92f973d523c863b646f04ebddc2c3bd5bf5ac8050c662d42a4ee30846a949d1c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/report.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "qualify.py",
+      "expectedSHA256": "3bc9092ae893ff51bbb1d02b49bc084b37734741f9dd4bc08a3075de024292e1",
+      "actualSHA256": "3bc9092ae893ff51bbb1d02b49bc084b37734741f9dd4bc08a3075de024292e1",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/qualify.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "seals.py",
+      "expectedSHA256": "8090d75e2f4c83f8df1d7f158ccfaa8d2ddf5819eb87b591f6d83348e232af48",
+      "actualSHA256": "8090d75e2f4c83f8df1d7f158ccfaa8d2ddf5819eb87b591f6d83348e232af48",
+      "proof": "scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json#sourceSHA256.seals.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "admit.py",
+      "expectedSHA256": "f468e045be4fd682f25598d76590ff9be470f4a46fa4b86dd91cb6d6d55c48e0",
+      "actualSHA256": "f468e045be4fd682f25598d76590ff9be470f4a46fa4b86dd91cb6d6d55c48e0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/admit.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "config.json",
+      "expectedSHA256": "0e7943a864197c8926bdc2b7eb732f5fc4a3d7d044c83a1165ffbbd6e71be45d",
+      "actualSHA256": "0e7943a864197c8926bdc2b7eb732f5fc4a3d7d044c83a1165ffbbd6e71be45d",
+      "proof": "scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json#sourceSHA256.config.json",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "PROTOCOL.md",
+      "expectedSHA256": "eeca8ee75f6fb323ef2ecf20e174c744dfdc254ee7c70a071d4d8bf75158e425",
+      "actualSHA256": "eeca8ee75f6fb323ef2ecf20e174c744dfdc254ee7c70a071d4d8bf75158e425",
+      "proof": "scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json#sourceSHA256.PROTOCOL.md",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "requirements.txt",
+      "expectedSHA256": "fa09278d34ab6afd830774f90689f6a0c07c51123f6bdc50fefdeca8ae0eff08",
+      "actualSHA256": "fa09278d34ab6afd830774f90689f6a0c07c51123f6bdc50fefdeca8ae0eff08",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/requirements.txt",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "requirements-lock.txt",
+      "expectedSHA256": "239576af5c9783937e75309f0bc437e5b6d1d0f779bee348535b6a82b91f4905",
+      "actualSHA256": "239576af5c9783937e75309f0bc437e5b6d1d0f779bee348535b6a82b91f4905",
+      "proof": "scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json#sourceSHA256.requirements-lock.txt",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_workflow.py",
+      "expectedSHA256": "7420db59961e13f9141f59e61cc201a0aa838e8ff8c67bbc809a367e4676310e",
+      "actualSHA256": "7420db59961e13f9141f59e61cc201a0aa838e8ff8c67bbc809a367e4676310e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/test_workflow.py",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/595e2e2812a1dc964d85/field.json",
+      "expectedSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a",
+      "actualSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/workflow/results/595e2e2812a1dc964d85/field.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}

@@ -1,0 +1,46 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "campaign.py",
+      "expectedSHA256": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+      "actualSHA256": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+      "proof": "scientific/expert-v88/festim/validated/results.json#provenance.moduleSHA256.campaign.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "oracle.py",
+      "expectedSHA256": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+      "actualSHA256": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+      "proof": "scientific/expert-v88/festim/validated/results.json#provenance.moduleSHA256.oracle.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_campaign.py",
+      "expectedSHA256": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+      "actualSHA256": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+      "proof": "scientific/expert-v88/festim/validated/results.json#provenance.moduleSHA256.test_campaign.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "protocol.json",
+      "expectedSHA256": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+      "actualSHA256": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/festim/validated/protocol.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results.json",
+      "expectedSHA256": "d3632537de35c25cde6adb4d7fed27478ee1dd72fb2c9bb4c645a3e37c06f773",
+      "actualSHA256": "d3632537de35c25cde6adb4d7fed27478ee1dd72fb2c9bb4c645a3e37c06f773",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/festim/validated/results.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}

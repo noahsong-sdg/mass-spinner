@@ -1,0 +1,77 @@
+{
+  "campaign.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/festim/validated/campaign.py",
+    "gitBlobOID": "cc56ae0d83fd3d6179da3517bac86f0c6025ed86",
+    "sha256": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "campaign.py"
+  },
+  "compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+    "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "compare.py"
+  },
+  "guest.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+    "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "guest.py"
+  },
+  "oracle.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/festim/validated/oracle.py",
+    "gitBlobOID": "10c6ec75cf68993972ee2d9a03e370613589b095",
+    "sha256": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "oracle.py"
+  },
+  "protocol.json": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/festim/validated/protocol.json",
+    "gitBlobOID": "1ed58cb047c6c7074c83fc6f4b462877a0959dc3",
+    "sha256": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "protocol.json"
+  },
+  "test_campaign.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/festim/validated/test_campaign.py",
+    "gitBlobOID": "339ea4bbb7cc8f3ea7cf7838e67db77a5f0a3623",
+    "sha256": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "test_campaign.py"
+  },
+  "test_compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+    "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-festim-20261113a.tar.gz",
+    "recoveryBundleSHA256": "0da21e707a278e55432b6e15187210146a74bc7305b1805a59fb5ce8b5d0f8cc",
+    "pathInBundle": "test_compare.py"
+  }
+}

@@ -1,0 +1,41 @@
+# R1: e + Ar(1S0) -> e + Ar(1S0), Elastic
+# R2: e + Ar(1S0) -> e + Ar(3P2), Excitation
+# R3: e + Ar(1S0) -> e + Ar(3P1), Excitation
+# R4: e + Ar(1S0) -> e + Ar(3P0), Excitation
+# R5: e + Ar(1S0) -> e + Ar(1P1), Excitation
+# R6: e + Ar(1S0) -> e + Ar(4p[1/2]1), Excitation
+# R7: e + Ar(1S0) -> e + Ar(4p[5/2]3), Excitation
+# R8: e + Ar(1S0) -> e + Ar(4p[5/2]2), Excitation
+# R9: e + Ar(1S0) -> e + Ar(4p[3/2]1), Excitation
+# R10: e + Ar(1S0) -> e + Ar(4p[3/2]2), Excitation
+# R11: e + Ar(1S0) -> e + Ar(4p[1/2]0), Excitation
+# R12: e + Ar(1S0) -> e + Ar(4p'[3/2]1), Excitation
+# R13: e + Ar(1S0) -> e + Ar(4p'[3/2]2), Excitation
+# R14: e + Ar(1S0) -> e + Ar(4p'[1/2]1), Excitation
+# R15: e + Ar(1S0) -> e + Ar(4p'[1/2]0), Excitation
+# R16: e + Ar(1S0) -> e + Ar(3d[1/2]0+3d[1/2]1), Excitation
+# R17: e + Ar(1S0) -> e + Ar(3d[3/2]2), Excitation
+# R18: e + Ar(1S0) -> e + Ar(3d[7/2]4), Excitation
+# R19: e + Ar(1S0) -> e + Ar(3d[7/2]3), Excitation
+# R20: e + Ar(1S0) -> e + Ar(3d[5/2]2+5s[3/2]2), Excitation
+# R21: e + Ar(1S0) -> e + Ar(3d[5/2]3+5s[3/2]1), Excitation
+# R22: e + Ar(1S0) -> e + Ar(3d[3/2]1), Excitation
+# R23: e + Ar(1S0) -> e + Ar(3d'[5/2]2), Excitation
+# R24: e + Ar(1S0) -> e + Ar(3d'[5/2or3/2]3or2+5s'[1/2]0or1), Excitation
+# R25: e + Ar(1S0) -> e + Ar(3d'[3/2]1), Excitation
+# R26: e + Ar(1S0) -> e + Ar(5p[1/2]1), Excitation
+# R27: e + Ar(1S0) -> e + Ar(5p[5/2]3), Excitation
+# R28: e + Ar(1S0) -> e + Ar(5p[5/2]2), Excitation
+# R29: e + Ar(1S0) -> e + Ar(5p[3/2]1), Excitation
+# R30: e + Ar(1S0) -> e + Ar(5p[3/2]2), Excitation
+# R31: e + Ar(1S0) -> e + Ar(5p[1/2]0), Excitation
+# R32: e + Ar(1S0) -> e + Ar(5p'[3/2]1), Excitation
+# R33: e + Ar(1S0) -> e + Ar(5p'[1/2]1), Excitation
+# R34: e + Ar(1S0) -> e + Ar(5p'[3/2]2), Excitation
+# R35: e + Ar(1S0) -> e + Ar(5p'[1/2]0), Excitation
+# R36: e + Ar(1S0) -> e + Ar(4d), Excitation
+# R37: e + Ar(1S0) -> e + Ar(6s), Excitation
+# R38: e + Ar(1S0) -> e + Ar(4d'), Excitation
+# R39: e + Ar(1S0) -> e + e + Ar(+,gnd), Ionization
+RedField(Td)           R1_ine(m^3s^-1)        R2_ine(m^3s^-1)        R3_ine(m^3s^-1)        R4_ine(m^3s^-1)        R5_ine(m^3s^-1)        R6_ine(m^3s^-1)        R7_ine(m^3s^-1)        R8_ine(m^3s^-1)        R9_ine(m^3s^-1)        R10_ine(m^3s^-1)       R11_ine(m^3s^-1)       R12_ine(m^3s^-1)       R13_ine(m^3s^-1)       R14_ine(m^3s^-1)       R15_ine(m^3s^-1)       R16_ine(m^3s^-1)       R17_ine(m^3s^-1)       R18_ine(m^3s^-1)       R19_ine(m^3s^-1)       R20_ine(m^3s^-1)       R21_ine(m^3s^-1)       R22_ine(m^3s^-1)       R23_ine(m^3s^-1)       R24_ine(m^3s^-1)       R25_ine(m^3s^-1)       R26_ine(m^3s^-1)       R27_ine(m^3s^-1)       R28_ine(m^3s^-1)       R29_ine(m^3s^-1)       R30_ine(m^3s^-1)       R31_ine(m^3s^-1)       R32_ine(m^3s^-1)       R33_ine(m^3s^-1)       R34_ine(m^3s^-1)       R35_ine(m^3s^-1)       R36_ine(m^3s^-1)       R37_ine(m^3s^-1)       R38_ine(m^3s^-1)       R39_ine(m^3s^-1)       
++1.00000000000000e+01  +1.15647251678711e-13  +3.50219084148041e-18  +1.89844943794447e-18  +2.29203559579020e-19  +1.23551532939071e-18  +3.03920109437432e-20  +1.20978233466233e-20  +4.46776212716464e-20  +4.53716027702846e-21  +4.53001948195094e-21  +9.25616588435087e-21  +3.08416376892312e-21  +3.21615851423429e-21  +1.90635338929213e-21  +5.95939650966911e-21  +9.43188220055835e-21  +6.21681136670867e-21  +4.87089917377176e-21  +2.41017889899551e-21  +2.69890983697510e-21  +5.25620930249628e-22  +8.16883560520485e-22  +7.95055216066027e-22  +6.71917849864040e-22  +4.46896127857944e-22  +1.58875631199751e-22  +5.35371967607424e-23  +4.01212115792727e-22  +2.03707722319154e-23  +4.98431886137522e-23  +2.44729997660938e-24  +7.21645781671747e-23  +5.72389085083507e-24  +3.03656526214252e-23  +2.08686103789938e-23  +3.50940893544790e-23  +4.37194057846129e-24  +9.36913346408410e-24  +1.29297325556209e-23  

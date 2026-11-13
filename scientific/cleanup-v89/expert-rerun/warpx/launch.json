@@ -1,0 +1,50 @@
+{
+  "campaign": "warpx",
+  "freshName": "v89-warpx-20261113a",
+  "stage": "/private/tmp/mass-spinner-warpx-v88-20261112",
+  "startedUTC": "2026-11-13T02:20:25.892955+00:00",
+  "runnerSHA256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+  "inputSHA256": {
+    "reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "analyze.py": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+    "test_reference.py": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+    "protocol.json": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "supplemental-warm-off/reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "supplemental-warm-off/protocol.json": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+    "warm-eligibility.py": "db6e69a507be2cedd245dbf4a0521b622e744c27aa229e59bf76136323e4a320",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "protocol.json": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "results/orbit-coarse/result.json": "e329dab3c7994d9a6ff809819301d8ca65e1d9402f2507279a740c51e2646082",
+    "results/orbit-medium/result.json": "796a532811e08d4cb4022296fc03010b199f7ebdd30a14de58905b6d1b3382fb",
+    "results/orbit-fine/result.json": "51b0894de44c22339cb2c3da259c20f9d329713198a37e0247befe88f90d4a93",
+    "results/orbit-grid/result.json": "f0dfe4db556ca5718c321a6a98fdb314b5d858ac0a584a382f453ac903637f5d",
+    "results/free-control/result.json": "216e36faf00ce10b5652ddd0d24196f0216bde6d2f9d69a64c27a9e030f99b60",
+    "results/bobylev/result.json": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+    "results/nanbu/result.json": "a35cb4ab67c9cf9a89755cdb602f606b530f1f0597b0c1b9941030a758dcd9bb",
+    "results/bobylev-sub4/result.json": "a1850f240ef757788b6200daa1d0d090bcd9c31d075538b03eef2d965b8be222",
+    "results/nanbu-sub4/result.json": "1fb3598f09c76fbfc24f1febe711cff01035412e74ab3f87bc0960ad33b43710",
+    "results/bobylev-dt/result.json": "17530b7f2784c13e31bec52cbf1fab2a0a75cbb96f94cc0b910a5c2be3216866",
+    "results/bobylev-grid/result.json": "e3e323f70c9a5989609a6ea98c86fadb016275f81709c22d192222c136426eea",
+    "results/bobylev-seed/result.json": "2d1a28c1f895fffaee21a94db5780a9697346a0b26e3c6b1b3330a2a83eb6b86",
+    "supplemental-warm-off/results/warm-off/result.json": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac"
+  },
+  "guestJobSHA256": "c5cb356ff8600f0794e306995442c94850f28279160458816b9e9ee9b79b38d5",
+  "finishedUTC": "2026-11-13T02:20:30.154320+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-warpx-v88-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "logSHA256": "4cc35f97d6a1016b75c811bee0862f48df72630280763f62be75d59675da5873"
+}

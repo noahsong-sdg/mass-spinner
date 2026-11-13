@@ -1,0 +1,166 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "reference.py",
+      "expectedSHA256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+      "actualSHA256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+      "proof": "scientific/expert-v88/warpx/results/bobylev/result.json#runnerSHA256",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "analyze.py",
+      "expectedSHA256": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+      "actualSHA256": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/analyze.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_reference.py",
+      "expectedSHA256": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+      "actualSHA256": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/test_reference.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "protocol.json",
+      "expectedSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+      "actualSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+      "proof": "scientific/expert-v88/warpx/results/bobylev/result.json#protocolSHA256",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "supplemental-warm-off/reference.py",
+      "expectedSHA256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+      "actualSHA256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+      "proof": "scientific/expert-v88/warpx/supplemental-warm-off/results/warm-off/result.json#runnerSHA256",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "supplemental-warm-off/protocol.json",
+      "expectedSHA256": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+      "actualSHA256": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+      "proof": "scientific/expert-v88/warpx/supplemental-warm-off/results/warm-off/result.json#protocolSHA256",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "protocol.json",
+      "expectedSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+      "actualSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/protocol.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/orbit-coarse/result.json",
+      "expectedSHA256": "e329dab3c7994d9a6ff809819301d8ca65e1d9402f2507279a740c51e2646082",
+      "actualSHA256": "e329dab3c7994d9a6ff809819301d8ca65e1d9402f2507279a740c51e2646082",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/orbit-coarse/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/orbit-medium/result.json",
+      "expectedSHA256": "796a532811e08d4cb4022296fc03010b199f7ebdd30a14de58905b6d1b3382fb",
+      "actualSHA256": "796a532811e08d4cb4022296fc03010b199f7ebdd30a14de58905b6d1b3382fb",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/orbit-medium/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/orbit-fine/result.json",
+      "expectedSHA256": "51b0894de44c22339cb2c3da259c20f9d329713198a37e0247befe88f90d4a93",
+      "actualSHA256": "51b0894de44c22339cb2c3da259c20f9d329713198a37e0247befe88f90d4a93",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/orbit-fine/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/orbit-grid/result.json",
+      "expectedSHA256": "f0dfe4db556ca5718c321a6a98fdb314b5d858ac0a584a382f453ac903637f5d",
+      "actualSHA256": "f0dfe4db556ca5718c321a6a98fdb314b5d858ac0a584a382f453ac903637f5d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/orbit-grid/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/free-control/result.json",
+      "expectedSHA256": "216e36faf00ce10b5652ddd0d24196f0216bde6d2f9d69a64c27a9e030f99b60",
+      "actualSHA256": "216e36faf00ce10b5652ddd0d24196f0216bde6d2f9d69a64c27a9e030f99b60",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/free-control/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/bobylev/result.json",
+      "expectedSHA256": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+      "actualSHA256": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/bobylev/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/nanbu/result.json",
+      "expectedSHA256": "a35cb4ab67c9cf9a89755cdb602f606b530f1f0597b0c1b9941030a758dcd9bb",
+      "actualSHA256": "a35cb4ab67c9cf9a89755cdb602f606b530f1f0597b0c1b9941030a758dcd9bb",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/nanbu/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/bobylev-sub4/result.json",
+      "expectedSHA256": "a1850f240ef757788b6200daa1d0d090bcd9c31d075538b03eef2d965b8be222",
+      "actualSHA256": "a1850f240ef757788b6200daa1d0d090bcd9c31d075538b03eef2d965b8be222",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/bobylev-sub4/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/nanbu-sub4/result.json",
+      "expectedSHA256": "1fb3598f09c76fbfc24f1febe711cff01035412e74ab3f87bc0960ad33b43710",
+      "actualSHA256": "1fb3598f09c76fbfc24f1febe711cff01035412e74ab3f87bc0960ad33b43710",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/nanbu-sub4/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/bobylev-dt/result.json",
+      "expectedSHA256": "17530b7f2784c13e31bec52cbf1fab2a0a75cbb96f94cc0b910a5c2be3216866",
+      "actualSHA256": "17530b7f2784c13e31bec52cbf1fab2a0a75cbb96f94cc0b910a5c2be3216866",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/bobylev-dt/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/bobylev-grid/result.json",
+      "expectedSHA256": "e3e323f70c9a5989609a6ea98c86fadb016275f81709c22d192222c136426eea",
+      "actualSHA256": "e3e323f70c9a5989609a6ea98c86fadb016275f81709c22d192222c136426eea",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/bobylev-grid/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/bobylev-seed/result.json",
+      "expectedSHA256": "2d1a28c1f895fffaee21a94db5780a9697346a0b26e3c6b1b3330a2a83eb6b86",
+      "actualSHA256": "2d1a28c1f895fffaee21a94db5780a9697346a0b26e3c6b1b3330a2a83eb6b86",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/results/bobylev-seed/result.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "supplemental-warm-off/results/warm-off/result.json",
+      "expectedSHA256": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac",
+      "actualSHA256": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/warpx/supplemental-warm-off/results/warm-off/result.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}

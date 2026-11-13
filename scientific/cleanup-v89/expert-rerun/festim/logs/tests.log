@@ -1,0 +1,14 @@
+test_closed_heating_energy_balance (test_campaign.NativeLimits.test_closed_heating_energy_balance) ... ok
+test_conservation_and_positivity_mutants_fail (test_campaign.NativeLimits.test_conservation_and_positivity_mutants_fail) ... ok
+test_frozen_snapshot_and_native_stack (test_campaign.NativeLimits.test_frozen_snapshot_and_native_stack) ... ok
+test_initial_state_is_real_initial_condition (test_campaign.NativeLimits.test_initial_state_is_real_initial_condition) ... ok
+test_recompute_isotope_inventory_from_raw_integrals (test_campaign.NativeLimits.test_recompute_isotope_inventory_from_raw_integrals) ... ok
+test_saved_qualification_recomputes (test_campaign.NativeLimits.test_saved_qualification_recomputes) ... ok
+test_thermal_coupling_changes_the_transport (test_campaign.NativeLimits.test_thermal_coupling_changes_the_transport) ... ok
+test_time_axis_is_actual_solver_time (test_campaign.NativeLimits.test_time_axis_is_actual_solver_time) ... ok
+test_wrong_reference_profile_fails (test_campaign.NativeLimits.test_wrong_reference_profile_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.322s
+
+OK

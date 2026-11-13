@@ -1,0 +1,7 @@
+["/work/home/workflow-v88-venv/bin/python", "assess.py", "/tmp/tmpaqd25qhg/results/595e2e2812a1dc964d85/field.json", "rejected.json"]
+Traceback (most recent call last):
+  File "/tmp/tmpaqd25qhg/assess.py", line 37, in <module>
+    main()
+  File "/tmp/tmpaqd25qhg/assess.py", line 19, in main
+    raise ValueError('Field arrays must have exactly cells finite real values: '+name)
+ValueError: Field arrays must have exactly cells finite real values: initialK

@@ -1,0 +1,110 @@
+{
+  "analyze.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/analyze.py",
+    "gitBlobOID": "cabbe690bdd01feb9e3728866855614093470539",
+    "sha256": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "analyze.py"
+  },
+  "compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+    "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "compare.py"
+  },
+  "guest.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+    "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "guest.py"
+  },
+  "protocol.json": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/protocol.json",
+    "gitBlobOID": "063692e3e10027437ac4dc8ed9f06c3198006213",
+    "sha256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "protocol.json"
+  },
+  "reference.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/reference.py",
+    "gitBlobOID": "d0a8803fdffa1d0f750c4a216c129517d85794c1",
+    "sha256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "reference.py"
+  },
+  "supplemental-warm-off/protocol.json": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/supplemental-warm-off/protocol.json",
+    "gitBlobOID": "fab31b092f55cb57128b0eb96f4ab90b5221737a",
+    "sha256": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "supplemental-warm-off/protocol.json"
+  },
+  "supplemental-warm-off/reference.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/supplemental-warm-off/reference.py",
+    "gitBlobOID": "d0a8803fdffa1d0f750c4a216c129517d85794c1",
+    "sha256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "supplemental-warm-off/reference.py"
+  },
+  "test_compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+    "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "test_compare.py"
+  },
+  "test_reference.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/warpx/test_reference.py",
+    "gitBlobOID": "461447ef16abed6b4ec2ac8f218776cb77d033a4",
+    "sha256": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "test_reference.py"
+  },
+  "warm-eligibility.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/warm-eligibility.py",
+    "sha256": "db6e69a507be2cedd245dbf4a0521b622e744c27aa229e59bf76136323e4a320",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-warpx-20261113a.tar.gz",
+    "recoveryBundleSHA256": "a0af68abc61909ff6f296837de13c674232028d43922e5e66a1c112e558dbdc8",
+    "pathInBundle": "warm-eligibility.py"
+  }
+}

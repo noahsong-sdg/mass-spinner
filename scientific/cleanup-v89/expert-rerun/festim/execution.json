@@ -1,0 +1,96 @@
+{
+  "startedUTC": "2026-11-13T02:19:46.676179+00:00",
+  "campaign": "festim",
+  "python": "3.11.2",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "uid": 1000,
+  "commands": [
+    {
+      "name": "replay-comparison-controls",
+      "command": [
+        "python3",
+        "test_compare.py"
+      ],
+      "cwd": "/work/project/v89-festim-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.04355700000000007,
+      "logSHA256": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c"
+    },
+    {
+      "name": "producer",
+      "command": [
+        "/work/project/.cache/bootstrap/bin/micromamba",
+        "run",
+        "-p",
+        "/work/project/.venv",
+        "python",
+        "campaign.py"
+      ],
+      "cwd": "/work/project",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0,
+        1
+      ],
+      "wallSeconds": 5.761803003,
+      "logSHA256": "8511ea1287e77ccb493357bd0b42f8bcbd29bb89b6f388ec5110a1c7a1235846"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/work/project/.cache/bootstrap/bin/micromamba",
+        "run",
+        "-p",
+        "/work/project/.venv",
+        "python",
+        "-m",
+        "unittest",
+        "test_campaign",
+        "-v"
+      ],
+      "cwd": "/work/project",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.956797625000001,
+      "logSHA256": "5a7d6d2a45b5de3f08b2c5aa50afd1034a74f9cc071aa03f94a41007404c405c"
+    }
+  ],
+  "sourceSHA256": {
+    "campaign.py": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+    "oracle.py": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+    "test_campaign.py": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+    "protocol.json": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results.json": "d3632537de35c25cde6adb4d7fed27478ee1dd72fb2c9bb4c645a3e37c06f773"
+  },
+  "experimentalQualification": false,
+  "finishedUTC": "2026-11-13T02:19:53.814131+00:00",
+  "executionCompleted": true,
+  "outputSHA256": {
+    "campaign.py": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "coverage.json": "bc5bfb39aba416e5c0f912183745d91de923e61c9e35813c6003a2bf447393a9",
+    "frozen-preflight.json": "63d0a8329b16eaa939d2575a63aef3f69233175c41da94f506ab8e11877456e1",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "logs/producer.log": "8511ea1287e77ccb493357bd0b42f8bcbd29bb89b6f388ec5110a1c7a1235846",
+    "logs/replay-comparison-controls.log": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c",
+    "logs/tests.log": "5a7d6d2a45b5de3f08b2c5aa50afd1034a74f9cc071aa03f94a41007404c405c",
+    "oracle.py": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+    "prior-root-preservation.json": "ab00431ea5f16a258eb7b265a5e56e57387d7bf0a531edc92e7d4908b89233e2",
+    "protocol.json": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+    "replay-comparison.json": "1adf6628661671b6b644f6281c9fee2efa946e370f95bfada92a9f5f1f81976d",
+    "response.json": "46c7772ae7f414169dce5f8bf2f1d0e0ca4dd7331127c9759827355c36b74601",
+    "results.json": "7e07c1217a8e2ace2d239f7d3c5cce6ae83530e2a6321687d584755fd7eb7518",
+    "test_campaign.py": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc"
+  }
+}

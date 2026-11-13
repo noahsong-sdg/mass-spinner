@@ -1,0 +1,77 @@
+{
+  "reference88.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/openfoam/reference88.py",
+    "gitBlobOID": "e8cddeaa1cc69bf78a42428ba394d816cfe56970",
+    "sha256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "reference88.py"
+  },
+  "audit88.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/openfoam/audit88.py",
+    "gitBlobOID": "35e3cb23ee8a87ab22cc0f4abd343d2d5e92a565",
+    "sha256": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "audit88.py"
+  },
+  "test_reference88.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/openfoam/test_reference88.py",
+    "gitBlobOID": "2237d4f46eb11c753b4388422ed3fd95e2b4c7a8",
+    "sha256": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "test_reference88.py"
+  },
+  "PROTOCOL.md": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/openfoam/PROTOCOL.md",
+    "gitBlobOID": "8b6869d7ece9ae5eec8ce9c43e4238ca921aedf7",
+    "sha256": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "PROTOCOL.md"
+  },
+  "compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+    "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "compare.py"
+  },
+  "test_compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+    "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "test_compare.py"
+  },
+  "guest.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+    "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+    "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+    "pathInBundle": "guest.py"
+  }
+}

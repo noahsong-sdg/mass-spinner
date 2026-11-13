@@ -1,0 +1,9 @@
+test_argon_internal_energy_not_enthalpy (test_reference88.Controls.test_argon_internal_energy_not_enthalpy) ... ok
+test_boundary_and_angular_integrals (test_reference88.Controls.test_boundary_and_angular_integrals) ... ok
+test_native_torque_includes_initial_time (test_reference88.Controls.test_native_torque_includes_initial_time) ... ok
+test_parser_uniform_and_nonuniform (test_reference88.Controls.test_parser_uniform_and_nonuniform) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

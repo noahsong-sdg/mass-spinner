@@ -1,0 +1,10 @@
+["/work/home/workflow-v88-venv/bin/python", "report.py", "/tmp/tmp_tktvbvi/results/595e2e2812a1dc964d85/field.json", "/tmp/tmp_tktvbvi/results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json", "rejected.json"]
+Traceback (most recent call last):
+  File "/tmp/tmp_tktvbvi/report.py", line 19, in <module>
+    main()
+  File "/tmp/tmp_tktvbvi/report.py", line 9, in main
+    assessment, assessment_sha = read(sys.argv[2])
+                                 ^^^^^^^^^^^^^^^^^
+  File "/tmp/tmp_tktvbvi/seals.py", line 15, in read
+    raise ValueError('Corrupt sealed artifact: '+str(path))
+ValueError: Corrupt sealed artifact: /tmp/tmp_tktvbvi/results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json

@@ -1,0 +1,316 @@
+Initializing AMReX (26.10)...
+OMP initialized with 1 OMP threads
+AMReX (26.10) initialized
+PICSAR (26.10)
+WarpX (Unknown)
+
+                                   ___
+    __        __             ___  /  /
+    \ \      / /_ _ _ __ _ __\  \/  /
+     \ \ /\ / / _` | '__| '_ \\    /
+      \ V  V / (_| | |  | |_) /    \
+       \_/\_/ \__,_|_|  | .__/__/\  \
+                        |_|       \__\
+
+Level 0: dt = 5e-08 ; dr = 0.0075 ; dz = 0.005
+
+Grids Summary:
+  Level 0   1 grids  64 cells  100 % of domain
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 2D (RZ)
+                      | - n_rz_azimuthal_modes = 1
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | Esirkepov 
+Guard cells           | - ng_alloc_J  = (1,1)
+ (allocated for J)    | 
+Guard cells           | - ng_alloc_EB = (2,2)
+ (allocated for E/B)  | 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+                      | - staggered grid 
+Guard cells           | - ng_alloc_EB = (2,2)
+ (allocated for E/B)  | 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+/work/project/v89-warpx-20261113a/reference.py:158: UserWarning: ParticleContainerWrapper("ionA") is deprecated. Use sim.particles.get("ionA") instead.
+  pcs = [particle_containers.ParticleContainerWrapper(n) for n in ('ionA', 'ionB')]
+/work/project/v89-warpx-20261113a/reference.py:158: UserWarning: ParticleContainerWrapper("ionB") is deprecated. Use sim.particles.get("ionB") instead.
+  pcs = [particle_containers.ParticleContainerWrapper(n) for n in ('ionA', 'ionB')]
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ FIRST STEP ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+**** WARNINGS ******************************************************************
+* GLOBAL warning list  after  [ THE END ]
+*
+* No recorded warnings.
+********************************************************************************
+
+
+
+TinyProfiler total time across processes [min...avg...max]: 0.1042 ... 0.1042 ... 0.1042
+
+---------------------------------------------------------------------------------------------------------------------
+Name                                                                  NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+---------------------------------------------------------------------------------------------------------------------
+PhysicalParticleContainer::Evolve::GatherAndPush                         400    0.06719    0.06719    0.06719  64.45%
+MultiParticleContainer::doCollisions()                                   200   0.006772   0.006772   0.006772   6.50%
+PhysicalParticleContainer::PushP()                                        40   0.003681   0.003681   0.003681   3.53%
+Redistribute_partition                                                   404    0.00361    0.00361    0.00361   3.46%
+WarpXParticleContainer::ApplyBoundaryConditions()                        400   0.001103   0.001103   0.001103   1.06%
+WarpX::Evolve::step                                                      200  0.0007357  0.0007357  0.0007357   0.71%
+PhysicalParticleContainer::Evolve()                                      400  0.0004857  0.0004857  0.0004857   0.47%
+FillBoundary_nowait()                                                   1260  0.0003981  0.0003981  0.0003981   0.38%
+WarpX::UpdateAuxiliaryData()                                             210  0.0002927  0.0002927  0.0002927   0.28%
+ParticleContainer::Redistribute_impl()                                   404   0.000273   0.000273   0.000273   0.26%
+ParticleCopyPlan::build                                                  404  0.0001439  0.0001439  0.0001439   0.14%
+WarpX::InitData()                                                          1   0.000135   0.000135   0.000135   0.13%
+MultiFab::Copy()                                                        1260  0.0001125  0.0001125  0.0001125   0.11%
+FillBoundary_nowait(Vector)                                              420  8.009e-05  8.009e-05  8.009e-05   0.08%
+WarpX::OneStep()                                                         200  4.934e-05  4.934e-05  4.934e-05   0.05%
+WarpX::Evolve()                                                           10  3.105e-05  3.105e-05  3.105e-05   0.03%
+REG::WarpX::Evolve()                                                      10    4.5e-06    4.5e-06    4.5e-06   0.00%
+Other                                                                   8606  0.0008521  0.0008521  0.0008521   0.82%
+---------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------
+Name                                                                  NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+---------------------------------------------------------------------------------------------------------------------
+REG::WarpX::Evolve()                                                      10    0.08574    0.08574    0.08574  82.25%
+WarpX::Evolve()                                                           10    0.08574    0.08574    0.08574  82.25%
+WarpX::Evolve::step                                                      200    0.08571    0.08571    0.08571  82.22%
+WarpX::OneStep()                                                         200    0.07452    0.07452    0.07452  71.48%
+PhysicalParticleContainer::Evolve()                                      400    0.06768    0.06768    0.06768  64.92%
+PhysicalParticleContainer::Evolve::GatherAndPush                         400    0.06719    0.06719    0.06719  64.45%
+MultiParticleContainer::doCollisions()                                   200   0.006793   0.006793   0.006793   6.52%
+ParticleContainer::Redistribute_impl()                                   404   0.004491   0.004491   0.004491   4.31%
+PhysicalParticleContainer::PushP()                                        40   0.003681   0.003681   0.003681   3.53%
+Redistribute_partition                                                   404    0.00361    0.00361    0.00361   3.46%
+WarpXParticleContainer::ApplyBoundaryConditions()                        400   0.001103   0.001103   0.001103   1.06%
+FillBoundary_nowait(Vector)                                              420  0.0005742  0.0005742  0.0005742   0.55%
+WarpX::UpdateAuxiliaryData()                                             210  0.0004988  0.0004988  0.0004988   0.48%
+FillBoundary_nowait()                                                   1260  0.0004941  0.0004941  0.0004941   0.47%
+ParticleCopyPlan::build                                                  404  0.0002321  0.0002321  0.0002321   0.22%
+MultiFab::Copy()                                                        1260  0.0002061  0.0002061  0.0002061   0.20%
+WarpX::InitData()                                                          1  0.0001653  0.0001653  0.0001653   0.16%
+Other                                                                   8606  0.0008953  0.0008953  0.0008953   0.86%
+---------------------------------------------------------------------------------------------------------------------
+
+
+
+BEGIN REGION WarpX::Evolve()
+
+---------------------------------------------------------------------------------------------------------------------
+Name                                                                  NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+---------------------------------------------------------------------------------------------------------------------
+PhysicalParticleContainer::Evolve::GatherAndPush                         400    0.06719    0.06719    0.06719  64.45%
+MultiParticleContainer::doCollisions()                                   200   0.006772   0.006772   0.006772   6.50%
+PhysicalParticleContainer::PushP()                                        40   0.003681   0.003681   0.003681   3.53%
+Redistribute_partition                                                   400   0.003576   0.003576   0.003576   3.43%
+WarpXParticleContainer::ApplyBoundaryConditions()                        400   0.001103   0.001103   0.001103   1.06%
+WarpX::Evolve::step                                                      200  0.0007357  0.0007357  0.0007357   0.71%
+PhysicalParticleContainer::Evolve()                                      400  0.0004857  0.0004857  0.0004857   0.47%
+FillBoundary_nowait()                                                   1260  0.0003981  0.0003981  0.0003981   0.38%
+WarpX::UpdateAuxiliaryData()                                             210  0.0002927  0.0002927  0.0002927   0.28%
+ParticleContainer::Redistribute_impl()                                   400  0.0002661  0.0002661  0.0002661   0.26%
+ParticleCopyPlan::build                                                  400  0.0001402  0.0001402  0.0001402   0.13%
+MultiFab::Copy()                                                        1260  0.0001125  0.0001125  0.0001125   0.11%
+FillBoundary_nowait(Vector)                                              420  8.009e-05  8.009e-05  8.009e-05   0.08%
+WarpX::OneStep()                                                         200  4.934e-05  4.934e-05  4.934e-05   0.05%
+WarpX::Evolve()                                                           10  3.105e-05  3.105e-05  3.105e-05   0.03%
+REG::WarpX::Evolve()                                                      10    4.5e-06    4.5e-06    4.5e-06   0.00%
+Other                                                                   8544  0.0008257  0.0008257  0.0008257   0.79%
+---------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------------------------------------------
+Name                                                                  NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+---------------------------------------------------------------------------------------------------------------------
+REG::WarpX::Evolve()                                                      10    0.08574    0.08574    0.08574  82.25%
+WarpX::Evolve()                                                           10    0.08574    0.08574    0.08574  82.25%
+WarpX::Evolve::step                                                      200    0.08571    0.08571    0.08571  82.22%
+WarpX::OneStep()                                                         200    0.07452    0.07452    0.07452  71.48%
+PhysicalParticleContainer::Evolve()                                      400    0.06768    0.06768    0.06768  64.92%
+PhysicalParticleContainer::Evolve::GatherAndPush                         400    0.06719    0.06719    0.06719  64.45%
+MultiParticleContainer::doCollisions()                                   200   0.006793   0.006793   0.006793   6.52%
+ParticleContainer::Redistribute_impl()                                   400   0.004432   0.004432   0.004432   4.25%
+PhysicalParticleContainer::PushP()                                        40   0.003681   0.003681   0.003681   3.53%
+Redistribute_partition                                                   400   0.003576   0.003576   0.003576   3.43%
+WarpXParticleContainer::ApplyBoundaryConditions()                        400   0.001103   0.001103   0.001103   1.06%
+FillBoundary_nowait(Vector)                                              420  0.0005742  0.0005742  0.0005742   0.55%
+WarpX::UpdateAuxiliaryData()                                             210  0.0004988  0.0004988  0.0004988   0.48%
+FillBoundary_nowait()                                                   1260  0.0004941  0.0004941  0.0004941   0.47%
+ParticleCopyPlan::build                                                  400   0.000227   0.000227   0.000227   0.22%
+MultiFab::Copy()                                                        1260  0.0002061  0.0002061  0.0002061   0.20%
+Other                                                                   8544   0.000864   0.000864   0.000864   0.83%
+---------------------------------------------------------------------------------------------------------------------
+
+END REGION WarpX::Evolve()
+Pinned Memory Usage:
+--------------------------------------------------------------
+Name                                Nalloc    AvgMem    MaxMem
+--------------------------------------------------------------
+The_Pinned_Arena::Initialize()           1    19   B  8192 KiB
+Unprofiled                             275  9093   B   144 KiB
+PhysicalParticleContainer::PushP()       6  1326   B  1536   B
+--------------------------------------------------------------
+
+Cpu Memory Usage:
+-------------------------------------------
+Name               Nalloc   AvgMem   MaxMem
+-------------------------------------------
+Unprofiled             16  264 KiB  276 KiB
+WarpX::InitData()       9   10 KiB   10 KiB
+-------------------------------------------
+
+AMReX (26.10) finalized

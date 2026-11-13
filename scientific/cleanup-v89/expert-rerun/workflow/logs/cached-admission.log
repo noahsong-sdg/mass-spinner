@@ -1,0 +1,45 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-13 02:22:08
+  Workflow ID: 30487592-858f-4e4e-b8b1-65ddef11c6a2
+  Platform: Linux-6.18.35-aarch64-with-glibc2.36
+  Host: safe-dev-run-de3cede904924e3bb51da2cbff3874b4
+  User: node
+  Snakemake version: 9.27.1
+  Python version: 3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]
+  Command: /work/home/workflow-v88-venv/lib/python3.11/site-packages/snakemake/__main__.py --cores 1 --executor local --scheduler greedy --printshellcmds
+  Snakefile: /work/project/v89-workflow-20261113a/Snakefile
+  Base directory: /work/project/v89-workflow-20261113a
+  Run directory: /work/project/v89-workflow-20261113a
+  Working directory: /work/project/v89-workflow-20261113a
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count
+-----  -------
+all          1
+total        1
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 02:22:08 2026]
+localrule all:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json, results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json.sha256, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json, results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json.sha256, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json, results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json.sha256, admit.py
+    jobid: 0
+    reason: Rules with a run or shell declaration but no output are always executed.
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python admit.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-98a0c51f23c17a4868ac.json results/595e2e2812a1dc964d85/report-fb5557f478f73f958cef.json results/595e2e2812a1dc964d85/qualification-06e6f0453baaadf29116.json
+{"cachedInputsAdmitted": true, "fieldSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a", "assessmentSHA256": "4ff16f3c658e9a4e7b6589967336f9d00763985812cf12993654e4c95ed9cf70", "reportSHA256": "2dbafe587c8a9068aae8df0fd47e954d245112c909ed4a936c67686936810da2", "qualificationSHA256": "2f7f272597ddf003e8ccfc72afc18bd779a0667252e5b8bcf95d0c236db278d1", "globalQualification": false}
+[Fri Nov 13 02:22:08 2026]
+Finished jobid: 0 (Rule: all)
+1 of 1 steps (100%) done
+Complete log(s): /work/project/v89-workflow-20261113a/.snakemake/log/2026-11-13T022208.883556.snakemake.log
+Elapsed time: 0:00:00.036561

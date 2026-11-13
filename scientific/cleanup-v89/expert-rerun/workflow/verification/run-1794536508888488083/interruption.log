@@ -1,0 +1,77 @@
+Assuming unrestricted shared filesystem usage.
+
+SNAKEMAKE
+=========
+  Date: 2026-11-13 02:22:01
+  Workflow ID: fb03bc96-19e0-4b9e-a6f7-025089269414
+  Platform: Linux-6.18.35-aarch64-with-glibc2.36
+  Host: safe-dev-run-de3cede904924e3bb51da2cbff3874b4
+  User: node
+  Snakemake version: 9.27.1
+  Python version: 3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]
+  Command: /work/home/workflow-v88-venv/lib/python3.11/site-packages/snakemake/__main__.py --cores 1 --executor local --scheduler greedy --printshellcmds
+  Snakefile: /tmp/tmpb_ry8yxd/Snakefile
+  Base directory: /tmp/tmpb_ry8yxd
+  Run directory: /tmp/tmpb_ry8yxd
+  Working directory: /tmp/tmpb_ry8yxd
+  Config file(s): []
+  Config MD5: 99914b932bd37a50b983c5e7c90ae93b
+
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count
+-------------  -------
+solve                1
+assess               1
+report               1
+qualification        1
+all                  1
+total                5
+
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 02:22:01 2026]
+localrule solve:
+    input: producer.py, seals.py, config.json, PROTOCOL.md, requirements-lock.txt
+    output: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256
+    jobid: 1
+    reason: Missing output files: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python producer.py config.json results/595e2e2812a1dc964d85/field.json
+[Fri Nov 13 02:22:01 2026]
+Finished jobid: 1 (Rule: solve)
+1 of 5 steps (20%) done
+Select jobs to execute...
+Execute 1 jobs...
+
+[Fri Nov 13 02:22:01 2026]
+localrule assess:
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, assess.py, seals.py
+    output: results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json, results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json.sha256
+    jobid: 2
+    reason: Missing output files: results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json.sha256, results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json; Input files updated by another job: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256
+    resources: tmpdir=/tmp
+Shell command: /work/home/workflow-v88-venv/bin/python assess.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json
+Will exit after finishing currently running jobs (scheduler).
+RuleException:
+CalledProcessError in file "/tmp/tmpb_ry8yxd/Snakefile", line 33:
+Command 'set -euo pipefail;  /work/home/workflow-v88-venv/bin/python assess.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json' died with <Signals.SIGTERM: 15>.
+[Fri Nov 13 02:22:01 2026]
+Error in rule assess:
+    message: None
+    jobid: 2
+    input: results/595e2e2812a1dc964d85/field.json, results/595e2e2812a1dc964d85/field.json.sha256, assess.py, seals.py
+    output: results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json, results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json.sha256
+    shell:
+        /work/home/workflow-v88-venv/bin/python assess.py results/595e2e2812a1dc964d85/field.json results/595e2e2812a1dc964d85/assessment-55fddd8fe9d1c7502c3e.json
+        (command exited with non-zero exit code)
+Will exit after finishing currently running jobs (scheduler).
+Shutting down, this might take some time.
+Complete log(s): /tmp/tmpb_ry8yxd/.snakemake/log/2026-11-13T022201.167533.snakemake.log
+Elapsed time: 0:00:00.334939
+WorkflowError:
+At least one job did not complete successfully.

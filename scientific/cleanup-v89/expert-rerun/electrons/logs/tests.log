@@ -1,0 +1,13 @@
+test_exact_domain_and_no_extrapolation (test_adapter.Adapter.test_exact_domain_and_no_extrapolation) ... ok
+test_refuse_ambiguous_upstream_config (test_adapter.Adapter.test_refuse_ambiguous_upstream_config) ... ok
+test_stale_and_unqualified_table (test_adapter.Adapter.test_stale_and_unqualified_table) ... ok
+test_term_absent_and_nonfinite (test_adapter.Adapter.test_term_absent_and_nonfinite) ... ok
+test_real_bulk_and_domain (test_admission.Admission.test_real_bulk_and_domain) ... ok
+test_signed_power_no_duplicate_terms (test_admission.Admission.test_signed_power_no_duplicate_terms) ... ok
+test_stale_native_power_and_source_row (test_admission.Admission.test_stale_native_power_and_source_row) ... ok
+test_stale_pre_admission_schema (test_admission.Admission.test_stale_pre_admission_schema) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.004s
+
+OK

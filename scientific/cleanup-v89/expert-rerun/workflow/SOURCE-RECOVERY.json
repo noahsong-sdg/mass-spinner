@@ -1,0 +1,173 @@
+{
+  "PROTOCOL.md": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/PROTOCOL.md",
+    "gitBlobOID": "5915510f7dece246e0a420c29ac72125bcc7b276",
+    "sha256": "eeca8ee75f6fb323ef2ecf20e174c744dfdc254ee7c70a071d4d8bf75158e425",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "PROTOCOL.md"
+  },
+  "Snakefile": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/Snakefile",
+    "gitBlobOID": "b491da0df04b6e56bc02afbd6f2a4060431af89b",
+    "sha256": "21d4ce9c302664f760e4a5499449957631df0548c3974bbc97223452bfaba151",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "Snakefile"
+  },
+  "admit.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/admit.py",
+    "gitBlobOID": "d4e98e7e273480c9fb08025b469483473de57ab1",
+    "sha256": "f468e045be4fd682f25598d76590ff9be470f4a46fa4b86dd91cb6d6d55c48e0",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "admit.py"
+  },
+  "assess.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/assess.py",
+    "gitBlobOID": "96bf9d9b2578c6e305c77b3746d1132cc06a5ec7",
+    "sha256": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "assess.py"
+  },
+  "compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+    "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "compare.py"
+  },
+  "config.json": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/config.json",
+    "gitBlobOID": "0391784ed05a747d319fecf1b4250e9e350556d4",
+    "sha256": "0e7943a864197c8926bdc2b7eb732f5fc4a3d7d044c83a1165ffbbd6e71be45d",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "config.json"
+  },
+  "guest.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+    "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "guest.py"
+  },
+  "producer.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/producer.py",
+    "gitBlobOID": "aaf286f0f9502f5c113502badfc68b64ab5fa12b",
+    "sha256": "4687f4dbacef7e978543e25793cda64456bcb4d29598ed206630401e31c21e23",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "producer.py"
+  },
+  "qualify.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/qualify.py",
+    "gitBlobOID": "7c90c9e9bc9cfed31bdfe9be1a18e5a259a8e59f",
+    "sha256": "3bc9092ae893ff51bbb1d02b49bc084b37734741f9dd4bc08a3075de024292e1",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "qualify.py"
+  },
+  "report.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/report.py",
+    "gitBlobOID": "b6d654065649dddac97bcc5cfed7650d50902a84",
+    "sha256": "92f973d523c863b646f04ebddc2c3bd5bf5ac8050c662d42a4ee30846a949d1c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "report.py"
+  },
+  "requirements-lock.txt": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/requirements-lock.txt",
+    "gitBlobOID": "90f919033331e49f26f2107d9aafcb9c9a994a4c",
+    "sha256": "239576af5c9783937e75309f0bc437e5b6d1d0f779bee348535b6a82b91f4905",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "requirements-lock.txt"
+  },
+  "requirements.txt": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/requirements.txt",
+    "gitBlobOID": "439df73c0736aafa0580b0a4eed5f9bacefae159",
+    "sha256": "fa09278d34ab6afd830774f90689f6a0c07c51123f6bdc50fefdeca8ae0eff08",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "requirements.txt"
+  },
+  "seals.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/seals.py",
+    "gitBlobOID": "fa531409c5aac016ffdb90bcc982b79b6644ce4c",
+    "sha256": "8090d75e2f4c83f8df1d7f158ccfaa8d2ddf5819eb87b591f6d83348e232af48",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "seals.py"
+  },
+  "test_compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+    "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "test_compare.py"
+  },
+  "test_workflow.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/workflow/test_workflow.py",
+    "gitBlobOID": "862d98328a6edba203a2813c5952b6105f283d0b",
+    "sha256": "7420db59961e13f9141f59e61cc201a0aa838e8ff8c67bbc809a367e4676310e",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-workflow-20261113a.tar.gz",
+    "recoveryBundleSHA256": "e5147c8ab2cea618f084fa2fa252f3358b30a0a7da0308b8bc8771036b3f470b",
+    "pathInBundle": "test_workflow.py"
+  }
+}

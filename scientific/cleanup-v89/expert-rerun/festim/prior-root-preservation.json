@@ -1,0 +1,14 @@
+{
+  "path": "/work/home/v89-festim-20261113a-prior-root",
+  "fileSHA256": {
+    "README.md": "e656f2399c5938d24cf34fe4fe43d2e06b03f165a6ed9f423404f52bc088e168",
+    "campaign.py": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+    "install.sh": "a8bbab98befee04d85c546cc52bbc03c98c3b466bd0830b6eb522ac251caee90",
+    "oracle.py": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+    "protocol.json": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+    "response.json": "46c7772ae7f414169dce5f8bf2f1d0e0ca4dd7331127c9759827355c36b74601",
+    "results.json": "d3632537de35c25cde6adb4d7fed27478ee1dd72fb2c9bb4c645a3e37c06f773",
+    "test_campaign.py": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569"
+  },
+  "allVerified": true
+}

@@ -1,0 +1,113 @@
+{
+  "PROTOCOL-EXTENSION.md": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/PROTOCOL-EXTENSION.md",
+    "gitBlobOID": "425d70b3b7ebbac59723e5ab9e9d9b4187f93356",
+    "sha256": "627a2f619eccfd97a310f06f071685a48a7029ecc5b9c57a18a9577c32ed0d79",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "PROTOCOL-EXTENSION.md"
+  },
+  "PROTOCOL.md": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/PROTOCOL.md",
+    "gitBlobOID": "3d3c427494cc6a06663e54c23b20d0f30c802e28",
+    "sha256": "f45f54cb9eac038b5de0e264a2dfb44ac972acfadfff7bef968455440e4307d2",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "PROTOCOL.md"
+  },
+  "adapter.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/adapter.py",
+    "gitBlobOID": "da136a604396301169e0f72b4448e9bf9dfbec00",
+    "sha256": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "adapter.py"
+  },
+  "admission.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/admission.py",
+    "gitBlobOID": "8ccecff12d1df37fd7b861ac9310981f00988f8b",
+    "sha256": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "admission.py"
+  },
+  "compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+    "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "compare.py"
+  },
+  "extension.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/extension.py",
+    "gitBlobOID": "fab4e8f3f325bf1579c0f3d1cbe168cebbf26dae",
+    "sha256": "40583010e5721d66353a821f6eecb6ed14a471ee9f670eb9d9baf86c75ec6ec7",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "extension.py"
+  },
+  "guest.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+    "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "guest.py"
+  },
+  "test_adapter.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/test_adapter.py",
+    "gitBlobOID": "d05a951c6f148d19b918d251f2740554e5377ac8",
+    "sha256": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "test_adapter.py"
+  },
+  "test_admission.py": {
+    "role": "frozen V88 producer/input",
+    "repository": "noahsong-sdg/mass-spinner",
+    "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+    "canonicalPath": "scientific/expert-v88/electrons/test_admission.py",
+    "gitBlobOID": "4cb42a215dfa3b3731d2eefd91538577e441444b",
+    "sha256": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "test_admission.py"
+  },
+  "test_compare.py": {
+    "role": "new V89 orchestration",
+    "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+    "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "verifiedCurrentAlias": true,
+    "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-electrons-20261113a.tar.gz",
+    "recoveryBundleSHA256": "675f8e11080666452b13512667c40de0f7046e0fe74c8395ddea9198c97f8c7e",
+    "pathInBundle": "test_compare.py"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "campaign": "festim",
+  "freshName": "v89-festim-20261113a",
+  "stage": "/private/tmp/mass-spinner-festim-v88-retry-20261112",
+  "startedUTC": "2026-11-13T02:19:45.610404+00:00",
+  "runnerSHA256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+  "inputSHA256": {
+    "campaign.py": "6596ac9b4cd5322a78e3786237054ea5a01ab4c042331cfa5610ca5260da9013",
+    "oracle.py": "c510a9ccc6a347cfccdfeb88c34bf03bd5373721434ff6c830f735e94ac6bdce",
+    "test_campaign.py": "b49c58091616cdd92052533c77ac0e16a70388a20a199a72d9f14d4f3ff82569",
+    "protocol.json": "be8b8542dcc565f9ef600e551034eebb1b69148a0c985ddf0ed26b432831fa00",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results.json": "d3632537de35c25cde6adb4d7fed27478ee1dd72fb2c9bb4c645a3e37c06f773"
+  },
+  "guestJobSHA256": "affd0c44734ea353c45015ee1eb3d37f0e6fd191f5a40e5051b967776bd0fd5c",
+  "finishedUTC": "2026-11-13T02:19:55.950470+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-festim-v88-retry-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "logSHA256": "7e602413c10bc69477b87b32fccce63b0ca9e4e20ce6145d9a9d8755cf013372"
+}

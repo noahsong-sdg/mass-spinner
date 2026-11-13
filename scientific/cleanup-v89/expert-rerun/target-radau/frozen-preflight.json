@@ -1,0 +1,1254 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "src/apparatus-state-layer.js",
+      "expectedSHA256": "9974b5de9ed6c56a5d442ac15cc3f49d98fb66e9c431f958c8f953aff880a8b3",
+      "actualSHA256": "9974b5de9ed6c56a5d442ac15cc3f49d98fb66e9c431f958c8f953aff880a8b3",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/apparatus-state-layer.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/apparatus-state.ts",
+      "expectedSHA256": "49707884d1e598541d0f96cd49fdaf24b0dce58ca3dfa25ce68e5f68cb5325c5",
+      "actualSHA256": "49707884d1e598541d0f96cd49fdaf24b0dce58ca3dfa25ce68e5f68cb5325c5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/apparatus-state.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/apparatus-ui.js",
+      "expectedSHA256": "24dba359ec1dd96849a9bde8df4738d0558ec17650cd0ffe2d22dbffc13c241d",
+      "actualSHA256": "24dba359ec1dd96849a9bde8df4738d0558ec17650cd0ffe2d22dbffc13c241d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/apparatus-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/apparatus-viewer.js",
+      "expectedSHA256": "4475b36d0231b3d09555c8b1a0fe3b59373d2b1f4c6e79a13de8d0fb0015c497",
+      "actualSHA256": "4475b36d0231b3d09555c8b1a0fe3b59373d2b1f4c6e79a13de8d0fb0015c497",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/apparatus-viewer.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/apparatus.css",
+      "expectedSHA256": "0239ada91386da411cb68b144d0c9b07962ff2eeb9d2ff9f5a91e26f10fe6790",
+      "actualSHA256": "0239ada91386da411cb68b144d0c9b07962ff2eeb9d2ff9f5a91e26f10fe6790",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/apparatus.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/axisymmetric-collisions.ts",
+      "expectedSHA256": "2e2c1da25716aa2e7486b9962986878d23c8dc4e9b1f69949a43469babc820b0",
+      "actualSHA256": "2e2c1da25716aa2e7486b9962986878d23c8dc4e9b1f69949a43469babc820b0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/axisymmetric-collisions.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/baseline-state.js",
+      "expectedSHA256": "50bd1debb144696ddd10b86391f0bbd4b51d03688f59646443bd22e5ae3394c3",
+      "actualSHA256": "50bd1debb144696ddd10b86391f0bbd4b51d03688f59646443bd22e5ae3394c3",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/baseline-state.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/baseline-ui.js",
+      "expectedSHA256": "b4b7682e82f085674294ef5c1319b3d8269d9d35a907f1bcbee2a1e7aa8d4903",
+      "actualSHA256": "b4b7682e82f085674294ef5c1319b3d8269d9d35a907f1bcbee2a1e7aa8d4903",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/baseline-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/blanket-reference.ts",
+      "expectedSHA256": "a86576ad40687d0ca54a53859b7f5567ecedacb0f73d8bd7bacaf9591beaa467",
+      "actualSHA256": "a86576ad40687d0ca54a53859b7f5567ecedacb0f73d8bd7bacaf9591beaa467",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/blanket-reference.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/blanket-ui.js",
+      "expectedSHA256": "a40e291227eeb66e92192a2d459a1806484bd0bba3ec58ab53105246e8d20280",
+      "actualSHA256": "a40e291227eeb66e92192a2d459a1806484bd0bba3ec58ab53105246e8d20280",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/blanket-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/centrifuge-bulk.ts",
+      "expectedSHA256": "b5cc858b1e1f45dab15fc0c7136bf9642eab5522686d1e5674d718f0ead846ae",
+      "actualSHA256": "b5cc858b1e1f45dab15fc0c7136bf9642eab5522686d1e5674d718f0ead846ae",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/centrifuge-bulk.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/centrifuge-diagnostics.ts",
+      "expectedSHA256": "e1ff38403a38d14c30634258adc7a7c573f946c75d892387c8c0a6d11c9a8151",
+      "actualSHA256": "e1ff38403a38d14c30634258adc7a7c573f946c75d892387c8c0a6d11c9a8151",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/centrifuge-diagnostics.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/centrifuge.ts",
+      "expectedSHA256": "cfdc02f8d3fa10240a790588c15b3f03339e3454d2cbdc97ad94890db23b0edf",
+      "actualSHA256": "cfdc02f8d3fa10240a790588c15b3f03339e3454d2cbdc97ad94890db23b0edf",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/centrifuge.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/collector-acceptance-ui.js",
+      "expectedSHA256": "ef970e77ed28edfb266ca0617b289be273d6e57724abe78f675dd6db085b9c06",
+      "actualSHA256": "ef970e77ed28edfb266ca0617b289be273d6e57724abe78f675dd6db085b9c06",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/collector-acceptance-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/collector-acceptance.ts",
+      "expectedSHA256": "dc05db3487322e4eaf13d82b01965edea55ce364e0fa70eef4bb9b80cba5747a",
+      "actualSHA256": "dc05db3487322e4eaf13d82b01965edea55ce364e0fa70eef4bb9b80cba5747a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/collector-acceptance.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/collision-locality.ts",
+      "expectedSHA256": "3538ba2d76858decda0bfa56c5c440504e23f9b9c71e70b645985d0f61b6e4f0",
+      "actualSHA256": "3538ba2d76858decda0bfa56c5c440504e23f9b9c71e70b645985d0f61b6e4f0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/collision-locality.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/collisions.ts",
+      "expectedSHA256": "129e76b125cb29840316188f6e9e4afd95190d2416523f6939b937712b903895",
+      "actualSHA256": "129e76b125cb29840316188f6e9e4afd95190d2416523f6939b937712b903895",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/collisions.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/component-actions.js",
+      "expectedSHA256": "963400640a7d630d4627aa1441b0b1cd0bc2066558b78d16cc13eb9d2c768580",
+      "actualSHA256": "963400640a7d630d4627aa1441b0b1cd0bc2066558b78d16cc13eb9d2c768580",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/component-actions.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/component-catalog.ts",
+      "expectedSHA256": "72e5265283d5d576308afa00f09aaa2d3a9104330f59a5877bd0c27048b175db",
+      "actualSHA256": "72e5265283d5d576308afa00f09aaa2d3a9104330f59a5877bd0c27048b175db",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/component-catalog.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/component-inspector.css",
+      "expectedSHA256": "0e97f0ddb445c1dc60b2e6ea53803ff0bafd1c34c000f05295dad71479cecdf4",
+      "actualSHA256": "0e97f0ddb445c1dc60b2e6ea53803ff0bafd1c34c000f05295dad71479cecdf4",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/component-inspector.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/component-inspector.js",
+      "expectedSHA256": "b67effe98d2694aed53130c2df7a7477e12536398d51927690fe19fb2ab1c6cf",
+      "actualSHA256": "b67effe98d2694aed53130c2df7a7477e12536398d51927690fe19fb2ab1c6cf",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/component-inspector.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/convergence-evidence.js",
+      "expectedSHA256": "5af9565c19193daf01f98b342123303dd2ae628aeea2b3589f628c8ce8d81429",
+      "actualSHA256": "5af9565c19193daf01f98b342123303dd2ae628aeea2b3589f628c8ce8d81429",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/convergence-evidence.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/convergence.ts",
+      "expectedSHA256": "6bcdf3574eb5e26fe9b154a61a3a8548f4a5412f4ac7802d1a939828fd218d81",
+      "actualSHA256": "6bcdf3574eb5e26fe9b154a61a3a8548f4a5412f4ac7802d1a939828fd218d81",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/convergence.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/coulomb.ts",
+      "expectedSHA256": "3ae1013f33a6b719451b5314817769fa0b81ab4b817a521f0880d94b55f44cfc",
+      "actualSHA256": "3ae1013f33a6b719451b5314817769fa0b81ab4b817a521f0880d94b55f44cfc",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/coulomb.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/coupled-target-ui.js",
+      "expectedSHA256": "f7dbff5772428d57a3db5c0c9c57677c93ffc26a12be7f7cf6d5c6a863a36d4f",
+      "actualSHA256": "f7dbff5772428d57a3db5c0c9c57677c93ffc26a12be7f7cf6d5c6a863a36d4f",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/coupled-target-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/coupled-target.css",
+      "expectedSHA256": "b8fa8d80cf1ef74ca644bfcb32242e837807f3be23fb0e274ce559ff1a688628",
+      "actualSHA256": "b8fa8d80cf1ef74ca644bfcb32242e837807f3be23fb0e274ce559ff1a688628",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/coupled-target.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/coupled-target.ts",
+      "expectedSHA256": "6246ef45afe2fc3f16f247455351cf3001878dbedc99364c7d5551c2a29fa021",
+      "actualSHA256": "6246ef45afe2fc3f16f247455351cf3001878dbedc99364c7d5551c2a29fa021",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/coupled-target.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/decay-network-ui.js",
+      "expectedSHA256": "dc5b11502b588fe96367ce55e02c54804196f5595cf40d7565b60940c51f9fbc",
+      "actualSHA256": "dc5b11502b588fe96367ce55e02c54804196f5595cf40d7565b60940c51f9fbc",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/decay-network-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/decay-network.ts",
+      "expectedSHA256": "1668b1cf6f20b4227114fd58ad5087f86fca30d6d941146bc88f3279da1f9e7a",
+      "actualSHA256": "1668b1cf6f20b4227114fd58ad5087f86fca30d6d941146bc88f3279da1f9e7a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/decay-network.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/deuteron-stopping.ts",
+      "expectedSHA256": "a7ec7cb1026e7051e2a02297fd3d6ce345d8cdd38d343e6dcf6d311a4e4f4e42",
+      "actualSHA256": "a7ec7cb1026e7051e2a02297fd3d6ce345d8cdd38d343e6dcf6d311a4e4f4e42",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/deuteron-stopping.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/doublewell-dynamics.ts",
+      "expectedSHA256": "e00c505ba6b63dc3517aa1593b1bf27f0af21cf9026de5f0b7bba27b29ec413d",
+      "actualSHA256": "e00c505ba6b63dc3517aa1593b1bf27f0af21cf9026de5f0b7bba27b29ec413d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/doublewell-dynamics.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/doublewell-orbits.ts",
+      "expectedSHA256": "23df1715b5a3dbe2f17b87a2bb32289dad758c5cb150ffed1225a961dfaeafb0",
+      "actualSHA256": "23df1715b5a3dbe2f17b87a2bb32289dad758c5cb150ffed1225a961dfaeafb0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/doublewell-orbits.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/doublewell-regime.ts",
+      "expectedSHA256": "e217e6b1039045aef827b52945f1a89274cc3e11147581ace33c201042ee4472",
+      "actualSHA256": "e217e6b1039045aef827b52945f1a89274cc3e11147581ace33c201042ee4472",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/doublewell-regime.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/doublewell-ui.js",
+      "expectedSHA256": "3fca56b9cbd5c35e54873e313023824eb2e37810fa148002707deb53e142c021",
+      "actualSHA256": "3fca56b9cbd5c35e54873e313023824eb2e37810fa148002707deb53e142c021",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/doublewell-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/engineering-geometry.js",
+      "expectedSHA256": "2cdf8ac750da7829564203cda3f495ae6fdf29fd1ea6fccbef272db95c25730d",
+      "actualSHA256": "2cdf8ac750da7829564203cda3f495ae6fdf29fd1ea6fccbef272db95c25730d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/engineering-geometry.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/ensemble.ts",
+      "expectedSHA256": "6b8b44fbaf1fc452ebdfcfe73923bb2ca3f772be598277c65088db86ef9fc54f",
+      "actualSHA256": "6b8b44fbaf1fc452ebdfcfe73923bb2ca3f772be598277c65088db86ef9fc54f",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/ensemble.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/equilibrium-controls.js",
+      "expectedSHA256": "bf73d487f28301d1963e330241bb175a7a2a9b4f5c56c91bb1429c93b7c9097a",
+      "actualSHA256": "bf73d487f28301d1963e330241bb175a7a2a9b4f5c56c91bb1429c93b7c9097a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/equilibrium-controls.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/equilibrium-model.ts",
+      "expectedSHA256": "74c06b1f46070c20193eb5f3aad3b5c76abacb8dbb0170152c51187021da6853",
+      "actualSHA256": "74c06b1f46070c20193eb5f3aad3b5c76abacb8dbb0170152c51187021da6853",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/equilibrium-model.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/experience-state.ts",
+      "expectedSHA256": "01de6a00700fb06d449729e8e73b1f4c18113a76c8cec47fd193c89a6d59a989",
+      "actualSHA256": "01de6a00700fb06d449729e8e73b1f4c18113a76c8cec47fd193c89a6d59a989",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/experience-state.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/experience-ui.js",
+      "expectedSHA256": "58cf08c0e57a359915f450f3af59e269cea4c111aa558049ce077d0491cb73b5",
+      "actualSHA256": "58cf08c0e57a359915f450f3af59e269cea4c111aa558049ce077d0491cb73b5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/experience-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/experimental-validation.ts",
+      "expectedSHA256": "13a27dabb294a4f8563f16591be3ce18b0adf9351c4ef8b11bdfca6eee2fc51c",
+      "actualSHA256": "13a27dabb294a4f8563f16591be3ce18b0adf9351c4ef8b11bdfca6eee2fc51c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/experimental-validation.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/experiments.ts",
+      "expectedSHA256": "33f56a58d9ddb4f204dddfebac45f2c2f0d49252e485d7409b262008837af679",
+      "actualSHA256": "33f56a58d9ddb4f204dddfebac45f2c2f0d49252e485d7409b262008837af679",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/experiments.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/exploration.css",
+      "expectedSHA256": "4e1ecc7b48a1029940516898152fd1f04f3f4b76353164f6d9740e7c69999c5d",
+      "actualSHA256": "4e1ecc7b48a1029940516898152fd1f04f3f4b76353164f6d9740e7c69999c5d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/exploration.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/failure-budgets.ts",
+      "expectedSHA256": "d6e4936e1579d7445dbf3e0e9a0685ae94dd8f39fd13f6acc3ae42f5dc03b3ef",
+      "actualSHA256": "d6e4936e1579d7445dbf3e0e9a0685ae94dd8f39fd13f6acc3ae42f5dc03b3ef",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/failure-budgets.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/failure-catalog.js",
+      "expectedSHA256": "7676d1487ec8457014bc84b4fea92f01e60d9528878212d60655ed7e0bd81ce2",
+      "actualSHA256": "7676d1487ec8457014bc84b4fea92f01e60d9528878212d60655ed7e0bd81ce2",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/failure-catalog.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/field-graphics.ts",
+      "expectedSHA256": "fcf013ad331f93639239fb30e106c46d8b10cd85db9cbf42477abb389199e78e",
+      "actualSHA256": "fcf013ad331f93639239fb30e106c46d8b10cd85db9cbf42477abb389199e78e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/field-graphics.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/finite-film-ui.js",
+      "expectedSHA256": "83cbd3964858ab839ccd5a8f4544fb1dae4966e27db15d6c15310d129170093d",
+      "actualSHA256": "83cbd3964858ab839ccd5a8f4544fb1dae4966e27db15d6c15310d129170093d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/finite-film-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/floating-playback.js",
+      "expectedSHA256": "f8d1930aa41dd93a3ade09e37a749c5609a5a46d9b2c3b34ca435075f125cb1e",
+      "actualSHA256": "f8d1930aa41dd93a3ade09e37a749c5609a5a46d9b2c3b34ca435075f125cb1e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/floating-playback.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/focused-diagnostics.js",
+      "expectedSHA256": "531aefde49f598b823470b993180aa96cda8018996a9a4fa61c37098ba3786b3",
+      "actualSHA256": "531aefde49f598b823470b993180aa96cda8018996a9a4fa61c37098ba3786b3",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/focused-diagnostics.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-assembly.js",
+      "expectedSHA256": "af11b55210679ccafe3cd7b2c4f6aee82791304d616512c299ec42fc58059ab3",
+      "actualSHA256": "af11b55210679ccafe3cd7b2c4f6aee82791304d616512c299ec42fc58059ab3",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-assembly.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-centrifuge-geometry.js",
+      "expectedSHA256": "c68e234ac6bb44face26982c0acc99047e62f352886d24bb05cca07be435c606",
+      "actualSHA256": "c68e234ac6bb44face26982c0acc99047e62f352886d24bb05cca07be435c606",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-centrifuge-geometry.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-centrifuge-ui.js",
+      "expectedSHA256": "4d233b8ca03d060c9ea3a4605d56f7d140a02761ea26e0f4617c73e49a3f71e5",
+      "actualSHA256": "4d233b8ca03d060c9ea3a4605d56f7d140a02761ea26e0f4617c73e49a3f71e5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-centrifuge-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-centrifuge.ts",
+      "expectedSHA256": "2fe2850c3538eb332ccebdd408b8ac2c8bedbe8f4f5b7dedd53a5d7b0d10ff7c",
+      "actualSHA256": "2fe2850c3538eb332ccebdd408b8ac2c8bedbe8f4f5b7dedd53a5d7b0d10ff7c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-centrifuge.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-circuit.js",
+      "expectedSHA256": "6d32b7788992f135c1b35ff7c04e181954b5cbfb9c75e7ec1e1a5b9444d17828",
+      "actualSHA256": "6d32b7788992f135c1b35ff7c04e181954b5cbfb9c75e7ec1e1a5b9444d17828",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-circuit.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-comparison-ui.js",
+      "expectedSHA256": "df5247df301443d6192acdf19a6ad6d3ac2b765ec8abd5c25660a60c663cdd04",
+      "actualSHA256": "df5247df301443d6192acdf19a6ad6d3ac2b765ec8abd5c25660a60c663cdd04",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-comparison-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-comparison.css",
+      "expectedSHA256": "5703a23bbfff4552bcf1ed8cdd88b1599fa570c78a124db135fc6a42c46c8919",
+      "actualSHA256": "5703a23bbfff4552bcf1ed8cdd88b1599fa570c78a124db135fc6a42c46c8919",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-comparison.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-current.ts",
+      "expectedSHA256": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+      "actualSHA256": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-current.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-cut-faces.js",
+      "expectedSHA256": "64312a40c85e0539deb9a89f0c5e06ee2a0e27387a7de550687c0a767daa22dc",
+      "actualSHA256": "64312a40c85e0539deb9a89f0c5e06ee2a0e27387a7de550687c0a767daa22dc",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-cut-faces.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-drive.js",
+      "expectedSHA256": "51f78a60f893f3cb40ad3afbfdc5faf45a59821d5599d41eb18fe58fc7211f2b",
+      "actualSHA256": "51f78a60f893f3cb40ad3afbfdc5faf45a59821d5599d41eb18fe58fc7211f2b",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-drive.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-experiments.ts",
+      "expectedSHA256": "46e8364321f7253d327fdda2c7cfa259518d25e53d35d5c035e808312aa08609",
+      "actualSHA256": "46e8364321f7253d327fdda2c7cfa259518d25e53d35d5c035e808312aa08609",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-experiments.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-export.js",
+      "expectedSHA256": "10566eb8fd0631641389c35b6b83cde80f689d4425783222f475c60ce8f1c18c",
+      "actualSHA256": "10566eb8fd0631641389c35b6b83cde80f689d4425783222f475c60ce8f1c18c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-export.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-finishes.js",
+      "expectedSHA256": "a1316ebdb46e4beafa39fd1189d3f0b076ee2b3cd4886a9de3d8162feacc91ba",
+      "actualSHA256": "a1316ebdb46e4beafa39fd1189d3f0b076ee2b3cd4886a9de3d8162feacc91ba",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-finishes.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-gas-thermal.ts",
+      "expectedSHA256": "d2c6f179fc12d54f6396d5e862b21a7e4b74f8d05c07e2a8228f0919de088b00",
+      "actualSHA256": "d2c6f179fc12d54f6396d5e862b21a7e4b74f8d05c07e2a8228f0919de088b00",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-gas-thermal.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-gas.ts",
+      "expectedSHA256": "7bb1bbdd33f5cd6cb7d98c00e79c75bd4256d488a4e741df023a8e471fe7b896",
+      "actualSHA256": "7bb1bbdd33f5cd6cb7d98c00e79c75bd4256d488a4e741df023a8e471fe7b896",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-gas.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-momentum.ts",
+      "expectedSHA256": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+      "actualSHA256": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-momentum.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-motion.js",
+      "expectedSHA256": "623f202bab2a33644ca753960af7d32a3e475d08142152ee8cbab2e284baa8f1",
+      "actualSHA256": "623f202bab2a33644ca753960af7d32a3e475d08142152ee8cbab2e284baa8f1",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-motion.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-neutral-transport.ts",
+      "expectedSHA256": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+      "actualSHA256": "dcd82aa07d33c1a82f1a4ae5af774837e52e6a618d1126d35a8cbb5dcb5a10a8",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-neutral-transport.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-operation.ts",
+      "expectedSHA256": "ea2a8481443c88f0c6da54ab50a49dc4e579e98f1c094da17a3388a456e02f10",
+      "actualSHA256": "ea2a8481443c88f0c6da54ab50a49dc4e579e98f1c094da17a3388a456e02f10",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-operation.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-playground.css",
+      "expectedSHA256": "6b7fd0ca43b5b13a96be914d642670953c509e0a17e59b378351ab9e42769151",
+      "actualSHA256": "6b7fd0ca43b5b13a96be914d642670953c509e0a17e59b378351ab9e42769151",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-playground.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-scene-tools.js",
+      "expectedSHA256": "4ffca4446fa017b38bc57dbd49edadabb227992de6857d3f97e8b926801faea9",
+      "actualSHA256": "4ffca4446fa017b38bc57dbd49edadabb227992de6857d3f97e8b926801faea9",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-scene-tools.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-spatial-coupling.ts",
+      "expectedSHA256": "9c6b6d17561f433572d87c2f8293c6b0d5260e88dd020070f0d7125e998dd35c",
+      "actualSHA256": "9c6b6d17561f433572d87c2f8293c6b0d5260e88dd020070f0d7125e998dd35c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-spatial-coupling.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-spatial-operation.ts",
+      "expectedSHA256": "94a194aa597a477eb3e722f52412e31fe45e02a8a1eca01508093c19c54abdf6",
+      "actualSHA256": "94a194aa597a477eb3e722f52412e31fe45e02a8a1eca01508093c19c54abdf6",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-spatial-operation.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-thermal.ts",
+      "expectedSHA256": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b",
+      "actualSHA256": "4afb51a70fcc495423c4ac7bf883f9340868cc796d4bbc3aee46ad2e1ed0ed2b",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-thermal.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-time-control.ts",
+      "expectedSHA256": "24d4e2c5d81bcb3a089ec17ffb2b1f52f877b558efd26d053a068abeb36b8df7",
+      "actualSHA256": "24d4e2c5d81bcb3a089ec17ffb2b1f52f877b558efd26d053a068abeb36b8df7",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-time-control.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-transport.ts",
+      "expectedSHA256": "b28ce92df5c89365ca7676545426958429ffb79f7b5d50eebf339ec83937b991",
+      "actualSHA256": "b28ce92df5c89365ca7676545426958429ffb79f7b5d50eebf339ec83937b991",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-transport.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fuel-view-ui.js",
+      "expectedSHA256": "c2de4913a45ee60f02159620c908517687768f4f7e917375f27aafeffcc33291",
+      "actualSHA256": "c2de4913a45ee60f02159620c908517687768f4f7e917375f27aafeffcc33291",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fuel-view-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fusion-playground.ts",
+      "expectedSHA256": "f830cbfc4fcc25957d305948995fa60d7ef0f89633e37b45e4d3cda23bb92b9a",
+      "actualSHA256": "f830cbfc4fcc25957d305948995fa60d7ef0f89633e37b45e4d3cda23bb92b9a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fusion-playground.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fusion-reactor.ts",
+      "expectedSHA256": "53c402fe41db394df2fbe6e876c9d83b616f540222634d8a0b3cede68e981309",
+      "actualSHA256": "53c402fe41db394df2fbe6e876c9d83b616f540222634d8a0b3cede68e981309",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/fusion-reactor.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/fusion-ui.js",
+      "expectedSHA256": "3837b59d81497fa0832d51f1408fe8af52e76e823d11fa1e89f35c98c89e87b9",
+      "actualSHA256": "3837b59d81497fa0832d51f1408fe8af52e76e823d11fa1e89f35c98c89e87b9",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/fusion-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/gaussian-centrifuge.ts",
+      "expectedSHA256": "72bf3063a859ae3bac1c96fb2aa9281e27bab963cda5aaf0aa63292275051b49",
+      "actualSHA256": "72bf3063a859ae3bac1c96fb2aa9281e27bab963cda5aaf0aa63292275051b49",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/gaussian-centrifuge.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/geometries.ts",
+      "expectedSHA256": "8697c8743c9756b9d13652b6bf792410a4f02345980510f47fc688f6b550110c",
+      "actualSHA256": "8697c8743c9756b9d13652b6bf792410a4f02345980510f47fc688f6b550110c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/geometries.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/hydrogen-charge-exchange.ts",
+      "expectedSHA256": "763dd176861feaf62306c1a92483c573c3bb7c2b0c9ec869383b56afc32c792d",
+      "actualSHA256": "763dd176861feaf62306c1a92483c573c3bb7c2b0c9ec869383b56afc32c792d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/hydrogen-charge-exchange.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/hydrogen-tracer-ui.js",
+      "expectedSHA256": "9a2112df692749982d8aa28b9cb0daa23c906652c68c6c599a99341b9e826f1c",
+      "actualSHA256": "9a2112df692749982d8aa28b9cb0daa23c906652c68c6c599a99341b9e826f1c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/hydrogen-tracer-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/hydrogen-tracer.ts",
+      "expectedSHA256": "f52a29d88371784a343f85939a6b35265740bea250af268dacd539213e1d7eaf",
+      "actualSHA256": "f52a29d88371784a343f85939a6b35265740bea250af268dacd539213e1d7eaf",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/hydrogen-tracer.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/laboratory.js",
+      "expectedSHA256": "69c6418303fb3d897b9184948aa4a2b6fd1f23986b03831abe497f2fbc1a1fb9",
+      "actualSHA256": "69c6418303fb3d897b9184948aa4a2b6fd1f23986b03831abe497f2fbc1a1fb9",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/laboratory.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/landau-reference.ts",
+      "expectedSHA256": "eaf4cff23c07cb2feac762960768f1786dc1b8aa5c4865a4c642908e3151ba74",
+      "actualSHA256": "eaf4cff23c07cb2feac762960768f1786dc1b8aa5c4865a4c642908e3151ba74",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/landau-reference.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/legacy-scene.ts",
+      "expectedSHA256": "4bc758381578046b4349e5192a62bb5193e7e61b1a662c12adf5c4168a329d58",
+      "actualSHA256": "4bc758381578046b4349e5192a62bb5193e7e61b1a662c12adf5c4168a329d58",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/legacy-scene.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/limitations-ui.js",
+      "expectedSHA256": "fb5b2fa32b474645975feef68a1a24db47c7f33d8deb16246a11bee5662dfd51",
+      "actualSHA256": "fb5b2fa32b474645975feef68a1a24db47c7f33d8deb16246a11bee5662dfd51",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/limitations-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/lithium-coating.ts",
+      "expectedSHA256": "db3567ea9e94074194590f10fd94096144b22ae9a85684e7bb869107b37ae62a",
+      "actualSHA256": "db3567ea9e94074194590f10fd94096144b22ae9a85684e7bb869107b37ae62a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/lithium-coating.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/magnetic-centrifuge.ts",
+      "expectedSHA256": "c3a14f4701d84292271218effd04bc6470e325309113c42d3c8e264ad1fecb9e",
+      "actualSHA256": "c3a14f4701d84292271218effd04bc6470e325309113c42d3c8e264ad1fecb9e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/magnetic-centrifuge.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/main.js",
+      "expectedSHA256": "75441bb85c5898472efbaefa843bc724a2417df807821d112ff5239d70029b02",
+      "actualSHA256": "75441bb85c5898472efbaefa843bc724a2417df807821d112ff5239d70029b02",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/main.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/marathon-layout.css",
+      "expectedSHA256": "ac45200d5c3bf59a78d70e0c16f2f65e9ff1cb162a094ce357e2e346a96adbf5",
+      "actualSHA256": "ac45200d5c3bf59a78d70e0c16f2f65e9ff1cb162a094ce357e2e346a96adbf5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/marathon-layout.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/marathon-ui.js",
+      "expectedSHA256": "400e39ae2943eefff31d1c61c4b345cc5101b0d526c509100d034047468ab7bd",
+      "actualSHA256": "400e39ae2943eefff31d1c61c4b345cc5101b0d526c509100d034047468ab7bd",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/marathon-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/material-realism-ui.js",
+      "expectedSHA256": "c619813a1430744e5eefce5929f8bcd0929ea1ee2090559eef08a8cf0867e052",
+      "actualSHA256": "c619813a1430744e5eefce5929f8bcd0929ea1ee2090559eef08a8cf0867e052",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/material-realism-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/material-realism.ts",
+      "expectedSHA256": "bf32b8af09486dcba317b740ec4e2b32fb080e85a28507e5e1dc83d8ae17336a",
+      "actualSHA256": "bf32b8af09486dcba317b740ec4e2b32fb080e85a28507e5e1dc83d8ae17336a",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/material-realism.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/methods.ts",
+      "expectedSHA256": "df667b9dfd0dbe7c7a68467b571621b63b104d2701ed81306b4b78d02cfad5af",
+      "actualSHA256": "df667b9dfd0dbe7c7a68467b571621b63b104d2701ed81306b4b78d02cfad5af",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/methods.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/minimal.css",
+      "expectedSHA256": "b60330259f4e3fe1ccd1c55e8a92a3488f2d9cb13d82aeef2460938d2a2eb99a",
+      "actualSHA256": "b60330259f4e3fe1ccd1c55e8a92a3488f2d9cb13d82aeef2460938d2a2eb99a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/minimal.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-data.ts",
+      "expectedSHA256": "ab19df166543dbb6aa28c78c593f7ed209489f005f298024d68957904fff8652",
+      "actualSHA256": "ab19df166543dbb6aa28c78c593f7ed209489f005f298024d68957904fff8652",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-data.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-geometry-ui.js",
+      "expectedSHA256": "852b9717cc6cd75478c359d01e91b2267b9dcb39df6eb089e0dbc5a87a2821a4",
+      "actualSHA256": "852b9717cc6cd75478c359d01e91b2267b9dcb39df6eb089e0dbc5a87a2821a4",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-geometry-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-geometry.ts",
+      "expectedSHA256": "972cd928eed1e392b619b4a4ff61aab3f69fd52eaec12615b058d77bfff28f92",
+      "actualSHA256": "972cd928eed1e392b619b4a4ff61aab3f69fd52eaec12615b058d77bfff28f92",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-geometry.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-response-ui.js",
+      "expectedSHA256": "a79449ae5416e35bfef11f568df92b09a4b8d6bdb08dcfae57eb9bd7f2b5399a",
+      "actualSHA256": "a79449ae5416e35bfef11f568df92b09a4b8d6bdb08dcfae57eb9bd7f2b5399a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-response-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-response.ts",
+      "expectedSHA256": "609f5dc5a5f99613b5da8a720aed03a9cfccc56585787b73159a4e731abe63ea",
+      "actualSHA256": "609f5dc5a5f99613b5da8a720aed03a9cfccc56585787b73159a4e731abe63ea",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-response.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-transport-ui.js",
+      "expectedSHA256": "fb0bfb859e9787be083b4eea090f6368171f9ca324cf0268d6b2e364df96630e",
+      "actualSHA256": "fb0bfb859e9787be083b4eea090f6368171f9ca324cf0268d6b2e364df96630e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-transport-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/neutron-transport.ts",
+      "expectedSHA256": "b4d0e8d9195ccae64dafd262d05d077015b7cad65b1013ef5eebc6e4a87d6694",
+      "actualSHA256": "b4d0e8d9195ccae64dafd262d05d077015b7cad65b1013ef5eebc6e4a87d6694",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/neutron-transport.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/observable-evidence.ts",
+      "expectedSHA256": "2a5a3f3436c6d200f6eb90b5631e9a7304051b7ee0a466414289ddd151275503",
+      "actualSHA256": "2a5a3f3436c6d200f6eb90b5631e9a7304051b7ee0a466414289ddd151275503",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/observable-evidence.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/orbit-events.ts",
+      "expectedSHA256": "3a4369d602755bd2eb903249ec456b4b29738731808c6650ea451ebcd3bb872f",
+      "actualSHA256": "3a4369d602755bd2eb903249ec456b4b29738731808c6650ea451ebcd3bb872f",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/orbit-events.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/physics.ts",
+      "expectedSHA256": "a48f1cb57374c8a30c155837d2e91bdff605395ada3fec8911c1ead9ef6b370f",
+      "actualSHA256": "a48f1cb57374c8a30c155837d2e91bdff605395ada3fec8911c1ead9ef6b370f",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/physics.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/polynomial-roots.ts",
+      "expectedSHA256": "090190b5c47dce5368703853be5625e26d635b7fbf4893e1fc5567684d3952b5",
+      "actualSHA256": "090190b5c47dce5368703853be5625e26d635b7fbf4893e1fc5567684d3952b5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/polynomial-roots.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/precise-controls.css",
+      "expectedSHA256": "f0eedac52df2c4fdcde1e7c6e99121cd2e7ae2fb0dc52eb402159414e317b017",
+      "actualSHA256": "f0eedac52df2c4fdcde1e7c6e99121cd2e7ae2fb0dc52eb402159414e317b017",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/precise-controls.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/precise-controls.js",
+      "expectedSHA256": "52df2bed63ff34b3aa80ba57784b2bfc944ebc4299ace15e6a992f75b46daaf2",
+      "actualSHA256": "52df2bed63ff34b3aa80ba57784b2bfc944ebc4299ace15e6a992f75b46daaf2",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/precise-controls.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/producing-code.ts",
+      "expectedSHA256": "1aaf68299ecb017037161d27c5454395044a37465530d5115e5c09937f915d34",
+      "actualSHA256": "1aaf68299ecb017037161d27c5454395044a37465530d5115e5c09937f915d34",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/producing-code.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/radial-refinement.ts",
+      "expectedSHA256": "c463a5a878fdd85ac8e642b7af2ccf6f9d341526a4acb55da9053d76414dbbf3",
+      "actualSHA256": "c463a5a878fdd85ac8e642b7af2ccf6f9d341526a4acb55da9053d76414dbbf3",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/radial-refinement.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/random-stream.ts",
+      "expectedSHA256": "e12ba434ee995c3125c9c0173c008c30cf69cd492c97fe48b9eed8106bd7c625",
+      "actualSHA256": "e12ba434ee995c3125c9c0173c008c30cf69cd492c97fe48b9eed8106bd7c625",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/random-stream.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/reference-atlas.js",
+      "expectedSHA256": "d8648dffde41934bb4e67b8e9c8519a724d9fb154785f2f2ab5237a967b20313",
+      "actualSHA256": "d8648dffde41934bb4e67b8e9c8519a724d9fb154785f2f2ab5237a967b20313",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/reference-atlas.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/research-distribution-ui.js",
+      "expectedSHA256": "908aefada7d59e3b338dcedefedb5b5229e026fe115c6a2ea613194165ff8414",
+      "actualSHA256": "908aefada7d59e3b338dcedefedb5b5229e026fe115c6a2ea613194165ff8414",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/research-distribution-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/research-distribution.ts",
+      "expectedSHA256": "4446e3bfba0812c53057eb03ee6232d622fd514855600a99518fcda1f1d1cead",
+      "actualSHA256": "4446e3bfba0812c53057eb03ee6232d622fd514855600a99518fcda1f1d1cead",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/research-distribution.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/research-ui.js",
+      "expectedSHA256": "2741669739226026b522eb82be3c18245c97b913fb397f37abb93d1964fe9314",
+      "actualSHA256": "2741669739226026b522eb82be3c18245c97b913fb397f37abb93d1964fe9314",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/research-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/rotating-diagnostics.ts",
+      "expectedSHA256": "de212b2c5898625335352bec58a187d22145d28a7df6253899d59055580aa28a",
+      "actualSHA256": "de212b2c5898625335352bec58a187d22145d28a7df6253899d59055580aa28a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/rotating-diagnostics.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/scenario-state.js",
+      "expectedSHA256": "177d8ba650c33bd545f0a142f38bfc0ee1fb39c2c748986133bf4d7c2dffee90",
+      "actualSHA256": "177d8ba650c33bd545f0a142f38bfc0ee1fb39c2c748986133bf4d7c2dffee90",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/scenario-state.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/study-presentation.ts",
+      "expectedSHA256": "e783642a09b5dd46a3467137167a260b6b365dcf0e6c8782f5af6c578bd6e44e",
+      "actualSHA256": "e783642a09b5dd46a3467137167a260b6b365dcf0e6c8782f5af6c578bd6e44e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/study-presentation.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/study-ui.js",
+      "expectedSHA256": "60798ed63b4a1a9fb52dcdb498de59474ddacd462abab1d4764a5c3e21d38fa8",
+      "actualSHA256": "60798ed63b4a1a9fb52dcdb498de59474ddacd462abab1d4764a5c3e21d38fa8",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/study-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/style.css",
+      "expectedSHA256": "f21fbd0ca5ac693da4475377c37366178920c529062777934a8592e0d6a95039",
+      "actualSHA256": "f21fbd0ca5ac693da4475377c37366178920c529062777934a8592e0d6a95039",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/style.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/surface-layer.js",
+      "expectedSHA256": "8282ed005a7d5b995dd175a9d88b461a18e27059844028b07079fbb533d792cc",
+      "actualSHA256": "8282ed005a7d5b995dd175a9d88b461a18e27059844028b07079fbb533d792cc",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/surface-layer.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/surface-state.ts",
+      "expectedSHA256": "c60d505f45ea0020b4471badb3578057b2d655d3fa4aae62d4f47d3b6c9800da",
+      "actualSHA256": "c60d505f45ea0020b4471badb3578057b2d655d3fa4aae62d4f47d3b6c9800da",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/surface-state.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-conduction.ts",
+      "expectedSHA256": "9f9671a619e91524fe6016276aaae3aa3de2e57b86dcd033b6f60ded2950fcb2",
+      "actualSHA256": "9f9671a619e91524fe6016276aaae3aa3de2e57b86dcd033b6f60ded2950fcb2",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/target-conduction.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-exposure-ui.js",
+      "expectedSHA256": "5a27ef19ddf80192014245a9724d7b66b37d4515d9b7b8eebb68075134a14f1a",
+      "actualSHA256": "5a27ef19ddf80192014245a9724d7b66b37d4515d9b7b8eebb68075134a14f1a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-exposure-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-exposure.css",
+      "expectedSHA256": "a71e9a34f8f8563a5cf68ecb4cacbf049dca242c1352509d9cf5a1a776eff2c0",
+      "actualSHA256": "a71e9a34f8f8563a5cf68ecb4cacbf049dca242c1352509d9cf5a1a776eff2c0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-exposure.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-exposure.ts",
+      "expectedSHA256": "d27a0525def85e9abc274bcd832c005643b14d6366bdf08bf6b57aa81b9d19de",
+      "actualSHA256": "d27a0525def85e9abc274bcd832c005643b14d6366bdf08bf6b57aa81b9d19de",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-exposure.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-loading-ui.js",
+      "expectedSHA256": "d4e3ba89e2f9a62dc88b18bf3d242b8a6f60d00a3c9d9c60fce0add85d069d74",
+      "actualSHA256": "d4e3ba89e2f9a62dc88b18bf3d242b8a6f60d00a3c9d9c60fce0add85d069d74",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-loading-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-loading.css",
+      "expectedSHA256": "3d1a569802977319d912238d2f3e9acf1e36ce70f4fa15655873790b7e4fa518",
+      "actualSHA256": "3d1a569802977319d912238d2f3e9acf1e36ce70f4fa15655873790b7e4fa518",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-loading.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-loading.ts",
+      "expectedSHA256": "4dd86b27ec8e14dccd540206c43532ccab590a2a859e52d2eb9014c079915de4",
+      "actualSHA256": "4dd86b27ec8e14dccd540206c43532ccab590a2a859e52d2eb9014c079915de4",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/target-loading.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/target-material.ts",
+      "expectedSHA256": "ec46ba4663aa8fabec57bdff00744a137693d6ba9bc8a31c36083e742f83d8d8",
+      "actualSHA256": "ec46ba4663aa8fabec57bdff00744a137693d6ba9bc8a31c36083e742f83d8d8",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.src/target-material.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/transport.ts",
+      "expectedSHA256": "223f6e1be3a176e8ebc9b049d17c5e516fbebd18faf3facc1ca45daaf853040d",
+      "actualSHA256": "223f6e1be3a176e8ebc9b049d17c5e516fbebd18faf3facc1ca45daaf853040d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/transport.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/tutorial-insights-ui.js",
+      "expectedSHA256": "164baf87be21103ca70f57b11d73feb9ff9d3e7e06a1348677612d1aeacbaa7a",
+      "actualSHA256": "164baf87be21103ca70f57b11d73feb9ff9d3e7e06a1348677612d1aeacbaa7a",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/tutorial-insights-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/tutorial-insights.ts",
+      "expectedSHA256": "4952c39d30515905d213034e0948ee4d1cabc6f64f73c14ac4097ae5f93bfa66",
+      "actualSHA256": "4952c39d30515905d213034e0948ee4d1cabc6f64f73c14ac4097ae5f93bfa66",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/tutorial-insights.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/view-state.ts",
+      "expectedSHA256": "5e7b7c11fbe066b264bea4b57493b5f0dcb98d095b36b71fe01b46353eb7da63",
+      "actualSHA256": "5e7b7c11fbe066b264bea4b57493b5f0dcb98d095b36b71fe01b46353eb7da63",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/view-state.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/worker-client.ts",
+      "expectedSHA256": "0b275d372f424afb702c53e2c1b3ca48a1a500b2b6ba89f6a6ac8bc5de8bca7c",
+      "actualSHA256": "0b275d372f424afb702c53e2c1b3ca48a1a500b2b6ba89f6a6ac8bc5de8bca7c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/worker-client.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/worker-identity.ts",
+      "expectedSHA256": "0651abcaef7a7e153f0ff872779c13aa307c0543605d09038d47bf13636cb2a2",
+      "actualSHA256": "0651abcaef7a7e153f0ff872779c13aa307c0543605d09038d47bf13636cb2a2",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/worker-identity.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/worker.ts",
+      "expectedSHA256": "940803fda1d1c354513773e2c1bf0247a6fd819d486114cb8b45249facf94692",
+      "actualSHA256": "940803fda1d1c354513773e2c1bf0247a6fd819d486114cb8b45249facf94692",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/worker.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/workspace-layout.js",
+      "expectedSHA256": "920424b6a8957f7aabeb2dc725245018673cfbaa44479572d72cb12fdfbbe6d7",
+      "actualSHA256": "920424b6a8957f7aabeb2dc725245018673cfbaa44479572d72cb12fdfbbe6d7",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/workspace-layout.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/workspace-ui.js",
+      "expectedSHA256": "628d58ea594630287fba80029ef1139a6c66904b79eea7144bbbaa0f022377e0",
+      "actualSHA256": "628d58ea594630287fba80029ef1139a6c66904b79eea7144bbbaa0f022377e0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/workspace-ui.js",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "src/workspace.css",
+      "expectedSHA256": "2d40ea0daf0f190445e8a4bf8d42b8e6d039e97de2e5adf79ded62e6994e2a7d",
+      "actualSHA256": "2d40ea0daf0f190445e8a4bf8d42b8e6d039e97de2e5adf79ded62e6994e2a7d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:src/workspace.css",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/run.py",
+      "expectedSHA256": "17b0297dc7b2c644b65a42e58eadeda1cda83bc638927dc5e11e8615063bd391",
+      "actualSHA256": "17b0297dc7b2c644b65a42e58eadeda1cda83bc638927dc5e11e8615063bd391",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/run.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/continue.py",
+      "expectedSHA256": "6cfcb8ec073d17b05101e087eff08dcd03a84cb8f09fdce9a1357b836f801b2c",
+      "actualSHA256": "6cfcb8ec073d17b05101e087eff08dcd03a84cb8f09fdce9a1357b836f801b2c",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/continue.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/reference.py",
+      "expectedSHA256": "64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463",
+      "actualSHA256": "64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/expert-v88/target-radau/reference.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/export.ts",
+      "expectedSHA256": "808d0305e9bb232715b6024ae2e204db94301f18c4f7fce3aec51f96f1139ce4",
+      "actualSHA256": "808d0305e9bb232715b6024ae2e204db94301f18c4f7fce3aec51f96f1139ce4",
+      "proof": "scientific/expert-v88/target-radau/results/browser.json#sourceSHA256.scientific/expert-v88/target-radau/export.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/diagnose.ts",
+      "expectedSHA256": "654e477735b399adfa85e51f5bebb73903f690bb683fd1fb357733f6bb12c73d",
+      "actualSHA256": "654e477735b399adfa85e51f5bebb73903f690bb683fd1fb357733f6bb12c73d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/diagnose.ts",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/cases.json",
+      "expectedSHA256": "d50d6d3df7d696c17feadbeeb7898f742fafac4b02af86030da6407e71829525",
+      "actualSHA256": "d50d6d3df7d696c17feadbeeb7898f742fafac4b02af86030da6407e71829525",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/expert-v88/target-radau/cases.json",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/PROTOCOL.md",
+      "expectedSHA256": "3f54ea2bd10f889b0e9a5c150b666a86f1f2ed25d77bd6fd40c04ff4addbdec8",
+      "actualSHA256": "3f54ea2bd10f889b0e9a5c150b666a86f1f2ed25d77bd6fd40c04ff4addbdec8",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/expert-v88/target-radau/PROTOCOL.md",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/test_reference.py",
+      "expectedSHA256": "4071ab5d5cf796169f483a046bcaa66c6e6f4ea92d6c041342500720682ce8b1",
+      "actualSHA256": "4071ab5d5cf796169f483a046bcaa66c6e6f4ea92d6c041342500720682ce8b1",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/expert-v88/target-radau/test_reference.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/audit_zero_beam.py",
+      "expectedSHA256": "67c73a8ae279aae71549aada6eec3f3c1400af6ca78f380a3e1478ea827ee63e",
+      "actualSHA256": "67c73a8ae279aae71549aada6eec3f3c1400af6ca78f380a3e1478ea827ee63e",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/audit_zero_beam.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/expert-v88/target-radau/test_audit_zero_beam.py",
+      "expectedSHA256": "2261f6c48b37dd084823d1cb7f3fefa6b9c15be7339d73acf1f716c184da491d",
+      "actualSHA256": "2261f6c48b37dd084823d1cb7f3fefa6b9c15be7339d73acf1f716c184da491d",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/test_audit_zero_beam.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/marathon-v35/material/reference/atomic-reference.cpp",
+      "expectedSHA256": "a12001c3e48c2127a17c0690ef55ff28b23ae3ddedabf8d450e186e1eb873768",
+      "actualSHA256": "a12001c3e48c2127a17c0690ef55ff28b23ae3ddedabf8d450e186e1eb873768",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/marathon-v35/material/reference/atomic-reference.cpp",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "scientific/marathon-v35/material/reference/atomic-reference.json",
+      "expectedSHA256": "da12120d0ac5dc8a65023cfd7414f997da7734ea6d0e5228395139d543d3159e",
+      "actualSHA256": "da12120d0ac5dc8a65023cfd7414f997da7734ea6d0e5228395139d543d3159e",
+      "proof": "scientific/expert-v88/target-radau/results/reference.json#sourceSHA256.scientific/marathon-v35/material/reference/atomic-reference.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "scientific/expert-v88/target-radau/results/browser.json",
+      "expectedSHA256": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+      "actualSHA256": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/results/browser.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "scientific/expert-v88/target-radau/results/reference.json",
+      "expectedSHA256": "8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418",
+      "actualSHA256": "8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/target-radau/results/reference.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}

@@ -1,0 +1,126 @@
+{
+  "completedCases": 44,
+  "bulkRows": 8,
+  "originalQualified": false,
+  "extensionQualified": false,
+  "admittedBulkRows": [
+    {
+      "reducedFieldTd": 10,
+      "gasTemperatureK": 300,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 30,
+      "gasTemperatureK": 300,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 100,
+      "gasTemperatureK": 300,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 300,
+      "gasTemperatureK": 300,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 10,
+      "gasTemperatureK": 1000,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 30,
+      "gasTemperatureK": 1000,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 100,
+      "gasTemperatureK": 1000,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    },
+    {
+      "reducedFieldTd": 300,
+      "gasTemperatureK": 1000,
+      "qualifiedObservables": [
+        "meanEnergyEV",
+        "mobilityM2VS",
+        "diffusionM2S"
+      ]
+    }
+  ],
+  "originalFailedRefinements": [
+    {
+      "td": 10,
+      "tg": 300,
+      "key": "ionizationRateM3S",
+      "relative": 0.05430350931704896,
+      "passGate": false
+    },
+    {
+      "td": 30,
+      "tg": 300,
+      "key": "ionizationRateM3S",
+      "relative": 0.00333751112949385,
+      "passGate": false
+    },
+    {
+      "td": 10,
+      "tg": 1000,
+      "key": "ionizationRateM3S",
+      "relative": 0.053312157145077914,
+      "passGate": false
+    },
+    {
+      "td": 30,
+      "tg": 1000,
+      "key": "ionizationRateM3S",
+      "relative": 0.003344471558552227,
+      "passGate": false
+    }
+  ],
+  "extensionFailedRefinements": [
+    {
+      "td": 10,
+      "tg": 300,
+      "key": "meanEnergyEV",
+      "relative": 1.5593677620982784e-05,
+      "passGate": false
+    },
+    {
+      "td": 10,
+      "tg": 1000,
+      "key": "meanEnergyEV",
+      "relative": 1.6039396709886377e-05,
+      "passGate": false
+    }
+  ]
+}

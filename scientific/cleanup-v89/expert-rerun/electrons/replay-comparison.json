@@ -1,0 +1,14 @@
+{
+  "physicalProjection": "electrons",
+  "comparedNumericScalars": 1040,
+  "exactlyEqualNumericScalars": 1040,
+  "changedNumericScalars": 0,
+  "maxAbsoluteDifference": 0.0,
+  "maxRelativeDifferenceOverNonzeroBaseline": 0.0,
+  "changedNonNumericScalars": 0,
+  "structuralDifferences": [],
+  "firstChangedNumbers": [],
+  "experimentalQualification": false,
+  "interpretation": "Descriptive equality of the explicitly selected physics fields only. Distribution/archive/runtime provenance, native logs and wall time are outside this projection; original frozen gates are unchanged.",
+  "physicalProjectionExactlyEqual": true
+}

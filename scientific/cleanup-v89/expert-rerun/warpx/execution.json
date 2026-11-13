@@ -1,0 +1,215 @@
+{
+  "startedUTC": "2026-11-13T02:20:26.892888+00:00",
+  "campaign": "warpx",
+  "python": "3.11.2",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "uid": 1000,
+  "commands": [
+    {
+      "name": "replay-comparison-controls",
+      "command": [
+        "python3",
+        "test_compare.py"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.04339612499999995,
+      "logSHA256": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/work/home/warpx88-env/bin/python",
+        "-m",
+        "unittest",
+        "-v",
+        "test_reference"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.132618,
+      "logSHA256": "51946933ead5b670fe869fa657a5abfb85d7d4554397c1a22785c2649af2d190"
+    },
+    {
+      "name": "producer",
+      "command": [
+        "/work/home/warpx88-env/bin/python",
+        "reference.py",
+        "campaign"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 2.728973626,
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "audit",
+      "command": [
+        "/work/home/warpx88-env/bin/python",
+        "analyze.py"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.03543837500000002,
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "warm-off",
+      "command": [
+        "/work/home/warpx88-env/bin/python",
+        "reference.py",
+        "campaign"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a/supplemental-warm-off",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.17341562499999963,
+      "logSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "warm-eligibility",
+      "command": [
+        "/work/home/warpx88-env/bin/python",
+        "warm-eligibility.py"
+      ],
+      "cwd": "/work/project/v89-warpx-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.038637957999999806,
+      "logSHA256": "fda4538c8cc82be8f416207987efa377e832aaf0ed746476013c3b5b6fe89931"
+    }
+  ],
+  "sourceSHA256": {
+    "reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "analyze.py": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+    "test_reference.py": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+    "protocol.json": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "supplemental-warm-off/reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "supplemental-warm-off/protocol.json": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+    "warm-eligibility.py": "db6e69a507be2cedd245dbf4a0521b622e744c27aa229e59bf76136323e4a320",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "protocol.json": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "results/orbit-coarse/result.json": "e329dab3c7994d9a6ff809819301d8ca65e1d9402f2507279a740c51e2646082",
+    "results/orbit-medium/result.json": "796a532811e08d4cb4022296fc03010b199f7ebdd30a14de58905b6d1b3382fb",
+    "results/orbit-fine/result.json": "51b0894de44c22339cb2c3da259c20f9d329713198a37e0247befe88f90d4a93",
+    "results/orbit-grid/result.json": "f0dfe4db556ca5718c321a6a98fdb314b5d858ac0a584a382f453ac903637f5d",
+    "results/free-control/result.json": "216e36faf00ce10b5652ddd0d24196f0216bde6d2f9d69a64c27a9e030f99b60",
+    "results/bobylev/result.json": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+    "results/nanbu/result.json": "a35cb4ab67c9cf9a89755cdb602f606b530f1f0597b0c1b9941030a758dcd9bb",
+    "results/bobylev-sub4/result.json": "a1850f240ef757788b6200daa1d0d090bcd9c31d075538b03eef2d965b8be222",
+    "results/nanbu-sub4/result.json": "1fb3598f09c76fbfc24f1febe711cff01035412e74ab3f87bc0960ad33b43710",
+    "results/bobylev-dt/result.json": "17530b7f2784c13e31bec52cbf1fab2a0a75cbb96f94cc0b910a5c2be3216866",
+    "results/bobylev-grid/result.json": "e3e323f70c9a5989609a6ea98c86fadb016275f81709c22d192222c136426eea",
+    "results/bobylev-seed/result.json": "2d1a28c1f895fffaee21a94db5780a9697346a0b26e3c6b1b3330a2a83eb6b86",
+    "supplemental-warm-off/results/warm-off/result.json": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac"
+  },
+  "experimentalQualification": false,
+  "nativeDistribution": {
+    "name": "warpx",
+    "version": "26.10",
+    "build": "np2py312hded7337_0",
+    "sha256": "a442e121ea53b32cdd6443fd1aa413247496ab7b34da756bd067363e65b4348c",
+    "url": "https://conda.anaconda.org/conda-forge/linux-aarch64/warpx-26.10-np2py312hded7337_0.conda"
+  },
+  "finishedUTC": "2026-11-13T02:20:30.063832+00:00",
+  "executionCompleted": true,
+  "outputSHA256": {
+    "analyze.py": "500f4e16f041e842b51ef3e7a8be08b40417daa3f10073a91d757df72dacd0c6",
+    "bobylev-dt.log": "dbb5097a988ea5942e386708f56ba4c41c258e71cd24e1d6cfc197621023ca52",
+    "bobylev-grid.log": "b06f6549c7de5de8c6fd52ed65e4a269c346f0213e36af1f6e30534972c73a54",
+    "bobylev-seed.log": "885937b9a96536d7d3891ccdd9c76a7b211a14c9628a2d612bfb63908a6c8871",
+    "bobylev-sub4.log": "c98154851e2c7beac30ef474c5edb25c5c450726101853b86d03389c3e5ced07",
+    "bobylev.log": "eab8f29a17bfea75554dcd6b19a47311874406db593955fe006c78a1fe8b4f51",
+    "campaign-protocol.sha256": "a63dc5026e4ae3c97e264de283c02887c10d972bd8182e6d7d1d0d07f55f1f30",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "coverage.json": "a1284fdec0620f2eeff9cd41fc1b17c8ecfa4f1a7ed14f1e5591481689e50959",
+    "free-control.log": "f8744692de5fc5d509bac8f5a3644d1698ba6ce5da2630fd9283917538ebeb5b",
+    "frozen-preflight.json": "7c990a278b493d5917373a6c5b8eade46782e5ae65b0c933b20ba824540371d6",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "logs/audit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/producer.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/replay-comparison-controls.log": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c",
+    "logs/tests.log": "51946933ead5b670fe869fa657a5abfb85d7d4554397c1a22785c2649af2d190",
+    "logs/warm-eligibility.log": "fda4538c8cc82be8f416207987efa377e832aaf0ed746476013c3b5b6fe89931",
+    "logs/warm-off.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "nanbu-sub4.log": "645e17b9aec11abc0b36089b72a126e13db5a305ef8321c4e7ac7c93691ab2cd",
+    "nanbu.log": "a2fc6019957b392202767eb4c24ceae513e17c6dce27ae2dcdaae290a7244d5b",
+    "orbit-coarse.log": "7c70a9c52fdf092877b0e8cb552834b089489fe36c2734229e74780120cc9e11",
+    "orbit-fine.log": "2879294e66518314ddcaeca02c4335057dcc3dfc942c92957c38642d86cce463",
+    "orbit-grid.log": "b198eba488898a979039571918f68dc5860edb6cf653b95259e2f79c9c838caa",
+    "orbit-medium.log": "b61b8524d3deeee50a1c8f309278e25ee02087b8a650dd946704e6a48e98c26b",
+    "protocol.json": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+    "reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "replay-comparison.json": "bdf2820741dbbc2cb6f21f8b492d6f9aefcab4974f16c07f9b7cbab73a2e05ee",
+    "results/bobylev/raw.npz": "e22cab249a2a624546a69bdee38e21186f1ae95dafeb40d820b6f724358c934f",
+    "results/bobylev/result.json": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+    "results/bobylev/warpx.inputs": "de8fee46a5d9699685cbec6302ea7139c20060fbcadb09826606ffd2c649f649",
+    "results/bobylev-dt/raw.npz": "e6af120d4a1c906a631deeffefc4423c90cb8717998680bab2d9645a6ec4b7d4",
+    "results/bobylev-dt/result.json": "17530b7f2784c13e31bec52cbf1fab2a0a75cbb96f94cc0b910a5c2be3216866",
+    "results/bobylev-dt/warpx.inputs": "b78ba3d04f3068d15de2ac57ab3ba15ceba4ba6defb821d21c2af7c85fe8c16d",
+    "results/bobylev-grid/raw.npz": "5c14fcc64ba0d295fb0494ff10347a11a2c777076218eb1c798c6d2dcdccbdb0",
+    "results/bobylev-grid/result.json": "e3e323f70c9a5989609a6ea98c86fadb016275f81709c22d192222c136426eea",
+    "results/bobylev-grid/warpx.inputs": "ddb6e658081c91dace5226c4092007bcdf597ec84f49b677a9d71c71cbb9737b",
+    "results/bobylev-seed/raw.npz": "aefdea8b53e30b71c466c8eef881c4b6a2d8d64eedca5728856e1d0ae4c7dbcb",
+    "results/bobylev-seed/result.json": "2d1a28c1f895fffaee21a94db5780a9697346a0b26e3c6b1b3330a2a83eb6b86",
+    "results/bobylev-seed/warpx.inputs": "7468ebfbc35a07dfeb85de4d1f2ac0f0d7bda06cc21b5638dc8dabc2125414cc",
+    "results/bobylev-sub4/raw.npz": "edf1f967056e266572c4437c4c06b1ddb85fb328a86bc99780bd5d01e235e1c1",
+    "results/bobylev-sub4/result.json": "a1850f240ef757788b6200daa1d0d090bcd9c31d075538b03eef2d965b8be222",
+    "results/bobylev-sub4/warpx.inputs": "305f27baf24c29399267a9ddefbd62c5a1fee7e5713c8825baf2e8bf518f6869",
+    "results/free-control/raw.npz": "c75e6650f5e039bf53fd3f09b3118ab9031c53751c8a2955ebf0bddef46cf26d",
+    "results/free-control/result.json": "216e36faf00ce10b5652ddd0d24196f0216bde6d2f9d69a64c27a9e030f99b60",
+    "results/free-control/warpx.inputs": "52e55e02fb29b86fb038564ef039ad28d24806268b9594ffde659b061544be3e",
+    "results/nanbu/raw.npz": "7468ef68103a40dc87356ba0e5247f6cb721604aceac564f319298988f097ee8",
+    "results/nanbu/result.json": "a35cb4ab67c9cf9a89755cdb602f606b530f1f0597b0c1b9941030a758dcd9bb",
+    "results/nanbu/warpx.inputs": "5359aa804d651d3b4a2ea6528d9082d6e142caecf8b2edea0ffeca70497680c4",
+    "results/nanbu-sub4/raw.npz": "8135e24bcb765ce27a2661a27ad8c4bc11075181c72d08660acc48bbe5977fa5",
+    "results/nanbu-sub4/result.json": "1fb3598f09c76fbfc24f1febe711cff01035412e74ab3f87bc0960ad33b43710",
+    "results/nanbu-sub4/warpx.inputs": "cbce824902ad53cccd486aab3ff20fe8538530f0c969e394078d1410ed816391",
+    "results/orbit-coarse/raw.npz": "e5974f70dd1a43ef4b38d9f1c9b77eee5c32925569b91bdf996b340016f96cd7",
+    "results/orbit-coarse/result.json": "e329dab3c7994d9a6ff809819301d8ca65e1d9402f2507279a740c51e2646082",
+    "results/orbit-coarse/warpx.inputs": "882ad4efb8ca0d8b99b817c677e64b34ce5c70f318bc1403f6d626db467aa4f5",
+    "results/orbit-fine/raw.npz": "f2fb7ac07ed2bbb7f46f09e9a73e7e3a0970cd92706640cbfeb4f5ba31aba08f",
+    "results/orbit-fine/result.json": "51b0894de44c22339cb2c3da259c20f9d329713198a37e0247befe88f90d4a93",
+    "results/orbit-fine/warpx.inputs": "b6315aadc0d4dfe37f9193d82466c0748a74ed9b4457735c3c8ae0262f40966a",
+    "results/orbit-grid/raw.npz": "f2fb7ac07ed2bbb7f46f09e9a73e7e3a0970cd92706640cbfeb4f5ba31aba08f",
+    "results/orbit-grid/result.json": "f0dfe4db556ca5718c321a6a98fdb314b5d858ac0a584a382f453ac903637f5d",
+    "results/orbit-grid/warpx.inputs": "5bbf0f35179ea717927376de31e34a0ad34b868d0c6938574d63aca58c890193",
+    "results/orbit-medium/raw.npz": "053aa391cfe49fa3516dddff8da5116fad2d9d7ddb12647afef132586462ba41",
+    "results/orbit-medium/result.json": "796a532811e08d4cb4022296fc03010b199f7ebdd30a14de58905b6d1b3382fb",
+    "results/orbit-medium/warpx.inputs": "ba559e7c33088161ca7845d5dd00f76e7646b1da242188997668f106c6969547",
+    "summary.json": "9da05efadcdccc1b30c1f21863a101cdb4c5644a986e6cc9320e86af01cbcce5",
+    "supplemental-warm-off/campaign-protocol.sha256": "4ee3d4b07e98f8a390d01afe0c2990a6489662b2a28d7b7c48e0006eeb204ac2",
+    "supplemental-warm-off/eligibility-v89.json": "fda4538c8cc82be8f416207987efa377e832aaf0ed746476013c3b5b6fe89931",
+    "supplemental-warm-off/protocol.json": "b41f8e5bbed52705339c93d726bbdc301d51cc70751753af8c72690e35c60419",
+    "supplemental-warm-off/reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "supplemental-warm-off/results/warm-off/raw.npz": "2a91b604612f304a4ce8989b625cb4a87d0cf2642237d46cbacb45a80bc810de",
+    "supplemental-warm-off/results/warm-off/result.json": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac",
+    "supplemental-warm-off/results/warm-off/warpx.inputs": "882ad4efb8ca0d8b99b817c677e64b34ce5c70f318bc1403f6d626db467aa4f5",
+    "supplemental-warm-off/warm-off.log": "33864d69f69dc1ae9432baee1ad1f529ef2854dabc4310dbee21345c1713a30a",
+    "supplemental-warm-off/warpx_used_inputs": "cc356f6bfaad9364abe1707232b7111ac77c34675704d89f29a949c40c395508",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "test_reference.py": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+    "warm-eligibility.py": "db6e69a507be2cedd245dbf4a0521b622e744c27aa229e59bf76136323e4a320",
+    "warpx_used_inputs": "f284794bc18090685991ddb67fc0c1ec10e1a58fec10beee518a1affe738f06f"
+  }
+}

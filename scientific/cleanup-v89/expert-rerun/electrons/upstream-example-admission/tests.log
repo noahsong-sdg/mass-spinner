@@ -1,0 +1,10 @@
+test_domain_and_convergence_warnings_fail_without_nan (test_upstream_example.AdmissionTests.test_domain_and_convergence_warnings_fail_without_nan) ... ok
+test_exit_zero_with_nonfinite_rows_fails (test_upstream_example.AdmissionTests.test_exit_zero_with_nonfinite_rows_fails) ... ok
+test_finite_completed_smoke (test_upstream_example.AdmissionTests.test_finite_completed_smoke) ... ok
+test_nonzero_cli_fails_despite_finite_output (test_upstream_example.AdmissionTests.test_nonzero_cli_fails_despite_finite_output) ... ok
+test_stale_log_and_missing_command_rejected (test_upstream_example.AdmissionTests.test_stale_log_and_missing_command_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK

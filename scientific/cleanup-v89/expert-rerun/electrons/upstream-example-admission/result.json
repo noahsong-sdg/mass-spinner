@@ -1,0 +1,56 @@
+{
+  "exampleLogSHA256": "45e0c8a10c55d920347536f085ded60aae141ba0962478c798e41e8b49c3a8f4",
+  "cliExitCode": 0,
+  "cliCompleted": true,
+  "nonfiniteRows": 3000,
+  "nonfiniteTokenCount": 3000,
+  "firstNonfiniteLines": [
+    97847,
+    97848,
+    97849,
+    97850,
+    97851,
+    97852,
+    97853,
+    97854,
+    97855,
+    97856
+  ],
+  "lastNonfiniteLines": [
+    100855,
+    100856,
+    100857,
+    100858,
+    100859,
+    100860,
+    100861,
+    100862,
+    100863,
+    100864
+  ],
+  "energyDomainWarnings": [
+    {
+      "line": 97838,
+      "text": "[Warning] The maximum grid energy 1020.66eV exceeds the maximum energy of the lookup table 1000eV. Values beyond the maximum value of the lookup table will be clipped at 0.0. The simulation is not reliable under these conditions."
+    }
+  ],
+  "nonconvergenceWarnings": [
+    {
+      "line": 97839,
+      "text": "[Warning] Iterative temporal growth scheme did not converge."
+    },
+    {
+      "line": 98848,
+      "text": "[Warning] Iterative temporal growth scheme did not converge."
+    },
+    {
+      "line": 99857,
+      "text": "[Warning] Iterative temporal growth scheme did not converge."
+    }
+  ],
+  "numericalPass": false,
+  "experimentalQualification": false,
+  "interpretation": "Native CLI smoke only. Exit zero does not establish finite or reliable physics. This supplemental check does not alter the frozen example or the separate 44 bounded electron cases.",
+  "executionSHA256": "22a994cb08e9fa3e437c7434ab3a1f11bab6ab747962bee4783c1068c350cc2c",
+  "auditorSHA256": "05481fb2870dc63f4c2142b03b282b766689fce478717170fe06ff0a38febf8d"
+}

@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 89,
+  "resultSHA256": "018221aaa6d84d5b8067080cb2b504fd1bc0a83207639cb86168cab241375bac",
+  "rawSHA256": "2a91b604612f304a4ce8989b625cb4a87d0cf2642237d46cbacb45a80bc810de",
+  "baselineResultSHA256": "8e079a7916c1e1883adad6ef30312dc012057a9c9a61842833eb0a7a1fde8a59",
+  "matchedBaselineInitialArrays": {
+    "initial-0-ids": true,
+    "initial-0-r": true,
+    "initial-0-u": true,
+    "initial-0-v": true,
+    "initial-0-w": true,
+    "initial-0-x": true,
+    "initial-0-y": true,
+    "initial-0-z": true,
+    "initial-1-ids": true,
+    "initial-1-r": true,
+    "initial-1-u": true,
+    "initial-1-v": true,
+    "initial-1-w": true,
+    "initial-1-x": true,
+    "initial-1-y": true,
+    "initial-1-z": true
+  },
+  "configDifferences": {
+    "law": [
+      "bobylev",
+      "off"
+    ]
+  },
+  "boundaryWitnesses": [
+    {
+      "species": 0,
+      "unboundedFinalOutsideCount": 0,
+      "unboundedFinalMaxRadiusM": 0.04900270052483389,
+      "actualFinalMaxRadiusM": 0.04900289691637956
+    },
+    {
+      "species": 1,
+      "unboundedFinalOutsideCount": 55,
+      "unboundedFinalMaxRadiusM": 0.0805899691705396,
+      "actualFinalMaxRadiusM": 0.059999095642615755
+    }
+  ],
+  "analyticOrbitComparisonApplicable": false,
+  "interpretation": "Matching establishes a pusher baseline; it does not permit exact subtraction of collision error.",
+  "experimentalQualification": false
+}

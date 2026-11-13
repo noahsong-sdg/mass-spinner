@@ -1,0 +1,35 @@
+{
+  "campaign": "openfoam",
+  "freshName": "v89-openfoam-20261113a",
+  "stage": "/private/tmp/mass-spinner-openfoam-v87-20261112",
+  "startedUTC": "2026-11-13T02:15:00.510416+00:00",
+  "runnerSHA256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+  "inputSHA256": {
+    "reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "test_reference88.py": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+    "PROTOCOL.md": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results/predictions.json": "be1cd2f172f51c0dd1db5458787ef1d4f7f8cc1819f19e058d50fc7967288871",
+    "results/audit.json": "84215f68e6f72a2d3bd08484658d200838bef37b2604d07209f6658a859fa340"
+  },
+  "guestJobSHA256": "53cd65d57170689a249d315b0fadc1f2a5b71da579e12c02eb2d2b7cc73025da",
+  "finishedUTC": "2026-11-13T02:15:51.538894+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-openfoam-v87-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "logSHA256": "22414837aceccb9ed8fd4f0fcd8c6a6b936bd67c15089d0c52441d18028b4dec"
+}

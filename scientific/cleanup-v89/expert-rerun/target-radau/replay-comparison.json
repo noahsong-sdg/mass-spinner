@@ -1,0 +1,617 @@
+{
+  "physicalProjection": "target-radau",
+  "comparedNumericScalars": 9145,
+  "exactlyEqualNumericScalars": 7970,
+  "changedNumericScalars": 1175,
+  "maxAbsoluteDifference": 3.4924596548080444e-10,
+  "maxRelativeDifferenceOverNonzeroBaseline": 18.0,
+  "changedNonNumericScalars": 0,
+  "structuralDifferences": [],
+  "firstChangedNumbers": [
+    {
+      "path": "$.reference[0].errors[0].ledger",
+      "current": 17.968161297445477,
+      "baseline": 17.968161297463666,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[0].maximumCoordinateError",
+      "current": 17.968161297445477,
+      "baseline": 17.968161297463666,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[0].population",
+      "current": 1.380612724068142e-05,
+      "baseline": 1.3806127240695298e-05,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "path": "$.reference[0].errors[0].temperature",
+      "current": 0.00014069494920278204,
+      "baseline": 0.00014069494920263993,
+      "difference": 1.421117997585375e-16
+    },
+    {
+      "path": "$.reference[0].errors[1].ledger",
+      "current": 9.061761747532728,
+      "baseline": 9.061761747550918,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[1].maximumCoordinateError",
+      "current": 9.061761747532728,
+      "baseline": 9.061761747550918,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[1].population",
+      "current": 6.96300307549691e-06,
+      "baseline": 6.9630030755107875e-06,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "path": "$.reference[0].errors[1].temperature",
+      "current": 7.095573596686222e-05,
+      "baseline": 7.095573596672012e-05,
+      "difference": 1.4209824723138142e-16
+    },
+    {
+      "path": "$.reference[0].errors[2].ledger",
+      "current": 4.550321403548878,
+      "baseline": 4.550321403567068,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[2].maximumCoordinateError",
+      "current": 4.550321403548878,
+      "baseline": 4.550321403567068,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].errors[2].population",
+      "current": 3.495859923215161e-06,
+      "baseline": 3.495859923229039e-06,
+      "difference": -1.3877787807814457e-17
+    },
+    {
+      "path": "$.reference[0].errors[2].temperature",
+      "current": 3.563009191552169e-05,
+      "baseline": 3.563009191537958e-05,
+      "difference": 1.421117997585375e-16
+    },
+    {
+      "path": "$.reference[0].radauSelfDifference",
+      "current": 1.1342308425810188e-06,
+      "baseline": 1.1343072401359677e-06,
+      "difference": -7.639755494892597e-11
+    },
+    {
+      "path": "$.reference[0].radauStates[2][2]",
+      "current": 0.39361305810894004,
+      "baseline": 0.3936130581089399,
+      "difference": 1.6653345369377348e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[2][3]",
+      "current": 0.39440775676643036,
+      "baseline": 0.3944077567664304,
+      "difference": -5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[2][6]",
+      "current": 368.9872156742993,
+      "baseline": 368.9872156742994,
+      "difference": -1.1368683772161603e-13
+    },
+    {
+      "path": "$.reference[0].radauStates[2][7]",
+      "current": 368.97647911663233,
+      "baseline": 368.9764791166324,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[2][8]",
+      "current": 368.9120647834575,
+      "baseline": 368.91206478345754,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[2][9]",
+      "current": 368.72972041132016,
+      "baseline": 368.7297204113202,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[2][14]",
+      "current": 0.010811195695508568,
+      "baseline": 0.010811195695508567,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[2][15]",
+      "current": 0.007189592562314681,
+      "baseline": 0.007189592562314683,
+      "difference": -2.6020852139652106e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[2][16]",
+      "current": 0.004800000000000001,
+      "baseline": 0.004800000000000003,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[2][17]",
+      "current": 0.0012000000000000001,
+      "baseline": 0.0011999999999999992,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "path": "$.reference[0].radauStates[2][24]",
+      "current": 9974.095272874001,
+      "baseline": 9974.095272874007,
+      "difference": -5.4569682106375694e-12
+    },
+    {
+      "path": "$.reference[0].radauStates[3][2]",
+      "current": 0.39361305810894004,
+      "baseline": 0.3936130581089399,
+      "difference": 1.6653345369377348e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[3][3]",
+      "current": 0.39440775676643036,
+      "baseline": 0.3944077567664304,
+      "difference": -5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[3][6]",
+      "current": 368.9872156742993,
+      "baseline": 368.9872156742994,
+      "difference": -1.1368683772161603e-13
+    },
+    {
+      "path": "$.reference[0].radauStates[3][7]",
+      "current": 368.97647911663233,
+      "baseline": 368.9764791166324,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[3][8]",
+      "current": 368.9120647834575,
+      "baseline": 368.91206478345754,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[3][9]",
+      "current": 368.72972041132016,
+      "baseline": 368.7297204113202,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[3][14]",
+      "current": 0.01081119569550857,
+      "baseline": 0.010811195695508568,
+      "difference": 1.734723475976807e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[3][15]",
+      "current": 0.0071895925623146825,
+      "baseline": 0.007189592562314685,
+      "difference": -2.6020852139652106e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[3][16]",
+      "current": 0.004800000000000002,
+      "baseline": 0.004800000000000004,
+      "difference": -1.734723475976807e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[3][17]",
+      "current": 0.0012000000000000003,
+      "baseline": 0.0011999999999999995,
+      "difference": 8.673617379884035e-19
+    },
+    {
+      "path": "$.reference[0].radauStates[3][24]",
+      "current": 9974.095272874003,
+      "baseline": 9974.095272874009,
+      "difference": -5.4569682106375694e-12
+    },
+    {
+      "path": "$.reference[0].radauStates[4][0]",
+      "current": 0.590332948320381,
+      "baseline": 0.5903329483203809,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[4][1]",
+      "current": 0.5920325981909109,
+      "baseline": 0.592032598190911,
+      "difference": -1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[4][2]",
+      "current": 0.3905971099148788,
+      "baseline": 0.39059710991487856,
+      "difference": 2.220446049250313e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[4][3]",
+      "current": 0.3917257401364202,
+      "baseline": 0.39172574013642025,
+      "difference": -5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[4][4]",
+      "current": 0.019069941764740538,
+      "baseline": 0.01906994176474053,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][5]",
+      "current": 0.016241661672668845,
+      "baseline": 0.016241661672668852,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][7]",
+      "current": 357.2259930812793,
+      "baseline": 357.22599308127934,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[4][8]",
+      "current": 357.1725520499044,
+      "baseline": 357.1725520499045,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[4][9]",
+      "current": 357.02127094782475,
+      "baseline": 357.0212709478248,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[4][14]",
+      "current": 0.01601722674435431,
+      "baseline": 0.016017226744354306,
+      "difference": 3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][15]",
+      "current": 0.010638574974350386,
+      "baseline": 0.01063857497435039,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][16]",
+      "current": 0.007200000000000003,
+      "baseline": 0.007200000000000009,
+      "difference": -6.071532165918825e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][17]",
+      "current": 0.0018000000000000006,
+      "baseline": 0.0017999999999999984,
+      "difference": 2.168404344971009e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[4][24]",
+      "current": 13726.317613397932,
+      "baseline": 13726.317613397943,
+      "difference": -1.0913936421275139e-11
+    },
+    {
+      "path": "$.reference[0].radauStates[5][0]",
+      "current": 0.5874092728459268,
+      "baseline": 0.5874092728459267,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[5][2]",
+      "current": 0.387679354746336,
+      "baseline": 0.3876793547463358,
+      "difference": 2.220446049250313e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[5][3]",
+      "current": 0.38910946240539873,
+      "baseline": 0.3891094624053988,
+      "difference": -5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[5][4]",
+      "current": 0.024911372407737487,
+      "baseline": 0.02491137240773748,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[5][5]",
+      "current": 0.021324593392299092,
+      "baseline": 0.021324593392299095,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[5][6]",
+      "current": 347.48465083218105,
+      "baseline": 347.4846508321811,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[5][7]",
+      "current": 347.4772607427713,
+      "baseline": 347.4772607427714,
+      "difference": -1.1368683772161603e-13
+    },
+    {
+      "path": "$.reference[0].radauStates[5][8]",
+      "current": 347.4329236566968,
+      "baseline": 347.43292365669686,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[5][9]",
+      "current": 347.3074140422338,
+      "baseline": 347.30741404223386,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[5][14]",
+      "current": 0.021112391475885804,
+      "baseline": 0.02111239147588581,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[5][15]",
+      "current": 0.014005591424132482,
+      "baseline": 0.014005591424132486,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[5][16]",
+      "current": 0.009599999999999997,
+      "baseline": 0.009600000000000008,
+      "difference": -1.0408340855860843e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[5][17]",
+      "current": 0.0023999999999999994,
+      "baseline": 0.002399999999999998,
+      "difference": 1.3010426069826053e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[5][24]",
+      "current": 16839.330229410836,
+      "baseline": 16839.330229410854,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].radauStates[6][0]",
+      "current": 0.5874092728459268,
+      "baseline": 0.5874092728459267,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[6][2]",
+      "current": 0.387679354746336,
+      "baseline": 0.3876793547463358,
+      "difference": 2.220446049250313e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[6][3]",
+      "current": 0.38910946240539873,
+      "baseline": 0.3891094624053988,
+      "difference": -5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[6][4]",
+      "current": 0.024911372407737494,
+      "baseline": 0.024911372407737487,
+      "difference": 6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[6][5]",
+      "current": 0.021324593392299095,
+      "baseline": 0.0213245933922991,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[6][6]",
+      "current": 347.48465083218105,
+      "baseline": 347.4846508321811,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[6][7]",
+      "current": 347.4772607427713,
+      "baseline": 347.4772607427714,
+      "difference": -1.1368683772161603e-13
+    },
+    {
+      "path": "$.reference[0].radauStates[6][8]",
+      "current": 347.4329236566968,
+      "baseline": 347.43292365669686,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[6][9]",
+      "current": 347.3074140422338,
+      "baseline": 347.30741404223386,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[6][14]",
+      "current": 0.021112391475885808,
+      "baseline": 0.021112391475885815,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[6][15]",
+      "current": 0.014005591424132486,
+      "baseline": 0.014005591424132489,
+      "difference": -3.469446951953614e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[6][16]",
+      "current": 0.0096,
+      "baseline": 0.00960000000000001,
+      "difference": -1.0408340855860843e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[6][17]",
+      "current": 0.0024,
+      "baseline": 0.0023999999999999985,
+      "difference": 1.3010426069826053e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[6][24]",
+      "current": 16839.33022941084,
+      "baseline": 16839.330229410858,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].radauStates[7][0]",
+      "current": 0.5846022754056792,
+      "baseline": 0.584602275405679,
+      "difference": 2.220446049250313e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[7][1]",
+      "current": 0.5871758836239467,
+      "baseline": 0.5871758836239466,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[7][2]",
+      "current": 0.3848475440318282,
+      "baseline": 0.38484754403182786,
+      "difference": 3.3306690738754696e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[7][3]",
+      "current": 0.3865516789269588,
+      "baseline": 0.38655167892695874,
+      "difference": 5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[7][4]",
+      "current": 0.03055018056249294,
+      "baseline": 0.03055018056249293,
+      "difference": 1.0408340855860843e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[7][5]",
+      "current": 0.026272437449094573,
+      "baseline": 0.02627243744909458,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[7][6]",
+      "current": 339.39540456094704,
+      "baseline": 339.3954045609471,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[7][14]",
+      "current": 0.02611092048518735,
+      "baseline": 0.026110920485187362,
+      "difference": -1.0408340855860843e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[7][15]",
+      "current": 0.017300388520606398,
+      "baseline": 0.017300388520606405,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[7][16]",
+      "current": 0.011999999999999992,
+      "baseline": 0.012000000000000007,
+      "difference": -1.5612511283791264e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[7][24]",
+      "current": 19422.025674399414,
+      "baseline": 19422.025674399432,
+      "difference": -1.8189894035458565e-11
+    },
+    {
+      "path": "$.reference[0].radauStates[8][0]",
+      "current": 0.5818967725851234,
+      "baseline": 0.5818967725851233,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[8][1]",
+      "current": 0.58485279021802,
+      "baseline": 0.5848527902180198,
+      "difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[8][2]",
+      "current": 0.38209131931422946,
+      "baseline": 0.3820913193142291,
+      "difference": 3.3306690738754696e-16
+    },
+    {
+      "path": "$.reference[0].radauStates[8][3]",
+      "current": 0.3840457953308994,
+      "baseline": 0.38404579533089933,
+      "difference": 5.551115123125783e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[8][4]",
+      "current": 0.03601190810064751,
+      "baseline": 0.0360119081006475,
+      "difference": 1.3877787807814457e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[8][5]",
+      "current": 0.0311014144510807,
+      "baseline": 0.03110141445108071,
+      "difference": -6.938893903907228e-18
+    },
+    {
+      "path": "$.reference[0].radauStates[8][7]",
+      "current": 332.6791149172144,
+      "baseline": 332.67911491721446,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[8][8]",
+      "current": 332.64859721867293,
+      "baseline": 332.648597218673,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[8][9]",
+      "current": 332.56220758603445,
+      "baseline": 332.5622075860345,
+      "difference": -5.684341886080802e-14
+    },
+    {
+      "path": "$.reference[0].radauStates[8][14]",
+      "current": 0.031025218598428616,
+      "baseline": 0.031025218598428633,
+      "difference": -1.734723475976807e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[8][16]",
+      "current": 0.01439999999999999,
+      "baseline": 0.014400000000000008,
+      "difference": -1.9081958235744878e-17
+    },
+    {
+      "path": "$.reference[0].radauStates[8][17]",
+      "current": 0.0035999999999999973,
+      "baseline": 0.003599999999999998,
+      "difference": -8.673617379884035e-19
+    }
+  ],
+  "experimentalQualification": false,
+  "interpretation": "Descriptive equality of the explicitly selected physics fields only. Distribution/archive/runtime provenance, native logs and wall time are outside this projection; original frozen gates are unchanged.",
+  "maximumAbsolutePath": "$.reference[1].radauStates[7][19]",
+  "maximumRelativePath": "$.reference[0].referenceBudgets[13].energy",
+  "physicalProjectionExactlyEqual": false
+}

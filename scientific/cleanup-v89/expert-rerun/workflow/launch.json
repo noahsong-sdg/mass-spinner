@@ -1,0 +1,42 @@
+{
+  "campaign": "workflow",
+  "freshName": "v89-workflow-20261113a",
+  "stage": "/private/tmp/mass-spinner-workflow-v88-20261112",
+  "startedUTC": "2026-11-13T02:21:47.898720+00:00",
+  "runnerSHA256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+  "inputSHA256": {
+    "Snakefile": "21d4ce9c302664f760e4a5499449957631df0548c3974bbc97223452bfaba151",
+    "producer.py": "4687f4dbacef7e978543e25793cda64456bcb4d29598ed206630401e31c21e23",
+    "assess.py": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd",
+    "report.py": "92f973d523c863b646f04ebddc2c3bd5bf5ac8050c662d42a4ee30846a949d1c",
+    "qualify.py": "3bc9092ae893ff51bbb1d02b49bc084b37734741f9dd4bc08a3075de024292e1",
+    "seals.py": "8090d75e2f4c83f8df1d7f158ccfaa8d2ddf5819eb87b591f6d83348e232af48",
+    "admit.py": "f468e045be4fd682f25598d76590ff9be470f4a46fa4b86dd91cb6d6d55c48e0",
+    "config.json": "0e7943a864197c8926bdc2b7eb732f5fc4a3d7d044c83a1165ffbbd6e71be45d",
+    "PROTOCOL.md": "eeca8ee75f6fb323ef2ecf20e174c744dfdc254ee7c70a071d4d8bf75158e425",
+    "requirements.txt": "fa09278d34ab6afd830774f90689f6a0c07c51123f6bdc50fefdeca8ae0eff08",
+    "requirements-lock.txt": "239576af5c9783937e75309f0bc437e5b6d1d0f779bee348535b6a82b91f4905",
+    "test_workflow.py": "7420db59961e13f9141f59e61cc201a0aa838e8ff8c67bbc809a367e4676310e",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results/595e2e2812a1dc964d85/field.json": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a"
+  },
+  "guestJobSHA256": "9e25eb6af2384ea5259b9c3d31e6851a5e45b70e0838053f8cd1b51b2d247a12",
+  "finishedUTC": "2026-11-13T02:22:10.478046+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-workflow-v88-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "logSHA256": "b66472dc5678589f93928e1fca53900c6b61e51c2f09941975423ddcefca6d68"
+}

@@ -1,0 +1,39 @@
+{
+  "campaign": "electrons",
+  "freshName": "v89-electrons-20261113a",
+  "stage": "/private/tmp/mass-spinner-electrons-v88-20261112",
+  "startedUTC": "2026-11-13T02:16:50.405491+00:00",
+  "runnerSHA256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+  "inputSHA256": {
+    "adapter.py": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+    "extension.py": "40583010e5721d66353a821f6eecb6ed14a471ee9f670eb9d9baf86c75ec6ec7",
+    "admission.py": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+    "test_adapter.py": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+    "test_admission.py": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0",
+    "PROTOCOL.md": "f45f54cb9eac038b5de0e264a2dfb44ac972acfadfff7bef968455440e4307d2",
+    "PROTOCOL-EXTENSION.md": "627a2f619eccfd97a310f06f071685a48a7029ecc5b9c57a18a9577c32ed0d79",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results/receipt.json": "bea9b99948fc73d70b8734a866ea4e9287a82e44479e91915706b294f9986687",
+    "results/transport-table.json": "44cf57929a67cd0c99cf5b63bf1b66394f6a8af08ac693682b2009270059c2fa",
+    "extension-results/receipt.json": "8b491783f85fcc11745773d25157e7e60a32a64875416c18971b09b677debedc"
+  },
+  "guestJobSHA256": "32c7a5fe2f82d31e0a3ad67630bd34290461f7bbd1957fd688c3f65be8af60f9",
+  "finishedUTC": "2026-11-13T02:17:29.277060+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-electrons-v88-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "logSHA256": "2e53b157ee93fb382a9ef2d7a35c0708213ac3e70b8e18e955e71c8c785eb876"
+}

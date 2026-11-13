@@ -1,0 +1,81 @@
+{
+  "checks": {
+    "cachedFinalCorruption": {
+      "exitCode": 1,
+      "unchangedMtimeCorruptionRejected": true
+    },
+    "scientificFailure": {
+      "reportRetained": true,
+      "qualificationExitCode": 1,
+      "assessment": {
+        "assessment": "gate_fail",
+        "experimentalQualification": false,
+        "fieldSHA256": "19650429084df9b79e29234261b69daaff3a9c1e7021f16d94a0af0daa3fa73e",
+        "gates": {
+          "analyticRMS": false,
+          "inventory": true,
+          "passiveBounds": true
+        },
+        "globalQualification": false,
+        "relativeInventoryDrift": 5.684341886080802e-16,
+        "relativePerturbationRMS": 0.029018750524894037,
+        "sourceSHA256": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd"
+      }
+    },
+    "executionError": {
+      "exitCode": 1,
+      "reportNotProduced": true
+    },
+    "physicalMutation": {
+      "caseCount": 2,
+      "oldCaseRetained": true,
+      "descendantsInvalidated": true
+    },
+    "checkerMutation": {
+      "physicalBytesAndMtimeUnchanged": true,
+      "assessmentCount": 2,
+      "reportCount": 2,
+      "fieldSHA256": "9ff4113c72974d6346a11b22bc113a6294f075d96bdc681ebf0724833530e89a"
+    },
+    "interruption": {
+      "processExitCode": 1,
+      "resumed": true,
+      "completedPhysicalBytesAndMtimeUnchanged": true
+    },
+    "geometryInvariant": {
+      "resealedInvalidArraysRejected": 8,
+      "arrays": [
+        "xM",
+        "initialK",
+        "finalK"
+      ],
+      "scientificAssessmentNotProduced": true
+    },
+    "corruption": {
+      "fieldRejected": true,
+      "auditRejected": true,
+      "reportRejected": true
+    }
+  },
+  "globalQualification": false,
+  "sourceSHA256": {
+    "Snakefile": "21d4ce9c302664f760e4a5499449957631df0548c3974bbc97223452bfaba151",
+    "producer.py": "4687f4dbacef7e978543e25793cda64456bcb4d29598ed206630401e31c21e23",
+    "assess.py": "5763282d041f8952bc9102a32a37571200b876c5c25fa731f51113b0e054e3bd",
+    "report.py": "92f973d523c863b646f04ebddc2c3bd5bf5ac8050c662d42a4ee30846a949d1c",
+    "qualify.py": "3bc9092ae893ff51bbb1d02b49bc084b37734741f9dd4bc08a3075de024292e1",
+    "seals.py": "8090d75e2f4c83f8df1d7f158ccfaa8d2ddf5819eb87b591f6d83348e232af48",
+    "admit.py": "f468e045be4fd682f25598d76590ff9be470f4a46fa4b86dd91cb6d6d55c48e0",
+    "config.json": "0e7943a864197c8926bdc2b7eb732f5fc4a3d7d044c83a1165ffbbd6e71be45d",
+    "PROTOCOL.md": "eeca8ee75f6fb323ef2ecf20e174c744dfdc254ee7c70a071d4d8bf75158e425",
+    "requirements.txt": "fa09278d34ab6afd830774f90689f6a0c07c51123f6bdc50fefdeca8ae0eff08",
+    "requirements-lock.txt": "239576af5c9783937e75309f0bc437e5b6d1d0f779bee348535b6a82b91f4905",
+    "test_workflow.py": "7420db59961e13f9141f59e61cc201a0aa838e8ff8c67bbc809a367e4676310e"
+  },
+  "versions": {
+    "snakemake": "9.27.1",
+    "FiPy": "4.0.3",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  }
+}

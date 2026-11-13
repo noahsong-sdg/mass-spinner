@@ -1,0 +1,19 @@
+Testing s = 1, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Testing s = 2, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Testing s = 3, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Testing s = 1, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Testing s = 2, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Testing s = 3, TeV = 1
+Testing expression 'relativeError.mean() < tolerance': OK
+Testing expression '(getMeanEnergy(eedf_norm,grid)-1.5*TeV) < tolerance*TeV': OK
+Executed 12 tests, 0 failed.

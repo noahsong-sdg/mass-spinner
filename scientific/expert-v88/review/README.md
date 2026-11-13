@@ -142,9 +142,15 @@ temperature difference .014252 K. The frozen energy-coordinate scale is
 despite contracting error. A scale is not itself the allowed error. Retaining
 that prospective norm avoids retrospectively declaring success. All saved
 internal budgets pass; that does not establish cross-solver agreement.
-Browser/reference SHA256 respectively:
+Browser/reference **result packet** SHA256 respectively:
 `63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4` and
 `8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418`.
+The final `reference.py` **producer source** SHA256 is
+`64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463`,
+matching the continuation receipt and reference result's source maps.
+The original aborted execution instead sealed the earlier producer source
+`f3b86762e6a49a117378eea4f32c76897346e45199c7a081c4e6da639176fca1`.
+The continuation completes its comparison with exit1; no failed gate is promoted.
 
 **Supplemental zero-current gate:** read-only review verified the
 [auditor](../target-radau/audit_zero_beam.py),
@@ -158,7 +164,7 @@ match byte for byte, SHA256
 Its helper hash
 `67c73a8ae279aae71549aada6eec3f3c1400af6ca78f380a3e1478ea827ee63e`
 matches the reviewed source, and its browser hash matches the unchanged
-original above. The original reference hash also remains unchanged.
+original above. The original reference result-packet hash also remains unchanged.
 `numericalControlPass` and `experimentalQualification` remain false. This
 closes the admission edge without promoting failed physics comparisons;
 the reviewer did not independently rerun these four supplemental tests.

@@ -1,0 +1,84 @@
+{
+  "completedCases": 13,
+  "orbitErrorContraction": {
+    "orbitPositionRelative": [
+      4.009272527152087,
+      4.004691353115504
+    ],
+    "orbitVelocityRelative": [
+      4.000213969918268,
+      4.000171559995979
+    ]
+  },
+  "failedGates": {
+    "orbit-coarse": {},
+    "orbit-medium": {},
+    "orbit-fine": {},
+    "orbit-grid": {},
+    "free-control": {},
+    "bobylev": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.003891189630753157,
+        "threshold": 0.001
+      }
+    },
+    "nanbu": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.002452464773398531,
+        "threshold": 0.001
+      }
+    },
+    "bobylev-sub4": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.0021715737045390187,
+        "threshold": 0.001
+      }
+    },
+    "nanbu-sub4": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.001736323795819812,
+        "threshold": 0.001
+      }
+    },
+    "bobylev-dt": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.002844095620194038,
+        "threshold": 0.001
+      }
+    },
+    "bobylev-grid": {},
+    "bobylev-seed": {
+      "canonicalAngularKGMS2RelativeChange": {
+        "passed": false,
+        "value": 0.0037241657211380453,
+        "threshold": 0.001
+      }
+    }
+  },
+  "failedStrictEnergyCases": [
+    "orbit-coarse",
+    "orbit-medium",
+    "orbit-fine",
+    "orbit-grid",
+    "bobylev",
+    "nanbu",
+    "bobylev-sub4",
+    "nanbu-sub4",
+    "bobylev-dt",
+    "bobylev-grid",
+    "bobylev-seed"
+  ],
+  "warmOffMetrics": {
+    "energyJRelativeChange": 7.731270650219597e-06,
+    "canonicalAngularKGMS2RelativeChange": 0.00018746152777064922,
+    "numberRelativeChange": 0.0,
+    "orbitPositionRelative": 0.074215920663489,
+    "orbitVelocityRelative": 0.5276587867487078
+  },
+  "warmOffFreeOrbitEligible": false
+}

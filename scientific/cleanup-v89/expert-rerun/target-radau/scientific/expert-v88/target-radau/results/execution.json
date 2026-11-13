@@ -1,0 +1,50 @@
+{
+  "startedUTC": "2026-11-13T02:23:05.961707+00:00",
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "network": "offline safe-dev",
+  "commands": [
+    {
+      "name": "controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/v89-target-radau-20261113a/scientific/expert-v88/target-radau",
+        "-p",
+        "test_reference.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "browser",
+      "command": [
+        "/work/home/v75-deps/node_modules/.bin/tsx",
+        "/work/project/v89-target-radau-20261113a/scientific/expert-v88/target-radau/export.ts"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "sourceSHA256": {
+    "scientific/expert-v88/target-radau/PROTOCOL.md": "3f54ea2bd10f889b0e9a5c150b666a86f1f2ed25d77bd6fd40c04ff4addbdec8",
+    "scientific/expert-v88/target-radau/audit_zero_beam.py": "67c73a8ae279aae71549aada6eec3f3c1400af6ca78f380a3e1478ea827ee63e",
+    "scientific/expert-v88/target-radau/cases.json": "d50d6d3df7d696c17feadbeeb7898f742fafac4b02af86030da6407e71829525",
+    "scientific/expert-v88/target-radau/continue.py": "6cfcb8ec073d17b05101e087eff08dcd03a84cb8f09fdce9a1357b836f801b2c",
+    "scientific/expert-v88/target-radau/diagnose.ts": "654e477735b399adfa85e51f5bebb73903f690bb683fd1fb357733f6bb12c73d",
+    "scientific/expert-v88/target-radau/export.ts": "808d0305e9bb232715b6024ae2e204db94301f18c4f7fce3aec51f96f1139ce4",
+    "scientific/expert-v88/target-radau/reference.py": "64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463",
+    "scientific/expert-v88/target-radau/run.py": "17b0297dc7b2c644b65a42e58eadeda1cda83bc638927dc5e11e8615063bd391",
+    "scientific/expert-v88/target-radau/test_audit_zero_beam.py": "2261f6c48b37dd084823d1cb7f3fefa6b9c15be7339d73acf1f716c184da491d",
+    "scientific/expert-v88/target-radau/test_reference.py": "4071ab5d5cf796169f483a046bcaa66c6e6f4ea92d6c041342500720682ce8b1"
+  },
+  "experimentalQualification": false,
+  "finishedUTC": "2026-11-13T02:23:07.099265+00:00",
+  "artifactSHA256": {
+    "browser.json": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+    "logs/browser.log": "ef377ffaf31b32af5542fdf57120fa02aa5381f6189e27a436455144f03a712d",
+    "logs/controls.log": "10daeeb8055835b524e34318b5571d7a39cbdf0a5b4c9f8d2dd1a990f643db69"
+  }
+}

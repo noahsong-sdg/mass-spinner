@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "1G",
+    "-C",
+    "/private/tmp/mass-spinner-electrons-v88-20261112",
+    "run",
+    "--",
+    "python3",
+    "-"
+  ],
+  "exitCode": 0,
+  "guestJobSHA256": "2ca82b58763ac7ec0f850beb396c40d4fb31d729071276ab1fa9afed9e010dbc",
+  "files": {
+    "audit_upstream_example.py": "05481fb2870dc63f4c2142b03b282b766689fce478717170fe06ff0a38febf8d",
+    "test_upstream_example.py": "a65597b37218f15b296c24fe8eef5114eb1e51342b917f40b71ac942b36e9dd5",
+    "tests.log": "47dfd9911d6ad8a3e1915e4789d1b9d43fbb2b8a96ebf2848406b7d72e14477b",
+    "audit.log": "39a8bfe42b5dc28a722f500a29284845dfcff699a4f6096812ccc6c789049650",
+    "result.json": "39a8bfe42b5dc28a722f500a29284845dfcff699a4f6096812ccc6c789049650",
+    "execution.json": "b0a4165236c6672e3d4772bfb9b3643ec86db1c4c6bbe4d1cecef19f4b54a57e"
+  },
+  "allTransferredHashesVerified": true
+}

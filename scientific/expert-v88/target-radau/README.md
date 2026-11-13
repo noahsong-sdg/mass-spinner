@@ -44,4 +44,11 @@ are retained as `results/attempt01-missing-native-source.tgz` and
 `results/attempt02-browser-source.tgz`. Report prose was written after execution.
 
 Browser packet SHA256: `63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4`.
-Reference SHA256: `8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418`.
+Reference **result packet** (`results/reference.json`) SHA256:
+`8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418`.
+The final `reference.py` **producer source** SHA256 is
+`64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463`,
+matching both the continuation receipt and reference result's source map.
+The original aborted execution receipt records the earlier producer source
+`f3b86762e6a49a117378eea4f32c76897346e45199c7a081c4e6da639176fca1`;
+the completed continuation's controls pass and its scientific comparison retains exit1.

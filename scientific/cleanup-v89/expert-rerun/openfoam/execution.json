@@ -1,0 +1,116 @@
+{
+  "startedUTC": "2026-11-13T02:15:00.910683+00:00",
+  "campaign": "openfoam",
+  "python": "3.11.2",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "uid": 1000,
+  "commands": [
+    {
+      "name": "replay-comparison-controls",
+      "command": [
+        "python3",
+        "test_compare.py"
+      ],
+      "cwd": "/work/project/v89-openfoam-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.04221662499999995,
+      "logSHA256": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c"
+    },
+    {
+      "name": "tests",
+      "command": [
+        "/work/project/.venv/bin/python",
+        "-m",
+        "unittest",
+        "-v",
+        "test_reference88"
+      ],
+      "cwd": "/work/project/v89-openfoam-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 0.253559917,
+      "logSHA256": "634dc80e668332422629d95de08027c91c39c96d8c4f1d7ca34490b17490d33a"
+    },
+    {
+      "name": "producer",
+      "command": [
+        "/work/project/.venv/bin/python",
+        "reference88.py"
+      ],
+      "cwd": "/work/project/v89-openfoam-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0
+      ],
+      "wallSeconds": 42.670303145,
+      "logSHA256": "d3ba6ac75aeae2902059b305b7c55702e14b6b550d62aec2052ea601bb4cdbb5"
+    },
+    {
+      "name": "audit",
+      "command": [
+        "/work/project/.venv/bin/python",
+        "audit88.py"
+      ],
+      "cwd": "/work/project/v89-openfoam-20261113a",
+      "exitCode": 0,
+      "allowedStatuses": [
+        0,
+        1
+      ],
+      "wallSeconds": 0.22938237500000014,
+      "logSHA256": "264d7fcac228c9dde6cb4e1b46f79e547327b86706eaff611152d762c709502e"
+    }
+  ],
+  "sourceSHA256": {
+    "reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "test_reference88.py": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+    "PROTOCOL.md": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff"
+  },
+  "baselineSHA256": {
+    "results/predictions.json": "be1cd2f172f51c0dd1db5458787ef1d4f7f8cc1819f19e058d50fc7967288871",
+    "results/audit.json": "84215f68e6f72a2d3bd08484658d200838bef37b2604d07209f6658a859fa340"
+  },
+  "experimentalQualification": false,
+  "finishedUTC": "2026-11-13T02:15:44.539257+00:00",
+  "executionCompleted": true,
+  "outputSHA256": {
+    "PROTOCOL.md": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "compare.py": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+    "coverage.json": "a6355be1cf6f551394213c9b27399ef50577356396be2257a8a7ac5b9a0dc766",
+    "frozen-preflight.json": "ddb4bd2d244808a9c6755e7661a0a6cd5fd392ead99f6e52d32c5151fd0ec256",
+    "guest.py": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+    "logs/audit.log": "264d7fcac228c9dde6cb4e1b46f79e547327b86706eaff611152d762c709502e",
+    "logs/producer.log": "d3ba6ac75aeae2902059b305b7c55702e14b6b550d62aec2052ea601bb4cdbb5",
+    "logs/replay-comparison-controls.log": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c",
+    "logs/tests.log": "634dc80e668332422629d95de08027c91c39c96d8c4f1d7ca34490b17490d33a",
+    "reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "replay-comparison.json": "c34bc7be80db08d9ec0985aadbdb4d97ae52a0123da8f9ce69dfda429b502087",
+    "results/audit.json": "984397ef57babeb3759c4f4a9e70b634bde7a48424866b59c5690cac722d9c4c",
+    "results/heat-n16-s128-a0.25-x1.0.zip": "af25e2ae0a802edadd79cfb898835453200a606e2cd6daac044aa24731d73ef8",
+    "results/heat-n16-s128-a0.5-x1.0.zip": "a64f56bbf892d16698abc5dbd883693362faf3c633589a019d850e462eeb9328",
+    "results/heat-n32-s128-a0.5-x1.0.zip": "cbb672403fcf3f6785501b1a8455dce0175c1a34fd0e23ad3e6c16b25c3b9513",
+    "results/heat-n32-s256-a0.5-x1.0.zip": "85d7700308df5d3d1eefd6d6c18f0bf8faea76f0d02a69dff80bc2e898074fb3",
+    "results/heat-n32-s64-a0.5-x1.0.zip": "c09ceee13d49916fc6b369b54ff288636d2133c2ff2a2a1d84d493b30b5ba8ad",
+    "results/heat-n8-s128-a0.5-x1.0.zip": "3ce868f54dde425a6fd2c55d8eab3e3d61b14bf62057d39be0e806ff0892f542",
+    "results/predictions.json": "9948306509b28729d65b5f7a1349ab07921c3e0c7c345617b87af73a4efad308",
+    "results/swirl-n16-s128-a0.25-x1.0.zip": "3852bbb8a1d831207408613fed16f0d2994865f88c829689556ea03950194011",
+    "results/swirl-n16-s128-a0.5-x1.0.zip": "26494e945208600ce5be944faff0bc7f00307b3b2db22b9b75929109cc6472b2",
+    "results/swirl-n32-s128-a0.5-x0.5.zip": "92d080828ce4823ef9a694c64f383d5e18a848195a02cdb03ee303afda771de5",
+    "results/swirl-n32-s128-a0.5-x1.0.zip": "d6c7f372025fe1b1c8c112f3a29ab5b706a54886e445dbaa660588e970bd26ee",
+    "results/swirl-n32-s256-a0.5-x1.0.zip": "204e841517cea8130e7ab91d50bb279a0a2a99c258d4ff84196cc1cfdfa7d950",
+    "results/swirl-n32-s64-a0.5-x1.0.zip": "25c0c799629930637b0b76c3d481d69908d7db72ad3ebfb71e8d9af6a78305e1",
+    "results/swirl-n8-s128-a0.5-x1.0.zip": "88eb7f1d334e7a723ce6a0ce249190ee70e0d0549db08bb1eae9827d73eac2c5",
+    "test_compare.py": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+    "test_reference88.py": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406"
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "transferredUTC": "2026-11-13T02:16:11.934854+00:00",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "1G",
+    "-C",
+    "/private/tmp/mass-spinner-openfoam-v87-20261112",
+    "run",
+    "--",
+    "python3",
+    "-c",
+    "from pathlib import Path; import shutil,sys; p=Path('/work/home/v89-openfoam-20261113a.tar.gz'); assert p.stat().st_size==315457835; f=p.open('rb'); shutil.copyfileobj(f,sys.stdout.buffer,1048576)"
+  ],
+  "transferExitCode": 0,
+  "bundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+  "bundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+  "bundleBytes": 315457835,
+  "unpackedBytes": 319961951,
+  "fileCount": 30,
+  "verifiedExtractionDirectory": "/private/tmp/mass-spinner-v89-openfoam-20261113a-evidence/verified",
+  "verifiedArtifactHashes": true,
+  "localOnlyArtifacts": {
+    "results/heat-n16-s128-a0.25-x1.0.zip": {
+      "sha256": "af25e2ae0a802edadd79cfb898835453200a606e2cd6daac044aa24731d73ef8",
+      "bytes": 4674678
+    },
+    "results/heat-n16-s128-a0.5-x1.0.zip": {
+      "sha256": "a64f56bbf892d16698abc5dbd883693362faf3c633589a019d850e462eeb9328",
+      "bytes": 4732577
+    },
+    "results/heat-n32-s128-a0.5-x1.0.zip": {
+      "sha256": "cbb672403fcf3f6785501b1a8455dce0175c1a34fd0e23ad3e6c16b25c3b9513",
+      "bytes": 15587211
+    },
+    "results/heat-n32-s256-a0.5-x1.0.zip": {
+      "sha256": "85d7700308df5d3d1eefd6d6c18f0bf8faea76f0d02a69dff80bc2e898074fb3",
+      "bytes": 31052659
+    },
+    "results/heat-n32-s64-a0.5-x1.0.zip": {
+      "sha256": "c09ceee13d49916fc6b369b54ff288636d2133c2ff2a2a1d84d493b30b5ba8ad",
+      "bytes": 7867951
+    },
+    "results/heat-n8-s128-a0.5-x1.0.zip": {
+      "sha256": "3ce868f54dde425a6fd2c55d8eab3e3d61b14bf62057d39be0e806ff0892f542",
+      "bytes": 1848867
+    },
+    "results/swirl-n16-s128-a0.25-x1.0.zip": {
+      "sha256": "3852bbb8a1d831207408613fed16f0d2994865f88c829689556ea03950194011",
+      "bytes": 13092677
+    },
+    "results/swirl-n16-s128-a0.5-x1.0.zip": {
+      "sha256": "26494e945208600ce5be944faff0bc7f00307b3b2db22b9b75929109cc6472b2",
+      "bytes": 13121621
+    },
+    "results/swirl-n32-s128-a0.5-x0.5.zip": {
+      "sha256": "92d080828ce4823ef9a694c64f383d5e18a848195a02cdb03ee303afda771de5",
+      "bytes": 49115934
+    },
+    "results/swirl-n32-s128-a0.5-x1.0.zip": {
+      "sha256": "d6c7f372025fe1b1c8c112f3a29ab5b706a54886e445dbaa660588e970bd26ee",
+      "bytes": 49065202
+    },
+    "results/swirl-n32-s256-a0.5-x1.0.zip": {
+      "sha256": "204e841517cea8130e7ab91d50bb279a0a2a99c258d4ff84196cc1cfdfa7d950",
+      "bytes": 97768712
+    },
+    "results/swirl-n32-s64-a0.5-x1.0.zip": {
+      "sha256": "25c0c799629930637b0b76c3d481d69908d7db72ad3ebfb71e8d9af6a78305e1",
+      "bytes": 24702595
+    },
+    "results/swirl-n8-s128-a0.5-x1.0.zip": {
+      "sha256": "88eb7f1d334e7a723ce6a0ce249190ee70e0d0549db08bb1eae9827d73eac2c5",
+      "bytes": 3924265
+    }
+  },
+  "experimentalQualification": false,
+  "expandedExportRemovedAfterSecondArchiveVerification": true,
+  "omittedByteIdenticalSources": {
+    "reference88.py": {
+      "role": "frozen V88 producer/input",
+      "repository": "noahsong-sdg/mass-spinner",
+      "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+      "canonicalPath": "scientific/expert-v88/openfoam/reference88.py",
+      "gitBlobOID": "e8cddeaa1cc69bf78a42428ba394d816cfe56970",
+      "sha256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "reference88.py"
+    },
+    "audit88.py": {
+      "role": "frozen V88 producer/input",
+      "repository": "noahsong-sdg/mass-spinner",
+      "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+      "canonicalPath": "scientific/expert-v88/openfoam/audit88.py",
+      "gitBlobOID": "35e3cb23ee8a87ab22cc0f4abd343d2d5e92a565",
+      "sha256": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "audit88.py"
+    },
+    "test_reference88.py": {
+      "role": "frozen V88 producer/input",
+      "repository": "noahsong-sdg/mass-spinner",
+      "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+      "canonicalPath": "scientific/expert-v88/openfoam/test_reference88.py",
+      "gitBlobOID": "2237d4f46eb11c753b4388422ed3fd95e2b4c7a8",
+      "sha256": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "test_reference88.py"
+    },
+    "PROTOCOL.md": {
+      "role": "frozen V88 producer/input",
+      "repository": "noahsong-sdg/mass-spinner",
+      "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+      "canonicalPath": "scientific/expert-v88/openfoam/PROTOCOL.md",
+      "gitBlobOID": "8b6869d7ece9ae5eec8ce9c43e4238ca921aedf7",
+      "sha256": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "PROTOCOL.md"
+    },
+    "compare.py": {
+      "role": "new V89 orchestration",
+      "canonicalPath": "scientific/cleanup-v89/expert-rerun/compare.py",
+      "sha256": "032fb38b1cc7f00e6d9f47b851e0b9a64f40ad3f0441a0eb6022076285184e8c",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "compare.py"
+    },
+    "test_compare.py": {
+      "role": "new V89 orchestration",
+      "canonicalPath": "scientific/cleanup-v89/expert-rerun/test_compare.py",
+      "sha256": "28117d6e6d2bdf621054eeec88eb034672a9a594ab3c174042e4feb51d867acc",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "test_compare.py"
+    },
+    "guest.py": {
+      "role": "new V89 orchestration",
+      "canonicalPath": "scientific/cleanup-v89/expert-rerun/guest.py",
+      "sha256": "1c9be8c36f666275385fe566f61593672559cc1ee2b30d65067f611babc15aff",
+      "verifiedCurrentAlias": true,
+      "recoveryBundlePath": "/Users/noahs/.codex/archives/mass-spinner-v89-expert-20261113/v89-openfoam-20261113a.tar.gz",
+      "recoveryBundleSHA256": "101eecc975385ba72c3b2aa0c9a20d7ee00854555292b82060e092609b3f6d83",
+      "pathInBundle": "guest.py"
+    }
+  }
+}

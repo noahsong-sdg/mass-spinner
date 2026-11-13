@@ -1,0 +1,21 @@
+{
+  "requestedBrowserCases": 9,
+  "completedBrowserCases": 8,
+  "fullReferenceCases": 3,
+  "numericalControlPass": false,
+  "cases": {
+    "beam-off-two": false,
+    "continuous-two": false,
+    "pulsed-four": true
+  },
+  "zeroBeam": {
+    "zeroCurrentTrajectories": 3,
+    "zeroCurrentSamples": 45,
+    "zeroBeamRateAdmissionPass": true,
+    "numericalControlPass": false,
+    "experimentalQualification": false,
+    "scope": "Exact-zero rate admission only; original failed numerical gates remain unchanged.",
+    "browserSHA256": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+    "helperSHA256": "67c73a8ae279aae71549aada6eec3f3c1400af6ca78f380a3e1478ea827ee63e"
+  }
+}

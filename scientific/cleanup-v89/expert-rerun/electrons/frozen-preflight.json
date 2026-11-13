@@ -1,0 +1,86 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "adapter.py",
+      "expectedSHA256": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+      "actualSHA256": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+      "proof": "scientific/expert-v88/electrons/extension-results/receipt.json#protocolHashes.adapter.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "extension.py",
+      "expectedSHA256": "40583010e5721d66353a821f6eecb6ed14a471ee9f670eb9d9baf86c75ec6ec7",
+      "actualSHA256": "40583010e5721d66353a821f6eecb6ed14a471ee9f670eb9d9baf86c75ec6ec7",
+      "proof": "scientific/expert-v88/electrons/extension-results/receipt.json#protocolHashes.extension.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "admission.py",
+      "expectedSHA256": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+      "actualSHA256": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/admission.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_adapter.py",
+      "expectedSHA256": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+      "actualSHA256": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/test_adapter.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_admission.py",
+      "expectedSHA256": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0",
+      "actualSHA256": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/test_admission.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "PROTOCOL.md",
+      "expectedSHA256": "f45f54cb9eac038b5de0e264a2dfb44ac972acfadfff7bef968455440e4307d2",
+      "actualSHA256": "f45f54cb9eac038b5de0e264a2dfb44ac972acfadfff7bef968455440e4307d2",
+      "proof": "scientific/expert-v88/electrons/results/receipt.json#producerHashes.PROTOCOL.md",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "PROTOCOL-EXTENSION.md",
+      "expectedSHA256": "627a2f619eccfd97a310f06f071685a48a7029ecc5b9c57a18a9577c32ed0d79",
+      "actualSHA256": "627a2f619eccfd97a310f06f071685a48a7029ecc5b9c57a18a9577c32ed0d79",
+      "proof": "scientific/expert-v88/electrons/extension-results/receipt.json#protocolHashes.PROTOCOL-EXTENSION.md",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/receipt.json",
+      "expectedSHA256": "bea9b99948fc73d70b8734a866ea4e9287a82e44479e91915706b294f9986687",
+      "actualSHA256": "bea9b99948fc73d70b8734a866ea4e9287a82e44479e91915706b294f9986687",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/results/receipt.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/transport-table.json",
+      "expectedSHA256": "44cf57929a67cd0c99cf5b63bf1b66394f6a8af08ac693682b2009270059c2fa",
+      "actualSHA256": "44cf57929a67cd0c99cf5b63bf1b66394f6a8af08ac693682b2009270059c2fa",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/results/transport-table.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "extension-results/receipt.json",
+      "expectedSHA256": "8b491783f85fcc11745773d25157e7e60a32a64875416c18971b09b677debedc",
+      "actualSHA256": "8b491783f85fcc11745773d25157e7e60a32a64875416c18971b09b677debedc",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/electrons/extension-results/receipt.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}

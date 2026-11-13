@@ -1,0 +1,54 @@
+{
+  "checkedBeforeNativeExecution": true,
+  "checks": [
+    {
+      "family": "source",
+      "path": "reference88.py",
+      "expectedSHA256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+      "actualSHA256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+      "proof": "scientific/expert-v88/openfoam/results/predictions.json#sourceSHA256.reference88.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "audit88.py",
+      "expectedSHA256": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+      "actualSHA256": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+      "proof": "scientific/expert-v88/openfoam/results/predictions.json#sourceSHA256.audit88.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "test_reference88.py",
+      "expectedSHA256": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+      "actualSHA256": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406",
+      "proof": "scientific/expert-v88/openfoam/results/predictions.json#sourceSHA256.test_reference88.py",
+      "passed": true
+    },
+    {
+      "family": "source",
+      "path": "PROTOCOL.md",
+      "expectedSHA256": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+      "actualSHA256": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+      "proof": "scientific/expert-v88/openfoam/results/predictions.json#sourceSHA256.PROTOCOL.md",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/predictions.json",
+      "expectedSHA256": "be1cd2f172f51c0dd1db5458787ef1d4f7f8cc1819f19e058d50fc7967288871",
+      "actualSHA256": "be1cd2f172f51c0dd1db5458787ef1d4f7f8cc1819f19e058d50fc7967288871",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/openfoam/results/predictions.json",
+      "passed": true
+    },
+    {
+      "family": "baseline",
+      "path": "results/audit.json",
+      "expectedSHA256": "84215f68e6f72a2d3bd08484658d200838bef37b2604d07209f6658a859fa340",
+      "actualSHA256": "84215f68e6f72a2d3bd08484658d200838bef37b2604d07209f6658a859fa340",
+      "proof": "git:ce57170038bfff66a6521883a70042aa1294e8d3:scientific/expert-v88/openfoam/results/audit.json",
+      "passed": true
+    }
+  ],
+  "allPassed": true
+}
