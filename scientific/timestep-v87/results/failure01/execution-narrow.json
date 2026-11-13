@@ -1,0 +1,54 @@
+{
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "zlib": "1.2.13",
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-fem": "12.0.2",
+    "matplotlib": "3.10.8"
+  },
+  "sourceSHA256": {
+    "scientific/timestep-v87/launch87.py": "35bf731a70c0550aaf90318e37a2fdf10ce38ac7cd3ea0a2a003def92e50667b",
+    "scientific/timestep-v87/study87.py": "be37cc8f7187a64d3b474face9415ee013063b338944a67c6adf442c4a38c9e0",
+    "scientific/timestep-v87/summarize87.py": "5436494c6252f4265e0f3f8e7e63420930092492efc6a0ac7eaaebdba40b8a7e",
+    "scientific/timestep-v87/test_reporting87.py": "5a67281d4dda4257ab3e5df4f8ec8dd37276ff63339e9ee7ad4c3b7a21adb897",
+    "scientific/timestep-v87/test_study87.py": "d46c867eb3f96b568a5c1b3d22fa7f04427f4addfe52f9c994ec951fc1e2f647",
+    "scientific/timestep-v87-independent/audit87.py": "1cdf47e4c724c1ac234b739479bbade1dcbfb156f73bd14d068628d8fdf062cf",
+    "scientific/timestep-v87-independent/test_audit87.py": "dd684f868e614cc674bdecc3c070f6079a56f21260ae0c1fc256ba6f3ae74cec",
+    "scientific/tooling-v87/check_report87.py": "27821b58cb56c4b742ff9e0cdba5d96514cef38af55a4ebe673f1cabf7bc3b9d",
+    "scientific/tooling-v87/test_check_report87.py": "41d892209f9b4f03455187149ea467bd4ca4db98c13709531be9ff1c3cff3624"
+  },
+  "commands": [
+    {
+      "name": "study-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/timestep-v87",
+        "-p",
+        "test_*87.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "independent-controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/timestep-v87-independent",
+        "-p",
+        "test_audit87.py",
+        "-v"
+      ],
+      "exitCode": 1
+    }
+  ]
+}

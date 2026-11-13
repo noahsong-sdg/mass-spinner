@@ -1,0 +1,16 @@
+test_cap_limited_schedule_is_not_active_cfl_refinement (test_audit87.ActiveCFLAuditControls.test_cap_limited_schedule_is_not_active_cfl_refinement) ... ok
+test_exact_zero_and_nonzero_reference_contraction_rules_preserved (test_audit87.ActiveCFLAuditControls.test_exact_zero_and_nonzero_reference_contraction_rules_preserved) ... ok
+test_fake_cfl_label_or_candidate_rejected_independently (test_audit87.ActiveCFLAuditControls.test_fake_cfl_label_or_candidate_rejected_independently) ... ok
+test_genuine_acoustic_schedule_and_reporting_state_checks (test_audit87.ActiveCFLAuditControls.test_genuine_acoustic_schedule_and_reporting_state_checks) ... ok
+test_inactive_step_counts_or_nonshrinking_maximum_fail (test_audit87.ActiveCFLAuditControls.test_inactive_step_counts_or_nonshrinking_maximum_fail) ... ok
+test_missing_or_corrupt_accepted_schedule_rejected (test_audit87.ActiveCFLAuditControls.test_missing_or_corrupt_accepted_schedule_rejected) ... ok
+test_prediction_seal_rejected_before_other_admission (test_audit87.ActiveCFLAuditControls.test_prediction_seal_rejected_before_other_admission) ... ok
+test_roundoff_residual_step_does_not_duplicate_reporting_state (test_audit87.ActiveCFLAuditControls.test_roundoff_residual_step_does_not_duplicate_reporting_state) ... ok
+test_three_case_inventory_and_unchanged_slice (test_audit87.ActiveCFLAuditControls.test_three_case_inventory_and_unchanged_slice) ... ok
+test_true_temporal_success_cannot_promote_spatial_or_experimental_status (test_audit87.ActiveCFLAuditControls.test_true_temporal_success_cannot_promote_spatial_or_experimental_status) ... ok
+test_uniform_cylindrical_bound_has_independent_analytic_value (test_audit87.ActiveCFLAuditControls.test_uniform_cylindrical_bound_has_independent_analytic_value) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.003s
+
+OK

@@ -44,6 +44,15 @@ class ActiveCFLAuditControls(unittest.TestCase):
         state,case=fixture(cap=1e-8); result=a.check_schedule(case,state)
         self.assertFalse(result['passed'])
         self.assertEqual(result['acousticLimitedNonterminalFraction'],0.)
+        self.assertEqual(len(result['independentSnapshotCFLChecks']),3)
+
+    def test_roundoff_residual_step_does_not_duplicate_reporting_state(self):
+        state,case=fixture(cap=1e-6-5e-20)
+        self.assertTrue(any(0<abs(s['timeBeforeS']-1e-6)<1e-16 for s in case['schedule']))
+        result=a.check_schedule(case,state)
+        self.assertEqual([s['timeS'] for s in result['independentSnapshotCFLChecks']],list(a.old.TIMES[:-1]))
+        self.assertFalse(result['passed'])
+        self.assertEqual(result['acousticLimitedNonterminalFraction'],0.)
 
     def test_fake_cfl_label_or_candidate_rejected_independently(self):
         for corruption in ('cfl','bound'):

@@ -1,0 +1,15 @@
+test_admits_failed_science_without_modifying_inputs_or_qualifying (test_check_report87.ReportAdmissionTests.test_admits_failed_science_without_modifying_inputs_or_qualifying) ... ok
+test_changed_audit_with_same_prediction_rejected_by_panel (test_check_report87.ReportAdmissionTests.test_changed_audit_with_same_prediction_rejected_by_panel) ... ok
+test_changed_optical_index_with_same_prediction_rejected (test_check_report87.ReportAdmissionTests.test_changed_optical_index_with_same_prediction_rejected) ... ok
+test_legacy_summary_without_comparison_seal_rejected (test_check_report87.ReportAdmissionTests.test_legacy_summary_without_comparison_seal_rejected) ... ok
+test_missing_input_rejected (test_check_report87.ReportAdmissionTests.test_missing_input_rejected) ... ok
+test_resealed_fitted_comparison_still_cannot_change_scope (test_check_report87.ReportAdmissionTests.test_resealed_fitted_comparison_still_cannot_change_scope) ... ok
+test_semantically_identical_but_changed_target_bytes_rejected (test_check_report87.ReportAdmissionTests.test_semantically_identical_but_changed_target_bytes_rejected) ... ok
+test_stale_comparison_packet_rejected (test_check_report87.ReportAdmissionTests.test_stale_comparison_packet_rejected) ... ok
+test_stale_prediction_bindings_rejected (test_check_report87.ReportAdmissionTests.test_stale_prediction_bindings_rejected) ... ok
+test_summary_metadata_must_match_bound_comparison (test_check_report87.ReportAdmissionTests.test_summary_metadata_must_match_bound_comparison) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.003s
+
+OK

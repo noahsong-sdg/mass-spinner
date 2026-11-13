@@ -1,0 +1,158 @@
+{
+  "predictionSHA256": "4a3a4fcd7801480c9590828b7949d4fd7cf47289bf4dca183e46f8fd1a57b2e1",
+  "auditSHA256": "2d2c886ec58aa3e3a9d58c2764148c81c70d09ca16986ee06cb9779fda8279b6",
+  "reportSourceSHA256": {
+    "scientific/timestep-v87/summarize87.py": "5436494c6252f4265e0f3f8e7e63420930092492efc6a0ac7eaaebdba40b8a7e",
+    "scientific/tooling-v87/check_report87.py": "27821b58cb56c4b742ff9e0cdba5d96514cef38af55a4ebe673f1cabf7bc3b9d"
+  },
+  "baselineReportAdmission": {
+    "evidenceAdmitted": true,
+    "globalQualification": false,
+    "experimentalQualification": false,
+    "predictionSHA256": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+    "artifactSHA256": {
+      "predictions.json": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+      "optical-index.json": "b8508d27ad99ae26cca91785325ea98dcad767c92dd48ba825a9b775f33b2303",
+      "comparison-summary.json": "ff3ec42efea1c24812c200586f2768759c6734c4bd60ebf1e6687c9f7559fc15",
+      "comparison.json.gz": "ca9d4e1e067e4387869e1752ad074877165d66657fae8f6889580d2b5c31ef98",
+      "audit.json": "000ff297e48a62536ac118111963266b02e0269f4a103a9d5c9096bf5467d19b",
+      "panel-audit.json": "50576928ba13a9590286a5c4562c723c88aee10bfbf675f955179106af4be6e6",
+      "target": "1e4f542dab2cdd777673f724ec3038e0223589797fa290765c0e1c8f047b4741"
+    },
+    "inputPaths": {
+      "predictions.json": "/work/project/scientific/meridional-v86/results/predictions.json",
+      "optical-index.json": "/work/project/scientific/meridional-v86/results/optical-index.json",
+      "comparison-summary.json": "/work/project/scientific/meridional-v86/results/comparison-summary.json",
+      "comparison.json.gz": "/work/project/scientific/meridional-v86/results/comparison.json.gz",
+      "audit.json": "/work/project/scientific/meridional-v86/results/audit.json",
+      "panel-audit.json": "/work/project/scientific/meridional-v86/results/panel-audit.json",
+      "target": "/work/project/scientific/profile-v79/results/score.json"
+    },
+    "scope": "Report input identities only; no numerical or experimental qualification"
+  },
+  "baselineBitwiseReplay": true,
+  "temporalSliceNumericalPass": true,
+  "temporalGateCount": 28,
+  "temporalFailureCount": 0,
+  "quadratureCheckCount": 112,
+  "quadratureFailureCount": 0,
+  "largestFineChange": {
+    "timeS": 1e-06,
+    "field": "densityKgM3/increment",
+    "coarseChange": 0.014244478486169231,
+    "fineChange": 0.0063953870214860705,
+    "limit": 0.02,
+    "contraction": true,
+    "passed": true
+  },
+  "unresolvedFiniteTimeComparisons": 0,
+  "activity": [
+    {
+      "cfl": 0.2,
+      "stepCount": 654,
+      "maximumAcceptedDtS": 4.7666980843541067e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 651,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 0.0
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 0.0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "cfl": 0.1,
+      "stepCount": 1310,
+      "maximumAcceptedDtS": 2.3833490421770533e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 1307,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 2.2613571765362454e-16
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 0.0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "cfl": 0.05,
+      "stepCount": 2621,
+      "maximumAcceptedDtS": 1.1916745210885267e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 2618,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 0.0
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 1.4768700642238293e-16
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "activityRefinements": [
+    {
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "stepCountRatio": 2.003058103975535,
+      "maximumDtRatio": 0.5,
+      "passed": true
+    },
+    {
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "stepCountRatio": 2.000763358778626,
+      "maximumDtRatio": 0.5,
+      "passed": true
+    }
+  ],
+  "ledger": [
+    {
+      "mass": 1.6452187025200452e-16,
+      "species": 1.6452187025200452e-16,
+      "energy": 1.9969318808355153e-14,
+      "charge": 5.058006374847324e-12
+    },
+    {
+      "mass": 1.6452187025200452e-16,
+      "species": 1.6452187025200452e-16,
+      "energy": 4.99110908357972e-14,
+      "charge": 4.526775707752728e-12
+    },
+    {
+      "mass": 3.2904374050400904e-16,
+      "species": 3.2904374050400904e-16,
+      "energy": 6.253228621956201e-14,
+      "charge": 3.545251930567317e-12
+    }
+  ],
+  "retainedV86FieldFailures": 85,
+  "retainedV86SpatialFailures": 64,
+  "fullModelNumericallyQualified": false,
+  "experimentalQualification": false,
+  "scope": "One fixed-grid temporal slice only. No optical re-scoring, physical-closure correction or experimental validation."
+}

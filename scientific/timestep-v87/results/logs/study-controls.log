@@ -1,0 +1,14 @@
+test_all_unresolved_comparisons_have_no_invented_maximum (test_reporting87.ReportingControls.test_all_unresolved_comparisons_have_no_invented_maximum) ... ok
+test_fresh_source_copy_can_start (test_reporting87.ReportingControls.test_fresh_source_copy_can_start) ... ok
+test_stale_or_partial_outputs_refused_without_touching_them (test_reporting87.ReportingControls.test_stale_or_partial_outputs_refused_without_touching_them) ... ok
+test_stale_panel_after_initial_admission_is_rejected (test_reporting87.ReportingControls.test_stale_panel_after_initial_admission_is_rejected) ... ok
+test_unresolved_relative_fields_remain_in_report_rows (test_reporting87.ReportingControls.test_unresolved_relative_fields_remain_in_report_rows) ... ok
+test_checker_change_does_not_invalidate_physics (test_study87.Controls.test_checker_change_does_not_invalidate_physics) ... ok
+test_inactive_caps_do_not_refine_but_cfl_does (test_study87.Controls.test_inactive_caps_do_not_refine_but_cfl_does) ... ok
+test_report_boundary_and_invalid_candidates (test_study87.Controls.test_report_boundary_and_invalid_candidates) ... ok
+test_stale_prediction_rejected (test_study87.Controls.test_stale_prediction_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.002s
+
+OK

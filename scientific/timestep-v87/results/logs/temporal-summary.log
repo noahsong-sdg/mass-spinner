@@ -1,0 +1,15 @@
+{
+  "temporalSliceNumericalPass": true,
+  "temporalFailureCount": 0,
+  "quadratureFailureCount": 0,
+  "largestFineChange": {
+    "timeS": 1e-06,
+    "field": "densityKgM3/increment",
+    "coarseChange": 0.014244478486169231,
+    "fineChange": 0.0063953870214860705,
+    "limit": 0.02,
+    "contraction": true,
+    "passed": true
+  },
+  "retainedV86SpatialFailures": 64
+}

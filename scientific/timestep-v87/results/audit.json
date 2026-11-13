@@ -1,0 +1,2410 @@
+{
+  "predictionSHA256": "4a3a4fcd7801480c9590828b7949d4fd7cf47289bf4dca183e46f8fd1a57b2e1",
+  "baselinePredictionSHA256": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+  "baselineRawFieldSHA256": "2f4b7ef9994029fe6469b853caaa47d5c353b26a06d42bf63884bb4f25a13418",
+  "baselineBitwiseReplay": true,
+  "sourceSHA256": {
+    "scientific/timestep-v87/study87.py": "be37cc8f7187a64d3b474face9415ee013063b338944a67c6adf442c4a38c9e0",
+    "scientific/timestep-v87/PROTOCOL.md": "0ccbe0e74224e55bbefa5c6f54fded337266039595ea9f555cd5d597154ad5d2",
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072",
+    "scientific/flow-v81/transport.py": "98970f9aedb65de9d4738b35ba39ea0dcdd678324cc92441e96cda624ce18405",
+    "scientific/flow-v81/argon-viscosity-source.json": "583b67d3ece2c7f29d164bde80c4b3d7510b30b584ca947e1edb76652b10e00f"
+  },
+  "checkerSHA256": {
+    "scientific/timestep-v87-independent/audit87.py": "0e4fee6ae4886439e46d3b6d8597ac068db22e0de7189f60954e6eae75c81bdb",
+    "scientific/timestep-v87-independent/test_audit87.py": "167108c2c89491a8c8eae190b606176807da6983b60737d63f0086f97ca47015",
+    "scientific/meridional-v86/audit86.py": "448157c40bcc9c1113c43da9112291aad7fcf23ccc75d7e96dc77d137cad3936",
+    "scientific/meridional-v86-independent/panel86.py": "ca787e0ff29615aaf0ab0fe7ed4642ce834ef99fa19b8d668eb140213231e353",
+    "scientific/meridional-v86-independent/test_panel86.py": "11e3b58464d5f57b9ea0ba547b2ce03f33d19e7bb131aca8d6e1b59b09cde00b"
+  },
+  "ledger": [
+    {
+      "mass": 1.6452187025200452e-16,
+      "species": 1.6452187025200452e-16,
+      "energy": 1.9969318808355153e-14,
+      "charge": 5.058006374847324e-12
+    },
+    {
+      "mass": 1.6452187025200452e-16,
+      "species": 1.6452187025200452e-16,
+      "energy": 4.99110908357972e-14,
+      "charge": 4.526775707752728e-12
+    },
+    {
+      "mass": 3.2904374050400904e-16,
+      "species": 3.2904374050400904e-16,
+      "energy": 6.253228621956201e-14,
+      "charge": 3.545251930567317e-12
+    }
+  ],
+  "activity": [
+    {
+      "cfl": 0.2,
+      "stepCount": 654,
+      "maximumAcceptedDtS": 4.7666980843541067e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 651,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 0.0
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 0.0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "cfl": 0.1,
+      "stepCount": 1310,
+      "maximumAcceptedDtS": 2.3833490421770533e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 1307,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 2.2613571765362454e-16
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 0.0
+        }
+      ],
+      "passed": true
+    },
+    {
+      "cfl": 0.05,
+      "stepCount": 2621,
+      "maximumAcceptedDtS": 1.1916745210885267e-08,
+      "acousticLimitedNonterminalFraction": 1.0,
+      "nonterminalSteps": 2618,
+      "independentSnapshotCFLChecks": [
+        {
+          "timeS": 0.0,
+          "relativeDefect": 1.3882660037028325e-16
+        },
+        {
+          "timeS": 1e-06,
+          "relativeDefect": 0.0
+        },
+        {
+          "timeS": 2e-06,
+          "relativeDefect": 1.4768700642238293e-16
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "differences": [
+    {
+      "timeS": 0.0,
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 1.6494546812896935e-10,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0002465121822610065,
+          "value": 0.0
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "temperatureK": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 23593.47140852684,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 2948.248695225516,
+          "value": 0.0
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 1628716.6778387853,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 24495.762585855988,
+          "value": 0.0
+        },
+        "vrMPS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "vzMPS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        }
+      }
+    },
+    {
+      "timeS": 0.0,
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 1.6494546812896935e-10,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0002465121822610065,
+          "value": 0.0
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "temperatureK": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 23593.47140852684,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 2948.248695225516,
+          "value": 0.0
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 1628716.6778387853,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 24495.762585855988,
+          "value": 0.0
+        },
+        "vrMPS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        },
+        "vzMPS": {
+          "errorIntegral": 0.0,
+          "referenceIntegral": 0.0,
+          "absoluteRMS": 0.0,
+          "referenceRMS": 0.0,
+          "value": 0.0
+        }
+      }
+    },
+    {
+      "timeS": 1e-06,
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 1.2977723427815463e-19,
+          "referenceIntegral": 1.649666127079314e-10,
+          "absoluteRMS": 6.9146061750423285e-09,
+          "referenceRMS": 0.000246527982116943,
+          "value": 2.804795672956231e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 1.2977723427815025e-19,
+          "referenceIntegral": 6.395955114282949e-16,
+          "absoluteRMS": 6.914606175042212e-09,
+          "referenceRMS": 4.854236104014614e-07,
+          "value": 0.014244478486169231
+        },
+        "temperatureK": {
+          "errorIntegral": 0.20515570372309494,
+          "referenceIntegral": 58135.073202441876,
+          "absoluteRMS": 8.693806910113665,
+          "referenceRMS": 4627.93557166737,
+          "value": 0.0018785496849476292
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.2051557037230886,
+          "referenceIntegral": 29168.384027679596,
+          "absoluteRMS": 8.69380691011353,
+          "referenceRMS": 3278.1164490789497,
+          "value": 0.0026520738494681066
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.4702348043922441,
+          "referenceIntegral": 1605404.288289981,
+          "absoluteRMS": 13.162111864496124,
+          "referenceRMS": 24319.822549678745,
+          "value": 0.0005412092065067304
+        },
+        "vrMPS": {
+          "errorIntegral": 0.0003164175802831829,
+          "referenceIntegral": 6.435196074755726,
+          "absoluteRMS": 0.34142749753399604,
+          "referenceRMS": 50.68658752916597,
+          "value": 0.006736052162468671
+        },
+        "vzMPS": {
+          "errorIntegral": 3.088556609147032e-05,
+          "referenceIntegral": 0.5382865299984874,
+          "absoluteRMS": 0.10667090392678648,
+          "referenceRMS": 50.68658752916597,
+          "value": 0.002104519343808776
+        }
+      }
+    },
+    {
+      "timeS": 1e-06,
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 2.6456543117777067e-20,
+          "referenceIntegral": 1.6496661230597047e-10,
+          "absoluteRMS": 3.122013244656464e-09,
+          "referenceRMS": 0.0002465279818165955,
+          "value": 1.266393056743995e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 2.6456543117777283e-20,
+          "referenceIntegral": 6.468438226174339e-16,
+          "absoluteRMS": 3.1220132446564768e-09,
+          "referenceRMS": 4.881664290476399e-07,
+          "value": 0.0063953870214860705
+        },
+        "temperatureK": {
+          "errorIntegral": 0.040462809917914025,
+          "referenceIntegral": 58205.89233775441,
+          "absoluteRMS": 3.8609680858273463,
+          "referenceRMS": 4630.753549046844,
+          "value": 0.0008337666958376692
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.040462809917916044,
+          "referenceIntegral": 29235.06763444406,
+          "absoluteRMS": 3.8609680858274427,
+          "referenceRMS": 3281.8614600106002,
+          "value": 0.0011764567556776062
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.09711837384928951,
+          "referenceIntegral": 1605203.4284199984,
+          "absoluteRMS": 5.981621014492731,
+          "referenceRMS": 24318.301116967643,
+          "value": 0.00024597199392021533
+        },
+        "vrMPS": {
+          "errorIntegral": 6.970304743833197e-05,
+          "referenceIntegral": 6.473096837992333,
+          "absoluteRMS": 0.1602485377842474,
+          "referenceRMS": 50.83780009752877,
+          "value": 0.003152153269355121
+        },
+        "vzMPS": {
+          "errorIntegral": 6.737446418801688e-06,
+          "referenceIntegral": 0.5420556116432396,
+          "absoluteRMS": 0.04982139167048603,
+          "referenceRMS": 50.83780009752877,
+          "value": 0.0009800068369384034
+        }
+      }
+    },
+    {
+      "timeS": 2e-06,
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 2.4936770583588747e-19,
+          "referenceIntegral": 1.6504215771057798e-10,
+          "absoluteRMS": 9.584915694395753e-09,
+          "referenceRMS": 0.00024658442331154207,
+          "value": 3.8870726567695174e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 2.4936770583589084e-19,
+          "referenceIntegral": 8.591270582637498e-15,
+          "absoluteRMS": 9.584915694395817e-09,
+          "referenceRMS": 1.77908579094528e-06,
+          "value": 0.005387551147436838
+        },
+        "temperatureK": {
+          "errorIntegral": 0.5653906560070908,
+          "referenceIntegral": 153949.7009307185,
+          "absoluteRMS": 14.432531226228475,
+          "referenceRMS": 7531.086177047613,
+          "value": 0.0019163943801644842
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.5653906560070884,
+          "referenceIntegral": 118197.3164013172,
+          "absoluteRMS": 14.432531226228445,
+          "referenceRMS": 6598.906889954072,
+          "value": 0.002187109390526481
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.11174626782976047,
+          "referenceIntegral": 1557202.147870341,
+          "absoluteRMS": 6.416300656440296,
+          "referenceRMS": 23951.93968924104,
+          "value": 0.0002678822984562887
+        },
+        "vrMPS": {
+          "errorIntegral": 0.00022929360445833233,
+          "referenceIntegral": 20.656643019511062,
+          "absoluteRMS": 0.29064587467406044,
+          "referenceRMS": 93.82964548874115,
+          "value": 0.003097591098848772
+        },
+        "vzMPS": {
+          "errorIntegral": 1.8697079246882535e-05,
+          "referenceIntegral": 3.2403780283522323,
+          "absoluteRMS": 0.08299560150552837,
+          "referenceRMS": 93.82964548874115,
+          "value": 0.0008845349577227936
+        }
+      }
+    },
+    {
+      "timeS": 2e-06,
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 5.430770261566088e-20,
+          "referenceIntegral": 1.6504218845611155e-10,
+          "absoluteRMS": 4.4730001012368135e-09,
+          "referenceRMS": 0.0002465844462795201,
+          "value": 1.813983066947526e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 5.430770261565733e-20,
+          "referenceIntegral": 8.621959717468e-15,
+          "absoluteRMS": 4.473000101236668e-09,
+          "referenceRMS": 1.7822605211410967e-06,
+          "value": 0.0025097341540016934
+        },
+        "temperatureK": {
+          "errorIntegral": 0.117369644159316,
+          "referenceIntegral": 154190.49383533586,
+          "absoluteRMS": 6.575762002896042,
+          "referenceRMS": 7536.9735661127725,
+          "value": 0.0008724671707038399
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.11736964415932052,
+          "referenceIntegral": 118429.10484658365,
+          "absoluteRMS": 6.575762002896168,
+          "referenceRMS": 6605.374047060393,
+          "value": 0.000995516976941313
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.024164322274811672,
+          "referenceIntegral": 1557091.2247747118,
+          "absoluteRMS": 2.983702388913174,
+          "referenceRMS": 23951.086598133094,
+          "value": 0.00012457482363851266
+        },
+        "vrMPS": {
+          "errorIntegral": 4.82401186556276e-05,
+          "referenceIntegral": 20.66797584606505,
+          "absoluteRMS": 0.13331296145917504,
+          "referenceRMS": 93.86532577852026,
+          "value": 0.0014202578039704818
+        },
+        "vzMPS": {
+          "errorIntegral": 4.32343625993813e-06,
+          "referenceIntegral": 3.2472231401055955,
+          "absoluteRMS": 0.03991009142991519,
+          "referenceRMS": 93.86532577852026,
+          "value": 0.00042518460463329097
+        }
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 4.0257413493215746e-19,
+          "referenceIntegral": 1.6540244558995677e-10,
+          "absoluteRMS": 1.2178425019745617e-08,
+          "referenceRMS": 0.0002468534241163891,
+          "value": 4.933464084340027e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 4.025741349321601e-19,
+          "referenceIntegral": 7.83410539298273e-14,
+          "absoluteRMS": 1.2178425019745658e-08,
+          "referenceRMS": 5.372332667189014e-06,
+          "value": 0.0022668784258510597
+        },
+        "temperatureK": {
+          "errorIntegral": 0.11543007021565613,
+          "referenceIntegral": 450281.1026402572,
+          "absoluteRMS": 6.521202289218805,
+          "referenceRMS": 12879.827687668874,
+          "value": 0.0005063112991381238
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.11543007021565932,
+          "referenceIntegral": 398518.3175149535,
+          "absoluteRMS": 6.521202289218896,
+          "referenceRMS": 12116.922676606351,
+          "value": 0.0005381896429700847
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.030131052212654635,
+          "referenceIntegral": 1501774.1238050135,
+          "absoluteRMS": 3.331772516592935,
+          "referenceRMS": 23521.797180874866,
+          "value": 0.0001416461714626949
+        },
+        "vrMPS": {
+          "errorIntegral": 9.062826494602314e-05,
+          "referenceIntegral": 40.79982435441148,
+          "absoluteRMS": 0.18272586448264366,
+          "referenceRMS": 141.66664142590508,
+          "value": 0.0012898298614512826
+        },
+        "vzMPS": {
+          "errorIntegral": 1.0667505650497788e-05,
+          "referenceIntegral": 13.675372847129662,
+          "absoluteRMS": 0.06269019680025899,
+          "referenceRMS": 141.66664142590508,
+          "value": 0.00044251911508078924
+        }
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "fields": {
+        "densityKgM3": {
+          "errorIntegral": 9.152432118928768e-20,
+          "referenceIntegral": 1.6540254276712427e-10,
+          "absoluteRMS": 5.8067944180051305e-09,
+          "referenceRMS": 0.0002468534966319826,
+          "value": 2.3523241506528438e-05
+        },
+        "densityKgM3/increment": {
+          "errorIntegral": 9.152432118929471e-20,
+          "referenceIntegral": 7.841907571620502e-14,
+          "absoluteRMS": 5.806794418005353e-09,
+          "referenceRMS": 5.375007220695332e-06,
+          "value": 0.0010803323939077732
+        },
+        "temperatureK": {
+          "errorIntegral": 0.025862564525686176,
+          "referenceIntegral": 450478.74283335736,
+          "absoluteRMS": 3.086767976385197,
+          "referenceRMS": 12882.654024759304,
+          "value": 0.0002396065259885662
+        },
+        "temperatureK/increment": {
+          "errorIntegral": 0.02586256452568656,
+          "referenceIntegral": 398708.18318470835,
+          "absoluteRMS": 3.0867679763852203,
+          "referenceRMS": 12119.808759361986,
+          "value": 0.0002546878451362391
+        },
+        "omegaRadS": {
+          "errorIntegral": 0.0066015621256425286,
+          "referenceIntegral": 1501752.104966348,
+          "absoluteRMS": 1.55952215825655,
+          "referenceRMS": 23521.6247433067,
+          "value": 6.630163414626903e-05
+        },
+        "vrMPS": {
+          "errorIntegral": 2.0342410392628005e-05,
+          "referenceIntegral": 40.80104768491029,
+          "absoluteRMS": 0.08657039482504188,
+          "referenceRMS": 141.68182271913327,
+          "value": 0.0006110197706635735
+        },
+        "vzMPS": {
+          "errorIntegral": 2.508215216535632e-06,
+          "referenceIntegral": 13.685825494063359,
+          "absoluteRMS": 0.03039839062998917,
+          "referenceRMS": 141.68182271913327,
+          "value": 0.00021455392122001586
+        }
+      }
+    }
+  ],
+  "gates": [
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3/increment",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK/increment",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "omegaRadS",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vrMPS",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vzMPS",
+      "coarseChange": 0.0,
+      "fineChange": 0.0,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3",
+      "coarseChange": 2.804795672956231e-05,
+      "fineChange": 1.266393056743995e-05,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3/increment",
+      "coarseChange": 0.014244478486169231,
+      "fineChange": 0.0063953870214860705,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK",
+      "coarseChange": 0.0018785496849476292,
+      "fineChange": 0.0008337666958376692,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK/increment",
+      "coarseChange": 0.0026520738494681066,
+      "fineChange": 0.0011764567556776062,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "omegaRadS",
+      "coarseChange": 0.0005412092065067304,
+      "fineChange": 0.00024597199392021533,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vrMPS",
+      "coarseChange": 0.006736052162468671,
+      "fineChange": 0.003152153269355121,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vzMPS",
+      "coarseChange": 0.002104519343808776,
+      "fineChange": 0.0009800068369384034,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3",
+      "coarseChange": 3.8870726567695174e-05,
+      "fineChange": 1.813983066947526e-05,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3/increment",
+      "coarseChange": 0.005387551147436838,
+      "fineChange": 0.0025097341540016934,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK",
+      "coarseChange": 0.0019163943801644842,
+      "fineChange": 0.0008724671707038399,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK/increment",
+      "coarseChange": 0.002187109390526481,
+      "fineChange": 0.000995516976941313,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "omegaRadS",
+      "coarseChange": 0.0002678822984562887,
+      "fineChange": 0.00012457482363851266,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vrMPS",
+      "coarseChange": 0.003097591098848772,
+      "fineChange": 0.0014202578039704818,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vzMPS",
+      "coarseChange": 0.0008845349577227936,
+      "fineChange": 0.00042518460463329097,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3",
+      "coarseChange": 4.933464084340027e-05,
+      "fineChange": 2.3523241506528438e-05,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3/increment",
+      "coarseChange": 0.0022668784258510597,
+      "fineChange": 0.0010803323939077732,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK",
+      "coarseChange": 0.0005063112991381238,
+      "fineChange": 0.0002396065259885662,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK/increment",
+      "coarseChange": 0.0005381896429700847,
+      "fineChange": 0.0002546878451362391,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "omegaRadS",
+      "coarseChange": 0.0001416461714626949,
+      "fineChange": 6.630163414626903e-05,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vrMPS",
+      "coarseChange": 0.0012898298614512826,
+      "fineChange": 0.0006110197706635735,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vzMPS",
+      "coarseChange": 0.00044251911508078924,
+      "fineChange": 0.00021455392122001586,
+      "limit": 0.02,
+      "contraction": true,
+      "passed": true
+    }
+  ],
+  "failures": [],
+  "quadratureChecks": [
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1.6494546812896935e-10,
+        1.649454681289695e-10,
+        1.649454681289685e-10
+      ],
+      "relativeSpread": 6.111876749234218e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1.6494546812896935e-10,
+        1.649454681289695e-10,
+        1.649454681289685e-10
+      ],
+      "relativeSpread": 6.111876749234218e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        23593.47140852684,
+        23593.471408526897,
+        23593.471408526908
+      ],
+      "relativeSpread": 2.9296916989401285e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        23593.47140852684,
+        23593.471408526897,
+        23593.471408526908
+      ],
+      "relativeSpread": 2.9296916989401285e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1628716.6778387853,
+        1628716.6778387849,
+        1628716.6778387856
+      ],
+      "relativeSpread": 4.288603048434845e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1628716.6778387853,
+        1628716.6778387849,
+        1628716.6778387856
+      ],
+      "relativeSpread": 4.288603048434845e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 0.0,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        1.2977723427815463e-19,
+        1.2977723427814577e-19,
+        1.2977723427815176e-19
+      ],
+      "relativeSpread": 6.826526850767203e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1.649666127079314e-10,
+        1.649666127079314e-10,
+        1.6496661270793132e-10
+      ],
+      "relativeSpread": 4.70084104619055e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        2.6456543117777067e-20,
+        2.6456543117778478e-20,
+        2.6456543117777714e-20
+      ],
+      "relativeSpread": 5.334580300564151e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1.6496661230597047e-10,
+        1.6496661230597055e-10,
+        1.649666123059705e-10
+      ],
+      "relativeSpread": 4.70084105764471e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        1.2977723427815025e-19,
+        1.297772342781503e-19,
+        1.2977723427815034e-19
+      ],
+      "relativeSpread": 7.420137881268945e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        6.395955114282949e-16,
+        6.395955114282947e-16,
+        6.395955114282947e-16
+      ],
+      "relativeSpread": 3.0834366843014153e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        2.6456543117777283e-20,
+        2.6456543117777317e-20,
+        2.645654311777724e-20
+      ],
+      "relativeSpread": 2.843592910748606e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        6.468438226174339e-16,
+        6.468438226174335e-16,
+        6.468438226174337e-16
+      ],
+      "relativeSpread": 6.097769489618918e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.20515570372309494,
+        0.20515570372309208,
+        0.20515570372309355
+      ],
+      "relativeSpread": 1.3934900353871821e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        58135.073202441876,
+        58135.073202441854,
+        58135.07320244182
+      ],
+      "relativeSpread": 1.0012486044486907e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.040462809917914025,
+        0.04046280991791449,
+        0.04046280991791431
+      ],
+      "relativeSpread": 1.1489708512703959e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        58205.89233775441,
+        58205.892337754434,
+        58205.8923377544
+      ],
+      "relativeSpread": 6.250189905141251e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.2051557037230886,
+        0.20515570372309405,
+        0.20515570372309286
+      ],
+      "relativeSpread": 2.651689776076591e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        29168.384027679596,
+        29168.38402767959,
+        29168.384027679596
+      ],
+      "relativeSpread": 2.494467162554786e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.040462809917916044,
+        0.04046280991791384,
+        0.04046280991791427
+      ],
+      "relativeSpread": 5.453324338865252e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        29235.06763444406,
+        29235.067634444058,
+        29235.067634444058
+      ],
+      "relativeSpread": 1.2443887089919137e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.4702348043922441,
+        0.4702348043922327,
+        0.47023480439223564
+      ],
+      "relativeSpread": 2.420022060492881e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1605404.288289981,
+        1605404.2882899812,
+        1605404.2882899814
+      ],
+      "relativeSpread": 2.900585794521234e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.09711837384928951,
+        0.09711837384929307,
+        0.09711837384929173
+      ],
+      "relativeSpread": 3.67241678916793e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1605203.4284199984,
+        1605203.4284199984,
+        1605203.428419998
+      ],
+      "relativeSpread": 2.9009487462040226e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.0003164175802831829,
+        0.0003164175802831814,
+        0.0003164175802831819
+      ],
+      "relativeSpread": 4.625763623960129e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        6.435196074755726,
+        6.435196074755724,
+        6.435196074755725
+      ],
+      "relativeSpread": 4.1405657700981844e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        6.970304743833197e-05,
+        6.970304743833196e-05,
+        6.970304743833163e-05
+      ],
+      "relativeSpread": 4.8608086927831475e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        6.473096837992333,
+        6.473096837992331,
+        6.4730968379923315
+      ],
+      "relativeSpread": 4.116322257781634e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        3.088556609147032e-05,
+        3.088556609147012e-05,
+        3.0885566091470276e-05
+      ],
+      "relativeSpread": 6.36257218601761e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        0.5382865299984874,
+        0.5382865299984874,
+        0.538286529998487
+      ],
+      "relativeSpread": 6.187539327586052e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        6.737446418801688e-06,
+        6.737446418801732e-06,
+        6.737446418801727e-06
+      ],
+      "relativeSpread": 6.411728958529111e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 1e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        0.5420556116432396,
+        0.5420556116432396,
+        0.5420556116432395
+      ],
+      "relativeSpread": 2.0481718125922901e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        2.4936770583588747e-19,
+        2.493677058358874e-19,
+        2.4936770583588987e-19
+      ],
+      "relativeSpread": 9.847147892958291e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1.6504215771057798e-10,
+        1.6504215771057824e-10,
+        1.6504215771057803e-10
+      ],
+      "relativeSpread": 1.5662297743108892e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        5.430770261566088e-20,
+        5.430770261565927e-20,
+        5.430770261565612e-20
+      ],
+      "relativeSpread": 8.755000342870108e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1.6504218845611155e-10,
+        1.650421884561115e-10,
+        1.6504218845611145e-10
+      ],
+      "relativeSpread": 6.264917930158458e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        2.4936770583589084e-19,
+        2.4936770583589204e-19,
+        2.493677058358909e-19
+      ],
+      "relativeSpread": 4.827033280861865e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        8.591270582637498e-15,
+        8.591270582637496e-15,
+        8.591270582637494e-15
+      ],
+      "relativeSpread": 3.672848608983439e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        5.430770261565733e-20,
+        5.430770261565674e-20,
+        5.430770261565716e-20
+      ],
+      "relativeSpread": 1.0860633336725655e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        8.621959717468e-15,
+        8.621959717467997e-15,
+        8.621959717467999e-15
+      ],
+      "relativeSpread": 3.6597754156646677e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.5653906560070908,
+        0.5653906560070814,
+        0.5653906560070902
+      ],
+      "relativeSpread": 1.6690929729824678e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        153949.7009307185,
+        153949.70093071848,
+        153949.70093071854
+      ],
+      "relativeSpread": 3.780953165973502e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.117369644159316,
+        0.11736964415931633,
+        0.11736964415931633
+      ],
+      "relativeSpread": 2.8377602213349595e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        154190.49383533586,
+        154190.49383533583,
+        154190.49383533577
+      ],
+      "relativeSpread": 5.662572912143558e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.5653906560070884,
+        0.5653906560070846,
+        0.5653906560070877
+      ],
+      "relativeSpread": 6.6763718919299006e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        118197.3164013172,
+        118197.3164013172,
+        118197.31640131718
+      ],
+      "relativeSpread": 2.4623089036909273e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.11736964415932052,
+        0.11736964415931737,
+        0.11736964415931941
+      ],
+      "relativeSpread": 2.6840482093458867e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        118429.10484658365,
+        118429.10484658362,
+        118429.10484658368
+      ],
+      "relativeSpread": 4.914979386939656e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.11174626782976047,
+        0.11174626782976081,
+        0.11174626782975966
+      ],
+      "relativeSpread": 1.0307783968260924e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1557202.147870341,
+        1557202.1478703413,
+        1557202.1478703418
+      ],
+      "relativeSpread": 4.485557202171081e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.024164322274811672,
+        0.02416432227481201,
+        0.024164322274813084
+      ],
+      "relativeSpread": 5.8435940945753e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1557091.2247747118,
+        1557091.2247747122,
+        1557091.224774712
+      ],
+      "relativeSpread": 2.9905844943356706e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.00022929360445833233,
+        0.00022929360445833187,
+        0.0002292936044583316
+      ],
+      "relativeSpread": 3.1917003012646443e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        20.656643019511062,
+        20.656643019511055,
+        20.656643019511066
+      ],
+      "relativeSpread": 5.159667534717253e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        4.82401186556276e-05,
+        4.8240118655627376e-05,
+        4.824011865562762e-05
+      ],
+      "relativeSpread": 5.056900679509008e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        20.66797584606505,
+        20.667975846065044,
+        20.667975846065037
+      ],
+      "relativeSpread": 6.875784460483386e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        1.8697079246882535e-05,
+        1.8697079246882633e-05,
+        1.8697079246882627e-05
+      ],
+      "relativeSpread": 5.255142826539661e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        3.2403780283522323,
+        3.2403780283522305,
+        3.240378028352232
+      ],
+      "relativeSpread": 5.481943229640855e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        4.32343625993813e-06,
+        4.323436259938066e-06,
+        4.323436259938123e-06
+      ],
+      "relativeSpread": 1.4889661861754393e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 2e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        3.2472231401055955,
+        3.247223140105593,
+        3.247223140105594
+      ],
+      "relativeSpread": 8.205581027652224e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        4.0257413493215746e-19,
+        4.0257413493215823e-19,
+        4.0257413493215327e-19
+      ],
+      "relativeSpread": 1.2318897754404585e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1.6540244558995677e-10,
+        1.6540244558995672e-10,
+        1.6540244558995667e-10
+      ],
+      "relativeSpread": 6.251272537133922e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        9.152432118928768e-20,
+        9.152432118929108e-20,
+        9.15243211892941e-20
+      ],
+      "relativeSpread": 7.009889878309692e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1.6540254276712427e-10,
+        1.6540254276712427e-10,
+        1.654025427671243e-10
+      ],
+      "relativeSpread": 1.56281721609784e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        4.025741349321601e-19,
+        4.0257413493216194e-19,
+        4.025741349321629e-19
+      ],
+      "relativeSpread": 6.9368550461694916e-15,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        7.83410539298273e-14,
+        7.834105392982727e-14,
+        7.83410539298273e-14
+      ],
+      "relativeSpread": 3.222263130348472e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        9.152432118929471e-20,
+        9.152432118929309e-20,
+        9.152432118929321e-20
+      ],
+      "relativeSpread": 1.775488055481805e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "densityKgM3/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        7.841907571620502e-14,
+        7.841907571620504e-14,
+        7.841907571620499e-14
+      ],
+      "relativeSpread": 6.438114383910261e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.11543007021565613,
+        0.11543007021565702,
+        0.11543007021565574
+      ],
+      "relativeSpread": 1.1060865474079474e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        450281.1026402572,
+        450281.102640257,
+        450281.1026402571
+      ],
+      "relativeSpread": 5.170784256515532e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.025862564525686176,
+        0.02586256452568441,
+        0.025862564525685517
+      ],
+      "relativeSpread": 6.828203354661465e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        450478.74283335736,
+        450478.74283335736,
+        450478.74283335736
+      ],
+      "relativeSpread": 0.0,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.11543007021565932,
+        0.1154300702156523,
+        0.11543007021565439
+      ],
+      "relativeSpread": 6.08347601074359e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK/increment",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        398518.3175149535,
+        398518.3175149534,
+        398518.31751495344
+      ],
+      "relativeSpread": 2.9212037868890833e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.02586256452568656,
+        0.025862564525685007,
+        0.025862564525687724
+      ],
+      "relativeSpread": 1.0503896319645594e-13,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "temperatureK/increment",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        398708.18318470835,
+        398708.1831847083,
+        398708.18318470824
+      ],
+      "relativeSpread": 2.9198127035432184e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        0.030131052212654635,
+        0.030131052212654216,
+        0.030131052212653896
+      ],
+      "relativeSpread": 2.452593409452037e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "omegaRadS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        1501774.1238050135,
+        1501774.1238050133,
+        1501774.1238050126
+      ],
+      "relativeSpread": 6.201482365775527e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        0.0066015621256425286,
+        0.006601562125642534,
+        0.006601562125642349
+      ],
+      "relativeSpread": 2.7985505047950804e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "omegaRadS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        1501752.104966348,
+        1501752.1049663478,
+        1501752.104966347
+      ],
+      "relativeSpread": 6.201573292526519e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        9.062826494602314e-05,
+        9.062826494602253e-05,
+        9.06282649460222e-05
+      ],
+      "relativeSpread": 1.0467781784080655e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vrMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        40.79982435441148,
+        40.79982435441147,
+        40.79982435441146
+      ],
+      "relativeSpread": 3.4830676210167206e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        2.0342410392628005e-05,
+        2.034241039262766e-05,
+        2.0342410392627944e-05
+      ],
+      "relativeSpread": 1.698861815338238e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vrMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        40.80104768491029,
+        40.80104768491027,
+        40.80104768491027
+      ],
+      "relativeSpread": 3.482963188824608e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "errorIntegral",
+      "values": [
+        1.0667505650497788e-05,
+        1.0667505650497532e-05,
+        1.0667505650497727e-05
+      ],
+      "relativeSpread": 2.3979734199518504e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vzMPS",
+      "pair": 0,
+      "term": "referenceIntegral",
+      "values": [
+        13.675372847129662,
+        13.675372847129655,
+        13.675372847129655
+      ],
+      "relativeSpread": 5.195783279204974e-16,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "errorIntegral",
+      "values": [
+        2.508215216535632e-06,
+        2.5082152165356553e-06,
+        2.508215216535614e-06
+      ],
+      "relativeSpread": 1.6378617620610223e-14,
+      "limit": 1e-10,
+      "passed": true
+    },
+    {
+      "timeS": 4e-06,
+      "field": "vzMPS",
+      "pair": 1,
+      "term": "referenceIntegral",
+      "values": [
+        13.685825494063359,
+        13.685825494063357,
+        13.685825494063351
+      ],
+      "relativeSpread": 5.191814962629179e-16,
+      "limit": 1e-10,
+      "passed": true
+    }
+  ],
+  "quadratureFailures": [],
+  "temporalSliceNumericalPass": true,
+  "activityRefinements": [
+    {
+      "coarseCFL": 0.2,
+      "fineCFL": 0.1,
+      "stepCountRatio": 2.003058103975535,
+      "maximumDtRatio": 0.5,
+      "passed": true
+    },
+    {
+      "coarseCFL": 0.1,
+      "fineCFL": 0.05,
+      "stepCountRatio": 2.000763358778626,
+      "maximumDtRatio": 0.5,
+      "passed": true
+    }
+  ],
+  "fullModelNumericallyQualified": false,
+  "allRequiredNumericalPass": false,
+  "experimentalQualification": false,
+  "opticalScoringPerformed": false,
+  "scope": "Prospective active-CFL temporal screen for one fixed spatially unqualified conditional slice. Independent saved-state/global-budget/reporting-state CFL checks; unsaved pre-step CFL bounds are producer claims. No experimental qualification."
+}

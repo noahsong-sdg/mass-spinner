@@ -54,7 +54,7 @@ def check_schedule(case,state):
         if not terminal:
             nonterminal+=1; acoustic_nonterminal+=int(bound<=case['maxDtS']*(1+2e-12))
         for snapshot in state['snapshots'][:-1]:
-            if abs(snapshot['timeS']-before)<1e-16:
+            if snapshot['timeS']==before:
                 actual=acoustic_bound(state,snapshot,case['cfl'])
                 defect=abs(actual-bound)/actual
                 old.require(defect<2e-12,'Independent reporting-state CFL mismatch')

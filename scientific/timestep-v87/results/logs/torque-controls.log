@@ -1,0 +1,8 @@
+test_meridional_stress_does_not_create_angular_momentum (torque86.WallReactionControls.test_meridional_stress_does_not_create_angular_momentum) ... ok
+test_nonuniform_density_and_all_velocity_components (torque86.WallReactionControls.test_nonuniform_density_and_all_velocity_components) ... ok
+test_spin_reversal_reverses_wall_torque (torque86.WallReactionControls.test_spin_reversal_reverses_wall_torque) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.028s
+
+OK
