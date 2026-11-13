@@ -1,0 +1,48 @@
+RUN ['/work/home/v90-venv/bin/python', '-u', 'test92.py', 'tests-results']
+test_bad_clock_and_initial_frame_are_not_scored (__main__.ScoringControls.test_bad_clock_and_initial_frame_are_not_scored) ... ok
+test_global_matches_existing_conservative_scorer_at_each_clock (__main__.ScoringControls.test_global_matches_existing_conservative_scorer_at_each_clock) ... ok
+test_identical_histories_have_zero_error_in_both_regions (__main__.ScoringControls.test_identical_histories_have_zero_error_in_both_regions) ... ok
+test_physical_band_volume_is_exact_across_meshes (__main__.ScoringControls.test_physical_band_volume_is_exact_across_meshes) ... ok
+test_undefined_or_noncontracting_refinement_fails_closed (__main__.ScoringControls.test_undefined_or_noncontracting_refinement_fails_closed) ... ok
+test_all_closed_wall_inventories_and_tangential_euler_fluxes (test91.BoundaryControls.test_all_closed_wall_inventories_and_tangential_euler_fluxes) ... ok
+test_axis_and_midplane_keep_the_original_symmetry (test91.BoundaryControls.test_axis_and_midplane_keep_the_original_symmetry) ... ok
+test_coupled_step_conserves_energy_and_keeps_thermal_domain (test91.BoundaryControls.test_coupled_step_conserves_energy_and_keeps_thermal_domain) ... ok
+test_invalid_wall_policy_rejected (test91.BoundaryControls.test_invalid_wall_policy_rejected) ... ok
+test_legacy_coupled_reference_remains_bitwise_unchanged (test91.BoundaryControls.test_legacy_coupled_reference_remains_bitwise_unchanged) ... ok
+test_linear_endwall_shear_has_exact_zero_advection (test91.BoundaryControls.test_linear_endwall_shear_has_exact_zero_advection) ... ok
+test_linear_outer_wall_shear_reconstructs_both_traces (test91.BoundaryControls.test_linear_outer_wall_shear_reconstructs_both_traces) ... ok
+test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source (test_flow.FlowTests.test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source) ... ok
+test_closed_nonuniform_flow_conserves_all_inventories (test_flow.FlowTests.test_closed_nonuniform_flow_conserves_all_inventories) ... ok
+test_density_and_angular_momentum_actually_transport (test_flow.FlowTests.test_density_and_angular_momentum_actually_transport) ... ok
+test_eos_and_swirl_use_evolving_species_mass (test_flow.FlowTests.test_eos_and_swirl_use_evolving_species_mass) ... ok
+test_invalid_states_rejected_without_clipping (test_flow.FlowTests.test_invalid_states_rejected_without_clipping) ... ok
+test_pressure_gradient_accelerates_towards_low_pressure (test_flow.FlowTests.test_pressure_gradient_accelerates_towards_low_pressure) ... ok
+test_reflecting_faces_have_no_mass_energy_or_species_leak (test_flow.FlowTests.test_reflecting_faces_have_no_mass_energy_or_species_leak) ... ok
+test_rotational_source_is_even_in_spin_and_outward (test_flow.FlowTests.test_rotational_source_is_even_in_spin_and_outward) ... ok
+test_smooth_contact_has_no_first_order_acoustic_mass_diffusion (test_flow.FlowTests.test_smooth_contact_has_no_first_order_acoustic_mass_diffusion) ... ok
+test_uniform_composition_preserved_during_density_pressure_transport (test_flow.FlowTests.test_uniform_composition_preserved_during_density_pressure_transport) ... ok
+test_uniform_gas_stationary (test_flow.FlowTests.test_uniform_gas_stationary) ... ok
+test_zero_mass_flux_rigid_rotation_has_zero_angular_transport (test_flow.FlowTests.test_zero_mass_flux_rigid_rotation_has_zero_angular_transport) ... ok
+test_domain_rejections (test_diffusion86.DiffusionControls.test_domain_rejections) ... ok
+test_exact_divergence_free_extensional_stress_and_variable_mu (test_diffusion86.DiffusionControls.test_exact_divergence_free_extensional_stress_and_variable_mu) ... ok
+test_linear_omega_has_exact_cylindrical_shear (test_diffusion86.DiffusionControls.test_linear_omega_has_exact_cylindrical_shear) ... ok
+test_stationary_uniform_temperature_is_exact_adiabatic_state (test_diffusion86.DiffusionControls.test_stationary_uniform_temperature_is_exact_adiabatic_state) ... ok
+test_step_full_energy_positive_heat_and_boundary_symmetry (test_diffusion86.DiffusionControls.test_step_full_energy_positive_heat_and_boundary_symmetry) ... ok
+test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace (test_diffusion86.DiffusionControls.test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace) ... ok
+test_uniform_translation_rotation_and_dilation_have_zero_strain_work (test_diffusion86.DiffusionControls.test_uniform_translation_rotation_and_dilation_have_zero_strain_work) ... ok
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.00034429199999985727
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 1.068s
+
+OK
+RECEIPT {"args": ["/work/home/v90-venv/bin/python", "-u", "test92.py", "tests-results"], "exitCode": 0, "wallSeconds": 1.3803013759999998, "sourceSHA256": {"scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c", "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310", "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf", "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7", "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19", "scientific/coupled-openfoam-v90/reference90.py": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89", "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c", "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2", "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c", "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f", "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2", "scientific/endwall-v91/candidate91.py": "f772919710dc16c4e90d808ea5f862b968b1c56143d5a5ad3caae1be48278b24", "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402", "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b", "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150", "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83", "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94", "references.json": "f5a69793ced6e0e9a8929c3238254151541286d8e004f35d4e344f19a3e72581"}, "sourceUnchanged": true}
