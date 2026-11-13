@@ -50,7 +50,6 @@ class Electro:
             _, R, t, m = radial(cell,rc[-1],f.r[-1],f.z[j+1]-f.z[j])
             self.ports.append(dict(kind='anode',cell=int(cell),amp=float(-current*overlap[j]/anodeWidth),halfR=R,t=t,m=m))
         row, col, val, tr, tc, tv, mr, mc, mv = [],[],[],[],[],[],[],[],[]
-        self.segments = segments
         resistance = []
         for k, ((a,b), parts) in enumerate(zip(edges,segments)):
             row.extend([k,k]); col.extend([a,b]); val.extend([1.,-1.])
@@ -58,6 +57,11 @@ class Electro:
             for cell, R, t, m in parts:
                 tr.append(k); tc.append(cell); tv.append(t)
                 mr.append(k); mc.append(cell); mv.append(m)
+        # Each face has its two ordered series halves. Keep only the numeric
+        # heat data; advance need not retain/walk the nested Python tuples.
+        self._segment_cells = np.array([s[0] for parts in segments for s in parts], dtype=int)
+        self._segment_resistance = np.array([s[1] for parts in segments for s in parts])
+        self._segment_hall = np.array([s[3] for parts in segments for s in parts])
         shape = (len(edges),n)
         self.D = coo_matrix((val,(row,col)),shape=shape).tocsr()
         self.T = coo_matrix((tv,(tr,tc)),shape=shape).tocsr()
@@ -108,8 +112,10 @@ class Electro:
         torque = np.asarray(T.T@amps)+self.torque
         force = np.asarray(M.T@amps)+self.force-self.K*u
         heat = self.K*u*u
-        for amp, parts in zip(amps,self.segments):
-            for a,R,t,m in parts: heat[a] += amp*amp*R-2*amp*m*u[a]
+        half_amps = np.repeat(amps, 2)
+        np.add.at(heat, self._segment_cells,
+            half_amps*half_amps*self._segment_resistance
+            -2*half_amps*self._segment_hall*u[self._segment_cells])
         ports = []
         for port in self.ports:
             a,I,R,t,m = (port[k] for k in ('cell','amp','halfR','t','m'))

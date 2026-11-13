@@ -13,6 +13,7 @@ from skfem import Basis, BilinearForm, ElementQuad1, ElementVector, MeshQuad, as
 
 KB = 1.380649e-23
 M_AR = 39.948*1.66053906660e-27
+STRESS_BATCH_ELEMENTS = 1024
 
 
 def argon_conductivity(mu):
@@ -44,7 +45,8 @@ class Diffusion:
         self.rnodes = np.r_[flow.r[0], flow.mean_r, flow.r[-1]]
         self.znodes = np.r_[flow.z[0], (flow.z[:-1]+flow.z[1:])/2, flow.z[-1]]
         self.mesh = MeshQuad.init_tensor(self.rnodes, self.znodes)
-        self.velocity = Basis(self.mesh, ElementVector(ElementQuad1(), dim=3), intorder=6)
+        # This basis supplies DOF maps only; physical integrals use order 6 below.
+        self.velocity = Basis(self.mesh, ElementVector(ElementQuad1(), dim=3), intorder=1)
         self.heat = Basis(self.mesh, ElementQuad1(), intorder=6)
         coordinates = self.mesh.p
         interior = ((coordinates[0] > flow.r[0]) & (coordinates[0] < flow.r[-1])
@@ -72,7 +74,12 @@ class Diffusion:
         # Gauss rule otherwise assigns incorrect fractions of heat to cells.
         split = MeshQuad.init_tensor(np.union1d(self.rnodes, flow.r),
                                      np.union1d(self.znodes, flow.z))
-        self.integration = Basis(split, ElementVector(ElementQuad1(), dim=3), intorder=6)
+        # Coefficients retain their full-domain evaluation semantics and are
+        # shared by stress and heating, including precomputed quadrature arrays.
+        self.integration = Basis(split, ElementQuad1(), intorder=6)
+        self.quadrature_mu = self.coefficient(mu, np.asarray(self.integration.global_coordinates()))
+        integration = Basis(split, ElementVector(ElementQuad1(), dim=3), intorder=6,
+                            elements=np.arange(min(STRESS_BATCH_ELEMENTS, split.nelements)))
         points = split.p
         ri = np.clip(np.searchsorted(self.rnodes, points[0], side='right')-1, 0, len(self.rnodes)-2)
         zi = np.clip(np.searchsorted(self.znodes, points[1], side='right')-1, 0, len(self.znodes)-2)
@@ -85,17 +92,17 @@ class Diffusion:
         for dr, dz in ((0, 0), (0, 1), (1, 0), (1, 1)):
             nodes = lookup[zi+dz, ri+dr]
             weight = (fr if dr else 1-fr)*(fz if dz else 1-fz)
-            rows.append(self.integration.nodal_dofs.ravel())
+            rows.append(integration.nodal_dofs.ravel())
             columns.append(self.velocity.nodal_dofs[:, nodes].ravel())
             weights.append(np.tile(weight, 3))
         self.prolongation = coo_matrix((np.concatenate(weights),
             (np.concatenate(rows), np.concatenate(columns))),
-            shape=(self.integration.N, self.velocity.N)).tocsr()
+            shape=(integration.N, self.velocity.N)).tocsr()
         self.prolongation.eliminate_zeros()
 
         @BilinearForm
         def stress(u, v, w):
-            return (2*self.coefficient(self.mu, w.x)*2*np.pi*w.x[0]
+            return (2*w.viscosity*2*np.pi*w.x[0]
                     *deviatoric_product(strains(u, w.x[0]), strains(v, w.x[0])))
 
         @BilinearForm
@@ -103,15 +110,27 @@ class Diffusion:
             return (self.coefficient(self.conductivity, w.x)*2*np.pi*w.x[0]
                     *np.sum(u.grad*v.grad, axis=0))
 
-        self.stiffness = (self.prolongation.T@asm(stress, self.integration)
-                          @self.prolongation).tocsr()
+        component_dofs = integration.nodal_dofs.copy()
+        assembled = asm(stress, integration, viscosity=self.quadrature_mu[:integration.nelems])
+        del integration
+        # Evaluate every element once, retaining only a bounded vector basis.
+        # The Gauss rule, global DOFs and bilinear form are unchanged.
+        for start in range(STRESS_BATCH_ELEMENTS, split.nelements, STRESS_BATCH_ELEMENTS):
+            batch = Basis(split, ElementVector(ElementQuad1(), dim=3), intorder=6,
+                elements=np.arange(start, min(start+STRESS_BATCH_ELEMENTS, split.nelements)))
+            assembled += asm(stress, batch, viscosity=self.quadrature_mu[start:start+batch.nelems])
+            del batch
+        self.stiffness = (self.prolongation.T@assembled@self.prolongation).tocsr()
+        del assembled
+        # Scalar components share the same Gauss rule without interpolating
+        # the vector basis's identically zero cross-component arrays.
+        self.component_dofs = component_dofs[:, np.argsort(self.integration.nodal_dofs[0])]
         self.thermal_stiffness = asm(conduction, self.heat).tocsr()
         points = np.asarray(self.integration.global_coordinates())
         ri = np.searchsorted(flow.r, points[0], side='right')-1
         zi = np.searchsorted(flow.z, points[1], side='right')-1
         self.quadrature_cells = (zi*flow.nr+ri).ravel()
         self.quadrature_weight = self.integration.dx*2*np.pi*points[0]
-        self.quadrature_mu = self.coefficient(mu, points)
 
     @staticmethod
     def coefficient(value, x):
@@ -129,9 +148,13 @@ class Diffusion:
         return x
 
     def dissipation_cells(self, x):
-        field = self.integration.interpolate(self.prolongation@x)
+        projected = self.prolongation@x
+        ur, uz, omega = [self.integration.interpolate(projected[dofs])
+                         for dofs in self.component_dofs]
         radius = self.integration.global_coordinates()[0]
-        e = strains(field, radius)
+        e = np.array([ur.grad[0], uz.grad[1], ur/radius,
+                      .5*(ur.grad[1]+uz.grad[0]), .5*radius*omega.grad[0],
+                      .5*radius*omega.grad[1]])
         density = 2*self.quadrature_mu*deviatoric_product(e, e)
         return np.bincount(self.quadrature_cells,
                            weights=(density*self.quadrature_weight).ravel(),
@@ -140,7 +163,10 @@ class Diffusion:
     @staticmethod
     def solve(matrix, rhs, free):
         out = np.zeros(len(rhs))
-        out[free] = spsolve(matrix[free][:, free].tocsc(), rhs[free])
+        # Stress and conduction systems have symmetric sparsity. Minimum degree
+        # on A+A.T reduces fill; evolving capacities still get a fresh solve.
+        out[free] = spsolve(matrix[free][:, free].tocsc(), rhs[free],
+                            permc_spec='MMD_AT_PLUS_A')
         if not np.all(np.isfinite(out)):
             raise ArithmeticError('Nonfinite implicit diffusion solution')
         return out
