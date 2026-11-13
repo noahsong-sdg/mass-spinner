@@ -59,12 +59,24 @@ identity fixes this; CFL, conservation and convergence tolerances are unchanged.
 An explicit residual-step regression passes. [The failed attempt, logs and old
 checker sources](scientific/timestep-v87/results/failure01/README.md) are retained.
 
-Other reviewer fixes retain unresolved relative comparisons in plots/counts,
-verify the exact admitted panel bytes used for old failure counts, and prevent
-normal replay from overwriting complete or partial evidence. Use the
-[canonical launcher](scientific/timestep-v87/REPLAY.md); the executed producer
-remains frozen. These correct the actual reporting/output boundaries without
-forcing an unchanged physical replay for checker-only edits.
+The summarizer filtered out `fineChange=None` before plotting and selecting its
+largest error. An undefined relative error could therefore disappear from the
+report. It now retains those rows as plot gaps, counts them explicitly, and
+selects a maximum only among defined values. This preserves unresolved evidence
+without inventing a normalization floor or an error value.
+
+The report also reread the old panel audit after admitting its original bytes.
+A later file replacement could change the failure counts being displayed.
+The reread bytes are now hash-checked before parsing, so the actual counted
+data have the admitted identity. This extends the existing seal contract
+without adding a new storage framework.
+
+The producer's direct entry point could overwrite complete or partial results.
+The [canonical launcher](scientific/timestep-v87/REPLAY.md) now refuses nonempty
+outputs before starting it. Keeping the executed numerical producer frozen
+preserves exact source/field evidence; this small execution-boundary guard
+protects routine replay without forcing identical physics to rerun for an
+I/O-only change. Direct invocation remains documented as requiring fresh output.
 
 ## Exact checks and evidence
 
