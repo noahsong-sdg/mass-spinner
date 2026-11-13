@@ -1,0 +1,55 @@
+Initializing AMReX (26.10)...
+OMP initialized with 1 OMP threads
+AMReX (26.10) initialized
+amrex::Abort::0::
+### ERROR   : Binary collision selfA must have exactly two species.
+#            (/home/conda/feedstock_root/build_artifacts/bld/rattler-build_warpx_1791106408/work/Source/Particles/Collision/BinaryCollision/BinaryCollision.H:97)
+ !!!
+SIGABRT
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+addr2line: '/work/project/python': No such file
+See Backtrace.0.0 file for details

@@ -1,0 +1,668 @@
+{
+  "schemaVersion": 88,
+  "case": "orbit-coarse",
+  "config": {
+    "particles": 2048,
+    "cells": 8,
+    "dt": 1e-07,
+    "end": 1e-05,
+    "seed": 101,
+    "B": 0.1,
+    "kappa": 1000.0,
+    "law": "off",
+    "subcycles": 1,
+    "initialTemperatureEV": [
+      0.005,
+      0.005
+    ]
+  },
+  "protocolSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+  "runnerSHA256": "98fa8ad13372fa34c20b75fccdfcf3549363318b2af0ee010e3d63c6c4676415",
+  "deckSHA256": "882ad4efb8ca0d8b99b817c677e64b34ce5c70f318bc1403f6d626db467aa4f5",
+  "rawSHA256": "23d1703f68f87d373c533471e06106024d9ac8f5d82d6f6bf3cbf52c983c42c0",
+  "initial": [
+    {
+      "count": 2048,
+      "number": 62831853071795.88,
+      "mechanicalAngularKGMS2": -6.035957379782773e-13,
+      "canonicalAngularKGMS2": 3.6183711424651863e-10,
+      "energyJ": -3.398515342407992e-06,
+      "energyScaleJ": 3.850298857281945e-06,
+      "angularScaleKGMS2": 3.6183711424651863e-10,
+      "kineticEnergyJ": 2.2589175743697677e-07,
+      "radialMeanM": 0.026237010108214352,
+      "radialVthetaMS": [
+        null,
+        null,
+        null,
+        -5.38190142483905,
+        -9.336568296089846,
+        2.2268476167222597,
+        -8.518187981473035,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "count": 2048,
+      "number": 62831853071795.88,
+      "mechanicalAngularKGMS2": 2.692810682813077e-13,
+      "canonicalAngularKGMS2": 3.628964449582861e-10,
+      "energyJ": -3.2319029936613435e-06,
+      "energyScaleJ": 4.020640284138751e-06,
+      "angularScaleKGMS2": 3.628964449582861e-10,
+      "kineticEnergyJ": 3.943686452387036e-07,
+      "radialMeanM": 0.026249049576650602,
+      "radialVthetaMS": [
+        null,
+        null,
+        null,
+        -4.9862360233579786,
+        6.474787315518608,
+        -3.4420507122932658,
+        4.301097154407791,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "final": [
+    {
+      "count": 2048,
+      "number": 62831853071795.88,
+      "mechanicalAngularKGMS2": -5.940205410255802e-11,
+      "canonicalAngularKGMS2": 3.6184102421715325e-10,
+      "energyJ": -3.398554442114338e-06,
+      "energyScaleJ": 5.0263071242798864e-06,
+      "angularScaleKGMS2": 3.6184102421715325e-10,
+      "kineticEnergyJ": 8.138763410827743e-07,
+      "radialMeanM": 0.028247992699743096,
+      "radialVthetaMS": [
+        null,
+        null,
+        3.0973377860506135,
+        -255.64684850806483,
+        -364.6803521691715,
+        -452.67226745209956,
+        -540.9719501944536,
+        -690.9179874942809,
+        -1027.3194186423234,
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "count": 2048,
+      "number": 62831853071795.88,
+      "mechanicalAngularKGMS2": -4.124069999907521e-11,
+      "canonicalAngularKGMS2": 3.628970071415713e-10,
+      "energyJ": -3.2319086154941962e-06,
+      "energyScaleJ": 4.8508455273187324e-06,
+      "angularScaleKGMS2": 3.628970071415713e-10,
+      "kineticEnergyJ": 8.094684559122687e-07,
+      "radialMeanM": 0.027670841003153503,
+      "radialVthetaMS": [
+        null,
+        null,
+        57.130352933255345,
+        -76.32138527720703,
+        -136.82353819489936,
+        -153.01048775906744,
+        -179.4957994645178,
+        -262.6729470811321,
+        -481.61725540593426,
+        null,
+        null,
+        null
+      ]
+    }
+  ],
+  "history": [
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.561731090113545e-12,
+        "canonicalAngularKGMS2": 3.6183717493298564e-10,
+        "energyJ": -3.3985159492726623e-06,
+        "energyScaleJ": 3.869462171189321e-06,
+        "angularScaleKGMS2": 3.6183717493298564e-10,
+        "kineticEnergyJ": 2.3547311095832943e-07,
+        "radialMeanM": 0.026270906697550712,
+        "radialVthetaMS": [
+          null,
+          null,
+          6.141123143990015,
+          -11.074318535567334,
+          -15.835466122320708,
+          -7.072555352761433,
+          -17.10668932382709,
+          -78.60853186945597,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.5397109528998838e-13,
+        "canonicalAngularKGMS2": 3.628964503537701e-10,
+        "energyJ": -3.2319030476161844e-06,
+        "energyScaleJ": 4.029105381365018e-06,
+        "angularScaleKGMS2": 3.628964503537701e-10,
+        "kineticEnergyJ": 3.9860116687441655e-07,
+        "radialMeanM": 0.02626459234680828,
+        "radialVthetaMS": [
+          null,
+          null,
+          -39.16562382693955,
+          -5.593516736271829,
+          4.128469791660302,
+          -5.06566435245951,
+          1.8441815730179731,
+          27.728164699135437,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -4.2522488409277584e-12,
+        "canonicalAngularKGMS2": 3.6183735132523614e-10,
+        "energyJ": -3.3985177131951673e-06,
+        "energyScaleJ": 3.92327429012811e-06,
+        "angularScaleKGMS2": 3.6183735132523614e-10,
+        "kineticEnergyJ": 2.6237828846647156e-07,
+        "radialMeanM": 0.02636609767214691,
+        "radialVthetaMS": [
+          null,
+          null,
+          -17.826278155697423,
+          -23.16275589881026,
+          -36.94429239734695,
+          -29.72224286829708,
+          -43.467554540580835,
+          -140.4526547319336,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.4699068542000325e-12,
+        "canonicalAngularKGMS2": 3.628964679109471e-10,
+        "energyJ": -3.231903223187954e-06,
+        "energyScaleJ": 4.055424272114988e-06,
+        "angularScaleKGMS2": 3.628964679109471e-10,
+        "kineticEnergyJ": 4.11760524463517e-07,
+        "radialMeanM": 0.026311348994509064,
+        "radialVthetaMS": [
+          null,
+          null,
+          56.73892535666757,
+          -10.747817240335463,
+          0.6443599641177243,
+          -12.682282935139348,
+          -3.550663020180328,
+          -9.261401637063942,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -8.545104872091044e-12,
+        "canonicalAngularKGMS2": 3.618376348974855e-10,
+        "energyJ": -3.3985205489176604e-06,
+        "energyScaleJ": 4.009134246473869e-06,
+        "angularScaleKGMS2": 3.618376348974855e-10,
+        "kineticEnergyJ": 3.053068487781044e-07,
+        "radialMeanM": 0.026517348385745192,
+        "radialVthetaMS": [
+          null,
+          null,
+          27.330416913003443,
+          -46.0978606454937,
+          -62.60604063618417,
+          -71.10442026893409,
+          -84.1648964767885,
+          -196.36214991310553,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -3.66721878469403e-12,
+        "canonicalAngularKGMS2": 3.6289649747895375e-10,
+        "energyJ": -3.23190351886802e-06,
+        "energyScaleJ": 4.099370806404934e-06,
+        "angularScaleKGMS2": 3.6289649747895375e-10,
+        "kineticEnergyJ": 4.337336437684569e-07,
+        "radialMeanM": 0.026388743208160804,
+        "radialVthetaMS": [
+          null,
+          null,
+          32.95351655226467,
+          -15.21296489567179,
+          -9.41601604734859,
+          -20.857229206353786,
+          -14.305795048130333,
+          -33.99771576459306,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.4232807269632423e-11,
+        "canonicalAngularKGMS2": 3.6183801194348576e-10,
+        "energyJ": -3.398524319377663e-06,
+        "energyScaleJ": 4.1228920648847e-06,
+        "angularScaleKGMS2": 3.6183801194348576e-10,
+        "kineticEnergyJ": 3.6218387275351823e-07,
+        "radialMeanM": 0.026716461704780998,
+        "radialVthetaMS": [
+          null,
+          null,
+          86.21979757664027,
+          -70.9075084429244,
+          -98.46727727501107,
+          -123.09440920892126,
+          -142.09286402324105,
+          -241.4566891877138,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -6.727026073668974e-12,
+        "canonicalAngularKGMS2": 3.628965388037214e-10,
+        "energyJ": -3.2319039321156977e-06,
+        "energyScaleJ": 4.160567365432109e-06,
+        "angularScaleKGMS2": 3.628965388037214e-10,
+        "kineticEnergyJ": 4.6433171665820644e-07,
+        "radialMeanM": 0.026495837749281825,
+        "radialVthetaMS": [
+          null,
+          null,
+          41.37512283553251,
+          -23.144049729299883,
+          -18.634125008144057,
+          -32.82143873894841,
+          -28.619621031518093,
+          -78.32239976458723,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -2.1040445286954568e-11,
+        "canonicalAngularKGMS2": 3.618384642390068e-10,
+        "energyJ": -3.3985288423328737e-06,
+        "energyScaleJ": 4.259049348186354e-06,
+        "angularScaleKGMS2": 3.618384642390068e-10,
+        "kineticEnergyJ": 4.3026025292673965e-07,
+        "radialMeanM": 0.026952863198572003,
+        "radialVthetaMS": [
+          null,
+          null,
+          73.33949655957045,
+          -100.46102779639119,
+          -137.08635910385854,
+          -183.48509112482657,
+          -207.77396245317468,
+          -318.7807725922485,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.0623036755586156e-11,
+        "canonicalAngularKGMS2": 3.628965915301594e-10,
+        "energyJ": -3.2319044593800773e-06,
+        "energyScaleJ": 4.238488106334833e-06,
+        "angularScaleKGMS2": 3.628965915301594e-10,
+        "kineticEnergyJ": 5.032918234773781e-07,
+        "radialMeanM": 0.026631356140326225,
+        "radialVthetaMS": [
+          null,
+          null,
+          63.599227614561116,
+          -28.468371288569042,
+          -35.161872615657515,
+          -47.041478554214486,
+          -48.312220627392755,
+          -99.65062940660356,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -2.8638976945575446e-11,
+        "canonicalAngularKGMS2": 3.6183896992269054e-10,
+        "energyJ": -3.398533899169712e-06,
+        "energyScaleJ": 4.411025038195609e-06,
+        "angularScaleKGMS2": 3.6183896992269054e-10,
+        "kineticEnergyJ": 5.062455695129485e-07,
+        "radialMeanM": 0.02721430612272248,
+        "radialVthetaMS": [
+          null,
+          null,
+          14.978244890695445,
+          -134.0836155600359,
+          -183.2413453854057,
+          -245.62484049213163,
+          -275.0415698720061,
+          -409.6458030074688,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -1.5321773631094997e-11,
+        "canonicalAngularKGMS2": 3.6289665520520593e-10,
+        "energyJ": -3.2319050961305424e-06,
+        "energyScaleJ": 4.332463480595476e-06,
+        "angularScaleKGMS2": 3.6289665520520593e-10,
+        "kineticEnergyJ": 5.502791922324666e-07,
+        "radialMeanM": 0.026793711006007935,
+        "radialVthetaMS": [
+          null,
+          null,
+          78.26331774771563,
+          -36.922172683435846,
+          -51.258878093433765,
+          -67.29198040029924,
+          -69.67326227992798,
+          -120.18303338504927,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -3.666113302757464e-11,
+        "canonicalAngularKGMS2": 3.6183950455270274e-10,
+        "energyJ": -3.398539245469833e-06,
+        "energyScaleJ": 4.571473506135714e-06,
+        "angularScaleKGMS2": 3.6183950455270274e-10,
+        "kineticEnergyJ": 5.864671303329405e-07,
+        "radialMeanM": 0.027487620111093024,
+        "radialVthetaMS": [
+          null,
+          null,
+          -17.08530902836129,
+          -166.17364301899826,
+          -232.30753449088445,
+          -305.7940870810815,
+          -349.4032917653885,
+          -478.3080707786227,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -2.0782861926120237e-11,
+        "canonicalAngularKGMS2": 3.628967292817212e-10,
+        "energyJ": -3.231905836895695e-06,
+        "energyScaleJ": 4.441685987261133e-06,
+        "angularScaleKGMS2": 3.628967292817212e-10,
+        "kineticEnergyJ": 6.04890075182719e-07,
+        "radialMeanM": 0.026981037681050993,
+        "radialVthetaMS": [
+          null,
+          null,
+          66.31801260057046,
+          -44.474436491754574,
+          -69.46895137367906,
+          -87.2980666270061,
+          -93.98317761285716,
+          -156.46800274050645,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -4.471916875242945e-11,
+        "canonicalAngularKGMS2": 3.618400422881105e-10,
+        "energyJ": -3.3985446228239107e-06,
+        "energyScaleJ": 4.732639597986887e-06,
+        "angularScaleKGMS2": 3.618400422881105e-10,
+        "kineticEnergyJ": 6.670474875814885e-07,
+        "radialMeanM": 0.027759438229879703,
+        "radialVthetaMS": [
+          null,
+          null,
+          -19.157921528199342,
+          -197.00430454226642,
+          -283.30667149244755,
+          -362.04115958263134,
+          -416.86122118447025,
+          -558.2016344973052,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -2.6959376219648003e-11,
+        "canonicalAngularKGMS2": 3.6289681312318896e-10,
+        "energyJ": -3.2319066753103725e-06,
+        "energyScaleJ": 4.565217111546366e-06,
+        "angularScaleKGMS2": 3.6289681312318896e-10,
+        "kineticEnergyJ": 6.666552181179965e-07,
+        "radialMeanM": 0.027191231564291637,
+        "radialVthetaMS": [
+          null,
+          null,
+          73.02457701198752,
+          -55.58816894592107,
+          -90.39276323076709,
+          -109.52713229136006,
+          -121.07818549825677,
+          -186.9015380318743,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -5.2423605124513797e-11,
+        "canonicalAngularKGMS2": 3.618405571378841e-10,
+        "energyJ": -3.3985497713216463e-06,
+        "energyScaleJ": 4.886733473926311e-06,
+        "angularScaleKGMS2": 3.618405571378841e-10,
+        "kineticEnergyJ": 7.44091851302332e-07,
+        "radialMeanM": 0.028016855570250326,
+        "radialVthetaMS": [
+          null,
+          null,
+          -9.971680109097449,
+          -227.6417279931384,
+          -327.72266154468593,
+          -408.36045543339515,
+          -484.6683837555555,
+          -625.3985359208453,
+          -1144.7074552748945,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -3.379824365916907e-11,
+        "canonicalAngularKGMS2": 3.6289690600918576e-10,
+        "energyJ": -3.23190760417034e-06,
+        "energyScaleJ": 4.701995389196755e-06,
+        "angularScaleKGMS2": 3.6289690600918576e-10,
+        "kineticEnergyJ": 7.350438925132073e-07,
+        "radialMeanM": 0.02742198768153622,
+        "radialVthetaMS": [
+          null,
+          null,
+          68.88867037819143,
+          -65.4691010241943,
+          -113.1452957936775,
+          -133.8537005177287,
+          -146.53994276635285,
+          -226.37614558599057,
+          null,
+          null,
+          null,
+          null
+        ]
+      }
+    ],
+    [
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -5.940205410255802e-11,
+        "canonicalAngularKGMS2": 3.6184102421715325e-10,
+        "energyJ": -3.398554442114338e-06,
+        "energyScaleJ": 5.0263071242798864e-06,
+        "angularScaleKGMS2": 3.6184102421715325e-10,
+        "kineticEnergyJ": 8.138763410827743e-07,
+        "radialMeanM": 0.028247992699743096,
+        "radialVthetaMS": [
+          null,
+          null,
+          3.0973377860506135,
+          -255.64684850806483,
+          -364.6803521691715,
+          -452.67226745209956,
+          -540.9719501944536,
+          -690.9179874942809,
+          -1027.3194186423234,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "count": 2048,
+        "number": 62831853071795.88,
+        "mechanicalAngularKGMS2": -4.124069999907521e-11,
+        "canonicalAngularKGMS2": 3.628970071415713e-10,
+        "energyJ": -3.2319086154941962e-06,
+        "energyScaleJ": 4.8508455273187324e-06,
+        "angularScaleKGMS2": 3.628970071415713e-10,
+        "kineticEnergyJ": 8.094684559122687e-07,
+        "radialMeanM": 0.027670841003153503,
+        "radialVthetaMS": [
+          null,
+          null,
+          57.130352933255345,
+          -76.32138527720703,
+          -136.82353819489936,
+          -153.01048775906744,
+          -179.4957994645178,
+          -262.6729470811321,
+          -481.61725540593426,
+          null,
+          null,
+          null
+        ]
+      }
+    ]
+  ],
+  "historyIntervalS": 1.0000000000000002e-06,
+  "metrics": {
+    "energyJRelativeChange": 5.6818555441870844e-06,
+    "canonicalAngularKGMS2RelativeChange": 6.170755946098834e-06,
+    "numberRelativeChange": 0.0,
+    "orbitPositionRelative": 6.602313551959156e-06,
+    "orbitVelocityRelative": 7.663023971434889e-05
+  },
+  "ledgers": {
+    "mechanicalAngularChangeKGM2PerS": -1.0030843943193627e-10,
+    "expectedLorentzAngularImpulseKGM2PerS": -1.00312911585856e-10,
+    "kineticEnergyChangeJ": 1.0030843943193627e-06,
+    "expectedElectrostaticWorkJ": 1.0031291158585598e-06
+  },
+  "exitLedger": {
+    "boundary": "closed radial specular / axial periodic",
+    "expectedPhysicalExitNumber": 0,
+    "measuredInventoryLoss": 0.0
+  }
+}

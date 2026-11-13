@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 88,
+  "frozenBeforeCampaign": true,
+  "solver": "WarpX 26.10 np2py312hded7337_0",
+  "interpretation": "Prescribed-field orbit and finite-cell collision diagnostics; not self-consistent plasma or experimental qualification.",
+  "common": {"particles": 2048, "cells": 8, "dt": 1e-7, "end": 1e-5, "seed": 101, "B": 0.1, "kappa": 1000.0, "law": "off", "subcycles": 1, "initialTemperatureEV": [0.005, 0.005]},
+  "gates": {"orbitPositionRelative": 0.001, "orbitVelocityRelative": 0.001, "energyRelative": 0.001, "strictEnergyRelative": 1e-10, "canonicalAngularRelative": 0.001, "closedInventoryRelative": 1e-12},
+  "gateSources": {"strictEnergyRelative": "scientific/warpx/audit_reference.py energyConservedAt1e-10", "canonicalAngularRelative": "scientific/collision-v38/protocol.json maxRawMomentumResidual=0.001; this adapter uses a smaller positive canonical-only scale without the browser thermal scale, and ten saved intervals rather than every step", "energyRelative": "separate 0.1% prescribed-field pusher feasibility diagnostic; does not replace strict energy gate"},
+  "cases": {
+    "orbit-coarse": {},
+    "orbit-medium": {"dt": 5e-8},
+    "orbit-fine": {"dt": 2.5e-8},
+    "orbit-grid": {"cells": 16, "dt": 2.5e-8},
+    "free-control": {"B": 0.0, "kappa": 0.0},
+    "bobylev": {"law": "bobylev", "initialTemperatureEV": [0.2, 2.0]},
+    "nanbu": {"law": "nanbu", "initialTemperatureEV": [0.2, 2.0]},
+    "bobylev-sub4": {"law": "bobylev", "subcycles": 4, "initialTemperatureEV": [0.2, 2.0]},
+    "nanbu-sub4": {"law": "nanbu", "subcycles": 4, "initialTemperatureEV": [0.2, 2.0]},
+    "bobylev-dt": {"law": "bobylev", "dt": 5e-8, "initialTemperatureEV": [0.2, 2.0]},
+    "bobylev-grid": {"law": "bobylev", "cells": 16, "initialTemperatureEV": [0.2, 2.0]},
+    "bobylev-seed": {"law": "bobylev", "seed": 202, "initialTemperatureEV": [0.2, 2.0]}
+  },
+  "unqualified": ["absorbing collectors", "joint particle/cell limit", "self-consistent fields", "measured transport", "full distribution convergence"]
+}

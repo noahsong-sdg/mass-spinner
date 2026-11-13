@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 88,
+  "frozenBeforeCampaign": true,
+  "solver": "WarpX 26.10 np2py312hded7337_0",
+  "interpretation": "Separately frozen matched warm collision-off attribution control; original twelve cases unchanged",
+  "common": {
+    "particles": 2048,
+    "cells": 8,
+    "dt": 1e-07,
+    "end": 1e-05,
+    "seed": 101,
+    "B": 0.1,
+    "kappa": 1000.0,
+    "law": "off",
+    "subcycles": 1,
+    "initialTemperatureEV": [
+      0.2,
+      2.0
+    ]
+  },
+  "gates": {
+    "orbitPositionRelative": 0.001,
+    "orbitVelocityRelative": 0.001,
+    "energyRelative": 0.001,
+    "strictEnergyRelative": 1e-10,
+    "canonicalAngularRelative": 0.001,
+    "closedInventoryRelative": 1e-12
+  },
+  "gateSources": {
+    "strictEnergyRelative": "scientific/warpx/audit_reference.py energyConservedAt1e-10",
+    "canonicalAngularRelative": "scientific/collision-v38/protocol.json maxRawMomentumResidual=0.001; this adapter uses a smaller positive canonical-only scale without the browser thermal scale, and ten saved intervals rather than every step",
+    "energyRelative": "separate 0.1% prescribed-field pusher feasibility diagnostic; does not replace strict energy gate"
+  },
+  "cases": {
+    "warm-off": {}
+  },
+  "unqualified": [
+    "absorbing collectors",
+    "joint particle/cell limit",
+    "self-consistent fields",
+    "measured transport",
+    "full distribution convergence"
+  ]
+}

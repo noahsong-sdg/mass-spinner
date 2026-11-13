@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 88,
+  "assessment": "Diagnostic-only; not collision-transport or experimental qualification",
+  "transportQualified": false,
+  "experimentalQualified": false,
+  "originalProtocolCases": 12,
+  "strictEnergyPassed": 1,
+  "strictEnergyFailed": 11,
+  "warmCollisionCanonicalAngularScreenPassed": 1,
+  "warmCollisionCanonicalAngularScreenFailed": 6,
+  "inventoryChecksPassed": 12,
+  "supplementalWarmCollisionOffAnalyticOrbitApplicable": false,
+  "supplementalWarmCollisionOffInitialArraysExactlyMatched": 16,
+  "interpretation": "Successful executable/provenance checks do not mean physical gates passed. The 0.001 prescribed-field energy screen supplements rather than replaces the failed inherited 1e-10 screen. The fine-grid single-seed angular pass is not a spatial/continuum certificate.",
+  "requiredStudiesNotEstablished": [
+    "six independent seeds with uncertainty",
+    "joint particle/cell continuum limit",
+    "independent radial and axial refinement",
+    "alignment and orientation controls",
+    "absorbing collector exit transport",
+    "full distribution convergence",
+    "self-consistent plasma fields",
+    "matched experimental transport"
+  ]
+}

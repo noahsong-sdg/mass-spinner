@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 88,
+  "protocolSHA256": "a07907e9ae2714b0ee0e27dc015b4b8bc2505115799633ef8b978d5dc1253edb",
+  "orbitErrorContraction": {
+    "orbitPositionRelative": [
+      4.009272527152087,
+      4.004691353115504
+    ],
+    "orbitVelocityRelative": [
+      4.000213969918268,
+      4.000171559995979
+    ]
+  },
+  "cases": {
+    "orbit-coarse": {
+      "metrics": {
+        "energyJRelativeChange": 3.1424217030947177e-07,
+        "canonicalAngularKGMS2RelativeChange": 3.9129473758851853e-07,
+        "numberRelativeChange": 0.0,
+        "orbitPositionRelative": 2.687445172024224e-06,
+        "orbitVelocityRelative": 5.650625131556413e-05
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 3.1424217030947177e-07,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 3.9129473758851853e-07,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        },
+        "orbitPositionRelative": {
+          "passed": true,
+          "value": 2.687445172024224e-06,
+          "threshold": 0.001
+        },
+        "orbitVelocityRelative": {
+          "passed": true,
+          "value": 5.650625131556413e-05,
+          "threshold": 0.001
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "orbit-medium": {
+      "metrics": {
+        "energyJRelativeChange": 7.865902281062337e-08,
+        "canonicalAngularKGMS2RelativeChange": 9.794631207453138e-08,
+        "numberRelativeChange": 0.0,
+        "orbitPositionRelative": 6.703074320400967e-07,
+        "orbitVelocityRelative": 1.4125807204437782e-05
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 7.865902281062337e-08,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 9.794631207453138e-08,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        },
+        "orbitPositionRelative": {
+          "passed": true,
+          "value": 6.703074320400967e-07,
+          "threshold": 0.001
+        },
+        "orbitVelocityRelative": {
+          "passed": true,
+          "value": 1.4125807204437782e-05,
+          "threshold": 0.001
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "orbit-fine": {
+      "metrics": {
+        "energyJRelativeChange": 1.9677053064375515e-08,
+        "canonicalAngularKGMS2RelativeChange": 2.450189038621813e-08,
+        "numberRelativeChange": 0.0,
+        "orbitPositionRelative": 1.6738054769654643e-07,
+        "orbitVelocityRelative": 3.531300343641256e-06
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 1.9677053064375515e-08,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 2.450189038621813e-08,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        },
+        "orbitPositionRelative": {
+          "passed": true,
+          "value": 1.6738054769654643e-07,
+          "threshold": 0.001
+        },
+        "orbitVelocityRelative": {
+          "passed": true,
+          "value": 3.531300343641256e-06,
+          "threshold": 0.001
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "orbit-grid": {
+      "metrics": {
+        "energyJRelativeChange": 1.9677053064375515e-08,
+        "canonicalAngularKGMS2RelativeChange": 2.450189038621813e-08,
+        "numberRelativeChange": 0.0,
+        "orbitPositionRelative": 1.6738054769654643e-07,
+        "orbitVelocityRelative": 3.531300343641256e-06
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 1.9677053064375515e-08,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 2.450189038621813e-08,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        },
+        "orbitPositionRelative": {
+          "passed": true,
+          "value": 1.6738054769654643e-07,
+          "threshold": 0.001
+        },
+        "orbitVelocityRelative": {
+          "passed": true,
+          "value": 3.531300343641256e-06,
+          "threshold": 0.001
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "free-control": {
+      "metrics": {
+        "energyJRelativeChange": 8.570693798345876e-17,
+        "canonicalAngularKGMS2RelativeChange": 2.7710901316607703e-16,
+        "numberRelativeChange": 0.0,
+        "orbitPositionRelative": 3.5789617641823194e-15,
+        "orbitVelocityRelative": 1.0770258229467582e-15
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 8.570693798345876e-17,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 2.7710901316607703e-16,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        },
+        "orbitPositionRelative": {
+          "passed": true,
+          "value": 3.5789617641823194e-15,
+          "threshold": 0.001
+        },
+        "orbitVelocityRelative": {
+          "passed": true,
+          "value": 1.0770258229467582e-15,
+          "threshold": 0.001
+        }
+      },
+      "strictEnergyGate": {
+        "passed": true,
+        "threshold": 1e-10
+      }
+    },
+    "bobylev": {
+      "metrics": {
+        "energyJRelativeChange": 7.015716793384962e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.003891189630753157,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 7.015716793384962e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.003891189630753157,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "nanbu": {
+      "metrics": {
+        "energyJRelativeChange": 5.380633268269436e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.002452464773398531,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 5.380633268269436e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.002452464773398531,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "bobylev-sub4": {
+      "metrics": {
+        "energyJRelativeChange": 2.1536687589899146e-05,
+        "canonicalAngularKGMS2RelativeChange": 0.0021715737045390187,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 2.1536687589899146e-05,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.0021715737045390187,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "nanbu-sub4": {
+      "metrics": {
+        "energyJRelativeChange": 6.865136604973269e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.001736323795819812,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 6.865136604973269e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.001736323795819812,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "bobylev-dt": {
+      "metrics": {
+        "energyJRelativeChange": 3.472857094606882e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.002844095620194038,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 3.472857094606882e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.002844095620194038,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "bobylev-grid": {
+      "metrics": {
+        "energyJRelativeChange": 3.7678963895215426e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.0003869799318698303,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 3.7678963895215426e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": true,
+          "value": 0.0003869799318698303,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    },
+    "bobylev-seed": {
+      "metrics": {
+        "energyJRelativeChange": 3.966910970450811e-06,
+        "canonicalAngularKGMS2RelativeChange": 0.0037241657211380453,
+        "numberRelativeChange": 0.0
+      },
+      "gates": {
+        "energyJRelativeChange": {
+          "passed": true,
+          "value": 3.966910970450811e-06,
+          "threshold": 0.001
+        },
+        "canonicalAngularKGMS2RelativeChange": {
+          "passed": false,
+          "value": 0.0037241657211380453,
+          "threshold": 0.001
+        },
+        "numberRelativeChange": {
+          "passed": true,
+          "value": 0.0,
+          "threshold": 1e-12
+        }
+      },
+      "strictEnergyGate": {
+        "passed": false,
+        "threshold": 1e-10
+      }
+    }
+  },
+  "unqualified": [
+    "absorbing collectors",
+    "joint particle/cell limit",
+    "self-consistent fields",
+    "measured transport",
+    "full distribution convergence"
+  ],
+  "interpretation": "Orbit diagnostics and collision locality feasibility only; failed gates are retained."
+}

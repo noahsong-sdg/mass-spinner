@@ -1,0 +1,118 @@
+Initializing AMReX (26.10)...
+OMP initialized with 1 OMP threads
+AMReX (26.10) initialized
+PICSAR (26.10)
+WarpX (Unknown)
+
+                                   ___
+    __        __             ___  /  /
+    \ \      / /_ _ _ __ _ __\  \/  /
+     \ \ /\ / / _` | '__| '_ \\    /
+      \ V  V / (_| | |  | |_) /    \
+       \_/\_/ \__,_|_|  | .__/__/\  \
+                        |_|       \__\
+
+Level 0: dt = 1e-07 ; dr = 0.0075 ; dz = 0.005
+
+Grids Summary:
+  Level 0   1 grids  64 cells  100 % of domain
+
+-------------------------------------------------------------------------------
+--------------------------- MAIN EM PIC PARAMETERS ----------------------------
+-------------------------------------------------------------------------------
+Precision:            | DOUBLE
+Particle precision:   | DOUBLE
+Geometry:             | 2D (RZ)
+                      | - n_rz_azimuthal_modes = 1
+Operation mode:       | Electromagnetic
+                      | - vacuum
+-------------------------------------------------------------------------------
+Current Deposition:   | Esirkepov 
+Guard cells           | - ng_alloc_J  = (1,1)
+ (allocated for J)    | 
+Guard cells           | - ng_alloc_EB = (2,2)
+ (allocated for E/B)  | 
+Particle Pusher:      | Boris 
+Charge Deposition:    | standard 
+Field Gathering:      | energy-conserving 
+Particle Shape Factor:| 1
+-------------------------------------------------------------------------------
+                      | - staggered grid 
+Guard cells           | - ng_alloc_EB = (2,2)
+ (allocated for E/B)  | 
+-------------------------------------------------------------------------------
+For full input parameters, see the file: warpx_used_inputs
+
+/work/project/reference.py:153: UserWarning: ParticleContainerWrapper("ionA") is deprecated. Use sim.particles.get("ionA") instead.
+  pcs = [particle_containers.ParticleContainerWrapper(n) for n in ('ionA', 'ionB')]
+/work/project/reference.py:153: UserWarning: ParticleContainerWrapper("ionB") is deprecated. Use sim.particles.get("ionB") instead.
+  pcs = [particle_containers.ParticleContainerWrapper(n) for n in ('ionA', 'ionB')]
+Traceback (most recent call last):
+  File "/work/project/reference.py", line 207, in <module>
+    run(sys.argv[1])
+  File "/work/project/reference.py", line 157, in run
+    before = [snapshot(pc, m, c) for pc, m in zip(pcs, MASSES)]
+              ^^^^^^^^^^^^^^^^^^
+  File "/work/project/reference.py", line 109, in snapshot
+    r, theta = flat(pc.get_particle_r)[order], flat(pc.get_particle_theta)[order]
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/project/reference.py", line 106, in flat
+    return np.concatenate(getter(copy_to_host=True))
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/home/warpx88-env/lib/python3.12/site-packages/pywarpx/particle_containers.py", line 411, in get_particle_r
+    return self.get_particle_x(level, copy_to_host)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/home/warpx88-env/lib/python3.12/site-packages/pywarpx/particle_containers.py", line 358, in get_particle_x
+    return self.get_particle_real_arrays("x", level, copy_to_host=copy_to_host)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/home/warpx88-env/lib/python3.12/site-packages/pywarpx/particle_containers.py", line 163, in get_particle_real_arrays
+    comp_idx = self.particle_container.get_real_comp_index(comp_name)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: GetRealCompIndex: Component x does not exist!
+
+
+TinyProfiler total time across processes [min...avg...max]: 0.008782 ... 0.008782 ... 0.008782
+
+--------------------------------------------------------------------------------------------
+Name                                         NCalls  Excl. Min  Excl. Avg  Excl. Max   Max %
+--------------------------------------------------------------------------------------------
+WarpX::InitData()                                 1  0.0002117  0.0002117  0.0002117   2.41%
+Redistribute_partition                            4  4.979e-05  4.979e-05  4.979e-05   0.57%
+ParticleContainer::Redistribute_impl()            4  1.563e-05  1.563e-05  1.563e-05   0.18%
+Other                                            66  5.124e-05  5.124e-05  5.124e-05   0.58%
+--------------------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------------------
+Name                                         NCalls  Incl. Min  Incl. Avg  Incl. Max   Max %
+--------------------------------------------------------------------------------------------
+WarpX::InitData()                                 1    0.00027    0.00027    0.00027   3.07%
+ParticleContainer::Redistribute_impl()            4   0.000101   0.000101   0.000101   1.15%
+Redistribute_partition                            4  4.979e-05  4.979e-05  4.979e-05   0.57%
+Other                                            66  5.808e-05  5.808e-05  5.808e-05   0.66%
+--------------------------------------------------------------------------------------------
+
+Unused ParmParse Variables:
+  [TOP]::particles.Bx_external_particle_function(x,y,z,t)(nvals = 1)  :: [0]
+  [TOP]::particles.By_external_particle_function(x,y,z,t)(nvals = 1)  :: [0]
+  [TOP]::particles.Bz_external_particle_function(x,y,z,t)(nvals = 1)  :: [0.1]
+  [TOP]::particles.Ex_external_particle_function(x,y,z,t)(nvals = 1)  :: [1000.0*x]
+  [TOP]::particles.Ey_external_particle_function(x,y,z,t)(nvals = 1)  :: [1000.0*y]
+  [TOP]::particles.Ez_external_particle_function(x,y,z,t)(nvals = 1)  :: [0]
+
+Pinned Memory Usage:
+----------------------------------------------------------
+Name                            Nalloc    AvgMem    MaxMem
+----------------------------------------------------------
+The_Pinned_Arena::Initialize()       1   267   B  8192 KiB
+Unprofiled                         100  9006   B   144 KiB
+----------------------------------------------------------
+
+Cpu Memory Usage:
+--------------------------------------------
+Name               Nalloc    AvgMem   MaxMem
+--------------------------------------------
+Unprofiled             16    16 KiB  276 KiB
+WarpX::InitData()       9  8658   B   10 KiB
+--------------------------------------------
+
+AMReX (26.10) finalized

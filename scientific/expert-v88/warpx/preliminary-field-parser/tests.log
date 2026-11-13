@@ -1,0 +1,13 @@
+test_changed_raw_rejected (test_reference.ReferenceTests.test_changed_raw_rejected) ... ok
+test_exact_zero_field_free_flight (test_reference.ReferenceTests.test_exact_zero_field_free_flight) ... ok
+test_implicit_or_invalid_law_rejected (test_reference.ReferenceTests.test_implicit_or_invalid_law_rejected) ... ok
+test_invalid_subcycle_rejected (test_reference.ReferenceTests.test_invalid_subcycle_rejected) ... ok
+test_real_push_and_explicit_law (test_reference.ReferenceTests.test_real_push_and_explicit_law) ... ok
+test_rz_actual_radius_component (test_reference.ReferenceTests.test_rz_actual_radius_component) ... ok
+test_stale_protocol_rejected (test_reference.ReferenceTests.test_stale_protocol_rejected) ... ok
+test_stale_result_rejected (test_reference.ReferenceTests.test_stale_result_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.035s
+
+OK
