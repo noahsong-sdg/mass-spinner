@@ -1,0 +1,8 @@
+{
+  "upstream": "Geant4 v11.4.0",
+  "commit": "b4a16de652ec244f7a0ecc0a5cacfee21930bf75",
+  "rows": 20,
+  "sourceSha256": "a12001c3e48c2127a17c0690ef55ff28b23ae3ddedabf8d450e186e1eb873768",
+  "outputSha256": "da12120d0ac5dc8a65023cfd7414f997da7734ea6d0e5228395139d543d3159e",
+  "fullGeant4TransportRun": false
+}

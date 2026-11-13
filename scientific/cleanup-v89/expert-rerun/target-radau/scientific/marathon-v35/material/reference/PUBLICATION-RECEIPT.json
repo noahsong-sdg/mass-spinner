@@ -1,0 +1,8 @@
+{
+  "purpose": "Retained original Geant4 attribution and input provenance beside the unchanged atomic reference source/output",
+  "copiedSHA256": {
+    "LICENSE": "e2e3b456d6f939a98438eb22c6b7ac6ad4306321010493ac6e014980dfca567f",
+    "reference-status.json": "5c32ae3b390484c9309cc9e87d2a57d3da1807e3d3ab169cc0c67a6ec3f5312d"
+  },
+  "scientificExecution": false
+}
