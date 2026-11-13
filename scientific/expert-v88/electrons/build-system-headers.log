@@ -1,0 +1,56 @@
+[  3%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/ConvDiff.cpp.o
+[  7%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/CrossSection.cpp.o
+[  7%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/EedfCollisions.cpp.o
+[ 11%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/EedfMixture.cpp.o
+[ 14%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/EedfUtilities.cpp.o
+[ 18%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/ElectronKinetics.cpp.o
+[ 22%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Enumeration.cpp.o
+[ 25%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Environment.cpp.o
+[ 29%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Gas.cpp.o
+[ 33%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/GasMixture.cpp.o
+[ 37%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/GasProperties.cpp.o
+[ 40%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Gnuplot.cpp.o
+[ 40%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Grid.cpp.o
+[ 44%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/JobSystem.cpp.o
+[ 48%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/json.cpp.o
+[ 51%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/LegacyToJSON.cpp.o
+[ 55%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/LinearAlgebra.cpp.o
+[ 59%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/LookupTable.cpp.o
+In file included from /work/project/upstream/LoKI-B/json.h:47,
+                 from /work/project/upstream/LoKI-B/LookupTable.h:34,
+                 from /work/project/upstream/source/LookupTable.cpp:30:
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp: In instantiation of ‘decltype (((arr.reserve(declval<typename ConstructibleArrayType::size_type>()), j.get<typename ConstructibleArrayType::value_type>()), void())) nlohmann::detail::from_json_array_impl(const BasicJsonType&, ConstructibleArrayType&, priority_tag<1>) [with BasicJsonType = nlohmann::basic_json<>; ConstructibleArrayType = std::vector<std::pair<double, double> >; decltype (((arr.reserve(declval<typename ConstructibleArrayType::size_type>()), j.get<typename ConstructibleArrayType::value_type>()), void())) = void; typename ConstructibleArrayType::size_type = long unsigned int; typename ConstructibleArrayType::value_type = std::pair<double, double>]’:
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:3013:25:   required from ‘decltype (((nlohmann::detail::from_json_array_impl(j, arr, nlohmann::detail::priority_tag<3>{}), j.get<typename ConstructibleArrayType::value_type>()), void())) nlohmann::detail::from_json(const BasicJsonType&, ConstructibleArrayType&) [with BasicJsonType = nlohmann::basic_json<>; ConstructibleArrayType = std::vector<std::pair<double, double> >; typename std::enable_if<(((is_constructible_array_type<BasicJsonType, ConstructibleArrayType>::value && (! is_constructible_object_type<BasicJsonType, ConstructibleObjectType>::value)) && (! is_constructible_string_type<BasicJsonType, ConstructibleStringType>::value)) && (! is_basic_json<T>::value)), int>::type <anonymous> = 0; decltype (((nlohmann::detail::from_json_array_impl(j, arr, priority_tag<3>{}), j.get<typename ConstructibleArrayType::value_type>()), void())) = void; typename ConstructibleArrayType::value_type = std::pair<double, double>]’
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:3145:25:   required from ‘decltype ((nlohmann::detail::from_json(j, val), void())) nlohmann::detail::from_json_fn::operator()(const BasicJsonType&, T&) const [with BasicJsonType = nlohmann::basic_json<>; T = std::vector<std::pair<double, double> >; decltype ((nlohmann::detail::from_json(j, val), void())) = void]’
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:3702:30:   required from ‘static decltype ((nlohmann::{anonymous}::from_json(forward<BasicJsonType>(j), val), void())) nlohmann::adl_serializer<T, SFINAE>::from_json(BasicJsonType&&, ValueType&) [with BasicJsonType = const nlohmann::basic_json<>&; ValueType = std::vector<std::pair<double, double> >; <template-parameter-1-1> = std::vector<std::pair<double, double> >; <template-parameter-1-2> = void; decltype ((nlohmann::{anonymous}::from_json(forward<BasicJsonType>(j), val), void())) = void]’
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:17002:45:   required from ‘ValueType nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer>::get() const [with ValueTypeCV = std::vector<std::pair<double, double> >; ValueType = std::vector<std::pair<double, double> >; typename std::enable_if<(((! nlohmann::detail::is_basic_json<U>::value) && nlohmann::detail::has_from_json<nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer>, ValueType>::value) && (! nlohmann::detail::has_non_default_from_json<nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer>, ValueType>::value)), int>::type <anonymous> = 0; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long int; NumberUnsignedType = long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer]’
+/work/project/upstream/source/LookupTable.cpp:58:61:   required from here
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:2971:76: note: parameter passing for argument of type ‘std::pair<double, double>’ when C++17 is enabled changed to match C++14 in GCC 10.1
+ 2971 |         return i.template get<typename ConstructibleArrayType::value_type>();
+      |                                                                            ^
+[ 62%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/OffSideToJSON.cpp.o
+[ 66%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Operators.cpp.o
+[ 70%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Output.cpp.o
+[ 74%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Parse.cpp.o
+[ 74%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Power.cpp.o
+[ 77%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Range.cpp.o
+[ 81%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/Simulation.cpp.o
+[ 85%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/StateEntry.cpp.o
+[ 88%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/WorkingConditions.cpp.o
+[ 92%] Linking CXX shared library libloki-b.so
+[ 92%] Built target loki-b
+[ 96%] Building CXX object app/CMakeFiles/loki.dir/loki_main.cpp.o
+[100%] Linking CXX executable loki
+[100%] Built target loki
+[ 92%] Built target loki-b
+[ 96%] Building CXX object tests/CMakeFiles/loki_test_eedf_utilities.dir/test_eedf_utilities.cpp.o
+[100%] Linking CXX executable loki_test_eedf_utilities
+[100%] Built target loki_test_eedf_utilities
+[ 92%] Built target loki-b
+[ 96%] Building CXX object tests/CMakeFiles/test_trans_coefs.dir/test_trans_coefs.cpp.o
+[100%] Linking CXX executable test_trans_coefs
+[100%] Built target test_trans_coefs
+[ 92%] Built target loki-b
+[ 96%] Building CXX object tests/CMakeFiles/test_grid.dir/test_grid.cpp.o
+[100%] Linking CXX executable test_grid
+[100%] Built target test_grid

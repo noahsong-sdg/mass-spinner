@@ -1,0 +1,24 @@
+{
+  "sourceSHA256": {
+    "adapter.py": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+    "admission.py": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+    "extension.py": "40583010e5721d66353a821f6eecb6ed14a471ee9f670eb9d9baf86c75ec6ec7",
+    "test_adapter.py": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+    "test_admission.py": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0",
+    "PROTOCOL.md": "f45f54cb9eac038b5de0e264a2dfb44ac972acfadfff7bef968455440e4307d2",
+    "PROTOCOL-EXTENSION.md": "627a2f619eccfd97a310f06f071685a48a7029ecc5b9c57a18a9577c32ed0d79"
+  },
+  "resultSHA256": {
+    "results/receipt.json": "bea9b99948fc73d70b8734a866ea4e9287a82e44479e91915706b294f9986687",
+    "results/transport-table.json": "44cf57929a67cd0c99cf5b63bf1b66394f6a8af08ac693682b2009270059c2fa",
+    "results/bulk-admission-v2.json": "2be0967cabb083c2402161ca5a2f534b87fc1eff67580096a84ec64f33168d0a",
+    "extension-results/receipt.json": "8b491783f85fcc11745773d25157e7e60a32a64875416c18971b09b677debedc",
+    "final-tests-v2.log": "d47c892310fa13a4185bda814fefb3188625c01eaf6b28edfffba3dbbaf029e2"
+  },
+  "nativeSHA256": "b8e74938edaba606175bc9a70160a26e76a92a7745dca91246faef8bcadd3a66",
+  "finalTestsCommand": "python3 -m unittest -v test_adapter test_admission",
+  "finalTestsPassed": 8,
+  "upstreamTrackedSourceChanged": false,
+  "rawCrossSectionsRedistributed": false,
+  "admissionRevision": "v2: source rows, original gates and native power hashes checked before admission"
+}

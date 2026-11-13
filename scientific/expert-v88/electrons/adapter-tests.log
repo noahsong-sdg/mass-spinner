@@ -1,0 +1,9 @@
+test_exact_domain_and_no_extrapolation (test_adapter.Adapter.test_exact_domain_and_no_extrapolation) ... ok
+test_refuse_ambiguous_upstream_config (test_adapter.Adapter.test_refuse_ambiguous_upstream_config) ... ok
+test_stale_and_unqualified_table (test_adapter.Adapter.test_stale_and_unqualified_table) ... ok
+test_term_absent_and_nonfinite (test_adapter.Adapter.test_term_absent_and_nonfinite) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

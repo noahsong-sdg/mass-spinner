@@ -1,0 +1,138 @@
+[  3%] Building CXX object lib/CMakeFiles/loki-b.dir/__/source/ConvDiff.cpp.o
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:166,
+                 from /work/project/upstream/include/eigen-3.4.0/Eigen/Dense:1,
+                 from /work/project/upstream/LoKI-B/LinearAlgebra.h:33,
+                 from /work/project/upstream/LoKI-B/Grid.h:34,
+                 from /work/project/upstream/LoKI-B/ConvDiff.h:34,
+                 from /work/project/upstream/source/ConvDiff.cpp:31:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h: In function ‘void* Eigen::internal::handmade_aligned_malloc(std::size_t, std::size_t)’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:107:19: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  107 |   if (original == 0) return 0;
+      |                   ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:107:29: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  107 |   if (original == 0) return 0;
+      |                             ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h: In function ‘void* Eigen::internal::handmade_aligned_realloc(void*, std::size_t, std::size_t)’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:129:14: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  129 |   if (ptr == 0) return handmade_aligned_malloc(size);
+      |              ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:133:19: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  133 |   if (original == 0) return 0;
+      |                   ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:133:29: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  133 |   if (original == 0) return 0;
+      |                             ^
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:214:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/arch/NEON/PacketMath.h: In function ‘Packet Eigen::internal::pload(const typename unpacket_traits<T>::type*) [with Packet = eigen_packet_wrapper<int, 2>; typename unpacket_traits<T>::type = signed char]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/arch/NEON/PacketMath.h:1671:9: warning: ‘void* memcpy(void*, const void*, size_t)’ copying an object of non-trivial type ‘Eigen::internal::Packet4c’ {aka ‘struct Eigen::internal::eigen_packet_wrapper<int, 2>’} from an array of ‘const int8_t’ {aka ‘const signed char’} [-Wclass-memaccess]
+ 1671 |   memcpy(&res, from, sizeof(Packet4c));
+      |   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:172:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/GenericPacketMath.h:159:8: note: ‘Eigen::internal::Packet4c’ {aka ‘struct Eigen::internal::eigen_packet_wrapper<int, 2>’} declared here
+  159 | struct eigen_packet_wrapper
+      |        ^~~~~~~~~~~~~~~~~~~~
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/arch/NEON/PacketMath.h: In function ‘Packet Eigen::internal::ploadu(const typename unpacket_traits<T>::type*) [with Packet = eigen_packet_wrapper<int, 2>; typename unpacket_traits<T>::type = signed char]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/arch/NEON/PacketMath.h:1716:9: warning: ‘void* memcpy(void*, const void*, size_t)’ copying an object of non-trivial type ‘Eigen::internal::Packet4c’ {aka ‘struct Eigen::internal::eigen_packet_wrapper<int, 2>’} from an array of ‘const int8_t’ {aka ‘const signed char’} [-Wclass-memaccess]
+ 1716 |   memcpy(&res, from, sizeof(Packet4c));
+      |   ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/GenericPacketMath.h:159:8: note: ‘Eigen::internal::Packet4c’ {aka ‘struct Eigen::internal::eigen_packet_wrapper<int, 2>’} declared here
+  159 | struct eigen_packet_wrapper
+      |        ^~~~~~~~~~~~~~~~~~~~
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:294:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h: In instantiation of ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T&) [with T = long int; _Scalar = double; int _Rows = -1; int _Cols = 1; int _Options = 0; int _MaxRows = -1; int _MaxCols = 1]’:
+/work/project/upstream/LoKI-B/LinearAlgebra.h:136:8:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:840:214: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  840 |                                                                               && ((!internal::is_same<typename internal::traits<Derived>::XprKind,ArrayXpr>::value || Base::SizeAtCompileTime==Dynamic)),T>::type* = 0)
+      |                                                                                                                                                                                                                      ^
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:298:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseBinaryOp.h: In instantiation of ‘Derived& Eigen::MatrixBase<Derived>::operator+=(const Eigen::MatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<double, -1, 1>; Derived = Eigen::Matrix<double, -1, 1>]’:
+/work/project/upstream/source/ConvDiff.cpp:65:46:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseBinaryOp.h:177:18: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  177 |   call_assignment(derived(), other.derived(), internal::add_assign_op<Scalar,typename OtherDerived::Scalar>());
+      |   ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:287:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h: In instantiation of ‘void Eigen::DenseStorage<T, -1, -1, _Cols, _Options>::resize(Eigen::Index, Eigen::Index, Eigen::Index) [with T = double; int _Cols = 1; int _Options = 0; Eigen::Index = long int]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:309:25:   required from ‘void Eigen::PlainObjectBase<Derived>::resize(Eigen::Index) [with Derived = Eigen::Matrix<double, -1, 1>; Eigen::Index = long int]’
+/work/project/upstream/LoKI-B/LinearAlgebra.h:142:17:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h:641:20: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  641 |           m_data = 0;
+      |                    ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h: In instantiation of ‘Eigen::DenseStorage<T, -1, -1, _Cols, _Options>::DenseStorage() [with T = double; int _Cols = 1; int _Options = 0]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:476:45:   required from ‘Eigen::PlainObjectBase<Derived>::PlainObjectBase() [with Derived = Eigen::Matrix<double, -1, 1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/Matrix.h:330:5:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T&) [with T = long int; _Scalar = double; int _Rows = -1; int _Cols = 1; int _Options = 0; int _MaxRows = -1; int _MaxCols = 1]’
+/work/project/upstream/LoKI-B/LinearAlgebra.h:136:8:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h:580:47: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  580 |     EIGEN_DEVICE_FUNC DenseStorage() : m_data(0), m_rows(0) {}
+      |                                               ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h: In instantiation of ‘T* Eigen::internal::conditional_aligned_new_auto(std::size_t) [with T = double; bool Align = true; std::size_t = long unsigned int]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h:639:85:   required from ‘void Eigen::DenseStorage<T, -1, -1, _Cols, _Options>::resize(Eigen::Index, Eigen::Index, Eigen::Index) [with T = double; int _Cols = 1; int _Options = 0; Eigen::Index = long int]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:309:25:   required from ‘void Eigen::PlainObjectBase<Derived>::resize(Eigen::Index) [with Derived = Eigen::Matrix<double, -1, 1>; Eigen::Index = long int]’
+/work/project/upstream/LoKI-B/LinearAlgebra.h:142:17:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Memory.h:402:12: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  402 |     return 0; // short-cut. Also fixes Bug 884
+      |            ^
+In file included from /work/project/upstream/LoKI-B/json.h:47,
+                 from /work/project/upstream/LoKI-B/Grid.h:35:
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp: In instantiation of ‘std::string nlohmann::detail::lexer<BasicJsonType>::get_token_string() const [with BasicJsonType = nlohmann::basic_json<>; std::string = std::__cxx11::basic_string<char>]’:
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:8633:57:   required from ‘void nlohmann::detail::parser<BasicJsonType>::parse(bool, BasicJsonType&) [with BasicJsonType = nlohmann::basic_json<>]’
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:20698:79:   required from ‘static nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer> nlohmann::basic_json<ObjectType, ArrayType, StringType, BooleanType, NumberIntegerType, NumberUnsignedType, NumberFloatType, AllocatorType, JSONSerializer>::parse(IteratorType, IteratorType, parser_callback_t, bool) [with IteratorType = const char*; typename std::enable_if<std::is_base_of<std::random_access_iterator_tag, typename std::iterator_traits<_InputIterator>::iterator_category>::value, int>::type <anonymous> = 0; ObjectType = std::map; ArrayType = std::vector; StringType = std::__cxx11::basic_string<char>; BooleanType = bool; NumberIntegerType = long int; NumberUnsignedType = long unsigned int; NumberFloatType = double; AllocatorType = std::allocator; JSONSerializer = nlohmann::adl_serializer; parser_callback_t = std::function<bool(int, nlohmann::detail::parser<nlohmann::basic_json<> >::parse_event_t, nlohmann::basic_json<>&)>]’
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:22516:33:   required from here
+/work/project/upstream/include/nlohmann-3.7.0/nlohmann/json.hpp:8382:24: error: comparison is always true due to limited range of data type [-Werror=type-limits]
+ 8382 |             if ('\x00' <= c and c <= '\x1F')
+      |                 ~~~~~~~^~~~
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:278:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h: In instantiation of ‘void Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:779:32:   required from ‘Derived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<double, -1, 1>; Derived = Eigen::Matrix<double, -1, 1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/Matrix.h:208:24:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&) [with _Scalar = double; int _Rows = -1; int _Cols = 1; int _Options = 0; int _MaxRows = -1; int _MaxCols = 1]’
+/work/project/upstream/source/ConvDiff.cpp:58:41:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:836:18: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  836 |   call_assignment(dst, src, internal::assign_op<typename Dst::Scalar,typename Src::Scalar>());
+      |   ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /work/project/upstream/include/eigen-3.4.0/Eigen/Core:162:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Meta.h: In instantiation of ‘struct Eigen::internal::has_ReturnType<Eigen::ScalarBinaryOpTraits<double, double, Eigen::internal::add_assign_op<double, double> > >’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:888:3:   required from ‘void Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>; Func = add_assign_op<double, double>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:858:27:   required from ‘void Eigen::internal::call_assignment(Dst&, const Src&, const Func&, typename enable_if<(! evaluator_assume_aliasing<Src>::value), void*>::type) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>; Func = add_assign_op<double, double>; typename enable_if<(! evaluator_assume_aliasing<Src>::value), void*>::type = void*; typename evaluator_traits<SrcXprType>::Shape = Eigen::DenseShape]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseBinaryOp.h:177:18:   required from ‘Derived& Eigen::MatrixBase<Derived>::operator+=(const Eigen::MatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<double, -1, 1>; Derived = Eigen::Matrix<double, -1, 1>]’
+/work/project/upstream/source/ConvDiff.cpp:65:46:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Meta.h:658:97: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  658 |   template <typename C> static meta_yes testFunctor(C const *, typename C::ReturnType const * = 0);
+      |                                                                                                 ^
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Meta.h: In instantiation of ‘struct Eigen::internal::has_ReturnType<Eigen::ScalarBinaryOpTraits<double, double, Eigen::internal::assign_op<double, double> > >’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:888:3:   required from ‘void Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>; Func = assign_op<double, double>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:858:27:   required from ‘void Eigen::internal::call_assignment(Dst&, const Src&, const Func&, typename enable_if<(! evaluator_assume_aliasing<Src>::value), void*>::type) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>; Func = assign_op<double, double>; typename enable_if<(! evaluator_assume_aliasing<Src>::value), void*>::type = void*; typename evaluator_traits<SrcXprType>::Shape = Eigen::DenseShape]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:836:18:   required from ‘void Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, -1, 1>; Src = Eigen::Matrix<double, -1, 1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:779:32:   required from ‘Derived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<double, -1, 1>; Derived = Eigen::Matrix<double, -1, 1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/Matrix.h:208:24:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&) [with _Scalar = double; int _Rows = -1; int _Cols = 1; int _Options = 0; int _MaxRows = -1; int _MaxCols = 1]’
+/work/project/upstream/source/ConvDiff.cpp:58:41:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/util/Meta.h:658:97: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h: In instantiation of ‘void Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, -1, -1>; Src = Eigen::CwiseNullaryOp<scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:779:32:   required from ‘Derived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; Derived = Eigen::Matrix<double, -1, -1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/Matrix.h:225:24:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseNullaryOp.h:347:20:   required from ‘Derived& Eigen::DenseBase<Derived>::setConstant(const Scalar&) [with Derived = Eigen::Matrix<double, -1, -1>; Scalar = double]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseNullaryOp.h:337:3:   required from ‘void Eigen::DenseBase<Derived>::fill(const Scalar&) [with Derived = Eigen::Matrix<double, -1, -1>; Scalar = double]’
+/work/project/upstream/source/ConvDiff.cpp:185:13:   required from ‘void loki::discretize_dflux_du(Matrix&, const Grid&, const ConvectionDiffusionOperator&, const ConvectionDiffusionOperator&) [with SchemeTraits = Schemes::CD; Matrix = Eigen::Matrix<double, -1, -1>]’
+/work/project/upstream/source/ConvDiff.cpp:275:43:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:836:18: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  836 |   call_assignment(dst, src, internal::assign_op<typename Dst::Scalar,typename Src::Scalar>());
+      |   ~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h: In instantiation of ‘void Eigen::DenseStorage<T, -1, -1, -1, _Options>::resize(Eigen::Index, Eigen::Index, Eigen::Index) [with T = double; int _Options = 0; Eigen::Index = long int]’:
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:285:25:   required from ‘void Eigen::PlainObjectBase<Derived>::resize(Eigen::Index, Eigen::Index) [with Derived = Eigen::Matrix<double, -1, -1>; Eigen::Index = long int]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:764:15:   required from ‘void Eigen::internal::resize_if_allowed(DstXprType&, const SrcXprType&, const assign_op<T1, T2>&) [with DstXprType = Eigen::Matrix<double, -1, -1>; SrcXprType = Eigen::CwiseNullaryOp<scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; T1 = double; T2 = double]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:793:20:   required from ‘void Eigen::internal::call_dense_assignment_loop(DstXprType&, const Eigen::CwiseNullaryOp<scalar_constant_op<typename DstXprType::Scalar>, DstXprType>&, const assign_op<typename DstXprType::Scalar, typename DstXprType::Scalar>&) [with DstXprType = Eigen::Matrix<double, -1, -1>; typename DstXprType::Scalar = double]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:954:31:   required from ‘static void Eigen::internal::Assignment<DstXprType, SrcXprType, Functor, Eigen::internal::Dense2Dense, Weak>::run(DstXprType&, const SrcXprType&, const Functor&) [with DstXprType = Eigen::Matrix<double, -1, -1>; SrcXprType = Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; Functor = Eigen::internal::assign_op<double, double>; Weak = void]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:890:49:   required from ‘void Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, -1, -1>; Src = Eigen::CwiseNullaryOp<scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; Func = assign_op<double, double>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/AssignEvaluator.h:858:27:   [ skipping 2 instantiation contexts, use -ftemplate-backtrace-limit=0 to disable ]
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/PlainObjectBase.h:779:32:   required from ‘Derived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; Derived = Eigen::Matrix<double, -1, -1>]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/Matrix.h:225:24:   required from ‘Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, Eigen::Matrix<double, -1, -1> >; _Scalar = double; int _Rows = -1; int _Cols = -1; int _Options = 0; int _MaxRows = -1; int _MaxCols = -1]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseNullaryOp.h:347:20:   required from ‘Derived& Eigen::DenseBase<Derived>::setConstant(const Scalar&) [with Derived = Eigen::Matrix<double, -1, -1>; Scalar = double]’
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/CwiseNullaryOp.h:337:3:   required from ‘void Eigen::DenseBase<Derived>::fill(const Scalar&) [with Derived = Eigen::Matrix<double, -1, -1>; Scalar = double]’
+/work/project/upstream/source/ConvDiff.cpp:185:13:   required from ‘void loki::discretize_dflux_du(Matrix&, const Grid&, const ConvectionDiffusionOperator&, const ConvectionDiffusionOperator&) [with SchemeTraits = Schemes::CD; Matrix = Eigen::Matrix<double, -1, -1>]’
+/work/project/upstream/source/ConvDiff.cpp:275:43:   required from here
+/work/project/upstream/include/eigen-3.4.0/Eigen/src/Core/DenseStorage.h:488:20: error: zero as null pointer constant [-Werror=zero-as-null-pointer-constant]
+  488 |           m_data = 0;
+      |                    ^
+cc1plus: some warnings being treated as errors
+gmake[3]: *** [lib/CMakeFiles/loki-b.dir/build.make:79: lib/CMakeFiles/loki-b.dir/__/source/ConvDiff.cpp.o] Error 1
+gmake[2]: *** [CMakeFiles/Makefile2:335: lib/CMakeFiles/loki-b.dir/all] Error 2
+gmake[1]: *** [CMakeFiles/Makefile2:438: app/CMakeFiles/loki.dir/rule] Error 2
+gmake: *** [Makefile:208: loki] Error 2

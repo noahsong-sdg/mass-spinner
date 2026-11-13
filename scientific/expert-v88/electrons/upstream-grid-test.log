@@ -1,0 +1,8 @@
+Testing expression 'std::abs(grid1.duCells().sum()-grid1.uMax()) < eps*grid1.uMax()': OK
+Testing expression 'std::abs(grid1.duNodes().sum()-grid1.uMax()) < eps*grid1.uMax()': OK
+Testing expression 'std::abs(grid1.duCells().sum()-grid1.uMax()) < eps*grid1.uMax()': OK
+Testing expression 'std::abs(grid1.duNodes().sum()-grid1.uMax()) < eps*grid1.uMax()': OK
+Testing expression 'std::abs(grid2.duCells().sum()-grid2.uMax()) < eps*grid2.uMax()': OK
+Testing expression 'std::abs(grid2.duNodes().sum()-grid2.uMax()) < eps*grid2.uMax()': OK
+Testing expression '(grid1.getNodes()-grid2.getNodes()).squaredNorm()<eps*grid1.uMax()/grid1.getNodes().size()': OK
+Executed 7 tests, 0 failed.
