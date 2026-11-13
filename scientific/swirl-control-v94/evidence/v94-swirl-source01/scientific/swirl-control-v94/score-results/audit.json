@@ -1,0 +1,2074 @@
+{
+  "sets": {
+    "analytic": [
+      {
+        "name": "n64-s512-x1/native/1/0/0",
+        "value": 0.0001589074538671179,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/1/0/1",
+        "value": 0.06756776197984418,
+        "limit": 0.05,
+        "passed": false
+      },
+      {
+        "name": "n64-s512-x1/native/1/1/0",
+        "value": 0.00015890760139191876,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/1/1/1",
+        "value": 0.0675678247076797,
+        "limit": 0.05,
+        "passed": false
+      },
+      {
+        "name": "n64-s512-x1/native/2/0/0",
+        "value": 0.00017692320071267584,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/2/0/1",
+        "value": 0.03756986763941976,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/2/1/0",
+        "value": 0.00017692366252128713,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/2/1/1",
+        "value": 0.03756996570506819,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/3/0/0",
+        "value": 0.00019514797841290073,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/3/0/1",
+        "value": 0.020671288839343226,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/3/1/0",
+        "value": 0.00019514946505201777,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/native/3/1/1",
+        "value": 0.020671446313414117,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/1/0/0",
+        "value": 9.054133601014134e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/1/0/1",
+        "value": 0.003849835418034343,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/1/1/0",
+        "value": 3.4314621596654987e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/1/1/1",
+        "value": 0.0014590644604999797,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/2/0/0",
+        "value": 1.7966669849097496e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/2/0/1",
+        "value": 0.0038152452896661818,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/2/1/0",
+        "value": 5.890198309695173e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/2/1/1",
+        "value": 0.0012507911340829576,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/3/0/0",
+        "value": 3.5508340532375735e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/3/0/1",
+        "value": 0.0037612644994848028,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/3/1/0",
+        "value": 1.0332249330185521e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/v86/3/1/1",
+        "value": 0.0010944561762856497,
+        "limit": 0.05,
+        "passed": true
+      }
+    ],
+    "spatial": [
+      {
+        "name": "native/1/0/0/0",
+        "value": 0.6068796391737183,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/0/1",
+        "value": 0.3565185837994391,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/1/0",
+        "value": 0.6068796391737187,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/1/1",
+        "value": 0.3565185837994391,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/0/0",
+        "value": 0.6068746510859614,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/0/1",
+        "value": 0.35651832941252914,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/1/0",
+        "value": 0.606874651085961,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/1/1",
+        "value": 0.35651832941252914,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/0/0",
+        "value": 0.4552240503570217,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/0/1",
+        "value": 0.31273013565282937,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/1/0",
+        "value": 0.45522405035702174,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/1/1",
+        "value": 0.31273013565282914,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/0/0",
+        "value": 0.4552204504716754,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/0/1",
+        "value": 0.31272983827467515,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/1/0",
+        "value": 0.45522045047167553,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/1/1",
+        "value": 0.3127298382746751,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/0/0",
+        "value": 0.350320359638328,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/0/1",
+        "value": 0.29991870015935485,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/1/0",
+        "value": 0.3503203596383278,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/1/1",
+        "value": 0.2999187001593542,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/0/0",
+        "value": 0.35031743078812916,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/0/1",
+        "value": 0.2999180785763066,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/1/0",
+        "value": 0.35031743078812916,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/1/1",
+        "value": 0.29991807857630576,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/0/0",
+        "value": 0.2630571679847198,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/0/1",
+        "value": 0.2527041812799159,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/1/0",
+        "value": 0.2630571679847658,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/1/1",
+        "value": 0.25270418127996996,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/0/0",
+        "value": 0.2518388584176759,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/0/1",
+        "value": 0.2473072244460254,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/1/0",
+        "value": 0.251838858417381,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/1/1",
+        "value": 0.24730722444522277,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/0/0",
+        "value": 0.2624372638815138,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/0/1",
+        "value": 0.25183111193772334,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/1/0",
+        "value": 0.2624372638815172,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/1/1",
+        "value": 0.25183111193769125,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/0/0",
+        "value": 0.2504184832082976,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/0/1",
+        "value": 0.2466190595501047,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/1/0",
+        "value": 0.2504184832082542,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/1/1",
+        "value": 0.24661905954997712,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/0/0",
+        "value": 0.2617905412977552,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/0/1",
+        "value": 0.2501933296348039,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/1/0",
+        "value": 0.2617905412977659,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/1/1",
+        "value": 0.25019332963484375,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/0/0",
+        "value": 0.24788076393017278,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/0/1",
+        "value": 0.2468084953269076,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/1/0",
+        "value": 0.24788076392999797,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/1/1",
+        "value": 0.24680849532628393,
+        "limit": 1.0,
+        "passed": true
+      }
+    ],
+    "temporal": [
+      {
+        "name": "native/1/0/0/fine",
+        "value": 1.455903275079217e-07,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/0/contraction",
+        "value": 0.5051830844140122,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/1/fine",
+        "value": 6.190529365506619e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/1/contraction",
+        "value": 0.505183084414012,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/0/fine",
+        "value": 1.455763131978826e-07,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/0/contraction",
+        "value": 0.5050991573922032,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/1/fine",
+        "value": 6.189933474286926e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/1/contraction",
+        "value": 0.5050991573922035,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/0/fine",
+        "value": 9.5790923534726e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/0/contraction",
+        "value": 0.5014867601158264,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/1/fine",
+        "value": 2.034132495772553e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/1/contraction",
+        "value": 0.5014867601158263,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/0/fine",
+        "value": 9.576017322280775e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/0/contraction",
+        "value": 0.5012134263342614,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/1/fine",
+        "value": 2.033479508971508e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/1/contraction",
+        "value": 0.5012134263342614,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/0/fine",
+        "value": 9.898246716617665e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/0/contraction",
+        "value": 0.5002292995841325,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/1/fine",
+        "value": 1.048483917416584e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/1/contraction",
+        "value": 0.5002292995841325,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/0/fine",
+        "value": 9.893991780578305e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/0/contraction",
+        "value": 0.4998613423292976,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/1/fine",
+        "value": 1.0480332081006187e-05,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/1/contraction",
+        "value": 0.49986134232929763,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/0/fine",
+        "value": 2.1606070082765943e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/0/contraction",
+        "value": 0.5000428207161974,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/1/fine",
+        "value": 9.186943501674515e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/1/contraction",
+        "value": 0.5000428207161975,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/0/fine",
+        "value": 2.2481310892073684e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/0/contraction",
+        "value": 0.5001196224993079,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/1/fine",
+        "value": 9.559097615526245e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/1/contraction",
+        "value": 0.5001196224993079,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/0/fine",
+        "value": 4.308992480152174e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/0/contraction",
+        "value": 0.500020708097602,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/1/fine",
+        "value": 9.150200566486456e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/1/contraction",
+        "value": 0.500020708097602,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/0/fine",
+        "value": 4.3787380997528516e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/0/contraction",
+        "value": 0.5000346136887732,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/1/fine",
+        "value": 9.29830628050653e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/1/contraction",
+        "value": 0.5000346136887732,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/0/fine",
+        "value": 8.612927972460013e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/0/contraction",
+        "value": 0.5000186412804434,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/1/fine",
+        "value": 9.123349538086249e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/1/contraction",
+        "value": 0.5000186412804434,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/0/fine",
+        "value": 8.677772440731107e-08,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/0/contraction",
+        "value": 0.5000211655617006,
+        "limit": 1.0,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/1/fine",
+        "value": 9.192036836010971e-06,
+        "limit": 0.02,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/1/contraction",
+        "value": 0.5000211655617007,
+        "limit": 1.0,
+        "passed": true
+      }
+    ],
+    "linearity": [
+      {
+        "name": "n16-s256-x1/meridional",
+        "value": 7.834333384490699e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "n32-s256-x1/meridional",
+        "value": 7.892330915018265e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x1/meridional",
+        "value": 7.909763372917647e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "n64-s128-x1/meridional",
+        "value": 7.909720477214454e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/meridional",
+        "value": 7.909735830892975e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x0.5/meridional",
+        "value": 3.954884364788077e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "native/1/0/half-response",
+        "value": 3.764855580926601e-13,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "native/1/1/half-response",
+        "value": 2.2291343859572757e-13,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "native/2/0/half-response",
+        "value": 2.453192203558013e-13,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "native/2/1/half-response",
+        "value": 1.2157251060658827e-13,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "native/3/0/half-response",
+        "value": 1.444890780522198e-13,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "native/3/1/half-response",
+        "value": 6.668148171021374e-14,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/1/0/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/1/1/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/2/0/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/2/1/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/3/0/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      },
+      {
+        "name": "v86/3/1/half-response",
+        "value": 0.0,
+        "limit": 0.001,
+        "passed": true
+      }
+    ],
+    "conservation": [
+      {
+        "name": "n16-s256-x1/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n16-s256-x1/energyJ",
+        "value": 8.881784197001252e-16,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "n32-s256-x1/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n32-s256-x1/energyJ",
+        "value": 9.769962616701378e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x1/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x1/energyJ",
+        "value": 4.551914400963142e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "n64-s128-x1/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n64-s128-x1/energyJ",
+        "value": 5.551115123125783e-16,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n64-s512-x1/energyJ",
+        "value": 8.992806499463768e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x0.5/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "n64-s256-x0.5/energyJ",
+        "value": 4.551914400963142e-15,
+        "limit": 1e-06,
+        "passed": true
+      }
+    ]
+  },
+  "analyticErrors": {
+    "n16-s256-x1/native/1/0/0": {
+      "absoluteRMS": 3.9659699921088766e-08,
+      "scaleRMS": 5.402238728816984e-05,
+      "relative": 0.000734134530366704
+    },
+    "n16-s256-x1/native/1/0/1": {
+      "absoluteRMS": 3.9659699921088726e-08,
+      "scaleRMS": 1.270511226692286e-07,
+      "relative": 0.3121554464681184
+    },
+    "n16-s256-x1/native/1/1/0": {
+      "absoluteRMS": 6.459153786367019e-10,
+      "scaleRMS": 8.798237864327629e-07,
+      "relative": 0.0007341417549706851
+    },
+    "n16-s256-x1/native/1/1/1": {
+      "absoluteRMS": 6.45915378636702e-10,
+      "scaleRMS": 2.0691903010708486e-09,
+      "relative": 0.31215851838394343
+    },
+    "n16-s256-x1/native/2/0/0": {
+      "absoluteRMS": 6.696161144280448e-08,
+      "scaleRMS": 5.389563426624266e-05,
+      "relative": 0.0012424310865703208
+    },
+    "n16-s256-x1/native/2/0/1": {
+      "absoluteRMS": 6.696161144280447e-08,
+      "scaleRMS": 2.538041445964137e-07,
+      "relative": 0.2638318280786288
+    },
+    "n16-s256-x1/native/2/1/0": {
+      "absoluteRMS": 1.555517557772213e-09,
+      "scaleRMS": 1.2519807766557227e-06,
+      "relative": 0.0012424452409942703
+    },
+    "n16-s256-x1/native/2/1/1": {
+      "absoluteRMS": 1.5555175577722125e-09,
+      "scaleRMS": 5.895800548529511e-09,
+      "relative": 0.2638348337886326
+    },
+    "n16-s256-x1/native/3/0/0": {
+      "absoluteRMS": 9.962018323155057e-08,
+      "scaleRMS": 5.3643019728513915e-05,
+      "relative": 0.0018570949908436553
+    },
+    "n16-s256-x1/native/3/0/1": {
+      "absoluteRMS": 9.962018323155053e-08,
+      "scaleRMS": 5.064186823251515e-07,
+      "relative": 0.1967150634612416
+    },
+    "n16-s256-x1/native/3/1/0": {
+      "absoluteRMS": 3.2318717442120473e-09,
+      "scaleRMS": 1.7402524853544153e-06,
+      "relative": 0.0018571280727427623
+    },
+    "n16-s256-x1/native/3/1/1": {
+      "absoluteRMS": 3.2318717442120453e-09,
+      "scaleRMS": 1.642891050888771e-08,
+      "relative": 0.19671856770195856
+    },
+    "n16-s256-x1/v86/1/0/0": {
+      "absoluteRMS": 7.3606848171685225e-09,
+      "scaleRMS": 5.402032042610396e-05,
+      "relative": 0.00013625770375126574
+    },
+    "n16-s256-x1/v86/1/0/1": {
+      "absoluteRMS": 7.360684817168781e-09,
+      "scaleRMS": 1.270462617743468e-07,
+      "relative": 0.05793704367502335
+    },
+    "n16-s256-x1/v86/1/1/0": {
+      "absoluteRMS": 4.8200102635912176e-11,
+      "scaleRMS": 8.797901249360823e-07,
+      "relative": 5.478591003668513e-05
+    },
+    "n16-s256-x1/v86/1/1/1": {
+      "absoluteRMS": 4.820010263590215e-11,
+      "scaleRMS": 2.0691111351702163e-09,
+      "relative": 0.023295076719954413
+    },
+    "n16-s256-x1/v86/2/0/0": {
+      "absoluteRMS": 1.4657372560813119e-08,
+      "scaleRMS": 5.389357225366651e-05,
+      "relative": 0.00027196884429600863
+    },
+    "n16-s256-x1/v86/2/0/1": {
+      "absoluteRMS": 1.4657372560813804e-08,
+      "scaleRMS": 2.537944342117942e-07,
+      "relative": 0.05775293144759064
+    },
+    "n16-s256-x1/v86/2/1/0": {
+      "absoluteRMS": 1.1867291987610088e-10,
+      "scaleRMS": 1.2519328766700779e-06,
+      "relative": 9.479175927686319e-05
+    },
+    "n16-s256-x1/v86/2/1/1": {
+      "absoluteRMS": 1.1867291987608219e-10,
+      "scaleRMS": 5.895574978962545e-09,
+      "relative": 0.0201291511514226
+    },
+    "n16-s256-x1/v86/3/0/0": {
+      "absoluteRMS": 2.9093236342107965e-08,
+      "scaleRMS": 5.3640967380808795e-05,
+      "relative": 0.0005423697178234838
+    },
+    "n16-s256-x1/v86/3/0/1": {
+      "absoluteRMS": 2.9093236342108994e-08,
+      "scaleRMS": 5.063993070695124e-07,
+      "relative": 0.057451177234955075
+    },
+    "n16-s256-x1/v86/3/1/0": {
+      "absoluteRMS": 2.919135798149929e-10,
+      "scaleRMS": 1.740185904404765e-06,
+      "relative": 0.00016774850266060664
+    },
+    "n16-s256-x1/v86/3/1/1": {
+      "absoluteRMS": 2.9191357981495163e-10,
+      "scaleRMS": 1.6428281949254783e-08,
+      "relative": 0.017768965782097097
+    },
+    "n32-s256-x1/native/1/0/0": {
+      "absoluteRMS": 2.4056488297560375e-08,
+      "scaleRMS": 5.39950579393269e-05,
+      "relative": 0.0004455312988939125
+    },
+    "n32-s256-x1/native/1/0/1": {
+      "absoluteRMS": 2.405648829756037e-08,
+      "scaleRMS": 1.2698684886300466e-07,
+      "relative": 0.18944078471868275
+    },
+    "n32-s256-x1/native/1/1/0": {
+      "absoluteRMS": 3.901107527134404e-10,
+      "scaleRMS": 8.756065422448377e-07,
+      "relative": 0.00044553202139546987
+    },
+    "n32-s256-x1/native/1/1/1": {
+      "absoluteRMS": 3.901107527134403e-10,
+      "scaleRMS": 2.0592720868722048e-09,
+      "relative": 0.1894410919277662
+    },
+    "n32-s256-x1/native/2/0/0": {
+      "absoluteRMS": 3.0467115189986874e-08,
+      "scaleRMS": 5.386836904039996e-05,
+      "relative": 0.0005655845115180169
+    },
+    "n32-s256-x1/native/2/0/1": {
+      "absoluteRMS": 3.0467115189986874e-08,
+      "scaleRMS": 2.536757477899479e-07,
+      "relative": 0.12010259339105082
+    },
+    "n32-s256-x1/native/2/1/0": {
+      "absoluteRMS": 6.977037727504808e-10,
+      "scaleRMS": 1.2335934372464668e-06,
+      "relative": 0.0005655864822918011
+    },
+    "n32-s256-x1/native/2/1/1": {
+      "absoluteRMS": 6.977037727504806e-10,
+      "scaleRMS": 5.809211291093252e-09,
+      "relative": 0.12010301188738097
+    },
+    "n32-s256-x1/native/3/0/0": {
+      "absoluteRMS": 3.4881323396405775e-08,
+      "scaleRMS": 5.361588229766827e-05,
+      "relative": 0.0006505781850748868
+    },
+    "n32-s256-x1/native/3/0/1": {
+      "absoluteRMS": 3.488132339640575e-08,
+      "scaleRMS": 5.06162490521631e-07,
+      "relative": 0.06891329177801864
+    },
+    "n32-s256-x1/native/3/1/0": {
+      "absoluteRMS": 1.1289752288883359e-09,
+      "scaleRMS": 1.7353249502019649e-06,
+      "relative": 0.0006505843350877544
+    },
+    "n32-s256-x1/native/3/1/1": {
+      "absoluteRMS": 1.128975228888335e-09,
+      "scaleRMS": 1.638239195210914e-08,
+      "relative": 0.06891394322567077
+    },
+    "n32-s256-x1/v86/1/0/0": {
+      "absoluteRMS": 1.935301623597308e-09,
+      "scaleRMS": 5.3992999516004686e-05,
+      "relative": 3.584356566490889e-05
+    },
+    "n32-s256-x1/v86/1/0/1": {
+      "absoluteRMS": 1.935301623597714e-09,
+      "scaleRMS": 1.2698200781455894e-07,
+      "relative": 0.01524075463056133
+    },
+    "n32-s256-x1/v86/1/1/0": {
+      "absoluteRMS": 1.2080476453519788e-11,
+      "scaleRMS": 8.755731619875148e-07,
+      "relative": 1.3797221041012275e-05
+    },
+    "n32-s256-x1/v86/1/1/1": {
+      "absoluteRMS": 1.208047645350313e-11,
+      "scaleRMS": 2.0591935823969167e-09,
+      "relative": 0.005866605527898628
+    },
+    "n32-s256-x1/v86/2/0/0": {
+      "absoluteRMS": 3.844695302518494e-09,
+      "scaleRMS": 5.386631544676761e-05,
+      "relative": 7.137475935806196e-05
+    },
+    "n32-s256-x1/v86/2/0/1": {
+      "absoluteRMS": 3.844695302518724e-09,
+      "scaleRMS": 2.536660770516348e-07,
+      "relative": 0.01515652131024252
+    },
+    "n32-s256-x1/v86/2/1/0": {
+      "absoluteRMS": 2.9281441836133524e-11,
+      "scaleRMS": 1.2335464096554498e-06,
+      "relative": 2.3737608578758155e-05
+    },
+    "n32-s256-x1/v86/2/1/1": {
+      "absoluteRMS": 2.928144183612384e-11,
+      "scaleRMS": 5.808989829788027e-09,
+      "relative": 0.005040711499608932
+    },
+    "n32-s256-x1/v86/3/0/0": {
+      "absoluteRMS": 7.612482110380034e-09,
+      "scaleRMS": 5.361383832944647e-05,
+      "relative": 0.00014198726201252056
+    },
+    "n32-s256-x1/v86/3/0/1": {
+      "absoluteRMS": 7.612482110380614e-09,
+      "scaleRMS": 5.06143194372778e-07,
+      "relative": 0.015040174786532776
+    },
+    "n32-s256-x1/v86/3/1/0": {
+      "absoluteRMS": 7.215488395661026e-11,
+      "scaleRMS": 1.735258795381771e-06,
+      "relative": 4.158162698765379e-05
+    },
+    "n32-s256-x1/v86/3/1/1": {
+      "absoluteRMS": 7.215488395654918e-11,
+      "scaleRMS": 1.6381767415365283e-08,
+      "relative": 0.004404584812312222
+    },
+    "n64-s256-x1/native/1/0/0": {
+      "absoluteRMS": 8.575498358935883e-09,
+      "scaleRMS": 5.398821596744484e-05,
+      "relative": 0.0001588401877199823
+    },
+    "n64-s256-x1/native/1/0/1": {
+      "absoluteRMS": 8.57549835893588e-09,
+      "scaleRMS": 1.2697075775240174e-07,
+      "relative": 0.0675391602817592
+    },
+    "n64-s256-x1/native/1/1/0": {
+      "absoluteRMS": 1.3862811017707871e-10,
+      "scaleRMS": 8.727513249296688e-07,
+      "relative": 0.00015884033196770012
+    },
+    "n64-s256-x1/native/1/1/1": {
+      "absoluteRMS": 1.3862811017707864e-10,
+      "scaleRMS": 2.0525571195490875e-09,
+      "relative": 0.06753922161617257
+    },
+    "n64-s256-x1/native/2/0/0": {
+      "absoluteRMS": 9.526777729784476e-09,
+      "scaleRMS": 5.386154312187384e-05,
+      "relative": 0.00017687532101016865
+    },
+    "n64-s256-x1/native/2/0/1": {
+      "absoluteRMS": 9.52677772978447e-09,
+      "scaleRMS": 2.536436033234026e-07,
+      "relative": 0.03755970032343991
+    },
+    "n64-s256-x1/native/2/1/0": {
+      "absoluteRMS": 2.1766897048019339e-10,
+      "scaleRMS": 1.2306319375551886e-06,
+      "relative": 0.00017687576913745737
+    },
+    "n64-s256-x1/native/2/1/1": {
+      "absoluteRMS": 2.1766897048019333e-10,
+      "scaleRMS": 5.7952650613828035e-09,
+      "relative": 0.03755979548384203
+    },
+    "n64-s256-x1/native/3/0/0": {
+      "absoluteRMS": 1.046023553846676e-08,
+      "scaleRMS": 5.3609088372944184e-05,
+      "relative": 0.00019512056361969225
+    },
+    "n64-s256-x1/native/3/0/1": {
+      "absoluteRMS": 1.0460235538466727e-08,
+      "scaleRMS": 5.060983522530547e-07,
+      "relative": 0.02066838489376566
+    },
+    "n64-s256-x1/native/3/1/0": {
+      "absoluteRMS": 3.3782441109375257e-10,
+      "scaleRMS": 1.7313496409090626e-06,
+      "relative": 0.00019512200373136327
+    },
+    "n64-s256-x1/native/3/1/1": {
+      "absoluteRMS": 3.3782441109375143e-10,
+      "scaleRMS": 1.6344862914703433e-08,
+      "relative": 0.0206685374393598
+    },
+    "n64-s256-x1/v86/1/0/0": {
+      "absoluteRMS": 4.889968580317415e-10,
+      "scaleRMS": 5.398615964763393e-05,
+      "relative": 9.057818915503705e-06
+    },
+    "n64-s256-x1/v86/1/0/1": {
+      "absoluteRMS": 4.889968580319488e-10,
+      "scaleRMS": 1.2696592165104345e-07,
+      "relative": 0.0038514024210049122
+    },
+    "n64-s256-x1/v86/1/1/0": {
+      "absoluteRMS": 2.977847138021378e-12,
+      "scaleRMS": 8.727180833081734e-07,
+      "relative": 3.412152440721047e-06
+    },
+    "n64-s256-x1/v86/1/1/1": {
+      "absoluteRMS": 2.9778471380076072e-12,
+      "scaleRMS": 2.052478941120804e-09,
+      "relative": 0.0014508539300196106
+    },
+    "n64-s256-x1/v86/2/0/0": {
+      "absoluteRMS": 9.68091239127925e-10,
+      "scaleRMS": 5.385949162681732e-05,
+      "relative": 1.7974385013428167e-05
+    },
+    "n64-s256-x1/v86/2/0/1": {
+      "absoluteRMS": 9.680912391278595e-10,
+      "scaleRMS": 2.53633942467657e-07,
+      "relative": 0.003816883614665687
+    },
+    "n64-s256-x1/v86/2/1/0": {
+      "absoluteRMS": 7.204025501064326e-12,
+      "scaleRMS": 1.2305850648666061e-06,
+      "relative": 5.8541467036618335e-06
+    },
+    "n64-s256-x1/v86/2/1/1": {
+      "absoluteRMS": 7.204025501058217e-12,
+      "scaleRMS": 5.795044329540741e-09,
+      "relative": 0.0012431355294963097
+    },
+    "n64-s256-x1/v86/3/0/0": {
+      "absoluteRMS": 1.9043509709942454e-09,
+      "scaleRMS": 5.360704649346196e-05,
+      "relative": 3.552426584864183e-05
+    },
+    "n64-s256-x1/v86/3/0/1": {
+      "absoluteRMS": 1.904350970994694e-09,
+      "scaleRMS": 5.060790758230161e-07,
+      "relative": 0.003762951408132661
+    },
+    "n64-s256-x1/v86/3/1/0": {
+      "absoluteRMS": 1.7767643099697346e-11,
+      "scaleRMS": 1.7312836967302603e-06,
+      "relative": 1.0262698790067566e-05
+    },
+    "n64-s256-x1/v86/3/1/1": {
+      "absoluteRMS": 1.7767643099637408e-11,
+      "scaleRMS": 1.6344240366526523e-08,
+      "relative": 0.0010870889500637824
+    },
+    "n64-s128-x1/native/1/0/0": {
+      "absoluteRMS": 8.568426723154876e-09,
+      "scaleRMS": 5.398821596744484e-05,
+      "relative": 0.00015870920291794193
+    },
+    "n64-s128-x1/native/1/0/1": {
+      "absoluteRMS": 8.568426723154871e-09,
+      "scaleRMS": 1.2697075775240174e-07,
+      "relative": 0.06748346528626425
+    },
+    "n64-s128-x1/native/1/1/0": {
+      "absoluteRMS": 1.3851378360333322e-10,
+      "scaleRMS": 8.727513249296688e-07,
+      "relative": 0.00015870933637883097
+    },
+    "n64-s128-x1/native/1/1/1": {
+      "absoluteRMS": 1.3851378360333315e-10,
+      "scaleRMS": 2.0525571195490875e-09,
+      "relative": 0.06748352203409681
+    },
+    "n64-s128-x1/native/2/0/0": {
+      "absoluteRMS": 9.52164331723498e-09,
+      "scaleRMS": 5.386154312187384e-05,
+      "relative": 0.00017677999487853742
+    },
+    "n64-s128-x1/native/2/0/1": {
+      "absoluteRMS": 9.521643317234973e-09,
+      "scaleRMS": 2.536436033234026e-07,
+      "relative": 0.03753945769763653
+    },
+    "n64-s128-x1/native/2/1/0": {
+      "absoluteRMS": 2.1755162167088263e-10,
+      "scaleRMS": 1.2306319375551886e-06,
+      "relative": 0.00017678041259279958
+    },
+    "n64-s128-x1/native/2/1/1": {
+      "absoluteRMS": 2.1755162167088257e-10,
+      "scaleRMS": 5.7952650613828035e-09,
+      "relative": 0.03753954639979362
+    },
+    "n64-s128-x1/native/3/0/0": {
+      "absoluteRMS": 1.0457305120818321e-08,
+      "scaleRMS": 5.3609088372944184e-05,
+      "relative": 0.00019506590091720322
+    },
+    "n64-s128-x1/native/3/0/1": {
+      "absoluteRMS": 1.0457305120818292e-08,
+      "scaleRMS": 5.060983522530547e-07,
+      "relative": 0.020662594679995174
+    },
+    "n64-s128-x1/native/3/1/0": {
+      "absoluteRMS": 3.3772960465116473e-10,
+      "scaleRMS": 1.7313496409090626e-06,
+      "relative": 0.0001950672450388683
+    },
+    "n64-s128-x1/native/3/1/1": {
+      "absoluteRMS": 3.377296046511636e-10,
+      "scaleRMS": 1.6344862914703433e-08,
+      "relative": 0.020662737057730255
+    },
+    "n64-s128-x1/v86/1/0/0": {
+      "absoluteRMS": 4.894029899138473e-10,
+      "scaleRMS": 5.398615964763393e-05,
+      "relative": 9.0653418044211e-06
+    },
+    "n64-s128-x1/v86/1/0/1": {
+      "absoluteRMS": 4.894029899140597e-10,
+      "scaleRMS": 1.2696592165104345e-07,
+      "relative": 0.003854601168171315
+    },
+    "n64-s128-x1/v86/1/1/0": {
+      "absoluteRMS": 2.9442592194026923e-12,
+      "scaleRMS": 8.727180833081734e-07,
+      "relative": 3.373665878724571e-06
+    },
+    "n64-s128-x1/v86/1/1/1": {
+      "absoluteRMS": 2.944259219388991e-12,
+      "scaleRMS": 2.052478941120804e-09,
+      "relative": 0.0014344893681497214
+    },
+    "n64-s128-x1/v86/2/0/0": {
+      "absoluteRMS": 9.68938492926371e-10,
+      "scaleRMS": 5.385949162681732e-05,
+      "relative": 1.799011583027873e-05
+    },
+    "n64-s128-x1/v86/2/0/1": {
+      "absoluteRMS": 9.68938492926308e-10,
+      "scaleRMS": 2.53633942467657e-07,
+      "relative": 0.0038202240737154713
+    },
+    "n64-s128-x1/v86/2/1/0": {
+      "absoluteRMS": 7.115700413372184e-12,
+      "scaleRMS": 1.2305850648666061e-06,
+      "relative": 5.782371829893383e-06
+    },
+    "n64-s128-x1/v86/2/1/1": {
+      "absoluteRMS": 7.115700413366119e-12,
+      "scaleRMS": 5.795044329540741e-09,
+      "relative": 0.0012278940433799995
+    },
+    "n64-s128-x1/v86/3/0/0": {
+      "absoluteRMS": 1.906090802608483e-09,
+      "scaleRMS": 5.360704649346196e-05,
+      "relative": 3.55567211269689e-05
+    },
+    "n64-s128-x1/v86/3/0/1": {
+      "absoluteRMS": 1.9060908026089415e-09,
+      "scaleRMS": 5.060790758230161e-07,
+      "relative": 0.0037663892732754116
+    },
+    "n64-s128-x1/v86/3/1/0": {
+      "absoluteRMS": 1.752821437991724e-11,
+      "scaleRMS": 1.7312836967302603e-06,
+      "relative": 1.0124403304335046e-05
+    },
+    "n64-s128-x1/v86/3/1/1": {
+      "absoluteRMS": 1.7528214379857758e-11,
+      "scaleRMS": 1.6344240366526523e-08,
+      "relative": 0.0010724398312053735
+    },
+    "n64-s512-x1/native/1/0/0": {
+      "absoluteRMS": 8.579129938214739e-09,
+      "scaleRMS": 5.398821596744484e-05,
+      "relative": 0.0001589074538671179
+    },
+    "n64-s512-x1/native/1/0/1": {
+      "absoluteRMS": 8.579129938214735e-09,
+      "scaleRMS": 1.2697075775240174e-07,
+      "relative": 0.06756776197984418
+    },
+    "n64-s512-x1/native/1/1/0": {
+      "absoluteRMS": 1.3868681965619278e-10,
+      "scaleRMS": 8.727513249296688e-07,
+      "relative": 0.00015890760139191876
+    },
+    "n64-s512-x1/native/1/1/1": {
+      "absoluteRMS": 1.386868196561927e-10,
+      "scaleRMS": 2.0525571195490875e-09,
+      "relative": 0.0675678247076797
+    },
+    "n64-s512-x1/native/2/0/0": {
+      "absoluteRMS": 9.52935660444573e-09,
+      "scaleRMS": 5.386154312187384e-05,
+      "relative": 0.00017692320071267584
+    },
+    "n64-s512-x1/native/2/0/1": {
+      "absoluteRMS": 9.529356604445727e-09,
+      "scaleRMS": 2.536436033234026e-07,
+      "relative": 0.03756986763941976
+    },
+    "n64-s512-x1/native/2/1/0": {
+      "absoluteRMS": 2.1772790960793188e-10,
+      "scaleRMS": 1.2306319375551886e-06,
+      "relative": 0.00017692366252128713
+    },
+    "n64-s512-x1/native/2/1/1": {
+      "absoluteRMS": 2.177279096079318e-10,
+      "scaleRMS": 5.7952650613828035e-09,
+      "relative": 0.03756996570506819
+    },
+    "n64-s512-x1/native/3/0/0": {
+      "absoluteRMS": 1.0461705220538598e-08,
+      "scaleRMS": 5.3609088372944184e-05,
+      "relative": 0.00019514797841290073
+    },
+    "n64-s512-x1/native/3/0/1": {
+      "absoluteRMS": 1.0461705220538565e-08,
+      "scaleRMS": 5.060983522530547e-07,
+      "relative": 0.020671288839343226
+    },
+    "n64-s512-x1/native/3/1/0": {
+      "absoluteRMS": 3.378719562414066e-10,
+      "scaleRMS": 1.7313496409090626e-06,
+      "relative": 0.00019514946505201777
+    },
+    "n64-s512-x1/native/3/1/1": {
+      "absoluteRMS": 3.378719562414054e-10,
+      "scaleRMS": 1.6344862914703433e-08,
+      "relative": 0.020671446313414117
+    },
+    "n64-s512-x1/v86/1/0/0": {
+      "absoluteRMS": 4.887979020553557e-10,
+      "scaleRMS": 5.398615964763393e-05,
+      "relative": 9.054133601014134e-06
+    },
+    "n64-s512-x1/v86/1/0/1": {
+      "absoluteRMS": 4.887979020555605e-10,
+      "scaleRMS": 1.2696592165104345e-07,
+      "relative": 0.003849835418034343
+    },
+    "n64-s512-x1/v86/1/1/0": {
+      "absoluteRMS": 2.9946990789277993e-12,
+      "scaleRMS": 8.727180833081734e-07,
+      "relative": 3.4314621596654987e-06
+    },
+    "n64-s512-x1/v86/1/1/1": {
+      "absoluteRMS": 2.9946990789139953e-12,
+      "scaleRMS": 2.052478941120804e-09,
+      "relative": 0.0014590644604999797
+    },
+    "n64-s512-x1/v86/2/0/0": {
+      "absoluteRMS": 9.676757042992578e-10,
+      "scaleRMS": 5.385949162681732e-05,
+      "relative": 1.7966669849097496e-05
+    },
+    "n64-s512-x1/v86/2/0/1": {
+      "absoluteRMS": 9.676757042991916e-10,
+      "scaleRMS": 2.53633942467657e-07,
+      "relative": 0.0038152452896661818
+    },
+    "n64-s512-x1/v86/2/1/0": {
+      "absoluteRMS": 7.248390069013408e-12,
+      "scaleRMS": 1.2305850648666061e-06,
+      "relative": 5.890198309695173e-06
+    },
+    "n64-s512-x1/v86/2/1/1": {
+      "absoluteRMS": 7.248390069007277e-12,
+      "scaleRMS": 5.795044329540741e-09,
+      "relative": 0.0012507911340829576
+    },
+    "n64-s512-x1/v86/3/0/0": {
+      "absoluteRMS": 1.9034972618247456e-09,
+      "scaleRMS": 5.360704649346196e-05,
+      "relative": 3.5508340532375735e-05
+    },
+    "n64-s512-x1/v86/3/0/1": {
+      "absoluteRMS": 1.903497261825188e-09,
+      "scaleRMS": 5.060790758230161e-07,
+      "relative": 0.0037612644994848028
+    },
+    "n64-s512-x1/v86/3/1/0": {
+      "absoluteRMS": 1.7888054815902344e-11,
+      "scaleRMS": 1.7312836967302603e-06,
+      "relative": 1.0332249330185521e-05
+    },
+    "n64-s512-x1/v86/3/1/1": {
+      "absoluteRMS": 1.7888054815842183e-11,
+      "scaleRMS": 1.6344240366526523e-08,
+      "relative": 0.0010944561762856497
+    },
+    "n64-s256-x0.5/native/1/0/0": {
+      "absoluteRMS": 4.287749179467918e-09,
+      "scaleRMS": 2.699410798372242e-05,
+      "relative": 0.0001588401877199814
+    },
+    "n64-s256-x0.5/native/1/0/1": {
+      "absoluteRMS": 4.287749179467916e-09,
+      "scaleRMS": 6.348537887620087e-08,
+      "relative": 0.06753916028175881
+    },
+    "n64-s256-x0.5/native/1/1/0": {
+      "absoluteRMS": 6.931405508853994e-11,
+      "scaleRMS": 4.363756624648344e-07,
+      "relative": 0.00015884033196770147
+    },
+    "n64-s256-x0.5/native/1/1/1": {
+      "absoluteRMS": 6.931405508853989e-11,
+      "scaleRMS": 1.0262785597745437e-09,
+      "relative": 0.06753922161617312
+    },
+    "n64-s256-x0.5/native/2/0/0": {
+      "absoluteRMS": 4.763388864892135e-09,
+      "scaleRMS": 2.693077156093692e-05,
+      "relative": 0.0001768753210101648
+    },
+    "n64-s256-x0.5/native/2/0/1": {
+      "absoluteRMS": 4.763388864892132e-09,
+      "scaleRMS": 1.268218016617013e-07,
+      "relative": 0.0375597003234391
+    },
+    "n64-s256-x0.5/native/2/1/0": {
+      "absoluteRMS": 1.0883448524009726e-10,
+      "scaleRMS": 6.153159687775943e-07,
+      "relative": 0.0001768757691374583
+    },
+    "n64-s256-x0.5/native/2/1/1": {
+      "absoluteRMS": 1.0883448524009721e-10,
+      "scaleRMS": 2.8976325306914018e-09,
+      "relative": 0.037559795483842216
+    },
+    "n64-s256-x0.5/native/3/0/0": {
+      "absoluteRMS": 5.2301177692333594e-09,
+      "scaleRMS": 2.6804544186472092e-05,
+      "relative": 0.0001951205636196915
+    },
+    "n64-s256-x0.5/native/3/0/1": {
+      "absoluteRMS": 5.230117769233344e-09,
+      "scaleRMS": 2.5304917612652733e-07,
+      "relative": 0.020668384893765584
+    },
+    "n64-s256-x0.5/native/3/1/0": {
+      "absoluteRMS": 1.6891220554687435e-10,
+      "scaleRMS": 8.656748204545313e-07,
+      "relative": 0.00019512200373136102
+    },
+    "n64-s256-x0.5/native/3/1/1": {
+      "absoluteRMS": 1.6891220554687378e-10,
+      "scaleRMS": 8.172431457351716e-09,
+      "relative": 0.020668537439359563
+    },
+    "n64-s256-x0.5/v86/1/0/0": {
+      "absoluteRMS": 2.4449842901587073e-10,
+      "scaleRMS": 2.6993079823816963e-05,
+      "relative": 9.057818915503705e-06
+    },
+    "n64-s256-x0.5/v86/1/0/1": {
+      "absoluteRMS": 2.444984290159744e-10,
+      "scaleRMS": 6.348296082552173e-08,
+      "relative": 0.0038514024210049122
+    },
+    "n64-s256-x0.5/v86/1/1/0": {
+      "absoluteRMS": 1.488923569010689e-12,
+      "scaleRMS": 4.363590416540867e-07,
+      "relative": 3.412152440721047e-06
+    },
+    "n64-s256-x0.5/v86/1/1/1": {
+      "absoluteRMS": 1.4889235690038036e-12,
+      "scaleRMS": 1.026239470560402e-09,
+      "relative": 0.0014508539300196106
+    },
+    "n64-s256-x0.5/v86/2/0/0": {
+      "absoluteRMS": 4.840456195639625e-10,
+      "scaleRMS": 2.692974581340866e-05,
+      "relative": 1.7974385013428167e-05
+    },
+    "n64-s256-x0.5/v86/2/0/1": {
+      "absoluteRMS": 4.840456195639297e-10,
+      "scaleRMS": 1.268169712338285e-07,
+      "relative": 0.003816883614665687
+    },
+    "n64-s256-x0.5/v86/2/1/0": {
+      "absoluteRMS": 3.602012750532163e-12,
+      "scaleRMS": 6.152925324333031e-07,
+      "relative": 5.8541467036618335e-06
+    },
+    "n64-s256-x0.5/v86/2/1/1": {
+      "absoluteRMS": 3.6020127505291083e-12,
+      "scaleRMS": 2.8975221647703707e-09,
+      "relative": 0.0012431355294963097
+    },
+    "n64-s256-x0.5/v86/3/0/0": {
+      "absoluteRMS": 9.521754854971227e-10,
+      "scaleRMS": 2.680352324673098e-05,
+      "relative": 3.552426584864183e-05
+    },
+    "n64-s256-x0.5/v86/3/0/1": {
+      "absoluteRMS": 9.52175485497347e-10,
+      "scaleRMS": 2.5303953791150805e-07,
+      "relative": 0.003762951408132661
+    },
+    "n64-s256-x0.5/v86/3/1/0": {
+      "absoluteRMS": 8.883821549848673e-12,
+      "scaleRMS": 8.656418483651302e-07,
+      "relative": 1.0262698790067566e-05
+    },
+    "n64-s256-x0.5/v86/3/1/1": {
+      "absoluteRMS": 8.883821549818704e-12,
+      "scaleRMS": 8.172120183263262e-09,
+      "relative": 0.0010870889500637824
+    }
+  },
+  "integratedRecoveryDiagnostic": [
+    {
+      "name": "n16-s256-x1/native/1/0/0",
+      "absoluteRMS": 3.548967790098163e-08,
+      "scaleRMS": 5.393133271223609e-05,
+      "relative": 0.0006580530485004988
+    },
+    {
+      "name": "n16-s256-x1/native/1/0/1",
+      "absoluteRMS": 3.5489677900981596e-08,
+      "scaleRMS": 1.2683697837318256e-07,
+      "relative": 0.27980545071456275
+    },
+    {
+      "name": "n16-s256-x1/native/1/1/0",
+      "absoluteRMS": 5.780007904386949e-10,
+      "scaleRMS": 8.783408460113647e-07,
+      "relative": 0.0006580597874543298
+    },
+    {
+      "name": "n16-s256-x1/native/1/1/1",
+      "absoluteRMS": 5.78000790438695e-10,
+      "scaleRMS": 2.0657026868640717e-09,
+      "relative": 0.2798083161309887
+    },
+    {
+      "name": "n16-s256-x1/native/2/0/0",
+      "absoluteRMS": 5.998337534008173e-08,
+      "scaleRMS": 5.380479333215702e-05,
+      "relative": 0.0011148333006277345
+    },
+    {
+      "name": "n16-s256-x1/native/2/0/1",
+      "absoluteRMS": 5.998337534008172e-08,
+      "scaleRMS": 2.5337635845225125e-07,
+      "relative": 0.23673627526455107
+    },
+    {
+      "name": "n16-s256-x1/native/2/1/0",
+      "absoluteRMS": 1.3934142289992232e-09,
+      "scaleRMS": 1.249870566714657e-06,
+      "relative": 0.0011148468218288214
+    },
+    {
+      "name": "n16-s256-x1/native/2/1/1",
+      "absoluteRMS": 1.3934142289992228e-09,
+      "scaleRMS": 5.885863193931079e-09,
+      "relative": 0.2367391465088713
+    },
+    {
+      "name": "n16-s256-x1/native/3/0/0",
+      "absoluteRMS": 8.950032283152861e-08,
+      "scaleRMS": 5.355260457549355e-05,
+      "relative": 0.0016712599422752494
+    },
+    {
+      "name": "n16-s256-x1/native/3/0/1",
+      "absoluteRMS": 8.950032283152856e-08,
+      "scaleRMS": 5.055651151157265e-07,
+      "relative": 0.17703025813211315
+    },
+    {
+      "name": "n16-s256-x1/native/3/1/0",
+      "absoluteRMS": 2.9035688637752767e-09,
+      "scaleRMS": 1.737319294874951e-06,
+      "relative": 0.0016712925898772512
+    },
+    {
+      "name": "n16-s256-x1/native/3/1/1",
+      "absoluteRMS": 2.9035688637752743e-09,
+      "scaleRMS": 1.6401219628226317e-08,
+      "relative": 0.17703371636937684
+    },
+    {
+      "name": "n32-s256-x1/native/1/0/0",
+      "absoluteRMS": 2.1527688081195783e-08,
+      "scaleRMS": 5.397045148970223e-05,
+      "relative": 0.0003988791549261608
+    },
+    {
+      "name": "n32-s256-x1/native/1/0/1",
+      "absoluteRMS": 2.1527688081195777e-08,
+      "scaleRMS": 1.2692897883528742e-07,
+      "relative": 0.1696042013316102
+    },
+    {
+      "name": "n32-s256-x1/native/1/1/0",
+      "absoluteRMS": 3.491026669966189e-10,
+      "scaleRMS": 8.752075137208386e-07,
+      "relative": 0.00039887987879863053
+    },
+    {
+      "name": "n32-s256-x1/native/1/1/1",
+      "absoluteRMS": 3.491026669966188e-10,
+      "scaleRMS": 2.0583336421922114e-09,
+      "relative": 0.16960450912360828
+    },
+    {
+      "name": "n32-s256-x1/native/2/0/0",
+      "absoluteRMS": 2.740720827903262e-08,
+      "scaleRMS": 5.384382032502224e-05,
+      "relative": 0.0005090130699046252
+    },
+    {
+      "name": "n32-s256-x1/native/2/0/1",
+      "absoluteRMS": 2.740720827903261e-08,
+      "scaleRMS": 2.5356014351527507e-07,
+      "relative": 0.10808957551083549
+    },
+    {
+      "name": "n32-s256-x1/native/2/1/0",
+      "absoluteRMS": 6.276315362425096e-10,
+      "scaleRMS": 1.233031268116006e-06,
+      "relative": 0.0005090151016214625
+    },
+    {
+      "name": "n32-s256-x1/native/2/1/1",
+      "absoluteRMS": 6.276315362425094e-10,
+      "scaleRMS": 5.806563936493615e-09,
+      "relative": 0.10809000694850086
+    },
+    {
+      "name": "n32-s256-x1/native/3/0/0",
+      "absoluteRMS": 3.171465188042792e-08,
+      "scaleRMS": 5.359144864471578e-05,
+      "relative": 0.0005917856800378737
+    },
+    {
+      "name": "n32-s256-x1/native/3/0/1",
+      "absoluteRMS": 3.171465188042789e-08,
+      "scaleRMS": 5.059318238217468e-07,
+      "relative": 0.06268562361003367
+    },
+    {
+      "name": "n32-s256-x1/native/3/1/0",
+      "absoluteRMS": 1.0264836239702495e-09,
+      "scaleRMS": 1.7345341336420947e-06,
+      "relative": 0.0005917921152781737
+    },
+    {
+      "name": "n32-s256-x1/native/3/1/1",
+      "absoluteRMS": 1.026483623970249e-09,
+      "scaleRMS": 1.637492622250933e-08,
+      "relative": 0.06268630527075121
+    },
+    {
+      "name": "n64-s256-x1/native/1/0/0",
+      "absoluteRMS": 7.774329030175361e-09,
+      "scaleRMS": 5.398049865241553e-05,
+      "relative": 0.0001440210673160848
+    },
+    {
+      "name": "n64-s256-x1/native/1/0/1",
+      "absoluteRMS": 7.774329030175358e-09,
+      "scaleRMS": 1.2695260798917054e-07,
+      "relative": 0.06123804113451953
+    },
+    {
+      "name": "n64-s256-x1/native/1/1/0",
+      "absoluteRMS": 1.2567674311270373e-10,
+      "scaleRMS": 8.726265699846121e-07,
+      "relative": 0.00014402121988437726
+    },
+    {
+      "name": "n64-s256-x1/native/1/1/1",
+      "absoluteRMS": 1.2567674311270366e-10,
+      "scaleRMS": 2.0522637179312835e-09,
+      "relative": 0.061238106006857605
+    },
+    {
+      "name": "n64-s256-x1/native/2/0/0",
+      "absoluteRMS": 8.737478955938247e-09,
+      "scaleRMS": 5.385384391402288e-05,
+      "relative": 0.0001622442953169238
+    },
+    {
+      "name": "n64-s256-x1/native/2/0/1",
+      "absoluteRMS": 8.737478955938242e-09,
+      "scaleRMS": 2.5360734638182865e-07,
+      "relative": 0.03445278333058689
+    },
+    {
+      "name": "n64-s256-x1/native/2/1/0",
+      "absoluteRMS": 1.996350558422248e-10,
+      "scaleRMS": 1.2304560255681551e-06,
+      "relative": 0.00016224477079548178
+    },
+    {
+      "name": "n64-s256-x1/native/2/1/1",
+      "absoluteRMS": 1.996350558422247e-10,
+      "scaleRMS": 5.7944366604928025e-09,
+      "relative": 0.03445288429906596
+    },
+    {
+      "name": "n64-s256-x1/native/3/0/0",
+      "absoluteRMS": 9.70196433598893e-09,
+      "scaleRMS": 5.360142525209468e-05,
+      "relative": 0.00018100198437558874
+    },
+    {
+      "name": "n64-s256-x1/native/3/0/1",
+      "absoluteRMS": 9.701964335988895e-09,
+      "scaleRMS": 5.060260083100264e-07,
+      "relative": 0.019172857079798166
+    },
+    {
+      "name": "n64-s256-x1/native/3/1/0",
+      "absoluteRMS": 3.133355669990816e-10,
+      "scaleRMS": 1.7311021541128174e-06,
+      "relative": 0.00018100351054075415
+    },
+    {
+      "name": "n64-s256-x1/native/3/1/1",
+      "absoluteRMS": 3.133355669990803e-10,
+      "scaleRMS": 1.634252650750858e-08,
+      "relative": 0.019173018740714184
+    },
+    {
+      "name": "n64-s128-x1/native/1/0/0",
+      "absoluteRMS": 7.766903514088459e-09,
+      "scaleRMS": 5.398049865241553e-05,
+      "relative": 0.000143883508081319
+    },
+    {
+      "name": "n64-s128-x1/native/1/0/1",
+      "absoluteRMS": 7.766903514088456e-09,
+      "scaleRMS": 1.2695260798917054e-07,
+      "relative": 0.061179550677296815
+    },
+    {
+      "name": "n64-s128-x1/native/1/1/0",
+      "absoluteRMS": 1.2555669500028043e-10,
+      "scaleRMS": 8.726265699846121e-07,
+      "relative": 0.00014388364888143906
+    },
+    {
+      "name": "n64-s128-x1/native/1/1/1",
+      "absoluteRMS": 1.2555669500028035e-10,
+      "scaleRMS": 2.0522637179312835e-09,
+      "relative": 0.061179610545784836
+    },
+    {
+      "name": "n64-s128-x1/native/2/0/0",
+      "absoluteRMS": 8.73215528902184e-09,
+      "scaleRMS": 5.385384391402288e-05,
+      "relative": 0.0001621454413349331
+    },
+    {
+      "name": "n64-s128-x1/native/2/0/1",
+      "absoluteRMS": 8.732155289021836e-09,
+      "scaleRMS": 2.5360734638182865e-07,
+      "relative": 0.03443179156125387
+    },
+    {
+      "name": "n64-s128-x1/native/2/1/0",
+      "absoluteRMS": 1.995133796571976e-10,
+      "scaleRMS": 1.2304560255681551e-06,
+      "relative": 0.0001621458837304434
+    },
+    {
+      "name": "n64-s128-x1/native/2/1/1",
+      "absoluteRMS": 1.9951337965719754e-10,
+      "scaleRMS": 5.7944366604928025e-09,
+      "relative": 0.03443188550450553
+    },
+    {
+      "name": "n64-s128-x1/native/3/0/0",
+      "absoluteRMS": 9.698906764624114e-09,
+      "scaleRMS": 5.360142525209468e-05,
+      "relative": 0.00018094494165050382
+    },
+    {
+      "name": "n64-s128-x1/native/3/0/1",
+      "absoluteRMS": 9.698906764624084e-09,
+      "scaleRMS": 5.060260083100264e-07,
+      "relative": 0.019166814759216617
+    },
+    {
+      "name": "n64-s128-x1/native/3/1/0",
+      "absoluteRMS": 3.132366412049379e-10,
+      "scaleRMS": 1.7311021541128174e-06,
+      "relative": 0.0001809463644076339
+    },
+    {
+      "name": "n64-s128-x1/native/3/1/1",
+      "absoluteRMS": 3.132366412049367e-10,
+      "scaleRMS": 1.634252650750858e-08,
+      "relative": 0.019166965466509724
+    },
+    {
+      "name": "n64-s512-x1/native/1/0/0",
+      "absoluteRMS": 7.77813219203718e-09,
+      "scaleRMS": 5.398049865241553e-05,
+      "relative": 0.00014409152168306475
+    },
+    {
+      "name": "n64-s512-x1/native/1/0/1",
+      "absoluteRMS": 7.778132192037177e-09,
+      "scaleRMS": 1.2695260798917054e-07,
+      "relative": 0.061267998469954045
+    },
+    {
+      "name": "n64-s512-x1/native/1/1/0",
+      "absoluteRMS": 1.2573822672388725e-10,
+      "scaleRMS": 8.726265699846121e-07,
+      "relative": 0.00014409167798558383
+    },
+    {
+      "name": "n64-s512-x1/native/1/1/1",
+      "absoluteRMS": 1.2573822672388713e-10,
+      "scaleRMS": 2.0522637179312835e-09,
+      "relative": 0.061268064930092604
+    },
+    {
+      "name": "n64-s512-x1/native/2/0/0",
+      "absoluteRMS": 8.740151849886895e-09,
+      "scaleRMS": 5.385384391402288e-05,
+      "relative": 0.00016229392768769596
+    },
+    {
+      "name": "n64-s512-x1/native/2/0/1",
+      "absoluteRMS": 8.740151849886888e-09,
+      "scaleRMS": 2.5360734638182865e-07,
+      "relative": 0.03446332282791132
+    },
+    {
+      "name": "n64-s512-x1/native/2/1/0",
+      "absoluteRMS": 1.9969614468118767e-10,
+      "scaleRMS": 1.2304560255681551e-06,
+      "relative": 0.00016229441811134963
+    },
+    {
+      "name": "n64-s512-x1/native/2/1/1",
+      "absoluteRMS": 1.9969614468118757e-10,
+      "scaleRMS": 5.7944366604928025e-09,
+      "relative": 0.03446342697000055
+    },
+    {
+      "name": "n64-s512-x1/native/3/0/0",
+      "absoluteRMS": 9.703497793299719e-09,
+      "scaleRMS": 5.360142525209468e-05,
+      "relative": 0.00018103059289305965
+    },
+    {
+      "name": "n64-s512-x1/native/3/0/1",
+      "absoluteRMS": 9.703497793299684e-09,
+      "scaleRMS": 5.060260083100264e-07,
+      "relative": 0.01917588747208158
+    },
+    {
+      "name": "n64-s512-x1/native/3/1/0",
+      "absoluteRMS": 3.133851780806254e-10,
+      "scaleRMS": 1.7311021541128174e-06,
+      "relative": 0.0001810321692085433
+    },
+    {
+      "name": "n64-s512-x1/native/3/1/1",
+      "absoluteRMS": 3.1338517808062414e-10,
+      "scaleRMS": 1.634252650750858e-08,
+      "relative": 0.01917605444523154
+    },
+    {
+      "name": "n64-s256-x0.5/native/1/0/0",
+      "absoluteRMS": 3.8871645150876576e-09,
+      "scaleRMS": 2.6990249326207765e-05,
+      "relative": 0.00014402106731608392
+    },
+    {
+      "name": "n64-s256-x0.5/native/1/0/1",
+      "absoluteRMS": 3.887164515087656e-09,
+      "scaleRMS": 6.347630399458527e-08,
+      "relative": 0.06123804113451916
+    },
+    {
+      "name": "n64-s256-x0.5/native/1/1/0",
+      "absoluteRMS": 6.283837155635249e-11,
+      "scaleRMS": 4.3631328499230605e-07,
+      "relative": 0.00014402121988437867
+    },
+    {
+      "name": "n64-s256-x0.5/native/1/1/1",
+      "absoluteRMS": 6.283837155635242e-11,
+      "scaleRMS": 1.0261318589656417e-09,
+      "relative": 0.06123810600685819
+    },
+    {
+      "name": "n64-s256-x0.5/native/2/0/0",
+      "absoluteRMS": 4.368739477969015e-09,
+      "scaleRMS": 2.692692195701144e-05,
+      "relative": 0.00016224429531691976
+    },
+    {
+      "name": "n64-s256-x0.5/native/2/0/1",
+      "absoluteRMS": 4.368739477969013e-09,
+      "scaleRMS": 1.2680367319091432e-07,
+      "relative": 0.03445278333058604
+    },
+    {
+      "name": "n64-s256-x0.5/native/2/1/0",
+      "absoluteRMS": 9.981752792111297e-11,
+      "scaleRMS": 6.152280127840776e-07,
+      "relative": 0.0001622447707954827
+    },
+    {
+      "name": "n64-s256-x0.5/native/2/1/1",
+      "absoluteRMS": 9.981752792111294e-11,
+      "scaleRMS": 2.8972183302464012e-09,
+      "relative": 0.03445288429906617
+    },
+    {
+      "name": "n64-s256-x0.5/native/3/0/0",
+      "absoluteRMS": 4.850982167994437e-09,
+      "scaleRMS": 2.680071262604734e-05,
+      "relative": 0.00018100198437558774
+    },
+    {
+      "name": "n64-s256-x0.5/native/3/0/1",
+      "absoluteRMS": 4.850982167994421e-09,
+      "scaleRMS": 2.530130041550132e-07,
+      "relative": 0.019172857079798062
+    },
+    {
+      "name": "n64-s256-x0.5/native/3/1/0",
+      "absoluteRMS": 1.566677834995387e-10,
+      "scaleRMS": 8.655510770564087e-07,
+      "relative": 0.00018100351054075174
+    },
+    {
+      "name": "n64-s256-x0.5/native/3/1/1",
+      "absoluteRMS": 1.5666778349953805e-10,
+      "scaleRMS": 8.17126325375429e-09,
+      "relative": 0.019173018740713928
+    }
+  ],
+  "analyticControlPass": false,
+  "coupledReleaseQualified": false,
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false
+}

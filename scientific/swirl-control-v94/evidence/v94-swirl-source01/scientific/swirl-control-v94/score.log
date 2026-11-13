@@ -1,0 +1,5 @@
+analytic {"gates": 24, "failed": [{"name": "n64-s512-x1/native/1/0/1", "value": 0.06756776197984418, "limit": 0.05, "passed": false}, {"name": "n64-s512-x1/native/1/1/1", "value": 0.0675678247076797, "limit": 0.05, "passed": false}]}
+spatial {"gates": 48, "failed": []}
+temporal {"gates": 48, "failed": []}
+linearity {"gates": 18, "failed": []}
+conservation {"gates": 12, "failed": []}

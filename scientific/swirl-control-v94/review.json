@@ -1,0 +1,13 @@
+{
+  "checkedUTC": "2026-11-13T11:31:28.353089+00:00",
+  "testedSourceFiles": 25,
+  "testedSourceMatchesHost": true,
+  "applicationFiles": 2666,
+  "applicationUnchanged": true,
+  "archivesRehashed": 2,
+  "localReportLinksValid": true,
+  "rootReadmeUnchanged": true,
+  "gitBlobSizeBoundaryPassed": true,
+  "sourceAndReportSecretPatternScreenPassed": true,
+  "independentAgentReview": false
+}

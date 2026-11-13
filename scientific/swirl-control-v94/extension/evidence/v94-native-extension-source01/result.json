@@ -1,0 +1,258 @@
+{
+  "postHocExtension": true,
+  "customRun": false,
+  "coupledReleaseQualified": false,
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false,
+  "commands": [
+    {
+      "args": [
+        "blockMesh",
+        "-case",
+        "/work/project/v94-native-extension-source01/native-n128-s256"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.1491212500000001
+    },
+    {
+      "args": [
+        "checkMesh",
+        "-case",
+        "/work/project/v94-native-extension-source01/native-n128-s256"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.253278
+    },
+    {
+      "args": [
+        "foamPostProcess",
+        "-case",
+        "/work/project/v94-native-extension-source01/native-n128-s256",
+        "-func",
+        "writeCellCentres",
+        "-time",
+        "0"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.161561375
+    },
+    {
+      "args": [
+        "foamPostProcess",
+        "-case",
+        "/work/project/v94-native-extension-source01/native-n128-s256",
+        "-func",
+        "writeCellVolumes",
+        "-time",
+        "0"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.10808366700000005
+    },
+    {
+      "args": [
+        "foamRun",
+        "-case",
+        "/work/project/v94-native-extension-source01/native-n128-s256"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 136.94372052199998
+    }
+  ],
+  "inputSHA256": {
+    "mesh.log": "3af38282f2d6ff0c1077d7d2e56995e6974683285d63e6af02326c3aaa83bed7",
+    "check-mesh.log": "6ec441c33d475bf09b2297c62e08644767d34136913626f71f5fec7df068c6cd",
+    "writeCellCentres.log": "5e334e7ec35db0a88bd9c338f8534ff18a5323dd5077914e5277cf14c682a18e",
+    "writeCellVolumes.log": "ee71c9df54d834f30f47820e55b87e638c4eeef38830c1857cc4e3f1c512a89a",
+    "system/blockMeshDict": "b338f9ac5ede6ea368b64c85255641619531d1cc02bb22825c98a2c5ef83b3f8",
+    "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+    "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+    "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+    "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+    "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+    "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+    "constant/polyMesh/points": "f2d10e392d6f5581bbcbcf1dc7d1c50c1573ea4b2d060f96a36b857cab127d55",
+    "constant/polyMesh/neighbour": "64cf9341d3ca4685688204fc07f8a930675d9fd159034049255053ff8711d182",
+    "constant/polyMesh/faces": "b3d6876382783d782e320cf1022f5e722bc92d1a85877ff9d3529dbab11d3699",
+    "constant/polyMesh/owner": "c8318f49925096049f12752ac9771ef3f1c222d40ee59223ceaa90dbf01e20c6",
+    "constant/polyMesh/boundary": "667fa7f6be16f6cf8a4848efab364e16e9acd88b3d1be82ca8a1c3cfdd6cae57",
+    "0/T": "8f37372e3af1ce0e00a3753bc1bd345a161daaf9805dfde290e67c08424dda25",
+    "0/p": "0909f712f2be9793713522a3ab4770f901ded8f677ec9a07ecdcf2aa2fef037e",
+    "0/rho": "4d998e869b076b8e42bca8db4904f7e636331c9b5363fa39fd4c59d2f4515d96",
+    "0/U": "0920c07226cffa27067df6dfa1f86c12e5cd4001d5c2dc075ac9fb0031c2cbdf",
+    "0/C": "5aec1ca2da591c776c6df6492ed849f772ad7cc4df43694c5723e82a55c01388",
+    "0/Ccx": "c44be06b2d266ebbd2ca23fcc48170431aefb1d16e4cc2f25feaa30653021db0",
+    "0/Ccy": "8be2d6fe0f1ebe8e8901fbb66b54ea6a7c9bfab432991d50f97db427cd29e34a",
+    "0/Ccz": "eb93553a23c659fa699dcb525f95bcbc7e18d7b93c6dbaac4c49f9e43c44b132",
+    "0/Vc": "656589644b57acdf7e10544643c380870e08c4d61ae545a3618d66e61a915f16"
+  },
+  "packetSHA256": "aba3205db2461bf9d27786e4ec8f9b85260897b9879d1f22eced991d5f9d0e61",
+  "wallSeconds": 138.013590772,
+  "native": {
+    "peakMeridionalOverAmplitude": 7.910616533899536e-09,
+    "cellMapBijective": true
+  },
+  "comparisons": [
+    {
+      "timeS": 5e-06,
+      "local": false,
+      "increment": false,
+      "absoluteRMS": 2.813050889281756e-09,
+      "scaleRMS": 5.3986505918382235e-05,
+      "relative": 5.2106555914816505e-05,
+      "contraction": 0.3280439079225631,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 5e-06,
+      "local": false,
+      "increment": true,
+      "absoluteRMS": 2.8130508892817524e-09,
+      "scaleRMS": 1.269667360187441e-07,
+      "relative": 0.022155810076636622,
+      "contraction": 0.32804390792256277,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 5e-06,
+      "local": true,
+      "increment": false,
+      "absoluteRMS": 4.539132797689733e-11,
+      "scaleRMS": 8.711244724800025e-07,
+      "relative": 5.2106592583345585e-05,
+      "contraction": 0.32804384086745275,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 5e-06,
+      "local": true,
+      "increment": true,
+      "absoluteRMS": 4.539132797689724e-11,
+      "scaleRMS": 2.0487310496450545e-09,
+      "relative": 0.022155825668167303,
+      "contraction": 0.3280438408674522,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 1e-05,
+      "local": false,
+      "increment": false,
+      "absoluteRMS": 3.118567271359339e-09,
+      "scaleRMS": 5.3859837085108675e-05,
+      "relative": 5.790153554366338e-05,
+      "contraction": 0.32735791071912507,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 1e-05,
+      "local": false,
+      "increment": true,
+      "absoluteRMS": 3.1185672713593344e-09,
+      "scaleRMS": 2.53635569292303e-07,
+      "relative": 0.012295465025117724,
+      "contraction": 0.3273579107191248,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 1e-05,
+      "local": true,
+      "increment": false,
+      "absoluteRMS": 7.117652963219696e-11,
+      "scaleRMS": 1.2292658841886958e-06,
+      "relative": 5.790165540888888e-05,
+      "contraction": 0.32735775901497927,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 1e-05,
+      "local": true,
+      "increment": true,
+      "absoluteRMS": 7.117652963219684e-11,
+      "scaleRMS": 5.788832072683884e-09,
+      "relative": 0.012295490478651451,
+      "contraction": 0.3273577590149789,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 2e-05,
+      "local": false,
+      "increment": false,
+      "absoluteRMS": 3.4516626713294725e-09,
+      "scaleRMS": 5.360739033255377e-05,
+      "relative": 6.438781388008374e-05,
+      "contraction": 0.32998989284174807,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 2e-05,
+      "local": false,
+      "increment": true,
+      "absoluteRMS": 3.4516626713294386e-09,
+      "scaleRMS": 5.060823218472089e-07,
+      "relative": 0.0068203581163056885,
+      "contraction": 0.32998989284174585,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 2e-05,
+      "local": true,
+      "increment": false,
+      "absoluteRMS": 1.1141310559270024e-10,
+      "scaleRMS": 1.7303341830742219e-06,
+      "relative": 6.438820124026945e-05,
+      "contraction": 0.32998944254855406,
+      "belowOriginalLimit": true
+    },
+    {
+      "timeS": 2e-05,
+      "local": true,
+      "increment": true,
+      "absoluteRMS": 1.1141310559269901e-10,
+      "scaleRMS": 1.6335276451799607e-08,
+      "relative": 0.006820399147908205,
+      "contraction": 0.32998944254855145,
+      "belowOriginalLimit": true
+    }
+  ],
+  "initialAnalyticError": 1.3552527156068805e-20,
+  "allBelowOriginalLimit": true,
+  "allContract": true,
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/coupled-openfoam-v90/reference90.py": "4d47683ff59c1e29f85d6081bc7d8e97320fe1c43450b420cc1ff83017de9ff4",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/endwall-v91/candidate91.py": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe",
+    "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "scientific/graded-endwall-v93/PROTOCOL.md": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482",
+    "scientific/graded-endwall-v93/score93.py": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed",
+    "scientific/graded-endwall-v93/study93.py": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2",
+    "scientific/graded-endwall-v93/test93.py": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/swirl-control-v94/PROTOCOL.md": "589299071007e858c51dfb674c1ea914ba8d9d5842a60c177b06961311472251",
+    "scientific/swirl-control-v94/control94.py": "6e1f61bd57b7fdf334d3aac99c5cc8d7e113cf485775b430bb1b89326b1a0485",
+    "scientific/swirl-control-v94/score94.py": "5e151c31a28e9e13762778777638db0e8c7a8c0937ad502f2441212a4f1f1da0",
+    "scientific/swirl-control-v94/test94.py": "9dca01805a54bdda7e67d0da6d991fec7999eb55f03afde89ca4370c9b8da05c",
+    "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94",
+    "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b",
+    "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150",
+    "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83",
+    "references.json": "9695f2c5d4033f1946070abf5c0293d95c83d1e73ff5c74b05e01da04bca4e91"
+  },
+  "nativeSHA256": {
+    "applications/modules/incompressibleFluid/momentumPredictor.C": "7921c5f86dcffc46fc7849ac9ec6adfe1c9c261041788406469b545617119d59",
+    "applications/modules/incompressibleFluid/correctPressure.C": "1e6b6d38e1f2730368b5de45a4fc76017b06284748349149da41c90c6d84efb2",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libincompressibleFluidSolver.so": "f5a9c9e086eaecf4cb1b09eec0268efe4e1f17d274e4f822e5184c38126291d4"
+  },
+  "predictionsSHA256": "2cb578dd80668b41a0b68a872d955ffb889311106b9463d1c596a3689f7a929f"
+}

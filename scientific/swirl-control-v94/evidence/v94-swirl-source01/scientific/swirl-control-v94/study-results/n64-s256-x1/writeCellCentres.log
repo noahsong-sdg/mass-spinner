@@ -1,0 +1,39 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : foamPostProcess -case study-results/n64-s256-x1 -func writeCellCentres -time 0
+Date   : Nov 13 2026
+Time   : 11:20:21
+Host   : "safe-dev-run-a5a730c0c27f494bb79896fa0c348266"
+PID    : 23
+I/O    : uncollated
+Case   : study-results/n64-s256-x1
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+Constructing functionObjects from system/functions
+    Selecting writeCellCentres with name writeCellCentres
+Time = 0s
+
+Reading fields:
+
+Executing functionObjects
+    Writing cell-centre field C to 0
+    Writing the x component field of the cell-centres Ccx to 0
+    Writing the y component field of the cell-centres Ccy to 0
+    Writing the z component field of the cell-centres Ccz to 0
+
+End
+
