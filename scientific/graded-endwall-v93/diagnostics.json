@@ -1,0 +1,578 @@
+{
+  "diagnosticOnly": true,
+  "changesAdmission": false,
+  "resolution": [
+    {
+      "label": "g4-n16-s2048",
+      "endwallCellM": 0.0005962076809792327,
+      "initialCFLMargin": 13.040415211483978,
+      "viscousScaleCells": [
+        {
+          "timeS": 5e-06,
+          "cells": 1.2663094884773427
+        },
+        {
+          "timeS": 1e-05,
+          "cells": 1.7908320527663946
+        },
+        {
+          "timeS": 2e-05,
+          "cells": 2.5326189769546854
+        }
+      ]
+    },
+    {
+      "label": "g4-n32-s2048",
+      "endwallCellM": 0.0002887911267592802,
+      "initialCFLMargin": 6.34347249861803,
+      "viscousScaleCells": [
+        {
+          "timeS": 5e-06,
+          "cells": 2.614288922236818
+        },
+        {
+          "timeS": 1e-05,
+          "cells": 3.69716284978905
+        },
+        {
+          "timeS": 2e-05,
+          "cells": 5.228577844473636
+        }
+      ]
+    },
+    {
+      "label": "g4-n64-s2048",
+      "endwallCellM": 0.00014213956629238744,
+      "initialCFLMargin": 3.1286773214762307,
+      "viscousScaleCells": [
+        {
+          "timeS": 5e-06,
+          "cells": 5.311564283051492
+        },
+        {
+          "timeS": 1e-05,
+          "cells": 7.511686246507945
+        },
+        {
+          "timeS": 2e-05,
+          "cells": 10.623128566102984
+        }
+      ]
+    },
+    {
+      "label": "g4-n64-s1024",
+      "endwallCellM": 0.00014213956629238744,
+      "initialCFLMargin": 1.5643386607381153,
+      "viscousScaleCells": [
+        {
+          "timeS": 5e-06,
+          "cells": 5.311564283051492
+        },
+        {
+          "timeS": 1e-05,
+          "cells": 7.511686246507945
+        },
+        {
+          "timeS": 2e-05,
+          "cells": 10.623128566102984
+        }
+      ]
+    },
+    {
+      "label": "g4-n64-s4096",
+      "endwallCellM": 0.00014213956629238744,
+      "initialCFLMargin": 6.257354642952461,
+      "viscousScaleCells": [
+        {
+          "timeS": 5e-06,
+          "cells": 5.311564283051492
+        },
+        {
+          "timeS": 1e-05,
+          "cells": 7.511686246507945
+        },
+        {
+          "timeS": 2e-05,
+          "cells": 10.623128566102984
+        }
+      ]
+    }
+  ],
+  "initialSampling": [
+    {
+      "solver": "native",
+      "region": "global",
+      "differences": [
+        {
+          "rho": {
+            "absoluteRMS": 6.3967268098468244e-18,
+            "scaleRMS": 0.0009999492312032943,
+            "relative": 6.397051580458028e-15
+          },
+          "T": {
+            "absoluteRMS": 0.18837788209818618,
+            "scaleRMS": 2900.230380033969,
+            "relative": 6.495273044342766e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.31113568888510984,
+            "scaleRMS": 113.80667303286162,
+            "relative": 0.0027338967091610662
+          },
+          "meridional": {
+            "absoluteRMS": 1.4683091215252203e-32,
+            "scaleRMS": 1.1783136678280558e-32,
+            "relative": 1.2461105744718237
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 2.7296818114294773e-17,
+            "scaleRMS": 0.0009999492312032946,
+            "relative": 2.7298204011264646e-14
+          },
+          "T": {
+            "absoluteRMS": 0.04742903195241589,
+            "scaleRMS": 2900.163720670791,
+            "relative": 1.635391533738855e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.08628047485373415,
+            "scaleRMS": 113.88922203902635,
+            "relative": 0.0007575824411564465
+          },
+          "meridional": {
+            "absoluteRMS": 4.2502215354744926e-32,
+            "scaleRMS": 3.3399662209604645e-32,
+            "relative": 1.2725342875630248
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "region": "global",
+      "differences": [
+        {
+          "rho": {
+            "absoluteRMS": 1.0934262197972263e-19,
+            "scaleRMS": 0.001,
+            "relative": 1.0934262197972263e-16
+          },
+          "T": {
+            "absoluteRMS": 0.1768642488017906,
+            "scaleRMS": 2900.220108592539,
+            "relative": 6.098304341721907e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.3544898589136916,
+            "scaleRMS": 113.99445618500697,
+            "relative": 0.003109711391037941
+          },
+          "meridional": {
+            "absoluteRMS": 0.0,
+            "scaleRMS": 0.0,
+            "relative": null
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 1.1568002106012864e-19,
+            "scaleRMS": 0.001,
+            "relative": 1.1568002106012863e-16
+          },
+          "T": {
+            "absoluteRMS": 0.04438805728678441,
+            "scaleRMS": 2900.159941771371,
+            "relative": 1.530538252303178e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.08895482135938833,
+            "scaleRMS": 113.9368032080405,
+            "relative": 0.0007807382588834194
+          },
+          "meridional": {
+            "absoluteRMS": 0.0,
+            "scaleRMS": 0.0,
+            "relative": null
+          }
+        }
+      ]
+    }
+  ],
+  "velocityComponents": [
+    {
+      "solver": "native",
+      "timeS": 5e-06,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.027374324966542237,
+            "scaleRMS": 4.751281673729465,
+            "relative": 0.005761461190124531
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.005191736209588055,
+            "scaleRMS": 0.3665622080686962,
+            "relative": 0.014163315517280737
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.006856771111606545,
+            "scaleRMS": 4.746516511652845,
+            "relative": 0.0014445901736089952
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.008236722747349589,
+            "scaleRMS": 0.36801773782512587,
+            "relative": 0.022381319976656947
+          }
+        }
+      ]
+    },
+    {
+      "solver": "native",
+      "timeS": 5e-06,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.0634457347389567,
+            "scaleRMS": 2.233167573080323,
+            "relative": 0.028410646609668765
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.004780945201779779,
+            "scaleRMS": 0.04991519335033051,
+            "relative": 0.09578136196377414
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.016665188250902442,
+            "scaleRMS": 2.229034399909971,
+            "relative": 0.0074764159097659225
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.001249386924665289,
+            "scaleRMS": 0.051380760036305595,
+            "relative": 0.024316240627473656
+          }
+        }
+      ]
+    },
+    {
+      "solver": "native",
+      "timeS": 1e-05,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.059959166696656026,
+            "scaleRMS": 8.886188816991563,
+            "relative": 0.0067474558476639844
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.015518246139061132,
+            "scaleRMS": 0.6492645604819188,
+            "relative": 0.02390126780913879
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.015870080918536422,
+            "scaleRMS": 8.87162695730367,
+            "relative": 0.0017888580070954396
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.018592110121353235,
+            "scaleRMS": 0.6497456523559119,
+            "relative": 0.0286144432886009
+          }
+        }
+      ]
+    },
+    {
+      "solver": "native",
+      "timeS": 1e-05,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.06114758168962766,
+            "scaleRMS": 4.196593090340566,
+            "relative": 0.014570767375653604
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.007753082312865849,
+            "scaleRMS": 0.16538664849657725,
+            "relative": 0.04687852606812032
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.015665118774923048,
+            "scaleRMS": 4.204108437950425,
+            "relative": 0.003726145271019713
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.002845940809433627,
+            "scaleRMS": 0.16789252945621141,
+            "relative": 0.016950967494809743
+          }
+        }
+      ]
+    },
+    {
+      "solver": "native",
+      "timeS": 2e-05,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.1638007506091024,
+            "scaleRMS": 13.710089583014799,
+            "relative": 0.011947460271305041
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.03875668866432885,
+            "scaleRMS": 0.739270545027564,
+            "relative": 0.052425582116062526
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.05034328430369428,
+            "scaleRMS": 13.661592729234098,
+            "relative": 0.003685023064401997
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.02367100459942351,
+            "scaleRMS": 0.7328513785430691,
+            "relative": 0.03229987046825536
+          }
+        }
+      ]
+    },
+    {
+      "solver": "native",
+      "timeS": 2e-05,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.046695538539265107,
+            "scaleRMS": 6.638298427311069,
+            "relative": 0.007034263230341055
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.012068578160127857,
+            "scaleRMS": 0.44096526810329606,
+            "relative": 0.02736854585404852
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.012713504370598974,
+            "scaleRMS": 6.6523302962864985,
+            "relative": 0.0019111354674761082
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.00951639214919918,
+            "scaleRMS": 0.44500469154768096,
+            "relative": 0.021384925440004098
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 5e-06,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.03137860978206153,
+            "scaleRMS": 4.751523757635559,
+            "relative": 0.006603904638304086
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.019105236919966132,
+            "scaleRMS": 0.37217971963992225,
+            "relative": 0.05133336372666983
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.007214793585938838,
+            "scaleRMS": 4.747237652428687,
+            "relative": 0.0015197877406132698
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.010482141826728285,
+            "scaleRMS": 0.36953406563128793,
+            "relative": 0.028365833631119438
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 5e-06,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.07202962103204373,
+            "scaleRMS": 2.2696838701143003,
+            "relative": 0.0317355302121508
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.006579646597049389,
+            "scaleRMS": 0.04898007426905277,
+            "relative": 0.1343331282208085
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.020989757963992373,
+            "scaleRMS": 2.242142048419707,
+            "relative": 0.009361475549145624
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.0017272237492777325,
+            "scaleRMS": 0.0510566130676149,
+            "relative": 0.033829579470740626
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 1e-05,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.047855381968633245,
+            "scaleRMS": 8.876323350164718,
+            "relative": 0.005391351810966327
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.03326245240745359,
+            "scaleRMS": 0.6579636576640799,
+            "relative": 0.05055363167859883
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.011196285925092468,
+            "scaleRMS": 8.87138135146532,
+            "relative": 0.0012620679329993106
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.020699632558220646,
+            "scaleRMS": 0.6523426497690277,
+            "relative": 0.031731226780204666
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 1e-05,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.08153911418763436,
+            "scaleRMS": 4.255758176403105,
+            "relative": 0.019159715098415166
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.010288484514549799,
+            "scaleRMS": 0.1638097542430263,
+            "relative": 0.06280752060274701
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.020775616036175903,
+            "scaleRMS": 4.221232803969236,
+            "relative": 0.004921693969742806
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.00363951439324508,
+            "scaleRMS": 0.16747772792297255,
+            "relative": 0.02173133370258635
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 2e-05,
+      "local": false,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.07514941912785522,
+            "scaleRMS": 13.654118994784799,
+            "relative": 0.00550379113852447
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.04782426186522362,
+            "scaleRMS": 0.7410303605563762,
+            "relative": 0.06453752020270329
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.01910541666674853,
+            "scaleRMS": 13.653627940711306,
+            "relative": 0.0013992923162774572
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.023376343354070468,
+            "scaleRMS": 0.7351762368568001,
+            "relative": 0.03179692457690765
+          }
+        }
+      ]
+    },
+    {
+      "solver": "v86",
+      "timeS": 2e-05,
+      "local": true,
+      "differences": [
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.055242242721176116,
+            "scaleRMS": 6.6746690898027365,
+            "relative": 0.008276401717887823
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.016039390652699163,
+            "scaleRMS": 0.43986651726781156,
+            "relative": 0.03646422271994306
+          }
+        },
+        {
+          "vrMPS": {
+            "absoluteRMS": 0.013543496901734713,
+            "scaleRMS": 6.664899632693875,
+            "relative": 0.00203206314395174
+          },
+          "vzMPS": {
+            "absoluteRMS": 0.011306701798703845,
+            "scaleRMS": 0.4449905159907486,
+            "relative": 0.025408860172064684
+          }
+        }
+      ]
+    }
+  ]
+}
+

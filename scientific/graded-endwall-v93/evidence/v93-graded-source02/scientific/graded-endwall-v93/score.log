@@ -1,0 +1,5 @@
+globalSpatial {"gates": 144, "failed": [{"name": "global/5e-06/increment/native/space/swirl/fine", "value": 0.10449865593256592, "limit": 0.05, "passed": false}, {"name": "global/1e-05/increment/native/space/swirl/fine", "value": 0.051196688931898784, "limit": 0.05, "passed": false}]}
+localSpatial {"gates": 144, "failed": [{"name": "local/5e-06/increment/cross/swirl/fine", "value": 0.06566949072302015, "limit": 0.05, "passed": false}, {"name": "local/5e-06/increment/native/space/swirl/fine", "value": 0.14705063514167155, "limit": 0.05, "passed": false}, {"name": "local/1e-05/increment/native/space/swirl/fine", "value": 0.09720561413358189, "limit": 0.05, "passed": false}, {"name": "local/2e-05/increment/native/space/swirl/fine", "value": 0.055569755964216455, "limit": 0.05, "passed": false}]}
+globalTemporal {"gates": 96, "failed": []}
+localTemporal {"gates": 96, "failed": []}
+conservation {"gates": 25, "failed": []}

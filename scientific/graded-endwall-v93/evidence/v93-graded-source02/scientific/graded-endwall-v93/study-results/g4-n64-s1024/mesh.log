@@ -1,0 +1,74 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : blockMesh -case study-results/g4-n64-s1024
+Date   : Nov 13 2026
+Time   : 10:48:51
+Host   : "safe-dev-run-0087560b8d7f466c8c3be250e4dc5ee7"
+PID    : 26
+I/O    : uncollated
+Case   : study-results/g4-n64-s1024
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading "blockMeshDict"
+
+Creating block mesh from
+    "system/blockMeshDict"
+No non-linear block edges defined
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Creating block mesh topology
+
+Basic statistics
+    Number of internal faces : 0
+    Number of boundary faces : 6
+    Number of defined boundary faces : 6
+    Number of undefined boundary faces : 0
+
+Checking topology
+Creating block offsets
+Creating merge list .
+
+Creating polyMesh from blockMesh
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.0009375 .. 0.0009375000000000028
+        j : 0 1.636225405945113e-05 0 1.636225405945113e-05 
+        k : 0.007521790117262031 .. 0.0001421395662923597
+Creating cells
+Creating patches
+
+No patch pairs to merge
+
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (0 -0.0005235921299024361 0) (0.05999771538385028 0.0005235921299024361 0.24)
+  nPoints: 16641
+  nCells: 8192
+  nFaces: 32832
+  nInternalFaces: 16192
+----------------
+Patches
+----------------
+  patch 0 (start: 16192 size: 192) name: walls
+  patch 1 (start: 16384 size: 64) name: midplane
+  patch 2 (start: 16448 size: 8192) name: minus
+  patch 3 (start: 24640 size: 8192) name: plus
+  patch 4 (start: 32832 size: 0) name: axis
+
+End
+

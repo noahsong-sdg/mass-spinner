@@ -1,0 +1,1590 @@
+{
+  "files": [
+    {
+      "path": "v93-graded-source01/references.json",
+      "size": 773,
+      "sha256": "bb5abd47831a35a57b685e662da8c68a68ae2dccad0c331a8bfec702b0d9b6a5"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/PROTOCOL.md",
+      "size": 4565,
+      "sha256": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/REFINEMENT.md",
+      "size": 1410,
+      "sha256": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/reference90.py",
+      "size": 12119,
+      "sha256": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/requirements.txt",
+      "size": 46,
+      "sha256": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/score90.py",
+      "size": 6268,
+      "sha256": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c"
+    },
+    {
+      "path": "v93-graded-source01/scientific/coupled-openfoam-v90/test_reference90.py",
+      "size": 5994,
+      "sha256": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2"
+    },
+    {
+      "path": "v93-graded-source01/scientific/endwall-v91/candidate91.py",
+      "size": 4000,
+      "sha256": "f772919710dc16c4e90d808ea5f862b968b1c56143d5a5ad3caae1be48278b24"
+    },
+    {
+      "path": "v93-graded-source01/scientific/endwall-v91/test91.py",
+      "size": 4645,
+      "sha256": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402"
+    },
+    {
+      "path": "v93-graded-source01/scientific/expert-v88/openfoam/reference88.py",
+      "size": 13439,
+      "sha256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+    },
+    {
+      "path": "v93-graded-source01/scientific/graded-endwall-v93/PROTOCOL.md",
+      "size": 2766,
+      "sha256": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482"
+    },
+    {
+      "path": "v93-graded-source01/scientific/graded-endwall-v93/test93.py",
+      "size": 3903,
+      "sha256": "0f90bd57efcb329779dc1747cbd6f682f632805c5c61ef9dbc002437bfafb514"
+    },
+    {
+      "path": "v93-graded-source01/scientific/graded-endwall-v93/tests-execution.json",
+      "size": 2536,
+      "sha256": "18cfda6a6a9c6e10c3e7a7fb87e8476eb386bff694c9c5bdee70248d402b0b98"
+    },
+    {
+      "path": "v93-graded-source01/scientific/graded-endwall-v93/tests-results/controls.json",
+      "size": 72,
+      "sha256": "a5c3b63005f391ba2c2ea6ae3566983ab2a16405fdc501137cbc7bf4bef649f5"
+    },
+    {
+      "path": "v93-graded-source01/scientific/graded-endwall-v93/tests.log",
+      "size": 9610,
+      "sha256": "21ea4cea2178a62d9ba2d101a623024508d4e30c9f0e2013c070a51293f5a624"
+    },
+    {
+      "path": "v93-graded-source01/scientific/meridional-v86/diffusion86.py",
+      "size": 8152,
+      "sha256": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf"
+    },
+    {
+      "path": "v93-graded-source01/scientific/meridional-v86/test_diffusion86.py",
+      "size": 4900,
+      "sha256": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7"
+    },
+    {
+      "path": "v93-graded-source01/scientific/mixture-axial-v75/flow.py",
+      "size": 12052,
+      "sha256": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c"
+    },
+    {
+      "path": "v93-graded-source01/scientific/mixture-axial-v75/test_flow.py",
+      "size": 7652,
+      "sha256": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310"
+    },
+    {
+      "path": "v93-graded-source01/scientific/wall-transient-v92/PROTOCOL.md",
+      "size": 2801,
+      "sha256": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94"
+    },
+    {
+      "path": "v93-graded-source01/scientific/wall-transient-v92/score92.py",
+      "size": 5949,
+      "sha256": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b"
+    },
+    {
+      "path": "v93-graded-source01/scientific/wall-transient-v92/study92.py",
+      "size": 2421,
+      "sha256": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150"
+    },
+    {
+      "path": "v93-graded-source01/scientific/wall-transient-v92/test92.py",
+      "size": 3385,
+      "sha256": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83"
+    },
+    {
+      "path": "v93-graded-source01/transfer.json",
+      "size": 2289,
+      "sha256": "b4c89e28bf32d7a8967cf1a700c0123cd63d372987d27c2bb14052330ba2f6d6"
+    },
+    {
+      "path": "v93-graded-source02/references.json",
+      "size": 773,
+      "sha256": "bb5abd47831a35a57b685e662da8c68a68ae2dccad0c331a8bfec702b0d9b6a5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/PROTOCOL.md",
+      "size": 4565,
+      "sha256": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/REFINEMENT.md",
+      "size": 1410,
+      "sha256": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/reference90.py",
+      "size": 13445,
+      "sha256": "4d47683ff59c1e29f85d6081bc7d8e97320fe1c43450b420cc1ff83017de9ff4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/requirements.txt",
+      "size": 46,
+      "sha256": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/score90.py",
+      "size": 6268,
+      "sha256": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/coupled-openfoam-v90/test_reference90.py",
+      "size": 5994,
+      "sha256": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/endwall-v91/candidate91.py",
+      "size": 3999,
+      "sha256": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe"
+    },
+    {
+      "path": "v93-graded-source02/scientific/endwall-v91/test91.py",
+      "size": 4645,
+      "sha256": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402"
+    },
+    {
+      "path": "v93-graded-source02/scientific/expert-v88/openfoam/reference88.py",
+      "size": 13439,
+      "sha256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/PROTOCOL.md",
+      "size": 2766,
+      "sha256": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/diagnostics.json",
+      "size": 15204,
+      "sha256": "e0862a5ccb3f1dabd44b4dc386d58b7783691f097a5e4ab71ad491048c78eebc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/score-execution.json",
+      "size": 2762,
+      "sha256": "b413d01db598409d61f168c5acbc1cc07c18a488fd318280254adacfddf3d17c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/score-results/audit.json",
+      "size": 212092,
+      "sha256": "f9fe2b69d55e02698b7708fe0f8f60793836e3a35f32054ce24bd82ae64a80e6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/score.log",
+      "size": 930,
+      "sha256": "7e024072d1f1117567410f3c11ea214a474a6b156804713aaad6a93c9a577369"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/score93.py",
+      "size": 5495,
+      "sha256": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-execution.json",
+      "size": 2765,
+      "sha256": "92bf2d63a22f34b5d5196f604039e07068d604c2b8d5cbf790475d5640aa9a46"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/C",
+      "size": 36500,
+      "sha256": "4f6bcefe87d21a216abedf0c8898538c93e5930caefc03547c215d6591b7401a"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/Ccx",
+      "size": 12400,
+      "sha256": "668ce7c1c3a837a3f05044da41b184319073a681b98de9c20f2e961c8ea44847"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/Ccy",
+      "size": 13633,
+      "sha256": "5839f577338c17d3c27b84901aae3607fe2ee8c68908b399a86c181f7dd7a794"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/Ccz",
+      "size": 11561,
+      "sha256": "a66a7c4c0c6fd68d551d9c4c7c3f3c54edc027c106a655fb5ed326e7f86f3242"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/T",
+      "size": 9935,
+      "sha256": "31e637d9df9b26966aef5b59504bce886a17630b4691c013a3b38896fe8cff57"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/U",
+      "size": 24008,
+      "sha256": "f9acfaccbf990a9f858ff5c968d2182fe451eb64262a663c35d58e694f93f807"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/Vc",
+      "size": 12284,
+      "sha256": "ea76a2a2698181ac3b8e2179d48db08c5c578fef9971205eab8b85b5cfdb15b1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/p",
+      "size": 9933,
+      "sha256": "736930c14f7446d2f5de540c026b0733780d638bdc3f515add42bc75ec405404"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/T",
+      "size": 10225,
+      "sha256": "f07b0e4577116945f3edabc95773bd8d0be86ff03c50f598da9739f1642a8a71"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/U",
+      "size": 30717,
+      "sha256": "d74727c4f9ecca3796286b2816b6db8a5bcc5cd8dba4d17e3e710707587a93ef"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/p",
+      "size": 10220,
+      "sha256": "8fabaa37e4e7b22ad4481ef4c77ef9c0c4a6ad8f6da53b9ec2ccc6250c9a2c81"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/phi",
+      "size": 46063,
+      "sha256": "9b28eb9f168305ed45dcbb812cf3e7bb2f30f09d3a93288dcfae47ef42d9e3e7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/rho",
+      "size": 11977,
+      "sha256": "07a32e1200e91e5c62ada95c8fd357691f67468434698156406acdb198400353"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.499999999999955e-05/uniform/time",
+      "size": 896,
+      "sha256": "ad41e1d5a70fbc887e66bb4ade6d628cc14cffe45b98f42d1d296c653dfc92ed"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/T",
+      "size": 10229,
+      "sha256": "6d1047129b8dcc4fd6ea290ea25978e2d022498bded623dd108b24cfd307cecc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/U",
+      "size": 30703,
+      "sha256": "b16ee391d291effa160d1b7a62875679f6bb7595bbdb5a484e3208d564f45061"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/p",
+      "size": 10231,
+      "sha256": "98de032e902865a3167133db188a00063f6381897d3f0368376993733b3e3829"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/phi",
+      "size": 46068,
+      "sha256": "0e7c9416f7d0b40af941c83ad7082569e31d1c7e3ed11fe287c3026cd95db043"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/rho",
+      "size": 11984,
+      "sha256": "9918d47d721f1a06c87ed9488609ba46df99723f3fd0dcbab01270de724b52e7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/1.999999999999935e-05/uniform/time",
+      "size": 896,
+      "sha256": "b9e232031c092eeba1a9bbd9e892792ab5f5794723ad0c3ef689f14a96f8b77f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/T",
+      "size": 10225,
+      "sha256": "14c091593963067e89d49f81df967825a2e4e4c6bb98275a151a1a8df26a9f27"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/U",
+      "size": 31111,
+      "sha256": "f6c4613739b34b7a7c32c59bb7b26a69ab2af07243dc2495195456ba420c3987"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/p",
+      "size": 10236,
+      "sha256": "821425afb2d69e3da0f41d4c515589f4cc7ce7919946bfb201e57b8bedd1087f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/phi",
+      "size": 46093,
+      "sha256": "34496178b1be2a8c59e37a5938357f3e38b2def96cb3ab91c2cef21774fd9fce"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/rho",
+      "size": 11986,
+      "sha256": "7cab547aebf20b570d45c14c176ae80d3cae7c8cb20c2471ea959561668f81fa"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/4.999999999999961e-06/uniform/time",
+      "size": 894,
+      "sha256": "30a523f1510debb1f868a2689f8cf24263fcfa9720b8d816b6622b70dc70d9e4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/T",
+      "size": 10228,
+      "sha256": "cdcdc178ff4a4e89ab59759bb20546b2996883c0405372537a7e3cc2159cef65"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/U",
+      "size": 30850,
+      "sha256": "b8937b11e0a6cdd464609dc322df4435a7ce75dd1f2f7a8f4a563629e9f20930"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/p",
+      "size": 10227,
+      "sha256": "a483a3dc6736a77d6d3c8a14e494ab5fcdb80949e4b5e36607bfa9f637ecc0fb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/phi",
+      "size": 46108,
+      "sha256": "403eb0080b6f129839ef1d34f962156f1b85c01b45f336f3361c8f7aa738fdd0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/rho",
+      "size": 11980,
+      "sha256": "f2650f802421edb7a27f72e3a85235822113b30dfe693b292f49ee22d3847f24"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/9.999999999999757e-06/uniform/time",
+      "size": 896,
+      "sha256": "c24b7bec5bd64fab381eac247ef57824e862870349f40fe0a3146aebd4b9635f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/check-mesh.log",
+      "size": 3096,
+      "sha256": "758af9ddc7d9065b5cd2287abc9f8a3a70989715608f738df4d6dbca2d6c80c8"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/constant/polyMesh/points",
+      "size": 67518,
+      "sha256": "4d89be4b92c938ff94042d51ddd52b10f3068704227093e9bdd795d298215054"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/mesh.log",
+      "size": 2185,
+      "sha256": "9ddb992ad16a05a92e6428420e0c00406e67a3053b0e04559251adcffa2311cc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/postProcessing/torque/0/forces.dat",
+      "size": 651778,
+      "sha256": "deba1347746c4a59814c0dcc316a8a1a356715b46c233b831cfedb4e5e35d53f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/solver.log",
+      "size": 9426053,
+      "sha256": "739f7b76ed7b0c8dcd6b0dbb8ec7f594998ed7cf8979dff26fd7996812dba242"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/system/blockMeshDict",
+      "size": 616,
+      "sha256": "4c662ee506a3212ee8625d464129451b895b865df34ff2df6c5b948d09922b5b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/system/controlDict",
+      "size": 494,
+      "sha256": "7c6f9c2289e045920a6725b802df9c0c77ca61b2527548f1a76a8450ac7f23ca"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/writeCellCentres.log",
+      "size": 1377,
+      "sha256": "7084711381e27a4d65f23bb27117e08f10f1ac675f55b8dab8b71c6e714a9c0a"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048/writeCellVolumes.log",
+      "size": 1190,
+      "sha256": "2cb7bd6ab9c86973bc4ae21529077f70a0df130ce5f58d9fb51b0439448e68a1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n16-s2048.npz",
+      "size": 159834,
+      "sha256": "ac6ef6d0ed016a9d396e144870f46cb12e2580a8e73f65be1dba1d87350efa79"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/C",
+      "size": 136888,
+      "sha256": "a5292b3d3f643f610ae3fb38adc1cac5dadc6d2bebb7b1fe52682056ce51c748"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/Ccx",
+      "size": 44221,
+      "sha256": "683f8eca110311aadfb95d87cb4a9fabdc0cdb3b7a704abecf47ae8f66be2179"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/Ccy",
+      "size": 49057,
+      "sha256": "ca670f72e0ad3908842708162f0a431d6f9a6aa1b6b50c7460f2e08260cb197b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/Ccz",
+      "size": 41538,
+      "sha256": "488221c88bfb6991b3518b4e7e1e47968b1b1f23f724004ccccb28e7f3ccbdb5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/T",
+      "size": 38965,
+      "sha256": "41b3bf27bef7f25cac955bc7b642ab6ef472cc5289be7d9da302a702c4b3998c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/U",
+      "size": 95248,
+      "sha256": "392c7402a2ea417aded2891e23ed64eeee6db889cfb9daafe93bc48635c9987e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/Vc",
+      "size": 45905,
+      "sha256": "92d61276408c5fe61f1ad1a5d74757fef51f33c016dcefa1c26159f132013b20"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/p",
+      "size": 38968,
+      "sha256": "cdbfe9bb491114ebdd74910c7448ab6ed703f4a5dae16aaa03368b87619765b3"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/0/rho",
+      "size": 12560,
+      "sha256": "ab9a2bde7531ff3bcce7d77e398edeceb96dcd07679c5715f1a0d3157cebe2b5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/T",
+      "size": 37719,
+      "sha256": "33ad80da305e436ef485606f19afe866c6c116285caef3db4e3d8571a5b00aa0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/U",
+      "size": 119743,
+      "sha256": "8a23410ddc37f5400ab84959c378a9b6e2b0f06a4361c3c09e6e197c0d16b9ad"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/p",
+      "size": 37707,
+      "sha256": "face148659cffd7cf9054ab332318544b3a441ce9fa10e6424267893a1886532"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/phi",
+      "size": 182672,
+      "sha256": "5d59c7c55b030f4bf13eac22856929a8ec8c605987e77c27cbca4fb68d3ca992"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/rho",
+      "size": 44680,
+      "sha256": "069de6eb18eee96004dab92c8a999f96fe3026b68e84b8c05fbe9426ded4f37c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.499999999999955e-05/uniform/time",
+      "size": 896,
+      "sha256": "ad41e1d5a70fbc887e66bb4ade6d628cc14cffe45b98f42d1d296c653dfc92ed"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/T",
+      "size": 37696,
+      "sha256": "412b6911d44d66ad83a042b307a55c25635071d226feac80ff74666825e251cf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/U",
+      "size": 119561,
+      "sha256": "f406c85feef1be72f4d8e0234e67c00328d3590a35a6c3a762b65773436857d9"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/p",
+      "size": 37699,
+      "sha256": "d25a4d008e46295eab12fd51523778622755581195efcd5dc0069d6d92efe1cf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/phi",
+      "size": 182615,
+      "sha256": "3fdb1213b1d67088e8a84fde20782c1c44b6095c544a148e7a5aa6dbe1b24eb3"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/rho",
+      "size": 44707,
+      "sha256": "df8298a0f8b95af94dcc95d44f6b0ed3a6a75c538deebf0cede7abf9840ab795"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/1.999999999999935e-05/uniform/time",
+      "size": 896,
+      "sha256": "b9e232031c092eeba1a9bbd9e892792ab5f5794723ad0c3ef689f14a96f8b77f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/T",
+      "size": 37698,
+      "sha256": "e17989f2db5c78e86ea4c71b841a641e15b5f58c9d62f07cf292927623a151a8"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/U",
+      "size": 121056,
+      "sha256": "35031a5e3cf11892b9dc4b3110dee363d7a5e4a0b9c5fae1b5c78d4ed62efe36"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/p",
+      "size": 37718,
+      "sha256": "a96792c087494d76a86b296f2da94a406c30572ef972ec1007715c868257ef29"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/phi",
+      "size": 182693,
+      "sha256": "e087997b2dd7e613bac40c743d93a83a955cf5e5af57cef137557f3cc6282e78"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/rho",
+      "size": 44690,
+      "sha256": "08ae3c29f023ea39e9ee407459de668be71d020ced07d12e1a10e0db50720652"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/4.999999999999961e-06/uniform/time",
+      "size": 894,
+      "sha256": "30a523f1510debb1f868a2689f8cf24263fcfa9720b8d816b6622b70dc70d9e4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/T",
+      "size": 37697,
+      "sha256": "b418bfc7210f5efd8830e062a7d9d4061257cc9233da01cd34076963b8c36dd7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/U",
+      "size": 120169,
+      "sha256": "4e2a49fec3b4bbb2e122321bb8c858d3c85b974078ae16d30005e2f7142c57b9"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/p",
+      "size": 37697,
+      "sha256": "d19f9832ad80ec5ce6fea2070a15f5bf12512c66781c82cd6fd238d94319d126"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/phi",
+      "size": 182735,
+      "sha256": "f359a3402007caf59cadbd6b99f8a7fb02bd265f8935c65c81c88c4301a643e6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/rho",
+      "size": 44722,
+      "sha256": "4c44403de0884f6c1a26bbdde18c09631a7d97d9958324123634d99c5da37040"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/9.999999999999757e-06/uniform/time",
+      "size": 896,
+      "sha256": "c24b7bec5bd64fab381eac247ef57824e862870349f40fe0a3146aebd4b9635f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/check-mesh.log",
+      "size": 3098,
+      "sha256": "74f39d7eda1ddef9a3f27bed1ed178e089bd5249318e925ecc739b27d1cfe40c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/polyMesh/boundary",
+      "size": 1491,
+      "sha256": "5d8c9147ea07b6e76c255700aa609571a063943adc8e43e29736d2bf1a514784"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/polyMesh/faces",
+      "size": 181203,
+      "sha256": "ca2dff17f0aa9aed6a3d7ac549dac792c2f0a2a529b28ee5f76ac0a2a2efb693"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/polyMesh/neighbour",
+      "size": 18663,
+      "sha256": "f505673dfec678029d61236ca4ac2640938b8e452bbaabb8a3db18208928300d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/polyMesh/owner",
+      "size": 37374,
+      "sha256": "e1d62e93d47894b0f2fa95764a4b541acdceed97a4087c95defe4e2575d7e2bb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/constant/polyMesh/points",
+      "size": 264682,
+      "sha256": "14110071df305eb63d57761fa36394b66a44e2791387bf2fd8a9e3df001e4aeb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/mesh.log",
+      "size": 2191,
+      "sha256": "3fdffe732c7d823dc65478640e883c91759ac7ae700d39599b14423470b6d69d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/postProcessing/torque/0/forces.dat",
+      "size": 649728,
+      "sha256": "a9134d2dfc8910e0851e3af04d78ed3b4da449150591ec198551e61e152fb970"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/solver.log",
+      "size": 9428324,
+      "sha256": "4226c548750b4adaabaf40df7c70c4f4525758e298008e6f6bbf2a2dcaeb8d48"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/system/blockMeshDict",
+      "size": 616,
+      "sha256": "a5162d805e97b826a63877f3081396de538db7a16918114328a1109a6a3c59d6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/system/controlDict",
+      "size": 494,
+      "sha256": "7c6f9c2289e045920a6725b802df9c0c77ca61b2527548f1a76a8450ac7f23ca"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/writeCellCentres.log",
+      "size": 1377,
+      "sha256": "e6cd5ba0478662cb88152382b0228463e84548a2a4b03e1d55c6a20c6ee5069e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048/writeCellVolumes.log",
+      "size": 1190,
+      "sha256": "c3aebdca5fd05c6e27350d29fc9b9f7c5cd8205205395016532f154ef4ef57a6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n32-s2048.npz",
+      "size": 696526,
+      "sha256": "e8960f42162530e37a10f6b4caa2cc0aefc8070ea617ebdbd44e1ac4f1905e28"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/C",
+      "size": 532878,
+      "sha256": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/Ccx",
+      "size": 169706,
+      "sha256": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/Ccy",
+      "size": 188904,
+      "sha256": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/Ccz",
+      "size": 159718,
+      "sha256": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/T",
+      "size": 155028,
+      "sha256": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/U",
+      "size": 380001,
+      "sha256": "ab192caace5c2401377d23ca55b213742ee98c8cfd5918cf4ff631fdb8236dae"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/Vc",
+      "size": 180376,
+      "sha256": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/p",
+      "size": 155032,
+      "sha256": "2152a01e25eb22989c49ab73b2ebaceed2f17d105261cd8237be07006c4b09af"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/T",
+      "size": 147635,
+      "sha256": "7b50d580ce61078ffa1bd512325c0ef0f86def2d92d3345a4981ecf4166a48aa"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/U",
+      "size": 475558,
+      "sha256": "5e254b2b9862b2e6e45b7b56eb6474f1d11350796cfb5b0fc8fb93758cea811c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/p",
+      "size": 147587,
+      "sha256": "fd50ce7ac2d945baaa6de56cf8fd484442e39a8f29f4ed65773071f09443ef35"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/phi",
+      "size": 731297,
+      "sha256": "a5d23c12733fb3f020469fa6021c86d877c080d37379a6351cd0feb053ef564c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/rho",
+      "size": 175569,
+      "sha256": "be558e9159a968334233dc2ece91dc6ed71792cff0464debfec44994d42fad92"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.499999999999972e-05/uniform/time",
+      "size": 877,
+      "sha256": "87727ca6734a31be13d881a0ca61bf55f808837cf210c60cf44d998b8ddbf8de"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/T",
+      "size": 147558,
+      "sha256": "c38a628407ed01bf1995557a7c379f68e6f188da2763e8813fc68f02762b286c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/U",
+      "size": 475092,
+      "sha256": "76df61e9e3c65a468f439ce150473602e1d9f7eca57b7c1eb9ff51be58392136"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/p",
+      "size": 147587,
+      "sha256": "511345fb3202dd7c321a417044ee5ca159b87b823fd35552c12dc63a3fb4e084"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/phi",
+      "size": 731085,
+      "sha256": "ed595377c7d97666ea069da35d52e99e1b7d2de3e41015e241f6d39b3fd8d4fa"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/rho",
+      "size": 175625,
+      "sha256": "2726f8372f7fbded298b3c6cfdf3d195c390edbc089323cdb108c76da76118bc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/1.999999999999951e-05/uniform/time",
+      "size": 878,
+      "sha256": "a7653223540e63b9fe69591d9debb42740c624945fcf187b4939434cef06fb7f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/T",
+      "size": 147670,
+      "sha256": "d8f47a6dd3cfd6bd2dbde0477ebc5dbd742baca10b28d913c112158ae86a3b4f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/U",
+      "size": 481229,
+      "sha256": "59215ec963e99f76db7f80a8924362137c06f7b6a8c29d2a56c890a77fac83bf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/p",
+      "size": 147630,
+      "sha256": "8626eff9962093700552be843379e01fe818edfe5e1f5ec205eb6ab0ed4f2265"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/phi",
+      "size": 731491,
+      "sha256": "9dea1cf23acb1dce0d7bcdcf72bac33b3d5dd0bea664e8c78be7268d091b0e4e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/rho",
+      "size": 175467,
+      "sha256": "984544f5fde301c0741d5936f738723e7b76e3bec595a814964e0104bd33c649"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/5.000000000000011e-06/uniform/time",
+      "size": 877,
+      "sha256": "24561dd84450ef2db07a206f6608882b621ab5a7a6ff2018d885d22e10a65a97"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/T",
+      "size": 147606,
+      "sha256": "6ae88e93c0601fe5f57b07c9e0ef05f99ae0e87b2367fdd38dede1f5632a99c1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/U",
+      "size": 477104,
+      "sha256": "94509fc4dd564941c3875e26367f4b9f13e3cd8add826099ea86041222a2ae28"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/p",
+      "size": 147590,
+      "sha256": "6d4efe0d63d2f0afcd9c23be25f7d5c319a38f34fe46f4d9b2ad7bdab5f4fb67"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/phi",
+      "size": 731352,
+      "sha256": "bf600bb94a091d41556d60d30e3bf711eed2471bd820861fedc1dbef5f019e64"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/rho",
+      "size": 175535,
+      "sha256": "093c69b23dbe473737b4fd75828337fac5667477161e5a41932ac4afb527b1a6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/9.999999999999921e-06/uniform/time",
+      "size": 876,
+      "sha256": "ed3a8b7771f29c0e8c251378a7dbd441e9ccd66de8a475c15b86149d1af63466"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/check-mesh.log",
+      "size": 3103,
+      "sha256": "2e6dc4f68c369919d670e2af8ce734613a6a9b58fbc53eb29de7238594323fe7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/constant/polyMesh/points",
+      "size": 1049233,
+      "sha256": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/mesh.log",
+      "size": 2203,
+      "sha256": "87f19275326c61a3213354df7b321b76b12aec3be9faf52b9de2aa95d1cd58f2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/postProcessing/torque/0/forces.dat",
+      "size": 327169,
+      "sha256": "4477042ebab9de0a444cd29121520e5fcbb1a597742371e71de31d89da362c1c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/solver.log",
+      "size": 4713514,
+      "sha256": "7b0c3a0b0ddf1a8717714f45e749e9db58d6d7774495643866b5b87017fa7bc0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/system/blockMeshDict",
+      "size": 617,
+      "sha256": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/system/controlDict",
+      "size": 494,
+      "sha256": "0cb93ed5c72d03bde36e473dc21db831c2fcc61d8bc0e310cdc9becec48ea569"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/writeCellCentres.log",
+      "size": 1377,
+      "sha256": "811aa207bf5493e3ba8a80289ab449d3397bc3ca9dfc8ac19a15a08c6d811261"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024/writeCellVolumes.log",
+      "size": 1190,
+      "sha256": "7df7d5d2220fd5be302c25ffded799c83f04fb1c511ca846c5752c904dceb267"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s1024.npz",
+      "size": 2764187,
+      "sha256": "eb5e5b11f8db4929259624e0ea45b6e9c6896619d86d72c49a5b35ae665db9a1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/C",
+      "size": 532878,
+      "sha256": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/Ccx",
+      "size": 169706,
+      "sha256": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/Ccy",
+      "size": 188904,
+      "sha256": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/Ccz",
+      "size": 159718,
+      "sha256": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/T",
+      "size": 155028,
+      "sha256": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/U",
+      "size": 380001,
+      "sha256": "ab192caace5c2401377d23ca55b213742ee98c8cfd5918cf4ff631fdb8236dae"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/Vc",
+      "size": 180376,
+      "sha256": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/p",
+      "size": 155032,
+      "sha256": "2152a01e25eb22989c49ab73b2ebaceed2f17d105261cd8237be07006c4b09af"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/T",
+      "size": 147635,
+      "sha256": "d33d33c2f74cccd30b36f5f026e884f3c66bfaca9565c47ba2afaef3e1ba9a78"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/U",
+      "size": 475658,
+      "sha256": "04b159d57494bbe0e6a9815ad2d41d8a63493fee5775c313443663d88dd873ff"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/p",
+      "size": 147583,
+      "sha256": "c87663b40ba37e87dfa7a5cbd4b0be0af6a67c5f9cf4108d8a5805072488ecd1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/phi",
+      "size": 731193,
+      "sha256": "3b73f00ec723110dd9f854669fc6bf2d9575299519c8a9bea797e3777da523ed"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/rho",
+      "size": 175509,
+      "sha256": "ff738a93f41b152c264cf6e94a15b1081e352cad0786d0b01888490a7bd4813e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.499999999999955e-05/uniform/time",
+      "size": 896,
+      "sha256": "ad41e1d5a70fbc887e66bb4ade6d628cc14cffe45b98f42d1d296c653dfc92ed"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/T",
+      "size": 147569,
+      "sha256": "44e8759088b2348910c6295432cd2ebbc6c566a68b4ac46d8c5fa024cab878f0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/U",
+      "size": 475131,
+      "sha256": "1d553a3fbaa4cd5edf5e216addaf6e2df168d161a70b41f0603d3bbb0565e959"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/p",
+      "size": 147635,
+      "sha256": "0b5bd6e481a00022103bb76225478ed0a9c6cb7a3119caffab828b50917dfd38"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/phi",
+      "size": 731106,
+      "sha256": "5c3b72c79dd8b1d12f69621bb9c0c633f9f24efdbe2e8d4e86b7ac1f7b70b215"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/rho",
+      "size": 175601,
+      "sha256": "117164d88959ae06e9b6f7cffe47a14f15e465f779a8a20e68442949b44ca869"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/1.999999999999935e-05/uniform/time",
+      "size": 896,
+      "sha256": "b9e232031c092eeba1a9bbd9e892792ab5f5794723ad0c3ef689f14a96f8b77f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/T",
+      "size": 147624,
+      "sha256": "45db2f8dae8cae5614bc53b38790d8c7dbf287ea2ac311db3897fb8325e5b179"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/U",
+      "size": 481158,
+      "sha256": "b9e5b80b97aead3f0a426d5d9bf58d55611d0105598479cbd0f603de06d7ebf7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/p",
+      "size": 147609,
+      "sha256": "1e3176da4efacde89bbdb88c53e9585a0e4de28c94c5a0f0bca2089f42dc30be"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/phi",
+      "size": 731507,
+      "sha256": "0a68ad25d29cc6e23e4a2407952ae51c7a5a7d21b8866f6737161c19e46be793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/rho",
+      "size": 175527,
+      "sha256": "fbf4550d7077090b063840e6705fcf81edc686322da3d60385bdd3832e420b6c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/4.999999999999961e-06/uniform/time",
+      "size": 894,
+      "sha256": "30a523f1510debb1f868a2689f8cf24263fcfa9720b8d816b6622b70dc70d9e4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/T",
+      "size": 147576,
+      "sha256": "4e0354fb1f31a97d6cfac5177425da1f05d4fb40dc7646e9159b1867f6f4d63c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/U",
+      "size": 477148,
+      "sha256": "53a4d9b6972169c3d316a6aaef9f00bd72553b73c0c877c512d5983fbab5acfa"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/p",
+      "size": 147596,
+      "sha256": "2f45ac2b552aa41539ac1c07f439ff8875eeeb67631bddf7b782fcdc4b675b45"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/phi",
+      "size": 731350,
+      "sha256": "3623b01686c9737ebf31f0af6e2f77508e265417af934839f277bca1bed1321e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/rho",
+      "size": 175504,
+      "sha256": "72aebc57715a26c78b1eb03f0cca1c15ae9c4923d23748be4226b03bd18140e3"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/9.999999999999757e-06/uniform/time",
+      "size": 896,
+      "sha256": "c24b7bec5bd64fab381eac247ef57824e862870349f40fe0a3146aebd4b9635f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/check-mesh.log",
+      "size": 3103,
+      "sha256": "10c80e0335a9fd710d3bcd392b78ee1e9cb36447ab3810302ba8332e4fbd1fe2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/constant/polyMesh/points",
+      "size": 1049233,
+      "sha256": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/mesh.log",
+      "size": 2203,
+      "sha256": "2d1a14593765f4df92690db38184ba00da247ceea7da09e2e6d08cd217e5b998"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/postProcessing/torque/0/forces.dat",
+      "size": 653825,
+      "sha256": "94684544d187c61ddd33163ed95294455de4458ccc629310d2ea0cacc2159e0d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/solver.log",
+      "size": 9441814,
+      "sha256": "e0d176594355545f89737c2d7ab75cb6cf38855aed7de528ccbb596364a964be"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/system/blockMeshDict",
+      "size": 617,
+      "sha256": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/system/controlDict",
+      "size": 494,
+      "sha256": "7c6f9c2289e045920a6725b802df9c0c77ca61b2527548f1a76a8450ac7f23ca"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/writeCellCentres.log",
+      "size": 1377,
+      "sha256": "23df6e21a967876a154c2f853404183bccecc7f1fa48beb62fdb8314294348e4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048/writeCellVolumes.log",
+      "size": 1190,
+      "sha256": "5bb332eb30d88238f4ce834f10115f2eeab652dc6434a1c887985909997c8a25"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s2048.npz",
+      "size": 2764353,
+      "sha256": "8d9e2c34a0630aa0c8585735ecc0b32852a594c512711e3fae8a617c3489b2c4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/C",
+      "size": 532878,
+      "sha256": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/Ccx",
+      "size": 169706,
+      "sha256": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/Ccy",
+      "size": 188904,
+      "sha256": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/Ccz",
+      "size": 159718,
+      "sha256": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/T",
+      "size": 155028,
+      "sha256": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/U",
+      "size": 380001,
+      "sha256": "ab192caace5c2401377d23ca55b213742ee98c8cfd5918cf4ff631fdb8236dae"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/Vc",
+      "size": 180376,
+      "sha256": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/p",
+      "size": 155032,
+      "sha256": "2152a01e25eb22989c49ab73b2ebaceed2f17d105261cd8237be07006c4b09af"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/T",
+      "size": 147602,
+      "sha256": "e37b82d32e693014fae66b566167d52a51f855ff4d65fad811c410c9fdd43bf4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/U",
+      "size": 475675,
+      "sha256": "632690caafb06ca4675ff1bd8aea67367e98f8b8cad0ac1368066a98670531e0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/p",
+      "size": 147602,
+      "sha256": "9ec40fedbac58affc7f602713d4ee848abd30c2d69eaa49e4a7de0747ae5bcfb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/phi",
+      "size": 731361,
+      "sha256": "5d5eef405d80f230cc069e10cb6e79f25fd774266f7970c3a5a640bb4aa70253"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/rho",
+      "size": 175590,
+      "sha256": "5eead2e26a86d7a039efa0655ebf2b3ce582650cc9c9d98a0d0108974ea1cf27"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/1.499999999999947e-05/uniform/time",
+      "size": 880,
+      "sha256": "88a81c3f2cc34a63f392a0dfd33e0cb44ec6d861c8d63bebf816386cd44a24f0"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/T",
+      "size": 147647,
+      "sha256": "c1c055568b4ac09e876ee0f1fc83a2d619368913189d4fa6bbfd93a5dec5f8c2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/U",
+      "size": 475033,
+      "sha256": "b88b96a2be965955d3a971504186c4e626851c3909287cdba9a2afcdec52d072"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/p",
+      "size": 147650,
+      "sha256": "78082c37dc38871290d607d6d942853431769d52153044de5040f26b1de73d19"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/phi",
+      "size": 731198,
+      "sha256": "7154223832fc33dbcdf128acbde51ce3fc83272ea0f1d8c2ca9118b09494527c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/rho",
+      "size": 175609,
+      "sha256": "af617e855102ea3240929dbacc4f99a6615b6d10aa4d137911e8615c6f2c88f7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/2.000000000000091e-05/uniform/time",
+      "size": 879,
+      "sha256": "9f6be52c760c5dd9491fb2486767d25b311adf1308f66a969fc6caa84a7bbccd"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/T",
+      "size": 147612,
+      "sha256": "a07b60eb9c11cbf0c1209a51b45305e8bda7eaaeb83e63e9bf04badb3eb2745f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/U",
+      "size": 481197,
+      "sha256": "96c02183c272db3a001aab0e4b4852baba98060c83cdb9312026c9ece58fc60b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/p",
+      "size": 147606,
+      "sha256": "5db4d7e90dc94330a2bb7b49827e6916ae800d5c325d44957d3ddde78ef9e9e6"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/phi",
+      "size": 731476,
+      "sha256": "9cd03a20db2b1df39863db722a05f2e4f6159f2955bca4d5a60d5ed3338f86dc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/rho",
+      "size": 175550,
+      "sha256": "8d75883184e2cee9216bd8fdca388d9ca769b026c807be2cbceaac0c7e44c025"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/4.999999999999878e-06/uniform/time",
+      "size": 880,
+      "sha256": "bd9cacd8969da73c6fa4965e82bacbd0bee9fc22147abd0d6d23b261a3c1bb4c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/T",
+      "size": 147669,
+      "sha256": "354fa9a365b950eddb161e4f577402fc6e3dcbbf35e771358610d45a67d4d131"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/U",
+      "size": 477065,
+      "sha256": "ca1fe9b8f755a55ed075cdd5eb4fd0ab7cd200548abb91a021407d404309262b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/p",
+      "size": 147658,
+      "sha256": "be672c155b2f8a52a52074dc6fed17387c05a221846b3436af13098e1fac6f7d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/phi",
+      "size": 731403,
+      "sha256": "b15944a740a4b8bf42c030a8c4a98e4ea71fccee11b02f9e470084785dfe3113"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/rho",
+      "size": 175520,
+      "sha256": "88d32e5fba670145f0eb9feea1eaa387c9efd91f89f4e1f02ec1061a56dd8ecc"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/9.999999999999676e-06/uniform/time",
+      "size": 880,
+      "sha256": "d36df1fee563aa30689ca27464837432ab2177b5a2bb8227b517392733f75bee"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/check-mesh.log",
+      "size": 3103,
+      "sha256": "9a48e9418d3c617d2f3b44ad73d88b2d84964847ee22cfe8e1303e64089edca4"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/constant/polyMesh/points",
+      "size": 1049233,
+      "sha256": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/mesh.log",
+      "size": 2203,
+      "sha256": "dc44fb080c3b4d79ba59745f459d695ffcd1ab2873c3e2c99a8237f64d5734af"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/postProcessing/torque/0/forces.dat",
+      "size": 1307137,
+      "sha256": "f1401eff433dd946a8bc8069bdaf4eb03b62d1e697a326a14b3eea800eef78b5"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/solver.log",
+      "size": 18866824,
+      "sha256": "84eeec4a613fe9dc5156fb5dee15cc084abccb5a7b3c11a362800a25f4b08ee3"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/system/blockMeshDict",
+      "size": 617,
+      "sha256": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/system/controlDict",
+      "size": 495,
+      "sha256": "8b226c136db6c9bc3d96810c35808a3129bca4713548d1be107262b013362b33"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/writeCellCentres.log",
+      "size": 1377,
+      "sha256": "36893ebbf93ec44beb419ba002e2e15a7740ce89ce5003559337c4b2c457c239"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096/writeCellVolumes.log",
+      "size": 1190,
+      "sha256": "421ef33a0acc720151c91b2ee99a07d666b59faa6463c25c4faf8ed0d238e89f"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/g4-n64-s4096.npz",
+      "size": 2764458,
+      "sha256": "8f205f8c3432812f08c48b7332559d6d93ce2c5adf2bee0875967c42211384a9"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study-results/predictions.json",
+      "size": 38717,
+      "sha256": "057237ef1b504d1d65fcaa8910abea4cacf94e15779fe207284afdd29f98707a"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study.log",
+      "size": 458,
+      "sha256": "3df3cfebd03d405883d9fc5cf2b00aa7fd3acf4b68383d914b48b991cf503d51"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/study93.py",
+      "size": 3540,
+      "sha256": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/test93.py",
+      "size": 6596,
+      "sha256": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/tests-execution.json",
+      "size": 2768,
+      "sha256": "9407d99cc730b9e195b8c1ceb9f61393d1b457c81ef46cbab5bf5dc06d0a66c1"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/tests-results/controls.json",
+      "size": 71,
+      "sha256": "9f0e576246a2b5b57daec2adb7533d2928c248499b425a44bb35cd21de433838"
+    },
+    {
+      "path": "v93-graded-source02/scientific/graded-endwall-v93/tests.log",
+      "size": 7351,
+      "sha256": "f57277df6240f6ee66519a248e1b60a66089d723a3659459db91f5255cee7192"
+    },
+    {
+      "path": "v93-graded-source02/scientific/meridional-v86/diffusion86.py",
+      "size": 8152,
+      "sha256": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf"
+    },
+    {
+      "path": "v93-graded-source02/scientific/meridional-v86/test_diffusion86.py",
+      "size": 4900,
+      "sha256": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7"
+    },
+    {
+      "path": "v93-graded-source02/scientific/mixture-axial-v75/flow.py",
+      "size": 12052,
+      "sha256": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c"
+    },
+    {
+      "path": "v93-graded-source02/scientific/mixture-axial-v75/test_flow.py",
+      "size": 7652,
+      "sha256": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310"
+    },
+    {
+      "path": "v93-graded-source02/scientific/wall-transient-v92/PROTOCOL.md",
+      "size": 2801,
+      "sha256": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94"
+    },
+    {
+      "path": "v93-graded-source02/scientific/wall-transient-v92/score92.py",
+      "size": 5949,
+      "sha256": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b"
+    },
+    {
+      "path": "v93-graded-source02/scientific/wall-transient-v92/study92.py",
+      "size": 2421,
+      "sha256": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150"
+    },
+    {
+      "path": "v93-graded-source02/scientific/wall-transient-v92/test92.py",
+      "size": 3385,
+      "sha256": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83"
+    },
+    {
+      "path": "v93-graded-source02/transfer.json",
+      "size": 2517,
+      "sha256": "5be21930112ddf8ec88dac94f79393fadba56708ef5b302116ce24ed83df482c"
+    }
+  ],
+  "rawBytes": 100940595
+}

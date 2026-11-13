@@ -8,15 +8,15 @@ import numpy as np
 
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'scientific/coupled-openfoam-v90'))
-from reference90 import Flow,Diffusion,R,H,RHO,MU,K,END,M_AR,initial,sha,environment
+from reference90 import Flow,Diffusion,R,H,RHO,MU,K,END,M_AR,initial,sha,environment,geometry
 from score90 import require_packets
 
 OLD=Path('/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90')
 BASE=Path('/work/project/v91-endwall-source02/scientific/endwall-v91/refine-results')
 
 
-def evolve(n,steps):
-    f=Flow(np.linspace(0,R,n+1),np.linspace(0,H,2*n+1),[M_AR,M_AR],noSlipWalls=True)
+def evolve(n,steps, *, axialGrade=0.):
+    f=geometry(n,axialGrade=axialGrade,noSlipWalls=True)
     r,z=np.meshgrid(f.mean_r,(f.z[:-1]+f.z[1:])/2)
     t,u=initial(r,z);q=f.state(RHO,t,.5,u/r);d=Diffusion(f,MU,conductivity=K)
     states=[];history=[]

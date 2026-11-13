@@ -28,8 +28,27 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def geometry(n):
-    return Flow(np.linspace(0, R, n+1), np.linspace(0, H, 2*n+1), [M_AR, M_AR])
+def geometry(n, *, axialGrade=0., noSlipWalls=False):
+    if (isinstance(axialGrade,(bool,np.bool_)) or not np.isscalar(axialGrade)
+            or not np.isfinite(axialGrade) or axialGrade<0):
+        raise ValueError('Axial grading must be finite and nonnegative')
+    z=np.linspace(0,H,2*n+1)
+    if axialGrade:
+        z=H*np.expm1(-axialGrade*np.linspace(0,1,2*n+1))/np.expm1(-axialGrade)
+    return Flow(np.linspace(0,R,n+1),z,[M_AR,M_AR],noSlipWalls=noSlipWalls)
+
+
+def native_order(flow, centres):
+    if centres.shape!=(flow.count,3) or not np.all(np.isfinite(centres)):
+        raise ValueError('Need one finite native centre per cell')
+    radius=np.hypot(centres[:,0],centres[:,1])
+    ir=np.searchsorted(flow.r,radius,side='right')-1
+    iz=np.searchsorted(flow.z,centres[:,2],side='right')-1
+    index=iz*flow.nr+ir
+    if (np.any(ir<0) or np.any(ir>=flow.nr) or np.any(iz<0) or np.any(iz>=flow.nz)
+            or sorted(index.tolist())!=list(range(flow.count))):
+        raise ValueError('Native cell-to-tensor mapping is not bijective')
+    return np.argsort(index)
 
 
 def initial(radius, axial):
@@ -38,7 +57,7 @@ def initial(radius, axial):
     return temperature, swirl
 
 
-def make_case(case, n, steps, angle, work=True):
+def make_case(case, n, steps, angle, work=True, *, axialGrade=0.):
     if case.exists():
         raise FileExistsError(case)
     delta = np.deg2rad(angle)
@@ -46,7 +65,10 @@ def make_case(case, n, steps, angle, work=True):
     vertices = [(0,0,0),(x,-y,0),(x,y,0),(0,0,0),
                 (0,0,H),(x,-y,H),(x,y,H),(0,0,H)]
     body = 'vertices ('+' '.join('('+' '.join(map(str,v))+')' for v in vertices)+');'
-    body += f' blocks (hex (0 1 2 3 4 5 6 7) ({n} 1 {2*n}) simpleGrading (1 1 1));'
+    geometry(n,axialGrade=axialGrade)
+    grading='1' if not axialGrade else f'{np.exp(-axialGrade*(2*n-1)/(2*n)):.17g}'
+    if float(grading)<=0:raise ValueError('Unrepresentable native grading ratio')
+    body += f' blocks (hex (0 1 2 3 4 5 6 7) ({n} 1 {2*n}) simpleGrading (1 1 {grading}));'
     body += (' boundary (walls {type wall; faces ((1 5 6 2)(4 5 6 7));}'
              ' midplane {type symmetryPlane; faces ((0 3 2 1));}'
              ' minus {type wedge; faces ((0 1 5 4));}'
@@ -102,14 +124,17 @@ def make_case(case, n, steps, angle, work=True):
     return calls
 
 
-def native_packet(case,n,steps,angle):
-    flow = geometry(n)
+def native_packet(case,n,steps,angle, *, axialGrade=0.):
+    flow = geometry(n,axialGrade=axialGrade)
     c = read_field(case/'0/C',flow.count,3)
     radius = np.hypot(c[:,0],c[:,1])
-    index = np.floor(c[:,2]/(H/(2*n))).astype(int)*n+np.floor(radius/(R/n)).astype(int)
-    if sorted(index.tolist()) != list(range(flow.count)):
-        raise ValueError('Native cell-to-tensor mapping is not bijective')
-    order = np.argsort(index)
+    if axialGrade:
+        order=native_order(flow,c)
+    else:
+        index=np.floor(c[:,2]/(H/(2*n))).astype(int)*n+np.floor(radius/(R/n)).astype(int)
+        if sorted(index.tolist())!=list(range(flow.count)):
+            raise ValueError('Native cell-to-tensor mapping is not bijective')
+        order=np.argsort(index)
     volume = read_field(case/'0/Vc',flow.count)*np.pi/np.deg2rad(angle)
     states, histories = [], []
     native_rgas = []
