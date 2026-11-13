@@ -1,0 +1,30 @@
+START decay-r32-z128-gauss
+NATIVE COMPLETE decay-r32-z128-gauss
+END decay-r32-z128-gauss complete 18.241544758
+START decay-r64-z128-gauss
+NATIVE COMPLETE decay-r64-z128-gauss
+END decay-r64-z128-gauss complete 51.022346023000004
+START decay-r128-z128-gauss
+NATIVE COMPLETE decay-r128-z128-gauss
+END decay-r128-z128-gauss complete 154.968687322
+START decay-r64-z64-gauss
+NATIVE COMPLETE decay-r64-z64-gauss
+END decay-r64-z64-gauss complete 21.358313718999995
+START decay-r64-z256-gauss
+NATIVE COMPLETE decay-r64-z256-gauss
+END decay-r64-z256-gauss complete 124.081443974
+START decay-r64-z128-ls
+NATIVE COMPLETE decay-r64-z128-ls
+END decay-r64-z128-ls complete 16.120347882999965
+START rigid-r16-z32-gauss
+NATIVE COMPLETE rigid-r16-z32-gauss
+END rigid-r16-z32-gauss complete 0.7430168750000234
+START rigid-r32-z64-gauss
+NATIVE COMPLETE rigid-r32-z64-gauss
+END rigid-r32-z64-gauss complete 2.880417917999978
+START rigid-r64-z128-gauss
+NATIVE COMPLETE rigid-r64-z128-gauss
+END rigid-r64-z128-gauss complete 16.41052830000001
+START rigid-r64-z128-ls
+NATIVE COMPLETE rigid-r64-z128-ls
+END rigid-r64-z128-ls complete 16.512340757000004

@@ -1,0 +1,6 @@
+
+> check:assets
+> python3 blender/check_assets.py
+
+GLB v2: 176 meshes; PNG 1600×1000; Blender scene present
+Authored centrifuge: nine SI modules, 261 selectable hardware meshes, no studio objects

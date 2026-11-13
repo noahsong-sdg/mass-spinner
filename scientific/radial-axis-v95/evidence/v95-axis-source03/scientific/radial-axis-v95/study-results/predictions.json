@@ -1,0 +1,1229 @@
+{
+  "model": "directional-viscous-v95",
+  "timesS": [
+    0.0,
+    5e-06,
+    1e-05,
+    2e-05
+  ],
+  "steps": 256,
+  "axialGrade": 4.0,
+  "halfAngleDeg": 0.5,
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/coupled-openfoam-v90/reference90.py": "2422832513d13f50cf5c9c9aa8bf66dcd693155cf743641f1b49139d73131657",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/endwall-v91/candidate91.py": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe",
+    "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "scientific/graded-endwall-v93/PROTOCOL.md": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482",
+    "scientific/graded-endwall-v93/score93.py": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed",
+    "scientific/graded-endwall-v93/study93.py": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2",
+    "scientific/graded-endwall-v93/test93.py": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/radial-axis-v95/PROTOCOL.md": "570bd916c7da50d094d383f12bb62ddeff5e4c83acd6f6cd52f86232e2cb2fce",
+    "scientific/radial-axis-v95/score95.py": "7539d5daf39680194f614361f88f4a9b6e77e215a8f0be4857555ea059b04b60",
+    "scientific/radial-axis-v95/study95.py": "e3bb52b4b970b1936e3a17ddb029d28c48d92e643cc1c0aae69439f900d3ec3e",
+    "scientific/radial-axis-v95/test95.py": "534c69c3ba742cd09e06fb5bf4127eed65245cbea80bffc8e0ed310284626b51",
+    "scientific/swirl-control-v94/PROTOCOL.md": "589299071007e858c51dfb674c1ea914ba8d9d5842a60c177b06961311472251",
+    "scientific/swirl-control-v94/control94.py": "56e66645585fce21a22a06b3ddba04537ba36ad1af3673d74344c990aaf8423a",
+    "scientific/swirl-control-v94/score94.py": "5e151c31a28e9e13762778777638db0e8c7a8c0937ad502f2441212a4f1f1da0",
+    "scientific/swirl-control-v94/test94.py": "9dca01805a54bdda7e67d0da6d991fec7999eb55f03afde89ca4370c9b8da05c",
+    "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94",
+    "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b",
+    "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150",
+    "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83",
+    "references.json": "43b6175fdce3e8e9acc673f250c8980cd4ac49628da2c904d6b4deeaf13843e0"
+  },
+  "referenceSHA256": {
+    "/work/project/v91-endwall-source04/transfer.json": "d99d4343a0cbd6a4d550b6cc3b50756d75ea1352a8bfcaedb00798858fa79197",
+    "/work/project/v91-endwall-source04/scientific/endwall-v91/candidate-results/extension-results/predictions.json": "47f2d0c922113935900fff23f4455af5d5bc5b4d15afde943b7c821a0838ccc9",
+    "/work/project/v91-endwall-source04/scientific/endwall-v91/candidate-results/fine-results/predictions.json": "cfafd7bc3d70767df5e478191789aee80f465b17d6f694e38e1ba8c41cbaaa9f",
+    "/work/project/v92-wall-source02/transfer.json": "e1b8ba364e138a7a6b62003543adf178b81075fb863ace12483f0818a6b7392c",
+    "/work/project/v92-wall-source02/scientific/wall-transient-v92/study-results/predictions.json": "7200246da3fcf59e5514cc8d4b69efe18f1f1d0cdd8e54d2353b58d69a6b6575",
+    "/work/project/v93-graded-source02/transfer.json": "5be21930112ddf8ec88dac94f79393fadba56708ef5b302116ce24ed83df482c",
+    "/work/project/v93-graded-source02/scientific/graded-endwall-v93/study-results/predictions.json": "057237ef1b504d1d65fcaa8910abea4cacf94e15779fe207284afdd29f98707a",
+    "/work/project/v93-graded-source02/scientific/graded-endwall-v93/score-results/audit.json": "f9fe2b69d55e02698b7708fe0f8f60793836e3a35f32054ce24bd82ae64a80e6",
+    "/work/project/v94-swirl-source01/transfer.json": "a9b2b976a2e425d450f48e72935145bab19bf7ffd6ddd8075ecc709505422d4a",
+    "/work/project/v94-swirl-source01/scientific/swirl-control-v94/study-results/predictions.json": "2cb578dd80668b41a0b68a872d955ffb889311106b9463d1c596a3689f7a929f",
+    "/work/project/v94-swirl-source01/scientific/swirl-control-v94/score-results/audit.json": "6099c6ea646a782c784495e81da506f7eed241bca5df30af693697f5f9e6c0c3"
+  },
+  "nativeSHA256": {
+    "applications/modules/incompressibleFluid/momentumPredictor.C": "7921c5f86dcffc46fc7849ac9ec6adfe1c9c261041788406469b545617119d59",
+    "applications/modules/incompressibleFluid/correctPressure.C": "1e6b6d38e1f2730368b5de45a4fc76017b06284748349149da41c90c6d84efb2",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libincompressibleFluidSolver.so": "f5a9c9e086eaecf4cb1b09eec0268efe4e1f17d274e4f822e5184c38126291d4",
+    "src/finiteVolume/fields/fvPatchFields/derived/rotatingWallVelocity/rotatingWallVelocityFvPatchVectorField.C": "079492638cd756c9a861545c0ca9b560136d7f139d4bb91b2d29560ae5fd113a",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresGrad.C": "536d54578d1f58fc1b01e475f11c12c6b3fa46223c0e3e64b67a4c523bd76a91",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfiniteVolume.so": "c1c4033147b56e9ab674b02f7321d8aee6ed3b177abd4fcdca72d4890a9aa8a6"
+  },
+  "runtime": {
+    "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "skfem": "12.0.2"
+  },
+  "cases": [
+    {
+      "label": "decay-r32-z128-gauss",
+      "kind": "decay",
+      "n": 32,
+      "nz": 128,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r32-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03654891699999996
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r32-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.031187291999999922
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r32-z128-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.06852645800000001
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r32-z128-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04107466599999998
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r32-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 5.010123669
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "bd7ccebf9df80a6e48e550560f5762de4cbedaaf5d0171bed93507bd4bc21f51",
+        "check-mesh.log": "c78696c8ea37f5f85f63496a2fddda2bff2c2cbc984e4bfb305f6cd081f584d5",
+        "writeCellCentres.log": "ca9d2640cf1f54f38840478e03b61203ff9fbe76441a223376624bedecf4a091",
+        "writeCellVolumes.log": "d2627d36a6f9443cd9d13093c1740f0c77f25d865fc7207151668803cc7cbe5b",
+        "system/blockMeshDict": "b50b28bfb740c90556763bab6f44c64d2e31c901ff95452b52876e85a5d2f5a7",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "fb5c5ad02fbae207415d3f2ec175fa9c84a5a44d9bb95b26a820619f1322ba5c",
+        "constant/polyMesh/neighbour": "4adf9a50bdf95db0146996672a0f82fd73b9c2155f623884aa90314eead469fb",
+        "constant/polyMesh/faces": "3933acff107a366e3cc409033f780aca94b47c9868ca173690cf19205ec332e9",
+        "constant/polyMesh/owner": "d19d3a6a2427a2ce871f3b90feff13e723cf36dd734700820d10600c581d5a70",
+        "constant/polyMesh/boundary": "fcc3eb2bbf4a8b97b152beb8cafd7c6418efc348186292a6953f6748ecc9c96f",
+        "0/T": "7cb5da24348e1cc0b6e1b4dffe28b7a67bcde9de57bd91e72e4def81a1d55a6b",
+        "0/p": "684b177128a3dbc6792762e4448c9b0aad5b313f20af48fc45b243f9eaf0de9c",
+        "0/rho": "c4277db9f140d109358f23913c481f22d9496dbcd9da2e0537f7827fe517cb3a",
+        "0/U": "4b4236217d2931e4c9b6d30c50e0a73cfabbdff0983c792cab21f83dbb07cba0",
+        "0/C": "86fcde6a1b9684e154ea416acf5ed408b7ecaf4fea7342832f20075942a854df",
+        "0/Ccx": "3c8fe10f418cfeeb5ec85d0940afd323f0c34e4b88ed1998bfde9c8f4b0a1f3e",
+        "0/Ccy": "50287bf09fa58b74cfa154ca0a147590d4bed7d685c5a978f2fc4428cba44829",
+        "0/Ccz": "bbd9f05dcd20fffa0768c01af847c2c95eea6c5634338d6ec54d0f54f7690123",
+        "0/Vc": "f55cadaa50c75882bd0339ea378d7c9f9dc21482679e1d9eaf8f7d784de18309"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.906970941664197e-09,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445741
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445736
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445733
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.45749145344573
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "decay-r32-z128-gauss.npz",
+      "packetSHA256": "40cdb580bded25e2703cdf9a7cece312f3acd4cbee1f1ac21aa6a2d40fc10375",
+      "wallSeconds": 18.241544758
+    },
+    {
+      "label": "decay-r64-z128-gauss",
+      "kind": "decay",
+      "n": 64,
+      "nz": 128,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04268908299999907
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.054316958000001136
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z128-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.056493082999999444
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z128-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04804908300000221
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 14.966737923
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "ff62353e8c637b85c9cabcd63d6b493c37802be2d01d18806d71bde2c617f240",
+        "check-mesh.log": "8d4d5617f1c905e36955e20e492a7bf6308bb1abb3e4ed63755879f6bb07d498",
+        "writeCellCentres.log": "e352564f589f9a86db965f8a834de8bf10e0059bcf8d970a39835af94b2005e1",
+        "writeCellVolumes.log": "c352dece61c84b3abdadd3c44a61750464a9dde6cfd66b1d236e8fbfb2500ec6",
+        "system/blockMeshDict": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad",
+        "0/p": "4e483421aba27c90af2ea789cd854bb85ffa656408275e8509b796e03740077d",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "3752e1b85def0a7ecd18d797c7eb14ce6aed4bb482fdf0e7c5a810512c3f20fc",
+        "0/C": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41",
+        "0/Ccx": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882",
+        "0/Ccy": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5",
+        "0/Ccz": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf",
+        "0/Vc": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.909763372917647e-09,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.457491453445741
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.457491453445737
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4574914534457344
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.45749145344573
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "decay-r64-z128-gauss.npz",
+      "packetSHA256": "f083cdb5244ba343046f7266389ebe9550609212adbe9e8fc5f99811cd9a98bf",
+      "wallSeconds": 51.022346023000004
+    },
+    {
+      "label": "decay-r128-z128-gauss",
+      "kind": "decay",
+      "n": 128,
+      "nz": 128,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r128-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07451116699999716
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r128-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.11368366699998944
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r128-z128-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.08575395800001218
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r128-z128-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.06828137499999798
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r128-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 47.394523189
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "b582d50e45dc604c3bc31751d53e640ac4b0e0efb12930990b5cab707d18cf0d",
+        "check-mesh.log": "a4e9be355d89a8e221addd561151419471ccc4772892d7971029c734cc6f7499",
+        "writeCellCentres.log": "8f03ed9c08d6c67c4989eba28929eba460e3309c17e240be976cbae3dbaabc7a",
+        "writeCellVolumes.log": "e5292827dedf224f20a3e1588f010fd194e5fe68a5f01b7243b1f0e3c06516b7",
+        "system/blockMeshDict": "9f416fd94911d12b02620dd8595d2d48f8b07af0a2c750537996b2ce97c9a008",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "de8b56fe325228cbbdf8c435170d9d6bb5084a4cdd87bc55a4a0716ad4aa11b2",
+        "constant/polyMesh/neighbour": "4c66b70856f3e88d6660676798af2871134def294d1a750b8faa973117110028",
+        "constant/polyMesh/faces": "26363b6160942b4b63475aa65a3bff2597ed6d19243141909c577976aeb2708a",
+        "constant/polyMesh/owner": "3ee25ab46362a230110d4e491c2e83e39b3c2f92a12147e233722004b8f52462",
+        "constant/polyMesh/boundary": "b2c0d6aee95af9902294a42ab0131ded0e031dd74e64bc3f369f8c3ba5be25ed",
+        "0/T": "291452979c0aaffffdfceeec0e6b7071db5179ca9e786a2b8f7bb94d768feb34",
+        "0/p": "cc8cef37cc1d491178931882f7033ced15ea8a4ff3b089290f873a43843c9287",
+        "0/rho": "efdcccde442566d2c57dc7acd5941417f49fda5c711ef84d05a5845b082d7033",
+        "0/U": "16edce63f6272dd89a0b83d79965a5f60fd6b3fadbb2bf6befe103388bc4b1f5",
+        "0/C": "6d2016c66f1c155857c206a2cacbb96c332448bd8bbcf2ed6eecd4d405faa533",
+        "0/Ccx": "f2e2b24c29a8646c7ed7e92290faabe455a38380770da0d4d7ba81e581ed99d5",
+        "0/Ccy": "820e83e2d950e2703992ca0468d6a64b8cc4a7e80716ee15c0b73e1af3f7c290",
+        "0/Ccz": "b298f6e1872e6f61998823b7d0010f6ead7588fb39e03a90f083be72240e2b55",
+        "0/Vc": "1809784f0f787a997b490512b43f2e99c28d68cb4e06455bedeb50ac39dd5329"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.90809839856341e-09,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445741
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445737
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457344
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457313
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "decay-r128-z128-gauss.npz",
+      "packetSHA256": "8ee41544b148bfe41fda340153e8cc7f5c93e0e17572113d47622c77d2f8cd74",
+      "wallSeconds": 154.968687322
+    },
+    {
+      "label": "decay-r64-z64-gauss",
+      "kind": "decay",
+      "n": 64,
+      "nz": 64,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r64-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.028612457999997787
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r64-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03097962500001472
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z64-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04494220800000903
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z64-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03986958400000162
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r64-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 5.585437585999983
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "7e08c6244f4c8a1a89a627956acb438268cdea8c31c8952542513135b3d10d2a",
+        "check-mesh.log": "7cfd43c8aaa35d2d64440afe24ea814ba914e3289c42eabb38b24a1db5bd1547",
+        "writeCellCentres.log": "d36217e4ef1882d4771b06cc1cc1996e2168b8293a0ea2c5c09e4494bc0377ef",
+        "writeCellVolumes.log": "5e337104d5c7c1f0100003cfeba5cadfcd6445b856a350868bc8ed34f6644d40",
+        "system/blockMeshDict": "de8d134390d3479136ed1b43f2b8fe37d49638fd0beec503f8b85350a664ce59",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "9e5c74e098291498d9d1655a8f78c3ce572c0c8305affe9e54ebdf34c279fccc",
+        "constant/polyMesh/neighbour": "2b006d95d327b716bac1151e5021be31917199b3a3cd28bfb7d48875820f3735",
+        "constant/polyMesh/faces": "fc3115410df775ed7520a3d16b31048072030fea89b8e1ea86122ac7585b4cc0",
+        "constant/polyMesh/owner": "f62c1d0efde846914ddbe7e012b7207a9aa3c37269ad33dc8fead80e5fb04f6c",
+        "constant/polyMesh/boundary": "b0ade5e000e517bf5a20fd7bdbb842cbfbadc106dbf5cd2b81547679cd8204d5",
+        "0/T": "970338c325f91c9c6aca56d1cb00f84c35ecfaffd094292788f985d276a803a3",
+        "0/p": "684b177128a3dbc6792762e4448c9b0aad5b313f20af48fc45b243f9eaf0de9c",
+        "0/rho": "c4277db9f140d109358f23913c481f22d9496dbcd9da2e0537f7827fe517cb3a",
+        "0/U": "aa3eade55cfa0fd0127d5233c256930f8f045e817f48fb31415bafe60aea37f0",
+        "0/C": "5293b8a5e11fde8a46a542f290ac78731ce16a20a82c28c58a5b6f0fb0752b53",
+        "0/Ccx": "5aa192c2ba2d12bcee90bfc025aae68a9907a8317ad2c4bdbe546e2bf12460ca",
+        "0/Ccy": "6bfe8361a48dbb35d3f7407895a2fb9edfc87b3477eae6260309b62eca793273",
+        "0/Ccz": "2c4d0742c0b790f9a2aced0aa2ad2f0f070153b5664e0866314f7e33458f2291",
+        "0/Vc": "fd8de2c410231c991e6522af6885f1de20321659a4ed41b63f59f104039465e8"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.894797839005122e-09,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445741
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445737
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457344
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457317
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "decay-r64-z64-gauss.npz",
+      "packetSHA256": "60f33020edc852900e87704aa70c1ca9d92d4a7bbd86d69f1bd4d63d02655582",
+      "wallSeconds": 21.358313718999995
+    },
+    {
+      "label": "decay-r64-z256-gauss",
+      "kind": "decay",
+      "n": 64,
+      "nz": 256,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r64-z256-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07469150000000013
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r64-z256-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.12179779100000587
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z256-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.0866215830000101
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z256-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07141225099999815
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r64-z256-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 46.55930364600002
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "4995ab31100635baa830412effa2cea5af2535ab2a862b541f4508c298e5d8c7",
+        "check-mesh.log": "fe3f77dc7fdab5868077a356c3993ab3cbebac77862ae258ea5e396cf100c491",
+        "writeCellCentres.log": "485aa100594c168a03276dad053c2d1598add57c8a1c71312d6a1972efbc4090",
+        "writeCellVolumes.log": "c6c4f9212912c00074b2b2cb27edd2c09f1cad71d8f2302d124c707873d9d533",
+        "system/blockMeshDict": "523eb40bd517b008b7dd5bb7304e831b421d14ed304bfed0229145aed1c68251",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "666d590b6c721089ae24c6251eaaaa9a8a9e7582456005f4620a897836371710",
+        "constant/polyMesh/neighbour": "9122340965fb430ab0101062d7c44e9c764aeb330b43979188f616cbd6132673",
+        "constant/polyMesh/faces": "f956139198d47a34f541ffdee64b1fb27a1d089b315f2df88c7ae1227b1e10de",
+        "constant/polyMesh/owner": "24db03e9945b73c3e2adffd8ea08ae873c5c1c66658044596d45a9190a881a0d",
+        "constant/polyMesh/boundary": "3c614847dcf4a5f7c0395092658c7321cd8e263ff83cde5a4ea8aaa34e92f93e",
+        "0/T": "58f47c03b9e4e6ab2dbd5b3ded27577379738c43f9a5d1029e7e093fe9438778",
+        "0/p": "cc8cef37cc1d491178931882f7033ced15ea8a4ff3b089290f873a43843c9287",
+        "0/rho": "efdcccde442566d2c57dc7acd5941417f49fda5c711ef84d05a5845b082d7033",
+        "0/U": "20dbcf399d0bcadc52b1333606855773facc9ef92c53766823e31cbb111198a2",
+        "0/C": "2d7c129ebaf46e7a699d12c583b368ba0bc61c9734c0a7000c7e33e305d1f217",
+        "0/Ccx": "3de9c14b9261ea65fbd1133f0e3ca2acee5698e9fa12f55973093afb846f2346",
+        "0/Ccy": "d741926a387ea6c7d98bcac71ebd406f59a3f311de1a48c4fbc5dd0eea23f79b",
+        "0/Ccz": "1ab69c0b43b52b68c63436f6ff8de51bac44cd74afdd90c927f6640229d34729",
+        "0/Vc": "f5f2bd47aca6917601ec8407d91ec4521c1970e16679682a1d33ac0ded073541"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.91228780712804e-09,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445741
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.457491453445737
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457357
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4574914534457353
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "decay-r64-z256-gauss.npz",
+      "packetSHA256": "22d31d82280da7a6649e2e86b8ad9536d791f3dee825b5f57e9a7a64dd017b9c",
+      "wallSeconds": 124.081443974
+    },
+    {
+      "label": "decay-r64-z128-ls",
+      "kind": "decay",
+      "n": 64,
+      "nz": 128,
+      "gradient": "leastSquares",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/decay-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04368325000001505
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/decay-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.056996333999961735
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z128-ls",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05880333300001439
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/decay-r64-z128-ls",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.050572250000016084
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/decay-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 15.806556632000024
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "34d64afc36258f26bde3a0a002e1f8389982b1cd1db024df452ccc5ea6e299e0",
+        "check-mesh.log": "8061953651d213a66738e1212c45d84058bb928323320b368486e2b30c505b44",
+        "writeCellCentres.log": "6074ab1345175223c2476006157ab8ac0912c965e9488a87a6a99682f3d27241",
+        "writeCellVolumes.log": "bdfb71345b572297725cd7b450d89f3af7666141966a7ffec71b8452b36b4d7b",
+        "system/blockMeshDict": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d",
+        "system/controlDict": "797fdcf5d65ca9eda601c1c23d0b326ff9897b4080466f41c5a5f2e1a5384d7a",
+        "system/fvSchemes": "c5f5f03949fc3147e4a426037032b568d5d274e989aa5c33b90604435011588f",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad",
+        "0/p": "4e483421aba27c90af2ea789cd854bb85ffa656408275e8509b796e03740077d",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "3752e1b85def0a7ecd18d797c7eb14ce6aed4bb482fdf0e7c5a810512c3f20fc",
+        "0/C": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41",
+        "0/Ccx": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882",
+        "0/Ccy": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5",
+        "0/Ccz": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf",
+        "0/Vc": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 7.911017165607957e-09,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "packet": "decay-r64-z128-ls.npz",
+      "packetSHA256": "f9f524b418c7ca923ac4e618dda79d7c67c7e51a28f123766dcfcb654d38ad0c",
+      "wallSeconds": 16.120347882999965
+    },
+    {
+      "label": "rigid-r16-z32-gauss",
+      "kind": "rigid",
+      "n": 16,
+      "nz": 32,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r16-z32-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.014534582999999657
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r16-z32-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01208820800002286
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.034145165999973415
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03322550000001456
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-gauss",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03504170799999429
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/rigid-r16-z32-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.5914238340000111
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "96c1111bf6fbe90cc4d9f6e0e253ab4f547182a4ebc568cb0e3e215879743b41",
+        "check-mesh.log": "9b88b4b2b11ac5923291511432b008480a7a33c1573bb46b4c964585ff6fe7f6",
+        "writeCellCentres.log": "0d5124d801c87de013cd4c3ac415d0b4102084f05999175599597aa77e2beeac",
+        "writeCellVolumes.log": "28021c9dc3fbd03c7d7625a09e3802782d7014726ead161550c56935e1e3a65d",
+        "initial-gradient.log": "0a8f288b185f48d5648e9dc4a9e8aadba2063b2ee15afed8bd932dcb80fceb7b",
+        "system/blockMeshDict": "4c662ee506a3212ee8625d464129451b895b865df34ff2df6c5b948d09922b5b",
+        "system/controlDict": "441cad2ca8f32285b62489636e8bdeb0871e013a4de9b7855f8762f44b7d47fd",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "4d89be4b92c938ff94042d51ddd52b10f3068704227093e9bdd795d298215054",
+        "constant/polyMesh/neighbour": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822",
+        "constant/polyMesh/faces": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6",
+        "constant/polyMesh/owner": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5",
+        "constant/polyMesh/boundary": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa",
+        "0/T": "31e637d9df9b26966aef5b59504bce886a17630b4691c013a3b38896fe8cff57",
+        "0/p": "f32707c573be16a01b1a99cf58d243541174036d3d27f31a058974709b6e5f05",
+        "0/rho": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57",
+        "0/U": "312f712b32c26c502776feb88129555069eb781d3958e934228a05cd4caafad7",
+        "0/C": "4f6bcefe87d21a216abedf0c8898538c93e5930caefc03547c215d6591b7401a",
+        "0/Ccx": "668ce7c1c3a837a3f05044da41b184319073a681b98de9c20f2e961c8ea44847",
+        "0/Ccy": "5839f577338c17d3c27b84901aae3607fe2ee8c68908b399a86c181f7dd7a794",
+        "0/Ccz": "a66a7c4c0c6fd68d551d9c4c7c3f3c54edc027c106a655fb5ed326e7f86f3242",
+        "0/Vc": "ea76a2a2698181ac3b8e2179d48db08c5c578fef9971205eab8b85b5cfdb15b1",
+        "0/grad(U)": "0031a49218b5a8dc583d6fded71a009f488d0f391bacd8967ffde88c6b158516"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 1.7757588220686537e-08,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "packet": "rigid-r16-z32-gauss.npz",
+      "packetSHA256": "f4bfcefac1a8bf7932461996607d9cc0165d3d003e08ddfce86ba89b6921ad9d",
+      "wallSeconds": 0.7430168750000234
+    },
+    {
+      "label": "rigid-r32-z64-gauss",
+      "kind": "rigid",
+      "n": 32,
+      "nz": 64,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r32-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.02017700000004652
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r32-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01964654200003224
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r32-z64-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03806333300002507
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r32-z64-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03699825000001056
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r32-z64-gauss",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.041886792000013884
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/rigid-r32-z64-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 2.6522290849999877
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "23d7921974ffd3616160434aef2357c5c0a7d529a0257ce4c72150d157a6b19b",
+        "check-mesh.log": "1c2108938cbd08764b6434366ffb386c3136a5d8f3f5ffd018e904177e45e1bf",
+        "writeCellCentres.log": "a4c9553012944f1afc779d441ae869abe39fa0b298d251fcb1a5e3f4db13cb29",
+        "writeCellVolumes.log": "20a2300086d9ca11d402bff4d450e4075d23d499da2a294043694f811c5066e3",
+        "initial-gradient.log": "371af6c5af81aadf944df9b452ae97facf26b41a6e176822c1ee36dcc7df9205",
+        "system/blockMeshDict": "a5162d805e97b826a63877f3081396de538db7a16918114328a1109a6a3c59d6",
+        "system/controlDict": "441cad2ca8f32285b62489636e8bdeb0871e013a4de9b7855f8762f44b7d47fd",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "14110071df305eb63d57761fa36394b66a44e2791387bf2fd8a9e3df001e4aeb",
+        "constant/polyMesh/neighbour": "f505673dfec678029d61236ca4ac2640938b8e452bbaabb8a3db18208928300d",
+        "constant/polyMesh/faces": "ca2dff17f0aa9aed6a3d7ac549dac792c2f0a2a529b28ee5f76ac0a2a2efb693",
+        "constant/polyMesh/owner": "e1d62e93d47894b0f2fa95764a4b541acdceed97a4087c95defe4e2575d7e2bb",
+        "constant/polyMesh/boundary": "5d8c9147ea07b6e76c255700aa609571a063943adc8e43e29736d2bf1a514784",
+        "0/T": "41b3bf27bef7f25cac955bc7b642ab6ef472cc5289be7d9da302a702c4b3998c",
+        "0/p": "a41fb8ccb499c852eb4b0133f6e9547577d48bb588633db9d610a1b48e51081a",
+        "0/rho": "ab9a2bde7531ff3bcce7d77e398edeceb96dcd07679c5715f1a0d3157cebe2b5",
+        "0/U": "d7a14312ce5df78b3173be1ce241e5be9c83de8fdfe0bb27df2c659322184182",
+        "0/C": "a5292b3d3f643f610ae3fb38adc1cac5dadc6d2bebb7b1fe52682056ce51c748",
+        "0/Ccx": "683f8eca110311aadfb95d87cb4a9fabdc0cdb3b7a704abecf47ae8f66be2179",
+        "0/Ccy": "ca670f72e0ad3908842708162f0a431d6f9a6aa1b6b50c7460f2e08260cb197b",
+        "0/Ccz": "488221c88bfb6991b3518b4e7e1e47968b1b1f23f724004ccccb28e7f3ccbdb5",
+        "0/Vc": "92d61276408c5fe61f1ad1a5d74757fef51f33c016dcefa1c26159f132013b20",
+        "0/grad(U)": "f144ba4fa49a0a113a5ed06de17903fd4d20aebcb23311e514891b2d1f746d5c"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 9.852321922784876e-09,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "packet": "rigid-r32-z64-gauss.npz",
+      "packetSHA256": "4f725d16cc42f4f523540c885728468d7c92980b980ef41154dcbea762be6d42",
+      "wallSeconds": 2.880417917999978
+    },
+    {
+      "label": "rigid-r64-z128-gauss",
+      "kind": "rigid",
+      "n": 64,
+      "nz": 128,
+      "gradient": "Gauss linear",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04327479199997697
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.0560913339999729
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-gauss",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.057887875000005806
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-gauss",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04993858400001727
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-gauss",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07022325000002638
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/rigid-r64-z128-gauss"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 15.86440909099997
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "64dd5b35c8fd4ca434e7e5b3b3c541f26d2c3305f33e9fbcbfe39dbc17bf41f5",
+        "check-mesh.log": "8f26568b4896106f6d87852e43ef9f4f502ffd2d60365bc4eb155625b6f33215",
+        "writeCellCentres.log": "6746c45ddef2b32fb0bd4bc0a0ec3cac2bd32f26cf3042c1df32ae12b6efeefc",
+        "writeCellVolumes.log": "f88f4e33ce71948e09a32560205e3a0e35371055b677e70b0b7d177b01572fb0",
+        "initial-gradient.log": "d143ad17569c7d21971aaf3e48fdd94be66cdae259d68fcbca5dd55072d3ebc5",
+        "system/blockMeshDict": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d",
+        "system/controlDict": "441cad2ca8f32285b62489636e8bdeb0871e013a4de9b7855f8762f44b7d47fd",
+        "system/fvSchemes": "557670e59a8262dfb3ccc3d077d8d8c3847ee515aa142fc025c4fb9a46c2a556",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad",
+        "0/p": "2dad798b03e5aa6ea523d4f4b50efa30d485a4e5cd7db5f53f8e17887bc2089c",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "6801fb4c731b1dbb4e54d06d41853f2b0c7d4cf739fa55e37e0079fe6e2b401b",
+        "0/C": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41",
+        "0/Ccx": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882",
+        "0/Ccy": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5",
+        "0/Ccz": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf",
+        "0/Vc": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f",
+        "0/grad(U)": "4b6092e67b65f9a6bfd4ea22312e68c763c13f3a701622c84c6f058f9b66b154"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 3.315119731430896e-09,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "packet": "rigid-r64-z128-gauss.npz",
+      "packetSHA256": "9f37b2dea53fe2928f3b898d3d174fa7ee59246b77f030db0845a27fd3383ced",
+      "wallSeconds": 16.41052830000001
+    },
+    {
+      "label": "rigid-r64-z128-ls",
+      "kind": "rigid",
+      "n": 64,
+      "nz": 128,
+      "gradient": "leastSquares",
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.049202166999975816
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.06202966699999024
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-ls",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.06813275000001795
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-ls",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05664508299997806
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r64-z128-ls",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07534862500000372
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/rigid-r64-z128-ls"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 15.935008089999997
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "3c007cdd6495bb760e1effea5372c2aac6990b8c8683826f8ac2fa4960e548be",
+        "check-mesh.log": "e30ae6ad81e065bf24b062d03cac4be175e5f65673807ed078debc220297dc67",
+        "writeCellCentres.log": "5c4f43f6089db215c0da582d44fed21035eff50d0a61a7f102355fe58afb1d7c",
+        "writeCellVolumes.log": "2387a883f3afe4db1abcf4637dade1707e37700a92f60f2068f7db78a0590d65",
+        "initial-gradient.log": "f8db04eae494a218ee39c8df52f0c44e65802532f1cef04ff6c201b31f4b0693",
+        "system/blockMeshDict": "3f6533e6d1a5419623d6ca9b30932d67fc3bb07c805d1a1ee489bbc22b66a75d",
+        "system/controlDict": "441cad2ca8f32285b62489636e8bdeb0871e013a4de9b7855f8762f44b7d47fd",
+        "system/fvSchemes": "c5f5f03949fc3147e4a426037032b568d5d274e989aa5c33b90604435011588f",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "278bcddf7aa67a430db54046c853a3fed7765cacc885e5424b1bde0dc8f2e8d2",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "55c784d291454e10ce95ded29023c0bcf283934a0813850e8e1a8ada289ae5ad",
+        "0/p": "2dad798b03e5aa6ea523d4f4b50efa30d485a4e5cd7db5f53f8e17887bc2089c",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "6801fb4c731b1dbb4e54d06d41853f2b0c7d4cf739fa55e37e0079fe6e2b401b",
+        "0/C": "d1a356e4ea772b02fe253faf3847764ce6ed1385e03731fcb9393d89f94daf41",
+        "0/Ccx": "9f313feb72f9f8132622032b520b26db2224be3cb6ae40f8366850e458f3e882",
+        "0/Ccy": "9c0c82c4a12360bc1e7eec4a0cbde732510d121cf7c20b959167de3f26a9f9d5",
+        "0/Ccz": "09a398b0a56dc8b9d84ea11d99e06ec0b64496cb57601f5e2d4df53507f90aaf",
+        "0/Vc": "df8907a7da20a31b741a0ba6202b412da0067da61157239dd45cd0ac74ad337f",
+        "0/grad(U)": "ea36686a545d268e6e95fa7ecc9c7fb9f129a129e32e0a0a765cfcf15ab95ea3"
+      },
+      "native": {
+        "peakMeridionalOverAmplitude": 4.507647557809508e-09,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "packet": "rigid-r64-z128-ls.npz",
+      "packetSHA256": "5c1c50d4d228bc94479a9f53d981f47addcd0bcb237d9ccfb98027611f45ddc5",
+      "wallSeconds": 16.512340757000004
+    }
+  ],
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false
+}

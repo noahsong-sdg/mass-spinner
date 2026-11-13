@@ -1,0 +1,65 @@
+{
+  "startedUTC": "2026-11-13T11:54:04.379605+00:00",
+  "sourceFiles": 2666,
+  "sourceTreeSHA256": "ccfc2619fbc2509e31034c4b9a86535a5d8e623f7f68a3c6f8510023fba1ab7c",
+  "changedFiles": [],
+  "commands": [
+    {
+      "name": "test",
+      "args": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 39.280045393,
+      "logSHA256": "b71a15b3af9a37f3a028fafd902844afb49013175fe37684eed1d6927982e8e7"
+    },
+    {
+      "name": "typecheck",
+      "args": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.9507997929999945,
+      "logSHA256": "8fa1cf5506304e8abac55868e7f1a136c9b1dde57a3981a382da4c21ea129a6f"
+    },
+    {
+      "name": "build",
+      "args": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.35687499999999517,
+      "logSHA256": "12346ce50ca8d37390c0ee0c4066426e1870b72508210feaa414a4586469993f"
+    },
+    {
+      "name": "site",
+      "args": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.11260795799999812,
+      "logSHA256": "96472b54a03d1daec401b59e23742b598cddf88e8db93d63f9551009efda5cc8"
+    },
+    {
+      "name": "assets",
+      "args": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.047124874999994404,
+      "logSHA256": "0a0ae3f8a5d62f28963222bf2d12624204dd4a7d59d1db5042b8a6cff85b6fa3"
+    }
+  ],
+  "allPassed": true,
+  "sourceUnchanged": true,
+  "finishedUTC": "2026-11-13T11:54:45.677395+00:00"
+}

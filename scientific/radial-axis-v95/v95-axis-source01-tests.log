@@ -1,0 +1,121 @@
+RUN ['/work/home/v90-venv/bin/python', '-u', 'test95.py', 'tests-results']
+test_default_geometry_is_identical (__main__.RectangularControls.test_default_geometry_is_identical) ... ERROR
+test_fixed_other_axis_and_exact_nesting (__main__.RectangularControls.test_fixed_other_axis_and_exact_nesting) ... ERROR
+test_invalid_axial_counts_rejected (__main__.RectangularControls.test_invalid_axial_counts_rejected) ... ERROR
+test_legacy_custom_evolution_remains_identical (__main__.RectangularControls.test_legacy_custom_evolution_remains_identical) ... ok
+test_legacy_native_extraction_remains_identical (__main__.RectangularControls.test_legacy_native_extraction_remains_identical) ... ERROR
+test_legacy_native_inputs_remain_identical (__main__.RectangularControls.test_legacy_native_inputs_remain_identical) ... ok
+test_native_rectangular_centres_and_volumes (__main__.RectangularControls.test_native_rectangular_centres_and_volumes) ... ERROR
+test_bad_clock_rejected (test94.AnalyticControls.test_bad_clock_rejected) ... ok
+test_exact_decay_is_scored_without_reference_subtraction (test94.AnalyticControls.test_exact_decay_is_scored_without_reference_subtraction) ... ok
+test_mode_boundaries_and_midplane_symmetry (test94.AnalyticControls.test_mode_boundaries_and_midplane_symmetry) ... ok
+test_mode_obeys_cylindrical_stokes_equation (test94.AnalyticControls.test_mode_obeys_cylindrical_stokes_equation) ... ok
+test_native_configuration_uses_low_amplitude_and_mixed_walls (test94.AnalyticControls.test_native_configuration_uses_low_amplitude_and_mixed_walls) ... ok
+test_no_decay_and_wrong_rate_fail_response_gate (test94.AnalyticControls.test_no_decay_and_wrong_rate_fail_response_gate) ... ok
+test_representation_factor_cannot_hide_missing_decay (test94.AnalyticControls.test_representation_factor_cannot_hide_missing_decay) ... ok
+test_wrong_and_partial_campaign_rejected (test94.AnalyticControls.test_wrong_and_partial_campaign_rejected) ... ok
+test_corrected_uniform_reference_remains_bitwise_identical (test93.GradedControls.test_corrected_uniform_reference_remains_bitwise_identical) ... ok
+test_declared_timestep_study_respects_initial_graded_cfl (test93.GradedControls.test_declared_timestep_study_respects_initial_graded_cfl) ... ok
+test_fixed_map_is_nested_and_refines_the_endwall (test93.GradedControls.test_fixed_map_is_nested_and_refines_the_endwall) ... ok
+test_graded_mapping_rejects_outside_and_duplicate_cells (test93.GradedControls.test_graded_mapping_rejects_outside_and_duplicate_cells) ... ok
+test_graded_native_centres_and_cell_volumes (test93.GradedControls.test_graded_native_centres_and_cell_volumes) ... ok
+test_graded_norm_uses_actual_volume_not_uniform_geometry (test93.GradedControls.test_graded_norm_uses_actual_volume_not_uniform_geometry) ... ok
+test_invalid_grading_rejected (test93.GradedControls.test_invalid_grading_rejected) ... ok
+test_legacy_native_packet_remains_bitwise_identical (test93.GradedControls.test_legacy_native_packet_remains_bitwise_identical) ... ok
+test_local_band_and_invalid_clock (test93.GradedControls.test_local_band_and_invalid_clock) ... ok
+test_old_uniform_metadata_cannot_enter_graded_campaign (test93.GradedControls.test_old_uniform_metadata_cannot_enter_graded_campaign) ... ok
+test_restriction_preserves_graded_constant_primitives_and_inventory (test93.GradedControls.test_restriction_preserves_graded_constant_primitives_and_inventory) ... ok
+test_uniform_default_keeps_identical_geometry (test93.GradedControls.test_uniform_default_keeps_identical_geometry) ... ok
+test_bad_clock_and_initial_frame_are_not_scored (test92.ScoringControls.test_bad_clock_and_initial_frame_are_not_scored) ... ok
+test_global_matches_existing_conservative_scorer_at_each_clock (test92.ScoringControls.test_global_matches_existing_conservative_scorer_at_each_clock) ... ok
+test_identical_histories_have_zero_error_in_both_regions (test92.ScoringControls.test_identical_histories_have_zero_error_in_both_regions) ... ok
+test_physical_band_volume_is_exact_across_meshes (test92.ScoringControls.test_physical_band_volume_is_exact_across_meshes) ... ok
+test_undefined_or_noncontracting_refinement_fails_closed (test92.ScoringControls.test_undefined_or_noncontracting_refinement_fails_closed) ... ok
+test_all_closed_wall_inventories_and_tangential_euler_fluxes (test91.BoundaryControls.test_all_closed_wall_inventories_and_tangential_euler_fluxes) ... ok
+test_axis_and_midplane_keep_the_original_symmetry (test91.BoundaryControls.test_axis_and_midplane_keep_the_original_symmetry) ... ok
+test_coupled_step_conserves_energy_and_keeps_thermal_domain (test91.BoundaryControls.test_coupled_step_conserves_energy_and_keeps_thermal_domain) ... ok
+test_invalid_wall_policy_rejected (test91.BoundaryControls.test_invalid_wall_policy_rejected) ... ok
+test_legacy_coupled_reference_remains_bitwise_unchanged (test91.BoundaryControls.test_legacy_coupled_reference_remains_bitwise_unchanged) ... ok
+test_linear_endwall_shear_has_exact_zero_advection (test91.BoundaryControls.test_linear_endwall_shear_has_exact_zero_advection) ... ok
+test_linear_outer_wall_shear_reconstructs_both_traces (test91.BoundaryControls.test_linear_outer_wall_shear_reconstructs_both_traces) ... ok
+test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source (test_flow.FlowTests.test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source) ... ok
+test_closed_nonuniform_flow_conserves_all_inventories (test_flow.FlowTests.test_closed_nonuniform_flow_conserves_all_inventories) ... ok
+test_density_and_angular_momentum_actually_transport (test_flow.FlowTests.test_density_and_angular_momentum_actually_transport) ... ok
+test_eos_and_swirl_use_evolving_species_mass (test_flow.FlowTests.test_eos_and_swirl_use_evolving_species_mass) ... ok
+test_invalid_states_rejected_without_clipping (test_flow.FlowTests.test_invalid_states_rejected_without_clipping) ... ok
+test_pressure_gradient_accelerates_towards_low_pressure (test_flow.FlowTests.test_pressure_gradient_accelerates_towards_low_pressure) ... ok
+test_reflecting_faces_have_no_mass_energy_or_species_leak (test_flow.FlowTests.test_reflecting_faces_have_no_mass_energy_or_species_leak) ... ok
+test_rotational_source_is_even_in_spin_and_outward (test_flow.FlowTests.test_rotational_source_is_even_in_spin_and_outward) ... ok
+test_smooth_contact_has_no_first_order_acoustic_mass_diffusion (test_flow.FlowTests.test_smooth_contact_has_no_first_order_acoustic_mass_diffusion) ... ok
+test_uniform_composition_preserved_during_density_pressure_transport (test_flow.FlowTests.test_uniform_composition_preserved_during_density_pressure_transport) ... ok
+test_uniform_gas_stationary (test_flow.FlowTests.test_uniform_gas_stationary) ... ok
+test_zero_mass_flux_rigid_rotation_has_zero_angular_transport (test_flow.FlowTests.test_zero_mass_flux_rigid_rotation_has_zero_angular_transport) ... ok
+test_domain_rejections (test_diffusion86.DiffusionControls.test_domain_rejections) ... ok
+test_exact_divergence_free_extensional_stress_and_variable_mu (test_diffusion86.DiffusionControls.test_exact_divergence_free_extensional_stress_and_variable_mu) ... ok
+test_linear_omega_has_exact_cylindrical_shear (test_diffusion86.DiffusionControls.test_linear_omega_has_exact_cylindrical_shear) ... ok
+test_stationary_uniform_temperature_is_exact_adiabatic_state (test_diffusion86.DiffusionControls.test_stationary_uniform_temperature_is_exact_adiabatic_state) ... ok
+test_step_full_energy_positive_heat_and_boundary_symmetry (test_diffusion86.DiffusionControls.test_step_full_energy_positive_heat_and_boundary_symmetry) ... ok
+test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace (test_diffusion86.DiffusionControls.test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace) ... ok
+test_uniform_translation_rotation_and_dilation_have_zero_strain_work (test_diffusion86.DiffusionControls.test_uniform_translation_rotation_and_dilation_have_zero_strain_work) ... ok
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.00031266699999932257
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+======================================================================
+ERROR: test_default_geometry_is_identical (__main__.RectangularControls.test_default_geometry_is_identical)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v95-axis-source01/scientific/radial-axis-v95/test95.py", line 16, in test_default_geometry_is_identical
+    a=geometry(8,axialGrade=grade);b=geometry(8,axialGrade=grade,axialCells=16)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: geometry() got an unexpected keyword argument 'axialCells'
+
+======================================================================
+ERROR: test_fixed_other_axis_and_exact_nesting (__main__.RectangularControls.test_fixed_other_axis_and_exact_nesting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v95-axis-source01/scientific/radial-axis-v95/test95.py", line 20, in test_fixed_other_axis_and_exact_nesting
+    a=geometry(8,axialGrade=4.,axialCells=32)
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: geometry() got an unexpected keyword argument 'axialCells'
+
+======================================================================
+ERROR: test_invalid_axial_counts_rejected (__main__.RectangularControls.test_invalid_axial_counts_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v95-axis-source01/scientific/radial-axis-v95/test95.py", line 28, in test_invalid_axial_counts_rejected
+    with self.assertRaises(ValueError):geometry(8,axialCells=n)
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: geometry() got an unexpected keyword argument 'axialCells'
+
+======================================================================
+ERROR: test_legacy_native_extraction_remains_identical (__main__.RectangularControls.test_legacy_native_extraction_remains_identical)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v95-axis-source01/scientific/radial-axis-v95/test95.py", line 49, in test_legacy_native_extraction_remains_identical
+    a,_,_,_=native_packet(OLD/'n16-s256-x1',16,256,1.,axialCells=32)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: native_packet() got an unexpected keyword argument 'axialCells'
+
+======================================================================
+ERROR: test_native_rectangular_centres_and_volumes (__main__.RectangularControls.test_native_rectangular_centres_and_volumes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v95-axis-source01/scientific/radial-axis-v95/test95.py", line 33, in test_native_rectangular_centres_and_volumes
+    p=Path(folder)/'case';make_control(p,n,128,1.,axialCells=nz)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: make_control() got an unexpected keyword argument 'axialCells'
+
+----------------------------------------------------------------------
+Ran 66 tests in 3.453s
+
+FAILED (errors=5)
+RECEIPT {"args": ["/work/home/v90-venv/bin/python", "-u", "test95.py", "tests-results"], "exitCode": 1, "wallSeconds": 3.78171296, "sourceSHA256": {"scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c", "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f", "scientific/coupled-openfoam-v90/reference90.py": "4d47683ff59c1e29f85d6081bc7d8e97320fe1c43450b420cc1ff83017de9ff4", "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2", "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c", "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2", "scientific/endwall-v91/candidate91.py": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe", "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402", "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19", "scientific/graded-endwall-v93/PROTOCOL.md": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482", "scientific/graded-endwall-v93/score93.py": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed", "scientific/graded-endwall-v93/study93.py": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2", "scientific/graded-endwall-v93/test93.py": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7", "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf", "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7", "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c", "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310", "scientific/radial-axis-v95/PROTOCOL.md": "570bd916c7da50d094d383f12bb62ddeff5e4c83acd6f6cd52f86232e2cb2fce", "scientific/radial-axis-v95/test95.py": "958a31121dc7ae336b6babdff7c96d91b1915d0719176897a5dd090eecc468fc", "scientific/swirl-control-v94/PROTOCOL.md": "589299071007e858c51dfb674c1ea914ba8d9d5842a60c177b06961311472251", "scientific/swirl-control-v94/control94.py": "6e1f61bd57b7fdf334d3aac99c5cc8d7e113cf485775b430bb1b89326b1a0485", "scientific/swirl-control-v94/score94.py": "5e151c31a28e9e13762778777638db0e8c7a8c0937ad502f2441212a4f1f1da0", "scientific/swirl-control-v94/test94.py": "9dca01805a54bdda7e67d0da6d991fec7999eb55f03afde89ca4370c9b8da05c", "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94", "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b", "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150", "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83", "references.json": "43b6175fdce3e8e9acc673f250c8980cd4ac49628da2c904d6b4deeaf13843e0"}, "sourceUnchanged": true}
+safe-dev: Guest/runtime command failed (exit 1).

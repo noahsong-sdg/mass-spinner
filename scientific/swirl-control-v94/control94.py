@@ -24,8 +24,8 @@ def mode(r,z):
     return jv(1,CHI*r/R)*np.cos(np.pi*z/(2*H))
 
 
-def make_control(case,n,steps,scale):
-    calls=make_case(case,n,steps,.5,axialGrade=4.)
+def make_control(case,n,steps,scale, *, axialCells=None):
+    calls=make_case(case,n,steps,.5,axialGrade=4.,axialCells=axialCells)
     dictionary(case/'system/controlDict',
         f'application foamRun; solver incompressibleFluid; startFrom startTime; startTime 0; stopAt endTime;'
         f' endTime {END:.17g}; deltaT {END/steps:.17g}; writeControl timeStep; writeInterval {steps//4};'
@@ -42,7 +42,7 @@ def make_control(case,n,steps,scale):
         ' PIMPLE {nCorrectors 2; nNonOrthogonalCorrectors 1; pRefCell 0; pRefValue 0;}')
     dictionary(case/'constant/physicalProperties',f'viscosityModel constant; nu {NU:.17g} [m^2/s];')
     dictionary(case/'constant/fvModels','')
-    f=geometry(n,axialGrade=4.);c=read_field(case/'0/C',f.count,3)
+    f=geometry(n,axialGrade=4.,axialCells=axialCells);c=read_field(case/'0/C',f.count,3)
     radius=np.hypot(c[:,0],c[:,1]);speed=AMP*scale*mode(radius,c[:,2])
     common='midplane {type symmetryPlane;} minus {type wedge;} plus {type wedge;} axis {type empty;}'
     field(case/'0/p',np.zeros(f.count),'0 2 -2 0 0 0 0','walls {type zeroGradient;} '+common,'volScalarField')
@@ -51,8 +51,8 @@ def make_control(case,n,steps,scale):
     return calls
 
 
-def native_packet(case,n,steps,scale):
-    f=geometry(n,axialGrade=4.);c=read_field(case/'0/C',f.count,3)
+def native_packet(case,n,steps,scale, *, axialCells=None):
+    f=geometry(n,axialGrade=4.,axialCells=axialCells);c=read_field(case/'0/C',f.count,3)
     radius=np.hypot(c[:,0],c[:,1]);order=native_order(f,c);shape=f.volume.shape
     r=radius[order].reshape(shape);z=c[order,2].reshape(shape)
     np.testing.assert_allclose(z,np.broadcast_to(((f.z[:-1]+f.z[1:])/2)[:,None],shape),atol=1e-13,rtol=0)
@@ -70,8 +70,8 @@ def native_packet(case,n,steps,scale):
     return np.array(states),r,z,dict(peakMeridionalOverAmplitude=peak,cellMapBijective=True)
 
 
-def own_packet(n,steps,scale):
-    f=geometry(n,axialGrade=4.,noSlipWalls=True)
+def own_packet(n,steps,scale, *, axialCells=None):
+    f=geometry(n,axialGrade=4.,noSlipWalls=True,axialCells=axialCells)
     r,z=np.meshgrid(f.mean_r,(f.z[:-1]+f.z[1:])/2)
     q=f.state(RHO,2900.,.5,AMP*scale*mode(r,z)/r)
     d=Diffusion(f,MU);states=[];history=[]

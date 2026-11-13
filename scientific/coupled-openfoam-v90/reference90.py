@@ -28,13 +28,16 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def geometry(n, *, axialGrade=0., noSlipWalls=False):
+def geometry(n, *, axialGrade=0., noSlipWalls=False, axialCells=None):
     if (isinstance(axialGrade,(bool,np.bool_)) or not np.isscalar(axialGrade)
             or not np.isfinite(axialGrade) or axialGrade<0):
         raise ValueError('Axial grading must be finite and nonnegative')
-    z=np.linspace(0,H,2*n+1)
+    nz=2*n if axialCells is None else axialCells
+    if isinstance(nz,(bool,np.bool_)) or not isinstance(nz,(int,np.integer)) or nz<1:
+        raise ValueError('Axial cell count must be a positive integer')
+    z=np.linspace(0,H,nz+1)
     if axialGrade:
-        z=H*np.expm1(-axialGrade*np.linspace(0,1,2*n+1))/np.expm1(-axialGrade)
+        z=H*np.expm1(-axialGrade*np.linspace(0,1,nz+1))/np.expm1(-axialGrade)
     return Flow(np.linspace(0,R,n+1),z,[M_AR,M_AR],noSlipWalls=noSlipWalls)
 
 
@@ -57,7 +60,7 @@ def initial(radius, axial):
     return temperature, swirl
 
 
-def make_case(case, n, steps, angle, work=True, *, axialGrade=0.):
+def make_case(case, n, steps, angle, work=True, *, axialGrade=0., axialCells=None):
     if case.exists():
         raise FileExistsError(case)
     delta = np.deg2rad(angle)
@@ -65,10 +68,11 @@ def make_case(case, n, steps, angle, work=True, *, axialGrade=0.):
     vertices = [(0,0,0),(x,-y,0),(x,y,0),(0,0,0),
                 (0,0,H),(x,-y,H),(x,y,H),(0,0,H)]
     body = 'vertices ('+' '.join('('+' '.join(map(str,v))+')' for v in vertices)+');'
-    geometry(n,axialGrade=axialGrade)
-    grading='1' if not axialGrade else f'{np.exp(-axialGrade*(2*n-1)/(2*n)):.17g}'
+    flow=geometry(n,axialGrade=axialGrade,axialCells=axialCells)
+    nz=flow.nz
+    grading='1' if not axialGrade else f'{np.exp(-axialGrade*(nz-1)/nz):.17g}'
     if float(grading)<=0:raise ValueError('Unrepresentable native grading ratio')
-    body += f' blocks (hex (0 1 2 3 4 5 6 7) ({n} 1 {2*n}) simpleGrading (1 1 {grading}));'
+    body += f' blocks (hex (0 1 2 3 4 5 6 7) ({n} 1 {nz}) simpleGrading (1 1 {grading}));'
     body += (' boundary (walls {type wall; faces ((1 5 6 2)(4 5 6 7));}'
              ' midplane {type symmetryPlane; faces ((0 3 2 1));}'
              ' minus {type wedge; faces ((0 1 5 4));}'
@@ -102,7 +106,7 @@ def make_case(case, n, steps, angle, work=True, *, axialGrade=0.):
     dictionary(case/'constant/momentumTransport', 'simulationType laminar;')
     dictionary(case/'constant/fvModels', 'stressWork {type viscousHeating; libs ("libfvModels.so");}' if work else '')
     common = 'midplane {type symmetryPlane;} minus {type wedge;} plus {type wedge;} axis {type empty;}'
-    count = 2*n*n
+    count = flow.count
     for name, values, dim, kind, wall in (
         ('T',np.full(count,2900.),'0 0 0 1 0 0 0','volScalarField','zeroGradient;'),
         ('p',np.full(count,RHO*RGAS*2900),'1 -1 -2 0 0 0 0','volScalarField','zeroGradient;'),
@@ -124,11 +128,11 @@ def make_case(case, n, steps, angle, work=True, *, axialGrade=0.):
     return calls
 
 
-def native_packet(case,n,steps,angle, *, axialGrade=0.):
-    flow = geometry(n,axialGrade=axialGrade)
+def native_packet(case,n,steps,angle, *, axialGrade=0., axialCells=None):
+    flow = geometry(n,axialGrade=axialGrade,axialCells=axialCells)
     c = read_field(case/'0/C',flow.count,3)
     radius = np.hypot(c[:,0],c[:,1])
-    if axialGrade:
+    if axialGrade or axialCells is not None:
         order=native_order(flow,c)
     else:
         index=np.floor(c[:,2]/(H/(2*n))).astype(int)*n+np.floor(radius/(R/n)).astype(int)
@@ -151,7 +155,7 @@ def native_packet(case,n,steps,angle, *, axialGrade=0.):
         ut = (-u[:,0]*c[:,1]+u[:,1]*c[:,0])/radius
         mass = rho*volume
         q = np.array([mass,mass*ur,mass*u[:,2],mass*radius*ut,
-                      mass*(CV*temp+.5*np.sum(u*u,axis=1)),.5*mass])[:,order].reshape(6,2*n,n)
+                      mass*(CV*temp+.5*np.sum(u*u,axis=1)),.5*mass])[:,order].reshape(6,flow.nz,n)
         if not np.all(np.isfinite(q)) or min(rho.min(),temp.min())<=0:
             raise ValueError('Nonfinite or nonpositive native state')
         states.append(q)

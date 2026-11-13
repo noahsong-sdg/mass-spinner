@@ -1,0 +1,1508 @@
+{
+  "sets": {
+    "radialAnalytic": [
+      {
+        "name": "decay-r128-z128-gauss/native/1/0/0",
+        "value": 5.210656414907382e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/1/0/1",
+        "value": 0.022155813577859007,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/1/1/0",
+        "value": 5.210671838935571e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/1/1/1",
+        "value": 0.0221558791611303,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/2/0/0",
+        "value": 5.790155493870054e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/2/0/1",
+        "value": 0.01229546914367864,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/2/1/0",
+        "value": 5.7902020776042456e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/2/1/1",
+        "value": 0.01229556806483316,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/3/0/0",
+        "value": 6.438786227408952e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/3/0/1",
+        "value": 0.006820363242500079,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/3/1/0",
+        "value": 6.438931367589095e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/native/3/1/1",
+        "value": 0.006820516984015105,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/1/0/0",
+        "value": 8.868616154210641e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/1/0/1",
+        "value": 0.0037709530347114703,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/1/1/0",
+        "value": 2.9491824236987106e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/1/1/1",
+        "value": 0.0012539981680468656,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/2/0/0",
+        "value": 1.765098069676927e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/2/0/1",
+        "value": 0.0037482082949685104,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/2/1/0",
+        "value": 4.935441761003345e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/2/1/1",
+        "value": 0.0010480473615432752,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/3/0/0",
+        "value": 3.4972823948678786e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/3/0/1",
+        "value": 0.003704539248883266,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/3/1/0",
+        "value": 8.504949334782853e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/v86/3/1/1",
+        "value": 0.0009008971842406116,
+        "limit": 0.05,
+        "passed": true
+      }
+    ],
+    "axialAnalytic": [
+      {
+        "name": "decay-r64-z256-gauss/native/1/0/0",
+        "value": 0.00015884019717108926,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/1/0/1",
+        "value": 0.06753916430038846,
+        "limit": 0.05,
+        "passed": false
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/1/1/0",
+        "value": 0.00015884022919522773,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/1/1/1",
+        "value": 0.06753917791711514,
+        "limit": 0.05,
+        "passed": false
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/2/0/0",
+        "value": 0.00017687535444551464,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/2/0/1",
+        "value": 0.03755970742347835,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/2/1/0",
+        "value": 0.00017687546563222286,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/2/1/1",
+        "value": 0.03755973103411783,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/3/0/0",
+        "value": 0.000195120685054876,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/3/0/1",
+        "value": 0.020668397756936366,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/3/1/0",
+        "value": 0.00019512105157192382,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/native/3/1/1",
+        "value": 0.020668436580703945,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/1/0/0",
+        "value": 3.018450475902991e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/1/0/1",
+        "value": 0.0012834510801132235,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/1/1/0",
+        "value": 1.953508666301604e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/1/1/1",
+        "value": 0.0008306357277623473,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/2/0/0",
+        "value": 5.787556464468394e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/2/0/1",
+        "value": 0.0012289950071550488,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/2/1/0",
+        "value": 3.542793251860053e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/2/1/1",
+        "value": 0.0007523166719229458,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/3/0/0",
+        "value": 1.0990631988616138e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/3/0/1",
+        "value": 0.0011641961664755852,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/3/1/0",
+        "value": 6.428672785246796e-06,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/v86/3/1/1",
+        "value": 0.0006809650454900051,
+        "limit": 0.05,
+        "passed": true
+      }
+    ],
+    "leastSquaresAnalytic": [
+      {
+        "name": "decay-r64-z128-ls/native/1/0/0",
+        "value": 5.475203785221528e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/1/0/1",
+        "value": 0.02328067420049077,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/1/1/0",
+        "value": 5.475244595888109e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/1/1/1",
+        "value": 0.023280847728247844,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/2/0/0",
+        "value": 7.174347223179991e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/2/0/1",
+        "value": 0.015234817959903597,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/2/1/0",
+        "value": 7.174453297949022e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/2/1/1",
+        "value": 0.015235043211030452,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/3/0/0",
+        "value": 8.881750549838759e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/3/0/1",
+        "value": 0.009408103148588566,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/3/1/0",
+        "value": 8.882051456284999e-05,
+        "limit": 0.05,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/native/3/1/1",
+        "value": 0.009408421887430445,
+        "limit": 0.05,
+        "passed": true
+      }
+    ],
+    "rigid": [
+      {
+        "name": "rigid-r16-z32-gauss/0/maxStrainOverOmega",
+        "value": 0.47133272223229117,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/0/maxSwirlChangeOverA",
+        "value": 0.0,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r16-z32-gauss/1/maxStrainOverOmega",
+        "value": 0.4506231609719093,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/1/maxSwirlChangeOverA",
+        "value": 0.0023362662227013457,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/2/maxStrainOverOmega",
+        "value": 0.4526804291049683,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/2/maxSwirlChangeOverA",
+        "value": 0.003933078887113249,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/3/maxStrainOverOmega",
+        "value": 0.4578554348367468,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/3/maxSwirlChangeOverA",
+        "value": 0.005792439448949245,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r16-z32-gauss/meridional",
+        "value": 1.7757588220686537e-08,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r32-z64-gauss/0/maxStrainOverOmega",
+        "value": 0.4713327222322817,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/0/maxSwirlChangeOverA",
+        "value": 0.0,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r32-z64-gauss/1/maxStrainOverOmega",
+        "value": 0.4599028215868144,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/1/maxSwirlChangeOverA",
+        "value": 0.0028948837293144855,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/2/maxStrainOverOmega",
+        "value": 0.4643014888315048,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/2/maxSwirlChangeOverA",
+        "value": 0.0035866213876024127,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/3/maxStrainOverOmega",
+        "value": 0.4661079970730639,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/3/maxSwirlChangeOverA",
+        "value": 0.0038925091673359643,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r32-z64-gauss/meridional",
+        "value": 9.852321922784876e-09,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-gauss/0/maxStrainOverOmega",
+        "value": 0.4713327222322918,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/0/maxSwirlChangeOverA",
+        "value": 0.0,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-gauss/1/maxStrainOverOmega",
+        "value": 0.4672150531128029,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/1/maxSwirlChangeOverA",
+        "value": 0.0019459838075301826,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/2/maxStrainOverOmega",
+        "value": 0.4679568012664933,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/2/maxSwirlChangeOverA",
+        "value": 0.002019081293487338,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/3/maxStrainOverOmega",
+        "value": 0.46827377609472104,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/3/maxSwirlChangeOverA",
+        "value": 0.0020611308713411654,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-gauss/meridional",
+        "value": 3.315119731430896e-09,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-ls/0/maxStrainOverOmega",
+        "value": 0.008067123853363063,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/0/maxSwirlChangeOverA",
+        "value": 0.0,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-ls/1/maxStrainOverOmega",
+        "value": 0.008662692001837315,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/1/maxSwirlChangeOverA",
+        "value": 4.7185721822893296e-05,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/2/maxStrainOverOmega",
+        "value": 0.008745482819354868,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/2/maxSwirlChangeOverA",
+        "value": 5.2704225819899044e-05,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/3/maxStrainOverOmega",
+        "value": 0.008795596071589418,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/3/maxSwirlChangeOverA",
+        "value": 5.72632950760272e-05,
+        "limit": 1e-06,
+        "passed": false
+      },
+      {
+        "name": "rigid-r64-z128-ls/meridional",
+        "value": 4.507647557809508e-09,
+        "limit": 1e-06,
+        "passed": true
+      }
+    ],
+    "conservation": [
+      {
+        "name": "decay-r32-z128-gauss/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "decay-r32-z128-gauss/energyJ",
+        "value": 4.551914400963142e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-gauss/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-gauss/energyJ",
+        "value": 4.551914400963142e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/energyJ",
+        "value": 3.9968028886505635e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z64-gauss/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z64-gauss/energyJ",
+        "value": 3.774758283725532e-15,
+        "limit": 1e-06,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/massKg",
+        "value": 0.0,
+        "limit": 1e-08,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/energyJ",
+        "value": 2.3314683517128287e-15,
+        "limit": 1e-06,
+        "passed": true
+      }
+    ],
+    "linearity": [
+      {
+        "name": "decay-r32-z128-gauss/meridional",
+        "value": 7.906970941664197e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-gauss/meridional",
+        "value": 7.909763372917647e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "decay-r128-z128-gauss/meridional",
+        "value": 7.90809839856341e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z64-gauss/meridional",
+        "value": 7.894797839005122e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z256-gauss/meridional",
+        "value": 7.91228780712804e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "decay-r64-z128-ls/meridional",
+        "value": 7.911017165607957e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "rigid-r16-z32-gauss/meridional",
+        "value": 1.7757588220686537e-08,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "rigid-r32-z64-gauss/meridional",
+        "value": 9.852321922784876e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-gauss/meridional",
+        "value": 3.315119731430896e-09,
+        "limit": 0.0001,
+        "passed": true
+      },
+      {
+        "name": "rigid-r64-z128-ls/meridional",
+        "value": 4.507647557809508e-09,
+        "limit": 0.0001,
+        "passed": true
+      }
+    ]
+  },
+  "analyticErrors": {
+    "decay-r32-z128-gauss/native/1/0/0": {
+      "relative": 0.0004455313526769584,
+      "absoluteRMS": 2.4053451119621386e-08,
+      "scaleRMS": 5.398823444208163e-05
+    },
+    "decay-r32-z128-gauss/native/1/0/1": {
+      "relative": 0.18944080758733972,
+      "absoluteRMS": 2.4053451119621383e-08,
+      "scaleRMS": 1.2697080120148764e-07
+    },
+    "decay-r32-z128-gauss/native/1/1/0": {
+      "relative": 0.00044553153150378775,
+      "absoluteRMS": 3.8883836747737825e-10,
+      "scaleRMS": 8.727516235830605e-07
+    },
+    "decay-r32-z128-gauss/native/1/1/1": {
+      "relative": 0.1894408836248593,
+      "absoluteRMS": 3.888383674773782e-10,
+      "scaleRMS": 2.052557821929168e-09
+    },
+    "decay-r32-z128-gauss/native/2/0/0": {
+      "relative": 0.0005655846859952589,
+      "absoluteRMS": 3.0463274378260285e-08,
+      "scaleRMS": 5.386156155316349e-05
+    },
+    "decay-r32-z128-gauss/native/2/0/1": {
+      "relative": 0.12010263044151599,
+      "absoluteRMS": 3.046327437826027e-08,
+      "scaleRMS": 2.5364369011962957e-07
+    },
+    "decay-r32-z128-gauss/native/2/1/0": {
+      "relative": 0.0005655851803083616,
+      "absoluteRMS": 6.960274244741983e-10,
+      "scaleRMS": 1.230632358674459e-06
+    },
+    "decay-r32-z128-gauss/native/2/1/1": {
+      "relative": 0.12010273540953473,
+      "absoluteRMS": 6.960274244741983e-10,
+      "scaleRMS": 5.79526704450848e-09
+    },
+    "decay-r32-z128-gauss/native/3/0/0": {
+      "relative": 0.0006505788112360786,
+      "absoluteRMS": 3.487694891992331e-08,
+      "scaleRMS": 5.3609106717844435e-05
+    },
+    "decay-r32-z128-gauss/native/3/0/1": {
+      "relative": 0.06891335810491046,
+      "absoluteRMS": 3.4876948919923274e-08,
+      "scaleRMS": 5.060985254386855e-07
+    },
+    "decay-r32-z128-gauss/native/3/1/0": {
+      "relative": 0.0006505803621580647,
+      "absoluteRMS": 1.1263824618500726e-09,
+      "scaleRMS": 1.7313502333727178e-06
+    },
+    "decay-r32-z128-gauss/native/3/1/1": {
+      "relative": 0.06891352238822307,
+      "absoluteRMS": 1.1263824618500715e-09,
+      "scaleRMS": 1.6344868507875952e-08
+    },
+    "decay-r32-z128-gauss/v86/1/0/0": {
+      "relative": 1.1652819121829237e-05,
+      "absoluteRMS": 6.290911472570673e-10,
+      "scaleRMS": 5.398617627888777e-05
+    },
+    "decay-r32-z128-gauss/v86/1/0/1": {
+      "relative": 0.0049548016135009315,
+      "absoluteRMS": 6.290911472572156e-10,
+      "scaleRMS": 1.2696596076481788e-07
+    },
+    "decay-r32-z128-gauss/v86/1/1/0": {
+      "relative": 7.955599407616037e-06,
+      "absoluteRMS": 6.942997605477178e-12,
+      "scaleRMS": 8.72718352162192e-07
+    },
+    "decay-r32-z128-gauss/v86/1/1/1": {
+      "relative": 0.003382736518010162,
+      "absoluteRMS": 6.942997605471044e-12,
+      "scaleRMS": 2.0524795734180165e-09
+    },
+    "decay-r32-z128-gauss/v86/2/0/0": {
+      "relative": 2.2489766725684645e-05,
+      "absoluteRMS": 1.2112877758065104e-09,
+      "scaleRMS": 5.3859508219049154e-05
+    },
+    "decay-r32-z128-gauss/v86/2/0/1": {
+      "relative": 0.004775730688354558,
+      "absoluteRMS": 1.2112877758065675e-09,
+      "scaleRMS": 2.5363402060343305e-07
+    },
+    "decay-r32-z128-gauss/v86/2/1/0": {
+      "relative": 1.4464791498297455e-05,
+      "absoluteRMS": 1.7800161867821975e-11,
+      "scaleRMS": 1.2305854439669664e-06
+    },
+    "decay-r32-z128-gauss/v86/2/1/1": {
+      "relative": 0.0030716169492393756,
+      "absoluteRMS": 1.7800161867818547e-11,
+      "scaleRMS": 5.795046114791885e-09
+    },
+    "decay-r32-z128-gauss/v86/3/0/0": {
+      "relative": 4.320583718801741e-05,
+      "absoluteRMS": 2.3161380364481656e-09,
+      "scaleRMS": 5.3607063007924247e-05
+    },
+    "decay-r32-z128-gauss/v86/3/0/1": {
+      "relative": 0.004576631268860302,
+      "absoluteRMS": 2.316138036448708e-09,
+      "scaleRMS": 5.060792317283374e-07
+    },
+    "decay-r32-z128-gauss/v86/3/1/0": {
+      "relative": 2.6110079918580094e-05,
+      "absoluteRMS": 4.520396960912483e-11,
+      "scaleRMS": 1.7312842300784152e-06
+    },
+    "decay-r32-z128-gauss/v86/3/1/1": {
+      "relative": 0.0027657422229252575,
+      "absoluteRMS": 4.520396960910474e-11,
+      "scaleRMS": 1.6344245401617224e-08
+    },
+    "decay-r64-z128-gauss/native/1/0/0": {
+      "relative": 0.0001588401877199823,
+      "absoluteRMS": 8.575498358935883e-09,
+      "scaleRMS": 5.398821596744484e-05
+    },
+    "decay-r64-z128-gauss/native/1/0/1": {
+      "relative": 0.0675391602817592,
+      "absoluteRMS": 8.57549835893588e-09,
+      "scaleRMS": 1.2697075775240174e-07
+    },
+    "decay-r64-z128-gauss/native/1/1/0": {
+      "relative": 0.00015884033196770012,
+      "absoluteRMS": 1.3862811017707871e-10,
+      "scaleRMS": 8.727513249296688e-07
+    },
+    "decay-r64-z128-gauss/native/1/1/1": {
+      "relative": 0.06753922161617257,
+      "absoluteRMS": 1.3862811017707864e-10,
+      "scaleRMS": 2.0525571195490875e-09
+    },
+    "decay-r64-z128-gauss/native/2/0/0": {
+      "relative": 0.00017687532101016865,
+      "absoluteRMS": 9.526777729784476e-09,
+      "scaleRMS": 5.386154312187384e-05
+    },
+    "decay-r64-z128-gauss/native/2/0/1": {
+      "relative": 0.03755970032343991,
+      "absoluteRMS": 9.52677772978447e-09,
+      "scaleRMS": 2.536436033234026e-07
+    },
+    "decay-r64-z128-gauss/native/2/1/0": {
+      "relative": 0.00017687576913745737,
+      "absoluteRMS": 2.1766897048019339e-10,
+      "scaleRMS": 1.2306319375551886e-06
+    },
+    "decay-r64-z128-gauss/native/2/1/1": {
+      "relative": 0.03755979548384203,
+      "absoluteRMS": 2.1766897048019333e-10,
+      "scaleRMS": 5.7952650613828035e-09
+    },
+    "decay-r64-z128-gauss/native/3/0/0": {
+      "relative": 0.00019512056361969225,
+      "absoluteRMS": 1.046023553846676e-08,
+      "scaleRMS": 5.3609088372944184e-05
+    },
+    "decay-r64-z128-gauss/native/3/0/1": {
+      "relative": 0.02066838489376566,
+      "absoluteRMS": 1.0460235538466727e-08,
+      "scaleRMS": 5.060983522530547e-07
+    },
+    "decay-r64-z128-gauss/native/3/1/0": {
+      "relative": 0.0001951220037313633,
+      "absoluteRMS": 3.3782441109375257e-10,
+      "scaleRMS": 1.7313496409090624e-06
+    },
+    "decay-r64-z128-gauss/native/3/1/1": {
+      "relative": 0.0206685374393598,
+      "absoluteRMS": 3.3782441109375143e-10,
+      "scaleRMS": 1.6344862914703433e-08
+    },
+    "decay-r64-z128-gauss/v86/1/0/0": {
+      "relative": 9.057818915503705e-06,
+      "absoluteRMS": 4.889968580317415e-10,
+      "scaleRMS": 5.398615964763393e-05
+    },
+    "decay-r64-z128-gauss/v86/1/0/1": {
+      "relative": 0.0038514024210049122,
+      "absoluteRMS": 4.889968580319488e-10,
+      "scaleRMS": 1.2696592165104345e-07
+    },
+    "decay-r64-z128-gauss/v86/1/1/0": {
+      "relative": 3.412152440721047e-06,
+      "absoluteRMS": 2.977847138021378e-12,
+      "scaleRMS": 8.727180833081734e-07
+    },
+    "decay-r64-z128-gauss/v86/1/1/1": {
+      "relative": 0.0014508539300196108,
+      "absoluteRMS": 2.9778471380076076e-12,
+      "scaleRMS": 2.052478941120804e-09
+    },
+    "decay-r64-z128-gauss/v86/2/0/0": {
+      "relative": 1.7974385013428167e-05,
+      "absoluteRMS": 9.68091239127925e-10,
+      "scaleRMS": 5.385949162681732e-05
+    },
+    "decay-r64-z128-gauss/v86/2/0/1": {
+      "relative": 0.003816883614665687,
+      "absoluteRMS": 9.680912391278595e-10,
+      "scaleRMS": 2.53633942467657e-07
+    },
+    "decay-r64-z128-gauss/v86/2/1/0": {
+      "relative": 5.8541467036618335e-06,
+      "absoluteRMS": 7.204025501064326e-12,
+      "scaleRMS": 1.2305850648666061e-06
+    },
+    "decay-r64-z128-gauss/v86/2/1/1": {
+      "relative": 0.0012431355294963097,
+      "absoluteRMS": 7.204025501058217e-12,
+      "scaleRMS": 5.795044329540741e-09
+    },
+    "decay-r64-z128-gauss/v86/3/0/0": {
+      "relative": 3.552426584864183e-05,
+      "absoluteRMS": 1.9043509709942454e-09,
+      "scaleRMS": 5.360704649346196e-05
+    },
+    "decay-r64-z128-gauss/v86/3/0/1": {
+      "relative": 0.003762951408132661,
+      "absoluteRMS": 1.904350970994694e-09,
+      "scaleRMS": 5.060790758230161e-07
+    },
+    "decay-r64-z128-gauss/v86/3/1/0": {
+      "relative": 1.0262698790067566e-05,
+      "absoluteRMS": 1.7767643099697346e-11,
+      "scaleRMS": 1.7312836967302603e-06
+    },
+    "decay-r64-z128-gauss/v86/3/1/1": {
+      "relative": 0.0010870889500637824,
+      "absoluteRMS": 1.7767643099637408e-11,
+      "scaleRMS": 1.6344240366526523e-08
+    },
+    "decay-r128-z128-gauss/native/1/0/0": {
+      "relative": 5.210656414907382e-05,
+      "absoluteRMS": 2.813140343186705e-09,
+      "scaleRMS": 5.398821413629338e-05
+    },
+    "decay-r128-z128-gauss/native/1/0/1": {
+      "relative": 0.022155813577859007,
+      "absoluteRMS": 2.813140343186698e-09,
+      "scaleRMS": 1.269707534458566e-07
+    },
+    "decay-r128-z128-gauss/native/1/1/0": {
+      "relative": 5.210671838935571e-05,
+      "absoluteRMS": 4.547620596960295e-11,
+      "scaleRMS": 8.727512953280276e-07
+    },
+    "decay-r128-z128-gauss/native/1/1/1": {
+      "relative": 0.0221558791611303,
+      "absoluteRMS": 4.547620596960288e-11,
+      "scaleRMS": 2.0525570499312506e-09
+    },
+    "decay-r128-z128-gauss/native/2/0/0": {
+      "relative": 5.790155493870054e-05,
+      "absoluteRMS": 3.1186669923766197e-09,
+      "scaleRMS": 5.3861541295018816e-05
+    },
+    "decay-r128-z128-gauss/native/2/0/1": {
+      "relative": 0.01229546914367864,
+      "absoluteRMS": 3.1186669923766156e-09,
+      "scaleRMS": 2.536435947204168e-07
+    },
+    "decay-r128-z128-gauss/native/2/1/0": {
+      "relative": 5.7902020776042456e-05,
+      "absoluteRMS": 7.125607359914586e-11,
+      "scaleRMS": 1.2306318958150902e-06
+    },
+    "decay-r128-z128-gauss/native/2/1/1": {
+      "relative": 0.01229556806483316,
+      "absoluteRMS": 7.125607359914572e-11,
+      "scaleRMS": 5.795264864821242e-09
+    },
+    "decay-r128-z128-gauss/native/3/0/0": {
+      "relative": 6.438786227408952e-05,
+      "absoluteRMS": 3.4517744817206664e-09,
+      "scaleRMS": 5.3609086554651834e-05
+    },
+    "decay-r128-z128-gauss/native/3/0/1": {
+      "relative": 0.006820363242500079,
+      "absoluteRMS": 3.451774481720634e-09,
+      "scaleRMS": 5.060983350874063e-07
+    },
+    "decay-r128-z128-gauss/native/3/1/0": {
+      "relative": 6.438931367589095e-05,
+      "absoluteRMS": 1.1148041132998509e-10,
+      "scaleRMS": 1.7313495821858137e-06
+    },
+    "decay-r128-z128-gauss/native/3/1/1": {
+      "relative": 0.006820516984015105,
+      "absoluteRMS": 1.1148041132998372e-10,
+      "scaleRMS": 1.6344862360324683e-08
+    },
+    "decay-r128-z128-gauss/v86/1/0/0": {
+      "relative": 8.868616154210641e-06,
+      "absoluteRMS": 4.787825153995827e-10,
+      "scaleRMS": 5.3986158277046005e-05
+    },
+    "decay-r128-z128-gauss/v86/1/0/1": {
+      "relative": 0.0037709530347114703,
+      "absoluteRMS": 4.787825153997228e-10,
+      "scaleRMS": 1.2696591842766248e-07
+    },
+    "decay-r128-z128-gauss/v86/1/1/0": {
+      "relative": 2.9491824236987106e-06,
+      "absoluteRMS": 2.5738047667933405e-12,
+      "scaleRMS": 8.72718061151812e-07
+    },
+    "decay-r128-z128-gauss/v86/1/1/1": {
+      "relative": 0.0012539981680468656,
+      "absoluteRMS": 2.5738047667771067e-12,
+      "scaleRMS": 2.052478889012951e-09
+    },
+    "decay-r128-z128-gauss/v86/2/0/0": {
+      "relative": 1.765098069676927e-05,
+      "absoluteRMS": 9.506728229073e-10,
+      "scaleRMS": 5.38594902594452e-05
+    },
+    "decay-r128-z128-gauss/v86/2/0/1": {
+      "relative": 0.0037482082949685104,
+      "absoluteRMS": 9.506728229073793e-10,
+      "scaleRMS": 2.5363393602845815e-07
+    },
+    "decay-r128-z128-gauss/v86/2/1/0": {
+      "relative": 4.935441761003345e-06,
+      "absoluteRMS": 6.073480765417552e-12,
+      "scaleRMS": 1.2305850336248017e-06
+    },
+    "decay-r128-z128-gauss/v86/2/1/1": {
+      "relative": 0.0010480473615432752,
+      "absoluteRMS": 6.073480765409387e-12,
+      "scaleRMS": 5.795044182417519e-09
+    },
+    "decay-r128-z128-gauss/v86/3/0/0": {
+      "relative": 3.4972823948678786e-05,
+      "absoluteRMS": 1.874789751827761e-09,
+      "scaleRMS": 5.3607045132498863e-05
+    },
+    "decay-r128-z128-gauss/v86/3/0/1": {
+      "relative": 0.003704539248883266,
+      "absoluteRMS": 1.8747897518282112e-09,
+      "scaleRMS": 5.060790629747996e-07
+    },
+    "decay-r128-z128-gauss/v86/3/1/0": {
+      "relative": 8.504949334782853e-06,
+      "absoluteRMS": 1.4724479751004793e-11,
+      "scaleRMS": 1.7312836527768375e-06
+    },
+    "decay-r128-z128-gauss/v86/3/1/1": {
+      "relative": 0.0009008971842406116,
+      "absoluteRMS": 1.472447975093385e-11,
+      "scaleRMS": 1.6344239951582794e-08
+    },
+    "decay-r64-z64-gauss/native/1/0/0": {
+      "relative": 0.00015884017915200507,
+      "absoluteRMS": 8.576581741520071e-09,
+      "scaleRMS": 5.3995039462355124e-05
+    },
+    "decay-r64-z64-gauss/native/1/0/1": {
+      "relative": 0.0675391566386384,
+      "absoluteRMS": 8.576581741520065e-09,
+      "scaleRMS": 1.269868054084273e-07
+    },
+    "decay-r64-z64-gauss/native/1/1/0": {
+      "relative": 0.00015884076118793272,
+      "absoluteRMS": 1.3908196207779265e-10,
+      "scaleRMS": 8.756062426144986e-07
+    },
+    "decay-r64-z64-gauss/native/1/1/1": {
+      "relative": 0.06753940412145981,
+      "absoluteRMS": 1.390819620777926e-10,
+      "scaleRMS": 2.0592713821945168e-09
+    },
+    "decay-r64-z64-gauss/native/2/0/0": {
+      "relative": 0.0001768752900134578,
+      "absoluteRMS": 9.52798013612098e-09,
+      "scaleRMS": 5.3868350606780804e-05
+    },
+    "decay-r64-z64-gauss/native/2/0/1": {
+      "relative": 0.0375596937412488,
+      "absoluteRMS": 9.527980136120977e-09,
+      "scaleRMS": 2.536756609827508e-07
+    },
+    "decay-r64-z64-gauss/native/2/1/0": {
+      "relative": 0.00017687705935618897,
+      "absoluteRMS": 2.1819430495568553e-10,
+      "scaleRMS": 1.2335930151139233e-06
+    },
+    "decay-r64-z64-gauss/native/2/1/1": {
+      "relative": 0.03756006946343757,
+      "absoluteRMS": 2.1819430495568547e-10,
+      "scaleRMS": 5.809209303195892e-09
+    },
+    "decay-r64-z64-gauss/native/3/0/0": {
+      "relative": 0.00019512044791295116,
+      "absoluteRMS": 1.0461551389251545e-08,
+      "scaleRMS": 5.361586395044944e-05
+    },
+    "decay-r64-z64-gauss/native/3/0/1": {
+      "relative": 0.020668372637387265,
+      "absoluteRMS": 1.046155138925151e-08,
+      "scaleRMS": 5.061623173141114e-07
+    },
+    "decay-r64-z64-gauss/native/3/1/0": {
+      "relative": 0.0001951260361250495,
+      "absoluteRMS": 3.3860696305132533e-10,
+      "scaleRMS": 1.7353243563781714e-06
+    },
+    "decay-r64-z64-gauss/native/3/1/1": {
+      "relative": 0.02066896457560418,
+      "absoluteRMS": 3.3860696305132384e-10,
+      "scaleRMS": 1.6382386346096195e-08
+    },
+    "decay-r64-z64-gauss/v86/1/0/0": {
+      "relative": 3.503079147812432e-05,
+      "absoluteRMS": 1.891416924644008e-09,
+      "scaleRMS": 5.3992982882648853e-05
+    },
+    "decay-r64-z64-gauss/v86/1/0/1": {
+      "relative": 0.014895161447487646,
+      "absoluteRMS": 1.8914169246443735e-09,
+      "scaleRMS": 1.2698196869584096e-07
+    },
+    "decay-r64-z64-gauss/v86/1/1/0": {
+      "relative": 1.1913714464956706e-05,
+      "absoluteRMS": 1.0431325431570804e-11,
+      "scaleRMS": 8.75572892254029e-07
+    },
+    "decay-r64-z64-gauss/v86/1/1/1": {
+      "relative": 0.00506573482661234,
+      "absoluteRMS": 1.0431325431556957e-11,
+      "scaleRMS": 2.0591929480313526e-09
+    },
+    "decay-r64-z64-gauss/v86/2/0/0": {
+      "relative": 6.997128510533242e-05,
+      "absoluteRMS": 3.769094154573029e-09,
+      "scaleRMS": 5.38662988524387e-05
+    },
+    "decay-r64-z64-gauss/v86/2/0/1": {
+      "relative": 0.014858491760144293,
+      "absoluteRMS": 3.769094154573324e-09,
+      "scaleRMS": 2.536659989059833e-07
+    },
+    "decay-r64-z64-gauss/v86/2/1/0": {
+      "relative": 1.998834249834663e-05,
+      "absoluteRMS": 2.465654052797832e-11,
+      "scaleRMS": 1.2335460296429193e-06
+    },
+    "decay-r64-z64-gauss/v86/2/1/1": {
+      "relative": 0.004244550058832842,
+      "absoluteRMS": 2.465654052796554e-11,
+      "scaleRMS": 5.808988040241313e-09
+    },
+    "decay-r64-z64-gauss/v86/3/0/0": {
+      "relative": 0.00013961762984835623,
+      "absoluteRMS": 7.485434728628772e-09,
+      "scaleRMS": 5.361382181289694e-05
+    },
+    "decay-r64-z64-gauss/v86/3/0/1": {
+      "relative": 0.014789168594684222,
+      "absoluteRMS": 7.485434728629542e-09,
+      "scaleRMS": 5.06143038447752e-07
+    },
+    "decay-r64-z64-gauss/v86/3/1/0": {
+      "relative": 3.451511375801418e-05,
+      "absoluteRMS": 5.98926362713631e-11,
+      "scaleRMS": 1.7352582608091919e-06
+    },
+    "decay-r64-z64-gauss/v86/3/1/1": {
+      "relative": 0.0036560557358387507,
+      "absoluteRMS": 5.989263627128921e-11,
+      "scaleRMS": 1.6381762368715365e-08
+    },
+    "decay-r64-z256-gauss/native/1/0/0": {
+      "relative": 0.00015884019717108926,
+      "absoluteRMS": 8.575227535505267e-09,
+      "scaleRMS": 5.398650774947575e-05
+    },
+    "decay-r64-z256-gauss/native/1/0/1": {
+      "relative": 0.06753916430038846,
+      "absoluteRMS": 8.575227535505262e-09,
+      "scaleRMS": 1.2696674032515296e-07
+    },
+    "decay-r64-z256-gauss/native/1/1/0": {
+      "relative": 0.00015884022919522773,
+      "absoluteRMS": 1.383696155594625e-10,
+      "scaleRMS": 8.711245020264661e-07
+    },
+    "decay-r64-z256-gauss/native/1/1/1": {
+      "relative": 0.06753917791711514,
+      "absoluteRMS": 1.3836961555946244e-10,
+      "scaleRMS": 2.0487311191331237e-09
+    },
+    "decay-r64-z256-gauss/native/2/0/0": {
+      "relative": 0.00017687535444551464,
+      "absoluteRMS": 9.526478097921675e-09,
+      "scaleRMS": 5.3859838911905886e-05
+    },
+    "decay-r64-z256-gauss/native/2/0/1": {
+      "relative": 0.03755970742347835,
+      "absoluteRMS": 9.526478097921671e-09,
+      "scaleRMS": 2.536355778950165e-07
+    },
+    "decay-r64-z256-gauss/native/2/1/0": {
+      "relative": 0.00017687546563222286,
+      "absoluteRMS": 2.1742698302628606e-10,
+      "scaleRMS": 1.2292659258824622e-06
+    },
+    "decay-r64-z256-gauss/native/2/1/1": {
+      "relative": 0.03755973103411783,
+      "absoluteRMS": 2.174269830262859e-10,
+      "scaleRMS": 5.788832269027259e-09
+    },
+    "decay-r64-z256-gauss/native/3/0/0": {
+      "relative": 0.000195120685054876,
+      "absoluteRMS": 1.0459911080467252e-08,
+      "scaleRMS": 5.360739215078859e-05
+    },
+    "decay-r64-z256-gauss/native/3/0/1": {
+      "relative": 0.020668397756936366,
+      "absoluteRMS": 1.0459911080467222e-08,
+      "scaleRMS": 5.060823390123141e-07
+    },
+    "decay-r64-z256-gauss/native/3/1/0": {
+      "relative": 0.00019512105157192382,
+      "absoluteRMS": 3.376246368237099e-10,
+      "scaleRMS": 1.7303342417630301e-06
+    },
+    "decay-r64-z256-gauss/native/3/1/1": {
+      "relative": 0.020668436580703945,
+      "absoluteRMS": 3.3762463682370866e-10,
+      "scaleRMS": 1.633527700585322e-08
+    },
+    "decay-r64-z256-gauss/v86/1/0/0": {
+      "relative": 3.018450475902991e-06,
+      "absoluteRMS": 1.6294939330562353e-10,
+      "scaleRMS": 5.398445149472796e-05
+    },
+    "decay-r64-z256-gauss/v86/1/0/1": {
+      "relative": 0.0012834510801132235,
+      "absoluteRMS": 1.6294939330565068e-10,
+      "scaleRMS": 1.2696190437681162e-07
+    },
+    "decay-r64-z256-gauss/v86/1/1/0": {
+      "relative": 1.953508666301604e-06,
+      "absoluteRMS": 1.7016844473858274e-12,
+      "scaleRMS": 8.710913223679052e-07
+    },
+    "decay-r64-z256-gauss/v86/1/1/1": {
+      "relative": 0.0008306357277623473,
+      "absoluteRMS": 1.701684447379967e-12,
+      "scaleRMS": 2.0486530864307283e-09
+    },
+    "decay-r64-z256-gauss/v86/2/0/0": {
+      "relative": 5.787556464468394e-06,
+      "absoluteRMS": 3.11704986102024e-10,
+      "scaleRMS": 5.385778748175982e-05
+    },
+    "decay-r64-z256-gauss/v86/2/0/1": {
+      "relative": 0.0012289950071550488,
+      "absoluteRMS": 3.1170498610205753e-10,
+      "scaleRMS": 2.5362591734494584e-07
+    },
+    "decay-r64-z256-gauss/v86/2/1/0": {
+      "relative": 3.542793251860053e-06,
+      "absoluteRMS": 4.354869151041343e-12,
+      "scaleRMS": 1.2292191052229566e-06
+    },
+    "decay-r64-z256-gauss/v86/2/1/1": {
+      "relative": 0.0007523166719229458,
+      "absoluteRMS": 4.3548691510381984e-12,
+      "scaleRMS": 5.788611782199392e-09
+    },
+    "decay-r64-z256-gauss/v86/3/0/0": {
+      "relative": 1.0990631988616138e-05,
+      "absoluteRMS": 5.891566781628556e-10,
+      "scaleRMS": 5.3605350335912576e-05
+    },
+    "decay-r64-z256-gauss/v86/3/0/1": {
+      "relative": 0.0011641961664755852,
+      "absoluteRMS": 5.891566781632424e-10,
+      "scaleRMS": 5.060630631921926e-07
+    },
+    "decay-r64-z256-gauss/v86/3/1/0": {
+      "relative": 6.428672785246796e-06,
+      "absoluteRMS": 1.1123328964482883e-11,
+      "scaleRMS": 1.7302683362590617e-06
+    },
+    "decay-r64-z256-gauss/v86/3/1/1": {
+      "relative": 0.0006809650454900051,
+      "absoluteRMS": 1.112332896446291e-11,
+      "scaleRMS": 1.633465482278734e-08
+    },
+    "decay-r64-z128-ls/native/1/0/0": {
+      "relative": 5.475203785221528e-05,
+      "absoluteRMS": 2.9559648442231134e-09,
+      "scaleRMS": 5.398821596744484e-05
+    },
+    "decay-r64-z128-ls/native/1/0/1": {
+      "relative": 0.02328067420049077,
+      "absoluteRMS": 2.9559648442231026e-09,
+      "scaleRMS": 1.2697075775240174e-07
+    },
+    "decay-r64-z128-ls/native/1/1/0": {
+      "relative": 5.475244595888109e-05,
+      "absoluteRMS": 4.778526975375356e-11,
+      "scaleRMS": 8.727513249296688e-07
+    },
+    "decay-r64-z128-ls/native/1/1/1": {
+      "relative": 0.023280847728247844,
+      "absoluteRMS": 4.7785269753753315e-11,
+      "scaleRMS": 2.0525571195490875e-09
+    },
+    "decay-r64-z128-ls/native/2/0/0": {
+      "relative": 7.174347223179991e-05,
+      "absoluteRMS": 3.864214123326049e-09,
+      "scaleRMS": 5.386154312187384e-05
+    },
+    "decay-r64-z128-ls/native/2/0/1": {
+      "relative": 0.015234817959903597,
+      "absoluteRMS": 3.864214123326038e-09,
+      "scaleRMS": 2.536436033234026e-07
+    },
+    "decay-r64-z128-ls/native/2/1/0": {
+      "relative": 7.174453297949022e-05,
+      "absoluteRMS": 8.829111362954218e-11,
+      "scaleRMS": 1.2306319375551886e-06
+    },
+    "decay-r64-z128-ls/native/2/1/1": {
+      "relative": 0.015235043211030452,
+      "absoluteRMS": 8.829111362954205e-11,
+      "scaleRMS": 5.7952650613828035e-09
+    },
+    "decay-r64-z128-ls/native/3/0/0": {
+      "relative": 8.881750549838759e-05,
+      "absoluteRMS": 4.761425501327516e-09,
+      "scaleRMS": 5.3609088372944184e-05
+    },
+    "decay-r64-z128-ls/native/3/0/1": {
+      "relative": 0.009408103148588566,
+      "absoluteRMS": 4.761425501327449e-09,
+      "scaleRMS": 5.060983522530547e-07
+    },
+    "decay-r64-z128-ls/native/3/1/0": {
+      "relative": 8.882051456284999e-05,
+      "absoluteRMS": 1.5377936599374847e-10,
+      "scaleRMS": 1.7313496409090624e-06
+    },
+    "decay-r64-z128-ls/native/3/1/1": {
+      "relative": 0.009408421887430445,
+      "absoluteRMS": 1.5377936599374597e-10,
+      "scaleRMS": 1.6344862914703433e-08
+    }
+  },
+  "rigidDiagnostics": [
+    {
+      "label": "rigid-r16-z32-gauss",
+      "timeS": 0.0,
+      "maxStrainOverOmega": 0.47133272223229117,
+      "rmsStrainOverOmega": 0.03020385229822037,
+      "axisMaxStrainOverOmega": 0.47133272223229117,
+      "maxSwirlChangeOverA": 0.0
+    },
+    {
+      "label": "rigid-r16-z32-gauss",
+      "timeS": 5e-06,
+      "maxStrainOverOmega": 0.4506231609719093,
+      "rmsStrainOverOmega": 0.025531408157353812,
+      "axisMaxStrainOverOmega": 0.4506231609719093,
+      "maxSwirlChangeOverA": 0.0023362662227013457
+    },
+    {
+      "label": "rigid-r16-z32-gauss",
+      "timeS": 1e-05,
+      "maxStrainOverOmega": 0.4526804291049683,
+      "rmsStrainOverOmega": 0.022377431437326702,
+      "axisMaxStrainOverOmega": 0.4526804291049683,
+      "maxSwirlChangeOverA": 0.003933078887113249
+    },
+    {
+      "label": "rigid-r16-z32-gauss",
+      "timeS": 2e-05,
+      "maxStrainOverOmega": 0.4578554348367468,
+      "rmsStrainOverOmega": 0.018775727414163973,
+      "axisMaxStrainOverOmega": 0.4578554348367468,
+      "maxSwirlChangeOverA": 0.005792439448949245
+    },
+    {
+      "label": "rigid-r32-z64-gauss",
+      "timeS": 0.0,
+      "maxStrainOverOmega": 0.4713327222322817,
+      "rmsStrainOverOmega": 0.015102743260611217,
+      "axisMaxStrainOverOmega": 0.4713327222322817,
+      "maxSwirlChangeOverA": 0.0
+    },
+    {
+      "label": "rigid-r32-z64-gauss",
+      "timeS": 5e-06,
+      "maxStrainOverOmega": 0.4599028215868144,
+      "rmsStrainOverOmega": 0.009376340932542119,
+      "axisMaxStrainOverOmega": 0.4599028215868144,
+      "maxSwirlChangeOverA": 0.0028948837293144855
+    },
+    {
+      "label": "rigid-r32-z64-gauss",
+      "timeS": 1e-05,
+      "maxStrainOverOmega": 0.4643014888315048,
+      "rmsStrainOverOmega": 0.008095062405858664,
+      "axisMaxStrainOverOmega": 0.4643014888315048,
+      "maxSwirlChangeOverA": 0.0035866213876024127
+    },
+    {
+      "label": "rigid-r32-z64-gauss",
+      "timeS": 2e-05,
+      "maxStrainOverOmega": 0.4661079970730639,
+      "rmsStrainOverOmega": 0.007620531759603011,
+      "axisMaxStrainOverOmega": 0.4661079970730639,
+      "maxSwirlChangeOverA": 0.0038925091673359643
+    },
+    {
+      "label": "rigid-r64-z128-gauss",
+      "timeS": 0.0,
+      "maxStrainOverOmega": 0.4713327222322918,
+      "rmsStrainOverOmega": 0.0075513955987453335,
+      "axisMaxStrainOverOmega": 0.4713327222322918,
+      "maxSwirlChangeOverA": 0.0
+    },
+    {
+      "label": "rigid-r64-z128-gauss",
+      "timeS": 5e-06,
+      "maxStrainOverOmega": 0.4672150531128029,
+      "rmsStrainOverOmega": 0.0038032357764566337,
+      "axisMaxStrainOverOmega": 0.4672150531128029,
+      "maxSwirlChangeOverA": 0.0019459838075301826
+    },
+    {
+      "label": "rigid-r64-z128-gauss",
+      "timeS": 1e-05,
+      "maxStrainOverOmega": 0.4679568012664933,
+      "rmsStrainOverOmega": 0.003719176681170109,
+      "axisMaxStrainOverOmega": 0.4679568012664933,
+      "maxSwirlChangeOverA": 0.002019081293487338
+    },
+    {
+      "label": "rigid-r64-z128-gauss",
+      "timeS": 2e-05,
+      "maxStrainOverOmega": 0.46827377609472104,
+      "rmsStrainOverOmega": 0.0036750294472239074,
+      "axisMaxStrainOverOmega": 0.46827377609472104,
+      "maxSwirlChangeOverA": 0.0020611308713411654
+    },
+    {
+      "label": "rigid-r64-z128-ls",
+      "timeS": 0.0,
+      "maxStrainOverOmega": 0.008067123853363063,
+      "rmsStrainOverOmega": 0.00020148220770315332,
+      "axisMaxStrainOverOmega": 0.008067123853363063,
+      "maxSwirlChangeOverA": 0.0
+    },
+    {
+      "label": "rigid-r64-z128-ls",
+      "timeS": 5e-06,
+      "maxStrainOverOmega": 0.008662692001837315,
+      "rmsStrainOverOmega": 0.00015049284426080965,
+      "axisMaxStrainOverOmega": 0.008662692001837315,
+      "maxSwirlChangeOverA": 4.7185721822893296e-05
+    },
+    {
+      "label": "rigid-r64-z128-ls",
+      "timeS": 1e-05,
+      "maxStrainOverOmega": 0.008745482819354868,
+      "rmsStrainOverOmega": 0.00014438410856499538,
+      "axisMaxStrainOverOmega": 0.008745482819354868,
+      "maxSwirlChangeOverA": 5.2704225819899044e-05
+    },
+    {
+      "label": "rigid-r64-z128-ls",
+      "timeS": 2e-05,
+      "maxStrainOverOmega": 0.008795596071589418,
+      "rmsStrainOverOmega": 0.00013808179584439326,
+      "axisMaxStrainOverOmega": 0.008795596071589418,
+      "maxSwirlChangeOverA": 5.72632950760272e-05
+    }
+  ],
+  "diagnosticPass": false,
+  "coupledReleaseQualified": false,
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false
+}

@@ -1,0 +1,146 @@
+{
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-openfoam-v87-20261112",
+    "run",
+    "--",
+    "python3",
+    "-I",
+    "-"
+  ],
+  "parts": [
+    {
+      "path": "evidence-part01.tar.gz",
+      "bytes": 30486844,
+      "sha256": "b5a76e699c29e05037efeb43f06b2e8a5573f6ec832801020380912d01e88a65",
+      "rawBytes": 83788214,
+      "files": 434,
+      "exitCode": 0,
+      "jobSHA256": "28524994f283b271831d269acc51f90344afc9cdf5fe63683356237b106c04ae"
+    },
+    {
+      "path": "evidence-part02.tar.gz",
+      "bytes": 31481973,
+      "sha256": "32665aa38ff14185229362f3e4a823fbc6699a278938f945a7cff3a6a07fef60",
+      "rawBytes": 83648651,
+      "files": 372,
+      "exitCode": 0,
+      "jobSHA256": "4d0f5312e4dd8705aca49133133664291790eb070414245feac74c976e8b467a"
+    },
+    {
+      "path": "evidence-part03.tar.gz",
+      "bytes": 31187958,
+      "sha256": "511afe56fbfc9c2822d0a1b7a52070f3158ea61e9591c47773db6580af45d315",
+      "rawBytes": 83618938,
+      "files": 174,
+      "exitCode": 0,
+      "jobSHA256": "a10f79ad24234914e84af7577c06f647ab25ca8d5bb05e5c0dbc09419da32368"
+    },
+    {
+      "path": "evidence-part04.tar.gz",
+      "bytes": 31270924,
+      "sha256": "06595b636772e7f6631f89332ae6ee795d1f26e22d5d69f1d23c437e6a5b3d1e",
+      "rawBytes": 82765260,
+      "files": 49,
+      "exitCode": 0,
+      "jobSHA256": "e913eaddea297c5a2c22d69a8726c6a2342a9ef4629bf65fd359431717dca04b"
+    },
+    {
+      "path": "evidence-part05.tar.gz",
+      "bytes": 31229520,
+      "sha256": "a9b96f7dfdeeeb2364b30ffb212c5dbd4da567b41bad3d5149e1dc9f8109951c",
+      "rawBytes": 82517654,
+      "files": 52,
+      "exitCode": 0,
+      "jobSHA256": "e2d02d7502ff224de423166230809b2a60a04c0f73b382f5d805a2e65e07322e"
+    },
+    {
+      "path": "evidence-part06.tar.gz",
+      "bytes": 31130518,
+      "sha256": "d6e04d3d268f1d41ff846ca546de6688ab61463ab698a55b34d4b87cf67944be",
+      "rawBytes": 82485433,
+      "files": 52,
+      "exitCode": 0,
+      "jobSHA256": "2a76f3b8bb5a31931320fa22ad45cf41c6181442a4a622960a6c7c0b0bb93dd3"
+    },
+    {
+      "path": "evidence-part07.tar.gz",
+      "bytes": 30941422,
+      "sha256": "5d8be48a1429febebf5cc2eec39208f5ed52b0a360031b5edcbc9599ff109c82",
+      "rawBytes": 82385599,
+      "files": 52,
+      "exitCode": 0,
+      "jobSHA256": "8cf11bf1e1d21864c59b59b55b87bc592258a1a2dc4124dc64cb83d5752d3354"
+    },
+    {
+      "path": "evidence-part08.tar.gz",
+      "bytes": 31435602,
+      "sha256": "27dc17eb93074d23434fb21d0f8c43d1f4d8523ac309296127571713f1cebf55",
+      "rawBytes": 83684624,
+      "files": 57,
+      "exitCode": 0,
+      "jobSHA256": "b1d57b707d899a6aed5915c2db2b4f8f4e593409eb81f3e6613e0186430e88fd"
+    },
+    {
+      "path": "evidence-part09.tar.gz",
+      "bytes": 30939141,
+      "sha256": "1e88f469643108c11f5fb4eea6a2161e52fc6b06a615e5f335dd536a751779af",
+      "rawBytes": 82580894,
+      "files": 69,
+      "exitCode": 0,
+      "jobSHA256": "f19dfb6f4f288af3db18b42e8df1b616331db70f35fa0a7842557152c2eaf46c"
+    },
+    {
+      "path": "evidence-part10.tar.gz",
+      "bytes": 30468582,
+      "sha256": "ce9b1d0174deb195b7d7f1559b64ce7a192f0ce3337dda2b8e29157daf30c1d0",
+      "rawBytes": 82256724,
+      "files": 52,
+      "exitCode": 0,
+      "jobSHA256": "b50f7778fff603290c18e18257e7dcf363fc868bcf7c5973f8301eae446fbb8d"
+    },
+    {
+      "path": "evidence-part11.tar.gz",
+      "bytes": 30647240,
+      "sha256": "85d63853d2649cb5da4e10a88a03033fd69c995d1d1b208c76f2bf3b80d2c8e3",
+      "rawBytes": 82508846,
+      "files": 49,
+      "exitCode": 0,
+      "jobSHA256": "5e1f2e2fa6881d212a82f9e47d42ad2ba93bbe679227f0316eb7ef56a82ebbee"
+    },
+    {
+      "path": "evidence-part12.tar.gz",
+      "bytes": 30655843,
+      "sha256": "9985d48750120bab48b91fbd5ee575833d6cb89281cc3e9ea379fbcd8b62804b",
+      "rawBytes": 83582405,
+      "files": 56,
+      "exitCode": 0,
+      "jobSHA256": "126f5588962be4362b5e878ba699c575d6ba731eb52c8eca560b889767f58ed5"
+    },
+    {
+      "path": "evidence-part13.tar.gz",
+      "bytes": 30274921,
+      "sha256": "37f0c2ea31f690cb43f0f61c678cd8f1d4c71318d3ce7811249b11cb138cbbf8",
+      "rawBytes": 82310064,
+      "files": 49,
+      "exitCode": 0,
+      "jobSHA256": "d3f2a9d593d6f2441b44a755b2dd948b921d6efafdf36dc9ad87a5b60626a4eb"
+    },
+    {
+      "path": "evidence-part14.tar.gz",
+      "bytes": 14187144,
+      "sha256": "5601b7bb7d069af75712560e07eaade49c477c02f4b81b7133a38215fc58bf6b",
+      "rawBytes": 36386469,
+      "files": 53,
+      "exitCode": 0,
+      "jobSHA256": "e5d552ea8d2d8174e3c324b2b22320e79999cd72173125697e688f15f12ab3b8"
+    }
+  ],
+  "rawBytes": 1114519775,
+  "files": 1570,
+  "allMembersRehashed": true,
+  "rawByteLimitPerTransfer": 83886080
+}
