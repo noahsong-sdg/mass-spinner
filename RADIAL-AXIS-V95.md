@@ -161,6 +161,7 @@ Compact evidence remains in Git:
 - [Directional ratios and historical replay comparison](scientific/radial-axis-v95/diagnostics.json)
 - [Export regression receipt](scientific/radial-axis-v95/export-controls.json)
 - [Application checks](scientific/radial-axis-v95/app-final/execution.json)
+- [Published release and verified server asset digests](scientific/radial-axis-v95/publication.json)
 
 Review checked the changed mesh generation, native mapping, custom geometry and
 scoring paths against the controls above. Legacy inputs and base packets retain

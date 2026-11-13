@@ -1,0 +1,141 @@
+{
+  "verifiedUTC": "2026-11-13T12:00:53.360176+00:00",
+  "releaseURL": "https://github.com/noahsong-sdg/mass-spinner/releases/tag/v95-scientific-evidence",
+  "releaseId": 444174577,
+  "tag": "v95-scientific-evidence",
+  "targetCommit": "8a0993d0b854ece538b55f7c81f0cb9fa1f8a116",
+  "draft": false,
+  "publishedAt": "2026-11-13T12:00:52Z",
+  "verification": "GitHub API uploaded-state, byte-size and server SHA256 digest matched local export receipt",
+  "priorReadAttempt": "Draft lookup by tag returned HTTP 404; resolved the draft via gh release view and fetched its numeric release ID before publication.",
+  "assets": [
+    {
+      "id": 743488989,
+      "name": "ARCHIVE-MANIFEST.json",
+      "size": 369723,
+      "digest": "sha256:407a9a5bf93f18847b0f89080ac59514395fb5837b83a84f767a19cd4bdac21c",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/ARCHIVE-MANIFEST.json"
+    },
+    {
+      "id": 743485982,
+      "name": "evidence-part01.tar.gz",
+      "size": 30486844,
+      "digest": "sha256:b5a76e699c29e05037efeb43f06b2e8a5573f6ec832801020380912d01e88a65",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part01.tar.gz"
+    },
+    {
+      "id": 743485980,
+      "name": "evidence-part02.tar.gz",
+      "size": 31481973,
+      "digest": "sha256:32665aa38ff14185229362f3e4a823fbc6699a278938f945a7cff3a6a07fef60",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part02.tar.gz"
+    },
+    {
+      "id": 743485977,
+      "name": "evidence-part03.tar.gz",
+      "size": 31187958,
+      "digest": "sha256:511afe56fbfc9c2822d0a1b7a52070f3158ea61e9591c47773db6580af45d315",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part03.tar.gz"
+    },
+    {
+      "id": 743485978,
+      "name": "evidence-part04.tar.gz",
+      "size": 31270924,
+      "digest": "sha256:06595b636772e7f6631f89332ae6ee795d1f26e22d5d69f1d23c437e6a5b3d1e",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part04.tar.gz"
+    },
+    {
+      "id": 743485975,
+      "name": "evidence-part05.tar.gz",
+      "size": 31229520,
+      "digest": "sha256:a9b96f7dfdeeeb2364b30ffb212c5dbd4da567b41bad3d5149e1dc9f8109951c",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part05.tar.gz"
+    },
+    {
+      "id": 743487273,
+      "name": "evidence-part06.tar.gz",
+      "size": 31130518,
+      "digest": "sha256:d6e04d3d268f1d41ff846ca546de6688ab61463ab698a55b34d4b87cf67944be",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part06.tar.gz"
+    },
+    {
+      "id": 743487300,
+      "name": "evidence-part07.tar.gz",
+      "size": 30941422,
+      "digest": "sha256:5d8be48a1429febebf5cc2eec39208f5ed52b0a360031b5edcbc9599ff109c82",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part07.tar.gz"
+    },
+    {
+      "id": 743487308,
+      "name": "evidence-part08.tar.gz",
+      "size": 31435602,
+      "digest": "sha256:27dc17eb93074d23434fb21d0f8c43d1f4d8523ac309296127571713f1cebf55",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part08.tar.gz"
+    },
+    {
+      "id": 743487309,
+      "name": "evidence-part09.tar.gz",
+      "size": 30939141,
+      "digest": "sha256:1e88f469643108c11f5fb4eea6a2161e52fc6b06a615e5f335dd536a751779af",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part09.tar.gz"
+    },
+    {
+      "id": 743487305,
+      "name": "evidence-part10.tar.gz",
+      "size": 30468582,
+      "digest": "sha256:ce9b1d0174deb195b7d7f1559b64ce7a192f0ce3337dda2b8e29157daf30c1d0",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part10.tar.gz"
+    },
+    {
+      "id": 743488783,
+      "name": "evidence-part11.tar.gz",
+      "size": 30647240,
+      "digest": "sha256:85d63853d2649cb5da4e10a88a03033fd69c995d1d1b208c76f2bf3b80d2c8e3",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part11.tar.gz"
+    },
+    {
+      "id": 743488912,
+      "name": "evidence-part12.tar.gz",
+      "size": 30655843,
+      "digest": "sha256:9985d48750120bab48b91fbd5ee575833d6cb89281cc3e9ea379fbcd8b62804b",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part12.tar.gz"
+    },
+    {
+      "id": 743488918,
+      "name": "evidence-part13.tar.gz",
+      "size": 30274921,
+      "digest": "sha256:37f0c2ea31f690cb43f0f61c678cd8f1d4c71318d3ce7811249b11cb138cbbf8",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part13.tar.gz"
+    },
+    {
+      "id": 743488932,
+      "name": "evidence-part14.tar.gz",
+      "size": 14187144,
+      "digest": "sha256:5601b7bb7d069af75712560e07eaade49c477c02f4b81b7133a38215fc58bf6b",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/evidence-part14.tar.gz"
+    },
+    {
+      "id": 743488944,
+      "name": "export.json",
+      "size": 4764,
+      "digest": "sha256:89e37cefdb77f8db50dd1e9956b048789c2912ee6e3f08aef1b49f745d289be4",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v95-scientific-evidence/export.json"
+    }
+  ]
+}
