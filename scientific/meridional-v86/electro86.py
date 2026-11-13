@@ -64,6 +64,10 @@ class Electro:
         self.M = coo_matrix((mv,(mr,mc)),shape=shape).tocsr()
         self.R = np.asarray(resistance); self.G = diags(1/self.R)
         self.K = B*B*(self.p+self.h*self.h/self.p)*f.volume.ravel()
+        # Geometry and conductivity are prescribed; only mass/dt changes later.
+        D, T, M, G = self.D, self.T, self.M, self.G
+        self._blocks = (D.T@G@D, D.T@G@T, D.T@G@M,
+                        T.T@G@T, T.T@G@M, M.T@G@M)
         self.charge, self.torque, self.force = np.zeros((3,n))
         for port in self.ports:
             a, amp = port['cell'],port['amp']
@@ -91,9 +95,9 @@ class Electro:
         f = self.flow; old = f.primitive(q); n = f.count
         mass = q[0].ravel(); inertia = (q[0]*f.mean_r2).ravel()
         D,T,M,G = self.D,self.T,self.M,self.G
-        A,C,F = D.T@G@D,D.T@G@T,D.T@G@M
-        matrix = bmat([[A,-C,F],[-C.T,diags(inertia/dt)+T.T@G@T,-T.T@G@M],
-                       [-F.T,M.T@G@T,diags(mass/dt+self.K)-M.T@G@M]],format='csc')
+        A,C,F,W,H,U = self._blocks
+        matrix = bmat([[A,-C,F],[-C.T,diags(inertia/dt)+W,-H],
+                       [-F.T,H.T,diags(mass/dt+self.K)-U]],format='csc')
         rhs = np.r_[-self.charge,inertia/dt*old['omegaRadS'].ravel()+self.torque,
                     mass/dt*old['vrMPS'].ravel()+self.force]
         keep = np.arange(1,3*n); reduced = matrix[keep][:,keep]

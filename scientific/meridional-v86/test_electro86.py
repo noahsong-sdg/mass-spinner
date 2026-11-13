@@ -155,6 +155,37 @@ class ElectroTests(unittest.TestCase):
         expected = .5*m.B*(m.current*self.f.r[-1]**2-source_moment)
         self.assertAlmostEqual(float(np.sum(out[3]-q[3]))/self.dt, expected, delta=2e-12)
 
+    def test_repeated_changing_mass_and_timestep_matches_uncached_system(self):
+        from scipy.sparse import bmat, diags
+        m = self.model()
+        q = self.q.copy()
+        for dt, density_factor in ((3e-5, .6), (7e-6, 1.8), (4e-5, 1.1)):
+            p = self.f.primitive(q)
+            q = self.f.state(p['densityKgM3']*density_factor, p['temperatureK'],
+                             p['massFraction'], p['omegaRadS'], p['vrMPS'], p['vzMPS'])
+            p = self.f.primitive(q)
+            mass, inertia = q[0].ravel(), (q[0]*self.f.mean_r2).ravel()
+            D, T, M, G = m.D, m.T, m.M, m.G
+            # Reassemble all fixed blocks independently; no cached block input.
+            matrix = bmat([[D.T@G@D, -D.T@G@T, D.T@G@M],
+                [-T.T@G@D, diags(inertia/dt)+T.T@G@T, -T.T@G@M],
+                [-M.T@G@D, M.T@G@T, diags(mass/dt+m.K)-M.T@G@M]], format='csc')
+            rhs = np.r_[-m.charge, inertia/dt*p['omegaRadS'].ravel()+m.torque,
+                        mass/dt*p['vrMPS'].ravel()+m.force]
+            reduced = matrix[1:, 1:].toarray()
+            scale = 1/np.sqrt(abs(reduced.diagonal()))
+            expected = np.r_[0., scale*np.linalg.solve(
+                scale[:, None]*reduced*scale[None, :], scale*rhs[1:])]
+            out, receipt = m.advance(q, dt)
+            actual = self.f.primitive(out)
+            np.testing.assert_allclose(np.r_[receipt['potentialV'],
+                actual['omegaRadS'].ravel(), actual['vrMPS'].ravel()],
+                expected, rtol=2e-10, atol=2e-11)
+            self.assertLess(abs(receipt['energyResidualJ']), 1e-12)
+            self.dt = dt
+            self.reconstruct(m, q, out, receipt)
+            q = out
+
     def test_invalid_conductivity_geometry_and_timestep_rejected(self):
         for dt in (0., -1., float('nan'), float('inf'), True):
             with self.subTest(dt=dt), self.assertRaises(ValueError):

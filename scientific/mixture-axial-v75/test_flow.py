@@ -49,6 +49,22 @@ class FlowTests(unittest.TestCase):
         expected = .001*(1+.2*self.flow.z[2:-2, None]/.14)*3*self.flow.axial_area[2:-2]
         np.testing.assert_allclose(flux[0, 2:-2], expected, rtol=2e-13, atol=0)
 
+    def test_stationary_density_contact_has_no_acoustic_mass_flux(self):
+        f = Flow(self.flow.r, self.flow.z, [40*U, 40*U])
+        rho = np.where(np.arange(f.nz)[:, None] < 3, .001, .002)
+        q = f.state(rho, 350*.001/rho, .4, 0.)
+        _, flux = f.fluxes(q)
+        scale = np.max(f.primitive(q)['soundMPS'])*.002*np.max(f.axial_area)
+        self.assertLess(np.max(abs(flux[0])), 128*np.finfo(float).eps*scale)
+
+    def test_stationary_axial_swirl_shear_has_no_energy_diffusion(self):
+        omega = np.where(np.arange(self.flow.nz)[:, None] < 3, 900., 1800.)
+        q = self.flow.state(.001, 350., .4, omega)
+        _, flux = self.flow.fluxes(q)
+        p = self.flow.primitive(q)
+        scale = np.max(p['soundMPS'])*np.max(q[4]/self.flow.volume)*np.max(self.flow.axial_area)
+        self.assertLess(np.max(abs(flux[4])), 128*np.finfo(float).eps*scale)
+
     def test_eos_and_swirl_use_evolving_species_mass(self):
         rho = np.linspace(.001, .002, self.flow.count).reshape(6, 6)
         y = np.linspace(0., 1., self.flow.count).reshape(6, 6)
@@ -111,10 +127,14 @@ class FlowTests(unittest.TestCase):
     def test_zero_mass_flux_rigid_rotation_has_zero_angular_transport(self):
         q = self.flow.state(.001, 350., .4, 900.)
         radial, axial = self.flow.fluxes(q)
-        for flux in (radial, axial):
-            np.testing.assert_array_equal(flux[0], 0)
-            np.testing.assert_array_equal(flux[3], 0)
-            np.testing.assert_array_equal(flux[5], 0)
+        # Recovering pressure from total minus swirl energy can differ by an
+        # ULP. HLLC resolves that pressure wave; bound it by input arithmetic.
+        sound = np.max(self.flow.primitive(q)['soundMPS'])
+        for flux, area, radius2 in ((radial, self.flow.radial_area, self.flow.r[None, :]**2),
+                                   (axial, self.flow.axial_area, self.flow.mean_r2[None, :])):
+            self.assertTrue(np.all(abs(flux[0]) <= 128*np.finfo(float).eps*.001*sound*area))
+            np.testing.assert_allclose(flux[3], flux[0]*radius2*900, rtol=2e-15, atol=0)
+            np.testing.assert_allclose(flux[5], flux[0]*.4, rtol=2e-15, atol=0)
 
     def test_uniform_composition_preserved_during_density_pressure_transport(self):
         rho = .001*(1+.1*np.arange(6)[:, None])

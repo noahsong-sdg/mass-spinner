@@ -7,7 +7,7 @@ matched plasma thermal closure. Spatial/time refinement remains required.
 """
 import math
 import numpy as np
-from scipy.sparse import diags
+from scipy.sparse import coo_matrix, diags
 from scipy.sparse.linalg import spsolve
 from skfem import Basis, BilinearForm, ElementQuad1, ElementVector, MeshQuad, asm
 
@@ -68,6 +68,31 @@ class Diffusion:
         self.free = np.setdiff1d(np.arange(self.velocity.N), self.fixed)
         self.wall_nodes = np.flatnonzero(wall)
 
+        # Split each Q1 integration element at FV faces. Point-binning its old
+        # Gauss rule otherwise assigns incorrect fractions of heat to cells.
+        split = MeshQuad.init_tensor(np.union1d(self.rnodes, flow.r),
+                                     np.union1d(self.znodes, flow.z))
+        self.integration = Basis(split, ElementVector(ElementQuad1(), dim=3), intorder=6)
+        points = split.p
+        ri = np.clip(np.searchsorted(self.rnodes, points[0], side='right')-1, 0, len(self.rnodes)-2)
+        zi = np.clip(np.searchsorted(self.znodes, points[1], side='right')-1, 0, len(self.znodes)-2)
+        fr = (points[0]-self.rnodes[ri])/(self.rnodes[ri+1]-self.rnodes[ri])
+        fz = (points[1]-self.znodes[zi])/(self.znodes[zi+1]-self.znodes[zi])
+        lookup = np.empty((len(self.znodes), len(self.rnodes)), dtype=int)
+        lookup[np.searchsorted(self.znodes, coordinates[1]),
+               np.searchsorted(self.rnodes, coordinates[0])] = np.arange(self.mesh.nvertices)
+        rows, columns, weights = [], [], []
+        for dr, dz in ((0, 0), (0, 1), (1, 0), (1, 1)):
+            nodes = lookup[zi+dz, ri+dr]
+            weight = (fr if dr else 1-fr)*(fz if dz else 1-fz)
+            rows.append(self.integration.nodal_dofs.ravel())
+            columns.append(self.velocity.nodal_dofs[:, nodes].ravel())
+            weights.append(np.tile(weight, 3))
+        self.prolongation = coo_matrix((np.concatenate(weights),
+            (np.concatenate(rows), np.concatenate(columns))),
+            shape=(self.integration.N, self.velocity.N)).tocsr()
+        self.prolongation.eliminate_zeros()
+
         @BilinearForm
         def stress(u, v, w):
             return (2*self.coefficient(self.mu, w.x)*2*np.pi*w.x[0]
@@ -78,13 +103,14 @@ class Diffusion:
             return (self.coefficient(self.conductivity, w.x)*2*np.pi*w.x[0]
                     *np.sum(u.grad*v.grad, axis=0))
 
-        self.stiffness = asm(stress, self.velocity).tocsr()
+        self.stiffness = (self.prolongation.T@asm(stress, self.integration)
+                          @self.prolongation).tocsr()
         self.thermal_stiffness = asm(conduction, self.heat).tocsr()
-        points = np.asarray(self.velocity.global_coordinates())
+        points = np.asarray(self.integration.global_coordinates())
         ri = np.searchsorted(flow.r, points[0], side='right')-1
         zi = np.searchsorted(flow.z, points[1], side='right')-1
         self.quadrature_cells = (zi*flow.nr+ri).ravel()
-        self.quadrature_weight = self.velocity.dx*2*np.pi*points[0]
+        self.quadrature_weight = self.integration.dx*2*np.pi*points[0]
         self.quadrature_mu = self.coefficient(mu, points)
 
     @staticmethod
@@ -103,8 +129,8 @@ class Diffusion:
         return x
 
     def dissipation_cells(self, x):
-        field = self.velocity.interpolate(x)
-        radius = self.velocity.global_coordinates()[0]
+        field = self.integration.interpolate(self.prolongation@x)
+        radius = self.integration.global_coordinates()[0]
         e = strains(field, radius)
         density = 2*self.quadrature_mu*deviatoric_product(e, e)
         return np.bincount(self.quadrature_cells,

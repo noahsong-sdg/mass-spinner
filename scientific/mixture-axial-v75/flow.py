@@ -1,6 +1,6 @@
 """Conservative axisymmetric binary monatomic Euler flow with swirl.
 
-Limited primitive MUSCL/Rusanov face fluxes and SSPRK2, with reflecting closed walls. Cell state is
+Limited primitive MUSCL/HLLC face fluxes and SSPRK2, with reflecting closed walls. Cell state is
 integrated [mass, radial momentum, axial momentum, angular momentum, total
 energy, species-1 mass]. Total energy includes meridional and swirl kinetic
 energy. This is an inviscid meridional operator, not a complete Navier–Stokes
@@ -131,7 +131,7 @@ class Flow:
         for axis, normal, area in ((2, 1, self.radial_area), (1, 2, self.axial_area)):
             pair = self._face_states(p, axis)
             radius2 = self.r[None, :]**2 if axis == 2 else self.mean_r2[None, :]
-            states, fluxes, speeds = [], [], []
+            states, fluxes, velocities, sounds, pressures = [], [], [], [], []
             for rho, pressure, ur, uz, omega, y in pair:
                 if np.any(rho <= 0) or np.any(pressure <= 0) or np.any(y < 0) or np.any(y > 1):
                     raise ValueError('Reconstructed face violates density/pressure/species domain')
@@ -143,8 +143,10 @@ class Flow:
                 flux[4] += pressure*velocity
                 states.append(state)
                 fluxes.append(flux)
-                speeds.append(abs(velocity)+np.sqrt(GAMMA*pressure/rho))
-            flux = .5*(fluxes[0]+fluxes[1])-.5*np.maximum(*speeds)*(states[1]-states[0])
+                velocities.append(velocity)
+                sounds.append(np.sqrt(GAMMA*pressure/rho))
+                pressures.append(pressure)
+            flux = self._hllc(states, fluxes, velocities, sounds, pressures, normal)
             # L and species travel with the same mass flux, using reconstructed
             # specific values at the SAME face radius. No artificial r² jump.
             for component in (3, 5):
@@ -152,6 +154,37 @@ class Flow:
                     states[0][component]/states[0][0], states[1][component]/states[1][0])
             faces.append(flux*area)
         return faces
+
+    @staticmethod
+    def _hllc(states, fluxes, velocities, sounds, pressures, normal):
+        """Toro HLLC contact/shear resolution with Davis acoustic bounds.
+
+        Same star-state construction as Clawpack's euler_hllc_1D, extended
+        to tangential momentum, face-specific angular momentum and species.
+        Unlike LLF, a stationary contact cannot diffuse mass or swirl energy.
+        """
+        left, right = states
+        ul, ur = velocities
+        pl, pr = pressures
+        # Davis endpoint bounds need no azimuthal Roe average or axis division.
+        sl = np.minimum(ul-sounds[0], ur-sounds[1])
+        sr = np.maximum(ul+sounds[0], ur+sounds[1])
+        contact = (pr-pl+left[0]*ul*(sl-ul)-right[0]*ur*(sr-ur)) / (
+            left[0]*(sl-ul)-right[0]*(sr-ur))
+        stars = []
+        for state, u, p, speed in zip(states, velocities, pressures, (sl, sr)):
+            density = state[0]*(speed-u)/(speed-contact)
+            star = state*(density/state[0])
+            star[normal] = density*contact
+            star[4] = density*(state[4]/state[0]+(contact-u)*(
+                contact+p/(state[0]*(speed-u))))
+            pressure_star = p+state[0]*(speed-u)*(contact-u)
+            star_flux = star*contact
+            star_flux[normal] += pressure_star
+            star_flux[4] += pressure_star*contact
+            stars.append(star_flux)
+        return np.where(sl >= 0, fluxes[0], np.where(sr <= 0, fluxes[1],
+            np.where(contact >= 0, stars[0], stars[1])))
 
     def fluxes(self, q):
         return self._fluxes(q, self.primitive(q))

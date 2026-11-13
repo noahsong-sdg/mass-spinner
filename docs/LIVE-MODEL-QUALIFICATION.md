@@ -111,3 +111,7 @@ angular solution does not change live-model or experimental qualification.
 The [coupled finite-contact release](../COUPLED-FLOW-V99.md) retains meridional
 momentum and thermal transport. Its spatial and experimental screens fail;
 it is research evidence and has not replaced the live equations.
+
+The [V100 spatial repairs](../SPATIAL-FLOW-V100.md) correct contact/shear flux
+diffusion and misplaced local viscous heating. Ten spatial screens and the
+experimental comparison still fail; these fixes do not qualify a live adoption.

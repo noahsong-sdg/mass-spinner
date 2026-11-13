@@ -49,6 +49,37 @@ class DiffusionControls(unittest.TestCase):
         expected = self.mu*(a*a+b*b)*np.pi*self.f.r[-1]**4*self.f.z[-1]/2
         self.assertAlmostEqual(np.sum(self.d.dissipation_cells(x))/expected, 1., places=12)
 
+    def test_graded_cells_receive_exact_linear_omega_heat(self):
+        # Constitutive manufactured field, including nonzero boundary traces.
+        # A correct global integral alone cannot detect misplaced local heat.
+        f = Flow([0., .0008, .003, .014, .04, .06],
+                 [0., .0004, .007, .032, .08, .14], [M_AR, M_AR])
+        d = Diffusion(f, self.mu)
+        a, b = 2., 3.
+        x = np.zeros(d.velocity.N)
+        r, z = d.mesh.p
+        x[d.velocity.nodal_dofs[2]] = a*r+b*z
+        actual = d.dissipation_cells(x).reshape(f.nz, f.nr)
+        expected = (self.mu*(a*a+b*b)*np.pi/2
+                    *np.diff(f.z)[:, None]*np.diff(f.r**4)[None, :])
+        np.testing.assert_allclose(actual, expected, rtol=2e-12, atol=0.)
+
+    def test_graded_hoop_strain_heat_matches_stiffness_work(self):
+        # Q1 ur/r has rational integrands off-axis. Dissipation and stiffness
+        # must use the same quadrature, including when FV faces split elements.
+        f = Flow([0., .0008, .003, .014, .04, .06],
+                 [0., .0004, .007, .032, .08, .14], [M_AR, M_AR])
+        d = Diffusion(f, self.mu)
+        r, z = d.mesh.p
+        x = np.zeros(d.velocity.N)
+        x[d.velocity.nodal_dofs[0]] = r*(.06-r)*(1+z/.14)
+        x[d.velocity.nodal_dofs[1]] = z*(.14-z)*(1+r/.06)
+        heat = d.dissipation_cells(x)
+        self.assertTrue(np.all(heat >= 0))
+        work = float(x@(d.stiffness@x))
+        self.assertGreater(work, 0.)
+        self.assertAlmostEqual(float(heat.sum())/work, 1., places=12)
+
     def test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace(self):
         k = self.d.stiffness
         self.assertLess(np.max(abs((k-k.T).data), initial=0.), 1e-15)
