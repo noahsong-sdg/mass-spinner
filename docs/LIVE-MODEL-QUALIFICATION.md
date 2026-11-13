@@ -107,3 +107,7 @@ throughput, target physics or the complete fusion fuel cycle.
 The [non-rigid argon reference](../NONRIGID-FLOW-V98.md) now independently
 cross-checks steady spatial charge/torsional-flow numerics. Its conditional
 angular solution does not change live-model or experimental qualification.
+
+The [coupled finite-contact release](../COUPLED-FLOW-V99.md) retains meridional
+momentum and thermal transport. Its spatial and experimental screens fail;
+it is research evidence and has not replaced the live equations.
