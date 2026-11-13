@@ -11,16 +11,16 @@ import audit99
 import optics99
 
 
-def audit_sources():
-    baseline = 'scientific/'+campaign100.old.SOURCE_FILES[-1]
+def audit_sources(campaign=campaign100):
+    baseline = 'scientific/'+campaign.old.SOURCE_FILES[-1]
     # The legacy auditor identifies its baseline by the final inventory entry.
-    return tuple('scientific/'+p for p in campaign100.FILES
+    return tuple('scientific/'+p for p in campaign.FILES
                  if 'scientific/'+p != baseline)+(baseline,)
 
 
-def evaluate(directory, producer):
-    audit99.SOURCES = audit_sources()
-    audit = audit99.audit(directory/'predictions.json', producer, 'cflBound')
+def evaluate(directory, producer, campaign=campaign100, expected_edges=None):
+    audit99.SOURCES = audit_sources(campaign)
+    audit = audit99.audit(directory/'predictions.json', producer, 'cflBound', expected_edges)
     with (directory/'audit.json').open('x') as stream:
         json.dump(audit, stream, indent=2, allow_nan=False)
     states = independent100.load(directory/'predictions.json')

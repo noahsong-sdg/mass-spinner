@@ -86,7 +86,7 @@ def metrics(a, b, ti, order):
     return result
 
 
-def audit(path, root=ROOT, cfl_field='actualCfl'):
+def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
     path, root = Path(path).resolve(), Path(root).resolve()
     require(cfl_field in ('actualCfl', 'cflBound'), 'Select explicit configured-CFL metadata schema')
     raw = path.read_bytes()
@@ -109,7 +109,9 @@ def audit(path, root=ROOT, cfl_field='actualCfl'):
     for key, case in cases.items():
         n, cfl = key
         name = str(key)
-        require(type(n) is int and case['nr'] == 16*n and case['nz'] == 24*n and case['maxDtS'] == 1e-7 and case['anodeCenterM'] == .07, 'Job geometry/clock drift')
+        require(type(n) is int, 'Integer refinement required')
+        expected_mesh = edges(n) if expected_edges is None else expected_edges(n)
+        require(case['nr'] == len(expected_mesh[0])-1 and case['nz'] == len(expected_mesh[1])-1 and case['maxDtS'] == 1e-7 and case['anodeCenterM'] == .07, 'Job geometry/clock drift')
         if case['completed'] is not True:
             gate('completion', name, None, 1.)
             continue
@@ -122,7 +124,7 @@ def audit(path, root=ROOT, cfl_field='actualCfl'):
         require(sha(payload) == p['rawSHA256'], 'Raw field seal mismatch')
         state = json.loads(payload)
         r, z = (np.asarray(state[k], dtype=float) for k in ('radialEdgesM', 'axialEdgesM'))
-        for saved, expected in zip((r, z), edges(n)):
+        for saved, expected in zip((r, z), expected_mesh):
             require(saved.shape == expected.shape and np.isfinite(saved).all() and
                 np.allclose(saved, expected, rtol=0, atol=1e-15), 'Changed nested mesh')
         for flag, expected in dict(conditionalRelease=True, thermalSteadyState=False,
