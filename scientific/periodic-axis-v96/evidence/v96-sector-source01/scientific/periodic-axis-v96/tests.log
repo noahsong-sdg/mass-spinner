@@ -1,0 +1,15 @@
+test_candidate_preserves_rigid_rotation_gradient (__main__.SectorControls.test_candidate_preserves_rigid_rotation_gradient) ... FAIL
+test_prescribed_faces_cannot_drive_decay (__main__.SectorControls.test_prescribed_faces_cannot_drive_decay) ... ok
+
+======================================================================
+FAIL: test_candidate_preserves_rigid_rotation_gradient (__main__.SectorControls.test_candidate_preserves_rigid_rotation_gradient)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v96-sector-source01/scientific/periodic-axis-v96/test96.py", line 11, in test_candidate_preserves_rigid_rotation_gradient
+    self.assertLess(gradient_metrics(gradient(p,8,16,0.),8,16)['maxStrainOverOmega'],1e-6)
+AssertionError: 0.008067123875874976 not less than 1e-06
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.279s
+
+FAILED (failures=1)

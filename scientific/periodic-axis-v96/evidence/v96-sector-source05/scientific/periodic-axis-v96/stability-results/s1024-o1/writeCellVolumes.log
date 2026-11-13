@@ -1,0 +1,36 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : foamPostProcess -case stability-results/s1024-o1 -func writeCellVolumes -time 0
+Date   : Nov 13 2026
+Time   : 12:14:16
+Host   : "safe-dev-run-1e116b903d744029bbe396f9686d1d26"
+PID    : 24
+I/O    : uncollated
+Case   : stability-results/s1024-o1
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+Constructing functionObjects from system/functions
+    Selecting writeCellVolumes with name writeCellVolumes
+Time = 0s
+
+Reading fields:
+
+Executing functionObjects
+    Writing cell-volumes field Vc to 0
+
+End
+

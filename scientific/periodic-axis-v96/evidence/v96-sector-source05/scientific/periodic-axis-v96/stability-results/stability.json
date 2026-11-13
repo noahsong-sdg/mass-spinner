@@ -1,0 +1,614 @@
+{
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/coupled-openfoam-v90/reference90.py": "2422832513d13f50cf5c9c9aa8bf66dcd693155cf743641f1b49139d73131657",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/endwall-v91/candidate91.py": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe",
+    "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "scientific/graded-endwall-v93/PROTOCOL.md": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482",
+    "scientific/graded-endwall-v93/score93.py": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed",
+    "scientific/graded-endwall-v93/study93.py": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2",
+    "scientific/graded-endwall-v93/test93.py": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/periodic-axis-v96/PROTOCOL.md": "10bb94dbe13ccac7f25ffe295158aef5ccd22723fc4e05022286c76261dacbe2",
+    "scientific/periodic-axis-v96/STABILITY.md": "12ab401b4c4b911764f72ebc9900698ab088ae6509e2dd5ab577110497c019e4",
+    "scientific/periodic-axis-v96/score96.py": "74ea3678403d7ea26660fa95b3f8801f594507bf89d2a579e4e125f8944a1f0d",
+    "scientific/periodic-axis-v96/sector96.py": "abd4e51d1298e27a53d99c267bd4c3389f0720cc9276f790b4da18ac2a9f5d0b",
+    "scientific/periodic-axis-v96/stability96.py": "7d2b1bc3e53473d971bd839516f47e0ee9472a61c5f0de21bfa8e22ba0216112",
+    "scientific/periodic-axis-v96/study96.py": "2d0fec5beede8a1cee41ecd3bf8f44e0d8791b35decae649168463aa06e8d866",
+    "scientific/periodic-axis-v96/test96.py": "574eca3461eed44561ad37a42a4d62d1c967ec01b156871828a1a085400c0496",
+    "scientific/radial-axis-v95/PROTOCOL.md": "570bd916c7da50d094d383f12bb62ddeff5e4c83acd6f6cd52f86232e2cb2fce",
+    "scientific/radial-axis-v95/score95.py": "7539d5daf39680194f614361f88f4a9b6e77e215a8f0be4857555ea059b04b60",
+    "scientific/radial-axis-v95/study95.py": "e3bb52b4b970b1936e3a17ddb029d28c48d92e643cc1c0aae69439f900d3ec3e",
+    "scientific/radial-axis-v95/test95.py": "534c69c3ba742cd09e06fb5bf4127eed65245cbea80bffc8e0ed310284626b51",
+    "scientific/swirl-control-v94/PROTOCOL.md": "589299071007e858c51dfb674c1ea914ba8d9d5842a60c177b06961311472251",
+    "scientific/swirl-control-v94/control94.py": "56e66645585fce21a22a06b3ddba04537ba36ad1af3673d74344c990aaf8423a",
+    "scientific/swirl-control-v94/score94.py": "5e151c31a28e9e13762778777638db0e8c7a8c0937ad502f2441212a4f1f1da0",
+    "scientific/swirl-control-v94/test94.py": "9dca01805a54bdda7e67d0da6d991fec7999eb55f03afde89ca4370c9b8da05c",
+    "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94",
+    "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b",
+    "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150",
+    "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83",
+    "references.json": "93e023a3b93e0945801565205dca691798acb603a06c0a53b3bb24f7e5b487e7"
+  },
+  "nativeSHA256": {
+    "applications/modules/incompressibleFluid/momentumPredictor.C": "7921c5f86dcffc46fc7849ac9ec6adfe1c9c261041788406469b545617119d59",
+    "applications/modules/incompressibleFluid/correctPressure.C": "1e6b6d38e1f2730368b5de45a4fc76017b06284748349149da41c90c6d84efb2",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libincompressibleFluidSolver.so": "f5a9c9e086eaecf4cb1b09eec0268efe4e1f17d274e4f822e5184c38126291d4",
+    "src/finiteVolume/fields/fvPatchFields/derived/rotatingWallVelocity/rotatingWallVelocityFvPatchVectorField.C": "079492638cd756c9a861545c0ca9b560136d7f139d4bb91b2d29560ae5fd113a",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresGrad.C": "536d54578d1f58fc1b01e475f11c12c6b3fa46223c0e3e64b67a4c523bd76a91",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfiniteVolume.so": "c1c4033147b56e9ab674b02f7321d8aee6ed3b177abd4fcdca72d4890a9aa8a6",
+    "src/finiteVolume/fields/fvPatchFields/constraint/wedge/wedgeFvPatchField.C": "4322d0221e3ba6d3d36238f800b0f13e7eafdbcbab95fdd26faaa8010e0e16b6",
+    "src/finiteVolume/fvMesh/fvPatches/constraint/cyclic/cyclicFvPatch.C": "57cb17aa159291bb07b2125a8eef8a4dfae0c653fe0336b5011d55693b2087c7",
+    "src/finiteVolume/fields/fvPatchFields/constraint/cyclic/cyclicFvPatchField.C": "9396643a3d64cfbe4e5ab7f60e77a40b5d790c5d59664f2337755ddc313f418c",
+    "src/finiteVolume/finiteVolume/gradSchemes/gaussGrad/gaussGrad.C": "e450cdc29ee754dab9b64e43119f48e8420664336a8e9ffc82ef516bb519b857",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresVectors.C": "2e4eea40a692dd00ec6a609863f19a7b4b139c3e8320501a0ea731a16458b80b"
+  },
+  "cases": [
+    {
+      "label": "s512-o1",
+      "steps": 512,
+      "outer": 1,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s512-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.02280954200000007
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s512-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.012194209000000011
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s512-o1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.056949417
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s512-o1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.034674208999999956
+        },
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s512-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.015549541999999916
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s512-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011398790999999964
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s512-o1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03161362499999998
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s512-o1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.030419540999999994
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s512-o1",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03203779100000004
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "stability-results/s512-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 11.618617255999999
+        }
+      ],
+      "native": {
+        "peakMeridionalOverAmplitude": 0.00587605205195981,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "frames": [
+        {
+          "timeS": 0.0,
+          "maxStrainOverOmega": 3.104332885704438e-13,
+          "rmsStrainOverOmega": 7.106003864377007e-14,
+          "axisStrainOverOmega": 3.104332885704438e-13,
+          "maxGradientErrorOverOmega": 3.85167795346981e-13,
+          "maxSwirlChangeOverA": 0.0
+        },
+        {
+          "timeS": 5e-06,
+          "maxStrainOverOmega": 4.113337086115198e-07,
+          "rmsStrainOverOmega": 3.959365042453306e-08,
+          "axisStrainOverOmega": 4.2308829762264374e-10,
+          "maxGradientErrorOverOmega": 5.82454465157694e-07,
+          "maxSwirlChangeOverA": 3.124214154925335e-14
+        },
+        {
+          "timeS": 1e-05,
+          "maxStrainOverOmega": 4.5916422157083725e-06,
+          "rmsStrainOverOmega": 7.586190947929915e-08,
+          "axisStrainOverOmega": 4.5916422157083725e-06,
+          "maxGradientErrorOverOmega": 5.332513904325817e-06,
+          "maxSwirlChangeOverA": 5.5922006791357595e-14
+        },
+        {
+          "timeS": 2e-05,
+          "maxStrainOverOmega": 0.35666540499629895,
+          "rmsStrainOverOmega": 0.003512370917589076,
+          "axisStrainOverOmega": 0.35666540499629895,
+          "maxGradientErrorOverOmega": 0.4129553795028282,
+          "maxSwirlChangeOverA": 2.5566129189020847e-13
+        }
+      ],
+      "iterationLimitOccurrences": 1024
+    },
+    {
+      "label": "s1024-o1",
+      "steps": 1024,
+      "outer": 1,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s1024-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01421029199999957
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s1024-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011337292000000332
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s1024-o1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03168233400000098
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s1024-o1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.030400042000000127
+        },
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s1024-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.014474333000000783
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s1024-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01119225000000057
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s1024-o1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.030991832999999858
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s1024-o1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.030221292000000233
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s1024-o1",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03145491699999958
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "stability-results/s1024-o1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 17.583658675000002
+        }
+      ],
+      "native": {
+        "peakMeridionalOverAmplitude": 2.002176545433668e-08,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "frames": [
+        {
+          "timeS": 0.0,
+          "maxStrainOverOmega": 3.104332885704438e-13,
+          "rmsStrainOverOmega": 7.106003864377007e-14,
+          "axisStrainOverOmega": 3.104332885704438e-13,
+          "maxGradientErrorOverOmega": 3.85167795346981e-13,
+          "maxSwirlChangeOverA": 0.0
+        },
+        {
+          "timeS": 5e-06,
+          "maxStrainOverOmega": 4.057718663446893e-07,
+          "rmsStrainOverOmega": 3.648204144764201e-08,
+          "axisStrainOverOmega": 3.9942319095620284e-10,
+          "maxGradientErrorOverOmega": 5.746413346084202e-07,
+          "maxSwirlChangeOverA": 7.703541751870688e-14
+        },
+        {
+          "timeS": 1e-05,
+          "maxStrainOverOmega": 5.152581828040679e-07,
+          "rmsStrainOverOmega": 5.3897361800305033e-08,
+          "axisStrainOverOmega": 4.4732489560571634e-10,
+          "maxGradientErrorOverOmega": 7.3036668106953e-07,
+          "maxSwirlChangeOverA": 1.4650995146613328e-13
+        },
+        {
+          "timeS": 2e-05,
+          "maxStrainOverOmega": 6.042322421562527e-07,
+          "rmsStrainOverOmega": 7.369874053932662e-08,
+          "axisStrainOverOmega": 5.832562966322692e-10,
+          "maxGradientErrorOverOmega": 8.569236967398156e-07,
+          "maxSwirlChangeOverA": 2.7233446674668787e-13
+        }
+      ],
+      "iterationLimitOccurrences": 2048
+    },
+    {
+      "label": "s256-o2",
+      "steps": 256,
+      "outer": 2,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s256-o2"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01638499999999965
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s256-o2"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011519082999999597
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o2",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03168587500000086
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o2",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.031105917000001426
+        },
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s256-o2"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.014802916000000721
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s256-o2"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011230666999999528
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o2",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03108879200000203
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o2",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.029939083000002142
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o2",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03110316599999763
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "stability-results/s256-o2"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 22.495919260000004
+        }
+      ],
+      "completed": false,
+      "error": "ValueError: Field count mismatch: stability-results/s256-o2/5.000000000000008e-06/U",
+      "iterationLimitOccurrences": 3234
+    },
+    {
+      "label": "s256-o4",
+      "steps": 256,
+      "outer": 4,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s256-o4"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01364575000000201
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s256-o4"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.01132141699999778
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o4",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03151020800000026
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o4",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03059074999999467
+        },
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "stability-results/s256-o4"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.014968374999995149
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "stability-results/s256-o4"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011332708999994168
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o4",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.033431207999996104
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o4",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.031519249999995225
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "stability-results/s256-o4",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03257675000000404
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "stability-results/s256-o4"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 46.298032189000004
+        }
+      ],
+      "completed": false,
+      "error": "ValueError: Field count mismatch: stability-results/s256-o4/5.000000000000008e-06/U",
+      "iterationLimitOccurrences": 6776
+    }
+  ]
+}

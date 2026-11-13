@@ -1,0 +1,249 @@
+{
+  "model": "periodic-axis-v96",
+  "candidate": "cyclic",
+  "scheme": "leastSquares",
+  "timesS": [
+    0.0,
+    5e-06,
+    1e-05,
+    2e-05
+  ],
+  "axialGrade": 4.0,
+  "halfAngleDeg": 0.5,
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/coupled-openfoam-v90/reference90.py": "2422832513d13f50cf5c9c9aa8bf66dcd693155cf743641f1b49139d73131657",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/endwall-v91/candidate91.py": "a222c378e4f89d55a1c5c1c3778d861a565ab307ea03ece966fe453a519816fe",
+    "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "scientific/graded-endwall-v93/PROTOCOL.md": "2a412912572e31f8bf52a5d9adc4edfd3c653fa4e044e62d5c125ba6bb912482",
+    "scientific/graded-endwall-v93/score93.py": "a0c4406e0cf3b5c3bdf5f1937f057012dacf8a04b3fb934f433567db6f9205ed",
+    "scientific/graded-endwall-v93/study93.py": "4cfa70689427428686fb4d3aa900fa0334ed091fb750232b9c918a354e7258c2",
+    "scientific/graded-endwall-v93/test93.py": "1ac76f4bccd8d5d57e13c7eb870f10c69ee443930d9b2044d62dbeddd60c54d7",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/periodic-axis-v96/PROTOCOL.md": "10bb94dbe13ccac7f25ffe295158aef5ccd22723fc4e05022286c76261dacbe2",
+    "scientific/periodic-axis-v96/score96.py": "74ea3678403d7ea26660fa95b3f8801f594507bf89d2a579e4e125f8944a1f0d",
+    "scientific/periodic-axis-v96/sector96.py": "abd4e51d1298e27a53d99c267bd4c3389f0720cc9276f790b4da18ac2a9f5d0b",
+    "scientific/periodic-axis-v96/study96.py": "2d0fec5beede8a1cee41ecd3bf8f44e0d8791b35decae649168463aa06e8d866",
+    "scientific/periodic-axis-v96/test96.py": "574eca3461eed44561ad37a42a4d62d1c967ec01b156871828a1a085400c0496",
+    "scientific/radial-axis-v95/PROTOCOL.md": "570bd916c7da50d094d383f12bb62ddeff5e4c83acd6f6cd52f86232e2cb2fce",
+    "scientific/radial-axis-v95/score95.py": "7539d5daf39680194f614361f88f4a9b6e77e215a8f0be4857555ea059b04b60",
+    "scientific/radial-axis-v95/study95.py": "e3bb52b4b970b1936e3a17ddb029d28c48d92e643cc1c0aae69439f900d3ec3e",
+    "scientific/radial-axis-v95/test95.py": "534c69c3ba742cd09e06fb5bf4127eed65245cbea80bffc8e0ed310284626b51",
+    "scientific/swirl-control-v94/PROTOCOL.md": "589299071007e858c51dfb674c1ea914ba8d9d5842a60c177b06961311472251",
+    "scientific/swirl-control-v94/control94.py": "56e66645585fce21a22a06b3ddba04537ba36ad1af3673d74344c990aaf8423a",
+    "scientific/swirl-control-v94/score94.py": "5e151c31a28e9e13762778777638db0e8c7a8c0937ad502f2441212a4f1f1da0",
+    "scientific/swirl-control-v94/test94.py": "9dca01805a54bdda7e67d0da6d991fec7999eb55f03afde89ca4370c9b8da05c",
+    "scientific/wall-transient-v92/PROTOCOL.md": "32e5f7d35b2d651b44f8b194c8e50d8e837260d2db7dd825b3ac9143d6687b94",
+    "scientific/wall-transient-v92/score92.py": "f644aec99de56d57e72a8324bc7b133a6d8a72350935cad0f2e367e7c735189b",
+    "scientific/wall-transient-v92/study92.py": "b6f896111d0283bbdcddf19a94aa510d7fbcde3cb41eb08671033b81fc12e150",
+    "scientific/wall-transient-v92/test92.py": "732dc81869d6a3243736129e43d34c4b34c0f691d76658db0446d68075dc5a83",
+    "references.json": "93e023a3b93e0945801565205dca691798acb603a06c0a53b3bb24f7e5b487e7"
+  },
+  "referenceSHA256": {
+    "/work/project/v91-endwall-source04/transfer.json": "d99d4343a0cbd6a4d550b6cc3b50756d75ea1352a8bfcaedb00798858fa79197",
+    "/work/project/v91-endwall-source04/scientific/endwall-v91/candidate-results/extension-results/predictions.json": "47f2d0c922113935900fff23f4455af5d5bc5b4d15afde943b7c821a0838ccc9",
+    "/work/project/v91-endwall-source04/scientific/endwall-v91/candidate-results/fine-results/predictions.json": "cfafd7bc3d70767df5e478191789aee80f465b17d6f694e38e1ba8c41cbaaa9f",
+    "/work/project/v92-wall-source02/transfer.json": "e1b8ba364e138a7a6b62003543adf178b81075fb863ace12483f0818a6b7392c",
+    "/work/project/v92-wall-source02/scientific/wall-transient-v92/study-results/predictions.json": "7200246da3fcf59e5514cc8d4b69efe18f1f1d0cdd8e54d2353b58d69a6b6575",
+    "/work/project/v93-graded-source02/transfer.json": "5be21930112ddf8ec88dac94f79393fadba56708ef5b302116ce24ed83df482c",
+    "/work/project/v93-graded-source02/scientific/graded-endwall-v93/study-results/predictions.json": "057237ef1b504d1d65fcaa8910abea4cacf94e15779fe207284afdd29f98707a",
+    "/work/project/v93-graded-source02/scientific/graded-endwall-v93/score-results/audit.json": "f9fe2b69d55e02698b7708fe0f8f60793836e3a35f32054ce24bd82ae64a80e6",
+    "/work/project/v94-swirl-source01/transfer.json": "a9b2b976a2e425d450f48e72935145bab19bf7ffd6ddd8075ecc709505422d4a",
+    "/work/project/v94-swirl-source01/scientific/swirl-control-v94/study-results/predictions.json": "2cb578dd80668b41a0b68a872d955ffb889311106b9463d1c596a3689f7a929f",
+    "/work/project/v94-swirl-source01/scientific/swirl-control-v94/score-results/audit.json": "6099c6ea646a782c784495e81da506f7eed241bca5df30af693697f5f9e6c0c3",
+    "/work/project/v95-axis-source03/transfer.json": "22b2bcd85f3350aba3c0071d86c72d8d614af21aa39190dfe04ce79380bd51a5",
+    "/work/project/v95-axis-source03/scientific/radial-axis-v95/study-results/predictions.json": "cd3c8113633f8d81e0be4760afe604405626436be0e77926c125896e8128cdcc",
+    "/work/project/v95-axis-source03/scientific/radial-axis-v95/score-results/audit.json": "fcbe755ac210946145a6b6884438fa61b5a480c145d1991ab49f81e3609fede1"
+  },
+  "nativeSHA256": {
+    "applications/modules/incompressibleFluid/momentumPredictor.C": "7921c5f86dcffc46fc7849ac9ec6adfe1c9c261041788406469b545617119d59",
+    "applications/modules/incompressibleFluid/correctPressure.C": "1e6b6d38e1f2730368b5de45a4fc76017b06284748349149da41c90c6d84efb2",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libincompressibleFluidSolver.so": "f5a9c9e086eaecf4cb1b09eec0268efe4e1f17d274e4f822e5184c38126291d4",
+    "src/finiteVolume/fields/fvPatchFields/derived/rotatingWallVelocity/rotatingWallVelocityFvPatchVectorField.C": "079492638cd756c9a861545c0ca9b560136d7f139d4bb91b2d29560ae5fd113a",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresGrad.C": "536d54578d1f58fc1b01e475f11c12c6b3fa46223c0e3e64b67a4c523bd76a91",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfiniteVolume.so": "c1c4033147b56e9ab674b02f7321d8aee6ed3b177abd4fcdca72d4890a9aa8a6",
+    "src/finiteVolume/fields/fvPatchFields/constraint/wedge/wedgeFvPatchField.C": "4322d0221e3ba6d3d36238f800b0f13e7eafdbcbab95fdd26faaa8010e0e16b6",
+    "src/finiteVolume/fvMesh/fvPatches/constraint/cyclic/cyclicFvPatch.C": "57cb17aa159291bb07b2125a8eef8a4dfae0c653fe0336b5011d55693b2087c7",
+    "src/finiteVolume/fields/fvPatchFields/constraint/cyclic/cyclicFvPatchField.C": "9396643a3d64cfbe4e5ab7f60e77a40b5d790c5d59664f2337755ddc313f418c",
+    "src/finiteVolume/finiteVolume/gradSchemes/gaussGrad/gaussGrad.C": "e450cdc29ee754dab9b64e43119f48e8420664336a8e9ffc82ef516bb519b857",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresVectors.C": "2e4eea40a692dd00ec6a609863f19a7b4b139c3e8320501a0ea731a16458b80b"
+  },
+  "runtime": {
+    "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "skfem": "12.0.2"
+  },
+  "cases": [
+    {
+      "label": "rigid-r16-z32-s256",
+      "kind": "rigid",
+      "n": 16,
+      "nz": 32,
+      "steps": 256,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r16-z32-s256"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.024172083000000066
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r16-z32-s256"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.012177290999999979
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-s256",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.056988457999999964
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-s256",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.033984000000000014
+        },
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "study-results/rigid-r16-z32-s256"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.015106417000000039
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "study-results/rigid-r16-z32-s256"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.011312916000000062
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-s256",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03296770800000004
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-s256",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.03066116699999999
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "study-results/rigid-r16-z32-s256",
+            "-func",
+            "grad(U)",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.031926457999999935
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "study-results/rigid-r16-z32-s256"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 10.255941838
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "2ce717d2b4300f143f721b2a08a20bd9a8b9b5a62cb568628de4db3e69385c8d",
+        "check-mesh.log": "8a87408acea37c9660efe705c5f80bae78347b92cbb34b035195a90f23de0c9e",
+        "writeCellCentres.log": "7d96ac85261c02485febd9da0dfcd833b5fad1757f82fa1ff4db26a0ce3ae391",
+        "writeCellVolumes.log": "b5d02ab99800f83e08c7f68a3da523658fd71114eb7978e954ddeb3099cd903d",
+        "sector-mesh.log": "6fbae17aeab9f73efb3ecf9c51142987ae2d05aabc7be4560dc65965770e6a52",
+        "sector-check.log": "0095f1c3c8635ce0a5edbef047de5c1e715316506a4d2bd1b79e1160a612777a",
+        "sector-centres.log": "34296121801b90ec4dd6f6c4c35e3934867d90b13bfda378f5fd5bbd7423e3e5",
+        "sector-volumes.log": "01a81b0c7f1884eb896b9fd94b03c27d6a434f9b07a7cc8340e5508725d1e679",
+        "initial-gradient.log": "e38c28dbf67ff3215ec064ea3ab37ff8c710162da50601b14580476179159951",
+        "system/blockMeshDict": "a94f4adf49255e21fbe9a4b5a70ed431f6f507ea5d2f8ae39ed3c8b1c16aafd8",
+        "system/controlDict": "63eb906f7542148759eafa76e9f43c754ad97756efeb1f4342ea96a939f03efb",
+        "system/fvSchemes": "c5f5f03949fc3147e4a426037032b568d5d274e989aa5c33b90604435011588f",
+        "system/fvSolution": "87ef5bbb762e2188eee7ae8476ea4c40816ea273af9c35d361c53d395bbf20ae",
+        "constant/physicalProperties": "549ed7f82cf44946bd90985d0a02635331d7cfc88e562b164914e03dfb658e36",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117",
+        "constant/polyMesh/points": "4d89be4b92c938ff94042d51ddd52b10f3068704227093e9bdd795d298215054",
+        "constant/polyMesh/neighbour": "9c148afdfe55ac09f96acb58d5bae13581126ee99a78c1880a4cc9d32f4f7d58",
+        "constant/polyMesh/faces": "3167404a11589630d25cb2ee5719914c08f8c291f92eb83c4b52ee170b240e3a",
+        "constant/polyMesh/owner": "7fa7bf7a865278d2053ee6175ab8185f921b22e17772c6ac23fe94d24b5f59cc",
+        "constant/polyMesh/boundary": "038d1cca2288bdf08aed42e14d2ac8b797584d8fea294427cade6af522461aa4",
+        "0/T": "6c0bc0dcc54ddb6cbad121fcfac224caac0fa636dd50e950faeef8e037b39a1e",
+        "0/p": "702374ca7d73f69dd8570ad690227d0d0166aa9e2c99cdbeff44d6d698abe581",
+        "0/rho": "0b34ab16a1c94b0166a58c72e35c604356b2d3f66013edc3631fe7e5d6a3509f",
+        "0/U": "954415268c706e968b06b9c4852432246a045dc2e0a799aee35a9ceb64ce2fc1",
+        "0/C": "e4f23dceee81cedb0aebae99b7228f4bd4006014ecef6014ccf9a8d11270d437",
+        "0/Ccx": "b151fc18fcd34e4ef8a81a6512d9ee93305f7a6b3ad1f5c44753171593074ce8",
+        "0/Ccy": "13c6d83015507c4bd6f6f06c0415d32abaebbb262a225b5362204404fdc130ff",
+        "0/Ccz": "c3ff014d4604a69a76951f078ebeed628c364c830ca330cecb6073f1764d6d94",
+        "0/Vc": "d3600b657652b47474b16bc53e0f4cc2b6ffef75b1d23888d56f573c92d638e6",
+        "0/grad(U)": "a2fd26f966e18e125a5942ecbcabd894a3a8798cbf3105cd42c92a08c2734758"
+      },
+      "completed": false,
+      "error": "ValueError: Field count mismatch: study-results/rigid-r16-z32-s256/1.000000000000002e-05/U",
+      "wallSeconds": 10.517581380000001
+    }
+  ],
+  "coupledReleaseQualified": false,
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false
+}

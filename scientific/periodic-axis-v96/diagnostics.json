@@ -1,0 +1,380 @@
+{
+  "postHoc": true,
+  "inputSHA256": {
+    "probes": "99c98daae536905130423bbe9b99d504616d6e3c423ad1877ca1398cc9be167b",
+    "campaign": "66a439523f98fbb3327c0c3a205f6ffd752a2258cb74ced5681272d45fc052a5",
+    "stability": "2e9fc511e0582e3689515bb47d9721610d0e21a6087f410dad28c3fe43f75965"
+  },
+  "nativeSHA256": {
+    "applications/modules/incompressibleFluid/momentumPredictor.C": "7921c5f86dcffc46fc7849ac9ec6adfe1c9c261041788406469b545617119d59",
+    "applications/modules/incompressibleFluid/correctPressure.C": "1e6b6d38e1f2730368b5de45a4fc76017b06284748349149da41c90c6d84efb2",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libincompressibleFluidSolver.so": "f5a9c9e086eaecf4cb1b09eec0268efe4e1f17d274e4f822e5184c38126291d4",
+    "src/finiteVolume/fields/fvPatchFields/derived/rotatingWallVelocity/rotatingWallVelocityFvPatchVectorField.C": "079492638cd756c9a861545c0ca9b560136d7f139d4bb91b2d29560ae5fd113a",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresGrad.C": "536d54578d1f58fc1b01e475f11c12c6b3fa46223c0e3e64b67a4c523bd76a91",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfiniteVolume.so": "c1c4033147b56e9ab674b02f7321d8aee6ed3b177abd4fcdca72d4890a9aa8a6",
+    "src/finiteVolume/fields/fvPatchFields/constraint/wedge/wedgeFvPatchField.C": "4322d0221e3ba6d3d36238f800b0f13e7eafdbcbab95fdd26faaa8010e0e16b6",
+    "src/finiteVolume/fvMesh/fvPatches/constraint/cyclic/cyclicFvPatch.C": "57cb17aa159291bb07b2125a8eef8a4dfae0c653fe0336b5011d55693b2087c7",
+    "src/finiteVolume/fields/fvPatchFields/constraint/cyclic/cyclicFvPatchField.C": "9396643a3d64cfbe4e5ab7f60e77a40b5d790c5d59664f2337755ddc313f418c",
+    "src/finiteVolume/finiteVolume/gradSchemes/gaussGrad/gaussGrad.C": "e450cdc29ee754dab9b64e43119f48e8420664336a8e9ffc82ef516bb519b857",
+    "src/finiteVolume/finiteVolume/gradSchemes/leastSquaresGrad/leastSquaresVectors.C": "2e4eea40a692dd00ec6a609863f19a7b4b139c3e8320501a0ea731a16458b80b"
+  },
+  "probes": [
+    {
+      "label": "wedge-Gauss-linear-0.5",
+      "boundary": "wedge",
+      "scheme": "Gauss linear",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 0.47133272223229117,
+      "rmsStrainOverOmega": 0.03020385229822037,
+      "axisStrainOverOmega": 0.47133272223229117,
+      "maxGradientErrorOverOmega": 0.47133272223229117
+    },
+    {
+      "label": "wedge-leastSquares-0.5",
+      "boundary": "wedge",
+      "scheme": "leastSquares",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 0.008067123876413305,
+      "rmsStrainOverOmega": 0.0006864859941799834,
+      "axisStrainOverOmega": 0.008067123876413305,
+      "maxGradientErrorOverOmega": 0.011370621369015005
+    },
+    {
+      "label": "wedge-Gauss-linear-0.25",
+      "boundary": "wedge",
+      "scheme": "Gauss linear",
+      "halfAngleDeg": 0.25,
+      "completed": true,
+      "maxStrainOverOmega": 0.4713865710659145,
+      "rmsStrainOverOmega": 0.030210500212338683,
+      "axisStrainOverOmega": 0.4713865710659145,
+      "maxGradientErrorOverOmega": 0.47138657106591453
+    },
+    {
+      "label": "wedge-leastSquares-0.25",
+      "boundary": "wedge",
+      "scheme": "leastSquares",
+      "halfAngleDeg": 0.25,
+      "completed": true,
+      "maxStrainOverOmega": 0.004073164127890342,
+      "rmsStrainOverOmega": 0.00034161860260633866,
+      "axisStrainOverOmega": 0.004073164127890342,
+      "maxGradientErrorOverOmega": 0.005750812460304421
+    },
+    {
+      "label": "wedge-Gauss-linear-0.125",
+      "boundary": "wedge",
+      "scheme": "Gauss linear",
+      "halfAngleDeg": 0.125,
+      "completed": true,
+      "maxStrainOverOmega": 0.4714000333544114,
+      "rmsStrainOverOmega": 0.030212170463670262,
+      "axisStrainOverOmega": 0.4714000333544114,
+      "maxGradientErrorOverOmega": 0.4714000333544114
+    },
+    {
+      "label": "wedge-leastSquares-0.125",
+      "boundary": "wedge",
+      "scheme": "leastSquares",
+      "halfAngleDeg": 0.125,
+      "completed": true,
+      "maxStrainOverOmega": 0.0020466717010581546,
+      "rmsStrainOverOmega": 0.00017043758281617285,
+      "axisStrainOverOmega": 0.0020466717010581546,
+      "maxGradientErrorOverOmega": 0.002892052028214754
+    },
+    {
+      "label": "cyclic-Gauss-linear-0.5",
+      "boundary": "cyclic",
+      "scheme": "Gauss linear",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 0.4712609264073167,
+      "rmsStrainOverOmega": 0.030195071039444275,
+      "axisStrainOverOmega": 0.4712609264073167,
+      "maxGradientErrorOverOmega": 0.4712609264073167
+    },
+    {
+      "label": "cyclic-leastSquares-0.5",
+      "boundary": "cyclic",
+      "scheme": "leastSquares",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 3.104332885704438e-13,
+      "rmsStrainOverOmega": 7.106003864377007e-14,
+      "axisStrainOverOmega": 3.104332885704438e-13,
+      "maxGradientErrorOverOmega": 3.85167795346981e-13
+    },
+    {
+      "label": "exact-Gauss-linear-0.5",
+      "boundary": "exact",
+      "scheme": "Gauss linear",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 2.0135162996550827e-13,
+      "rmsStrainOverOmega": 1.1211027651857592e-14,
+      "axisStrainOverOmega": 2.287637797958466e-14,
+      "maxGradientErrorOverOmega": 2.4659268846504103e-13
+    },
+    {
+      "label": "exact-leastSquares-0.5",
+      "boundary": "exact",
+      "scheme": "leastSquares",
+      "halfAngleDeg": 0.5,
+      "completed": true,
+      "maxStrainOverOmega": 52.95182940319243,
+      "rmsStrainOverOmega": 3.3165561642561454,
+      "axisStrainOverOmega": 52.95182940319243,
+      "maxGradientErrorOverOmega": 74.63567092359486
+    }
+  ],
+  "stability": [
+    {
+      "label": "s512-o1",
+      "steps": 512,
+      "outer": 1,
+      "native": {
+        "peakMeridionalOverAmplitude": 0.00587605205195981,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "frames": [
+        {
+          "timeS": 0.0,
+          "maxStrainOverOmega": 3.104332885704438e-13,
+          "rmsStrainOverOmega": 7.106003864377007e-14,
+          "axisStrainOverOmega": 3.104332885704438e-13,
+          "maxGradientErrorOverOmega": 3.85167795346981e-13,
+          "maxSwirlChangeOverA": 0.0
+        },
+        {
+          "timeS": 5e-06,
+          "maxStrainOverOmega": 4.113337086115198e-07,
+          "rmsStrainOverOmega": 3.959365042453306e-08,
+          "axisStrainOverOmega": 4.2308829762264374e-10,
+          "maxGradientErrorOverOmega": 5.82454465157694e-07,
+          "maxSwirlChangeOverA": 3.124214154925335e-14
+        },
+        {
+          "timeS": 1e-05,
+          "maxStrainOverOmega": 4.5916422157083725e-06,
+          "rmsStrainOverOmega": 7.586190947929915e-08,
+          "axisStrainOverOmega": 4.5916422157083725e-06,
+          "maxGradientErrorOverOmega": 5.332513904325817e-06,
+          "maxSwirlChangeOverA": 5.5922006791357595e-14
+        },
+        {
+          "timeS": 2e-05,
+          "maxStrainOverOmega": 0.35666540499629895,
+          "rmsStrainOverOmega": 0.003512370917589076,
+          "axisStrainOverOmega": 0.35666540499629895,
+          "maxGradientErrorOverOmega": 0.4129553795028282,
+          "maxSwirlChangeOverA": 2.5566129189020847e-13
+        }
+      ],
+      "iterationLimitOccurrences": 1024
+    },
+    {
+      "label": "s1024-o1",
+      "steps": 1024,
+      "outer": 1,
+      "native": {
+        "peakMeridionalOverAmplitude": 2.002176545433668e-08,
+        "cellMapBijective": true
+      },
+      "completed": true,
+      "frames": [
+        {
+          "timeS": 0.0,
+          "maxStrainOverOmega": 3.104332885704438e-13,
+          "rmsStrainOverOmega": 7.106003864377007e-14,
+          "axisStrainOverOmega": 3.104332885704438e-13,
+          "maxGradientErrorOverOmega": 3.85167795346981e-13,
+          "maxSwirlChangeOverA": 0.0
+        },
+        {
+          "timeS": 5e-06,
+          "maxStrainOverOmega": 4.057718663446893e-07,
+          "rmsStrainOverOmega": 3.648204144764201e-08,
+          "axisStrainOverOmega": 3.9942319095620284e-10,
+          "maxGradientErrorOverOmega": 5.746413346084202e-07,
+          "maxSwirlChangeOverA": 7.703541751870688e-14
+        },
+        {
+          "timeS": 1e-05,
+          "maxStrainOverOmega": 5.152581828040679e-07,
+          "rmsStrainOverOmega": 5.3897361800305033e-08,
+          "axisStrainOverOmega": 4.4732489560571634e-10,
+          "maxGradientErrorOverOmega": 7.3036668106953e-07,
+          "maxSwirlChangeOverA": 1.4650995146613328e-13
+        },
+        {
+          "timeS": 2e-05,
+          "maxStrainOverOmega": 6.042322421562527e-07,
+          "rmsStrainOverOmega": 7.369874053932662e-08,
+          "axisStrainOverOmega": 5.832562966322692e-10,
+          "maxGradientErrorOverOmega": 8.569236967398156e-07,
+          "maxSwirlChangeOverA": 2.7233446674668787e-13
+        }
+      ],
+      "iterationLimitOccurrences": 2048
+    },
+    {
+      "label": "s256-o2",
+      "steps": 256,
+      "outer": 2,
+      "completed": false,
+      "error": "ValueError: Field count mismatch: stability-results/s256-o2/5.000000000000008e-06/U",
+      "iterationLimitOccurrences": 3234
+    },
+    {
+      "label": "s256-o4",
+      "steps": 256,
+      "outer": 4,
+      "completed": false,
+      "error": "ValueError: Field count mismatch: stability-results/s256-o4/5.000000000000008e-06/U",
+      "iterationLimitOccurrences": 6776
+    }
+  ],
+  "stabilityGates": [
+    {
+      "name": "s512-o1/completed",
+      "value": true,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/0.0/maxStrainOverOmega",
+      "value": 3.104332885704438e-13,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/0.0/maxSwirlChangeOverA",
+      "value": 0.0,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/5e-06/maxStrainOverOmega",
+      "value": 4.113337086115198e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/5e-06/maxSwirlChangeOverA",
+      "value": 3.124214154925335e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/1e-05/maxStrainOverOmega",
+      "value": 4.5916422157083725e-06,
+      "limit": 1e-06,
+      "passed": false
+    },
+    {
+      "name": "s512-o1/1e-05/maxSwirlChangeOverA",
+      "value": 5.5922006791357595e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/2e-05/maxStrainOverOmega",
+      "value": 0.35666540499629895,
+      "limit": 1e-06,
+      "passed": false
+    },
+    {
+      "name": "s512-o1/2e-05/maxSwirlChangeOverA",
+      "value": 2.5566129189020847e-13,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s512-o1/meridional",
+      "value": 0.00587605205195981,
+      "limit": 1e-06,
+      "passed": false
+    },
+    {
+      "name": "s1024-o1/completed",
+      "value": true,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/0.0/maxStrainOverOmega",
+      "value": 3.104332885704438e-13,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/0.0/maxSwirlChangeOverA",
+      "value": 0.0,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/5e-06/maxStrainOverOmega",
+      "value": 4.057718663446893e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/5e-06/maxSwirlChangeOverA",
+      "value": 7.703541751870688e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/1e-05/maxStrainOverOmega",
+      "value": 5.152581828040679e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/1e-05/maxSwirlChangeOverA",
+      "value": 1.4650995146613328e-13,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/2e-05/maxStrainOverOmega",
+      "value": 6.042322421562527e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/2e-05/maxSwirlChangeOverA",
+      "value": 2.7233446674668787e-13,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s1024-o1/meridional",
+      "value": 2.002176545433668e-08,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "s256-o2/completed",
+      "value": false,
+      "passed": false
+    },
+    {
+      "name": "s256-o4/completed",
+      "value": false,
+      "passed": false
+    }
+  ],
+  "campaignComplete": false,
+  "diagnosticPass": false,
+  "coupledReleaseQualified": false,
+  "experimentalQualification": false,
+  "livePlaygroundQualified": false
+}

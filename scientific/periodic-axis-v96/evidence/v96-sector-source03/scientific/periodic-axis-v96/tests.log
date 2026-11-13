@@ -1,0 +1,100 @@
+test_candidate_preserves_rigid_rotation_gradient (__main__.SectorControls.test_candidate_preserves_rigid_rotation_gradient) ... ok
+test_cyclic_mesh_and_field_constraints_match (__main__.SectorControls.test_cyclic_mesh_and_field_constraints_match) ... ok
+test_full_gradient_metric_includes_antisymmetric_error (__main__.SectorControls.test_full_gradient_metric_includes_antisymmetric_error) ... ok
+test_native_gradient_outputs_only_requested_clocks (__main__.SectorControls.test_native_gradient_outputs_only_requested_clocks) ... FAIL
+test_prescribed_faces_cannot_drive_decay (__main__.SectorControls.test_prescribed_faces_cannot_drive_decay) ... ok
+test_stale_wedge_metadata_is_rejected (__main__.SectorControls.test_stale_wedge_metadata_is_rejected) ... ok
+test_default_geometry_is_identical (test95.RectangularControls.test_default_geometry_is_identical) ... ok
+test_exact_directional_decay_and_partial_volume_norm (test95.RectangularControls.test_exact_directional_decay_and_partial_volume_norm) ... ok
+test_fixed_other_axis_and_exact_nesting (test95.RectangularControls.test_fixed_other_axis_and_exact_nesting) ... ok
+test_invalid_axial_counts_rejected (test95.RectangularControls.test_invalid_axial_counts_rejected) ... ok
+test_legacy_custom_evolution_remains_identical (test95.RectangularControls.test_legacy_custom_evolution_remains_identical) ... ok
+test_legacy_native_extraction_remains_identical (test95.RectangularControls.test_legacy_native_extraction_remains_identical) ... ok
+test_legacy_native_inputs_remain_identical (test95.RectangularControls.test_legacy_native_inputs_remain_identical) ... ok
+test_native_rectangular_centres_and_volumes (test95.RectangularControls.test_native_rectangular_centres_and_volumes) ... ok
+test_native_rigid_boundary_and_initial_gradient (test95.RectangularControls.test_native_rigid_boundary_and_initial_gradient) ... ok
+test_rigid_strain_is_zero_for_antisymmetric_gradient (test95.RectangularControls.test_rigid_strain_is_zero_for_antisymmetric_gradient) ... ok
+test_stale_square_packet_cannot_enter_directional_campaign (test95.RectangularControls.test_stale_square_packet_cannot_enter_directional_campaign) ... ok
+test_bad_clock_rejected (test94.AnalyticControls.test_bad_clock_rejected) ... ok
+test_exact_decay_is_scored_without_reference_subtraction (test94.AnalyticControls.test_exact_decay_is_scored_without_reference_subtraction) ... ok
+test_mode_boundaries_and_midplane_symmetry (test94.AnalyticControls.test_mode_boundaries_and_midplane_symmetry) ... ok
+test_mode_obeys_cylindrical_stokes_equation (test94.AnalyticControls.test_mode_obeys_cylindrical_stokes_equation) ... ok
+test_native_configuration_uses_low_amplitude_and_mixed_walls (test94.AnalyticControls.test_native_configuration_uses_low_amplitude_and_mixed_walls) ... ok
+test_no_decay_and_wrong_rate_fail_response_gate (test94.AnalyticControls.test_no_decay_and_wrong_rate_fail_response_gate) ... ok
+test_representation_factor_cannot_hide_missing_decay (test94.AnalyticControls.test_representation_factor_cannot_hide_missing_decay) ... ok
+test_wrong_and_partial_campaign_rejected (test94.AnalyticControls.test_wrong_and_partial_campaign_rejected) ... ok
+test_corrected_uniform_reference_remains_bitwise_identical (test93.GradedControls.test_corrected_uniform_reference_remains_bitwise_identical) ... ok
+test_declared_timestep_study_respects_initial_graded_cfl (test93.GradedControls.test_declared_timestep_study_respects_initial_graded_cfl) ... ok
+test_fixed_map_is_nested_and_refines_the_endwall (test93.GradedControls.test_fixed_map_is_nested_and_refines_the_endwall) ... ok
+test_graded_mapping_rejects_outside_and_duplicate_cells (test93.GradedControls.test_graded_mapping_rejects_outside_and_duplicate_cells) ... ok
+test_graded_native_centres_and_cell_volumes (test93.GradedControls.test_graded_native_centres_and_cell_volumes) ... ok
+test_graded_norm_uses_actual_volume_not_uniform_geometry (test93.GradedControls.test_graded_norm_uses_actual_volume_not_uniform_geometry) ... ok
+test_invalid_grading_rejected (test93.GradedControls.test_invalid_grading_rejected) ... ok
+test_legacy_native_packet_remains_bitwise_identical (test93.GradedControls.test_legacy_native_packet_remains_bitwise_identical) ... ok
+test_local_band_and_invalid_clock (test93.GradedControls.test_local_band_and_invalid_clock) ... ok
+test_old_uniform_metadata_cannot_enter_graded_campaign (test93.GradedControls.test_old_uniform_metadata_cannot_enter_graded_campaign) ... ok
+test_restriction_preserves_graded_constant_primitives_and_inventory (test93.GradedControls.test_restriction_preserves_graded_constant_primitives_and_inventory) ... ok
+test_uniform_default_keeps_identical_geometry (test93.GradedControls.test_uniform_default_keeps_identical_geometry) ... ok
+test_bad_clock_and_initial_frame_are_not_scored (test92.ScoringControls.test_bad_clock_and_initial_frame_are_not_scored) ... ok
+test_global_matches_existing_conservative_scorer_at_each_clock (test92.ScoringControls.test_global_matches_existing_conservative_scorer_at_each_clock) ... ok
+test_identical_histories_have_zero_error_in_both_regions (test92.ScoringControls.test_identical_histories_have_zero_error_in_both_regions) ... ok
+test_physical_band_volume_is_exact_across_meshes (test92.ScoringControls.test_physical_band_volume_is_exact_across_meshes) ... ok
+test_undefined_or_noncontracting_refinement_fails_closed (test92.ScoringControls.test_undefined_or_noncontracting_refinement_fails_closed) ... ok
+test_all_closed_wall_inventories_and_tangential_euler_fluxes (test91.BoundaryControls.test_all_closed_wall_inventories_and_tangential_euler_fluxes) ... ok
+test_axis_and_midplane_keep_the_original_symmetry (test91.BoundaryControls.test_axis_and_midplane_keep_the_original_symmetry) ... ok
+test_coupled_step_conserves_energy_and_keeps_thermal_domain (test91.BoundaryControls.test_coupled_step_conserves_energy_and_keeps_thermal_domain) ... ok
+test_invalid_wall_policy_rejected (test91.BoundaryControls.test_invalid_wall_policy_rejected) ... ok
+test_legacy_coupled_reference_remains_bitwise_unchanged (test91.BoundaryControls.test_legacy_coupled_reference_remains_bitwise_unchanged) ... ok
+test_linear_endwall_shear_has_exact_zero_advection (test91.BoundaryControls.test_linear_endwall_shear_has_exact_zero_advection) ... ok
+test_linear_outer_wall_shear_reconstructs_both_traces (test91.BoundaryControls.test_linear_outer_wall_shear_reconstructs_both_traces) ... ok
+test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source (test_flow.FlowTests.test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source) ... ok
+test_closed_nonuniform_flow_conserves_all_inventories (test_flow.FlowTests.test_closed_nonuniform_flow_conserves_all_inventories) ... ok
+test_density_and_angular_momentum_actually_transport (test_flow.FlowTests.test_density_and_angular_momentum_actually_transport) ... ok
+test_eos_and_swirl_use_evolving_species_mass (test_flow.FlowTests.test_eos_and_swirl_use_evolving_species_mass) ... ok
+test_invalid_states_rejected_without_clipping (test_flow.FlowTests.test_invalid_states_rejected_without_clipping) ... ok
+test_pressure_gradient_accelerates_towards_low_pressure (test_flow.FlowTests.test_pressure_gradient_accelerates_towards_low_pressure) ... ok
+test_reflecting_faces_have_no_mass_energy_or_species_leak (test_flow.FlowTests.test_reflecting_faces_have_no_mass_energy_or_species_leak) ... ok
+test_rotational_source_is_even_in_spin_and_outward (test_flow.FlowTests.test_rotational_source_is_even_in_spin_and_outward) ... ok
+test_smooth_contact_has_no_first_order_acoustic_mass_diffusion (test_flow.FlowTests.test_smooth_contact_has_no_first_order_acoustic_mass_diffusion) ... ok
+test_uniform_composition_preserved_during_density_pressure_transport (test_flow.FlowTests.test_uniform_composition_preserved_during_density_pressure_transport) ... ok
+test_uniform_gas_stationary (test_flow.FlowTests.test_uniform_gas_stationary) ... ok
+test_zero_mass_flux_rigid_rotation_has_zero_angular_transport (test_flow.FlowTests.test_zero_mass_flux_rigid_rotation_has_zero_angular_transport) ... ok
+test_domain_rejections (test_diffusion86.DiffusionControls.test_domain_rejections) ... ok
+test_exact_divergence_free_extensional_stress_and_variable_mu (test_diffusion86.DiffusionControls.test_exact_divergence_free_extensional_stress_and_variable_mu) ... ok
+test_linear_omega_has_exact_cylindrical_shear (test_diffusion86.DiffusionControls.test_linear_omega_has_exact_cylindrical_shear) ... ok
+test_stationary_uniform_temperature_is_exact_adiabatic_state (test_diffusion86.DiffusionControls.test_stationary_uniform_temperature_is_exact_adiabatic_state) ... ok
+test_step_full_energy_positive_heat_and_boundary_symmetry (test_diffusion86.DiffusionControls.test_step_full_energy_positive_heat_and_boundary_symmetry) ... ok
+test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace (test_diffusion86.DiffusionControls.test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace) ... ok
+test_uniform_translation_rotation_and_dilation_have_zero_strain_work (test_diffusion86.DiffusionControls.test_uniform_translation_rotation_and_dilation_have_zero_strain_work) ... ok
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.0002833339999996909
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+======================================================================
+FAIL: test_native_gradient_outputs_only_requested_clocks (__main__.SectorControls.test_native_gradient_outputs_only_requested_clocks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v96-sector-source03/scientific/periodic-axis-v96/test96.py", line 34, in test_native_gradient_outputs_only_requested_clocks
+    np.testing.assert_allclose(clocks,TIMES[1:],atol=1e-18,rtol=0)
+  File "/work/home/v90-venv/lib/python3.11/site-packages/numpy/testing/_private/utils.py", line 1768, in assert_allclose
+    assert_array_compare(compare, actual, desired, err_msg=str(err_msg),
+  File "/work/home/v90-venv/lib/python3.11/site-packages/numpy/testing/_private/utils.py", line 842, in assert_array_compare
+    raise AssertionError(msg)
+AssertionError: 
+Not equal to tolerance rtol=0, atol=1e-18
+
+(shapes (4,), (3,) mismatch)
+ ACTUAL: array([5.0e-06, 1.0e-05, 1.5e-05, 2.0e-05])
+ DESIRED: array([5.e-06, 1.e-05, 2.e-05])
+
+----------------------------------------------------------------------
+Ran 76 tests in 4.462s
+
+FAILED (failures=1)

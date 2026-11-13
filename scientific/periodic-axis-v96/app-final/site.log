@@ -1,0 +1,5 @@
+
+> check:site
+> node scripts/check-site.mjs
+
+Built modules parse; HTML resources, physics worker and deployment assets exist. Not a browser runtime check.
