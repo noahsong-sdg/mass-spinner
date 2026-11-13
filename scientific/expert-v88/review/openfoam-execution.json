@@ -1,0 +1,21 @@
+{
+  "recordType": "independent-reviewer-observed-execution",
+  "date": "2026-11-12",
+  "stage": "/private/tmp/mass-spinner-openfoam-v87-20261112",
+  "command": "safe-dev -C /private/tmp/mass-spinner-openfoam-v87-20261112 run -- sh -c 'cd v88-openfoam && ../.venv/bin/python -m unittest -v test_reference88 && ../.venv/bin/python audit88.py'",
+  "exitCode": 0,
+  "helperTestsPassed": 4,
+  "helperTestSeconds": 0.001,
+  "nativeRawAuditGatesPassed": 86,
+  "nativeRawAuditGatesTotal": 86,
+  "scope": "Independent execution of helper tests and unchanged auditor on restored native output ZIPs; not another 13-case solver campaign",
+  "sourceSHA256": {
+    "reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "test_reference88.py": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406"
+  },
+  "predictionSHA256": "be1cd2f172f51c0dd1db5458787ef1d4f7f8cc1819f19e058d50fc7967288871",
+  "auditSHA256": "84215f68e6f72a2d3bd08484658d200838bef37b2604d07209f6658a859fa340",
+  "experimentalQualification": false,
+  "fullV86Qualified": false
+}

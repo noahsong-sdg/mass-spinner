@@ -1,0 +1,9 @@
+test_boolean_or_non_numeric_rates_are_not_physical_zero (test_audit_zero_beam.ZeroBeamRateControls.test_boolean_or_non_numeric_rates_are_not_physical_zero) ... ok
+test_exact_zero_admitted_without_promoting_original_gates (test_audit_zero_beam.ZeroBeamRateControls.test_exact_zero_admitted_without_promoting_original_gates) ... ok
+test_missing_zero_beam_trajectory_is_not_a_pass (test_audit_zero_beam.ZeroBeamRateControls.test_missing_zero_beam_trajectory_is_not_a_pass) ... ok
+test_positive_negative_and_nonfinite_zero_beam_rates_rejected (test_audit_zero_beam.ZeroBeamRateControls.test_positive_negative_and_nonfinite_zero_beam_rates_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.000s
+
+OK

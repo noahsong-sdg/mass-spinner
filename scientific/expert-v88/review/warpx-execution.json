@@ -1,0 +1,27 @@
+{
+  "recordType": "independent-reviewer-observed-execution",
+  "date": "2026-11-12",
+  "stage": "/private/tmp/mass-spinner-warpx-v88-20261112",
+  "commands": [
+    "safe-dev -C /private/tmp/mass-spinner-warpx-v88-20261112 run -- /work/home/warpx88-env/bin/python -m unittest -v test_reference",
+    "safe-dev -C /private/tmp/mass-spinner-warpx-v88-20261112 run -- /work/home/warpx88-env/bin/python analyze.py",
+    "safe-dev -C /private/tmp/mass-spinner-warpx-v88-20261112 run -- /work/home/warpx88-env/bin/python -c CONTENTS_OF_warpx_centering_probe.py default",
+    "safe-dev -C /private/tmp/mass-spinner-warpx-v88-20261112 run -- /work/home/warpx88-env/bin/python -c CONTENTS_OF_warpx_centering_probe.py off"
+  ],
+  "exitCodes": [0, 0, 0, 0],
+  "testsPassed": 9,
+  "testSeconds": 0.027,
+  "sourceSHA256": {
+    "reference.py": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+    "test_reference.py": "84059e1a3d42fa98a9f9ae5064f4aa6b007bb946b89abdc12895c38e82f65a8c",
+    "warpx_centering_probe.py": "0f8c4621a1f9497f70f9440e8c01b54bf5c5f2bebe8fe0328c07c03c6d8b6273"
+  },
+  "summarySHA256BeforeAndAfterIndependentAnalyzer": "9da05efadcdccc1b30c1f21863a101cdb4c5644a986e6cc9320e86af01cbcce5",
+  "defaultCenteringResultSHA256": "60101b14e3f5201c7cfaf87a6b61bab47232e69a5f10c5926fdc17cbcb4a1540",
+  "offCenteringResultSHA256": "f727f0959ccb0f036e1f1e832e4cb458712d5af90cdebcd561af9d7172e8df5c",
+  "export": "/private/tmp/mass-spinner-warpx-v88-independent-export01",
+  "probeNativeOMPThreads": 5,
+  "packagedSourceCommitRecovered": false,
+  "experimentalQualification": false,
+  "collisionTransportQualified": false
+}

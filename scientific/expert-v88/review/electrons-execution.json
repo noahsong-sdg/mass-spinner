@@ -1,0 +1,20 @@
+{
+  "recordType": "independent-reviewer-observed-execution",
+  "date": "2026-11-12",
+  "stage": "/private/tmp/mass-spinner-electrons-v88-20261112",
+  "command": "safe-dev -C /private/tmp/mass-spinner-electrons-v88-20261112 run -- python3 -m unittest -v test_adapter test_admission",
+  "exitCode": 0,
+  "testsPassed": 8,
+  "testSeconds": 0.009,
+  "scope": "Independent execution of actual result admission, unit reconstruction and stale/domain tests; not a second 44-case native Boltzmann campaign",
+  "sourceSHA256": {
+    "adapter.py": "c141f80ffc3c7089985119d518058094e4ebc602d368e7168395479539f7b96b",
+    "admission.py": "181168139d6332597d2a76a373159ada1e319c78f1f0f2ab164fd54f33f5b1d5",
+    "test_adapter.py": "e3e2b1c6c475cb5e7c0b87836fbcdba983fcd996719c6d4ee98dfe5433d6d586",
+    "test_admission.py": "0fd442f18df2932a6b92fddd4fc5eff84826d5d9426f051de35970a4b77965d0"
+  },
+  "bulkAdmissionSHA256": "2be0967cabb083c2402161ca5a2f534b87fc1eff67580096a84ec64f33168d0a",
+  "producerTestedSnapshotSHA256": "5a3d4008640bb3dde4a1c428e50c9d8a4e14e094075ea0cf8cae05f4f34dd6f9",
+  "experimentalQualification": false,
+  "magnetizedClosureQualified": false
+}

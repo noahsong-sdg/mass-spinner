@@ -1,0 +1,37 @@
+{
+  "mode": "default",
+  "actualTimeS": 1e-06,
+  "dtS": 1e-07,
+  "runnerSHA256": "e684b3c7dc0e4d71914a6fe22df34400a46a6fd34e41a36c26a94a63d8a852fc",
+  "rows": [
+    {
+      "sameTime": {
+        "velocityRelative": 5.736807254754779e-06,
+        "positionRelative": 1.0025918032587502e-07
+      },
+      "minusHalf": {
+        "velocityRelative": 0.006025977029969512,
+        "positionRelative": 0.0004493734060576626
+      },
+      "plusHalf": {
+        "velocityRelative": 0.006035425435438034,
+        "positionRelative": 0.00044941836604990435
+      }
+    },
+    {
+      "sameTime": {
+        "velocityRelative": 4.537947103378074e-07,
+        "positionRelative": 1.8633496257296136e-08
+      },
+      "minusHalf": {
+        "velocityRelative": 0.0021470741282269656,
+        "positionRelative": 0.00041133731716868434
+      },
+      "plusHalf": {
+        "velocityRelative": 0.0021477616973944406,
+        "positionRelative": 0.0004113865003033252
+      }
+    }
+  ],
+  "interpretation": "Binary response witness; not proof of exact packaged source commit"
+}

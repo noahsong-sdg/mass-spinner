@@ -1,0 +1,25 @@
+{
+  "stage": "/private/tmp/mass-spinner-app-v88-clean-20261112",
+  "volume": "safe-dev-8bed71533ca2cd54",
+  "snapshotFiles": 2666,
+  "snapshotBytes": 509162577,
+  "snapshotSHA256": "a81d4ae45bf8f9a5b90726b0480f135c336bb516207e16bbe6b756a3e53681e7",
+  "verifiedCopiedFiles": 2666,
+  "canonicalApplicationAndFixtureFiles": 557,
+  "stageMismatches": [],
+  "canonicalApplicationMismatches": [],
+  "manifestSHA256": "eca42c491e60751b0435f28c051a5c289ee0d3a6a09f362d6f54dbc26744e7d9",
+  "checks": {
+    "npm test": {
+      "passed": 1238,
+      "failed": 0
+    },
+    "npm run typecheck": 0,
+    "npm run build": 0
+  },
+  "runtime": {
+    "node": "22.23.4",
+    "npm": "10.9.9"
+  },
+  "productionSourceChanged": false
+}
