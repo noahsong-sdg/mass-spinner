@@ -153,3 +153,4 @@ current source-admission guards intentionally reject changed historical sources.
 - [Export checksums](scientific/periodic-axis-v96/export.json) and [complete inventory](scientific/periodic-axis-v96/evidence/ARCHIVE-MANIFEST.json)
 - [Export regression checks](scientific/periodic-axis-v96/export-controls.json)
 - [Application checks](scientific/periodic-axis-v96/app-final/execution.json)
+- [Public release and verified server-side asset digests](scientific/periodic-axis-v96/publication.json)

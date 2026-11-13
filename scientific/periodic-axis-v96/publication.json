@@ -1,0 +1,36 @@
+{
+  "verifiedUTC": "2026-11-13T12:22:17.739307+00:00",
+  "releaseURL": "https://github.com/noahsong-sdg/mass-spinner/releases/tag/v96-scientific-evidence",
+  "releaseId": 444197545,
+  "tag": "v96-scientific-evidence",
+  "targetCommit": "ba0e83ffc895586fa109f94af475ad892314d30a",
+  "draft": false,
+  "publishedAt": "2026-11-13T12:22:16Z",
+  "verification": "GitHub API uploaded-state, byte-size and server SHA256 digest matched local export receipt",
+  "assets": [
+    {
+      "id": 743559697,
+      "name": "ARCHIVE-MANIFEST.json",
+      "size": 252767,
+      "digest": "sha256:66d5e31a7da31cd27808c6af3fac05c74fc435f1e960960bae48f76e7b5d75a1",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v96-scientific-evidence/ARCHIVE-MANIFEST.json"
+    },
+    {
+      "id": 743559699,
+      "name": "evidence-part01.tar.gz",
+      "size": 4927106,
+      "digest": "sha256:7cd1aee174507a769facc105ad4682179e57e5230ed261aa475d0c98815fceb9",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v96-scientific-evidence/evidence-part01.tar.gz"
+    },
+    {
+      "id": 743559696,
+      "name": "export.json",
+      "size": 652,
+      "digest": "sha256:e1e1141f7cbd211e186d121cc9cad8ba15c1782f9f1fa81023be9df12bffd157",
+      "state": "uploaded",
+      "browser_download_url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/v96-scientific-evidence/export.json"
+    }
+  ]
+}
