@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_pack"
+  ],
+  "cwd": "/work/project/v89-flow-helper-20261112-02/packaging-01",
+  "exitCode": 0,
+  "wallSeconds": 0.04800162500000005,
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "sourceSHA256": {
+    "pack.py": "22eb93947ea41507219088212addc2bc6a29912841a091d2abe11df02122f848",
+    "test_pack.py": "a0038a481efae8b19a195936627b5a475d3f733f781e2198d2f2ece2c7fc7ab8"
+  }
+}

@@ -1,0 +1,4187 @@
+{
+  "passed": true,
+  "expectedWitnesses": 84,
+  "witnesses": [
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0011686659999998739,
+      "fourierSeconds": 0.0006885420000006803,
+      "errors": {
+        "probability": 2.6410634119947813e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 0.0
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.7775448339443615e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 6.070167692627017e-15,
+        "removedNegativeProbability": 1.9819295423238396e-16,
+        "totalProbabilityErrorBudget": 1.457626845515261e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.001868959000000281,
+      "fourierSeconds": 0.0009482499999995397,
+      "errors": {
+        "probability": 3.0140820395097023e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.7775448339443615e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.0530168979621583e-15,
+        "removedNegativeProbability": 2.304132207345363e-16,
+        "totalProbabilityErrorBudget": 1.4662379323332634e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.003676792000000262,
+      "fourierSeconds": 0.001660874999999784,
+      "errors": {
+        "probability": 3.198396408832238e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.661338147750939e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.7775448339443615e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.535469315385058e-15,
+        "removedNegativeProbability": 2.9678640395120227e-16,
+        "totalProbabilityErrorBudget": 1.4748470013994047e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.003079500000000124,
+      "fourierSeconds": 0.0007669169999999781,
+      "errors": {
+        "probability": 1.9081958235744878e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.7763568394002505e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175477e-12,
+        "varianceM2S2": 4.8021376851927e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5272027196775625e-241,
+        "floatingPointProbabilityBound": 6.038177148680348e-15,
+        "removedNegativeProbability": 2.246466901389966e-18,
+        "totalProbabilityErrorBudget": 1.4497994523262614e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.007715499999999764,
+      "fourierSeconds": 0.0011565830000002109,
+      "errors": {
+        "probability": 2.0166160408230382e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.3314683517128287e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175477e-12,
+        "varianceM2S2": 4.8021376851927e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5272027196775625e-241,
+        "floatingPointProbabilityBound": 3.030102334336989e-15,
+        "removedNegativeProbability": 0.0,
+        "totalProbabilityErrorBudget": 1.4550858324780423e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.017902957999999636,
+      "fourierSeconds": 0.0018269160000006224,
+      "errors": {
+        "probability": 1.9244588561617704e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.551914400963142e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175477e-12,
+        "varianceM2S2": 4.8021376851927e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5272027196775625e-241,
+        "floatingPointProbabilityBound": 1.5205558772144611e-15,
+        "removedNegativeProbability": 2.187197182627424e-18,
+        "totalProbabilityErrorBudget": 1.4603705728418885e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0007071249999999196,
+      "fourierSeconds": 0.000540333000000004,
+      "errors": {
+        "probability": 3.252606517456513e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0379502361420497e-11,
+        "varianceM2S2": 1.8476170440570656e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 5.9681400855742276e-15,
+        "removedNegativeProbability": 1.9493587011011376e-16,
+        "totalProbabilityErrorBudget": 1.4331398941141797e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0013083329999998838,
+      "fourierSeconds": 0.0008921250000000214,
+      "errors": {
+        "probability": 3.0770907028735816e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0379502361420497e-11,
+        "varianceM2S2": 1.8476170440570656e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.0016477085369302e-15,
+        "removedNegativeProbability": 2.4198631846459366e-16,
+        "totalProbabilityErrorBudget": 1.441581878718927e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.002514582999999959,
+      "fourierSeconds": 0.0016107500000002162,
+      "errors": {
+        "probability": 3.5236570605778894e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.551115123125783e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0379502361420497e-11,
+        "varianceM2S2": 1.8476170440570656e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.509607348393812e-15,
+        "removedNegativeProbability": 2.479128107934667e-16,
+        "totalProbabilityErrorBudget": 1.450014625728493e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.001666916999999657,
+      "fourierSeconds": 0.0006469999999998421,
+      "errors": {
+        "probability": 2.1250362580715887e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.03795023614205e-11,
+        "varianceM2S2": 4.4268021174232606e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.2619574260051965e-286,
+        "floatingPointProbabilityBound": 4.975052803624917e-15,
+        "removedNegativeProbability": 3.165126450166577e-17,
+        "totalProbabilityErrorBudget": 1.194652549992718e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.003601582999999131,
+      "fourierSeconds": 0.0009611249999998961,
+      "errors": {
+        "probability": 2.190088388420719e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.03795023614205e-11,
+        "varianceM2S2": 4.4268021174232606e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.2619574260051965e-286,
+        "floatingPointProbabilityBound": 2.4989229229633046e-15,
+        "removedNegativeProbability": 2.323447174287931e-17,
+        "totalProbabilityErrorBudget": 1.200122038465848e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.007224082999999659,
+      "fourierSeconds": 0.0015889169999994124,
+      "errors": {
+        "probability": 2.7863995832877464e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.661338147750939e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.03795023614205e-11,
+        "varianceM2S2": 4.4268021174232606e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.2619574260051965e-286,
+        "floatingPointProbabilityBound": 1.2551578324263794e-15,
+        "removedNegativeProbability": 2.806437677121773e-17,
+        "totalProbabilityErrorBudget": 1.2055910375632889e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0003500829999998345,
+      "fourierSeconds": 0.0004782919999994917,
+      "errors": {
+        "probability": 8.109832250191573e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 0.0
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 1.7404756569753967e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 5.666744199071037e-15,
+        "removedNegativeProbability": 3.419624397021127e-16,
+        "totalProbabilityErrorBudget": 1.360819584010373e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0006307080000000909,
+      "fourierSeconds": 0.0008389580000001118,
+      "errors": {
+        "probability": 8.586881206085195e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.551115123125783e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 1.7404756569753967e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.851497943646045e-15,
+        "removedNegativeProbability": 3.740333553086295e-16,
+        "totalProbabilityErrorBudget": 1.3695231962749865e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0011684999999994616,
+      "fourierSeconds": 0.0014597089999996982,
+      "errors": {
+        "probability": 7.22078646875346e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 0.0
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 1.7404756569753967e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.4348064953495657e-15,
+        "removedNegativeProbability": 3.8050462322812125e-16,
+        "totalProbabilityErrorBudget": 1.37821906598726e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0003413750000005322,
+      "fourierSeconds": 0.00045375000000014154,
+      "errors": {
+        "probability": 1.2750217548429532e-16,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.661338147750939e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 3.9319447757611444e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.691862029563536e-15,
+        "removedNegativeProbability": 9.042867683449908e-17,
+        "totalProbabilityErrorBudget": 8.866926419592198e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.000618833999999957,
+      "fourierSeconds": 0.0007377499999998705,
+      "errors": {
+        "probability": 8.044780119842443e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 3.9319447757611444e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.8579852548594787e-15,
+        "removedNegativeProbability": 9.869826921963897e-17,
+        "totalProbabilityErrorBudget": 8.924795041557595e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.001165124999999989,
+      "fourierSeconds": 0.0013909590000000804,
+      "errors": {
+        "probability": 8.689880412471318e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.662137425588298e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.581745263660186e-12,
+        "varianceM2S2": 3.9319447757611444e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 9.350181906506149e-16,
+        "removedNegativeProbability": 1.152084552482077e-16,
+        "totalProbabilityErrorBudget": 8.982656958664027e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.000902541000000312,
+      "fourierSeconds": 0.0006021660000001816,
+      "errors": {
+        "probability": 2.642770040694843e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893035e-12,
+        "varianceM2S2": 1.7782761341109887e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 6.0688922659045145e-15,
+        "removedNegativeProbability": 2.461025329780488e-16,
+        "totalProbabilityErrorBudget": 1.4573255340597352e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0016888750000001451,
+      "fourierSeconds": 0.0008846669999993395,
+      "errors": {
+        "probability": 2.970713952610282e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893035e-12,
+        "varianceM2S2": 1.7782761341109887e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.052375410070694e-15,
+        "removedNegativeProbability": 2.500998372022335e-16,
+        "totalProbabilityErrorBudget": 1.465931986807007e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0032979589999992953,
+      "fourierSeconds": 0.0015537919999992766,
+      "errors": {
+        "probability": 3.230922474006803e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.887379141862766e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893035e-12,
+        "varianceM2S2": 1.7782761341109887e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.535146687794241e-15,
+        "removedNegativeProbability": 3.252547802240239e-16,
+        "totalProbabilityErrorBudget": 1.4745401257498477e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0029595420000001482,
+      "fourierSeconds": 0.0007149169999998151,
+      "errors": {
+        "probability": 1.951563910473908e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893032e-12,
+        "varianceM2S2": 4.798764452099338e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5198935109976078e-241,
+        "floatingPointProbabilityBound": 6.040553257655123e-15,
+        "removedNegativeProbability": 9.59880323373833e-19,
+        "totalProbabilityErrorBudget": 1.4503695898215496e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.005781750000000585,
+      "fourierSeconds": 0.0010355840000002559,
+      "errors": {
+        "probability": 1.8648277366750676e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893032e-12,
+        "varianceM2S2": 4.798764452099338e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5198935109976078e-241,
+        "floatingPointProbabilityBound": 3.0312947278856417e-15,
+        "removedNegativeProbability": 0.0,
+        "totalProbabilityErrorBudget": 1.4556581813813955e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.013391166999999982,
+      "fourierSeconds": 0.001740458999999639,
+      "errors": {
+        "probability": 2.0166160408230382e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.8833827526759706e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.897283715893032e-12,
+        "varianceM2S2": 4.798764452099338e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 2.5198935109976078e-241,
+        "floatingPointProbabilityBound": 1.5211542408058365e-15,
+        "removedNegativeProbability": 3.0935901988253057e-19,
+        "totalProbabilityErrorBudget": 1.4609448141057924e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0006533329999998116,
+      "fourierSeconds": 0.0005106249999995427,
+      "errors": {
+        "probability": 2.992397996059992e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0268477187225118e-11,
+        "varianceM2S2": 1.8512911822589833e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 5.961979177565042e-15,
+        "removedNegativeProbability": 1.8296811576881835e-16,
+        "totalProbabilityErrorBudget": 1.431660079416541e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0012769580000000502,
+      "fourierSeconds": 0.0008554579999993095,
+      "errors": {
+        "probability": 2.951682181076662e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0268477187225118e-11,
+        "varianceM2S2": 1.8512911822589833e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.9985490782083694e-15,
+        "removedNegativeProbability": 2.2422424550814174e-16,
+        "totalProbabilityErrorBudget": 1.4400927599539222e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0025213329999997924,
+      "fourierSeconds": 0.0015515419999996283,
+      "errors": {
+        "probability": 3.599551212651875e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.662137425588298e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0268477187225118e-11,
+        "varianceM2S2": 1.8512911822589833e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.5080489620563286e-15,
+        "removedNegativeProbability": 2.728275307907533e-16,
+        "totalProbabilityErrorBudget": 1.4485210663165086e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.001640791999999891,
+      "fourierSeconds": 0.000592000000000148,
+      "errors": {
+        "probability": 2.211772431870429e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.4432899320127035e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026847718722512e-11,
+        "varianceM2S2": 4.4274096338269894e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.210466370617832e-286,
+        "floatingPointProbabilityBound": 4.9747615196454024e-15,
+        "removedNegativeProbability": 2.5070090341084226e-17,
+        "totalProbabilityErrorBudget": 1.1945819837202183e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.0036216670000008833,
+      "fourierSeconds": 0.0009171249999999631,
+      "errors": {
+        "probability": 2.3310346708438345e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.6653345369377348e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026847718722512e-11,
+        "varianceM2S2": 4.4274096338269894e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.210466370617832e-286,
+        "floatingPointProbabilityBound": 2.498776613262207e-15,
+        "removedNegativeProbability": 2.198087180282743e-17,
+        "totalProbabilityErrorBudget": 1.2000516844493275e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 161,
+      "completed": true,
+      "directSeconds": 0.007197749999999559,
+      "fourierSeconds": 0.0015774999999997874,
+      "errors": {
+        "probability": 2.8080836267374565e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.551115123125783e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026847718722512e-11,
+        "varianceM2S2": 4.4274096338269894e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 7.210466370617832e-286,
+        "floatingPointProbabilityBound": 1.2550843440009862e-15,
+        "removedNegativeProbability": 2.277462694470048e-17,
+        "totalProbabilityErrorBudget": 1.2055199596999289e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0003470419999995755,
+      "fourierSeconds": 0.00045975000000009203,
+      "errors": {
+        "probability": 7.762887554996212e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 0.0
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 1.744331363445732e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 5.6604323442947086e-15,
+        "removedNegativeProbability": 3.116724076342957e-16,
+        "totalProbabilityErrorBudget": 1.3593017098608474e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0006190420000002916,
+      "fourierSeconds": 0.0007951670000005961,
+      "errors": {
+        "probability": 8.370040771588094e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 1.744331363445732e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.848321794348892e-15,
+        "removedNegativeProbability": 3.5840355662434306e-16,
+        "totalProbabilityErrorBudget": 1.3679970816324848e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.0011503330000000034,
+      "fourierSeconds": 0.001455916000000279,
+      "errors": {
+        "probability": 7.112366251504909e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.661338147750939e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 1.744331363445732e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.4332083278521197e-15,
+        "removedNegativeProbability": 3.768253628484042e-16,
+        "totalProbabilityErrorBudget": 1.3766844572636738e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.00033933399999952485,
+      "fourierSeconds": 0.0004405419999997662,
+      "errors": {
+        "probability": 1.196959198423997e-16,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 8.881784197001252e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 3.9358004822314794e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.690047355300203e-15,
+        "removedNegativeProbability": 1.095218273082363e-16,
+        "totalProbabilityErrorBudget": 8.862590294510671e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.000683417000000297,
+      "fourierSeconds": 0.0008007499999997947,
+      "errors": {
+        "probability": 7.383416794626285e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.6645352591003757e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 3.9358004822314794e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.85707198852756e-15,
+        "removedNegativeProbability": 1.0671661575916216e-16,
+        "totalProbabilityErrorBudget": 8.920419381510925e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 53,
+      "completed": true,
+      "directSeconds": 0.001177958000000423,
+      "fourierSeconds": 0.0014025000000001953,
+      "errors": {
+        "probability": 8.46761896711179e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.440092820663267e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.3977095552484145e-12,
+        "varianceM2S2": 3.9358004822314794e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 9.345585951840413e-16,
+        "removedNegativeProbability": 1.0988364427905479e-16,
+        "totalProbabilityErrorBudget": 8.978239517373952e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05289900000000003,
+      "fourierSeconds": 0.008194833000000123,
+      "errors": {
+        "probability": 8.239936510889834e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 8.881784197001252e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.784444280745159e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 4.39644294913221e-14,
+        "removedNegativeProbability": 5.28049063752807e-16,
+        "totalProbabilityErrorBudget": 1.0552282662813032e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10578999999999983,
+      "fourierSeconds": 0.008477166999999675,
+      "errors": {
+        "probability": 8.734309034503138e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.5543122344752192e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.784444280745159e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.20002069518709e-14,
+        "removedNegativeProbability": 5.68862833225011e-16,
+        "totalProbabilityErrorBudget": 1.0560923003170709e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.24469554199999966,
+      "fourierSeconds": 0.009524834000000482,
+      "errors": {
+        "probability": 1.007682030164753e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.552713678800501e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.784444280745159e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.1009058611914123e-14,
+        "removedNegativeProbability": 5.91403927914584e-16,
+        "totalProbabilityErrorBudget": 1.0569522187819704e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05246054200000039,
+      "fourierSeconds": 0.0060299580000000574,
+      "errors": {
+        "probability": 7.37257477290143e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 8.881784197001252e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 4.8090371319934963e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.556313843392038e-241,
+        "floatingPointProbabilityBound": 2.839720767979937e-14,
+        "removedNegativeProbability": 2.0524669926598926e-17,
+        "totalProbabilityErrorBudget": 6.815968607615128e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10416487500000038,
+      "fourierSeconds": 0.006322707999999899,
+      "errors": {
+        "probability": 7.008158492884816e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 4.8090371319934963e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.556313843392038e-241,
+        "floatingPointProbabilityBound": 1.420963219899258e-14,
+        "removedNegativeProbability": 8.010085650322906e-18,
+        "totalProbabilityErrorBudget": 6.821260968521291e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.24043333399999955,
+      "fourierSeconds": 0.0071529579999998205,
+      "errors": {
+        "probability": 6.869266784446938e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.218847493575595e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 4.8090371319934963e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.556313843392038e-241,
+        "floatingPointProbabilityBound": 7.110320064861445e-15,
+        "removedNegativeProbability": 2.094823157531659e-17,
+        "totalProbabilityErrorBudget": 6.826546069086433e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.03165108299999986,
+      "fourierSeconds": 0.0053068749999996,
+      "errors": {
+        "probability": 8.885497004772899e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 1.8481474287182306e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.8297143860386753e-14,
+        "removedNegativeProbability": 1.299464022074957e-16,
+        "totalProbabilityErrorBudget": 6.792094301122395e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.06324641700000022,
+      "fourierSeconds": 0.005549958000000466,
+      "errors": {
+        "probability": 1.0694400418701512e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.2212453270876722e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 1.8481474287182306e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.4166200278845266e-14,
+        "removedNegativeProbability": 1.374589027726138e-16,
+        "totalProbabilityErrorBudget": 6.800556659725359e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.1472806250000005,
+      "fourierSeconds": 0.0072682090000002475,
+      "errors": {
+        "probability": 1.051658228491495e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.551115123125783e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 1.8481474287182306e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 7.091888930906014e-15,
+        "removedNegativeProbability": 1.8166937100227094e-16,
+        "totalProbabilityErrorBudget": 6.808998320596228e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.03217625000000002,
+      "fourierSeconds": 0.0039343750000000455,
+      "errors": {
+        "probability": 9.709526722211941e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 4.427332502084426e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.98580827035684e-286,
+        "floatingPointProbabilityBound": 1.8968885135420967e-14,
+        "removedNegativeProbability": 2.0048055903365617e-18,
+        "totalProbabilityErrorBudget": 4.553169344977879e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.06612145800000047,
+      "fourierSeconds": 0.0043280829999998716,
+      "errors": {
+        "probability": 9.020512684177528e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.774758283725532e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 4.427332502084426e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.98580827035684e-286,
+        "floatingPointProbabilityBound": 9.495852520971807e-15,
+        "removedNegativeProbability": 7.87808287876402e-18,
+        "totalProbabilityErrorBudget": 4.5586467098710426e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.14692391700000051,
+      "fourierSeconds": 0.005442625000000589,
+      "errors": {
+        "probability": 8.630622389145904e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.6645352591003757e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.0376063945799788e-11,
+        "varianceM2S2": 4.427332502084426e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.98580827035684e-286,
+        "floatingPointProbabilityBound": 4.75362401716793e-15,
+        "removedNegativeProbability": 1.7703754902796107e-18,
+        "totalProbabilityErrorBudget": 4.56411594551505e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.011197334000000225,
+      "fourierSeconds": 0.002070333999999896,
+      "errors": {
+        "probability": 2.946916317454904e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.887379141862766e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 1.7406754076681968e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.3247694143993655e-14,
+        "removedNegativeProbability": 2.9396298154730087e-16,
+        "totalProbabilityErrorBudget": 3.180242770845986e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.022306084000000226,
+      "fourierSeconds": 0.0024177079999994078,
+      "errors": {
+        "probability": 2.6082659885174515e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.440892098500626e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 1.7406754076681968e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 6.6419912038839845e-15,
+        "removedNegativeProbability": 3.296581219180005e-16,
+        "totalProbabilityErrorBudget": 3.1889555236658584e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.04733837500000071,
+      "fourierSeconds": 0.003484374999999318,
+      "errors": {
+        "probability": 1.849456736161417e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 8.881784197001252e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 1.7406754076681968e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.330055017796235e-15,
+        "removedNegativeProbability": 3.539070386726591e-16,
+        "totalProbabilityErrorBudget": 3.197654987777607e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.011374541999999543,
+      "fourierSeconds": 0.001609457999999897,
+      "errors": {
+        "probability": 3.026245269521906e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.7763568394002505e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 3.932144526453945e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 8.735523049382122e-15,
+        "removedNegativeProbability": 9.561255546901708e-17,
+        "totalProbabilityErrorBudget": 2.0971718051035437e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.02221479099999968,
+      "fourierSeconds": 0.001954290999999664,
+      "errors": {
+        "probability": 2.5766716589569657e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.4424906541753444e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 3.932144526453945e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 4.379821153236329e-15,
+        "removedNegativeProbability": 9.458415991919364e-17,
+        "totalProbabilityErrorBudget": 2.1029603239657172e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.04732599999999998,
+      "fourierSeconds": 0.002914999999999779,
+      "errors": {
+        "probability": 2.2228588318239344e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.107825191113079e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.584345749587106e-12,
+        "varianceM2S2": 3.932144526453945e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.1959366981086272e-15,
+        "removedNegativeProbability": 9.627867928002407e-17,
+        "totalProbabilityErrorBudget": 2.1087455700484976e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05393299999999979,
+      "fourierSeconds": 0.00827020799999989,
+      "errors": {
+        "probability": 8.834916541461513e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 8.881784197001252e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 1.7851677322594053e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 4.3955312538150176e-14,
+        "removedNegativeProbability": 2.2174093921957392e-16,
+        "totalProbabilityErrorBudget": 1.0550063963239319e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10733216700000003,
+      "fourierSeconds": 0.008705707999999923,
+      "errors": {
+        "probability": 8.25955830469013e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.7763568394002505e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 1.7851677322594053e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.1995644697777425e-14,
+        "removedNegativeProbability": 2.7826574919491475e-16,
+        "totalProbabilityErrorBudget": 1.0558704061497437e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.2419015,
+      "fourierSeconds": 0.009241624999999587,
+      "errors": {
+        "probability": 1.0661109879634279e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.7763568394002505e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 1.7851677322594053e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.1006775622001678e-14,
+        "removedNegativeProbability": 2.869232531837913e-16,
+        "totalProbabilityErrorBudget": 1.0567300069436283e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05223270800000002,
+      "fourierSeconds": 0.005957208000000769,
+      "errors": {
+        "probability": 7.15573433840433e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 4.805656050247756e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.543115018443613e-241,
+        "floatingPointProbabilityBound": 2.840842450663065e-14,
+        "removedNegativeProbability": 1.3010426069826053e-19,
+        "totalProbabilityErrorBudget": 6.81865860659807e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10476099999999988,
+      "fourierSeconds": 0.006550916000000129,
+      "errors": {
+        "probability": 7.984973745340865e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 7.771561172376096e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 4.805656050247756e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.543115018443613e-241,
+        "floatingPointProbabilityBound": 1.4215244992096484e-14,
+        "removedNegativeProbability": 0.0,
+        "totalProbabilityErrorBudget": 6.8239543082026e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.24617483300000043,
+      "fourierSeconds": 0.007319125000000426,
+      "errors": {
+        "probability": 6.712332262107594e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.774758283725532e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.985737959358121e-12,
+        "varianceM2S2": 4.805656050247756e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 4.543115018443613e-241,
+        "floatingPointProbabilityBound": 7.113128638416708e-15,
+        "removedNegativeProbability": 3.541727096785982e-19,
+        "totalProbabilityErrorBudget": 6.829240240293598e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.03265741600000016,
+      "fourierSeconds": 0.00548708399999942,
+      "errors": {
+        "probability": 8.18158223267967e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 1.8518117139149853e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.82680064089919e-14,
+        "removedNegativeProbability": 1.328890665585445e-16,
+        "totalProbabilityErrorBudget": 6.785101607054065e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.06523970900000009,
+      "fourierSeconds": 0.005850667000000698,
+      "errors": {
+        "probability": 1.0743789591100222e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 5.551115123125783e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 1.8518117139149853e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.4151613255783994e-14,
+        "removedNegativeProbability": 1.6056773963056424e-16,
+        "totalProbabilityErrorBudget": 6.793557199539634e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.14962074999999952,
+      "fourierSeconds": 0.00738479099999978,
+      "errors": {
+        "probability": 1.142036139905234e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.5543122344752192e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 1.8518117139149853e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 7.084586351289563e-15,
+        "removedNegativeProbability": 1.7428125172073528e-16,
+        "totalProbabilityErrorBudget": 6.801987105352506e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.03306120800000034,
+      "fourierSeconds": 0.0041503750000000394,
+      "errors": {
+        "probability": 9.637386304504147e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.4424906541753444e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 4.4279301654829924e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.936274837384995e-286,
+        "floatingPointProbabilityBound": 1.8967795427705883e-14,
+        "removedNegativeProbability": 5.624327772739571e-18,
+        "totalProbabilityErrorBudget": 4.5529081770784766e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.06818333299999946,
+      "fourierSeconds": 0.004574000000000744,
+      "errors": {
+        "probability": 9.441737663211864e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.3314683517128287e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 4.4279301654829924e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.936274837384995e-286,
+        "floatingPointProbabilityBound": 9.495307009950545e-15,
+        "removedNegativeProbability": 8.023421188417479e-18,
+        "totalProbabilityErrorBudget": 4.558384879114668e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r3",
+      "impactM": 0.02985959438377535,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 2576,
+      "completed": true,
+      "directSeconds": 0.15298029199999963,
+      "fourierSeconds": 0.00579120799999977,
+      "errors": {
+        "probability": 8.577882256093497e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 1.026507509074544e-11,
+        "varianceM2S2": 4.4279301654829924e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 6.936274837384995e-286,
+        "floatingPointProbabilityBound": 4.753350934124496e-15,
+        "removedNegativeProbability": 4.502911153294923e-18,
+        "totalProbabilityErrorBudget": 4.563854059046919e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 10.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.011527292000000244,
+      "fourierSeconds": 0.002197542000000219,
+      "errors": {
+        "probability": 2.908598617106605e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.1102230246251565e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 1.7445313294713056e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.3232937354764687e-14,
+        "removedNegativeProbability": 2.876414877483321e-16,
+        "totalProbabilityErrorBudget": 3.1767005092816535e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 5.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.02392341699999978,
+      "fourierSeconds": 0.0025340000000007024,
+      "errors": {
+        "probability": 2.5765682644100126e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 1.7445313294713056e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 6.634592522348932e-15,
+        "removedNegativeProbability": 3.031695285654165e-16,
+        "totalProbabilityErrorBudget": 3.185401507669698e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": 2900,
+      "instrumentSigmaMS": 0.0,
+      "binWidthMS": 2.5,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.0504368340000001,
+      "fourierSeconds": 0.003702750000000421,
+      "errors": {
+        "probability": 1.823371324457793e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.552713678800501e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 1.7445313294713056e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 160,
+        "truncationProbabilityBound": 7.6677998935403e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.3263455760007167e-15,
+        "removedNegativeProbability": 3.5553338242391724e-16,
+        "totalProbabilityErrorBudget": 3.194094086288285e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 10.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.011984707999999955,
+      "fourierSeconds": 0.0017119999999994917,
+      "errors": {
+        "probability": 2.990522164161492e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 2.220446049250313e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 3.9360004482570536e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 8.73122898928128e-15,
+        "removedNegativeProbability": 9.64426597681839e-17,
+        "totalProbabilityErrorBudget": 2.096141313689772e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 5.0,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.02313845900000011,
+      "fourierSeconds": 0.002071749999999817,
+      "errors": {
+        "probability": 2.544050778558826e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.9984014443252818e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 3.9360004482570536e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 4.377668185367747e-15,
+        "removedNegativeProbability": 1.178525909655165e-16,
+        "totalProbabilityErrorBudget": 2.1019292262319022e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "sqrt",
+      "id": "ar-i-r5",
+      "impactM": 0.0500780031201248,
+      "temperatureK": "linear",
+      "instrumentSigmaMS": 1000.0,
+      "binWidthMS": 2.5,
+      "componentCount": 848,
+      "completed": true,
+      "directSeconds": 0.04900754099999993,
+      "fourierSeconds": 0.002909791000000439,
+      "errors": {
+        "probability": 2.191494554590303e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.9984014443252818e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.400374941929925e-12,
+        "varianceM2S2": 3.9360004482570536e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 106,
+        "truncationProbabilityBound": 6.367119962876313e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.1948572507202395e-15,
+        "removedNegativeProbability": 1.0760602639441202e-16,
+        "totalProbabilityErrorBudget": 2.107710433290357e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0009164590000008133,
+      "fourierSeconds": 0.0005866669999994301,
+      "errors": {
+        "probability": 3.382710778154774e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.5543122344752192e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.6007669002662996e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 6.4225453510691916e-15,
+        "removedNegativeProbability": 2.379113816786831e-16,
+        "totalProbabilityErrorBudget": 1.542208408652852e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0018004170000001096,
+      "fourierSeconds": 0.0009145830000001354,
+      "errors": {
+        "probability": 3.122502256758253e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.440892098500626e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.6007669002662996e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 3.2301708276463755e-15,
+        "removedNegativeProbability": 3.0005130906072765e-16,
+        "totalProbabilityErrorBudget": 1.551285735659245e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0038752500000001078,
+      "fourierSeconds": 0.0015617920000003949,
+      "errors": {
+        "probability": 2.927345865710862e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 1.6007669002662996e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.624527842005373e-15,
+        "removedNegativeProbability": 3.657444057628122e-16,
+        "totalProbabilityErrorBudget": 1.560357036023813e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 10.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.000919084000000403,
+      "fourierSeconds": 0.0005293340000003255,
+      "errors": {
+        "probability": 2.6237692574149207e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.440892098500626e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 5.061317511075134e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 9.849522442168485e-283,
+        "floatingPointProbabilityBound": 3.508932127483675e-15,
+        "removedNegativeProbability": 8.2052420413703e-18,
+        "totalProbabilityErrorBudget": 8.42640893260874e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 5.0,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.0017227909999997237,
+      "fourierSeconds": 0.0008083750000000833,
+      "errors": {
+        "probability": 3.469446951953614e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.887379141862766e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 5.061317511075134e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 9.849522442168485e-283,
+        "floatingPointProbabilityBound": 1.7650898043754905e-15,
+        "removedNegativeProbability": 1.9272388840986918e-18,
+        "totalProbabilityErrorBudget": 8.477396609647116e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 0.0,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 2.5,
+      "componentCount": 268,
+      "completed": true,
+      "directSeconds": 0.003332624999999645,
+      "fourierSeconds": 0.001470291000000401,
+      "errors": {
+        "probability": 4.391018798566293e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.440892098500626e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 5.935449483175476e-12,
+        "varianceM2S2": 5.061317511075134e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 9.849522442168485e-283,
+        "floatingPointProbabilityBound": 8.87855622739706e-16,
+        "removedNegativeProbability": 7.157179941300975e-18,
+        "totalProbabilityErrorBudget": 8.528384756886998e-12,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05520258399999989,
+      "fourierSeconds": 0.00886254200000014,
+      "errors": {
+        "probability": 8.440594406936922e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 1.7763568394002505e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.6076663470670918e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 4.634500889015479e-14,
+        "removedNegativeProbability": 5.819310850179552e-16,
+        "totalProbabilityErrorBudget": 1.112363406000373e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10995262500000003,
+      "fourierSeconds": 0.009191416000000174,
+      "errors": {
+        "probability": 9.261461749318986e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 3.3306690738754696e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.6076663470670918e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 2.319147168724547e-14,
+        "removedNegativeProbability": 6.266659553299802e-16,
+        "totalProbabilityErrorBudget": 1.1132742809731437e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 1400,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.25090233400000006,
+      "fourierSeconds": 0.01050208300000044,
+      "errors": {
+        "probability": 9.125761613788616e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.440892098500626e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 1.6076663470670918e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 169,
+        "truncationProbabilityBound": 7.737332580785148e-15,
+        "imageProbabilityBound": 0.0,
+        "floatingPointProbabilityBound": 1.1605171541914233e-14,
+        "removedNegativeProbability": 6.713459174164008e-16,
+        "totalProbabilityErrorBudget": 1.1141805548087484e-10,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 10.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.05518450000000019,
+      "fourierSeconds": 0.006162916999999268,
+      "errors": {
+        "probability": 9.962124693114057e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.661338147750939e-16
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 5.068216957875943e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 2.4545045332392574e-282,
+        "floatingPointProbabilityBound": 2.5991808285512233e-14,
+        "removedNegativeProbability": 2.104769661902841e-17,
+        "totalProbabilityErrorBudget": 6.238532455433186e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 5.0,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.10999508399999947,
+      "fourierSeconds": 0.006221999999999284,
+      "errors": {
+        "probability": 9.729411878490408e-18,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 4.218847493575595e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 5.068216957875943e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 2.4545045332392574e-282,
+        "floatingPointProbabilityBound": 1.3006540320044224e-14,
+        "removedNegativeProbability": 2.010802861213048e-17,
+        "totalProbabilityErrorBudget": 6.243637726564677e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    },
+    {
+      "timeS": 4e-06,
+      "edgeClosure": "linear",
+      "id": "ar-i-r1",
+      "impactM": 0.009734789391575663,
+      "temperatureK": 7250,
+      "instrumentSigmaMS": 500.0,
+      "binWidthMS": 2.5,
+      "componentCount": 4288,
+      "completed": true,
+      "directSeconds": 0.2427412499999999,
+      "fourierSeconds": 0.006887582999999253,
+      "errors": {
+        "probability": 1.0711983876521524e-17,
+        "modeMS": 0.0,
+        "centroidMS": 0.0,
+        "varianceM2S2": 0.0,
+        "capturedFlux": 6.5503158452884236e-15
+      },
+      "thresholds": {
+        "probability": 1e-10,
+        "modeMS": 1e-06,
+        "centroidMS": 6.024177223326499e-12,
+        "varianceM2S2": 5.068216957875943e-08,
+        "capturedFlux": 2.842170943040401e-14
+      },
+      "gates": {
+        "probability": true,
+        "modeMS": true,
+        "centroidMS": true,
+        "varianceM2S2": true,
+        "capturedFlux": true,
+        "nonnegative": true,
+        "unrenormalized": true,
+        "sumBudget": true
+      },
+      "passed": true,
+      "fourier": {
+        "periodMS": 96000.0,
+        "frequencyCount": 94,
+        "truncationProbabilityBound": 4.963621405877548e-15,
+        "imageProbabilityBound": 2.4545045332392574e-282,
+        "floatingPointProbabilityBound": 6.508579713843739e-15,
+        "removedNegativeProbability": 2.202403683965428e-17,
+        "totalProbabilityErrorBudget": 6.24873508983426e-11,
+        "modeCandidateCount": 1,
+        "probabilityRenormalized": false
+      }
+    }
+  ],
+  "fieldCase": "linear-finite-te1-a0.07-r64-dt1e-07",
+  "sourceSHA256": {
+    "scientific/meridional-v86-independent/validate_fourier86.py": "5e32bae29e99a2b1e53e546841c49df6575f95e2ab53a1d5a7238d56a912ee30",
+    "scientific/meridional-v86-independent/fourier86.py": "f5af090ba58fb549e00c938ef562edd32127a017d05553723346cbaee9253e6d",
+    "scientific/meridional-v86/optical86.py": "547c3ee72eab266403ed9678b42ec40fdd88be67f21f466051d81d3862168d79",
+    "scientific/optical-v80/audit.py": "cb5009584602cfb59487fc15f835139aa1dfa2b6032807428d83a7ee73efdc07",
+    "scientific/optical-v80/compare.py": "75cfcc0ee62e0f80a986897b0e23b87e5d8846d81bda28afbd4ca4c996958bc4",
+    "scientific/optical-v80/emissivity.py": "342de7f162ee4e9eef593ff041722a4aaada7f035d580f7d85d39b2d0e4254e9",
+    "scientific/optical-v80/feasible.py": "ae300cabe0d0474a8aacecbaaa835c01eff8011c7b208a0da1a16a6c37630dec",
+    "scientific/optical-v80/independent_bound.py": "9d973f1bd1dba94d111994a450d1e76819615c4a5530c6e8b494683ec28d69c3",
+    "scientific/optical-v80/spectrum.py": "4293e2e18df87810d3fd0532e515abe62ac486383bdcfec121355789948bf2d4",
+    "scientific/optical-v80/study.py": "e442b93719fce9e88c65a67a4c004bfee4f980ab85f16a42cf5532016264e553",
+    "scientific/optical-v80/test_compare.py": "d049b3c171e214c81bead2459a997774374815fe6af4b4ca51b74510f299fa0a",
+    "scientific/optical-v80/test_emissivity.py": "615e5fe347e85f6e39cdafe8b907bbc5998ed619f4cc379224249322f8491aa7",
+    "scientific/optical-v80/test_feasible.py": "7bbc7b031774bbfbc771c683b8c5daa2af9c8b6178bff07f12ff65c8e5bce3e1",
+    "scientific/optical-v80/test_independent_bound.py": "367fa6ac386b9eac78dda7250a4e96147a562855c8f33ecda8eed41bafdd6d70",
+    "scientific/optical-v80/test_spectrum.py": "e1015cfb8d84e6ec39aa87d73c0c046b6d13a2dbe36525d926f2e898191ef508",
+    "scientific/optical-v80/test_study.py": "523974bbb8038f5af68311f33e98b344d696782bed997714553d417d3970a8e9"
+  },
+  "archivedProducerSourceSHA256": {
+    "scientific/meridional-v86/audit86.py": "448157c40bcc9c1113c43da9112291aad7fcf23ccc75d7e96dc77d137cad3936",
+    "scientific/meridional-v86/campaign86.py": "c085d6c03c4f4a5af42576f827df806ce4aa737e226d173b660fa9c4aa0bfe59",
+    "scientific/meridional-v86/compare86.py": "f799e660776990725c542926529b8951b639cf29b70cbaeb946e524a49dfe8fd",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/electro86.py": "23e2ac67777bfeea8c09179450b218241265dac21a3b9f3857a2a36c02ac7463",
+    "scientific/meridional-v86/optical86.py": "622f62c14a725c12275eea6b6ffebe234c8e47d409ea1cd01fe63ece41ce0f29",
+    "scientific/meridional-v86/run86.py": "c46323f6e4ad13bdf59d7c9a76cbec73b9bdd1f753b826079b717ec7d54c6ba9",
+    "scientific/meridional-v86/summarize86.py": "1a1c9afc0f1e33f1189ee2bf40209441164c61890897a853cb79ec6718f9e917",
+    "scientific/meridional-v86/test_audit86.py": "c38a1688dfc6eb8db12cbaba0462412b7171a671189b60622667ea4cd716ad48",
+    "scientific/meridional-v86/test_campaign86.py": "d3cb004d21b0cdf1bda2e55bfec3b280eb7683d7b2912146288a636770ad0cd2",
+    "scientific/meridional-v86/test_compare86.py": "7ef21d7fdd9bf95dc1883bc47f703223db5b45f73f7c4ca72344cb38ebcaf0ee",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/meridional-v86/test_electro86.py": "a63ef2747f33b90d6f51b718227d35c71f842e89b101d719e07612df577c7eed",
+    "scientific/meridional-v86/test_optical86.py": "6b0bc24e70c52b2d28d825ffdf7c76433c2587fe3706b18cb01041ef5ef36fd9",
+    "scientific/meridional-v86/test_thermal_reference86.py": "2031c2c97b3dd62580216bfc25491aff2ff76bfdb84b78f3c4c65b438c5ac09a",
+    "scientific/meridional-v86/thermal_reference86.py": "943a38a16ee12002542c3cdc454f1000535fd4328895ea3298e65dc154416a6b",
+    "scientific/meridional-v86/PROTOCOL.md": "48ecba8c64e0e6273d67838c8f8143fed552acb0295fd4e35690a245d2294770",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/electrical-v82/transport82.py": "99218d6f3b7d553268ecd6bbb3049409ea5e05575988e5134c46611f02945072",
+    "scientific/flow-v81/transport.py": "98970f9aedb65de9d4738b35ba39ea0dcdd678324cc92441e96cda624ce18405",
+    "scientific/flow-v81/argon-viscosity-source.json": "583b67d3ece2c7f29d164bde80c4b3d7510b30b584ca947e1edb76652b10e00f"
+  },
+  "archivedProducerSourceDirectory": "scientific/meridional-v86/results/attempt01/source-snapshot",
+  "predictionSHA256": "b211cfaffeacdea7207f210f7874f6aedd34d3d38c804cd18554b2bb679ae06e",
+  "fieldPacketSHA256": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+  "fieldPacketRawSHA256": "2f4b7ef9994029fe6469b853caaa47d5c353b26a06d42bf63884bb4f25a13418",
+  "brightnessSHA256": "091684a80eb612e7009e73a235e02e9c0a1020f5c7cbbc17b4016a77b754fcee",
+  "locationsSHA256": "78b7c54a0f40034a2c08fbc8977563db1ba6ff29a75d9c0bcd4926e985b79170",
+  "targetVelocityRead": false,
+  "velocityFitted": false,
+  "currentFitted": false,
+  "experimentalQualification": false,
+  "reference": "Unchanged V86 grouped SciPy Gaussian-CDF spectrum",
+  "scope": "Numerical optical-kernel equivalence on one frozen fine flow case; not physical or experimental validation",
+  "timing": {
+    "directSeconds": 3.870201756,
+    "fourierSeconds": 0.27663229099999764,
+    "reconstructionSeconds": 0.008922042000000019,
+    "fixedSpeedGate": false
+  },
+  "versions": {
+    "python": "3.11.2",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1"
+  }
+}

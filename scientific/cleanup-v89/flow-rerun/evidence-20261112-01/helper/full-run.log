@@ -1,0 +1,228 @@
+RUN v86-controls
+EXIT v86-controls 0
+RUN v86-independent-controls
+EXIT v86-independent-controls 0
+RUN v86-hydro-controls
+EXIT v86-hydro-controls 0
+RUN v86-wall-controls
+EXIT v86-wall-controls 0
+RUN v86-fourier-validation
+EXIT v86-fourier-validation 0
+RUN v86-flow
+START linear-finite-te1-a0.07-r16-dt1e-07
+END linear-finite-te1-a0.07-r16-dt1e-07 555374.4614557414 1.2
+START linear-finite-te1-a0.07-r32-dt1e-07
+END linear-finite-te1-a0.07-r32-dt1e-07 610891.8193520637 9.23
+START linear-finite-te1-a0.07-r64-dt1e-07
+END linear-finite-te1-a0.07-r64-dt1e-07 594187.7283786391 102.59
+START linear-finite-te1-a0.08-r16-dt1e-07
+END linear-finite-te1-a0.08-r16-dt1e-07 555379.0314975398 1.17
+START linear-finite-te1-a0.08-r32-dt1e-07
+END linear-finite-te1-a0.08-r32-dt1e-07 610892.002217249 8.83
+START linear-finite-te1-a0.08-r64-dt1e-07
+END linear-finite-te1-a0.08-r64-dt1e-07 594187.7322098468 100.36
+START linear-finite-te2.5-source-a0.07-r16-dt1e-07
+END linear-finite-te2.5-source-a0.07-r16-dt1e-07 188340.94163333988 0.74
+START linear-finite-te2.5-source-a0.07-r32-dt1e-07
+END linear-finite-te2.5-source-a0.07-r32-dt1e-07 202318.9633419949 5.03
+START linear-finite-te2.5-source-a0.07-r64-dt1e-07
+END linear-finite-te2.5-source-a0.07-r64-dt1e-07 201348.40935313224 58.73
+START linear-finite-te2.5-source-a0.08-r16-dt1e-07
+END linear-finite-te2.5-source-a0.08-r16-dt1e-07 188341.3474400296 0.71
+START linear-finite-te2.5-source-a0.08-r32-dt1e-07
+END linear-finite-te2.5-source-a0.08-r32-dt1e-07 202318.97476983254 5.11
+START linear-finite-te2.5-source-a0.08-r64-dt1e-07
+END linear-finite-te2.5-source-a0.08-r64-dt1e-07 201348.3055713529 58.51
+START quadratic-finite-te1-a0.07-r16-dt1e-07
+END quadratic-finite-te1-a0.07-r16-dt1e-07 661903.5472869773 1.29
+START quadratic-finite-te1-a0.07-r32-dt1e-07
+END quadratic-finite-te1-a0.07-r32-dt1e-07 667784.0423884342 9.25
+START quadratic-finite-te1-a0.07-r64-dt1e-07
+END quadratic-finite-te1-a0.07-r64-dt1e-07 665033.8069865449 108.54
+START quadratic-finite-te1-a0.08-r16-dt1e-07
+END quadratic-finite-te1-a0.08-r16-dt1e-07 661906.7628906128 1.3
+START quadratic-finite-te1-a0.08-r32-dt1e-07
+END quadratic-finite-te1-a0.08-r32-dt1e-07 667784.212940347 9.45
+START quadratic-finite-te1-a0.08-r64-dt1e-07
+END quadratic-finite-te1-a0.08-r64-dt1e-07 665033.8869201858 109.06
+START quadratic-finite-te2.5-source-a0.07-r16-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r16-dt1e-07 215349.23689296024 0.8
+START quadratic-finite-te2.5-source-a0.07-r32-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r32-dt1e-07 219416.77757643443 5.39
+START quadratic-finite-te2.5-source-a0.07-r64-dt1e-07
+END quadratic-finite-te2.5-source-a0.07-r64-dt1e-07 219136.2228499631 63.83
+START quadratic-finite-te2.5-source-a0.08-r16-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r16-dt1e-07 215349.50763088907 0.78
+START quadratic-finite-te2.5-source-a0.08-r32-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r32-dt1e-07 219416.73002711215 5.41
+START quadratic-finite-te2.5-source-a0.08-r64-dt1e-07
+END quadratic-finite-te2.5-source-a0.08-r64-dt1e-07 219136.15751176528 64.23
+START linear-finite-te1-a0.07-r64-dt5e-08
+END linear-finite-te1-a0.07-r64-dt5e-08 594187.7283786391 100.29
+START linear-finite-te1-a0.07-r64-dt2.5e-08
+END linear-finite-te1-a0.07-r64-dt2.5e-08 594206.3750458943 99.76
+SEALED 70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7
+EXIT v86-flow 0
+RUN v86-archived-field-replay
+EXIT v86-archived-field-replay 0
+RUN v86-original-audit
+EXIT v86-original-audit 1
+RUN v86-panel-audit
+EXIT v86-panel-audit 1
+RUN v86-thermal-reference
+EXIT v86-thermal-reference 0
+RUN v86-optics
+START optics linear-finite-te1-a0.07-r32-dt1e-07-t0
+START optics linear-finite-te1-a0.07-r32-dt1e-07-t1
+START optics linear-finite-te1-a0.07-r32-dt1e-07-t2
+END optics linear-finite-te1-a0.07-r32-dt1e-07-t0 complete
+START optics linear-finite-te1-a0.07-r32-dt1e-07-t3
+END optics linear-finite-te1-a0.07-r32-dt1e-07-t1 complete
+START optics linear-finite-te1-a0.07-r64-dt1e-07-t0
+END optics linear-finite-te1-a0.07-r32-dt1e-07-t2 complete
+START optics linear-finite-te1-a0.07-r64-dt1e-07-t1
+START optics linear-finite-te1-a0.07-r64-dt1e-07-t2
+END optics linear-finite-te1-a0.07-r32-dt1e-07-t3 complete
+END optics linear-finite-te1-a0.07-r64-dt1e-07-t0 complete
+START optics linear-finite-te1-a0.07-r64-dt1e-07-t3
+END optics linear-finite-te1-a0.07-r64-dt1e-07-t1 complete
+START optics linear-finite-te1-a0.08-r32-dt1e-07-t0
+END optics linear-finite-te1-a0.07-r64-dt1e-07-t2 complete
+START optics linear-finite-te1-a0.08-r32-dt1e-07-t1
+START optics linear-finite-te1-a0.08-r32-dt1e-07-t2
+END optics linear-finite-te1-a0.07-r64-dt1e-07-t3 complete
+END optics linear-finite-te1-a0.08-r32-dt1e-07-t0 complete
+START optics linear-finite-te1-a0.08-r32-dt1e-07-t3
+END optics linear-finite-te1-a0.08-r32-dt1e-07-t1 complete
+START optics linear-finite-te1-a0.08-r64-dt1e-07-t0
+END optics linear-finite-te1-a0.08-r32-dt1e-07-t2 complete
+START optics linear-finite-te1-a0.08-r64-dt1e-07-t1
+START optics linear-finite-te1-a0.08-r64-dt1e-07-t2
+END optics linear-finite-te1-a0.08-r32-dt1e-07-t3 complete
+END optics linear-finite-te1-a0.08-r64-dt1e-07-t0 complete
+START optics linear-finite-te1-a0.08-r64-dt1e-07-t3
+END optics linear-finite-te1-a0.08-r64-dt1e-07-t1 complete
+START optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t0
+END optics linear-finite-te1-a0.08-r64-dt1e-07-t2 complete
+START optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t1
+START optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t2
+END optics linear-finite-te1-a0.08-r64-dt1e-07-t3 complete
+END optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t0 complete
+START optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t3
+END optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t1 complete
+START optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t0
+END optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t2 complete
+START optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t1
+START optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t2
+END optics linear-finite-te2.5-source-a0.07-r32-dt1e-07-t3 complete
+END optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t0 complete
+START optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t3
+END optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t1 complete
+START optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t0
+END optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t2 complete
+START optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t1
+START optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t2
+END optics linear-finite-te2.5-source-a0.07-r64-dt1e-07-t3 complete
+END optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t0 complete
+START optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t3
+END optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t1 complete
+START optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t0
+END optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t2 complete
+START optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t1
+START optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t2
+END optics linear-finite-te2.5-source-a0.08-r32-dt1e-07-t3 complete
+END optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t0 complete
+START optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t3
+START optics quadratic-finite-te1-a0.07-r32-dt1e-07-t0
+END optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t1 complete
+END optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t2 complete
+START optics quadratic-finite-te1-a0.07-r32-dt1e-07-t1
+START optics quadratic-finite-te1-a0.07-r32-dt1e-07-t2
+END optics linear-finite-te2.5-source-a0.08-r64-dt1e-07-t3 complete
+END optics quadratic-finite-te1-a0.07-r32-dt1e-07-t0 complete
+START optics quadratic-finite-te1-a0.07-r32-dt1e-07-t3
+END optics quadratic-finite-te1-a0.07-r32-dt1e-07-t1 complete
+START optics quadratic-finite-te1-a0.07-r64-dt1e-07-t0
+END optics quadratic-finite-te1-a0.07-r32-dt1e-07-t2 complete
+START optics quadratic-finite-te1-a0.07-r64-dt1e-07-t1
+END optics quadratic-finite-te1-a0.07-r32-dt1e-07-t3 complete
+START optics quadratic-finite-te1-a0.07-r64-dt1e-07-t2
+END optics quadratic-finite-te1-a0.07-r64-dt1e-07-t0 complete
+START optics quadratic-finite-te1-a0.07-r64-dt1e-07-t3
+END optics quadratic-finite-te1-a0.07-r64-dt1e-07-t1 complete
+START optics quadratic-finite-te1-a0.08-r32-dt1e-07-t0
+END optics quadratic-finite-te1-a0.07-r64-dt1e-07-t2 complete
+START optics quadratic-finite-te1-a0.08-r32-dt1e-07-t1
+START optics quadratic-finite-te1-a0.08-r32-dt1e-07-t2
+END optics quadratic-finite-te1-a0.07-r64-dt1e-07-t3 complete
+END optics quadratic-finite-te1-a0.08-r32-dt1e-07-t0 complete
+START optics quadratic-finite-te1-a0.08-r32-dt1e-07-t3
+END optics quadratic-finite-te1-a0.08-r32-dt1e-07-t1 complete
+START optics quadratic-finite-te1-a0.08-r64-dt1e-07-t0
+END optics quadratic-finite-te1-a0.08-r32-dt1e-07-t2 complete
+START optics quadratic-finite-te1-a0.08-r64-dt1e-07-t1
+START optics quadratic-finite-te1-a0.08-r64-dt1e-07-t2
+END optics quadratic-finite-te1-a0.08-r32-dt1e-07-t3 complete
+END optics quadratic-finite-te1-a0.08-r64-dt1e-07-t0 complete
+START optics quadratic-finite-te1-a0.08-r64-dt1e-07-t3
+END optics quadratic-finite-te1-a0.08-r64-dt1e-07-t1 complete
+START optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t0
+END optics quadratic-finite-te1-a0.08-r64-dt1e-07-t2 complete
+START optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t1
+START optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t2
+END optics quadratic-finite-te1-a0.08-r64-dt1e-07-t3 complete
+END optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t0 complete
+START optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t3
+END optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t1 complete
+START optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t0
+END optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t2 complete
+START optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t1
+END optics quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t3 complete
+START optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t2
+END optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t0 complete
+START optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t3
+END optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t1 complete
+START optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t0
+END optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t2 complete
+START optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t1
+START optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t2
+END optics quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t3 complete
+END optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t0 complete
+START optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t3
+END optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t1 complete
+START optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t0
+END optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t2 complete
+START optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t1
+END optics quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t3 complete
+START optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t2
+END optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t0 complete
+START optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t3
+END optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t1 complete
+END optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t2 complete
+END optics quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t3 complete
+EXIT v86-optics 0
+RUN v86-compare
+EXIT v86-compare 0
+RUN v86-summary
+EXIT v86-summary 0
+RUN v87-study-controls
+EXIT v87-study-controls 0
+RUN v87-independent-controls
+EXIT v87-independent-controls 0
+RUN v87-report-controls
+EXIT v87-report-controls 0
+RUN v87-flow
+START linear-finite-te1-a0.07-r64-cfl0.2
+END linear-finite-te1-a0.07-r64-cfl0.2 654 101.15
+START linear-finite-te1-a0.07-r64-cfl0.1
+END linear-finite-te1-a0.07-r64-cfl0.1 1310 199.3
+START linear-finite-te1-a0.07-r64-cfl0.05
+END linear-finite-te1-a0.07-r64-cfl0.05 2621 395.51
+SEALED 4a3a4fcd7801480c9590828b7949d4fd7cf47289bf4dca183e46f8fd1a57b2e1
+EXIT v87-flow 0
+RUN v87-original-report-admission
+EXIT v87-original-report-admission 0
+RUN v87-audit
+EXIT v87-audit 0
+RUN v87-summary
+EXIT v87-summary 0

@@ -1,0 +1,7 @@
+START linear-finite-te1-a0.07-r64-cfl0.2
+END linear-finite-te1-a0.07-r64-cfl0.2 654 101.15
+START linear-finite-te1-a0.07-r64-cfl0.1
+END linear-finite-te1-a0.07-r64-cfl0.1 1310 199.3
+START linear-finite-te1-a0.07-r64-cfl0.05
+END linear-finite-te1-a0.07-r64-cfl0.05 2621 395.51
+SEALED 4a3a4fcd7801480c9590828b7949d4fd7cf47289bf4dca183e46f8fd1a57b2e1

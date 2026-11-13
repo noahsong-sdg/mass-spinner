@@ -1,0 +1,26 @@
+{
+  "evidenceAdmitted": true,
+  "globalQualification": false,
+  "experimentalQualification": false,
+  "predictionSHA256": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+  "artifactSHA256": {
+    "predictions.json": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+    "optical-index.json": "b8508d27ad99ae26cca91785325ea98dcad767c92dd48ba825a9b775f33b2303",
+    "comparison-summary.json": "ff3ec42efea1c24812c200586f2768759c6734c4bd60ebf1e6687c9f7559fc15",
+    "comparison.json.gz": "ca9d4e1e067e4387869e1752ad074877165d66657fae8f6889580d2b5c31ef98",
+    "audit.json": "000ff297e48a62536ac118111963266b02e0269f4a103a9d5c9096bf5467d19b",
+    "panel-audit.json": "50576928ba13a9590286a5c4562c723c88aee10bfbf675f955179106af4be6e6",
+    "target": "1e4f542dab2cdd777673f724ec3038e0223589797fa290765c0e1c8f047b4741"
+  },
+  "inputPaths": {
+    "predictions.json": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/predictions.json",
+    "optical-index.json": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/optical-index.json",
+    "comparison-summary.json": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/comparison-summary.json",
+    "comparison.json.gz": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/comparison.json.gz",
+    "audit.json": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/audit.json",
+    "panel-audit.json": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/meridional-v86/results/panel-audit.json",
+    "target": "/work/project/v89-flow-rerun-20261112-01/v87/scientific/profile-v79/results/score.json"
+  },
+  "scope": "Report input identities only; no numerical or experimental qualification",
+  "checkerSHA256": "27821b58cb56c4b742ff9e0cdba5d96514cef38af55a4ebe673f1cabf7bc3b9d"
+}

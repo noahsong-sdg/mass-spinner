@@ -1,0 +1,10 @@
+test_batch_budget_groups_many_small_files_without_one_launch_per_file (test_material_retirement_control.MaterialTransferControls.test_batch_budget_groups_many_small_files_without_one_launch_per_file) ... ok
+test_changed_size_and_symlink_are_rejected_by_actual_guest_helper (test_material_retirement_control.MaterialTransferControls.test_changed_size_and_symlink_are_rejected_by_actual_guest_helper) ... ok
+test_chunk_helper_reconstructs_exact_bounded_slice (test_material_retirement_control.MaterialTransferControls.test_chunk_helper_reconstructs_exact_bounded_slice) ... ok
+test_real_guest_tar_roundtrip_with_empty_unicode_and_long_paths (test_material_retirement_control.MaterialTransferControls.test_real_guest_tar_roundtrip_with_empty_unicode_and_long_paths) ... ok
+test_tar_validator_rejects_corruption_extra_member_and_changed_mode (test_material_retirement_control.MaterialTransferControls.test_tar_validator_rejects_corruption_extra_member_and_changed_mode) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.046s
+
+OK

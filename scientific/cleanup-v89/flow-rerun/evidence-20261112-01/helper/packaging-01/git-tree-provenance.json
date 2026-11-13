@@ -1,0 +1,10 @@
+{
+  "repositoryURL": "https://github.com/noahsong-sdg/mass-spinner",
+  "commit": "ce57170038bfff66a6521883a70042aa1294e8d3",
+  "cwd": "/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6",
+  "command": ["git", "ls-tree", "-rz", "-r", "ce57170038bfff66a6521883a70042aa1294e8d3"],
+  "exitCode": 0,
+  "treeBytes": 453507,
+  "treeSHA256": "ac864b5adaa2d6ff68ba68691710f86e9cb85810ef7736ac1cdf68f61ca09e4f",
+  "scope": "Root-authorized trusted host read-only Git metadata command; no project code executed on the host. Guest packer authenticates omitted bytes against these recorded regular-blob OIDs."
+}

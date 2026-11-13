@@ -1,0 +1,435 @@
+{
+  "startedUTC": "2026-11-13T01:41:23.941455+00:00",
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "zlib": "1.2.13",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "scikit-fem": "12.0.2",
+    "FiPy": "4.0.3",
+    "matplotlib": "3.10.8",
+    "PyAbel": "0.9.1"
+  },
+  "commands": [
+    {
+      "name": "v86-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-p",
+        "test_*86.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 2.441928418,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-independent-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86-independent",
+        "-p",
+        "test_*86.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 0.7714913330000002,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-hydro-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "../mixture-axial-v75",
+        "-p",
+        "test_flow.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 0.05571445800000019,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-wall-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86-independent",
+        "-p",
+        "torque86.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 0.11987833299999995,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-fourier-validation",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86-independent/validate_fourier86.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 4.4007820849999995,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-flow",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "campaign86.py",
+        "flow"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 931.6963255559999,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-archived-field-replay",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86-independent/replay_fields86.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 0.48212979100003395,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-original-audit",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "audit86.py",
+        "results/predictions.json",
+        "results/audit.json"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 1,
+      "wallSeconds": 1.5642444179999302,
+      "scientificFailureRetained": true
+    },
+    {
+      "name": "v86-panel-audit",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86-independent/panel86.py",
+        "results/predictions.json",
+        "results/panel-audit.json"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 1,
+      "wallSeconds": 4.552491502000066,
+      "scientificFailureRetained": true
+    },
+    {
+      "name": "v86-thermal-reference",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "thermal_reference86.py",
+        "results/thermal-reference.json"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 3.565419292999991,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-optics",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "compare86.py",
+        "optics"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 129.71726005999994,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-compare",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "compare86.py",
+        "compare"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 0.7277135840001847,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v86-summary",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "summarize86.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v86/scientific/meridional-v86",
+      "exitCode": 0,
+      "wallSeconds": 1.6989935009999044,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-study-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/timestep-v87",
+        "-p",
+        "test_*87.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.21647345799988216,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-independent-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/timestep-v87-independent",
+        "-p",
+        "test_audit87.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.15040625000006003,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-report-controls",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scientific/tooling-v87",
+        "-p",
+        "test_check_report87.py",
+        "-v"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.020476957999790102,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-flow",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "scientific/timestep-v87/launch87.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 696.0682216119999,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-original-report-admission",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "scientific/tooling-v87/check_report87.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.03179220800006988,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-audit",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "scientific/timestep-v87-independent/audit87.py",
+        "scientific/timestep-v87/results/predictions.json",
+        "scientific/timestep-v87/results/audit.json"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.7967186250000395,
+      "scientificFailureRetained": false
+    },
+    {
+      "name": "v87-summary",
+      "command": [
+        "/work/home/benchmark89-venv/bin/python",
+        "scientific/timestep-v87/summarize87.py"
+      ],
+      "cwd": "/work/project/v89-flow-rerun-20261112-01/v87",
+      "exitCode": 0,
+      "wallSeconds": 0.3508604590001596,
+      "scientificFailureRetained": false
+    }
+  ],
+  "helperSHA256": "9d54ea68a21369d9e08c4e7bd75ba609972ec123a07d5ad844ed482110182d93",
+  "flowOnly": false,
+  "experimentalQualification": false,
+  "physicalCampaignsComplete": true,
+  "updatedUTC": "2026-11-13T02:11:05.399084+00:00",
+  "finishedUTC": "2026-11-13T02:11:05.443123+00:00",
+  "allCommandsPassed": false,
+  "fullModelNumericallyQualified": false,
+  "outputSHA256": {
+    "logs/v86-archived-field-replay.log": "990c2575ffaf5267d476b147fd9c149eb04324beb62d1367abb5a539b42edc4b",
+    "logs/v86-compare.log": "ff3ec42efea1c24812c200586f2768759c6734c4bd60ebf1e6687c9f7559fc15",
+    "logs/v86-controls.log": "c8b439a1d459964a2aca48da65076bcd6b2928e0c5601d3f6a1df8eb1ca4ba5a",
+    "logs/v86-flow.log": "b56d16da3750acad7473d38ecfaef38928f63ca87c579b9f1c367018215c98ab",
+    "logs/v86-fourier-validation.log": "cfb08993880dfd273b03d740471cc768e40e4cacb56cd50dcc678a868bd10392",
+    "logs/v86-hydro-controls.log": "41b4e565d263dea4f95002294b5140632ae9fc5e32144d907cfb79ed4d94dacd",
+    "logs/v86-independent-controls.log": "4de2c2227eae3714e6cde5f0029215580568cfd70d28bf841e46c4746c6b2e40",
+    "logs/v86-optics.log": "7174486b3c9fef560e9b79c70e991a53b8eb9aad78f0138f5af7c28bffc84db4",
+    "logs/v86-original-audit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/v86-panel-audit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/v86-summary.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/v86-thermal-reference.log": "6e81382502a0e3d15fd2076f04c1dc622f6b93dbf785c26a652f1af119930729",
+    "logs/v86-wall-controls.log": "3f7bcb0c1e2f2f03c34e0f614dd647655f5838fdb5a006769db22a8bd89ee3ac",
+    "logs/v87-audit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "logs/v87-flow.log": "e395ac57a507e6273ca0c4ba410ff44d11c32beeff5addf9db4220f8a5b21861",
+    "logs/v87-independent-controls.log": "eb4dda727998f644bdf4b9950a231b162f9354e5cf00fdb7f29d44672125a140",
+    "logs/v87-original-report-admission.log": "0e43d14ac98e5d794dbff929d8bec30e32e7f007586859c2272f72bacd55a687",
+    "logs/v87-report-controls.log": "08434b1f0f35dfa94364be6e9f2765e55ef007451a81840fc81211b8edc9403f",
+    "logs/v87-study-controls.log": "35c6c307ede6344b9d9d0c94da2cba0096e11ea2f6b0a9aefbab04fad7f6e1c7",
+    "logs/v87-summary.log": "907457795638d991901a11184ac5a8e1d671f445b7efae4d3619dd30eb2d6fd5",
+    "source-closure.json": "9db734fc773ed2b7abdf41576ebad9458a1741acf526b277255e4257ffca3dfc",
+    "v86/scientific/meridional-v86/results/audit.json": "000ff297e48a62536ac118111963266b02e0269f4a103a9d5c9096bf5467d19b",
+    "v86/scientific/meridional-v86/results/comparison-summary.json": "ff3ec42efea1c24812c200586f2768759c6734c4bd60ebf1e6687c9f7559fc15",
+    "v86/scientific/meridional-v86/results/comparison.json.gz": "ca9d4e1e067e4387869e1752ad074877165d66657fae8f6889580d2b5c31ef98",
+    "v86/scientific/meridional-v86/results/comparison.png": "72aeb422955284d2931361f758e47088aa8ba4748c871242bf2d36b0edd6b7d6",
+    "v86/scientific/meridional-v86/results/conditional-release.png": "d6208ab0209b29d5190318980e250d3a4410477248ae277dea28f82354e41442",
+    "v86/scientific/meridional-v86/results/field-replay.json": "990c2575ffaf5267d476b147fd9c149eb04324beb62d1367abb5a539b42edc4b",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.07-r16-dt1e-07.json.gz": "5b1549f21181f47339bca3a19774dc1a75f8299718e98f5985d3bcf5ed9bc079",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.07-r32-dt1e-07.json.gz": "81d8568401be7667bce3c5ce2078094be15192fde4235cf2fe848ca958724fd3",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.07-r64-dt1e-07.json.gz": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.07-r64-dt2.5e-08.json.gz": "bc4fa9b2ff79d4ba96c267a4806e3620f925b0f4a7adc64f4ae53836543d9ad4",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.07-r64-dt5e-08.json.gz": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.08-r16-dt1e-07.json.gz": "4ac267d7e60159a4dac7088d3b64396c6665da54d0a33100cf7781fcba17661b",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.08-r32-dt1e-07.json.gz": "f4ddbd6ad53779c5d0bcf06bd1e3e7a2d82450240cb6407517720f0811d6514e",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te1-a0.08-r64-dt1e-07.json.gz": "97d3053637a495a974e05c68e16bcc344c2889349f433e4b4fe1345c4e83c680",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.07-r16-dt1e-07.json.gz": "feb9cc6aa54c69d1d8779649cf9da474094df35c249f2b22abe39c286e20425b",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.07-r32-dt1e-07.json.gz": "9bfe89f4d2056a64b2dbbc72b32a0078562e53d64cf34a2861d77c70f32e2996",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.07-r64-dt1e-07.json.gz": "85084a198387da582ca4d4ab1f6acea6e3ca0c280adcc803625cf07e77101233",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.08-r16-dt1e-07.json.gz": "45287170fc0203bb4b2742a9fde6a4c2a012d5d22c2531ef1cc6a69651b70afb",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.08-r32-dt1e-07.json.gz": "a1554ede5c369ea96432b15e60c9195b4d96602a9244c1624bc53d4f3eedeedb",
+    "v86/scientific/meridional-v86/results/fields/linear-finite-te2.5-source-a0.08-r64-dt1e-07.json.gz": "144076686601dd8686d403e7b543efbdc3cc0c7539f7e5a0af72634134698781",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.07-r16-dt1e-07.json.gz": "fb5b58e1fedae480f5d81ea3daa28810852d596f7224a35512eb324cfc1df04b",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.07-r32-dt1e-07.json.gz": "1db3c804f057138f69758edaed2c80384dc17d094abab18928ac2a4aab84f82d",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.07-r64-dt1e-07.json.gz": "538344e2a9a63b9fc359fada9ac52d90e935bdf81f70202c847409d0a3f31525",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.08-r16-dt1e-07.json.gz": "895c43e0eb7837a87a7579cdad2c5812933b200b3ed1253eb87571aac006e314",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.08-r32-dt1e-07.json.gz": "0e625caeb05136e36f899bc57d5ee207d51cbf5ccbeadea36d3f1a3222a8e409",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te1-a0.08-r64-dt1e-07.json.gz": "6d230143b60d10df0734798c8a4803314e2b2b5d0286a72ff8d56ca89dafa068",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.07-r16-dt1e-07.json.gz": "97d31a1b2a3fe4971835950568f788f4e55ec41ded5ac37822c1d090b18095c2",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07.json.gz": "3723adeeadba103fb938f39f2db100551ce1251d625c41ab1b40b7f807bf3c1d",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07.json.gz": "e1a7d95b63d70b6e7ecb61d2e3527de9bc89f8050b6526b60af1a14719982377",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.08-r16-dt1e-07.json.gz": "4e6060cc31cf7389efaa306e0fda99aca18ff5f4a3865119831a7dbcc27b6e3b",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07.json.gz": "66ca76f6bdea805dc503bb3966625b8fbae528e3a2bee0829a2b3a8a4a8a68b3",
+    "v86/scientific/meridional-v86/results/fields/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07.json.gz": "aab3cbf154c1d6a06e07c2920fb6797b89a7b1e89bc0c8b6f24299272501e365",
+    "v86/scientific/meridional-v86/results/fourier-validation.json": "aff5397a0c95ec20792c256c1a3057e35ab5aad384496e9d09436fc0d63323b0",
+    "v86/scientific/meridional-v86/results/optical-index.json": "b8508d27ad99ae26cca91785325ea98dcad767c92dd48ba825a9b775f33b2303",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r32-dt1e-07-t0.json.gz": "4b083e3089993300651b52555f0ef5e870507ca29e4dd83c5a742e83fa288cd9",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r32-dt1e-07-t1.json.gz": "54a4a70a2bf1ec643cd8f6a36c553065321af03338eda845875f66dfdbb6fa7a",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r32-dt1e-07-t2.json.gz": "a52c78b9f405f945577b4b21666a137a31bae671eb58cb523fcb0b8b15112ab6",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r32-dt1e-07-t3.json.gz": "cae21d65a89dc20870f589d72b251c12f88c205a56143637711744e91645cf0d",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r64-dt1e-07-t0.json.gz": "f92b83e59f44808a23968e6d38b0883c0e3cef41a040040d97005a9c38c15c72",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r64-dt1e-07-t1.json.gz": "667c931dc6f8b6bf980d22012232f865aef14a1498cb3622385e804094373a38",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r64-dt1e-07-t2.json.gz": "15305391429a9be68aff73c4acec482f6cb57d5e977174646006a3879f0e386f",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.07-r64-dt1e-07-t3.json.gz": "3493510b5d392a6e78b0796b2d3284f5e59caa96ebf1775b1d351a1d85c714cf",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r32-dt1e-07-t0.json.gz": "da209ac9a75c09963c4ee0f3949f26582a5367bb6c979159a422adc768c34e14",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r32-dt1e-07-t1.json.gz": "f12503873bb869d86e9a12ae43ad34aea21041b41f72ba7207b5028dbbf26fce",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r32-dt1e-07-t2.json.gz": "b06e6f3b224dac081f99a91cbcd38c46049eb21e96ad5b4c5c6855d51657557b",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r32-dt1e-07-t3.json.gz": "2f787f511abb9c72a125b35a9383de75f3d1404556131fc09d4aaa229fee1363",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r64-dt1e-07-t0.json.gz": "0fe87618294671b8f344ea646271e10a5c8dd400f3540df62474d90edcf0de17",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r64-dt1e-07-t1.json.gz": "7819e662bfd88dc52224227f47a4f9e1bb40ccf885a725a4d4774a405770b000",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r64-dt1e-07-t2.json.gz": "2d6b03c70e21c1cf8fabc96afede4b9d2e6bc88cbcfcfbfc5a81e71b0532e25e",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te1-a0.08-r64-dt1e-07-t3.json.gz": "be1cf8b1f5bcd64c0e9298c184421aa17696937b9f52533c03945532399d8a85",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t0.json.gz": "fa174221e3bcbbe8fc34ea5ae360cffc16665d39d740f0a73e2c30857e7329ca",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t1.json.gz": "5bf8b6a93ce4caa89b1791b91b2d46f06d3740ee4a5bd1a42aae4233200413ed",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t2.json.gz": "aae29082e5c2c6960502e2ec58c5d552c9b6e832e25ff611a7c6a6cfeed5350b",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r32-dt1e-07-t3.json.gz": "8bbfeaf38aa504c539164d3bf62a93e45877799814c8d5e68dd67fa605b89f75",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t0.json.gz": "2360adfda8d77cbfb0996a56d0b387e2be7c5f1e495dacd143cb299e355ee791",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t1.json.gz": "819e9273a78d194028928abaa182c5c067ca7eb3ba6e5713e211f80c3b9dde17",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t2.json.gz": "ccd70c86cbb8dcefd2d189352dc947fb25d7573d4eed8263c8bb995cf0750e8c",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.07-r64-dt1e-07-t3.json.gz": "6f35ac7cd21f2473b0d9c8ca72d712b922b8130b46e9158ffb64471feb9e0f13",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t0.json.gz": "1c372a50af1023d5a47677155565508a46152c9271f1cf4dbec359e3e1752a39",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t1.json.gz": "166d1ef3d18d4babb0ce1a4e232fbada2be1a4b24345c9ed3499198e1268752b",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t2.json.gz": "764be2513dc911e85c85ad8623ca800495ac49fa7aad916e62df87a4b0604b2a",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r32-dt1e-07-t3.json.gz": "cbf86c4b0136993b186260e72f8afe439b6e351edf41fbb9f44d2f9fbb84a960",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t0.json.gz": "17692257ed0e426dbc489341fb33e010962110f463cef23b0af70dff8f3a69ed",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t1.json.gz": "9e165c49280065bd4f1d0ba2cafa34cded7c2a7d2046a721842236b7b6485f03",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t2.json.gz": "a85da03dddd442d87287b151a33ba4e50a6447bf4f89b4b1b8594f954467142b",
+    "v86/scientific/meridional-v86/results/optics/linear-finite-te2.5-source-a0.08-r64-dt1e-07-t3.json.gz": "9437d05434318fb0aa81b69c27acec62164bf4d884c8236a5c01296cc8032f7b",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t0.json.gz": "64ed6dd28cbbcd6a1d05f9363730ab4b65f900ed424d1770dc6b955af922d83c",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t1.json.gz": "c2b7f3f4f58e0058956bf54f3cfd4ba1ab08497df7a761c364e7e042bc3dec93",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t2.json.gz": "4e23b6806d58a1b441664cf1e8eb44f23c973ca3d3e38d3492fa1b0c7cf42aaf",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r32-dt1e-07-t3.json.gz": "3d299c7f1037103511af91c8734684249232eb9a0d991102adc611618cbabd5d",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t0.json.gz": "9511dc08eb176d4f2f2b606983dffa77b35aac3839c144f5a2478cc5ab89a8d9",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t1.json.gz": "09ee77ac1cf017266a647310da24b0739fb847a76ca84b5eaa68d8fed4db1762",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t2.json.gz": "628f5d0d12b0286139874c973ace1278b8fad84aec0f3b8387d92f962416afd4",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.07-r64-dt1e-07-t3.json.gz": "8976f2e0da81fb0483b964d30e3acfa181d05f863a08a7073c60c7689a511c84",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t0.json.gz": "d264bed9811e327ca0ecadc35d518f23186555bc58733fa2905afe102fda6ac8",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t1.json.gz": "ed7fa4b99af2b33ab83c182db6b88700211d60ef49d7392e8ff2d710c0e735c3",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t2.json.gz": "167d5503eede6d76c102c06fc11769d0fa4e45caed96e60e5ec6c2ba2ad86e5d",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r32-dt1e-07-t3.json.gz": "d4fa3ef466961dfc9301313d15aabbfc51388e75c9a603bf130cae1afbe9f867",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t0.json.gz": "11c08f8e9a35843f1dfce75f6d5a0b7276f6caf74614ea66ce0812bc6e1f5910",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t1.json.gz": "2f39cce7bb7c85f896a5029ef36b4d7abcfdea0d5a1b78b3c198e7ce664d5c3b",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t2.json.gz": "f599a5900c957b93958437199da19d210c3ff5e12385090f003a2485b3344b88",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te1-a0.08-r64-dt1e-07-t3.json.gz": "ff11e035527438a601d29bf0c2e3f57eede84a4a7219190a0e61faf5bf9bb226",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t0.json.gz": "e744b5b275d0f8fb168fe223cfd86dad36bd6a7c92e8606850cf56215cef90f3",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t1.json.gz": "0689793a24186a2c2060daf3fa8e194357968c3b188383d9e9a029e7f729e584",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t2.json.gz": "0c6a7c61e0f30015ab21ddff0377dd6c57057204caf8fcc39cdfe89c1da5c086",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r32-dt1e-07-t3.json.gz": "5a3b1c7fea2c7d4dacba88dc8142f441f389c4e11997a1de4716d4205cdac486",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t0.json.gz": "a1086efc1d0a6bbdbf432d7f3f3de3d08d86546e38718d4faf3dc3e4f371488b",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t1.json.gz": "6bcd52700167a14e5bd4ec82684a9ce8620cf4197dd7f4833737e190f917c754",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t2.json.gz": "5e2fdb978cb99b221e5f5ac7a4687ca913826ae6719de653fb88d5ec73dc1538",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.07-r64-dt1e-07-t3.json.gz": "adc4e09da1fddc1679e7f12b71a6ae6506cd1df0d278219b2c3da47d923c6903",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t0.json.gz": "74095863bd0c565aead48f7daa4ca55083134b98628c4909214b5370e57352ce",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t1.json.gz": "a5428bc3be01aba5e21b6b1271a5fac39315ad1770744231815ec549f4415a2f",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t2.json.gz": "c6f38e63dddc3cad393554281c1ed038de7ee05b5934a4c324cd0cce92ad75f0",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r32-dt1e-07-t3.json.gz": "017cad6f7b4543d6720e6aba4b44c0f65bdf3a56966cd1d99ffd9bb4cc60036d",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t0.json.gz": "b9b499b8430c4ab6f60e7af1bfd47f918acf179445bb88419c5beb03aaa5ef2d",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t1.json.gz": "572a7920a8d4c6bcf9bc5508c9902d80184c1daad8e30abbcfcba9e55ad7521f",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t2.json.gz": "b80ab873728ddae22acd4be5e158a0059ac3ee71b2438d51e384cf1e05ba02b7",
+    "v86/scientific/meridional-v86/results/optics/quadratic-finite-te2.5-source-a0.08-r64-dt1e-07-t3.json.gz": "c44ede3ba227e97d33e51a50f00a5a838a83170e88d8a4e5d6833b5fe52517b2",
+    "v86/scientific/meridional-v86/results/panel-audit.json": "50576928ba13a9590286a5c4562c723c88aee10bfbf675f955179106af4be6e6",
+    "v86/scientific/meridional-v86/results/predictions.json": "70e0923e8ac9a53a476e439a9df3e670fb52467ee9d3d6ab5aa62ad9eae5e5c7",
+    "v86/scientific/meridional-v86/results/summary.json": "755f0c2c3004b11b5bf96da174c1f91dc3d04e3abb46537741c7e827a36185f6",
+    "v86/scientific/meridional-v86/results/thermal-reference.json": "4dd45127dc027da884831b5ba9eeb1193142a5a2576316437947ab16c3077677",
+    "v86-replay-differences.json": "fa91fcd4226158fabd87c011c0f833a735b1865d4e591513323e8885477bafcf",
+    "v87/scientific/timestep-v87/results/audit.json": "2d2c886ec58aa3e3a9d58c2764148c81c70d09ca16986ee06cb9779fda8279b6",
+    "v87/scientific/timestep-v87/results/fields/linear-finite-te1-a0.07-r64-cfl0.05.json.gz": "b20938fc08d724a449dc6623fa936e1e16c25e4e66fddff2784e63ed33085826",
+    "v87/scientific/timestep-v87/results/fields/linear-finite-te1-a0.07-r64-cfl0.1.json.gz": "c08dc7d769bfff0411e1284217ef94a737e5d357b2af9c91c6e1eb8c1e1f1ddc",
+    "v87/scientific/timestep-v87/results/fields/linear-finite-te1-a0.07-r64-cfl0.2.json.gz": "dd4fa46b7017f8ae8e1f4767e0c5a0a027c08cde9de0cb34ff349aa6f1d39901",
+    "v87/scientific/timestep-v87/results/predictions.json": "4a3a4fcd7801480c9590828b7949d4fd7cf47289bf4dca183e46f8fd1a57b2e1",
+    "v87/scientific/timestep-v87/results/summary.json": "e252866403d7ea2c076772bb51d84b7daa3c14e9d29c81710be6a1b9121f5c09",
+    "v87/scientific/timestep-v87/results/temporal-refinement.png": "013daaba38297f42279653b8390f849b14c87656bf35f06e8ab71fba5adeb2c8",
+    "v87-replay-differences.json": "d881dbb33ee5de70aad548ba91277f464edb395e57b2cdd595483d009116c028"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "archive": "/work/project/v89-flow-evidence-20261112-01.tar.gz",
+  "sha256": "86881d0c159c40bdf1b72c8edbab25e7e8a4eaf05d89aa50d4802fec85fc8f94",
+  "archiveBytes": 608410,
+  "includedFiles": 58,
+  "includedRegularBytes": 2248591,
+  "recoveredFiles": 531,
+  "recoveredBytes": 152022680,
+  "includedMemberHashesVerified": true
+}

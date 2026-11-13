@@ -1,0 +1,19 @@
+test_changed_receipted_output_stops_export (test_pack.PackingTests.test_changed_receipted_output_stops_export) ... ok
+test_existing_archive_is_preserved (test_pack.PackingTests.test_existing_archive_is_preserved) ... ok
+test_incomplete_run_cannot_be_exported_as_complete (test_pack.PackingTests.test_incomplete_run_cannot_be_exported_as_complete) ... ok
+test_only_exact_pinned_git_blob_is_deduplicated (test_pack.PackingTests.test_only_exact_pinned_git_blob_is_deduplicated) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+OK
+{
+  "archive": "/work/project/tmpvpqlrveq/evidence.tar.gz",
+  "sha256": "732a3ea9e8e2454e222efbf01e5e6da5beb065a6d7900ce2450de9a8b0dacfe6",
+  "archiveBytes": 1373,
+  "includedFiles": 4,
+  "includedRegularBytes": 407,
+  "recoveredFiles": 1,
+  "recoveredBytes": 9,
+  "includedMemberHashesVerified": true
+}

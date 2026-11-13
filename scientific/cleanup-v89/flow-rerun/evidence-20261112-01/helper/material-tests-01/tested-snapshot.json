@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/python3",
+    "-m",
+    "unittest",
+    "-v",
+    "test_material_retirement_control"
+  ],
+  "cwd": "/work/project/v89-flow-helper-20261112-02/material-tests-01",
+  "exitCode": 0,
+  "wallSeconds": 0.06771116600000004,
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "sourceSHA256": {
+    "material_retirement_control.py": "61312c1814294aea3c8897d5d05e35aa0cac6277e444bc08fa25d9d9ff8ee6dc",
+    "test_material_retirement_control.py": "3b9b0d68dfc434877d1842f6cb6b2cb1f8cf817d0b67aa6445e76643c14c0360"
+  }
+}

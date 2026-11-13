@@ -1,0 +1,9 @@
+test_exact_and_float_changes_are_reported_separately (test_rerun.ReplayComparisonTests.test_exact_and_float_changes_are_reported_separately) ... ok
+test_existing_stage_is_never_overwritten (test_rerun.ReplayComparisonTests.test_existing_stage_is_never_overwritten) ... ok
+test_failed_trajectory_cannot_be_a_completed_replay (test_rerun.ReplayComparisonTests.test_failed_trajectory_cannot_be_a_completed_replay) ... ok
+test_mutated_archive_is_rejected_before_comparison (test_rerun.ReplayComparisonTests.test_mutated_archive_is_rejected_before_comparison) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.049s
+
+OK

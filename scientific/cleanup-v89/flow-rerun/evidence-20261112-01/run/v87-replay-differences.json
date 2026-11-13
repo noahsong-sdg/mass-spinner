@@ -1,0 +1,2017 @@
+{
+  "cases": [
+    {
+      "label": "linear-finite-te1-a0.07-r64-cfl0.2",
+      "stepCount": 654,
+      "compressedBytesEqual": true,
+      "rawBytesEqual": true,
+      "decodedStateExactlyEqual": true,
+      "numericalDifferences": [
+        {
+          "field": "snapshot[0].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00014780627237828654,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00029985406933969285,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5898.125000000001,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 212860.31072063136,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138.7545701900378,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001477233032396553,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8553837911469958e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1430.3783662240635,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016208817485785786,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030092074223590445,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 220208.53551333488,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 174923.81119856166,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1142.6202006925955,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1689.650748510853,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 857.7794375501193,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016199077448506968,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8556827855532338e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 8739.991719009156,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00017239790496562107,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0003030543221395159,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 406068.5105815612,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138692.65877182237,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 797.9323884983542,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1760.2139383972137,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1228.7540663670666,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016686559744968522,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.856654976616662e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 11868.439029575937,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0002559307167629113,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030792008722763456,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594187.7283786391,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 179764.71485712696,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 595.1111031418394,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1453.728397023603,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1549.4654568985366,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00020740676691685677,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5.184218072426183e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 14356.738363764314,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.timeS",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.dtS",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4.7666980843541067e-08,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.massRelativeDrift",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.6452187025200452e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.speciesRelativeDrift",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.6452187025200452e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.energyRelativeDefect",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.9969318808355153e-14,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.chargeRelativeResidual",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5.058006374847324e-12,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.electricalWorkJ",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.039458632768921614,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.ohmicJ",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0004475284427343996,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.emNumericalHeatJ",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.3966209274978786e-08,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousHeatJ",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.9533894274933457e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousNumericalHeatJ",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 7.735662641897628e-09,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTemperatureK",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594187.7283786391,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.minimumTemperatureK",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1800.004235630444,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTotalMach",
+          "shape": [
+            654
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.7482567050860112,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        }
+      ]
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-cfl0.1",
+      "stepCount": 1310,
+      "compressedBytesEqual": true,
+      "rawBytesEqual": true,
+      "decodedStateExactlyEqual": true,
+      "numericalDifferences": [
+        {
+          "field": "snapshot[0].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00014780627237828654,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00029985406933969285,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5898.125000000001,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 212860.31072063136,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138.7545701900378,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001477233032396553,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8553837911469958e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1430.3783662240635,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016207748073875368,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0003009316081095467,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 220676.51427910358,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 174370.0825371463,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1135.5682844171906,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1692.8703550412101,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 862.8060886086579,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016198002473195186,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8556838806394375e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 8749.27373840648,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001722984852970912,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0003030650033453417,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 407051.9704142205,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138884.20269174318,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 795.4457447134314,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1761.1063623895272,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1230.0362142215104,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001668468351803382,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.856656904958588e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 11882.802460992454,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0002559018940094344,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030793170091169707,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594311.8664206746,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 179838.4937803622,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594.7034399898097,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1453.3456558618038,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1550.695290542982,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00020735192045197016,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5.188251181142057e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 14358.23799446151,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.timeS",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.dtS",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.3833490421770533e-08,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.massRelativeDrift",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.6452187025200452e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.speciesRelativeDrift",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.6452187025200452e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.energyRelativeDefect",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4.99110908357972e-14,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.chargeRelativeResidual",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4.526775707752728e-12,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.electricalWorkJ",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.03945841493802844,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.ohmicJ",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.000223766003086171,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.emNumericalHeatJ",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5.991715317591576e-09,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousHeatJ",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 9.766245238301859e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousNumericalHeatJ",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.9168280167576135e-09,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTemperatureK",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594311.8664206746,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.minimumTemperatureK",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1800.0036241613152,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTotalMach",
+          "shape": [
+            1310
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.7483146927806349,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        }
+      ]
+    },
+    {
+      "label": "linear-finite-te1-a0.07-r64-cfl0.05",
+      "stepCount": 2621,
+      "compressedBytesEqual": true,
+      "rawBytesEqual": true,
+      "decodedStateExactlyEqual": true,
+      "numericalDifferences": [
+        {
+          "field": "snapshot[0].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00014780627237828654,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00029985406933969285,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5898.125000000001,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 212860.31072063136,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138.7545701900378,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0,
+          "maxDifferenceOverBaselinePeak": null,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001477233032396553,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8553837911469958e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[0].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1430.3783662240635,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016207251573774304,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030093659401146173,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 220872.24379441535,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 174119.4165944024,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1132.3669976232607,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1694.543727746446,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 865.1953879648927,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.0001619750336916489,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.8556843938502583e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[1].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 8753.152972129235,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00017225187591085408,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030306999515457614,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 407494.3282427242,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 138968.06516197155,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 794.3085137215925,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1761.5928536499573,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1230.6771898130726,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00016683791699063238,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 2.856657828024663e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[2].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 11889.257439419885,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].timeS",
+          "shape": [],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].q",
+          "shape": [
+            6,
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.000255891016604325,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].densityKgM3",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00030793727569175744,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].temperatureK",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594368.8770276816,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].omegaRadS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 179873.12983241165,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].pressurePa",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594.5092823779365,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].massFraction",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.5,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vrMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1453.1853470363396,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].vzMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1551.2888449338732,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].thermalJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00020732715515950307,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].kineticJ",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 5.1902970535077095e-05,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "snapshot[3].soundMPS",
+          "shape": [
+            96,
+            64
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 14358.92664993013,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.timeS",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.dtS",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.1916745210885267e-08,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.massRelativeDrift",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 3.2904374050400904e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.speciesRelativeDrift",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 3.2904374050400904e-16,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.energyRelativeDefect",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 6.253228621956201e-14,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.chargeRelativeResidual",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 3.545251930567317e-12,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.electricalWorkJ",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.039458306748045,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.ohmicJ",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.00011188344849893446,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.emNumericalHeatJ",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1.4979502803416769e-09,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousHeatJ",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4.883023633771967e-06,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.viscousNumericalHeatJ",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 4.77733693760758e-10,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTemperatureK",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 594368.8770276816,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.minimumTemperatureK",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 1800.0033682811566,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        },
+        {
+          "field": "history.maximumTotalMach",
+          "shape": [
+            2621
+          ],
+          "maxAbsoluteDifference": 0.0,
+          "baselineMaxAbsolute": 0.7483435811699682,
+          "maxDifferenceOverBaselinePeak": 0.0,
+          "exactlyEqual": true
+        }
+      ]
+    }
+  ],
+  "completedCases": 3,
+  "rawIdenticalCases": 3,
+  "exactDecodedCases": 3,
+  "predictionBytesEqual": true,
+  "experimentalQualification": false,
+  "scope": "Descriptive replay differences; all original gates remain authoritative."
+}
