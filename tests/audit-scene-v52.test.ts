@@ -6,7 +6,7 @@ import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 import {DEFAULT_FUEL_CENTRIFUGE,simulateFuelCentrifuge} from '../src/fuel-centrifuge.js';
 import {DEFAULT_FUEL_THERMAL,simulateFuelOperation} from '../src/fuel-operation.js';
-import {simulateFuelTransport} from '../src/fuel-transport.js';
+import {sampleFuelTransport,simulateFuelTransport} from '../src/fuel-transport.js';
 import {createFuelMotion,fuelMotionState} from '../src/fuel-motion.js';
 import {sampleFuelField} from '../src/fuel-scene-tools.js';
 import {comparisonDomain} from '../src/fuel-experiments.js';
@@ -137,7 +137,15 @@ test('resolved rotation clock includes accepted checkpoint-only current-pulse sp
  const neutralPeak=Math.max(...transport.checkpoints!.map(s=>Math.abs(s.neutralRadS)))*rotor.config.radiusM;
  assert.ok(neutralPeak>Math.max(...endpoints.map(s=>Math.abs(s.neutralRadS)))*rotor.config.radiusM*1.1);
  assert.equal(comparisonDomain([full],'speed')[1],neutralPeak,'the fixed color range must include a pulse peak omitted from plotting snapshots');
- const legacy={...rotor,transport:{...transport,checkpoints:undefined}};
+ // Equivalent older recorders stored every accepted state as a snapshot.
+ // Removing refined checkpoints while keeping only compact plotting snapshots
+ // deliberately discards extrema and cannot preserve their original range.
+ const legacy={...rotor,transport:{...transport,checkpoints:undefined,
+  snapshots:transport.checkpoints!.map(s=>sampleFuelTransport(transport,s.timeS))}};
  assert.equal(fuelMotionState(legacy,0,'transport').secondsPerScreenSecond,fuelMotionState({...rotor,transport},0,'transport').secondsPerScreenSecond);
  for(const layer of ['speed','density'] as const)assert.deepEqual(comparisonDomain([legacy],layer),comparisonDomain([{...rotor,transport}],layer));
+ const compact={...rotor,transport:{...transport,checkpoints:undefined}};
+ const retainedPeak=Math.max(...transport.snapshots.map(s=>Math.abs(s.neutralRadS)))*rotor.config.radiusM;
+ assert.ok(comparisonDomain([compact],'speed')[1]>=retainedPeak);
+ assert.ok(comparisonDomain([compact],'speed')[1]<=comparisonDomain([full],'speed')[1]);
 });

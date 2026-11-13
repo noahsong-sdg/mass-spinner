@@ -83,7 +83,7 @@ test('the live workspace exposes one current named main landmark and reuses the 
  assert.equal(shell.firstChild,f.heading,'startup captures the h1 before its learning-path parent is detached');
  assert.deepEqual([...shell.childNodes].filter(node=>node.nodeType===f.window.Node.TEXT_NODE&&node.textContent!.trim()),[],'append never stringifies an absent document query as null');
  setupExperience({selectMode(){},invalidate(){},showView(){},showResearch(){},onLevelChange:level=>f.workspace.setLevel(level)});
- for(const [level,title]of [['1','Mass Spinner'],['2','Marathon'],['3','Models'],['4','Research']]){
+ for(const [level,title]of [['1','Mass Spinner'],['2','Marathon centrifuge'],['3','Models'],['4','Research']]){
   f.doc.querySelector<HTMLButtonElement>(`button[data-level="${level}"]`)!.click();
   const mains=[...f.doc.querySelectorAll('main')].filter(main=>!main.closest('[hidden]'));
   assert.equal(mains.length,1);assert.ok(mains[0].classList.contains('sim-workspace'));

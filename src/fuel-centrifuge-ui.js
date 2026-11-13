@@ -10,6 +10,7 @@ import {createFuelViewTools} from './fuel-view-ui.js';
 import {FUEL_COMPONENT_CONTROLS} from './fuel-scene-tools.js';
 import {floatingPlayback} from './floating-playback.js';
 import {DEFAULT_FUEL_THERMAL,fuelCurrentIntervention} from './fuel-operation.ts';
+import {mountFuelQualification} from './fuel-qualification-ui.js';
 
 const fmt=value=>value===null?'—':Number(value).toLocaleString(undefined,{maximumSignificantDigits:4});
 const temperatureDomain=results=>{let lo=Infinity,hi=0;for(const result of results){lo=Math.min(lo,result.config.gasK);hi=Math.max(hi,result.config.gasK);for(const s of result.transport?.checkpoints??result.transport?.snapshots??[]){if(s.thermal){lo=Math.min(lo,s.thermal.gas?.minK??s.thermal.gasK);hi=Math.max(hi,s.thermal.gas?.maxK??s.thermal.gasK);}}}return [lo,hi];};
@@ -62,6 +63,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const el=(tag,text)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
  const root=el('section'),nodes={};root.id='fuel-centrifuge';
  for(const key of ['render','controls','plots','inspect','view','info']){nodes[key]=el('div');nodes[key].id=`fuel-${key}`;root.append(nodes[key]);}
+ const qualification=mountFuelQualification(nodes.info);
  (doc.querySelector('main')??doc.body).append(root);
  const frame=el('div');frame.className='apparatus-frame';nodes.render.className='apparatus';nodes.render.append(frame);
  const baselineFrame=el('div');baselineFrame.className='apparatus-frame fuel-baseline';baselineFrame.hidden=true;nodes.render.append(baselineFrame);
@@ -412,5 +414,5 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
  });
  dependencies();
- return {nodes,read,run,get latest(){return latest;},setActive(value){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${error.message}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();comparisons.dispose();if(tools)viewer?.select(null);tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
+ return {nodes,read,run,get latest(){return latest;},setActive(value){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${error.message}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();comparisons.dispose();qualification.dispose();if(tools)viewer?.select(null);tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
 }

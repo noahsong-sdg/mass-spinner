@@ -6,7 +6,9 @@ const bounds = {field:[.04,.25,.01], voltage:[0,800,20], energy:[0,20,.5], massB
 /** A versioned link describes the small, fixed collisionless playground only. */
 export function readExperience(search:string){
  const query=new URLSearchParams(search),candidate=query.get('level');
- const level:ExperienceLevel=['1','2','3','4'].includes(candidate??'')?candidate as ExperienceLevel:'1';
+ // Pre-v2 links could omit level; their coordinates still describe the introductory filter.
+ const legacy=query.get('v')==='1'&&Object.keys(bounds).some(key=>query.has(key));
+ const level:ExperienceLevel=['1','2','3','4'].includes(candidate??'')?candidate as ExperienceLevel:legacy?'1':'2';
  const settings={...PLAY_DEFAULTS};
  const supplied=Object.keys(bounds).some(key=>query.has(key));
  if(!supplied)return {level,settings,invalid:false};

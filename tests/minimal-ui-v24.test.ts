@@ -5,10 +5,12 @@ import {setupExperience} from '../src/experience-ui.js';
 
 const html=readFileSync('index.html','utf8');
 
-test('navigation contains only four names, without duplicate introductions',()=>{
+test('centrifuge is primary and the other three playgrounds are disclosed under Advanced',()=>{
  const nav=html.match(/<nav class="level-navigation"[^>]*>([\s\S]*?)<\/nav>/)![1];
  assert.deepEqual([...nav.matchAll(/<button data-level="(\d)" aria-pressed="(?:true|false)">([^<]+)<\/button>/g)]
-  .map(match=>[match[1],match[2]]),[['1','Mass Spinner'],['2','Marathon'],['3','Models'],['4','Research']]);
+  .map(match=>[match[1],match[2]]),[['2','Centrifuge'],['1','Mass Spinner'],['3','Models'],['4','Research']]);
+ assert.match(nav,/<details id="advanced-simulators"[^>]*><summary>Advanced<\/summary>/);
+ assert.match(nav,/<div id="advanced-marathon"><\/div>/);
  for(const text of ['Rotating ions & collection','Beam, target & neutron output','02 / BEAM–TARGET PLAYGROUND',
   'level-description','level-boundary','learning-path-heading','level-introduction'])assert.ok(!html.includes(text),text);
  assert.equal([...html.matchAll(/<h1\b/g)].length,1);
@@ -67,7 +69,7 @@ test('switching all playgrounds changes the accessible title without recreating 
   t.after(()=>{if(previous)Object.defineProperty(globalThis,key,previous);else Reflect.deleteProperty(globalThis,key);});
  }
  const ui=setupExperience({invalidate(){},selectMode(){},showView(){},showResearch(){}});
- for(const [index,title]of ['Mass Spinner','Marathon','Models','Research'].entries()){
+ for(const [index,title]of ['Mass Spinner','Marathon centrifuge','Models','Research'].entries()){
   buttons[index].events.get('click')();
   assert.equal(ui.level,String(index+1));assert.equal(node('level-title').textContent,title);
   assert.equal(node('share-playground').hidden,false);

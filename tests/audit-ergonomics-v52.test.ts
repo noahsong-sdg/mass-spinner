@@ -121,7 +121,8 @@ test('thermal trajectory explanations scope the reference and distinguish work f
  const f=fixture(t);await f.start();f.thermal(true);await f.ui.run();
  f.change('fuel-plot','separation','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/evolving gas temperature/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/reference retains its initial fixed temperature/);
  f.change('fuel-plot','heat','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/Mechanical ledger/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/numerical dissipation is not heat/);
- assert.match(f.ui.nodes.info.querySelector('ul').textContent,/Uniform-inertia reference:/);assert.match(f.ui.nodes.info.querySelector('ul').textContent,/Coupled trajectory:/);
+ const assumptions=f.ui.nodes.info.querySelector(':scope > ul');assert.ok(assumptions);
+ assert.match(assumptions.textContent,/Uniform-inertia reference:/);assert.match(assumptions.textContent,/Coupled trajectory:/);
 });
 
 test('unchanged playback status does not repeatedly mutate the live region',async t=>{

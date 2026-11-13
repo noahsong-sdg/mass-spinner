@@ -62,6 +62,7 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
  model.assumptions=[...model.assumptions.filter(s=>!thermal.enabled||!s.startsWith('Isothermal independent')),
   'Current events preserve inventories and angular momenta; setup, B, ion inertia, friction, drag frequency, conductivity and D remain prescribed. Editing the past branches the recorded experiment.',
   'Playback retains every accepted integration knot; between knots it interpolates canonical inventories, momenta and energy ledgers. This first-order time approximation does not resolve physics faster than the chosen integration step. Legacy histories retain conservative global resolution bounds when prefix diagnostics are unavailable.',
+  'Every operation mode resolves startup, resumed starts and current switches with rotor-relaxation substeps. Nominal intervals bound the slower transport evolution; refinement remains necessary.',
   ...(thermal.enabled?[
    liner?'Lumped monatomic neutral gas coupled to radial cylindrical tungsten conduction: fixed reference mass/geometry, NIST solid enthalpy and Tolias conductivity, 300–1900 K solid-property domain. Gas and coolant film conductances include half-cell solid resistance. Wall drag is deposited in the innermost cell; slip, Ohmic and signed redistribution work enter gas. Axial heat flow, radiation, thermal expansion and discharge ion/electron temperatures are not solved. Deposition and film coefficients are assumptions, not device calibration.':
    'Two lumped thermal reservoirs: monatomic neutral Cv=3NkB/2, prescribed liner heat capacity and conductances. Ohmic and slip losses and signed redistribution work enter the gas; wall drag enters the liner. Electron/ion temperature, ionization and temperature-dependent transport coefficients are not solved. This deposition partition is assumed, not calibrated.',
@@ -257,9 +258,10 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
   while(time<target){
    // At the default 512 intervals, resolve the initial relaxation scale
    // with at least 64 steps. Grow spacing with transient age, then let
-   // the quadratic base grid bound the slower thermal/transport evolution.
-   const next=thermal.gas?Math.min(target,time+(time-transientStart+relaxationS)*8/model.steps,
-    accuracy?time+proposalS:Infinity):target;
+   // the base grid bound the slower thermal/transport evolution. Fast ion
+   // relaxation exists in isothermal and lumped-thermal modes as well.
+   const next=Math.min(target,time+(time-transientStart+relaxationS)*8/model.steps,
+    accuracy?time+proposalS:Infinity);
    if(next<=time)throw new RangeError('Requested rotor timestep is below floating-point time resolution.');
    if(accuracy){
     if(++attempts>100000)throw new RangeError('Temporal accuracy exceeded its step budget; reduce the run horizon or relax tolerances explicitly.');

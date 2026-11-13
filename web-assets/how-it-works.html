@@ -21,19 +21,19 @@
   <header><div class="bar"><a class="brand" href="/">Mass Spinner ↗</a><nav aria-label="On this page"><a href="#physics">Physics</a><a href="#computation">Computation</a><a href="#accuracy">Accuracy</a><a href="#uses">Uses</a></nav></div></header>
   <main id="main"><article class="reading">
     <h1>How Mass Spinner works</h1>
-    <p class="lead">Several bounded physics models, connected to a visual playground.</p>
+    <p class="lead">A Marathon-inspired centrifuge playground. Other models are under Advanced.</p>
     <p>Separators move <strong>ions and neutral atoms</strong>. The separate beam-target model estimates <strong>neutrons</strong> from D–T fusion. Neutrinos are different particles and are not modeled.</p>
 
     <section id="physics" aria-labelledby="physics-title">
       <h2 id="physics-title">What moves, and why</h2>
       <dl>
-        <dt>Mass Spinner / Models</dt>
+        <dt>Advanced → Mass Spinner / Models</dt>
         <dd>Prescribed-field ion orbits, resonant heating, rotating filters and equilibrium models. The orbit integrator advances the Lorentz force:</dd>
       </dl>
       <p class="equation"><var>m</var> d<var>v</var>/d<var>t</var> = <var>q</var>(<var>E</var> + <var>v</var> × <var>B</var>)</p>
-      <dl><dt>Marathon → Centrifuge</dt><dd>Current drives ions; friction spins up neutral gas. Radial transport changes composition and gas inertia; work and heat evolve the temperatures.</dd></dl>
-      <p class="equation">d<var>p</var>/d<var>r</var> = <var>ρΩ</var>²<var>r</var><br><var>n</var><sub>s</sub>(<var>r</var>) ∝ exp[<var>m</var><sub>s</sub><var>Ω</var>²<var>r</var>²/(2<var>k</var><sub>B</sub><var>T</var>)]</p>
-      <p>The second relation assumes ideal, isothermal, rigidly rotating neutral gas. Heavier atoms favor the wall. Faster rotation strengthens separation; heating weakens it. Equilibrium alone gives no extraction rate.</p>
+      <dl><dt>Centrifuge</dt><dd>Current drives ions; friction spins up neutral gas. Radial transport changes composition and gas inertia; optional thermal evolution tracks work and heat.</dd></dl>
+      <p class="equation">d<var>p</var>/d<var>r</var> = <var>ρ</var><var>Ω</var>²<var>r</var><br><var>n</var><sub>s</sub>(<var>r</var>) ∝ exp[<var>m</var><sub>s</sub><var>Ω</var>²<var>r</var>²/(2<var>k</var><sub>B</sub><var>T</var>)]</p>
+      <p>These are equilibrium references; the second assumes ideal, isothermal, rigidly rotating neutral gas. Heavier atoms favor the wall. Faster rotation strengthens separation; heating weakens it. The live model does not solve radial fluid momentum or extraction.</p>
       <details><summary>Torque and heat equations</summary>
         <p class="equation">d<var>L</var><sub>i</sub>/d<var>t</var> = <var>τ</var><sub>em</sub> − <var>Γ</var>(<var>Ω</var><sub>i</sub> − <var>Ω</var><sub>n</sub>)<br>d<var>L</var><sub>n</sub>/d<var>t</var> = <var>Γ</var>(<var>Ω</var><sub>i</sub> − <var>Ω</var><sub>n</sub>) − <var>τ</var><sub>wall</sub></p>
         <p><var>L = IΩ</var>: angular momentum equals inertia × angular speed. Redistribution changes neutral inertia, so conserved momentum determines speed. <var>Γ</var> is the ion–neutral coupling coefficient.</p>
@@ -41,7 +41,7 @@
         <p>Drive work, friction, transported enthalpy and cooling have separate energy ledgers. Numerical damping is kept separate from physical heat.</p>
         <small>SI units: mass <var>m</var> in kg; radius <var>r</var> in m; temperature <var>T</var> in K; angular speed <var>Ω</var> in rad/s; torque <var>τ</var> in N·m; angular momentum <var>L</var> in kg·m²/s; heat flux <var>q</var><sub>heat</sub> in W/m². <var>k</var><sub>B</sub> is Boltzmann’s constant; <var>k</var> is thermal conductivity.</small>
       </details>
-      <dl><dt>Marathon → Beam target / Future blanket</dt><dd>Deuteron stopping, reaction cross sections, target loading and heat determine neutron output. The blanket is a separate conceptual calculation, not a full reactor simulation.</dd></dl>
+      <dl><dt>Advanced → Marathon systems</dt><dd>Deuteron stopping, reaction cross sections, target loading and heat determine neutron output. The future blanket is a separate conceptual calculation, not a full reactor simulation.</dd></dl>
       <details><summary>Neutron-source equation</summary><p class="equation"><var>p</var><sub>fusion</sub> = 1 − exp(−∫<var>n</var><sub>T</sub><var>σ</var>[<var>E</var><sub>cm</sub>(<var>x</var>)] d<var>x</var>)<br><var>R</var><sub>n</sub> = (<var>I</var><sub>beam</sub>/<var>e</var>)<var>p</var><sub>fusion</sub></p><p>Target tritium density and the slowing deuteron's reaction probability set neutron rate. Fusion output and accelerator input are separate ledgers; this is not a net-electricity prediction.</p></details>
     </section>
 
@@ -61,16 +61,16 @@
         <li><strong>Qualify the live playground.</strong> Establish those limits for the actual browser model and parameter range, then verify sliders, plots and 3D views use the same result. This is our project label, not a certification.</li>
       </ol>
       <p>First-order hardware fidelity is blocked mainly by experimental constraints, uncertain plasma/wall closures and untested regimes. The audited microkelvin wall-response discrepancy is secondary to those, though relative heating remains unqualified.</p>
-      <p class="muted">A numerical pass is not experimental accuracy. The simulator is presently pedagogical; the latest research checks cover one short argon-proxy startup, not the live lithium regime.</p>
+      <p class="muted">A numerical pass is not experimental accuracy. The live rigid-rotation family fails the retrospective argon profile screen under the stated optical interpretation. The lithium playground remains pedagogical and experimentally unqualified.</p>
     </section>
 
     <section id="uses" aria-labelledby="uses-title">
       <h2 id="uses-title">What this could be useful for</h2>
       <p><strong>Now:</strong> learning, scientific visualization and a portfolio of reproducible modeling. <strong>After bounded validation:</strong> sensitivity studies, operating-point screening, experiment planning and thermal/fuel-cycle estimates. Hardware design, safety or performance guarantees need separate evidence.</p>
-      <p>Relevant work includes scientific software, computational plasma physics, thermal/fluids modeling, experimental diagnostics and verification. A useful deliverable is a defensible prediction—with its uncertainty—not a claim to simulate every detail.</p>
+      <p>Relevant work includes scientific software, computational plasma physics, thermal/fluids modeling, experimental diagnostics and verification. A useful deliverable is a defensible prediction with its uncertainty.</p>
     </section>
-    <div class="sources" aria-label="Sources and implementation"><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/OVERFITTING-AUDIT-V78.md">Accuracy audit ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/src/fuel-operation.ts">Live equations ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/scientific/mixture-axial-v75/PROTOCOL.md">Research protocol ↗</a><a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html">Verification vs validation ↗</a><a href="https://www.marathonfusion.com/fusion-energy/">Marathon’s fuel cycle ↗</a><a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon’s neutron source ↗</a></div>
-    <footer><span>Mass Spinner · 11 November 2026</span><a href="/?level=2">Back to the playground ↗</a></footer>
+    <div class="sources" aria-label="Sources and implementation"><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/LIVE-MODEL-QUALIFICATION.md">Qualification record ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/src/fuel-operation.ts">Live equations ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/scientific/mixture-axial-v75/PROTOCOL.md">Research protocol ↗</a><a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html">Verification vs validation ↗</a><a href="https://www.marathonfusion.com/fusion-energy/">Marathon’s fuel cycle ↗</a><a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon’s neutron source ↗</a></div>
+    <footer><span>Mass Spinner · 13 November 2026</span><a href="/">Back to the playground ↗</a></footer>
   </article></main>
 </body>
 </html>

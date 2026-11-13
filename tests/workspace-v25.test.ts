@@ -118,7 +118,7 @@ test('playground navigation lives beside the brand and stays available in every 
  }
  assert.equal(parseFloat(f.window.getComputedStyle(brand).letterSpacing),0);
  assert.equal(f.window.getComputedStyle(header).flexWrap,'nowrap');
- assert.equal(f.window.getComputedStyle(navigation).overflowX,'auto');
+ assert.equal(f.window.getComputedStyle(navigation).overflow,'visible','Advanced is not clipped by an old horizontal scroller');
  // JSDOM has no layout engine: inspect the mobile cascade without claiming pixel verification.
  const sheet=f.document.styleSheets[styles.indexOf('workspace')];
  const mobile=[...sheet.cssRules].find(rule=>'conditionText' in rule&&String(rule.conditionText).replace(/\s/g,'')==='(max-width:740px)') as CSSMediaRule;

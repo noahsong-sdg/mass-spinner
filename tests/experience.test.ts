@@ -14,7 +14,12 @@ test('stale, blank, nonfinite, out-of-range and off-step links restore the whole
   'v=1&voltage=10000','v=1&voltage=401','v=1&massB=-4']){
   const state=readExperience('?level=1&'+suffix);assert.equal(state.invalid,true);assert.deepEqual(state.settings,PLAY_DEFAULTS);
  }
- assert.equal(readExperience('?level=2').level,'2');assert.equal(readExperience('?level=old').level,'1');
+ assert.equal(readExperience('?level=2').level,'2');assert.equal(readExperience('?level=old').level,'2');
+});
+test('new sessions start at the centrifuge while implicit v1 introductory links retain their model',()=>{
+ for(const search of ['', '?utm_source=shared','?level=obsolete'])assert.equal(readExperience(search).level,'2');
+ assert.deepEqual(readExperience('?v=1&field=.15'),{level:'1',settings:{...PLAY_DEFAULTS,field:.15},invalid:false});
+ for(const level of ['1','2','3','4'])assert.equal(readExperience('?level='+level).level,level);
 });
 
 test('playground pins its source, cancels old work and clears stale asynchronous share confirmation',async t=>{

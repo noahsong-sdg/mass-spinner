@@ -6,8 +6,21 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top header.masthead{min-width:0;min-height:0;height:100%;padding:0 24px;gap:24px;flex:1;flex-wrap:nowrap;border:0;background:none}
 .world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
 .world-top .learning-path{flex:none;min-width:0;min-height:0;padding:0 24px 0 0;gap:0;border:0;background:none}
-.world-top .level-navigation{align-self:stretch;align-items:stretch;gap:0;margin:0;width:auto;flex-wrap:nowrap}
+.world-top .level-navigation{align-self:stretch;align-items:stretch;gap:0;margin:0;width:auto;flex-wrap:nowrap;overflow:visible;flex:none}
 .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 14px;font-size:12px}
+.advanced-simulators{position:relative;display:flex;align-items:center}
+.advanced-simulators>summary{cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;font-size:12px;color:var(--muted)}
+.advanced-simulators>summary::-webkit-details-marker{display:none}
+.advanced-simulators>summary:after{content:'⌄'}
+.advanced-simulators[data-active=true]>summary{color:var(--text)}
+.advanced-simulators-menu{position:absolute;top:100%;right:0;width:min(280px,calc(100vw - 32px));padding:8px;background:#18211d;border:1px solid var(--line);box-shadow:0 12px 28px #07110b55}
+.world-top .advanced-simulators-menu button,.world-top .advanced-simulators-menu button:nth-child(-n+2){width:100%;min-height:44px;padding:10px 12px;text-align:left}
+.advanced-marathon{display:grid;gap:8px;padding:12px;border-top:1px solid var(--line);margin-top:8px}
+.advanced-marathon label{font-size:11px;color:var(--muted)}
+.advanced-marathon select{width:100%;font-size:12px;min-height:40px}
+.fuel-qualification code{overflow-wrap:anywhere}
+.fuel-qualification table{width:100%;font-size:12px;border-collapse:collapse}
+.fuel-qualification th,.fuel-qualification td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
 .world-top .level-actions{width:auto;border:0}
 .world-top .share-link-label{display:none}
 .world-top #share-link,.world-top #share-status:not(:empty){position:absolute;right:20px;top:64px;max-width:min(400px,90vw);background:#202b24;padding:12px;border:1px solid var(--line);z-index:6}
@@ -100,6 +113,7 @@ body.immersive{overflow:hidden;background:#101614}
 @media(max-width:740px){
  .sim-workspace{--world-bottom:80px}
  .world-top header.masthead{padding-inline:16px;gap:12px}.world-top .brand{font-size:13px}.world-top .learning-path{padding-right:16px;flex-wrap:nowrap}.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 10px;font-size:11px}.world-top .level-actions .text-button{font-size:0;min-width:32px;min-height:44px}.world-top .level-actions .text-button:after{content:'↗';font-size:19px}
+ .advanced-simulators>summary{padding-inline:10px;font-size:11px}.advanced-simulators-menu{position:fixed;top:var(--world-top);right:16px;max-height:calc(100dvh - var(--world-top) - 16px);overflow:auto}
  .world-context{left:16px}.world-context select{max-width:calc(100vw - 32px)}
  .sim-workspace:is([data-level="2"],[data-level="3"]) .apparatus-provenance{top:72px}
  .world-rail{top:auto;bottom:var(--world-bottom);left:10px;right:10px;width:auto!important;max-height:min(58dvh,calc(100dvh - var(--world-top) - var(--world-bottom) - 12px),620px)}
@@ -110,5 +124,10 @@ body.immersive{overflow:hidden;background:#101614}
  .world-window .control label{font-size:12px}.world-window .run-button{min-height:44px}.world-window .apparatus-toolbar select{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){.world-window{animation:none}}
+@media(max-width:480px){
+ .world-top header.masthead{padding-inline:8px;gap:6px}.world-top .brand{font-size:11px}
+ .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2),.advanced-simulators>summary{padding-inline:6px}
+ .world-top .learning-path{padding-right:8px}
+}
 /* Mode-specific controls and unavailable results retain the native hidden contract. */
 body.immersive .sim-workspace [hidden]{display:none!important}

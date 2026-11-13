@@ -1,0 +1,47 @@
+{
+  "source": "Wijnakker and Granneman 1979 conference paper, Figure 2",
+  "doi": "10.1051/jphyscol:19797236",
+  "sourcePdfSha256": "235f0180bfa134e6e82895ceb2615ea2b396efb3c950dc2992ab1cbe0e7d2c67",
+  "image": "sources/figure2-crop.png",
+  "imageSha256": "07bdee0628c73b9cb411996214a513055c9ab1381579ed9eff4c6e755ad61f4f",
+  "cropRecipe": "PyMuPDF 1.26.7; PDF page index 2; clip [95,75,245,252] points; Matrix(6,6)",
+  "imageSizePx": [900, 1062],
+  "method": "Independent manual visual centers and vertical error-bar endpoints; predictions and parent digitization not inspected.",
+  "coordinateConvention": "Pixel origin top left; x rightward, y downward.",
+  "coordinateUncertaintyPx": 6,
+  "uncertaintyInterpretation": "Conservative visual extraction range in the supplied rendered crop; not statistical sigma. Does not replace plotted experimental error bars or imply native scan resolution.",
+  "xAnchors": [
+    { "radiusCm": 0, "xPx": 170 },
+    { "radiusCm": 1, "xPx": 274 },
+    { "radiusCm": 2, "xPx": 382 },
+    { "radiusCm": 3, "xPx": 490 },
+    { "radiusCm": 4, "xPx": 595 },
+    { "radiusCm": 5, "xPx": 704 },
+    { "radiusCm": 6, "xPx": 811 }
+  ],
+  "yAnchors": [
+    { "velocityMps": 0, "yPx": 978 },
+    { "velocityMps": 500, "yPx": 718 },
+    { "velocityMps": 1000, "yPx": 458 },
+    { "velocityMps": 1500, "yPx": 197 }
+  ],
+  "measuredMarkers": [
+    { "id": "ar-i-r1", "centerPx": [274, 831], "verticalErrorBarY": [798, 868] },
+    { "id": "ar-i-r2", "centerPx": [382, 704], "verticalErrorBarY": [670, 739] },
+    { "id": "ar-i-r3", "centerPx": [489, 614], "verticalErrorBarY": [578, 650] },
+    { "id": "ar-i-r4", "centerPx": [594, 649], "verticalErrorBarY": [614, 683] },
+    { "id": "ar-i-r5", "centerPx": [705, 767], "verticalErrorBarY": [733, 801] }
+  ],
+  "exclusions": [
+    { "locationPx": [465, 233], "reason": "Ar I legend glyph with illustrative error bar; not data." },
+    { "locationPx": [171, 895], "reason": "Dark near-axis feature overlaps ordinate. Independent marker center and error-bar extent not resolvable." },
+    { "locationPx": [171, 931], "reason": "Dark near-axis feature overlaps ordinate. Independent marker center and error-bar extent not resolvable." },
+    { "reason": "Both smooth theory curves, annotations, axis ticks and curve origin are not measured data symbols." }
+  ],
+  "sourceCaveats": [
+    "Radius labels correspond to optical sightlines without Abel inversion.",
+    "Source does not specify centroid, peak or fitted spectral-shift estimator.",
+    "Source experimental error bars have unspecified confidence semantics.",
+    "No point was included or excluded using a model residual."
+  ]
+}

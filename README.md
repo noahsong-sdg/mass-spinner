@@ -4,6 +4,6 @@ pedagogical plasma mass separation sim made by astra. i read a couple of the mar
 
 current status:
 
-- [experimental accuracy](docs/FIRST-ORDER-ACCURACY-V70.md)
+- [experimental accuracy](docs/LIVE-MODEL-QUALIFICATION.md)
 - [thermal refinement](docs/LOCAL-THERMAL-REFINEMENT-V69.md)
 - [optical diagnostic research](docs/DIAGNOSTIC-V71.md)

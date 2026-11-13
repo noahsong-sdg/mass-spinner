@@ -133,12 +133,12 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  mechanism.querySelector('label').classList.add('visually-hidden');
  mechanism.querySelector('select').setAttribute('aria-label','Separation mechanism');
  // The recording viewer is data, not a simulated apparatus.
- const context=make('div','world-context'),switcher=make('select','');switcher.id='marathon-apparatus';switcher.setAttribute('aria-label','Marathon apparatus');
+ const context=make('div','advanced-marathon'),label=make('label','','Marathon systems'),switcher=make('select','');switcher.id='marathon-apparatus';switcher.setAttribute('aria-label','Marathon apparatus');label.htmlFor=switcher.id;
  for(const [value,label]of [['centrifuge','Centrifuge'],['source','Beam target'],['blanket','Future blanket']]){const option=make('option','',label);option.value=value;switcher.append(option);}
- context.append(switcher);shell.append(context);
+ context.append(label,switcher);doc.querySelector('#advanced-marathon').append(context);
  switcher.addEventListener('change',()=>{marathon=switcher.value;refresh();});
  function refresh(){
-  shell.dataset.level=level;shell.dataset.context=marathon;context.hidden=level!=='2';
+  shell.dataset.level=level;shell.dataset.context=marathon;
   for(const {wrapper,levels,context}of groups)wrapper.hidden=!levels.includes(level)||(!!context&&context!==marathon);
   const allowed=level==='4'?['controls']:level==='2'?(marathon==='source'?['controls','plots','target','inspect','info']:marathon==='centrifuge'?['controls','plots','inspect','view','info']:['plots','inspect']):level==='1'?['controls','plots','inspect','view']:['controls','plots','inspect','view','info'];
   for(const [key,{button}]of windows){const available=allowed.includes(key)&&(key!=='view'||level==='2'&&marathon==='centrifuge'||!doc.querySelector('.viewport-tools').hidden);if(!available)close(key);button.hidden=!available;}

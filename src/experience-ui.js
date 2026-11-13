@@ -9,6 +9,7 @@ const fixedPlay={parallel:'20','source-radius':'4',distribution:'thermal','axial
 export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange}){
  const shared=readScenario(location.search),initial=readExperience(location.search);
  const levelButtons=[...document.querySelectorAll('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
+ const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus');
  let level,savedPlay=initial.settings,shareRevision=0,hydrating=false,cancelDeferred=()=>{};
  const defaults=Object.fromEntries(['2','3','4'].map(key=>[key,captureScenario(document,key)]));
  let savedModels=defaults['3'];
@@ -23,16 +24,20 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  };
  function revealActiveLevel(){
   if(!navigation)return;
-  const button=levelButtons.find(button=>button.dataset.level===level),bounds=navigation.getBoundingClientRect(),item=button.getBoundingClientRect();
+  const button=level==='2'?levelButtons.find(button=>button.dataset.level===level):advanced?.querySelector('summary');
+  if(!button)return;
+  const bounds=navigation.getBoundingClientRect(),item=button.getBoundingClientRect();
   const left=bounds.left+navigation.clientLeft,right=left+navigation.clientWidth;
   if(item.right-item.left>navigation.clientWidth||item.left<left)navigation.scrollLeft+=item.left-left;
   else if(item.right>right)navigation.scrollLeft+=item.right-right;
  }
- function refresh(){
+ function refresh(notifyLevel=true){
   document.body.dataset.level=level;
-  for(const button of levelButtons)button.setAttribute('aria-pressed',String(button.dataset.level===level));
-  $('level-title').textContent=copy[level];$('share-playground').hidden=false;
-  sync();onLevelChange?.(level);revealActiveLevel();
+  const centrifuge=level==='2'&&(!apparatus||apparatus.value==='centrifuge');
+  for(const button of levelButtons)button.setAttribute('aria-pressed',String(button.dataset.level===level&&(level!=='2'||centrifuge)));
+  if(advanced)advanced.dataset.active=String(!centrifuge);
+  $('level-title').textContent=centrifuge?'Marathon centrifuge':copy[level];$('share-playground').hidden=false;
+  sync();if(notifyLevel)onLevelChange?.(level);revealActiveLevel();
  }
  function enter(next,reset=false,dispatchEvents=true){
   if(level==='1'&&!reset){savedPlay=read();savedMask=mask();}
@@ -76,7 +81,20 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
    $('share-status').textContent='Unsupported scenario; previous settings retained.';return false;
   }finally{hydrating=false;}
  }
- for(const button of levelButtons)button.addEventListener('click',()=>enter(button.dataset.level));
+ for(const button of levelButtons)button.addEventListener('click',()=>{
+  const primary=button.dataset.level==='2'&&apparatus;
+  if(primary)apparatus.value='centrifuge';
+  if(!primary||level!=='2')enter(button.dataset.level);
+  if(primary)apparatus.dispatchEvent(new (view?.Event??Event)('change'));
+  if(advanced){advanced.open=false;if(advanced.contains?.(button))advanced.querySelector('summary').focus();}
+ });
+ apparatus?.addEventListener('change',()=>{
+  if(!hydrating&&level!=='2')enter('2');else refresh(false);
+  if(!hydrating&&advanced?.open){advanced.open=false;advanced.querySelector('summary').focus();}
+ });
+ advanced?.addEventListener('keydown',event=>{
+  if(event.key==='Escape'&&advanced.open){event.preventDefault();advanced.open=false;advanced.querySelector('summary').focus();}
+ });
  view?.addEventListener('resize',revealActiveLevel);
  $('play-mass-b').addEventListener('input',()=>{
   $('mass-b').value=$('play-mass-b').value;$('mass-b').dispatchEvent(new Event('input'));

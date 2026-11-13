@@ -81,16 +81,25 @@ test('independent analytic wall cooldown and isolated two-node exchange converge
  close(cg*b.gasK+exchange.wallCapacityJK*b.linerK,cg*c.gasK+exchange.wallCapacityJK*c.linerK,cg*c.gasK+exchange.wallCapacityJK*c.linerK,2e-9);
 });
 
-test('independent constant-current compatibility preserves the existing isothermal transport backend',()=>{
- const r=simulateFuelCentrifuge(base),options={cells:8,steps:128};
- const original=simulateFuelTransport(r,options),operated=simulateFuelOperation(r,{schemaVersion:1,events:[]},options);
- assert.equal(original.snapshots.length,operated.snapshots.length);
- for(let i=0;i<original.snapshots.length;i++){
-  const a=original.snapshots[i],b=operated.snapshots[i];assert.equal(a.timeS,b.timeS);
-  assert.ok(l1(a.lightMass,b.lightMass)+l1(a.heavyMass,b.heavyMass)<2e-11);
-  close(a.ionRadS,b.ionRadS,Math.max(1,Math.abs(a.ionRadS)),2e-11);
-  close(a.neutralRadS,b.neutralRadS,Math.max(1,Math.abs(a.neutralRadS)),2e-11);
+test('constant-current reference and live operation approach the same continuum with independent time grids',()=>{
+ const r=simulateFuelCentrifuge({...base,collisionHz:1e4}),errors=[];
+ for(const steps of [1024,2048,4096]){
+  const options={cells:8,steps},original=simulateFuelTransport(r,options),operated=simulateFuelOperation(r,{schemaVersion:1,events:[]},options);
+  let error=0;
+  for(const time of [.01,.05,.1,.2]){
+   const a=sampleFuelTransport(original,time),b=sampleFuelTransport(operated,time);
+   error=Math.max(error,l1(a.lightMass,b.lightMass)+l1(a.heavyMass,b.heavyMass));
+   for(const key of ['ionRadS','neutralRadS','ionPhaseRad','neutralPhaseRad'] as const)
+    error=Math.max(error,Math.abs(a[key]-b[key])/Math.max(1,Math.abs(a[key])));
+  }
+  for(const model of [original,operated]){
+   assert.ok(model.maxBalanceError<2e-8&&model.maxAngularMomentumRelativeError<2e-8&&model.maxEnergyRelativeError<2e-8);
+   assert.ok(model.snapshots.every(s=>s.balances.minimumMass>=0));
+  }
+  errors.push(error);
  }
+ assert.ok(errors[1]<errors[0]&&errors[2]<errors[1],`Different time grids do not approach the same solution: ${errors}`);
+ assert.ok(errors[2]<.01,`Finest time-grid disagreement exceeds 1%: ${errors}`);
 });
 
 test('independent fixed-inertia current switching converges to an exact linear superposition',()=>{
