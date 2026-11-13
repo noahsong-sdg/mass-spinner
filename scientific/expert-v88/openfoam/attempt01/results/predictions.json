@@ -1,0 +1,69 @@
+{
+  "sourceSHA256": {
+    "reference88.py": "89b0ed2a18cb694d9c5d6bad49d411255ccacfa8c7c4236e712d8548eba7210d",
+    "PROTOCOL.md": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "test_reference88.py": "28690522f308eb0b9051075174dae8e79fb0f6607ee87b5cf39a362917456c35"
+  },
+  "versions": {
+    "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+    "numpy": "2.3.5",
+    "scipy": "1.16.3"
+  },
+  "executedBinarySHA256": {
+    "laplacianFoam": "91286b826e8ee525c09cd1fcf66f6073b6d97df28182f59e588e53a499ab0b34",
+    "foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280"
+  },
+  "constants": {
+    "radiusM": 0.06,
+    "lengthM": 0.24,
+    "densityKgM3": 0.001,
+    "muPaS": 0.000114,
+    "cvJKgK": 312.1982059562384,
+    "kWmK": 0.08897648869752793,
+    "nuM2S": 0.114,
+    "alphaM2S": 0.285,
+    "chi": 3.8317059702075125,
+    "lambdaM2": 4249.672476997772,
+    "endS": 0.0004128285119402157,
+    "amplitudeMPS": 0.00019
+  },
+  "cases": [
+    {
+      "label": "heat-n8-s128-a0.5-x1.0",
+      "mode": "heat",
+      "n": 8,
+      "steps": 128,
+      "halfAngleDeg": 0.5,
+      "amplitudeScale": 1.0,
+      "completed": false,
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/work/project/v88-openfoam/.cache/heat-n8-s128-a0.5-x1.0/0/V'",
+      "archive": {
+        "path": "heat-n8-s128-a0.5-x1.0.zip",
+        "sha256": "f87695b9ddfa87bbac288e32b36bb0e99fe7cea5578e2de4840186e271bad4f7",
+        "bytes": 20309
+      }
+    },
+    {
+      "label": "swirl-n8-s128-a0.5-x1.0",
+      "mode": "swirl",
+      "n": 8,
+      "steps": 128,
+      "halfAngleDeg": 0.5,
+      "amplitudeScale": 1.0,
+      "completed": false,
+      "error": "FileNotFoundError: [Errno 2] No such file or directory: '/work/project/v88-openfoam/.cache/swirl-n8-s128-a0.5-x1.0/0/V'",
+      "archive": {
+        "path": "swirl-n8-s128-a0.5-x1.0.zip",
+        "sha256": "0988ae8974d986849738c0dc9c15bbc19d09d19b35c47756773aed8efaa44a97",
+        "bytes": 20390
+      }
+    }
+  ],
+  "experimentalQualification": false,
+  "fullV86Qualified": false,
+  "peakChildRSSKiB": 126136
+}

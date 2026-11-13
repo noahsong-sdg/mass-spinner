@@ -1,0 +1,228 @@
+{
+  "predictionSHA256": "2ce37ec1be95ca79a4152edc504184d0182abf51e6d5eaafb9572dff65950ddd",
+  "auditorSHA256": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+  "gates": [
+    {
+      "name": "source:reference88.py",
+      "passed": true
+    },
+    {
+      "name": "source:PROTOCOL.md",
+      "passed": true
+    },
+    {
+      "name": "source:audit88.py",
+      "passed": true
+    },
+    {
+      "name": "source:test_reference88.py",
+      "passed": true
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:analytic",
+      "passed": true,
+      "value": 0.00874673176815022,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:inventory",
+      "passed": true,
+      "value": 3.3306690738754696e-16
+    },
+    {
+      "name": "heat-n8-s128-a0.5-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:analytic",
+      "passed": true,
+      "value": 0.0027622634689777863,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:inventory",
+      "passed": true,
+      "value": 2.220446049250313e-16
+    },
+    {
+      "name": "heat-n16-s128-a0.5-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:analytic",
+      "passed": true,
+      "value": 0.0013454887989944252,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:inventory",
+      "passed": true,
+      "value": 6.661338147750939e-16
+    },
+    {
+      "name": "heat-n32-s128-a0.5-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:analytic",
+      "passed": true,
+      "value": 0.0023004700832023758,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:inventory",
+      "passed": true,
+      "value": 2.220446049250313e-16
+    },
+    {
+      "name": "heat-n32-s64-a0.5-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:analytic",
+      "passed": true,
+      "value": 0.0008784794142805951,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:inventory",
+      "passed": true,
+      "value": 1.5543122344752192e-15
+    },
+    {
+      "name": "heat-n32-s256-a0.5-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:complete",
+      "passed": true
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:analytic",
+      "passed": true,
+      "value": 0.0027987375780702604,
+      "limit": 0.05
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:inventory",
+      "passed": true,
+      "value": 4.440892098500626e-16
+    },
+    {
+      "name": "heat-n16-s128-a0.25-x1.0:temperature",
+      "passed": true
+    },
+    {
+      "name": "swirl-n8-s128-a0.5-x1.0:archive",
+      "passed": true
+    },
+    {
+      "name": "swirl-n8-s128-a0.5-x1.0:initial-input",
+      "passed": true
+    },
+    {
+      "name": "swirl-n8-s128-a0.5-x1.0:complete",
+      "passed": false
+    },
+    {
+      "name": "heat:matrix",
+      "passed": true
+    },
+    {
+      "name": "heat:space",
+      "passed": true,
+      "errors": [
+        0.00874673176815022,
+        0.0027622634689777863,
+        0.0013454887989944252
+      ]
+    },
+    {
+      "name": "heat:time",
+      "passed": true,
+      "differences": [
+        0.0009681500011112378,
+        0.0004858429394070193
+      ]
+    },
+    {
+      "name": "heat:angle",
+      "passed": true,
+      "value": 9.665009345627153e-05
+    },
+    {
+      "name": "swirl:matrix",
+      "passed": false
+    }
+  ],
+  "allPassed": false,
+  "scope": "Constant-property smooth neutral operators only; no experimental or V86 qualification."
+}

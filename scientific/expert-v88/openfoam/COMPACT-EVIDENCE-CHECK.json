@@ -1,0 +1,19 @@
+{
+  "inputFiles": 254,
+  "boundProducerInputFiles": 247,
+  "allInputHashesPassed": true,
+  "producerSHA256": {
+    "reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "PROTOCOL.md": "2a1f5ef5e38d00db3224d4216e5a3cf8b49eb2c095d9c150b09c8c91cebee145",
+    "audit88.py": "2244e9b37e4b74d9048e6ca830eb9216002f6865c4b6606594feaa5338c4dcda",
+    "test_reference88.py": "0efe858a75a6ea926fa944cd89f28f967dd0df8ca47d6c709169947fa818b406"
+  },
+  "nativeCases": 13,
+  "auditGates": 86,
+  "helperTests": 4,
+  "commands": [
+    "../.venv/bin/python -m unittest -v test_reference88",
+    "../.venv/bin/python reference88.py",
+    "../.venv/bin/python audit88.py"
+  ]
+}
