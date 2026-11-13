@@ -1,0 +1,11 @@
+{
+  "status": "blocked-before-runtime",
+  "cause": "Host APFS Data backing filesystem 100% full; guest ext4 reported Structure needs cleaning",
+  "freeHostBytesReportedMiB": 289,
+  "guestFreeGiB": 8.3,
+  "guestUsedPercent": 30,
+  "scientificResults": false,
+  "runtimeExecuted": false,
+  "installLogSHA256": "a2d8e13a6ae09ac01856486dc55cae76a9714eb660fb1da6d41e3aae7897e16d",
+  "installLogNulBytes": 626812
+}

@@ -1,0 +1,22 @@
+cached-property @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_cached_property_1787678456/work
+cffi @ file:///home/conda/feedstock_root/build_artifacts/cffi_1788485197664/work
+fenics-basix @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_fenics-basix_1781024955/work/python
+fenics-dolfinx @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_fenics-dolfinx_1782254929/work/python
+fenics-ffcx @ file:///D:/bld/bld/rattler-build_fenics-ffcx_1781038774/work
+fenics-ufl @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_fenics-ufl_1781032710/work
+fenicsx-compat @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_fenicsx-compat_hc364b38_1793112504/work
+FESTIM==2.2
+h5py @ file:///home/conda/feedstock_root/build_artifacts/h5py_1790854768636/work
+io4dolfinx==1.5.1
+mpi4py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_mpi4py_1788880507/work
+numpy @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_numpy_1791675315/work/dist/numpy-2.5.4-cp312-cp312-linux_aarch64.whl#sha256=52018ec7b1cf92d604a493b86b05f3131423a383966488f83fce88f0bf553200
+packaging @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_packaging_1785888127/work
+petsc4py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_petsc4py_1790684421/work
+pycparser @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_pycparser_1792687210/work
+scifem @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_scifem_h673d025_1794485500/work
+scipy @ file:///home/conda/feedstock_root/build_artifacts/scipy-split_1792929792097/work/dist/scipy-1.18.1-cp312-cp312-linux_aarch64.whl#sha256=10d18dfbe9edd9959b1c87d4f623a222e0c5ea277afc2d8cc685dc990cc10bf3
+setuptools==84.2.1
+slepc4py @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_slepc4py_1790286471/work
+tqdm @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_tqdm_1789187326/work
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/bld/rattler-build_typing_extensions_1783002732/work
+wheel==0.48.0

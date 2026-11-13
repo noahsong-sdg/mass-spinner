@@ -1,0 +1,307 @@
+Collect information..
+Cleaning index cache..
+Cleaning lock files..
+  Package file                                                      Size
+──────────────────────────────────────────────────────────────────────────
+  /work/project/.cache/mamba/pkgs
+──────────────────────────────────────────────────────────────────────────
+
+  _openmp_mutex-4.5-8_kmp_llvm.conda                                 8kB
+  _python_abi3_support-1.0-hd8ed1ab_3.conda                          8kB
+  adios2-2.12.1-mpi_mpich_py312_ha805447_12.conda                  781kB
+  binutils_impl_linux-aarch64-2.46.1-default_h5f4c503_103.conda      5MB
+  bzip2-1.0.8-h4777abc_10.conda                                    195kB
+  c-ares-1.34.9-h29ee22c_0.conda                                   247kB
+  c-blosc2-3.3.5-h84c80c1_0.conda                                  377kB
+  ca-certificates-2026.10.23-hbd8a1cb_0.conda                      130kB
+  cached-property-2.0.1-pyhcf101f3_0.conda                           4kB
+  cached_property-2.0.1-pyhcf101f3_0.conda                          17kB
+  cffi-2.1.1-py312h563f9cf_3.conda                                 325kB
+  conda-gcc-specs-16.2.0-h969d813_7.conda                           33kB
+  cpython-3.12.16-py312hd8ed1ab_0.conda                             47kB
+  fenics-basix-0.11.0-py312hb51c29e_0.conda                        188kB
+  fenics-basix-nanobind-abi-2.19-py312h0a6f99c_0.conda               6kB
+  fenics-dolfinx-0.11.0-py312he8cf3a9_101.conda                      2MB
+  fenics-ffcx-0.11.0-pyh4a40500_0.conda                            127kB
+  fenics-libbasix-0.11.0-py312h2a1c81a_0.conda                     834kB
+  fenics-libdolfinx-0.11.0-py312h4343179_101.conda                   1MB
+  fenics-ufcx-0.11.0-haec879b_0.conda                               19kB
+  fenics-ufl-2026.1.0-pyhc364b38_0.conda                           196kB
+  fenicsx-compat-0.4.0-pyhc364b38_0.conda                           26kB
+  fftw-3.3.11-mpi_mpich_h71cae1e_0.conda                             2MB
+  fmt-12.1.0-h166da81_1.conda                                      197kB
+  gcc-16.2.0-hfdd745d_7.conda                                       30kB
+  gcc_impl_linux-aarch64-16.2.0-h5425ead_7.conda                    77MB
+  h5py-3.16.0-mpi_mpich_py312ha450a89_5.conda                        1MB
+  hdf5-1.14.6-mpi_mpich_he5038ac_10.conda                            4MB
+  hypre-3.2.1-h3887af0_0.conda                                       3MB
+  icu-78.3-py311h3512406_2.conda                                    15MB
+  kahip-3.25-py313h236e92b_0.conda                                   6MB
+  kernel-headers_linux-aarch64-5.14.0-h05a177a_3.conda               1MB
+  keyutils-1.6.3-h5bc82ec_1.conda                                  130kB
+  krb5-1.22.2-h095d8e5_2.conda                                       2MB
+  ld_impl_linux-aarch64-2.46.1-default_h1979696_103.conda          905kB
+  libadios2-2.12.1-mpi_mpich_h37ded8e_12.conda                       5MB
+  libaec-1.1.8-h30d59cc_0.conda                                     40kB
+  libamd-3.3.3-h913f464_7100102.conda                               48kB
+  libblas-3.11.0-12_haddc8a3_openblas.conda                         18kB
+  libboost-1.90.0-h47d6679_3.conda                                   4MB
+  libboost-devel-1.90.0-hf41333a_3.conda                            39kB
+  libboost-headers-1.90.0-h707e725_3.conda                          15MB
+  libbtf-2.3.2-h6ed72c6_7100102.conda                               27kB
+  libcamd-3.3.3-h6ed72c6_7100102.conda                              43kB
+  libcap-2.78-hfcc8634_1.conda                                     109kB
+  libcblas-3.11.0-12_hd72aa62_openblas.conda                        18kB
+  libccolamd-3.3.4-h6ed72c6_7100102.conda                           42kB
+  libcholmod-5.3.1-h3b6fcec_7100102.conda                          876kB
+  libcolamd-3.3.4-h6ed72c6_7100102.conda                            33kB
+  libcurl-8.23.0-h86273da_0.conda                                  530kB
+  libedit-3.1.20260512-pl5321hc48eb74_0.conda                      150kB
+  libev-4.33-h80f16a2_3.conda                                       46kB
+  libexpat-2.9.0-h4154aff_0.conda                                   80kB
+  libfabric-2.7.0-h8af1aa0_0.conda                                  14kB
+  libfabric1-2.7.0-hb5471ae_0.conda                                842kB
+  libffi-3.7.0-hdaad0be_1.conda                                     63kB
+  libgcc-16.2.0-h205dda4_7.conda                                   628kB
+  libgcc-devel_linux-aarch64-16.2.0-hc0c2482_107.conda               2MB
+  libgfortran-16.2.0-he9431aa_7.conda                               29kB
+  libgfortran5-16.2.0-hc864f27_7.conda                               1MB
+  libgomp-16.2.0-h8acb6b2_7.conda                                  617kB
+  libhwloc-2.13.0-default_ha95e27d_1000.conda                        2MB
+  libiconv-1.18-h1ea5142_3.conda                                   786kB
+  libklu-2.3.5-h23d02ee_7100102.conda                              120kB
+  liblapack-3.11.0-12_h88aeb00_openblas.conda                       18kB
+  liblzma-5.8.3-he30d5cf_1.conda                                   126kB
+  libnghttp2-1.71.0-h0d23a54_0.conda                               942kB
+  libnl-3.11.0-he30d5cf_1.conda                                    743kB
+  libnsl-2.0.1-h86ecc28_1.conda                                     35kB
+  libopenblas-0.3.34-openmp_hcf905d8_2.conda                         6MB
+  libpng-1.6.59-hf9b7768_0.conda                                   333kB
+  libpsl-0.23.1-hb8431ed_1.conda                                    73kB
+  libptscotch-7.0.11-int32_h4c1a4d9_3.conda                        220kB
+  libpython-3.12.16-h3cfa5a6_0_cpython.conda                         8MB
+  libsanitizer-16.2.0-h73cac2c_7.conda                               8MB
+  libscotch-7.0.11-int32_h3298660_3.conda                          389kB
+  libsodium-1.0.22-h29ee22c_3.conda                                290kB
+  libspqr-4.3.4-he5f3b44_7100102.conda                             194kB
+  libsqlite-3.54.1-h399dd60_0.conda                                982kB
+  libssh2-1.11.1-h7572e3e_1.conda                                  316kB
+  libstdcxx-16.2.0-hef695bb_7.conda                                  6MB
+  libstdcxx-devel_linux-aarch64-16.2.0-h082e5f6_107.conda           20MB
+  libsuitesparseconfig-7.10.1-h27f2d44_7100102.conda                43kB
+  libsystemd0-262.2-hd1ea486_1.conda                               596kB
+  libudev1-262.2-hd1ea486_1.conda                                  196kB
+  libumfpack-6.3.5-h8b28e19_7100102.conda                          363kB
+  libuuid-2.42.4-hd6fdeab_1.conda                                   38kB
+  libxcrypt-4.4.38-h80f16a2_0.conda                                134kB
+  libxml2-16-2.15.4-h2e5089f_1.conda                               628kB
+  libxml2-2.15.4-h92b9305_1.conda                                   49kB
+  libzlib-1.3.2-hdc9db2a_3.conda                                    70kB
+  llvm-openmp-23.1.5-hde6636f_0.conda                                6MB
+  lz4-c-1.10.0-hfb11796_2.conda                                    219kB
+  metis-5.1.0-h94a1348_1008.conda                                    4MB
+  mpi-1.0.1-mpich.conda                                              7kB
+  mpi4py-4.1.2-py312h2b8f3c7_101.conda                             833kB
+  mpich-5.0.1-ha88d0e1_4.conda                                       9MB
+  mumps-include-5.8.2-h4dc465c_3.conda                              27kB
+  mumps-mpi-5.8.2-gfortran_h47962c2_3.conda                          3MB
+  nanobind-abi-19-hd8ed1ab_0.conda                                  10kB
+  ncurses-6.6-h2b6f883_1.conda                                     955kB
+  numpy-2.5.4-py312hfb93532_0.conda                                  8MB
+  openssl-3.6.5-he6ad1d5_0.conda                                     4MB
+  packaging-26.3-pyhc364b38_0.conda                                116kB
+  parmetis-4.0.3-h8a67055_1009.conda                               322kB
+  petsc-3.25.6-real_h97b4bb5_0.conda                                23MB
+  petsc4py-3.25.6-np2py311ha57a955_0.conda                           2MB
+  pip-26.2.2-pyh8b19718_2.conda                                      1MB
+  pkg-config-0.29.2-hfbd14cd_1013.conda                            338kB
+  pugixml-1.15-h6ef32b0_0.conda                                    113kB
+  pycparser-3.12-pyh5ded981_1.conda                                 68kB
+  python-3.12.16-h94ad73b_0_cpython.conda                           22MB
+  python-gil-3.12.16-hd8ed1ab_0.conda                               47kB
+  python_abi-3.12-9_cp312.conda                                      7kB
+  rdma-core-65.0-h807d763_0.conda                                    1MB
+  readline-8.3-ha7194a6_1.conda                                    364kB
+  scalapack-2.2.0-h668029c_6.conda                                   2MB
+  scifem-0.27.0-py312h673d025_1.conda                              279kB
+  scipy-1.18.1-py312h3e7234c_2.conda                                17MB
+  setuptools-84.2.1-pyhe730653_0.conda                             567kB
+  slepc-3.25.2-real_h487d94d_0.conda                                10MB
+  slepc4py-3.25.2-np2py311h1f039aa_0.conda                         544kB
+  spdlog-1.17.0-hb3fff47_2.conda                                   196kB
+  superlu-7.0.1-h8effc92_0.conda                                   268kB
+  superlu_dist-9.2.1-hbd63904_2.conda                                1MB
+  sysroot_linux-aarch64-2.34-h96c1060_3.conda                       40MB
+  tk-8.6.13-noxft_hf03c496_4.conda                                   4MB
+  tqdm-4.70.1-pyhfa0c392_0.conda                                    96kB
+  typing_extensions-4.16.0-pyhcf101f3_0.conda                       53kB
+  tzdata-2026e-h5d301ff_0.conda                                    119kB
+  ucx-1.22.0-h6c30a11_1.conda                                        9MB
+  wheel-0.48.0-pyhd8ed1ab_0.conda                                   35kB
+  yaml-0.2.5-h29ee22c_3.conda                                       89kB
+  zeromq-4.3.5-h3469ab9_12.conda                                   368kB
+  zfp-1.0.1-h6b5f512_6.conda                                       249kB
+  zlib-ng-2.3.3-h1024f78_1.conda                                   125kB
+  zstd-1.5.7-h9d15635_7.conda                                      615kB
+
+  /work/home/.mamba/pkgs
+──────────────────────────────────────────────────────────────────────────
+
+
+  
+──────────────────────────────────────────────────────────────────────────
+
+  Total size:                                                      385MB
+Cleaning tarballs..
+  Package folder                                              Size
+────────────────────────────────────────────────────────────────────
+  /work/project/.cache/mamba/pkgs
+────────────────────────────────────────────────────────────────────
+
+  _openmp_mutex-4.5-8_kmp_llvm                                23kB
+  _python_abi3_support-1.0-hd8ed1ab_3                         22kB
+  adios2-2.12.1-mpi_mpich_py312_ha805447_12                    4MB
+  binutils_impl_linux-aarch64-2.46.1-default_h5f4c503_103     44MB
+  bzip2-1.0.8-h4777abc_10                                      2MB
+  c-ares-1.34.9-h29ee22c_0                                   947kB
+  c-blosc2-3.3.5-h84c80c1_0                                    1MB
+  ca-certificates-2026.10.23-hbd8a1cb_0                      253kB
+  cached-property-2.0.1-pyhcf101f3_0                          10kB
+  cached_property-2.0.1-pyhcf101f3_0                          63kB
+  cffi-2.1.1-py312h563f9cf_3                                   1MB
+  conda-gcc-specs-16.2.0-h969d813_7                          145kB
+  cpython-3.12.16-py312hd8ed1ab_0                            215kB
+  fenics-basix-0.11.0-py312hb51c29e_0                        893kB
+  fenics-basix-nanobind-abi-2.19-py312h0a6f99c_0              14kB
+  fenics-dolfinx-0.11.0-py312he8cf3a9_101                      9MB
+  fenics-ffcx-0.11.0-pyh4a40500_0                            623kB
+  fenics-libbasix-0.11.0-py312h2a1c81a_0                       3MB
+  fenics-libdolfinx-0.11.0-py312h4343179_101                   4MB
+  fenics-ufcx-0.11.0-haec879b_0                               66kB
+  fenics-ufl-2026.1.0-pyhc364b38_0                             1MB
+  fenicsx-compat-0.4.0-pyhc364b38_0                           87kB
+  fftw-3.3.11-mpi_mpich_h71cae1e_0                             6MB
+  fmt-12.1.0-h166da81_1                                      838kB
+  gcc-16.2.0-hfdd745d_7                                      122kB
+  gcc_impl_linux-aarch64-16.2.0-h5425ead_7                   287MB
+  h5py-3.16.0-mpi_mpich_py312ha450a89_5                        7MB
+  hdf5-1.14.6-mpi_mpich_he5038ac_10                           16MB
+  hypre-3.2.1-h3887af0_0                                       8MB
+  icu-78.3-py311h3512406_2                                    50MB
+  kahip-3.25-py313h236e92b_0                                  32MB
+  kernel-headers_linux-aarch64-5.14.0-h05a177a_3               7MB
+  keyutils-1.6.3-h5bc82ec_1                                  646kB
+  krb5-1.22.2-h095d8e5_2                                       7MB
+  ld_impl_linux-aarch64-2.46.1-default_h1979696_103            5MB
+  libadios2-2.12.1-mpi_mpich_h37ded8e_12                      26MB
+  libaec-1.1.8-h30d59cc_0                                    195kB
+  libamd-3.3.3-h913f464_7100102                              177kB
+  libblas-3.11.0-12_haddc8a3_openblas                         73kB
+  libboost-1.90.0-h47d6679_3                                  20MB
+  libboost-devel-1.90.0-hf41333a_3                           419kB
+  libboost-headers-1.90.0-h707e725_3                         169MB
+  libbtf-2.3.2-h6ed72c6_7100102                              165kB
+  libcamd-3.3.3-h6ed72c6_7100102                             172kB
+  libcap-2.78-hfcc8634_1                                     694kB
+  libcblas-3.11.0-12_hd72aa62_openblas                        73kB
+  libccolamd-3.3.4-h6ed72c6_7100102                          165kB
+  libcholmod-5.3.1-h3b6fcec_7100102                            2MB
+  libcolamd-3.3.4-h6ed72c6_7100102                           163kB
+  libcurl-8.23.0-h86273da_0                                    2MB
+  libedit-3.1.20260512-pl5321hc48eb74_0                      420kB
+  libev-4.33-h80f16a2_3                                      160kB
+  libexpat-2.9.0-h4154aff_0                                  238kB
+  libfabric-2.7.0-h8af1aa0_0                                  39kB
+  libfabric1-2.7.0-hb5471ae_0                                  3MB
+  libffi-3.7.0-hdaad0be_1                                    259kB
+  libgcc-16.2.0-h205dda4_7                                     3MB
+  libgcc-devel_linux-aarch64-16.2.0-hc0c2482_107               9MB
+  libgfortran-16.2.0-he9431aa_7                              118kB
+  libgfortran5-16.2.0-hc864f27_7                               8MB
+  libgomp-16.2.0-h8acb6b2_7                                    2MB
+  libhwloc-2.13.0-default_ha95e27d_1000                        5MB
+  libiconv-1.18-h1ea5142_3                                     3MB
+  libklu-2.3.5-h23d02ee_7100102                              426kB
+  liblapack-3.11.0-12_h88aeb00_openblas                       73kB
+  liblzma-5.8.3-he30d5cf_1                                   630kB
+  libnghttp2-1.71.0-h0d23a54_0                                 4MB
+  libnl-3.11.0-he30d5cf_1                                      8MB
+  libnsl-2.0.1-h86ecc28_1                                    159kB
+  libopenblas-0.3.34-openmp_hcf905d8_2                        26MB
+  libpng-1.6.59-hf9b7768_0                                     1MB
+  libpsl-0.23.1-hb8431ed_1                                   190kB
+  libptscotch-7.0.11-int32_h4c1a4d9_3                        943kB
+  libpython-3.12.16-h3cfa5a6_0_cpython                        31MB
+  libsanitizer-16.2.0-h73cac2c_7                              33MB
+  libscotch-7.0.11-int32_h3298660_3                            2MB
+  libsodium-1.0.22-h29ee22c_3                                774kB
+  libspqr-4.3.4-he5f3b44_7100102                             584kB
+  libsqlite-3.54.1-h399dd60_0                                  3MB
+  libssh2-1.11.1-h7572e3e_1                                    1MB
+  libstdcxx-16.2.0-hef695bb_7                                 24MB
+  libstdcxx-devel_linux-aarch64-16.2.0-h082e5f6_107          120MB
+  libsuitesparseconfig-7.10.1-h27f2d44_7100102               347kB
+  libsystemd0-262.2-hd1ea486_1                                 2MB
+  libudev1-262.2-hd1ea486_1                                  714kB
+  libumfpack-6.3.5-h8b28e19_7100102                            1MB
+  libuuid-2.42.4-hd6fdeab_1                                  153kB
+  libxcrypt-4.4.38-h80f16a2_0                                322kB
+  libxml2-16-2.15.4-h2e5089f_1                                 2MB
+  libxml2-2.15.4-h92b9305_1                                  256kB
+  libzlib-1.3.2-hdc9db2a_3                                   169kB
+  llvm-openmp-23.1.5-hde6636f_0                               23MB
+  lz4-c-1.10.0-hfb11796_2                                    747kB
+  metis-5.1.0-h94a1348_1008                                   13MB
+  mpi-1.0.1-mpich                                             15kB
+  mpi4py-4.1.2-py312h2b8f3c7_101                               3MB
+  mpich-5.0.1-ha88d0e1_4                                      33MB
+  mumps-include-5.8.2-h4dc465c_3                             145kB
+  mumps-mpi-5.8.2-gfortran_h47962c2_3                         11MB
+  nanobind-abi-19-hd8ed1ab_0                                  23kB
+  ncurses-6.6-h2b6f883_1                                       6MB
+  numpy-2.5.4-py312hfb93532_0                                 36MB
+  openssl-3.6.5-he6ad1d5_0                                    12MB
+  packaging-26.3-pyhc364b38_0                                534kB
+  parmetis-4.0.3-h8a67055_1009                                 1MB
+  petsc-3.25.6-real_h97b4bb5_0                                48MB
+  petsc4py-3.25.6-np2py311ha57a955_0                           9MB
+  pip-26.2.2-pyh8b19718_2                                      6MB
+  pkg-config-0.29.2-hfbd14cd_1013                            955kB
+  pugixml-1.15-h6ef32b0_0                                    400kB
+  pycparser-3.12-pyh5ded981_1                                346kB
+  python-3.12.16-h94ad73b_0_cpython                           83MB
+  python-gil-3.12.16-hd8ed1ab_0                              215kB
+  python_abi-3.12-9_cp312                                     19kB
+  rdma-core-65.0-h807d763_0                                    8MB
+  readline-8.3-ha7194a6_1                                      2MB
+  scalapack-2.2.0-h668029c_6                                   5MB
+  scifem-0.27.0-py312h673d025_1                                1MB
+  scipy-1.18.1-py312h3e7234c_2                                74MB
+  setuptools-84.2.1-pyhe730653_0                               3MB
+  slepc-3.25.2-real_h487d94d_0                                13MB
+  slepc4py-3.25.2-np2py311h1f039aa_0                           3MB
+  spdlog-1.17.0-hb3fff47_2                                     1MB
+  superlu-7.0.1-h8effc92_0                                   794kB
+  superlu_dist-9.2.1-hbd63904_2                                5MB
+  sysroot_linux-aarch64-2.34-h96c1060_3                      489MB
+  tk-8.6.13-noxft_hf03c496_4                                  12MB
+  tqdm-4.70.1-pyhfa0c392_0                                   397kB
+  typing_extensions-4.16.0-pyhcf101f3_0                      227kB
+  tzdata-2026e-h5d301ff_0                                    667kB
+  ucx-1.22.0-h6c30a11_1                                       35MB
+  wheel-0.48.0-pyhd8ed1ab_0                                  121kB
+  yaml-0.2.5-h29ee22c_3                                      400kB
+  zeromq-4.3.5-h3469ab9_12                                     1MB
+  zfp-1.0.1-h6b5f512_6                                         1MB
+  zlib-ng-2.3.3-h1024f78_1                                   353kB
+  zstd-1.5.7-h9d15635_7                                        2MB
+
+  /work/home/.mamba/pkgs
+────────────────────────────────────────────────────────────────────
+
+
+  
+────────────────────────────────────────────────────────────────────
+
+  Total size:                                                  2GB
+Cleaning packages..

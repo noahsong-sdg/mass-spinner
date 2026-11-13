@@ -1,0 +1,141 @@
+{
+  "version": "1",
+  "pip_version": "26.2.2",
+  "install": [
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/31/ab/6a8f5873dbaa1df7615768680d9d62e97ebf898e2a3d83b1a07c4640527e/festim-2.2-py3-none-any.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "1951a598556c1ca2f473142c6a5fb2075576f64666543a1b804a8bc1bc2ca1a2"
+          },
+          "hash": "sha256=1951a598556c1ca2f473142c6a5fb2075576f64666543a1b804a8bc1bc2ca1a2"
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "FESTIM",
+        "version": "2.2",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Finite element simulations of hydrogen transport",
+        "description": "# FESTIM\n[![NumFOCUS](https://img.shields.io/badge/powered%20by-NumFOCUS-orange.svg?style=flat&colorA=E1523D&colorB=007D8A)](https://numfocus.org/)\n[![Conda CI](https://github.com/festim-dev/FESTIM/actions/workflows/ci_conda.yml/badge.svg?branch=main)](https://github.com/festim-dev/FESTIM/actions/workflows/ci_conda.yml)\n[![Docker CI](https://github.com/festim-dev/FESTIM/actions/workflows/ci_docker.yml/badge.svg?branch=main)](https://github.com/festim-dev/FESTIM/actions/workflows/ci_docker.yml)\n[![codecov](https://codecov.io/gh/festim-dev/FESTIM/branch/main/graph/badge.svg?token=AK3A9CV2D3)](https://codecov.io/gh/festim-dev/FESTIM)\n[![Code style: Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)\n![GitHub stars](https://img.shields.io/github/stars/festim-dev/FESTIM.svg?logo=github&label=Stars&logoColor=white)\n![GitHub forks](https://img.shields.io/github/forks/festim-dev/FESTIM.svg?logo=github&label=Forks&logoColor=white)\n\nFESTIM (Finite Elements Simulation of Tritium in Materials) is a tool for modeling hydrogen transport in materials. \nIt simulates the diffusion and trapping of hydrogen, coupled to heat transfer with [FEniCS](https://fenicsproject.org).\n\n\n## Getting started\n\nThe installation instructions are available [here](https://festim.readthedocs.io/en/latest/installation.html).\n\n## Documentation \n\nDocumentation can be viewed at https://festim.readthedocs.io/\n\n## Tutorials\n\nVisit the FESTIM-workshop to view the available tutorials https://github.com/festim-dev/FESTIM-workshop\n\n## Contact\n\nFor questions on how to use FESTIM, visit our [Discourse page](https://festim.discourse.group/)\nor join our [Slack](https://join.slack.com/t/festimworkspace/shared_invite/zt-246hw8d6o-htWASLsbdosUo_2nRKCf9g) channel\n\n## Contributing\n\nThe guidelines for contributions can be found in the documentation: https://festim.readthedocs.io/en/latest/devguide/index.html\n\n## Roadmap\n\nYou can follow the public roadmap on the [FESTIM projects page](https://github.com/festim-dev/FESTIM/projects?query=is%3Aopen).\n",
+        "description_content_type": "text/markdown",
+        "author": "Remi Delaporte-Mathurin",
+        "author_email": "rdelaportemathurin@gmail.com",
+        "license_expression": "Apache-2.0",
+        "license_file": [
+          "LICENSE"
+        ],
+        "classifier": [
+          "Natural Language :: English",
+          "Topic :: Scientific/Engineering",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13",
+          "Operating System :: OS Independent"
+        ],
+        "requires_dist": [
+          "tqdm",
+          "scifem>=0.20.0",
+          "io4dolfinx[h5py]",
+          "pyvista; extra == \"plot\"",
+          "pytest>=5.4.3; extra == \"test\"",
+          "pytest-cov; extra == \"test\"",
+          "sympy; extra == \"test\"",
+          "scipy; extra == \"test\"",
+          "ipyparallel; extra == \"test\"",
+          "pyvista; extra == \"test\"",
+          "ruff; extra == \"lint\"",
+          "mypy; extra == \"lint\"",
+          "sphinx; extra == \"docs\"",
+          "sphinx-book-theme; extra == \"docs\"",
+          "sphinx-design; extra == \"docs\"",
+          "matplotlib; extra == \"docs\""
+        ],
+        "requires_python": ">=3.9",
+        "project_url": [
+          "Homepage, https://github.com/festim-dev/FESTIM",
+          "Issues, https://github.com/festim-dev/FESTIM/issues"
+        ],
+        "provides_extra": [
+          "plot",
+          "test",
+          "lint",
+          "docs"
+        ]
+      }
+    },
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/cf/63/bc196ae60cc1f22fdf74ea0e4c29f4deafd41af48c2e074c4599f899fe11/io4dolfinx-1.5.1-py3-none-any.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "6eae5d15192f8acea076693ab8b080e1db1dd1a007ee6f50240627ced03795f4"
+          },
+          "hash": "sha256=6eae5d15192f8acea076693ab8b080e1db1dd1a007ee6f50240627ced03795f4"
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.4",
+        "name": "io4dolfinx",
+        "version": "1.5.1",
+        "dynamic": [
+          "license-file"
+        ],
+        "summary": "Checkpointing functionality for DOLFINx meshes/functions with ADIOS2",
+        "description": "# io4dolfinx - A framework for reading and writing data to various mesh formats\n\n**io4dolfinx** is an extension for [DOLFINx](https://github.com/FEniCS/dolfinx/) that provides advanced input/output capabilities. It focuses on **N-to-M checkpointing** (writing data on N processors, reading on M processors) and supports reading/writing various mesh formats using interchangeable backends.\n\n\n## Installation\n\nThe library is compatible with DOLFINx v0.10.0 and newer, including the nightly release.\n\nWorkarounds for API differences between DOLFINx versions live in [`fenicsx-compat`](https://github.com/scientificcomputing/fenicsx-compat), which `io4dolfinx` depends on.\n\n```bash\npython3 -m pip install io4dolfinx\n```\n\nFor specific backend requirements (like ADIOS2 or H5PY), see the [Installation Guide](./docs/installation.md).\n\n\n## Quick Start\n\nHere is a minimal example of saving and loading a simulation state (Checkpointing).\n\n```python\nfrom pathlib import Path\nfrom mpi4py import MPI\nimport dolfinx\nimport io4dolfinx\n\n# 1. Create a mesh and function\ncomm = MPI.COMM_WORLD\nmesh = dolfinx.mesh.create_unit_square(comm, 10, 10)\nV = dolfinx.fem.functionspace(mesh, (\"Lagrange\", 1))\nu = dolfinx.fem.Function(V)\nu.interpolate(lambda x: x[0] + x[1])\nu.name = \"my_function\"\n\n# 2. Write checkpoint\n# The mesh must be written before the function\nfilename = Path(\"checkpoint.bp\")\nio4dolfinx.write_mesh(filename, mesh)\nio4dolfinx.write_function(filename, u, time=0.0)\n\n# 3. Read checkpoint\n# This works even if the number of MPI processes changes (N-to-M)\nmesh_new = io4dolfinx.read_mesh(filename, comm)\nV_new = dolfinx.fem.functionspace(mesh_new, (\"Lagrange\", 1))\nu_new = dolfinx.fem.Function(V_new)\nio4dolfinx.read_function(filename, u_new, time=0.0, name=\"my_function\")\n```\n\n\n## Features and Backends\n\n`io4dolfinx` supports custom user backends. You can switch backends by passing `backend=\"name\"` to IO functions.\n\n### Checkpointing (N-to-M)\nMany finite element applications requires storage of functions that cannot be associated with the nodes or cells of the mesh. Therefore, we have implemented our own, native checkpointing format that supports N-to-M checkpointing (write data on N processors, read in on M) through the following backends:\n\n- [h5py](./docs/backends/h5py.rst): Requires HDF5 with MPI support to work, but can store, meshes, partitioning info, meshtags, function data and more.\n- [adios2](./docs/backends/adios2.rst): Requires [ADIOS 2](https://adios2.readthedocs.io/en/latest/) compiled with MPI support and Python bindings. Supports the same set of operations as the `h5py` backend.\n\nThe code uses the ADIOS2/Python-wrappers and h5py module to write DOLFINx objects to file, supporting N-to-M (_recoverable_) and N-to-N (_snapshot_) checkpointing.\nSee: [Checkpointing in DOLFINx - FEniCS 23](https://jsdokken.com/checkpointing-presentation/#/) or the examples in the [Documentation](https://jsdokken.com/io4dolfinx/) for more information.\n\nFor scalability, the code uses [MPI Neighbourhood collectives](https://www.mpi-forum.org/docs/mpi-3.1/mpi31-report/node200.htm) for communication across processes.\n\n\n### Mesh IO (Import/Export)\nMost meshing formats supports associating data with the nodes of the mesh (the mesh can be higher order) and the cells of the mesh. The node data can be read in as P-th order Lagrange functions (where P is the order of the grid), while the cell data can be read in as piecewise constant (DG-0) functions.\n\n- [VTKHDF](./docs/backends/vtkhdf.rst): The new scalable format from VTK, called [VTKHDF](https://docs.vtk.org/en/latest/vtk_file_formats/vtkhdf_file_format/index.html) is supported by the `vtkhdf` backend.\n- [XDMF](./docs/backends/xdmf.rst) (eXtensible Model Data Format): `.xdmf`. The `xdmf` backend supports the `HDF5` encoding, to ensure performance in parallel.\n- [Gmsh](./docs/backends/gmsh.rst): `.msh` files (MSH 2.2 and 4.1, ASCII and binary) are read and written with the [Gmsh](https://gmsh.info) Python API by the `gmsh` backend, including physical groups as mesh tags and time-dependent point and cell data.\n- [PyVista](./docs/backends/pyvista.rst) (IO backend is meshio): The [pyvista](https://pyvista.org/) backend uses {py:func}`pyvista.read` to read in meshes, point data and cell data. `pyvista` relies on [meshio](https://github.com/nschloe/meshio) for most reading operations (including the XDMF ascii format).\n\n\n\n## Advanced Usage\n\nThe repository contains detailed documented examples in the `docs` folder:\n\n* [Reading and writing mesh checkpoints](./docs/writing_mesh_checkpoint.py)\n* [Storing mesh partitioning data](./docs/partitioned_mesh.py) (Avoid re-partitioning when restarting)\n* [Writing mesh-tags](./docs/meshtags.py)\n* [Writing function checkpoints](./docs/writing_functions_checkpoint.py)\n* [Checkpoint on input mesh](./docs/original_checkpoint.py)\n\nFor a full API reference and backend details, see the [Documentation](https://jsdokken.com/io4dolfinx/).\n\n### Legacy DOLFIN Support\n`io4dolfinx` can read checkpoints created by the legacy version of DOLFIN (Lagrange or DG functions).\n* Reading meshes from DOLFIN HDF5File-format.\n* Reading checkpoints from DOLFIN HDF5File and XDMFFile.\n\n## Project Background\n\n### Relation to adios4dolfinx\nThis library is an evolution of [adios4dolfinx](https://doi.org/10.21105/joss.06451). It includes all functionality of the original library but has been refactored to support multiple IO backends (not just ADIOS2), making it easier to interface with different meshing formats while keeping the library structure sane.\n\n### Statement of Need\nAs large-scale, long-running simulations on HPC clusters become more common, the need to store intermediate solutions is crucial. If a system crashes or a computational budget is exceeded, checkpoints allow the simulation to resume without restarting from scratch. `io4dolfinx` extends DOLFINx with this essential functionality.\n\n## Contributing\n\nPlease read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.\n\n## Testing\n\n`io4dolfinx` includes a comprehensive test suite that ensures functionality across different backends and compatibility with legacy data formats, see the [Testing Guide](./docs/testing.md) for details.\n\n\n## LICENSE\nThis project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.\n",
+        "description_content_type": "text/markdown",
+        "author_email": "\"Jørgen S. Dokken\" <dokken@simula.no>, \"Henrik N.T. Finsberg\" <henriknf@simula.no>",
+        "license": "Copyright 2023 Jørgen S. Dokken, Henrik N.T. Finsberg and Simula Research Laboratory\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n",
+        "license_file": [
+          "LICENSE"
+        ],
+        "requires_dist": [
+          "fenics-dolfinx>=0.10.0",
+          "fenicsx-compat>=0.3.0",
+          "h5py; extra == \"h5py\"",
+          "pyvista; extra == \"pyvista\"",
+          "h5py; extra == \"xdmf\"",
+          "netcdf4; extra == \"exodus\"",
+          "h5py; extra == \"med\"",
+          "gmsh; extra == \"gmsh\""
+        ],
+        "requires_python": ">=3.12",
+        "provides_extra": [
+          "h5py",
+          "pyvista",
+          "xdmf",
+          "exodus",
+          "med",
+          "gmsh"
+        ]
+      },
+      "requested_extras": [
+        "h5py"
+      ]
+    }
+  ],
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.12.16",
+    "os_name": "posix",
+    "platform_machine": "aarch64",
+    "platform_release": "6.18.35",
+    "platform_system": "Linux",
+    "platform_version": "#1 SMP Mon Jun 15 12:55:27 UTC 2026",
+    "python_full_version": "3.12.16",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.12",
+    "sys_platform": "linux"
+  }
+}

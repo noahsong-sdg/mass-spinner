@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "id": "festim-v88-synthetic-limits-v1",
+  "frozenBeforeCampaign": true,
+  "scope": "Numerical qualification of actual FESTIM 2.2 diffusion, isotope trapping and heat adapters. Not LiT property data, full target physics, live integration or experimental qualification.",
+  "sourceTrace": [
+    "src/coupled-target.ts:147-166 computes conditional Arrhenius diffusion/release, replacement and heat with custom IMEX stepping",
+    "src/target-conduction.ts:22 solves constant-property conservative depth heat",
+    "FESTIM v2.2 HydrogenTransportProblem, HeatTransferProblem and CoupledTransientHeatTransferHydrogenTransport APIs checked in upstream source before writing adapter"
+  ],
+  "need": "Existing SciPy loading oracle covers a well-mixed reduced system. This pilot establishes an independent specialist runtime and common transport/heat limits before any production material-model migration.",
+  "runtime": {"festim": "2.2", "dolfinx": "0.11.0", "python": "3.12.16", "platform": "Linux aarch64", "execution": "safe-dev nonroot guest only; serial thread limits; network only for installation"},
+  "syntheticUnits": "Unit slab length, unit concentration scale and unit time scale. Thermal temperatures in kelvin with dimensionless positive conductivity/density/capacity. All coefficients are manufactured positive values, not measured material parameters.",
+  "meshCells": [16, 32, 64],
+  "timesteps": [0.01, 0.005, 0.0025],
+  "finalTime": 0.1,
+  "newton": {"atol": 1e-11, "rtol": 1e-11, "maxIterations": 30},
+  "cases": [
+    {"id": "sealed-dt-diffusion", "equations": "dcD/dt=0.1*d2cD/dx2; dcT/dt=0.1*d2cT/dx2; zero-flux ends", "initial": "cD=0.6+0.2*cos(pi*x), cT=0.4-0.2*cos(pi*x)", "oracle": "Exact eigenmode 0.2*exp(-0.1*pi^2*t), plus independent SciPy sparse finite-volume exponential"},
+    {"id": "isotope-shared-trap", "equations": "R_i=2*c_i*(0.3-cDt-cTt)-0.5*c_it; dc_i/dt=-R_i; dc_it/dt=R_i; sealed uniform D/T", "initial": "cD=0.4,cT=0.2,cDt=cTt=0", "oracle": "Independent SciPy Radau and DOP853 tolerances 1e-11/1e-13; both isotope inventories constant; shared vacancies nonnegative"},
+    {"id": "heat-eigenmode", "equations": "dT/dt=0.1*d2T/dx2; T(0)=T(1)=300", "initial": "T=300+50*sin(pi*x)", "oracle": "Exact amplitude 50*exp(-0.1*pi^2*t), plus independent SciPy sparse finite-volume exponential"},
+    {"id": "thermal-diffusion-coupling", "equations": "Insulated heat dT/dt=1000; D(T)=4*exp(-0.05/(kB*T)); sealed D/T diffusion driven by actual evolving heat solution", "initial": "T=300; same complementary D/T cosine profiles", "oracle": "T=300+1000*t; exact mode amplitude from independent SciPy quad integral of D(T); no reaction heat feedback is asserted"}
+  ],
+  "gates": {
+    "runtimeImports": "Actual FESTIM/dolfinx/PETSc imported; pinned versions, package lock and source hashes recorded",
+    "positivityTolerance": 1e-10,
+    "isotopeInventoryAbsoluteTolerance": 1e-9,
+    "sharedTrapVacancyTolerance": 1e-10,
+    "finestNormalizedProfileError": 0.003,
+    "spatialDifferenceContraction": 0.4,
+    "timeDifferenceContraction": 0.65,
+    "exactTimeTolerance": 1e-12,
+    "oracleCrossCheckTolerance": 1e-8,
+    "uniformTrapSpatialDifferenceTolerance": 1e-9,
+    "heatCouplingTemperatureAbsoluteTolerance": 1e-8,
+    "allRequired": true
+  },
+  "handling": "No tolerance changes after results; retain every failure. Fixed iteration count exactly finalTime/dt, and verify actual solver time rather than relying on a floating-point while-loop endpoint. Use actual per-step dt and states in exported response tables. Convergence compares differences, not error signs, avoiding cancellation between temporal and spatial truncation.",
+  "exports": ["source and protocol SHA256", "package/source/license manifest", "all result states and convergence gates", "small reusable response JSON", "tests and execution receipt"],
+  "sources": [
+    "https://festim.readthedocs.io/en/latest/installation.html",
+    "https://raw.githubusercontent.com/festim-dev/FESTIM/v2.2/src/festim/hydrogen_transport_problem.py",
+    "https://raw.githubusercontent.com/festim-dev/FESTIM/v2.2/src/festim/coupled_heat_hydrogen_problem.py",
+    "https://raw.githubusercontent.com/festim-dev/FESTIM/v2.2/pyproject.toml",
+    "https://pypi.org/project/io4dolfinx/1.5.1/"
+  ]
+}
