@@ -1,0 +1,15 @@
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.0003286249999999713
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.006s
+
+OK

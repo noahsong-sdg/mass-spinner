@@ -1,0 +1,41 @@
+{
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/reference90.py": "94b4ad254808e322a49b1ead851210c79633ace126f6134476d8599b1310fecb",
+    "scientific/coupled-openfoam-v90/score90.py": "50b5ee63e3dd30850971b49d4879d3fa3ba5f212562f71710eba4bdf16fccb70",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "64f58fdc75ed003d4e8de313a7a93b90f4315fb1cb0f14c5f34ae36134e0f035",
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+  },
+  "startedUTC": "2026-11-13T08:06:59.799821+00:00",
+  "commands": [
+    {
+      "name": "tests",
+      "args": [
+        "/work/home/v90-venv/bin/python",
+        "-m",
+        "unittest",
+        "-v",
+        "test_reference90"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.276779958,
+      "logSHA256": "ba23f33de6c86d4198198c17c5efd1980840906c45c3e856fc79f2d507cd16cb"
+    },
+    {
+      "name": "pilot",
+      "args": [
+        "/work/home/v90-venv/bin/python",
+        "-u",
+        "reference90.py",
+        "pilot",
+        "pilot-results"
+      ],
+      "exitCode": 1,
+      "wallSeconds": 0.37774537600000013,
+      "logSHA256": "012ec139e9122c9ee1c162dab7d7b402b3ce213a2cfb663a98c88252283f12f5"
+    }
+  ]
+}

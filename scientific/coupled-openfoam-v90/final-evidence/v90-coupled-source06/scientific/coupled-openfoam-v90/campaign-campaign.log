@@ -1,0 +1,14 @@
+START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 1.657725042
+START n16-s512-a0.5-work1
+END n16-s512-a0.5-work1 complete 4.448298544
+START n32-s512-a0.5-work1
+END n32-s512-a0.5-work1 complete 17.610314008
+START n16-s256-a0.5-work1
+END n16-s256-a0.5-work1 complete 2.3044427920000032
+START n16-s1024-a0.5-work1
+END n16-s1024-a0.5-work1 complete 8.909176170000002
+START n16-s512-a0.25-work1
+END n16-s512-a0.25-work1 complete 4.472286793000002
+START n16-s512-a0.5-work0
+END n16-s512-a0.5-work0 complete 4.266794585999996

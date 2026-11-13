@@ -1,0 +1,5 @@
+RUN tests
+Traceback (most recent call last):
+  File "<stdin>", line 19, in <module>
+TypeError: a bytes-like object is required, not 'str'
+safe-dev: Guest/runtime command failed (exit 1).

@@ -1,0 +1,20 @@
+RUN tests
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.0003286249999999713
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.006s
+
+OK
+RUN pilot
+START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 1.9143082089999999
+RECEIPT {"sourceSHA256": {"scientific/coupled-openfoam-v90/reference90.py": "c4f7444a0cdb4e59acd570a428be6752dd213e9995839dbd7d4c9e0d4f403ce8", "scientific/coupled-openfoam-v90/score90.py": "50b5ee63e3dd30850971b49d4879d3fa3ba5f212562f71710eba4bdf16fccb70", "scientific/coupled-openfoam-v90/test_reference90.py": "03e2e2f41afd774723caea52474df671de7e68a876c3ebc2fa02c37aa84dc36a", "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c", "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2", "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9", "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf", "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"}, "startedUTC": "2026-11-13T08:08:18.973535+00:00", "commands": [{"name": "tests", "args": ["/work/home/v90-venv/bin/python", "-m", "unittest", "-v", "test_reference90"], "exitCode": 0, "wallSeconds": 0.27569966700000004, "logSHA256": "c03da9797bc71df29f2044b5a3d3764cc02b00f76178271aa9deb474dad5cdaf"}, {"name": "pilot", "args": ["/work/home/v90-venv/bin/python", "-u", "reference90.py", "pilot", "pilot-results"], "exitCode": 0, "wallSeconds": 2.107472042, "logSHA256": "ad18895138b96f165b43d21343b3d4545297c7b53b1cbb6ab36cb84deba6c711"}], "sourceUnchanged": true, "finishedUTC": "2026-11-13T08:08:21.357366+00:00"}

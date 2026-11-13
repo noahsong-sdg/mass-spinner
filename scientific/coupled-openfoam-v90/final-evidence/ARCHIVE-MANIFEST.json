@@ -1,0 +1,2790 @@
+{
+  "files": [
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/PROTOCOL.md",
+      "size": 4565,
+      "sha256": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/REFINEMENT.md",
+      "size": 1410,
+      "sha256": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-campaign.log",
+      "size": 525,
+      "sha256": "88d12958479e3846e72bf7e8be6d12ef7234dbf4c253d95d659a170cd8babee2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-execution.json",
+      "size": 2974,
+      "sha256": "06965049ea1a18a4633350cd7b33e1ae9e7e8ee5d5b7a0f95f0638e435bea431"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-flow-controls.log",
+      "size": 1749,
+      "sha256": "41b4e565d263dea4f95002294b5140632ae9fc5e32144d907cfb79ed4d94dacd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/audit-extension.json",
+      "size": 35552,
+      "sha256": "e11a43512244ceec679bd7b893f2c12e5f934cf1830920f2a0ed6aba8bf87ece"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/audit.json",
+      "size": 33297,
+      "sha256": "a7fbc736918f28f513a40821373d63cc90b278e4ce46db613b68d6c8241fc52a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/C",
+      "size": 32031,
+      "sha256": "c504ddbf4d1d8b326be1b523254fed27d50668e52708b075c811c138328be842"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/Ccx",
+      "size": 12402,
+      "sha256": "5c9f791fc222a85fbf8e19d3f19a2d0d4c2dc8728805bea0424ae98b9c81255f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/Ccy",
+      "size": 13663,
+      "sha256": "a2b30a1e48a9c380bf6264ca9bbaaf96a25e9fbbce3caab9efaec30e80c5533d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/Ccz",
+      "size": 7060,
+      "sha256": "5a26c43db2edec74829559cc6da6fedf819fcaed0c244546578c4db86d16a290"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/T",
+      "size": 9926,
+      "sha256": "9c6dd7036007e74cd0fffb3a2b401d01a2c55cbfeb3244ba9e6a61b70847a527"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/U",
+      "size": 23966,
+      "sha256": "165f321ae7bee8629262b39edfbc67c775b17f81031e3d066c9e8d8079f92b74"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/Vc",
+      "size": 12290,
+      "sha256": "9a51f6db2ac278ea6e12a05316f8e6eac9b958a36e5aa78ccbc8a52f26a80885"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/p",
+      "size": 9929,
+      "sha256": "9390dc0b4196a20b16081d0d4aedd8bd780dfdc629c04f0b399f07d09fc94cb5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/T",
+      "size": 10219,
+      "sha256": "e59022df940851b5f50190c6398bae64c4e2271ef853767861f9a394222dfeb8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/U",
+      "size": 30426,
+      "sha256": "3e5ead9ae1e0242fa35b94b29ef847ba8a147e2c3ddbe3cbb6901c3218db13da"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/p",
+      "size": 10233,
+      "sha256": "8264c1653d68cb9b20997b598cb621f24c7900a2fb3dc10d05a628a176d4e280"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/phi",
+      "size": 45875,
+      "sha256": "33e36f85ae5bfd731ab176e0a5199e4909e23fb520b13d4cf335f2ed1019a430"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/rho",
+      "size": 12007,
+      "sha256": "8fb2a68fd46c2507f62dda61aaa0dffe3b5a4e9b41e0ffc0b6d93e7ceb414520"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.499999999999972e-05/uniform/time",
+      "size": 877,
+      "sha256": "87727ca6734a31be13d881a0ca61bf55f808837cf210c60cf44d998b8ddbf8de"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/T",
+      "size": 10215,
+      "sha256": "043ecaa5fe7897c02b295de4793f36c4f7880104fc7d89a44b8fdf464d0d054f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/U",
+      "size": 30387,
+      "sha256": "107410019b6c3c241d35883aeceda415a67526a7be4ca52efcef28fad587a1cd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/p",
+      "size": 10239,
+      "sha256": "084303d6b11a3ab0a39c91e79be9a947d0848ca2e19f9290332bc10c118c6b06"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/phi",
+      "size": 45856,
+      "sha256": "188fcc168c3b593b01f434dfb22f1851e0a6558e1a37208e6c87279b0b74a241"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/rho",
+      "size": 12010,
+      "sha256": "572436e7e4fa58e34e7c00586f844e44c45d8be6e200a3ecb99ce4b4a7f91c9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/1.999999999999951e-05/uniform/time",
+      "size": 878,
+      "sha256": "a7653223540e63b9fe69591d9debb42740c624945fcf187b4939434cef06fb7f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/T",
+      "size": 10234,
+      "sha256": "91327a3c12e81b19aa1b2bff84f08e0516172fedc0044a038716941edc556164"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/U",
+      "size": 30708,
+      "sha256": "ff0493d1f04bf21ae2390f8dbc6d92a14f3d0b44d4f01af6cf67d142efd8386f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/p",
+      "size": 10246,
+      "sha256": "eb0dbf1905ab7ac91a4776d981af6ed32f75da152c2e1a769b04ed2145aab79d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 45917,
+      "sha256": "9b6b5eedba875d8d0c15e8b197947167f80d1a39dff618ceb644d9c3ab9cb8c7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 12003,
+      "sha256": "225d6d5dece3f28d88a5e3ceeaaee7e835a97406b0f3518c3fba5489957bc328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 877,
+      "sha256": "24561dd84450ef2db07a206f6608882b621ab5a7a6ff2018d885d22e10a65a97"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/T",
+      "size": 10237,
+      "sha256": "d57e4f37e805ceb83f0e991e96bda69c9e96c233fc74c63fb206f707bef86d39"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/U",
+      "size": 30535,
+      "sha256": "665b57c1ee2ced3c4a16ddb4376e7716927bdbce106ddb5333d234ea1f5806b7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/p",
+      "size": 10230,
+      "sha256": "5e78bfa694952637aeaaaeee351c97959feec64ca2083000f3e73949b2b0db14"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/phi",
+      "size": 45908,
+      "sha256": "3a6a23fd591ceeaa3d98bda67151c8643490ed2e30946325d4ea4c43b2e059c6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/rho",
+      "size": 11990,
+      "sha256": "044259600f8dc2c9c3bf5e7192ada0a78b748019b325264b155084960841fc89"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/9.999999999999921e-06/uniform/time",
+      "size": 876,
+      "sha256": "ed3a8b7771f29c0e8c251378a7dbd441e9ccd66de8a475c15b86149d1af63466"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/check-mesh.log",
+      "size": 3252,
+      "sha256": "784565a4fc90d0f0a7381afe5b5113bc6e70fe45e26583c8a4eecf5300eb67bb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/constant/polyMesh/points",
+      "size": 56165,
+      "sha256": "cb6e8bc460534b369a05c3ae47ee2f470bd134a65fe74f4061abc48f330fe440"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/mesh.log",
+      "size": 2327,
+      "sha256": "d85a72d55d54eeed92c56421c8d3c0a04b5b7001e19ce097f79535a8d9fc345d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 325699,
+      "sha256": "225d3f7148e3dee3e843679f646041be233b0ebbadf0bd2d5411ef91ea6f5af3"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/solver.log",
+      "size": 4719802,
+      "sha256": "01a7a7707515062230215544e0ac69029cf0bb6c0549bad10f7f3a4cc6010a5b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/system/blockMeshDict",
+      "size": 597,
+      "sha256": "9f6548ffb4dd599b199ec106ccea38d14d501ee8c78e3c5342a98246550f0b4c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "0cb93ed5c72d03bde36e473dc21db831c2fcc61d8bc0e310cdc9becec48ea569"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/writeCellCentres.log",
+      "size": 1533,
+      "sha256": "5abfd4f07ce2754b3082e27dba6ed3b61c495a80751630746657f32ac222a3e1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1/writeCellVolumes.log",
+      "size": 1346,
+      "sha256": "185528b6c2628388cfa17ab9926befa5e478c5f41745889b01ee8533d6ca0ce2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s1024-a0.5-work1.npz",
+      "size": 147838,
+      "sha256": "5fa669dad574bc2bb13be740f9cfd483e6675940a5f487b4b567c5fabd3adbba"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/C",
+      "size": 32031,
+      "sha256": "c504ddbf4d1d8b326be1b523254fed27d50668e52708b075c811c138328be842"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/Ccx",
+      "size": 12402,
+      "sha256": "5c9f791fc222a85fbf8e19d3f19a2d0d4c2dc8728805bea0424ae98b9c81255f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/Ccy",
+      "size": 13663,
+      "sha256": "a2b30a1e48a9c380bf6264ca9bbaaf96a25e9fbbce3caab9efaec30e80c5533d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/Ccz",
+      "size": 7060,
+      "sha256": "5a26c43db2edec74829559cc6da6fedf819fcaed0c244546578c4db86d16a290"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/T",
+      "size": 9926,
+      "sha256": "9c6dd7036007e74cd0fffb3a2b401d01a2c55cbfeb3244ba9e6a61b70847a527"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/U",
+      "size": 23966,
+      "sha256": "165f321ae7bee8629262b39edfbc67c775b17f81031e3d066c9e8d8079f92b74"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/Vc",
+      "size": 12290,
+      "sha256": "9a51f6db2ac278ea6e12a05316f8e6eac9b958a36e5aa78ccbc8a52f26a80885"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/p",
+      "size": 9929,
+      "sha256": "9390dc0b4196a20b16081d0d4aedd8bd780dfdc629c04f0b399f07d09fc94cb5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/T",
+      "size": 10228,
+      "sha256": "519cb6fd758fdef205a80192878df2491de197546175aec60af0f7766f2b8c77"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/U",
+      "size": 30532,
+      "sha256": "65dc9cf43631c61bcdfc71492ba8d1f6fdcb9eb9f1bdd6dc7b6781b01ecf5e99"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/p",
+      "size": 10226,
+      "sha256": "1b5ca14259d272b07e901c03b53906b7680a9c4bdbf9940175f2f15b128c34e5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 45922,
+      "sha256": "8dab37d91658ebbb4af251ed5fb6c825c1e9201bdbef57e51cb5707c74260cc2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 12009,
+      "sha256": "3c0c640df069c2b5db7bd2d9b95d6ab45e8cd74c134bdb8f6b1646b7efdb90fc"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 895,
+      "sha256": "4e9ddc2dc911861d790e81c1a565b6eaae9e5b5c4324706baff182fd7fdc9fa6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/T",
+      "size": 10217,
+      "sha256": "611cb3521aca86e54f2368bc76cf6eb9fb2c3cc2dafbed24d9ef993f20ba8794"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/U",
+      "size": 30421,
+      "sha256": "de94a974d878241a72126922e6e36ccc847d5941b1d9bf56203ab2aee272bfd7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/p",
+      "size": 10231,
+      "sha256": "eb60d12fc376c36be647bcde24500d6e52803e45a30aa4102889f6aa855ef471"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/phi",
+      "size": 45890,
+      "sha256": "2a12a5c7d78c15b496ea57beff931903c9fe3f8fdc7eb2a2f98dba1f756bbf8e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/rho",
+      "size": 12000,
+      "sha256": "62ac657b85d6d926ed88042be31c0fe76ab7d6acef31485ecefef2caf6d99ca1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/1.500000000000003e-05/uniform/time",
+      "size": 895,
+      "sha256": "a53733ad271efd3b4f1c9d81b42653e19b8b86d2576e836c3e5d67c3f9e6ea69"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/T",
+      "size": 10232,
+      "sha256": "0dbeac76a6eccb0bb6344e9859706eeb37072b666bc0978a071e81cc8facad05"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/U",
+      "size": 30408,
+      "sha256": "7f18cf5a5b52eaab6cd7f2488c777cbd0e710849650a9ccb888d4bf370c70e7e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/p",
+      "size": 10232,
+      "sha256": "37476a6556eec324bd711458c499066e18e04784736a5060b589fc2f70d268f4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/phi",
+      "size": 45848,
+      "sha256": "b14357f8f90e71d3000638130b99403a4c984ebef3bca3cd5aae24d1ef9f047e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/rho",
+      "size": 12018,
+      "sha256": "6a82dad3b6c840f5338b2121c56443d3abd696823a54bb4b156d970fcc146d1c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/2.000000000000005e-05/uniform/time",
+      "size": 895,
+      "sha256": "a26c66e3c43830c6ce34b499ee4434c3128223b3f18e239117beb9ac58a484d2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/T",
+      "size": 10242,
+      "sha256": "d21563321dfd4bfa25105065c5bf60bf722d30d1404e516eff7d75a9c164b316"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/U",
+      "size": 30726,
+      "sha256": "b800c14b7117f5a5d9c79a02ca986a9aa47d1af251dc98e1edb5df1b52033659"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/p",
+      "size": 10215,
+      "sha256": "d9ca271f60958d85b09e31c03c3c79a9aea09d2848f80c27b5a2f468a073d8e0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/phi",
+      "size": 45915,
+      "sha256": "27cada4e2dbcb57ba8df1ccb82be6206fa6f32c4219fb34354b8a5ec712ce7c1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/rho",
+      "size": 12008,
+      "sha256": "107ca1f21b3c3998851df116cda2846820fc55d1ff35edf5e761d837de8188a5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/5.000000000000008e-06/uniform/time",
+      "size": 894,
+      "sha256": "f87e77f9717b231adfcb5af60fbf25c0e0795de9fc2da410cdd8133ad7623267"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/check-mesh.log",
+      "size": 3250,
+      "sha256": "cff9b5f0ff0ced1439e8026940bc041dc735304e46a0ebd451cbb1ccfa6928ab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/constant/polyMesh/points",
+      "size": 56165,
+      "sha256": "cb6e8bc460534b369a05c3ae47ee2f470bd134a65fe74f4061abc48f330fe440"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/mesh.log",
+      "size": 2325,
+      "sha256": "7e713f5bd3a79ca3bb2e9bb2972d36cec1055aba2509792323561cc2d3e05b6e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 81812,
+      "sha256": "07a690aee143afd22543a853114fb78f065a30ae4ad7dbd42b7a7edd2dc95069"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/solver.log",
+      "size": 1180504,
+      "sha256": "27ea422d3faf39f8e8d2c3801661144652f19810d3e3b6beb520005dd083dbd9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/system/blockMeshDict",
+      "size": 597,
+      "sha256": "9f6548ffb4dd599b199ec106ccea38d14d501ee8c78e3c5342a98246550f0b4c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/system/controlDict",
+      "size": 493,
+      "sha256": "258d7da774ae49e7a99b6f1d22700c3661965968ce2260ba633399c0fbad6047"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/writeCellCentres.log",
+      "size": 1531,
+      "sha256": "86a51880111a0504325183a97af42de8450efa2d98d1232b85730e40414dd6e8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1/writeCellVolumes.log",
+      "size": 1344,
+      "sha256": "5af467e829f39e2b182d87b9e435c6cbe694e63032ba3c77c20e30ee173b1c31"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s256-a0.5-work1.npz",
+      "size": 147832,
+      "sha256": "a5d92c32d3c5976e3c38945ed3c69fb83f586649ebe97335467012a4f8342790"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/C",
+      "size": 31907,
+      "sha256": "4d5800d8e027c4e5b6b832e0bd054bc36f9ab655c548db4932cb8248e58345b0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/Ccx",
+      "size": 12391,
+      "sha256": "c0cd57d4615519aeadc4c5c652a98de8429e9960622a76373607739b1b382557"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/Ccy",
+      "size": 13619,
+      "sha256": "3873c65d4ebaae6a3c5891ba2c58c922ebb1bc979c4457085bcead6829a21d99"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/Ccz",
+      "size": 6991,
+      "sha256": "f6ead129798c4b672dd4e60455d229be8ede5de08007f962d3b05ced6edc272d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/T",
+      "size": 9946,
+      "sha256": "15ff2c53761442a1cfc05ad036fb1aad0cd30a77524eeec24093449a98abbc31"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/U",
+      "size": 23988,
+      "sha256": "b305d5c2485a7ea32ee894a5280b4211ddbc5b5e84405a599845d3b937cec16b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/Vc",
+      "size": 12278,
+      "sha256": "5e0925dbff6bc1260253cb045626f8804075fa4f334bb53fe834401aff0a2dfd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/p",
+      "size": 9931,
+      "sha256": "4d05fdee8759cd551ec84119402282c3972beb70de7c17e06fba993f65a8690e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/T",
+      "size": 10219,
+      "sha256": "584777875bac74b8fc791b727c730f769aa87e125fd43cc82af9a715aeeaf31f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/U",
+      "size": 30507,
+      "sha256": "4423058371b22c7998a918b9df7bfdd3e8c16385756342724f9f86967e11313e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/p",
+      "size": 10219,
+      "sha256": "e6292605ea92fe52684ff5dea723202ebb25b68f9e047c4ca323a49d623de51e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/phi",
+      "size": 45876,
+      "sha256": "2958bc0e6abc2a1ec071d426146a9bf014098d0ed9d8e9dd61b9edab92106e6d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/rho",
+      "size": 11995,
+      "sha256": "5df60a0a9f0677bea05f1c8daa1844738682fe6a98b1c4cae000c63ebe734616"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/T",
+      "size": 10222,
+      "sha256": "f124a72bf72f3bb831d241941e1a70d49458804b824e13bbc7eb790f8b66acc8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/U",
+      "size": 30385,
+      "sha256": "7d9987e8a0d210875d9b8f2b296be6c02d3c7989bf8176a412602935b9f92ba3"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/p",
+      "size": 10232,
+      "sha256": "2ce4a9a9918b6778d3f45be0583528420cf19d8704a25ce958e87e4e38cb91f9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/phi",
+      "size": 45820,
+      "sha256": "550457fe5c304e15a6dc3d6d05ebccda981b89f051017539fa02c1233699568e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/rho",
+      "size": 12015,
+      "sha256": "176e2ba587d7a25522d263b7dfc3513a862564e93b2e7d96f3c322b7b34bddce"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/T",
+      "size": 10224,
+      "sha256": "c3273a2f1716d0420b09e49433b38294aab6981baae61b81eefb3f7e3f49f264"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/U",
+      "size": 30421,
+      "sha256": "e79e350288d14483941ff6a47523c8459fe6f9ad4f2d29164e09bef3fcda9d06"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/p",
+      "size": 10224,
+      "sha256": "bea7ba08ac933e62abc35c831aef3ec2f2594867694856028089e5a654250cc2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/phi",
+      "size": 45872,
+      "sha256": "9517ede0c51c5273dfc5bfb0d06de56ff1a9f3b1e6c48ffcd1d1908fd18514fd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/rho",
+      "size": 12014,
+      "sha256": "d7121dae9be4e1a559490297a66db51e75a40ed549c440b2b08856c2d38d7e8f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/T",
+      "size": 10235,
+      "sha256": "256718be363234111be12d531211509d651ac714f0fdbb3d13128ccbe1063b43"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/U",
+      "size": 30733,
+      "sha256": "45271cc984fa3180050d55e16e225fd84165c3cb73c5eb6125bac5e494b5fa83"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/p",
+      "size": 10236,
+      "sha256": "ebe2c2f74b0edf2d03b6b558e3c1dbc2816c88a29e9e9674cac9b66500e9f5c1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/phi",
+      "size": 45927,
+      "sha256": "75bc387e7a080ea11ceb569b05b75f6f76b0efa8dcfecf6828e246ec797fe202"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/rho",
+      "size": 11993,
+      "sha256": "2b02cd585723ef4b4f1eec4b6bd10457720e19d3d745dd8c592ee647d8688d50"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/check-mesh.log",
+      "size": 3251,
+      "sha256": "58b0248807fa35e6bf373769f15dadb4378bfce0d89094bd91acaf502ec13ee8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/constant/polyMesh/points",
+      "size": 56355,
+      "sha256": "4ec8f63c7426d5e82ee39497eb8fb57219b1ab46e03ad4fa9ee363d63158565a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/mesh.log",
+      "size": 2327,
+      "sha256": "f880bf5d2a8f04c2e0d284feb862cd1a7f8131b39a7e90db1e71c41060a1644c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/postProcessing/torque/0/forces.dat",
+      "size": 163106,
+      "sha256": "7b7510e722a049ed9c04a6caec56a4e006c4923c7cf02bb64bfed7468ad414bd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/solver.log",
+      "size": 2359721,
+      "sha256": "6ba61fd27b5c639006a575d8b08dd5dc389a339d2eb3929f837f197047aa4049"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/system/blockMeshDict",
+      "size": 605,
+      "sha256": "025d8a2ca9a7d4418aa4cacf771441da51f9fb8bea9463b35ca33ef2b9d89a5d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/writeCellCentres.log",
+      "size": 1533,
+      "sha256": "4b032bf26cafa780e04b8bbb08f24cf3805380dbdb05093e1f0af316c71a76a2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1/writeCellVolumes.log",
+      "size": 1346,
+      "sha256": "c289e363243e484714f10f6f9e4738be127e59d53cf1936276aa24d50ebc432d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1.npz",
+      "size": 147693,
+      "sha256": "4d9ec6a9520a1ae0f7d6654d0deb27bd5456d6a5612dc11f52165571b8f3a4f9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/C",
+      "size": 32031,
+      "sha256": "c504ddbf4d1d8b326be1b523254fed27d50668e52708b075c811c138328be842"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/Ccx",
+      "size": 12402,
+      "sha256": "5c9f791fc222a85fbf8e19d3f19a2d0d4c2dc8728805bea0424ae98b9c81255f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/Ccy",
+      "size": 13663,
+      "sha256": "a2b30a1e48a9c380bf6264ca9bbaaf96a25e9fbbce3caab9efaec30e80c5533d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/Ccz",
+      "size": 7060,
+      "sha256": "5a26c43db2edec74829559cc6da6fedf819fcaed0c244546578c4db86d16a290"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/T",
+      "size": 9926,
+      "sha256": "9c6dd7036007e74cd0fffb3a2b401d01a2c55cbfeb3244ba9e6a61b70847a527"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/U",
+      "size": 23966,
+      "sha256": "165f321ae7bee8629262b39edfbc67c775b17f81031e3d066c9e8d8079f92b74"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/Vc",
+      "size": 12290,
+      "sha256": "9a51f6db2ac278ea6e12a05316f8e6eac9b958a36e5aa78ccbc8a52f26a80885"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/p",
+      "size": 9929,
+      "sha256": "9390dc0b4196a20b16081d0d4aedd8bd780dfdc629c04f0b399f07d09fc94cb5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/T",
+      "size": 10228,
+      "sha256": "fe4b7b245b42a035036aa3d3c6009843e8f7c9b6ed3a5a3dd367e0a2eefffefd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/U",
+      "size": 30525,
+      "sha256": "3514502ded55889b3754448141c2669193e0c46156a6d56ee8bb3146b28cf18e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/p",
+      "size": 10226,
+      "sha256": "7e42a97cd1659ebe2f63e819f71dde1340b7db1f7c246f3c4221be22473896ce"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/phi",
+      "size": 45935,
+      "sha256": "37fa0fe9ce411dcf6a9a95f815b4c264906a3a203e185331ff8307e7f613481e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/rho",
+      "size": 12003,
+      "sha256": "7393d80171fbe2875cf21a5da79b51db5f6fe7cd86f87cfa70476707ea0f07bd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/T",
+      "size": 10230,
+      "sha256": "f7e0cca4c49128cad2c175d39d2a74cb85f61a03808039397ab1ec043da7bd93"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/U",
+      "size": 30420,
+      "sha256": "9362e2c32dd547db6a7c0be0276cb400f57b089630edb7492845c789659a70ef"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/p",
+      "size": 10225,
+      "sha256": "d947bd23641ec50b44359c15126dab0530cc1cc94c19e7928ee5f66608659669"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/phi",
+      "size": 45877,
+      "sha256": "ab95b125c0b5075aedb447c5c936f62c99095b2991e7b598e9ee6e4c8e6d64ab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/rho",
+      "size": 12014,
+      "sha256": "1f86714a2317e2cefcc8bcde9473cadc40c26525b86cb310ad77044a3b4490fb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/T",
+      "size": 10237,
+      "sha256": "b945d8457b3934ce76c412a5f6851e011c627c2a0db8b5d2858c3dbec698a867"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/U",
+      "size": 30371,
+      "sha256": "a98a5e386970ff883f2557bf7e4cfaa804eb8bdcefb8451f9b06f5c80215cf8d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/p",
+      "size": 10221,
+      "sha256": "e610c54ad5fb6a842863271405781c0356a6723aa88ee498a506be01a2139b3a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/phi",
+      "size": 45870,
+      "sha256": "5752d127df097bbfbddc9f01d666806e8b41bb36af227959b71a9ee86ec553e8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/rho",
+      "size": 12002,
+      "sha256": "f4b59a5059dd1f84907c6132a3683c952c7689fd62d7087581390b861ef511a1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/T",
+      "size": 10231,
+      "sha256": "c01ecd666b2aa6610299c8a299df43694d492f5431034f16a9db9045ca9fc999"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/U",
+      "size": 30697,
+      "sha256": "49af84375ce5b65ca5a1f88ce3dc0afb36e7bd1c09efd79c7c180757ba6d9026"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/p",
+      "size": 10239,
+      "sha256": "25919e6aa0bde22c5c230fdaeb9cc2cf142e180d3f3337be3fdc5117ce30b8b1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/phi",
+      "size": 45928,
+      "sha256": "cb7a3a4a6d369b43a072dfd712fed25a209e758aaecd7830d1af30287c476976"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/rho",
+      "size": 12004,
+      "sha256": "77642ed70916e556242abd85e2e07c14f597c6734de4b7b43fad0bad5f74592d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/check-mesh.log",
+      "size": 3250,
+      "sha256": "82a929b94cde3bb4692d97c09ef69b37c949b19340e4e99ffa057ff673f32abf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/fvModels",
+      "size": 63,
+      "sha256": "e7486a6859749488fdd0e2e0c0414c6f973753bd4ea858a14f134fefcefe1117"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/constant/polyMesh/points",
+      "size": 56165,
+      "sha256": "cb6e8bc460534b369a05c3ae47ee2f470bd134a65fe74f4061abc48f330fe440"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/mesh.log",
+      "size": 2325,
+      "sha256": "e435c4f411648bb4e912f01221642269ddaece4fb470310986aee518a6f1cc77"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/postProcessing/torque/0/forces.dat",
+      "size": 163107,
+      "sha256": "804509531f7d7b852bf3adfc0fe0e7a3eb52f9767c4830fafc9f6c301f08b250"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/solver.log",
+      "size": 2360329,
+      "sha256": "3c63ff81f7e333c4a4e6bb9745652693b1c71dd57b96f771131a5bf8d11a8853"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/system/blockMeshDict",
+      "size": 597,
+      "sha256": "9f6548ffb4dd599b199ec106ccea38d14d501ee8c78e3c5342a98246550f0b4c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/writeCellCentres.log",
+      "size": 1531,
+      "sha256": "e6ea1ea5d389d540f4756a41a66a5782bbf170ca5a6212155a8349f7894a5f2c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0/writeCellVolumes.log",
+      "size": 1344,
+      "sha256": "3eea2ef673e2363aa38b68803966545bc2b7deb60101d03822cbd368b8bf8c2b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work0.npz",
+      "size": 147831,
+      "sha256": "d5be607612d74301733a8f60240e8bc5762b4a82bc5f0f2dbbd4516d272a9b3c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/C",
+      "size": 32031,
+      "sha256": "c504ddbf4d1d8b326be1b523254fed27d50668e52708b075c811c138328be842"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/Ccx",
+      "size": 12402,
+      "sha256": "5c9f791fc222a85fbf8e19d3f19a2d0d4c2dc8728805bea0424ae98b9c81255f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/Ccy",
+      "size": 13663,
+      "sha256": "a2b30a1e48a9c380bf6264ca9bbaaf96a25e9fbbce3caab9efaec30e80c5533d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/Ccz",
+      "size": 7060,
+      "sha256": "5a26c43db2edec74829559cc6da6fedf819fcaed0c244546578c4db86d16a290"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/T",
+      "size": 9926,
+      "sha256": "9c6dd7036007e74cd0fffb3a2b401d01a2c55cbfeb3244ba9e6a61b70847a527"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/U",
+      "size": 23966,
+      "sha256": "165f321ae7bee8629262b39edfbc67c775b17f81031e3d066c9e8d8079f92b74"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/Vc",
+      "size": 12290,
+      "sha256": "9a51f6db2ac278ea6e12a05316f8e6eac9b958a36e5aa78ccbc8a52f26a80885"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/p",
+      "size": 9929,
+      "sha256": "9390dc0b4196a20b16081d0d4aedd8bd780dfdc629c04f0b399f07d09fc94cb5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/0/rho",
+      "size": 3343,
+      "sha256": "d83fc1ed7b37329602cb889ac4910bd646c051ce4f3a0469f45f2b396ed71c57"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/T",
+      "size": 10229,
+      "sha256": "6975969a90e0652851327311e0ca15b5cb2c5f0215b164b89a66671b28d59834"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/U",
+      "size": 30538,
+      "sha256": "958ac6e1a3ae99bad52a5363aaf74f29e19152ec8fb1914628e65ed35e70be8f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/p",
+      "size": 10220,
+      "sha256": "64acf25903d0c6479b641f4495927a3dca19df9772500d01031596e845afb17a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 45885,
+      "sha256": "46642d0448fa9399948adc0c532a2219a9e2514931eaf882475b94d5665b76ce"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 12003,
+      "sha256": "3f3e5ceb66d443a9ac5e196997481f5ed3ecbb453b2bc224ebe4de432dc154c8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/T",
+      "size": 10207,
+      "sha256": "77e2f48636d5bb5de19f202d19a9538b7ef2647d3b536d0b06395a653b958c21"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/U",
+      "size": 30425,
+      "sha256": "69cfad85f503f90c9c74289d133aa645eb050bad3e1f9c56b735671f301188df"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/p",
+      "size": 10232,
+      "sha256": "efd58516a06a0859f282d1e748c2252c7989dce71c5fcd955bde9e39868257d0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/phi",
+      "size": 45851,
+      "sha256": "ae47af99391d97ce2b1919be8c9a10f78bc91b315618d05758ce0c615e2a2ffa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/rho",
+      "size": 12027,
+      "sha256": "b034a1f4edf71c3c872810d4233d353dec5be287d0db8987e137bd1efec396df"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/T",
+      "size": 10227,
+      "sha256": "d2308c169108cff53be463c37846cfae05e910c9440331614de068060e789600"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/U",
+      "size": 30378,
+      "sha256": "6ce152ad458423434466fb74efc4e07573f78e21290ce2f1ef1a190bce7cef6b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/p",
+      "size": 10227,
+      "sha256": "9c55031802a537427e49dac5d093964adb2a679a284b9c085c15b5d496b7fb6f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/phi",
+      "size": 45846,
+      "sha256": "112145a8ecb85336856a17b760e6435fa65783485fa3f1bc01897e036383e8fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/rho",
+      "size": 12014,
+      "sha256": "35f1e5f26fd0aa5350aead56d2e47462db1207b098413e7a71beadd2075147cc"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/T",
+      "size": 10245,
+      "sha256": "34044cf73e7957b39f6932bb48c0a15b28de0d0f3ea810ecf35ddd44766ac535"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/U",
+      "size": 30720,
+      "sha256": "14d640f65624854f4552d756cff69458787395f005df8e3dc030173f5df18d90"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/p",
+      "size": 10230,
+      "sha256": "f003b09f6da5c1952682195d5022f26d384fe053b1f82ab094476ccb182dd30e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 45894,
+      "sha256": "3195d8d2048d10f2d40994e5ccee069e4dfbbb9fbe68c9c29193d72e4cecc79f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 11998,
+      "sha256": "a9af23d1bb40fdf45ad87a09a8ba9c3b816b2d0d72ddeecd2109de9a18059bab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/check-mesh.log",
+      "size": 3250,
+      "sha256": "f220c123f2f1fc3e349c98e40a7b93648dcdfe5d3b602a0403228f5f614196e6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1488,
+      "sha256": "87ada228f68cdf39e2cb6d161779e4fa667bcb033e000843f5b8933be00bd2fa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/polyMesh/faces",
+      "size": 39641,
+      "sha256": "0f97dcb03cf20fb0e499cde3e3fe1f9c77534750a1d364bc217f1c5ab78c41d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 4487,
+      "sha256": "5a41a894e339b042602511a0ed820b6e9eb11f9f6abb8b51485111fcda61b822"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/polyMesh/owner",
+      "size": 8556,
+      "sha256": "d9af30f3c711dc58577340d1f23f9c3f5376652873d44741f890f6fc0ce87de5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/constant/polyMesh/points",
+      "size": 56165,
+      "sha256": "cb6e8bc460534b369a05c3ae47ee2f470bd134a65fe74f4061abc48f330fe440"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/mesh.log",
+      "size": 2325,
+      "sha256": "75a60eb6bde937a1a9c5e483f1a48bd39003c89c8202f7ebf580d0e0c21f39b4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 163108,
+      "sha256": "cda69383b4c87327bc4b275f6fde1c831768c2925bf61c3bad9d757dd0372ad4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/solver.log",
+      "size": 2360194,
+      "sha256": "59b6feeabaf51b391f6b0c3e2b892e62468301e1219724456f59f0442989dae9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/system/blockMeshDict",
+      "size": 597,
+      "sha256": "9f6548ffb4dd599b199ec106ccea38d14d501ee8c78e3c5342a98246550f0b4c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/writeCellCentres.log",
+      "size": 1531,
+      "sha256": "332b990191b0f3b583fb5e038c8133326cd9a6fcd28cef88ff68b0cf7fbf14cc"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1/writeCellVolumes.log",
+      "size": 1344,
+      "sha256": "3282b3fc3916dd79c8f4364a89dfce2ec31b4b5b5ce774d36c6c11865e142406"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.5-work1.npz",
+      "size": 147822,
+      "sha256": "692a28e5168583a10f107abfb7512bdbb088f884fe832d1d8715a661700679db"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/C",
+      "size": 120926,
+      "sha256": "6d6b3f95333d105d4487a311148d839681153bec2e5f842e83503e03f7e4829c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/Ccx",
+      "size": 44274,
+      "sha256": "2467e680c6a611173d6511be49d7ac23e81a405c25bc0b3ad90f2f38ce8eb926"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/Ccy",
+      "size": 49124,
+      "sha256": "c246a22d89e6ba9bf825ff7ab6d85cf4aeead2f9afeda0399a1b4dadf17ddd22"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/Ccz",
+      "size": 25456,
+      "sha256": "4298ad3631b77a9264406c120ff6464b3ccdfe4f5bfb10ab50d348a1e6a5f59d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/T",
+      "size": 38976,
+      "sha256": "928ae02387fadc44f5a62cf12f366ca577cfe873cc7f5cdbbebd3c10b27056b1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/U",
+      "size": 95096,
+      "sha256": "338939a25baef8df112ff87c77adf85e78d1c25ff22349f62a5db637777ebabd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/Vc",
+      "size": 45829,
+      "sha256": "921d735052160e6228b602a100fb461eae08e174623f0bcc602478da10aec186"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/p",
+      "size": 38978,
+      "sha256": "de653c734551be4fb063279b64925dce5e1d6e9fcba228afc025aa0c22516606"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/0/rho",
+      "size": 12560,
+      "sha256": "ab9a2bde7531ff3bcce7d77e398edeceb96dcd07679c5715f1a0d3157cebe2b5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/T",
+      "size": 37702,
+      "sha256": "7d710a4c589fff253c42629ccef1482e968d4c6456122f2b8b2e8852292e8400"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/U",
+      "size": 118729,
+      "sha256": "7693909d4d7da9784bb5eec51c40aed5c54430328c1f6abf7f7c2d9573745622"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/p",
+      "size": 37732,
+      "sha256": "42c70aeeb80969bfd04f10ab6225b96900155f2dbe42a6ac17d2fe74214ac158"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 181958,
+      "sha256": "ad8c71044a69c55a7fd4dc1bae1a5c19c12cde820f147ae55a1417f2b379177b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 44797,
+      "sha256": "57450fd1c471dbaf0638e583b5dd4e81a9a1b393bd714a5c7d929fa082016a9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/T",
+      "size": 37680,
+      "sha256": "0221b4e1bb441811b715bb975e2705399e0caa3bf3606f559ff3dd76e6cb1e17"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/U",
+      "size": 118337,
+      "sha256": "eae82f181ef2d42bb183721d12493db29efe6e86a6770c9ba01b01237f30b3ef"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/p",
+      "size": 37732,
+      "sha256": "9c839818606c2fcbe3a221e07f8a70c6decaac2c2710ad7e3cb8721faae7b54c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/phi",
+      "size": 181855,
+      "sha256": "c1aa477a0ff83092d97fffc7c7a38214bf4dae2a86b8b8fdfb5b81d32b5bd6c8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/rho",
+      "size": 44824,
+      "sha256": "97f340b3cc5311c2b04072749836a0fcde07ac8e1e5a6d85ffc9b00c09a25e78"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/T",
+      "size": 37708,
+      "sha256": "6e9a5f01cdf03b5640e82b582a9528320a51c9b5f89c2c9b6ce95ffc36908253"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/U",
+      "size": 118305,
+      "sha256": "4a55fed8fac2e873e9d502dd5ef40946c72a032aae9909210248e6bdda2b8c38"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/p",
+      "size": 37733,
+      "sha256": "9d130000d652327fdea441937faf194978739fb4228df5dd4a940e112097b00a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/phi",
+      "size": 181832,
+      "sha256": "909cd103d458032e460cc9921195fb96ac5e61303278028a05a785ab192f38db"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/rho",
+      "size": 44845,
+      "sha256": "edece7a407f81920f4cc74e077041d4f240dbe25a01a81f352255b2362dea4e1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/T",
+      "size": 37713,
+      "sha256": "46d044df50a1f7f6a0e6a459ecb9ebc5aa232a81461806e5f1561d46d30c5b67"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/U",
+      "size": 119556,
+      "sha256": "8207cc445ce5af3d4af1d544bcd20b50ec8e05c35af097cf8c43dc1453e34f1c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/p",
+      "size": 37725,
+      "sha256": "39bcc64d95b1fc1c025a4225aef56e580c50f243588aac12f5cda3346e7d493f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 181905,
+      "sha256": "28f8cdb0f89f43d0d266d6cf1b1825e8c80c542fb4c02e4860dd996d2f906ecf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 44796,
+      "sha256": "fc4e6eb2c5ca87941062c1dc238c653cf5535bf7f680f49c74fe4c020e05e29b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/check-mesh.log",
+      "size": 3252,
+      "sha256": "de54ce461b84cd3e004f39a6b76847490fe97e50a65f0deb5bae2ef561809ad6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1491,
+      "sha256": "5d8c9147ea07b6e76c255700aa609571a063943adc8e43e29736d2bf1a514784"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/polyMesh/faces",
+      "size": 181203,
+      "sha256": "ca2dff17f0aa9aed6a3d7ac549dac792c2f0a2a529b28ee5f76ac0a2a2efb693"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 18663,
+      "sha256": "f505673dfec678029d61236ca4ac2640938b8e452bbaabb8a3db18208928300d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/polyMesh/owner",
+      "size": 37374,
+      "sha256": "e1d62e93d47894b0f2fa95764a4b541acdceed97a4087c95defe4e2575d7e2bb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/constant/polyMesh/points",
+      "size": 222829,
+      "sha256": "f777723d714f15e7ef379689ac84ef90fe94c19ad808c88a385d954118a33a5d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/mesh.log",
+      "size": 2332,
+      "sha256": "0507e830bfd9473d27dc72dcd77d74c22f4183b7ac269cedcc8cfaf3d6f9e11d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 162735,
+      "sha256": "c7c9dfd5136150f6628b6b5a82b94046b621c1e9e0bc93a098c7e809c7177bc3"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/solver.log",
+      "size": 2359890,
+      "sha256": "aec705f1477ec80f088f8187ca90ba3eb1c05ed8f70a47f8686144dce34e626e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/system/blockMeshDict",
+      "size": 597,
+      "sha256": "9373de92f3730a5c1a06e6f77634919a322eec2de26940c5a2f743cd42936310"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/writeCellCentres.log",
+      "size": 1531,
+      "sha256": "2d5fb8d2c2ada40c0c19a7cefc62ad4fd8e1ae8790d09f7c0d05c9ef588f19ae"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1/writeCellVolumes.log",
+      "size": 1344,
+      "sha256": "7e6ac91da288fe70db8e0ee3680d08d12590e0aad55efe4789cb5f1666a676dc"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n32-s512-a0.5-work1.npz",
+      "size": 627933,
+      "sha256": "773502ee7ba9d91af4ed22570fc81d5032b91fed875209e5e0e3191fc9f4e7bf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/C",
+      "size": 9414,
+      "sha256": "10b860e6cd75f5fa0fbc6a82ef3c5c0ff0e4a45878ceda9eae2a8a0c70d5108c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/Ccx",
+      "size": 4150,
+      "sha256": "bd24fd599ee386eb6dda394f7d773b0c452ad0d6607416919b2c10cc7faa7c38"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/Ccy",
+      "size": 4497,
+      "sha256": "4c129c80fd0b33e1f6bc9345677e5ccd24c8b8dfed232b99fe105abcc0f5f0b9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/Ccz",
+      "size": 2677,
+      "sha256": "4810aad8d6a46e645b0716263c5877ecf729894257e7f6dc1a729af308151e7a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/T",
+      "size": 2686,
+      "sha256": "baa838dc16c7eaed17e833c9572e066114b2b1a7bfdef0f165b3d90aa313f0fd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/U",
+      "size": 6212,
+      "sha256": "b5df9235b0d62bfa085c30a929006c9dc44407c3df110dc6ad46afaf0a575222"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/Vc",
+      "size": 3888,
+      "sha256": "879014db5f9a029f1054b5231b0ca121fc5c25d98e98a69811251169bdf6ceab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/p",
+      "size": 2689,
+      "sha256": "ae1130dda838607519cec71847cedb4aaf3175c9002d7524175e63cc9d7141d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/0/rho",
+      "size": 1039,
+      "sha256": "8834ac2bf09c9e915d79695198b682894e2f591515385451305f7af1146d663a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/T",
+      "size": 3357,
+      "sha256": "a24a8d978550c1455281ba50c65e1934769221a2691b8877faecd30cc86b7630"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/U",
+      "size": 8457,
+      "sha256": "598d26a218a7ac30dfe10fc1be7d109c810cb95936d4e8d575fb550d2dcf7ff8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/p",
+      "size": 3362,
+      "sha256": "7c6e185d9105cc2e0f952a2f055c4678ccef198c0c4983780febd5a5e3f94be7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 12143,
+      "sha256": "a989338ae1d72fa11b45eee972be57d589d8f61f1334aeb68ed97d9a604d9536"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 3799,
+      "sha256": "c08a016f14ecd20b3e247fa371dde25e6e92329a07cf29b9051e0141ac06ec04"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/T",
+      "size": 3354,
+      "sha256": "b2c8dee4545e1b2fbe5e06e2e7a8a8bca3e1e9fd175c6c055dc1bb7bd771e4a8"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/U",
+      "size": 8418,
+      "sha256": "5748700ade91d5961e97ffa4ae7cfc34bbc926c994436bc47538522e0b72830d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/p",
+      "size": 3355,
+      "sha256": "435357de62d91fa841e84c3ca4785497dca1cbb37eaf4118314011b8a7cfd180"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/phi",
+      "size": 12151,
+      "sha256": "b36f8b104de5f12e1596f32e02e7986ee7ed5708a9d572fd84f579eee6a93967"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/rho",
+      "size": 3805,
+      "sha256": "d227f6050b314027524228a17898e5d1474f31abcd460aec7e1da907cdb8074c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/T",
+      "size": 3355,
+      "sha256": "19c158b3021d9855d2c24a65e2614d400de1ea8f4cdaf58819360217bd8ad662"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/U",
+      "size": 8450,
+      "sha256": "373fb1b7e6fcb1b6102289491515be790e2ec65342a37def4dd661798f8b7513"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/p",
+      "size": 3358,
+      "sha256": "1953becf21dbf02f2e1ebed2cbc1aaae75f9250f3bfc6727401f67f322666d45"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/phi",
+      "size": 12158,
+      "sha256": "cae810ba6b8c5d8084a756926e8ef0e7339c6d660e2b1aa9566ecfb9f4fb499a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/rho",
+      "size": 3801,
+      "sha256": "575b25ac976bc7b8ae7be0d26553cb726c1e65ca0780ebce58073915a1a14c08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/T",
+      "size": 3357,
+      "sha256": "95d50dc439b93158c5bd10855213c5db3db8df34521560f44752d133373027f1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/U",
+      "size": 8503,
+      "sha256": "650f4f11ed7309f54d82f7680826f2826d9266698e78e78fb88582d164972288"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/p",
+      "size": 3360,
+      "sha256": "037345332d23a2664fff2e27cfda3d6d41b715d0e5d3ec2e2dbbf2b20fb54189"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 12143,
+      "sha256": "692d43a37bb65487307262fe48c6deaea03471e53a5ca31da29c9dbb16f851ef"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 3806,
+      "sha256": "695a323741006d7d71f69edee48f66cf86521b68b694820c40b177bbbddc92b4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/check-mesh.log",
+      "size": 3243,
+      "sha256": "4922dc1f99aa4f00a287b0bd49eb6ad4362ce8bc14be80016afb53d9e22f6f1c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1483,
+      "sha256": "86bb653cfe16137e14257c6eaa97deda0d5d17cba543ea93bdf63d1fdb122d31"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/polyMesh/faces",
+      "size": 9751,
+      "sha256": "5b8366e30a2e1d77d21396f99c43a0138f369eed70994c881eb71d24f4f11d40"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 1506,
+      "sha256": "d532179d0a2e07b2b44fdbab70d16d9cf517456ee78a949c2ca4d273fa051abd"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/polyMesh/owner",
+      "size": 2387,
+      "sha256": "b05de2a026f04b7944f50002deef60028c6873c848d02defec878df9fcd5190c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/constant/polyMesh/points",
+      "size": 14851,
+      "sha256": "570640504a87ce4642b1a4e79a7e6155bce32d1be7e665f4ecc275062b190072"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/mesh.log",
+      "size": 2311,
+      "sha256": "a05123d2ed43f9fefb004230cc28d1a6e416d9069938a30d0f0336d3d6974333"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 162979,
+      "sha256": "06cde5b3611abd28dbf2b8352a0ff456e116f33976f6a420d773ba2aaab10faa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/solver.log",
+      "size": 2360112,
+      "sha256": "d8e53ea0fdbe3f0d3439dc7eb1a9cd586f487dad3421bcfd3151306292124495"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/system/blockMeshDict",
+      "size": 596,
+      "sha256": "5a74a39906a8d5f8b6f14eeede3000965b53668c922c51a63a1be597de8ef876"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/writeCellCentres.log",
+      "size": 1529,
+      "sha256": "0bc2a8fcc6f2e397e1fcde098166f7c589e3abd9a2571fb921457577bff93f29"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1/writeCellVolumes.log",
+      "size": 1342,
+      "sha256": "3f8b3c3bb751eaac7acfcc9de4125a14df692cb71b3a5f0f4ce5577104e90fd7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/n8-s512-a0.5-work1.npz",
+      "size": 37510,
+      "sha256": "238e7f6238d7519500af7772ae328dade9b0d307ac006cfd9856b679ca5891d4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-results/predictions.json",
+      "size": 51853,
+      "sha256": "1289841640cca05011a399d9886b3c2afad8314fad5c269311556a25c57ba970"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-stress-controls.log",
+      "size": 1188,
+      "sha256": "dd5b1011cbaff71774390f6358da5d615265684d0ea96c6e8c7fb2f7ba2cff29"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/campaign-tests.log",
+      "size": 1329,
+      "sha256": "bd9d9f93278bc32ac6776ab58f122444c7072cacd1871306e16d777a16a7c3d5"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extendedscore2-execution.json",
+      "size": 1819,
+      "sha256": "11a5c4e18e768d4a19318c58dbf326f82c4f167bde3fb15037c2686e4555b287"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extendedscore2-score.log",
+      "size": 30,
+      "sha256": "255e0564c2c9ff13ccebd376a38d3444f86daa9d04ff8b3d0c5373c8132c6f45"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-execution.json",
+      "size": 2154,
+      "sha256": "c660df1ff4a83fc39de1bdd9191aa10a7114eaf361ae20f8bb1d70f5e0c05795"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-extension.log",
+      "size": 218,
+      "sha256": "522bdd42fd35ab8474e417228d1a4b4421d36b535aa40c26b9441328eb67dbab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/C",
+      "size": 476644,
+      "sha256": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/Ccx",
+      "size": 169693,
+      "sha256": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/Ccy",
+      "size": 188733,
+      "sha256": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/Ccz",
+      "size": 103668,
+      "sha256": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/T",
+      "size": 154991,
+      "sha256": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/U",
+      "size": 379554,
+      "sha256": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/Vc",
+      "size": 180373,
+      "sha256": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/p",
+      "size": 155047,
+      "sha256": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/T",
+      "size": 147656,
+      "sha256": "72810f1149bfceefb2322f0b09cb4a859483d51d8a394cac9e4d099a91cdfeea"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/U",
+      "size": 470254,
+      "sha256": "fc09606f86a3dcd9911e429c35629796501fd390d0105c376112625951272d3b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/p",
+      "size": 147580,
+      "sha256": "2bfa0f7ade45b34d1c055919aa2e16d94cd45b6a9a642b4c22c0c9f8a0301468"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/phi",
+      "size": 727984,
+      "sha256": "5b1485b364cd8c9525853021f80562bcfdaa79d26ef88cd1bd8f7da322c4df22"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/rho",
+      "size": 176030,
+      "sha256": "ff40ca36f78518ad9db7b3adf251af0b840fe52189eeeb48c08a723fbdc3dbb6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.499999999999972e-05/uniform/time",
+      "size": 877,
+      "sha256": "87727ca6734a31be13d881a0ca61bf55f808837cf210c60cf44d998b8ddbf8de"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/T",
+      "size": 147607,
+      "sha256": "03fc35e835c1aa5a64d9fef80bf45b8e08e2417d74fc94151cabaff1a72eace6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/U",
+      "size": 469869,
+      "sha256": "e94bbbc3ce759253ab819a1927b74ca17393e7bd6dadc30ba13a8e6431f5c938"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/p",
+      "size": 147577,
+      "sha256": "bdff923959f39ef7f3bdc1d6dbe05cbdecb6f323c5ff05583927da60a7cfb779"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/phi",
+      "size": 727695,
+      "sha256": "f647acd2b5434242696a714160c4bd7ed4e4850272688cf2a1445a4e59354c63"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/rho",
+      "size": 176102,
+      "sha256": "ef15545a1691ba47175d233fcc12e12136ae2c6a38440370151f372b85a67fed"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/1.999999999999951e-05/uniform/time",
+      "size": 878,
+      "sha256": "a7653223540e63b9fe69591d9debb42740c624945fcf187b4939434cef06fb7f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/T",
+      "size": 147646,
+      "sha256": "3eecd58201fd5fd998caa0df1cf371bea88d6eeef49a3031b80f72027609cf63"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/U",
+      "size": 475166,
+      "sha256": "5d5a56a868f5603c5d1ff59c50f8b460ab6868e6d11c0ea129de9f91b3d02cc1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/p",
+      "size": 147665,
+      "sha256": "6b9d75cc5c46daabf3ca955765cd4b618ee0d354bbf1b63b54e26b63d59b97f6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 728249,
+      "sha256": "8c0f7f71e9f02c37393205d428add7fab6749da95d3d5cc8a47bd74a052ae356"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 175999,
+      "sha256": "3747f39f1485e0e7e27d5c4f25ef8093b9ccb5540e01a9b2861196e4abb08fa6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 877,
+      "sha256": "24561dd84450ef2db07a206f6608882b621ab5a7a6ff2018d885d22e10a65a97"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/T",
+      "size": 147628,
+      "sha256": "9ce2f47725c960c9ad33b5e137d164967feb710fbd04de798360bd7a954552da"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/U",
+      "size": 471746,
+      "sha256": "477d7d8584b9bbaaaaeeeb655cf8f2ae21e83fccae47ab0ad3d7fef11c1f53f1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/p",
+      "size": 147661,
+      "sha256": "3e979f5d94d851f6e8b0275bd429df8c674bdb26151d84cede5ab082c0c9fc05"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/phi",
+      "size": 727989,
+      "sha256": "21d868617a1a6a9e6339174debf3c0417e54f81717ff159a1fc7b82cd46d4cd3"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/rho",
+      "size": 176023,
+      "sha256": "66eda0a5a95bd48304e4e28c08c3264334f904c89e4804890f98d6a3a1d9ec6c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/9.999999999999921e-06/uniform/time",
+      "size": 876,
+      "sha256": "ed3a8b7771f29c0e8c251378a7dbd441e9ccd66de8a475c15b86149d1af63466"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/check-mesh.log",
+      "size": 3262,
+      "sha256": "c273ef28be6ae4badcad2525156818e6d4fed19ff4ba8f01baae33812d8eb750"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/constant/polyMesh/points",
+      "size": 891839,
+      "sha256": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/mesh.log",
+      "size": 2348,
+      "sha256": "5186acb31421b8ddd2002824032271afbe30c32abc63c0db4596f53ea7921aeb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 327170,
+      "sha256": "51db64d45373370c8d46b3956b27d70c4fc1d361c7ec30fa193502eeb523420d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/solver.log",
+      "size": 4720443,
+      "sha256": "a056a0df5b26fb28153067a6c267f5419af56f056d5cd6dcc02943776dd9e161"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/system/blockMeshDict",
+      "size": 598,
+      "sha256": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "0cb93ed5c72d03bde36e473dc21db831c2fcc61d8bc0e310cdc9becec48ea569"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/writeCellCentres.log",
+      "size": 1535,
+      "sha256": "a56fcf0b3b92a39c83839863247b7b9e08dabe79068a07851a7cf4a977989f63"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1/writeCellVolumes.log",
+      "size": 1348,
+      "sha256": "a28d2147469960c3bc5254f4f27ced31fa281b7f064ec4964a730dec671670e0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1.npz",
+      "size": 2473621,
+      "sha256": "77a583677fed2aeb8234470b6ef04410109fa273193286402e22b7901b57cdfa"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/C",
+      "size": 476644,
+      "sha256": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/Ccx",
+      "size": 169693,
+      "sha256": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/Ccy",
+      "size": 188733,
+      "sha256": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/Ccz",
+      "size": 103668,
+      "sha256": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/T",
+      "size": 154991,
+      "sha256": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/U",
+      "size": 379554,
+      "sha256": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/Vc",
+      "size": 180373,
+      "sha256": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/p",
+      "size": 155047,
+      "sha256": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/T",
+      "size": 147571,
+      "sha256": "8196a3defe76da5908192cb0458eef29dee15e80fde9d91af37c8ce07a138fad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/U",
+      "size": 471693,
+      "sha256": "da63e77ead0a9d8a20352818798054e2eae645b0983bd0451721b84eecd6fbc1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/p",
+      "size": 147586,
+      "sha256": "d7dbcda7a15fef485aa3265fe59adaa09dc0625eef0e8ace91e839ddb7b71c6e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 728194,
+      "sha256": "ba52cef7f1813c8436446799fa39da326f48084cfee82c9226ed76471fb9696f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 176022,
+      "sha256": "b8481aa28f3fe0a421e1cfd16af4dd62ddbfff760a8cb132ca4ca44548ce19ba"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 895,
+      "sha256": "4e9ddc2dc911861d790e81c1a565b6eaae9e5b5c4324706baff182fd7fdc9fa6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/T",
+      "size": 147617,
+      "sha256": "d24a4092bb248bb89657cfb32fab415f62dd79a787d723cfd4eabb94a13320a4"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/U",
+      "size": 470202,
+      "sha256": "bb09e5c60d5ad92c7a0cefcf8e070d81bd45057b621e1753fb80c5bed87fbb77"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/p",
+      "size": 147550,
+      "sha256": "d6595322399174a9971e460924d002e6d9f665bdbe84aba39d59691a33b1d396"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/phi",
+      "size": 727876,
+      "sha256": "8f06786e6f090aca31dc77929788608955274be9f8b616fe2d9cb7f076364222"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/rho",
+      "size": 176069,
+      "sha256": "553c744a21c7357a0d64f34d8dd8458078e61d9cb719a60ce0177ad47747de4b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/1.500000000000003e-05/uniform/time",
+      "size": 895,
+      "sha256": "a53733ad271efd3b4f1c9d81b42653e19b8b86d2576e836c3e5d67c3f9e6ea69"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/T",
+      "size": 147532,
+      "sha256": "977bc95d8a04905dead9c6ecddd819774c8a16ca90aba4cd6bcaabf0d0389c20"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/U",
+      "size": 470015,
+      "sha256": "1e0cc5f31e108d21c2531baff9ef006def96110db0825496945bed6cbda1fc04"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/p",
+      "size": 147550,
+      "sha256": "ef3b107f81281380094b092c834b59b00f4b6d9d5052e4cb0fb6c8a164461b15"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/phi",
+      "size": 727624,
+      "sha256": "62d11641923ee6abed7c638bde4b199a7c659458263199f6653e16728107bc3c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/rho",
+      "size": 176077,
+      "sha256": "a5af4af15cb7bf2f5e24404cccd2e1b5496f6734ef4c182a07f42f8d22e4be52"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/2.000000000000005e-05/uniform/time",
+      "size": 895,
+      "sha256": "a26c66e3c43830c6ce34b499ee4434c3128223b3f18e239117beb9ac58a484d2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/T",
+      "size": 147624,
+      "sha256": "72bd87fd42408dfdbd65fb8e815ca5afe7c6bbef05d2f937f7b32861e45b5d64"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/U",
+      "size": 475183,
+      "sha256": "25a465f216220cf3e749a4411b59f3311c8d687865a420621df2b5113291091a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/p",
+      "size": 147634,
+      "sha256": "336e74fef95494f34ada3548894ecd28c905b7fca5b3ce522fd44004497c3462"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/phi",
+      "size": 728367,
+      "sha256": "fc0a6c1e371c7d01a6957259ff0b9ee5b7e5666e1d3451662e6669b78641c980"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/rho",
+      "size": 176029,
+      "sha256": "606161742051895e348f4f4b5a8aa0474372d08b6a09a7310c62398ba18e9118"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/5.000000000000008e-06/uniform/time",
+      "size": 894,
+      "sha256": "f87e77f9717b231adfcb5af60fbf25c0e0795de9fc2da410cdd8133ad7623267"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/check-mesh.log",
+      "size": 3260,
+      "sha256": "19dbdc8a6637638e716972668459b8a0a35ee1e362424d55d3d22cd840c8d32e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/constant/polyMesh/points",
+      "size": 891839,
+      "sha256": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/mesh.log",
+      "size": 2346,
+      "sha256": "055fb231b59cfab2f48f954706df7977a4b4162cd49d7d4cf9f48e7a07f60379"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 82178,
+      "sha256": "3ffd285531421a646fa96dec30397ac04a53ffb107f3a3ef2791d9c4c6f15b6c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/solver.log",
+      "size": 1179805,
+      "sha256": "384b01b1088abcc926f5447f9ecf9cf64d38e94a900bf31c1a5ec42d32fb01ea"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/system/blockMeshDict",
+      "size": 598,
+      "sha256": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/system/controlDict",
+      "size": 493,
+      "sha256": "258d7da774ae49e7a99b6f1d22700c3661965968ce2260ba633399c0fbad6047"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/writeCellCentres.log",
+      "size": 1533,
+      "sha256": "50b7b21fdb241006ecd87b6d515a2d2568386ddff8c73eef7c7b861026bd5c2d"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1/writeCellVolumes.log",
+      "size": 1346,
+      "sha256": "133bb453b699132adc0748efe72b9a6d42605a72c414bc14dc4be4bb7c924633"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1.npz",
+      "size": 2473829,
+      "sha256": "09042ba321f65da232cb4813f1835f1abad365becdb689a37762e14f72639675"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/C",
+      "size": 476644,
+      "sha256": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/Ccx",
+      "size": 169693,
+      "sha256": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/Ccy",
+      "size": 188733,
+      "sha256": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/Ccz",
+      "size": 103668,
+      "sha256": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/T",
+      "size": 154991,
+      "sha256": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/U",
+      "size": 379554,
+      "sha256": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/Vc",
+      "size": 180373,
+      "sha256": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/p",
+      "size": 155047,
+      "sha256": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/0/rho",
+      "size": 49424,
+      "sha256": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/T",
+      "size": 147541,
+      "sha256": "d58e29535ebec363283559551303534dec1e72a786308679366a37abb92c6c9b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/U",
+      "size": 471598,
+      "sha256": "9c242c396c6c3c980f651106c1a3015831b5256e7036c692317785c983aadcb3"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/p",
+      "size": 147655,
+      "sha256": "a6382c980af2853fccd2066e66971bc15fdd1e7c82135ae26a2070aded314b88"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/phi",
+      "size": 728079,
+      "sha256": "566bf75a3a543d3d0f364c7e9c3b639dfbbb73876bf8bb306c5bf3e100f39e1f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/rho",
+      "size": 176005,
+      "sha256": "998a673280e9d71f12e29dc9a18abb72b538d15a4f1ee12db1a0407687de976c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.000000000000002e-05/uniform/time",
+      "size": 875,
+      "sha256": "5e9ce56d4d023c07fe38c5296cc3b0da41e571e691e68ad62122071b0205db9f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/T",
+      "size": 147632,
+      "sha256": "ab90c0c6ca3630b9144052cd99378716dd5860bbdd4995cb4eefbe0a8ebbcdf2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/U",
+      "size": 470264,
+      "sha256": "1f067b79d46fecb5481cf346698f01924878d8ffa12c721dab592d0ac26d2662"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/p",
+      "size": 147596,
+      "sha256": "074a2f9508b3349437e8574993d6c2fdc45a0a6240c02c9becb77bff02eeb542"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/phi",
+      "size": 727922,
+      "sha256": "0ecf02894583f291eed939c38f9fbc304c72824fdb420d595d24057796b89d86"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/rho",
+      "size": 176111,
+      "sha256": "2b8283e68ea0a051d0a6d6fcbff82b81e55c2aa139c08c2a7d59523cbf96a9ab"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.500000000000004e-05/uniform/time",
+      "size": 874,
+      "sha256": "e671e4b11bdb0840e2d365ed0a4113c0220b005674b7c11baac4ebb032ea0e0e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/T",
+      "size": 147598,
+      "sha256": "1a52862209a8578b3130c4b94924b407f2428633e2e336f365b6f86d76515385"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/U",
+      "size": 469905,
+      "sha256": "f0b3f91636ddf8e6bec8111012c683fc396f46f28285608f7f7b3d8eb4695d2c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/p",
+      "size": 147562,
+      "sha256": "8e9847bc06088d72b199e114b95e6cad52869d62b7ee0e6c707044d2b321bb8b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/phi",
+      "size": 727659,
+      "sha256": "dce369326f24e769793c942d00c3b934cfc87f37ed500ce1578cadb1d84284d6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/rho",
+      "size": 176052,
+      "sha256": "c8281a312df5dffcfdfb94ba1a3a555699df6e19f5276bbbd3e61d9ba2732815"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/1.999999999999984e-05/uniform/time",
+      "size": 875,
+      "sha256": "c28a3587dc4f0c0b2aad8c15619be582381de9d3b59f3fb38b779fee8335f9ad"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/T",
+      "size": 147603,
+      "sha256": "0717f9ee288d70f1fcb419b0f4935619acffbabd3a3c45d186bec5e0959fc572"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/U",
+      "size": 475195,
+      "sha256": "d7cc93896529c41e1919a3130ed54b33e50fe383acfc84f238e61a4ad599b476"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/p",
+      "size": 147574,
+      "sha256": "eb9dfc7a2b67639e8a715aeb733222a0052145f1136b4c1c682a809e7466b1a0"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/phi",
+      "size": 728259,
+      "sha256": "447562bb4959d03d1d6009886b8862198793b87b7339982260a6988e9206da01"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/rho",
+      "size": 176023,
+      "sha256": "fc9d43532ef25b3d86ab709627a9d1c62c72343346d5cc50d704460fef164694"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/5.000000000000011e-06/uniform/time",
+      "size": 875,
+      "sha256": "f3626f7c0864d02949c0ee375dae224fbe0e439b5c3aa28874172f5820ae5a08"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/check-mesh.log",
+      "size": 3260,
+      "sha256": "a9355888bb0bcb5584a5f52e031c0d4930427ef2a23889a6445962c2920103c1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/fvModels",
+      "size": 121,
+      "sha256": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/momentumTransport",
+      "size": 95,
+      "sha256": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/physicalProperties",
+      "size": 376,
+      "sha256": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/polyMesh/boundary",
+      "size": 1497,
+      "sha256": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/polyMesh/faces",
+      "size": 799370,
+      "sha256": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/polyMesh/neighbour",
+      "size": 79673,
+      "sha256": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/polyMesh/owner",
+      "size": 160354,
+      "sha256": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/constant/polyMesh/points",
+      "size": 891839,
+      "sha256": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/mesh.log",
+      "size": 2346,
+      "sha256": "9652491940633e862a92bb818e4f9fe6dbf6f6ae781e9aca2c9eea9b4393b1c1"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/postProcessing/torque/0/forces.dat",
+      "size": 163842,
+      "sha256": "79d99be2b0440b4708b111aff15c7156fac8dd890563fc42358ad017ea6d4199"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/solver.log",
+      "size": 2360168,
+      "sha256": "b2931a913dc367b65ae6a53eaa7003fb6552a4cc04d66c9f662cfc19632ee0db"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/system/blockMeshDict",
+      "size": 598,
+      "sha256": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/system/controlDict",
+      "size": 494,
+      "sha256": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/system/fvSchemes",
+      "size": 534,
+      "sha256": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/system/fvSolution",
+      "size": 428,
+      "sha256": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/writeCellCentres.log",
+      "size": 1533,
+      "sha256": "1dda3f33c0d9cc0c4763194d73146170c86598446124c8c5ff10b2a8d3627b24"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1/writeCellVolumes.log",
+      "size": 1346,
+      "sha256": "aade8d13af9a95e3c69511366a9ee483c546ef5df7e9773f243bfda5986afe3a"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1.npz",
+      "size": 2473615,
+      "sha256": "6834ddeb806bb1b6ac6ee7e7a4ba102398b9fc2b9a1c0d4684e103d30d20c889"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/predictions.json",
+      "size": 23574,
+      "sha256": "285efdfdaf6880683e35dd42f9bbe5be640bc12ffe32d3b9a49fb2703849bea9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/extension-tests.log",
+      "size": 1329,
+      "sha256": "3de203e4e22503adca3936beab7fe39ef35ca5dbe3446e8b9d66b5952f558eb9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/reference90.py",
+      "size": 12119,
+      "sha256": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay-admission.json",
+      "size": 1200,
+      "sha256": "3bad704c470e47d06fa036965b16bdebf267b0a4a95a3809168333136ab5656c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay-check.json",
+      "size": 1200,
+      "sha256": "3bad704c470e47d06fa036965b16bdebf267b0a4a95a3809168333136ab5656c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay-execution.json",
+      "size": 2743,
+      "sha256": "dc2a5b928134b6cd17e549391793354abd74e3ab8116508dbf1329278b7af66f"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay-replay.log",
+      "size": 620,
+      "sha256": "b8bf7dc082dad55bc865d22fd3f2a79718279a117bb7e45d528e9db15521d5c6"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay2-execution.json",
+      "size": 2828,
+      "sha256": "365e629e02dc1bc7861b6e66b8e567bf16ba72e7d595f8ba0661f77904579194"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay2-replay.log",
+      "size": 826,
+      "sha256": "7e9a26967181cef4ff358cba1dc1c5291b4ebb19cf1f34382939eb129c37e905"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay3-execution.json",
+      "size": 2905,
+      "sha256": "1691bb1c57dcf564d4e3a90c8469c8921da28b524892b366224df45fc1a003ea"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/replay3-replay.log",
+      "size": 826,
+      "sha256": "7e9a26967181cef4ff358cba1dc1c5291b4ebb19cf1f34382939eb129c37e905"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/requirements.txt",
+      "size": 46,
+      "sha256": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/score-execution.json",
+      "size": 1786,
+      "sha256": "6e38c68cb0f8c2bfa074377d0fb93cd922ee67f3d26715fad4f591f14e3b1a51"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/score-score.log",
+      "size": 30,
+      "sha256": "4bfbb17a086b3c351240a2b41114522636f64a31d7bb3ca86b02b011cbd341e2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/score90.py",
+      "size": 6268,
+      "sha256": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/coupled-openfoam-v90/test_reference90.py",
+      "size": 5994,
+      "sha256": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/expert-v88/openfoam/reference88.py",
+      "size": 13439,
+      "sha256": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/meridional-v86/diffusion86.py",
+      "size": 8152,
+      "sha256": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/meridional-v86/test_diffusion86.py",
+      "size": 4900,
+      "sha256": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/mixture-axial-v75/flow.py",
+      "size": 11531,
+      "sha256": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9"
+    },
+    {
+      "path": "v90-coupled-source06/scientific/mixture-axial-v75/test_flow.py",
+      "size": 7652,
+      "sha256": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310"
+    },
+    {
+      "path": "v90-coupled-source06/transfer.json",
+      "size": 1299,
+      "sha256": "ac290ec8bbc976dda7e368f17f64f679c6f67cad202eb50e28c21535cd487c09"
+    },
+    {
+      "path": "runtime/pip-report.json",
+      "size": 102153,
+      "sha256": "a36a2e21b0976a38e94020861d2766004d16a771902d03718d83b952240b5cea"
+    }
+  ],
+  "rawBytes": 74664962
+}

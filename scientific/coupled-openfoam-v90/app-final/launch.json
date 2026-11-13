@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-app-v88-clean-20261112",
+    "run",
+    "--",
+    "python3",
+    "-I",
+    "-"
+  ],
+  "exitCode": 0,
+  "jobSHA256": "37175339ba761a3a53650b294b8bc5f720909b492a5a29aa43bdf24d9a904457"
+}

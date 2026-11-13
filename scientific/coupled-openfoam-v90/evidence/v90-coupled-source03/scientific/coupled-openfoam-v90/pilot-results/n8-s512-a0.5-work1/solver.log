@@ -1,0 +1,86 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : foamRun -case /work/project/v90-coupled-source03/scientific/coupled-openfoam-v90/pilot-results/n8-s512-a0.5-work1
+Date   : Nov 13 2026
+Time   : 08:07:00
+Host   : "safe-dev-run-8b55d1fbfdac42b692ed4c1fc0c7f3be"
+PID    : 24
+I/O    : uncollated
+Case   : /work/project/v90-coupled-source03/scientific/coupled-openfoam-v90/pilot-results/n8-s512-a0.5-work1
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Create mesh for time = 0
+
+
+Selecting solver fluid
+
+Selecting thermodynamics package 
+{
+    type            hePsiThermo;
+    mixture         pureMixture;
+    transport       const;
+    thermo          hConst;
+    equationOfState perfectGas;
+    specie          specie;
+    energy          sensibleInternalEnergy;
+}
+
+Selecting momentum transport model type laminar
+    Selecting laminar stress model Stokes
+Courant Number mean: 0.007111648560475577 max: 0.03758616615826736
+
+Selecting thermophysical transport type laminar
+    Selecting default laminar thermophysical transport model unityLewisFourier
+
+Constructing fvModels from constant/fvModels
+    Selecting viscousHeating with name stressWork
+
+PIMPLE: No convergence criteria found
+
+
+PIMPLE: No corrector convergence criteria found
+        Calculations will do 3 corrections
+
+
+PIMPLE: Operating solver in transient mode with 3 outer correctors
+
+
+
+Starting time loop
+
+
+Constructing functionObjects from system/functions
+    Selecting writeCellCentres with name centres
+    Selecting writeCellVolumes with name volumes
+    Selecting forces with name torque
+Courant Number mean: 0.007111648560475577 max: 0.03758616615826736
+Time = 3.90625e-08s
+
+PIMPLE: Iteration 1
+diagonal:  Solving for rho, Initial residual = 0, Final residual = 0, No Iterations 0
+smoothSolver:  Solving for Ux, Initial residual = 0.9999999999999978, Final residual = 1.228240411909742e-16, No Iterations 2
+smoothSolver:  Solving for Uy, Initial residual = 1.575293670052926e-05, Final residual = 1.486319491611459e-13, No Iterations 1
+smoothSolver:  Solving for Uz, Initial residual = 1, Final residual = 1.021856886737702e-16, No Iterations 2
+
+
+--> FOAM FATAL IO ERROR: 
+Cannot find scheme for div(phi,(p|rho)) in dictionary "$FOAM_CASE/system/fvSchemes!divSchemes"
+
+file: /work/project/v90-coupled-source03/scientific/coupled-openfoam-v90/pilot-results/n8-s512-a0.5-work1/system/fvSchemes!divSchemes at line 2.
+
+    From function Foam::ITstream& Foam::fvSchemes::lookupScheme(const Foam::word&, const Foam::dictionary&, const Foam::ITstream&) const
+    in file finiteVolume/fvSchemes/fvSchemes.C at line 285.
+
+FOAM exiting
+

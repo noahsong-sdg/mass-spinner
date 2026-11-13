@@ -1,0 +1,24 @@
+RUN tests
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.0003717079999999706
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.007s
+
+OK
+RUN extension
+START n64-s256-a0.5-work1
+END n64-s256-a0.5-work1 complete 47.597764939
+START n64-s512-a0.5-work1
+END n64-s512-a0.5-work1 complete 96.665281878
+START n64-s1024-a0.5-work1
+END n64-s1024-a0.5-work1 complete 189.37421788
+RECEIPT {"sourceSHA256": {"scientific/coupled-openfoam-v90/reference90.py": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89", "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c", "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2", "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c", "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f", "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2", "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9", "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf", "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19", "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310", "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7"}, "startedUTC": "2026-11-13T08:16:48.804701+00:00", "commands": [{"name": "tests", "args": ["/work/home/v90-venv/bin/python", "-m", "unittest", "-v", "test_reference90"], "exitCode": 0, "wallSeconds": 0.27652825, "logSHA256": "3de203e4e22503adca3936beab7fe39ef35ca5dbe3446e8b9d66b5952f558eb9"}, {"name": "extension", "args": ["/work/home/v90-venv/bin/python", "-u", "reference90.py", "extension", "extension-results"], "exitCode": 0, "wallSeconds": 333.811818531, "logSHA256": "522bdd42fd35ab8474e417228d1a4b4421d36b535aa40c26b9441328eb67dbab"}], "sourceUnchanged": true, "finishedUTC": "2026-11-13T08:22:22.516924+00:00"}

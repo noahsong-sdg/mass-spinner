@@ -1,0 +1,21 @@
+{
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-openfoam-v87-20261112",
+    "run",
+    "--",
+    "python3",
+    "-I",
+    "-"
+  ],
+  "source": "v90-coupled-source06",
+  "phase": "extendedscore",
+  "startedUTC": "2026-11-13T08:23:06.447674+00:00",
+  "finishedUTC": "2026-11-13T08:23:06.476319+00:00",
+  "exitCode": 1,
+  "logSHA256": "9f82ffe40c29e938b2bf74becba4d3d93f5a56e72b6f151349b769c7b6f74c4d",
+  "jobSHA256": "1f6e2a86c9b2b5374549136a3131434851aae661f177649abfd07df1e3b0a717"
+}

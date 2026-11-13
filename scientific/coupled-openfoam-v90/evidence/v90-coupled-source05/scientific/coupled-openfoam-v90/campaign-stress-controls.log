@@ -1,0 +1,12 @@
+test_domain_rejections (test_diffusion86.DiffusionControls.test_domain_rejections) ... ok
+test_exact_divergence_free_extensional_stress_and_variable_mu (test_diffusion86.DiffusionControls.test_exact_divergence_free_extensional_stress_and_variable_mu) ... ok
+test_linear_omega_has_exact_cylindrical_shear (test_diffusion86.DiffusionControls.test_linear_omega_has_exact_cylindrical_shear) ... ok
+test_stationary_uniform_temperature_is_exact_adiabatic_state (test_diffusion86.DiffusionControls.test_stationary_uniform_temperature_is_exact_adiabatic_state) ... ok
+test_step_full_energy_positive_heat_and_boundary_symmetry (test_diffusion86.DiffusionControls.test_step_full_energy_positive_heat_and_boundary_symmetry) ... ok
+test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace (test_diffusion86.DiffusionControls.test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace) ... ok
+test_uniform_translation_rotation_and_dilation_have_zero_strain_work (test_diffusion86.DiffusionControls.test_uniform_translation_rotation_and_dilation_have_zero_strain_work) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.085s
+
+OK

@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/work/project/v90-coupled-source02/scientific/coupled-openfoam-v90/reference90.py", line 226, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/work/project/v90-coupled-source02/scientific/coupled-openfoam-v90/reference90.py", line 192, in main
+    result['nativeSHA256'] = {p:sha(prefix/p) for p in native_files}
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/work/project/v90-coupled-source02/scientific/coupled-openfoam-v90/reference90.py", line 192, in <dictcomp>
+    result['nativeSHA256'] = {p:sha(prefix/p) for p in native_files}
+                                ^^^^^^^^^^^^^
+  File "/work/project/v90-coupled-source02/scientific/coupled-openfoam-v90/reference90.py", line 28, in sha
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1051, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/pathlib.py", line 1045, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/work/project/tools/opt/openfoam14/platforms/linuxArm64GccDPInt32Opt/lib/libfluid.so'

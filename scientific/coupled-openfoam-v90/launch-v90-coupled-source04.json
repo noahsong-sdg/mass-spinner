@@ -1,0 +1,31 @@
+{
+  "utc": "2026-11-13T08:08:03.586369+00:00",
+  "stage": "/private/tmp/mass-spinner-openfoam-v87-20261112",
+  "name": "v90-coupled-source04",
+  "command": [
+    "/Users/noahs/.local/bin/safe-dev",
+    "--memory",
+    "2G",
+    "-C",
+    "/private/tmp/mass-spinner-openfoam-v87-20261112",
+    "run",
+    "--",
+    "python3",
+    "-I",
+    "-"
+  ],
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/reference90.py": "c4f7444a0cdb4e59acd570a428be6752dd213e9995839dbd7d4c9e0d4f403ce8",
+    "scientific/coupled-openfoam-v90/score90.py": "50b5ee63e3dd30850971b49d4879d3fa3ba5f212562f71710eba4bdf16fccb70",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "03e2e2f41afd774723caea52474df671de7e68a876c3ebc2fa02c37aa84dc36a",
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+  },
+  "jobSHA256": "9fb80c88e757d39085a79a2f7ca64d73ecfef4869a24b3e665168984187d210c",
+  "exitCode": 0,
+  "stdout": "{\"sourceRoot\": \"/work/project/v90-coupled-source04\", \"files\": 8, \"hashes\": {\"scientific/coupled-openfoam-v90/reference90.py\": \"c4f7444a0cdb4e59acd570a428be6752dd213e9995839dbd7d4c9e0d4f403ce8\", \"scientific/coupled-openfoam-v90/score90.py\": \"50b5ee63e3dd30850971b49d4879d3fa3ba5f212562f71710eba4bdf16fccb70\", \"scientific/coupled-openfoam-v90/test_reference90.py\": \"03e2e2f41afd774723caea52474df671de7e68a876c3ebc2fa02c37aa84dc36a\", \"scientific/coupled-openfoam-v90/PROTOCOL.md\": \"16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c\", \"scientific/coupled-openfoam-v90/requirements.txt\": \"5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2\", \"scientific/mixture-axial-v75/flow.py\": \"68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9\", \"scientific/meridional-v86/diffusion86.py\": \"e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf\", \"scientific/expert-v88/openfoam/reference88.py\": \"9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19\"}}\n",
+  "stderr": ""
+}

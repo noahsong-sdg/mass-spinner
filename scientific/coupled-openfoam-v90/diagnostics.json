@@ -1,0 +1,33 @@
+{
+  "postPredictionDiagnostic": true,
+  "changesAdmission": false,
+  "ownGasConstant": 208.1321373041589,
+  "nativeGasConstantRange": [
+    208.13226171522967,
+    208.13226171522996
+  ],
+  "eosRelativeDifference": 5.977504131671196e-07,
+  "localization": [
+    {
+      "coarseN": 16,
+      "fineN": 32,
+      "radialRMS": 0.08682849920908976,
+      "axialRMS": 0.04140219815815514,
+      "endQuarterSquaredErrorFraction": 0.37174972214519464,
+      "outerQuarterSquaredErrorFraction": 0.47414559669954015,
+      "largestCellContributionAtRM": 0.03191176470588236,
+      "largestCellContributionAtZM": 0.23625
+    },
+    {
+      "coarseN": 32,
+      "fineN": 64,
+      "radialRMS": 0.12909178745317879,
+      "axialRMS": 0.06337997686442674,
+      "endQuarterSquaredErrorFraction": 0.8461247894366482,
+      "outerQuarterSquaredErrorFraction": 0.27412850233320407,
+      "largestCellContributionAtRM": 0.03469594594594591,
+      "largestCellContributionAtZM": 0.23812499999999998
+    }
+  ]
+}
+

@@ -1,0 +1,548 @@
+{
+  "sourceSHA256": {
+    "scientific/coupled-openfoam-v90/reference90.py": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/mixture-axial-v75/flow.py": "68197973da7b153cf38f3d7d4dfad6d64bbf3919e8ca1a009c47b766a15e6ba9",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19"
+  },
+  "cases": [
+    {
+      "label": "n64-s256-a0.5-work1",
+      "n": 64,
+      "steps": 256,
+      "halfAngleDeg": 0.5,
+      "stressWork": true,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.07392658399999996
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05784437500000006
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.09645270900000014
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05153108399999984
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s256-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 8.685518711999999
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "055fb231b59cfab2f48f954706df7977a4b4162cd49d7d4cf9f48e7a07f60379",
+        "check-mesh.log": "19dbdc8a6637638e716972668459b8a0a35ee1e362424d55d3d22cd840c8d32e",
+        "writeCellCentres.log": "50b7b21fdb241006ecd87b6d515a2d2568386ddff8c73eef7c7b861026bd5c2d",
+        "writeCellVolumes.log": "133bb453b699132adc0748efe72b9a6d42605a72c414bc14dc4be4bb7c924633",
+        "system/blockMeshDict": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e",
+        "system/controlDict": "258d7da774ae49e7a99b6f1d22700c3661965968ce2260ba633399c0fbad6047",
+        "system/fvSchemes": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b",
+        "system/fvSolution": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59",
+        "constant/physicalProperties": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c",
+        "constant/polyMesh/points": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca",
+        "0/p": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0",
+        "0/C": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf",
+        "0/Ccx": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f",
+        "0/Ccy": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32",
+        "0/Ccz": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c",
+        "0/Vc": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+      },
+      "native": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749793931443262,
+            "angularKgM2S": 8.720012240726005e-06,
+            "maxTemperatureK": 2999.9526527857233,
+            "peakMeridionalMPS": 8.913168457005048e-31
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7141982491263287e-06,
+            "energyJ": 2.4749781078305437,
+            "angularKgM2S": 8.699348825635839e-06,
+            "maxTemperatureK": 2989.114028720664,
+            "peakMeridionalMPS": 13.849321489518365
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714198249126327e-06,
+            "energyJ": 2.4749781078578597,
+            "angularKgM2S": 8.678819828762026e-06,
+            "maxTemperatureK": 2960.84290642131,
+            "peakMeridionalMPS": 25.323379598235142
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7141982491263266e-06,
+            "energyJ": 2.4749781079463133,
+            "angularKgM2S": 8.637869931436476e-06,
+            "maxTemperatureK": 2928.489346178749,
+            "peakMeridionalMPS": 35.84962250581594
+          }
+        ],
+        "wallImpulseKgM2S": 8.211237296409294e-08,
+        "nativeGasConstantRange": [
+          208.13226171522965,
+          208.13226171523002
+        ],
+        "nativeVolumeM3": 0.002714198249126331,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582808177,
+            "angularKgM2S": 8.720408546906046e-06,
+            "maxTemperatureK": 2999.952649753603,
+            "peakMeridionalMPS": 0.0
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582808115,
+            "angularKgM2S": 8.699952870305157e-06,
+            "maxTemperatureK": 2989.2477023454007,
+            "peakMeridionalMPS": 13.867885985909675
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.475105558280805,
+            "angularKgM2S": 8.679534153742704e-06,
+            "maxTemperatureK": 2960.9403899323534,
+            "peakMeridionalMPS": 25.380540148843412
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582807915,
+            "angularKgM2S": 8.638743641578996e-06,
+            "maxTemperatureK": 2928.4716129761787,
+            "peakMeridionalMPS": 35.95753233070549
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "n64-s256-a0.5-work1.npz",
+      "packetSHA256": "09042ba321f65da232cb4813f1835f1abad365becdb689a37762e14f72639675",
+      "wallSeconds": 47.597764939
+    },
+    {
+      "label": "n64-s512-a0.5-work1",
+      "n": 64,
+      "steps": 512,
+      "halfAngleDeg": 0.5,
+      "stressWork": true,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.044311666999995225
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05554945899999808
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05901025000000004
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.04948916600000075
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s512-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 17.18439513300001
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "9652491940633e862a92bb818e4f9fe6dbf6f6ae781e9aca2c9eea9b4393b1c1",
+        "check-mesh.log": "a9355888bb0bcb5584a5f52e031c0d4930427ef2a23889a6445962c2920103c1",
+        "writeCellCentres.log": "1dda3f33c0d9cc0c4763194d73146170c86598446124c8c5ff10b2a8d3627b24",
+        "writeCellVolumes.log": "aade8d13af9a95e3c69511366a9ee483c546ef5df7e9773f243bfda5986afe3a",
+        "system/blockMeshDict": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e",
+        "system/controlDict": "20896b81785015924d0619a25fd0456d8eb24f5500a7129048e39e7a8b0a963b",
+        "system/fvSchemes": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b",
+        "system/fvSolution": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59",
+        "constant/physicalProperties": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c",
+        "constant/polyMesh/points": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca",
+        "0/p": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0",
+        "0/C": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf",
+        "0/Ccx": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f",
+        "0/Ccy": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32",
+        "0/Ccz": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c",
+        "0/Vc": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+      },
+      "native": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749793931443262,
+            "angularKgM2S": 8.720012240726005e-06,
+            "maxTemperatureK": 2999.9526527857233,
+            "peakMeridionalMPS": 8.913168457005048e-31
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7141982491263304e-06,
+            "energyJ": 2.4749787485053707,
+            "angularKgM2S": 8.699348382735274e-06,
+            "maxTemperatureK": 2989.185039705746,
+            "peakMeridionalMPS": 13.858847774102507
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7141982491263304e-06,
+            "energyJ": 2.474978748532391,
+            "angularKgM2S": 8.678819545508389e-06,
+            "maxTemperatureK": 2960.932545809336,
+            "peakMeridionalMPS": 25.355788527774912
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714198249126329e-06,
+            "energyJ": 2.474978748619865,
+            "angularKgM2S": 8.637871072388625e-06,
+            "maxTemperatureK": 2928.497146791775,
+            "peakMeridionalMPS": 35.91934154504144
+          }
+        ],
+        "wallImpulseKgM2S": 8.211217207525603e-08,
+        "nativeGasConstantRange": [
+          208.13226171522965,
+          208.13226171523
+        ],
+        "nativeVolumeM3": 0.002714198249126331,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582808177,
+            "angularKgM2S": 8.720408546906046e-06,
+            "maxTemperatureK": 2999.952649753603,
+            "peakMeridionalMPS": 0.0
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751055582808066,
+            "angularKgM2S": 8.699952701293294e-06,
+            "maxTemperatureK": 2989.247628915629,
+            "peakMeridionalMPS": 13.867767834144209
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.475105558280796,
+            "angularKgM2S": 8.679533859816163e-06,
+            "maxTemperatureK": 2960.939911827426,
+            "peakMeridionalMPS": 25.380310270307884
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751055582807715,
+            "angularKgM2S": 8.638743328160735e-06,
+            "maxTemperatureK": 2928.4729563188553,
+            "peakMeridionalMPS": 35.95729633879334
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "n64-s512-a0.5-work1.npz",
+      "packetSHA256": "6834ddeb806bb1b6ac6ee7e7a4ba102398b9fc2b9a1c0d4684e103d30d20c889",
+      "wallSeconds": 96.665281878
+    },
+    {
+      "label": "n64-s1024-a0.5-work1",
+      "n": 64,
+      "steps": 1024,
+      "halfAngleDeg": 0.5,
+      "stressWork": true,
+      "commands": [
+        {
+          "args": [
+            "blockMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05090916599999673
+        },
+        {
+          "args": [
+            "checkMesh",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.0630747499999984
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1",
+            "-func",
+            "writeCellCentres",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.0713693329999785
+        },
+        {
+          "args": [
+            "foamPostProcess",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1",
+            "-func",
+            "writeCellVolumes",
+            "-time",
+            "0"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 0.05661308300000201
+        },
+        {
+          "args": [
+            "foamRun",
+            "-case",
+            "/work/project/v90-coupled-source06/scientific/coupled-openfoam-v90/extension-results/n64-s1024-a0.5-work1"
+          ],
+          "exitCode": 0,
+          "wallSeconds": 36.216127433
+        }
+      ],
+      "inputSHA256": {
+        "mesh.log": "5186acb31421b8ddd2002824032271afbe30c32abc63c0db4596f53ea7921aeb",
+        "check-mesh.log": "c273ef28be6ae4badcad2525156818e6d4fed19ff4ba8f01baae33812d8eb750",
+        "writeCellCentres.log": "a56fcf0b3b92a39c83839863247b7b9e08dabe79068a07851a7cf4a977989f63",
+        "writeCellVolumes.log": "a28d2147469960c3bc5254f4f27ced31fa281b7f064ec4964a730dec671670e0",
+        "system/blockMeshDict": "75f97ecc8a6517198c73a8cf9da7e1c7cc79fd307b38ee12da75b796aa10ef8e",
+        "system/controlDict": "0cb93ed5c72d03bde36e473dc21db831c2fcc61d8bc0e310cdc9becec48ea569",
+        "system/fvSchemes": "74a42df9afdcedf5574a567116e2eb6532fcae8b0deb4624ff78cee4bcc1451b",
+        "system/fvSolution": "cb2fe7a37c98f6d07f50ced8fc6bcc4b5be0017051db96db5df0669d4b545a59",
+        "constant/physicalProperties": "dea82fd589aa4dfbfabb7560ce43c1065b3a4ec8de439f26a53b0f9b723a5328",
+        "constant/momentumTransport": "1e30ed3650d4c5a03bd4c6d8489a6e8bcd5d8baf0931b2b116734a2ce5c2c793",
+        "constant/fvModels": "549985e443a9585094363a8ab74368d3e91b80984302bc533927b0a746acb78c",
+        "constant/polyMesh/points": "697ac68bc0b322ba3f6367df8e721718562d517707b913a4f37657df86d1a72b",
+        "constant/polyMesh/neighbour": "346750d8709346054898a3396f12936d499ab5c6d2a1b520e95e8864df10216e",
+        "constant/polyMesh/faces": "621a5f85c45efc2615af5ae39176c5b52e74d844aaedf46efe06586d58968d71",
+        "constant/polyMesh/owner": "e4582eca15e3343d54d033f909a57dd8e930ef0e833455e7fb77bb9a617ed7eb",
+        "constant/polyMesh/boundary": "b9f80dd554502682a54f5385392d743f0cb3fedc81a584fe0513ddef2f2f0365",
+        "0/T": "b5f37a79768c22ba27bfb68c91bf27d10ed917f0670e511244cf1068426095ca",
+        "0/p": "77bdd3bd6840b121d644f7e604b62dc05f0601c6bf4b0607c9fcb39134c76ae0",
+        "0/rho": "3171927b4e10b10ac913e09614d283f743f940d718b9bb9d478fc72c1c891e75",
+        "0/U": "670ff0093facc6b94b0ed1738ff1c49f2864dc51b95cd20baaaf5e252345a6d0",
+        "0/C": "8d81510602121d266d890de527f3e40a51408ae9b73839d10d0544b9e8dcf0cf",
+        "0/Ccx": "4cd8ac8253aab8783e766b4f02122b2c6af778d7b582429f160f7ffcad8fbe8f",
+        "0/Ccy": "7f301dc7f597bd2b6bb396fcc7f0bb5fabf7e59838cdd0bf0794c9d2a2057a32",
+        "0/Ccz": "1c44f9cff46159dc4d4eac9023f4f0e7d93b50fb61600c84a4226eb0f89b8f9c",
+        "0/Vc": "3112f76389d01230ff61f4d691e5f35c6df4ab30439d4008abc1fff5e6d70f56"
+      },
+      "native": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749793931443262,
+            "angularKgM2S": 8.720012240726005e-06,
+            "maxTemperatureK": 2999.9526527857233,
+            "peakMeridionalMPS": 8.913168457005048e-31
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749790703453383,
+            "angularKgM2S": 8.69934816565763e-06,
+            "maxTemperatureK": 2989.221525008918,
+            "peakMeridionalMPS": 13.863580823323543
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7141982491263304e-06,
+            "energyJ": 2.474979070374856,
+            "angularKgM2S": 8.67881950214889e-06,
+            "maxTemperatureK": 2960.982190577547,
+            "peakMeridionalMPS": 25.3719247846872
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7141982491263296e-06,
+            "energyJ": 2.4749790704622274,
+            "angularKgM2S": 8.637873096145011e-06,
+            "maxTemperatureK": 2928.5023231567,
+            "peakMeridionalMPS": 35.95107170135827
+          }
+        ],
+        "wallImpulseKgM2S": 8.211205081110379e-08,
+        "nativeGasConstantRange": [
+          208.13226171522965,
+          208.13226171523
+        ],
+        "nativeVolumeM3": 0.002714198249126331,
+        "cellMapBijective": true
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582808177,
+            "angularKgM2S": 8.720408546906046e-06,
+            "maxTemperatureK": 2999.952649753603,
+            "peakMeridionalMPS": 0.0
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751055582807924,
+            "angularKgM2S": 8.699952616803222e-06,
+            "maxTemperatureK": 2989.247557968759,
+            "peakMeridionalMPS": 13.86772499512608
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751055582807666,
+            "angularKgM2S": 8.67953371287014e-06,
+            "maxTemperatureK": 2960.9395615111894,
+            "peakMeridionalMPS": 25.380231368616027
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.475105558280716,
+            "angularKgM2S": 8.638743171373134e-06,
+            "maxTemperatureK": 2928.47359337275,
+            "peakMeridionalMPS": 35.95716647602355
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "n64-s1024-a0.5-work1.npz",
+      "packetSHA256": "77a583677fed2aeb8234470b6ef04410109fa273193286402e22b7901b57cdfa",
+      "wallSeconds": 189.37421788
+    }
+  ],
+  "experimentalQualification": false,
+  "nativeSHA256": {
+    "applications/modules/fluid/thermophysicalPredictor.C": "b3271ffca3d544eec49c79cf220ade3013204a5de959a9d887a4f46a64223be9",
+    "applications/modules/isothermalFluid/momentumPredictor.C": "e6b9640e94a0f478bab8cca90f9c892a301789c59ec9c5c1fc15f5578063dec3",
+    "src/fvModels/general/viscousHeating/viscousHeating.C": "debbbec99a69964063467e79988ee024be6cebabdbc1691197e32cb48515956b",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfluidSolver.so": "1f0f41c1284346bcfa5447ea6fd9a1f94792a15babfe61baafe065a94ebbcda8",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfvModels.so": "437c413684cfdbce9410e552ac48e5afb9a40a3ce118a80c849db584c2df283f"
+  },
+  "runtime": {
+    "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "skfem": "12.0.2"
+  }
+}

@@ -1,0 +1,2 @@
+START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 RuntimeError: {"args": ["foamRun", "-case", "/work/project/v90-coupled-source03/scientific/coupled-openfoam-v90/pilot-results/n8-s512-a0.5-work1"], "exitCode": 1, "wallSeconds": 0.043334208000000096} see solver.log 0.20138

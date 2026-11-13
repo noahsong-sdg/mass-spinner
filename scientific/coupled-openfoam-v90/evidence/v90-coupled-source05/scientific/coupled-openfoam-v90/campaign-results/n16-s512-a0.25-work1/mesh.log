@@ -1,0 +1,74 @@
+/*---------------------------------------------------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  14
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+Build  : 14-a4867fc914c1
+Exec   : blockMesh -case /work/project/v90-coupled-source05/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1
+Date   : Nov 13 2026
+Time   : 08:09:54
+Host   : "safe-dev-run-2d903e698e344f968aaee4e0f99fd8f8"
+PID    : 59
+I/O    : uncollated
+Case   : /work/project/v90-coupled-source05/scientific/coupled-openfoam-v90/campaign-results/n16-s512-a0.25-work1
+nProcs : 1
+fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+allowSystemOperations : Allowing user-supplied system call operations
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+Create time
+
+Reading "blockMeshDict"
+
+Creating block mesh from
+    "system/blockMeshDict"
+No non-linear block edges defined
+No non-planar block faces defined
+Creating topology blocks
+Creating topology patches
+
+Creating block mesh topology
+
+Basic statistics
+    Number of internal faces : 0
+    Number of boundary faces : 6
+    Number of defined boundary faces : 6
+    Number of undefined boundary faces : 0
+
+Checking topology
+Creating block offsets
+Creating merge list .
+
+Creating polyMesh from blockMesh
+Creating points with scale 1
+    Block 0 cell size :
+        i : 0.00375 .. 0.003749999999999999
+        j : 0 3.272481963559928e-05 0 3.272481963559928e-05 
+        k : 0.0075 .. 0.007499999999999979
+Creating cells
+Creating patches
+
+No patch pairs to merge
+
+Writing polyMesh
+----------------
+Mesh Information
+----------------
+  boundingBox: (0 -0.0002617985570847942 0) (0.05999942884324407 0.0002617985570847942 0.24)
+  nPoints: 1089
+  nCells: 512
+  nFaces: 2064
+  nInternalFaces: 976
+----------------
+Patches
+----------------
+  patch 0 (start: 976 size: 48) name: walls
+  patch 1 (start: 1024 size: 16) name: midplane
+  patch 2 (start: 1040 size: 512) name: minus
+  patch 3 (start: 1552 size: 512) name: plus
+  patch 4 (start: 2064 size: 0) name: axis
+
+End
+
