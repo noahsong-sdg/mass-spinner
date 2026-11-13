@@ -115,3 +115,8 @@ it is research evidence and has not replaced the live equations.
 The [V100 spatial repairs](../SPATIAL-FLOW-V100.md) correct contact/shear flux
 diffusion and misplaced local viscous heating. Ten spatial screens and the
 experimental comparison still fail; these fixes do not qualify a live adoption.
+
+The [V101 source-aligned refinement](../SPATIAL-FLOW-V101.md) reduces the failed
+spatial screens to six, retaining the original limits and no-fit comparison.
+Density increments, radial flow and experimental accuracy remain unqualified;
+the live model is unchanged.
