@@ -1,0 +1,67 @@
+{
+  "startedUTC": "2026-11-13T09:19:28.690412+00:00",
+  "sourceFiles": 2666,
+  "sourceTreeSHA256": "ccfc2619fbc2509e31034c4b9a86535a5d8e623f7f68a3c6f8510023fba1ab7c",
+  "changedFiles": [
+    "scientific/mixture-axial-v75/flow.py"
+  ],
+  "commands": [
+    {
+      "name": "test",
+      "args": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 41.627160353,
+      "logSHA256": "aa99dd97c61e9290732099305d6711a6e93e685baa2001c2330b7147448bbbd2"
+    },
+    {
+      "name": "typecheck",
+      "args": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 1.0012934169999994,
+      "logSHA256": "8fa1cf5506304e8abac55868e7f1a136c9b1dde57a3981a382da4c21ea129a6f"
+    },
+    {
+      "name": "build",
+      "args": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.37472362499999434,
+      "logSHA256": "f48c68a5efe1022407bace4b4ccbb87a63e46fb54539277b803e61c518d4ae0f"
+    },
+    {
+      "name": "site",
+      "args": [
+        "npm",
+        "run",
+        "check:site"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.12270012499999439,
+      "logSHA256": "96472b54a03d1daec401b59e23742b598cddf88e8db93d63f9551009efda5cc8"
+    },
+    {
+      "name": "assets",
+      "args": [
+        "npm",
+        "run",
+        "check:assets"
+      ],
+      "exitCode": 0,
+      "wallSeconds": 0.05211095900000373,
+      "logSHA256": "0a0ae3f8a5d62f28963222bf2d12624204dd4a7d59d1db5042b8a6cff85b6fa3"
+    }
+  ],
+  "allPassed": true,
+  "sourceUnchanged": true,
+  "finishedUTC": "2026-11-13T09:20:12.108915+00:00"
+}

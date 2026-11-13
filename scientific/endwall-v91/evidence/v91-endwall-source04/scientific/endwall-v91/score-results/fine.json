@@ -1,0 +1,774 @@
+{
+  "gates": [
+    {
+      "name": "cross-whole/rho/fine",
+      "value": 5.1219885344352123e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/rho/contraction",
+      "value": 0.9789628290588589,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/T/fine",
+      "value": 4.239830216868755e-06,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/T/contraction",
+      "value": 0.5007358519097915,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/swirl/fine",
+      "value": 0.00013306522185508747,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/swirl/contraction",
+      "value": 0.35030231478990176,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/meridional/fine",
+      "value": 0.0015815403467633494,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/meridional/contraction",
+      "value": 0.6129423962658124,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/whole/rho/fine",
+      "value": 1.8099215296982164e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/whole/rho/contraction",
+      "value": 0.49452981662746326,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/whole/T/fine",
+      "value": 1.1600559245082478e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/whole/T/contraction",
+      "value": 0.488311302684243,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/whole/swirl/fine",
+      "value": 0.00027518952811342355,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/whole/swirl/contraction",
+      "value": 0.29020217911239293,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/whole/meridional/fine",
+      "value": 0.0048218635763144415,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/whole/meridional/contraction",
+      "value": 0.6360496416472418,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/rho/fine",
+      "value": 1.5407821820675256e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/rho/contraction",
+      "value": 0.4796061840558848,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/T/fine",
+      "value": 9.976912681564768e-06,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/T/contraction",
+      "value": 0.45024339641706407,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/swirl/fine",
+      "value": 0.0001575659319854079,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/swirl/contraction",
+      "value": 0.2496254488916246,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/meridional/fine",
+      "value": 0.0038140782780628725,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/whole/meridional/contraction",
+      "value": 0.5531133853879324,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/rho/fine",
+      "value": 0.0006241378403339765,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/rho/contraction",
+      "value": 0.5376685189224598,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/T/fine",
+      "value": 0.0006030376782068227,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/T/contraction",
+      "value": 0.5495931895138217,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/swirl/fine",
+      "value": 0.002825342342945218,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/swirl/contraction",
+      "value": 0.3467000512109196,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/meridional/fine",
+      "value": 0.0015815403467633494,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/meridional/contraction",
+      "value": 0.6129423962658124,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/increment/rho/fine",
+      "value": 0.0016599492134309773,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/increment/rho/contraction",
+      "value": 0.49436389972803835,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/increment/T/fine",
+      "value": 0.0015444111306281592,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/increment/T/contraction",
+      "value": 0.5072642034940682,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/increment/swirl/fine",
+      "value": 0.006045672437682263,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/increment/swirl/contraction",
+      "value": 0.2853826300717876,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/increment/meridional/fine",
+      "value": 0.0048218635763144415,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/increment/meridional/contraction",
+      "value": 0.6360496416472418,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/rho/fine",
+      "value": 0.001412770031534551,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/rho/contraction",
+      "value": 0.47978356248347725,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/T/fine",
+      "value": 0.0013578890442251838,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/T/contraction",
+      "value": 0.45373236256951827,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/swirl/fine",
+      "value": 0.0003735592741472261,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/swirl/contraction",
+      "value": 0.2574598461346876,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/meridional/fine",
+      "value": 0.0038140782780628725,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/increment/meridional/contraction",
+      "value": 0.5531133853879324,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "n64-s256-a0.5-work1/native/massKg",
+      "value": 1.5543122344752192e-15,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s256-a0.5-work1/native/energyJ",
+      "value": 5.193230239175506e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s256-a0.5-work1/v86/massKg",
+      "value": 0.0,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s256-a0.5-work1/v86/energyJ",
+      "value": 1.0436096431476471e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s256-a0.5-work1/wall-angular-budget",
+      "value": 3.433060024425047e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n64-s512-a0.5-work1/native/massKg",
+      "value": 6.661338147750939e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s512-a0.5-work1/native/energyJ",
+      "value": 2.6046235268584184e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s512-a0.5-work1/v86/massKg",
+      "value": 0.0,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s512-a0.5-work1/v86/energyJ",
+      "value": 1.887379141862766e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s512-a0.5-work1/wall-angular-budget",
+      "value": 3.325254750130916e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n64-s1024-a0.5-work1/native/massKg",
+      "value": 4.440892098500626e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s1024-a0.5-work1/native/energyJ",
+      "value": 1.3042491942005796e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s1024-a0.5-work1/v86/massKg",
+      "value": 2.220446049250313e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n64-s1024-a0.5-work1/v86/energyJ",
+      "value": 4.107825191113079e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n64-s1024-a0.5-work1/wall-angular-budget",
+      "value": 3.1070793414842807e-06,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n32-s1024-a0.5-work1/native/massKg",
+      "value": 3.3306690738754696e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n32-s1024-a0.5-work1/native/energyJ",
+      "value": 1.3052650449374426e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n32-s1024-a0.5-work1/v86/massKg",
+      "value": 2.220446049250313e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n32-s1024-a0.5-work1/v86/energyJ",
+      "value": 1.1879386363489175e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n32-s1024-a0.5-work1/wall-angular-budget",
+      "value": 1.0820101180787146e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n128-s1024-a0.5-work1/native/massKg",
+      "value": 2.4424906541753444e-15,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n128-s1024-a0.5-work1/native/energyJ",
+      "value": 1.3039903279388199e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n128-s1024-a0.5-work1/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n128-s1024-a0.5-work1/v86/energyJ",
+      "value": 3.8968828164342995e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n128-s1024-a0.5-work1/wall-angular-budget",
+      "value": 8.692865792626478e-07,
+      "limit": 0.01,
+      "passed": true
+    }
+  ],
+  "comparisons": {
+    "cross-whole": [
+      {
+        "rho": {
+          "absoluteRMS": 6.920163036342106e-08,
+          "scaleRMS": 0.00100005952090226,
+          "relative": 6.91975116650926e-05
+        },
+        "T": {
+          "absoluteRMS": 0.09453648345329095,
+          "scaleRMS": 2900.492841052287,
+          "relative": 3.259324833189159e-05
+        },
+        "swirl": {
+          "absoluteRMS": 0.14157454863580593,
+          "scaleRMS": 112.05198540084633,
+          "relative": 0.0012634720226450946
+        },
+        "meridional": {
+          "absoluteRMS": 0.066304727246577,
+          "scaleRMS": 13.674332783705076,
+          "relative": 0.00484884551921894
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 5.232367381445461e-08,
+          "scaleRMS": 0.001000059476896108,
+          "relative": 5.23205619498272e-05
+        },
+        "T": {
+          "absoluteRMS": 0.024558995101871456,
+          "scaleRMS": 2900.486270760656,
+          "relative": 8.467199224297941e-06
+        },
+        "swirl": {
+          "absoluteRMS": 0.04256313330703663,
+          "scaleRMS": 112.05004519064757,
+          "relative": 0.0003798582431146509
+        },
+        "meridional": {
+          "absoluteRMS": 0.035276258640825356,
+          "scaleRMS": 13.671680616210972,
+          "relative": 0.002580243031642877
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 5.122293031606758e-08,
+          "scaleRMS": 0.0010000594490146744,
+          "relative": 5.1219885344352123e-05
+        },
+        "T": {
+          "absoluteRMS": 0.01229756226892225,
+          "scaleRMS": 2900.484604311438,
+          "relative": 4.239830216868755e-06
+        },
+        "swirl": {
+          "absoluteRMS": 0.014909905011934451,
+          "scaleRMS": 112.04960097065666,
+          "relative": 0.00013306522185508747
+        },
+        "meridional": {
+          "absoluteRMS": 0.021622868280441725,
+          "scaleRMS": 13.672030767152613,
+          "relative": 0.0015815403467633494
+        }
+      }
+    ],
+    "native/whole": [
+      {
+        "rho": {
+          "absoluteRMS": 3.659915135970708e-08,
+          "scaleRMS": 0.0010000086364879354,
+          "relative": 3.6598835274307786e-05
+        },
+        "T": {
+          "absoluteRMS": 0.0689057962232817,
+          "scaleRMS": 2900.504915790933,
+          "relative": 2.375648317234171e-05
+        },
+        "swirl": {
+          "absoluteRMS": 0.10620771228438596,
+          "scaleRMS": 112.00175295466633,
+          "relative": 0.0009482683036878399
+        },
+        "meridional": {
+          "absoluteRMS": 0.10366449859069093,
+          "scaleRMS": 13.674332783705076,
+          "relative": 0.007580954788099206
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.8099372332525493e-08,
+          "scaleRMS": 0.0010000086763730224,
+          "relative": 1.8099215296982164e-05
+        },
+        "T": {
+          "absoluteRMS": 0.03364729778629699,
+          "scaleRMS": 2900.489284648946,
+          "relative": 1.1600559245082478e-05
+        },
+        "swirl": {
+          "absoluteRMS": 0.030831537837388106,
+          "scaleRMS": 112.03746759099211,
+          "relative": 0.00027518952811342355
+        },
+        "meridional": {
+          "absoluteRMS": 0.06588217442419168,
+          "scaleRMS": 13.663218251924969,
+          "relative": 0.0048218635763144415
+        }
+      }
+    ],
+    "v86/whole": [
+      {
+        "rho": {
+          "absoluteRMS": 3.2127898722707935e-08,
+          "scaleRMS": 0.00100005952090226,
+          "relative": 3.212598655500218e-05
+        },
+        "T": {
+          "absoluteRMS": 0.06427200023406249,
+          "scaleRMS": 2900.500846657106,
+          "relative": 2.215893172661454e-05
+        },
+        "swirl": {
+          "absoluteRMS": 0.07072826744585996,
+          "scaleRMS": 112.05198540084633,
+          "relative": 0.0006312094086761782
+        },
+        "meridional": {
+          "absoluteRMS": 0.09426996439570687,
+          "scaleRMS": 13.670925278909484,
+          "relative": 0.006895653547396661
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.5408738230092935e-08,
+          "scaleRMS": 0.001000059476896108,
+          "relative": 1.5407821820675256e-05
+        },
+        "T": {
+          "absoluteRMS": 0.028937904651725795,
+          "scaleRMS": 2900.486911667268,
+          "relative": 9.976912681564768e-06
+        },
+        "swirl": {
+          "absoluteRMS": 0.017655269799471456,
+          "scaleRMS": 112.05004519064757,
+          "relative": 0.0001575659319854079
+        },
+        "meridional": {
+          "absoluteRMS": 0.052144860062903496,
+          "scaleRMS": 13.671680616210972,
+          "relative": 0.0038140782780628725
+        }
+      }
+    ],
+    "cross-increment": [
+      {
+        "rho": {
+          "absoluteRMS": 4.702547103438191e-08,
+          "scaleRMS": 1.0910790404822477e-05,
+          "relative": 0.004309996736221516
+        },
+        "T": {
+          "absoluteRMS": 0.09004004773287701,
+          "scaleRMS": 21.853870264784714,
+          "relative": 0.004120096195407885
+        },
+        "swirl": {
+          "absoluteRMS": 0.0628178450576831,
+          "scaleRMS": 2.360249355656423,
+          "relative": 0.026614918846238796
+        },
+        "meridional": {
+          "absoluteRMS": 0.066304727246577,
+          "scaleRMS": 13.674332783705076,
+          "relative": 0.00484884551921894
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.2660810497524812e-08,
+          "scaleRMS": 1.0906756150082963e-05,
+          "relative": 0.0011608227343955523
+        },
+        "T": {
+          "absoluteRMS": 0.023963284549439096,
+          "scaleRMS": 21.839527549780414,
+          "relative": 0.0010972437244724206
+        },
+        "swirl": {
+          "absoluteRMS": 0.019236823596857158,
+          "scaleRMS": 2.360566231139771,
+          "relative": 0.008149241204543068
+        },
+        "meridional": {
+          "absoluteRMS": 0.035276258640825356,
+          "scaleRMS": 13.671680616210972,
+          "relative": 0.002580243031642877
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 6.805723434876566e-09,
+          "scaleRMS": 1.0904199353198677e-05,
+          "relative": 0.0006241378403339765
+        },
+        "T": {
+          "absoluteRMS": 0.013166533210079932,
+          "scaleRMS": 21.833682514219667,
+          "relative": 0.0006030376782068227
+        },
+        "swirl": {
+          "absoluteRMS": 0.00667008461843918,
+          "scaleRMS": 2.3608058099911857,
+          "relative": 0.002825342342945218
+        },
+        "meridional": {
+          "absoluteRMS": 0.021622868280441725,
+          "scaleRMS": 13.672030767152613,
+          "relative": 0.0015815403467633494
+        }
+      }
+    ],
+    "native/increment": [
+      {
+        "rho": {
+          "absoluteRMS": 3.6599151359725755e-08,
+          "scaleRMS": 1.0899911302426785e-05,
+          "relative": 0.0033577476315405632
+        },
+        "T": {
+          "absoluteRMS": 0.06644680085358759,
+          "scaleRMS": 21.82455360575832,
+          "relative": 0.0030445892298138857
+        },
+        "swirl": {
+          "absoluteRMS": 0.05000057106474889,
+          "scaleRMS": 2.360249355656423,
+          "relative": 0.02118444432361382
+        },
+        "meridional": {
+          "absoluteRMS": 0.10366449859069093,
+          "scaleRMS": 13.674332783705076,
+          "relative": 0.007580954788099206
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.8099372332517836e-08,
+          "scaleRMS": 1.090356993218361e-05,
+          "relative": 0.0016599492134309773
+        },
+        "T": {
+          "absoluteRMS": 0.03371839869586323,
+          "scaleRMS": 21.832527639287946,
+          "relative": 0.0015444111306281592
+        },
+        "swirl": {
+          "absoluteRMS": 0.01427121020092521,
+          "scaleRMS": 2.360566231139771,
+          "relative": 0.006045672437682263
+        },
+        "meridional": {
+          "absoluteRMS": 0.06588217442419168,
+          "scaleRMS": 13.663218251924969,
+          "relative": 0.0048218635763144415
+        }
+      }
+    ],
+    "v86/increment": [
+      {
+        "rho": {
+          "absoluteRMS": 3.212789872270534e-08,
+          "scaleRMS": 1.0910790404822477e-05,
+          "relative": 0.0029445986524042366
+        },
+        "T": {
+          "absoluteRMS": 0.06540227996613979,
+          "scaleRMS": 21.853870264784714,
+          "relative": 0.0029927092626484976
+        },
+        "swirl": {
+          "absoluteRMS": 0.003420458008978929,
+          "scaleRMS": 2.3574052463620627,
+          "relative": 0.0014509418837755472
+        },
+        "meridional": {
+          "absoluteRMS": 0.09426996439570687,
+          "scaleRMS": 13.670925278909484,
+          "relative": 0.006895653547396661
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.5408738230092366e-08,
+          "scaleRMS": 1.0906756150082963e-05,
+          "relative": 0.001412770031534551
+        },
+        "T": {
+          "absoluteRMS": 0.029655655190900895,
+          "scaleRMS": 21.839527549780414,
+          "relative": 0.0013578890442251838
+        },
+        "swirl": {
+          "absoluteRMS": 0.0008816537887477537,
+          "scaleRMS": 2.360144292389536,
+          "relative": 0.0003735592741472261
+        },
+        "meridional": {
+          "absoluteRMS": 0.052144860062903496,
+          "scaleRMS": 13.671680616210972,
+          "relative": 0.0038140782780628725
+        }
+      }
+    ]
+  },
+  "spatialMeshes": [
+    32,
+    64,
+    128
+  ],
+  "steps": 1024,
+  "allSpatialGatesPass": true,
+  "finestTemporalQualification": false,
+  "numericalComparisonPass": false,
+  "experimentalQualification": false
+}

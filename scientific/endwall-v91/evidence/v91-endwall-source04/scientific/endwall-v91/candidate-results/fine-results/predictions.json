@@ -1,0 +1,227 @@
+{
+  "sourceSHA256": {
+    "scientific/mixture-axial-v75/flow.py": "43dfde8fdf544e74e9c93cb7417218056fbbfeb5a1279b0d2ba011e4cf071d8c",
+    "scientific/mixture-axial-v75/test_flow.py": "efa7c45d6f49c9d43fe9eb1b4d60aacbf60f98a9613eed253f9e646514dc4310",
+    "scientific/meridional-v86/diffusion86.py": "e564848ead7cf7b98c41e355f70cae9d01024e83135a0cf63bebd420d0435caf",
+    "scientific/meridional-v86/test_diffusion86.py": "25a1b0ce77cca3ba08c9031191dc40a6b7a9f911ca8eb337500d179c67e12db7",
+    "scientific/expert-v88/openfoam/reference88.py": "9b0be0792dd5be02bb8cc83262569a3220215908369d6967f6929d68ed504d19",
+    "scientific/coupled-openfoam-v90/reference90.py": "a8d206b0edd0fa4cb728b7164945b1239e4aa2f96df8eccf4c73ef43565bdb89",
+    "scientific/coupled-openfoam-v90/score90.py": "a4af30d600eceb785c698b1469ce024030dc7a55c4ce6172b2055b31724a257c",
+    "scientific/coupled-openfoam-v90/test_reference90.py": "719bc33d0d32f1647d9880d434b768781ecb012fbd351212586cced8fa0d46a2",
+    "scientific/coupled-openfoam-v90/PROTOCOL.md": "16b1c089161be8114d8a6ba20c06395b897e71c2ca2998341311acca69fc771c",
+    "scientific/coupled-openfoam-v90/REFINEMENT.md": "8bc3548e3bfebe7cf09dc132a5dc3d722e8694a835f2565b6455e1c1bf94b44f",
+    "scientific/coupled-openfoam-v90/requirements.txt": "5d80a1eaf70606917126788bd6c072e0a24428eb6e4a69b2a909339b9e81bac2",
+    "scientific/endwall-v91/candidate91.py": "f772919710dc16c4e90d808ea5f862b968b1c56143d5a5ad3caae1be48278b24",
+    "scientific/endwall-v91/inspect91.py": "0a2de03a543facfeeb60c9e1e1d532b0b55d18a004fb9c343b428aaadbda2486",
+    "scientific/endwall-v91/probe91.py": "62c033084d376ce78f69b8eeb7f8a1b1c73235a4c4ca7cd72b2f7a5073cea9a7",
+    "scientific/endwall-v91/refine91.py": "02e1178cd88937f67240ef7dfca56366462715415907445c6f31344506c72f9e",
+    "scientific/endwall-v91/score91.py": "dfd658b6bf54cc44a176a57110943eb7491f057f1deca16c85f2537498f8f3b5",
+    "scientific/endwall-v91/test91.py": "e7a803f30cf06e1c3df6732496425118ff353e5d4e93a8ff1c144fd3c78a8402",
+    "scientific/endwall-v91/PROTOCOL.md": "02b09fc9a8c502f4b46d1994d4fc663fa40a957487505660964704d843a4d3e3",
+    "scientific/endwall-v91/WALL-TRACE.md": "a0de8aa284f6a289c6e6bdf7e3915fc0f4b23864ea743f9ba4b2bff0ea615fd2"
+  },
+  "nativeSHA256": {
+    "applications/modules/fluid/thermophysicalPredictor.C": "b3271ffca3d544eec49c79cf220ade3013204a5de959a9d887a4f46a64223be9",
+    "applications/modules/isothermalFluid/momentumPredictor.C": "e6b9640e94a0f478bab8cca90f9c892a301789c59ec9c5c1fc15f5578063dec3",
+    "src/fvModels/general/viscousHeating/viscousHeating.C": "debbbec99a69964063467e79988ee024be6cebabdbc1691197e32cb48515956b",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamRun": "b706605d40b41b0c9d8f5fee77be025dc3f50146adeb00b9d9573b42e84c95ac",
+    "platforms/linuxArm64GccDPInt32Opt/bin/blockMesh": "10e17379127421db5351b54eb6db579ec09843a7c5c3143ffdb9ef1103c3ed58",
+    "platforms/linuxArm64GccDPInt32Opt/bin/checkMesh": "bdb8082bd7b009acbbda290fe86b722623c8aba5195700715324d2dc69e08dee",
+    "platforms/linuxArm64GccDPInt32Opt/bin/foamPostProcess": "172e33d84a5c48e1a183d352a1315c6a603a2a7aba006a4f14e1beab3edcb280",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfluidSolver.so": "1f0f41c1284346bcfa5447ea6fd9a1f94792a15babfe61baafe065a94ebbcda8",
+    "platforms/linuxArm64GccDPInt32Opt/lib/libfvModels.so": "437c413684cfdbce9410e552ac48e5afb9a40a3ce118a80c849db584c2df283f"
+  },
+  "cases": [
+    {
+      "label": "n32-s1024-a0.5-work1",
+      "n": 32,
+      "steps": 1024,
+      "halfAngleDeg": 0.5,
+      "stressWork": true,
+      "native": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749794051983773,
+            "angularKgM2S": 8.724087236982893e-06,
+            "maxTemperatureK": 2999.8106958104227,
+            "peakMeridionalMPS": 3.5526977750147982e-31
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.474979082147967,
+            "angularKgM2S": 8.703178229445936e-06,
+            "maxTemperatureK": 2989.037357509132,
+            "peakMeridionalMPS": 13.851410783532161
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7141982491263304e-06,
+            "energyJ": 2.474979082175017,
+            "angularKgM2S": 8.682404520291202e-06,
+            "maxTemperatureK": 2960.999122119376,
+            "peakMeridionalMPS": 25.388100088703798
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.71419824912633e-06,
+            "energyJ": 2.474979082262518,
+            "angularKgM2S": 8.641070479868687e-06,
+            "maxTemperatureK": 2928.121901782978,
+            "peakMeridionalMPS": 35.99818995860167
+          }
+        ],
+        "wallImpulseKgM2S": 8.292236160759171e-08,
+        "nativeGasConstantRange": [
+          208.13226171522965,
+          208.13226171523
+        ],
+        "nativeVolumeM3": 0.002714198249126331,
+        "cellMapBijective": true
+      },
+      "nativePacketReference": {
+        "path": "/work/project/v91-endwall-source02/scientific/endwall-v91/refine-results/n32-s1024-a0.5-work1.npz",
+        "sha256": "da6c852b0fd6f39858a2be101795f6bca7e50e0fcd2b17cb421869ce23627e9f"
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.4751110967279146,
+            "angularKgM2S": 8.726332560854273e-06,
+            "maxTemperatureK": 2999.8106836919237,
+            "peakMeridionalMPS": 0.0
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751110967279066,
+            "angularKgM2S": 8.705884263404968e-06,
+            "maxTemperatureK": 2989.1131545097496,
+            "peakMeridionalMPS": 13.850812980121871
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.475111096727898,
+            "angularKgM2S": 8.685472001262127e-06,
+            "maxTemperatureK": 2960.7012015576784,
+            "peakMeridionalMPS": 25.37951574483458
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751110967278853,
+            "angularKgM2S": 8.64469313699053e-06,
+            "maxTemperatureK": 2927.9240812453518,
+            "peakMeridionalMPS": 35.92954966802646
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "n32-s1024-a0.5-work1.npz",
+      "packetSHA256": "4f9f2bb14095a0b6f8dd8886b76127da1d48bb63865f50690fbab4100951c844",
+      "wallSeconds": 24.77370522000001
+    },
+    {
+      "label": "n128-s1024-a0.5-work1",
+      "n": 128,
+      "steps": 1024,
+      "halfAngleDeg": 0.5,
+      "stressWork": true,
+      "native": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714198249126331e-06,
+            "energyJ": 2.4749793919495646,
+            "angularKgM2S": 8.718994358332446e-06,
+            "maxTemperatureK": 2999.9881618731406,
+            "peakMeridionalMPS": 2.743899340668862e-30
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.7141982491263313e-06,
+            "energyJ": 2.474979069214646,
+            "angularKgM2S": 8.698429951617319e-06,
+            "maxTemperatureK": 2989.258825622964,
+            "peakMeridionalMPS": 13.864509562422047
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7141982491263325e-06,
+            "energyJ": 2.474979069244331,
+            "angularKgM2S": 8.677964129640417e-06,
+            "maxTemperatureK": 2960.978716620773,
+            "peakMeridionalMPS": 25.374525448430813
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.714198249126337e-06,
+            "energyJ": 2.474979069332387,
+            "angularKgM2S": 8.637105957779523e-06,
+            "maxTemperatureK": 2928.710346427418,
+            "peakMeridionalMPS": 35.93833677476278
+          }
+        ],
+        "wallImpulseKgM2S": 8.18808212481427e-08,
+        "nativeGasConstantRange": [
+          208.13226171522965,
+          208.13226171523
+        ],
+        "nativeVolumeM3": 0.002714198249126331,
+        "cellMapBijective": true
+      },
+      "nativePacketReference": {
+        "path": "/work/project/v91-endwall-source02/scientific/endwall-v91/refine-results/n128-s1024-a0.5-work1.npz",
+        "sha256": "290b0f151b78382f825235a50f32ef89abd1478e88bc3381472ba029180c5d5c"
+      },
+      "v86": {
+        "history": [
+          {
+            "timeS": 0.0,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.4751041711584643,
+            "angularKgM2S": 8.718927577379525e-06,
+            "maxTemperatureK": 2999.988161114955,
+            "peakMeridionalMPS": 0.0
+          },
+          {
+            "timeS": 5e-06,
+            "massKg": 2.714336052701581e-06,
+            "energyJ": 2.475104171158441,
+            "angularKgM2S": 8.698470473004278e-06,
+            "maxTemperatureK": 2989.288434410813,
+            "peakMeridionalMPS": 13.868893627777059
+          },
+          {
+            "timeS": 1e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.475104171158419,
+            "angularKgM2S": 8.678051572558992e-06,
+            "maxTemperatureK": 2961.0035784273887,
+            "peakMeridionalMPS": 25.38845132090597
+          },
+          {
+            "timeS": 2e-05,
+            "massKg": 2.7143360527015808e-06,
+            "energyJ": 2.475104171158368,
+            "angularKgM2S": 8.637261911608902e-06,
+            "maxTemperatureK": 2928.713805043769,
+            "peakMeridionalMPS": 35.96578543565779
+          }
+        ]
+      },
+      "completed": true,
+      "packet": "n128-s1024-a0.5-work1.npz",
+      "packetSHA256": "d3ff2895a3579410c75b1528efea787c94bdec31e75ba2bc7541664e67319a7d",
+      "wallSeconds": 1046.1694808989998
+    }
+  ],
+  "nativePredictionReference": "/work/project/v91-endwall-source02/scientific/endwall-v91/refine-results/predictions.json",
+  "nativePredictionSHA256": "03ccbb9c786e198b6026035b2a4ba8dd1e4b50ff08699e1eaf2002b814b22ca2",
+  "experimentalQualification": false
+}

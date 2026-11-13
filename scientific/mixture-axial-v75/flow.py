@@ -15,7 +15,10 @@ GAMMA = 5./3.
 
 
 class Flow:
-    def __init__(self, r, z, massesKg):
+    def __init__(self, r, z, massesKg, *, noSlipWalls=False):
+        if not isinstance(noSlipWalls, (bool, np.bool_)):
+            raise ValueError('Stationary no-slip wall reconstruction must be boolean')
+        self.noSlipWalls = bool(noSlipWalls)
         self.r, self.z = [np.array(v, dtype=float, copy=True) for v in (r, z)]
         for edges in (self.r, self.z):
             if (edges.ndim != 1 or len(edges) < 3 or not np.all(np.isfinite(edges))
@@ -90,8 +93,9 @@ class Flow:
         """Monotone linear reconstruction about cylindrical volume centroids.
 
         Limit slopes by the actual center-to-face distances on graded grids.
-        Reflected ghost primitives impose impermeable slip Euler boundaries;
-        the separate viscous source supplies azimuthal no-slip braking.
+        The optional viscous-wall stencil reflects tangential velocities for
+        slopes at the outer radius/endwall. Final Riemann ghosts stay slip:
+        only the separate viscous operator supplies wall shear traction.
         """
         values = np.array([p[k] for k in ('densityKgM3', 'pressurePa', 'vrMPS',
                                          'vzMPS', 'omegaRadS', 'massFraction')])
@@ -102,6 +106,10 @@ class Flow:
         normal = 2 if axis == 2 else 3
         ghost_lo[normal] *= -1
         ghost_hi[normal] *= -1
+        if self.noSlipWalls:
+            # Zero stationary-wall velocity, without flattening linear shear.
+            # The lower radial/axial boundaries retain axis/midplane symmetry.
+            ghost_hi[2:5] = -a[2:5, ..., -1:]
         extended = np.concatenate((ghost_lo, a, ghost_hi), axis=-1)
         x = np.r_[2*edges[0]-centers[0], centers, 2*edges[-1]-centers[-1]]
         back = (a-extended[..., :-2])/(centers-edges[:-1])

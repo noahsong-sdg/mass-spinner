@@ -1,0 +1,24 @@
+START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.858349668
+START n16-s512-a0.5-work1
+END n16-s512-a0.5-work1 complete 2.9507295019999997
+START n32-s512-a0.5-work1
+END n32-s512-a0.5-work1 complete 13.075098506000002
+START n16-s256-a0.5-work1
+END n16-s256-a0.5-work1 complete 1.4388151680000014
+START n16-s1024-a0.5-work1
+END n16-s1024-a0.5-work1 complete 5.770140544
+START n16-s512-a0.25-work1
+END n16-s512-a0.25-work1 complete 2.885758710000001
+START n16-s512-a0.5-work0
+END n16-s512-a0.5-work0 complete 2.8507048349999984
+START n64-s256-a0.5-work1
+END n64-s256-a0.5-work1 complete 38.047920643
+START n64-s512-a0.5-work1
+END n64-s512-a0.5-work1 complete 75.226899869
+START n64-s1024-a0.5-work1
+END n64-s1024-a0.5-work1 complete 151.020102652
+START n32-s1024-a0.5-work1
+END n32-s1024-a0.5-work1 complete 24.77370522000001
+START n128-s1024-a0.5-work1
+END n128-s1024-a0.5-work1 complete 1046.1694808989998

@@ -1,0 +1,1262 @@
+{
+  "gates": [
+    {
+      "name": "n8-s512-a0.5-work1/native/massKg",
+      "value": 2.220446049250313e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n8-s512-a0.5-work1/native/energyJ",
+      "value": 2.6499585270567394e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n8-s512-a0.5-work1/v86/massKg",
+      "value": 4.440892098500626e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n8-s512-a0.5-work1/v86/energyJ",
+      "value": 3.086420008457935e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n8-s512-a0.5-work1/wall-angular-budget",
+      "value": 0.0002022437705914895,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work1/native/massKg",
+      "value": 2.220446049250313e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work1/native/energyJ",
+      "value": 2.6149085241566894e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work1/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work1/v86/energyJ",
+      "value": 9.547918011776346e-15,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work1/wall-angular-budget",
+      "value": 4.769501753453345e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n32-s512-a0.5-work1/native/massKg",
+      "value": 3.3306690738754696e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n32-s512-a0.5-work1/native/energyJ",
+      "value": 2.606644888825116e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n32-s512-a0.5-work1/v86/massKg",
+      "value": 2.220446049250313e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n32-s512-a0.5-work1/v86/energyJ",
+      "value": 1.1435297153639112e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n32-s512-a0.5-work1/wall-angular-budget",
+      "value": 1.1916999939838665e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n16-s256-a0.5-work1/native/massKg",
+      "value": 3.3306690738754696e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s256-a0.5-work1/native/energyJ",
+      "value": 5.213807845461105e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s256-a0.5-work1/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s256-a0.5-work1/v86/energyJ",
+      "value": 3.3306690738754696e-16,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s256-a0.5-work1/wall-angular-budget",
+      "value": 4.94630452616509e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n16-s1024-a0.5-work1/native/massKg",
+      "value": 6.661338147750939e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s1024-a0.5-work1/native/energyJ",
+      "value": 1.3093795447893797e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s1024-a0.5-work1/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s1024-a0.5-work1/v86/energyJ",
+      "value": 3.530509218307998e-14,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s1024-a0.5-work1/wall-angular-budget",
+      "value": 4.634336411785423e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.25-work1/native/massKg",
+      "value": 0.0,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.25-work1/native/energyJ",
+      "value": 2.6146259279880013e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.25-work1/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.25-work1/v86/energyJ",
+      "value": 9.547918011776346e-15,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.25-work1/wall-angular-budget",
+      "value": 4.769730298174673e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work0/native/massKg",
+      "value": 0.0,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work0/native/energyJ",
+      "value": 2.6149085718962795e-07,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work0/v86/massKg",
+      "value": 1.1102230246251565e-16,
+      "limit": 1e-08,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work0/v86/energyJ",
+      "value": 9.547918011776346e-15,
+      "limit": 1e-06,
+      "passed": true
+    },
+    {
+      "name": "n16-s512-a0.5-work0/wall-angular-budget",
+      "value": 4.780977996976299e-05,
+      "limit": 0.01,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/rho/fine",
+      "value": 6.44536713807458e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/rho/contraction",
+      "value": 0.44497607249265847,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/T/fine",
+      "value": 2.835071378809745e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/T/contraction",
+      "value": 0.23868293422886758,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/swirl/fine",
+      "value": 0.0012628130272705914,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/swirl/contraction",
+      "value": 0.31257886728268036,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/meridional/fine",
+      "value": 0.004530499685818702,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-whole/meridional/contraction",
+      "value": 0.26791828930506595,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/rho/fine",
+      "value": 5.698499188781898e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/rho/contraction",
+      "value": 0.3057736402491887,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/T/fine",
+      "value": 5.4730606121841146e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/T/contraction",
+      "value": 0.24548412459030278,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/swirl/fine",
+      "value": 0.003073155447103223,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/swirl/contraction",
+      "value": 0.3320433521967267,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/meridional/fine",
+      "value": 0.012409059835617846,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-whole/meridional/contraction",
+      "value": 0.30003315247465745,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/rho/fine",
+      "value": 2.1914222858215925e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/rho/contraction",
+      "value": 0.8281226958843771,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/T/fine",
+      "value": 1.3645356510993938e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/T/contraction",
+      "value": 0.8058410103214158,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/swirl/fine",
+      "value": 1.306410621548852e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/swirl/contraction",
+      "value": 0.9121813719489009,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/meridional/fine",
+      "value": 0.0018687066418828862,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-whole/meridional/contraction",
+      "value": 0.7623995256284237,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/rho/fine",
+      "value": 7.152896334078686e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/rho/contraction",
+      "value": 0.2202939580726756,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/T/fine",
+      "value": 7.642678486714119e-05,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/T/contraction",
+      "value": 0.19703581429444675,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/swirl/fine",
+      "value": 0.002527203117733878,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/swirl/contraction",
+      "value": 0.2512042329022503,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/meridional/fine",
+      "value": 0.00659409193249496,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-whole/meridional/contraction",
+      "value": 0.3463067923473844,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/rho/fine",
+      "value": 1.4137387827411652e-07,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/rho/contraction",
+      "value": 0.447421764921329,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/T/fine",
+      "value": 6.169774794078808e-08,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/T/contraction",
+      "value": 0.5333770202219579,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/swirl/fine",
+      "value": 1.1312244208773115e-07,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/swirl/contraction",
+      "value": 0.423119416912925,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/meridional/fine",
+      "value": 6.904789679667543e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-whole/meridional/contraction",
+      "value": 0.46608280513390504,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/rho/fine",
+      "value": 0.003639948315431918,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/rho/contraction",
+      "value": 0.29259404956690577,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/T/fine",
+      "value": 0.003525087015582497,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/T/contraction",
+      "value": 0.2399167625654473,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/swirl/fine",
+      "value": 0.026607556355262737,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/swirl/contraction",
+      "value": 0.35629457809355525,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/meridional/fine",
+      "value": 0.004530499685818702,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "cross-increment/meridional/contraction",
+      "value": 0.26791828930506595,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/rho/fine",
+      "value": 0.005240958623483387,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/rho/contraction",
+      "value": 0.30280639869330594,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/T/fine",
+      "value": 0.0046443458352693374,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/T/contraction",
+      "value": 0.30911270474807895,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/swirl/fine",
+      "value": 0.06273614926110829,
+      "limit": 0.05,
+      "passed": false
+    },
+    {
+      "name": "native/space-increment/swirl/contraction",
+      "value": 0.5269615976504478,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/meridional/fine",
+      "value": 0.012409059835617846,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "native/space-increment/meridional/contraction",
+      "value": 0.30003315247465745,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/rho/fine",
+      "value": 0.0020152845990686727,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/rho/contraction",
+      "value": 0.8279548250894311,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/T/fine",
+      "value": 0.001817809632212377,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/T/contraction",
+      "value": 0.8056588747963641,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/swirl/fine",
+      "value": 0.00061819501504834,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/swirl/contraction",
+      "value": 0.9120522387429586,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/meridional/fine",
+      "value": 0.0018687066418828862,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "native/time-increment/meridional/contraction",
+      "value": 0.7623995256284237,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/rho/fine",
+      "value": 0.006559335818234111,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/rho/contraction",
+      "value": 0.21819749660212598,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/T/fine",
+      "value": 0.010069270908206656,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/T/contraction",
+      "value": 0.1945625113361692,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/swirl/fine",
+      "value": 0.005475614106593612,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/swirl/contraction",
+      "value": 0.27723334780342046,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/meridional/fine",
+      "value": 0.00659409193249496,
+      "limit": 0.05,
+      "passed": true
+    },
+    {
+      "name": "v86/space-increment/meridional/contraction",
+      "value": 0.3463067923473844,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/rho/fine",
+      "value": 1.2964241339667416e-05,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/rho/contraction",
+      "value": 0.4474346923502067,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/T/fine",
+      "value": 8.172857137803028e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/T/contraction",
+      "value": 0.533376043258216,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/swirl/fine",
+      "value": 5.405291283896331e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/swirl/contraction",
+      "value": 0.4231242605925389,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/meridional/fine",
+      "value": 6.904789679667543e-06,
+      "limit": 0.02,
+      "passed": true
+    },
+    {
+      "name": "v86/time-increment/meridional/contraction",
+      "value": 0.46608280513390504,
+      "limit": 1.0,
+      "passed": true
+    },
+    {
+      "name": "wedge/rho",
+      "value": 3.8080952723824374e-05,
+      "limit": 0.001,
+      "passed": true
+    },
+    {
+      "name": "wedge/T",
+      "value": 9.760968743383778e-07,
+      "limit": 0.001,
+      "passed": true
+    },
+    {
+      "name": "wedge/swirl",
+      "value": 5.7681770016004096e-05,
+      "limit": 0.001,
+      "passed": true
+    },
+    {
+      "name": "wedge/meridional",
+      "value": 3.507090301765421e-05,
+      "limit": 0.001,
+      "passed": true
+    }
+  ],
+  "comparisons": {
+    "cross-whole": [
+      {
+        "rho": {
+          "absoluteRMS": 4.2827401195047415e-07,
+          "scaleRMS": 0.0010000581298786125,
+          "relative": 0.0004282491178812358
+        },
+        "T": {
+          "absoluteRMS": 1.5931861073029996,
+          "scaleRMS": 2900.619584206977,
+          "relative": 0.0005492571711152441
+        },
+        "swirl": {
+          "absoluteRMS": 1.334234568686303,
+          "scaleRMS": 112.10574504314906,
+          "relative": 0.011901571754175146
+        },
+        "meridional": {
+          "absoluteRMS": 0.7394925219377643,
+          "scaleRMS": 13.844417263052781,
+          "relative": 0.053414492490867146
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.4485611255848934e-07,
+          "scaleRMS": 0.0010000594638288735,
+          "relative": 0.00014484749937157396
+        },
+        "T": {
+          "absoluteRMS": 0.3445231215343307,
+          "scaleRMS": 2900.519195817439,
+          "relative": 0.00011877981088045701
+        },
+        "swirl": {
+          "absoluteRMS": 0.4527243969661953,
+          "scaleRMS": 112.0609909297405,
+          "relative": 0.0040399820955540405
+        },
+        "meridional": {
+          "absoluteRMS": 0.23167102885739613,
+          "scaleRMS": 13.70023397801025,
+          "relative": 0.01691000527649695
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 6.445750782151729e-08,
+          "scaleRMS": 0.001000059522455266,
+          "relative": 6.44536713807458e-05
+        },
+        "T": {
+          "absoluteRMS": 0.08223104830488152,
+          "scaleRMS": 2900.49304999879,
+          "relative": 2.835071378809745e-05
+        },
+        "swirl": {
+          "absoluteRMS": 0.14150069833751477,
+          "scaleRMS": 112.05197862374797,
+          "relative": 0.0012628130272705914
+        },
+        "meridional": {
+          "absoluteRMS": 0.06193641342582452,
+          "scaleRMS": 13.670989453922024,
+          "relative": 0.004530499685818702
+        }
+      }
+    ],
+    "native/whole": {
+      "space": [
+        {
+          "rho": {
+            "absoluteRMS": 1.8636466600842983e-07,
+            "scaleRMS": 0.0010000072027983027,
+            "relative": 0.00018636332367099841
+          },
+          "T": {
+            "absoluteRMS": 0.6467355742096693,
+            "scaleRMS": 2900.8141426906354,
+            "relative": 0.00022294967633113957
+          },
+          "swirl": {
+            "absoluteRMS": 1.0302856236934288,
+            "scaleRMS": 111.31864238554111,
+            "relative": 0.00925528376572485
+          },
+          "meridional": {
+            "absoluteRMS": 0.5725907313559074,
+            "scaleRMS": 13.844417263052781,
+            "relative": 0.04135896227889679
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 5.6985467405319404e-08,
+            "scaleRMS": 0.0010000083446094256,
+            "relative": 5.698499188781898e-05
+          },
+          "T": {
+            "absoluteRMS": 0.15874980974293174,
+            "scaleRMS": 2900.5673606011833,
+            "relative": 5.4730606121841146e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.3437639024438435,
+            "scaleRMS": 111.86023888504491,
+            "relative": 0.003073155447103223
+          },
+          "meridional": {
+            "absoluteRMS": 0.1700070231950939,
+            "scaleRMS": 13.70023397801025,
+            "relative": 0.012409059835617846
+          }
+        }
+      ],
+      "time": [
+        {
+          "rho": {
+            "absoluteRMS": 2.6462751891368885e-08,
+            "scaleRMS": 0.0010000083315107754,
+            "relative": 2.646253141850323e-05
+          },
+          "T": {
+            "absoluteRMS": 0.049114682247013056,
+            "scaleRMS": 2900.519684601877,
+            "relative": 1.6933062894815175e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.0016020473335316052,
+            "scaleRMS": 111.86052153306778,
+            "relative": 1.43218296461993e-05
+          },
+          "meridional": {
+            "absoluteRMS": 0.033580448792848605,
+            "scaleRMS": 13.70023397801025,
+            "relative": 0.002451085787786352
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 2.191440596208706e-08,
+            "scaleRMS": 0.0010000083554809276,
+            "relative": 2.1914222858215925e-05
+          },
+          "T": {
+            "absoluteRMS": 0.039578618493910395,
+            "scaleRMS": 2900.519195817439,
+            "relative": 1.3645356510993938e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.0014613540420841458,
+            "scaleRMS": 111.86023888504491,
+            "relative": 1.306410621548852e-05
+          },
+          "meridional": {
+            "absoluteRMS": 0.02562452353912931,
+            "scaleRMS": 13.712437771029888,
+            "relative": 0.0018687066418828862
+          }
+        }
+      ]
+    },
+    "v86/whole": {
+      "space": [
+        {
+          "rho": {
+            "absoluteRMS": 3.247167410981741e-07,
+            "scaleRMS": 0.0010000583373223275,
+            "relative": 0.0003246977990980091
+          },
+          "T": {
+            "absoluteRMS": 1.1251608581150558,
+            "scaleRMS": 2900.776033903979,
+            "relative": 0.00038788270620147456
+          },
+          "swirl": {
+            "absoluteRMS": 1.127823305824508,
+            "scaleRMS": 112.10574504314906,
+            "relative": 0.010060352441263498
+          },
+          "meridional": {
+            "absoluteRMS": 0.2587099182889216,
+            "scaleRMS": 13.586859702332308,
+            "relative": 0.01904118567180845
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 7.153321672682245e-08,
+            "scaleRMS": 0.0010000594638288735,
+            "relative": 7.152896334078686e-05
+          },
+          "T": {
+            "absoluteRMS": 0.22168018605580866,
+            "scaleRMS": 2900.5562178387213,
+            "relative": 7.642678486714119e-05
+          },
+          "swirl": {
+            "absoluteRMS": 0.28320088565398804,
+            "scaleRMS": 112.0609909297405,
+            "relative": 0.002527203117733878
+          },
+          "meridional": {
+            "absoluteRMS": 0.09006603563638994,
+            "scaleRMS": 13.658595688142354,
+            "relative": 0.00659409193249496
+          }
+        }
+      ],
+      "time": [
+        {
+          "rho": {
+            "absoluteRMS": 3.1599331207528446e-10,
+            "scaleRMS": 0.0010000594672654255,
+            "relative": 3.159745219345209e-07
+          },
+          "T": {
+            "absoluteRMS": 0.00033550966526358934,
+            "scaleRMS": 2900.4809978753656,
+            "relative": 1.15673802210514e-07
+          },
+          "swirl": {
+            "absoluteRMS": 2.995989418124976e-05,
+            "scaleRMS": 112.0609909297405,
+            "relative": 2.6735346468633215e-07
+          },
+          "meridional": {
+            "absoluteRMS": 0.00020234749486872146,
+            "scaleRMS": 13.658734356232136,
+            "relative": 1.4814512793888213e-05
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 1.413822849062214e-10,
+            "scaleRMS": 0.0010000594638288735,
+            "relative": 1.4137387827411652e-07
+          },
+          "T": {
+            "absoluteRMS": 0.00017895314548792204,
+            "scaleRMS": 2900.4809974533446,
+            "relative": 6.169774794078808e-08
+          },
+          "swirl": {
+            "absoluteRMS": 1.2676613714169111e-05,
+            "scaleRMS": 112.06099762536837,
+            "relative": 1.1312244208773115e-07
+          },
+          "meridional": {
+            "absoluteRMS": 9.430973054623693e-05,
+            "scaleRMS": 13.658595688142354,
+            "relative": 6.904789679667543e-06
+          }
+        }
+      ]
+    },
+    "cross-increment": [
+      {
+        "rho": {
+          "absoluteRMS": 4.2525422818959584e-07,
+          "scaleRMS": 1.078253849088091e-05,
+          "relative": 0.039439156980449926
+        },
+        "T": {
+          "absoluteRMS": 1.5041767872918361,
+          "scaleRMS": 22.113454618087278,
+          "relative": 0.06802088652677196
+        },
+        "swirl": {
+          "absoluteRMS": 0.3035070513954527,
+          "scaleRMS": 2.379749102022556,
+          "relative": 0.12753741608201516
+        },
+        "meridional": {
+          "absoluteRMS": 0.7394925219377643,
+          "scaleRMS": 13.844417263052781,
+          "relative": 0.053414492490867146
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 1.3566806045135638e-07,
+          "scaleRMS": 1.090555792675859e-05,
+          "relative": 0.01244026773893634
+        },
+        "T": {
+          "absoluteRMS": 0.3217169057254716,
+          "scaleRMS": 21.895992394807315,
+          "relative": 0.014692958415612509
+        },
+        "swirl": {
+          "absoluteRMS": 0.1765083826777128,
+          "scaleRMS": 2.3635759291999996,
+          "relative": 0.0746785328523191
+        },
+        "meridional": {
+          "absoluteRMS": 0.23167102885739613,
+          "scaleRMS": 13.70023397801025,
+          "relative": 0.01691000527649695
+        }
+      },
+      {
+        "rho": {
+          "absoluteRMS": 3.971523127979043e-08,
+          "scaleRMS": 1.091093274907608e-05,
+          "relative": 0.003639948315431918
+        },
+        "T": {
+          "absoluteRMS": 0.07703665345314022,
+          "scaleRMS": 21.853830306203214,
+          "relative": 0.003525087015582497
+        },
+        "swirl": {
+          "absoluteRMS": 0.06279912390597504,
+          "scaleRMS": 2.3601988498110966,
+          "relative": 0.026607556355262737
+        },
+        "meridional": {
+          "absoluteRMS": 0.06193641342582452,
+          "scaleRMS": 13.670989453922024,
+          "relative": 0.004530499685818702
+        }
+      }
+    ],
+    "native/increment": {
+      "space": [
+        {
+          "rho": {
+            "absoluteRMS": 1.863646660084863e-07,
+            "scaleRMS": 1.0767574677054572e-05,
+            "relative": 0.017307952031725832
+          },
+          "T": {
+            "absoluteRMS": 0.32400182862155585,
+            "scaleRMS": 21.56451847921539,
+            "relative": 0.015024765284411044
+          },
+          "swirl": {
+            "absoluteRMS": 0.2833153222818126,
+            "scaleRMS": 2.379749102022556,
+            "relative": 0.11905260182303339
+          },
+          "meridional": {
+            "absoluteRMS": 0.5725907313559074,
+            "scaleRMS": 13.844417263052781,
+            "relative": 0.04135896227889679
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 5.698546740536069e-08,
+            "scaleRMS": 1.0873100037467092e-05,
+            "relative": 0.005240958623483387
+          },
+          "T": {
+            "absoluteRMS": 0.10111489285874821,
+            "scaleRMS": 21.771611427141774,
+            "relative": 0.0046443458352693374
+          },
+          "swirl": {
+            "absoluteRMS": 0.1482816522842539,
+            "scaleRMS": 2.3635759291999996,
+            "relative": 0.06273614926110829
+          },
+          "meridional": {
+            "absoluteRMS": 0.1700070231950939,
+            "scaleRMS": 13.70023397801025,
+            "relative": 0.012409059835617846
+          }
+        }
+      ],
+      "time": [
+        {
+          "rho": {
+            "absoluteRMS": 2.6462751891368885e-08,
+            "scaleRMS": 1.0871895276592015e-05,
+            "relative": 0.0024340513974913944
+          },
+          "T": {
+            "absoluteRMS": 0.049114682247013056,
+            "scaleRMS": 21.767779713517616,
+            "relative": 0.0022563018779776256
+          },
+          "swirl": {
+            "absoluteRMS": 0.0016020473335316052,
+            "scaleRMS": 2.3635759291999996,
+            "relative": 0.000677806586934506
+          },
+          "meridional": {
+            "absoluteRMS": 0.033580448792848605,
+            "scaleRMS": 13.70023397801025,
+            "relative": 0.002451085787786352
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 2.191440596208706e-08,
+            "scaleRMS": 1.0874099852802133e-05,
+            "relative": 0.0020152845990686727
+          },
+          "T": {
+            "absoluteRMS": 0.039578618493910395,
+            "scaleRMS": 21.772697092456806,
+            "relative": 0.001817809632212377
+          },
+          "swirl": {
+            "absoluteRMS": 0.0014613540420841458,
+            "scaleRMS": 2.36390460374365,
+            "relative": 0.00061819501504834
+          },
+          "meridional": {
+            "absoluteRMS": 0.02562452353912931,
+            "scaleRMS": 13.712437771029888,
+            "relative": 0.0018687066418828862
+          }
+        }
+      ]
+    },
+    "v86/increment": {
+      "space": [
+        {
+          "rho": {
+            "absoluteRMS": 3.2471674109817027e-07,
+            "scaleRMS": 1.080176133313085e-05,
+            "relative": 0.030061462300801672
+          },
+          "T": {
+            "absoluteRMS": 1.1444463979040993,
+            "scaleRMS": 22.113454618087278,
+            "relative": 0.051753397091019025
+          },
+          "swirl": {
+            "absoluteRMS": 0.045148222649689186,
+            "scaleRMS": 2.2858792947945963,
+            "relative": 0.019750921561125605
+          },
+          "meridional": {
+            "absoluteRMS": 0.2587099182889216,
+            "scaleRMS": 13.586859702332308,
+            "relative": 0.01904118567180845
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 7.153321672681455e-08,
+            "scaleRMS": 1.090555792675859e-05,
+            "relative": 0.006559335818234111
+          },
+          "T": {
+            "absoluteRMS": 0.22047667922734748,
+            "scaleRMS": 21.895992394807315,
+            "relative": 0.010069270908206656
+          },
+          "swirl": {
+            "absoluteRMS": 0.012841536418941618,
+            "scaleRMS": 2.345223050594111,
+            "relative": 0.005475614106593612
+          },
+          "meridional": {
+            "absoluteRMS": 0.09006603563638994,
+            "scaleRMS": 13.658595688142354,
+            "relative": 0.00659409193249496
+          }
+        }
+      ],
+      "time": [
+        {
+          "rho": {
+            "absoluteRMS": 3.1599331207528446e-10,
+            "scaleRMS": 1.090587306027079e-05,
+            "relative": 2.897460022952426e-05
+          },
+          "T": {
+            "absoluteRMS": 0.00033550966526358934,
+            "scaleRMS": 21.895992394807315,
+            "relative": 1.5322880060150012e-05
+          },
+          "swirl": {
+            "absoluteRMS": 2.995989418124976e-05,
+            "scaleRMS": 2.345249757517997,
+            "relative": 1.2774713688897953e-05
+          },
+          "meridional": {
+            "absoluteRMS": 0.00020234749486872146,
+            "scaleRMS": 13.658734356232136,
+            "relative": 1.4814512793888213e-05
+          }
+        },
+        {
+          "rho": {
+            "absoluteRMS": 1.413822849062214e-10,
+            "scaleRMS": 1.090555792675859e-05,
+            "relative": 1.2964241339667416e-05
+          },
+          "T": {
+            "absoluteRMS": 0.00017895314548792204,
+            "scaleRMS": 21.896032497642192,
+            "relative": 8.172857137803028e-06
+          },
+          "swirl": {
+            "absoluteRMS": 1.2676613714169111e-05,
+            "scaleRMS": 2.345223050594111,
+            "relative": 5.405291283896331e-06
+          },
+          "meridional": {
+            "absoluteRMS": 9.430973054623693e-05,
+            "scaleRMS": 13.658595688142354,
+            "relative": 6.904789679667543e-06
+          }
+        }
+      ]
+    }
+  },
+  "stressWorkNegativeControl": {
+    "rho": {
+      "absoluteRMS": 4.3279566141620476e-08,
+      "scaleRMS": 1.0880438862129703e-05,
+      "relative": 0.0039777408512682985
+    },
+    "T": {
+      "absoluteRMS": 0.4055440129537384,
+      "scaleRMS": 21.767779713517616,
+      "relative": 0.018630472114797212
+    },
+    "swirl": {
+      "absoluteRMS": 0.0025895993002212413,
+      "scaleRMS": 2.3635759291999996,
+      "relative": 0.0010956277174043415
+    },
+    "meridional": {
+      "absoluteRMS": 0.0592293409455977,
+      "scaleRMS": 13.73956096690696,
+      "relative": 0.004310861248642312
+    }
+  },
+  "spatialMeshes": [
+    8,
+    16,
+    32
+  ],
+  "timestepMesh": 16,
+  "numericalComparisonPass": false,
+  "experimentalQualification": false
+}

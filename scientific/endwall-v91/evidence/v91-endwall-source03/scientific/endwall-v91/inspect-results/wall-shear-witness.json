@@ -1,0 +1,42 @@
+[
+  {
+    "n": 16,
+    "exactTangentialVelocityAtLastInteriorFace": 0.16620710784313747,
+    "reconstructedLeft": 0.16620710784313752,
+    "reconstructedRight": 0.08310355392156873,
+    "physicalAxialRadialMomentumFluxPa": 0.0,
+    "numericalFluxPa": 0.04167566581321015,
+    "physicalWallShearMagnitudePa": 0.0025263480392156874,
+    "artificialFluxOverPhysicalShear": 16.49640713246639
+  },
+  {
+    "n": 32,
+    "exactTangentialVelocityAtLastInteriorFace": 0.08059106691919211,
+    "reconstructedLeft": 0.08059106691919211,
+    "reconstructedRight": 0.040295533459596355,
+    "physicalAxialRadialMomentumFluxPa": 0.0,
+    "numericalFluxPa": 0.020207838377310144,
+    "physicalWallShearMagnitudePa": 0.0024499684343434382,
+    "artificialFluxOverPhysicalShear": 8.24820356623313
+  },
+  {
+    "n": 64,
+    "exactTangentialVelocityAtLastInteriorFace": 0.03967598157051264,
+    "reconstructedLeft": 0.03967598157051265,
+    "reconstructedRight": 0.01983799078525603,
+    "physicalAxialRadialMomentumFluxPa": 0.0,
+    "numericalFluxPa": 0.009948569409584766,
+    "physicalWallShearMagnitudePa": 0.0024122996794871837,
+    "artificialFluxOverPhysicalShear": 4.124101783116629
+  },
+  {
+    "n": 128,
+    "exactTangentialVelocityAtLastInteriorFace": 0.019684232174580325,
+    "reconstructedLeft": 0.019684232174580325,
+    "reconstructedRight": 0.009842116087290452,
+    "physicalAxialRadialMomentumFluxPa": 0.0,
+    "numericalFluxPa": 0.004935730442236292,
+    "physicalWallShearMagnitudePa": 0.0023936026324289476,
+    "artificialFluxOverPhysicalShear": 2.0620508915582527
+  }
+]

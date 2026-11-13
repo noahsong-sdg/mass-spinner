@@ -1,0 +1,109 @@
+test_all_closed_wall_inventories_and_tangential_euler_fluxes (__main__.BoundaryControls.test_all_closed_wall_inventories_and_tangential_euler_fluxes) ... ERROR
+test_axis_and_midplane_keep_the_original_symmetry (__main__.BoundaryControls.test_axis_and_midplane_keep_the_original_symmetry) ... ERROR
+test_coupled_step_conserves_energy_and_keeps_thermal_domain (__main__.BoundaryControls.test_coupled_step_conserves_energy_and_keeps_thermal_domain) ... ERROR
+test_invalid_wall_policy_rejected (__main__.BoundaryControls.test_invalid_wall_policy_rejected) ... ERROR
+test_legacy_coupled_reference_remains_bitwise_unchanged (__main__.BoundaryControls.test_legacy_coupled_reference_remains_bitwise_unchanged) ... ok
+test_linear_endwall_shear_has_exact_zero_advection (__main__.BoundaryControls.test_linear_endwall_shear_has_exact_zero_advection) ... ERROR
+test_linear_outer_wall_shear_reconstructs_both_traces (__main__.BoundaryControls.test_linear_outer_wall_shear_reconstructs_both_traces) ... ERROR
+test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source (test_flow.FlowTests.test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source) ... ok
+test_closed_nonuniform_flow_conserves_all_inventories (test_flow.FlowTests.test_closed_nonuniform_flow_conserves_all_inventories) ... ok
+test_density_and_angular_momentum_actually_transport (test_flow.FlowTests.test_density_and_angular_momentum_actually_transport) ... ok
+test_eos_and_swirl_use_evolving_species_mass (test_flow.FlowTests.test_eos_and_swirl_use_evolving_species_mass) ... ok
+test_invalid_states_rejected_without_clipping (test_flow.FlowTests.test_invalid_states_rejected_without_clipping) ... ok
+test_pressure_gradient_accelerates_towards_low_pressure (test_flow.FlowTests.test_pressure_gradient_accelerates_towards_low_pressure) ... ok
+test_reflecting_faces_have_no_mass_energy_or_species_leak (test_flow.FlowTests.test_reflecting_faces_have_no_mass_energy_or_species_leak) ... ok
+test_rotational_source_is_even_in_spin_and_outward (test_flow.FlowTests.test_rotational_source_is_even_in_spin_and_outward) ... ok
+test_smooth_contact_has_no_first_order_acoustic_mass_diffusion (test_flow.FlowTests.test_smooth_contact_has_no_first_order_acoustic_mass_diffusion) ... ok
+test_uniform_composition_preserved_during_density_pressure_transport (test_flow.FlowTests.test_uniform_composition_preserved_during_density_pressure_transport) ... ok
+test_uniform_gas_stationary (test_flow.FlowTests.test_uniform_gas_stationary) ... ok
+test_zero_mass_flux_rigid_rotation_has_zero_angular_transport (test_flow.FlowTests.test_zero_mass_flux_rigid_rotation_has_zero_angular_transport) ... ok
+test_domain_rejections (test_diffusion86.DiffusionControls.test_domain_rejections) ... ok
+test_exact_divergence_free_extensional_stress_and_variable_mu (test_diffusion86.DiffusionControls.test_exact_divergence_free_extensional_stress_and_variable_mu) ... ok
+test_linear_omega_has_exact_cylindrical_shear (test_diffusion86.DiffusionControls.test_linear_omega_has_exact_cylindrical_shear) ... ok
+test_stationary_uniform_temperature_is_exact_adiabatic_state (test_diffusion86.DiffusionControls.test_stationary_uniform_temperature_is_exact_adiabatic_state) ... ok
+test_step_full_energy_positive_heat_and_boundary_symmetry (test_diffusion86.DiffusionControls.test_step_full_energy_positive_heat_and_boundary_symmetry) ... ok
+test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace (test_diffusion86.DiffusionControls.test_stiffness_symmetry_positive_mechanical_and_constant_heat_nullspace) ... ok
+test_uniform_translation_rotation_and_dilation_have_zero_strain_work (test_diffusion86.DiffusionControls.test_uniform_translation_rotation_and_dilation_have_zero_strain_work) ... ok
+test_driver_seals_native_files_after_state_arrays_are_produced (test_reference90.Controls.test_driver_seals_native_files_after_state_arrays_are_produced) ... START n8-s512-a0.5-work1
+END n8-s512-a0.5-work1 complete 0.00032149999999986356
+ok
+test_equal_states_zero_error_zero_increment_is_unresolved (test_reference90.Controls.test_equal_states_zero_error_zero_increment_is_unresolved) ... ok
+test_finite_positive_and_full_history_admission (test_reference90.Controls.test_finite_positive_and_full_history_admission) ... ok
+test_increment_norm_does_not_hide_local_temperature_error (test_reference90.Controls.test_increment_norm_does_not_hide_local_temperature_error) ... ok
+test_initial_boundaries_and_axis_regular (test_reference90.Controls.test_initial_boundaries_and_axis_regular) ... ok
+test_native_internal_energy_scheme_and_conservative_work_are_explicit (test_reference90.Controls.test_native_internal_energy_scheme_and_conservative_work_are_explicit) ... ok
+test_nested_restriction_preserves_every_conserved_inventory (test_reference90.Controls.test_nested_restriction_preserves_every_conserved_inventory) ... ok
+test_partial_campaign_never_qualifies (test_reference90.Controls.test_partial_campaign_never_qualifies) ... ok
+
+======================================================================
+ERROR: test_all_closed_wall_inventories_and_tangential_euler_fluxes (__main__.BoundaryControls.test_all_closed_wall_inventories_and_tangential_euler_fluxes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 51, in test_all_closed_wall_inventories_and_tangential_euler_fluxes
+    f=self.flow();q=f.state(RHO,2900.,.4,700.,vr=3.,vz=-2.)
+      ^^^^^^^^^^^
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 17, in flow
+    return Flow(r,z,[M_AR,M_AR],noSlipWalls=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+======================================================================
+ERROR: test_axis_and_midplane_keep_the_original_symmetry (__main__.BoundaryControls.test_axis_and_midplane_keep_the_original_symmetry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 41, in test_axis_and_midplane_keep_the_original_symmetry
+    f=self.flow();legacy=Flow(f.r,f.z,f.masses)
+      ^^^^^^^^^^^
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 17, in flow
+    return Flow(r,z,[M_AR,M_AR],noSlipWalls=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+======================================================================
+ERROR: test_coupled_step_conserves_energy_and_keeps_thermal_domain (__main__.BoundaryControls.test_coupled_step_conserves_energy_and_keeps_thermal_domain)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 60, in test_coupled_step_conserves_energy_and_keeps_thermal_domain
+    f=self.flow();r,z=np.meshgrid(f.mean_r,(f.z[:-1]+f.z[1:])/2)
+      ^^^^^^^^^^^
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 17, in flow
+    return Flow(r,z,[M_AR,M_AR],noSlipWalls=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+======================================================================
+ERROR: test_invalid_wall_policy_rejected (__main__.BoundaryControls.test_invalid_wall_policy_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 72, in test_invalid_wall_policy_rejected
+    Flow(np.linspace(0,R,5),np.linspace(0,H,5),[M_AR,M_AR],noSlipWalls=value)
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+======================================================================
+ERROR: test_linear_endwall_shear_has_exact_zero_advection (__main__.BoundaryControls.test_linear_endwall_shear_has_exact_zero_advection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 21, in test_linear_endwall_shear_has_exact_zero_advection
+    f=self.flow(graded);r,z=np.meshgrid(f.mean_r,(f.z[:-1]+f.z[1:])/2)
+      ^^^^^^^^^^^^^^^^^
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 17, in flow
+    return Flow(r,z,[M_AR,M_AR],noSlipWalls=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+======================================================================
+ERROR: test_linear_outer_wall_shear_reconstructs_both_traces (__main__.BoundaryControls.test_linear_outer_wall_shear_reconstructs_both_traces)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 32, in test_linear_outer_wall_shear_reconstructs_both_traces
+    f=self.flow(graded)
+      ^^^^^^^^^^^^^^^^^
+  File "/work/project/v91-endwall-source03/scientific/endwall-v91/test91.py", line 17, in flow
+    return Flow(r,z,[M_AR,M_AR],noSlipWalls=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Flow.__init__() got an unexpected keyword argument 'noSlipWalls'
+
+----------------------------------------------------------------------
+Ran 34 tests in 0.975s
+
+FAILED (errors=6)
