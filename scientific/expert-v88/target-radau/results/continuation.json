@@ -1,0 +1,59 @@
+{
+  "browserSHA256": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+  "commands": [
+    {
+      "name": "controls-final",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/scientific/expert-v88/target-radau",
+        "-p",
+        "test_reference.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "diagnosis",
+      "command": [
+        "/work/home/v75-deps/node_modules/.bin/tsx",
+        "/work/project/scientific/expert-v88/target-radau/diagnose.ts"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "radau",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "/work/project/scientific/expert-v88/target-radau/reference.py"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "sourceSHA256": {
+    "scientific/expert-v88/target-radau/PROTOCOL.md": "3f54ea2bd10f889b0e9a5c150b666a86f1f2ed25d77bd6fd40c04ff4addbdec8",
+    "scientific/expert-v88/target-radau/cases.json": "d50d6d3df7d696c17feadbeeb7898f742fafac4b02af86030da6407e71829525",
+    "scientific/expert-v88/target-radau/diagnose.ts": "654e477735b399adfa85e51f5bebb73903f690bb683fd1fb357733f6bb12c73d",
+    "scientific/expert-v88/target-radau/export.ts": "808d0305e9bb232715b6024ae2e204db94301f18c4f7fce3aec51f96f1139ce4",
+    "scientific/expert-v88/target-radau/reference.py": "64ca1b7815595591edc6ad984decd79adef417039b8c0071baeb270a6bc96463",
+    "scientific/expert-v88/target-radau/run.py": "17b0297dc7b2c644b65a42e58eadeda1cda83bc638927dc5e11e8615063bd391",
+    "scientific/expert-v88/target-radau/test_reference.py": "4071ab5d5cf796169f483a046bcaa66c6e6f4ea92d6c041342500720682ce8b1",
+    "scientific/expert-v88/target-radau/continue.py": "6cfcb8ec073d17b05101e087eff08dcd03a84cb8f09fdce9a1357b836f801b2c"
+  },
+  "artifactSHA256": {
+    "browser.json": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+    "execution.json": "7f0b4f6e533a494b0eb629cc27718fe625c63a7f99e967aedc05a957c20c3f84",
+    "diagnostic-source.ts": "e49bfe6aafb75c834027b9b71d8941cac0f1fbb8b4a1d607a43bc6c7f1e31868",
+    "reference.json": "8612bcfbd3ef0395ad48bf23bbc50d497b81e00d6b67079786c145df32b55418",
+    "logs/browser.log": "ef377ffaf31b32af5542fdf57120fa02aa5381f6189e27a436455144f03a712d",
+    "logs/controls.log": "c38701f413164889a9b43e48c1fd2c816e8f34c9c02a2caf327518e5861495e2",
+    "logs/controls-final.log": "354063952de0eef8ea781c8ab2867c00ac589c0f3da1cd7f33c1954abe5ebb02",
+    "logs/diagnosis.log": "de1a176b55779414f70d23292cc2fce77b818500c8433a7bd407c4ddf7bac7d5",
+    "logs/radau.log": "76ad252b9ff4b2250593b731a699b6b5c9dfd440a2ee633854aed27220ccc14b"
+  },
+  "experimentalQualification": false
+}

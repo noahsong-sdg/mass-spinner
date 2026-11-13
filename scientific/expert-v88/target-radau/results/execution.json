@@ -1,0 +1,46 @@
+{
+  "startedUTC": "2026-11-13T01:04:16.003579+00:00",
+  "python": "3.11.2 (main, Oct  7 2026, 12:35:07) [GCC 12.2.0]",
+  "platform": "Linux-6.18.35-aarch64-with-glibc2.36",
+  "network": "offline safe-dev",
+  "commands": [
+    {
+      "name": "controls",
+      "command": [
+        "/work/home/diagnostic-v72-venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/work/project/scientific/expert-v88/target-radau",
+        "-p",
+        "test_reference.py",
+        "-v"
+      ],
+      "exitCode": 0
+    },
+    {
+      "name": "browser",
+      "command": [
+        "/work/home/v75-deps/node_modules/.bin/tsx",
+        "/work/project/scientific/expert-v88/target-radau/export.ts"
+      ],
+      "exitCode": 1
+    }
+  ],
+  "sourceSHA256": {
+    "scientific/expert-v88/target-radau/PROTOCOL.md": "3f54ea2bd10f889b0e9a5c150b666a86f1f2ed25d77bd6fd40c04ff4addbdec8",
+    "scientific/expert-v88/target-radau/cases.json": "d50d6d3df7d696c17feadbeeb7898f742fafac4b02af86030da6407e71829525",
+    "scientific/expert-v88/target-radau/export.ts": "808d0305e9bb232715b6024ae2e204db94301f18c4f7fce3aec51f96f1139ce4",
+    "scientific/expert-v88/target-radau/reference.py": "f3b86762e6a49a117378eea4f32c76897346e45199c7a081c4e6da639176fca1",
+    "scientific/expert-v88/target-radau/run.py": "17b0297dc7b2c644b65a42e58eadeda1cda83bc638927dc5e11e8615063bd391",
+    "scientific/expert-v88/target-radau/test_reference.py": "4071ab5d5cf796169f483a046bcaa66c6e6f4ea92d6c041342500720682ce8b1"
+  },
+  "experimentalQualification": false,
+  "finishedUTC": "2026-11-13T01:04:17.217509+00:00",
+  "artifactSHA256": {
+    "browser.json": "63e73efb9bcebbe4364da335c8635179d0fe75383516fb7cc482dd4c989838b4",
+    "logs/browser.log": "ef377ffaf31b32af5542fdf57120fa02aa5381f6189e27a436455144f03a712d",
+    "logs/controls.log": "c38701f413164889a9b43e48c1fd2c816e8f34c9c02a2caf327518e5861495e2"
+  }
+}

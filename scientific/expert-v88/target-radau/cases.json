@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "stepsS": [0.002, 0.001, 0.0005],
+  "beam": {"beamEnergyKeV":100,"beamCurrentA":0.001,"targetColumnM2":6e19,"materialColumnM2":1e20,"stoppingModel":"geant4-bragg","stoppingFraction":0.2,"beamAreaM2":0.0001,"alphaDepositedFraction":0.7,"acceleratorEfficiency":0.8,"exposureS":0.4,"intervals":400},
+  "config": {"depthCells":2,"backingCells":2,"filmThicknessM":0.00001,"filmConductivityWMK":1,"filmHeatCapacityJm3K":2000000,"backingThicknessM":0.0001,"backingConductivityWMK":10,"backingHeatCapacityJm3K":3000000,"contactResistanceM2KPerW":0.00001,"backHeatTransferWM2K":1000,"coolantK":300,"initialK":400,"replacementProbability":0.7,"implantationWeights":[1,3],"diffusivityM2S":1e-10,"diffusionActivationEV":0.05,"releaseAttemptRateS":0.2,"releaseActivationEV":0.03,"surfaceReleaseVelocityMS":2e-7,"surfaceReleaseActivationEV":0.01,"backPermeationVelocityMS":1e-7,"backPermeationActivationEV":0.02,"renewalRateS":0.05,"renewalTritiumFraction":0.8,"pulsePeriodS":0.12,"pulseDuty":1,"cooldownS":0.2,"relativeTolerance":0.01,"absoluteTolerance":0.0001,"maxStepS":0.002,"samples":10},
+  "cases": [
+    {"id":"beam-off-two","beam":{"beamCurrentA":0},"config":{}},
+    {"id":"continuous-two","beam":{},"config":{}},
+    {"id":"pulsed-four","beam":{},"config":{"depthCells":4,"implantationWeights":[1,2,3,4],"pulseDuty":0.4}}
+  ]
+}

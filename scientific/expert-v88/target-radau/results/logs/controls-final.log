@@ -1,0 +1,14 @@
+test_beam_partition_closes_without_thermal_solver (test_reference.RadauControls.test_beam_partition_closes_without_thermal_solver) ... ok
+test_budget_rejects_corruption_and_negative_saved_populations (test_reference.RadauControls.test_budget_rejects_corruption_and_negative_saved_populations) ... ok
+test_closed_diffusion_transfers_without_creating_species_or_energy (test_reference.RadauControls.test_closed_diffusion_transfers_without_creating_species_or_energy) ... ok
+test_full_rhs_species_projectile_and_heat_derivative_identities (test_reference.RadauControls.test_full_rhs_species_projectile_and_heat_derivative_identities) ... ok
+test_invalid_domain_rejected_without_floors (test_reference.RadauControls.test_invalid_domain_rejected_without_floors) ... ok
+test_native_atomic_values_match_retained_cpp_execution (test_reference.RadauControls.test_native_atomic_values_match_retained_cpp_execution) ... ok
+test_radau_pulse_clock_does_not_trust_browser_on_flag (test_reference.RadauControls.test_radau_pulse_clock_does_not_trust_browser_on_flag) ... ok
+test_radau_release_matches_analytic_and_self_refines (test_reference.RadauControls.test_radau_release_matches_analytic_and_self_refines) ... ok
+test_stale_producer_source_rejected (test_reference.RadauControls.test_stale_producer_source_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.139s
+
+OK

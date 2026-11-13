@@ -1,0 +1,119 @@
+[
+  {
+    "id": "beam-off-two",
+    "stepS": 0.002,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 445,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.1571135404691784,
+      "maxPackingRoundoff": 0,
+      "packingRoundoffBound": 2.842170943040401e-14
+    }
+  },
+  {
+    "id": "beam-off-two",
+    "stepS": 0.001,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 742,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.08292402071092395,
+      "maxPackingRoundoff": 0,
+      "packingRoundoffBound": 2.842170943040401e-14
+    }
+  },
+  {
+    "id": "beam-off-two",
+    "stepS": 0.0005,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 1375,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.04662505158775322,
+      "maxPackingRoundoff": 0,
+      "packingRoundoffBound": 2.842170943040401e-14
+    }
+  },
+  {
+    "id": "continuous-two",
+    "stepS": 0.002,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 445,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.06454679734171674,
+      "maxPackingRoundoff": 1.7319479184152442e-14,
+      "packingRoundoffBound": 2.842170943040401e-14
+    }
+  },
+  {
+    "id": "continuous-two",
+    "stepS": 0.001,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 742,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.058603604365718154,
+      "maxPackingRoundoff": 5.662137425588298e-15,
+      "packingRoundoffBound": 2.842170943040401e-14
+    }
+  },
+  {
+    "id": "continuous-two",
+    "stepS": 0.0005,
+    "completed": false
+  },
+  {
+    "id": "pulsed-four",
+    "stepS": 0.002,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 445,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.06518716164429246,
+      "maxPackingRoundoff": 2.020605904817785e-14,
+      "packingRoundoffBound": 5.684341886080802e-14
+    }
+  },
+  {
+    "id": "pulsed-four",
+    "stepS": 0.001,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 742,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.059551106366000375,
+      "maxPackingRoundoff": 3.552713678800501e-15,
+      "packingRoundoffBound": 5.684341886080802e-14
+    }
+  },
+  {
+    "id": "pulsed-four",
+    "stepS": 0.0005,
+    "completed": true,
+    "solver": {
+      "method": "IMEX-Euler-step-doubling",
+      "order": 1,
+      "acceptedSteps": 1375,
+      "rejectedSteps": 0,
+      "maxErrorRatio": 0.03776499591721334,
+      "maxPackingRoundoff": 4.96269692007445e-14,
+      "packingRoundoffBound": 5.684341886080802e-14
+    }
+  }
+]
