@@ -86,8 +86,21 @@ def metrics(a, b, ti, order):
     return result
 
 
-def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
+def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None, *,
+          jobs=None, reporting_times=None, comparison_groups=None):
     path, root = Path(path).resolve(), Path(root).resolve()
+    declared_jobs = JOBS if jobs is None else set(jobs)
+    times = TIMES if reporting_times is None else tuple(reporting_times)
+    groups = ([('spatial', [(n, .1) for n in (1, 2, 4)]),
+               ('timestep', [(2, c) for c in (.2, .1, .05)])]
+              if comparison_groups is None else list(comparison_groups))
+    require(bool(declared_jobs) and all(type(n) is int and n > 0 and
+        np.isfinite(cfl) and cfl > 0 for n, cfl in declared_jobs), 'Invalid declared jobs')
+    require(len(times) >= 2 and times[0] == 0 and np.isfinite(times).all() and
+        np.all(np.diff(times) > 0), 'Invalid reporting clocks')
+    require(all(kind in ('spatial', 'timestep') and len(keys) == 3
+        and len(set(keys)) == 3 and set(keys) <= declared_jobs for kind, keys in groups),
+        'Invalid comparison layout')
     require(cfl_field in ('actualCfl', 'cflBound'), 'Select explicit configured-CFL metadata schema')
     raw = path.read_bytes()
     packet = json.loads(raw)
@@ -96,16 +109,18 @@ def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
     baseline = json.loads(baseline_raw)
     require(packet['sourceSHA256'] == {p: sha((root/p).read_bytes()) for p in SOURCES}, 'Source seal mismatch')
     require(packet['manifest'] == baseline['manifest'] and packet['scenario'] == baseline['scenarios'][0], 'Changed physical inputs')
-    require(packet['timesS'] == list(TIMES), 'Changed reporting clocks')
+    require(packet['timesS'] == list(times), 'Changed reporting clocks')
     for flag in ('targetVelocityRead', 'currentFitted', 'velocityFitted', 'experimentalQualification'):
         require(packet[flag] is False, 'False fitting/qualification claim')
     require(packet['conditionalRelease'] is True, 'Conditional scope missing')
     cases = {(c['refinement'], c['cfl']): c for c in packet['cases']}
-    require(len(packet['cases']) == 5 and set(cases) == JOBS, 'Incomplete/duplicate job matrix')
+    require(len(packet['cases']) == len(declared_jobs) and set(cases) == declared_jobs, 'Incomplete/duplicate job matrix')
     gates, states, sequences, ledgers = [], {}, {}, {}
     def gate(kind, context, value, limit):
         valid = value is not None and np.isfinite(value) and 0 <= value < limit
         gates.append(dict(kind=kind, context=context, value=value if value is None or np.isfinite(value) else None, limit=limit, passed=bool(valid)))
+    if not groups:
+        gate('missingComparison', 'layout', None, .05)
     for key, case in cases.items():
         n, cfl = key
         name = str(key)
@@ -132,7 +147,7 @@ def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
             require(state[flag] is expected, 'State qualification scope drift')
         require(state['cfl'] == cfl, 'State CFL drift')
         snaps, history = state['snapshots'], state['history']
-        require([s['timeS'] for s in snaps] == list(TIMES), 'Snapshot clock drift')
+        require([s['timeS'] for s in snaps] == list(times), 'Snapshot clock drift')
         require(len(history) == case['stepCount'] and len(history) > 0, 'Missing step history')
         rc = (2/3)*np.diff(r**3)/np.diff(r*r)
         overlap = np.maximum(0., np.minimum(r[1:], .004)**2-r[:-1]**2)
@@ -146,7 +161,7 @@ def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
         elapsed, cumulative = 0., {}
         for h in history:
             dt, t, unit = (h[k] for k in ('dtS', 'timeS', 'unitCflStableDtS'))
-            target = next((v for v in TIMES if v > elapsed+1e-18), None)
+            target = next((v for v in times if v > elapsed+1e-18), None)
             if elapsed in archived:
                 require(np.isclose(unit, unit_clock(r, z, archived[elapsed]['q']), rtol=2e-12, atol=0), 'Independent acoustic CFL mismatch')
             require(target is not None and np.isfinite([dt, t, unit, h[cfl_field]]).all() and
@@ -166,7 +181,7 @@ def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
             scale = max(abs(initial[3]), abs(h['externalAngularImpulseKgM2S']), abs(h['wallAngularImpulseKgM2S']), np.finfo(float).tiny)
             gate('hydroAngular', name+'/'+str(t), abs(h['hydroAngularDefectKgM2S'])/scale, 1e-10)
             cumulative[t] = h
-        require(abs(elapsed-TIMES[-1]) < 1e-16, 'Truncated trajectory')
+        require(abs(elapsed-times[-1]) < 1e-16, 'Truncated trajectory')
         for s in snaps:
             rebuilt = primitive(r, z, s['q'])
             for metric, expected in rebuilt.items():
@@ -189,29 +204,32 @@ def audit(path, root=ROOT, cfl_field='actualCfl', expected_edges=None):
         realized = [h['dtS']/h['unitCflStableDtS'] for h in history]
         states[key], sequences[key], ledgers[name] = state, [h['dtS'] for h in history], dict(discreteTorqueNm=discrete, continuumDiskTorqueNm=continuum, realizedCflRange=[min(realized), max(realized)])
     comparisons, quadratures = [], []
-    for kind, keys, limit in [('spatial', [(n, .1) for n in (1, 2, 4)], .05),
-                              ('timestep', [(2, c) for c in (.2, .1, .05)], .02)]:
+    for group_index, (kind, keys) in enumerate(groups):
+        limit = .05 if kind == 'spatial' else .02
+        repeated = sum(group_kind == kind for group_kind, _ in groups) > 1
+        context_kind = kind+'['+str(group_index)+']' if repeated else kind
+        group_tag = dict(groupIndex=group_index) if repeated else {}
         if not all(k in states for k in keys):
-            gate('missingComparison', kind, None, limit)
+            gate('missingComparison', context_kind, None, limit)
             continue
         if kind == 'timestep':
             for a, b in zip(keys[:-1], keys[1:]):
                 gate('distinctClocks', str((a, b)), 0. if sequences[a] != sequences[b] else 1., 1.)
-        for ti, t in enumerate(TIMES):
+        for ti, t in enumerate(times):
             pairs = [{order: metrics(states[a], states[b], ti, order) for order in (2, 3)}
                      for a, b in zip(keys[:-1], keys[1:])]
             for field in pairs[0][2]:
                 x, y = (pair[2][field]['value'] for pair in pairs)
                 contraction = x is not None and y is not None and (y < x or x == y == 0)
-                gate('refinement', kind+'/'+str(t)+'/'+field, y, limit)
-                gate('contraction', kind+'/'+str(t)+'/'+field, 0. if contraction else 1., 1.)
-                comparisons.append(dict(kind=kind, timeS=t, field=field, coarseChange=x, fineChange=y, contraction=bool(contraction), limit=limit))
+                gate('refinement', context_kind+'/'+str(t)+'/'+field, y, limit)
+                gate('contraction', context_kind+'/'+str(t)+'/'+field, 0. if contraction else 1., 1.)
+                comparisons.append(dict(kind=kind, timeS=t, field=field, coarseChange=x, fineChange=y, contraction=bool(contraction), limit=limit, **group_tag))
                 for index, pair in enumerate(pairs):
                     for term in ('errorIntegral', 'referenceIntegral'):
                         a, b = (pair[o][field][term] for o in (2, 3))
                         spread = abs(a-b)/max(abs(a), abs(b)) if a or b else 0.
-                        gate('panelQuadrature', kind+'/'+str(t)+'/'+field+'/'+str(index)+'/'+term, spread, 1e-10)
-                        quadratures.append(dict(kind=kind, timeS=t, field=field, pair=index, term=term, values=[a, b], relativeSpread=spread))
+                        gate('panelQuadrature', context_kind+'/'+str(t)+'/'+field+'/'+str(index)+'/'+term, spread, 1e-10)
+                        quadratures.append(dict(kind=kind, timeS=t, field=field, pair=index, term=term, values=[a, b], relativeSpread=spread, **group_tag))
     return dict(predictionSHA256=sha(raw), producerSourceSHA256=packet['sourceSHA256'],
         auditorSHA256=sha(Path(__file__).read_bytes()), caseCount=len(cases), gates=gates,
         primitiveInterpolationSHA256=sha((ROOT/'scientific/meridional-v86/audit86.py').read_bytes()),
