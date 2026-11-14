@@ -1,8 +1,9 @@
 # V107: resolve the radial response before changing the physics
 
-Status: three of nine full-clock trajectories have completed. A separate
-initial-clock diagnostic now records two strict-contraction failures at
-roundoff scale; full qualification remains incomplete. Earlier bounded
+Status: four of nine full-clock trajectories have completed. The declared
+three-level timestep study passes at every reporting clock. A separate
+initial-clock diagnostic records two strict-contraction failures at roundoff
+scale; full qualification remains incomplete. Earlier bounded
 1 microsecond radial and axial checks pass with corrected comparison arithmetic.
 This is research-backend qualification, not an update to the live playground.
 
@@ -307,6 +308,56 @@ its [exact driver](scientific/refinement-v107/q0_diagnostic107.py) and
 The diagnostic executed in 6.83 s; exit zero means successful execution, while
 its two scientific checks explicitly fail. No experimental or live-playground
 qualification follows.
+
+## Complete timestep triple
+
+The fresh 160 × 48, CFL 0.05 trajectory reached 0/1/2/4 microseconds with
+19,874 accepted steps, 3,630.75 s runtime and 415,416 KiB peak RSS. Its
+prediction seal is `258db38c8b84584101ff26124eeb0a194d0842b119ebcfaecbcd2cc4961fab36`.
+It used the same producer and original initializer, not checkpoint continuation.
+
+The frozen stable auditor admitted all four completed full trajectories and
+scored the complete CFL 0.2/0.1/0.05 triple. All **28 field/time comparisons**
+pass the original 2% timestep limit and contraction rule, with panel checks
+unchanged. Representative middle-to-fine discrepancies are:
+
+| Time | Density increment | Radial velocity | Temperature increment |
+|---|---:|---:|---:|
+| 1 microsecond | 0.082646% | 0.040431% | 0.014397% |
+| 2 microseconds | 0.033985% | 0.016865% | 0.012008% |
+| 4 microseconds | 0.014614% | 0.007790% | 0.003287% |
+
+The largest fine timestep discrepancy is 0.082646%, in the 1 microsecond
+density increment. The audit records **242,154 checks, zero failures**, and
+`caseAdmissionPass: true`. Most checks are repeated step/state/ledger checks,
+not independent physics validations. Analysis took 18.55 s and 437,132 KiB
+peak RSS in the offline, explicitly selected 2 GiB VM.
+The audit seal is `8d85807cb41344ff98b88b791d13a79e9e316694684bd217def84938bd8eb669`.
+
+Its overall status and qualification remain **PENDING**, with
+`fullDeclaredMatrixPass: false`. The five absent full jobs are r4-z1,
+r8-z1, r8-z4, r16-z2 and r16-z4, all at CFL 0.1. Their spatial comparisons
+have not been scored. The separate two-failure axial initial-clock diagnostic
+and the historical six V106 failures remain retained; the successful temporal
+subset supersedes neither. The expensive remaining spatial runs are paused:
+extending these trajectories cannot remove the initial-clock obstacle under
+the frozen rules. No physics or threshold was changed to turn it into a pass.
+
+All **288** exported scientific payload hashes were verified (183,189,157
+bytes), together with all six final application-check artifacts. The application
+source still matches the unchanged 330-input snapshot above. Final commands
+`npm run typecheck`, `npm run build`, `npm run check:site` and
+`npm run check:assets` all passed in its offline 1 GiB VM. This is not a
+deployment or live-model verification.
+
+The [timestep metric review](scientific/refinement-v107/REVIEW-TIMESTEP-METRICS.md)
+rechecks the actual predicates and reports its authorship limitations. The
+[independent physics review](scientific/refinement-v107/REVIEW-TIMESTEP-PHYSICS.md)
+checks the new trajectory and physical interpretation. Large artifact reads
+were serialized to limit host memory. The exact audit controller is retained
+as [run_timestep_audit107.py](scientific/refinement-v107/run_timestep_audit107.py).
+Raw scientific/application evidence, source, drivers and SHA256 sums are in the
+[research prerelease](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v107-timestep-study).
 
 ## Interpretation limits
 
