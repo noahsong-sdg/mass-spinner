@@ -97,3 +97,8 @@ Source inventories are verified unchanged before and after execution.
 The follow-up heat study tests a separate, reproduced thermal discretization
 defect. Its results must be assessed independently; V105 is not relabeled as
 a convergence success if a later method improves the outcome.
+
+[Public source snapshots, raw fields, exact logs and checksums](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v106-density-flow-refinement)
+include the failed attempts and the separate thermal study. Current source
+includes the reviewed wall-test packaging fix; the archived transfer manifest
+identifies the exact earlier full-study snapshot.

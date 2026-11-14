@@ -114,6 +114,16 @@ torsional initializer, so directional differences include initialization and
 evolution. Further targeted radial resolution must be tested before claiming
 the density and radial-flow problem is fixed.
 
+A predeclared extra run then doubles only radial resolution again, to
+160 × 48 cells at 1 µs, using the same V101 mapping. The radial density
+increment discrepancy contracts **20.2706% → 7.4515%**, and radial-flow
+discrepancy **6.9487% → 2.1037%**. It takes 1,499 steps, 273.77 s and
+385,352 KiB peak RSS. Five admission, geometry, stale-data and source-sealing
+controls pass; the prior 2→4 radial comparison is reproduced exactly.
+This strengthens the under-resolution explanation without establishing a
+unique operator cause. Density still exceeds 5%; the original 1/2/4 µs matrix
+remains failed. No new mesh mapping or physical parameter is tuned.
+
 Constant positive scalar conductivity is the candidate's declared domain.
 Variable conductivity, ionization/excitation energy, wall energy exhaust,
 electrode/sheath uncertainty and apparatus calibration are not supplied by
@@ -140,3 +150,41 @@ The first candidate's incorrect top-level FiPy mesh import is retained as a
 failed attempt; candidate02 uses the class's defining module. The old heat
 red test, source inventories, environment and exact execution receipts are
 retained alongside successful controls.
+
+`test_heat106.py` is a solver-neutral witness whose default is deliberately
+the old `Diffusion` for the red control. Select the candidate explicitly:
+
+```sh
+python -c 'import sys,unittest; sys.path.insert(0,"scientific/heat-v106"); import heat106,test_heat106; test_heat106.Method=heat106.FVDiffusion; unittest.main(module=test_heat106,verbosity=2)'
+```
+
+A final generic discovery initially selected that old-method default and
+reproduced its two known failed subcases. That invocation is retained. The
+candidate-discovery runner must bind `Method` before discovery, as in the
+original green run; no physical assertion or tolerance changes.
+The correctly selected combined candidate suite passes all 18 methods in
+`v106-radial01`, whose 103-input transfer SHA256 is
+`8e4a5b3ab30e6b53f615dd3ff89e575b7885a8f389aeded3289b6140458aaced`.
+
+The unchanged 330-input app snapshot also passes `npm run typecheck`,
+`npm run build`, `npm run check:site` and `npm run check:assets` in a separate
+1G VM. Its source-manifest SHA256 is
+`47201c00b9770bd6daf5c11b3fafa39b68adcd046bb2d48c519de064aff5fc3e`.
+These checks establish application compatibility only, not deployed browser
+behavior or adoption of the research candidate.
+
+Independent [thermal](scientific/heat-v106/REVIEW-THERMAL.md) and
+[metrics/evidence](scientific/heat-v106/REVIEW-METRICS.md) reviewers inspected
+actual retained logs and hashes. The adapter author's separate
+[implementation review](scientific/heat-v106/REVIEW-IMPLEMENTATION.md)
+identifies that authorship. All distinguish support for the local fixes from
+the six remaining spatial failures; none approves experimental accuracy.
+The separate [radial review](scientific/heat-v106/REVIEW-RADIAL.md) checks the
+extra refinement and preserves its initialization and fixed-height limits.
+
+[Public raw fields, exact source snapshots, failed attempts, logs and checksums](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v106-density-flow-refinement)
+preserve the evidence separately from the current Git source. The radial
+supplement retains its own inventory and repeats the earlier comparison
+exactly. The next qualification target is sufficient radial resolution at
+all original clocks, including a corresponding timestep study; the 1 µs
+supplement is not a substitute for that full matrix.
