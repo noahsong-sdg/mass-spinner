@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101714"><title>Laurelin · Mass Spinner</title></head>
+<body>
+ <header><a href="/">Mass Spinner</a><span class="divider">/</span><h1>Laurelin</h1><span class="model-label">Concept model</span><button id="home" aria-label="Reset camera">Recenter</button></header>
+ <main>
+  <canvas id="reactor" aria-label="Interactive FRC reactor. Drag to orbit; scroll to zoom. Select hardware to inspect its role and assumed material."></canvas>
+  <p id="graphics-error" role="status" hidden>3D is unavailable in this browser. Controls and plots remain available.</p>
+  <nav class="tools" aria-label="Panels"><button data-panel="controls" aria-expanded="false">Parameters</button><button data-panel="plots" aria-expanded="false">Plots</button><button data-panel="model" aria-expanded="false">Model</button></nav>
+  <aside id="controls" class="panel" aria-label="Parameters" hidden><div class="panel-heading"><h2>Pulse</h2><button data-close="controls" aria-label="Close parameters">×</button></div><div id="sliders"></div><button id="reset">Reset parameters</button></aside>
+  <aside id="plots" class="panel" aria-label="Live plots" hidden><div class="panel-heading"><h2>Pulse traces</h2><button data-close="plots" aria-label="Close plots">×</button></div><div id="charts"></div><h3>Per pulse</h3><dl id="ledger"></dl></aside>
+  <aside id="model" class="panel" aria-label="Model details" hidden><div class="panel-heading"><h2>What is solved</h2><button data-close="model" aria-label="Close model details">×</button></div>
+   <label for="component-select">Inspect component<select id="component-select"><option value="">Choose a component</option></select></label>
+   <p>A fixed deuterium inventory shares one ion/electron temperature (Tᵢ=Tₑ). Prescribed radial compression at fixed length couples density, temperature, pressure work and energy-confinement loss. D–D yields use Bosch–Hale thermal reactivities.</p>
+   <p>The speed is each plasmoid's center-of-mass-frame speed; relative collision speed is twice that. Translation is a normalized phase animation, not a computed trajectory. Ten seconds of playback spans one pulse. Field curves show an analytic reversed-field topology, not a solved equilibrium.</p>
+   <p>Dimensions, materials, timing and efficiencies are illustrative. Stability, reconnection, circuit dynamics, fusion heating, fuel depletion and secondary D–T / D–³He burn are unsolved. No Laurelin operating point is calibrated.</p>
+   <p>Recovered work is an assumed fraction of expansion work. Fusion energy is separate; electrical fusion recovery is unsolved. The plasma driver ledger omits coil stored energy and circuit dynamics. Residual thermal energy is discarded at reset.</p>
+   <a id="model-source">Equations & sources ↗</a><a href="https://www.laurelin.dev/technology" target="_blank" rel="noreferrer">Laurelin technology ↗</a>
+  </aside>
+  <aside id="inspector" class="panel" aria-label="Selected component" hidden><div class="panel-heading"><h2 id="component-name"></h2><button data-close="inspector" aria-label="Close component">×</button></div><p id="component-purpose"></p><p id="component-material"></p></aside>
+  <div class="readout" aria-label="Current state"><span><b id="temperature"></b> keV</span><span><b id="density"></b> m⁻³</span><span title="Beta=1 pressure-balance requirement; not a computed coil field"><b id="field"></b> T <small>β=1 estimate</small></span></div>
+  <section class="transport" aria-label="Pulse timeline"><div class="playback"><button id="play">Play</button><button id="restart">Restart</button><output id="clock"></output><span id="phase"></span></div><input id="timeline" aria-label="Pulse time" type="range" min="0" max="1" step=".002" value="0"><div class="phases"><span>Form</span><span>Merge</span><span>Compress</span><span>Hold</span><span>Recover</span></div><p id="validity" role="status"></p></section>
+ </main><script type="module" src="/src/laurelin-ui.js"></script>
+</body></html>

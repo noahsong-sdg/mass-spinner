@@ -8,8 +8,11 @@ for(const file of ['src/main.js','src/study-ui.js']){
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);
 }
-for(const match of html.matchAll(/(?:src|href)="(\/[^"#]+)"/g))
-  assert.ok(existsSync(`release${match[1]}`),`Missing published resource: ${match[1]}`);
+for(const name of ['index.html','laurelin.html']){
+ const page=readFileSync(`release/${name}`,'utf8');
+ for(const match of page.matchAll(/(?:src|href)="(\/[^"#]+)"/g))
+  assert.ok(existsSync(`release${match[1]}`),`Missing published resource in ${name}: ${match[1]}`);
+}
 for(const name of readdirSync('release/assets').filter(name=>name.endsWith('.js'))){
   const parsed=spawnSync(process.execPath,['--check',`release/assets/${name}`],{encoding:'utf8'});
   assert.equal(parsed.status,0,parsed.stderr);

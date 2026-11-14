@@ -13,6 +13,7 @@ export default {
     {find:'three/addons',replacement:resolve(three,'examples/jsm')},
     {find:/^three$/,replacement:resolve(three,'build/three.module.js')},
   ]},
-  build:{outDir:'release',emptyOutDir:false,target:'es2022'},
+  build:{outDir:'release',emptyOutDir:false,target:'es2022',
+    rollupOptions:{input:{main:resolve('index.html'),laurelin:resolve('laurelin.html')}}},
   worker:{format:'es',plugins:()=>[workerIdentityPlugin(process.cwd())]},
 };
