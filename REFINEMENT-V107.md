@@ -14,6 +14,11 @@ late feature's radial/axial mass fluxes without changing the solver. Its
 independent reviews support unresolved evolving gradients; the density gate
 still fails and no unique faulty operator has been established.
 
+The [frozen electromagnetic and stress/heat responses](SOURCE-RESPONSE-V107.md)
+now isolate a much stronger mesh sensitivity in local stress/heat response.
+Different evolved states and source discretizations remain confounded; the
+original gates and physical coefficients are unchanged.
+
 ## Question and cause
 
 V106 corrected a reproduced heat-discretization artifact, but retained six
