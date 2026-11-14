@@ -1,7 +1,9 @@
 # V107: resolve the radial response before changing the physics
 
-Status: the bounded 1 microsecond radial and axial checks pass with the
-corrected comparison arithmetic. All nine full-clock jobs remain pending.
+Status: three of nine full-clock trajectories have completed. A separate
+initial-clock diagnostic now records two strict-contraction failures at
+roundoff scale; full qualification remains incomplete. Earlier bounded
+1 microsecond radial and axial checks pass with corrected comparison arithmetic.
 This is research-backend qualification, not an update to the live playground.
 
 ## Question and cause
@@ -244,7 +246,67 @@ and [physics review](scientific/refinement-v107/REVIEW-FINEST-PHYSICS.md) inspec
 these actual artifacts; all 257 exported payload hashes were verified.
 
 This adds a second two-level axial check, not joint contraction or timestep
-qualification. **All nine full 0/1/2/4 microsecond jobs remain unrun.**
+qualification. At that preflight checkpoint, all nine full-clock jobs were unrun.
+
+## Full-clock follow-up: three trajectories and an initial-clock blocker
+
+Three fresh trajectories now retain all 0/1/2/4 microsecond snapshots:
+
+| Geometry and CFL | Accepted steps | Runtime | Peak RSS |
+|---|---:|---:|---:|
+| 80 × 48, 0.1 | 5,541 | 430.66 s | 256,848 KiB |
+| 160 × 48, 0.2 | 4,968 | 909.47 s | 399,612 KiB |
+| 160 × 48, 0.1 | 9,937 | 1,863.31 s | 405,496 KiB |
+
+All used the unchanged 107-input producer, offline 1 GiB VM and frozen inputs.
+The [independent physical-state review](scientific/refinement-v107/REVIEW-FULL-PARTIAL-PHYSICS.md)
+checks their actual clocks, positive states and conserved ledgers. Completing
+these trajectories is not a three-level finite-time convergence result. Six
+full jobs, including CFL 0.05, remain unrun at this checkpoint.
+
+Before the expensive remaining spatial runs, a supplemental diagnostic calls
+the unchanged initializer at 160 × 24 and compares its initial state against
+the saved 160 × 48 full trajectory and 160 × 96 preflight. It performs no time
+evolution. The original seven metrics, 5% spatial limit, strict contraction
+predicate and 1e-10 panel-quadrature limit are retained:
+
+| Initial observable | 24 → 48 axial rows | 48 → 96 axial rows | Contraction |
+|---|---:|---:|---|
+| Density | 3.1657282913e-17 | 3.2017901568e-17 | **FAIL** |
+| Temperature | 1.1685076934e-16 | 1.1776439379e-16 | **FAIL** |
+| Angular speed | 1.333934% | 0.321075% | PASS |
+
+There are **40 passing and 2 failing diagnostic checks**. All 28 panel checks
+pass; this differs from the earlier corrected interpolant cancellation bug.
+The stable norm faithfully measures the tiny saved-state differences.
+
+The cause is extensive-to-primitive roundoff. The prescribed initial density
+and temperature depend only on radius, but storing mass as density times cell
+volume and recovering it by division loses last bits differently across axial
+cells. Temperature also subtracts swirl kinetic energy from total energy.
+Independent arithmetic reproduces both effects from saved conserved fields.
+In simple terms, these failures measure rounding in the initial encoding,
+before heat or flow evolves. Initial rotation has genuine two-dimensional
+electrode/endwall dependence and must not be forced uniform.
+
+No equation or gate was changed to make these failures pass. With this same
+initializer, environment and retained initial clock, extending trajectories
+cannot remove this specific obstacle to the frozen full-matrix PASS. This is
+an execution-path inference backed by the diagnostic, not an executed complete
+matrix audit. The remaining finite-time density/flow convergence is unscored.
+The next useful computation is the final CFL 0.05 trajectory and declared
+three-level timestep audit before additional expensive spatial work.
+
+The [metric author review](scientific/refinement-v107/REVIEW-FULL-PARTIAL-METRICS.md)
+discloses its authorship; a separate [independent review](scientific/refinement-v107/REVIEW-Q0-INDEPENDENT.md)
+checks source/geometry consistency, packet seals and the contraction arithmetic.
+All 277 exported payload hashes were verified (82,474,219 bytes). The diagnostic
+JSON seal is `7bd41151c8d843acd238af9c64f92652c0b6696612409d0ff11fa967e93e773d`;
+its [exact driver](scientific/refinement-v107/q0_diagnostic107.py) and
+[transport controller](scientific/refinement-v107/run_q0_diagnostic107.py) are retained.
+The diagnostic executed in 6.83 s; exit zero means successful execution, while
+its two scientific checks explicitly fail. No experimental or live-playground
+qualification follows.
 
 ## Interpretation limits
 
