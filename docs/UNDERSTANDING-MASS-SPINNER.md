@@ -1,5 +1,7 @@
 # Understanding Mass Spinner
 
+Continue afterward with [Part 2: from rotation to a prediction](UNDERSTANDING-MASS-SPINNER-02.md).
+
 We started with a visual way to explore plasma mass separation. The project now
 contains an interactive playground and a separate research model that tests how
 far its simplifying assumptions can be trusted. You do not need to understand
