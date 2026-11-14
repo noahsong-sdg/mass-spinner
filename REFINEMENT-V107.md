@@ -1,7 +1,7 @@
 # V107: resolve the radial response before changing the physics
 
-Status: the 1 microsecond radial preflight passes its unchanged checks;
-the complete nine-job refinement study remains pending.
+Status: the bounded 1 microsecond radial and axial checks pass with the
+corrected comparison arithmetic. All nine full-clock jobs remain pending.
 This is research-backend qualification, not an update to the live playground.
 
 ## Question and cause
@@ -75,7 +75,8 @@ Inside the offline 1 GiB safe-dev VM:
 
 The tested 107-input transfer manifest is
 `31d24d7550a869e830e561c5276270b8daedeb8b948da30c54107cb801997cef`.
-No host scientific execution was used.
+All solver and test execution was inside safe-dev. Reviewers used trusted
+host artifact reads, hashing and arithmetic; they did not rerun the PDE.
 
 ## First measured result
 
@@ -98,7 +99,7 @@ continuum-error bounds. Temperature-increment discrepancy is 0.317654%,
 angular-speed discrepancy 0.093374%, and axial-velocity discrepancy 0.131063%.
 
 The 320 by 48 trajectory used 2,839 steps, 1,114.87 s and 660,612 KiB peak RSS.
-Its peak temperature was 233,957.72 K. The field/prediction packet is sealed by
+Its peak temperature was 233,957.72 K. The prediction packet is sealed by
 `4991334e3b566f49e56db3b6ed058f9878fb6f4480dcd778c43369c7ef0a952d`;
 the independent audit by
 `907f8bf06ca38f183ed2edcfea345723821910b4be1d522446ef755a296438b3`.
@@ -120,6 +121,88 @@ hashes and six application-check payload hashes were verified after transport.
 against the unchanged 330-input app snapshot
 `47201c00b9770bd6daf5c11b3fafa39b68adcd046bb2d48c519de064aff5fc3e`.
 This is not browser or deployment verification.
+
+## Axial follow-up: physical differences pass, checker fails near zero
+
+The separate 160 by 96 preflight completed in 810.28 s, with 1,661 steps and
+657,884 KiB peak RSS. At 1 microsecond, doubling axial rows from 48 to 96
+gives density-increment discrepancy **3.009840%**, radial velocity **0.994207%**
+and axial velocity **1.405413%**. All seven physical comparison metrics are
+below the unchanged 5% pair limit. This pair alone establishes no axial order
+or contraction rate; the planned three-level study is still required.
+
+The combined raw audit nevertheless records **FAIL: 2 of 41,138 gates fail**.
+Both failures are initial-clock quadrature checks on error integrals near
+roundoff: density about 3e-42, temperature about 6.7e-28. The relative order
+2/3 spreads are 2.747682% and 0.258447%, exceeding 1e-10. Other state,
+conservation and refinement checks pass; full qualification remains PENDING.
+
+The checker separately rounds two almost equal interpolated profiles, then
+subtracts them. That cancellation is as large as the actual initial density
+and temperature differences, so the resulting sampled roundoff no longer
+behaves like the exact bilinear difference polynomial. Raw initial axial
+spreads are at most 1.08e-19 kg/m3 and 3.64e-12 K. This explanation does not
+apply to initial angular speed: its mesh dependence is real. No errors are
+clipped, no threshold changed, and the failed audit is retained. A separate
+high-precision difference-polynomial diagnostic confirms the cancellation.
+
+Prediction seal:
+`9c071da189b7390b846d9925c2aa5d6ace484ba7ed37d66e9ee1d16152c971b6`.
+Combined raw audit seal:
+`19b36780162a19d8d7e52f4f8fd6902fc61ea0644797dfd6807384613495c845`.
+See the independent [axial review](scientific/refinement-v107/REVIEW-AXIAL.md).
+
+## Corrected checker and independent validation
+
+The [stable norm](scientific/refinement-v107/METHOD-NORMS.md) subtracts exact
+rational Q1 interpolants on their common knot grid, then evaluates the small
+difference with the existing SciPy interpolation and Gaussian quadrature.
+This preserves the observable, boundary padding, increment/reference norms and
+every threshold. It fixes the arithmetic for all five fields without tiny-error
+clipping, special initial-clock rules, or an adaptive tolerance.
+
+The separate 40/60-digit Decimal mass-matrix and Gaussian witnesses agree on
+nonzero initial norms: density 1.6910590268e-43 and temperature 3.2718964386e-28.
+Their precision refinements agree around 2e-25. The stable binary64 panel
+calculation agrees with that independent reference within about 5e-15 relative.
+The combined corrected audit records **41,138 gates, zero failures, PENDING**.
+All gate identities/limits and every non-norm gate match the raw failed audit;
+the original full-clock study still has precisely its six genuine failures.
+
+The explicit [replay entry point](scientific/refinement-v107/stable_audit107.py)
+writes `stable-audit.json`, sealing the norm implementation separately from the
+unchanged producer. The component `audit.json` is intermediate. Its derived
+full-job list correctly requires all nine jobs; the old short-record key list
+is retained separately. An optional prior-audit link preserves earlier failures
+only after verifying it describes the same sealed case packets.
+
+The norm controls pass 7/7, and the independent Decimal controls pass 5/5.
+Legacy-plus-preflight replay took 43.54 s and 396,132 KiB peak RSS in a 1 GiB
+offline VM, on the 111-input snapshot
+`8a1e19b531b89709df3fa145144cf367c4cc79d01bc78a6032cb2ab0292b1362`.
+The corrected audit seal is
+`1c9cc7034257079b264015bdaf0c70b5022d27bf164f3bd9e8b4436feeba4793`.
+Independent [implementation/evidence review](scientific/refinement-v107/REVIEW-STABLE.md)
+and [physics review](scientific/refinement-v107/REVIEW-STABLE-PHYSICS.md) inspected
+the actual data, numerical references and provenance. These are scoped reviews
+of the retained-field calculation, not independent reproductions of the PDE.
+
+The reusable entry point passed 4/4 lifecycle/reporting controls and reproduced
+all 41,138 prior corrected gate values exactly on the actual saved fields. This
+replay took 27.19 s and 308,296 KiB peak RSS. Its 113-input source snapshot is
+`993dc1e78b42aefa79c8261f6b335115ad4476ed06a5f8304a0a214e6a4e6836`;
+the canonical `stable-audit.json` seal is
+`c7981440c34f49fafd3b3a33847822de2e4843f30335327b0cacbb8807e3a0a9`.
+The 26 targeted controls (10 admission, 5 Decimal, 7 norm, 4 entry) and the
+four application checks above all passed in the recorded isolated snapshots.
+
+Both unsuccessful verification attempts are retained. The first Decimal unit
+test requested more relative digits than its working precision could retain
+after cancellation; the corrected test budgets precision explicitly, without
+changing the scientific 1e-10 gate. The first entry replay passed its four
+controls but its outer comparison driver compared integer dictionary keys with
+JSON string keys. Canonicalizing the driver's comparison fixed that mismatch;
+the entry and norm source snapshots were unchanged between attempts.
 
 ## Interpretation limits
 
