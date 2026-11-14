@@ -1,7 +1,9 @@
 # V107: resolve the radial response before changing the physics
 
-Status: four of nine full-clock trajectories have completed. The declared
-three-level timestep study passes at every reporting clock. A separate
+Status: five of nine full-clock trajectories have completed. The full radial
+audit has one genuine failure: the 4 µs density-increment discrepancy is
+5.595688%, above the unchanged 5% limit. Radial velocity passes at every clock;
+the three-level timestep study still passes. A separate
 initial-clock diagnostic records two strict-contraction failures at roundoff
 scale; full qualification remains incomplete. Earlier bounded
 1 microsecond radial and axial checks pass with corrected comparison arithmetic.
@@ -339,7 +341,7 @@ Its overall status and qualification remain **PENDING**, with
 r8-z1, r8-z4, r16-z2 and r16-z4, all at CFL 0.1. Their spatial comparisons
 have not been scored. The separate two-failure axial initial-clock diagnostic
 and the historical six V106 failures remain retained; the successful temporal
-subset supersedes neither. The expensive remaining spatial runs are paused:
+subset supersedes neither. At that checkpoint, remaining spatial runs were paused:
 extending these trajectories cannot remove the initial-clock obstacle under
 the frozen rules. No physics or threshold was changed to turn it into a pass.
 
@@ -358,6 +360,136 @@ were serialized to limit host memory. The exact audit controller is retained
 as [run_timestep_audit107.py](scientific/refinement-v107/run_timestep_audit107.py).
 Raw scientific/application evidence, source, drivers and SHA256 sums are in the
 [research prerelease](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v107-timestep-study).
+
+## Full radial trajectory
+
+The initial-clock [roundoff disposition](scientific/refinement-v107/ROUNDING-DISPOSITION.md)
+retains the two failed predicates while separating them from finite-time
+spatial evidence. It changes no norm, threshold, equation or saved state.
+The finest radial trajectory therefore proceeded under the frozen protocol.
+
+The new 320 × 48, CFL 0.1 case reached every declared clock through 4 µs in
+**18,757 steps**, **7,450.81 s** and **695,216 KiB** peak worker RSS, within
+its original 1 GiB budget. Peak temperature was **618,203.01 K**. Its sealed
+prediction is `786b52edf45d1436665bab421b8131f60b932accdb240ad475b9acbbfb8e9a61`.
+The producing source transfer remains unchanged. This completed trajectory
+permits the radial triple to be scored at all four reporting clocks.
+Four full jobs remain absent: r4-z1,
+r8-z1, r8-z4 and r16-z4, all at CFL 0.1.
+
+The unchanged saved-field audit admits all five cases, scores both radial and
+timestep layouts, and reports **354,880 checks with one failure**. Most are
+repeated step/ledger checks, not independent validations. All contraction and
+panel-quadrature predicates pass. Its verdict is **FAIL**, qualification is
+**PENDING**, and `fullDeclaredMatrixPass` remains false. Analysis took 49.88 s
+and 567,544 KiB peak RSS in the offline 1 GiB VM. The audit seal is
+`f63ed0efb04ad2a632ffddc4b2074755d5424b5d2d5490ad6f00ea9a3661cbd5`.
+
+| Time | Density increment, 80 → 160 | Density increment, 160 → 320 | Radial velocity, 160 → 320 |
+|---|---:|---:|---:|
+| 1 µs | 7.451522% | 2.381344% | 0.486684% |
+| 2 µs | 9.795787% | 3.166139% | 0.977785% |
+| 4 µs | 13.444051% | **5.595688% — FAIL** | 1.815158% |
+
+The 4 µs density response contracts but still misses the declared limit. Its
+total-density discrepancy is 0.127543%; that smaller number does not replace
+the increment gate. The fixed-grid timestep comparisons retain their earlier
+values; their largest fine change is 0.082646%. This does not independently
+qualify time accuracy on 320 × 48 cells. The six historical V106 failures and
+the two separate axial initial-clock failures remain preserved.
+
+A read-only localization reuses the frozen exact-Q1 difference and order-2
+Gaussian weights. It reproduces both 4 µs density-increment error integrals
+exactly in the recorded binary64 calculation; summing panel contributions
+differs by at most 9.15e-16 relative. The largest fine-pair contributions lie
+around r = 16–19 mm and z = 225–237 mm. These are interpolation-panel bounds,
+not original cell boundaries. Concentration identifies a region for diagnosis;
+it does not establish a flux, heat-source or boundary-condition defect.
+
+Next, evaluate the original instantaneous radial/axial mass fluxes and
+pressure/velocity gradients across the ring on saved states. Electrical and
+diffusion sources alter momentum and energy; mass evolves through Euler face fluxes. Accumulated
+operator attribution requires a separately sealed instrumented run. The
+mesh-dependent initial torsion also needs to remain explicit. Neither simply
+adding density diffusion nor another blind doubling is a demonstrated fix.
+
+The independent [physical-state review](scientific/refinement-v107/REVIEW-RADIAL-PHYSICS.md)
+reconstructs saved primitives and exposure budgets from conserved states. The
+[metric/provenance review](scientific/refinement-v107/REVIEW-RADIAL-METRICS.md)
+checks all predicates, seals and unchanged earlier comparisons, with its
+implementation authorship disclosed. Neither reviewer reran the PDE.
+
+## Reference-domain exposure
+
+The independent [closure review](scientific/refinement-v107/REVIEW-CLOSURE-SCOPE.md)
+distinguishes the constant transport law from the cited neutral-Ar property
+reference's 84–10,000 K range. The new read-only diagnostic reconstructs the
+saved conserved-to-primitive identities exactly and changes no fields or gates.
+All four analytic/seal/stale-state controls pass inside the offline 1 GiB VM,
+including nonzero meridional motion and negative angular momentum.
+
+At 4 µs, the 320 × 48 case's cells above 10,000 K contain:
+
+| Discrete budget | Fraction |
+|---|---:|
+| Volume | 1.925834% |
+| Mass | 0.588017% |
+| Heavy-fluid thermal energy | 5.462114% |
+| Rotational inertia | 0.045093% |
+| Absolute angular momentum | 0.262850% |
+| Swirl kinetic energy | 0.947876% |
+
+No saved cells are below 84 K; initial cells are below 10,000 K. The final
+temperature maximum lies in the axis-adjacent cell at z = 239.059–240 mm.
+The 160 × 48, CFL 0.05 comparison gives 0.573153% exposed mass and 5.405682%
+thermal energy. These are descriptive exposures, not another convergence gate.
+
+Neither the remaining mass inside the reference interval nor a small hot mass
+fraction validates the constant coefficients or plasma closure. Stored thermal
+energy is not cumulative Joule deposition, and localized current/shear regions
+can influence global flow. No observable-error bound or constitutive
+sensitivity solve has been established. The two diagnostic reads took
+0.19/0.25 s and 119,568/154,464 KiB peak RSS. Their output seals are
+`5269bbbc13d70cca64db1460c5f220a28bb2d8709605706ee1ca69ebe32912ec`
+and `e885bc8b2d6754d31a10ce66ae8135e668f4681d080b13bc37a232e5da5fc8ca`.
+
+The diagnostic addresses an interpretation gap: a temperature maximum says
+nothing about how much material or energy is exposed. In ordinary terms,
+one very hot cell and a hot bulk gas are different situations. It computes
+weighted budgets directly from sealed conserved states, rather than changing
+coefficients or treating the reference interval as a plasma-validity switch.
+This is the smallest justified addition; it does not fix the density failure.
+
+## Latest checks and reproduction
+
+The closure diagnostic and regression controls were transferred byte-for-byte
+into `/work/project/v107-closure01`. The offline 1 GiB VM ran
+`/work/home/v90-venv/bin/python -m unittest discover -s /work/project/v107-closure01 -p test_closure_exposure107.py -v`:
+**4/4 passed**. Source/test SHA256 values are
+`59909c543e53e6c141a087b6793e4c91581b6d711d1cafd6a836b30afd4b3a67`
+and `62f778c42e8a6ac011e971e68f044bec7c8e57e815cc2c45ef7f9f7b567b5453`.
+Actual controllers, commands, logs, environment records and execution receipts
+are retained, including the separate full-case and five-case audit invocations.
+Process exit 0 does not override the scientific audit's **FAIL** verdict.
+
+All **314 scientific payload hashes** (331,536,547 bytes) and six application
+check payloads were verified after export. Independent metric review repeated
+all 314 science hashes. The unchanged 330-input application snapshot above
+again passed `npm run typecheck`, `npm run build`, `npm run check:site` and
+`npm run check:assets` in its separate offline 1 GiB VM. A fresh host manifest
+comparison found zero changed application inputs. No browser verification or
+deployment was performed in this study.
+
+The [radial-study prerelease](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v107-radial-study)
+contains the new source/evidence, application checks, controllers and checksums.
+It also requires frozen inputs from the earlier
+[V106 release](https://github.com/noahsong-sdg/mass-spinner/releases/tag/v106-density-flow-refinement):
+`source-heat-evidence.tar.gz` supplies `v106-candidate02/results/` and
+`v106-cross01/results/`; `radial-refinement-evidence.tar.gz` supplies
+`v106-radial01/results/`. Preserve those directory names under `/work/project`
+in an isolated environment, verify each release's `SHA256SUMS`, and use the
+recorded guest dependency environment. The new archive alone is not a
+self-contained rerun environment; the controllers record the original paths.
 
 ## Interpretation limits
 
