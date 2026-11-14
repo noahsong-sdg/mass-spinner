@@ -57,6 +57,9 @@ clipping small errors, flooring a denominator, skipping initial clocks or
 selecting an adaptive precision threshold. It also avoids the cancellation
 in the expanded expression \(A^2-2AB+B^2\). It uses established rational
 arithmetic and SciPy interpolation, without changing a producing equation.
+Exact rational subtraction needs no selected working precision; Decimal is
+retained as a separately implemented precision-refinement witness. The added
+cost is confined to postprocessing and is measured below.
 
 ## Validation and cost
 

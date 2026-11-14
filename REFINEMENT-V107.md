@@ -195,6 +195,13 @@ the canonical `stable-audit.json` seal is
 `c7981440c34f49fafd3b3a33847822de2e4843f30335327b0cacbb8807e3a0a9`.
 The 26 targeted controls (10 admission, 5 Decimal, 7 norm, 4 entry) and the
 four application checks above all passed in the recorded isolated snapshots.
+The additional test commands, using `/work/home/v90-venv/bin/python`, were:
+
+```sh
+python -m unittest discover -s scientific/refinement-v107 -p test_precision107.py -v
+python -m unittest discover -s scientific/refinement-v107 -p test_stable107.py -v
+python -m unittest discover -s scientific/refinement-v107 -p test_stable_entry107.py -v
+```
 
 Both unsuccessful verification attempts are retained. The first Decimal unit
 test requested more relative digits than its working precision could retain
@@ -203,6 +210,41 @@ changing the scientific 1e-10 gate. The first entry replay passed its four
 controls but its outer comparison driver compared integer dictionary keys with
 JSON string keys. Canonicalizing the driver's comparison fixed that mismatch;
 the entry and norm source snapshots were unchanged between attempts.
+
+## Finest resource preflight
+
+All three declared 0/1 microsecond resource preflights are now complete.
+The 320 by 96 case took 2,997 steps, 3,869.50 s and 1,221,720 KiB peak RSS,
+within its predeclared 2 GiB limit. Peak temperature was 234,263.28 K.
+Its prediction seal is
+`f84e8380ef3d8ccbb6e1d695fb2d165ef8cdb4557cc445f42b2e3aecce363a85`;
+the producing 107-input snapshot above is unchanged.
+
+At fixed 320 radial cells, doubling axial rows from 48 to 96 gives, at
+1 microsecond:
+
+| Observable | Relative discrepancy |
+|---|---:|
+| Density increment | **3.020112%** |
+| Radial velocity | **0.999464%** |
+| Axial velocity | **1.406756%** |
+| Temperature increment | 0.630975% |
+| Angular speed | 0.303059% |
+
+All seven comparison metrics pass the unchanged 5% pair gate. The combined
+radial/axial preflight replay contains 59,170 gates with zero failures,
+**PENDING** status and no full-matrix pass. These are predominantly step and
+state checks, not 59,170 independent validations of experimental accuracy.
+It took 57.60 s and 329,292 KiB peak RSS in the offline 1 GiB VM, on the
+unchanged 113-input checker snapshot. The final audit seal is
+`f98a4b0d9bb41de3363412706db63693af97cf0c38c1732402afc6c4d00f66b5`.
+Its exact driver is separately sealed in the execution receipt and summary.
+The [metrics/provenance review](scientific/refinement-v107/REVIEW-FINEST-METRICS.md)
+and [physics review](scientific/refinement-v107/REVIEW-FINEST-PHYSICS.md) inspect
+these actual artifacts; all 257 exported payload hashes were verified.
+
+This adds a second two-level axial check, not joint contraction or timestep
+qualification. **All nine full 0/1/2/4 microsecond jobs remain unrun.**
 
 ## Interpretation limits
 
