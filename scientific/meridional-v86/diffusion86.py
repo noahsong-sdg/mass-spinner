@@ -171,6 +171,16 @@ class Diffusion:
             raise ArithmeticError('Nonfinite implicit diffusion solution')
         return out
 
+    def conduct(self, thermal, heat_capacity, dt):
+        """Return cell temperatures and the legacy finite-element trace."""
+        tc = np.zeros(self.heat.N)
+        tc[self.tdofs] = heat_capacity
+        rhs = np.zeros(self.heat.N)
+        rhs[self.tdofs] = thermal
+        temperature = self.solve(diags(tc)+dt*self.thermal_stiffness,
+                                 rhs, np.arange(self.heat.N))
+        return temperature[self.tdofs], temperature
+
     def advance(self, q, dt):
         if isinstance(dt, (bool, np.bool_)) or not np.isscalar(dt) or not math.isfinite(dt) or dt <= 0:
             raise ValueError('Diffusion timestep must be finite and positive')
@@ -200,13 +210,8 @@ class Diffusion:
         mid = self.flow.primitive(out)
         heat_capacity = (1.5*KB*(q[5]/self.flow.masses[0]
                                 +(q[0]-q[5])/self.flow.masses[1])).ravel()
-        tc = np.zeros(self.heat.N)
-        tc[self.tdofs] = heat_capacity
-        rhs = np.zeros(self.heat.N)
-        rhs[self.tdofs] = mid['thermalJ'].ravel()
-        temperature = self.solve(diags(tc)+dt*self.thermal_stiffness,
-                                 rhs, np.arange(self.heat.N))
-        thermal_change = heat_capacity*temperature[self.tdofs]-mid['thermalJ'].ravel()
+        cell_temperature, temperature = self.conduct(mid['thermalJ'].ravel(), heat_capacity, dt)
+        thermal_change = heat_capacity*cell_temperature-mid['thermalJ'].ravel()
         out[4] += thermal_change.reshape(q.shape[1:])
         final = self.flow.primitive(out)
         work = -dt*new*(self.stiffness@new)
