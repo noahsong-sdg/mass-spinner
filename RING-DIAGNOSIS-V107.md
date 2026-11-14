@@ -39,7 +39,8 @@ The late ring is sharpening, not approaching an initial roundoff floor.
 
 ![Common-point profiles at four microseconds](https://github.com/noahsong-sdg/mass-spinner/releases/download/v107-ring-diagnosis/ring-profiles.png)
 
-Every boundary mass flux is exactly zero. Global directional cancellation
+At all twelve probed case/clock states, boundary mass fluxes are exactly zero.
+Global directional cancellation
 residuals are at most 2.16e-20 kg/s. The largest native and projected flux-sum
 defects are 2.85e-14 and 8.53e-14 kg/m³/s. These check bookkeeping, not accuracy.
 
