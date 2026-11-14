@@ -32,7 +32,9 @@ class HLLCControls(unittest.TestCase):
             side = (np.arange(shape[-1] if axis == 2 else shape[0]) < face).reshape(shape)
             rho = np.where(side, .001, .003)
             tangent = np.where(side, 3., -8.)
-            omega = np.where(side, 200., 900.)
+            # An exact radial Riemann contact has no centrifugal body force.
+            # Axial contacts still exercise discontinuous angular transport.
+            omega = 0. if axis == 2 else np.where(side, 200., 900.)
             species = np.where(side, .2, .8)
             pressure = 80.
             for speed in (-17., 17.):
@@ -43,7 +45,7 @@ class HLLCControls(unittest.TestCase):
                     left = speed > 0
                     density = .001 if left else .003
                     shear = 3. if left else -8.
-                    spin = 200. if left else 900.
+                    spin = 0. if axis == 2 else (200. if left else 900.)
                     y = .2 if left else .8
                     ur, uz = (speed, shear) if axis == 2 else (shear, speed)
                     radius2 = f.r[face]**2 if axis == 2 else f.mean_r2
@@ -70,6 +72,18 @@ class HLLCControls(unittest.TestCase):
                     observed = Flow._hllc(*zip(*inputs), normal)
                     expected = inputs[0 if sign > 0 else 1][1]
                     np.testing.assert_array_equal(observed, expected)
+
+    def test_radial_hllc_contact_transports_discontinuous_angular_momentum(self):
+        # Prescribed Riemann states isolate angular advection from the radial
+        # equilibrium reconstruction and its centrifugal body force.
+        for speed in (-17., 17.):
+            inputs = []
+            for rho, omega, y in ((.001, 200., .2), (.003, 900., .8)):
+                state, flux = physical(rho, 80., speed, 3., omega, y, .03**2, 1)
+                inputs.append((state, flux, speed, np.sqrt(GAMMA*80./rho), 80.))
+            observed = Flow._hllc(*zip(*inputs), 1)
+            expected = inputs[0 if speed > 0 else 1][1]
+            np.testing.assert_allclose(observed, expected, rtol=3e-13, atol=0.)
 
     def test_shock_tube_small_cfl_positive_and_conservative(self):
         f = Flow(np.linspace(0, .06, 5), np.linspace(0, .24, 81), [MASS, MASS])

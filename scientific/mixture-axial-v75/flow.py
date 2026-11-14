@@ -119,12 +119,72 @@ class Flow:
             abs(centered), np.minimum(abs(back), abs(forward))), 0.)
         lower = a+slope*(edges[:-1]-centers)
         upper = a+slope*(edges[1:]-centers)
+        if axis == 2:
+            # Reconstruct departures from each cell's own centrifugal
+            # equilibrium, rather than limiting away its pressure gradient.
+            coefficient, lo, hi = self._radial_equilibrium(p)
+            span = np.diff(self.r**2)
+            before, after = np.ones_like(lo), np.ones_like(hi)
+            with np.errstate(over='ignore', invalid='ignore'):
+                before[:, 1:] = (hi[:, 1:]*np.exp(coefficient[:, 1:]
+                    *(self.r[1:-1]**2-self.r[2:]**2))
+                    *self._exponential_average(coefficient[:, 1:]*span[:-1]))
+                after[:, :-1] = (hi[:, :-1]*np.exp(coefficient[:, :-1]
+                    *(self.r[2:]**2-self.r[1:-1]**2))
+                    *self._exponential_average(coefficient[:, :-1]*span[1:]))
+            if not np.all(np.isfinite(before)) or not np.all(np.isfinite(after)):
+                raise ValueError('Unrepresentable neighboring centrifugal equilibrium')
+            previous = np.concatenate((a[:2, ..., :1], a[:2, ..., :-1]), axis=-1)
+            following = np.concatenate((a[:2, ..., 1:], a[:2, ..., -1:]), axis=-1)
+            delta_lo, delta_hi = previous-a[:2]*before, following-a[:2]*after
+            back = -delta_lo/(centers-edges[:-1])
+            forward = delta_hi/(edges[1:]-centers)
+            centered = (delta_hi-delta_lo)/(x[2:]-x[:-2])
+            residual_slope = np.where(back*forward > 0, np.sign(centered)*np.minimum(
+                abs(centered), np.minimum(abs(back), abs(forward))), 0.)
+            baseline = np.array([a[:2]*lo, a[:2]*hi])
+            change = np.array([residual_slope*(edges[:-1]-centers),
+                               residual_slope*(edges[1:]-centers)])
+            # Limit the perturbation, not the equilibrium. This preserves the
+            # positive density/pressure domain without imposing a floor.
+            ratio = np.ones_like(change)
+            np.divide((1-64*np.finfo(float).eps)*baseline, -change,
+                      out=ratio, where=change < 0)
+            theta = np.minimum(1., np.min(ratio, axis=0))
+            lower[:2], upper[:2] = baseline+theta*change
         ghost_lo, ghost_hi = lower[..., :1].copy(), upper[..., -1:].copy()
         ghost_lo[normal] *= -1
         ghost_hi[normal] *= -1
         left = np.concatenate((ghost_lo, upper), axis=-1)
         right = np.concatenate((lower, ghost_hi), axis=-1)
         return [np.moveaxis(v, -1, axis) for v in (left, right)]
+
+    @staticmethod
+    def _exponential_average(span):
+        """Average exp[a(r²-r_hi²)] over a cylindrical annulus.
+
+        span=a*(r_hi²-r_lo²); expm1 retains the nonrotating limit.
+        """
+        average = np.ones_like(span)
+        np.divide(-np.expm1(-span), span, out=average, where=span != 0)
+        return average
+
+    def _radial_equilibrium(self, p):
+        """Cell-average-normalized local isothermal rigid-rotation profile.
+
+        c²=p/rho and Omega are local reconstruction parameters, not imposed
+        global equilibrium constraints. General thermal/sheared states still
+        evolve. The momentum source uses these SAME equilibrium edge values.
+        """
+        with np.errstate(over='ignore', invalid='ignore', divide='ignore'):
+            coefficient = .5*p['densityKgM3']*p['omegaRadS']**2/p['pressurePa']
+            span = coefficient*np.diff(self.r**2)
+            upper = 1/self._exponential_average(span)
+            lower = upper*np.exp(-span)
+        if (not np.all(np.isfinite(coefficient)) or not np.all(np.isfinite(upper))
+                or not np.all(np.isfinite(lower)) or np.any(lower <= 0)):
+            raise ValueError('Unrepresentable local centrifugal equilibrium')
+        return coefficient, lower, upper
 
     def _fluxes(self, q, p):
         faces = []
@@ -193,17 +253,14 @@ class Flow:
         p = self.primitive(q)
         radial, axial = self._fluxes(q, p)
         out = radial[:, :, :-1]-radial[:, :, 1:]+axial[:, :-1]-axial[:, 1:]
-        # Subtract each cell's pressure before differencing radial momentum
-        # fluxes: this is exactly +p*(Aout-Ain), but avoids cancellation of
-        # large equal terms for a uniform stationary gas.
+        # The area-weighted local equilibrium pressures integrate both the
+        # cylindrical p/r term and rho*Omega²*r. Their common reconstruction
+        # cancels a stationary rotating profile, including reflecting walls.
         pressure = p['pressurePa']
-        out[1] = ((radial[1, :, :-1]-pressure*self.radial_area[:, :-1])
-                  -(radial[1, :, 1:]-pressure*self.radial_area[:, 1:])
+        _, lower, upper = self._radial_equilibrium(p)
+        out[1] = ((radial[1, :, :-1]-pressure*lower*self.radial_area[:, :-1])
+                  -(radial[1, :, 1:]-pressure*upper*self.radial_area[:, 1:])
                   +axial[1, :-1]-axial[1, 1:])
-        # Integral rho*Omega²*r uses a cell-constant rho and Omega. Updating
-        # radial momentum but conserving total energy includes pressure and
-        # centrifugal conversion between thermal and kinetic energy.
-        out[1] += q[0]*p['omegaRadS']**2*self.mean_r
         if not np.all(np.isfinite(out)):
             raise ArithmeticError('Nonfinite compressible flow rate')
         return out

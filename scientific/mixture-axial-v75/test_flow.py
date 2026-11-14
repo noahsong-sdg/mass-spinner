@@ -125,7 +125,16 @@ class FlowTests(unittest.TestCase):
             np.testing.assert_array_equal(axial[field, [0, -1]], 0)
 
     def test_zero_mass_flux_rigid_rotation_has_zero_angular_transport(self):
-        q = self.flow.state(.001, 350., .4, 900.)
+        # A rigid rotor is stationary only when its pressure gradient balances
+        # centrifugal acceleration. Integrate that continuum density profile
+        # independently of the reconstruction's equilibrium normalization.
+        xi, weight = np.polynomial.legendre.leggauss(16)
+        lo, hi = self.flow.r[:-1, None], self.flow.r[1:, None]
+        radius = (lo+hi)/2+(hi-lo)*xi/2
+        c2 = KB*350*(.4/(36*U)+.6/(40*U))
+        rho = np.sum(radius*.001*np.exp(900.**2*(radius**2-.06**2)/(2*c2))*weight,
+                     axis=1)*(hi-lo).ravel()/(hi**2-lo**2).ravel()
+        q = self.flow.state(rho, 350., .4, 900.)
         radial, axial = self.flow.fluxes(q)
         # Recovering pressure from total minus swirl energy can differ by an
         # ULP. HLLC resolves that pressure wave; bound it by input arithmetic.
@@ -165,7 +174,9 @@ class FlowTests(unittest.TestCase):
     def test_acoustic_cfl_does_not_silently_admit_fast_centrifugal_source(self):
         q = self.flow.state(.001, 350., .4, 1e7)
         self.assertGreater(np.min(self.flow.primitive(q)['thermalJ']), 0)
-        with self.assertRaisesRegex(ValueError, 'thermal energy'):
+        # The local reconstruction can reject an unresolved centrifugal
+        # profile before an accepted stage reaches negative thermal energy.
+        with self.assertRaisesRegex(ValueError, 'thermal energy|centrifugal equilibrium'):
             self.flow.advance(q, self.flow.stable_dt(q)*.8)
 
 
