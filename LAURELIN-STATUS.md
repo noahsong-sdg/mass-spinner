@@ -4,7 +4,57 @@
 
 Interactive WebGL assembly, six selectable component descriptions/material assumptions, ten parameters, pulse playback/scrubbing, three synchronized plot cursors and a separate plasma work/recovery ledger. Geometry and topology are illustrative; the numerical scope and primary sources are in [LAURELIN-MODEL.md](LAURELIN-MODEL.md).
 
-## Verification
+## Second independent audit
+
+The conditional 0D equations received separate analytic, numerical-oracle and
+scene/UI reviews. Check08 passed **5/5 independent analytic controls**, **25/25
+application regressions**, `npm run typecheck`, `npm run build`,
+`npm run check:site` and `npm run check:assets`, offline in 1 GiB safe-dev.
+All 21 retained payload hashes and 7 execution logs were independently checked.
+Tested source manifest:
+`07393420863bf4168287f9eb59419d04072f982a2fff4db789d39ae315987ede`.
+Release manifest:
+`1a9b370526149a632348b1bcfc91181f7f34299cad7cee9f7ad43e73c13cefe7`.
+
+The reviewer reproduced an ambiguous plot caption: it showed the full-pulse
+maximum beside the selected-time readout without labeling the difference.
+The new regression failed in check07 (24 others passed); adding **Peak** to
+all three captions passes check08. This preserves the existing full-pulse plot
+and selected-state behavior with a one-word clarification.
+
+Independent native Brave review observed the WebGL pair, component inspection,
+parameter reset and scrollable 390×844 / 390×460 layouts with no horizontal
+overflow or captured browser warnings/errors. Those independent observations used the previous deployed build. Root then
+verified the new caption on Cloudflare version
+`5ca7dbb3-fb7c-4a99-9db6-6a58729e55cc`: all three Peak labels stay fixed as the
+selected state changes at 0/20/80 µs, with all plot cursors aligned. Native WebGL
+rendered, 390×844 document width remained 390 px, and warning/error capture was
+empty. Temporary viewport and timeline changes were reset. Screenshots:
+`scientific/laurelin/retained/review2-peak-live.jpg` and `review2-peak-phone.jpg`.
+
+A separate SciPy DOP853/QUADPACK comparison passed its five initial controls,
+then failed strict evidence serialization because NumPy comparison decisions
+were not native Python booleans. The smallest correction converts decisions
+at construction and adds a real-assessment serialization regression; equations,
+inputs and gates are unchanged. Original failed evidence/source is preserved.
+After the memory guard recovered, the old source reproduced the regression
+failure, all six corrected controls passed, and all 16 prespecified comparison
+rows passed unchanged gates. Maximum state/energy errors were 8.14e−14 /
+4.07e−13; yield error decreased 3.635e−5→2.272e−6 under fourfold refinement.
+The independent oracle reviewer verified all 66 exported payload hashes,
+source bindings, logs and gate decisions. This is independently authored
+DOP853/QUADPACK comparison with root-owned isolated execution, not an
+independent machine or experimental measurement.
+
+No new conditional-equation physics bug was established. Missing FRC equilibrium,
+axial compression, ion/electron energy, reconnection, burn and recovery-circuit
+physics still prevent a Laurelin device-prediction claim.
+
+[Independent physics review](scientific/laurelin/REVIEW-INDEPENDENT-2.md) ·
+[Oracle protocol](scientific/laurelin/ORACLE2.md) ·
+[Scene review](scientific/laurelin/SCENE-REVIEW-2.md)
+
+## Previously deployed verification
 
 All project execution used offline 1-GiB safe-dev; deployment alone used networking. Final check06 341-input source manifest SHA256: `aa92fcd69261f33f25acc8a6e88aa52dba7079e86dc58a3d39429a5ea472b334`. Final 168-file release manifest: `08b6c95ba15c36c09b0fcd3bfe97f3970823e67347047c910cd79c9e96768490`.
 

@@ -57,7 +57,7 @@ function plot(title,key,color,unit){
  let pen=false,path='';for(const s of result.samples){
   if(s[key]===null){pen=false;continue;}path+=`${pen?'L':'M'}${(s.fraction*250+30).toFixed(2)},${(106-90*s[key]/max).toFixed(2)}`;pen=true;
  }
- return `<figure><figcaption>${title}<span>${number(max,unit)}</span></figcaption><svg viewBox="0 0 290 129" role="img" aria-label="${title} over pulse time. Linear scale, zero to ${max} ${unit}"><path d="M30 14V106H280" fill="none" stroke="#35483c"/><text x="26" y="116" fill="#adbcaf" font-size="9">0</text><text x="238" y="123" fill="#adbcaf" font-size="9">${config.durationUs} µs</text><path d="${path}" fill="none" stroke="${color}" stroke-width="1.8"/><line class="plot-cursor" x1="30" x2="30" y1="14" y2="106"/></svg></figure>`;
+ return `<figure><figcaption>${title}<span>Peak ${number(max,unit)}</span></figcaption><svg viewBox="0 0 290 129" role="img" aria-label="${title} over pulse time. Linear scale, zero to ${max} ${unit}"><path d="M30 14V106H280" fill="none" stroke="#35483c"/><text x="26" y="116" fill="#adbcaf" font-size="9">0</text><text x="238" y="123" fill="#adbcaf" font-size="9">${config.durationUs} µs</text><path d="${path}" fill="none" stroke="${color}" stroke-width="1.8"/><line class="plot-cursor" x1="30" x2="30" y1="14" y2="106"/></svg></figure>`;
 }
 function recalculate(){result=simulateLaurelin(config);updateResults();draw();}
 function updateResults(){

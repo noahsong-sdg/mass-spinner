@@ -1,0 +1,15 @@
+{
+  "protocol": "Independent conditional 0D verification, frozen before production comparison",
+  "steps": [500, 2000],
+  "gates": {"stateRelative": 2e-8, "energyInitialNormalized": 2e-8, "yieldRelative500": 5e-4, "yieldRelative2000": 4e-5},
+  "cases": [
+    {"name": "default", "input": {}},
+    {"name": "constant-volume-decay", "input": {"compression": 1, "speedKmS": 0}},
+    {"name": "loss-dominated", "input": {"temperatureKeV": 0.5, "compression": 1, "speedKmS": 0, "confinementUs": 10, "durationUs": 1000}},
+    {"name": "high-compression", "input": {"temperatureKeV": 5, "compression": 30, "speedKmS": 600, "confinementUs": 2000, "durationUs": 25}},
+    {"name": "lower-endpoint-crossing", "input": {"temperatureKeV": 0.5, "compression": 1, "speedKmS": 0, "confinementUs": 600, "durationUs": 550}},
+    {"name": "upper-fit-crossing", "input": {"temperatureKeV": 10, "compression": 30, "speedKmS": 600, "confinementUs": 10000, "durationUs": 25}},
+    {"name": "zero-compression-exponent", "input": {"compression": 1.1548841085249135, "speedKmS": 0, "durationUs": 200, "confinementUs": 500}},
+    {"name": "inventory-efficiency-cadence", "input": {"densityM3": 1e23, "lengthM": 2.8, "driverEfficiency": 0.1, "recoveryEfficiency": 1, "frequencyHz": 20, "parasiticKW": 100}}
+  ]
+}

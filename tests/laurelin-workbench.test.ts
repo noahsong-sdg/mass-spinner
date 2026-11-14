@@ -38,6 +38,13 @@ test('timeline, plot cursors and rendered state use the same physical sample',t=
  f.click('restart');assert.equal(f.app.fraction,0);assert.equal(f.node('play').textContent,'Play');
  f.click('home');assert.equal(f.homes(),1);
 });
+test('full-pulse plot maxima are explicitly labeled and stay distinct from the selected state',t=>{
+ const f=fixture(t),captions=[...f.document.querySelectorAll('figcaption')].map(c=>c.textContent);
+ assert.equal(captions.length,3);for(const caption of captions)assert.match(caption!,/Peak /);
+ assert.match(captions[0]!,/Peak 3\.68 keV/);assert.equal(f.node('temperature').textContent,'1.00');
+ f.slide('timeline',.4);assert.equal(f.node('temperature').textContent,'1.56');
+ assert.deepEqual([...f.document.querySelectorAll('figcaption')].map(c=>c.textContent),captions);
+});
 test('panels and all component inspectors remain usable without overlay pileup',t=>{
  const f=fixture(t),buttons=[...f.document.querySelectorAll<HTMLButtonElement>('[data-panel]')];
  assert.equal(f.node('controls').hidden,true);assert.equal(buttons[0].getAttribute('aria-expanded'),'false');
