@@ -9,6 +9,11 @@ scale; full qualification remains incomplete. Earlier bounded
 1 microsecond radial and axial checks pass with corrected comparison arithmetic.
 This is research-backend qualification, not an update to the live playground.
 
+The subsequent [saved-state ring diagnosis](RING-DIAGNOSIS-V107.md) traces the
+late feature's radial/axial mass fluxes without changing the solver. Its
+independent reviews support unresolved evolving gradients; the density gate
+still fails and no unique faulty operator has been established.
+
 ## Question and cause
 
 V106 corrected a reproduced heat-discretization artifact, but retained six
