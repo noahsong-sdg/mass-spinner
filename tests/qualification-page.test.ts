@@ -18,4 +18,7 @@ test('published report is readable HTML with working evidence links and a local 
  assert.match(doc.body.textContent!,/not independent experimental voltage/);
  assert.match(doc.body.textContent!,/historically inferred using electrical observations/);
  assert.ok([...doc.querySelectorAll('main a')].some(a=>a.getAttribute('href')?.endsWith('/scientific/finite-contact-reference/results/RUN.md')));
+ assert.match(doc.body.textContent!,/current-spreading and voltage study/);
+ assert.match(doc.body.textContent!,/21.10\/17.47\/13.46 V/);
+ assert.match(doc.body.textContent!,/floating-wall current redistribution/);
 });

@@ -41,6 +41,8 @@ jobs:
             python3 scientific/public-fenicsx-reference/reference.py campaign-results/fenics-reference.json
             python3 -m unittest discover -s scientific/finite-contact-reference -p "test_*.py" -v
             python3 scientific/finite-contact-reference/campaign.py campaign-results/finite-contacts.json
+            python3 -m unittest discover -s scientific/voltage-footprint-reference -p "test_*.py" -v
+            python3 scientific/voltage-footprint-reference/voltage_campaign.py campaign-results/voltage-footprint.json
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

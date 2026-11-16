@@ -162,6 +162,21 @@ and [complete compressed field/budget receipt](../scientific/finite-contact-refe
 
 ### Remaining physical identification
 
+The follow-up [current-spreading and voltage study](../scientific/voltage-footprint-reference/results/RUN.md)
+now independently solves ideal equipotential finite contacts. On the same
+narrow/middle/broad supports, port voltages at prescribed 100 A are
+21.10/17.47/13.46 V, versus 21.86/18.12/14.11 V for prescribed uniform current.
+All nine mesh cases pass the original conservation/refinement screens; the
+boundary choice changes voltage by 3.5–4.7%, without choosing a preferred case.
+
+The source-supported voltage ledger keeps terminal 58±0.5 V, corrected
+18.5±2 V, modeled port voltage, and the radial probe proxy separate. The latter
+uses `phi(r,0)-phi(.05 m,0)`, matching the published alignment radius. The probe's
+conversion to plasma potential and the raw fixed-field V–I correction remain
+unrecovered; no measured probe points or new experimental score are admitted.
+The inherited Hall calibration, missing sheath/emission law and unmodeled
+floating-wall current redistribution still preclude experimental qualification.
+
 A physically justified finite cathode/anode current footprint and plasma-port
 voltage mapping are still needed, followed by matched
 non-rigid neutral/ion momentum, meridional transport and energy predictions.
