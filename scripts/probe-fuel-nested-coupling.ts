@@ -20,7 +20,7 @@ const conditions={material:'argon' as const,radiusM:R,lengthM:L,groundedDiskRadi
  linerMaterial:'tungsten' as const,coolingWK:0,electricalRadialCells:ne,electricalAxialCells:nz};
 const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
 const configAt=(n:number,steps:number)=>({...DEFAULT_SPATIAL_EXPERIMENT,radialCells:n,axialCells:nz,steps,axialSpacingPower:2,currentRelativeTolerance:1e-15});
-const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml',
+const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml','.github/workflows/liner-storage.yml',
  ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
   !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
 if(assessmentOnly)sourcePaths.push('.github/workflows/thermal-postprocessing.yml');
@@ -53,15 +53,15 @@ for(const {n,steps} of assessmentOnly?[]:requests){
  const started=performance.now();let failure:string|null=null,rows=0;
  try{for(let step=0;step<=steps;step++){
   const a=advance(state,step===0?0:dt);state=a.state;
-  const gas=fuelGasState(state.lightMass,state.heavyMass,state.gasEnergyJ,c),currents=a.electrical.boundaryCurrentsA;
+  const gas=fuelGasState(state.lightMass,state.heavyMass,state.gasEnergyJ,c),solid=fuelLinerState(liner,state.linerEnergyJ,state.linerEnergyCorrectionJ),currents=a.electrical.boundaryCurrentsA;
   const snapshot:FuelSpatialExperimentSnapshot={timeS:step===steps?durationS:step*dt,contactVoltageV:1,
    radiusM:gas.radiusM,omegaRadS:state.omegaRadS,temperatureK:gas.temperatureK,
    densityKgM3:state.lightMass.map((v,i)=>N*M*(v+state.heavyMass[i])/(2*volume)),
    lightMass:state.lightMass,heavyMass:state.heavyMass,electrodeCurrentA:sum(currents.slice(0,nz-1))+currents.at(-1)!,
    electricalPowerW:a.electrical.electrodePowerW,kineticJ:a.momentum.kineticJ,gasEnergyJ:gas.energyJ,
-   linerEnergyJ:sum(state.linerEnergyJ),angularMomentumKgM2S:a.momentum.angularMomentumKgM2S,
-   gasCellEnergyJ:state.gasEnergyJ,linerCellEnergyJ:state.linerEnergyJ,
-   linerTemperatureK:fuelLinerState(liner,state.linerEnergyJ).temperatureK,intervalGasWallHeatJ:a.thermal.gasExchangeJ,
+   linerEnergyJ:solid.energyJ,angularMomentumKgM2S:a.momentum.angularMomentumKgM2S,
+   gasCellEnergyJ:state.gasEnergyJ,linerCellEnergyJ:state.linerEnergyJ,linerCellEnergyCorrectionJ:state.linerEnergyCorrectionJ,
+   linerTemperatureK:solid.temperatureK,intervalGasWallHeatJ:a.thermal.gasExchangeJ,
    jouleByGasCellW:a.jouleWByGasCell,torqueByGasCellNm:a.torqueNmByGasCell,joulePowerW:a.electrical.jouleW,
    mechanicalPowerW:a.electrical.mechanicalW,stepOmegaMismatchRadS:a.maxOmegaMismatchRadS,
    stepMechanicalEndpointDefectJ:a.mechanicalEndpointDefectJ,thermalRowResidualJ:a.thermal.maximumRowResidualJ,
@@ -69,6 +69,7 @@ for(const {n,steps} of assessmentOnly?[]:requests){
    intervalElectricalWorkJ:a.inputWorkJ,maxCellCurrentResidualA:a.electrical.maxCellCurrentResidualA};
   const receipt={step,snapshot,faceTransfers:a.faceTransfers,sourceOmegaRadS:a.sourceOmegaRadS,
    thermalEnergyChangeJ:a.thermal.energyChangeJ,thermalStorageDefectJByCell:a.thermal.storageDefectJByCell,
+   thermalCompensatedStorageDefectJByCell:a.thermal.compensatedStorageDefectJByCell,
    thermalTemperatureIncrementK:[...a.thermal.gasTemperatureIncrementK,...a.thermal.linerTemperatureIncrementK],
    thermalGasSourceJ:a.thermal.gasSourceJ,thermalGasSolveTemperatureK:a.thermal.gasTemperatureK,
    numericalLossJ:a.momentum.increment.numericalLossJ,wallWorkJ:a.momentum.increment.wallWorkJ,

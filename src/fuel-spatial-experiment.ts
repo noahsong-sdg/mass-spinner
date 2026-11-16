@@ -35,7 +35,7 @@ export interface FuelSpatialExperimentSnapshot {
  timeS:number;contactVoltageV:number;radiusM:number[];omegaRadS:number[];temperatureK:number[];
  densityKgM3:number[];lightMass:number[];heavyMass:number[];electrodeCurrentA:number;electricalPowerW:number;
  kineticJ:number;gasEnergyJ:number;linerEnergyJ:number;angularMomentumKgM2S:number;
- gasCellEnergyJ:number[];linerCellEnergyJ:number[];linerTemperatureK:number[];
+ gasCellEnergyJ:number[];linerCellEnergyJ:number[];linerTemperatureK:number[];linerCellEnergyCorrectionJ?:number[];
  intervalGasWallHeatJ:number;jouleByGasCellW:number[];torqueByGasCellNm:number[];
  joulePowerW:number;mechanicalPowerW:number;stepOmegaMismatchRadS:number;
  stepMechanicalEndpointDefectJ:number;thermalRowResidualJ:number;electricalEnergyResidualW:number;
@@ -61,12 +61,13 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
  const stepper=(powered:boolean)=>powered?on:off??(off=createFuelSpatialStepper(setup(0)));
  let state:FuelSpatialState={lightMass:Array(nr).fill(1/nr),heavyMass:Array(nr).fill(1/nr),omegaRadS:Array(nr).fill(0),
   gasEnergyJ:Array(nr).fill(1.5*K*number*config.temperatureK/nr),linerEnergyJ:initialFuelLinerEnergy(liner,config.temperatureK)};
- const initialGasJ=sum(state.gasEnergyJ),initialLinerJ=sum(state.linerEnergyJ);
+ const initialGasJ=sum(state.gasEnergyJ),initialLinerEnergy=[...state.linerEnergyJ];
  const budgets={electricWorkJ:0,driveImpulseKgM2S:0,wallImpulseKgM2S:0,wallWorkJ:0,numericalLossJ:0,
   coolingEnergyJ:0,energyResidualJ:0,angularResidualKgM2S:0,maxStepEnergyResidualJ:0,maxStepAngularResidualKgM2S:0};
  type Step=ReturnType<typeof on>;
  const snapshot=(timeS:number,voltage:number,result:Step,acceptedStep=result):FuelSpatialExperimentSnapshot=>{
   const gas=fuelGasState(state.lightMass,state.heavyMass,state.gasEnergyJ,c);
+  const solid=fuelLinerState(liner,state.linerEnergyJ,state.linerEnergyCorrectionJ);
   const currents=result.electrical.boundaryCurrentsA;
   if(currents.length!==nz+nr/2)throw new RangeError('Spatial lab cell electrode-current topology changed.');
   // The existing solver appends outer contacts j=0..nz-2, then upper disk
@@ -78,9 +79,10 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
    densityKgM3:state.lightMass.map((v,i)=>number*ARGON_KG*(v+state.heavyMass[i])/(2*volume)),
    lightMass:[...state.lightMass],heavyMass:[...state.heavyMass],electrodeCurrentA,
    electricalPowerW:result.electrical.electrodePowerW,kineticJ:result.momentum.kineticJ,
-   angularMomentumKgM2S:result.momentum.angularMomentumKgM2S,gasEnergyJ:gas.energyJ,linerEnergyJ:sum(state.linerEnergyJ),
+   angularMomentumKgM2S:result.momentum.angularMomentumKgM2S,gasEnergyJ:gas.energyJ,linerEnergyJ:solid.energyJ,
    gasCellEnergyJ:[...state.gasEnergyJ],linerCellEnergyJ:[...state.linerEnergyJ],
-   linerTemperatureK:fuelLinerState(liner,state.linerEnergyJ).temperatureK,intervalGasWallHeatJ:acceptedStep.thermal.gasExchangeJ,
+   linerCellEnergyCorrectionJ:[...(state.linerEnergyCorrectionJ??state.linerEnergyJ.map(()=>0))],
+   linerTemperatureK:solid.temperatureK,intervalGasWallHeatJ:acceptedStep.thermal.gasExchangeJ,
    jouleByGasCellW,torqueByGasCellNm,joulePowerW:result.electrical.jouleW,mechanicalPowerW:result.electrical.mechanicalW,
    stepOmegaMismatchRadS:acceptedStep.maxOmegaMismatchRadS,stepMechanicalEndpointDefectJ:acceptedStep.mechanicalEndpointDefectJ,
    thermalRowResidualJ:acceptedStep.thermal.maximumRowResidualJ,electricalEnergyResidualW:result.electrical.energyResidualW,
@@ -106,7 +108,8 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
   snapshots.push(snapshot(i===config.steps?config.durationS:i*dt,voltage,endpoint,result));
  }
  const final=snapshots.at(-1)!;
- budgets.energyResidualJ=final.kineticJ+(final.gasEnergyJ-initialGasJ)+(final.linerEnergyJ-initialLinerJ)+
+ const linerChangeJ=sum(state.linerEnergyJ.map((u,i)=>(u-initialLinerEnergy[i])+(state.linerEnergyCorrectionJ?.[i]??0)));
+ budgets.energyResidualJ=final.kineticJ+(final.gasEnergyJ-initialGasJ)+linerChangeJ+
   budgets.coolingEnergyJ-budgets.electricWorkJ-budgets.wallWorkJ+budgets.numericalLossJ;
  budgets.angularResidualKgM2S=final.angularMomentumKgM2S-budgets.driveImpulseKgM2S-budgets.wallImpulseKgM2S;
  if(Object.values(budgets).some(v=>!Number.isFinite(v)))throw new RangeError('Spatial lab cell budgets exceed the finite domain.');

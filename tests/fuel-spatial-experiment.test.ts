@@ -32,6 +32,8 @@ test('driven trajectory resolves non-rigid momentum, heat, electrode current and
   close(sum(s.jouleByGasCellW),s.joulePowerW);
   close(sum(s.inertiaKgM2.map((v,i)=>v*s.omegaRadS[i])),s.angularMomentumKgM2S);
   assert.equal(s.linerTemperatureK.length,3);assert.equal(s.inertiaKgM2.length,r.config.radialCells);
+  assert.equal(s.linerCellEnergyCorrectionJ?.length,3);
+  s.linerCellEnergyCorrectionJ!.forEach((low,i)=>assert.equal(s.linerCellEnergyJ[i]+low,s.linerCellEnergyJ[i]));
   assert.ok(Number.isFinite(s.maxCellCurrentResidualA)&&s.maxCellCurrentResidualA>=0);
   for(const a of [s.radiusM,s.omegaRadS,s.temperatureK,s.densityKgM3,s.lightMass,s.heavyMass]){
    assert.equal(a.length,r.config.radialCells);assert.ok(a.every(Number.isFinite));

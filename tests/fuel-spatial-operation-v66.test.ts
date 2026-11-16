@@ -114,3 +114,12 @@ test('paired wall state rejects malformed, overlapping and out-of-domain words',
  assert.throws(()=>fuelLinerState(c.liner,maximum,tiny),/enthalpy domain/);
  assert.throws(()=>fuelLinerState(c.liner,[0,0,0],[-Number.MIN_VALUE,0,0]),/normalized|enthalpy domain/);
 });
+
+test('legacy states mean zero correction and zero time preserves nonzero paired energy exactly',()=>{
+ const {c,s}=fixture(),step=createFuelSpatialStepper(c),legacy=JSON.parse(JSON.stringify(s));
+ assert.deepEqual(step(legacy,1e-9),step({...legacy,linerEnergyCorrectionJ:[0,0,0]},1e-9));
+ const low=s.linerEnergyJ.map((u,i)=>(i%2?-1:1)*Number.EPSILON*u/16);
+ const paired=JSON.parse(JSON.stringify({...s,linerEnergyCorrectionJ:low})),a=step(paired,0);
+ assert.deepEqual(a.state.linerEnergyJ,paired.linerEnergyJ);
+ assert.deepEqual(a.state.linerEnergyCorrectionJ,paired.linerEnergyCorrectionJ);
+});

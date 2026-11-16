@@ -15,6 +15,12 @@ GAS_LEVELS = (1024, 2048, 4096)
 TIME_LEVELS = (64, 128, 256)
 
 
+def paired_liner_changes(current, old):
+    return [math.fsum((h - prior_h, low - prior_low)) for h, prior_h, low, prior_low in zip(
+        current['linerCellEnergyJ'], old['linerCellEnergyJ'],
+        current.get('linerCellEnergyCorrectionJ', [0.] * 3), old.get('linerCellEnergyCorrectionJ', [0.] * 3))]
+
+
 def audit_case(root, case, packet):
     n, steps = case['n'], case['steps']
     conditions = packet['conditions']
@@ -39,7 +45,7 @@ def audit_case(root, case, packet):
         value = ratio(abs(defect), actual_input)
         if value is not None:
             target[name] = max(target.get(name, 0.), value)
-    count = incremental_rows = 0
+    count = incremental_rows = paired_rows = 0
     with gzip.open(path, 'rt', encoding='utf-8') as stream:
         for line in stream:
             row = read_json(line)
@@ -51,6 +57,10 @@ def audit_case(root, case, packet):
             heavy = array(s['heavyMass'], n, 'heavy inventory', positive=True)
             gas = array(s['gasCellEnergyJ'], n, 'gas internal energy', positive=True)
             liner = array(s['linerCellEnergyJ'], 3, 'liner internal energy')
+            low_key = 'linerCellEnergyCorrectionJ'
+            lows = array(s.get(low_key, [0.] * 3), 3, 'liner energy correction')
+            require(all(h + low == h for h, low in zip(liner, lows)), 'Liner high/low pairs must be normalized')
+            paired_rows += low_key in s
             omega = array(s['omegaRadS'], n, 'accepted angular speed')
             source_omega = array(row['sourceOmegaRadS'], n, 'source angular speed')
             inertia = array(s['inertiaKgM2'], n, 'accepted inertia', positive=True)
@@ -72,6 +82,9 @@ def audit_case(root, case, packet):
             require(row['numericalLossJ'] >= 0, 'Negative native numerical dissipation')
             fields = ('thermalEnergyChangeJ', 'thermalStorageDefectJByCell', 'thermalGasSourceJ',
                       'thermalTemperatureIncrementK', 'thermalGasSolveTemperatureK')
+            compensated_key = 'thermalCompensatedStorageDefectJByCell'
+            if compensated_key in row:
+                require(low_key in s and all(name in row for name in fields), 'Partial compensated thermal receipt')
             if any(name in row for name in fields):
                 require(all(name in row for name in fields), 'Partial incremental thermal receipt')
                 changes = array(row[fields[0]], n + 3, fields[0])
@@ -87,6 +100,13 @@ def audit_case(root, case, packet):
                 peak('thermalIncrementEnergyResidualJ', incremental_residual)
                 peak('thermalStoredEnergyResidualJ', stored_residual)
                 peak('thermalStorageResidualIdentityMismatchJ', math.fsum((stored_residual, -incremental_residual, -math.fsum(storage))))
+                if compensated_key in row:
+                    compensated = array(row[compensated_key], n + 3, compensated_key)
+                    paired_changes = stored_changes[:n] + paired_liner_changes(s, previous or s)
+                    peak('thermalCompensatedCellStorageIdentityMismatchJ', max(abs(a - b - c) for a, b, c in zip(paired_changes, changes, compensated)))
+                    paired_residual = math.fsum([*paired_changes, row['coolingJ'], *(-v for v in source)])
+                    peak('thermalPairedStoredEnergyResidualJ', paired_residual)
+                    peak('thermalCompensatedStorageResidualIdentityMismatchJ', math.fsum((paired_residual, -incremental_residual, -math.fsum(compensated))))
                 canonical_t = [u / (1.5 * 1.380649e-23 * number * ((a + b) / 2)) for u, a, b in zip(gas, light, heavy)]
                 peak('thermalNativeCanonicalGasMismatchK', max(abs(a - b) for a, b in zip(solve_t, canonical_t)))
                 incremental_rows += 1
@@ -133,22 +153,26 @@ def audit_case(root, case, packet):
                 loss_terms.append(row['numericalLossJ']); cooling_terms.append(row['coolingJ'])
                 drive_terms.append(row['driveImpulse']); wall_impulse_terms.append(row['wallImpulse'])
                 heat_terms.append(s['intervalGasWallHeatJ'])
-                energy = math.fsum((s['kineticJ'] - previous['kineticJ'], delta(gas, previous['gasCellEnergyJ']),
-                                   delta(liner, previous['linerCellEnergyJ']), row['coolingJ'],
-                                   -s['intervalElectricalWorkJ'], -row['wallWorkJ'], row['numericalLossJ']))
+                step_terms = (s['kineticJ'] - previous['kineticJ'], delta(gas, previous['gasCellEnergyJ']),
+                              row['coolingJ'], -s['intervalElectricalWorkJ'], -row['wallWorkJ'], row['numericalLossJ'])
+                liner_step = math.fsum(paired_liner_changes(s, previous))
+                energy = math.fsum((*step_terms, liner_step))
                 angular = math.fsum((s['angularMomentumKgM2S'] - previous['angularMomentumKgM2S'],
                                     -row['driveImpulse'], -row['wallImpulse']))
-                prefix_energy = math.fsum((s['kineticJ'] - first['kineticJ'], delta(gas, first['gasCellEnergyJ']),
-                                          delta(liner, first['linerCellEnergyJ']), math.fsum(cooling_terms),
-                                          -math.fsum(work_terms), -math.fsum(wall_terms), math.fsum(loss_terms)))
+                prefix_terms = (s['kineticJ'] - first['kineticJ'], delta(gas, first['gasCellEnergyJ']), math.fsum(cooling_terms),
+                                -math.fsum(work_terms), -math.fsum(wall_terms), math.fsum(loss_terms))
+                liner_prefix = math.fsum(paired_liner_changes(s, first))
+                prefix_energy = math.fsum((*prefix_terms, liner_prefix))
                 prefix_angular = math.fsum((s['angularMomentumKgM2S'] - first['angularMomentumKgM2S'],
                                            -math.fsum(drive_terms), -math.fsum(wall_impulse_terms)))
                 for name, value in [('stepEnergyDefectJ', energy), ('prefixEnergyDefectJ', prefix_energy),
+                                    ('highOnlyStepEnergyDefectJ', math.fsum((*step_terms, delta(liner, previous['linerCellEnergyJ'])))),
+                                    ('highOnlyPrefixEnergyDefectJ', math.fsum((*prefix_terms, delta(liner, first['linerCellEnergyJ'])))),
                                     ('stepAngularDefect', angular), ('prefixAngularDefect', prefix_angular),
                                     ('nativeStepEnergyResidualMismatchJ', energy - row['energyResidualJ']),
                                     ('nativeStepAngularResidualMismatch', angular - row['angularResidual']),
-                                    ('linerStepDefectJ', math.fsum((delta(liner, previous['linerCellEnergyJ']), row['coolingJ'], -s['intervalGasWallHeatJ']))),
-                                    ('linerPrefixDefectJ', math.fsum((delta(liner, first['linerCellEnergyJ']), math.fsum(cooling_terms), -math.fsum(heat_terms)))),
+                                    ('linerStepDefectJ', math.fsum((liner_step, row['coolingJ'], -s['intervalGasWallHeatJ']))),
+                                    ('linerPrefixDefectJ', math.fsum((liner_prefix, math.fsum(cooling_terms), -math.fsum(heat_terms)))),
                                     ('driveImpulseScheduleDefect', row['driveImpulse'] - dt * math.fsum(torque)),
                                     ('sourceWorkScheduleDefectJ', s['intervalElectricalWorkJ'] - dt * s['electricalPowerW']),
                                     ('nativeEndpointWorkDefectMismatchJ', dt * (endpoint_work - s['mechanicalPowerW']) - s['stepMechanicalEndpointDefectJ'])]:
@@ -163,7 +187,8 @@ def audit_case(root, case, packet):
     require(count == case['rows'] and (count == steps + 1 if complete else count <= steps + 1), 'Declared accepted-row count mismatch')
     require(count > 0, 'No accepted initial state')
     return {'file': case['file'], 'sha256': checksum, 'n': n, 'steps': steps, 'acceptedRows': count,
-            'complete': complete, 'failure': case['failure'], 'incrementalThermalRows': incremental_rows, 'peaks': peaks,
+            'complete': complete, 'failure': case['failure'], 'incrementalThermalRows': incremental_rows,
+            'pairedLinerRows': paired_rows, 'peaks': peaks,
             'maxStepRelativeDefects': step_relative, 'maxPrefixRelativeDefects': prefix_relative,
             'actualSignedElectricalWorkJ': math.fsum(work_terms), 'actualAbsoluteElectricalWorkJ': math.fsum(map(abs, work_terms)),
             'actualNumericalLossJ': math.fsum(loss_terms), 'actualWallWorkJ': math.fsum(wall_terms),
@@ -208,7 +233,7 @@ def audit(root, source_root=None):
             'allTrajectoriesComplete': all(c['complete'] for c in cases), 'cases': cases,
             'energyAcceptanceThreshold': None, 'numericallyQualified': False, 'experimentallyQualified': False,
             'liveDefaultReplaced': False,
-            'scope': 'Stored-row accounting and q-adjoint diagnostics at one fixed electrical mesh. No convergence rescoring, wall constitutive reconstruction, continuum, local startup or experimental qualification. Zero actual-work denominators are omitted, never floored.'}
+            'scope': 'Stored-row accounting (optional paired liner lows; missing means zero) and q-adjoint diagnostics at one fixed electrical mesh. High-only and paired ledgers are distinct. No convergence rescoring, wall constitutive reconstruction, continuum, local startup or experimental qualification. Zero actual-work denominators are omitted, never floored.'}
 
 
 def self_test():
@@ -242,6 +267,7 @@ def self_test():
                 root = Path(temporary)
                 _, case, packet = self.fixture(root)
                 result = audit_case(root, case, packet)
+                self.assertEqual(result['pairedLinerRows'], 0, 'Legacy receipts have zero low words')
                 for name in ('adjointGroupingDefectW', 'sourceMechanicalPowerDefectW',
                              'stepEnergyDefectJ', 'prefixEnergyDefectJ', 'stepAngularDefect'):
                     self.assertEqual(result['peaks'][name], 0.)
@@ -303,6 +329,49 @@ def self_test():
                 write()
                 with self.assertRaisesRegex(ValueError, 'Partial incremental'):
                     audit_case(root, case, packet)
+        def test_paired_liner_carry_signed_prefix_and_partial_refusal(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                rows, case, packet = self.fixture(root)
+                rows.append(json.loads(json.dumps(rows[1])))
+                case.update(steps=2, rows=3); packet['durationS'] = .5
+                capacity = 1.5 * 1.380649e-23 * packet['totalParticles'] / 4
+                for step, row in enumerate(rows):
+                    s = row['snapshot']; row['step'] = step; s['timeS'] = .25 * step
+                    s['gasCellEnergyJ'] = [[10.] * 4, [10.375] * 4, [11.] * 4][step]
+                    s['linerCellEnergyJ'] = [float(2**52 + (step == 1)), 2., 3.]
+                    s['linerCellEnergyCorrectionJ'] = [-.25 if step == 1 else .25, 0., 0.]
+                    wall_heat = [0., .5, -.5][step]
+                    s['intervalGasWallHeatJ'] = wall_heat
+                    gas_change = [0., .375, .625][step]
+                    row.update(thermalEnergyChangeJ=[gas_change] * 4 + [wall_heat, 0., 0.],
+                               thermalStorageDefectJByCell=[0.] * 4 + [wall_heat, 0., 0.],
+                               thermalCompensatedStorageDefectJByCell=[0.] * 7,
+                               thermalGasSourceJ=[0. if step == 0 else .5] * 4,
+                               thermalTemperatureIncrementK=[0.] * 7,
+                               thermalGasSolveTemperatureK=[u / capacity for u in s['gasCellEnergyJ']])
+                path = root / case['file']
+                def write():
+                    path.write_bytes(b''.join(gzip.compress((json.dumps(r) + '\n').encode()) for r in rows))
+                    case['sha256'] = digest(path)
+                write(); result = audit_case(root, case, packet)
+                self.assertEqual(result['pairedLinerRows'], 3)
+                for name in ('stepEnergyDefectJ', 'prefixEnergyDefectJ', 'linerStepDefectJ', 'linerPrefixDefectJ',
+                             'thermalCellStorageIdentityMismatchJ', 'thermalCompensatedCellStorageIdentityMismatchJ',
+                             'thermalPairedStoredEnergyResidualJ', 'thermalCompensatedStorageResidualIdentityMismatchJ'):
+                    self.assertEqual(result['peaks'][name], 0., name)
+                self.assertEqual(result['peaks']['highOnlyStepEnergyDefectJ'], .5)
+                self.assertEqual(result['peaks']['highOnlyPrefixEnergyDefectJ'], .5)
+                self.assertEqual(result['peaks']['thermalStoredEnergyResidualJ'], .5)
+                for bad, message in ((None, 'Partial compensated'), ([0.], 'liner energy correction'),
+                                     ([.75, 0., 0.], 'normalized'), ([float('inf'), 0., 0.], 'finite')):
+                    if bad is None:
+                        del rows[1]['snapshot']['linerCellEnergyCorrectionJ']
+                    else:
+                        rows[1]['snapshot']['linerCellEnergyCorrectionJ'] = bad
+                    write()
+                    with self.assertRaisesRegex(ValueError, message):
+                        audit_case(root, case, packet)
     return unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Tests)).wasSuccessful()
 
 
