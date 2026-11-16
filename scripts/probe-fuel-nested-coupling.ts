@@ -7,9 +7,11 @@ import {createInterface} from 'node:readline';
 import {createFuelSpatialStepper,type FuelSpatialSetup,type FuelSpatialState} from '../src/fuel-spatial-operation.js';
 import {createFuelLiner,initialFuelLinerEnergy,fuelLinerState} from '../src/fuel-thermal.js';
 import {fuelGasState} from '../src/fuel-gas.js';
-import {DEFAULT_SPATIAL_EXPERIMENT,type FuelSpatialExperimentSnapshot} from '../src/fuel-spatial-experiment.js';
+import {DEFAULT_SPATIAL_EXPERIMENT,type FuelSpatialExperimentConfig,type FuelSpatialExperimentSnapshot} from '../src/fuel-spatial-experiment.js';
 import {assessSpatialRefinement} from '../src/fuel-spatial-convergence.js';
-const output=process.argv[2];mkdirSync(output);
+const output=process.argv[2],assessmentOnly=process.argv[3]==='--assess-only';
+if(process.argv[3]!==undefined&&!assessmentOnly)throw new RangeError('Only --assess-only can reuse retained trajectories.');
+if(!assessmentOnly)mkdirSync(output);
 const R=.01,L=.1,N=1e19,M=39.948*1.66053906892e-27,K=1.380649e-23,T=1000,durationS=1e-6;
 const ne=16,nz=32,gasLevels=[1024,2048,4096],timeLevels=[64,128,256];
 const sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0);
@@ -20,9 +22,16 @@ const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
 const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml',
  ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
   !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
-const sourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
-const cases=[];
-for(const {n,steps} of requests){
+const assessmentSourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
+const retained=assessmentOnly?JSON.parse(readFileSync(output+'/index.json','utf8')):null;
+if(retained&&(retained.schemaVersion!==1||retained.durationS!==durationS||retained.totalParticles!==N||
+ Object.entries(conditions).some(([key,value])=>JSON.stringify(retained.conditions[key])!==JSON.stringify(value))||
+ retained.cases.length!==requests.length||requests.some(({n,steps})=>retained.cases.filter((c:{n:number;steps:number})=>c.n===n&&c.steps===steps).length!==1)))
+ throw new RangeError('Retained assessment needs all nine trajectories from the unchanged protocol.');
+const sourceFiles:Record<string,string>=retained?.sourceFiles??assessmentSourceFiles;
+type Case={n:number;steps:number;config:FuelSpatialExperimentConfig;file:string;sha256:string;rows:number;failure:string|null;elapsedMs:number};
+const cases:Case[]=retained?.cases??[];
+for(const {n,steps} of assessmentOnly?[]:requests){
  const liner=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
  const c:FuelSpatialSetup={number:N,lightFraction:.5,speciesMassKg:[M,M],radiusM:R,lengthM:L,diffusivityM2S:.001,
   material:'argon',currentRelativeTolerance:1e-15,liner,boundary:{gasWallWK:.1,coolingWK:0,coolantK:T},
@@ -88,7 +97,7 @@ for(const n of gasLevels){
  const h=await Promise.all(selected.map(v=>read(v,v.steps)));
  comparisons.push(assessSpatialRefinement([h[0],h[1],h[2]],'steps'));
 }
-const assessment={schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,cases,comparisons,maxRssKiB:process.resourceUsage().maxRSS,
+const assessment={schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,assessmentSourceFiles,cases,comparisons,maxRssKiB:process.resourceUsage().maxRSS,
  numericallyQualified:false,experimentallyQualified:false,liveDefaultReplaced:false,
  scope:'Fully evolving gas/species/momentum/heat on one fixed e16/z32 electrical mesh. Three-cell liner fixed; no electrical continuum, local startup, experimental or live-slider qualification.'};
 writeFileSync(output+'/assessment.json',JSON.stringify(assessment)+'\n');
