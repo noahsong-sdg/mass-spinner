@@ -37,9 +37,11 @@ jobs:
         env:
           GH_TOKEN: '${{ github.token }}'
           PRODUCER_RUN: '${{ matrix.run }}'
+          PRODUCER_SHA: '${{ matrix.producer }}'
         run: |
           while [ "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN" --jq .status)" != completed ]; do sleep 15; done
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN" > producer-run.json
+          jq -e --arg sha "$PRODUCER_SHA" '.head_sha == $sha' producer-run.json
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN/artifacts" > producer-artifacts.json
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
@@ -58,6 +60,7 @@ jobs:
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check sh -eu -c '
             npm run typecheck
+            node --import tsx --test tests/nested-heat-reuse.test.ts
             node --import tsx scripts/probe-fuel-nested-coupling.ts retained/nested-output --assess-only
             python3 scientific/spatial-argon-20261116/audit_nested.py retained/nested-output --source-root producer --output retained/nested-output/independent-reassessment.json
           '

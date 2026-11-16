@@ -19,16 +19,21 @@ const conditions={material:'argon' as const,radiusM:R,lengthM:L,groundedDiskRadi
  diffusivityM2S:.001,sigmaPerpSM:.01,sigmaParallelSM:.1,gasWallWK:.1,linerThicknessM:.001,
  linerMaterial:'tungsten' as const,coolingWK:0,electricalRadialCells:ne,electricalAxialCells:nz};
 const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
+const configAt=(n:number,steps:number)=>({...DEFAULT_SPATIAL_EXPERIMENT,radialCells:n,axialCells:nz,steps,axialSpacingPower:2,currentRelativeTolerance:1e-15});
 const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml',
  ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
   !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
+if(assessmentOnly)sourcePaths.push('.github/workflows/thermal-postprocessing.yml');
 const assessmentSourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
-const retained=assessmentOnly?JSON.parse(readFileSync(output+'/index.json','utf8')):null;
+const retainedBytes=assessmentOnly?readFileSync(output+'/index.json'):null,retained=retainedBytes?JSON.parse(retainedBytes.toString('utf8')):null;
 if(retained&&(retained.schemaVersion!==1||retained.durationS!==durationS||retained.totalParticles!==N||
+ !retained.sourceFiles||Object.keys(retained.sourceFiles).length===0||
+ Object.values(retained.sourceFiles).some(value=>typeof value!=='string'||!/^[a-f0-9]{64}$/.test(value))||
  Object.entries(conditions).some(([key,value])=>JSON.stringify(retained.conditions[key])!==JSON.stringify(value))||
- retained.cases.length!==requests.length||requests.some(({n,steps})=>retained.cases.filter((c:{n:number;steps:number})=>c.n===n&&c.steps===steps).length!==1)))
+ retained.cases.length!==requests.length||requests.some(({n,steps})=>retained.cases.filter((c:{n:number;steps:number;config:FuelSpatialExperimentConfig})=>c.n===n&&c.steps===steps&&
+  c.config&&Object.entries(configAt(n,steps)).every(([key,value])=>c.config[key as keyof FuelSpatialExperimentConfig]===value)).length!==1)))
  throw new RangeError('Retained assessment needs all nine trajectories from the unchanged protocol.');
-const sourceFiles:Record<string,string>=retained?.sourceFiles??assessmentSourceFiles;
+const sourceFiles:Record<string,string>=assessmentOnly?retained.sourceFiles:assessmentSourceFiles;
 type Case={n:number;steps:number;config:FuelSpatialExperimentConfig;file:string;sha256:string;rows:number;failure:string|null;elapsedMs:number};
 const cases:Case[]=retained?.cases??[];
 for(const {n,steps} of assessmentOnly?[]:requests){
@@ -43,7 +48,7 @@ for(const {n,steps} of assessmentOnly?[]:requests){
  const advance=createFuelSpatialStepper(c),dt=durationS/steps,volume=Math.PI*R**2*L/n;
  let state:FuelSpatialState={lightMass:Array(n).fill(1/n),heavyMass:Array(n).fill(1/n),omegaRadS:Array(n).fill(0),
   gasEnergyJ:Array(n).fill(1.5*K*N*T/n),linerEnergyJ:initialFuelLinerEnergy(liner,T)};
- const config={...DEFAULT_SPATIAL_EXPERIMENT,radialCells:n,axialCells:nz,steps,axialSpacingPower:2,currentRelativeTolerance:1e-15};
+ const config=configAt(n,steps);
  const file=`coupled-g${n}-e${ne}-z${nz}-t${steps}.jsonl.gz`,fd=openSync(output+'/'+file,'wx'),hash=createHash('sha256');
  const started=performance.now();let failure:string|null=null,rows=0;
  try{for(let step=0;step<=steps;step++){
@@ -98,6 +103,8 @@ for(const n of gasLevels){
  comparisons.push(assessSpatialRefinement([h[0],h[1],h[2]],'steps'));
 }
 const assessment={schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,assessmentSourceFiles,cases,comparisons,maxRssKiB:process.resourceUsage().maxRSS,
+ resourceScope:assessmentOnly?'postprocessing only; capture peak unavailable':'capture and postprocessing',
+ retainedIndexSha256:retainedBytes?createHash('sha256').update(retainedBytes).digest('hex'):null,
  numericallyQualified:false,experimentallyQualified:false,liveDefaultReplaced:false,
  scope:'Fully evolving gas/species/momentum/heat on one fixed e16/z32 electrical mesh. Three-cell liner fixed; no electrical continuum, local startup, experimental or live-slider qualification.'};
 writeFileSync(output+'/assessment.json',JSON.stringify(assessment)+'\n');
