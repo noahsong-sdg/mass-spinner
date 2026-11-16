@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {advanceFuelSpatialOperation,type FuelSpatialSetup,type FuelSpatialState} from '../src/fuel-spatial-operation.js';
+import {advanceFuelSpatialOperation,createFuelSpatialStepper,type FuelSpatialSetup,type FuelSpatialState} from '../src/fuel-spatial-operation.js';
+import {solveFuelCurrent} from '../src/fuel-current.js';
 import {createFuelLiner,initialFuelLinerEnergy} from '../src/fuel-thermal.js';
 import {fuelArgonNeutralTransport} from '../src/fuel-neutral-transport.js';
 import {advanceFuelGasMass} from '../src/fuel-gas.js';
@@ -39,4 +40,22 @@ test('local rotation SG force reduces exactly to the rigid closure for a constan
  const mass=[.1,.2,.3,.4],temperature=[500,600,700,800],m=7*1.66053906892e-27;
  assert.deepEqual(advanceFuelGasMass(mass,temperature,m,3e4,.01,.001,.01),advanceFuelGasMass(mass,temperature,m,[3e4,3e4,3e4,3e4],.01,.001,.01));
  assert.throws(()=>advanceFuelGasMass(mass,temperature,m,[3e4],.01,.001,.01));
+});
+test('nested fine gas and coarse electrical cells preserve source power and accepted inertia',()=>{
+ const {c,s}=fixture();
+ s.lightMass=Array(8).fill(1/8);s.heavyMass=Array(8).fill(1/8);
+ s.gasEnergyJ=Array(8).fill(1.5*K*c.number/8*1000);
+ s.omegaRadS=[2000,-1000,3000,1000,-2000,4000,1000,-3000];
+ const a=advanceFuelSpatialOperation(c,s,1e-6),b=createFuelSpatialStepper(c)(s,1e-6);
+ assert.deepEqual(a,b);
+ const omega=Array.from({length:4},(_,i)=>(a.sourceOmegaRadS[2*i]+a.sourceOmegaRadS[2*i+1])/2);
+ const reference=solveFuelCurrent({...c.electrical,omegaRadS:Array.from({length:12},(_,i)=>omega[i%4])});
+ assert.deepEqual(a.electrical,reference);
+ assert.ok(Math.abs(a.mechanicalEndpointDefectJ)<1e-17);
+ assert.ok(Math.abs(a.momentum.angularResidualKgM2S)<1e-20);
+ assert.ok(Math.abs(a.energyResidualJ)<1e-10);
+ assert.equal(a.state.lightMass.length,8);assert.equal(a.electrical.torqueNm.length,12);
+ const invalid={...s,lightMass:Array(6).fill(1/6),heavyMass:Array(6).fill(1/6),
+  gasEnergyJ:Array(6).fill(1.5*K*c.number/6*1000),omegaRadS:Array(6).fill(0)};
+ assert.throws(()=>advanceFuelSpatialOperation(c,invalid,1e-6),/equal-volume/);
 });
