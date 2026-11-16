@@ -31,6 +31,7 @@ test('research panel stays lazy and uses its own voltage boundary controls and a
  assert.match(f.view.element.textContent!,/no ion–neutral slip control/);
  assert.match(f.view.element.textContent!,/4.63712%.*2.88464%/);
  assert.match(f.view.element.textContent!,/No electron energy/);
+ assert.match(f.view.element.textContent!,/not validated continuum limits/);assert.match(f.view.element.textContent!,/low-density rarefaction/);
  assert.match(f.view.element.textContent!,/shorts the driven and grounded contacts/);
  assert.match(f.doc.querySelector('select')!.textContent!,/First half, then shorted/);
  const pending=f.view.run();assert.equal(f.requests.length,1);
