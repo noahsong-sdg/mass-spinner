@@ -75,3 +75,20 @@ test('fine gas cells retain tiny temperature-driven transfers in the coupled hea
  assert.ok(a.state.lightMass.every(v=>v>0));
  assert.ok(a.thermal.massStorageDefectBySpecies.every(row=>row.every(Number.isFinite)));
 });
+
+test('repeated sub-ULP wall heat survives the stored coupled state and JSON continuation',()=>{
+ const {c,s}=fixture();
+ c.electrical.outerVoltageV.fill(0);s.omegaRadS.fill(0);
+ s.gasEnergyJ.fill(1.5*K*c.number/s.lightMass.length*1100);
+ const step=createFuelSpatialStepper(c),initial=[...s.linerEnergyJ];
+ let state=s,heat=0;
+ for(let i=0;i<64;i++){
+  // Each physical wall exchange is much smaller than the absolute wall ULP.
+  const result=step(state,1e-16);heat+=result.thermal.gasExchangeJ;
+  state=JSON.parse(JSON.stringify(result.state));
+ }
+ const correction=(state as FuelSpatialState&{linerEnergyCorrectionJ?:number[]}).linerEnergyCorrectionJ??initial.map(()=>0);
+ const storedChange=sum(state.linerEnergyJ.map((u,i)=>(u-initial[i])+correction[i]));
+ assert.ok(heat>0);
+ assert.ok(Math.abs(storedChange-heat)<.02*heat,`Stored wall heat ${storedChange} != accepted exchanges ${heat}`);
+});
