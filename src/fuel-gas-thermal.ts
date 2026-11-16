@@ -115,6 +115,17 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
    merit:Math.max(...residual.map((r,i)=>r===0?0:Math.abs(r)/tolerance[i]))};
  }
  let change=Array<number>(n).fill(0),accepted=evaluate(change);
+ function diagnostic(message:string){
+  const repeated=evaluate(change),again=evaluate(change);
+  const row=accepted.residual.reduce((best,r,i)=>Math.abs(r)/accepted.tolerance[i]>Math.abs(accepted.residual[best])/accepted.tolerance[best]?i:best,0);
+  return new RangeError(message+' [DEBUG-heat-increments] '+JSON.stringify({row,ng,dt,change:change[row],oldTemperature:oldValues[row],
+   residual:accepted.residual[row],tolerance:accepted.tolerance[row],energyChange:accepted.energyChange[row],
+   repeatedResidual:repeated.residual[row],againResidual:again.residual[row],
+   oldMass:oldMass.map(a=>a[row]),mass:[accepted.source.lightMass[row],accepted.source.heavyMass[row]],
+   roundoffEnergyScale:16*Number.EPSILON*Math.abs(oldEnergy[row]),
+   repeatedMass:[repeated.source.lightMass[row],repeated.source.heavyMass[row]],
+   source:row<ng?accepted.source.gasSourceJ[row]:accepted.source.dragEnergyJ}));
+ }
  for(let iteration=1;iteration<=160;iteration++){
   if(accepted.residual.every((r,i)=>Math.abs(r)<=accepted.tolerance[i])){
    const liner=fuelLinerState(grid,accepted.energy.slice(ng));
@@ -142,8 +153,8 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
    if(next.merit<accepted.merit||next.residual.every((r,i)=>Math.abs(r)<=next!.tolerance[i]))break;
    next=undefined;damping*=.5;
   }
-  if(!next)throw new RangeError('Coupled mixture energy iteration stalled; refine the time step.');
+  if(!next)throw diagnostic('Coupled mixture energy iteration stalled; refine the time step.');
   change=nextValues;accepted=next;
  }
- throw new RangeError('Coupled spatial mixture energy did not converge; refine the time step.');
+ throw diagnostic('Coupled spatial mixture energy did not converge; refine the time step.');
 }
