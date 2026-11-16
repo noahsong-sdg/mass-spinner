@@ -14,6 +14,7 @@ jobs:
           persist-credentials: false
       - name: Prepare locked tools
         run: |
+          git fetch --no-tags --depth=1 origin c2769b2e9d327d43fc87c55e96a5f9ba981a6f0e
           docker pull node:22-bookworm
           docker image inspect node:22-bookworm --format '{{.Id}}'
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm npm ci --ignore-scripts --no-audit --no-fund
@@ -24,7 +25,7 @@ jobs:
             cp -R src tests "$regression/"
             cp package.json "$regression/"
             ln -s /work/node_modules "$regression/node_modules"
-            git show c2769b2:src/fuel-spatial-convergence.ts > "$regression/src/fuel-spatial-convergence.ts"
+            git show c2769b2e9d327d43fc87c55e96a5f9ba981a6f0e:src/fuel-spatial-convergence.ts > "$regression/src/fuel-spatial-convergence.ts"
             if node --import tsx --test --test-name-pattern "quantized responses|ULP-sized contraction" "$regression/tests/fuel-spatial-convergence.test.ts"; then
               echo "Expected the pre-fix representation regressions to fail"
               exit 1

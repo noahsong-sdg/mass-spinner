@@ -83,7 +83,7 @@ export function assessSpatialRefinement(histories:readonly [History,History,Hist
   const representationScreen=32*Number.EPSILON*(c.config.radialCells/n)*background;
   const resolved=tolerance*scale>representationScreen;
   const coarseRelative=resolved?coarseDifference/scale:null,fineRelative=resolved?fineDifference/scale:null;
-  const contractionResolved=fineDifference===0&&coarseDifference===0||Math.abs(coarseDifference-fineDifference)>representationScreen;
+  const contractionResolved=representationScreen===0||fineDifference===0&&coarseDifference===0||Math.abs(coarseDifference-fineDifference)>representationScreen;
   const contracting=fineDifference<coarseDifference||coarseDifference===0&&fineDifference===0;
   const status=!resolved||!contractionResolved?'unresolved':coarseRelative!==null&&fineRelative!==null&&coarseRelative<tolerance&&fineRelative<tolerance&&contracting?'pass':'fail';
   return {name:field.name,unit:field.unit,scale,coarseDifference,fineDifference,coarseRelative,fineRelative,

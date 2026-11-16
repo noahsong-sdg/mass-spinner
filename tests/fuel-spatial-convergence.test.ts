@@ -70,6 +70,14 @@ test('an ULP-sized contraction margin remains unresolved even when both errors a
  assert.equal(metric.status,'unresolved');
 });
 
+test('an exact nonzero error tie fails strict contraction when no representation screen applies',()=>{
+ const histories=[fixture(),fixture(32),fixture(64)] as const,offsets=[2/256,1/256,0];
+ histories.forEach((h,i)=>{for(const row of h.snapshots.slice(1))row.omegaRadS.fill(1+offsets[i]);});
+ const metric=assessSpatialRefinement(histories,'steps').metrics.find(m=>m.name==='angularSpeed')!;
+ assert.equal(metric.coarseDifference,1/256);assert.equal(metric.fineDifference,1/256);
+ assert.equal(metric.contracting,false);assert.equal(metric.representationScreen,0);assert.equal(metric.status,'fail');
+});
+
 test('comparison refuses changed physics, missing accepted endpoints and nonfinite responses',()=>{
  const a=fixture(),b=fixture(32),c=fixture(64);
  b.config.contactVoltageV=2;assert.throws(()=>assessSpatialRefinement([a,b,c],'steps'),/frozen physical/);
