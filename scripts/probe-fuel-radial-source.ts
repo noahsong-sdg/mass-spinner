@@ -12,6 +12,7 @@ import {fuelNeutralTransport} from '../src/fuel-neutral-transport.js';
 const output=process.argv[2];mkdirSync(output);
 const K=1.380649e-23,M=39.948*1.66053906892e-27,R=.01,L=.1,N=1e19,T0=1000,D=.001;
 const steps=256,durationS=1e-6,dt=durationS/steps,nz=128,levels=[8,16,32,64,128,256];
+const gasLevels=[...levels,512,1024];
 const sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0),peak=(v:readonly number[])=>Math.max(...v.map(Math.abs));
 const restrict=(v:readonly number[],n:number)=>Array.from({length:n},(_,i)=>sum(v.slice(i*v.length/n,(i+1)*v.length/n)));
 const sources=levels.map(n=>{
@@ -26,8 +27,12 @@ const sources=levels.map(n=>{
   electricalEnergyResidualW:electrical.energyResidualW,elapsedMs:performance.now()-started};
 });
 const histories=[];
-for(const mode of ['native','common-fine'] as const)for(const source of sources){
- const n=source.n,powerW=mode==='native'?source.powerW:restrict(sources.at(-1)!.powerW,n);
+for(const mode of ['native','common-fine'] as const)for(const n of mode==='native'?levels:gasLevels){
+ const fine=sources.at(-1)!.powerW;
+ // Beyond the source mesh, keep its piecewise-constant power density exactly:
+ // every child receives its equal-volume share of its parent's cell power.
+ const powerW=mode==='native'?sources.find(s=>s.n===n)!.powerW:n<=fine.length?restrict(fine,n):
+  Array.from({length:n},(_,i)=>fine[Math.floor(i*fine.length/n)]*fine.length/n);
  const liner=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
  let mass=Array(n).fill(1/n),gasEnergyJ=Array(n).fill(1.5*K*N*T0/n),linerEnergyJ=initialFuelLinerEnergy(liner,T0);
  const snapshots=[{timeS:0,mass:[...mass],gasEnergyJ:[...gasEnergyJ],intervalWallHeatJ:0}];
@@ -47,8 +52,8 @@ for(const mode of ['native','common-fine'] as const)for(const source of sources)
  writeFileSync(output+'/source-histories.partial.json',JSON.stringify({sources,histories})+'\n');
 }
 const comparisons=[];
-for(const mode of ['native','common-fine'])for(let level=0;level<levels.length-2;level++){
- const n=levels[level],triple=histories.filter(h=>h.mode===mode&&h.n>=n&&h.n<=4*n);
+for(const mode of ['native','common-fine'])for(let level=0;level<(mode==='native'?levels:gasLevels).length-2;level++){
+ const n=gasLevels[level],triple=histories.filter(h=>h.mode===mode&&h.n>=n&&h.n<=4*n);
  const profiles=triple.map(h=>h.snapshots.map(s=>{
   const mass=restrict(s.mass,n),energy=restrict(s.gasEnergyJ,n);
   const gas=fuelGasState(mass,mass,energy,{number:N,lightFraction:.5,radiusM:R,lengthM:L});

@@ -59,3 +59,12 @@ every native source without rescaling its total power. If common-source errors
 fall while native-source errors persist, source discretization is implicated;
 if both fail similarly, gas resolution/transport remains limiting. No new live
 default, physical fit or promotion follows from either outcome.
+
+The [first source receipt](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43846474117)
+finds that common-source temperature passes the r32/64/128 and r64/128/256
+triples, but common-source density still fails (7.94% / 6.91% at r64/128/256).
+Extend only the common-source gas grid to 512 and 1024 cells. Keep its r256
+electrical source unchanged as a piecewise-constant power density: split each
+source cell's power equally among its equal-volume children. No new electrical
+solve, smoothing or fitted source is introduced. Retain all original modes and
+comparisons; score the two added radial triples with the same 2% gate.
