@@ -1,5 +1,9 @@
 # Coupled radial density: bounded convergence result
 
+Follow-up: [thermal increment precision](THERMAL-INCREMENT-PRECISION.md) fixes
+the wall-power contraction failure below. This page preserves the earlier
+producer's results; the follow-up has 66 passing and six unresolved checks.
+
 Tested code: `7ed99b04f3ab418b0dece5f4accace6635dc5e53`.
 The [protocol](NESTED-COUPLING-PROTOCOL.md) fixes the equations, parameters,
 nine-case matrix and original 2% spatial / 1% temporal gates before results.
