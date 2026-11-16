@@ -1,0 +1,10 @@
+{
+  "url": "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev",
+  "cloudflareVersion": "1c8ad085-44c2-4787-b583-70a839ccbb09",
+  "checkedUTC": "2026-11-16T20:48:34.582779+00:00",
+  "rootHTTP": {
+    "status": 403,
+    "reason": "Forbidden"
+  },
+  "browserVerification": "Supported IAB opened deployed page and executed real coupled sensitivity workers; this does not assert byte-level HTTP equality."
+}

@@ -1,0 +1,605 @@
+{
+  "schemaVersion": 1,
+  "kind": "public-component-verification",
+  "sourceFiles": {
+    "scripts/qualify-public-components.mjs": "837a9f4b0af45e713b9ade39782a48bd013755f5e639a062240d558d25a3c954",
+    "src/fuel-centrifuge.ts": "766df6af39c363e691711d239345e430cf7094288bf31d0ba834acbd81d44678",
+    "src/fuel-transport.ts": "a301bea2ef3c752205c7545005fc100cdc1253550f20720bd3689d57540a5b2a",
+    "src/fuel-current.ts": "0dbe952963bcbf2e8530d5d088bcb2cdc79cd57227d8fc9f5e3e95020cf7a537",
+    "src/fuel-thermal.ts": "feb7461250d513222b9fb6956f966cdf2905380848ea92a6c7572441a79ad6b0",
+    "src/fuel-gas-thermal.ts": "92a3d4bcc792ebeea40850c65c7949e7116d96908d63b0f77aa9afb4815f8790",
+    "src/fuel-gas.ts": "e1d500b4860d984f2eb4f21d25673134f2fadc58d8604bc466721aadd62b6e11",
+    "src/fuel-momentum.ts": "b631906a745caf4525c4b4da665998f33f2f34db235937a4e2a024a9116cfcad",
+    "package-lock.json": "aacc229fbf7412afa3c6160164c7ac0e05d4499547d752911b023bed504b6718"
+  },
+  "sourceHash": "1b5b025e6c71072471dbf8d5fd076a31fd35a3148e04afc49b4b3e5a4d9d96eb",
+  "controls": {
+    "rotor": {
+      "iiKgM2": 0.2,
+      "nnKgM2": 5,
+      "couplingKgM2S": 0.7,
+      "dragKgM2S": 0,
+      "torqueNm": 0.9
+    },
+    "equilibrium": {
+      "cells": 64,
+      "diffusionRateS": 1.3,
+      "stepS": 0.7,
+      "coordinate": "y=r²/R²",
+      "boundary": "closed"
+    },
+    "current": {
+      "innerRadiusM": 1,
+      "outerRadiusM": 2,
+      "lengthM": 1,
+      "radialCells": 16,
+      "axialCells": 4,
+      "sigmaPerpSM": 2,
+      "sigmaParallelSM": 7,
+      "magneticT": 3,
+      "voltageV": 10
+    },
+    "heat": {
+      "cells": 2,
+      "number": 1000000000000000000,
+      "radiusM": 0.01,
+      "lengthM": 0.1,
+      "stepS": 0.01,
+      "conductivityWMK": 0.2,
+      "gasWallWK": 0,
+      "coolingWK": 0,
+      "cellCapacityJK": 0.000010354867500000001
+    }
+  },
+  "numericallyVerified": true,
+  "experimentallyQualified": false,
+  "rows": [
+    {
+      "id": "rotor/0/ion",
+      "gate": "rotor",
+      "actual": 0,
+      "expected": 0,
+      "error": 0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/0/neutral",
+      "gate": "rotor",
+      "actual": 0,
+      "expected": 0,
+      "error": 0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/0/momentum",
+      "gate": "rotor",
+      "actual": 0,
+      "expected": 0,
+      "error": 0,
+      "limit": 1e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/1e-9/ion",
+      "gate": "rotor",
+      "actual": 4.499999992125e-9,
+      "expected": 4.499999992125e-9,
+      "error": 0,
+      "limit": 1.000004499999992e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/1e-9/neutral",
+      "gate": "rotor",
+      "actual": 3.149999996178e-19,
+      "expected": 3.1499999323481387e-19,
+      "error": 6.382986114424932e-27,
+      "limit": 1.0000000000000004e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/1e-9/momentum",
+      "gate": "rotor",
+      "actual": 8.999999999999999e-10,
+      "expected": 9.000000000000001e-10,
+      "error": 2.0679515313825692e-25,
+      "limit": 1.0000008999999999e-12,
+      "pass": true
+    },
+    {
+      "id": "rotor/0.3/ion",
+      "gate": "rotor",
+      "actual": 0.8417711070453583,
+      "expected": 0.8417711070453582,
+      "error": 1.1102230246251565e-16,
+      "limit": 8.427711070453583e-10,
+      "pass": true
+    },
+    {
+      "id": "rotor/0.3/neutral",
+      "gate": "rotor",
+      "actual": 0.02032915571818567,
+      "expected": 0.020329155718185672,
+      "error": 3.469446951953614e-18,
+      "limit": 2.1329155718185672e-11,
+      "pass": true
+    },
+    {
+      "id": "rotor/0.3/momentum",
+      "gate": "rotor",
+      "actual": 0.27,
+      "expected": 0.27,
+      "error": 0,
+      "limit": 2.7100000000000005e-10,
+      "pass": true
+    },
+    {
+      "id": "rotor/8/ion",
+      "gate": "rotor",
+      "actual": 2.573330515637941,
+      "expected": 2.57333051563794,
+      "error": 1.3322676295501878e-15,
+      "limit": 2.57433051563794e-9,
+      "pass": true
+    },
+    {
+      "id": "rotor/8/neutral",
+      "gate": "rotor",
+      "actual": 1.3370667793744824,
+      "expected": 1.3370667793744824,
+      "error": 0,
+      "limit": 1.3380667793744825e-9,
+      "pass": true
+    },
+    {
+      "id": "rotor/8/momentum",
+      "gate": "rotor",
+      "actual": 7.2,
+      "expected": 7.2,
+      "error": 0,
+      "limit": 7.201000000000001e-9,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/0/distribution",
+      "gate": "distribution",
+      "actual": 6.643990912991171e-16,
+      "expected": 0,
+      "error": 6.643990912991171e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/0/inventory",
+      "gate": "inventory",
+      "actual": 0.9999999999999999,
+      "expected": 1,
+      "error": 1.1102230246251565e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/1e-8/distribution",
+      "gate": "distribution",
+      "actual": 2.7582103268031233e-16,
+      "expected": 0,
+      "error": 2.7582103268031233e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/1e-8/inventory",
+      "gate": "inventory",
+      "actual": 1,
+      "expected": 1,
+      "error": 0,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/0.5/distribution",
+      "gate": "distribution",
+      "actual": 2.1163626406917047e-16,
+      "expected": 0,
+      "error": 2.1163626406917047e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/0.5/inventory",
+      "gate": "inventory",
+      "actual": 1,
+      "expected": 1,
+      "error": 0,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/8/distribution",
+      "gate": "distribution",
+      "actual": 9.885077782365026e-16,
+      "expected": 0,
+      "error": 9.885077782365026e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/8/inventory",
+      "gate": "inventory",
+      "actual": 0.9999999999999991,
+      "expected": 1,
+      "error": 8.881784197001252e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/50/distribution",
+      "gate": "distribution",
+      "actual": 8.020797901377235e-17,
+      "expected": 0,
+      "error": 8.020797901377235e-17,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/50/inventory",
+      "gate": "inventory",
+      "actual": 1,
+      "expected": 1,
+      "error": 0,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/300/distribution",
+      "gate": "distribution",
+      "actual": 1.1453304644563117e-16,
+      "expected": 0,
+      "error": 1.1453304644563117e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "equilibrium/300/inventory",
+      "gate": "inventory",
+      "actual": 0.9999999999999999,
+      "expected": 1,
+      "error": 1.1102230246251565e-16,
+      "limit": 3e-11,
+      "pass": true
+    },
+    {
+      "id": "current/0/current",
+      "gate": "current",
+      "actual": 181.29440567308694,
+      "expected": 181.29440567308774,
+      "error": 7.958078640513122e-13,
+      "limit": 1.8129440567308774e-7,
+      "pass": true
+    },
+    {
+      "id": "current/0/mechanical",
+      "gate": "power",
+      "actual": 0,
+      "expected": 0,
+      "error": 0,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "current/0/charge",
+      "gate": "charge",
+      "actual": -3.739842213690281e-9,
+      "expected": 0,
+      "error": 3.739842213690281e-9,
+      "limit": 1e-8,
+      "pass": true
+    },
+    {
+      "id": "current/0/energy",
+      "gate": "power",
+      "actual": -6.139089236967266e-12,
+      "expected": 0,
+      "error": 6.139089236967266e-12,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "current/2/current",
+      "gate": "current",
+      "actual": 344.4593707789025,
+      "expected": 344.45937077886674,
+      "error": 3.575451046344824e-11,
+      "limit": 3.4445937077886675e-7,
+      "pass": true
+    },
+    {
+      "id": "current/2/mechanical",
+      "gate": "power",
+      "actual": -3100.1343370094373,
+      "expected": -3100.1343370098007,
+      "error": 3.6334313335828483e-10,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "current/2/charge",
+      "gate": "charge",
+      "actual": -3.703831907841959e-9,
+      "expected": 0,
+      "error": 3.703831907841959e-9,
+      "limit": 1e-8,
+      "pass": true
+    },
+    {
+      "id": "current/2/energy",
+      "gate": "power",
+      "actual": -3.637978807091713e-12,
+      "expected": 0,
+      "error": 3.637978807091713e-12,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "current/-2/current",
+      "gate": "current",
+      "actual": 18.129440567265696,
+      "expected": 18.129440567308773,
+      "error": 4.3076653355456074e-11,
+      "limit": 1.8129440567308775e-8,
+      "pass": true
+    },
+    {
+      "id": "current/-2/mechanical",
+      "gate": "power",
+      "actual": 163.1649651053463,
+      "expected": 163.16496510577895,
+      "error": 4.326352609496098e-10,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "current/-2/charge",
+      "gate": "charge",
+      "actual": -3.769921264051845e-9,
+      "expected": 0,
+      "error": 3.769921264051845e-9,
+      "limit": 1e-8,
+      "pass": true
+    },
+    {
+      "id": "current/-2/energy",
+      "gate": "power",
+      "actual": 1.8474111129762605e-12,
+      "expected": 0,
+      "error": 1.8474111129762605e-12,
+      "limit": 1e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/400/-0.001/face",
+      "gate": "heat",
+      "actual": -0.0004989720997935334,
+      "expected": -0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/400/-0.001/left",
+      "gate": "temperature",
+      "actual": 351.6142625478833,
+      "expected": 351.61426254788336,
+      "error": 5.684341886080802e-14,
+      "limit": 9.032285250957666e-8,
+      "pass": true
+    },
+    {
+      "id": "heat/400/-0.001/right",
+      "gate": "temperature",
+      "actual": 351.812797238251,
+      "expected": 351.81279723825105,
+      "error": 5.684341886080802e-14,
+      "limit": 9.03625594476502e-8,
+      "pass": true
+    },
+    {
+      "id": "heat/400/-0.001/energy",
+      "gate": "heat",
+      "actual": -0.001,
+      "expected": -0.001,
+      "error": 0,
+      "limit": 2.2e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/400/0.001/face",
+      "gate": "heat",
+      "actual": 0.0004989720997935334,
+      "expected": 0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/400/0.001/left",
+      "gate": "temperature",
+      "actual": 448.3857374521166,
+      "expected": 448.38573745211664,
+      "error": 5.684341886080802e-14,
+      "limit": 1.0967714749042333e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/400/0.001/right",
+      "gate": "temperature",
+      "actual": 448.1872027617489,
+      "expected": 448.18720276174895,
+      "error": 5.684341886080802e-14,
+      "limit": 1.0963744055234979e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/400/0.001/energy",
+      "gate": "heat",
+      "actual": 0.0010000000000000009,
+      "expected": 0.001,
+      "error": 8.673617379884035e-19,
+      "limit": 2.2e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/-0.001/face",
+      "gate": "heat",
+      "actual": -0.0004989720997935334,
+      "expected": -0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/-0.001/left",
+      "gate": "temperature",
+      "actual": 951.6142625478834,
+      "expected": 951.6142625478833,
+      "error": 1.1368683772161603e-13,
+      "limit": 2.1032285250957665e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/-0.001/right",
+      "gate": "temperature",
+      "actual": 951.8127972382512,
+      "expected": 951.812797238251,
+      "error": 1.1368683772161603e-13,
+      "limit": 2.1036255944765022e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/-0.001/energy",
+      "gate": "heat",
+      "actual": -0.0009999999999999974,
+      "expected": -0.001,
+      "error": 2.6020852139652106e-18,
+      "limit": 2.2e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/0.001/face",
+      "gate": "heat",
+      "actual": 0.0004989720997935334,
+      "expected": 0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/0.001/left",
+      "gate": "temperature",
+      "actual": 1048.3857374521167,
+      "expected": 1048.3857374521167,
+      "error": 0,
+      "limit": 2.2967714749042334e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/0.001/right",
+      "gate": "temperature",
+      "actual": 1048.187202761749,
+      "expected": 1048.187202761749,
+      "error": 0,
+      "limit": 2.296374405523498e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1000/0.001/energy",
+      "gate": "heat",
+      "actual": 0.0009999999999999974,
+      "expected": 0.001,
+      "error": 2.6020852139652106e-18,
+      "limit": 2.2e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/-0.001/face",
+      "gate": "heat",
+      "actual": -0.0004989720997935334,
+      "expected": -0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/-0.001/left",
+      "gate": "temperature",
+      "actual": 1651.6142625478833,
+      "expected": 1651.6142625478833,
+      "error": 0,
+      "limit": 3.503228525095767e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/-0.001/right",
+      "gate": "temperature",
+      "actual": 1651.812797238251,
+      "expected": 1651.812797238251,
+      "error": 0,
+      "limit": 3.5036255944765023e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/-0.001/energy",
+      "gate": "heat",
+      "actual": -0.0010000000000000009,
+      "expected": -0.001,
+      "error": 8.673617379884035e-19,
+      "limit": 2.2e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/0.001/face",
+      "gate": "heat",
+      "actual": 0.0004989720997935334,
+      "expected": 0.0004989720997935444,
+      "error": 1.0950441942103595e-17,
+      "limit": 2.099794419958709e-12,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/0.001/left",
+      "gate": "temperature",
+      "actual": 1748.3857374521167,
+      "expected": 1748.3857374521167,
+      "error": 0,
+      "limit": 3.696771474904234e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/0.001/right",
+      "gate": "temperature",
+      "actual": 1748.187202761749,
+      "expected": 1748.187202761749,
+      "error": 0,
+      "limit": 3.696374405523498e-7,
+      "pass": true
+    },
+    {
+      "id": "heat/1700/0.001/energy",
+      "gate": "heat",
+      "actual": 0.0010000000000000009,
+      "expected": 0.001,
+      "error": 8.673617379884035e-19,
+      "limit": 2.2e-12,
+      "pass": true
+    }
+  ],
+  "interpretation": "Analytical limiting cases for production kernels, not full live-model qualification, experimental measurements, or device validation. Thermal comparison verifies a discrete BE system; it does not qualify continuum heat-flow accuracy.",
+  "existingContinuumCoverage": [
+    "tests/fuel-transport-independent-v47.test.ts",
+    "tests/fuel-operation-independent-v51.test.ts",
+    "tests/fuel-mixture-audit-v58.test.ts",
+    "docs/LIVE-MODEL-QUALIFICATION.md"
+  ]
+}

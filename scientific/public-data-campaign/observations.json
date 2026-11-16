@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1, "kind": "public-observation-inventory",
+  "observationsPreviouslyExamined": true, "experimentalQualification": false,
+  "apparatus": {
+    "id": "wijnakker-1979-diffuse", "species": "argon", "radiusM": 0.06,
+    "halfLengthM": 0.24, "magneticT": 0.13, "branchCurrentA": 100,
+    "fillPressureTorr": 1, "fillPressureLocation": "behind cathodes",
+    "cathodeMaterial": "tantalum", "cathodeInnerRadiusM": 0.004,
+    "currentFootprintMeasured": false, "sameShotIdentityKnown": false
+  },
+  "sources": {
+    "thesis": {
+      "url": "https://inis.iaea.org/records/ymfdn-qv182/files/12582976.pdf",
+      "sha256": "99e21f93355a518b06e02a68901b4598a7c31a2c43f6a7e932021b8d5fb7127c",
+      "pressurePdfPage1Based": 44, "pressurePrintedPage": 39,
+      "tablePdfPage1Based": 32, "tablePrintedPage": 27,
+      "apparatusPaperDOI": "10.1515/zna-1979-0602"
+    },
+    "pressureCrop": {
+      "path": "scientific/public-data-campaign/sources/pressure-1979.png",
+      "sha256": "3d84852c044bfcc7eeadb44eebd754f69fca001ce2abe89077dca5e65ddb5708",
+      "recipe": "pdftoppm -f 44 -l 44 -scale-to 2400 -x 885 -y 200 -W 650 -H 1070 -png THESIS.pdf OUT",
+      "coordinateOffsetFullPagePx": [885, 200]
+    },
+    "pressurePage": {
+      "path": "scientific/public-data-campaign/sources/pressure-page-1979.png",
+      "sha256": "93e36642b86875e61f71759c886b37069b5a489af162007d46486979f60bba4f",
+      "recipe": "pdftoppm -f 44 -l 44 -scale-to 2400 -png THESIS.pdf OUT",
+      "imageSizePx": [1678, 2400]
+    }
+  },
+  "rotation": {
+    "path": "scientific/profile-v79/digitization-independent.json",
+    "sha256": "8bc1cf5f11e4c4a2b15ff2f31129d0b158a75b99b8daa90bdc994d804997de17",
+    "reuse": true, "observation": "neutral argon lateral Doppler speed",
+    "status": "existing five resolved sightlines; no new extraction",
+    "operatorUnresolved": "Original spectral-shift estimator is unspecified; centroid and peak differ."
+  },
+  "pressure": {
+    "id": "wijnakker-1979-figure12a-crosses", "figure": "Chapter II Fig. 12a",
+    "units": {"radius": "cm", "pressure": "Torr"},
+    "coordinateFrame": "full-page 1678x2400 image, origin top left",
+    "xAnchors": [[3, 1085], [4, 1195], [5, 1307], [6, 1418]],
+    "yAnchors": [[0, 1128], [0.5, 855], [1, 578], [1.5, 304]],
+    "coordinateUncertaintyPx": 7,
+    "extractionMethod": "Manual visual centers of isolated crosses, retained before any pressure prediction was inspected.",
+    "extractionIndependentlyReviewed": true,
+    "extractionReview": "Separate component_validation agent visually checked all 17 centers, anchors, series identity and wall-channel exclusion against retained images; not a second independent extraction.",
+    "extractionUncertaintyMeaning": "Conservative coordinate ranges, including anchors, not standard deviations. Resampling does not increase scan resolution.",
+    "markers": [
+      {"id": "p01", "centerPx": [1209, 858]},
+      {"id": "p02", "centerPx": [1220, 847]},
+      {"id": "p03", "centerPx": [1232, 838]},
+      {"id": "p04", "centerPx": [1244, 827]},
+      {"id": "p05", "centerPx": [1254, 813]},
+      {"id": "p06", "centerPx": [1264, 804]},
+      {"id": "p07", "centerPx": [1278, 792]},
+      {"id": "p08", "centerPx": [1287, 780]},
+      {"id": "p09", "centerPx": [1299, 766]},
+      {"id": "p10", "centerPx": [1310, 748]},
+      {"id": "p11", "centerPx": [1320, 731]},
+      {"id": "p12", "centerPx": [1331, 713]},
+      {"id": "p13", "centerPx": [1343, 699]},
+      {"id": "p14", "centerPx": [1353, 675]},
+      {"id": "p15", "centerPx": [1365, 658]},
+      {"id": "p16", "centerPx": [1377, 638]},
+      {"id": "p17", "centerPx": [1387, 608]}
+    ],
+    "experimentalUncertainty": null,
+    "scoring": "diagnostic-only; no pressure acceptance threshold established",
+    "operator": "Midplane static-pressure probe: 4 mm high, 1 mm wide biconvex tip; 0.5 mm hole 5 mm from tip. Extent/calibration are not a pointwise uncertainty model.",
+    "exclusions": [
+      "Other field/current series: circles 0.07 T/100 A, inverted triangles 0.07 T/50 A, triangles 0.26 T/100 A.",
+      "Legend symbols, Fig. 12b continuous trace, axis and annotation marks.",
+      "Crowded or overlapping cross symbols near the wall cannot reliably be separated from other series.",
+      "All r > 6 cm points: caption identifies measurements in the wall probe channel, outside the gas bore.",
+      "No measured central pressure. The often cited 0.4 Torr is an extrapolation, not an independent central datum."
+    ]
+  },
+  "scalars": [
+    {"id": "branch-current", "value": 100, "reportedPlusMinus": null, "units": "A", "role": "reported operating input", "operator": "one opposed branch, not their sum"},
+    {"id": "terminal-voltage", "value": 58, "reportedPlusMinus": 0.5, "units": "V", "role": "electrical observation", "operator": "terminal difference including electrode falls"},
+    {"id": "corrected-voltage", "value": 18.5, "reportedPlusMinus": 2, "units": "V", "role": "electrode-fall-corrected inference", "operator": "not proven equal to finite model port voltage"},
+    {"id": "central-heavy-temperature", "radiusM": 0, "value": 5950, "reportedPlusMinus": 1300, "units": "K", "role": "optical inference; prescribed input in existing V82", "operator": "ion 4806 A Doppler halfwidth, not independently measured local neutral temperature"},
+    {"id": "near-wall-heavy-temperature", "radiusM": 0.05, "value": 1800, "reportedPlusMinus": 400, "units": "K", "role": "corrected thermocouple inference; prescribed input in existing V82", "operator": "W-Rh sensor corrected for flow-dependent transfer, radiation and conduction"}
+  ],
+  "scalarUncertaintyMeaning": "Published plus/minus with unspecified confidence/correlation semantics; not assumed independent Gaussian errors.",
+  "excludedAsIndependentTargets": ["neutral density derived from assumed central pressure", "effective Hall parameters 3 and 9 inferred using voltage", "1980 tungsten cathodes pooled with 1979 tantalum apparatus"],
+  "qualificationBoundary": "Same reported condition, not proven same shot. Pressure challenges declared radial force balance. Prescribed temperature cannot validate a temperature output."
+}

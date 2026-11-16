@@ -125,3 +125,7 @@ The [V101 source-aligned refinement](../SPATIAL-FLOW-V101.md) reduces the failed
 spatial screens to six, retaining the original limits and no-fit comparison.
 Density increments, radial flow and experimental accuracy remain unqualified;
 the live model is unchanged.
+
+The [public-data campaign](PUBLIC-DATA-QUALIFICATION.md) adds component checks,
+an independent angular reference and conditional sensitivities. It does not
+change this model's experimental qualification or extend tested input coverage.

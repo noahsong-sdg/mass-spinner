@@ -13,6 +13,7 @@ import {DEFAULT_FUEL_THERMAL,fuelCurrentIntervention} from './fuel-operation.ts'
 import {mountFuelQualification} from './fuel-qualification-ui.js';
 import {mountArgonReference} from './argon-reference-ui.js';
 import {mountFuelSpatialExperiment} from './fuel-spatial-experiment-ui.js';
+import {mountPublicSensitivity} from './public-sensitivity-ui.js';
 
 const fmt=value=>value===null?'—':Number(value).toLocaleString(undefined,{maximumSignificantDigits:4});
 const temperatureDomain=results=>{let lo=Infinity,hi=0;for(const result of results){lo=Math.min(lo,result.config.gasK);hi=Math.max(hi,result.config.gasK);for(const s of result.transport?.checkpoints??result.transport?.snapshots??[]){if(s.thermal){lo=Math.min(lo,s.thermal.gas?.minK??s.thermal.gasK);hi=Math.max(hi,s.thermal.gas?.maxK??s.thermal.gasK);}}}return [lo,hi];};
@@ -68,6 +69,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const qualification=mountFuelQualification(nodes.info);
  const argonReference=mountArgonReference(nodes.info);
  const spatialExperiment=mountFuelSpatialExperiment(nodes.info,{request});
+ const sensitivity=mountPublicSensitivity(nodes.info,{request});
  (doc.querySelector('main')??doc.body).append(root);
  const frame=el('div');frame.className='apparatus-frame';nodes.render.className='apparatus';nodes.render.append(frame);
  const baselineFrame=el('div');baselineFrame.className='apparatus-frame fuel-baseline';baselineFrame.hidden=true;nodes.render.append(baselineFrame);
@@ -271,7 +273,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    operatingConfig={...latest.result.config};resume={transport:latest.result.transport,timeS:elapsed};
    if(elapsed>=operatingConfig.durationS){operatingConfig.durationS=Math.min(60,operatingConfig.durationS+Math.max(.1,latest.result.config.durationS));controls.get('durationS').input.value=operatingConfig.durationS;}
   }else{currentEvents=[];operatingConfig=null;resume=null;elapsed=0;}
-  dependencies();
+  dependencies();sensitivity.invalidate();
   draw();
   cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;status.textContent=latest?'Updating · previous accepted state':'Updating…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
   viewer?.setAnimation(null);motionBar.hidden=true;
@@ -332,6 +334,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  async function run(){
   if(disposed)return;
+  sensitivity.invalidate();
   const activeThermalInputs=[...thermalControls].filter(([key])=>key!=='wallCapacityJK'||thermalModel.value!=='spatial').map(([,input])=>input);if(gasModel.value==='spatial')activeThermalInputs.push(gasConductivity);
   if(thermalEnable.checked&&[...activeThermalInputs,...(thermalModel.value==='spatial'?[thickness]:[])].some(input=>input.value===''||!Number.isFinite(Number(input.value))||Number(input.value)<Number(input.min)||Number(input.value)>Number(input.max))){status.textContent='Enter valid thermal settings before running.';return;}
   cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;status.textContent='Updating…';
@@ -339,7 +342,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   try{
    const operation={schemaVersion:1,events:structuredClone(currentEvents),thermal:thermalRead()};
    const reply=await request({kind:'fuel-centrifuge',schemaVersion:1,id,config:operatingConfig??read(),includeTransport:true,operation,...(resume?{resume}:{} )},controller.signal);
-   if(disposed||id!==revision)return;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};exportButton.disabled=false;
+   if(disposed||id!==revision)return;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};exportButton.disabled=false;sensitivity.update(latest);
    const r=latest.result,notes=['Uniform-inertia equilibrium reference'];
    eventHistory.replaceChildren(el('summary','Drive history'),...currentEvents.map(e=>el('p',`${fmt(e.timeS)} s → ${fmt(e.currentA)} A`)));if(!currentEvents.length)eventHistory.append(el('p',`Initial current ${fmt(r.config.currentA)} A`));
    if(r.config.durationS<r.mechanics.radialDiffusionTimeS)notes.push('spin time < a²/D');
@@ -418,5 +421,5 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
  });
  dependencies();
- return {nodes,read,run,get latest(){return latest;},setActive(value){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${error.message}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();comparisons.dispose();qualification.dispose();argonReference.dispose();spatialExperiment.dispose();if(tools)viewer?.select(null);tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
+ return {nodes,read,run,get latest(){return latest;},setActive(value){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${error.message}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);sensitivity.cancelPending();}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();comparisons.dispose();qualification.dispose();argonReference.dispose();spatialExperiment.dispose();sensitivity.dispose();if(tools)viewer?.select(null);tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
 }
