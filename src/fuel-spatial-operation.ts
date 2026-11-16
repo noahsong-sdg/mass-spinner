@@ -11,11 +11,13 @@ import {fuelNeutralTransport} from './fuel-neutral-transport.js';
 import {createFuelRadialProjection} from './fuel-radial-projection.js';
 import type {FuelLinerGrid,FuelLinerBoundary} from './fuel-thermal.js';
 
-export type FuelSpatialState={lightMass:number[];heavyMass:number[];omegaRadS:number[];gasEnergyJ:number[];linerEnergyJ:number[]};
+export type FuelSpatialState={lightMass:number[];heavyMass:number[];omegaRadS:number[];gasEnergyJ:number[];linerEnergyJ:number[];
+ linerEnergyCorrectionJ?:number[]};
 export type FuelSpatialSetup={number:number;lightFraction:number;speciesMassKg:readonly [number,number];
  radiusM:number;lengthM:number;diffusivityM2S:number;material:'lithium'|'argon';
  electrical:Omit<FuelCurrentInput,'omegaRadS'>;currentRelativeTolerance?:number;liner:FuelLinerGrid;boundary:FuelLinerBoundary};
 const sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0);
+const delta=(a:readonly number[],b:readonly number[])=>sum(a.map((v,i)=>v-b[i]));
 
 function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:()=>ReturnType<typeof createFuelCurrentSolver>){
  const n=state.lightMass.length,nz=c.electrical.axialEdgesM.length-1,x=c.lightFraction;
@@ -61,18 +63,21 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
   }
   throw new RangeError('Spatial electrical/species/momentum iteration did not converge; refine the timestep.');
  }
+ const oldLinerCorrectionJ=state.linerEnergyCorrectionJ??state.linerEnergyJ.map(()=>0);
  const thermal=advanceFuelMixtureThermal(c.liner,state.linerEnergyJ,state.gasEnergyJ,c.number,x,c.radiusM,c.lengthM,dtS,c.boundary,
   {lightMass:state.lightMass,heavyMass:state.heavyMass,conductivityWMK:0,
-   conductivityAtTemperature:t=>fuelNeutralTransport(c.material,t).conductivityWmK},sourceAt);
+   conductivityAtTemperature:t=>fuelNeutralTransport(c.material,t).conductivityWmK},sourceAt,oldLinerCorrectionJ);
  const accepted=sourceAt(thermal.gasTemperatureK,thermal.gasTemperatureBasis),{momentum,electrical}=accepted.payload;
  const next:FuelSpatialState={lightMass:accepted.lightMass,heavyMass:accepted.heavyMass,omegaRadS:momentum.omegaRadS,
-  gasEnergyJ:thermal.gasEnergyJ,linerEnergyJ:thermal.cellEnergyJ};
+  gasEnergyJ:thermal.gasEnergyJ,linerEnergyJ:thermal.cellEnergyJ,linerEnergyCorrectionJ:thermal.cellEnergyCorrectionJ};
  const inputWorkJ=dtS*electrical.electrodePowerW,wallWorkJ=momentum.increment.wallWorkJ;
  const mechanicalEndpointDefectJ=momentum.increment.driveWorkJ-dtS*electrical.mechanicalW;
- const energyResidualJ=momentum.kineticJ-before.kineticJ+sum(next.gasEnergyJ)-sum(state.gasEnergyJ)+
-  sum(next.linerEnergyJ)-sum(state.linerEnergyJ)+thermal.coolingEnergyJ-inputWorkJ-wallWorkJ+momentum.increment.numericalLossJ;
+ const gasChangeJ=delta(next.gasEnergyJ,state.gasEnergyJ),linerChangeJ=sum(next.linerEnergyJ.map((u,i)=>
+  (u-state.linerEnergyJ[i])+(thermal.cellEnergyCorrectionJ[i]-oldLinerCorrectionJ[i])));
+ const energyResidualJ=momentum.kineticJ-before.kineticJ+gasChangeJ+linerChangeJ+
+  thermal.coolingEnergyJ-inputWorkJ-wallWorkJ+momentum.increment.numericalLossJ;
  const scale=Math.abs(inputWorkJ)+Math.abs(wallWorkJ)+before.kineticJ+momentum.kineticJ+momentum.increment.numericalLossJ+
-  Math.abs(sum(next.gasEnergyJ)-sum(state.gasEnergyJ))+Math.abs(sum(next.linerEnergyJ)-sum(state.linerEnergyJ))+Math.abs(thermal.coolingEnergyJ);
+  Math.abs(gasChangeJ)+Math.abs(linerChangeJ)+Math.abs(thermal.coolingEnergyJ);
  const storageRoundoffJ=64*Number.EPSILON*(sum(state.gasEnergyJ)+sum(next.gasEnergyJ)+Math.abs(sum(state.linerEnergyJ))+Math.abs(sum(next.linerEnergyJ)));
  if(!Number.isFinite(energyResidualJ)||Math.abs(energyResidualJ)>1e-9*scale+storageRoundoffJ)throw new RangeError('Coupled spatial step failed electrical/mechanical/thermal energy conservation.');
  return {state:next,momentum,electrical,thermal,faceTransfers:accepted.faceTransfers,inputWorkJ,energyResidualJ,energyScaleJ:scale,storageRoundoffJ,

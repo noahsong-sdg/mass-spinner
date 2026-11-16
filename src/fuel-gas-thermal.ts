@@ -13,6 +13,14 @@ export type FuelMixtureGasOptions={conductivityWMK:number;lightMass:readonly num
 export type FuelMixtureHeatSource<T>={lightMass:number[];heavyMass:number[];faceTransfers:number[][];
  gasSourceJ:number[];dragEnergyJ:number;payload:T};
 
+/** Knuth TwoSum: retain the error of a finite binary64 addition.
+ * Ogita–Rump–Oishi (2005), doi:10.1137/030601818, Algorithm 3.1. */
+function twoSum(a:number,b:number){
+ const high=a+b,z=high-a,low=(a-(high-z))+(b-z);
+ if(!Number.isFinite(high)||!Number.isFinite(low))throw new RangeError('Paired liner energy exceeds the floating-point domain.');
+ return [high,low];
+}
+
 /** Derivatives of T*=a*b*log(b/a)/(b-a); Euler's identity a*da+b*db=T*. */
 function faceDerivatives(a:number,b:number){
  const d=(b-a)/a;
@@ -36,14 +44,15 @@ function solve(diagonal:number[],lower:number[],upper:number[],rhs:number[]){
 
 export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:readonly number[],oldGasEnergy:readonly number[],
  number:number,lightFraction:number,radiusM:number,lengthM:number,dt:number,boundary:FuelLinerBoundary,gasOptions:FuelMixtureGasOptions,
- sourceAtTemperatures:(temperatures:readonly number[],basis:FuelGasTemperatureBasis)=>FuelMixtureHeatSource<T>){
+ sourceAtTemperatures:(temperatures:readonly number[],basis:FuelGasTemperatureBasis)=>FuelMixtureHeatSource<T>,
+ oldLinerCorrectionJ?:readonly number[]){
  const ng=oldGasEnergy.length,oldMass=[gasOptions.lightMass,gasOptions.heavyMass],fractions=[lightFraction,1-lightFraction];
  if(!Number.isSafeInteger(ng)||ng<2||ng>4096||oldMass.some(a=>a.length!==ng||a.some(v=>!Number.isFinite(v)||v<0)||Math.abs(sum(a)-1)>2e-8)||
   [number,radiusM,lengthM,boundary.coolantK].some(v=>!Number.isFinite(v)||v<=0)||!Number.isFinite(lightFraction)||lightFraction<0||lightFraction>1||
   [dt,gasOptions.conductivityWMK,boundary.gasWallWK,boundary.coolingWK].some(v=>!Number.isFinite(v)||v<0)||
   grid.radiusEdgesM[0]!==radiusM||grid.lengthM!==lengthM||oldGasEnergy.some(v=>!Number.isFinite(v)||v<=0))
   throw new RangeError('Mixture energy needs positive gas energies and geometry, normalized species, and nonnegative transport/time.');
- const oldSolid=fuelLinerState(grid,oldLinerEnergy),nw=oldSolid.temperatureK.length,n=ng+nw;
+ const oldSolid=fuelLinerState(grid,oldLinerEnergy,oldLinerCorrectionJ),nw=oldSolid.temperatureK.length,n=ng+nw;
  const oldNumbers=oldGasEnergy.map((_,i)=>number*(fractions[0]*oldMass[0][i]+fractions[1]*oldMass[1][i]));
  if(oldNumbers.some(v=>v<=0))throw new RangeError('Each gas cell needs a positive particle inventory.');
  const oldT=oldGasEnergy.map((u,i)=>u/(1.5*K*oldNumbers[i])),oldValues=[...oldT,...oldSolid.temperatureK];
@@ -84,7 +93,15 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
   const numberChange=oldT.map((_,i)=>number*(fractions[0]*massChange[0][i]+fractions[1]*massChange[1][i]));
   const energyChange=values.map((t,i)=>i<ng?1.5*K*(numbers[i]*change[i]+oldT[i]*numberChange[i]):
    grid.massesKg[i-ng]*change[i]*meanHeatCapacity(t,oldValues[i]));
-  const energy=energyChange.map((u,i)=>oldEnergy[i]+u);
+  const linerCorrectionJ=Array<number>(nw).fill(0);
+  const energy=energyChange.map((u,i)=>{
+   if(i<ng||oldLinerCorrectionJ===undefined)return oldEnergy[i]+u;
+   // Keep the low word between steps; never round high+low into a scalar
+   // before adding the next increment. Zero-time preserves both input words.
+   if(u===0){linerCorrectionJ[i-ng]=oldLinerCorrectionJ[i-ng];return oldEnergy[i];}
+   const [high,error]=twoSum(oldEnergy[i],u),pair=twoSum(high,error+oldLinerCorrectionJ[i-ng]);
+   linerCorrectionJ[i-ng]=pair[1];return pair[0];
+  });
   const residual=energyChange.map((u,i)=>u-(i<ng?source.gasSourceJ[i]:i===ng?source.dragEnergyJ:0));
   const roundoffScale=energyChange.map((u,i)=>i<ng?1.5*K*(Math.abs(numbers[i]*change[i])+Math.abs(oldT[i]*numberChange[i])):Math.abs(u));
   const diagonal=values.map((t,i)=>i<ng?1.5*K*numbers[i]:grid.massesKg[i-ng]*tungstenThermalProperties(t).heatCapacityJKgK);
@@ -111,7 +128,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
   // exchanged heat, not with stored U or conductance times absolute 1000 K.
   const tolerance=residual.map((_,i)=>2e-12*(Math.abs(energyChange[i])+fluxScale[i])+
    16*Number.EPSILON*(roundoffScale[i]+fluxScale[i]));
-  return {source,numbers,energy,energyChange,massStorageDefect,residual,diagonal,lower,upper,faceEnergyJ,speciesFaceEnergyJ,coolingEnergyJ,scales,tolerance,
+  return {source,numbers,energy,energyChange,linerCorrectionJ,massStorageDefect,residual,diagonal,lower,upper,faceEnergyJ,speciesFaceEnergyJ,coolingEnergyJ,scales,tolerance,
    // Search and acceptance must rank the same unfinished rows: a converged
    // solid roundoff plateau must not veto a useful gas-temperature correction.
    merit:Math.max(...residual.map((r,i)=>r===0?0:Math.abs(r)/tolerance[i]))};
@@ -119,14 +136,17 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
  let change=Array<number>(n).fill(0),accepted=evaluate(change);
  for(let iteration=1;iteration<=160;iteration++){
   if(accepted.residual.every((r,i)=>Math.abs(r)<=accepted.tolerance[i])){
-   const liner=fuelLinerState(grid,accepted.energy.slice(ng));
+   const liner=fuelLinerState(grid,accepted.energy.slice(ng),oldLinerCorrectionJ===undefined?undefined:accepted.linerCorrectionJ);
    const gasEnergyJ=accepted.energy.slice(0,ng),residualJ=sum(accepted.residual);
    if(Math.abs(residualJ)>2e-10*sum(accepted.scales))throw new RangeError('Mixture thermal step failed total energy conservation.');
    return {...liner,gasEnergyJ,gasTemperatureK:oldT.map((t,i)=>t+change[i]),
     gasTemperatureBasis:{referenceK:oldT,incrementK:change.slice(0,ng)},
     linerSolveTemperatureK:oldSolid.temperatureK.map((t,i)=>t+change[ng+i]),
     gasTemperatureIncrementK:change.slice(0,ng),linerTemperatureIncrementK:change.slice(ng),energyChangeJ:accepted.energyChange,
+    cellEnergyCorrectionJ:accepted.linerCorrectionJ,
     storageDefectJByCell:accepted.energy.map((u,i)=>(u-oldEnergy[i])-accepted.energyChange[i]),
+    compensatedStorageDefectJByCell:accepted.energy.map((u,i)=>(u-oldEnergy[i])+
+     (i<ng?0:accepted.linerCorrectionJ[i-ng]-(oldLinerCorrectionJ?.[i-ng]??0))-accepted.energyChange[i]),
     massStorageDefectBySpecies:accepted.massStorageDefect,
     meanGasK:sum(gasEnergyJ)/(1.5*K*number),gasCellNumbers:accepted.numbers,gasExchangeJ:accepted.faceEnergyJ[ng-1],
     gasFaceEnergyJ:accepted.faceEnergyJ.slice(0,ng-1),speciesFaceEnergyJ:accepted.speciesFaceEnergyJ,

@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {advanceFuelSpatialOperation,createFuelSpatialStepper,type FuelSpatialSetup,type FuelSpatialState} from '../src/fuel-spatial-operation.js';
 import {solveFuelCurrent} from '../src/fuel-current.js';
-import {createFuelLiner,initialFuelLinerEnergy} from '../src/fuel-thermal.js';
+import {createFuelLiner,initialFuelLinerEnergy,fuelLinerState,tungstenThermalProperties} from '../src/fuel-thermal.js';
 import {fuelArgonNeutralTransport} from '../src/fuel-neutral-transport.js';
 import {advanceFuelGasMass} from '../src/fuel-gas.js';
 const K=1.380649e-23,sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0);
@@ -77,9 +77,10 @@ test('fine gas cells retain tiny temperature-driven transfers in the coupled hea
 });
 
 test('repeated sub-ULP wall heat survives the stored coupled state and JSON continuation',()=>{
+ for(const gasK of [900,1100]){
  const {c,s}=fixture();
  c.electrical.outerVoltageV.fill(0);s.omegaRadS.fill(0);
- s.gasEnergyJ.fill(1.5*K*c.number/s.lightMass.length*1100);
+ s.gasEnergyJ.fill(1.5*K*c.number/s.lightMass.length*gasK);
  const step=createFuelSpatialStepper(c),initial=[...s.linerEnergyJ];
  let state=s,heat=0;
  for(let i=0;i<64;i++){
@@ -87,8 +88,29 @@ test('repeated sub-ULP wall heat survives the stored coupled state and JSON cont
   const result=step(state,1e-16);heat+=result.thermal.gasExchangeJ;
   state=JSON.parse(JSON.stringify(result.state));
  }
- const correction=(state as FuelSpatialState&{linerEnergyCorrectionJ?:number[]}).linerEnergyCorrectionJ??initial.map(()=>0);
+ const correction=state.linerEnergyCorrectionJ!;
+ assert.equal(correction.length,initial.length);
  const storedChange=sum(state.linerEnergyJ.map((u,i)=>(u-initial[i])+correction[i]));
- assert.ok(heat>0);
- assert.ok(Math.abs(storedChange-heat)<.02*heat,`Stored wall heat ${storedChange} != accepted exchanges ${heat}`);
+ assert.ok(heat*(gasK-1000)>0);
+ assert.ok(Math.abs(storedChange-heat)<.02*Math.abs(heat),`Stored wall heat ${storedChange} != accepted exchanges ${heat}`);
+ }
+});
+
+test('paired wall state preserves zero time, old checkpoints and explicit zero corrections',()=>{
+ const {c,s}=fixture(),step=createFuelSpatialStepper(c);
+ assert.deepEqual(step(s,1e-8),step({...s,linerEnergyCorrectionJ:[0,0,0]},1e-8));
+ const paired={...s,linerEnergyCorrectionJ:s.linerEnergyJ.map((u,i)=>(i===1?-1:1)*2**(Math.floor(Math.log2(u))-56))};
+ const next=step(JSON.parse(JSON.stringify(paired)),0).state;
+ assert.deepEqual(next.linerEnergyJ,paired.linerEnergyJ);
+ assert.deepEqual(next.linerEnergyCorrectionJ,paired.linerEnergyCorrectionJ);
+});
+
+test('paired wall state rejects malformed, overlapping and out-of-domain words',()=>{
+ const {c,s}=fixture();
+ for(const low of [[0],[NaN,0,0],[Infinity,0,0],[1,0,0]])
+  assert.throws(()=>fuelLinerState(c.liner,s.linerEnergyJ,low),/normalized/);
+ const maximum=c.liner.massesKg.map(m=>m*tungstenThermalProperties(1900).specificEnthalpyJKg*(1+8*Number.EPSILON));
+ const tiny=maximum.map(u=>2**(Math.floor(Math.log2(u))-56));
+ assert.throws(()=>fuelLinerState(c.liner,maximum,tiny),/enthalpy domain/);
+ assert.throws(()=>fuelLinerState(c.liner,[0,0,0],[-Number.MIN_VALUE,0,0]),/normalized|enthalpy domain/);
 });

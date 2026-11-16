@@ -66,12 +66,23 @@ export function initialFuelLinerEnergy(grid:FuelLinerGrid,value:number){
  const h=tungstenThermalProperties(value).specificEnthalpyJKg;return grid.massesKg.map(mass=>mass*h);
 }
 
-export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[]):FuelLinerState{
+export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[],correctionJ?:readonly number[]):FuelLinerState{
  if(cellEnergyJ.length!==grid.massesKg.length)throw new RangeError('Liner energy state must match its radial grid.');
- const temperatureK=cellEnergyJ.map((energy,i)=>invertTungstenEnthalpy(energy/grid.massesKg[i]));
+ if(correctionJ!==undefined){
+  if(correctionJ.length!==cellEnergyJ.length||correctionJ.some((v,i)=>!Number.isFinite(v)||cellEnergyJ[i]+v!==cellEnergyJ[i]))
+   throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
+  for(let i=0;i<cellEnergyJ.length;i++){
+   // Preserve the existing inversion's upper endpoint roundoff allowance.
+   // Compare both words: adding them first can hide a tiny domain violation.
+   const energy=cellEnergyJ[i],low=correctionJ[i],maximum=grid.massesKg[i]*enthalpy(FUEL_LINER_MAX_K)*(1+8*Number.EPSILON);
+   if(energy<0||energy===0&&low<0||energy>maximum||energy===maximum&&low>0)
+    throw new RangeError('Paired liner energy leaves the solid tungsten enthalpy domain.');
+  }
+ }
+ const temperatureK=cellEnergyJ.map((energy,i)=>invertTungstenEnthalpy(energy/grid.massesKg[i]+(correctionJ?.[i]??0)/grid.massesKg[i]));
  return {cellEnergyJ:[...cellEnergyJ],temperatureK,radiusM:[...grid.radiusCentersM],
   meanK:sum(temperatureK.map((value,i)=>value*grid.massesKg[i]))/sum(grid.massesKg),
-  innerK:temperatureK[0],outerK:temperatureK.at(-1)!,energyJ:sum(cellEnergyJ),minK:Math.min(...temperatureK),maxK:Math.max(...temperatureK)};
+  innerK:temperatureK[0],outerK:temperatureK.at(-1)!,energyJ:sum(cellEnergyJ)+(correctionJ?sum(correctionJ):0),minK:Math.min(...temperatureK),maxK:Math.max(...temperatureK)};
 }
 
 export function conductances(grid:FuelLinerGrid,values:readonly number[],boundary:FuelLinerBoundary){
