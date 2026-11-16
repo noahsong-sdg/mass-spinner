@@ -1,5 +1,9 @@
 # Thermal increment precision
 
+Follow-up: [persistent liner heat](PERSISTENT-LINER-HEAT.md) addresses the
+between-step wall-energy storage loss. The results below retain their original
+producer identity and unresolved temperature-response status.
+
 Status: the retained nine-case study has **66 passing, zero failing and six
 unresolved checks**. The former wall-power contraction failure passes the
 unchanged gates. Persistent liner heating remains unresolved. This is numerical
