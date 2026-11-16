@@ -16,7 +16,8 @@ function temperature(value:number){
  if(!Number.isFinite(value)||value<FUEL_LINER_MIN_K||value>FUEL_LINER_MAX_K)
   throw new RangeError('Solid tungsten liner supports 300–1900 K; refine the step or change the thermal setup.');
 }
-function meanHeatCapacity(a:number,b:number){
+/** Exact interval average of the solid Shomate heat capacity, in J/(kg K). */
+export function meanHeatCapacity(a:number,b:number){
  return (A+B*(a+b)/2+C*(a*a+a*b+b*b)/3+D*(a**3+a*a*b+a*b*b+b**3)/4+E/(a*b))/MOLAR_KG;
 }
 function enthalpy(value:number){return (value-FUEL_LINER_MIN_K)*meanHeatCapacity(value,FUEL_LINER_MIN_K);}
