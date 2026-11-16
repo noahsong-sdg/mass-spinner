@@ -4,9 +4,11 @@ import {JSDOM} from 'jsdom';
 import * as THREE from 'three';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 import * as geometry from '../src/fuel-centrifuge-geometry.js';
-import {simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
+import {DEFAULT_FUEL_CENTRIFUGE,simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
 import {simulateFuelTransport,sampleFuelTransport,fuelTransportCDF} from '../src/fuel-transport.ts';
 import {comparisonDomain,computeFuelOperatingMap} from '../src/fuel-experiments.ts';
+import {sampleFuelField} from '../src/fuel-field.js';
+import {publicInputCoverage} from '../src/public-sensitivity.ts';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const clone=<T>(value:T):T=>structuredClone(value);
@@ -14,8 +16,14 @@ const close=(a:number,b:number,tolerance=1e-9)=>assert.ok(Math.abs(a-b)<=toleran
 const flush=async()=>{for(let i=0;i<40;i++)await Promise.resolve();};
 
 /** Only browser display I/O is fake. Geometry, tracers, diagnostic adapters and worker calculations are real. */
-function fixture(t:any){
+function fixture(t:any,nativeRangePrecision=false){
  const dom=new JSDOM('<!doctype html><main></main>',{url:'https://example.org/?level=2'}),{window}=dom;
+ if(nativeRangePrecision){
+  const descriptor=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value')!;
+  Object.defineProperty(window.HTMLInputElement.prototype,'value',{...descriptor,set(value){
+   descriptor.set!.call(this,this.type==='range'&&Number.isFinite(Number(value))?Number(value).toPrecision(15):value);
+  }});
+ }
  Object.defineProperty(window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:window.document,configurable:true});
  const requests:any[]=[],viewers:any[]=[],builds:any[]=[];let failNext=false;
@@ -49,6 +57,111 @@ function fixture(t:any){
  t.after(()=>{ui.dispose();window.close();if(old)Object.defineProperty(globalThis,'document',old);else Reflect.deleteProperty(globalThis,'document');});
  return {ui,window,requests,viewers,builds,node,change,check,start,failOnce(){failNext=true;}};
 }
+
+test('native range serialization preserves exact log defaults without masking genuine slider changes',async t=>{
+ const f=fixture(t,true);await f.start();
+ const coverage=()=>publicInputCoverage({config:f.ui.read(),transport:{cells:64,steps:512,operation:f.requests[0].record.operation}} as any);
+ assert.deepEqual(f.ui.read(),DEFAULT_FUEL_CENTRIFUGE);assert.equal(coverage().historicalInputMatch,true);
+ for(const key of ['radialDiffusivityM2S','conductanceM3S','dragHz'] as const){
+  const initial=f.node(`fuel-${key}`).value;
+  assert.equal(f.ui.read()[key],DEFAULT_FUEL_CENTRIFUGE[key]);assert.equal(f.requests[0].record.config[key],DEFAULT_FUEL_CENTRIFUGE[key]);
+  assert.notEqual(10**Number(initial),DEFAULT_FUEL_CENTRIFUGE[key],'fixture must actually round the logarithmic coordinate');
+  f.change(`fuel-${key}`,Number(initial)+.1);assert.equal(f.ui.read()[key],10**Number(f.node(`fuel-${key}`).value));
+  assert.equal(coverage().historicalInputMatch,false);
+  f.change(`fuel-${key}`,initial);assert.equal(f.ui.read()[key],DEFAULT_FUEL_CENTRIFUGE[key]);assert.equal(coverage().historicalInputMatch,true);
+ }
+});
+
+test('composition plot, precise radius, physical-time sampling and 3D ring share the accepted cell state',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.37);f.change('fuel-plot','composition','change');
+ const count=f.requests.length,r=f.ui.latest.result,tools=f.viewers[0].built.tools;
+ const graph=f.ui.nodes.plots.querySelector('svg')!,readout=f.node('fuel-composition-readout');
+ assert.match(graph.getAttribute('aria-label')!,/Local composition \(%\).*Radius \(cm\)/);
+ graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ close(Number(readout.dataset.radiusM),r.config.radiusM);close(Number(readout.dataset.timeS),.37);
+ close(tools.group.getObjectByName('Composition probe').userData.radiusM,r.config.radiusM);
+ graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
+ close(Number(readout.dataset.radiusM),0);assert.equal(tools.group.getObjectByName('Composition probe axis').visible,true);
+ f.change('fuel-view-radius',.637);
+ const state=sampleFuelTransport(r.transport,.37),expected=sampleFuelField(r,r.config.radiusM*.637,state);
+ close(Number(readout.dataset.lightFraction),expected.lightFraction!);close(Number(readout.dataset.radiusM),expected.radiusM);
+ close(tools.sampleAt(expected.radiusM).lightFraction!,expected.lightFraction!);
+ assert.match(readout.textContent,/⁶Li.*%.*⁷Li.*%/);
+ assert.equal(f.ui.nodes.plots.querySelector('.plot-readout')!.hasAttribute('hidden'),true,'nearest generic readout must not contradict exact cell probe');
+ assert.equal(f.requests.length,count);close(Number(f.node('fuel-motion-time').value),.37);
+});
+
+test('touch-style slice selection retains radius and opens composition without changing physics or time',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.4);const v=f.viewers[0],r=f.ui.latest.result,count=f.requests.length;
+ const point=v.built.scene.localToWorld(new THREE.Vector3(.6*r.config.radiusM,0,.3*r.config.lengthM));
+ v.options.onSelect('slice',{},'Gas',{point});
+ assert.equal(f.node('fuel-plot').value,'composition');close(Number(f.node('fuel-view-radius').value),.6);
+ close(Number(f.node('fuel-composition-readout').dataset.radiusM),.6*r.config.radiusM);
+ close(Number(f.node('fuel-motion-time').value),.4);assert.equal(f.requests.length,count);assert.equal(v.animation,null);
+});
+
+test('pinned vessels probe the same physical radius and disclose a probe beyond A',async t=>{
+ const f=fixture(t);await f.start();const originalRadius=f.ui.latest.result.config.radiusM;
+ (f.ui.nodes.view.querySelector('button[aria-label="Pin accepted experiment as comparison A"]') as HTMLButtonElement).click();await flush();
+ f.change('fuel-radiusM',.2);await f.ui.run();await flush();f.change('fuel-plot','composition','change');f.change('fuel-view-radius',.4);
+ const probe=(index:number)=>f.viewers[index].built.tools.group.getObjectByName('Composition probe').userData.radiusM;
+ close(probe(0),.08);close(probe(1),.08);
+ f.change('fuel-view-radius',.8);close(probe(0),.16);close(probe(1),originalRadius);
+ assert.match(f.node('fuel-composition-readout').textContent,/A probe at wall; selected radius is outside A/);
+ f.change('fuel-view-layer','density','change');close(probe(1),originalRadius);
+});
+
+test('comparison snapshots pause at the displayed off-redraw time and probe announcements follow playback',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-plot','composition','change');f.node('fuel-motion-play').click();
+ const v=f.viewers[0];assert.ok(v.animation);v.animation(.08);v.animation(.001);
+ const time=Number(f.node('fuel-motion-time').value),expected=sampleFuelTransport(f.ui.latest.result.transport,time).neutralRadS;
+ assert.equal(f.node('fuel-composition-readout').getAttribute('aria-live'),'off');
+ f.node('fuel-compare-temperature').click();
+ assert.match(f.node('fuel-learning-comparisons').textContent,new RegExp(`rotation held at ${Number(expected.toPrecision(4))} rad/s`));
+ assert.equal(f.node('fuel-composition-readout').getAttribute('aria-live'),'polite');assert.equal(v.animation,null);
+});
+
+test('conditional comparison buttons leave accepted drive history and pinned baseline unchanged',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.8);
+ const pin=f.ui.nodes.view.querySelector('[aria-label="Pin accepted experiment as comparison A"]') as HTMLButtonElement;pin.click();await flush();
+ const before=JSON.stringify(f.ui.latest),count=f.requests.length,buildCount=f.builds.length;
+ for(const kind of ['temperature','rotation','collection']){
+  f.node(`fuel-compare-${kind}`).click();assert.ok(f.node('fuel-learning-comparisons').querySelector('svg'));
+  assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
+  assert.match(f.node('fuel-learning-comparisons').textContent,/no drive, heating or extraction prediction/);
+ }
+ assert.equal(JSON.stringify(f.ui.latest),before);assert.equal(f.requests.length,count);assert.equal(f.builds.length,buildCount);
+ assert.equal(f.ui.nodes.render.classList.contains('fuel-comparing'),true);
+});
+
+test('a pinned larger vessel cannot send the composition probe outside the current vessel',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-radiusM',.2);await f.ui.run();
+ (f.ui.nodes.view.querySelector('[aria-label="Pin accepted experiment as comparison A"]') as HTMLButtonElement).click();await flush();
+ f.change('fuel-radiusM',.1);await f.ui.run();f.change('fuel-plot','composition','change');
+ f.ui.nodes.plots.querySelector('svg')!.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ close(Number(f.node('fuel-composition-readout').dataset.radiusM),.1);
+ assert.match(f.node('fuel-composition-readout').textContent,/outside B/);
+});
+
+test('pending and failed operations cannot present accepted-input coverage for new settings',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-gasK',600);
+ assert.equal(f.node('fuel-input-coverage').dataset.match,'pending');assert.equal(f.node('fuel-compare-temperature').disabled,true);
+ const running=f.ui.run();f.change('fuel-plot','composition','change');
+ assert.equal(f.node('fuel-input-coverage').dataset.match,'pending','redrawing the previous result while awaiting the worker stays pending');
+ await running;assert.equal(f.node('fuel-input-coverage').dataset.match,'false');assert.equal(f.node('fuel-compare-temperature').disabled,false);
+ f.failOnce();await f.ui.run();assert.match(f.node('fuel-result-scope').textContent,/No accepted result/);
+ assert.equal(f.node('fuel-compare-temperature').disabled,true);assert.equal(f.node('fuel-composition-readout').hidden,true);
+});
+
+test('centimetre conversion preserves right-continuous cell-edge probing',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.8);f.change('fuel-plot','composition','change');
+ const r=f.ui.latest.result,state=sampleFuelTransport(r.transport,.8),n=state.lightMass.length;
+ for(const i of [1,6,17,63]){
+  const cm=100*r.config.radiusM*Math.sqrt(i/n);f.change('fuel-view-radius',cm/(100*r.config.radiusM));
+  const light=r.config.lightFraction*state.lightMass[i],heavy=(1-r.config.lightFraction)*state.heavyMass[i];
+  close(Number(f.node('fuel-composition-readout').dataset.lightFraction),light/(light+heavy));
+ }
+});
 
 test('real apparatus initially keeps the viewer fit and preserves the user SI pose after a physical change',async t=>{
  const f=fixture(t);await f.start();const v=f.viewers[0];

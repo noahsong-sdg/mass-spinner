@@ -241,7 +241,7 @@ export function createApparatusViewer(frame,{onSelect=()=>{},onError=()=>{},onRe
    const impact=hits.filter(hit=>hit.object.isPoints&&hit.object.userData.impactIndices&&hit.object.material.depthTest===false)
     .sort((a,b)=>b.index-a.index)[0],hit=impact??hits[0];
    if(stateLayer.pick(hit))return;
-   const id=hit&&componentId(hit.object);if(id){select(id);onSelect(id,hit.object.userData,hit.object.name);}
+   const id=hit&&componentId(hit.object);if(id){select(id);onSelect(id,hit.object.userData,hit.object.name,hit);}
   },
   keydown:event=>{
    if(event.key==='Escape'&&dragging!==null){event.preventDefault();cancelDrag();return;}

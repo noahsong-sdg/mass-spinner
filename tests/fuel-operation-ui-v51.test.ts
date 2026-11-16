@@ -44,9 +44,9 @@ test('thermal setup resets explicitly; compact selected instrument exposes respo
  f.selected.onSelect('supply',{},'Discharge supply');
  const inspect=f.ui.nodes.inspect,slider=inspect.querySelector('[data-key=currentA]'),details=inspect.querySelector('details');assert.ok(slider&&details);assert.equal(details.open,false);assert.ok(slider.compareDocumentPosition(details)&f.doc.defaultView!.Node.DOCUMENT_POSITION_FOLLOWING);assert.match(inspect.querySelector('[data-response]').textContent,/m\/s.*A/);
  [...inspect.querySelectorAll('button')].find((b:any)=>b.textContent==='Plot response')!.click();assert.equal(f.opened,1);assert.equal(f.node('fuel-plot').value,'spin');
- f.selected.onSelect('slice',{},'Gas');assert.equal(f.opened,2);assert.equal(f.node('fuel-plot').value,'profile');
+ f.selected.onSelect('slice',{},'Gas');assert.equal(f.opened,2);assert.equal(f.node('fuel-plot').value,'composition');
  f.change('fuel-view-layer','temperature','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'thermal','A lumped temperature surface opens the scalar thermal history.');
- f.change('fuel-view-layer','enrichment','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'profile','Composition keeps its original radial-profile route.');
+ f.change('fuel-view-layer','enrichment','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'composition','Composition opens the percentage profile.');
  f.change('fuel-magneticT',1);await f.ui.run();assert.equal(Number(f.node('fuel-motion-time').value),0);assert.equal(f.requests.at(-1).resume,undefined);
 });
 

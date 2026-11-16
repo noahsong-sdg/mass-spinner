@@ -1,8 +1,9 @@
 import * as THREE from 'three';
 import {createFuelDrive} from './fuel-drive.js';
 import {createFuelCutFaces} from './fuel-cut-faces.js';
+import {sampleFuelField,validateProfiles} from './fuel-field.js';
+export {sampleFuelField} from './fuel-field.js';
 
-const K=1.380649e-23;
 const COLORS=['#d29456','#8db3a6'];
 const LAYERS={composition:{label:'Light fraction',unit:''},enrichment:{label:'Δ light fraction · color clipped at ±0.01',unit:''},density:{label:'Neutral density',unit:'m⁻³'},speed:{label:'Neutral bulk speed',unit:'m/s'},temperature:{label:'Neutral temperature',unit:'K'}};
 const EQUILIBRIUM='Radial equilibrium reference';
@@ -13,32 +14,6 @@ function bounded(value,min,max,name){
  if(!Number.isFinite(value)||value<min||value>max)throw new RangeError(`${name} must lie in [${min}, ${max}].`);
  return value;
 }
-function validateProfiles(profiles,R){
- if(!Array.isArray(profiles)||profiles.length<2||profiles[0].radiusM!==0||Math.abs(profiles.at(-1).radiusM-R)>R*1e-10||profiles.some((p,i)=>!Number.isFinite(p.radiusM)||p.radiusM<0||p.radiusM>R||i>0&&p.radiusM<=profiles[i-1].radiusM||!Number.isFinite(p.lightDensityRatio)||p.lightDensityRatio<0||!Number.isFinite(p.heavyDensityRatio)||p.heavyDensityRatio<0))throw new RangeError('A nonnegative radial density profile spanning the gas radius is required.');
-}
-
-/** Preserve transport's cellwise volume density; interpolate equilibrium reference samples only. */
-export function sampleFuelField(result,radiusM,state={}){
- const c=result.config,R=c.radiusM,profiles=state.profiles??result.profiles;
- bounded(radiusM,0,R,'Sample radius');
- if(state.timeS!==undefined)bounded(state.timeS,0,Number.MAX_VALUE,'Physical time');
- validateProfiles(profiles,R);
- const right=Math.max(1,profiles.findIndex(p=>p.radiusM>=radiusM)),a=profiles[right-1],b=profiles[right],t=(radiusM-a.radiusM)/(b.radiusM-a.radiusM);
- let light=a.lightDensityRatio+(b.lightDensityRatio-a.lightDensityRatio)*t,heavy=a.heavyDensityRatio+(b.heavyDensityRatio-a.heavyDensityRatio)*t;
- if(state.lightMass!==undefined||state.heavyMass!==undefined){
-  const l=state.lightMass,h=state.heavyMass;
-  if(!Array.isArray(l)||!Array.isArray(h)||l.length<2||l.length!==h.length||[...l,...h].some(v=>!Number.isFinite(v)||v<0))throw new RangeError('Matching nonnegative finite-volume species masses required.');
-  const cell=Math.min(l.length-1,Math.floor((radiusM/R)**2*l.length));light=l[cell]*l.length;heavy=h[cell]*h.length;
- }
- const total=c.lightFraction*light+(1-c.lightFraction)*heavy,omega=state.neutralRadS??result.samples.at(-1).neutralRadS;
- if(!Number.isFinite(omega)||!Number.isFinite(total)||total<0)throw new RangeError('Finite bulk rotation and density are required.');
- const number=c.pressurePa/(K*c.gasK);
- const gas=state.thermal?.gas,cell=state.lightMass?Math.min(state.lightMass.length-1,Math.floor((radiusM/R)**2*state.lightMass.length)):0;
- if(gas&&(!state.lightMass||!Array.isArray(gas.temperatureK)||!Array.isArray(gas.pressurePa)||gas.temperatureK.length!==state.lightMass.length||gas.pressurePa.length!==state.lightMass.length||gas.temperatureK.some(v=>!Number.isFinite(v)||v<=0)||gas.pressurePa.some(v=>!Number.isFinite(v)||v<0)))throw new RangeError('Spatial gas diagnostics need positive cell temperatures and nonnegative pressure on the species grid.');
- const temperatureK=gas?gas.temperatureK[cell]:state.thermal?.gasK??c.gasK,pressurePa=gas?gas.pressurePa[cell]:number*total*K*temperatureK;
- return {radiusM,lightFraction:total>0?c.lightFraction*light/total:null,densityM3:number*total,lightDensityM3:number*c.lightFraction*light,heavyDensityM3:number*(1-c.lightFraction)*heavy,speedMS:Math.abs(omega)*radiusM,temperatureK,pressurePa,timeS:state.timeS??result.samples.at(-1).timeS,scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),reconstruction:state.lightMass?'Cellwise constant volume density':'Interpolated radial reference samples'};
-}
-
 /** Shader clipping is not applied by THREE.Raycaster; use this predicate before accepting a hit. */
 export function visibleFuelHit(hit){
  const materials=hit.object.material,material=Array.isArray(materials)?materials[hit.face?.materialIndex??0]:materials;
@@ -71,6 +46,12 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  edge.name='Axial slice handle';edge.userData={componentId:'slice',controlKey:'slice',quantitativeOnly:true};group.add(edge);owned.push(edge);
  const cut=new THREE.Mesh(new THREE.TorusGeometry(R,R*.006,6,96),new THREE.MeshBasicMaterial({color:0xe1ad78,depthWrite:false}));
  cut.name='Collection radius handle';cut.position.z=R*.012;cut.userData={componentId:'light-outlet',controlKey:'cutFraction',quantitativeOnly:true,purpose:'Prescribed inventory cut; extraction flow is not solved.'};group.add(cut);owned.push(cut);
+ const probe=new THREE.Mesh(new THREE.TorusGeometry(R,R*.003,6,96),new THREE.MeshBasicMaterial({color:0xe8eae4,depthTest:false,depthWrite:false}));
+ probe.name='Composition probe';probe.position.z=R*.02;probe.renderOrder=5;
+ probe.userData={componentId:'slice',quantitativeOnly:true,purpose:'Selected sample radius; display only.'};group.add(probe);owned.push(probe);
+ const probeAxis=new THREE.Mesh(new THREE.SphereGeometry(R*.008,8,6),probe.material.clone());
+ probeAxis.name='Composition probe axis';probeAxis.position.z=probe.position.z;probeAxis.renderOrder=5;probeAxis.userData={...probe.userData};group.add(probeAxis);owned.push(probeAxis);
+ function setProbe(fraction){bounded(fraction,0,1,'Probe radius');probe.scale.set(fraction,fraction,1);probe.visible=fraction>0;probeAxis.visible=fraction===0;probe.userData.radiusM=probeAxis.userData.radiusM=fraction*R;return sampleAt(fraction*R);}
  // Clone only the two shell materials; shared electrode and hardware materials retain their original state.
  scene.traverse(mesh=>{
   if(!mesh.isMesh)return;
@@ -90,7 +71,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const drive=createFuelDrive(c);scene.add(drive.group);
  const cutFaces=createFuelCutFaces(scene,originals,R);
 
- function sampleAt(radiusM){return {...sampleFuelField(result,radiusM,state),axialM:slice*L,axialUniform:true};}
+ function sampleAt(radiusM){return {...sampleFuelField(result,radiusM,state),axialM:slice*L,radiusFraction:radiusM/R,axialUniform:true};}
  function rebuildField(cells){
   if(cells===fieldCells)return;fieldCells=cells;
   for(const mesh of [...gasField.children]){mesh.geometry.dispose();mesh.material.dispose();gasField.remove(mesh);}
@@ -174,6 +155,6 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   for(const {mesh,original,clones} of originals){mesh.material=original;for(const material of clones)material.dispose();}
   for(const {mesh,position} of exploded)mesh.position.copy(position);
  }
- setCut(c.cutFraction);setSlice(slice);
- return {group,drive,update,setSlice,setLayer,setSpecies,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
+ setCut(c.cutFraction);setProbe(.5);setSlice(slice);
+ return {group,drive,radiusM:R,setProbe,update,setSlice,setLayer,setSpecies,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
 }
