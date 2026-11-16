@@ -2,6 +2,8 @@
 
 Schema 1: cases[{id,mass,temperatureK,omegaRadS,speciesMassKg,radiusM,
 diffusivityM2S,dtS,native:{mass,faceTransfers,storageDefect,failure}}].
+Optional temperatureBasis:{referenceK:[...],incrementK:[...]} defines physical
+T as the exact lifted sum; its rounded binary64 sum must match temperatureK.
 Inputs are binary64 primitives, not rounded production SG coefficients.
 Ratios are exact decimal strings or null, with no floors or accuracy waiver.
 """
@@ -41,6 +43,16 @@ def solve(case, precision):
         if not 2 <= n <= 4096:
             raise ValueError('Need 2–4096 species cells')
         old, temperature = vector(case['mass'], n), vector(case['temperatureK'], n)
+        rounded = list(temperature)
+        physical = list(map(Fraction, temperature))
+        if 'temperatureBasis' in case:
+            basis = case['temperatureBasis']
+            reference, increment = vector(basis['referenceK'], n), vector(basis['incrementK'], n)
+            if min(reference) <= 0 or any(float(a)+float(b) != float(t) for a, b, t in zip(reference, increment, rounded)):
+                raise ValueError('Temperature basis must reproduce the supplied positive endpoint')
+            physical = [Fraction(a)+Fraction(b) for a, b in zip(reference, increment)]
+            temperature = [a+b for a, b in zip(reference, increment)]
+        offset = [a-b for a, b in zip(rounded, temperature)]
         omega = case['omegaRadS']
         rotation = vector(omega if isinstance(omega, list) else [omega]*n, n)
         species, radius, diffusivity, dt = map(lift, (
@@ -50,7 +62,7 @@ def solve(case, precision):
         if dt == 0 or diffusivity == 0:
             zero = [D(0)]*(n-1)
             return dict(mass=old, faceTransfers=zero, divergence=divergence(zero), activity=zero,
-                        exactStationaryControl=True, rawStationaryCellSolveLeakage=zero)
+                        exactStationaryControl=True, rawStationaryCellSolveLeakage=zero, roundedTemperatureOffsetK=offset)
         outward, inward = [], []
         for i in range(n-1):
             inverse = (1/temperature[i]+1/temperature[i+1])/2
@@ -78,13 +90,14 @@ def solve(case, precision):
         face = [a*mass[i]-b*mass[i+1] for i, (a, b) in enumerate(zip(outward, inward))]
         activity = [abs(a*mass[i])+abs(b*mass[i+1]) for i, (a, b) in enumerate(zip(outward, inward))]
         # A symbolic zero control, independently proven from exact input ratios.
-        pressure = [Fraction(float(p))*Fraction(float(t)) for p, t in zip(old, temperature)]
+        pressure = [Fraction(p)*t for p, t in zip(old, physical)]
         stationary = not any(rotation) and all(p == pressure[0] for p in pressure)
         leakage = list(face) if stationary else None
         if stationary:
             mass, face = old, [D(0)]*(n-1)
         return dict(mass=mass, faceTransfers=face, divergence=divergence(face),
-                    activity=activity, exactStationaryControl=stationary, rawStationaryCellSolveLeakage=leakage)
+                    activity=activity, exactStationaryControl=stationary, rawStationaryCellSolveLeakage=leakage,
+                    roundedTemperatureOffsetK=offset)
 
 
 def metric(native, reference):
@@ -111,6 +124,9 @@ def assess(packet):
                 continue
             row['reference120'] = {k: list(map(str, v)) if isinstance(v, list) else v for k, v in ref.items()}
             row['precision80Versus120'] = {k: metric(low[k], ref[k]) for k in ('mass', 'faceTransfers', 'divergence')}
+            if 'temperatureBasis' in case:
+                rounded = solve({k: v for k, v in case.items() if k != 'temperatureBasis'}, 120)
+                row['roundedTemperatureOperatorDifference'] = {k: metric(rounded[k], ref[k]) for k in ('mass', 'faceTransfers', 'divergence')}
             row['referenceNetToGrossRatio'] = [str(abs(f)/a) if a else None for f, a in zip(ref['faceTransfers'], ref['activity'])]
             if row['nativeFailure'] is None:
                 n, native = len(case['mass']), case['native']
@@ -127,7 +143,7 @@ def assess(packet):
             rows.append(row)
     return dict(schemaVersion=1, kind='independent-cell-BE-SG-precision', precisionDigits=[80, 120], cases=rows,
                 allComplete=all(r['complete'] for r in rows), numericallyQualified=False, experimentallyQualified=False,
-                scope='Binary64-input discrete SG arithmetic only; no accuracy gate, floors, continuum or coupled-model qualification. Activity is one-way probability transfer, not an error allowance. Divergence is per-particle inventory change; multiply by species inventory for particle count.')
+                scope='Binary64-input discrete SG arithmetic only; no accuracy gate, floors, continuum or coupled-model qualification. Optional basis uses exact reference+increment T; production coefficients use rounded endpoint T, whose separate operator difference is reported. Activity is one-way probability transfer, not an error allowance. Divergence is per-particle inventory change; multiply by species inventory for particle count.')
 
 
 def self_test():
@@ -175,6 +191,17 @@ def self_test():
                 self.assertNotEqual(ref['faceTransfers'][0], 0)
                 wrong = D(metric([-ref['faceTransfers'][0]], ref['faceTransfers'])['errorOverReferenceNorm'])
                 self.assertLess(abs(wrong-2), D('1e-110'))
+        def test_subulp_basis_signed_flux_and_mismatch_refusal(self):
+            for mass, temperature, pattern in (([.5, .5], [1000., 1000.], [1, 0]), ([.75, .25], [500., 1500.], [1, 1])):
+                for delta in (2**-50, -(2**-50)):
+                    case = self.case(); case.update(mass=mass, temperatureK=temperature, diffusivityM2S=.001, dtS=.01)
+                    case['temperatureBasis'] = dict(referenceK=temperature, incrementK=[delta*p for p in pattern])
+                    ref = solve(case, 120)
+                    self.assertFalse(ref['exactStationaryControl'])
+                    self.assertGreater(ref['faceTransfers'][0]*lift(delta), 0)
+                    self.assertTrue(all(float(a)+b == a for a, b in zip(temperature, case['temperatureBasis']['incrementK'])))
+            case['temperatureBasis']['incrementK'][0] = 1.
+            self.assertRaises(ValueError, solve, case, 120)
     return unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Tests)).wasSuccessful()
 
 
@@ -194,7 +221,7 @@ def main():
     encoded = json.dumps(result, indent=2, allow_nan=False)+'\n'
     with (args.output or args.input.with_name('sg-precision-assessment.json')).open('x') as output:
         output.write(encoded)
-    print(encoded, end='')
+    print(json.dumps({'cases': len(result['cases']), 'allComplete': result['allComplete'], 'diagnosticOnly': True}))
     return 0 if result['allComplete'] else 1
 
 

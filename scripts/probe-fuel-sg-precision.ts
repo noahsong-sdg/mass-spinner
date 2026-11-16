@@ -15,6 +15,15 @@ for(const n of [2,8,32])for(const profile of ['uniform','gradient','pressure-equ
   cases.push({id:`${n}-${profile}-${dtS}-${omegaRadS}-${diffusivityM2S}`,mass,temperatureK,omegaRadS,speciesMassKg,radiusM,diffusivityM2S,dtS,native});
  }
 }
+for(const [mass,referenceK] of [[[.5,.5],[1000,1000]],[[.75,.25],[500,1500]]])for(const delta of [2**-50,-(2**-50)]){
+ const temperatureBasis={referenceK,incrementK:mass[0]===.5?[delta,0]:[delta,delta]};
+ const temperatureK=referenceK.map((t,i)=>t+temperatureBasis.incrementK[i]);
+ const speciesMassKg=7*1.66053906892e-27,radiusM=.01,diffusivityM2S=.001,dtS=.01,omegaRadS=0;
+ let native;
+ try{native={...advanceFuelGasMass(mass,temperatureK,speciesMassKg,omegaRadS,radiusM,diffusivityM2S,dtS,temperatureBasis),failure:null};}
+ catch(error){native={failure:String(error)};}
+ cases.push({id:`sub-ULP-${mass[0]}-${delta}`,mass,temperatureK,temperatureBasis,speciesMassKg,radiusM,diffusivityM2S,dtS,omegaRadS,native});
+}
 const sourceFiles=Object.fromEntries(['scripts/probe-fuel-sg-precision.ts','src/fuel-gas.ts','package-lock.json']
  .map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
 writeFileSync(output+'/sg-precision-input.json',JSON.stringify({schemaVersion:1,sourceFiles,cases})+'\n');
