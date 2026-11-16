@@ -1,6 +1,6 @@
 /** Fully evolving coupled gas at one fixed electrical mesh. Offline diagnostic;
  * no experimental or full live-model qualification is implied. */
-import {mkdirSync,writeFileSync,openSync,closeSync,createReadStream} from 'node:fs';
+import {mkdirSync,writeFileSync,openSync,closeSync,createReadStream,readFileSync,readdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {gzipSync,createGunzip} from 'node:zlib';
 import {createInterface} from 'node:readline';
@@ -17,6 +17,10 @@ const conditions={material:'argon' as const,radiusM:R,lengthM:L,groundedDiskRadi
  diffusivityM2S:.001,sigmaPerpSM:.01,sigmaParallelSM:.1,gasWallWK:.1,linerThicknessM:.001,
  linerMaterial:'tungsten' as const,coolingWK:0,electricalRadialCells:ne,electricalAxialCells:nz};
 const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
+const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml',
+ ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
+  !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
+const sourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
 const cases=[];
 for(const {n,steps} of requests){
  const liner=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
@@ -57,7 +61,7 @@ for(const {n,steps} of requests){
   const bytes=gzipSync(JSON.stringify(receipt)+'\n');writeFileSync(fd,bytes);hash.update(bytes);rows++;
  }}catch(error){failure=String(error);}finally{closeSync(fd);}
  cases.push({n,steps,config,file,sha256:hash.digest('hex'),rows,failure,elapsedMs:performance.now()-started});
- writeFileSync(output+'/index.json',JSON.stringify({schemaVersion:1,conditions,durationS,requests,cases})+'\n');
+ writeFileSync(output+'/index.json',JSON.stringify({schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,requests,cases})+'\n');
  console.log(JSON.stringify(cases.at(-1)));
 }
 async function read(h:typeof cases[number],commonSteps:number){
@@ -81,7 +85,7 @@ for(const n of gasLevels){
  const h=await Promise.all(selected.map(v=>read(v,v.steps)));
  comparisons.push(assessSpatialRefinement([h[0],h[1],h[2]],'steps'));
 }
-const assessment={schemaVersion:1,conditions,cases,comparisons,maxRssKiB:process.resourceUsage().maxRSS,
+const assessment={schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,cases,comparisons,maxRssKiB:process.resourceUsage().maxRSS,
  numericallyQualified:false,experimentallyQualified:false,liveDefaultReplaced:false,
  scope:'Fully evolving gas/species/momentum/heat on one fixed e16/z32 electrical mesh. Three-cell liner fixed; no electrical continuum, local startup, experimental or live-slider qualification.'};
 writeFileSync(output+'/assessment.json',JSON.stringify(assessment)+'\n');
