@@ -1,7 +1,7 @@
 name: Persistent liner heat
 on:
   push:
-    branches: [codex/liner-energy-storage]
+    branches: [codex/liner-energy-storage,codex/liner-state-validation]
 permissions:
   contents: read
 jobs:

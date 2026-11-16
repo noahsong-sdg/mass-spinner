@@ -123,3 +123,12 @@ test('legacy states mean zero correction and zero time preserves nonzero paired 
  assert.deepEqual(a.state.linerEnergyJ,paired.linerEnergyJ);
  assert.deepEqual(a.state.linerEnergyCorrectionJ,paired.linerEnergyCorrectionJ);
 });
+
+test('supplied null, nonarray and sparse corrections cannot masquerade as legacy missing state',()=>{
+ const {c,s}=fixture(),step=createFuelSpatialStepper(c);
+ for(const bad of [null,{length:3},Array<number>(3)]){
+  const correction=bad as unknown as number[];
+  assert.throws(()=>step({...s,linerEnergyCorrectionJ:correction},0),/normalized/,'Supplied invalid correction must not reset stored energy.');
+  assert.throws(()=>fuelLinerState(c.liner,s.linerEnergyJ,correction),/normalized/);
+ }
+});
