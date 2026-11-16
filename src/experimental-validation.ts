@@ -4,6 +4,8 @@ export interface Coordinate {name:string;unit:string;value:number}
 export interface Measurement {observable:string;unit:string;value:number;standardUncertainty:number;coordinate?:Coordinate}
 export interface ValidationCase {
  schemaVersion:1;id:string;source:{kind:'measured'|'synthetic';citation:string};expectedModel:ModelIdentity;
+ /** Declarations for a no-fit study; the protocol hash does not prove pre-exposure independence. */
+ design?:{kind:'a-priori';protocol:{citation:string;sourceSha256:string};inputEvidence:string};
  acceptance:{maxStandardizedResidual:number;maxNumericalErrorFraction:number};
  conditions:{id:string;split:'calibration'|'heldout';settings:Record<string,string|number>;measurements:Measurement[]}[];
 }
@@ -52,6 +54,12 @@ export function parseValidationCase(v:unknown):ValidationCase{
  const d=object(v,'validation case');if(d.schemaVersion!==1)throw new Error('Unsupported validation-case schemaVersion; expected 1.');
  text(d.id,'id');identity(d.expectedModel);
  const source=object(d.source,'source');if(!['measured','synthetic'].includes(source.kind as string))throw new Error('source.kind must be measured or synthetic.');text(source.citation,'source.citation');
+ if(d.design!==undefined){
+  const design=object(d.design,'design');if(design.kind!=='a-priori')throw new Error('Explicit design.kind must be a-priori.');
+  const protocol=object(design.protocol,'design.protocol');text(protocol.citation,'design.protocol.citation');
+  if(typeof protocol.sourceSha256!=='string'||!/^[a-f0-9]{64}$/.test(protocol.sourceSha256))throw new Error('design.protocol.sourceSha256 must be a lowercase SHA-256.');
+  text(design.inputEvidence,'design.inputEvidence');
+ }
  const a=object(d.acceptance,'acceptance');positive(a.maxStandardizedResidual,'maxStandardizedResidual');positive(a.maxNumericalErrorFraction,'maxNumericalErrorFraction');
  const conditions=array(d.conditions,'conditions');if(!conditions.length)throw new Error('conditions cannot be empty.');
  const ids=conditions.map(v=>{
@@ -111,14 +119,17 @@ export function validateExperiment(caseInput:unknown,predictionInput:unknown):Va
  const add=(s:string)=>{if(!reasons.includes(s))reasons.push(s);};
  const report=(status:ValidationReport['status']):ValidationReport=>({schemaVersion:1,caseId:d.id,status,reasons,residuals,
   heldoutCount:residuals.filter(r=>r.split==='heldout').length,calibrationCount:residuals.filter(r=>r.split==='calibration').length,
-  interpretation:'Consistency with supplied measurements only; provenance, model scope, uncertainty assumptions and independence require external review. No experimental validity follows from synthetic data or calibration fit.'});
+  interpretation:'Consistency with supplied measurements only; provenance, model scope, uncertainty assumptions and independence require external review. A-priori protocol/input fields are declarations, not proof of pre-exposure independence. No experimental validity follows from synthetic data or calibration fit.'});
  if(d.id!==p.caseId)add('Prediction case identity differs.');
  if(['name','version','sourceSha256'].some(k=>d.expectedModel[k as keyof ModelIdentity]!==p.model[k as keyof ModelIdentity]))add('Prediction model/version/source hash differs from expected model; regenerate or explicitly review the case.');
  if(reasons.length)return report('blocked');
  if(d.source.kind!=='measured')add('Synthetic source: comparison is not experimental evidence.');
  if(!p.convergence.established)add('Model numerical convergence is not established.');
  const calibration=d.conditions.filter(c=>c.split==='calibration').map(c=>c.id);
- if(!calibration.length||!p.calibratedOn.length)add('A documented calibration condition is required.');
+ if(d.design?.kind==='a-priori'){
+  if(calibration.length)add('A-priori design cannot contain calibration conditions.');
+  if(p.calibratedOn.length)add('A-priori design cannot use fitted conditions.');
+ }else if(!calibration.length||!p.calibratedOn.length)add('A documented calibration condition is required.');
  for(const id of p.calibratedOn)if(!calibration.includes(id))add(`Calibration leakage or unknown condition: ${id}.`);
  if(!d.conditions.some(c=>c.split==='heldout'&&c.measurements.length))add('A distinct held-out condition with measurements is required.');
  for(const a of d.conditions.filter(c=>c.split==='calibration'))for(const b of d.conditions.filter(c=>c.split==='heldout'))

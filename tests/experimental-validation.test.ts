@@ -25,6 +25,53 @@ test('synthetic data and unestablished numerical convergence cannot pass experim
  const {data,predictions}=fixture();data.source.kind='synthetic';predictions.convergence.established=false;
  const r=validateExperiment(data,predictions);assert.equal(r.status,'blocked');assert.ok(r.reasons.some(s=>s.includes('Synthetic')));assert.ok(r.reasons.some(s=>s.includes('convergence')));
 });
+test('explicit a-priori comparison permits independently specified inputs without fitting measured outputs',()=>{
+ const {data,predictions}=fixture();
+ data.design={kind:'a-priori',protocol:{citation:'TEST-only frozen protocol',sourceSha256:'b'.repeat(64)},inputEvidence:'TEST-only independently measured input metadata'};
+ data.conditions=data.conditions.slice(1);predictions.conditions=predictions.conditions.slice(1);predictions.calibratedOn=[];
+ const report=validateExperiment(data,predictions);
+ assert.equal(report.status,'consistent');assert.equal(report.calibrationCount,0);assert.equal(report.heldoutCount,1);
+ assert.match(report.interpretation,/declarations/);assert.match(report.interpretation,/pre-exposure/);
+});
+test('a-priori protocol declarations are required and never admit fitted conditions',()=>{
+ const make=()=>{
+  const {data,predictions}=fixture();
+  data.design={kind:'a-priori',protocol:{citation:'TEST-only protocol',sourceSha256:'b'.repeat(64)},inputEvidence:'TEST-only input sources'};
+  return {data,predictions};
+ };
+ let {data,predictions}=make();
+ assert.equal(validateExperiment(data,predictions).status,'blocked');
+ assert.ok(validateExperiment(data,predictions).reasons.some(s=>s.includes('A-priori')));
+ data.conditions=data.conditions.slice(1);predictions.conditions=predictions.conditions.slice(1);
+ assert.ok(validateExperiment(data,predictions).reasons.some(s=>s.includes('fitted')));
+ for(const mutate of [
+  (d:ValidationCase)=>d.design!.protocol.citation='',
+  (d:ValidationCase)=>d.design!.protocol.sourceSha256='old-source',
+  (d:ValidationCase)=>d.design!.inputEvidence='',
+ ]){
+  ({data,predictions}=make());mutate(data);assert.throws(()=>validateExperiment(data,predictions));
+ }
+ assert.throws(()=>parseValidationCase({...make().data,design:{kind:'no-fit'}}),/a-priori/);
+});
+test('a-priori mode retains synthetic, convergence, identity, numerical and measurement gates',()=>{
+ for(const mutate of [
+  (d:ValidationCase,p:PredictionArtifact)=>d.source.kind='synthetic',
+  (d:ValidationCase,p:PredictionArtifact)=>p.convergence.established=false,
+  (d:ValidationCase,p:PredictionArtifact)=>p.model.sourceSha256='c'.repeat(64),
+  (d:ValidationCase,p:PredictionArtifact)=>p.conditions[0].series[0].numericalErrorBound=[.3,.3],
+  (d:ValidationCase,p:PredictionArtifact)=>d.conditions[0].measurements=[],
+ ]){
+  const {data,predictions}=fixture();
+  data.design={kind:'a-priori',protocol:{citation:'TEST-only protocol',sourceSha256:'b'.repeat(64)},inputEvidence:'TEST-only independent inputs'};
+  data.conditions=data.conditions.slice(1);predictions.conditions=predictions.conditions.slice(1);predictions.calibratedOn=[];
+  mutate(data,predictions);assert.equal(validateExperiment(data,predictions).status,'blocked');
+ }
+});
+test('legacy cases still require documented calibration and cannot silently opt into no-fit validation',()=>{
+ const {data,predictions}=fixture();predictions.calibratedOn=[];
+ const report=validateExperiment(data,predictions);
+ assert.equal(report.status,'blocked');assert.ok(report.reasons.some(s=>s.includes('calibration condition')));
+});
 test('case, model version and source hash mismatches block stale predictions before displaying residuals',()=>{
  for(const mutate of [(p:PredictionArtifact)=>p.model.version='old',(p:PredictionArtifact)=>p.model.sourceSha256='b'.repeat(64),(p:PredictionArtifact)=>p.caseId='old-case']){
   const {data,predictions}=fixture();mutate(predictions);const r=validateExperiment(data,predictions);

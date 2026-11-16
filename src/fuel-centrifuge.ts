@@ -111,7 +111,8 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  const torquePerAmp=c.magneticT*c.radiusM**2*(1-c.driveInnerFraction**2)/2;
  const torque=c.currentA*c.magneticT*c.radiusM**2*(1-c.driveInnerFraction**2)/2;
  const ohmicW=c.currentA**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm);
- const civ=c.lithiumSeed?Math.sqrt(2*5.3917*E/(7.0160034366*U)):Math.min(...pair.ionEV.map((v,i)=>Math.sqrt(2*v*E/masses[i])));
+ const presentCriticalSpeeds=pair.ionEV.map((v,i)=>Math.sqrt(2*v*E/masses[i])).filter((_,i)=>(i===0?x:1-x)>0);
+ const civ=c.lithiumSeed?Math.sqrt(2*5.3917*E/(7.0160034366*U)):Math.min(...presentCriticalSpeeds);
  function referenceAt(timeS:number){
   let {ion,neutral}=rotorResponse(ii,nn,gamma,drag,torque,timeS),currentA=c.currentA,previousTorque=torque;
   for(const event of currentEvents){
@@ -167,13 +168,13 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  });
  const cuts=Array.from({length:81},(_,i)=>{
   const fraction=i/80,l=radialCDF(beta[0],fraction**2),h=radialCDF(beta[1],fraction**2),flow=x*l+(1-x)*h;
-  return {radiusFraction:fraction,lightRecovery:l,lightPurity:ratio(x*l,flow),outerHeavyPurity:ratio((1-x)*(1-h),1-flow)};
+  return {radiusFraction:fraction,lightRecovery:x>0?l:null,lightPurity:ratio(x*l,flow),outerHeavyPurity:ratio((1-x)*(1-h),1-flow)};
  });
  const l=radialCDF(beta[0],c.cutFraction**2),h=radialCDF(beta[1],c.cutFraction**2),cut=x*l+(1-x)*h;
  const light=idealCascade(l,c.stages,c.feedStage),heavy=idealCascade(h,c.stages,c.feedStage),product=x*light.product+(1-x)*heavy.product;
  const cascades=Array.from({length:c.stages-c.feedStage+1},(_,i)=>{
   const n=c.feedStage+i,a=idealCascade(l,n,c.feedStage),b=idealCascade(h,n,c.feedStage),p=x*a.product+(1-x)*b.product;
-  return {stages:n,feedStage:c.feedStage,purity:ratio(x*a.product,p),recovery:a.product};
+  return {stages:n,feedStage:c.feedStage,purity:ratio(x*a.product,p),recovery:x>0?a.product:null};
  });
  const axis=c.pressurePa*(x*radialPDF(beta[0],0)+(1-x)*radialPDF(beta[1],0));
  const wall=c.pressurePa*(x*radialPDF(beta[0],1)+(1-x)*radialPDF(beta[1],1));
@@ -188,9 +189,9 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  const result={schemaVersion:1,config:{...c},pair,samples,profiles,cuts,cascades,
   mechanics:{ii,nn,gamma,drag,torque,ohmicW,criticalVelocityMS:civ,slipCIV:Math.abs(end.ionMS-end.neutralMS)/civ,wallCIV:end.neutralMS/civ,
    requiredCoolingW:end.slipW+end.dragW+end.ohmicW+linerHeatW,linerHeatW,radialDiffusionTimeS:c.radiusM**2/c.radialDiffusivityM2S},
-  collection:{innerLightPurity:ratio(x*l,cut),lightRecovery:l,innerFraction:cut,outerHeavyPurity:ratio((1-x)*(1-h),1-cut),
+  collection:{innerLightPurity:ratio(x*l,cut),lightRecovery:x>0?l:null,innerFraction:cut,outerHeavyPurity:ratio((1-x)*(1-h),1-cut),
    logHeavyLightSeparation:beta[1]-beta[0],lightBalance:l+(1-l)-1,heavyBalance:h+(1-h)-1},
-  cascade:{productLightPurity:ratio(x*light.product,product),lightRecovery:light.product,productFraction:product,
+  cascade:{productLightPurity:ratio(x*light.product,product),lightRecovery:x>0?light.product:null,productFraction:product,
    lightBalance:light.product+light.tails-1,heavyBalance:heavy.product+heavy.tails-1,light,heavy,
    circulationPerFeed:x*light.visits.reduce((a,b)=>a+b,0)+(1-x)*heavy.visits.reduce((a,b)=>a+b,0)},
   pumping:{axisPa:axis,wallPa:wall,upstreamPa:upstream,gasLoadPaM3S:gasLoad,effectiveSpeedM3S:ratio(gasLoad,upstream),
