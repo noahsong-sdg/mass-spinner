@@ -19,7 +19,8 @@ body.immersive{overflow:hidden;background:#101614}
 .advanced-marathon{display:grid;gap:8px;padding:12px;border-top:1px solid var(--line);margin-top:8px}
 .advanced-marathon label{font-size:11px;color:var(--muted)}
 .advanced-marathon select{width:100%;font-size:12px;min-height:40px}
-.fuel-qualification code{overflow-wrap:anywhere}
+.fuel-qualification code,.argon-reference code{overflow-wrap:anywhere}
+.argon-reference select{width:100%;max-width:100%;min-width:0;min-height:44px}
 .fuel-qualification table{width:100%;font-size:12px;border-collapse:collapse}
 .fuel-qualification th,.fuel-qualification td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
 .world-top .level-actions{width:auto;border:0}

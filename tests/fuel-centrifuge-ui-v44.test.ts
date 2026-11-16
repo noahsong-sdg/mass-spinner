@@ -35,6 +35,16 @@ function fixture(t:any,options:any={}){
  return {window,ui,node,change,requests,loaded,selected,built,motionCalls,get animation(){return animation;},reduce:()=>reduceListener?.({matches:true}),get viewerOptions(){return viewerOptions;},inspected:()=>inspected,resets:()=>resets,disposed:()=>disposed};
 }
 
+test('recorded spatial reference is mounted lazily and disposed with the playground',t=>{
+ const f=fixture(t),reference=f.ui.nodes.info.querySelector('.argon-reference')! as HTMLDetailsElement;
+ assert.ok(reference);assert.equal(reference.open,false);
+ assert.match(reference.textContent!,/Lithium sliders do not change/);
+ assert.match(reference.textContent!,/not experimentally qualified/);
+ assert.match(reference.textContent!,/Contact potential and Joule heating are singular/);
+ assert.equal(reference.querySelectorAll('svg').length,0);assert.equal(f.requests.length,0);
+ f.ui.dispose();assert.equal(f.ui.nodes.info.querySelector('.argon-reference'),null);
+});
+
 test('gas playback pauses, seeks exact physical time, respects reduced motion and never recalculates physics for display controls',async t=>{
  const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
  assert.equal(f.animation,null);assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.ui.nodes.render.querySelector('.fuel-motion')!.hasAttribute('hidden'),false);
