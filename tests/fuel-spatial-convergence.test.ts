@@ -53,12 +53,31 @@ test('large thermal background cannot turn a failed heating response into a pass
  for(const h of [fixture(16),fixture(32),fixture(64)])assert.ok(h.snapshots[0].temperatureK[0]===1000);
 });
 
+test('quantized responses cannot pass at an accuracy finer than their representation screen',()=>{
+ const histories=[fixture(),fixture(32),fixture(64)] as const;
+ for(const h of histories)for(const row of h.snapshots.slice(1))row.densityKgM3.fill(1+64*Number.EPSILON);
+ const metric=assessSpatialRefinement(histories,'steps').metrics.find(m=>m.name==='densityResponse')!;
+ assert.ok(metric.scale>metric.representationScreen);assert.ok(.01*metric.scale<metric.representationScreen);
+ assert.equal(metric.coarseDifference,0);assert.equal(metric.fineDifference,0);assert.equal(metric.status,'unresolved');
+});
+
+test('an ULP-sized contraction margin remains unresolved even when both errors are large',()=>{
+ const histories=[fixture(),fixture(32),fixture(64)] as const,offsets=[2*2**-10+2**-43,2**-10,0];
+ histories.forEach((h,i)=>{for(const row of h.snapshots.slice(1))row.temperatureK.fill(1001+offsets[i]);});
+ const metric=assessSpatialRefinement(histories,'steps').metrics.find(m=>m.name==='gasTemperatureResponse')!;
+ assert.ok(metric.fineDifference<metric.coarseDifference);assert.ok(metric.fineDifference>metric.representationScreen);
+ assert.ok(metric.coarseRelative!<.01&&metric.fineRelative!<.01);assert.equal(metric.contracting,true);
+ assert.equal(metric.status,'unresolved');
+});
+
 test('comparison refuses changed physics, missing accepted endpoints and nonfinite responses',()=>{
  const a=fixture(),b=fixture(32),c=fixture(64);
  b.config.contactVoltageV=2;assert.throws(()=>assessSpatialRefinement([a,b,c],'steps'),/frozen physical/);
  b.config.contactVoltageV=1;b.snapshots.pop();assert.throws(()=>assessSpatialRefinement([a,b,c],'steps'),/frozen physical/);
  const other=fixture(32);other.snapshots[2].timeS+=1e-9;assert.throws(()=>assessSpatialRefinement([a,other,c],'steps'),/common clocks/);
  const bad=fixture(32);bad.snapshots[2].omegaRadS[0]=NaN;assert.throws(()=>assessSpatialRefinement([a,bad,c],'steps'),/Nonfinite/);
+ const badHeat=fixture(32);badHeat.snapshots[2].intervalGasWallHeatJ=NaN;
+ assert.throws(()=>assessSpatialRefinement([a,badHeat,c],'steps'),/Nonfinite accepted interval/);
 });
 
 test('wall heat is summed across accepted fine intervals before power is compared',()=>{

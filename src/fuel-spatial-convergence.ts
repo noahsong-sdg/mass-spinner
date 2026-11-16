@@ -67,6 +67,7 @@ export function assessSpatialRefinement(histories:readonly [History,History,Hist
   for(let i=1;i<=steps;i++)values.push(sum(h.snapshots.slice((i-1)*ratio+1,i*ratio+1).map(r=>r.intervalGasWallHeatJ)));
   return values;
  });
+ if(heat.flat().some(v=>!Number.isFinite(v)))throw new RangeError('Nonfinite accepted interval wall heat.');
  fields.push({name:'intervalWallPower',unit:'W',shape:'max',response:false,representation:false,
   values:heat.map(h=>h.map((v,i)=>[i===0?0:v/(a.snapshots[i].timeS-a.snapshots[i-1].timeS)]))});
  const norm=(v:readonly number[],shape:Metric['shape'])=>shape==='l1'?sum(v.map(Math.abs)):peak(v);
@@ -80,9 +81,9 @@ export function assessSpatialRefinement(histories:readonly [History,History,Hist
   // cannot turn a failed metric into a pass; tiny responses stay unassessed.
   const background=field.representation?Math.max(...values.flatMap(h=>h.map(row=>peak(row)))):0;
   const representationScreen=32*Number.EPSILON*(c.config.radialCells/n)*background;
-  const resolved=scale>representationScreen;
+  const resolved=tolerance*scale>representationScreen;
   const coarseRelative=resolved?coarseDifference/scale:null,fineRelative=resolved?fineDifference/scale:null;
-  const contractionResolved=fineDifference===0&&coarseDifference===0||Math.max(coarseDifference,fineDifference)>representationScreen;
+  const contractionResolved=fineDifference===0&&coarseDifference===0||Math.abs(coarseDifference-fineDifference)>representationScreen;
   const contracting=fineDifference<coarseDifference||coarseDifference===0&&fineDifference===0;
   const status=!resolved||!contractionResolved?'unresolved':coarseRelative!==null&&fineRelative!==null&&coarseRelative<tolerance&&fineRelative<tolerance&&contracting?'pass':'fail';
   return {name:field.name,unit:field.unit,scale,coarseDifference,fineDifference,coarseRelative,fineRelative,

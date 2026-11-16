@@ -23,8 +23,8 @@ export function validateFuelSpatialExperiment(input:unknown):FuelSpatialExperime
  if(Math.abs(c.contactVoltageV)>10||c.magneticT<0||c.magneticT>1||c.numberDensityM3<1e18||c.numberDensityM3>1e24||
   c.temperatureK<300||c.temperatureK>1800||c.durationS<0||c.durationS>1e-5)
   throw new RangeError('Spatial lab cell requires |V|≤10V, B=0–1T, density=1e18–1e24m⁻³, initial T=300–1800K and duration≤10µs.');
- if(![4,8,16].includes(c.radialCells)||![2,4,8].includes(c.axialCells)||![16,32,64].includes(c.steps)||![0,.5,1].includes(c.driveFraction))
-  throw new RangeError('Spatial lab cell requires nr=4/8/16, nz=2/4/8, 16/32/64 steps and drive fraction=0/0.5/1.');
+ if(![4,8,16,32].includes(c.radialCells)||![2,4,8,16,32,64,128].includes(c.axialCells)||![16,32,64,128,256].includes(c.steps)||![0,.5,1].includes(c.driveFraction))
+  throw new RangeError('Spatial lab cell requires nr=4/8/16/32, nz=2/4/8/16/32/64/128, 16/32/64/128/256 steps and drive fraction=0/0.5/1.');
  return c;
 }
 export interface FuelSpatialExperimentSnapshot {

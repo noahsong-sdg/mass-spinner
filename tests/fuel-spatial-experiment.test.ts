@@ -68,7 +68,7 @@ test('zero duration keeps the initial state and validated domain refuses unsuppo
  const r=simulateFuelSpatialExperiment({durationS:0});assert.equal(r.snapshots.length,1);assert.equal(r.budgets.electricWorkJ,0);
  const original={...DEFAULT_SPATIAL_EXPERIMENT};simulateFuelSpatialExperiment({...original,durationS:0});assert.deepEqual(original,DEFAULT_SPATIAL_EXPERIMENT);
  for(const value of [null,[],{temperatureK:299},{temperatureK:1900},{magneticT:-1},{contactVoltageV:11},
-  {durationS:1e-3},{numberDensityM3:0},{steps:128},{steps:16.5},{radialCells:5},{driveFraction:.3},{temperatureK:NaN},{voltage:1}])
+  {durationS:1e-3},{numberDensityM3:0},{steps:512},{steps:16.5},{radialCells:5},{driveFraction:.3},{temperatureK:NaN},{voltage:1}])
   assert.throws(()=>validateFuelSpatialExperiment(value),RangeError);
  assert.deepEqual(validateFuelSpatialExperiment({}),DEFAULT_SPATIAL_EXPERIMENT);
 });

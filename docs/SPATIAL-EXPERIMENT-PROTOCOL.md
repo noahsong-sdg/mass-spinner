@@ -48,6 +48,16 @@ dominated by it, remain `unresolved`; the screen cannot produce a pass or change
 the physical thresholds. Raw failed contraction is retained. Exactly zero
 responses do not qualify transport. No density/temperature denominator floor.
 
+Independent review clarified that resolution must hold at the requested
+accuracy: `tolerance * scale > screen`; contraction requires
+`abs(coarse difference - fine difference) > screen`, with the stated exact-zero
+exception only for an accuracy-resolved signal. The initial implementation
+tested the response/error amplitudes instead of these two quantities. Its raw
+histories and [initial receipt](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43837928441)
+remain retained; corrected scores are separate. Nonfinite interval heat is
+refused before assessment/JSON serialization. A fresh output directory is
+required before any computation, preserving existing partial and final evidence.
+
 This initial campaign does not qualify finer-only times, finer radial structure
 lost by coarsest-bin restriction, local causal early responses, solid spatial
 resolution, physical wall-surface temperature, the full slider envelope,
@@ -60,3 +70,15 @@ Execute `node --import tsx scripts/study-fuel-spatial.ts` inside the offline
 one-CPU/1-GiB CI container. The artifact retains all histories, physical
 conditions, code hashes, failures and machine-readable assessments. A green
 workflow means operational completion and regression checks, not convergence.
+
+## Resolution extension after the first measured failure
+
+The initial 27-case run found large axial-current/heat errors and a 1.366% fine
+density timestep difference at r16/z8. The extension changes only numerical
+resolution: repeat that original cross and add a second full cross
+`nr={8,16,32}, nz={32,64,128}, steps={64,128,256}`, plus r16/z16/t64 to connect
+the axial ladders. This is 55 distinct trajectories. Score every available
+consecutive doubling triple while holding the other two axes fixed. The same
+physical inputs, thresholds and scope exclusions apply; browser defaults and
+all qualification flags remain unchanged. The expanded bounds permit offline
+reference refinement, not a claim that any newly allowed mesh is adequate.

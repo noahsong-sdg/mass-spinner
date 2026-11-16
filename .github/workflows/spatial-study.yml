@@ -20,7 +20,17 @@ jobs:
       - name: Execute offline characterization
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm sh -eu -c '
-            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-convergence.test.ts tests/fuel-spatial-experiment.test.ts
+            regression=$(mktemp -d)
+            cp -R src tests "$regression/"
+            cp package.json "$regression/"
+            ln -s /work/node_modules "$regression/node_modules"
+            git show c2769b2:src/fuel-spatial-convergence.ts > "$regression/src/fuel-spatial-convergence.ts"
+            if node --import tsx --test --test-name-pattern "quantized responses|ULP-sized contraction" "$regression/tests/fuel-spatial-convergence.test.ts"; then
+              echo "Expected the pre-fix representation regressions to fail"
+              exit 1
+            fi
+            rm -rf "$regression"
+            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-convergence.test.ts tests/fuel-spatial-experiment.test.ts tests/fuel-spatial-study-cli.test.ts
             node --import tsx scripts/study-fuel-spatial.ts
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
