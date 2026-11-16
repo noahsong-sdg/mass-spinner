@@ -79,7 +79,9 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
   const wallK=conductivity[ng-1],solid=conductances(grid,values.slice(ng),boundary),inner=wallK===0||solid.inner===0?0:
    1/(1/solid.inner+1/(2*factor*wallK*ng));
   const links=[...gasLinks,inner,...solid.internal].map(g=>dt*g),outer=dt*solid.outer;
-  const numberChange=oldT.map((_,i)=>number*(fractions[0]*(mass[0][i]-oldMass[0][i])+fractions[1]*(mass[1][i]-oldMass[1][i])));
+  const massChange=mass.map((_,s)=>oldT.map((_,i)=>(i?source.faceTransfers[s][i-1]:0)-(i<ng-1?source.faceTransfers[s][i]:0)));
+  const massStorageDefect=mass.map((a,s)=>a.map((p,i)=>(p-oldMass[s][i])-massChange[s][i]));
+  const numberChange=oldT.map((_,i)=>number*(fractions[0]*massChange[0][i]+fractions[1]*massChange[1][i]));
   const energyChange=values.map((t,i)=>i<ng?1.5*K*(numbers[i]*change[i]+oldT[i]*numberChange[i]):
    grid.massesKg[i-ng]*change[i]*meanHeatCapacity(t,oldValues[i]));
   const energy=energyChange.map((u,i)=>oldEnergy[i]+u);
@@ -109,7 +111,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
   // exchanged heat, not with stored U or conductance times absolute 1000 K.
   const tolerance=residual.map((_,i)=>2e-12*(Math.abs(energyChange[i])+fluxScale[i])+
    16*Number.EPSILON*(roundoffScale[i]+fluxScale[i]));
-  return {source,numbers,energy,energyChange,residual,diagonal,lower,upper,faceEnergyJ,speciesFaceEnergyJ,coolingEnergyJ,scales,tolerance,
+  return {source,numbers,energy,energyChange,massStorageDefect,residual,diagonal,lower,upper,faceEnergyJ,speciesFaceEnergyJ,coolingEnergyJ,scales,tolerance,
    // Search and acceptance must rank the same unfinished rows: a converged
    // solid roundoff plateau must not veto a useful gas-temperature correction.
    merit:Math.max(...residual.map((r,i)=>r===0?0:Math.abs(r)/tolerance[i]))};
@@ -142,6 +144,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
     linerSolveTemperatureK:oldSolid.temperatureK.map((t,i)=>t+change[ng+i]),
     gasTemperatureIncrementK:change.slice(0,ng),linerTemperatureIncrementK:change.slice(ng),energyChangeJ:accepted.energyChange,
     storageDefectJByCell:accepted.energy.map((u,i)=>(u-oldEnergy[i])-accepted.energyChange[i]),
+    massStorageDefectBySpecies:accepted.massStorageDefect,
     meanGasK:sum(gasEnergyJ)/(1.5*K*number),gasCellNumbers:accepted.numbers,gasExchangeJ:accepted.faceEnergyJ[ng-1],
     gasFaceEnergyJ:accepted.faceEnergyJ.slice(0,ng-1),speciesFaceEnergyJ:accepted.speciesFaceEnergyJ,
     gasSourceJ:[...accepted.source.gasSourceJ],coolingEnergyJ:accepted.coolingEnergyJ,residualJ,

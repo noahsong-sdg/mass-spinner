@@ -18,6 +18,18 @@ test('SG retains sub-inventory-resolution transfers and exactly stationary unifo
  }
 });
 
+test('direct SG transfer matches independent two-cell BE balance over signed and stiff cases',()=>{
+ const radius=.01,temperature=1000;
+ for(const p of [[1,0],[0,1],[.75,.25]])for(const dt of [1e-20,.01,1e8])for(const omega of [0,3e5]){
+  const D=.001,z=M*omega**2*radius**2/(4*K*temperature),b=z===0?1:z/Math.expm1(z);
+  const scale=dt*8*D/radius**2,a=scale*(b+z),c=scale*b;
+  const expected=(a*p[0]-c*p[1])/(1+a+c),actual=advanceFuelGasMass(p,[temperature,temperature],M,omega,radius,D,dt);
+  assert.ok(Math.abs(actual.faceTransfers[0]-expected)<2e-12*Math.abs(expected));
+  assert.ok(actual.mass.every(v=>v>=0));
+  actual.mass.forEach((v,i)=>close(v-p[i]-(i?actual.faceTransfers[0]:-actual.faceTransfers[0]),actual.storageDefect[i]));
+ }
+});
+
 test('bounded offline gas refinement supports 4096 cells without changing positivity or inventory gates',()=>{
  const n=4096,p=Array(n).fill(1/n),temperature=Array.from({length:n},(_,i)=>1000+1e-5*(i+.5)/n);
  const moved=advanceFuelGasMass(p,temperature,M,0,.01,.001,1e-6/256);

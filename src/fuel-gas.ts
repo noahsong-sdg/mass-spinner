@@ -48,8 +48,9 @@ function bernoulli(z:number){
 /** Positive backward-Euler SG flux for J=−D/T [∇(nT)−n mΩ²r/kB].
  * Equal-volume y=r²/R² cells; face ζ uses trapezoidal reciprocal T.
  * Signed face transfers are probabilities moving outward over this step.
- * Their cumulative reconstruction enforces the exact discrete continuity
- * relation without subtracting two large near-equilibrium rate products. */
+ * Integrated transfers solve the equivalent face system directly, retaining
+ * changes below the precision of stored cell probabilities. The positive cell
+ * solve supplies stored inventories; their representation defect is returned. */
 export function advanceFuelGasMass(mass:readonly number[],temperatureK:readonly number[],speciesMassKg:number,omega:number|readonly number[],radiusM:number,diffusivityM2S:number,dtS:number){
  inventory(mass);positive(speciesMassKg,'Species mass');positive(radiusM,'Gas radius');
  if(temperatureK.length!==mass.length)throw new RangeError('Gas temperatures must share the species grid.');
@@ -58,14 +59,18 @@ export function advanceFuelGasMass(mass:readonly number[],temperatureK:readonly 
  if(rotation.length!==mass.length||rotation.some(v=>!Number.isFinite(v))||!Number.isFinite(diffusivityM2S)||diffusivityM2S<0||!Number.isFinite(dtS)||dtS<0)
   throw new RangeError('Gas rotation must be finite; diffusivity and timestep nonnegative.');
  const n=mass.length;
- if(dtS===0||diffusivityM2S===0)return {mass:[...mass],faceTransfers:Array<number>(n-1).fill(0)};
- const outward:number[]=[],inward:number[]=[];
+ if(dtS===0||diffusivityM2S===0)return {mass:[...mass],faceTransfers:Array<number>(n-1).fill(0),storageDefect:Array<number>(n).fill(0)};
+ const outward:number[]=[],inward:number[]=[],forcing:number[]=[];
  for(let i=0;i<n-1;i++){
   // Matches symmetric centrifugal-work deposition in the spatial momentum ledger.
   const coefficient=speciesMassKg*radiusM**2/(2*K*n)*(.5*rotation[i]**2+.5*rotation[i+1]**2);
   const inverseT=.5/temperatureK[i]+.5/temperatureK[i+1],z=coefficient*inverseT,b=bernoulli(z);
   const scale=dtS*4*diffusivityM2S/radiusM**2*(i+1)*n*inverseT;
   outward.push(scale*temperatureK[i]*(b+z));inward.push(scale*temperatureK[i+1]*b);
+  // Factored pressure difference: do not subtract two O(p) rates or lose z
+  // when b+z rounds to b. This is the same SG operator over the reals.
+  const pressureDifference=temperatureK[i]*(mass[i]-mass[i+1])+mass[i+1]*(temperatureK[i]-temperatureK[i+1]);
+  forcing.push(scale*(b*pressureDifference+z*temperatureK[i]*mass[i]));
  }
  const diagonal:number[]=[],rhs:number[]=[];let retained=1;
  for(let i=0;i<n;i++){
@@ -77,7 +82,17 @@ export function advanceFuelGasMass(mass:readonly number[],temperatureK:readonly 
  for(let i=n-2;i>=0;i--)next[i]=(rhs[i]+inward[i]*next[i+1])/diagonal[i];
  if(next.some(value=>!Number.isFinite(value)||value<0)||Math.abs(sum(next)-sum(mass))>2e-10)
   throw new RangeError('Gas transport failed positivity or particle conservation.');
- let transferred=0;
- const faceTransfers=Array.from({length:n-1},(_,i)=>transferred+=mass[i]-next[i]);
- return {mass:next,faceTransfers};
+ // F=a*p'left-b*p'right and p'=p+div(F) give a strictly diagonally
+ // dominant face system. Retain its +1 pivot under stiff transport.
+ const faceDiagonal:number[]=[],faceRhs:number[]=[];retained=1;
+ for(let i=0;i<n-1;i++){
+  const remainder=1+outward[i]*retained,pivot=remainder+inward[i];
+  if(!Number.isFinite(pivot)||pivot<=0)throw new RangeError('Gas transport exceeds the finite stiffness domain.');
+  faceDiagonal.push(pivot);faceRhs.push(forcing[i]+(i?outward[i]*faceRhs[i-1]/faceDiagonal[i-1]:0));retained=remainder/pivot;
+ }
+ const faceTransfers=Array<number>(n-1);faceTransfers[n-2]=faceRhs[n-2]/faceDiagonal[n-2];
+ for(let i=n-3;i>=0;i--)faceTransfers[i]=(faceRhs[i]+inward[i]*faceTransfers[i+1])/faceDiagonal[i];
+ if(faceTransfers.some(v=>!Number.isFinite(v)))throw new RangeError('Gas face transport is not finite.');
+ const storageDefect=next.map((p,i)=>(p-mass[i])-((i?faceTransfers[i-1]:0)-(i<n-1?faceTransfers[i]:0)));
+ return {mass:next,faceTransfers,storageDefect};
 }
