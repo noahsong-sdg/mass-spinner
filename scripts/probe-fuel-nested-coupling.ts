@@ -10,7 +10,9 @@ import {fuelGasState} from '../src/fuel-gas.js';
 import {DEFAULT_SPATIAL_EXPERIMENT,type FuelSpatialExperimentConfig,type FuelSpatialExperimentSnapshot} from '../src/fuel-spatial-experiment.js';
 import {assessSpatialRefinement} from '../src/fuel-spatial-convergence.js';
 const output=process.argv[2],assessmentOnly=process.argv[3]==='--assess-only';
-if(process.argv[3]!==undefined&&!assessmentOnly)throw new RangeError('Only --assess-only can reuse retained trajectories.');
+const captureGrid=process.argv[3]==='--capture-grid'?Number(process.argv[4]):undefined;
+if(process.argv[3]!==undefined&&!assessmentOnly&&![1024,2048,4096].includes(captureGrid!))
+ throw new RangeError('Use --assess-only or --capture-grid 1024/2048/4096.');
 if(!assessmentOnly)mkdirSync(output);
 const R=.01,L=.1,N=1e19,M=39.948*1.66053906892e-27,K=1.380649e-23,T=1000,durationS=1e-6;
 const ne=16,nz=32,gasLevels=[1024,2048,4096],timeLevels=[64,128,256];
@@ -20,10 +22,10 @@ const conditions={material:'argon' as const,radiusM:R,lengthM:L,groundedDiskRadi
  linerMaterial:'tungsten' as const,coolingWK:0,electricalRadialCells:ne,electricalAxialCells:nz};
 const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
 const configAt=(n:number,steps:number)=>({...DEFAULT_SPATIAL_EXPERIMENT,radialCells:n,axialCells:nz,steps,axialSpacingPower:2,currentRelativeTolerance:1e-15});
-const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml','.github/workflows/liner-storage.yml',
+const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml','.github/workflows/liner-storage.yml','.github/workflows/liner-refinement.yml',
  ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
   !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
-if(assessmentOnly)sourcePaths.push('.github/workflows/thermal-postprocessing.yml');
+if(assessmentOnly)sourcePaths.push('.github/workflows/thermal-postprocessing.yml','scripts/merge-fuel-nested-captures.ts');
 const assessmentSourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
 const retainedBytes=assessmentOnly?readFileSync(output+'/index.json'):null,retained=retainedBytes?JSON.parse(retainedBytes.toString('utf8')):null;
 if(retained&&(retained.schemaVersion!==1||retained.durationS!==durationS||retained.totalParticles!==N||
@@ -36,7 +38,7 @@ if(retained&&(retained.schemaVersion!==1||retained.durationS!==durationS||retain
 const sourceFiles:Record<string,string>=assessmentOnly?retained.sourceFiles:assessmentSourceFiles;
 type Case={n:number;steps:number;config:FuelSpatialExperimentConfig;file:string;sha256:string;rows:number;failure:string|null;elapsedMs:number};
 const cases:Case[]=retained?.cases??[];
-for(const {n,steps} of assessmentOnly?[]:requests){
+for(const {n,steps} of assessmentOnly?[]:requests.filter(r=>captureGrid===undefined||r.n===captureGrid)){
  const liner=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
  const c:FuelSpatialSetup={number:N,lightFraction:.5,speciesMassKg:[M,M],radiusM:R,lengthM:L,diffusivityM2S:.001,
   material:'argon',currentRelativeTolerance:1e-15,liner,boundary:{gasWallWK:.1,coolingWK:0,coolantK:T},
@@ -82,6 +84,9 @@ for(const {n,steps} of assessmentOnly?[]:requests){
  writeFileSync(output+'/index.json',JSON.stringify({schemaVersion:1,conditions,durationS,totalParticles:N,sourceFiles,requests,cases})+'\n');
  console.log(JSON.stringify(cases.at(-1)));
 }
+// Bounded capture shards are joined and authenticated before the unchanged
+// nine-case assessor is allowed to run. A shard is never a refinement result.
+if(captureGrid!==undefined)process.exit(cases.some(h=>h.failure)?1:0);
 async function read(h:typeof cases[number],commonSteps:number){
  const snapshots:FuelSpatialExperimentSnapshot[]=[];
  const lines=createInterface({input:createReadStream(output+'/'+h.file).pipe(createGunzip()),crlfDelay:Infinity});

@@ -1,0 +1,75 @@
+name: Paired liner refinement
+on:
+  push:
+    branches: [codex/liner-refinement-capture]
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        grid: [4096,2048,1024]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          docker build -t nested-check - <<'DOCKERFILE'
+          FROM node:22-bookworm
+          DOCKERFILE
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check npm ci --ignore-scripts --no-audit --no-fund
+      - name: Capture one frozen gas grid offline
+        env:
+          GAS_GRID: '${{ matrix.grid }}'
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check node --import tsx scripts/probe-fuel-nested-coupling.ts capture --capture-grid "$GAS_GRID"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: 'gas-${{ matrix.grid }}'
+          path: capture/
+          compression-level: 0
+          if-no-files-found: error
+  assess:
+    needs: capture
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: gas-*
+          path: captures
+      - name: Prepare locked tools
+        run: |
+          docker build -t nested-check - <<'DOCKERFILE'
+          FROM node:22-bookworm
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+          DOCKERFILE
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check npm ci --ignore-scripts --no-audit --no-fund
+      - name: Join, assess and independently authenticate offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check sh -eu -c '
+            node --import tsx --test tests/nested-capture-merge.test.ts tests/nested-heat-reuse.test.ts
+            python3 scientific/spatial-argon-20261116/audit_nested.py --self-test
+            node --import tsx scripts/merge-fuel-nested-captures.ts captures nested-output
+            node --import tsx scripts/probe-fuel-nested-coupling.ts nested-output --assess-only
+            python3 scientific/spatial-argon-20261116/audit_nested.py nested-output --source-root /work --output nested-output/independent-accounting.json
+          '
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: paired-liner-assessment
+          path: |
+            nested-output/index.json
+            nested-output/assessment.json
+            nested-output/independent-accounting.json
+          if-no-files-found: error
