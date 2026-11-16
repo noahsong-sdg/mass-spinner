@@ -18,10 +18,10 @@
   "replayCanonicalSortedJSONSHA256": "1089053e7d062aff912fac838d36a0fd4a9a879170511ea3498b8732409633cc",
   "files": {
     "independent-audit.json": "7400e3d821ff7c7404cccbfe735585c0689dddf297531132264bd28c9fa15447",
-    "replay-ci.log": "01d52f2230bc9b6df78ffbb5a69a61ac420500091a88c62b9395cba5b7141fbc",
     "replay.json.gz": "ed23508b1257f20021aac230f1c08cb66fff8918dca55f0a29aa3c0dd45ee844",
     "runtime.txt": "44c87b9dc6f2dbb7f9cc83617568c2df7acf4e64e8265c924e32b929508c785c",
-    "verify-ci.log.gz": "38e3ab5511e0d97ab3204ee6211bd6c48400b6a2be9005a8ab4615fe62dcd07f"
+    "verify-ci.log.gz": "38e3ab5511e0d97ab3204ee6211bd6c48400b6a2be9005a8ab4615fe62dcd07f",
+    "replay-ci.log.gz": "f6d244d7a9d9d5659bbd4ebdf28c1e15fb305c1dda0a3a8df7e8bfe59002c1af"
   },
   "jointQualification": false,
   "experimentalQualification": false,
