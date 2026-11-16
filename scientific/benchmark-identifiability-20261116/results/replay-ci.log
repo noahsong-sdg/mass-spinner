@@ -1,0 +1,381 @@
+replay	Set up job	﻿2026-11-16T20:03:00.9530564Z Current runner version: '2.338.2'
+replay	Set up job	2026-11-16T20:03:00.9549258Z ##[group]Runner Image Provisioner
+replay	Set up job	2026-11-16T20:03:00.9549975Z Hosted Compute Agent
+replay	Set up job	2026-11-16T20:03:00.9550416Z Version: 20261103.629
+replay	Set up job	2026-11-16T20:03:00.9550867Z Commit: 15dbd9ccb5dbf34fae002b6ed1a2670f52df37bc
+replay	Set up job	2026-11-16T20:03:00.9551451Z Build Date: 2026-11-03T17:26:59Z
+replay	Set up job	2026-11-16T20:03:00.9551953Z Worker ID: {e4eb8377-a364-4956-a5e7-7ad013440d64}
+replay	Set up job	2026-11-16T20:03:00.9552504Z Region: us-east-1
+replay	Set up job	2026-11-16T20:03:00.9552897Z Cloud: AWS
+replay	Set up job	2026-11-16T20:03:00.9553272Z ##[endgroup]
+replay	Set up job	2026-11-16T20:03:00.9554229Z ##[group]Operating System
+replay	Set up job	2026-11-16T20:03:00.9554684Z Ubuntu
+replay	Set up job	2026-11-16T20:03:00.9555358Z 24.04.5
+replay	Set up job	2026-11-16T20:03:00.9555777Z LTS
+replay	Set up job	2026-11-16T20:03:00.9556141Z ##[endgroup]
+replay	Set up job	2026-11-16T20:03:00.9556566Z ##[group]Runner Image
+replay	Set up job	2026-11-16T20:03:00.9556989Z Image: ubuntu-24.04
+replay	Set up job	2026-11-16T20:03:00.9557409Z Version: 20261111.127.1
+replay	Set up job	2026-11-16T20:03:00.9558201Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261111.127/images/ubuntu/Ubuntu2404-Readme.md
+replay	Set up job	2026-11-16T20:03:00.9559480Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261111.127
+replay	Set up job	2026-11-16T20:03:00.9560170Z ##[endgroup]
+replay	Set up job	2026-11-16T20:03:00.9560977Z ##[group]GITHUB_TOKEN Permissions
+replay	Set up job	2026-11-16T20:03:00.9562768Z Contents: read
+replay	Set up job	2026-11-16T20:03:00.9563360Z Metadata: read
+replay	Set up job	2026-11-16T20:03:00.9563781Z ##[endgroup]
+replay	Set up job	2026-11-16T20:03:00.9565589Z Secret source: Actions
+replay	Set up job	2026-11-16T20:03:00.9566253Z Cache mode: write
+replay	Set up job	2026-11-16T20:03:00.9566903Z Prepare workflow directory
+replay	Set up job	2026-11-16T20:03:00.9798203Z Prepare all required actions
+replay	Set up job	2026-11-16T20:03:00.9836996Z Getting action download info
+replay	Set up job	2026-11-16T20:03:01.1780522Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+replay	Set up job	2026-11-16T20:03:02.5411516Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+replay	Set up job	2026-11-16T20:03:02.8682243Z Complete job name: replay
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-11-16T20:03:02.9291294Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9291958Z with:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9292253Z   persist-credentials: false
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9292590Z   repository: noahsong-sdg/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9295305Z   token: ***
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9295624Z   ssh-strict: true
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9295908Z   ssh-user: git
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9296185Z   clean: true
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9296478Z   sparse-checkout-cone-mode: true
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9296828Z   fetch-depth: 1
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9297097Z   fetch-tags: false
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9297410Z   show-progress: true
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9297694Z   lfs: false
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9297974Z   submodules: false
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9298284Z   set-safe-directory: true
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9298605Z   allow-unsafe-pr-checkout: false
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:02.9299090Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.1485438Z Syncing repository: noahsong-sdg/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.1486958Z ##[group]Getting Git version info
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.1487547Z Working directory is '/home/runner/work/mass-spinner/mass-spinner'
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.1488174Z [command]/usr/bin/git version
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.3961502Z git version 2.56.1
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.3975601Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.3986729Z Temporarily overriding HOME='/home/runner/work/_temp/5aaabc88-c4e6-42be-871f-66acbef07889' before making global git config changes
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.3987474Z Adding repository directory to the temporary git global config as a safe directory
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.3990783Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/mass-spinner/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4044845Z Deleting the contents of '/home/runner/work/mass-spinner/mass-spinner'
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4047973Z ##[group]Initializing the repository
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4051661Z [command]/usr/bin/git init /home/runner/work/mass-spinner/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4530584Z hint: Using 'master' as the name for the initial branch. This default branch name
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4531875Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4532348Z hint: to use in all of your new repositories, which will suppress this warning,
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4532757Z hint: call:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4533003Z hint:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4533325Z hint: 	git config --global init.defaultBranch <name>
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4533844Z hint:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4534185Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4534642Z hint: 'development'. The just-created branch can be renamed via this command:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4535218Z hint:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4535532Z hint: 	git branch -m <name>
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4535838Z hint:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4536168Z hint: Disable this message with "git config set advice.defaultBranchName false"
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4539721Z Initialized empty Git repository in /home/runner/work/mass-spinner/mass-spinner/.git/
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4548769Z [command]/usr/bin/git remote add origin https://github.com/noahsong-sdg/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4606036Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4606764Z ##[group]Disabling automatic garbage collection
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4609118Z [command]/usr/bin/git config --local gc.auto 0
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4632543Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4633246Z ##[group]Setting up auth
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4638100Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.4664924Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.8763001Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.8789097Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.8951042Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.8967404Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.9120357Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.9148152Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.9148850Z ##[group]Fetching the repository
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:06.9161817Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f688220f175e06b44af826289b94fdbb38ddec6c:refs/remotes/origin/codex/benchmark-identifiability
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9675859Z From https://github.com/noahsong-sdg/mass-spinner
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9676660Z  * [new ref]         f688220f175e06b44af826289b94fdbb38ddec6c -> origin/codex/benchmark-identifiability
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9679824Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9680371Z ##[group]Determining the checkout info
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9681924Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9687393Z [command]/usr/bin/git sparse-checkout disable
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9765971Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9786834Z ##[group]Checking out the ref
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:26.9798916Z [command]/usr/bin/git checkout --progress --force -B codex/benchmark-identifiability refs/remotes/origin/codex/benchmark-identifiability
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.0571470Z Updating files:  33% (1991/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.1117385Z Updating files:  34% (2028/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.1130681Z Updating files:  35% (2088/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.1364132Z Updating files:  36% (2147/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.1687043Z Updating files:  37% (2207/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.1953039Z Updating files:  38% (2266/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.2268486Z Updating files:  39% (2326/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4191714Z Updating files:  40% (2386/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4215421Z Updating files:  41% (2445/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4261674Z Updating files:  42% (2505/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4306234Z Updating files:  43% (2565/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4351217Z Updating files:  44% (2624/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4403080Z Updating files:  45% (2684/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4463733Z Updating files:  46% (2743/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4536913Z Updating files:  47% (2803/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4624161Z Updating files:  48% (2863/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.4774376Z Updating files:  49% (2922/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5464358Z Updating files:  50% (2982/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5550230Z Updating files:  51% (3042/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5706258Z Updating files:  52% (3101/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5732006Z Updating files:  53% (3161/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5742110Z Updating files:  54% (3221/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5750091Z Updating files:  55% (3280/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5848049Z Updating files:  56% (3340/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.5911799Z Updating files:  57% (3399/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.6003923Z Updating files:  58% (3459/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.7162613Z Updating files:  59% (3519/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.8734590Z Updating files:  60% (3578/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.9780327Z Updating files:  61% (3638/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.9807045Z Updating files:  62% (3698/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:28.9909338Z Updating files:  63% (3757/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.0175419Z Updating files:  63% (3778/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.0270812Z Updating files:  64% (3817/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.0357279Z Updating files:  65% (3876/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.0684361Z Updating files:  66% (3936/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.0722652Z Updating files:  67% (3996/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.2047394Z Updating files:  68% (4055/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.2396788Z Updating files:  69% (4115/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3326520Z Updating files:  70% (4175/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3342195Z Updating files:  71% (4234/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3353795Z Updating files:  72% (4294/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3365913Z Updating files:  73% (4353/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3392469Z Updating files:  74% (4413/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3488878Z Updating files:  75% (4473/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3634755Z Updating files:  76% (4532/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3740311Z Updating files:  77% (4592/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.3999906Z Updating files:  78% (4652/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.4034539Z Updating files:  79% (4711/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.4485346Z Updating files:  80% (4771/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.4883602Z Updating files:  81% (4831/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5453746Z Updating files:  82% (4890/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5739189Z Updating files:  83% (4950/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5786761Z Updating files:  84% (5009/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5883720Z Updating files:  85% (5069/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5905504Z Updating files:  86% (5129/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5924709Z Updating files:  87% (5188/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.5946291Z Updating files:  88% (5248/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7473094Z Updating files:  89% (5308/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7489601Z Updating files:  90% (5367/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7515782Z Updating files:  91% (5427/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7542384Z Updating files:  92% (5486/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7563919Z Updating files:  93% (5546/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7586306Z Updating files:  94% (5606/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7612226Z Updating files:  95% (5665/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7635250Z Updating files:  96% (5725/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.7661920Z Updating files:  97% (5785/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.8273932Z Updating files:  98% (5844/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9652740Z Updating files:  99% (5904/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9653625Z Updating files: 100% (5963/5963)
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9654015Z Updating files: 100% (5963/5963), done.
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9720385Z Switched to a new branch 'codex/benchmark-identifiability'
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9729393Z branch 'codex/benchmark-identifiability' set up to track 'origin/codex/benchmark-identifiability'.
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9854482Z ##[endgroup]
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9896685Z [command]/usr/bin/git log -1 --format=%H
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9916730Z f688220f175e06b44af826289b94fdbb38ddec6c
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9925276Z ##[group]Removing auth
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9928594Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:29.9958245Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0128905Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0154910Z http.https://github.com/.extraheader
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0160617Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0190582Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0356974Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0381660Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+replay	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:30.0542840Z ##[endgroup]
+replay	Prepare reference diagnostic tools	﻿2026-11-16T20:03:30.0715935Z ##[group]Run benchmark_build=$(mktemp -d)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0716380Z [36;1mbenchmark_build=$(mktemp -d)[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0716888Z [36;1mcp scientific/benchmark-identifiability-20261116/requirements.txt "$benchmark_build/requirements.txt"[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0717450Z [36;1mcat > "$benchmark_build/Dockerfile" <<'DOCKERFILE'[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0717768Z [36;1mFROM python:3.12-slim-bookworm[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0718077Z [36;1mCOPY requirements.txt /tmp/requirements.txt[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0718429Z [36;1mRUN pip install --no-cache-dir -r /tmp/requirements.txt[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0718763Z [36;1mDOCKERFILE[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0719062Z [36;1mdocker build -t benchmark-check "$benchmark_build"[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.0719420Z [36;1mdocker image inspect benchmark-check --format '{{.Id}}'[0m
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.2018343Z shell: /usr/bin/bash -e {0}
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:30.2018737Z ##[endgroup]
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9358502Z #0 building with "default" instance using docker driver
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9359050Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9359406Z #1 [internal] load build definition from Dockerfile
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9359770Z #1 transferring dockerfile: 170B done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360012Z #1 DONE 0.0s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360136Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360315Z #2 [auth] library/python:pull token for registry-1.docker.io
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360631Z #2 DONE 0.0s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360734Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:33.9360933Z #3 [internal] load metadata for docker.io/library/python:3.12-slim-bookworm
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.0851125Z #3 DONE 0.3s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2002653Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2003521Z #4 [internal] load .dockerignore
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2003967Z #4 transferring context: 2B done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2004208Z #4 DONE 0.0s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2004335Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2004465Z #5 [internal] load build context
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2004747Z #5 transferring context: 75B done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2005170Z #5 DONE 0.0s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2005323Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2005747Z #6 [1/3] FROM docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2006545Z #6 resolve docker.io/library/python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2007162Z #6 sha256:88d15687540999237909e04714b1393c610db9dc2e13d82acd6356fa9bf8f092 0B / 249B 0.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2007850Z #6 sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df 6.55kB / 6.55kB done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2008491Z #6 sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4 1.75kB / 1.75kB done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2009328Z #6 sha256:313cf8f190a1abab00472c1f0c950c10486c22114bcd8aef2a8198fb587a6d18 5.68kB / 5.68kB done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2010037Z #6 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 4.19MB / 28.25MB 0.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2010637Z #6 sha256:a47be7bff94f52aefb243d8b245b01c74976150bb88de60875c5eb7ac964f91e 3.34MB / 3.34MB 0.1s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.2011181Z #6 sha256:8691b22c22a3e005c632ab6bc07b085b98dae9cc02d1d84de175849f997439c7 8.39MB / 13.68MB 0.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.4001896Z #6 sha256:88d15687540999237909e04714b1393c610db9dc2e13d82acd6356fa9bf8f092 249B / 249B 0.1s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.4002545Z #6 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 27.26MB / 28.25MB 0.3s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.4003317Z #6 sha256:8691b22c22a3e005c632ab6bc07b085b98dae9cc02d1d84de175849f997439c7 13.68MB / 13.68MB 0.2s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.5415617Z #6 sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 28.25MB / 28.25MB 0.3s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:34.5417034Z #6 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 0.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.1082194Z #6 extracting sha256:dd051e1b8c92ff101fa3071ab97ea4924885942f15644e01c3dc095764e863e3 0.6s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.1083099Z #6 extracting sha256:a47be7bff94f52aefb243d8b245b01c74976150bb88de60875c5eb7ac964f91e
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.2825419Z #6 extracting sha256:a47be7bff94f52aefb243d8b245b01c74976150bb88de60875c5eb7ac964f91e 0.1s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.2826211Z #6 extracting sha256:8691b22c22a3e005c632ab6bc07b085b98dae9cc02d1d84de175849f997439c7 0.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.5955343Z #6 extracting sha256:8691b22c22a3e005c632ab6bc07b085b98dae9cc02d1d84de175849f997439c7 0.3s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.5956217Z #6 extracting sha256:88d15687540999237909e04714b1393c610db9dc2e13d82acd6356fa9bf8f092 done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.5956642Z #6 DONE 1.5s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.5956873Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:35.5957019Z #7 [2/3] COPY requirements.txt /tmp/requirements.txt
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:40.6786625Z #7 DONE 5.1s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:40.8297336Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:40.8298320Z #8 [3/3] RUN pip install --no-cache-dir -r /tmp/requirements.txt
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:41.9868925Z #8 1.307 Collecting numpy==2.4.6 (from -r /tmp/requirements.txt (line 1))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.1004856Z #8 1.421   Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.2036228Z #8 1.524 Collecting matplotlib==3.10.8 (from -r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.3118682Z #8 1.552   Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (52 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.3119504Z #8 1.632 Collecting contourpy>=1.0.1 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.4878145Z #8 1.661   Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.4878927Z #8 1.673 Collecting cycler>=0.10 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.4879506Z #8 1.703   Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.4880154Z #8 1.808 Collecting fonttools>=4.22.0 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.6006064Z #8 1.839   Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (139 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.6007432Z #8 1.921 Collecting kiwisolver>=1.3.1 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.7912661Z #8 1.950   Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.7913764Z #8 1.970 Collecting packaging>=20.0 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.7914397Z #8 1.997   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.7915119Z #8 2.112 Collecting pillow>=8 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.9164374Z #8 2.141   Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.9165237Z #8 2.163 Collecting pyparsing>=3 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.9165955Z #8 2.194   Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.9166504Z #8 2.208 Collecting python-dateutil>=2.7 (from matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:42.9166989Z #8 2.237   Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:43.1439411Z #8 2.259 Collecting tzdata (from python-dateutil>=2.7->matplotlib==3.10.8->-r /tmp/requirements.txt (line 2))
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:43.1440365Z #8 2.286   Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:43.1440893Z #8 2.314 Downloading numpy-2.4.6-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.6 MB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.0369598Z #8 3.183    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 19.9 MB/s eta 0:00:00
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.0370227Z #8 3.209 Downloading matplotlib-3.10.8-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.7 MB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.1686222Z #8 3.357    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.7/8.7 MB 58.6 MB/s eta 0:00:00
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.1687111Z #8 3.379 Downloading contourpy-1.4.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (383 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.1688187Z #8 3.402 Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.1688922Z #8 3.425 Downloading fonttools-4.68.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3205957Z #8 3.489    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 84.3 MB/s eta 0:00:00
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3206588Z #8 3.510 Downloading kiwisolver-1.5.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3207171Z #8 3.524    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 110.6 MB/s eta 0:00:00
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3207619Z #8 3.545 Downloading packaging-26.3-py3-none-any.whl (129 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3208152Z #8 3.566 Downloading pillow-13.0.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.3208719Z #8 3.641    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 95.5 MB/s eta 0:00:00
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.4621001Z #8 3.663 Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.4621725Z #8 3.685 Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.4622604Z #8 3.707 Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:44.4623536Z #8 3.783 Installing collected packages: tzdata, pyparsing, pillow, packaging, numpy, kiwisolver, fonttools, cycler, python-dateutil, contourpy, matplotlib
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:47.9296011Z #8 7.250 Successfully installed contourpy-1.4.0 cycler-0.12.1 fonttools-4.68.0 kiwisolver-1.5.1 matplotlib-3.10.8 numpy-2.4.6 packaging-26.3 pillow-13.0.0 pyparsing-3.3.3 python-dateutil-4.0.0 tzdata-2026.6
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.1631201Z #8 7.250 WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.1633008Z #8 7.333 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.1633512Z #8 7.333 [notice] A new release of pip is available: 25.0.1 -> 26.3
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.1633968Z #8 7.333 [notice] To update, run: pip install --upgrade pip
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.1923401Z #8 DONE 7.5s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.3435268Z 
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.3436229Z #9 exporting to image
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.3436666Z #9 exporting layers
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.6547821Z #9 exporting layers 0.5s done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.6652387Z #9 writing image sha256:8498234762628d49f4d53d6bf8f9ea095fbaa31f782c85fafd844a92c8930c6c done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.6653345Z #9 naming to docker.io/library/benchmark-check done
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.6653686Z #9 DONE 0.5s
+replay	Prepare reference diagnostic tools	2026-11-16T20:03:48.6828443Z sha256:8498234762628d49f4d53d6bf8f9ea095fbaa31f782c85fafd844a92c8930c6c
+replay	Replay sealed predictions and audit offline	﻿2026-11-16T20:03:48.6870547Z ##[group]Run mkdir benchmark-output
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6870932Z [36;1mmkdir benchmark-output[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6871783Z [36;1mdocker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp --env MPLCONFIGDIR=/tmp/matplotlib --env OPENBLAS_NUM_THREADS=1 --env OMP_NUM_THREADS=1 benchmark-check sh -eu -c '[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6872688Z [36;1m  python -m pip freeze > benchmark-output/runtime.txt[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6873191Z [36;1m  python -m unittest discover -s scientific/benchmark-identifiability-20261116 -p "test_*.py" -v[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6873731Z [36;1m  python scientific/benchmark-identifiability-20261116/replay.py benchmark-output/replay[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6874317Z [36;1m  python scientific/benchmark-identifiability-20261116/audit_replay.py benchmark-output/replay[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6874778Z [36;1m'[0m
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6900948Z shell: /usr/bin/bash -e {0}
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:48.6901710Z ##[endgroup]
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:53.6514323Z test_actual_output_corruptions_are_rejected (test_audit_replay.FullReplayAuditTests.test_actual_output_corruptions_are_rejected) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2846269Z test_every_actual_row_current_and_receipt (test_audit_replay.FullReplayAuditTests.test_every_actual_row_current_and_receipt) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2848556Z test_bad_location_and_forged_extraction_mask_fail (test_audit_replay.IndependentAuditTests.test_bad_location_and_forged_extraction_mask_fail) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2849490Z test_current_conditioned_rows_are_not_admitted (test_audit_replay.IndependentAuditTests.test_current_conditioned_rows_are_not_admitted) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2851558Z test_nominal_match_does_not_hide_unresolved_spectrum (test_audit_replay.IndependentAuditTests.test_nominal_match_does_not_hide_unresolved_spectrum) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2890675Z test_recursive_receipt_rejects_error_claim_and_inventory_corruption (test_audit_replay.IndependentAuditTests.test_recursive_receipt_rejects_error_claim_and_inventory_corruption) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.2892060Z test_scalar_arithmetic_and_complete_sensitivity_grid (test_audit_replay.IndependentAuditTests.test_scalar_arithmetic_and_complete_sensitivity_grid) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.7679054Z test_actual_sealed_packets_and_all_sources_admit (test_replay.ReplayAdmissionTests.test_actual_sealed_packets_and_all_sources_admit) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:54.7944300Z test_apparatus_mismatch_rejected (test_replay.ReplayAdmissionTests.test_apparatus_mismatch_rejected) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.8364253Z test_complete_actual_replay_and_exported_claim_boundaries (test_replay.ReplayAdmissionTests.test_complete_actual_replay_and_exported_claim_boundaries) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9136182Z test_conditioning_and_qualification_flags_rejected (test_replay.ReplayAdmissionTests.test_conditioning_and_qualification_flags_rejected) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9141680Z test_existing_output_is_not_overwritten (test_replay.ReplayAdmissionTests.test_existing_output_is_not_overwritten) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9144225Z test_missing_and_duplicate_optical_groups_rejected (test_replay.ReplayAdmissionTests.test_missing_and_duplicate_optical_groups_rejected) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9923684Z test_missing_duplicate_or_fixed_current_primary_cases_rejected (test_replay.ReplayAdmissionTests.test_missing_duplicate_or_fixed_current_primary_cases_rejected) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9926570Z test_stale_bytes_rejected_before_scoring (test_replay.ReplayAdmissionTests.test_stale_bytes_rejected_before_scoring) ... ok
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9927131Z 
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9928547Z ----------------------------------------------------------------------
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9929793Z Ran 15 tests in 6.538s
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9930087Z 
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:55.9930300Z OK
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4684247Z {
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4685499Z   "cases": 4320,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4686197Z   "electricalCases": 60,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4686848Z   "opticalAllPointMatches": 0,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4687950Z   "temperatureStatus": "prescribed-not-predicted",
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4688761Z   "jointQualification": false,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4689659Z   "replaySHA256": "c9c0facb26f70a0a1fef2414f82d7e45f5daf52596e619e19f54ea2a07d0e40e"
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:57.4690691Z }
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1914443Z {
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1914917Z   "opticalRowsChecked": 4320,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1915449Z   "electricalRowsChecked": 60,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1915767Z   "arithmeticAuditPassed": true,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1916085Z   "experimentalQualification": false,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1916372Z   "jointQualification": false,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1916675Z   "temperaturePredictionAvailable": false,
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1917116Z   "replaySHA256": "1089053e7d062aff912fac838d36a0fd4a9a879170511ea3498b8732409633cc"
+replay	Replay sealed predictions and audit offline	2026-11-16T20:03:58.1917532Z }
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	﻿2026-11-16T20:03:58.2342613Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2343033Z with:
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2343254Z   name: benchmark-identifiability
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2343542Z   path: benchmark-output/
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2343785Z   if-no-files-found: error
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2344047Z   compression-level: 6
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2344277Z   overwrite: false
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2344503Z   include-hidden-files: false
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.2344756Z ##[endgroup]
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.3627355Z (node:2523) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.3628163Z (Use `node --trace-deprecation ...` to show where the warning was created)
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.3673749Z With the provided path, there will be 3 files uploaded
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.3677986Z Artifact name is valid!
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.3678583Z Root directory input is valid!
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.6511022Z Beginning upload of artifact content to blob storage
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.8855490Z (node:2523) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.9703852Z Uploaded bytes 294984
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.9898163Z Finished uploading artifact content to blob storage!
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.9898826Z SHA256 digest of uploaded artifact zip is f6b2447a72d2b3ea54f28249e367cfd9b6c937b0e7e6a2111411e29cf15ac1c1
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:58.9899406Z Finalizing artifact upload
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:59.3113306Z Artifact benchmark-identifiability.zip successfully finalized. Artifact ID 14264174081
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:59.3114160Z Artifact benchmark-identifiability has been successfully uploaded! Final size is 294984 bytes. Artifact ID is 14264174081
+replay	Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02	2026-11-16T20:03:59.3118342Z Artifact download URL: https://github.com/noahsong-sdg/mass-spinner/actions/runs/43945680619/artifacts/14264174081
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-11-16T20:03:59.3292159Z Post job cleanup.
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.3984078Z [command]/usr/bin/git version
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4015821Z git version 2.56.1
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4046452Z Temporarily overriding HOME='/home/runner/work/_temp/0f42ce00-3096-4d41-88f4-9db768eea418' before making global git config changes
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4047780Z Adding repository directory to the temporary git global config as a safe directory
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4049175Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/mass-spinner/mass-spinner
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4073039Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4098243Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4264338Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4289230Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4464361Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+replay	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-11-16T20:03:59.4518986Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+replay	Complete job	﻿2026-11-16T20:03:59.4802537Z Cleaning up orphan processes
+replay	Complete job	2026-11-16T20:03:59.5070606Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -4,6 +4,11 @@ The primary playground is the Marathon-inspired centrifuge. Other simulators
 remain under Advanced, with their shared links preserved. This is a conditional
 learning model, **not an experimentally qualified Marathon device model**.
 
+The [16 November benchmark admission review](IDENTIFIABLE-BENCHMARK.md) searches
+for an independent rotation/temperature/electrical case. None is yet admitted.
+Its separate frozen non-rigid reference replay retains 4,320 failed optical
+alternatives and prescribed temperature; it does not qualify this live model.
+
 ## Measured benchmark
 
 The [1979 Wijnakker neutral-argon profile](https://doi.org/10.1051/jphyscol:19797236)
