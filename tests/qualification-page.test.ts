@@ -14,4 +14,8 @@ test('published report is readable HTML with working evidence links and a local 
  for(const a of doc.querySelectorAll('main a'))assert.match(a.getAttribute('href')!,/^https:\/\/github.com\/noahsong-sdg\/mass-spinner\/blob\/codex\/public-data-qualification\//);
  assert.equal(doc.querySelectorAll('script').length,0);
  assert.match(doc.body.textContent!,/experimental qualification remains false/);
+ assert.match(doc.body.textContent!,/Finite-current footprint continuation/);
+ assert.match(doc.body.textContent!,/not independent experimental voltage/);
+ assert.match(doc.body.textContent!,/historically inferred using electrical observations/);
+ assert.ok([...doc.querySelectorAll('main a')].some(a=>a.getAttribute('href')?.endsWith('/scientific/finite-contact-reference/results/RUN.md')));
 });

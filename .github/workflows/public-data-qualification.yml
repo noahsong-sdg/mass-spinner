@@ -39,6 +39,8 @@ jobs:
           docker run --rm --network none --cpus 1 --memory 2g --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work --env HOME=/tmp public-fenics sh -eu -c '
             python3 -m unittest discover -s scientific/public-fenicsx-reference -p "test_*.py" -v
             python3 scientific/public-fenicsx-reference/reference.py campaign-results/fenics-reference.json
+            python3 -m unittest discover -s scientific/finite-contact-reference -p "test_*.py" -v
+            python3 scientific/finite-contact-reference/campaign.py campaign-results/finite-contacts.json
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

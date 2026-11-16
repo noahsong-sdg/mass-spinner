@@ -123,8 +123,47 @@ These checks do not establish experimental fidelity.
 
 ## What remains
 
-The most useful next physics work is a physically justified finite cathode/anode
-current footprint and plasma-port voltage mapping, followed by matched
+### Finite-current footprint continuation
+
+The next conditional numerical step is complete. The new independent DOLFINx
+and scikit-fem reference replaces zero-area point loads with finite, surface-area
+normalized current patches. Fixed physical widths remove the mesh-dependent
+cutoff without clipping heating, changing conductivity or fitting observations.
+The historical point-ring source and receipts are preserved unchanged.
+
+All three predeclared footprint hypotheses passed the original 5% angular-field
+and 1e-8 budget screens, and the added 5% fine-change/contraction screens for
+integrated power and voltage. Final mesh changes are 0.30–0.45% for angular
+flow, 0.12–0.86% for port voltage and 0.15–1.05% for integrated Joule power.
+The largest independent-code difference is below 1.33e-9 relative. Seven new
+physics tests cover source balance/moments, wall torque, work, independent
+assembly, gauge invariance, reversals, drive scaling and fixed support geometry.
+
+At imposed 100 A, the narrow/middle/broad hypotheses give current-weighted port
+voltages 21.86/18.12/14.11 V. **These are not independent experimental voltage
+predictions.** The inherited fixed conductivity ratio corresponds to Hall
+parameter 3, historically inferred using electrical observations; the emission
+footprints and corrected-voltage operator remain unidentified. No new parameter
+was fitted, but that does not erase the inherited calibration provenance.
+The 2 cm anode band has a metal-geometry basis; uniform current on it remains
+an assumption. The hollow cathode's 4 mm inner radius is not its emitting width.
+The supports are paired illustrative alternatives, not measured uncertainty
+bounds or an isolated causal study of either contact.
+
+This qualifies integrated electrical work only within the stated stationary,
+fixed-property angular model. It does not qualify peak local heating at sharp
+patch edges, equipotential metal electrodes, sheaths, thermal evolution,
+meridional flow, or the live lithium playground. Experimental qualification
+remains false.
+
+See the [frozen protocol](../scientific/finite-contact-reference/PROTOCOL.md),
+[run and independent-review record](../scientific/finite-contact-reference/results/RUN.md),
+and [complete compressed field/budget receipt](../scientific/finite-contact-reference/results/campaign.json.gz).
+
+### Remaining physical identification
+
+A physically justified finite cathode/anode current footprint and plasma-port
+voltage mapping are still needed, followed by matched
 non-rigid neutral/ion momentum, meridional transport and energy predictions.
 No benchmark input should be selected because it reduces the measured residual.
 A new output/condition withheld from model development is needed for a prospective
