@@ -28,3 +28,31 @@ Predictions, ranked before execution:
    transport is converged; a subsequent coupling-tolerance probe is then needed.
 
 Run only in offline bounded CI, preserving the unrelated frozen safe-dev run.
+
+## Frozen electrical-source probe, declared after precision receipt
+
+[The first precision receipt](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43845961851)
+finds less than 0.05% mass-response error at original amplitude, versus the
+22–38% coupled radial discrepancy. Thus inventory arithmetic is not its main
+cause. Face-transfer errors up to 3.14% remain a separate limitation.
+
+Next solve the original zero-rotation electrical problem once on each radial
+grid {8,16,32,64,128,256}, with upper-graded z128 and tolerance 1e-15. Keep all
+physical geometry, contact, conductivity and voltage inputs unchanged. This
+supplies each native grid's frozen Joule source. Separately restrict the single
+r256 source by exact cell-power summation onto those same gas grids. The common
+source is a finite reference, not an exact or validated continuum solution.
+
+Evolve the existing coupled species/thermal kernels for 256 steps over 1 µs
+using each native source, then each common restricted source. Prescribe Ω=0
+throughout this diagnostic; no momentum solve, centrifugal work or current
+feedback is claimed. Keep the original common-gas heating, gas-wall boundary,
+temperature-dependent conductivity, tungsten liner and transport inputs.
+
+Compare density and temperature excursions at identical clocks and conserved
+coarse bins for every consecutive radial doubling triple, with the unchanged
+strict 2% plus contraction gates and declared representation screen. Preserve
+every native source without rescaling its total power. If common-source errors
+fall while native-source errors persist, source discretization is implicated;
+if both fail similarly, gas resolution/transport remains limiting. No new live
+default, physical fit or promotion follows from either outcome.

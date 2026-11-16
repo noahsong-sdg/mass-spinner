@@ -28,10 +28,13 @@ jobs:
             python3 -m unittest discover -s scientific/spatial-argon-20261116 -p test_precision_oracle.py -v
             node --import tsx scripts/probe-fuel-gas-precision.ts precision-output
             python3 scientific/spatial-argon-20261116/precision_oracle.py precision-output/precision-input.json
+            node --import tsx scripts/probe-fuel-radial-source.ts source-output
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: radial-precision
-          path: precision-output/
+          path: |
+            precision-output/
+            source-output/
           if-no-files-found: error
