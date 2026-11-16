@@ -45,6 +45,9 @@ requires institutional/static-IP coordination. A publication's data policy is no
 evidence that its actual joint dataset was downloaded. No authors were contacted.
 Primary links, search coverage and access limits are recorded in the
 [independent data review](reviews/identifiable-benchmark-data-20261116.md).
+The [follow-up acquisition search](BENCHMARK-DATA-ACQUISITION.md) recovered the
+full historical thesis, MIT release plan and public reference/diagnostic codes;
+it has not yet recovered a complete matched experimental bundle.
 
 ## Executable comparison
 
