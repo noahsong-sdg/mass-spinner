@@ -6,7 +6,7 @@ const steps=[
  {title:'Watch the gas spin up',intro:'Ions are charged atoms. Neutrals have no net charge: the drive reaches them through collisions.',
   do:'Replay spin-up. Follow the time cursor on the Ions and Neutrals speed curves. Pause or drag the playback slider to inspect a moment.',
   notice:'With the default drive, ions lead and neutrals follow. Friction transfers angular momentum; wall drag removes it.',
-  note:'Try a small change to Radial discharge current. During playback this changes the drive at the selected time; New run starts from rest with the displayed settings. Screen motion is slowed; use the physical-time readout.',actions:[['spin','Replay spin-up'],['current','Adjust drive current']]},
+  note:'Fast rotation is averaged so the full run plays in seconds; use the physical-time readout. Try a small change to Radial discharge current: during playback it changes the drive at that time. New run starts from rest with the displayed settings.',actions:[['spin','Replay spin-up'],['current','Adjust drive current']]},
  {title:'Find the lighter atoms',intro:'A radial composition profile answers: “At this distance from the axis, what percentage of the atoms are each species?”',
   do:'Show the end of the computed trajectory. Compare the axis and wall probes, or click the gas cutaway to choose your own radius.',
   notice:'In a rotating mixture, both species favor the wall. The heavier species favors it more, so the lighter species can be enriched toward the axis. Compare against the feed percentage, not 50%.',
@@ -68,7 +68,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   }else if(key==='coils'){
    set('fuel-component','coils');open('inspect',true);
   }else if(key==='spin'){
-   set('fuel-motion-mode','spin');set('fuel-motion-time',0,'input');plot('spin');
+   set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();
   }else if(['composition','axis','wall','temperature','rotation'].includes(key)){
    composition();

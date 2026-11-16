@@ -83,6 +83,7 @@ test('guided experiments use the real accepted plots, timeline and probes withou
   const button=[...host.querySelectorAll<HTMLButtonElement>('.guide-actions button')].find(b=>b.textContent===label);assert.ok(button,label);button.click();
  };
  action(1,'Replay spin-up');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
+ assert.equal(f.node('fuel-motion-mode').value,'transport','use averaged turns so the full history plays in seconds');
  action(2,'Show composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  action(2,'Probe axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
