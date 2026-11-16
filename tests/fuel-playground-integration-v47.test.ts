@@ -90,9 +90,11 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  action(2,'Probe wall');close(Number(f.node('fuel-composition-readout').dataset.radiusM),f.ui.latest.result.config.radiusM);
  for(const [label,key]of [['Compare 2× temperature','temperature'],['Compare 2× rotation','rotation']]){
   action(3,label);assert.equal(f.node(`fuel-compare-${key}`).getAttribute('aria-pressed'),'true');
+  assert.equal(f.node('fuel-learning-comparisons').open,true,'the computed comparison must be visible, not hidden in a closed disclosure');
   assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
  }
  action(4,'Show drive work');assert.equal(f.node('fuel-plot').value,'heat');
+ assert.equal(f.node('fuel-learning-comparisons').open,false,'a new guided plot must not leave an unrelated comparison in front');
  action(4,'Open thermal controls');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
  action(5,'Show purity & recovery');assert.equal(f.node('fuel-plot').value,'cut');
  action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
