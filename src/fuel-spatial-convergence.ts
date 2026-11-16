@@ -79,7 +79,7 @@ export function assessSpatialRefinement(histories:readonly [History,History,Hist
   const [coarseDifference,fineDifference]=differences.map(peak);
   // Representation sensitivity screen only, NOT a solver-error allowance. It
   // cannot turn a failed metric into a pass; tiny responses stay unassessed.
-  const background=field.representation?Math.max(...values.flatMap(h=>h.map(row=>peak(row)))):0;
+  const background=field.representation?Math.max(...values.flatMap(h=>h.map(row=>norm(row,shape)))):0;
   const representationScreen=32*Number.EPSILON*(c.config.radialCells/n)*background;
   const resolved=tolerance*scale>representationScreen;
   const coarseRelative=resolved?coarseDifference/scale:null,fineRelative=resolved?fineDifference/scale:null;

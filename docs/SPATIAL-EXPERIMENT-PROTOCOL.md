@@ -41,7 +41,8 @@ These are this new campaign's gates; they do not reinterpret older protocols.
 
 Raw differences, scales, contraction and a separate representation-sensitivity
 screen are reported. For baseline-subtracted fields the screen is
-`32 * Number.EPSILON * (finest radial cells / coarsest cells) * max|field|`.
+`32 * Number.EPSILON * (finest radial cells / coarsest cells) * norm(field)`
+(the same maximum or L1 norm used for that field's comparison).
 It is a conservative binary64 sensitivity diagnostic, **not a rigorous solver
 error bound or an acceptance allowance**. Signals below it, or contraction
 dominated by it, remain `unresolved`; the screen cannot produce a pass or change
@@ -57,6 +58,8 @@ histories and [initial receipt](https://github.com/noahsong-sdg/mass-spinner/act
 remain retained; corrected scores are separate. Nonfinite interval heat is
 refused before assessment/JSON serialization. A fresh output directory is
 required before any computation, preserving existing partial and final evidence.
+Without a positive representation screen, an exact nonzero difference tie
+remains a failed strict-contraction gate.
 
 This initial campaign does not qualify finer-only times, finer radial structure
 lost by coarsest-bin restriction, local causal early responses, solid spatial
@@ -82,3 +85,32 @@ consecutive doubling triple while holding the other two axes fixed. The same
 physical inputs, thresholds and scope exclusions apply; browser defaults and
 all qualification flags remain unchanged. The expanded bounds permit offline
 reference refinement, not a claim that any newly allowed mesh is adequate.
+
+## Independent numerical probes after the 55-case study
+
+The [55-case receipt](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43839587719)
+resolves the density timestep failure at tested refined points, but retains
+spatial source/heat/density failures and noncontracting electrical timestep
+differences around 1e-9 relative. Before further scoring, declare two probes:
+
+- **Upper-graded grid:** only the axial cell partition changes, to
+  `z_j=L*(1-(1-j/nz)^2)`. Keep the same current operator, physical boundaries,
+  contact area and default 1e-11 solve tolerance. Run the full cross
+  `nr={8,16,32}, nz={8,16,32}, steps={64,128,256}` plus r32/z64/t256 and
+  r32/z128/t256: 29 trajectories. The original uniform path retains its exact
+  arithmetic. This tests axial truncation near the grounded electrode without
+  adding a contact/sheath regularization or altering material coefficients.
+- **Tighter current solve:** preserve the uniform r32/z128 mesh and physical
+  condition. Cross steps {64,128,256} with current relative tolerances
+  {1e-11,1e-13,1e-15}: nine trajectories. The existing current solver already
+  supports this range; the adapter passes it through both current-creation
+  paths. Evaluate time contraction separately at each tolerance. No tolerance
+  is substituted into a physical-error denominator or used to waive a failure.
+
+These probes are independent; grading and tightening are never combined in
+this campaign. Neither changes browser defaults or promotion flags. Use fresh
+output directories for `upper-graded` and `tight-current` CLI modes. All prior
+uniform failures and source hashes remain retained. A grid probe failing an
+operational solve still exports its failure and does not suppress the other
+probe's execution. The representation diagnostic remains heuristic, not a
+certified L1 or local error bound.

@@ -13,7 +13,7 @@ import type {FuelLinerGrid,FuelLinerBoundary} from './fuel-thermal.js';
 export type FuelSpatialState={lightMass:number[];heavyMass:number[];omegaRadS:number[];gasEnergyJ:number[];linerEnergyJ:number[]};
 export type FuelSpatialSetup={number:number;lightFraction:number;speciesMassKg:readonly [number,number];
  radiusM:number;lengthM:number;diffusivityM2S:number;material:'lithium'|'argon';
- electrical:Omit<FuelCurrentInput,'omegaRadS'>;liner:FuelLinerGrid;boundary:FuelLinerBoundary};
+ electrical:Omit<FuelCurrentInput,'omegaRadS'>;currentRelativeTolerance?:number;liner:FuelLinerGrid;boundary:FuelLinerBoundary};
 const sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0);
 
 function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:()=>ReturnType<typeof createFuelCurrentSolver>){
@@ -28,7 +28,7 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
  const gridAt=(temperature:readonly number[])=>createFuelMomentumGrid({edgesM:e,lengthM:c.lengthM,densityKgM3:density,
   viscosityPaS:temperature.map(t=>fuelNeutralTransport(c.material,t).viscosityPaS),innerWallRadS:null,outerWallRadS:0,shearScheme:'volume-coordinate'});
  const before=fuelMomentumState(gridAt(initial.temperatureK),state.omegaRadS);
- const solveCurrent=prepared?prepared():createFuelCurrentSolver(c.electrical);
+ const solveCurrent=prepared?prepared():createFuelCurrentSolver(c.electrical,c.currentRelativeTolerance);
  function sourceAt(temperature:readonly number[]){
   let guess=[...state.omegaRadS];const grid=gridAt(temperature);
   for(let iteration=0;iteration<100;iteration++){
@@ -85,6 +85,6 @@ export function advanceFuelSpatialOperation(c:FuelSpatialSetup,state:FuelSpatial
 /** A trajectory owns a frozen setup. Create a new stepper after changing inputs. */
 export function createFuelSpatialStepper(setup:FuelSpatialSetup){
  const c=structuredClone(setup);let solver:ReturnType<typeof createFuelCurrentSolver>|undefined;
- const current=()=>solver??(solver=createFuelCurrentSolver(c.electrical));
+ const current=()=>solver??(solver=createFuelCurrentSolver(c.electrical,c.currentRelativeTolerance));
  return (state:FuelSpatialState,dtS:number)=>advance(c,state,dtS,current);
 }

@@ -32,11 +32,18 @@ jobs:
             fi
             rm -rf "$regression"
             node --import tsx --test --test-concurrency=1 tests/fuel-spatial-convergence.test.ts tests/fuel-spatial-experiment.test.ts tests/fuel-spatial-study-cli.test.ts
-            node --import tsx scripts/study-fuel-spatial.ts
+            study_status=0
+            node --import tsx scripts/study-fuel-spatial.ts study-output uniform || study_status=1
+            node --import tsx scripts/study-fuel-spatial.ts graded-output upper-graded || study_status=1
+            node --import tsx scripts/study-fuel-spatial.ts tight-output tight-current || study_status=1
+            exit "$study_status"
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: spatial-convergence
-          path: study-output/
+          path: |
+            study-output/
+            graded-output/
+            tight-output/
           if-no-files-found: error

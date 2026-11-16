@@ -9,10 +9,11 @@ const sum=(values:readonly number[])=>values.reduce((a,b)=>a+b,0);
 export interface FuelSpatialExperimentConfig {
  contactVoltageV:number;magneticT:number;numberDensityM3:number;temperatureK:number;
  durationS:number;radialCells:number;axialCells:number;steps:number;driveFraction:number;
+ axialSpacingPower:number;currentRelativeTolerance:number;
 }
 export const DEFAULT_SPATIAL_EXPERIMENT:Readonly<FuelSpatialExperimentConfig>={
  contactVoltageV:1,magneticT:.5,numberDensityM3:1e19/(Math.PI*R**2*L),temperatureK:1000,
- durationS:1e-6,radialCells:4,axialCells:4,steps:16,driveFraction:1,
+ durationS:1e-6,radialCells:4,axialCells:4,steps:16,driveFraction:1,axialSpacingPower:1,currentRelativeTolerance:1e-11,
 };
 export function validateFuelSpatialExperiment(input:unknown):FuelSpatialExperimentConfig {
  if(input===null||typeof input!=='object'||Array.isArray(input))throw new RangeError('Spatial experiment config must be an object.');
@@ -25,6 +26,9 @@ export function validateFuelSpatialExperiment(input:unknown):FuelSpatialExperime
   throw new RangeError('Spatial lab cell requires |V|≤10V, B=0–1T, density=1e18–1e24m⁻³, initial T=300–1800K and duration≤10µs.');
  if(![4,8,16,32].includes(c.radialCells)||![2,4,8,16,32,64,128].includes(c.axialCells)||![16,32,64,128,256].includes(c.steps)||![0,.5,1].includes(c.driveFraction))
   throw new RangeError('Spatial lab cell requires nr=4/8/16/32, nz=2/4/8/16/32/64/128, 16/32/64/128/256 steps and drive fraction=0/0.5/1.');
+ if(![1,2].includes(c.axialSpacingPower))throw new RangeError('Spatial lab cell axial spacing power must be 1 or 2.');
+ if(c.currentRelativeTolerance<4*Number.EPSILON||c.currentRelativeTolerance>1e-11)
+  throw new RangeError('Spatial lab cell current relative tolerance must be between 4 epsilon and 1e-11.');
  return c;
 }
 export interface FuelSpatialExperimentSnapshot {
@@ -35,7 +39,7 @@ export interface FuelSpatialExperimentSnapshot {
  intervalGasWallHeatJ:number;jouleByGasCellW:number[];torqueByGasCellNm:number[];
  joulePowerW:number;mechanicalPowerW:number;stepOmegaMismatchRadS:number;
  stepMechanicalEndpointDefectJ:number;thermalRowResidualJ:number;electricalEnergyResidualW:number;
- inertiaKgM2:number[];intervalElectricalWorkJ:number;
+ inertiaKgM2:number[];intervalElectricalWorkJ:number;maxCellCurrentResidualA:number;
 }
 
 export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimentConfig>={}) {
@@ -43,10 +47,11 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
  const number=config.numberDensityM3*Math.PI*R**2*L,volume=Math.PI*R**2*L/nr;
  const liner=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
  const setup=(voltage:number):FuelSpatialSetup=>({number,lightFraction:.5,speciesMassKg:[ARGON_KG,ARGON_KG],
-  radiusM:R,lengthM:L,diffusivityM2S:.001,material:'argon',liner,
+  radiusM:R,lengthM:L,diffusivityM2S:.001,material:'argon',liner,currentRelativeTolerance:config.currentRelativeTolerance,
   boundary:{gasWallWK:.1,coolingWK:0,coolantK:config.temperatureK},
   electrical:{radialEdgesM:Array.from({length:nr+1},(_,i)=>R*Math.sqrt(i/nr)),
-   axialEdgesM:Array.from({length:nz+1},(_,j)=>L*j/nz),
+   // Preserve the original uniform coordinates exactly; power 2 concentrates cells near the upper contact.
+   axialEdgesM:Array.from({length:nz+1},(_,j)=>config.axialSpacingPower===1?L*j/nz:L*(1-(1-j/nz)**config.axialSpacingPower)),
    sigmaPerpSM:Array(nr*nz).fill(.01),sigmaParallelSM:Array(nr*nz).fill(.1),magneticT:config.magneticT,
    innerVoltageV:Array(nz).fill(null),outerVoltageV:Array(nz).fill(voltage),
    lowerVoltageV:Array(nr).fill(null),upperVoltageV:Array.from({length:nr},(_,i)=>i<nr/2?0:null)}});
@@ -79,7 +84,8 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
    jouleByGasCellW,torqueByGasCellNm,joulePowerW:result.electrical.jouleW,mechanicalPowerW:result.electrical.mechanicalW,
    stepOmegaMismatchRadS:acceptedStep.maxOmegaMismatchRadS,stepMechanicalEndpointDefectJ:acceptedStep.mechanicalEndpointDefectJ,
    thermalRowResidualJ:acceptedStep.thermal.maximumRowResidualJ,electricalEnergyResidualW:result.electrical.energyResidualW,
-   inertiaKgM2:[...result.momentum.grid.inertiaKgM2],intervalElectricalWorkJ:acceptedStep.inputWorkJ};
+   inertiaKgM2:[...result.momentum.grid.inertiaKgM2],intervalElectricalWorkJ:acceptedStep.inputWorkJ,
+   maxCellCurrentResidualA:result.electrical.maxCellCurrentResidualA};
   if(Object.values(record).flat().some(v=>!Number.isFinite(v)))throw new RangeError('Spatial lab cell result exceeds the finite domain.');
   return record;
  };
