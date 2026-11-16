@@ -51,18 +51,23 @@ def assess(packet):
             initial = list(map(decimal, case['initial']))
             mass = initial
             error, response, transfer_error, transfer_scale = D(0), D(0), D(0), D(0)
-            for sample in case['samples']:
+            clocks = []
+            for step, sample in enumerate(case['samples'], 1):
                 mass, transfers = advance(mass, sample, case)
-                response = max(response, max(abs(a-b) for a, b in zip(mass, initial)))
-                error = max(error, max(abs(decimal(a)-b) for a, b in zip(sample['mass'], mass)))
-                transfer_error = max(transfer_error, max(abs(decimal(a)-b) for a, b in zip(sample['faceTransfers'], transfers)))
-                transfer_scale = max(transfer_scale, max(map(abs, transfers)))
+                scale = max(abs(a-b) for a, b in zip(mass, initial))
+                mass_error = max(abs(decimal(a)-b) for a, b in zip(sample['mass'], mass))
+                face_error = max(abs(decimal(a)-b) for a, b in zip(sample['faceTransfers'], transfers))
+                face_scale = max(map(abs, transfers))
+                response, error = max(response, scale), max(error, mass_error)
+                transfer_error, transfer_scale = max(transfer_error, face_error), max(transfer_scale, face_scale)
+                clocks.append({'step': step, 'massResponse': float(scale), 'maximumMassError': float(mass_error),
+                               'maximumTransferError': float(face_error), 'maximumTransfer': float(face_scale)})
             rows.append({'id': case['id'], 'amplitude': case['amplitude'], 'massResponse': float(response),
                          'maximumMassError': float(error), 'relativeMassResponseError': float(error/response),
                          'maximumTransferError': float(transfer_error), 'maximumTransfer': float(transfer_scale),
-                         'relativeTransferError': float(transfer_error/transfer_scale)})
+                         'relativeTransferError': float(transfer_error/transfer_scale), 'clocks': clocks})
     return {'kind': '80-digit-discrete-transport-replay', 'sourceHash': packet['sourceHash'],
-            'retainedSourceHash': packet['retainedSourceHash'], 'cases': rows,
+            'retainedSourceHash': packet['retainedSourceHash'], 'retainedHistoriesSha256': packet['retainedHistoriesSha256'], 'cases': rows,
             'numericallyQualified': False, 'experimentallyQualified': False}
 
 

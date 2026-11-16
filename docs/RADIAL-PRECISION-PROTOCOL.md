@@ -10,6 +10,9 @@ each accepted replay to an independently assembled 80-digit Decimal backward
 Euler solve of the same SG operator, lifting the exact supplied binary64 inputs.
 This separates transport arithmetic from electrical/thermal field generation.
 Recorded fields are prescribed in this diagnostic; it is not a coupled rerun.
+Recovered snapshot T/Ω are not the native thermal-solve/source-Ω values, so this
+does not exclude transfer-feedback or coupled acceptance errors. Retained
+history bytes are pinned separately from the original producing source hash.
 
 Use original temperature excursions and a separate 1000-fold amplified
 excursion control, with rotation unchanged. Amplification tests weak-signal

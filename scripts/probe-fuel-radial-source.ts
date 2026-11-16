@@ -2,7 +2,7 @@
  * Native electrical heating versus conservative restriction of one fine source.
  * This is neither a fully coupled trajectory nor a continuum reference.
  */
-import {mkdirSync,readFileSync,writeFileSync} from 'node:fs';
+import {mkdirSync,readdirSync,readFileSync,writeFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {createFuelCurrentSolver} from '../src/fuel-current.js';
 import {advanceFuelGasMass,fuelGasState} from '../src/fuel-gas.js';
@@ -65,8 +65,8 @@ for(const mode of ['native','common-fine'])for(let level=0;level<levels.length-2
  });
  comparisons.push({mode,levels:[n,2*n,4*n],metrics});
 }
-const files=['src/fuel-current.ts','src/fuel-gas.ts','src/fuel-gas-thermal.ts','src/fuel-thermal.ts','src/fuel-neutral-transport.ts',
- 'scripts/probe-fuel-radial-source.ts','docs/RADIAL-PRECISION-PROTOCOL.md','package-lock.json'];
+const walk=(path:string):string[]=>readdirSync(path,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(path+'/'+e.name):[path+'/'+e.name]);
+const files=[...walk('src'),'scripts/probe-fuel-radial-source.ts','docs/RADIAL-PRECISION-PROTOCOL.md','package-lock.json'].sort();
 const sourceFiles=Object.fromEntries(files.map(file=>[file,createHash('sha256').update(readFileSync(file)).digest('hex')]));
 const packet={kind:'frozen-zero-rotation-radial-source-probe',sourceFiles,sources,comparisons,
  numericallyQualified:false,experimentallyQualified:false,conditions:{N,R,L,T0,D,steps,durationS,nz}};

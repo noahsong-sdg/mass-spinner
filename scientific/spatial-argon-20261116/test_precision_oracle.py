@@ -4,6 +4,20 @@ from precision_oracle import advance
 
 
 class OracleTests(unittest.TestCase):
+    def test_rotating_two_cell_exact_flux(self):
+        case = {'dtS': 1, 'diffusivityM2S': .125, 'radiusM': 1, 'speciesMassKg': 1.380649e-23}
+        sample = {'temperatureK': [1, 1], 'omegaRadS': [1, 1]}
+        with localcontext() as context:
+            context.prec = 80
+            z = D(1)/4
+            b = z/(z.exp()-1)
+            outward, inward = b+z, b
+            mass, transfers = advance([D(1), D(0)], sample, case)
+            expected = outward/(1+outward+inward)
+            self.assertLess(abs(mass[1]-expected), D('1e-78'))
+            self.assertLess(abs(mass[0]-(1-expected)), D('1e-78'))
+            self.assertLess(abs(transfers[0]-expected), D('1e-78'))
+
     def test_two_cell_exact_backward_euler(self):
         case = {'dtS': 1, 'diffusivityM2S': .125, 'radiusM': 1, 'speciesMassKg': 1e-26}
         sample = {'temperatureK': [500, 500], 'omegaRadS': [0, 0]}
