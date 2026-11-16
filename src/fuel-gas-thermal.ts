@@ -118,12 +118,19 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
  function diagnostic(message:string){
   const repeated=evaluate(change),again=evaluate(change);
   const row=accepted.residual.reduce((best,r,i)=>Math.abs(r)/accepted.tolerance[i]>Math.abs(accepted.residual[best])/accepted.tolerance[best]?i:best,0);
-  return new RangeError(message+' [DEBUG-heat-increments] '+JSON.stringify({row,ng,dt,change:change[row],oldTemperature:oldValues[row],
+  const neighbors=row<ng?[-1,1].map(sign=>{
+   const shifted=[...change];shifted[row]+=sign*Number.EPSILON*oldValues[row];const probe=evaluate(shifted);
+   return {sign,temperature:oldValues[row]+shifted[row],residual:probe.residual[row],energyChange:probe.energyChange[row],
+    mass:[probe.source.lightMass[row],probe.source.heavyMass[row]],source:probe.source.gasSourceJ[row],
+    faces:probe.source.faceTransfers.map(a=>a.slice(Math.max(0,row-1),Math.min(ng-1,row+1)))};
+  }):[];
+  return new RangeError(message+' [DEBUG-heat-increments] '+JSON.stringify({row,ng,dt,change:change[row],oldTemperature:oldValues[row],neighbors,
    residual:accepted.residual[row],tolerance:accepted.tolerance[row],energyChange:accepted.energyChange[row],
    repeatedResidual:repeated.residual[row],againResidual:again.residual[row],
    oldMass:oldMass.map(a=>a[row]),mass:[accepted.source.lightMass[row],accepted.source.heavyMass[row]],
    roundoffEnergyScale:16*Number.EPSILON*Math.abs(oldEnergy[row]),
    repeatedMass:[repeated.source.lightMass[row],repeated.source.heavyMass[row]],
+   faces:accepted.source.faceTransfers.map(a=>a.slice(Math.max(0,row-1),Math.min(ng-1,row+1))),
    source:row<ng?accepted.source.gasSourceJ[row]:accepted.source.dragEnergyJ}));
  }
  for(let iteration=1;iteration<=160;iteration++){

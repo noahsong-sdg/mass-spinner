@@ -9,7 +9,7 @@ const K=1.380649e-23,N=1e18,R=.01,L=.1,dtS=.01;
 const grid=createFuelLiner({radiusM:R,lengthM:L,thicknessM:.001,cells:3});
 const cases=[];
 for(const n of [2,8,32])for(const backgroundK of [400,1000,1700])for(const k of [0,.2])
- for(const q of [0,2**-50,-(2**-50),2**-40,-(2**-40),2**-20,-(2**-20)]){
+ for(const q of [0,2**-60,-(2**-60),2**-50,-(2**-50),2**-40,-(2**-40),2**-20,-(2**-20)]){
  const mass=Array(n).fill(1/n),capacityJK=mass.map(p=>1.5*K*(N*(.5*p+.5*p)));
  const oldEnergyJ=capacityJK.map(c=>c*backgroundK),sourceJ=mass.map((_,i)=>i===0?q:0);
  // Assemble the actual constant-property production coefficients independently
