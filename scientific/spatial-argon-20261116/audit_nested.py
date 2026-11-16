@@ -39,7 +39,7 @@ def audit_case(root, case, packet):
         value = ratio(abs(defect), actual_input)
         if value is not None:
             target[name] = max(target.get(name, 0.), value)
-    count = 0
+    count = incremental_rows = 0
     with gzip.open(path, 'rt', encoding='utf-8') as stream:
         for line in stream:
             row = read_json(line)
@@ -70,6 +70,26 @@ def audit_case(root, case, packet):
                          'energyResidualJ', 'angularResidual'):
                 finite(row[name], name)
             require(row['numericalLossJ'] >= 0, 'Negative native numerical dissipation')
+            fields = ('thermalEnergyChangeJ', 'thermalStorageDefectJByCell', 'thermalGasSourceJ',
+                      'thermalTemperatureIncrementK', 'thermalGasSolveTemperatureK')
+            if any(name in row for name in fields):
+                require(all(name in row for name in fields), 'Partial incremental thermal receipt')
+                changes = array(row[fields[0]], n + 3, fields[0])
+                storage = array(row[fields[1]], n + 3, fields[1])
+                source = array(row[fields[2]], n, fields[2])
+                array(row[fields[3]], n + 3, fields[3])
+                solve_t = array(row[fields[4]], n, fields[4], positive=True)
+                old_energy = previous['gasCellEnergyJ'] + previous['linerCellEnergyJ'] if previous else gas + liner
+                stored_changes = [u - old for u, old in zip(gas + liner, old_energy)]
+                peak('thermalCellStorageIdentityMismatchJ', max(abs(a - b - c) for a, b, c in zip(stored_changes, changes, storage)))
+                incremental_residual = math.fsum([*changes, row['coolingJ'], *(-v for v in source)])
+                stored_residual = math.fsum([*stored_changes, row['coolingJ'], *(-v for v in source)])
+                peak('thermalIncrementEnergyResidualJ', incremental_residual)
+                peak('thermalStoredEnergyResidualJ', stored_residual)
+                peak('thermalStorageResidualIdentityMismatchJ', math.fsum((stored_residual, -incremental_residual, -math.fsum(storage))))
+                canonical_t = [u / (1.5 * 1.380649e-23 * number * ((a + b) / 2)) for u, a, b in zip(gas, light, heavy)]
+                peak('thermalNativeCanonicalGasMismatchK', max(abs(a - b) for a, b in zip(solve_t, canonical_t)))
+                incremental_rows += 1
             # Independently form RΩ and the coarse source from constant children.
             coarse_work = []
             for j in range(ne):
@@ -143,7 +163,7 @@ def audit_case(root, case, packet):
     require(count == case['rows'] and (count == steps + 1 if complete else count <= steps + 1), 'Declared accepted-row count mismatch')
     require(count > 0, 'No accepted initial state')
     return {'file': case['file'], 'sha256': checksum, 'n': n, 'steps': steps, 'acceptedRows': count,
-            'complete': complete, 'failure': case['failure'], 'peaks': peaks,
+            'complete': complete, 'failure': case['failure'], 'incrementalThermalRows': incremental_rows, 'peaks': peaks,
             'maxStepRelativeDefects': step_relative, 'maxPrefixRelativeDefects': prefix_relative,
             'actualSignedElectricalWorkJ': math.fsum(work_terms), 'actualAbsoluteElectricalWorkJ': math.fsum(map(abs, work_terms)),
             'actualNumericalLossJ': math.fsum(loss_terms), 'actualWallWorkJ': math.fsum(wall_terms),
@@ -258,6 +278,31 @@ def self_test():
                              'prefixAngularDefect', 'linerStepDefectJ', 'driveImpulseScheduleDefect',
                              'nativeEndpointWorkDefectMismatchJ'):
                     self.assertEqual(result['peaks'][name], 0.)
+        def test_optional_increment_storage_separation_and_partial_refusal(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                rows, case, packet = self.fixture(root)
+                capacity = 1.5 * 1.380649e-23 * packet['totalParticles'] / 4
+                for step, row in enumerate(rows):
+                    row.update(thermalEnergyChangeJ=[.625 * step] * 4 + [0.] * 3,
+                               thermalStorageDefectJByCell=[-.125 * step] * 4 + [0.] * 3,
+                               thermalGasSourceJ=[.625 * step] * 4,
+                               thermalTemperatureIncrementK=[.625 * step / capacity] * 4 + [0.] * 3,
+                               thermalGasSolveTemperatureK=[(10 + .625 * step) / capacity] * 4)
+                path = root / case['file']
+                def write():
+                    path.write_bytes(b''.join(gzip.compress((json.dumps(r) + '\n').encode()) for r in rows))
+                    case['sha256'] = digest(path)
+                write()
+                result = audit_case(root, case, packet)
+                self.assertEqual(result['incrementalThermalRows'], 2)
+                self.assertEqual(result['peaks']['thermalIncrementEnergyResidualJ'], 0.)
+                self.assertEqual(result['peaks']['thermalStoredEnergyResidualJ'], .5)
+                self.assertEqual(result['peaks']['thermalCellStorageIdentityMismatchJ'], 0.)
+                del rows[1]['thermalGasSourceJ']
+                write()
+                with self.assertRaisesRegex(ValueError, 'Partial incremental'):
+                    audit_case(root, case, packet)
     return unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Tests)).wasSuccessful()
 
 

@@ -17,7 +17,7 @@ const conditions={material:'argon' as const,radiusM:R,lengthM:L,groundedDiskRadi
  diffusivityM2S:.001,sigmaPerpSM:.01,sigmaParallelSM:.1,gasWallWK:.1,linerThicknessM:.001,
  linerMaterial:'tungsten' as const,coolingWK:0,electricalRadialCells:ne,electricalAxialCells:nz};
 const requests=gasLevels.flatMap(n=>timeLevels.map(steps=>({n,steps})));
-const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml',
+const sourcePaths=['scripts/probe-fuel-nested-coupling.ts','package-lock.json','.github/workflows/nested-coupling.yml','.github/workflows/thermal-precision.yml',
  ...readdirSync('src',{recursive:true}).filter(name=>typeof name==='string'&&name.endsWith('.ts')&&
   !name.split('/').some(part=>part.startsWith('.'))).map(name=>'src/'+name)].sort();
 const sourceFiles=Object.fromEntries(sourcePaths.map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')]));
@@ -54,6 +54,9 @@ for(const {n,steps} of requests){
    electricalEnergyResidualW:a.electrical.energyResidualW,inertiaKgM2:a.momentum.grid.inertiaKgM2,
    intervalElectricalWorkJ:a.inputWorkJ,maxCellCurrentResidualA:a.electrical.maxCellCurrentResidualA};
   const receipt={step,snapshot,faceTransfers:a.faceTransfers,sourceOmegaRadS:a.sourceOmegaRadS,
+   thermalEnergyChangeJ:a.thermal.energyChangeJ,thermalStorageDefectJByCell:a.thermal.storageDefectJByCell,
+   thermalTemperatureIncrementK:[...a.thermal.gasTemperatureIncrementK,...a.thermal.linerTemperatureIncrementK],
+   thermalGasSourceJ:a.thermal.gasSourceJ,thermalGasSolveTemperatureK:a.thermal.gasTemperatureK,
    numericalLossJ:a.momentum.increment.numericalLossJ,wallWorkJ:a.momentum.increment.wallWorkJ,
    coolingJ:a.thermal.coolingEnergyJ,driveImpulse:a.momentum.increment.driveImpulseKgM2S,
    wallImpulse:a.momentum.increment.wallImpulseKgM2S,energyResidualJ:a.energyResidualJ,
