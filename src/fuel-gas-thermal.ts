@@ -5,7 +5,7 @@
  */
 import {conductances,fuelLinerState,tungstenThermalProperties,meanHeatCapacity,
  FUEL_LINER_MIN_K,FUEL_LINER_MAX_K,type FuelLinerGrid,type FuelLinerBoundary} from './fuel-thermal.js';
-import {fuelGasFaceTemperature} from './fuel-gas.js';
+import {fuelGasFaceTemperature,type FuelGasTemperatureBasis} from './fuel-gas.js';
 
 const K=1.380649e-23,sum=(a:readonly number[])=>a.reduce((s,v)=>s+v,0);
 export type FuelMixtureGasOptions={conductivityWMK:number;lightMass:readonly number[];heavyMass:readonly number[];
@@ -36,7 +36,7 @@ function solve(diagonal:number[],lower:number[],upper:number[],rhs:number[]){
 
 export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:readonly number[],oldGasEnergy:readonly number[],
  number:number,lightFraction:number,radiusM:number,lengthM:number,dt:number,boundary:FuelLinerBoundary,gasOptions:FuelMixtureGasOptions,
- sourceAtTemperatures:(temperatures:readonly number[])=>FuelMixtureHeatSource<T>){
+ sourceAtTemperatures:(temperatures:readonly number[],basis:FuelGasTemperatureBasis)=>FuelMixtureHeatSource<T>){
  const ng=oldGasEnergy.length,oldMass=[gasOptions.lightMass,gasOptions.heavyMass],fractions=[lightFraction,1-lightFraction];
  if(!Number.isSafeInteger(ng)||ng<2||ng>4096||oldMass.some(a=>a.length!==ng||a.some(v=>!Number.isFinite(v)||v<0)||Math.abs(sum(a)-1)>2e-8)||
   [number,radiusM,lengthM,boundary.coolantK].some(v=>!Number.isFinite(v)||v<=0)||!Number.isFinite(lightFraction)||lightFraction<0||lightFraction>1||
@@ -58,7 +58,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
   if(values.some((t,i)=>!Number.isFinite(t)||change[i]<=-oldValues[i]||
    i>=ng&&(change[i]<FUEL_LINER_MIN_K-oldValues[i]||change[i]>FUEL_LINER_MAX_K-oldValues[i])))
    throw new RangeError('Mixture thermal state leaves positive gas / solid tungsten 300–1900 K.');
-  const source=sourceAtTemperatures(values.slice(0,ng)),mass=[source.lightMass,source.heavyMass];
+  const source=sourceAtTemperatures(values.slice(0,ng),{referenceK:oldT,incrementK:change.slice(0,ng)}),mass=[source.lightMass,source.heavyMass];
   if(mass.some(a=>!Array.isArray(a)||a.length!==ng||a.some(v=>!Number.isFinite(v)||v<0)||Math.abs(sum(a)-1)>2e-8)||
    !Array.isArray(source.faceTransfers)||source.faceTransfers.length!==2||source.faceTransfers.some(a=>a.length!==ng-1||a.some(v=>!Number.isFinite(v)))||
    source.gasSourceJ.length!==ng||source.gasSourceJ.some(v=>!Number.isFinite(v))||!Number.isFinite(source.dragEnergyJ)||source.dragEnergyJ<0)
@@ -141,6 +141,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
    const gasEnergyJ=accepted.energy.slice(0,ng),residualJ=sum(accepted.residual);
    if(Math.abs(residualJ)>2e-10*sum(accepted.scales))throw new RangeError('Mixture thermal step failed total energy conservation.');
    return {...liner,gasEnergyJ,gasTemperatureK:oldT.map((t,i)=>t+change[i]),
+    gasTemperatureBasis:{referenceK:oldT,incrementK:change.slice(0,ng)},
     linerSolveTemperatureK:oldSolid.temperatureK.map((t,i)=>t+change[ng+i]),
     gasTemperatureIncrementK:change.slice(0,ng),linerTemperatureIncrementK:change.slice(ng),energyChangeJ:accepted.energyChange,
     storageDefectJByCell:accepted.energy.map((u,i)=>(u-oldEnergy[i])-accepted.energyChange[i]),

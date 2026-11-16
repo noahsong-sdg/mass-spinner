@@ -30,6 +30,21 @@ test('direct SG transfer matches independent two-cell BE balance over signed and
  }
 });
 
+test('retained temperature increments drive SG pressure transport below absolute temperature precision',()=>{
+ const radius=.01,D=.001,dt=.01;
+ for(const [p,referenceK] of [[[.5,.5],[1000,1000]],[[.75,.25],[500,1500]]])for(const delta of [2**-50,-(2**-50)]){
+  const incrementK=p[0]===.5?[delta,0]:[delta,delta],basis={referenceK,incrementK};
+  const temperature=referenceK.map((t,i)=>t+incrementK[i]);assert.deepEqual(temperature,referenceK);
+  const scale=dt*8*D/radius**2*(.5/temperature[0]+.5/temperature[1]);
+  const expected=scale*.5*delta/(1+scale*(temperature[0]+temperature[1]));
+  const actual=advanceFuelGasMass(p,temperature,M,0,radius,D,dt,basis);
+  assert.ok(Math.abs(actual.faceTransfers[0]/expected-1)<2e-12);
+  assert.equal(advanceFuelGasMass(p,temperature,M,0,radius,D,dt).faceTransfers[0],0);
+ }
+ assert.throws(()=>advanceFuelGasMass([.5,.5],[1000,1000],M,0,radius,D,dt,{referenceK:[1000],incrementK:[0]}),/basis/);
+ assert.throws(()=>advanceFuelGasMass([.5,.5],[1000,1000],M,0,radius,D,dt,{referenceK:[1000,1000],incrementK:[.1,0]}),/basis/);
+});
+
 test('bounded offline gas refinement supports 4096 cells without changing positivity or inventory gates',()=>{
  const n=4096,p=Array(n).fill(1/n),temperature=Array.from({length:n},(_,i)=>1000+1e-5*(i+.5)/n);
  const moved=advanceFuelGasMass(p,temperature,M,0,.01,.001,1e-6/256);

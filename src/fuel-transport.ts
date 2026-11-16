@@ -1,12 +1,12 @@
 import {simulateFuelCentrifuge} from './fuel-centrifuge.js';
 import {fuelLinerState,type FuelLinerGrid,type FuelLinerState} from './fuel-thermal.js';
-import {advanceFuelGasMass,fuelGasState,type FuelGasState} from './fuel-gas.js';
+import {advanceFuelGasMass,fuelGasState,type FuelGasState,type FuelGasTemperatureBasis} from './fuel-gas.js';
 
 const U=1.66053906892e-27,K=1.380649e-23;
 type RotorResult=ReturnType<typeof simulateFuelCentrifuge>;
 export type FuelTransportOptions={cells?:number;steps?:number};
 export type FuelCoupledParameters={radiusM:number;gasK:number;lightFraction:number;diffusivityM2S:number;
- gasTemperaturesK?:readonly number[];
+ gasTemperaturesK?:readonly number[];gasTemperatureBasis?:FuelGasTemperatureBasis;
  speciesMassKg:number[];mechanics:Pick<RotorResult['mechanics'],'ii'|'nn'|'gamma'|'drag'|'torque'>};
 export type FuelCoupledState={lightMass:number[];heavyMass:number[];
  ionAngularMomentumKgM2S:number;neutralAngularMomentumKgM2S:number};
@@ -103,6 +103,7 @@ function relativeError(error:number,scale:number){return scale>0?Math.abs(error)
  * Ion geometry and Γ stay prescribed; neutral dragHz=initial drag/initial inertia.
  */
 export function advanceFuelCoupledStep(model:FuelCoupledParameters,state:FuelCoupledState,dtS:number){
+ if(model.gasTemperatureBasis&&!model.gasTemperaturesK)throw new RangeError('A gas temperature basis requires spatial endpoint temperatures.');
  const {ii,nn,gamma,drag,torque}=model.mechanics,n=state.lightMass.length;
  resolution(n,'radial cells',2,1024);nonnegative(dtS,'time step');
  for(const [name,value] of Object.entries({ii,nn,radiusM:model.radiusM,gasK:model.gasK}))
@@ -122,7 +123,7 @@ export function advanceFuelCoupledStep(model:FuelCoupledParameters,state:FuelCou
  const target=ln0+h*u,scale=Math.abs(target),rate=4*model.diffusivityM2S/model.radiusM**2;
  function evaluate(speed:number){
   const coefficient=speed**2*model.radiusM**2/(2*K*model.gasK);
-  const spatial=model.gasTemperaturesK?model.speciesMassKg.map((mass,i)=>advanceFuelGasMass(i?state.heavyMass:state.lightMass,model.gasTemperaturesK!,mass,speed,model.radiusM,model.diffusivityM2S,dtS)):undefined;
+  const spatial=model.gasTemperaturesK?model.speciesMassKg.map((mass,i)=>advanceFuelGasMass(i?state.heavyMass:state.lightMass,model.gasTemperaturesK!,mass,speed,model.radiusM,model.diffusivityM2S,dtS,model.gasTemperatureBasis)):undefined;
   const lightMass=spatial?.[0].mass??advanceFuelRadialMass(state.lightMass,model.speciesMassKg[0]*coefficient,rate,dtS);
   const heavyMass=spatial?.[1].mass??advanceFuelRadialMass(state.heavyMass,model.speciesMassKg[1]*coefficient,rate,dtS);
   const neutralInertiaKgM2=inertia(model,lightMass,heavyMass);

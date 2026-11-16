@@ -3,7 +3,7 @@
  * of z. Conductivities and species mobility remain prescribed closures.
  */
 import {createFuelCurrentSolver,type FuelCurrentInput} from './fuel-current.js';
-import {advanceFuelGasMass,fuelGasState} from './fuel-gas.js';
+import {advanceFuelGasMass,fuelGasState,type FuelGasTemperatureBasis} from './fuel-gas.js';
 import {advanceFuelMixtureThermal} from './fuel-gas-thermal.js';
 import {createFuelMomentumGrid,fuelMomentumState} from './fuel-momentum.js';
 import {advanceFuelAdvectedMomentum} from './fuel-spatial-coupling.js';
@@ -32,11 +32,11 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
   viscosityPaS:temperature.map(t=>fuelNeutralTransport(c.material,t).viscosityPaS),innerWallRadS:null,outerWallRadS:0,shearScheme:'volume-coordinate'});
  const before=fuelMomentumState(gridAt(initial.temperatureK),state.omegaRadS);
  const solveCurrent=prepared?prepared():createFuelCurrentSolver(c.electrical,c.currentRelativeTolerance);
- function sourceAt(temperature:readonly number[]){
+ function sourceAt(temperature:readonly number[],basis?:FuelGasTemperatureBasis){
   let guess=[...state.omegaRadS];const grid=gridAt(temperature);
   for(let iteration=0;iteration<100;iteration++){
-   const light=advanceFuelGasMass(state.lightMass,temperature,c.speciesMassKg[0],guess,c.radiusM,c.diffusivityM2S,dtS);
-   const heavy=advanceFuelGasMass(state.heavyMass,temperature,c.speciesMassKg[1],guess,c.radiusM,c.diffusivityM2S,dtS);
+   const light=advanceFuelGasMass(state.lightMass,temperature,c.speciesMassKg[0],guess,c.radiusM,c.diffusivityM2S,dtS,basis);
+   const heavy=advanceFuelGasMass(state.heavyMass,temperature,c.speciesMassKg[1],guess,c.radiusM,c.diffusivityM2S,dtS,basis);
    const flux=light.faceTransfers.map((v,i)=>c.number*(x*c.speciesMassKg[0]*v+(1-x)*c.speciesMassKg[1]*heavy.faceTransfers[i]));
    const electricalOmega=projection.restrictOmega(guess);
    const electrical=solveCurrent(Array.from({length:ne*nz},(_,i)=>electricalOmega[i%ne]));
@@ -64,7 +64,7 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
  const thermal=advanceFuelMixtureThermal(c.liner,state.linerEnergyJ,state.gasEnergyJ,c.number,x,c.radiusM,c.lengthM,dtS,c.boundary,
   {lightMass:state.lightMass,heavyMass:state.heavyMass,conductivityWMK:0,
    conductivityAtTemperature:t=>fuelNeutralTransport(c.material,t).conductivityWmK},sourceAt);
- const accepted=sourceAt(thermal.gasTemperatureK),{momentum,electrical}=accepted.payload;
+ const accepted=sourceAt(thermal.gasTemperatureK,thermal.gasTemperatureBasis),{momentum,electrical}=accepted.payload;
  const next:FuelSpatialState={lightMass:accepted.lightMass,heavyMass:accepted.heavyMass,omegaRadS:momentum.omegaRadS,
   gasEnergyJ:thermal.gasEnergyJ,linerEnergyJ:thermal.cellEnergyJ};
  const inputWorkJ=dtS*electrical.electrodePowerW,wallWorkJ=momentum.increment.wallWorkJ;

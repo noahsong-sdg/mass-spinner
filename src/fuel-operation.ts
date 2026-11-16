@@ -182,8 +182,8 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
   const at=(temperature:number)=>advanceFuelCoupledStep({...parameters,gasK:temperature},state,dtS);
   let next;
   if(thermal.gas&&liner&&linerEnergy&&gasEnergy){
-   const coupled=advanceFuelMixtureThermal(liner,linerEnergy,gasEnergy,number,c.lightFraction,c.radiusM,c.lengthM,dtS,thermal,{...thermal.gas,lightMass:state.lightMass,heavyMass:state.heavyMass},temperatures=>{
-    const result=advanceFuelCoupledStep({...parameters,gasTemperaturesK:temperatures},state,dtS),e=result.energyIncrement;
+   const coupled=advanceFuelMixtureThermal(liner,linerEnergy,gasEnergy,number,c.lightFraction,c.radiusM,c.lengthM,dtS,thermal,{...thermal.gas,lightMass:state.lightMass,heavyMass:state.heavyMass},(temperatures,gasTemperatureBasis)=>{
+    const result=advanceFuelCoupledStep({...parameters,gasTemperaturesK:temperatures,gasTemperatureBasis},state,dtS),e=result.energyIncrement;
     const fractions=result.lightMass.map((p,i)=>c.lightFraction*p+(1-c.lightFraction)*result.heavyMass[i]);
     const gasSourceJ=fractions.map(p=>p*(e.slipDissipationJ+ohmic));
     let work=0;

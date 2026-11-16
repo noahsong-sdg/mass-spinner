@@ -64,3 +64,14 @@ test('nested fine gas and coarse electrical cells preserve source power and acce
   gasEnergyJ:Array(6).fill(1.5*K*c.number/6*1000),omegaRadS:Array(6).fill(0)};
  assert.throws(()=>advanceFuelSpatialOperation(c,invalid,1e-6),/equal-volume/);
 });
+
+test('fine gas cells retain tiny temperature-driven transfers in the coupled heat solve',()=>{
+ const {c,s}=fixture(),n=1024;
+ s.lightMass=Array(n).fill(1/n);s.heavyMass=Array(n).fill(1/n);s.omegaRadS=Array(n).fill(0);
+ s.gasEnergyJ=Array(n).fill(1.5*K*c.number/n*1000);
+ const a=advanceFuelSpatialOperation(c,s,1e-6/64);
+ assert.ok(a.thermal.gasTemperatureIncrementK.some(v=>v>0));
+ assert.ok(a.thermal.gasTemperatureIncrementK.every(Number.isFinite));
+ assert.ok(a.state.lightMass.every(v=>v>0));
+ assert.ok(a.thermal.massStorageDefectBySpecies.every(row=>row.every(Number.isFinite)));
+});

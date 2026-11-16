@@ -20,16 +20,23 @@ jobs:
           DOCKERFILE
           docker image inspect heat-check --format '{{.Id}}'
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify heat precision offline
+      - name: Check heat and transport regressions offline
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check sh -eu -c '
             node --import tsx --test --test-concurrency=1 tests/fuel-gas.test.ts tests/fuel-gas-thermal.test.ts tests/fuel-spatial-operation-v66.test.ts
             node --import tsx --test --test-concurrency=1 tests/fuel-hotwall-continuation-v59.test.ts tests/fuel-mixture-operation-v58.test.ts
+          '
+      - name: Compare independent precision references and coupled refinement offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check sh -eu -c '
             python3 scientific/spatial-argon-20261116/heat_precision_oracle.py --self-test
+            python3 scientific/spatial-argon-20261116/sg_precision_oracle.py --self-test
             python3 scientific/spatial-argon-20261116/audit_nested.py --self-test
             study_status=0
             node --import tsx scripts/probe-fuel-heat-precision.ts heat-output || study_status=1
             python3 scientific/spatial-argon-20261116/heat_precision_oracle.py heat-output/heat-precision-input.json > heat-output/oracle-summary.log || study_status=1
+            node --import tsx scripts/probe-fuel-sg-precision.ts heat-output || study_status=1
+            python3 scientific/spatial-argon-20261116/sg_precision_oracle.py heat-output/sg-precision-input.json > heat-output/sg-oracle-summary.log || study_status=1
             node --import tsx scripts/probe-fuel-nested-coupling.ts nested-output || study_status=1
             python3 scientific/spatial-argon-20261116/audit_nested.py nested-output --source-root /work --output nested-output/independent-accounting.json || study_status=1
             exit "$study_status"
