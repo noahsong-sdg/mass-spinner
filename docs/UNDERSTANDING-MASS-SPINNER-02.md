@@ -322,7 +322,7 @@ Three checks answer different questions:
 | Stable results with smaller spatial cells and time steps | The selected numerical solution is resolved for the tested case |
 | Matched apparatus, inputs and diagnostics reproduce measurements without refitting | Evidence for those experimental observables |
 
-The [public-data assessment](PUBLIC-DATA-QUALIFICATION.md) records numerical
+The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records numerical
 successes alongside unresolved disagreement with historical argon measurements.
 Those are not measurements of this lithium playground or Marathon's machine.
 The playground explores conditional physical relationships; experimentally
