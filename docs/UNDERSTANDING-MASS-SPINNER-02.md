@@ -1,223 +1,346 @@
 # Understanding Mass Spinner · 2
 
-## From rotation to a prediction
+## What are we trying to predict?
 
-The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduced the machine: current
-and magnetic field drive ions; collisions spin up neutral gas; rotation can
-separate masses. This guide connects that picture to equations you can reason
-with. Read the physical meaning first. The algebra gives you a way to check it.
+Imagine a sealed cylinder containing lithium-6 and lithium-7 atoms. We want gas
+near its center to contain a **larger fraction of lithium-6** than the original
+mixture. We do not change either isotope into the other: we move them around.
 
-## 1. A rotating gas needs a pressure gradient
+Why care? Marathon describes enriching lithium for fusion blankets, where
+neutron reactions can produce tritium fuel. **The centrifuge is a fuel processing
+machine, not the fusion reactor.** Our playground explores a simplified
+centrifuge; it is not a reconstruction of Marathon's proprietary apparatus.
+[Marathon's description](https://www.marathonfusion.com/fusion-energy/) gives
+the application, not enough information to calibrate this model.
 
-An atom moving around a circle continually changes direction. Its inward
-acceleration is `vθ²/r`. The gas needs an inward force to maintain that motion.
-Pressure supplies it: higher pressure outside pushes inward more strongly than
-lower pressure inside pushes outward.
+The central question is: **Can we create enough rotation to separate the mixture,
+without heating it so much that thermal motion weakens the separation?**
 
-For steady circular motion, ignoring other radial forces,
+That makes three quantities essential:
 
-`dp/dr = ρ vθ²/r`.
-
-Here `p` is pressure, `ρ` mass density, `r` radius and `vθ` tangential speed.
-For rigid rotation, `vθ = Ωr`, so
-
-`dp/dr = ρ Ω²r`.
-
-“Rigid” means every radius has the same angular speed Ω, not the same
-tangential speed. Gas at twice the radius moves twice as fast.
-
-In the laboratory frame, the pressure force supplies inward acceleration.
-In a frame rotating with the gas, we describe pressure balancing the outward
-centrifugal term. These are two descriptions of the same balance.
-
-If we initialize uniform pressure and nonzero rotation, that balance is absent:
-radial motion is expected. A good test for *artificial* radial motion must
-initialize the balancing pressure gradient as well.
-
-## 2. Why heavier atoms favor the wall
-
-Consider an ideal neutral species with mass per atom `m`, number density `n`
-and uniform temperature `T`. Its partial pressure is `p = nkBT`; its mass
-density is `ρ = mn`. In rigid rotational equilibrium:
-
-`kBT dn/dr = mnΩ²r`.
-
-Divide by `n kBT` and integrate between the axis and radius r:
-
-`ln[n(r)/n(0)] = mΩ²r²/(2kBT)`.
-
-Both species concentrate outward. Taking their ratio reveals the separation:
-
-`α = [(nh/nl) at wall] / [(nh/nl) at axis]`
-
-`ln α = (mh − ml) Ω²R²/(2kBT) = Δm vwall²/(2kBT)`.
-
-The subscripts h/l mean heavy/light; R is the chamber radius. The crucial
-quantity is **rotation energy associated with the mass difference, divided by
-thermal energy**. Its dimensionless value is the exponent, not α itself.
-
-At fixed temperature, doubling angular speed multiplies `ln α` by four.
-Doubling temperature at fixed speed halves `ln α`. Doubling both speed and
-temperature doubles `ln α`.
-
-For a hypothetical baseline with α = 2:
-
-| Change | New ideal α |
-|---|---:|
-| Double Ω, keep T fixed | 16 |
-| Double T, keep Ω fixed | √2 ≈ 1.41 |
-| Double both Ω and T | 4 |
-
-These illustrate the equation, not a particular machine's performance.
-
-These are equilibrium neutral-gas relationships, not a general formula for
-charged-species separation. Electric fields, different population temperatures,
-non-rigid flow and transport can change the result. The tutorial's plasma
-filters and a partially ionized neutral centrifuge share ideas without having
-identical equations.
-
-Most importantly, **α is not product purity or production rate**. It compares
-two local composition ratios. To predict a collected product, we also need the
-whole distribution, inlet/outlet locations and flows, and time to establish
-separation. A tiny enriched sample can have excellent purity and poor recovery.
-
-## 3. More current is a coupled tradeoff
-
-Use I for electrical current and ℐ for gas moment of inertia:
-
-`L = ℐΩ`, and `dL/dt = applied torque − loss torque`.
-
-Current and magnetic field supply torque. In the simple annular radial-current
-reference, `τ = IB(R² − rin²)/2`. That says how rapidly angular momentum is
-supplied; it does not directly prescribe speed. Inertia and losses determine
-the response.
-
-The mechanical power delivered to a rigid rotating population is `P = τΩ`.
-Electrical power also supplies resistive heat. In the simple resistive reference,
-with fixed conductivity, geometry and current pattern, doubling current doubles
-the reference torque but quadruples resistive heating. That comparison is for
-prescribed current; prescribed voltage is a different experiment. Motion can
-change both the required voltage and the spatial current pattern.
-
-Collisions help transfer torque from ions to neutrals, but relative motion
-dissipates energy. Increasing drive can therefore increase both Ω and T.
-Whether separation improves depends on the resulting `Ω²/T`, rather than the
-current slider alone. Temperatures of electrons, ions, neutral gas and walls
-need not be equal.
-
-There is feedback in the other direction too: moving gas outward increases ℐ.
-At conserved L, the rotation slows. If ℐ doubles while L stays fixed, Ω halves
-and rotational kinetic energy `K = L²/(2ℐ)` halves. A consistent model must
-account for that energy change through the other work and energy terms.
-Recomputing a distribution while holding speed fixed implicitly assumes an
-angular-momentum source can maintain that speed.
-
-## 4. What “solving the flow” adds
-
-An equilibrium formula describes a possible final balance. It does not tell
-us how the apparatus gets there. A flow calculation also follows transport:
-
-`∂ρ/∂t + (1/r)∂(rρur)/∂r + ∂(ρuz)/∂z = 0`.
-
-This is conservation of mass in an axisymmetric chamber. The speeds ur and uz
-describe radial and axial motion. “Meridional flow” means motion in this
-radius–length plane, alongside the circular motion around the axis.
-
-An endwall can brake circular motion. That changes centrifugal support, which
-changes pressure balance and can drive radial/axial circulation. The circulation
-then transports angular momentum, species and heat. This is why a single bulk
-angular speed cannot represent every measured velocity profile.
-
-The research solver divides this plane into cells. It stores **amounts** in
-each cell: mass, momentum, angular momentum, energy and species mass. A shared
-face flux leaves one cell and enters its neighbor. Current, viscosity and heat
-transport are coupled to those evolving quantities using additional operators.
-The model assumes rotational symmetry; its cells are not a full 3D turbulent
-plasma calculation.
-
-The current argon research campaign is a short, closed, adiabatic control:
-electrical work enters, but heat cannot leave. Sustained positive net power
-therefore prevents steady total energy. Its four-microsecond history cannot
-establish the experiment's steady thermal state. A physically justified energy
-exhaust and population-energy model is a separate requirement, not something
-smaller cells can supply.
-
-The browser model is deliberately faster and simpler. Its 3D scene visualizes
-computed populations and fields; adding realistic surfaces or more dots does
-not add missing momentum equations.
-
-## 5. Three different reasons a prediction can be wrong
-
-| Question | Example | Evidence needed |
+| We need to know… | Because… | Playground view |
 |---|---|---|
-| Did we implement the equations correctly? | Balanced gas moves because pressure and centrifugal source were discretized differently | Analytical controls and conservation checks |
-| Have we resolved their solution? | An endwall layer changes when cells get smaller | Spatial and timestep convergence |
-| Do these equations describe this experiment? | Prescribed conductivity or optical weighting does not represent the apparatus | Matched measurements, uncertainty and predictions without refitting |
+| How fast ions and neutral gas rotate | Rotation produces the separating effect; current alone does not specify speed | Spin-up |
+| How hot the gas becomes | Thermal motion opposes the composition gradient | Work / heat and thermal controls |
+| Where each isotope ends up, over time | Speed and temperature matter only if they produce a useful composition | Composition and collection |
 
-The radial-balance correction addresses the first row. On one equilibrium
-control, radial RMS speed fell from 0.127 m/s to about `3.7 × 10⁻¹³ m/s`.
-That is numerical cancellation, not a measurement of physical gas motion.
+Everything below builds that chain. Follow it in
+[Start here](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=2&guide=start).
+The [first guide](UNDERSTANDING-MASS-SPINNER.md) explains ions, neutrals and the
+project's two backends if those terms are unfamiliar.
 
-The complete coupled study still fails six spatial checks. Its density-change
-differences are 21–24%, while total density differences are much smaller:
-subtracting the initial density asks whether we resolve the *change* we claim
-to predict. Neither percentage is an absolute error against a known solution.
-The experimental optical comparison also still fails. See the
-[V103 evidence](../RADIAL-BALANCE-V103.md) for the exact conditions and limits.
+## 1. How do we spin a gas without spinning a drum?
 
-Finally, an instrument measures a signal. A Doppler observation can combine
-light from gas at several radii, weighted by emissivity and viewing geometry.
-Comparing that signal with a simulated local velocity requires a diagnostic
-model. Better flow numerics alone cannot correct an unjustified measurement
-interpretation.
+Picture the cylinder from the end. Electrical current crosses the gas between
+inner and outer electrodes. A magnetic field points along the cylinder's axis.
+Current across that field produces a sideways electromagnetic force, which
+turns the charged population. Collisions transfer rotation to neutral atoms.
 
-## Check your understanding
+```text
+electrical drive → charged population turns → collisions turn neutral gas
+                           ↓                            ↓
+                          heat                 radial redistribution
+```
 
-Try answering before opening the explanation. These are practice questions,
-not prerequisites for using the playground.
+The electromagnetic force per unit volume is
 
-<details><summary>1. Double Ω and quadruple T. Does ideal equilibrium separation improve?</summary>
+```math
+\mathbf{f}=\mathbf{J}\times\mathbf{B}.
+```
 
-No. Ω²/T is unchanged, so α is unchanged under these assumptions. The drive
-power, stresses and time to equilibrium could still differ.
+**J** is current per unit area and **B** is magnetic field. The cross product
+means the force points perpendicular to both; reversing the current reverses
+the force. This is a bulk force law, not a claim that every charged particle
+follows a circular microscopic orbit.
+
+**Why simulate this?** We control electrical drive, but need gas speed. The
+drive accelerates the gas and replaces rotation lost to boundaries. Neutral
+atoms feel no direct Lorentz force, so ion–neutral collisions are essential
+to the route by which this model spins them.
+
+## 2. Why does rotation separate masses?
+
+Think of air becoming less dense with height in gravity. Gravity favors lower
+positions; thermal motion spreads particles upward. In an ideal isothermal
+mixture, heavier particles have a steeper equilibrium density gradient.
+
+A centrifuge creates an analogous competition **across the radius**. In a frame
+rotating with the gas, the centrifugal effect favors the wall. Heavier atoms
+develop a stronger outward concentration than lighter atoms. Thermal motion
+keeps the separation incomplete: neither region contains only one isotope.
+This is a statistical distribution in a colliding gas, not a sieve that sends
+each atom to one destination based only on mass.
+
+Start with uniform temperature and **rigid rotation**: every radius has the same
+angular speed, called Ω. At twice the radius an atom travels twice as far per
+turn, so its tangential speed is twice as large:
+
+```math
+v_\theta(r)=\Omega r.
+```
+
+r is distance from the axis; the wall is at r = R. Under these assumptions,
+the equilibrium density of either neutral isotope obeys
+
+```math
+\frac{n_s(r)}{n_s(0)}
+=\exp\!\left(\frac{m_s\Omega^2r^2}{2k_BT}\right).
+```
+
+The label s means either isotope; n is atoms per unit volume, m is mass per atom,
+T is temperature in kelvin, and k_B is Boltzmann's constant, which converts
+temperature to an energy scale. The exponential says how strongly density
+increases outward. Each species' total inventory sets its normalization.
+
+**Both densities rise toward the wall. Separation means their ratio changes.**
+The local light-isotope fraction is
+
+```math
+x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
+```
+
+Subscripts ℓ and h mean light and heavy. A **radial composition profile** is a
+graph of this fraction against radius: “What percentage of atoms here are the
+light isotope?” Density answers “How many atoms are here?” The center can be
+light-enriched while containing fewer light atoms per unit volume than the wall.
+
+<details>
+<summary>Where does the exponential come from?</summary>
+
+An atom moving in a circle needs inward acceleration. In the laboratory frame,
+pressure increasing toward the wall provides an inward pressure force. For
+steady neutral circular flow, neglecting other radial forces,
+
+```math
+-\frac{dp}{dr}=-\rho\frac{v_\theta^2}{r},
+\qquad\text{so}\qquad
+\frac{dp}{dr}=\rho\Omega^2r.
+```
+
+p is pressure and ρ is mass per volume. In the rotating frame we describe the
+same balance as pressure opposing the centrifugal effect. Inward acceleration
+and outward-increasing density are consistent descriptions of circular flow.
+
+For either ideal neutral species at isothermal diffusive equilibrium, insert
+its partial pressure and mass density:
+
+```math
+p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
+\qquad
+\frac{d\ln n_s}{dr}=\frac{m_s\Omega^2r}{k_BT}.
+```
+
+Integrating from the axis to r gives the exponential above. This is a special
+equilibrium result, not a complete transient momentum equation for each species.
 
 </details>
 
-<details><summary>2. Two species both become denser near the wall. Has separation failed?</summary>
+## 3. How strong is the separation?
 
-Not necessarily. Separation concerns their relative abundance. If the heavy
-species increases more strongly, the local heavy/light ratio still changes.
+Compare the heavy/light ratio at the wall with the same ratio at the axis.
+Call this comparison α:
 
-</details>
+```math
+\alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}},
+\qquad
+\ln\alpha=\frac{(m_h-m_\ell)\Omega^2R^2}{2k_BT}
+=\frac{\Delta m\,v_{\mathrm{wall}}^2}{2k_BT}.
+```
 
-<details><summary>3. More current produces faster rotation. Is that enough to predict higher purity?</summary>
+This isolates mass sorting from the overall rise in density. The exponent is
+**rotation energy associated with the mass difference, divided by thermal
+energy**. If that dimensionless number is small, the composition gradient is
+weak. α = 1 means identical heavy/light ratios at axis and wall; α = 2 means
+the wall's ratio is twice the axis's ratio.
 
-No. Check heating, transport time, the composition profile and the collection
-cut. Even a larger equilibrium α does not specify collected product purity.
+For orientation, a mass difference of about one atomic mass unit, wall speed
+1,000 m/s and temperature 500 K give an exponent about 0.12 and α about 1.13.
+That is a 13% change in the **heavy/light ratio**, not 13 percentage points of
+product enrichment. These are illustrative inputs, not a Marathon measurement.
 
-</details>
+**Why simulate both speed and temperature?** Doubling speed multiplies the
+exponent by four. Doubling temperature halves it. Increasing current might
+increase both, so “more drive means better separation” is not enough reasoning.
 
-<details><summary>4. Energy balances to twelve digits. Are the temperatures experimentally accurate?</summary>
+**Try it:** use the composition view's temperature and rotation comparisons.
+They independently change T or Ω to expose this relationship. They are
+equilibrium references, not predictions of the drive power needed to get there.
+This neutral-gas formula is also not a universal law for the charged-species
+filters in the plasma mass separation tutorial.
 
-No. The code can conserve energy perfectly while depositing it in the wrong
-place, using the wrong heat-transfer law or omitting a physical energy channel.
+## 4. What sets the rotation speed?
 
-</details>
+Torque is the rotational counterpart of force. It changes **angular momentum**,
+the amount of rotational motion. Moment of inertia measures how hard a mass
+distribution is to spin: moving mass farther from the axis increases it.
+For one rigidly rotating population,
 
-<details><summary>5. What would make this a useful predictive simulator?</summary>
+```math
+L=\mathcal{I}\Omega,
+\qquad
+\frac{dL}{dt}=\tau_{\mathrm{in}}-\tau_{\mathrm{loss}}.
+```
 
-A declared operating range where numerical errors are small, selected
-observables match justified experiments with uncertainty, and the fast browser
-model reproduces the qualified reference. Argon rotation evidence alone would
-not establish lithium enrichment or extraction performance.
+L is angular momentum, script ℐ is moment of inertia, and τ is torque. The
+derivative means “change per second.” Steady speed requires balanced torques,
+provided the mass distribution is steady too.
 
-</details>
+The simplest browser mechanics treat ions and neutrals as two rotating
+populations. Collisions transfer equal and opposite torques between them:
 
-The next reading step is to pick one operating point and trace its torque,
-angular momentum, heat, rotation and composition together. Before moving a
-slider, predict the direction of each change; afterward, explain any difference
-using the assumptions above.
+```math
+\frac{dL_i}{dt}=\tau_{\mathrm{drive}}-\Gamma(\Omega_i-\Omega_n),
+\qquad
+\frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
+```
 
-Sources: [plasma mass separation tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf),
-[Marathon's public fuel-cycle description](https://www.marathonfusion.com/fusion-energy/),
-[live equations](../src/fuel-centrifuge.ts), [research flow operator](../scientific/mixture-axial-v75/flow.py).
+i/n mean ions/neutrals. Γ is the prescribed friction coefficient. If ions lead,
+collisions slow them and accelerate neutrals. Add the equations: the internal
+collision torques cancel. Only drive and boundary torque change the total
+angular momentum. The simple browser wall torque is proportional to neutral
+angular momentum through a prescribed drag rate.
+
+For the reference annulus carrying radial current through a uniform axial field,
+the drive torque's magnitude is
+
+```math
+\tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
+```
+
+I is total current, distinct from script ℐ; B is field strength. The radii bound
+the driven annulus. This integrates the sideways force times its lever arm;
+it assumes that radial-current geometry, not arbitrary electrode shapes.
+
+**Why evolve angular momentum rather than prescribe speed?** It explains
+spin-up, ion–neutral lag and coast-down. There is also feedback: moving gas
+outward increases neutral inertia. With no net torque, angular momentum stays
+fixed and rotation slows. Maintaining speed during that redistribution would
+require an additional source of angular momentum.
+
+**Try it:** replay spin-up and compare the two curves. Change current; then
+separately change collision or drag rate. Are you changing the source of
+rotation, its transfer to neutrals, or its loss?
+
+## 5. Where does the energy go?
+
+Turning gas faster takes work. Driving current through resistance also produces
+heat. Mechanical power applied to ions and resistive heating are
+
+```math
+P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
+\qquad
+P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
+```
+
+Power is energy per second. At fixed geometry and conductivity, doubling
+current doubles reference torque but quadruples resistive heating. The
+electrical resistance here excludes the motion-induced voltage: total drive
+power also supplies mechanical work.
+
+Ion–neutral slip dissipates mechanical energy at rate
+
+```math
+P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
+```
+
+Collisions therefore **transfer angular momentum and convert relative rotation
+into heat**. They do not destroy energy. Boundary drag also dissipates rotation.
+For a closed vessel with no mass crossing its boundary, an overall account is
+
+```math
+\frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
+=P_{\mathrm{mechanical}}+P_{\mathrm{Ohmic}}-P_{\mathrm{cooling}}.
+```
+
+K is rotational kinetic energy and U is internal (thermal) energy. Slip and
+wall friction are internal conversions, not extra external power sources.
+Where their heat goes is an additional model assumption. The browser keeps
+numerical time-stepping loss separate from physical heat.
+
+**Why simulate heat?** The separation exponent depends on temperature.
+Fixed-temperature mode assumes thermal control and reports heat loads; it
+does not predict a temperature rise. Optional thermal evolution follows gas
+and wall energy with prescribed heat-transfer and deposition assumptions.
+It does not solve separate electron/ion temperatures or discharge ionization.
+
+**Try it:** inspect work/heat, then thermal controls. A fixed-temperature
+comparison isolates rotation's effect. An evolving-temperature run asks the
+coupled question of whether heating erodes that benefit.
+
+## 6. Why do we need time and collection, too?
+
+Equilibrium says where the mixture could settle, not whether it gets there
+during the run. The browser evolves radial species inventories using prescribed
+transport coefficients. A rough diffusion time scale is
+
+```math
+t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
+```
+
+D is diffusivity in square meters per second. This is a scale, not an exact
+separation time: rotation, boundaries and the transport law matter. A rapidly
+spinning gas can still be far from its equilibrium composition.
+
+Nor is α the purity of a sample. Imagine selecting all gas inside a chosen
+radius. Two different counts matter:
+
+```math
+\mathrm{purity}=\frac{N_{\ell,\mathrm{inside}}}
+{N_{\ell,\mathrm{inside}}+N_{h,\mathrm{inside}}},
+\qquad
+\mathrm{recovery}=\frac{N_{\ell,\mathrm{inside}}}{N_{\ell,\mathrm{whole\ vessel}}}.
+```
+
+N means number of atoms. A small central region can be relatively pure but
+hold little of the desired isotope. The collection view counts inventory
+inside the cut; it does not solve an outlet flow or predict kilograms per hour.
+
+**Try it:** probe axis and wall at the same playback time. Change collection
+radius and watch purity and recovery together. You are changing which gas you
+count, not making the gas instantaneously rearrange itself.
+
+## Why these pieces, and what is still missing?
+
+The essential links are **drive → rotation, work → temperature, and rotation
+plus temperature → composition**. Transport time and the collection cut connect
+that picture to a possible product. Omitting any link can reverse a conclusion
+such as “increasing current improves useful separation.” They are necessary
+ingredients, not proof our approximations are sufficient for a real apparatus.
+
+The fast model uses bulk angular speeds. Real gas can rotate at different
+angular speeds at different radii and axial positions. Endwalls brake nearby
+gas; radial/axial circulation carries heat and composition elsewhere. The
+separate research backend resolves more of this flow. Its results do not
+automatically replace the browser model, and detail alone does not establish
+accuracy.
+
+Three checks answer different questions:
+
+| Check | What passing it establishes |
+|---|---|
+| Conservation and known analytical limits | The implementation respects selected equations and bookkeeping |
+| Stable results with smaller spatial cells and time steps | The selected numerical solution is resolved for the tested case |
+| Matched apparatus, inputs and diagnostics reproduce measurements without refitting | Evidence for those experimental observables |
+
+The [public-data assessment](PUBLIC-DATA-QUALIFICATION.md) records numerical
+successes alongside unresolved disagreement with historical argon measurements.
+Those are not measurements of this lithium playground or Marathon's machine.
+The playground explores conditional physical relationships; experimentally
+accurate enrichment and throughput remain separate claims.
+
+For one run, try to explain: **what supplies torque, what sets the speed, where
+the energy goes, what composition means, and how the cut changes purity and
+recovery.** That is why we simulate these quantities rather than just draw
+spinning particles.
+
+## Equations and further reading
+
+- [Live mechanics and equilibrium reference](../src/fuel-centrifuge.ts),
+  [evolving composition and inertia](../src/fuel-transport.ts), and
+  [optional thermal evolution](../src/fuel-operation.ts) implement the simplified
+  picture above.
+- [Plasma mass separation tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf)
+  covers several mechanisms. Its charged-species filters need additional
+  physics beyond the neutral-gas equilibrium derived here.
+- [How it works](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/how-it-works.html)
+  gives more implementation detail and accuracy limits.
