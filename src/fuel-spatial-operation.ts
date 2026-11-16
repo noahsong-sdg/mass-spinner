@@ -63,7 +63,7 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
   }
   throw new RangeError('Spatial electrical/species/momentum iteration did not converge; refine the timestep.');
  }
- const oldLinerCorrectionJ=state.linerEnergyCorrectionJ??state.linerEnergyJ.map(()=>0);
+ const oldLinerCorrectionJ=state.linerEnergyCorrectionJ===undefined?state.linerEnergyJ.map(()=>0):state.linerEnergyCorrectionJ;
  const thermal=advanceFuelMixtureThermal(c.liner,state.linerEnergyJ,state.gasEnergyJ,c.number,x,c.radiusM,c.lengthM,dtS,c.boundary,
   {lightMass:state.lightMass,heavyMass:state.heavyMass,conductivityWMK:0,
    conductivityAtTemperature:t=>fuelNeutralTransport(c.material,t).conductivityWmK},sourceAt,oldLinerCorrectionJ);

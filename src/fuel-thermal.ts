@@ -69,12 +69,14 @@ export function initialFuelLinerEnergy(grid:FuelLinerGrid,value:number){
 export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[],correctionJ?:readonly number[]):FuelLinerState{
  if(cellEnergyJ.length!==grid.massesKg.length)throw new RangeError('Liner energy state must match its radial grid.');
  if(correctionJ!==undefined){
-  if(correctionJ.length!==cellEnergyJ.length||correctionJ.some((v,i)=>!Number.isFinite(v)||cellEnergyJ[i]+v!==cellEnergyJ[i]))
+  if(!Array.isArray(correctionJ)||correctionJ.length!==cellEnergyJ.length)
    throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
   for(let i=0;i<cellEnergyJ.length;i++){
    // Preserve the existing inversion's upper endpoint roundoff allowance.
    // Compare both words: adding them first can hide a tiny domain violation.
    const energy=cellEnergyJ[i],low=correctionJ[i],maximum=grid.massesKg[i]*enthalpy(FUEL_LINER_MAX_K)*(1+8*Number.EPSILON);
+   if(!Number.isFinite(low)||energy+low!==energy)
+    throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
    if(energy<0||energy===0&&low<0||energy>maximum||energy===maximum&&low>0)
     throw new RangeError('Paired liner energy leaves the solid tungsten enthalpy domain.');
   }
