@@ -20,7 +20,7 @@ export function requestSimulationWithIdentity(request:Record<string,unknown>,sig
   signal?.addEventListener('abort',abort,{once:true});
   worker.onmessage=({data})=>{
    cleanup();
-   if(['coupled-target','fuel-centrifuge','fuel-operating-map'].includes(String(request.kind))&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
+   if(['coupled-target','fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'].includes(String(request.kind))&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
     reject(new Error(`Unsupported ${request.kind} worker response.`));return;
    }
    data.error?reject(new Error(data.error)):resolve({result:data.result,producingCode:producingCode(data.producingCode)});

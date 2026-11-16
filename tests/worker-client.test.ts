@@ -27,3 +27,11 @@ test('centrifuge accepts only its matching versioned worker response',async()=>{
   assert.equal(f.terminated(),1);
  }
 });
+test('spatial research requests accept only matching versioned worker replies',async()=>{
+ for(const edit of [{},{id:6},{kind:'fuel-centrifuge'},{schemaVersion:0}]){
+  const f=fixture(),pending=requestSimulation({id:7,kind:'fuel-spatial-experiment',schemaVersion:1},undefined,f.create);
+  const reply={id:7,kind:'fuel-spatial-experiment',schemaVersion:1,result:42,...edit};
+  const checked=Object.keys(edit).length?assert.rejects(pending,/Unsupported fuel-spatial-experiment/):pending.then(value=>assert.equal(value,42));
+  f.worker.onmessage!({data:reply});await checked;assert.equal(f.terminated(),1);
+ }
+});

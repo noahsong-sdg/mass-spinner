@@ -22,6 +22,7 @@ jobs:
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp --env OPENBLAS_NUM_THREADS=1 --env OMP_NUM_THREADS=1 --env MKL_NUM_THREADS=1 mass-spinner-check sh -eu -c '
             node --import tsx --test --test-concurrency=1 tests/experimental-validation.test.ts tests/fuel-recovery-domain.test.ts tests/argon-reference.test.ts tests/argon-reference-ui.test.ts
+            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-experiment.test.ts tests/fuel-spatial-experiment-ui.test.ts tests/fuel-worker-v47.test.ts tests/worker-client.test.ts
             python3 -m unittest discover -s scientific/electron-applicability -p test_screen.py -v
             python3 -m unittest discover -s tests -p test_argon_reference_export.py -v
             node --import tsx --test --test-concurrency=1 tests/*.test.ts

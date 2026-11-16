@@ -46,8 +46,17 @@ test('actual operating-map worker returns its typed schema and selected full con
  }
 });
 
-test('actual fuel worker rejects invalid protocol versions and request identities for both typed kinds',()=>{
- for(const kind of ['fuel-centrifuge','fuel-operating-map'])for(const invalid of [{schemaVersion:2},{schemaVersion:undefined},{id:-1},{id:1.5},{id:NaN}]){
+test('actual spatial worker runs the coupled research backend with its own voltage boundary protocol',()=>{
+ const reply=dispatch({id:5104,kind:'fuel-spatial-experiment',schemaVersion:1,config:{durationS:1e-7}});
+ assert.equal(reply.error,undefined);assert.equal(reply.kind,'fuel-spatial-experiment');assert.equal(reply.schemaVersion,1);
+ const r=reply.result;assert.equal(r.kind,'spatial-argon-experiment');
+ assert.equal(r.experimentallyQualified,false);assert.equal(r.liveDefaultReplaced,false);
+ assert.equal(r.snapshots.at(-1).timeS,1e-7);assert.ok(r.snapshots.at(-1).omegaRadS.some((v:number)=>v!==0));
+ assert.ok(r.budgets.electricWorkJ>0);assert.equal(Object.hasOwn(r.config,'currentA'),false);
+});
+
+test('actual fuel worker rejects invalid protocol versions and request identities for all typed fuel kinds',()=>{
+ for(const kind of ['fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'])for(const invalid of [{schemaVersion:2},{schemaVersion:undefined},{id:-1},{id:1.5},{id:NaN}]){
   messages.length=0;
   const reply=dispatch({id:4703,kind,schemaVersion:1,config:DEFAULT_FUEL_CENTRIFUGE,...invalid});
   assert.equal(reply.kind,kind);assert.equal(reply.schemaVersion,1);assert.equal(reply.result,undefined);

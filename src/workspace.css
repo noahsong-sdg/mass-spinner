@@ -21,6 +21,9 @@ body.immersive{overflow:hidden;background:#101614}
 .advanced-marathon select{width:100%;font-size:12px;min-height:40px}
 .fuel-qualification code,.argon-reference code{overflow-wrap:anywhere}
 .argon-reference select{width:100%;max-width:100%;min-width:0;min-height:44px}
+.fuel-spatial-controls{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.fuel-spatial-controls input,.fuel-spatial-controls select{width:100%;min-width:0;min-height:44px;box-sizing:border-box;margin-bottom:10px}
+.fuel-spatial-identity{overflow-wrap:anywhere}
 .fuel-qualification table{width:100%;font-size:12px;border-collapse:collapse}
 .fuel-qualification th,.fuel-qualification td{text-align:left;padding:6px 4px;border-bottom:1px solid var(--line)}
 .world-top .level-actions{width:auto;border:0}
