@@ -1,0 +1,31 @@
+name: Spatial convergence study
+on:
+  push:
+    branches: [codex/spatial-convergence]
+permissions:
+  contents: read
+jobs:
+  study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          docker pull node:22-bookworm
+          docker image inspect node:22-bookworm --format '{{.Id}}'
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm npm ci --ignore-scripts --no-audit --no-fund
+      - name: Execute offline characterization
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm sh -eu -c '
+            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-convergence.test.ts tests/fuel-spatial-experiment.test.ts
+            node --import tsx scripts/study-fuel-spatial.ts
+          '
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: spatial-convergence
+          path: study-output/
+          if-no-files-found: error

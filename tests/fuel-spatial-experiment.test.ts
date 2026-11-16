@@ -26,6 +26,10 @@ test('driven trajectory resolves non-rigid momentum, heat, electrode current and
  assert.ok(r.budgets.electricWorkJ>0);assert.ok(last.electrodeCurrentA<0);
  for(const s of r.snapshots){
   close(s.electricalPowerW,-s.contactVoltageV*s.electrodeCurrentA,2e-9);
+  close(sum(s.gasCellEnergyJ),s.gasEnergyJ);close(sum(s.linerCellEnergyJ),s.linerEnergyJ);
+  close(sum(s.jouleByGasCellW),s.joulePowerW);
+  close(sum(s.inertiaKgM2.map((v,i)=>v*s.omegaRadS[i])),s.angularMomentumKgM2S);
+  assert.equal(s.linerTemperatureK.length,3);assert.equal(s.inertiaKgM2.length,r.config.radialCells);
   for(const a of [s.radiusM,s.omegaRadS,s.temperatureK,s.densityKgM3,s.lightMass,s.heavyMass]){
    assert.equal(a.length,r.config.radialCells);assert.ok(a.every(Number.isFinite));
   }
@@ -48,6 +52,9 @@ test('pulse switch preserves state and applies right-continuous shorted-contact 
  const pulse=simulateFuelSpatialExperiment({driveFraction:.5,steps:32}),n=pulse.config.steps/2;
  const powered=simulateFuelSpatialExperiment({durationS:pulse.config.durationS/2,steps:16});
  const switchState=pulse.snapshots[n];assert.equal(switchState.contactVoltageV,0);assert.equal(switchState.electricalPowerW,0);
+ assert.ok(switchState.intervalElectricalWorkJ>0,'right-continuous zero voltage must not erase preceding driven work');
+ assert.ok(switchState.intervalGasWallHeatJ>0,'zero-time switch diagnostics must not erase accepted wall heat');
+ assert.equal(switchState.intervalGasWallHeatJ,powered.snapshots.at(-1)!.intervalGasWallHeatJ);
  assert.ok(switchState.omegaRadS.some(v=>v!==0));assert.ok(switchState.electrodeCurrentA>0,'shorted motional current reverses its source-side sign');
  assert.ok(pulse.budgets.electricWorkJ>0);assert.ok(pulse.snapshots.slice(n).every(s=>s.contactVoltageV===0));
  assert.equal(powered.snapshots.at(-1)!.timeS,switchState.timeS);
