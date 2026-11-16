@@ -2,6 +2,7 @@
 import hashlib
 import importlib.util
 import json
+import shutil
 from pathlib import Path
 import tempfile
 import tarfile
@@ -33,7 +34,7 @@ class ReferenceExportTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root/exporter.ARCHIVE).parent.mkdir(parents=True)
-            (root/exporter.ARCHIVE).hardlink_to(ROOT/exporter.ARCHIVE)
+            shutil.copyfile(ROOT/exporter.ARCHIVE, root/exporter.ARCHIVE)
             (root/'web-assets/argon-reference').mkdir(parents=True)
             (root/'src').mkdir()
             with patch.object(exporter, 'ROOT', root):
