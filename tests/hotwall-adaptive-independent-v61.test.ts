@@ -123,7 +123,7 @@ test('off-knot adaptive continuation preserves a stale metadata-free canonical p
  for(const key of ['lightMass','heavyMass','ionAngularMomentumKgM2S','neutralAngularMomentumKgM2S','ionPhaseRad','neutralPhaseRad','energy','angularMomentum'] as const)
   assert.deepEqual(at[key],before[key]);
  for(const key of ['gasK','linerK','pressurePa','gasEnergyJ','linerEnergyJ','ohmicEnergyJ','coolingEnergyJ','gas','spatial'] as const)
-  assert.deepEqual(at.thermal![key],before.thermal![key]);
+  assert.deepEqual(at.thermal![key],before.thermal![key],`Continuation must preserve canonical ${key}, including its stored precision.`);
  const corrupt=structuredClone(stale);corrupt.checkpoints![1].thermal!.gas!.temperatureK[0]+=1;
  assert.throws(()=>simulateFuelOperation(r,op,options,{transport:corrupt,timeS:time}),/Spatial gas continuation/);
  const changed=operation(.002,.0001);

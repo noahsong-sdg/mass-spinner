@@ -163,7 +163,8 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
    const gasEnergyJ=gas?.energyJ??capacity*gasK,linerEnergyJ=spatial?.energyJ??thermal.wallCapacityJK*wallK;
    const residualJ=s.energy.kineticJ+gasEnergyJ+linerEnergyJ-initialEnergy-ledger.driveWorkJ-ohmicEnergyJ+coolingEnergyJ+ledger.numericalDissipationJ;
    const scale=initialEnergy+Math.abs(ledger.driveWorkJ)+ohmicEnergyJ+Math.abs(coolingEnergyJ)+s.energy.kineticJ;
-   s.thermal={gasK,linerK:wallK,pressurePa:c.pressurePa*gasK/initialGas,gasEnergyJ,linerEnergyJ,ohmicEnergyJ,coolingEnergyJ,residualJ,relativeResidual:Math.abs(residualJ)/scale};
+   s.thermal={gasK,linerK:wallK,pressurePa:gas?gas.pressurePa.reduce((total,p)=>total+p,0)/n:c.pressurePa*gasK/initialGas,
+    gasEnergyJ,linerEnergyJ,ohmicEnergyJ,coolingEnergyJ,residualJ,relativeResidual:Math.abs(residualJ)/scale};
    if(spatial)s.thermal.spatial=spatial;
    if(gas)s.thermal.gas=gas;
    if(s.thermal.relativeResidual>2e-8)throw new RangeError('Thermal energy budget failed; refine the time step.');
