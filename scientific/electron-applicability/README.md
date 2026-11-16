@@ -1,6 +1,6 @@
 # Electron energy applicability screen
 
-**Implemented; regression rerun pending. No live/PDE closure changes.**
+**Implemented; all 17 regressions passed in isolated offline CI. No live/PDE closure changes.**
 
 The centrifuge's prescribed conductivity and immediate heavy-gas Ohmic heating
 do not resolve electron energy or internal atomic states. A conserved heavy
@@ -78,9 +78,13 @@ failure. Both large fixture times now compare their normalized ratio to one at
 14 decimal places. The original 2% plus contraction gates are unchanged.
 A new subprocess control covers the actual CLI with source-bound assumed inputs,
 the retained 100 Td/300 K native point, magnetic refusal, and no overwrite.
-The corrected 17-test suite is pending rerun; source audits alone do not clear it.
+The corrected 17-test suite passed in [isolated offline CI](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43832326328)
+at commit `409bd963713643df319554b51116dc6aa5c2f1cb`; the adapter and tests
+were unchanged in the later [spatial integration check](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43833292908),
+which also passed all 17. Source inspection independently checked normalization,
+channel accounting, applicability refusal and finite-output handling. These are
+software and declared-domain checks, not an experimental validation of the rates.
 
-**Remaining:** corrected regression execution and actual-result review; magnetic
-solver/data admission; electron/internal-state and boundary inputs; channel-wise
+**Remaining:** magnetic solver/data admission; electron/internal-state and boundary inputs; channel-wise
 experimental reference and transient/locality checks. No numerical screen here
 establishes experimental, apparatus or Marathon qualification.

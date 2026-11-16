@@ -100,6 +100,7 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
    'Outer cylinder at prescribed voltage; grounded upper disk occupies exactly half the end area on every allowed mesh. Other faces insulate total current.',
    'After a pulse both contacts are grounded: this is a shorted circuit, not an open circuit or discharge quench. Stored switch samples use right-continuous voltage/current.',
    'Prescribed diagonal electrical conductivity, diffusion and gas–wall film. Neutral transport depends on temperature within sourced bounds; no electron energy, chemistry or Hall force.',
+   'Joule heating is assigned directly to the common gas; its electron/heavy-particle deposition partition is assumed, not evolved.',
    'Density controls are exploration bounds, not validated continuum limits. At low density, rarefaction can invalidate local viscosity, Fourier heat conduction and the gas–wall film; no Knudsen or accommodation qualification is supplied.',
    'Closed radial species transport and spatial gas/tungsten energy; no radial fluid inertia, axial momentum, extraction, or self-consistent ionization.',
    'Coarse short research trajectory; historical startup/refinement failures remain. No numerical or experimental qualification is inherited from other studies.'],

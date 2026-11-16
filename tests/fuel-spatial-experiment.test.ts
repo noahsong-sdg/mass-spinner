@@ -16,6 +16,7 @@ test('zero drive preserves a uniform stationary gas and reports the actual commo
  assert.equal(result.budgets.electricWorkJ,0);assert.equal(result.budgets.angularResidualKgM2S,0);
  assert.match(result.assumptions.join(' '),/Equal-mass passive labels/);assert.match(result.assumptions.join(' '),/historical startup\/refinement failures remain/);
  assert.match(result.assumptions.join(' '),/not validated continuum limits/);assert.match(result.assumptions.join(' '),/no Knudsen or accommodation qualification/);
+ assert.match(result.assumptions.join(' '),/Joule heating is assigned directly to the common gas/);
 });
 
 test('driven trajectory resolves non-rigid momentum, heat, electrode current and closed budgets',()=>{
