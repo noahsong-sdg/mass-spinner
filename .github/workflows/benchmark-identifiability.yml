@@ -1,0 +1,40 @@
+name: Experimental benchmark identifiability
+on:
+  push:
+    branches: [codex/benchmark-identifiability]
+permissions:
+  contents: read
+jobs:
+  replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare reference diagnostic tools
+        run: |
+          benchmark_build=$(mktemp -d)
+          cp scientific/benchmark-identifiability-20261116/requirements.txt "$benchmark_build/requirements.txt"
+          cat > "$benchmark_build/Dockerfile" <<'DOCKERFILE'
+          FROM python:3.12-slim-bookworm
+          COPY requirements.txt /tmp/requirements.txt
+          RUN pip install --no-cache-dir -r /tmp/requirements.txt
+          DOCKERFILE
+          docker build -t benchmark-check "$benchmark_build"
+          docker image inspect benchmark-check --format '{{.Id}}'
+      - name: Replay sealed predictions and audit offline
+        run: |
+          mkdir benchmark-output
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp --env MPLCONFIGDIR=/tmp/matplotlib --env OPENBLAS_NUM_THREADS=1 --env OMP_NUM_THREADS=1 benchmark-check sh -eu -c '
+            python -m pip freeze > benchmark-output/runtime.txt
+            python -m unittest discover -s scientific/benchmark-identifiability-20261116 -p "test_*.py" -v
+            python scientific/benchmark-identifiability-20261116/replay.py benchmark-output/replay
+            python scientific/benchmark-identifiability-20261116/audit_replay.py benchmark-output/replay
+          '
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: benchmark-identifiability
+          path: benchmark-output/
+          if-no-files-found: error
