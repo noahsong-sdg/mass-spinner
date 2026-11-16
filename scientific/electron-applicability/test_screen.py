@@ -2,6 +2,8 @@
 import json
 import os
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -68,8 +70,8 @@ class ApplicabilityTests(unittest.TestCase):
         self.assertAlmostEqual(report['directElasticHeavyFractionDiagnostic'], .4)
         self.assertAlmostEqual(report['electronEnergyThroughputTimeS'], .05)
         self.assertAlmostEqual(report['durationOverElectronEnergyThroughputTime'], 2.)
-        self.assertAlmostEqual(report['neutralIonizationDepletionTimeS'], 5e14)
-        self.assertAlmostEqual(report['electronIonizationMultiplicationTimeS'], 1e14)
+        self.assertAlmostEqual(report['neutralIonizationDepletionTimeS'] / 5e14, 1., places=14)
+        self.assertAlmostEqual(report['electronIonizationMultiplicationTimeS'] / 1e14, 1., places=14)
         self.assertFalse(report['qualification']['experimental'])
         self.assertFalse(report['qualification']['magnetized'])
 
@@ -209,6 +211,55 @@ class ApplicabilityTests(unittest.TestCase):
                     self.assertEqual(len(point['powerGates']), 22)
                     self.assertEqual(point['ionizationGate']['passGate'], td in (100, 300))
                     self.assertEqual(len(point['nativeSources']), 6)
+
+    def test_main_real_native_point_assumed_inputs_magnetic_refusal_and_no_overwrite(self):
+        upstream = Path(__file__).resolve().parents[1] / 'expert-v88/electrons'
+        pin = '2be0967cabb083c2402161ca5a2f534b87fc1eff67580096a84ec64f33168d0a'
+        point = m.authenticated_point(upstream, pin, 100., 300.)
+        inputs = state()
+        n = point['row']['numberDensityM3']
+        inputs.update(neutralDensityM3=n, electronDensityM3=1e16, durationS=4e-6,
+                      electricFieldNeutralFrameVm=[0., 0., 100. * 1e-21 * n])
+        source = self.root / 'assumed-inputs.txt'
+        source.write_text('Manufactured CLI study, not apparatus measurements.\n'
+                          'Exact retained 100 Td, 300 K neutral condition; assumed ne=1e16 m^-3.\n'
+                          'B=0 is allowed; B=.13 T is a refusal control, not a magnetic calculation.\n')
+        names = ('neutralDensityM3', 'electronDensityM3', 'gasTemperatureK',
+                 'electricFieldNeutralFrameVm', 'magneticFieldT', 'durationS')
+        inputs['provenance'] = {name: dict(kind='assumption', citation='CLI regression fixture',
+            path=source.name, sha256=m.digest(source)) for name in names}
+        state_path = self.root / 'cli-state.json'
+        output = self.root / 'cli-screen.json'
+
+        def command(target):
+            return [sys.executable, str(Path(m.__file__).resolve()),
+                '--electron-root', str(upstream), '--admission-sha256', pin,
+                '--state', str(state_path), '--state-sha256', m.digest(state_path),
+                '--field-td', '100', '--gas-temperature-k', '300', '--output', str(target)]
+
+        write(state_path, inputs)
+        completed = subprocess.run(command(output), capture_output=True, text=True, timeout=30)
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        report = json.loads(output.read_text())
+        self.assertFalse(report['qualification']['experimental'])
+        self.assertFalse(report['qualification']['magnetized'])
+        self.assertEqual(report['stateSHA256'], m.digest(state_path))
+        self.assertEqual(report['producerSHA256'], m.digest(m.__file__))
+        self.assertTrue(all(value['kind'] == 'assumption'
+                            for value in report['inputState']['provenance'].values()))
+        self.assertEqual(len(report['nativeSources']), 6)
+        before = output.read_bytes()
+        refused = subprocess.run(command(output), capture_output=True, text=True, timeout=30)
+        self.assertNotEqual(refused.returncode, 0)
+        self.assertIn('FileExistsError', refused.stderr)
+        self.assertEqual(output.read_bytes(), before)
+        inputs['magneticFieldT'] = .13
+        write(state_path, inputs)
+        magnetic_output = self.root / 'refused-magnetic.json'
+        refused = subprocess.run(command(magnetic_output), capture_output=True, text=True, timeout=30)
+        self.assertNotEqual(refused.returncode, 0)
+        self.assertIn('Magnetized use', refused.stderr)
+        self.assertFalse(magnetic_output.exists())
 
 
 if __name__ == '__main__':

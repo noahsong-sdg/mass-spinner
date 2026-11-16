@@ -1,6 +1,6 @@
 # Electron energy applicability screen
 
-**Implemented; scientific execution pending. No live/PDE closure changes.**
+**Implemented; regression rerun pending. No live/PDE closure changes.**
 
 The centrifuge's prescribed conductivity and immediate heavy-gas Ohmic heating
 do not resolve electron energy or internal atomic states. A conserved heavy
@@ -67,7 +67,20 @@ python3 screen.py --electron-root ../expert-v88/electrons \
 within the input packet's directory. Missing operating data remain assumptions;
 the adapter never declares them measurements. The output path must be new.
 
-**Remaining:** actual regression execution and independent review; magnetic
+## Actual checks and retained failure
+
+The first isolated offline [CI run](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43831545876)
+passed 15 of 16 energy tests. Its sole failure was a manufactured-fixture
+assertion comparing a roughly `5e14 s` result to seven absolute decimal places;
+the binary64 difference was `0.0625 s`, approximately one representable increment
+at that scale. This was a test-scale error, not an original scientific-gate
+failure. Both large fixture times now compare their normalized ratio to one at
+14 decimal places. The original 2% plus contraction gates are unchanged.
+A new subprocess control covers the actual CLI with source-bound assumed inputs,
+the retained 100 Td/300 K native point, magnetic refusal, and no overwrite.
+The corrected 17-test suite is pending rerun; source audits alone do not clear it.
+
+**Remaining:** corrected regression execution and actual-result review; magnetic
 solver/data admission; electron/internal-state and boundary inputs; channel-wise
 experimental reference and transient/locality checks. No numerical screen here
 establishes experimental, apparatus or Marathon qualification.
