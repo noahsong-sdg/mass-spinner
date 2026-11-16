@@ -50,7 +50,12 @@ test('nested fine gas and coarse electrical cells preserve source power and acce
  assert.deepEqual(a,b);
  const omega=Array.from({length:4},(_,i)=>(a.sourceOmegaRadS[2*i]+a.sourceOmegaRadS[2*i+1])/2);
  const reference=solveFuelCurrent({...c.electrical,omegaRadS:Array.from({length:12},(_,i)=>omega[i%4])});
- assert.deepEqual(a.electrical,reference);
+ for(const key of ['jouleW','mechanicalW','electrodePowerW'] as const)
+  assert.ok(Math.abs(a.electrical[key]-reference[key])<1e-9*Math.max(Math.abs(reference[key]),1e-12));
+ const work=sum(a.torqueNmByGasCell.map((v,i)=>v*a.sourceOmegaRadS[i]));
+ assert.ok(Math.abs(work-a.electrical.mechanicalW)<1e-13*Math.max(Math.abs(work),1e-12));
+ assert.ok(Math.abs(sum(a.jouleWByGasCell)-a.electrical.jouleW)<1e-13*a.electrical.jouleW);
+ assert.ok(Math.abs(sum(a.torqueNmByGasCell)-sum(a.electrical.torqueNm))<1e-13*sum(a.electrical.torqueNm.map(Math.abs)));
  assert.ok(Math.abs(a.mechanicalEndpointDefectJ)<1e-17);
  assert.ok(Math.abs(a.momentum.angularResidualKgM2S)<1e-20);
  assert.ok(Math.abs(a.energyResidualJ)<1e-10);

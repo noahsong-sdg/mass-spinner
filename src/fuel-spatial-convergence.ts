@@ -2,7 +2,7 @@
  * Nested cells/clocks only. No point interpolation or background-temperature norm.
  */
 import type {simulateFuelSpatialExperiment,FuelSpatialExperimentSnapshot} from './fuel-spatial-experiment.js';
-type History=ReturnType<typeof simulateFuelSpatialExperiment>;
+type History=Pick<ReturnType<typeof simulateFuelSpatialExperiment>,'config'|'conditions'|'snapshots'>;
 export type SpatialRefinementAxis='radialCells'|'axialCells'|'steps';
 const sum=(a:readonly number[])=>a.reduce((s,v)=>s+v,0);
 const peak=(a:readonly number[])=>Math.max(...a.map(Math.abs));
