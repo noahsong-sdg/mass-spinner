@@ -31,3 +31,12 @@ jobs:
             npm run check:site
             npm run check:assets
           '
+      - name: Save verified site for deployment
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: verified-site
+          path: release/
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 0

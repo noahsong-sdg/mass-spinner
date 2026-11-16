@@ -5,6 +5,26 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;height:var(--world-top);background:#141b18ee;border-bottom:1px solid #35413b}
 .world-top header.masthead{min-width:0;min-height:0;height:100%;padding:0 24px;gap:24px;flex:1;flex-wrap:nowrap;border:0;background:none}
 .world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
+.world-top #start-here{margin-left:auto;flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
+.world-top #start-here[aria-expanded=true]{background:#edbe90;color:#18211d}
+.world-window-body.playground-guide{display:flex;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
+.guide-reading{min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px}
+.guide-reading>p:first-child{color:#b9c7bd;margin:0 0 16px;font-size:12px}
+.guide-reading>label{display:block;color:#b9c7bd;font-size:12px}
+.guide-reading>select{width:100%;min-height:44px;margin:6px 0 20px;font-size:13px}
+.world-window .playground-guide h3{font-size:21px;line-height:1.25;margin:0 0 16px;letter-spacing:0}
+.playground-guide p{margin:0 0 16px;font-size:14px;line-height:1.65}
+.playground-guide strong{color:#e7eee4;font-weight:600}
+.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-block:20px}
+.guide-actions button,.guide-navigation button,.guide-leave{min-height:44px;padding:10px 12px;font-size:13px;border:1px solid #566b5c;border-radius:6px;text-align:left}
+.guide-actions button{background:#26392e;color:#e3eee3}
+.playground-guide .guide-note{font-size:12px;color:#b9c7bd;border-top:1px solid #394b3f;padding-top:16px}
+.guide-navigation{display:flex;flex:none;justify-content:space-between;gap:6px;padding:10px 12px;border-top:1px solid #394b3f}
+.guide-navigation button:disabled{opacity:.4}
+.guide-leave{color:#b9c7bd}
+.guide-reading>a{display:block;min-height:44px;padding-block:10px;color:#b9c7bd;font-size:12px}
+.playground-guide #guide-status:empty{display:none}
+.playground-guide #guide-status{color:#edbe90}
 .world-top .learning-path{flex:none;min-width:0;min-height:0;padding:0 24px 0 0;gap:0;border:0;background:none}
 .world-top .level-navigation{align-self:stretch;align-items:stretch;gap:0;margin:0;width:auto;flex-wrap:nowrap;overflow:visible;flex:none}
 .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 14px;font-size:12px}
@@ -133,6 +153,8 @@ body.immersive{overflow:hidden;background:#101614}
  .world-top header.masthead{padding-inline:8px;gap:6px}.world-top .brand{font-size:11px}
  .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2),.advanced-simulators>summary{padding-inline:6px}
  .world-top .learning-path{padding-right:8px}
+ .world-top #start-here{padding:8px;font-size:11px}
 }
+@media(max-width:380px){.world-top #start-here{position:absolute;top:76px;right:12px;background:#18211df5}}
 /* Mode-specific controls and unavailable results retain the native hidden contract. */
 body.immersive .sim-workspace [hidden]{display:none!important}

@@ -1,4 +1,5 @@
 import {clamp,defaultWorkspaceLayout,readWorkspaceLayout,workspaceGeometry,workspaceLayoutKey} from './workspace-layout.js';
+import {setupPlaygroundGuide} from './playground-guide.js';
 
 /** Reuse the live simulation nodes: opening a window never rebuilds its controls. */
 export function setupWorkspace({document:doc=document,matchMedia=window.matchMedia.bind(window),storage,onContextChange=()=>{}}={}){
@@ -97,7 +98,9 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   bar.append(heading,dismiss);panel.append(bar,body);panel.hidden=true;rails[side].append(panel);dock.append(button);
   windows.set(key,{panel,button,body,heading,side,group:key==='target'?'target':side});return body;
  }
- const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right')};
+ const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Start here','left')};
+ const guideButton=windows.get('guide').button;guideButton.id='start-here';header.append(guideButton);
+ setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated});
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);
  function group(parent,levels,selectors,context){
@@ -140,7 +143,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  function refresh(){
   shell.dataset.level=level;shell.dataset.context=marathon;
   for(const {wrapper,levels,context}of groups)wrapper.hidden=!levels.includes(level)||(!!context&&context!==marathon);
-  const allowed=level==='4'?['controls']:level==='2'?(marathon==='source'?['controls','plots','target','inspect','info']:marathon==='centrifuge'?['controls','plots','inspect','view','info']:['plots','inspect']):level==='1'?['controls','plots','inspect','view']:['controls','plots','inspect','view','info'];
+  const allowed=level==='4'?['controls']:level==='2'?(marathon==='source'?['controls','plots','target','inspect','info']:marathon==='centrifuge'?['controls','plots','inspect','view','info','guide']:['plots','inspect']):level==='1'?['controls','plots','inspect','view']:['controls','plots','inspect','view','info'];
   for(const [key,{button}]of windows){const available=allowed.includes(key)&&(key!=='view'||level==='2'&&marathon==='centrifuge'||!doc.querySelector('.viewport-tools').hidden);if(!available)close(key);button.hidden=!available;}
   if(doc.activeElement?.closest('[hidden]'))(context.hidden?[...windows.values()].find(item=>!item.button.hidden)?.button:switcher)?.focus();
   arrange();
@@ -153,9 +156,10 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  doc.body.classList.add('immersive');
  // Everything interactive was moved into the workspace before hiding the document shell.
  originalMain.hidden=true;refresh();
- return {open,close,focusRelated(key,selector){
+ function focusRelated(key,selector){
   open(key,true);const item=windows.get(key);if(!item||item.panel.hidden)return;
   const node=selector?item.body.querySelector(selector):null;
   if(node){for(let parent=node.parentElement;parent&&parent!==item.body;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;node.scrollIntoView?.({block:'nearest'});node.focus?.({preventScroll:true});}
- },refreshMode:refresh,setLevel(next){for(const key of windows.keys())close(key);level=next;refresh();}};
+ }
+ return {open,close,focusRelated,refreshMode:refresh,setLevel(next){for(const key of windows.keys())close(key);level=next;refresh();}};
 }

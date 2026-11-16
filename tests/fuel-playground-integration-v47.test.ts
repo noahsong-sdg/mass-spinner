@@ -9,6 +9,7 @@ import {simulateFuelTransport,sampleFuelTransport,fuelTransportCDF} from '../src
 import {comparisonDomain,computeFuelOperatingMap} from '../src/fuel-experiments.ts';
 import {sampleFuelField} from '../src/fuel-field.js';
 import {publicInputCoverage} from '../src/public-sensitivity.ts';
+import {setupPlaygroundGuide} from '../src/playground-guide.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const clone=<T>(value:T):T=>structuredClone(value);
@@ -70,6 +71,34 @@ test('native range serialization preserves exact log defaults without masking ge
   assert.equal(coverage().historicalInputMatch,false);
   f.change(`fuel-${key}`,initial);assert.equal(f.ui.read()[key],DEFAULT_FUEL_CENTRIFUGE[key]);assert.equal(coverage().historicalInputMatch,true);
  }
+});
+
+test('guided experiments use the real accepted plots, timeline and probes without changing physical inputs',async t=>{
+ const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const opened:string[]=[],focused:any[]=[];
+ setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated:(...args)=>focused.push(args)});
+ const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
+ const action=(step:number,label:string)=>{
+  const choice=f.node('guide-step');choice.value=String(step);choice.dispatchEvent(new f.window.Event('change'));
+  const button=[...host.querySelectorAll<HTMLButtonElement>('.guide-actions button')].find(b=>b.textContent===label);assert.ok(button,label);button.click();
+ };
+ action(1,'Replay spin-up');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
+ action(2,'Show composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
+ assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ action(2,'Probe axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
+ action(2,'Probe wall');close(Number(f.node('fuel-composition-readout').dataset.radiusM),f.ui.latest.result.config.radiusM);
+ for(const [label,key]of [['Compare 2× temperature','temperature'],['Compare 2× rotation','rotation']]){
+  action(3,label);assert.equal(f.node(`fuel-compare-${key}`).getAttribute('aria-pressed'),'true');
+  assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
+ }
+ action(4,'Show drive work');assert.equal(f.node('fuel-plot').value,'heat');
+ action(4,'Open thermal controls');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ action(5,'Show purity & recovery');assert.equal(f.node('fuel-plot').value,'cut');
+ action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
+ assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
+ assert.ok(opened.includes('plots'));
+ f.change('fuel-application','pump','change');await f.ui.run();action(5,'Show purity & recovery');
+ assert.match(f.node('guide-status').textContent,/Choose Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
 test('composition plot, precise radius, physical-time sampling and 3D ring share the accepted cell state',async t=>{
