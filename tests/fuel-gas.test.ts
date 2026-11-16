@@ -6,6 +6,14 @@ const K=1.380649e-23,M=7*1.66053906892e-27;
 const sum=(a:number[])=>a.reduce((s,x)=>s+x,0);
 const close=(a:number,b:number,tolerance=2e-12)=>assert.ok(Math.abs(a-b)<=tolerance,`${a} versus ${b}`);
 
+test('bounded offline gas refinement supports 4096 cells without changing positivity or inventory gates',()=>{
+ const n=4096,p=Array(n).fill(1/n),temperature=Array.from({length:n},(_,i)=>1000+1e-5*(i+.5)/n);
+ const moved=advanceFuelGasMass(p,temperature,M,0,.01,.001,1e-6/256);
+ assert.equal(moved.mass.length,n);assert.ok(moved.mass.every(v=>Number.isFinite(v)&&v>0));
+ close(sum(moved.mass),1,2e-12);
+ assert.throws(()=>advanceFuelGasMass(Array(n+1).fill(1/(n+1)),Array(n+1).fill(1000),M,0,.01,.001,0),/2–4096/);
+});
+
 test('uniform-temperature gas transport retains the isothermal SG reference',()=>{
  const n=32,m=Array.from({length:n},(_,i)=>i+1),p=m.map(v=>v/sum(m)),temperature=500,omega=1800,radius=.12,D=.02,dt=.03;
  const actual=advanceFuelGasMass(p,Array(n).fill(temperature),M,omega,radius,D,dt);

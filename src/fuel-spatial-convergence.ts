@@ -7,6 +7,20 @@ export type SpatialRefinementAxis='radialCells'|'axialCells'|'steps';
 const sum=(a:readonly number[])=>a.reduce((s,v)=>s+v,0);
 const peak=(a:readonly number[])=>Math.max(...a.map(Math.abs));
 
+/** Shared gates for coupled studies and isolated transport probes. A screen
+ * withholds precision claims; it never turns an error into an accepted pass. */
+export function classifySpatialConvergence(scale:number,coarseDifference:number,fineDifference:number,representationScreen:number,tolerance:number){
+ if([scale,coarseDifference,fineDifference,representationScreen,tolerance].some(v=>!Number.isFinite(v)||v<0)||tolerance===0)
+  throw new RangeError('Convergence scoring needs finite nonnegative magnitudes and a positive tolerance.');
+ const resolved=tolerance*scale>representationScreen;
+ const coarseRelative=resolved?coarseDifference/scale:null,fineRelative=resolved?fineDifference/scale:null;
+ const exact=coarseDifference===0&&fineDifference===0;
+ const contractionResolved=representationScreen===0||exact||Math.abs(coarseDifference-fineDifference)>representationScreen;
+ const contracting=fineDifference<coarseDifference||exact;
+ const status=!resolved||!contractionResolved?'unresolved':coarseRelative!==null&&fineRelative!==null&&coarseRelative<tolerance&&fineRelative<tolerance&&contracting?'pass':'fail';
+ return {coarseRelative,fineRelative,contracting,status};
+}
+
 /** Equal-volume nested shells. Restrict extensive state before intensive fields.
  * The actual fine-grid kinetic energy is retained; mixing Ω does not retain it.
  */
@@ -81,13 +95,8 @@ export function assessSpatialRefinement(histories:readonly [History,History,Hist
   // cannot turn a failed metric into a pass; tiny responses stay unassessed.
   const background=field.representation?Math.max(...values.flatMap(h=>h.map(row=>norm(row,shape)))):0;
   const representationScreen=32*Number.EPSILON*(c.config.radialCells/n)*background;
-  const resolved=tolerance*scale>representationScreen;
-  const coarseRelative=resolved?coarseDifference/scale:null,fineRelative=resolved?fineDifference/scale:null;
-  const contractionResolved=representationScreen===0||fineDifference===0&&coarseDifference===0||Math.abs(coarseDifference-fineDifference)>representationScreen;
-  const contracting=fineDifference<coarseDifference||coarseDifference===0&&fineDifference===0;
-  const status=!resolved||!contractionResolved?'unresolved':coarseRelative!==null&&fineRelative!==null&&coarseRelative<tolerance&&fineRelative<tolerance&&contracting?'pass':'fail';
-  return {name:field.name,unit:field.unit,scale,coarseDifference,fineDifference,coarseRelative,fineRelative,
-   representationScreen,contracting,status,tolerance,
+  return {name:field.name,unit:field.unit,scale,coarseDifference,fineDifference,
+   ...classifySpatialConvergence(scale,coarseDifference,fineDifference,representationScreen,tolerance),representationScreen,tolerance,
    initialDifference:Math.max(differences[0][0],differences[1][0]),
    worstFineTimeS:a.snapshots[differences[1].indexOf(fineDifference)].timeS};
  });

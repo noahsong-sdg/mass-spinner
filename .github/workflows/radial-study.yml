@@ -26,9 +26,14 @@ jobs:
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp radial-check sh -eu -c '
             python3 -m unittest discover -s scientific/spatial-argon-20261116 -p test_precision_oracle.py -v
+            python3 scientific/spatial-argon-20261116/audit_source.py --self-test
+            node --import tsx --test --test-concurrency=1 tests/fuel-gas.test.ts tests/fuel-spatial-convergence.test.ts
             node --import tsx scripts/probe-fuel-gas-precision.ts precision-output
             python3 scientific/spatial-argon-20261116/precision_oracle.py precision-output/precision-input.json
-            node --import tsx scripts/probe-fuel-radial-source.ts source-output
+            source_status=0
+            node --import tsx scripts/probe-fuel-radial-source.ts source-output || source_status=1
+            python3 scientific/spatial-argon-20261116/audit_source.py source-output --source-root /work --output source-output/independent-accounting.json || source_status=1
+            exit "$source_status"
           '
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()

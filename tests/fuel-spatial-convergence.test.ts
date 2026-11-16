@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {assessSpatialRefinement,restrictSpatialSnapshot} from '../src/fuel-spatial-convergence.js';
+import {assessSpatialRefinement,classifySpatialConvergence,restrictSpatialSnapshot} from '../src/fuel-spatial-convergence.js';
 import {DEFAULT_SPATIAL_EXPERIMENT} from '../src/fuel-spatial-experiment.js';
 const N=1e19,K=1.380649e-23;
+test('shared scoring preserves exact resolved equality and explicitly represents zero response',()=>{
+ assert.equal(classifySpatialConvergence(1,0,0,1e-12,.02).status,'pass');
+ const quiet=classifySpatialConvergence(0,0,0,0,.02);
+ assert.equal(quiet.status,'unresolved');assert.equal(quiet.coarseRelative,null);assert.equal(quiet.fineRelative,null);
+ assert.equal(classifySpatialConvergence(1,.01,.01,0,.02).status,'fail');
+ assert.throws(()=>classifySpatialConvergence(1,NaN,0,0,.02),/finite/);
+});
 function fixture(steps=16,coefficient=1){
  const n=4,config={...DEFAULT_SPATIAL_EXPERIMENT,steps},duration=config.durationS;
  const snapshots=Array.from({length:steps+1},(_,i)=>{

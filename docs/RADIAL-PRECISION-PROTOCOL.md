@@ -68,3 +68,37 @@ electrical source unchanged as a piecewise-constant power density: split each
 source cell's power equally among its equal-volume children. No new electrical
 solve, smoothing or fitted source is introduced. Retain all original modes and
 comparisons; score the two added radial triples with the same 2% gate.
+
+## Joint refinement and auditable energy receipts
+
+The [1024-cell receipt](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43846944142)
+still fails density: the r256/512/1024 adjacent differences are 8.97% / 2.47%.
+Extend only the common-source gas grid to 2048/4096. Also cross gas grids
+{1024,2048,4096} with timesteps {256,512,1024}. Retain every earlier case.
+This is 22 frozen-source trajectories: six native, ten common-source at 256
+steps and six additional joint cases. Score every available radial triple at
+each fixed timestep with the same 2% gate, and every time triple at fixed grid
+with the same 1% gate. Use identical accepted clocks, not interpolated times;
+report omitted finer-only clocks as unassessed. Shared scoring now handles
+resolved exact equality and quiet/nonfinite inputs identically to the coupled
+study, with regression coverage. Previous classifier outputs remain historical.
+
+The gas kernel's numerical cell-count ceiling increases from 1024 to 4096 to
+permit this offline reference. Equations, nonlinear tolerances, positivity,
+inventory/energy checks, 1-GiB/one-CPU execution cap and browser defaults remain
+unchanged. The UI radial bound remains 32. N=1e19 is total particle count, not
+number density; R=.01m and L=.1m retain the original cell volume.
+
+Schema 2 stores every accepted snapshot in per-case compressed JSONL, including
+species inventory, gas and liner energy, native solved temperature, accepted
+face transfers, deposited/wall heat and thermal residuals. Gzip members are
+streamed per row; only common-clock profiles are loaded for each comparison.
+This avoids retaining or serializing all fine histories simultaneously. The
+index retains per-case hashes, refusals and timings; Linux maxRSS is recorded.
+All source meshes remain finite references; successful frozen-source convergence
+does not qualify the coupled rotating model, native electrical source or liner.
+An independent streaming Python reader checks file/source identities, the
+declared case plan, conservative power mapping and native continuity invariants.
+It reports gas/liner/total stored-energy defects against actual deposited energy
+without an invented acceptance floor. This is an accounting audit, not validation
+of a wall constitutive law or an experimental uncertainty claim.

@@ -10,8 +10,8 @@ function positive(value:number,name:string){
  if(!Number.isFinite(value)||value<=0)throw new RangeError(`${name} must be finite and positive.`);
 }
 function inventory(mass:readonly number[]){
- if(mass.length<2||mass.length>1024||mass.some(value=>!Number.isFinite(value)||value<0)||Math.abs(sum(mass)-1)>2e-8)
-  throw new RangeError('Gas transport needs 2–1024 positive, normalized cell inventories.');
+ if(mass.length<2||mass.length>4096||mass.some(value=>!Number.isFinite(value)||value<0)||Math.abs(sum(mass)-1)>2e-8)
+  throw new RangeError('Gas transport needs 2–4096 positive, normalized cell inventories.');
 }
 /** Entropy-compatible enthalpy temperature: the reciprocal logarithmic mean
  * of reciprocal temperatures. It satisfies T* Δ(1/T)=−Δln(T). */

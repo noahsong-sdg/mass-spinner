@@ -38,7 +38,7 @@ export function advanceFuelMixtureThermal<T>(grid:FuelLinerGrid,oldLinerEnergy:r
  number:number,lightFraction:number,radiusM:number,lengthM:number,dt:number,boundary:FuelLinerBoundary,gasOptions:FuelMixtureGasOptions,
  sourceAtTemperatures:(temperatures:readonly number[])=>FuelMixtureHeatSource<T>){
  const ng=oldGasEnergy.length,oldMass=[gasOptions.lightMass,gasOptions.heavyMass],fractions=[lightFraction,1-lightFraction];
- if(!Number.isSafeInteger(ng)||ng<2||ng>1024||oldMass.some(a=>a.length!==ng||a.some(v=>!Number.isFinite(v)||v<0)||Math.abs(sum(a)-1)>2e-8)||
+ if(!Number.isSafeInteger(ng)||ng<2||ng>4096||oldMass.some(a=>a.length!==ng||a.some(v=>!Number.isFinite(v)||v<0)||Math.abs(sum(a)-1)>2e-8)||
   [number,radiusM,lengthM,boundary.coolantK].some(v=>!Number.isFinite(v)||v<=0)||!Number.isFinite(lightFraction)||lightFraction<0||lightFraction>1||
   [dt,gasOptions.conductivityWMK,boundary.gasWallWK,boundary.coolingWK].some(v=>!Number.isFinite(v)||v<0)||
   grid.radiusEdgesM[0]!==radiusM||grid.lengthM!==lengthM||oldGasEnergy.some(v=>!Number.isFinite(v)||v<=0))
