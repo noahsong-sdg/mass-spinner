@@ -63,7 +63,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const focus={current:'#fuel-currentA',thermal:'#fuel-thermal-enabled',cut:'#fuel-cutFraction',controls:null};
   if(Object.hasOwn(focus,key)){focusRelated('controls',focus[key]);return;}
   // Pending/failed results must not be presented as a fresh experiment.
-  if(!node('fuel-export')||node('fuel-export').disabled){status.textContent='Wait for the run to finish. If it failed, check Controls and choose New run.';return;}
+  if(!node('fuel-export')||node('fuel-export').disabled){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
   if(key==='look'){
    set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);
   }else if(key==='coils'){
