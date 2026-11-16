@@ -126,3 +126,31 @@ includes the new HTML report regression. Component receipt was re-executed after
 the parser lockfile addition and its production/package hashes match current
 source. The separate seven public-data and five FEniCSx tests remain passed;
 their scientific source identities remain unchanged.
+
+## Final publication and browser receipt
+
+Final Cloudflare version: `9d3bc48a-3a4a-4222-afb5-1e381db4d4dd`. The actual Evidence & limits link now
+opens the HTML report (Cloudflare normalizes `/qualification.html` to
+`/qualification`). Browser observation confirmed the 1,357-test statement and
+fully loaded local comparison image. Its mobile viewport/document widths are
+390/390. The final simulator rerun reproduced the drag sample endpoint and
+rendered the 3D apparatus. Final console inspection returned no warning/error
+entries. Screenshots are in `browser/final-*.jpg`; deployment metadata and
+observed version are in `deployment.json`. These are behavior/appearance checks,
+not an experimental or byte-for-byte HTTP validation.
+
+The first HTML deployment failed authentication despite valid unexpired guest
+credentials. Source tracing of Wrangler's `getGlobalConfigPath` showed that a
+legacy `$guestHome/.wrangler` directory takes precedence over XDG config. An
+empty legacy-auth directory created during the follow-up launch contained only
+cache/log/project state, and no `config` directory; it shadowed the valid login
+in `$guestHome/.config/.wrangler`. The shadow was renamed and preserved, and
+Wrangler was run from the project directory. The existing session immediately
+worked and deployment succeeded. No credentials were copied, permissions
+expanded, browser policy altered or fresh login requested. Preserving the empty
+shadow fixes the demonstrated path-selection cause without replacing tokens or
+removing diagnostic files. Failed and successful deployment logs are retained.
+
+The public source branch `codex/public-data-qualification` was pushed and its
+remote head verified. The documentation/receipt-only follow-up records this final
+publication; runtime code and mathematical models remain those tested above.
