@@ -6,6 +6,18 @@ const K=1.380649e-23,M=7*1.66053906892e-27;
 const sum=(a:number[])=>a.reduce((s,x)=>s+x,0);
 const close=(a:number,b:number,tolerance=2e-12)=>assert.ok(Math.abs(a-b)<=tolerance,`${a} versus ${b}`);
 
+test('SG retains sub-inventory-resolution transfers and exactly stationary uniform gas',()=>{
+ const radius=.01,dt=.01,D=1e-30,p=[.75,.25],a=dt*8*D/radius**2;
+ const moved=advanceFuelGasMass(p,[1000,1000],M,0,radius,D,dt),expected=a*(p[0]-p[1])/(1+2*a);
+ assert.ok(Math.abs(moved.faceTransfers[0]/expected-1)<2e-12,
+  `Resolved transfer ${moved.faceTransfers[0]} must retain ${expected} even when stored inventories cannot change.`);
+ assert.deepEqual(moved.mass,p);
+ for(const cells of [2,8,32])for(const step of [.007,1,100]){
+  const uniform=Array(cells).fill(1/cells),equilibrium=advanceFuelGasMass(uniform,Array(cells).fill(1000),M,0,radius,.001,step);
+  assert.ok(equilibrium.faceTransfers.every(v=>v===0),'Uniform pressure without rotation has exactly zero driving force.');
+ }
+});
+
 test('bounded offline gas refinement supports 4096 cells without changing positivity or inventory gates',()=>{
  const n=4096,p=Array(n).fill(1/n),temperature=Array.from({length:n},(_,i)=>1000+1e-5*(i+.5)/n);
  const moved=advanceFuelGasMass(p,temperature,M,0,.01,.001,1e-6/256);
