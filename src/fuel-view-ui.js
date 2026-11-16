@@ -1,7 +1,7 @@
 /** Display controls stay separate from accepted physical inputs. */
 export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=()=>{}}){
  const el=(tag,text)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
- const state={slice:.5,layer:'enrichment',cutaway:.62,ghost:true,explode:0,visible:true,species:'all',drive:'all',representation:'field',circuit:false};
+ const state={slice:.5,radius:.5,layer:'enrichment',cutaway:.62,ghost:true,explode:0,visible:true,species:'all',drive:'all',representation:'field',circuit:false};
  const inputs=new Map(),legend=el('p'),probe=el('p');probe.className='fuel-probe';probe.setAttribute('aria-live','off');
  function range(key,title,min,max,step){
   const box=el('div'),label=el('label',title),input=el('input'),number=el('input');box.className='fuel-view-control';
@@ -9,7 +9,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
   for(const n of [input,number]){n.min=min;n.max=max;n.step=step;n.value=state[key];}
   number.setAttribute('aria-label',`${title} precisely`);
   function change(source){const value=Number(source.value);if(!Number.isFinite(value)||value<min||value>max){source.setCustomValidity(`Use ${min} to ${max}`);return;}source.setCustomValidity('');if(source===number)input.step='any';state[key]=value;input.value=value;if(source!==number)number.value=value;onChange({...state});}
-  input.addEventListener('input',()=>change(input));number.addEventListener('input',()=>{if(number.value!=='')change(number);});number.addEventListener('change',()=>change(number));box.append(label,input,number);host.append(box);inputs.set(key,input);
+  input.addEventListener('input',()=>change(input));number.addEventListener('input',()=>{if(number.value!=='')change(number);});number.addEventListener('change',()=>change(number));box.append(label,input,number);host.append(box);inputs.set(key,{input,number});
  }
  function select(key,title,options){
   const label=el('label',title),input=el('select');input.id=`fuel-view-${key}`;label.htmlFor=input.id;
@@ -22,6 +22,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
  const visible=el('input'),visibleLabel=el('label','Gas cutaway');visible.type='checkbox';visible.id='fuel-view-visible';visible.checked=state.visible;visibleLabel.htmlFor=visible.id;
  visible.addEventListener('change',()=>{state.visible=visible.checked;state.representation=visible.checked?'both':'tracers';representation.value=state.representation;onChange({...state});});host.append(visible,visibleLabel);
  range('slice','Axial position / length',0,1,.01);
+ range('radius','Probe radius / vessel radius',0,1,.01);
  select('layer','Field',[['enrichment','Change in light fraction'],['composition','Composition'],['density','Number density'],['speed','Bulk speed'],['temperature','Temperature']]);
  select('species','Highlight',[['all','Both species'],['light','Light species'],['heavy','Heavy species']]);
  host.append(legend,probe,el('p','Radial model · uniform along the axis. Diagnostic colors, not visible emission.'));
@@ -40,10 +41,10 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
   if(!tools)return;tools.group.visible=state.visible;
   if(tools.motion)tools.motion.group.visible=state.representation!=='field';
   if(tools.circuit&&tools.circuit.visible!==state.circuit){tools.circuit.visible=state.circuit;const scene=tools.circuit.parent;scene.userData.shadowRevision=(scene.userData.shadowRevision??0)+1;}
-  tools.setSlice(state.slice);tools.setLayer(state.layer);tools.setSpecies?.(state.species);tools.setStaging(state);tools.drive?.setLayer(state.drive);
+  tools.setSlice(state.slice);tools.setProbe?.(state.radius);tools.setLayer(state.layer);tools.setSpecies?.(state.species);tools.setStaging(state);tools.drive?.setLayer(state.drive);
   updateLegend(tools);
  }
- let probePosition=null;
- function showSample(s){probePosition=s?{radiusM:s.radiusM,axialM:s.axialM}:null;probe.textContent=s?`r ${s.radiusM.toPrecision(3)} m · z ${s.axialM.toPrecision(3)} m · light ${s.lightFraction===null?'—':s.lightFraction.toPrecision(4)} · n ${s.densityM3.toExponential(3)} m⁻³ · ${s.temperatureK.toPrecision(4)} K · ${s.pressurePa.toPrecision(4)} Pa · ${s.speedMS.toPrecision(4)} m/s · ${s.timeS.toPrecision(4)} s`:'';}
- return {state,apply,updateLegend,showSample,refreshSample:tools=>{if(tools&&probePosition)showSample({...tools.sampleAt(probePosition.radiusM),axialM:probePosition.axialM});},clearSample:()=>showSample(null)};
+ function selectRadius(fraction){if(!Number.isFinite(fraction)||fraction<0||fraction>1)throw new RangeError('Probe radius must lie within the vessel.');state.radius=fraction;const {input,number}=inputs.get('radius');input.step='any';input.value=number.value=fraction;}
+ function showSample(s){probe.textContent=s?`r ${(100*s.radiusM).toPrecision(3)} cm · light ${s.lightFraction===null?'undefined':`${(100*s.lightFraction).toPrecision(4)}%`} · n ${s.densityM3.toExponential(3)} m⁻³ · ${s.temperatureK.toPrecision(4)} K · ${s.speedMS.toPrecision(4)} m/s · ${s.timeS.toPrecision(4)} s`:'';}
+ return {state,apply,updateLegend,showSample,selectRadius,refreshSample:tools=>{if(tools)showSample(tools.sampleAt(tools.radiusM*state.radius));},clearSample:()=>showSample(null)};
 }

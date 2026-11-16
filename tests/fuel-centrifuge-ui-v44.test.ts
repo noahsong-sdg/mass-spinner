@@ -71,7 +71,8 @@ test('pending, failed and inactive states stop gas playback and accepted results
 test('flow clock preserves pump-speed comparisons and bounds extreme packet sampling rates',async t=>{
  const f=fixture(t,{motion:true});f.ui.setActive(true);await flush();f.change('fuel-motion-mode','flow','change');
  const scale=f.motionCalls.at(-1).scale;
- f.change('fuel-pumpSpeedM3S',Math.log10(.04));await f.ui.run();assert.equal(f.motionCalls.at(-1).scale,scale);
+ f.change('fuel-pumpSpeedM3S',Math.log10(.04));await f.ui.run();
+ assert.ok(Math.abs(f.motionCalls.at(-1).scale/scale-1)<=8*Number.EPSILON,'ordinary pump comparisons preserve the clock to floating-point roundoff');
  const doubled=fuelMotionState(f.motionCalls.at(-1).result,0,'flow').turnoverHz*scale;assert.ok(Math.abs(doubled-.5)<1e-12);
  f.change('fuel-pumpSpeedM3S',0);await f.ui.run();const last=f.motionCalls.at(-1);
  assert.ok(last.scale<scale);assert.ok(fuelMotionState(last.result,0,'flow').turnoverHz*last.scale<=.500000000001);
@@ -110,7 +111,7 @@ test('changing all declared parameters dispatches their actual values without to
 test('plot topics render finite SVG paths and disclose conditional equilibrium and thermal semantics',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();
  const topics=[...f.node('fuel-plot').options].map((option:any)=>option.value);
- assert.deepEqual(topics,['separation','spin','heat','thermal','thermalProfile','gasEnergy','gasPressure','momentum','inertia','profile','cut','cascade','pump','field','inventory','lithium']);
+ assert.deepEqual(topics,['separation','composition','spin','heat','thermal','thermalProfile','gasEnergy','gasPressure','momentum','inertia','profile','cut','cascade','pump','field','inventory','lithium']);
  for(const topic of topics){
   f.change('fuel-plot',topic,'change');
   assert.equal(f.ui.nodes.plots.querySelectorAll('svg').length>0,!['thermalProfile','gasEnergy','gasPressure'].includes(topic),topic);
