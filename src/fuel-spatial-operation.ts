@@ -8,6 +8,7 @@ import {advanceFuelMixtureThermal} from './fuel-gas-thermal.js';
 import {createFuelMomentumGrid,fuelMomentumState} from './fuel-momentum.js';
 import {advanceFuelAdvectedMomentum} from './fuel-spatial-coupling.js';
 import {fuelNeutralTransport} from './fuel-neutral-transport.js';
+import {createFuelRadialProjection} from './fuel-radial-projection.js';
 import type {FuelLinerGrid,FuelLinerBoundary} from './fuel-thermal.js';
 
 export type FuelSpatialState={lightMass:number[];heavyMass:number[];omegaRadS:number[];gasEnergyJ:number[];linerEnergyJ:number[]};
@@ -18,14 +19,16 @@ const sum=(v:readonly number[])=>v.reduce((a,b)=>a+b,0);
 
 function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:()=>ReturnType<typeof createFuelCurrentSolver>){
  const n=state.lightMass.length,nz=c.electrical.axialEdgesM.length-1,x=c.lightFraction;
- const e=c.electrical.radialEdgesM,volume=Math.PI*c.radiusM**2*c.lengthM/n;
- if(e.length!==n+1||e.some((r,i)=>Math.abs(r-c.radiusM*Math.sqrt(i/n))>1e-12*c.radiusM)||
+ const e=c.electrical.radialEdgesM,ne=e.length-1,volume=Math.PI*c.radiusM**2*c.lengthM/n;
+ const projection=createFuelRadialProjection(n,ne);
+ if(e.some((r,i)=>Math.abs(r-c.radiusM*Math.sqrt(i/ne))>1e-12*c.radiusM)||
   Math.abs(c.electrical.axialEdgesM[nz]-c.electrical.axialEdgesM[0]-c.lengthM)>1e-12*c.lengthM||
   c.speciesMassKg.some(v=>!Number.isFinite(v)||v<=0))throw new RangeError('Spatial coupling needs the same equal-volume full-cylinder gas and electrical geometry.');
+ const gasEdges=n===ne?e:Array.from({length:n+1},(_,i)=>c.radiusM*Math.sqrt(i/n));
  const initial=fuelGasState(state.lightMass,state.heavyMass,state.gasEnergyJ,c);
  if([state.lightMass,state.heavyMass].some(a=>Math.abs(sum(a)-1)>512*Number.EPSILON*n))throw new RangeError('Spatial coupling needs conserved normalized species inventories.');
  const density=state.lightMass.map((p,i)=>c.number*(x*c.speciesMassKg[0]*p+(1-x)*c.speciesMassKg[1]*state.heavyMass[i])/volume);
- const gridAt=(temperature:readonly number[])=>createFuelMomentumGrid({edgesM:e,lengthM:c.lengthM,densityKgM3:density,
+ const gridAt=(temperature:readonly number[])=>createFuelMomentumGrid({edgesM:gasEdges,lengthM:c.lengthM,densityKgM3:density,
   viscosityPaS:temperature.map(t=>fuelNeutralTransport(c.material,t).viscosityPaS),innerWallRadS:null,outerWallRadS:0,shearScheme:'volume-coordinate'});
  const before=fuelMomentumState(gridAt(initial.temperatureK),state.omegaRadS);
  const solveCurrent=prepared?prepared():createFuelCurrentSolver(c.electrical,c.currentRelativeTolerance);
@@ -35,9 +38,11 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
    const light=advanceFuelGasMass(state.lightMass,temperature,c.speciesMassKg[0],guess,c.radiusM,c.diffusivityM2S,dtS);
    const heavy=advanceFuelGasMass(state.heavyMass,temperature,c.speciesMassKg[1],guess,c.radiusM,c.diffusivityM2S,dtS);
    const flux=light.faceTransfers.map((v,i)=>c.number*(x*c.speciesMassKg[0]*v+(1-x)*c.speciesMassKg[1]*heavy.faceTransfers[i]));
-   const electrical=solveCurrent(Array.from({length:n*nz},(_,i)=>guess[i%n]));
-   const torque=Array<number>(n).fill(0),joule=Array<number>(n).fill(0);
-   for(let i=0;i<n*nz;i++){torque[i%n]+=electrical.torqueNm[i];joule[i%n]+=electrical.jouleByCellW[i];}
+   const electricalOmega=projection.restrictOmega(guess);
+   const electrical=solveCurrent(Array.from({length:ne*nz},(_,i)=>electricalOmega[i%ne]));
+   const radialTorque=Array<number>(ne).fill(0),radialJoule=Array<number>(ne).fill(0);
+   for(let i=0;i<ne*nz;i++){radialTorque[i%ne]+=electrical.torqueNm[i];radialJoule[i%ne]+=electrical.jouleByCellW[i];}
+   const torque=projection.prolongIntegrated(radialTorque),joule=projection.prolongIntegrated(radialJoule);
    const momentum=advanceFuelAdvectedMomentum(grid,state.omegaRadS,flux,torque,dtS);
    for(let i=0;i<n;i++){
     const reconstructed=c.number*(x*c.speciesMassKg[0]*light.mass[i]+(1-x)*c.speciesMassKg[1]*heavy.mass[i])/volume;
@@ -49,7 +54,7 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
    if(Math.max(...guess.map((v,i)=>Math.abs(v-momentum.omegaRadS[i])))<=2e-11*scale){
     return {lightMass:light.mass,heavyMass:heavy.mass,faceTransfers:[light.faceTransfers,heavy.faceTransfers],dragEnergyJ:0,
      gasSourceJ:joule.map((v,i)=>dtS*v+momentum.shearHeatJByCell[i]+momentum.centWorkJByCell[i]),
-     payload:{momentum,electrical,sourceOmegaRadS:guess,iterations:iteration+1,
+     payload:{momentum,electrical,sourceOmegaRadS:guess,torqueNmByGasCell:torque,jouleWByGasCell:joule,iterations:iteration+1,
       maxOmegaMismatchRadS:Math.max(...guess.map((v,i)=>Math.abs(v-momentum.omegaRadS[i])))}};
    }
    guess=guess.map((v,i)=>.5*(v+momentum.omegaRadS[i]));
@@ -72,8 +77,9 @@ function advance(c:FuelSpatialSetup,state:FuelSpatialState,dtS:number,prepared?:
  if(!Number.isFinite(energyResidualJ)||Math.abs(energyResidualJ)>1e-9*scale+storageRoundoffJ)throw new RangeError('Coupled spatial step failed electrical/mechanical/thermal energy conservation.');
  return {state:next,momentum,electrical,thermal,faceTransfers:accepted.faceTransfers,inputWorkJ,energyResidualJ,energyScaleJ:scale,storageRoundoffJ,
   mechanicalEndpointDefectJ,maxOmegaMismatchRadS:accepted.payload.maxOmegaMismatchRadS,sourceOmegaRadS:accepted.payload.sourceOmegaRadS,
+  torqueNmByGasCell:accepted.payload.torqueNmByGasCell,jouleWByGasCell:accepted.payload.jouleWByGasCell,
   relativeEnergyResidual:scale===0?0:Math.abs(energyResidualJ)/scale,
-  assumptions:['Common Ω(r) extruded into z; projected electrical power and torque use that same field.',
+  assumptions:['Common Ω(r) extruded into z; nested q-volume averaging and integrated-source distribution preserve electrical mechanical power. Electrical-cell Ω is piecewise constant.',
    'Prescribed diagonal conductivity and species mobility; no Hall radial force, separate charged-fluid momentum, electron energy, chemistry or acoustic/radial hydrodynamics.',
    'Sourced neutral transport; physical Joule/shear/centrifugal work enters gas. BE and upwind losses are separate numerical ledgers.']};
 }
