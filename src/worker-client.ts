@@ -1,8 +1,11 @@
 import {producingCode,type ProducingCodeIdentity} from './producing-code.js';
+import type {SimulationRequest, SimulationResult} from './worker-types.js';
 type WorkerFactory=()=>Pick<Worker,'onmessage'|'onerror'|'postMessage'|'terminate'>;
 const createSimulationWorker:WorkerFactory=()=>new Worker(new URL('./worker.ts',import.meta.url),{type:'module'});
 
 /** Existing solver consumers keep their result-only contract. */
+export function requestSimulation<R extends SimulationRequest>(request:R,signal?:AbortSignal,createWorker?:WorkerFactory):Promise<SimulationResult<R>>;
+export function requestSimulation(request:Record<string,unknown>,signal?:AbortSignal,createWorker?:WorkerFactory):Promise<unknown>;
 export function requestSimulation(request:Record<string,unknown>,signal?:AbortSignal,
  createWorker:WorkerFactory=createSimulationWorker):Promise<unknown>{
  return requestSimulationWithIdentity(request,signal,createWorker).then(reply=>reply.result);
@@ -10,6 +13,8 @@ export function requestSimulation(request:Record<string,unknown>,signal?:AbortSi
 
 /** One cancellable computation. Termination also settles the promise, so obsolete
  * UI requests cannot remain pending when live sliders supersede them. */
+export function requestSimulationWithIdentity<R extends SimulationRequest>(request:R,signal?:AbortSignal,createWorker?:WorkerFactory):Promise<{result:SimulationResult<R>;producingCode:ProducingCodeIdentity|null}>;
+export function requestSimulationWithIdentity(request:Record<string,unknown>,signal?:AbortSignal,createWorker?:WorkerFactory):Promise<{result:unknown;producingCode:ProducingCodeIdentity|null}>;
 export function requestSimulationWithIdentity(request:Record<string,unknown>,signal?:AbortSignal,
  createWorker:WorkerFactory=createSimulationWorker):Promise<{result:unknown;producingCode:ProducingCodeIdentity|null}>{
  return new Promise((resolve,reject)=>{

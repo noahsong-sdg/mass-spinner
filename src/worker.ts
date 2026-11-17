@@ -1,25 +1,16 @@
-import {simulate,type RunConfig} from './physics.js';
-import {solveEquilibrium,type EquilibriumConfig} from './equilibrium-model.js';
-import {geometry,type GeometryMode,type GeometryConfig} from './geometries.js';
-import {transport,type TransportMode,type TransportConfig} from './transport.js';
-import {simulateDoublewell,type DoublewellConfig} from './doublewell-dynamics.js';
-import {simulateCoupledTarget,type CoupledTargetConfig} from './coupled-target.js';
-import type {FusionBeamConfig} from './fusion-reactor.js';
+import {simulate} from './physics.js';
+import {solveEquilibrium} from './equilibrium-model.js';
+import {geometry} from './geometries.js';
+import {transport} from './transport.js';
+import {simulateDoublewell} from './doublewell-dynamics.js';
+import {simulateCoupledTarget} from './coupled-target.js';
 import {workerProducingCode} from './worker-identity.js';
-import {simulateFuelCentrifuge,type FuelConfig} from './fuel-centrifuge.js';
+import {simulateFuelCentrifuge} from './fuel-centrifuge.js';
 import {simulateFuelTransport} from './fuel-transport.js';
-import {simulateFuelOperation,validateFuelOperation,type FuelOperation,type FuelResume} from './fuel-operation.js';
+import {simulateFuelOperation,validateFuelOperation} from './fuel-operation.js';
 import {computeFuelOperatingMap} from './fuel-experiments.js';
-import {simulateFuelSpatialExperiment,type FuelSpatialExperimentConfig} from './fuel-spatial-experiment.js';
-type Request={id:number;kind:'orbit';config:RunConfig}
- |{id:number;kind:'centrifuge';config:EquilibriumConfig}
- |{id:number;kind:'geometry';model:GeometryMode;config:GeometryConfig}
- |{id:number;kind:'transport';model:TransportMode;config:TransportConfig}
- |{id:number;kind:'doublewell-dynamics';config:DoublewellConfig}
- |{id:number;kind:'coupled-target';schemaVersion:1;beam:FusionBeamConfig;config:CoupledTargetConfig}
- |{id:number;kind:'fuel-centrifuge';schemaVersion:1;config:FuelConfig;includeTransport?:boolean;operation?:FuelOperation;resume?:FuelResume}
- |{id:number;kind:'fuel-operating-map';schemaVersion:1;config:FuelConfig;options?:Parameters<typeof computeFuelOperatingMap>[1]}
- |{id:number;kind:'fuel-spatial-experiment';schemaVersion:1;config:FuelSpatialExperimentConfig};
+import {simulateFuelSpatialExperiment} from './fuel-spatial-experiment.js';
+import type {SimulationRequest as Request} from './worker-types.js';
 self.onmessage=(event:MessageEvent<Request>)=>{
  const request=event.data;
  try{
