@@ -111,7 +111,7 @@ test('empty cuts and absent species show undefined values, preserve plot gaps an
  for(const fraction of [0,1]){
   f.set('cutFraction',.5);f.set('lightFraction',fraction);
   assert.equal(f.metrics()[fraction===0?'⁶Li recovery':'⁷Li recovery'],'—');
-  const collection=f.panel.querySelectorAll('svg')[1],series=collection.querySelectorAll('path[stroke-width="2"]');
+  const collection=f.panel.querySelectorAll('svg')[1],series=collection.querySelectorAll('path[stroke-width="2"][stroke-opacity]');
   assert.equal(series.length,4);assert.equal(series[fraction===0?1:3].getAttribute('d'),'','undefined recovery is an empty path, not a fabricated zero curve');
   assert.match(collection.nextElementSibling!.textContent!,/—/);
   for(const path of f.panel.querySelectorAll('path'))assert.doesNotMatch(path.getAttribute('d')??'',/NaN|Infinity/);

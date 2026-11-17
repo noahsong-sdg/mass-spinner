@@ -13,8 +13,8 @@ const close=(a:number,b:number,tolerance=2e-12)=>assert.ok(Math.abs(a-b)<=tolera
 test('independent 80-digit direct-integral screen: density, composition, gains and both inventory cuts',()=>{
  const pairs=[...Object.values(FUEL_PAIRS).map(p=>p.masses),[7,7],[7,7.00000000001],[249.999999,250],[1,250]];
  const cases:any[]=[];
- for(const massesU of pairs)for(const bh of [0,1e-12,1e-8,9.9e-8,.001,.099,.101,1,10,100])
-  for(const lightFraction of [0,1e-6,.0759,.5,1-1e-6,1])for(const radiusFraction of [0,1e-6,.1,.5,.99,1-1e-8,1]){
+ for(const massesU of pairs)for(const bh of [0,1e-300,1e-12,1e-8,9.9e-8,.001,.099,.101,1,10,100])
+  for(const lightFraction of [0,1e-6,.0759,.5,1-1e-6,1])for(const radiusFraction of [0,1e-6,.1,.5,.99,1-1e-8,1-1e-16,1]){
    const edgeSpeedMS=Math.sqrt(bh*2*equilibriumModel.boltzmannJK*500/(massesU[1]*equilibriumModel.atomicMassKg))*(1-4*Number.EPSILON);
    cases.push({massesU,edgeSpeedMS,temperatureK:500,lightFraction,radiusFraction});
   }
@@ -58,7 +58,8 @@ test('zero rotation, equal masses, pure feeds and empty cuts retain distinct dom
   const p=equilibriumPoint({...base,edgeSpeedMS:0,lightFraction:x},cut);close(p.lightFraction,x);close(p.inner.speciesFractions[0],cut**2);
   if(cut===0)assert.equal(p.inner.lightPurity,null);else close(p.inner.lightPurity!,x);
   if(cut===1)assert.equal(p.outer.heavyPurity,null);else close(p.outer.heavyPurity!,1-x);
-  assert.equal(p.inner.lightRecovery,x===0?null:cut**2);assert.equal(p.outer.heavyRecovery,x===1?null:1-cut**2);
+  if(x===0)assert.equal(p.inner.lightRecovery,null);else close(p.inner.lightRecovery!,cut**2);
+  if(x===1)assert.equal(p.outer.heavyRecovery,null);else close(p.outer.heavyRecovery!,1-cut**2);
  }
  const p=equilibriumPoint({...base,massesU:[7,7]},.5);close(p.lightFraction,base.lightFraction);assert.equal(p.lightGain,0);
  close(p.inner.lightPurity!,base.lightFraction);assert.notEqual(p.inner.lightRecovery,.25,'equal masses do not imply uniform density');

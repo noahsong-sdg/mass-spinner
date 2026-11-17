@@ -34,7 +34,7 @@ function composition(x:number,logRatio:number){
  return {fraction:logRatio>=0?x/denominator:x*e/denominator,
   gain:x*(1-x)*(logRatio>=0?-Math.expm1(-logRatio):Math.expm1(logRatio))/denominator};
 }
-function survival(b:number,volumeFraction:number){return b===0?volumeFraction:-Math.expm1(-b*volumeFraction)/-Math.expm1(-b);}
+function survival(b:number,volumeFraction:number){return b<1e-7?volumeFraction*(1+b*(1-volumeFraction)/2):-Math.expm1(-b*volumeFraction)/-Math.expm1(-b);}
 const ratio=(a:number,b:number)=>b>0?a/b:null;
 
 /** Number composition, not mass fraction. y=r²/R² includes the cylindrical volume Jacobian. */
