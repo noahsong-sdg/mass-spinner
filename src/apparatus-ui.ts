@@ -7,8 +7,7 @@ import type {SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
 
 type ApparatusAsset = ViewerAsset<string> & {caption: string};
-// Generated manifest camera vectors are fixed three-coordinate JSON arrays.
-const assets = manifest.assets as Record<string, ApparatusAsset | undefined>;
+const assets: Record<string, ApparatusAsset | undefined> = manifest.assets;
 type SelectionPart = Record<string, unknown>;
 export interface ApparatusDisplay {
  load(asset: ApparatusAsset): Promise<unknown>;
