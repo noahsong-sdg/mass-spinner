@@ -78,7 +78,7 @@ test('the mobile physics reader has a panel height instead of the iframe intrins
  const selector='#window-guide:has(.guide-physics:not([hidden]))';
  assert.equal(f.doc.querySelector(selector),f.node('window-guide'));
  const style=f.doc.createElement('style');style.textContent=readFileSync('src/workspace.css','utf8');f.doc.head.append(style);
- const mobile=[...style.sheet!.cssRules].find(rule=>rule instanceof f.window.CSSMediaRule&&rule.conditionText==='(max-width:740px)') as CSSMediaRule;
+ const mobile=[...style.sheet!.cssRules].find(rule=>rule instanceof f.window.CSSMediaRule&&rule.conditionText.replace(/\s/g,'')==='(max-width:740px)') as CSSMediaRule;
  const reader=[...mobile.cssRules].find(rule=>(rule as CSSStyleRule).selectorText===selector) as CSSStyleRule;
  assert.equal(reader.style.height,'58dvh');
  f.doc.querySelector<HTMLButtonElement>('.guide-views button')!.click();
