@@ -39,6 +39,15 @@ test('a malformed equation fails the build instead of publishing raw or broken m
  assert.throws(()=>understandingPage('```math\n\\notARealCommand{1}\n```'),/Undefined control sequence/);
 });
 
+test('the chapter picker remains reachable and leaves room for anchored headings',t=>{
+ const dom=new JSDOM(understandingPage(markdown));t.after(()=>dom.window.close());
+ const style=dom.window.document.createElement('style');style.textContent=readFileSync('web-assets/guide.css','utf8');dom.window.document.head.append(style);
+ const nav=dom.window.getComputedStyle(dom.window.document.querySelector('nav')!);
+ assert.equal(nav.position,'sticky');assert.equal(nav.top,'0px');
+ const heading=dom.window.getComputedStyle(dom.window.document.querySelector('h2')!);
+ assert.equal(heading.scrollMarginTop,'104px');
+});
+
 test('the embedded reader keeps actions in the parent simulator and Escape exits the reading window',t=>{
  const dom=new JSDOM(understandingPage(markdown),{url:'https://example.org/guide.html#energy'});t.after(()=>dom.window.close());
  const messages:any[]=[],win=dom.window;
