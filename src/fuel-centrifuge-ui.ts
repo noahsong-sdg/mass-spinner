@@ -471,7 +471,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(topic==='inertia'&&transport){const data=rows!.map(s=>({timeS:s.timeS,neutral:s.neutralInertiaKgM2,initial:m.nn}));curves=(['neutral','initial'] as const).map(k=>curve(k==='neutral'?'Evolving neutral inertia':'Initial uniform inertia',data,'timeS',k,'Time (s)','Moment of inertia (kg m²)'));const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
   if(topic==='profile'){
    curves=fuelDensityCurves(r,diagnosticState(r));values=[];
-   if(!capture){explanation.textContent=`${transient&&transport?'Closed-wall transport at the selected time':'Equilibrium reference, not finite-time transport'}. Compare equal-size volumes: a value of 2 means twice that isotope’s own volume-average density. These curves are not mixture percentages; no local fluid momentum or extraction solution.`;
+   if(!capture){explanation.textContent=`${transient&&transport?'Closed-wall transport at the selected time':'Equilibrium reference, not finite-time separation'}. Compare equal-size volumes: a value of 2 means twice that isotope’s own volume-average density. These curves are not mixture percentages; no local fluid momentum or extraction solution.`;
     densityReading.textContent=curves.map(line=>`${line.label}: axis ${line.y[0]===null?'absent':`${fmt(line.y[0])}× average`}; wall ${line.y.at(-1)===null?'absent':`${fmt(line.y.at(-1)!)}× average`}.`).join(' ');
    }
   }
