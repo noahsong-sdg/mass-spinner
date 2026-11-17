@@ -1,14 +1,14 @@
-import entries from '../web-assets/reference-atlas/manifest.json';
+import entries from '../web-assets/reference-atlas/manifest.json' with {type:'json'};
 
 export function setupReferenceAtlas(){
- const host=document.getElementById('reference-atlas');
+ const host=document.getElementById('reference-atlas')!;
  for(const entry of entries){
   const article=document.createElement('article'),image=document.createElement('img'),body=document.createElement('div');
   image.src=entry.image;image.alt=entry.alt;image.width=1600;image.height=1000;image.loading='lazy';
   const section=document.createElement('span');section.className='overline';section.textContent='SECTION '+entry.section;
   const title=document.createElement('h3');title.textContent=entry.title;
   const mechanism=document.createElement('p');mechanism.textContent=entry.mechanism;body.append(section,title,mechanism);
-  for(const [label,items] of [['Advantages',entry.pros],['Disadvantages',entry.cons]]){
+  for(const [label,items] of [['Advantages',entry.pros],['Disadvantages',entry.cons]] satisfies [string, string[]][]){
    const heading=document.createElement('h4'),list=document.createElement('ul');heading.textContent=label;
    for(const text of items){const li=document.createElement('li');li.textContent=text;list.append(li);}body.append(heading,list);
   }
