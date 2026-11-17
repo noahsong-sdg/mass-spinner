@@ -23,7 +23,7 @@ const steps=[
   note:'The default temperature is fixed by an assumed bath. A work plot alone does not mean temperature is evolving. Thermal conductances and several transport properties remain assumed.',actions:[['work','Show drive work'],['thermal','Open thermal controls']]},
  {title:'Choose purity or recovery',intro:'Purity is the light-species share in your selected inner region. Recovery is the fraction of all light atoms that lies in that region.',
   do:'Open the collection plot. Sweep across its horizontal axis: zero is the axis; one is the wall. Probe with a click or arrow keys; Home and End select the axis and wall. Read the values below the curve.',
-  notice:'For a separated mixture, a smaller inner region generally trades higher light purity for lower recovery. At the full radius you recover all light atoms, at the original feed purity.',
+  notice:'For a separated mixture, a smaller inner region generally trades higher light purity for lower recovery. At the full radius, purity equals the feed and all light atoms are recovered. With no light atoms, recovery is undefined.',
   note:'The probe keeps the same gas and time; it does not move the 3D cut marker. The setup collection slider starts a new run. These cuts partition a closed inventory. They do not simulate an extraction flow, product throughput or a real collector’s efficiency.',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve']]},
  {title:'Make your own comparison',intro:'Pick one question: what happens if I increase wall drag, change the feed, or run longer?',
   do:'Pin the accepted run as A in View. Change one physical input in Controls, then choose New run. Compare A and B at the same physical time, using Plots and the synchronized 3D views.',

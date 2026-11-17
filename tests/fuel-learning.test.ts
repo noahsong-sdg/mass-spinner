@@ -178,7 +178,9 @@ test('composition includes the accepted inventory feed and reference comparisons
   const comparison=fuelLearningComparison(rotor({lightFraction}),{neutralRadS},kind);
   assert.match(comparison.scope,/Zoomed light-fraction axis.*feed.*percentage points/);
   for(const curve of comparison.curves){
-   assert.match(curve.yLabel,/%.*zoomed axis/);assert.equal(curve.yDomain,undefined);
+   assert.match(curve.yLabel,/%.*zoomed axis/);assert.ok(curve.yDomain[0]>=0&&curve.yDomain[1]<=100&&curve.yDomain[0]<curve.yDomain[1]);
+   assert.ok(curve.yDomain[1]-curve.yDomain[0]<100);
+   for(const value of [100*lightFraction,...curve.y.filter(Number.isFinite)])assert.ok(value>=curve.yDomain[0]&&value<=curve.yDomain[1]);
    assert.ok(curve.y.every((v:number|null)=>v===null||Number.isFinite(v)&&v>=0&&v<=100));
   }
  }

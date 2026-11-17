@@ -42,6 +42,11 @@ export function fuelLearningComparison(result,state,kind){
   cases.map(v=>({label:kind==='temperature'?`${fmt(v.temperatureK)} K`:`${fmt(v.omega)} rad/s`,
    x:v.profiles.map(p=>p.radiusM*100),y:v.profiles.map(p=>p.lightFraction===null?null:100*p.lightFraction),
    xLabel:'Radius (cm)',yLabel:`${result.pair.light} composition (%) · zoomed axis`}));
+ if(kind!=='collection'){
+  const values=[100*x,...curves.flatMap(curve=>curve.y).filter(Number.isFinite)],lo=Math.min(...values),hi=Math.max(...values);
+  const padding=Math.max(.05,(hi-lo)*.08),domain=[Math.max(0,lo-padding),Math.min(100,hi+padding)];
+  for(const curve of curves)curve.yDomain=domain;
+ }
  return {cases,curves,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation held at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
  Closed inventory; no drive, heating or extraction prediction.${kind==='collection'?'':` Zoomed light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' Spatial temperature replaced by its mean for these references.':''}${omega===0?' No centrifugal bias at zero rotation.':''}`};
 }

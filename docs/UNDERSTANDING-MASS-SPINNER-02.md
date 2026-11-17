@@ -277,7 +277,7 @@ Redistribution matters, too. Since rotational energy is K = L²/(2ℐ), moving
 mass outward at fixed angular momentum increases inertia and lowers rotation
 energy. The evolving thermal model deposits the signed redistribution work
 in the gas; inward redistribution can draw heat. This is a **reduced-model
-closure**, not resolved radial pressure work or heat carried by fluid motion.
+closure**, not a resolved fluid momentum-and-energy solution.
 
 For a closed vessel with no mass crossing its boundary, the intended continuous
 physical account is
@@ -342,8 +342,9 @@ inside the cut; it does not solve an outlet flow or predict kilograms per hour.
 keeps your selected time. Click or use arrow keys on that curve to inspect
 purity and recovery at different radii. Home and End select the axis and wall.
 Use the values below the graph, not the selected-cut summary above it: this
-probe does not move the 3D cut marker. At the wall, recovery is one and purity
-is the feed fraction; an empty inner cut has undefined purity.
+probe does not move the 3D cut marker. At the wall, purity is the feed fraction and recovery is one when light atoms
+are present. With no light atoms, recovery is undefined. An empty inner cut
+has undefined purity.
 
 Probing counts the same gas without rearranging it. The **Inner collection
 radius / a** setup slider instead starts a new run, as other setup edits do.
