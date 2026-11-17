@@ -6,10 +6,14 @@ import {setupNeutronGeometry} from '../src/neutron-geometry-ui.js';
 
 // Source-unit DOM: invokes the production handlers, no browser or GPU substitute.
 class El{
- private identifier='';value:string|number='';type='';checked=false;disabled=false;open=false;textContent='';className='';
- min:string|number='';max:string|number='';step:string|number='';htmlFor='';children:El[]=[];
+ private identifier='';private inputValue='';private minimum='';private maximum='';private increment='';
+ type='';checked=false;disabled=false;open=false;textContent='';className='';htmlFor='';children:El[]=[];
  attributes:Record<string,string>={};events=new Map<string,()=>void>();
  constructor(private registry:Map<string,El>){}
+ set value(value:string|number){this.inputValue=String(value);}get value(){return this.inputValue;}
+ set min(value:string|number){this.minimum=String(value);}get min(){return this.minimum;}
+ set max(value:string|number){this.maximum=String(value);}get max(){return this.maximum;}
+ set step(value:string|number){this.increment=String(value);}get step(){return this.increment;}
  set id(id:string){this.identifier=id;this.registry.set(id,this);}get id(){return this.identifier;}
  append(...children:El[]){this.children.push(...children);}replaceChildren(...children:El[]){this.children=children;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,fn:()=>void){this.events.set(k,fn);}
@@ -28,9 +32,15 @@ function dom(t:{after:(fn:()=>void)=>void}){
  return (id:string)=>registry.get(id)!;
 }
 
+test('source-unit inputs coerce numeric assignments to native DOMString properties',()=>{
+ const input=new El(new Map());input.value=.5;input.min=-2;input.max=100;input.step=.01;
+ assert.equal(input.value,'0.5');assert.equal(input.min,'-2');assert.equal(input.max,'100');assert.equal(input.step,'0.01');
+ input.value='';input.step='any';assert.equal(input.value,'');assert.equal(input.step,'any');
+});
+
 test('actual source ranges expose physical values rather than logarithmic internal coordinates',t=>{
  const get=dom(t),lab=setupFusionLaboratory(),current=get('fusion-beamCurrentA');
- assert.equal(current.value,-2);assert.equal(current.attributes['aria-valuetext'],'0.01 A');
+ assert.equal(current.value,'-2');assert.equal(current.attributes['aria-valuetext'],'0.01 A');
  current.value=-1;current.fire('input');assert.equal(lab.read().beamCurrentA,.1);
  assert.equal(current.attributes['aria-valuetext'],'0.1 A');
  assert.equal(get('fusion-targetColumnM2').attributes['aria-valuetext'],'1.000e+22 m⁻²');
