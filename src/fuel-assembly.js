@@ -4,7 +4,12 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 const REPLACED=new Set(['Vessel pressure wall','Vacuum flange','Flange seal land','Captive flange bolt','Solenoid former','Copper solenoid turn','Coil terminal','Support leg','Isolation pad']);
 let template;
 /** A failed asset load is reported by the playground, never substituted with simpler hardware. */
-export function loadFuelAssembly(){return template??=new GLTFLoader().loadAsync('/models/centrifuge-assembly.glb').then(gltf=>gltf.scene);}
+export function loadFuelAssembly(){
+ return template??=new GLTFLoader().loadAsync('/models/centrifuge-assembly.glb').then(gltf=>gltf.scene).catch(error=>{
+  template=undefined;
+  throw error;
+ });
+}
 
 /** Clone owned GPU resources, then place authored modules in the accepted SI frame. */
 export function attachFuelAssembly(scene,source,config){
