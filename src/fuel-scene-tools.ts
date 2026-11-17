@@ -12,11 +12,15 @@ export type FuelFieldLayer = 'composition' | 'enrichment' | 'density' | 'speed' 
 export type FuelStaging = {cutaway?: number; ghost?: boolean; explode?: number};
 export type FuelColorDomain = readonly [number,number];
 export type FuelColorDomains = Partial<Record<FuelFieldLayer,FuelColorDomain>>;
+export type NumericFuelControlKey = {[K in keyof FuelConfig]: FuelConfig[K] extends number ? K : never}[keyof FuelConfig];
+export type FuelHit = Pick<THREE.Intersection,'object' | 'point'> & {face?: Pick<NonNullable<THREE.Intersection['face']>,'materialIndex'> | null};
+type MaterialObject = THREE.Object3D & {material?: THREE.Material | THREE.Material[]};
+type DriveResourceObject = THREE.Object3D & {geometry?: THREE.BufferGeometry; material?: THREE.Material};
 export type FuelDiagnosticSample = FuelFieldSample & {axialM: number; radiusFraction: number; axialUniform: boolean};
 type FieldMesh = THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
 type ShellClone = {mesh: FuelShellMesh; original: FuelShellMesh['material']; clones: THREE.MeshStandardMaterial[]};
 type ExplodedMesh = {mesh: THREE.Object3D; position: THREE.Vector3; offset: THREE.Vector3};
-type SceneOptions = {scene: THREE.Object3D; result: FuelRenderResult; onSample?: (sample: FuelDiagnosticSample) => void; onControl?: (key: keyof FuelConfig, value?: number, selection?: {componentId: string; keys: readonly (keyof FuelConfig)[]}) => void};
+type SceneOptions = {scene: THREE.Object3D; result: FuelRenderResult; onSample?: (sample: FuelDiagnosticSample) => void; onControl?: (key: NumericFuelControlKey, value?: number, selection?: {componentId: string; keys: readonly NumericFuelControlKey[]}) => void};
 
 function isMesh(node: THREE.Object3D): node is THREE.Mesh {return 'isMesh' in node && node.isMesh===true;}
 function isLayer(value: string): value is FuelFieldLayer {return Object.hasOwn(LAYERS,value);}
@@ -25,17 +29,17 @@ const COLORS=['#d29456','#8db3a6'];
 const LAYERS: Record<FuelFieldLayer,{label: string; unit: string}>={composition:{label:'Light fraction',unit:''},enrichment:{label:'Δ light fraction · color clipped at ±0.01',unit:''},density:{label:'Neutral density',unit:'m⁻³'},speed:{label:'Neutral bulk speed',unit:'m/s'},temperature:{label:'Neutral temperature',unit:'K'}};
 const EQUILIBRIUM='Radial equilibrium reference';
 const TRANSIENT='Coupled rotor and radial transport · reflecting wall';
-export const FUEL_COMPONENT_CONTROLS: Readonly<Record<string,readonly (keyof FuelConfig)[]>>=Object.freeze({coils:['magneticT'],electrodes:['currentA','driveInnerFraction'],supply:['currentA'],pump:['pumpSpeedM3S'],liner:['linerK'],'light-outlet':['cutFraction'],feed:['conductanceM3S']});
+export const FUEL_COMPONENT_CONTROLS: Readonly<Record<string,readonly NumericFuelControlKey[]>>=Object.freeze({coils:['magneticT'],electrodes:['currentA','driveInnerFraction'],supply:['currentA'],pump:['pumpSpeedM3S'],liner:['linerK'],'light-outlet':['cutFraction'],feed:['conductanceM3S']});
 
 function bounded(value: number,min: number,max: number,name: string){
  if(!Number.isFinite(value)||value<min||value>max)throw new RangeError(`${name} must lie in [${min}, ${max}].`);
  return value;
 }
 /** Shader clipping is not applied by THREE.Raycaster; use this predicate before accepting a hit. */
-export function visibleFuelHit(hit: THREE.Intersection){
- const materials=isMesh(hit.object)?hit.object.material:undefined,material=Array.isArray(materials)?materials[hit.face?.materialIndex??0]:materials;
+export function visibleFuelHit(hit: FuelHit){
+ const materials=(hit.object as MaterialObject).material,material=Array.isArray(materials)?materials[hit.face?.materialIndex??0]:materials;
  const planes=material?.clippingPlanes;
- if(!planes?.length)return true;
+ if(!material||!planes?.length)return true;
  const outside=(p: THREE.Plane)=>p.distanceToPoint(hit.point)<0;
  return !(material.clipIntersection?planes.every(outside):planes.some(outside));
 }
@@ -168,7 +172,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  function handlePick(id: string){const keys=FUEL_COMPONENT_CONTROLS[id]??[];if(keys.length)onControl(keys[0],undefined,{componentId:id,keys});return keys;}
  function dispose(){
   if(disposed)return;disposed=true;cutFaces.dispose();group.removeFromParent();drive.group.removeFromParent();
-  const resources=new Set<THREE.BufferGeometry | THREE.Material>();drive.group.traverse(node=>{if(isMesh(node)||node instanceof THREE.Line){resources.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])resources.add(material);}});for(const resource of resources)resource.dispose();
+  const resources=new Set<THREE.BufferGeometry | THREE.Material>();drive.group.traverse(node=>{const owned=node as DriveResourceObject;if(owned.geometry)resources.add(owned.geometry);if(owned.material)resources.add(owned.material);});for(const resource of resources)resource.dispose();
   for(const mesh of [...owned,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();}
   for(const {mesh,original,clones} of originals){mesh.material=original;for(const material of clones)material.dispose();}
   for(const {mesh,position} of exploded)mesh.position.copy(position);
