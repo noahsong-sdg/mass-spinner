@@ -26,10 +26,12 @@ export function createFuelDrive(config: FuelDriveConfig){
  function arrow(layer: FuelDriveLayer,position: VectorTuple,vector: VectorTuple,length: number,value: number,unit: string){
   const direction=new THREE.Vector3(...vector);if(direction.lengthSq()===0)return;
   const head=Math.min(R*.1,length*.35),glyph=new THREE.ArrowHelper(direction.normalize(),new THREE.Vector3(...position),length,colors[layer],head,Math.min(R*.055,length*.2));
+  // ArrowHelper constructs its cone with one MeshBasicMaterial; its declaration widens this to Mesh.
+  const cone=glyph.cone as THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   // ArrowHelper shares global geometries; each accepted/pinned scene owns disposal.
-  glyph.line.geometry=glyph.line.geometry.clone();glyph.cone.geometry=glyph.cone.geometry.clone();
+  glyph.line.geometry=glyph.line.geometry.clone();cone.geometry=cone.geometry.clone();
   const width=Math.min(R*.009,length*.06),shaft=new THREE.Mesh(new THREE.CylinderGeometry(width,width,length-head,8),new THREE.MeshBasicMaterial({color:colors[layer],toneMapped:false}));
-  shaft.position.y=Math.max(length-head,0)/2;glyph.add(shaft);glyph.line.visible=false;glyph.cone.material.toneMapped=false;
+  shaft.position.y=Math.max(length-head,0)/2;glyph.add(shaft);glyph.line.visible=false;cone.material.toneMapped=false;
   glyph.traverse(node=>{node.userData.quantitativeOnly=true;});
   glyph.userData={physicalMagnitude:value,unit,directionOnly:true};layers[layer].add(glyph);
  }
