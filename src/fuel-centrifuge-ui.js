@@ -286,7 +286,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   for(const option of selector.options)option.disabled=application.value==='pump'&&['cut','cascade'].includes(option.value)||pair.value!=='lithium'&&option.value==='lithium';
   if(selector.selectedOptions[0]?.disabled)selector.value=application.value==='pump'?'pump':'spin';
  }
- function changed(event){
+ function changed(event,editedInput=event?.target){
   if(disposed)return;
   const intervention=event?.target===controls.get('currentA').input&&latest?.result.transport?.operation&&elapsed>0&&['spin','transport'].includes(motionMode.value);
   if(intervention){
@@ -297,7 +297,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }else{currentEvents=[];operatingConfig=null;resume=null;elapsed=0;}
   dependencies();sensitivity.invalidate();
   for(const input of description.querySelectorAll('input[data-key]')){
-   const control=controls.get(input.dataset.key);if(event?.target===control.input)input.value=input.type==='number'?control.read():control.input.value;
+   const control=controls.get(input.dataset.key);if(input!==editedInput&&event?.target===control.input)input.value=input.type==='number'?control.read():control.input.value;
   }
   cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;
   draw();
@@ -319,7 +319,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    input.min=control.input.min;input.max=control.input.max;input.step=control.input.step;input.value=control.input.value;
    number.min=log?10**Number(input.min):input.min;number.max=log?10**Number(input.max):input.max;number.step='any';number.value=control.read();number.setAttribute('aria-label',`${definition[1]} (${definition[2]||'fraction'}) precisely`);
    for(const n of [input,number])n.dataset.key=key;
-   const update=event=>{if(event.target.value===''||!event.target.checkValidity()){changed();return;}if(event.target===number&&control.input.dataset.integer!=='true')control.input.step=input.step='any';const value=Number(event.target.value);control.input.value=event.target===number&&log?Math.log10(value):value;input.value=control.input.value;if(event.target!==number)number.value=control.read();changed({target:control.input});};input.addEventListener('input',update);number.addEventListener('input',update);number.addEventListener('change',update);box.className='fuel-view-control';box.append(label,input,number);description.append(box);
+   const update=event=>{if(event.target.value===''||!event.target.checkValidity()){changed();return;}if(event.target===number&&control.input.dataset.integer!=='true')control.input.step=input.step='any';const value=Number(event.target.value);control.input.value=event.target===number&&log?Math.log10(value):value;input.value=control.input.value;if(event.target!==number)number.value=control.read();changed({target:control.input},event.target);};input.addEventListener('input',update);number.addEventListener('input',update);number.addEventListener('change',update);box.className='fuel-view-control';box.append(label,input,number);description.append(box);
   }
   const response=el('output');response.dataset.response='';description.append(response);
   const resultButton=el('button','Plot response');resultButton.addEventListener('click',()=>{selector.value=({supply:'spin',electrodes:'spin',coils:'field',liner:'thermal',pump:'pump','light-outlet':'cut'})[id]??'separation';draw();onResults();});description.append(resultButton);
