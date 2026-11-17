@@ -26,3 +26,11 @@ test('the rewritten guide links to existing local explanations, evidence and imp
   assert.ok(existsSync(resolve(dirname(path),target)),`missing guide target: ${target}`);
  }
 });
+
+
+test('the guide connects equation symbols, plot units and experiment histories to the real controls',()=>{
+ for(const phrase of ['not the speed','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n','curve slope is power in watts',
+  'signed redistribution work','finite-step','even while','New run','does not move the 3D cut marker',
+  'setup slider instead starts a new run','demonstrated sustainable operating point'])
+  assert.ok(source.includes(phrase)||source.replace(/\s+/g,' ').includes(phrase),phrase);
+});

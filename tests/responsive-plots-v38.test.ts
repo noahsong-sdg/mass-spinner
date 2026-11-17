@@ -79,3 +79,17 @@ test('narrow legends wrap without reducing type, spatial scale remains equal and
  assert.equal(host.querySelectorAll('polygon').length,2);
  assert.equal((host.querySelector('path[stroke-width="2"]')!.getAttribute('d')!.match(/M/g)||[]).length,2);
 });
+
+
+test('a scalar probe preserves undefined purity at an empty cut instead of borrowing a neighboring value',t=>{
+ const {host,window}=fixture(t,300);
+ renderPlots(host,[
+  {label:'Purity',x:[0,.5,1],y:[null,.4,.3],xLabel:'Cut radius',yLabel:'Fraction'},
+  {label:'Recovery',x:[0,.5,1],y:[0,.6,1],xLabel:'Cut radius',yLabel:'Fraction'},
+ ]);
+ const svg=host.querySelector('svg')!,readout=host.querySelector('.plot-readout')!;
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
+ assert.equal(readout.textContent,'Purity: 0, — · Recovery: 0, 0');
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ assert.equal(readout.textContent,'Purity: 1, 0.3 · Recovery: 1, 1');
+});

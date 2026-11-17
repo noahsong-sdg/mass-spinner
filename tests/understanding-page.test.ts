@@ -18,7 +18,7 @@ test('the website renders every guide equation and its derivation, with accessib
   assert.equal(svg.getAttribute('role'),'img');
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
  }
- assert.match(doc.getElementById('drive-description')!.textContent!,/clockwise torque/);
+ assert.match(doc.getElementById('drive-description')!.textContent!,/inward to the left.*counterclockwise torque/);
  assert.match(doc.body.textContent!,/Schematic trend, not computed data/);
  assert.match(doc.body.textContent!,/not a reconstruction/);
  for(const topic of guideTopics){

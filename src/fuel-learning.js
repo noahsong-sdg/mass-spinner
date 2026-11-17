@@ -8,9 +8,12 @@ export function fuelCompositionCurves(result,state={}){
   const lo=R*Math.sqrt(i/n),hi=R*Math.sqrt((i+1)/n),sample=sampleFuelField(result,(lo+hi)/2,state);
   return [{...sample,radiusM:lo},{...sample,radiusM:hi}];
  }).flat():result.profiles.map(p=>sampleFuelField(result,p.radiusM,state));
- return [result.pair.light,result.pair.heavy].map((label,i)=>({label,x:samples.map(s=>s.radiusM*100),
+ const curves=[result.pair.light,result.pair.heavy].map((label,i)=>({label,x:samples.map(s=>s.radiusM*100),
   y:samples.map(s=>s.lightFraction===null?null:100*(i?1-s.lightFraction:s.lightFraction)),
   xLabel:'Radius (cm)',yLabel:'Local composition (%)',yDomain:[0,100],color:i?'#d2956b':'#a4c4b1'}));
+ curves.push({label:`${result.pair.light} feed`,x:[0,100*R],y:[100*result.config.lightFraction,100*result.config.lightFraction],
+  xLabel:'Radius (cm)',yLabel:'Local composition (%)',yDomain:[0,100],dash:'4 4'});
+ return curves;
 }
 
 /** Conditional isothermal equilibrium comparisons; never change or rerun the accepted drive. */
@@ -38,7 +41,7 @@ export function fuelLearningComparison(result,state,kind){
   xLabel:'Collection radius (cm)',yLabel:'Inventory (%)',yDomain:[0,100]})):
   cases.map(v=>({label:kind==='temperature'?`${fmt(v.temperatureK)} K`:`${fmt(v.omega)} rad/s`,
    x:v.profiles.map(p=>p.radiusM*100),y:v.profiles.map(p=>p.lightFraction===null?null:100*p.lightFraction),
-   xLabel:'Radius (cm)',yLabel:`${result.pair.light} composition (%)`,yDomain:[0,100]}));
+   xLabel:'Radius (cm)',yLabel:`${result.pair.light} composition (%) · zoomed axis`}));
  return {cases,curves,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation held at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
- Closed inventory; no drive, heating or extraction prediction.${state.thermal?.gas?' Spatial temperature replaced by its mean for these references.':''}${omega===0?' No centrifugal bias at zero rotation.':''}`};
+ Closed inventory; no drive, heating or extraction prediction.${kind==='collection'?'':` Zoomed light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' Spatial temperature replaced by its mean for these references.':''}${omega===0?' No centrifugal bias at zero rotation.':''}`};
 }

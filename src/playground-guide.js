@@ -8,11 +8,11 @@ const steps=[
  {title:'Watch the gas spin up',intro:'Ions are charged atoms. Neutrals have no net charge: the drive reaches them through collisions.',
   do:'Replay spin-up. Follow the time cursor on the Ions and Neutrals speed curves. Pause or drag the playback slider to inspect a moment.',
   notice:'With the default drive, ions lead and neutrals follow. Friction transfers angular momentum; wall drag removes it.',
-  note:'Fast rotation is averaged so the full run plays in seconds; use the physical-time readout. Try a small change to Radial discharge current: during playback it changes the drive at that time. New run starts from rest with the displayed settings.',actions:[['spin','Replay spin-up'],['current','Adjust drive current']]},
+  note:'Fast rotation is averaged so the full run plays in seconds; use the physical-time readout. Try a small change to Radial discharge current: after time zero, even while paused, it inserts a drive step at that time. New run starts from rest with the displayed settings.',actions:[['spin','Replay spin-up'],['current','Adjust drive current']]},
  {title:'Find the lighter atoms',intro:'A radial composition profile answers: “At this distance from the axis, what percentage of the atoms are each species?”',
   do:'Show the end of the computed trajectory. Compare the axis and wall probes, or click the gas cutaway to choose your own radius.',
   notice:'In a rotating mixture, both species favor the wall. The heavier species favors it more, so the lighter species can be enriched toward the axis. Compare against the feed percentage, not 50%.',
-  note:'Composition is a local number percentage. It is different from density, the number of atoms per volume. No resolved density means the percentage is undefined.',actions:[['composition','Show composition'],['axis','Probe axis'],['wall','Probe wall']]},
+  note:'Composition is a local number percentage. It is different from density, the number of atoms per volume. No resolved density means the percentage is undefined.',actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall']]},
  {title:'Separate temperature from rotation',intro:'Faster rotation strengthens centrifugal sorting. Random thermal motion works against it.',
   do:'Compare T with 2T at fixed rotation, then Ω with 2Ω at fixed temperature. These buttons make reference curves without changing your run.',
   notice:'The equilibrium mass bias scales as Ω²/T. Doubling temperature halves that bias; doubling rotation multiplies it by four. A percentage or purity does not itself change by that factor.',
@@ -22,11 +22,11 @@ const steps=[
   notice:'Rotation, ion–neutral slip and wall losses have separate energy curves. Gas redistribution also changes inertia. Numerical dissipation is solver damping, not physical heat.',
   note:'The default temperature is fixed by an assumed bath. A work plot alone does not mean temperature is evolving. Thermal conductances and several transport properties remain assumed.',actions:[['work','Show drive work'],['thermal','Open thermal controls']]},
  {title:'Choose purity or recovery',intro:'Purity is the light-species share in your selected inner region. Recovery is the fraction of all light atoms that lies in that region.',
-  do:'Open the collection plot. Sweep across its horizontal axis: zero is the axis; one is the wall. Adjust Inner collection radius / a to move the selected cut.',
+  do:'Open the collection plot. Sweep across its horizontal axis: zero is the axis; one is the wall. Probe with a click or arrow keys; Home and End select the axis and wall. Read the values below the curve.',
   notice:'For a separated mixture, a smaller inner region generally trades higher light purity for lower recovery. At the full radius you recover all light atoms, at the original feed purity.',
-  note:'These cuts partition a closed inventory. They do not simulate an extraction flow, product throughput or a real collector’s efficiency.',actions:[['collection','Show purity & recovery'],['cut','Adjust collection radius']]},
+  note:'The probe keeps the same gas and time; it does not move the 3D cut marker. The setup collection slider starts a new run. These cuts partition a closed inventory. They do not simulate an extraction flow, product throughput or a real collector’s efficiency.',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve']]},
  {title:'Make your own comparison',intro:'Pick one question: what happens if I increase wall drag, change the feed, or run longer?',
-  do:'Pin the accepted run as A in View. Change one physical input in Controls. Compare A and B at the same physical time, using Plots and the synchronized 3D views.',
+  do:'Pin the accepted run as A in View. Change one physical input in Controls, then choose New run. Compare A and B at the same physical time, using Plots and the synchronized 3D views.',
   notice:'First predict the direction of the change, then inspect the result. A surprising curve is a reason to check the assumptions and time scale.',
   note:'Matching screened inputs is a narrow numerical check, not experimental accuracy. Other settings are exploratory. Reset ↺ restores the playground defaults.',actions:[['pin','Pin this run as A'],['controls','Open controls']]},
 ];
@@ -74,9 +74,12 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(node('fuel-motion-mode').value!=='transport')set('fuel-motion-mode','transport');
   set('fuel-motion-time',node('fuel-motion-time').max,'input');
  }
- function composition(){endpoint();plot('composition');node('fuel-locate-plot').click();}
+ function transient(){
+  if(!['spin','transport'].includes(node('fuel-motion-mode').value))endpoint();
+ }
+ function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
- const controlFocus={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',cut:'#fuel-cutFraction',controls:null};
+ const controlFocus={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',duration:'#fuel-durationS',controls:null};
  let cancelLaunch=()=>{};
  function action(key){
   if(!allowed.has(key))return;
@@ -93,15 +96,18 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();
   }else if(['composition','axis','wall','temperature','rotation'].includes(key)){
+   if(key==='composition')endpoint();
    composition();
    if(key==='axis'||key==='wall')set('fuel-view-radius',key==='axis'?0:1,'input');
    if(key==='temperature'||key==='rotation'){
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }
-  }else if(key==='work')plot('heat');
+  }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);}
+  else if(key==='work')plot('heat');
   else if(key==='thermalPlot')plot('thermal');
   else if(key==='collection'){endpoint();plot('cut');}
+  else if(key==='cut'){transient();set('fuel-motion-time',node('fuel-motion-time').value,'input');if(plot('cut'))doc.querySelector('#fuel-plots > .live-plots svg')?.focus();}
   else if(key==='pin'){
    doc.querySelector('[aria-label="Pin accepted experiment as comparison A"]').click();open('view',true);
   }

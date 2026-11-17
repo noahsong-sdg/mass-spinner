@@ -167,3 +167,21 @@ test('equilibrium comparisons reject unsupported kinds and otherwise use the acc
  const comparison=fuelLearningComparison(r,{},'temperature');
  assert.equal(comparison.cases[0].omega,r.samples.at(-1)!.neutralRadS);assert.equal(comparison.cases[0].temperatureK,r.config.gasK);
 });
+
+
+test('composition includes the accepted inventory feed and reference comparisons disclose a zoomed percentage axis',()=>{
+ const r=rotor({lightFraction:.0759}),state={neutralRadS:9000};
+ const curves=fuelCompositionCurves(r,state),feed=curves.at(-1)!;
+ assert.equal(feed.label,`${r.pair.light} feed`);assert.deepEqual(feed.x,[0,100*r.config.radiusM]);
+ assert.deepEqual(feed.y,[7.59,7.59]);assert.equal(feed.dash,'4 4');
+ for(const lightFraction of [0,.0759,1])for(const neutralRadS of [0,9000])for(const kind of ['temperature','rotation']){
+  const comparison=fuelLearningComparison(rotor({lightFraction}),{neutralRadS},kind);
+  assert.match(comparison.scope,/Zoomed light-fraction axis.*feed.*percentage points/);
+  for(const curve of comparison.curves){
+   assert.match(curve.yLabel,/%.*zoomed axis/);assert.equal(curve.yDomain,undefined);
+   assert.ok(curve.y.every((v:number|null)=>v===null||Number.isFinite(v)&&v>=0&&v<=100));
+  }
+ }
+ const collection=fuelLearningComparison(r,state,'collection');
+ assert.deepEqual(collection.curves[0].yDomain,[0,100]);assert.doesNotMatch(collection.scope,/Zoomed/);
+});

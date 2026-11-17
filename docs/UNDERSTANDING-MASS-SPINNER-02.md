@@ -42,7 +42,7 @@ electrical drive → charged population turns → collisions turn neutral gas
                           heat                 radial redistribution
 ```
 
-The electromagnetic force per unit volume is
+The magnetic force per unit volume in this bulk model is
 
 ```math
 \mathbf{f}=\mathbf{J}\times\mathbf{B}.
@@ -72,7 +72,7 @@ This is a statistical distribution in a colliding gas, not a sieve that sends
 each atom to one destination based only on mass.
 
 Start with uniform temperature and **rigid rotation**: every radius has the same
-angular speed, called Ω. At twice the radius an atom travels twice as far per
+angular speed, called Ω, in radians per second (one turn is 2π radians). At twice the radius an atom travels twice as far per
 turn, so its tangential speed is twice as large:
 
 ```math
@@ -90,7 +90,8 @@ the equilibrium density of either neutral isotope obeys
 The label s means either isotope; n is atoms per unit volume, m is mass per atom,
 T is temperature in kelvin, and k_B is Boltzmann's constant, which converts
 temperature to an energy scale. The exponential says how strongly density
-increases outward. Each species' total inventory sets its normalization.
+increases outward. exp(q) means e raised to q. Each species' total number of
+atoms stays fixed and sets its normalization.
 
 **Both densities rise toward the wall. Separation means their ratio changes.**
 The local light-isotope fraction is
@@ -103,6 +104,13 @@ Subscripts ℓ and h mean light and heavy. A **radial composition profile** is a
 graph of this fraction against radius: “What percentage of atoms here are the
 light isotope?” Density answers “How many atoms are here?” The center can be
 light-enriched while containing fewer light atoms per unit volume than the wall.
+
+**Try it:** Show end-of-run composition selects the endpoint. Axis and wall probes
+then keep your selected time; use the playback slider for earlier profiles.
+Compare the light curve with the dashed feed line. Species density shows each
+species relative to its own volume mean, rather than its mixture percentage.
+Tracers are weighted populations and fast turns are averaged: use plotted m/s
+and physical time, not screen revolutions, to measure motion.
 
 <details>
 <summary>Where does the exponential come from?</summary>
@@ -117,7 +125,7 @@ steady neutral circular flow, neglecting other radial forces,
 \frac{dp}{dr}=\rho\Omega^2r.
 ```
 
-p is pressure and ρ is mass per volume. In the rotating frame we describe the
+p is pressure and ρ is mass per volume; d/dr means change with radius. In the rotating frame we describe the
 same balance as pressure opposing the centrifugal effect. Inward acceleration
 and outward-increasing density are consistent descriptions of circular flow.
 
@@ -130,7 +138,8 @@ p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
 \frac{d\ln n_s}{dr}=\frac{m_s\Omega^2r}{k_BT}.
 ```
 
-Integrating from the axis to r gives the exponential above. This is a special
+ln is the inverse of exp: it extracts the exponent. Integrating this radial
+gradient from the axis to r gives the exponential above. This is a special
 equilibrium result, not a complete transient momentum equation for each species.
 
 </details>
@@ -146,6 +155,10 @@ Call this comparison α:
 \ln\alpha=\frac{(m_h-m_\ell)\Omega^2R^2}{2k_BT}
 =\frac{\Delta m\,v_{\mathrm{wall}}^2}{2k_BT}.
 ```
+
+Here v_wall = ΩR is the model gas speed at the outer radius, **not the speed
+of the metal vessel**. The vessel is stationary; this rigid bulk model does
+not resolve its near-wall shear layer. ln α extracts the separation exponent.
 
 This isolates mass sorting from the overall rise in density. The exponent is
 **rotation energy associated with the mass difference, divided by thermal
@@ -194,11 +207,15 @@ populations. Collisions transfer equal and opposite torques between them:
 \frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
 ```
 
-i/n mean ions/neutrals. Γ is the prescribed friction coefficient. If ions lead,
+i/n mean ions/neutrals. Γ is the prescribed friction coefficient: the
+**Ion → neutral collision rate** slider sets Γ = ℐᵢνᵢₙ, with νᵢₙ in s⁻¹ and
+Γ in kg·m²/s. The ion inertia ℐᵢ stays prescribed; neutral inertia evolves. If ions lead,
 collisions slow them and accelerate neutrals. Add the equations: the internal
 collision torques cancel. Only drive and boundary torque change the total
 angular momentum. The simple browser wall torque is proportional to neutral
-angular momentum through a prescribed drag rate.
+angular momentum: τ_wall = ν_wall L_n, where **Neutral wall drag** sets ν_wall.
+Stronger coupling generally reduces ion–neutral lag; it need not increase the
+steady neutral speed at a fixed drive torque and wall drag.
 
 For the reference annulus carrying radial current through a uniform axial field,
 the drive torque's magnitude is
@@ -208,8 +225,9 @@ the drive torque's magnitude is
 ```
 
 I is total current, distinct from script ℐ; B is field strength. The radii bound
-the driven annulus. This integrates the sideways force times its lever arm;
-it assumes that radial-current geometry, not arbitrary electrode shapes.
+the driven annulus. A radial strip contributes torque rIB dr; integrating
+from the inner to outer radius gives the squared radii. The formula
+assumes that radial-current geometry, not arbitrary electrode shapes.
 
 **Why evolve angular momentum rather than prescribe speed?** It explains
 spin-up, ion–neutral lag and coast-down. There is also feedback: moving gas
@@ -217,9 +235,16 @@ outward increases neutral inertia. With no net torque, angular momentum stays
 fixed and rotation slows. Maintaining speed during that redistribution would
 require an additional source of angular momentum.
 
-**Try it:** replay spin-up and compare the two curves. Change current; then
-separately change collision or drag rate. Are you changing the source of
-rotation, its transfer to neutrals, or its loss?
+**Try it:** compare spin-up with Angular momentum: total momentum follows
+**Drive minus wall impulse** because collision torques cancel. Gas inertia
+shows the feedback from redistribution.
+
+For a fresh comparison, pin A, change one input, then choose **New run** and
+compare at the same physical time. Editing current after time zero, even while
+paused, instead inserts a current step at that time; at the endpoint it extends
+the run. **Replay spin-up** repeats that history, including any current steps.
+Collision and drag edits start a new trajectory. Distinguish the source of
+rotation, its transfer to neutrals, and its loss.
 
 ## 5. Where does the energy go?
 
@@ -232,7 +257,8 @@ P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
 P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
 ```
 
-Power is energy per second. At fixed geometry and conductivity, doubling
+Power is energy per second: torque times angular speed is rotational work
+per second. At fixed geometry and conductivity, doubling
 current doubles reference torque but quadruples resistive heating. The
 electrical resistance here excludes the motion-induced voltage: total drive
 power also supplies mechanical work.
@@ -243,9 +269,18 @@ Ion–neutral slip dissipates mechanical energy at rate
 P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 ```
 
+The friction torque Γ(Ω_i − Ω_n) acts across the relative angular speed
+Ω_i − Ω_n; multiplying them explains the nonnegative square.
 Collisions therefore **transfer angular momentum and convert relative rotation
 into heat**. They do not destroy energy. Boundary drag also dissipates rotation.
-For a closed vessel with no mass crossing its boundary, an overall account is
+Redistribution matters, too. Since rotational energy is K = L²/(2ℐ), moving
+mass outward at fixed angular momentum increases inertia and lowers rotation
+energy. The evolving thermal model deposits the signed redistribution work
+in the gas; inward redistribution can draw heat. This is a **reduced-model
+closure**, not resolved radial pressure work or heat carried by fluid motion.
+
+For a closed vessel with no mass crossing its boundary, the intended continuous
+physical account is
 
 ```math
 \frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
@@ -255,7 +290,14 @@ For a closed vessel with no mass crossing its boundary, an overall account is
 K is rotational kinetic energy and U is internal (thermal) energy. Slip and
 wall friction are internal conversions, not extra external power sources.
 Where their heat goes is an additional model assumption. The browser keeps
-numerical time-stepping loss separate from physical heat.
+numerical time-stepping loss separate from physical heat. In its finite-step
+ledger, that loss is subtracted from the right-hand energy input; it should
+shrink with refinement, not be interpreted as gas heating.
+
+**Drive & work** plots accumulated mechanical energies: curve height is energy
+in joules; curve slope is power in watts. A steeper slip-energy curve means
+faster frictional heating. Ohmic power is a separate readout; cooling and
+Ohmic-energy accounting belong to the thermal budget.
 
 **Why simulate heat?** The separation exponent depends on temperature.
 Fixed-temperature mode assumes thermal control and reports heat loads; it
@@ -277,7 +319,8 @@ transport coefficients. A rough diffusion time scale is
 t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
 
-D is diffusivity in square meters per second. This is a scale, not an exact
+Diffusion spreads a distance roughly √(Dt); reaching R therefore takes roughly
+R²/D. D is diffusivity in square meters per second. This is a scale, not an exact
 separation time: rotation, boundaries and the transport law matter. A rapidly
 spinning gas can still be far from its equilibrium composition.
 
@@ -295,9 +338,17 @@ N means number of atoms. A small central region can be relatively pure but
 hold little of the desired isotope. The collection view counts inventory
 inside the cut; it does not solve an outlet flow or predict kilograms per hour.
 
-**Try it:** probe axis and wall at the same playback time. Change collection
-radius and watch purity and recovery together. You are changing which gas you
-count, not making the gas instantaneously rearrange itself.
+**Try it:** Show end-of-run cuts selects the endpoint; **Probe collection curve**
+keeps your selected time. Click or use arrow keys on that curve to inspect
+purity and recovery at different radii. Home and End select the axis and wall.
+Use the values below the graph, not the selected-cut summary above it: this
+probe does not move the 3D cut marker. At the wall, recovery is one and purity
+is the feed fraction; an empty inner cut has undefined purity.
+
+Probing counts the same gas without rearranging it. The **Inner collection
+radius / a** setup slider instead starts a new run, as other setup edits do.
+To explore time available for separation, compare **Run duration** with R²/D,
+then change diffusivity in a separate fresh run.
 
 ## Why these pieces, and what is still missing?
 
@@ -313,6 +364,10 @@ gas; radial/axial circulation carries heat and composition elsewhere. The
 separate research backend resolves more of this flow. Its results do not
 automatically replace the browser model, and detail alone does not establish
 accuracy.
+
+The lithium inventory and temperatures are imposed gas-only inputs, not a
+demonstrated sustainable operating point. Phase exchange with surfaces,
+ionization and discharge sustainment are not solved by this learning model.
 
 Three checks answer different questions:
 

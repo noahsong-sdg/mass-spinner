@@ -84,7 +84,7 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  };
  action(1,'Replay spin-up');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
  assert.equal(f.node('fuel-motion-mode').value,'transport','use averaged turns so the full history plays in seconds');
- action(2,'Show composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
+ action(2,'Show end-of-run composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  action(2,'Probe axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
  action(2,'Probe wall');close(Number(f.node('fuel-composition-readout').dataset.radiusM),f.ui.latest.result.config.radiusM);
@@ -96,11 +96,11 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  action(4,'Show drive work');assert.equal(f.node('fuel-plot').value,'heat');
  assert.equal(f.node('fuel-learning-comparisons').open,false,'a new guided plot must not leave an unrelated comparison in front');
  action(4,'Open thermal controls');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
- action(5,'Show purity & recovery');assert.equal(f.node('fuel-plot').value,'cut');
+ action(5,'Show end-of-run cuts');assert.equal(f.node('fuel-plot').value,'cut');
  action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
  assert.ok(opened.includes('plots'));
- f.change('fuel-application','pump','change');await f.ui.run();action(5,'Show purity & recovery');
+ f.change('fuel-application','pump','change');await f.ui.run();action(5,'Show end-of-run cuts');
  assert.match(f.node('guide-status').textContent,/Choose Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
@@ -111,10 +111,26 @@ test('reading links use accepted physics results and focus the real collision, d
  guide.showPhysics('momentum');const frame=host.querySelector<HTMLIFrameElement>('iframe')!;
  const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
  const send=(action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin:'https://example.org',source:frame.contentWindow,data:{type:'mass-spinner:guide-action',action}}));
- for(const [key,id]of [['current','currentA'],['collisions','collisionHz'],['drag','dragHz'],['diffusion','radialDiffusivityM2S'],['cut','cutFraction']]){
+ for(const [key,id]of [['current','currentA'],['collisions','collisionHz'],['drag','dragHz'],['diffusion','radialDiffusivityM2S'],['duration','durationS']]){
   send(key);assert.deepEqual(focused.at(-1),['controls',`#fuel-${id}`]);assert.ok(f.node(`fuel-${id}`));
  }
  send('composition');assert.equal(f.node('fuel-plot').value,'composition');
+ f.change('fuel-motion-time',.37);
+ for(const [key,topic]of [['axis','composition'],['wall','composition'],['temperature','composition'],['rotation','composition'],['momentum','momentum'],['inertia','inertia'],['density','profile'],['cut','cut']]){
+  send(key);assert.equal(f.node('fuel-plot').value,topic);close(Number(f.node('fuel-motion-time').value),.37);
+  if(key==='axis'||key==='wall')close(Number(f.node('fuel-composition-readout').dataset.timeS),.37);
+ }
+ f.node('fuel-motion-play').click();assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
+ send('cut');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ const graph=f.ui.nodes.plots.querySelector('svg')!;
+ assert.equal(f.window.document.activeElement,graph,'collection shortcut focuses the diagnostic, not the setup slider');
+ const accepted=f.ui.latest.result,originalCut=f.node('fuel-cutFraction').value;
+ graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/lightRecovery: 1, 1/);
+ assert.equal(f.ui.latest.result,accepted);assert.equal(f.node('fuel-cutFraction').value,originalCut);
+ close(Number(f.node('fuel-motion-time').value),.37);
+ send('collection');close(Number(f.node('fuel-motion-time').value),Number(f.node('fuel-motion-time').max));
+
  send('thermalPlot');assert.equal(f.node('fuel-plot').value,'thermal');assert.equal(f.node('fuel-thermal-enabled').checked,false);
  assert.match(f.ui.nodes.plots.textContent,/fixed-temperature bath/);
  send('work');assert.equal(f.node('fuel-plot').value,'heat');

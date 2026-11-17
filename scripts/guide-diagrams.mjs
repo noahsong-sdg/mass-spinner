@@ -1,11 +1,12 @@
 const drawings={
- drive:{title:'How radial current turns the gas',description:'End view: current points outward to the right, magnetic field points out of the page, and J cross B points down, giving clockwise torque.',caption:'End view · schematic geometry and chosen field directions.',body:`
+ drive:{title:'How radial current turns the gas',description:'End view: current points inward to the left, magnetic field points out of the page, and J cross B points up, giving counterclockwise torque.',caption:'End view · inward current, matching the 3D drive convention. Geometry is schematic.',body:`
  <circle cx="165" cy="111" r="83" fill="#1d2c25" stroke="#82958a" stroke-width="3"/>
  <circle cx="165" cy="111" r="24" fill="#101715" stroke="#82958a" stroke-width="2"/>
- <path d="M194 111H242" class="current" marker-end="url(#drive-current)"/>
- <path d="M247 118V170" class="force" marker-end="url(#drive-force)"/>
+ <path d="M242 111H194" class="current" marker-end="url(#drive-current)"/>
+ <path d="M247 104V53" class="force" marker-end="url(#drive-force)"/>
  <circle cx="115" cy="68" r="11" fill="none" stroke="#9bd8ce" stroke-width="2"/><circle cx="115" cy="68" r="3" fill="#9bd8ce"/>
- <text x="52" y="40">B out of page</text><text x="207" y="99">J</text><text x="258" y="153">J × B</text>
+ <text x="52" y="40">B out of page</text><text x="207" y="99">J</text><text x="258" y="65">J × B</text>
+ <path d="M165 111V28M165 111L148 94" stroke="#82958a" fill="none"/><text x="171" y="48">R</text><text x="126" y="86">r_in</text>
  <text x="165" y="116" text-anchor="middle">axis</text><text x="165" y="216" text-anchor="middle">outer electrode</text>
  <text x="165" y="247" text-anchor="middle">ions turn → collisions turn neutrals</text>`},
  composition:{title:'Composition is a fraction, not a density',description:'A qualitative graph of light-isotope number fraction decreasing from the axis toward the wall, crossing the feed fraction. No numerical predictions are drawn.',caption:'Schematic trend, not computed data. Use Composition for the actual profile.',body:`

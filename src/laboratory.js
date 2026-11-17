@@ -204,7 +204,7 @@ export function renderPlots(host,curves,{onSelect,announce=true}={}){
     let closest=-1,best=Infinity;
     // A response discontinuity uses the last (post-event) value at a repeated
     // abscissa, matching the right-continuous cumulative-incidence producer.
-    series.x.forEach((x,i)=>{if(![x,series.y[i]].every(Number.isFinite))return;const d=distance(x,series.y[i]);if(d<best||(!c.equalAspect&&d===best&&x===series.x[closest])){best=d;closest=i;}});
+    series.x.forEach((x,i)=>{if(!Number.isFinite(x)||(c.equalAspect&&!Number.isFinite(series.y[i])))return;const d=distance(x,series.y[i]);if(d<best||(!c.equalAspect&&d===best&&x===series.x[closest])){best=d;closest=i;}});
     return closest<0?`${series.label}: —`:`${series.label}: ${format(series.x[closest])}, ${format(series.y[closest])}`+(series.low?` [${format(series.low[closest])}, ${format(series.high[closest])}]`:'');
    }).join(' · ');
   };
