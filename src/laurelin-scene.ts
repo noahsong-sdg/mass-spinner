@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {LAURELIN_DEFAULTS} from './laurelin-physics.js';
+import {LAURELIN_DEFAULTS, type LaurelinConfig, type LaurelinSample} from './laurelin-physics.js';
 import {fitLaurelinCamera} from './laurelin-camera.js';
 
 export const LAURELIN_COMPONENTS={
@@ -10,7 +10,14 @@ export const LAURELIN_COMPONENTS={
  plasma:['Field-reversed plasma','Closed poloidal field contours surround a magnetic null ring. No central conductor. Lines show an analytic topology, not computed ion trajectories.','Deuterium ions and electrons; D–D reactions also produce T, ³He and neutrons.'],
  power:['Pulsed-power bank','Stores driver energy; switches connect the coils to a protected electrical link. Circuit losses and recovery are parameterized.','Assumed film capacitors, copper bus and semiconductor switches.'],
  dc:['Protected DC link','The relevant measurement is electrical energy returned across this boundary. Inferred plasma energy alone is insufficient.','Illustrative copper bus and insulated converter enclosure.'],
-};
+} satisfies Record<string, readonly [string, string, string]>;
+export type LaurelinComponentId = keyof typeof LAURELIN_COMPONENTS;
+export type LaurelinSceneState = Pick<LaurelinSample, 'fraction' | 'radiusM' | 'temperatureKeV'>;
+export type LaurelinSceneConfig = Pick<LaurelinConfig, 'lengthM'>;
+export type LaurelinSceneController = {update(state: LaurelinSceneState,config: LaurelinSceneConfig): void; home(): void};
+function isComponentId(value: unknown): value is LaurelinComponentId {
+ return typeof value === 'string' && Object.hasOwn(LAURELIN_COMPONENTS, value);
+}
 export function buildLaurelinAssembly(){
  const assembly=new THREE.Group();assembly.rotation.y=Math.PI/2;
  // Normalized drawing units preserve the actual plasma aspect ratio; hardware
@@ -20,12 +27,12 @@ export function buildLaurelinAssembly(){
  const copper=new THREE.MeshStandardMaterial({color:0xb18553,metalness:.85,roughness:.31});
  const ceramic=new THREE.MeshStandardMaterial({color:0xbdbdb0,roughness:.6});
  const dark=new THREE.MeshStandardMaterial({color:0x27352e,metalness:.55,roughness:.4});
- const picks=[];
- function mesh(geometry,material,position,id){
+ const picks: THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>[]=[];
+ function mesh(geometry: THREE.BufferGeometry,material: THREE.MeshStandardMaterial,position: [number,number,number],id: LaurelinComponentId){
   const obj=new THREE.Mesh(geometry,material);obj.position.set(...position);obj.userData.component=id;
   assembly.add(obj);picks.push(obj);return obj;
  }
- function ring(radius,width,z,id,material){
+ function ring(radius: number,width: number,z: number,id: LaurelinComponentId,material: THREE.MeshStandardMaterial){
   const g=new THREE.TorusGeometry(radius,width,12,80);return mesh(g,material,[0,0,z],id);
  }
  for(let i=0;i<19;i++){
@@ -44,12 +51,12 @@ export function buildLaurelinAssembly(){
  for(const x of [1.5,2.1])mesh(new THREE.BoxGeometry(.035,.055,6.3),copper,[x,-.42,0],'power');
  mesh(new THREE.BoxGeometry(.85,.9,.8),dark,[1.8,-.6,4],'dc');
  for(const z of [-3,-1,1,3]){
-  const curve=new THREE.CatmullRomCurve3([[.7,-.6,z],[1.15,-.3,z],[1.5,-.42,z]].map(v=>new THREE.Vector3(...v)));
+  const curve=new THREE.CatmullRomCurve3([[.7,-.6,z],[1.15,-.3,z],[1.5,-.42,z]].map(v=>new THREE.Vector3(v[0],v[1],v[2])));
   mesh(new THREE.TubeGeometry(curve,12,.025,8,false),copper,[0,0,0],Math.abs(z)<2?'compression':'formation');
  }
  const plasmaMaterial=new THREE.MeshStandardMaterial({color:0xd4c58b,emissive:0x9c7735,
   emissiveIntensity:.5,transparent:true,opacity:.3,roughness:.6,depthWrite:false});
- function frc(length){
+ function frc(length: number){
   const group=new THREE.Group();assembly.add(group);
   const body=new THREE.Mesh(new THREE.SphereGeometry(1,48,24),plasmaMaterial.clone());
   body.scale.set(plasmaRadius,plasmaRadius,length);body.userData.component='plasma';group.add(body);picks.push(body);
@@ -66,7 +73,7 @@ export function buildLaurelinAssembly(){
   return {group,body};
  }
  const pair=[frc(.65),frc(.65)],merged=frc(1.3);merged.group.visible=false;
- function update(state,config){
+ function update(state: LaurelinSceneState,config: LaurelinSceneConfig){
   const fraction=state.fraction,isPair=fraction<.32;
   const progress=THREE.MathUtils.clamp((fraction-.12)/.2,0,1);
   const lengthScale=config.lengthM/LAURELIN_DEFAULTS.lengthM;
@@ -80,7 +87,7 @@ export function buildLaurelinAssembly(){
  }
  return {assembly,picks,pair,merged,update,unitsPerM};
 }
-export function createLaurelinScene(canvas,onInspect){
+export function createLaurelinScene(canvas: HTMLCanvasElement,onInspect: (id: LaurelinComponentId)=>void): LaurelinSceneController{
  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});
  renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setClearColor(0x101714);
  renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;
@@ -91,7 +98,7 @@ export function createLaurelinScene(canvas,onInspect){
  camera.position.set(7,4.2,8);const controls=new OrbitControls(camera,canvas);
  controls.target.set(0,0,0);controls.enableDamping=true;controls.minDistance=3;controls.maxDistance=60;
  scene.add(new THREE.HemisphereLight(0xe1ede2,0x1d2821,2));
- for(const [color,power,p]of [[0xffedcf,65,[3,5,3]],[0x9bafa6,45,[-4,2,-4]]]){
+ for(const [color,power,p]of [[0xffedcf,65,[3,5,3]],[0x9bafa6,45,[-4,2,-4]]] satisfies [number,number,[number,number,number]][]){
   const light=new THREE.PointLight(color,power,25,2);light.position.set(...p);scene.add(light);
  }
  const hardware=buildLaurelinAssembly(),{assembly,picks}=hardware;scene.add(assembly);
@@ -105,14 +112,14 @@ export function createLaurelinScene(canvas,onInspect){
   camera.setViewOffset(width,height,0,view.offsetY,width,height);camera.updateProjectionMatrix();controls.update();
  }
  const grid=new THREE.GridHelper(20,40,0x314338,0x1c2b23);grid.position.y=-1.75;scene.add(grid);
- const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();let down;
+ const ray=new THREE.Raycaster(),pointer=new THREE.Vector2();let down: [number,number] | undefined;
  canvas.addEventListener('pointerdown',e=>{down=[e.clientX,e.clientY];});
  canvas.addEventListener('pointerup',e=>{
   if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;
   const b=canvas.getBoundingClientRect();pointer.set(2*(e.clientX-b.left)/b.width-1,1-2*(e.clientY-b.top)/b.height);
   ray.setFromCamera(pointer,camera);
-  const visible=picks.filter(o=>{let p=o;while(p){if(!p.visible)return false;p=p.parent;}return true;});
-  const hit=ray.intersectObjects(visible,false)[0];if(hit)onInspect(hit.object.userData.component);
+  const visible=picks.filter(o=>{let p: THREE.Object3D | null=o;while(p){if(!p.visible)return false;p=p.parent;}return true;});
+  const hit=ray.intersectObjects(visible,false)[0];if(hit){const component: unknown=hit.object.userData.component;if(isComponentId(component))onInspect(component);}
  });
  const resize=new ResizeObserver(()=>{
   const {width,height}=canvas.getBoundingClientRect();if(!width||!height)return;
@@ -120,7 +127,7 @@ export function createLaurelinScene(canvas,onInspect){
   fit(!manuallyMoved);
  });resize.observe(canvas);fit();
  return {
-  update(state,config){
+  update(state: LaurelinSceneState,config: LaurelinSceneConfig){
    hardware.update(state,config);
    controls.update();renderer.render(scene,camera);
   },

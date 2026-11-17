@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 /** Fit the real assembly inside the viewport area left by tools and timeline. */
-export function fitLaurelinCamera(bounds,width,height,fov=38,upOverride){
+export function fitLaurelinCamera(bounds: THREE.Box3,width: number,height: number,fov=38,upOverride?: THREE.Vector3){
  if(bounds.isEmpty()||!Number.isFinite(width)||!Number.isFinite(height)||width<=0||height<=0)
   throw new RangeError('Nonempty assembly bounds and positive viewport dimensions required');
  const target=bounds.getCenter(new THREE.Vector3()),direction=new THREE.Vector3(7,4.2,8).normalize();
