@@ -1,21 +1,43 @@
 import * as THREE from 'three';
 
+export type EngineeringMode = 'centrifuge' | 'rotating' | 'doublewell' | 'doublewell-dynamics' | 'gyro' | 'icr' | 'curved' | 'beam-target' | 'blanket';
+export type EngineeringGeometryOptions = {
+ mode?: string; kind?: string;
+ radiusM?: number; lengthM?: number; sourceRadiusM?: number;
+ beamAreaM2?: number; filmThicknessM?: number; backingThicknessM?: number;
+ boundary?: string; curvatureRadiusM?: number; depthSegments?: number;
+};
+export type EngineeringDomain = {
+ coordinateSystem: string; mode: EngineeringMode; radiusM: number; lengthM: number; constructionBasis: string;
+ kind?: string; beamAreaM2?: number; filmThicknessM?: number; backingThicknessM?: number;
+ targetFrontZ?: number; beamDirection?: number[]; layerScale?: number;
+ constructionLengthM?: number; constructionLengthBasis?: string;
+ curvatureRadiusM?: number; bendAngleRad?: number; absorbingBoundaries?: boolean;
+ boundary?: string; sourceRadiusM?: number | null; sourceGeometryBasis?: string;
+};
+export type EngineeringGeometry = {
+ group: THREE.Group; surfaces: Map<string, THREE.Mesh>; domain: EngineeringDomain; dispose(): void;
+};
+type Point = readonly [number, number, number];
+
+
 /** SI local coordinates: x/y transverse, z axial. No implicit display rescaling. */
-export const solverToScene=([x,y,z],lengthM)=>[z-lengthM/2,y,-x];
-export const sceneToSolver=([x,y,z],lengthM)=>[-z,y,x+lengthM/2];
+export const solverToScene=([x,y,z]: readonly number[],lengthM: number): [number, number, number]=>[z-lengthM/2,y,-x];
+export const sceneToSolver=([x,y,z]: readonly number[],lengthM: number): [number, number, number]=>[-z,y,x+lengthM/2];
 const ASSUMED='Illustrative construction; not an as-built drawing or a solved material property.';
 const SOLVED='Accepted numerical domain, metres; construction does not change solver boundaries.';
-const MODES=['centrifuge','rotating','doublewell','doublewell-dynamics','gyro','icr','curved','beam-target','blanket'];
+const MODES: readonly EngineeringMode[]=['centrifuge','rotating','doublewell','doublewell-dynamics','gyro','icr','curved','beam-target','blanket'];
+function isEngineeringMode(mode: string | undefined): mode is EngineeringMode { return MODES.some(candidate=>candidate===mode); }
 const TAU=2*Math.PI;
-const positive=(value,name)=>{if(!Number.isFinite(value)||value<=0)throw new RangeError(`${name} must be finite and positive.`);return value;};
+const positive=(value: number | undefined,name: string): number=>{if(typeof value!=='number'||!Number.isFinite(value)||value<=0)throw new RangeError(`${name} must be finite and positive.`);return value;};
 
 /** Closed annular sector, including radial cut faces. Axial direction is local z. */
-export function annulus(inner,outer,depth,start=0,sweep=TAU,segments=72){
+export function annulus(inner: number,outer: number,depth: number,start=0,sweep=TAU,segments=72){
  // Separate axial, cylindrical and chamfer vertices: averaging across those
  // boundaries rounds the face normals and erases the machined edge highlight.
  const b=inner>0?Math.min((outer-inner)*.18,depth*.12):0,h=depth/2;
- const profile=b?[[inner,-h+b],[inner+b,-h],[outer-b,-h],[outer,-h+b],[outer,h-b],[outer-b,h],[inner+b,h],[inner,h-b]]:[[inner,-h],[outer,-h],[outer,h],[inner,h]];
- const positions=[],normals=[],uvs=[],indices=[];
+ const profile: [number, number][]=b?[[inner,-h+b],[inner+b,-h],[outer-b,-h],[outer,-h+b],[outer,h-b],[outer-b,h],[inner+b,h],[inner,h-b]]:[[inner,-h],[outer,-h],[outer,h],[inner,h]];
+ const positions: number[]=[],normals: number[]=[],uvs: number[]=[],indices: number[]=[];
  for(let j=0;j<profile.length;j++){
   const [r0,z0]=profile[j],[r1,z1]=profile[(j+1)%profile.length],dr=r1-r0,dz=z1-z0,n=Math.hypot(dr,dz),base=positions.length/3;
   if(r0===0&&r1===0)continue;
@@ -38,7 +60,7 @@ export function annulus(inner,outer,depth,start=0,sweep=TAU,segments=72){
 }
 
 /** Optical finish only; no inferred alloy, wear or temperature field. */
-export function machinedMetal(color,roughness=.36,anisotropy=.35){
+export function machinedMetal(color: THREE.ColorRepresentation,roughness=.36,anisotropy=.35){
  const data=new Uint8Array(128*32*4);
  for(let y=0;y<32;y++)for(let x=0;x<128;x++){
   const i=(y*128+x)*4,v=215+((y*73+Math.imul(x+1,1103515245)>>>8)%41);
@@ -48,18 +70,18 @@ export function machinedMetal(color,roughness=.36,anisotropy=.35){
  return new THREE.MeshPhysicalMaterial({color,metalness:1,roughness,roughnessMap:texture,anisotropy});
 }
 
-export function buildEngineeringGeometry(options){
+export function buildEngineeringGeometry(options: EngineeringGeometryOptions): EngineeringGeometry{
  const mode=options.mode??options.kind;
- if(!MODES.includes(mode))throw new RangeError('Unsupported engineering geometry mode.');
+ if(!isEngineeringMode(mode))throw new RangeError('Unsupported engineering geometry mode.');
  const beam=mode==='beam-target',blanket=mode==='blanket';
  const radius=positive(beam?Math.sqrt(positive(options.beamAreaM2,'beamAreaM2')/Math.PI):options.radiusM,'radiusM');
  const length=positive(options.lengthM??(beam ? .45 : blanket ? 2 : undefined),'lengthM');
  if(beam){positive(options.filmThicknessM,'filmThicknessM');positive(options.backingThicknessM,'backingThicknessM');}
- if(mode==='doublewell-dynamics'&&!['open','closed'].includes(options.boundary))throw new RangeError('Double-well dynamics requires its accepted open/closed boundary.');
+ if(mode==='doublewell-dynamics'&&(!options.boundary||!['open','closed'].includes(options.boundary)))throw new RangeError('Double-well dynamics requires its accepted open/closed boundary.');
  if(options.sourceRadiusM!==undefined&&(positive(options.sourceRadiusM,'sourceRadiusM')>=radius))throw new RangeError('Source support must lie inside the numerical radius.');
  const group=new THREE.Group();group.name=`engineering-${mode}`;
  group.userData={coordinateSystem:'SI solver xyz; axial z',mode,geometryBasis:ASSUMED};
- const surfaces=new Map(),hardware=new THREE.Group();hardware.name='construction';group.add(hardware);
+ const surfaces=new Map<string, THREE.Mesh>(),hardware=new THREE.Group();hardware.name='construction';group.add(hardware);
  const materials={
   steel:machinedMetal(0x8b969b,.34,.45),
   copper:machinedMetal(0xb66c3e,.33,.3),
@@ -70,22 +92,22 @@ export function buildEngineeringGeometry(options){
   hidden:new THREE.MeshBasicMaterial({transparent:true,opacity:0,depthWrite:false,side:THREE.DoubleSide}),
  };
  const materialLabels={steel:'Assumed stainless-steel finish; alloy unspecified',copper:'Assumed copper winding / electrode',ceramic:'Assumed alumina insulator',dark:'Illustrative structural metal',film:'LiT target composition from source architecture; optical finish illustrative',fluid:'Illustrative coolant; fluid unspecified',hidden:'Numerical surface, no construction material'};
- function mesh(name,geometry,material,componentId,position=[0,0,0],parent=hardware){
+ function mesh(name: string,geometry: THREE.BufferGeometry,material: keyof typeof materials,componentId: string,position: Point=[0,0,0],parent: THREE.Object3D=hardware){
   const item=new THREE.Mesh(geometry,materials[material]);item.name=name;item.position.set(...position);
   item.userData={componentId:componentId==='support'&&!beam?'supports':componentId,geometryBasis:ASSUMED,materialBasis:materialLabels[material]};parent.add(item);return item;
  }
- function ring(name,z,inner,outer,depth,material,id,cut=false){return mesh(name,annulus(inner,outer,depth,cut?Math.PI*.75:0,cut?Math.PI*1.5:TAU),material,id,[0,0,z]);}
- function cylinder(name,r,depth,material,id,position){const geometry=new THREE.CylinderGeometry(r,r,depth,48);geometry.rotateX(Math.PI/2);return mesh(name,geometry,material,id,position);}
- function box(name,size,material,id,position){return mesh(name,new THREE.BoxGeometry(...size),material,id,position);}
- function pipe(name,points,tube,material,id){
+ function ring(name: string,z: number,inner: number,outer: number,depth: number,material: keyof typeof materials,id: string,cut=false){return mesh(name,annulus(inner,outer,depth,cut?Math.PI*.75:0,cut?Math.PI*1.5:TAU),material,id,[0,0,z]);}
+ function cylinder(name: string,r: number,depth: number,material: keyof typeof materials,id: string,position: Point){const geometry=new THREE.CylinderGeometry(r,r,depth,48);geometry.rotateX(Math.PI/2);return mesh(name,geometry,material,id,position);}
+ function box(name: string,size: Point,material: keyof typeof materials,id: string,position: Point){return mesh(name,new THREE.BoxGeometry(...size),material,id,position);}
+ function pipe(name: string,points: readonly Point[],tube: number,material: keyof typeof materials,id: string){
   const path=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));return mesh(name,new THREE.TubeGeometry(path,32,tube,10,false),material,id);
  }
- function surface(id,geometry,componentId,position=[0,0,0],basis=SOLVED){
+ function surface(id: string,geometry: THREE.BufferGeometry,componentId: string,position: Point=[0,0,0],basis=SOLVED){
   const item=mesh(id,geometry,'hidden',componentId,position,group);item.visible=false;
   item.userData={...item.userData,surfaceId:id,surfaceRole:id,geometryBasis:basis,quantitativeOnly:true};surfaces.set(id,item);return item;
  }
- function diskGeometry(r,normalZ=1){const g=new THREE.CircleGeometry(r,72);if(normalZ<0)g.rotateY(Math.PI);return g;}
- function flange(z,r,wall){
+ function diskGeometry(r: number,normalZ=1){const g=new THREE.CircleGeometry(r,72);if(normalZ<0)g.rotateY(Math.PI);return g;}
+ function flange(z: number,r: number,wall: number){
   ring('Vacuum flange',z,r,r+wall*3,wall*1.6,'steel',beam?'beamline':'fittings');
   ring('Flange seal land',z+wall*.86,r+wall*.16,r+wall*.7,wall*.16,'dark',beam?'beamline':'seals');
   for(let i=0;i<16;i++){
@@ -94,25 +116,25 @@ export function buildEngineeringGeometry(options){
    bolt.userData.fastener=true;
   }
  }
- function coil(z,r,wall){
+ function coil(z: number,r: number,wall: number){
   ring('Solenoid former',z,r+wall*2,r+wall*3.2,wall*5,'ceramic','coils');
   for(let i=0;i<7;i++)ring('Copper solenoid turn',z+(i-3)*wall*.65,r+wall*3.2,r+wall*4.6,wall*.48,'copper','coils');
   pipe('Coil terminal',[[r+wall*4.1,0,z],[r+wall*5.1,0,z],[r+wall*5.1,-wall*3,z]],wall*.22,'copper','coils');
  }
- function feet(r,L,wall){
+ function feet(r: number,L: number,wall: number){
   box('Support bed',[r*3.3,wall*2,L+wall*12],'dark','support',[0,-r-wall*8,L/2]);
   for(const z of [L*.18,L*.82])for(const x of [-r*.65,r*.65]){
    box('Support leg',[wall*3,wall*6,wall*5],'steel','support',[x,-r-wall*5,z]);
    box('Isolation pad',[wall*5,wall,wall*7],'ceramic','support',[x,-r-wall*7.5,z]);
   }
  }
- function port(z,r,wall){
+ function port(z: number,r: number,wall: number){
   const p=ring('Diagnostic port',0,wall*1.2,wall*2.2,wall*6,'steel','fittings');p.rotation.x=Math.PI/2;p.position.set(0,-r-wall*2,z);
   const cap=cylinder('Diagnostic viewport',wall*1.1,wall*.7,'ceramic','fittings',[0,-r-wall*5.1,z]);cap.rotation.x=Math.PI/2;
  }
- const domain={coordinateSystem:'SI solver xyz; axial z',mode,radiusM:radius,lengthM:length,constructionBasis:ASSUMED};
+ const domain: EngineeringDomain={coordinateSystem:'SI solver xyz; axial z',mode,radiusM:radius,lengthM:length,constructionBasis:ASSUMED};
  if(beam){
-  const film=options.filmThicknessM,backing=options.backingThicknessM,r=radius,w=Math.max(r*.12,.001);
+  const film=options.filmThicknessM!,backing=options.backingThicknessM!,r=radius,w=Math.max(r*.12,.001);
   Object.assign(domain,{kind:'planar-target',beamAreaM2:options.beamAreaM2,filmThicknessM:film,backingThicknessM:backing,targetFrontZ:0,beamDirection:[0,0,1],layerScale:1});
   const vesselR=Math.max(r*2.5,.025),constructionLength=Math.max(length,6*vesselR),tubeStart=-constructionLength*.85,tubeEnd=film+backing;
   Object.assign(domain,{constructionLengthM:constructionLength,constructionLengthBasis:'Illustrative beamline length expands with the prescribed beam area; no flight or optics solution.'});
@@ -143,7 +165,7 @@ export function buildEngineeringGeometry(options){
   surface('target-backing',diskGeometry(r),'substrate',[0,0,film+backing]);
   surface('target-interface',diskGeometry(r),'substrate',[0,0,film]);
   // Side faces retain exact physical depth and allow finite-volume temperature painting.
-  for(const [id,start,depth,componentId]of [['target-film-depth',0,film,'target'],['target-backing-depth',film,backing,'substrate']]){
+  for(const [id,start,depth,componentId]of [['target-film-depth',0,film,'target'],['target-backing-depth',film,backing,'substrate']] as const){
    const g=new THREE.PlaneGeometry(r*2,depth,1,Math.max(1,options.depthSegments??16));g.rotateX(Math.PI/2);
    surface(id,g,componentId,[0,0,start+depth/2]);
   }
@@ -151,7 +173,7 @@ export function buildEngineeringGeometry(options){
   const R=positive(options.curvatureRadiusM,'curvatureRadiusM'),angle=length/R;
   if(radius>=R||angle>TAU)throw new RangeError('Curved guide requires radius < curvatureRadius and arc length ≤ one circumference.');
   Object.assign(domain,{kind:'curved-reference',curvatureRadiusM:R,bendAngleRad:angle,absorbingBoundaries:false,constructionBasis:'Channel aperture is illustrative; reduced solver predicts arc-length deflection only.'});
-  class Arc extends THREE.Curve{getPoint(t,target=new THREE.Vector3()){const a=t*angle;return target.set(R*(1-Math.cos(a)),0,R*Math.sin(a));}}
+  class Arc extends THREE.Curve<THREE.Vector3>{constructor(){super();}override getPoint(t: number,target=new THREE.Vector3()){const a=t*angle;return target.set(R*(1-Math.cos(a)),0,R*Math.sin(a));}}
   const arc=new Arc(),tube=new THREE.TubeGeometry(arc,96,radius,24,false);
   // Guide cage is deliberately open; no fictitious wall/acceptance surface is registered.
   const cage=mesh('Curved guide cage',tube,'steel','vessel');cage.material=materials.steel.clone();cage.material.wireframe=true;
@@ -162,7 +184,7 @@ export function buildEngineeringGeometry(options){
   const end=ring('Diagnostic exit plane',0,radius*.6,radius*1.08,radius*.1,'steel','collectors');end.rotation.y=angle;end.position.copy(arc.getPoint(1));
  }else if(blanket){
   Object.assign(domain,{kind:'blanket-reference',absorbingBoundaries:false,constructionBasis:'Published layer ordering and thickness where specified; major radius and unlisted thickness illustrative.'});
-  const layers=[['Tungsten armor',.005,'steel','armor'],['Inner V–4Cr–4Ti',.010,'dark','structure'],['Hg/Li channel',.210,'fluid','multiplier'],['Outer V–4Cr–4Ti',.030,'dark','structure'],['FLiBe blanket',.35,'film','breeder'],['Eurofer97 tank',.030,'steel','tank']];
+  const layers: [string, number, keyof typeof materials, string][]=[['Tungsten armor',.005,'steel','armor'],['Inner V–4Cr–4Ti',.010,'dark','structure'],['Hg/Li channel',.210,'fluid','multiplier'],['Outer V–4Cr–4Ti',.030,'dark','structure'],['FLiBe blanket',.35,'film','breeder'],['Eurofer97 tank',.030,'steel','tank']];
   let inner=radius;
   for(const [name,thickness,mat,id]of layers){const item=ring(name,length/2,inner,inner+thickness,length,mat,id,true);item.userData.materialBasis=`${name}; alchemy paper representative materials, not compact beam-target hardware.`;item.userData.geometryBasis=name==='FLiBe blanket'?'Illustrative thickness, not a sourced dimension.':'Alchemy paper §4.1 representative layer thickness; cylindrical cutaway is illustrative.';inner+=thickness;}
  }else{
@@ -200,5 +222,5 @@ export function buildEngineeringGeometry(options){
   }
  }
  group.updateMatrixWorld(true);
- return {group,surfaces,domain,dispose(){const gs=new Set(),ms=new Set();group.traverse(node=>{if(node.geometry)gs.add(node.geometry);if(node.material)for(const m of Array.isArray(node.material)?node.material:[node.material])ms.add(m);});for(const g of gs)g.dispose();const textures=new Set();for(const m of new Set([...ms,...Object.values(materials)])){for(const value of Object.values(m))if(value?.isTexture)textures.add(value);m.dispose();}for(const texture of textures)texture.dispose();group.removeFromParent();}};
+ return {group,surfaces,domain,dispose(){const gs=new Set<THREE.BufferGeometry>(),ms=new Set<THREE.Material>();group.traverse(node=>{if('geometry' in node&&node.geometry instanceof THREE.BufferGeometry)gs.add(node.geometry);const material: unknown='material' in node?node.material:undefined;const list: unknown[]=Array.isArray(material)?material:[material];for(const m of list)if(m instanceof THREE.Material)ms.add(m);});for(const g of gs)g.dispose();const textures=new Set<THREE.Texture>();for(const m of new Set([...ms,...Object.values(materials)])){for(const value of Object.values(m))if(value instanceof THREE.Texture)textures.add(value);m.dispose();}for(const texture of textures)texture.dispose();group.removeFromParent();}};
 }
