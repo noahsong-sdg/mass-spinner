@@ -2,14 +2,16 @@ import * as THREE from 'three';
 import {annulus,buildEngineeringGeometry,machinedMetal} from './engineering-geometry.js';
 import {finishFuelHardware} from './fuel-finishes.js';
 import {createFuelCircuit} from './fuel-circuit.js';
-import {createFuelMotion} from './fuel-motion.js';
+import {createFuelMotion, type FuelRenderResult} from './fuel-motion.js';
+import type {FuelConfig} from './fuel-centrifuge.js';
 import {createFuelSceneTools} from './fuel-scene-tools.js';
 import {attachFuelAssembly,loadFuelAssembly} from './fuel-assembly.js';
 export {loadFuelAssembly};
 
 const BASIS='Conceptual Marathon patent topology; dimensions and construction are illustrative, not an as-built machine.';
 const STAGE_BASIS=BASIS+' Routing overlay only: length describes one reference vessel, not a solved per-stage length or the total cascade length.';
-export const FUEL_COMPONENTS=[
+export type FuelComponent = {id: string; name: string; purpose: string; material: string; basis: string};
+export const FUEL_COMPONENTS: FuelComponent[]=[
  ['vessel','Vacuum vessel','Contains the partially ionized working gas.','Assumed stainless-steel vessel'],
  ['coils','Magnetic coils','Provide the prescribed axial magnetic field.','Assumed copper winding with ceramic former'],
  ['source','Auxiliary hollow cathode','Optional ignition source; its axial jacket is not the modeled radial-current endpoint. Openings admit working gas.','Illustrative tungsten jacket and LaB₆ emitter; disclosed material options'],
@@ -27,7 +29,7 @@ export const FUEL_COMPONENTS=[
 ].map(([id,name,purpose,material])=>({id,name,purpose,material,basis:id==='stages'?STAGE_BASIS:BASIS}));
 
 /** Retain the detailed SI engineering shell and add disclosed application topology. */
-export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false,assembly}){
+export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false,assembly}: {config: FuelConfig; result: FuelRenderResult; diagnostics?: boolean; assembly?: THREE.Object3D}){
  const R=c.radiusM,L=c.lengthM,f=c.driveInnerFraction;
  if(!Number.isFinite(R)||R<=0||!Number.isFinite(L)||L<=0)throw new RangeError('Positive finite centrifuge dimensions required.');
  if(!Number.isFinite(f)||f<=0||f>=1)throw new RangeError('Drive annulus must lie inside the vessel.');
@@ -41,31 +43,31 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
  const scene=buildEngineeringGeometry({mode:'centrifuge',radiusM:R,lengthM:L}).group;
  const envelopeScale=c.pair==='lithium'?1.12:1;
  scene.name='fuel-centrifuge';scene.userData={...scene.userData,application:c.application,stages,gasRadiusM:R,vacuumEnvelopeRadiusM:R*envelopeScale,geometryBasis:BASIS,stageGeometryBasis:STAGE_BASIS};
- scene.getObjectByName('construction').scale.set(envelopeScale,envelopeScale,1);
+ scene.getObjectByName('construction')!.scale.set(envelopeScale,envelopeScale,1);
  // Replace the generic source electrodes: they imply a different current endpoint.
- for(const name of ['Arc cathode','Source discharge anode']){const old=scene.getObjectByName(name);old.geometry.dispose();old.removeFromParent();}
+ for(const name of ['Arc cathode','Source discharge anode']){const old=scene.getObjectByName(name) as THREE.Mesh;old.geometry.dispose();old.removeFromParent();}
  if(assembly){attachFuelAssembly(scene,assembly,c);finishFuelHardware(scene);}
  const records=new Map(FUEL_COMPONENTS.map(x=>[x.id,x]));
- scene.traverse(mesh=>{if(mesh.isMesh){
+ scene.traverse(mesh=>{if('isMesh' in mesh&&mesh.isMesh){
   const id=records.has(mesh.userData.componentId)?mesh.userData.componentId:'vessel';
-  mesh.userData={...mesh.userData,componentId:id,purpose:records.get(id).purpose,geometryBasis:BASIS};
+  mesh.userData={...mesh.userData,componentId:id,purpose:records.get(id)!.purpose,geometryBasis:BASIS};
  }});
  const metal=machinedMetal(0x75878d,.32,.4);
  const refractory=machinedMetal(0x77746d,.48,.2);refractory.side=THREE.DoubleSide;
  const emitter=new THREE.MeshStandardMaterial({color:0xb09a70,metalness:.4,roughness:.4});
- function add(name,geometry,material,id,position=[0,0,0]){
-  const mesh=new THREE.Mesh(geometry,material),record=records.get(id);mesh.name=name;mesh.position.set(...position);
+ function add(name: string,geometry: THREE.BufferGeometry,material: THREE.Material,id: string,position: [number,number,number]=[0,0,0]){
+  const mesh=new THREE.Mesh(geometry,material),record=records.get(id)!;mesh.name=name;mesh.position.set(...position);
   mesh.userData={componentId:id,materialBasis:record.material,geometryBasis:record.basis,purpose:record.purpose};scene.add(mesh);return mesh;
  }
- function ring(name,inner,outer,z,id,material=metal){
+ function ring(name: string,inner: number,outer: number,z: number,id: string,material: THREE.Material=metal){
   return add(name,new THREE.RingGeometry(inner,outer,64),material,id,[0,0,z]);
  }
- function tube(name,points,id,diameter=R*.05){
+ function tube(name: string,points: [number,number,number][],id: string,diameter=R*.05){
   const path=new THREE.CatmullRomCurve3(points.map(p=>new THREE.Vector3(...p)));
   return add(name,new THREE.TubeGeometry(path,32,diameter/2,12,false),metal,id);
  }
  const cathodeR=R*Math.min(.055,f*.7),cathodeL=L*.84;
- const jacket=new THREE.CylinderGeometry(cathodeR,cathodeR,cathodeL,48,16,true),index=jacket.getIndex(),position=jacket.getAttribute('position'),triangles=[];
+ const jacket=new THREE.CylinderGeometry(cathodeR,cathodeR,cathodeL,48,16,true),index=jacket.getIndex()!,position=jacket.getAttribute('position'),triangles=[];
  // Remove actual side faces for gas slots rather than painting dark spots on a solid tube.
  for(let i=0;i<index.count;i+=3){
   const center=new THREE.Vector3();for(let j=0;j<3;j++)center.add(new THREE.Vector3().fromBufferAttribute(position,index.getX(i+j)));center.multiplyScalar(1/3);
@@ -115,8 +117,9 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
  if(c.pair==='lithium'){
   const liner=annulus(R,R*1.012,L*.86,Math.PI*.75,Math.PI*1.5,96);
   const mesh=add('Lithium refractory sub-vessel',liner,refractory,'liner',[0,0,L/2]);mesh.userData.temperatureK=c.linerK;mesh.userData.gasBoundaryRadiusM=R;
-  const thermal=r.transport?.operation?.thermal?.enabled===true;
-  const spatial=thermal&&!!r.transport.operation.thermal.spatial;
+  const options=r.transport?.operation?.thermal;
+  const thermal=!!options&&typeof options==='object'&&'enabled' in options&&options.enabled===true;
+  const spatial=thermal&&'spatial' in options&&!!options.spatial;
   mesh.userData.temperatureBasis=spatial?'Initial radial liner temperature':thermal?'Initial lumped liner temperature':'Prescribed reference liner temperature';
   mesh.userData.purpose+=spatial?` Initial liner ${c.linerK} K; radial temperatures evolve in the thermal grid. Shell thickness and shading remain illustrative; use the temperature profile plot for quantitative values.`:thermal?` Initial liner ${c.linerK} K; the evolving liner temperature is a lumped reservoir, not a spatial thermal field.`:` Prescribed reference liner ${c.linerK} K; no temperature evolution or spatial thermal field is solved.`;
   const ceramic=new THREE.MeshStandardMaterial({color:0xc2bba7,roughness:.65});
