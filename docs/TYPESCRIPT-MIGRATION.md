@@ -17,12 +17,11 @@ Existing runtime tests still exercise legacy links, invalid input, deferred
 restoration, run history, and baseline behavior. The migration changes ownership
 and checking, not the numerical model or historical link format.
 
-Remaining batches, in dependency order:
-
-1. Interface adapters, worker clients, and plotting inputs.
-2. Interactive renderers and component selection, with Three.js types.
-3. Playground composition and entrypoints, then development/build scripts where
-   TypeScript improves their contracts.
+The remaining 69 UI and rendering modules have now been migrated, including
+main entrypoints, workspaces, guides, plots, component selection, all playground
+controllers and Three.js renderers. Every module under `src/` is included in the
+strict compiler gate. Build and scientific export scripts retain `.mjs` where
+no browser-facing contract requires migration.
 
 Each batch must pass strict checking and the relevant behavior tests before
 publication. Renaming files while disabling checking would hide the original
@@ -62,3 +61,51 @@ check was blocked with HTTP 403, so it is not claimed as verification evidence.
 
 The migration keeps runtime guards and adds genuine compiler coverage. A bulk
 extension rename or unchecked TypeScript would leave the same contract gap.
+
+## Remaining UI and rendering migration
+
+The root cause of the checking gap was the compiler boundary: strict mode only
+covered TypeScript source, leaving JavaScript callers free to pass incompatible
+settings, solver results or scene state. In plain terms, the physics code had
+contracts that the interface did not have to obey.
+
+The fix brings existing execution paths under the same compiler, without a new
+framework or a second numerical model:
+
+- Worker request discriminants select the matching result type and are shared
+  with the actual worker dispatcher. Dynamic requests remain `unknown`.
+- Plot samples, nullable values, domains, callbacks and pinned state are typed.
+- Three.js declarations match the installed runtime version exactly. Geometry,
+  materials, picking, clipping, camera and disposal have concrete contracts.
+- DOM controls use their actual element types; stored state and external JSON
+  keep runtime validation. Legacy scenario links keep their historical format.
+- Standalone guide source is compiled to browser JavaScript rather than copied
+  with TypeScript syntax. Entry paths and producing-code hashes follow renames.
+- Compile-only negative cases check worker, plotting and precision-control
+  contracts. A runtime test prevents new JavaScript source escaping strict mode.
+
+Three real boundary defects were found during the migration:
+
+1. References listened for `toggle` on an inner `<div>`, which never owns native
+   disclosure state. The listener now uses the actual `<details>`. This keeps
+   lazy activation and the existing append host, rather than adding synthetic
+   state or polling. Tests exercise the real owner and repeated clean reopens.
+2. The deferred renderer assumed every mesh had one material. Three.js also
+   permits material arrays; clone, opacity and disposal now handle both legal
+   shapes. This uses the renderer's existing lifecycle instead of flattening or
+   replacing authored material assignments. Both shapes have regression tests.
+3. Target film thickness used a positive comparison that accepted numeric strings
+   and infinity. A finite positive-number check now enforces the physical length
+   boundary before geometry construction; valid numerical inputs are unchanged.
+
+Types do not establish experimental accuracy or validate a numerical closure.
+Existing scientific qualification labels remain unchanged. Preexisting broad
+internal types in `surface-state.ts` and sparse-array validation limitations in
+`apparatus-state.ts` remain separate follow-up work; this migration does not claim they were solved.
+
+### Final verification
+
+The isolated strict compiler passed both production and contract configurations
+on the 157-module integration snapshot. The initial isolated runtime batch passed
+85/85 cases with no failures, skips or cancellations. Full final test/build and
+deployment/browser evidence will be added after those gates complete.
