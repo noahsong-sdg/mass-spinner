@@ -1,4 +1,8 @@
 import type {FusionBeamConfig,simulateFusionBeam} from './fusion-reactor.js';
+import {DEFAULT_COUPLED_TARGET,type CoupledTargetConfig,type simulateCoupledTarget} from './coupled-target.js';
+import {requestSimulationWithIdentity} from './worker-client.js';
+import {producingCode,type ProducingCodeIdentity} from './producing-code.js';
+import {renderPlots,type PlotCurve} from './laboratory.js';
 
 export type CoupledTargetResult = ReturnType<typeof simulateCoupledTarget> & {producingCode?:ProducingCodeIdentity|null};
 export type CoupledTargetSnapshot = {result:CoupledTargetResult;state:CoupledTargetResult['history'][number];source:FusionBeamConfig};
@@ -22,10 +26,6 @@ export interface CoupledTargetOptions {
 }
 type TargetNumberKey = Exclude<keyof CoupledTargetConfig,'implantationWeights'>;
 type TargetTab = 'dynamics'|'depth'|'settings';
-import {DEFAULT_COUPLED_TARGET,type CoupledTargetConfig,type simulateCoupledTarget} from './coupled-target.js';
-import {requestSimulationWithIdentity} from './worker-client.js';
-import {producingCode,type ProducingCodeIdentity} from './producing-code.js';
-import {renderPlots,type PlotCurve} from './laboratory.js';
 
 const make=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const node=document.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
 const format=(value:number)=>!Number.isFinite(value)?'—':value===0?'0':Math.abs(value)<.001||Math.abs(value)>=1e5?value.toExponential(3):Number(value.toPrecision(4)).toString();
@@ -183,5 +183,5 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  time.addEventListener('input',()=>{if(!latest)return;selected=Number(time.value);renderSelected();});plotChoice.addEventListener('change',()=>{if(latest)renderSelected();});
  depthScope.addEventListener('change',()=>{if(latest)renderSelected();});
  exportButton.addEventListener('click',()=>{if(!latest||phase!=='accepted')return;const payload={schemaVersion:1,source:acceptedSource,selectedTimeS:latest.history[selected].timeS,...latest,producingCode:producingCode(latest.producingCode)},url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-coupled-target.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
- selectTab('dynamics');schedule();return {durationHost,referenceHost,focusSetting(selector:string){selectTab('settings');const input=settings.querySelector<HTMLElement>(selector);if(input){for(let parent=input.parentElement;parent&&parent!==settings;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;input.scrollIntoView?.({block:'nearest'});input.focus();}},update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;schedule();},get result(){return latest;},get status(){return {phase,revision,snapshot:currentSnapshot()};}};
+ selectTab('dynamics');schedule();return {durationHost,referenceHost,references,focusSetting(selector:string){selectTab('settings');const input=settings.querySelector<HTMLElement>(selector);if(input){for(let parent=input.parentElement;parent&&parent!==settings;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;input.scrollIntoView?.({block:'nearest'});input.focus();}},update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;schedule();},get result(){return latest;},get status(){return {phase,revision,snapshot:currentSnapshot()};}};
 }

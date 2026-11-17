@@ -45,8 +45,8 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},transformPlo
   },
  });
  target.referenceHost.append(node('target-exposure'),node('target-loading'));
- target.referenceHost.addEventListener('toggle',()=>{
-  exposure.setActive(target.referenceHost.open);loading.setActive(target.referenceHost.open);
+ target.references.addEventListener('toggle',()=>{
+  exposure.setActive(target.references.open);loading.setActive(target.references.open);
  });
  setupFiniteFilmReference(target.referenceHost,finiteFilmReference);
  const source=setupFusionLaboratory({exposureHost:target.durationHost,onUpdate(value){
