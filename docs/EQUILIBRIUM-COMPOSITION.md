@@ -48,7 +48,7 @@ These are **partitions of a closed equilibrium inventory**, not continuous extra
 
 ## Numerical qualification
 
-The screened domain is masses 1–250 u (light ≤ heavy), T 100–10,000 K, R 0.001–10 m, L 0.001–100 m, N 1–10³⁰ particles, x and c in [0,1], nonnegative wall speed ≤200,000 m/s and βH ≤100. This is a numerical domain, not a physical operating envelope. In particular, prescribed lithium gas is not a vapor/condensation calculation.
+The screened domain is masses 1–250 u (light ≤ heavy), T 100–10,000 K, R 0.001–10 m, L 0.001–100 m, N 1–10³⁰ particles, x and c in [0,1], nonnegative gas edge speed ≤200,000 m/s and βH ≤100. This is a numerical domain, not a physical operating envelope. In particular, prescribed lithium gas is not a vapor/condensation calculation.
 
 Production uses stable exponential integrals, direct outer-tail integration, and a separate enrichment-gain calculation to retain small changes. The independent Python Decimal oracle uses 80-digit direct integrals. The 5,280-case matrix compares local density/composition, cut purity/recovery, weak enrichment and species conservation. Independent Simpson integration refines through 1,024, 4,096 and 16,384 intervals. Frozen gates:
 

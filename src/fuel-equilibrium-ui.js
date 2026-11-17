@@ -19,7 +19,7 @@ export function createEquilibriumCalculator({document:doc,host,sampleState=(_res
  const cutLabel=el('label','Inner cut radius / vessel radius'),cut=el('input');cut.type='range';cut.id='equilibrium-cutFraction';cut.min=0;cut.max=1;cut.step=.005;cut.value=.65;cutLabel.htmlFor=cut.id;cutLabel.append(cut);basic.append(cutLabel);fields.set('cutFraction',cut);cut.addEventListener('input',draw);
  input(extra,'lightFraction','Light inventory number fraction',.0759,0,1);input(extra,'radiusM','Radius (m)',.12,.001,10);
  input(extra,'lengthM','Length (m)',.8,.001,100);input(extra,'totalParticles','Neutral inventory (particles)',5.2426e19,1,1e30);
- more.append(el('p','Temperature changes hold inventory fixed. At fixed wall speed, radius changes dimensional positions and densities, not normalized composition.'));
+ more.append(el('p','Temperature changes hold inventory fixed. At fixed gas edge speed, radius changes dimensional positions and densities, not normalized composition.'));
  const scenarios=el('details'),scenarioInputs=el('div');scenarioInputs.className='equilibrium-inputs';scenarios.append(el('summary','Input scenarios'),scenarioInputs,
   el('p','Dashed curves sample speed/temperature endpoint combinations, not guaranteed extrema, confidence intervals or experimental error bars.'));
  input(scenarioInputs,'speedPercent','Speed ± (%)',0,0,50);input(scenarioInputs,'temperaturePercent','Temperature ± (%)',0,0,50);panel.append(scenarios);
