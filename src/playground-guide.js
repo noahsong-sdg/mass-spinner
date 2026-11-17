@@ -80,6 +80,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
  const controlFocus={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',duration:'#fuel-durationS',controls:null};
+ const pinButton=()=>doc.querySelector('[aria-label="Pin accepted experiment as comparison A"]');
+ const pending=key=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton().disabled);
  let cancelLaunch=()=>{};
  function action(key){
   if(!allowed.has(key))return;
@@ -87,7 +89,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   status.textContent='';
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   // Pending/failed results must not be presented as a fresh experiment.
-  if(!node('fuel-export')||node('fuel-export').disabled){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
+  if(pending(key)){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
   if(key==='look'){
    set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);
   }else if(key==='coils'){
@@ -109,7 +111,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   else if(key==='collection'){endpoint();plot('cut');}
   else if(key==='cut'){transient();set('fuel-motion-time',node('fuel-motion-time').value,'input');if(plot('cut'))doc.querySelector('#fuel-plots > .live-plots svg')?.focus();}
   else if(key==='pin'){
-   doc.querySelector('[aria-label="Pin accepted experiment as comparison A"]').click();open('view',true);
+   pinButton().click();open('view',true);
   }
  }
  // Only this embedded reader may request one of the explicitly listed native actions.
@@ -122,13 +124,14 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function launch(key){
   if(!allowed.has(key))return;
   cancelLaunch();const accepted=node('fuel-export');
-  if(Object.hasOwn(controlFocus,key)||!accepted||!accepted.disabled){action(key);return;}
-  status.textContent='Waiting for the computed run before opening this plot…';
+  if(Object.hasOwn(controlFocus,key)||!accepted||!pending(key)){action(key);return;}
+  status.textContent='Waiting for the computed run and controls…';
   const observer=new doc.defaultView.MutationObserver(()=>{
-   if(!accepted.disabled){cancelLaunch();if(!node('start-here')?.hidden)action(key);}
+   if(!pending(key)){cancelLaunch();if(!node('start-here')?.hidden)action(key);}
   });
   cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};};
   observer.observe(accepted,{attributes:true,attributeFilter:['disabled']});
+  if(key==='pin'&&pinButton())observer.observe(pinButton(),{attributes:true,attributeFilter:['disabled']});
  }
  function render(focus=false){
   const step=steps[index];choice.value=String(index);status.textContent='';

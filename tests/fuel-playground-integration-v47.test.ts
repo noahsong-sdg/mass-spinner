@@ -361,3 +361,17 @@ test('Transport cut plots show the current inventory rather than the final equil
  f.change('fuel-motion-time',1);close(metric(),sampleFuelTransport(f.ui.latest.result.transport,1).collection.innerLightPurity!,.001);
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/Current closed-wall inventory/);
 });
+
+
+test('a standalone pin link waits for native comparison readiness after result export becomes available',async t=>{
+ const f=fixture(t);await f.start();
+ const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated(){}});
+ const pin=f.window.document.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]')!;
+ const clear=f.window.document.querySelector<HTMLButtonElement>('.fuel-comparison-bar button:nth-child(2)')!;
+ assert.ok(clear);assert.equal(f.node('fuel-export').disabled,false);
+ pin.disabled=true;guide.launch('pin');
+ assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);assert.equal(clear.disabled,true);
+ pin.disabled=false;await flush();assert.equal(clear.disabled,false,'pin only after accepted comparison tools are ready');
+ assert.equal(f.node('guide-status').textContent,'');
+});

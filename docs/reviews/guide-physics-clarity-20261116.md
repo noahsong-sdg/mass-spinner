@@ -20,6 +20,7 @@ It does not certify experimental accuracy.
 | Collection exercise restarts the physical experiment | Guide focused a setup slider handled by generic invalidation | Focus the existing paused diagnostic cut curve; disclose setup-slider reset behavior |
 | Empty-cut purity shows a neighboring radius's value | Generic scalar readout skipped undefined y before finding nearest x | Select the radius first; display undefined as — without borrowing another sample |
 | Enrichment changes are difficult to see | Light-only references used a 0–100% axis | Use explicitly labeled zoomed percentage axes and show feed; keep full two-species axes |
+| Standalone Pin A silently does nothing | Export becomes ready before comparison controls | Wait for the native Pin A readiness signal as well as the accepted result |
 | Momentum/inertia claims lack their actual plots | Guide action list omitted existing diagnostics | Link native angular momentum, gas inertia, species density and run duration |
 
 The collection probe changes neither setup nor the selected 3D cut. Its graph
