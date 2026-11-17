@@ -3,10 +3,14 @@ import {renderPlots, reducedConfig, type PlotCurve, type PlotOptions} from '../.
 import {setupPreciseControls, type RangeDescriptor} from '../../src/precise-controls.js';
 import type {IonSpecies} from '../../src/physics.js';
 import type {TransportConfig} from '../../src/transport.js';
+import type {Curve} from '../../src/ensemble.js';
+import type {FuelSceneTools, NumericFuelControlKey} from '../../src/fuel-scene-tools.js';
 
 declare const document: Document;
 declare const host: HTMLElement;
 declare const ions: readonly IonSpecies[];
+declare const arrivalCurve: Curve;
+declare const fuelScene: FuelSceneTools;
 
 // Plotting reads frozen scientific samples; missing observations remain nullable.
 const curve: PlotCurve = {
@@ -20,6 +24,8 @@ const controller = renderPlots(host, [curve] as const, {
 });
 controller.setCursor(1);
 controller.setCursor(undefined);
+// Ordinary core interfaces need no open index signature to feed the shared plotter.
+renderPlots(host, [arrivalCurve]);
 // @ts-expect-error Read-only plot samples cannot be modified by a renderer consumer.
 curve.x.push(3);
 // @ts-expect-error Plot ordinates must be numeric or explicitly missing.
@@ -50,4 +56,15 @@ controls.reset({});
 const diffusion: TransportConfig = reducedConfig('diffusion', ions);
 // @ts-expect-error Collision closures are a closed physical-model selection.
 diffusion.collisionModel = 'arbitrary';
+const fieldControl: NumericFuelControlKey = 'magneticT';
+fuelScene.setSpecies('light');
+fuelScene.setLayer('temperature');
+fuelScene.setDomains({temperature: [300, 900] as const});
+// @ts-expect-error Component sliders cannot write a categorical pair selection.
+const categoricalSlider: NumericFuelControlKey = 'pair';
+// @ts-expect-error Species selectors must use the shared physical-species vocabulary.
+fuelScene.setSpecies('ions');
+// @ts-expect-error Field color domains need exactly two numeric bounds.
+fuelScene.setDomains({temperature: [300, 600, 900]});
+void [fieldControl, categoricalSlider];
 void [invalidSample, invalidDomain, invalidSelection, invalidScale, diffusion];
