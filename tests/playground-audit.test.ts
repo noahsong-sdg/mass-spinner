@@ -32,7 +32,7 @@ test('survival scales are physical and exact samples can be inspected with the k
  assert.equal(prevented,4);key('Tab');assert.equal(prevented,4);
 });
 test('production resize observer preserves camera validity across hidden levels',()=>{
- const source=readFileSync('src/main.js','utf8'),endMarker="observer.observe($('stage'));";
+ const source=readFileSync('src/legacy-renderer.js','utf8'),endMarker="observer.observe($('stage'));";
  const start=source.indexOf('observer=new ResizeObserver('),end=source.indexOf(endMarker,start);
  assert.ok(start>=0&&end>start,'Production scene owns and registers its resize observer');
  let bounds={width:0,height:0},projections=0;
@@ -44,7 +44,7 @@ test('production resize observer preserves camera validity across hidden levels'
  const renderer={setSize:(...size:unknown[])=>sizes.push(size)};
  const stage={getBoundingClientRect:()=>bounds},$=(id:string)=>{assert.equal(id,'stage');return stage;};
  class Observer {constructor(notify:()=>void){callback=notify;}observe(target:unknown){observed.push(target);}}
- const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('async function initScene()'));
+ const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('let environment,observer,keyboard;'));
  new Function('$','renderer','camera','controls','THREE','ResizeObserver',`let observer;const legacyRadius=2;${helpers}${source.slice(start,end+endMarker.length)}`)($,renderer,camera,controls,THREE,Observer);
  assert.deepEqual(observed,[stage]);callback();assert.equal(camera.aspect,1);assert.equal(sizes.length,0);assert.equal(projections,0);
  bounds={width:640,height:480};callback();assert.equal(camera.aspect,4/3);assert.deepEqual(sizes,[[640,480,false]]);assert.equal(projections,1);
@@ -54,8 +54,8 @@ test('production resize observer preserves camera validity across hidden levels'
 });
 
 test('actual legacy first-use fit contains the hardware at narrow aspect and resize preserves user framing',()=>{
- const source=readFileSync('src/main.js','utf8');
- const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('async function initScene()'));
+ const source=readFileSync('src/legacy-renderer.js','utf8');
+ const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('let environment,observer,keyboard;'));
  const hardware=new THREE.Group();hardware.add(new THREE.Mesh(new THREE.BoxGeometry(4,1.8,1.6),new THREE.MeshBasicMaterial()));hardware.position.set(.2,.1,-.1);hardware.updateMatrixWorld(true);
  const box=new THREE.Box3().setFromObject(hardware),sphere=box.getBoundingSphere(new THREE.Sphere()),legacyCenter=sphere.center,legacyRadius=sphere.radius;
  const camera=new THREE.PerspectiveCamera(33,1,.05,100),controls={target:new THREE.Vector3(),minDistance:2,maxDistance:10,update(){camera.lookAt(this.target);camera.updateMatrixWorld();}};

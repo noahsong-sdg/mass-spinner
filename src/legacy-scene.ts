@@ -3,7 +3,7 @@ export function needsLegacyScene(level:string,model:string,view:string):boolean 
 }
 
 /** A hidden first visit allocates nothing; concurrent first visits share creation. */
-export function createLazyScene(needed:()=>boolean,create:()=>Promise<{dispose():void}>,failed:(error:unknown)=>void){
+export function createLazyScene(needed:()=>boolean,create:()=>Promise<{dispose():void}|null>,failed:(error:unknown)=>void){
  let resource:{dispose():void}|null=null,pending:Promise<void>|null=null;
  return {
   ensure():Promise<void>{

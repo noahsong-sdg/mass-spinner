@@ -19,7 +19,7 @@ test('actual main fusion wiring publishes one action bar after primary part and 
  const calls:unknown[]=[];
  const workspace={open:(panel:string)=>calls.push(['open',panel]),focusRelated:(panel:string,selector:string)=>calls.push(['focus',panel,selector])};
  const construct=new Function('$','THREE','setupComponentInspectors','setupApparatus','setupTutorialInsights','fusionComponents','componentDestination','appendComponentActions','workspace','document',`
-  let inspectors,apparatus,tutorialInsights,fusionApparatus,hardware,camera,gpuReady=false;
+  let inspectors,apparatus,tutorialInsights,fusionApparatus,legacyRenderer,gpuReady=false;
   const experience={level:'2'},view='render',mode=()=> 'rotating',marathon={target:{focusSetting:selector=>workspace.focusRelated('target-settings',selector)}};
   ${inspect}
   ${wiring}

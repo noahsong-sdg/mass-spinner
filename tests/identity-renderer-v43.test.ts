@@ -108,9 +108,9 @@ test('actual main accepted-run and download callbacks retain the producing worke
  assert.equal(newest.producingCode.sourceHash,'f'.repeat(64));assert.equal(newest.result.tag,'f');
 });
 
-test('actual deferred main scene cleans environment/model/compile failures and hydrates latest accepted paths',async()=>{
- const source=await readFile(new URL('../src/main.js',import.meta.url),'utf8');
- const initialize=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('function updateReadouts()'));
+test('actual deferred renderer cleans environment/model/compile failures and hydrates latest accepted paths',async()=>{
+ const source=await readFile(new URL('../src/legacy-renderer.js',import.meta.url),'utf8');
+ const initialize=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('\nreturn {initScene,'));
  for(const failure of ['environment','model','compile',null]){
   const counts={renderer:0,studio:0,pmrem:0,environment:0,controls:0,observed:0,disconnected:0,paths:0,fields:0,keyboard:0};
   class Renderer {setPixelRatio(){}async init(){}setSize(){}setAnimationLoop(){}render(){}async compileAsync(){if(failure==='compile')throw Error('compile');}dispose(){counts.renderer++;}}
@@ -123,15 +123,15 @@ test('actual deferred main scene cleans environment/model/compile failures and h
   const canvas={addEventListener(event:string,handler:(event:any)=>void){counts.keyboard++;handlers.set(event,handler);},removeEventListener(event:string){counts.keyboard--;handlers.delete(event);}};
   const $=(id:string)=>id==='scene'?canvas:id==='stage'?{getBoundingClientRect:()=>({width:460,height:840})}:{};
   const build=new Function('THREE','RoomEnvironment','GLTFLoader','OrbitControls','ResizeObserver','$','updateFields','drawPaths',`
-   let scene,camera,renderer,controls,hardware,gpuReady=false,gpuFailed=false;
+   let scene,camera,renderer,controls,hardware;
    const devicePixelRatio=1,trajectories=new THREE.Group(),fieldGroup=new THREE.Group(),legacyCenter=new THREE.Vector3(),latest={kind:'rotating',result:{accepted:true}},view='orbits';let legacyRadius=0;
-   const clear=group=>group.clear(),sceneVisibility=()=>{},showView=()=>{},mode=()=> 'rotating',experience={level:'1'},rendererFailure=()=>{};
+   const clear=group=>group.clear(),showView=()=>{},getView=()=>view,getLatest=()=>latest,isActive=()=>true,onFailure=()=>{};
    ${initialize}
-   return {initScene,state:()=>({scene,gpuReady,camera,hardware,controls})};`);
+   return {initScene,dispose,state:()=>({scene,camera,hardware,controls})};`);
   const app=build({...THREE,WebGPURenderer:Renderer,PMREMGenerator:PMREM},Room,Loader,Controls,Observer,$,()=>{counts.fields++;},(result:any)=>{assert.equal(result.accepted,true);counts.paths++;});
   if(failure){await assert.rejects(app.initScene(),new RegExp(failure));assert.equal(app.state().scene,undefined);}
   else{
-   const resource=await app.initScene();assert.equal(counts.paths,1);assert.equal(counts.fields,1);assert.equal(app.state().gpuReady,true);
+   await app.initScene();assert.equal(counts.paths,1);assert.equal(counts.fields,1);assert.ok(app.state().hardware);
    const {hardware,camera,controls}=app.state(),box=new THREE.Box3().setFromObject(hardware);
    const resetDistance=camera.position.distanceTo(controls.target);
    assert.ok(resetDistance>10,'actual narrow first-use initializer fits beyond the former distance cap');
@@ -142,7 +142,7 @@ test('actual deferred main scene cleans environment/model/compile failures and h
    for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){
     const point=new THREE.Vector3(x,y,z).project(camera);assert.ok(Math.abs(point.x)<1&&Math.abs(point.y)<1,`actual first-use bounds ${point.toArray()}`);
    }
-   resource.dispose();
+   app.dispose();app.dispose();
   }
   assert.equal(counts.renderer,1);assert.equal(counts.studio,1);assert.equal(counts.pmrem,1);assert.equal(counts.keyboard,0);
   assert.equal(counts.environment,failure==='environment'?0:1);

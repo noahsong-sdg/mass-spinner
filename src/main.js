@@ -7,7 +7,6 @@ import './target-loading.css';
 import './minimal.css';
 import './workspace.css';
 import {setupWorkspace} from './workspace-ui.js';
-import {fieldGraphics} from './field-graphics.ts';
 import './coupled-target.css';
 import './precise-controls.css';
 import {setupPreciseControls} from './precise-controls.js';
@@ -47,16 +46,12 @@ import {setupFailureLaboratory,modelValidity} from './limitations-ui.js';
 import {createResearchLoader} from './research-ui.js';
 import {renderConvergenceEvidence} from './convergence-evidence.js';
 import convergenceEvidence from '../web-assets/convergence/display.json';
-import * as THREE from 'three/webgpu';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+import * as THREE from 'three';
 import { DEFAULT_CONFIG, cutoffMassU, E_CHARGE, AMU } from './physics.ts';
 
 const $ = id => document.getElementById(id);
 const guideQuery=new URL(location.href).searchParams;
 const guideOnLoad=guideQuery.get('guide'),guideTopic=guideQuery.get('topic'),guideAction=guideQuery.get('try');
-const colors = [0xa4c4b1, 0xd2956b];
 const inputs = ['field','voltage','energy','parallel','source-radius','distribution','axial-temperature','particles','resolution','mass-a','mass-b','charge-a','charge-b','neutral-density','neutral-cross-section','neutral-mass','rf-amplitude','rf-frequency','rf-handedness','rotation','ion-temperature','electron-temperature','axis-fraction','radial-cut','radial-resolution','random-seed','centrifuge-closure','magnetic-boundary','composition-boundary','gaussian-field','gaussian-width','gaussian-density'];
 const ions = () => ['a','b'].map(k=>({massU:+$('mass-'+k).value,chargeState:+$('charge-'+k).value}));
 const mode = () => $('system').value;
@@ -95,13 +90,13 @@ async function showResearch(){
  try{const viewer=await loadResearch();button.hidden=!!viewer;}
  finally{button.disabled=false;}
 }
-let latest = null, revision = 0, busy = false, hardware, renderer, controls, scene, camera;
+let latest = null, revision = 0, busy = false, legacyRenderer;
 let view = 'hardware', gpuReady=false, gpuFailed=false, runController, comparisonController, refinementController, liveTimer;
 const legacyNeeded=()=>needsLegacyScene(document.body.dataset.level??'1',mode(),view);
 const legacyScene=createLazyScene(legacyNeeded,initScene,rendererFailure);
 function sceneVisibility(){
  const rendered=view==='render'&&apparatus?.hasMode(mode());
- const state=rendererPresentation(mode(),gpuReady,gpuFailed,!!renderer?.backend?.isWebGPUBackend,rendered||!legacyNeeded());
+ const state=rendererPresentation(mode(),gpuReady,gpuFailed,!!legacyRenderer?.webGPU,rendered||!legacyNeeded());
  $('model-apparatus').hidden=!rendered;
  $('scene').hidden=state.canvasHidden;$('poster').hidden=state.posterHidden;$('load-state').hidden=state.loadingHidden;$('renderer-status').textContent=state.status;
  $('separator-inspector').hidden=!legacyNeeded();
@@ -122,138 +117,21 @@ function equilibriumControls(){
  $('composition-label').textContent=$('composition-boundary').value==='bulk'?'Whole-cylinder A number fraction':'Central A number fraction';
 }
 function changed(){experience?.sync();equilibriumControls();invalidate();clearTimeout(liveTimer);if($('live-update').checked)liveTimer=setTimeout(run,250);}
-const trajectories = new THREE.Group(), fieldGroup = new THREE.Group();
-const legacyCenter=new THREE.Vector3();let legacyRadius=0;
-const toScene = p => new THREE.Vector3(p[2]-DEFAULT_CONFIG.length/2,p[0],p[1]);
-
-function clear(group) {
-  for(const child of [...group.children]) {
-    child.traverse(item => { item.geometry?.dispose(); if(item.material) item.material.dispose(); });
-    group.remove(child);
-  }
-}
-function line(points, color, opacity=1) {
-  return new THREE.Line(new THREE.BufferGeometry().setFromPoints(points),
-    new THREE.LineBasicMaterial({color,transparent:opacity<1,opacity}));
-}
 function showView(next) {
-  inspectors?.clear();
-  document.body.dataset.view=next;
-  view=next;
-  document.querySelectorAll('[data-view]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.view===next)));
-  trajectories.visible=next==='orbits'; fieldGroup.visible=next==='fields';
-  hardware?.traverse(item=>{
-    if(!item.isMesh) return;
-    item.material.transparent=next!=='hardware';
-    item.material.opacity=next==='hardware'?1:.12;
-    item.material.depthWrite=next==='hardware';
-    item.material.needsUpdate=true;
-  });
-  sceneVisibility();
-  void legacyScene.ensure();
+ inspectors?.clear();document.body.dataset.view=next;view=next;
+ document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===next)));
+ legacyRenderer?.showView(next);sceneVisibility();void legacyScene.ensure();
 }
-function updateFields() {
-  clear(fieldGroup);
-  if(!scene||!['rotating','icr'].includes(mode()))return;
-  const c=config(),{radius:a,length:l}=c;
-  let samples;
-  try{samples=fieldGraphics(c);}catch{ $('field-scale').textContent='Enter finite field parameters.';return; }
-  const ring = x => Array.from({length:97},(_,i)=>new THREE.Vector3(x,a*Math.cos(i*Math.PI/48),a*Math.sin(i*Math.PI/48)));
-  for(const x of [-l/2,l/2]) fieldGroup.add(line(ring(x),0xb1b5ad,.8));
-  for(let i=0;i<12;i++) {
-    const t=i*Math.PI/6,y=a*Math.cos(t),z=a*Math.sin(t);
-    fieldGroup.add(line([new THREE.Vector3(-l/2,y,z),new THREE.Vector3(l/2,y,z)],0x717c7a,.45));
-  }
-  for(const [glyphs,reference,color]of [[samples.electric,samples.electricReferenceVM,0xd2956b],[samples.magnetic,samples.magneticReferenceT,0xa4c4b1]]){
-    for(const {position,vector}of glyphs){
-      const direction=new THREE.Vector3(vector[2],vector[0],vector[1]),magnitude=direction.length();
-      if(magnitude===0)continue;
-      const length=.42*a*magnitude/reference;
-      fieldGroup.add(new THREE.ArrowHelper(direction.normalize(),toScene(position),length,color,length*.24,length*.12));
-    }
-  }
-  $('field-scale').textContent=`E (copper) ≤ ${samples.electricReferenceVM.toPrecision(3)} V/m · B (sage) ${c.magneticT.toPrecision(3)} T · arrows scaled separately${c.mode==='icr'?' · RF snapshot t = 0':''}`;
-}
-function drawPaths(result) {
-  clear(trajectories);
-  if(!scene)return;
-  result.species.forEach((s,i)=>s.paths.forEach(path=>{
-    trajectories.add(line(path.positions.map(toScene),colors[i],.88));
-    const dot=new THREE.Mesh(new THREE.SphereGeometry(.009,8,6),new THREE.MeshBasicMaterial({color:colors[i]}));
-    dot.position.copy(toScene(path.positions.at(-1))); trajectories.add(dot);
-  }));
-}
-function legacyFitDistance(){
-  const vertical=THREE.MathUtils.degToRad(camera.fov),horizontal=2*Math.atan(Math.tan(vertical/2)*camera.aspect);
-  return 1.12*legacyRadius/Math.sin(Math.min(vertical,horizontal)/2);
-}
-function resetCamera() {
-  if(!hardware||!camera||!controls)return;
-  const distance=legacyFitDistance();
-  controls.target.copy(legacyCenter);camera.position.copy(legacyCenter).addScaledVector(new THREE.Vector3(3.5,2.35,4.1).normalize(),distance);
-  controls.minDistance=2;controls.maxDistance=Math.max(10,2*distance);
-  camera.far=Math.max(100,controls.maxDistance+legacyRadius*20);camera.updateProjectionMatrix();controls.update();
-}
-function resizeScene(){
-  const {width,height}=$('stage').getBoundingClientRect();
-  if(width<=0||height<=0)return;
-  const previousFit=legacyFitDistance();
-  renderer.setSize(width,height,false);camera.aspect=width/height;
-  const ratio=legacyFitDistance()/previousFit;
-  camera.position.sub(controls.target).multiplyScalar(ratio).add(controls.target);
-  controls.minDistance*=ratio;controls.maxDistance*=ratio;controls.update();
-  camera.far=Math.max(100,controls.maxDistance+legacyRadius*20);camera.updateProjectionMatrix();
-}
-async function initScene() {
-  let environment,observer,keyboard;
-  const dispose=()=>{
-    observer?.disconnect();if(keyboard)$('scene').removeEventListener('keydown',keyboard);
-    renderer?.setAnimationLoop(null);controls?.dispose();environment?.dispose();
-    clear(trajectories);clear(fieldGroup);if(scene)clear(scene);renderer?.dispose();
-    renderer=controls=hardware=camera=scene=undefined;gpuReady=false;
-  };
-  try {
-    gpuFailed=false;$('load-state').textContent='Loading 3D…';sceneVisibility();
-    scene=new THREE.Scene(); scene.background=new THREE.Color('#151919');
-    camera=new THREE.PerspectiveCamera(33,1,.05,100);
-    renderer=new THREE.WebGPURenderer({canvas:$('scene'),antialias:true,alpha:false});
-    renderer.setPixelRatio(Math.min(devicePixelRatio,2));
-    renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.25;
-    await renderer.init();
-    const studio=new RoomEnvironment();
-    let pmrem;
-    try{pmrem=new THREE.PMREMGenerator(renderer);environment=pmrem.fromScene(studio,.04);}finally{studio.dispose();pmrem?.dispose();}
-    scene.environment=environment.texture; scene.environmentIntensity=1.15;
-    scene.add(new THREE.HemisphereLight(0xeaf0ed,0x242b29,1.5));
-    const key=new THREE.DirectionalLight(0xffe4c8,3); key.position.set(0,5,4); scene.add(key);
-    const fill=new THREE.DirectionalLight(0xa6c3d0,2); fill.position.set(-3,2,-3); scene.add(fill);
-    controls=new OrbitControls(camera,$('scene')); controls.enableDamping=true;
-    controls.minDistance=2; controls.maxDistance=10; controls.maxPolarAngle=Math.PI*.85;
-    const gltf=await new GLTFLoader().loadAsync('/separator.glb');
-    hardware=gltf.scene; scene.add(hardware,trajectories,fieldGroup);
-    // Keep independently adjustable opacity per mesh when inspecting the interior.
-    hardware.traverse(item=>{if(item.isMesh) item.material=item.material.clone();});
-    hardware.updateWorldMatrix(true,true);const bounds=new THREE.Box3().setFromObject(hardware);
-    bounds.getCenter(legacyCenter);legacyRadius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
-    if(!Number.isFinite(legacyRadius)||legacyRadius<=0)throw new Error('3D model has no finite geometry.');
-    updateFields();if(latest&&['rotating','icr'].includes(latest.kind))drawPaths(latest.result);showView(view);
-    observer=new ResizeObserver(resizeScene);observer.observe($('stage'));
-    resizeScene();resetCamera();
-    await renderer.compileAsync(scene,camera);renderer.render(scene,camera);gpuReady=true;sceneVisibility();
-    renderer.setAnimationLoop(()=>{if($('scene').hidden||!['rotating','icr'].includes(mode())||!['1','3'].includes(experience?.level??'1'))return;try{controls.update();renderer.render(scene,camera);}catch(error){rendererFailure(error);}});
-    keyboard=event=>{
-      if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','='].includes(event.key))return;
-      event.preventDefault();
-      const offset=camera.position.clone().sub(controls.target),s=new THREE.Spherical().setFromVector3(offset);
-      if(event.key==='ArrowLeft')s.theta-=.1;if(event.key==='ArrowRight')s.theta+=.1;
-      if(event.key==='ArrowUp')s.phi=Math.max(.1,s.phi-.1);if(event.key==='ArrowDown')s.phi=Math.min(Math.PI*.85,s.phi+.1);
-      if(event.key==='+'||event.key==='=')s.radius=Math.max(controls.minDistance,s.radius*.9);if(event.key==='-')s.radius=Math.min(controls.maxDistance,s.radius*1.1);
-      camera.position.copy(controls.target).add(new THREE.Vector3().setFromSpherical(s));controls.update();
-    };$('scene').addEventListener('keydown',keyboard);
-    return {dispose};
-  } catch(error) {
-    dispose();throw error;
-  }
+async function initScene(){
+ gpuFailed=false;$('load-state').textContent='Loading 3D…';sceneVisibility();
+ const {createLegacyRenderer}=await import('./legacy-renderer.js');
+ if(!legacyNeeded())return null;
+ const current=createLegacyRenderer({$,config,mode,getLatest:()=>latest,getView:()=>view,isActive:legacyNeeded,onFailure:rendererFailure});
+ legacyRenderer=current;
+ try{
+  await current.initScene();gpuReady=true;sceneVisibility();
+  return {dispose(){inspectors?.clear();current.dispose();if(legacyRenderer===current){legacyRenderer=null;gpuReady=false;}}};
+ }catch(error){if(legacyRenderer===current)legacyRenderer=null;throw error;}
 }
 
 function updateReadouts() {
@@ -271,7 +149,7 @@ function updateReadouts() {
   $('cutoff').innerHTML=cutoff===null?'∞ <small>u / e</small>':`${cutoff.toFixed(1)} <small>u / e</small>`;
   $('cutoff-context').textContent=ions().map((s,i)=>`${['A','B'][i]} ${cutoff===null||s.massU/s.chargeState<cutoff?'below':'at/above'}`).join(' · ');
   $('cutoff-mark').style.left=`${Math.min(100,Math.max(0,(cutoff??150)-20))}%`;
-  updateFields();
+  legacyRenderer?.updateFields();
   const frequencies=ions().map(s=>E_CHARGE*c.magneticT*s.chargeState/(s.massU*AMU)/(2*Math.PI));
   $('frequency-readout').textContent=mode()==='centrifuge'?'Static composition boundary; this is not a flowing-feed or extraction calculation.':
     `Cyclotron: A ${frequencies[0].toFixed(0)} Hz · B ${frequencies[1].toFixed(0)} Hz · `+
@@ -283,7 +161,7 @@ function invalidate() {
   $('model-validity').textContent=modelValidity(mode(),null,null);
   studyUI?.invalidate();
   baseline?.clearCurrent();collector?.update(null);
-  runController?.abort();comparisonController?.abort();refinementController?.abort();revision++; latest=null; $('export').disabled=true; $('refine').disabled=true; clear(trajectories);
+  runController?.abort();comparisonController?.abort();refinementController?.abort();revision++; latest=null; $('export').disabled=true; $('refine').disabled=true; legacyRenderer?.drawPaths(null);
   $('impact-diagnostics').replaceChildren();$('equilibrium-results').replaceChildren();renderPlots($('equilibrium-chart'),[]);
   $('comparison').hidden=true;$('compare').disabled=false;$('refinement-status').textContent='Run an experiment to compare Δt with Δt/2.';
   $('run-status').textContent=busy?'Inputs changed · run again after calculation':'Inputs changed · run to update collection';
@@ -313,7 +191,7 @@ function drawResults(result) {
   $('deposition').innerHTML=`<path d="M30 110H775" stroke="#4d5753"/>${bars}<g fill="#9eaaa4" font-size="12"><text x="30" y="135">Source · 0 m</text><text x="690" y="135">End · 2.8 m</text><text x="5" y="25">${max}</text></g>`;
   const summary=collectionSummary(result);
   $('sampling-uncertainty').textContent=summary.species.map((s,i)=>`${['A','B'][i]}: `+['end','wall','source','remaining'].map(d=>`${d} ${(100*s.outcomes[d].fraction).toFixed(1)}% [${(100*s.outcomes[d].low).toFixed(1)}, ${(100*s.outcomes[d].high).toFixed(1)}]%`).join(' · ')).join(' | ')+'. Pointwise Wilson 95% intervals for sampled fractions; purity needs paired-batch resampling below. Model and timestep errors are separate.';
-  $('export').disabled=false;drawPaths(result);
+  $('export').disabled=false;legacyRenderer?.drawPaths(result);
 }
 function calculate(selected,settings,signal,withIdentity=false){
  const kind=selected==='doublewell-dynamics'?'doublewell-dynamics':geometryModes.includes(selected)?'geometry':transportModes.includes(selected)?'transport':selected==='centrifuge'?'centrifuge':'orbit';
@@ -406,7 +284,7 @@ $('lithium-preset').addEventListener('click',()=>{
  experience?.sync();selectMode();
  $('plot-status').textContent=LITHIUM_PRESET_NOTE;
 });
-$('reset-camera').addEventListener('click',resetCamera);
+$('reset-camera').addEventListener('click',()=>legacyRenderer?.resetCamera());
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
 function preset(voltage) {
   $('field').value='.10';$('voltage').value=String(voltage);$('energy').value='.5';$('parallel').value='20';$('source-radius').value='4';
@@ -459,7 +337,7 @@ $('export').addEventListener('click',()=>{
   const blob=new Blob([serializeRun(latest)],{type:'application/json'});
   const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='mass-spinner-run.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
-inspectors=setupComponentInspectors({THREE:{Raycaster:THREE.Raycaster,Vector2:THREE.Vector2},canvas:$('scene'),getHardware:()=>hardware,getCamera:()=>camera,onFusionSelect:id=>fusionApparatus?.syncSelection(id),onInspect:inspectComponent,
+inspectors=setupComponentInspectors({THREE:{Raycaster:THREE.Raycaster,Vector2:THREE.Vector2},canvas:$('scene'),getHardware:()=>legacyRenderer?.hardware,getCamera:()=>legacyRenderer?.camera,onFusionSelect:id=>fusionApparatus?.syncSelection(id),onInspect:inspectComponent,
  canPick:()=>gpuReady&&['rotating','icr'].includes(mode())&&['1','3'].includes(experience?.level??'1')});
 apparatus=setupApparatus($('model-apparatus'),{onInspect:inspectComponent});
 tutorialInsights=setupTutorialInsights($('tutorial-insights'));
@@ -480,7 +358,7 @@ setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density
 baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',showResearch);
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
-experience=setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
+experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch,onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 if(guideOnLoad==='start'||guideOnLoad==='physics'){
  workspace.open('guide');
  if(guideOnLoad==='physics')workspace.openPhysics(guideTopic);
