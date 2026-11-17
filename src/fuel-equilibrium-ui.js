@@ -4,7 +4,7 @@ import {equilibriumProducingCode} from './equilibrium-identity.ts';
 import {renderPlots} from './laboratory.js';
 
 /** Timeline redraws only update the optional import source, never prescribed inputs. */
-export function createEquilibriumCalculator({document:doc,host}){
+export function createEquilibriumCalculator({document:doc,host,sampleState=(_result,state)=>state}){
  const el=(tag,text)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  const panel=el('details'),basic=el('div'),more=el('details'),extra=el('div');panel.id='fuel-equilibrium-calculator';basic.className=extra.className='equilibrium-inputs';
  more.append(el('summary','Mixture & geometry'),extra);panel.append(el('summary','Equilibrium'),el('p','Prescribe a gas state. Independent of the 3D timeline.'),basic,more);
@@ -64,7 +64,7 @@ export function createEquilibriumCalculator({document:doc,host}){
  function revoke(){if(downloadURL){doc.defaultView.URL.revokeObjectURL(downloadURL);downloadURL=null;}}
  sample.addEventListener('click',()=>{
   if(pending||!accepted)return;
-  const {r,state}=accepted,c=r.config;pair.value=c.pair;
+  const {r}=accepted,state=sampleState(r,accepted.state),c=r.config;pair.value=c.pair;
   const inputs={radiusM:c.radiusM,lengthM:c.lengthM,lightFraction:c.lightFraction,cutFraction:c.cutFraction,
    edgeSpeedMS:Math.abs(state.neutralRadS??r.samples.at(-1).neutralRadS)*c.radiusM,temperatureK:state.thermal?.gasK??c.gasK,
    totalParticles:c.pressurePa*Math.PI*c.radiusM**2*c.lengthM/(1.380649e-23*c.gasK)};

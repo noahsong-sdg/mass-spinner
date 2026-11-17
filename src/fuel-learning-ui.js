@@ -4,7 +4,7 @@ import {fuelLearningComparison} from './fuel-learning.js';
 import {createEquilibriumCalculator} from './fuel-equilibrium-ui.js';
 
 /** Result-owned scope and conditional comparisons, independent of pending slider values. */
-export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
+export function createFuelLearningTools({document:doc,host,onCompare=()=>{},sampleState}){
  const el=(tag,text)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
  const scope=el('div'),coverage=el('details'),coverageTitle=el('summary'),coverageText=el('p');
  scope.id='fuel-result-scope';scope.className='fuel-result-scope';coverage.id='fuel-input-coverage';
@@ -18,7 +18,7 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
   button.addEventListener('click',()=>{if(pending||!result)return;kind=key;onCompare();drawComparison();});bar.append(button);buttons.set(key,button);
  }
  host.append(scope,coverage,comparisons);
- const equilibrium=createEquilibriumCalculator({document:doc,host});
+ const equilibrium=createEquilibriumCalculator({document:doc,host,sampleState});
  function drawComparison(){
   for(const [key,button]of buttons)button.setAttribute('aria-pressed',String(kind===key));
   if(!kind||!result||pending)return;

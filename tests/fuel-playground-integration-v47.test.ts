@@ -86,6 +86,19 @@ test('guided equilibrium calculator changes no worker input, accepted timeline o
  assert.equal(f.node('equilibrium-edgeSpeedMS').value,'1500');assert.equal(f.requests.length,requests);assert.equal(f.viewers[0].built,built);
 });
 
+test('equilibrium import samples the visible playback state even when the time-history plot has not redrawn',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-mode','transport','change');f.change('fuel-plot','spin','change');
+ const panel=f.node('fuel-equilibrium-calculator');panel.open=true;panel.dispatchEvent(new f.window.Event('toggle'));
+ const sample=[...panel.querySelectorAll('button')].find((b:any)=>b.textContent==='Use sampled state') as HTMLButtonElement;
+ const count=f.requests.length,result=f.ui.latest.result;
+ f.node('fuel-motion-play').click();assert.ok(f.viewers[0].animation);f.viewers[0].animation(1);
+ const time=Number(f.node('fuel-motion-time').value);assert.ok(time>0);assert.equal(f.node('fuel-plot').value,'spin');
+ const state=sampleFuelTransport(result.transport,time);sample.click();
+ close(Number(f.node('equilibrium-edgeSpeedMS').value),state.neutralRadS*result.config.radiusM);
+ assert.ok(Number(f.node('equilibrium-edgeSpeedMS').value)>0,'must not import the cached t=0 state');
+ assert.equal(Number(f.node('fuel-motion-time').value),time);assert.equal(f.requests.length,count,'sampling must neither pause/rerun nor replace the trajectory');
+});
+
 test('guided experiments use the real accepted plots, timeline and probes without changing physical inputs',async t=>{
  const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
  const opened:string[]=[],focused:any[]=[];

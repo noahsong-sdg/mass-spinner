@@ -176,7 +176,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  let currentEvents=[],operatingConfig=null,resume=null,lastPoweredCurrent=DEFAULT_FUEL_CENTRIFUGE.currentA;
  const eventHistory=el('details');eventHistory.append(el('summary','Drive history'));nodes.plots.append(eventHistory);
  let motion=null,tools=null,baselineViewer=null,baselineMotion=null,baselineTools=null,pinned=null,plotCursor=null,lastProfileTime=-Infinity,dragCut=null,elapsed=0,playing=!doc.defaultView.matchMedia?.('(prefers-reduced-motion: reduce)').matches;const timeScales={};
- const learning=createFuelLearningTools({document:doc,host:nodes.plots,onCompare:()=>{playing=false;playback();draw();}});
+ const learning=createFuelLearningTools({document:doc,host:nodes.plots,sampleState:r=>diagnosticState(r),onCompare:()=>{playing=false;playback();draw();}});
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-result-scope'),metrics);
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-input-coverage'),metrics);
  const views=createFuelViewTools({document:doc,host:nodes.view,onChange:()=>{applyViews();draw();viewer?.refresh();baselineViewer?.refresh();},onCamera:direction=>{const pose=viewer?.cameraPose?.();if(!pose)return;const distance=Math.hypot(...pose.position.map((v,i)=>v-pose.target[i])),norm=Math.hypot(...direction),next={...pose,position:direction.map((v,i)=>pose.target[i]+v*distance/norm)};viewer.setCamera(next);baselineViewer?.setCamera?.(next);}});
