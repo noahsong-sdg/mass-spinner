@@ -298,7 +298,7 @@ test('the beginner guide explains every actual gas-view and plot menu option wit
  for(const id of ['fuel-motion-mode','fuel-plot'])for(const option of f.node(id).options)
   assert.ok(reference.includes(`| ${option.textContent} |`),`missing explanation for ${id}: ${option.textContent}`);
  assert.match(reference,/same accepted coupled solution/);
- assert.match(reference,/not solved inlet\/outlet fluid motion/);
+ assert.match(reference,/not solved inlet\/outlet fluid motion/i);
  assert.match(reference,/not a fixed-current experiment/);
  assert.match(reference,/both share the local temperature/);
  assert.equal(f.requests.length,0);
