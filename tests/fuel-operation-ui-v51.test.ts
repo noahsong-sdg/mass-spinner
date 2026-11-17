@@ -5,17 +5,19 @@ import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 import {simulateFuelCentrifuge} from '../src/fuel-centrifuge.js';
 import {simulateFuelOperation} from '../src/fuel-operation.js';
 import {sampleFuelTransport} from '../src/fuel-transport.js';
+import {restoreScenario} from '../src/scenario-state.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-operation.ts':'b'.repeat(64)}};
 const flush=async()=>{for(let i=0;i<30;i++)await Promise.resolve();};
-function fixture(t:any,hold=false){
+const settle=async()=>{await new Promise(resolve=>setTimeout(resolve,160));await flush();};
+function fixture(t:any,hold=false,graphicsReady=Promise.resolve()){
  const dom=new JSDOM('<main></main>',{url:'https://example.org/?level=2'}),doc=dom.window.document,requests:any[]=[],pending:any[]=[];let selected:any,animation:any,opened=0;
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const solve=(r:any)=>{const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};};
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
   {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
- const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>graphics,onResults:()=>opened++,request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
+ const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};
  const start=async()=>{ui.setActive(true);if(hold)pending.shift()();await flush();assert.ok(ui.latest);};
@@ -63,6 +65,65 @@ test('invalid thermal input retains accepted state and cutaway does not advertis
  assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);
  f.change('fuel-thermal-wallCapacityJK',10);await f.ui.run();assert.ok(f.ui.latest.result.transport.snapshots.at(-1).thermal);
  f.change('fuel-view-representation','tracers','change');assert.match(f.doc.querySelector('.fuel-motion-legend')!.textContent!,/weighted/);
+});
+
+test('enabled thermal number edits invalidate accepted ownership before validation and recover through input events',async t=>{
+ const f=fixture(t);await f.start();
+ f.change('fuel-currentA',0);f.change('fuel-durationS',.01);f.change('fuel-linerK',500);
+ f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView!.Event('change'));await settle();
+ assert.ok(f.ui.latest.result.transport.operation.thermal.enabled);
+ for(const [key,value]of [['wallCapacityJK',''],['gasWallWK',-1],['coolingWK',1000001],['coolantK','']] as const){
+  const input=f.node(`fuel-thermal-${key}`),valid=input.value,accepted=f.ui.latest,count=f.requests.length;
+  f.change(input.id,value);
+  assert.equal(f.node('fuel-export').disabled,true,key);assert.equal(f.node('fuel-power').disabled,true,key);
+  assert.match(f.ui.nodes.render.textContent,/previous accepted state/,key);
+  assert.equal(f.node('fuel-input-coverage').dataset.match,'pending',key);
+  await settle();assert.equal(f.requests.length,count,key);assert.equal(f.ui.latest,accepted,key);
+  assert.equal(input.value,String(value),key);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/,key);
+  assert.match(f.node('fuel-result-scope').textContent,/Invalid settings.*previous accepted result/,key);
+  f.change(input.id,valid);await settle();assert.equal(f.requests.length,count+1,key);assert.notEqual(f.ui.latest,accepted,key);assert.equal(f.node('fuel-export').disabled,false,key);
+ }
+ f.change('fuel-thermal-model','spatial','change');f.change('fuel-thermal-gasModel','spatial','change');await settle();
+ for(const [id,value]of [['fuel-thermal-thicknessMm',21],['fuel-thermal-gasConductivityWMK','']] as const){
+  const input=f.node(id),valid=input.value,accepted=f.ui.latest,count=f.requests.length;
+  assert.equal(input.disabled,false,id);f.change(id,value);assert.equal(f.node('fuel-export').disabled,true,id);
+  await settle();assert.equal(f.requests.length,count,id);assert.equal(f.ui.latest,accepted,id);assert.equal(input.value,String(value),id);
+  f.change(id,valid);await settle();assert.equal(f.requests.length,count+1,id);assert.notEqual(f.ui.latest,accepted,id);assert.equal(f.node('fuel-export').disabled,false,id);
+ }
+});
+
+test('invalid precise component edits remain visible and cannot export or run the old canonical range',async t=>{
+ const f=fixture(t);await f.start();f.selected.onSelect('supply',{},'Discharge supply');
+ const input=f.ui.nodes.inspect.querySelector('input[type="number"][data-key="currentA"]') as HTMLInputElement;
+ const accepted=f.ui.latest,count=f.requests.length;
+ input.value='';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));
+ assert.equal(input.value,'');assert.equal(f.node('fuel-export').disabled,true);await settle();
+ assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.equal(input.value,'');
+ assert.match(f.ui.nodes.render.textContent,/valid component values.*Previous accepted state/);
+ input.value='.02';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));await settle();
+ assert.equal(f.requests.length,count+1);assert.equal(f.requests.at(-1).config.currentA,.02);assert.equal(f.node('fuel-export').disabled,false);
+ input.value='';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));
+ restoreScenario(f.doc,{version:2,level:'2',controls:{'fuel-currentA':.04}});await settle();
+ assert.equal(Number(input.value),.04);assert.equal(f.requests.at(-1).config.currentA,.04);assert.equal(f.node('fuel-export').disabled,false,'Explicit scenario replacement clears the obsolete inspector draft.');
+});
+
+test('invalid thermal edits abort pending ownership and late replies cannot make export current',async t=>{
+ const f=fixture(t,true);await f.start();
+ f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView!.Event('change'));
+ const pending=f.ui.run(),accepted=f.ui.latest,count=f.requests.length;
+ f.change('fuel-thermal-coolantK','');assert.equal(f.node('fuel-export').disabled,true);
+ f.pending[0]();await pending;await settle();
+ assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.equal(f.node('fuel-export').disabled,true);
+ assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
+});
+
+test('late graphics completion cannot revive playback or current-result scope after an invalid edit',async t=>{
+ let ready!:()=>void;const graphicsReady=new Promise<void>(resolve=>{ready=resolve;});
+ const f=fixture(t,false,graphicsReady);await f.start();
+ f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView!.Event('change'));
+ f.change('fuel-thermal-coolantK','');ready();await settle();
+ assert.equal(f.animation,undefined);assert.equal(f.ui.nodes.render.querySelector('.fuel-motion').hidden,true);
+ assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
 });
 
 test('spatial mixture controls reach the solver and accepted gas profiles follow the shared cursor',async t=>{

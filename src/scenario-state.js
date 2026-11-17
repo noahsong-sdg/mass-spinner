@@ -1,4 +1,6 @@
-/** Shareable control coordinates, not raw solver results or executable settings. */
+import {validateFuelCurrentEvents} from './fuel-centrifuge.ts';
+
+/** Shareable inputs and drive history, never raw solver results or executable settings. */
 const ids = text => text.split(/\s+/).filter(Boolean);
 const separator = ids(`system live-update field voltage energy parallel source-radius distribution axial-temperature particles resolution mass-a mass-b charge-a charge-b neutral-density neutral-cross-section neutral-mass rf-amplitude rf-frequency rf-handedness rotation ion-temperature electron-temperature axis-fraction radial-cut radial-resolution random-seed centrifuge-closure magnetic-boundary composition-boundary gaussian-field gaussian-width gaussian-density diffusion-closure study-batches scan-parameter scan-min scan-max scan-points`);
 const prefixed = (prefix, text) => ids(text).map(key => prefix + key);
@@ -54,7 +56,7 @@ function validateFuel(document, controls){
  if(controls['fuel-thermal-gasModel']==='spatial'&&(value('fuel-pair')==='molecular'||controls['fuel-thermal-enabled']!==true||controls['fuel-thermal-model']!=='spatial'))throw new Error('Spatial gas requires enabled atomic thermal evolution and a radial tungsten liner.');
  if(controls['fuel-thermal-resolution']==='refined'&&(value('fuel-pair')==='molecular'||controls['fuel-thermal-enabled']!==true||controls['fuel-thermal-model']!=='spatial'||controls['fuel-thermal-gasModel']!=='spatial'))throw new Error('Refined resolution requires enabled atomic spatial gas and a radial tungsten liner.');
 }
-export function captureScenario(document, level, {validate=true}={}) {
+export function captureScenario(document, level, {validate=true,fuelRun}={}) {
  const controls={};
  for(const id of levels[level]??[]){
   const node=control(document,id);if(!node||(selectedTimes.has(id)||id==='replay-case')&&node.disabled)continue;
@@ -66,28 +68,37 @@ export function captureScenario(document, level, {validate=true}={}) {
   controls[id]=value;
  }
  if(validate){validateMask(document,controls);validateFuel(document,controls);}
- return {version:2,level,controls};
+ const scenario=fuelRun?{version:3,level,controls,fuelRun:structuredClone(fuelRun)}:{version:2,level,controls};
+ if(validate)validateScenario(scenario);
+ return scenario;
 }
 export function scenarioLink(href, scenario) {
  validateScenario(scenario);
  const url=new URL(href);url.search='';url.hash='';
- url.searchParams.set('level',scenario.level);url.searchParams.set('v','2');url.searchParams.set('scenario',JSON.stringify(scenario));
+ url.searchParams.set('level',scenario.level);url.searchParams.set('v',String(scenario.version));url.searchParams.set('scenario',JSON.stringify(scenario));
  if(url.href.length>maxLength)throw new Error('Scenario link exceeds the supported size.');
  return url.href;
 }
 export function validateScenario(value) {
- if(!value||value.version!==2||!['1','2','3','4'].includes(value.level)||!value.controls||typeof value.controls!=='object'||Array.isArray(value.controls)||Object.keys(value).sort().join()!=='controls,level,version')throw new Error('Unsupported scenario.');
+ if(!value||![2,3].includes(value.version)||!['1','2','3','4'].includes(value.level)||!value.controls||typeof value.controls!=='object'||Array.isArray(value.controls)||Object.keys(value).sort().join()!==(value.version===3?'controls,fuelRun,level,version':'controls,level,version'))throw new Error('Unsupported scenario.');
  const entries=Object.entries(value.controls);
  if(entries.length>200||entries.some(([id,v])=>!known(value.level,id)||!['string','number','boolean'].includes(typeof v)||typeof v==='string'&&v.length>160||typeof v==='number'&&!Number.isFinite(v)))throw new Error('Unsupported scenario settings.');
+ if(value.version===3){
+  const run=value.fuelRun;
+  if(value.level!=='2'||value.controls['marathon-apparatus']!=='centrifuge'||!run||typeof run!=='object'||Array.isArray(run)||Object.keys(run).sort().join()!=='events,initialCurrentA,mode,timeS'||
+   !Number.isFinite(run.initialCurrentA)||run.initialCurrentA<0||run.initialCurrentA>.2||!Array.isArray(run.events)||run.events.some(event=>!event||typeof event!=='object'||Array.isArray(event)||Object.keys(event).sort().join()!=='currentA,timeS'))throw new Error('Unsupported centrifuge history.');
+  validateFuelCurrentEvents(run.events,value.controls['fuel-durationS']);
+  if(!['equilibrium','transport','spin','flow'].includes(run.mode)||!Number.isFinite(run.timeS)||run.timeS<0||run.timeS>value.controls['fuel-durationS'])throw new Error('Unsupported centrifuge selection.');
+ }
 }
 /** v1 is deliberately left to readExperience, preserving its original bounds. */
 export function readScenario(search) {
  const query=new URLSearchParams(search);
- if(query.get('v')!=='2'&&!query.has('scenario'))return {scenario:null,invalid:query.has('v')&&query.get('v')!=='1'};
+ if(!['2','3'].includes(query.get('v'))&&!query.has('scenario'))return {scenario:null,invalid:query.has('v')&&query.get('v')!=='1'};
  try{
-  if(search.length>maxLength||query.get('v')!=='2'||query.getAll('scenario').length!==1||query.getAll('level').length!==1||query.getAll('v').length!==1)throw new Error();
+  if(search.length>maxLength||!['2','3'].includes(query.get('v'))||query.getAll('scenario').length!==1||query.getAll('level').length!==1||query.getAll('v').length!==1)throw new Error();
   const scenario=JSON.parse(query.get('scenario'));validateScenario(scenario);
-  if(query.get('level')!==scenario.level)throw new Error();
+  if(query.get('level')!==scenario.level||query.get('v')!==String(scenario.version))throw new Error();
   return {scenario,invalid:false};
  }catch{return {scenario:null,invalid:true};}
 }

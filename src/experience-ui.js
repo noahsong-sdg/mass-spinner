@@ -6,7 +6,7 @@ const copy={'1':'Mass Spinner','2':'Marathon','3':'Models','4':'Research'};
 const fixedPlay={parallel:'20','source-radius':'4',distribution:'thermal','axial-temperature':'1',particles:'96',resolution:'2e-8',
  'mass-a':'40','charge-a':'1','charge-b':'1','neutral-density':'0','neutral-cross-section':'1e-19','neutral-mass':'40','random-seed':'42'};
 
-export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange}){
+export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange,fuelCentrifuge}){
  const shared=readScenario(location.search),initial=readExperience(location.search);
  const levelButtons=[...document.querySelectorAll('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
  const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus');
@@ -37,6 +37,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   for(const button of levelButtons)button.setAttribute('aria-pressed',String(button.dataset.level===level&&(level!=='2'||centrifuge)));
   if(advanced)advanced.dataset.active=String(!centrifuge);
   $('level-title').textContent=centrifuge?'Marathon centrifuge':copy[level];$('share-playground').hidden=false;
+  $('share-playground').title=centrifuge?'Rerun inputs and drive history at the selected time. Camera and independent equilibrium calculator are separate.':'';
   sync();if(notifyLevel)onLevelChange?.(level);revealActiveLevel();
  }
  function enter(next,reset=false,dispatchEvents=true){
@@ -58,10 +59,13 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('level',level);
   history.replaceState(null,'',url);
  }
- function capture(){return captureScenario(document,level);}
+ function capture({validate=true}={}){
+  const fuelRun=level==='2'&&apparatus?.value==='centrifuge'?fuelCentrifuge?.captureRun({validate}):undefined;
+  return captureScenario(document,level,{validate,fuelRun});
+ }
  function restore(scenario){
   try{scenarioLink(location.href,scenario);}catch{$('share-status').textContent='Unsupported scenario.';return false;}
-  const previous=captureScenario(document,level,{validate:false}),previousModels=savedModels;
+  const previous=capture({validate:false}),previousModels=savedModels;
   hydrating=true;
   try{
    // The incoming batch owns notifications; do not recompute the intermediate saved context.
@@ -72,12 +76,14 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
     select.value=scenario.controls.system;selectMode();
    }
    cancelDeferred=restoreScenario(document,scenario,{onDeferredError:message=>$('share-status').textContent=message});
+   if(level==='2'&&apparatus?.value==='centrifuge')fuelCentrifuge?.restoreRun(scenario.fuelRun);
    if(level==='1'){savedPlay=read();$('system').value='rotating';selectMode();showView('render');}
    if(level==='3')savedModels=capture();
    refresh();return true;
   }catch{
    savedModels=previousModels;enter(previous.level,true,false);
    cancelDeferred=restoreScenario(document,previous,{validateDomains:false});
+   if(previous.level==='2'&&apparatus?.value==='centrifuge')fuelCentrifuge?.restoreRun(previous.fuelRun);
    $('share-status').textContent='Unsupported scenario; previous settings retained.';return false;
   }finally{hydrating=false;}
  }
@@ -103,7 +109,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   let href;
   try{href=scenarioLink(location.href,capture());}catch(error){$('share-status').textContent=error.message;return;}
   const revision=shareRevision;$('share-link').value=href;$('share-link').hidden=false;
-  try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent='Copied current settings.';}
+  try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent=level==='2'&&apparatus?.value==='centrifuge'?'Copied run link · fresh solve; camera and calculator separate.':'Copied experiment link.';}
   catch{if(revision===shareRevision)$('share-status').textContent='Select and copy the experiment link below.';}
  });
  function reset(){
