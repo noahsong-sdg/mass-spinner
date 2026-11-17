@@ -1,8 +1,20 @@
 import {simulateFusionBeam,MaterialSlabDomainError,DTCrossSectionDomainError} from './fusion-reactor.js';
 import {E_CHARGE} from './physics.js';
 
+type FusionPlaygroundCurve = ReturnType<typeof simulateFusionBeam>['curves'][number] & {
+ yDomain?:readonly [number,number]; selectedX?:number;
+};
+
+export interface FusionPlaygroundData {
+ excludedEnergiesKeV:number[];
+ spotRadiusM:number;
+ metrics:[string,number|null,string][];
+ profiles:FusionPlaygroundCurve[];
+ curves:FusionPlaygroundCurve[];
+}
+
 /** Display geometry and sensitivity curves for the existing illustrative slab. */
-export function fusionPlaygroundData(r:ReturnType<typeof simulateFusionBeam>){
+export function fusionPlaygroundData(r:ReturnType<typeof simulateFusionBeam>):FusionPlaygroundData{
  const c=r.config;
  const energy=[...new Set([...Array.from({length:25},(_,i)=>20+20*i),c.beamEnergyKeV])].sort((a,b)=>a-b);
  // Fixed toy column/fractional slowing is a family of imposed stopping laws,
@@ -25,7 +37,7 @@ export function fusionPlaygroundData(r:ReturnType<typeof simulateFusionBeam>){
    ['Heat / beam area¹',r.assemblyHeatIfTransmittedBeamStoppedW/c.beamAreaM2,'W/m²'],
    ['Fusion / beam power',r.beamGain,''],
   ],
-  profiles:r.curves.map((curve,i)=>i===0?{...curve,yDomain:[0,1]}:i===1?{...curve,yDomain:[0,Math.max(...curve.y)||1]}:curve),
+  profiles:r.curves.map((curve,i)=>i===0?{...curve,yDomain:[0,1] as const}:i===1?{...curve,yDomain:[0,Math.max(...curve.y)||1] as const}:curve),
   curves:[
    {label:'Fusion probability',x:scanEnergy,y:probability,xLabel:'D⁺ laboratory energy (keV)',yLabel:'Fusion probability per incident D⁺',selectedX:c.beamEnergyKeV,yDomain:[0,Math.max(...probability)||1]},
    {label:'Accelerator only',x:scanEnergy,y:specificYield,xLabel:'D⁺ laboratory energy (keV)',yLabel:'D–T neutrons per accelerator joule',selectedX:c.beamEnergyKeV,yDomain:[0,Math.max(...specificYield)||1]},

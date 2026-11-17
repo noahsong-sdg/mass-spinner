@@ -1,18 +1,19 @@
-import {DEFAULT_TARGET_EXPOSURE,simulateTargetExposure} from './target-exposure.ts';
+import type {simulateFusionBeam} from './fusion-reactor.js';
+import {DEFAULT_TARGET_EXPOSURE,simulateTargetExposure,type TargetExposureConfig} from './target-exposure.js';
 import {renderPlots} from './laboratory.js';
 
-const make=(tag,text)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;};
-const number=n=>n===null?'—':n===0?'0':Math.abs(n)<.001||Math.abs(n)>=1e5?n.toExponential(3):Number(n.toPrecision(4)).toString();
+const make=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;};
+const number=(n:number|null)=>n===null?'—':n===0?'0':Math.abs(n)<.001||Math.abs(n)>=1e5?n.toExponential(3):Number(n.toPrecision(4)).toString();
 
-export function setupTargetExposure(host,{active=true,simulate=simulateTargetExposure}={}){
+export function setupTargetExposure(host:HTMLElement,{active=true,simulate=simulateTargetExposure}:{active?:boolean;simulate?:typeof simulateTargetExposure}={}){
  const panel=make('section'),heading=make('div'),title=make('h3','Exposure');panel.className='target-exposure-panel';
  heading.append(title);
  const body=make('div'),controls=make('div'),durationHost=make('div'),plot=make('div'),metrics=make('div'),status=make('p');
  body.className='target-exposure-body';controls.className='target-exposure-controls';plot.className='live-plots';metrics.className='target-exposure-metrics';
  status.setAttribute('role','status');status.className='instrument-note';durationHost.className='target-duration';controls.append(durationHost);
  const advanced=make('details'),advancedBody=make('div');advanced.append(make('summary','Initial state & cooldown'),advancedBody);
- const reads=new Map();let beam=null,latest=null,dirty=true;
- const fields=[
+ const reads=new Map<keyof TargetExposureConfig,()=>number>();let beam:ReturnType<typeof simulateFusionBeam>|null=null,latest:ReturnType<typeof simulateTargetExposure>|null=null,dirty=true;
+ const fields: [keyof TargetExposureConfig,string,string,number,number,number,number,boolean][]=[
   ['arealHeatCapacityJm2K','Areal heat capacity','J m⁻² K⁻¹',2,6,.01,4,true],
   ['heatTransferWM2K','Effective cooling conductance','W m⁻² K⁻¹',0,20000,100,5000,false],
   ['coolantK','Coolant bath','°C',-20,200,1,20,false],
@@ -43,17 +44,17 @@ export function setupTargetExposure(host,{active=true,simulate=simulateTargetExp
    const temperature={...latest.curves[0],y:latest.curves[0].y.map(k=>k-273.15),yLabel:'Bulk assembly temperature (°C)'};renderPlots(plot,[temperature]);
    // Energy curves are available only when requested, keeping the primary view compact.
    if(ledger.open)renderPlots(ledgerPlot,latest.curves.slice(1));
-   for(const [label,value]of [['Peak bulk temperature',`${number(latest.peakTemperatureK-273.15)} °C`],['Thermal time constant',latest.thermalTimeConstantS===null?'Adiabatic':`${number(latest.thermalTimeConstantS)} s`]]){const row=make('div');row.append(make('span',label),make('strong',value));metrics.append(row);}
+   for(const [label,value]of [['Peak bulk temperature',`${number(latest.peakTemperatureK-273.15)} °C`],['Thermal time constant',latest.thermalTimeConstantS===null?'Adiabatic':`${number(latest.thermalTimeConstantS)} s`]] as const){const row=make('div');row.append(make('span',label),make('strong',value));metrics.append(row);}
    const f=latest.final,fraction=latest.fusionOnlyConsumedFraction;
    ledgerText.textContent=`Deposited ${number(f.depositedEnergyJ)} J · stored change ${number(f.storedEnergyJ)} J · heat to coolant ${number(f.heatToCoolantJ)} J (signed) · residual ${number(f.energyResidualJ)} J. Initial T inventory ${number(latest.initialTritiumNuclei)} nuclei; fusion consumes ${number(latest.fusionConsumedTritium)} (${fraction===null?'no loaded inventory':number(100*fraction)+'%'}). This omits exchange, diffusion and renewal; it is not target lifetime.`;
    list.replaceChildren(...latest.assumptions.map(text=>make('li',text)));
    status.textContent='';exportButton.disabled=false;
-  }catch(error){latest=null;status.textContent=error.message;}
+  }catch(error){latest=null;status.textContent=error instanceof Error?error.message:String(error);}
  }
  function refresh(){if(active&&dirty)calculate();}
  function invalidate(){dirty=true;latest=null;exportButton.disabled=!beam;refresh();}
  ledger.addEventListener('toggle',()=>{ledgerPlot.replaceChildren();if(ledger.open&&latest)renderPlots(ledgerPlot,latest.curves.slice(1));});
- exportButton.addEventListener('click',()=>{if(dirty)calculate();if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,source:beam.config,...latest},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-target-exposure.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ exportButton.addEventListener('click',()=>{if(dirty)calculate();if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,source:beam!.config,...latest},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-target-exposure.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
  body.append(controls,plot);panel.append(heading,metrics,body,status,ledger,notes,exportButton);host.append(panel);refresh();
- return {durationHost,update(value){beam=value;invalidate();},setActive(value){active=value;refresh();}};
+ return {durationHost,update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;invalidate();},setActive(value:boolean){active=value;refresh();}};
 }

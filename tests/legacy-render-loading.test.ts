@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {resolve,dirname,extname} from 'node:path';
 import ts from 'typescript';
+import {productionSource,productionFunction} from './helpers/production-code.js';
 import {createLazyScene} from '../src/legacy-scene.ts';
 
 test('the real default static module graph excludes the legacy renderer and WebGPU backend',()=>{
@@ -13,6 +14,11 @@ test('the real default static module graph excludes the legacy renderer and WebG
   const source=ts.createSourceFile(file,readFileSync(file,'utf8'),ts.ScriptTarget.Latest,true);
   for(const statement of source.statements){
    if(!ts.isImportDeclaration(statement)&&!ts.isExportDeclaration(statement))continue;
+   if(ts.isExportDeclaration(statement)&&statement.isTypeOnly)continue;
+   if(ts.isImportDeclaration(statement)){
+    const clause=statement.importClause,bindings=clause?.namedBindings;
+    if(clause?.isTypeOnly||(!clause?.name&&bindings&&ts.isNamedImports(bindings)&&bindings.elements.length>0&&bindings.elements.every(item=>item.isTypeOnly)))continue;
+   }else if(statement.exportClause&&ts.isNamedExports(statement.exportClause)&&statement.exportClause.elements.length>0&&statement.exportClause.elements.every(item=>item.isTypeOnly))continue;
    const specifier=statement.moduleSpecifier;
    if(!specifier||!ts.isStringLiteral(specifier))continue;
    const name=specifier.text;
@@ -22,16 +28,16 @@ test('the real default static module graph excludes the legacy renderer and WebG
    if(['.js','.ts'].includes(extname(dependency)))walk(dependency);
   }
  }
- walk(resolve('src/main.js'));
- assert.equal(visited.has(resolve('src/legacy-renderer.js')),false);
+ walk(resolve('src/main.ts'));
+ assert.equal(visited.has(resolve('src/legacy-renderer.ts')),false);
  assert.equal(external.has('three/webgpu'),false);
  assert.ok(visited.has(resolve('src/legacy-scene.ts')),'the activation owner remains in the initial graph');
- assert.match(readFileSync('src/legacy-renderer.js','utf8'),/from 'three\/webgpu'/);
+ assert.match(readFileSync('src/legacy-renderer.ts','utf8'),/from 'three\/webgpu'/);
 });
 
 test('production first-use import deduplicates, cancels hidden initialization and rehydrates accepted state',async()=>{
- const source=readFileSync('src/main.js','utf8');
- const initialize=source.slice(source.indexOf('async function initScene()'),source.indexOf('function updateReadouts()'))
+ const source=productionSource('src/main.ts');
+ const initialize=productionFunction(source,'initScene')
   .replace("import('./legacy-renderer.js')",'loadModule()');
  assert.match(initialize,/await loadModule\(\)/);
  const state={needed:false},counts={loads:0,created:0,initialized:0,disposed:0,cleared:0};

@@ -1,10 +1,10 @@
-import {modelInsights,globalTakeaways,TUTORIAL_SOURCE,LITHIUM_PRESET_NOTE} from './tutorial-insights.ts';
+import {modelInsights,globalTakeaways,TUTORIAL_SOURCE,LITHIUM_PRESET_NOTE} from './tutorial-insights.js';
 
-export function setupTutorialInsights(host){
+export function setupTutorialInsights(host: HTMLElement){
  const details=document.createElement('details'),summary=document.createElement('summary'),body=document.createElement('div');
  details.className='source-controls';summary.textContent='What changes the outcome?';details.append(summary,body);host.append(details);
- const paragraph=(label,text)=>{const p=document.createElement('p'),b=document.createElement('strong');b.textContent=label+' ';p.append(b,document.createTextNode(text));body.append(p);};
- return {show(mode){
+ const paragraph=(label:string,text:string)=>{const p=document.createElement('p'),b=document.createElement('strong');b.textContent=label+' ';p.append(b,document.createTextNode(text));body.append(p);};
+ return {show(mode:string){
   const insight=modelInsights[mode];details.hidden=!insight;body.replaceChildren();if(!insight)return;
   paragraph(insight.section,insight.equation);paragraph('Try it.',insight.meaning);
   paragraph('Shown here.',insight.observable);paragraph('Boundary.',insight.boundary);

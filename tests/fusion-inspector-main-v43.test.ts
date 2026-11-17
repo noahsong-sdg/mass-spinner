@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {productionSource,productionFunction,productionStatements} from './helpers/production-code.js';
 import {JSDOM} from 'jsdom';
 import * as THREE from 'three';
 import {setupApparatus} from '../src/apparatus-ui.js';
@@ -13,9 +13,9 @@ test('actual main fusion wiring publishes one action bar after primary part and 
  const doc=dom.window.document;const previous=Object.getOwnPropertyDescriptor(globalThis,'IntersectionObserver');
  Object.defineProperty(globalThis,'IntersectionObserver',{configurable:true,value:class{observe(){}disconnect(){}}});
  t.after(()=>{if(previous)Object.defineProperty(globalThis,'IntersectionObserver',previous);else Reflect.deleteProperty(globalThis,'IntersectionObserver');dom.window.close();});
- const source=readFileSync(new URL('../src/main.js',import.meta.url),'utf8');
- const inspect=source.slice(source.indexOf('function inspectComponent('),source.indexOf('const loadResearch='));
- const wiring=source.slice(source.indexOf('inspectors=setupComponentInspectors('),source.indexOf('const blanketExplorer='));
+ const source=productionSource(new URL('../src/main.ts',import.meta.url));
+ const inspect=productionFunction(source,'inspectComponent');
+ const wiring=productionStatements(source,'inspectors','blanketExplorer');
  const calls:unknown[]=[];
  const workspace={open:(panel:string)=>calls.push(['open',panel]),focusRelated:(panel:string,selector:string)=>calls.push(['focus',panel,selector])};
  const construct=new Function('$','THREE','setupComponentInspectors','setupApparatus','setupTutorialInsights','fusionComponents','componentDestination','appendComponentActions','workspace','document',`

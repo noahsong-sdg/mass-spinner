@@ -1,7 +1,11 @@
 /** Section III is an inventory of coupled physics problems, not eleven
  * calibrated efficiency penalties. Status describes the C/D solvers, not
  * whether this reference text or an independent estimate is displayed. */
-export const section3Coverage = [
+export interface Section3Issue {
+ subsection:string;title:string;status:'partial'|'diagnostic'|'omitted';
+ mechanism:string;iic:string;iid:string;currentEvidence:string[];nextRequirement:string;
+}
+export const section3Coverage: Section3Issue[] = [
  {subsection:'III A',title:'Charge state',status:'partial',
   mechanism:'Charge states alter electromagnetic response and equilibrium; different or changing charges can create overlapping transport and mass-to-charge cutoffs.',
   iic:'Fixed positive charge states change equilibrium profiles; the Gaussian closure requires equal charges.',

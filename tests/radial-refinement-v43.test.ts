@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {productionSource,productionEvent} from './helpers/production-code.js';
 import {runInNewContext} from 'node:vm';
 import {radialRefinementSettings} from '../src/radial-refinement.js';
 import {solveEquilibrium,type EquilibriumConfig} from '../src/equilibrium-model.js';
@@ -16,15 +16,13 @@ test('finest supported radial state has no reference, so no identical-grid estim
 });
 
 test('actual radial click handler refuses the cap and names the two executed grids',async()=>{
- const main=readFileSync('src/main.js','utf8'),start=main.indexOf("$('refine').addEventListener('click'");
- const end=main.indexOf("$('compare').addEventListener('click'",start);
- assert.ok(start>=0&&end>start,'Production refinement callback exists');
+ const handler=productionEvent(productionSource('src/main.ts'),'refine');
  for(const bins of [2000,400,1000]){
   let click:()=>Promise<void>=async()=>{throw new Error('Callback was not registered');};
   const executed:number[]=[],settings={...config,bins};
   const elements={refine:{disabled:false,addEventListener:(_event:string,handler:()=>Promise<void>)=>{click=handler;}},
    'refinement-status':{textContent:''},'radial-cut':{value:'.5'}};
-  runInNewContext(main.slice(start,end),{
+  runInNewContext(handler,{
    $:(id:string)=>elements[id as keyof typeof elements],latest:{kind:'centrifuge',settings,result:solveEquilibrium(settings)},revision:1,
    refinementController:undefined,AbortController,radialRefinementSettings,numeric:(value:number)=>String(value),
    calculate:async(kind:string,fine:EquilibriumConfig)=>{assert.equal(kind,'centrifuge');executed.push(fine.bins!);return solveEquilibrium(fine);},

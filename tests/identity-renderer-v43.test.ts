@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {mkdtemp,readFile,writeFile,mkdir,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
+import {productionSource,productionFunction,productionEvent,productionScopeTail} from './helpers/production-code.js';
 import {createHash} from 'node:crypto';
 import {build} from 'vite';
 import {workerIdentityPlugin} from '../scripts/worker-identity-plugin.mjs';
@@ -77,9 +78,9 @@ test('a first-use view hidden before its queued initialization allocates nothing
 });
 
 test('actual main accepted-run and download callbacks retain the producing worker identity',async()=>{
- const source=await readFile(new URL('../src/main.js',import.meta.url),'utf8');
- const run=source.slice(source.indexOf('async function run()'),source.indexOf('function selectMode()'));
- const download=source.slice(source.indexOf("$('export').addEventListener"),source.indexOf('inspectors=setupComponentInspectors'));
+ const source=productionSource(new URL('../src/main.ts',import.meta.url));
+ const run=productionFunction(source,'run');
+ const download=productionEvent(source,'export');
  const nodes=new Map<string,any>();let exported:Blob|undefined;
  const $=(id:string)=>{if(!nodes.has(id))nodes.set(id,{checked:true,replaceChildren(){},append(){},addEventListener(_event:string,fn:any){this.click=fn;}});return nodes.get(id);};
  const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'d'.repeat(64),sourceFiles:{'src/worker.ts':'e'.repeat(64)}};
@@ -109,8 +110,8 @@ test('actual main accepted-run and download callbacks retain the producing worke
 });
 
 test('actual deferred renderer cleans environment/model/compile failures and hydrates latest accepted paths',async()=>{
- const source=await readFile(new URL('../src/legacy-renderer.js',import.meta.url),'utf8');
- const initialize=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('\nreturn {initScene,'));
+ const source=productionSource(new URL('../src/legacy-renderer.ts',import.meta.url));
+ const initialize=productionScopeTail(source,'legacyFitDistance');
  for(const failure of ['environment','model','compile',null]){
   const counts={renderer:0,studio:0,pmrem:0,environment:0,controls:0,observed:0,disconnected:0,paths:0,fields:0,keyboard:0};
   class Renderer {setPixelRatio(){}async init(){}setSize(){}setAnimationLoop(){}render(){}async compileAsync(){if(failure==='compile')throw Error('compile');}dispose(){counts.renderer++;}}
