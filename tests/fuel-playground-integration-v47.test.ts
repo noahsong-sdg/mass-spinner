@@ -115,7 +115,8 @@ test('reading links use accepted physics results and focus the real collision, d
   send(key);assert.deepEqual(focused.at(-1),['controls',`#fuel-${id}`]);assert.ok(f.node(`fuel-${id}`));
  }
  send('composition');assert.equal(f.node('fuel-plot').value,'composition');
- send('thermalPlot');assert.match(f.node('guide-status').textContent,/Enable Evolve gas/);assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ send('thermalPlot');assert.equal(f.node('fuel-plot').value,'thermal');assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ assert.match(f.ui.nodes.plots.textContent,/fixed-temperature bath/);
  send('work');assert.equal(f.node('fuel-plot').value,'heat');
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests);
 });

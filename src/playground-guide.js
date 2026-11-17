@@ -66,7 +66,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function plot(value){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
-  if(option.disabled){status.textContent=value==='thermal'?'Enable Evolve gas & liner temperature in Controls to use this plot.':'Choose Isotope separation in Controls to use this plot.';return false;}
+  if(option.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
   doc.querySelector('#fuel-plots > .live-plots').scrollIntoView?.({block:'nearest'});return true;
  }
