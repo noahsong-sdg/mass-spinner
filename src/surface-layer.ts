@@ -1,30 +1,37 @@
 import * as THREE from 'three';
 import {mergeGeometries} from 'three/addons/utils/BufferGeometryUtils.js';
-import {buildEngineeringGeometry} from './engineering-geometry.js';
-import {sampleSurfaceField} from './surface-state.ts';
+import {buildEngineeringGeometry, type EngineeringGeometry} from './engineering-geometry.js';
+import {sampleSurfaceField, type SurfaceField, type SurfaceSnapshot, type SurfaceState} from './surface-state.js';
+
+export interface SurfaceSettings {radius?:number;length?:number;curvatureRadius?:number;boundary?:'open'|'closed';initialState?:string;sourceRadius?:number}
+export interface SurfaceLayerOptions {render?:()=>void;onSelect?:(id:string)=>void}
+type SurfaceView='state'|'tracks'|'impacts'|'hardware';
+type SurfaceObject=THREE.Object3D & {geometry?:THREE.BufferGeometry;material?:THREE.Material|THREE.Material[]};
+function isSurfaceObject(node:THREE.Object3D):node is SurfaceObject {return 'geometry' in node || 'material' in node;}
+
 
 const colours=[0xa4c4b1,0xd2956b];
-const number=value=>Number(value.toPrecision(5)).toString();
-const surfaceEdges=field=>field.boundsM??[field.positionsM[0],...field.positionsM.slice(1).map((v,i)=>(v+field.positionsM[i])/2),field.positionsM.at(-1)];
-export function surfaceColour(value,domain){
+const number=(value:number)=>Number(value.toPrecision(5)).toString();
+const surfaceEdges=(field:SurfaceField)=>field.boundsM??[field.positionsM[0],...field.positionsM.slice(1).map((v,i)=>(v+field.positionsM[i])/2),field.positionsM.at(-1)!];
+export function surfaceColour(value:number,domain:readonly [number,number]){
  const fraction=domain[1]===domain[0]?.5:(value-domain[0])/(domain[1]-domain[0]);
  return new THREE.Color('#264e68').lerp(new THREE.Color('#f1b16e'),Math.max(0,Math.min(1,fraction)));
 }
-export function releaseSurfaceGroup(group){
- const geometry=new Set(),materials=new Set();
- group.traverse(node=>{if(node.geometry)geometry.add(node.geometry);if(node.material)for(const m of Array.isArray(node.material)?node.material:[node.material])materials.add(m);});
+export function releaseSurfaceGroup(group:THREE.Object3D){
+ const geometry=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>();
+ group.traverse(node=>{if(!isSurfaceObject(node))return;if(node.geometry)geometry.add(node.geometry);if(node.material)for(const m of Array.isArray(node.material)?node.material:[node.material])materials.add(m);});
  geometry.forEach(value=>value.dispose());materials.forEach(value=>value.dispose());group.clear();group.removeFromParent();
 }
 /** Exact raw values: rings are nearest-sample Voronoi supports, not interpolated solutions. */
-export function buildSurfaceOverlay(snapshot,fieldId,view='state',{sectionZM=(snapshot.domain.lengthM??0)/2}={}){
+export function buildSurfaceOverlay(snapshot:SurfaceSnapshot,fieldId:string,view:SurfaceView='state',{sectionZM=(snapshot.domain.lengthM??0)/2}:{sectionZM?:number}={}){
  const group=new THREE.Group();group.name='Accepted numerical surfaces';
  const field=snapshot.fields.find(value=>value.id===fieldId);
  if(view==='state'&&field){
-  const radius=snapshot.domain.radiusM??Math.sqrt(snapshot.domain.beamAreaM2/Math.PI);
+  const radius=snapshot.domain.radiusM??Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI);
   const depth=field.coordinate==='depth';
   const edges=surfaceEdges(field);
   const pieces=field.values.map((value,index)=>{
-   let geometry,position;
+   let geometry:THREE.BufferGeometry,position:[number,number,number];
    if(depth){
     // True-depth physical section through the illuminated target; no hidden magnification.
     const width=edges[index+1]-edges[index];geometry=new THREE.PlaneGeometry(2*radius,width);geometry.rotateX(Math.PI/2);
@@ -38,7 +45,7 @@ export function buildSurfaceOverlay(snapshot,fieldId,view='state',{sectionZM=(sn
    geometry.setAttribute('sampleIndex',new THREE.Float32BufferAttribute(new Array(vertices).fill(index),1));return geometry;
   });
   const combined=mergeGeometries(pieces);pieces.forEach(piece=>piece.dispose());
-  const mesh=new THREE.Mesh(combined,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));
+  const mesh=new THREE.Mesh(combined!,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));
   mesh.userData={fieldId:field.id,componentId:depth?field.region==='film'?'target':'substrate':undefined};group.add(mesh);
  }
  if(view==='tracks')for(const track of snapshot.tracks){
@@ -49,7 +56,7 @@ export function buildSurfaceOverlay(snapshot,fieldId,view='state',{sectionZM=(sn
  if(view==='impacts'){
   const events=snapshot.impacts.map((event,index)=>({event,index})).filter(({event})=>event.positionM);
   if(events.length){
-   const geometry=new THREE.BufferGeometry().setFromPoints(events.map(({event})=>new THREE.Vector3(...event.positionM)));
+   const geometry=new THREE.BufferGeometry().setFromPoints(events.map(({event})=>new THREE.Vector3(...event.positionM!)));
    geometry.setAttribute('color',new THREE.Float32BufferAttribute(events.flatMap(({event})=>new THREE.Color(colours[event.speciesIndex%colours.length]).toArray()),3));
    const point=new THREE.Points(geometry,new THREE.PointsMaterial({vertexColors:true,size:5,sizeAttenuation:false,depthTest:false}));
    point.renderOrder=1;point.userData={impactIndices:events.map(({index})=>index)};group.add(point);
@@ -59,7 +66,7 @@ export function buildSurfaceOverlay(snapshot,fieldId,view='state',{sectionZM=(sn
 }
 
 /** Owns SI hardware and result layers. The common rigid transform rotates both together. */
-export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
+export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=>{}}:SurfaceLayerOptions={}){
  const doc=frame.ownerDocument,group=new THREE.Group();group.name='SI engineering assembly';
  group.rotation.y=Math.PI/2;
  const panel=doc.createElement('details'),summary=doc.createElement('summary'),body=doc.createElement('div');
@@ -73,32 +80,33 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
  }
  view.value='state';limitsTitle.textContent='Model info';limits.append(limitsTitle,limitsText);
  body.append(view,fields,samples,legend,readout,scope,ledger,limits);frame.append(panel);
- let snapshot=null,engineering=null,overlay=null,geometryKey='',selected=0,expanded=null,selection=null;
+ let snapshot:SurfaceSnapshot|null=null,engineering:EngineeringGeometry|null=null,overlay:THREE.Group|null=null,geometryKey='',selected=0,expanded:THREE.Group|null=null,selection:THREE.LineSegments|null=null;
  function clearSelection(){if(selection)releaseSurfaceGroup(selection);selection=null;}
  function clearOverlay(){clearSelection();if(overlay)releaseSurfaceGroup(overlay);overlay=null;if(expanded)releaseSurfaceGroup(expanded);expanded=null;}
  function clear(){clearOverlay();engineering?.dispose();engineering=null;snapshot=null;geometryKey='';group.clear();panel.hidden=true;
   view.hidden=fields.hidden=samples.hidden=true;fields.replaceChildren();samples.replaceChildren();
   for(const node of [legend,readout,scope,ledger,limitsText])node.textContent='';
  }
- function inspect(index,open=true){
-  const field=snapshot?.fields.find(f=>f.id===fields.value);if(!field||index<0||index>=field.values.length)return;
-  selected=index;samples.value=String(index);const sample=sampleSurfaceField(field,field.positionsM[index]);
+ function inspect(index:number,open=true){
+  const field=snapshot?.fields.find(f=>f.id===fields.value);if(!snapshot||!field||index<0||index>=field.values.length)return;
+  // The coordinate is an accepted field sample, so it is inside validated support.
+  selected=index;samples.value=String(index);const sample=sampleSurfaceField(field,field.positionsM[index])!;
   readout.textContent=`${number(sample.positionM)} m · ${number(sample.value)} ${sample.unit}`;
   if(sample.boundsM)readout.textContent+=` · [${sample.boundsM.map(number).join(', ')}] m`;
-  clearSelection();const edges=surfaceEdges(field),points=[];
-  const segment=(a,b)=>points.push(...a,...b);
-  const loop=vertices=>vertices.forEach((a,i)=>segment(a,vertices[(i+1)%vertices.length]));
+  clearSelection();const edges=surfaceEdges(field),points:number[]=[];
+  const segment=(a:readonly number[],b:readonly number[])=>points.push(...a,...b);
+  const loop=(vertices:readonly (readonly number[])[])=>vertices.forEach((a,i)=>segment(a,vertices[(i+1)%vertices.length]));
   if(field.coordinate==='depth'){
-   const r=Math.sqrt(snapshot.domain.beamAreaM2/Math.PI);
+   const r=Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI);
    loop([[-r,0,edges[index]],[r,0,edges[index]],[r,0,edges[index+1]],[-r,0,edges[index+1]]]);
-   const strip=expanded?.children[index];
+   const strip=expanded?.children[index] as THREE.Mesh|undefined;
    if(strip){
-    strip.geometry.computeBoundingBox();const box=strip.geometry.boundingBox.clone().translate(strip.position),corners=[];
+    strip.geometry.computeBoundingBox();const box=strip.geometry.boundingBox!.clone().translate(strip.position),corners:number[][]=[];
     for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])corners.push([x,y,z]);
     for(let i=0;i<8;i++)for(const bit of [1,2,4])if(!(i&bit))segment(corners[i],corners[i|bit]);
    }
   }else for(const radius of [edges[index],edges[index+1]])if(radius>0){
-   loop(Array.from({length:96},(_,i)=>[radius*Math.cos(i*Math.PI/48),radius*Math.sin(i*Math.PI/48),engineering.domain.lengthM/2]));
+   loop(Array.from({length:96},(_,i)=>[radius*Math.cos(i*Math.PI/48),radius*Math.sin(i*Math.PI/48),engineering!.domain.lengthM/2]));
   }
   selection=new THREE.LineSegments(new THREE.BufferGeometry().setAttribute('position',new THREE.Float32BufferAttribute(points,3)),
    new THREE.LineBasicMaterial({color:0xf4e7d0,transparent:true,opacity:.95,depthTest:false,depthWrite:false}));
@@ -107,9 +115,10 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
  }
  function draw(){
   clearOverlay();if(!snapshot||!engineering)return;
-  const field=snapshot.fields.find(f=>f.id===fields.value),show=view.value;
+  const current=snapshot;
+  const field=current.fields.find(f=>f.id===fields.value),show=view.value as SurfaceView;
   fields.hidden=samples.hidden=show!=='state'||!field;
-  overlay=buildSurfaceOverlay(snapshot,fields.value,show,{sectionZM:engineering.domain.lengthM/2});group.add(overlay);
+  overlay=buildSurfaceOverlay(snapshot,fields.value,show,{sectionZM:engineering!.domain.lengthM/2});group.add(overlay);
   legend.textContent='';scope.textContent='';readout.textContent='';
   if(show==='state'&&field){
    legend.textContent=`${number(field.domain[0])} – ${number(field.domain[1])} ${field.unit}`;scope.textContent=field.scope;
@@ -119,13 +128,13 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
    // Separate film/backing microscope strips: each region expands depth independently.
    // The actual hardware and physical section above stay at true SI scale.
    if(field.coordinate==='depth'){
-    const r=Math.sqrt(snapshot.domain.beamAreaM2/Math.PI),lo=field.boundsM[0],hi=field.boundsM.at(-1),width=r*2;
-    const inspectionY=new THREE.Box3().setFromObject(engineering.group).max.y+r*.5;
+    const r=Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI),lo=field.boundsM![0],hi=field.boundsM!.at(-1)!,width=r*2;
+    const inspectionY=new THREE.Box3().setFromObject(engineering!.group).max.y+r*.5;
     expanded=new THREE.Group();expanded.name=`Depth microscope: ${field.region}`;
     field.values.forEach((value,index)=>{
-     const a=(field.boundsM[index]-lo)/(hi-lo),b=(field.boundsM[index+1]-lo)/(hi-lo);
+     const a=(field.boundsM![index]-lo)/(hi-lo),b=(field.boundsM![index+1]-lo)/(hi-lo);
      const mesh=new THREE.Mesh(new THREE.BoxGeometry(width*(b-a)*.98,r*.25,r*.05),new THREE.MeshBasicMaterial({color:surfaceColour(value,field.domain)}));
-     mesh.position.set(width*((a+b)/2-.5),inspectionY,0);mesh.userData={fieldId:field.id,sampleIndex:index,componentId:field.region==='film'?'target':'substrate',expandedDepth:true};expanded.add(mesh);
+     mesh.position.set(width*((a+b)/2-.5),inspectionY,0);mesh.userData={fieldId:field.id,sampleIndex:index,componentId:field.region==='film'?'target':'substrate',expandedDepth:true};expanded!.add(mesh);
     });group.add(expanded);
     scope.textContent+=` Depth microscope ×${number(width/(hi-lo))}; ${field.region} only. Hardware is true scale.`;
    }
@@ -137,7 +146,7 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
   render();
  }
  fields.addEventListener('change',()=>{selected=0;draw();});view.addEventListener('change',draw);samples.addEventListener('change',()=>inspect(Number(samples.value)));
- return {group,panel,clear,get representation(){return {layer:view.value,numerical:Boolean(overlay?.children.length&&view.value!=='hardware')};},update(packet,settings){
+ return {group,panel,clear,get representation(){return {layer:view.value,numerical:Boolean(overlay?.children.length&&view.value!=='hardware')};},update(packet:SurfaceState|null|undefined,settings:SurfaceSettings={}){
   if(packet?.status!=='ready'){clear();if(packet){panel.hidden=false;summary.textContent=packet.status==='pending'?'Updating…':'No surface state';scope.textContent=packet.reason;}render();return false;}
   snapshot=packet.snapshot;const d=snapshot.domain;
   const options={mode:snapshot.model==='marathon'||snapshot.model==='coupled-target'?'beam-target':snapshot.model,...d,
@@ -145,7 +154,7 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
   const nextKey=JSON.stringify(options),changed=!engineering||nextKey!==geometryKey;
   if(changed){clearOverlay();engineering?.dispose();engineering=null;
    try{engineering=buildEngineeringGeometry(options);group.add(engineering.group);geometryKey=nextKey;}
-   catch(error){clear();panel.hidden=false;summary.textContent='Geometry outside display domain';scope.textContent=error.message;return false;}
+   catch(error){clear();panel.hidden=false;summary.textContent='Geometry outside display domain';scope.textContent=(error as Error).message;return false;}
   }
   panel.hidden=false;view.hidden=false;summary.textContent=`Surfaces${snapshot.timeS===null?'':` · ${number(snapshot.timeS)} s`}`;
   const previous=fields.value;fields.replaceChildren();
@@ -156,13 +165,13 @@ export function createSurfaceLayer(frame,{render=()=>{},onSelect=()=>{}}={}){
    ...snapshot.scalars.map(s=>`${s.label??s.id.replaceAll('-',' ')} ${number(s.value)} ${s.unit} (whole assembly)`)].join(' · ');
   limitsText.textContent=[...snapshot.unsupported,d.lengthM===undefined&&d.kind==='cylinder'?'Axial construction length 2.8 m is illustrative; this solver resolves radius only.':'','Windings, electrodes, ports and cooling fittings are illustrative construction; field realization, stress and coil current are not solved.'].filter(Boolean).join(' ');
   draw();return changed;
- },pick(hit){
-  const sample=hit?.object.userData.sampleIndex??(hit?.face&&hit.object.geometry.getAttribute('sampleIndex')?.getX(hit.face.a));
-  if(Number.isInteger(sample)){inspect(sample);const id=hit.object.userData.componentId;if(id)onSelect(id);return true;}
-  const eventIndex=hit?.object.userData.impactIndices?.[hit.index];
-  if(Number.isInteger(eventIndex)){
+ },pick(hit:THREE.Intersection|undefined){
+  const sample=hit?.object.userData.sampleIndex??(hit?.face&&(hit.object as THREE.Mesh).geometry.getAttribute('sampleIndex')?.getX(hit.face.a));
+  if(hit&&typeof sample==='number'&&Number.isInteger(sample)){inspect(sample);const id=hit.object.userData.componentId;if(id)onSelect(id);return true;}
+  const eventIndex=hit?.object.userData.impactIndices?.[hit.index!];
+  if(snapshot&&typeof eventIndex==='number'&&Number.isInteger(eventIndex)){
    const e=snapshot.impacts[eventIndex];panel.open=true;
-   readout.textContent=`Species ${e.speciesIndex+1} · ${e.destination} · ${number(e.timeS)} s · ${number(e.kineticEV)} eV · ${e.positionM.map(number).join(', ')} m`;render();return true;
+   readout.textContent=`Species ${e.speciesIndex+1} · ${e.destination} · ${number(e.timeS)} s · ${number(e.kineticEV!)} eV · ${e.positionM!.map(number).join(', ')} m`;render();return true;
   }return false;
  },dispose(){clear();group.removeFromParent();panel.parentNode?.removeChild(panel);}};
 }
