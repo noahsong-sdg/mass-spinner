@@ -96,6 +96,7 @@ test('equilibrium import samples the visible playback state even when the time-h
  const state=sampleFuelTransport(result.transport,time);sample.click();
  close(Number(f.node('equilibrium-edgeSpeedMS').value),state.neutralRadS*result.config.radiusM);
  assert.ok(Number(f.node('equilibrium-edgeSpeedMS').value)>0,'must not import the cached t=0 state');
+ assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true','sampling must not pause playback');
  assert.equal(Number(f.node('fuel-motion-time').value),time);assert.equal(f.requests.length,count,'sampling must neither pause/rerun nor replace the trajectory');
 });
 

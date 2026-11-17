@@ -54,6 +54,7 @@ function fixture(t:any,learning=false){
 
 test('prescribed calculator is lazy and can run before any accepted trajectory',t=>{
  const f=fixture(t);
+ assert.equal(f.node('equilibrium-pair').getAttribute('aria-label'),'Mixture','option text must not enter the accessible field name');
  assert.equal(f.panel.open,false);assert.equal(f.panel.querySelectorAll('svg').length,0);
  assert.equal(f.sample().disabled,true);assert.equal(f.save().disabled,true);
  f.open();assert.equal(f.panel.querySelectorAll('svg').length,2);assert.equal(f.save().disabled,false);

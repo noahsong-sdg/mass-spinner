@@ -12,7 +12,7 @@ export function createEquilibriumCalculator({document:doc,host,sampleState=(_res
  function input(parent,key,label,value,min,max){
   const wrap=el('label',label),n=el('input');n.type='number';n.id=`equilibrium-${key}`;n.value=value;n.min=min;n.max=max;n.step='any';wrap.htmlFor=n.id;wrap.append(n);parent.append(wrap);fields.set(key,n);n.addEventListener('input',draw);return n;
  }
- const pairLabel=el('label','Mixture'),pair=el('select');pair.id='equilibrium-pair';pairLabel.htmlFor=pair.id;
+ const pairLabel=el('label','Mixture'),pair=el('select');pair.id='equilibrium-pair';pair.setAttribute('aria-label','Mixture');pairLabel.htmlFor=pair.id;
  for(const [key,value]of Object.entries(FUEL_PAIRS)){const o=el('option',value.label);o.value=key;pair.append(o);}
  pairLabel.append(pair);extra.append(pairLabel);
  input(basic,'edgeSpeedMS','Gas edge speed (m/s)',1000,0,200000);input(basic,'temperatureK','Temperature (K)',500,100,10000);
