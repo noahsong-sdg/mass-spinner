@@ -1,0 +1,34 @@
+name: Toolchain refresh
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/stack-modernization]
+    paths: [.github/workflows/toolchain-refresh.yml]
+permissions:
+  contents: read
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Resolve reviewed packages in isolation
+        run: |
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 sh -eu -c '
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+            npm ci --ignore-scripts --no-audit --no-fund
+            mkdir -p toolchain-report
+            cp package-lock.json toolchain-report/
+            npm audit --json > toolchain-report/npm-audit.json || test "$?" = 1
+            npm run typecheck > toolchain-report/typecheck.log 2>&1 || touch toolchain-report/typecheck-failed
+            if test -f tsconfig.tooling.json; then node node_modules/@typescript/native/bin/tsc --noEmit -p tsconfig.tooling.json > toolchain-report/tooling-types.log 2>&1 || touch toolchain-report/tooling-types-failed; fi
+            if test -f eslint.config.mjs; then npm run lint > toolchain-report/lint.log 2>&1 || touch toolchain-report/lint-failed; fi
+          '
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: toolchain-report
+          path: toolchain-report/
+          if-no-files-found: error
+          retention-days: 3
