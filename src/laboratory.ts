@@ -7,7 +7,6 @@ export interface PlotCurve {
  label: string; x: readonly number[]; y: readonly (number | null)[]; xLabel: string; yLabel: string;
  low?: readonly (number | null)[]; high?: readonly (number | null)[]; xDomain?: readonly [number, number]; yDomain?: readonly [number, number];
  selectedX?: number; equalAspect?: boolean; color?: string; dash?: string; muted?: boolean;
- [metadata: string]: unknown;
 }
 export interface PlotOptions {onSelect?: (x: number) => void; announce?: boolean}
 export interface PlotController {setCursor(value: number | undefined): void}
