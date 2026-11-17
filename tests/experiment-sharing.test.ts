@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {setupExperience} from '../src/experience-ui.js';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
+import {setupWorkspace} from '../src/workspace-ui.js';
 import {simulateFuelCentrifuge} from '../src/fuel-centrifuge.js';
 import {simulateFuelOperation} from '../src/fuel-operation.js';
 import {sampleFuelTransport} from '../src/fuel-transport.js';
@@ -33,7 +34,11 @@ function fixture(t:any){
  const fuel=setupFuelCentrifuge({document:doc,loadGraphics:async()=>graphics,request:async(r:any)=>{
   const rotor=simulateFuelCentrifuge(r.config,r.operation?.events);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};
  }});
- const ui=setupExperience({fuelCentrifuge:fuel,selectMode(){},invalidate(){},showView(){},showResearch(){},onLevelChange:(level:string)=>fuel.setActive(level==='2')});
+ // Match main: the workspace creates the apparatus selector before experience
+ // captures defaults and wires sharing. Static index.html does not contain it.
+ const workspace=setupWorkspace({document:doc,storage:null,matchMedia:()=>({matches:false,addEventListener(){}}),
+  onContextChange:({level,marathon}:any)=>fuel.setActive(level==='2'&&marathon==='centrifuge')});
+ const ui=setupExperience({fuelCentrifuge:fuel,selectMode(){},invalidate(){},showView(){},showResearch(){},onLevelChange:(level:string)=>workspace.setLevel(level)});
  t.after(()=>{ui.dispose();fuel.dispose();dom.window.close();});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:number|string)=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event('input',{bubbles:true}));};
