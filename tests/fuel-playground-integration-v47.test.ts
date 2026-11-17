@@ -125,8 +125,10 @@ test('reading links use accepted physics results and focus the real collision, d
  const graph=f.ui.nodes.plots.querySelector('svg')!;
  assert.equal(f.window.document.activeElement,graph,'collection shortcut focuses the diagnostic, not the setup slider');
  const accepted=f.ui.latest.result,originalCut=f.node('fuel-cutFraction').value;
+ graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/innerLightPurity: 0, —.*lightRecovery: 0, 0/);
  graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
- assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/lightRecovery: 1, 1/);
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/lightRecovery: 1, 1.*outerHeavyPurity: 1, —/);
  assert.equal(f.ui.latest.result,accepted);assert.equal(f.node('fuel-cutFraction').value,originalCut);
  close(Number(f.node('fuel-motion-time').value),.37);
  send('collection');close(Number(f.node('fuel-motion-time').value),Number(f.node('fuel-motion-time').max));
