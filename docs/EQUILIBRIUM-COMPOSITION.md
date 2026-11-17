@@ -6,7 +6,7 @@ Open **Plots → Equilibrium**. Set gas edge speed and temperature, then move th
 
 Two neutral species, rigid rotation at angular speed Ω, uniform temperature T, a cylinder of radius R and length L, total neutral inventory N, and its light-species number fraction x. Gas speed v at R specifies Ω = v/R; this is not the metal vessel’s speed. Near-wall shear is not resolved. Inventory stays fixed when temperature changes. Gas-phase existence and discharge sustainment are assumed, not solved.
 
-D and T denote atoms; D₂ denotes a molecule counted as one gas particle. Molecular recovery and number purity are not automatically deuterium-nuclei fractions or mass purity. The default lithium case is a prescribed all-gas reference, not a prediction that this inventory remains vapor at 500 K.
+D and T are atoms; D₂ is one gas particle containing two deuterium nuclei. In He/D₂, molecular and deuterium-nuclei recovery coincide; gas-particle purity generally differs from nuclei or mass purity. The default lithium case is a prescribed all-gas reference, not a prediction that this inventory remains vapor at 500 K.
 
 ## Why does composition vary?
 
