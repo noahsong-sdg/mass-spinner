@@ -60,3 +60,13 @@ test('all six replay components have distinct plotted and legend styles',async t
   assert.deepEqual(legends.map(n=>`${n.attributes.stroke}|${n.attributes['stroke-dasharray']??''}`),expected);
  }
 });
+
+test('malformed saved-moment arrays clear previously displayed replay data',async t=>{
+ const get=dom(t),data=packet();assert.ok(await setupResearchViewer(async()=>({ok:true,json:async()=>data})));
+ const malformed={...data,cases:[{...data.cases[0],states:[{...data.cases[0].states[0],means:[null]}]}]};
+ assert.equal(await setupResearchViewer(async()=>({ok:true,json:async()=>malformed})),null);
+ assert.match(get('replay-status').textContent,/Unsupported recording packet/);
+ assert.equal(get('replay-case').disabled,true);assert.equal(get('replay-time').disabled,true);
+ assert.equal(get('replay-time-value').textContent,'—');assert.equal(get('replay-scale').textContent,'');
+ assert.equal(get('replay-tensors').children.length,0);assert.equal(get('replay-plots').children.length,0);
+});

@@ -40,6 +40,14 @@ test('exact saved state selection refuses stale schema and unsaved time reconstr
  data.schemaVersion='moments-only-v0';assert.throws(()=>validateDistributionPacket(data),/Unsupported/);
  const invalid=load();invalid.cases[0].states[0].species[0].axes[0].density[0]=-1;assert.throws(()=>validateDistributionPacket(invalid),/marginal/);
 });
+test('unknown distribution JSON rejects malformed arrays before exposing archived evidence',()=>{
+ const packet=validateDistributionPacket(load()),group=packet.refinements[0],record=group.records[0];
+ for(const malformed of [null,{},
+  {...packet,refinements:[{...group,records:[{...record,species:[null]}]}]},
+  {...packet,cases:packet.cases.map(c=>({...c,states:c.states.map(s=>({...s,species:s.species.map(p=>({...p,axes:null}))}))}))},
+ ])assert.throws(()=>validateDistributionPacket(malformed),/Unsupported recorded distribution packet/);
+ assert.equal(validateDistributionPacket(packet),packet,'validation preserves original arrays and archived decisions');
+});
 test('entropy curves use archived physical H, expose uncertainty and retain selected saved time',()=>{
  const packet=load(),c=packet.cases[0],value=distributionCurves(packet,c.id,20,1),curves=value.curves;
  assert.deepEqual(curves[0].y,c.states[20].species[0].axes[1].density);
