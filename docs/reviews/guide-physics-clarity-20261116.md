@@ -7,21 +7,21 @@ It does not certify experimental accuracy.
 
 ## Findings and corrections
 
-| Problem | Cause | Correction |
-|---|---|---|
-| Gas “wall speed” suggests a spinning vessel | Rigid-reference edge speed was undefined | Define ΩR as gas speed; stationary-wall shear layer is unresolved |
-| Collision slider cannot be related to Γ | Equation uses friction, UI uses a rate | State Γ = ℐᵢνᵢₙ and wall torque = νwall Lneutral; give units and expected lag response |
-| Drive schematic disagrees with 3D current direction | Both sign conventions were individually valid | Match inward J and counterclockwise J×B; annotate the annular radii |
-| Power equations lead to energy plots | Instantaneous W and accumulated J were not distinguished | Explain height versus slope and separate the Ohmic readout |
-| Redistribution work is unexplained | Variable inertia changes kinetic energy even at fixed L | Explain signed thermal deposition as a reduced closure, not resolved fluid work |
-| Continuous budget appears to be the discrete ledger | Numerical damping is an additional discrete energy deficit | State that it is excluded from heat and should shrink under refinement |
-| Current edits and other edits appear equivalent | Current inserts an intervention after t>0; setup edits restart | Explain New run, replayed history and equal-time comparisons |
-| Radius probes silently jump to the endpoint | All guide composition actions shared endpoint() | Preserve selected time for probes/comparisons; explicitly label endpoint shortcuts |
-| Collection exercise restarts the physical experiment | Guide focused a setup slider handled by generic invalidation | Focus the existing paused diagnostic cut curve; disclose setup-slider reset behavior |
-| Empty-cut purity shows a neighboring radius's value | Chart adapter dropped nulls; scalar readout also skipped undefined y before finding nearest x | Preserve null gaps in the native adapter, select radius first and display — without borrowing another sample |
-| Enrichment changes are difficult to see | Light-only references used a 0–100% axis | Use explicitly labeled zoomed percentage axes and show feed; keep full two-species axes |
-| Standalone Pin A silently does nothing | Export becomes ready before comparison controls | Wait for the native Pin A readiness signal as well as the accepted result |
-| Momentum/inertia claims lack their actual plots | Guide action list omitted existing diagnostics | Link native angular momentum, gas inertia, species density and run duration |
+| Problem | Cause: technical and physical meaning | Correction | Why this fix |
+|---|---|---|---|
+| Gas “wall speed” suggests a spinning vessel | Rigid-reference edge speed was undefined | Define ΩR as gas speed; stationary-wall shear layer is unresolved | Clarify the existing reference; a moving-vessel depiction would teach the wrong machine. |
+| Collision slider cannot be related to Γ | Equation uses friction, UI uses a rate | State Γ = ℐᵢνᵢₙ and wall torque = νwall Lneutral; give units and expected lag response | Expose the implemented mapping rather than imply a new first-principles collision model. |
+| Drive schematic disagrees with 3D current direction | Both sign conventions were individually valid | Match inward J and counterclockwise J×B; annotate the annular radii | Use one consistent convention instead of making a beginner reconcile opposite arrows. |
+| Power equations lead to energy plots | Instantaneous W and accumulated J were not distinguished | Explain height versus slope and separate the Ohmic readout | Bridge the existing ledger units without adding another competing plot. |
+| Redistribution work is unexplained | Variable inertia changes kinetic energy even at fixed L | Explain signed thermal deposition as a reduced closure, not resolved fluid work | Disclose the closure rather than present bookkeeping as resolved fluid physics. |
+| Continuous budget appears to be the discrete ledger | Numerical damping is an additional discrete energy deficit | State that it is excluded from heat and should shrink under refinement | Keep numerical loss visible rather than hiding it in physical heating. |
+| Current edits and other edits appear equivalent | Current inserts an intervention after t>0; setup edits restart | Explain New run, replayed history and equal-time comparisons | Preserve native intervention behavior and teach controlled comparisons instead of changing experiment history. |
+| Radius probes silently jump to the endpoint | All guide composition actions shared endpoint() | Preserve selected time for probes/comparisons; explicitly label endpoint shortcuts | Reuse the native clock; only explicitly named endpoint actions should seek to the end. |
+| Collection exercise restarts the physical experiment | Guide focused a setup slider handled by generic invalidation | Focus the existing paused diagnostic cut curve; disclose setup-slider reset behavior | Reuse an inventory diagnostic instead of mutating accepted results, continuation state and provenance. |
+| Empty-cut purity shows a neighboring radius's value | Chart adapter dropped nulls; scalar readout also skipped undefined y before finding nearest x | Preserve null gaps in the native adapter, select radius first and display — without borrowing another sample | Undefined means no denominator; neither zero nor a neighboring radius is a valid replacement. |
+| Enrichment changes are difficult to see | Light-only references used a 0–100% axis | Use explicitly labeled zoomed percentage axes and show feed; keep full two-species axes | Show small changes with explicit units and bounded axes rather than imply a large absolute enrichment. |
+| Standalone Pin A silently does nothing | Export becomes ready before comparison controls | Wait for the native Pin A readiness signal as well as the accepted result | Observe actual readiness instead of using a guessed delay or claiming a successful pin. |
+| Momentum/inertia claims lack their actual plots | Guide action list omitted existing diagnostics | Link native angular momentum, gas inertia, species density and run duration | Reuse existing diagnostics rather than create duplicate calculations or panels. |
 
 The collection probe changes neither setup nor the selected 3D cut. Its graph
 readout reports radius-dependent purity and recovery for the same inventory.
@@ -93,4 +93,40 @@ Evidence: [live qualification](../LIVE-MODEL-QUALIFICATION.md),
 Regression coverage checks preserved probe time, paused cut focus, unchanged
 accepted inputs/worker request count, native momentum/inertia/density links,
 empty/full cut readouts, feed references, zoom disclosure and rendered math.
-Execution and deployed browser receipts are appended after the final gate.
+The final execution and deployed-browser receipts follow.
+
+
+### Final receipt
+
+- Runtime source: `ee8a3da26c215f19e40bee72534024553d4c0e9d`.
+- [Isolated verification run 43993141439](https://github.com/noahsong-sdg/mass-spinner/actions/runs/43993141439): all gates passed. Focused batches passed 39, 24 and 29 tests; the full TypeScript suite passed **1,405/1,405**. Python suites passed **17 + 3** tests.
+- Required final commands: `npm run typecheck`, `npm run build`, `npm run check:site`, `npm run check:assets` all passed. The workflow retains exact commands and logs for all test batches.
+- Deployment: `88f82153-7436-4335-8e70-007531cef6b3`, using the exact verified-site artifact from that run.
+- Browser loaded `/assets/main-DyFM8osW.js`, matching that artifact. Verified with the live in-app browser, without bypassing policy.
+
+Live checks covered all physics-guide action kinds: current, collision rate,
+wall drag, thermal controls, diffusivity and duration focus the native controls;
+composition/axis/wall/density, momentum/inertia, mechanical energy, temperature
+and reference comparisons open the promised native diagnostics. Both temperature
+and rotation reference curves retain the sampled state and clearly disclose the
+zoomed percentage axis. All 15 equations render with MathML and no KaTeX errors.
+Scene/drive and the walkthrough's coils inspection work. Replay starts playback;
+explicit endpoint links select the end. The standalone startup Pin A link now
+produces an A summary and enables Clear; it no longer silently drops the action.
+
+At physical time **0.99 s**, collection probing paused playback without changing
+the clock. Home reported `innerLightPurity: 0, —` and `lightRecovery: 0, 0`.
+End reported `innerLightPurity: 1, 0.0759`, `lightRecovery: 1, 1`, and
+`outerHeavyPurity: 1, —`. These checks crossed the real adapter, not a synthetic
+renderer-only fixture. The earlier renderer-only check had missed its null filter;
+the retained regression now exercises the complete path.
+
+Mobile verification at **390 × 844** confirmed readable chapter navigation,
+control-sheet focus/return, the same cut readout at 0.99 s, and no page-wide
+horizontal overflow (390 px scroll width). Escape closed the embedded guide and
+returned focus to Start here. The viewport override was reset. Browser error logs
+were empty. Desktop/mobile screenshots were retained locally for the change.
+
+No new experimental solver campaign ran in this guide audit. Historical numerical
+and experimental receipts above retain their stated scope; no gate was relaxed.
+This receipt-only update does not change the deployed runtime artifact.
