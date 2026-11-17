@@ -1,11 +1,15 @@
-import {DEFAULT_SPATIAL_EXPERIMENT,validateFuelSpatialExperiment} from './fuel-spatial-experiment.ts';
-import {requestSimulationWithIdentity} from './worker-client.ts';
-import {producingCode} from './producing-code.ts';
+import {DEFAULT_SPATIAL_EXPERIMENT,validateFuelSpatialExperiment,type FuelSpatialExperimentConfig,type simulateFuelSpatialExperiment} from './fuel-spatial-experiment.js';
+import {requestSimulationWithIdentity} from './worker-client.js';
+import {producingCode,type ProducingCodeIdentity} from './producing-code.js';
 import {renderPlots} from './laboratory.js';
 
+type SpatialResult = ReturnType<typeof simulateFuelSpatialExperiment>;
+type SpatialExport = {schemaVersion: 1;kind: 'fuel-spatial-experiment-export';result: SpatialResult;producingCode: ProducingCodeIdentity};
+type SpatialControlKey = 'contactVoltageV'|'magneticT'|'numberDensityM3'|'temperatureK'|'durationS';
+
 /** Optional common-fluid experiment; its controls never modify the live rotors. */
-export function mountFuelSpatialExperiment(host,{request=requestSimulationWithIdentity}={}){
- const doc=host.ownerDocument,el=(tag,text)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
+export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSimulationWithIdentity}: {request?: typeof requestSimulationWithIdentity}={}){
+ const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
  const detail=el('details');detail.className='fuel-spatial-experiment';
  detail.append(el('summary','Spatial rotation · research experiment'));
  detail.append(el('p','Unqualified closed argon experiment · local rotation, species transport and gas/liner heat. This optional worker uses the existing spatial backend; it does not replace the live two-rotor model.'));
@@ -13,23 +17,23 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
  detail.append(el('p',`Fixed exploratory grid: ${DEFAULT_SPATIAL_EXPERIMENT.radialCells} radial × ${DEFAULT_SPATIAL_EXPERIMENT.axialCells} axial electrical cells, ${DEFAULT_SPATIAL_EXPERIMENT.steps} time steps. Positive plotted current flows conventionally out of the gas through the outer contact.`));
  detail.append(el('p','Numerical limits remain open: retained startup surface errors were 4.63712% in time and 2.88464% in space against 1%/2% targets. Those conditions differ from this short window; they do not qualify this trajectory. Density controls are exploration bounds, not validated continuum limits: low-density rarefaction can invalidate local viscosity, Fourier heat conduction and the gas–wall film. Joule heat goes directly into the common gas; its electron/heavy-particle partition is assumed. No electron energy, chemistry, axial shear, meridional hydrodynamics or feed/exhaust is solved.'));
  const controls=el('div');controls.className='fuel-spatial-controls';detail.append(controls);
- const inputs=new Map();
+ const inputs=new Map<SpatialControlKey,{input: HTMLInputElement;scale: number}>();
  for(const [key,label,unit,min,max,step,scale]of [
   ['contactVoltageV','Outer contact potential','V',-10,10,.1,1],
   ['magneticT','Axial magnetic field','T',0,1,.05,1],
   ['numberDensityM3','Initial argon number density','m⁻³',1e18,1e24,'any',1],
   ['temperatureK','Initial gas and liner temperature','K',300,1800,10,1],
   ['durationS','Experiment window','μs',.1,10,.1,1e6],
- ]){
+ ] as const){
   const labelNode=el('label',`${label} (${unit})`),input=el('input');
   input.type='number';input.id=`spatial-${key}`;labelNode.htmlFor=input.id;
-  input.min=min;input.max=max;input.step=step;input.value=DEFAULT_SPATIAL_EXPERIMENT[key]*scale;
+  input.min=String(min);input.max=String(max);input.step=String(step);input.value=String(DEFAULT_SPATIAL_EXPERIMENT[key]*scale);
   controls.append(labelNode,input);inputs.set(key,{input,scale});
  }
  const pulseLabel=el('label','Driven fraction of window'),pulse=el('select');
  pulse.id='spatial-drive-fraction';pulseLabel.htmlFor=pulse.id;
- for(const [value,label]of [[1,'Full window'],[.5,'First half, then shorted'],[0,'Grounded throughout']]){
-  const option=el('option',label);option.value=value;pulse.append(option);
+ for(const [value,label]of [[1,'Full window'],[.5,'First half, then shorted'],[0,'Grounded throughout']] as const){
+  const option=el('option',label);option.value=String(value);pulse.append(option);
  }
  pulse.value=String(DEFAULT_SPATIAL_EXPERIMENT.driveFraction);controls.append(pulseLabel,pulse);
  detail.append(el('p','Switching to zero voltage shorts the driven and grounded contacts; it does not model an open circuit or discharge extinction.'));
@@ -39,7 +43,7 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
  const plots=el('div');plots.className='live-plots';
  const identity=el('p');identity.className='fuel-spatial-identity';
  detail.append(run,cancel,download,status,identity,plots);host.append(detail);
- let revision=0,controller=null,accepted=null,disposed=false,exportURL=null,exportTimer;
+ let revision=0,controller: AbortController | null=null,accepted: SpatialExport | null=null,disposed=false,exportURL: string | null=null,exportTimer: ReturnType<typeof setTimeout> | undefined;
  const read=()=>validateFuelSpatialExperiment({...DEFAULT_SPATIAL_EXPERIMENT,
   ...Object.fromEntries([...inputs].map(([key,{input,scale}])=>[key,Number(input.value)/scale])),
   driveFraction:Number(pulse.value)});
@@ -52,11 +56,11 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
  const changed=()=>{invalidate();status.textContent='Inputs changed. Run again; previous results were cleared.';};
  for(const {input}of inputs.values())input.addEventListener('input',changed);
  pulse.addEventListener('change',changed);
- function checkedResult(result,config){
+ function checkedResult(result: SpatialResult,config: FuelSpatialExperimentConfig){
   if(result?.schemaVersion!==1||result.kind!=='spatial-argon-experiment'
    ||result.numericallyQualified!==false||result.experimentallyQualified!==false
    ||result.liveDefaultReplaced!==false
-   ||!Object.entries(config).every(([key,value])=>result.config?.[key]===value)
+   ||!Object.entries(config).every(([key,value])=>result.config?.[key as keyof FuelSpatialExperimentConfig]===value)
    ||!Array.isArray(result.snapshots)||result.snapshots.length<2)throw new Error('Unsupported spatial research result.');
   const history=result.snapshots;
   for(const [i,row]of history.entries()){
@@ -68,7 +72,7 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
     ||row.omegaRadS.some(v=>!Number.isFinite(v))||row.temperatureK.some(v=>!Number.isFinite(v)||v<=0))
     throw new Error('Incomplete or nonfinite spatial research trajectory.');
   }
-  if(history.at(-1).timeS!==config.durationS)throw new Error('Incomplete spatial research window.');
+  if(history.at(-1)!.timeS!==config.durationS)throw new Error('Incomplete spatial research window.');
   return result;
  }
  async function start(){
@@ -80,7 +84,7 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
    if(disposed||id!==revision)return;
    const source=producingCode(reply.producingCode);
    if(!source)throw new Error('Spatial research source identity is unavailable.');
-   const result=checkedResult(reply.result,config),last=result.snapshots.at(-1);
+   const result=checkedResult(reply.result,config),last=result.snapshots.at(-1)!;
    accepted={schemaVersion:1,kind:'fuel-spatial-experiment-export',result,producingCode:source};
    renderPlots(plots,[
     {label:'Endpoint local angular speed',x:last.radiusM.map(r=>r*100),y:last.omegaRadS,xLabel:'Radius (cm)',yLabel:'Common-fluid angular speed (rad/s)'},
@@ -90,7 +94,8 @@ export function mountFuelSpatialExperiment(host,{request=requestSimulationWithId
    identity.textContent=`Worker source SHA-256: ${source.sourceHash}`;download.disabled=false;
    status.textContent='Computed research trajectory · numerical and experimental accuracy unqualified. Lines join retained samples.';
   }catch(error){
-   if(!disposed&&id===revision){clear();status.textContent=error.name==='AbortError'?'Research calculation cancelled.':`Research calculation failed: ${error.message}`;}
+   const failure=error as Error;
+   if(!disposed&&id===revision){clear();status.textContent=failure.name==='AbortError'?'Research calculation cancelled.':`Research calculation failed: ${failure.message}`;}
   }finally{if(!disposed&&id===revision){controller=null;cancel.hidden=true;ready();}}
  }
  const cancelled=()=>{invalidate();status.textContent='Research calculation cancelled.';};

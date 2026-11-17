@@ -1,9 +1,9 @@
-import {loadRecordedArgonReference} from './argon-reference.ts';
+import {loadRecordedArgonReference,type RecordedArgonReference} from './argon-reference.js';
 import {renderPlots} from './laboratory.js';
 
 /** An inspectable offline reference, isolated from the live lithium controls. */
-export function mountArgonReference(host,{fetcher=fetch}={}){
- const doc=host.ownerDocument,el=(tag,text)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+export function mountArgonReference(host: HTMLElement,{fetcher=fetch}: {fetcher?: typeof fetch}={}){
+ const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  const detail=el('details');detail.className='argon-reference';detail.append(el('summary','Spatial argon reference'));
  const status=el('p','Recorded scikit-fem solution · not experimentally qualified. Open to load.');status.setAttribute('role','status');
  const label=el('label','Recorded condition'),select=el('select');select.id='argon-reference-case';label.htmlFor=select.id;select.disabled=true;
@@ -14,14 +14,15 @@ export function mountArgonReference(host,{fetcher=fetch}={}){
  const evidence=el('details');evidence.append(el('summary','Reference identity'));
  const link=el('a','Numerical protocol ↗');link.href='https://github.com/noahsong-sdg/mass-spinner/blob/main/NONRIGID-FLOW-V98.md';link.target='_blank';link.rel='noopener';
  evidence.append(link);detail.append(status,label,select,retry,scope,diagnostic,plot,evidence);host.append(detail);
- let data,pending,controller,disposed=false;
+ let data: RecordedArgonReference | undefined,pending: Promise<RecordedArgonReference | null> | undefined,controller: AbortController | undefined,disposed=false;
  const render=()=>{
   if(disposed||!data||!detail.open)return;
-  const [scenario,anode]=select.value.split('/'),rows=data.cases.filter(c=>c.scenario===scenario&&c.anodeCenterM===Number(anode)).sort((a,b)=>a.refinement-b.refinement);
-  renderPlots(plot,rows.map((c,i)=>({label:`Saved mesh refinement ${c.refinement}`,x:data.manifest.chordsM.map(r=>r*100),y:c.chordVelocityMS,
+  const current=data;
+  const [scenario,anode]=select.value.split('/'),rows=current.cases.filter(c=>c.scenario===scenario&&c.anodeCenterM===Number(anode)).sort((a,b)=>a.refinement-b.refinement);
+  renderPlots(plot,rows.map((c,i)=>({label:`Saved mesh refinement ${c.refinement}`,x:current.manifest.chordsM.map(r=>r*100),y:c.chordVelocityMS,
    xLabel:'Sightline offset (cm)',yLabel:'Uniform-emissivity apparent speed (m/s)',dash:['2 4','7 4',''][i]})));
  };
- const load=()=>{
+ const load=(): Promise<RecordedArgonReference | null>=>{
   if(disposed)return Promise.resolve(null);
   if(data){render();return Promise.resolve(data);}
   if(pending)return pending;
@@ -36,7 +37,8 @@ export function mountArgonReference(host,{fetcher=fetch}={}){
    for(const [name,value]of Object.entries(data.origin)){const p=el('p');p.append(el('span',`${name}: `),el('code',value));evidence.append(p);}
    render();return data;
   }).catch(error=>{
-   if(!disposed){status.textContent=`Reference unavailable: ${error.message}`;retry.hidden=false;select.disabled=true;renderPlots(plot,[]);}
+   const failure=error as Error;
+   if(!disposed){status.textContent=`Reference unavailable: ${failure.message}`;retry.hidden=false;select.disabled=true;renderPlots(plot,[]);}
    return null;
   }).finally(()=>{pending=undefined;controller=undefined;});
   return pending;

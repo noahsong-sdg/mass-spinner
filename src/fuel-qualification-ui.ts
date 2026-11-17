@@ -1,9 +1,9 @@
-import {fuelBenchmarkReport} from './fuel-benchmark.ts';
+import {fuelBenchmarkReport} from './fuel-benchmark.js';
 import {renderPlots} from './laboratory.js';
 
 /** Model-level evidence stays separate from the current, unmatched lithium scenario. */
-export function mountFuelQualification(host){
- const doc=host.ownerDocument,el=(tag,text)=>{const n=doc.createElement(tag);if(text)n.textContent=text;return n;};
+export function mountFuelQualification(host: HTMLElement){
+ const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text)n.textContent=text;return n;};
  const report=fuelBenchmarkReport(),section=el('section');section.className='fuel-qualification';
  section.setAttribute('aria-label','Live model qualification');
  section.append(el('h3','Experimental accuracy: unqualified'));
@@ -13,7 +13,7 @@ export function mountFuelQualification(host){
  const table=el('table'),caption=el('caption','20% per-signal compatibility screen'),head=el('tr');
  head.append(el('th','Observation ranges'),el('th','Any rigid speed?'));const thead=el('thead');thead.append(head);table.append(caption,thead);
  const tbody=el('tbody');
- for(const [key,label]of [['nominal','Nominal markers'],['digitization','Digitization boxes'],['bars','Published bars + radius boxes'],['combined','Bars + digitization sensitivity']]){
+ for(const [key,label]of [['nominal','Nominal markers'],['digitization','Digitization boxes'],['bars','Published bars + radius boxes'],['combined','Bars + digitization sensitivity']] as const){
   const row=el('tr'),result=report.cases[key];row.append(el('th',label),el('td',result.status==='incompatible'?'Excluded':'Not excluded'));tbody.append(row);
  }
  table.append(tbody);detail.append(table);
@@ -31,6 +31,6 @@ export function mountFuelQualification(host){
  const source=el('a','Original experiment ↗');source.href=report.source.url;source.target='_blank';source.rel='noopener';detail.append(source);
  const status=el('a','Qualification record ↗');status.href='https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/LIVE-MODEL-QUALIFICATION.md';status.target='_blank';status.rel='noopener';const record=el('p');record.append(status);detail.append(record);
  const identity=el('details');identity.append(el('summary','Source identity'),el('p',report.source.conditions),el('p',report.source.independence));
- for(const key of ['pdfSha256','cropSha256','extractionSha256']){const line=el('p');line.append(el('span',`${key}: `),el('code',report.source[key]));identity.append(line);}detail.append(identity);
+ for(const key of ['pdfSha256','cropSha256','extractionSha256'] as const){const line=el('p');line.append(el('span',`${key}: `),el('code',report.source[key]));identity.append(line);}detail.append(identity);
  host.prepend(section);return {report,dispose(){detail.removeEventListener('toggle',render);renderPlots(plot,[]);section.remove();}};
 }

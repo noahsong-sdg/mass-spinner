@@ -1,10 +1,10 @@
 /** Native JSON property semantics, with bounded pieces for accepted histories. */
-function* fuelExportParts(run){
- const property=(key,value)=>{
+function* fuelExportParts(run: Record<string, unknown>): Generator<string> {
+ const property=(key: string,value: unknown)=>{
   const text=JSON.stringify({[key]:value});
   return text==='{}'?null:text.slice(1,-1);
  };
- function* history(values){
+ function* history(values: readonly unknown[]): Generator<string> {
   yield '[';
   for(let i=0;i<values.length;i++){
    const key=String(i),entry=property(key,values[i]);
@@ -13,10 +13,10 @@ function* fuelExportParts(run){
   }
   yield ']';
  }
- function* record(value,path){
+ function* record(value: object,path: string): Generator<string> {
   yield '{';let first=true;
   for(const key of Object.keys(value)){
-   const field=value[key];let nested;
+   const field=(value as Record<string, unknown>)[key];let nested: Generator<string>;
    if(path==='transport'&&['checkpoints','snapshots'].includes(key)&&Array.isArray(field))nested=history(field);
    else if((path==='root'&&key==='result'||path==='result'&&key==='transport')&&field&&typeof field==='object'&&!Array.isArray(field))nested=record(field,key);
    else{
@@ -31,20 +31,20 @@ function* fuelExportParts(run){
 }
 
 /** Preserve the synchronous Interactive JSON download. */
-export function fuelExportBlob(run){
- const parts=[];
+export function fuelExportBlob(run: Record<string, unknown>){
+ const parts: Blob[]=[];
  for(const piece of fuelExportParts(run))parts.push(new Blob([piece]));
  return new Blob(parts,{type:'application/json'});
 }
 
 /** Compress refined histories directly; never retain their uncompressed bytes. */
-export async function fuelExportGzipBlob(run,{signal}={}){
+export async function fuelExportGzipBlob(run: Record<string, unknown>,{signal}: {signal?: AbortSignal}={}){
  signal?.throwIfAborted();
  const compression=new CompressionStream('gzip'),writer=compression.writable.getWriter(),reader=compression.readable.getReader();
- const parts=[],encoder=new TextEncoder();
+ const parts: Uint8Array<ArrayBuffer>[]=[],encoder=new TextEncoder();
  const abort=()=>{
-  void writer.abort(signal.reason).catch(()=>{});
-  void reader.cancel(signal.reason).catch(()=>{});
+  void writer.abort(signal?.reason).catch(()=>{});
+  void reader.cancel(signal?.reason).catch(()=>{});
  };
  signal?.addEventListener('abort',abort,{once:true});
  // Drain concurrently: awaiting all writes before reading can deadlock under
@@ -53,7 +53,7 @@ export async function fuelExportGzipBlob(run,{signal}={}){
   while(true){const {done,value}=await reader.read();if(done)return;parts.push(value);}
  })();
  void drained.catch(()=>{});
- const yieldTask=()=>new Promise(resolve=>setTimeout(resolve,0));
+ const yieldTask=()=>new Promise<void>(resolve=>setTimeout(resolve,0));
  try{
   await yieldTask();let batchBytes=0;
   for(const piece of fuelExportParts(run)){
