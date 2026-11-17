@@ -1,9 +1,51 @@
-import {validateFuelCurrentEvents} from './fuel-centrifuge.ts';
+import {validateFuelCurrentEvents} from './fuel-centrifuge.js';
+import type {ExperienceLevel} from './experience-state.js';
+import type {FuelCurrentEvent} from './fuel-operation.js';
+
+export type ScenarioValue = string | number | boolean;
+export type ScenarioControls = Record<string, ScenarioValue>;
+export type FuelRunState = {
+ initialCurrentA: number;
+ events: FuelCurrentEvent[];
+ mode: 'equilibrium' | 'transport' | 'spin' | 'flow';
+ timeS: number;
+};
+export type Scenario =
+ | {version: 2; level: ExperienceLevel; controls: ScenarioControls}
+ | {version: 3; level: '2'; controls: ScenarioControls; fuelRun: FuelRunState};
+/** Local edits may contain empty numeric inputs or a history not yet validated for sharing. */
+export type ScenarioDraft = {
+ version: 2 | 3;
+ level: ExperienceLevel;
+ controls: ScenarioControls;
+ fuelRun?: FuelRunState;
+};
+export type CaptureOptions = {validate?: boolean; fuelRun?: FuelRunState};
+export type RestoreOptions = {
+ includeModel?: boolean;
+ validateDomains?: boolean;
+ dispatchEvents?: boolean;
+ onDeferredError?: (message: string) => void;
+};
+type ScenarioControl = HTMLInputElement | HTMLSelectElement;
+type Selection = [ScenarioControl, ScenarioValue];
+function isRecord(value: unknown): value is Record<string, unknown> {
+ return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+function isLevel(value: unknown): value is ExperienceLevel {
+ return value === '1' || value === '2' || value === '3' || value === '4';
+}
+function isSelect(node: Element): node is HTMLSelectElement { return node.tagName === 'SELECT'; }
+function isInput(node: Element): node is HTMLInputElement { return node.tagName === 'INPUT'; }
+function isCurrentEvent(value: unknown): value is FuelCurrentEvent {
+ return isRecord(value) && Object.keys(value).sort().join() === 'currentA,timeS' &&
+  typeof value.timeS === 'number' && typeof value.currentA === 'number';
+}
 
 /** Shareable inputs and drive history, never raw solver results or executable settings. */
-const ids = text => text.split(/\s+/).filter(Boolean);
+const ids = (text: string) => text.split(/\s+/).filter(Boolean);
 const separator = ids(`system live-update field voltage energy parallel source-radius distribution axial-temperature particles resolution mass-a mass-b charge-a charge-b neutral-density neutral-cross-section neutral-mass rf-amplitude rf-frequency rf-handedness rotation ion-temperature electron-temperature axis-fraction radial-cut radial-resolution random-seed centrifuge-closure magnetic-boundary composition-boundary gaussian-field gaussian-width gaussian-density diffusion-closure study-batches scan-parameter scan-min scan-max scan-points`);
-const prefixed = (prefix, text) => ids(text).map(key => prefix + key);
+const prefixed = (prefix: string, text: string) => ids(text).map(key => prefix + key);
 const collector=ids('collector-inner-fraction collector-outer-fraction collector-surface');
 const model = [...separator,...collector,
  ...prefixed('h1-', `energy field pitch neutral-density radius length particles seed`),
@@ -20,98 +62,105 @@ const marathon = [
  ...prefixed('neutron-response-', `thickness rate`),
  ...prefixed('target-', `arealHeatCapacityJm2K heatTransferWM2K coolantK initialK cooldownS`),
  ...ids(`loading-replacement loading-tolerance implantation-reference-case finite-film-reference-case blanket-cooldown-hours blanket-isomer-fraction blanket-optical-depth material-geometry-mode material-number-density coating-deposition coating-erosion coating-incoming-t coating-incoming-d coating-temperature coating-duration`)];
-const levels = {'1':[...ids('field voltage energy mass-b'),...collector], '2':marathon, '3':model, '4':ids('replay-case replay-time')};
+const levels: Record<ExperienceLevel, string[]> = {'1':[...ids('field voltage energy mass-b'),...collector], '2':marathon, '3':model, '4':ids('replay-case replay-time')};
 const selectedTimes = new Set(['coupled-time', 'replay-time']);
 const maxLength = 24000;
 
-function known(level, id) { return levels[level]?.includes(id); }
-function control(document, id) {
+function known(level: ExperienceLevel, id: string) { return levels[level]?.includes(id); }
+function control(document: Document, id: string): ScenarioControl | null {
  const node=document.getElementById(id);
- return node && (node.tagName==='SELECT'||node.tagName==='INPUT'&&['range','number','checkbox'].includes(node.type)) ? node : null;
+ return node && (isSelect(node)||isInput(node)&&['range','number','checkbox'].includes(node.type)) ? node : null;
 }
-function accepts(node, value) {
- if(node.type==='checkbox')return typeof value==='boolean';
- if(node.tagName==='SELECT')return typeof value==='string'&&[...node.options].some(option=>option.value===value&&!option.disabled);
+function accepts(node: ScenarioControl, value: unknown) {
+ if(isInput(node)&&node.type==='checkbox')return typeof value==='boolean';
+ if(isSelect(node))return typeof value==='string'&&[...node.options].some(option=>option.value===value&&!option.disabled);
  if(typeof value!=='number'||!Number.isFinite(value))return false;
  if((node.dataset.integer==='true'||['charge-a','charge-b','random-seed','dw-seed','h1-particles','h1-seed'].includes(node.id))&&!Number.isInteger(value))return false;
  return (node.min===''||value>=Number(node.min))&&(node.max===''||value<=Number(node.max));
 }
-function dispatch(node) {
- const EventType=node.ownerDocument.defaultView.Event;
+function dispatch(node: ScenarioControl) {
+ const EventType=node.ownerDocument.defaultView!.Event;
  node.dispatchEvent(new EventType(node.tagName==='SELECT'||node.type==='checkbox'?'change':'input',{bubbles:true}));
 }
-function validateMask(document, controls){
+function validateMask(document: Document, controls: ScenarioControls){
  const [inner,outer]=collector;
  if(!Object.hasOwn(controls,inner)&&!Object.hasOwn(controls,outer))return;
  const lo=Number(controls[inner]??control(document,inner)?.value),hi=Number(controls[outer]??control(document,outer)?.value);
  if(!Number.isFinite(lo)||!Number.isFinite(hi)||lo>hi)throw new Error('An ordered collector aperture is required.');
 }
-function validateFuel(document, controls){
- const value=id=>controls[id]??control(document,id)?.value;
+function validateFuel(document: Document, controls: ScenarioControls){
+ const value=(id: string)=>controls[id]??control(document,id)?.value;
  if(!Object.keys(controls).some(id=>id.startsWith('fuel-')))return;
  if(Number(value('fuel-feedStage'))>Number(value('fuel-stages')))throw new Error('Stage feed must lie in the cascade.');
  const topic=value('fuel-plot');
- if(value('fuel-application')==='pump'&&['cut','cascade'].includes(topic)||value('fuel-pair')!=='lithium'&&topic==='lithium')throw new Error('Plot is unavailable for this centrifuge configuration.');
+ if(value('fuel-application')==='pump'&&(topic==='cut'||topic==='cascade')||value('fuel-pair')!=='lithium'&&topic==='lithium')throw new Error('Plot is unavailable for this centrifuge configuration.');
  if(value('fuel-pair')==='molecular'&&controls['fuel-thermal-enabled']===true)throw new Error('Atomic thermal model cannot be used with D₂.');
  if(controls['fuel-thermal-gasModel']==='spatial'&&(value('fuel-pair')==='molecular'||controls['fuel-thermal-enabled']!==true||controls['fuel-thermal-model']!=='spatial'))throw new Error('Spatial gas requires enabled atomic thermal evolution and a radial tungsten liner.');
  if(controls['fuel-thermal-resolution']==='refined'&&(value('fuel-pair')==='molecular'||controls['fuel-thermal-enabled']!==true||controls['fuel-thermal-model']!=='spatial'||controls['fuel-thermal-gasModel']!=='spatial'))throw new Error('Refined resolution requires enabled atomic spatial gas and a radial tungsten liner.');
 }
-export function captureScenario(document, level, {validate=true,fuelRun}={}) {
- const controls={};
+export function captureScenario(document: Document, level: ExperienceLevel, options: CaptureOptions & {validate: false}): ScenarioDraft;
+export function captureScenario(document: Document, level: ExperienceLevel, options?: CaptureOptions & {validate?: true}): Scenario;
+export function captureScenario(document: Document, level: ExperienceLevel, options: CaptureOptions): ScenarioDraft;
+export function captureScenario(document: Document, level: ExperienceLevel, {validate=true,fuelRun}: CaptureOptions={}): ScenarioDraft {
+ const controls: ScenarioControls={};
  for(const id of levels[level]??[]){
   const node=control(document,id);if(!node||(selectedTimes.has(id)||id==='replay-case')&&node.disabled)continue;
   if(node.disabled&&(id==='fuel-thermal-thicknessMm'||id==='fuel-thermal-gasConductivityWMK'||id==='fuel-thermal-resolution'||id==='fuel-thermal-wallCapacityJK'&&control(document,'fuel-thermal-model')?.value==='spatial'))continue;
-  const phase=id==='coupled-time'?node.closest('.coupled-target')?.dataset.status:null;
+  const phase=id==='coupled-time'?node.closest<HTMLElement>('.coupled-target')?.dataset.status:null;
   if(phase&&phase!=='accepted')continue;
-  const value=node.type==='checkbox'?node.checked:node.tagName==='SELECT'?node.value:node.value.trim()===''?(validate?NaN:''):Number(node.value);
-  if(validate&&(!accepts(node,value)||level==='1'&&id==='mass-b'&&value<20))throw new Error(`Invalid setting: ${id}`);
+  const value=isInput(node)&&node.type==='checkbox'?node.checked:isSelect(node)?node.value:node.value.trim()===''?(validate?NaN:''):Number(node.value);
+  if(validate&&(!accepts(node,value)||level==='1'&&id==='mass-b'&&Number(value)<20))throw new Error(`Invalid setting: ${id}`);
   controls[id]=value;
  }
  if(validate){validateMask(document,controls);validateFuel(document,controls);}
- const scenario=fuelRun?{version:3,level,controls,fuelRun:structuredClone(fuelRun)}:{version:2,level,controls};
+ const scenario: ScenarioDraft=fuelRun?{version:3,level,controls,fuelRun:structuredClone(fuelRun)}:{version:2,level,controls};
  if(validate)validateScenario(scenario);
  return scenario;
 }
-export function scenarioLink(href, scenario) {
+export function scenarioLink(href: string, scenario: unknown): string {
  validateScenario(scenario);
  const url=new URL(href);url.search='';url.hash='';
  url.searchParams.set('level',scenario.level);url.searchParams.set('v',String(scenario.version));url.searchParams.set('scenario',JSON.stringify(scenario));
  if(url.href.length>maxLength)throw new Error('Scenario link exceeds the supported size.');
  return url.href;
 }
-export function validateScenario(value) {
- if(!value||![2,3].includes(value.version)||!['1','2','3','4'].includes(value.level)||!value.controls||typeof value.controls!=='object'||Array.isArray(value.controls)||Object.keys(value).sort().join()!==(value.version===3?'controls,fuelRun,level,version':'controls,level,version'))throw new Error('Unsupported scenario.');
- const entries=Object.entries(value.controls);
- if(entries.length>200||entries.some(([id,v])=>!known(value.level,id)||!['string','number','boolean'].includes(typeof v)||typeof v==='string'&&v.length>160||typeof v==='number'&&!Number.isFinite(v)))throw new Error('Unsupported scenario settings.');
+export function validateScenario(value: unknown): asserts value is Scenario {
+ if(!isRecord(value)||(value.version!==2&&value.version!==3)||!isLevel(value.level)||!isRecord(value.controls)||Object.keys(value).sort().join()!==(value.version===3?'controls,fuelRun,level,version':'controls,level,version'))throw new Error('Unsupported scenario.');
+ const level=value.level,entries=Object.entries(value.controls);
+ if(entries.length>200||entries.some(([id,v])=>!known(level,id)||!['string','number','boolean'].includes(typeof v)||typeof v==='string'&&v.length>160||typeof v==='number'&&!Number.isFinite(v)))throw new Error('Unsupported scenario settings.');
  if(value.version===3){
   const run=value.fuelRun;
-  if(value.level!=='2'||value.controls['marathon-apparatus']!=='centrifuge'||!run||typeof run!=='object'||Array.isArray(run)||Object.keys(run).sort().join()!=='events,initialCurrentA,mode,timeS'||
-   !Number.isFinite(run.initialCurrentA)||run.initialCurrentA<0||run.initialCurrentA>.2||!Array.isArray(run.events)||run.events.some(event=>!event||typeof event!=='object'||Array.isArray(event)||Object.keys(event).sort().join()!=='currentA,timeS'))throw new Error('Unsupported centrifuge history.');
-  validateFuelCurrentEvents(run.events,value.controls['fuel-durationS']);
-  if(!['equilibrium','transport','spin','flow'].includes(run.mode)||!Number.isFinite(run.timeS)||run.timeS<0||run.timeS>value.controls['fuel-durationS'])throw new Error('Unsupported centrifuge selection.');
+  if(value.level!=='2'||value.controls['marathon-apparatus']!=='centrifuge'||!isRecord(run)||Object.keys(run).sort().join()!=='events,initialCurrentA,mode,timeS'||
+   typeof run.initialCurrentA!=='number'||!Number.isFinite(run.initialCurrentA)||run.initialCurrentA<0||run.initialCurrentA>.2||!Array.isArray(run.events))throw new Error('Unsupported centrifuge history.');
+  const events: unknown[]=run.events;
+  if(!events.every(isCurrentEvent))throw new Error('Unsupported centrifuge history.');
+  const duration=value.controls['fuel-durationS'];
+  if(typeof duration!=='number')throw new RangeError('durationS outside [0, Infinity].');
+  validateFuelCurrentEvents(events,duration);
+  if(!['equilibrium','transport','spin','flow'].some(mode=>mode===run.mode)||typeof run.timeS!=='number'||!Number.isFinite(run.timeS)||run.timeS<0||run.timeS>duration)throw new Error('Unsupported centrifuge selection.');
  }
 }
 /** v1 is deliberately left to readExperience, preserving its original bounds. */
-export function readScenario(search) {
+export function readScenario(search: string): {scenario: Scenario | null; invalid: boolean} {
  const query=new URLSearchParams(search);
- if(!['2','3'].includes(query.get('v'))&&!query.has('scenario'))return {scenario:null,invalid:query.has('v')&&query.get('v')!=='1'};
+ if(!['2','3'].includes(query.get('v')??'')&&!query.has('scenario'))return {scenario:null,invalid:query.has('v')&&query.get('v')!=='1'};
  try{
-  if(search.length>maxLength||!['2','3'].includes(query.get('v'))||query.getAll('scenario').length!==1||query.getAll('level').length!==1||query.getAll('v').length!==1)throw new Error();
-  const scenario=JSON.parse(query.get('scenario'));validateScenario(scenario);
+  if(search.length>maxLength||!['2','3'].includes(query.get('v')??'')||query.getAll('scenario').length!==1||query.getAll('level').length!==1||query.getAll('v').length!==1)throw new Error();
+  const scenario: unknown=JSON.parse(query.get('scenario')??'null');validateScenario(scenario);
   if(query.get('level')!==scenario.level||query.get('v')!==String(scenario.version))throw new Error();
   return {scenario,invalid:false};
  }catch{return {scenario:null,invalid:true};}
 }
 /** Model selection is handled by the caller first. Validate the whole batch before mutation. */
-export function restoreScenario(document, scenario, {includeModel=false, validateDomains=true, dispatchEvents=true, onDeferredError=()=>{}}={}) {
+export function restoreScenario(document: Document, scenario: unknown, {includeModel=false, validateDomains=true, dispatchEvents=true, onDeferredError=()=>{}}: RestoreOptions={}): () => void {
  validateScenario(scenario);
- const immediate=[],deferred=[];let acceptedSelection;
+ const immediate: Selection[]=[],deferred: Selection[]=[];let acceptedSelection: Selection | undefined;
  // Older setup links predate the thermal extension; they represent a bath run.
  if(scenario.level==='2'&&!Object.hasOwn(scenario.controls,'fuel-thermal-enabled')){
   const thermal=control(document,'fuel-thermal-enabled');if(thermal)immediate.push([thermal,false]);
  }
  // Pre-spatial thermal links describe a lumped liner, even in an already-open spatial workspace.
- if(scenario.level==='2')for(const [id,value]of [['fuel-thermal-model','lumped'],['fuel-thermal-thicknessMm',1],['fuel-thermal-gasModel','lumped'],['fuel-thermal-gasConductivityWMK',.1],['fuel-thermal-resolution','interactive']]){
+ if(scenario.level==='2')for(const [id,value]of [['fuel-thermal-model','lumped'],['fuel-thermal-thicknessMm',1],['fuel-thermal-gasModel','lumped'],['fuel-thermal-gasConductivityWMK',.1],['fuel-thermal-resolution','interactive']] satisfies [string, ScenarioValue][]){
   const node=control(document,id);if(node&&!Object.hasOwn(scenario.controls,id))immediate.push([node,value]);
  }
  // Pre-centrifuge v2 links describe the original beam-target playground.
@@ -134,33 +183,34 @@ export function restoreScenario(document, scenario, {includeModel=false, validat
    if(selectedTimes.has(id)&&(typeof value!=='number'||!Number.isInteger(value)||value<0||value>100000))throw new Error(`Invalid time: ${id}`);
    deferred.push([node,value]);continue;
   }
-  const valid=id==='fuel-feedStage'?Number.isInteger(value)&&value>=1&&value<=12:id==='fuel-plot'?typeof value==='string'&&[...node.options].some(option=>option.value===value):accepts(node,value);
-  if(validateDomains&&(!valid||scenario.level==='1'&&id==='mass-b'&&value<20))throw new Error(`Out-of-domain scenario setting: ${id}`);
+  const valid=id==='fuel-feedStage'?typeof value==='number'&&Number.isInteger(value)&&value>=1&&value<=12:id==='fuel-plot'?isSelect(node)&&typeof value==='string'&&[...node.options].some(option=>option.value===value):accepts(node,value);
+  if(validateDomains&&(!valid||scenario.level==='1'&&id==='mass-b'&&Number(value)<20))throw new Error(`Out-of-domain scenario setting: ${id}`);
   immediate.push([node,value]);
  }
  if(validateDomains){validateMask(document,scenario.controls);validateFuel(document,scenario.controls);}
- const apply=entries=>{
+ const apply=(entries: Selection[])=>{
   const stages=entries.find(([node])=>node.id==='fuel-stages');
-  if(stages&&control(document,'fuel-feedStage'))control(document,'fuel-feedStage').max=String(stages[1]);
+  const feed=control(document,'fuel-feedStage');
+  if(stages&&feed&&isInput(feed))feed.max=String(stages[1]);
   // Set every coordinate before notifications: linked listeners see a coherent configuration.
-  for(const [node,value]of entries)if(node.type==='checkbox')node.checked=value;else{
+  for(const [node,value]of entries)if(isInput(node)&&node.type==='checkbox')node.checked=Boolean(value);else{
    // Precision controllers retain their declared gesture step before hydration.
-   if(node.type==='range'&&!selectedTimes.has(node.id))node.step='any';
+   if(isInput(node)&&node.type==='range'&&!selectedTimes.has(node.id))node.step='any';
    node.value=String(value);
   }
   const priority=['material-geometry-mode','material-number-density','fusion-stopping-model'];
-  const rank=node=>priority.includes(node.id)?priority.indexOf(node.id):100;
+  const rank=(node: ScenarioControl)=>priority.includes(node.id)?priority.indexOf(node.id):100;
   if(dispatchEvents)for(const [node]of [...entries].sort(([a],[b])=>rank(a)-rank(b)))dispatch(node);
  };
  const accepted=()=>{
-  const [node,value]=acceptedSelection;
+  const [node,value]=acceptedSelection!;
   if(accepts(node,value))apply([[node,value]]);else onDeferredError(`Unavailable saved selection: ${node.id}`);
   node.removeEventListener('coupled-accepted',accepted);
  };
  // Install before configuration notifications can request/accept new work.
  if(acceptedSelection)acceptedSelection[0].addEventListener('coupled-accepted',accepted);
  apply(immediate);
- let observer;
+ let observer: MutationObserver | undefined;
  const remaining=[...deferred].sort(([a],[b])=>Number(a.id==='replay-time')-Number(b.id==='replay-time'));
  const ready=()=>{
   for(let i=0;i<remaining.length;){
@@ -174,7 +224,7 @@ export function restoreScenario(document, scenario, {includeModel=false, validat
   if(!remaining.length)observer?.disconnect();
  };
  if(remaining.length){
-  observer=new document.defaultView.MutationObserver(ready);
+  observer=new document.defaultView!.MutationObserver(ready);
   for(const [node]of remaining)observer.observe(node,{attributes:true,childList:true,subtree:true});
   ready();
  }
