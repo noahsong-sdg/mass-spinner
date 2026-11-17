@@ -1,0 +1,52 @@
+/** Static controls owned by index.html; dynamic text IDs use the HTMLElement overload. */
+export interface MainElements {
+ 'axial-temperature':HTMLInputElement;
+ 'axis-fraction':HTMLInputElement;
+ 'centrifuge-closure':HTMLSelectElement;
+ 'charge-a':HTMLInputElement;
+ 'charge-b':HTMLInputElement;
+ 'compare':HTMLButtonElement;
+ 'composition-boundary':HTMLSelectElement;
+ 'diffusion-closure':HTMLSelectElement;
+ 'distribution':HTMLSelectElement;
+ 'electron-temperature':HTMLInputElement;
+ 'energy':HTMLInputElement;
+ 'export':HTMLButtonElement;
+ 'field':HTMLInputElement;
+ 'gaussian-density':HTMLInputElement;
+ 'gaussian-field':HTMLInputElement;
+ 'gaussian-width':HTMLInputElement;
+ 'ion-temperature':HTMLInputElement;
+ 'lithium-preset':HTMLButtonElement;
+ 'live-update':HTMLInputElement;
+ 'magnetic-boundary':HTMLSelectElement;
+ 'mass-a':HTMLInputElement;
+ 'mass-b':HTMLInputElement;
+ 'neutral-cross-section':HTMLInputElement;
+ 'neutral-density':HTMLSelectElement;
+ 'neutral-mass':HTMLInputElement;
+ 'parallel':HTMLInputElement;
+ 'particles':HTMLSelectElement;
+ 'preset-control':HTMLButtonElement;
+ 'preset-separate':HTMLButtonElement;
+ 'radial-cut':HTMLInputElement;
+ 'radial-resolution':HTMLSelectElement;
+ 'random-seed':HTMLInputElement;
+ 'refine':HTMLButtonElement;
+ 'replay-retry':HTMLButtonElement;
+ 'reset-camera':HTMLButtonElement;
+ 'resolution':HTMLSelectElement;
+ 'rf-amplitude':HTMLInputElement;
+ 'rf-frequency':HTMLInputElement;
+ 'rf-handedness':HTMLSelectElement;
+ 'rotation':HTMLInputElement;
+ 'run':HTMLButtonElement;
+ 'scene':HTMLCanvasElement;
+ 'source-radius':HTMLInputElement;
+ 'system':HTMLSelectElement;
+ 'tune-rf':HTMLButtonElement;
+ 'voltage':HTMLInputElement;
+}
+export function mainElement<K extends keyof MainElements>(id:K):MainElements[K];
+export function mainElement(id:string):HTMLElement;
+export function mainElement(id:string){return document.getElementById(id)!;}

@@ -11,7 +11,7 @@ import './coupled-target.css';
 import './precise-controls.css';
 import {setupPreciseControls} from './precise-controls.js';
 import {setupCollectorAcceptance} from './collector-acceptance-ui.js';
-import {assessCollisionObservableEvidence} from './observable-evidence.ts';
+import {assessCollisionObservableEvidence} from './observable-evidence.js';
 import {setupHydrogenTracer} from './hydrogen-tracer-ui.js';
 import {setupBaseline} from './baseline-ui.js';
 import {setupMaterialRealism} from './material-realism-ui.js';
@@ -22,67 +22,103 @@ import {setupFuelCentrifuge} from './fuel-centrifuge-ui.js';
 import './fuel-comparison.css';
 import './fuel-playground.css';
 import {setupApparatus} from './apparatus-ui.js';
-import {surfaceState} from './surface-state.ts';
-import {fusionComponents} from './component-catalog.ts';
+import {surfaceState} from './surface-state.js';
+import {fusionComponents} from './component-catalog.js';
 import {setupTutorialInsights} from './tutorial-insights-ui.js';
-import {LITHIUM_PRESET_VALUES,LITHIUM_PRESET_NOTE} from './tutorial-insights.ts';
+import {LITHIUM_PRESET_VALUES,LITHIUM_PRESET_NOTE} from './tutorial-insights.js';
 import {setupBlanketExplorer} from './blanket-ui.js';
-import {blanketComponents} from './blanket-reference.ts';
+import {blanketComponents} from './blanket-reference.js';
 import {setupComponentInspectors} from './component-inspector.js';
 import {setupExperience} from './experience-ui.js';
-import {rendererPresentation} from './view-state.ts';
-import {requestSimulation,requestSimulationWithIdentity} from './worker-client.ts';
-import {serializeRun} from './producing-code.ts';
-import {createLazyScene,needsLegacyScene} from './legacy-scene.ts';
-import {radialRefinementSettings} from './radial-refinement.ts';
+import {rendererPresentation} from './view-state.js';
+import {requestSimulation,requestSimulationWithIdentity} from './worker-client.js';
+import {serializeRun} from './producing-code.js';
+import {createLazyScene,needsLegacyScene} from './legacy-scene.js';
+import {radialRefinementSettings} from './radial-refinement.js';
 import {setupLaboratory,showLaboratory,reducedConfig,isReduced,isInfo,guide,geometryModes,transportModes,coreModes,renderPlots} from './laboratory.js';
 import {equilibriumPresentation,rotatingPresentation} from './focused-diagnostics.js';
 import {equilibriumConfig} from './equilibrium-controls.js';
 import {setupDoublewellControls,doublewellConfig} from './doublewell-ui.js';
 import {setupStudies} from './study-ui.js';
-import {arrivalCurves,collectionSummary} from './ensemble.ts';
+import {arrivalCurves,collectionSummary} from './ensemble.js';
 import {setupReferenceAtlas} from './reference-atlas.js';
 import {setupFailureLaboratory,modelValidity} from './limitations-ui.js';
 import {createResearchLoader} from './research-ui.js';
 import {renderConvergenceEvidence} from './convergence-evidence.js';
-import convergenceEvidence from '../web-assets/convergence/display.json';
+import convergenceEvidence from '../web-assets/convergence/display.json' with {type:'json'};
+import type {ConvergenceEvidence} from './convergence-evidence.js';
 import * as THREE from 'three';
-import { DEFAULT_CONFIG, cutoffMassU, E_CHARGE, AMU } from './physics.ts';
+import { DEFAULT_CONFIG, cutoffMassU, E_CHARGE, AMU } from './physics.js';
 
-const $ = id => document.getElementById(id);
+import {mainElement as $} from './main-elements.js';
+import type {RunConfig,simulate} from './physics.js';
+import type {EquilibriumConfig,solveEquilibrium} from './equilibrium-model.js';
+import type {GeometryConfig,geometry} from './geometries.js';
+import type {TransportConfig,transport} from './transport.js';
+import type {DoublewellConfig,simulateDoublewell} from './doublewell-dynamics.js';
+import type {ProducingCodeIdentity} from './producing-code.js';
+import type {Scenario} from './scenario-state.js';
+import type {PlotCurve} from './laboratory.js';
+import type {CoupledPlotContext} from './coupled-target-ui.js';
+import type {SimulationRequest} from './worker-types.js';
+import type {GeometryMode} from './geometries.js';
+import type {TransportMode} from './transport.js';
+import type {CollisionObservableEvidence} from './observable-evidence.js';
+type OrbitResult=ReturnType<typeof simulate>;
+type EquilibriumResult=ReturnType<typeof solveEquilibrium>;
+type GeometryResult=ReturnType<typeof geometry>;
+type TransportResult=ReturnType<typeof transport>;
+type DoublewellResult=ReturnType<typeof simulateDoublewell>;
+type OrbitMode='rotating'|'icr';
+type GeometryUiMode=GeometryMode|'centrifugal';
+type ReducedMode=GeometryUiMode|TransportMode;
+type ModelMode=OrbitMode|ReducedMode|'centrifuge'|'doublewell-dynamics';
+type Settings=RunConfig|EquilibriumConfig|GeometryConfig|TransportConfig|DoublewellConfig;
+type EquilibriumSettings=EquilibriumConfig&{bins:number};
+type RunMetadata={producingCode:ProducingCodeIdentity|null;diagnostics?:unknown;evidence?:CollisionObservableEvidence};
+type AcceptedRun={ [K in ModelMode]:RunMetadata&{kind:K;settings:SettingsByMode[K];result:ResultsByMode[K]} }[ModelMode];
+const errorMessage=(error:unknown)=>error instanceof Error?error.message:String(error);
 const guideQuery=new URL(location.href).searchParams;
 const guideOnLoad=guideQuery.get('guide'),guideTopic=guideQuery.get('topic'),guideAction=guideQuery.get('try');
 const inputs = ['field','voltage','energy','parallel','source-radius','distribution','axial-temperature','particles','resolution','mass-a','mass-b','charge-a','charge-b','neutral-density','neutral-cross-section','neutral-mass','rf-amplitude','rf-frequency','rf-handedness','rotation','ion-temperature','electron-temperature','axis-fraction','radial-cut','radial-resolution','random-seed','centrifuge-closure','magnetic-boundary','composition-boundary','gaussian-field','gaussian-width','gaussian-density'];
-const ions = () => ['a','b'].map(k=>({massU:+$('mass-'+k).value,chargeState:+$('charge-'+k).value}));
+const ions = () => (['a','b'] as const).map(k=>({massU:+$(`mass-${k}`).value,chargeState:+$(`charge-${k}`).value}));
 const mode = () => $('system').value;
-const equilibriumLabel=()=>({'corotating':'Bounded common-corotation benchmark','gaussian':'Prescribed density · required current','magnetic-gaussian':'Coupled B(r) · current and radial force balance'})[$('centrifuge-closure').value];
-const config = (selected=mode()) => selected==='doublewell-dynamics'?doublewellConfig(ions()):isReduced(selected)?reducedConfig(selected,ions()):selected==='centrifuge'
- ? equilibriumConfig(id=>$(id).value,ions(),DEFAULT_CONFIG.radius)
- : ({...DEFAULT_CONFIG,seed:Number($('random-seed').value),mode:selected,dt:+$('resolution').value,magneticT:+$('field').value,
+const equilibriumLabel=()=>({'corotating':'Bounded common-corotation benchmark','gaussian':'Prescribed density · required current','magnetic-gaussian':'Coupled B(r) · current and radial force balance'} as Record<string,string>)[$('centrifuge-closure').value];
+const orbitConfig = (selected:OrbitMode) => ({...DEFAULT_CONFIG,seed:Number($('random-seed').value),mode:selected,dt:+$('resolution').value,magneticT:+$('field').value,
   voltage:selected==='rotating'?+$('voltage').value:0,perpendicularEV:+$('energy').value,
   parallelEV:+$('parallel').value,sourceRadius:+$('source-radius').value/100,
-  distribution:$('distribution').value,axialTemperatureEV:+$('axial-temperature').value,
+  distribution:$('distribution').value as 'fixed'|'thermal',axialTemperatureEV:+$('axial-temperature').value,
   particlesPerSpecies:+$('particles').value,species:ions(),rfAmplitudeVM:+$('rf-amplitude').value,
-  rfFrequencyHz:+$('rf-frequency').value,rfHandedness:+$('rf-handedness').value,
+  rfFrequencyHz:+$('rf-frequency').value,rfHandedness:Number($('rf-handedness').value) as -1|1,
   neutralDensityM3:+$('neutral-density').value,neutralCrossSectionM2:+$('neutral-cross-section').value,
   neutralMassU:+$('neutral-mass').value});
-let studyUI,experience,inspectors,apparatus,tutorialInsights,fusionApparatus,workspace,collector,baseline;
-const targetBaselines=new Map();
-const baselineOptions={capture:()=>{if(!experience)throw new Error('Scenario is not ready.');return experience.capture();},restore:value=>experience.restore(value)};
-function plotSimulation(curves){
- const identity={model:mode(),observable:'prescribed-model-response',xUnit:'per-curve',yUnit:'per-curve',version:1};
- if(baseline)baseline.update(curves,identity,{seed:latest.settings.seed});else renderPlots($('live-plots'),curves);
+function config(selected:'centrifuge'):EquilibriumSettings;
+function config(selected:'doublewell-dynamics'):DoublewellConfig;
+function config(selected:OrbitMode):RunConfig;
+function config(selected?:string):Settings;
+function config(selected=mode()):Settings {
+ if(selected==='doublewell-dynamics')return doublewellConfig(ions());
+ if(isReduced(selected))return reducedConfig(selected,ions());
+ if(selected==='centrifuge')return {...equilibriumConfig(id=>($(id) as HTMLInputElement|HTMLSelectElement).value,ions(),DEFAULT_CONFIG.radius),bins:Number($('radial-resolution').value)};
+ return orbitConfig(selected as OrbitMode);
 }
-function targetPlots(curves,{host,observable}){
+let studyUI:ReturnType<typeof setupStudies>|undefined,experience:ReturnType<typeof setupExperience>|undefined,inspectors:ReturnType<typeof setupComponentInspectors>,apparatus:ReturnType<typeof setupApparatus>|undefined,tutorialInsights:ReturnType<typeof setupTutorialInsights>|undefined,fusionApparatus:ReturnType<typeof setupApparatus>|undefined,workspace:ReturnType<typeof setupWorkspace>,collector:ReturnType<typeof setupCollectorAcceptance>|undefined,baseline:ReturnType<typeof setupBaseline>|undefined;
+const targetBaselines=new Map<HTMLElement,ReturnType<typeof setupBaseline>>();
+const baselineOptions={capture:()=>{if(!experience)throw new Error('Scenario is not ready.');return experience.capture();},restore:(value:Scenario)=>experience!.restore(value)};
+function plotSimulation(curves:PlotCurve[]){
+ const identity={model:mode(),observable:'prescribed-model-response',xUnit:'per-curve',yUnit:'per-curve',version:1};
+ if(baseline)baseline.update(curves,identity,{seed:latest&&'seed' in latest.settings?latest.settings.seed:undefined});else renderPlots($('live-plots'),curves);
+}
+function targetPlots(curves:PlotCurve[],{host,observable}:CoupledPlotContext){
  let control=targetBaselines.get(host);if(!control){control=setupBaseline(host,baselineOptions);targetBaselines.set(host,control);}
  return control.update(curves,{model:'coupled-depth-target-scenario',observable,xUnit:'per-curve',yUnit:'per-curve',version:1});
 }
-function inspectComponent(id){
+function inspectComponent(id:string){
  workspace?.open('inspect');
  const level=experience?.level??'1';
  const readout=level==='2'?fusionApparatus?.readout:apparatus?.hasMode(mode())&&view==='render'?apparatus.readout:document.querySelector('#separator-inspector .component-description');
  const destination=componentDestination(id,{level,model:mode(),closure:$('centrifuge-closure').value});
- appendComponentActions(readout,{parameters:()=>{workspace.focusRelated(destination.panel,destination.selector);if(destination.settings)marathon.target.focusSetting(destination.selector);},results:()=>workspace.focusRelated(level==='2'&&['target','substrate'].includes(id)?'target':'plots')});
+ appendComponentActions(readout,{parameters:()=>{workspace.focusRelated(destination.panel,destination.selector);if(destination.settings&&destination.selector)marathon.target.focusSetting(destination.selector);},results:()=>workspace.focusRelated(level==='2'&&['target','substrate'].includes(id)?'target':'plots')});
 }
 const loadResearch=createResearchLoader();
 async function showResearch(){
@@ -90,8 +126,8 @@ async function showResearch(){
  try{const viewer=await loadResearch();button.hidden=!!viewer;}
  finally{button.disabled=false;}
 }
-let latest = null, revision = 0, busy = false, legacyRenderer;
-let view = 'hardware', gpuReady=false, gpuFailed=false, runController, comparisonController, refinementController, liveTimer;
+let latest:AcceptedRun|null = null, revision = 0, busy = false, legacyRenderer:ReturnType<typeof import('./legacy-renderer.js').createLegacyRenderer>|null|undefined;
+let view = 'hardware', gpuReady=false, gpuFailed=false, runController:AbortController|undefined, comparisonController:AbortController|undefined, refinementController:AbortController|undefined, liveTimer:ReturnType<typeof setTimeout>|undefined;
 const legacyNeeded=()=>needsLegacyScene(document.body.dataset.level??'1',mode(),view);
 const legacyScene=createLazyScene(legacyNeeded,initScene,rendererFailure);
 function sceneVisibility(){
@@ -103,7 +139,7 @@ function sceneVisibility(){
   $('field-scale').hidden=view!=='fields'||state.canvasHidden;
  if($('separator-inspector').hidden)inspectors?.clear();
 }
-function rendererFailure(error){
+function rendererFailure(error:unknown){
  console.error(error);legacyScene.reset();gpuReady=false;gpuFailed=true;sceneVisibility();
  $('load-state').textContent='3D unavailable. Simulation controls remain available.';
 }
@@ -117,16 +153,16 @@ function equilibriumControls(){
  $('composition-label').textContent=$('composition-boundary').value==='bulk'?'Whole-cylinder A number fraction':'Central A number fraction';
 }
 function changed(){experience?.sync();equilibriumControls();invalidate();clearTimeout(liveTimer);if($('live-update').checked)liveTimer=setTimeout(run,250);}
-function showView(next) {
+function showView(next:string) {
  inspectors?.clear();document.body.dataset.view=next;view=next;
- document.querySelectorAll('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===next)));
+ document.querySelectorAll<HTMLElement>('[data-view]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.view===next)));
  legacyRenderer?.showView(next);sceneVisibility();void legacyScene.ensure();
 }
 async function initScene(){
  gpuFailed=false;$('load-state').textContent='Loading 3D…';sceneVisibility();
  const {createLegacyRenderer}=await import('./legacy-renderer.js');
  if(!legacyNeeded())return null;
- const current=createLegacyRenderer({$,config,mode,getLatest:()=>latest,getView:()=>view,isActive:legacyNeeded,onFailure:rendererFailure});
+ const current=createLegacyRenderer({$,config:()=>orbitConfig(mode()==='icr'?'icr':'rotating'),mode,getLatest:()=>latest,getView:()=>view,isActive:legacyNeeded,onFailure:rendererFailure});
  legacyRenderer=current;
  try{
   await current.initScene();gpuReady=true;sceneVisibility();
@@ -135,7 +171,7 @@ async function initScene(){
 }
 
 function updateReadouts() {
-  const c=config(mode()==='icr'?'icr':'rotating'),cutoff=cutoffMassU(c);
+  const c=orbitConfig(mode()==='icr'?'icr':'rotating'),cutoff=cutoffMassU(c);
   for(const [id,value] of Object.entries({'field-value':`${c.magneticT.toFixed(2)} T`,
     'voltage-value':`${c.voltage} V`,'energy-value':`${c.perpendicularEV} eV`,
     'parallel-value':`${c.parallelEV} eV`,'source-radius-value':`${Math.round(c.sourceRadius*100)} cm`,
@@ -172,10 +208,10 @@ function invalidate() {
   $('sampling-uncertainty').textContent='';renderPlots($('live-plots'),[]);$('model-metrics').replaceChildren();$('model-assumptions').replaceChildren();$('plot-status').textContent='Inputs changed · calculating when live updates are enabled.';
   updateReadouts();
 }
-const percent=(a,b)=>b?`${(100*a/b).toFixed(1)}%`:'—';
-function drawResults(result) {
+const percent=(a:number,b:number)=>b?`${(100*a/b).toFixed(1)}%`:'—';
+function drawResults(result:OrbitResult) {
   const [ar,kr]=result.species;
-  for(const destination of ['end','wall']) {
+  for(const destination of ['end','wall'] as const) {
     const counts=[ar[destination],kr[destination]],sum=counts[0]+counts[1];
     $(destination+'-stack').replaceChildren(...counts.map((n,i)=>{
       const span=document.createElement('span');span.className=i?'kr':'ar';span.style.width=`${sum?100*n/sum:0}%`;span.textContent=n?String(n):'';return span;
@@ -184,48 +220,71 @@ function drawResults(result) {
     $(destination+'-purity').textContent=percent(target[destination],sum);
     $(destination+'-recovery').textContent=percent(target[destination],target.injected);
   }
-  $('ledger').innerHTML=['injected','end','wall','source','remaining'].map(key=>`<tr><td>${{injected:'Injected',end:'Axial end',wall:'Wall',source:'Source return',remaining:'Still in chamber'}[key]}</td><td>${ar[key]}</td><td>${kr[key]}</td></tr>`).join('');
+  $('ledger').innerHTML=(['injected','end','wall','source','remaining'] as const).map(key=>`<tr><td>${{injected:'Injected',end:'Axial end',wall:'Wall',source:'Source return',remaining:'Still in chamber'}[key]}</td><td>${ar[key]}</td><td>${kr[key]}</td></tr>`).join('');
   $('energy-error').textContent=`Maximum relative energy error: ${Math.max(ar.maxRelativeEnergyError,kr.maxRelativeEnergyError).toExponential(2)}`;
   const max=Math.max(1,...ar.wallAxialBins,...kr.wallAxialBins);
   const bars=result.species.map((s,j)=>s.wallAxialBins.map((n,i)=>`<rect x="${30+i*31+j*13}" y="${110-90*n/max}" width="12" height="${90*n/max}" fill="${j?'#d2956b':'#a4c4b1'}"><title>${s.massU} u · bin ${i+1}: ${n} ions</title></rect>`).join('')).join('');
   $('deposition').innerHTML=`<path d="M30 110H775" stroke="#4d5753"/>${bars}<g fill="#9eaaa4" font-size="12"><text x="30" y="135">Source · 0 m</text><text x="690" y="135">End · 2.8 m</text><text x="5" y="25">${max}</text></g>`;
   const summary=collectionSummary(result);
-  $('sampling-uncertainty').textContent=summary.species.map((s,i)=>`${['A','B'][i]}: `+['end','wall','source','remaining'].map(d=>`${d} ${(100*s.outcomes[d].fraction).toFixed(1)}% [${(100*s.outcomes[d].low).toFixed(1)}, ${(100*s.outcomes[d].high).toFixed(1)}]%`).join(' · ')).join(' | ')+'. Pointwise Wilson 95% intervals for sampled fractions; purity needs paired-batch resampling below. Model and timestep errors are separate.';
+  $('sampling-uncertainty').textContent=summary.species.map((s,i)=>`${['A','B'][i]}: `+(['end','wall','source','remaining'] as const).map(d=>`${d} ${(100*s.outcomes[d].fraction).toFixed(1)}% [${(100*s.outcomes[d].low).toFixed(1)}, ${(100*s.outcomes[d].high).toFixed(1)}]%`).join(' · ')).join(' | ')+'. Pointwise Wilson 95% intervals for sampled fractions; purity needs paired-batch resampling below. Model and timestep errors are separate.';
   $('export').disabled=false;legacyRenderer?.drawPaths(result);
 }
-function calculate(selected,settings,signal,withIdentity=false){
- const kind=selected==='doublewell-dynamics'?'doublewell-dynamics':geometryModes.includes(selected)?'geometry':transportModes.includes(selected)?'transport':selected==='centrifuge'?'centrifuge':'orbit';
- return (withIdentity?requestSimulationWithIdentity:requestSimulation)({id:0,kind,model:selected==='centrifugal'?'mirror':selected,config:settings},signal);
+type SettingsByMode={rotating:RunConfig;icr:RunConfig;centrifuge:EquilibriumSettings;'doublewell-dynamics':DoublewellConfig}&Record<GeometryUiMode,GeometryConfig>&Record<TransportMode,TransportConfig>;
+type ResultsByMode={rotating:OrbitResult;icr:OrbitResult;centrifuge:EquilibriumResult;'doublewell-dynamics':DoublewellResult}&Record<GeometryUiMode,GeometryResult>&Record<TransportMode,TransportResult>;
+function calculate<M extends ModelMode>(selected:M,settings:SettingsByMode[M],signal:AbortSignal,withIdentity?:false):Promise<ResultsByMode[M]>;
+function calculate<M extends ModelMode>(selected:M,settings:SettingsByMode[M],signal:AbortSignal,withIdentity:true):Promise<{result:ResultsByMode[M];producingCode:ProducingCodeIdentity|null}>;
+function calculate(selected:string,settings:Settings,signal:AbortSignal,withIdentity=false){
+ // Each branch is the existing bundled worker protocol; the UI model owns its configuration.
+ const request:SimulationRequest=selected==='doublewell-dynamics'?{id:0,kind:'doublewell-dynamics',config:settings as DoublewellConfig}
+  :geometryModes.includes(selected)?{id:0,kind:'geometry',model:(selected==='centrifugal'?'mirror':selected) as GeometryMode,config:settings as GeometryConfig}
+  :transportModes.includes(selected)?{id:0,kind:'transport',model:selected as TransportMode,config:settings as TransportConfig}
+  :selected==='centrifuge'?{id:0,kind:'centrifuge',config:settings as EquilibriumConfig}
+  :{id:0,kind:'orbit',config:settings as RunConfig};
+ return withIdentity?requestSimulationWithIdentity(request,signal):requestSimulation(request,signal);
 }
-const mean=values=>values.length?values.reduce((s,v)=>s+v,0)/values.length:NaN;
-const numeric=(n,d=2)=>!Number.isFinite(n)?'—':n!==0&&(Math.abs(n)<.001||Math.abs(n)>=1e6)?n.toExponential(d):n.toFixed(d);
-function presentDiagnostics(presentation){
+type PreparedRun={ [K in ModelMode]:{kind:K;settings:SettingsByMode[K]} }[ModelMode];
+function prepareRun(selected:string):PreparedRun{
+ if(selected==='centrifuge')return {kind:selected,settings:config(selected)};
+ if(selected==='doublewell-dynamics')return {kind:selected,settings:config(selected)};
+ if(geometryModes.includes(selected))return {kind:selected as GeometryUiMode,settings:reducedConfig(selected,ions()) as GeometryConfig};
+ if(transportModes.includes(selected)){const kind=selected as TransportMode;return {kind,settings:reducedConfig(kind,ions())};}
+ return {kind:selected as OrbitMode,settings:orbitConfig(selected as OrbitMode)};
+}
+async function calculateRun(prepared:PreparedRun,signal:AbortSignal):Promise<AcceptedRun>{
+ const response=await calculate(prepared.kind,prepared.settings,signal,true);
+ // prepareRun and the dispatcher retain the same model/config/result identity across the worker boundary.
+ return {...prepared,...response} as AcceptedRun;
+}
+const mean=(values:number[])=>values.length?values.reduce((s,v)=>s+v,0)/values.length:NaN;
+const numeric=(n:number|null,d=2)=>n===null||!Number.isFinite(n)?'—':n!==0&&(Math.abs(n)<.001||Math.abs(n)>=1e6)?n.toExponential(d):n.toFixed(d);
+function presentDiagnostics(presentation:{metrics:string;notes:string[];diagnostics:unknown}){
   $('model-metrics').textContent=presentation.metrics;$('model-assumptions').replaceChildren();
   for(const note of presentation.notes){const li=document.createElement('li');li.textContent=note;$('model-assumptions').append(li);}
-  latest.diagnostics=presentation.diagnostics;
+  if(latest)latest.diagnostics=presentation.diagnostics;
 }
-function equilibrium(result) {
+function equilibrium(result:EquilibriumResult) {
   const points=result.profiles.map(p=>p.ionDensities[1]/(p.ionDensities[0]+p.ionDensities[1]));
   renderPlots($('equilibrium-chart'),[{label:'B number fraction',x:result.profiles.map(p=>p.radius),y:points,xLabel:'Radius (m)',yLabel:'Number fraction',yDomain:[0,1]}]);
   $('equilibrium-caption').textContent=`Local number fractions · central A ${(100*result.species[0].axisFraction).toPrecision(4)}% · ${equilibriumLabel()}`;
-  const wall=result.profiles.at(-1);
-  $('equilibrium-results').textContent=`Wall B number fraction: ${(100*points.at(-1)).toFixed(2)}% · log enrichment B/A: ${numeric(wall.logSeparationFactors[1])} · maximum relative charge residual: ${result.maxRelativeChargeResidual.toExponential(2)}. Not per-pass recovery.`;
+  const wall=result.profiles.at(-1)!;
+  $('equilibrium-results').textContent=`Wall B number fraction: ${(100*points.at(-1)!).toFixed(2)}% · log enrichment B/A: ${numeric(wall.logSeparationFactors[1])} · maximum relative charge residual: ${result.maxRelativeChargeResidual.toExponential(2)}. Not per-pass recovery.`;
 }
 async function run() {
   clearTimeout(liveTimer);runController?.abort();
   comparisonController?.abort();if(comparisonController){$('compare-status').textContent='Comparison superseded by a new run.';$('compare').disabled=false;}
   const selected=mode();if(isInfo(selected)){$('run-status').textContent='Overview only · no quantitative solver for this variant.';return;}
-  const settings=config(),id=++revision,controller=new AbortController();runController=controller;
+  const prepared=prepareRun(selected),id=++revision,controller=new AbortController();runController=controller;
   busy=true;latest=null;$('export').disabled=true;$('refine').disabled=true;$('run').disabled=true;
   $('run-status').textContent=selected==='centrifuge'?'Solving radial quasineutral equilibrium…':selected==='doublewell-dynamics'?'Advancing coupled quartic orbits and ion–ion collisions…':'Integrating ion orbits…';
   try {
-    const {result,producingCode}=await calculate(selected,settings,controller.signal,true);
+    const accepted=await calculateRun(prepared,controller.signal);
+    const {kind:selected,settings,result}=accepted;
     if(id!==revision)return;
-    latest={kind:selected,settings,result,producingCode};
+    latest=accepted;
     apparatus?.updateSurfaceState(surfaceState({model:selected,settings,result,acceptedModel:selected,acceptedSettings:settings}),settings);
-    collector?.update(selected==='rotating'||selected==='icr'?result:null);
+    collector?.update(accepted.kind==='rotating'||accepted.kind==='icr'?accepted.result:null);
     $('model-validity').textContent=modelValidity(selected,settings,result);
-    if(isReduced(selected)||selected==='doublewell-dynamics'){
+    if(selected!=='centrifuge'&&selected!=='rotating'&&selected!=='icr'){
       $('model-assumptions').replaceChildren();
       plotSimulation(result.curves);$('model-metrics').textContent=result.metrics.map(m=>`${m.label}: ${numeric(m.value,4)} ${m.unit}`).join(' · ');
       for(const note of result.assumptions){const li=document.createElement('li');li.textContent=note;$('model-assumptions').append(li);}
@@ -242,18 +301,18 @@ async function run() {
     }
     $('plot-status').textContent='Computed from the current settings · hover over curves to inspect values.';
     if(selected==='doublewell-dynamics'){
-     latest.evidence=assessCollisionObservableEvidence(result,'outlet-fraction');
-     $('model-validity').textContent=`Collisions: ${latest.evidence.status} · continuum ${latest.evidence.continuum}`;
-     for(const text of latest.evidence.reasons){const li=document.createElement('li');li.textContent=text;$('model-assumptions').append(li);}
+     accepted.evidence=assessCollisionObservableEvidence(result,'outlet-fraction');
+     $('model-validity').textContent=`Collisions: ${accepted.evidence!.status} · continuum ${accepted.evidence!.continuum}`;
+     for(const text of accepted.evidence!.reasons){const li=document.createElement('li');li.textContent=text;$('model-assumptions').append(li);}
      const study=document.createElement('li'),link=document.createElement('a');link.href='/convergence/browser-v38.summary.json';link.textContent='Browser-resolution study · qualification unresolved';study.append(link);$('model-assumptions').append(study);
     }
-    $('export').disabled=false;$('run-status').textContent=selected==='doublewell-dynamics'?`Complete · ${settings.particlesPerSpecies} particles per species · ${(settings.duration*1e6).toFixed(0)} µs · inspect torque and resolution diagnostics`:isReduced(selected)?'Complete · reduced model diagnostics':'Complete · '+(selected==='centrifuge'?`${settings.bins+1} radial samples`:`${settings.particlesPerSpecies} ions per species · ${(settings.dt*1e9).toFixed(0)} ns step`);
-  } catch(error) {if(id===revision)$('run-status').textContent=error.message;}
+    $('export').disabled=false;$('run-status').textContent=selected==='doublewell-dynamics'?`Complete · ${settings.particlesPerSpecies} particles per species · ${(settings.duration*1e6).toFixed(0)} µs · inspect torque and resolution diagnostics`:selected==='centrifuge'?`Complete · ${settings.bins+1} radial samples`:selected==='rotating'||selected==='icr'?`Complete · ${settings.particlesPerSpecies} ions per species · ${(settings.dt*1e9).toFixed(0)} ns step`:'Complete · reduced model diagnostics';
+  } catch(error) {if(id===revision)$('run-status').textContent=errorMessage(error);}
   finally {if(runController===controller){busy=false;$('run').disabled=false;}}
 }
 function selectMode(){
- const selected=mode(),orbital=['rotating','icr'].includes(selected),reduced=isReduced(selected),info=isInfo(selected),g=guide(selected);
- for(const name of ['orbit','rotating','icr','centrifuge'])document.querySelectorAll('[data-'+name+']').forEach(el=>el.hidden=name==='orbit'?!orbital:selected!==name);
+ const selected=mode(),orbital=['rotating','icr'].includes(selected),reduced=isReduced(selected),info=isInfo(selected),g=guide(selected)!;
+ for(const name of ['orbit','rotating','icr','centrifuge'])document.querySelectorAll<HTMLElement>('[data-'+name+']').forEach(el=>el.hidden=name==='orbit'?!orbital:selected!==name);
  $('orbit-presets').hidden=selected!=='rotating';$('equilibrium-view').hidden=selected!=='centrifuge';
  $('reduced-view').hidden=orbital||selected==='centrifuge';$('reduced-controls').hidden=!reduced;$('doublewell-controls').hidden=selected!=='doublewell-dynamics';$('doublewell-initial-note').hidden=selected!=='doublewell-dynamics';$('diffusion-settings').hidden=selected!=='diffusion';
  $('reduced-title').textContent=g.title;$('reduced-description').textContent=g.mechanism;
@@ -261,9 +320,9 @@ function selectMode(){
  $('deposition-panel').hidden=!orbital;$('refine').hidden=!orbital&&selected!=='centrifuge';
  $('sampling-uncertainty').hidden=!orbital;
  $('refine').textContent=selected==='centrifuge'?'Check radial refinement ↗':'Check timestep refinement ↗';
- document.querySelector('.viewport-tools').hidden=!orbital;
+ document.querySelector<HTMLElement>('.viewport-tools')!.hidden=!orbital;
  workspace?.refreshMode();
- document.querySelector('.legend-note').hidden=!orbital;
+ document.querySelector<HTMLElement>('.legend-note')!.hidden=!orbital;
  $('experiment-label').textContent='SECTION '+g.section;$('experiment-title').textContent=g.title;$('experiment-subtitle').textContent=info?'Overview · no quantitative solver':orbital?'Finite-device full ion orbits':selected==='centrifuge'?equilibriumLabel():selected==='doublewell-dynamics'?'Coupled kinetic model · prescribed fields':'Reduced physics diagnostics';
  $('system-scope').textContent=selected==='doublewell-dynamics'?'Exploratory collisional kinetics · inspect convergence':info?'Overview only':reduced?'Explicit reduced model · see fidelity notes':selected==='centrifuge'?'Equilibrium closure':'Prescribed-field orbits';
  $('field-key').hidden=!orbital;
@@ -280,13 +339,13 @@ $('live-update').addEventListener('change',()=>{if($('live-update').checked)run(
 $('system').addEventListener('change',selectMode);$('run').addEventListener('click',()=>{workspace?.open('plots');run();});
 $('lithium-preset').setAttribute('aria-description',LITHIUM_PRESET_NOTE);
 $('lithium-preset').addEventListener('click',()=>{
- for(const [id,value]of Object.entries(LITHIUM_PRESET_VALUES))$(id).value=value;
+ for(const [id,value]of Object.entries(LITHIUM_PRESET_VALUES))($(id) as HTMLInputElement|HTMLSelectElement).value=value;
  experience?.sync();selectMode();
  $('plot-status').textContent=LITHIUM_PRESET_NOTE;
 });
 $('reset-camera').addEventListener('click',()=>legacyRenderer?.resetCamera());
-document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view)));
-function preset(voltage) {
+document.querySelectorAll<HTMLElement>('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view!)));
+function preset(voltage:number) {
   $('field').value='.10';$('voltage').value=String(voltage);$('energy').value='.5';$('parallel').value='20';$('source-radius').value='4';
   experience?.sync();invalidate();run();
 }
@@ -295,37 +354,41 @@ $('tune-rf').addEventListener('click',()=>{
   const ion=ions()[0];$('rf-frequency').value=String(Math.round(E_CHARGE*(+$('field').value)*ion.chargeState/(ion.massU*AMU)/(2*Math.PI)));changed();
 });
 $('refine').addEventListener('click',async()=>{
-  if(!latest)return;
+  if(!latest||(latest.kind!=='centrifuge'&&latest.kind!=='rotating'&&latest.kind!=='icr'))return;
   const finerSettings=latest.kind==='centrifuge'?radialRefinementSettings(latest.settings):{...latest.settings,dt:latest.settings.dt/2};
   if(!finerSettings){$('refine').disabled=true;$('refinement-status').textContent='No finer supported grid; radial convergence unassessed.';return;}
   const snapshot=latest,id=revision,controller=new AbortController();refinementController?.abort();refinementController=controller;$('refine').disabled=true;$('refinement-status').textContent=snapshot.kind==='centrifuge'?'Running finer radial grid…':'Running half-timestep comparison…';
   try {
-    const fine=await calculate(snapshot.kind,finerSettings,controller.signal);
-    if(id!==revision)return;
     if(snapshot.kind==='centrifuge'){
+      const fineSettings=radialRefinementSettings(snapshot.settings)!;
+      const fine=await calculate('centrifuge',fineSettings,controller.signal);
+      if(id!==revision)return;
       const cut=Number($('radial-cut').value),a=equilibriumPresentation(snapshot.result,cut).diagnostics,b=equilibriumPresentation(fine,cut).diagnostics;
-      $('refinement-status').textContent=`${snapshot.settings.bins} → ${finerSettings.bins} radial intervals · `+a.volumeMeanIonDensities.map((n,i)=>`${['A','B'][i]}: inventory relative change ${numeric(Math.abs(n-b.volumeMeanIonDensities[i])/b.volumeMeanIonDensities[i],5)} · bulk fraction change ${numeric(Math.abs(a.bulkNumberFractions[i]-b.bulkNumberFractions[i]),5)}`).join(' | ')+'. Radial quadrature check only; not experimental validation.';
+      $('refinement-status').textContent=`${snapshot.settings.bins} → ${fineSettings.bins} radial intervals · `+a.volumeMeanIonDensities.map((n,i)=>`${['A','B'][i]}: inventory relative change ${numeric(Math.abs(n-b.volumeMeanIonDensities[i])/b.volumeMeanIonDensities[i],5)} · bulk fraction change ${numeric(Math.abs(a.bulkNumberFractions[i]!-b.bulkNumberFractions[i]!),5)}`).join(' | ')+'. Radial quadrature check only; not experimental validation.';
       return;
     }
+    const fine=await calculate(snapshot.kind,{...snapshot.settings,dt:snapshot.settings.dt/2},controller.signal);
+    if(id!==revision)return;
     $('refinement-status').textContent=snapshot.result.species.map((s,i)=>`${['A','B'][i]}: |Δ wall| ${Math.abs(s.wall-fine.species[i].wall)}, |Δ end| ${Math.abs(s.end-fine.species[i].end)}, |Δ RF work/ion| ${numeric(Math.abs(s.rfWorkEV-fine.species[i].rfWorkEV)/s.injected,4)} eV`).join(' · ')+(snapshot.settings.neutralDensityM3?' · Stochastic collision paths need ensemble convergence as well.':' · Counts alone do not establish trajectory convergence.');
-  } catch(e){if(id===revision)$('refinement-status').textContent=e.message;}
+  } catch(e){if(id===revision)$('refinement-status').textContent=errorMessage(e);}
   finally{if(id===revision)$('refine').disabled=snapshot.kind==='centrifuge'&&!radialRefinementSettings(snapshot.settings);}
 });
 $('compare').addEventListener('click',async()=>{
   workspace?.open('plots');
   const id=revision,controller=new AbortController();comparisonController?.abort();comparisonController=controller;$('comparison').hidden=false;$('comparison-results').replaceChildren();$('compare-status').textContent='Running independent models…';$('compare').disabled=true;
   const modes=coreModes;
-  const settings=modes.map(selected=>config(selected));
-  const results=await Promise.allSettled(modes.map((selected,i)=>calculate(selected,settings[i],controller.signal)));
+  const prepared=modes.map(prepareRun);
+  const settings=prepared.map(value=>value.settings);
+  const results=await Promise.allSettled(prepared.map(value=>calculateRun(value,controller.signal)));
   if(id===revision) {
     $('compare-status').textContent='Independent operating points · observables differ by model; inspect each configuration.';
     results.forEach((entry,i)=>{
-      const card=document.createElement('div'),heading=document.createElement('h3'),p=document.createElement('p');heading.textContent=guide(modes[i]).title;
-      if(entry.status==='rejected')p.textContent=entry.reason.message;
-      else if(isReduced(modes[i])||modes[i]==='doublewell-dynamics')p.textContent=entry.value.metrics.map(m=>`${m.label}: ${numeric(m.value)} ${m.unit}`).join(' · ');
-      else if(modes[i]==='centrifuge'){const r=entry.value,w=r.profiles.at(-1);p.textContent=`Wall B fraction ${(100*w.ionDensities[1]/w.ionDensities.reduce((a,b)=>a+b,0)).toFixed(1)}% · log enrichment ${numeric(w.logSeparationFactors[1])}. Equilibrium, not collection efficiency.`;}
-      else p.textContent=entry.value.species.map((s,j)=>`${['A','B'][j]}: end ${s.end}/${s.injected}, wall ${s.wall}/${s.injected}, RF work/ion ${numeric(s.rfWorkEV/s.injected)} eV`).join(' · ');
-      const scope=document.createElement('p');scope.className='comparison-scope';scope.textContent=entry.status==='fulfilled'?modelValidity(modes[i],settings[i],entry.value):guide(modes[i]).fidelity;
+      const card=document.createElement('div'),heading=document.createElement('h3'),p=document.createElement('p');heading.textContent=guide(modes[i])!.title;
+      if(entry.status==='rejected')p.textContent=errorMessage(entry.reason);
+      else if(entry.value.kind!=='centrifuge'&&entry.value.kind!=='rotating'&&entry.value.kind!=='icr')p.textContent=entry.value.result.metrics.map(m=>`${m.label}: ${numeric(m.value)} ${m.unit}`).join(' · ');
+      else if(entry.value.kind==='centrifuge'){const r=entry.value.result,w=r.profiles.at(-1)!;p.textContent=`Wall B fraction ${(100*w.ionDensities[1]/w.ionDensities.reduce((a,b)=>a+b,0)).toFixed(1)}% · log enrichment ${numeric(w.logSeparationFactors[1])}. Equilibrium, not collection efficiency.`;}
+      else p.textContent=entry.value.result.species.map((s,j)=>`${['A','B'][j]}: end ${s.end}/${s.injected}, wall ${s.wall}/${s.injected}, RF work/ion ${numeric(s.rfWorkEV/s.injected)} eV`).join(' · ');
+      const scope=document.createElement('p');scope.className='comparison-scope';scope.textContent=entry.status==='fulfilled'?modelValidity(modes[i],settings[i],entry.value.result):guide(modes[i])!.fidelity;
       const detail=document.createElement('details'),summary=document.createElement('summary'),pre=document.createElement('pre');summary.textContent='Operating point';pre.textContent=JSON.stringify(settings[i],null,2);detail.append(summary,pre);
       card.append(heading,p,scope,detail);$('comparison-results').append(card);
     });
@@ -347,20 +410,20 @@ setupApparatus(blanketExplorer.render,{components:blanketComponents,onInspect:()
 setupLaboratory(changed);setupDoublewellControls(changed);setupReferenceAtlas();setupFailureLaboratory();
 setupHydrogenTracer($('failure-lab'));
 const marathon=setupMarathonModels({transformPlots:targetPlots,onState:value=>{
- fusionApparatus.updateSurfaceState(value?surfaceState({model:'beam-target',settings:value.result.config,result:value.result,acceptedModel:'beam-target',acceptedSettings:value.result.config,selectedState:value.state,source:value.source,acceptedSource:value.source}):null,value?.result.config);
+ fusionApparatus.updateSurfaceState(value?surfaceState({model:'beam-target',settings:value.result.config,result:value.result,acceptedModel:'beam-target',acceptedSettings:value.result.config,selectedState:value.state,source:value.source,acceptedSource:value.source}):null);
 },onStatus:value=>{
  fusionApparatus.setPending(value.phase==='pending');for(const control of targetBaselines.values()){if(value.phase==='invalid')control.clearCurrent();else control.setPending(value.phase==='pending');}
 }});
 setupMaterialRealism({readSource:()=>marathon.source.read()});
 const fuelCentrifuge=setupFuelCentrifuge({onInspect:()=>workspace?.open('inspect'),onResults:()=>workspace?.open('plots')});
 const collectorHost=document.createElement('div');$('orbit-results').after(collectorHost);collector=setupCollectorAcceptance(collectorHost);
-setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'})[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence);studyUI=setupStudies(mode,config,calculate);
+setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'} as Record<string,string>)[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence as ConvergenceEvidence);studyUI=setupStudies(mode,()=>orbitConfig(mode()==='icr'?'icr':'rotating'),(selected,settings,signal)=>calculate(selected as OrbitMode,settings,signal));
 baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',showResearch);
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
 experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch,onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 if(guideOnLoad==='start'||guideOnLoad==='physics'){
  workspace.open('guide');
- if(guideOnLoad==='physics')workspace.openPhysics(guideTopic);
+ if(guideOnLoad==='physics')workspace.openPhysics(guideTopic??undefined);
  if(guideAction)workspace.launchGuideAction(guideAction);
 }
