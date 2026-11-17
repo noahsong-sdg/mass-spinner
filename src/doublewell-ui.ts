@@ -1,6 +1,11 @@
-import {DEFAULT_DOUBLEWELL} from './doublewell-dynamics.ts';
+import {DEFAULT_DOUBLEWELL, type DoublewellConfig} from './doublewell-dynamics.js';
+import type {IonSpecies} from './physics.js';
+type NumericField = 'radius'|'length'|'magneticT'|'voltage'|'quadraticShape'|'ionTemperatureEV'|'rotationRadS'|'beamEV'|'sourceRadiusFraction'|'pulseLengthFraction'|'densityM3'|'electronTemperatureEV'|'coulombLog';
+type SelectorField = 'boundary'|'initialState'|'rotationMode'|'collisions'|'collisionScattering'|'collisionMethod'|'collisionSourceAligned'|'collisionTarget'|'particlesPerSpecies'|'cellsAcross'|'collisionAxialCells'|'dt'|'duration';
+type ControlGroup = 'geometry'|'source'|'collision';
+type SelectValue = string | number | boolean;
 
-const fields=[
+const fields: readonly [NumericField,string,string,number,number,number,ControlGroup,boolean?][]=[
  ['radius','Column radius','m',.05,.5,.01,'geometry'],
  ['length','Column length','m',.1,3,.1,'geometry'],
  ['magneticT','Imposed axial B','T',.01,.2,.01,'geometry'],
@@ -15,7 +20,7 @@ const fields=[
  ['electronTemperatureEV','Screening electron temperature','eV',.5,30,.5,'collision'],
  ['coulombLog','Prescribed Coulomb logarithm','',2,15,.5,'collision'],
 ];
-const selectors=[
+const selectors: readonly [SelectorField,string,readonly (readonly [string|number,string])[],ControlGroup][]=[
  ['boundary','Boundaries',[['open','Open · source, end and wall absorb'],['closed','Closed · periodic z, reflecting wall']],'source'],
  ['initialState','Initial distribution',[['pulse','Finite cylindrical pulse'],['equilibrium','Common-Ω equilibrium benchmark']],'source'],
  ['rotationMode','Initial rotation',[['zero-canonical','Species-specific zero mean Pθ'],['common','Common rigid rotation']],'source'],
@@ -30,11 +35,11 @@ const selectors=[
  ['dt','Physical timestep',[[2.5e-8,'25 ns'],[5e-8,'50 ns'],[1e-7,'100 ns'],[2e-7,'200 ns']],'collision'],
  ['duration','Observation duration',[[5e-5,'50 µs'],[1e-4,'100 µs'],[2e-4,'200 µs'],[5e-4,'500 µs'],[1e-3,'1 ms']],'collision'],
 ];
-const $=id=>document.getElementById('dw-'+id);
-const reads=new Map(),updates=[];
-function synchronize(changed){
+const $=(id: string)=>document.getElementById('dw-'+id) as HTMLInputElement | HTMLSelectElement;
+const reads=new Map<NumericField|SelectorField|'seed',()=>SelectValue>(),updates: (()=>void)[]=[];
+function synchronize(changed?: string){
  if(changed==='initialState'&&$('initialState').value==='equilibrium'){
-  $('boundary').value='closed';$('rotationMode').value='common';$('beamEV').value=0;
+  $('boundary').value='closed';$('rotationMode').value='common';$('beamEV').value='0';
  }else if($('boundary').value!=='closed'||$('rotationMode').value!=='common')$('initialState').value='pulse';
  const equilibrium=$('initialState').value==='equilibrium';
  for(const key of ['sourceRadiusFraction','pulseLengthFraction','beamEV'])$(key).disabled=equilibrium;
@@ -43,47 +48,59 @@ function synchronize(changed){
  $('cellsAcross').disabled=$('collisionMethod').value==='adaptive';
  $('collisionAxialCells').disabled=$('collisionMethod').value!=='axisymmetric';
  $('collisionSourceAligned').disabled=$('collisionMethod').value!=='axisymmetric'||equilibrium;
- document.getElementById('doublewell-initial-note').textContent=equilibrium
+ document.getElementById('doublewell-initial-note')!.textContent=equilibrium
   ? 'The equilibrium benchmark uses common ion rotation and temperature in a closed column. Selecting it sets closed boundaries, common rotation and zero axial drift; pulse size does not apply.'
   : 'Both species start with equal physical particle weights in a finite cylindrical pulse at t = 0. There is no continuous reservoir. Zero-mean-Pθ rotation is species dependent; collisions may exchange that angular momentum.';
  updates.forEach(update=>update());
 }
-export function setupDoublewellControls(onInput){
+export function setupDoublewellControls(onInput: () => void){
  reads.clear();updates.length=0;
- const host=document.getElementById('doublewell-controls'),groups=new Map();
+ const host=document.getElementById('doublewell-controls')!,groups=new Map<ControlGroup,HTMLDetailsElement>();
  const notice=document.createElement('p');notice.className='kinetic-validation-note';
  notice.textContent='Exploratory kinetic model: spatial and particle convergence is not established. The fast default uses a coarse pulse grid. Check collision-cell torque and local-regime diagnostics, and refine particles together with cells. Outlet counts are not calibrated product-purity predictions.';
  host.append(notice);
- for(const [key,title]of [['geometry','Column & shaped potential'],['source','Initial mixture & boundaries'],['collision','Coulomb scattering & resolution']]){
+ for(const [key,title]of [['geometry','Column & shaped potential'],['source','Initial mixture & boundaries'],['collision','Coulomb scattering & resolution']] satisfies [ControlGroup,string][]){
   const details=document.createElement('details'),summary=document.createElement('summary');
   details.className='source-controls';details.open=key==='geometry';summary.textContent=title;details.append(summary);host.append(details);groups.set(key,details);
  }
- const event=(key)=>{synchronize(key);onInput();};
+ const event=(key: string)=>{synchronize(key);onInput();};
  for(const [key,label,unit,min,max,step,group,log]of fields){
   const box=document.createElement('div'),l=document.createElement('label'),title=document.createElement('span'),out=document.createElement('output'),input=document.createElement('input');
-  box.className='control';input.id='dw-'+key;input.type='range';input.min=min;input.max=max;input.step=step;
+  box.className='control';input.id='dw-'+key;input.type='range';input.min=String(min);input.max=String(max);input.step=String(step);
   input.dataset.rangeScale=log?'log10':'linear';input.dataset.unit=unit;
   const initial=key==='sourceRadiusFraction'?DEFAULT_DOUBLEWELL.sourceRadius/DEFAULT_DOUBLEWELL.radius:DEFAULT_DOUBLEWELL[key];
-  input.value=log?Math.log10(initial):initial;l.htmlFor=input.id;title.textContent=label;
+  input.value=String(log?Math.log10(initial):initial);l.htmlFor=input.id;title.textContent=label;
   const read=()=>log?10**Number(input.value):Number(input.value);
   reads.set(key,read);updates.push(()=>out.textContent=`${log?read().toExponential(2):read().toLocaleString(undefined,{maximumSignificantDigits:4})} ${unit}`);
-  input.addEventListener('input',()=>event(key));l.append(title,out);box.append(l,input);groups.get(group).append(box);
+  input.addEventListener('input',()=>event(key));l.append(title,out);box.append(l,input);groups.get(group)!.append(box);
  }
  for(const [key,label,options,group]of selectors){
   const l=document.createElement('label'),select=document.createElement('select');l.textContent=label;select.id='dw-'+key;
   for(const [value,title]of options){const option=document.createElement('option');option.value=String(value);option.textContent=title;select.add(option);}
-  const fallback={collisionMethod:'fixed',collisionScattering:'takizuka-abe',collisionSourceAligned:false,collisionAxialCells:0};
+  const fallback: Partial<Record<SelectorField,SelectValue>>={collisionMethod:'fixed',collisionScattering:'takizuka-abe',collisionSourceAligned:false,collisionAxialCells:0};
   select.value=String(DEFAULT_DOUBLEWELL[key]??fallback[key]??32);reads.set(key,()=>['collisions','collisionSourceAligned'].includes(key)?select.value==='true':['boundary','initialState','rotationMode','collisionMethod','collisionScattering'].includes(key)?select.value:Number(select.value));
-  select.addEventListener('change',()=>event(key));l.append(select);groups.get(group).append(l);
+  select.addEventListener('change',()=>event(key));l.append(select);groups.get(group)!.append(l);
  }
- const label=document.createElement('label'),seed=document.createElement('input');label.textContent='Random seed';seed.id='dw-seed';seed.type='number';seed.min=0;seed.max=4294967295;seed.step=1;seed.value=DEFAULT_DOUBLEWELL.seed;
- label.append(seed);groups.get('collision').append(label);reads.set('seed',()=>Number(seed.value));seed.addEventListener('input',()=>event('seed'));
+ const label=document.createElement('label'),seed=document.createElement('input');label.textContent='Random seed';seed.id='dw-seed';seed.type='number';seed.min='0';seed.max='4294967295';seed.step='1';seed.value=String(DEFAULT_DOUBLEWELL.seed);
+ label.append(seed);groups.get('collision')!.append(label);reads.set('seed',()=>Number(seed.value));seed.addEventListener('input',()=>event('seed'));
  synchronize();
 }
-export function doublewellConfig(ions){
- const c={...DEFAULT_DOUBLEWELL,species:ions.map(s=>({...s}))};
- for(const [key,read]of reads)c[key]=read();
- c.sourceRadius=c.sourceRadiusFraction*c.radius;delete c.sourceRadiusFraction;
- if(c.collisionAxialCells===0)delete c.collisionAxialCells;
- return c;
+export function doublewellConfig(ions: IonSpecies[]): DoublewellConfig{
+ const c: DoublewellConfig & {sourceRadiusFraction?: number}={...DEFAULT_DOUBLEWELL,species:ions.map(s=>({...s}))};
+ for(const [key,read]of reads){
+  const value=read();
+  switch(key){
+   case 'boundary': c.boundary=value as DoublewellConfig['boundary'];break;
+   case 'initialState': c.initialState=value as DoublewellConfig['initialState'];break;
+   case 'rotationMode': c.rotationMode=value as DoublewellConfig['rotationMode'];break;
+   case 'collisionScattering': c.collisionScattering=value as DoublewellConfig['collisionScattering'];break;
+   case 'collisionMethod': c.collisionMethod=value as DoublewellConfig['collisionMethod'];break;
+   case 'collisions': case 'collisionSourceAligned': c[key]=value as boolean;break;
+   default: c[key]=value as number;
+  }
+ }
+ c.sourceRadius=c.sourceRadiusFraction!*c.radius;
+ const {sourceRadiusFraction,...config}=c;
+ if(config.collisionAxialCells===0)delete config.collisionAxialCells;
+ return config;
 }
