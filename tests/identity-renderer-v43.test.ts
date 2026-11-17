@@ -3,10 +3,11 @@ import assert from 'node:assert/strict';
 import {mkdtemp,readFile,writeFile,mkdir,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {productionSource,productionFunction,productionEvent,productionScopeTail} from './helpers/production-code.js';
+import {productionSource,productionFunctions,productionEvent,productionScopeTail} from './helpers/production-code.js';
 import {createHash} from 'node:crypto';
 import {build} from 'vite';
 import {workerIdentityPlugin} from '../scripts/worker-identity-plugin.mjs';
+import {geometryModes,transportModes} from '../src/laboratory.js';
 import {requestSimulationWithIdentity} from '../src/worker-client.ts';
 import {serializeRun} from '../src/producing-code.ts';
 import {createLazyScene,needsLegacyScene} from '../src/legacy-scene.ts';
@@ -79,7 +80,7 @@ test('a first-use view hidden before its queued initialization allocates nothing
 
 test('actual main accepted-run and download callbacks retain the producing worker identity',async()=>{
  const source=productionSource(new URL('../src/main.ts',import.meta.url));
- const run=productionFunction(source,'run');
+ const run=productionFunctions(source,['prepareRun','calculateRun','run']);
  const download=productionEvent(source,'export');
  const nodes=new Map<string,any>();let exported:Blob|undefined;
  const $=(id:string)=>{if(!nodes.has(id))nodes.set(id,{checked:true,replaceChildren(){},append(){},addEventListener(_event:string,fn:any){this.click=fn;}});return nodes.get(id);};
@@ -89,14 +90,14 @@ test('actual main accepted-run and download callbacks retain the producing worke
   assert.equal(withIdentity,true);if(deferred)return new Promise(resolve=>deferred!.push(resolve));
   return {result:{curves:[],metrics:[],assumptions:[]},producingCode:identity};
  };
- const execute=new Function('$','calculate','serializeRun','URL','document','plotSimulation',`
+ const execute=new Function('$','calculate','serializeRun','URL','document','plotSimulation','geometryModes','transportModes',`
  let latest=null,revision=0,liveTimer,busy,runController,comparisonController,apparatus,collector;
- const mode=()=> 'advection',isInfo=()=>false,isReduced=()=>true,config=()=>({seed:19});
- const surfaceState=()=>null,modelValidity=()=>'',numeric=String;
+ const mode=()=> 'advection',isInfo=()=>false,isReduced=()=>true,config=()=>({seed:19}),ions=()=>[],reducedConfig=()=>config();
+ const surfaceState=()=>null,modelValidity=()=>'',numeric=String,errorMessage=error=>{throw error;};
  ${run}
  ${download}
  return {run,getLatest:()=>latest};`);
- const app=execute($,calculate,serializeRun,{createObjectURL:(blob:Blob)=>{exported=blob;return 'blob:fixture';},revokeObjectURL(){}},{createElement:()=>({click(){}})},()=>{});
+ const app=execute($,calculate,serializeRun,{createObjectURL:(blob:Blob)=>{exported=blob;return 'blob:fixture';},revokeObjectURL(){}},{createElement:()=>({click(){}})},()=>{},geometryModes,transportModes);
  await app.run();assert.equal(app.getLatest().producingCode.sourceHash,identity.sourceHash);
  $('export').click();const result=JSON.parse(await exported!.text());
  assert.deepEqual(result.producingCode,identity);assert.equal(result.settings.seed,19);assert.equal(result.kind,'advection');
@@ -117,7 +118,10 @@ test('actual deferred renderer cleans environment/model/compile failures and hyd
   class Renderer {setPixelRatio(){}async init(){}setSize(){}setAnimationLoop(){}render(){}async compileAsync(){if(failure==='compile')throw Error('compile');}dispose(){counts.renderer++;}}
   class PMREM {fromScene(){if(failure==='environment')throw Error('environment');return {texture:{},dispose(){counts.environment++;}};}dispose(){counts.pmrem++;}}
   class Room {dispose(){counts.studio++;}}
-  class Loader {async loadAsync(){if(failure==='model')throw Error('model');const scene=new THREE.Group();scene.add(new THREE.Mesh(new THREE.BoxGeometry(3,1,1),new THREE.MeshBasicMaterial()));return {scene};}}
+  const originalMaterials:THREE.Material[]=[];
+  class Loader {async loadAsync(){if(failure==='model')throw Error('model');const scene=new THREE.Group();
+   const single=new THREE.MeshBasicMaterial(),array=[new THREE.MeshBasicMaterial(),new THREE.MeshBasicMaterial()];originalMaterials.push(...array,single);
+   scene.add(new THREE.Mesh(new THREE.BoxGeometry(3,1,1),array),new THREE.Mesh(new THREE.BoxGeometry(3,1,1),single));return {scene};}}
   class Controls {target=new THREE.Vector3();constructor(public camera:THREE.Camera){}update(){this.camera.lookAt(this.target);this.camera.updateMatrixWorld();}dispose(){counts.controls++;}}
   class Observer {observe(){counts.observed++;}disconnect(){counts.disconnected++;}}
   const handlers=new Map<string,(event:any)=>void>();
@@ -134,6 +138,8 @@ test('actual deferred renderer cleans environment/model/compile failures and hyd
   else{
    await app.initScene();assert.equal(counts.paths,1);assert.equal(counts.fields,1);assert.ok(app.state().hardware);
    const {hardware,camera,controls}=app.state(),box=new THREE.Box3().setFromObject(hardware);
+   const clones:THREE.Material[]=[];hardware.traverse((item:THREE.Object3D)=>{if(item instanceof THREE.Mesh)clones.push(...(Array.isArray(item.material)?item.material:[item.material]));});
+   assert.equal(clones.length,3);clones.forEach((material,index)=>{assert.ok(material instanceof THREE.Material);assert.notEqual(material,originalMaterials[index],'initialization clones both legal single and array materials');});
    const resetDistance=camera.position.distanceTo(controls.target);
    assert.ok(resetDistance>10,'actual narrow first-use initializer fits beyond the former distance cap');
    handlers.get('keydown')!({key:'-',preventDefault(){}});
@@ -150,4 +156,21 @@ test('actual deferred renderer cleans environment/model/compile failures and hyd
   assert.equal(counts.controls,failure==='environment'?0:1);
   assert.equal(counts.disconnected,counts.observed);
  }
+});
+
+test('actual legacy opacity and disposal support both legal Three material shapes',t=>{
+ const source=productionSource(new URL('../src/legacy-renderer.ts',import.meta.url));
+ const materials=[new THREE.MeshBasicMaterial(),new THREE.MeshBasicMaterial(),new THREE.MeshBasicMaterial()];
+ const geometries=[new THREE.BoxGeometry(),new THREE.BoxGeometry()],hardware=new THREE.Group();
+ hardware.add(new THREE.Mesh(geometries[0],[materials[0],materials[1]]),new THREE.Mesh(geometries[1],materials[2]));
+ const disposed:number[]=[],geometryDisposed:number[]=[];
+ materials.forEach((material,index)=>t.mock.method(material,'dispose',()=>{disposed.push(index);}));
+ geometries.forEach((geometry,index)=>t.mock.method(geometry,'dispose',()=>{geometryDisposed.push(index);}));
+ const construct=new Function('THREE','hardware',`const trajectories=new THREE.Group(),fieldGroup=new THREE.Group();${productionFunctions(source,['materials','clear','showView'])}return {clear,showView};`);
+ const app=construct(THREE,hardware);
+ app.showView('fields');
+ for(const material of materials){assert.equal(material.transparent,true);assert.equal(material.opacity,.12);assert.equal(material.depthWrite,false);}
+ app.showView('hardware');
+ for(const material of materials){assert.equal(material.transparent,false);assert.equal(material.opacity,1);assert.equal(material.depthWrite,true);}
+ app.clear(hardware);assert.deepEqual(disposed,[0,1,2]);assert.deepEqual(geometryDisposed,[0,1]);assert.equal(hardware.children.length,0);
 });

@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {productionSource,productionFunctions,productionAssignment,productionMethodCall,productionEventBody} from './helpers/production-code.js';
-import {renderPlots} from '../src/laboratory.js';
+import {renderPlots,geometryModes,transportModes} from '../src/laboratory.js';
 import {simulate,DEFAULT_CONFIG} from '../src/physics.js';
 import {geometry,DEFAULT_GEOMETRY} from '../src/geometries.js';
 import {modelValidity} from '../src/limitations-ui.js';
@@ -95,12 +95,12 @@ test('grossly invalid curved-drift settings are labeled as extrapolation',()=>{
 });
 test('comparison cards retain the actual independent operating points and model boundaries',async t=>{
  const {$,document}=dom(t),source=productionSource('src/main.ts');
- const body=productionEventBody(source,'compare');
+ const body=`const ions=()=>[],reducedConfig=selected=>config(selected);${productionFunctions(source,['prepareRun','calculateRun'])}${productionEventBody(source,'compare')}`;
  const AsyncFunction=Object.getPrototypeOf(async()=>{}).constructor;
- const handler=new AsyncFunction('revision','comparisonController','coreModes','config','calculate','isReduced','guide','numeric','modelValidity','$','document','workspace',body);
+ const handler=new AsyncFunction('revision','comparisonController','coreModes','config','calculate','isReduced','guide','numeric','modelValidity','$','document','workspace','geometryModes','transportModes',body);
  const modes=['curved','doublewell'],configs=modes.map((_,i)=>({...DEFAULT_GEOMETRY,magneticT:.1+i*.1}));
  const opened:string[]=[];
- await handler(0,undefined,modes,(s:string)=>configs[modes.indexOf(s)],(s:any,c:any)=>Promise.resolve(geometry(s,c)),()=>true,(s:string)=>({title:s,fidelity:'limits'}),String,modelValidity,$,document,{open:(key:string)=>opened.push(key)});
+ await handler(0,undefined,modes,(s:string)=>configs[modes.indexOf(s)],(s:any,c:any,_signal:any,withIdentity:boolean)=>{assert.equal(withIdentity,true);return Promise.resolve({result:geometry(s,c),producingCode:null});},()=>true,(s:string)=>({title:s,fidelity:'limits'}),String,modelValidity,$,document,{open:(key:string)=>opened.push(key)},geometryModes,transportModes);
  assert.deepEqual(opened,['plots']);
  const cards=$('comparison-results').children;assert.equal(cards.length,2);
  for(let i=0;i<2;i++){
