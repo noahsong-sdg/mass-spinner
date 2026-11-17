@@ -29,3 +29,36 @@ publication. Renaming files while disabling checking would hide the original
 problem. Browser bundles will still be JavaScript: TypeScript checks authored
 source and erases types when building. Independent scientific Python, Julia, and
 OpenFOAM tools retain their native languages.
+
+## Verified first batch
+
+Source revision: `639634e58db402b41c3f2a70535febf3a98453ae`.
+[Isolated CI run](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44124864675)
+passed both strict compiler configurations, 30 focused sharing/baseline cases,
+all 1,436 runtime tests, the existing qualification groups, 20 Python tests,
+the production build, and site/asset checks. Independent source review found no
+blocking regressions. Source now contains 86 TypeScript and 69 JavaScript modules;
+the remaining JavaScript callers are still outside `tsc`.
+
+Native deployed-browser checks confirmed:
+
+- Current entry, worker and graphics bundles loaded and the 3D apparatus rendered.
+- Cutting power at 0.5 s produced a version 3 link retaining the initial 0.03 A,
+  the 0 A intervention, transport mode and selected time. Opening that link in a
+  fresh tab restored its history, power state, plot and physical time.
+- In Models, pinning at 10,000 rad/s and changing to 12,000 rad/s kept the baseline
+  curves; Restore returned 10,000 rad/s and the original equilibrium outputs.
+- No browser console errors were recorded in the fresh-release checks.
+
+A deployment transition exposed cached HTML referencing the previous hashed
+worker after its removal. The immediate remedy retains the previous green
+release's hashed assets alongside the new ones; fresh navigation confirmed the
+new entry and worker. Final Cloudflare version:
+`8b48eafe-1ada-4406-9d6b-d138a5b1cae1`. This preserves open-tab compatibility more
+safely than forcing a reload and discarding a user's in-progress run. Future
+publishing should retain prior hashes too; long-lived tabs spanning older
+releases are not qualified by this check. A separate terminal HTTPS body/hash
+check was blocked with HTTP 403, so it is not claimed as verification evidence.
+
+The migration keeps runtime guards and adds genuine compiler coverage. A bulk
+extension rename or unchecked TypeScript would leave the same contract gap.
