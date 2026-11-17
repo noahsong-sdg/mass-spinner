@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.contracts.json",
     "build": "node scripts/build.mjs",
     "check:assets": "python3 blender/check_assets.py",
     "check:site": "node scripts/check-site.mjs",
