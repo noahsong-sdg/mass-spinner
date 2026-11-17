@@ -26,15 +26,15 @@ nav{position:sticky;top:0;z-index:1;padding-block:8px;background:#111b16}h2{scro
 .drive-field circle.drive-field-dot,.drive-field-key circle.drive-field-dot{fill:#a1b7c2;stroke:none}
 .drive-currents path{fill:none;stroke:#9bd8ce;stroke-width:2}.drive-currents text{fill:#9bd8ce}
 .drive-forces path{fill:none;stroke:#e4ac76;stroke-width:2.5}.drive-forces text{fill:#e4ac76}
-.drive-ions{fill:#9bd8ce;stroke:#14231c;stroke-width:1.5;animation:drive-turn 9s linear infinite}
-.drive-neutrals{fill:#14231c;stroke:#e5c489;stroke-width:1.8;animation:drive-turn 15s linear infinite}
+.drive-ions{fill:none;stroke:#9bd8ce;stroke-width:1.8;animation:drive-turn 9s linear infinite}
+.drive-neutrals{fill:#e5c489;stroke:#14231c;stroke-width:1.2;animation:drive-turn 15s linear infinite}
 .drive-orbit{transform-box:view-box;transform-origin:160px 160px}
 .drive-illustration[data-stage=current] .drive-orbit,.drive-illustration[data-stage=ions] .drive-neutrals,.drive-illustration[data-motion=paused] .drive-orbit{animation-play-state:paused}
 .drive-illustration[data-stage=current] .drive-forces{visibility:hidden}
 .drive-illustration[data-stage=current] .drive-neutrals,.drive-illustration[data-stage=ions] .drive-neutrals{opacity:.45}
 .drive-key{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;padding:12px 0;font-size:12px;border-block:1px solid #405749}
 .drive-key span{display:inline-flex;align-items:center;gap:7px}.drive-key i{display:inline-block;width:9px;height:9px;border-radius:50%}
-.drive-ion-key{background:#9bd8ce}.drive-neutral-key{border:1.5px solid #e5c489}.drive-force-key{color:#e4ac76}
+.drive-ion-key{border:1.5px solid #9bd8ce}.drive-neutral-key{background:#e5c489}.drive-force-key{color:#e4ac76}
 .drive-explanation{margin:14px 0 4px;min-height:3.4em;font-size:14px;line-height:1.6}
 .drive-illustration figcaption{font-size:11px;padding-top:4px}
 @keyframes drive-turn{to{transform:rotate(-360deg)}}

@@ -20,6 +20,7 @@ test('the website renders every guide equation and its derivation, with accessib
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
  }
  assert.match(doc.getElementById('drive-description')!.textContent!,/inward to the left.*counterclockwise torque/);
+ assert.match(doc.getElementById('drive-description')!.textContent!,/Hollow circles represent ions; filled dots represent neutral atoms/);
  assert.match(doc.body.textContent!,/Schematic trend, not computed data/);
  assert.match(doc.body.textContent!,/not a reconstruction/);
  for(const topic of guideTopics){
@@ -83,6 +84,7 @@ test('the end-view force arrows give the same counterclockwise torque in all fou
   assert.ok(x*dx+y*dy<0,'current must point inward in every quadrant');
  }
  const style=readFileSync('web-assets/guide.css','utf8');assert.match(style,/@keyframes drive-turn\{to\{transform:rotate\(-360deg\)\}\}/);
+ assert.match(style,/\.drive-ions\{fill:none;/,'hollow ions must match the live 3D marker convention');
 });
 
 test('a malformed equation fails the build instead of publishing raw or broken mathematics',()=>{

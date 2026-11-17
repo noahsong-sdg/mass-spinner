@@ -48,7 +48,7 @@ function driveDiagram(){
  <div class="drive-view"><h3>Looking into the end</h3>
  <svg viewBox="0 0 320 320" role="img" aria-labelledby="drive-title drive-description">
  <title id="drive-title">How radial current turns the gas</title>
- <desc id="drive-description">At the right, current points inward to the left, magnetic field points out of the page, and J cross B points up, giving counterclockwise torque. The same tangential force acts around the annulus. Filled dots represent ions; hollow circles represent neutral atoms. Motion illustrates bulk rotation, not microscopic trajectories or measured speeds.</desc>
+ <desc id="drive-description">At the right, current points inward to the left, magnetic field points out of the page, and J cross B points up, giving counterclockwise torque. The same tangential force acts around the annulus. Hollow circles represent ions; filled dots represent neutral atoms, matching the 3D view's marker shapes. Motion illustrates bulk rotation, not microscopic trajectories or measured speeds.</desc>
  <defs>${[['current','#9bd8ce'],['force','#e4ac76']].map(([kind,color])=>`<marker id="drive-${kind}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="${color}"/></marker>`).join('')}</defs>
  <circle cx="160" cy="160" r="116" fill="#1d3329" stroke="#a1b3a4" stroke-width="3"/>
  ${[58,84,104].map(r=>`<circle cx="160" cy="160" r="${r}" class="drive-track"/>`).join('')}
