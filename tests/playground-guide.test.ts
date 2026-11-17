@@ -59,3 +59,27 @@ test('the walkthrough respects the one-sheet mobile layout, Escape and context a
  f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
  assert.equal(f.node('start-here').hidden,true);assert.equal(f.node('window-guide').hidden,true);
 });
+
+test('physics reading loads on demand and preserves its place while controls or experiments are open',t=>{
+ const f=fixture(t);f.workspace.open('guide');const frame=f.node('physics-guide-frame');
+ assert.equal(frame.hasAttribute('src'),false,'do not load the full reading and math fonts before requested');
+ f.workspace.openPhysics('energy');assert.equal(frame.getAttribute('src'),'/guide.html#energy');
+ assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(f.doc.querySelector('.guide-reading').hidden,true);
+ f.workspace.open('controls');f.node('start-here').click();
+ assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(frame.getAttribute('src'),'/guide.html#energy');
+ const buttons=[...f.doc.querySelectorAll<HTMLButtonElement>('.guide-views button')];
+ buttons[0].click();assert.equal(f.doc.querySelector('.guide-reading').hidden,false);
+ buttons[1].click();assert.equal(frame.getAttribute('src'),'/guide.html#energy');
+ assert.equal(buttons[1].getAttribute('aria-pressed'),'true');
+});
+
+test('only messages from the same-origin guide frame can operate native controls or close the guide',t=>{
+ const f=fixture(t);f.workspace.openPhysics('drive');const frame=f.node('physics-guide-frame');
+ const send=(origin:string,source:any,action:string,type='mass-spinner:guide-action')=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type,action}}));
+ send('https://unrelated.example',frame.contentWindow,'current');assert.equal(f.node('window-controls').hidden,true);
+ send('https://example.org',f.window,'current');assert.equal(f.node('window-controls').hidden,true);
+ send('https://example.org',frame.contentWindow,'not-an-action');assert.equal(f.node('window-controls').hidden,true);
+ send('https://example.org',frame.contentWindow,'current');assert.equal(f.node('window-controls').hidden,false);
+ f.workspace.open('guide');send('https://example.org',frame.contentWindow,'','mass-spinner:guide-close');
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('start-here'));
+});

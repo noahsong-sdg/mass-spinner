@@ -104,6 +104,32 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  assert.match(f.node('guide-status').textContent,/Choose Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
+test('reading links use accepted physics results and focus the real collision, drag and heat controls',async t=>{
+ const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const focused:any[]=[];
+ const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated:(...args)=>focused.push(args)});
+ guide.showPhysics('momentum');const frame=host.querySelector<HTMLIFrameElement>('iframe')!;
+ const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
+ const send=(action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin:'https://example.org',source:frame.contentWindow,data:{type:'mass-spinner:guide-action',action}}));
+ for(const [key,id]of [['current','currentA'],['collisions','collisionHz'],['drag','dragHz'],['diffusion','radialDiffusivityM2S'],['cut','cutFraction']]){
+  send(key);assert.deepEqual(focused.at(-1),['controls',`#fuel-${id}`]);assert.ok(f.node(`fuel-${id}`));
+ }
+ send('composition');assert.equal(f.node('fuel-plot').value,'composition');
+ send('thermalPlot');assert.match(f.node('guide-status').textContent,/Enable Evolve gas/);assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ send('work');assert.equal(f.node('fuel-plot').value,'heat');
+ assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests);
+});
+
+test('a standalone guide plot link waits for accepted results and cancels if another action is chosen',async t=>{
+ const f=fixture(t);const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated(){}});
+ guide.launch('composition');assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);
+ await f.start();await flush();assert.equal(f.node('fuel-plot').value,'composition');
+ f.change('fuel-currentA',.04);guide.launch('composition');guide.launch('current');
+ f.change('fuel-plot','spin','change');await f.ui.run();await flush();
+ assert.equal(f.node('fuel-plot').value,'spin','the canceled opening must not override a newer user choice');
+});
+
 test('composition plot, precise radius, physical-time sampling and 3D ring share the accepted cell state',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-motion-time',.37);f.change('fuel-plot','composition','change');
  const count=f.requests.length,r=f.ui.latest.result,tools=f.viewers[0].built.tools;

@@ -100,7 +100,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Start here','left')};
  const guideButton=windows.get('guide').button;guideButton.id='start-here';header.append(guideButton);
- setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated});
+ const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated});
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);
  function group(parent,levels,selectors,context){
@@ -161,5 +161,5 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   const node=selector?item.body.querySelector(selector):null;
   if(node){for(let parent=node.parentElement;parent&&parent!==item.body;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;node.scrollIntoView?.({block:'nearest'});node.focus?.({preventScroll:true});}
  }
- return {open,close,focusRelated,refreshMode:refresh,setLevel(next){for(const key of windows.keys())close(key);level=next;refresh();}};
+ return {open,close,focusRelated,openPhysics(topic){open('guide');guide.showPhysics(topic);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next){for(const key of windows.keys())close(key);level=next;refresh();}};
 }

@@ -7,8 +7,12 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
 .world-top #start-here{margin-left:auto;flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
 .world-top #start-here[aria-expanded=true]{background:#edbe90;color:#18211d}
-.world-window-body.playground-guide{display:flex;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
-.guide-reading{min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px}
+.world-window-body.playground-guide{display:flex;flex:1;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
+.guide-views{display:flex;flex:none;gap:6px;padding:10px 12px;border-bottom:1px solid #394b3f}
+.guide-views button{flex:1;min-height:44px;padding:8px;font-size:12px;border:1px solid #566b5c;border-radius:6px;color:#b9c7bd}
+.guide-views button[aria-pressed=true]{background:#26392e;color:#edbe90}
+.guide-physics{flex:1;min-height:0;display:flex}.guide-physics iframe{width:100%;flex:1;min-height:0;border:0;background:#111b16}
+.guide-reading{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px}
 .guide-reading>p:first-child{color:#b9c7bd;margin:0 0 16px;font-size:12px}
 .guide-reading>label{display:block;color:#b9c7bd;font-size:12px}
 .guide-reading>select{width:100%;min-height:44px;margin:6px 0 20px;font-size:13px}
@@ -24,7 +28,7 @@ body.immersive{overflow:hidden;background:#101614}
 .guide-leave{color:#b9c7bd}
 .guide-reading>a{display:block;min-height:44px;padding-block:10px;color:#b9c7bd;font-size:12px}
 .playground-guide #guide-status:empty{display:none}
-.playground-guide #guide-status{color:#edbe90}
+.playground-guide #guide-status{flex:none;margin:0;padding:10px 16px;color:#edbe90;font-size:12px}
 .world-top .learning-path{flex:none;min-width:0;min-height:0;padding:0 24px 0 0;gap:0;border:0;background:none}
 .world-top .level-navigation{align-self:stretch;align-items:stretch;gap:0;margin:0;width:auto;flex-wrap:nowrap;overflow:visible;flex:none}
 .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 14px;font-size:12px}

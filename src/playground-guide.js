@@ -1,3 +1,5 @@
+import {guideActions,guideTopics} from './guide-topics.js';
+
 const steps=[
  {title:'Meet the centrifuge',intro:'Separate lighter and heavier atoms by spinning a gas. The default feed is lithium: ⁶Li and ⁷Li are the same element with different masses.',
   do:'Drag the apparatus to orbit; scroll or pinch to zoom. Open the cutaway, then click a component to inspect its role and material.',
@@ -41,7 +43,22 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  for(const button of [previous,next,leave])button.type='button';
  leave.setAttribute('aria-label','Back to the scene');
  const methods=el('a','Equations & accuracy limits ↗');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';
- nav.append(previous,next,leave);reading.append(intro,label,choice,content,status,methods);host.append(reading,nav);
+ const views=el('div'),explore=el('button','Experiments'),physics=el('button','Physics & equations'),reader=el('div'),frame=el('iframe');
+ views.className='guide-views';views.setAttribute('role','group');views.setAttribute('aria-label','Guide view');
+ reader.className='guide-physics';reader.hidden=true;frame.title='Mass Spinner physical guide with equations and diagrams';frame.id='physics-guide-frame';reader.append(frame);
+ for(const button of [explore,physics])button.type='button';
+ explore.setAttribute('aria-pressed','true');physics.setAttribute('aria-pressed','false');views.append(explore,physics);
+ function showPhysics(topic){
+  reading.hidden=true;reader.hidden=false;previous.hidden=true;next.hidden=true;
+  explore.setAttribute('aria-pressed','false');physics.setAttribute('aria-pressed','true');
+  if(!frame.hasAttribute('src')||topic){const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';frame.src=`/guide.html#${id}`;}
+ }
+ function showExplore(){
+  reading.hidden=false;reader.hidden=true;previous.hidden=false;next.hidden=false;
+  explore.setAttribute('aria-pressed','true');physics.setAttribute('aria-pressed','false');
+ }
+ explore.addEventListener('click',showExplore);physics.addEventListener('click',()=>showPhysics());
+ nav.append(previous,next,leave);reading.append(intro,label,choice,content,methods);host.append(views,reading,reader,status,nav);
  let index=0;
  const node=id=>doc.getElementById(id);
  function set(id,value,type='change'){
@@ -49,7 +66,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function plot(value){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
-  if(option.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
+  if(option.disabled){status.textContent=value==='thermal'?'Enable Evolve gas & liner temperature in Controls to use this plot.':'Choose Isotope separation in Controls to use this plot.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
   doc.querySelector('#fuel-plots > .live-plots').scrollIntoView?.({block:'nearest'});return true;
  }
@@ -58,10 +75,14 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   set('fuel-motion-time',node('fuel-motion-time').max,'input');
  }
  function composition(){endpoint();plot('composition');node('fuel-locate-plot').click();}
+ const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
+ const controlFocus={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',cut:'#fuel-cutFraction',controls:null};
+ let cancelLaunch=()=>{};
  function action(key){
+  if(!allowed.has(key))return;
+  cancelLaunch();
   status.textContent='';
-  const focus={current:'#fuel-currentA',thermal:'#fuel-thermal-enabled',cut:'#fuel-cutFraction',controls:null};
-  if(Object.hasOwn(focus,key)){focusRelated('controls',focus[key]);return;}
+  if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   // Pending/failed results must not be presented as a fresh experiment.
   if(!node('fuel-export')||node('fuel-export').disabled){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
   if(key==='look'){
@@ -79,10 +100,29 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
     comparison.scrollIntoView?.({block:'nearest'});
    }
   }else if(key==='work')plot('heat');
+  else if(key==='thermalPlot')plot('thermal');
   else if(key==='collection'){endpoint();plot('cut');}
   else if(key==='pin'){
    doc.querySelector('[aria-label="Pin accepted experiment as comparison A"]').click();open('view',true);
   }
+ }
+ // Only this embedded reader may request one of the explicitly listed native actions.
+ doc.defaultView.addEventListener('message',event=>{
+  if(event.origin!==doc.defaultView.location.origin||event.source!==frame.contentWindow)return;
+  if(event.data?.type==='mass-spinner:guide-action')action(event.data.action);
+  else if(event.data?.type==='mass-spinner:guide-view'&&event.data.view==='experiments')showExplore();
+  else if(event.data?.type==='mass-spinner:guide-close')close('guide',true);
+ });
+ function launch(key){
+  if(!allowed.has(key))return;
+  cancelLaunch();const accepted=node('fuel-export');
+  if(Object.hasOwn(controlFocus,key)||!accepted||!accepted.disabled){action(key);return;}
+  status.textContent='Waiting for the computed run before opening this plot…';
+  const observer=new doc.defaultView.MutationObserver(()=>{
+   if(!accepted.disabled){cancelLaunch();if(!node('start-here')?.hidden)action(key);}
+  });
+  cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};};
+  observer.observe(accepted,{attributes:true,attributeFilter:['disabled']});
  }
  function render(focus=false){
   const step=steps[index];choice.value=String(index);status.textContent='';
@@ -101,4 +141,5 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  next.addEventListener('click',()=>{if(index===steps.length-1)close('guide',true);else{index++;render(true);}});
  leave.addEventListener('click',()=>close('guide',true));
  render();
+ return {showPhysics,showExplore,launch};
 }

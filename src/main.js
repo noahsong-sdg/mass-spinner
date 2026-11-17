@@ -54,7 +54,8 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { DEFAULT_CONFIG, cutoffMassU, E_CHARGE, AMU } from './physics.ts';
 
 const $ = id => document.getElementById(id);
-const openGuideOnLoad=new URL(location.href).searchParams.get('guide')==='start';
+const guideQuery=new URL(location.href).searchParams;
+const guideOnLoad=guideQuery.get('guide'),guideTopic=guideQuery.get('topic'),guideAction=guideQuery.get('try');
 const colors = [0xa4c4b1, 0xd2956b];
 const inputs = ['field','voltage','energy','parallel','source-radius','distribution','axial-temperature','particles','resolution','mass-a','mass-b','charge-a','charge-b','neutral-density','neutral-cross-section','neutral-mass','rf-amplitude','rf-frequency','rf-handedness','rotation','ion-temperature','electron-temperature','axis-fraction','radial-cut','radial-resolution','random-seed','centrifuge-closure','magnetic-boundary','composition-boundary','gaussian-field','gaussian-width','gaussian-density'];
 const ions = () => ['a','b'].map(k=>({massU:+$('mass-'+k).value,chargeState:+$('charge-'+k).value}));
@@ -480,4 +481,8 @@ baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',showResearch);
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
 experience=setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
-if(openGuideOnLoad)workspace.open('guide');
+if(guideOnLoad==='start'||guideOnLoad==='physics'){
+ workspace.open('guide');
+ if(guideOnLoad==='physics')workspace.openPhysics(guideTopic);
+ if(guideAction)workspace.launchGuideAction(guideAction);
+}
