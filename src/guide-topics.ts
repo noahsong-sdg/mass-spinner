@@ -1,4 +1,5 @@
 /** Stable reading anchors and actions over the existing centrifuge controls. */
+export type GuideTopic = {id:string;heading:string;diagram?:string;actions:readonly (readonly [string,string])[]};
 export const guideTopics=[
  {id:'goal',heading:'What are we trying to predict?',actions:[['spin','Replay spin-up']]},
  {id:'drive',heading:'1. How do we spin a gas without spinning a drum?',diagram:'drive',actions:[['look','Show gas & drive'],['current','Adjust current']]},
@@ -8,5 +9,7 @@ export const guideTopics=[
  {id:'energy',heading:'5. Where does the energy go?',diagram:'energy',actions:[['work','Show drive work'],['thermal','Open thermal controls'],['thermalPlot','Show temperature']]},
  {id:'collection',heading:'6. Why do we need time and collection, too?',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve'],['diffusion','Adjust diffusivity'],['duration','Adjust run duration']]},
  {id:'limits',heading:'Why these pieces, and what is still missing?',actions:[['pin','Pin this run as A']]},
-];
-export const guideActions=new Set(guideTopics.flatMap(topic=>topic.actions.map(([key])=>key)));
+] as const satisfies readonly GuideTopic[];
+export type GuideTopicId = typeof guideTopics[number]['id'];
+export type GuideAction = typeof guideTopics[number]['actions'][number][0];
+export const guideActions:ReadonlySet<string>=new Set<string>(guideTopics.flatMap(topic=>topic.actions.map(([key])=>key)));

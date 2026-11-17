@@ -1,10 +1,13 @@
 /** Move presentation controls without intercepting inputs or changing simulation state. */
-export function floatingPlayback(panel){
- const doc=panel.ownerDocument,win=doc.defaultView,parent=panel.parentElement;
+export function floatingPlayback(panel:HTMLElement){
+ const doc=panel.ownerDocument,win=doc.defaultView!,parent=panel.parentElement!;
  const grip=doc.createElement('button');grip.type='button';grip.className='fuel-motion-grip';grip.textContent='⠿';
  grip.setAttribute('aria-label','Move playback panel');grip.title='Drag to move · arrow keys move · Home or double-click resets';panel.prepend(grip);
- const key='mass-spinner-playback-v1';let position=null,drag=null,storage;
- try{storage=win.localStorage;const saved=JSON.parse(storage.getItem(key));if(saved?.version===1&&['x','y'].every(k=>Number.isFinite(saved[k])&&saved[k]>=0&&saved[k]<=1))position=saved;}catch{}
+ const key='mass-spinner-playback-v1';
+ type Position={x:number;y:number};
+ type Drag={id:number;x:number;y:number;left:number;top:number};
+ let position:Position|null=null,drag:Drag|null=null,storage:Storage|undefined;
+ try{storage=win.localStorage;const saved:unknown=JSON.parse(storage.getItem(key)??'null');if(saved&&typeof saved==='object'&&'version' in saved&&saved.version===1&&'x' in saved&&typeof saved.x==='number'&&Number.isFinite(saved.x)&&saved.x>=0&&saved.x<=1&&'y' in saved&&typeof saved.y==='number'&&Number.isFinite(saved.y)&&saved.y>=0&&saved.y<=1)position={x:saved.x,y:saved.y};}catch{}
  function bounds(){const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect(),workspace=parent.closest('.sim-workspace'),top=workspace?64:8,bottom=workspace?(parseFloat(win.getComputedStyle(workspace).getPropertyValue('--world-bottom'))||86):8;return {top,x:Math.max(0,p.width-b.width-16),y:Math.max(0,p.height-b.height-top-bottom)};}
  function reservePlayback(){
   let inset=0;
@@ -24,21 +27,21 @@ export function floatingPlayback(panel){
  }
  function save(){try{if(position)storage?.setItem(key,JSON.stringify({version:1,...position}));else storage?.removeItem(key);}catch{}}
  function reset(){position=null;panel.classList.remove('fuel-motion-moved');panel.style.removeProperty('left');panel.style.removeProperty('top');save();apply();}
- function move(x,y){const b=bounds();position={x:b.x?Math.max(0,Math.min(1,(x-8)/b.x)):0,y:b.y?Math.max(0,Math.min(1,(y-b.top)/b.y)):0};apply();}
- const down=e=>{
+ function move(x:number,y:number){const b=bounds();position={x:b.x?Math.max(0,Math.min(1,(x-8)/b.x)):0,y:b.y?Math.max(0,Math.min(1,(y-b.top)/b.y)):0};apply();}
+ const down=(e:PointerEvent)=>{
   if(e.button!==0||e.isPrimary===false||drag)return;
   const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect();drag={id:e.pointerId,x:e.clientX,y:e.clientY,left:b.left-p.left,top:b.top-p.top};
   e.preventDefault();grip.focus({preventScroll:true});grip.setPointerCapture?.(e.pointerId);grip.classList.add('is-dragging');
  };
- const moving=e=>{if(drag?.id===e.pointerId)move(drag.left+e.clientX-drag.x,drag.top+e.clientY-drag.y);};
- const end=e=>{if(drag?.id!==e.pointerId)return;drag=null;grip.classList.remove('is-dragging');save();};
- const keyboard=e=>{
+ const moving=(e:PointerEvent)=>{if(drag?.id===e.pointerId)move(drag.left+e.clientX-drag.x,drag.top+e.clientY-drag.y);};
+ const end=(e:PointerEvent)=>{if(drag?.id!==e.pointerId)return;drag=null;grip.classList.remove('is-dragging');save();};
+ const keyboard=(e:KeyboardEvent)=>{
   if(e.key==='Home'){e.preventDefault();reset();return;}
-  const d={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]}[e.key];if(!d)return;
+  const directions:Record<string,[number,number]>={ArrowLeft:[-24,0],ArrowRight:[24,0],ArrowUp:[0,-24],ArrowDown:[0,24]};const d=directions[e.key];if(!d)return;
   e.preventDefault();const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect();move(b.left-p.left+d[0],b.top-p.top+d[1]);save();
  };
  grip.addEventListener('pointerdown',down);grip.addEventListener('pointermove',moving);
- for(const type of ['pointerup','pointercancel','lostpointercapture'])grip.addEventListener(type,end);
+ for(const type of ['pointerup','pointercancel','lostpointercapture'] as const)grip.addEventListener(type,end);
  grip.addEventListener('keydown',keyboard);grip.addEventListener('dblclick',reset);win.addEventListener('resize',apply);
  const observer=win.ResizeObserver?new win.ResizeObserver(apply):null;observer?.observe(parent);observer?.observe(panel);apply();
  const visibility=new win.MutationObserver(apply);visibility.observe(panel,{attributes:true,attributeFilter:['hidden']});visibility.observe(parent,{attributes:true,attributeFilter:['class']});
