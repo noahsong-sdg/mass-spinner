@@ -1,24 +1,29 @@
+export interface RangeDescriptor {
+ scale?: 'linear' | 'log10'; unit?: string; integer?: boolean; label?: string;
+}
+export interface PreciseControlOptions {describeRange?: (range: HTMLInputElement) => RangeDescriptor | null | undefined}
+export interface PreciseControls {reset(scope?: ParentNode & Node): void}
 /** Exact entry augments an existing range/readout; its input event remains the model API.
  * Log scales and integer domains must be declared, never inferred from captions. */
-export function setupPreciseControls(root,{describeRange=()=>({})}={}){
- const controls=[];
- for(const range of root.querySelectorAll('.control input[type=range]')){
+export function setupPreciseControls(root: ParentNode & Node,{describeRange=()=>({})}: PreciseControlOptions={}): PreciseControls{
+ const controls: {range: HTMLInputElement; reset: () => void}[]=[];
+ for(const range of root.querySelectorAll<HTMLInputElement>('.control input[type=range]')){
   if(range.dataset.preciseControl||range.dataset.precision==='off')continue;
-  const box=range.closest('.control'),output=box.querySelector('output');if(!output)continue;
+  const box=range.closest<HTMLElement>('.control')!,output=box.querySelector('output');if(!output)continue;
   const doc=range.ownerDocument,descriptor=describeRange(range)??{},scale=descriptor.scale??range.dataset.rangeScale??'linear';
   if(!['linear','log10'].includes(scale))throw new Error(`Unsupported range scale: ${scale}`);
   const unit=descriptor.unit??range.dataset.unit??'',integer=descriptor.integer??range.dataset.integer==='true';
   const name=descriptor.label??box.querySelector('label span')?.textContent??range.getAttribute('aria-label')??range.id;
-  const originalStep=range.step||'1',initial=range.value,toPhysical=value=>scale==='log10'?10**value:value;
+  const originalStep=range.step||'1',initial=range.value,toPhysical=(value: number)=>scale==='log10'?10**value:value;
   const min=Number(range.min||0),max=Number(range.max||100),physicalMin=toPhysical(min),physicalMax=toPhysical(max);
   const editor=doc.createElement('div'),input=doc.createElement('input'),error=doc.createElement('span');
   editor.className='precise-editor';editor.hidden=true;input.type='number';input.step='any';input.min=String(physicalMin);input.max=String(physicalMax);
   input.setAttribute('aria-label',`${name}${unit?` (${unit})`:''}`);error.className='precise-error';error.setAttribute('role','alert');
   const errorId=`${range.id}-precision-error`;error.id=errorId;input.setAttribute('aria-describedby',errorId);
-  const button=(text,label,action)=>{const node=doc.createElement('button');node.type='button';node.textContent=text;node.setAttribute('aria-label',label);node.addEventListener('click',action);return node;};
+  const button=(text: string,label: string,action: () => void)=>{const node=doc.createElement('button');node.type='button';node.textContent=text;node.setAttribute('aria-label',label);node.addEventListener('click',action);return node;};
   const close=()=>{editor.hidden=true;output.removeAttribute('aria-expanded');error.textContent='';input.removeAttribute('aria-invalid');output.focus();};
-  const emit=()=>range.dispatchEvent(new doc.defaultView.Event('input',{bubbles:true}));
-  const setValue=value=>{
+  const emit=()=>range.dispatchEvent(new doc.defaultView!.Event('input',{bubbles:true}));
+  const setValue=(value: number)=>{
    // Native range inputs quantize against step. 'any' deliberately preserves an exact
    // off-grid value until an explicit slider gesture chooses a stepped value again.
    range.step='any';range.value=String(value);emit();
@@ -39,10 +44,10 @@ export function setupPreciseControls(root,{describeRange=()=>({})}={}){
   const restoreStep=()=>{const before=range.value;range.step=originalStep;if(range.value!==before)emit();};
   range.addEventListener('pointerdown',restoreStep);
   range.addEventListener('keydown',event=>{
-   const direction={ArrowLeft:-1,ArrowDown:-1,ArrowRight:1,ArrowUp:1,PageDown:-10,PageUp:10}[event.key];
+   const direction=({ArrowLeft:-1,ArrowDown:-1,ArrowRight:1,ArrowUp:1,PageDown:-10,PageUp:10} as Record<string, number | undefined>)[event.key];
    if(direction===undefined&&!['Home','End'].includes(event.key))return;
    const step=Number(originalStep);if(!Number.isFinite(step)||step<=0)return;event.preventDefault();
-   const value=event.key==='Home'?min:event.key==='End'?max:min+(Math.round((Number(range.value)-min)/step)+direction)*step;
+   const value=event.key==='Home'?min:event.key==='End'?max:min+(Math.round((Number(range.value)-min)/step)+direction!)*step;
    range.step=originalStep;range.value=String(Math.max(min,Math.min(max,value)));emit();
   });
   range.dataset.preciseControl='true';controls.push({range,reset});
