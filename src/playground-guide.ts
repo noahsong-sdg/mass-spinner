@@ -31,9 +31,20 @@ const steps=[
   note:'Matching screened inputs is a narrow numerical check, not experimental accuracy. Other settings are exploratory. Reset ↺ restores the playground defaults.',actions:[['pin','Pin this run as A'],['controls','Open controls']]},
 ];
 
+export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
+type GuideElements={
+ 'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
+ 'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;
+ 'fuel-equilibrium-calculator':HTMLDetailsElement;'fuel-locate-plot':HTMLButtonElement;'start-here':HTMLButtonElement;
+ 'fuel-view-representation':HTMLSelectElement;'fuel-view-cutaway':HTMLInputElement;'fuel-view-drive':HTMLSelectElement;
+ 'fuel-component':HTMLSelectElement;'fuel-view-radius':HTMLInputElement;'fuel-compare-temperature':HTMLButtonElement;'fuel-compare-rotation':HTMLButtonElement;
+};
+type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
+
 /** Optional guidance over existing live controls; no alternate simulation or physical presets. */
-export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated}){
- const el=(tag,text)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
+export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated}:PlaygroundGuideOptions){
+ const win=doc.defaultView!;
+ const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
  const intro=el('p','Seven small experiments. Your current settings stay as they are; nothing is reset.'),label=el('label','Explore'),choice=el('select');
  choice.id='guide-step';label.htmlFor=choice.id;
@@ -48,7 +59,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  reader.className='guide-physics';reader.hidden=true;frame.title='Mass Spinner physical guide with equations and diagrams';frame.id='physics-guide-frame';reader.append(frame);
  for(const button of [explore,physics])button.type='button';
  explore.setAttribute('aria-pressed','true');physics.setAttribute('aria-pressed','false');views.append(explore,physics);
- function showPhysics(topic){
+ function showPhysics(topic?:string){
   reading.hidden=true;reader.hidden=false;previous.hidden=true;next.hidden=true;
   explore.setAttribute('aria-pressed','false');physics.setAttribute('aria-pressed','true');
   if(!frame.hasAttribute('src')||topic){const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';frame.src=`/guide.html#${id}`;}
@@ -60,15 +71,15 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  explore.addEventListener('click',showExplore);physics.addEventListener('click',()=>showPhysics());
  nav.append(previous,next,leave);reading.append(intro,label,choice,content,methods);host.append(views,reading,reader,status,nav);
  let index=0;
- const node=id=>doc.getElementById(id);
- function set(id,value,type='change'){
-  const input=node(id);input.value=String(value);input.dispatchEvent(new doc.defaultView.Event(type,{bubbles:true}));
+ const node=<K extends keyof GuideElements>(id:K)=>doc.getElementById(id) as GuideElements[K];
+ function set(id:GuideValueId,value:string|number,type='change'){
+  const input=node(id);input.value=String(value);input.dispatchEvent(new win.Event(type,{bubbles:true}));
  }
- function plot(value){
+ function plot(value:string){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
-  if(option.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
+  if(option!.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
-  doc.querySelector('#fuel-plots > .live-plots').scrollIntoView?.({block:'nearest'});return true;
+  doc.querySelector<HTMLElement>('#fuel-plots > .live-plots')!.scrollIntoView?.({block:'nearest'});return true;
  }
  function endpoint(){
   if(node('fuel-motion-mode').value!=='transport')set('fuel-motion-mode','transport');
@@ -79,11 +90,11 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
- const controlFocus={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',duration:'#fuel-durationS',controls:null};
- const pinButton=()=>doc.querySelector('[aria-label="Pin accepted experiment as comparison A"]');
- const pending=key=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton().disabled);
+ const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',duration:'#fuel-durationS',controls:null};
+ const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');
+ const pending=(key:string)=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton()!.disabled);
  let cancelLaunch=()=>{};
- function action(key){
+ function action(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();
   status.textContent='';
@@ -110,29 +121,31 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   else if(key==='work')plot('heat');
   else if(key==='thermalPlot')plot('thermal');
   else if(key==='collection'){endpoint();plot('cut');}
-  else if(key==='cut'){transient();set('fuel-motion-time',node('fuel-motion-time').value,'input');if(plot('cut'))doc.querySelector('#fuel-plots > .live-plots svg')?.focus();}
+  else if(key==='cut'){transient();set('fuel-motion-time',node('fuel-motion-time').value,'input');if(plot('cut'))doc.querySelector<SVGSVGElement>('#fuel-plots > .live-plots svg')?.focus();}
   else if(key==='pin'){
-   pinButton().click();open('view',true);
+   pinButton()!.click();open('view',true);
   }
  }
  // Only this embedded reader may request one of the explicitly listed native actions.
- doc.defaultView.addEventListener('message',event=>{
-  if(event.origin!==doc.defaultView.location.origin||event.source!==frame.contentWindow)return;
-  if(event.data?.type==='mass-spinner:guide-action')action(event.data.action);
-  else if(event.data?.type==='mass-spinner:guide-view'&&event.data.view==='experiments')showExplore();
-  else if(event.data?.type==='mass-spinner:guide-close')close('guide',true);
+ win.addEventListener('message',event=>{
+  if(event.origin!==win.location.origin||event.source!==frame.contentWindow)return;
+  const data:unknown=event.data;
+  if(!data||typeof data!=='object'||!('type' in data))return;
+  if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string')action(data.action);
+  else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments')showExplore();
+  else if(data.type==='mass-spinner:guide-close')close('guide',true);
  });
- function launch(key){
+ function launch(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();const accepted=node('fuel-export');
   if(key==='equilibrium'||Object.hasOwn(controlFocus,key)||!accepted||!pending(key)){action(key);return;}
   status.textContent='Waiting for the computed run and controls…';
-  const observer=new doc.defaultView.MutationObserver(()=>{
+  const observer=new win.MutationObserver(()=>{
    if(!pending(key)){cancelLaunch();if(!node('start-here')?.hidden)action(key);}
   });
   cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};};
   observer.observe(accepted,{attributes:true,attributeFilter:['disabled']});
-  if(key==='pin'&&pinButton())observer.observe(pinButton(),{attributes:true,attributeFilter:['disabled']});
+  const pin=pinButton();if(key==='pin'&&pin)observer.observe(pin,{attributes:true,attributeFilter:['disabled']});
  }
  function render(focus=false){
   const step=steps[index];choice.value=String(index);status.textContent='';

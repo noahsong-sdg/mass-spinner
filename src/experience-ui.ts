@@ -1,18 +1,28 @@
-import {PLAY_DEFAULTS,readExperience} from './experience-state.ts';
-import {captureScenario,readScenario,restoreScenario,scenarioLink} from './scenario-state.js';
+import {PLAY_DEFAULTS,readExperience} from './experience-state.js';
+import {captureScenario,readScenario,restoreScenario,scenarioLink,type Scenario,type ScenarioDraft,type FuelRunState} from './scenario-state.js';
+import type {ExperienceLevel,PlaySettings} from './experience-state.js';
+export type SetupExperienceOptions={selectMode:()=>void;invalidate:()=>void;showView:(view:string)=>void;showResearch?:()=>void;onLevelChange?:(level:ExperienceLevel)=>void;fuelCentrifuge?:{captureRun:(options?:{validate?:boolean})=>FuelRunState;restoreRun:(run?:FuelRunState)=>void}};
 
-const $=id=>document.getElementById(id);
+type ExperienceElements={
+ 'advanced-simulators':HTMLDetailsElement;'marathon-apparatus':HTMLSelectElement;'system':HTMLSelectElement;'replay-case':HTMLSelectElement;
+ 'field':HTMLInputElement;'voltage':HTMLInputElement;'energy':HTMLInputElement;'mass-b':HTMLInputElement;'play-mass-b':HTMLInputElement;'live-update':HTMLInputElement;'share-link':HTMLInputElement;
+ 'play-mass-b-value':HTMLElement;'share-status':HTMLElement;'level-title':HTMLElement;'share-playground':HTMLButtonElement;'reset-playground':HTMLButtonElement;
+};
+const $=<K extends keyof ExperienceElements>(id:K)=>document.getElementById(id) as ExperienceElements[K];
+const valueControl=(id:string)=>document.getElementById(id) as HTMLInputElement|HTMLSelectElement;
 const copy={'1':'Mass Spinner','2':'Marathon','3':'Models','4':'Research'};
 const fixedPlay={parallel:'20','source-radius':'4',distribution:'thermal','axial-temperature':'1',particles:'96',resolution:'2e-8',
  'mass-a':'40','charge-a':'1','charge-b':'1','neutral-density':'0','neutral-cross-section':'1e-19','neutral-mass':'40','random-seed':'42'};
 
-export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange,fuelCentrifuge}){
+export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange,fuelCentrifuge}:SetupExperienceOptions){
  const shared=readScenario(location.search),initial=readExperience(location.search);
- const levelButtons=[...document.querySelectorAll('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
+ const levelButtons=[...document.querySelectorAll<HTMLButtonElement>('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
  const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus');
- let level,savedPlay=initial.settings,shareRevision=0,hydrating=false,cancelDeferred=()=>{};
- const defaults=Object.fromEntries(['2','3','4'].map(key=>[key,captureScenario(document,key)]));
- let savedModels=defaults['3'];
+ let level:ExperienceLevel,savedPlay:PlaySettings=initial.settings,shareRevision=0,hydrating=false,cancelDeferred=()=>{};
+ const defaults={
+ '2':captureScenario(document,'2'),'3':captureScenario(document,'3'),'4':captureScenario(document,'4'),
+ };
+ let savedModels:ScenarioDraft=defaults['3'];
  const mask=()=>Object.fromEntries(Object.entries(captureScenario(document,'1',{validate:false}).controls).filter(([id])=>id.startsWith('collector-')));
  const defaultMask=mask();let savedMask={...defaultMask};
  const read=()=>({field:Number($('field').value),voltage:Number($('voltage').value),energy:Number($('energy').value),massB:Number($('mass-b').value)});
@@ -40,18 +50,18 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   $('share-playground').title=centrifuge?'Rerun inputs and drive history at the selected time. Camera and independent equilibrium calculator are separate.':'';
   sync();if(notifyLevel)onLevelChange?.(level);revealActiveLevel();
  }
- function enter(next,reset=false,dispatchEvents=true){
+ function enter(next:ExperienceLevel,reset=false,dispatchEvents=true){
   if(level==='1'&&!reset){savedPlay=read();savedMask=mask();}
   if(level==='3'&&!reset)savedModels=captureScenario(document,'3',{validate:false});
   cancelDeferred();level=next;invalidate();
   $('live-update').checked=level!=='4'&&level!=='2';
   if(level==='1'){
-   for(const [id,value]of Object.entries(fixedPlay))$(id).value=value;
-   for(const [key,value]of Object.entries(savedPlay))$(key==='massB'?'mass-b':key).value=String(value);
+   for(const [id,value]of Object.entries(fixedPlay))valueControl(id).value=value;
+   for(const [key,value]of Object.entries(savedPlay))valueControl(key==='massB'?'mass-b':key).value=String(value);
    restoreScenario(document,{version:2,level:'1',controls:savedMask},{validateDomains:false,dispatchEvents});
    $('system').value='rotating';selectMode();showView('render');
   }else if(level==='3'){
-   $('system').value=savedModels.controls.system??'centrifuge';selectMode();
+   $('system').value=String(savedModels.controls.system??'centrifuge');selectMode();
    // Local editing state may be unfinished; only shared/pinned scenarios require valid domains.
    restoreScenario(document,savedModels,{validateDomains:false,dispatchEvents});
   }else if(level==='4')showResearch?.();
@@ -59,12 +69,16 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('level',level);
   history.replaceState(null,'',url);
  }
- function capture({validate=true}={}){
+ function capture(options:{validate:false}):ScenarioDraft;
+ function capture(options?:{validate?:true}):Scenario;
+ function capture(options:{validate:boolean}):ScenarioDraft;
+ function capture({validate=true}:{validate?:boolean}={}):ScenarioDraft{
   const fuelRun=level==='2'&&apparatus?.value==='centrifuge'?fuelCentrifuge?.captureRun({validate}):undefined;
   return captureScenario(document,level,{validate,fuelRun});
  }
- function restore(scenario){
-  try{scenarioLink(location.href,scenario);}catch{$('share-status').textContent='Unsupported scenario.';return false;}
+ function shareable(value:unknown):asserts value is Scenario {scenarioLink(location.href,value);}
+ function restore(scenario:unknown){
+  try{shareable(scenario);}catch{$('share-status').textContent='Unsupported scenario.';return false;}
   const previous=capture({validate:false}),previousModels=savedModels;
   hydrating=true;
   try{
@@ -73,10 +87,10 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
    if(scenario.level==='3'&&scenario.controls.system!==undefined){
     const select=$('system');
     if(![...select.options].some(option=>option.value===scenario.controls.system))throw new Error('Unsupported model.');
-    select.value=scenario.controls.system;selectMode();
+    select.value=String(scenario.controls.system);selectMode();
    }
    cancelDeferred=restoreScenario(document,scenario,{onDeferredError:message=>$('share-status').textContent=message});
-   if(level==='2'&&apparatus?.value==='centrifuge')fuelCentrifuge?.restoreRun(scenario.fuelRun);
+   if(level==='2'&&apparatus?.value==='centrifuge')fuelCentrifuge?.restoreRun(scenario.version===3?scenario.fuelRun:undefined);
    if(level==='1'){savedPlay=read();$('system').value='rotating';selectMode();showView('render');}
    if(level==='3')savedModels=capture();
    refresh();return true;
@@ -90,16 +104,16 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  for(const button of levelButtons)button.addEventListener('click',()=>{
   const primary=button.dataset.level==='2'&&apparatus;
   if(primary)apparatus.value='centrifuge';
-  if(!primary||level!=='2')enter(button.dataset.level);
+  if(!primary||level!=='2')enter(button.dataset.level as ExperienceLevel);
   if(primary)apparatus.dispatchEvent(new (view?.Event??Event)('change'));
-  if(advanced){advanced.open=false;if(advanced.contains?.(button))advanced.querySelector('summary').focus();}
+  if(advanced){advanced.open=false;if(advanced.contains?.(button))advanced.querySelector('summary')!.focus();}
  });
  apparatus?.addEventListener('change',()=>{
   if(!hydrating&&level!=='2')enter('2');else refresh(false);
-  if(!hydrating&&advanced?.open){advanced.open=false;advanced.querySelector('summary').focus();}
+  if(!hydrating&&advanced?.open){advanced.open=false;advanced.querySelector('summary')!.focus();}
  });
  advanced?.addEventListener('keydown',event=>{
-  if(event.key==='Escape'&&advanced.open){event.preventDefault();advanced.open=false;advanced.querySelector('summary').focus();}
+  if(event.key==='Escape'&&advanced.open){event.preventDefault();advanced.open=false;advanced.querySelector('summary')!.focus();}
  });
  view?.addEventListener('resize',revealActiveLevel);
  $('play-mass-b').addEventListener('input',()=>{
@@ -107,7 +121,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  });
  $('share-playground').addEventListener('click',async()=>{
   let href;
-  try{href=scenarioLink(location.href,capture());}catch(error){$('share-status').textContent=error.message;return;}
+  try{href=scenarioLink(location.href,capture());}catch(error){$('share-status').textContent=error&&typeof error==='object'&&'message' in error?String(error.message):'';return;}
   const revision=shareRevision;$('share-link').value=href;$('share-link').hidden=false;
   try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent=level==='2'&&apparatus?.value==='centrifuge'?'Copied run link · fresh solve; camera and calculator separate.':'Copied experiment link.';}
   catch{if(revision===shareRevision)$('share-status').textContent='Select and copy the experiment link below.';}
@@ -121,7 +135,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   else restore(defaults[level]);
  }
  $('reset-playground').addEventListener('click',reset);
- for(const node of document.querySelectorAll('input[id],select[id]'))if(['INPUT','SELECT'].includes(node.tagName)){
+ for(const node of document.querySelectorAll<HTMLInputElement|HTMLSelectElement>('input[id],select[id]'))if(['INPUT','SELECT'].includes(node.tagName)){
   node.addEventListener(node.tagName==='SELECT'||node.type==='checkbox'?'change':'input',sync);
  }
  enter(shared.scenario?.level??initial.level);
