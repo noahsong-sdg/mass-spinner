@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 const html=readFileSync('release/index.html','utf8');
 const ids=new Set([...html.matchAll(/id="([^"]+)"/g)].map(match=>match[1]));
-for(const file of ['src/main.js','src/legacy-renderer.js','src/study-ui.js']){
+for(const file of ['src/main.ts','src/legacy-renderer.ts','src/study-ui.ts']){
  const source=readFileSync(file,'utf8');
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);

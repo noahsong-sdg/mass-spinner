@@ -1,6 +1,7 @@
 import {Marked} from 'marked';
 import katex from 'katex';
-import {guideTopics} from '../src/guide-topics.js';
+import {tsImport} from 'tsx/esm/api';
+const {guideTopics}=await tsImport('../src/guide-topics.ts',import.meta.url);
 import {guideDiagram} from './guide-diagrams.mjs';
 import {releaseSourceBase} from './release-links.mjs';
 

@@ -20,5 +20,5 @@
   <aside id="inspector" class="panel" aria-label="Selected component" hidden><div class="panel-heading"><h2 id="component-name"></h2><button data-close="inspector" aria-label="Close component">×</button></div><p id="component-purpose"></p><p id="component-material"></p></aside>
   <div class="readout" aria-label="Current state"><span><b id="temperature"></b> keV</span><span><b id="density"></b> m⁻³</span><span title="Beta=1 pressure-balance requirement; not a computed coil field"><b id="field"></b> T <small>β=1 estimate</small></span></div>
   <section class="transport" aria-label="Pulse timeline"><div class="playback"><button id="play">Play</button><button id="restart">Restart</button><output id="clock"></output><span id="phase"></span></div><input id="timeline" aria-label="Pulse time" type="range" min="0" max="1" step=".002" value="0"><div class="phases"><span>Form</span><span>Merge</span><span>Compress</span><span>Hold</span><span>Recover</span></div><p id="validity" role="status"></p></section>
- </main><script type="module" src="/src/laurelin-ui.js"></script>
+ </main><script type="module" src="/src/laurelin-ui.ts"></script>
 </body></html>

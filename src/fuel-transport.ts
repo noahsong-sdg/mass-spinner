@@ -1,3 +1,4 @@
+import type {FuelThermalOptions} from './fuel-operation.js';
 import {simulateFuelCentrifuge} from './fuel-centrifuge.js';
 import {fuelLinerState,type FuelLinerGrid,type FuelLinerState} from './fuel-thermal.js';
 import {advanceFuelGasMass,fuelGasState,type FuelGasState,type FuelGasTemperatureBasis} from './fuel-gas.js';
@@ -44,7 +45,7 @@ export type FuelTransportResult={
  thermalGas?:{number:number;lengthM:number};
  timeControl?:{method:'BE step doubling';relativeTolerance:number;temperatureToleranceK:number;startTimeS:number;
   acceptedPairs:number;rejectedSteps:number;maxErrorRatio:number};
- operation?:{schemaVersion:1;events:{timeS:number;currentA:number}[];thermal:unknown;setup:unknown;initialCurrentA:number};
+ operation?:{schemaVersion:1;events:{timeS:number;currentA:number}[];thermal:FuelThermalOptions;setup:Omit<RotorResult['config'],'durationS'|'currentA'>;initialCurrentA:number};
 };
 
 function nonnegative(value:number,name:string){

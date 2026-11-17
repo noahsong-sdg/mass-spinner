@@ -2,7 +2,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
-import {buildEngineeringGeometry} from '../src/engineering-geometry.js';
+import {buildEngineeringGeometry} from '../src/engineering-geometry.ts';
 
 // GLTFExporter uses the browser FileReader API for its binary buffer, even without textures.
 globalThis.FileReader=class {
@@ -19,7 +19,7 @@ for(const mode of requested){
  const built=buildEngineeringGeometry(inputs),file=`${mode}.glb`;
  const bytes=await new GLTFExporter().parseAsync(built.group,{binary:true,onlyVisible:true});
  await fs.writeFile(path.join(out,file),Buffer.from(bytes));
- records.push({mode,file,inputs,domain:built.domain,surfaceIds:[...built.surfaces.keys()],source:'src/engineering-geometry.js',basis:'Same procedural geometry as runtime. Construction assumptions are not a validated device bill of materials.'});
+ records.push({mode,file,inputs,domain:built.domain,surfaceIds:[...built.surfaces.keys()],source:'src/engineering-geometry.ts',basis:'Same procedural geometry as runtime. Construction assumptions are not a validated device bill of materials.'});
  built.dispose();
 }
 await fs.writeFile(path.join(out,'geometry-manifest.json'),JSON.stringify(records,null,2)+'\n');

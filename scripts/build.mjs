@@ -1,3 +1,4 @@
+import {transpileModule,ScriptTarget,ModuleKind} from 'typescript';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -18,7 +19,7 @@ if(build.status===0){
  writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));
- copyFileSync('src/guide-reader.js','release/guide-reader.js');
+ writeFileSync('release/guide-reader.js',transpileModule(readFileSync('src/guide-reader.ts','utf8'),{fileName:'guide-reader.ts',compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
  const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');
  mkdirSync('release/guide-katex',{recursive:true});
  copyFileSync(resolve(katexDist,'katex.min.css'),'release/guide-katex/katex.min.css');
