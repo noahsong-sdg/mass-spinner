@@ -44,8 +44,10 @@ test('an inactive spatial draft does not affect a lumped or disabled thermal run
 test('thermal validation and serialization follow model selection even before disabled attributes refresh',async t=>{
  const f=fixture(t);await f.start();const accepted=f.ui.latest,count=f.requests.length;
  f.node('fuel-thermal-enabled').checked=true;
+ assert.equal(f.node('fuel-thermal-coolingWK').disabled,true,'Model selection precedes the presentation-attribute refresh.');
  f.node('fuel-thermal-coolingWK').value=-1;await f.ui.run();
  assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count,'A stale disabled attribute cannot hide an active out-of-domain input.');
+ assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
  f.node('fuel-thermal-coolingWK').value=.5;f.node('fuel-thermal-wallCapacityJK').value=23;await f.ui.run();
  assert.equal(f.requests.at(-1).operation.thermal.wallCapacityJK,23);assert.equal(f.requests.at(-1).operation.thermal.coolingWK,.5);
 });

@@ -362,9 +362,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  async function run(){
   if(disposed)return;
   sensitivity.invalidate();
-  const invalid=input=>!input.disabled&&(input.value===''||!input.checkValidity());
-  const invalidThermal=[...thermalControls.values(),gasConductivity,thickness].some(invalid);
-  if(invalidThermal||[...description.querySelectorAll('input[type="number"]')].some(invalid)){
+  const invalid=input=>input.value===''||!Number.isFinite(Number(input.value))||Number(input.value)<Number(input.min)||Number(input.value)>Number(input.max);
+  const activeThermalInputs=thermalEnable.checked?[...thermalControls].filter(([key])=>key!=='wallCapacityJK'||thermalModel.value!=='spatial').map(([,input])=>input):[];
+  if(thermalEnable.checked&&thermalModel.value==='spatial'){
+   activeThermalInputs.push(thickness);if(gasModel.value==='spatial')activeThermalInputs.push(gasConductivity);
+  }
+  const invalidThermal=activeThermalInputs.some(invalid);
+  if(invalidThermal||[...description.querySelectorAll('input[type="number"]')].some(input=>!input.disabled&&invalid(input))){
+   if(!dirty){changed();clearTimeout(timer);}
    updating=false;status.textContent=`Enter valid ${invalidThermal?'thermal settings':'component values'} before running.${latest?' Previous accepted state.':''}`;
    learning.setPending(latest?'Invalid settings · previous accepted result':'Enter valid settings before running.');return;
   }
