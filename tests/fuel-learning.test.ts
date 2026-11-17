@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {DEFAULT_FUEL_CENTRIFUGE,simulateFuelCentrifuge,type FuelConfig} from '../src/fuel-centrifuge.js';
 import {sampleFuelField} from '../src/fuel-field.js';
-import {fuelCompositionCurves,fuelLearningComparison} from '../src/fuel-learning.js';
+import {fuelCompositionCurves,fuelLearningComparison,fuelDensityCurves,zoomCompositionCurves} from '../src/fuel-learning.js';
 
 const K=1.380649e-23,U=1.66053906892e-27;
 const close=(actual:number,expected:number,tolerance=2e-11)=>{
@@ -77,6 +77,23 @@ test('empty cells leave both composition curves undefined and pure feeds remain 
   const [a,b]=fuelCompositionCurves(rotor({lightFraction}),{lightMass:[.25,.75],heavyMass:[.6,.4]});
   assert.ok(a.y.every((v:number)=>v===100*lightFraction));assert.ok(b.y.every((v:number)=>v===100*(1-lightFraction)));
  }
+});
+
+test('the light-percentage zoom preserves values and includes every feed and pinned-run extreme',()=>{
+ const r=rotor({lightFraction:.0759}),source=fuelCompositionCurves(r,{lightMass:[.49,.51],heavyMass:[.51,.49]}),before=JSON.stringify(source);
+ const shown=zoomCompositionCurves([source[0],source[2],{...source[0],y:[6,9]}]);
+ assert.equal(JSON.stringify(source),before);assert.equal(shown[0].y,source[0].y);
+ for(const curve of shown){assert.deepEqual(curve.yDomain,shown[0].yDomain);for(const value of curve.y)if(value!==null)assert.ok(value>=curve.yDomain![0]&&value<=curve.yDomain![1]);}
+ assert.ok(shown[0].yDomain![1]-shown[0].yDomain![0]<5);assert.match(shown[0].yLabel,/zoomed/);
+ for(const fraction of [0,1]){const curves=zoomCompositionCurves(fuelCompositionCurves(rotor({lightFraction:fraction})).filter((_,i)=>i!==1));assert.ok(curves[0].yDomain![0]>=0&&curves[0].yDomain![1]<=100&&curves[0].yDomain![0]<curves[0].yDomain![1]);}
+});
+
+test('density curves show cellwise volume density, not radial shell probability or composition',()=>{
+ const r=rotor({lightFraction:.2}),state={lightMass:[.1,.2,.3,.4],heavyMass:[.05,.15,.3,.5]};
+ const [light,heavy]=fuelDensityCurves(r,state);
+ for(let i=0;i<4;i++)for(const j of [2*i,2*i+1]){close(light.y[j]!,4*state.lightMass[i]);close(heavy.y[j]!,4*state.heavyMass[i]);}
+ close(light.x.at(-1)!,100*r.config.radiusM);assert.equal(light.yLabel,'Density / species volume mean');
+ const pure=fuelDensityCurves(rotor({lightFraction:1}),state);assert.ok(pure[1].y.every(v=>v===null),'an absent species has no density/own-mean ratio');
 });
 
 test('equilibrium composition matches separately normalized Boltzmann number inventories',()=>{

@@ -79,7 +79,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
   if(option!.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
-  doc.querySelector<HTMLElement>('#fuel-plots > .live-plots')!.scrollIntoView?.({block:'nearest'});return true;
+  const target=value==='composition'?'#fuel-composition-readout':value==='profile'?'#fuel-density-reading':'#fuel-plots > .live-plots';
+  doc.querySelector<HTMLElement>(target)!.scrollIntoView?.({block:'start'});return true;
  }
  function endpoint(){
   if(node('fuel-motion-mode').value!=='transport')set('fuel-motion-mode','transport');
@@ -117,7 +118,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }
-  }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);}
+  }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);if(key==='density')node('fuel-locate-plot').click();}
   else if(key==='work')plot('heat');
   else if(key==='thermalPlot')plot('thermal');
   else if(key==='collection'){endpoint();plot('cut');}

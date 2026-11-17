@@ -38,4 +38,7 @@ nav{position:sticky;top:0;z-index:1;padding-block:8px;background:#111b16}h2{scro
 .drive-explanation{margin:14px 0 4px;min-height:3.4em;font-size:14px;line-height:1.6}
 .drive-illustration figcaption{font-size:11px;padding-top:4px}
 @keyframes drive-turn{to{transform:rotate(-360deg)}}
+.density-example>strong{display:block;font-size:16px;line-height:1.5}.density-cases{display:flex;gap:6px;margin:16px 0}.density-cases button{flex:1;min-height:44px;padding:6px;font:inherit;font-size:12px;background:transparent;color:inherit;border:1px solid #566b5c;border-radius:4px;cursor:pointer}.density-cases button[aria-pressed=true]{border-color:#edbe90;color:#edbe90}
+.density-example [data-density-case]{display:none}.density-example[data-case=rest] [data-density-case=rest],.density-example[data-case=spin] [data-density-case=spin],.density-example[data-case=warm] [data-density-case=warm]{display:block}
+.density-key{display:flex;justify-content:center;gap:20px;font-size:13px}.density-key span:first-child{color:#9bd8ce}.density-key span:last-child{color:#e4ac76}.density-result p{margin:10px 0;font-size:13px}.density-example svg{max-height:360px}.density-example figcaption{border-top:1px solid #405749;padding-top:12px}
 @media(max-width:580px){.drive-views{grid-template-columns:1fr}.drive-view:first-child svg{max-height:300px}.drive-view:last-child svg{max-height:320px}.drive-illustration{padding:14px}.drive-heading{font-size:14px}.drive-heading button{font-size:11px}.drive-view h3{text-align:center}.drive-stages button{font-size:12px}.drive-key{gap:8px 14px}}

@@ -21,7 +21,7 @@ test('the website renders every guide equation and its derivation, with accessib
  }
  assert.match(doc.getElementById('drive-description')!.textContent!,/inward to the left.*counterclockwise torque/);
  assert.match(doc.getElementById('drive-description')!.textContent!,/Hollow circles represent ions; filled dots represent neutral atoms/);
- assert.match(doc.body.textContent!,/Schematic trend, not computed data/);
+ assert.match(doc.body.textContent!,/Ideal equilibrium example, not your run/);
  assert.match(doc.body.textContent!,/not a reconstruction/);
  for(const topic of guideTopics){
   assert.equal(doc.getElementById(topic.id)?.textContent,topic.heading);
@@ -89,6 +89,20 @@ test('the end-view force arrows give the same counterclockwise torque in all fou
 
 test('a malformed equation fails the build instead of publishing raw or broken mathematics',()=>{
  assert.throws(()=>understandingPage('```math\n\\notARealCommand{1}\n```',revision),/Undefined control sequence/);
+});
+
+test('the density-gradient example follows the ideal-gas exponent and keeps the three cases distinct',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ const doc=dom.window.document,figure=doc.querySelector<HTMLElement>('[data-density-example]')!;setupGuideReader(dom.window);
+ for(const [id,v,T]of [['rest',0,500],['spin',1500,500],['warm',1500,1000]] as const){
+  (figure.querySelector(`[data-density-select="${id}"]`) as HTMLButtonElement).click();
+  assert.equal(figure.dataset.case,id);assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
+  const curves=[...figure.querySelectorAll<SVGPathElement>(`g[data-density-case="${id}"] path`)];
+  for(const curve of curves){const m=Number(curve.dataset.mass)*1.66053906892e-27,beta=m*v*v/(2*1.380649e-23*T);assert.ok(Math.abs(Number(curve.dataset.beta)-beta)<1e-14);assert.ok(Math.abs(Number(curve.dataset.wall)-Math.exp(beta))<1e-12);}
+  if(v>0)assert.ok(Number(curves[1].dataset.wall)>Number(curves[0].dataset.wall));
+ }
+ assert.match(figure.textContent!,/equal-size volumes.*not whole rings/);
+ assert.match(figure.textContent!,/not isotope percentages/);
 });
 
 test('the chapter picker remains reachable and leaves room for anchored headings',t=>{

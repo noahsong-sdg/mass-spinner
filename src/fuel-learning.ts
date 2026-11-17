@@ -4,18 +4,38 @@ import type {PlotCurve} from './laboratory.js';
 export type FuelLearningKind = 'temperature' | 'rotation' | 'collection';
 
 /** Shared 3D sampler, preserving the finite-volume jumps rather than smoothing percentages. */
-export function fuelCompositionCurves(result: FuelFieldResult, state: FuelFieldState = {}): PlotCurve[] {
+function profileSamples(result: FuelFieldResult, state: FuelFieldState){
  const R=result.config.radiusM,n=state.lightMass?.length;
- const samples=n?Array.from({length:n},(_,i)=>{
+ return n?Array.from({length:n},(_,i)=>{
   const lo=R*Math.sqrt(i/n),hi=R*Math.sqrt((i+1)/n),sample=sampleFuelField(result,(lo+hi)/2,state);
   return [{...sample,radiusM:lo},{...sample,radiusM:hi}];
  }).flat():result.profiles.map(p=>sampleFuelField(result,p.radiusM,state));
+}
+export function fuelCompositionCurves(result: FuelFieldResult, state: FuelFieldState = {}): PlotCurve[] {
+ const R=result.config.radiusM,samples=profileSamples(result,state);
  const curves: PlotCurve[]=[result.pair.light,result.pair.heavy].map((label,i)=>({label,x:samples.map(s=>s.radiusM*100),
   y:samples.map(s=>s.lightFraction===null?null:100*(i?1-s.lightFraction:s.lightFraction)),
   xLabel:'Radius (cm)',yLabel:'Local composition (%)',yDomain:[0,100],color:i?'#d2956b':'#a4c4b1'}));
  curves.push({label:`${result.pair.light} feed`,x:[0,100*R],y:[100*result.config.lightFraction,100*result.config.lightFraction],
   xLabel:'Radius (cm)',yLabel:'Local composition (%)',yDomain:[0,100],dash:'4 4'});
  return curves;
+}
+
+/** One shared zoom for current/pinned curves; percentages and cell discontinuities stay unchanged. */
+export function zoomCompositionCurves(curves:readonly PlotCurve[]):PlotCurve[]{
+ const values=curves.flatMap(c=>c.y).filter((y):y is number=>typeof y==='number'&&Number.isFinite(y));
+ if(!values.length)return [...curves];
+ const lo=Math.min(...values),hi=Math.max(...values),pad=Math.max(.05,(hi-lo)*.08);
+ const domain:[number,number]=[Math.max(0,lo-pad),Math.min(100,hi+pad)];
+ return curves.map(c=>({...c,yDomain:domain,yLabel:'Local composition (%) · light isotope · zoomed'}));
+}
+
+/** Each species is compared with its own volume mean, not with the other species' abundance. */
+export function fuelDensityCurves(result:FuelFieldResult,state:FuelFieldState={}):PlotCurve[]{
+ const samples=profileSamples(result,state),c=result.config,mean=c.pressurePa/(1.380649e-23*c.gasK);
+ return [result.pair.light,result.pair.heavy].map((label,i)=>({label,x:samples.map(s=>100*s.radiusM),
+  y:samples.map(s=>{const fraction=i?1-c.lightFraction:c.lightFraction;return fraction>0?(i?s.heavyDensityM3:s.lightDensityM3)/(mean*fraction):null;}),
+  xLabel:'Radius (cm)',yLabel:'Density / species volume mean'}));
 }
 
 /** Conditional isothermal equilibrium comparisons; never change or rerun the accepted drive. */

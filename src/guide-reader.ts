@@ -1,6 +1,11 @@
 /** The standalone reader links work without this enhancement; embeds use native app actions. */
 export function setupGuideReader(win=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
+ const density=doc.querySelector<HTMLElement>('[data-density-example]');
+ if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
+  density.dataset.case=button.dataset.densitySelect;
+  for(const choice of density.querySelectorAll('[data-density-select]'))choice.setAttribute('aria-pressed',String(choice===button));
+ });
  const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');
  if(drive){
   const descriptions={

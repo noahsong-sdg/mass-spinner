@@ -204,6 +204,20 @@ test('touch-style slice selection retains radius and opens composition without c
  close(Number(f.node('fuel-motion-time').value),.4);assert.equal(f.requests.length,count);assert.equal(v.animation,null);
 });
 
+test('beginner sample controls explain the exact accepted fraction without rerunning or changing time',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.37);f.change('fuel-plot','composition','change');
+ const requests=f.requests.length,r=f.ui.latest.result,readout=f.node('fuel-composition-readout');
+ for(const [label,radius]of [['At axis',0],['At wall',1]] as const){
+  [...f.node('fuel-sample-controls').querySelectorAll('button')].find((b:any)=>b.textContent===label).click();
+  const sample=sampleFuelField(r,radius*r.config.radiusM,sampleFuelTransport(r.transport,.37));
+  close(Number(readout.dataset.lightFraction),sample.lightFraction!);assert.match(readout.textContent,/In 1,000 atoms here, about/);assert.match(readout.textContent,/Feed:.*%/);assert.match(readout.textContent,radius?/At the wall/:/At the axis/);
+  close(parseFloat(readout.querySelector('.fuel-sample-bar span').style.width),100*sample.lightFraction!,1e-5);
+ }
+ f.change('fuel-sample-radius',.32);close(Number(readout.dataset.radiusM),.32*r.config.radiusM);close(Number(readout.dataset.timeS),.37);assert.equal(f.requests.length,requests);
+ assert.match(f.ui.nodes.plots.querySelector('svg')!.getAttribute('aria-label')!,/zoomed/);
+ f.change('fuel-plot','profile','change');assert.equal(f.node('fuel-sample-controls').hidden,true);assert.equal(f.node('fuel-density-reading').hidden,false);assert.match(f.node('fuel-density-reading').textContent,/axis.*average.*wall/);
+});
+
 test('pinned vessels probe the same physical radius and disclose a probe beyond A',async t=>{
  const f=fixture(t);await f.start();const originalRadius=f.ui.latest.result.config.radiusM;
  (f.ui.nodes.view.querySelector('button[aria-label="Pin accepted experiment as comparison A"]') as HTMLButtonElement).click();await flush();

@@ -1,11 +1,4 @@
 const drawings={
- composition:{title:'Composition is a fraction, not a density',description:'A qualitative graph of light-isotope number fraction decreasing from the axis toward the wall, crossing the feed fraction. No numerical predictions are drawn.',caption:'Schematic trend, not computed data. Use Composition for the actual profile.',body:`
- <path d="M48 35V192H290" fill="none" stroke="#82958a" stroke-width="2"/>
- <path d="M48 118H290" fill="none" stroke="#82958a" stroke-dasharray="5 5"/>
- <path d="M48 73C135 73 211 125 286 155" fill="none" stroke="#9bd8ce" stroke-width="4"/>
- <text x="48" y="22">light-isotope number fraction</text><text x="230" y="109">feed</text>
- <text x="48" y="216">axis</text><text x="264" y="216">wall</text><text x="165" y="244" text-anchor="middle">radius →</text>
- <text x="67" y="60" fill="#9bd8ce">relatively light-rich</text>`},
  energy:{title:'Drive energy becomes rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Mechanical work changes rotation or is dissipated by ion-neutral slip and wall drag; cooling removes heat.',caption:'Energy routes in the simplified model. Deposition and cooling laws remain assumptions.',body:`
  <rect x="91" y="14" width="148" height="37" rx="7"/><text x="165" y="38" text-anchor="middle">electrical input</text>
  <path d="M126 51L83 91M204 51L246 91" class="force" marker-end="url(#energy-force)"/>
@@ -18,6 +11,27 @@ const drawings={
  <text x="165" y="255" text-anchor="middle">slip + drag convert rotation to heat</text>
  <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">cooling out</text>`},
 };
+function densityDiagram(){
+ const cases=[['rest','No spin',0,500],['spin','Spinning',1500,500],['warm','Warmer',1500,1000]];
+ const masses=[6.0151228874,7.0160034366],colors=['#9bd8ce','#e4ac76'];
+ const curves=(speed,temperature)=>masses.map((mass,i)=>{
+  const beta=mass*1.66053906892e-27*speed**2/(2*1.380649e-23*temperature);
+  return {beta,wall:Math.exp(beta),path:Array.from({length:65},(_,j)=>`${j?'L':'M'}${52+264*j/64} ${220-165*Math.exp(beta*(j/64)**2)/7}`).join(' '),color:colors[i]};
+ });
+ return `<figure class="density-example" data-density-example data-case="spin">
+ <strong>Both crowd toward the wall. The heavier isotope crowds more.</strong>
+ <div class="density-cases" role="group" aria-label="Compare equilibrium density gradients">${cases.map(([id,label])=>`<button type="button" data-density-select="${id}" aria-pressed="${id==='spin'}">${label}</button>`).join('')}</div>
+ <svg viewBox="0 0 360 278" role="img" aria-labelledby="composition-title composition-description">
+ <title id="composition-title">Heavier atoms have a steeper equilibrium density gradient</title><desc id="composition-description">Each curve starts at one at the axis: density divided by that species' own axis density. With rotation both curves rise, lithium-7 more steeply than lithium-6. These ratios do not show mixture percentages or which species has more atoms. This is an ideal uniform-temperature example, not your live run.</desc>
+ <text x="16" y="22">Density ÷ its own axis density</text>
+ ${[1,3,5,7].map(y=>`<path d="M52 ${220-165*y/7}H316" stroke="#405749" stroke-width=".6"/><text x="42" y="${224-165*y/7}" text-anchor="end">${y}×</text>`).join('')}
+ <path d="M52 45V220H316" fill="none" stroke="#82958a"/>
+ ${cases.map(([id,,speed,temperature])=>`<g data-density-case="${id}">${curves(speed,temperature).map((c,i)=>`<path data-mass="${masses[i]}" data-beta="${c.beta}" data-wall="${c.wall}" d="${c.path}" stroke="${c.color}" stroke-width="3" ${i?'stroke-dasharray="6 3"':''} fill="none"/>`).join('')}</g>`).join('')}
+ <text x="52" y="243">axis</text><text x="316" y="243" text-anchor="end">wall</text><text x="184" y="267" text-anchor="middle">distance from the axis →</text>
+ </svg><div class="density-key"><span>━ ⁶Li · lighter</span><span>┄ ⁷Li · heavier</span></div>
+ ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>Wall versus axis: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
+ <figcaption>Ideal equilibrium example, not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference; these curves are not isotope percentages.</figcaption></figure>`;
+}
 function driveDiagram(){
  const particles=(kind,points)=>points.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${kind==='ion'?4:5}"/>`).join('');
  const caption='Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.';
@@ -70,6 +84,7 @@ function driveDiagram(){
 }
 export function guideDiagram(id){
  if(id==='drive')return driveDiagram();
+ if(id==='composition')return densityDiagram();
  const d=drawings[id];if(!d)throw new Error(`Unknown guide diagram: ${id}`);
  return `<figure><svg viewBox="0 0 330 ${id==='energy'?312:270}" role="img" aria-labelledby="${id}-title ${id}-description">
  <title id="${id}-title">${d.title}</title><desc id="${id}-description">${d.description}</desc>

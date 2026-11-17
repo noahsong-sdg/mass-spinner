@@ -103,10 +103,18 @@ graph of this fraction against radius: “What percentage of atoms here are the
 light isotope?” Density answers “How many atoms are here?” The center can be
 light-enriched while containing fewer light atoms per unit volume than the wall.
 
-**Try it:** Show end-of-run composition selects the endpoint. Axis and wall probes
-then keep your selected time; use the playback slider for earlier profiles.
-Compare the light curve with the dashed feed line. Species density shows each
-species relative to its own volume mean, rather than its mixture percentage.
+**Read the example first:** No spin gives flat density curves. Spinning makes both
+rise; the heavier isotope rises more. Warmer keeps the same speed but flattens
+both curves. “6×” means six times that isotope's density at the axis, **not 6%**.
+The figure is an ideal equilibrium example; your run may not have reached equilibrium.
+
+**Then inspect your run:** Show end-of-run composition selects the endpoint.
+Read “In 1,000 atoms here…” before the graph. At axis and At wall change the
+sample position, not the settings or time. Compare the light percentage with the
+feed, not 50%. The plot shows only the light percentage on a clearly labeled
+zoomed scale; the heavy percentage is the remainder. Use the playback slider
+for earlier profiles. Species density instead shows each species relative to its
+own volume mean: 1× means average density, not 100% of the mixture.
 Tracers are weighted populations and fast turns are averaged: use plotted m/s
 and physical time, not screen revolutions, to measure motion.
 
