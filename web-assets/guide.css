@@ -38,4 +38,4 @@ nav{position:sticky;top:0;z-index:1;padding-block:8px;background:#111b16}h2{scro
 .drive-explanation{margin:14px 0 4px;min-height:3.4em;font-size:14px;line-height:1.6}
 .drive-illustration figcaption{font-size:11px;padding-top:4px}
 @keyframes drive-turn{to{transform:rotate(-360deg)}}
-@media(max-width:580px){.drive-views{grid-template-columns:1fr}.drive-view:first-child svg{max-height:205px}.drive-view:last-child svg{max-height:320px}.drive-illustration{padding:14px}.drive-heading{font-size:14px}.drive-heading button{font-size:11px}.drive-view h3{text-align:center}.drive-stages button{font-size:12px}.drive-key{gap:8px 14px}}
+@media(max-width:580px){.drive-views{grid-template-columns:1fr}.drive-view:first-child svg{max-height:300px}.drive-view:last-child svg{max-height:320px}.drive-illustration{padding:14px}.drive-heading{font-size:14px}.drive-heading button{font-size:11px}.drive-view h3{text-align:center}.drive-stages button{font-size:12px}.drive-key{gap:8px 14px}}

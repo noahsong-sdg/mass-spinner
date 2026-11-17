@@ -22,7 +22,7 @@ function driveDiagram(){
  const particles=(kind,points)=>points.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${kind==='ion'?4:5}"/>`).join('');
  const caption='Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.';
  return `<figure class="drive-illustration" data-drive-diagram data-stage="gas" data-motion="paused">
- <div class="drive-heading"><span>Spin the gas. Keep the cylinder still.</span><button type="button" data-drive-motion aria-pressed="true">Play motion</button></div>
+ <div class="drive-heading"><span>Spin the gas. Keep the cylinder still.</span><button type="button" data-drive-motion>Play motion</button></div>
  <div class="drive-stages" role="group" aria-label="Explore how the gas spins">
  ${[['current','Current'],['ions','Turn ions'],['gas','Turn gas']].map(([id,label],i)=>`<button type="button" data-drive-stage="${id}" aria-pressed="${id==='gas'}" aria-controls="drive-explanation"><span>${i+1}</span>${label}</button>`).join('')}</div>
  <div class="drive-views">
@@ -43,7 +43,7 @@ function driveDiagram(){
  <path d="M116 162L204 150H290" class="drive-leader"/><text x="208" y="142">Inner electrode</text>
  <path d="M142 207L203 227H307" class="drive-leader"/><text x="208" y="248">Outer electrode</text>
  <path d="M88 112L37 58H16" class="drive-leader"/><text x="12" y="45">Gas in the gap</text>
- <text x="125" y="284" text-anchor="middle" class="drive-muted">Look into this end →</text>
+ <text x="125" y="284" text-anchor="middle" class="drive-muted">View from this end</text>
  </svg></div>
  <div class="drive-view"><h3>Looking into the end</h3>
  <svg viewBox="0 0 320 320" role="img" aria-labelledby="drive-title drive-description">
@@ -53,11 +53,11 @@ function driveDiagram(){
  <circle cx="160" cy="160" r="116" fill="#1d3329" stroke="#a1b3a4" stroke-width="3"/>
  ${[58,84,104].map(r=>`<circle cx="160" cy="160" r="${r}" class="drive-track"/>`).join('')}
  <g class="drive-field">${[[105,105],[215,105],[105,215],[215,215]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8"/><circle cx="${x}" cy="${y}" r="2" class="drive-field-dot"/>`).join('')}</g>
- <g class="drive-currents"><path d="M268 160H198M52 160H122M160 52V122M160 268V198" marker-end="url(#drive-current)"/>
+ <g class="drive-currents">${['M268 160H198','M52 160H122','M160 52V122','M160 268V198'].map(d=>`<path d="${d}" marker-end="url(#drive-current)"/>`).join('')}
  <text x="215" y="184">J</text></g>
  <g class="drive-orbit drive-ions">${particles('ion',[[219,160],[118,118],[118,202],[252,160],[160,68],[68,160],[160,252]])}</g>
  <g class="drive-orbit drive-neutrals">${particles('neutral',[[210,210],[110,210],[110,110],[210,110],[259,160],[160,61],[61,160],[160,259]])}</g>
- <g class="drive-forces"><path d="M253 160V108M160 67H108M67 160V212M160 253H212" marker-end="url(#drive-force)"/><text x="247" y="96">J × B</text></g>
+ <g class="drive-forces">${['M253 160V108','M160 67H108','M67 160V212','M160 253H212'].map(d=>`<path d="${d}" marker-end="url(#drive-force)"/>`).join('')}<text x="247" y="96">J × B</text></g>
  <circle cx="160" cy="160" r="29" fill="#14221b" stroke="#a1b3a4" stroke-width="2"/>
  <text x="160" y="157" text-anchor="middle" class="drive-inner-label">Inner</text><text x="160" y="171" text-anchor="middle" class="drive-inner-label">electrode</text>
  <text x="160" y="304" text-anchor="middle">Outer electrode · stationary</text>

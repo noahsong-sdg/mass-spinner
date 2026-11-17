@@ -50,7 +50,7 @@ test('the drive illustration separates current, ion rotation and neutral entrain
   assert.equal(figure.querySelectorAll('[data-drive-stage][aria-pressed="true"]').length,1);
   assert.match(doc.getElementById('drive-explanation')!.textContent!,phrase);
  }
- motion.click();assert.equal(figure.dataset.motion,'paused');assert.equal(motion.textContent,'Play motion');assert.equal(motion.getAttribute('aria-pressed'),'true');
+ motion.click();assert.equal(figure.dataset.motion,'paused');assert.equal(motion.textContent,'Play motion');assert.equal(motion.hasAttribute('aria-pressed'),false,'changing action labels use an ordinary button');
  figure.querySelector<HTMLButtonElement>('[data-drive-stage="ions"]')!.click();assert.equal(figure.dataset.motion,'paused','changing explanation must not override pause');
  motion.click();assert.equal(figure.dataset.motion,'running');assert.equal(motion.textContent,'Pause motion');
  assert.match(figure.textContent!,/not simulated particle paths/);assert.match(figure.textContent!,/Outer electrode · stationary/);
@@ -68,11 +68,19 @@ test('reduced motion starts paused, and the full static explanation remains avai
 
 test('the end-view force arrows give the same counterclockwise torque in all four quadrants',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
- const path=dom.window.document.querySelector('.drive-forces path')!.getAttribute('d')!;
- const segments=[...path.matchAll(/M(\d+) (\d+)([HV])(\d+)/g)];assert.equal(segments.length,4);
- for(const [,xText,yText,axis,endText] of segments){
+ const doc=dom.window.document,forces=[...doc.querySelectorAll('.drive-forces path')],currents=[...doc.querySelectorAll('.drive-currents path')];
+ assert.equal(forces.length,4);assert.equal(currents.length,4);
+ for(const node of forces){
+  assert.equal(node.getAttribute('marker-end'),'url(#drive-force)','every force gets its own visible arrowhead');
+  const [,xText,yText,axis,endText]=/^M(\d+) (\d+)([HV])(\d+)$/.exec(node.getAttribute('d')!)!;
   const x=Number(xText)-160,y=Number(yText)-160,dx=axis==='H'?Number(endText)-Number(xText):0,dy=axis==='V'?Number(endText)-Number(yText):0;
   assert.ok(x*dy-y*dx<0,'SVG y points down: negative screen-space torque is counterclockwise');
+ }
+ for(const node of currents){
+  assert.equal(node.getAttribute('marker-end'),'url(#drive-current)');
+  const [,xText,yText,axis,endText]=/^M(\d+) (\d+)([HV])(\d+)$/.exec(node.getAttribute('d')!)!;
+  const x=Number(xText)-160,y=Number(yText)-160,dx=axis==='H'?Number(endText)-Number(xText):0,dy=axis==='V'?Number(endText)-Number(yText):0;
+  assert.ok(x*dx+y*dy<0,'current must point inward in every quadrant');
  }
  const style=readFileSync('web-assets/guide.css','utf8');assert.match(style,/@keyframes drive-turn\{to\{transform:rotate\(-360deg\)\}\}/);
 });

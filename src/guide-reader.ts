@@ -18,7 +18,7 @@ export function setupGuideReader(win=window){
   const motion=drive.querySelector<HTMLButtonElement>('[data-drive-motion]')!;
   const pause=(paused:boolean)=>{
    drive.dataset.motion=paused?'paused':'running';
-   motion.setAttribute('aria-pressed',String(paused));motion.textContent=paused?'Play motion':'Pause motion';
+   motion.textContent=paused?'Play motion':'Pause motion';
   };
   pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);
   motion.addEventListener('click',()=>pause(drive.dataset.motion!=='paused'));
