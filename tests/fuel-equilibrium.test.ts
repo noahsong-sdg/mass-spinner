@@ -91,6 +91,18 @@ test('missing mass entries cannot bypass the two finite ordered masses invariant
  for(const slot of [0,1]){const massesU=Array<number>(2);massesU[slot]=7;assert.throws(()=>equilibriumPoint({...base,massesU:massesU as any},.5),RangeError);}
 });
 
+test('one-ulp crossings of the normalization branch preserve near-wall inventory limits',()=>{
+ const speed=Math.sqrt(.1*2*equilibriumModel.boltzmannJK*500/(7*equilibriumModel.atomicMassKg));
+ for(let i=-4;i<=4;i++){
+  const p=equilibriumPoint({...base,massesU:[7,7],edgeSpeedMS:speed*(1+i*Number.EPSILON)},1-Number.EPSILON/2);
+  for(let j=0;j<2;j++){
+   assert.ok(p.inner.speciesFractions[j]>=0&&p.inner.speciesFractions[j]<=1+gates.conservation);
+   close(p.inner.speciesFractions[j]+p.outer.speciesFractions[j],1,gates.conservation);
+  }
+  close(p.inner.lightPurity!,base.lightFraction);assert.ok(p.outer.heavyRecovery!>0);
+ }
+});
+
 test('zero rotation, equal masses, pure feeds and empty cuts retain distinct domain meanings',()=>{
  for(const x of [0,.0759,.5,1])for(const cut of [0,.3,1]){
   const p=equilibriumPoint({...base,edgeSpeedMS:0,lightFraction:x},cut);close(p.lightFraction,x);close(p.inner.speciesFractions[0],cut**2);
