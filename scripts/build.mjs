@@ -4,11 +4,13 @@ import { spawnSync } from 'node:child_process';
 import { copyFileSync,cpSync,mkdirSync,readFileSync,writeFileSync } from 'node:fs';
 import {qualificationPage} from './qualification-page.mjs';
 import {understandingPage} from './understanding-page.mjs';
+import {equilibriumPage} from './equilibrium-page.mjs';
 const require=createRequire(import.meta.url);
 // The project-local prefix supports this host's demonstrated npm prune failure.
 const vite=dirname(require.resolve('vite/package.json',{paths:[process.cwd(),resolve('.tools/frontend')]}));
 const build=spawnSync(process.execPath,[resolve(vite,'bin/vite.js'),'build'],{stdio:'inherit'});
 if(build.status===0){
+ writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8')));
  copyFileSync('src/guide-reader.js','release/guide-reader.js');
  const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');

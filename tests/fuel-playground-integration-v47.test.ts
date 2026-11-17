@@ -73,6 +73,19 @@ test('native range serialization preserves exact log defaults without masking ge
  }
 });
 
+test('guided equilibrium calculator changes no worker input, accepted timeline or 3D geometry, including pending work',async t=>{
+ const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const opened:string[]=[],guide=setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated(){}});
+ const inputs=JSON.stringify(f.ui.read()),requests=f.requests.length,time=f.node('fuel-motion-time').value,built=f.viewers[0].built;
+ guide.launch('equilibrium');const panel=f.node('fuel-equilibrium-calculator');panel.dispatchEvent(new f.window.Event('toggle'));
+ assert.equal(panel.open,true);assert.equal(opened.at(-1),'plots');assert.equal(panel.querySelectorAll('svg').length,2);
+ f.change('equilibrium-edgeSpeedMS',1500);f.change('equilibrium-temperatureK',600);f.change('equilibrium-cutFraction',.3);
+ assert.equal(JSON.stringify(f.ui.read()),inputs);assert.equal(f.requests.length,requests);assert.equal(f.node('fuel-motion-time').value,time);assert.equal(f.viewers[0].built,built);
+ f.change('fuel-currentA',.04);assert.equal(f.node('fuel-export').disabled,true);
+ panel.open=false;guide.launch('equilibrium');assert.equal(panel.open,true,'independent inputs work without an accepted fresh worker result');
+ assert.equal(f.node('equilibrium-edgeSpeedMS').value,'1500');assert.equal(f.requests.length,requests);assert.equal(f.viewers[0].built,built);
+});
+
 test('guided experiments use the real accepted plots, timeline and probes without changing physical inputs',async t=>{
  const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
  const opened:string[]=[],focused:any[]=[];

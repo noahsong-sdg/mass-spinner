@@ -1,11 +1,13 @@
 import {createRequire} from 'node:module';
 import {dirname,resolve} from 'node:path';
 import {workerIdentityPlugin} from './scripts/worker-identity-plugin.mjs';
+import {equilibriumIdentityPlugin} from './scripts/equilibrium-identity-plugin.mjs';
 const require=createRequire(import.meta.url);
 // This session's npm cannot prune existing optional directories. Tooling is
 // installed in a project-local prefix; ordinary installs resolve from root first.
 const three=resolve(dirname(require.resolve('three',{paths:[process.cwd(),resolve('.tools/frontend')]})),'..');
 export default {
+  plugins:[equilibriumIdentityPlugin(process.cwd())],
   publicDir:'web-assets',
   resolve:{alias:[
     {find:'three/webgpu',replacement:resolve(three,'build/three.webgpu.js')},

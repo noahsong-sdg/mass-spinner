@@ -8,7 +8,7 @@ for(const file of ['src/main.js','src/study-ui.js']){
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);
 }
-for(const name of ['index.html','laurelin.html','guide.html']){
+for(const name of ['index.html','laurelin.html','guide.html','equilibrium.html']){
  const page=readFileSync(`release/${name}`,'utf8');
  for(const match of page.matchAll(/(?:src|href)="(\/[^"#]+)"/g)){
   const path=new URL(match[1],'https://example.org').pathname;

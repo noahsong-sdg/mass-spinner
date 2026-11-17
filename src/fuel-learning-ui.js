@@ -1,6 +1,7 @@
 import {renderPlots} from './laboratory.js';
 import {publicInputCoverage} from './public-sensitivity.ts';
 import {fuelLearningComparison} from './fuel-learning.js';
+import {createEquilibriumCalculator} from './fuel-equilibrium-ui.js';
 
 /** Result-owned scope and conditional comparisons, independent of pending slider values. */
 export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
@@ -17,6 +18,7 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
   button.addEventListener('click',()=>{if(pending||!result)return;kind=key;onCompare();drawComparison();});bar.append(button);buttons.set(key,button);
  }
  host.append(scope,coverage,comparisons);
+ const equilibrium=createEquilibriumCalculator({document:doc,host});
  function drawComparison(){
   for(const [key,button]of buttons)button.setAttribute('aria-pressed',String(kind===key));
   if(!kind||!result||pending)return;
@@ -24,11 +26,13 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
   renderPlots(plots,comparison.curves,{announce:false});
  }
  function setPending(message='Updating · previous accepted result'){
+  equilibrium.setPending();
   pending=true;kind=null;scope.textContent=message;coverageTitle.textContent='Coverage pending';coverageText.textContent='Wait for an accepted result.';
   coverage.dataset.match='pending';for(const button of buttons.values()){button.disabled=true;button.setAttribute('aria-pressed','false');}
   description.textContent='';renderPlots(plots,[]);
  }
  function update(next,nextState,topic){
+  equilibrium.update(next,nextState);
   result=next;state=nextState;pending=false;
   const timeSeries=['separation','spin','heat','thermal','momentum','inertia'].includes(topic)&&result.transport;
   const local=['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(topic);
@@ -44,5 +48,5 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{}}){
   drawComparison();
  }
  setPending('Run the simulator to inspect results.');
- return {update,setPending,dispose(){renderPlots(plots,[]);scope.remove();coverage.remove();comparisons.remove();}};
+ return {update,setPending,dispose(){equilibrium.dispose();renderPlots(plots,[]);scope.remove();coverage.remove();comparisons.remove();}};
 }

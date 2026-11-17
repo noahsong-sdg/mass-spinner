@@ -24,7 +24,7 @@ const steps=[
  {title:'Choose purity or recovery',intro:'Purity is the light-species share in your selected inner region. Recovery is the fraction of all light atoms that lies in that region.',
   do:'Open the collection plot. Sweep across its horizontal axis: zero is the axis; one is the wall. Probe with a click or arrow keys; Home and End select the axis and wall. Read the values below the curve.',
   notice:'For a separated mixture, a smaller inner region generally trades higher light purity for lower recovery. At the full radius, purity equals the feed and all light atoms are recovered. With no light atoms, recovery is undefined.',
-  note:'The probe keeps the same gas and time; it does not move the 3D cut marker. The setup collection slider starts a new run. These cuts partition a closed inventory. They do not simulate an extraction flow, product throughput or a real collector’s efficiency.',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve']]},
+  note:'The probe keeps the same gas and time; it does not move the 3D cut marker. The setup collection slider starts a new run. Equilibrium opens a separate prescribed-speed calculator. These cuts partition a closed inventory, not an extraction flow or product throughput.',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve'],['equilibrium','Open equilibrium calculator']]},
  {title:'Make your own comparison',intro:'Pick one question: what happens if I increase wall drag, change the feed, or run longer?',
   do:'Pin the accepted run as A in View. Change one physical input in Controls, then choose New run. Compare A and B at the same physical time, using Plots and the synchronized 3D views.',
   notice:'First predict the direction of the change, then inspect the result. A surprising curve is a reason to check the assumptions and time scale.',
@@ -88,6 +88,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   cancelLaunch();
   status.textContent='';
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
+  if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   // Pending/failed results must not be presented as a fresh experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
   if(key==='look'){
@@ -124,7 +125,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function launch(key){
   if(!allowed.has(key))return;
   cancelLaunch();const accepted=node('fuel-export');
-  if(Object.hasOwn(controlFocus,key)||!accepted||!pending(key)){action(key);return;}
+  if(key==='equilibrium'||Object.hasOwn(controlFocus,key)||!accepted||!pending(key)){action(key);return;}
   status.textContent='Waiting for the computed run and controls…';
   const observer=new doc.defaultView.MutationObserver(()=>{
    if(!pending(key)){cancelLaunch();if(!node('start-here')?.hidden)action(key);}
