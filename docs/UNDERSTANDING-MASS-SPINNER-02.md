@@ -31,9 +31,9 @@ project's two backends if those terms are unfamiliar.
 
 ## 1. How do we spin a gas without spinning a drum?
 
-The electrodes stay still. **The gas between them rotates.** Start with
-**Current** in the illustration, then **Turn ions**, then **Turn gas**.
-The left picture shows the cylinder; the right looks straight into its end.
+The electrodes stay still. **The gas between them rotates.** In the website
+illustration, step through **Current**, **Turn ions**, then **Turn gas**.
+Compare the cylinder view with the view straight into its end.
 
 Current crosses the gas from the outer electrode to the inner one. With a
 magnetic field along the axis, the force points **around** the cylinder, not

@@ -38,7 +38,7 @@ function driveDiagram(){
  <ellipse cx="105" cy="163" rx="65" ry="87" fill="#1d3329" fill-opacity=".88" stroke="#bac5b8" stroke-width="3"/>
  <ellipse cx="105" cy="163" rx="52" ry="70" fill="#233e32" stroke="#547361"/>
  <ellipse cx="105" cy="163" rx="14" ry="18" fill="#899a8e" stroke="#c2cbbf"/>
- <path d="M234 112L60 202" fill="none" stroke="#b5c5cf" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#drive-axis-arrow)"/>
+ <path d="M255 105.4L60 180.28" fill="none" stroke="#b5c5cf" stroke-width="2" stroke-dasharray="5 5" marker-end="url(#drive-axis-arrow)"/>
  <text x="28" y="227" class="drive-field-label">B along the axis</text>
  <path d="M116 162L204 150H290" class="drive-leader"/><text x="208" y="142">Inner electrode</text>
  <path d="M142 207L203 227H307" class="drive-leader"/><text x="208" y="248">Outer electrode</text>
@@ -57,7 +57,7 @@ function driveDiagram(){
  <text x="215" y="184">J</text></g>
  <g class="drive-orbit drive-ions">${particles('ion',[[219,160],[118,118],[118,202],[252,160],[160,68],[68,160],[160,252]])}</g>
  <g class="drive-orbit drive-neutrals">${particles('neutral',[[210,210],[110,210],[110,110],[210,110],[259,160],[160,61],[61,160],[160,259]])}</g>
- <g class="drive-forces"><path d="M253 150V105M150 67H105M67 170V215M170 253H215" marker-end="url(#drive-force)"/><text x="247" y="96">J × B</text></g>
+ <g class="drive-forces"><path d="M253 160V108M160 67H108M67 160V212M160 253H212" marker-end="url(#drive-force)"/><text x="247" y="96">J × B</text></g>
  <circle cx="160" cy="160" r="29" fill="#14221b" stroke="#a1b3a4" stroke-width="2"/>
  <text x="160" y="157" text-anchor="middle" class="drive-inner-label">Inner</text><text x="160" y="171" text-anchor="middle" class="drive-inner-label">electrode</text>
  <text x="160" y="304" text-anchor="middle">Outer electrode · stationary</text>
