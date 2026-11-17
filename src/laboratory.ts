@@ -198,9 +198,9 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   xLines.forEach((line,i)=>svg.append(svgElement('text',{x:(left+right)/2,y:bottom+50+15*i,'text-anchor':'middle',fill:'#d7ded7','font-size':12},line)));
   group.forEach((series,index)=>{
    const color=series.color??['#a4c4b1','#d2956b','#95b3d4','#d1bc87'][index%4],dash=series.dash??'';
-   const layer=svgElement('g',{'data-series':series.label});svg.append(layer);
+   const layer=revealUntil===undefined?svg:svgElement('g',{'data-series':series.label});if(layer!==svg)svg.append(layer);
    const source=series,update=()=>{
-   const series=visible(source);layer.replaceChildren();let path='',connected=false;
+   const series=visible(source);if(layer!==svg)layer.replaceChildren();let path='',connected=false;
    if(series.low&&series.high){
     // Each finite contiguous segment gets its own uncertainty band; missing
     // bootstrap bounds must not be connected across an undefined collector.
