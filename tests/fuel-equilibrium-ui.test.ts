@@ -59,7 +59,21 @@ test('prescribed calculator is lazy and can run before any accepted trajectory',
  assert.equal(f.sample().disabled,true);assert.equal(f.save().disabled,true);
  f.open();assert.equal(f.panel.querySelectorAll('svg').length,2);assert.equal(f.save().disabled,false);
  assert.match(f.panel.textContent!,/Independent of the 3D timeline/);
+ assert.match(f.panel.querySelector('p')!.textContent!,/Ideal neutral-gas reference/);
  assert.equal(f.workers,0);
+});
+
+test('sampled cuts preserve their exact accepted radius and zero-speed recovery in exports',t=>{
+ const f=fixture(t);f.open();
+ for(const cutFraction of [.333,1-1e-8]){
+  const r=freeze({...accepted(),config:{...DEFAULT_FUEL_CENTRIFUGE,cutFraction}});
+  f.tools.update(r,{neutralRadS:0});f.sample().click();
+  assert.equal(Number(f.input('cutFraction').value),cutFraction);
+  assert.equal(f.save().disabled,false,'native step mismatch must not invalidate a valid imported cut');
+  f.save().click();const result=f.exports.at(-1).result;
+  assert.equal(result.inputs.cutFraction,cutFraction);assert.equal(result.selected.inner.lightRecovery,cutFraction**2);
+  assert.ok(result.selected.outer.heavyRecovery>0,'a thin nonempty outer cut must not be rounded away');
+ }
 });
 
 test('manual prescribed inputs and output survive accepted redraws and pending work without physical side effects',t=>{

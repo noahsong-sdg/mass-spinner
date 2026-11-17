@@ -4,6 +4,8 @@ JSON stdin is a list of cases with massesU, edgeSpeedMS, temperatureK,
 lightFraction and radiusFraction. JSON stdout is an ordered list of references;
 Decimal results are strings so tiny enrichment gains survive serialization.
 No production modules or log-domain production formulas are used.
+Supplying totalParticles, radiusM and lengthM together also returns absolute
+SI densities and cut counts, scaled before any conversion to binary64.
 
 The volume coordinate is y=(r/R)^2. A species' unnormalized density is
 exp(beta*y), beta=m*v_edge^2/(2*k*T). We integrate that density directly.
@@ -19,6 +21,8 @@ from decimal import Decimal as D, localcontext
 
 U = D('1.66053906892e-27')
 KB = D('1.380649e-23')
+# Pi rounded independently to 80 significant decimal digits.
+PI = D('3.1415926535897932384626433832795028841971693993751058209749445923078164062862090')
 ZERO, ONE = D(0), D(1)
 
 
@@ -33,34 +37,43 @@ def binary64(value):
 def integral(beta, start, end):
     if start == end:
         return ZERO
+    width = end - start
     if beta == 0:
-        return end - start
-    if beta >= D('1e-20'):
-        return ((beta * end).exp() - (beta * start).exp()) / beta
-    # The convergent integral of exp's Taylor series retains tiny-beta limits.
-    total = end - start
-    coefficient = ONE
+        return width
+    # Shift to the interval's origin: exp(beta*start) * width * phi(beta*width),
+    # where phi(z) = sum(z**n/(n+1)!). Tiny intervals retain their own scale
+    # instead of disappearing when two nearly equal exponentials are subtracted.
+    z = beta * width
+    shift = (beta * start).exp()
+    if abs(z) >= D('0.5'):
+        return shift * (z.exp() - ONE) / beta
+    total = term = ONE
     for order in range(1, 10000):
-        coefficient *= beta / order
-        term = coefficient * (end ** (order + 1) - start ** (order + 1)) / (order + 1)
+        term *= z / (order + 1)
         updated = total + term
         if updated == total:
-            return total
+            return shift * width * total
         total = updated
     raise ArithmeticError('Integral series failed to converge.')
 
 
-def region(weights, species, inner):
+def region(weights, species, inner, total_particles=None):
     inventory = sum((weight * fraction for weight, fraction in zip(weights, species)), ZERO)
     desired = 0 if inner else 1
     purity = weights[desired] * species[desired] / inventory if inventory else None
-    return {
+    result = {
         'speciesFractions': species,
         'inventoryFraction': inventory,
         'purity': purity,
         'gain': purity - weights[desired] if purity is not None else None,
         'recoveries': [fraction if weight else None for weight, fraction in zip(weights, species)],
     }
+    if total_particles is not None:
+        result['speciesParticles'] = [
+            total_particles * weight * fraction for weight, fraction in zip(weights, species)
+        ]
+        result['totalParticles'] = total_particles * inventory
+    return result
 
 
 def reference(case):
@@ -75,6 +88,14 @@ def reference(case):
             raise ValueError('Require two positive masses ordered light then heavy.')
         if temperature <= 0 or not ZERO <= light <= ONE or not ZERO <= radius <= ONE:
             raise ValueError('Require T>0 and fractions in [0,1].')
+        total_particles = mean_density = None
+        if all(key in case for key in ('totalParticles', 'radiusM', 'lengthM')):
+            total_particles, radius_m, length_m = [
+                binary64(case[key]) for key in ('totalParticles', 'radiusM', 'lengthM')
+            ]
+            if min(total_particles, radius_m, length_m) <= 0:
+                raise ValueError('SI references require positive inventory, radius and length.')
+            mean_density = total_particles / (PI * radius_m * radius_m * length_m)
         beta = [mass * U * speed * speed / (2 * KB * temperature) for mass in masses]
         if beta[1] > 100:
             raise ValueError('Oracle qualification domain is beta_heavy <= 100.')
@@ -86,14 +107,19 @@ def reference(case):
         composition = weights[0] * densities[0] / total
         inner = [integral(b, ZERO, y) / z for b, z in zip(beta, normalizers)]
         outer = [integral(b, y, ONE) / z for b, z in zip(beta, normalizers)]
-        return {
+        result = {
             'beta': beta,
             'densityRelativeMean': densities,
             'lightFraction': composition,
             'gain': composition - light,
-            'inner': region(weights, inner, True),
-            'outer': region(weights, outer, False),
+            'inner': region(weights, inner, True, total_particles),
+            'outer': region(weights, outer, False, total_particles),
         }
+        if mean_density is not None:
+            result['densityM3'] = [
+                mean_density * weight * density for weight, density in zip(weights, densities)
+            ]
+        return result
 
 
 def encode(value):

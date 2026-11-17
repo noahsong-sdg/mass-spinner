@@ -13,8 +13,8 @@ const close=(a:number,b:number,tolerance=2e-12)=>assert.ok(Math.abs(a-b)<=tolera
 test('independent 80-digit direct-integral screen: density, composition, gains and both inventory cuts',()=>{
  const pairs=[...Object.values(FUEL_PAIRS).map(p=>p.masses),[7,7],[7,7.00000000001],[249.999999,250],[1,250]];
  const cases:any[]=[];
- for(const massesU of pairs)for(const bh of [0,1e-300,1e-12,1e-8,9.9e-8,.001,.099,.101,1,10,100])
-  for(const lightFraction of [0,1e-6,.0759,.5,1-1e-6,1])for(const radiusFraction of [0,1e-6,.1,.5,.99,1-1e-8,1-1e-16,1]){
+ for(const massesU of pairs)for(const bh of [0,1e-300,1e-12,1e-8,9.9e-8,1e-7,1.0000001e-7,.001,.099,.0999999999,.1,.1000000001,.101,1,10,100])
+  for(const lightFraction of [0,1e-6,.0759,.5,1-1e-6,1])for(const radiusFraction of [0,1e-100,1e-6,.1,.5,.99,1-1e-8,1-1e-16,1]){
    const edgeSpeedMS=Math.sqrt(bh*2*equilibriumModel.boltzmannJK*500/(massesU[1]*equilibriumModel.atomicMassKg))*(1-4*Number.EPSILON);
    cases.push({massesU,edgeSpeedMS,temperatureK:500,lightFraction,radiusFraction});
   }
@@ -51,6 +51,44 @@ test('independent 80-digit direct-integral screen: density, composition, gains a
  const files=['src/fuel-equilibrium.ts','src/fuel-centrifuge.ts','scientific/equilibrium-composition/oracle.py','tests/fuel-equilibrium.test.ts'];
  mkdirSync('output',{recursive:true});writeFileSync('output/equilibrium-qualification.json',JSON.stringify({schemaVersion:1,status:'pass',scope:'Finite numerical screen, not experimental validation or plot-interpolation qualification',cases:cases.length,gates,
   maxima:{absolute:maxAbsolute,relative:maxRelative,gainAbsolute:maxGainAbsolute,conservation:maxConservation},sourceFiles:Object.fromEntries(files.map(f=>[f,createHash('sha256').update(readFileSync(f)).digest('hex')]))},null,2));
+});
+
+test('positive microscopic cuts retain conditional purity and independently scaled particle counts',()=>{
+ const cases=[];
+ for(const edgeSpeedMS of [0,1,1000,10000])for(const radiusFraction of [0,1e-200,1e-170,2.3e-162,1e-160,1e-150,1e-100])for(const lightFraction of [0,.0759,.5,1])
+  cases.push({...base,edgeSpeedMS,totalParticles:1e30,lightFraction,radiusFraction});
+ cases.push({...base,massesU:[7,7],edgeSpeedMS:Math.sqrt(99*2*equilibriumModel.boltzmannJK*500/(7*equilibriumModel.atomicMassKg)),radiusM:1,lengthM:10,totalParticles:1,lightFraction:Number.MIN_VALUE,radiusFraction:1});
+ const oracle=spawnSync('python3',['scientific/equilibrium-composition/oracle.py'],{input:JSON.stringify(cases),encoding:'utf8',maxBuffer:40*1024*1024});
+ assert.equal(oracle.status,0,oracle.stderr);const references=JSON.parse(oracle.stdout);
+ const rounded=(actual:number,expected:string)=>{const ref=Number(expected);assert.ok(Math.abs(actual-ref)<=gates.relative*Math.abs(ref)+2*Number.MIN_VALUE,`${actual} vs ${expected}`);};
+ cases.forEach((c,i)=>{
+  const p=equilibriumPoint(c,c.radiusFraction),ref=references[i];
+  if(c.radiusFraction===0)assert.equal(p.inner.lightPurity,null);else{assert.notEqual(p.inner.lightPurity,null);close(p.inner.lightPurity!,Number(ref.inner.purity));}
+  for(const side of ['inner','outer'] as const){
+   p[side].speciesParticles.forEach((v,j)=>rounded(v,ref[side].speciesParticles[j]));rounded(p[side].totalParticles,ref[side].totalParticles);
+   close(p[side].totalParticles,p[side].speciesParticles[0]+p[side].speciesParticles[1],gates.conservation*Math.max(p[side].totalParticles,Number.MIN_VALUE));
+  }
+  p.densityM3.forEach((v,j)=>rounded(v,ref.densityM3[j]));
+  if(c.lightFraction===Number.MIN_VALUE)assert.ok(p.densityM3[0]>0,'a representable trace-species density must survive scaling');
+ });
+});
+
+test('absolute zero-rotation SI densities and inventory splits preserve geometry and species accounting',()=>{
+ for(const radiusM of [.001,10])for(const lengthM of [.001,100])for(const totalParticles of [1,1e30])for(const lightFraction of [0,.0759,.5,1])for(const cut of [0,.333,1]){
+  const c={...base,edgeSpeedMS:0,radiusM,lengthM,totalParticles,lightFraction},p=equilibriumPoint(c,cut),volume=Math.PI*radiusM*radiusM*lengthM;
+  for(const [j,weight]of [lightFraction,1-lightFraction].entries()){
+   const inventory=totalParticles*weight,inside=inventory*cut*cut,outside=inventory*(1-cut)*(1+cut),density=inventory/volume;
+   close(p.densityM3[j],density,gates.relative*Math.max(density,Number.MIN_VALUE));
+   close(p.inner.speciesParticles[j],inside,gates.relative*Math.max(inside,Number.MIN_VALUE));
+   close(p.outer.speciesParticles[j],outside,gates.relative*Math.max(outside,Number.MIN_VALUE));
+   close(p.inner.speciesParticles[j]+p.outer.speciesParticles[j],inventory,gates.conservation*Math.max(inventory,Number.MIN_VALUE));
+  }
+  close(p.inner.totalParticles+p.outer.totalParticles,totalParticles,gates.conservation*totalParticles);
+ }
+});
+
+test('missing mass entries cannot bypass the two finite ordered masses invariant',()=>{
+ for(const slot of [0,1]){const massesU=Array<number>(2);massesU[slot]=7;assert.throws(()=>equilibriumPoint({...base,massesU:massesU as any},.5),RangeError);}
 });
 
 test('zero rotation, equal masses, pure feeds and empty cuts retain distinct domain meanings',()=>{
