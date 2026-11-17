@@ -8,7 +8,11 @@ import {isInfo,isReduced,coreModes,showLaboratory,setupLaboratory} from '../src/
 // Source-unit execution of the actual control builder and config adapter. This
 // does not exercise a browser, CSS layout, network or GPU.
 class Element {
- private identifier='';value:string|number='';type='';min:string|number='';max:string|number='';step:string|number='';
+ private identifier='';private inputValue='';private minimum='';private maximum='';private increment='';type='';
+ get value(){return this.inputValue;}set value(value:string|number){this.inputValue=String(value);}
+ get min(){return this.minimum;}set min(value:string|number){this.minimum=String(value);}
+ get max(){return this.maximum;}set max(value:string|number){this.maximum=String(value);}
+ get step(){return this.increment;}set step(value:string|number){this.increment=String(value);}
  hidden=false;disabled=false;textContent='';className='';htmlFor='';open=false;dataset:Record<string,string>={};
  children:Element[]=[];options:Element[]=[];listeners=new Map<string,(()=>void)[]>();
  set id(id:string){this.identifier=id;registry.set(id,this);}get id(){return this.identifier;}
@@ -34,6 +38,11 @@ function harness(t:TestContext){
  return {get,changes:()=>changes,config:()=>doublewellConfig(ions)};
 }
 
+test('control fixture coerces numeric DOMString property assignments like browser inputs',()=>{
+ const element=new Element();
+ for(const property of ['value','min','max','step'] as const){element[property]=.5;assert.equal(element[property],'0.5');}
+});
+
 test('actual kinetic controls map SI values, log density and relative source size to independent config snapshots',t=>{
  const h=harness(t),initial=h.config();
  assert.equal(initial.densityM3,DEFAULT_DOUBLEWELL.densityM3);
@@ -44,7 +53,7 @@ test('actual kinetic controls map SI values, log density and relative source siz
  assert.match(registry.get('doublewell-controls')!.children[0].textContent,/not calibrated product-purity/);
  assert.ok(h.get('particlesPerSpecies').options.some(option=>option.value==='2048'));
  assert.ok(h.get('particlesPerSpecies').options.some(option=>option.value==='4096'));
- assert.equal(h.get('electronTemperatureEV').min,.5);
+ assert.equal(h.get('electronTemperatureEV').min,'0.5');
  assert.equal(h.get('densityM3').dataset.rangeScale,'log10');
  assert.ok(h.get('cellsAcross').options.some(option=>option.value==='12'));
  h.get('densityM3').value=19;h.get('densityM3').fire('input');
