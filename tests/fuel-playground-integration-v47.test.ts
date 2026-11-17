@@ -215,6 +215,8 @@ test('beginner sample controls explain the exact accepted fraction without rerun
  }
  f.change('fuel-sample-radius',.32);close(Number(readout.dataset.radiusM),.32*r.config.radiusM);close(Number(readout.dataset.timeS),.37);assert.equal(f.requests.length,requests);
  assert.match(f.ui.nodes.plots.querySelector('svg')!.getAttribute('aria-label')!,/zoomed/);
+ f.change('fuel-view-species','heavy','change');
+ assert.equal(f.ui.nodes.plots.querySelector('svg path[stroke="#94d9cd"]')!.getAttribute('stroke-opacity'),'1','a 3D highlight must not obscure the sole light-percentage curve');
  f.change('fuel-plot','profile','change');assert.equal(f.node('fuel-sample-controls').hidden,true);assert.equal(f.node('fuel-density-reading').hidden,false);assert.match(f.node('fuel-density-reading').textContent,/axis.*average.*wall/);
 });
 

@@ -164,7 +164,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const samplePosition=el('strong'),sampleCounts=el('p'),samplePercent=el('p'),sampleChange=el('p'),sampleBounds=el('p'),sampleBar=el('div'),sampleLight=el('span'),sampleHeavy=el('span');
  sampleBar.className='fuel-sample-bar';sampleBar.setAttribute('aria-hidden','true');sampleBar.append(sampleLight,sampleHeavy);
  compositionReadout.append(samplePosition,sampleCounts,sampleBar,samplePercent,sampleChange,sampleBounds);
- const probeControls=el('div'),probeRadius=el('input'),probeLabel=el('label','Sample position'),densityReading=el('p');
+ const probeControls=el('div'),probeRadius=el('input'),probeLabel=el('label','Sample position · center → outer wall'),densityReading=el('p');
  probeControls.id='fuel-sample-controls';probeControls.hidden=true;probeRadius.id='fuel-sample-radius';probeRadius.type='range';probeRadius.min='0';probeRadius.max='1';probeRadius.step='any';probeLabel.htmlFor=probeRadius.id;
  const probeEnds=el('div');probeEnds.className='fuel-sample-ends';
  for(const [value,title]of [[0,'At axis'],[1,'At wall']] as const){const button=el('button',title);button.type='button';button.addEventListener('click',()=>sampleRadius(value));probeEnds.append(button);}
@@ -224,7 +224,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(!latest||selector.value!=='composition')return;
   const r=latest!.result,s=sampleFuelField(r,views.state.radius*r.config.radiusM,state??diagnosticState(r));
   compositionReadout.setAttribute('aria-live',playing?'off':'polite');
-  samplePosition.textContent=`${views.state.radius===0?'At the axis':views.state.radius===1?'At the wall':`Between axis and wall`} · r ${fmt(100*s.radiusM)} cm · ${fmt(s.timeS)} s`;
+  samplePosition.textContent=`${views.state.radius===0?'At the axis (center)':views.state.radius===1?'At the wall (outer edge)':`Between axis and wall`} · r ${fmt(100*s.radiusM)} cm · ${fmt(s.timeS)} s`;
   const x=s.lightFraction,delta=x===null?null:Number((100*(x-r.config.lightFraction)).toFixed(3));
   sampleCounts.textContent=x===null?'Composition undefined · no resolved local density':`In 1,000 atoms here, about ${Math.round(1000*x)} are ${r.pair.light} and ${1000-Math.round(1000*x)} are ${r.pair.heavy}.`;
   samplePercent.textContent=x===null?'':`${r.pair.light} ${fmt(100*x)}% · ${r.pair.heavy} ${fmt(100*(1-x))}%`;
@@ -482,7 +482,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(topic==='field'){const scan=Array.from({length:40},(_,i)=>({field:.05+i*.05,power:m.ohmicW*(c.magneticT/(.05+i*.05))**2}));curves=[curve('Matched torque · resistive only',scan,'field','power','Magnetic field (T)','Ohmic power (W)')];values=[['Applied torque',m.torque,'N m']];}
   if(topic==='inventory'){const scan=Array.from({length:100},(_,i)=>{const burn=(i+1)/100,scale=r.fuelCycle.grossTritiumKg*c.burnFraction*1000;return {burn,gross:scale/burn,exhaust:scale*(1/burn-1)};});curves=(['gross','exhaust'] as const).map(k=>curve(k,scan,'burn',k,'Burned / injected tritium','Processing inventory (g)'));values=[['Unburned exhaust inventory',r.fuelCycle.exhaustTritiumKg*1000,'g'],['Gross circulation inventory',r.fuelCycle.grossTritiumKg*1000,'g']];}
   if(topic==='lithium'){const scan=Array.from({length:81},(_,i)=>({temperature:298.14+(1599.99-298.14)*i/80,pressure:lithiumVaporPressurePa(298.14+(1599.99-298.14)*i/80)}));curves=[curve('NIST equilibrium vapor pressure',scan,'temperature','pressure','Temperature (K)','Equilibrium vapor pressure (Pa)')];values=[['Reference outer gas pressure',r.pumping.wallPa,'Pa'],['Initial liner saturation pressure',r.lithium.wallVaporPressurePa,'Pa'],['Reference gas / initial saturation',r.lithium.wallSaturationRatio,'']];}
-  curves=curves.map((curve,i)=>({...curve,color:['#94d9cd','#e5ab70','#95b3d4','#d1bc87','#c2a5d4','#dc9292'][i%6],muted:views.state.species!=='all'&&curve.label===(views.state.species==='light'?r.pair.heavy:r.pair.light)}));
+  curves=curves.map((curve,i)=>({...curve,color:['#94d9cd','#e5ab70','#95b3d4','#d1bc87','#c2a5d4','#dc9292'][i%6],muted:topic!=='composition'&&views.state.species!=='all'&&curve.label===(views.state.species==='light'?r.pair.heavy:r.pair.light)}));
   if(capture)return curves;
   if(pinned){const baseline=draw({result:pinned.result},true)!;curves=[...baseline.map(curve=>({...curve,label:`A · ${curve.label}`,dash:'5 4'})),...curves.map(curve=>({...curve,label:`B · ${curve.label}`}))];curves=curves.map(curve=>{if(curve.xLabel!=='Time (s)')return curve;const n=curve.x.findIndex(t=>t>limit);if(n<0)return {...curve,xDomain:[0,limit] as const};const x=curve.x.slice(0,n),y=curve.y.slice(0,n);if(n&&x.at(-1)!<limit){const f=(limit-x.at(-1)!)/(curve.x[n]-x.at(-1)!);y.push(Number(y.at(-1))+(Number(curve.y[n])-Number(y.at(-1)))*f);x.push(limit);}return {...curve,x,y,xDomain:[0,limit] as const};});}
   if(topic==='composition')curves=zoomCompositionCurves(curves);
