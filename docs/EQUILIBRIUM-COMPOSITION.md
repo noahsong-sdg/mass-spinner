@@ -1,10 +1,10 @@
 # Equilibrium composition and collection
 
-Open **Plots → Equilibrium**. Set wall speed and temperature, then move the cut slider. The upper plot shows local composition; the lower plot shows the purity–recovery tradeoff across every cut. **Use sampled state** copies an accepted timeline state explicitly. This calculator never changes the 3D trajectory.
+Open **Plots → Equilibrium**. Set gas edge speed and temperature, then move the cut slider. The upper plot shows local composition; the lower plot shows the purity–recovery tradeoff across every cut. **Use sampled state** copies an accepted timeline state explicitly. This calculator never changes the 3D trajectory.
 
 ## What is prescribed?
 
-Two neutral species, rigid rotation at angular speed Ω, uniform temperature T, a cylinder of radius R and length L, total neutral inventory N, and its light-species number fraction x. A wall speed v specifies Ω = v/R. Inventory stays fixed when temperature changes. Gas-phase existence and discharge sustainment are assumed, not solved.
+Two neutral species, rigid rotation at angular speed Ω, uniform temperature T, a cylinder of radius R and length L, total neutral inventory N, and its light-species number fraction x. Gas speed v at R specifies Ω = v/R; this is not the metal vessel’s speed. Near-wall shear is not resolved. Inventory stays fixed when temperature changes. Gas-phase existence and discharge sustainment are assumed, not solved.
 
 ## Why does composition vary?
 

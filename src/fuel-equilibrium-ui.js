@@ -15,7 +15,7 @@ export function createEquilibriumCalculator({document:doc,host}){
  const pairLabel=el('label','Mixture'),pair=el('select');pair.id='equilibrium-pair';pairLabel.htmlFor=pair.id;
  for(const [key,value]of Object.entries(FUEL_PAIRS)){const o=el('option',value.label);o.value=key;pair.append(o);}
  pairLabel.append(pair);extra.append(pairLabel);
- input(basic,'edgeSpeedMS','Wall speed (m/s)',1000,0,200000);input(basic,'temperatureK','Temperature (K)',500,100,10000);
+ input(basic,'edgeSpeedMS','Gas edge speed (m/s)',1000,0,200000);input(basic,'temperatureK','Temperature (K)',500,100,10000);
  const cutLabel=el('label','Inner cut radius / vessel radius'),cut=el('input');cut.type='range';cut.id='equilibrium-cutFraction';cut.min=0;cut.max=1;cut.step=.005;cut.value=.65;cutLabel.htmlFor=cut.id;cutLabel.append(cut);basic.append(cutLabel);fields.set('cutFraction',cut);cut.addEventListener('input',draw);
  input(extra,'lightFraction','Light inventory number fraction',.0759,0,1);input(extra,'radiusM','Radius (m)',.12,.001,10);
  input(extra,'lengthM','Length (m)',.8,.001,100);input(extra,'totalParticles','Neutral inventory (particles)',5.2426e19,1,1e30);
