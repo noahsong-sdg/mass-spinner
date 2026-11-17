@@ -29,15 +29,15 @@ problem. Browser bundles will still be JavaScript: TypeScript checks authored
 source and erases types when building. Independent scientific Python, Julia, and
 OpenFOAM tools retain their native languages.
 
-## Verified first batch
+## Historical first-batch verification
 
 Source revision: `639634e58db402b41c3f2a70535febf3a98453ae`.
 [Isolated CI run](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44124864675)
 passed both strict compiler configurations, 30 focused sharing/baseline cases,
 all 1,436 runtime tests, the existing qualification groups, 20 Python tests,
 the production build, and site/asset checks. Independent source review found no
-blocking regressions. Source now contains 86 TypeScript and 69 JavaScript modules;
-the remaining JavaScript callers are still outside `tsc`.
+blocking regressions. At that revision, source contained 86 TypeScript and 69
+JavaScript modules; those JavaScript callers were still outside `tsc`.
 
 Native deployed-browser checks confirmed:
 
@@ -105,7 +105,49 @@ internal types in `surface-state.ts` and sparse-array validation limitations in
 
 ### Final verification
 
-The isolated strict compiler passed both production and contract configurations
-on the 157-module integration snapshot. The initial isolated runtime batch passed
-85/85 cases with no failures, skips or cancellations. Full final test/build and
-deployment/browser evidence will be added after those gates complete.
+Producing source: `3cb9a172499f49189ea8a45802f3971e9462ab19`.
+There are now **157 TypeScript modules and no JavaScript modules under `src/`**.
+[Final isolated CI](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44177051948)
+passed:
+
+- `npm run typecheck`: strict production and compile-only contract configurations.
+- `node --import tsx --test --test-concurrency=1 tests/*.test.ts`: 1,443/1,443
+  runtime tests, with no failures or skips.
+- All required focused qualification groups and 20 Python tests.
+- `npm run build`, `npm run check:site`, and `npm run check:assets`.
+
+Independent adversarial agents reviewed all 69 migrated modules, runtime changes
+after type erasure, 46 entrypoint DOM contracts, worker dispatch, old v2/v3 links,
+cancellation, comparison state, provenance and renderer resource ownership.
+No migration blockers remain. A full-suite failure in an input mock was fixed by
+modeling native DOMString coercion for `value`, `min`, `max` and `step`; the
+production behavior and physical assertions were preserved before the green run.
+
+The verified artifact was deployed to the
+[live simulator](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=2),
+Cloudflare version `9abace8a-de62-4cb2-9e34-bf0d0420f89b`. Twelve previous-release
+hashed assets were retained after byte comparison. An already-open old-release
+tab still completed a new worker calculation; fresh navigation loaded the new
+`main-DRLDZuHn.js` entry and `worker-D8ywqXOz.js` worker.
+
+Native browser verification exercised the deployed artifact, without a headless
+or policy bypass:
+
+| Playground | Observed checks |
+| --- | --- |
+| Centrifuge | Current intervention and fresh-tab share restoration; thermal and spatial-temperature plots; composition and purity/recovery endpoint; clipping, camera, direct hardware picking and material inspection; guide-to-plot links. |
+| Mass Spinner | Magnetic-field/mass changes, rerun, no-electric-field control, collection plots and GPU-rendered apparatus. |
+| Models | Equilibrium baseline/restore; static and collisional double wells; gyro, drift, resonance and rotating-filter outputs; independent comparison cards. Increasing drift curvature radius from 2 to 3 m changed the displayed drift from 225 to 150 m/s. Reversing RF polarization suppressed resonant heating. |
+| Research | Combined operating-point selection, saved-step scrubbing, temperature tensors and lazy distribution/entropy plots; qualification remained withheld. |
+| Beam target | Energy slider, zero output with beam off, material-model activation, finite-time energy ledger, References disclosure and lazy exposure controls. |
+| Future blanket | Rendered blanket assembly and decay response to time and initial isomer fraction. |
+| Laurelin | Compression and timeline changes updated state and traces; direct coil picking reported its assumed material. |
+
+At 390 × 844, the centrifuge, Mass Spinner, Models, Research, beam target and
+Laurelin layouts were checked; document width equaled scroll width (390 px).
+Responsive panel switching and representative plots/controls remained usable.
+Screenshots were inspected at desktop and mobile sizes. Main and Laurelin pages
+recorded no console errors during these checks. These are representative
+end-to-end regression checks, not exhaustive parameter-space validation or new
+experimental qualification. The preexisting exploratory collision warnings are
+still displayed.
