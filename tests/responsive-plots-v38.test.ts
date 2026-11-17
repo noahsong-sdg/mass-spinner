@@ -98,7 +98,7 @@ test('a scalar probe preserves undefined purity at an empty cut instead of borro
 test('chronological plots grow and rewind without future paths, readouts or focus loss',t=>{
  const {host,window,observers}=fixture(t,300),selected:number[]=[];
  const history={...curve,xLabel:'Time (s)'};
- const control=renderPlots(host,[history],{revealUntil:0,onSelect:time=>{selected.push(time);control.setCursor(time);}});
+ const control=renderPlots(host,[history],{revealUntil:0,onSelect:time=>{selected.push(time);}});
  const svg=host.querySelector('svg')!,readout=host.querySelector('.plot-readout')!;
  const line=()=>svg.querySelector('g[data-series="Response"] path')!;
  assert.equal(points(line()).length,1);svg.focus();
@@ -111,7 +111,8 @@ test('chronological plots grow and rewind without future paths, readouts or focu
  svg.dispatchEvent(new window.MouseEvent('pointermove',{clientX:280,clientY:100}));
  assert.match(readout.textContent!,/Response: 0.25, 0.25/);assert.deepEqual(selected,[]);
  // Explicit keyboard seeking still reaches the complete accepted timeline.
- svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End'}));assert.deepEqual(selected,[1]);assert.equal(points(line()).length,3);
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End'}));assert.deepEqual(selected,[1]);assert.equal(points(line()).length,3);assert.match(readout.textContent!,/Response: 1, 1/);
+ svg.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:177.5,clientY:100}));assert.equal(svg.dataset.visibleUntil,'0.5');assert.equal(points(line()).length,2);assert.match(readout.textContent!,/Response: 0.5, 0.5/);
  control.setCursor(0);assert.equal(points(line()).length,1);assert.match(readout.textContent!,/Response: 0, 0/);
  observers[0].resize(450);assert.equal(points(line()).length,1,'resizing must not expose future data');
  assert.deepEqual(history.y,[0,.5,1],'the accepted trajectory stays immutable');

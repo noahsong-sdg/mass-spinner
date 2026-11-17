@@ -227,7 +227,8 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   };
   let cursor: SVGPathElement | undefined,selected=c.selectedX??revealUntil;
   function updateCursor(value: number | undefined){selected=value;if(!cursor||!sx)return;cursor.setAttribute('d',finite(value)&&value>=xmin&&value<=xmax?`M${sx(value)} ${top}V${bottom}`:'');}
-  cursors.push(value=>{if(revealUntil!==undefined&&finite(value)){revealed=value;svg.dataset.visibleUntil=String(value);for(const update of updates)update();}updateCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}});
+  function moveCursor(value: number | undefined){if(revealUntil!==undefined&&finite(value)){revealed=value;svg.dataset.visibleUntil=String(value);for(const update of updates)update();}updateCursor(value);}
+  cursors.push(value=>{moveCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}});
   const readout=document.createElement('p');readout.className='plot-readout';readout.setAttribute('aria-live',announce?'polite':'off');
   const samples: {x: number; y?: number}[]=c.equalAspect?group.flatMap(series=>series.x.flatMap((x,i)=>{const y=series.y[i];return finite(x)&&finite(y)?[{x,y}]:[];})):
    [...new Set(pairs.map(p=>p[0]))].sort((a,b)=>a-b).map(x=>({x}));let sample=0;
@@ -245,7 +246,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   svg.setAttribute('tabindex','0');svg.setAttribute('aria-label',caption.textContent+'. Arrow keys inspect samples; Home and End select endpoints.');
   svg.addEventListener('keydown',event=>{
    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-   event.preventDefault();const i=event.key==='Home'?0:event.key==='End'?samples.length-1:Math.max(0,Math.min(samples.length-1,sample+(event.key==='ArrowRight'?1:-1)));inspect(samples[i].x,samples[i].y);sample=i;updateCursor(samples[i].x);onSelect?.(samples[i].x);
+   event.preventDefault();const i=event.key==='Home'?0:event.key==='End'?samples.length-1:Math.max(0,Math.min(samples.length-1,sample+(event.key==='ArrowRight'?1:-1)));moveCursor(samples[i].x);inspect(samples[i].x,samples[i].y);sample=i;onSelect?.(samples[i].x);
    // A shared-clock callback may silently update this same readout. Announce
    // the deliberate keyboard sample after that callback, never every RAF tick.
    readout.setAttribute('aria-live','polite');readout.textContent='';inspect(samples[i].x,samples[i].y);sample=i;
@@ -257,7 +258,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    const py=(event.clientY-bounds.top-(bounds.height-height*scale)/2)/scale;
    if(px<left||px>right||py<top||py>bottom)return;
    const target=xmin+(px-left)/(right-left)*(xmax-xmin);
-   const targetY=ymax-(py-top)/(bottom-top)*(ymax-ymin);inspect(target,targetY);if(event.type==='pointerdown'||event.buttons===1){updateCursor(samples[sample].x);onSelect?.(samples[sample].x);}
+   const targetY=ymax-(py-top)/(bottom-top)*(ymax-ymin);inspect(target,targetY);if(event.type==='pointerdown'||event.buttons===1){moveCursor(samples[sample].x);inspect(samples[sample].x,samples[sample].y);onSelect?.(samples[sample].x);}
   };
   svg.addEventListener('pointermove',inspectPointer);svg.addEventListener('pointerdown',inspectPointer);
   inspect(finite(selected)?selected:samples[0].x,samples[0].y);
