@@ -3,7 +3,7 @@ import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 const html=readFileSync('release/index.html','utf8');
 const ids=new Set([...html.matchAll(/id="([^"]+)"/g)].map(match=>match[1]));
-for(const file of ['src/main.js','src/study-ui.js']){
+for(const file of ['src/main.js','src/legacy-renderer.js','src/study-ui.js']){
  const source=readFileSync(file,'utf8');
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);
@@ -17,6 +17,17 @@ for(const name of ['index.html','laurelin.html','guide.html','equilibrium.html']
 }
 for(const [,font]of readFileSync('release/guide-katex/katex.min.css','utf8').matchAll(/url\((fonts\/[^)]+)\)/g))
  assert.ok(existsSync(`release/guide-katex/${font}`),`Missing guide math font: ${font}`);
+const sourceRevisions=new Set();
+for(const name of ['guide.html','qualification.html','how-it-works.html']){
+ const links=[...readFileSync(`release/${name}`,'utf8').matchAll(/href="https:\/\/github.com\/noahsong-sdg\/mass-spinner\/blob\/([^"?#]+)"/g)];
+ assert.ok(links.length,`Missing source links in ${name}`);
+ for(const [,path]of links){
+  const revision=path.split('/')[0];
+  assert.match(revision,/^[0-9a-f]{40}$/,`Unpinned source link in ${name}: ${path}`);
+  sourceRevisions.add(revision);
+ }
+}
+assert.equal(sourceRevisions.size,1,'Published guides must identify the same producing release.');
 for(const name of readdirSync('release/assets').filter(name=>name.endsWith('.js'))){
   const parsed=spawnSync(process.execPath,['--check',`release/assets/${name}`],{encoding:'utf8'});
   assert.equal(parsed.status,0,parsed.stderr);

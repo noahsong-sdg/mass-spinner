@@ -7,9 +7,10 @@ import {guideTopics,guideActions} from '../src/guide-topics.js';
 import {setupGuideReader} from '../src/guide-reader.js';
 
 const markdown=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
+const revision='8cab091a3458a050142049f9227238d18e51b53d';
 
 test('the website renders every guide equation and its derivation, with accessible schematic diagrams',t=>{
- const dom=new JSDOM(understandingPage(markdown));t.after(()=>dom.window.close());const doc=dom.window.document;
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
  const count=[...markdown.matchAll(/^```math$/gm)].length;
  assert.equal(doc.querySelectorAll('.equation').length,count);assert.equal(doc.querySelectorAll('math').length,count);
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
@@ -32,15 +33,18 @@ test('the website renders every guide equation and its derivation, with accessib
  }
  assert.equal(doc.querySelector('link[href="/guide-katex/katex.min.css"]')?.getAttribute('rel'),'stylesheet');
  assert.deepEqual([...doc.querySelectorAll('script')].map(node=>node.getAttribute('src')),['/guide-reader.js']);
- assert.ok([...doc.querySelectorAll('a')].some(node=>node.href.includes('/blob/main/src/fuel-transport.ts')));
+ for(const file of ['fuel-centrifuge.ts','fuel-transport.ts','fuel-operation.ts'])
+  assert.ok(doc.querySelector(`a[href="https://github.com/noahsong-sdg/mass-spinner/blob/${revision}/src/${file}"]`));
+ assert.ok(doc.querySelector('a[href="https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"]'));
+ assert.ok(!doc.body.innerHTML.includes('/blob/main/'));
 });
 
 test('a malformed equation fails the build instead of publishing raw or broken mathematics',()=>{
- assert.throws(()=>understandingPage('```math\n\\notARealCommand{1}\n```'),/Undefined control sequence/);
+ assert.throws(()=>understandingPage('```math\n\\notARealCommand{1}\n```',revision),/Undefined control sequence/);
 });
 
 test('the chapter picker remains reachable and leaves room for anchored headings',t=>{
- const dom=new JSDOM(understandingPage(markdown));t.after(()=>dom.window.close());
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
  const style=dom.window.document.createElement('style');style.textContent=readFileSync('web-assets/guide.css','utf8');dom.window.document.head.append(style);
  const nav=dom.window.getComputedStyle(dom.window.document.querySelector('nav')!);
  assert.equal(nav.position,'sticky');assert.equal(nav.top,'0px');
@@ -49,7 +53,7 @@ test('the chapter picker remains reachable and leaves room for anchored headings
 });
 
 test('the embedded reader keeps actions in the parent simulator and Escape exits the reading window',t=>{
- const dom=new JSDOM(understandingPage(markdown),{url:'https://example.org/guide.html#energy'});t.after(()=>dom.window.close());
+ const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html#energy'});t.after(()=>dom.window.close());
  const messages:any[]=[],win=dom.window;
  Object.defineProperty(win,'parent',{value:{postMessage:(...args:any[])=>messages.push(args)}});
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
@@ -64,7 +68,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
 });
 
 test('standalone reading retains ordinary links and does not impersonate an embedded simulator',t=>{
- const dom=new JSDOM(understandingPage(markdown),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
  setupGuideReader(dom.window);assert.equal(dom.window.document.body.classList.contains('embedded'),false);
  const chapters=dom.window.document.getElementById('guide-chapter') as HTMLSelectElement;chapters.value='composition';chapters.dispatchEvent(new dom.window.Event('change'));
  assert.equal(dom.window.location.hash,'#composition');

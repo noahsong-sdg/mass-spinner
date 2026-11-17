@@ -2,12 +2,13 @@ import {Marked} from 'marked';
 import katex from 'katex';
 import {guideTopics} from '../src/guide-topics.js';
 import {guideDiagram} from './guide-diagrams.mjs';
+import {releaseSourceBase} from './release-links.mjs';
 
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-const sourceBase='https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/';
 
 /** Render the same reviewed guide as GitHub, with math compiled at build time. */
-export function understandingPage(markdown){
+export function understandingPage(markdown,revision){
+ const sourceBase=releaseSourceBase(revision)+'docs/';
  const parser=new Marked({renderer:{
   code({lang,text}){return lang==='math'?`<div class="equation" tabindex="0" aria-label="Equation, scroll horizontally if needed">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
   link({href,tokens}){

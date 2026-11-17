@@ -3,15 +3,16 @@ import {readFileSync} from 'node:fs';
 import test from 'node:test';
 import {JSDOM} from 'jsdom';
 import {qualificationPage} from '../scripts/qualification-page.mjs';
+const revision='8cab091a3458a050142049f9227238d18e51b53d';
 
 test('published report is readable HTML with working evidence links and a local plot',()=>{
- const doc=new JSDOM(qualificationPage(readFileSync('docs/PUBLIC-DATA-QUALIFICATION.md','utf8'))).window.document;
+ const doc=new JSDOM(qualificationPage(readFileSync('docs/PUBLIC-DATA-QUALIFICATION.md','utf8'),revision)).window.document;
  assert.equal(doc.querySelector('h1')?.textContent,'Public-data qualification campaign');
  assert.equal(doc.querySelector('meta[name=viewport]')?.getAttribute('content'),'width=device-width, initial-scale=1');
  assert.equal(doc.querySelector('nav a')?.getAttribute('href'),'/?level=2');
  assert.equal(doc.querySelector('img')?.getAttribute('src'),'/qualification-comparison.png');
  assert.equal(doc.querySelectorAll('table tbody tr').length,5);
- for(const a of doc.querySelectorAll('main a'))assert.match(a.getAttribute('href')!,/^https:\/\/github.com\/noahsong-sdg\/mass-spinner\/blob\/codex\/public-data-qualification\//);
+ for(const a of doc.querySelectorAll('main a'))assert.ok(a.getAttribute('href')!.startsWith(`https://github.com/noahsong-sdg/mass-spinner/blob/${revision}/`));
  assert.equal(doc.querySelectorAll('script').length,0);
  assert.match(doc.body.textContent!,/experimental qualification remains false/);
  assert.match(doc.body.textContent!,/Finite-current footprint continuation/);

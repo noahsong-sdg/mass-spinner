@@ -1,10 +1,11 @@
 import {Marked} from 'marked';
+import {releaseSourceBase} from './release-links.mjs';
 
-const evidenceBase='https://github.com/noahsong-sdg/mass-spinner/blob/codex/public-data-qualification/docs/';
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
 /** Build only the reviewed repository report; no user-supplied Markdown input. */
-export function qualificationPage(markdown){
+export function qualificationPage(markdown,revision){
+ const evidenceBase=releaseSourceBase(revision)+'docs/';
  const parser=new Marked({renderer:{link({href,tokens}){
   return `<a href="${escape(new URL(href,evidenceBase).href)}">${this.parser.parseInline(tokens)}</a>`;
  }}});
