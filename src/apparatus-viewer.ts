@@ -7,7 +7,7 @@ import type {SurfaceState} from './surface-state.js';
 
 export type CameraVector=[number,number,number];
 export interface CameraPose {position:CameraVector;target:CameraVector;up?:CameraVector}
-export interface ModelCamera {position?:CameraVector;portraitPosition?:CameraVector;target?:CameraVector;up?:CameraVector;fitScale?:number}
+export interface ModelCamera {position?:number[];portraitPosition?:number[];target?:number[];up?:number[];fitScale?:number}
 export interface ViewerAsset<Model=unknown> {model:Model;modelCamera?:ModelCamera}
 export interface ViewerLoader<Model=unknown> {loadAsync(source:Model):Promise<{scene:THREE.Object3D}>}
 export interface ViewerControls {
@@ -173,7 +173,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function portraitComposition(){return root!==stateLayer.group&&asset?.modelCamera?.portraitPosition;}
  function defaultDirection(){
   const target=asset?.modelCamera?.target,position=camera.aspect<1&&portraitComposition()||asset?.modelCamera?.position;
-  return root===stateLayer.group?new THREE.Vector3(0,1,-.2).transformDirection(root.matrixWorld):position&&target?new THREE.Vector3(...position).sub(new THREE.Vector3(...target)).normalize():new THREE.Vector3(1.2,.65,1).normalize();
+  return root===stateLayer.group?new THREE.Vector3(0,1,-.2).transformDirection(root.matrixWorld):position&&target?new THREE.Vector3(position[0],position[1],position[2]).sub(new THREE.Vector3(target[0],target[1],target[2])).normalize():new THREE.Vector3(1.2,.65,1).normalize();
  }
  function fitDistance(){
   const vertical=THREE.MathUtils.degToRad(camera.fov),horizontal=2*Math.atan(Math.tan(vertical/2)*camera.aspect);
@@ -205,7 +205,8 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   // with the assembly, rather than aiming at the closed wall in world space.
   const direction=defaultDirection();
   // Local +x is transverse up; the axial source→target direction stays screen-right.
-  cameraUp(root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(...(asset?.modelCamera?.up??[0,1,0])));
+  const up=asset?.modelCamera?.up??[0,1,0];
+  cameraUp(root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]));
   const distance=fitDistance();
   controls.target.copy(center);camera.position.copy(center).addScaledVector(direction,distance);
   camera.near=Math.max(radius/1e7,1e-9);camera.far=distance+radius*20;camera.updateProjectionMatrix();
