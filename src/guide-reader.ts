@@ -1,6 +1,28 @@
 /** The standalone reader links work without this enhancement; embeds use native app actions. */
 export function setupGuideReader(win=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
+ const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');
+ if(drive){
+  const descriptions={
+   current:'Current crosses the gas from the outer electrode to the inner electrode. The magnetic field points toward you.',
+   ions:'With the axial magnetic field, J × B pushes the charged gas sideways all around the cylinder: counterclockwise.',
+   gas:'Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.',
+  };
+  const stages=drive.querySelectorAll<HTMLButtonElement>('[data-drive-stage]');
+  for(const button of stages)button.addEventListener('click',()=>{
+   const stage=button.dataset.driveStage as keyof typeof descriptions;
+   drive.dataset.stage=stage;
+   for(const candidate of stages)candidate.setAttribute('aria-pressed',String(candidate===button));
+   drive.querySelector<HTMLElement>('#drive-explanation')!.textContent=descriptions[stage];
+  });
+  const motion=drive.querySelector<HTMLButtonElement>('[data-drive-motion]')!;
+  const pause=(paused:boolean)=>{
+   drive.dataset.motion=paused?'paused':'running';
+   motion.setAttribute('aria-pressed',String(paused));motion.textContent=paused?'Play motion':'Pause motion';
+  };
+  pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);
+  motion.addEventListener('click',()=>pause(drive.dataset.motion!=='paused'));
+ }
  const chapters=doc.getElementById('guide-chapter') as HTMLSelectElement;
  function sync(){if([...chapters.options].some(option=>`#${option.value}`===win.location.hash))chapters.value=win.location.hash.slice(1);}
  chapters.addEventListener('change',()=>{win.location.hash=chapters.value;});win.addEventListener('hashchange',sync);sync();

@@ -31,16 +31,14 @@ project's two backends if those terms are unfamiliar.
 
 ## 1. How do we spin a gas without spinning a drum?
 
-Picture the cylinder from the end. Electrical current crosses the gas between
-inner and outer electrodes. A magnetic field points along the cylinder's axis.
-Current across that field produces a sideways electromagnetic force, which
-turns the charged population. Collisions transfer rotation to neutral atoms.
+The electrodes stay still. **The gas between them rotates.** Start with
+**Current** in the illustration, then **Turn ions**, then **Turn gas**.
+The left picture shows the cylinder; the right looks straight into its end.
 
-```text
-electrical drive → charged population turns → collisions turn neutral gas
-                           ↓                            ↓
-                          heat                 radial redistribution
-```
+Current crosses the gas from the outer electrode to the inner one. With a
+magnetic field along the axis, the force points **around** the cylinder, not
+along it. It drives the charged population; collisions pass rotation to neutral
+atoms. The dots show bulk motion, not individual microscopic orbits.
 
 The magnetic force per unit volume in this bulk model is
 

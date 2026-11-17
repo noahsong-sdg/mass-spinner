@@ -14,7 +14,7 @@ test('the website renders every guide equation and its derivation, with accessib
  const count=[...markdown.matchAll(/^```math$/gm)].length;
  assert.equal(doc.querySelectorAll('.equation').length,count);assert.equal(doc.querySelectorAll('math').length,count);
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
- assert.equal(doc.querySelectorAll('figure svg').length,3);
+ assert.equal(doc.querySelectorAll('figure svg').length,4);
  for(const svg of doc.querySelectorAll('figure svg')){
   assert.equal(svg.getAttribute('role'),'img');
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
@@ -37,6 +37,44 @@ test('the website renders every guide equation and its derivation, with accessib
   assert.ok(doc.querySelector(`a[href="https://github.com/noahsong-sdg/mass-spinner/blob/${revision}/src/${file}"]`));
  assert.ok(doc.querySelector('a[href="https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf"]'));
  assert.ok(!doc.body.innerHTML.includes('/blob/main/'));
+});
+
+test('the drive illustration separates current, ion rotation and neutral entrainment, with a working motion control',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ const win=dom.window,doc=win.document;setupGuideReader(win);
+ const figure=doc.querySelector<HTMLElement>('[data-drive-diagram]')!,motion=figure.querySelector<HTMLButtonElement>('[data-drive-motion]')!;
+ assert.equal(figure.dataset.stage,'gas');assert.equal(figure.dataset.motion,'running');
+ for(const [stage,phrase] of [['current',/outer electrode to the inner/],['ions',/counterclockwise/],['gas',/collisions.*neutral gas/]] as const){
+  const button=figure.querySelector<HTMLButtonElement>(`[data-drive-stage="${stage}"]`)!;button.click();
+  assert.equal(figure.dataset.stage,stage);assert.equal(button.getAttribute('aria-pressed'),'true');
+  assert.equal(figure.querySelectorAll('[data-drive-stage][aria-pressed="true"]').length,1);
+  assert.match(doc.getElementById('drive-explanation')!.textContent!,phrase);
+ }
+ motion.click();assert.equal(figure.dataset.motion,'paused');assert.equal(motion.textContent,'Play motion');assert.equal(motion.getAttribute('aria-pressed'),'true');
+ figure.querySelector<HTMLButtonElement>('[data-drive-stage="ions"]')!.click();assert.equal(figure.dataset.motion,'paused','changing explanation must not override pause');
+ motion.click();assert.equal(figure.dataset.motion,'running');assert.equal(motion.textContent,'Pause motion');
+ assert.match(figure.textContent!,/not simulated particle paths/);assert.match(figure.textContent!,/Outer electrode · stationary/);
+ assert.ok(figure.querySelector('.drive-ions circle'));assert.ok(figure.querySelector('.drive-neutrals circle'));
+});
+
+test('reduced motion starts paused, and the full static explanation remains available before scripts run',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ const win=dom.window,figure=win.document.querySelector<HTMLElement>('[data-drive-diagram]')!;
+ assert.equal(figure.dataset.motion,'paused');assert.equal(figure.dataset.stage,'gas');
+ Object.defineProperty(win,'matchMedia',{value:()=>({matches:true})});setupGuideReader(win);
+ assert.equal(figure.dataset.motion,'paused');assert.equal(figure.querySelector('[data-drive-motion]')!.textContent,'Play motion');
+ figure.querySelector<HTMLButtonElement>('[data-drive-motion]')!.click();assert.equal(figure.dataset.motion,'running','explicit play is available after respecting the initial preference');
+});
+
+test('the end-view force arrows give the same counterclockwise torque in all four quadrants',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
+ const path=dom.window.document.querySelector('.drive-forces path')!.getAttribute('d')!;
+ const segments=[...path.matchAll(/M(\d+) (\d+)([HV])(\d+)/g)];assert.equal(segments.length,4);
+ for(const [,xText,yText,axis,endText] of segments){
+  const x=Number(xText)-160,y=Number(yText)-160,dx=axis==='H'?Number(endText)-Number(xText):0,dy=axis==='V'?Number(endText)-Number(yText):0;
+  assert.ok(x*dy-y*dx<0,'SVG y points down: negative screen-space torque is counterclockwise');
+ }
+ const style=readFileSync('web-assets/guide.css','utf8');assert.match(style,/@keyframes drive-turn\{to\{transform:rotate\(-360deg\)\}\}/);
 });
 
 test('a malformed equation fails the build instead of publishing raw or broken mathematics',()=>{
