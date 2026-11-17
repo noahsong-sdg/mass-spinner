@@ -73,6 +73,18 @@ test('physics reading loads on demand and preserves its place while controls or 
  assert.equal(buttons[1].getAttribute('aria-pressed'),'true');
 });
 
+test('the mobile physics reader has a panel height instead of the iframe intrinsic height',t=>{
+ const f=fixture(t,true);f.workspace.openPhysics('drive');
+ const selector='#window-guide:has(.guide-physics:not([hidden]))';
+ assert.equal(f.doc.querySelector(selector),f.node('window-guide'));
+ const style=f.doc.createElement('style');style.textContent=readFileSync('src/workspace.css','utf8');f.doc.head.append(style);
+ const mobile=[...style.sheet!.cssRules].find(rule=>rule instanceof f.window.CSSMediaRule&&rule.conditionText==='(max-width:740px)') as CSSMediaRule;
+ const reader=[...mobile.cssRules].find(rule=>(rule as CSSStyleRule).selectorText===selector) as CSSStyleRule;
+ assert.equal(reader.style.height,'58dvh');
+ f.doc.querySelector<HTMLButtonElement>('.guide-views button')!.click();
+ assert.equal(f.doc.querySelector(selector),null,'short experiment cards must retain their intrinsic size');
+});
+
 test('only messages from the same-origin guide frame can operate native controls or close the guide',t=>{
  const f=fixture(t);f.workspace.openPhysics('drive');const frame=f.node('physics-guide-frame');
  const send=(origin:string,source:any,action:string,type='mass-spinner:guide-action')=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type,action}}));
