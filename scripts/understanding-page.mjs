@@ -10,18 +10,24 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').repla
 /** Render the same reviewed guide as GitHub, with math compiled at build time. */
 export function understandingPage(markdown,revision){
  const sourceBase=releaseSourceBase(revision)+'docs/';
+ let enhancement='';
  const parser=new Marked({renderer:{
   code({lang,text}){return lang==='math'?`<div class="equation" tabindex="0" aria-label="Equation, scroll horizontally if needed">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
+   if(href.startsWith('#'))return `<a href="${escape(href)}">${label}</a>`;
    if(href.endsWith('/?level=2&guide=start'))return `<a href="/?level=2&guide=start" data-guide-view="experiments">${label}</a>`;
    return `<a href="${escape(new URL(href,sourceBase).href)}" target="_blank" rel="noopener">${label}</a>`;
   },
   heading({tokens,depth}){
    const text=tokens.map(token=>token.raw).join(''),topic=guideTopics.find(topic=>topic.heading===text);
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
-   if(!topic)return heading;
-   return heading+(topic.diagram?guideDiagram(topic.diagram):'')+`<div class="try-actions" aria-label="Try ${escape(topic.heading)}">${topic.actions.map(([key,label])=>`<a data-guide-action="${key}" href="/?level=2&guide=physics&topic=${topic.id}&try=${key}">${escape(label)}</a>`).join('')}</div>`;
+   enhancement=topic?(topic.diagram?guideDiagram(topic.diagram):'')+(topic.actions.length?`<div class="try-actions" aria-label="Try ${escape(topic.heading)}">${topic.actions.map(([key,label])=>`<a data-guide-action="${key}" href="/?level=2&guide=physics&topic=${topic.id}&try=${key}">${escape(label)}</a>`).join('')}</div>`:''):'';
+   return heading;
+  },
+  paragraph({tokens}){
+   const after=enhancement;enhancement='';
+   return `<p>${this.parser.parseInline(tokens)}</p>`+after;
   },
  }});
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">

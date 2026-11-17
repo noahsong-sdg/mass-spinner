@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
+import {readFileSync} from 'node:fs';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 import {simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
 import {fuelMotionState} from '../src/fuel-motion.js';
@@ -288,4 +289,17 @@ test('disposing the playground prevents pending completion and further requests 
  const record=f.requests[0].record;f.ui.dispose();assert.equal(f.requests[0].signal.aborted,true);
  resolve(reply(record));await flush();assert.equal(f.ui.latest,null);assert.equal(f.loaded.length,0);
  f.ui.setActive(true);f.change('fuel-currentA',.02);await settle();assert.equal(f.requests.length,1);
+});
+
+
+test('the beginner guide explains every actual gas-view and plot menu option without launching a run',t=>{
+ const f=fixture(t),guide=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
+ const reference=guide.split('## What do the menu options mean?')[1].split('## Where do we go after this guide?')[0];
+ for(const id of ['fuel-motion-mode','fuel-plot'])for(const option of f.node(id).options)
+  assert.ok(reference.includes(`| ${option.textContent} |`),`missing explanation for ${id}: ${option.textContent}`);
+ assert.match(reference,/same accepted coupled solution/);
+ assert.match(reference,/not solved inlet\/outlet fluid motion/);
+ assert.match(reference,/not a fixed-current experiment/);
+ assert.match(reference,/both share the local temperature/);
+ assert.equal(f.requests.length,0);
 });

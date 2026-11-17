@@ -25,6 +25,7 @@ test('the website renders every guide equation and its derivation, with accessib
  assert.match(doc.body.textContent!,/not a reconstruction/);
  for(const topic of guideTopics){
   assert.equal(doc.getElementById(topic.id)?.textContent,topic.heading);
+  assert.equal(doc.getElementById(topic.id)!.nextElementSibling?.tagName,'P','motivate the question before showing diagrams and controls');
   for(const [key]of topic.actions)assert.ok(doc.querySelector(`#${topic.id} ~ .try-actions a[data-guide-action="${key}"]`));
  }
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[data-guide-action]')){
@@ -135,4 +136,27 @@ test('standalone reading retains ordinary links and does not impersonate an embe
  const chapters=dom.window.document.getElementById('guide-chapter') as HTMLSelectElement;chapters.value='composition';chapters.dispatchEvent(new dom.window.Event('change'));
  assert.equal(dom.window.location.hash,'#composition');
  assert.ok(dom.window.document.querySelector('a[href="/?level=2&guide=physics&topic=momentum&try=collisions"]'));
+});
+
+
+test('the model-building order and old deep links survive the guide rewrite',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.deepEqual([...doc.querySelectorAll('main h2[id]')].map(node=>node.id),['goal','composition','bias','drive','momentum','energy','collection','limits','views','path']);
+ for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')){
+  assert.ok(doc.getElementById(link.hash.slice(1)),`missing same-page destination: ${link.hash}`);
+  assert.equal(link.hasAttribute('target'),false,'embedded chapter links stay in the reader');
+  assert.equal(link.hasAttribute('data-guide-action'),false,'reading a section must not operate the simulator');
+ }
+ assert.ok(doc.querySelector('a[href="#views"]'));assert.ok(doc.querySelector('a[href="#path"]'));
+ for(const id of ['views','path']){
+  assert.ok(doc.querySelector(`#guide-chapter option[value="${id}"]`));
+  assert.notEqual(doc.getElementById(id)!.nextElementSibling?.className,'try-actions','reference sections should not emit empty action groups');
+ }
+});
+
+test('the reading plan distinguishes existing guides from proposed extensions',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
+ const plan=doc.getElementById('path')!;const rows=plan.nextElementSibling!.nextElementSibling!.querySelectorAll('tbody tr');
+ assert.equal(rows.length,6);assert.match(rows[0].textContent!,/available/);assert.match(rows[1].textContent!,/this page/);
+ for(const row of [...rows].slice(2)){assert.match(row.textContent!,/planned/);assert.equal(row.querySelectorAll('a').length,0);}
 });
