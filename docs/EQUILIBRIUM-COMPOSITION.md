@@ -6,6 +6,8 @@ Open **Plots → Equilibrium**. Set gas edge speed and temperature, then move th
 
 Two neutral species, rigid rotation at angular speed Ω, uniform temperature T, a cylinder of radius R and length L, total neutral inventory N, and its light-species number fraction x. Gas speed v at R specifies Ω = v/R; this is not the metal vessel’s speed. Near-wall shear is not resolved. Inventory stays fixed when temperature changes. Gas-phase existence and discharge sustainment are assumed, not solved.
 
+D and T denote atoms; D₂ denotes a molecule counted as one gas particle. Molecular recovery and number purity are not automatically deuterium-nuclei fractions or mass purity. The default lithium case is a prescribed all-gas reference, not a prediction that this inventory remains vapor at 500 K.
+
 ## Why does composition vary?
 
 Outward centrifugal force is balanced by a pressure gradient. For each ideal species, pressure is nₛkT; this gives the density slope:
@@ -50,14 +52,16 @@ These are **partitions of a closed equilibrium inventory**, not continuous extra
 
 The screened domain is masses 1–250 u (light ≤ heavy), T 100–10,000 K, R 0.001–10 m, L 0.001–100 m, N 1–10³⁰ particles, x and c in [0,1], nonnegative gas edge speed ≤200,000 m/s and βH ≤100. This is a numerical domain, not a physical operating envelope. In particular, prescribed lithium gas is not a vapor/condensation calculation.
 
-Production uses stable exponential integrals, direct outer-tail integration, and a separate enrichment-gain calculation to retain small changes. The independent Python Decimal oracle uses 80-digit direct integrals. The 5,280-case matrix compares local density/composition, cut purity/recovery, weak enrichment and species conservation. Independent Simpson integration refines through 1,024, 4,096 and 16,384 intervals. Frozen gates:
+Production uses stable exponential integrals, direct outer-tail integration, and a separate enrichment-gain calculation to retain small changes. Inner counts scale inventory before the cut radius factors, retaining representable counts even when the corresponding fraction underflows. Positive cuts retain defined purity even when their particle counts round to zero. The independent Python Decimal oracle uses 80-digit interval integrals, with a shifted Taylor series for small intervals. The 8,640-case matrix compares normalized density/composition, cut purity/recovery, weak enrichment and species conservation. Additional regressions compare absolute SI densities/counts against Decimal results for tiny cuts and check zero-rotation SI accounting across geometry and inventory endpoints. Independent Simpson integration refines through 1,024, 4,096 and 16,384 intervals. Frozen gates:
 
-- Absolute fraction/density error ≤2×10⁻¹²; relative error ≤2×10⁻¹¹ for every positive density and species-cut fraction in the matrix.
+- Absolute fraction/normalized-density error ≤2×10⁻¹²; relative error ≤2×10⁻¹¹ for every positive normalized density and species-cut fraction in the matrix. Normalized density is qₛ = nₛ / n̄ₛ, not density in m⁻³.
 - Species inventory split error ≤2×10⁻¹³.
 - Gain absolute error ≤2×10⁻¹⁴; when |gain| ≥10⁻¹², also require error ≤10⁻⁷|gain| + 32εx(1−x)Δβ, where ε is binary64 machine epsilon. The explicit rounding term accounts for subtracting near-coincident composition levels.
 - Independent quadrature final relative error ≤2×10⁻¹¹, with refinement required when the coarse error exceeds 10⁻¹².
 
 A passing finite screen is not a proof over all real inputs or experimental validation. Plot interpolation is not covered by the pointwise gates.
+
+The extra SI regressions use the same relative tolerance plus an absolute floor of two smallest binary64 values (2×2⁻¹⁰⁷⁴) for final subnormal rounding. The matrix gates above are unchanged. Counts are ensemble expectations and need not be integers; fractions and counts can underflow at different scales, so a rounded zero fraction need not imply zero scaled count.
 
 **Input scenarios** evaluate the declared speed/temperature endpoint combinations. They are sampled sensitivity cases, not guaranteed profile extrema, confidence intervals or measured uncertainty. A combination outside the numerical domain invalidates the output rather than silently clamping it.
 

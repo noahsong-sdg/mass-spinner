@@ -1,4 +1,4 @@
-import {radialPDF,radialCDF} from './fuel-centrifuge.js';
+import {radialPDF} from './fuel-centrifuge.js';
 
 export const equilibriumModel={version:'neutral-cylinder-equilibrium-v1',atomicMassKg:1.66053906892e-27,boltzmannJK:1.380649e-23,
  scope:'Ideal neutral gas; prescribed rigid rotation and uniform temperature; closed cylindrical inventory. No separation time, extraction throughput, plasma electric field, phase equilibrium or experimental calibration.'};
@@ -6,7 +6,7 @@ export type EquilibriumInput={massesU:readonly[number,number];edgeSpeedMS:number
 const range=(v:number,name:string,lo:number,hi:number)=>{if(!Number.isFinite(v)||v<lo||v>hi)throw new RangeError(`${name} must be in [${lo}, ${hi}].`);};
 function validate(c:EquilibriumInput){
  if(!Array.isArray(c.massesU)||c.massesU.length!==2)throw new RangeError('Two ordered neutral masses are required.');
- c.massesU.forEach(m=>range(m,'Mass (u)',1,250));
+ for(const m of c.massesU)range(m,'Mass (u)',1,250);
  if(c.massesU[0]>c.massesU[1])throw new RangeError('Light mass must not exceed heavy mass.');
  range(c.edgeSpeedMS,'Edge speed (m/s)',0,2e5);range(c.temperatureK,'Temperature (K)',100,10000);
  range(c.radiusM,'Radius (m)',.001,10);range(c.lengthM,'Length (m)',.001,100);range(c.totalParticles,'Inventory (particles)',1,1e30);
@@ -44,19 +44,22 @@ export function equilibriumPoint(c:EquilibriumInput,radiusFraction:number){
  const delta=(c.massesU[1]-c.massesU[0])*equilibriumModel.atomicMassKg*c.edgeSpeedMS**2/(2*equilibriumModel.boltzmannJK*c.temperatureK);
  const densityRelativeMean=beta.map(b=>radialPDF(b,y));
  const local=composition(x,-delta*y+logZDifference(bl,delta));
- const inner=beta.map(b=>radialCDF(b,y)),outer=beta.map(b=>survival(b,(1-radiusFraction)*(1+radiusFraction)));
+ // Integrate the mean density first: neither r² nor a species fraction need
+ // remain representable before multiplication by a large inventory.
+ const innerMean=beta.map(b=>Math.exp(logZ(b*y)-logZ(b)));
+ const inner=innerMean.map(q=>q*radiusFraction*radiusFraction),outer=beta.map(b=>survival(b,(1-radiusFraction)*(1+radiusFraction)));
  const meanDensity=c.totalParticles/(Math.PI*c.radiusM**2*c.lengthM);
- const innerFraction=x*inner[0]+(1-x)*inner[1],outerFraction=x*outer[0]+(1-x)*outer[1];
+ const innerFraction=(x*innerMean[0]+(1-x)*innerMean[1])*radiusFraction*radiusFraction,outerFraction=x*outer[0]+(1-x)*outer[1];
  const innerComposition=composition(x,logZDifference(bl,delta)-logZDifference(bl*y,delta*y));
- const speciesInner=[c.totalParticles*x*inner[0],c.totalParticles*(1-x)*inner[1]];
+ const speciesInner=[x,1-x].map((weight,j)=>c.totalParticles*weight*innerMean[j]*radiusFraction*radiusFraction);
  const speciesOuter=[c.totalParticles*x*outer[0],c.totalParticles*(1-x)*outer[1]];
  return {radiusFraction,radiusM:radiusFraction*c.radiusM,beta,densityRelativeMean,
-  densityM3:[meanDensity*x*densityRelativeMean[0],meanDensity*(1-x)*densityRelativeMean[1]],
+  densityM3:[meanDensity*densityRelativeMean[0]*x,meanDensity*densityRelativeMean[1]*(1-x)],
   lightFraction:local.fraction,lightGain:local.gain,
-  inner:{speciesFractions:inner,speciesParticles:speciesInner,totalParticles:c.totalParticles*innerFraction,
-   lightPurity:innerFraction>0?innerComposition.fraction:null,lightGain:innerFraction>0?innerComposition.gain:null,
+  inner:{speciesFractions:inner,speciesParticles:speciesInner,totalParticles:speciesInner[0]+speciesInner[1],
+   lightPurity:radiusFraction>0?innerComposition.fraction:null,lightGain:radiusFraction>0?innerComposition.gain:null,
    lightRecovery:x>0?inner[0]:null,inventoryFraction:innerFraction},
-  outer:{speciesFractions:outer,speciesParticles:speciesOuter,totalParticles:c.totalParticles*outerFraction,
+  outer:{speciesFractions:outer,speciesParticles:speciesOuter,totalParticles:speciesOuter[0]+speciesOuter[1],
    heavyPurity:ratio((1-x)*outer[1],outerFraction),heavyRecovery:x<1?outer[1]:null,inventoryFraction:outerFraction}};
 }
 
