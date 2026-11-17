@@ -420,3 +420,30 @@ test('a standalone pin link waits for native comparison readiness after result e
  pin.disabled=false;await flush();assert.equal(clear.disabled,false,'pin only after accepted comparison tools are ready');
  assert.equal(f.node('guide-status').textContent,'');
 });
+
+
+test('replayed histories draw only through shared physical time, including pinned comparisons',async t=>{
+ const f=fixture(t);await f.start();const count=f.requests.length,accepted=f.ui.latest.result;
+ const history=()=>f.ui.nodes.plots.querySelector<SVGSVGElement>('svg')!;
+ const paths=()=>[...history().querySelectorAll('g[data-series] path')].map(p=>p.getAttribute('d'));
+ f.change('fuel-motion-mode','transport','change');
+ for(const topic of ['spin','heat','thermal','separation','momentum','inertia']){
+  f.change('fuel-plot',topic,'change');f.change('fuel-motion-time',0);
+  const svg=history(),initial=paths();assert.equal(svg.dataset.visibleUntil,'0');
+  f.node('fuel-motion-play').click();assert.ok(f.viewers[0].animation);f.viewers[0].animation(1);
+  const time=Number(f.node('fuel-motion-time').value);assert.ok(time>0&&time<accepted.config.durationS);
+  assert.equal(history(),svg,'playback updates the existing graph, not its focusable element');
+  close(Number(svg.dataset.visibleUntil),time);assert.notDeepEqual(paths(),initial);
+  if(topic==='spin'){
+   const current=Number(f.ui.nodes.plots.querySelector('.fuel-metrics strong')!.textContent!.split(' ')[0]);
+   close(current,sampleFuelTransport(accepted.transport,time).neutralRadS*accepted.config.radiusM,.001);
+  }
+  f.node('fuel-motion-restart').click();assert.equal(svg.dataset.visibleUntil,'0');assert.deepEqual(paths(),initial);
+  f.change('fuel-motion-time',accepted.config.durationS);assert.equal(history().dataset.visibleUntil,String(accepted.config.durationS));
+ }
+ const pin=f.ui.nodes.view.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]')!;pin.click();await flush();
+ f.change('fuel-plot','momentum','change');f.change('fuel-motion-time',.37);
+ const svg=history();assert.equal(svg.querySelectorAll('g[data-series]').length,8);
+ assert.equal(svg.dataset.visibleUntil,'0.37');assert.ok(svg.textContent!.includes('A ·')&&svg.textContent!.includes('B ·'));
+ assert.equal(f.requests.length,count);assert.equal(f.ui.latest.result,accepted);
+});

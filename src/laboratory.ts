@@ -8,7 +8,7 @@ export interface PlotCurve {
  low?: readonly (number | null)[]; high?: readonly (number | null)[]; xDomain?: readonly [number, number]; yDomain?: readonly [number, number];
  selectedX?: number; equalAspect?: boolean; color?: string; dash?: string; muted?: boolean;
 }
-export interface PlotOptions {onSelect?: (x: number) => void; announce?: boolean}
+export interface PlotOptions {onSelect?: (x: number) => void; announce?: boolean; /** Reveal chronological history through this time; setCursor advances or rewinds it. */ revealUntil?: number}
 export interface PlotController {setCursor(value: number | undefined): void}
 const finite = (value: unknown): value is number => typeof value === 'number' && Number.isFinite(value);
 export const geometryModes=['gyro','curved','doublewell','mirror','centrifugal','poms','azimuthal'];
@@ -132,19 +132,31 @@ function plotLines(text: string,width: number){
  }
  if(line)lines.push(line);return lines;
 }
-export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSelect,announce=true}: PlotOptions={}): PlotController {
+export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSelect,announce=true,revealUntil}: PlotOptions={}): PlotController {
  for(const observer of plotObservers.get(host)??[])observer.disconnect();
  const observers: ResizeObserver[]=[];plotObservers.set(host,observers);
  host.replaceChildren();const groups=new Map<string, PlotCurve[]>(),cursors: ((value: number | undefined) => void)[]=[];
  for(const c of curves){const key=c.xLabel+'|'+c.yLabel+'|'+!!c.equalAspect;if(!groups.has(key))groups.set(key,[]);groups.get(key)!.push(c);}
  for(const group of groups.values()){
-  const c=group[0];let width=800,height=c.equalAspect?800:310,bottom=height-60,top=45,left=75,right=750,xmin=0,xmax=0,ymin=0,ymax=0,sx: ((x: number) => number) | undefined,sy: (y: number) => number;
+  const c=group[0];let revealed=revealUntil;const updates:(()=>void)[]=[];
+  function visible(series:PlotCurve):PlotCurve{
+   if(!finite(revealed))return series;
+   const n=series.x.findIndex(x=>x>revealed!);if(n<0)return series;
+   const x=series.x.slice(0,n),y=series.y.slice(0,n),low=series.low?.slice(0,n),high=series.high?.slice(0,n);
+   if(n&&series.x[n-1]<revealed){
+    const fraction=(revealed-series.x[n-1])/(series.x[n]-series.x[n-1]);
+    const interpolate=(values:readonly (number|null)[])=>finite(values[n-1])&&finite(values[n])?values[n-1]!+(values[n]!-values[n-1]!)*fraction:null;
+    x.push(revealed);y.push(interpolate(series.y));if(low)low.push(interpolate(series.low!));if(high)high.push(interpolate(series.high!));
+   }
+   return {...series,x,y,low,high};
+  }
+  let width=800,height=c.equalAspect?800:310,bottom=height-60,top=45,left=75,right=750,xmin=0,xmax=0,ymin=0,ymax=0,sx: ((x: number) => number) | undefined,sy: (y: number) => number;
   const figure=document.createElement('figure'),caption=document.createElement('figcaption'),svg=svgElement('svg',{preserveAspectRatio:'xMidYMid meet',role:'img'});
   caption.textContent=c.yLabel+' against '+c.xLabel+(c.equalAspect?' · equal spatial scale':'');svg.setAttribute('aria-label',caption.textContent);
   const pairs=group.flatMap(s=>s.x.flatMap((x,i)=>[s.y[i],s.low?.[i],s.high?.[i]].map(y=>[x,y] as const))).filter((p): p is readonly [number,number]=>p.every(finite));
   if(!pairs.length)continue;
   const draw=(nextWidth: number)=>{
-  width=nextWidth;svg.replaceChildren();
+  width=nextWidth;svg.replaceChildren();updates.length=0;
   const columns=Math.max(1,Math.floor((width-100)/220)),columnWidth=(width-100)/columns;
   const legends=group.map(series=>plotLines(series.label,columnWidth-32));
   const rows: number[]=[];let legendY=18;
@@ -185,16 +197,22 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   }
   xLines.forEach((line,i)=>svg.append(svgElement('text',{x:(left+right)/2,y:bottom+50+15*i,'text-anchor':'middle',fill:'#d7ded7','font-size':12},line)));
   group.forEach((series,index)=>{
-   const color=series.color??['#a4c4b1','#d2956b','#95b3d4','#d1bc87'][index%4],dash=series.dash??'';let path='',connected=false;
+   const color=series.color??['#a4c4b1','#d2956b','#95b3d4','#d1bc87'][index%4],dash=series.dash??'';
+   const layer=svgElement('g',{'data-series':series.label});svg.append(layer);
+   const source=series,update=()=>{
+   const series=visible(source);layer.replaceChildren();let path='',connected=false;
    if(series.low&&series.high){
     // Each finite contiguous segment gets its own uncertainty band; missing
     // bootstrap bounds must not be connected across an undefined collector.
     let segment: number[]=[];
-    const flush=()=>{if(segment.length){const points=[...segment.map(i=>[sx!(series.x[i]),sy(series.low![i]!)]),...[...segment].reverse().map(i=>[sx!(series.x[i]),sy(series.high![i]!)])];svg.append(svgElement('polygon',{points:points.map(p=>p.join(',')).join(' '),fill:color,'fill-opacity':.14}));segment=[];}};
+    const flush=()=>{if(segment.length){const points=[...segment.map(i=>[sx!(series.x[i]),sy(series.low![i]!)]),...[...segment].reverse().map(i=>[sx!(series.x[i]),sy(series.high![i]!)])];layer.append(svgElement('polygon',{points:points.map(p=>p.join(',')).join(' '),fill:color,'fill-opacity':.14}));segment=[];}};
     series.x.forEach((x,i)=>{if([x,series.low![i],series.high![i]].every(Number.isFinite))segment.push(i);else flush();});flush();
    }
    series.x.forEach((x,i)=>{const y=series.y[i];if(!finite(x)||!finite(y)){connected=false;return;}path+=`${connected?'L':'M'}${sx!(x)} ${sy(y)} `;connected=true;});
-   svg.append(svgElement('path',{d:path,stroke:color,'stroke-width':2,'stroke-dasharray':dash,'stroke-opacity':series.muted?.18:1,fill:'none'}));
+   layer.append(svgElement('path',{d:path,stroke:color,'stroke-width':2,'stroke-dasharray':dash,'stroke-opacity':series.muted?.18:1,fill:'none'}));
+   const last=series.x.length-1;
+   if(finite(revealed)&&last>=0&&finite(series.y[last]))layer.append(svgElement('circle',{cx:sx!(series.x[last]),cy:sy(series.y[last]!),r:3,fill:color}));
+   };updates.push(update);update();
    const lx=80+(index%columns)*columnWidth,ly=rows[Math.floor(index/columns)];
    svg.append(svgElement('path',{d:`M${lx} ${ly-4}h20`,stroke:color,'stroke-width':2,'stroke-dasharray':dash,fill:'none'}));
    const legend=svgElement('text',{x:lx+26,y:ly,fill:color,'font-size':12});
@@ -207,17 +225,17 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   }
   cursor=svgElement('path',{stroke:'#e8eae4','stroke-dasharray':'4 4','pointer-events':'none'});svg.append(cursor);updateCursor(selected);
   };
-  let cursor: SVGPathElement | undefined,selected=c.selectedX;
+  let cursor: SVGPathElement | undefined,selected=c.selectedX??revealUntil;
   function updateCursor(value: number | undefined){selected=value;if(!cursor||!sx)return;cursor.setAttribute('d',finite(value)&&value>=xmin&&value<=xmax?`M${sx(value)} ${top}V${bottom}`:'');}
-  cursors.push(value=>{updateCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}});
+  cursors.push(value=>{if(revealUntil!==undefined&&finite(value)){revealed=value;svg.dataset.visibleUntil=String(value);for(const update of updates)update();}updateCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}});
   const readout=document.createElement('p');readout.className='plot-readout';readout.setAttribute('aria-live',announce?'polite':'off');
   const samples: {x: number; y?: number}[]=c.equalAspect?group.flatMap(series=>series.x.flatMap((x,i)=>{const y=series.y[i];return finite(x)&&finite(y)?[{x,y}]:[];})):
    [...new Set(pairs.map(p=>p[0]))].sort((a,b)=>a-b).map(x=>({x}));let sample=0;
   const inspect=(target: number,targetY?: number)=>{
    const distance=(x: number,y?: number | null)=>c.equalAspect?Math.hypot(x-target,y!-targetY!):Math.abs(x-target);
    sample=samples.reduce((best,p,i)=>distance(p.x,p.y)<distance(samples[best].x,samples[best].y)?i:best,0);
-   readout.textContent=group.map(series=>{
-    let closest=-1,best=Infinity;
+   readout.textContent=group.map(source=>{
+    const series=visible(source);let closest=-1,best=Infinity;
     // A response discontinuity uses the last (post-event) value at a repeated
     // abscissa, matching the right-continuous cumulative-incidence producer.
     series.x.forEach((x,i)=>{if(!Number.isFinite(x)||(c.equalAspect&&!Number.isFinite(series.y[i])))return;const d=distance(x,series.y[i]);if(d<best||(!c.equalAspect&&d===best&&x===series.x[closest])){best=d;closest=i;}});
@@ -242,7 +260,8 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    const targetY=ymax-(py-top)/(bottom-top)*(ymax-ymin);inspect(target,targetY);if(event.type==='pointerdown'||event.buttons===1){updateCursor(samples[sample].x);onSelect?.(samples[sample].x);}
   };
   svg.addEventListener('pointermove',inspectPointer);svg.addEventListener('pointerdown',inspectPointer);
-  inspect(finite(c.selectedX)?c.selectedX:samples[0].x,samples[0].y);
+  inspect(finite(selected)?selected:samples[0].x,samples[0].y);
+  if(finite(revealed))svg.dataset.visibleUntil=String(revealed);
   figure.append(caption,svg,readout);host.append(figure);
   const measured=plotWidth(figure);draw(Number.isFinite(measured)&&measured>0?Math.max(180,measured):800);
   const Observer=figure.ownerDocument?.defaultView?.ResizeObserver??globalThis.ResizeObserver;
