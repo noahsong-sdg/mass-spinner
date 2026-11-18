@@ -42,6 +42,23 @@ test('changing the radial grid releases old volume and section resources exactly
  tools.dispose();tools.dispose();assert.equal(geometries,old.length);assert.equal(materials,old.length);
 });
 
+test('wall probes accept float32 surface rounding without sampling outside the exact gas domain',()=>{
+ const {result,scene,tools,field}=fixture(),R=result.config.radiusM,L=result.config.lengthM;
+ scene.updateMatrixWorld(true);let overshoot=false;
+ for(const node of field.children as THREE.Mesh[]){
+  if(node.userData.outerRadiusM!==R)continue;
+  const p=node.geometry.getAttribute('position');
+  for(let i=0;i<p.count;i++){
+   const point=new THREE.Vector3().fromBufferAttribute(p,i);overshoot ||= Math.hypot(point.x,point.y)>R;
+   const sample=tools.sampleWorld(node.localToWorld(point));assert.ok(sample);
+   assert.ok(sample.radiusM<=R&&sample.axialM>=0&&sample.axialM<=L);
+  }
+ }
+ assert.equal(overshoot,true,'exercise a rendered vertex beyond the exact radius');
+ assert.equal(tools.sampleWorld(scene.localToWorld(new THREE.Vector3(R*(1+1e-5),0,L/2))),null);
+ tools.dispose();
+});
+
 test('field and movable section agree while moving the section does not move the longitudinal gas field',()=>{
  const {result,scene,tools,field}=fixture(),state={lightMass:[.1,.9],heavyMass:[.6,.4],timeS:.3,neutralRadS:7};
  tools.update(state);tools.setLayer('density');tools.setSpecies('heavy');

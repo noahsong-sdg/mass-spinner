@@ -167,7 +167,14 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   bounded(fraction,0,1,'Collection cut');cut.scale.set(fraction,fraction,1);cut.visible=c.application==='enrichment'&&fraction>0;
   cut.userData.cutRadiusM=fraction*R;if(commit)onControl('cutFraction',fraction);return fraction;
  }
- function sampleWorld(point: THREE.Vector3){scene.updateMatrixWorld(true);const local=scene.worldToLocal(point.clone()),radiusM=Math.hypot(local.x,local.y);if(radiusM>R*(1+1e-10)||local.z < -L*1e-10||local.z>L*(1+1e-10))return null;const sample={...sampleAt(Math.min(radiusM,R)),axialM:THREE.MathUtils.clamp(local.z,0,L)};onSample(sample);return sample;}
+ function sampleWorld(point: THREE.Vector3){
+  scene.updateMatrixWorld(true);const local=scene.worldToLocal(point.clone()),radiusM=Math.hypot(local.x,local.y);
+  // Ray hits originate on float32 mesh vertices. Admit their rounding error,
+  // then clamp to the exact domain; the numerical sampler never extrapolates.
+  const tolerance=2**-22;
+  if(radiusM>R*(1+tolerance)||local.z < -L*tolerance||local.z>L*(1+tolerance))return null;
+  const sample={...sampleAt(Math.min(radiusM,R)),axialM:THREE.MathUtils.clamp(local.z,0,L)};onSample(sample);return sample;
+ }
  function projectCut(ray: THREE.Ray){scene.updateMatrixWorld(true);const plane=new THREE.Plane(new THREE.Vector3(0,0,1),-slice*L).applyMatrix4(scene.matrixWorld),point=ray.intersectPlane(plane,new THREE.Vector3());if(!point)return null;scene.worldToLocal(point);return THREE.MathUtils.clamp(Math.hypot(point.x,point.y)/R,0,1);}
  function handlePick(id: string){const keys=FUEL_COMPONENT_CONTROLS[id]??[];if(keys.length)onControl(keys[0],undefined,{componentId:id,keys});return keys;}
  function dispose(){
