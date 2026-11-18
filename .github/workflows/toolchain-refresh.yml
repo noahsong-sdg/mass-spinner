@@ -22,7 +22,10 @@ jobs:
             mkdir -p toolchain-report
             cp package-lock.json toolchain-report/
             npm audit --json > toolchain-report/npm-audit.json || test "$?" = 1
+            npm exec eslint -- src --fix > toolchain-report/autofix.log 2>&1 || test "$?" = 1
+            git diff -- src > toolchain-report/safe-lint-fixes.patch
             npm run typecheck > toolchain-report/typecheck.log 2>&1 || touch toolchain-report/typecheck-failed
+            node --import tsx --test --test-concurrency=1 tests/surface-state.test.ts tests/surface-independent-v39.test.ts tests/surface-viewer-v39.test.ts tests/scenario-schema.test.ts > toolchain-report/regressions.log 2>&1 || touch toolchain-report/regressions-failed
             if test -f tsconfig.tooling.json; then node node_modules/@typescript/native/bin/tsc --noEmit -p tsconfig.tooling.json > toolchain-report/tooling-types.log 2>&1 || touch toolchain-report/tooling-types-failed; fi
             if test -f eslint.config.mjs; then npm run lint > toolchain-report/lint.log 2>&1 || touch toolchain-report/lint-failed; fi
           '

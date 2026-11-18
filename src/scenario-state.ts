@@ -1,6 +1,8 @@
 import {validateFuelCurrentEvents} from './fuel-centrifuge.js';
 import type {ExperienceLevel} from './experience-state.js';
 import type {FuelCurrentEvent} from './fuel-operation.js';
+import {Ajv} from 'ajv';
+import scenarioSchema from '../schemas/scenario-v2-v3.schema.json' with {type:'json'};
 
 export type ScenarioValue = string | number | boolean;
 export type ScenarioControls = Record<string, ScenarioValue>;
@@ -13,6 +15,7 @@ export type FuelRunState = {
 export type Scenario =
  | {version: 2; level: ExperienceLevel; controls: ScenarioControls}
  | {version: 3; level: '2'; controls: ScenarioControls; fuelRun: FuelRunState};
+const validateShape=new Ajv({strict:true,strictNumbers:true}).compile<Scenario>(scenarioSchema);
 /** Local edits may contain empty numeric inputs or a history not yet validated for sharing. */
 export type ScenarioDraft = {
  version: 2 | 3;
@@ -125,6 +128,7 @@ export function scenarioLink(href: string, scenario: unknown): string {
  return url.href;
 }
 export function validateScenario(value: unknown): asserts value is Scenario {
+ if(!validateShape(value))throw new Error('Unsupported scenario.');
  if(!isRecord(value)||(value.version!==2&&value.version!==3)||!isLevel(value.level)||!isRecord(value.controls)||Object.keys(value).sort().join()!==(value.version===3?'controls,fuelRun,level,version':'controls,level,version'))throw new Error('Unsupported scenario.');
  const level=value.level,entries=Object.entries(value.controls);
  if(entries.length>200||entries.some(([id,v])=>!known(level,id)||!['string','number','boolean'].includes(typeof v)||typeof v==='string'&&v.length>160||typeof v==='number'&&!Number.isFinite(v)))throw new Error('Unsupported scenario settings.');

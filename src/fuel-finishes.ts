@@ -5,18 +5,19 @@ export function finishFuelHardware(scene: THREE.Object3D){
  const finishes=new Map<string,THREE.MeshPhysicalMaterial>(),replaced=new Set<THREE.Material>();
  scene.traverse(mesh=>{
   if(!(mesh instanceof THREE.Mesh))return;
+  const hardware=mesh as THREE.Mesh<THREE.BufferGeometry,THREE.Material|THREE.Material[]>;
   const data: Record<string,unknown>=mesh.userData;
   if(data.quantitativeOnly||data.componentId==='profile'||data.componentId==='motion')return;
-  const original=mesh.material;if(Array.isArray(original)||!(original instanceof THREE.MeshStandardMaterial))return;
+  const original=hardware.material;if(Array.isArray(original)||!(original instanceof THREE.MeshStandardMaterial))return;
   const name=original.name.toLowerCase(),kind=name.includes('copper')?'copper':name.includes('alumina')?'ceramic':name.includes('stainless')?'steel':null;
   if(!kind)return;
-  if(!mesh.geometry.getAttribute('uv')){
-   mesh.geometry.computeBoundingBox();const box=mesh.geometry.boundingBox!,size=box.getSize(new THREE.Vector3()),p=mesh.geometry.getAttribute('position'),n=mesh.geometry.getAttribute('normal'),uv=[];
+  if(!hardware.geometry.getAttribute('uv')){
+   hardware.geometry.computeBoundingBox();const box=hardware.geometry.boundingBox!,size=box.getSize(new THREE.Vector3()),p=hardware.geometry.getAttribute('position'),n=hardware.geometry.getAttribute('normal'),uv=[];
    for(let i=0;i<p.count;i++){
     const flat=Math.abs(n.getZ(i))>.8;
     uv.push(flat?(p.getX(i)-box.min.x)/(size.x||1):Math.atan2(p.getY(i),p.getX(i))/(2*Math.PI)+.5,flat?(p.getY(i)-box.min.y)/(size.y||1):(p.getZ(i)-box.min.z)/(size.z||1));
    }
-   mesh.geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
+   hardware.geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
   }
   if(!finishes.has(name)){
    const material=new THREE.MeshPhysicalMaterial();THREE.MeshStandardMaterial.prototype.copy.call(material,original);
@@ -33,7 +34,7 @@ export function finishFuelHardware(scene: THREE.Object3D){
    material.metalness=kind==='ceramic'?0:1;material.anisotropy=kind==='ceramic'?0:.38;material.normalScale.set(.15,.15);
    material.userData={...material.userData,opticalFinish:kind,basis:'Illustrative microfinish; not measured surface properties'};finishes.set(name,material);
   }
-  mesh.material=finishes.get(name)!;replaced.add(original);
+  hardware.material=finishes.get(name)!;replaced.add(original);
  });
  for(const original of replaced)original.dispose();
 }
