@@ -1,4 +1,5 @@
 """Source closure shared by the producer and checker, independent of verdict code."""
+
 import hashlib
 import json
 from pathlib import Path
@@ -46,4 +47,3 @@ def sources():
 
 def content_key(values):
     return hashlib.sha256(json.dumps(values, sort_keys=True).encode()).hexdigest()
-

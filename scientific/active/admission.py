@@ -1,4 +1,5 @@
 """Checker-only admission: verdict changes do not rerun the physical producer."""
+
 import json
 from pathlib import Path
 
@@ -29,4 +30,3 @@ def admit(destination):
     if report["opticalCases"] != 4320 or report["electricalCases"] != 60:
         raise ValueError("Incomplete no-fit diagnostic replay")
     return manifest
-

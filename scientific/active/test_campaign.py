@@ -54,12 +54,26 @@ class CampaignPublicationTests(unittest.TestCase):
     def test_admission_rechecks_cached_files_identity_and_claims(self):
         with tempfile.TemporaryDirectory() as root:
             destination = Path(root)
-            report = dict.fromkeys(["experimentalQualification", "parametersRefitted", "fieldProducerReexecuted", "temperaturePredictionAvailable"], False)
+            report = dict.fromkeys(
+                [
+                    "experimentalQualification",
+                    "parametersRefitted",
+                    "fieldProducerReexecuted",
+                    "temperaturePredictionAvailable",
+                ],
+                False,
+            )
             report.update(opticalCases=4320, electricalCases=60)
             (destination / "diagnosis.json").write_text(json.dumps(report))
             (destination / "comparison.png").write_bytes(b"image")
-            manifest = {"schemaVersion": 1, "sources": {"physics": "v1"}, "files": {
-                name: campaign_inputs.sha(destination / name) for name in ("diagnosis.json", "comparison.png")}}
+            manifest = {
+                "schemaVersion": 1,
+                "sources": {"physics": "v1"},
+                "files": {
+                    name: campaign_inputs.sha(destination / name)
+                    for name in ("diagnosis.json", "comparison.png")
+                },
+            }
             (destination / "manifest.json").write_text(json.dumps(manifest))
             with patch.object(admission, "sources", return_value={"physics": "v1"}):
                 admission.admit(destination)
@@ -74,4 +88,7 @@ class CampaignPublicationTests(unittest.TestCase):
         paths = campaign_inputs.source_paths()
         self.assertNotIn(Path(admission.__file__).resolve(), paths)
         self.assertIn(Path(campaign.__file__).resolve(), paths)
-        self.assertNotEqual(campaign_inputs.content_key({"physics": "v1"}), campaign_inputs.content_key({"physics": "v2"}))
+        self.assertNotEqual(
+            campaign_inputs.content_key({"physics": "v1"}),
+            campaign_inputs.content_key({"physics": "v2"}),
+        )

@@ -36,8 +36,6 @@ def produce(destination):
     admit(destination)
 
 
-
-
 if __name__ == "__main__":
     if sys.argv[1] == "produce":
         produce(sys.argv[2])
