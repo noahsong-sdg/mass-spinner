@@ -103,14 +103,16 @@ test('equilibrium import samples the visible playback state even when the time-h
 test('guided experiments use the real accepted plots, timeline and probes without changing physical inputs',async t=>{
  const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
  const opened:string[]=[],focused:any[]=[];
- setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated:(...args)=>focused.push(args)});
+ const guide=setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated:(...args)=>focused.push(args)});
  const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
  const action=(step:number,label:string)=>{
   const choice=f.node('guide-step');choice.value=String(step);choice.dispatchEvent(new f.window.Event('change'));
   const button=[...host.querySelectorAll<HTMLButtonElement>('.guide-actions button')].find(b=>b.textContent===label);assert.ok(button,label);button.click();
  };
- action(1,'Replay spin-up');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
+ guide.launch('spin');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
  assert.equal(f.node('fuel-motion-mode').value,'transport','use averaged turns so the full history plays in seconds');
+ action(1,'Show end-of-run speeds');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  action(2,'Show end-of-run composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  action(2,'Probe axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
