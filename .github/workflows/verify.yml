@@ -66,9 +66,13 @@ jobs:
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp mass-spinner-browser npm ci --ignore-scripts --no-audit --no-fund
       - name: Verify exact candidate in Chromium desktop and phone layouts
         run: |
-          docker run --rm --network none --memory 2g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp mass-spinner-browser sh -eu -c '
+          docker run --rm --network none --memory 2g --cpus 2 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp mass-spinner-browser sh -eu -c '
             npm run release:verify
-            npm run test:browser
+            status=0
+            npm run test:browser || status=$?
+            mkdir -p test-results
+            cat /sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.stat > test-results/container-resources.txt
+            test "$status" -eq 0
             npm run release:verify
           '
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
