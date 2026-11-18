@@ -137,9 +137,15 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }}
  const stateLayer=createSurfaceLayer(frame,{render,onSelect});scene.add(stateLayer.group);
  let reactorState:ReactorMotionState|null=null,reactorPending=false,active=true,reactorLayer:ReturnType<typeof createReactorMotionLayer>|null=null;
+ const animateReactor=(dt:number)=>reactorLayer?.tick(dt);
  function refreshReactor(){
   reactorLayer?.update(reactorState,root,reactorPending);
-  if(asset?.reactor){setAnimation(active&&reactorLayer?.running?dt=>reactorLayer?.tick(dt):null);render();}
+  if(asset?.reactor){
+   const nextAnimation=active&&reactorLayer?.running?animateReactor:null;
+   // Input updates preserve the clock; visibility changes still restart it through setAnimation.
+   if(animation!==nextAnimation)setAnimation(nextAnimation);
+   render();
+  }
  }
  function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!root||!asset?.scaleLabel;}
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}

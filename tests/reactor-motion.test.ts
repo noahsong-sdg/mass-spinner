@@ -67,7 +67,7 @@ test('live scene moves particles toward target and hides reactions independently
  const f=fixture(t),before=f.positions(0);f.layer.tick(.05);assert.notDeepEqual(f.positions(0),before);assert.ok(f.count(0)>0&&f.count(1)>0&&f.count(4)>0);
  const beam=(f.layer.group.children[0] as THREE.Points).geometry.getAttribute('position');
  for(let i=0;i<f.count(0);i++)assert.ok(beam.getX(i)>=-.29&&beam.getX(i)<=1e-8);
- f.layer.update({...f.state,neutronRateS:0,neutronEnergyMeV:null},f.root);assert.ok(f.count(0)>0);assert.equal(f.count(1),0);assert.equal(f.count(4),0);assert.ok(f.count(3)>0);
+ f.layer.update({...f.state,neutronRateS:0,neutronEnergyMeV:null},f.root);assert.ok(f.count(0)>0);assert.equal(f.count(1),0);assert.equal(f.count(4),0);assert.ok(f.panel.querySelector('.reactor-heat path'));
  f.layer.update({...f.state,particleRateS:0,neutronRateS:0,depositedPowerW:0},f.root);assert.equal(f.count(0),0);assert.equal(f.count(3),0);
 });
 test('pending, invalid, paused and reduced-motion states never keep moving stale quantitative output',t=>{
@@ -79,9 +79,23 @@ test('pending, invalid, paused and reduced-motion states never keep moving stale
 test('area changes beam radius; refinement cannot exceed fixed GPU buffers; reverse heat stays signed',t=>{
  const f=fixture(t),radius=()=>{const p=(f.layer.group.children[0] as THREE.Points).geometry.getAttribute('position');return Math.max(...Array.from({length:f.count(0)},(_,i)=>Math.hypot(p.getY(i),p.getZ(i))));};
  const before=radius();f.layer.update({...f.state,areaM2:f.state.areaM2*4},f.root);assert.ok(Math.abs(radius()/before-2)<1e-6);
- const many:BeamMotionState={...f.state,heatFacesWM2:Array.from({length:1025},()=>-1000)};f.layer.update(many,f.root);
+ const many:BeamMotionState={...f.state,heatFacesWM2:Array.from({length:1025},()=>-1000),heatGeometry:{faceDepthM:Array.from({length:1025},(_,i)=>i*2e-6/1024),filmThicknessM:1e-6,backingThicknessM:1e-6}};f.layer.update(many,f.root);
  const heat=f.layer.group.children[3] as THREE.LineSegments;assert.ok(heat.geometry.drawRange.count<=heat.geometry.getAttribute('position').count);assert.equal(f.panel.dataset.heatDirection,'toward target');
  f.layer.update({kind:'power-reference'},f.root);assert.equal(f.panel.dataset.basis,'power-reference');assert.equal(f.count(0),0);assert.match(f.panel.textContent!,/not calculated/);
+ assert.equal(f.panel.querySelector<HTMLInputElement>('[aria-label="Show beam"]')!.parentElement!.hidden,true);
+});
+
+test('no processes rendered means no animation loop, and toggles can resume it',t=>{
+ const f=fixture(t);for(const input of f.panel.querySelectorAll<HTMLInputElement>('input')){input.checked=false;input.dispatchEvent(new f.frame.ownerDocument.defaultView!.Event('change'));}
+ assert.equal(f.layer.running,false);const beam=f.panel.querySelector<HTMLInputElement>('[aria-label="Show beam"]')!;
+ beam.checked=true;beam.dispatchEvent(new f.frame.ownerDocument.defaultView!.Event('change'));assert.equal(f.layer.running,true);
+ f.layer.update({...f.state,particleRateS:0,neutronRateS:0,depositedPowerW:0},f.root);assert.equal(f.layer.running,false);
+});
+
+test('reference beam footprint fits the full supported area range without clipping its sqrt-area response',t=>{
+ const f=fixture(t);f.root.name='Blender illustrative envelope';
+ const extent=(areaM2:number)=>{f.layer.update({...f.state,areaM2},f.root);const p=(f.layer.group.children[0] as THREE.Points).geometry.getAttribute('position');return Math.max(...Array.from({length:f.count(0)},(_,i)=>Math.hypot(p.getY(i),p.getZ(i))));};
+ const small=extent(.025),large=extent(.1);assert.ok(large<.24,'beam stays inside the authored .24-unit downstream bore');assert.ok(Math.abs(large/small-2)<1e-6);
 });
 
 test('SI beam axis follows the solver origin rather than an asymmetric cutaway bounding box',t=>{

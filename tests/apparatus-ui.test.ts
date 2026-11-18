@@ -66,3 +66,36 @@ test('apparatus fidelity disclosure follows the displayed asset instead of imply
  assert.doesNotMatch(text(disclosure),/210 mm/i);
  ui.show('gyro');assert.equal(disclosure.children[2].hidden,true);assert.equal((disclosure.children[2] as any).href,'');
 });
+
+test('observer reveal resumes an already loaded apparatus without resetting motion or camera preferences',async t=>{
+ const previous=globalThis.IntersectionObserver;let visibility!:(entries:{isIntersecting:boolean}[])=>void;
+ globalThis.IntersectionObserver=class{constructor(callback:typeof visibility){visibility=callback;}observe(){}disconnect(){}} as any;
+ t.after(()=>{globalThis.IntersectionObserver=previous;});
+ let loads=0,paused=false,beamVisible=true;const active:boolean[]=[];
+ const ui=setupApparatus(host(),{viewerModuleLoader:async()=>({createApparatusViewer:()=>({
+  async load(){loads++;paused=false;beamVisible=true;return true;},select(){},reset(){},dispose(){},setActive(value){active.push(value);},
+ })})});t.after(()=>ui.dispose());
+ ui.show('beam-target');visibility([{isIntersecting:true}]);
+ for(let i=0;i<6;i++)await Promise.resolve();assert.equal(loads,1);
+ paused=true;beamVisible=false;visibility([{isIntersecting:false}]);visibility([{isIntersecting:true}]);
+ for(let i=0;i<6;i++)await Promise.resolve();
+ assert.equal(loads,1);assert.equal(paused,true);assert.equal(beamVisible,false);assert.equal(active.at(-1),true);
+ ui.show('blanket');for(let i=0;i<6;i++)await Promise.resolve();assert.equal(loads,2,'changing the actual asset still loads it');
+});
+
+test('failed loads remain retryable and a repeated reveal does not duplicate an in-flight load',async t=>{
+ const previous=globalThis.IntersectionObserver;let visibility!:(entries:{isIntersecting:boolean}[])=>void;
+ globalThis.IntersectionObserver=class{constructor(callback:typeof visibility){visibility=callback;}observe(){}disconnect(){}} as any;
+ t.after(()=>{globalThis.IntersectionObserver=previous;});
+ const root=host();let finish!:(success:boolean)=>void,loads=0;
+ const ui=setupApparatus(root,{viewerModuleLoader:async()=>({createApparatusViewer:(_,options)=>({
+  load(){loads++;return new Promise<boolean>(resolve=>{finish=success=>{if(!success)options.onError?.(new Error('Load rejected'));resolve(success);};});},
+  select(){},reset(){},dispose(){},
+ })})});t.after(()=>ui.dispose());
+ ui.show('beam-target');visibility([{isIntersecting:true}]);for(let i=0;i<3;i++)await Promise.resolve();
+ visibility([{isIntersecting:false}]);visibility([{isIntersecting:true}]);assert.equal(loads,1);
+ finish(false);for(let i=0;i<6;i++)await Promise.resolve();
+ const retry=root.children[0].children[1].children[1];assert.equal(retry.hidden,false);retry.events.click();assert.equal(loads,2);
+ finish(true);for(let i=0;i<6;i++)await Promise.resolve();
+ visibility([{isIntersecting:false}]);visibility([{isIntersecting:true}]);for(let i=0;i<3;i++)await Promise.resolve();assert.equal(loads,2);
+});

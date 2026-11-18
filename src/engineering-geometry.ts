@@ -146,7 +146,8 @@ export function buildEngineeringGeometry(options: EngineeringGeometryOptions): E
   ring('Source vacuum adaptor',tubeStart-w*.5,vesselR*.73,vesselR+w,w,'steel','beamline');
   for(let i=0;i<3;i++){
    const z=tubeStart+vesselR*(.4+i*.65);
-   ring('Extraction electrode',z,vesselR*.21,vesselR*.68,w*.8,'copper','accelerator');
+   // No focusing/interception is solved: the illustrative bore must clear the prescribed beam.
+   ring('Extraction electrode',z,Math.max(r*1.1,vesselR*.21),vesselR*.68,w*.8,'copper','accelerator');
    ring('High-voltage ceramic spacer',z+w,vesselR*.7,vesselR*.88,w*1.2,'ceramic','accelerator');
   }
   // Remove only the display's +y half to expose the true-depth section at y=0.

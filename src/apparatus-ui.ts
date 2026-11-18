@@ -44,6 +44,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  const focus=doc.createElement('button');focus.type='button';focus.textContent='⌖';focus.disabled=true;focus.setAttribute('aria-label','Focus selected component');toolbar.append(focus);
  let records: Component[]=[],asset: ApparatusAsset | null | undefined=null,viewer: ApparatusDisplay | null=null,pending: Promise<ViewerModule> | null=null,visible=false,disposed=false,selected='',acceptedState: unknown=null,statePending=false,surface: {packet: SurfaceState | null | undefined; settings?: SurfaceSettings} | null=null;
  let reactorState:ReactorMotionState|null=null;
+ let loadedAsset:ApparatusAsset|null=null,loadingAsset:ApparatusAsset|null=null;
  function describeRepresentation({geometry,status,layer,numerical=false}: Pick<ViewerRepresentation, 'geometry' | 'status'> & Partial<Pick<ViewerRepresentation, 'layer' | 'numerical'>>){
   if(disposed||!asset)return;
   if(geometry==='none'){provenanceText.textContent=status==='loading'?'Loading 3D geometry.':'3D unavailable; no geometry is displayed.';return;}
@@ -63,17 +64,27 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   summary.textContent='Materials & model';basis.textContent=typeof part?.geometryBasis==='string'?part.geometryBasis:c.basis;info.append(summary,material,basis);readout.replaceChildren(title,purpose,info);
   if(notify)onInspect?.(id);
  }
+ async function load(current:ApparatusDisplay,requested:ApparatusAsset){
+  if(loadedAsset===requested){publish(current);return;}
+  if(loadingAsset===requested)return;
+  loadingAsset=requested;
+  try{
+   const success=await current.load(requested);if(disposed||viewer!==current)return;
+   if(success!==false&&asset===requested)loadedAsset=requested;
+   publish(current);
+  }finally{if(loadingAsset===requested)loadingAsset=null;}
+ }
  async function start(){
   if(disposed||!visible||!asset||pending)return;
   retry.hidden=true;
-  if(viewer){const current=viewer;await current.load(asset);if(disposed||viewer!==current)return;publish(current);return;}
+  if(viewer){await load(viewer,asset);return;}
   describeRepresentation({geometry:'none',status:'loading'});
   pending=viewerModuleLoader();
   let loaded: ApparatusAsset | null=null;
   try{
    const module=await pending;if(disposed||!visible||!asset?.model)return;
    viewer=module.createApparatusViewer(frame,{onSelect:(id,part,name)=>select(id,true,part??null,name),onRepresentation:describeRepresentation,onError:()=>{retry.hidden=false;}});
-   loaded=asset;if(loaded?.model)await viewer.load(loaded);if(disposed)return;publish(viewer);
+   loaded=asset;if(loaded?.model)await load(viewer,loaded);
   }catch{
    describeRepresentation({geometry:'none',status:'error'});
    const status=doc.createElement('p');status.textContent='3D unavailable';frame.replaceChildren(status);retry.hidden=false;
