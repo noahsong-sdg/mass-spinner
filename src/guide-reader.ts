@@ -1,5 +1,5 @@
 /** The standalone reader links work without this enhancement; embeds use native app actions. */
-export function setupGuideReader(win=window){
+export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  let simulatorWindow:Window|null=embedded?win.parent:win.opener;
 
@@ -35,7 +35,7 @@ export function setupGuideReader(win=window){
  chapters.addEventListener('change',()=>{win.location.hash=chapters.value;});win.addEventListener('hashchange',sync);sync();
  doc.addEventListener('click',event=>{
   const link=(event.target as Element).closest<HTMLAnchorElement>('a[data-guide-action],a[data-guide-view],a[data-guide-simulator]');if(!link)return;
-  if(event instanceof win.MouseEvent&&(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey))return;
+  if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();
   if(!simulatorWindow||simulatorWindow.closed){simulatorWindow=win.open(link.href,'mass-spinner-simulator');return;}
   if(link.dataset.guideAction)simulatorWindow.postMessage({type:'mass-spinner:guide-action',action:link.dataset.guideAction},win.location.origin);

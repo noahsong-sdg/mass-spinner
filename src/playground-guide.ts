@@ -131,7 +131,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const heading=el('h3',step.title);heading.tabIndex=-1;
   const actions=el('div');actions.className='guide-actions';
   for(const [key,text]of step.actions){const button=el('button',text);button.type='button';button.addEventListener('click',()=>action(key));actions.append(button);}
-  const blocks=[el('p',step.intro)];
+  const blocks:HTMLElement[]=[el('p',step.intro)];
   const instructions=el('ol');for(const text of step.do)instructions.append(el('li',text));blocks.push(instructions);
   const observation=el('p');observation.append(el('strong','Watch for. '),doc.createTextNode(step.notice));blocks.push(observation);
   const note=el('p',step.note);note.className='guide-note';
