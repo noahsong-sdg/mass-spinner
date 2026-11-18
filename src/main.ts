@@ -302,8 +302,8 @@ async function run() {
     $('plot-status').textContent='Computed from the current settings · hover over curves to inspect values.';
     if(selected==='doublewell-dynamics'){
      accepted.evidence=assessCollisionObservableEvidence(result,'outlet-fraction');
-     $('model-validity').textContent=`Collisions: ${accepted.evidence!.status} · continuum ${accepted.evidence!.continuum}`;
-     for(const text of accepted.evidence!.reasons){const li=document.createElement('li');li.textContent=text;$('model-assumptions').append(li);}
+     $('model-validity').textContent=`Collisions: ${accepted.evidence.status} · continuum ${accepted.evidence.continuum}`;
+     for(const text of accepted.evidence.reasons){const li=document.createElement('li');li.textContent=text;$('model-assumptions').append(li);}
      const study=document.createElement('li'),link=document.createElement('a');link.href='/convergence/browser-v38.summary.json';link.textContent='Browser-resolution study · qualification unresolved';study.append(link);$('model-assumptions').append(study);
     }
     $('export').disabled=false;$('run-status').textContent=selected==='doublewell-dynamics'?`Complete · ${settings.particlesPerSpecies} particles per species · ${(settings.duration*1e6).toFixed(0)} µs · inspect torque and resolution diagnostics`:selected==='centrifuge'?`Complete · ${settings.bins+1} radial samples`:selected==='rotating'||selected==='icr'?`Complete · ${settings.particlesPerSpecies} ions per species · ${(settings.dt*1e9).toFixed(0)} ns step`:'Complete · reduced model diagnostics';
@@ -335,8 +335,8 @@ function selectMode(){
 }
 inputs.forEach(id=>$(id).addEventListener('input',changed));
 $('diffusion-closure').addEventListener('change',()=>{showLaboratory(mode());changed();});
-$('live-update').addEventListener('change',()=>{if($('live-update').checked)run();else clearTimeout(liveTimer);});
-$('system').addEventListener('change',selectMode);$('run').addEventListener('click',()=>{workspace?.open('plots');run();});
+$('live-update').addEventListener('change',()=>{if($('live-update').checked)void run();else clearTimeout(liveTimer);});
+$('system').addEventListener('change',selectMode);$('run').addEventListener('click',()=>{workspace?.open('plots');void run();});
 $('lithium-preset').setAttribute('aria-description',LITHIUM_PRESET_NOTE);
 $('lithium-preset').addEventListener('click',()=>{
  for(const [id,value]of Object.entries(LITHIUM_PRESET_VALUES))($(id) as HTMLInputElement|HTMLSelectElement).value=value;
@@ -347,13 +347,13 @@ $('reset-camera').addEventListener('click',()=>legacyRenderer?.resetCamera());
 document.querySelectorAll<HTMLElement>('[data-view]').forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view!)));
 function preset(voltage:number) {
   $('field').value='.10';$('voltage').value=String(voltage);$('energy').value='.5';$('parallel').value='20';$('source-radius').value='4';
-  experience?.sync();invalidate();run();
+  experience?.sync();invalidate();void run();
 }
 $('preset-separate').addEventListener('click',()=>preset(400));$('preset-control').addEventListener('click',()=>preset(0));
 $('tune-rf').addEventListener('click',()=>{
   const ion=ions()[0];$('rf-frequency').value=String(Math.round(E_CHARGE*(+$('field').value)*ion.chargeState/(ion.massU*AMU)/(2*Math.PI)));changed();
 });
-$('refine').addEventListener('click',async()=>{
+$('refine').addEventListener('click',()=>{void (async()=>{
   if(!latest||(latest.kind!=='centrifuge'&&latest.kind!=='rotating'&&latest.kind!=='icr'))return;
   const finerSettings=latest.kind==='centrifuge'?radialRefinementSettings(latest.settings):{...latest.settings,dt:latest.settings.dt/2};
   if(!finerSettings){$('refine').disabled=true;$('refinement-status').textContent='No finer supported grid; radial convergence unassessed.';return;}
@@ -372,8 +372,8 @@ $('refine').addEventListener('click',async()=>{
     $('refinement-status').textContent=snapshot.result.species.map((s,i)=>`${['A','B'][i]}: |Δ wall| ${Math.abs(s.wall-fine.species[i].wall)}, |Δ end| ${Math.abs(s.end-fine.species[i].end)}, |Δ RF work/ion| ${numeric(Math.abs(s.rfWorkEV-fine.species[i].rfWorkEV)/s.injected,4)} eV`).join(' · ')+(snapshot.settings.neutralDensityM3?' · Stochastic collision paths need ensemble convergence as well.':' · Counts alone do not establish trajectory convergence.');
   } catch(e){if(id===revision)$('refinement-status').textContent=errorMessage(e);}
   finally{if(id===revision)$('refine').disabled=snapshot.kind==='centrifuge'&&!radialRefinementSettings(snapshot.settings);}
-});
-$('compare').addEventListener('click',async()=>{
+ })().catch(error=>{$('refinement-status').textContent=errorMessage(error);$('refine').disabled=false;});});
+$('compare').addEventListener('click',()=>{void (async()=>{
   workspace?.open('plots');
   const id=revision,controller=new AbortController();comparisonController?.abort();comparisonController=controller;$('comparison').hidden=false;$('comparison-results').replaceChildren();$('compare-status').textContent='Running independent models…';$('compare').disabled=true;
   const modes=coreModes;
@@ -394,7 +394,7 @@ $('compare').addEventListener('click',async()=>{
     });
   }
   if(comparisonController===controller)$('compare').disabled=false;
-});
+ })().catch(error=>{$('compare-status').textContent=errorMessage(error);$('compare').disabled=false;});});
 $('export').addEventListener('click',()=>{
   if(!latest)return;
   const blob=new Blob([serializeRun(latest)],{type:'application/json'});
@@ -419,9 +419,9 @@ const fuelCentrifuge=setupFuelCentrifuge({onInspect:()=>workspace?.open('inspect
 const collectorHost=document.createElement('div');$('orbit-results').after(collectorHost);collector=setupCollectorAcceptance(collectorHost);
 setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'} as Record<string,string>)[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence as ConvergenceEvidence);studyUI=setupStudies(mode,()=>orbitConfig(mode()==='icr'?'icr':'rotating'),(selected,settings,signal)=>calculate(selected as OrbitMode,settings,signal));
 baseline=setupBaseline($('live-plots'),baselineOptions);
-$('replay-retry').addEventListener('click',showResearch);
+$('replay-retry').addEventListener('click',()=>{void showResearch();});
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
-experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch,onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
+experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch:()=>{void showResearch();},onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 if(guideOnLoad==='start'||guideOnLoad==='physics'){
  workspace.open('guide');
  if(guideOnLoad==='physics')workspace.openPhysics(guideTopic??undefined);

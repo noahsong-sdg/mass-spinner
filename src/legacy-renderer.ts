@@ -12,7 +12,7 @@ export interface LegacyRendererOptions {
  getLatest:()=>{kind:string;result:unknown}|null;
  getView:()=>string; isActive:()=>boolean; onFailure:(error:unknown)=>void;
 }
-function materials(item:THREE.Mesh|THREE.Line|THREE.Points){return Array.isArray(item.material)?item.material:[item.material];}
+function materials(item:{material:THREE.Material|THREE.Material[]}){return Array.isArray(item.material)?item.material:[item.material];}
 
 /** Loaded only for the charged separator's hardware, field and orbit views. */
 export function createLegacyRenderer({$,config,mode,getLatest,getView,isActive,onFailure}:LegacyRendererOptions){
@@ -99,8 +99,8 @@ function resizeScene(){
 let environment:THREE.RenderTarget|undefined,observer:ResizeObserver|undefined,keyboard:((event:KeyboardEvent)=>void)|undefined;
 function dispose(){
     observer?.disconnect();if(keyboard)$('scene').removeEventListener('keydown',keyboard);
-    renderer?.setAnimationLoop(null);controls?.dispose();environment?.dispose();
-    clear(trajectories);clear(fieldGroup);if(scene)clear(scene);renderer?.dispose();
+    void renderer?.setAnimationLoop(null);controls?.dispose();environment?.dispose();
+    clear(trajectories);clear(fieldGroup);if(scene)clear(scene);void renderer?.dispose();
     renderer=undefined;controls=undefined;hardware=undefined;camera=undefined;scene=undefined;environment=undefined;observer=undefined;keyboard=undefined;
 }
 async function initScene() {
@@ -123,15 +123,15 @@ async function initScene() {
     const gltf=await new GLTFLoader().loadAsync('/separator.glb');
     hardware=gltf.scene; scene.add(hardware,trajectories,fieldGroup);
     // Keep independently adjustable opacity per mesh when inspecting the interior.
-    hardware.traverse(item=>{if(item instanceof THREE.Mesh)item.material=Array.isArray(item.material)?item.material.map(material=>material.clone()):item.material.clone();});
+    hardware.traverse(item=>{if(item instanceof THREE.Mesh){const mesh=item as THREE.Mesh<THREE.BufferGeometry,THREE.Material|THREE.Material[]>;mesh.material=Array.isArray(mesh.material)?mesh.material.map(material=>material.clone()):mesh.material.clone();}});
     hardware.updateWorldMatrix(true,true);const bounds=new THREE.Box3().setFromObject(hardware);
     bounds.getCenter(legacyCenter);legacyRadius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
     if(!Number.isFinite(legacyRadius)||legacyRadius<=0)throw new Error('3D model has no finite geometry.');
     updateFields();const latest=getLatest();if(latest&&['rotating','icr'].includes(latest.kind))drawPaths(latest.result as OrbitResult);showView(getView());
     observer=new ResizeObserver(resizeScene);observer.observe($('stage'));
     resizeScene();resetCamera();
-    await renderer.compileAsync(scene,camera);renderer.render(scene,camera);
-    renderer.setAnimationLoop(()=>{if($('scene').hidden||!isActive()||!controls||!renderer||!scene||!camera)return;try{controls.update();renderer.render(scene,camera);}catch(error){onFailure(error);}});
+    await renderer.compileAsync(scene,camera);void renderer.render(scene,camera);
+    void renderer.setAnimationLoop(()=>{if($('scene').hidden||!isActive()||!controls||!renderer||!scene||!camera)return;try{controls.update();void renderer.render(scene,camera);}catch(error){onFailure(error);}});
     keyboard=event=>{
       if(!camera||!controls)return;
       if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','='].includes(event.key))return;

@@ -45,7 +45,7 @@ export function buildSurfaceOverlay(snapshot:SurfaceSnapshot,fieldId:string,view
    geometry.setAttribute('sampleIndex',new THREE.Float32BufferAttribute(new Array(vertices).fill(index),1));return geometry;
   });
   const combined=mergeGeometries(pieces);pieces.forEach(piece=>piece.dispose());
-  const mesh=new THREE.Mesh(combined!,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));
+  const mesh=new THREE.Mesh(combined,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.DoubleSide,transparent:true,opacity:.9,depthWrite:false,polygonOffset:true,polygonOffsetFactor:-1,polygonOffsetUnits:-1}));
   mesh.userData={fieldId:field.id,componentId:depth?field.region==='film'?'target':'substrate':undefined};group.add(mesh);
  }
  if(view==='tracks')for(const track of snapshot.tracks){
@@ -118,7 +118,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
   const current=snapshot;
   const field=current.fields.find(f=>f.id===fields.value),show=view.value as SurfaceView;
   fields.hidden=samples.hidden=show!=='state'||!field;
-  overlay=buildSurfaceOverlay(snapshot,fields.value,show,{sectionZM:engineering!.domain.lengthM/2});group.add(overlay);
+  overlay=buildSurfaceOverlay(snapshot,fields.value,show,{sectionZM:engineering.domain.lengthM/2});group.add(overlay);
   legend.textContent='';scope.textContent='';readout.textContent='';
   if(show==='state'&&field){
    legend.textContent=`${number(field.domain[0])} – ${number(field.domain[1])} ${field.unit}`;scope.textContent=field.scope;
@@ -129,7 +129,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
    // The actual hardware and physical section above stay at true SI scale.
    if(field.coordinate==='depth'){
     const r=Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI),lo=field.boundsM![0],hi=field.boundsM!.at(-1)!,width=r*2;
-    const inspectionY=new THREE.Box3().setFromObject(engineering!.group).max.y+r*.5;
+    const inspectionY=new THREE.Box3().setFromObject(engineering.group).max.y+r*.5;
     expanded=new THREE.Group();expanded.name=`Depth microscope: ${field.region}`;
     field.values.forEach((value,index)=>{
      const a=(field.boundsM![index]-lo)/(hi-lo),b=(field.boundsM![index+1]-lo)/(hi-lo);
@@ -166,9 +166,10 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
   limitsText.textContent=[...snapshot.unsupported,d.lengthM===undefined&&d.kind==='cylinder'?'Axial construction length 2.8 m is illustrative; this solver resolves radius only.':'','Windings, electrodes, ports and cooling fittings are illustrative construction; field realization, stress and coil current are not solved.'].filter(Boolean).join(' ');
   draw();return changed;
  },pick(hit:THREE.Intersection|undefined){
-  const sample=hit?.object.userData.sampleIndex??(hit?.face&&(hit.object as THREE.Mesh).geometry.getAttribute('sampleIndex')?.getX(hit.face.a));
-  if(hit&&typeof sample==='number'&&Number.isInteger(sample)){inspect(sample);const id=hit.object.userData.componentId;if(id)onSelect(id);return true;}
-  const eventIndex=hit?.object.userData.impactIndices?.[hit.index!];
+  const sample:unknown=hit?.object.userData.sampleIndex??(hit?.face&&(hit.object as THREE.Mesh).geometry.getAttribute('sampleIndex')?.getX(hit.face.a));
+  if(hit&&typeof sample==='number'&&Number.isInteger(sample)){inspect(sample);const id:unknown=hit.object.userData.componentId;if(typeof id==='string')onSelect(id);return true;}
+  const indices:unknown=hit?.object.userData.impactIndices;
+  const eventIndex:unknown=Array.isArray(indices)&&hit?.index!==undefined?indices[hit.index]:undefined;
   if(snapshot&&typeof eventIndex==='number'&&Number.isInteger(eventIndex)){
    const e=snapshot.impacts[eventIndex];panel.open=true;
    readout.textContent=`Species ${e.speciesIndex+1} · ${e.destination} · ${number(e.timeS)} s · ${number(e.kineticEV!)} eV · ${e.positionM!.map(number).join(', ')} m`;render();return true;

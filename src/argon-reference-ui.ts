@@ -44,8 +44,8 @@ export function mountArgonReference(host: HTMLElement,{fetcher=fetch}: {fetcher?
   return pending;
  };
  const opened=()=>{if(detail.open)void load();};
- detail.addEventListener('toggle',opened);select.addEventListener('change',render);retry.addEventListener('click',load);
+ detail.addEventListener('toggle',opened);select.addEventListener('change',render);retry.addEventListener('click',opened);
  return {element:detail,load,dispose(){
-  disposed=true;controller?.abort();detail.removeEventListener('toggle',opened);select.removeEventListener('change',render);retry.removeEventListener('click',load);renderPlots(plot,[]);detail.remove();
+  disposed=true;controller?.abort();detail.removeEventListener('toggle',opened);select.removeEventListener('change',render);retry.removeEventListener('click',opened);renderPlots(plot,[]);detail.remove();
  }};
 }

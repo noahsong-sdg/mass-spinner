@@ -19,7 +19,7 @@ export function validateFuelSpatialExperiment(input:unknown):FuelSpatialExperime
  if(input===null||typeof input!=='object'||Array.isArray(input))throw new RangeError('Spatial experiment config must be an object.');
  const record=input as Record<string,unknown>;
  if(Object.keys(record).some(k=>!Object.hasOwn(DEFAULT_SPATIAL_EXPERIMENT,k)))throw new RangeError('Unknown spatial experiment setting.');
- const c={...DEFAULT_SPATIAL_EXPERIMENT,...record} as FuelSpatialExperimentConfig;
+ const c={...DEFAULT_SPATIAL_EXPERIMENT,...record};
  if(Object.values(c).some(v=>typeof v!=='number'||!Number.isFinite(v)))throw new RangeError('Spatial experiment settings must be finite numbers.');
  if(Math.abs(c.contactVoltageV)>10||c.magneticT<0||c.magneticT>1||c.numberDensityM3<1e18||c.numberDensityM3>1e24||
   c.temperatureK<300||c.temperatureK>1800||c.durationS<0||c.durationS>1e-5)
@@ -52,15 +52,15 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
   electrical:{radialEdgesM:Array.from({length:nr+1},(_,i)=>R*Math.sqrt(i/nr)),
    // Preserve the original uniform coordinates exactly; power 2 concentrates cells near the upper contact.
    axialEdgesM:Array.from({length:nz+1},(_,j)=>config.axialSpacingPower===1?L*j/nz:L*(1-(1-j/nz)**config.axialSpacingPower)),
-   sigmaPerpSM:Array(nr*nz).fill(.01),sigmaParallelSM:Array(nr*nz).fill(.1),magneticT:config.magneticT,
-   innerVoltageV:Array(nz).fill(null),outerVoltageV:Array(nz).fill(voltage),
-   lowerVoltageV:Array(nr).fill(null),upperVoltageV:Array.from({length:nr},(_,i)=>i<nr/2?0:null)}});
+   sigmaPerpSM:Array<number>(nr*nz).fill(.01),sigmaParallelSM:Array<number>(nr*nz).fill(.1),magneticT:config.magneticT,
+   innerVoltageV:Array<number|null>(nz).fill(null),outerVoltageV:Array<number>(nz).fill(voltage),
+   lowerVoltageV:Array<number|null>(nr).fill(null),upperVoltageV:Array.from({length:nr},(_,i)=>i<nr/2?0:null)}});
  const activeSteps=config.steps*config.driveFraction;
  const c=setup(config.contactVoltageV),on=createFuelSpatialStepper(c);
  let off:ReturnType<typeof createFuelSpatialStepper>|undefined;
  const stepper=(powered:boolean)=>powered?on:off??(off=createFuelSpatialStepper(setup(0)));
- let state:FuelSpatialState={lightMass:Array(nr).fill(1/nr),heavyMass:Array(nr).fill(1/nr),omegaRadS:Array(nr).fill(0),
-  gasEnergyJ:Array(nr).fill(1.5*K*number*config.temperatureK/nr),linerEnergyJ:initialFuelLinerEnergy(liner,config.temperatureK)};
+ let state:FuelSpatialState={lightMass:Array<number>(nr).fill(1/nr),heavyMass:Array<number>(nr).fill(1/nr),omegaRadS:Array<number>(nr).fill(0),
+  gasEnergyJ:Array<number>(nr).fill(1.5*K*number*config.temperatureK/nr),linerEnergyJ:initialFuelLinerEnergy(liner,config.temperatureK)};
  const initialGasJ=sum(state.gasEnergyJ),initialLinerEnergy=[...state.linerEnergyJ];
  const budgets={electricWorkJ:0,driveImpulseKgM2S:0,wallImpulseKgM2S:0,wallWorkJ:0,numericalLossJ:0,
   coolingEnergyJ:0,energyResidualJ:0,angularResidualKgM2S:0,maxStepEnergyResidualJ:0,maxStepAngularResidualKgM2S:0};

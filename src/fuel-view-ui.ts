@@ -47,7 +47,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
  function apply(tools: FuelSceneTools | null | undefined){
   if(!tools)return;tools.group.visible=state.visible;
   if(tools.motion)tools.motion.group.visible=state.representation!=='field';
-  if(tools.circuit&&tools.circuit.visible!==state.circuit){tools.circuit.visible=state.circuit;const scene=tools.circuit.parent!;scene.userData.shadowRevision=(scene.userData.shadowRevision??0)+1;}
+  if(tools.circuit&&tools.circuit.visible!==state.circuit){tools.circuit.visible=state.circuit;const scene=tools.circuit.parent!;scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;}
   tools.setSlice(state.slice);tools.setProbe?.(state.radius);tools.setLayer(state.layer);tools.setSpecies?.(state.species);tools.setStaging(state);tools.drive?.setLayer(state.drive);
   updateLegend(tools);
  }

@@ -103,7 +103,7 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
   }
   status.textContent=`${map.x.label} → · ${map.y.label} ↓ · Select a point to apply`;
  }
- run.addEventListener('click',async()=>{
+ run.addEventListener('click',()=>{void (async()=>{
   if(!latest||x.value===y.value||disposed)return;
   cancel();controller=new AbortController();const id=revision,accepted=latest;
   run.disabled=true;status.textContent='Computing…';
@@ -118,7 +118,7 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
    renderMap(map);
   }catch(error){const failure=error as Error;if(!disposed&&id===revision&&failure.name!=='AbortError')status.textContent=failure.message;}
   finally{if(!disposed&&id===revision)ready();}
- });
+ })();});
  return {accept(snapshot: AcceptedFuelSnapshot | null){
   if(disposed)return;
   if(configKey(latest)!==configKey(snapshot)||latest?.producingCode?.sourceHash!==snapshot?.producingCode?.sourceHash)cancel();

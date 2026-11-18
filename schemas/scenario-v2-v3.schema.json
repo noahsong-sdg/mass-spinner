@@ -3,33 +3,126 @@
   "$id": "https://mass-spinner.dev/schemas/scenario-v2-v3",
   "type": "object",
   "additionalProperties": false,
-  "required": ["version", "level", "controls"],
+  "required": [
+    "version",
+    "level",
+    "controls"
+  ],
   "properties": {
-    "version": {"enum": [2, 3]},
-    "level": {"enum": ["1", "2", "3", "4"]},
+    "version": {
+      "enum": [
+        2,
+        3
+      ]
+    },
+    "level": {
+      "enum": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
     "controls": {
       "type": "object",
       "maxProperties": 200,
-      "additionalProperties": {"anyOf": [{"type": "string", "maxLength": 160}, {"type": "number"}, {"type": "boolean"}]}
+      "additionalProperties": {
+        "anyOf": [
+          {
+            "type": "string",
+            "maxLength": 160
+          },
+          {
+            "type": "number"
+          },
+          {
+            "type": "boolean"
+          }
+        ]
+      }
     },
     "fuelRun": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["initialCurrentA", "events", "mode", "timeS"],
+      "required": [
+        "initialCurrentA",
+        "events",
+        "mode",
+        "timeS"
+      ],
       "properties": {
-        "initialCurrentA": {"type": "number", "minimum": 0, "maximum": 0.2},
-        "mode": {"enum": ["equilibrium", "transport", "spin", "flow"]},
-        "timeS": {"type": "number", "minimum": 0},
-        "events": {"type": "array", "items": {
-          "type": "object", "additionalProperties": false, "required": ["timeS", "currentA"],
-          "properties": {"timeS": {"type": "number", "minimum": 0}, "currentA": {"type": "number", "minimum": 0, "maximum": 0.2}}
-        }}
+        "initialCurrentA": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.2
+        },
+        "mode": {
+          "enum": [
+            "equilibrium",
+            "transport",
+            "spin",
+            "flow"
+          ]
+        },
+        "timeS": {
+          "type": "number",
+          "minimum": 0
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "timeS",
+              "currentA"
+            ],
+            "properties": {
+              "timeS": {
+                "type": "number",
+                "minimum": 0
+              },
+              "currentA": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 0.2
+              }
+            }
+          }
+        }
       }
     }
   },
-  "allOf": [{
-    "if": {"properties": {"version": {"const": 3}}},
-    "then": {"required": ["fuelRun"], "properties": {"level": {"const": "2"}}},
-    "else": {"not": {"required": ["fuelRun"]}}
-  }]
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "version": {
+            "const": 3
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "fuelRun"
+        ],
+        "properties": {
+          "level": {
+            "const": "2"
+          },
+          "fuelRun": {}
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "fuelRun"
+          ],
+          "properties": {
+            "fuelRun": {}
+          }
+        }
+      }
+    }
+  ]
 }

@@ -81,7 +81,7 @@ export function setupNeutronTransport(host:HTMLElement){
    const scan=x.map(cm=>simulateFirstFlightNeutrons({...c,layers:[{...c.layers[0],thicknessM:cm/100}]}));
    renderPlots(plot,([['firstAbsorbed','First absorbed'],['firstScatteredUnresolved','First scattered · unresolved'],['uncollidedEscaped','Uncollided escape']] as const).map(([key,label])=>({
     label,x,y:scan.map(r=>r.rates[key]),xLabel:'Layer thickness (cm)',yLabel:'Neutrons (s⁻¹)',selectedX:thickness})));
-   list.replaceChildren(make('li',selected.evaluated?`H-1 microscopic cross sections use the native ENDF/B-VIII.1 interpolation at ${fmt(source!.sourceEnergyMeV!)} MeV. Atom density and first-absorption detection probability are assumed; this is not a LiT material model.`:'Custom coefficients are scenario inputs at the selected neutron energy, not a measured material or calibrated detector.'),
+   list.replaceChildren(make('li',selected.evaluated?`H-1 microscopic cross sections use the native ENDF/B-VIII.1 interpolation at ${fmt(source.sourceEnergyMeV!)} MeV. Atom density and first-absorption detection probability are assumed; this is not a LiT material model.`:'Custom coefficients are scenario inputs at the selected neutron energy, not a measured material or calibrated detector.'),
     ...result.assumptions.map(text=>make('li',text)));
    if(selected.evaluated){const item=make('li'),link=make('a','NNDC evaluated source ↗');link.href=selected.evaluated.source.url;item.append(link);list.append(item);}
    status.textContent='';exportButton.disabled=pending;renderRefinement();

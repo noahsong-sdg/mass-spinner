@@ -1,4 +1,5 @@
 import {fields,type Vec,type RunConfig,type SpeciesResult,type simulate} from './physics.js';
+import type {GaussianCentrifugeResult} from './gaussian-centrifuge.js';
 import type {EquilibriumConfig,solveEquilibrium} from './equilibrium-model.js';
 import type {DoublewellConfig,simulateDoublewell} from './doublewell-dynamics.js';
 import type {GeometryConfig,GeometryResult} from './geometries.js';
@@ -106,12 +107,12 @@ function imposedFields(s:SurfaceSnapshot,c:RunConfig|DoublewellConfig|GeometryCo
   values:radii.map(r=>quartic?quarticPotential([r,0,0],model):model.voltage*(1-(r/model.radius)**2)),scope});
 }
 function orbit(s:SurfaceSnapshot,c:RunConfig,r:OrbitResult){
- cylinder(s,c);counts(s,r.species,'remaining');injectedSpecies(c,r);imposedFields(s,{...c,mode:s.model});
+ cylinder(s,c);counts(s,r.species,'remaining');injectedSpecies(c,r);imposedFields(s,c);
  requireValue((c.mode??'rotating')===s.model,'Orbit mode does not match the completed request.');
  r.species.forEach((p,i:number)=>{
   requireValue(Array.isArray(p.impacts)&&Array.isArray(p.paths),'Missing orbit event/path samples.');
   requireValue(p.impacts.length===p.wall+p.end+p.source,'Unexpected orbit impact event.');
-  for(const d of ['wall','end','source'])requireValue(p.impacts.filter((e)=>e.destination===d).length===p[d],'Impact ledger does not match counts.');
+  for(const d of ['wall','end','source'] as const)requireValue(p.impacts.filter((e)=>e.destination===d).length===p[d],'Impact ledger does not match counts.');
   p.impacts.forEach((e)=>{
    requireValue(['wall','end','source'].includes(e.destination)&&vector(e.position)&&finite(e.time)&&e.time>=0&&e.time<=c.duration&&finite(e.kineticEV)&&e.kineticEV>=0,'Invalid positioned impact.');
    const radius=Math.hypot(e.position[0],e.position[1]),z=e.position[2];
@@ -132,11 +133,11 @@ function equilibrium(s:SurfaceSnapshot,c:EquilibriumConfig,r:EquilibriumResult){
  cylinder(s,c);
  requireValue(Array.isArray(r.profiles)&&r.profiles.length>=2&&Array.isArray(r.species),'Missing equilibrium profiles.');
  const profiles=r.profiles,x=profiles.map((p)=>p.radius),n=r.species.length;
- requireValue(close(x[0],0)&&close(x.at(-1),c.radius),'Equilibrium radial bounds mismatch.');
+ requireValue(close(x[0],0)&&close(x.at(-1)!,c.radius),'Equilibrium radial bounds mismatch.');
  requireValue(profiles.every((p)=>p.ionDensities?.length===n&&p.ionDensities.every((v)=>finite(v)&&v>=0)),'Invalid equilibrium densities.');
  const sum=profiles.map((p)=>p.ionDensities.reduce((a:number,b:number)=>a+b,0));
  requireValue(sum.every(positive),'Empty equilibrium composition.');
- const gaussian='gaussianProfiles' in r?r.gaussianProfiles:undefined,model='model' in r?r.model:undefined;
+ const gaussian='gaussianProfiles' in r?(r as GaussianCentrifugeResult).gaussianProfiles:undefined,model='model' in r?r.model:undefined;
  requireValue((c.closure==='magnetic-gaussian'?model==='coupled-magnetic-gaussian':c.closure==='gaussian'?model==='prescribed-gaussian':!model),'Equilibrium closure mismatch.');
  if(gaussian)requireValue(gaussian.length===x.length&&gaussian.every((p,i:number)=>p.radius===x[i]&&positive(p.totalIonDensityM3)),'Mismatched Gaussian profiles.');
  for(let i=0;i<n;i++){
@@ -174,7 +175,7 @@ function doublewell(s:SurfaceSnapshot,c:DoublewellConfig,r:DoublewellResult){
   const inventory=p.y.reduce((sum:number,v:number,j:number)=>sum+v*volume*((j+1)**2-j*j)/400,0);
   requireValue(close(inventory,species.active*weight,Math.max(weight,1e-100)),'Annular density does not close the active population ledger.');
   requireValue(species.impacts.length===species.wall+species.end+species.source,'Unexpected double-well impact event.');
-  for(const d of ['wall','source','end'])requireValue(species.impacts.filter((e)=>e.destination===d).length===species[d],'Double-well impact ledger mismatch.');
+  for(const d of ['wall','source','end'] as const)requireValue(species.impacts.filter((e)=>e.destination===d).length===species[d],'Double-well impact ledger mismatch.');
   species.impacts.forEach((e)=>{
    requireValue(['wall','end','source'].includes(e.destination)&&finite(e.radius)&&e.radius>=0&&e.radius<=c.radius+1e-9&&finite(e.time)&&e.time>=0&&e.time<=c.duration&&finite(e.energyJ),'Invalid radial impact.');
    s.impacts.push({speciesIndex:i,destination:e.destination,timeS:e.time,radiusM:e.radius,hamiltonianJ:e.energyJ,injected:species.injected,scope:'radial-event-only'});

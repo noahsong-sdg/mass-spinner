@@ -36,7 +36,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  figure.className='apparatus';frame.className='apparatus-frame';toolbar.className='apparatus-toolbar';
  choices.setAttribute('aria-label','Inspect a component');reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
  readout.className='component-description';readout.setAttribute('aria-live','polite');
- retry.type='button';retry.textContent='Retry 3D';retry.hidden=true;retry.addEventListener('click',()=>start());
+ retry.type='button';retry.textContent='Retry 3D';retry.hidden=true;retry.addEventListener('click',()=>{void start();});
  toolbar.append(choices,retry,reset);figure.append(frame,toolbar,readout,provenance);host.replaceChildren(figure);
  const focus=doc.createElement('button');focus.type='button';focus.textContent='⌖';focus.disabled=true;focus.setAttribute('aria-label','Focus selected component');toolbar.append(focus);
  let records: Component[]=[],asset: ApparatusAsset | null | undefined=null,viewer: ApparatusDisplay | null=null,pending: Promise<ViewerModule> | null=null,visible=false,disposed=false,selected='',acceptedState: unknown=null,statePending=false,surface: {packet: SurfaceState | null | undefined; settings?: SurfaceSettings} | null=null;
@@ -55,8 +55,8 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   selected=id;choices.value=id;viewer?.select(id);focus.disabled=false;
   if(notify)onSelect?.(id);
   const title=doc.createElement('h3'),purpose=doc.createElement('p'),material=doc.createElement('p'),info=doc.createElement('details'),summary=doc.createElement('summary'),basis=doc.createElement('p');
-  title.textContent=name||c.name;purpose.textContent=c.purpose;material.textContent=String(part?.materialBasis??c.material);
-  summary.textContent='Materials & model';basis.textContent=String(part?.geometryBasis??c.basis);info.append(summary,material,basis);readout.replaceChildren(title,purpose,info);
+  title.textContent=name||c.name;purpose.textContent=c.purpose;material.textContent=typeof part?.materialBasis==='string'?part.materialBasis:c.material;
+  summary.textContent='Materials & model';basis.textContent=typeof part?.geometryBasis==='string'?part.geometryBasis:c.basis;info.append(summary,material,basis);readout.replaceChildren(title,purpose,info);
   if(notify)onInspect?.(id);
  }
  async function start(){
@@ -67,15 +67,15 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   pending=viewerModuleLoader();
   let loaded: ApparatusAsset | null=null;
   try{
-   const {createApparatusViewer}=await pending;if(disposed||!visible||!asset?.model)return;
-   viewer=createApparatusViewer(frame,{onSelect:(id,part,name)=>select(id,true,part??null,name),onRepresentation:describeRepresentation,onError:()=>{retry.hidden=false;}});
+   const module=await pending;if(disposed||!visible||!asset?.model)return;
+   viewer=module.createApparatusViewer(frame,{onSelect:(id,part,name)=>select(id,true,part??null,name),onRepresentation:describeRepresentation,onError:()=>{retry.hidden=false;}});
    loaded=asset;if(loaded?.model)await viewer.load(loaded);if(disposed)return;publish(viewer);
   }catch{
    describeRepresentation({geometry:'none',status:'error'});
    const status=doc.createElement('p');status.textContent='3D unavailable';frame.replaceChildren(status);retry.hidden=false;
-  }finally{pending=null;if(!disposed&&asset?.model&&loaded&&loaded!==asset)start();}
+  }finally{pending=null;if(!disposed&&asset?.model&&loaded&&loaded!==asset)void start();}
  }
- const observer=new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);if(visible)start();});observer.observe(frame);
+ const observer=new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);if(visible)void start();});observer.observe(frame);
  choices.addEventListener('change',()=>select(choices.value));reset.addEventListener('click',()=>viewer?.reset());
  focus.addEventListener('click',()=>viewer?.focus?.(selected));
  function show(mode: string){
@@ -85,7 +85,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   records=components??modelComponents(mode);selected='';focus.disabled=true;choices.replaceChildren();readout.replaceChildren();
   const prompt=doc.createElement('option');prompt.value='';prompt.textContent='Inspect…';prompt.disabled=true;choices.append(prompt);
   for(const c of records){const option=doc.createElement('option');option.value=c.id;option.textContent=c.name;choices.append(option);}choices.value='';
-  if(visible)start();
+  if(visible)void start();
  }
  return {readout,show,select,syncSelection:(id: string)=>select(id,false),hasMode:(mode: string)=>!!assets[mode]?.model,
   updateState(value: unknown){acceptedState=value;viewer?.updateState?.(value);},setPending(value: boolean){statePending=!!value;viewer?.setPending?.(statePending);},

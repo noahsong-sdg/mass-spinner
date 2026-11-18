@@ -79,7 +79,7 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
  let linerEnergy=liner?initialFuelLinerEnergy(liner,c.linerK):undefined;
  let gasEnergy=thermal.gas?Array<number>(n).fill(capacity*c.gasK/n):undefined;
  const initialGas=c.gasK,initialWall=c.linerK,initialEnergy=capacity*initialGas+(linerEnergy?linerEnergy.reduce((a,b)=>a+b,0):thermal.wallCapacityJK*initialWall);
- let state:FuelCoupledState={lightMass:Array(n).fill(1/n),heavyMass:Array(n).fill(1/n),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
+ let state:FuelCoupledState={lightMass:Array<number>(n).fill(1/n),heavyMass:Array<number>(n).fill(1/n),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
  const ledger:FuelLedger={driveWorkJ:0,slipDissipationJ:0,dragDissipationJ:0,redistributionWorkJ:0,numericalDissipationJ:0,
   driveImpulseKgM2S:0,dragImpulseKgM2S:0,ionPhaseRad:0,neutralPhaseRad:0};
  let gasK=initialGas,wallK=initialWall,ohmicEnergyJ=0,coolingEnergyJ=0,current=c.currentA,eventIndex=0,start=0;

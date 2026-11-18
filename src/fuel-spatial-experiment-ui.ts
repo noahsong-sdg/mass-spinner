@@ -107,11 +107,12 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
   exportURL=url;const link=el('a');link.href=url;link.download='spatial-argon-research.json';link.click();
   exportTimer=setTimeout(()=>{if(exportURL===url){URL.revokeObjectURL(url);exportURL=null;}},1000);
  };
- run.addEventListener('click',start);cancel.addEventListener('click',cancelled);download.addEventListener('click',exportResult);detail.addEventListener('toggle',toggled);ready();
+ const clicked=()=>{void start();};
+ run.addEventListener('click',clicked);cancel.addEventListener('click',cancelled);download.addEventListener('click',exportResult);detail.addEventListener('toggle',toggled);ready();
  return {element:detail,run:start,get snapshot(){return accepted?structuredClone(accepted):null;},dispose(){
   disposed=true;invalidate();
   for(const {input}of inputs.values())input.removeEventListener('input',changed);
-  pulse.removeEventListener('change',changed);run.removeEventListener('click',start);cancel.removeEventListener('click',cancelled);
+  pulse.removeEventListener('change',changed);run.removeEventListener('click',clicked);cancel.removeEventListener('click',cancelled);
   download.removeEventListener('click',exportResult);detail.removeEventListener('toggle',toggled);detail.remove();
  }};
 }

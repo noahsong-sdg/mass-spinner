@@ -23,14 +23,17 @@ export function requestSimulationWithIdentity(request:Record<string,unknown>,sig
   const cleanup=()=>{worker.terminate();signal?.removeEventListener('abort',abort);};
   const abort=()=>{cleanup();reject(new DOMException('Superseded','AbortError'));};
   signal?.addEventListener('abort',abort,{once:true});
-  worker.onmessage=({data})=>{
+  worker.onmessage=({data:payload}:{data:unknown})=>{
    cleanup();
+   if(!payload||typeof payload!=='object'||!('result' in payload||'error' in payload)){reject(new Error('Unsupported worker response.'));return;}
+   const data=payload as Record<string,unknown>;
    if(['coupled-target','fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'].includes(String(request.kind))&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
-    reject(new Error(`Unsupported ${request.kind} worker response.`));return;
+    reject(new Error(`Unsupported ${String(request.kind)} worker response.`));return;
    }
-   data.error?reject(new Error(data.error)):resolve({result:data.result,producingCode:producingCode(data.producingCode)});
+   if(data.error!==undefined){reject(new Error(typeof data.error==='string'?data.error:'Physics worker failed.'));return;}
+   resolve({result:data.result,producingCode:producingCode(data.producingCode)});
   };
   worker.onerror=()=>{cleanup();reject(new Error('Physics worker failed.'));};
-  try{worker.postMessage(request);}catch(error){cleanup();reject(error);}
+  try{worker.postMessage(request);}catch(error){cleanup();reject(error instanceof Error?error:new Error(String(error)));}
  });
 }

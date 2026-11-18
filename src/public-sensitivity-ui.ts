@@ -57,7 +57,7 @@ export function mountPublicSensitivity(host: HTMLElement,{request}: {request?: t
    status.textContent=`${samples.length} sampled settings · line = current coefficient; shading = sampled minimum/maximum, not an exhaustive envelope. Numerical and experimental accuracy remain unqualified.`;
   }catch(error){const failure=error as Error;if(!disposed&&id===revision){clear();ready();status.textContent=`Samples unavailable: ${failure.message}`;}}
  }
- run.addEventListener('click',start);cancel.addEventListener('click',()=>{clear();ready();status.textContent='Cancelled. No partial sample range retained.';});
+ run.addEventListener('click',()=>{void start();});cancel.addEventListener('click',()=>{clear();ready();status.textContent='Cancelled. No partial sample range retained.';});
  detail.addEventListener('toggle',()=>{if(!detail.open&&controller){clear();ready();status.textContent='Cancelled.';}else render();});
  return {element:detail,run:start,get samples(){return samples;},
   update(value: SensitivityAccepted){if(disposed)return;clear();accepted=value;coverage.textContent=publicInputCoverage(accepted.result).text+' Experimental accuracy: unqualified.';resetBounds();status.textContent='Bounds initially equal the current assumption; choose a range to explore.';ready();},

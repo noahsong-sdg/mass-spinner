@@ -30,7 +30,7 @@ function validate(c:FuelConfig){
 /** Current is the only scheduled input; setup remains fixed within a run. */
 export function validateFuelCurrentEvents(events:readonly{timeS:number;currentA:number}[],durationS:number){
  finite(durationS,'durationS',0);
- if(!Array.isArray(events)||events.length>128)throw new RangeError('Unsupported operating history.');
+ if(!Array.isArray(events as unknown)||events.length>128)throw new RangeError('Unsupported operating history.');
  let last=-1;
  for(const event of events){
   if(!event||!Number.isFinite(event.timeS)||event.timeS<0||event.timeS>durationS||event.timeS<=last||!Number.isFinite(event.currentA)||event.currentA<0||event.currentA>.2)

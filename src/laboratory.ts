@@ -145,7 +145,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    const x=series.x.slice(0,n),y=series.y.slice(0,n),low=series.low?.slice(0,n),high=series.high?.slice(0,n);
    if(n&&series.x[n-1]<revealed){
     const fraction=(revealed-series.x[n-1])/(series.x[n]-series.x[n-1]);
-    const interpolate=(values:readonly (number|null)[])=>finite(values[n-1])&&finite(values[n])?values[n-1]!+(values[n]!-values[n-1]!)*fraction:null;
+    const interpolate=(values:readonly (number|null)[])=>finite(values[n-1])&&finite(values[n])?values[n-1]!+(values[n]-values[n-1]!)*fraction:null;
     x.push(revealed);y.push(interpolate(series.y));if(low)low.push(interpolate(series.low!));if(high)high.push(interpolate(series.high!));
    }
    return {...series,x,y,low,high};
@@ -211,7 +211,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    series.x.forEach((x,i)=>{const y=series.y[i];if(!finite(x)||!finite(y)){connected=false;return;}path+=`${connected?'L':'M'}${sx!(x)} ${sy(y)} `;connected=true;});
    layer.append(svgElement('path',{d:path,stroke:color,'stroke-width':2,'stroke-dasharray':dash,'stroke-opacity':series.muted?.18:1,fill:'none'}));
    const last=series.x.length-1;
-   if(finite(revealed)&&last>=0&&finite(series.y[last]))layer.append(svgElement('circle',{cx:sx!(series.x[last]),cy:sy(series.y[last]!),r:3,fill:color}));
+   if(finite(revealed)&&last>=0&&finite(series.y[last]))layer.append(svgElement('circle',{cx:sx!(series.x[last]),cy:sy(series.y[last]),r:3,fill:color}));
    };updates.push(update);update();
    const lx=80+(index%columns)*columnWidth,ly=rows[Math.floor(index/columns)];
    svg.append(svgElement('path',{d:`M${lx} ${ly-4}h20`,stroke:color,'stroke-width':2,'stroke-dasharray':dash,fill:'none'}));
@@ -220,8 +220,8 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    legends[index].forEach((line,i)=>legend.append(svgElement('tspan',{x:lx+26,dy:i?15:0},line)));svg.append(legend);
   });
   if(finite(c.selectedX)){
-   const x=sx!(c.selectedX);svg.append(svgElement('path',{d:`M${x} ${top}V${bottom}`,stroke:'#e8eae4','stroke-dasharray':'4 4'}));
-   for(const series of group){const i=c.equalAspect?series.x.indexOf(c.selectedX!):series.x.lastIndexOf(c.selectedX!);if(i>=0&&Number.isFinite(series.y[i]))svg.append(svgElement('circle',{cx:x,cy:sy(series.y[i]!),r:4,fill:'#e8eae4'}));}
+   const x=sx(c.selectedX);svg.append(svgElement('path',{d:`M${x} ${top}V${bottom}`,stroke:'#e8eae4','stroke-dasharray':'4 4'}));
+   for(const series of group){const i=c.equalAspect?series.x.indexOf(c.selectedX):series.x.lastIndexOf(c.selectedX);if(i>=0&&Number.isFinite(series.y[i]))svg.append(svgElement('circle',{cx:x,cy:sy(series.y[i]!),r:4,fill:'#e8eae4'}));}
   }
   cursor=svgElement('path',{stroke:'#e8eae4','stroke-dasharray':'4 4','pointer-events':'none'});svg.append(cursor);updateCursor(selected);
   };

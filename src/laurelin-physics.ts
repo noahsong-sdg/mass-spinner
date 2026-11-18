@@ -65,7 +65,7 @@ export function simulateLaurelin(input: Partial<LaurelinConfig>={},steps=500){
  };
  samples.push(sample(0));
  for(let i=0;i<steps;i++){
-  const f=i/steps,m=(i+.5)/steps,phase=phaseAt(m),dlog=phase===2?-Math.log(c.compression)/(.24*duration):phase===4?Math.log(c.compression)/(.24*duration):0;
+  const m=(i+.5)/steps,phase=phaseAt(m),dlog=phase===2?-Math.log(c.compression)/(.24*duration):phase===4?Math.log(c.compression)/(.24*duration):0;
   const power=phase===1?mergeJ/(.2*duration):0,a=-2*dlog/3-1/tau;
   const half=advanceEnergy(U,power,a,dt/2),saved=U;U=half.U;
   const middle=sample(m);U=saved;

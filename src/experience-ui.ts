@@ -119,13 +119,13 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  $('play-mass-b').addEventListener('input',()=>{
   $('mass-b').value=$('play-mass-b').value;$('mass-b').dispatchEvent(new Event('input'));
  });
- $('share-playground').addEventListener('click',async()=>{
+ $('share-playground').addEventListener('click',()=>{void (async()=>{
   let href;
   try{href=scenarioLink(location.href,capture());}catch(error){$('share-status').textContent=error&&typeof error==='object'&&'message' in error?String(error.message):'';return;}
   const revision=shareRevision;$('share-link').value=href;$('share-link').hidden=false;
   try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent=level==='2'&&apparatus?.value==='centrifuge'?'Copied run link · fresh solve; camera and calculator separate.':'Copied experiment link.';}
   catch{if(revision===shareRevision)$('share-status').textContent='Select and copy the experiment link below.';}
- });
+ })();});
  function reset(){
   if(level==='1'){savedPlay={...PLAY_DEFAULTS};savedMask={...defaultMask};enter('1',true);}
   else if(level==='4'){

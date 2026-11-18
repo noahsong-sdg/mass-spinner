@@ -100,7 +100,7 @@ export function doublewellConfig(ions: IonSpecies[]): DoublewellConfig{
   }
  }
  c.sourceRadius=c.sourceRadiusFraction!*c.radius;
- const {sourceRadiusFraction,...config}=c;
+ const {sourceRadiusFraction:_sourceRadiusFraction,...config}=c;
  if(config.collisionAxialCells===0)delete config.collisionAxialCells;
  return config;
 }

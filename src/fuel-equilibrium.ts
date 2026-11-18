@@ -5,7 +5,7 @@ export const equilibriumModel={version:'neutral-cylinder-equilibrium-v1',atomicM
 export type EquilibriumInput={massesU:readonly[number,number];edgeSpeedMS:number;temperatureK:number;radiusM:number;lengthM:number;totalParticles:number;lightFraction:number;cutFraction:number};
 const range=(v:number,name:string,lo:number,hi:number)=>{if(!Number.isFinite(v)||v<lo||v>hi)throw new RangeError(`${name} must be in [${lo}, ${hi}].`);};
 function validate(c:EquilibriumInput){
- if(!Array.isArray(c.massesU)||c.massesU.length!==2)throw new RangeError('Two ordered neutral masses are required.');
+ if(!Array.isArray(c.massesU as unknown)||c.massesU.length!==2)throw new RangeError('Two ordered neutral masses are required.');
  for(const m of c.massesU)range(m,'Mass (u)',1,250);
  if(c.massesU[0]>c.massesU[1])throw new RangeError('Light mass must not exceed heavy mass.');
  range(c.edgeSpeedMS,'Edge speed (m/s)',0,2e5);range(c.temperatureK,'Temperature (K)',100,10000);

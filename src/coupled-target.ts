@@ -69,7 +69,7 @@ function diffuse(rhs:number[],loss:number[],faces:number[],dt:number){
 /** Fixed-cell composition, RK4 energy path and midpoint reaction quadrature. */
 function depthBeam(beam:FusionBeamConfig,c:CoupledTargetConfig,state:State,recordPacking:(residual:number)=>void):BeamPlan{
  const n=c.depthCells,siteStep=beam.materialColumnM2!/n/4;
- const reaction=Array(n).fill(0),heat=Array(n+c.backingCells).fill(0);
+ const reaction=Array<number>(n).fill(0),heat=Array<number>(n+c.backingCells).fill(0);
  let energy=beam.beamEnergyKeV,survival=1,neutron=0,alphaEscape=0;
  for(let i=0;i<n;i++){
   const occupied=state.t[i]+state.d[i],total=occupied+state.v[i],residual=Math.abs(total-1);
@@ -104,7 +104,7 @@ function conductionConfig(c:CoupledTargetConfig):TargetConductionConfig{
  const cells=Array.from({length:c.depthCells},()=>({widthM:c.filmThicknessM/c.depthCells,
   conductivityWMK:c.filmConductivityWMK,volumetricHeatCapacityJm3K:c.filmHeatCapacityJm3K}));
  for(let i=0;i<c.backingCells;i++)cells.push({widthM:c.backingThicknessM/c.backingCells,conductivityWMK:c.backingConductivityWMK,volumetricHeatCapacityJm3K:c.backingHeatCapacityJm3K});
- const contact=Array(c.depthCells+c.backingCells-1).fill(0);contact[c.depthCells-1]=c.contactResistanceM2KPerW;
+ const contact=Array<number>(c.depthCells+c.backingCells-1).fill(0);contact[c.depthCells-1]=c.contactResistanceM2KPerW;
  return {cells,contactResistanceM2KPerW:contact,coolantK:c.coolantK,backHeatTransferWM2K:c.backHeatTransferWM2K};
 }
 
@@ -124,12 +124,12 @@ export function simulateCoupledTarget(beam:FusionBeamConfig,config:CoupledTarget
   ||Math.ceil(beam.exposureS/c.pulsePeriodS)>4096)
   throw new RangeError('Coupled target requires finite physical coefficients, valid material capacity, 2–32 depth cells, 10–1000 samples, bounded tolerances and at most 4096 pulse periods.');
  if(c.implantationWeights!==undefined&&!Array.isArray(c.implantationWeights))throw new RangeError('Implantation weights must be an array when supplied.');
- const weights=normalizeImplantationWeights(c.implantationWeights===undefined?Array(n).fill(1):c.implantationWeights);
+ const weights=normalizeImplantationWeights(c.implantationWeights===undefined?Array<number>(n).fill(1):c.implantationWeights);
  if(weights.length!==n)throw new RangeError('Implantation weights must match the target depth cells.');
  const flux=beam.beamCurrentA/E_CHARGE/area,dz=c.filmThicknessM/n,totalS=beam.exposureS+c.cooldownS;
- const f0=beam.targetColumnM2/column,thermal=conductionConfig(c),initialTemperature=Array(n+c.backingCells).fill(c.initialK);
- const zeros=()=>Array(n).fill(0);
- let state:State={t:Array(n).fill(f0),d:Array(n).fill(1-f0),v:zeros(),temperature:initialTemperature,
+ const f0=beam.targetColumnM2/column,thermal=conductionConfig(c),initialTemperature=Array<number>(n+c.backingCells).fill(c.initialK);
+ const zeros=()=>Array<number>(n).fill(0);
+ let state:State={t:Array<number>(n).fill(f0),d:Array<number>(n).fill(1-f0),v:zeros(),temperature:initialTemperature,
   fused:0,incident:0,retained:0,unretained:0,releasedT:0,releasedD:0,addedT:0,addedD:0,beamOnS:0,
   incidentEnergy:0,nuclearEnergy:0,depositedEnergy:0,neutronEnergy:0,escapingAlphaEnergy:0,coolantEnergy:0};
  let maxPackingRoundoff=0;
@@ -144,7 +144,7 @@ export function simulateCoupledTarget(beam:FusionBeamConfig,config:CoupledTarget
  let acceptedSteps=0,rejectedSteps=0,maxErrorRatio=0;
 
  function advance(s:State,dt:number,on:boolean):State|null{
-  const plan=on?beamAt(s):{reaction:zeros(),heat:Array(n+c.backingCells).fill(0),neutron:0,alphaEscape:0,probability:0};
+  const plan=on?beamAt(s):{reaction:zeros(),heat:Array<number>(n+c.backingCells).fill(0),neutron:0,alphaEscape:0,probability:0};
   const j=on?flux:0,fusion=plan.reaction.map(p=>dt*j*p*n/column);
   if(fusion.some((f,i)=>f>s.t[i]))return null;
   const b=weights.map(w=>j*(1-plan.probability)*c.replacementProbability*w*n/column);

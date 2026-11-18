@@ -84,7 +84,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
  const priorResidual=previousPotential?apply(previousPotential).map((v,i)=>rhs[i]-v):undefined;
  const usePrior=priorResidual!==undefined&&Math.hypot(...priorResidual)<scale;
  const potentialV=usePrior?[...previousPotential!]:Array<number>(n).fill(0);
- let residual=usePrior?priorResidual!:[...rhs],pre=precondition(residual),direction=[...pre],rz=dot(residual,pre),iterations=0;
+ let residual=usePrior?priorResidual:[...rhs],pre=precondition(residual),direction=[...pre],rz=dot(residual,pre),iterations=0;
  for(;Math.hypot(...residual)>tolerance&&iterations<Math.max(100,8*n);iterations++){
   const ap=apply(direction),denominator=dot(direction,ap);
   if(!Number.isFinite(denominator)||denominator<=0)throw new RangeError('Current SPD solve failed.');

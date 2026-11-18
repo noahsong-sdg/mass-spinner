@@ -210,7 +210,7 @@ export function simulate(config: RunConfig): { config: RunConfig; species: Speci
     const pathStride=Math.max(1,Math.min(16,Math.floor(.1/(config.dt*displayRate))));
     const result: SpeciesResult={massU,chargeState,injected:samples.length,wall:0,end:0,source:0,remaining:0,
       collisions:0,rfWorkEV:0,neutralEnergyEV:0,meanInitialKineticEV:0,impacts:[],
-      wallAxialBins:Array(24).fill(0),endRadialBins:Array(24).fill(0),maxRelativeEnergyError:0,maxRelativeImpactEnergyError:0,paths:[]};
+      wallAxialBins:Array<number>(24).fill(0),endRadialBins:Array<number>(24).fill(0),maxRelativeEnergyError:0,maxRelativeImpactEnergyError:0,paths:[]};
     // Independent random streams keep source samples identical when only collisions change.
     const velocityRandom=randomGenerator(config.seed^0xa341316c),collisionRandom=randomGenerator(config.seed^0x9e3779b9);
     samples.forEach((sample,index)=>{
@@ -235,7 +235,7 @@ export function simulate(config: RunConfig): { config: RunConfig; species: Speci
         const opticalDepth=(config.neutralDensityM3??0)*(config.neutralCrossSectionM2??1e-19)*speed*dt;
         if(opticalDepth>.02) throw new Error('Collision timestep unresolved: reduce density/cross section or timestep.');
         const drive=config.mode==='icr'?{timeS:time,amplitudeVM:config.rfAmplitudeVM??0,
-          frequencyHz:config.rfFrequencyHz??0,handedness:config.rfHandedness??-1 as -1|1}:undefined;
+          frequencyHz:config.rfFrequencyHz??0,handedness:config.rfHandedness??-1}:undefined;
         const at=(elapsed:number):Particle=>{
           if(elapsed===0)return {position:[...p.position],velocity:[...p.velocity]};
           const partialRF=drive?rfField(time+elapsed/2,drive.amplitudeVM,drive.frequencyHz,drive.handedness):[0,0,0] as Vec;

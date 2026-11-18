@@ -51,7 +51,7 @@ export function invertTungstenEnthalpy(value:number){
 export function createFuelLiner({radiusM,lengthM,thicknessM,cells,radiusEdgesM:edges}:{radiusM:number;lengthM:number;thicknessM:number;cells:number;radiusEdgesM?:readonly number[]}):FuelLinerGrid{
  if([radiusM,lengthM,thicknessM].some(value=>!Number.isFinite(value)||value<=0)||!Number.isSafeInteger(cells)||cells<2||cells>128)
   throw new RangeError('Liner geometry must be positive, with 2–128 radial cells.');
- if(edges!==undefined&&!Array.isArray(edges))throw new RangeError('Explicit liner edges must be an array.');
+ if(edges!==undefined&&!Array.isArray(edges as unknown))throw new RangeError('Explicit liner edges must be an array.');
  const radiusEdgesM=edges===undefined?Array.from({length:cells+1},(_,i)=>radiusM+thicknessM*i/cells):[...edges];
  if(radiusEdgesM.length!==cells+1||edges!==undefined&&(radiusEdgesM[0]!==radiusM||radiusEdgesM[cells]!==radiusM+thicknessM)||
   radiusEdgesM.some((value,i)=>!Number.isFinite(value)||i>0&&value<=radiusEdgesM[i-1]))
@@ -69,7 +69,7 @@ export function initialFuelLinerEnergy(grid:FuelLinerGrid,value:number){
 export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[],correctionJ?:readonly number[]):FuelLinerState{
  if(cellEnergyJ.length!==grid.massesKg.length)throw new RangeError('Liner energy state must match its radial grid.');
  if(correctionJ!==undefined){
-  if(!Array.isArray(correctionJ)||correctionJ.length!==cellEnergyJ.length)
+  if(!Array.isArray(correctionJ as unknown)||correctionJ.length!==cellEnergyJ.length)
    throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
   for(let i=0;i<cellEnergyJ.length;i++){
    // Preserve the existing inversion's upper endpoint roundoff allowance.

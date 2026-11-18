@@ -35,3 +35,10 @@ test('spatial research requests accept only matching versioned worker replies',a
   f.worker.onmessage!({data:reply});await checked;assert.equal(f.terminated(),1);
  }
 });
+
+test('malformed worker envelopes reject and terminate rather than strand the caller',async()=>{
+ for(const data of [null,42,[],{}, {error: {message:'unexpected'}}]){
+  const f=fixture(),pending=requestSimulation({},undefined,f.create),rejected=assert.rejects(pending,/Unsupported worker response|Physics worker failed/);
+  f.worker.onmessage!({data});await rejected;assert.equal(f.terminated(),1);
+ }
+});

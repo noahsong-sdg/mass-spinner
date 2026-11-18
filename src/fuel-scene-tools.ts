@@ -22,7 +22,7 @@ type ShellClone = {mesh: FuelShellMesh; original: FuelShellMesh['material']; clo
 type ExplodedMesh = {mesh: THREE.Object3D; position: THREE.Vector3; offset: THREE.Vector3};
 type SceneOptions = {scene: THREE.Object3D; result: FuelRenderResult; onSample?: (sample: FuelDiagnosticSample) => void; onControl?: (key: NumericFuelControlKey, value?: number, selection?: {componentId: string; keys: readonly NumericFuelControlKey[]}) => void};
 
-function isMesh(node: THREE.Object3D): node is THREE.Mesh {return 'isMesh' in node && node.isMesh===true;}
+function isMesh(node: THREE.Object3D): node is THREE.Mesh<THREE.BufferGeometry,THREE.Material|THREE.Material[]> {return 'isMesh' in node && node.isMesh===true;}
 function isLayer(value: string): value is FuelFieldLayer {return Object.hasOwn(LAYERS,value);}
 
 const COLORS=['#d29456','#8db3a6'];
@@ -81,7 +81,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
    const original=shell.material,clones=(Array.isArray(original)?original:[original]).map(m=>m.clone());
    shell.material=Array.isArray(original)?clones:clones[0];originals.push({mesh:shell,original,clones});
   }
-  if(['coils','electrodes','insulators'].includes(mesh.userData.componentId)){
+  if(['coils','electrodes','insulators'].includes(String(mesh.userData.componentId))){
    scene.updateMatrixWorld(true);
    const local=scene.worldToLocal(mesh.getWorldPosition(new THREE.Vector3()));
    const origin=mesh.parent!.worldToLocal(scene.localToWorld(new THREE.Vector3()));
@@ -127,7 +127,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   rebuildField(state.lightMass?.length??64);
   const domain=domains[layer];
   for(const ring of [...rings,...gasField.children as FieldMesh[]]){
-   const sample=sampleAt(ring.userData.radiusM),value=fieldValue(sample);
+   const sample=sampleAt(ring.userData.radiusM as number),value=fieldValue(sample);
    ring.material.color.copy(fieldColor(value,domain));
    ring.userData={...ring.userData,...sample,value,layer,unit:LAYERS[layer].unit,purpose:`${sample.scope}; uniform along z. Numerical field, not optical emission.`};
   }
@@ -150,7 +150,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  }
  function setStaging({cutaway=0,ghost=false,explode=0}: FuelStaging={}){
   bounded(cutaway,0,1,'Cutaway');bounded(explode,0,1,'Explode');
-  const previous=group.userData.staging;if(!previous||previous.cutaway!==cutaway||previous.ghost!==ghost||previous.explode!==explode)scene.userData.shadowRevision=(scene.userData.shadowRevision??0)+1;
+  const previous=group.userData.staging as FuelStaging|undefined;if(!previous||previous.cutaway!==cutaway||previous.ghost!==ghost||previous.explode!==explode)scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
   scene.updateMatrixWorld(true);
   // A planar opening in the illustrative shell, never a new gas boundary.
   const plane=new THREE.Plane(new THREE.Vector3(0,-1,0),R*(1-2*cutaway)).applyMatrix4(scene.matrixWorld);

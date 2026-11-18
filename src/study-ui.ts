@@ -37,7 +37,7 @@ export function setupStudies(getMode: () => string,getConfig: () => RunConfig,co
   }catch(error){if(active===controller)$('study-status').textContent=error instanceof Error?(error.name==='AbortError'?'Study cancelled.':error.message):String(error);}
   finally{if(active===controller){active=null;resetButtons();}}
  }
- $('repeat-study').addEventListener('click',()=>start('ensemble'));$('scan-study').addEventListener('click',()=>start('scan'));
+ $('repeat-study').addEventListener('click',()=>{void start('ensemble');});$('scan-study').addEventListener('click',()=>{void start('scan');});
  $('cancel-study').addEventListener('click',()=>{invalidate();$('study-status').textContent='Study cancelled; no partial result published.';});
  $('export-study').addEventListener('click',()=>{if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify(latest,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='mass-spinner-study.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
  return {invalidate,show(mode: string){$('study-panel').hidden=!['rotating','icr'].includes(mode);if(mode==='icr'&&$('scan-parameter').value==='voltage'){$('scan-parameter').value='magneticT';range();}}};

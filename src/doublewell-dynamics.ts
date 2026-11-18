@@ -258,7 +258,7 @@ export function simulateDoublewell(c:DoublewellConfig,executionMode:DoublewellEx
    y:series.map(s=>s[destination]/c.particlesPerSpecies),xLabel:'Time (ms)',yLabel:`Fraction of injected ${label} representatives`});
   for(const [key,yLabel,scale]of [['meanRadius','Survivor mean radius (m)',1],['temperatureEV','Survivor residual kinetic temperature (eV)',1],
    ['rotationRadS','Survivor fitted rigid rotation (rad/s)',1],['meanCanonicalMomentum','Survivor mean Pθ (kg m²/s)',1]] as const)
-   curves.push({label,x,y:series.map(s=>s[key]===null?NaN:s[key]!*scale),xLabel:'Time (ms)',yLabel});
+   curves.push({label,x,y:series.map(s=>s[key]===null?NaN:s[key]*scale),xLabel:'Time (ms)',yLabel});
   const bins=20,counts=Array(bins).fill(0);
   ions.filter(p=>p.active&&p.speciesIndex===i).forEach(p=>counts[Math.min(bins-1,Math.floor(Math.hypot(p.position[0],p.position[1])/c.radius*bins))]++);
   curves.push({label,x:counts.map((_,j)=>c.radius*(j+.5)/bins),y:counts.map((n,j)=>n*weight/(Math.PI*c.radius**2*((j+1)**2-j*j)/bins**2*c.length)),

@@ -41,7 +41,7 @@ export function restrictSpatialSnapshot(row:FuelSpatialExperimentSnapshot,n:numb
 }
 
 export function assessSpatialRefinement(histories:readonly [History,History,History],axis:SpatialRefinementAxis){
- const [a,b,c]=histories,base=a.config,n=base.radialCells,steps=base.steps;
+ const [a,,c]=histories,base=a.config,n=base.radialCells,steps=base.steps;
  for(let level=0;level<3;level++){
   const h=histories[level];
   if(h.snapshots.length!==h.config.steps+1||h.config.durationS<=0||

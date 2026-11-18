@@ -56,7 +56,7 @@ export function parseRecordedArgonReference(input:unknown):RecordedArgonReferenc
  const cases=array(d.cases,'cases');equal(cases.length,24,'complete case count');
  const caseIds=new Set<string>();
  for(const item of cases){
-  const c=object(item,'case'),id=text(c.scenario,'case scenario'),a=finite(c.anodeCenterM,'anode location'),n=c.refinement;
+  const c=object(item,'case'),id=text(c.scenario,'case scenario'),a=finite(c.anodeCenterM,'anode location'),n=finite(c.refinement,'refinement');
   if(!ids.has(id)||![.07,.08].includes(a)||![1,2,4].includes(Number(n))||typeof n!=='number')fail('case condition');
   const key=`${id}/${a}/${n}`;if(caseIds.has(key))fail('duplicate case');caseIds.add(key);
   equal(c.packet,`${id}-a${a}-n${n}.npz`,'original packet name');hash(c.packetSHA256,'original packet hash');

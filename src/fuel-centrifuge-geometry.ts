@@ -49,7 +49,8 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
  if(assembly){attachFuelAssembly(scene,assembly,c);finishFuelHardware(scene);}
  const records=new Map(FUEL_COMPONENTS.map(x=>[x.id,x]));
  scene.traverse(mesh=>{if('isMesh' in mesh&&mesh.isMesh){
-  const id=records.has(mesh.userData.componentId)?mesh.userData.componentId:'vessel';
+  const componentId:unknown=mesh.userData.componentId;
+  const id=typeof componentId==='string'&&records.has(componentId)?componentId:'vessel';
   mesh.userData={...mesh.userData,componentId:id,purpose:records.get(id)!.purpose,geometryBasis:BASIS};
  }});
  const metal=machinedMetal(0x75878d,.32,.4);

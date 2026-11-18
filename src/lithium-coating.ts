@@ -35,7 +35,7 @@ function logarithmicRemainder(x:number,shrinking:boolean,ratio:number,r:number){
  * evaporation latent heat, chemical binding, nuclear heat or beam is included.
  */
 export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoatingConfig,dtS:number){
- const fields=[...Object.values(state),...Object.values(c),dtS];
+ const fields=[...Object.values(state) as number[],...Object.values(c) as number[],dtS];
  const packingExcess=(s:LithiumCoatingState)=>Math.max(0,s.tritiumColumnM2+s.deuteriumColumnM2-s.lithiumColumnM2)/s.lithiumColumnM2;
  if(!fields.every(Number.isFinite)||state.lithiumColumnM2<=0||state.tritiumColumnM2<0||state.deuteriumColumnM2<0
   ||packingExcess(state)>COATING_PACKING_ROUNDOFF_BOUND
@@ -74,7 +74,7 @@ export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoating
  const initialMassKgm2=mass(n0,state.tritiumColumnM2,state.deuteriumColumnM2),massKgm2=mass(n1,next.tritiumColumnM2,next.deuteriumColumnM2);
  const depositedMassKgm2=mass(deposited.lithiumM2,deposited.tritiumM2,deposited.deuteriumM2),erodedMassKgm2=mass(eroded.lithiumM2,eroded.tritiumM2,eroded.deuteriumM2);
  const temperatureK=c.referenceK+next.sensibleEnergyJm2/(n1*c.heatCapacityPerLiJK),thicknessM=n1/c.lithiumNumberDensityM3;
- if(![...Object.values(next),...Object.values(deposited),...Object.values(eroded),initialMassKgm2,massKgm2,depositedMassKgm2,erodedMassKgm2,temperatureK,thicknessM].every(Number.isFinite)
+ if(![...Object.values(next) as number[],...Object.values(deposited) as number[],...Object.values(eroded) as number[],initialMassKgm2,massKgm2,depositedMassKgm2,erodedMassKgm2,temperatureK,thicknessM].every(Number.isFinite)
   ||temperatureK<=0||thicknessM<=0||packingExcess(next)>COATING_PACKING_ROUNDOFF_BOUND)
   throw new RangeError('Coating balance exceeds the finite numeric domain.');
  return {model:'external-well-mixed-Li-coating' as const,state:next,thicknessM,temperatureK,

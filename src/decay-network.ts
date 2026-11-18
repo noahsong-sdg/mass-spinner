@@ -9,7 +9,7 @@ export interface DecayNetwork {
 const nonnegative=(x:number)=>Number.isFinite(x)&&x>=0;
 const identity=(n:number)=>Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>Number(i===j)));
 function multiply(a:number[][],b:number[][]){
- const n=a.length,c=Array.from({length:n},()=>Array(n).fill(0) as number[]);
+ const n=a.length,c=Array.from({length:n},()=>Array<number>(n).fill(0) as number[]);
  for(let i=0;i<n;i++)for(let k=0;k<n;k++)for(let j=0;j<n;j++)c[i][j]+=a[i][k]*b[k][j];
  return c;
 }
@@ -24,12 +24,12 @@ export function evolveDecayNetwork(network:DecayNetwork,initial:number[],duratio
   throw new Error('Expected 1–16 nodes, finite nonnegative populations and duration in seconds.');
  const ids=new Map(nodes.map((node,i)=>[node.id,i]));
  if(ids.size!==n||nodes.some(node=>!node.id||!nonnegative(node.decayRateS)))throw new Error('Invalid or duplicate decay node.');
- const source=network.productionAtomsS??Array(n).fill(0);
+ const source=network.productionAtomsS??Array<number>(n).fill(0);
  if(source.length!==n||!source.every(nonnegative))throw new Error('Production requires nonnegative atoms/s per node.');
  const initialTotal=initial.reduce((sum,x)=>sum+x,0),sourceTotal=source.reduce((sum,x)=>sum+x,0);
  if(!Number.isFinite(initialTotal)||!Number.isFinite(sourceTotal))throw new Error('Aggregate inventory or production exceeds the finite numerical domain.');
  // Explicit lost-inventory sink and constant reservoir retain affine production without cancellation.
- const size=n+2,sink=n,reservoir=n+1,a=Array.from({length:size},()=>Array(size).fill(0) as number[]);
+ const size=n+2,sink=n,reservoir=n+1,a=Array.from({length:size},()=>Array<number>(size).fill(0) as number[]);
  for(let i=0;i<n;i++){
   let branches=0;
   for(const product of nodes[i].products??[]){

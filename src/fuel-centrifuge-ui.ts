@@ -178,7 +178,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const layer={separation:'composition',composition:'composition',profile:'density',spin:'speed',momentum:'speed',inertia:'density'}[selector.value];
   if(layer){for(const [key,value]of [['representation','both'],['layer',layer]]){const input=nodes.view.querySelector<HTMLSelectElement>(`#fuel-view-${key}`)!;input.value=value;input.dispatchEvent(new doc.defaultView!.Event('change'));}viewer?.select('slice');viewer?.focus?.('slice',{animate:true});}
   else if(['thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&latest?.result.transport?.operation?.thermal?.gas){
-   if(!['spin','transport'].includes(motionMode.value))elapsed=pinned?Math.min(latest!.result.config.durationS,pinned.config.durationS):latest!.result.config.durationS;
+   if(!['spin','transport'].includes(motionMode.value))elapsed=pinned?Math.min(latest.result.config.durationS,pinned.config.durationS):latest.result.config.durationS;
    motionMode.value='transport';playing=false;
    for(const [key,value]of [['representation','both'],['layer','temperature']]){const input=nodes.view.querySelector<HTMLSelectElement>(`#fuel-view-${key}`)!;input.value=value;input.dispatchEvent(new doc.defaultView!.Event('change'));}
    draw();playback();viewer?.select('slice');viewer?.focus?.('slice',{animate:true});
@@ -215,14 +215,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-result-scope')!,metrics);
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-input-coverage')!,metrics);
  const views=createFuelViewTools({document:doc,host:nodes.view,onChange:()=>{applyViews();draw();viewer?.refresh();baselineViewer?.refresh();},onCamera:direction=>{const pose=viewer?.cameraPose?.();if(!pose)return;const distance=Math.hypot(...pose.position.map((v,i)=>v-pose.target[i])),norm=Math.hypot(...direction),next:CameraPose={...pose,position:direction.map((v,i)=>pose.target[i]+v*distance/norm) as CameraVector};viewer!.setCamera(next);baselineViewer?.setCamera?.(next);}});
- const comparisons=createFuelComparisonTools({document:doc,host:nodes.view,request,onApply:applyConfig,onPin:value=>{pinned=value;void showBaseline();draw();},onClear:()=>{pinned=null;baselineTools?.dispose();baselineTools=null;baselineViewer?.dispose();baselineViewer=null;baselineMotion=null;baselineFrame.hidden=true;comparisonLabel.hidden=true;nodes.render.classList.remove('fuel-comparing');if(tools&&latest){tools.setDomains({...Object.fromEntries((['composition','density','speed'] as const).map(layer=>[layer,comparisonDomain([latest!.result],layer)])),temperature:temperatureDomain([latest!.result])});views.updateLegend(tools);}viewer?.resize();draw();}});
- function acceptComparison(){comparisons.accept(latest?{...latest,camera:viewer?.cameraPose?.(),timeS:Math.min(elapsed,latest!.result.config.durationS),mode:motionMode.value}:null);}
+ const comparisons=createFuelComparisonTools({document:doc,host:nodes.view,request,onApply:applyConfig,onPin:value=>{pinned=value;void showBaseline();draw();},onClear:()=>{pinned=null;baselineTools?.dispose();baselineTools=null;baselineViewer?.dispose();baselineViewer=null;baselineMotion=null;baselineFrame.hidden=true;comparisonLabel.hidden=true;nodes.render.classList.remove('fuel-comparing');if(tools&&latest){tools.setDomains({...Object.fromEntries((['composition','density','speed'] as const).map(layer=>[layer,comparisonDomain([latest!.result],layer)])),temperature:temperatureDomain([latest.result])});views.updateLegend(tools);}viewer?.resize();draw();}});
+ function acceptComparison(){comparisons.accept(latest?{...latest,camera:viewer?.cameraPose?.(),timeS:Math.min(elapsed,latest.result.config.durationS),mode:motionMode.value}:null);}
  function applyConfig(config:FuelConfig){for(const [key,c]of controls){if(c.input.dataset.integer!=='true')c.input.step='any';c.input.value=String(c.input.dataset.rangeScale==='log10'?Math.log10(config[key]):config[key]);}pair.value=config.pair;application.value=config.application;seed.checked=config.lithiumSeed;changed();}
  function syncProbes(){const radius=views.state.radius*(latest?.result.config.radiusM??tools?.radiusM??0);tools?.setProbe?.(views.state.radius);if(baselineTools)baselineTools.setProbe(Math.min(1,radius/baselineTools.radiusM));}
  function applyViews(){if(hasSelection)viewer?.select(null);for(const value of [tools,baselineTools])views.apply(value);syncProbes();if(hasSelection)viewer?.select(inspectSelect.value);for(const value of [motion,baselineMotion])value?.setSpecies?.(views.state.species);for(const label of driveKey.querySelectorAll<HTMLElement>('[data-layer]'))label.hidden=views.state.drive!=='all'&&views.state.drive!==label.dataset.layer;views.refreshSample(tools);refreshGasLegend();}
  function refreshComposition(state?:DiagnosticState){
   if(!latest||selector.value!=='composition')return;
-  const r=latest!.result,s=sampleFuelField(r,views.state.radius*r.config.radiusM,state??diagnosticState(r));
+  const r=latest.result,s=sampleFuelField(r,views.state.radius*r.config.radiusM,state??diagnosticState(r));
   compositionReadout.setAttribute('aria-live',playing?'off':'polite');
   samplePosition.textContent=`${views.state.radius===0?'At the axis (center)':views.state.radius===1?'At the wall (outer edge)':`Between axis and wall`} · r ${fmt(100*s.radiusM)} cm · ${fmt(s.timeS)} s`;
   const x=s.lightFraction,delta=x===null?null:Number((100*(x-r.config.lightFraction)).toFixed(3));
@@ -246,7 +246,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  function refreshGasLegend(){
   if(!latest)return;
   const field=views.state.representation==='field',l=tools?.legend;
-  const labels=field?[l?`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`:'Gas cutaway']:[`● ${latest!.result.pair.light}`,`● ${latest!.result.pair.heavy}`,'○ ions · weighted'];
+  const labels=field?[l?`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`:'Gas cutaway']:[`● ${latest.result.pair.light}`,`● ${latest.result.pair.heavy}`,'○ ions · weighted'];
   const key=JSON.stringify(labels);if(legend.dataset.key===key)return;legend.dataset.key=key;
   legend.replaceChildren(...labels.map((text,i)=>{const node=el('span',text);if(field&&l){node.style.borderBottom='3px solid';node.style.borderImage=`linear-gradient(to right,${l.colors.join(',')}) 1`;}else node.className=`fuel-gas-${i}`;return node;}));
  }
@@ -255,9 +255,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   baselineFrame.hidden=false;comparisonLabel.hidden=false;nodes.render.classList.add('fuel-comparing');
   baselineTools?.dispose();baselineTools=null;
   if(!baselineViewer)baselineViewer=graphics[0].createApparatusViewer<FuelModel>(baselineFrame,{loader:{loadAsync:(value:FuelModel)=>{const built=graphics![1].buildFuelCentrifugeGeometry({...value,diagnostics:true});baselineMotion=built.motion;baselineTools=built.tools;return Promise.resolve(built);}},onCamera:pose=>viewer?.setCamera?.(pose),onResize:()=>baselineViewer?.setCamera?.(viewer?.cameraPose?.(),{preserveOwnership:true}),pickFilter:hit=>baselineTools?.visibleHit(hit)??true,onError:error=>{comparisonLabel.textContent=message(error);}});
-  await baselineViewer!.load({model:{config:accepted.result.config,result:accepted.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:true});
+  await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:true});
   if(pinned!==accepted||disposed)return;
-  viewer?.resize();baselineViewer!.setCamera?.(viewer!.cameraPose?.(),{preserveOwnership:true});applyViews();playback();
+  viewer?.resize();baselineViewer.setCamera?.(viewer!.cameraPose?.(),{preserveOwnership:true});applyViews();playback();
  }
  const reducedMotion=doc.defaultView!.matchMedia?.('(prefers-reduced-motion: reduce)');
  function animateGas(dt=0){
@@ -266,30 +266,30 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   let suggested=motion.update(elapsed,mode).secondsPerScreenSecond;
   if(baselineMotion)suggested=Math.min(suggested,baselineMotion.update(elapsed,mode).secondsPerScreenSecond);
   // Fast real rotation is azimuthally averaged in transport mode so diffusion can be explored in seconds.
-  if(mode==='transport')suggested=Math.min(latest!.result.config.durationS/8,1);
+  if(mode==='transport')suggested=Math.min(latest.result.config.durationS/8,1);
   timeScales[motionMode.value]??=suggested;
   // Preserve slider comparisons; retime only outside the visual sampling budget.
   const scale=Math.min(timeScales[motionMode.value],suggested*(motionMode.value==='flow'?2:8));
   elapsed+=dt*scale;
-  const c=latest!.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
+  const c=latest.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
   if((transient||pinned)&&elapsed>=limit){elapsed=limit;playing=false;}
   const state=motion.update(elapsed,mode,scale);
   play.textContent=playing?'Pause':'Play';play.setAttribute('aria-pressed',String(playing));seek.hidden=!transient;seek.max=String(limit);seek.value=String(elapsed);seek.setAttribute('aria-valuetext',`${fmt(elapsed)} s`);
-  const diagnostic=diagnosticState(latest!.result);tools?.update(diagnostic);views.refreshSample(tools);refreshComposition(diagnostic);
+  const diagnostic=diagnosticState(latest.result);tools?.update(diagnostic);views.refreshSample(tools);refreshComposition(diagnostic);
   const current=diagnostic.currentA??c.currentA;tools?.drive?.setCurrent?.(current);power.textContent=current>0?'Cut power':'Power on';power.setAttribute('aria-pressed',String(current>0));
   power.disabled=dirty||!transient||elapsed>=60;refreshInstrument(diagnostic);
   const readouts=metrics.querySelectorAll('strong');
-  if(transient&&selector.value==='spin'&&readouts.length){readouts[0].textContent=`${fmt(state.speeds.neutral*c.radiusM)} m/s`;readouts[1].textContent=`${fmt(Math.abs(state.speeds.ion-state.speeds.neutral)*c.radiusM/latest!.result.mechanics.criticalVelocityMS)} `;readouts[2].textContent=`${fmt(state.speeds.neutral*c.radiusM/latest!.result.mechanics.criticalVelocityMS)} `;}
-  if(transient&&selector.value==='heat'&&latest!.result.transport&&readouts.length){const energy=sampleFuelTransport(latest!.result.transport!,elapsed).energy;readouts[1].textContent=`${fmt(energy.redistributionWorkJ)} J`;readouts[2].textContent=`${fmt(energy.numericalDissipationJ)} J`;}
+  if(transient&&selector.value==='spin'&&readouts.length){readouts[0].textContent=`${fmt(state.speeds.neutral*c.radiusM)} m/s`;readouts[1].textContent=`${fmt(Math.abs(state.speeds.ion-state.speeds.neutral)*c.radiusM/latest.result.mechanics.criticalVelocityMS)} `;readouts[2].textContent=`${fmt(state.speeds.neutral*c.radiusM/latest.result.mechanics.criticalVelocityMS)} `;}
+  if(transient&&selector.value==='heat'&&latest.result.transport&&readouts.length){const energy=sampleFuelTransport(latest.result.transport,elapsed).energy;readouts[1].textContent=`${fmt(energy.redistributionWorkJ)} J`;readouts[2].textContent=`${fmt(energy.numericalDissipationJ)} J`;}
   if(selector.value==='heat'&&readouts.length)readouts[0].textContent=`${fmt(current**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm))} W`;
   if(selector.value==='thermal'&&diagnostic.thermal){readouts[0].textContent=`${fmt(diagnostic.thermal.pressurePa)} Pa`;readouts[1].textContent=`${fmt(diagnostic.thermal.coolingEnergyJ)} J`;}
   views.updateLegend(tools);
   refreshGasLegend();
-  if(transient&&['separation','momentum','inertia'].includes(selector.value)&&latest!.result.transport){const sample=sampleFuelTransport(latest!.result.transport!,elapsed),rows=metrics.querySelectorAll('strong');if(rows.length===3){rows[0].textContent=`${fmt(sample.timeS)} s`;rows[1].textContent=`${fmt(sample.neutralInertiaRatio)} × initial inertia`;}}
+  if(transient&&['separation','momentum','inertia'].includes(selector.value)&&latest.result.transport){const sample=sampleFuelTransport(latest.result.transport,elapsed),rows=metrics.querySelectorAll('strong');if(rows.length===3){rows[0].textContent=`${fmt(sample.timeS)} s`;rows[1].textContent=`${fmt(sample.neutralInertiaRatio)} × initial inertia`;}}
   if(pinned&&baselineMotion){
    const comparison=comparisonFrame(pinned,latest,elapsed);
    baselineMotion.update(comparison.timeS,mode,scale);const baselineState=diagnosticState(pinned.result);baselineTools?.update(baselineState);baselineTools?.drive?.setCurrent?.(baselineState.currentA??pinned.result.config.currentA);
-   for(const value of [tools,baselineTools])value?.setDomains({...comparison.domains,temperature:temperatureDomain([pinned.result,latest!.result])});
+   for(const value of [tools,baselineTools])value?.setDomains({...comparison.domains,temperature:temperatureDomain([pinned.result,latest.result])});
    views.updateLegend(tools);
    comparisonLabel.textContent=`${transient?`A pinned · B current · ${fmt(comparison.timeS)} s`:'A/B final references'} · shared SI camera/colors${comparison.sameGeometry?'':' · geometry differs'}${comparison.sameProducingCode?'':' · source identities differ/unavailable'}`;
    baselineViewer?.refresh();
@@ -297,7 +297,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(selector.value!=='composition')plotCursor?.setCursor(transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(selector.value)?elapsed:NaN);
   if(transient&&['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&Math.abs(elapsed-lastProfileTime)>=c.durationS/80){lastProfileTime=elapsed;draw();}
   acceptComparison();
-  setStatus(transient?`Closed vessel · ${diagnostic.thermal?'evolving temperature':'thermal bath'}${(latest!.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
+  setStatus(transient?`Closed vessel · ${diagnostic.thermal?'evolving temperature':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;
   clock.textContent=`${transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:'Final reference'} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}`;
   if(!playing)viewer?.setAnimation(null);
@@ -308,7 +308,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  play.addEventListener('click',()=>{playing=!playing;playback();});
  restart.addEventListener('click',()=>{elapsed=0;playback();});
  newRun.addEventListener('click',()=>{changed();void run();});
- power.addEventListener('click',()=>{if(power.disabled||!latest)return;const current=sampleFuelTransport(latest!.result.transport!,elapsed).currentA??latest!.result.config.currentA;if(current>0)lastPoweredCurrent=current;controls.get('currentA')!.input.value=String(current>0?0:lastPoweredCurrent);changed({target:controls.get('currentA')!.input});});
+ power.addEventListener('click',()=>{if(power.disabled||!latest)return;const current=sampleFuelTransport(latest.result.transport!,elapsed).currentA??latest.result.config.currentA;if(current>0)lastPoweredCurrent=current;controls.get('currentA')!.input.value=String(current>0?0:lastPoweredCurrent);changed({target:controls.get('currentA')!.input});});
  motionMode.addEventListener('change',()=>{elapsed=0;draw();playback();});
  seek.addEventListener('input',()=>{elapsed=Number(seek.value);playing=false;draw();playback();});
  const reduce=(event:MediaQueryListEvent)=>{if(event.matches){playing=false;playback();}};reducedMotion?.addEventListener('change',reduce);
@@ -354,7 +354,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const record=graphics?.[1].FUEL_COMPONENTS.find(c=>c.id===id);if(!record)return;
   if(highlight)hasSelection=true;
   inspectSelect.value=id;viewer?.select(hasSelection?id:null);
-  if(description.dataset.component===id){description.querySelector('h3')!.textContent=name||record.name;[String(part?.purpose??record.purpose),String(part?.materialBasis??record.material),record.basis].forEach((text,i)=>description.querySelectorAll('details p')[i].textContent=text);for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]')){if(doc.activeElement!==input){const control=controls.get(input.dataset.key as NumericFuelKey)!;input.value=String(input.type==='number'?control.read():control.input.value);}}refreshInstrument();return;}
+  if(description.dataset.component===id){description.querySelector('h3')!.textContent=name||record.name;[typeof part?.purpose==='string'?part.purpose:record.purpose,typeof part?.materialBasis==='string'?part.materialBasis:record.material,record.basis].forEach((text,i)=>description.querySelectorAll('details p')[i].textContent=text);for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]')){if(doc.activeElement!==input){const control=controls.get(input.dataset.key as NumericFuelKey)!;input.value=String(input.type==='number'?control.read():control.input.value);}}refreshInstrument();return;}
   description.dataset.component=id;description.replaceChildren(el('h3',name||record.name));
   if(['supply','electrodes'].includes(id)){const toggle=el('button');toggle.dataset.power='';toggle.addEventListener('click',()=>power.click());description.append(toggle);}
   for(const key of FUEL_COMPONENT_CONTROLS[id]??[]){
@@ -366,13 +366,13 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
   const response=el('output');response.dataset.response='';description.append(response);
   const resultButton=el('button','Plot response');resultButton.addEventListener('click',()=>{selector.value=({supply:'spin',electrodes:'spin',coils:'field',liner:'thermal',pump:'pump','light-outlet':'cut'})[id]??'separation';draw();onResults();});description.append(resultButton);
-  const details=el('details');details.append(el('summary','Materials & model'),el('p',String(part?.purpose??record.purpose)),el('p',String(part?.materialBasis??record.material)),el('p',record.basis));description.append(details);refreshInstrument();
+  const details=el('details');details.append(el('summary','Materials & model'),el('p',typeof part?.purpose==='string'?part.purpose:record.purpose),el('p',typeof part?.materialBasis==='string'?part.materialBasis:record.material),el('p',record.basis));description.append(details);refreshInstrument();
  }
- function refreshInstrument(state:DiagnosticState|null=latest?diagnosticState(latest!.result):null){
-  if(latest&&!dirty&&!exportButton.disabled){const control=controls.get('currentA')!,current=state?.currentA??latest!.result.config.currentA;control.input.value=String(current);control.refresh();for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key="currentA"]'))input.value=String(current);}
+ function refreshInstrument(state:DiagnosticState|null=latest?diagnosticState(latest.result):null){
+  if(latest&&!dirty&&!exportButton.disabled){const control=controls.get('currentA')!,current=state?.currentA??latest.result.config.currentA;control.input.value=String(current);control.refresh();for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key="currentA"]'))input.value=String(current);}
   for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]'))input.disabled=controls.get(input.dataset.key as NumericFuelKey)!.input.disabled;
   const toggle=description.querySelector<HTMLButtonElement>('[data-power]');if(toggle){toggle.textContent=power.textContent;toggle.disabled=power.disabled;toggle.setAttribute('aria-pressed',power.getAttribute('aria-pressed')??'false');}
-  const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest!.result,id=description.dataset.component;
+  const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest.result,id=description.dataset.component;
   const collection=state?.collection??r.collection,pct=(value:number|null)=>value===null?'—':fmt(100*value);
   const spatial=state?.thermal?.spatial;
   output.textContent=id==='liner'?`Gas ${fmt(state?.thermal?.gasK??r.config.gasK)} K · ${spatial?`tungsten ${fmt(spatial.minK)}–${fmt(spatial.maxK)} K`:`liner ${fmt(state?.thermal?.linerK??r.config.linerK)} K`}`:id==='light-outlet'?`Light ${pct(collection.innerLightPurity)}% · recovery ${pct(collection.lightRecovery)}%`:id==='pump'?`Reference inlet speed ${fmt(r.pumping.effectiveSpeedM3S)} m³/s`:id==='coils'?`Prescribed field ${fmt(r.config.magneticT)} T`:`Gas ${fmt((state?.neutralRadS??0)*r.config.radiusM)} m/s · ${fmt(state?.currentA??r.config.currentA)} A`;
@@ -389,9 +389,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    if(event.phase==='end'&&dragCut!==null){controls.get('cutFraction')!.input.value=String(dragCut);dragCut=null;changed();}return false;
    },onSelect:(id,part,name,hit)=>{if(id==='slice'){const sample=hit&&tools?.sampleWorld(hit.point);if(sample)selectProbe(sample.radiusM/latest!.result.config.radiusM);playing=false;selector.value=views.state.layer==='temperature'?(latest?.result.transport?.operation?.thermal?.gas?'thermalProfile':'thermal'):'composition';draw();playback();onResults();return;}describe(id,part,name);onInspect();},onError:error=>{status.textContent=`3D unavailable: ${message(error)}`;}});
   }
-  const pose=tools?viewer!.cameraPose?.():null;if(tools)viewer!.select(null);tools?.dispose();tools=null;
-  await viewer!.load({model:{config:snapshot.result.config,result:snapshot.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:!!pose});
-  if(pose&&snapshot.result.config.radiusM)viewer!.setCamera?.(pose,{preserveOwnership:true});
+  const pose=tools?viewer.cameraPose?.():null;if(tools)viewer.select(null);tools?.dispose();tools=null;
+  await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:!!pose});
+  if(pose&&snapshot.result.config.radiusM)viewer.setCamera?.(pose,{preserveOwnership:true});
   if(disposed||!active||dirty||updating||snapshot!==latest)return;
   // The asynchronous viewer loader installs tools before load resolves.
   const loadedTools=tools as Geometry['tools']|null;
@@ -425,8 +425,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   try{
    const operation={schemaVersion:1 as const,events:structuredClone(currentEvents),thermal:thermalRead()};
    const reply=await request({kind:'fuel-centrifuge',schemaVersion:1,id,config:operatingConfig??read(),includeTransport:true,operation,...(resume?{resume}:{} )},controller.signal);
-   if(disposed||id!==revision)return;updating=false;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};exportButton.disabled=false;sensitivity.update(latest!);
-   const r=latest!.result,notes=['Uniform-inertia equilibrium reference'];
+   if(disposed||id!==revision)return;updating=false;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};exportButton.disabled=false;sensitivity.update(latest);
+   const r=latest.result,notes=['Uniform-inertia equilibrium reference'];
    eventHistory.replaceChildren(el('summary','Drive history'),...currentEvents.map(e=>el('p',`${fmt(e.timeS)} s → ${fmt(e.currentA)} A`)));if(!currentEvents.length)eventHistory.append(el('p',`Initial current ${fmt(r.config.currentA)} A`));
    if(r.config.durationS<r.mechanics.radialDiffusionTimeS)notes.push('spin time < a²/D');
    if(r.config.application==='pump'&&r.pumping.turnoverS!==null&&r.pumping.turnoverS<r.mechanics.radialDiffusionTimeS)notes.push('turnover < a²/D');
@@ -442,17 +442,17 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(!source||!('result' in source)||!source.result)source=latest;if(!source)return;frame.hidden=false;const r=source.result,c=r.config,m=r.mechanics,end=r.samples.at(-1)!,topic=selector.value;
   const transient=['spin','transport'].includes(motionMode.value),transport=r.transport,limit=pinned?Math.min(latest!.result.config.durationS,pinned.config.durationS):c.durationS;
   const sampleTime=transient?elapsed:limit;
-  const rows=transport?[...(transport.checkpoints??transport.snapshots).filter(s=>s.timeS<limit),sampleFuelTransport(transport!,limit)]:null;
+  const rows=transport?[...(transport.checkpoints??transport.snapshots).filter(s=>s.timeS<limit),sampleFuelTransport(transport,limit)]:null;
   const curve=<X extends string,Y extends string>(label:string,rows:readonly (Record<X,number>&Record<Y,number|null>)[],xKey:X,yKey:Y,xLabel:string,yLabel:string):PlotCurve=>({label,x:rows.map(v=>v[xKey]),y:rows.map(v=>v[yKey]),xLabel,yLabel});
   let curves:PlotCurve[]=[],values:[string,number|null,string][]=[];if(!capture)explanation.textContent=topics[topic][1];
   if(topic==='composition')curves=fuelCompositionCurves(r,diagnosticState(r)).filter((_,i)=>i!==1);
-  if(topic==='separation'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.collection}));curves=(['innerLightPurity','lightRecovery'] as const).map(k=>curve(k==='innerLightPurity'?'Light purity':'Light recovery',data,'timeS',k,'Time (s)','Inventory fraction'));curves.push({label:'Uniform-inertia equilibrium reference',x:[0,limit],y:[r.collection.innerLightPurity,r.collection.innerLightPurity],xLabel:'Time (s)',yLabel:'Inventory fraction',dash:'2 4'});const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Species inventory error',transport.maxBalanceError,'']];if(sample.thermal&&!capture)explanation.textContent='Closed-wall transport and evolving gas temperature feed back on radial separation and gas inertia. Diffusivity is prescribed; local fluid momentum and extraction are not solved. The dashed equilibrium reference retains its initial fixed temperature and uniform-inertia mechanics.';}
+  if(topic==='separation'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.collection}));curves=(['innerLightPurity','lightRecovery'] as const).map(k=>curve(k==='innerLightPurity'?'Light purity':'Light recovery',data,'timeS',k,'Time (s)','Inventory fraction'));curves.push({label:'Uniform-inertia equilibrium reference',x:[0,limit],y:[r.collection.innerLightPurity,r.collection.innerLightPurity],xLabel:'Time (s)',yLabel:'Inventory fraction',dash:'2 4'});const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Species inventory error',transport.maxBalanceError,'']];if(sample.thermal&&!capture)explanation.textContent='Closed-wall transport and evolving gas temperature feed back on radial separation and gas inertia. Diffusivity is prescribed; local fluid momentum and extraction are not solved. The dashed equilibrium reference retains its initial fixed temperature and uniform-inertia mechanics.';}
   if(topic==='spin'){
-   const data=rows?rows!.map(s=>({timeS:s.timeS,ionMS:s.ionRadS*c.radiusM,neutralMS:s.neutralRadS*c.radiusM})):r.samples,last=transient?{ionMS:diagnosticState(r).ionRadS!*c.radiusM,neutralMS:diagnosticState(r).neutralRadS!*c.radiusM}:data.at(-1)!;
+   const data=rows?rows.map(s=>({timeS:s.timeS,ionMS:s.ionRadS*c.radiusM,neutralMS:s.neutralRadS*c.radiusM})):r.samples,last=transient?{ionMS:diagnosticState(r).ionRadS!*c.radiusM,neutralMS:diagnosticState(r).neutralRadS*c.radiusM}:data.at(-1)!;
    curves=(['ionMS','neutralMS'] as const).map((k,i)=>curve(i?'Neutrals':'Ions',data,'timeS',k,'Time (s)','Wall speed (m/s)'));values=[[transient?'Current neutral speed':'Final neutral speed',last.neutralMS,'m/s'],[transient?'Current slip / CIV':'Final slip / CIV',Math.abs(last.ionMS-last.neutralMS)/m.criticalVelocityMS,''],[transient?'Current wall speed / CIV':'Final wall speed / CIV',last.neutralMS/m.criticalVelocityMS,''],['a² / D',m.radialDiffusionTimeS,'s']];
    if(!transport&&!capture)explanation.textContent='Uniform-inertia reference: reciprocal friction drives neutral spin-up. No radial inertia feedback is included in this result.';
   }
-  if(topic==='heat'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.energy})),last=data.at(-1)!,sample=sampleFuelTransport(transport!,sampleTime),current=transient?(sample.currentA??c.currentA):(end.currentA??c.currentA);curves=(['driveWorkJ','kineticJ','slipDissipationJ','dragDissipationJ','redistributionWorkJ','numericalDissipationJ'] as const).map(k=>curve(k.replace(/J$/,'').replace(/([A-Z])/g,' $1'),data,'timeS',k,'Time (s)','Energy (J)'));values=[[transient?'Current ohmic power':'Reference ohmic power',current**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm),'W'],[transient?'Current redistribution work':'Final redistribution work',(transient?sample.energy:last).redistributionWorkJ,'J'],[transient?'Current numerical dissipation':'Final numerical dissipation',(transient?sample.energy:last).numericalDissipationJ,'J'],['Mechanical ledger error',transport.maxEnergyRelativeError,'relative']];if(sample.thermal&&!capture)explanation.textContent='Mechanical ledger: drive work supplies kinetic energy, slip and wall dissipation, signed redistribution work, and numerical dissipation. The thermal model deposits slip and resistive heat into gas and wall drag into liner; redistribution work enters gas with its sign. Ohmic deposition and cooling are in the Temperature budget; numerical dissipation is not heat.';}
+  if(topic==='heat'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.energy})),last=data.at(-1)!,sample=sampleFuelTransport(transport,sampleTime),current=transient?(sample.currentA??c.currentA):(end.currentA??c.currentA);curves=(['driveWorkJ','kineticJ','slipDissipationJ','dragDissipationJ','redistributionWorkJ','numericalDissipationJ'] as const).map(k=>curve(k.replace(/J$/,'').replace(/([A-Z])/g,' $1'),data,'timeS',k,'Time (s)','Energy (J)'));values=[[transient?'Current ohmic power':'Reference ohmic power',current**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm),'W'],[transient?'Current redistribution work':'Final redistribution work',(transient?sample.energy:last).redistributionWorkJ,'J'],[transient?'Current numerical dissipation':'Final numerical dissipation',(transient?sample.energy:last).numericalDissipationJ,'J'],['Mechanical ledger error',transport.maxEnergyRelativeError,'relative']];if(sample.thermal&&!capture)explanation.textContent='Mechanical ledger: drive work supplies kinetic energy, slip and wall dissipation, signed redistribution work, and numerical dissipation. The thermal model deposits slip and resistive heat into gas and wall drag into liner; redistribution work enters gas with its sign. Ohmic deposition and cooling are in the Temperature budget; numerical dissipation is not heat.';}
   if(topic==='heat'&&!transport){curves=(['totalInputW','mechanicalW','slipW','dragW'] as const).map(k=>curve(k,r.samples,'timeS',k,'Time (s)','Power (W)'));values=[['Ohmic',m.ohmicW,'W'],['Reference thermal control',m.requiredCoolingW,'W']];if(!capture)explanation.textContent='Uniform-inertia mechanical reference. Fixed gas temperature is not a thermal solution.';}
   if(topic==='thermal'){
    const data=rows?.filter(s=>s.thermal).map(s=>({timeS:s.timeS,...s.thermal!}))??[];
@@ -460,17 +460,17 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    else{curves=[{label:'Gas thermal bath',x:[0,limit],y:[c.gasK,c.gasK],xLabel:'Time (s)',yLabel:'Temperature (K)'}];if(!capture)explanation.textContent='Enable Thermal model in Controls to evolve atomic gas and liner temperature. The current run uses a fixed-temperature bath.';}
   }
   if(topic==='thermalProfile'){
-   const sample=transport?sampleFuelTransport(transport!,sampleTime):null,spatial=sample?.thermal?.spatial;
+   const sample=transport?sampleFuelTransport(transport,sampleTime):null,spatial=sample?.thermal?.spatial;
    if(spatial){curves=[{label:'Tungsten liner',x:spatial.radiusM,y:spatial.temperatureK,xLabel:'Radius (m)',yLabel:'Temperature (K)'}];const gas=sample.thermal!.gas;if(gas)curves.unshift({label:'Neutral gas',x:gas.radiusM,y:gas.temperatureK,xLabel:'Radius (m)',yLabel:'Temperature (K)'});values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Inner liner cell',spatial.innerK,'K'],['Outer liner cell',spatial.outerK,'K'],['Mean neutral gas',sample.thermal!.gasK,'K']];}
    else if(!capture)explanation.textContent='Choose Radial tungsten liner in Thermal model to resolve heat flow through the solid wall.';
   }
   if(topic==='gasEnergy'||topic==='gasPressure'){
-   const sample=transport?sampleFuelTransport(transport!,sampleTime):null,gas=sample?.thermal?.gas;
+   const sample=transport?sampleFuelTransport(transport,sampleTime):null,gas=sample?.thermal?.gas;
    if(gas){curves=topic==='gasPressure'?[{label:'Neutral gas',x:gas.radiusM,y:gas.pressurePa,xLabel:'Radius (m)',yLabel:'Pressure (Pa)'}]:gas.speciesEnergyJ.map((energy,i)=>({label:i?r.pair.heavy:r.pair.light,x:gas.radiusM,y:energy,xLabel:'Radius (m)',yLabel:'Cell internal energy (J)'}));values=[['Time',sample.timeS,'s'],['Gas energy',gas.energyJ,'J'],['Gas minimum',gas.minK,'K'],['Gas maximum',gas.maxK,'K']];}
    else if(!capture)explanation.textContent='Choose Spatial mixture under Thermal model to resolve species energy and local pressure.';
   }
-  if(topic==='momentum'&&transport){const data=rows!.map(s=>({timeS:s.timeS,ions:s.ionAngularMomentumKgM2S,neutrals:s.neutralAngularMomentumKgM2S,total:s.ionAngularMomentumKgM2S+s.neutralAngularMomentumKgM2S,external:s.angularMomentum.driveImpulseKgM2S-s.angularMomentum.dragImpulseKgM2S}));curves=(['ions','neutrals','total','external'] as const).map(k=>curve(k==='external'?'Drive minus wall impulse':k,data,'timeS',k,'Time (s)','Angular momentum (kg m²/s)'));const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
-  if(topic==='inertia'&&transport){const data=rows!.map(s=>({timeS:s.timeS,neutral:s.neutralInertiaKgM2,initial:m.nn}));curves=(['neutral','initial'] as const).map(k=>curve(k==='neutral'?'Evolving neutral inertia':'Initial uniform inertia',data,'timeS',k,'Time (s)','Moment of inertia (kg m²)'));const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
+  if(topic==='momentum'&&transport){const data=rows!.map(s=>({timeS:s.timeS,ions:s.ionAngularMomentumKgM2S,neutrals:s.neutralAngularMomentumKgM2S,total:s.ionAngularMomentumKgM2S+s.neutralAngularMomentumKgM2S,external:s.angularMomentum.driveImpulseKgM2S-s.angularMomentum.dragImpulseKgM2S}));curves=(['ions','neutrals','total','external'] as const).map(k=>curve(k==='external'?'Drive minus wall impulse':k,data,'timeS',k,'Time (s)','Angular momentum (kg m²/s)'));const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
+  if(topic==='inertia'&&transport){const data=rows!.map(s=>({timeS:s.timeS,neutral:s.neutralInertiaKgM2,initial:m.nn}));curves=(['neutral','initial'] as const).map(k=>curve(k==='neutral'?'Evolving neutral inertia':'Initial uniform inertia',data,'timeS',k,'Time (s)','Moment of inertia (kg m²)'));const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
   if(topic==='profile'){
    curves=fuelDensityCurves(r,diagnosticState(r));values=[];
    if(!capture){explanation.textContent=`${transient&&transport?'Closed-wall transport at the selected time':'Equilibrium reference, not finite-time separation'}. Compare equal-size volumes: a value of 2 means twice that isotope’s own volume-average density. These curves are not mixture percentages; no local fluid momentum or extraction solution.`;
@@ -478,7 +478,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    }
   }
   if(topic==='cut'){curves=(['lightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,r.cuts,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Light purity',r.collection.innerLightPurity,''],['Light recovery',r.collection.lightRecovery,''],['Heavy outer purity',r.collection.outerHeavyPurity,'']];}
-  if(topic==='cut'&&transient&&transport){const sample=sampleFuelTransport(transport!,elapsed),data=r.cuts.map(p=>({radiusFraction:p.radiusFraction,...fuelTransportCollection(sample.lightMass,sample.heavyMass,c.lightFraction,p.radiusFraction)}));curves=(['innerLightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,data,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Current light purity',sample.collection.innerLightPurity,''],['Current light recovery',sample.collection.lightRecovery,''],['Current outer heavy purity',sample.collection.outerHeavyPurity,'']];if(!capture)explanation.textContent='Current closed-wall inventory at the shared time. Cuts partition inventory; no extraction flow is solved.';}
+  if(topic==='cut'&&transient&&transport){const sample=sampleFuelTransport(transport,elapsed),data=r.cuts.map(p=>({radiusFraction:p.radiusFraction,...fuelTransportCollection(sample.lightMass,sample.heavyMass,c.lightFraction,p.radiusFraction)}));curves=(['innerLightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,data,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Current light purity',sample.collection.innerLightPurity,''],['Current light recovery',sample.collection.lightRecovery,''],['Current outer heavy purity',sample.collection.outerHeavyPurity,'']];if(!capture)explanation.textContent='Current closed-wall inventory at the shared time. Cuts partition inventory; no extraction flow is solved.';}
   if(topic==='cascade'){curves=(['purity','recovery'] as const).map(k=>curve(k,r.cascades,'stages',k,'Ideal stages','Fraction'));values=[['Product light purity',r.cascade.productLightPurity,''],['Light recovery',r.cascade.lightRecovery,''],['Internal circulation / feed',r.cascade.circulationPerFeed,''],['Worst species balance',Math.max(Math.abs(r.cascade.lightBalance),Math.abs(r.cascade.heavyBalance)),'']];}
   if(topic==='pump'){curves=r.pumping.species.map(s=>({label:s.name,x:[0,1,2],y:[s.upstreamPa,s.axisPa,s.wallPa],xLabel:'0 upstream · 1 axis · 2 outer outlet',yLabel:'Partial pressure (Pa)'}));values=[['Effective inlet speed',r.pumping.effectiveSpeedM3S,'m³/s'],['Without rotation',r.pumping.nonrotatingSpeedM3S,'m³/s'],['Heavy / light pumping speed',r.pumping.heavyLightSpeedRatio,''],['Outer outlet light fraction',r.pumping.outerLightFraction,''],['Gas load',r.pumping.gasLoadPaM3S,'Pa m³/s'],['Ideal turnover',r.pumping.turnoverS,'s']];}
   if(topic==='field'){const scan=Array.from({length:40},(_,i)=>({field:.05+i*.05,power:m.ohmicW*(c.magneticT/(.05+i*.05))**2}));curves=[curve('Matched torque · resistive only',scan,'field','power','Magnetic field (T)','Ohmic power (W)')];values=[['Applied torque',m.torque,'N m']];}
@@ -494,7 +494,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(topic==='composition')for(const readout of plotHost.querySelectorAll<HTMLElement>('.plot-readout'))readout.hidden=true;
   refreshComposition();if(dirty||updating)learning.setPending();else learning.update(r,diagnosticState(r),topic);
  }
- exportButton.addEventListener('click',async()=>{
+ exportButton.addEventListener('click',()=>{void (async()=>{
   if(disposed||!latest||exportButton.disabled)return;
   cancelExport();const accepted=latest,id=revision,preparation=new AbortController(),gzip=!!accepted.result.transport?.timeControl,previousStatus=status.textContent;
   exportController=preparation;exportButton.disabled=true;
@@ -512,7 +512,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }finally{
    if(exportController===preparation){exportController=null;exportButton.textContent='Export';exportButton.disabled=disposed||dirty||latest!==accepted||id!==revision;}
   }
- });
+ })();});
  function captureRun({validate=true}:{validate?:boolean}={}):FuelRunState{
   if(validate&&(dirty||updating||!latest))throw new Error('Wait for an accepted centrifuge run before sharing.');
   return {initialCurrentA:operatingConfig?.currentA??read().currentA,events:structuredClone(currentEvents),mode:motionMode.value as FuelRunState['mode'],timeS:['spin','transport'].includes(motionMode.value)?elapsed:0};

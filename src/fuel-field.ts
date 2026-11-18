@@ -17,7 +17,7 @@ function bounded(value: number,min: number,max: number,name: string){
 // Keep the displayed finite-volume reconstruction right-continuous at that edge.
 function cellAt(radiusM: number,R: number,n: number){const q=(radiusM/R)**2*n,edge=Math.round(q);return Math.min(n-1,Math.floor(Math.abs(q-edge)<=8*n*Number.EPSILON?edge:q));}
 export function validateProfiles(profiles: readonly FuelProfile[],R: number){
- if(!Array.isArray(profiles)||profiles.length<2||profiles[0].radiusM!==0||Math.abs(profiles.at(-1)!.radiusM-R)>R*1e-10||profiles.some((p,i)=>!Number.isFinite(p.radiusM)||p.radiusM<0||p.radiusM>R||i>0&&p.radiusM<=profiles[i-1].radiusM||!Number.isFinite(p.lightDensityRatio)||p.lightDensityRatio<0||!Number.isFinite(p.heavyDensityRatio)||p.heavyDensityRatio<0))throw new RangeError('A nonnegative radial density profile spanning the gas radius is required.');
+ if(!Array.isArray(profiles as unknown)||profiles.length<2||profiles[0].radiusM!==0||Math.abs(profiles.at(-1)!.radiusM-R)>R*1e-10||profiles.some((p,i)=>!Number.isFinite(p.radiusM)||p.radiusM<0||p.radiusM>R||i>0&&p.radiusM<=profiles[i-1].radiusM||!Number.isFinite(p.lightDensityRatio)||p.lightDensityRatio<0||!Number.isFinite(p.heavyDensityRatio)||p.heavyDensityRatio<0))throw new RangeError('A nonnegative radial density profile spanning the gas radius is required.');
 }
 
 /** Preserve transport's cellwise volume density; interpolate equilibrium reference samples only. */

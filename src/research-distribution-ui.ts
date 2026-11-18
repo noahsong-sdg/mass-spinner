@@ -33,7 +33,7 @@ export function setupResearchDistributions(fetcher=fetch){
    status.textContent=`Saved positive-mixture marginals · ${caseId}, step ${step}. Physical entropy gate: ${selected.case.gates.physicalEntropy}; integration: ${selected.state.physicalEntropy.quadratureGate}. Integration sensitivity is an estimate, not a confidence interval or proof of an H theorem. Qualification withheld.`;
   }catch(error:unknown){renderPlots(plots,[]);status.textContent=error instanceof Error?error.message:String(error);}
  }
- button.addEventListener('click',async()=>{
+ button.addEventListener('click',()=>{void (async()=>{
   if(pending)return;button.disabled=true;status.textContent='Loading saved arrays…';
   pending=(async()=>{
    try{
@@ -44,7 +44,7 @@ export function setupResearchDistributions(fetcher=fetch){
    }catch(error:unknown){packet=null;renderPlots(plots,[]);status.textContent=error instanceof Error?error.message:String(error);button.disabled=false;}
    finally{pending=null;}
   })();await pending;
- });
+ })();});
  axis.addEventListener('change',update);
  comparison.addEventListener('change',renderGates);
  return {element:root,update(id:string,savedStep:number){caseId=id;step=savedStep;update();}};
