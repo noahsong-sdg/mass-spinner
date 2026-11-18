@@ -18,6 +18,8 @@ test('heat and collection illustrations explain direction and inventory with acc
  await page.goto('/tutorial-04.html#sample');const cut=page.locator('[data-collection-example]'),radius=cut.getByRole('slider');
  await expect(radius).toBeEnabled();await radius.press('Home');
  await expect(cut.locator('[data-cut-purity]')).toHaveText('undefined');await expect(cut.locator('[data-cut-recovery]')).toHaveText('0.0%');
+ await radius.press('ArrowRight');await expect(cut.locator('[data-cut-light]')).toHaveText('<0.1');await expect(cut.locator('[data-cut-heavy]')).toHaveText('<0.1');
+ await expect(cut.locator('[data-cut-recovery]')).toHaveText('<0.1%');await expect(cut.locator('[data-cut-purity]')).not.toHaveText('undefined');
  await radius.press('End');await expect(cut.locator('[data-cut-purity]')).toHaveText('50.0%');await expect(cut.locator('[data-cut-recovery]')).toHaveText('100.0%');
  for(let i=0;i<35;i++)await radius.press('ArrowLeft');await expect(radius).toHaveValue('65');
  await expect(cut.locator('[data-cut-purity]')).not.toHaveText('50.0%');

@@ -44,17 +44,18 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  if(collection){
   const samples=JSON.parse(collection.dataset.cutValues!) as [number,number,number|null,number|null][];
   const radius=collection.querySelector<HTMLInputElement>('#example-cut-radius')!;
-  const percent=(value:number|null)=>value===null?'undefined':`${(value*100).toFixed(1)}%`;
+  const amount=(value:number)=>value>0&&value<.1?'<0.1':value.toFixed(1);
+  const percent=(value:number|null)=>value===null?'undefined':`${amount(value*100)}%`;
   radius.disabled=false;radius.addEventListener('input',()=>{
    const index=radius.valueAsNumber,r=index/100,[light,heavy,purity,recovery]=samples[index];
    collection.querySelector('[data-cut-radius-label]')!.textContent=`${r.toFixed(2)} R`;
    for(const circle of collection.querySelectorAll('[data-cut-area],[data-cut-boundary]'))circle.setAttribute('r',String(110*r));
    for(const dot of collection.querySelectorAll<SVGElement>('[data-cut-particle]'))dot.classList.toggle('cut-outside',Number(dot.dataset.cutParticle)>r);
-   collection.querySelector('[data-cut-light]')!.textContent=light.toFixed(1);collection.querySelector('[data-cut-heavy]')!.textContent=heavy.toFixed(1);
+   collection.querySelector('[data-cut-light]')!.textContent=amount(light);collection.querySelector('[data-cut-heavy]')!.textContent=amount(heavy);
    collection.querySelector<HTMLElement>('[data-cut-light-bar]')!.style.transform=`scaleX(${light/50})`;
    collection.querySelector<HTMLElement>('[data-cut-heavy-bar]')!.style.transform=`scaleX(${heavy/50})`;
    collection.querySelector('[data-cut-purity]')!.textContent=percent(purity);collection.querySelector('[data-cut-recovery]')!.textContent=percent(recovery);
-   collection.querySelector('[data-cut-reading]')!.textContent=index===0?'Empty cut: no sample, so purity is undefined.':index===100?'Whole vessel: purity equals the 50% feed; all light inventory is kept.':`Keep ${light.toFixed(1)} light + ${heavy.toFixed(1)} heavy units: ${percent(purity)} purity, ${percent(recovery)} light recovery.`;
+   collection.querySelector('[data-cut-reading]')!.textContent=index===0?'Empty cut: no sample, so purity is undefined.':index===100?'Whole vessel: purity equals the 50% feed; all light inventory is kept.':`Keep ${amount(light)} light + ${amount(heavy)} heavy units: ${percent(purity)} purity, ${percent(recovery)} light recovery.`;
   });
  }
  const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');

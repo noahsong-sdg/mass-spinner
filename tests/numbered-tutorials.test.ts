@@ -120,13 +120,13 @@ test('the radius control updates the whole inner volume, counts, purity and reco
  const dom=reader('04');t.after(()=>dom.window.close());const doc=dom.window.document,figure=doc.querySelector<HTMLElement>('[data-collection-example]')!;
  const input=figure.querySelector<HTMLInputElement>('input[type=range]')!;assert.equal(input.disabled,true);setupGuideReader(dom.window);assert.equal(input.disabled,false);
  const samples=JSON.parse(figure.dataset.cutValues!) as [number,number,number|null,number][];
- for(const index of [0,25,65,100,0]){
+ for(const index of [0,1,25,65,100,0]){
   input.value=String(index);input.dispatchEvent(new dom.window.Event('input',{bubbles:true}));
   const [light,heavy,purity,recovery]=samples[index];
   assert.equal(figure.querySelector('[data-cut-area]')!.getAttribute('r'),String(110*index/100));
-  assert.equal(figure.querySelector('[data-cut-light]')!.textContent,light.toFixed(1));assert.equal(figure.querySelector('[data-cut-heavy]')!.textContent,heavy.toFixed(1));
+  assert.equal(figure.querySelector('[data-cut-light]')!.textContent,index===1?'<0.1':light.toFixed(1));assert.equal(figure.querySelector('[data-cut-heavy]')!.textContent,index===1?'<0.1':heavy.toFixed(1));
   assert.equal(figure.querySelector('[data-cut-purity]')!.textContent,purity===null?'undefined':`${(purity*100).toFixed(1)}%`);
-  assert.equal(figure.querySelector('[data-cut-recovery]')!.textContent,`${(recovery*100).toFixed(1)}%`);
+  assert.equal(figure.querySelector('[data-cut-recovery]')!.textContent,index===1?'<0.1%':`${(recovery*100).toFixed(1)}%`);
   for(const dot of figure.querySelectorAll<SVGElement>('[data-cut-particle]'))assert.equal(dot.classList.contains('cut-outside'),Number(dot.dataset.cutParticle)>index/100);
   assert.equal(figure.querySelector('[data-cut-reading]')!.getAttribute('aria-live'),'polite');
  }
