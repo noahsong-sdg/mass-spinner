@@ -18,7 +18,8 @@ is **not a reconstruction** of Marathon’s proprietary apparatus.
 Follow one chain: **rotation sorts masses → electrical drive creates rotation
 → losses and heating limit it → time and collection determine the sample**.
 Use Coupled separation and four plots: Composition, Ion–neutral spin-up,
-Drive & work, and Purity & recovery. [Every menu option is explained below](#views).
+Drive & work, and Purity & recovery. [Every menu option is explained below](#views);
+[the reading plan](#path) lists later topics.
 The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduces ions and neutrals;
 the separate [Start here walkthrough](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
 lets you try the controls alongside this explanation.
