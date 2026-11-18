@@ -54,8 +54,9 @@ def produce(destination):
         manifest = {"schemaVersion": 1, "sources": identity,
                     "files": {name: sha(work / name) for name in ("diagnosis.json", "comparison.png")}}
         (work / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
-        if destination.exists():
-            raise ValueError("Existing result directory must be inspected before explicit regeneration")
+        if destination.is_dir() and not destination.is_symlink():
+            # Snakemake creates output parents; rmdir refuses nonempty evidence.
+            destination.rmdir()
         shutil.move(work, destination)
     admit(destination)
 

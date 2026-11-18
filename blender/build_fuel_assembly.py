@@ -37,10 +37,10 @@ modules = []
 def module(name, anchor, kind='radius'):
     obj = bpy.data.objects.new(name, None)
     bpy.context.collection.objects.link(obj)
-    obj['assemblyModule'] = True
+    obj['assemblyModule'] = 1
     obj['anchorFraction'] = anchor
     obj['scaleMode'] = kind
-    obj['coilPack'] = name == 'Solenoid pack'
+    obj['coilPack'] = int(name == 'Solenoid pack')
     obj['referenceRadiusM'] = R
     obj['referenceLengthM'] = L
     modules.append(obj)
