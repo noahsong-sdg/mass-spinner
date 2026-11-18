@@ -39,7 +39,7 @@ test('rotation arrows use accepted phases and a shared physical exposure, includ
     close(rotor.userData.angularSpeedRadS,speed);close(rotor.rotation.z,phase%(2*Math.PI));close(rotor.userData.exposureS,.5*state.secondsPerScreenSecond);
     assert.equal(rotor.visible,speed!==0);
     const arc=rotor.children[0] as THREE.Mesh<THREE.BufferGeometry>,a=arc.geometry.getAttribute('position');
-    const last=a.count-2;close(Math.atan2(a.getY(last),a.getX(last)),-speed*state.secondsPerScreenSecond*.5);
+    const last=a.count-2,angle=Math.atan2(a.getY(last),a.getX(last));assert.ok(Math.abs(angle+speed*state.secondsPerScreenSecond*.5)<2e-7,'float32 arc matches physical angular exposure');
    }
   }
  }finally{release(motion.group);}

@@ -264,8 +264,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(!latest)return;
   const field=views.state.representation==='field',l=tools?.legend;
   const labels=field?[l?`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`:'Gas cutaway']:[`● ${latest.result.pair.light}`,`● ${latest.result.pair.heavy}`,`○ ions · weighted${['transport','flow'].includes(motionMode.value)?' · rotation averaged':''}`];
+  if(views.state.representation==='both'&&l)labels.push(`Section · ${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`);
   const key=JSON.stringify(labels);if(legend.dataset.key===key)return;legend.dataset.key=key;
-  legend.replaceChildren(...labels.map((text,i)=>{const node=el('span',text);if(field&&l){node.style.borderBottom='3px solid';node.style.borderImage=`linear-gradient(to right,${l.colors.join(',')}) 1`;}else node.className=`fuel-gas-${i}`;return node;}));
+  legend.replaceChildren(...labels.map((text,i)=>{const node=el('span',text);if((field||i===3)&&l){node.style.borderBottom='3px solid';node.style.borderImage=`linear-gradient(to right,${l.colors.join(',')}) 1`;}else node.className=`fuel-gas-${i}`;return node;}));
  }
  async function showBaseline(){
   if(!pinned||!graphics||!active)return;const accepted=pinned;

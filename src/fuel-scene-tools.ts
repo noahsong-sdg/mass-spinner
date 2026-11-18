@@ -27,6 +27,7 @@ function isMesh(node: THREE.Object3D): node is THREE.Mesh<THREE.BufferGeometry,T
 function isLayer(value: string): value is FuelFieldLayer {return Object.hasOwn(LAYERS,value);}
 
 const COLORS=['#d29456','#8db3a6'];
+const DENSITY_COLORS=['#18272e','#d8e6ee'];
 const LAYERS: Record<FuelFieldLayer,{label: string; unit: string}>={composition:{label:'Light fraction',unit:''},enrichment:{label:'Δ light fraction · color clipped at ±0.01',unit:''},density:{label:'Neutral density',unit:'m⁻³'},speed:{label:'Neutral bulk speed',unit:'m/s'},temperature:{label:'Neutral temperature',unit:'K'}};
 const EQUILIBRIUM='Radial equilibrium reference';
 const TRANSIENT='Coupled rotor and radial transport · reflecting wall';
@@ -121,6 +122,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   if(layer==='enrichment'){
    const neutral=new THREE.Color('#69777a');return fraction<.5?low.clone().lerp(neutral,fraction*2):neutral.lerp(high,(fraction-.5)*2);
   }
+  if(layer==='density')return new THREE.Color(DENSITY_COLORS[0]).lerp(new THREE.Color(DENSITY_COLORS[1]),fraction);
   return low.clone().lerp(high,fraction);
  }
  function repaint(){
@@ -186,7 +188,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   for(const {mesh,position} of exploded)mesh.position.copy(position);
  }
  setCut(c.cutFraction);setProbe(.5);setSlice(slice);
- const tools={group,drive,radiusM:R,setProbe,update,setSlice,setLayer,setSpecies,setVolumeVisible,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
+ const tools={group,drive,radiusM:R,setProbe,update,setSlice,setLayer,setSpecies,setVolumeVisible,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:layer==='density'?[...DENSITY_COLORS]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
  const resultTools: typeof tools & {motion?: ReturnType<typeof createFuelMotion>; circuit?: THREE.Group}=tools;
  return resultTools;
 }
