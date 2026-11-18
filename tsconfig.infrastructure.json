@@ -13,6 +13,7 @@
     "scripts/release-manifest.ts",
     "scripts/check-dependencies.ts",
     "scripts/check-gltf.ts",
+    "scripts/export-thermal-toolchain.ts",
     "scripts/gltf-validator.d.ts",
     "playwright.config.ts",
     "e2e/**/*.ts",
