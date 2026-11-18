@@ -1,6 +1,30 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test('heat and collection illustrations explain direction and inventory with accessible working controls',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.goto('/tutorial-03.html#flow');const heat=page.locator('[data-heat-example]');
+ await expect(heat.locator('[data-heat-motion]')).toBeEnabled();
+ await heat.getByRole('button',{name:'Wall hotter',exact:true}).click();await expect(heat).toHaveAttribute('data-case','wall');
+ await expect(heat.locator('[data-heat-reading]')).toContainText('flows inward');
+ await heat.getByRole('button',{name:'Pause motion',exact:true}).click();await expect(heat).toHaveAttribute('data-motion','paused');
+ await info.attach('heat-direction',{body:await heat.screenshot(),contentType:'image/png'});
+ await heat.getByRole('button',{name:'Same temperature',exact:true}).click();await expect(heat.locator('[data-heat-reading]')).toContainText('no conductive heat flow');
+ expect(await heat.locator('.heat-flow:visible').count()).toBe(0);
+ expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+ await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(heat.locator('[data-heat-motion]')).toBeEnabled();
+ await expect(heat).toHaveAttribute('data-motion','paused');await expect(heat.locator('[data-heat-motion]')).toHaveText('Play motion');
+ await page.goto('/tutorial-04.html#sample');const cut=page.locator('[data-collection-example]'),radius=cut.getByRole('slider');
+ await expect(radius).toBeEnabled();await radius.press('Home');
+ await expect(cut.locator('[data-cut-purity]')).toHaveText('undefined');await expect(cut.locator('[data-cut-recovery]')).toHaveText('0.0%');
+ await radius.press('End');await expect(cut.locator('[data-cut-purity]')).toHaveText('50.0%');await expect(cut.locator('[data-cut-recovery]')).toHaveText('100.0%');
+ await radius.fill('65');await expect(cut.locator('[data-cut-purity]')).not.toHaveText('50.0%');
+ await info.attach('collection-cut',{body:await cut.screenshot(),contentType:'image/png'});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);expect(errors).toEqual([]);
+});
+
 test('numbered tutorials 03–06 render independently with readable diagrams, math and mobile navigation',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  for(const part of ['03','04','05','06']){

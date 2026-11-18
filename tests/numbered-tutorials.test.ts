@@ -56,3 +56,76 @@ test('03–06 state the prerequisites and boundaries needed to interpret their e
  assert.match(read('06'),/not a confidence interval/);
  assert.match(read('06'),/not successful device validation/);
 });
+
+function reader(number:string){
+ const tutorial=numberedTutorials.find(part=>part.number===number)!;
+ return new JSDOM(understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${number}.md`,'utf8'),revision,tutorial),{url:`https://example.org/tutorial-${number}.html`});
+}
+
+test('heat-flow examples send energy down every temperature gradient and have no flow at equal temperature',t=>{
+ const dom=reader('03');t.after(()=>dom.window.close());const doc=dom.window.document,figure=doc.querySelector<HTMLElement>('[data-heat-example]')!;
+ assert.equal(figure.dataset.motion,'paused','the unscripted explanation is static');
+ assert.equal(figure.querySelectorAll('button:not([disabled])').length,0);
+ setupGuideReader(dom.window);
+ for(const [name,sign,phrase]of [['gas',1,/flows outward/],['wall',-1,/flows inward/],['equal',0,/no conductive heat flow/]] as const){
+  figure.querySelector<HTMLButtonElement>(`[data-heat-select="${name}"]`)!.click();
+  assert.equal(figure.dataset.case,name);assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
+  assert.match(figure.querySelector('[data-heat-reading]')!.textContent!,phrase);
+  const temperatures=figure.querySelector(`[data-heat-case="${name}"][data-temperatures]`)!.getAttribute('data-temperatures')!.split(',').map(Number);
+  for(let i=1;i<temperatures.length;i++)assert.equal(Math.sign(temperatures[i-1]-temperatures[i]),sign,'q = -k dT/dr for positive conductivity');
+  const flow=figure.querySelector(`.heat-flow[data-heat-case="${name}"]`);
+  if(sign===0)assert.equal(flow,null,'uniform temperature must not suggest heat transfer');
+  else for(const arrow of flow!.querySelectorAll('path')){
+   const [,start,end]=/M(\d+) 262H(\d+)/.exec(arrow.getAttribute('d')!)!;
+   assert.equal(Math.sign(Number(end)-Number(start)),sign);
+  }
+ }
+ assert.match(figure.textContent!,/not heat-flow rate/);assert.match(figure.textContent!,/interface temperature jumps are omitted/);
+});
+
+test('heat motion respects reduced motion and keeps pause independent of the selected explanation',t=>{
+ const dom=reader('03');t.after(()=>dom.window.close());const figure=dom.window.document.querySelector<HTMLElement>('[data-heat-example]')!;
+ Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true})});setupGuideReader(dom.window);
+ const motion=figure.querySelector<HTMLButtonElement>('[data-heat-motion]')!;
+ assert.equal(figure.dataset.motion,'paused');assert.equal(motion.textContent,'Play motion');
+ figure.querySelector<HTMLButtonElement>('[data-heat-select="wall"]')!.click();assert.equal(figure.dataset.motion,'paused');
+ motion.click();assert.equal(figure.dataset.motion,'running');assert.equal(motion.textContent,'Pause motion');
+ motion.click();assert.equal(figure.dataset.motion,'paused');
+});
+
+test('the collection illustration uses cylindrical equilibrium integrals and preserves the full inventory',t=>{
+ const dom=reader('04');t.after(()=>dom.window.close());const figure=dom.window.document.querySelector<HTMLElement>('[data-collection-example]')!;
+ const samples=JSON.parse(figure.dataset.cutValues!) as [number,number,number|null,number][];
+ assert.equal(samples.length,101);assert.deepEqual(samples[0],[0,0,null,0]);assert.deepEqual(samples[100],[50,50,.5,1]);
+ const beta=[20,40].map(m=>m*1.66053906892e-27*1000**2/(2*1.380649e-23*500));
+ for(const [index,[light,heavy,purity,recovery]]of samples.entries()){
+  const r=index/100,expected=beta.map(b=>Math.expm1(b*r*r)/Math.expm1(b));
+  assert.ok(Math.abs(light-50*expected[0])<1e-12);assert.ok(Math.abs(heavy-50*expected[1])<1e-12);
+  assert.ok(Math.abs(recovery-expected[0])<1e-14);
+  if(index>0){assert.ok(Math.abs(purity!-light/(light+heavy))<1e-14);assert.ok(recovery>=samples[index-1][3]);}
+ }
+ for(const [species,className]of ['cut-light','cut-heavy'].entries()){
+  const dots=[...figure.querySelectorAll<SVGElement>(`.${className}`)];assert.equal(dots.length,50);
+  for(const [i,dot]of dots.entries()){
+   const r=Number(dot.dataset.cutParticle),cdf=Math.expm1(beta[species]*r*r)/Math.expm1(beta[species]);
+   assert.ok(Math.abs(cdf-(i+.5)/50)<2e-9,'visual samples follow the same radial inventory, not uniformly spaced radii');
+  }
+ }
+ assert.match(figure.textContent!,/not your run/);assert.match(figure.textContent!,/No extraction flow is solved/);
+});
+
+test('the radius control updates the whole inner volume, counts, purity and recovery, including empty and full cuts',t=>{
+ const dom=reader('04');t.after(()=>dom.window.close());const doc=dom.window.document,figure=doc.querySelector<HTMLElement>('[data-collection-example]')!;
+ const input=figure.querySelector<HTMLInputElement>('input[type=range]')!;assert.equal(input.disabled,true);setupGuideReader(dom.window);assert.equal(input.disabled,false);
+ const samples=JSON.parse(figure.dataset.cutValues!) as [number,number,number|null,number][];
+ for(const index of [0,25,65,100,0]){
+  input.value=String(index);input.dispatchEvent(new dom.window.Event('input',{bubbles:true}));
+  const [light,heavy,purity,recovery]=samples[index];
+  assert.equal(figure.querySelector('[data-cut-area]')!.getAttribute('r'),String(110*index/100));
+  assert.equal(figure.querySelector('[data-cut-light]')!.textContent,light.toFixed(1));assert.equal(figure.querySelector('[data-cut-heavy]')!.textContent,heavy.toFixed(1));
+  assert.equal(figure.querySelector('[data-cut-purity]')!.textContent,purity===null?'undefined':`${(purity*100).toFixed(1)}%`);
+  assert.equal(figure.querySelector('[data-cut-recovery]')!.textContent,`${(recovery*100).toFixed(1)}%`);
+  for(const dot of figure.querySelectorAll<SVGElement>('[data-cut-particle]'))assert.equal(dot.classList.contains('cut-outside'),Number(dot.dataset.cutParticle)>index/100);
+  assert.equal(figure.querySelector('[data-cut-reading]')!.getAttribute('aria-live'),'polite');
+ }
+});

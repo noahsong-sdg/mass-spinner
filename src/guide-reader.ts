@@ -25,6 +25,38 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   density.dataset.case=button.dataset.densitySelect;
   for(const choice of density.querySelectorAll('[data-density-select]'))choice.setAttribute('aria-pressed',String(choice===button));
  });
+ const heat=doc.querySelector<HTMLElement>('[data-heat-example]');
+ if(heat){
+  const descriptions={gas:'Temperature falls outward → conductive heat flows outward.',wall:'Temperature rises outward → conductive heat flows inward.',equal:'No temperature gradient → no conductive heat flow.'};
+  for(const button of heat.querySelectorAll<HTMLButtonElement>('[data-heat-select]')){
+   button.disabled=false;button.addEventListener('click',()=>{
+    const choice=button.dataset.heatSelect as keyof typeof descriptions;heat.dataset.case=choice;
+    for(const candidate of heat.querySelectorAll('[data-heat-select]'))candidate.setAttribute('aria-pressed',String(candidate===button));
+    heat.querySelector('[data-heat-reading]')!.textContent=descriptions[choice];
+   });
+  }
+  const motion=heat.querySelector<HTMLButtonElement>('[data-heat-motion]')!;
+  const pause=(paused:boolean)=>{heat.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play motion':'Pause motion';};
+  pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);motion.disabled=false;
+  motion.addEventListener('click',()=>pause(heat.dataset.motion!=='paused'));
+ }
+ const collection=doc.querySelector<HTMLElement>('[data-collection-example]');
+ if(collection){
+  const samples=JSON.parse(collection.dataset.cutValues!) as [number,number,number|null,number|null][];
+  const radius=collection.querySelector<HTMLInputElement>('#example-cut-radius')!;
+  const percent=(value:number|null)=>value===null?'undefined':`${(value*100).toFixed(1)}%`;
+  radius.disabled=false;radius.addEventListener('input',()=>{
+   const index=radius.valueAsNumber,r=index/100,[light,heavy,purity,recovery]=samples[index];
+   collection.querySelector('[data-cut-radius-label]')!.textContent=`${r.toFixed(2)} R`;
+   for(const circle of collection.querySelectorAll('[data-cut-area],[data-cut-boundary]'))circle.setAttribute('r',String(110*r));
+   for(const dot of collection.querySelectorAll<SVGElement>('[data-cut-particle]'))dot.classList.toggle('cut-outside',Number(dot.dataset.cutParticle)>r);
+   collection.querySelector('[data-cut-light]')!.textContent=light.toFixed(1);collection.querySelector('[data-cut-heavy]')!.textContent=heavy.toFixed(1);
+   collection.querySelector<HTMLElement>('[data-cut-light-bar]')!.style.transform=`scaleX(${light/50})`;
+   collection.querySelector<HTMLElement>('[data-cut-heavy-bar]')!.style.transform=`scaleX(${heavy/50})`;
+   collection.querySelector('[data-cut-purity]')!.textContent=percent(purity);collection.querySelector('[data-cut-recovery]')!.textContent=percent(recovery);
+   collection.querySelector('[data-cut-reading]')!.textContent=index===0?'Empty cut: no sample, so purity is undefined.':index===100?'Whole vessel: purity equals the 50% feed; all light inventory is kept.':`Keep ${light.toFixed(1)} light + ${heavy.toFixed(1)} heavy units: ${percent(purity)} purity, ${percent(recovery)} light recovery.`;
+  });
+ }
  const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');
  if(drive){
   const descriptions={

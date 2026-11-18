@@ -1,18 +1,8 @@
+import {tsImport} from 'tsx/esm/api';
+const {equilibriumPoint}=/** @type {typeof import('../src/fuel-equilibrium.js')} */(await tsImport('../src/fuel-equilibrium.ts',import.meta.url));
+
 /** @type {Record<string,{title:string,description:string,caption:string,body:string}>} */
 const drawings={
- 'heat-flow':{title:'Heat travels through the gas and wall',description:'Gas, inner liner, outer liner and coolant exchange heat. A temperature difference drives heat toward the cooler region; the sign can reverse. These are schematic regions, not computed temperatures.',caption:'Radial heat path, schematic. Read Temperature profile for your calculated cell temperatures.',body:`
- <text x="165" y="28" text-anchor="middle">from the gas toward the outside →</text>
- <rect x="12" y="72" width="82" height="96" rx="5"/><text x="53" y="115" text-anchor="middle">gas</text><text x="53" y="139" text-anchor="middle">cells</text>
- <rect x="126" y="72" width="78" height="96" rx="5"/><text x="165" y="115" text-anchor="middle">tungsten</text><text x="165" y="139" text-anchor="middle">liner</text>
- <rect x="236" y="72" width="82" height="96" rx="5"/><text x="277" y="126" text-anchor="middle">coolant</text>
- <path d="M100 120H120M210 120H230" class="force" marker-start="url(#heat-flow-force)" marker-end="url(#heat-flow-force)"/>
- <text x="165" y="207" text-anchor="middle">heat flows from hotter to cooler</text>
- <text x="165" y="237" text-anchor="middle">direction depends on temperature</text>`},
- 'inventory-cut':{title:'Purity and recovery count different things',description:'Purity is light atoms collected divided by all atoms collected. Recovery is light atoms collected divided by all light atoms in the vessel. A radius cut includes its whole interior, not a thin shell.',caption:'Count definitions, not computed output. A small enriched sample can still have low recovery.',body:`
- <rect x="15" y="25" width="300" height="85" rx="5"/><text x="165" y="49" text-anchor="middle">Purity · how enriched is the sample?</text>
- <text x="165" y="76" text-anchor="middle">light atoms collected</text><path d="M65 83H265" class="current"/><text x="165" y="102" text-anchor="middle">all atoms collected</text>
- <rect x="15" y="140" width="300" height="85" rx="5"/><text x="165" y="164" text-anchor="middle">Recovery · how much did you keep?</text>
- <text x="165" y="191" text-anchor="middle">light atoms collected</text><path d="M65 198H265" class="current"/><text x="165" y="217" text-anchor="middle">all light atoms in the vessel</text>`},
  'fuel-cycle':{title:'Breeding fuel and recovering fuel are separate jobs',description:'A blanket can produce tritium from lithium and neutrons. A D–T fusion plasma consumes some injected fuel; exhaust processing returns unburned fuel. Lithium isotope enrichment is upstream of breeding, not fusion inside the centrifuge.',caption:'Process sketch. No breeding rate, return efficiency or plant inventory is predicted by these arrows.',body:`
  <rect x="15" y="15" width="300" height="45" rx="5"/><text x="165" y="43" text-anchor="middle">lithium + neutrons → tritium</text>
  <path d="M74 62V96" class="force" marker-end="url(#fuel-cycle-force)"/><text x="88" y="83">make-up fuel</text>
@@ -36,6 +26,71 @@ const drawings={
  <text x="165" y="255" text-anchor="middle">slip + drag convert rotation to heat</text>
  <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">cooling out</text>`},
 };
+function heatDiagram(){
+ /** @type {[string,string,number[]][]} */
+ const cases=[['gas','Gas hotter',[900,800,600,400,300]],['wall','Wall hotter',[300,400,600,800,900]],['equal','Same temperature',[600,600,600,600,600]]];
+ const positions=[50,150,230,280,320];
+ return `<figure class="heat-example" data-heat-example data-case="gas" data-motion="paused">
+ <div class="drive-heading"><span>The slope tells you which way heat flows.</span><button type="button" data-heat-motion disabled>Play motion</button></div>
+ <div class="diagram-cases" role="group" aria-label="Compare heat-flow directions">${cases.map(([id,label])=>`<button type="button" data-heat-select="${id}" aria-pressed="${id==='gas'}" disabled>${label}</button>`).join('')}</div>
+ <svg viewBox="0 0 360 330" role="img" aria-labelledby="heat-title heat-description">
+ <title id="heat-title">Conduction follows the temperature gradient, not a fixed outward direction</title>
+ <desc id="heat-description">A temperature profile above a radial strip of gas, liner and coolant. A hot gas sends heat outward; a hotter wall and exterior send heat inward. At uniform temperature there is no conductive heat flux. These are prescribed example profiles, not a thermal simulation.</desc>
+ <defs><marker id="heat-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e4ac76"/></marker></defs>
+ <text x="16" y="20">Temperature (K)</text>
+ ${[300,600,900].map(T=>`<path d="M50 ${200-(T-300)/5}H320" class="diagram-grid"/><text x="42" y="${204-(T-300)/5}" text-anchor="end">${T}</text>`).join('')}
+ <path d="M50 65V200H320" class="diagram-axis"/>
+ <path d="M230 60V282M280 60V282" class="diagram-grid"/>
+ ${cases.map(([id,,temperatures])=>`<g data-heat-case="${id}" data-temperatures="${temperatures.join(',')}"><path d="${temperatures.map((T,i)=>`${i?'L':'M'}${positions[i]} ${200-(T-300)/5}`).join(' ')}" class="heat-profile"/></g>`).join('')}
+ <text x="50" y="222">axis</text><text x="320" y="222" text-anchor="end">outward →</text>
+ <rect x="50" y="242" width="180" height="40"/><rect x="230" y="242" width="50" height="40" class="heat-wall"/><rect x="280" y="242" width="40" height="40"/>
+ ${cases.filter(([id])=>id!=='equal').map(([id])=>`<g data-heat-case="${id}" class="heat-flow" data-direction="${id==='gas'?1:-1}"><path d="M${id==='gas'?'80 262H210':'210 262H80'}" marker-end="url(#heat-arrow)"/><path d="M${id==='gas'?'240 262H310':'310 262H240'}" marker-end="url(#heat-arrow)"/><circle class="heat-packet" cx="${id==='gas'?90:185}" cy="262" r="4"/></g>`).join('')}
+ <text x="140" y="308" text-anchor="middle">gas</text><text x="255" y="308" text-anchor="middle">liner</text><text x="311" y="308" text-anchor="middle">coolant</text>
+ </svg>
+ <p class="diagram-reading" data-heat-reading aria-live="polite">Temperature falls outward → conductive heat flows outward.</p>
+ <figcaption>Prescribed profiles, not your run. Motion shows direction, not heat-flow rate. Gas motion and interface temperature jumps are omitted.</figcaption></figure>`;
+}
+
+function collectionDiagram(){
+ // Normalize a generic ideal mixture to 100 inventory units; reuse the qualified
+ // cylindrical integrals, including their r dr volume weighting and empty cut.
+ const config={massesU:/** @type {[number,number]} */([20,40]),edgeSpeedMS:1000,temperatureK:500,radiusM:.1,lengthM:.5,totalParticles:100,lightFraction:.5,cutFraction:.65};
+ /** @type {[number,number,number|null,number|null][]} */
+ const samples=Array.from({length:101},(_,i)=>{const s=equilibriumPoint(config,i/100).inner;return [s.speciesParticles[0],s.speciesParticles[1],s.lightPurity,s.lightRecovery];});
+ const selected=samples[65];
+ /** @param {number|null} value */
+ const percent=value=>value===null?'undefined':`${(value*100).toFixed(1)}%`;
+ // Equal-weight quantile samples depict the same radial inventories. They are
+ // visual samples, not discrete atom counts or simulated particle trajectories.
+ const particles=[0,1].flatMap(species=>Array.from({length:50},(_,i)=>{
+  let lo=0,hi=1;const target=(i+.5)/50;
+  for(let j=0;j<32;j++){const mid=(lo+hi)/2;if(equilibriumPoint(config,mid).inner.speciesFractions[species]<target)lo=mid;else hi=mid;}
+  const r=(lo+hi)/2,angle=i*2.399963229728653+species*1.1;
+  return `<circle data-cut-particle="${r}" cx="${140+110*r*Math.cos(angle)}" cy="${140+110*r*Math.sin(angle)}" r="3" class="cut-${species?'heavy':'light'}${r>.65?' cut-outside':''}"/>`;
+ })).join('');
+ return `<figure class="collection-example" data-collection-example data-cut-values='${JSON.stringify(samples)}'>
+ <strong>A purer sample can leave most of your light atoms behind.</strong>
+ <label class="cut-control" for="example-cut-radius">Keep everything inside <output for="example-cut-radius" data-cut-radius-label>0.65 R</output></label>
+ <input id="example-cut-radius" type="range" min="0" max="100" step="1" value="65" aria-label="Example collection radius, percent of vessel radius" disabled>
+ <div class="collection-views"><svg viewBox="0 0 280 280" role="img" aria-labelledby="cut-title cut-description">
+ <title id="cut-title">A radius cut keeps an entire inner cylinder, not a thin ring</title>
+ <desc id="cut-description">End view of an ideal rotating mixture. Green markers show lighter atoms and amber markers heavier atoms; positions are equal-weight samples of the computed radial distributions. Markers outside the cut fade. Readouts integrate the density continuously, rather than counting these markers.</desc>
+ <circle cx="140" cy="140" r="110" class="cut-vessel"/>
+ <circle data-cut-area cx="140" cy="140" r="71.5" class="cut-area"/>
+ ${particles}
+ <circle data-cut-boundary cx="140" cy="140" r="71.5" class="cut-boundary"/>
+ <text x="140" y="19" text-anchor="middle">End view · whole inner volume</text>
+ <text x="140" y="269" text-anchor="middle">Dimmed = outside the cut</text>
+ </svg><div class="cut-inventory">
+ <p class="cut-key"><span>● Light · 20 u</span><span>● Heavy · 40 u</span></p>
+ <p>Of 50 light units, keep <b data-cut-light>${selected[0].toFixed(1)}</b></p><div class="cut-bar"><span data-cut-light-bar style="transform:scaleX(${selected[0]/50})"></span></div>
+ <p>Of 50 heavy units, keep <b data-cut-heavy>${selected[1].toFixed(1)}</b></p><div class="cut-bar cut-heavy-bar"><span data-cut-heavy-bar style="transform:scaleX(${selected[1]/50})"></span></div>
+ <dl><div><dt>Purity · light share of sample</dt><dd data-cut-purity>${percent(selected[2])}</dd></div><div><dt>Recovery · light inventory kept</dt><dd data-cut-recovery>${percent(selected[3])}</dd></div></dl>
+ </div></div>
+ <p class="diagram-reading" data-cut-reading aria-live="polite">Move the cut toward the wall to keep more of both species.</p>
+ <figcaption>Ideal equilibrium example, not your run; computed with the simulator’s equilibrium reference. Uniform 500 K, rigid rotation at 1,000 m/s at the wall, 50% light feed. Inventories normalized to 100 units; dots are distribution samples. No extraction flow is solved.</figcaption></figure>`;
+}
+
 function densityDiagram(){
  /** @type {[string,string,number,number][]} */
  const cases=[['rest','No spin',0,500],['spin','Spinning',1500,500],['warm','Warmer',1500,1000]];
@@ -112,6 +167,8 @@ function driveDiagram(){
 }
 /** @param {string} id */
 export function guideDiagram(id){
+ if(id==='heat-flow')return heatDiagram();
+ if(id==='inventory-cut')return collectionDiagram();
  if(id==='drive')return driveDiagram();
  if(id==='composition')return densityDiagram();
  const d=drawings[id];if(!d)throw new Error(`Unknown guide diagram: ${id}`);
