@@ -89,7 +89,7 @@ test('human scale: person comparison and return to apparatus close-up',async({pa
  await expect(button).toHaveAttribute('aria-pressed','false');await button.click();
  await expect(button).toHaveAttribute('aria-pressed','true');await expect(button).toHaveText('5′9″ · 1.75 m');
  await expect.poll(async()=>{
-  const frame=await page.locator('#fuel-render > .apparatus-frame').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
+  const frame=await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
   return frame&&panel?frame.y+frame.height<=panel.y:false;
  }).toBe(true);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);

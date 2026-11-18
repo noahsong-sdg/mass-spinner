@@ -15,3 +15,10 @@ numerical surfaces, solver inputs and model dimensions.
 
 This compares the geometry actually displayed. Illustrative assemblies remain
 illustrative: a precisely sized person does not establish as-built machine sizes.
+
+Verification: candidate `812dcf6` passed 1,483 Node tests, 20 Python tests,
+all four TypeScript checks, lint, production build and asset/release checks.
+Manual browser checks passed on desktop and 390 × 844, including return to
+close-up and an eight-pixel gap above playback. Full browser CI passed 15/20:
+two scale checks used an ambiguous selector (corrected to exclude the hidden
+baseline); three export-wait timeouts remain unqualified by this change.
