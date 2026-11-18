@@ -16,7 +16,7 @@ Power is joules per second. Torque τ times ion angular speed Ωᵢ gives mechan
 
 **Try one controlled comparison:**
 
-1. Choose Centrifuge → Coupled separation, Isotope separation and an atomic lithium feed. Turn thermal evolution off. Rewind, set current to 0.03 A, then New run to clear earlier power switches. Wait for the accepted result.
+1. Choose Centrifuge → Coupled separation, Isotope separation and an atomic lithium feed. Turn thermal evolution off. Set Run duration to 1 s. Rewind, set current to 0.03 A, then New run to clear earlier power switches. Wait for the accepted result.
 2. Select 0.1 s, record speeds and temperature, then pin A. Enable **Evolve gas & liner temperature** in Controls. Wait and return to 0.1 s.
 3. Compare Temperature and Drive & work. Curve heights in Drive & work are joules; slopes are watts. Temperature can rise or fall depending on heating and cooling. Check the signed budget before explaining the difference.
 

@@ -43,6 +43,7 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
 test('03–06 state the prerequisites and boundaries needed to interpret their experiments',()=>{
  const read=(part:string)=>readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${part}.md`,'utf8');
  assert.match(read('03'),/New run to clear earlier power switches/);
+ assert.match(read('03'),/Set Run duration to 1 s/);
  assert.match(read('03'),/Both species share one local temperature/);
  assert.match(read('04'),/0.08 means 8%, not 0.08%/);
  assert.match(read('04'),/higher required upstream pressure/);

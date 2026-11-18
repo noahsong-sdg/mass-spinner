@@ -19,7 +19,7 @@ for(const name of ['index.html','laurelin.html','guide.html','tutorial-03.html',
 for(const [,font]of readFileSync('release/guide-katex/katex.min.css','utf8').matchAll(/url\((fonts\/[^)]+)\)/g))
  assert.ok(existsSync(`release/guide-katex/${font}`),`Missing guide math font: ${font}`);
 const sourceRevisions=new Set();
-for(const name of ['guide.html','qualification.html','how-it-works.html']){
+for(const name of ['guide.html','tutorial-03.html','tutorial-04.html','tutorial-05.html','tutorial-06.html','qualification.html','how-it-works.html']){
  const links=[...readFileSync(`release/${name}`,'utf8').matchAll(/href="https:\/\/github.com\/noahsong-sdg\/mass-spinner\/blob\/([^"?#]+)"/g)];
  assert.ok(links.length,`Missing source links in ${name}`);
  for(const [,path]of links){
