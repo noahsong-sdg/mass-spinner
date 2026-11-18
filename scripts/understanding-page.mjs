@@ -40,5 +40,5 @@ export function understandingPage(markdown,revision){
  <script type="module" src="/guide-reader.js"></script></head><body>
  <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/start.html">Start here →</a><a href="/learn.html">Investigations →</a><a class="standalone" href="/guide.html" target="_blank" rel="noopener">Read on its own ↗</a></header>
  <nav aria-label="Guide chapters"><label for="guide-chapter">Jump to</label><select id="guide-chapter">${guideTopics.map(topic=>`<option value="${topic.id}">${escape(topic.heading.replace(/^\d\. /,''))}</option>`).join('')}</select></nav>
- <main>${parser.parse(markdown)}</main><footer><a href="/start.html">Try the seven experiments ↗</a></footer></body></html>`;
+ <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/start.html">Try the seven experiments ↗</a></footer></body></html>`;
 }
