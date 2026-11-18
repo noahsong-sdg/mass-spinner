@@ -28,7 +28,7 @@ test('all four modes expose different, correctly scoped diagnostic geometry',()=
   motion.group.getObjectByName('Gas mode diagnostics')!.traverse(node=>{
    if(node instanceof THREE.Mesh||node instanceof THREE.Line){assert.equal(node.renderOrder,3);for(const material of [node.material].flat()){assert.equal(material.depthTest,false);assert.equal(material.depthWrite,false);assert.equal(material.transparent,true);}}
   });
-  motion.group.traverse(node=>{if(node instanceof THREE.Points&&node.name!=='Schematic throughput packets')assert.equal(node.material.depthTest,true,'particle depth still conveys the chamber volume');});
+  motion.group.traverse(node=>{if(node instanceof THREE.Points&&node.name!=='Schematic throughput packets')for(const material of [node.material].flat())assert.equal(material.depthTest,true,'particle depth still conveys the chamber volume');});
   assert.equal(JSON.stringify(result),before,'graphics never alter accepted physics');
  }finally{release(motion.group);}
 });
