@@ -53,6 +53,16 @@ test('heat refinement retains legible fixed-size animated direction glyphs with 
  f.inset.update(selected({heatGeometry:{filmThicknessM:film,backingThicknessM:back,
   faceDepthM:[...Array.from({length:n+1},(_,i)=>film*i/n),...Array.from({length:n},(_,i)=>film+back*(i+1)/n)]},
   heatFacesWM2:Array.from({length:2*n+1},(_,i)=>i===0?0:1000)}));
+ for(const strip of f.inset.element.querySelectorAll<SVGRectElement>('rect')){
+  const x=Number(strip.getAttribute('x')),width=Number(strip.getAttribute('width'));
+  const bars=f.bars().filter(b=>Number(b.getAttribute('x1'))>=x&&Number(b.getAttribute('x1'))<=x+width);
+  assert.equal(bars.length,n+1,'every refined physical face remains represented');
+  for(let i=1;i<bars.length;i++){
+   const gap=Number(bars[i].getAttribute('x1'))-Number(bars[i-1].getAttribute('x1'));
+   const halfWidths=(Number(bars[i].getAttribute('stroke-width'))+Number(bars[i-1].getAttribute('stroke-width')))/2;
+   assert.ok(halfWidths<gap,'neighboring translucent bars cannot overlap and brighten the same flux under refinement');
+  }
+ }
  assert.ok(f.paths().length>0&&f.paths().length<=20,'refinement cannot create an unreadable stack of chevrons');
  for(const p of f.paths())sameExtent(p,coarse);
  const before=f.paths()[0].getAttribute('d');f.inset.tick(.5);assert.notEqual(f.paths()[0].getAttribute('d'),before);
