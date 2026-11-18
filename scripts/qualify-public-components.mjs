@@ -8,10 +8,16 @@ import {solveFuelCurrent} from '../src/fuel-current.ts';
 import {createFuelLiner,initialFuelLinerEnergy} from '../src/fuel-thermal.ts';
 import {advanceFuelMixtureThermal} from '../src/fuel-gas-thermal.ts';
 
-const sum=a=>a.reduce((s,v)=>s+v,0),hash=b=>createHash('sha256').update(b).digest('hex');
+/** @typedef {{id:string,gate:string,actual:number,expected:number,error:number,limit:number,pass:boolean}} Metric */
+/** @typedef {{schemaVersion:number,kind:string,experimentallyQualified:boolean,numericallyVerified:boolean,rows:Metric[],sourceFiles:Record<string,string>,sourceHash:string}} ComponentReceipt */
+/** @param {number[]} a */
+const sum=a=>a.reduce((s,v)=>s+v,0);
+/** @param {string|Uint8Array} b */
+const hash=b=>createHash('sha256').update(b).digest('hex');
 const sources=['scripts/qualify-public-components.mjs','src/fuel-centrifuge.ts','src/fuel-transport.ts',
  'src/fuel-current.ts','src/fuel-thermal.ts','src/fuel-gas-thermal.ts','src/fuel-gas.ts',
  'src/fuel-momentum.ts','package-lock.json'];
+/** @type {Record<string,readonly [number,number]>} */
 const gates={rotor:[1e-12,1e-9],inventory:[3e-11,0],distribution:[3e-11,0],current:[0,1e-9],charge:[1e-8,0],
  power:[1e-7,0],heat:[2e-12,2e-10],temperature:[2e-8,2e-10]};
 const expectedIds=[
@@ -21,7 +27,9 @@ const expectedIds=[
  ...[400,1000,1700].flatMap(t=>[-.001,.001].flatMap(q=>['face','left','right','energy'].map(key=>`heat/${t}/${q}/${key}`))),
 ];
 
-/** Recompute numeric gates; neither a producer flag nor NaN is acceptance evidence. */
+/** Recompute numeric gates; neither a producer flag nor NaN is acceptance evidence.
+ * @param {ComponentReceipt} report
+ */
 export function auditPublicComponents(report){
  if(report?.schemaVersion!==1||report.kind!=='public-component-verification'||report.experimentallyQualified!==false||
   report.rows?.length!==expectedIds.length)throw new Error('Wrong component receipt identity, scope or case count.');
@@ -45,7 +53,9 @@ export function auditPublicComponents(report){
 }
 
 export function qualifyPublicComponents(){
+ /** @type {Metric[]} */
  const rows=[];
+ /** @param {string} id @param {string} gate @param {number} actual @param {number} expected */
  const metric=(id,gate,actual,expected)=>{
   const [absolute,relative]=gates[gate],error=Math.abs(actual-expected),limit=absolute+relative*Math.abs(expected);
   rows.push({id,gate,actual,expected,error,limit,pass:Number.isFinite(error)&&error<=limit});
