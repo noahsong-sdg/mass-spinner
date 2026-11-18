@@ -29,6 +29,6 @@ test('bulk samples fill azimuth and axial position without an artificial helical
     'equal species inventories must not draw coincident samples that conceal one color');
   }
  }finally{motion.group.traverse(node=>{
-  if(node instanceof THREE.Points||node instanceof THREE.LineSegments){node.geometry.dispose();node.material.dispose();}
+  if(node instanceof THREE.Points||node instanceof THREE.LineSegments){node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])material.dispose();}
  });}
 });
