@@ -11,7 +11,7 @@ function fixture(t:any){
  const {window}=new JSDOM(readFileSync('index.html','utf8'),{url:'https://example.com/?level=2'});
  const previous=Object.getOwnPropertyDescriptor(globalThis,'document');
  Object.defineProperty(globalThis,'document',{value:window.document,configurable:true});
- const states:any[]=[];const models=setupMarathonModels({onState:state=>states.push(state),
+ const states:any[]=[],sources:any[]=[];const models=setupMarathonModels({onState:state=>states.push(state),onSource:source=>sources.push(source),
   requestTarget:async(request:any)=>simulateCoupledTarget(request.beam,request.config)});
  const node=(id:string)=>window.document.getElementById(id)! as any;
  const change=(id:string,value:string|number,event='input')=>{
@@ -22,8 +22,17 @@ function fixture(t:any){
   if(previous)Object.defineProperty(globalThis,'document',previous);else Reflect.deleteProperty(globalThis,'document');
  });
  change('fusion-exposureS',1);change('coupled-cooldownS',1);change('coupled-depthCells',4,'change');
- return {window,models,states,node,change};
+ return {window,models,states,sources,node,change};
 }
+
+test('material failure clears live source motion while explicit initial-source mode restores it',async t=>{
+ const f=fixture(t);assert.ok(f.sources.at(-1));
+ f.change('fusion-stopping-model','geant4-bragg','change');await settle();assert.ok(f.models.target.result);
+ f.change('coupled-cooldownS',-1);assert.equal(f.models.target.status.phase,'invalid');
+ assert.equal(f.states.at(-1),null);assert.equal(f.sources.at(-1),null);
+ f.change('fusion-stopping-model','linear','change');assert.ok(f.sources.at(-1));
+ assert.equal(f.sources.at(-1).config.stoppingModel,'linear');
+});
 
 test('production Marathon orchestration preserves one exposure and explicit material admission',async t=>{
  const f=fixture(t),doc=f.window.document;

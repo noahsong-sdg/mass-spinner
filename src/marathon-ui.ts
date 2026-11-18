@@ -19,6 +19,7 @@ export interface MarathonModelsOptions {
 
 /** One source, one evolving target, and explicitly separate frozen references. */
 export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=>{},transformPlots,requestTarget}:MarathonModelsOptions={}){
+ let currentSource:Parameters<NonNullable<FusionLaboratoryOptions['onUpdate']>>[0]=null;
  const node=(id:string)=>document.getElementById(id)!;
  const geometry=setupNeutronGeometry(node('neutron-geometry'));
  const exposure=setupTargetExposure(node('target-exposure'),{active:false});
@@ -41,6 +42,8 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=
    select.dispatchEvent(new select.ownerDocument.defaultView!.Event('change',{bubbles:true}));
   },
   onUpdate(value){
+   // An invalid material run must not leave its previous process animation visible.
+   if(!value)onSource(currentSource?.config.stoppingModel==='geant4-bragg'?null:currentSource);
    neutrons.update(value?{sourceRateS:value.state.neutronRateS,sourceEnergyMeV:value.state.neutronMeanEnergyMeV}:null);
    onState(value);
   },
@@ -51,6 +54,7 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=
  });
  setupFiniteFilmReference(target.referenceHost,finiteFilmReference);
  const source=setupFusionLaboratory({exposureHost:target.durationHost,onUpdate(value){
+  currentSource=value;
   onSource(value);
   geometry.update(value);exposure.update(value);loading.update(value);target.update(value);
  }});
