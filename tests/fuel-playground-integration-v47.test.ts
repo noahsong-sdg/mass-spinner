@@ -11,6 +11,7 @@ import {sampleFuelField} from '../src/fuel-field.js';
 import {publicInputCoverage} from '../src/public-sensitivity.ts';
 import {setupPlaygroundGuide} from '../src/playground-guide.js';
 import {fuelMotionState} from '../src/fuel-motion.js';
+import {setupPreciseControls} from '../src/precise-controls.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const clone=<T>(value:T):T=>structuredClone(value);
@@ -415,10 +416,13 @@ test('operating-map cells apply real accepted physical configurations and recomp
  close(result.config.currentA,.2*Number(point.dataset.iy)/6);assert.equal(f.viewers[0].asset.model.result,result);
  for(const path of f.ui.nodes.plots.querySelectorAll('path'))assert.doesNotMatch(path.getAttribute('d')??'',/NaN|Infinity/);
 });
-test('exact contextual physical entry preserves decimal text and bypasses native range-step rounding',async t=>{
- const f=fixture(t);await f.start();f.viewers[0].options.onSelect('coils');
- const input=f.ui.nodes.inspect.querySelector('input[type=number]') as HTMLInputElement;input.focus();input.value='0.5300';input.dispatchEvent(new f.window.Event('input',{bubbles:true}));
- assert.equal(input.value,'0.5300');assert.equal(f.node('fuel-magneticT').step,'any');await f.ui.run();assert.equal(f.ui.latest.result.config.magneticT,.53);
+test('precise Controls entry preserves decimal drafts and bypasses native range-step rounding',async t=>{
+ const f=fixture(t);await f.start();setupPreciseControls(f.window.document);
+ const box=f.node('fuel-magneticT').closest('.control') as HTMLElement;
+ box.querySelector('output')!.click();const input=box.querySelector('input[type=number]') as HTMLInputElement;
+ input.value='0.5300';assert.equal(input.value,'0.5300');
+ input.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Enter',bubbles:true}));
+ assert.equal(f.node('fuel-magneticT').step,'any');await f.ui.run();assert.equal(f.ui.latest.result.config.magneticT,.53);
 });
 test('Clear remains safe after a failed current computation with a pinned accepted baseline',async t=>{
  const f=fixture(t);await f.start();const errors:any[]=[];f.window.addEventListener('error',event=>errors.push(event.error));
