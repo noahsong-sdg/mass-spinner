@@ -1,0 +1,3 @@
+FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+ENV PLAYWRIGHT_BROWSERS_PATH=/opt/playwright
+RUN npm exec --yes --package=@playwright/test@1.65.1 -- playwright install --with-deps chromium && chmod -R a+rX /opt/playwright

@@ -1,0 +1,8 @@
+{
+  "GHSA-fc5q-39xc-vjpf": {
+    "package": "picomatch",
+    "expires": "2026-12-01",
+    "reason": "No patched npm version published as of 2026-11-17. Development-only glob parser through Vite/ESLint; deployed static application does not import it. Patterns are repository configuration, not visitor input. CI runs in bounded, credential-free containers. This remains an upstream vulnerability, not a remediation claim.",
+    "upstream": "https://github.com/advisories/GHSA-fc5q-39xc-vjpf"
+  }
+}

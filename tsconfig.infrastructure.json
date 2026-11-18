@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "types": [
+      "node",
+      "vite/client"
+    ]
+  },
+  "include": [
+    "scripts/release-manifest.ts",
+    "scripts/check-dependencies.ts",
+    "scripts/check-gltf.ts",
+    "scripts/gltf-validator.d.ts",
+    "playwright.config.ts",
+    "e2e/**/*.ts",
+    "tests/release-manifest.test.ts",
+    "tests/dependency-review.test.ts",
+    "tests/scenario-schema.test.ts",
+    "tests/worker-client.test.ts"
+  ]
+}
