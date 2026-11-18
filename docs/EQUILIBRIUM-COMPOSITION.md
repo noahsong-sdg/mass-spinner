@@ -86,10 +86,4 @@ JSON exports retain SI inputs/results, curves, counts, scenarios and source hash
 [NIST 2022 CODATA](https://physics.nist.gov/cuu/pdf/JPCRD2022CODATA.pdf) supplies k and u;
 constant, mass and model uncertainties are not propagated.
 
-SI regressions allow two smallest binary64 values for subnormal rounding.
-Scaled counts can remain nonzero when fractions underflow. Finite screens do
-not prove all inputs or plot interpolation. Input scenarios sample speed/temperature
-endpoints, not confidence bounds or guaranteed extrema; invalid combinations
-are rejected, not clamped. JSON exports retain inputs, SI outputs and source hashes.
-
 [Open the calculator beside the simulator](/?level=2&guide=physics&topic=bias&try=equilibrium)
