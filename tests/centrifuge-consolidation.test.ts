@@ -53,7 +53,7 @@ for(const mobile of [false,true])test(`centrifuge-first navigation preserves adv
  assert.equal(f.ui.level,'2','choosing another Marathon system from an advanced playground enters its scene');
  assert.equal(f.contexts.at(-1).marathon,'source');
  f.advanced.open=true;const escape=new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true});
- f.advanced.querySelector('summary')!.dispatchEvent(escape);assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.apparatus);
+ f.advanced.querySelector('summary')!.dispatchEvent(escape);assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.advanced.querySelector('summary'));
 });
 
 test('same-level apparatus changes preserve compatible panels and close unavailable target controls',t=>{
