@@ -25,7 +25,7 @@ test('each experiment motivates a prediction, preserves optional feedback and as
   assert.ok(e.baseline&&e.predict&&e.steps.length&&e.observe&&e.explain&&e.boundary&&e.transfer[0]&&e.transfer[1]);
   const dom=new JSDOM(learningPages()[`learn-${module.id}.html`]);const section=dom.window.document.querySelector(`[aria-labelledby="${e.id}"]`)!;
   assert.match(section.textContent!,/Baseline\./);assert.match(section.textContent!,/Predict\./);
-  for(const detail of section.querySelectorAll('details[data-learning-explanation],.learning-transfer details'))assert.equal(detail.open,false,'answers must not be compulsory or pre-revealed without enhancement');
+  for(const detail of section.querySelectorAll<HTMLDetailsElement>('details[data-learning-explanation],.learning-transfer details'))assert.equal(detail.open,false,'answers must not be compulsory or pre-revealed without enhancement');
   dom.window.close();
  }
 });
