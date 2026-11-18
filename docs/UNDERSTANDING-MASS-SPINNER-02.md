@@ -303,8 +303,8 @@ machine or lithium enrichment. Use this model to explore conditional mechanisms.
 |---|---|
 | Equilibrium reference | Ideal distribution at the bulk reference’s endpoint speed; not the coupled end state. |
 | Coupled separation | Coupled history with fast turns averaged into rings; weighted populations, not particle orbits. |
-| Coupled spin-up | The same coupled history slowed to reveal turning; transport still evolves. |
-| Flow · reference | Reference rotation and schematic pumping packets; no solved inlet/outlet flow or rotor feedback. |
+| Coupled spin-up | The same accepted coupled solution, slowed to reveal turning; transport still evolves. |
+| Flow · reference | Schematic reference, not solved inlet/outlet fluid motion or rotor feedback. |
 
 The time slider selects physical seconds; “1 s screen = …” is playback scale.
 Read m/s rather than counting turns. Play/Pause and Rewind navigate history;
@@ -322,7 +322,7 @@ profiles show the selected instant; parameter scans compare hypothetical setting
 | Drive & work | Mechanical energies (J); slopes are power (W). Ohmic power is separate. [§5](#energy) |
 | Temperature | Mean gas/liner temperatures; evolution requires thermal physics enabled. [§5](#energy) |
 | Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. Planned guide 03. |
-| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy at the same shared temperature. Planned guide 03. |
+| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. Planned guide 03. |
 | Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. Planned guide 03. |
 | Angular momentum | Drive impulse minus wall impulse; internal collision transfer cancels. [§4](#momentum) |
 | Gas inertia | Mass redistribution’s effect on resistance to turning, versus time. [§4](#momentum) |
@@ -330,7 +330,7 @@ profiles show the selected instant; parameter scans compare hypothetical setting
 | Purity & recovery | Inventory fractions versus cut radius, not throughput. [§6](#collection) |
 | Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. Planned guide 04. |
 | Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. Planned guide 04. |
-| Magnetic leverage | Resistive heat at matched reference torque: current changes with B. Planned guide 03. |
+| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. Planned guide 03. |
 | D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. Planned guide 05. |
 | Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. Planned guide 03. |
 

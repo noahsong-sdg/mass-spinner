@@ -57,8 +57,8 @@ P_L=\frac{xF_L}{xF_L+(1-x)F_H},\qquad \mathcal R_L=F_L.
 The outer heavy product uses 1 − F and exchanged species. Inner light inventory
 is NxFL; both cuts conserve each species. Empty-cut purity and absent-species
 recovery are undefined (“—”). Counts are ensemble expectations, not integers.
-These closed-equilibrium partitions predict no settling time, extraction rate,
-throughput or power.
+These closed-equilibrium partitions are not continuous extraction yields.
+They predict no settling time, throughput or power.
 
 ## Numerical qualification
 
