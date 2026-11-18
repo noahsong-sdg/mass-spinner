@@ -46,7 +46,7 @@ test('selected thermal arrows reproduce Fourier/contact/Robin fluxes, including 
  assert.ok(Math.abs(s.heatFacesWM2[2]-(600-450)/(filmHalf+c.contactResistanceM2KPerW+backHalf))<1e-8);
  assert.ok(Math.abs(s.heatFacesWM2.at(-1)!-(400-c.coolantK)/(backHalf+1/c.backHeatTransferWM2K))<1e-8);
  snapshot.state.temperatureK=[200,210,220,230];assert.ok(targetMotionState(snapshot).heatFacesWM2.at(-1)!<0,'hot coolant heats the target');
- snapshot.result.config.backHeatTransferWM2K=0;assert.equal(targetMotionState(snapshot).heatFacesWM2.at(-1),0,'adiabatic back has no coolant heat');
+ snapshot.result.config.backHeatTransferWM2K=0;assert.ok(targetMotionState(snapshot).heatFacesWM2.at(-1)===0,'adiabatic back has no coolant heat');
 });
 
 function fixture(t:TestContext,reducedMotion=false){
