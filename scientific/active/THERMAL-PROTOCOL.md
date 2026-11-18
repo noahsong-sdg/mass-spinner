@@ -1,0 +1,13 @@
+# Bounded thermal toolchain comparison
+
+This is an additional numerical reference, not a replacement for the existing spatial/mixture convergence studies. The live thermal kernel uses finite-volume enthalpy and implicit time evolution; SciPy independently integrates the corresponding temperature equations with Radau and BDF. No coefficients are fitted to either output.
+
+**Fixed case.** Radius 0.12 m, length 0.8 m, tungsten thickness 0.005 m; gas heat capacity 0.5 J/K; initial gas/wall 400/1200 K; gas/liner and coolant conductances 100 W/K; coolant 500 K; gas heating 10 W; duration 0.05 s. Tungsten density is 19,250 kg/m³. Both codes use the same published NIST heat-capacity/enthalpy relation, Tolias conductivity, annular volumes and logarithmic cell-centre/face resistances. Those formulae are implemented separately in Python.
+
+**Refinement.** Meshes 8, 16 and 32 wall cells. For each mesh, 512, 1024 and 2048 equal live steps, sampled at the same 33 physical times. SciPy uses rtol 1e-10 and atol 1e-9. Radau and BDF must agree within 1e-4 K. Each reference must satisfy normalized total energy residual ≤1e-8. Live temperatures must remain finite in the 300–1900 K material domain. The maximum live/reference temperature difference must contract at every timestep refinement and the finest difference must be below 1% of the imposed 800 K difference. This separate imposed-gradient normalization is explicitly stated; it does not reinterpret another campaign's excursion-based gates.
+
+The root source/lock hashes travel with the live export and are rechecked before comparison. The Python report adds its own source/environment hashes and actual NumPy/SciPy versions. CI records container identity and runtime inventory. Uniform insulated equilibrium and the enthalpy derivative are independent regression checks.
+
+**Observed first executed comparison:** [run 44208897304](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44208897304), source `468ebb9`. Errors contract approximately `2.843 → 1.428 → 0.7153 K` across all three meshes. The worst finest discrepancy is 0.08941% of the imposed difference; Radau/BDF differ by at most 3.06e-6 K and normalized reference energy residual is below 8.88e-12. This initial run preceded the added source-manifest admission; later runs must supply it.
+
+This checks time evolution on matching grids. Similar results across these meshes do not establish a spatial-convergence order. The case has one lumped gas temperature and no species redistribution, rotor work, electrical feedback, accommodation uncertainty, plasma kinetics or experimental data. Those qualifications remain separate.
