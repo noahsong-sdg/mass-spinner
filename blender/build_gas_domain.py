@@ -23,8 +23,8 @@ for i in range(segments + 1):
 for i in range(segments):
     for j in range(4):
         a, b = 4*i+j, 4*i+(j+1) % 4
-        faces.append((a, b, b+4, a+4))
-faces.extend([(3, 2, 1, 0), (4*segments, 4*segments+1, 4*segments+2, 4*segments+3)])
+        faces.append((a+4, b+4, b, a))
+faces.extend([(0, 1, 2, 3), (4*segments+3, 4*segments+2, 4*segments+1, 4*segments)])
 mesh = bpy.data.meshes.new('Gas cell topology')
 mesh.from_pydata(vertices, [], faces)
 mesh.update()
