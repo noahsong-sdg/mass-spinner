@@ -16,7 +16,7 @@ function fixture(t:any,hold=false,graphicsReady=Promise.resolve()){
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const solve=(r:any)=>{const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};};
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
-  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
+  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'},...['coils','liner','light-outlet','pump','feed'].map(id=>({id,name:id,purpose:'Fixture component',material:'Illustrative',basis:'Not engineering CAD'}))],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};
@@ -145,4 +145,46 @@ test('spatial mixture controls reach the solver and accepted gas profiles follow
   assert.equal(f.requests.length,solvedCount,'Locating an accepted profile must not recompute physics.');
  }
  const accepted=f.ui.latest,count=f.requests.length;f.change('fuel-thermal-gasConductivityWMK','');await f.ui.run();assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);
+});
+
+test('Inspect edits reach the real solver and response buttons show the accepted endpoint without another solve',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-component','coils','change');
+ const before=f.ui.latest.result.mechanics.torque,button=f.ui.nodes.inspect.querySelector('[data-show-response]');
+ f.change('fuel-component-magneticT',.75);assert.equal(button.disabled,true);
+ assert.match(f.ui.nodes.inspect.textContent,/Recomputing/);await f.ui.run();
+ assert.equal(f.ui.latest.result.config.magneticT,.75);assert.equal(f.node('fuel-magneticT').value,'0.75');
+ assert.ok(Math.abs(f.ui.latest.result.mechanics.torque/before-1.5)<1e-12);
+ const count=f.requests.length;button.click();assert.equal(f.requests.length,count);
+ assert.equal(f.node('fuel-plot').value,'spin');assert.equal(Number(f.node('fuel-motion-time').value),1);
+ assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/Ions: 1,/);
+});
+
+test('liner response distinguishes a fixed bath from enabled thermal evolution and marks the exact reference temperature',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-component','liner','change');
+ f.change('fuel-component-linerK',1200);await f.ui.run();
+ assert.equal(f.ui.latest.result.transport.operation.thermal.enabled,false);
+ assert.match(f.ui.nodes.inspect.textContent,/not the fixed gas temperature/);
+ f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'lithium');
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/1200,/);
+ assert.equal(f.ui.latest.result.config.gasK,500);
+ f.change('fuel-currentA',0);f.change('fuel-linerK',600);f.change('fuel-durationS',.01);
+ f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
+ f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'thermal');
+ assert.ok(f.ui.latest.result.transport.snapshots.at(-1).thermal.gasK>500);
+ assert.equal(Number(f.node('fuel-motion-time').value),.01);assert.match(f.ui.nodes.plots.textContent,/Neutral gas/);
+});
+
+test('reference scans mark exact selected inputs while the closed-vessel gas remains unaffected by cut and pump controls',async t=>{
+ const f=fixture(t);await f.start();
+ const trajectory=f.ui.latest.result.transport.snapshots.map(s=>({time:s.timeS,light:s.lightMass,heavy:s.heavyMass,omega:s.neutralRadS}));
+ f.change('fuel-cutFraction',.633);f.change('fuel-burnFraction',.037);await f.ui.run();
+ for(const [plot,x]of [['cut','0.633'],['inventory','0.037'],['cascade','5'],['field','0.5']]){
+  f.change('fuel-plot',plot,'change');assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,new RegExp(`${x.replace('.','\\.')},`),plot);
+ }
+ f.change('fuel-component','pump','change');f.change('fuel-component-pumpSpeedM3S',Math.log10(.04));await f.ui.run();
+ assert.deepEqual(f.ui.latest.result.transport.snapshots.map(s=>({time:s.timeS,light:s.lightMass,heavy:s.heavyMass,omega:s.neutralRadS})),trajectory);
+ assert.ok(Math.abs(f.ui.latest.result.config.pumpSpeedM3S-.04)<1e-15);
+ f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');
+ assert.match(f.ui.nodes.inspect.textContent,/Pumping reference only/);
 });

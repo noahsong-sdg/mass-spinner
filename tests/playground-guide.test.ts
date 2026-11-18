@@ -22,7 +22,7 @@ test('a visible start point opens optional guidance without opening or rebuildin
  assert.equal(f.node('window-guide').hidden,false);assert.equal(f.node('window-controls').hidden,true);
  assert.equal(f.node('field'),input);assert.equal(input.value,'.17');
  assert.equal(f.node('guide-step').options.length,7);
- assert.match(f.node('window-guide').textContent,/nothing is reset/);
+ assert.match(f.node('window-guide').textContent,/Your inputs stay as they are/);
  f.step(5);f.node('window-guide').querySelector('.world-close').click();f.node('start-here').click();
  assert.equal(f.node('guide-step').value,'5','reopening must keep the reader’s place');
 });
@@ -94,4 +94,24 @@ test('only messages from the same-origin guide frame can operate native controls
  send('https://example.org',frame.contentWindow,'current');assert.equal(f.node('window-controls').hidden,false);
  f.workspace.open('guide');send('https://example.org',frame.contentWindow,'','mass-spinner:guide-close');
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('start-here'));
+});
+
+test('the current experiment rewinds before editing and compares endpoints without silently changing inputs',t=>{
+ const f=fixture(t);f.workspace.open('guide');f.step(1);
+ const input=f.doc.createElement('input');input.id='fuel-currentA';input.value='.07';f.node('window-controls').querySelector('.world-window-body').append(input);
+ const make=(tag:string,id:string,value:string)=>{const n=f.doc.createElement(tag) as any;n.id=id;n.value=value;f.doc.body.append(n);return n;};
+ const mode=make('select','fuel-motion-mode','');mode.innerHTML='<option value="equilibrium">Reference</option><option value="transport">Coupled</option>';mode.value='equilibrium';
+ const time=make('input','fuel-motion-time','.6');time.type='range';time.min='0';time.max='1';time.step='any';time.value='.6';
+ const plot=make('select','fuel-plot','');plot.innerHTML='<option value="composition">Composition</option><option value="spin">Spin-up</option>';
+ const plotHost=make('div','fuel-plots','');plotHost.innerHTML='<div class="live-plots"></div>';
+ make('details','fuel-learning-comparisons','');make('button','fuel-export','');
+ let restarted=0;make('button','fuel-new-run','').addEventListener('click',()=>restarted++);
+ const seen:number[]=[];time.addEventListener('input',()=>seen.push(Number(time.value)));
+ f.doc.querySelector<HTMLButtonElement>('.guide-actions button')!.click();
+ assert.equal(mode.value,'transport');assert.equal(time.value,'0');assert.equal(input.value,'.07');
+ assert.equal(restarted,1,'preparation explicitly clears old drive history through New run');
+ assert.equal(f.doc.activeElement,input);assert.equal(f.node('window-controls').hidden,false);
+ assert.match(f.node('window-guide').textContent,/0 A.*0.03 A/);
+ f.doc.querySelectorAll<HTMLButtonElement>('.guide-actions button')[1].click();
+ assert.equal(time.value,'1');assert.equal(plot.value,'spin');assert.deepEqual(seen,[0,1]);
 });

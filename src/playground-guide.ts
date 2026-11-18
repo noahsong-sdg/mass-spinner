@@ -5,10 +5,10 @@ const steps=[
   do:'Drag the apparatus to orbit; scroll or pinch to zoom. Open the cutaway, then click a component to inspect its role and material.',
   notice:'Current J crosses the axial magnetic field B. The J × B force turns the ions; collisions transfer rotation to neutral atoms.',
   note:'Colors are diagnostics, not a photograph of glowing plasma. Tracers represent populations, not every atom.',actions:[['look','Show gas & drive'],['coils','Inspect the coils']]},
- {title:'Watch the gas spin up',intro:'Ions are charged atoms. Neutrals have no net charge: the drive reaches them through collisions.',
-  do:'Replay spin-up. Follow the time cursor on the Ions and Neutrals speed curves. Pause or drag the playback slider to inspect a moment.',
-  notice:'With the default drive, ions lead and neutrals follow. Friction transfers angular momentum; wall drag removes it.',
-  note:'Fast rotation is averaged so the full run plays in seconds; use the physical-time readout. Try a small change to Radial discharge current: after time zero, even while paused, it inserts a drive step at that time. New run starts from rest with the displayed settings.',actions:[['spin','Replay spin-up'],['current','Adjust drive current']]},
+ {title:'Change current; watch rotation',intro:'Does turning up the electrical drive actually spin the gas faster? Change one input and compare at the same physical time.',
+  do:'1. Press Start from rest & edit current. Set Radial discharge current to 0 A. Wait for Updating to finish, then Show end-of-run speeds. 2. Press Start from rest & edit current again. Set 0.03 A, wait, then show the speeds again. Keep the other inputs unchanged.',
+  notice:'At 0 A, a run from rest stays at zero rotation. At 0.03 A, ions turn and collisions accelerate the neutrals. Read the Ions and Neutrals values below the plot; a higher speed does not mean temperature has risen.',
+  note:'Each preparation starts from rest and clears earlier drive steps, keeping your other inputs. A current edit later in a run instead inserts a drive step; cutting power then does not instantly stop moving gas. On a phone, reopen Start here to continue these instructions.',actions:[['currentExperiment','Start from rest & edit current'],['endSpin','Show end-of-run speeds']]},
  {title:'Find the lighter atoms',intro:'A radial composition profile answers: “At this distance from the axis, what percentage of the atoms are each species?”',
   do:'Show the end of the computed trajectory. Compare the axis and wall probes, or click the gas cutaway to choose your own radius.',
   notice:'In a rotating mixture, both species favor the wall. The heavier species favors it more, so the lighter species can be enriched toward the axis. Compare against the feed percentage, not 50%.',
@@ -34,7 +34,7 @@ const steps=[
 export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
 type GuideElements={
  'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
- 'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;
+ 'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;'fuel-new-run':HTMLButtonElement;
  'fuel-equilibrium-calculator':HTMLDetailsElement;'fuel-locate-plot':HTMLButtonElement;'start-here':HTMLButtonElement;
  'fuel-view-representation':HTMLSelectElement;'fuel-view-cutaway':HTMLInputElement;'fuel-view-drive':HTMLSelectElement;
  'fuel-component':HTMLSelectElement;'fuel-view-radius':HTMLInputElement;'fuel-compare-temperature':HTMLButtonElement;'fuel-compare-rotation':HTMLButtonElement;
@@ -46,7 +46,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  const win=doc.defaultView!;
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
- const intro=el('p','Seven small experiments. Your current settings stay as they are; nothing is reset.'),label=el('label','Explore'),choice=el('select');
+ const intro=el('p','Seven small experiments. Your inputs stay as they are; Start from rest explicitly restarts the run.'),label=el('label','Explore'),choice=el('select');
  choice.id='guide-step';label.htmlFor=choice.id;
  steps.forEach((step,i)=>{const option=el('option',`${i+1}. ${step.title}`);option.value=String(i);choice.append(option);});
  const reading=el('div'),content=el('div'),status=el('p'),nav=el('nav'),previous=el('button','Back'),next=el('button','Next →'),leave=el('button','Scene');reading.className='guide-reading';
@@ -103,7 +103,11 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   // Pending/failed results must not be presented as a fresh experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
-  if(key==='look'){
+  if(key==='currentExperiment'){
+   index=1;render();showExplore();set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
+  }else if(key==='endSpin'){
+   endpoint();plot('spin');
+  }else if(key==='look'){
    set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);
   }else if(key==='coils'){
    set('fuel-component','coils');open('inspect',true);

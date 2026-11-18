@@ -39,6 +39,16 @@ The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduces ions and neutrals.
 The [seven experiments](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=2&guide=start)
 are a quick way to try the controls alongside this explanation.
 
+### First, change one real control
+
+Open **Start here → Experiments → Change current; watch rotation**.
+
+1. Press **Start from rest & edit current**. Move **Radial discharge current** to **0 A**. Wait for the new result, then press **Show end-of-run speeds** in the guide. Both populations stay at rest: there is no drive torque.
+2. Press **Start from rest & edit current** again. Set **0.03 A**, wait, then show the endpoint again. With the other inputs unchanged, ions now rotate and collisions spin up the neutrals.
+3. Compare at the same physical time. A faster rotation is a speed change, not a temperature measurement. With thermal evolution off, the gas temperature stays fixed.
+
+Starting from rest matters: changing current after time zero normally adds a drive step to gas that is already moving. The preparation button restarts the run and clears earlier drive steps; it does not change your other physical inputs. Click a control's numeric readout to enter an exact value. On a phone, reopen **Start here** to return to these instructions.
+
 ## 1. Why does rotation separate masses?
 
 Our counting example tells us what success means, but nothing yet moves one
@@ -515,6 +525,40 @@ horizontal axis is not playback time.
 | Magnetic leverage | At the same reference torque, could stronger B reduce resistive heat? Current is adjusted in this hypothetical scan: it is not a fixed-current experiment. Planned guide 03. |
 | D–T fuel inventory | How much unburned fuel is tied up by an assumed burn fraction and processing delay? Separate steady fuel-loop scenario; not a burn prediction from the lithium centrifuge. Planned guide 05. |
 | Lithium vapor & surfaces | How does equilibrium lithium vapor pressure depend on surface temperature? A saturation check, not a condensation rate, surface chemistry calculation or lifetime prediction. Planned guide 03. |
+
+### Which controls actually change physics?
+
+**Controls** and the sliders in **Inspect** share the same physical inputs.
+Selecting a component, changing **View**, or scrubbing time does not rerun the
+solver. Editing a physical input does. An edit can leave the new run paused at
+0 s; use **Play** or the component's response button to see later behavior.
+
+Not every input affects every plot. Some plots scan many possible settings:
+the curve can stay the same while the marker and selected values move.
+
+| Input | What changes; where to look |
+|---|---|
+| Feed; Reference light-species fraction | Species masses and inventories. Look at Composition and Species density. |
+| Axial magnetic field; Radial discharge current | Applied torque and the spin-up trajectory. Look at Ion–neutral spin-up and Drive & work. A late current edit changes drive history; it does not restart the gas. |
+| Initial / bath gas temperature | Initial temperature, gas inventory at prescribed pressure, and separation bias. With thermal evolution off it remains a fixed bath. Look at Composition and Temperature. |
+| Run duration | How far the computed evolution runs. Compare at the same physical time when testing another input. |
+| Ionized number fraction; Ion → neutral collision rate | Driven inertia and ion–neutral momentum transfer. Look at Ion–neutral spin-up. These are assumed inputs, not a solved ionization balance. |
+| Neutral wall drag rate | Momentum lost to the wall. Look at Ion–neutral spin-up and Angular momentum. |
+| Effective perpendicular conductivity | Resistive heat at prescribed current, not a self-consistent discharge current. Look at Drive & work; it heats the gas only with thermal evolution enabled. |
+| Drive annulus inner radius / a | Torque lever arm and resistive path. Look at Ion–neutral spin-up and Drive & work. |
+| Vessel radius; Vessel length; Volume-mean neutral pressure | Geometry, gas inventory, inertia and transport scales. Look at spin-up, density and composition. Decorative bolts and coil turns are not independently solved engineering geometry. |
+| Assumed radial diffusivity | How quickly composition redistributes, not the ideal equilibrium preference. Look at Separation over time. |
+| Inner collection radius / a | Which closed inventory is counted as product. Look at the marker and values in Purity & recovery; the curve scans all cut radii. It does not extract atoms. |
+| Ideal countercurrent stages; Feed stage | Separate ideal cascade calculation and routing overlay. Look at Countercurrent stages. No axial cascade flow feeds back into the gas evolution. |
+| Outer pump speed; Inlet conductance | Separate equilibrium pumping calculation. Look at Differential pumping. These do not generate an open inlet/outlet flow in the closed-vessel evolution. |
+| Initial / reference liner temperature | With thermal evolution on: initial wall temperature. With it off: lithium saturation-pressure reference; the gas does not heat. Inspect's response button chooses the appropriate plot. |
+| Reference-only liner → gas conductance | Reference heat demand, not an evolved temperature. It is disabled when the thermal model supplies its own heat-transfer parameters. |
+| Fusion thermal power; Single-pass tritium burn fraction; Exhaust processing time | Separate fuel-loop inventory accounting. Look at D–T fuel inventory. These do not change the lithium centrifuge dynamics. |
+| Lithium-seeded CIV reference | Only the reported critical-ionization-velocity reference. It does not add a species, solve ionization, limit speed or change rotation. |
+| Evolve gas & liner temperature; Liner model; Gas model | Enable the thermal calculation and choose lumped or spatial heat transport. Look at Temperature and Temperature profile. Off means the bath remains fixed. |
+| Liner heat capacity; Gas–liner conductance; Liner cooling conductance; Coolant temperature | Thermal energy storage, exchange and cooling when enabled. Spatial tungsten computes its own heat capacity from material data. |
+| Liner thickness; Gas conductivity; Resolution | Enabled spatial models only: wall heat flow, gas heat flow, or numerical resolution. Increasing resolution is not a physical change; it tests numerical sensitivity. |
+| View; Gas view; Physical time | Display, diagnostic/reference choice and time sampling only. They do not change the accepted physical inputs. |
 
 ## Where do we go after this guide?
 

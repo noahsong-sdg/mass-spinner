@@ -83,6 +83,7 @@ const topics: Record<string,readonly[string,string]>={
  inventory:['D–T fuel inventory','Separate steady fuel-loop scenario: unburned exhaust = burn×(1/β−1). Delay multiplies processing inventory. This is not a prediction of burn fraction from this centrifuge.'],
  lithium:['Lithium vapor & surfaces','NIST/Hicks equilibrium vapor-pressure fit at the chosen surface temperature. Saturation is a phase-equilibrium diagnostic, not a condensation rate or proof of operating lifetime. No extrapolation beyond 298.14–1599.99 K.'],
 };
+const scanInputs:Readonly<Record<string,NumericFuelKey>>={cut:'cutFraction',cascade:'stages',field:'magneticT',inventory:'burnFraction',lithium:'linerK'};
 
 /** Dedicated playground; its physics, controls and geometry do not reuse the beam-target state. */
 async function loadFuelGraphics(){
@@ -111,6 +112,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   for(const [value,text]of options){const option=el('option',text);option.value=value;select.append(option);}box.append(title,select);host.append(box);return select;
  };
  const application=makeSelect(nodes.controls,'fuel-application','Application',[['enrichment','Isotope separation'],['pump','Differential pumping']]);
+ const controlHelp=el('details');controlHelp.id='fuel-control-help';
+ controlHelp.append(el('summary','Which controls change physics?'),el('p','Start with current, magnetic field, gas temperature and duration. These rerun the physical model.'),el('p','View and playback only change how you inspect a computed run. Pumping, stages and fuel inventory are separate reference calculations; they do not feed flow back into the closed vessel.'),el('p','Temperature evolves only when Evolve gas & liner temperature is enabled. Otherwise the gas stays at its bath temperature.'));
+ nodes.controls.prepend(controlHelp);
  const motionMode=makeSelect(motionBar,'fuel-motion-mode','Gas view',[['equilibrium','Equilibrium reference'],['transport','Coupled separation'],['spin','Coupled spin-up'],['flow','Flow · reference']]);
  motionMode.value='transport';
  const play=el('button','Pause'),restart=el('button','Rewind'),clock=el('output'),seek=el('input'),legend=el('span'),power=el('button','Drive on'),newRun=el('button','New run');legend.className='fuel-motion-legend';
@@ -185,6 +189,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
   else{const id={heat:'electrodes',thermal:latest?.result.config.pair==='lithium'?'liner':'vessel',thermalProfile:latest?.result.config.pair==='lithium'?'liner':'vessel',cut:'light-outlet',cascade:'stages',pump:'pump',field:'coils',inventory:'pump',lithium:'liner'}[selector.value];if(id){viewer?.select(id);viewer?.focus?.(id,{animate:true});}}
  });
+ nodes.inspect.append(el('p','Selecting a part highlights it. Its sliders edit the same inputs as Controls.'));
  const inspectSelect=makeSelect(nodes.inspect,'fuel-component','Component',[]),description=el('div'),reset=el('button','Reset 3D view');nodes.inspect.append(reset,description);
  reset.addEventListener('click',()=>viewer?.reset());inspectSelect.addEventListener('change',()=>describe(inspectSelect.value));
  const focus=el('button','Frame component');focus.id='fuel-focus-component';focus.addEventListener('click',()=>viewer?.focus?.(inspectSelect.value,{animate:true}));nodes.inspect.insertBefore(focus,description);
@@ -294,7 +299,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    comparisonLabel.textContent=`${transient?`A pinned · B current · ${fmt(comparison.timeS)} s`:'A/B final references'} · shared SI camera/colors${comparison.sameGeometry?'':' · geometry differs'}${comparison.sameProducingCode?'':' · source identities differ/unavailable'}`;
    baselineViewer?.refresh();
   }
-  if(selector.value!=='composition')plotCursor?.setCursor(transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(selector.value)?elapsed:NaN);
+  const scanInput=scanInputs[selector.value];
+  if(selector.value!=='composition')plotCursor?.setCursor(scanInput?c[scanInput]:transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(selector.value)?elapsed:NaN);
   if(transient&&['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&Math.abs(elapsed-lastProfileTime)>=c.durationS/80){lastProfileTime=elapsed;draw();}
   acceptComparison();
   setStatus(transient?`Closed vessel · ${diagnostic.thermal?'evolving temperature':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
@@ -350,6 +356,10 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   learning.setPending();
  }
  pair.addEventListener('change',changed);application.addEventListener('change',changed);
+ function componentResponse(id:string){
+  if(id==='liner')return latest?.result.transport?.operation?.thermal?.enabled?'thermal':'lithium';
+  return ({coils:'spin',supply:'spin',electrodes:'spin',pump:'pump',feed:'pump','light-outlet':'cut'})[id]??'separation';
+ }
  function describe(id:string,part?:Record<string,unknown>,name?:string,highlight=true){
   const record=graphics?.[1].FUEL_COMPONENTS.find(c=>c.id===id);if(!record)return;
   if(highlight)hasSelection=true;
@@ -364,15 +374,28 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    for(const n of [input,number])n.dataset.key=key;
    const update=(event:Event)=>{const target=event.target as HTMLInputElement;if(target.value===''||!target.checkValidity()){changed();return;}if(target===number&&control.input.dataset.integer!=='true')control.input.step=input.step='any';const value=Number(target.value);control.input.value=String(target===number&&log?Math.log10(value):value);input.value=control.input.value;if(target!==number)number.value=String(control.read());changed({target:control.input},target);};input.addEventListener('input',update);number.addEventListener('input',update);number.addEventListener('change',update);box.className='fuel-view-control';box.append(label,input,number);description.append(box);
   }
+  const effect=el('p');effect.dataset.effect='';description.append(effect);
   const response=el('output');response.dataset.response='';description.append(response);
-  const resultButton=el('button','Plot response');resultButton.addEventListener('click',()=>{selector.value=({supply:'spin',electrodes:'spin',coils:'field',liner:'thermal',pump:'pump','light-outlet':'cut'})[id]??'separation';draw();onResults();});description.append(resultButton);
+  const resultButton=el('button');resultButton.dataset.showResponse='';resultButton.addEventListener('click',()=>{
+   if(!latest||dirty||updating)return;
+   selector.value=componentResponse(id);motionMode.value='transport';elapsed=latest.result.config.durationS;playing=false;
+   draw();playback();onResults();
+  });description.append(resultButton);
   const details=el('details');details.append(el('summary','Materials & model'),el('p',typeof part?.purpose==='string'?part.purpose:record.purpose),el('p',typeof part?.materialBasis==='string'?part.materialBasis:record.material),el('p',record.basis));description.append(details);refreshInstrument();
  }
  function refreshInstrument(state:DiagnosticState|null=latest?diagnosticState(latest.result):null){
   if(latest&&!dirty&&!exportButton.disabled){const control=controls.get('currentA')!,current=state?.currentA??latest.result.config.currentA;control.input.value=String(current);control.refresh();for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key="currentA"]'))input.value=String(current);}
   for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]'))input.disabled=controls.get(input.dataset.key as NumericFuelKey)!.input.disabled;
   const toggle=description.querySelector<HTMLButtonElement>('[data-power]');if(toggle){toggle.textContent=power.textContent;toggle.disabled=power.disabled;toggle.setAttribute('aria-pressed',power.getAttribute('aria-pressed')??'false');}
-  const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest.result,id=description.dataset.component;
+  const id=description.dataset.component!,topic=componentResponse(id),button=description.querySelector<HTMLButtonElement>('[data-show-response]');
+  if(button){button.disabled=!latest||dirty||updating;button.textContent=({spin:'Show end-of-run speeds',thermal:'Show end-of-run temperature',lithium:'Show liner vapor pressure',pump:'Show pumping reference',cut:'Show selected collection cut'})[topic]??'Show end-of-run separation';}
+  const effect=description.querySelector<HTMLElement>('[data-effect]');
+  if(effect)effect.textContent=id==='liner'?(topic==='thermal'?'Changes the initial liner temperature. Show the endpoint to see the evolved gas and wall.':'Thermal evolution is off: this changes liner vapor pressure, not the fixed gas temperature.'):
+   id==='pump'||id==='feed'?'Pumping reference only. This does not change rotation or drive an inlet/outlet flow.':
+   id==='light-outlet'?'Selects an inventory cut, not an extraction flow. The curve scans every cut; the marker shows yours.':
+   ['coils','supply','electrodes'].includes(id)?'Changes the drive. A new run starts at 0 s; show its endpoint to compare speeds.':'';
+  const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest.result;
+  if(dirty||updating){output.textContent='Recomputing · previous result shown in plots';return;}
   const collection=state?.collection??r.collection,pct=(value:number|null)=>value===null?'—':fmt(100*value);
   const spatial=state?.thermal?.spatial;
   output.textContent=id==='liner'?`Gas ${fmt(state?.thermal?.gasK??r.config.gasK)} K · ${spatial?`tungsten ${fmt(spatial.minK)}–${fmt(spatial.maxK)} K`:`liner ${fmt(state?.thermal?.linerK??r.config.linerK)} K`}`:id==='light-outlet'?`Light ${pct(collection.innerLightPurity)}% · recovery ${pct(collection.lightRecovery)}%`:id==='pump'?`Reference inlet speed ${fmt(r.pumping.effectiveSpeedM3S)} m³/s`:id==='coils'?`Prescribed field ${fmt(r.config.magneticT)} T`:`Gas ${fmt((state?.neutralRadS??0)*r.config.radiusM)} m/s · ${fmt(state?.currentA??r.config.currentA)} A`;
@@ -477,13 +500,13 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
     densityReading.textContent=curves.map(line=>`${line.label}: axis ${line.y[0]===null?'absent':`${fmt(line.y[0])}× average`}; wall ${line.y.at(-1)===null?'absent':`${fmt(line.y.at(-1)!)}× average`}.`).join(' ');
    }
   }
-  if(topic==='cut'){curves=(['lightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,r.cuts,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Light purity',r.collection.innerLightPurity,''],['Light recovery',r.collection.lightRecovery,''],['Heavy outer purity',r.collection.outerHeavyPurity,'']];}
-  if(topic==='cut'&&transient&&transport){const sample=sampleFuelTransport(transport,elapsed),data=r.cuts.map(p=>({radiusFraction:p.radiusFraction,...fuelTransportCollection(sample.lightMass,sample.heavyMass,c.lightFraction,p.radiusFraction)}));curves=(['innerLightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,data,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Current light purity',sample.collection.innerLightPurity,''],['Current light recovery',sample.collection.lightRecovery,''],['Current outer heavy purity',sample.collection.outerHeavyPurity,'']];if(!capture)explanation.textContent='Current closed-wall inventory at the shared time. Cuts partition inventory; no extraction flow is solved.';}
+  if(topic==='cut'){const data=[...r.cuts.filter(p=>p.radiusFraction!==c.cutFraction),{radiusFraction:c.cutFraction,lightPurity:r.collection.innerLightPurity,lightRecovery:r.collection.lightRecovery,outerHeavyPurity:r.collection.outerHeavyPurity}].sort((a,b)=>a.radiusFraction-b.radiusFraction);curves=(['lightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,data,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Light purity',r.collection.innerLightPurity,''],['Light recovery',r.collection.lightRecovery,''],['Heavy outer purity',r.collection.outerHeavyPurity,'']];}
+  if(topic==='cut'&&transient&&transport){const sample=sampleFuelTransport(transport,elapsed),data=[...new Set([...r.cuts.map(p=>p.radiusFraction),c.cutFraction])].sort((a,b)=>a-b).map(radiusFraction=>({radiusFraction,...fuelTransportCollection(sample.lightMass,sample.heavyMass,c.lightFraction,radiusFraction)}));curves=(['innerLightPurity','lightRecovery','outerHeavyPurity'] as const).map(k=>curve(k,data,'radiusFraction',k,'Inner cut radius / a','Inventory fraction'));values=[['Current light purity',sample.collection.innerLightPurity,''],['Current light recovery',sample.collection.lightRecovery,''],['Current outer heavy purity',sample.collection.outerHeavyPurity,'']];if(!capture)explanation.textContent='Current closed-wall inventory at the shared time. Cuts partition inventory; no extraction flow is solved.';}
   if(topic==='cascade'){curves=(['purity','recovery'] as const).map(k=>curve(k,r.cascades,'stages',k,'Ideal stages','Fraction'));values=[['Product light purity',r.cascade.productLightPurity,''],['Light recovery',r.cascade.lightRecovery,''],['Internal circulation / feed',r.cascade.circulationPerFeed,''],['Worst species balance',Math.max(Math.abs(r.cascade.lightBalance),Math.abs(r.cascade.heavyBalance)),'']];}
   if(topic==='pump'){curves=r.pumping.species.map(s=>({label:s.name,x:[0,1,2],y:[s.upstreamPa,s.axisPa,s.wallPa],xLabel:'0 upstream · 1 axis · 2 outer outlet',yLabel:'Partial pressure (Pa)'}));values=[['Effective inlet speed',r.pumping.effectiveSpeedM3S,'m³/s'],['Without rotation',r.pumping.nonrotatingSpeedM3S,'m³/s'],['Heavy / light pumping speed',r.pumping.heavyLightSpeedRatio,''],['Outer outlet light fraction',r.pumping.outerLightFraction,''],['Gas load',r.pumping.gasLoadPaM3S,'Pa m³/s'],['Ideal turnover',r.pumping.turnoverS,'s']];}
-  if(topic==='field'){const scan=Array.from({length:40},(_,i)=>({field:.05+i*.05,power:m.ohmicW*(c.magneticT/(.05+i*.05))**2}));curves=[curve('Matched torque · resistive only',scan,'field','power','Magnetic field (T)','Ohmic power (W)')];values=[['Applied torque',m.torque,'N m']];}
-  if(topic==='inventory'){const scan=Array.from({length:100},(_,i)=>{const burn=(i+1)/100,scale=r.fuelCycle.grossTritiumKg*c.burnFraction*1000;return {burn,gross:scale/burn,exhaust:scale*(1/burn-1)};});curves=(['gross','exhaust'] as const).map(k=>curve(k,scan,'burn',k,'Burned / injected tritium','Processing inventory (g)'));values=[['Unburned exhaust inventory',r.fuelCycle.exhaustTritiumKg*1000,'g'],['Gross circulation inventory',r.fuelCycle.grossTritiumKg*1000,'g']];}
-  if(topic==='lithium'){const scan=Array.from({length:81},(_,i)=>({temperature:298.14+(1599.99-298.14)*i/80,pressure:lithiumVaporPressurePa(298.14+(1599.99-298.14)*i/80)}));curves=[curve('NIST equilibrium vapor pressure',scan,'temperature','pressure','Temperature (K)','Equilibrium vapor pressure (Pa)')];values=[['Reference outer gas pressure',r.pumping.wallPa,'Pa'],['Initial liner saturation pressure',r.lithium.wallVaporPressurePa,'Pa'],['Reference gas / initial saturation',r.lithium.wallSaturationRatio,'']];}
+  if(topic==='field'){const scan=[...new Set([...Array.from({length:40},(_,i)=>.05+i*.05),c.magneticT])].sort((a,b)=>a-b).map(field=>({field,power:m.ohmicW*(c.magneticT/field)**2}));curves=[curve('Matched torque · resistive only',scan,'field','power','Magnetic field (T)','Ohmic power (W)')];values=[['Applied torque',m.torque,'N m']];}
+  if(topic==='inventory'){const scan=[...new Set([...Array.from({length:100},(_,i)=>(i+1)/100),c.burnFraction])].sort((a,b)=>a-b).map(burn=>{const scale=r.fuelCycle.grossTritiumKg*c.burnFraction*1000;return {burn,gross:scale/burn,exhaust:scale*(1/burn-1)};});curves=(['gross','exhaust'] as const).map(k=>curve(k,scan,'burn',k,'Burned / injected tritium','Processing inventory (g)'));values=[['Unburned exhaust inventory',r.fuelCycle.exhaustTritiumKg*1000,'g'],['Gross circulation inventory',r.fuelCycle.grossTritiumKg*1000,'g']];}
+  if(topic==='lithium'){const scan=[...new Set([...Array.from({length:81},(_,i)=>298.14+(1599.99-298.14)*i/80),c.linerK])].sort((a,b)=>a-b).map(temperature=>({temperature,pressure:lithiumVaporPressurePa(temperature)}));curves=[curve('NIST equilibrium vapor pressure',scan,'temperature','pressure','Temperature (K)','Equilibrium vapor pressure (Pa)')];values=[['Reference outer gas pressure',r.pumping.wallPa,'Pa'],['Initial liner saturation pressure',r.lithium.wallVaporPressurePa,'Pa'],['Reference gas / initial saturation',r.lithium.wallSaturationRatio,'']];}
   curves=curves.map((curve,i)=>({...curve,color:['#94d9cd','#e5ab70','#95b3d4','#d1bc87','#c2a5d4','#dc9292'][i%6],muted:topic!=='composition'&&views.state.species!=='all'&&curve.label===(views.state.species==='light'?r.pair.heavy:r.pair.light)}));
   if(capture)return curves;
   if(pinned){const baseline=draw({result:pinned.result},true)!;curves=[...baseline.map(curve=>({...curve,label:`A · ${curve.label}`,dash:'5 4'})),...curves.map(curve=>({...curve,label:`B · ${curve.label}`}))];curves=curves.map(curve=>{if(curve.xLabel!=='Time (s)')return curve;const n=curve.x.findIndex(t=>t>limit);if(n<0)return {...curve,xDomain:[0,limit] as const};const x=curve.x.slice(0,n),y=curve.y.slice(0,n);if(n&&x.at(-1)!<limit){const f=(limit-x.at(-1)!)/(curve.x[n]-x.at(-1)!);y.push(Number(y.at(-1))+(Number(curve.y[n])-Number(y.at(-1)))*f);x.push(limit);}return {...curve,x,y,xDomain:[0,limit] as const};});}
@@ -491,6 +514,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   compositionReadout.hidden=topic!=='composition';
   probeControls.hidden=topic!=='composition';densityReading.hidden=topic!=='profile';
   metrics.replaceChildren(...values.map(([label,value,unit])=>{const row=el('div');row.append(el('span',label),el('strong',`${fmt(value)} ${unit}`));return row;}));plotCursor=renderPlots(plotHost,curves,{revealUntil:transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(topic)?elapsed:undefined,announce:!(playing&&transient),onSelect:topic==='composition'?radius=>{const fraction=radius/(100*latest!.result.config.radiusM);playing=false;selectProbe(Math.min(1,fraction));playback();if(fraction>1)sampleBounds.textContent='Probe at B wall; selected radius is outside B';}:['spin','heat','thermal','separation','momentum','inertia'].includes(topic)?time=>{elapsed=time;playing=false;motionMode.value=topic==='spin'?'spin':'transport';playback();}:undefined});
+  const scanInput=scanInputs[topic];if(scanInput)plotCursor?.setCursor(c[scanInput]);
   if(topic==='composition')for(const readout of plotHost.querySelectorAll<HTMLElement>('.plot-readout'))readout.hidden=true;
   refreshComposition();if(dirty||updating)learning.setPending();else learning.update(r,diagnosticState(r),topic);
  }

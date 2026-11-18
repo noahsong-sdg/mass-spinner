@@ -85,3 +85,45 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  await expect(page.getByRole('button',{name:'Controls',exact:true})).toBeVisible();
  expect(errors).toEqual([]);
 });
+
+test('control tutorial: zero drive, driven endpoint and Inspect reference feedback',async({page},info)=>{
+ await page.goto('/?level=2&guide=start&try=currentExperiment');
+ await expect(page.locator('#fuel-currentA')).toBeFocused({timeout:30_000});
+ await page.locator('#fuel-currentA').press('Home');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
+ await page.getByRole('button',{name:'Show end-of-run speeds',exact:true}).click();
+ const zero=await exported(page);
+ expect(zero.result.config.currentA).toBe(0);
+ expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
+ await page.getByRole('button',{name:'Close Plots',exact:true}).click();
+ // Start here can remain open in a desktop column and becomes a single sheet on a phone.
+ if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
+ await page.getByRole('button',{name:'Start from rest & edit current',exact:true}).click();
+ await page.getByRole('button',{name:'Set Radial discharge current precisely',exact:true}).click();
+ const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
+ await current.fill('0.03');await current.press('Enter');
+ await expect(page.locator('#fuel-currentA')).toHaveValue('0.03');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
+ await page.getByRole('button',{name:'Show end-of-run speeds',exact:true}).click();
+ const driven=await exported(page);
+ expect(driven.result.config.currentA).toBe(.03);
+ expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
+ expect(driven.result.config.durationS).toBe(zero.result.config.durationS);
+ await expect(page.locator('#fuel-plots .plot-readout')).toContainText('Neutrals: 1,');
+ await page.getByRole('button',{name:'Close Plots',exact:true}).click();
+ await page.getByRole('button',{name:'Inspect',exact:true}).click();
+ await page.locator('#fuel-component').selectOption('liner');
+ await expect(page.locator('#fuel-inspect [data-effect]')).toContainText('Thermal evolution is off');
+ await page.getByRole('spinbutton',{name:'Initial / reference liner temperature (K) precisely'}).fill('1200');
+ await expect(page.locator('#fuel-inspect [data-show-response]')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Show liner vapor pressure',exact:true}).click();
+ await expect(page.locator('#fuel-plot')).toHaveValue('lithium');
+ await expect(page.locator('#fuel-plots .plot-readout')).toContainText('1200,');
+ const liner=await exported(page);expect(liner.result.config.linerK).toBe(1200);expect(liner.result.config.gasK).toBe(500);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ await info.attach('component-response',{body:await page.screenshot(),contentType:'image/png'});
+});
