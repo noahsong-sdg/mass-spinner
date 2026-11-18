@@ -22,3 +22,12 @@ Manual browser checks passed on desktop and 390 × 844, including return to
 close-up and an eight-pixel gap above playback. Full browser CI passed 15/20:
 two scale checks used an ambiguous selector (corrected to exclude the hidden
 baseline); three export-wait timeouts remain unqualified by this change.
+
+The export traces showed accepted results after the 30-second test deadline,
+not worker errors: the two-CPU software-rendering container was throttled in
+97.6% of measured CPU periods. Browser qualification now uses the public runner's
+four CPUs with the same 2 GiB memory cap, single test worker and unchanged
+deadlines/assertions. Internal camera transactions also draw only once after
+OrbitControls applies the final pose, covered by a render-count regression.
+The successful previous production artifact is retained when deploying so
+already-open tabs can still load their old content-hashed chunks.

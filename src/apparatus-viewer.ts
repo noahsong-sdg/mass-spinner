@@ -106,7 +106,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const win=doc.defaultView!;
  function cameraPose():CameraPose{return {position:camera.position.toArray(),target:controls.target.toArray(),up:camera.up.toArray()};}
  let settingCamera=false,dragging:number|null=null,pristineCamera=true;
- function cameraChanged(){render();if(!settingCamera){pristineCamera=false;onCamera(cameraPose());}}
+ function cameraChanged(){if(settingCamera)return;render();pristineCamera=false;onCamera(cameraPose());}
  function stopFlight(){if(flight!==null)win.cancelAnimationFrame(flight);flight=null;}
  function setCamera(pose:CameraPose|null|undefined,{preserveOwnership=false}:{preserveOwnership?:boolean}={}){
   if(!pose||disposed)return;stopFlight();if(!preserveOwnership)pristineCamera=false;settingCamera=true;cameraUp(new THREE.Vector3(...(pose.up??camera.up.toArray())));
