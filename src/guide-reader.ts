@@ -3,6 +3,23 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
 
+ const learningMode=doc.querySelector<HTMLSelectElement>('#learning-mode');
+ if(learningMode){
+  const descriptions={
+   show:'Follow a worked experiment, then try a new case. You can close any explanation.',
+   investigate:'Predict, choose an action, then compare with the explanation. Hints and answers are optional.',
+   explore:'Choose any question or control. Instructions and explanations remain available when you want them.',
+  };
+  function setLearningMode(){
+   const mode=learningMode!.value as keyof typeof descriptions;
+   doc.body.dataset.learningMode=mode;
+   for(const detail of doc.querySelectorAll<HTMLDetailsElement>('details[data-learning-hint],details[data-learning-explanation]'))detail.open=mode==='show';
+   doc.getElementById('learning-mode-description')!.textContent=descriptions[mode];
+  }
+  doc.querySelector<HTMLElement>('[data-learning-controls]')!.hidden=false;
+  learningMode.addEventListener('change',setLearningMode);setLearningMode();
+ }
+
  const density=doc.querySelector<HTMLElement>('[data-density-example]');
  if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
   density.dataset.case=button.dataset.densitySelect;

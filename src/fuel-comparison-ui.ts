@@ -1,6 +1,6 @@
 import {FUEL_MAP_AXES,FUEL_MAP_METRICS,pinFuelExperiment,computeFuelOperatingMap} from './fuel-experiments.js';
 import {sampleFuelTransport,type FuelTransportResult} from './fuel-transport.js';
-import type {FuelConfig,simulateFuelCentrifuge} from './fuel-centrifuge.js';
+import {FUEL_PAIRS,type FuelConfig,type simulateFuelCentrifuge} from './fuel-centrifuge.js';
 import type {ProducingCodeIdentity} from './producing-code.js';
 import type {requestSimulationWithIdentity} from './worker-client.js';
 
@@ -15,6 +15,18 @@ type FuelOperatingMap = ReturnType<typeof computeFuelOperatingMap>;
 export type FuelComparisonOptions = {document?: Document;host: HTMLElement;request: typeof requestSimulationWithIdentity;
  onApply?: (config: FuelConfig)=>void;onPin?: (snapshot: PinnedFuelSnapshot)=>void;onClear?: ()=>void};
 
+const inputLabels={
+ pair:['Feed',''],application:['Application',''],radiusM:['Vessel radius','m'],lengthM:['Vessel length','m'],
+ magneticT:['Axial magnetic field','T'],currentA:['Initial discharge current','A'],gasK:['Initial / bath gas temperature','K'],
+ pressurePa:['Initial gas pressure','Pa'],ionFraction:['Ionized number fraction',''],collisionHz:['Ion → neutral collision rate','s⁻¹'],
+ dragHz:['Neutral wall drag rate','s⁻¹'],conductivitySm:['Effective perpendicular conductivity','S/m'],
+ driveInnerFraction:['Drive annulus inner radius / a',''],durationS:['Run duration','s'],cutFraction:['Collection radius / a',''],
+ stages:['Stages',''],feedStage:['Feed stage',''],pumpSpeedM3S:['Pump speed','m³/s'],conductanceM3S:['Inlet conductance','m³/s'],
+ lightFraction:['Feed light fraction',''],linerK:['Initial liner temperature','K'],linerConductanceWK:['Liner conductance','W/K'],
+ lithiumSeed:['Lithium-seeded CIV reference',''],radialDiffusivityM2S:['Radial diffusivity','m²/s'],
+ fusionMW:['Fusion power reference','MW'],burnFraction:['Burn fraction',''],loopTimeS:['Fuel processing delay','s'],
+} satisfies Record<keyof FuelConfig,[string,string]>;
+
 /** Accepted-state tools only; this module never reads in-flight slider values. */
 export function createFuelComparisonTools({document:doc=document,host,request,onApply=()=>{},onPin=()=>{},onClear=()=>{}}: FuelComparisonOptions){
  const el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
@@ -24,6 +36,8 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
  pinButton.setAttribute('aria-label','Pin accepted experiment as comparison A');summary.setAttribute('aria-live','polite');
  bar.append(pinButton,clearButton,summary);root.append(bar);
  const delta=el('output');delta.className='fuel-comparison-delta';delta.hidden=true;root.append(delta);
+ const inputs=el('output');inputs.className='fuel-comparison-inputs fuel-comparison-delta';inputs.hidden=true;
+ inputs.setAttribute('aria-label','Accepted inputs: A to B');root.append(inputs);
  const details=el('details'),heading=el('summary','Operating map'),choices=el('div');choices.className='fuel-map-choices';
  details.append(heading,el('p','Uniform-inertia equilibrium reference; not the coupled transient.'),choices);root.append(details);
  const select=(name: string,entries: [string,{label: string}][],value: string)=>{
@@ -39,7 +53,38 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
  let latest: AcceptedFuelSnapshot | null=null,pinned: PinnedFuelSnapshot | null=null,controller: AbortController | null=null,revision=0,disposed=false;
  const fmt=(v: number | null)=>v===null?'Undefined':Number(v).toLocaleString(undefined,{maximumSignificantDigits:3});
  const configKey=(s: AcceptedFuelSnapshot | null)=>s?JSON.stringify(Object.entries(s.result.config).sort(([a],[b])=>a.localeCompare(b))):null;
+ function showInputs(){
+  inputs.hidden=!pinned||!latest;if(!pinned||!latest){inputs.textContent='';return;}
+  const a=pinned.result,b=latest.result,changes:string[]=[];
+  const value=(key:keyof FuelConfig,c:FuelConfig)=>key==='pair'?FUEL_PAIRS[c.pair].label:
+   typeof c[key]==='boolean'?(c[key]?'on':'off'):`${c[key]}${inputLabels[key][1]?` ${inputLabels[key][1]}`:''}`;
+  for(const key of Object.keys(inputLabels) as (keyof FuelConfig)[])
+   if(a.config[key]!==b.config[key])changes.push(`${inputLabels[key][0]}: ${value(key,a.config)} → ${value(key,b.config)}`);
+  const oa=a.transport?.operation,ob=b.transport?.operation;
+  if(oa&&ob){
+   if(oa.events.length!==ob.events.length||oa.events.some((event,i)=>event.timeS!==ob.events[i].timeS||event.currentA!==ob.events[i].currentA))
+    changes.push('Current-switch history changed');
+   const ta=oa.thermal,tb=ob.thermal;
+   for(const [key,label,unit]of [
+    ['enabled','Temperature evolution',''],['wallCapacityJK','Liner heat capacity','J/K'],
+    ['gasWallWK','Gas–wall conductance','W/K'],['coolingWK','Cooling conductance','W/K'],['coolantK','Coolant temperature','K'],
+   ] as const)if(ta[key]!==tb[key]){
+    const describe=(v:boolean|number)=>typeof v==='boolean'?(v?'on':'off'):`${v}${unit?` ${unit}`:''}`;
+    changes.push(`${label}: ${describe(ta[key])} → ${describe(tb[key])}`);
+   }
+   const spatial=(t:typeof ta)=>t.spatial?`${t.spatial.material}, ${t.spatial.thicknessM} m, ${t.spatial.cells} cells`:'lumped';
+   if(spatial(ta)!==spatial(tb))changes.push(`Liner model: ${spatial(ta)} → ${spatial(tb)}`);
+   const gas=(t:typeof ta)=>t.gas?`spatial, ${t.gas.conductivityWMK} W/(m K)`:'lumped';
+   if(gas(ta)!==gas(tb))changes.push(`Gas model: ${gas(ta)} → ${gas(tb)}`);
+   const accuracy=(t:typeof ta)=>t.gas?.accuracy;
+   if(accuracy(ta)?.relativeTolerance!==accuracy(tb)?.relativeTolerance||accuracy(ta)?.temperatureToleranceK!==accuracy(tb)?.temperatureToleranceK)
+    changes.push('Gas timestep accuracy changed');
+  }
+  inputs.textContent=changes.length?`Changed A → B: ${changes.join('; ')}.`:'Same accepted base inputs.';
+  if(!oa||!ob)inputs.textContent+=' Drive/thermal history unavailable for this comparison.';
+ }
  function showDifference(){
+  showInputs();
   delta.hidden=!pinned||!latest;if(!pinned||!latest){delta.textContent='';return;}
   const a=pinned.result,b=latest.result,mode=latest.mode??'equilibrium';
   const transient=['spin','transport'].includes(mode),timeS=Math.min(latest.timeS??0,a.config.durationS,b.config.durationS);

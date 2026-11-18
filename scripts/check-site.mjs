@@ -8,7 +8,8 @@ for(const file of ['src/main.ts','src/legacy-renderer.ts','src/study-ui.ts']){
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);
 }
-for(const name of ['index.html','laurelin.html','guide.html','start.html','equilibrium.html']){
+for(const name of ['index.html','laurelin.html','guide.html','start.html','equilibrium.html','learn.html',
+ 'learn-controls.html','learn-transport.html','learn-thermal.html','learn-beam.html','learn-collection.html','learn-evidence.html']){
  const page=readFileSync(`release/${name}`,'utf8');
  for(const match of page.matchAll(/(?:src|href)="(\/[^"#]+)"/g)){
   const path=new URL(match[1],'https://example.org').pathname;

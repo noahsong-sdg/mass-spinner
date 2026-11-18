@@ -27,6 +27,7 @@
     "scripts/check-site.mjs",
     "scripts/guide-diagrams.mjs",
     "scripts/understanding-page.mjs",
+    "scripts/learning-pages.mjs",
     "scripts/qualification-page.mjs",
     "scripts/equilibrium-page.mjs",
     "scripts/release-links.mjs",

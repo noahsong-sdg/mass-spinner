@@ -13,6 +13,20 @@ function fixture(t:any,mobile=false){
  return {doc,window,workspace,node,step(index:number){node('guide-step').value=String(index);node('guide-step').dispatchEvent(new window.Event('change'));}};
 }
 
+/** Native controls mounted by the centrifuge after the workspace exists. */
+function acceptedFuel(f:ReturnType<typeof fixture>){
+ const make=(tag:string,id:string)=>{const node=f.doc.createElement(tag) as any;node.id=id;f.doc.body.append(node);return node;};
+ const mode=make('select','fuel-motion-mode');mode.innerHTML='<option value="transport">Coupled separation</option><option value="equilibrium">Equilibrium reference</option>';
+ const time=make('input','fuel-motion-time');time.type='range';time.min='0';time.max='1';time.step='any';time.value='.4';
+ const plot=make('select','fuel-plot');
+ for(const value of ['spin','composition','separation','thermalProfile','gasEnergy','gasPressure','field','cascade','pump','inventory','lithium']){const option=f.doc.createElement('option');option.value=value;option.textContent=value;plot.append(option);}
+ const plotHost=make('div','fuel-plots');plotHost.innerHTML='<div class="live-plots"></div>';
+ make('output','fuel-composition-readout');
+ make('details','fuel-learning-comparisons');const accepted=make('button','fuel-export'),newRun=make('button','fuel-new-run'),power=make('button','fuel-power');
+ power.setAttribute('aria-pressed','true');
+ return {mode,time,plot,accepted,newRun,power};
+}
+
 test('Start here opens a separate reader without changing panels, inputs or the current run',t=>{
  const f=fixture(t),input=f.node('field');input.value='.17';
  let focuses=0;const reader={closed:false,focus:()=>focuses++} as unknown as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
@@ -116,4 +130,62 @@ test('the current experiment rewinds before editing and compares endpoints witho
  assert.match(f.node('window-guide').textContent,/0 A.*0.03 A/);
  f.doc.querySelectorAll<HTMLButtonElement>('.guide-actions button')[1].click();
  assert.equal(time.value,'1');assert.equal(plot.value,'spin');assert.deepEqual(seen,[0,1]);
+});
+
+test('temperature equation term focuses the temperature input without changing its value',t=>{
+ const f=fixture(t),input=f.doc.createElement('input');input.id='fuel-gasK';input.value='500';
+ f.node('window-controls').querySelector('.world-window-body').append(input);
+ f.workspace.launchGuideAction('gasTemperature');
+ assert.equal(f.node('window-controls').hidden,false);assert.equal(f.doc.activeElement,input);assert.equal(input.value,'500');
+});
+
+test('investigation actions open the actual existing plots without changing inputs or physical time',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);f.node('field').value='.17';
+ for(const [action,value]of Object.entries({spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'})){
+  f.workspace.launchGuideAction(action);
+  assert.equal(fuel.plot.value,value);assert.equal(f.node('window-plots').hidden,false);
+  assert.equal(fuel.time.value,'0.4');assert.equal(fuel.mode.value,'transport');assert.equal(f.node('field').value,'.17');
+ }
+ fuel.mode.value='equilibrium';f.workspace.launchGuideAction('spinPlot');
+ assert.equal(fuel.time.value,'0.4');assert.equal(fuel.mode.value,'equilibrium','opening a speed plot must not switch or replay a reference view');assert.equal(f.node('field').value,'.17');
+ fuel.plot.querySelector('option[value="lithium"]')!.disabled=true;fuel.plot.value='spin';
+ f.workspace.launchGuideAction('lithiumSurfaces');
+ assert.equal(fuel.plot.value,'spin');assert.match(f.node('guide-status').textContent,/lithium feed/);
+ fuel.plot.querySelector('option[value="cascade"]')!.disabled=true;
+ f.workspace.launchGuideAction('cascade');assert.match(f.node('guide-status').textContent,/Isotope separation/);
+});
+
+test('new plot links wait for accepted results and panel links remain available while updating',async t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);fuel.accepted.disabled=true;
+ f.workspace.launchGuideAction('separationPlot');assert.equal(fuel.plot.value,'spin');
+ assert.equal(f.node('window-plots').hidden,true);assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);
+ fuel.accepted.disabled=false;await Promise.resolve();
+ assert.equal(fuel.plot.value,'separation');assert.equal(f.node('window-plots').hidden,false);
+ fuel.accepted.disabled=true;
+ f.workspace.launchGuideAction('view');assert.equal(f.node('window-view').hidden,false);
+ f.workspace.launchGuideAction('inspect');assert.equal(f.node('window-inspect').hidden,false);
+ f.workspace.launchGuideAction('modelInfo');assert.equal(f.node('window-info').hidden,false);
+});
+
+test('cut power is a single explicit intervention, never a power-on or hidden rewind',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);let cuts=0,restarts=0;
+ fuel.power.addEventListener('click',()=>{cuts++;fuel.power.setAttribute('aria-pressed','false');});
+ fuel.newRun.addEventListener('click',()=>restarts++);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,'0.4');assert.equal(restarts,0);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/already off/);
+ fuel.mode.value='equilibrium';fuel.power.setAttribute('aria-pressed','true');
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.mode.value,'equilibrium');assert.match(f.node('guide-status').textContent,/Choose Coupled separation/);
+ fuel.mode.value='transport';fuel.power.disabled=true;
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/cannot be changed here/);
+ f.workspace.launchGuideAction('newRun');assert.equal(restarts,1);
+});
+
+test('new investigation actions preserve origin restrictions and cannot modify an inactive centrifuge',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);let restarts=0;
+ fuel.newRun.addEventListener('click',()=>restarts++);f.workspace.openPhysics('drive');
+ const frame=f.node('physics-guide-frame');
+ const send=(origin:string,source:any)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action:'newRun'}}));
+ send('https://foreign.example',frame.contentWindow);send('https://example.org',f.window);assert.equal(restarts,0);
+ f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
+ send('https://example.org',frame.contentWindow);assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/Choose Centrifuge/);
 });

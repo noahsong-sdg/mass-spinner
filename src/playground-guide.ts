@@ -9,6 +9,7 @@ type GuideElements={
  'fuel-equilibrium-calculator':HTMLDetailsElement;'fuel-locate-plot':HTMLButtonElement;'start-here':HTMLButtonElement;
  'fuel-view-representation':HTMLSelectElement;'fuel-view-cutaway':HTMLInputElement;'fuel-view-drive':HTMLSelectElement;
  'fuel-component':HTMLSelectElement;'fuel-view-radius':HTMLInputElement;'fuel-compare-temperature':HTMLButtonElement;'fuel-compare-rotation':HTMLButtonElement;
+ 'fuel-power':HTMLButtonElement;
 };
 type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
@@ -51,7 +52,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function plot(value:string){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
-  if(option!.disabled){status.textContent='Choose Isotope separation in Controls to use this plot.';return false;}
+  if(option!.disabled){status.textContent=value==='lithium'?'Choose a lithium feed in Controls to use this plot.':'Choose Isotope separation in Controls to use this plot.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
   const target=value==='composition'?'#fuel-composition-readout':value==='profile'?'#fuel-density-reading':'#fuel-plots > .live-plots';
   doc.querySelector<HTMLElement>(target)!.scrollIntoView?.({block:'start'});return true;
@@ -65,7 +66,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
- const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',duration:'#fuel-durationS',controls:null};
+ const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',controls:null};
+ const tutorialPlots:Readonly<Record<string,string>>={spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'};
  const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');
  const pending=(key:string)=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton()!.disabled);
  let cancelLaunch=()=>{};
@@ -73,10 +75,21 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(!allowed.has(key))return;
   cancelLaunch();
   status.textContent='';
+  if(node('start-here')?.hidden){status.textContent='Choose Centrifuge to use its guide controls.';return;}
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
+  if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   // Pending/failed results must not be presented as a fresh experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
+  if(Object.hasOwn(tutorialPlots,key)){plot(tutorialPlots[key]);return;}
+  if(key==='newRun'){node('fuel-new-run').click();return;}
+  if(key==='cutPower'){
+   const power=node('fuel-power');
+   if(!['spin','transport'].includes(node('fuel-motion-mode').value)){status.textContent='Choose Coupled separation or Coupled spin-up before cutting power. The selected physical time sets when the current changes.';return;}
+   if(power.disabled){status.textContent='Power cannot be changed here. Choose a time below 60 s in an accepted coupled run.';return;}
+   if(power.getAttribute('aria-pressed')!=='true'){status.textContent='The discharge is already off. The moving gas can still coast and lose angular momentum to wall drag.';return;}
+   power.click();return;
+  }
   if(key==='currentExperiment'){
    index=1;render();showExplore();set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
   }else if(key==='endSpin'){
@@ -117,7 +130,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function launch(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();const accepted=node('fuel-export');
-  if(key==='equilibrium'||Object.hasOwn(controlFocus,key)||!accepted||!pending(key)){action(key);return;}
+  if(key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo'].includes(key)||!accepted||!pending(key)){action(key);return;}
   status.textContent='Waiting for the computed run and controls…';
   const observer=new win.MutationObserver(()=>{
    if(!pending(key)){cancelLaunch();if(!node('start-here')?.hidden)action(key);}

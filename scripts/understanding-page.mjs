@@ -21,6 +21,7 @@ export function understandingPage(markdown,revision){
    const label=this.parser.parseInline(tokens);
    if(href.startsWith('#'))return `<a href="${escape(href)}">${label}</a>`;
    if(href.endsWith('/start.html'))return `<a href="/start.html">${label}</a>`;
+   if(href.startsWith('/learn'))return `<a href="${escape(href)}">${label}</a>`;
    return `<a href="${escape(new URL(href,sourceBase).href)}" target="_blank" rel="noopener">${label}</a>`;
   },
   heading({tokens,depth}){
@@ -37,7 +38,7 @@ export function understandingPage(markdown,revision){
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <title>Physics guide · Mass Spinner</title><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
- <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/start.html">Start here →</a><a class="standalone" href="/guide.html" target="_blank" rel="noopener">Read on its own ↗</a></header>
+ <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/start.html">Start here →</a><a href="/learn.html">Investigations →</a><a class="standalone" href="/guide.html" target="_blank" rel="noopener">Read on its own ↗</a></header>
  <nav aria-label="Guide chapters"><label for="guide-chapter">Jump to</label><select id="guide-chapter">${guideTopics.map(topic=>`<option value="${topic.id}">${escape(topic.heading.replace(/^\d\. /,''))}</option>`).join('')}</select></nav>
  <main>${parser.parse(markdown)}</main><footer><a href="/start.html">Try the seven experiments ↗</a></footer></body></html>`;
 }

@@ -13,5 +13,7 @@ export const guideTopics=[
  {id:'path',heading:'Where do we go after this guide?',actions:[]},
 ] as const satisfies readonly GuideTopic[];
 export type GuideTopicId = typeof guideTopics[number]['id'];
-export type GuideAction = typeof guideTopics[number]['actions'][number][0];
-export const guideActions:ReadonlySet<string>=new Set<string>(guideTopics.flatMap(topic=>topic.actions.map(([key])=>key)));
+/** Additional explicit entrypoints used by the optional investigation pages. */
+export const tutorialActions=['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','gasTemperature','magneticLeverage','cascade','pumping','fuelInventory','lithiumSurfaces','newRun','cutPower','inspect','view','modelInfo'] as const;
+export type GuideAction = typeof guideTopics[number]['actions'][number][0]|typeof tutorialActions[number];
+export const guideActions:ReadonlySet<string>=new Set<string>([...guideTopics.flatMap(topic=>topic.actions.map(([key])=>key)),...tutorialActions]);

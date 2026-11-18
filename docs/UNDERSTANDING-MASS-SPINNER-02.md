@@ -321,18 +321,18 @@ profiles show the selected instant; parameter scans compare hypothetical setting
 | Ion–neutral spin-up | Ion and neutral edge speeds (m/s) versus time. [§4](#momentum) |
 | Drive & work | Mechanical energies (J); slopes are power (W). Ohmic power is separate. [§5](#energy) |
 | Temperature | Mean gas/liner temperatures; evolution requires thermal physics enabled. [§5](#energy) |
-| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. Planned guide 03. |
-| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. Planned guide 03. |
-| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. Planned guide 03. |
+| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. [Try thermal limits](/learn-thermal.html). |
+| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. [Try thermal limits](/learn-thermal.html). |
+| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. [Try thermal limits](/learn-thermal.html). |
 | Angular momentum | Drive impulse minus wall impulse; internal collision transfer cancels. [§4](#momentum) |
 | Gas inertia | Mass redistribution’s effect on resistance to turning, versus time. [§4](#momentum) |
 | Species density | Each isotope’s density divided by its own volume mean; 1× is average. Evolving in coupled views, equilibrium in reference views. [§1](#composition) |
 | Purity & recovery | Inventory fractions versus cut radius, not throughput. [§6](#collection) |
-| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. Planned guide 04. |
-| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. Planned guide 04. |
-| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. Planned guide 03. |
-| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. Planned guide 05. |
-| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. Planned guide 03. |
+| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. [Try collection and processes](/learn-collection.html). |
+| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. [Try collection and processes](/learn-collection.html). |
+| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. [Try thermal limits](/learn-thermal.html). |
+| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. [Explore fuel accounting](/learn-collection.html#fuel). |
+| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. [Try thermal limits](/learn-thermal.html). |
 
 ### Which controls affect physics?
 
@@ -363,19 +363,22 @@ while its selected marker moves. After editing, wait for the accepted result.
 
 ## Where do we go after this guide?
 
-Only guides **01 and 02 exist today**. The others are planned, not completed tutorials.
+The [investigation path](/learn.html) turns the ideas above into short experiments.
+Choose any question; the order below builds toward an enriched, useful inventory.
 
-| Guide | Question | Outcome |
-|---|---|---|
-| 01 — available | What rotates? | Identify gas, drive and model boundaries. [Read 01](UNDERSTANDING-MASS-SPINNER.md) |
-| 02 — this page | Can drive make a useful sample? | Connect torque, speed, heat, transport and cuts. |
-| 03 — planned | Can that operating point survive? | Heat flow, magnetic leverage, lithium phase and ionization limits. |
-| 04 — planned | Can a sample become a process? | Cascades, pumping and unresolved extraction. |
-| 05 — planned | Why process fusion fuel? | Blanket lithium versus D–T exhaust; burn/delay inventory costs. |
-| 06 — planned | Which predictions deserve trust? | Conservation, convergence, diagnostics and experimental uncertainty. |
+| Investigation | Why it comes next |
+|---|---|
+| [Controls and evidence](/learn-controls.html) | Connect a physical change to motion and a plot; distinguish display changes. |
+| [Spin-up and separation](/learn-transport.html) | Turning quickly does not imply that the mixture has redistributed. |
+| [Thermal limits](/learn-thermal.html) | More drive can also mean more heating; follow where energy goes. |
+| [Beam and target](/learn-beam.html) | A separate machine: follow deuteron energy into neutrons and heat. |
+| [Collection and processes](/learn-collection.html) | Trade purity against recovery, then distinguish inventory from throughput. |
+| [Trust and reproducibility](/learn-evidence.html) | Identify what the model calculates, assumes and has evidence for. |
 
-These are optional reading paths. Start with a question, predict one control’s
-effect, then explain the observed plot.
+The [first explanation](UNDERSTANDING-MASS-SPINNER.md) introduces ions and
+neutrals. This page supplies the equations; the investigations provide optional
+practice. Detailed plant design, self-consistent ionization and experimentally
+validated device prediction remain outside these tutorials.
 
 ## Equations and further reading
 
