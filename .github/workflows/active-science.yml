@@ -18,7 +18,8 @@ jobs:
         run: |
           docker build -t active-science -f ci/Dockerfile.science .
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp active-science npm ci --ignore-scripts --no-audit --no-fund
-          docker image inspect active-science --format '{{.Id}}'
+          mkdir -p science-evidence
+          docker image inspect active-science > science-evidence/container.json
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp active-science sh -eu -c '
             uv lock --check --project scientific/active
             uv sync --frozen --project scientific/active
