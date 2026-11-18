@@ -32,6 +32,7 @@
     "scripts/release-links.mjs",
     "scripts/equilibrium-identity-plugin.mjs",
     "scripts/worker-identity-plugin.mjs",
-    "vite.config.mjs"
+    "vite.config.mjs",
+    "scripts/qualify-gltf.ts"
   ]
 }
