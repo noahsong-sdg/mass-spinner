@@ -129,10 +129,10 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  motionBar.append(play,power,restart,newRun,seek,legend,driveKey,clock);
  const modeReading=el('p');modeReading.id='fuel-mode-reading';modeReading.className='fuel-mode-reading';motionBar.append(modeReading);
  const modeDescriptions:Record<FuelMotionMode,string>={
-  equilibrium:'Ideal settled density at the reference speed; not the finite-time result. Cream arrow: neutral rotation.',
-  transport:'Neutral dots follow the computed density. Arrows track equal-count gas shells from their starting radii. Fast rotation is averaged.',
-  spin:'Blue arrow: ions. Cream arrow: neutral gas. Shown at two sections for clarity. Each arc spans ½ screen second on the same clock.',
-  flow:'Dashed routes and packets show reference pumping throughput, not solved chamber flow.'
+  equilibrium:'Ideal settled density, not this run’s endpoint. Cream arrow: neutral rotation.',
+  transport:'Rotation averaged. Arrows track equal-count gas shells from their starting radii; dots show the computed neutral density.',
+  spin:'Same coupled run, slowed down. Blue: ions · cream: gas. Two display sections; arcs trail up to ½ screen second.',
+  flow:'Reference throughput along dashed routes; chamber flow is not solved.'
  };
  const playbackPosition=floatingPlayback(motionBar);
  clock.setAttribute('aria-live','off');

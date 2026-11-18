@@ -19,7 +19,7 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   const head=new THREE.Mesh(new THREE.ConeGeometry(R*.055,R*.16,16),makeMaterial(color));
   rotor.position.z=L*z;head.position.x=R*.72;rotor.add(arc,head);rotation.add(rotor);
   rotor.name=kind==='ion'?'Ion rotation arrow':'Neutral rotation arrow';
-  rotor.userData={kind,radiusM:R*.72,scope:'Bulk angular speed; two display stations, axially uniform model. Arc is 0.5 screen seconds of rotation.'};
+  rotor.userData={kind,radiusM:R*.72,scope:'Bulk angular speed; two display stations, axially uniform model. Arc integrates up to 0.5 screen seconds of rotation.'};
   return {kind,rotor,arc,head,n};
  });
  const shells=[0,1].flatMap(species=>[.25,.5,.75].map((probability,i)=>{
@@ -40,15 +40,15 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   const direction=path.getTangent(1),head=new THREE.ArrowHelper(direction,path.getPoint(.83),R*.15,0xabbab5,R*.09,R*.06);
   head.line.geometry=head.line.geometry.clone();head.cone.geometry=head.cone.geometry.clone();flow.add(line,head);
  }
- function update(state:FuelMotionState,mode:FuelMotionMode,quantile:(species:number,p:number)=>number){
+ function update(state:FuelMotionState,mode:FuelMotionMode,quantile:(species:number,p:number)=>number,exposure:{ion:number;neutral:number;seconds:number}){
   rotation.visible=mode==='spin'||mode==='equilibrium';migration.visible=mode==='transport';flow.visible=mode==='flow'&&state.turnoverHz>0;
   for(const {kind,rotor,arc,head,n}of rotors){
-   const speed=state.speeds[kind],direction=Math.sign(speed),sweep=Math.abs(speed)*state.secondsPerScreenSecond*.5;
+   const speed=state.speeds[kind],direction=Math.sign(speed),sweep=exposure[kind];
    rotor.visible=speed!==0&&(mode==='spin'||kind==='neutral');rotor.rotation.z=state.phases[kind]%(2*Math.PI);head.rotation.z=direction<0?Math.PI:0;
-   rotor.userData.angularSpeedRadS=speed;rotor.userData.exposureS=state.secondsPerScreenSecond*.5;
+   rotor.userData.angularSpeedRadS=speed;rotor.userData.exposureS=exposure.seconds;rotor.userData.angularDisplacementRad=sweep;
    const a=arc.geometry.getAttribute('position');
    for(let i=0;i<=n;i++)for(let side=0;side<2;side++){
-    const angle=-direction*sweep*i/n,radius=R*(.72+(side?1:-1)*.016);
+    const angle=-sweep*i/n,radius=R*(.72+(side?1:-1)*.016);
     a.setXYZ(i*2+side,radius*Math.cos(angle),radius*Math.sin(angle),0);
    }a.needsUpdate=true;
   }

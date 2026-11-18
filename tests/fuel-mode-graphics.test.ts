@@ -32,14 +32,15 @@ test('all four modes expose different, correctly scoped diagnostic geometry',()=
 test('rotation arrows use accepted phases and a shared physical exposure, including rewind and rest',()=>{
  const result=fixture(),motion=createFuelMotion(result);
  try{
-  for(const t of [.01,.13,0,.2]){
-   const sampled=sampleFuelTransport(result.transport,t),state=motion.update(t,'spin');
+  for(const t of [1e-6,.01,.13,0,.2]){
+   const sampled=sampleFuelTransport(result.transport,t),state=motion.update(t,'spin'),exposure=Math.min(t,.5*state.secondsPerScreenSecond),before=sampleFuelTransport(result.transport,t-exposure);
    for(const [name,speed,phase]of [['Ion',sampled.ionRadS,sampled.ionPhaseRad],['Neutral',sampled.neutralRadS,sampled.neutralPhaseRad]] as const){
     const rotor=motion.group.getObjectByName(`${name} rotation arrow`)!;
-    close(rotor.userData.angularSpeedRadS,speed);close(rotor.rotation.z,phase%(2*Math.PI));close(rotor.userData.exposureS,.5*state.secondsPerScreenSecond);
+    close(rotor.userData.angularSpeedRadS,speed);close(rotor.rotation.z,phase%(2*Math.PI));close(rotor.userData.exposureS,exposure);
     assert.equal(rotor.visible,speed!==0);
     const arc=rotor.children[0] as THREE.Mesh<THREE.BufferGeometry>,a=arc.geometry.getAttribute('position');
-    const last=a.count-2,angle=Math.atan2(a.getY(last),a.getX(last));assert.ok(Math.abs(angle+speed*state.secondsPerScreenSecond*.5)<2e-7,'float32 arc matches physical angular exposure');
+    const last=a.count-2,angle=Math.atan2(a.getY(last),a.getX(last)),displacement=phase-(name==='Ion'?before.ionPhaseRad:before.neutralPhaseRad);
+    assert.ok(Math.abs(angle+displacement)<2e-7,'float32 arc matches integrated physical angular exposure');
    }
   }
  }finally{release(motion.group);}

@@ -89,7 +89,7 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
 test('four gas modes reveal their geometry and explain their physical scope',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue arrow'],['flow','tracers','Dashed routes'],['transport','both','equal-count']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue: ions'],['flow','tracers','dashed routes'],['transport','both','equal-count']] as const){
   await page.locator('#fuel-motion-mode').selectOption(mode);
   if(mode==='spin'||mode==='transport')await page.locator('#fuel-motion-time').press('End');
   await expect(page.locator('#fuel-mode-reading')).toContainText(reading);

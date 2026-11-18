@@ -76,7 +76,7 @@ test('native range serialization preserves exact log defaults without masking ge
 
 test('mode selection reveals its diagnostic geometry without rerunning physics or replacing the user camera',async t=>{
  const f=fixture(t);await f.start();const result=f.ui.latest.result,requests=f.requests.length,v=f.viewers[0],pose=clone(v.pose);
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue arrow'],['flow','tracers','Dashed routes'],['transport','both','equal-count']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue: ions'],['flow','tracers','dashed routes'],['transport','both','equal-count']] as const){
   f.change('fuel-motion-mode',mode,'change');
   assert.equal(f.node('fuel-view-representation').value,representation);assert.equal(v.built.motion.group.visible,true);
   assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,false);

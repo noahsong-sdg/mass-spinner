@@ -99,7 +99,11 @@ export function createFuelMotion(result: FuelRenderResult){
    let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;
    return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);
   };
-  glyphs.update(state,mode,quantile);
+  // A trailing arc integrates the accepted phase history, rather than using
+  // endpoint speed × exposure during acceleration. Never invent pre-run motion.
+  const exposureS=mode==='spin'?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
+  const before=mode==='spin'?fuelMotionState(result,timeS-exposureS,mode).phases:null;
+  glyphs.update(state,mode,quantile,{seconds:exposureS,ion:before?state.phases.ion-before.ion:state.speeds.ion*exposureS,neutral:before?state.phases.neutral-before.neutral:state.speeds.neutral*exposureS});
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){
