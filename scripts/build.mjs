@@ -15,6 +15,8 @@ const require=createRequire(import.meta.url);
 const vite=dirname(require.resolve('vite/package.json'));
 const build=spawnSync(process.execPath,[resolve(vite,'bin/vite.js'),'build'],{stdio:'inherit'});
 if(build.status===0){
+ copyFileSync('output/gltf-trial/centrifuge-assembly.glb','release/models/centrifuge-assembly.glb');
+ copyFileSync('output/gltf-trial/report.json','release/asset-qualification.json');
  writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));

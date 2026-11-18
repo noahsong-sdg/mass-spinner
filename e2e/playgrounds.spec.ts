@@ -50,7 +50,7 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('centrifuge',{body:await page.screenshot(),contentType:'image/png'});
  const assets=await page.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/models/')).map(e=>{const r=e as PerformanceResourceTiming;return {url:r.name,durationMS:r.duration,bytes:r.decodedBodySize};}));
- expect(assets.some(r=>r.bytes>0&&r.bytes<=8_000_000)).toBe(true);
+ expect(assets.some(r=>r.bytes>0&&r.bytes<=1_200_000)).toBe(true);
  await info.attach('performance',{body:JSON.stringify({backend:'Chromium software ANGLE/SwiftShader',controlLatencyMS,assets}),contentType:'application/json'});
  expect(errors).toEqual([]);
 });

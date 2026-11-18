@@ -33,7 +33,8 @@ assert.deepEqual(geometry(after),before,'Lossless transform changed picking hier
 const bytes=await readFile(destination),validation=await validateBytes(bytes,{uri:destination,maxIssues:1000});
 assert.equal(validation.issues.numErrors,0,'Transformed glTF failed Khronos validation');
 const sourceBytes=(await readFile(source)).byteLength;
-assert.ok(bytes.byteLength<=sourceBytes,'Lossless trial increased delivery size');
+assert.ok(bytes.byteLength<=sourceBytes,'Lossless transform increased delivery size');
+assert.ok(bytes.byteLength<=1_200_000,'Assembly exceeds the measured 1.2 MB delivery budget');
 const timings=[];
 for(const file of [source,destination]){
  const samples=[];
@@ -43,6 +44,6 @@ for(const file of [source,destination]){
 const report={kind:'lossless-accessor-mesh-dedup',source,sourceBytes,bytes:bytes.byteLength,
  savedFraction:1-bytes.byteLength/sourceBytes,elapsedMS,peakRSSKiB:process.resourceUsage().maxRSS,timings,
  selectableNodes:before.filter(node=>node.primitives).length,geometryStreamsExact:true,validation,
- scope:'NodeIO warm filesystem parsing; not browser cold-load latency, GPU memory or frame performance. No quantization, decoder extension or production asset replacement.'};
+ scope:'NodeIO warm filesystem parsing; not browser cold-load latency, GPU memory or frame performance. Build copies this qualified asset into release/models. No quantization or decoder extension.'};
 await writeFile('output/gltf-trial/report.json',JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));

@@ -6,7 +6,7 @@
     "dev": "vite",
     "test": "tsx --test tests/*.test.ts",
     "typecheck": "tsc --noEmit --checkers 1 && tsc --noEmit --checkers 1 -p tsconfig.contracts.json",
-    "build": "node scripts/build.mjs",
+    "build": "tsx scripts/qualify-gltf.ts && node scripts/build.mjs",
     "check:assets": "python3 blender/check_assets.py",
     "check:site": "node scripts/check-site.mjs",
     "lint": "eslint src --max-warnings 0",
@@ -45,5 +45,6 @@
     "node": ">=26.13.1 <27",
     "npm": ">=11.20.0 <12"
   },
-  "packageManager": "npm@11.20.0"
+  "packageManager": "npm@11.20.0",
+  "license": "MIT"
 }
