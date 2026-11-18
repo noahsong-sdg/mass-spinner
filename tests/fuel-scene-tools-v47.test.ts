@@ -43,14 +43,16 @@ test('zero-speed shared domains retain a true zero key and finite native materia
  for(const ring of tools.group.children.filter(o=>o.name==='Radial field sample'))assert.ok(Number.isFinite((ring as THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>).material.color.r));tools.dispose();
 });
 
-test('clipping and ghost staging affect only shell clones and keep quantitative surfaces fixed',()=>{
+test('clipping opens shell and coil clones while ghosting only the shell and keeping quantitative surfaces fixed',()=>{
  const {tools,scene,shell,coil,material,result}=fixture(),slice=tools.group.position.clone(),base=coil.position.clone();
- assert.notEqual(shell.material,material);assert.equal(coil.material,material);
+ assert.notEqual(shell.material,material);assert.notEqual(coil.material,material);
  tools.setStaging({cutaway:.5,ghost:true,explode:1});
- assert.equal((shell.material as THREE.Material).opacity,.14);assert.equal(material.opacity,1);assert.ok(coil.position.z<base.z);assert.deepEqual(tools.group.position,slice);
+ assert.equal((shell.material as THREE.Material).opacity,.14);assert.equal((coil.material as THREE.Material).opacity,1);assert.equal(material.opacity,1);assert.equal(material.clippingPlanes,null);assert.ok(coil.position.z<base.z);assert.deepEqual(tools.group.position,slice);
  const hidden=scene.localToWorld(new THREE.Vector3(0,result.config.radiusM*.5,.2)),kept=scene.localToWorld(new THREE.Vector3(0,-result.config.radiusM*.5,.2));
  assert.equal(tools.visibleHit({object:shell,point:hidden}),false);assert.equal(tools.visibleHit({object:shell,point:kept}),true);
- tools.dispose();tools.dispose();assert.equal(shell.material,material);assert.deepEqual(coil.position,base);assert.equal(tools.group.parent,null);
+ assert.equal(tools.visibleHit({object:coil,point:hidden}),false);assert.equal(tools.visibleHit({object:coil,point:kept}),true);
+ tools.setStaging({cutaway:0});assert.equal((coil.material as THREE.Material).clippingPlanes,null);assert.equal(tools.visibleHit({object:coil,point:hidden}),true);
+ tools.dispose();tools.dispose();assert.equal(shell.material,material);assert.equal(coil.material,material);assert.deepEqual(coil.position,base);assert.equal(tools.group.parent,null);
 });
 
 test('intersection clipping matches native material semantics and indexed material hits',()=>{
