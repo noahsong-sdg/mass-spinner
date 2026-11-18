@@ -150,7 +150,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    }
    return {...series,x,y,low,high};
   }
-  let width=800,height=c.equalAspect?800:310,bottom=height-60,top=45,left=75,right=750,xmin=0,xmax=0,ymin=0,ymax=0,sx: ((x: number) => number) | undefined,sy: (y: number) => number;
+  const left=75;let width=800,height=c.equalAspect?800:310,bottom=height-60,top=45,right=750,xmin=0,xmax=0,ymin=0,ymax=0,sx: ((x: number) => number) | undefined,sy: (y: number) => number;
   const figure=document.createElement('figure'),caption=document.createElement('figcaption'),svg=svgElement('svg',{preserveAspectRatio:'xMidYMid meet',role:'img'});
   caption.textContent=c.yLabel+' against '+c.xLabel+(c.equalAspect?' · equal spatial scale':'');svg.setAttribute('aria-label',caption.textContent);
   const pairs=group.flatMap(s=>s.x.flatMap((x,i)=>[s.y[i],s.low?.[i],s.high?.[i]].map(y=>[x,y] as const))).filter((p): p is readonly [number,number]=>p.every(finite));

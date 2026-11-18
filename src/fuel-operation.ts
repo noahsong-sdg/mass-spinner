@@ -216,7 +216,7 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
     return {temperature,wall,residual,result};
    };
    // Positive-temperature bracket; signed inward redistribution can draw heat.
-   let lo=1e-6,hi=Math.max(gasK,wallK,thermal.coolantK,1),low=evaluate(lo),high=evaluate(hi),iterations=0;
+   let lo=1e-6,hi=Math.max(gasK,wallK,thermal.coolantK,1);const low=evaluate(lo);let high=evaluate(hi),iterations=0;
    while(high.residual<0&&iterations++<60){hi*=2;high=evaluate(hi);}
    if(low.residual>0||high.residual<0||!Number.isFinite(high.residual))throw new RangeError('Thermal closure has no positive-temperature bracket.');
    const tolerance=Math.max(2e-12*Math.max(capacity*gasK,Math.abs(high.result.energyIncrement.driveWorkJ),ohmic,1e-20),

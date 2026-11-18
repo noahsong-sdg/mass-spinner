@@ -93,9 +93,9 @@ export function lithiumVaporPressurePa(temperatureK:number){
 export function idealCascade(probability:number,stages:number,feedStage:number){
  finite(probability,'routing probability',0,1);
  if(!Number.isSafeInteger(stages)||stages<1||stages>12||!Number.isSafeInteger(feedStage)||feedStage<1||feedStage>stages)throw new RangeError('Invalid cascade.');
- const p=probability,q=1-p,diagonal=Array(stages).fill(1),rhs=Array(stages).fill(0);rhs[feedStage-1]=1;
+ const p=probability,q=1-p,diagonal=Array<number>(stages).fill(1),rhs=Array<number>(stages).fill(0);rhs[feedStage-1]=1;
  for(let i=1;i<stages;i++){const multiplier=-p/diagonal[i-1];diagonal[i]-=multiplier*(-q);rhs[i]-=multiplier*rhs[i-1];}
- const visits=Array(stages).fill(0);visits[stages-1]=rhs[stages-1]/diagonal[stages-1];
+ const visits=Array<number>(stages).fill(0);visits[stages-1]=rhs[stages-1]/diagonal[stages-1];
  for(let i=stages-2;i>=0;i--)visits[i]=(rhs[i]+q*visits[i+1])/diagonal[i];
  return {product:p*visits[stages-1],tails:q*visits[0],visits};
 }

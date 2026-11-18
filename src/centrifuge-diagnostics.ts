@@ -25,8 +25,8 @@ export function centrifugeDiagnostics(result: CentrifugeResult, cutRadiusFractio
   }
   const wallRadius = samples[samples.length - 1].radius;
   const cumulative: number[][] = [Array<number>(count).fill(0)];
-  const inner = Array<number>(count).fill(0) as number[];
-  const outer = Array<number>(count).fill(0) as number[];
+  const inner = Array<number>(count).fill(0);
+  const outer = Array<number>(count).fill(0);
   // Exact integral of 2u*n(u) for the piecewise-linear density, u=r/a.
   const cell = (u: number, h: number, n0: number, n1: number) =>
     2 * (n0 * (u * h + h * h / 2) + (n1 - n0) * (u * h / 2 + h * h / 3));

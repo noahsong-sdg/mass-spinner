@@ -9,7 +9,7 @@ export interface DecayNetwork {
 const nonnegative=(x:number)=>Number.isFinite(x)&&x>=0;
 const identity=(n:number)=>Array.from({length:n},(_,i)=>Array.from({length:n},(_,j)=>Number(i===j)));
 function multiply(a:number[][],b:number[][]){
- const n=a.length,c=Array.from({length:n},()=>Array<number>(n).fill(0) as number[]);
+ const n=a.length,c=Array.from({length:n},()=>Array<number>(n).fill(0));
  for(let i=0;i<n;i++)for(let k=0;k<n;k++)for(let j=0;j<n;j++)c[i][j]+=a[i][k]*b[k][j];
  return c;
 }
@@ -29,7 +29,7 @@ export function evolveDecayNetwork(network:DecayNetwork,initial:number[],duratio
  const initialTotal=initial.reduce((sum,x)=>sum+x,0),sourceTotal=source.reduce((sum,x)=>sum+x,0);
  if(!Number.isFinite(initialTotal)||!Number.isFinite(sourceTotal))throw new Error('Aggregate inventory or production exceeds the finite numerical domain.');
  // Explicit lost-inventory sink and constant reservoir retain affine production without cancellation.
- const size=n+2,sink=n,reservoir=n+1,a=Array.from({length:size},()=>Array<number>(size).fill(0) as number[]);
+ const size=n+2,sink=n,reservoir=n+1,a=Array.from({length:size},()=>Array<number>(size).fill(0));
  for(let i=0;i<n;i++){
   let branches=0;
   for(const product of nodes[i].products??[]){

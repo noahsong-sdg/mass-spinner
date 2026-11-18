@@ -74,7 +74,7 @@ export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoating
  const initialMassKgm2=mass(n0,state.tritiumColumnM2,state.deuteriumColumnM2),massKgm2=mass(n1,next.tritiumColumnM2,next.deuteriumColumnM2);
  const depositedMassKgm2=mass(deposited.lithiumM2,deposited.tritiumM2,deposited.deuteriumM2),erodedMassKgm2=mass(eroded.lithiumM2,eroded.tritiumM2,eroded.deuteriumM2);
  const temperatureK=c.referenceK+next.sensibleEnergyJm2/(n1*c.heatCapacityPerLiJK),thicknessM=n1/c.lithiumNumberDensityM3;
- if(![...Object.values(next) as number[],...Object.values(deposited) as number[],...Object.values(eroded) as number[],initialMassKgm2,massKgm2,depositedMassKgm2,erodedMassKgm2,temperatureK,thicknessM].every(Number.isFinite)
+ if(![...Object.values(next) as number[],...Object.values<number>(deposited),...Object.values<number>(eroded),initialMassKgm2,massKgm2,depositedMassKgm2,erodedMassKgm2,temperatureK,thicknessM].every(Number.isFinite)
   ||temperatureK<=0||thicknessM<=0||packingExcess(next)>COATING_PACKING_ROUNDOFF_BOUND)
   throw new RangeError('Coating balance exceeds the finite numeric domain.');
  return {model:'external-well-mixed-Li-coating' as const,state:next,thicknessM,temperatureK,
