@@ -19,7 +19,8 @@ test('heat and collection illustrations explain direction and inventory with acc
  await expect(radius).toBeEnabled();await radius.press('Home');
  await expect(cut.locator('[data-cut-purity]')).toHaveText('undefined');await expect(cut.locator('[data-cut-recovery]')).toHaveText('0.0%');
  await radius.press('End');await expect(cut.locator('[data-cut-purity]')).toHaveText('50.0%');await expect(cut.locator('[data-cut-recovery]')).toHaveText('100.0%');
- await radius.fill('65');await expect(cut.locator('[data-cut-purity]')).not.toHaveText('50.0%');
+ for(let i=0;i<35;i++)await radius.press('ArrowLeft');await expect(radius).toHaveValue('65');
+ await expect(cut.locator('[data-cut-purity]')).not.toHaveText('50.0%');
  await info.attach('collection-cut',{body:await cut.screenshot(),contentType:'image/png'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);expect(errors).toEqual([]);
