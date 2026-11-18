@@ -95,16 +95,18 @@ test('small lithium-fraction changes use the fixed one-percentage-point key with
  cell.material.color.toArray().forEach((value,i)=>close(value,expected.toArray()[i]));assert.deepEqual(tools.legend.domain,[-.01,.01]);tools.dispose();
 });
 
-test('gas display opens with visible tracers and a section instead of an occluding volume, without solving again',()=>{
+test('gas display opens with 3D samples and a transparent longitudinal section, without solving again',()=>{
  const {result,tools}=fixture(),dom=new JSDOM('<main></main>'),doc=dom.window.document;
  const host=doc.querySelector('main')!,before=JSON.stringify(result);tools.motion={group:new THREE.Group()};
  const view=createFuelViewTools({document:doc,host,onChange:()=>view.apply(tools)});view.apply(tools);
  assert.equal(view.state.representation,'both');assert.equal(view.state.visible,true);assert.equal(tools.group.visible,true);assert.equal(tools.motion.group.visible,true);
- assert.equal(tools.group.getObjectByName('Axially uniform gas field')!.visible,false);
+ const field=tools.group.getObjectByName('Axially uniform gas field')!;assert.equal(field.visible,true);
+ for(const mesh of field.children as THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>[]){assert.equal(mesh.geometry.getIndex()!.count,6);assert.equal(mesh.material.transparent,true);assert.equal(mesh.material.depthWrite,false);}
  assert.equal((host.querySelector('#fuel-view-visible') as HTMLInputElement).checked,true);
  assert.equal(tools.legend.layer,'density');assert.match(host.textContent!,/not visible emission/);
  const representation=host.querySelector('#fuel-view-representation') as HTMLSelectElement;representation.value='field';representation.dispatchEvent(new dom.window.Event('change'));
  assert.equal(tools.motion.group.visible,false);assert.equal(tools.group.getObjectByName('Axially uniform gas field')!.visible,true);
+ for(const mesh of field.children as THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>[]){assert.ok(mesh.geometry.getIndex()!.count>6);assert.equal(mesh.material.transparent,false);assert.equal(mesh.material.depthWrite,true);}
  for(const mode of ['spin','flow','transport','equilibrium'] as const){view.presentMode(mode);view.apply(tools);assert.equal(tools.motion.group.visible,true);assert.equal(tools.group.visible,mode==='transport'||mode==='equilibrium');assert.equal(representation.value,view.state.representation);}
  assert.equal(JSON.stringify(result),before);tools.dispose();dom.window.close();
 });

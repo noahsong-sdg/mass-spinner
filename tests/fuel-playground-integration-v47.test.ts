@@ -79,7 +79,7 @@ test('mode selection reveals its diagnostic geometry without rerunning physics o
  for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue: ions'],['flow','tracers','dashed routes'],['transport','both','equal-count']] as const){
   f.change('fuel-motion-mode',mode,'change');
   assert.equal(f.node('fuel-view-representation').value,representation);assert.equal(v.built.motion.group.visible,true);
-  assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,false);
+  assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,representation==='both');
   assert.match(f.node('fuel-mode-reading').textContent,new RegExp(reading));
   assert.equal(f.node('fuel-mode-reading').hidden,false);
   f.change('fuel-view-representation','field','change');assert.equal(f.node('fuel-mode-reading').hidden,true);
@@ -378,9 +378,9 @@ test('pinned real apparatus stays immutable while both viewers share camera, phy
 test('presentation controls move only diagnostic/display geometry and never dispatch a solver calculation',async t=>{
  const f=fixture(t);await f.start();const v=f.viewers[0],r=f.ui.latest.result,before=JSON.stringify(r),count=f.requests.length;
  const cloud=v.built.motion.group.children.find((o:any)=>o.userData.tracers&&!o.userData.ion) as THREE.Group;
- const positions=(cloud.children[0] as THREE.Points).geometry.attributes.position.array.slice();
+ const positions=(cloud.children[0] as THREE.InstancedMesh).geometry.attributes.samplePosition.array.slice();
  f.check('fuel-view-visible',true);f.change('fuel-view-slice',.2);f.change('fuel-view-cutaway',.8);f.change('fuel-view-explode',.7);f.check('fuel-view-ghost',true);f.change('fuel-view-layer','density','change');f.change('fuel-view-species','heavy','change');
- assert.equal(f.requests.length,count);assert.equal(JSON.stringify(f.ui.latest.result),before);assert.deepEqual((cloud.children[0] as THREE.Points).geometry.attributes.position.array,positions);
+ assert.equal(f.requests.length,count);assert.equal(JSON.stringify(f.ui.latest.result),before);assert.deepEqual((cloud.children[0] as THREE.InstancedMesh).geometry.attributes.samplePosition.array,positions);
  assert.equal(v.built.tools.group.visible,true);close(v.built.tools.group.position.z,r.config.lengthM*.2);
  const wall=v.built.scene.getObjectByName('Vessel pressure wall') as THREE.Mesh<any,THREE.Material>;assert.equal(wall.material.opacity,.14);assert.equal(wall.material.clippingPlanes!.length,1);
  const numericalRadius=v.built.tools.sampleAt(r.config.radiusM).radiusM;assert.equal(numericalRadius,r.config.radiusM);assert.ok(v.built.tools.legend.axialUniform);
@@ -392,11 +392,11 @@ test('transport seek updates the plotted profiles, cellwise probes and actual ne
  f.change('fuel-motion-mode','transport','change');f.change('fuel-plot','profile','change');f.change('fuel-motion-time',0);
  const curve=()=>f.ui.nodes.plots.querySelector('svg path[stroke-width="2"]')!.getAttribute('d'),initialCurve=curve();
  const clouds=v.built.motion.group.children.filter((o:any)=>o.userData.tracers&&!o.userData.ion) as THREE.Group[];
- const first=(clouds[0].children[0] as THREE.Points).geometry.attributes.position,initialRadius=Math.hypot(first.getX(0),first.getY(0));
+ const first=(clouds[0].children[0] as THREE.InstancedMesh).geometry.attributes.samplePosition,initialRadius=Math.hypot(first.getX(0),first.getY(0));
  f.change('fuel-motion-time',r.config.durationS);const sample=sampleFuelTransport(r.transport,r.config.durationS);
  assert.notEqual(curve(),initialCurve);assert.notEqual(Math.hypot(first.getX(0),first.getY(0)),initialRadius);
  for(const cloud of clouds){
-  const species=cloud.userData.species,mass=species?sample.heavyMass:sample.lightMass,points=(cloud.children[0] as THREE.Points).geometry.attributes.position,n=cloud.userData.tracers;
+  const species=cloud.userData.species,mass=species?sample.heavyMass:sample.lightMass,points=(cloud.children[0] as THREE.InstancedMesh).geometry.attributes.samplePosition,n=cloud.userData.tracers;
   for(let i=0;i<n;i+=Math.max(1,Math.floor(n/11))){const radius=Math.hypot(points.getX(i),points.getY(i));close(fuelTransportCDF(mass,Math.min(1,radius/R)),(i+.5)/n,2e-6);}
   assert.equal(cloud.children[0].visible,true,'azimuth-averaged gas samples must use the transported radii');
   assert.equal(cloud.userData.azimuthAveraged,true);assert.equal(cloud.children.length,2);

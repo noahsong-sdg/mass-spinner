@@ -3,12 +3,13 @@ import {rotorResponse,rotorPhase} from './fuel-centrifuge.js';
 import {sampleFuelTransport} from './fuel-transport.js';
 import type {FuelRenderResult} from './fuel-field.js';
 import {createFuelMotionGlyphs} from './fuel-motion-glyphs.js';
+import {createFuelBulkMarkers,syncFuelBulkMarkers} from './fuel-bulk-markers.js';
 export type {FuelRenderResult} from './fuel-field.js';
 
 export type FuelMotionMode = 'equilibrium' | 'spin' | 'transport' | 'flow';
 export type FuelSpecies = 'all' | 'light' | 'heavy';
 type FuelCloud = {
- rotor: THREE.Group; points: THREE.Points<THREE.BufferGeometry, THREE.PointsMaterial>;
+ rotor: THREE.Group; points: THREE.InstancedMesh<THREE.BufferGeometry, THREE.MeshStandardMaterial>;
  lines: THREE.LineSegments<THREE.BufferGeometry, THREE.LineBasicMaterial>;
  ion: boolean; species: number; n: number;
 };
@@ -71,7 +72,7 @@ export function createFuelMotion(result: FuelRenderResult){
    if(i%4===0)trails.push(radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),z,...positions.slice(-3));
   }
   const rotor=new THREE.Group();rotor.name=`${ion?'Ions':'Neutrals'} · ${species===0?result.pair.light:result.pair.heavy}`;
-  const points=dots(positions,colors[species],ion?6:3.5,ion?1:.85,ion);
+  const points=createFuelBulkMarkers(positions,colors[species],R*(ion?.035:.022),ion);
   rotor.userData={species,ion,representedNumber:reference.neutralNumber*fractions[species]*(ion?c.ionFraction/(1-c.ionFraction):1),tracers:n};
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(trails,3));
   const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:colors[species],transparent:true,opacity:.22,depthWrite:false,toneMapped:false}));
@@ -107,19 +108,19 @@ export function createFuelMotion(result: FuelRenderResult){
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){
-    const a=points.geometry.attributes.position;
+    const a=points.geometry.attributes.samplePosition;
     for(let i=0;i<n;i++){
      const radius=R*Math.sqrt(quantile(species,(i+.5)/n)),angle=tracerAngle(i,species,ion);
      a.setXY(i,radius*Math.cos(angle),radius*Math.sin(angle));
      if(i%4===0){const j=i/4*2,b=lines.geometry.attributes.position;b.setXYZ(j,radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),a.getZ(i));b.setXYZ(j+1,a.getX(i),a.getY(i),a.getZ(i));}
-    }a.needsUpdate=true;
+    }syncFuelBulkMarkers(points);
    }
    const kind=ion?'ion':'neutral',averaged=['flow','transport'].includes(mode)&&state.speeds[kind]!==0;rotor.rotation.z=averaged?0:state.phases[kind]%TAU;
    // At the transport clock a revolution is unresolved. Show an azimuthally
    // uniform ensemble, not one full wire hoop per sample or aliased rotation.
    rotor.userData.azimuthAveraged=averaged;
    points.visible=true;lines.visible=!averaged&&state.speeds[kind]!==0;
-   const a=points.geometry.attributes.position,b=lines.geometry.attributes.position,exposure=state.speeds[kind]*state.secondsPerScreenSecond*.07;
+   const a=points.geometry.attributes.samplePosition,b=lines.geometry.attributes.position,exposure=state.speeds[kind]*state.secondsPerScreenSecond*.07;
    for(let i=0;i<n;i+=4){const radius=Math.hypot(a.getX(i),a.getY(i)),angle=Math.atan2(a.getY(i),a.getX(i));b.setXYZ(i/2,radius*Math.cos(angle-exposure),radius*Math.sin(angle-exposure),a.getZ(i));b.setXYZ(i/2+1,a.getX(i),a.getY(i),a.getZ(i));}b.needsUpdate=true;
   }
   for(const {path,points,species}of flows){

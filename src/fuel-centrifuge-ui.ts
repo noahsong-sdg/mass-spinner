@@ -130,7 +130,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const modeReading=el('p');modeReading.id='fuel-mode-reading';modeReading.className='fuel-mode-reading';motionBar.append(modeReading);
  const modeDescriptions:Record<FuelMotionMode,string>={
   equilibrium:'Ideal settled density, not this run’s endpoint. Cream arrow: neutral rotation.',
-  transport:'Rotation averaged. Arrows track equal-count gas shells from their starting radii; dots show the computed neutral density.',
+  transport:'Rotation averaged. Arrows track equal-count gas shells from their starting radii; 3D samples follow the computed neutral density.',
   spin:'Same coupled run, slowed down. Blue: ions · cream: gas. Two display sections; arcs trail up to ½ screen second.',
   flow:'Reference throughput along dashed routes; chamber flow is not solved.'
  };

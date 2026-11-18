@@ -73,7 +73,7 @@ function displayFactory(canvas:HTMLCanvasElement):DisplayAdapter{
 
 function release(root:THREE.Object3D){
  const geometries=new Set<THREE.BufferGeometry>(),materials=new Set<THREE.Material>(),textures=new Set<THREE.Texture>();
- root.traverse(node=>{if(!isDrawable(node))return;if(node.geometry)geometries.add(node.geometry);for(const material of node.material?Array.isArray(node.material)?node.material:[node.material]:[]){
+ root.traverse(node=>{if(node instanceof THREE.InstancedMesh)node.dispose();if(!isDrawable(node))return;if(node.geometry)geometries.add(node.geometry);for(const material of node.material?Array.isArray(node.material)?node.material:[node.material]:[]){
   materials.add(material);for(const value of Object.values(material))if(isTexture(value))textures.add(value);
  }});
  for(const value of [...textures,...materials,...geometries])value.dispose();

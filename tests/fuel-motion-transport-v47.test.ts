@@ -11,7 +11,7 @@ function fixture(overrides={}){
  return {...rotor,transport:simulateFuelTransport(rotor,{cells:64,steps:256})};
 }
 const clouds=(motion:any)=>motion.group.children.filter((o:any)=>o.userData.tracers);
-const positions=(cloud:any)=>cloud.children[0].geometry.attributes.position as THREE.BufferAttribute;
+const positions=(cloud:any)=>cloud.children[0].geometry.attributes.samplePosition as THREE.BufferAttribute;
 function close(a:number,b:number,tolerance=3e-7){assert.ok(Number.isFinite(a)&&Math.abs(a-b)<=tolerance,`${a} != ${b}`);}
 function dispose(motion:any){motion.group.traverse((o:any)=>{o.geometry?.dispose();o.material?.dispose();});}
 

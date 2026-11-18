@@ -10,7 +10,7 @@ test('bulk samples fill azimuth and axial position without an artificial helical
   for(const mode of ['equilibrium','spin','transport','flow'] as FuelMotionMode[]){
    motion.update(.1,mode);
    for(const cloud of motion.group.children.filter(o=>o.userData.tracers)){
-    const p=(cloud.children[0] as THREE.Points).geometry.getAttribute('position');
+    const p=(cloud.children[0] as THREE.InstancedMesh).geometry.getAttribute('samplePosition');
     let cosine=0,sine=0;const bins=new Set<string>();
     for(let i=0;i<p.count;i++){
      const theta=Math.atan2(p.getY(i),p.getX(i)),z=p.getZ(i)/result.config.lengthM;
@@ -23,7 +23,7 @@ test('bulk samples fill azimuth and axial position without an artificial helical
    }
   }
   const neutrals=motion.group.children.filter(o=>o.userData.tracers&&!o.userData.ion);
-  const positions=neutrals.map(o=>(o.children[0] as THREE.Points).geometry.getAttribute('position'));
+  const positions=neutrals.map(o=>(o.children[0] as THREE.InstancedMesh).geometry.getAttribute('samplePosition'));
   for(let i=0;i<positions[0].count;i++){
    assert.ok(Math.hypot(positions[0].getX(i)-positions[1].getX(i),positions[0].getY(i)-positions[1].getY(i))>1e-5,
     'equal species inventories must not draw coincident samples that conceal one color');

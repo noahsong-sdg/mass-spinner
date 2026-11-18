@@ -23,7 +23,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
   for(const [value,text]of options){const option=el('option',text);option.value=value;input.append(option);}input.value=state[key];
   input.addEventListener('change',()=>{state[key]=input.value as FuelViewState[K];if(key==='representation'){state.visible=input.value!=='tracers';visible.checked=state.visible;}onChange({...state});});host.append(label,input);return input;
  }
- const representation=select('representation','Gas display',[['field','Gas cutaway'],['tracers','Weighted tracers'],['both','Section + tracers']]);
+ const representation=select('representation','Gas display',[['field','Gas cutaway'],['tracers','3D samples'],['both','Gas + 3D samples']]);
  select('drive','Electromagnetic drive',[['all','B · J · J × B'],['B','Axial field B'],['J','Inward current J'],['force','Azimuthal force J × B'],['off','Hidden']]);
  const driveLegend=el('p');driveLegend.className='fuel-drive-legend';host.append(driveLegend);
  const visible=el('input'),visibleLabel=el('label','Gas cutaway');visible.type='checkbox';visible.id='fuel-view-visible';visible.checked=state.visible;visibleLabel.htmlFor=visible.id;
@@ -47,7 +47,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
  function apply(tools: FuelSceneTools | null | undefined){
   if(!tools)return;tools.group.visible=state.visible;
   if(tools.motion)tools.motion.group.visible=state.representation!=='field';
-  tools.setVolumeVisible(state.representation==='field');
+  tools.setVolumeVisible(state.representation!=='tracers',state.representation==='both');
   if(tools.circuit&&tools.circuit.visible!==state.circuit){tools.circuit.visible=state.circuit;const scene=tools.circuit.parent!;scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;}
   tools.setSlice(state.slice);tools.setProbe?.(state.radius);tools.setLayer(state.layer);tools.setSpecies?.(state.species);tools.setStaging(state);tools.drive?.setLayer(state.drive);
   updateLegend(tools);

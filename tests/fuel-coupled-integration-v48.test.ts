@@ -39,9 +39,9 @@ test('spin and averaged transport retain identical evolving neutral radii and no
   const neutrals=motion.group.children.filter((o:any)=>o.userData.tracers&&!o.userData.ion);
   for(const time of [.137,.7,1]){
    motion.update(time,'transport');
-   const radii=neutrals.map((cloud:any)=>{const a=cloud.children[0].geometry.attributes.position;return Array.from({length:a.count},(_,i)=>Math.hypot(a.getX(i),a.getY(i)));});
+   const radii=neutrals.map((cloud:any)=>{const a=cloud.children[0].geometry.attributes.samplePosition;return Array.from({length:a.count},(_,i)=>Math.hypot(a.getX(i),a.getY(i)));});
    motion.update(time,'spin');
-   neutrals.forEach((cloud:any,species)=>{const a=cloud.children[0].geometry.attributes.position;for(let i=0;i<a.count;i++)close(Math.hypot(a.getX(i),a.getY(i)),radii[species][i],2e-7);});
+   neutrals.forEach((cloud:any,species)=>{const a=cloud.children[0].geometry.attributes.samplePosition;for(let i=0;i<a.count;i++)close(Math.hypot(a.getX(i),a.getY(i)),radii[species][i],2e-7);});
    assert.ok(motion.group.children.filter(o=>o.name==='Schematic throughput packets').every(o=>!o.visible));
   }
  }finally{release(motion.group);}

@@ -54,7 +54,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const group=new THREE.Group();group.name='Gas diagnostic slice';group.userData={componentId:'slice',quantitativeOnly:true,purpose:'Axial placement only; the radial model is uniform along z.',materialBasis:'Numerical diagnostic; no physical material'};
  const rings: FieldMesh[]=[],owned: FieldMesh[]=[],originals: ShellClone[]=[],exploded: ExplodedMesh[]=[];
  const gasField=new THREE.Group();gasField.name='Axially uniform gas field';gasField.userData={componentId:'slice',quantitativeOnly:true,purpose:'Numerical density section extruded along the uniform axial model; not predicted optical emission.',materialBasis:'Numerical diagnostic; no physical material'};group.add(gasField);
- let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0;
+ let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0,sectionOnly=false;
  const peak=Math.max(...result.profiles.map(p=>sampleFuelField(result,p.radiusM).densityM3));
  let domains: Record<FuelFieldLayer,FuelColorDomain>={composition:[0,1],enrichment:[-.01,.01],density:[0,peak],speed:[0,Math.abs(result.samples.at(-1)!.neutralRadS)*R],temperature:[c.gasK,c.gasK]};
  const low=new THREE.Color(COLORS[0]),high=new THREE.Color(COLORS[1]);
@@ -103,8 +103,8 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   // cutaway. Cell edges follow transport; no axial flow or emissivity is implied.
   for(let i=0;i<cells;i++)for(const side of [-1,1]){
    const inner=R*Math.sqrt(i/cells),outer=R*Math.sqrt((i+1)/cells);
-   const geometry=fuelGasCell(inner,outer,L,side);
-   const material=new THREE.MeshBasicMaterial({color:low,toneMapped:false,side:THREE.DoubleSide});
+   const geometry=fuelGasCell(inner,outer,L,side,sectionOnly);
+   const material=new THREE.MeshBasicMaterial({color:low,toneMapped:false,side:THREE.DoubleSide,transparent:sectionOnly,opacity:sectionOnly?.48:1,depthWrite:!sectionOnly});
    const mesh=new THREE.Mesh(geometry,material);mesh.name='Longitudinal gas cell';
    mesh.userData={componentId:'slice',quantitativeOnly:true,cell:i,side,innerRadiusM:inner,outerRadiusM:outer,radiusM:R*Math.sqrt((i+.5)/cells),volumeM3:Math.PI*(outer**2-inner**2)*L,geometrySource:'Blender gas-cell.glb; remapped to accepted SI cell edges'};gasField.add(mesh);
   }
@@ -138,7 +138,10 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  function setSlice(fraction: number){slice=bounded(fraction,0,1,'Slice');group.position.z=slice*L;gasField.position.z=-slice*L;repaint();return slice;}
  function setLayer(value: string){if(!isLayer(value))throw new RangeError('Unknown field layer.');layer=value;repaint();return layer;}
  function setSpecies(value: FuelSpecies){if(!['all','light','heavy'].includes(value))throw new RangeError('Unknown species display.');species=value;repaint();}
- function setVolumeVisible(value:boolean){gasField.visible=value;}
+ function setVolumeVisible(value:boolean,section=false){
+  gasField.visible=value;
+  if(sectionOnly!==section){sectionOnly=section;fieldCells=0;repaint();}
+ }
  function setDomains(next: FuelColorDomains){
   for(const [key,range] of Object.entries(next)){
    if(!isLayer(key)||!Array.isArray(range)||range.length!==2||!range.every(Number.isFinite)||key!=='enrichment'&&range[0]<0||range[1]<range[0]||key==='composition'&&(range[0]!==0||range[1]!==1)||key==='enrichment'&&(range[0]!==-.01||range[1]!==.01))throw new RangeError('Ordered finite physical color domains required; composition uses [0, 1] and enrichment uses [-0.01, 0.01].');

@@ -58,7 +58,7 @@ test('weighted neutral cloud reproduces inventory cuts, ion fraction and species
  for(const child of motion.group.children.filter(o=>o.userData.tracers)){
   const {ion,species,tracers,representedNumber}=child.userData;
   close(representedNumber,n*[r.config.lightFraction,1-r.config.lightFraction][species]*(ion?r.config.ionFraction/(1-r.config.ionFraction):1));
-  const p=(child.children[0] as THREE.Points).geometry.getAttribute('position');assert.equal(p.count,tracers);
+  const p=(child.children[0] as THREE.InstancedMesh).geometry.getAttribute('samplePosition');assert.equal(p.count,tracers);
   if(!ion){let inside=0;for(let i=0;i<p.count;i++)if(Math.hypot(p.getX(i),p.getY(i))<=r.config.cutFraction*r.config.radiusM)inside++;
    const beta=fuelMotionState(r,0).beta[species];close(inside/tracers,radialCDF(beta,r.config.cutFraction**2),1/tracers);
    const before=p.array.slice();motion.update(.02);assert.deepEqual(p.array,before,'rotation does not invent radial transport');
@@ -66,7 +66,7 @@ test('weighted neutral cloud reproduces inventory cuts, ion fraction and species
  }
  motion.update(.1,'spin');
  for(const child of motion.group.children.filter(o=>o.userData.tracers)){
-  const p=(child.children[0] as THREE.Points).geometry.getAttribute('position');let mean=0;
+  const p=(child.children[0] as THREE.InstancedMesh).geometry.getAttribute('samplePosition');let mean=0;
   for(let i=0;i<p.count;i++)mean+=(p.getX(i)**2+p.getY(i)**2)/p.count;
   close(mean,r.config.radiusM**2/2,1e-8);
  }
@@ -118,12 +118,19 @@ test('drive and collisions affect the same rotation/separation state; diffusivit
  const slowMixing=fuelMotionState(result({radialDiffusivityM2S:.0001}),.1);assert.deepEqual(slowMixing.beta,baseline.beta);
 });
 
-test('gas sprites use native logarithmic-depth capable materials with distinct neutral and ion masks',()=>{
+test('Blender bulk markers use native shaded geometry, logarithmic depth and distinct charge shapes',()=>{
  const motion=createFuelMotion(result()),clouds=motion.group.children.filter(o=>o.userData.tracers);
  for(const cloud of clouds){
-  const m=(cloud.children[0] as THREE.Points).material as THREE.PointsMaterial;
-  assert.equal(m.isPointsMaterial,true,'custom shaders must not silently bypass the viewer depth convention');assert.equal(m.depthTest,true);assert.equal(m.depthWrite,false);assert.equal(m.sizeAttenuation,false);
-  const data=m.map!.image.data as Uint8Array;assert.equal(data[(16*32+16)*4+3]>0,!cloud.userData.ion,'neutrals are solid, ions are rings');
+  const mesh=cloud.children[0] as THREE.InstancedMesh<THREE.BufferGeometry,THREE.MeshStandardMaterial>;
+  assert.equal(mesh.isInstancedMesh,true);assert.equal(mesh.material.isMeshStandardMaterial,true);
+  assert.equal(mesh.material.depthTest,true);assert.equal(mesh.material.depthWrite,false);
+  assert.equal(mesh.material.emissive.getHex(),0,'markers do not claim luminous gas');
+  assert.equal(mesh.count,cloud.userData.tracers);assert.equal(mesh.userData.geometrySource,'blender/build_gas_markers.py');
+  const p=mesh.geometry.getAttribute('samplePosition'),matrix=new THREE.Matrix4();
+  for(let i=0;i<mesh.count;i++){
+   mesh.getMatrixAt(i,matrix);close(matrix.elements[12],p.getX(i),1e-7);close(matrix.elements[13],p.getY(i),1e-7);close(matrix.elements[14],p.getZ(i),1e-7);
+  }
  }
- assert.equal((clouds[0].children[0] as THREE.Points).material.map,(clouds[1].children[0] as THREE.Points).material.map,'one shared native sprite per charge class');dispose(motion.group);
+ assert.notDeepEqual((clouds[0].children[0] as THREE.Mesh).geometry.getAttribute('position').array,(clouds[2].children[0] as THREE.Mesh).geometry.getAttribute('position').array);
+ dispose(motion.group);
 });

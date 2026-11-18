@@ -47,6 +47,15 @@ test('animation clock freezes across visibility, pause, reload and disposal; no 
  h.viewer.setAnimation(()=>{});h.viewer.dispose();assert.equal(h.frames.size,0);
 });
 
+test('replacement releases instanced particle GPU allocations, as well as their geometry and material',async t=>{
+ const h=await fixture(t),mesh=new THREE.InstancedMesh(new THREE.SphereGeometry(.001),new THREE.MeshStandardMaterial(),4);
+ let instances=0,geometries=0,materials=0;
+ mesh.addEventListener('dispose',()=>instances++);mesh.geometry.addEventListener('dispose',()=>geometries++);mesh.material.addEventListener('dispose',()=>materials++);
+ h.reference.add(mesh);await h.viewer.load({model:'replacement.glb'});
+ assert.equal(instances,1);assert.equal(geometries,1);assert.equal(materials,1);
+ mesh.removeFromParent();h.viewer.dispose();assert.equal(instances,1);
+});
+
 test('dimension provenance is visible without a human and clears stale labels during asset changes',async t=>{
  const h=await fixture(t),note=h.frame.querySelector<HTMLOutputElement>('.apparatus-scale-note')!;
  await h.viewer.load({model:'assumed.glb',scaleLabel:'Assumed dimensions'});assert.equal(note.hidden,false);
