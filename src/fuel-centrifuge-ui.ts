@@ -44,6 +44,7 @@ export type SetupFuelCentrifugeOptions = {
 };
 const message = (error:unknown) => error instanceof Error ? error.message : String(error);
 const fmt=(value:number|null)=>value===null?'—':Number(value).toLocaleString(undefined,{maximumSignificantDigits:4});
+const geometryScale=(config:FuelConfig)=>`Assumed chamber · Ø ${fmt(2*config.radiusM)} m × ${fmt(config.lengthM)} m`;
 const temperatureDomain=(results:FuelResult[]):[number,number]=>{let lo=Infinity,hi=0;for(const result of results){lo=Math.min(lo,result.config.gasK);hi=Math.max(hi,result.config.gasK);for(const s of result.transport?.checkpoints??result.transport?.snapshots??[]){if(s.thermal){lo=Math.min(lo,s.thermal.gas?.minK??s.thermal.gasK);hi=Math.max(hi,s.thermal.gas?.maxK??s.thermal.gasK);}}}return [lo,hi];};
 const fields: readonly FuelField[]=[
  ['magneticT','Axial magnetic field','T',.05,2,.05],['currentA','Radial discharge current','A',0,.2,.001],
@@ -102,6 +103,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const sensitivity=mountPublicSensitivity(nodes.info,{request});
  (doc.querySelector('main')??doc.body).append(root);
  const frame=el('div');frame.className='apparatus-frame';nodes.render.className='apparatus';nodes.render.append(frame);
+ const dimensionBasis=el('details');dimensionBasis.className='apparatus-provenance';
+ dimensionBasis.append(el('summary','Assumed dimensions'),el('p','Chamber dimensions follow the chosen solver inputs, not measured Marathon hardware. Electrode sizes, coils, wall thickness, ports and outer envelope are unknown and illustrative. The patent drawings establish topology, not scale.'));
+ const dimensionSource=el('a','Patent drawings & description ↗');dimensionSource.href='https://patents.google.com/patent/WO2026064411A1/en';dimensionSource.target='_blank';dimensionSource.rel='noopener';dimensionBasis.append(dimensionSource);nodes.render.append(dimensionBasis);
  const baselineFrame=el('div');baselineFrame.className='apparatus-frame fuel-baseline';baselineFrame.hidden=true;nodes.render.append(baselineFrame);
  const comparisonLabel=el('p');comparisonLabel.className='fuel-comparison-label';comparisonLabel.hidden=true;nodes.render.append(comparisonLabel);
  const status=el('p');status.setAttribute('role','status');status.className='fuel-status';nodes.render.append(status);
@@ -197,6 +201,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const sources=[['Patent WO2026064411A1','https://patents.google.com/patent/WO2026064411A1/en'],['Newer patent text · mirror','https://eureka.patsnap.com/patent/WO2026136752A2'],['Marathon fuel cycle','https://www.marathonfusion.com/fusion-energy/'],['Tritium-Lean paper · §VII.2','https://arxiv.org/html/2410.05238v2#S7.SS2'],['External centrifuge thermal study','https://arxiv.org/abs/2607.28208'],['NIST lithium vapor pressure','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7439932&Mask=4'],['NIST solid tungsten heat capacity','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440337&Mask=2'],['Tungsten thermal properties · Tolias','https://arxiv.org/abs/1703.06302']];
  for(const [title,url]of sources){const a=el('a',title);a.href=url;a.target='_blank';a.rel='noopener';const p=el('p');p.append(a);nodes.info.append(p);}
  for(const [title,text]of [
+  ['Dimensions','Chamber radius and length are simulator inputs, not published Marathon measurements. The default chamber is 0.24 m in diameter and 0.8 m long (36.2 L). The newer patent §§55–56 estimates about 12 L for differential pumping and 10 L for lithium separation under different stated conditions; neither specifies an aspect ratio or measured machine. Electrode sizes, coils, wall thickness, ports and outer envelope remain assumed. The 5′9″ person compares against the chosen model dimensions only.'],
   ['Partial ionization','A small driven ion population transfers momentum to mostly neutral gas. Hot electrons can sustain ionization while cooler heavy gas improves separation. Ion fraction, conductivity and collision rate are independent assumed inputs; electron heating, ionization, recombination and dissociation kinetics are not solved.'],
   ['Current localization','Annular drive and a rigid interior are disclosed approaches to reduce shear. This model imposes rigid rotors; it does not resolve the velocity profile or qualify turbulence suppression.'],
   ['Lithium handling','A hot refractory sub-vessel and controlled outlets manage lithium transport. The newer disclosure gives ≥700 °C as an embodiment, not a universal condensation threshold. Vapor pressure, condensation, erosion and wall lifetime need material data.'],
@@ -260,7 +265,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   baselineFrame.hidden=false;comparisonLabel.hidden=false;nodes.render.classList.add('fuel-comparing');
   baselineTools?.dispose();baselineTools=null;
   if(!baselineViewer)baselineViewer=graphics[0].createApparatusViewer<FuelModel>(baselineFrame,{loader:{loadAsync:(value:FuelModel)=>{const built=graphics![1].buildFuelCentrifugeGeometry({...value,diagnostics:true});baselineMotion=built.motion;baselineTools=built.tools;return Promise.resolve(built);}},onCamera:pose=>viewer?.setCamera?.(pose),onResize:()=>baselineViewer?.setCamera?.(viewer?.cameraPose?.(),{preserveOwnership:true}),pickFilter:hit=>baselineTools?.visibleHit(hit)??true,onError:error=>{comparisonLabel.textContent=message(error);}});
-  await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:true});
+  await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},scaleLabel:geometryScale(accepted.result.config),modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:true});
   if(pinned!==accepted||disposed)return;
   viewer?.resize();baselineViewer.setCamera?.(viewer!.cameraPose?.(),{preserveOwnership:true});applyViews();playback();
  }
@@ -425,7 +430,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    },onSelect:(id,part,name,hit)=>{if(id==='slice'){const sample=hit&&tools?.sampleWorld(hit.point);if(sample)selectProbe(sample.radiusM/latest!.result.config.radiusM);playing=false;selector.value=views.state.layer==='temperature'?(latest?.result.transport?.operation?.thermal?.gas?'thermalProfile':'thermal'):'composition';draw();playback();onResults();return;}describe(id,part,name);onInspect();},onError:error=>{status.textContent=`3D unavailable: ${message(error)}`;}});
   }
   const pose=tools?viewer.cameraPose?.():null;if(tools)viewer.select(null);tools?.dispose();tools=null;
-  await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:!!pose});
+  await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},scaleLabel:geometryScale(snapshot.result.config),modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:!!pose});
   if(pose&&snapshot.result.config.radiusM)viewer.setCamera?.(pose,{preserveOwnership:true});
   if(disposed||!active||dirty||updating||snapshot!==latest)return;
   // The asynchronous viewer loader installs tools before load resolves.

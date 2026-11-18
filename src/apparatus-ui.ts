@@ -6,7 +6,7 @@ import type {ApparatusViewerOptions, ViewerAsset, ViewerRepresentation} from './
 import type {SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
 
-type ApparatusAsset = ViewerAsset<string> & {caption: string};
+type ApparatusAsset = ViewerAsset<string> & {caption:string;geometryLabel?:string;dimensionSource?:string};
 const assets: Record<string, ApparatusAsset | undefined> = manifest.assets;
 type SelectionPart = Record<string, unknown>;
 export interface ApparatusDisplay {
@@ -30,9 +30,9 @@ export type SetupApparatusOptions = {
 export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,viewerModuleLoader=()=>import('./apparatus-viewer.js')}: SetupApparatusOptions={}){
  const doc=host.ownerDocument,figure=doc.createElement('figure'),frame=doc.createElement('div');
  const toolbar=doc.createElement('div'),choices=doc.createElement('select'),reset=doc.createElement('button'),retry=doc.createElement('button'),readout=doc.createElement('div');
- const provenance=doc.createElement('details'),provenanceTitle=doc.createElement('summary'),provenanceText=doc.createElement('p');
+ const provenance=doc.createElement('details'),provenanceTitle=doc.createElement('summary'),provenanceText=doc.createElement('p'),dimensionSource=doc.createElement('a');
  provenance.className='apparatus-provenance';provenanceTitle.textContent='Concept model';
- provenanceTitle.setAttribute('aria-label','Geometry and material fidelity');provenance.append(provenanceTitle,provenanceText);
+ provenanceTitle.setAttribute('aria-label','Geometry and material fidelity');dimensionSource.textContent='Dimension source ↗';dimensionSource.target='_blank';dimensionSource.rel='noopener';dimensionSource.hidden=true;provenance.append(provenanceTitle,provenanceText,dimensionSource);
  figure.className='apparatus';frame.className='apparatus-frame';toolbar.className='apparatus-toolbar';
  choices.setAttribute('aria-label','Inspect a component');reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
  readout.className='component-description';readout.setAttribute('aria-live','polite');
@@ -47,7 +47,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
    provenanceText.textContent=(status==='pending'?'Updating; numerical surfaces withheld. ':'')+asset.caption;return;
   }
   const content=numerical?layer==='tracks'?'accepted trajectories shown':layer==='impacts'?'accepted impacts shown':'accepted numerical fields shown':'hardware only; numerical layers hidden';
-  provenanceText.textContent=`True-scale SI hardware; ${content}. Construction and material choices are illustrative assumptions.`;
+  provenanceText.textContent=`SI geometry from simulator inputs; ${content}. Dimensions, construction and material choices are assumptions, not measured Marathon hardware.`;
  }
  function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.setPending?.(statePending);if(selected)current.select(selected);}
  function select(id: string,notify=true,part: SelectionPart | null=null,name=''){
@@ -81,6 +81,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  function show(mode: string){
   acceptedState=null;surface=null;statePending=false;viewer?.updateSurfaceState?.(null);
   asset=assets[mode];host.hidden=!asset?.model;if(!asset?.model)return;
+  provenanceTitle.textContent=asset.geometryLabel??'Concept model';dimensionSource.hidden=!asset.dimensionSource;dimensionSource.href=asset.dimensionSource??'';
   provenance.open=false;describeRepresentation({geometry:'reference',status:'reference'});
   records=components??modelComponents(mode);selected='';focus.disabled=true;choices.replaceChildren();readout.replaceChildren();
   const prompt=doc.createElement('option');prompt.value='';prompt.textContent='Inspect…';prompt.disabled=true;choices.append(prompt);
