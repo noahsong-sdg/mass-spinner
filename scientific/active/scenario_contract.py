@@ -1,4 +1,5 @@
 """Portable shape admission; physical/history semantics remain the solver's responsibility."""
+
 import json
 from pathlib import Path
 

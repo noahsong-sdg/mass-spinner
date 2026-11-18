@@ -15,7 +15,8 @@
     "check:gltf": "tsx scripts/check-gltf.ts",
     "release:seal": "tsx scripts/release-manifest.ts seal",
     "release:verify": "tsx scripts/release-manifest.ts verify",
-    "render:assembly": "python3 blender/render.py assembly"
+    "render:assembly": "python3 blender/render.py assembly",
+    "typecheck:tests": "tsc --noEmit --checkers 1 -p tsconfig.tests.json"
   },
   "devDependencies": {
     "@types/three": "0.187.0",

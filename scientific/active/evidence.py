@@ -1,4 +1,5 @@
 """Package and retrieve immutable evidence; never run downloaded contents."""
+
 import hashlib
 import json
 import shutil
@@ -35,9 +36,16 @@ def package(root, output, url, source_revision, run_url, scope):
     with tarfile.open(output, "w:gz") as archive:
         for name in files:
             archive.add(root / name, arcname=name, recursive=False)
-    return {"schemaVersion": 1, "url": url, "sha256": digest(output),
-            "bytes": output.stat().st_size, "sourceRevision": source_revision,
-            "runUrl": run_url, "scope": scope, "files": files}
+    return {
+        "schemaVersion": 1,
+        "url": url,
+        "sha256": digest(output),
+        "bytes": output.stat().st_size,
+        "sourceRevision": source_revision,
+        "runUrl": run_url,
+        "scope": scope,
+        "files": files,
+    }
 
 
 def unpack(bundle, catalog, destination):
@@ -57,8 +65,13 @@ def unpack(bundle, catalog, destination):
             names = set()
             for member in members:
                 path = PurePosixPath(member.name)
-                if (not member.isfile() or path.is_absolute() or ".." in path.parts
-                        or str(path) != member.name or member.name in names):
+                if (
+                    not member.isfile()
+                    or path.is_absolute()
+                    or ".." in path.parts
+                    or str(path) != member.name
+                    or member.name in names
+                ):
                     raise ValueError("Unsafe or duplicate evidence member")
                 names.add(member.name)
             if names != catalog["files"].keys() or sum(m.size for m in members) > MAX_BYTES:
@@ -89,6 +102,7 @@ def retrieve(catalog, destination):
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="command", required=True)
     pack = sub.add_parser("package")
@@ -99,7 +113,9 @@ if __name__ == "__main__":
     fetch.add_argument("destination")
     args = parser.parse_args()
     if args.command == "package":
-        data = package(args.root, args.output, args.url, args.source_revision, args.run_url, args.scope)
+        data = package(
+            args.root, args.output, args.url, args.source_revision, args.run_url, args.scope
+        )
         Path(args.catalog).write_text(json.dumps(data, indent=2) + "\n")
     else:
         retrieve(json.loads(Path(args.catalog).read_text()), args.destination)

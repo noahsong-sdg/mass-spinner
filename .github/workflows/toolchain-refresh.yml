@@ -24,6 +24,7 @@ jobs:
             npm audit --json > toolchain-report/npm-audit.json || test "$?" = 1
             node --import tsx scripts/qualify-gltf.ts > toolchain-report/gltf-trial.log 2>&1 || touch toolchain-report/gltf-trial-failed
             cp -R output/gltf-trial toolchain-report/
+            npm run typecheck:tests > toolchain-report/maintained-tests.log 2>&1 || touch toolchain-report/maintained-tests-failed
             npm run typecheck:infrastructure > toolchain-report/infrastructure.log 2>&1 || touch toolchain-report/infrastructure-failed
             npm run typecheck > toolchain-report/typecheck.log 2>&1 || touch toolchain-report/typecheck-failed
             node --import tsx --test --test-concurrency=1 tests/surface-state.test.ts tests/surface-independent-v39.test.ts tests/surface-viewer-v39.test.ts tests/scenario-schema.test.ts tests/worker-client.test.ts tests/release-manifest.test.ts tests/dependency-review.test.ts > toolchain-report/regressions.log 2>&1 || touch toolchain-report/regressions-failed

@@ -25,6 +25,7 @@ jobs:
             node --import tsx scripts/check-dependencies.ts npm-audit.json
             npm run typecheck
             npm run typecheck:infrastructure
+            npm run typecheck:tests
             npm run lint
             python3 -m unittest discover -s scientific/electron-applicability -p test_screen.py -v
             python3 -m unittest discover -s tests -p test_argon_reference_export.py -v
