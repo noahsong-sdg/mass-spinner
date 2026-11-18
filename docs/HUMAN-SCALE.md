@@ -7,8 +7,9 @@ The mannequin is procedural display geometry, not a detailed anatomical model.
 The person retains that height when apparatus dimensions or representations
 change. Feet and apparatus share the same world-Y floor plane, independent of
 the inspection camera's rolled up-axis. Scale mode uses an upright perspective;
-the camera
-fits both objects, including on narrow screens; hiding the person restores an
+the camera fits both objects, including on narrow screens, above the default
+playback panel. User-dragged panel positions remain under user control.
+Hiding the person restores an
 apparatus close-up. The reference is separate from selectable hardware,
 numerical surfaces, solver inputs and model dimensions.
 

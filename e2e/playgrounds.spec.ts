@@ -88,6 +88,10 @@ test('human scale: person comparison and return to apparatus close-up',async({pa
  const button=page.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true});
  await expect(button).toHaveAttribute('aria-pressed','false');await button.click();
  await expect(button).toHaveAttribute('aria-pressed','true');await expect(button).toHaveText('5′9″ · 1.75 m');
+ await expect.poll(async()=>{
+  const frame=await page.locator('#fuel-render > .apparatus-frame').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
+  return frame&&panel?frame.y+frame.height<=panel.y:false;
+ }).toBe(true);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('human-scale',{body:await page.screenshot(),contentType:'image/png'});
  await button.click();await expect(button).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);

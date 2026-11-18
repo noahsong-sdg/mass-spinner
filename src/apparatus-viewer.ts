@@ -140,6 +140,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  scaleToggle.addEventListener('click',()=>{
   person.visible=!person.visible;scaleToggle.setAttribute('aria-pressed',String(person.visible));
   scaleToggle.textContent=person.visible?'5′9″ · 1.75 m':'Human scale';fit();reset();
+  frame.dispatchEvent(new win.CustomEvent('apparatus-scalechange',{bubbles:true}));
  });
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return person.visible?new THREE.Vector3(0,1,0):root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
  function fit(){
