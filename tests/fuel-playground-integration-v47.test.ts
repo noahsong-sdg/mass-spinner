@@ -372,7 +372,8 @@ test('transport seek updates the plotted profiles, cellwise probes and actual ne
  for(const cloud of clouds){
   const species=cloud.userData.species,mass=species?sample.heavyMass:sample.lightMass,points=(cloud.children[0] as THREE.Points).geometry.attributes.position,n=cloud.userData.tracers;
   for(let i=0;i<n;i+=Math.max(1,Math.floor(n/11))){const radius=Math.hypot(points.getX(i),points.getY(i));close(fuelTransportCDF(mass,Math.min(1,radius/R)),(i+.5)/n,2e-6);}
-  assert.equal(cloud.children[2].visible,true,'rotation-averaged gas rings must use the transported radii');
+  assert.equal(cloud.children[0].visible,true,'azimuth-averaged gas samples must use the transported radii');
+  assert.equal(cloud.userData.azimuthAveraged,true);assert.equal(cloud.children.length,2);
  }
  const radius=R*.8,cell=Math.min(sample.lightMass.length-1,Math.floor((radius/R)**2*sample.lightMass.length)),x=r.config.lightFraction;
  const light=sample.lightMass[cell]*sample.lightMass.length,heavy=sample.heavyMass[cell]*sample.heavyMass.length,total=x*light+(1-x)*heavy,probe=v.built.tools.sampleAt(radius);

@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {createFuelDrive} from './fuel-drive.js';
+import {fuelGasCell} from './fuel-gas-cell.js';
 import {createFuelCutFaces, type FuelShellMesh} from './fuel-cut-faces.js';
 import type {FuelRenderResult, FuelSpecies, createFuelMotion} from './fuel-motion.js';
 import type {FuelFieldState, FuelFieldSample} from './fuel-field.js';
@@ -56,13 +57,6 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const peak=Math.max(...result.profiles.map(p=>sampleFuelField(result,p.radiusM).densityM3));
  let domains: Record<FuelFieldLayer,FuelColorDomain>={composition:[0,1],enrichment:[-.01,.01],density:[0,peak],speed:[0,Math.abs(result.samples.at(-1)!.neutralRadS)*R],temperature:[c.gasK,c.gasK]};
  const low=new THREE.Color(COLORS[0]),high=new THREE.Color(COLORS[1]);
- for(let i=0;i<64;i++){
-  const inner=R*i/64,outer=R*(i+1)/64;
-  const material=new THREE.MeshBasicMaterial({color:low,toneMapped:false,transparent:true,opacity:.72,side:THREE.DoubleSide,depthWrite:false});
-  const mesh=new THREE.Mesh(new THREE.RingGeometry(inner,outer,96),material);mesh.name='Radial field sample';
-  mesh.userData={componentId:'slice',quantitativeOnly:true,radiusM:Math.sqrt((inner**2+outer**2)/2)};
-  rings.push(mesh);owned.push(mesh);group.add(mesh);
- }
  const edge=new THREE.Mesh(new THREE.TorusGeometry(R,R*.004,6,96),new THREE.MeshBasicMaterial({color:0xc3d5cc,transparent:true,opacity:.8,depthWrite:false}));
  edge.name='Axial slice handle';edge.userData={componentId:'slice',controlKey:'slice',quantitativeOnly:true};group.add(edge);owned.push(edge);
  const cut=new THREE.Mesh(new THREE.TorusGeometry(R,R*.006,6,96),new THREE.MeshBasicMaterial({color:0xe1ad78,depthWrite:false}));
@@ -96,16 +90,22 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  function sampleAt(radiusM: number): FuelDiagnosticSample{return {...sampleFuelField(result,radiusM,state),axialM:slice*L,radiusFraction:radiusM/R,axialUniform:true};}
  function rebuildField(cells: number){
   if(cells===fieldCells)return;fieldCells=cells;
-  for(const node of [...gasField.children]){const mesh=node as FieldMesh;mesh.geometry.dispose();mesh.material.dispose();gasField.remove(mesh);}
-  // Equal-volume cell edges match transport exactly. The two flat longitudinal
-  // faces reveal the radial field, without implying an axial flow or emissivity.
+  for(const mesh of [...rings,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();mesh.removeFromParent();}rings.length=0;
+  for(let i=0;i<cells;i++){
+   const inner=R*Math.sqrt(i/cells),outer=R*Math.sqrt((i+1)/cells);
+   const material=new THREE.MeshBasicMaterial({color:low,toneMapped:false,transparent:true,opacity:.72,side:THREE.DoubleSide,depthWrite:false});
+   const mesh=new THREE.Mesh(new THREE.RingGeometry(inner,outer,96),material);mesh.name='Radial field sample';
+   mesh.userData={componentId:'slice',quantitativeOnly:true,cell:i,innerRadiusM:inner,outerRadiusM:outer,radiusM:R*Math.sqrt((i+.5)/cells)};
+   rings.push(mesh);group.add(mesh);
+  }
+  // Two quarter-annular volumes expose the radial field on a continuous 3D
+  // cutaway. Cell edges follow transport; no axial flow or emissivity is implied.
   for(let i=0;i<cells;i++)for(const side of [-1,1]){
-   const inner=R*Math.sqrt(i/cells),outer=R*Math.sqrt((i+1)/cells),a=side*inner,b=side*outer;
-   const geometry=new THREE.BufferGeometry();
-   geometry.setAttribute('position',new THREE.Float32BufferAttribute([a,0,0,b,0,0,b,0,L,a,0,0,b,0,L,a,0,L],3));
+   const inner=R*Math.sqrt(i/cells),outer=R*Math.sqrt((i+1)/cells);
+   const geometry=fuelGasCell(inner,outer,L,side);
    const material=new THREE.MeshBasicMaterial({color:low,toneMapped:false,side:THREE.DoubleSide});
    const mesh=new THREE.Mesh(geometry,material);mesh.name='Longitudinal gas cell';
-   mesh.userData={componentId:'slice',quantitativeOnly:true,cell:i,side,innerRadiusM:inner,outerRadiusM:outer,radiusM:R*Math.sqrt((i+.5)/cells),volumeM3:Math.PI*(outer**2-inner**2)*L};gasField.add(mesh);
+   mesh.userData={componentId:'slice',quantitativeOnly:true,cell:i,side,innerRadiusM:inner,outerRadiusM:outer,radiusM:R*Math.sqrt((i+.5)/cells),volumeM3:Math.PI*(outer**2-inner**2)*L,geometrySource:'Blender gas-cell.glb; remapped to accepted SI cell edges'};gasField.add(mesh);
   }
  }
  function fieldValue(sample: FuelFieldSample){
@@ -173,7 +173,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  function dispose(){
   if(disposed)return;disposed=true;cutFaces.dispose();group.removeFromParent();drive.group.removeFromParent();
   const resources=new Set<THREE.BufferGeometry | THREE.Material>();drive.group.traverse(node=>{const owned=node as DriveResourceObject;if(owned.geometry)resources.add(owned.geometry);if(owned.material)resources.add(owned.material);});for(const resource of resources)resource.dispose();
-  for(const mesh of [...owned,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();}
+  for(const mesh of [...owned,...rings,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();}
   for(const {mesh,original,clones} of originals){mesh.material=original;for(const material of clones)material.dispose();}
   for(const {mesh,position} of exploded)mesh.position.copy(position);
  }

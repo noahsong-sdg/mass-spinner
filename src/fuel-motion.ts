@@ -10,7 +10,6 @@ type FuelCloud = {
  rotor: THREE.Group; points: THREE.Points<THREE.BufferGeometry, THREE.PointsMaterial>;
  lines: THREE.LineSegments<THREE.BufferGeometry, THREE.LineBasicMaterial>;
  ion: boolean; species: number; n: number;
- average?: THREE.LineSegments<THREE.BufferGeometry, THREE.LineBasicMaterial>;
 };
 
 const U=1.66053906892e-27,K=1.380649e-23,TAU=2*Math.PI;
@@ -39,7 +38,7 @@ export function fuelMotionState(result: FuelRenderResult,timeS: number,mode: Fue
 
 /** Weighted bulk tracers: no claim of thermal gyromotion or time-resolved separation. */
 export function createFuelMotion(result: FuelRenderResult){
- const {config:c}=result,R=c.radiusM,L=c.lengthM,group=new THREE.Group(),clouds: FuelCloud[]=[];let selectedSpecies: FuelSpecies='all';
+ const {config:c}=result,R=c.radiusM,L=c.lengthM,group=new THREE.Group(),clouds: FuelCloud[]=[];
  group.name='Gas motion';group.userData.nonPickable=true;
  const sprites=new Map<boolean, THREE.DataTexture>();
  function sprite(ion: boolean){
@@ -103,21 +102,10 @@ export function createFuelMotion(result: FuelRenderResult){
     }a.needsUpdate=true;
    }
    const kind=ion?'ion':'neutral',averaged=['flow','transport'].includes(mode)&&state.speeds[kind]!==0;rotor.rotation.z=averaged?0:state.phases[kind]%TAU;
-   points.visible=!averaged;lines.visible=!averaged&&state.speeds[kind]!==0;
-   if(averaged&&!cloud.average){
-    const circles: number[]=[],a=points.geometry.attributes.position;
-    for(let i=0;i<n;i++){const radius=Math.hypot(a.getX(i),a.getY(i)),z=a.getZ(i);
-     for(let j=0;j<48;j++)for(const angle of [TAU*j/48,TAU*(j+1)/48])circles.push(radius*Math.cos(angle),radius*Math.sin(angle),z);
-    }
-    const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(circles,3));
-    const selected=selectedSpecies==='all'||species===(selectedSpecies==='light'?0:1);
-    cloud.average=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:colors[species],transparent:true,opacity:selected?(ion?.12:.085):.003,depthWrite:false}));rotor.add(cloud.average);
-   }
-   if(cloud.average)cloud.average.visible=averaged;
-   if(averaged&&(mode==='transport'||mode!==previousMode)){
-    const a=points.geometry.attributes.position,b=cloud.average!.geometry.attributes.position;
-    for(let i=0;i<n;i++){const radius=Math.hypot(a.getX(i),a.getY(i));for(let j=0;j<48;j++)for(let end=0;end<2;end++){const angle=TAU*(j+end)/48;b.setXYZ(i*96+j*2+end,radius*Math.cos(angle),radius*Math.sin(angle),a.getZ(i));}}b.needsUpdate=true;
-   }
+   // At the transport clock a revolution is unresolved. Show an azimuthally
+   // uniform ensemble, not one full wire hoop per sample or aliased rotation.
+   rotor.userData.azimuthAveraged=averaged;
+   points.visible=true;lines.visible=!averaged&&state.speeds[kind]!==0;
    const a=points.geometry.attributes.position,b=lines.geometry.attributes.position,exposure=state.speeds[kind]*state.secondsPerScreenSecond*.07;
    for(let i=0;i<n;i+=4){const radius=Math.hypot(a.getX(i),a.getY(i)),angle=Math.atan2(a.getY(i),a.getX(i));b.setXYZ(i/2,radius*Math.cos(angle-exposure),radius*Math.sin(angle-exposure),a.getZ(i));b.setXYZ(i/2+1,a.getX(i),a.getY(i),a.getZ(i));}b.needsUpdate=true;
   }
@@ -128,7 +116,7 @@ export function createFuelMotion(result: FuelRenderResult){
   }
   previousMode=mode;return state;
  }
- update(0);return {group,update,setSpecies(value: FuelSpecies){selectedSpecies=value;for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.22:.02;if(cloud.average)cloud.average.material.opacity=selected?(cloud.ion?.12:.085):.003;}}};
+ update(0);return {group,update,setSpecies(value: FuelSpecies){for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.22:.02;}}};
 }
 
 export type FuelMotion = ReturnType<typeof createFuelMotion>;

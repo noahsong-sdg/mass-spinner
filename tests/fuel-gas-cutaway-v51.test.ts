@@ -20,15 +20,26 @@ test('longitudinal gas field integrates accepted species inventories on their ex
  const transport=simulateFuelTransport(result,{cells:24,steps:64}),state=sampleFuelTransport(transport,.5),before=JSON.stringify(state);
  tools.update(state);const cells=field.children.filter(m=>m.userData.side===1);
  assert.equal(cells.length,24);assert.equal(field.children.length,48);
+ const section=tools.group.children.filter(m=>m.name==='Radial field sample');assert.equal(section.length,24);
  const x=result.config.lightFraction,number=result.config.pressurePa*Math.PI*result.config.radiusM**2*result.config.lengthM/(K*result.config.gasK);
  let light=0,heavy=0;
  for(const cell of cells){
   const s=cell.userData,i=s.cell;
   close(s.innerRadiusM,transport.radiusEdgesM[i]);close(s.outerRadiusM,transport.radiusEdgesM[i+1]);
+  close(section[i].userData.innerRadiusM,s.innerRadiusM);close(section[i].userData.outerRadiusM,s.outerRadiusM);
   close(s.lightDensityM3,number*x*state.lightMass[i]/s.volumeM3);close(s.heavyDensityM3,number*(1-x)*state.heavyMass[i]/s.volumeM3);
   light+=s.lightDensityM3*s.volumeM3;heavy+=s.heavyDensityM3*s.volumeM3;
  }
  close(light,number*x);close(heavy,number*(1-x));assert.equal(JSON.stringify(state),before);tools.dispose();
+});
+
+test('changing the radial grid releases old volume and section resources exactly once',()=>{
+ const {tools,field}=fixture(),old=[...field.children,...tools.group.children.filter(m=>m.name==='Radial field sample')];
+ let geometries=0,materials=0;
+ for(const node of old as THREE.Mesh<THREE.BufferGeometry,THREE.Material>[]){node.geometry.addEventListener('dispose',()=>geometries++);node.material.addEventListener('dispose',()=>materials++);}
+ tools.update({lightMass:[.2,.8],heavyMass:[.5,.5]});
+ assert.equal(geometries,old.length);assert.equal(materials,old.length);assert.equal(field.children.length,4);
+ tools.dispose();tools.dispose();assert.equal(geometries,old.length);assert.equal(materials,old.length);
 });
 
 test('field and movable section agree while moving the section does not move the longitudinal gas field',()=>{
