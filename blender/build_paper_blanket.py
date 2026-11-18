@@ -275,6 +275,11 @@ camera.rotation_euler = (Vector((0, 0, 0)) - camera.location).to_track_quat('-Z'
 camera.data.type, camera.data.ortho_scale = 'ORTHO', 31
 scene.camera = camera
 bpy.context.view_layer.update()
+# Fit every authored bound, including the foundation, with an 8% margin.
+projected_bounds = [world_to_camera_view(scene, camera, point) for point in points]
+extent = max(max(abs(p.x-.5), abs(p.y-.5))*2 for p in projected_bounds)
+camera.data.ortho_scale *= extent*1.08
+bpy.context.view_layer.update()
 metadata['hotspots'] = []
 for component, label, offset in [('plasma', 'Plasma region', -.3), ('armor', 'Tungsten armor', .0025),
                                  ('structure', 'Inner V alloy', .01), ('multiplier', 'Hg–Li channel', .12),
