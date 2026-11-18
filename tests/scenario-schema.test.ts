@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {Ajv} from 'ajv';
 import schema from '../schemas/scenario-v2-v3.schema.json' with {type:'json'};
+import fixtures from '../schemas/scenario-fixtures.json' with {type:'json'};
 import {validateScenario} from '../src/scenario-state.ts';
 
 test('shared schema preserves old setup links and rejects malformed current history',()=>{
@@ -13,4 +14,9 @@ test('shared schema preserves old setup links and rejects malformed current hist
  // Shape is necessary, but ordered events and supported control IDs remain domain checks.
  const invalid={...current,fuelRun:{...current.fuelRun,events:[{timeS:1,currentA:0},{timeS:.5,currentA:.03}]}};
  assert.equal(validate(invalid),true);assert.throws(()=>validateScenario(invalid));
+});
+
+test('TypeScript admits the same durable fixtures as Python',()=>{
+ const validate=new Ajv({strict:true,strictNumbers:true}).compile(schema);
+ for(const fixture of fixtures){assert.equal(validate(fixture.value),fixture.valid,fixture.name);}
 });

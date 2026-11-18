@@ -1,5 +1,7 @@
 import copy
+import json
 import unittest
+from pathlib import Path
 
 from jsonschema import ValidationError
 
@@ -20,3 +22,13 @@ class ScenarioContractTests(unittest.TestCase):
             value = copy.deepcopy(base) | edit
             with self.assertRaises((ValidationError, ValueError)):
                 admit_scenario(value)
+
+    def test_same_durable_fixtures_as_typescript(self):
+        fixtures = json.loads((Path(__file__).resolve().parents[2] / "schemas/scenario-fixtures.json").read_text())
+        for fixture in fixtures:
+            with self.subTest(fixture["name"]):
+                if fixture["valid"]:
+                    self.assertEqual(admit_scenario(fixture["value"]), fixture["value"])
+                else:
+                    with self.assertRaises(ValidationError):
+                        admit_scenario(fixture["value"])
