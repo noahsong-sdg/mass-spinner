@@ -139,6 +139,18 @@ test('temperature equation term focuses the temperature input without changing i
  assert.equal(f.node('window-controls').hidden,false);assert.equal(f.doc.activeElement,input);assert.equal(input.value,'500');
 });
 
+test('numbered tutorial process links expand their section and focus the canonical input without editing',t=>{
+ const f=fixture(t),body=f.node('window-controls').querySelector('.world-window-body');
+ for(const [action,id]of Object.entries({stageControls:'fuel-stages',pumpControls:'fuel-pumpSpeedM3S',inventoryControls:'fuel-fusionMW'})){
+  const section=f.doc.createElement('details'),input=f.doc.createElement('input');input.id=id;input.value='3';section.append(input);body.append(section);
+  let edits=0;input.addEventListener('input',()=>edits++);
+  f.workspace.launchGuideAction(action);
+  assert.equal(f.node('window-controls').hidden,false);assert.equal(section.open,true);
+  assert.equal(f.doc.activeElement,input);assert.equal(input.value,'3');assert.equal(edits,0);
+  f.workspace.close('controls');
+ }
+});
+
 test('investigation actions open the actual existing plots without changing inputs or physical time',t=>{
  const f=fixture(t),fuel=acceptedFuel(f),time=fuel.time.value;f.node('field').value='.17';
  for(const [action,value]of Object.entries({spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'})){

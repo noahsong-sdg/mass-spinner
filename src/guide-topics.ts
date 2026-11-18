@@ -22,12 +22,12 @@ export const numberedTutorials = [
  ]},
  {number:'04',title:'Does a purer sample make a useful process?',topics:[
   {id:'sample',heading:'How much useful material did you keep?',diagram:'inventory-cut',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve']]},
-  {id:'stages',heading:'Why use more than one stage?',actions:[['cascade','Show stages reference'],['controls','Open process controls']]},
-  {id:'pumping',heading:'What limits the gas entering a process?',actions:[['pumping','Show pumping reference'],['controls','Open pump controls']]},
+  {id:'stages',heading:'Why use more than one stage?',actions:[['cascade','Show stages reference'],['stageControls','Adjust stages']]},
+  {id:'pumping',heading:'What limits the gas entering a process?',actions:[['pumping','Show pumping reference'],['pumpControls','Adjust pump speed']]},
  ]},
  {number:'05',title:'Why does fusion need separation?',topics:[
   {id:'jobs',heading:'What are the three different jobs?',diagram:'fuel-cycle',actions:[]},
-  {id:'inventory',heading:'Why keep fuel outside the plasma?',actions:[['fuelInventory','Show D–T fuel inventory'],['controls','Open fuel inventory controls']]},
+  {id:'inventory',heading:'Why keep fuel outside the plasma?',actions:[['fuelInventory','Show D–T fuel inventory'],['inventoryControls','Open fuel inventory controls']]},
   {id:'design',heading:'What would establish a workable fuel cycle?',actions:[['modelInfo','Open model assumptions']]},
  ]},
  {number:'06',title:'Which prediction should I trust?',topics:[
@@ -37,6 +37,6 @@ export const numberedTutorials = [
  ]},
 ] as const satisfies readonly {number:string;title:string;topics:readonly GuideTopic[]}[];
 /** Additional explicit entrypoints used by the optional investigation pages. */
-export const tutorialActions=['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','gasTemperature','magneticLeverage','cascade','pumping','fuelInventory','lithiumSurfaces','newRun','cutPower','controls','inspect','view','modelInfo'] as const;
+export const tutorialActions=['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','gasTemperature','magneticLeverage','cascade','pumping','fuelInventory','lithiumSurfaces','stageControls','pumpControls','inventoryControls','newRun','cutPower','controls','inspect','view','modelInfo'] as const;
 export type GuideAction = typeof guideTopics[number]['actions'][number][0]|typeof tutorialActions[number];
 export const guideActions:ReadonlySet<string>=new Set<string>([...guideTopics.flatMap(topic=>topic.actions.map(([key])=>key)),...tutorialActions]);
