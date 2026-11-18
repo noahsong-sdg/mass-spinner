@@ -104,6 +104,134 @@ for component, name, thickness, color, metallic in layers:
     if thickness is not None:
         base += thickness
 
+# Complete the context around the paper's six unchanged material layers. These
+# additions are explicitly conceptual; this is not Marathon's reactor CAD.
+CONCEPT = ('Conceptual tokamak context, not as-built hardware. Coil count, sizes, '
+           'materials and service routing are illustrative assumptions; no magnetic '
+           'equilibrium, engineering qualification or plant performance is solved.')
+
+
+def author(name, component, vertices, faces, color, metallic=.65, alpha=1):
+    mesh = bpy.data.meshes.new(name)
+    mesh.from_pydata(vertices, [], faces)
+    mesh.update()
+    bm = bmesh.new()
+    bm.from_mesh(mesh)
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    bm.to_mesh(mesh)
+    bm.free()
+    obj = bpy.data.objects.new(name, mesh)
+    bpy.context.collection.objects.link(obj)
+    obj['componentId'], obj['renderName'] = component, name
+    obj['geometryBasis'] = CONCEPT
+    obj['materialBasis'] = 'Illustrative optical finish; construction alloy or conductor technology unspecified.'
+    mat = bpy.data.materials.new(name)
+    mat.use_nodes = True
+    shader = mat.node_tree.nodes.get('Principled BSDF')
+    shader.inputs['Base Color'].default_value = (*color, 1)
+    shader.inputs['Metallic'].default_value = metallic
+    shader.inputs['Roughness'].default_value = .32
+    shader.inputs['Alpha'].default_value = alpha
+    if alpha < 1:
+        mat.surface_render_method = 'DITHERED'
+    mesh.materials.append(mat)
+    objects.append(obj)
+    return obj
+
+
+def frame(name, component, phi, inner, outer, depth, color):
+    vertices, faces, n = [], [], 96
+    for offset, tangent in [(inner, -depth/2), (outer, -depth/2),
+                            (outer, depth/2), (inner, depth/2)]:
+        for j in range(n):
+            r, z = contour(math.tau*j/n, offset)
+            vertices.append((r*math.cos(phi)-tangent*math.sin(phi),
+                             r*math.sin(phi)+tangent*math.cos(phi), z))
+    for k in range(4):
+        for j in range(n):
+            a, b = k*n+j, k*n+(j+1)%n
+            faces.append((a, b, ((k+1)%4)*n+(j+1)%n, ((k+1)%4)*n+j))
+    return author(name, component, vertices, faces, color)
+
+
+def hoop(name, component, radius, tube, height, color):
+    vertices, faces, n, m = [], [], 96, 12
+    for i in range(n):
+        for j in range(m):
+            phi, theta = math.tau*i/n, math.tau*j/m
+            r = radius+tube*math.cos(theta)
+            vertices.append((r*math.cos(phi), r*math.sin(phi), height+tube*math.sin(theta)))
+    for i in range(n):
+        for j in range(m):
+            faces.append((i*m+j, ((i+1)%n)*m+j, ((i+1)%n)*m+(j+1)%m, i*m+(j+1)%m))
+    obj = author(name, component, vertices, faces, color)
+    for face in obj.data.polygons:
+        face.use_smooth = True
+    return obj
+
+
+def block(name, component, center, size, color):
+    vertices = [(center[0]+x*size[0]/2, center[1]+y*size[1]/2, center[2]+z*size[2]/2)
+                for z in [-1, 1] for y in [-1, 1] for x in [-1, 1]]
+    faces = [(0, 1, 3, 2), (4, 6, 7, 5), (0, 4, 5, 1),
+             (2, 3, 7, 6), (0, 2, 6, 4), (1, 5, 7, 3)]
+    return author(name, component, vertices, faces, color)
+
+
+# A translucent inset surface marks the plasma location, not a calculated LCFS,
+# temperature map, visible emission or a measured plasma-to-wall clearance.
+vertices, faces = [], []
+for i in range(97):
+    phi = start+span*i/96
+    for j in range(96):
+        r, z = contour(math.tau*j/96, -.12)
+        vertices.append((r*math.cos(phi), r*math.sin(phi), z))
+for i in range(96):
+    for j in range(96):
+        a, b = i*96+j, i*96+(j+1)%96
+        faces.append((a, b, b+96, a+96))
+plasma = author('D–T plasma location envelope', 'plasma', vertices, faces, (.62, .25, .27), 0, .45)
+plasma['geometryBasis'] = CONCEPT+' Inset location marker, not a plasma-wall gap or magnetic surface.'
+for face in plasma.data.polygons:
+    face.use_smooth = True
+
+for i in range(12):
+    phi = start+span*(i+.5)/12
+    frame(f'TF winding {i+1:02}', 'tf-coils', phi, 1.18, 1.48, .24, (.48, .28, .13))
+    for sign in [-1, 1]:
+        casing = frame(f'TF casing {i+1:02} {sign}', 'tf-coils', phi, 1.14, 1.52, .045, (.38, .44, .47))
+        casing.location = (-sign*.15*math.sin(phi), sign*.15*math.cos(phi), 0)
+
+for i in range(9):
+    hoop(f'Central solenoid module {i+1}', 'pf-coils', 1.05, .13, (i-4)*.42, (.49, .30, .17))
+for height, radius in [(-3.35, 5.6), (3.35, 5.6), (-2.8, 2.0), (2.8, 2.0)]:
+    hoop('Poloidal shaping coil', 'pf-coils', radius, .12, height, (.47, .30, .17))
+
+vertices, faces = [], []
+for radius, height in [(7.35, -3.9), (7.43, -3.9), (7.43, 3.9), (7.35, 3.9)]:
+    for i in range(97):
+        phi = start+span*i/96
+        vertices.append((radius*math.cos(phi), radius*math.sin(phi), height))
+for k in range(4):
+    for i in range(96):
+        faces.append((k*97+i, k*97+i+1, ((k+1)%4)*97+i+1, ((k+1)%4)*97+i))
+for i in [0, 96]:
+    faces.append(tuple(k*97+i for k in range(4)))
+author('Cryostat display cutaway', 'cryostat', vertices, faces, (.36, .43, .46), .6, .12)
+for z in [-3.9, 3.9]:
+    hoop('Cryostat rim', 'cryostat', 7.39, .07, z, (.38, .43, .45))
+block('Foundation interface', 'plant-supports', (0, 0, -4.3), (14.8, 13.8, .28), (.15, .19, .20))
+for phi in [math.pi*.65, math.pi, math.pi*1.35]:
+    block('Blanket support pedestal', 'plant-supports', (5.7*math.cos(phi), 5.7*math.sin(phi), -3.4), (.55, .55, 1.5), (.34, .40, .42))
+    block('Magnet support foot', 'plant-supports', (6.7*math.cos(phi), 6.7*math.sin(phi), -3.7), (.8, .8, .9), (.31, .37, .39))
+
+# Short interfaces intentionally stop at manifolds, rather than inventing an
+# integrated tritium plant, turbine, shielding design or a pipe-flow solution.
+for z in [-.65, .65]:
+    block('Blanket heat extraction interface', 'plant-services', (2.4, -6.6, z), (.28, 2, .28), (.23, .38, .38))
+    block('Heat extraction manifold', 'plant-services', (2.4, -7.7, z), (.7, .45, .6), (.36, .42, .44))
+block('Fuel-cycle service interface', 'plant-services', (3.5, -6.4, 1.35), (.18, 2.3, .18), (.49, .32, .17))
+
 bpy.ops.object.select_all(action='DESELECT')
 for obj in objects:
     obj.select_set(True)
@@ -121,10 +249,14 @@ metadata = {
     'geometryBuilderSHA256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     'blenderVersion': bpy.app.version_string,
     'dimensionSource': D['source'],
-    'geometryLabel': 'Paper dimensions',
-    'scaleLabel': 'Paper model · R 4.2 m · a 1.2 m',
+    'geometryLabel': 'Paper core · conceptual hardware',
+    'title': 'Fusion power reference',
+    'scaleLabel': 'Power reference · R 4.2 m · a 1.2 m · outer hardware conceptual',
     'caption': D['basis'] + ' ' + D['derived'] + ' ' + D['reconstruction'],
     'modelCamera': {'position': [1, .65, .45], 'target': [0, 0, 0], 'up': [0, 1, 0], 'fitScale': .86},
+    'componentIds': sorted({obj['componentId'] for obj in objects}),
+    'modelMeshComponentIds': sorted({obj['componentId'] for obj in objects}),
+    'modelRegionComponentIds': [],
 }
 
 scene = bpy.context.scene
@@ -140,7 +272,7 @@ scene.world.color = (.15, .15, .15)
 bpy.ops.object.camera_add(location=(11, -5, 8))
 camera = bpy.context.object
 camera.rotation_euler = (Vector((0, 0, 0)) - camera.location).to_track_quat('-Z', 'Y').to_euler()
-camera.data.type, camera.data.ortho_scale = 'ORTHO', 21
+camera.data.type, camera.data.ortho_scale = 'ORTHO', 25
 scene.camera = camera
 bpy.context.view_layer.update()
 metadata['hotspots'] = []

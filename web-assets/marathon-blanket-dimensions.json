@@ -13,5 +13,5 @@
   "outboardBreederM": 0.795,
   "tankM": 0.03,
   "derived": "At 210 mm channel width, fixed outer build gives inboard FLiBe = 750 - (210 - 5) = 545 mm; outboard = 1000 - (210 - 5) = 795 mm.",
-  "reconstruction": "Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Coils, cryostat, supports and services are not specified or modeled. Optical finishes are illustrative."
+  "reconstruction": "Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Added plasma location marker, coils, cryostat, supports and service interfaces are conceptual; their sizes, count and materials are not specified by Marathon. They do not represent an engineered plant or a solved magnetic equilibrium. Optical finishes are illustrative."
 }
