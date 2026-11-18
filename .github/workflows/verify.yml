@@ -15,9 +15,11 @@ jobs:
           docker build -t mass-spinner-check -f ci/Dockerfile .
           docker image inspect mass-spinner-check --format '{{.Id}}'
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp mass-spinner-check npm ci --ignore-scripts --no-audit --no-fund
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp mass-spinner-check sh -c 'npm audit --json > npm-audit.json; code=$?; test "$code" -le 1'
       - name: Test and build offline
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp --env OPENBLAS_NUM_THREADS=1 --env OMP_NUM_THREADS=1 --env MKL_NUM_THREADS=1 mass-spinner-check sh -eu -c '
+            node --import tsx scripts/check-dependencies.ts npm-audit.json
             npm run typecheck
             npm run typecheck:infrastructure
             npm run lint

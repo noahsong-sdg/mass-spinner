@@ -101,6 +101,8 @@ test('comparison cards retain the actual independent operating points and model 
  const modes=['curved','doublewell'],configs=modes.map((_,i)=>({...DEFAULT_GEOMETRY,magneticT:.1+i*.1}));
  const opened:string[]=[];
  await handler(0,undefined,modes,(s:string)=>configs[modes.indexOf(s)],(s:any,c:any,_signal:any,withIdentity:boolean)=>{assert.equal(withIdentity,true);return Promise.resolve({result:geometry(s,c),producingCode:null});},()=>true,(s:string)=>({title:s,fidelity:'limits'}),String,modelValidity,$,document,{open:(key:string)=>opened.push(key)},geometryModes,transportModes);
+ // DOM listeners intentionally return void; drain the resolved worker microtasks.
+ await new Promise<void>(resolve=>setImmediate(resolve));
  assert.deepEqual(opened,['plots']);
  const cards=$('comparison-results').children;assert.equal(cards.length,2);
  for(let i=0;i<2;i++){

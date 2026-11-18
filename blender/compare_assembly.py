@@ -45,7 +45,7 @@ if __name__ == "__main__":
         assert before["materials"] == after["materials"], name + ": material ownership changed"
         for key in ("translation", "rotation", "scale", "bounds"):
             def flat(value):
-                return sum((flat(v) if isinstance(v, list) else [v] for v in value), [])
+                return sum((flat(v) if isinstance(v, (list, tuple)) else [v] for v in value), [])
             a, b = flat(before[key]), flat(after[key])
             assert len(a) == len(b) and max(abs(x-y) for x, y in zip(a, b)) < 1e-6, name + ": SI geometry changed"
     print(f"{len(new)} selectable mesh nodes preserve metadata, material ownership and SI bounds to 1 micrometre")

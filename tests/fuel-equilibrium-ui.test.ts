@@ -15,7 +15,7 @@ function freeze<T>(value:T):T{
 
 test('calculator identity binds its own sources and the published equation page renders math',()=>{
  const plugin=equilibriumIdentityPlugin(process.cwd()),source=plugin.transform('',`${process.cwd()}/src/equilibrium-identity.ts`)!;
- assert.match(source,/sourceHash/);assert.match(source,/fuel-equilibrium.ts/);assert.doesNotMatch(source,/workerProducingCode/);
+ assert.match(source,/sourceHash/);assert.match(source,/fuel-equilibrium.ts/);assert.match(source,/array-shape.ts/);assert.doesNotMatch(source,/workerProducingCode/);
  const page=equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8'));assert.match(page,/class="katex/);assert.doesNotMatch(page,/```math|katex-error/);
  assert.match(page,/try=equilibrium/);assert.match(page,/not continuous extraction yields/);
 });
