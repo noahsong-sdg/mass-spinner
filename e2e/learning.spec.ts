@@ -80,7 +80,7 @@ test('an independently opened reader reconnects across guide navigation without 
  await simulator.getByRole('button',{name:'Close Controls',exact:true}).click();
  await expect(simulator.locator('#window-controls')).not.toBeVisible();let navigations=0;
  simulator.on('framenavigated',frame=>{if(frame===simulator.mainFrame())navigations++;});
- await page.getByRole('link',{name:'Physics & equations →',exact:true}).click();
+ await page.getByRole('banner').getByRole('link',{name:'Physics & equations →',exact:true}).click();
  await page.locator('[data-guide-action="current"]').first().click();
  await expect(simulator.locator('#window-controls')).toBeVisible();
  await expect(current).toHaveValue(edited);expect(navigations).toBe(0);
