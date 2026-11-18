@@ -136,7 +136,7 @@ scene.world.color = (.15, .15, .15)
 bpy.ops.object.camera_add(location=(11, -5, 8))
 camera = bpy.context.object
 camera.rotation_euler = (Vector((0, 0, 0)) - camera.location).to_track_quat('-Z', 'Y').to_euler()
-camera.data.type, camera.data.ortho_scale = 'ORTHO', 17
+camera.data.type, camera.data.ortho_scale = 'ORTHO', 21
 scene.camera = camera
 bpy.context.view_layer.update()
 metadata['hotspots'] = []

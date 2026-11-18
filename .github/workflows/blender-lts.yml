@@ -2,9 +2,9 @@ name: Blender LTS qualification
 on:
   workflow_dispatch:
   push:
-    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
+    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, web-assets/marathon-blanket-dimensions.json, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
   pull_request:
-    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
+    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, web-assets/marathon-blanket-dimensions.json, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
 permissions:
   contents: read
 jobs:
