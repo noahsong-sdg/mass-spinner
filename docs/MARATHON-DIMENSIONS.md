@@ -12,7 +12,7 @@ The blanket's FLiBe thickness decreases as the channel grows while the outer bui
 
 The blanket's Miller contour, normal offsets and interpolation between inboard/outboard thicknesses are reconstruction choices. Plasma-to-wall clearance is unknown and omitted. A 270° presentation cutaway exposes layers; the paper instead simulates a 90° reflective sector. Magnets, cryostat, supports and services are not specified or modeled. Optical finishes are illustrative. The empty core denotes the plasma region, not another solid layer.
 
-**The 1.7526 m person compares against each displayed model, not a verified real machine.** Its height does not validate an apparatus's size.
+Dimension labels describe the displayed model, not a verified real machine.
 
 Sources:
 

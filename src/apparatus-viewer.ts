@@ -4,7 +4,6 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createSurfaceLayer, type SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
-import {createHumanScale,placeHumanScale} from './human-scale.js';
 
 export type CameraVector=[number,number,number];
 export interface CameraPose {position:CameraVector;target:CameraVector;up?:CameraVector}
@@ -89,9 +88,6 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const doc=frame.ownerDocument,canvas=doc.createElement('canvas'),status=doc.createElement('p');
  canvas.tabIndex=0;canvas.setAttribute('aria-label','3D apparatus. Drag to rotate, scroll to zoom. Arrow keys rotate; plus and minus zoom.');
  status.setAttribute('role','status');status.className='apparatus-status';frame.replaceChildren(canvas,status);
- const scaleToggle=doc.createElement('button');scaleToggle.type='button';scaleToggle.className='apparatus-scale';
- scaleToggle.textContent='Human scale';scaleToggle.setAttribute('aria-label','Human scale: 5 foot 9 person');scaleToggle.setAttribute('aria-pressed','false');
- scaleToggle.title='5′9″ (1.7526 m), at the same metre scale as the model. Display reference only.';scaleToggle.disabled=true;frame.append(scaleToggle);
  const scaleNote=doc.createElement('output');scaleNote.className='apparatus-scale-note';scaleNote.hidden=true;frame.append(scaleNote);
  const display=makeDisplay(canvas),renderer=display.renderer,scene=new THREE.Scene();
  renderer.localClippingEnabled=true;
@@ -137,21 +133,13 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   renderer.render(scene,camera);reportRepresentation();
  }}
  const stateLayer=createSurfaceLayer(frame,{render,onSelect});scene.add(stateLayer.group);
- const person=createHumanScale();person.visible=false;scene.add(person);
- function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!person.visible||!root||!asset?.scaleLabel;}
- scaleToggle.addEventListener('click',()=>{
-  person.visible=!person.visible;scaleToggle.setAttribute('aria-pressed',String(person.visible));
-  scaleToggle.textContent=person.visible?'5′9″ · 1.75 m':'Human scale';describeScale();fit();reset();
-  frame.dispatchEvent(new win.CustomEvent('apparatus-scalechange',{bubbles:true}));
- });
- function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return person.visible?new THREE.Vector3(0,1,0):root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
+ function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!root||!asset?.scaleLabel;}
+ function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
  function fit(){
   root!.updateWorldMatrix(true,true);const bounds=modelBounds.setFromObject(root!);
   radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
   if(!Number.isFinite(radius)||radius<=0)throw new Error('3D model has no finite geometry.');
-  if(person.visible){placeHumanScale(person,bounds,modelUp(),defaultDirection());bounds.union(new THREE.Box3().setFromObject(person));}
   bounds.getCenter(center);radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
-  scaleToggle.disabled=false;
   // Shadow framing follows SI scene bounds, including microscopic targets and
   // large blanket models. Numerical overlays must not cast hardware shadows.
   updateShadows();
@@ -188,14 +176,13 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function portraitComposition(){return root!==stateLayer.group&&asset?.modelCamera?.portraitPosition;}
  function defaultDirection(){
-  if(person.visible)return new THREE.Vector3(.65,.4,1).normalize();
   const target=asset?.modelCamera?.target,position=camera.aspect<1&&portraitComposition()||asset?.modelCamera?.position;
   return root===stateLayer.group?new THREE.Vector3(0,1,-.2).transformDirection(root.matrixWorld):position&&target?new THREE.Vector3(position[0],position[1],position[2]).sub(new THREE.Vector3(target[0],target[1],target[2])).normalize():new THREE.Vector3(1.2,.65,1).normalize();
  }
  function fitDistance(){
   const vertical=THREE.MathUtils.degToRad(camera.fov),horizontal=2*Math.atan(Math.tan(vertical/2)*camera.aspect);
   const requested=asset?.modelCamera?.fitScale??1,scale=camera.aspect<1?Math.max(.9,requested):requested;
-  if((person.visible||portraitComposition()&&camera.aspect<1)&&!modelBounds.isEmpty()){
+  if((portraitComposition()&&camera.aspect<1)&&!modelBounds.isEmpty()){
    const direction=pristineCamera?defaultDirection():camera.position.clone().sub(controls.target).normalize();
    const right=new THREE.Vector3().crossVectors(camera.up,direction).normalize(),up=new THREE.Vector3().crossVectors(direction,right).normalize();
    let distance=0;
@@ -260,7 +247,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;scaleNote.hidden=true;
   setAnimation(null);
   stopFlight();
-  stateLayer.clear();clearSelection();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;scaleToggle.disabled=true;loadStatus='loading';reportRepresentation();renderer.clear();status.textContent='Loading 3D…';
+  stateLayer.clear();clearSelection();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;loadStatus='loading';reportRepresentation();renderer.clear();status.textContent='Loading 3D…';
   try{
    const gltf=await loader.loadAsync(next.model);
    if(disposed||token!==generation){release(gltf.scene);return false;}
@@ -269,7 +256,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    if(preserveOwnership)pristineCamera=previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
-   scaleToggle.disabled=true;scaleNote.hidden=true;
+   scaleNote.hidden=true;
    if(referenceRoot){clearSelection();release(referenceRoot);root=referenceRoot=null;}loadStatus='error';reportRepresentation();status.textContent='3D unavailable';onError(error);return false;
   }
  }
@@ -331,6 +318,6 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  return {canvas,load,select,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,setPending:value=>{if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});},dispose(){
   if(disposed)return;disposed=true;stopFlight();setAnimation(null);doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
   for(const [name,handler]of Object.entries(handlers))canvas.removeEventListener(name,handler as EventListener);
-  clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);release(person);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
+  clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
  }};
 }

@@ -36,7 +36,7 @@ Ion–neutral spin-up, Drive & work, and Purity & recovery; other plots inspect
 pieces of the same argument. [Every menu option is explained below](#views),
 and [the reading plan](#path) separates this first model from later extensions.
 The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduces ions and neutrals.
-The [seven experiments](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/?level=2&guide=start)
+The [seven experiments](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
 are a quick way to try the controls alongside this explanation.
 
 ### First, change one real control

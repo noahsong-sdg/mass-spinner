@@ -47,13 +47,13 @@ test('animation clock freezes across visibility, pause, reload and disposal; no 
  h.viewer.setAnimation(()=>{});h.viewer.dispose();assert.equal(h.frames.size,0);
 });
 
-test('human scale identifies dimension provenance and clears stale labels during asset changes',async t=>{
- const h=await fixture(t),button=h.frame.querySelector<HTMLButtonElement>('.apparatus-scale')!,note=h.frame.querySelector<HTMLOutputElement>('.apparatus-scale-note')!;
- await h.viewer.load({model:'assumed.glb',scaleLabel:'Assumed dimensions'});assert.equal(note.hidden,true);
- button.click();assert.equal(note.hidden,false);assert.equal(note.textContent,'Assumed dimensions');
+test('dimension provenance is visible without a human and clears stale labels during asset changes',async t=>{
+ const h=await fixture(t),note=h.frame.querySelector<HTMLOutputElement>('.apparatus-scale-note')!;
+ await h.viewer.load({model:'assumed.glb',scaleLabel:'Assumed dimensions'});assert.equal(note.hidden,false);
+ assert.equal(h.frame.querySelector('.apparatus-scale'),null);assert.equal(h.scene.getObjectByName('5 foot 9 scale person'),undefined);
+ assert.equal(note.textContent,'Assumed dimensions');
  const next=h.viewer.load({model:'paper.glb',scaleLabel:'Paper model · R 4.2 m'});assert.equal(note.hidden,true,'old dimensions withheld while loading');
  await next;assert.equal(note.hidden,false);assert.equal(note.textContent,'Paper model · R 4.2 m');
- button.click();assert.equal(note.hidden,true);button.click();assert.equal(note.hidden,false);
  await h.viewer.load({model:'unlabelled.glb'});assert.equal(note.hidden,true);assert.equal(note.textContent,'');
  h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb',scaleLabel:'Must not appear'}),false);assert.equal(note.hidden,true);
 });
@@ -91,7 +91,7 @@ test('camera synchronization uses SI vectors without echoing updates and clippin
 });
 test('internal camera transactions draw once after OrbitControls has applied the final pose',async t=>{
  const h=await fixture(t);
- for(const change of [()=>h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]}),()=>h.resize(500,600),()=>h.viewer.reset(),()=>h.frame.querySelector<HTMLButtonElement>('.apparatus-scale')!.click()]){
+ for(const change of [()=>h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]}),()=>h.resize(500,600),()=>h.viewer.reset()]){
   const before=h.renders;change();assert.equal(h.renders-before,1,'internal OrbitControls change must not draw an intermediate frame');
   assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements],'draw uses the final view and projection matrices');
  }
@@ -117,24 +117,14 @@ function inside(root:THREE.Object3D,camera:THREE.Camera){
  }
 }
 
-test('human-scale toggle fits both objects on desktop and phone, preserves SI hardware and survives representation changes',async t=>{
- const h=await fixture(t),button=h.frame.querySelector('.apparatus-scale') as HTMLButtonElement;
- const person=h.scene.getObjectByName('5 foot 9 scale person')!,before=new THREE.Box3().setFromObject(h.reference).clone();
- assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(person.visible,false);
- button.click();assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(person.visible,true);
- assert.deepEqual(new THREE.Box3().setFromObject(h.reference),before);inside(h.reference,h.camera);inside(person,h.camera);
- h.resize(390,844);inside(h.reference,h.camera);inside(person,h.camera);
+test('apparatus-only framing preserves SI dimensions and fits desktop and phone views',async t=>{
+ const h=await fixture(t),before=new THREE.Box3().setFromObject(h.reference).clone();
+ inside(h.reference,h.camera);h.resize(390,844);inside(h.reference,h.camera);
+ assert.deepEqual(new THREE.Box3().setFromObject(h.reference),before);
  h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
- const accepted=h.scene.getObjectByName('SI engineering assembly')!;
- inside(accepted,h.camera);inside(person,h.camera);
- const humanBounds=new THREE.Box3().setFromObject(person);assert.ok(Math.abs(humanBounds.max.y-humanBounds.min.y-1.7526)<1e-10);
- assert.ok(Math.abs(humanBounds.min.y-new THREE.Box3().setFromObject(accepted).min.y)<1e-10);assert.deepEqual(h.camera.up.toArray(),[0,1,0]);
- button.click();assert.equal(person.visible,false);inside(accepted,h.camera);
- button.click();await h.viewer.load({model:'replacement.glb'});assert.equal(person.visible,true);inside(h.reference,h.camera);inside(person,h.camera);
- h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false,'person cannot make an empty apparatus valid');assert.equal(button.disabled,true);
- const resources=new Set<THREE.BufferGeometry|THREE.Material>();person.traverse(node=>{if(node instanceof THREE.Mesh){resources.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])resources.add(material);}});
- let released=0;for(const resource of resources)resource.addEventListener('dispose',()=>released++);
- h.viewer.dispose();assert.equal(released,resources.size,'shared scale resources released exactly once');
+ inside(h.scene.getObjectByName('SI engineering assembly')!,h.camera);
+ assert.equal(h.scene.getObjectByName('5 foot 9 scale person'),undefined);
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false);
 });
 
 test('real OrbitControls retain the horizontal reference/accepted frame and cutaway sightline',async t=>{
