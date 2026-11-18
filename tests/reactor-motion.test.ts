@@ -6,6 +6,7 @@ import {DEFAULT_FUSION_BEAM,simulateFusionBeam} from '../src/fusion-reactor.js';
 import {DEFAULT_COUPLED_TARGET,simulateCoupledTarget} from '../src/coupled-target.js';
 import {ionSpeedMS,motionPopulation,neutronDirection,sourceMotionState,targetMotionState,type BeamMotionState} from '../src/reactor-motion.js';
 import {createReactorMotionLayer} from '../src/reactor-motion-layer.js';
+import {createApparatusViewer} from '../src/apparatus-viewer.js';
 
 test('beam visuals follow calculated current, energy, loading and stopping without inventing fusion events',()=>{
  const initial=sourceMotionState(simulateFusionBeam(DEFAULT_FUSION_BEAM))!;
@@ -81,4 +82,23 @@ test('area changes beam radius; refinement cannot exceed fixed GPU buffers; reve
  const many:BeamMotionState={...f.state,heatFacesWM2:Array.from({length:1025},()=>-1000)};f.layer.update(many,f.root);
  const heat=f.layer.group.children[3] as THREE.LineSegments;assert.ok(heat.geometry.drawRange.count<=heat.geometry.getAttribute('position').count);assert.equal(f.panel.dataset.heatDirection,'toward target');
  f.layer.update({kind:'power-reference'},f.root);assert.equal(f.panel.dataset.basis,'power-reference');assert.equal(f.count(0),0);assert.match(f.panel.textContent!,/not calculated/);
+});
+
+test('viewer publishes pre-load reactor state and stops RAF while hidden, pending or disposed',async t=>{
+ const f=fixture(t),win=f.frame.ownerDocument.defaultView!,frames=new Map<number,FrameRequestCallback>();let next=0;
+ Object.defineProperty(win.document,'hidden',{value:false});
+ win.requestAnimationFrame=fn=>{const id=++next;frames.set(id,fn);return id;};win.cancelAnimationFrame=id=>{frames.delete(id);};
+ f.frame.getBoundingClientRect=()=>({x:0,y:0,left:0,top:0,right:800,bottom:600,width:800,height:600,toJSON(){return {};}});
+ const old=globalThis.ResizeObserver;globalThis.ResizeObserver=class{observe(){}unobserve(){}disconnect(){}};
+ t.after(()=>{globalThis.ResizeObserver=old;});
+ const viewer=createApparatusViewer(f.frame,{loader:{loadAsync:async()=>({scene:f.root})},
+  displayFactory:()=>({renderer:{render(){},clear(){},setSize(){}},dispose(){}}),
+  controlsFactory:camera=>({target:new THREE.Vector3(),minDistance:0,maxDistance:100,addEventListener(){},removeEventListener(){},update(){camera.lookAt(this.target);},dispose(){}})});
+ t.after(()=>viewer.dispose());viewer.updateReactorState(f.state);
+ await viewer.load({model:'beam.glb',reactor:'beam'});assert.equal(frames.size,1);
+ assert.equal(f.frame.querySelector<HTMLElement>('.reactor-processes')!.dataset.basis,'initial source');
+ viewer.setActive(false);assert.equal(frames.size,0);viewer.setActive(true);assert.equal(frames.size,1);
+ viewer.setPending(true);assert.equal(frames.size,0);viewer.setPending(false);assert.equal(frames.size,1);
+ viewer.updateReactorState(null);assert.equal(frames.size,0);viewer.updateReactorState(f.state);assert.equal(frames.size,1);
+ viewer.dispose();assert.equal(frames.size,0);assert.equal(f.frame.children.length,0);
 });

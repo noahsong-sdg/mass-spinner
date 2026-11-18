@@ -63,11 +63,12 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   }beam.finish(enabled.beam?ions:0);
   for(let i=0;i<count;i++){
    const t=(i/count+phase*neutronSpeed*.8)%1,d=neutronDirection(i,count);
-   const a=i*2.399963,bx=power?4.2*Math.cos(a):target.x,by=power?0:target.y,bz=power?4.2*Math.sin(a):target.z;
+   const a=i*2.399963,rr=power?0:radius*Math.sqrt((i+.5)/count);
+   const bx=power?4.2*Math.cos(a):target.x,by=power?0:target.y+rr*Math.cos(a),bz=power?4.2*Math.sin(a):target.z+rr*Math.sin(a);
    const reach=power?2.4:span*.55;
    neutrons.position.setXYZ(i,bx+d[0]*reach*t,by+d[1]*reach*t,bz+d[2]*reach*t);
    for(let j=0;j<2;j++){const q=Math.max(0,t-(j===0?.075:0));tracks.position.setXYZ(2*i+j,bx+d[0]*reach*q,by+d[1]*reach*q,bz+d[2]*reach*q);}
-   if(i<12){const rr=power?0:radius*Math.sqrt((i+.5)/12);reactions.position.setXYZ(i,bx,by+rr*Math.cos(a),bz+rr*Math.sin(a));}
+   if(i<12)reactions.position.setXYZ(i,bx,by,bz);
   }
   neutrons.finish(enabled.neutrons?count:0);tracks.finish(enabled.neutrons?count*2:0);
   // Explicitly amplified reaction flashes; their number is not a reaction probability.
@@ -79,9 +80,9 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   const maximum=Math.max(...fluxes.map(Math.abs),0);
   for(let i=0;i<fluxes.length;i++){
    const flux=fluxes[i];if(flux===0)continue;
-   const fraction=(i+.5)/fluxes.length,t=(phase*.55*Math.sign(flux)+fraction+1e6)%1;
+   const t=(i+(phase*.55*Math.sign(flux)+1e6)%1)/fluxes.length;
    const x=power?4.2:target.x,y=power?0:target.y,z=power?0:target.z;
-   const length=power?1.6:radius*2,offset=power?0:radius*.6,tip=x+length*t,wing=length*.07;
+   const length=power?1.6:radius*2,offset=power?0:radius*.6,tip=x+length*t,wing=length*Math.min(.07,.4/fluxes.length);
    // Chevrons are heat-transfer direction indicators, never coolant particle paths.
    for(const sign of [-1,1]){
     heat.position.setXYZ(heatCount++,tip-Math.sign(flux)*wing,y+offset,z+sign*wing);
