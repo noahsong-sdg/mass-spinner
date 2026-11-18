@@ -398,7 +398,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(dirty||updating){output.textContent='Recomputing · previous result shown in plots';return;}
   const collection=state?.collection??r.collection,pct=(value:number|null)=>value===null?'—':fmt(100*value);
   const spatial=state?.thermal?.spatial;
-  output.textContent=id==='liner'?`Gas ${fmt(state?.thermal?.gasK??r.config.gasK)} K · ${spatial?`tungsten ${fmt(spatial.minK)}–${fmt(spatial.maxK)} K`:`liner ${fmt(state?.thermal?.linerK??r.config.linerK)} K`}`:id==='light-outlet'?`Light ${pct(collection.innerLightPurity)}% · recovery ${pct(collection.lightRecovery)}%`:id==='pump'?`Reference inlet speed ${fmt(r.pumping.effectiveSpeedM3S)} m³/s`:id==='coils'?`Prescribed field ${fmt(r.config.magneticT)} T`:`Gas ${fmt((state?.neutralRadS??0)*r.config.radiusM)} m/s · ${fmt(state?.currentA??r.config.currentA)} A`;
+  output.textContent=id==='liner'?`Gas ${fmt(state?.thermal?.gasK??r.config.gasK)} K · ${spatial?`tungsten ${fmt(spatial.minK)}–${fmt(spatial.maxK)} K`:`liner ${fmt(state?.thermal?.linerK??r.config.linerK)} K`}`:id==='light-outlet'?`Light ${pct(collection.innerLightPurity)}% · recovery ${pct(collection.lightRecovery)}%`:id==='pump'||id==='feed'?`Reference inlet speed ${fmt(r.pumping.effectiveSpeedM3S)} m³/s`:id==='coils'?`Prescribed field ${fmt(r.config.magneticT)} T`:`Gas ${fmt((state?.neutralRadS??0)*r.config.radiusM)} m/s · ${fmt(state?.currentA??r.config.currentA)} A`;
  }
  async function showGeometry(snapshot:AcceptedFuel){
   if(!active||disposed||dirty||updating||snapshot!==latest)return;

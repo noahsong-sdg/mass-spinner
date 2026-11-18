@@ -187,4 +187,10 @@ test('reference scans mark exact selected inputs while the closed-vessel gas rem
  assert.ok(Math.abs(f.ui.latest.result.config.pumpSpeedM3S-.04)<1e-15);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');
  assert.match(f.ui.nodes.inspect.textContent,/Pumping reference only/);
+ const previousSpeed=f.ui.latest.result.pumping.effectiveSpeedM3S;
+ f.change('fuel-component','feed','change');f.change('fuel-component-conductanceM3S',Math.log10(.01));await f.ui.run();
+ assert.ok(f.ui.latest.result.pumping.effectiveSpeedM3S<previousSpeed);
+ assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/Reference inlet speed/);
+ f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');
+ assert.deepEqual(f.ui.latest.result.transport.snapshots.map(s=>({time:s.timeS,light:s.lightMass,heavy:s.heavyMass,omega:s.neutralRadS})),trajectory);
 });
