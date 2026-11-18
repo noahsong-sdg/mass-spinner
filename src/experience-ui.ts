@@ -17,7 +17,7 @@ const fixedPlay={parallel:'20','source-radius':'4',distribution:'thermal','axial
 export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange,fuelCentrifuge}:SetupExperienceOptions){
  const shared=readScenario(location.search),initial=readExperience(location.search);
  const levelButtons=[...document.querySelectorAll<HTMLButtonElement>('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
- const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus'),reactor=document.querySelector<HTMLButtonElement>('#show-reactor');
+ const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus'),reactor=document.getElementById('show-reactor') as HTMLButtonElement|null;
  let level:ExperienceLevel,savedPlay:PlaySettings=initial.settings,shareRevision=0,hydrating=false,cancelDeferred=()=>{};
  const defaults={
  '2':captureScenario(document,'2'),'3':captureScenario(document,'3'),'4':captureScenario(document,'4'),
