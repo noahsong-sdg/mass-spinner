@@ -34,3 +34,10 @@ test('the guide connects equation symbols, plot units and experiment histories t
   'setup slider instead starts a new run','demonstrated sustainable operating point'])
   assert.ok(source.includes(phrase)||source.replace(/\s+/g,' ').includes(phrase),phrase);
 });
+
+
+test('current experiment directions lead to the separate walkthrough rather than the retired menu',()=>{
+ assert.match(source,/\[Start here walkthrough\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
+ assert.match(source,/In \*\*Start here\*\*, choose \*\*Can the current make the gas turn\?\*\*/);
+ assert.doesNotMatch(source,/Start here → Experiments|reopen \*\*Start here\*\* to return/);
+});
