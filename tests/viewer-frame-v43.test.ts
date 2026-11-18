@@ -107,7 +107,8 @@ test('human-scale toggle fits both objects on desktop and phone, preserves SI ha
  h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
  const accepted=h.scene.getObjectByName('SI engineering assembly')!;
  inside(accepted,h.camera);inside(person,h.camera);
- const humanBounds=new THREE.Box3().setFromObject(person);assert.ok(Math.abs(humanBounds.max.z-humanBounds.min.z-1.7526)<1e-10);
+ const humanBounds=new THREE.Box3().setFromObject(person);assert.ok(Math.abs(humanBounds.max.y-humanBounds.min.y-1.7526)<1e-10);
+ assert.ok(Math.abs(humanBounds.min.y-new THREE.Box3().setFromObject(accepted).min.y)<1e-10);assert.deepEqual(h.camera.up.toArray(),[0,1,0]);
  button.click();assert.equal(person.visible,false);inside(accepted,h.camera);
  button.click();await h.viewer.load({model:'replacement.glb'});assert.equal(person.visible,true);inside(h.reference,h.camera);inside(person,h.camera);
  h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false,'person cannot make an empty apparatus valid');assert.equal(button.disabled,true);

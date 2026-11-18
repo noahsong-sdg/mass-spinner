@@ -10,7 +10,7 @@ test('scale person is exactly 69 inches tall in metres, with feet at zero',()=>{
  assert.ok(box.getSize(new THREE.Vector3()).x<.8);
 });
 
-for(const dimension of [.00001,.24,20])for(const accepted of [false,true])test(`person stays human-sized beside ${dimension} m ${accepted?'accepted':'reference'} geometry`,()=>{
+for(const dimension of [.00001,.24,20])for(const accepted of [false,true])test(`person stays human-sized beside ${dimension} m ${accepted?'Z-up':'Y-up'} geometry`,()=>{
  const person=createHumanScale(),bounds=new THREE.Box3(new THREE.Vector3(-dimension,-dimension,-dimension),new THREE.Vector3(dimension,dimension,dimension));
  const up=accepted?new THREE.Vector3(0,0,-1):new THREE.Vector3(0,1,0),direction=accepted?new THREE.Vector3(0,1,-.2):new THREE.Vector3(0,1,.65);
  placeHumanScale(person,bounds,up,direction);

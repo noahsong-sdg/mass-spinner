@@ -141,7 +141,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   person.visible=!person.visible;scaleToggle.setAttribute('aria-pressed',String(person.visible));
   scaleToggle.textContent=person.visible?'5′9″ · 1.75 m':'Human scale';fit();reset();
  });
- function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
+ function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return person.visible?new THREE.Vector3(0,1,0):root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
  function fit(){
   root!.updateWorldMatrix(true,true);const bounds=modelBounds.setFromObject(root!);
   radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
@@ -185,6 +185,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function portraitComposition(){return root!==stateLayer.group&&asset?.modelCamera?.portraitPosition;}
  function defaultDirection(){
+  if(person.visible)return new THREE.Vector3(.65,.4,1).normalize();
   const target=asset?.modelCamera?.target,position=camera.aspect<1&&portraitComposition()||asset?.modelCamera?.position;
   return root===stateLayer.group?new THREE.Vector3(0,1,-.2).transformDirection(root.matrixWorld):position&&target?new THREE.Vector3(position[0],position[1],position[2]).sub(new THREE.Vector3(target[0],target[1],target[2])).normalize():new THREE.Vector3(1.2,.65,1).normalize();
  }
