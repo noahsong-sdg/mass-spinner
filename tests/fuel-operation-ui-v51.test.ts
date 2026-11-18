@@ -162,10 +162,15 @@ test('Inspect edits reach the real solver and response buttons show the accepted
 
 test('liner response distinguishes a fixed bath from enabled thermal evolution and marks the exact reference temperature',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-component','liner','change');
- f.change('fuel-component-linerK',1200);await f.ui.run();
+ const number=f.ui.nodes.inspect.querySelector('input[type=number]');number.focus();number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('input'));await f.ui.run();
+ const accepted=f.ui.latest,count=f.requests.length;
+ number.dispatchEvent(new f.doc.defaultView.Event('change'));number.blur();
+ assert.equal(f.node('fuel-export').disabled,false,'leaving an accepted number edit must not submit the same input again');
+ assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);
  assert.equal(f.ui.latest.result.transport.operation.thermal.enabled,false);
  assert.match(f.ui.nodes.inspect.textContent,/not the fixed gas temperature/);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'lithium');
+ assert.equal(f.requests.length,count,'the first response click after an accepted number edit must navigate without rerunning');
  assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/1200,/);
  assert.equal(f.ui.latest.result.config.gasK,500);
  f.change('fuel-currentA',0);f.change('fuel-linerK',600);f.change('fuel-durationS',.01);
