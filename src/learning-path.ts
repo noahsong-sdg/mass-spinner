@@ -120,7 +120,7 @@ export const learningPath = [
     id:'source',title:'Separate current, energy and footprint',
     baseline:'Open the simulator and choose Reactor in the header. Open Controls. Record D⁺ laboratory energy, D⁺ beam current, illuminated area and stopping model.',
     predict:'At fixed energy and target state, does doubling current double the reaction probability per ion?',
-    steps:['In Plots open Initial source. Change only D⁺ beam current and compare Incident beam power, Reaction probability / deuteron and neutron production.','Restore that current, then change only Illuminated target area. Compare total layer heat with Layer heat / illuminated area before investigating target evolution.'],
+    steps:['In Plots open Initial source → Target depth & full energy ledger. Change only D⁺ beam current and compare Incident beam power, Reaction probability / deuteron and neutron production.','Restore that current, then change only Illuminated target area. Compare Target-layer heat with Layer heat / illuminated area before investigating target evolution.'],
     actions:[],
     observe:'For the fixed initial target, current changes incident ions per second. Reaction probability per ion is set by the target and energy-dependent reaction/stopping calculation. Area changes heat flux and fluence per area; it is not itself a cross section.',
     explain:'Each singly charged D⁺ carries energy E and charge e: incident beam power is (I/e)E. The energy ledger separates transmitted beam, stopping heat, fusion products and specified alpha deposition.',

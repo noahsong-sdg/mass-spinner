@@ -38,6 +38,7 @@ test('learning sequence distinguishes model boundaries instead of promising unsu
  assert.match(pages['learn-collection.html'],/empty cut has no defined composition/);
  assert.match(pages['learn-evidence.html'],/experimentally unqualified/);
  assert.match(pages['learn-beam.html'],/choose Reactor in the header/);
+ assert.match(pages['learn-beam.html'],/Initial source → Target depth &amp; full energy ledger/,'the named energy readouts require opening the nested ledger');
  assert.doesNotMatch(pages['learn-beam.html'],/href="\/guide.html#goal"/,'beam questions must not lead to the centrifuge goal as their equations');
  assert.doesNotMatch(pages['learn-beam.html'],/data-guide-action=/);
  assert.match(pages['learn-beam.html'],/not measured LiT stopping/);
