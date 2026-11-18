@@ -25,6 +25,10 @@ test('all four modes expose different, correctly scoped diagnostic geometry',()=
    for(const packet of motion.group.children.filter(n=>n.name==='Schematic throughput packets'))assert.equal(packet.visible,mode==='flow');
   }
   motion.update(.2,'equilibrium');assert.equal(motion.group.getObjectByName('Ion rotation arrow')!.visible,false);
+  motion.group.getObjectByName('Gas mode diagnostics')!.traverse(node=>{
+   if(node instanceof THREE.Mesh||node instanceof THREE.Line){assert.equal(node.renderOrder,3);for(const material of [node.material].flat()){assert.equal(material.depthTest,false);assert.equal(material.depthWrite,false);assert.equal(material.transparent,true);}}
+  });
+  motion.group.traverse(node=>{if(node instanceof THREE.Points&&node.name!=='Schematic throughput packets')assert.equal(node.material.depthTest,true,'particle depth still conveys the chamber volume');});
   assert.equal(JSON.stringify(result),before,'graphics never alter accepted physics');
  }finally{release(motion.group);}
 });
