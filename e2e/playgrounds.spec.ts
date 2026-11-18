@@ -20,21 +20,26 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  await expect(page.locator('#fuel-render .fuel-status')).not.toContainText('unavailable');
  await page.getByRole('button',{name:'Plots',exact:true}).click();
  const before=await exported(page);
+ await page.getByRole('button',{name:'Close Plots',exact:true}).click();
  await page.getByRole('button',{name:'Controls',exact:true}).click();
+ const changedAt=Date.now();
  const field=page.locator('#fuel-magneticT'),maximum=Number(await field.getAttribute('max'));
  await field.press('End');
  await expect(field).toHaveValue(String(maximum));
+ await expect(page.locator('#fuel-export')).toBeEnabled();
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await page.getByRole('button',{name:'Plots',exact:true}).click();
  const after=await exported(page);
+ const controlLatencyMS=Date.now()-changedAt;
  expect(after.result.config.magneticT).toBe(maximum);
  expect(after.result.mechanics.torque).toBeCloseTo(maximum/before.result.config.magneticT*before.result.mechanics.torque,12);
- await page.getByRole('button',{name:'Close Controls',exact:true}).click();
  if(await page.locator('#fuel-motion-play').getAttribute('aria-pressed')==='true')await page.locator('#fuel-motion-play').click();
  await page.locator('#fuel-plot').selectOption('momentum');
  await page.locator('#fuel-motion-time').press('Home');
  const start=await page.locator('#fuel-plots').innerHTML();
  await page.locator('#fuel-motion-time').press('End');
  await expect.poll(()=>page.locator('#fuel-plots').innerHTML()).not.toBe(start);
- await expect(page.locator('#fuel-plots svg')).toBeVisible();
+ await expect(page.locator('#fuel-plots svg').first()).toBeVisible();
  await page.getByRole('button',{name:'Close Plots',exact:true}).click();
  await page.getByRole('button',{name:'Inspect',exact:true}).click();
  await page.locator('#fuel-component').selectOption('coils');
@@ -44,6 +49,9 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  await expect(page.locator('body')).toHaveAttribute('data-level','2');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('centrifuge',{body:await page.screenshot(),contentType:'image/png'});
+ const assets=await page.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/models/')).map(e=>{const r=e as PerformanceResourceTiming;return {url:r.name,durationMS:r.duration,bytes:r.decodedBodySize};}));
+ expect(assets.some(r=>r.bytes>0&&r.bytes<=8_000_000)).toBe(true);
+ await info.attach('performance',{body:JSON.stringify({backend:'Chromium software ANGLE/SwiftShader',controlLatencyMS,assets}),contentType:'application/json'});
  expect(errors).toEqual([]);
 });
 

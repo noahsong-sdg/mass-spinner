@@ -1,4 +1,5 @@
-import {mkdirSync,writeFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {mkdirSync,writeFileSync,readFileSync} from 'node:fs';
 import {advanceFuelThermal,createFuelLiner,initialFuelLinerEnergy} from '../src/fuel-thermal.js';
 
 const config={radiusM:.12,lengthM:.8,thicknessM:.005,gasCapacityJK:.5,initialGasK:400,initialWallK:1200,durationS:.05,
@@ -16,4 +17,4 @@ for(const cells of [8,16,32])for(const steps of [512,1024,2048]){
  cases.push({cells,steps,history});
 }
 mkdirSync('science-evidence',{recursive:true});
-writeFileSync('science-evidence/thermal-live.json',JSON.stringify({schemaVersion:1,config,cases})+'\n');
+writeFileSync('science-evidence/thermal-live.json',JSON.stringify({schemaVersion:1,sourceSHA256:Object.fromEntries(['src/fuel-thermal.ts','src/array-shape.ts','scripts/export-thermal-toolchain.ts','package-lock.json'].map(path=>[path,createHash('sha256').update(readFileSync(path)).digest('hex')])),config,cases})+'\n');

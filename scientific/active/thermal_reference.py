@@ -3,6 +3,8 @@
 No species redistribution, local flow, plasma kinetics or experimental validation.
 The spatial grid and logarithmic half-cell resistances match the exported live case.
 """
+import hashlib
+import importlib.metadata
 import json
 import sys
 from pathlib import Path
@@ -60,6 +62,14 @@ def solve(config, cells, times, method):
 
 
 def assess(packet):
+    root = Path(__file__).resolve().parents[2]
+    files = ["src/fuel-thermal.ts", "src/array-shape.ts", "scripts/export-thermal-toolchain.ts", "package-lock.json"]
+    identity = {name: hashlib.sha256((root / name).read_bytes()).hexdigest() for name in files}
+    if packet["sourceSHA256"] != identity:
+        raise ValueError("Live thermal source identity mismatch")
+    for name in ["scientific/active/thermal_reference.py", "scientific/active/uv.lock",
+                 "scientific/active/pyproject.toml", "scientific/active/.python-version"]:
+        identity[name] = hashlib.sha256((root / name).read_bytes()).hexdigest()
     config = packet["config"]
     rows = []
     for cells in (8, 16, 32):
@@ -85,6 +95,7 @@ def assess(packet):
             raise ValueError("Live temporal contraction or existing 1% temperature gate failed")
     return {"schemaVersion": 1, "kind": "bounded-variable-property-thermal-toolchain",
             "experimentalQualification": False, "wholeReactorQualification": False,
+            "sourceSHA256": identity, "runtime": {name: importlib.metadata.version(name) for name in ("numpy", "scipy")},
             "referenceMethods": ["SciPy Radau", "SciPy BDF"], "rows": rows,
             "scope": "Same finite-volume gas/wall equations at each mesh; time-integration comparison only. This does not establish spatial convergence or gas-regime validity."}
 

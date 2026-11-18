@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [codex/stack-modernization]
-    paths: [scientific/active/**, ci/Dockerfile.science, .github/workflows/active-science.yml, schemas/**]
+    paths: [scientific/active/**, ci/Dockerfile.science, .github/workflows/active-science.yml, schemas/**, scripts/export-thermal-toolchain.ts, src/fuel-thermal.ts, src/array-shape.ts, package-lock.json]
 permissions:
   contents: read
 jobs:
@@ -32,6 +32,7 @@ jobs:
             node --import tsx scripts/export-thermal-toolchain.ts
             /usr/bin/time -f "TS7 seconds=%e maxRSSKiB=%M" node node_modules/@typescript/native/bin/tsc --noEmit --checkers 1 2> science-evidence/typescript7.txt
             /usr/bin/time -f "TS6 seconds=%e maxRSSKiB=%M" node node_modules/typescript/bin/tsc6 --noEmit 2> science-evidence/typescript6.txt
+            uv run --frozen --offline --no-sync --project scientific/active ruff format --diff scientific/active > science-evidence/ruff-format.patch || test "$?" = 1
             uv run --frozen --offline --no-sync --project scientific/active ruff check scientific/active --output-format concise
             uv run --frozen --offline --no-sync --project scientific/active python -m unittest discover -s scientific/active -p "test_*.py" -v
             uv run --frozen --offline --no-sync --project scientific/active python -m unittest discover -s scientific/public-data-campaign -p "test_*.py" -v
