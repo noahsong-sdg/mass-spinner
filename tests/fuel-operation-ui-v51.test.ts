@@ -60,6 +60,8 @@ test('late worker replies cannot overwrite newer intervention histories',async t
 
 test('invalid thermal input retains accepted state and cutaway does not advertise hidden tracers',async t=>{
  const f=fixture(t);await f.start();const accepted=f.ui.latest,count=f.requests.length;
+ assert.match(f.doc.querySelector('.fuel-motion-legend')!.textContent!,/weighted/);
+ f.change('fuel-view-representation','field','change');
  assert.doesNotMatch(f.doc.querySelector('.fuel-motion-legend')!.textContent!,/weighted/);
  f.node('fuel-thermal-enabled').checked=true;f.change('fuel-thermal-wallCapacityJK','');await f.ui.run();
  assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);

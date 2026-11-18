@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import type {FuelMotionMode, FuelMotionState} from './fuel-motion.js';
+import type {FuelMotionMode, FuelMotionState, FuelSpecies} from './fuel-motion.js';
 import type {FuelRenderResult} from './fuel-field.js';
 
 /** Diagnostic geometry in chamber metres. No extra forces or fluid solver. */
@@ -62,6 +62,10 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
    arrow.setLength(Math.abs(distance),Math.min(R*.07,Math.abs(distance)*.4),Math.min(R*.04,Math.abs(distance)*.25));
   }
  }
- group.traverse(node=>{node.userData.quantitativeOnly=true;});
- return {group,paths,update};
+ group.traverse(node=>{node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions; glyph widths and display stations are illustrative.',purpose:node.userData.scope??'Display diagnostic for gas motion, not physical hardware.'};});
+ function setSpecies(value:FuelSpecies){for(const {arrow,species}of shells){
+  const selected=value==='all'||species===(value==='light'?0:1);
+  for(const material of [arrow.line.material,arrow.cone.material].flat()){material.transparent=true;material.opacity=selected?1:.08;}
+ }}
+ return {group,paths,update,setSpecies};
 }

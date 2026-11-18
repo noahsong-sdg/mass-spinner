@@ -44,7 +44,7 @@ async function fixture(t:any){
 }
 
 test('accepted physics refresh without an orbit preserves automatic portrait composition',async t=>{
- const f=await fixture(t);closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(0,1,.65).normalize());
+ const f=await fixture(t);closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(.55,1.25,.8).normalize());
  f.change('fuel-magneticT',.6);await f.ui.run();await flush();
  f.resize(320,740);
  closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(1,.65,.45).normalize());

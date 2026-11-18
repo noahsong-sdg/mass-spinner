@@ -10,6 +10,7 @@ import {comparisonDomain,computeFuelOperatingMap} from '../src/fuel-experiments.
 import {sampleFuelField} from '../src/fuel-field.js';
 import {publicInputCoverage} from '../src/public-sensitivity.ts';
 import {setupPlaygroundGuide} from '../src/playground-guide.js';
+import {fuelMotionState} from '../src/fuel-motion.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const clone=<T>(value:T):T=>structuredClone(value);
@@ -95,6 +96,17 @@ test('guided equilibrium calculator changes no worker input, accepted timeline o
  f.change('fuel-currentA',.04);assert.equal(f.node('fuel-export').disabled,true);
  panel.open=false;guide.launch('equilibrium');assert.equal(panel.open,true,'independent inputs work without an accepted fresh worker result');
  assert.equal(f.node('equilibrium-edgeSpeedMS').value,'1500');assert.equal(f.requests.length,requests);assert.equal(f.viewers[0].built,built);
+});
+
+test('a stronger drive keeps resolved rotation within the shared angular sampling budget',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-mode','spin','change');
+ const oldScale=fuelMotionState(f.ui.latest.result,0,'spin').secondsPerScreenSecond;
+ f.change('fuel-currentA',.12);await f.ui.run();await flush();
+ const expected=fuelMotionState(f.ui.latest.result,0,'spin').secondsPerScreenSecond;
+ assert.ok(expected<oldScale/2,'the prior display clock would exceed the angular sampling budget');
+ if(f.node('fuel-motion-play').getAttribute('aria-pressed')!=='true')f.node('fuel-motion-play').click();
+ f.viewers[0].animation(1);close(Number(f.node('fuel-motion-time').value),expected);
+ const arrow=f.viewers[0].built.motion.group.getObjectByName('Ion rotation arrow');close(arrow.userData.exposureS,expected/2);
 });
 
 test('equilibrium import samples the visible playback state even when the time-history plot has not redrawn',async t=>{

@@ -131,7 +131,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const modeDescriptions:Record<FuelMotionMode,string>={
   equilibrium:'Ideal settled density at the reference speed; not the finite-time result. Cream arrow: neutral rotation.',
   transport:'Neutral dots follow the computed density. Arrows track equal-count gas shells from their starting radii. Fast rotation is averaged.',
-  spin:'Blue arrow: ions. Cream arrow: neutral gas. One shared clock; each arc spans ½ screen second of rotation.',
+  spin:'Blue arrow: ions. Cream arrow: neutral gas. Shown at two sections for clarity. Each arc spans ½ screen second on the same clock.',
   flow:'Dashed routes and packets show reference pumping throughput, not solved chamber flow.'
  };
  const playbackPosition=floatingPlayback(motionBar);
@@ -288,7 +288,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(mode==='transport')suggested=Math.min(latest.result.config.durationS/8,1);
   timeScales[motionMode.value]??=suggested;
   // Preserve slider comparisons; retime only outside the visual sampling budget.
-  const scale=Math.min(timeScales[motionMode.value],suggested*(motionMode.value==='flow'?2:8));
+  const scale=Math.min(timeScales[motionMode.value],suggested*(mode==='flow'?2:mode==='transport'?8:1));
   elapsed+=dt*scale;
   const c=latest.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
   if((transient||pinned)&&elapsed>=limit){elapsed=limit;playing=false;}
@@ -319,7 +319,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   acceptComparison();
   setStatus(transient?`Closed vessel · ${diagnostic.thermal?'evolving temperature':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;
-  clock.textContent=`${transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:'Final reference'} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}`;
+  const timing=transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:mode==='flow'?`Reference Q ${fmt(latest.result.pumping.gasLoadPaM3S)} Pa·m³/s · 1 s screen = ${timeUnit}`:'Final reference';
+  clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}`;
   if(!playing)viewer?.setAnimation(null);
  }
  function playback(){
@@ -329,7 +330,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  restart.addEventListener('click',()=>{elapsed=0;playback();});
  newRun.addEventListener('click',()=>{changed();void run();});
  power.addEventListener('click',()=>{if(power.disabled||!latest)return;const current=sampleFuelTransport(latest.result.transport!,elapsed).currentA??latest.result.config.currentA;if(current>0)lastPoweredCurrent=current;controls.get('currentA')!.input.value=String(current>0?0:lastPoweredCurrent);changed({target:controls.get('currentA')!.input});});
- motionMode.addEventListener('change',()=>{elapsed=0;playing=!reducedMotion?.matches;views.presentMode(motionMode.value as FuelMotionMode);applyViews();draw();playback();});
+ motionMode.addEventListener('change',()=>{elapsed=0;playing=!reducedMotion?.matches;views.presentMode(motionMode.value as FuelMotionMode);playback();});
  seek.addEventListener('input',()=>{elapsed=Number(seek.value);playing=false;draw();playback();});
  const reduce=(event:MediaQueryListEvent)=>{if(event.matches){playing=false;playback();}};reducedMotion?.addEventListener('change',reduce);
  plotHost.addEventListener('focusin',()=>{if(playing){playing=false;playback();}});

@@ -125,7 +125,7 @@ export function createFuelMotion(result: FuelRenderResult){
   }
   previousMode=mode;return state;
  }
- update(0);return {group,update,setSpecies(value: FuelSpecies){for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.22:.02;}}};
+ update(0);return {group,update,setSpecies(value: FuelSpecies){glyphs.setSpecies(value);for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.22:.02;}}};
 }
 
 export type FuelMotion = ReturnType<typeof createFuelMotion>;

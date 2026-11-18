@@ -75,3 +75,16 @@ test('zero drive and pure species leave finite geometry and no fabricated rotati
   }finally{release(motion.group);}
  }
 });
+
+test('species focus dims the corresponding shell arrows and survives mode changes',()=>{
+ const motion=createFuelMotion(fixture());
+ try{
+  for(const species of ['light','heavy','all'] as const){
+   motion.setSpecies(species);motion.update(.3,'transport');motion.update(.3,'flow');motion.update(.3,'transport');
+   for(const arrow of motion.group.getObjectByName('Population-shell displacement')!.children as THREE.ArrowHelper[]){
+    const selected=species==='all'||arrow.userData.species===(species==='light'?0:1);
+    for(const material of [arrow.line.material,arrow.cone.material].flat())close(material.opacity,selected?1:.08);
+   }
+  }
+ }finally{release(motion.group);}
+});
