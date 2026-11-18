@@ -238,8 +238,15 @@ test('Inspect: liner reference changes its response without changing gas tempera
  await page.getByRole('button',{name:'Inspect',exact:true}).click();
  await page.locator('#fuel-component').selectOption('liner');
  await expect(page.locator('#fuel-inspect [data-effect]')).toContainText('Thermal evolution is off');
- await page.getByRole('spinbutton',{name:'Initial / reference liner temperature (K) precisely'}).fill('1200');
+ await expect(page.locator('#fuel-inspect input')).toHaveCount(0);
+ await page.locator('#fuel-inspect [data-control="linerK"]').click();
+ await expect(page.locator('#window-controls')).toBeVisible();
+ await expect(page.locator('#fuel-linerK')).toBeFocused();
+ await page.getByRole('button',{name:'Set Initial / reference liner temperature precisely',exact:true}).click();
+ await page.getByRole('spinbutton',{name:'Initial / reference liner temperature (K)',exact:true}).fill('1200');
+ await page.getByRole('button',{name:'Apply Initial / reference liner temperature',exact:true}).click();
  await expect(page.locator('#fuel-inspect [data-show-response]')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
  await page.getByRole('button',{name:'Show liner vapor pressure',exact:true}).click();
  await expect(page.locator('#fuel-plot')).toHaveValue('lithium');
  await expect(page.locator('#fuel-plots .plot-readout')).toContainText('1200,');

@@ -11,18 +11,18 @@ const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sou
 const flush=async()=>{for(let i=0;i<30;i++)await Promise.resolve();};
 const settle=async()=>{await new Promise(resolve=>setTimeout(resolve,160));await flush();};
 function fixture(t:any,hold=false,graphicsReady=Promise.resolve()){
- const dom=new JSDOM('<main></main>',{url:'https://example.org/?level=2'}),doc=dom.window.document,requests:any[]=[],pending:any[]=[];let selected:any,animation:any,opened=0;
+ const dom=new JSDOM('<main></main>',{url:'https://example.org/?level=2'}),doc=dom.window.document,requests:any[]=[],pending:any[]=[];let selected:any,animation:any,opened=0;const focused:string[]=[];
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const solve=(r:any)=>{const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};};
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
   {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'},...['coils','liner','light-outlet','pump','feed'].map(id=>({id,name:id,purpose:'Fixture component',material:'Illustrative',basis:'Not engineering CAD'}))],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
- const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
+ const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,onControls:selector=>focused.push(selector),request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};
  const start=async()=>{ui.setActive(true);if(hold)pending.shift()();await flush();assert.ok(ui.latest);};
  t.after(()=>{ui.dispose();dom.window.close();if(old)Object.defineProperty(globalThis,'document',old);else Reflect.deleteProperty(globalThis,'document');});
- return {ui,doc,node,change,start,requests,pending,get selected(){return selected;},get animation(){return animation;},get opened(){return opened;}};
+ return {ui,doc,node,change,start,requests,pending,focused,get selected(){return selected;},get animation(){return animation;},get opened(){return opened;}};
 }
 
 test('actual power control continues accepted momenta/distributions, branches past history and extends at the end',async t=>{
@@ -44,7 +44,7 @@ test('thermal setup resets explicitly; compact selected instrument exposes respo
  f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView!.Event('change'));await f.ui.run();
  assert.equal(Number(f.node('fuel-motion-time').value),0);assert.ok(f.ui.latest.result.transport.snapshots.at(-1).thermal);f.change('fuel-plot','thermal','change');assert.match(f.ui.nodes.plots.textContent,/Temperature \(K\)/);
  f.selected.onSelect('supply',{},'Discharge supply');
- const inspect=f.ui.nodes.inspect,slider=inspect.querySelector('[data-key=currentA]'),details=inspect.querySelector('details');assert.ok(slider&&details);assert.equal(details.open,false);assert.ok(slider.compareDocumentPosition(details)&f.doc.defaultView!.Node.DOCUMENT_POSITION_FOLLOWING);assert.match(inspect.querySelector('[data-response]').textContent,/m\/s.*A/);
+ const inspect=f.ui.nodes.inspect,link=inspect.querySelector('[data-control=currentA]'),details=inspect.querySelector('details');assert.ok(link&&details);assert.equal(details.open,false);assert.equal(inspect.querySelectorAll('input').length,0);assert.ok(link.compareDocumentPosition(details)&f.doc.defaultView!.Node.DOCUMENT_POSITION_FOLLOWING);assert.match(inspect.querySelector('[data-response]').textContent,/m\/s.*A/);
  [...inspect.querySelectorAll('button')].find((b:any)=>b.textContent==='Show end-of-run speeds')!.click();assert.equal(f.opened,1);assert.equal(f.node('fuel-plot').value,'spin');
  f.selected.onSelect('slice',{},'Gas');assert.equal(f.opened,2);assert.equal(f.node('fuel-plot').value,'composition');
  f.change('fuel-view-layer','temperature','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'thermal','A lumped temperature surface opens the scalar thermal history.');
@@ -94,19 +94,17 @@ test('enabled thermal number edits invalidate accepted ownership before validati
  }
 });
 
-test('invalid precise component edits remain visible and cannot export or run the old canonical range',async t=>{
- const f=fixture(t);await f.start();f.selected.onSelect('supply',{},'Discharge supply');
- const input=f.ui.nodes.inspect.querySelector('input[type="number"][data-key="currentA"]') as HTMLInputElement;
- const accepted=f.ui.latest,count=f.requests.length;
- input.value='';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));
- assert.equal(input.value,'');assert.equal(f.node('fuel-export').disabled,true);await settle();
- assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.equal(input.value,'');
- assert.match(f.ui.nodes.render.textContent,/valid component values.*Previous accepted state/);
- input.value='.02';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));await settle();
- assert.equal(f.requests.length,count+1);assert.equal(f.requests.at(-1).config.currentA,.02);assert.equal(f.node('fuel-export').disabled,false);
- input.value='';input.dispatchEvent(new f.doc.defaultView!.Event('input',{bubbles:true}));
- restoreScenario(f.doc,{version:2,level:'2',controls:{'fuel-currentA':.04}});await settle();
- assert.equal(Number(input.value),.04);assert.equal(f.requests.at(-1).config.currentA,.04);assert.equal(f.node('fuel-export').disabled,false,'Explicit scenario replacement clears the obsolete inspector draft.');
+test('Inspect contains no physical editors and old setup links retain canonical Controls and reject unknown inspector fields',async t=>{
+ const f=fixture(t);await f.start();const accepted=f.ui.latest,count=f.requests.length;
+ for(const id of ['supply','coils','liner','light-outlet','pump','feed']){
+  f.change('fuel-component',id,'change');assert.equal(f.ui.nodes.inspect.querySelectorAll('input').length,0,id);
+  const link=f.ui.nodes.inspect.querySelector<HTMLButtonElement>('[data-control]')!;assert.ok(link,id);link.click();
+  assert.equal(f.focused.at(-1),`#fuel-${link.dataset.control}`);
+ }
+ assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count,'inspecting and locating controls must not submit physics');
+ assert.throws(()=>restoreScenario(f.doc,{version:2,level:'2',controls:{'fuel-currentA':.04,'fuel-component-currentA':.15}}),/Unsupported scenario/);
+ assert.equal(f.ui.latest,accepted);restoreScenario(f.doc,{version:2,level:'2',controls:{'fuel-currentA':.04}});await settle();
+ assert.equal(f.ui.latest.result.config.currentA,.04);assert.equal(f.node('fuel-component-currentA'),null);
 });
 
 test('invalid thermal edits abort pending ownership and late replies cannot make export current',async t=>{
@@ -149,10 +147,11 @@ test('spatial mixture controls reach the solver and accepted gas profiles follow
  const accepted=f.ui.latest,count=f.requests.length;f.change('fuel-thermal-gasConductivityWMK','');await f.ui.run();assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);
 });
 
-test('Inspect edits reach the real solver and response buttons show the accepted endpoint without another solve',async t=>{
+test('Inspect links to the canonical solver input and response buttons show the accepted endpoint without another solve',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-component','coils','change');
  const before=f.ui.latest.result.mechanics.torque,button=f.ui.nodes.inspect.querySelector('[data-show-response]');
- f.change('fuel-component-magneticT',.75);assert.equal(button.disabled,true);
+ f.ui.nodes.inspect.querySelector<HTMLButtonElement>('[data-control=magneticT]')!.click();assert.equal(f.focused.at(-1),'#fuel-magneticT');
+ f.change('fuel-magneticT',.75);assert.equal(button.disabled,true);
  assert.match(f.ui.nodes.inspect.textContent,/Recomputing/);await f.ui.run();
  assert.equal(f.ui.latest.result.config.magneticT,.75);assert.equal(f.node('fuel-magneticT').value,'0.75');
  assert.ok(Math.abs(f.ui.latest.result.mechanics.torque/before-1.5)<1e-12);
@@ -164,23 +163,14 @@ test('Inspect edits reach the real solver and response buttons show the accepted
 
 test('liner response distinguishes a fixed bath from enabled thermal evolution and marks the exact reference temperature',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-component','liner','change');
- const number=f.ui.nodes.inspect.querySelector<HTMLInputElement>('input[type=number]')!;number.focus();number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('input'));await f.ui.run();
- const accepted=f.ui.latest,count=f.requests.length;
- number.dispatchEvent(new f.doc.defaultView.Event('change'));number.blur();
- assert.equal(f.node('fuel-export').disabled,false,'leaving an accepted number edit must not submit the same input again');
- assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);
+ f.change('fuel-linerK',1200);await f.ui.run();
+ const count=f.requests.length;
  assert.equal(f.ui.latest.result.transport.operation.thermal.enabled,false);
  assert.match(f.ui.nodes.inspect.textContent,/not the fixed gas temperature/);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'lithium');
- assert.equal(f.requests.length,count,'the first response click after an accepted number edit must navigate without rerunning');
+ assert.equal(f.requests.length,count,'viewing a response must not submit another calculation');
  assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/1200,/);
  assert.equal(f.ui.latest.result.config.gasK,500);
- f.change('fuel-linerK',1100);await f.ui.run();
- number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
- assert.equal(f.ui.latest.result.config.linerK,1200,'a change-only edit after an external slider change must remain active');
- number.value='';number.dispatchEvent(new f.doc.defaultView.Event('input'));
- number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
- assert.equal(f.node('fuel-export').disabled,false,'correcting an invalid field back to its previous value must recompute');
  f.change('fuel-currentA',0);f.change('fuel-linerK',600);f.change('fuel-durationS',.01);
  f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'thermal');
@@ -195,13 +185,13 @@ test('reference scans mark exact selected inputs while the closed-vessel gas rem
  for(const [plot,x]of [['cut','0.633'],['inventory','0.037'],['cascade','5'],['field','0.5']]){
   f.change('fuel-plot',plot,'change');assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,new RegExp(`${x.replace('.','\\.')},`),plot);
  }
- f.change('fuel-component','pump','change');f.change('fuel-component-pumpSpeedM3S',Math.log10(.04));await f.ui.run();
+ f.change('fuel-component','pump','change');f.change('fuel-pumpSpeedM3S',Math.log10(.04));await f.ui.run();
  assert.deepEqual(f.ui.latest.result.transport.snapshots.map(s=>({time:s.timeS,light:s.lightMass,heavy:s.heavyMass,omega:s.neutralRadS})),trajectory);
  assert.ok(Math.abs(f.ui.latest.result.config.pumpSpeedM3S-.04)<1e-15);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');
  assert.match(f.ui.nodes.inspect.textContent,/Pumping reference only/);
  const previousSpeed=f.ui.latest.result.pumping.effectiveSpeedM3S;
- f.change('fuel-component','feed','change');f.change('fuel-component-conductanceM3S',Math.log10(.01));await f.ui.run();
+ f.change('fuel-component','feed','change');f.change('fuel-conductanceM3S',Math.log10(.01));await f.ui.run();
  assert.ok(f.ui.latest.result.pumping.effectiveSpeedM3S<previousSpeed);
  assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/Reference inlet speed/);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');

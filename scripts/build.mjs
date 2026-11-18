@@ -7,6 +7,8 @@ import {qualificationPage} from './qualification-page.mjs';
 import {startPage} from './start-page.mjs';
 import {learningPages} from './learning-pages.mjs';
 import {understandingPage} from './understanding-page.mjs';
+import {tsImport} from 'tsx/esm/api';
+const {numberedTutorials}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 import {equilibriumPage} from './equilibrium-page.mjs';
 import {pinReleaseLinks,releaseSourceBase} from './release-links.mjs';
 const source=spawnSync('git',['rev-parse','--verify','HEAD'],{encoding:'utf8'});
@@ -23,6 +25,7 @@ if(build.status===0){
  writeFileSync('release/start.html',startPage());
  for(const [name,html]of Object.entries(learningPages()))writeFileSync(`release/${name}`,html);
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
+ for(const tutorial of numberedTutorials)writeFileSync(`release/tutorial-${tutorial.number}.html`,understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8'),revision,tutorial));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));
  writeFileSync('release/guide-reader.js',transpileModule(readFileSync('src/guide-reader.ts','utf8'),{fileName:'guide-reader.ts',compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
  const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');

@@ -322,16 +322,13 @@ test('real apparatus initially keeps the viewer fit and preserves the user SI po
  assert.equal(v.built.scene.userData.gasRadiusM,f.ui.latest.result.config.radiusM);
 });
 
-test('picked pump exposes physical numeric units and preserves the same focused contextual control across recompute',async t=>{
+test('picked pump stays read-only while its canonical control updates the engineering state',async t=>{
  const f=fixture(t);await f.start();const v=f.viewers[0],pump=v.built.scene.getObjectByName('Downstream exhaust pump');assert.ok(pump);
  v.options.onSelect('pump',pump.userData,pump.name);
- const number=f.ui.nodes.inspect.querySelector('input[type=number][data-key=pumpSpeedM3S]') as HTMLInputElement;
- assert.ok(number);close(Number(number.value),f.ui.latest.result.config.pumpSpeedM3S);assert.match(number.getAttribute('aria-label')!,/m³\/s/);
- assert.equal(Number(number.min),.001);assert.equal(Number(number.max),1);
- number.focus();number.value='.04';number.dispatchEvent(new f.window.Event('change',{bubbles:true}));await f.ui.run();
+ assert.equal(f.ui.nodes.inspect.querySelectorAll('input').length,0);
+ const input=f.node('fuel-pumpSpeedM3S');input.focus();f.change(input.id,Math.log10(.04));await f.ui.run();
  close(f.requests.at(-1).record.config.pumpSpeedM3S,.04);close(f.ui.latest.result.config.pumpSpeedM3S,.04);
- assert.equal(f.ui.nodes.inspect.querySelector('input[type=number][data-key=pumpSpeedM3S]'),number);assert.equal(f.window.document.activeElement,number);
- close(Number(f.node('fuel-pumpSpeedM3S').value),Math.log10(.04));
+ assert.equal(f.window.document.activeElement,input);assert.ok(f.ui.nodes.inspect.querySelector('[data-control=pumpSpeedM3S]'));
  close(v.built.scene.getObjectByName('Downstream exhaust pump').userData.prescribedSpeedM3S,.04);
 });
 

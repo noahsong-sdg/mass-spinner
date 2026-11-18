@@ -1,6 +1,20 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test('numbered tutorials 03–06 render independently with readable diagrams, math and mobile navigation',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ for(const part of ['03','04','05','06']){
+  await page.goto(`/tutorial-${part}.html`);await expect(page.locator('h1')).toContainText(part);
+  await expect(page.locator('figure svg')).not.toHaveCount(0);
+  await expect(page.locator('.katex-error')).toHaveCount(0);
+  const target=await page.locator('#guide-chapter option').last().getAttribute('value');
+  await page.locator('#guide-chapter').selectOption(target!);await expect(page.locator(`#${target}`)).toBeInViewport();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
+ }
+ await info.attach('numbered-evidence-tutorial',{body:await page.screenshot(),contentType:'image/png'});expect(errors).toEqual([]);
+});
+
 test('optional guidance preserves predictions and gives keyboard access to explanations',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/start.html');

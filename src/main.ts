@@ -417,7 +417,7 @@ const marathon=setupMarathonModels({transformPlots:targetPlots,onSource:value=>f
  fusionApparatus.setPending(value.phase==='pending');for(const control of targetBaselines.values()){if(value.phase==='invalid')control.clearCurrent();else control.setPending(value.phase==='pending');}
 }});
 setupMaterialRealism({readSource:()=>marathon.source.read()});
-const fuelCentrifuge=setupFuelCentrifuge({onInspect:()=>workspace?.open('inspect'),onResults:()=>workspace?.open('plots')});
+const fuelCentrifuge=setupFuelCentrifuge({onInspect:()=>workspace?.open('inspect'),onResults:()=>workspace?.open('plots'),onControls:selector=>workspace?.focusRelated('controls',selector)});
 const collectorHost=document.createElement('div');$('orbit-results').after(collectorHost);collector=setupCollectorAcceptance(collectorHost);
 setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'} as Record<string,string>)[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence as ConvergenceEvidence);studyUI=setupStudies(mode,()=>orbitConfig(mode()==='icr'?'icr':'rotating'),(selected,settings,signal)=>calculate(selected as OrbitMode,settings,signal));
 baseline=setupBaseline($('live-plots'),baselineOptions);

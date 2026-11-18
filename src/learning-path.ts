@@ -32,7 +32,7 @@ export const learningPath = [
     id:'picture',title:'Now change only the picture',
     baseline:'Keep one accepted run. Do not change physical inputs.',
     predict:'Will moving the radial probe change the species inventory, or only the place you sample?',
-    steps:['Open View. Move Probe radius / vessel radius from axis to wall; inspect Composition and Species density.','Switch gas display or rotate the camera. Open Inspect: selecting a component highlights it; editing a linked physical input changes the calculation.'],
+    steps:['Open View. Move Probe radius / vessel radius from axis to wall; inspect Composition and Species density.','Switch gas display or rotate the camera. Open Inspect: selecting a component highlights it; use its Adjust link to edit the input in Controls.'],
     actions:[['view','Open View'],['compositionPlot','Show composition at selected time'],['density','Show species density'],['axis','Probe axis'],['wall','Probe wall'],['inspect','Open Inspect']],
     observe:'The probe readout and plot marker select different radii of the same state. Display settings and playback do not rerun its physics. The radial model has no new axial structure when you move its slice.',
     explain:'A time history asks when; a radial profile asks where at the selected time; a parameter scan compares hypothetical settings. Their horizontal axes answer different questions.',

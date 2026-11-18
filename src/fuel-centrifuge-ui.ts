@@ -39,7 +39,7 @@ type Graphics = Awaited<ReturnType<typeof loadFuelGraphics>>;
 type Geometry = ReturnType<Graphics[1]['buildFuelCentrifugeGeometry']>;
 type FuelModel = {config:FuelConfig;result:FuelResult;diagnostics?:boolean};
 export type SetupFuelCentrifugeOptions = {
- document?:Document;request?:typeof requestSimulationWithIdentity;onInspect?:()=>void;onResults?:()=>void;
+ document?:Document;request?:typeof requestSimulationWithIdentity;onInspect?:()=>void;onResults?:()=>void;onControls?:(selector:string)=>void;
  loadGraphics?:typeof loadFuelGraphics;
 };
 const message = (error:unknown) => error instanceof Error ? error.message : String(error);
@@ -92,7 +92,7 @@ async function loadFuelGraphics(){
  const assembly=await geometry.loadFuelAssembly();
  return [viewer,{...geometry,buildFuelCentrifugeGeometry:(options:Parameters<typeof geometry.buildFuelCentrifugeGeometry>[0])=>geometry.buildFuelCentrifugeGeometry({...options,assembly})}] as const;
 }
-export function setupFuelCentrifuge({document:doc=document,request=requestSimulationWithIdentity,onInspect=()=>{},onResults=()=>{},
+export function setupFuelCentrifuge({document:doc=document,request=requestSimulationWithIdentity,onInspect=()=>{},onResults=()=>{},onControls=()=>{},
  loadGraphics=loadFuelGraphics}:SetupFuelCentrifugeOptions={}){
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
  const root=el('section'),nodes={} as FuelNodes;root.id='fuel-centrifuge';
@@ -200,7 +200,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
   else{const id={heat:'electrodes',thermal:latest?.result.config.pair==='lithium'?'liner':'vessel',thermalProfile:latest?.result.config.pair==='lithium'?'liner':'vessel',cut:'light-outlet',cascade:'stages',pump:'pump',field:'coils',inventory:'pump',lithium:'liner'}[selector.value];if(id){viewer?.select(id);viewer?.focus?.(id,{animate:true});}}
  });
- nodes.inspect.append(el('p','Selecting a part highlights it. Its sliders edit the same inputs as Controls.'));
+ nodes.inspect.append(el('p','Select a part to see its materials and response. Change physical inputs in Controls.'));
  const inspectSelect=makeSelect(nodes.inspect,'fuel-component','Component',[]),description=el('div'),reset=el('button','Reset 3D view');nodes.inspect.append(reset,description);
  reset.addEventListener('click',()=>viewer?.reset());inspectSelect.addEventListener('change',()=>describe(inspectSelect.value));
  const focus=el('button','Frame component');focus.id='fuel-focus-component';focus.addEventListener('click',()=>viewer?.focus?.(inspectSelect.value,{animate:true}));nodes.inspect.insertBefore(focus,description);
@@ -351,19 +351,16 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   for(const option of selector.options)option.disabled=application.value==='pump'&&['cut','cascade'].includes(option.value)||pair.value!=='lithium'&&option.value==='lithium';
   if(selector.selectedOptions[0]?.disabled)selector.value=application.value==='pump'?'pump':'spin';
  }
- function changed(event?:Event|{target:HTMLInputElement},editedInput:EventTarget|null|undefined=event?.target){
+ function changed(event?:Event|{target:HTMLInputElement}){
   if(disposed)return;
   const intervention=event?.target===controls.get('currentA')!.input&&latest?.result.transport?.operation&&elapsed>0&&['spin','transport'].includes(motionMode.value);
   if(intervention){
    try{currentEvents=fuelCurrentIntervention(latest!.result.transport!.operation!.events,elapsed,controls.get('currentA')!.read());}
-   catch(error){const control=controls.get('currentA')!,current=sampleFuelTransport(latest!.result.transport!,elapsed).currentA??latest!.result.config.currentA;control.input.value=String(current);control.refresh();for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key="currentA"]'))input.value=String(current);playing=false;playback();setStatus(`${message(error)} Start a new run to reset drive history.`);return;}
+   catch(error){const control=controls.get('currentA')!,current=sampleFuelTransport(latest!.result.transport!,elapsed).currentA??latest!.result.config.currentA;control.input.value=String(current);control.refresh();playing=false;playback();setStatus(`${message(error)} Start a new run to reset drive history.`);return;}
    operatingConfig={...latest!.result.config};resume={transport:latest!.result.transport!,timeS:elapsed};
    if(elapsed>=operatingConfig.durationS){operatingConfig.durationS=Math.min(60,operatingConfig.durationS+Math.max(.1,latest!.result.config.durationS));controls.get('durationS')!.input.value=String(operatingConfig.durationS);}
   }else{currentEvents=[];operatingConfig=null;resume=null;elapsed=0;}
   dependencies();sensitivity.invalidate();
-  for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]')){
-   const control=controls.get(input.dataset.key as NumericFuelKey)!;if(input!==editedInput&&event?.target===control.input)input.value=String(input.type==='number'?control.read():control.input.value);
-  }
   cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;
   draw();
   status.textContent=latest?'Updating · previous accepted state':'Updating…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
@@ -380,27 +377,11 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const record=graphics?.[1].FUEL_COMPONENTS.find(c=>c.id===id);if(!record)return;
   if(highlight)hasSelection=true;
   inspectSelect.value=id;viewer?.select(hasSelection?id:null);
-  if(description.dataset.component===id){description.querySelector('h3')!.textContent=name||record.name;[typeof part?.purpose==='string'?part.purpose:record.purpose,typeof part?.materialBasis==='string'?part.materialBasis:record.material,record.basis].forEach((text,i)=>description.querySelectorAll('details p')[i].textContent=text);for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]')){if(doc.activeElement!==input){const control=controls.get(input.dataset.key as NumericFuelKey)!;input.value=String(input.type==='number'?control.read():control.input.value);}}refreshInstrument();return;}
+  if(description.dataset.component===id){description.querySelector('h3')!.textContent=name||record.name;[typeof part?.purpose==='string'?part.purpose:record.purpose,typeof part?.materialBasis==='string'?part.materialBasis:record.material,record.basis].forEach((text,i)=>description.querySelectorAll('details p')[i].textContent=text);refreshInstrument();return;}
   description.dataset.component=id;description.replaceChildren(el('h3',name||record.name));
-  if(['supply','electrodes'].includes(id)){const toggle=el('button');toggle.dataset.power='';toggle.addEventListener('click',()=>power.click());description.append(toggle);}
   for(const key of FUEL_COMPONENT_CONTROLS[id]??[]){
-   const control=controls.get(key)!,box=el('div'),definition=fields.find(f=>f[0]===key)!,label=el('label',`${definition[1]} (${definition[2]||'fraction'})`),input=el('input'),number=el('input'),log=control.input.dataset.rangeScale==='log10';input.type='range';number.type='number';input.id=`fuel-component-${key}`;label.htmlFor=input.id;
-   input.min=control.input.min;input.max=control.input.max;input.step=control.input.step;input.value=control.input.value;
-   number.min=String(log?10**Number(input.min):input.min);number.max=String(log?10**Number(input.max):input.max);number.step='any';number.value=String(control.read());number.setAttribute('aria-label',`${definition[1]} (${definition[2]||'fraction'}) precisely`);
-   for(const n of [input,number])n.dataset.key=key;
-   let numberEdit:{text:string;coordinate:string}|null=null;
-   const update=(event:Event)=>{
-    const target=event.target as HTMLInputElement;
-    // Blur commits the input event again; retain change-only edits without rerunning the same value.
-    if(event.type==='change'&&numberEdit?.text===number.value&&numberEdit.coordinate===control.input.value)return;
-    if(target.value===''||!target.checkValidity()){numberEdit=null;changed();return;}
-    if(target===number&&control.input.dataset.integer!=='true')control.input.step=input.step='any';
-    const value=Number(target.value);control.input.value=String(target===number&&log?Math.log10(value):value);input.value=control.input.value;
-    if(target!==number)number.value=String(control.read());
-    numberEdit=target===number?{text:number.value,coordinate:control.input.value}:null;
-    changed({target:control.input},target);
-   };
-   input.addEventListener('input',update);number.addEventListener('input',update);number.addEventListener('change',update);box.className='fuel-view-control';box.append(label,input,number);description.append(box);
+   const definition=fields.find(field=>field[0]===key)!,link=el('button',`Adjust ${definition[1]}`);
+   link.type='button';link.dataset.control=key;link.addEventListener('click',()=>onControls(`#fuel-${key}`));description.append(link);
   }
   const effect=el('p');effect.dataset.effect='';description.append(effect);
   const response=el('output');response.dataset.response='';description.append(response);
@@ -412,16 +393,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const details=el('details');details.append(el('summary','Materials & model'),el('p',typeof part?.purpose==='string'?part.purpose:record.purpose),el('p',typeof part?.materialBasis==='string'?part.materialBasis:record.material),el('p',record.basis));description.append(details);refreshInstrument();
  }
  function refreshInstrument(state:DiagnosticState|null=latest?diagnosticState(latest.result):null){
-  if(latest&&!dirty&&!exportButton.disabled){const control=controls.get('currentA')!,current=state?.currentA??latest.result.config.currentA;control.input.value=String(current);control.refresh();for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key="currentA"]'))input.value=String(current);}
-  for(const input of description.querySelectorAll<HTMLInputElement>('input[data-key]'))input.disabled=controls.get(input.dataset.key as NumericFuelKey)!.input.disabled;
-  const toggle=description.querySelector<HTMLButtonElement>('[data-power]');if(toggle){toggle.textContent=power.textContent;toggle.disabled=power.disabled;toggle.setAttribute('aria-pressed',power.getAttribute('aria-pressed')??'false');}
+  if(latest&&!dirty&&!exportButton.disabled){const control=controls.get('currentA')!,current=state?.currentA??latest.result.config.currentA;control.input.value=String(current);control.refresh();}
   const id=description.dataset.component!,topic=componentResponse(id),button=description.querySelector<HTMLButtonElement>('[data-show-response]');
   if(button){button.disabled=!latest||dirty||updating;button.textContent=({spin:'Show end-of-run speeds',thermal:'Show end-of-run temperature',lithium:'Show liner vapor pressure',pump:'Show pumping reference',cut:'Show selected collection cut'})[topic]??'Show end-of-run separation';}
   const effect=description.querySelector<HTMLElement>('[data-effect]');
-  if(effect)effect.textContent=id==='liner'?(topic==='thermal'?'Changes the initial liner temperature. Show the endpoint to see the evolved gas and wall.':'Thermal evolution is off: this changes liner vapor pressure, not the fixed gas temperature.'):
+  if(effect)effect.textContent=id==='liner'?(topic==='thermal'?'Controls sets the initial liner temperature. The response shows the evolved gas and wall.':'Thermal evolution is off: liner temperature affects vapor pressure, not the fixed gas temperature.'):
    id==='pump'||id==='feed'?'Pumping reference only. This does not change rotation or drive an inlet/outlet flow.':
    id==='light-outlet'?'Selects an inventory cut, not an extraction flow. The curve scans every cut; the marker shows yours.':
-   ['coils','supply','electrodes'].includes(id)?'Changes the drive. A new run starts at 0 s; show its endpoint to compare speeds.':'';
+   ['coils','supply','electrodes'].includes(id)?'Drive inputs are in Controls. Current edits after 0 s add a drive step; other edits start a new run.':'';
   const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest.result;
   if(dirty||updating){output.textContent='Recomputing · previous result shown in plots';return;}
   const collection=state?.collection??r.collection,pct=(value:number|null)=>value===null?'—':fmt(100*value);
@@ -464,9 +443,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    activeThermalInputs.push(thickness);if(gasModel.value==='spatial')activeThermalInputs.push(gasConductivity);
   }
   const invalidThermal=activeThermalInputs.some(invalid);
-  if(invalidThermal||[...description.querySelectorAll<HTMLInputElement>('input[type="number"]')].some(input=>!input.disabled&&invalid(input))){
+  if(invalidThermal){
    if(!dirty){changed();clearTimeout(timer);}
-   updating=false;status.textContent=`Enter valid ${invalidThermal?'thermal settings':'component values'} before running.${latest?' Previous accepted state.':''}`;
+   updating=false;status.textContent=`Enter valid thermal settings before running.${latest?' Previous accepted state.':''}`;
    learning.setPending(latest?'Invalid settings · previous accepted result':'Enter valid settings before running.');return;
   }
   cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;status.textContent='Updating…';

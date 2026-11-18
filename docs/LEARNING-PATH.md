@@ -11,6 +11,12 @@ an accepted comparison or recorded/exported settings rather than a decorative sc
 The reader uses the existing same-origin simulator action bridge; it has no solver
 of its own and collects no learner data. The text remains available without JavaScript.
 
+Numbered readers 03–06 add concise motivations, rendered equations, diagrams and
+real-control links: thermal limits, collection/processes, fusion fuel inventory,
+and evidence. They are published as `/tutorial-03.html` through `/tutorial-06.html`,
+linked from 02 and the investigation index. Inspect now identifies parts and
+opens their canonical Controls inputs; it has no duplicate physical editors.
+
 Design rationale: [guided discovery](https://doi.org/10.1037/a0021017),
 [productive failure](https://doi.org/10.3102/00346543211019105),
 [linked representations](https://doi.org/10.1016/j.learninstruc.2006.03.001),

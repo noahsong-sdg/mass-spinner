@@ -22,7 +22,7 @@ function modulePage(module){
 }
 /** Build-only content: no independent solver, remote content or learner tracking. @returns {Record<string,string>} */
 export function learningPages(){
- const intro='<p class="walkthrough-intro">Can you obtain a more enriched sample while retaining useful light-isotope inventory?</p><p>Follow one question at a time, or choose any experiment. Start with a prediction, change one thing and explain what moved. Keep the simulator beside this reader.</p><p><a href="/start.html">New here? Try the short walkthrough first →</a></p>';
+ const intro='<p class="walkthrough-intro">Can you obtain a more enriched sample while retaining useful light-isotope inventory?</p><p>Follow one question at a time, or choose any experiment. Start with a prediction, change one thing and explain what moved. Keep the simulator beside this reader.</p><p><a href="/start.html">New here? Try the short walkthrough first →</a></p><p>Read the tutorials: <a href="/guide.html">02 · rotation</a> → <a href="/tutorial-03.html">03 · heat</a> → <a href="/tutorial-04.html">04 · process</a> → <a href="/tutorial-05.html">05 · fuel</a> → <a href="/tutorial-06.html">06 · evidence</a>.</p>';
  const contents=learningPath.map((module,i)=>`<section class="walkthrough-step"><span class="step-number">${i+1} / ${learningPath.length}</span><h2 id="${module.id}"><a href="/learn-${module.id}.html">${escape(module.title)} →</a></h2><p>${escape(module.question)}</p><p>${escape(module.scope)}</p></section>`).join('');
  return {'learn.html':page('Choose an experiment',intro+contents,learningPath.map(module=>[module.id,module.title])),...Object.fromEntries(learningPath.map(module=>[`learn-${module.id}.html`,modulePage(module)]))};
 }

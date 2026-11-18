@@ -33,15 +33,15 @@ test('disabling thermal evolution recovers an isothermal run even when its inact
  assert.doesNotMatch(f.ui.nodes.render.textContent,/Thermal capacities\/temperatures must be positive/);
 });
 
-test('seeking and rewinding operating history shows the accepted current in both current instruments',async t=>{
+test('seeking and rewinding operating history shows the accepted current in Controls and the read-only component response',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-motion-time',.4);f.node('fuel-power').click();await f.ui.run();
  f.change('fuel-motion-time',.2);f.options.onSelect('supply',{},'Discharge supply');
  assert.equal(Number(f.node('fuel-currentA').value),.03,'Main current control must agree with the sampled historical current.');
- assert.equal(Number(f.node('fuel-component-currentA').value),.03,'Component control must agree with its accepted current response.');
+ assert.equal(f.ui.nodes.inspect.querySelectorAll('input').length,0);assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/0.03 A/);
  f.change('fuel-motion-time',.6);assert.equal(Number(f.node('fuel-currentA').value),0);
- assert.equal(Number(f.node('fuel-component-currentA').value),0);
+ assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/0 A/);
  f.node('fuel-motion-restart').click();assert.equal(Number(f.node('fuel-currentA').value),.03);
- const toggle=f.ui.nodes.inspect.querySelector('[data-power]');assert.equal(toggle.textContent,'Cut power');assert.equal(toggle.getAttribute('aria-pressed'),'true');assert.equal(toggle.disabled,false);
+ const toggle=f.node('fuel-power');assert.equal(toggle.textContent,'Cut power');assert.equal(toggle.getAttribute('aria-pressed'),'true');assert.equal(toggle.disabled,false);
  f.change('fuel-motion-mode','equilibrium','change');assert.equal(toggle.disabled,true);
  f.change('fuel-motion-mode','transport','change');f.change('fuel-currentA',.07);f.change('fuel-motion-time',.2);
  assert.equal(Number(f.node('fuel-currentA').value),.07,'An accepted historical sample must not overwrite a pending draft.');assert.equal(toggle.disabled,true);
@@ -60,9 +60,9 @@ test('reference instruments use the final scheduled current after a power cut',a
  for(const mode of ['equilibrium','flow']){
   f.change('fuel-motion-mode',mode,'change');
   assert.equal(Number(f.node('fuel-currentA').value),0);assert.equal(f.node('fuel-currentA').getAttribute('aria-valuetext'),'0 A');
-  assert.equal(Number(f.node('fuel-component-currentA').value),0);
+  assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/0 A/);
   assert.equal(f.node('fuel-power').textContent,'Power on');assert.equal(f.node('fuel-power').getAttribute('aria-pressed'),'false');assert.equal(f.node('fuel-power').disabled,true);
-  const toggle=f.ui.nodes.inspect.querySelector('[data-power]');assert.equal(toggle.textContent,'Power on');assert.equal(toggle.getAttribute('aria-pressed'),'false');assert.equal(toggle.disabled,true);
+  const toggle=f.node('fuel-power');assert.equal(toggle.textContent,'Power on');assert.equal(toggle.getAttribute('aria-pressed'),'false');assert.equal(toggle.disabled,true);
   assert.equal(f.ui.nodes.inspect.querySelector('[data-response]').textContent,`Gas ${end.neutralMS.toLocaleString(undefined,{maximumSignificantDigits:4})} m/s · 0 A`);
   assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0 W');
  }
@@ -108,7 +108,7 @@ test('a full current history rejects the next edit without losing its accepted e
  for(let i=1;i<=128;i++){f.change('fuel-motion-time',i/200);f.change('fuel-currentA',i%2?.04:.02);await f.ui.run();assert.ok(f.ui.latest);}
  const accepted=f.ui.latest;assert.equal(accepted.result.transport.operation.events.length,128);
  f.change('fuel-motion-time',.8);f.options.onSelect('supply',{},'Supply');f.change('fuel-currentA',.1);
- assert.equal(f.ui.latest,accepted);assert.equal(Number(f.node('fuel-currentA').value),.02);assert.equal(Number(f.node('fuel-component-currentA').value),.02);
+ assert.equal(f.ui.latest,accepted);assert.equal(Number(f.node('fuel-currentA').value),.02);assert.match(f.ui.nodes.inspect.querySelector('[data-response]').textContent,/0.02 A/);
  assert.match(f.ui.nodes.render.querySelector('[role="status"]').textContent,/Start a new run/);
  assert.equal(f.node('fuel-export').disabled,false);
  f.node('fuel-new-run').click();await flush();assert.ok(f.ui.latest);assert.equal(f.ui.latest.result.transport.operation.events.length,0);

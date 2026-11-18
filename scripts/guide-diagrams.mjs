@@ -1,5 +1,29 @@
 /** @type {Record<string,{title:string,description:string,caption:string,body:string}>} */
 const drawings={
+ 'heat-flow':{title:'Heat travels through the gas and wall',description:'Gas, inner liner, outer liner and coolant exchange heat. A temperature difference drives heat toward the cooler region; the sign can reverse. These are schematic regions, not computed temperatures.',caption:'Radial heat path, schematic. Read Temperature profile for your calculated cell temperatures.',body:`
+ <text x="165" y="28" text-anchor="middle">from the gas toward the outside →</text>
+ <rect x="12" y="72" width="82" height="96" rx="5"/><text x="53" y="115" text-anchor="middle">gas</text><text x="53" y="139" text-anchor="middle">cells</text>
+ <rect x="126" y="72" width="78" height="96" rx="5"/><text x="165" y="115" text-anchor="middle">tungsten</text><text x="165" y="139" text-anchor="middle">liner</text>
+ <rect x="236" y="72" width="82" height="96" rx="5"/><text x="277" y="126" text-anchor="middle">coolant</text>
+ <path d="M100 120H120M210 120H230" class="force" marker-start="url(#heat-flow-force)" marker-end="url(#heat-flow-force)"/>
+ <text x="165" y="207" text-anchor="middle">heat flows from hotter to cooler</text>
+ <text x="165" y="237" text-anchor="middle">direction depends on temperature</text>`},
+ 'inventory-cut':{title:'Purity and recovery count different things',description:'Purity is light atoms collected divided by all atoms collected. Recovery is light atoms collected divided by all light atoms in the vessel. A radius cut includes its whole interior, not a thin shell.',caption:'Count definitions, not computed output. A small enriched sample can still have low recovery.',body:`
+ <rect x="15" y="25" width="300" height="85" rx="5"/><text x="165" y="49" text-anchor="middle">Purity · how enriched is the sample?</text>
+ <text x="165" y="76" text-anchor="middle">light atoms collected</text><path d="M65 83H265" class="current"/><text x="165" y="102" text-anchor="middle">all atoms collected</text>
+ <rect x="15" y="140" width="300" height="85" rx="5"/><text x="165" y="164" text-anchor="middle">Recovery · how much did you keep?</text>
+ <text x="165" y="191" text-anchor="middle">light atoms collected</text><path d="M65 198H265" class="current"/><text x="165" y="217" text-anchor="middle">all light atoms in the vessel</text>`},
+ 'fuel-cycle':{title:'Breeding fuel and recovering fuel are separate jobs',description:'A blanket can produce tritium from lithium and neutrons. A D–T fusion plasma consumes some injected fuel; exhaust processing returns unburned fuel. Lithium isotope enrichment is upstream of breeding, not fusion inside the centrifuge.',caption:'Process sketch. No breeding rate, return efficiency or plant inventory is predicted by these arrows.',body:`
+ <rect x="15" y="15" width="300" height="45" rx="5"/><text x="165" y="43" text-anchor="middle">lithium + neutrons → tritium</text>
+ <path d="M74 62V96" class="force" marker-end="url(#fuel-cycle-force)"/><text x="88" y="83">make-up fuel</text>
+ <rect x="15" y="105" width="118" height="49" rx="5"/><text x="74" y="135" text-anchor="middle">D–T fusion</text>
+ <rect x="197" y="105" width="118" height="49" rx="5"/><text x="256" y="126" text-anchor="middle">exhaust</text><text x="256" y="144" text-anchor="middle">processing</text>
+ <path d="M135 131H191" class="force" marker-end="url(#fuel-cycle-force)"/><text x="165" y="118" text-anchor="middle" style="font-size:10px">unburned</text>
+ <path d="M256 156V210H74V160" class="current" marker-end="url(#fuel-cycle-current)"/><text x="165" y="237" text-anchor="middle">return unburned fuel</text>`},
+ evidence:{title:'Three separate questions about a prediction',description:'Verification checks implementation against equations. Convergence checks sensitivity to numerical resolution. Validation checks matched measurements. Passing one does not establish the others.',caption:'Independent evidence requirements; passing numerical checks does not establish experimental accuracy.',body:`
+ <rect x="15" y="15" width="300" height="62" rx="5"/><text x="165" y="40" text-anchor="middle">Verification</text><text x="165" y="62" text-anchor="middle">Did we implement the equations?</text>
+ <rect x="15" y="100" width="300" height="62" rx="5"/><text x="165" y="125" text-anchor="middle">Convergence</text><text x="165" y="147" text-anchor="middle">Did cells and steps distort the answer?</text>
+ <rect x="15" y="185" width="300" height="62" rx="5"/><text x="165" y="210" text-anchor="middle">Validation</text><text x="165" y="232" text-anchor="middle">Does it match a measured device?</text>`},
  energy:{title:'Drive energy becomes rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Mechanical work changes rotation or is dissipated by ion-neutral slip and wall drag; cooling removes heat.',caption:'Energy routes in the simplified model. Deposition and cooling laws remain assumptions.',body:`
  <rect x="91" y="14" width="148" height="37" rx="7"/><text x="165" y="38" text-anchor="middle">electrical input</text>
  <path d="M126 51L83 91M204 51L246 91" class="force" marker-end="url(#energy-force)"/>

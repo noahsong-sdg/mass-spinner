@@ -336,7 +336,8 @@ profiles show the selected instant; parameter scans compare hypothetical setting
 
 ### Which controls affect physics?
 
-Controls and Inspect edit the same inputs. Some act only in enabled models;
+Controls changes physical inputs; Inspect identifies parts and links to those controls.
+Some inputs act only in enabled models;
 others belong to separate reference calculations. A scan’s curve may stay fixed
 while its selected marker moves. After editing, wait for the accepted result.
 
@@ -362,6 +363,11 @@ while its selected marker moves. After editing, wait for the accepted result.
 | View; gas view; time | Presentation and sampling only, not physical input changes. |
 
 ## Where do we go after this guide?
+
+Continue with [03 · thermal limits](UNDERSTANDING-MASS-SPINNER-03.md),
+[04 · useful processes](UNDERSTANDING-MASS-SPINNER-04.md),
+[05 · fusion fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
+[06 · what to trust](UNDERSTANDING-MASS-SPINNER-06.md).
 
 The [investigation path](/learn.html) turns the ideas above into short experiments.
 Choose any question; the order below builds toward an enriched, useful inventory.
