@@ -2,14 +2,14 @@ import {test,expect,type Page} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
-import type {simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
+import type {AcceptedFuelSnapshot} from '../src/fuel-comparison-ui.ts';
 
 async function exported(page:Page){
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const pending=page.waitForEvent('download');await page.locator('#fuel-export').click();
  const download=await pending,path=await download.path();if(!path)throw new Error('Missing accepted-run download.');
  const bytes=await readFile(path),data=download.suggestedFilename().endsWith('.gz')?gunzipSync(bytes):bytes;
- return JSON.parse(data.toString()) as {result:ReturnType<typeof simulateFuelCentrifuge>};
+ return JSON.parse(data.toString()) as Pick<AcceptedFuelSnapshot,'result'>;
 }
 
 test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navigation',async({page},info)=>{
