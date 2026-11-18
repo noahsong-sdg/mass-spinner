@@ -47,6 +47,17 @@ test('animation clock freezes across visibility, pause, reload and disposal; no 
  h.viewer.setAnimation(()=>{});h.viewer.dispose();assert.equal(h.frames.size,0);
 });
 
+test('human scale identifies dimension provenance and clears stale labels during asset changes',async t=>{
+ const h=await fixture(t),button=h.frame.querySelector<HTMLButtonElement>('.apparatus-scale')!,note=h.frame.querySelector<HTMLOutputElement>('.apparatus-scale-note')!;
+ await h.viewer.load({model:'assumed.glb',scaleLabel:'Assumed dimensions'});assert.equal(note.hidden,true);
+ button.click();assert.equal(note.hidden,false);assert.equal(note.textContent,'Assumed dimensions');
+ const next=h.viewer.load({model:'paper.glb',scaleLabel:'Paper model · R 4.2 m'});assert.equal(note.hidden,true,'old dimensions withheld while loading');
+ await next;assert.equal(note.hidden,false);assert.equal(note.textContent,'Paper model · R 4.2 m');
+ button.click();assert.equal(note.hidden,true);button.click();assert.equal(note.hidden,false);
+ await h.viewer.load({model:'unlabelled.glb'});assert.equal(note.hidden,true);assert.equal(note.textContent,'');
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb',scaleLabel:'Must not appear'}),false);assert.equal(note.hidden,true);
+});
+
 test('component framing eases to its SI target, respects reduced motion and yields to user input',async t=>{
  const h=await fixture(t),initial=h.viewer.cameraPose();h.viewer.focus('vessel',{animate:true});assert.equal(h.frames.size,1);
  assert.deepEqual(h.viewer.cameraPose(),initial);h.step(100);h.step(275);assert.notDeepEqual(h.viewer.cameraPose(),initial);h.step(450);assert.equal(h.frames.size,0);

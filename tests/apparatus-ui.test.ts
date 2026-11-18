@@ -56,8 +56,13 @@ test('level one bounds stay pinned while advanced isotope input and Li preset ar
 test('apparatus fidelity disclosure follows the displayed asset instead of implying engineering CAD',()=>{
  const root=host(),ui=setupApparatus(root);ui.show('beam-target');
  const disclosure=root.children[0].children[3];
- assert.equal(disclosure.children[0].textContent,'Concept model');assert.match(text(disclosure),/layer thickness exaggerated/i);
+ assert.equal(disclosure.children[0].textContent,'Assumed dimensions');assert.match(text(disclosure),/layer thickness exaggerated/i);
  (disclosure as any).open=true;ui.show('blanket');
- assert.equal((disclosure as any).open,false);assert.match(text(disclosure),/not to scale/i);
+ assert.equal((disclosure as any).open,false);assert.equal(disclosure.children[0].textContent,'Paper dimensions');assert.match(text(disclosure),/not as-built/i);
+ assert.match(text(disclosure),/unknown plasma-to-wall clearance|plasma-to-wall clearance is unknown/i);
+ assert.equal(disclosure.children[2].hidden,false);assert.equal((disclosure.children[2] as any).href,'https://www.marathonfusion.com/alchemy.pdf#page=13');
  assert.doesNotMatch(text(disclosure),/cooled substrate/i);
+ ui.show('beam-target');assert.equal(disclosure.children[0].textContent,'Assumed dimensions');assert.equal((disclosure.children[2] as any).href,'https://www.marathonfusion.com/beam-driven-fusion/');
+ assert.doesNotMatch(text(disclosure),/210 mm/i);
+ ui.show('gyro');assert.equal(disclosure.children[2].hidden,true);assert.equal((disclosure.children[2] as any).href,'');
 });

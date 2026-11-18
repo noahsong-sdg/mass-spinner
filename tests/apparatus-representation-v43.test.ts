@@ -31,8 +31,9 @@ test('apparatus caption follows reported displayed geometry through reference, r
  // A ready input alone does not establish that an asynchronous viewer has displayed it.
  f.ui.updateSurfaceState({status:'ready'});assert.match(f.caption(),/layer thickness exaggerated/);
  f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer:'state',numerical:true});
- assert.match(f.caption(),/True-scale SI hardware; accepted numerical fields shown/);
- assert.match(f.caption(),/material choices are illustrative assumptions/);
+ assert.match(f.caption(),/SI geometry from simulator inputs; accepted numerical fields shown/);
+ assert.match(f.caption(),/assumptions, not measured Marathon hardware/);
+ assert.match(f.caption(),/Dimensions, construction and material choices are assumptions/);
  assert.doesNotMatch(f.caption(),/layer thickness exaggerated|Hardware only/);
  for(const [layer,word]of [['tracks','trajectories'],['impacts','impacts']]){
   f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer,numerical:true});assert.match(f.caption(),new RegExp(`accepted ${word} shown`));

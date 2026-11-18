@@ -9,7 +9,7 @@ import {createHumanScale,placeHumanScale} from './human-scale.js';
 export type CameraVector=[number,number,number];
 export interface CameraPose {position:CameraVector;target:CameraVector;up?:CameraVector}
 export interface ModelCamera {position?:number[];portraitPosition?:number[];target?:number[];up?:number[];fitScale?:number}
-export interface ViewerAsset<Model=unknown> {model:Model;modelCamera?:ModelCamera}
+export interface ViewerAsset<Model=unknown> {model:Model;modelCamera?:ModelCamera;scaleLabel?:string}
 export interface ViewerLoader<Model=unknown> {loadAsync(source:Model):Promise<{scene:THREE.Object3D}>}
 export interface ViewerControls {
  target:THREE.Vector3;enableDamping?:boolean;enabled?:boolean;minDistance:number;maxDistance:number;
@@ -92,6 +92,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const scaleToggle=doc.createElement('button');scaleToggle.type='button';scaleToggle.className='apparatus-scale';
  scaleToggle.textContent='Human scale';scaleToggle.setAttribute('aria-label','Human scale: 5 foot 9 person');scaleToggle.setAttribute('aria-pressed','false');
  scaleToggle.title='5′9″ (1.7526 m), at the same metre scale as the model. Display reference only.';scaleToggle.disabled=true;frame.append(scaleToggle);
+ const scaleNote=doc.createElement('output');scaleNote.className='apparatus-scale-note';scaleNote.hidden=true;frame.append(scaleNote);
  const display=makeDisplay(canvas),renderer=display.renderer,scene=new THREE.Scene();
  renderer.localClippingEnabled=true;
  scene.background=new THREE.Color('#121716');scene.environment=display.environment??null;scene.environmentIntensity=.8;
@@ -137,9 +138,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }}
  const stateLayer=createSurfaceLayer(frame,{render,onSelect});scene.add(stateLayer.group);
  const person=createHumanScale();person.visible=false;scene.add(person);
+ function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!person.visible||!root||!asset?.scaleLabel;}
  scaleToggle.addEventListener('click',()=>{
   person.visible=!person.visible;scaleToggle.setAttribute('aria-pressed',String(person.visible));
-  scaleToggle.textContent=person.visible?'5′9″ · 1.75 m':'Human scale';fit();reset();
+  scaleToggle.textContent=person.visible?'5′9″ · 1.75 m':'Human scale';describeScale();fit();reset();
   frame.dispatchEvent(new win.CustomEvent('apparatus-scalechange',{bubbles:true}));
  });
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return person.visible?new THREE.Vector3(0,1,0):root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
@@ -255,19 +257,19 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   });render();
  }
  async function load(next:ViewerAsset,{preserveOwnership=false}:{preserveOwnership?:boolean}={}){
-  if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;
+  if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;scaleNote.hidden=true;
   setAnimation(null);
   stopFlight();
   stateLayer.clear();clearSelection();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;scaleToggle.disabled=true;loadStatus='loading';reportRepresentation();renderer.clear();status.textContent='Loading 3D…';
   try{
    const gltf=await loader.loadAsync(next.model);
    if(disposed||token!==generation){release(gltf.scene);return false;}
-   root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);status.textContent='';settingCamera=true;resize();reset();settingCamera=false;
+   root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();status.textContent='';settingCamera=true;resize();reset();settingCamera=false;
    if(accepted)updateSurfaceState(accepted.packet,accepted.settings);
    if(preserveOwnership)pristineCamera=previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
-   scaleToggle.disabled=true;
+   scaleToggle.disabled=true;scaleNote.hidden=true;
    if(referenceRoot){clearSelection();release(referenceRoot);root=referenceRoot=null;}loadStatus='error';reportRepresentation();status.textContent='3D unavailable';onError(error);return false;
   }
  }

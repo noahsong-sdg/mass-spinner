@@ -2,9 +2,9 @@ name: Blender LTS qualification
 on:
   workflow_dispatch:
   push:
-    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
+    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, web-assets/marathon-blanket-dimensions.json, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
   pull_request:
-    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
+    paths: [blender/**, web-assets/models/centrifuge-assembly.glb, web-assets/marathon-blanket-dimensions.json, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
 permissions:
   contents: read
 jobs:
@@ -27,6 +27,7 @@ jobs:
             python3 blender/render.py assembly output/blender-5.2.4
             python3 blender/compare_assembly.py web-assets/models/centrifuge-assembly.glb output/blender-5.2.4/centrifuge-assembly.glb
             /opt/blender/blender --background --factory-startup --threads 2 --python-exit-code 1 --python blender/build_gas_domain.py -- output/blender-5.2.4
+            /opt/blender/blender --background --factory-startup --threads 2 --python-exit-code 1 --python blender/build_paper_blanket.py -- output/blender-5.2.4
           '
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()

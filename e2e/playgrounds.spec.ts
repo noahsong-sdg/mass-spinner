@@ -4,6 +4,12 @@ import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import type {AcceptedFuelSnapshot} from '../src/fuel-comparison-ui.ts';
 
+async function dimensionLabelsDoNotOverlap(page:Page,host:string){
+ const note=await page.locator(`${host} .apparatus-scale-note`).boundingBox(),disclosure=await page.locator(`${host} .apparatus-provenance`).boundingBox();
+ expect(note).not.toBeNull();expect(disclosure).not.toBeNull();
+ expect(note!.x+note!.width<=disclosure!.x||disclosure!.x+disclosure!.width<=note!.x||note!.y+note!.height<=disclosure!.y||disclosure!.y+disclosure!.height<=note!.y).toBe(true);
+}
+
 async function exported(page:Page){
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const pending=page.waitForEvent('download');await page.locator('#fuel-export').click();
@@ -88,13 +94,42 @@ test('human scale: person comparison and return to apparatus close-up',async({pa
  const button=page.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true});
  await expect(button).toHaveAttribute('aria-pressed','false');await button.click();
  await expect(button).toHaveAttribute('aria-pressed','true');await expect(button).toHaveText('5′9″ · 1.75 m');
+ await expect(page.locator('#fuel-render .apparatus-scale-note')).toContainText('Assumed chamber');
+ await dimensionLabelsDoNotOverlap(page,'#fuel-render');
  await expect.poll(async()=>{
   const frame=await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
   return frame&&panel?frame.y+frame.height<=panel.y:false;
  }).toBe(true);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('human-scale',{body:await page.screenshot(),contentType:'image/png'});
- await button.click();await expect(button).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
+ await button.click();await expect(button).toHaveAttribute('aria-pressed','false');await expect(page.locator('#fuel-render .apparatus-scale-note')).toBeHidden();expect(errors).toEqual([]);
+});
+
+test('Marathon reference geometry discloses paper dimensions and unknown hardware size',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');
+ await page.locator('#advanced-simulators > summary').click();
+ await page.locator('#marathon-apparatus').selectOption('blanket');
+ await expect(page.locator('#blanket-render canvas')).toBeVisible();
+ const blanket=page.locator('#blanket-render');
+ await blanket.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true}).click();
+ await expect(blanket.locator('.apparatus-scale-note')).toHaveText('Paper model · R 4.2 m · a 1.2 m');
+ await blanket.getByLabel('Geometry and material fidelity',{exact:true}).click();
+ await expect(blanket.locator('.apparatus-provenance')).toContainText('not as-built');
+ await dimensionLabelsDoNotOverlap(page,'#blanket-render');
+ await expect(blanket.getByRole('link',{name:'Dimension source ↗'})).toHaveAttribute('href','https://www.marathonfusion.com/alchemy.pdf#page=13');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ await info.attach('blanket-paper-dimensions',{body:await page.screenshot(),contentType:'image/png'});
+ await page.locator('#advanced-simulators > summary').click();await page.locator('#marathon-apparatus').selectOption('source');
+ const beam=page.locator('#fusion-apparatus');
+ await expect(beam.locator('canvas')).toBeVisible();
+ await beam.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true}).click();
+ await expect(beam.locator('.apparatus-scale-note')).toHaveText('Assumed dimensions · not published');
+ await beam.getByLabel('Geometry and material fidelity',{exact:true}).click();
+ await expect(beam.locator('.apparatus-provenance')).toContainText('dimensions are not published');
+ await dimensionLabelsDoNotOverlap(page,'#fusion-apparatus');
+ await expect(beam.locator('.apparatus-provenance')).not.toContainText('210 mm');
+ expect(errors).toEqual([]);
 });
 
 test('guide: local links, native action and accessible reading layout',async({page,context},info)=>{

@@ -1,7 +1,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {validateBytes} from 'gltf-validator';
 
-const files=['assets/separator.glb','web-assets/models/centrifuge-assembly.glb','release/models/centrifuge-assembly.glb','web-assets/models/gas-cell.glb','release/models/gas-cell.glb'];
+const files=['assets/separator.glb','web-assets/models/centrifuge-assembly.glb','release/models/centrifuge-assembly.glb','web-assets/models/gas-cell.glb','release/models/gas-cell.glb','web-assets/models/blanket.glb','release/models/blanket.glb'];
 const reports=[];
 for(const path of files){
  const bytes=await readFile(path),report=await validateBytes(bytes,{uri:path,maxIssues:1000});

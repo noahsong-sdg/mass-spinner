@@ -14,13 +14,13 @@ export const HG197_HALF_LIFE_HOURS=64.14;
 export const AU195_HALF_LIFE_DAYS=186.10;
 export const HG197M_HALF_LIFE_HOURS=23.8;
 export const HG197M_IT_BRANCH=.947;
-const blanketBasis='Alchemy paper §4.1, p.12: representative OpenMC geometry, not compact beamline hardware. Illustration is not to scale.';
+const blanketBasis='Alchemy paper §4.1, Table 1, pp.12–14: published model dimensions, not as-built hardware or original CAD. D-shaped contour and poloidal layer interpolation are reconstruction assumptions; unknown plasma-wall clearance is omitted. Coils, cryostat and services are not specified or modeled.';
 export const blanketComponents=[
  {id:'plasma',name:'D–T plasma / neutron source',purpose:'Source of fusion neutrons for the proposed blanket; not a LiT beam target.',material:'Deuterium–tritium plasma; the shown core is conceptual.',basis:blanketBasis},
  {id:'armor',name:'First-wall armor',purpose:'Plasma-facing layer in the paper model; structural heating and damage are not solved here.',material:'Tungsten, 5 mm in the paper model.',basis:blanketBasis},
  {id:'structure',name:'Blanket structural layers',purpose:'Bounds the modeled inner multiplier channel. Compatibility and mechanical qualification remain engineering tasks.',material:'V–4Cr–4Ti alloy: 10 mm inner and 30 mm outer structural layers in the paper model.',basis:blanketBasis},
  {id:'multiplier',name:'Mercury–lithium inner channel',purpose:'Fast-neutron multiplication and transmutation, with lithium contributing to breeding. Flow and processing are not simulated.',material:'Hg/Li mixture in the neutronics model; reference case 85 at% Hg, with Hg 90 at% ¹⁹⁸Hg and Li 90 at% ⁶Li. Practical fluids need not be directly mixed.',basis:blanketBasis},
- {id:'breeder',name:'Outer breeding blanket',purpose:'Uses the softened neutron spectrum to breed tritium; actual TBR requires neutron transport.',material:'FLiBe, a lithium-fluoride/beryllium-fluoride molten salt, in the paper model.',basis:blanketBasis},
+ {id:'breeder',name:'Outer breeding blanket',purpose:'Uses the softened neutron spectrum to breed tritium; actual TBR requires neutron transport.',material:'FLiBe, a lithium-fluoride/beryllium-fluoride molten salt. At the reference 210 mm channel, thicknesses derived from the fixed outer build are 545 mm inboard and 795 mm outboard.',basis:blanketBasis},
  {id:'tank',name:'Blanket tank',purpose:'Contains the modeled blanket assembly; this render does not establish containment performance.',material:'Eurofer97 steel, 30 mm in the paper model.',basis:blanketBasis},
 ];
 

@@ -46,6 +46,16 @@ test('recorded spatial reference is mounted lazily and disposed with the playgro
  f.ui.dispose();assert.equal(f.ui.nodes.info.querySelector('.argon-reference'),null);
 });
 
+test('dimension labels follow accepted chamber inputs and disclose unmeasured Marathon geometry',async t=>{
+ const f=fixture(t,{reducedMotion:true});f.ui.setActive(true);await flush();
+ assert.equal(f.loaded.at(-1).scaleLabel,'Assumed chamber · Ø 0.24 m × 0.8 m');
+ assert.match(f.ui.nodes.info.textContent!,/not published Marathon measurements/);
+ assert.match(f.ui.nodes.info.textContent!,/neither specifies an aspect ratio or measured machine/);
+ f.change('fuel-radiusM',.2);await f.ui.run();
+ assert.equal(f.loaded.at(-1).scaleLabel,'Assumed chamber · Ø 0.4 m × 0.8 m');
+ assert.equal(f.loaded.at(-1).model.config.radiusM,.2);
+});
+
 test('gas playback pauses, seeks exact physical time, respects reduced motion and never recalculates physics for display controls',async t=>{
  const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
  assert.equal(f.animation,null);assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.ui.nodes.render.querySelector('.fuel-motion')!.hasAttribute('hidden'),false);

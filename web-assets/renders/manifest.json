@@ -7,7 +7,7 @@
       "image": "/renders/beam-target.webp",
       "png": "/renders/beam-target.png",
       "title": "Compact beam\u2013target source",
-      "caption": "Conceptual RF source, acceleration electrodes and LiT on a cooled substrate. Hardware only; layer thickness exaggerated. Unspecified alloys and dimensions are illustrative.",
+      "caption": "Conceptual RF source, acceleration electrodes and LiT on a cooled substrate. Hardware only; layer thickness exaggerated. Unspecified alloys and dimensions are illustrative. Beamline and target hardware dimensions are not published in the checked Marathon source. The reference envelope is illustrative; numerical target surfaces use chosen area/column inputs, not measured Marathon dimensions.",
       "hotspots": [
         {
           "id": "rf-source",
@@ -108,7 +108,10 @@
         "beam",
         "neutrons"
       ],
-      "modelSHA256": "4eb4952ca1106b3384a23b550132e570f319d16e0d60fa4e606bea691c6dd1f5"
+      "modelSHA256": "4eb4952ca1106b3384a23b550132e570f319d16e0d60fa4e606bea691c6dd1f5",
+      "scaleLabel": "Assumed dimensions \u00b7 not published",
+      "geometryLabel": "Assumed dimensions",
+      "dimensionSource": "https://www.marathonfusion.com/beam-driven-fusion/"
     },
     "gyro": {
       "image": "/renders/gyro.webp",
@@ -202,7 +205,8 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "e45793c58a574484991a3e24d8a5eff48c25db42828c6ae273fc07ce458d9f39"
+      "modelSHA256": "e45793c58a574484991a3e24d8a5eff48c25db42828c6ae273fc07ce458d9f39",
+      "scaleLabel": "Illustrative dimensions"
     },
     "icr": {
       "image": "/renders/icr.webp",
@@ -296,7 +300,8 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "4dca79e7219e70949b4aaa9402b00de476cf88787d8b7c6e34e47ace72a70061"
+      "modelSHA256": "4dca79e7219e70949b4aaa9402b00de476cf88787d8b7c6e34e47ace72a70061",
+      "scaleLabel": "Illustrative dimensions"
     },
     "curved": {
       "image": "/renders/curved.webp",
@@ -382,7 +387,8 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "7b649d0f0c3ecd2cbe12f39121cd2bb568e65540c653d573f7207a1fc51c262e"
+      "modelSHA256": "7b649d0f0c3ecd2cbe12f39121cd2bb568e65540c653d573f7207a1fc51c262e",
+      "scaleLabel": "Illustrative dimensions"
     },
     "centrifuge": {
       "image": "/renders/centrifuge.webp",
@@ -477,7 +483,8 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "e455b37e446c0b0bc80470baee193e4e531ce7f1470754efe52f05c75ac719f9"
+      "modelSHA256": "e455b37e446c0b0bc80470baee193e4e531ce7f1470754efe52f05c75ac719f9",
+      "scaleLabel": "Illustrative dimensions"
     },
     "rotating": {
       "image": "/renders/rotating.webp",
@@ -572,7 +579,8 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "47153a1dec97df7bff46b3135b5b666d068b3f54f78fb8cd81cddf2ea9a3b045"
+      "modelSHA256": "47153a1dec97df7bff46b3135b5b666d068b3f54f78fb8cd81cddf2ea9a3b045",
+      "scaleLabel": "Illustrative dimensions"
     },
     "doublewell": {
       "image": "/renders/doublewell.webp",
@@ -667,90 +675,92 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0",
+      "scaleLabel": "Illustrative dimensions"
     },
     "blanket": {
       "image": "/renders/blanket.webp",
       "png": "/renders/blanket.png",
       "title": "Future power-plant blanket concept",
-      "caption": "Separate alchemy-paper concept, not the compact source. Paper-model material sequence with both inner/outer V-alloy walls. Relative radial layers only; not to scale, no neutronics/depletion result. Empty core denotes the plasma region; optical finishes are illustrative.",
+      "caption": "Published neutronics model, not as-built Marathon hardware. Table 1 and section 4.1; selected 210 mm channel case. At 210 mm channel width, fixed outer build gives inboard FLiBe = 750 - (210 - 5) = 545 mm; outboard = 1000 - (210 - 5) = 795 mm. Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Coils, cryostat, supports and services are not specified or modeled. Optical finishes are illustrative.",
       "hotspots": [
         {
           "id": "plasma",
-          "label": "Plasma source region",
-          "xPct": 68.18,
-          "yPct": 60.9
+          "label": "Plasma region",
+          "xPct": 72.73941040039062,
+          "yPct": 58.36889445781708
         },
         {
           "id": "armor",
           "label": "Tungsten armor",
-          "xPct": 68.18,
-          "yPct": 52.97
+          "xPct": 74.08817410469055,
+          "yPct": 58.86528491973877
         },
         {
           "id": "structure",
-          "label": "V4Cr4Ti structure",
-          "xPct": 63.36,
-          "yPct": 57.55
+          "label": "Inner V alloy",
+          "xPct": 74.12161231040955,
+          "yPct": 58.87759327888489
         },
         {
           "id": "multiplier",
-          "label": "Hg-Li multiplier",
-          "xPct": 68.18,
-          "yPct": 73.32
+          "label": "Hg\u2013Li channel",
+          "xPct": 74.61206912994385,
+          "yPct": 59.05809998512268
         },
         {
           "id": "breeder",
-          "label": "FLiBe region",
-          "xPct": 77.82,
-          "yPct": 67.59
+          "label": "FLiBe",
+          "xPct": 76.75225138664246,
+          "yPct": 59.845760464668274
         },
         {
           "id": "tank",
           "label": "Eurofer97 tank",
-          "xPct": 68.18,
-          "yPct": 40.03
+          "xPct": 78.8255512714386,
+          "yPct": 60.60880720615387
         }
       ],
       "model": "/models/blanket.glb",
       "modelBounds": {
         "min": [
-          -3.24,
-          -1.24,
-          -3.24
+          -6.480000019073486,
+          -2.875822067260742,
+          -6.480000019073486
         ],
         "max": [
-          3.239926,
-          1.24,
-          3.239926
+          4.582051753997803,
+          2.875822067260742,
+          6.480000019073486
         ],
         "center": [
-          -3.700000000006476e-05,
+          -0.9489741325378418,
           0.0,
-          -3.700000000006476e-05
+          0.0
         ],
         "size": [
-          6.479926000000001,
-          2.48,
-          6.479926000000001
+          11.062051773071289,
+          5.751644134521484,
+          12.960000038146973
         ]
       },
       "modelCamera": {
         "position": [
-          6.0,
-          6.0,
-          8.0
+          1,
+          0.65,
+          0.45
         ],
         "target": [
-          1.902222,
-          1.833927,
-          2.536297
+          0,
+          0,
+          0
         ],
         "up": [
           0,
           1,
           0
-        ]
+        ],
+        "fitScale": 0.86
       },
       "componentIds": [
         "armor",
@@ -770,7 +780,19 @@
       "modelRegionComponentIds": [
         "plasma"
       ],
-      "modelSHA256": "61efc7c51ee32f4c8fc0496c0738cbee1a10f346bc6ae56794400b74ac711d6b"
+      "modelSHA256": "828ad7bb045c688b6f7a20f5c6818444c556046f4cc262857e301fa72f59e057",
+      "scaleLabel": "Paper model \u00b7 R 4.2 m \u00b7 a 1.2 m",
+      "geometryBuilder": "blender/build_paper_blanket.py",
+      "geometryBuilderSHA256": "af2917df86ab18f930f084d6f901404293cb4c15443b8e2b255e17c51f06076a",
+      "dimensionSource": "https://www.marathonfusion.com/alchemy.pdf#page=13",
+      "geometryLabel": "Paper dimensions",
+      "blenderVersion": "5.2.4 LTS",
+      "renderSettings": {
+        "engine": "Cycles CPU",
+        "samples": 24,
+        "denoising": true,
+        "viewTransform": "AgX"
+      }
     },
     "doublewell-dynamics": {
       "image": "/renders/doublewell.webp",
@@ -865,7 +887,8 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0",
+      "scaleLabel": "Illustrative dimensions"
     }
   },
   "sourceSHA256": "db29e522f560f3ffdeb02eb811c162a810a4d574f5e2eb3d25a1cbef189e2969",
