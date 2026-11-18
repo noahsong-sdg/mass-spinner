@@ -1,4 +1,4 @@
-import {Marked} from 'marked';
+import {Marked,Renderer} from 'marked';
 import katex from 'katex';
 import {tsImport} from 'tsx/esm/api';
 const {guideTopics}=/** @type {{guideTopics: readonly import('../src/guide-topics.js').GuideTopic[]}} */(await tsImport('../src/guide-topics.ts',import.meta.url));
@@ -13,8 +13,10 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').repla
 export function understandingPage(markdown,revision){
  const sourceBase=releaseSourceBase(revision)+'docs/';
  let enhancement='';
+ const baseRenderer=new Renderer();
  const parser=new Marked({renderer:{
-  code({lang,text}){return lang==='math'?`<div class="equation" tabindex="0" aria-label="Equation, scroll horizontally if needed">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
+  code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation, scroll horizontally if needed">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
+  table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table, scroll horizontally if needed">');},
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
    if(href.startsWith('#'))return `<a href="${escape(href)}">${label}</a>`;
@@ -24,7 +26,7 @@ export function understandingPage(markdown,revision){
   heading({tokens,depth}){
    const text=tokens.map(token=>token.raw).join(''),topic=guideTopics.find(topic=>topic.heading===text);
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
-   enhancement=topic?(topic.diagram?guideDiagram(topic.diagram):'')+(topic.actions.length?`<div class="try-actions" aria-label="Try ${escape(topic.heading)}">${topic.actions.map(([key,label])=>`<a data-guide-action="${key}" href="/?level=2&guide=physics&topic=${topic.id}&try=${key}">${escape(label)}</a>`).join('')}</div>`:''):'';
+   enhancement=topic?(topic.diagram?guideDiagram(topic.diagram):'')+(topic.actions.length?`<div class="try-actions" role="group" aria-label="Try ${escape(topic.heading)}">${topic.actions.map(([key,label])=>`<a data-guide-action="${key}" href="/?level=2&guide=physics&topic=${topic.id}&try=${key}">${escape(label)}</a>`).join('')}</div>`:''):'';
    return heading;
   },
   paragraph({tokens}){

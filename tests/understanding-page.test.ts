@@ -13,6 +13,8 @@ test('the website renders every guide equation and its derivation, with accessib
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
  const count=[...markdown.matchAll(/^```math$/gm)].length;
  assert.equal(doc.querySelectorAll('.equation').length,count);assert.equal(doc.querySelectorAll('math').length,count);
+ for(const equation of doc.querySelectorAll('.equation'))assert.equal(equation.getAttribute('role'),'group');
+ for(const table of doc.querySelectorAll('table')){assert.equal(table.getAttribute('tabindex'),'0');assert.ok(table.getAttribute('aria-label'));}
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
  assert.equal(doc.querySelectorAll('figure svg').length,4);
  for(const svg of doc.querySelectorAll('figure svg')){

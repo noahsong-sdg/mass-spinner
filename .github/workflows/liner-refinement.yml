@@ -14,7 +14,7 @@ jobs:
       matrix:
         grid: [4096,2048,1024]
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
       - name: Prepare locked tools
@@ -28,7 +28,7 @@ jobs:
           GAS_GRID: '${{ matrix.grid }}'
         run: |
           docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check node --import tsx scripts/probe-fuel-nested-coupling.ts capture --capture-grid "$GAS_GRID"
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: 'gas-${{ matrix.grid }}'
@@ -41,10 +41,10 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           pattern: gas-*
           path: captures
@@ -64,7 +64,7 @@ jobs:
             node --import tsx scripts/probe-fuel-nested-coupling.ts nested-output --assess-only
             python3 scientific/spatial-argon-20261116/audit_nested.py nested-output --source-root /work --output nested-output/independent-accounting.json
           '
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: paired-liner-assessment

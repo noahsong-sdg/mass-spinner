@@ -18,10 +18,10 @@ jobs:
           - run: '43863009813'
             producer: '1c03f1487d1778191e5d5773e93359be4204ca5c'
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: '${{ matrix.producer }}'
           path: producer
@@ -43,7 +43,7 @@ jobs:
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN" > producer-run.json
           jq -e --arg sha "$PRODUCER_SHA" '.head_sha == $sha' producer-run.json
           gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN/artifacts" > producer-artifacts.json
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           github-token: '${{ github.token }}'
           run-id: '${{ matrix.run }}'
@@ -64,7 +64,7 @@ jobs:
             node --import tsx scripts/probe-fuel-nested-coupling.ts retained/nested-output --assess-only
             python3 scientific/spatial-argon-20261116/audit_nested.py retained/nested-output --source-root producer --output retained/nested-output/independent-reassessment.json
           '
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: 'heat-postprocessed-${{ matrix.run }}'

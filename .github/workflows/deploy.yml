@@ -32,17 +32,17 @@ jobs:
             gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PREVIOUS_ID" > previous.json
             jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Verify" and .conclusion == "success" and .head_repository.full_name == $repo' previous.json
           fi
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           ref: ${{ steps.identity.outputs.sha }}
           persist-credentials: false
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
           name: verified-site
           path: release/
           run-id: ${{ inputs.verify_run_id }}
           github-token: ${{ github.token }}
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         if: inputs.previous_run_id != ''
         with:
           name: verified-site
@@ -78,7 +78,7 @@ jobs:
           curl --fail --retry 3 "$PLAYWRIGHT_BASE_URL/release-manifest.json" -o deployed-manifest.json
           test "$(jq -r .sourceRevision deployed-manifest.json)" = "$SOURCE_SHA"
           docker run --rm --memory 2g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e PLAYWRIGHT_BASE_URL deploy-browser npm run test:browser
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: deployment-evidence

@@ -2,7 +2,7 @@ import {defineConfig,devices} from '@playwright/test';
 
 export default defineConfig({
  testDir:'./e2e',workers:1,fullyParallel:false,retries:0,timeout:60000,
- use:{baseURL:process.env.PLAYWRIGHT_BASE_URL??'http://127.0.0.1:4173',trace:'retain-on-failure',screenshot:'only-on-failure',
+ use:{reducedMotion:'reduce',baseURL:process.env.PLAYWRIGHT_BASE_URL??'http://127.0.0.1:4173',trace:'retain-on-failure',screenshot:'only-on-failure',
   launchOptions:{args:['--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']}},
  reporter:[['list'],['html',{open:'never'}]],
  projects:[{name:'desktop',use:{...devices['Desktop Chrome']}},{name:'phone',use:{...devices['iPhone 13'],defaultBrowserType:'chromium'}}],

@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
       - name: Resolve reviewed packages in isolation
@@ -31,7 +31,7 @@ jobs:
             if test -f tsconfig.tooling.json; then node node_modules/@typescript/native/bin/tsc --noEmit --checkers 1 -p tsconfig.tooling.json > toolchain-report/tooling-types.log 2>&1 || touch toolchain-report/tooling-types-failed; fi
             if test -f eslint.config.mjs; then npm run lint > toolchain-report/lint.log 2>&1 || touch toolchain-report/lint-failed; fi
           '
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: toolchain-report
           path: toolchain-report/
@@ -42,14 +42,14 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
       - name: Resolve proposed scientific upgrade in isolation
         run: |
           docker build -t science-lock -f ci/Dockerfile.science .
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp science-lock uv lock --project scientific/active
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: proposed-science-lock
           path: scientific/active/uv.lock

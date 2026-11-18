@@ -16,7 +16,8 @@
     "release:seal": "tsx scripts/release-manifest.ts seal",
     "release:verify": "tsx scripts/release-manifest.ts verify",
     "render:assembly": "python3 blender/render.py assembly",
-    "typecheck:tests": "tsc --noEmit --checkers 1 -p tsconfig.tests.json"
+    "typecheck:tests": "tsc --noEmit --checkers 1 -p tsconfig.tests.json",
+    "typecheck:boundaries": "tsc --noEmit --checkers 1 -p tsconfig.boundaries.json"
   },
   "devDependencies": {
     "@types/three": "0.187.0",

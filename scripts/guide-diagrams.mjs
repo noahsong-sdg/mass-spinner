@@ -81,7 +81,7 @@ function driveDiagram(){
  <text x="160" y="304" text-anchor="middle">Outer electrode · stationary</text>
  <g class="drive-field-key"><circle cx="56" cy="19" r="7"/><circle cx="56" cy="19" r="2" class="drive-field-dot"/><text x="70" y="23">B toward you, out of the screen</text></g>
  </svg></div></div>
- <div class="drive-key" aria-label="Diagram key"><span><i class="drive-ion-key"></i>Ions</span><span><i class="drive-neutral-key"></i>Neutral atoms</span><span class="drive-force-key">↗ Sideways force</span></div>
+ <div class="drive-key" role="group" aria-label="Diagram key"><span><i class="drive-ion-key"></i>Ions</span><span><i class="drive-neutral-key"></i>Neutral atoms</span><span class="drive-force-key">↗ Sideways force</span></div>
  <p id="drive-explanation" class="drive-explanation" aria-live="polite">${caption}</p>
  <figcaption>Illustrative bulk motion · slowed down · not simulated particle paths. Geometry is schematic.</figcaption>
  </figure>`;
