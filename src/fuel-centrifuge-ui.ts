@@ -127,6 +127,13 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  for(const [key,text]of [['B','B'],['J','J'],['force','J × B']]){const label=el('span',text);label.dataset.layer=key;driveKey.append(label);}
  play.id='fuel-motion-play';restart.id='fuel-motion-restart';clock.id='fuel-motion-clock';seek.id='fuel-motion-time';seek.type='range';seek.min='0';seek.max='1';seek.step='any';seek.value='0';seek.setAttribute('aria-label','Physical time');seek.hidden=true;
  motionBar.append(play,power,restart,newRun,seek,legend,driveKey,clock);
+ const modeReading=el('p');modeReading.id='fuel-mode-reading';modeReading.className='fuel-mode-reading';motionBar.append(modeReading);
+ const modeDescriptions:Record<FuelMotionMode,string>={
+  equilibrium:'Ideal settled density at the reference speed; not the finite-time result. Cream arrow: neutral rotation.',
+  transport:'Neutral dots follow the computed density. Arrows track equal-count gas shells from their starting radii. Fast rotation is averaged.',
+  spin:'Blue arrow: ions. Cream arrow: neutral gas. One shared clock; each arc spans ½ screen second of rotation.',
+  flow:'Dashed routes and packets show reference pumping throughput, not solved chamber flow.'
+ };
  const playbackPosition=floatingPlayback(motionBar);
  clock.setAttribute('aria-live','off');
  const pair=makeSelect(nodes.controls,'fuel-pair','Feed',Object.entries(FUEL_PAIRS).map(([id,p])=>[id,p.label]));
@@ -265,7 +272,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   baselineFrame.hidden=false;comparisonLabel.hidden=false;nodes.render.classList.add('fuel-comparing');
   baselineTools?.dispose();baselineTools=null;
   if(!baselineViewer)baselineViewer=graphics[0].createApparatusViewer<FuelModel>(baselineFrame,{loader:{loadAsync:(value:FuelModel)=>{const built=graphics![1].buildFuelCentrifugeGeometry({...value,diagnostics:true});baselineMotion=built.motion;baselineTools=built.tools;return Promise.resolve(built);}},onCamera:pose=>viewer?.setCamera?.(pose),onResize:()=>baselineViewer?.setCamera?.(viewer?.cameraPose?.(),{preserveOwnership:true}),pickFilter:hit=>baselineTools?.visibleHit(hit)??true,onError:error=>{comparisonLabel.textContent=message(error);}});
-  await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},scaleLabel:geometryScale(accepted.result.config),modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:true});
+  await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},scaleLabel:geometryScale(accepted.result.config),modelCamera:{position:[.55,1.25,.8],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.85}},{preserveOwnership:true});
   if(pinned!==accepted||disposed)return;
   viewer?.resize();baselineViewer.setCamera?.(viewer!.cameraPose?.(),{preserveOwnership:true});applyViews();playback();
  }
@@ -273,6 +280,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  function animateGas(dt=0){
   if(!motion||!latest||dirty||updating)return;
   const mode=motionMode.value as FuelMotionMode,transient=mode==='spin'||mode==='transport';
+  if(modeReading.dataset.mode!==mode){modeReading.dataset.mode=mode;modeReading.textContent=modeDescriptions[mode];}
   let suggested=motion.update(elapsed,mode).secondsPerScreenSecond;
   if(baselineMotion)suggested=Math.min(suggested,baselineMotion.update(elapsed,mode).secondsPerScreenSecond);
   // Fast real rotation is azimuthally averaged in transport mode so diffusion can be explored in seconds.
@@ -320,7 +328,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  restart.addEventListener('click',()=>{elapsed=0;playback();});
  newRun.addEventListener('click',()=>{changed();void run();});
  power.addEventListener('click',()=>{if(power.disabled||!latest)return;const current=sampleFuelTransport(latest.result.transport!,elapsed).currentA??latest.result.config.currentA;if(current>0)lastPoweredCurrent=current;controls.get('currentA')!.input.value=String(current>0?0:lastPoweredCurrent);changed({target:controls.get('currentA')!.input});});
- motionMode.addEventListener('change',()=>{elapsed=0;draw();playback();});
+ motionMode.addEventListener('change',()=>{elapsed=0;playing=!reducedMotion?.matches;views.presentMode(motionMode.value as FuelMotionMode);applyViews();draw();playback();});
  seek.addEventListener('input',()=>{elapsed=Number(seek.value);playing=false;draw();playback();});
  const reduce=(event:MediaQueryListEvent)=>{if(event.matches){playing=false;playback();}};reducedMotion?.addEventListener('change',reduce);
  plotHost.addEventListener('focusin',()=>{if(playing){playing=false;playback();}});
@@ -430,7 +438,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    },onSelect:(id,part,name,hit)=>{if(id==='slice'){const sample=hit&&tools?.sampleWorld(hit.point);if(sample)selectProbe(sample.radiusM/latest!.result.config.radiusM);playing=false;selector.value=views.state.layer==='temperature'?(latest?.result.transport?.operation?.thermal?.gas?'thermalProfile':'thermal'):'composition';draw();playback();onResults();return;}describe(id,part,name);onInspect();},onError:error=>{status.textContent=`3D unavailable: ${message(error)}`;}});
   }
   const pose=tools?viewer.cameraPose?.():null;if(tools)viewer.select(null);tools?.dispose();tools=null;
-  await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},scaleLabel:geometryScale(snapshot.result.config),modelCamera:{position:[0,1,.65],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.78}},{preserveOwnership:!!pose});
+  await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},scaleLabel:geometryScale(snapshot.result.config),modelCamera:{position:[.55,1.25,.8],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.85}},{preserveOwnership:!!pose});
   if(pose&&snapshot.result.config.radiusM)viewer.setCamera?.(pose,{preserveOwnership:true});
   if(disposed||!active||dirty||updating||snapshot!==latest)return;
   // The asynchronous viewer loader installs tools before load resolves.

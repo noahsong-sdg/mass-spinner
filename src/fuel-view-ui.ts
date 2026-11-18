@@ -8,7 +8,7 @@ export type FuelViewOptions = {document: Document; host: HTMLElement; onChange?:
 /** Display controls stay separate from accepted physical inputs. */
 export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=()=>{}}: FuelViewOptions){
  const el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
- const state: FuelViewState={slice:.5,radius:.5,layer:'enrichment',cutaway:.62,ghost:true,explode:0,visible:true,species:'all',drive:'all',representation:'field',circuit:false};
+ const state: FuelViewState={slice:.5,radius:.5,layer:'density',cutaway:.62,ghost:true,explode:0,visible:true,species:'all',drive:'all',representation:'both',circuit:false};
  const inputs=new Map<RangeKey, {input: HTMLInputElement; number: HTMLInputElement}>(),legend=el('p'),probe=el('p');probe.className='fuel-probe';probe.setAttribute('aria-live','off');
  function range(key: RangeKey,title: string,min: number,max: number,step: number){
   const box=el('div'),label=el('label',title),input=el('input'),number=el('input');box.className='fuel-view-control';
@@ -23,7 +23,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
   for(const [value,text]of options){const option=el('option',text);option.value=value;input.append(option);}input.value=state[key];
   input.addEventListener('change',()=>{state[key]=input.value as FuelViewState[K];if(key==='representation'){state.visible=input.value!=='tracers';visible.checked=state.visible;}onChange({...state});});host.append(label,input);return input;
  }
- const representation=select('representation','Gas display',[['field','Gas cutaway'],['tracers','Weighted tracers'],['both','Cutaway + tracers']]);
+ const representation=select('representation','Gas display',[['field','Gas cutaway'],['tracers','Weighted tracers'],['both','Section + tracers']]);
  select('drive','Electromagnetic drive',[['all','B · J · J × B'],['B','Axial field B'],['J','Inward current J'],['force','Azimuthal force J × B'],['off','Hidden']]);
  const driveLegend=el('p');driveLegend.className='fuel-drive-legend';host.append(driveLegend);
  const visible=el('input'),visibleLabel=el('label','Gas cutaway');visible.type='checkbox';visible.id='fuel-view-visible';visible.checked=state.visible;visibleLabel.htmlFor=visible.id;
@@ -47,11 +47,17 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
  function apply(tools: FuelSceneTools | null | undefined){
   if(!tools)return;tools.group.visible=state.visible;
   if(tools.motion)tools.motion.group.visible=state.representation!=='field';
+  tools.setVolumeVisible(state.representation==='field');
   if(tools.circuit&&tools.circuit.visible!==state.circuit){tools.circuit.visible=state.circuit;const scene=tools.circuit.parent!;scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;}
   tools.setSlice(state.slice);tools.setProbe?.(state.radius);tools.setLayer(state.layer);tools.setSpecies?.(state.species);tools.setStaging(state);tools.drive?.setLayer(state.drive);
   updateLegend(tools);
  }
  function selectRadius(fraction: number){if(!Number.isFinite(fraction)||fraction<0||fraction>1)throw new RangeError('Probe radius must lie within the vessel.');state.radius=fraction;const {input,number}=inputs.get('radius')!;input.step='any';input.value=number.value=String(fraction);}
  function showSample(s: FuelFieldSample | null){probe.textContent=s?`r ${(100*s.radiusM).toPrecision(3)} cm · light ${s.lightFraction===null?'undefined':`${(100*s.lightFraction).toPrecision(4)}%`} · n ${s.densityM3.toExponential(3)} m⁻³ · ${s.temperatureK.toPrecision(4)} K · ${s.speedMS.toPrecision(4)} m/s · ${s.timeS.toPrecision(4)} s`:'';}
- return {state,apply,updateLegend,showSample,selectRadius,refreshSample:(tools: FuelSceneTools | null | undefined)=>{if(tools)showSample(tools.sampleAt(tools.radiusM*state.radius));},clearSample:()=>showSample(null)};
+ function presentMode(mode:'equilibrium'|'transport'|'spin'|'flow'){
+  state.representation=mode==='spin'||mode==='flow'?'tracers':'both';state.visible=state.representation==='both';state.layer='density';
+  representation.value=state.representation;visible.checked=state.visible;host.querySelector<HTMLSelectElement>('#fuel-view-layer')!.value=state.layer;
+  onChange({...state});
+ }
+ return {state,apply,updateLegend,showSample,selectRadius,presentMode,refreshSample:(tools: FuelSceneTools | null | undefined)=>{if(tools)showSample(tools.sampleAt(tools.radiusM*state.radius));},clearSample:()=>showSample(null)};
 }

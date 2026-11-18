@@ -136,6 +136,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  function setSlice(fraction: number){slice=bounded(fraction,0,1,'Slice');group.position.z=slice*L;gasField.position.z=-slice*L;repaint();return slice;}
  function setLayer(value: string){if(!isLayer(value))throw new RangeError('Unknown field layer.');layer=value;repaint();return layer;}
  function setSpecies(value: FuelSpecies){if(!['all','light','heavy'].includes(value))throw new RangeError('Unknown species display.');species=value;repaint();}
+ function setVolumeVisible(value:boolean){gasField.visible=value;}
  function setDomains(next: FuelColorDomains){
   for(const [key,range] of Object.entries(next)){
    if(!isLayer(key)||!Array.isArray(range)||range.length!==2||!range.every(Number.isFinite)||key!=='enrichment'&&range[0]<0||range[1]<range[0]||key==='composition'&&(range[0]!==0||range[1]!==1)||key==='enrichment'&&(range[0]!==-.01||range[1]!==.01))throw new RangeError('Ordered finite physical color domains required; composition uses [0, 1] and enrichment uses [-0.01, 0.01].');
@@ -185,7 +186,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   for(const {mesh,position} of exploded)mesh.position.copy(position);
  }
  setCut(c.cutFraction);setProbe(.5);setSlice(slice);
- const tools={group,drive,radiusM:R,setProbe,update,setSlice,setLayer,setSpecies,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
+ const tools={group,drive,radiusM:R,setProbe,update,setSlice,setLayer,setSpecies,setVolumeVisible,setDomains,setStaging,setCut,sampleAt,sampleWorld,projectCut,handlePick,visibleHit:visibleFuelHit,dispose,get legend(){return {layer,...LAYERS[layer],label:layer==='density'&&species!=='all'?`${species==='light'?result.pair.light:result.pair.heavy} neutral density`:LAYERS[layer].label,domain:[...domains[layer]],colors:layer==='enrichment'?[COLORS[0],'#69777a',COLORS[1]]:[...COLORS],scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM),axialUniform:true};}};
  const resultTools: typeof tools & {motion?: ReturnType<typeof createFuelMotion>; circuit?: THREE.Group}=tools;
  return resultTools;
 }

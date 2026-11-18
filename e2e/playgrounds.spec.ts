@@ -86,6 +86,22 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
  expect(errors).toEqual([]);
 });
 
+test('four gas modes reveal their geometry and explain their physical scope',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue arrow'],['flow','tracers','Dashed routes'],['transport','both','equal-count']] as const){
+  await page.locator('#fuel-motion-mode').selectOption(mode);
+  if(mode==='spin'||mode==='transport')await page.locator('#fuel-motion-time').press('End');
+  await expect(page.locator('#fuel-mode-reading')).toContainText(reading);
+  await page.getByRole('button',{name:'View',exact:true}).click();
+  await expect(page.locator('#fuel-view-representation')).toHaveValue(representation);
+  await page.getByRole('button',{name:'Close View',exact:true}).click();
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+  await info.attach(`gas-mode-${mode}`,{body:await page.screenshot(),contentType:'image/png'});
+ }
+ expect(errors).toEqual([]);
+});
+
 test('Start here opens a full-page walkthrough while preserving the running simulator',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
  await page.getByRole('button',{name:'Plots',exact:true}).click();const before=await exported(page);await page.getByRole('button',{name:'Close Plots',exact:true}).click();

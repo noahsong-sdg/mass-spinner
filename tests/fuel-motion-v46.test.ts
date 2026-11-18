@@ -71,7 +71,7 @@ test('weighted neutral cloud reproduces inventory cuts, ion fraction and species
   close(mean,r.config.radiusM**2/2,1e-8);
  }
  assert.equal(motion.group.children.filter(o=>o.name==='Schematic throughput packets').every(o=>!o.visible),true);
- motion.update(.1,'equilibrium');assert.equal(motion.group.children.filter(o=>o.name==='Schematic throughput packets').every(o=>o.visible),true);
+ motion.update(.1,'equilibrium');assert.equal(motion.group.children.filter(o=>o.name==='Schematic throughput packets').every(o=>!o.visible),true);
  dispose(motion.group);
 });
 
@@ -83,7 +83,7 @@ test('packet weight × boundary crossing rate equals species Q/kT; conductance d
  const morePump=fuelMotionState(result({pumpSpeedM3S:.04}),0);close(morePump.turnoverHz,state.turnoverHz*2);
  close(fuelMotionState(result({conductanceM3S:.1}),0).turnoverHz,state.turnoverHz);
  const points=motion.group.children.find(o=>o.name==='Schematic throughput packets') as THREE.Points,before=points.geometry.attributes.position.array.slice();
- motion.update(.01);assert.notDeepEqual(points.geometry.attributes.position.array,before);dispose(motion.group);
+ motion.update(.01,'flow');assert.notDeepEqual(points.geometry.attributes.position.array,before);dispose(motion.group);
 });
 
 test('zero current removes rotation and separation while retaining pressure-driven pumping; pure species stays pure',()=>{

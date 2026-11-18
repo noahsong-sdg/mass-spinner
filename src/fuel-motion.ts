@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import {rotorResponse,rotorPhase} from './fuel-centrifuge.js';
 import {sampleFuelTransport} from './fuel-transport.js';
 import type {FuelRenderResult} from './fuel-field.js';
+import {createFuelMotionGlyphs} from './fuel-motion-glyphs.js';
 export type {FuelRenderResult} from './fuel-field.js';
 
 export type FuelMotionMode = 'equilibrium' | 'spin' | 'transport' | 'flow';
@@ -58,6 +59,7 @@ export function createFuelMotion(result: FuelRenderResult){
   const points=new THREE.Points(geometry,material);points.frustumCulled=false;return points;
  }
  const fractions=[c.lightFraction,1-c.lightFraction],colors=[0x94d9cd,0xe5ab70],reference=fuelMotionState(result,0);
+ const glyphs=createFuelMotionGlyphs(result);group.add(glyphs.group);
  for(const ion of [false,true])for(let species=0;species<2;species++){
   const n=Math.max(1,Math.round((ion?192:768)*fractions[species])),positions: number[]=[],trails: number[]=[];
   for(let i=0;i<n;i++){
@@ -76,10 +78,9 @@ export function createFuelMotion(result: FuelRenderResult){
   rotor.add(points,lines);rotor.visible=fractions[species]>0;group.add(rotor);clouds.push({rotor,points,lines,ion,species,n});
  }
  // Outside-vessel packet paths show Q, not a fluid velocity through the chamber.
- const paths=[new THREE.CatmullRomCurve3([[0,0,-R*.95],[0,0,-R*.5],[0,0,L*.08]].map(p=>new THREE.Vector3(p[0],p[1],p[2]))),
-  new THREE.CatmullRomCurve3([[0,R,L*.88],[0,R*1.5,L*.88],[0,R*1.5,L*1.14]].map(p=>new THREE.Vector3(p[0],p[1],p[2])))];
+ const paths=glyphs.paths;
  const flows=paths.flatMap(path=>[0,1].map(species=>{
-  const share=result.pumping.species[species].gasLoadPaM3S/result.pumping.gasLoadPaM3S;
+  const share=result.pumping.gasLoadPaM3S>0?result.pumping.species[species].gasLoadPaM3S/result.pumping.gasLoadPaM3S:0;
   const points=dots(new Float32Array(12*3),colors[species],5,Math.sqrt(share),false,false);
   points.name='Schematic throughput packets';points.visible=share>0;points.renderOrder=2;group.add(points);
   points.userData={packetNumber:reference.neutralNumber*share/12,species};return {path,points,species};
@@ -91,15 +92,20 @@ export function createFuelMotion(result: FuelRenderResult){
   // Hidden tracers still supply physical clocks/readouts. Rebuild from the
   // current state when shown; previousMode records the last displayed state.
   if(!group.visible)return state;
+  const coupled=(mode==='spin'||mode==='transport')&&result.transport?sampleFuelTransport(result.transport,timeS):null;
+  const quantile=(species:number,p:number)=>{
+   const cdf=coupled?.[species?'heavyCDF':'lightCDF'];
+   if(!cdf)return radialQuantile(state.beta[species],p);
+   let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;
+   return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);
+  };
+  glyphs.update(state,mode,quantile);
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){
-    const transport=['spin','transport'].includes(mode)&&result.transport?sampleFuelTransport(result.transport,timeS):null;
-    const cdf=transport?.[species?'heavyCDF':'lightCDF'];
-    const quantile=(p: number)=>{if(!cdf)return radialQuantile(state.beta[species],p);let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);};
     const a=points.geometry.attributes.position;
     for(let i=0;i<n;i++){
-     const radius=R*Math.sqrt(quantile((i+.5)/n)),angle=tracerAngle(i,species,ion);
+     const radius=R*Math.sqrt(quantile(species,(i+.5)/n)),angle=tracerAngle(i,species,ion);
      a.setXY(i,radius*Math.cos(angle),radius*Math.sin(angle));
      if(i%4===0){const j=i/4*2,b=lines.geometry.attributes.position;b.setXYZ(j,radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),a.getZ(i));b.setXYZ(j+1,a.getX(i),a.getY(i),a.getZ(i));}
     }a.needsUpdate=true;
@@ -113,7 +119,7 @@ export function createFuelMotion(result: FuelRenderResult){
    for(let i=0;i<n;i+=4){const radius=Math.hypot(a.getX(i),a.getY(i)),angle=Math.atan2(a.getY(i),a.getX(i));b.setXYZ(i/2,radius*Math.cos(angle-exposure),radius*Math.sin(angle-exposure),a.getZ(i));b.setXYZ(i/2+1,a.getX(i),a.getY(i),a.getZ(i));}b.needsUpdate=true;
   }
   for(const {path,points,species}of flows){
-   points.visible=!['spin','transport'].includes(mode)&&result.pumping.species[species].gasLoadPaM3S>0;
+   points.visible=mode==='flow'&&result.pumping.species[species].gasLoadPaM3S>0;
    const a=points.geometry.attributes.position;
    for(let i=0;i<12;i++){const p=path.getPoint(((i+.5)/12+timeS*state.turnoverHz)%1);a.setXYZ(i,p.x,p.y,p.z);}a.needsUpdate=true;
   }
