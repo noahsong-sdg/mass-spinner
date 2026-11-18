@@ -97,6 +97,25 @@ function inside(root:THREE.Object3D,camera:THREE.Camera){
  }
 }
 
+test('human-scale toggle fits both objects on desktop and phone, preserves SI hardware and survives representation changes',async t=>{
+ const h=await fixture(t),button=h.frame.querySelector('.apparatus-scale') as HTMLButtonElement;
+ const person=h.scene.getObjectByName('5 foot 9 scale person')!,before=new THREE.Box3().setFromObject(h.reference).clone();
+ assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(person.visible,false);
+ button.click();assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(person.visible,true);
+ assert.deepEqual(new THREE.Box3().setFromObject(h.reference),before);inside(h.reference,h.camera);inside(person,h.camera);
+ h.resize(390,844);inside(h.reference,h.camera);inside(person,h.camera);
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
+ const accepted=h.scene.getObjectByName('SI engineering assembly')!;
+ inside(accepted,h.camera);inside(person,h.camera);
+ const humanBounds=new THREE.Box3().setFromObject(person);assert.ok(Math.abs(humanBounds.max.z-humanBounds.min.z-1.7526)<1e-10);
+ button.click();assert.equal(person.visible,false);inside(accepted,h.camera);
+ button.click();await h.viewer.load({model:'replacement.glb'});assert.equal(person.visible,true);inside(h.reference,h.camera);inside(person,h.camera);
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false,'person cannot make an empty apparatus valid');assert.equal(button.disabled,true);
+ const resources=new Set<THREE.BufferGeometry|THREE.Material>();person.traverse(node=>{if(node instanceof THREE.Mesh){resources.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])resources.add(material);}});
+ let released=0;for(const resource of resources)resource.addEventListener('dispose',()=>released++);
+ h.viewer.dispose();assert.equal(released,resources.size,'shared scale resources released exactly once');
+});
+
 test('real OrbitControls retain the horizontal reference/accepted frame and cutaway sightline',async t=>{
  const h=await fixture(t),axis=projectedAxis(h.camera,new THREE.Vector3(-.5,0,0),new THREE.Vector3(.5,0,0));
  assert.ok(axis.x>0&&Math.abs(axis.y)<axis.x*.2,'reference source→target points screen-right');
