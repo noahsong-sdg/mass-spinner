@@ -62,7 +62,10 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
    arrow.setLength(Math.abs(distance),Math.min(R*.07,Math.abs(distance)*.4),Math.min(R*.04,Math.abs(distance)*.25));
   }
  }
- group.traverse(node=>{node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions; glyph widths and display stations are illustrative.',purpose:node.userData.scope??'Display diagnostic for gas motion, not physical hardware.'};});
+ group.traverse(node=>{
+  const scope:unknown=node.userData.scope;
+  node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions; glyph widths and display stations are illustrative.',purpose:typeof scope==='string'?scope:'Display diagnostic for gas motion, not physical hardware.'};
+ });
  function setSpecies(value:FuelSpecies){for(const {arrow,species}of shells){
   const selected=value==='all'||species===(value==='light'?0:1);
   for(const material of [arrow.line.material,arrow.cone.material].flat()){material.transparent=true;material.opacity=selected?1:.08;}
