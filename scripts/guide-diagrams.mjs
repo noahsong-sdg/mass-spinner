@@ -29,7 +29,6 @@ const drawings={
 function heatDiagram(){
  /** @type {[string,string,number[]][]} */
  const cases=[['gas','Gas hotter',[900,800,600,400,300]],['wall','Wall hotter',[300,400,600,800,900]],['equal','Same temperature',[600,600,600,600,600]]];
- const positions=[50,150,230,280,320];
  return `<figure class="heat-example" data-heat-example data-case="gas" data-motion="paused">
  <div class="drive-heading"><span>The slope tells you which way heat flows.</span><button type="button" data-heat-motion disabled>Play motion</button></div>
  <div class="diagram-cases" role="group" aria-label="Compare heat-flow directions">${cases.map(([id,label])=>`<button type="button" data-heat-select="${id}" aria-pressed="${id==='gas'}" disabled>${label}</button>`).join('')}</div>
@@ -41,7 +40,7 @@ function heatDiagram(){
  ${[300,600,900].map(T=>`<path d="M50 ${200-(T-300)/5}H320" class="diagram-grid"/><text x="42" y="${204-(T-300)/5}" text-anchor="end">${T}</text>`).join('')}
  <path d="M50 65V200H320" class="diagram-axis"/>
  <path d="M230 60V282M280 60V282" class="diagram-grid"/>
- ${cases.map(([id,,temperatures])=>`<g data-heat-case="${id}" data-temperatures="${temperatures.join(',')}"><path d="${temperatures.map((T,i)=>`${i?'L':'M'}${positions[i]} ${200-(T-300)/5}`).join(' ')}" class="heat-profile"/></g>`).join('')}
+ ${cases.map(([id,,temperatures])=>{const y=temperatures.map(T=>200-(T-300)/5);return `<g data-heat-case="${id}" data-temperatures="${temperatures.join(',')}"><path d="M50 ${y[0]}C95 ${y[0]} 165 ${y[1]} 230 ${y[2]}L280 ${y[3]}L320 ${y[4]}" class="heat-profile"/></g>`;}).join('')}
  <text x="50" y="222">axis</text><text x="320" y="222" text-anchor="end">outward →</text>
  <rect x="50" y="242" width="180" height="40"/><rect x="230" y="242" width="50" height="40" class="heat-wall"/><rect x="280" y="242" width="40" height="40"/>
  ${cases.filter(([id])=>id!=='equal').map(([id])=>`<g data-heat-case="${id}" class="heat-flow" data-direction="${id==='gas'?1:-1}"><path d="M${id==='gas'?'80 262H210':'210 262H80'}" marker-end="url(#heat-arrow)"/><path d="M${id==='gas'?'240 262H310':'310 262H240'}" marker-end="url(#heat-arrow)"/><circle class="heat-packet" cx="${id==='gas'?90:185}" cy="262" r="4"/></g>`).join('')}

@@ -72,6 +72,8 @@ test('heat-flow examples send energy down every temperature gradient and have no
   assert.equal(figure.dataset.case,name);assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
   assert.match(figure.querySelector('[data-heat-reading]')!.textContent!,phrase);
   const temperatures=figure.querySelector(`[data-heat-case="${name}"][data-temperatures]`)!.getAttribute('data-temperatures')!.split(',').map(Number);
+  const curve=figure.querySelector(`[data-heat-case="${name}"] .heat-profile`)!.getAttribute('d')!;
+  const [,axis,firstControl]=/^M50 (\d+)C95 (\d+)/.exec(curve)!;assert.equal(axis,firstControl,'axis symmetry requires zero radial gradient at r = 0');
   for(let i=1;i<temperatures.length;i++)assert.equal(Math.sign(temperatures[i-1]-temperatures[i]),sign,'q = -k dT/dr for positive conductivity');
   const flow=figure.querySelector(`.heat-flow[data-heat-case="${name}"]`);
   if(sign===0)assert.equal(flow,null,'uniform temperature must not suggest heat transfer');
