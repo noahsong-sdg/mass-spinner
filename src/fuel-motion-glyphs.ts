@@ -66,7 +66,8 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   // CAD-style diagnostics stay readable through hardware; gas particles retain occlusion.
   if(node instanceof THREE.Mesh||node instanceof THREE.Line){
    node.renderOrder=3;
-   for(const material of [node.material].flat()){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
+   const materials=node.material as THREE.Material|THREE.Material[];
+   for(const material of Array.isArray(materials)?materials:[materials]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
   }
   const scope:unknown=node.userData.scope;
   node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions; glyph widths and display stations are illustrative.',purpose:typeof scope==='string'?scope:'Display diagnostic for gas motion, not physical hardware.'};
