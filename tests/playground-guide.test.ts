@@ -15,12 +15,13 @@ function fixture(t:any,mobile=false){
 
 test('Start here opens a separate reader without changing panels, inputs or the current run',t=>{
  const f=fixture(t),input=f.node('field');input.value='.17';
- const reader={} as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
- f.workspace.open('controls');f.workspace.open('guide');
+ let focuses=0;const reader={closed:false,focus:()=>focuses++} as unknown as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
+ f.workspace.open('controls');f.node('start-here').click();
  assert.deepEqual(opened,[['/start.html','mass-spinner-start']]);
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
  assert.equal(f.node('field'),input);assert.equal(input.value,'.17');
  assert.equal(f.node('start-here').getAttribute('aria-controls'),null);
+ f.node('start-here').click();assert.equal(opened.length,1);assert.equal(focuses,1,'focus the existing reader without reloading its reading position');
  f.workspace.close('controls');
  const send=(origin:string,source:any,action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action}}));
  send('https://unrelated.example',reader,'current');send('https://example.org',f.window,'current');send('https://example.org',reader,'invalid');
