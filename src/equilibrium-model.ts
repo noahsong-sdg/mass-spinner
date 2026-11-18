@@ -1,7 +1,7 @@
-import {centrifuge,type CentrifugeConfig} from './centrifuge.js';
+import {centrifuge,type CentrifugeConfig,type CentrifugeResult} from './centrifuge.js';
 import {solveBinaryBulk} from './centrifuge-bulk.js';
-import {gaussianCentrifuge} from './gaussian-centrifuge.js';
-import {magneticCentrifuge} from './magnetic-centrifuge.js';
+import {gaussianCentrifuge,type GaussianCentrifugeResult} from './gaussian-centrifuge.js';
+import {magneticCentrifuge,type MagneticCentrifugeResult} from './magnetic-centrifuge.js';
 export interface EquilibriumConfig extends CentrifugeConfig {
  closure?:'corotating'|'gaussian'|'magnetic-gaussian';compositionBoundary?:'central'|'bulk';bulkFractionA?:number;
  magneticT?:number;densityWidthM?:number;axisDensityM3?:number;
@@ -12,7 +12,7 @@ export interface EquilibriumConfig extends CentrifugeConfig {
 export function solveEquilibrium(config:EquilibriumConfig){
  if(config.closure!==undefined&&!['corotating','gaussian','magnetic-gaussian'].includes(config.closure))throw new Error('Unknown equilibrium closure.');
  if(config.compositionBoundary!==undefined&&!['central','bulk'].includes(config.compositionBoundary))throw new Error('Unknown composition boundary.');
- const solve=(axisA?:number,axisB?:number,magnetic=true)=>{
+ const solve=(axisA?:number,axisB?:number,magnetic=true):CentrifugeResult|GaussianCentrifugeResult|MagneticCentrifugeResult=>{
   const next={...config,species:config.species.map((s,i)=>({...s,
    axisFraction:axisA===undefined?s.axisFraction:i===0?axisA:axisB!}))};
   const shaped={...next,magneticT:config.magneticT!,densityWidthM:config.densityWidthM!,axisDensityM3:config.axisDensityM3!};

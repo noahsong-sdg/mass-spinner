@@ -24,7 +24,7 @@ const toScene = (p:Vec) => new THREE.Vector3(p[2]-DEFAULT_CONFIG.length/2,p[0],p
 
 function clear(group:THREE.Object3D) {
   for(const child of [...group.children]) {
-    child.traverse(item => { if(item instanceof THREE.Mesh||item instanceof THREE.Line||item instanceof THREE.Points){item.geometry.dispose();for(const material of materials(item))material.dispose();} });
+    child.traverse(item => { if(item instanceof THREE.Mesh||item instanceof THREE.Line||item instanceof THREE.Points){(item.geometry as THREE.BufferGeometry).dispose();for(const material of materials(item))material.dispose();} });
     group.remove(child);
   }
 }

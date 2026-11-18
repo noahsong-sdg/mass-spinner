@@ -1,6 +1,9 @@
 name: Blender LTS qualification
 on:
   workflow_dispatch:
+  push:
+    branches: [codex/stack-modernization]
+    paths: [blender/**, ci/Dockerfile.blender, .github/workflows/blender-lts.yml]
 permissions:
   contents: read
 jobs:

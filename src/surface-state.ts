@@ -1,5 +1,6 @@
 import {fields,type Vec,type RunConfig,type SpeciesResult,type simulate} from './physics.js';
 import type {GaussianCentrifugeResult} from './gaussian-centrifuge.js';
+import type {MagneticCentrifugeProfile} from './magnetic-centrifuge.js';
 import type {EquilibriumConfig,solveEquilibrium} from './equilibrium-model.js';
 import type {DoublewellConfig,simulateDoublewell} from './doublewell-dynamics.js';
 import type {GeometryConfig,GeometryResult} from './geometries.js';
@@ -155,7 +156,7 @@ function equilibrium(s:SurfaceSnapshot,c:EquilibriumConfig,r:EquilibriumResult){
    ['current-azimuthal','Azimuthal current density','A/m²','currentDensityAM2'],['ion-velocity','Ion azimuthal velocity','m/s','ionVelocityMS']] as const)
    field(s,{id,label,unit,coordinate:'radius',measure:'point',region:'plasma',positionsM:x,values:gaussian.map(p=>p[property]),scope:'Solved prescribed-Gaussian radial equilibrium.'});
   field(s,{id:'magnetic-axial',label:'Axial magnetic field',unit:'T',coordinate:'radius',measure:'point',region:'plasma',positionsM:x,
-   values:gaussian.map((p)=>'magneticFieldT' in p?p.magneticFieldT:c.magneticT!),scope:model==='coupled-magnetic-gaussian'?'Self-consistent radial B from the bounded equilibrium.':'Imposed uniform B; perturbation diagnostic is not fed back.'});
+   values:gaussian.map((p)=>'magneticFieldT' in p?(p as MagneticCentrifugeProfile).magneticFieldT:c.magneticT!),scope:model==='coupled-magnetic-gaussian'?'Self-consistent radial B from the bounded equilibrium.':'Imposed uniform B; perturbation diagnostic is not fed back.'});
  }else s.unsupported.push('Absolute density, laboratory potential, electric and magnetic field: common-corotation closure exports only normalized density and ψ.');
  s.unsupported.push('Throughput, equilibration time, collector impacts and thermal engineering are not predicted by radial equilibrium.');
 }
