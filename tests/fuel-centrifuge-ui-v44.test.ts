@@ -64,7 +64,7 @@ test('gas playback pauses, seeks exact physical time, respects reduced motion an
  const before=f.motionCalls.at(-1).time;f.node('fuel-motion-play').click();assert.equal(f.animation,null);assert.equal(f.motionCalls.at(-1).time,before);
  f.change('fuel-motion-mode','spin','change');assert.equal(f.node('fuel-motion-time').hidden,false);
  f.change('fuel-motion-time',.3);assert.equal(f.motionCalls.at(-1).time,.3);assert.equal(f.motionCalls.at(-1).mode,'spin');assert.equal(f.animation,null);
- f.change('fuel-motion-mode','flow','change');assert.equal(f.node('fuel-motion-time').hidden,true);assert.equal(f.motionCalls.at(-1).mode,'flow');assert.match(f.node('fuel-motion-clock').textContent,/^Final reference · ions.*gas.*m\/s/);
+ f.change('fuel-motion-mode','flow','change');assert.equal(f.node('fuel-motion-time').hidden,true);assert.equal(f.motionCalls.at(-1).mode,'flow');assert.match(f.node('fuel-motion-clock').textContent,/^Reference Q [\d.]+ Pa·m³\/s · 1 s screen =.*ions.*gas.*m\/s/);
  f.node('fuel-motion-restart').click();assert.equal(f.motionCalls.at(-1).time,0);
  f.node('fuel-motion-play').click();f.reduce();assert.equal(f.animation,null);assert.equal(f.requests.length,1);
 });

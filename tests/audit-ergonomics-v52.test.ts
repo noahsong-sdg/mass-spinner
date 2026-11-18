@@ -77,7 +77,11 @@ test('reference playback does not present its visual phase as physical time, inc
  f.change('fuel-durationS',2);await f.ui.run();
  for(const mode of ['equilibrium','flow']){
   f.change('fuel-motion-mode',mode,'change');assert.equal(f.node('fuel-motion-time').hidden,true);
-  assert.equal(cursor().getAttribute('d'),'');assert.match(f.node('fuel-motion-clock').textContent,/^Final reference · ions/);assert.doesNotMatch(f.node('fuel-motion-clock').textContent,/screen =|^0 s/);
+  assert.equal(cursor().getAttribute('d'),'');
+  const clock=f.node('fuel-motion-clock').textContent;
+  if(mode==='flow')assert.match(clock,/^Reference Q [\d.]+ Pa·m³\/s · 1 s screen =/);
+  else {assert.match(clock,/^Final reference · ions/);assert.doesNotMatch(clock,/screen =/);}
+  assert.doesNotMatch(clock,/^0 s/);
   assert.match(f.ui.nodes.render.querySelector('.fuel-comparison-label').textContent,/^A\/B final references · shared SI camera\/colors/);
   for(const topic of ['separation','momentum','inertia']){
    f.change('fuel-plot',topic,'change');const card=f.ui.nodes.plots.querySelector('.fuel-metrics div');
