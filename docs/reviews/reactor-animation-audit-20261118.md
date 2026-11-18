@@ -25,10 +25,42 @@ surfaces remain the spatial context.
 
 ## Verification
 
-Pending final exact-commit CI and deployed desktop/phone checks. New regressions
-inspect rendering buffers and real mesh geometry, not only metadata or helpers.
-Required gates: strict typechecks, lint, full runtime/Python suites, build,
-site/assets/glTF checks, exact-candidate browser tests and public release hashes.
+[CI 44376236846](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44376236846)
+passed at exact runtime commit `6abf73a975755ee9d9f53470cc985a9f902a90ba`:
+
+- `npm run typecheck`, `typecheck:infrastructure`, `typecheck:boundaries`,
+  `typecheck:tests` and `lint`: passed.
+- `node --import tsx --test --test-concurrency=1 tests/*.test.ts`: 1,528 passed.
+- Python unittest discovery in `scientific/electron-applicability` and `tests`
+  (`test_argon_reference_export.py`): 17 + 3 passed.
+- `npm run build`, `check:site`, `check:assets`, `check:gltf`, `release:seal`
+  and `release:verify`: passed; 238 release files verified.
+- `npm run test:browser`: 26 passed on the exact candidate; the reactor case
+  passed desktop (20.2 s) and phone (21.8 s). Release hashes verified again after.
+
+Independent agents reviewed the completed CPU and browser job logs. New tests
+inspect actual rendering buffers and mesh geometry, not only metadata/helpers.
+Native candidate inspection confirmed coolant removal, insulated internal-only
+redistribution, hotter-coolant reversal, pause/visibility persistence and a
+390 × 844 layout without horizontal overflow.
+
+The same release is deployed as Cloudflare Worker version
+`e63202fa-601a-41cf-b2b6-768c3832ec78`. All 238 browser-verified files match
+the candidate byte-for-byte. The public manifest, all 11 changed files and one
+retained lazy-load asset match their expected hashes. Previous hashed assets
+remain available for already-open tabs.
+
+Native public-site browser verification repeated energy/current/area changes,
+tritium-off and beam-off behavior, material-state selection, insulated cooling,
+hot-coolant reversal, pause/layer persistence and desktop/phone layout. At the
+default driven sample (0.1875 s), coolant transfer is 246.823 W. At 15 s,
+beam/neutron populations and deposited power are zero while 0.626 W of retained
+heat still leaves the target. No browser errors were recorded. These are checks
+of displayed accepted simulation values, not measured experimental powers.
+
+Local receipts, full logs and screenshots are in
+`output/reactor-animation-audit-20261118/`. The report-only follow-up changes no
+runtime or release asset; CI and deployment identity above refer to `6abf73a`.
 
 ## Retained limits
 

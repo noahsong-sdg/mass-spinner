@@ -2,7 +2,8 @@
 
 The beam view reads the same source calculation as the plots. Material-mode
 target results override it with the selected accepted history sample; pending
-results hide the numerical animation. No extra source or thermal solver is run.
+results hide the numerical animation. No extra time evolution is run; thermal
+fluxes are evaluated at the selected state with the existing conduction solver.
 
 - D⁺ speed uses `sqrt(2 E / mD)`; marker count increases with calculated current.
 - Beam radius follows `sqrt(area / π)` on SI hardware. The Blender envelope
