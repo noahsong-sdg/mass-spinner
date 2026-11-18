@@ -119,6 +119,7 @@ metadata = {
     'modelSHA256': hashlib.sha256(model.read_bytes()).hexdigest(),
     'geometryBuilder': 'blender/build_paper_blanket.py',
     'geometryBuilderSHA256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+    'blenderVersion': bpy.app.version_string,
     'dimensionSource': D['source'],
     'geometryLabel': 'Paper dimensions',
     'scaleLabel': 'Paper model · R 4.2 m · a 1.2 m',
@@ -132,6 +133,9 @@ scene.cycles.device = 'CPU'
 scene.cycles.samples = 24
 scene.cycles.use_denoising = True
 scene.render.resolution_x, scene.render.resolution_y, scene.render.resolution_percentage = 1600, 900, 100
+metadata['renderSettings'] = {'engine': 'Cycles CPU', 'samples': scene.cycles.samples,
+                              'denoising': scene.cycles.use_denoising,
+                              'viewTransform': scene.view_settings.view_transform}
 scene.world.color = (.15, .15, .15)
 bpy.ops.object.camera_add(location=(11, -5, 8))
 camera = bpy.context.object
