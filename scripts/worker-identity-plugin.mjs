@@ -3,9 +3,11 @@ import {readFileSync} from 'node:fs';
 import {relative,resolve} from 'node:path';
 
 const marker='__MASS_SPINNER_WORKER_IDENTITY_V1__';
+/** @param {import("node:crypto").BinaryLike} value */
 const hash=value=>createHash('sha256').update(value).digest('hex');
 
 /** Runs in Vite's worker build, whose module IDs are the producing import graph. */
+/** @param {string} root @returns {import("vite").Plugin} */
 export function workerIdentityPlugin(root){
  const identityModule=resolve(root,'src/worker-identity.ts');
  return {

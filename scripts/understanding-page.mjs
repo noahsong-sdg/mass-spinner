@@ -1,13 +1,15 @@
 import {Marked} from 'marked';
 import katex from 'katex';
 import {tsImport} from 'tsx/esm/api';
-const {guideTopics}=await tsImport('../src/guide-topics.ts',import.meta.url);
+const {guideTopics}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 import {guideDiagram} from './guide-diagrams.mjs';
 import {releaseSourceBase} from './release-links.mjs';
 
+/** @param {string} value */
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
 /** Render the same reviewed guide as GitHub, with math compiled at build time. */
+/** @param {string} markdown @param {string} revision */
 export function understandingPage(markdown,revision){
  const sourceBase=releaseSourceBase(revision)+'docs/';
  let enhancement='';

@@ -1,9 +1,11 @@
 import {Marked} from 'marked';
 import {releaseSourceBase} from './release-links.mjs';
 
+/** @param {string} value */
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
 /** Build only the reviewed repository report; no user-supplied Markdown input. */
+/** @param {string} markdown @param {string} revision */
 export function qualificationPage(markdown,revision){
  const evidenceBase=releaseSourceBase(revision)+'docs/';
  const parser=new Marked({renderer:{link({href,tokens}){

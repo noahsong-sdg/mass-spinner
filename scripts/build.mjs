@@ -12,8 +12,7 @@ if(source.status!==0)throw new Error('Cannot identify the producing release revi
 const revision=source.stdout.trim();
 releaseSourceBase(revision);
 const require=createRequire(import.meta.url);
-// The project-local prefix supports this host's demonstrated npm prune failure.
-const vite=dirname(require.resolve('vite/package.json',{paths:[process.cwd(),resolve('.tools/frontend')]}));
+const vite=dirname(require.resolve('vite/package.json'));
 const build=spawnSync(process.execPath,[resolve(vite,'bin/vite.js'),'build'],{stdio:'inherit'});
 if(build.status===0){
  writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));

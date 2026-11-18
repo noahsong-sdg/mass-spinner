@@ -1,3 +1,4 @@
+/** @type {Record<string,{title:string,description:string,caption:string,body:string}>} */
 const drawings={
  energy:{title:'Drive energy becomes rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Mechanical work changes rotation or is dissipated by ion-neutral slip and wall drag; cooling removes heat.',caption:'Energy routes in the simplified model. Deposition and cooling laws remain assumptions.',body:`
  <rect x="91" y="14" width="148" height="37" rx="7"/><text x="165" y="38" text-anchor="middle">electrical input</text>
@@ -12,8 +13,10 @@ const drawings={
  <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">cooling out</text>`},
 };
 function densityDiagram(){
+ /** @type {[string,string,number,number][]} */
  const cases=[['rest','No spin',0,500],['spin','Spinning',1500,500],['warm','Warmer',1500,1000]];
  const masses=[6.0151228874,7.0160034366],colors=['#9bd8ce','#e4ac76'];
+ /** @param {number} speed @param {number} temperature */
  const curves=(speed,temperature)=>masses.map((mass,i)=>{
   const beta=mass*1.66053906892e-27*speed**2/(2*1.380649e-23*temperature);
   return {beta,wall:Math.exp(beta),path:Array.from({length:65},(_,j)=>`${j?'L':'M'}${52+264*j/64} ${220-165*Math.exp(beta*(j/64)**2)/7}`).join(' '),color:colors[i]};
@@ -33,6 +36,7 @@ function densityDiagram(){
  <figcaption>Ideal equilibrium example, not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference; these curves are not isotope percentages.</figcaption></figure>`;
 }
 function driveDiagram(){
+ /** @param {string} kind @param {number[][]} points */
  const particles=(kind,points)=>points.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${kind==='ion'?4:5}"/>`).join('');
  const caption='Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.';
  return `<figure class="drive-illustration" data-drive-diagram data-stage="gas" data-motion="paused">
@@ -82,6 +86,7 @@ function driveDiagram(){
  <figcaption>Illustrative bulk motion · slowed down · not simulated particle paths. Geometry is schematic.</figcaption>
  </figure>`;
 }
+/** @param {string} id */
 export function guideDiagram(id){
  if(id==='drive')return driveDiagram();
  if(id==='composition')return densityDiagram();

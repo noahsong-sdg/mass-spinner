@@ -27,6 +27,7 @@ export function requestSimulationWithIdentity(request:Record<string,unknown>,sig
    cleanup();
    if(!payload||typeof payload!=='object'||!('result' in payload||'error' in payload)){reject(new Error('Unsupported worker response.'));return;}
    const data=payload as Record<string,unknown>;
+   if(data.result===undefined&&data.error===undefined){reject(new Error('Unsupported worker response.'));return;}
    if(['coupled-target','fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'].includes(String(request.kind))&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
     reject(new Error(`Unsupported ${String(request.kind)} worker response.`));return;
    }
