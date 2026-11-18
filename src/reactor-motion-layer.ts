@@ -42,19 +42,20 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
  pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'Resume motion':'Pause motion';pause.setAttribute('aria-pressed',String(paused));changed();});
  const motionPreference=()=>changed();reduced?.addEventListener?.('change',motionPreference);
  function draw(updateText=true){
-  panel.hidden=!state||!root;group.visible=!panel.hidden&&!pending;
+  const current=state;
+  panel.hidden=!current||!root;group.visible=!panel.hidden&&!pending;
   for(const b of [beam,neutrons,tracks,heat,reactions])b.finish(0);
-  if(!state||!root)return;
+  if(!current||!root)return;
   panel.dataset.pending=String(pending);
   if(pending){summary.textContent='Inside · updating…';metrics.textContent='Waiting for current target inputs.';return;}
-  const power=state.kind==='power-reference';
-  const ions=power?0:motionPopulation(state.particleRateS,6.24e16,96),count=power?48:motionPopulation(state.neutronRateS,1e11,64);
-  const speed=power?1:ionSpeedMS(state)/ionSpeedMS({...state,energyKeV:100});
-  const neutronSpeed=power?1:state.neutronEnergyMeV===null?0:kineticSpeedMS(state.neutronEnergyMeV*1e6*E_CHARGE,1)/5.2e7;
+  const power=current.kind==='power-reference';
+  const ions=power?0:motionPopulation(current.particleRateS,6.24e16,96),count=power?48:motionPopulation(current.neutronRateS,1e11,64);
+  const speed=power?1:ionSpeedMS(current)/ionSpeedMS({...current,energyKeV:100});
+  const neutronSpeed=power?1:current.neutronEnergyMeV===null?0:kineticSpeedMS(current.neutronEnergyMeV*1e6*E_CHARGE,1)/5.2e7;
   if(updateText){
    summary.textContent=power?'Inside · reference':'Inside · beam / neutrons / heat';pause.disabled=!!reduced?.matches;
-   panel.dataset.basis=power?'power-reference':state.basis;panel.dataset.beamCount=String(ions);panel.dataset.neutronCount=String(count);
-   panel.dataset.energyKeV=power?'':String(state.energyKeV);panel.dataset.heatW=power?'':String(state.depositedPowerW);
+   panel.dataset.basis=power?'power-reference':current.basis;panel.dataset.beamCount=String(ions);panel.dataset.neutronCount=String(count);
+   panel.dataset.energyKeV=power?'':String(current.energyKeV);panel.dataset.heatW=power?'':String(current.depositedPowerW);
   }
   for(let i=0;i<ions;i++){
    const t=(i/ions+phase*speed*.65)%1,a=i*2.399963,rad=radius*Math.sqrt((i+.5)/ions);
@@ -72,7 +73,7 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   // Explicitly amplified reaction flashes; their number is not a reaction probability.
   reactions.material.opacity=.2+.65*(.5+.5*Math.sin(phase*4));reactions.finish(enabled.reactions?Math.min(12,count):0);
   let heatCount=0;
-  const faces=power?[1]:state.heatFacesWM2.length?state.heatFacesWM2.slice(1):[state.depositedPowerW/state.areaM2];
+  const faces=power?[1]:current.heatFacesWM2.length?current.heatFacesWM2.slice(1):[current.depositedPowerW/current.areaM2];
   // Bound GPU storage independently of the target's refinement resolution.
   const fluxes=faces.length<=48?faces:Array.from({length:48},(_,i)=>faces[Math.round(i*(faces.length-1)/47)]);
   const maximum=Math.max(...fluxes.map(Math.abs),0);
@@ -91,9 +92,9 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   heat.material.opacity=power?.8:maximum===0?0:.3+.6*maximum/(maximum+1e4);
   if(!updateText)return;
   metrics.textContent=power?'Normalized D–T source → blanket · heat direction only. No beam source is attached.':
-   `${state.basis}${state.timeS===null?'':` · ${fmt(state.timeS)} s`} · D⁺ ${fmt(ionSpeedMS(state))} m/s · ${fmt(state.neutronRateS)} n/s · ${fmt(state.depositedPowerW)} W deposited`;
+   `${current.basis}${current.timeS===null?'':` · ${fmt(current.timeS)} s`} · D⁺ ${fmt(ionSpeedMS(current))} m/s · ${fmt(current.neutronRateS)} n/s · ${fmt(current.depositedPowerW)} W deposited`;
   scope.textContent=power?'Reference animation, not calculated plasma motion, neutron transport or heat flow. Does not change published TBR/yields.':
-   `Weighted markers; fusion flashes amplified. Ions and neutrons slowed separately. Straight neutron rays assume isotropic emission, no scattering or attenuation. ${state.heatFacesWM2.length?'Heat arrows use selected 1D face fluxes; reverse when the gradient reverses.':'Heat arrows show deposition → stopping substrate; no temperature or coolant flow is predicted.'} ${si?'SI hardware.':'Illustrative Blender envelope; footprint responds to area.'}`;
+   `Weighted markers; fusion flashes amplified. Ions and neutrons slowed separately. Straight neutron rays assume isotropic emission, no scattering or attenuation. ${current.heatFacesWM2.length?'Heat arrows use selected 1D face fluxes; reverse when the gradient reverses.':'Heat arrows show deposition → stopping substrate; no temperature or coolant flow is predicted.'} ${si?'SI hardware.':'Illustrative Blender envelope; footprint responds to area.'}`;
  }
  return {group,get running(){return !!state&&!!root&&!pending&&!paused&&!reduced?.matches;},
   update(value:ReactorMotionState|null,current:THREE.Object3D|null,waiting=false){

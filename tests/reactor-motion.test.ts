@@ -1,4 +1,4 @@
-import test from 'node:test';
+import test,{type TestContext} from 'node:test';
 import assert from 'node:assert/strict';
 import * as THREE from 'three';
 import {JSDOM} from 'jsdom';
@@ -48,14 +48,14 @@ test('selected thermal arrows reproduce Fourier/contact/Robin fluxes, including 
  snapshot.result.config.backHeatTransferWM2K=0;assert.equal(targetMotionState(snapshot).heatFacesWM2.at(-1),0,'adiabatic back has no coolant heat');
 });
 
-function fixture(t:test.TestContext,reducedMotion=false){
+function fixture(t:TestContext,reducedMotion=false){
  const dom=new JSDOM('<div id="frame"></div>');t.after(()=>dom.window.close());
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:reducedMotion,addEventListener(){},removeEventListener(){}})});
  const frame=dom.window.document.querySelector<HTMLDivElement>('#frame')!,root=new THREE.Group();root.name='SI engineering assembly';
  for(const [id,x,depth]of [['target',.0000005,.000001],['accelerator',-.3,.02]] as const){
   const mesh=new THREE.Mesh(new THREE.BoxGeometry(depth,.12,.12),new THREE.MeshBasicMaterial());mesh.userData.componentId=id;mesh.position.x=x;root.add(mesh);
  }
- let changes=0;const layer=createReactorMotionLayer(frame,()=>changes++);t.after(()=>{layer.dispose();root.traverse(o=>{if(o instanceof THREE.Mesh){o.geometry.dispose();o.material.dispose();}});});
+ let changes=0;const layer=createReactorMotionLayer(frame,()=>changes++);t.after(()=>{layer.dispose();root.traverse(o=>{if(o instanceof THREE.Mesh){o.geometry.dispose();for(const m of Array.isArray(o.material)?o.material:[o.material])m.dispose();}});});
  const state=sourceMotionState(simulateFusionBeam(DEFAULT_FUSION_BEAM))!;layer.update(state,root);
  const panel=frame.querySelector<HTMLDetailsElement>('.reactor-processes')!;
  const positions=(index:number)=>Array.from((layer.group.children[index] as THREE.Points).geometry.getAttribute('position').array);
