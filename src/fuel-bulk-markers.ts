@@ -14,7 +14,7 @@ export function createFuelBulkMarkers(positions: number[],color: THREE.ColorRepr
  mesh.name=ion?'Blender ion markers':'Blender neutral markers';mesh.frustumCulled=false;
  mesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
  mesh.userData={componentId:'motion',quantitativeOnly:true,nonPickable:true,
-  geometrySource:asset.generator,materialBasis:'Enlarged numerical markers; no physical material or optical emission',
+  geometrySource:asset.generator,geometryBasis:'Accepted SI centre positions; enlarged marker dimensions are illustrative.',materialBasis:'Enlarged numerical markers; no physical material or optical emission',
   markerRadiusM:radiusM,purpose:'Weighted bulk samples; shape size exaggerated, centre positions in SI metres'};
  syncFuelBulkMarkers(mesh);return mesh;
 }
