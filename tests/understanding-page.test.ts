@@ -161,3 +161,12 @@ test('the reading plan distinguishes existing guides from proposed extensions',t
  assert.equal(rows.length,6);assert.match(rows[0].textContent!,/available/);assert.match(rows[1].textContent!,/this page/);
  for(const row of [...rows].slice(2)){assert.match(row.textContent!,/planned/);assert.equal(row.querySelectorAll('a').length,0);}
 });
+
+
+test('condensed reference tables explain each entry once',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
+ for(const table of dom.window.document.querySelectorAll('table')){
+  const labels=[...table.querySelectorAll('tbody tr')].map(row=>row.querySelector('td')!.textContent!.trim());
+  assert.equal(new Set(labels).size,labels.length,'duplicate reference entry');
+ }
+});

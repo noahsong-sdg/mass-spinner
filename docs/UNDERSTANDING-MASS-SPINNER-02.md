@@ -297,114 +297,91 @@ machine or lithium enrichment. Use this model to explore conditional mechanisms.
 
 ## What do the menu options mean?
 
-The **Gas view** menu changes how the accepted result is displayed. It does not
-turn optional thermal physics on or off; that is done in Controls.
+**Gas view changes presentation, not physics.** Enable optional models in Controls.
 
-| Gas view | What you are looking at | What it cannot establish |
-|---|---|---|
-| Equilibrium reference | A fixed-temperature equilibrium distribution using the bulk reference's endpoint speed, with uniform-inertia reference mechanics | Not the actual end-of-run coupled distribution or its time to settle |
-| Coupled separation | The evolving coupled run; fast azimuthal motion is averaged into rings so radial redistribution can be watched over seconds | Rings are weighted populations, not resolved particle trajectories |
-| Coupled spin-up | The same accepted coupled solution, slowed so ion and neutral turning can be seen | Not a different collision solver or a switch that freezes species transport |
-| Flow · reference | Reference rotation and schematic throughput packets, using the pumping calculation | Not solved inlet/outlet fluid motion or its feedback on the rotor |
-
-For an accepted coupled run, changing these views changes the presentation,
-not the computed history. The **physical-time slider** selects seconds of that
-history. “1 s screen = …” is the visual playback scale. Use m/s readouts rather
-than counting screen revolutions. Reference views use reference states instead
-of the evolving coupled history; changing between them is not a controlled
-physics comparison.
-
-Play/Pause changes playback. Rewind returns to time zero. New run starts a
-fresh experiment with the current settings. Cut power inserts a current change
-at the selected time; it does not delete the earlier driven history.
-
-The **Plot** menu changes the question asked of a result. Time-history plots
-grow with the clock; a radius profile is a snapshot across the vessel at the
-selected time; a parameter scan compares hypothetical settings. A scan's
-horizontal axis is not playback time.
-
-| Plot | Question it answers and how to read it |
+| Gas view | Meaning and limit |
 |---|---|
-| Separation over time | At the chosen cut, how do light purity and recovery develop? Compare with the conditional equilibrium reference; it is not an extraction rate. [§6](#collection) |
-| Composition | What percentage here is light isotope? Radius is horizontal; the light percentage is zoomed vertically. The heavy percentage is the remainder. [§1](#composition) |
-| Ion–neutral spin-up | How fast does each population turn? Time is horizontal; speed at the model's outer radius is in m/s. [§4](#momentum) |
-| Drive & work | Where has mechanical input energy gone? Height is joules, slope is watts; Ohmic power is a separate readout. [§5](#energy) |
-| Temperature | How do mean gas and liner temperatures evolve? Thermal model must be enabled for evolution; otherwise the gas is a fixed-temperature bath. [§5](#energy) |
-| Temperature profile | Where is heat concentrated across radius? Requires a radial liner; a gas curve additionally requires Spatial mixture. These are cell temperatures, not axial structure. Planned guide 03. |
-| Species energy profile | How much internal energy is in each species in each gas cell? Requires Spatial mixture. More energy can mean more atoms, not a higher species temperature: both share the local temperature. Planned guide 03. |
-| Gas pressure profile | Where is local ideal-gas pressure high? Requires Spatial mixture; it uses local number density and temperature, not a solved local radial force balance. Planned guide 03. |
-| Angular momentum | Does rotation gained equal drive impulse minus wall impulse? Collision transfer cancels in the total. [§4](#momentum) |
-| Gas inertia | Has gas moved farther from the axis, making the same angular momentum turn it more slowly? This is a time history, not a second speed curve. [§4](#momentum) |
-| Species density | How crowded is each isotope relative to its own volume-average density? 1× means that isotope's mean density. In coupled views this is the evolving profile; in reference views it is equilibrium. [§1](#composition) |
-| Purity & recovery | For each possible cut radius, what percentage of the selected inventory is light, and what fraction of all light atoms is retained? This is a radius scan, not outlet throughput. [§6](#collection) |
-| Countercurrent stages | Can ideal routing through repeated stages improve purity, and what recovery/circulation does it cost? Fixed feed stage and assumed equal turnover; not a transient plant simulation. Planned guide 04. |
-| Differential pumping | How do rotation, pump speed and inlet conductance affect reference partial pressures and gas load? Select the Differential pumping application; no open-flow rotor feedback is solved. Planned guide 04. |
-| Magnetic leverage | At the same reference torque, could stronger B reduce resistive heat? Current is adjusted in this hypothetical scan: it is not a fixed-current experiment. Planned guide 03. |
-| D–T fuel inventory | How much unburned fuel is tied up by an assumed burn fraction and processing delay? Separate steady fuel-loop scenario; not a burn prediction from the lithium centrifuge. Planned guide 05. |
-| Lithium vapor & surfaces | How does equilibrium lithium vapor pressure depend on surface temperature? A saturation check, not a condensation rate, surface chemistry calculation or lifetime prediction. Planned guide 03. |
+| Equilibrium reference | Ideal distribution at the bulk reference’s endpoint speed; not the coupled end state. |
+| Coupled separation | Coupled history with fast turns averaged into rings; weighted populations, not particle orbits. |
+| Coupled spin-up | The same accepted coupled solution, slowed to reveal turning; transport still evolves. |
+| Flow · reference | Schematic reference, not solved inlet/outlet fluid motion or rotor feedback. |
 
-### Which controls actually change physics?
+The time slider selects physical seconds; “1 s screen = …” is playback scale.
+Read m/s rather than counting turns. Play/Pause and Rewind navigate history;
+New run restarts with current settings. Cut power inserts a current step at the
+selected time. Reference views are not controlled comparisons of evolving runs.
 
-**Controls** and the sliders in **Inspect** share the same physical inputs.
-Selecting a component, changing **View**, or scrubbing time does not rerun the
-solver. Editing a physical input does. An edit can leave the new run paused at
-0 s; use **Play** or the component's response button to see later behavior.
+**Plots ask different questions.** Time histories grow with the clock; radial
+profiles show the selected instant; parameter scans compare hypothetical settings.
 
-Not every input affects every plot. Some plots scan many possible settings:
-the curve can stay the same while the marker and selected values move.
-
-| Input | What changes; where to look |
+| Plot | Read it as… |
 |---|---|
-| Feed; Reference light-species fraction | Species masses and inventories. Look at Composition and Species density. |
-| Axial magnetic field; Radial discharge current | Applied torque and the spin-up trajectory. Look at Ion–neutral spin-up and Drive & work. A late current edit changes drive history; it does not restart the gas. |
-| Initial / bath gas temperature | Initial temperature, gas inventory at prescribed pressure, and separation bias. With thermal evolution off it remains a fixed bath. Look at Composition and Temperature. |
-| Run duration | How far the computed evolution runs. Compare at the same physical time when testing another input. |
-| Ionized number fraction; Ion → neutral collision rate | Driven inertia and ion–neutral momentum transfer. Look at Ion–neutral spin-up. These are assumed inputs, not a solved ionization balance. |
-| Neutral wall drag rate | Momentum lost to the wall. Look at Ion–neutral spin-up and Angular momentum. |
-| Effective perpendicular conductivity | Resistive heat at prescribed current, not a self-consistent discharge current. Look at Drive & work; it heats the gas only with thermal evolution enabled. |
-| Drive annulus inner radius / a | Torque lever arm and resistive path. Look at Ion–neutral spin-up and Drive & work. |
-| Vessel radius; Vessel length; Volume-mean neutral pressure | Geometry, gas inventory, inertia and transport scales. Look at spin-up, density and composition. Decorative bolts and coil turns are not independently solved engineering geometry. |
-| Assumed radial diffusivity | How quickly composition redistributes, not the ideal equilibrium preference. Look at Separation over time. |
-| Inner collection radius / a | Which closed inventory is counted as product. Look at the marker and values in Purity & recovery; the curve scans all cut radii. It does not extract atoms. |
-| Ideal countercurrent stages; Feed stage | Separate ideal cascade calculation and routing overlay. Look at Countercurrent stages. No axial cascade flow feeds back into the gas evolution. |
-| Outer pump speed; Inlet conductance | Separate equilibrium pumping calculation. Look at Differential pumping. These do not generate an open inlet/outlet flow in the closed-vessel evolution. |
-| Initial / reference liner temperature | With thermal evolution on: initial wall temperature. With it off: lithium saturation-pressure reference; the gas does not heat. Inspect's response button chooses the appropriate plot. |
-| Reference-only liner → gas conductance | Reference heat demand, not an evolved temperature. It is disabled when the thermal model supplies its own heat-transfer parameters. |
-| Fusion thermal power; Single-pass tritium burn fraction; Exhaust processing time | Separate fuel-loop inventory accounting. Look at D–T fuel inventory. These do not change the lithium centrifuge dynamics. |
-| Lithium-seeded CIV reference | Only the reported critical-ionization-velocity reference. It does not add a species, solve ionization, limit speed or change rotation. |
-| Evolve gas & liner temperature; Liner model; Gas model | Enable the thermal calculation and choose lumped or spatial heat transport. Look at Temperature and Temperature profile. Off means the bath remains fixed. |
-| Liner heat capacity; Gas–liner conductance; Liner cooling conductance; Coolant temperature | Thermal energy storage, exchange and cooling when enabled. Spatial tungsten computes its own heat capacity from material data. |
-| Liner thickness; Gas conductivity; Resolution | Enabled spatial models only: wall heat flow, gas heat flow, or numerical resolution. Increasing resolution is not a physical change; it tests numerical sensitivity. |
-| View; Gas view; Physical time | Display, diagnostic/reference choice and time sampling only. They do not change the accepted physical inputs. |
+| Separation over time | Cut purity/recovery versus time, not extraction rate. [§6](#collection) |
+| Composition | Local light percentage versus radius; heavy is the remainder. [§1](#composition) |
+| Ion–neutral spin-up | Ion and neutral edge speeds (m/s) versus time. [§4](#momentum) |
+| Drive & work | Mechanical energies (J); slopes are power (W). Ohmic power is separate. [§5](#energy) |
+| Temperature | Mean gas/liner temperatures; evolution requires thermal physics enabled. [§5](#energy) |
+| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. Planned guide 03. |
+| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. Planned guide 03. |
+| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. Planned guide 03. |
+| Angular momentum | Drive impulse minus wall impulse; internal collision transfer cancels. [§4](#momentum) |
+| Gas inertia | Mass redistribution’s effect on resistance to turning, versus time. [§4](#momentum) |
+| Species density | Each isotope’s density divided by its own volume mean; 1× is average. Evolving in coupled views, equilibrium in reference views. [§1](#composition) |
+| Purity & recovery | Inventory fractions versus cut radius, not throughput. [§6](#collection) |
+| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. Planned guide 04. |
+| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. Planned guide 04. |
+| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. Planned guide 03. |
+| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. Planned guide 05. |
+| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. Planned guide 03. |
+
+### Which controls affect physics?
+
+Controls and Inspect edit the same inputs. Some act only in enabled models;
+others belong to separate reference calculations. A scan’s curve may stay fixed
+while its selected marker moves. After editing, wait for the accepted result.
+
+| Input family | Effect; useful plot |
+|---|---|
+| Feed; light fraction | Masses/inventories; Composition, Species density. |
+| Magnetic field; current; drive annulus | Torque, lever arm and resistive path; Spin-up, Drive & work. Late current edits add steps. |
+| Gas temperature | Initial temperature, pressure-derived inventory and sorting; Composition, Temperature. Fixed bath unless thermal evolution is on. |
+| Duration; radial diffusivity | Available redistribution time and transport rate, not fixed-speed equilibrium; Separation over time. |
+| Ion fraction; collision rate | Driven inertia and momentum transfer; Spin-up. Ionization is prescribed. |
+| Wall drag | Boundary momentum loss; Spin-up, Angular momentum. |
+| Conductivity | Resistive heating at prescribed current, not a solved discharge; Drive & work. Temperature responds only with thermal evolution. |
+| Radius; length; pressure | Inventory, inertia and transport scales; Spin-up, density, composition. Decorative hardware is not independently solved. |
+| Collection radius | Closed inventory selected; Purity & recovery marker/values. No extraction. |
+| Stages; feed stage | Separate ideal cascade routing; Countercurrent stages. |
+| Pump speed; inlet conductance | Separate equilibrium pumping reference; Differential pumping. |
+| Liner temperature | Initial wall temperature if thermal physics is on; saturation reference otherwise. |
+| Reference liner → gas conductance | Reference heat demand only; disabled when thermal physics supplies heat transfer. |
+| Thermal switches; storage; conductances; coolant | Enable heat evolution and set exchange/cooling; Temperature. Spatial tungsten supplies material heat capacity. |
+| Liner thickness; gas conductivity | Enabled spatial heat transport; Temperature profile. Resolution tests numerical sensitivity, not new physics. |
+| Fusion power; burn fraction; processing time | Separate steady D–T inventory accounting, not lithium dynamics. |
+| Lithium-seeded CIV reference | Reported reference only; no ionization solution or enforced speed limit. |
+| View; gas view; time | Presentation and sampling only, not physical input changes. |
 
 ## Where do we go after this guide?
 
-Only guides **01 and 02 exist today**. The menu reference above covers the
-meaning of every current option; the remaining guides below are a plan for
-explaining the extensions properly, not links to completed tutorials.
+Only guides **01 and 02 exist today**. The others are planned, not completed tutorials.
 
-| Guide | One problem to solve | What you should be able to do afterward |
+| Guide | Question | Outcome |
 |---|---|---|
-| 01 · Meet the machine — available | What are ions, neutrals, fields and this centrifuge? | Identify what rotates, what stays still, and what the browser actually calculates. [Read 01](UNDERSTANDING-MASS-SPINNER.md) |
-| 02 · Build one separation prediction — this page | Can electrical drive produce a useful light-rich sample? | Explain each link from torque to speed, heat, composition and inventory cuts; compare one input at a time. |
-| 03 · Can the operating point survive? — planned | Does useful rotation require temperatures or phases our assumptions cannot support? | Follow gas-to-wall heat flow, distinguish cell energy from temperature, use the matched-torque B scan, and interpret lithium saturation and ionization/transport limits. |
-| 04 · From a sample to a process — planned | How would we repeatedly collect and process material? | Explain purity/recovery tradeoffs, ideal cascade routing and inlet/pump bottlenecks; identify the extraction dynamics we do not solve. |
-| 05 · Why fusion needs fuel processing — planned | How does separation connect to an actual fuel loop? | Distinguish lithium blanket material from D–T exhaust, and calculate the inventory cost of low burn fraction and long processing delay without claiming reactor performance. |
-| 06 · Which predictions deserve trust? — planned | How can a plausible graph still be wrong? | Separate conservation, numerical convergence and experimental validation; test closures, match diagnostics, and state the domain of a defensible prediction. |
+| 01 — available | What rotates? | Identify gas, drive and model boundaries. [Read 01](UNDERSTANDING-MASS-SPINNER.md) |
+| 02 — this page | Can drive make a useful sample? | Connect torque, speed, heat, transport and cuts. |
+| 03 — planned | Can that operating point survive? | Heat flow, magnetic leverage, lithium phase and ionization limits. |
+| 04 — planned | Can a sample become a process? | Cascades, pumping and unresolved extraction. |
+| 05 — planned | Why process fusion fuel? | Blanket lithium versus D–T exhaust; burn/delay inventory costs. |
+| 06 — planned | Which predictions deserve trust? | Conservation, convergence, diagnostics and experimental uncertainty. |
 
-For each future guide, begin with a concrete failed prediction or unresolved
-decision, add only the physics needed to address it, then make a prediction
-before touching a control. Finish by explaining the observed plot in your own
-words. There are no required lessons or completion gates in the playground.
+These are optional reading paths. Start with a question, predict one control’s
+effect, then explain the observed plot.
 
 ## Equations and further reading
 
-- [Live mechanics and equilibrium reference](../src/fuel-centrifuge.ts),
-  [evolving composition and inertia](../src/fuel-transport.ts), and
-  [optional thermal evolution](../src/fuel-operation.ts) implement the simplified
-  picture above.
-- [Plasma mass separation tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf)
-  covers several mechanisms. Its charged-species filters need additional
-  physics beyond the neutral-gas equilibrium derived here.
-- [How it works](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/how-it-works.html)
-  gives more implementation detail and accuracy limits.
+- Implementation: [mechanics/equilibrium](../src/fuel-centrifuge.ts),
+  [composition/inertia](../src/fuel-transport.ts), [thermal evolution](../src/fuel-operation.ts).
+- [Plasma mass separation tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf):
+  charged-species filters require physics beyond this neutral equilibrium.
+- [How it works](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/how-it-works.html):
+  numerical methods and accuracy limits.
