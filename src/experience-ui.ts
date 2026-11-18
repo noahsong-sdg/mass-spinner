@@ -34,7 +34,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  };
  function revealActiveLevel(){
   if(!navigation)return;
-  const button=level==='2'?(apparatus?.value!=='centrifuge'?reactor:levelButtons.find(button=>button.dataset.level===level)):advanced?.querySelector('summary');
+  const button=level==='2'?(apparatus&&apparatus.value!=='centrifuge'?reactor:levelButtons.find(button=>button.dataset.level===level)):advanced?.querySelector('summary');
   if(!button)return;
   const bounds=navigation.getBoundingClientRect(),item=button.getBoundingClientRect();
   const left=bounds.left+navigation.clientLeft,right=left+navigation.clientWidth;
