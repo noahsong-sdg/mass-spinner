@@ -51,6 +51,21 @@ test('rendered instance centres follow accepted shell inventories and angular ph
     }
     const phase=cloud.userData.ion?sample.ionPhaseRad:sample.neutralPhaseRad;
     assert.equal(cloud.rotation.z,mode==='spin'?phase%(2*Math.PI):0);
+    const trail=cloud.children[1] as THREE.LineSegments;
+    assert.equal(trail.visible,mode==='spin'&&time>0);
+    if(trail.visible){
+     const p=trail.geometry.getAttribute('position'),past=sampleFuelTransport(result.transport,time-(trail.userData.exposureS as number));
+     const pastPhase=cloud.userData.ion?past.ionPhaseRad:past.neutralPhaseRad;
+     const angle=Math.atan2(positions.getY(0),positions.getX(0))+pastPhase-phase;
+     const expectedDirection=new THREE.Vector2(Math.cos(angle),Math.sin(angle));
+     assert.ok(new THREE.Vector2(p.getX(0),p.getY(0)).normalize().distanceTo(expectedDirection)<3e-6,'trail integrates accepted phase, rather than endpoint speed × exposure');
+     assert.ok(new THREE.Vector3(p.getX(15),p.getY(15),p.getZ(15)).distanceTo(new THREE.Vector3().fromBufferAttribute(positions,0))<1e-7,'curved trace ends at its rendered marker');
+     if(!cloud.userData.ion){
+      const mass=cloud.userData.species?past.heavyMass:past.lightMass,y=(p.getX(0)**2+p.getY(0)**2)/R**2;
+      const probability=mass.reduce((sum,m,j)=>sum+m*Math.max(0,Math.min(1,y*mass.length-j)),0);
+      assert.ok(Math.abs(probability-.5/mesh.count)<3e-6,'trace uses historical radial inventory as well as historical phase');
+     }
+    }
    }
   }
   assert.equal(JSON.stringify(result),before);

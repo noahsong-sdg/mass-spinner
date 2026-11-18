@@ -16,6 +16,12 @@ type FuelCloud = {
 
 const U=1.66053906892e-27,K=1.380649e-23,TAU=2*Math.PI;
 const tracerAngle=(i: number,species: number,ion: boolean)=>i*2.399963229728653+species*Math.PI+(ion?Math.PI/2:0);
+const TRAIL_SEGMENTS=8,TRAIL_STRIDE=8;
+function populationQuantile(cdf:ArrayLike<number>|undefined,beta:number,p:number){
+ if(!cdf)return radialQuantile(beta,p);
+ let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;
+ return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);
+}
 /** Inverse CDF in y=r²/a², including an exponentially thin wall layer. */
 export function radialQuantile(beta: number,p: number){
  if(p===0||p===1)return p;
@@ -62,20 +68,21 @@ export function createFuelMotion(result: FuelRenderResult){
  const fractions=[c.lightFraction,1-c.lightFraction],colors=[0x94d9cd,0xe5ab70],reference=fuelMotionState(result,0);
  const glyphs=createFuelMotionGlyphs(result);group.add(glyphs.group);
  for(const ion of [false,true])for(let species=0;species<2;species++){
-  const n=Math.max(1,Math.round((ion?192:768)*fractions[species])),positions: number[]=[],trails: number[]=[];
+  const n=Math.max(1,Math.round((ion?192:768)*fractions[species])),positions: number[]=[];
   for(let i=0;i<n;i++){
    const radius=R*Math.sqrt(radialQuantile(ion?0:reference.beta[species],(i+.5)/n));
    // Independent irrational increments fill azimuth × z. Reusing the golden
    // ratio for z locks theta + 2πz/L to a constant: a spurious helical sheet.
    const angle=tracerAngle(i,species,ion),z=L*((i*Math.SQRT2+.37)%1);
    positions.push(radius*Math.cos(angle),radius*Math.sin(angle),z);
-   if(i%4===0)trails.push(radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),z,...positions.slice(-3));
   }
   const rotor=new THREE.Group();rotor.name=`${ion?'Ions':'Neutrals'} · ${species===0?result.pair.light:result.pair.heavy}`;
   const points=createFuelBulkMarkers(positions,colors[species],R*(ion?.035:.022),ion);
   rotor.userData={species,ion,representedNumber:reference.neutralNumber*fractions[species]*(ion?c.ionFraction/(1-c.ionFraction):1),tracers:n};
-  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(trails,3));
-  const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:colors[species],transparent:true,opacity:.22,depthWrite:false,toneMapped:false}));
+  const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(Math.ceil(n/TRAIL_STRIDE)*TRAIL_SEGMENTS*6),3));
+  const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:colors[species],transparent:true,opacity:.35,depthWrite:false,toneMapped:false}));
+  lines.name='Accepted bulk history traces';lines.frustumCulled=false;
+  lines.userData.purpose='Equal-population bulk history; not molecular trajectories';
   rotor.add(points,lines);rotor.visible=fractions[species]>0;group.add(rotor);clouds.push({rotor,points,lines,ion,species,n});
  }
  // Outside-vessel packet paths show Q, not a fluid velocity through the chamber.
@@ -94,17 +101,17 @@ export function createFuelMotion(result: FuelRenderResult){
   // current state when shown; previousMode records the last displayed state.
   if(!group.visible)return state;
   const coupled=(mode==='spin'||mode==='transport')&&result.transport?sampleFuelTransport(result.transport,timeS):null;
-  const quantile=(species:number,p:number)=>{
-   const cdf=coupled?.[species?'heavyCDF':'lightCDF'];
-   if(!cdf)return radialQuantile(state.beta[species],p);
-   let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;
-   return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);
-  };
+  const quantile=(species:number,p:number)=>populationQuantile(coupled?.[species?'heavyCDF':'lightCDF'],state.beta[species],p);
   // A trailing arc integrates the accepted phase history, rather than using
   // endpoint speed × exposure during acceleration. Never invent pre-run motion.
   const exposureS=mode==='spin'?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
   const before=mode==='spin'?fuelMotionState(result,timeS-exposureS,mode).phases:null;
   glyphs.update(state,mode,quantile,{seconds:exposureS,ion:before?state.phases.ion-before.ion:state.speeds.ion*exposureS,neutral:before?state.phases.neutral-before.neutral:state.speeds.neutral*exposureS});
+  const history=mode==='spin'||mode==='equilibrium'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
+   const time=timeS-exposureS*(1-j/TRAIL_SEGMENTS),frame=fuelMotionState(result,time,mode);
+   const sample=mode==='spin'&&result.transport?sampleFuelTransport(result.transport,time):null;
+   return {...frame,cdf:[sample?.lightCDF,sample?.heavyCDF]};
+  }):[];
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){
@@ -112,16 +119,24 @@ export function createFuelMotion(result: FuelRenderResult){
     for(let i=0;i<n;i++){
      const radius=R*Math.sqrt(quantile(species,(i+.5)/n)),angle=tracerAngle(i,species,ion);
      a.setXY(i,radius*Math.cos(angle),radius*Math.sin(angle));
-     if(i%4===0){const j=i/4*2,b=lines.geometry.attributes.position;b.setXYZ(j,radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),a.getZ(i));b.setXYZ(j+1,a.getX(i),a.getY(i),a.getZ(i));}
     }syncFuelBulkMarkers(points);
    }
    const kind=ion?'ion':'neutral',averaged=['flow','transport'].includes(mode)&&state.speeds[kind]!==0;rotor.rotation.z=averaged?0:state.phases[kind]%TAU;
    // At the transport clock a revolution is unresolved. Show an azimuthally
    // uniform ensemble, not one full wire hoop per sample or aliased rotation.
    rotor.userData.azimuthAveraged=averaged;
-   points.visible=true;lines.visible=!averaged&&state.speeds[kind]!==0;
-   const a=points.geometry.attributes.samplePosition,b=lines.geometry.attributes.position,exposure=state.speeds[kind]*state.secondsPerScreenSecond*.07;
-   for(let i=0;i<n;i+=4){const radius=Math.hypot(a.getX(i),a.getY(i)),angle=Math.atan2(a.getY(i),a.getX(i));b.setXYZ(i/2,radius*Math.cos(angle-exposure),radius*Math.sin(angle-exposure),a.getZ(i));b.setXYZ(i/2+1,a.getX(i),a.getY(i),a.getZ(i));}b.needsUpdate=true;
+   points.visible=true;lines.visible=history.length>0&&state.speeds[kind]!==0&&exposureS>0;
+   lines.userData.exposureS=exposureS;
+   if(lines.visible){
+    const a=points.geometry.attributes.samplePosition,b=lines.geometry.attributes.position;
+    for(let i=0;i<n;i+=TRAIL_STRIDE)for(let j=0;j<TRAIL_SEGMENTS;j++)for(let end=0;end<2;end++){
+     const frame=history[j+end],p=(i+.5)/n;
+     const radius=ion?Math.hypot(a.getX(i),a.getY(i)):R*Math.sqrt(populationQuantile(frame.cdf[species],frame.beta[species],p));
+     const angle=tracerAngle(i,species,ion)+frame.phases[kind]-state.phases[kind];
+     b.setXYZ((i/TRAIL_STRIDE*TRAIL_SEGMENTS+j)*2+end,radius*Math.cos(angle),radius*Math.sin(angle),a.getZ(i));
+    }
+    b.needsUpdate=true;
+   }
   }
   for(const {path,points,species}of flows){
    points.visible=mode==='flow'&&result.pumping.species[species].gasLoadPaM3S>0;
@@ -130,7 +145,7 @@ export function createFuelMotion(result: FuelRenderResult){
   }
   previousMode=mode;return state;
  }
- update(0);return {group,update,setSpecies(value: FuelSpecies){glyphs.setSpecies(value);for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.22:.02;}}};
+ update(0);return {group,update,setSpecies(value: FuelSpecies){glyphs.setSpecies(value);for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.35:.02;}}};
 }
 
 export type FuelMotion = ReturnType<typeof createFuelMotion>;
