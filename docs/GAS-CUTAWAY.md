@@ -24,7 +24,9 @@ then Blender with `--background --factory-startup --threads 2 --python-exit-code
 qualification workflow performs both steps and retains the rendered PNGs.
 
 Weighted samples replace full orbit hoops. Their neutral radial distribution
-comes from the solved species inventories. Spin-up uses the computed phase;
+comes from the solved species inventories. Independent azimuth/axial sampling
+avoids artificial helical sheets; species offsets prevent coincident markers.
+Spin-up uses the computed phase;
 fast separation and flow views show an azimuthally sampled distribution, avoiding
 aliased rotations. Ions remain an enlarged, oversampled population with prescribed
 uniform radial sampling; they are not kinetic particle trajectories. Axial gas

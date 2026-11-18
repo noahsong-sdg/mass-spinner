@@ -13,6 +13,7 @@ type FuelCloud = {
 };
 
 const U=1.66053906892e-27,K=1.380649e-23,TAU=2*Math.PI;
+const tracerAngle=(i: number,species: number,ion: boolean)=>i*2.399963229728653+species*Math.PI+(ion?Math.PI/2:0);
 /** Inverse CDF in y=r²/a², including an exponentially thin wall layer. */
 export function radialQuantile(beta: number,p: number){
  if(p===0||p===1)return p;
@@ -61,7 +62,9 @@ export function createFuelMotion(result: FuelRenderResult){
   const n=Math.max(1,Math.round((ion?192:768)*fractions[species])),positions: number[]=[],trails: number[]=[];
   for(let i=0;i<n;i++){
    const radius=R*Math.sqrt(radialQuantile(ion?0:reference.beta[species],(i+.5)/n));
-   const angle=i*2.399963229728653,z=L*((i*.618033988749895+.37)%1);
+   // Independent irrational increments fill azimuth × z. Reusing the golden
+   // ratio for z locks theta + 2πz/L to a constant: a spurious helical sheet.
+   const angle=tracerAngle(i,species,ion),z=L*((i*Math.SQRT2+.37)%1);
    positions.push(radius*Math.cos(angle),radius*Math.sin(angle),z);
    if(i%4===0)trails.push(radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),z,...positions.slice(-3));
   }
@@ -96,7 +99,7 @@ export function createFuelMotion(result: FuelRenderResult){
     const quantile=(p: number)=>{if(!cdf)return radialQuantile(state.beta[species],p);let j=1;while(j<cdf.length-1&&cdf[j]<p)j++;return (j-1+(p-cdf[j-1])/(cdf[j]-cdf[j-1]))/(cdf.length-1);};
     const a=points.geometry.attributes.position;
     for(let i=0;i<n;i++){
-     const radius=R*Math.sqrt(quantile((i+.5)/n)),angle=i*2.399963229728653;
+     const radius=R*Math.sqrt(quantile((i+.5)/n)),angle=tracerAngle(i,species,ion);
      a.setXY(i,radius*Math.cos(angle),radius*Math.sin(angle));
      if(i%4===0){const j=i/4*2,b=lines.geometry.attributes.position;b.setXYZ(j,radius*Math.cos(angle-.1),radius*Math.sin(angle-.1),a.getZ(i));b.setXYZ(j+1,a.getX(i),a.getY(i),a.getZ(i));}
     }a.needsUpdate=true;
