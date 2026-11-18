@@ -33,7 +33,7 @@ test('neutron directions cover solid angle without an artificial forward beam',(
 
 function selectedTarget(){
  const source={...DEFAULT_FUSION_BEAM,stoppingModel:'geant4-bragg' as const,materialColumnM2:1e22,beamCurrentA:0,exposureS:.01};
- const config={...DEFAULT_COUPLED_TARGET,depthCells:2,backingCells:2,cooldownS:0,samples:4,contactResistanceM2KPerW:.001};
+ const config={...DEFAULT_COUPLED_TARGET,depthCells:2,backingCells:2,cooldownS:0,samples:10,contactResistanceM2KPerW:.001};
  const result=simulateCoupledTarget(source,config),state={...result.history[0],temperatureK:[700,600,450,400]};
  return {source,result,state};
 }
