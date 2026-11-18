@@ -247,6 +247,7 @@ test('Inspect: liner reference changes its response without changing gas tempera
  await page.getByRole('button',{name:'Apply Initial / reference liner temperature',exact:true}).click();
  await expect(page.locator('#fuel-inspect [data-show-response]')).toBeEnabled({timeout:30_000});
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await page.getByRole('button',{name:'Inspect',exact:true}).click();
  await page.getByRole('button',{name:'Show liner vapor pressure',exact:true}).click();
  await expect(page.locator('#fuel-plot')).toHaveValue('lithium');
  await expect(page.locator('#fuel-plots .plot-readout')).toContainText('1200,');
