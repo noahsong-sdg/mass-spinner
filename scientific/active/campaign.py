@@ -45,7 +45,9 @@ def content_key(values):
 
 
 def produce(destination):
-    destination = Path(destination).resolve()
+    destination = Path(destination).absolute()
+    if destination.is_symlink():
+        raise ValueError("Result destination must not be a symlink")
     destination.parent.mkdir(parents=True, exist_ok=True)
     identity = sources()
     with tempfile.TemporaryDirectory(dir=destination.parent) as stage:
