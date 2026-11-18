@@ -55,7 +55,8 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  expect(errors).toEqual([]);
 });
 
-test('guide: local links, native action and accessible reading layout',async({page})=>{
+test('guide: local links, native action and accessible reading layout',async({page,context},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');
  await page.getByRole('link',{name:'Every menu option is explained below'}).click();
  await expect(page.locator('#guide-chapter')).toHaveValue('views');
@@ -64,9 +65,18 @@ test('guide: local links, native action and accessible reading layout',async({pa
  await expect(page.locator('.katex-error')).toHaveCount(0);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);
- await page.locator('a[href*="topic=momentum&try=spin"]').click();
- await expect(page.locator('#fuel-plot')).toHaveValue('spin');
- await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ const profiler=await context.newCDPSession(page);
+ await profiler.send('Profiler.enable');await profiler.send('Profiler.start');
+ try{
+  await page.locator('a[href*="topic=momentum&try=spin"]').click();
+  await expect(page.locator('#fuel-plot')).toHaveValue('spin');
+  await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+  expect(errors).toEqual([]);
+ }finally{
+  const {profile}=await profiler.send('Profiler.stop');
+  await info.attach('guide-startup.cpuprofile',{body:JSON.stringify(profile),contentType:'application/json'});
+  await profiler.detach();
+ }
 });
 
 for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its production module`,async({page})=>{
