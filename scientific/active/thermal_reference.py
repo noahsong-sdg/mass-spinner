@@ -141,7 +141,9 @@ def assess(packet):
             not errors[2] < errors[1] < errors[0]
             or errors[-1] / (config["initialWallK"] - config["initialGasK"]) > 0.01
         ):
-            raise ValueError("Live temporal contraction or bounded 1% imposed-temperature gate failed")
+            raise ValueError(
+                "Live temporal contraction or bounded 1% imposed-temperature gate failed"
+            )
     return {
         "schemaVersion": 1,
         "kind": "bounded-variable-property-thermal-toolchain",
