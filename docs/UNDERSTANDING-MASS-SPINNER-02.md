@@ -33,7 +33,7 @@ lets you try the controls alongside this explanation.
    collisions make neutrals follow. Compare at the same physical time.
 
 The preparation clears earlier current steps and restarts from rest. An ordinary
-current edit after time zero instead changes the drive of already moving gas.
+current edit after time zero, even while paused, changes the drive of already moving gas.
 Click a control’s number to enter an exact value. With thermal evolution off,
 this experiment changes speed, not temperature. [§4 explains why](#momentum).
 

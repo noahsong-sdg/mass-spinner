@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {learningPages} from '../scripts/learning-pages.mjs';
+import {guideActions} from '../src/guide-topics.js';
 
 const path='docs/UNDERSTANDING-MASS-SPINNER-02.md';
 const source=readFileSync(path,'utf8');
@@ -23,6 +24,12 @@ test('the understanding guide marks display equations as GitHub math, not litera
 test('the rewritten guide links to existing local explanations, evidence and implementation',()=>{
  for(const [,href]of source.matchAll(/\[[^\]]+\]\(([^\s)]+)\)/g)){
   if(/^[a-z][a-z\d+.-]*:/i.test(href)||href.startsWith('#'))continue;
+  if(href.startsWith('/?')){
+   const url=new URL(href,'https://example.org');
+   assert.equal(url.searchParams.get('level'),'2');
+   assert.ok(guideActions.has(url.searchParams.get('try')!),`unknown simulator action: ${href}`);
+   continue;
+  }
   if(href.startsWith('/learn')){
    assert.ok(Object.hasOwn(learningPages(),href.slice(1).split('#')[0]),`missing investigation: ${href}`);
    continue;
@@ -41,8 +48,10 @@ test('the guide connects equation symbols, plot units and experiment histories t
 });
 
 
-test('current experiment directions lead to the separate walkthrough rather than the retired menu',()=>{
+test('the introductory experiment links directly to its live actions without a detour through menus',()=>{
  assert.match(source,/\[Start here walkthrough\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
- assert.match(source,/In \*\*Start here\*\*, choose \*\*Can the current make the gas turn\?\*\*/);
+ const introduction=source.split('## 1.')[0];
+ assert.deepEqual([...introduction.matchAll(/try=([A-Za-z]+)\)/g)].map(match=>match[1]),['currentExperiment','endSpin']);
+ assert.doesNotMatch(introduction,/In \*\*Start here\*\*, choose/);
  assert.doesNotMatch(source,/Start here → Experiments|reopen \*\*Start here\*\* to return/);
 });
