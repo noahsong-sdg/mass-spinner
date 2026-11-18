@@ -46,6 +46,24 @@ test('free placement releases mobile reservation and Home restores measured defa
  restored.ui.reset();assert.equal(restored.inset(),'297px');
 });
 
+test('desktop human scale reserves playback space only while enabled and automatically placed',t=>{
+ const f=fixture(t);f.viewport(1000);assert.equal(f.inset(),'0px');
+ const button=f.doc.createElement('button');button.className='apparatus-scale';f.doc.querySelector('.apparatus-frame')!.append(button);
+ const toggle=(enabled:boolean)=>{button.setAttribute('aria-pressed',String(enabled));button.dispatchEvent(new f.dom.window.CustomEvent('apparatus-scalechange',{bubbles:true}));};
+ toggle(true);assert.equal(f.inset(),'297px','whole figure gets an unobscured camera frame');
+ toggle(false);assert.equal(f.inset(),'0px','close-up retains its existing full frame');
+ toggle(true);f.grip.dispatchEvent(new f.dom.window.KeyboardEvent('keydown',{key:'ArrowUp',bubbles:true,cancelable:true}));
+ assert.equal(f.inset(),'0px','manual panel position remains owned by the user');
+ f.ui.reset();assert.equal(f.inset(),'297px');
+ const restored=fixture(t,'{"version":1,"x":0.5,"y":0.5}');restored.viewport(1000);
+ const savedButton=button.cloneNode(true);restored.doc.querySelector('.apparatus-frame')!.append(savedButton);
+ savedButton.dispatchEvent(new restored.dom.window.CustomEvent('apparatus-scalechange',{bubbles:true}));
+ assert.equal(restored.inset(),'0px','persisted manual position also retains the full frame');
+ const style=f.doc.createElement('style');style.textContent=readFileSync('src/fuel-playground.css','utf8');f.doc.head.append(style);
+ const rule=[...style.sheet!.cssRules].find((r:any)=>r.selectorText?.includes(':has(.apparatus-scale')) as CSSStyleRule;
+ assert.ok(rule);assert.equal(rule.style.getPropertyValue('bottom'),'var(--fuel-playback-inset,0px)');assert.equal(rule.style.getPropertyValue('height'),'auto');
+});
+
 test('hidden playback and split comparisons release reservation without requiring a window resize',async t=>{
  const f=fixture(t);assert.equal(f.inset(),'297px');
  f.panel.hidden=true;await flush();assert.equal(f.inset(),'0px');

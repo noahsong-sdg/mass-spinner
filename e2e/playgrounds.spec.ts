@@ -80,6 +80,23 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
  expect(errors).toEqual([]);
 });
 
+test('human scale: person comparison and return to apparatus close-up',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ if(await page.locator('#fuel-motion-play').getAttribute('aria-pressed')==='true')await page.locator('#fuel-motion-play').click();
+ const button=page.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true});
+ await expect(button).toHaveAttribute('aria-pressed','false');await button.click();
+ await expect(button).toHaveAttribute('aria-pressed','true');await expect(button).toHaveText('5′9″ · 1.75 m');
+ await expect.poll(async()=>{
+  const frame=await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
+  return frame&&panel?frame.y+frame.height<=panel.y:false;
+ }).toBe(true);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ await info.attach('human-scale',{body:await page.screenshot(),contentType:'image/png'});
+ await button.click();await expect(button).toHaveAttribute('aria-pressed','false');expect(errors).toEqual([]);
+});
+
 test('guide: local links, native action and accessible reading layout',async({page,context},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');

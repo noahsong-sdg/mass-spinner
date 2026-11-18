@@ -16,11 +16,11 @@ async function fixture(t:any,options:any={}){
  let size={width:1000,height:600};const bounds=()=>({...size,left:0,top:0,right:size.width,bottom:size.height,x:0,y:0,toJSON(){}});
  frame.getBoundingClientRect=bounds;const previous=(globalThis as any).ResizeObserver;
  (globalThis as any).ResizeObserver=class{observe(){}disconnect(){}};
- let scene:THREE.Scene,camera:THREE.PerspectiveCamera,controls:OrbitControls;const history:OrbitControls[]=[],selected:string[]=[],representations:any[]=[];
+ let scene:THREE.Scene,camera:THREE.PerspectiveCamera,controls:OrbitControls,renders=0,renderedCamera:number[]=[];const history:OrbitControls[]=[],selected:string[]=[],representations:any[]=[];
  const reference=new THREE.Group(),body=new THREE.Mesh(new THREE.BoxGeometry(1,.18,.18),new THREE.MeshStandardMaterial());
  body.userData.componentId='vessel';reference.add(body);
  const viewer=createApparatusViewer(frame,{...options,loader:{loadAsync:async()=>({scene:reference})},onSelect:(id:string)=>selected.push(id),onRepresentation:(v:any)=>representations.push(v),
-  displayFactory:()=>({renderer:{render(s:THREE.Scene,c:THREE.PerspectiveCamera){scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();},clear(){},setSize(){}},dispose(){}}),
+  displayFactory:()=>({renderer:{render(s:THREE.Scene,c:THREE.PerspectiveCamera){renders++;scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();renderedCamera=[...c.matrixWorld.elements,...c.projectionMatrix.elements];},clear(){},setSize(){}},dispose(){}}),
   controlsFactory:(c:THREE.PerspectiveCamera,canvas:HTMLCanvasElement)=>{
    canvas.setPointerCapture=()=>{};canvas.releasePointerCapture=()=>{};
    camera=c;controls=new OrbitControls(c,canvas);history.push(controls);return controls;
@@ -30,7 +30,7 @@ async function fixture(t:any,options:any={}){
  await viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
  return {dom,frame,viewer,selected,representations,history,reference,frames,
   step(now:number){const callbacks=[...frames.values()];frames.clear();for(const fn of callbacks)fn(now);},visibility(value:boolean){hidden=value;dom.window.document.dispatchEvent(new dom.window.Event('visibilitychange'));},
-  get scene(){return scene!;},get camera(){return camera!;},get controls(){return controls!;},
+  get scene(){return scene!;},get camera(){return camera!;},get controls(){return controls!;},get renders(){return renders;},get renderedCamera(){return renderedCamera;},
   resize(width:number,height:number){size={width,height};viewer.resize();},click(x:number,y:number){
    for(const type of ['pointerdown','pointerup']){
     const event=new dom.window.MouseEvent(type,{clientX:x,clientY:y,button:0});Object.defineProperty(event,'pointerId',{value:1});viewer.canvas.dispatchEvent(event);
@@ -78,6 +78,15 @@ test('camera synchronization uses SI vectors without echoing updates and clippin
  h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));assert.ok(cameras.length>before);
  h.click(500,300);assert.deepEqual(h.selected,[]);
 });
+test('internal camera transactions draw once after OrbitControls has applied the final pose',async t=>{
+ const h=await fixture(t);
+ for(const change of [()=>h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]}),()=>h.resize(500,600),()=>h.viewer.reset(),()=>h.frame.querySelector<HTMLButtonElement>('.apparatus-scale')!.click()]){
+  const before=h.renders;change();assert.equal(h.renders-before,1,'internal OrbitControls change must not draw an intermediate frame');
+  assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements],'draw uses the final view and projection matrices');
+ }
+ const before=h.renders;h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));
+ assert.ok(h.renders>before,'user camera gestures still draw');
+});
 test('paired SI cameras resize independently without relaying programmatic fits or compounding zoom',async t=>{
  let a:any,b:any;const events:any[]=[];
  a=await fixture(t,{onCamera:(pose:any)=>{events.push('a');b?.viewer.setCamera(pose);}});
@@ -96,6 +105,26 @@ function inside(root:THREE.Object3D,camera:THREE.Camera){
   const p=new THREE.Vector3(x,y,z).project(camera);assert.ok(Math.abs(p.x)<=1&&Math.abs(p.y)<=1,`projected bounds ${p.toArray()}`);
  }
 }
+
+test('human-scale toggle fits both objects on desktop and phone, preserves SI hardware and survives representation changes',async t=>{
+ const h=await fixture(t),button=h.frame.querySelector('.apparatus-scale') as HTMLButtonElement;
+ const person=h.scene.getObjectByName('5 foot 9 scale person')!,before=new THREE.Box3().setFromObject(h.reference).clone();
+ assert.equal(button.getAttribute('aria-pressed'),'false');assert.equal(person.visible,false);
+ button.click();assert.equal(button.getAttribute('aria-pressed'),'true');assert.equal(person.visible,true);
+ assert.deepEqual(new THREE.Box3().setFromObject(h.reference),before);inside(h.reference,h.camera);inside(person,h.camera);
+ h.resize(390,844);inside(h.reference,h.camera);inside(person,h.camera);
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
+ const accepted=h.scene.getObjectByName('SI engineering assembly')!;
+ inside(accepted,h.camera);inside(person,h.camera);
+ const humanBounds=new THREE.Box3().setFromObject(person);assert.ok(Math.abs(humanBounds.max.y-humanBounds.min.y-1.7526)<1e-10);
+ assert.ok(Math.abs(humanBounds.min.y-new THREE.Box3().setFromObject(accepted).min.y)<1e-10);assert.deepEqual(h.camera.up.toArray(),[0,1,0]);
+ button.click();assert.equal(person.visible,false);inside(accepted,h.camera);
+ button.click();await h.viewer.load({model:'replacement.glb'});assert.equal(person.visible,true);inside(h.reference,h.camera);inside(person,h.camera);
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false,'person cannot make an empty apparatus valid');assert.equal(button.disabled,true);
+ const resources=new Set<THREE.BufferGeometry|THREE.Material>();person.traverse(node=>{if(node instanceof THREE.Mesh){resources.add(node.geometry);for(const material of Array.isArray(node.material)?node.material:[node.material])resources.add(material);}});
+ let released=0;for(const resource of resources)resource.addEventListener('dispose',()=>released++);
+ h.viewer.dispose();assert.equal(released,resources.size,'shared scale resources released exactly once');
+});
 
 test('real OrbitControls retain the horizontal reference/accepted frame and cutaway sightline',async t=>{
  const h=await fixture(t),axis=projectedAxis(h.camera,new THREE.Vector3(-.5,0,0),new THREE.Vector3(.5,0,0));
