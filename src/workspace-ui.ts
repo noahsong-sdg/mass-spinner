@@ -103,13 +103,13 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   panel.id=`window-${key}`;heading.id=`window-title-${key}`;heading.tabIndex=-1;
   panel.setAttribute('aria-labelledby',heading.id);dismiss.type='button';dismiss.setAttribute('aria-label',`Close ${title}`);
   button.type='button';button.setAttribute('aria-controls',panel.id);button.setAttribute('aria-expanded','false');
-  button.addEventListener('click',()=>panel.hidden?open(key,true):close(key,true));dismiss.addEventListener('click',()=>close(key,true));
+  button.addEventListener('click',()=>{if(key==='guide')guide.openStandalone();else if(panel.hidden)open(key,true);else close(key,true);});dismiss.addEventListener('click',()=>close(key,true));
   panel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();close(key,true);}});
   bar.append(heading,dismiss);panel.append(bar,body);panel.hidden=true;rails[side].append(panel);dock.append(button);
   windows.set(key,{panel,button,body,heading,side,group:key==='target'?'target':side});return body;
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Start here','left')};
- const guideButton=windows.get('guide')!.button;guideButton.id='start-here';header.append(guideButton);
+ const guideButton=windows.get('guide')!.button;guideButton.id='start-here';guideButton.textContent='Start here ↗';guideButton.setAttribute('aria-label','Start here');guideButton.title='Open the walkthrough in a separate tab';guideButton.removeAttribute('aria-controls');guideButton.removeAttribute('aria-expanded');header.append(guideButton);
  const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated});
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);

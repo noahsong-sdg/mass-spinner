@@ -1,35 +1,6 @@
 import {guideActions,guideTopics} from './guide-topics.js';
 
-const steps=[
- {title:'Meet the centrifuge',intro:'Separate lighter and heavier atoms by spinning a gas. The default feed is lithium: ⁶Li and ⁷Li are the same element with different masses.',
-  do:'Drag the apparatus to orbit; scroll or pinch to zoom. Open the cutaway, then click a component to inspect its role and material.',
-  notice:'Current J crosses the axial magnetic field B. The J × B force turns the ions; collisions transfer rotation to neutral atoms.',
-  note:'Colors are diagnostics, not a photograph of glowing plasma. Tracers represent populations, not every atom.',actions:[['look','Show gas & drive'],['coils','Inspect the coils']]},
- {title:'Change current; watch rotation',intro:'Does turning up the electrical drive actually spin the gas faster? Change one input and compare at the same physical time.',
-  do:'1. Press Start from rest & edit current. Set Radial discharge current to 0 A. Wait for Updating to finish, then Show end-of-run speeds. 2. Press Start from rest & edit current again. Set 0.03 A, wait, then show the speeds again. Keep the other inputs unchanged.',
-  notice:'At 0 A, a run from rest stays at zero rotation. At 0.03 A, ions turn and collisions accelerate the neutrals. Read the Ions and Neutrals values below the plot; a higher speed does not mean temperature has risen.',
-  note:'Each preparation starts from rest and clears earlier drive steps, keeping your other inputs. A current edit later in a run instead inserts a drive step; cutting power then does not instantly stop moving gas. On a phone, reopen Start here to continue these instructions.',actions:[['currentExperiment','Start from rest & edit current'],['endSpin','Show end-of-run speeds']]},
- {title:'Find the lighter atoms',intro:'A radial composition profile answers: “At this distance from the axis, what percentage of the atoms are each species?”',
-  do:'Show the end of the computed trajectory. Compare the axis and wall probes, or click the gas cutaway to choose your own radius.',
-  notice:'In a rotating mixture, both species favor the wall. The heavier species favors it more, so the lighter species can be enriched toward the axis. Compare against the feed percentage, not 50%.',
-  note:'Composition is a local number percentage. It is different from density, the number of atoms per volume. No resolved density means the percentage is undefined.',actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall']]},
- {title:'Separate temperature from rotation',intro:'Faster rotation strengthens centrifugal sorting. Random thermal motion works against it.',
-  do:'Compare T with 2T at fixed rotation, then Ω with 2Ω at fixed temperature. These buttons make reference curves without changing your run.',
-  notice:'The equilibrium mass bias scales as Ω²/T. Doubling temperature halves that bias; doubling rotation multiplies it by four. A percentage or purity does not itself change by that factor.',
-  note:'These are ideal, uniform-temperature equilibrium comparisons. They are not a new time evolution or a prediction of the heating needed to reach that speed.',actions:[['temperature','Compare 2× temperature'],['rotation','Compare 2× rotation']]},
- {title:'Account for work and heat',intro:'Spinning faster costs energy. Drive work becomes rotation and losses; resistive current also deposits heat.',
-  do:'Open Drive & work. Then inspect Thermal model in Controls. To try heating, explicitly enable Evolve gas & liner temperature and choose Temperature in Plots.',
-  notice:'Rotation, ion–neutral slip and wall losses have separate energy curves. Gas redistribution also changes inertia. Numerical dissipation is solver damping, not physical heat.',
-  note:'The default temperature is fixed by an assumed bath. A work plot alone does not mean temperature is evolving. Thermal conductances and several transport properties remain assumed.',actions:[['work','Show drive work'],['thermal','Open thermal controls']]},
- {title:'Choose purity or recovery',intro:'Purity is the light-species share in your selected inner region. Recovery is the fraction of all light atoms that lies in that region.',
-  do:'Open the collection plot. Sweep across its horizontal axis: zero is the axis; one is the wall. Probe with a click or arrow keys; Home and End select the axis and wall. Read the values below the curve.',
-  notice:'For a separated mixture, a smaller inner region generally trades higher light purity for lower recovery. At the full radius, purity equals the feed and all light atoms are recovered. With no light atoms, recovery is undefined.',
-  note:'The probe keeps the same gas and time; it does not move the 3D cut marker. The setup collection slider starts a new run. These cuts partition a closed inventory. They do not simulate an extraction flow, product throughput or a real collector’s efficiency. Equilibrium opens a separate prescribed-speed calculator.',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve'],['equilibrium','Open equilibrium calculator']]},
- {title:'Make your own comparison',intro:'Pick one question: what happens if I increase wall drag, change the feed, or run longer?',
-  do:'Pin the accepted run as A in View. Change one physical input in Controls, then choose New run. Compare A and B at the same physical time, using Plots and the synchronized 3D views.',
-  notice:'First predict the direction of the change, then inspect the result. A surprising curve is a reason to check the assumptions and time scale.',
-  note:'Matching screened inputs is a narrow numerical check, not experimental accuracy. Other settings are exploratory. Reset ↺ restores the playground defaults.',actions:[['pin','Pin this run as A'],['controls','Open controls']]},
-];
+import {playgroundSteps as steps} from './playground-guide-steps.js';
 
 export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
 type GuideElements={
@@ -44,6 +15,9 @@ type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-r
 /** Optional guidance over existing live controls; no alternate simulation or physical presets. */
 export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
+ let readerWindow=win.opener as Window|null;
+ function openStandalone(){if(readerWindow&&!readerWindow.closed){readerWindow.focus();return;}readerWindow=win.open('/start.html','mass-spinner-start');}
+
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
  const intro=el('p','Seven small experiments. Your inputs stay as they are; Start from rest explicitly restarts the run.'),label=el('label','Explore'),choice=el('select');
@@ -131,12 +105,12 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    pinButton()!.click();open('view',true);
   }
  }
- // Only this embedded reader may request one of the explicitly listed native actions.
+ // Only a known same-origin reader window may request an explicitly listed action.
  win.addEventListener('message',event=>{
-  if(event.origin!==win.location.origin||event.source!==frame.contentWindow)return;
+  if(event.origin!==win.location.origin||(event.source!==frame.contentWindow&&(!readerWindow||event.source!==readerWindow)))return;
   const data:unknown=event.data;
   if(!data||typeof data!=='object'||!('type' in data))return;
-  if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string')action(data.action);
+  if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string')launch(data.action);
   else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments')showExplore();
   else if(data.type==='mass-spinner:guide-close')close('guide',true);
  });
@@ -157,8 +131,9 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const heading=el('h3',step.title);heading.tabIndex=-1;
   const actions=el('div');actions.className='guide-actions';
   for(const [key,text]of step.actions){const button=el('button',text);button.type='button';button.addEventListener('click',()=>action(key));actions.append(button);}
-  const blocks=[el('p',step.intro)];
-  for(const [title,text]of [['Try this',step.do],['Watch for',step.notice]]){const p=el('p'),strong=el('strong',`${title}. `);p.append(strong,doc.createTextNode(text));blocks.push(p);}
+  const blocks:HTMLElement[]=[el('p',step.intro)];
+  const instructions=el('ol');for(const text of step.do)instructions.append(el('li',text));blocks.push(instructions);
+  const observation=el('p');observation.append(el('strong','Watch for. '),doc.createTextNode(step.notice));blocks.push(observation);
   const note=el('p',step.note);note.className='guide-note';
   content.replaceChildren(heading,actions,...blocks,note);
   previous.disabled=index===0;next.textContent=index===steps.length-1?'Finish':'Next →';
@@ -169,5 +144,5 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  next.addEventListener('click',()=>{if(index===steps.length-1)close('guide',true);else{index++;render(true);}});
  leave.addEventListener('click',()=>close('guide',true));
  render();
- return {showPhysics,showExplore,launch};
+ return {showPhysics,showExplore,openStandalone,launch};
 }

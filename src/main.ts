@@ -422,8 +422,8 @@ baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',()=>{void showResearch();});
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
 experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch:()=>{void showResearch();},onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
-if(guideOnLoad==='start'||guideOnLoad==='physics'){
+if(guideAction)workspace.launchGuideAction(guideAction);
+else if(guideOnLoad==='start'||guideOnLoad==='physics'){
  workspace.open('guide');
  if(guideOnLoad==='physics')workspace.openPhysics(guideTopic??undefined);
- if(guideAction)workspace.launchGuideAction(guideAction);
 }

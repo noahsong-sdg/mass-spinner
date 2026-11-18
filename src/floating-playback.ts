@@ -12,8 +12,7 @@ export function floatingPlayback(panel:HTMLElement){
  function reservePlayback(){
   let inset=0;
   const mobile=win.matchMedia?.('(max-width:600px)').matches??win.innerWidth<=600;
-  const humanScale=parent.querySelector('.apparatus-scale[aria-pressed="true"]')!==null;
-  if((mobile||humanScale)&&!position&&!panel.hidden&&!parent.classList.contains('fuel-comparing')){
+  if(mobile&&!position&&!panel.hidden&&!parent.classList.contains('fuel-comparing')){
    const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect();
    // Reserve the entire bottom footprint, including the dock below the panel.
    if(p.height>0&&b.height>0)inset=Math.max(0,Math.min(p.height,p.bottom-b.top+8));
@@ -43,8 +42,8 @@ export function floatingPlayback(panel:HTMLElement){
  };
  grip.addEventListener('pointerdown',down);grip.addEventListener('pointermove',moving);
  for(const type of ['pointerup','pointercancel','lostpointercapture'] as const)grip.addEventListener(type,end);
- grip.addEventListener('keydown',keyboard);grip.addEventListener('dblclick',reset);win.addEventListener('resize',apply);parent.addEventListener('apparatus-scalechange',apply);
+ grip.addEventListener('keydown',keyboard);grip.addEventListener('dblclick',reset);win.addEventListener('resize',apply);
  const observer=win.ResizeObserver?new win.ResizeObserver(apply):null;observer?.observe(parent);observer?.observe(panel);apply();
  const visibility=new win.MutationObserver(apply);visibility.observe(panel,{attributes:true,attributeFilter:['hidden']});visibility.observe(parent,{attributes:true,attributeFilter:['class']});
- return {refresh:apply,reset,dispose(){observer?.disconnect();visibility.disconnect();win.removeEventListener('resize',apply);parent.removeEventListener('apparatus-scalechange',apply);parent.style.removeProperty('--fuel-playback-inset');grip.remove();}};
+ return {refresh:apply,reset,dispose(){observer?.disconnect();visibility.disconnect();win.removeEventListener('resize',apply);parent.style.removeProperty('--fuel-playback-inset');grip.remove();}};
 }

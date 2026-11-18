@@ -13,18 +13,20 @@ function fixture(t:any,mobile=false){
  return {doc,window,workspace,node,step(index:number){node('guide-step').value=String(index);node('guide-step').dispatchEvent(new window.Event('change'));}};
 }
 
-test('a visible start point opens optional guidance without opening or rebuilding the simulation controls',t=>{
+test('Start here opens a separate reader without changing panels, inputs or the current run',t=>{
  const f=fixture(t),input=f.node('field');input.value='.17';
- assert.equal(f.node('start-here').hidden,false);
- assert.ok(f.node('start-here').closest('.masthead'));
- assert.equal(f.node('window-guide').hidden,true);
- f.node('start-here').click();
- assert.equal(f.node('window-guide').hidden,false);assert.equal(f.node('window-controls').hidden,true);
+ let focuses=0;const reader={closed:false,focus:()=>focuses++} as unknown as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
+ f.workspace.open('controls');f.node('start-here').click();
+ assert.deepEqual(opened,[['/start.html','mass-spinner-start']]);
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
  assert.equal(f.node('field'),input);assert.equal(input.value,'.17');
- assert.equal(f.node('guide-step').options.length,7);
- assert.match(f.node('window-guide').textContent,/Your inputs stay as they are/);
- f.step(5);f.node('window-guide').querySelector('.world-close').click();f.node('start-here').click();
- assert.equal(f.node('guide-step').value,'5','reopening must keep the reader’s place');
+ assert.equal(f.node('start-here').getAttribute('aria-controls'),null);
+ f.node('start-here').click();assert.equal(opened.length,1);assert.equal(focuses,1,'focus the existing reader without reloading its reading position');
+ f.workspace.close('controls');
+ const send=(origin:string,source:any,action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action}}));
+ send('https://unrelated.example',reader,'current');send('https://example.org',f.window,'current');send('https://example.org',reader,'invalid');
+ assert.equal(f.node('window-controls').hidden,true);
+ send('https://example.org',reader,'current');assert.equal(f.node('window-controls').hidden,false);
 });
 
 test('all seven steps have a live action and retain the physical scope distinctions',t=>{
@@ -32,9 +34,9 @@ test('all seven steps have a live action and retain the physical scope distincti
  for(let i=0;i<7;i++){
   f.step(i);assert.ok(f.doc.querySelectorAll('.guide-actions button').length>=2);
   assert.equal(f.node('window-guide').querySelector('h3').nextElementSibling.className,'guide-actions','put the action before the explanation');
-  assert.match(f.node('window-guide').textContent,/Try this/);assert.match(f.node('window-guide').textContent,/Watch for/);
+  assert.equal(f.node('window-guide').querySelectorAll('ol li').length,2);assert.match(f.node('window-guide').textContent,/Watch for/);
  }
- f.step(3);assert.match(f.node('window-guide').textContent,/percentage or purity does not itself change by that factor/);
+ f.step(3);assert.match(f.node('window-guide').textContent,/percentage or purity does not itself change by that factor/i);
  f.step(5);assert.match(f.node('window-guide').textContent,/do not simulate an extraction flow/);
  f.step(6);assert.match(f.node('window-guide').textContent,/not experimental accuracy/);
  f.node('window-guide').querySelector('.guide-navigation button:nth-child(2)').click();
@@ -49,9 +51,9 @@ test('pending or missing results explain what to do instead of inventing a succe
 });
 
 test('the walkthrough respects the one-sheet mobile layout, Escape and context availability',t=>{
- const f=fixture(t,true);f.node('start-here').click();f.workspace.open('plots');
+ const f=fixture(t,true);f.workspace.open('guide');f.workspace.open('plots');
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-plots').hidden,false);
- f.node('start-here').click();assert.equal(f.node('window-plots').hidden,true);
+ f.workspace.open('guide');assert.equal(f.node('window-plots').hidden,true);
  f.node('window-guide').dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
  assert.equal(f.doc.activeElement,f.node('start-here'));assert.equal(f.node('window-guide').hidden,true);
  for(const level of ['1','3','4']){f.workspace.setLevel(level);assert.equal(f.node('start-here').hidden,true);}
@@ -65,7 +67,7 @@ test('physics reading loads on demand and preserves its place while controls or 
  assert.equal(frame.hasAttribute('src'),false,'do not load the full reading and math fonts before requested');
  f.workspace.openPhysics('energy');assert.equal(frame.getAttribute('src'),'/guide.html#energy');
  assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(f.doc.querySelector('.guide-reading').hidden,true);
- f.workspace.open('controls');f.node('start-here').click();
+ f.workspace.open('controls');f.workspace.open('guide');
  assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(frame.getAttribute('src'),'/guide.html#energy');
  const buttons=[...f.doc.querySelectorAll<HTMLButtonElement>('.guide-views button')];
  buttons[0].click();assert.equal(f.doc.querySelector('.guide-reading').hidden,false);

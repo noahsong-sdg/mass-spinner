@@ -4,6 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { copyFileSync,cpSync,mkdirSync,readFileSync,writeFileSync } from 'node:fs';
 import {qualificationPage} from './qualification-page.mjs';
+import {startPage} from './start-page.mjs';
 import {understandingPage} from './understanding-page.mjs';
 import {equilibriumPage} from './equilibrium-page.mjs';
 import {pinReleaseLinks,releaseSourceBase} from './release-links.mjs';
@@ -18,6 +19,7 @@ if(build.status===0){
  copyFileSync('output/gltf-trial/centrifuge-assembly.glb','release/models/centrifuge-assembly.glb');
  copyFileSync('output/gltf-trial/report.json','release/asset-qualification.json');
  writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
+ writeFileSync('release/start.html',startPage());
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));
  writeFileSync('release/guide-reader.js',transpileModule(readFileSync('src/guide-reader.ts','utf8'),{fileName:'guide-reader.ts',compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);

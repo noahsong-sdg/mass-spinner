@@ -145,7 +145,6 @@ body.immersive{overflow:hidden;background:#101614}
  .advanced-simulators>summary{padding-inline:10px;font-size:11px}.advanced-simulators-menu{position:fixed;top:var(--world-top);right:16px;max-height:calc(100dvh - var(--world-top) - 16px);overflow:auto}
  .world-context{left:16px}.world-context select{max-width:calc(100vw - 32px)}
  .sim-workspace:is([data-level="2"],[data-level="3"]) .apparatus-provenance{top:72px}
- .sim-workspace:is([data-level="2"],[data-level="3"]) .apparatus:has(.apparatus-scale[aria-pressed="true"])>.apparatus-provenance{top:104px}
  .world-rail{top:auto;bottom:var(--world-bottom);left:10px;right:10px;width:auto!important;max-height:min(58dvh,calc(100dvh - var(--world-top) - var(--world-bottom) - 12px),620px)}
  .world-window{flex:0 1 auto!important;max-height:inherit;border-radius:12px}
  #window-guide:has(.guide-physics:not([hidden])){height:58dvh}

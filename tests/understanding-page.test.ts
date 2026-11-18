@@ -125,8 +125,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  assert.equal((win.document.getElementById('guide-chapter') as HTMLSelectElement).value,'energy');
  win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="current"]')!.click();
  assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-action',action:'current'},'https://example.org']);
- win.document.querySelector<HTMLAnchorElement>('a[data-guide-view]')!.click();
- assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-view',view:'experiments'},'https://example.org']);
+ assert.ok(win.document.querySelector('a[href="/start.html"]'));
  win.document.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
  assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-close'},'https://example.org']);
  assert.equal(win.location.pathname,'/guide.html');

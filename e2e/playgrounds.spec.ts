@@ -86,23 +86,20 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
  expect(errors).toEqual([]);
 });
 
-test('human scale: person comparison and return to apparatus close-up',async({page},info)=>{
- const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
- await page.goto('/?level=2');
- await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- if(await page.locator('#fuel-motion-play').getAttribute('aria-pressed')==='true')await page.locator('#fuel-motion-play').click();
- const button=page.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true});
- await expect(button).toHaveAttribute('aria-pressed','false');await button.click();
- await expect(button).toHaveAttribute('aria-pressed','true');await expect(button).toHaveText('5′9″ · 1.75 m');
- await expect(page.locator('#fuel-render .apparatus-scale-note')).toContainText('Assumed chamber');
- await dimensionLabelsDoNotOverlap(page,'#fuel-render');
- await expect.poll(async()=>{
-  const frame=await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox(),panel=await page.locator('.fuel-motion').boundingBox();
-  return frame&&panel?frame.y+frame.height<=panel.y:false;
- }).toBe(true);
- expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
- await info.attach('human-scale',{body:await page.screenshot(),contentType:'image/png'});
- await button.click();await expect(button).toHaveAttribute('aria-pressed','false');await expect(page.locator('#fuel-render .apparatus-scale-note')).toBeHidden();expect(errors).toEqual([]);
+test('Start here opens a full-page walkthrough while preserving the running simulator',async({page},info)=>{
+ await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ await page.getByRole('button',{name:'Plots',exact:true}).click();const before=await exported(page);await page.getByRole('button',{name:'Close Plots',exact:true}).click();
+ const popup=page.waitForEvent('popup');
+ await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await popup;
+ await expect(reader).toHaveURL(/\/start(?:\.html)?$/);
+ await expect(reader.getByRole('heading',{name:'Can the current make the gas turn?',exact:true})).toBeVisible();
+ await expect(reader.locator('iframe')).toHaveCount(0);await expect(page.locator('#window-guide')).toBeHidden();
+ await reader.locator('[data-guide-action="endSpin"]').click();
+ await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#window-plots')).toBeVisible();
+ const after=await exported(page);expect(after.result).toEqual(before.result);
+ expect(await reader.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ expect((await new AxeBuilder({page:reader}).analyze()).violations).toEqual([]);
+ await info.attach('standalone-start-guide',{body:await reader.screenshot(),contentType:'image/png'});await reader.close();
 });
 
 test('Marathon reference geometry discloses paper dimensions and unknown hardware size',async({page},info)=>{
@@ -112,7 +109,7 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await page.locator('#marathon-apparatus').selectOption('blanket');
  await expect(page.locator('#blanket-render canvas')).toBeVisible();
  const blanket=page.locator('#blanket-render');
- await blanket.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true}).click();
+ await expect(blanket.locator('.apparatus-scale')).toHaveCount(0);
  await expect(blanket.locator('.apparatus-scale-note')).toHaveText('Paper model · R 4.2 m · a 1.2 m');
  await blanket.getByLabel('Geometry and material fidelity',{exact:true}).click();
  await expect(blanket.locator('.apparatus-provenance')).toContainText('not as-built');
@@ -123,7 +120,7 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await page.locator('#advanced-simulators > summary').click();await page.locator('#marathon-apparatus').selectOption('source');
  const beam=page.locator('#fusion-apparatus');
  await expect(beam.locator('canvas')).toBeVisible();
- await beam.getByRole('button',{name:'Human scale: 5 foot 9 person',exact:true}).click();
+ await expect(beam.locator('.apparatus-scale')).toHaveCount(0);
  await expect(beam.locator('.apparatus-scale-note')).toHaveText('Assumed dimensions · not published');
  await beam.getByLabel('Geometry and material fidelity',{exact:true}).click();
  await expect(beam.locator('.apparatus-provenance')).toContainText('dimensions are not published');
@@ -132,7 +129,7 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  expect(errors).toEqual([]);
 });
 
-test('guide: local links, native action and accessible reading layout',async({page,context},info)=>{
+test('guide: local links, native action and accessible reading layout',async({page})=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');
  await page.getByRole('link',{name:'Every menu option is explained below'}).click();
@@ -142,18 +139,9 @@ test('guide: local links, native action and accessible reading layout',async({pa
  await expect(page.locator('.katex-error')).toHaveCount(0);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);
- const profiler=await context.newCDPSession(page);
- await profiler.send('Profiler.enable');await profiler.send('Profiler.start');
- try{
-  await page.locator('a[href*="topic=momentum&try=spin"]').click();
-  await expect(page.locator('#fuel-plot')).toHaveValue('spin');
-  await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
-  expect(errors).toEqual([]);
- }finally{
-  const {profile}=await profiler.send('Profiler.stop');
-  await info.attach('guide-startup.cpuprofile',{body:JSON.stringify(profile),contentType:'application/json'});
-  await profiler.detach();
- }
+ const popup=page.waitForEvent('popup');await page.locator('a[href*="topic=momentum&try=spin"]').click();const simulator=await popup;
+ await expect(simulator.locator('#fuel-plot')).toHaveValue('spin');await expect(simulator.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ expect(errors).toEqual([]);await simulator.close();
 });
 
 for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its production module`,async({page})=>{
@@ -163,35 +151,20 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  expect(errors).toEqual([]);
 });
 
-test('control tutorial: zero drive and driven endpoint',async({page})=>{
- await page.goto('/?level=2&guide=start&try=currentExperiment');
- await expect(page.locator('#fuel-currentA')).toBeFocused({timeout:30_000});
- await page.locator('#fuel-currentA').press('Home');
+test('control tutorial changes the existing run through the separate reader',async({page})=>{
+ await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await popup;
+ await reader.locator('[data-guide-action="currentExperiment"]').click();
+ await expect(page.locator('#fuel-currentA')).toBeFocused();await page.locator('#fuel-currentA').press('Home');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await page.getByRole('button',{name:'Close Controls',exact:true}).click();
- if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
- await page.getByRole('button',{name:'Show end-of-run speeds',exact:true}).click();
- const zero=await exported(page);
- expect(zero.result.config.currentA).toBe(0);
- expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
- await page.getByRole('button',{name:'Close Plots',exact:true}).click();
- // Start here can remain open in a desktop column and becomes a single sheet on a phone.
- if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
- await page.getByRole('button',{name:'Start from rest & edit current',exact:true}).click();
+ await reader.locator('[data-guide-action="endSpin"]').click();
+ const zero=await exported(page);expect(zero.result.config.currentA).toBe(0);expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
+ await reader.locator('[data-guide-action="currentExperiment"]').click();
  await page.getByRole('button',{name:'Set Radial discharge current precisely',exact:true}).click();
- const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
- await current.fill('0.03');await current.press('Enter');
- await expect(page.locator('#fuel-currentA')).toHaveValue('0.03');
- await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await page.getByRole('button',{name:'Close Controls',exact:true}).click();
- if(await page.locator('#window-guide').isHidden())await page.getByRole('button',{name:'Start here',exact:true}).click();
- await page.getByRole('button',{name:'Show end-of-run speeds',exact:true}).click();
- const driven=await exported(page);
- expect(driven.result.config.currentA).toBe(.03);
- expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
- expect(driven.result.config.durationS).toBe(zero.result.config.durationS);
- await expect(page.locator('#fuel-plots .plot-readout')).toContainText('Neutrals: 1,');
- await page.getByRole('button',{name:'Close Plots',exact:true}).click();
+ const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});await current.fill('0.03');await current.press('Enter');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});await reader.locator('[data-guide-action="endSpin"]').click();
+ const driven=await exported(page);expect(driven.result.config.currentA).toBe(.03);expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
+ expect(driven.result.config.durationS).toBe(zero.result.config.durationS);await expect(page.locator('#window-guide')).toBeHidden();await reader.close();
 });
 
 test('Inspect: liner reference changes its response without changing gas temperature',async({page},info)=>{
