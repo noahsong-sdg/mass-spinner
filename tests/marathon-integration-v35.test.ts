@@ -7,12 +7,12 @@ import {setupWorkspace} from '../src/workspace-ui.js';
 import {simulateCoupledTarget} from '../src/coupled-target.ts';
 
 const settle=()=>new Promise(resolve=>setTimeout(resolve,400));
-function fixture(t:any){
+function fixture(t:any,requestTarget=async(request:any)=>simulateCoupledTarget(request.beam,request.config)){
  const {window}=new JSDOM(readFileSync('index.html','utf8'),{url:'https://example.com/?level=2'});
  const previous=Object.getOwnPropertyDescriptor(globalThis,'document');
  Object.defineProperty(globalThis,'document',{value:window.document,configurable:true});
  const states:any[]=[],sources:any[]=[];const models=setupMarathonModels({onState:state=>states.push(state),onSource:source=>sources.push(source),
-  requestTarget:async(request:any)=>simulateCoupledTarget(request.beam,request.config)});
+  requestTarget});
  const node=(id:string)=>window.document.getElementById(id)! as any;
  const change=(id:string,value:string|number,event='input')=>{
   node(id).value=String(value);node(id).dispatchEvent(new window.Event(event,{bubbles:true}));
@@ -26,9 +26,10 @@ function fixture(t:any){
 }
 
 test('material failure clears live source motion while explicit initial-source mode restores it',async t=>{
- const f=fixture(t);assert.ok(f.sources.at(-1));
+ let fail=false;
+ const f=fixture(t,async request=>{if(fail)throw new Error('Rejected material state');return simulateCoupledTarget(request.beam,request.config);});assert.ok(f.sources.at(-1));
  f.change('fusion-stopping-model','geant4-bragg','change');await settle();assert.ok(f.models.target.result);
- f.change('coupled-cooldownS',-1);assert.equal(f.models.target.status.phase,'invalid');
+ fail=true;f.change('coupled-replacementProbability',.5);await settle();assert.equal(f.models.target.status.phase,'invalid');
  assert.equal(f.states.at(-1),null);assert.equal(f.sources.at(-1),null);
  f.change('fusion-stopping-model','linear','change');assert.ok(f.sources.at(-1));
  assert.equal(f.sources.at(-1).config.stoppingModel,'linear');
