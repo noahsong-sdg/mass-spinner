@@ -15,12 +15,12 @@ jobs:
       - name: Prepare locked tools
         run: |
           git fetch --no-tags --depth=1 origin c2769b2e9d327d43fc87c55e96a5f9ba981a6f0e
-          docker pull node:22-bookworm
-          docker image inspect node:22-bookworm --format '{{.Id}}'
-          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm npm ci --ignore-scripts --no-audit --no-fund
+          docker pull node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          docker image inspect node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 --format '{{.Id}}'
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 npm ci --ignore-scripts --no-audit --no-fund
       - name: Execute offline characterization
         run: |
-          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:22-bookworm sh -eu -c '
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 sh -eu -c '
             regression=$(mktemp -d)
             cp -R src tests "$regression/"
             cp package.json "$regression/"
