@@ -56,7 +56,9 @@ def finish(obj, name, material, component, parent, bevel=.0003):
     obj['geometryBasis'] = BASIS
     for face in obj.data.polygons:
         face.use_smooth = True
-    obj.data.use_auto_smooth = True
+    # Blender 4.1+ uses mesh sharp-edge data; this removed RNA property is unnecessary.
+    if bpy.app.version < (4, 1, 0):
+        obj.data.use_auto_smooth = True
     if bevel:
         modifier = obj.modifiers.new('Machined edge radii', 'BEVEL')
         modifier.width, modifier.segments = bevel, 3
