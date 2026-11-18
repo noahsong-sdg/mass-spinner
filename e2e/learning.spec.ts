@@ -66,3 +66,24 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await expect(page.locator('.fuel-comparison-inputs')).toContainText('Neutral wall drag rate');
  await reader.close();
 });
+
+test('an independently opened reader reconnects across guide navigation without resetting its simulator',async({page})=>{
+ await page.goto('/start.html');
+ const pending=page.waitForEvent('popup');await page.getByRole('link',{name:'Simulator ↗',exact:true}).click();
+ const simulator=await pending;
+ await expect(simulator.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await simulator.getByRole('button',{name:'Controls',exact:true}).click();
+ const current=simulator.locator('#fuel-currentA'),before=await current.inputValue();
+ await current.focus();await current.press('ArrowRight');await expect(current).not.toHaveValue(before);
+ await expect(simulator.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const edited=await current.inputValue();
+ await simulator.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await expect(simulator.locator('#window-controls')).not.toBeVisible();let navigations=0;
+ simulator.on('framenavigated',frame=>{if(frame===simulator.mainFrame())navigations++;});
+ await page.getByRole('link',{name:'Physics & equations →',exact:true}).click();
+ await page.locator('[data-guide-action="current"]').first().click();
+ await expect(simulator.locator('#window-controls')).toBeVisible();
+ await expect(current).toHaveValue(edited);expect(navigations).toBe(0);
+ await expect(page.locator('#reader-status')).toContainText('Sent to the simulator');
+ await simulator.close();
+});

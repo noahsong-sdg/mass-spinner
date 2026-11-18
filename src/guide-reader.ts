@@ -54,10 +54,24 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   const link=(event.target as Element).closest<HTMLAnchorElement>('a[data-guide-action],a[data-guide-view],a[data-guide-simulator]');if(!link)return;
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();
-  if(!simulatorWindow||simulatorWindow.closed){simulatorWindow=win.open(link.href,'mass-spinner-simulator');return;}
+  const status=doc.getElementById('reader-status');
+  // Looking up a named window with a URL would navigate it and discard its current run.
+  if(!simulatorWindow||simulatorWindow.closed){
+   simulatorWindow=win.open('','mass-spinner-simulator');
+   if(!simulatorWindow){if(status)status.textContent='Allow the simulator window to open, then try this action again.';return;}
+   try{
+    const url=simulatorWindow.location.href;
+    if(url==='about:blank'){simulatorWindow.location.replace(link.href);return;}
+    if(new URL(url).origin!==win.location.origin){if(status)status.textContent='The named simulator tab is on another site. Close it or open Mass Spinner there, then try again.';simulatorWindow=null;return;}
+   }catch{
+    // Cross-origin window locations are intentionally unreadable; never navigate that tab.
+    if(status)status.textContent='The named simulator tab is on another site. Close it or open Mass Spinner there, then try again.';
+    simulatorWindow=null;return;
+   }
+  }
   if(link.dataset.guideAction)simulatorWindow.postMessage({type:'mass-spinner:guide-action',action:link.dataset.guideAction},win.location.origin);
   else if(link.dataset.guideView)simulatorWindow.postMessage({type:'mass-spinner:guide-view',view:'experiments'},win.location.origin);
-  const status=doc.getElementById('reader-status');if(status)status.textContent='Sent to the simulator. Switch to its tab to see the result, then return here for the next step.';
+  if(status)status.textContent='Sent to the simulator. Switch to its tab to see the result, then return here for the next step.';
   if(!embedded)simulatorWindow.focus();
  });
  doc.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'){event.preventDefault();win.parent.postMessage({type:'mass-spinner:guide-close'},win.location.origin);}});

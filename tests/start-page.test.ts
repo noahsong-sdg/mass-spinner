@@ -39,11 +39,40 @@ test('a direct or stale reader opens one simulator and reuses it for subsequent 
  for(const stale of [false,true]){
   const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const win=dom.window;
   if(stale)Object.defineProperty(win,'opener',{value:{closed:true}});
-  const sent:unknown[][]=[],opened:unknown[][]=[],simulator={closed:false,postMessage:(...args:unknown[])=>sent.push(args),focus(){}};
+  const sent:unknown[][]=[],opened:unknown[][]=[],navigated:string[]=[],simulator={closed:false,location:{href:'about:blank',replace:(url:string)=>navigated.push(url)},postMessage:(...args:unknown[])=>sent.push(args),focus(){}};
   win.open=(...args)=>{opened.push(args);return simulator as unknown as Window;};setupGuideReader(win);
   win.document.querySelector<HTMLAnchorElement>('[data-guide-action="currentExperiment"]')!.click();
-  assert.deepEqual(opened,[['https://example.org/?level=2&try=currentExperiment','mass-spinner-simulator']]);
+  assert.deepEqual(opened,[['','mass-spinner-simulator']]);
+  assert.deepEqual(navigated,['https://example.org/?level=2&try=currentExperiment']);
   win.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
   assert.equal(opened.length,1);assert.deepEqual(sent,[[{type:'mass-spinner:guide-action',action:'endSpin'},'https://example.org']]);
  }
+});
+
+test('a direct reader reconnects after page navigation without navigating the existing simulator',t=>{
+ const sent:unknown[][]=[],opened:unknown[][]=[],navigated:string[]=[];
+ const simulator={closed:false,location:{href:'https://example.org/?level=2',replace:(url:string)=>navigated.push(url)},postMessage:(...args:unknown[])=>sent.push(args),focus(){}};
+ // A new document has no page-local simulator reference, as after navigating between guides.
+ for(const path of ['/start.html','/guide.html']){
+  const dom=new JSDOM(startPage(),{url:`https://example.org${path}`});t.after(()=>dom.window.close());
+  dom.window.open=(...args)=>{opened.push(args);return simulator as unknown as Window;};setupGuideReader(dom.window);
+  dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
+ }
+ assert.deepEqual(opened,[['','mass-spinner-simulator'],['','mass-spinner-simulator']]);
+ assert.equal(navigated.length,0);assert.equal(sent.length,2);
+ assert.deepEqual(sent[1],[{type:'mass-spinner:guide-action',action:'endSpin'},'https://example.org']);
+});
+
+test('reconnecting never navigates or sends an action to a cross-origin named tab',t=>{
+ const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());let sent=0;
+ const simulator={closed:false,get location():Location{throw new DOMException('Cross-origin access denied','SecurityError');},postMessage:()=>sent++,focus(){}};
+ dom.window.open=(_url,target)=>{assert.equal(_url,'');assert.equal(target,'mass-spinner-simulator');return simulator as unknown as Window;};
+ setupGuideReader(dom.window);dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
+ assert.equal(sent,0);assert.match(dom.window.document.getElementById('reader-status')!.textContent!,/another site/);
+});
+
+test('blocked simulator popups leave a useful instruction instead of claiming an action was sent',t=>{
+ const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());dom.window.open=()=>null;
+ setupGuideReader(dom.window);dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
+ assert.match(dom.window.document.getElementById('reader-status')!.textContent!,/Allow the simulator window/);
 });
