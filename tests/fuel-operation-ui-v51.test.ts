@@ -162,7 +162,7 @@ test('Inspect edits reach the real solver and response buttons show the accepted
 
 test('liner response distinguishes a fixed bath from enabled thermal evolution and marks the exact reference temperature',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-component','liner','change');
- const number=f.ui.nodes.inspect.querySelector('input[type=number]');number.focus();number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('input'));await f.ui.run();
+ const number=f.ui.nodes.inspect.querySelector<HTMLInputElement>('input[type=number]')!;number.focus();number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('input'));await f.ui.run();
  const accepted=f.ui.latest,count=f.requests.length;
  number.dispatchEvent(new f.doc.defaultView.Event('change'));number.blur();
  assert.equal(f.node('fuel-export').disabled,false,'leaving an accepted number edit must not submit the same input again');
@@ -173,6 +173,12 @@ test('liner response distinguishes a fixed bath from enabled thermal evolution a
  assert.equal(f.requests.length,count,'the first response click after an accepted number edit must navigate without rerunning');
  assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/1200,/);
  assert.equal(f.ui.latest.result.config.gasK,500);
+ f.change('fuel-linerK',1100);await f.ui.run();
+ number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
+ assert.equal(f.ui.latest.result.config.linerK,1200,'a change-only edit after an external slider change must remain active');
+ number.value='';number.dispatchEvent(new f.doc.defaultView.Event('input'));
+ number.value='1200';number.dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
+ assert.equal(f.node('fuel-export').disabled,false,'correcting an invalid field back to its previous value must recompute');
  f.change('fuel-currentA',0);f.change('fuel-linerK',600);f.change('fuel-durationS',.01);
  f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView.Event('change'));await f.ui.run();
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'thermal');
