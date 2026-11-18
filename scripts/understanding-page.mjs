@@ -11,7 +11,9 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').repla
 /** Render the same reviewed guide as GitHub, with math compiled at build time. */
 /** @param {string} markdown @param {string} revision @param {{title:string;number:string;topics:readonly import('../src/guide-topics.js').GuideTopic[]}=} tutorial */
 export function understandingPage(markdown,revision,tutorial){
- const topics=tutorial?.topics??guideTopics,title=tutorial?`${tutorial.number} · ${tutorial.title}`:'Physics guide';
+ /** @type {readonly import('../src/guide-topics.js').GuideTopic[]} */
+ const topics=tutorial?.topics??guideTopics;
+ const title=tutorial?`${tutorial.number} · ${tutorial.title}`:'Physics guide';
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
  const sourceBase=releaseSourceBase(revision)+'docs/';
  let enhancement='';
