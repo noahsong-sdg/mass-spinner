@@ -358,7 +358,6 @@ while its selected marker moves. After editing, wait for the accepted result.
 | Thermal switches; storage; conductances; coolant | Enable heat evolution and set exchange/cooling; Temperature. Spatial tungsten supplies material heat capacity. |
 | Liner thickness; gas conductivity | Enabled spatial heat transport; Temperature profile. Resolution tests numerical sensitivity, not new physics. |
 | Fusion power; burn fraction; processing time | Separate steady D–T inventory accounting, not lithium dynamics. |
-| Lithium-seeded CIV reference | Reported critical-ionization-velocity reference only; changes neither species, ionization nor rotation. |
 | Lithium-seeded CIV reference | Reported reference only; no ionization solution or enforced speed limit. |
 | View; gas view; time | Presentation and sampling only, not physical input changes. |
 
