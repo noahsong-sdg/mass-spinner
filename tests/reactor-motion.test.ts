@@ -84,6 +84,13 @@ test('area changes beam radius; refinement cannot exceed fixed GPU buffers; reve
  f.layer.update({kind:'power-reference'},f.root);assert.equal(f.panel.dataset.basis,'power-reference');assert.equal(f.count(0),0);assert.match(f.panel.textContent!,/not calculated/);
 });
 
+test('SI beam axis follows the solver origin rather than an asymmetric cutaway bounding box',t=>{
+ const f=fixture(t),before=f.positions(0);
+ f.root.children[0].position.y=-.03;
+ const microscope=f.root.children[0].clone();microscope.position.set(1,2,0);microscope.userData.expandedDepth=true;f.root.add(microscope);
+ f.layer.update(f.state,f.root);assert.deepEqual(f.positions(0),before);
+});
+
 test('viewer publishes pre-load reactor state and stops RAF while hidden, pending or disposed',async t=>{
  const f=fixture(t),win=f.frame.ownerDocument.defaultView!,frames=new Map<number,FrameRequestCallback>();let next=0;
  Object.defineProperty(win.document,'hidden',{value:false});

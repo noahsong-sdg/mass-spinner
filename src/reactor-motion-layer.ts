@@ -103,8 +103,11 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
    if(state?.kind==='beam'&&root){
     root.updateWorldMatrix(true,true);const b=boundsFor(root,'target'),accelerator=boundsFor(root,'accelerator');
     if(b.isEmpty()||accelerator.isEmpty()){root=null;draw();return;}
-    target=b.getCenter(target);end=b.min.x;target.x=end;start=accelerator.max.x;span=Math.max(end-start,.001);
-    si=root.name==='SI engineering assembly';radius=si?Math.sqrt(state.areaM2/Math.PI):.1*Math.sqrt(state.areaM2/.01);
+    si=root.name==='SI engineering assembly';
+    // The accepted target front is solver z=0, not the centre of its cutaway or depth microscope.
+    target=si?root.localToWorld(target.set(0,0,0)):b.getCenter(target);
+    end=si?target.x:b.min.x;target.x=end;start=accelerator.max.x;span=Math.max(end-start,.001);
+    radius=si?Math.sqrt(state.areaM2/Math.PI):.1*Math.sqrt(state.areaM2/.01);
    }
    draw();
   },tick(dt:number){if(!paused&&!reduced?.matches)phase+=Math.min(dt,.05);draw(false);},
