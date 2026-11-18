@@ -3,7 +3,7 @@ import {readFileSync} from 'node:fs';
 import {relative,resolve} from 'node:path';
 
 const marker='__MASS_SPINNER_WORKER_IDENTITY_V1__';
-/** @param {import("node:crypto").BinaryLike} value */
+/** @param {string | Uint8Array} value */
 const hash=value=>createHash('sha256').update(value).digest('hex');
 
 /** Runs in Vite's worker build, whose module IDs are the producing import graph. */
