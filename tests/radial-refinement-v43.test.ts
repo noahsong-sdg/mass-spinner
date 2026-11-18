@@ -29,6 +29,8 @@ test('actual radial click handler refuses the cap and names the two executed gri
    equilibriumPresentation:(result:ReturnType<typeof solveEquilibrium>)=>({diagnostics:centrifugeDiagnostics(result)})
   });
   await click();
+  // Production DOM listeners return void; the inner operation settles separately.
+  await new Promise<void>(resolve=>setImmediate(resolve));
   if(bins===2000){
    assert.deepEqual(executed,[]);assert.equal(elements.refine.disabled,true);
    assert.match(elements['refinement-status'].textContent,/No finer supported grid; radial convergence unassessed/);

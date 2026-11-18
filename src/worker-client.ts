@@ -25,10 +25,12 @@ export function requestSimulationWithIdentity(request:Record<string,unknown>,sig
   signal?.addEventListener('abort',abort,{once:true});
   worker.onmessage=({data:payload}:{data:unknown})=>{
    cleanup();
-   if(!payload||typeof payload!=='object'||!('result' in payload||'error' in payload)){reject(new Error('Unsupported worker response.'));return;}
+   const versioned=['coupled-target','fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'].includes(String(request.kind));
+   const unsupported=versioned?`Unsupported ${String(request.kind)} worker response.`:'Unsupported worker response.';
+   if(!payload||typeof payload!=='object'||!('result' in payload||'error' in payload)){reject(new Error(unsupported));return;}
    const data=payload as Record<string,unknown>;
-   if(data.result===undefined&&data.error===undefined){reject(new Error('Unsupported worker response.'));return;}
-   if(['coupled-target','fuel-centrifuge','fuel-operating-map','fuel-spatial-experiment'].includes(String(request.kind))&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
+   if(data.result===undefined&&data.error===undefined){reject(new Error(unsupported));return;}
+   if(versioned&&(data?.id!==request.id||data?.kind!==request.kind||data?.schemaVersion!==1)){
     reject(new Error(`Unsupported ${String(request.kind)} worker response.`));return;
    }
    if(data.error!==undefined){reject(new Error(typeof data.error==='string'?data.error:'Physics worker failed.'));return;}

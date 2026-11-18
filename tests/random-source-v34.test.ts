@@ -4,6 +4,27 @@ import {readFileSync} from 'node:fs';
 import {DEFAULT_DOUBLEWELL,simulateDoublewell,validateDoublewell,type DoublewellConfig} from '../src/doublewell-dynamics.js';
 import {executeSeed,summarizeConvergence,validateConvergencePlan,type ConvergencePlan,type SeedRun} from '../src/convergence.js';
 
+// Only derived diagnostics may differ by two relative machine epsilons across V8.
+// Every trajectory, RNG sample, count, metadata field and other number stays exact.
+function frozenReport(actual:unknown,expected:unknown,allowRoundoff=false):void{
+ if(allowRoundoff&&typeof actual==='number'&&typeof expected==='number'){
+  assert.ok(Number.isFinite(actual)&&Number.isFinite(expected));
+  assert.ok(Math.abs(actual-expected)<=2*Number.EPSILON*Math.abs(expected),`${actual} differs from frozen ${expected}`);return;
+ }
+ if(actual&&expected&&typeof actual==='object'&&typeof expected==='object'){
+  assert.equal(Array.isArray(actual),Array.isArray(expected));
+  assert.deepEqual(Object.keys(actual),Object.keys(expected));
+  const a=actual as Record<string,unknown>,b=expected as Record<string,unknown>;
+  for(const key of Object.keys(a)){
+   const diagnostic=['normalizedAbsolutePairTorque','localityQuadraticVariationScale','particlesPerDebyeSphere','debyePopulation'].includes(key);
+   const metric=key==='value'&&typeof a.label==='string'&&[
+    'Absolute pair torque / P scale','Pair torque quadratic-variation scale / P scale','Initial particles per Debye sphere',
+   ].includes(a.label);
+   frozenReport(a[key],b[key],diagnostic||metric);
+  }
+ }else assert.deepEqual(actual,expected);
+}
+
 const fixture=JSON.parse(readFileSync('tests/fixtures/rng-legacy-v33.json','utf8'));
 const legacy=():DoublewellConfig=>structuredClone(fixture.config);
 const phi='philox4x32-10-u32-v1' as const;
@@ -16,8 +37,8 @@ const incomplete=(declared:ConvergencePlan,runs:SeedRun[],hash:string)=>
 test('new double-well defaults explicitly select versioned Philox',()=>{assert.equal(DEFAULT_DOUBLEWELL.randomSource,phi);});
 test('omitted and explicit legacy selectors preserve the frozen v33 trajectory and raw run',()=>{
  for(const config of [legacy(),{...legacy(),randomSource:'mulberry32-v1' as const}]){
-  assert.deepEqual(persisted(simulateDoublewell(config)),{...fixture.trajectory,config});
-  assert.deepEqual(persisted(strip(executeSeed({id:'tiny',config},42,'same'))),{...strip(fixture.seedRun),config:{...config,seed:42}});
+  frozenReport(persisted(simulateDoublewell(config)),{...fixture.trajectory,config});
+  frozenReport(persisted(strip(executeSeed({id:'tiny',config},42,'same'))),{...strip(fixture.seedRun),config:{...config,seed:42}});
  }
 });
 test('new valid runs write resolved RNG provenance without migrating omitted legacy config',()=>{
@@ -56,4 +77,11 @@ test('RNG changes cannot masquerade as timestep, particle, spatial or method ref
   const declared=plan(legacy());declared.levels.push({id:'fine',config:{...legacy(),...change,randomSource:phi}});
   declared.comparisons=[{kind,coarse:'tiny',fine:'fine'}];assert.throws(()=>validateConvergencePlan(declared),/undeclared/);
  }
+});
+
+test('frozen diagnostic allowance rejects material drift and never applies to trajectories',()=>{
+ frozenReport({debyePopulation:1+Number.EPSILON},{debyePopulation:1});
+ assert.throws(()=>frozenReport({debyePopulation:1+4*Number.EPSILON},{debyePopulation:1}));
+ assert.throws(()=>frozenReport({position:1+Number.EPSILON},{position:1}));
+ assert.throws(()=>frozenReport({debyePopulation:NaN},{debyePopulation:1}));
 });
