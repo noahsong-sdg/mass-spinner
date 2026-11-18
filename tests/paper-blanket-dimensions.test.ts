@@ -25,7 +25,13 @@ test('Blender blanket has the published midplane build in actual SI vertex coord
  let checked=0;
  scene.traverse(node=>{
   if(!(node instanceof THREE.Mesh))return;
-  const entry=expected.find(([name])=>node.name.startsWith(name.replaceAll(' ','_'))||node.name.startsWith(name));assert.ok(entry,node.name);
+  const entry=expected.find(([name])=>node.name.startsWith(name.replaceAll(' ','_'))||node.name.startsWith(name));
+  if(!entry){
+   assert.ok(['plasma','tf-coils','pf-coils','cryostat','plant-supports','plant-services'].includes(node.userData.componentId),node.name);
+   assert.match(node.userData.geometryBasis,/conceptual.*not as-built/i);
+   node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])material.dispose();
+   return;
+  }
   const position=node.geometry.getAttribute('position'),radii:number[]=[];
   for(let i=0;i<position.count;i++){
    const v=new THREE.Vector3().fromBufferAttribute(position,i).applyMatrix4(node.matrixWorld);
@@ -44,10 +50,26 @@ test('dimension disclosures distinguish published models, inferred sizes and unk
  assert.deepEqual([d.majorRadiusM,d.minorRadiusM,d.elongation,d.triangularity],[4.2,1.2,1.6,.25]);
  assert.ok(Math.abs(d.inboardBreederM-(.750-(d.channelM-.005)))<1e-12);
  assert.ok(Math.abs(d.outboardBreederM-(1-(d.channelM-.005)))<1e-12);
- assert.equal(manifest.assets.blanket.geometryLabel,'Paper dimensions');
+ assert.equal(manifest.assets.blanket.geometryLabel,'Paper core · conceptual hardware');
  assert.equal(manifest.assets.blanket.renderSettings.samples,24);assert.equal(manifest.assets.blanket.renderSettings.denoising,true);
  assert.ok(manifest.assets.blanket.renderSettings.viewTransform);
  assert.match(manifest.assets.blanket.caption,/unknown.*omitted/i);assert.match(manifest.assets.blanket.caption,/not as-built/i);
  assert.match(manifest.assets['beam-target'].caption,/dimensions.*not published/i);
  for(const [mode,asset]of Object.entries<any>(manifest.assets))assert.ok(asset.scaleLabel,`${mode} must identify scale provenance`);
+});
+
+// These are display counts, not an assertion about Marathon's magnet design.
+test('reactor context has inspectable plasma, magnets, cryostat, supports and service interfaces',async()=>{
+ const bytes=readFileSync('web-assets/models/blanket.glb');
+ const {scene}=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOffset,bytes.byteOffset+bytes.byteLength),'');
+ const counts=new Map<string,number>(),ids=new Set<string>();
+ scene.traverse(node=>{
+  if(!(node instanceof THREE.Mesh))return;
+  ids.add(node.userData.componentId);
+  const prefix=node.name.replace(/ /g,'_').replace(/_\d.*$/,'');counts.set(prefix,(counts.get(prefix)??0)+1);
+  node.geometry.dispose();for(const material of Array.isArray(node.material)?node.material:[node.material])material.dispose();
+ });
+ for(const id of ['plasma','tf-coils','pf-coils','cryostat','plant-supports','plant-services'])assert.ok(ids.has(id),id);
+ assert.equal(counts.get('TF_winding'),12);assert.equal(counts.get('Central_solenoid_module'),9);
+ assert.deepEqual(manifest.assets.blanket.modelRegionComponentIds,[],'plasma now has actual pickable geometry');
 });

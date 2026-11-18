@@ -58,7 +58,7 @@ test('apparatus fidelity disclosure follows the displayed asset instead of imply
  const disclosure=root.children[0].children[3];
  assert.equal(disclosure.children[0].textContent,'Assumed dimensions');assert.match(text(disclosure),/layer thickness exaggerated/i);
  (disclosure as any).open=true;ui.show('blanket');
- assert.equal((disclosure as any).open,false);assert.equal(disclosure.children[0].textContent,'Paper dimensions');assert.match(text(disclosure),/not as-built/i);
+ assert.equal((disclosure as any).open,false);assert.equal(disclosure.children[0].textContent,'Paper core · conceptual hardware');assert.match(text(disclosure),/not as-built/i);
  assert.match(text(disclosure),/unknown plasma-to-wall clearance|plasma-to-wall clearance is unknown/i);
  assert.equal(disclosure.children[2].hidden,false);assert.equal((disclosure.children[2] as any).href,'https://www.marathonfusion.com/alchemy.pdf#page=13');
  assert.doesNotMatch(text(disclosure),/cooled substrate/i);

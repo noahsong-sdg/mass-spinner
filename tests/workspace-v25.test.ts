@@ -230,3 +230,22 @@ test('Escape on a resizer dismisses its rail, and unavailable actions cannot str
  f.setLevel('3');f.workspace.open('view',true);f.document.querySelector<HTMLElement>('.viewport-tools')!.hidden=true;f.workspace.refreshMode();
  assert.ok(!f.document.activeElement?.closest('[hidden]'),'removing View moves focus to a visible action');
 });
+
+test('Reactor navigation exposes distinct beam and power-reference scenes without changing saved apparatus values',t=>{
+ const f=fixture(t);setupExperience({selectMode(){},invalidate(){},showView(){},showResearch(){},onLevelChange:level=>f.workspace.setLevel(level)});
+ const select=f.node('marathon-apparatus') as HTMLSelectElement;
+ f.node('show-reactor').click();
+ assert.equal(select.value,'source');assert.equal(f.document.body.dataset.level,'2');
+ assert.equal(f.node('show-reactor').getAttribute('aria-pressed'),'true');
+ assert.equal(f.node('fusion-apparatus').parentElement!.hidden,false);
+ assert.equal(select.closest<HTMLElement>('.world-context')!.hidden,false);
+ assert.equal(select.closest('#advanced-marathon'),null);
+ select.value='blanket';select.dispatchEvent(new f.window.Event('change'));
+ assert.equal(f.node('blanket-render').parentElement!.hidden,false);
+ assert.equal(f.node('level-title').textContent,'Fusion power reference');
+ f.document.querySelector<HTMLButtonElement>('button[data-level="2"]')!.click();
+ assert.equal(select.value,'centrifuge');assert.equal(select.closest<HTMLElement>('.world-context')!.hidden,true);
+ assert.equal(f.node('show-reactor').getAttribute('aria-pressed'),'false');
+ f.document.querySelector<HTMLButtonElement>('button[data-level="3"]')!.click();f.node('show-reactor').click();
+ assert.equal(f.document.body.dataset.level,'2');assert.equal(select.value,'source');
+});

@@ -160,6 +160,17 @@ body.immersive{overflow:hidden;background:#101614}
  .world-top .learning-path{padding-right:8px}
  .world-top #start-here{padding:8px;font-size:11px}
 }
-@media(max-width:380px){.world-top #start-here{position:absolute;top:76px;right:12px;background:#18211df5}}
+@media(max-width:480px){.world-top #start-here{position:absolute;top:76px;right:12px;background:#18211df5}}
 /* Mode-specific controls and unavailable results retain the native hidden contract. */
 body.immersive .sim-workspace [hidden]{display:none!important}
+
+/* Keep the reactor chooser above the model scale disclosure. */
+.sim-workspace[data-context="blanket"] .apparatus-scale-note,
+.sim-workspace[data-context="source"] .apparatus-scale-note{top:64px}
+
+@media(max-width:480px){.world-reactor-context select{max-width:calc(100vw - 124px)}}
+
+@media(max-width:740px){
+ .sim-workspace[data-context="blanket"] .apparatus-provenance,
+ .sim-workspace[data-context="source"] .apparatus-provenance{top:116px}
+}

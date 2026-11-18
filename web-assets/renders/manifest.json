@@ -681,67 +681,67 @@
     "blanket": {
       "image": "/renders/blanket.webp",
       "png": "/renders/blanket.png",
-      "title": "Future power-plant blanket concept",
-      "caption": "Published neutronics model, not as-built Marathon hardware. Table 1 and section 4.1; selected 210 mm channel case. At 210 mm channel width, fixed outer build gives inboard FLiBe = 750 - (210 - 5) = 545 mm; outboard = 1000 - (210 - 5) = 795 mm. Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Coils, cryostat, supports and services are not specified or modeled. Optical finishes are illustrative.",
+      "title": "Fusion power reference",
+      "caption": "Published neutronics model, not as-built Marathon hardware. Table 1 and section 4.1; selected 210 mm channel case. At 210 mm channel width, fixed outer build gives inboard FLiBe = 750 - (210 - 5) = 545 mm; outboard = 1000 - (210 - 5) = 795 mm. Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Added plasma location marker, coils, cryostat, supports and service interfaces are conceptual; their sizes, count and materials are not specified by Marathon. They do not represent an engineered plant or a solved magnetic equilibrium. Optical finishes are illustrative.",
       "hotspots": [
         {
           "id": "plasma",
           "label": "Plasma region",
-          "xPct": 72.73941040039062,
-          "yPct": 58.36889445781708
+          "xPct": 63.82138729095459,
+          "yPct": 55.086749792099
         },
         {
           "id": "armor",
           "label": "Tungsten armor",
-          "xPct": 74.08817410469055,
-          "yPct": 58.86528491973877
+          "xPct": 64.64118361473083,
+          "yPct": 55.38846552371979
         },
         {
           "id": "structure",
           "label": "Inner V alloy",
-          "xPct": 74.12161231040955,
-          "yPct": 58.87759327888489
+          "xPct": 64.66150879859924,
+          "yPct": 55.3959459066391
         },
         {
           "id": "multiplier",
           "label": "Hg\u2013Li channel",
-          "xPct": 74.61206912994385,
-          "yPct": 59.05809998512268
+          "xPct": 64.95961546897888,
+          "yPct": 55.50566017627716
         },
         {
           "id": "breeder",
           "label": "FLiBe",
-          "xPct": 76.75225138664246,
-          "yPct": 59.845760464668274
+          "xPct": 66.26045107841492,
+          "yPct": 55.984413623809814
         },
         {
           "id": "tank",
           "label": "Eurofer97 tank",
-          "xPct": 78.8255512714386,
-          "yPct": 60.60880720615387
+          "xPct": 67.52063632011414,
+          "yPct": 56.448206305503845
         }
       ],
       "model": "/models/blanket.glb",
       "modelBounds": {
         "min": [
-          -6.480000019073486,
-          -2.875822067260742,
-          -6.480000019073486
+          -7.460000038146973,
+          -4.440000057220459,
+          -7.460000038146973
         ],
         "max": [
-          4.582051753997803,
-          2.875822067260742,
-          6.480000019073486
+          7.460000038146973,
+          3.9700000286102295,
+          7.925000190734863
         ],
         "center": [
-          -0.9489741325378418,
           0.0,
-          0.0
+          -0.23500001430511475,
+          0.2325000762939453
         ],
         "size": [
-          11.062051773071289,
-          5.751644134521484,
-          12.960000038146973
+          14.920000076293945,
+          8.410000085830688,
+          15.385000228881836
         ]
       },
       "modelCamera": {
@@ -765,27 +765,36 @@
       "componentIds": [
         "armor",
         "breeder",
+        "cryostat",
         "multiplier",
+        "pf-coils",
+        "plant-services",
+        "plant-supports",
         "plasma",
         "structure",
-        "tank"
+        "tank",
+        "tf-coils"
       ],
       "modelMeshComponentIds": [
         "armor",
         "breeder",
+        "cryostat",
         "multiplier",
+        "pf-coils",
+        "plant-services",
+        "plant-supports",
+        "plasma",
         "structure",
-        "tank"
+        "tank",
+        "tf-coils"
       ],
-      "modelRegionComponentIds": [
-        "plasma"
-      ],
-      "modelSHA256": "828ad7bb045c688b6f7a20f5c6818444c556046f4cc262857e301fa72f59e057",
-      "scaleLabel": "Paper model \u00b7 R 4.2 m \u00b7 a 1.2 m",
+      "modelRegionComponentIds": [],
+      "modelSHA256": "9318c9533100e4d0f7ae013a51c792ce09ae3fa4a4dd6d3adefd4a23d71f254b",
+      "scaleLabel": "Power reference \u00b7 R 4.2 m \u00b7 a 1.2 m \u00b7 outer hardware conceptual",
       "geometryBuilder": "blender/build_paper_blanket.py",
-      "geometryBuilderSHA256": "af2917df86ab18f930f084d6f901404293cb4c15443b8e2b255e17c51f06076a",
+      "geometryBuilderSHA256": "6e6ef1063082c1601916988acfa2bf34d67857566edea904ef8de50e200a43c5",
       "dimensionSource": "https://www.marathonfusion.com/alchemy.pdf#page=13",
-      "geometryLabel": "Paper dimensions",
+      "geometryLabel": "Paper core \u00b7 conceptual hardware",
       "blenderVersion": "5.2.4 LTS",
       "renderSettings": {
         "engine": "Cycles CPU",

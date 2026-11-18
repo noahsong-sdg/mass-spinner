@@ -17,7 +17,7 @@ const fixedPlay={parallel:'20','source-radius':'4',distribution:'thermal','axial
 export function setupExperience({selectMode,invalidate,showView,showResearch,onLevelChange,fuelCentrifuge}:SetupExperienceOptions){
  const shared=readScenario(location.search),initial=readExperience(location.search);
  const levelButtons=[...document.querySelectorAll<HTMLButtonElement>('button[data-level]')],navigation=levelButtons[0]?.closest?.('.level-navigation'),view=document.defaultView;
- const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus');
+ const advanced=$('advanced-simulators'),apparatus=$('marathon-apparatus'),reactor=document.querySelector<HTMLButtonElement>('#show-reactor');
  let level:ExperienceLevel,savedPlay:PlaySettings=initial.settings,shareRevision=0,hydrating=false,cancelDeferred=()=>{};
  const defaults={
  '2':captureScenario(document,'2'),'3':captureScenario(document,'3'),'4':captureScenario(document,'4'),
@@ -34,7 +34,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  };
  function revealActiveLevel(){
   if(!navigation)return;
-  const button=level==='2'?levelButtons.find(button=>button.dataset.level===level):advanced?.querySelector('summary');
+  const button=level==='2'?(apparatus?.value!=='centrifuge'?reactor:levelButtons.find(button=>button.dataset.level===level)):advanced?.querySelector('summary');
   if(!button)return;
   const bounds=navigation.getBoundingClientRect(),item=button.getBoundingClientRect();
   const left=bounds.left+navigation.clientLeft,right=left+navigation.clientWidth;
@@ -45,8 +45,9 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   document.body.dataset.level=level;
   const centrifuge=level==='2'&&(!apparatus||apparatus.value==='centrifuge');
   for(const button of levelButtons)button.setAttribute('aria-pressed',String(button.dataset.level===level&&(level!=='2'||centrifuge)));
-  if(advanced)advanced.dataset.active=String(!centrifuge);
-  $('level-title').textContent=centrifuge?'Marathon centrifuge':copy[level];$('share-playground').hidden=false;
+  reactor?.setAttribute('aria-pressed',String(level==='2'&&!centrifuge));
+  if(advanced)advanced.dataset.active=String(level!=='2');
+  $('level-title').textContent=centrifuge?'Marathon centrifuge':level==='2'?(apparatus?.value==='blanket'?'Fusion power reference':'Marathon beam reactor'):copy[level];$('share-playground').hidden=false;
   $('share-playground').title=centrifuge?'Rerun inputs and drive history at the selected time. Camera and independent equilibrium calculator are separate.':'';
   sync();if(notifyLevel)onLevelChange?.(level);revealActiveLevel();
  }
@@ -112,6 +113,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   if(!hydrating&&level!=='2')enter('2');else refresh(false);
   if(!hydrating&&advanced?.open){advanced.open=false;advanced.querySelector('summary')!.focus();}
  });
+ reactor?.addEventListener('click',()=>{if(apparatus){apparatus.value='source';apparatus.dispatchEvent(new (view?.Event??Event)('change'));}});
  advanced?.addEventListener('keydown',event=>{
   if(event.key==='Escape'&&advanced.open){event.preventDefault();advanced.open=false;advanced.querySelector('summary')!.focus();}
  });
