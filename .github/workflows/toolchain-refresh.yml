@@ -37,3 +37,20 @@ jobs:
           path: toolchain-report/
           if-no-files-found: error
           retention-days: 3
+
+  science-lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Resolve proposed scientific upgrade in isolation
+        run: |
+          docker build -t science-lock -f ci/Dockerfile.science .
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp science-lock uv lock --project scientific/active
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: proposed-science-lock
+          path: scientific/active/uv.lock
+          retention-days: 3

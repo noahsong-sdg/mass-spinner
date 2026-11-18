@@ -28,5 +28,7 @@ not manufacturer CAD or verified engineering dimensions.
   repository. Derived benchmark markers are identified as digitized/reproduced
   observations rather than raw instrument data.
 
-No project-wide software license has been selected. Public availability does not
-replace the licenses or attribution requirements of third-party material.
+Our original code is available under the [MIT license](LICENSE). This does not
+relicense third-party software, datasets, papers or retained upstream source.
+Their respective licenses and attribution requirements continue to apply.
+Historical OpenFOAM material retains its included GPLv3 license.
