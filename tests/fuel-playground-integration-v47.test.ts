@@ -81,6 +81,9 @@ test('mode selection reveals its diagnostic geometry without rerunning physics o
   assert.equal(f.node('fuel-view-representation').value,representation);assert.equal(v.built.motion.group.visible,true);
   assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,false);
   assert.match(f.node('fuel-mode-reading').textContent,new RegExp(reading));
+  assert.equal(f.node('fuel-mode-reading').hidden,false);
+  f.change('fuel-view-representation','field','change');assert.equal(f.node('fuel-mode-reading').hidden,true);
+  f.change('fuel-view-representation',representation,'change');assert.equal(f.node('fuel-mode-reading').hidden,false);
   assert.equal(f.requests.length,requests);assert.equal(f.ui.latest.result,result);assert.deepEqual(v.pose,pose);
  }
 });
