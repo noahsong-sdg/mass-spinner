@@ -22,6 +22,7 @@ import {setupFuelCentrifuge} from './fuel-centrifuge-ui.js';
 import './fuel-comparison.css';
 import './fuel-playground.css';
 import {setupApparatus} from './apparatus-ui.js';
+import {sourceMotionState,targetMotionState} from './reactor-motion.js';
 import {surfaceState} from './surface-state.js';
 import {fusionComponents} from './component-catalog.js';
 import {setupTutorialInsights} from './tutorial-insights-ui.js';
@@ -409,8 +410,9 @@ const blanketExplorer=setupBlanketExplorer($('blanket-explorer'));
 setupApparatus(blanketExplorer.render,{components:blanketComponents,onInspect:()=>workspace?.open('inspect')}).show('blanket');
 setupLaboratory(changed);setupDoublewellControls(changed);setupReferenceAtlas();setupFailureLaboratory();
 setupHydrogenTracer($('failure-lab'));
-const marathon=setupMarathonModels({transformPlots:targetPlots,onState:value=>{
+const marathon=setupMarathonModels({transformPlots:targetPlots,onSource:value=>fusionApparatus.updateReactorState(sourceMotionState(value)),onState:value=>{
  fusionApparatus.updateSurfaceState(value?surfaceState({model:'beam-target',settings:value.result.config,result:value.result,acceptedModel:'beam-target',acceptedSettings:value.result.config,selectedState:value.state,source:value.source,acceptedSource:value.source}):null);
+ if(value)fusionApparatus.updateReactorState(targetMotionState(value));
 },onStatus:value=>{
  fusionApparatus.setPending(value.phase==='pending');for(const control of targetBaselines.values()){if(value.phase==='invalid')control.clearCurrent();else control.setPending(value.phase==='pending');}
 }});

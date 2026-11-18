@@ -152,6 +152,35 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  expect(errors).toEqual([]);
 });
 
+test('reactor internals respond to source controls and distinguish normalized power reference',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');await page.getByRole('button',{name:'Reactor',exact:true}).click();
+ const processes=page.locator('#fusion-apparatus .reactor-processes');
+ await expect(processes).toHaveAttribute('data-basis','initial source');
+ const initial=Number(await processes.getAttribute('data-beam-count'));expect(initial).toBeGreaterThan(0);
+ await page.getByRole('button',{name:'Controls',exact:true}).click();await page.locator('#fusion-beamCurrentA').press('ArrowRight');
+ await expect.poll(async()=>Number(await processes.getAttribute('data-beam-count'))).toBeGreaterThan(initial);
+ await page.locator('#fusion-beamEnergyKeV').press('ArrowRight');await expect(processes).toHaveAttribute('data-energy-ke-v','105');
+ await page.locator('#fusion-target-enabled').uncheck();await expect(processes).toHaveAttribute('data-neutron-count','0');
+ expect(Number(await processes.getAttribute('data-heat-w'))).toBeGreaterThan(0);
+ await page.locator('#fusion-beam-enabled').uncheck();await expect(processes).toHaveAttribute('data-beam-count','0');await expect(processes).toHaveAttribute('data-heat-w','0');
+ await page.locator('#fusion-target-enabled').check();await page.locator('#fusion-beam-enabled').check();
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await processes.locator('summary').click();await expect(processes).toContainText('slowed separately');
+ await expect(processes.getByRole('button',{name:'Pause motion',exact:true})).toBeDisabled();
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await expect(processes.getByRole('button',{name:'Pause motion',exact:true})).toBeEnabled();
+ await processes.getByRole('button',{name:'Pause motion',exact:true}).click();
+ await expect(processes.getByRole('button',{name:'Resume motion',exact:true})).toHaveAttribute('aria-pressed','true');
+ await processes.locator('summary').click();await page.emulateMedia({reducedMotion:'reduce'});
+ await info.attach('beam-live-processes',{body:await page.screenshot(),contentType:'image/png'});
+ await page.locator('#marathon-apparatus').selectOption('blanket');
+ const reference=page.locator('#blanket-render .reactor-processes');await expect(reference).toHaveAttribute('data-basis','power-reference');
+ await reference.locator('summary').click();await expect(reference).toContainText('not calculated');await expect(reference).toHaveAttribute('data-beam-count','0');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ expect(errors).toEqual([]);
+});
+
 test('guide: local links, native action and accessible reading layout',async({page})=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');

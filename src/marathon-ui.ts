@@ -1,4 +1,4 @@
-import {setupFusionLaboratory} from './fusion-ui.js';
+import {setupFusionLaboratory,type FusionLaboratoryOptions} from './fusion-ui.js';
 import {setupTargetExposure} from './target-exposure-ui.js';
 import {setupTargetLoading} from './target-loading-ui.js';
 import {setupNeutronGeometry} from './neutron-geometry-ui.js';
@@ -10,6 +10,7 @@ import {setupFiniteFilmReference} from './finite-film-ui.js';
 import type {CoupledTargetOptions} from './coupled-target-ui.js';
 
 export interface MarathonModelsOptions {
+ onSource?:FusionLaboratoryOptions['onUpdate'];
  onState?:CoupledTargetOptions['onUpdate'];
  onStatus?:CoupledTargetOptions['onStatus'];
  transformPlots?:CoupledTargetOptions['transformPlots'];
@@ -17,7 +18,7 @@ export interface MarathonModelsOptions {
 }
 
 /** One source, one evolving target, and explicitly separate frozen references. */
-export function setupMarathonModels({onState=()=>{},onStatus=()=>{},transformPlots,requestTarget}:MarathonModelsOptions={}){
+export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=>{},transformPlots,requestTarget}:MarathonModelsOptions={}){
  const node=(id:string)=>document.getElementById(id)!;
  const geometry=setupNeutronGeometry(node('neutron-geometry'));
  const exposure=setupTargetExposure(node('target-exposure'),{active:false});
@@ -50,6 +51,7 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},transformPlo
  });
  setupFiniteFilmReference(target.referenceHost,finiteFilmReference);
  const source=setupFusionLaboratory({exposureHost:target.durationHost,onUpdate(value){
+  onSource(value);
   geometry.update(value);exposure.update(value);loading.update(value);target.update(value);
  }});
  return {source,target,neutrons,geometry,exposure,loading};

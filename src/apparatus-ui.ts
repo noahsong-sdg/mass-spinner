@@ -5,6 +5,7 @@ import type {Component} from './component-catalog.js';
 import type {ApparatusViewerOptions, ViewerAsset, ViewerRepresentation} from './apparatus-viewer.js';
 import type {SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
+import type {ReactorMotionState} from './reactor-motion.js';
 
 type ApparatusAsset = ViewerAsset<string> & {caption:string;geometryLabel?:string;dimensionSource?:string};
 const assets: Record<string, ApparatusAsset | undefined> = manifest.assets;
@@ -16,6 +17,8 @@ export interface ApparatusDisplay {
  dispose(): void;
  focus?(id: string): void;
  updateState?(value: unknown): void;
+ updateReactorState?(value:ReactorMotionState|null):void;
+ setActive?(value:boolean):void;
  updateSurfaceState?(packet: SurfaceState | null | undefined, settings?: SurfaceSettings): void;
  setPending?(value: boolean): void;
 }
@@ -40,6 +43,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  toolbar.append(choices,retry,reset);figure.append(frame,toolbar,readout,provenance);host.replaceChildren(figure);
  const focus=doc.createElement('button');focus.type='button';focus.textContent='⌖';focus.disabled=true;focus.setAttribute('aria-label','Focus selected component');toolbar.append(focus);
  let records: Component[]=[],asset: ApparatusAsset | null | undefined=null,viewer: ApparatusDisplay | null=null,pending: Promise<ViewerModule> | null=null,visible=false,disposed=false,selected='',acceptedState: unknown=null,statePending=false,surface: {packet: SurfaceState | null | undefined; settings?: SurfaceSettings} | null=null;
+ let reactorState:ReactorMotionState|null=null;
  function describeRepresentation({geometry,status,layer,numerical=false}: Pick<ViewerRepresentation, 'geometry' | 'status'> & Partial<Pick<ViewerRepresentation, 'layer' | 'numerical'>>){
   if(disposed||!asset)return;
   if(geometry==='none'){provenanceText.textContent=status==='loading'?'Loading 3D geometry.':'3D unavailable; no geometry is displayed.';return;}
@@ -49,7 +53,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   const content=numerical?layer==='tracks'?'accepted trajectories shown':layer==='impacts'?'accepted impacts shown':'accepted numerical fields shown':'hardware only; numerical layers hidden';
   provenanceText.textContent=`SI geometry from simulator inputs; ${content}. Dimensions, construction and material choices are assumptions, not measured Marathon hardware.`;
  }
- function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.setPending?.(statePending);if(selected)current.select(selected);}
+ function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.updateReactorState?.(reactorState);current.setPending?.(statePending);current.setActive?.(visible);if(selected)current.select(selected);}
  function select(id: string,notify=true,part: SelectionPart | null=null,name=''){
   const c=records.find(c=>c.id===id);if(!c)return;
   selected=id;choices.value=id;viewer?.select(id);focus.disabled=false;
@@ -75,12 +79,14 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
    const status=doc.createElement('p');status.textContent='3D unavailable';frame.replaceChildren(status);retry.hidden=false;
   }finally{pending=null;if(!disposed&&asset?.model&&loaded&&loaded!==asset)void start();}
  }
- const observer=new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);if(visible)void start();});observer.observe(frame);
+ const observer=new IntersectionObserver(entries=>{visible=entries.some(entry=>entry.isIntersecting);viewer?.setActive?.(visible);if(visible)void start();});observer.observe(frame);
  choices.addEventListener('change',()=>select(choices.value));reset.addEventListener('click',()=>viewer?.reset());
  focus.addEventListener('click',()=>viewer?.focus?.(selected));
  function show(mode: string){
   acceptedState=null;surface=null;statePending=false;viewer?.updateSurfaceState?.(null);
-  asset=assets[mode];host.hidden=!asset?.model;if(!asset?.model)return;
+  const original=assets[mode];asset=original?{...original,...(mode==='beam-target'?{reactor:'beam' as const}:mode==='blanket'?{reactor:'power-reference' as const}:{})}:null;
+  reactorState=mode==='blanket'?{kind:'power-reference'}:null;
+  host.hidden=!asset?.model;if(!asset?.model)return;
   provenanceTitle.textContent=asset.geometryLabel??'Concept model';dimensionSource.hidden=!asset.dimensionSource;dimensionSource.href=asset.dimensionSource??'';
   provenance.open=false;describeRepresentation({geometry:'reference',status:'reference'});
   records=components??modelComponents(mode);selected='';focus.disabled=true;choices.replaceChildren();readout.replaceChildren();
@@ -90,6 +96,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  }
  return {readout,show,select,syncSelection:(id: string)=>select(id,false),hasMode:(mode: string)=>!!assets[mode]?.model,
   updateState(value: unknown){acceptedState=value;viewer?.updateState?.(value);},setPending(value: boolean){statePending=!!value;viewer?.setPending?.(statePending);},
+  updateReactorState(value:ReactorMotionState|null){reactorState=value;viewer?.updateReactorState?.(value);},
   updateSurfaceState(packet: SurfaceState | null | undefined,settings?: SurfaceSettings){surface={packet,settings};statePending=packet?.status==='pending';viewer?.updateSurfaceState?.(packet,settings);},
   dispose(){disposed=true;observer.disconnect();viewer?.dispose();host.replaceChildren();}};
 }

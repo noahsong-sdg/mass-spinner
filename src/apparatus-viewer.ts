@@ -4,11 +4,13 @@ import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {createSurfaceLayer, type SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
+import {createReactorMotionLayer} from './reactor-motion-layer.js';
+import type {ReactorMotionState} from './reactor-motion.js';
 
 export type CameraVector=[number,number,number];
 export interface CameraPose {position:CameraVector;target:CameraVector;up?:CameraVector}
 export interface ModelCamera {position?:number[];portraitPosition?:number[];target?:number[];up?:number[];fitScale?:number}
-export interface ViewerAsset<Model=unknown> {model:Model;modelCamera?:ModelCamera;scaleLabel?:string}
+export interface ViewerAsset<Model=unknown> {model:Model;modelCamera?:ModelCamera;scaleLabel?:string;reactor?:'beam'|'power-reference'}
 export interface ViewerLoader<Model=unknown> {loadAsync(source:Model):Promise<{scene:THREE.Object3D}>}
 export interface ViewerControls {
  target:THREE.Vector3;enableDamping?:boolean;enabled?:boolean;minDistance:number;maxDistance:number;
@@ -36,6 +38,7 @@ export interface ApparatusViewer<Model=unknown> {
  canvas:HTMLCanvasElement;load(asset:ViewerAsset<Model>,options?:{preserveOwnership?:boolean}):Promise<boolean>;
  select(id:string|null):void;focus(id:string,options?:{animate?:boolean}):void;reset():void;resize():void;refresh():void;
  setAnimation(callback:((dt:number)=>void)|null):void;cameraPose():CameraPose;
+ updateReactorState(value:ReactorMotionState|null):void;setActive(value:boolean):void;
  setCamera(pose:CameraPose|null|undefined,options?:{preserveOwnership?:boolean}):void;
  updateSurfaceState(packet:SurfaceState|null|undefined,settings?:SurfaceSettings):void;setPending(value:boolean):void;dispose():void;
 }
@@ -133,6 +136,11 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   renderer.render(scene,camera);reportRepresentation();
  }}
  const stateLayer=createSurfaceLayer(frame,{render,onSelect});scene.add(stateLayer.group);
+ let reactorState:ReactorMotionState|null=null,reactorPending=false,active=true,reactorLayer:ReturnType<typeof createReactorMotionLayer>|null=null;
+ function refreshReactor(){
+  reactorLayer?.update(reactorState,root,reactorPending);
+  if(asset?.reactor){setAnimation(active&&reactorLayer?.running?dt=>reactorLayer?.tick(dt):null);render();}
+ }
  function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!root||!asset?.scaleLabel;}
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
  function fit(){
@@ -159,6 +167,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   referenceRoot.visible=packet?.status!=='ready'||stateLayer.group.children.length===0;loadStatus=packet?.status==='pending'?'pending':'reference';
   root=referenceRoot.visible?referenceRoot:stateLayer.group;
   if(changed||root!==previousRoot){fit();resize();reset();}else render();
+  refreshReactor();
  }
  function resize(){
   if(disposed)return;const {width,height}=frame.getBoundingClientRect();if(width<=0||height<=0)return;
@@ -246,6 +255,8 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  async function load(next:ViewerAsset,{preserveOwnership=false}:{preserveOwnership?:boolean}={}){
   if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;scaleNote.hidden=true;
   setAnimation(null);
+  reactorLayer?.dispose();reactorLayer=null;
+  if(next.reactor){reactorLayer=createReactorMotionLayer(frame,refreshReactor);scene.add(reactorLayer.group);}
   stopFlight();
   stateLayer.clear();clearSelection();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;loadStatus='loading';reportRepresentation();renderer.clear();status.textContent='Loading 3D…';
   try{
@@ -253,6 +264,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    if(disposed||token!==generation){release(gltf.scene);return false;}
    root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();status.textContent='';settingCamera=true;resize();reset();settingCamera=false;
    if(accepted)updateSurfaceState(accepted.packet,accepted.settings);
+   refreshReactor();
    if(preserveOwnership)pristineCamera=previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
@@ -315,8 +327,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  for(const [name,handler]of Object.entries(handlers))canvas.addEventListener(name,handler as EventListener);
  controls.addEventListener('change',cameraChanged);
  const observer=new ResizeObserver(resize);observer.observe(frame);
- return {canvas,load,select,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,setPending:value=>{if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});},dispose(){
-  if(disposed)return;disposed=true;stopFlight();setAnimation(null);doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
+ return {canvas,load,select,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,
+ updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(asset?.reactor)refreshReactor();},
+ setPending:value=>{reactorPending=value;if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});refreshReactor();},dispose(){
+  if(disposed)return;disposed=true;stopFlight();setAnimation(null);reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
   for(const [name,handler]of Object.entries(handlers))canvas.removeEventListener(name,handler as EventListener);
   clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
  }};
