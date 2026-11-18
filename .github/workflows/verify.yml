@@ -1,5 +1,8 @@
 name: Verify
 on: [push, pull_request]
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -23,12 +26,6 @@ jobs:
             npm run typecheck
             npm run typecheck:infrastructure
             npm run lint
-            node --import tsx --test --test-concurrency=1 tests/scenario-state-v38.test.ts tests/experiment-sharing.test.ts tests/fuel-centrifuge-scenario-v44.test.ts tests/baseline-capture-v38.test.ts tests/hydrogen-scenario-v38.test.ts tests/finite-film-scenario-v38.test.ts tests/collector-ui-v38.test.ts
-            node --import tsx --test --test-concurrency=1 tests/audit-spatial-ui-v53.test.ts tests/fuel-operation-ui-v51.test.ts tests/experiment-sharing.test.ts tests/scenario-state-v38.test.ts tests/experience.test.ts tests/fuel-assembly-load.test.ts tests/legacy-render-loading.test.ts tests/identity-renderer-v43.test.ts tests/playground-audit.test.ts tests/fusion-inspector-main-v43.test.ts tests/release-links.test.ts tests/qualification-page.test.ts
-            node --import tsx --test --test-concurrency=1 tests/fuel-equilibrium.test.ts tests/fuel-equilibrium-ui.test.ts
-            node --import tsx --test --test-concurrency=1 tests/understanding-page.test.ts tests/understanding-guide.test.ts tests/playground-guide.test.ts tests/fuel-playground-integration-v47.test.ts tests/fuel-centrifuge-ui-v44.test.ts
-            node --import tsx --test --test-concurrency=1 tests/experimental-validation.test.ts tests/fuel-recovery-domain.test.ts tests/argon-reference.test.ts tests/argon-reference-ui.test.ts
-            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-experiment.test.ts tests/fuel-spatial-experiment-ui.test.ts tests/fuel-worker-v47.test.ts tests/worker-client.test.ts
             python3 -m unittest discover -s scientific/electron-applicability -p test_screen.py -v
             python3 -m unittest discover -s tests -p test_argon_reference_export.py -v
             node --import tsx --test --test-concurrency=1 tests/*.test.ts

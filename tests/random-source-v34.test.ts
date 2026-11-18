@@ -18,7 +18,7 @@ function frozenReport(actual:unknown,expected:unknown,allowRoundoff=false):void{
   for(const key of Object.keys(a)){
    const diagnostic=['normalizedAbsolutePairTorque','localityQuadraticVariationScale','particlesPerDebyeSphere','debyePopulation'].includes(key);
    const metric=key==='value'&&typeof a.label==='string'&&[
-    'Absolute pair torque / P scale','Pair torque quadratic-variation scale / P scale','Initial particles per Debye sphere',
+    'Accumulated absolute pair torque / P scale','Pair torque quadratic-variation scale / P scale','Initial electrons per Debye sphere',
    ].includes(a.label);
    frozenReport(a[key],b[key],diagnostic||metric);
   }
