@@ -17,8 +17,8 @@ is **not a reconstruction** of Marathon’s proprietary apparatus.
 
 Follow one chain: **rotation sorts masses → electrical drive creates rotation
 → losses and heating limit it → time and collection determine the sample**.
-Use Coupled separation and four plots: Composition, Ion–neutral spin-up,
-Drive & work, and Purity & recovery. [Every menu option is explained below](#views);
+Use Coupled separation. Each experiment below opens the plot it needs;
+you do not need to learn every menu first. [Every menu option is explained below](#views);
 [the reading plan](#path) lists later topics.
 The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduces ions and neutrals;
 the separate [Start here walkthrough](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
@@ -26,11 +26,10 @@ lets you try the controls alongside this explanation.
 
 ### First, change one real control
 
-In **Start here**, choose **Can the current make the gas turn?**
-
-1. Choose **Start from rest & edit current**, set **Radial discharge current**
-   to **0 A**, wait for Updating to finish, then choose **Show end-of-run speeds**.
-2. Repeat with **0.03 A**, leaving other inputs unchanged. Ions now accelerate;
+1. [Start from rest & edit current](/?level=2&guide=physics&topic=goal&try=currentExperiment).
+   Set **Radial discharge current** to **0 A** and wait for Updating to finish.
+2. [Show end-of-run speeds](/?level=2&guide=physics&topic=goal&try=endSpin): neither population should turn.
+3. Repeat with **0.03 A**, leaving other inputs unchanged. Ions now accelerate;
    collisions make neutrals follow. Compare at the same physical time.
 
 The preparation clears earlier current steps and restarts from rest. An ordinary
@@ -76,8 +75,9 @@ The center can be light-rich yet contain fewer light atoms per volume than the w
 
 **Try it:** in the example above, compare No spin, Spinning and Warmer.
 “6×” means six times that species’ axis density, not 6% of the mixture.
-Then show your end-of-run composition. Read “In 1,000 atoms here…” and probe
-axis and wall. Compare with the feed, **not 50%**. The light-percentage axis is
+Then [show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
+Read “In 1,000 atoms here…” and click the profile near the axis, then near the wall.
+Compare with the feed, **not 50%**. The light-percentage axis is
 zoomed; the heavy percentage is the remainder. Species density instead uses
 **1× = that species’ volume mean**. The example assumes equilibrium; your run may not.
 
@@ -128,11 +128,16 @@ the wall’s heavy/light ratio is twice the axis’s, not twice the product puri
 For Δm ≈ 1 atomic mass unit, 1,000 m/s and 500 K, α ≈ 1.13: a 13% ratio
 contrast, not 13 percentage points of enrichment. These are illustrative inputs.
 
-**Predict, then try:** double rotation at fixed temperature: the exponent
-quadruples. Double temperature at fixed rotation: it halves. The comparison
-buttons draw ideal equilibrium overlays; they do not change your run or predict
-the power needed. This neutral-gas result does not describe every charged-particle
-filter in the plasma separation tutorial.
+**Predict, then compare:**
+
+1. What if the gas turned twice as fast? [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation).
+   At fixed temperature, the exponent quadruples: the composition contrast grows.
+2. Now oppose that sorting with more thermal motion. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature).
+   At fixed rotation, the exponent halves: the composition contrast shrinks.
+
+These ideal equilibrium overlays do not change your run or predict the power
+needed. This neutral-gas result does not describe every charged-particle filter
+in the plasma separation tutorial.
 
 ## 3. How do we spin a gas without spinning a drum?
 
@@ -151,6 +156,7 @@ Lorentz force: collisions transfer the ions’ rotation to them.
 
 **Look:** step through Current → Turn ions → Turn gas in the diagram.
 Compare cylinder and end views. Dots represent populations, not microscopic orbits.
+Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) to locate the same field and force arrows in the apparatus.
 
 ## 4. What sets the rotation speed?
 
@@ -187,16 +193,20 @@ For radial current I through an annulus in uniform axial field B,
 I is current, distinct from inertia ℐ. Integrating the radial strip torque
 rIB dr between the driven radii gives this lever arm. It assumes that geometry.
 
-**Try it:** replay spin-up, then cut power. Ions initially lead; removing drive
-does not instantly stop the gas. Angular momentum follows **Drive minus wall
-impulse**. Gas inertia shows redistribution feedback: at fixed L, greater
-inertia means slower rotation. Constant speed requires steady inertia as well
-as balanced torques.
+**One experiment: drive, then coast.** Use the powered run from the first experiment.
 
-For a fresh comparison, pin A, change one input, choose **New run**, and compare
-at the same physical time. Current edits after zero, even while paused, insert
-a drive step; an endpoint edit extends the run. Replay preserves those steps.
-Collision and drag edits start a new trajectory.
+1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin).
+   Watch the speed curves grow with the clock. Ions initially lead; collisions make the neutral gas follow.
+2. While it is turning, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower).
+   The gas keeps moving: removing torque does not remove the angular momentum already stored.
+3. To account for that motion, [show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum).
+   Total angular momentum follows **Drive minus wall impulse**. After power is cut,
+   wall drag removes it; collisions only transfer it between populations.
+
+At fixed L, moving mass outward increases inertia and slows rotation.
+Constant speed therefore requires steady inertia as well as balanced torques.
+Replay preserves power switches. To repeat from the original powered state,
+return to the first experiment’s **Start from rest & edit current**.
 
 ## 5. Where does the energy go?
 
@@ -236,11 +246,12 @@ U is thermal energy. Slip and wall friction convert energy internally; their
 heat destinations are assumptions. The finite-step ledger separately subtracts
 numerical damping, which should shrink with refinement; it is not physical heat.
 
-**Try it:** Drive & work curve height is energy in joules; curve slope is power
-in watts. Ohmic power is a separate readout. Work can rise while temperature
-stays fixed: the default bath assumes thermal control. Enable **Evolve gas &
-liner temperature** to explore heating versus cooling and its effect on separation.
-This does not solve separate electron/ion temperatures or ionization.
+**Read the energy account:** [show drive work](/?level=2&guide=physics&topic=energy&try=work).
+Curve height is energy in joules; curve slope is power in watts. Ohmic power is a
+separate readout. Work can rise while temperature stays fixed: the default bath
+assumes thermal control. [Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) removes
+that assumption in a controlled comparison; it does not solve separate
+electron/ion temperatures or ionization.
 
 ## 6. Why do we need time and collection, too?
 
@@ -269,9 +280,10 @@ inside a radius gives two distinct measures:
 N counts atoms. A smaller inner cut generally raises purity but lowers recovery.
 These are closed-inventory counts, not outlet flow or kilograms per hour.
 
-**Try it:** Show end-of-run cuts selects the endpoint; Probe collection curve
-keeps your selected time. Click the curve or use arrow keys; Home/End select
-axis/wall. Read the probe values below it. The probe does not move the 3D cut marker;
+**Try one collection cut:** [show end-of-run cuts](/?level=2&guide=physics&topic=collection&try=collection).
+Click the curve at a small radius, then a larger one, and read purity and recovery
+below it. Arrow keys also move the probe; Home/End select axis/wall.
+The probe does not move the 3D cut marker;
 the **Inner collection radius / a** setup slider instead starts a new run.
 At the wall, purity equals feed and recovery is one. Empty cuts have undefined
 purity; an absent light species has undefined recovery.

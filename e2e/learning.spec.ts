@@ -95,8 +95,9 @@ test('an independently opened reader reconnects across guide navigation without 
  await expect(simulator.locator('#window-controls')).not.toBeVisible();let navigations=0;
  simulator.on('framenavigated',frame=>{if(frame===simulator.mainFrame())navigations++;});
  await page.getByRole('banner').getByRole('link',{name:'Physics & equations →',exact:true}).click();
- await page.locator('[data-guide-action="current"]').first().click();
- await expect(simulator.locator('#window-controls')).toBeVisible();
+ await page.locator('[data-guide-action="work"]').click();
+ await expect(simulator.locator('#window-plots')).toBeVisible();
+ await expect(simulator.locator('#fuel-plot')).toHaveValue('heat');
  await expect(current).toHaveValue(edited);expect(navigations).toBe(0);
  await expect(page.locator('#reader-status')).toContainText('Sent to the simulator');
  await simulator.close();

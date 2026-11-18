@@ -194,13 +194,18 @@ test('reactor internals respond to source controls and distinguish normalized po
  expect(errors).toEqual([]);
 });
 
-test('guide: local links, native action and accessible reading layout',async({page})=>{
+test('guide: local links, native action and accessible reading layout',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');
  await page.getByRole('link',{name:'Every menu option is explained below'}).click();
  await expect(page.locator('#guide-chapter')).toHaveValue('views');
  await page.getByRole('link',{name:'§4',exact:true}).first().click();
  await expect(page.locator('#guide-chapter')).toHaveValue('momentum');
+ await expect(page.locator('.try-actions')).toHaveCount(0);
+ const steps=page.locator('ol').filter({has:page.locator('[data-guide-action="cutPower"]')});
+ await expect(steps.locator('[data-guide-action]')).toHaveCount(3);
+ await steps.scrollIntoViewIfNeeded();
+ await info.attach('rotation-experiment-sequence',{body:await page.screenshot(),contentType:'image/png'});
  await expect(page.locator('.katex-error')).toHaveCount(0);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);

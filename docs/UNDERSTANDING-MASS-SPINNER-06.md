@@ -12,7 +12,7 @@ Conserving atoms cannot prove the predicted rotation matches a real experiment. 
 | Did cells and timesteps distort the answer? | Refinement and error estimates: convergence | That a converged closure is physically correct |
 | Does the model predict measurements? | Matched apparatus, conditions and diagnostic: validation | Accuracy outside the tested conditions |
 
-**Try it:** open Model info and read the live qualification beside the run's assumptions. “Matches screened inputs” means those inputs match a numerical screen; it does not mean agreement with Marathon measurements. Check mesh/wall-layer warnings too.
+**Try it:** [open Model info](/?level=2&try=modelInfo) and read the live qualification beside the run's assumptions. “Matches screened inputs” means those inputs match a numerical screen; it does not mean agreement with Marathon measurements. Check mesh/wall-layer warnings too.
 
 ## Could an assumed input reverse the result?
 
@@ -20,9 +20,9 @@ The live model prescribes diffusivity, collision rate and conductivity. A sharpl
 
 **Try one sensitivity experiment:**
 
-1. Choose a powered, mixed atomic feed in Coupled separation. Turn thermal evolution off. Rewind, set a nonzero current, then New run to clear power switches. Wait; choose a time strictly inside the run and pin A.
-2. Change only Assumed radial diffusivity, then New run. Return to the same physical time in both cases. Check the accepted-input comparison for unintended changes.
-3. Compare Separation over time and the speed history. Diffusivity changes redistribution; redistribution also changes gas inertia, so speed need not be identical. Report the observed sensitivity without calling it a measured uncertainty interval.
+1. Choose a powered, mixed atomic feed in Coupled separation. Turn thermal evolution off. Rewind, set a nonzero current, then New run to clear power switches. Wait; choose a time strictly inside the run and [pin A](/?level=2&try=pin).
+2. [Adjust only radial diffusivity](/?level=2&try=diffusion), then choose New run. Return to the same physical time in both cases. Check the accepted-input comparison for unintended changes.
+3. [Show separation over time](/?level=2&try=separationPlot), then compare the speed history too. Diffusivity changes redistribution; redistribution also changes gas inertia, so speed need not be identical. Report the observed sensitivity without calling it a measured uncertainty interval.
 
 For sampled ranges, open Model info → **Sensitivity & tested inputs**. Choose one coefficient and explicit Lower/Upper bounds around its current value, then Run samples. The shading covers only sampled cases, not a confidence interval or every value in between. It preserves the accepted drive history.
 

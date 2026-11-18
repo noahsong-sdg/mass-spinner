@@ -28,7 +28,6 @@ test('the website renders every guide equation and its derivation, with accessib
  for(const topic of guideTopics){
   assert.equal(doc.getElementById(topic.id)?.textContent,topic.heading);
   assert.equal(doc.getElementById(topic.id)!.nextElementSibling?.tagName,'P','motivate the question before showing diagrams and controls');
-  for(const [key]of topic.actions)assert.ok(doc.querySelector(`#${topic.id} ~ .try-actions a[data-guide-action="${key}"]`));
  }
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[data-guide-action]')){
   assert.ok(guideActions.has(link.dataset.guideAction!));
@@ -123,8 +122,8 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  Object.defineProperty(win,'parent',{value:{postMessage:(...args:any[])=>messages.push(args)}});
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
  assert.equal((win.document.getElementById('guide-chapter') as HTMLSelectElement).value,'energy');
- win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="current"]')!.click();
- assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-action',action:'current'},'https://example.org']);
+ win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="work"]')!.click();
+ assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-action',action:'work'},'https://example.org']);
  const status=win.document.getElementById('reader-status')!;
  assert.equal(status.getAttribute('role'),'status');assert.equal(status.getAttribute('aria-live'),'polite');
  assert.match(status.textContent!,/Sent to the simulator/);
@@ -139,7 +138,37 @@ test('standalone reading retains ordinary links and does not impersonate an embe
  setupGuideReader(dom.window);assert.equal(dom.window.document.body.classList.contains('embedded'),false);
  const chapters=dom.window.document.getElementById('guide-chapter') as HTMLSelectElement;chapters.value='composition';chapters.dispatchEvent(new dom.window.Event('change'));
  assert.equal(dom.window.location.hash,'#composition');
- assert.ok(dom.window.document.querySelector('a[href="/?level=2&guide=physics&topic=momentum&try=collisions"]'));
+ assert.ok(dom.window.document.querySelector('a[href="/?level=2&guide=physics&topic=momentum&try=spin"]'));
+});
+
+test('the rotation chapter motivates one drive-and-coast experiment instead of emitting a shortcut bank',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.equal(doc.querySelectorAll('.try-actions').length,0);
+ const section:Element[]=[];
+ for(let node=doc.getElementById('momentum')!.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)section.push(node);
+ const links=section.flatMap(node=>[...node.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')]);
+ assert.deepEqual(links.map(link=>link.dataset.guideAction),['spin','cutPower','momentum']);
+ const equations=section.filter(node=>node.classList.contains('equation'));
+ assert.equal(equations.length,3);
+ assert.ok(equations.at(-1)!.compareDocumentPosition(links[0])&dom.window.Node.DOCUMENT_POSITION_FOLLOWING,'introduce torque before asking the reader to drive the gas');
+ const steps=links.map(link=>link.closest('li')!);
+ assert.equal(new Set(steps).size,3,'each action belongs to its own explained step');
+ for(const step of steps){assert.ok(step);assert.ok(step.textContent!.length>100,'each step states what to observe');}
+ assert.equal(doc.querySelectorAll('[data-guide-action="currentExperiment"]').length,1,'do not repeat the introductory current experiment');
+ for(const action of ['axis','wall','density','inertia','collisions','drag','duration','diffusion','pin','thermal','thermalPlot']){
+  assert.equal(doc.querySelector(`[data-guide-action="${action}"]`),null,'specialist shortcuts stay out of the main experiment sequence');
+  assert.ok(guideActions.has(action),'previously shared simulator deep links remain valid');
+ }
+});
+
+test('only explicitly authored, allowlisted local actions become simulator links',t=>{
+ const source='## 4. What sets the rotation speed?\n\nFirst explain torque.\n\n[Replay now](/?level=2&try=spin)';
+ const dom=new JSDOM(understandingPage(source,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.equal(doc.querySelectorAll('[data-guide-action]').length,1);
+ const link=doc.querySelector<HTMLAnchorElement>('[data-guide-action]')!;
+ assert.equal(link.dataset.guideAction,'spin');assert.equal(link.getAttribute('href'),'/?level=2&try=spin');assert.equal(link.hasAttribute('target'),false);
+ assert.equal(doc.getElementById('momentum')!.nextElementSibling!.textContent,'First explain torque.');
+ for(const href of ['/?level=2&try=notAnAction','/?level=3&try=spin','/?level=2'])assert.throws(()=>understandingPage(`[Go](${href})`,revision),/Unknown guide action/);
 });
 
 

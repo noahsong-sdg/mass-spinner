@@ -1,4 +1,5 @@
-/** Stable reading anchors and actions over the existing centrifuge controls. */
+/** Stable anchors and action registry, including previously shared deep links.
+ * Readers place the actions they need beside their instructions in Markdown. */
 export type GuideTopic = {id:string;heading:string;diagram?:string;actions:readonly (readonly [string,string])[]};
 export const guideTopics=[
  {id:'goal',heading:'What are we trying to predict?',actions:[['spin','Replay spin-up']]},

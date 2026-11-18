@@ -1,7 +1,7 @@
 import {Marked,Renderer} from 'marked';
 import katex from 'katex';
 import {tsImport} from 'tsx/esm/api';
-const {guideTopics}=/** @type {{guideTopics: readonly import('../src/guide-topics.js').GuideTopic[]}} */(await tsImport('../src/guide-topics.ts',import.meta.url));
+const {guideTopics,guideActions}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 import {guideDiagram} from './guide-diagrams.mjs';
 import {releaseSourceBase} from './release-links.mjs';
 
@@ -21,6 +21,11 @@ export function understandingPage(markdown,revision,tutorial){
   table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table, scroll horizontally if needed">');},
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
+   if(href.startsWith('/?')){
+    const params=new URL(href,'https://mass-spinner.invalid').searchParams,action=params.get('try');
+    if(params.get('level')!=='2'||!action||!guideActions.has(action))throw new Error(`Unknown guide action: ${href}`);
+    return `<a data-guide-action="${action}" href="${escape(href)}">${label}</a>`;
+   }
    const part=href.match(/^UNDERSTANDING-MASS-SPINNER-(0[2-6])\.md(#[\w-]+)?$/);
    if(part)return `<a href="${part[1]==='02'?'/guide.html':`/tutorial-${part[1]}.html`}${part[2]??''}">${label}</a>`;
    if(href.startsWith('#'))return `<a href="${escape(href)}">${label}</a>`;
@@ -32,7 +37,7 @@ export function understandingPage(markdown,revision,tutorial){
   heading({tokens,depth}){
    const text=tokens.map(token=>token.raw).join(''),topic=topics.find(topic=>topic.heading===text);
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
-   enhancement=topic?(topic.diagram?guideDiagram(topic.diagram):'')+(topic.actions.length?`<div class="try-actions" role="group" aria-label="Try ${escape(topic.heading)}">${topic.actions.map(([key,label])=>`<a data-guide-action="${key}" href="/?level=2&guide=physics&topic=${topic.id}&try=${key}">${escape(label)}</a>`).join('')}</div>`:''):'';
+   enhancement=topic?.diagram?guideDiagram(topic.diagram):'';
    return heading;
   },
   paragraph({tokens}){

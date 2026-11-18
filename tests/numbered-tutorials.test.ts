@@ -28,7 +28,11 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
   }
   for(const link of doc.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(link.dataset.guideAction!));assert.equal(new URL(link.href).searchParams.get('try'),link.dataset.guideAction);
+   const instruction=link.closest('p,li')!;assert.ok(instruction,'actions belong to their motivating instructions');
+   assert.equal(instruction.querySelectorAll('[data-guide-action]').length,1,'introduce only one action in an instruction');
   }
+  assert.equal(doc.querySelectorAll('.try-actions').length,0,'readers must not reintroduce automatic chapter shortcut banks');
+  assert.ok(doc.querySelector('[data-guide-action]'),'each reader still connects its experiments to the simulator');
   for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href*="github.com"]')){
    const path=link.pathname.split(`/blob/${revision}/`)[1];assert.ok(path,'source links use the producing revision');assert.ok(existsSync(path));
   }
