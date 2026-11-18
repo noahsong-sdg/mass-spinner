@@ -1,0 +1,5 @@
+FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv time && rm -rf /var/lib/apt/lists/*
+RUN python3 -m venv /opt/tools && /opt/tools/bin/pip install --no-cache-dir uv==0.13.9
+ENV PATH="/opt/tools/bin:$PATH" UV_PYTHON_INSTALL_DIR=/opt/python
+RUN uv python install 3.14.10 && chmod -R a+rX /opt/python
