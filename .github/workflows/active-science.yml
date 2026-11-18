@@ -27,7 +27,7 @@ jobs:
         run: |
           mkdir -p science-evidence
           cp scientific/active/uv.lock science-evidence/
-          docker run --rm --network none --memory 2g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e MPLCONFIGDIR=/tmp/mpl -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 active-science sh -eu -c '
+          docker run --rm --network none --memory 2g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e USER=scientist -e MPLCONFIGDIR=/tmp/mpl -e OPENBLAS_NUM_THREADS=1 -e OMP_NUM_THREADS=1 active-science sh -eu -c '
             node --import tsx scripts/export-thermal-toolchain.ts
             /usr/bin/time -f "TS7 seconds=%e maxRSSKiB=%M" node node_modules/@typescript/native/bin/tsc --noEmit --checkers 1 2> science-evidence/typescript7.txt
             /usr/bin/time -f "TS6 seconds=%e maxRSSKiB=%M" node node_modules/typescript/bin/tsc6 --noEmit 2> science-evidence/typescript6.txt

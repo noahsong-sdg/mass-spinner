@@ -22,6 +22,7 @@ jobs:
         run: |
           mkdir -p output
           docker run --rm --network none --memory 3g --cpus 2 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp mass-spinner-blender sh -eu -c '
+            python3 -m unittest discover -s blender -p "test_compare_assembly.py" -v
             python3 blender/render.py assembly output/blender-5.2.4
             python3 blender/compare_assembly.py web-assets/models/centrifuge-assembly.glb output/blender-5.2.4/centrifuge-assembly.glb
           '

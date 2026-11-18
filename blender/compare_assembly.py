@@ -15,37 +15,52 @@ def document(path):
 
 
 def signature(doc):
-    nodes = {}
-    for node in doc["nodes"]:
+    # Blender's numeric duplicate-name suffixes can be allocated in a new order.
+    # Match geometric instances by semantic role, ancestor pose and material.
+    parents = {}
+    for i, parent in enumerate(doc["nodes"]):
+        for child in parent.get("children", []):
+            assert child not in parents, "Multiple parents are outside the canonical assembly contract"
+            parents[child] = i
+    groups = {}
+    for i, node in enumerate(doc["nodes"]):
         if "mesh" not in node:
             continue
-        name = node["name"]
-        assert name not in nodes, "Duplicate selectable mesh name"
         extras = node["extras"]
         assert all(isinstance(extras.get(key), str) and extras[key] for key in
                    ("componentId", "renderName", "materialBasis", "geometryBasis"))
         primitives = doc["meshes"][node["mesh"]]["primitives"]
-        bounds = [(doc["accessors"][p["attributes"]["POSITION"]]["min"],
-                   doc["accessors"][p["attributes"]["POSITION"]]["max"])
-                  for p in primitives]
-        nodes[name] = {"extras": extras, "bounds": bounds,
-                       "translation": node.get("translation", [0, 0, 0]),
-                       "rotation": node.get("rotation", [0, 0, 0, 1]),
-                       "scale": node.get("scale", [1, 1, 1]),
-                       "materials": [doc["materials"][p["material"]]["name"] for p in primitives]}
-    return nodes
+        values = []
+        for primitive in primitives:
+            position = doc["accessors"][primitive["attributes"]["POSITION"]]
+            values.extend(position["min"] + position["max"])
+        chain = []
+        while True:
+            item = doc["nodes"][i]
+            assert "matrix" not in item, "Unexpected canonical assembly transform representation"
+            q = item.get("rotation", [0, 0, 0, 1])
+            if q[-1] < 0:
+                q = [-value for value in q]
+            values.extend(item.get("translation", [0, 0, 0]) + q + item.get("scale", [1, 1, 1]))
+            chain.append(item.get("extras", {}) if "mesh" not in item else {})
+            if i not in parents:
+                break
+            i = parents[i]
+        key = json.dumps([extras, chain, [doc["materials"][p["material"]]["name"] for p in primitives]], sort_keys=True)
+        groups.setdefault(key, []).append(values)
+    return {key: sorted(instances) for key, instances in groups.items()}
+
+
+def compare(old, new):
+    assert old.keys() == new.keys(), "Component ownership, ancestry or material assignment changed"
+    for key, before in old.items():
+        after = new[key]
+        assert len(before) == len(after), "Selectable instance count changed"
+        for a, b in zip(before, after):
+            assert len(a) == len(b) and max(abs(x-y) for x, y in zip(a, b)) < 1e-6, key + ": SI geometry changed"
 
 
 if __name__ == "__main__":
     old, new = [signature(document(path)) for path in sys.argv[1:]]
-    assert old.keys() == new.keys(), "Selectable assembly parts changed"
-    for name, before in old.items():
-        after = new[name]
-        assert before["extras"] == after["extras"], name + ": metadata changed"
-        assert before["materials"] == after["materials"], name + ": material ownership changed"
-        for key in ("translation", "rotation", "scale", "bounds"):
-            def flat(value):
-                return sum((flat(v) if isinstance(v, (list, tuple)) else [v] for v in value), [])
-            a, b = flat(before[key]), flat(after[key])
-            assert len(a) == len(b) and max(abs(x-y) for x, y in zip(a, b)) < 1e-6, name + ": SI geometry changed"
-    print(f"{len(new)} selectable mesh nodes preserve metadata, material ownership and SI bounds to 1 micrometre")
+    compare(old, new)
+    print(f"{sum(map(len, new.values()))} selectable mesh nodes preserve metadata, material ownership and SI bounds to 1 micrometre")
