@@ -15,7 +15,7 @@ type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-r
 /** Optional guidance over existing live controls; no alternate simulation or physical presets. */
 export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
- let readerWindow:Window|null=win.opener;
+ let readerWindow=win.opener as Window|null;
  function openStandalone(){if(readerWindow&&!readerWindow.closed){readerWindow.focus();return;}readerWindow=win.open('/start.html','mass-spinner-start');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};

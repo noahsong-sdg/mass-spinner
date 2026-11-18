@@ -1,7 +1,7 @@
 /** The standalone reader links work without this enhancement; embeds use native app actions. */
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
- let simulatorWindow:Window|null=embedded?win.parent:win.opener;
+ let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
 
  const density=doc.querySelector<HTMLElement>('[data-density-example]');
  if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
