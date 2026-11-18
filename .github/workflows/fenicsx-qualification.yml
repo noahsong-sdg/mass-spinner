@@ -2,8 +2,9 @@ name: FEniCSx toolchain qualification
 on:
   workflow_dispatch:
   push:
-    branches: [codex/stack-modernization]
-    paths: [ci/Dockerfile.fenicsx, scientific/current-fenicsx-reference/**, .github/workflows/fenicsx-qualification.yml]
+    paths: [ci/Dockerfile.fenicsx, scientific/current-fenicsx-reference/**, scientific/nonrigid-v98/fem98.py, .github/workflows/fenicsx-qualification.yml]
+  pull_request:
+    paths: [ci/Dockerfile.fenicsx, scientific/current-fenicsx-reference/**, scientific/nonrigid-v98/fem98.py, .github/workflows/fenicsx-qualification.yml]
 permissions:
   contents: read
 jobs:

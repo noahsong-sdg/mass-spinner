@@ -2,8 +2,9 @@ name: Active science environment
 on:
   workflow_dispatch:
   push:
-    branches: [codex/stack-modernization]
-    paths: [scientific/active/**, ci/Dockerfile.science, .github/workflows/active-science.yml, schemas/**, scripts/export-thermal-toolchain.ts, src/fuel-thermal.ts, src/array-shape.ts, package-lock.json]
+    paths: [scientific/**, ci/Dockerfile.science, .github/workflows/active-science.yml, schemas/**, scripts/export-thermal-toolchain.ts, src/fuel-thermal.ts, src/array-shape.ts, package-lock.json]
+  pull_request:
+    paths: [scientific/**, ci/Dockerfile.science, .github/workflows/active-science.yml, schemas/**, scripts/export-thermal-toolchain.ts, src/fuel-thermal.ts, src/array-shape.ts, package-lock.json]
 permissions:
   contents: read
 jobs:
