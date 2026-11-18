@@ -39,7 +39,7 @@ export function fuelMotionState(result: FuelRenderResult,timeS: number,mode: Fue
   secondsPerScreenSecond:mode==='flow'?Math.min(1,.25/Math.max(turnoverHz,.25)):Math.min(1,1.8/Math.max(resolvedSpeed,TAU*turnoverHz,1.8))};
 }
 
-/** Weighted bulk tracers: no claim of thermal gyromotion or time-resolved separation. */
+/** Weighted bulk samples, not microscopic trajectories or predicted emission. */
 export function createFuelMotion(result: FuelRenderResult){
  const {config:c}=result,R=c.radiusM,L=c.lengthM,group=new THREE.Group(),clouds: FuelCloud[]=[];
  group.name='Gas motion';group.userData.nonPickable=true;

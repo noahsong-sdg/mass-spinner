@@ -52,7 +52,8 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  if(!Number.isFinite(R)||R<=0||!Number.isFinite(L)||L<=0)throw new RangeError('Positive finite gas dimensions required.');
  validateProfiles(result.profiles,R);
  const group=new THREE.Group();group.name='Gas diagnostic slice';group.userData={componentId:'slice',quantitativeOnly:true,purpose:'Axial placement only; the radial model is uniform along z.',materialBasis:'Numerical diagnostic; no physical material'};
- const rings: FieldMesh[]=[],owned: FieldMesh[]=[],originals: ShellClone[]=[],exploded: ExplodedMesh[]=[];
+ const rings: FieldMesh[]=[],owned: FieldMesh[]=[],originals: ShellClone[]=[],coilCovers: ShellClone[]=[],exploded: ExplodedMesh[]=[];
+ const coilMaterials=new Map<THREE.MeshStandardMaterial,THREE.MeshStandardMaterial>();
  const gasField=new THREE.Group();gasField.name='Axially uniform gas field';gasField.userData={componentId:'slice',quantitativeOnly:true,purpose:'Numerical density section extruded along the uniform axial model; not predicted optical emission.',materialBasis:'Numerical diagnostic; no physical material'};group.add(gasField);
  let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0,sectionOnly=false;
  const peak=Math.max(...result.profiles.map(p=>sampleFuelField(result,p.radiusM).densityM3));
@@ -68,13 +69,21 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const probeAxis=new THREE.Mesh(new THREE.SphereGeometry(R*.008,8,6),probe.material.clone());
  probeAxis.name='Composition probe axis';probeAxis.position.z=probe.position.z;probeAxis.renderOrder=5;probeAxis.userData={...probe.userData};group.add(probeAxis);owned.push(probeAxis);
  function setProbe(fraction: number){bounded(fraction,0,1,'Probe radius');probe.scale.set(fraction,fraction,1);probe.visible=fraction>0;probeAxis.visible=fraction===0;probe.userData.radiusM=probeAxis.userData.radiusM=fraction*R;return sampleAt(fraction*R);}
- // Clone only the two shell materials; shared electrode and hardware materials retain their original state.
+ // Presentation clipping owns its materials; prescribed electrodes retain their
+ // complete shapes. Open the coils too, otherwise they hide the chamber cutaway.
  scene.traverse(mesh=>{
   if(!isMesh(mesh))return;
   if(['Vessel pressure wall','Lithium refractory sub-vessel'].includes(mesh.name)){
    const shell=mesh as FuelShellMesh;
    const original=shell.material,clones=(Array.isArray(original)?original:[original]).map(m=>m.clone());
    shell.material=Array.isArray(original)?clones:clones[0];originals.push({mesh:shell,original,clones});
+  }
+  if(mesh.userData.componentId==='coils'){
+   const cover=mesh as FuelShellMesh,original=cover.material;
+   const clones=(Array.isArray(original)?original:[original]).map(material=>{
+    if(!coilMaterials.has(material))coilMaterials.set(material,material.clone());return coilMaterials.get(material)!;
+   });
+   cover.material=Array.isArray(original)?clones:clones[0];coilCovers.push({mesh:cover,original,clones});
   }
   if(['coils','electrodes','insulators'].includes(String(mesh.userData.componentId))){
    scene.updateMatrixWorld(true);
@@ -165,6 +174,10 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
    material.clippingPlanes=cutaway>0?[plane]:base.clippingPlanes;material.clipShadows=cutaway>0||base.clipShadows;
    material.transparent=ghost||base.transparent;material.opacity=ghost?Math.min(.14,base.opacity):base.opacity;material.depthWrite=ghost?false:base.depthWrite;material.needsUpdate=true;
   }
+  for(const {original,clones} of coilCovers)for(let i=0;i<clones.length;i++){
+   const material=clones[i],base=Array.isArray(original)?original[i]:original;
+   material.clippingPlanes=cutaway>0?[plane]:base.clippingPlanes;material.clipShadows=cutaway>0||base.clipShadows;material.needsUpdate=true;
+  }
   for(const {mesh,position,offset} of exploded)mesh.position.copy(position).addScaledVector(offset,explode);
   cutFaces.update(cutaway,ghost);
   group.userData.staging={cutaway,ghost,explode,scope:'Display staging only; numerical gas surfaces remain fixed.'};
@@ -188,6 +201,8 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   const resources=new Set<THREE.BufferGeometry | THREE.Material>();drive.group.traverse(node=>{const owned=node as DriveResourceObject;if(owned.geometry)resources.add(owned.geometry);if(owned.material)resources.add(owned.material);});for(const resource of resources)resource.dispose();
   for(const mesh of [...owned,...rings,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();}
   for(const {mesh,original,clones} of originals){mesh.material=original;for(const material of clones)material.dispose();}
+  for(const {mesh,original}of coilCovers)mesh.material=original;
+  for(const material of coilMaterials.values())material.dispose();
   for(const {mesh,position} of exploded)mesh.position.copy(position);
  }
  setCut(c.cutFraction);setProbe(.5);setSlice(slice);
