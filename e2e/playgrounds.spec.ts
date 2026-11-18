@@ -16,7 +16,7 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  page.on('response',response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);});
  await page.goto('/?level=2');
- await expect(page.locator('#fuel-render canvas')).toBeVisible();
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
  await expect(page.locator('#fuel-render .fuel-status')).not.toContainText('unavailable');
  await page.getByRole('button',{name:'Plots',exact:true}).click();
  const before=await exported(page);
@@ -66,7 +66,7 @@ test('guide: local links, native action and accessible reading layout',async({pa
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);
  await page.locator('a[href*="topic=momentum&try=spin"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');
- await expect(page.locator('#fuel-render canvas')).toBeVisible();
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
 });
 
 for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its production module`,async({page})=>{

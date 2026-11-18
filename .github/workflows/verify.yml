@@ -71,7 +71,7 @@ jobs:
             status=0
             npm run test:browser || status=$?
             mkdir -p test-results
-            cat /sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.stat > test-results/container-resources.txt
+            awk '\''{print FILENAME ": " $0}'\'' /sys/fs/cgroup/memory.peak /sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.stat > test-results/container-resources.txt
             test "$status" -eq 0
             npm run release:verify
           '
