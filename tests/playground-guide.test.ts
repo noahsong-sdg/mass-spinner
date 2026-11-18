@@ -140,14 +140,14 @@ test('temperature equation term focuses the temperature input without changing i
 });
 
 test('investigation actions open the actual existing plots without changing inputs or physical time',t=>{
- const f=fixture(t),fuel=acceptedFuel(f);f.node('field').value='.17';
+ const f=fixture(t),fuel=acceptedFuel(f),time=fuel.time.value;f.node('field').value='.17';
  for(const [action,value]of Object.entries({spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'})){
   f.workspace.launchGuideAction(action);
   assert.equal(fuel.plot.value,value);assert.equal(f.node('window-plots').hidden,false);
-  assert.equal(fuel.time.value,'0.4');assert.equal(fuel.mode.value,'transport');assert.equal(f.node('field').value,'.17');
+  assert.equal(fuel.time.value,time);assert.equal(fuel.mode.value,'transport');assert.equal(f.node('field').value,'.17');
  }
  fuel.mode.value='equilibrium';f.workspace.launchGuideAction('spinPlot');
- assert.equal(fuel.time.value,'0.4');assert.equal(fuel.mode.value,'equilibrium','opening a speed plot must not switch or replay a reference view');assert.equal(f.node('field').value,'.17');
+ assert.equal(fuel.time.value,time);assert.equal(fuel.mode.value,'equilibrium','opening a speed plot must not switch or replay a reference view');assert.equal(f.node('field').value,'.17');
  fuel.plot.querySelector('option[value="lithium"]')!.disabled=true;fuel.plot.value='spin';
  f.workspace.launchGuideAction('lithiumSurfaces');
  assert.equal(fuel.plot.value,'spin');assert.match(f.node('guide-status').textContent,/lithium feed/);
@@ -168,10 +168,10 @@ test('new plot links wait for accepted results and panel links remain available 
 });
 
 test('cut power is a single explicit intervention, never a power-on or hidden rewind',t=>{
- const f=fixture(t),fuel=acceptedFuel(f);let cuts=0,restarts=0;
+ const f=fixture(t),fuel=acceptedFuel(f),time=fuel.time.value;let cuts=0,restarts=0;
  fuel.power.addEventListener('click',()=>{cuts++;fuel.power.setAttribute('aria-pressed','false');});
  fuel.newRun.addEventListener('click',()=>restarts++);
- f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,'0.4');assert.equal(restarts,0);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,time);assert.equal(restarts,0);
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/already off/);
  fuel.mode.value='equilibrium';fuel.power.setAttribute('aria-pressed','true');
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.mode.value,'equilibrium');assert.match(f.node('guide-status').textContent,/Choose Coupled separation/);
