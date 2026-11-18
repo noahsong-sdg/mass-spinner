@@ -49,6 +49,18 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  await expect(page.locator('body')).toHaveAttribute('data-level','2');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('centrifuge',{body:await page.screenshot(),contentType:'image/png'});
+ const assets=await page.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/models/')).map(e=>{const r=e as PerformanceResourceTiming;return {url:r.name,durationMS:r.duration,bytes:r.decodedBodySize};}));
+ expect(assets.some(r=>r.bytes>0&&r.bytes<=1_200_000)).toBe(true);
+ await info.attach('performance',{body:JSON.stringify({backend:'Chromium software ANGLE/SwiftShader',controlLatencyMS,assets}),contentType:'application/json'});
+ expect(errors).toEqual([]);
+});
+
+test('gas cutaway: live density, movable slice and rotation-averaged samples',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ if(await page.locator('#fuel-motion-play').getAttribute('aria-pressed')==='true')await page.locator('#fuel-motion-play').click();
+ await page.locator('#fuel-motion-time').press('End');
  await page.getByRole('button',{name:'View',exact:true}).click();
  await page.locator('#fuel-view-representation').selectOption('both');
  await page.locator('#fuel-view-layer').selectOption('density');
@@ -64,9 +76,7 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  await page.getByRole('button',{name:'Close View',exact:true}).click();
  await expect(page.locator('.fuel-gas-2')).toContainText('rotation averaged');
  await info.attach('gas-density-samples',{body:await page.screenshot(),contentType:'image/png'});
- const assets=await page.evaluate(()=>performance.getEntriesByType('resource').filter(e=>e.name.includes('/models/')).map(e=>{const r=e as PerformanceResourceTiming;return {url:r.name,durationMS:r.duration,bytes:r.decodedBodySize};}));
- expect(assets.some(r=>r.bytes>0&&r.bytes<=1_200_000)).toBe(true);
- await info.attach('performance',{body:JSON.stringify({backend:'Chromium software ANGLE/SwiftShader',controlLatencyMS,assets}),contentType:'application/json'});
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect(errors).toEqual([]);
 });
 
@@ -101,7 +111,7 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  expect(errors).toEqual([]);
 });
 
-test('control tutorial: zero drive, driven endpoint and Inspect reference feedback',async({page},info)=>{
+test('control tutorial: zero drive and driven endpoint',async({page})=>{
  await page.goto('/?level=2&guide=start&try=currentExperiment');
  await expect(page.locator('#fuel-currentA')).toBeFocused({timeout:30_000});
  await page.locator('#fuel-currentA').press('Home');
@@ -130,6 +140,11 @@ test('control tutorial: zero drive, driven endpoint and Inspect reference feedba
  expect(driven.result.config.durationS).toBe(zero.result.config.durationS);
  await expect(page.locator('#fuel-plots .plot-readout')).toContainText('Neutrals: 1,');
  await page.getByRole('button',{name:'Close Plots',exact:true}).click();
+});
+
+test('Inspect: liner reference changes its response without changing gas temperature',async({page},info)=>{
+ await page.goto('/?level=2');
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
  await page.getByRole('button',{name:'Inspect',exact:true}).click();
  await page.locator('#fuel-component').selectOption('liner');
  await expect(page.locator('#fuel-inspect [data-effect]')).toContainText('Thermal evolution is off');
