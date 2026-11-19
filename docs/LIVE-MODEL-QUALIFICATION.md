@@ -21,7 +21,7 @@ Rigid rotation means one neutral angular speed at a given time. The diagnostic
 operator assumes optically thin emission and a centroid of the full spectral
 line. Under those assumptions, Doppler speed is proportional to sightline
 offset for any positive emissivity weighting. The measured profile rises, then
-falls. Thus, the comparison includes every rigid speed without fitting drag,
+falls. Thus, the comparison includes all rigid speeds without fitting drag,
 current, temperature or rotation amplitude.
 
 The nominal minimum possible worst-point discrepancy is 56.37%, above the fixed

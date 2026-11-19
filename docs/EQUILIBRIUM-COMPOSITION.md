@@ -18,7 +18,7 @@ or nuclei. For He/D₂, molecule recovery equals deuterium-nuclei recovery.
 
 ## Why does composition vary?
 
-Pressure increases toward the wall to give the inward force for circular motion.
+Pressure increases with radius to give the inward force for circular motion.
 For species s, partial pressure nₛkT gives this equilibrium force balance:
 
 ```math
@@ -43,7 +43,7 @@ n_L=\frac{Nx}{\pi R^2L}q_L,\quad n_H=\frac{N(1-x)}{\pi R^2L}q_H,\qquad X_L(r)=\f
 For a mixed feed, separation factor α compares heavy/light number ratios at the wall and axis:
 log α = βH − βL. Larger v²/T strengthens this contrast; composition percentages
 do not multiply by α. Pure feeds keep their composition. Equal masses keep uniform composition even when both
-densities increase toward the wall.
+densities increase with radius.
 
 ## What does a cut collect?
 

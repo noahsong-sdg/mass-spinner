@@ -8,11 +8,11 @@ Use **Deploy verified artifact** from the trusted revision of `deploy.yml` for t
 gh workflow run deploy.yml -f verify_run_id=NEXT_VERIFY_RUN -f previous_deploy_run_id=CURRENT_DEPLOY_RUN
 ```
 
-For `previous_deploy_run_id`, use the Deploy run with `conclusion: success` for the live manifest. The workflow rejects a different manifest. It compares every file with its hash. It keeps prepared JS/CSS/Wasm chunks with hash filenames across deployments. It does not keep old HTML or data without hash filenames.
+For `previous_deploy_run_id`, use the Deploy run with `conclusion: success` for the live manifest. The workflow rejects a different manifest. It compares each file with its hash. It keeps prepared JS/CSS/Wasm chunks with hash filenames across deployments. It does not keep old HTML or data without hash filenames.
 
 `prepared-site` artifacts stay available for 90 days. Production deployments occur one at a time.
 
-The selected Verify run contains that version's feature and physics qualification. After publication, Deploy compares the manifest bytes and SHA256 of every file that the site serves.
+The selected Verify run contains that version's feature and physics qualification. After publication, Deploy compares the manifest bytes and SHA256 of each file that the site serves.
 
 Root `_redirects` and `_headers` are [Cloudflare deployment controls](https://developers.cloudflare.com/workers/static-assets/redirects/). The site does not serve them as HTTP assets. Their local hashes must agree with the verified base. The bootstrap procedure restores them only from that base.
 
@@ -45,7 +45,7 @@ Historical migration receipt:
 
 These inputs are applicable only while that same file tree is live. Each later manual publication must have its own qualified Verify run and trusted prepared-manifest hash.
 
-The bootstrap downloads the manifest with the specified hash. It examines every qualified base file and source, lockfile, and runtime identity. It accepts only chunks with hash filenames as additional files. It compares downloaded bytes with their hashes before offline retention. It does not select a previous release automatically or accept a live manifest without a specified hash.
+The bootstrap downloads the manifest with the specified hash. It examines each qualified base file and source, lockfile, and runtime identity. It accepts only chunks with hash filenames as additional files. It compares downloaded bytes with their hashes before offline retention. It does not select a previous release automatically or accept a live manifest without a specified hash.
 
 After a deployment with `conclusion: success`, use its Deploy run ID for later deployments. If Cloudflare receives a deployment but live checks fail, examine the actual live file tree. Use its qualified source and independently verified prepared-manifest hash for a new bootstrap procedure.
 
