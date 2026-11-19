@@ -5,6 +5,14 @@ import {startPage} from '../scripts/start-page.mjs';
 import {setupGuideReader} from '../src/guide-reader.js';
 import {guideActions} from '../src/guide-topics.js';
 
+function acknowledge(win:JSDOM['window'],source:Window,sent:unknown[][]){
+ win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source,data:{type:'mass-spinner:guide-ready',capability:'authorized-reader',instance:'simulator-1'}}));
+ const request=sent.at(-1)![0] as {type:string;action:string;requestId:string};
+ assert.equal(request.type,'mass-spinner:guide-action');
+ win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source,data:{type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'}}));
+ return request;
+}
+
 test('standalone walkthrough motivates each experiment before instructions and identifies expected outputs',t=>{
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('iframe').length,0);
@@ -30,12 +38,14 @@ test('standalone walkthrough motivates each experiment before instructions and i
 test('a separate guide operates only its connected simulator without navigating or resetting either page',t=>{
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const win=dom.window;
  const sent:unknown[][]=[];let focuses=0,opened=0;
- Object.defineProperty(win,'opener',{value:{closed:false,postMessage:(...args:unknown[])=>sent.push(args),focus:()=>focuses++}});
+ const simulator={closed:false,postMessage:(...args:unknown[])=>sent.push(args),focus:()=>focuses++} as unknown as Window;
+ Object.defineProperty(win,'opener',{value:simulator});
  win.open=()=>{opened++;return null;};setupGuideReader(win);
  win.document.querySelector<HTMLAnchorElement>('[data-guide-action="currentExperiment"]')!.click();
- assert.deepEqual(sent,[[{type:'mass-spinner:guide-action',action:'currentExperiment'},'https://example.org']]);
+ assert.equal((sent[0][0] as {type:string}).type,'mass-spinner:guide-hello');
+ assert.equal(acknowledge(win,simulator,sent).action,'currentExperiment');
  assert.equal(focuses,1);assert.equal(opened,0);assert.equal(win.location.pathname,'/start.html');
- assert.match(win.document.getElementById('reader-status')!.textContent!,/Sent to the simulator/);
+ assert.match(win.document.getElementById('reader-status')!.textContent!,/Opened in the simulator/);
 });
 
 test('a direct or stale reader opens one simulator and reuses it for subsequent actions',t=>{
@@ -48,7 +58,7 @@ test('a direct or stale reader opens one simulator and reuses it for subsequent 
   assert.deepEqual(opened,[['','mass-spinner-simulator']]);
   assert.deepEqual(navigated,['https://example.org/?level=2&try=currentExperiment']);
   win.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
-  assert.equal(opened.length,1);assert.deepEqual(sent,[[{type:'mass-spinner:guide-action',action:'endSpin'},'https://example.org']]);
+  assert.equal(opened.length,1);assert.equal(acknowledge(win,simulator as unknown as Window,sent).action,'endSpin');
  }
 });
 
@@ -60,10 +70,10 @@ test('a direct reader reconnects after page navigation without navigating the ex
   const dom=new JSDOM(startPage(),{url:`https://example.org${path}`});t.after(()=>dom.window.close());
   dom.window.open=(...args)=>{opened.push(args);return simulator as unknown as Window;};setupGuideReader(dom.window);
   dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-action="endSpin"]')!.click();
+  assert.equal(acknowledge(dom.window,simulator as unknown as Window,sent).action,'endSpin');
  }
  assert.deepEqual(opened,[['','mass-spinner-simulator'],['','mass-spinner-simulator']]);
- assert.equal(navigated.length,0);assert.equal(sent.length,2);
- assert.deepEqual(sent[1],[{type:'mass-spinner:guide-action',action:'endSpin'},'https://example.org']);
+ assert.equal(navigated.length,0);assert.equal(sent.filter(([packet])=>(packet as {type:string}).type==='mass-spinner:guide-action').length,2);
 });
 
 test('reconnecting never navigates or sends an action to a cross-origin named tab',t=>{

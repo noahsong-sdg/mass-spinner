@@ -36,6 +36,9 @@ test('the enhanced reader remains compatible with guide pages without experiment
  t.after(()=>dom.window.close());const win=dom.window,sent:unknown[][]=[];
  Object.defineProperty(win,'opener',{value:{closed:false,postMessage:(...args:unknown[])=>sent.push(args),focus(){}}});
  setupGuideReader(win);win.document.querySelector<HTMLAnchorElement>('[data-guide-action]')!.click();
- assert.deepEqual(sent,[[{type:'mass-spinner:guide-action',action:'spin'},'https://example.org']]);
+ assert.equal((sent[0][0] as {type:string}).type,'mass-spinner:guide-hello');
+ win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source:win.opener,data:{type:'mass-spinner:guide-ready',capability:'authorized-reader',instance:'simulator-1'}}));
+ const request=sent.find(([packet])=>(packet as {type:string}).type==='mass-spinner:guide-action')!;
+ assert.equal((request[0] as {action:string}).action,'spin');assert.equal(request[1],'https://example.org');
  assert.equal(win.document.body.dataset.learningMode,undefined);
 });

@@ -16,7 +16,7 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  const current=await page.locator('#fuel-currentA').inputValue();
  await reader.locator('main a[href="/tutorial-03.html"]').click();await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
- await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Sent to the simulator');
+ await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Opened in the simulator.');
  await button.click();await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
  await reader.locator('main a[href="/how-it-works.html"]').click();await expect(reader.locator('h1')).toBeVisible();
  await info.attach('main-page-docs-button',{body:await page.locator('.world-reading').screenshot(),contentType:'image/png'});
@@ -121,7 +121,7 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await reader.locator('[data-guide-action="momentum"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('momentum');
  await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
- await expect(reader.locator('#reader-status')).toContainText('Sent to the simulator');
+ await expect(reader.locator('#reader-status')).toContainText('Opened in the simulator.');
  await reader.goto('/tutorial-06.html#sensitivity');
  await reader.locator('[data-guide-action="pin"]').click();
  await reader.locator('[data-guide-action="diffusion"]').click();
@@ -154,7 +154,7 @@ test('an independently opened reader reconnects across guide navigation without 
  await expect(simulator.locator('#window-plots')).toBeVisible();
  await expect(simulator.locator('#fuel-plot')).toHaveValue('heat');
  await expect(current).toHaveValue(edited);expect(navigations).toBe(0);
- await expect(page.locator('#reader-status')).toContainText('Sent to the simulator');
+ await expect(page.locator('#reader-status')).toContainText('Opened in the simulator.');
  await simulator.close();
 });
 

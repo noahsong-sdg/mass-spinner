@@ -18,6 +18,11 @@ type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-r
 export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,canUseCentrifuge=()=>true}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
+ const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
+ let capability='';
+ try{capability=win.sessionStorage.getItem(capabilityKey)??'';}catch{/* An ephemeral connection must be explicitly reauthorized after reload. */}
+ if(!capability)capability=win.crypto.randomUUID();
+ try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Preserve the same authorization boundary without storage. */}
  function openStandalone(){readerWindow=win.open('/learn.html','mass-spinner-start');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
@@ -147,26 +152,55 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    pinButton()!.click();open('view',true);
   }
  }
- // Only a known same-origin reader window may request an explicitly listed action.
+ type Outcome={status:'waiting'|'executed'|'rejected';message?:string};
+ const outcomes=new Map<string,Outcome>();
+ // A capability is issued only to an explicit opener, Docs window, or embedded reader.
+ // It lets that reader prove the previous authorization after this page reloads.
  win.addEventListener('message',event=>{
-  if(event.origin!==win.location.origin||(event.source!==frame.contentWindow&&(!readerWindow||event.source!==readerWindow)))return;
+  if(event.origin!==win.location.origin||!event.source)return;
   const data:unknown=event.data;
   if(!data||typeof data!=='object'||!('type' in data))return;
-  if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string')launch(data.action);
-  else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments')showExplore();
+  const known=event.source===frame.contentWindow||event.source===readerWindow;
+  if(data.type==='mass-spinner:guide-hello'){
+   if(!known&&(!('capability' in data)||data.capability!==capability))return;
+   if(event.source!==frame.contentWindow)readerWindow=event.source as Window;
+   (event.source as Window).postMessage({type:'mass-spinner:guide-ready',capability,instance},event.origin);return;
+  }
+  if(!known)return;
+  const requestId='requestId' in data&&typeof data.requestId==='string'?data.requestId:undefined;
+  const reply=(outcome:Outcome)=>{
+   if(!requestId)return;
+   outcomes.set(requestId,outcome);
+   if(outcomes.size>32)outcomes.delete(outcomes.keys().next().value!);
+   (event.source as Window).postMessage({type:'mass-spinner:guide-result',requestId,...outcome},event.origin);
+  };
+  if(requestId&&outcomes.has(requestId)){reply(outcomes.get(requestId)!);return;}
+  if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string'){
+   if(allowed.has(data.action))launch(data.action,reply);
+   else reply({status:'rejected',message:'This tutorial action is not available.'});
+  }else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments'){showExplore();reply({status:'executed'});}
   else if(data.type==='mass-spinner:guide-close')close('guide',true);
  });
- function launch(key:string){
+ function launch(key:string,reply:(outcome:Outcome)=>void=()=>{}){
   if(!allowed.has(key))return;
-  cancelLaunch();const accepted=node('fuel-export');
-  if(Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key)||!accepted||!pending(key)){action(key);return;}
-  status.textContent='Waiting for the computed run and controls…';
+  cancelLaunch();
+  const execute=()=>{action(key);reply(status.textContent?{status:'rejected',message:status.textContent}:{status:'executed'});};
+  const immediate=Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key);
+  const ready=()=>{
+   if(!canUseCentrifuge()&&!Object.hasOwn(guideExperiments,key))return true;
+   if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
+   if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
+   if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]!);
+   return immediate||!pending(key);
+  };
+  if(ready()){execute();return;}
+  status.textContent='Waiting for the computed run and controls…';reply({status:'waiting'});
   const observer=new win.MutationObserver(()=>{
-   if(!pending(key)){cancelLaunch();if(canUseCentrifuge())action(key);}
+   if(ready()){observer.disconnect();cancelLaunch=()=>{};execute();}
   });
-  cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};};
-  observer.observe(accepted,{attributes:true,attributeFilter:['disabled']});
-  const pin=pinButton();if(key==='pin'&&pin)observer.observe(pin,{attributes:true,attributeFilter:['disabled']});
+  cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};reply({status:'rejected',message:'A newer tutorial action replaced this request.'});};
+  // Controls are mounted asynchronously, so watch their insertion as well as acceptance.
+  observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled']});
  }
  function render(focus=false){
   const step=steps[index];choice.value=String(index);status.textContent='';

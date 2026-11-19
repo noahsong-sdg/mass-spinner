@@ -12,6 +12,8 @@ function fixture(t:any,mobile=false){
  const node=(id:string)=>doc.getElementById(id)! as any;
  t.after(()=>window.close());
  workspace.setLevel('2');
+ // Canonical current input is mounted by the live centrifuge before a control action is ready.
+ const current=doc.createElement('input');current.id='fuel-currentA';doc.querySelector('#window-controls .world-window-body')!.append(current);
  return {doc,window,workspace,node,step(index:number){node('guide-step').value=String(index);node('guide-step').dispatchEvent(new window.Event('change'));}};
 }
 
@@ -137,7 +139,7 @@ test('only messages from the same-origin guide frame can operate native controls
 
 test('the current experiment rewinds before editing and compares endpoints without silently changing inputs',t=>{
  const f=fixture(t);f.workspace.open('guide');f.step(1);
- const input=f.doc.createElement('input');input.id='fuel-currentA';input.value='.07';f.node('window-controls').querySelector('.world-window-body').append(input);
+ const input=f.node('fuel-currentA');input.value='.07';
  const make=(tag:string,id:string,value:string)=>{const n=f.doc.createElement(tag) as any;n.id=id;n.value=value;f.doc.body.append(n);return n;};
  const mode=make('select','fuel-motion-mode','');mode.innerHTML='<option value="equilibrium">Reference</option><option value="transport">Coupled</option>';mode.value='equilibrium';
  const time=make('input','fuel-motion-time','.6');time.type='range';time.min='0';time.max='1';time.step='any';time.value='.6';
