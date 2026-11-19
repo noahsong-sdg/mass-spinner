@@ -210,10 +210,11 @@ return to the first experiment’s **Start from rest & edit current**.
 
 ## 5. Where does the energy go?
 
-**The goal here is isotope enrichment, not heating a fusion plasma.** More current can increase
-both rotation and heating. Rotation sorts the masses; random thermal
-motion opposes that sorting. At the same rotation speed, hotter gas gives
-less equilibrium enrichment: recall the competition Ω²/T.
+**The goal here is isotope enrichment, not heating a fusion plasma.** Atoms
+share a rotation around the axis, but also move randomly relative to the gas.
+Faster shared rotation strengthens mass sorting; faster random thermal motion
+weakens the composition difference at the same rotation speed. More current
+can increase both. Our equilibrium reference captures the competition in Ω²/T.
 
 If heating grows too much, faster gas need not separate better. Holding its
 temperature fixed instead requires cooling that removes the net heat input.
