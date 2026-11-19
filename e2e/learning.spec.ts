@@ -5,7 +5,7 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const button=page.getByRole('button',{name:'Docs & tutorials',exact:true});await expect(button).toBeInViewport();
- await expect(page.getByRole('button',{name:'Docs & tutorials',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button',{name:'Start here',exact:true})).toHaveCount(0);
  const docsBox=await button.boundingBox();
  const sceneBox=await page.locator('.world-stage>.world-group:not([hidden])').boundingBox();
  expect(docsBox&&sceneBox&&docsBox.y+docsBox.height<=sceneBox.y).toBeTruthy();
