@@ -1,0 +1,13 @@
+# Retired optional readers; numbered tutorials remain the documentation entrypoints.
+/learn-controls.html /start.html#current 301
+/learn-controls /start.html#current 301
+/learn-transport.html /guide.html#collection 301
+/learn-transport /guide.html#collection 301
+/learn-thermal.html /tutorial-03.html#flow 301
+/learn-thermal /tutorial-03.html#flow 301
+/learn-beam.html /?level=2&try=beamSource 301
+/learn-beam /?level=2&try=beamSource 301
+/learn-collection.html /tutorial-04.html#sample 301
+/learn-collection /tutorial-04.html#sample 301
+/learn-evidence.html /tutorial-06.html#questions 301
+/learn-evidence /tutorial-06.html#questions 301

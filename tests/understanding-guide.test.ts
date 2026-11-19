@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
-import {learningPages} from '../scripts/learning-pages.mjs';
+import {documentationPage} from '../scripts/documentation-page.mjs';
 import {guideActions} from '../src/guide-topics.js';
 
 const path='docs/UNDERSTANDING-MASS-SPINNER-02.md';
@@ -31,7 +31,7 @@ test('the rewritten guide links to existing local explanations, evidence and imp
    continue;
   }
   if(href.startsWith('/learn')){
-   assert.ok(Object.hasOwn(learningPages(),href.slice(1).split('#')[0]),`missing investigation: ${href}`);
+   assert.equal(href,'/learn.html');assert.ok(documentationPage().includes('<h1>Docs &amp; tutorials</h1>'));
    continue;
   }
   const target=decodeURIComponent(href.split('#')[0]);

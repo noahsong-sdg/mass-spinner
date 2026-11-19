@@ -37,7 +37,7 @@ export const numberedTutorials = [
   {id:'prediction',heading:'What is a defensible claim here?',actions:[['modelInfo','Open measured-reference assessment']]},
  ]},
 ] as const satisfies readonly {number:string;title:string;topics:readonly GuideTopic[]}[];
-/** Additional explicit entrypoints used by the optional investigation pages. */
+/** Additional explicit entrypoints used by the numbered tutorials. */
 export const tutorialActions=['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','gasTemperature','magneticLeverage','cascade','pumping','fuelInventory','lithiumSurfaces','stageControls','pumpControls','inventoryControls','newRun','cutPower','controls','inspect','view','modelInfo','beamLedger','beamDynamics'] as const;
 /** Navigation only: reveal canonical inputs and results, never install hidden physical presets. */
 export type GuideExperiment={title:string;control:string;result:string;label:string;hint:string;apparatus?:'source';panel?:'target'};

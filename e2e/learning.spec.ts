@@ -85,19 +85,25 @@ test('concise tutorials have linked contents and keyboard access to optional exp
  expect(errors).toEqual([]);
 });
 
-test('all investigation pages open independently with working navigation and no mobile overflow',async({page},info)=>{
+test('documentation index omits investigations and loads local typography without mobile overflow',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  page.on('response',response=>{if(response.status()>=400)errors.push(`${response.status()} ${response.url()}`);});
- for(const name of ['learn','learn-controls','learn-transport','learn-thermal','learn-beam','learn-collection','learn-evidence']){
+ for(const name of ['learn']){
   await page.goto(`/${name}.html`);await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('iframe')).toHaveCount(0);
+  await expect(page.locator('a[href^="/learn-"]')).toHaveCount(0);
+  await expect(page.locator('main section')).toHaveCount(2);
+  expect(await page.evaluate(async()=>{
+   const body=await document.fonts.load('400 16px Commissioner'),heading=await document.fonts.load('500 28px Literata');
+   return {body:body.some(face=>face.status==='loaded'),heading:heading.some(face=>face.status==='loaded'),computedBody:getComputedStyle(document.body).fontFamily,computedHeading:getComputedStyle(document.querySelector('h1')!).fontFamily};
+  })).toMatchObject({body:true,heading:true,computedBody:'Commissioner, sans-serif',computedHeading:'Literata, serif'});
   await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
   const last=page.locator('.guide-contents a').last(),target=await last.getAttribute('href');
   await last.click();await expect(page.locator(target!)).toBeInViewport();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  }
- await info.attach('evidence-investigation',{body:await page.screenshot(),contentType:'image/png'});
+ await info.attach('documentation-index',{body:await page.screenshot(),contentType:'image/png'});
  expect(errors).toEqual([]);
 });
 
@@ -105,25 +111,27 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const pending=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  const reader=await pending;
- await reader.locator('a[href="/learn-transport.html"]').click();
+ await reader.locator('a[href="/tutorial-06.html"]').click();
  await reader.locator('[data-guide-action="separationPlot"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('separation');
  await expect(page.locator('#window-plots')).toBeVisible();
  if(await page.locator('#fuel-motion-play').getAttribute('aria-pressed')==='true')await page.locator('#fuel-motion-play').click();
  const time=await page.locator('#fuel-motion-time').inputValue();
+ await reader.goto('/guide.html#momentum');
  await reader.locator('[data-guide-action="momentum"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('momentum');
  await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
  await expect(reader.locator('#reader-status')).toContainText('Sent to the simulator');
+ await reader.goto('/tutorial-06.html#sensitivity');
  await reader.locator('[data-guide-action="pin"]').click();
- await reader.locator('[data-guide-action="drag"]').click();
- const drag=page.locator('#fuel-dragHz'),before=await drag.inputValue();
- await drag.press('ArrowRight');await expect(drag).not.toHaveValue(before);
+ await reader.locator('[data-guide-action="diffusion"]').click();
+ const diffusivity=page.locator('#fuel-radialDiffusivityM2S'),before=await diffusivity.inputValue();
+ await diffusivity.press('ArrowRight');await expect(diffusivity).not.toHaveValue(before);
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
  if(!await page.locator('#window-view').isVisible())await page.getByRole('button',{name:'View',exact:true}).click();
  await expect(page.locator('.fuel-comparison-inputs')).toBeVisible();
- await expect(page.locator('.fuel-comparison-inputs')).toContainText('Neutral wall drag rate');
+ await expect(page.locator('.fuel-comparison-inputs')).toContainText('Assumed radial diffusivity');
  await reader.close();
 });
 
@@ -171,10 +179,10 @@ test('tutorial experiment links put relevant controls and results within one act
  await expect(page.locator('#fuel-burnFraction')).toBeFocused();await expect(page.locator('#fuel-loopTimeS')).toBeVisible();
  await info.attach('tutorial-controls-ready',{body:await page.locator('#window-controls').screenshot(),contentType:'image/png'});
  await page.getByRole('button',{name:'Show fuel inventory',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('inventory');
- await reader.goto('/learn-beam.html');await reader.locator('[data-guide-action="beamSource"]').click();
+ await page.goto('/?level=2&try=beamSource');
  await expect(page.locator('#fusion-beamCurrentA')).toBeFocused();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
  await page.getByRole('button',{name:'Show source energy ledger',exact:true}).click();await expect(page.locator('#fusion-plots')).toBeVisible();
- await reader.locator('[data-guide-action="beamTarget"]').click();
+ await page.goto('/?level=2&try=beamTarget');
  await expect(page.locator('#coupled-pulseDuty')).toBeFocused();await expect(page.locator('#coupled-view-settings')).toBeVisible();
  await page.getByRole('button',{name:'Show target dynamics',exact:true}).click();await expect(page.locator('#coupled-view-dynamics')).toBeVisible();
  expect(errors).toEqual([]);await reader.close();

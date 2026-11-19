@@ -49,7 +49,7 @@ export function understandingPage(markdown,revision,tutorial){
   },
  }});
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
- <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
+ <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
  <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Read on its own ↗</a></header>
 <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/learn.html">Docs & tutorials</a></footer></body></html>`;

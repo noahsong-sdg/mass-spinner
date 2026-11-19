@@ -36,4 +36,4 @@ A Doppler instrument measures emission along a sightline, not automatically the 
 
 Export the accepted run with its physical time, plot and prescribed coefficients. Operating maps and saved references do not certify an operating region.
 
-[Qualification implementation](../src/fuel-qualification-ui.ts) · [More evidence experiments](/learn-evidence.html) · [Back to the physics guide](UNDERSTANDING-MASS-SPINNER-02.md)
+[Qualification implementation](../src/fuel-qualification-ui.ts) · [Back to the physics guide](UNDERSTANDING-MASS-SPINNER-02.md)

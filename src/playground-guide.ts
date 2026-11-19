@@ -30,7 +30,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  for(const button of [previous,next,leave])button.type='button';
  leave.setAttribute('aria-label','Back to the scene');
  const methods=el('a','Equations & accuracy limits ↗');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';
- const views=el('div'),explore=el('button','Experiments'),physics=el('button','Physics & equations'),reader=el('div'),frame=el('iframe');
+ const views=el('div'),explore=el('button','Tutorial 1'),physics=el('button','Physics & equations'),reader=el('div'),frame=el('iframe');
  views.className='guide-views';views.setAttribute('role','group');views.setAttribute('aria-label','Guide view');
  reader.className='guide-physics';reader.hidden=true;frame.title='Mass Spinner physical guide with equations and diagrams';frame.id='physics-guide-frame';reader.append(frame);
  for(const button of [explore,physics])button.type='button';

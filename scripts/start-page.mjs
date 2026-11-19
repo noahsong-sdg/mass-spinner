@@ -5,7 +5,7 @@ const {playgroundSteps}=/** @type {typeof import('../src/playground-guide-steps.
 /** @param {string} value */
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 export function startPage(){
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial 1 · Using the simulator · Mass Spinner</title><link rel="stylesheet" href="/guide.css"><script type="module" src="/guide-reader.js"></script></head><body class="walkthrough">
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Tutorial 1 · Using the simulator · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide.css"><script type="module" src="/guide-reader.js"></script></head><body class="walkthrough">
  <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/guide.html">Physics & equations →</a><a href="/learn.html">Docs & tutorials</a></header>
  <main><h1>Tutorial 1 · Using the simulator</h1><p id="reader-status" role="status" aria-live="polite"></p>
  ${guideContents(playgroundSteps.map(step=>[step.id,step.title]))}

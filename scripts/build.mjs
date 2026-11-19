@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { copyFileSync,cpSync,mkdirSync,readFileSync,writeFileSync } from 'node:fs';
 import {qualificationPage} from './qualification-page.mjs';
 import {startPage} from './start-page.mjs';
-import {learningPages} from './learning-pages.mjs';
+import {documentationPage} from './documentation-page.mjs';
 import {understandingPage} from './understanding-page.mjs';
 import {tsImport} from 'tsx/esm/api';
 const {numberedTutorials}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
@@ -23,7 +23,7 @@ if(build.status===0){
  copyFileSync('output/gltf-trial/report.json','release/asset-qualification.json');
  writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
  writeFileSync('release/start.html',startPage());
- for(const [name,html]of Object.entries(learningPages()))writeFileSync(`release/${name}`,html);
+ writeFileSync('release/learn.html',documentationPage());
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  for(const tutorial of numberedTutorials)writeFileSync(`release/tutorial-${tutorial.number}.html`,understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8'),revision,tutorial));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));

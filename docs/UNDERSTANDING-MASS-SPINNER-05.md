@@ -35,4 +35,4 @@ Then [open fuel inventory controls](/?level=2&try=inventoryControls):
 
 This is steady processing holdup, not total plant inventory. Startup reserve, storage, decay, leakage, breeding dynamics and equipment residence-time distributions are omitted. Zero loop holdup does not mean a plant needs no tritium. Lithium purity alone cannot establish fuel self-sufficiency.
 
-[Fuel accounting implementation](../src/fuel-centrifuge.ts) · [Inventory experiment](/learn-collection.html#fuel) · [Next: 06 · which prediction to trust](UNDERSTANDING-MASS-SPINNER-06.md)
+[Fuel accounting implementation](../src/fuel-centrifuge.ts) · [Next: 06 · which prediction to trust](UNDERSTANDING-MASS-SPINNER-06.md)

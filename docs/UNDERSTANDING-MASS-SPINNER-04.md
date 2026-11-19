@@ -42,4 +42,4 @@ S is outer pump speed, C inlet conductance (both m³/s); p is pressure (Pa). Gas
 
 Now [adjust pump speed](/?level=2&try=pumpControls): increase S while holding C fixed. Gas load grows because this reference permits higher required upstream pressure; effective inlet speed approaches C. Then increase C separately. Do not interpret this as fixed-upstream-pressure throughput or feedback on the closed-vessel rotor.
 
-[Routing and pumping implementation](../src/fuel-centrifuge.ts) · [More collection experiments](/learn-collection.html) · [Next: 05 · why fusion needs separation](UNDERSTANDING-MASS-SPINNER-05.md)
+[Routing and pumping implementation](../src/fuel-centrifuge.ts) · [Next: 05 · why fusion needs separation](UNDERSTANDING-MASS-SPINNER-05.md)

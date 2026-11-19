@@ -1,12 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
-import {learningPages} from '../scripts/learning-pages.mjs';
+import {documentationPage} from '../scripts/documentation-page.mjs';
 import {startPage} from '../scripts/start-page.mjs';
 import {setupGuideReader} from '../src/guide-reader.js';
 
 test('every reader has ordinary contents links and omits repetitive learning scaffolding',t=>{
- for(const [name,html] of Object.entries({'start.html':startPage(),...learningPages()})){
+ for(const [name,html] of Object.entries({'start.html':startPage(),'learn.html':documentationPage()})){
   const dom=new JSDOM(html,{url:`https://example.org/${name}`});t.after(()=>dom.window.close());const doc=dom.window.document;
   assert.equal(doc.querySelector('#guide-chapter,#learning-mode,textarea,[data-learning-hint],.learning-transfer'),null,name);
   assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question or control/);

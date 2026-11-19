@@ -43,4 +43,4 @@ Lithium must also remain gaseous. The [surface reference](/?level=2&try=surfaceE
 
 Conductivity, heat exchange and deposition remain prescribed. Wall layers need joint cell/time refinement. Discharge and radial fluid momentum are not solved.
 
-[Implementation and assumptions](../src/fuel-operation.ts) · [Try more thermal experiments](/learn-thermal.html) · [Next: 04 · a useful process](UNDERSTANDING-MASS-SPINNER-04.md)
+[Implementation and assumptions](../src/fuel-operation.ts) · [Next: 04 · a useful process](UNDERSTANDING-MASS-SPINNER-04.md)

@@ -4,11 +4,6 @@
 contains six tutorials: controls, rotation/separation, heat, collection, fuel inventory
 and model accuracy. Equations and diagrams link directly to relevant simulator controls.
 
-Experiments are optional comparisons using the same simulator, not extra models.
-Each gives a baseline, one change, readouts and an optional explanation. Beam–target
-physics is separate from the centrifuge. Inspect identifies parts; physical edits
-open their canonical Controls inputs.
-
 The reader uses the same-origin action bridge, has no solver or learner tracking,
 and remains readable without JavaScript.
 

@@ -344,8 +344,7 @@ Continue with [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
 [04 · collection](UNDERSTANDING-MASS-SPINNER-04.md),
 [05 · fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
 [06 · accuracy](UNDERSTANDING-MASS-SPINNER-06.md).
-The [documentation index](/learn.html) also links optional experiments using
-the same controls and plots.
+The [documentation index](/learn.html) links all six tutorials and the technical references.
 
 ## Equations and further reading
 
