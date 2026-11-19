@@ -69,6 +69,6 @@ export function fuelLearningComparison(result: FuelFieldResult, state: FuelField
   const padding=Math.max(.05,(hi-lo)*.08),domain: [number, number]=[Math.max(0,lo-padding),Math.min(100,hi+padding)];
   for(const curve of curves)curve.yDomain=domain;
  }
- return {cases,curves,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation held at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
- Closed inventory; no drive, heating or extraction prediction.${kind==='collection'?'':` Zoomed light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' Spatial temperature replaced by its mean for these references.':''}${omega===0?' No centrifugal bias at zero rotation.':''}`};
+ return {cases,curves,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation fixed at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
+ Closed inventory. These references do not predict drive, heating or extraction.${kind==='collection'?'':` Expanded light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' These references use the mean gas temperature instead of spatial temperature differences.':''}${omega===0?' At zero rotation, there is no centrifugal separation.':''}`};
 }

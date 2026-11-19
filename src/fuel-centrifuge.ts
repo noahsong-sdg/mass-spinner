@@ -201,12 +201,12 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
   lithium:{wallVaporPressurePa:wallVapor,wallSaturationRatio:wallVapor===null?null:wall/wallVapor,gasVaporPressurePa:c.pair==='lithium'?lithiumVaporPressurePa(c.gasK):null},
   fuelCycle:{burnTritonsS,exhaustTritiumKg:massT*burnTritonsS*(1/c.burnFraction-1)*c.loopTimeS,
    grossTritiumKg:massT*burnTritonsS/c.burnFraction*c.loopTimeS},
-  assumptions:['Uniform-density two-rotor mechanics; neutral pressure fixes neutral inventory. Prescribed ion fraction, reciprocal collision rate, neutral drag and conductivity.',
-   ...(currentEvents.length?['Uniform-inertia reference follows the scheduled discharge-current steps by exact linear superposition. Radial equilibrium, cascade and pumping references use its final speed at the initial gas temperature; they are not evolving extraction or thermal predictions. Mechanics torque and Ohmic power retain the initial-current reference for setup identity and matched-torque scans.']:[]),
-   'Fixed gas temperature: required cooling is a load, not an evolved thermal solution. No ionization or electron energy balance.',
-   'Radial profiles are neutral isothermal equilibrium references at the computed speed, not transient separation or solved axial extraction.',
-   'Cascade assumes its incoming composition equals the reference vessel bulk composition, and assigns inventory fractions to routing probabilities with equal turnover; identical ideal stages retain both exit streams. Geometry partitions are schematic routing overlays: length and mechanics describe one reference vessel, not a dimensioned cascade envelope.',
-   'Pumping uses equilibrium pressure, Q=S p_wall and p_up=p_axis+Q/C with common species-independent S and C; flow back-reaction, thermal/rarefaction corrections and conductance validity are not solved.',
-   'CIV is a contextual slip-speed diagnostic, not a hard limit. Geometry, materials and coefficients are illustrative, not an as-built specification.']};
+  assumptions:['Two-rotor reference with uniform densities. Neutral pressure sets neutral inventory. Ion fraction, reciprocal collision rate, neutral drag and conductivity are specified inputs.',
+   ...(currentEvents.length?['The uniform-inertia reference uses exact linear superposition for discharge-current steps. Radial equilibrium, cascade and pumping references use its final speed at the initial gas temperature. They do not predict time-dependent extraction or temperature. Setup torque and Ohmic power use the initial current for setup identity and equal-torque scans.']:[]),
+   'At fixed gas temperature, required cooling is a heat load. It is not a calculated temperature history. The model does not include ionization or an electron energy balance.',
+   'Radial profiles show neutral isothermal equilibrium at the calculated speed. They do not predict time-dependent separation or axial extraction.',
+   'The cascade input composition equals the reference vessel bulk composition. Inventory fractions set routing probabilities with equal turnover times. Identical ideal stages include both exit streams. Geometry sections show schematic routing. Length and mechanics describe one reference vessel, not a complete cascade.',
+   'Pumping uses equilibrium pressure, Q=S p_wall and p_up=p_axis+Q/C. Both species use the same S and C. Flow does not change rotation. The calculation does not include thermal or rarefaction corrections or show where the conductance relation applies.',
+   'Critical ionization velocity (CIV) is a slip-speed reference, not a motion limit. Geometry, materials and coefficients are assumptions. They do not specify manufactured hardware.']};
  requireFiniteState(result);return result;
 }

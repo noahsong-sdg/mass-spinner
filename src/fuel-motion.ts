@@ -92,7 +92,7 @@ export function createFuelMotion(result: FuelRenderResult){
   const geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.BufferAttribute(new Float32Array(Math.ceil(n/TRAIL_STRIDE)*TRAIL_SEGMENTS*6),3));
   const lines=new THREE.LineSegments(geometry,new THREE.LineBasicMaterial({color:colors[species],transparent:true,opacity:.35,depthWrite:false,toneMapped:false}));
   lines.name='Accepted bulk history traces';lines.frustumCulled=false;
-  lines.userData.purpose='Equal-population bulk history; not molecular trajectories';
+  lines.userData.purpose='Equal-population bulk history, not molecular paths';
   rotor.add(points,lines);rotor.visible=fractions[species]>0;group.add(rotor);clouds.push({rotor,points,lines,ion,species,n});
  }
  // Outside-vessel packet paths show Q, not a fluid velocity through the chamber.

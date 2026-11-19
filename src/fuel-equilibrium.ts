@@ -2,18 +2,18 @@ import {isArrayShape} from './array-shape.js';
 import {radialPDF} from './fuel-centrifuge.js';
 
 export const equilibriumModel={version:'neutral-cylinder-equilibrium-v1',atomicMassKg:1.66053906892e-27,boltzmannJK:1.380649e-23,
- scope:'Ideal neutral gas; prescribed rigid rotation and uniform temperature; closed cylindrical inventory. No separation time, extraction throughput, plasma electric field, phase equilibrium or experimental calibration.'};
+ scope:'The model uses an ideal neutral gas, rigid rotation and uniform temperature in a closed cylinder. Rotation and temperature are inputs. It does not calculate separation time, extraction throughput, plasma electric fields or phase equilibrium. No experimental calibration applies.'};
 export type EquilibriumInput={massesU:readonly[number,number];edgeSpeedMS:number;temperatureK:number;radiusM:number;lengthM:number;totalParticles:number;lightFraction:number;cutFraction:number};
 const range=(v:number,name:string,lo:number,hi:number)=>{if(!Number.isFinite(v)||v<lo||v>hi)throw new RangeError(`${name} must be in [${lo}, ${hi}].`);};
 function validate(c:EquilibriumInput){
- if(!isArrayShape(c.massesU)||c.massesU.length!==2)throw new RangeError('Two ordered neutral masses are required.');
+ if(!isArrayShape(c.massesU)||c.massesU.length!==2)throw new RangeError('Supply two neutral masses in light-to-heavy order.');
  for(const m of c.massesU)range(m,'Mass (u)',1,250);
- if(c.massesU[0]>c.massesU[1])throw new RangeError('Light mass must not exceed heavy mass.');
+ if(c.massesU[0]>c.massesU[1])throw new RangeError('The light mass must be less than or equal to the heavy mass.');
  range(c.edgeSpeedMS,'Edge speed (m/s)',0,2e5);range(c.temperatureK,'Temperature (K)',100,10000);
  range(c.radiusM,'Radius (m)',.001,10);range(c.lengthM,'Length (m)',.001,100);range(c.totalParticles,'Inventory (particles)',1,1e30);
  range(c.lightFraction,'Light inventory fraction',0,1);range(c.cutFraction,'Cut radius / vessel radius',0,1);
  const beta=c.massesU.map(m=>m*equilibriumModel.atomicMassKg*c.edgeSpeedMS**2/(2*equilibriumModel.boltzmannJK*c.temperatureK));
- if(beta[1]>100)throw new RangeError('Outside the screened numerical domain: heavy-species β must be ≤ 100. Reduce speed or increase temperature.');
+ if(beta[1]>100)throw new RangeError('The numerical domain has the limit β ≤ 100 for the heavy species. Decrease the speed or increase the temperature.');
  return beta;
 }
 // log integral_0^1 exp(b y) dy. The series preserves enrichment near zero rotation.

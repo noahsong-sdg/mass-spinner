@@ -25,8 +25,8 @@ export function publicInputCoverage(result:Accepted['result']){
   &&Object.entries(historical).every(([k,v])=>k==='currentA'||equal(result.config[k as keyof FuelConfig],v)));
  return {historicalInputMatch:matches,experimentallyQualified:false as const,
   numericalQualification:'not-established-for-this-run' as const,
-  text:matches?'Matches a previously tested input node; this run has not been independently refined.'
-   :'Outside the previously tested input nodes; numerical accuracy for these settings is unqualified.'};
+  text:matches?'This run matches a previously tested input case. This match does not include independent refinement of the current run.'
+   :'These inputs are outside the previously tested cases. Their numerical accuracy is unknown.'};
 }
 export function publicSensitivityPlan(accepted:Accepted,key:Coefficient,lower:number,upper:number){
  if(!Object.hasOwn(PUBLIC_SENSITIVITY_COEFFICIENTS,key))throw new RangeError('Choose a supported prescribed coefficient.');

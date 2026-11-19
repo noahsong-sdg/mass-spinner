@@ -39,14 +39,14 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
  const inputs=el('output');inputs.className='fuel-comparison-inputs fuel-comparison-delta';inputs.hidden=true;
  inputs.setAttribute('aria-label','Accepted inputs: A to B');root.append(inputs);
  const details=el('details'),heading=el('summary','Operating map'),choices=el('div');choices.className='fuel-map-choices';
- details.append(heading,el('p','Uniform-inertia equilibrium reference; not the coupled transient.'),choices);root.append(details);
+ details.append(heading,el('p','Equilibrium reference with fixed uniform inertia. This map does not use the coupled time-dependent model.'),choices);root.append(details);
  const select=(name: string,entries: [string,{label: string}][],value: string)=>{
   const label=el('label',name),input=el('select');input.setAttribute('aria-label',`Operating map ${name.toLowerCase()}`);
   for(const [key,definition]of entries){const option=el('option',definition.label);option.value=key;input.append(option);}
   input.value=value;label.append(input);choices.append(label);return input;
  };
  const x=select('Horizontal',Object.entries(FUEL_MAP_AXES),'magneticT'),y=select('Vertical',Object.entries(FUEL_MAP_AXES),'currentA');
- const metric=select('Color',Object.entries(FUEL_MAP_METRICS),'purity'),run=el('button','Generate'),status=el('p'),grid=el('div'),legend=el('p'),axes=el('div'),scroll=el('div');
+ const metric=select('Color',Object.entries(FUEL_MAP_METRICS),'purity'),run=el('button','Calculate'),status=el('p'),grid=el('div'),legend=el('p'),axes=el('div'),scroll=el('div');
  run.type='button';run.disabled=true;status.setAttribute('role','status');grid.className='fuel-map-grid';grid.setAttribute('aria-label','Operating map');
  axes.className='fuel-map-axes';scroll.className='fuel-map-scroll';scroll.append(grid);
  legend.className='fuel-map-legend';details.append(run,status,axes,scroll,legend);
@@ -63,7 +63,7 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
   const oa=a.transport?.operation,ob=b.transport?.operation;
   if(oa&&ob){
    if(oa.events.length!==ob.events.length||oa.events.some((event,i)=>event.timeS!==ob.events[i].timeS||event.currentA!==ob.events[i].currentA))
-    changes.push('Current-switch history changed');
+    changes.push('The current-switch history changed');
    const ta=oa.thermal,tb=ob.thermal;
    for(const [key,label,unit]of [
     ['enabled','Temperature evolution',''],['wallCapacityJK','Liner heat capacity','J/K'],
@@ -81,14 +81,14 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
     changes.push('Gas timestep accuracy changed');
   }
   inputs.textContent=changes.length?`Changed A → B: ${changes.join('; ')}.`:'Same accepted base inputs.';
-  if(!oa||!ob)inputs.textContent+=' Drive/thermal history unavailable for this comparison.';
+  if(!oa||!ob)inputs.textContent+=' Drive and thermal histories are not available for this comparison.';
  }
  function showDifference(){
   showInputs();
   delta.hidden=!pinned||!latest;if(!pinned||!latest){delta.textContent='';return;}
   const a=pinned.result,b=latest.result,mode=latest.mode??'equilibrium';
   const transient=['spin','transport'].includes(mode),timeS=Math.min(latest.timeS??0,a.config.durationS,b.config.durationS);
-  if(transient&&(!a.transport||!b.transport)){delta.textContent='Transient comparison unavailable';return;}
+  if(transient&&(!a.transport||!b.transport)){delta.textContent='The time-dependent comparison is not available';return;}
   const sa=transient?sampleFuelTransport(a.transport!,timeS):null,sb=transient?sampleFuelTransport(b.transport!,timeS):null;
   const speedA=sa?sa.neutralRadS*a.config.radiusM:a.samples.at(-1)!.neutralMS;
   const speedB=sb?sb.neutralRadS*b.config.radiusM:b.samples.at(-1)!.neutralMS;
@@ -97,7 +97,7 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
   const signed=(value: number)=>`${value>0?'+':''}${fmt(value)}`;
   const purity=sameCut&&purityA!==null&&purityB!==null?`Δ inner light ${signed(100*(purityB-purityA))} pp`:'Inventory cuts/species differ';
   delta.textContent=`${purity} · Δ gas ${signed(speedB-speedA)} m/s · ${transient?`${fmt(timeS)} s`:'final reference'}`;
-  delta.title=`B minus A. ${transient?'Matched physical time; closed-wall inventory, not extracted product.':'Uniform-inertia final-equilibrium inventory reference.'}`;
+  delta.title=`B minus A. ${transient?'Same physical time. Closed-wall inventory, not extracted product.':'Final equilibrium inventory with fixed uniform inertia.'}`;
  }
  const cancel=()=>{revision++;controller?.abort();controller=null;grid.replaceChildren();axes.replaceChildren();legend.textContent='';status.textContent='';};
  const ready=()=>{run.disabled=!latest||x.value===y.value;pinButton.disabled=!latest;};
@@ -141,23 +141,23 @@ export function createFuelComparisonTools({document:doc=document,host,request,on
    button.addEventListener('click',()=>{
     if(point.status==='valid'){
      for(const cell of grid.children)cell.setAttribute('aria-pressed',String(cell===button));
-     status.textContent=`Applying ${label}`;onApply(structuredClone(point.config));
+     status.textContent=`Input selection: ${label}`;onApply(structuredClone(point.config));
     }else status.textContent=`${label} · ${notes}`;
    });
    grid.append(button);
   }
-  status.textContent=`${map.x.label} → · ${map.y.label} ↓ · Select a point to apply`;
+  status.textContent=`${map.x.label} → · ${map.y.label} ↓ · Select a point to use its inputs`;
  }
  run.addEventListener('click',()=>{void (async()=>{
   if(!latest||x.value===y.value||disposed)return;
   cancel();controller=new AbortController();const id=revision,accepted=latest;
-  run.disabled=true;status.textContent='Computing…';
+  run.disabled=true;status.textContent='Calculation in progress…';
   try{
    const reply=await request({kind:'fuel-operating-map',schemaVersion:1,id,config:structuredClone(accepted.result.config),
     options:{xKey:x.value as keyof typeof FUEL_MAP_AXES,yKey:y.value as keyof typeof FUEL_MAP_AXES,metric:metric.value as keyof typeof FUEL_MAP_METRICS,size:7}},controller.signal);
    if(disposed||id!==revision)return;
    const acceptedHash=accepted.producingCode?.sourceHash,mapHash=reply.producingCode?.sourceHash;
-   if(acceptedHash&&mapHash&&acceptedHash!==mapHash)throw new Error('Simulation code changed. Run the experiment again before mapping.');
+   if(acceptedHash&&mapHash&&acceptedHash!==mapHash)throw new Error('The simulation code changed. Before the operating-map calculation, run the experiment again.');
    const map=reply.result;
    if(map?.schemaVersion!==1||!Array.isArray(map.points))throw new Error('Unsupported operating-map result.');
    renderMap(map);

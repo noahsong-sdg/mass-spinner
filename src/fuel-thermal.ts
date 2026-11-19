@@ -15,7 +15,7 @@ export type FuelLinerBoundary={gasWallWK:number;coolingWK:number;coolantK:number
 
 function temperature(value:number){
  if(!Number.isFinite(value)||value<FUEL_LINER_MIN_K||value>FUEL_LINER_MAX_K)
-  throw new RangeError('Solid tungsten liner supports 300–1900 K; refine the step or change the thermal setup.');
+  throw new RangeError('Solid tungsten liner temperature must be 300–1900 K. Decrease the timestep or change the thermal setup.');
 }
 /** Exact interval average of the solid Shomate heat capacity, in J/(kg K). */
 export function meanHeatCapacity(a:number,b:number){
@@ -71,13 +71,13 @@ export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[],
  if(cellEnergyJ.length!==grid.massesKg.length)throw new RangeError('Liner energy state must match its radial grid.');
  if(correctionJ!==undefined){
   if(!isArrayShape(correctionJ)||correctionJ.length!==cellEnergyJ.length)
-   throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
+   throw new RangeError('Liner energy corrections must be finite normalized high/low pairs on the same grid.');
   for(let i=0;i<cellEnergyJ.length;i++){
    // Preserve the existing inversion's upper endpoint roundoff allowance.
    // Compare both words: adding them first can hide a tiny domain violation.
    const energy=cellEnergyJ[i],low=correctionJ[i],maximum=grid.massesKg[i]*enthalpy(FUEL_LINER_MAX_K)*(1+8*Number.EPSILON);
    if(!Number.isFinite(low)||energy+low!==energy)
-    throw new RangeError('Liner energy corrections need finite normalized high/low pairs on the same grid.');
+    throw new RangeError('Liner energy corrections must be finite normalized high/low pairs on the same grid.');
    if(energy<0||energy===0&&low<0||energy>maximum||energy===maximum&&low>0)
     throw new RangeError('Paired liner energy leaves the solid tungsten enthalpy domain.');
   }

@@ -12,10 +12,10 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
  const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
  const detail=el('details');detail.className='fuel-spatial-experiment';
  detail.append(el('summary','Spatial rotation · research experiment'));
- detail.append(el('p','Unqualified closed argon experiment · local rotation, species transport and gas/liner heat. This optional worker uses the existing spatial backend; it does not replace the live two-rotor model.'));
- detail.append(el('p','Conceptual 1 cm radius × 10 cm cylinder. Outer-cylinder voltage is relative to a grounded upper disk over the inner half-area. Current is solved, not imposed. Equal-mass argon labels share one fluid velocity; there is no ion–neutral slip control.'));
- detail.append(el('p',`Fixed exploratory grid: ${DEFAULT_SPATIAL_EXPERIMENT.radialCells} radial × ${DEFAULT_SPATIAL_EXPERIMENT.axialCells} axial electrical cells, ${DEFAULT_SPATIAL_EXPERIMENT.steps} time steps. Positive plotted current flows conventionally out of the gas through the outer contact.`));
- detail.append(el('p','Numerical limits remain open: retained startup surface errors were 4.63712% in time and 2.88464% in space against 1%/2% targets. Those conditions differ from this short window; they do not qualify this trajectory. Density controls are exploration bounds, not validated continuum limits: low-density rarefaction can invalidate local viscosity, Fourier heat conduction and the gas–wall film. Joule heat goes directly into the common gas; its electron/heavy-particle partition is assumed. No electron energy, chemistry, axial shear, meridional hydrodynamics or feed/exhaust is solved.'));
+ detail.append(el('p','This closed argon calculation includes local rotation, species transport and gas/liner heat. Its numerical and experimental accuracy are unknown. It does not replace the live two-rotor model.'));
+ detail.append(el('p','The assumed cylinder has a 1 cm radius and 10 cm length. The grounded upper disk covers the inner half-area. Outer-cylinder voltage is relative to this disk. The model calculates current from voltage. Equal-mass argon labels share one fluid velocity. There is no ion–neutral slip control.'));
+ detail.append(el('p',`Fixed research grid: ${DEFAULT_SPATIAL_EXPERIMENT.radialCells} radial × ${DEFAULT_SPATIAL_EXPERIMENT.axialCells} axial electrical cells, ${DEFAULT_SPATIAL_EXPERIMENT.steps} time steps. Positive conventional current leaves the gas through the outer contact.`));
+ detail.append(el('p','Prior startup surface errors were 4.63712% in time and 2.88464% in space, above the 1%/2% limits. Those conditions differ from this short run and do not show its accuracy. The density control limits do not show where continuum equations apply. At low density, rarefaction can make local viscosity, Fourier heat conduction and gas–wall film relations invalid. The model puts Joule heat directly into the common gas without separate electron and heavy-particle energy equations. It does not calculate electron energy, chemistry, axial shear, meridional flow or feed/exhaust.'));
  const controls=el('div');controls.className='fuel-spatial-controls';detail.append(controls);
  const inputs=new Map<SpatialControlKey,{input: HTMLInputElement;scale: number}>();
  for(const [key,label,unit,min,max,step,scale]of [
@@ -36,10 +36,10 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
   const option=el('option',label);option.value=String(value);pulse.append(option);
  }
  pulse.value=String(DEFAULT_SPATIAL_EXPERIMENT.driveFraction);controls.append(pulseLabel,pulse);
- detail.append(el('p','Switching to zero voltage shorts the driven and grounded contacts; it does not model an open circuit or discharge extinction.'));
+ detail.append(el('p','At zero voltage, the contacts form a short circuit. This state does not show an open circuit or discharge extinction.'));
  const run=el('button','Run research window'),cancel=el('button','Cancel'),download=el('button','Export research JSON');
  run.type=cancel.type=download.type='button';cancel.hidden=true;download.disabled=true;
- const status=el('p','Open controls, then run a separate short experiment.');status.setAttribute('role','status');
+ const status=el('p','Use Run research window to start a separate short calculation.');status.setAttribute('role','status');
  const plots=el('div');plots.className='live-plots';
  const identity=el('p');identity.className='fuel-spatial-identity';
  detail.append(run,cancel,download,status,identity,plots);host.append(detail);
@@ -53,7 +53,7 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
   run.disabled=disposed||Boolean(controller)||[...inputs.values()].some(({input})=>input.value===''||!input.checkValidity());
  };
  const invalidate=()=>{revision++;controller?.abort();controller=null;cancel.hidden=true;clear();ready();};
- const changed=()=>{invalidate();status.textContent='Inputs changed. Run again; previous results were cleared.';};
+ const changed=()=>{invalidate();status.textContent='Inputs changed. Previous results are no longer available. Run the calculation again.';};
  for(const {input}of inputs.values())input.addEventListener('input',changed);
  pulse.addEventListener('change',changed);
  function checkedResult(result: SpatialResult,config: FuelSpatialExperimentConfig){
@@ -79,7 +79,7 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
   if(disposed||!detail.open||run.disabled)return;
   invalidate();const id=revision;
   try{
-   const config=read();controller=new AbortController();ready();cancel.hidden=false;status.textContent='Computing a separate spatial research window…';
+   const config=read();controller=new AbortController();ready();cancel.hidden=false;status.textContent='Separate spatial calculation in progress…';
    const reply=await request({kind:'fuel-spatial-experiment',schemaVersion:1,id,config},controller.signal);
    if(disposed||id!==revision)return;
    const source=producingCode(reply.producingCode);
@@ -92,14 +92,14 @@ export function mountFuelSpatialExperiment(host: HTMLElement,{request=requestSim
     {label:'Solved outward electrode current',x:result.snapshots.map(s=>s.timeS*1e6),y:result.snapshots.map(s=>s.electrodeCurrentA),xLabel:'Time (μs)',yLabel:'Signed outer-contact current (A)'},
    ]);
    identity.textContent=`Worker source SHA-256: ${source.sourceHash}`;download.disabled=false;
-   status.textContent='Computed research trajectory · numerical and experimental accuracy unqualified. Lines join retained samples.';
+   status.textContent='Calculation complete. Numerical and experimental accuracy are unknown. Lines connect stored samples.';
   }catch(error){
    const failure=error as Error;
-   if(!disposed&&id===revision){clear();status.textContent=failure.name==='AbortError'?'Research calculation cancelled.':`Research calculation failed: ${failure.message}`;}
+   if(!disposed&&id===revision){clear();status.textContent=failure.name==='AbortError'?'Research calculation canceled.':`Research calculation failed: ${failure.message}`;}
   }finally{if(!disposed&&id===revision){controller=null;cancel.hidden=true;ready();}}
  }
- const cancelled=()=>{invalidate();status.textContent='Research calculation cancelled.';};
- const toggled=()=>{if(!detail.open){invalidate();status.textContent='Open controls, then run a separate short experiment.';}};
+ const cancelled=()=>{invalidate();status.textContent='Research calculation canceled.';};
+ const toggled=()=>{if(!detail.open){invalidate();status.textContent='Use Run research window to start a separate short calculation.';}};
  const exportResult=()=>{
   if(!accepted)return;
   clearExport();

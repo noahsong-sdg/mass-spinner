@@ -51,10 +51,10 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const c=result.config,R=c.radiusM,L=c.lengthM;
  if(!Number.isFinite(R)||R<=0||!Number.isFinite(L)||L<=0)throw new RangeError('Positive finite gas dimensions required.');
  validateProfiles(result.profiles,R);
- const group=new THREE.Group();group.name='Gas diagnostic slice';group.userData={componentId:'slice',quantitativeOnly:true,purpose:'Axial placement only; the radial model is uniform along z.',materialBasis:'Numerical diagnostic; no physical material'};
+ const group=new THREE.Group();group.name='Gas diagnostic slice';group.userData={componentId:'slice',quantitativeOnly:true,purpose:'Axial position changes the display only. The radial model is uniform along z.',materialBasis:'Numerical diagnostic; no physical material'};
  const rings: FieldMesh[]=[],owned: FieldMesh[]=[],originals: ShellClone[]=[],coilCovers: ShellClone[]=[],exploded: ExplodedMesh[]=[];
  const coilMaterials=new Map<THREE.MeshStandardMaterial,THREE.MeshStandardMaterial>();
- const gasField=new THREE.Group();gasField.name='Axially uniform gas field';gasField.userData={componentId:'slice',quantitativeOnly:true,purpose:'Numerical density section extruded along the uniform axial model; not predicted optical emission.',materialBasis:'Numerical diagnostic; no physical material'};group.add(gasField);
+ const gasField=new THREE.Group();gasField.name='Axially uniform gas field';gasField.userData={componentId:'slice',quantitativeOnly:true,purpose:'The display extends the calculated density section along the uniform axis. It does not predict optical emission.',materialBasis:'Numerical diagnostic; no physical material'};group.add(gasField);
  let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0,sectionOnly=false;
  const peak=Math.max(...result.profiles.map(p=>sampleFuelField(result,p.radiusM).densityM3));
  let domains: Record<FuelFieldLayer,FuelColorDomain>={composition:[0,1],enrichment:[-.01,.01],density:[0,peak],speed:[0,Math.abs(result.samples.at(-1)!.neutralRadS)*R],temperature:[c.gasK,c.gasK]};
@@ -62,7 +62,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const edge=new THREE.Mesh(new THREE.TorusGeometry(R,R*.004,6,96),new THREE.MeshBasicMaterial({color:0xc3d5cc,transparent:true,opacity:.8,depthWrite:false}));
  edge.name='Axial slice handle';edge.userData={componentId:'slice',controlKey:'slice',quantitativeOnly:true};group.add(edge);owned.push(edge);
  const cut=new THREE.Mesh(new THREE.TorusGeometry(R,R*.006,6,96),new THREE.MeshBasicMaterial({color:0xe1ad78,depthWrite:false}));
- cut.name='Collection radius handle';cut.position.z=R*.012;cut.userData={componentId:'light-outlet',controlKey:'cutFraction',quantitativeOnly:true,purpose:'Prescribed inventory cut; extraction flow is not solved.'};group.add(cut);owned.push(cut);
+ cut.name='Collection radius handle';cut.position.z=R*.012;cut.userData={componentId:'light-outlet',controlKey:'cutFraction',quantitativeOnly:true,purpose:'Specified inventory cut. The model does not calculate extraction flow.'};group.add(cut);owned.push(cut);
  const probe=new THREE.Mesh(new THREE.TorusGeometry(R,R*.003,6,96),new THREE.MeshBasicMaterial({color:0xe8eae4,depthTest:false,depthWrite:false}));
  probe.name='Composition probe';probe.position.z=R*.02;probe.renderOrder=5;
  probe.userData={componentId:'slice',quantitativeOnly:true,purpose:'Selected sample radius; display only.'};group.add(probe);owned.push(probe);
@@ -140,7 +140,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   for(const ring of [...rings,...gasField.children as FieldMesh[]]){
    const sample=sampleAt(ring.userData.radiusM as number),value=fieldValue(sample);
    ring.material.color.copy(fieldColor(value,domain));
-   ring.userData={...ring.userData,...sample,value,layer,unit:LAYERS[layer].unit,purpose:`${sample.scope}; uniform along z. Numerical field, not optical emission.`};
+   ring.userData={...ring.userData,...sample,value,layer,unit:LAYERS[layer].unit,purpose:`${sample.scope}. Uniform along z. Colors show calculated values, not optical emission.`};
   }
   group.userData={...group.userData,layer,timeS:state.timeS??result.samples.at(-1)!.timeS,scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM)};
  }
@@ -180,7 +180,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   }
   for(const {mesh,position,offset} of exploded)mesh.position.copy(position).addScaledVector(offset,explode);
   cutFaces.update(cutaway,ghost);
-  group.userData.staging={cutaway,ghost,explode,scope:'Display staging only; numerical gas surfaces remain fixed.'};
+  group.userData.staging={cutaway,ghost,explode,scope:'Display only. Numerical gas surfaces stay fixed.'};
  }
  function setCut(fraction: number,{commit=false}: {commit?: boolean}={}){
   bounded(fraction,0,1,'Collection cut');cut.scale.set(fraction,fraction,1);cut.visible=c.application==='enrichment'&&fraction>0;

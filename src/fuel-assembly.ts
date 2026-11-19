@@ -55,5 +55,5 @@ export function attachFuelAssembly(scene: THREE.Object3D,source: THREE.Object3D,
   }});
   parent.add(node);
  }
- scene.userData.authoredAssembly={tool:'Blender',modules:modules.length,source:'/models/centrifuge-assembly.glb',basis:'Parametric mesh assembly; illustrative construction, not fabrication CAD.'};
+ scene.userData.authoredAssembly={tool:'Blender',modules:modules.length,source:'/models/centrifuge-assembly.glb',basis:'Parametric mesh assembly with illustrative construction. It is not fabrication CAD.'};
 }

@@ -20,7 +20,7 @@ export function fuelDriveAt(config: FuelDriveConfig,radiusM: number,angle=0){
 
 export function createFuelDrive(config: FuelDriveConfig){
  const {radiusM:R,lengthM:L,driveInnerFraction:f}=config,group=new THREE.Group(),layers: Record<FuelDriveLayer, THREE.Group>={B:new THREE.Group(),J:new THREE.Group(),force:new THREE.Group()};
- group.name='Prescribed electromagnetic drive';group.userData={nonPickable:true,quantitativeOnly:true,scope:'Uniform axial B; Jr = −I/(2πrL), prescribed annulus. Fixed-length direction glyphs; no solved field lines.'};
+ group.name='Prescribed electromagnetic drive';group.userData={nonPickable:true,quantitativeOnly:true,scope:'Uniform axial B; Jr = −I/(2πrL) in a specified annulus. Fixed-length arrows show directions. The model does not calculate field lines.'};
  for(const name of ['B','J','force'] as const){layers[name].name=name;group.add(layers[name]);}
  const colors={B:0x9bb8cf,J:0xe0a36c,force:0xe0e6be};
  function arrow(layer: FuelDriveLayer,position: VectorTuple,vector: VectorTuple,length: number,value: number,unit: string){

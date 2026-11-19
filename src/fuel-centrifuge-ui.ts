@@ -67,23 +67,23 @@ const fields: readonly FuelField[]=[
  ['loopTimeS','Exhaust processing time','s',0,1000,10,false,'Fuel inventory'],
 ];
 const topics: Record<string,readonly[string,string]>={
- separation:['Separation over time','Closed-wall radial transport changes neutral inertia and feeds back on rotation through conserved angular momentum. Temperature and diffusivity are imposed; local fluid momentum and extraction are not solved.'],
- composition:['Composition','Left is the axis; right is the wall. The line shows the light-isotope percentage; the rest is heavy. The vertical scale is zoomed to reveal small differences. The dashed line is the original feed percentage.'],
- spin:['Ion–neutral spin-up','L̇ᵢ = τ − Γ(Ωᵢ−Ωₙ); L̇ₙ = Γ(Ωᵢ−Ωₙ) − IₙνΩₙ. Ωₙ = Lₙ/Iₙ uses the evolving gas distribution; ion inertia and integrated friction remain prescribed.'],
- heat:['Drive & work','Drive work supplies rotation, slip and wall losses, and redistribution work ½Ωₙ² dIₙ. Backward Euler adds separately reported numerical dissipation. Fixed gas temperature is not a thermal solution.'],
- thermal:['Temperature','Closed atomic-gas and liner energy balance. Slip, resistive heating and signed redistribution work enter the neutral gas; wall drag enters the liner. Deposition and conductances are prescribed; numerical dissipation is not heat.'],
- thermalProfile:['Temperature profile','Accepted gas and tungsten cell-average temperatures. Early wall-layer detail needs joint mesh/time refinement; no axial temperature is solved.'],
- gasEnergy:['Species energy profile','Species internal energy in each equal-volume gas cell at a common local temperature; separate species temperatures are not solved.'],
- gasPressure:['Gas pressure profile','Local ideal-gas pressure from accepted species inventories and temperature; no radial fluid momentum equation is solved.'],
- momentum:['Angular momentum','Lᵢ + Lₙ = ∫τ dt − ∫IₙνΩₙ dt, from rest. Reciprocal ion–neutral torque cancels; radial redistribution changes inertia rather than creating angular momentum.'],
- inertia:['Gas inertia','Iₙ = Σₛ mₛ ∫r²nₛ dV. Outward redistribution increases inertia, so the same angular momentum produces a lower angular speed. The driven ion population retains its prescribed uniform inertia.'],
- profile:['Species density','nₛ ∝ exp(mₛΩₙ²r² / 2kT), normalized to each species’ total inventory. These are equilibrium references at the selected speed, not finite-time separation.'],
- cut:['Purity & recovery','A smaller inner cut can enrich the light product while discarding most of it. These are inventory cuts; outlet flow requires a transport model.'],
- cascade:['Countercurrent stages','The inner fraction moves forward and the outer fraction returns to the preceding stage. The scan holds feed stage fixed. Both final streams are retained; routing assumes equal turnover.'],
- pump:['Differential pumping','One outer outlet: Q = S p_wall, p_up = p_axis + Q/C. Even an ideal rotor cannot beat the inlet-conductance ceiling. Flow back-reaction on rotation is not solved.'],
- field:['Magnetic leverage','At matched torque, I ∝ 1/B and resistive heating ∝ 1/B², with fixed geometry and conductivity. This does not hold at fixed current.'],
- inventory:['D–T fuel inventory','Separate steady fuel-loop scenario: unburned exhaust = burn×(1/β−1). Delay multiplies processing inventory. This is not a prediction of burn fraction from this centrifuge.'],
- lithium:['Lithium vapor & surfaces','NIST/Hicks equilibrium vapor-pressure fit at the chosen surface temperature. Saturation is a phase-equilibrium diagnostic, not a condensation rate or proof of operating lifetime. No extrapolation beyond 298.14–1599.99 K.'],
+ separation:['Separation over time','Radial transport moves gas in the closed vessel. The changed gas inertia changes rotation through the angular-momentum balance. The model does not calculate local fluid momentum or extraction.'],
+ composition:['Composition','The axis is on the left; the wall is on the right. The line shows the light-isotope percentage. The remaining percentage is heavy. The expanded vertical scale shows small differences. The dashed line shows the feed percentage.'],
+ spin:['Ion–neutral spin-up','L̇ᵢ = τ − Γ(Ωᵢ−Ωₙ); L̇ₙ = Γ(Ωᵢ−Ωₙ) − IₙνΩₙ. The gas distribution changes Iₙ, so Ωₙ = Lₙ/Iₙ changes. Ion inertia and the collision torque coefficient are specified inputs.'],
+ heat:['Drive & work','Drive work supplies rotation, slip losses, wall losses and redistribution work ½Ωₙ² dIₙ. Backward Euler also causes numerical dissipation, which the model shows separately. Fixed gas temperature does not give a thermal solution.'],
+ thermal:['Temperature','The energy balance connects the atomic gas and liner. Slip, resistive heat and signed redistribution work change gas energy. Wall drag supplies heat to the liner. Heat deposition and conductances are specified inputs. Numerical dissipation is not heat.'],
+ thermalProfile:['Temperature profile','The curves show gas and tungsten cell-average temperatures. Early wall layers make spatial and timestep refinement necessary together. The model does not calculate axial temperature differences.'],
+ gasEnergy:['Species energy profile','Each equal-volume gas cell has one local temperature. The curves show each species’ internal energy in that cell. The model does not calculate separate species temperatures.'],
+ gasPressure:['Gas pressure profile','Local species inventories and temperature give the ideal-gas pressure. The model does not calculate radial fluid momentum.'],
+ momentum:['Angular momentum','Lᵢ + Lₙ = ∫τ dt − ∫IₙνΩₙ dt, from rest. Ion–neutral torque moves angular momentum between populations. Radial redistribution changes inertia but does not create angular momentum.'],
+ inertia:['Gas inertia','Iₙ = Σₛ mₛ ∫r²nₛ dV. Outward gas motion increases inertia. At the same angular momentum, increased inertia gives a lower angular speed. Ion inertia stays at its specified uniform-density value.'],
+ profile:['Species density','nₛ ∝ exp(mₛΩₙ²r² / 2kT), normalized to each species’ total inventory. These equilibrium references use the selected speed. They do not predict separation at a finite time.'],
+ cut:['Purity & recovery','A smaller inner cut can increase light-species purity but decrease light-species recovery. These cuts divide the inventory. They do not predict outlet flow.'],
+ cascade:['Countercurrent stages','The inner fraction moves to the next stage. The outer fraction returns to the previous stage. The scan keeps the feed stage fixed. Both final streams stay in the calculation. The routing model uses equal turnover times.'],
+ pump:['Differential pumping','One outer outlet: Q = S p_wall, p_up = p_axis + Q/C. Inlet conductance limits the pumping speed, even for an ideal rotor. This calculation does not change the rotation.'],
+ field:['Magnetic leverage','At the same torque, I ∝ 1/B and resistive heating ∝ 1/B² for fixed geometry and conductivity. At fixed current, these relations do not apply.'],
+ inventory:['D–T fuel inventory','Separate steady fuel-loop calculation: unburned exhaust = burn×(1/β−1). Exhaust rate times processing delay gives the processing inventory. The centrifuge model does not predict the burn fraction.'],
+ lithium:['Lithium vapor & surfaces','The NIST/Hicks equilibrium vapor-pressure fit uses the selected surface temperature. Saturation does not give a condensation rate or component life. The fit applies only from 298.14 to 1599.99 K.'],
 };
 const scanInputs:Readonly<Record<string,NumericFuelKey>>={cut:'cutFraction',cascade:'stages',field:'magneticT',inventory:'burnFraction',lithium:'linerK'};
 
@@ -105,7 +105,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  (doc.querySelector('main')??doc.body).append(root);
  const frame=el('div');frame.className='apparatus-frame';nodes.render.className='apparatus';nodes.render.append(frame);
  const dimensionBasis=el('details');dimensionBasis.className='apparatus-provenance';
- dimensionBasis.append(el('summary','Assumed dimensions'),el('p','Chamber dimensions follow the chosen solver inputs, not measured Marathon hardware. Electrode sizes, coils, wall thickness, ports and outer envelope are unknown and illustrative. The patent drawings establish topology, not scale.'));
+ dimensionBasis.append(el('summary','Assumed dimensions'),el('p','The selected inputs set the chamber dimensions. Marathon hardware measurements are not available. Electrode sizes, coils, wall thickness, ports and outer dimensions are assumptions. The patent drawings show component connections but do not give their dimensions.'));
  const dimensionSource=el('a','Patent drawings & description ↗');dimensionSource.href='https://patents.google.com/patent/WO2026064411A1/en';dimensionSource.target='_blank';dimensionSource.rel='noopener';dimensionBasis.append(dimensionSource);nodes.render.append(dimensionBasis);
  const baselineFrame=el('div');baselineFrame.className='apparatus-frame fuel-baseline';baselineFrame.hidden=true;nodes.render.append(baselineFrame);
  const comparisonLabel=el('p');comparisonLabel.className='fuel-comparison-label';comparisonLabel.hidden=true;nodes.render.append(comparisonLabel);
@@ -118,7 +118,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  };
  const application=makeSelect(nodes.controls,'fuel-application','Application',[['enrichment','Isotope separation'],['pump','Differential pumping']]);
  const controlHelp=el('details');controlHelp.id='fuel-control-help';
- controlHelp.append(el('summary','Which controls change physics?'),el('p','Start with current, magnetic field, gas temperature and duration. These rerun the physical model.'),el('p','View and playback only change how you inspect a computed run. Pumping, stages and fuel inventory are separate reference calculations; they do not feed flow back into the closed vessel.'),el('p','Temperature evolves only when Evolve gas & liner temperature is enabled. Otherwise the gas stays at its bath temperature.'));
+ controlHelp.append(el('summary','Which controls change physics?'),el('p','Start with current, magnetic field, gas temperature and duration. These controls run the physical model again.'),el('p','View and playback controls change only the display. Pumping, stages and fuel inventory are separate reference calculations. They do not change flow in the closed vessel.'),el('p','To calculate temperature changes, select Evolve gas & liner temperature. Otherwise the gas stays at its bath temperature.'));
  nodes.controls.prepend(controlHelp);
  const motionMode=makeSelect(motionBar,'fuel-motion-mode','Gas view',[['equilibrium','Equilibrium reference'],['transport','Coupled separation'],['spin','Coupled spin-up'],['flow','Flow · reference']]);
  motionMode.value='transport';
@@ -130,10 +130,10 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  motionBar.append(play,power,restart,newRun,seek,legend,driveKey,clock);
  const modeReading=el('p');modeReading.id='fuel-mode-reading';modeReading.className='fuel-mode-reading';motionBar.append(modeReading);
  const modeDescriptions:Record<FuelMotionMode,string>={
-  equilibrium:'Ideal settled density, not this run’s endpoint. Cream arrow: neutral rotation.',
-  transport:'Rotation averaged. Arrows track equal-count gas shells from their starting radii; 3D samples follow the computed neutral density.',
-  spin:'Same coupled run, slowed down. Blue: ions · cream: gas. Two display sections; arcs trail up to ½ screen second.',
-  flow:'Reference throughput along dashed routes; chamber flow is not solved.'
+  equilibrium:'Ideal equilibrium density, not the final state of this run. The cream arrow shows neutral rotation.',
+  transport:'The display shows the azimuthal average. Arrows show displacement of equal-population gas shells from their initial radii. 3D samples show the calculated neutral density.',
+  spin:'The same coupled run at a slower display speed. Blue arrows show ions; cream arrows show gas. Arcs show up to ½ screen second of rotation.',
+  flow:'Dashed routes show reference throughput. The model does not calculate chamber flow.'
  };
  const playbackPosition=floatingPlayback(motionBar);
  clock.setAttribute('aria-live','off');
@@ -161,7 +161,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const thermalResolution=makeSelect(thermalSetup,'fuel-thermal-resolution','Resolution',[['interactive','Interactive · 64 cells'],['refined','Refined · 256 cells']]);
  thermalResolution.addEventListener('change',changed);
  const gasConductivityLabel=el('label','Gas conductivity (W/m K)'),gasConductivity=el('input');gasConductivity.id='fuel-thermal-gasConductivityWMK';gasConductivityLabel.htmlFor=gasConductivity.id;gasConductivity.type='number';gasConductivity.min='0';gasConductivity.max='1000';gasConductivity.step='any';gasConductivity.value='0.1';
- const gasScope=el('p','Common local temperature · prescribed conductivity and wall film · no radial momentum closure');thermalSetup.append(gasConductivityLabel,gasConductivity,gasScope);
+ const gasScope=el('p','One local temperature per cell. Gas conductivity and gas–wall heat transfer are specified inputs. No radial momentum equation.');thermalSetup.append(gasConductivityLabel,gasConductivity,gasScope);
  gasModel.addEventListener('change',()=>{changed();draw();});gasConductivity.addEventListener('input',changed);
  const thicknessLabel=el('label','Liner thickness (mm)'),thickness=el('input');thickness.id='fuel-thermal-thicknessMm';thicknessLabel.htmlFor=thickness.id;thickness.type='number';thickness.min='0.1';thickness.max='20';thickness.step='any';thickness.value='1';
  const spatialScope=el('p','Tungsten: 300–1900 K · radial solid heat flow');thermalSetup.append(thicknessLabel,thickness,spatialScope);
@@ -201,22 +201,22 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
   else{const id={heat:'electrodes',thermal:latest?.result.config.pair==='lithium'?'liner':'vessel',thermalProfile:latest?.result.config.pair==='lithium'?'liner':'vessel',cut:'light-outlet',cascade:'stages',pump:'pump',field:'coils',inventory:'pump',lithium:'liner'}[selector.value];if(id){viewer?.select(id);viewer?.focus?.(id,{animate:true});}}
  });
- nodes.inspect.append(el('p','Select a part to see its materials and response. Change physical inputs in Controls.'));
+ nodes.inspect.append(el('p','Select a component to see its materials and response. Use Controls to change physical inputs.'));
  const inspectSelect=makeSelect(nodes.inspect,'fuel-component','Component',[]),description=el('div'),reset=el('button','Reset 3D view');nodes.inspect.append(reset,description);
  reset.addEventListener('click',()=>viewer?.reset());inspectSelect.addEventListener('change',()=>describe(inspectSelect.value));
- const focus=el('button','Frame component');focus.id='fuel-focus-component';focus.addEventListener('click',()=>viewer?.focus?.(inspectSelect.value,{animate:true}));nodes.inspect.insertBefore(focus,description);
+ const focus=el('button','Show component');focus.id='fuel-focus-component';focus.addEventListener('click',()=>viewer?.focus?.(inspectSelect.value,{animate:true}));nodes.inspect.insertBefore(focus,description);
  nodes.info.append(el('h3','Published concept · conditional model'));
  const sources=[['Patent WO2026064411A1','https://patents.google.com/patent/WO2026064411A1/en'],['Newer patent text · mirror','https://eureka.patsnap.com/patent/WO2026136752A2'],['Marathon fuel cycle','https://www.marathonfusion.com/fusion-energy/'],['Tritium-Lean paper · §VII.2','https://arxiv.org/html/2410.05238v2#S7.SS2'],['External centrifuge thermal study','https://arxiv.org/abs/2607.28208'],['NIST lithium vapor pressure','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7439932&Mask=4'],['NIST solid tungsten heat capacity','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440337&Mask=2'],['Tungsten thermal properties · Tolias','https://arxiv.org/abs/1703.06302']];
  for(const [title,url]of sources){const a=el('a',title);a.href=url;a.target='_blank';a.rel='noopener';const p=el('p');p.append(a);nodes.info.append(p);}
  for(const [title,text]of [
-  ['Dimensions','Chamber radius and length are simulator inputs, not published Marathon measurements. The default chamber is 0.24 m in diameter and 0.8 m long (36.2 L). The newer patent §§55–56 estimates about 12 L for differential pumping and 10 L for lithium separation under different stated conditions; neither specifies an aspect ratio or measured machine. Electrode sizes, coils, wall thickness, ports and outer envelope remain assumed.'],
-  ['Partial ionization','A small driven ion population transfers momentum to mostly neutral gas. Hot electrons can sustain ionization while cooler heavy gas improves separation. Ion fraction, conductivity and collision rate are independent assumed inputs; electron heating, ionization, recombination and dissociation kinetics are not solved.'],
-  ['Current localization','Annular drive and a rigid interior are disclosed approaches to reduce shear. This model imposes rigid rotors; it does not resolve the velocity profile or qualify turbulence suppression.'],
-  ['Lithium handling','A hot refractory sub-vessel and controlled outlets manage lithium transport. The newer disclosure gives ≥700 °C as an embodiment, not a universal condensation threshold. Vapor pressure, condensation, erosion and wall lifetime need material data.'],
-  ['Molecular feed','D₂ and ⁴He have nearly equal mass. Compare atomic D/He with molecular He/D₂: dissociation matters before mass separation.'],
-  ['CIV','Relative ion–neutral speed is the physical context. Both slip/CIV and nominal neutral-wall-speed/CIV are displayed; neither clips the dynamics or certifies discharge stability. Lithium seeding changes this reference only.'],
-  ['Fuel inventory','For β = burned/injected, unburned exhaust is burn×(1/β−1). Processing inventory is that exhaust rate times delay. Gross fuel circulation is larger; neither is the whole plant inventory.'],
-  ['Tradeoffs','Stronger drive increases the equilibrium mass bias and dissipated heat; more drag reduces spin. High B reduces resistive demand only at matched torque. Small product cuts raise purity at a recovery cost; stages increase internal circulation. Low gas temperature favors separation but lithium surfaces must manage vapor transport. Strong centrifugal pumping still meets the inlet-conductance ceiling.'],
+  ['Dimensions','Chamber radius and length are simulator inputs. The default chamber is 0.24 m in diameter and 0.8 m long (36.2 L). The newer patent §§55–56 gives estimates of 12 L for differential pumping and 10 L for lithium separation under different conditions. It does not give chamber aspect ratios or measured dimensions. Electrode sizes, coils, wall thickness, ports and outer dimensions are assumptions.'],
+  ['Partial ionization','A small ion population gives momentum to mostly neutral gas. Hot electrons can keep the gas partly ionized. At fixed rotation, lower heavy-particle temperature increases equilibrium separation. Ion fraction, conductivity and collision rate are independent inputs. The model does not calculate electron heating, ionization, recombination or dissociation rates.'],
+  ['Current localization','The patents describe annular drive and a rigid interior to decrease shear. This model uses rigid rotors. It does not calculate the velocity profile or show turbulence suppression.'],
+  ['Lithium handling','A hot refractory chamber and controlled outlets manage lithium transport. The newer patent gives ≥700 °C for one design. This temperature is not a general condensation limit. Material data are necessary for vapor pressure, condensation, erosion and wall life.'],
+  ['Molecular feed','D₂ and ⁴He have almost equal mass. Compare atomic D/He with molecular He/D₂. Dissociation changes which masses the separator must separate.'],
+  ['CIV','Critical ionization velocity (CIV) concerns relative ion–neutral speed. The display shows slip/CIV and nominal neutral-wall-speed/CIV. Neither ratio limits the calculated motion or shows discharge stability. Lithium seeding changes only this reference.'],
+  ['Fuel inventory','For β = burned/injected, unburned exhaust is burn×(1/β−1). Exhaust rate times processing delay gives the processing inventory. Gross fuel circulation is larger. Neither calculation gives the total plant inventory.'],
+  ['Tradeoffs','Stronger drive increases equilibrium mass separation and heat losses; more drag decreases rotation. Higher B decreases resistive heating only at the same torque. Small product cuts can increase purity but decrease recovery; more stages increase internal circulation. At fixed rotation, lower gas temperature increases equilibrium separation. Lithium surfaces must manage vapor transport. Inlet conductance still limits centrifugal pumping.'],
  ]){const d=el('details');d.append(el('summary',title),el('p',text));nodes.info.append(d);}
  const assumptions=el('ul');nodes.info.append(assumptions);
  let active=false,dirty=true,updating=false,timer:ReturnType<typeof setTimeout>|undefined,controller:AbortController|undefined,revision=0,latest:AcceptedFuel|null=null,viewer:ApparatusViewer<FuelModel>|null=null,graphics:Graphics|null=null,disposed=false,hasSelection=false;
@@ -265,7 +265,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  function selectProbe(fraction:number){views.selectRadius(fraction);syncProbes();views.refreshSample(tools);refreshComposition();viewer?.refresh();baselineViewer?.refresh();}
  function diagnosticState(result:FuelResult):DiagnosticState{
-  if(['spin','transport'].includes(motionMode.value)&&result.transport)return {...sampleFuelTransport(result.transport,elapsed),scope:`Coupled rotor and radial transport · ${result.transport.operation?.thermal?.enabled?'evolving thermal reservoirs':'fixed temperature'}`};
+  if(['spin','transport'].includes(motionMode.value)&&result.transport)return {...sampleFuelTransport(result.transport,elapsed),scope:`Coupled rotor and radial transport · ${result.transport.operation?.thermal?.enabled?'time-dependent temperatures':'fixed temperature'}`};
   if(motionMode.value==='spin'){const m=result.mechanics,response=rotorResponse(m.ii,m.nn,m.gamma,m.drag,m.torque,elapsed);return {ionRadS:response.ion,profiles:result.profiles.map(p=>({...p,lightDensityRatio:1,heavyDensityRatio:1})),neutralRadS:response.neutral,timeS:elapsed,scope:'Spin-up only · uniform density'};}
   const end=result.samples.at(-1)!;
   return {timeS:end.timeS,ionRadS:end.ionRadS,neutralRadS:end.neutralRadS,currentA:end.currentA??result.config.currentA,scope:'Final equilibrium reference · not finite-time transport'};
@@ -327,7 +327,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(selector.value!=='composition')plotCursor?.setCursor(scanInput?c[scanInput]:transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(selector.value)?elapsed:NaN);
   if(transient&&['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&Math.abs(elapsed-lastProfileTime)>=c.durationS/80){lastProfileTime=elapsed;draw();}
   acceptComparison();
-  setStatus(transient?`Closed vessel · ${diagnostic.thermal?'evolving temperature':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
+  setStatus(transient?`Closed vessel · ${diagnostic.thermal?'temperature changes':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;
   const timing=transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:mode==='flow'?`Reference Q ${fmt(latest.result.pumping.gasLoadPaM3S)} Pa·m³/s · 1 s screen = ${timeUnit}`:'Final reference';
   clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}`;
@@ -351,7 +351,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   gasModel.disabled=!spatial;if(!spatial)gasModel.value='lumped';
   const spatialGas=spatial&&gasModel.value==='spatial';gasConductivity.disabled=!spatialGas;gasConductivity.hidden=!spatialGas;gasConductivityLabel.hidden=!spatialGas;gasScope.hidden=!spatialGas;
   thermalResolution.disabled=!spatialGas;thermalResolution.parentElement!.hidden=!spatialGas;
-  gasScope.textContent=`Common local temperature · prescribed conductivity and wall film · no radial momentum closure${spatialGas&&thermalResolution.value==='refined'?' · Refined runs are slower · temporal error estimate; spatial refinement remains necessary':''}`;
+  gasScope.textContent=`One local temperature per cell. Gas conductivity and gas–wall heat transfer are specified inputs. No radial momentum equation.${spatialGas&&thermalResolution.value==='refined'?' · Refined runs take longer. The timestep error estimate does not replace spatial refinement.':''}`;
   for(const [key,input]of thermalControls){if(!thermalEnable.checked){const value=Number(input.value);if(input.value===''||!Number.isFinite(value)||value<Number(input.min)||value>Number(input.max))input.value=String(DEFAULT_FUEL_THERMAL[key]);}const materialCapacity=spatial&&key==='wallCapacityJK';input.disabled=!thermalEnable.checked||materialCapacity;input.hidden=materialCapacity;thermalSetup.querySelector<HTMLLabelElement>(`label[for="${input.id}"]`)!.hidden=materialCapacity;}
   controls.get('linerConductanceWK')!.input.disabled=thermalEnable.checked;
   const feed=controls.get('feedStage')!.input;feed.max=String(controls.get('stages')!.read());if(Number(feed.value)>Number(feed.max))feed.value=feed.max;
@@ -372,7 +372,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   dependencies();sensitivity.invalidate();
   cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;
   draw();
-  status.textContent=latest?'Updating · previous accepted state':'Updating…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
+  status.textContent=latest?'Calculation in progress · previous accepted state':'Calculation in progress…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
   viewer?.setAnimation(null);motionBar.hidden=true;
   comparisons.accept(null);power.disabled=true;refreshInstrument();
   learning.setPending();
@@ -406,12 +406,12 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const id=description.dataset.component!,topic=componentResponse(id),button=description.querySelector<HTMLButtonElement>('[data-show-response]');
   if(button){button.disabled=!latest||dirty||updating;button.textContent=({spin:'Show end-of-run speeds',thermal:'Show end-of-run temperature',lithium:'Show liner vapor pressure',pump:'Show pumping reference',cut:'Show selected collection cut'})[topic]??'Show end-of-run separation';}
   const effect=description.querySelector<HTMLElement>('[data-effect]');
-  if(effect)effect.textContent=id==='liner'?(topic==='thermal'?'Controls sets the initial liner temperature. The response shows the evolved gas and wall.':'Thermal evolution is off: liner temperature affects vapor pressure, not the fixed gas temperature.'):
-   id==='pump'||id==='feed'?'Pumping reference only. This does not change rotation or drive an inlet/outlet flow.':
-   id==='light-outlet'?'Selects an inventory cut, not an extraction flow. The curve scans every cut; the marker shows yours.':
-   ['coils','supply','electrodes'].includes(id)?'Drive inputs are in Controls. Current edits after 0 s add a drive step; other edits start a new run.':'';
+  if(effect)effect.textContent=id==='liner'?(topic==='thermal'?'Controls sets the initial liner temperature. The response shows subsequent gas and wall temperatures.':'Thermal evolution is off. Liner temperature changes vapor pressure but does not change the fixed gas temperature.'):
+   id==='pump'||id==='feed'?'Pumping reference only. This calculation does not change rotation or cause inlet or outlet flow.':
+   id==='light-outlet'?'This control selects an inventory cut. It does not cause extraction flow. The curve shows all cuts; the marker shows your selection.':
+   ['coils','supply','electrodes'].includes(id)?'Use Controls for drive inputs. After 0 s, a current change adds a drive step. Other changes start a new run.':'';
   const output=description.querySelector<HTMLOutputElement>('[data-response]');if(!output||!latest)return;const r=latest.result;
-  if(dirty||updating){output.textContent='Recomputing · previous result shown in plots';return;}
+  if(dirty||updating){output.textContent='Calculation in progress · plots show the previous result';return;}
   const collection=state?.collection??r.collection,pct=(value:number|null)=>value===null?'—':fmt(100*value);
   const spatial=state?.thermal?.spatial;
   output.textContent=id==='liner'?`Gas ${fmt(state?.thermal?.gasK??r.config.gasK)} K · ${spatial?`tungsten ${fmt(spatial.minK)}–${fmt(spatial.maxK)} K`:`liner ${fmt(state?.thermal?.linerK??r.config.linerK)} K`}`:id==='light-outlet'?`Light ${pct(collection.innerLightPurity)}% · recovery ${pct(collection.lightRecovery)}%`:id==='pump'||id==='feed'?`Reference inlet speed ${fmt(r.pumping.effectiveSpeedM3S)} m³/s`:id==='coils'?`Prescribed field ${fmt(r.config.magneticT)} T`:`Gas ${fmt((state?.neutralRadS??0)*r.config.radiusM)} m/s · ${fmt(state?.currentA??r.config.currentA)} A`;
@@ -453,10 +453,10 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const invalidThermal=activeThermalInputs.some(invalid);
   if(invalidThermal){
    if(!dirty){changed();clearTimeout(timer);}
-   updating=false;status.textContent=`Enter valid thermal settings before running.${latest?' Previous accepted state.':''}`;
-   learning.setPending(latest?'Invalid settings · previous accepted result':'Enter valid settings before running.');return;
+   updating=false;status.textContent=`Before the run, enter permitted thermal settings.${latest?' Previous accepted state.':''}`;
+   learning.setPending(latest?'Invalid settings · previous accepted result':'Before the run, enter permitted settings.');return;
   }
-  cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;status.textContent='Updating…';
+  cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;status.textContent='Calculation in progress…';
   updating=true;
   learning.setPending();
   viewer?.setAnimation(null);motionBar.hidden=true;
@@ -472,7 +472,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    status.textContent=notes.join(' · ');
    status.dataset.reference=status.textContent;
    const timeControl=r.transport?.timeControl;
-   assumptions.replaceChildren(...[...r.assumptions.map(text=>`Uniform-inertia reference: ${text}`),...(r.transport?.assumptions??[]).map(text=>`Coupled trajectory: ${text}`),...(r.transport?[`Transport grid: ${r.transport.cells} equal-volume radial cells, ${r.transport.steps} nominal time intervals${r.transport.checkpoints?`, ${r.transport.checkpoints.length-1} retained intervals`:''}. Maximum centrifugal exponent per cell: ${fmt(r.transport.maxCellExponent)}; values above one indicate a wall layer finer than the grid. Refinement studies qualify tested cases, not every slider combination.`]:[]),...(timeControl?[`Temporal error estimate: ${timeControl.method}; relative tolerance ${fmt(timeControl.relativeTolerance)}, temperature tolerance ${fmt(timeControl.temperatureToleranceK)} K; ${timeControl.acceptedPairs} accepted pairs, ${timeControl.rejectedSteps} rejected steps, maximum accepted ratio ${fmt(timeControl.maxErrorRatio)}. Counters since ${fmt(timeControl.startTimeS)} s; retained prefix excluded.`]:[])].map(text=>el('li',text)));draw();
+   assumptions.replaceChildren(...[...r.assumptions.map(text=>`Uniform-inertia reference: ${text}`),...(r.transport?.assumptions??[]).map(text=>`Coupled trajectory: ${text}`),...(r.transport?[`Transport grid: ${r.transport.cells} equal-volume radial cells, ${r.transport.steps} nominal time intervals${r.transport.checkpoints?`, ${r.transport.checkpoints.length-1} retained intervals`:''}. Maximum centrifugal exponent per cell: ${fmt(r.transport.maxCellExponent)}. Values above one show a wall layer finer than the grid. Refinement studies apply to tested cases, not every slider combination.`]:[]),...(timeControl?[`Timestep error estimate: ${timeControl.method}. Relative tolerance ${fmt(timeControl.relativeTolerance)}; temperature tolerance ${fmt(timeControl.temperatureToleranceK)} K. ${timeControl.acceptedPairs} accepted pairs; ${timeControl.rejectedSteps} rejected steps; maximum accepted ratio ${fmt(timeControl.maxErrorRatio)}. Counters start at ${fmt(timeControl.startTimeS)} s and do not include an earlier history.`]:[])].map(text=>el('li',text)));draw();
   }catch(error){if(disposed||id!==revision||(error instanceof Error?error.name:undefined)==='AbortError')return;updating=false;latest=null;frame.hidden=true;motion=null;exportButton.disabled=true;renderPlots(plotHost,[]);metrics.replaceChildren();compositionReadout.hidden=true;probeControls.hidden=true;densityReading.hidden=true;learning.setPending('No accepted result');status.textContent=message(error);}
   if(latest&&id===revision)try{await showGeometry(latest);}catch(error){if(!disposed&&id===revision)status.textContent=`3D unavailable: ${message(error)}`;}
  }
@@ -484,34 +484,34 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const curve=<X extends string,Y extends string>(label:string,rows:readonly (Record<X,number>&Record<Y,number|null>)[],xKey:X,yKey:Y,xLabel:string,yLabel:string):PlotCurve=>({label,x:rows.map(v=>v[xKey]),y:rows.map(v=>v[yKey]),xLabel,yLabel});
   let curves:PlotCurve[]=[],values:[string,number|null,string][]=[];if(!capture)explanation.textContent=topics[topic][1];
   if(topic==='composition')curves=fuelCompositionCurves(r,diagnosticState(r)).filter((_,i)=>i!==1);
-  if(topic==='separation'&&transport){curves=(['innerLightPurity','lightRecovery'] as const).map(k=>fuelHistoryCurve(transport,rows!,k==='innerLightPurity'?'Light purity':'Light recovery','Inventory fraction',s=>s.collection[k]));curves.push({label:'Uniform-inertia equilibrium reference',x:[0,limit],y:[r.collection.innerLightPurity,r.collection.innerLightPurity],xLabel:'Time (s)',yLabel:'Inventory fraction',dash:'2 4'});const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Species inventory error',transport.maxBalanceError,'']];if(sample.thermal&&!capture)explanation.textContent='Closed-wall transport and evolving gas temperature feed back on radial separation and gas inertia. Diffusivity is prescribed; local fluid momentum and extraction are not solved. The dashed equilibrium reference retains its initial fixed temperature and uniform-inertia mechanics.';}
+  if(topic==='separation'&&transport){curves=(['innerLightPurity','lightRecovery'] as const).map(k=>fuelHistoryCurve(transport,rows!,k==='innerLightPurity'?'Light purity':'Light recovery','Inventory fraction',s=>s.collection[k]));curves.push({label:'Uniform-inertia equilibrium reference',x:[0,limit],y:[r.collection.innerLightPurity,r.collection.innerLightPurity],xLabel:'Time (s)',yLabel:'Inventory fraction',dash:'2 4'});const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Species inventory error',transport.maxBalanceError,'']];if(sample.thermal&&!capture)explanation.textContent='Gas transport and temperature changes have an effect on radial separation and gas inertia. Diffusivity is a specified input. The model does not calculate local fluid momentum or extraction. The dashed equilibrium reference keeps its initial fixed temperature and uniform inertia.';}
   if(topic==='spin'){
    const data=rows?rows.map(s=>({timeS:s.timeS,ionMS:s.ionRadS*c.radiusM,neutralMS:s.neutralRadS*c.radiusM})):r.samples,last=transient?{ionMS:diagnosticState(r).ionRadS!*c.radiusM,neutralMS:diagnosticState(r).neutralRadS*c.radiusM}:data.at(-1)!;
    curves=(['ionMS','neutralMS'] as const).map((k,i)=>transport?fuelHistoryCurve(transport,rows!,i?'Neutrals':'Ions','Wall speed (m/s)',s=>(i?s.neutralRadS:s.ionRadS)*c.radiusM):curve(i?'Neutrals':'Ions',data,'timeS',k,'Time (s)','Wall speed (m/s)'));values=[[transient?'Current neutral speed':'Final neutral speed',last.neutralMS,'m/s'],[transient?'Current slip / CIV':'Final slip / CIV',Math.abs(last.ionMS-last.neutralMS)/m.criticalVelocityMS,''],[transient?'Current wall speed / CIV':'Final wall speed / CIV',last.neutralMS/m.criticalVelocityMS,''],['a² / D',m.radialDiffusionTimeS,'s']];
-   if(!transport&&!capture)explanation.textContent='Uniform-inertia reference: reciprocal friction drives neutral spin-up. No radial inertia feedback is included in this result.';
+   if(!transport&&!capture)explanation.textContent='Uniform-inertia reference. Ion–neutral friction increases neutral rotation. In this calculation, radial transport does not change inertia.';
   }
-  if(topic==='heat'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.energy})),last=data.at(-1)!,sample=sampleFuelTransport(transport,sampleTime),current=transient?(sample.currentA??c.currentA):(end.currentA??c.currentA);curves=(['driveWorkJ','kineticJ','slipDissipationJ','dragDissipationJ','redistributionWorkJ','numericalDissipationJ'] as const).map(k=>fuelHistoryCurve(transport,rows!,k.replace(/J$/,'').replace(/([A-Z])/g,' $1'),'Energy (J)',s=>s.energy[k]));values=[[transient?'Current ohmic power':'Reference ohmic power',current**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm),'W'],[transient?'Current redistribution work':'Final redistribution work',(transient?sample.energy:last).redistributionWorkJ,'J'],[transient?'Current numerical dissipation':'Final numerical dissipation',(transient?sample.energy:last).numericalDissipationJ,'J'],['Mechanical ledger error',transport.maxEnergyRelativeError,'relative']];if(sample.thermal&&!capture)explanation.textContent='Mechanical ledger: drive work supplies kinetic energy, slip and wall dissipation, signed redistribution work, and numerical dissipation. The thermal model deposits slip and resistive heat into gas and wall drag into liner; redistribution work enters gas with its sign. Ohmic deposition and cooling are in the Temperature budget; numerical dissipation is not heat.';}
-  if(topic==='heat'&&!transport){curves=(['totalInputW','mechanicalW','slipW','dragW'] as const).map(k=>curve(k,r.samples,'timeS',k,'Time (s)','Power (W)'));values=[['Ohmic',m.ohmicW,'W'],['Reference thermal control',m.requiredCoolingW,'W']];if(!capture)explanation.textContent='Uniform-inertia mechanical reference. Fixed gas temperature is not a thermal solution.';}
+  if(topic==='heat'&&transport){const data=rows!.map(s=>({timeS:s.timeS,...s.energy})),last=data.at(-1)!,sample=sampleFuelTransport(transport,sampleTime),current=transient?(sample.currentA??c.currentA):(end.currentA??c.currentA);curves=(['driveWorkJ','kineticJ','slipDissipationJ','dragDissipationJ','redistributionWorkJ','numericalDissipationJ'] as const).map(k=>fuelHistoryCurve(transport,rows!,k.replace(/J$/,'').replace(/([A-Z])/g,' $1'),'Energy (J)',s=>s.energy[k]));values=[[transient?'Current ohmic power':'Reference ohmic power',current**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm),'W'],[transient?'Current redistribution work':'Final redistribution work',(transient?sample.energy:last).redistributionWorkJ,'J'],[transient?'Current numerical dissipation':'Final numerical dissipation',(transient?sample.energy:last).numericalDissipationJ,'J'],['Mechanical ledger error',transport.maxEnergyRelativeError,'relative']];if(sample.thermal&&!capture)explanation.textContent='Drive work supplies kinetic energy, slip losses, wall losses, signed redistribution work and numerical dissipation. The thermal model puts slip and resistive heat into gas. Wall drag supplies heat to the liner. Redistribution work changes gas energy with its sign. Temperature shows resistive heat and cooling. Numerical dissipation is not heat.';}
+  if(topic==='heat'&&!transport){curves=(['totalInputW','mechanicalW','slipW','dragW'] as const).map(k=>curve(k,r.samples,'timeS',k,'Time (s)','Power (W)'));values=[['Ohmic',m.ohmicW,'W'],['Reference thermal control',m.requiredCoolingW,'W']];if(!capture)explanation.textContent='Uniform-inertia mechanical reference. Fixed gas temperature does not give a thermal solution.';}
   if(topic==='thermal'){
    const data=rows?.filter(s=>s.thermal).map(s=>({timeS:s.timeS,...s.thermal!}))??[];
-   if(data.length){curves=data[0].spatial?[fuelHistoryCurve(transport!,rows!,'Neutral gas','Temperature (K)',s=>s.thermal?.gasK??null),...(['innerK','outerK'] as const).map((key,i)=>fuelHistoryCurve(transport!,rows!,i?'Outer liner cell':'Inner liner cell','Temperature (K)',s=>s.thermal?.spatial?.[key]??null))]:(['gasK','linerK'] as const).map(k=>fuelHistoryCurve(transport!,rows!,k==='gasK'?'Neutral gas':'Liner','Temperature (K)',s=>s.thermal?.[k]??null));const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Current mean pressure':'Endpoint pressure',sample.thermal!.pressurePa,'Pa'],[transient?'Cooling energy':'Endpoint cooling energy',sample.thermal!.coolingEnergyJ,'J'],['Energy budget error',Math.max(...data.map(s=>s.relativeResidual)),'relative']];if(data[0].spatial&&!capture)explanation.textContent=data[0].gas?'Spatial mixture energy, species transport and signed rotor work share the gas budget. Common local temperature, prescribed gas conductivity and wall film; no radial fluid momentum closure.':'Lumped neutral gas exchanges heat with a radial tungsten liner. Solid properties depend on temperature. Wall drag enters the inner liner cell; numerical dissipation is not heat.';}
-   else{curves=[{label:'Gas thermal bath',x:[0,limit],y:[c.gasK,c.gasK],xLabel:'Time (s)',yLabel:'Temperature (K)'}];if(!capture)explanation.textContent='Enable Thermal model in Controls to evolve atomic gas and liner temperature. The current run uses a fixed-temperature bath.';}
+   if(data.length){curves=data[0].spatial?[fuelHistoryCurve(transport!,rows!,'Neutral gas','Temperature (K)',s=>s.thermal?.gasK??null),...(['innerK','outerK'] as const).map((key,i)=>fuelHistoryCurve(transport!,rows!,i?'Outer liner cell':'Inner liner cell','Temperature (K)',s=>s.thermal?.spatial?.[key]??null))]:(['gasK','linerK'] as const).map(k=>fuelHistoryCurve(transport!,rows!,k==='gasK'?'Neutral gas':'Liner','Temperature (K)',s=>s.thermal?.[k]??null));const sample=sampleFuelTransport(transport!,sampleTime);values=[[transient?'Current mean pressure':'Endpoint pressure',sample.thermal!.pressurePa,'Pa'],[transient?'Cooling energy':'Endpoint cooling energy',sample.thermal!.coolingEnergyJ,'J'],['Energy budget error',Math.max(...data.map(s=>s.relativeResidual)),'relative']];if(data[0].spatial&&!capture)explanation.textContent=data[0].gas?'The gas energy balance includes spatial species transport and signed rotor work. Each cell has one local temperature. Gas conductivity and gas–wall heat transfer are specified inputs. The model does not calculate radial fluid momentum.':'Heat flows between the uniform-temperature gas and a radial tungsten liner. Solid properties change with temperature. Wall drag supplies heat to the inner liner cell. Numerical dissipation is not heat.';}
+   else{curves=[{label:'Gas thermal bath',x:[0,limit],y:[c.gasK,c.gasK],xLabel:'Time (s)',yLabel:'Temperature (K)'}];if(!capture)explanation.textContent='To calculate gas and liner temperature changes, use Thermal model in Controls. This run uses a fixed-temperature bath.';}
   }
   if(topic==='thermalProfile'){
    const sample=transport?sampleFuelTransport(transport,sampleTime):null,spatial=sample?.thermal?.spatial;
    if(spatial){curves=[{label:'Tungsten liner',x:spatial.radiusM,y:spatial.temperatureK,xLabel:'Radius (m)',yLabel:'Temperature (K)'}];const gas=sample.thermal!.gas;if(gas)curves.unshift({label:'Neutral gas',x:gas.radiusM,y:gas.temperatureK,xLabel:'Radius (m)',yLabel:'Temperature (K)'});values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Inner liner cell',spatial.innerK,'K'],['Outer liner cell',spatial.outerK,'K'],['Mean neutral gas',sample.thermal!.gasK,'K']];}
-   else if(!capture)explanation.textContent='Choose Radial tungsten liner in Thermal model to resolve heat flow through the solid wall.';
+   else if(!capture)explanation.textContent='To calculate heat flow through the solid wall, select Radial tungsten liner in Thermal model.';
   }
   if(topic==='gasEnergy'||topic==='gasPressure'){
    const sample=transport?sampleFuelTransport(transport,sampleTime):null,gas=sample?.thermal?.gas;
    if(gas){curves=topic==='gasPressure'?[{label:'Neutral gas',x:gas.radiusM,y:gas.pressurePa,xLabel:'Radius (m)',yLabel:'Pressure (Pa)'}]:gas.speciesEnergyJ.map((energy,i)=>({label:i?r.pair.heavy:r.pair.light,x:gas.radiusM,y:energy,xLabel:'Radius (m)',yLabel:'Cell internal energy (J)'}));values=[['Time',sample.timeS,'s'],['Gas energy',gas.energyJ,'J'],['Gas minimum',gas.minK,'K'],['Gas maximum',gas.maxK,'K']];}
-   else if(!capture)explanation.textContent='Choose Spatial mixture under Thermal model to resolve species energy and local pressure.';
+   else if(!capture)explanation.textContent='To calculate species energy and local pressure, select Spatial mixture under Thermal model.';
   }
   if(topic==='momentum'&&transport){curves=([['Ions',(s:FuelTransportCheckpoint)=>s.ionAngularMomentumKgM2S],['Neutrals',(s:FuelTransportCheckpoint)=>s.neutralAngularMomentumKgM2S],['Total',(s:FuelTransportCheckpoint)=>s.ionAngularMomentumKgM2S+s.neutralAngularMomentumKgM2S],['Drive minus wall impulse',(s:FuelTransportCheckpoint)=>s.angularMomentum.driveImpulseKgM2S-s.angularMomentum.dragImpulseKgM2S]] as const).map(([label,ordinate])=>fuelHistoryCurve(transport,rows!,label,'Angular momentum (kg m²/s)',ordinate));const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
   if(topic==='inertia'&&transport){curves=[fuelHistoryCurve(transport,rows!,'Evolving neutral inertia','Moment of inertia (kg m²)',s=>s.neutralInertiaKgM2),fuelHistoryCurve(transport,rows!,'Initial uniform inertia','Moment of inertia (kg m²)',()=>m.nn)];const sample=sampleFuelTransport(transport,sampleTime);values=[[transient?'Time':'Trajectory endpoint',sample.timeS,'s'],['Neutral inertia',sample.neutralInertiaRatio,'× initial inertia'],['Maximum momentum budget error',transport.maxAngularMomentumRelativeError,'relative']];}
   if(topic==='profile'){
    curves=fuelDensityCurves(r,diagnosticState(r));values=[];
-   if(!capture){explanation.textContent=`${transient&&transport?'Closed-wall transport at the selected time':'Equilibrium reference, not finite-time separation'}. Compare equal-size volumes: a value of 2 means twice that isotope’s own volume-average density. These curves are not mixture percentages; no local fluid momentum or extraction solution.`;
+   if(!capture){explanation.textContent=`${transient&&transport?'Closed-wall transport at the selected time':'Equilibrium reference, not finite-time separation'}. Compare equal-size volumes. A value of 2 means twice that isotope’s own volume-average density. These curves do not show mixture percentages. The model does not calculate local fluid momentum or extraction.`;
     densityReading.textContent=curves.map(line=>`${line.label}: axis ${line.y[0]===null?'absent':`${fmt(line.y[0])}× average`}; wall ${line.y.at(-1)===null?'absent':`${fmt(line.y.at(-1)!)}× average`}.`).join(' ');
    }
   }
@@ -524,7 +524,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    curves=labels.map(([key,label])=>({...curve(label,data,'radiusFraction',key,'Inner cut radius / a','Inventory (%)'),y:data.map(row=>row[key]===null?null:100*row[key])}));
    const selected=collection?.collection??r.collection;
    values=labels.map(([key,label])=>[label,selected[key]===null?null:100*selected[key],'%']);
-   if(collection&&!capture)explanation.textContent='Current closed-wall inventory at the shared time. Cuts partition inventory; no extraction flow is solved.';
+   if(collection&&!capture)explanation.textContent='Closed-wall inventory at the selected time. Cuts divide the inventory. The model does not calculate extraction flow.';
   }
   if(topic==='cascade'){curves=(['purity','recovery'] as const).map(k=>curve(k,r.cascades,'stages',k,'Ideal stages','Fraction'));values=[['Product light purity',r.cascade.productLightPurity,''],['Light recovery',r.cascade.lightRecovery,''],['Internal circulation / feed',r.cascade.circulationPerFeed,''],['Worst species balance',Math.max(Math.abs(r.cascade.lightBalance),Math.abs(r.cascade.heavyBalance)),'']];}
   if(topic==='pump'){curves=r.pumping.species.map(s=>({label:s.name,x:[0,1,2],y:[s.upstreamPa,s.axisPa,s.wallPa],xLabel:'0 upstream · 1 axis · 2 outer outlet',yLabel:'Partial pressure (Pa)'}));values=[['Effective inlet speed',r.pumping.effectiveSpeedM3S,'m³/s'],['Without rotation',r.pumping.nonrotatingSpeedM3S,'m³/s'],['Heavy / light pumping speed',r.pumping.heavyLightSpeedRatio,''],['Outer outlet light fraction',r.pumping.outerLightFraction,''],['Gas load',r.pumping.gasLoadPaM3S,'Pa m³/s'],['Ideal turnover',r.pumping.turnoverS,'s']];}
@@ -546,14 +546,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(disposed||!latest||exportButton.disabled)return;
   cancelExport();const accepted=latest,id=revision,preparation=new AbortController(),gzip=!!accepted.result.transport?.timeControl,previousStatus=status.textContent;
   exportController=preparation;exportButton.disabled=true;
-  if(gzip){exportButton.textContent='Preparing…';setStatus('Preparing compressed export…');}
+  if(gzip){exportButton.textContent='Export in progress…';setStatus('Compressed export in progress…');}
   try{
    const packet={model:'marathon-centrifuge',...accepted};
    const blob=gzip?await fuelExportGzipBlob(packet,{signal:preparation.signal}):fuelExportBlob(packet);
    if(disposed||preparation.signal.aborted||latest!==accepted||id!==revision)return;
    const url=URL.createObjectURL(blob),a=el('a');exportURL=url;a.href=url;a.download=`mass-spinner-centrifuge.json${gzip?'.gz':''}`;a.click();
    exportTimer=setTimeout(()=>{if(exportURL===url){URL.revokeObjectURL(url);exportURL=null;}},1000);
-   if(gzip&&status.textContent==='Preparing compressed export…')setStatus(previousStatus);
+   if(gzip&&status.textContent==='Compressed export in progress…')setStatus(previousStatus);
   }catch(error){
    if(exportController===preparation&&exportURL){URL.revokeObjectURL(exportURL);exportURL=null;}
    if(!disposed&&!preparation.signal.aborted&&latest===accepted&&id===revision){playing=false;playback();setStatus(`Export failed: ${message(error)}`);}

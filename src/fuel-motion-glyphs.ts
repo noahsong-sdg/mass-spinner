@@ -19,14 +19,14 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   const head=new THREE.Mesh(new THREE.ConeGeometry(R*.055,R*.16,16),makeMaterial(color));
   rotor.position.z=L*z;head.position.x=R*.72;rotor.add(arc,head);rotation.add(rotor);
   rotor.name=kind==='ion'?'Ion rotation arrow':'Neutral rotation arrow';
-  rotor.userData={kind,radiusM:R*.72,scope:'Bulk angular speed; two display stations, axially uniform model. Arc integrates up to 0.5 screen seconds of rotation.'};
+  rotor.userData={kind,radiusM:R*.72,scope:'Bulk angular speed at two display positions in an axially uniform model. The arc shows up to 0.5 screen seconds of rotation.'};
   return {kind,rotor,arc,head,n};
  });
  const shells=[0,1].flatMap(species=>[.25,.5,.75].map((probability,i)=>{
   const arrow=new THREE.ArrowHelper(new THREE.Vector3(1,0,0),new THREE.Vector3(),R*.1,species?0xe5ab70:0x94d9cd);
   // ArrowHelper geometries are shared globally; the scene owns these clones.
   arrow.line.geometry=arrow.line.geometry.clone();arrow.cone.geometry=arrow.cone.geometry.clone();
-  arrow.name='Equal-count shell displacement';arrow.userData={species,probability,scope:'Change in a population quantile since uniform start; not a microscopic trajectory or instantaneous velocity.'};
+  arrow.name='Equal-count shell displacement';arrow.userData={species,probability,scope:'Population-quantile displacement from the uniform initial state. This arrow does not show a microscopic path or instantaneous velocity.'};
   migration.add(arrow);return {arrow,species,probability,z:L*(.24+i*.26),angle:species?Math.PI*.18:Math.PI*.7};
  }));
  // External paths carry number throughput only. They do not imply axial chamber flow.
@@ -36,7 +36,7 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   const geometry=new THREE.BufferGeometry().setFromPoints(path.getPoints(64));
   const line=new THREE.Line(geometry,new THREE.LineDashedMaterial({color:0xabbab5,dashSize:R*.08,gapSize:R*.05,transparent:true,opacity:.7}));line.computeLineDistances();
   line.name=i?'Schematic exhaust route':'Schematic inlet route';
-  line.userData.scope='Reference Q/(kT); external routing is schematic, not a computed streamline.';
+  line.userData.scope='Reference Q/(kT). External routes are schematic, not calculated streamlines.';
   const direction=path.getTangent(1),head=new THREE.ArrowHelper(direction,path.getPoint(.83),R*.15,0xabbab5,R*.09,R*.06);
   head.line.geometry=head.line.geometry.clone();head.cone.geometry=head.cone.geometry.clone();flow.add(line,head);
  }
@@ -70,7 +70,7 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
    for(const material of Array.isArray(materials)?materials:[materials]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
   }
   const scope:unknown=node.userData.scope;
-  node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions; glyph widths and display stations are illustrative.',purpose:typeof scope==='string'?scope:'Display diagnostic for gas motion, not physical hardware.'};
+  node.userData={...node.userData,quantitativeOnly:true,componentId:'motion',materialBasis:'Numerical diagnostic; no physical material',geometryBasis:'Accepted chamber SI dimensions. Arrow widths and display positions are schematic.',purpose:typeof scope==='string'?scope:'Gas-motion display, not physical hardware.'};
  });
  function setSpecies(value:FuelSpecies){for(const {arrow,species}of shells){
   const selected=value==='all'||species===(value==='light'?0:1);

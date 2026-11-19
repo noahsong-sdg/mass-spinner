@@ -218,12 +218,12 @@ export function simulateFuelTransport(result:RotorResult,options:FuelTransportOp
   maxCellExponent:0,
   radiusEdgesM:Array.from({length:cells+1},(_,i)=>c.radiusM*Math.sqrt(i/cells)),mechanics:{ii,nn,gamma,drag,torque},
   assumptions:[
-   'Reflecting axis and wall; fixed species inventories, initially uniform volume densities. Cuts partition the current inventory; they are not extraction rates.',
-   'Neutral inertia follows the evolving mass-weighted radial second moment. Ion and neutral angular momenta evolve with reciprocal friction, applied torque and neutral drag; dragHz is fixed, so the neutral drag coefficient scales with its current inertia. Ion geometry/inertia and the collision torque coefficient remain prescribed.',
-   'Isothermal independent-species Smoluchowski closure with common prescribed D and instantaneous rigid rotation. An external thermal bath maintains temperature. Zero barycentric diffusive mass flux, local angular-momentum transport, pressure/temperature evolution, axial flow, extraction and pump depletion are not solved.',
-   'Finite-volume exponential SG flux and backward-Euler angular-momentum equations share a nonlinear endpoint speed. Positive conservative inventory; drive-minus-drag impulse closes the rotor budget. First-order time/phase accuracy requires refinement. Cellwise constant radial reconstruction.',
-   'Redistribution work and backward-Euler numerical dissipation are reported separately. Neither is presented as a measured heat load. The fixed-uniform-inertia result remains a separate reference benchmark.',
-   'Transport coefficient is a user-prescribed phenomenological input, not a validated binary gas diffusion coefficient. Not a fully coupled multicomponent neutral-fluid calculation.'
+   'No species flux crosses the axis or wall. Species inventories stay fixed; initial volume densities are uniform. Cuts divide the current inventory. They do not give extraction rates.',
+   'The gas distribution sets neutral inertia. Reciprocal friction, applied torque and neutral drag change ion and neutral angular momenta. The fixed drag frequency makes the neutral drag coefficient proportional to current inertia. Ion geometry, ion inertia and the collision torque coefficient are specified inputs.',
+   'Isothermal independent-species Smoluchowski closure uses one specified D and instantaneous rigid rotation. An external thermal bath keeps temperature fixed. The model does not keep total diffusive mass flux at zero. It does not calculate local angular-momentum transport, pressure/temperature changes, axial flow, extraction or pump depletion.',
+   'Finite-volume exponential SG flux and backward-Euler angular-momentum equations use the same nonlinear endpoint speed. Species inventories stay nonnegative and conserved. Drive impulse minus drag impulse gives the angular-momentum change. Refinement is necessary for first-order time and phase accuracy. Radial density is constant within each cell.',
+   'The model gives redistribution work and backward-Euler numerical dissipation separately. Neither quantity is a measured heat load. The fixed-uniform-inertia result is a separate reference benchmark.',
+   'The user supplies the transport coefficient. It is not a validated binary gas diffusion coefficient. This model is not a fully coupled multicomponent neutral-fluid calculation.'
   ]};
  let state:FuelCoupledState={lightMass:Array<number>(cells).fill(1/cells),heavyMass:Array<number>(cells).fill(1/cells),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
  const ledger:Ledger={driveImpulseKgM2S:0,dragImpulseKgM2S:0,ionPhaseRad:0,neutralPhaseRad:0,
