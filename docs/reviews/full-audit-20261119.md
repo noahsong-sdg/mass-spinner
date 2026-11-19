@@ -1,5 +1,9 @@
 # Mass Spinner audit — 19 November 2026
 
+Historical audit snapshot. [The follow-up](audit-fixes-20261119.md) records fixes,
+independent review and qualification of F1–F7; findings below describe the original
+revision, not the current implementation.
+
 Application revision: `45588450bf35cb9abc4e3472ff6f30bf9b00d459`.
 Scope: maintained UI, tutorial routing, physics-to-plot/scene path, solver contracts,
 scientific qualification, rendering, dependencies and release process. This is a
