@@ -21,6 +21,7 @@ test('reactor recalculation preserves a user-framed hardware view',async({page},
  for(const name of ['beam','neutrons','heat','reactions'])await processes.getByLabel(`Show ${name}`,{exact:true}).uncheck();
  await processes.locator(':scope > summary').click();
  await canvas.focus();await canvas.press('ArrowRight');await canvas.press('+');
+ await expect(canvas).toBeFocused();
  const before=await canvas.screenshot();
  await page.getByRole('button',{name:'Controls',exact:true}).click();
  const current=page.locator('#fusion-beamCurrentA'),oldCurrent=await current.inputValue();
@@ -28,8 +29,12 @@ test('reactor recalculation preserves a user-framed hardware view',async({page},
  await expect(page.locator('.coupled-target')).toHaveAttribute('data-status','pending');
  await expect(page.locator('.coupled-target')).toHaveAttribute('data-status','accepted',{timeout:30_000});
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ // The canvas's inset keyboard-focus outline is part of its screenshot.
+ // Compare the same focus state as well as the same geometry and camera.
+ await canvas.focus();await expect(canvas).toBeFocused();
  const after=await canvas.screenshot();
+ await info.attach('reactor-camera-before',{body:before,contentType:'image/png'});
+ await info.attach('reactor-camera-after',{body:after,contentType:'image/png'});
  expect(after.equals(before),'same geometry must retain the orbit, zoom, pan and frame through pending and acceptance').toBe(true);
- await info.attach('reactor-preserved-camera',{body:after,contentType:'image/png'});
  expect(errors).toEqual([]);
 });
