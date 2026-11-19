@@ -45,8 +45,8 @@ Spatial argon reference shows saved mesh refinements, not experimental accuracy 
 The comparison shows how diffusivity changes recovery under specified inputs, assumptions and time. Accuracy for a Marathon device is a different question. It is necessary to use its apparatus, operating conditions and measurement method.
 
 A Doppler instrument uses wavelength changes in emitted light to calculate velocity along a line of sight.
-It combines light from different positions along that sightline. Emission strength and the spectral estimator can affect the inferred velocity.
-The estimator is the method that converts the measured spectrum to velocity. Thus, inferred velocity can differ from local neutral speed.
+It receives light from different positions along that sightline. Emission strength and the spectral estimator can change the calculated velocity.
+The estimator is the method that calculates velocity from the measured spectrum. Thus, calculated velocity can differ from local neutral speed.
 The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records disagreement, not experimental accuracy.
 
 Export the accepted run with its physical time, plot and selected coefficients. Operating maps and saved references do not show an experimentally verified operating range.

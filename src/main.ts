@@ -325,7 +325,7 @@ function selectMode(){
  workspace?.refreshMode();
  document.querySelector<HTMLElement>('.legend-note')!.hidden=!orbital;
  $('experiment-label').textContent='SECTION '+g.section;$('experiment-title').textContent=g.title;$('experiment-subtitle').textContent=info?'Overview · no quantitative solver':orbital?'Finite-device full ion orbits':selected==='centrifuge'?equilibriumLabel():selected==='doublewell-dynamics'?'Coupled kinetic model · prescribed fields':'Reduced physics diagnostics';
- $('system-scope').textContent=selected==='doublewell-dynamics'?'Collision model · accuracy not established':info?'Overview only':reduced?'Reduced model · see model limits':selected==='centrifuge'?'Equilibrium closure':'Prescribed-field orbits';
+ $('system-scope').textContent=selected==='doublewell-dynamics'?'Collision model · accuracy unknown':info?'Overview only':reduced?'Reduced model · see model limits':selected==='centrifuge'?'Equilibrium closure':'Prescribed-field orbits';
  $('field-key').hidden=!orbital;
  $('field-key').textContent=selected==='icr'?'Copper = prescribed RF electric field at t = 0 · sage = axial B.':'Copper = radial E · sage = axial B · wire cylinder = ideal absorbing wall.';
  apparatus?.show(selected);tutorialInsights?.show(selected);

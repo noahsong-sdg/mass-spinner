@@ -23,7 +23,7 @@ They made no source changes and ran no project code on the host.
 | The first experiment used angular momentum before its explanation. | The rewrite substituted an undefined term for the visible speed change. | The first observation required knowledge taught later. | Describe ion and neutral speed changes. Keep the angular-momentum account in its later section. |
 | The density equation lacked one physical link. | The shorter introduction removed the earlier analogy without explaining the mass dependence. | The mass in the exponent had no immediate reason. | State that heavier atoms need more inward force at the same radius and angular speed. |
 | Tutorial 1 used undefined symbols. | This gap predates the STE pass. | The reader met Ω, T, and α before their definitions. | Define the symbols before the equation. State which input stays constant in each comparison. |
-| A collision-model status implied experimental evidence. | “Experimental” replaced “Exploratory.” Neither label directly stated the accuracy limit. | The reader could mistake an unqualified calculation for a measured result. | State “accuracy not established.” Keep the raw momentum error and uncalibrated-purity warnings. |
+| A collision-model status implied experimental evidence. | “Experimental” replaced “Exploratory.” Neither label directly stated the accuracy limit. | The reader could mistake an unqualified calculation for a measured result. | State “accuracy unknown.” Keep the raw momentum error and uncalibrated-purity warnings. |
 
 These are local text fixes. No new sections, solver changes, numerical inputs, or abstractions are necessary.
 The existing paragraphs now carry the missing conditions and reasons.

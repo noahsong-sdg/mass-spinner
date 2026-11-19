@@ -27,8 +27,8 @@ test('the heat reader introduces input power before stored energy and retains th
  const firstEquation=heat.indexOf('```math');
  const inputPower=heat.indexOf('First calculate the energy supplied each second');
  assert.ok(inputPower>=0&&inputPower<firstEquation);
- assert.ok(heat.indexOf('The balance of energy input and removal sets the stored energy and temperature')>firstEquation);
- assert.match(markdown,/The thermal model assigns this energy difference to gas thermal energy/);
+ assert.ok(heat.indexOf('The balance of energy input and removal sets the gas and liner thermal energy and temperatures')>firstEquation);
+ assert.match(markdown,/In the thermal model, this energy difference increases or decreases gas thermal energy/);
  assert.match(markdown,/This does not calculate full fluid momentum and energy transport/);
 });
 

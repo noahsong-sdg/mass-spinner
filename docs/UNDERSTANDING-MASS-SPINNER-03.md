@@ -19,7 +19,7 @@ Power is the energy rate, in watts. Torque τ and ion angular speed Ωᵢ give m
 Current I and electrical resistance Rₑ give resistive heat.
 At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
 Friction also changes rotational energy into heat.
-The balance of energy input and removal sets the stored energy and temperature.
+The balance of energy input and removal sets the gas and liner thermal energy and temperatures.
 
 [Open the heat experiment](/?level=2&try=heatExperiment).
 

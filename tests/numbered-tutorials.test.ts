@@ -67,9 +67,9 @@ test('03–06 state the prerequisites and boundaries needed to interpret their e
  assert.match(read('05'),/positive power and time, and a burn fraction below one/);
  assert.match(read('06'),/not a statistical confidence interval/);
  assert.match(read('06'),/disagreement, not experimental accuracy/);
- assert.match(read('06'),/combines light from different positions along that sightline/);
- assert.match(read('06'),/Emission strength and the spectral estimator can affect the inferred velocity/);
- assert.match(read('06'),/estimator is the method that converts the measured spectrum to velocity/);
+ assert.match(read('06'),/receives light from different positions along that sightline/);
+ assert.match(read('06'),/Emission strength and the spectral estimator can change the calculated velocity/);
+ assert.match(read('06'),/estimator is the method that calculates velocity from the measured spectrum/);
 });
 
 function reader(number:string){

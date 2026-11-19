@@ -199,7 +199,7 @@ P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 
 Slip heating cannot be negative. Wall drag also changes rotational energy into heat.
 
-Mass movement changes rotational energy K = L²/(2ℐ). The thermal model assigns this energy difference to gas thermal energy.
+Mass movement changes rotational energy K = L²/(2ℐ). In the thermal model, this energy difference increases or decreases gas thermal energy.
 At constant L, outward movement releases energy. Inward movement can remove heat.
 This does not calculate full fluid momentum and energy transport.
 
