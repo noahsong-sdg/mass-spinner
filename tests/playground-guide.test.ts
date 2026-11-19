@@ -284,6 +284,23 @@ test('tutorial experiments change apparatus only when a different apparatus is n
  assert.deepEqual(changes,['source','centrifuge']);assert.equal(f.doc.activeElement,f.node('fuel-burnFraction'));
 });
 
+test('tutorial experiments reactivate a retained apparatus from every advanced playground',t=>{
+ for(const level of ['1','3','4'] as const)for(const context of ['centrifuge','source'] as const){
+  const f=fixture(t,true);acceptedFuel(f);experimentControls(f);
+  const current=f.doc.createElement('input');current.id='fusion-beamCurrentA';f.node('fusion-controls').append(current);
+  const apparatus=f.node('marathon-apparatus');apparatus.value=context;apparatus.dispatchEvent(new f.window.Event('change'));
+  f.workspace.setLevel(level);
+  let changes=0;
+  // The experience controller uses this event to return from Advanced to Marathon.
+  apparatus.addEventListener('change',()=>{changes++;f.workspace.setLevel('2');});
+  const action=context==='source'?'beamSource':'inventoryExperiment';f.workspace.launchGuideAction(action);
+  assert.equal(f.doc.querySelector<HTMLElement>('.sim-workspace')!.dataset.level,'2',`${level}: reactivate ${context}`);
+  assert.equal(f.doc.activeElement,context==='source'?current:f.node('fuel-burnFraction'));
+  assert.equal(changes,1);
+  f.workspace.launchGuideAction(action);assert.equal(changes,1,'the active apparatus needs no second activation');
+ }
+});
+
 test('experiment entrypoints are available while computing and their plot action waits for acceptance',async t=>{
  const f=fixture(t),fuel=acceptedFuel(f);experimentControls(f);fuel.accepted.disabled=true;
  f.workspace.launchGuideAction('spatialHeatExperiment');assert.equal(f.node('window-controls').hidden,false);

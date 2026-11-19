@@ -113,7 +113,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Open the tutorials and documentation in a separate tab';
  docsButton.addEventListener('click',()=>guide.openStandalone());
  reading.append(docsButton);header.append(reading);
- const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseCentrifuge:()=>level==='2'&&marathon==='centrifuge'});
+ const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus});
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);
  function group(parent:HTMLElement,levels:readonly ExperienceLevel[],selectors:readonly string[],context?:string){

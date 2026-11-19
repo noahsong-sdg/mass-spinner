@@ -3,7 +3,7 @@ import type {GuideExperiment} from './guide-topics.js';
 
 import {playgroundSteps as steps} from './playground-guide-steps.js';
 
-export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseCentrifuge?:()=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
+export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
 type GuideElements={
  'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
  'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;'fuel-new-run':HTMLButtonElement;
@@ -15,7 +15,7 @@ type GuideElements={
 type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
 /** Optional instructions for the existing controls. These instructions do not add simulation modes or physical presets. */
-export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,canUseCentrifuge=()=>true}:PlaygroundGuideOptions){
+export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,canUseApparatus=()=>true}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
  const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
@@ -85,7 +85,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function showExperiment(key:string){
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
   const context=experiment.apparatus??'centrifuge';
-  if(apparatus.value!==context){apparatus.value=context;apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));}
+  if(apparatus.value!==context||!canUseApparatus(context)){apparatus.value=context;apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));}
   if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result)&&!['spin','transport'].includes(node('fuel-motion-mode').value))set('fuel-motion-mode','transport');
   // Beam references have their own accepted state. Centrifuge actions wait on fuel-export.
   if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
@@ -110,7 +110,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(Object.hasOwn(guideExperiments,key)){showExperiment(key);return;}
   if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
-  if(!canUseCentrifuge()){status.textContent='To use these guide controls, select Centrifuge.';return;}
+  if(!canUseApparatus('centrifuge')){status.textContent='To use these guide controls, select Centrifuge.';return;}
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
@@ -188,7 +188,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const execute=()=>{action(key);reply(status.textContent?{status:'rejected',message:status.textContent}:{status:'executed'});};
   const immediate=Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key);
   const ready=()=>{
-   if(!canUseCentrifuge()&&!Object.hasOwn(guideExperiments,key))return true;
+   if(!canUseApparatus('centrifuge')&&!Object.hasOwn(guideExperiments,key))return true;
    if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
    if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
