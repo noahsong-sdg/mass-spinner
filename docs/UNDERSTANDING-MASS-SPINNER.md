@@ -5,7 +5,7 @@ then [Part 2: from rotation to a prediction](UNDERSTANDING-MASS-SPINNER-02.md).
 
 ## What rotates?
 
-**Gas, not a metal drum.** An ion is a charged atom or molecule; a neutral has
+The gas rotates inside stationary electrodes. An ion is a charged atom or molecule; a neutral has
 no net charge. A partially ionized gas contains both, plus electrons.
 Isotopes share an element but differ in mass: our example is lithium-6 and lithium-7.
 
@@ -25,12 +25,12 @@ neither changes isotopes nor computes a fusion reaction.
 
 ## Why simulate more than rotation?
 
-- **Drive versus losses:** torque adds angular momentum; wall drag removes it.
+- Torque adds angular momentum; wall drag removes it.
   Ions and neutrals need not initially turn together.
-- **Rotation versus thermal mixing:** ideal equilibrium sorting strengthens
+- Ideal equilibrium sorting strengthens
   with speed squared and weakens with temperature. Heating can erode faster
   rotation’s benefit. Fixed temperature assumes external thermal control.
-- **Time and collection:** equilibrium may not be reached. A small light-rich
+- Equilibrium may not be reached. A small light-rich
   sample can have high purity but retain little of the available light isotope.
   Inventory cuts are not extraction rates.
 

@@ -55,3 +55,11 @@ test('the introductory experiment links directly to its live actions without a d
  assert.doesNotMatch(introduction,/In \*\*Start here\*\*, choose/);
  assert.doesNotMatch(source,/Start here → Experiments|reopen \*\*Start here\*\* to return/);
 });
+
+
+test('tutorial prose omits bold label prefixes',()=>{
+ for(const suffix of ['', '-02', '-03', '-04', '-05', '-06']){
+  const text=readFileSync(`docs/UNDERSTANDING-MASS-SPINNER${suffix}.md`,'utf8');
+  assert.doesNotMatch(text,/\*\*[^*\n]+[.:]\*\*/);
+ }
+});
