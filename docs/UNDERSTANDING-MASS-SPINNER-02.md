@@ -1,73 +1,75 @@
 # Tutorial 2 · Rotation and separation
 
-## What are we trying to predict?
+## What do we want to calculate?
 
-Can the gas near the axis become richer in lithium-6 while retaining enough
-material? For example, taking 10 light atoms and 90 heavy ones from a mixture
-of 76 light and 924 heavy atoms raises purity from 7.6% to 10%, but recovers
-only 10/76 of the light atoms. Separation rearranges isotopes; it creates none.
+The goal is to collect more light-isotope atoms at a higher percentage.
+Purity is their percentage in the sample. Recovery is their fraction of the initial light-isotope count.
 
-Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/)
-motivates this centrifuge model. It is not a reconstruction of proprietary hardware
-or a fusion reactor. Follow drive → rotation → heating → separation → collection.
+From 76 light and 924 heavy atoms, collect 10 light and 90 heavy atoms.
+Purity increases from 7.6% to 10%, but recovery is only 10/76. Separation moves isotopes. It does not make them.
 
-Use Coupled separation. [Every menu option is explained below](#views).
-[Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
-introduces the controls; the [first guide](UNDERSTANDING-MASS-SPINNER.md) defines ions and neutrals.
+This centrifuge model explains Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/), not proprietary equipment or a fusion reactor.
+It connects drive, rotation, heating, separation and collection.
+
+Use Coupled separation. [The menu table](#views) explains the other options.
+[Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html) shows the controls.
+The [first guide](UNDERSTANDING-MASS-SPINNER.md) explains ions and neutral atoms.
 
 ### First, change one real control
 
 1. [Start from rest & edit current](/?level=2&guide=physics&topic=goal&try=currentExperiment).
-   Set Radial discharge current to 0 A and wait for Updating to finish.
-2. [Show end-of-run speeds](/?level=2&guide=physics&topic=goal&try=endSpin): neither population should turn.
-3. Repeat with 0.03 A, leaving other inputs unchanged. Ions now accelerate;
-   collisions make neutrals follow. Compare at the same physical time.
+2. Set Radial discharge current to 0 A.
+3. Wait until Updating stops.
+4. [Show end-of-run speeds](/?level=2&guide=physics&topic=goal&try=endSpin). The two populations must stay at rest.
+5. Do the same comparison with 0.03 A and the same other inputs. Ion speeds increase. Collisions move angular momentum to neutral atoms.
+6. Compare the speeds at the same physical time.
 
-Preparation clears power switches and starts from rest. A later current edit,
-even while paused, changes the drive history. With thermal evolution off,
-temperature stays fixed. [§4 explains the motion](#momentum).
+The experiment removes earlier power switches and starts from rest.
+Later current changes change the drive history, also during a pause.
+Without thermal evolution, temperature stays constant. [§4 explains the motion](#momentum).
 
 ## 1. Why does rotation separate masses?
 
-Like gravity making air denser at lower heights, rotation favors the wall.
-Thermal motion opposes sorting. Heavier atoms develop a steeper equilibrium
-density gradient, leaving the inner gas relatively light-rich.
+Circular motion is possible only with force towards the axis. Pressure that increases towards the wall supplies this force.
+During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
+Random thermal motion decreases separation.
 
-Assume ideal neutral gas at uniform temperature and rigid rotation: every
-radius has angular speed Ω (radians per second). Tangential speed increases
-with radius:
+Use an ideal neutral gas at one temperature, with rigid rotation: angular speed Ω is the same at each radius.
+Tangential speed increases with radius:
 
 ```math
 v_\theta(r)=\Omega r.
 ```
 
-At equilibrium, the density of either species s obeys
+For each species s, the equilibrium density is
 
 ```math
 \frac{n_s(r)}{n_s(0)}
 =\exp\!\left(\frac{m_s\Omega^2r^2}{2k_BT}\right).
 ```
 
-Here r is radius, n atoms per volume, m mass per atom, T kelvin and k_B
-Boltzmann's constant. Each species' inventory fixes its normalization.
-Both densities rise outward, but their ratio changes. Local light fraction is
+Here, r is radius, n is number density (atoms/m³), m is one atom's mass, and T is temperature in kelvin.
+The symbol k_B is Boltzmann's constant.
+Each species' total atom count sets its density scale. The two densities increase outwards, but their ratio changes.
+The local light fraction is
 
 ```math
 x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
 ```
 
-The center can have a higher light percentage yet fewer light atoms per volume.
-In the diagram, compare No spin, Spinning and Warmer: “6×” is a density ratio,
-not a percentage. Then [show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition)
-and probe axis and wall. Compare with feed, not 50%. The composition axis is
-zoomed; heavy fraction is the remainder. Species density uses 1× = its volume
-mean. The diagram's equilibrium need not match your finite-time run.
+The center can have a higher light percentage but fewer light atoms in a unit volume.
+
+Compare No rotation, Rotation and Higher temperature in the diagram. The label “6×” is a density ratio, not a percentage.
+[Show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
+Select the axis and then the wall. Compare each percentage with the feed percentage, not 50%.
+
+Composition enlarges the percentage range. The heavy percentage is the remainder.
+Species density uses each species' volume mean as 1×. Your run might not become equal to the diagram's equilibrium.
 
 <details>
 <summary>Where does the exponential come from?</summary>
 
-Circular motion needs inward acceleration. Outward-rising pressure supplies
-the inward force. For steady neutral circular flow,
+Pressure that increases outwards gives inward acceleration. For constant circular motion of neutral gas,
 
 ```math
 -\frac{dp}{dr}=-\rho\frac{v_\theta^2}{r},
@@ -75,8 +77,8 @@ the inward force. For steady neutral circular flow,
 \frac{dp}{dr}=\rho\Omega^2r.
 ```
 
-With p pressure, ρ mass density and each species at diffusive equilibrium,
-substitute ideal partial pressure:
+Here, p is pressure and ρ is mass density. At diffusive equilibrium, each species has no net diffusion.
+Its ideal partial pressure gives
 
 ```math
 p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
@@ -84,15 +86,13 @@ p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
 \frac{d\ln n_s}{dr}=\frac{m_s\Omega^2r}{k_BT}.
 ```
 
-Integrating from the axis to r gives the exponential. This equilibrium balance
-is not a complete transient momentum equation.
+Integration from the axis to r gives the exponential. This is not a complete momentum equation for acceleration.
 
 </details>
 
 ## 2. How strong is the separation?
 
-A slope can represent tiny enrichment. Compare the heavy/light ratio at
-the wall with that at the axis:
+A clear slope can show a small isotope change. Compare the heavy/light ratio at the wall with the axis ratio:
 
 ```math
 \alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}},
@@ -101,42 +101,40 @@ the wall with that at the axis:
 =\frac{\Delta m\,v_{\mathrm{wall}}^2}{2k_BT}.
 ```
 
-R is vessel radius; v_wall = ΩR is gas speed, not the speed of the stationary
-vessel. The exponent compares rotational energy from the mass difference with
-thermal energy. α = 2 doubles the heavy/light ratio, not product purity.
+R is vessel radius. The speed v_wall = ΩR is gas speed at the wall, which does not move. Ω has units of rad/s.
+The exponent compares the rotational energy difference with thermal energy.
+When α = 2, the wall heavy/light ratio is two times the axis ratio, not two times the purity.
 
-For Δm ≈ 1 u, 1,000 m/s and 500 K, α ≈ 1.13: a 13% ratio contrast,
-not 13 percentage points of enrichment.
+For Δm ≈ 1 u, a gas speed of 1,000 m/s and a temperature of 500 K, α ≈ 1.13.
+The ratio increases by 13%. Purity does not increase by 13 percentage points.
 
-1. What if the gas turned twice as fast? [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation).
-   At fixed temperature, the exponent quadruples: the composition contrast grows.
-2. Now oppose that sorting with more thermal motion. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature).
-   At fixed rotation, the exponent halves: the composition contrast shrinks.
+1. [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation). At constant temperature, the exponent becomes four times its initial value and separation increases.
+2. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature). At constant rotation speed, the exponent becomes half its initial value and separation decreases.
 
-These equilibrium overlays leave your run unchanged and predict no required
-power. Charged-particle filters need physics beyond this neutral-gas result.
+These equilibrium curves do not change your run or calculate the necessary power.
+Charged-particle filters use more physics than this neutral-gas model includes.
 
-## 3. How do we spin a gas without spinning a drum?
+## 3. How do we turn gas without a moving drum?
 
-Assuming rotation does not explain how to produce it. Radial current crosses
-an axial magnetic field, pushing charged gas around stationary electrodes:
+Equilibrium does not explain how to turn the gas.
+Radial current crosses an axial magnetic field. The resulting force turns charged gas around electrodes that do not move:
 
 ```math
 \mathbf{f}=\mathbf{J}\times\mathbf{B}.
 ```
 
-f is force per volume, J current per area and B magnetic field. The force is
-perpendicular to both; reversing current reverses it. Collisions pass ion
-rotation to neutrals, which feel no direct Lorentz force.
+The symbol f is force density (N/m³), J is current density (A/m²), and B is magnetic field.
+The force is perpendicular to the current and field. Reversing current reverses force.
+Collisions move angular momentum from ions to neutral atoms, which receive no direct Lorentz force.
 
-Step through Current → Turn ions → Turn gas in the diagram, then
-[show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D apparatus.
-The dots represent populations, not microscopic orbits.
+Select Current, Turn the ions and Turn the gas in sequence in the diagram.
+Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.
+The dots show populations, not microscopic particle paths.
 
 ## 4. What sets the rotation speed?
 
-Force changes motion over time. Track angular momentum L, with moment of
-inertia ℐ measuring how hard the mass distribution is to turn. For rigid rotation,
+Torque changes angular momentum L over time, not speed immediately.
+Moment of inertia ℐ measures resistance to rotation changes. For rigid rotation,
 
 ```math
 L=\mathcal{I}\Omega,
@@ -144,7 +142,7 @@ L=\mathcal{I}\Omega,
 \frac{dL}{dt}=\tau_{\mathrm{in}}-\tau_{\mathrm{loss}}.
 ```
 
-τ is torque; d/dt means change per second. The browser uses two populations:
+The symbol τ is torque. The symbol d/dt means rate of change. For ions and neutral gas,
 
 ```math
 \frac{dL_i}{dt}=\tau_{\mathrm{drive}}-\Gamma(\Omega_i-\Omega_n),
@@ -152,43 +150,36 @@ L=\mathcal{I}\Omega,
 \frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
 ```
 
-The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is prescribed;
-neutral inertia evolves. Collision torques cancel in total angular momentum.
-Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
-Stronger coupling reduces lag but need not raise steady neutral speed.
+The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is specified. Neutral inertia changes with mass location.
+Collisions exchange angular momentum without changing its total. Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
+Stronger coupling decreases the speed difference, but does not necessarily increase the neutral speed after acceleration stops.
 
-For radial current I through an annulus in uniform axial field B,
+For radial current I through an annular region in constant axial field B,
 
 ```math
 \tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
 ```
 
-I is current, distinct from inertia ℐ. Integrating rIB dr across the driven
-annulus gives this geometry-dependent lever arm.
+The symbol I is current. ℐ is inertia.
+Integration of rIB dr across the driven region gives the torque. Thus, electrode radii change the drive.
 
 Use the powered run from the first experiment.
 
-1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin).
-   Watch the speed curves grow with the clock. Ions initially lead; collisions make the neutral gas follow.
-2. While it is turning, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower).
-   The gas keeps moving: removing torque does not remove the angular momentum already stored.
-3. To account for that motion, [show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum).
-   Total angular momentum follows Drive minus wall impulse. After power is cut,
-   wall drag removes it; collisions only transfer it between populations.
+1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin). The plot adds speeds when physical time increases. Ion speeds increase first. Collisions then increase neutral gas speed.
+2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it still has angular momentum.
+3. [Show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum). Total angular momentum equals drive impulse minus wall impulse. Each impulse is torque integrated over time.
+   After the power stops, wall drag decreases total angular momentum. Collisions only move it between populations.
 
-At fixed L, outward redistribution increases inertia and slows rotation.
-Replay preserves power switches; return to the first experiment to restart
-from the original powered state.
+At constant L, outward mass movement increases inertia and decreases angular speed.
+Replay keeps the power switches. The first experiment removes those switches and starts from rest.
 
 ## 5. Where does the energy go?
 
-Shared rotation strengthens sorting; random thermal motion weakens it at the
-same rotation speed. More current can increase both. The equilibrium competition
-is Ω²/T: faster gas need not improve separation if it also gets hotter.
+At the same rotation speed, more random thermal motion decreases separation. Equilibrium separation increases with Ω²/T.
+More current can increase speed and temperature. Heating can remove the separation gain from faster rotation.
 
-Holding temperature fixed requires cooling to remove net heat input. We ask:
-does extra current improve separation, and what cooling does it require?
-First separate mechanical power from resistive heat:
+For constant temperature, cooling must remove net heat input.
+Thus, we must calculate separation and cooling power. The drive supplies mechanical power and resistive heat:
 
 ```math
 P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
@@ -196,52 +187,50 @@ P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
 P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
 ```
 
-Power is energy per second. At fixed geometry and conductivity, doubling
-current doubles torque but quadruples resistive heating. Electrical resistance
-excludes motion-induced voltage; the drive also supplies mechanical work.
-Collisions dissipate relative rotation:
+Power is the energy rate, in watts.
+At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
+Resistance does not include motion-induced voltage. The source also supplies mechanical work.
+Collisions change relative rotational energy into heat:
 
 ```math
 P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 ```
 
-The square is nonnegative. Wall drag also dissipates rotation. Redistribution
-changes K = L²/(2ℐ); the thermal closure deposits signed redistribution work
-in the gas. Outward motion at fixed L releases energy; inward motion can draw
-heat. This does not resolve fluid momentum and energy.
+Slip heating cannot be negative. Wall drag also changes rotational energy into heat.
 
-For the closed vessel, the intended continuous energy account is
+Mass movement changes rotational energy K = L²/(2ℐ). This energy difference increases or decreases gas thermal energy.
+At constant L, outward movement releases energy. Inward movement can remove heat.
+This does not calculate full fluid momentum and energy transport.
+
+For the closed vessel, the continuous energy balance is
 
 ```math
 \frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
 =P_{\mathrm{mechanical}}+P_{\mathrm{Ohmic}}-P_{\mathrm{cooling}}.
 ```
 
-U is thermal energy. Slip and wall friction transfer energy internally;
-heat destinations are assumed. The finite-step ledger separately subtracts
-numerical damping, which should shrink with refinement; it is not physical heat.
+U is thermal energy. Slip and wall friction move energy inside the system. Specified heat fractions set its destination.
+Time stepping also removes numerical energy. The energy account records numerical loss and physical heat as separate terms.
+Smaller timesteps give a convergence check for this numerical loss.
 
-[Show drive work](/?level=2&guide=physics&topic=energy&try=work): curve height is
-energy in joules; curve slope is power in watts. Ohmic power is separate.
-The default bath holds temperature fixed despite work input.
-[Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) enables thermal evolution;
-it does not solve ionization or separate electron/ion temperatures.
+[Show drive work](/?level=2&guide=physics&topic=energy&try=work). Curve height is energy in joules. Curve slope is power in watts.
+Ohmic power is separate. The default bath keeps temperature constant.
 
-## 6. Why do we need time and collection, too?
+[Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) adds temperature changes.
+It does not calculate ionization or separate electron and ion temperatures.
 
-Rotation takes time to redistribute atoms. Diffusion spreads a distance
-roughly √(Dt), giving the timescale
+## 6. How do time and collection change the result?
+
+Separation takes time. Diffusion moves atoms a typical distance √(Dt), which gives the approximate time
 
 ```math
 t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
 
-D is diffusivity (m²/s); boundaries and rotation also affect settling.
-[Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare
-finite-time redistribution with equilibrium.
+D is diffusivity (m²/s). Boundaries and rotation also change the time to equilibrium.
+[Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare the calculated distribution with equilibrium.
 
-An enriched region can contain little material. Keeping all gas inside a
-radius gives two measures:
+Enriched gas can contain few atoms. For all gas inside a collection radius,
 
 ```math
 \mathrm{purity}=\frac{N_{\ell,\mathrm{inside}}}
@@ -250,97 +239,100 @@ radius gives two measures:
 \mathrm{recovery}=\frac{N_{\ell,\mathrm{inside}}}{N_{\ell,\mathrm{whole\ vessel}}}.
 ```
 
-N counts atoms. Smaller inner cuts generally raise purity but lower recovery;
-these are inventory fractions, not outlet flow.
+N counts atoms. With light enrichment near the axis, a smaller inner sample can increase purity but decrease recovery.
+These fractions measure gas in the vessel, not gas flow through an outlet.
 
-[Open the collection experiment](/?level=2&try=collectionExperiment) and probe
-two radii. At the wall, purity equals feed and recovery is one. Empty-cut purity
-and absent-light-species recovery are undefined. The probe does not move the 3D cut marker;
-the Inner collection radius / a setup slider instead starts a new run.
+[Open the collection experiment](/?level=2&try=collectionExperiment).
+Select two probe radii. At the wall, purity is the feed percentage and recovery is one.
+An empty sample has no defined purity. If the vessel contains no light species, recovery has no defined value.
 
-## Why these pieces, and what is still missing?
+The probe does not move the 3D collection marker.
+The Inner collection radius / a control changes that marker and starts a new run.
 
-Drive changes rotation; heating opposes sorting; transport and the collection
-cut determine the sample. Omitting a link can reverse “more current helps.”
+## Which model parts are necessary, and what is missing?
 
-The browser's bulk speeds and prescribed transport are not a demonstrated
-sustainable operating point. It does not solve shear, meridional circulation,
-phase exchange or discharge sustainment. The research solver is separate.
+Drive changes rotation, heating decreases separation at the same speed, and transport changes the distribution over time.
+The collection radius selects the sample. Without these connections, more current can appear useful when it is not.
 
-Conservation and refinement test the numerical solution; matched measurements
-test the physical model. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html)
-records unresolved argon-profile disagreement, not validated Marathon or lithium performance.
+The browser uses bulk speeds and specified transport coefficients. These do not show if the device can continue to operate.
+It does not calculate velocity shear, circulation in the radial–axial plane, evaporation, condensation or the discharge energy supply.
+The research solver is separate.
+
+Conservation and refinement tests identify numerical errors. Measurement comparisons give a physical-model validation check.
+The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records remaining differences from an argon experiment.
+It does not show accurate Marathon or lithium results.
 
 ## What do the menu options mean?
 
-Gas view changes presentation, not physics. Enable optional models in Controls.
+Gas view changes the display, not the physics. Use Controls to set optional models to on.
 
 | Gas view | Meaning and limit |
 |---|---|
-| Equilibrium reference | Ideal distribution at the bulk reference’s endpoint speed; not the coupled end state. |
-| Coupled separation | Coupled history with fast turns averaged into rings; weighted populations, not particle orbits. |
-| Coupled spin-up | The same accepted coupled solution, slowed to reveal turning; transport still evolves. |
-| Flow · reference | Schematic reference, not solved inlet/outlet fluid motion or rotor feedback. |
+| Equilibrium reference | Ideal equilibrium at the bulk reference's last speed. This is not the coupled model's last state. |
+| Coupled separation | Coupled time history. Rings show mean rotation. Dots show weighted populations, not particle paths. |
+| Coupled spin-up | The same coupled solution, with slower displayed rotation. The distribution continues to change with physical time. |
+| Flow · reference | A schematic reference. It does not calculate inlet/outlet fluid motion or changes in rotor motion caused by flow. |
 
-The time slider selects physical seconds; “1 s screen = …” is playback scale.
-Read m/s rather than counting turns. Play/Pause and Rewind navigate history;
-New run restarts with current settings. Cut power inserts a current step at the
-selected time. Reference views are not controlled comparisons of evolving runs.
+The time slider selects physical seconds. The label “1 s screen = …” gives the playback scale.
+Read the speed in m/s. Do not count displayed turns.
 
-Plots ask different questions. Time histories grow with the clock; radial
-profiles show the selected instant; parameter scans compare hypothetical settings.
+Play/Pause and Rewind select positions in the calculated history. New run starts again with the current settings.
+Cut power adds a current step at the selected time. Reference views do not compare time-dependent runs with controlled inputs.
 
-| Plot | Read it as… |
+Time plots add data as physical time increases. Radial profiles show values at the selected time.
+Parameter scans compare calculated values for different settings.
+
+| Plot | Meaning |
 |---|---|
-| Separation over time | Cut purity/recovery versus time, not extraction rate. [§6](#collection) |
-| Composition | Local light percentage versus radius; heavy is the remainder. [§1](#composition) |
-| Ion–neutral spin-up | Ion and neutral edge speeds (m/s) versus time. [§4](#momentum) |
-| Drive & work | Mechanical energies (J); slopes are power (W). Ohmic power is separate. [§5](#energy) |
-| Temperature | Mean gas/liner temperatures; evolution requires thermal physics enabled. [§5](#energy) |
-| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
-| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
-| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
-| Angular momentum | Drive impulse minus wall impulse; internal collision transfer cancels. [§4](#momentum) |
-| Gas inertia | Mass redistribution’s effect on resistance to turning, versus time. [§4](#momentum) |
-| Species density | Each isotope’s density divided by its own volume mean; 1× is average. Evolving in coupled views, equilibrium in reference views. [§1](#composition) |
-| Purity & recovery | Inventory fractions versus cut radius, not throughput. [§6](#collection) |
-| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. [Open stages experiment](/?level=2&try=stageExperiment). |
-| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. [Open pumping experiment](/?level=2&try=pumpingExperiment). |
-| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. [Open magnetic leverage](/?level=2&try=fieldExperiment). |
-| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. [Open fuel inventory](/?level=2&try=inventoryExperiment). |
-| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. [Open surface reference](/?level=2&try=surfaceExperiment). |
+| Separation over time | Sample purity and recovery against time, not extraction rate. [§6](#collection) |
+| Composition | Local light percentage against radius. The heavy percentage is the remainder. [§1](#composition) |
+| Ion–neutral spin-up | Ion and neutral gas speeds at the wall (m/s) against time. [§4](#momentum) |
+| Drive & work | Mechanical energy (J). Slopes give power (W). Ohmic power is separate. [§5](#energy) |
+| Temperature | Mean gas and liner temperatures. Temperature changes occur only with thermal evolution. [§5](#energy) |
+| Temperature profile | Radial temperatures use Radial tungsten liner. The gas curve also uses Spatial mixture. No axial temperature structure. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
+| Species energy profile | Internal energy in each cell with Spatial mixture. The two species have the same local temperature. More atoms can give more energy without a higher temperature. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
+| Gas pressure profile | Local nkT with Spatial mixture. This does not calculate local force balance. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
+| Angular momentum | Drive impulse minus wall impulse. Collision torques move angular momentum between populations without changing the total. [§4](#momentum) |
+| Gas inertia | Resistance to changes in rotation, against time. Mass movement changes this inertia. [§4](#momentum) |
+| Species density | Each isotope's density divided by its own volume mean. 1× is the mean. Coupled views change with time. Reference views show equilibrium. [§1](#composition) |
+| Purity & recovery | Fractions of atoms in a sample, against collection radius. No outlet flow. [§6](#collection) |
+| Countercurrent stages | Ideal routing between stages, with recovery and circulation. Equal turnover times are specified. Plant flow changes are not calculated. [Open stages experiment](/?level=2&try=stageExperiment). |
+| Differential pumping | Reference pressures and gas load for pump and inlet settings. Select that application. No flow-induced changes in rotor motion. [Open pumping experiment](/?level=2&try=pumpingExperiment). |
+| Magnetic leverage | Resistive heat at constant reference torque. Current changes with field. This differs from constant-current operation. [Open magnetic leverage](/?level=2&try=fieldExperiment). |
+| D–T fuel inventory | A separate fuel-loop account with constant flows using burn fraction and delay. This does not calculate lithium-centrifuge burn. [Open fuel inventory](/?level=2&try=inventoryExperiment). |
+| Lithium vapor & surfaces | Gas and liner conditions against saturation references. Evaporation and condensation do not change the run. [Open surface reference](/?level=2&try=surfaceExperiment). |
 
 ### Which controls affect physics?
 
-Controls changes physical inputs; Inspect identifies parts and links to those controls.
-Some inputs act only in enabled models;
-others belong to separate reference calculations. A scan’s curve may stay fixed
-while its selected marker moves. After editing, wait for the accepted result.
+Controls changes physical inputs. Inspect identifies parts and links to those controls.
+Some inputs affect only active models. Others affect separate reference calculations.
+A parameter scan can keep the same curve while the selected marker moves.
+After a change, wait until the calculation finishes.
 
-| Input family | Effect; useful plot |
+| Input family | Effect. Related plot |
 |---|---|
-| Feed; light fraction | Masses/inventories; Composition, Species density. |
-| Magnetic field; current; drive annulus | Torque, lever arm and resistive path; Spin-up, Drive & work. Late current edits add steps. |
-| Gas temperature | Initial temperature, pressure-derived inventory and sorting; Composition, Temperature. Fixed bath unless thermal evolution is on. |
-| Duration; radial diffusivity | Available redistribution time and transport rate, not fixed-speed equilibrium; Separation over time. |
-| Ion fraction; collision rate | Driven inertia and momentum transfer; Spin-up. Ionization is prescribed. |
-| Wall drag | Boundary momentum loss; Spin-up, Angular momentum. |
-| Conductivity | Resistive heating at prescribed current, not a solved discharge; Drive & work. Temperature responds only with thermal evolution. |
-| Radius; length; pressure | Inventory, inertia and transport scales; Spin-up, density, composition. Decorative hardware is not independently solved. |
-| Collection radius | Closed inventory selected; Purity & recovery marker/values. No extraction. |
-| Stages; feed stage | Separate ideal cascade routing; Countercurrent stages. |
-| Pump speed; inlet conductance | Separate equilibrium pumping reference; Differential pumping. |
-| Liner temperature | Initial wall temperature if thermal physics is on; saturation reference otherwise. |
-| Reference liner → gas conductance | Reference heat demand only; disabled when thermal physics supplies heat transfer. |
-| Thermal switches; storage; conductances; coolant | Enable heat evolution and set exchange/cooling; Temperature. Spatial tungsten supplies material heat capacity. |
-| Liner thickness; gas conductivity | Enabled spatial heat transport; Temperature profile. Resolution tests numerical sensitivity, not new physics. |
-| Fusion power; burn fraction; processing time | Separate steady D–T inventory accounting, not lithium dynamics. |
-| Lithium-seeded CIV reference | Reported reference only; no ionization solution or enforced speed limit. |
-| View; gas view; time | Presentation and sampling only, not physical input changes. |
+| Feed; light fraction | Species masses and atom counts. Composition, Species density. |
+| Magnetic field; current; drive annulus | Torque, electrode radii and resistive path. Spin-up, Drive & work. Current changes during a run add steps. |
+| Gas temperature | Initial temperature, atom count from pressure, and separation. Composition, Temperature. A constant-temperature bath operates unless thermal evolution is on. |
+| Duration; radial diffusivity | Time for mass movement and movement rate. Separation over time. These inputs do not change fixed-speed equilibrium. |
+| Ion fraction; collision rate | Ion inertia and angular momentum exchange. Spin-up. The model does not calculate ionization. |
+| Wall drag | Angular momentum loss at the wall. Spin-up, Angular momentum. |
+| Conductivity | Resistive heat at the selected current. Drive & work. Temperature changes occur only with thermal evolution. The model does not calculate the discharge. |
+| Radius; length; pressure | Atom count, inertia and transport scales. Spin-up, Species density, Composition. Displayed mechanical parts have no separate structural calculation. |
+| Collection radius | Selected gas in the closed vessel. Purity & recovery marker and values. No extraction. |
+| Stages; feed stage | Separate ideal routing between stages. Countercurrent stages. |
+| Pump speed; inlet conductance | Separate equilibrium pumping calculation. Differential pumping. |
+| Liner temperature | Initial wall temperature with thermal evolution. Otherwise, only a saturation reference. |
+| Reference liner → gas conductance | Reference heat demand only. This control is not active when thermal evolution calculates heat exchange. |
+| Thermal switches; storage; conductances; coolant | Temperature changes, heat exchange and cooling. Temperature. The spatial tungsten model uses material heat capacity. |
+| Liner thickness; gas conductivity | Spatial heat transport when active. Temperature profile. Cell count and timestep change numerical accuracy, not the physical model. |
+| Fusion power; burn fraction; processing time | Separate D–T fuel account with constant flows. These inputs do not change lithium motion. |
+| Lithium-seeded CIV reference | A reported critical ionization velocity reference. This does not calculate ionization or enforce a speed limit. |
+| View; gas view; time | Display and selected time only. These controls do not change physical inputs. |
 
-## Where do we go after this guide?
+## What comes next?
 
-Continue with [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
+Read [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
 [04 · collection](UNDERSTANDING-MASS-SPINNER-04.md),
 [05 · fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
 [06 · accuracy](UNDERSTANDING-MASS-SPINNER-06.md).
@@ -351,6 +343,6 @@ The [documentation index](/learn.html) links all six tutorials and the technical
 - Implementation: [mechanics/equilibrium](../src/fuel-centrifuge.ts),
   [composition/inertia](../src/fuel-transport.ts), [thermal evolution](../src/fuel-operation.ts).
 - [Plasma mass separation tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf):
-  charged-species filters require physics beyond this neutral equilibrium.
+  charged-species filters use physics that this neutral equilibrium does not include.
 - [How it works](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/how-it-works.html):
   numerical methods and accuracy limits.

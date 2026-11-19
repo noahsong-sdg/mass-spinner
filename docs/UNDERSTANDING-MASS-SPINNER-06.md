@@ -1,39 +1,51 @@
 # Tutorial 6 · Model accuracy
 
-A plausible curve can still be wrong. Check the equations, their numerical solution and their agreement with measurements separately.
+A curve alone does not show that a model is accurate. Different checks are necessary for the equations, their numerical solution and their agreement with measurements.
 
-## What does a passing test establish?
+## What does a test show?
 
-Conserving atoms cannot prove the predicted rotation matches a real experiment. Three questions need separate evidence.
+Atom conservation does not show that the calculated rotation agrees with measurements. Three questions have different evidence:
 
-| Question | Evidence | What it cannot establish |
+| Question | Evidence | What it cannot show |
 |---|---|---|
-| Did we implement the equations correctly? | Known limits and conservation budgets: verification | That the chosen equations capture the apparatus |
-| Did cells and timesteps distort the answer? | Refinement and error estimates: convergence | That a converged closure is physically correct |
-| Does the model predict measurements? | Matched apparatus, conditions and diagnostic: validation | Accuracy outside the tested conditions |
+| Does the code solve the specified equations? | Known limits and conservation checks: verification | Correct equations for the apparatus |
+| Does a smaller cell or timestep change the answer? | Refinement and error estimates: convergence | That the model assumptions are physically correct |
+| Do calculated quantities agree with measurements? | The same apparatus, conditions and measurement method: validation | Accuracy outside the comparison conditions |
 
-[open Model info](/?level=2&try=modelInfo) and read the live qualification beside the run's assumptions. “Matches screened inputs” means those inputs match a numerical screen; it does not mean agreement with Marathon measurements. Check mesh/wall-layer warnings too.
+[Open Model info](/?level=2&try=modelInfo). Read the qualification status beside the run assumptions. Agreement with inputs in a numerical study does not show agreement with Marathon measurements. Read the mesh and wall-layer warnings.
 
-## Could an assumed input reverse the result?
+## Which input can change the result?
 
-Diffusivity, collision rate and conductivity are prescribed. Change one at a time to see which assumptions control the answer.
+The model uses diffusivity, collision rate and conductivity as inputs. Changes to these selected coefficients show which assumptions have a large effect on the result.
 
-[open diffusivity and separation](/?level=2&try=diffusionExperiment).
+[Open the diffusivity experiment](/?level=2&try=diffusionExperiment).
 
-1. Choose a powered, mixed atomic feed in Coupled separation. Turn thermal evolution off. Rewind, set a nonzero current, then New run to clear power switches. Wait; choose a time strictly inside the run and [pin A](/?level=2&try=pin).
-2. [Adjust only radial diffusivity](/?level=2&try=diffusion), then choose New run. Return to the same physical time in both cases. Check the accepted-input comparison for unintended changes.
-3. [Show separation over time](/?level=2&try=separationPlot), then compare the speed history too. Diffusivity changes redistribution; redistribution also changes gas inertia, so speed need not be identical. Report the observed sensitivity without calling it a measured uncertainty interval.
+Use Coupled separation with both atomic isotopes and thermal evolution off.
 
-Model info → Sensitivity & tested inputs samples a coefficient between chosen Lower/Upper bounds, preserving drive history. Its shading covers sampled cases, not a confidence interval or every intermediate value.
+1. Select Rewind.
+2. Set a nonzero current.
+3. Select New run to remove previous power switches.
+4. After the result is available, select a time between the run's start and end.
+5. [Pin run A](/?level=2&try=pin).
+6. [Change only radial diffusivity](/?level=2&try=diffusion).
+7. Select New run.
+8. Select the same physical time as run A.
+9. Read the accepted-input comparison for unintended changes.
+10. [Open separation over time](/?level=2&try=separationPlot).
+11. Compare the speed history also.
 
-Spatial argon reference shows saved mesh refinements, not validation or a resolution control for live lithium. The live thermal Refined option estimates timestep error; spatial refinement is still needed.
+Diffusivity changes radial transport and thus gas inertia. The two runs can therefore have different speeds. This gives sensitivity to a selected input, not a measured uncertainty interval.
 
-## What is a defensible claim here?
+Model info → Sensitivity & tested inputs calculates results for selected coefficient values between the Lower and Upper bounds. Each case uses the same drive history. The shading shows calculated cases, not a statistical confidence interval or every intermediate value.
 
-“Under these inputs and assumptions, increasing diffusivity changed finite-time recovery” is testable. “This predicts Marathon's enrichment” additionally needs their apparatus, operating state and a matched measurement.
+Spatial argon reference shows saved mesh refinements, not experimental accuracy or a live lithium mesh control. The live thermal Refined option gives a timestep-error estimate, not spatial convergence.
 
-A Doppler instrument measures emission along a sightline, not automatically the local neutral speed. Comparing a local simulated velocity directly to that measurement can test the wrong quantity. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records remaining disagreement, not successful device validation.
+## Which predictions have sufficient evidence?
 
-Export the accepted run with its physical time, plot and prescribed coefficients. Operating maps and saved references do not certify an operating region.
+The comparison shows how diffusivity changes recovery under specified inputs, assumptions and time. Accuracy for a Marathon device is a different question. It is necessary to use its apparatus, operating conditions and measurement method.
+
+A Doppler instrument uses wavelength changes in emitted light to calculate velocity along a line of sight. Its indication can differ from local neutral speed. A comparison with local velocity can therefore use the incorrect quantity. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records disagreement, not experimental accuracy.
+
+Export the accepted run with its physical time, plot and selected coefficients. Operating maps and saved references do not show an experimentally verified operating range.
 
 [Qualification implementation](../src/fuel-qualification-ui.ts) · [Back to the physics guide](UNDERSTANDING-MASS-SPINNER-02.md)

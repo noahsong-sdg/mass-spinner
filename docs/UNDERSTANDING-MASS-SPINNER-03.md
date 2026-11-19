@@ -1,46 +1,76 @@
 # Tutorial 3 · Heating and cooling
 
-[02: rotation and separation](UNDERSTANDING-MASS-SPINNER-02.md) showed why faster rotation helps sorting. Can increasing current heat the gas enough to undo that gain?
+[02: rotation and separation](UNDERSTANDING-MASS-SPINNER-02.md) connected rotation with separation.
+The next question is if more current can heat the gas sufficiently to remove the separation gain.
 
 ## Why add a temperature model?
 
-Hotter gas has more random thermal motion and weaker mass sorting at the same rotation speed. We ask: does extra current improve separation enough to outweigh heating? A fixed-temperature bath assumes cooling removes the net heat; an evolving temperature model must account for it:
+At the same rotation speed, hotter gas has more random thermal motion and less separation.
+Does more current still increase separation when it increases temperature?
+To calculate Ω²/T, we must calculate speed and temperature. Cooling must remove net heat input to keep temperature constant.
+A temperature model calculates the energy that stays in the gas and liner:
 
 ```math
 P_{\mathrm{mech}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
 ```
 
-Power is joules per second. Torque τ and ion angular speed Ωᵢ give mechanical power; current I and resistance Rₑ give resistive heat. At fixed field, geometry and conductivity, doubling current doubles torque but quadruples resistive heating. Friction converts rotation into heat.
+Power is the energy rate, in watts. Torque τ and ion angular speed Ωᵢ give mechanical power.
+Current I and electrical resistance Rₑ give resistive heat.
+At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
+Friction also changes rotational energy into heat.
 
-[open the heat experiment](/?level=2&try=heatExperiment).
+[Open the heat experiment](/?level=2&try=heatExperiment).
 
-1. Choose Centrifuge → Coupled separation, Isotope separation and an atomic lithium feed. Turn thermal evolution off. Set Run duration to 1 s. Rewind, set current to 0.03 A, then New run to clear earlier power switches. Wait for the accepted result.
-2. Select 0.1 s, record speeds and temperature, then pin A. [Open thermal controls](/?level=2&try=thermal) and enable Evolve gas & liner temperature. Wait and return to 0.1 s.
-3. [Show temperature](/?level=2&try=thermalPlot). Compare with A: temperature can rise or fall depending on heating and cooling.
-4. To explain that difference, [show drive work](/?level=2&try=work). Curve heights are joules; slopes are watts. Check the signed budget before assigning a cause.
+1. Select Centrifuge → Coupled separation, Isotope separation and an atomic lithium feed.
+   Set thermal evolution to off. Set Run duration to 1 s.
+2. Select Rewind. Set current to 0.03 A. Select New run to remove earlier power switches.
+   Wait until the calculation finishes.
+3. Select 0.1 s. Record the speeds and temperature. Select Pin A.
+4. [Open thermal controls](/?level=2&try=thermal). Set Evolve gas & liner temperature to on.
+   Wait until the calculation finishes. Select 0.1 s again.
+5. [Show temperature](/?level=2&try=thermalPlot). Compare with A.
+   Temperature can increase or decrease, because heating and cooling change it.
+6. [Show drive work](/?level=2&try=work). Curve heights are energy in joules. Slopes are power in watts.
+   Use the energy account to identify the cause of the difference.
 
 ## Where does the heat go?
 
-An average hides hot layers that control cooling. The spatial model divides gas and liner into cells to calculate heat flow and local temperature:
+A mean temperature does not show hot boundary layers, which can control heat loss.
+The spatial model divides the gas and liner into cells. It calculates heat flow between cells and a temperature for each cell:
 
 ```math
 q_r=-k\frac{\partial T}{\partial r},\qquad
 p=nk_B T.
 ```
 
-Heat flux qᵣ (W/m²) runs down the temperature gradient; k is conductivity. Pressure p depends on number density n and temperature T.
+Heat flux qᵣ is heat flow divided by area, in W/m². Thermal conductivity k measures heat conduction, in W/(m·K).
+The minus sign gives heat flow from hot regions to cold regions.
+Calculate pressure p from number density n, temperature T and Boltzmann's constant k_B.
 
-[open the spatial heat experiment](/?level=2&try=spatialHeatExperiment). Enable Radial tungsten liner, then Spatial mixture · experimental.
+1. [Open the spatial heat experiment](/?level=2&try=spatialHeatExperiment).
+2. Set Radial tungsten liner to on.
+3. Set Spatial mixture · experimental to on.
+4. [Show temperature profile](/?level=2&try=thermalProfile).
+5. Select one physical time.
+6. Compare gas and liner temperatures to identify the heat-flow direction.
 
-[Show temperature profile](/?level=2&try=thermalProfile) at one time: where is the gas warmer, and which way should heat flow?
-Both species share one local temperature here. A cell with more atoms can contain more energy without being hotter.
+The two species have the same local temperature in this model.
+A cell with more atoms can contain more thermal energy without a higher temperature.
 
-## Can a field change avoid the heating?
+## Can a field change decrease resistive heating?
 
-The [Magnetic leverage experiment](/?level=2&try=fieldExperiment) asks a different question from changing B alone: it adjusts current to hold reference torque fixed. Then I ∝ 1/B, so resistive heating scales as 1/B². It does not establish that arbitrarily large fields are practical.
+The [Magnetic leverage experiment](/?level=2&try=fieldExperiment) changes current to keep reference torque constant.
+At constant conductivity and geometry, I ∝ 1/B and resistive heating ∝ 1/B².
+Two times B gives I/2 and one quarter of the resistive heat.
+A stronger field then decreases resistive heating. This result does not show a practical maximum field.
+Changing only B at constant current is a different experiment.
 
-Lithium must also remain gaseous. The [surface reference](/?level=2&try=surfaceExperiment) compares saturation conditions without evolving evaporation or condensation.
+Lithium must also stay in the gas phase.
+The [surface reference](/?level=2&try=surfaceExperiment) compares gas and liner conditions with saturation conditions.
+It does not calculate evaporation or condensation over time.
 
-Conductivity, heat exchange and deposition remain prescribed. Wall layers need joint cell/time refinement. Discharge and radial fluid momentum are not solved.
+Conductivity, heat exchange and heat deposition are specified.
+Joint spatial and timestep refinement is necessary to test wall boundary-layer accuracy.
+The model does not calculate the electrical discharge or radial fluid momentum.
 
 [Implementation and assumptions](../src/fuel-operation.ts) · [Next: 04 · a useful process](UNDERSTANDING-MASS-SPINNER-04.md)

@@ -1,10 +1,10 @@
 # Tutorial 4 · Purity and recovery
 
-After the [energy cost](UNDERSTANDING-MASS-SPINNER-03.md), ask what you can collect: enrichment is useful only if enough material remains.
+High purity alone does not give the product quantity. After the [energy cost](UNDERSTANDING-MASS-SPINNER-03.md), this quantity is the next question.
 
-## How much useful material did you keep?
+## How much light isotope did you keep?
 
-A small central sample can be light-rich yet retain few light atoms. Track both:
+A small central sample can have high light-isotope purity but contain few light atoms. Two quantities show this difference:
 
 ```math
 x_{\ell,\mathrm{cut}}=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{cut}}+N_{h,\mathrm{cut}}},
@@ -12,34 +12,50 @@ x_{\ell,\mathrm{cut}}=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{cut}}+N_{h,\m
 \eta_\ell=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{vessel}}}.
 ```
 
-N counts atoms; ℓ means light and h heavy. Purity divides by all atoms collected; recovery divides by all light atoms available. A fraction of 0.08 means 8%, not 0.08%.
+N is the number of atoms. The symbols ℓ and h identify the light and heavy isotopes. Purity is the light-isotope number fraction in the sample. Recovery is the fraction of the vessel's light atoms in the sample. A fraction of 0.08 is 8%, not 0.08%.
 
-[open the collection experiment](/?level=2&try=collectionExperiment). Use a mixed-feed Coupled separation run, then probe the curve at two radii. Each cut keeps all gas inside that radius. Read the probe values below the plot: smaller cuts usually improve purity but reduce recovery. At the wall, purity equals feed and recovery is 1 (100%). At an empty cut, purity is undefined. With no light atoms, light recovery is undefined.
+[Open the collection experiment](/?level=2&try=collectionExperiment).
 
-Probing does not move the 3D collection marker. Its setup control, Inner collection radius / a, changes the selected inventory cut and starts a new run. Neither action solves extraction flow.
+1. Select Isotope separation.
+2. Select Coupled separation with both isotopes in the feed.
+3. Select two radii on the collection curve.
+4. Read the purity and recovery below the plot.
+
+Each cut includes all gas inside its radius. Smaller cuts usually give higher purity and lower recovery. At the wall, purity is the feed light fraction and recovery is 1 (100%). An empty cut has no defined purity. With no light atoms, light recovery is undefined.
+
+The plot probe does not move the 3D collection marker. Inner collection radius / a changes the selected cut and starts a new run. These actions do not calculate extraction flow.
 
 ## Why use more than one stage?
 
-A cascade repeats modest enrichment by routing inner and outer streams between stages. This costs internal circulation.
+A cascade connects stages through inner and outer streams. More stages can give higher purity but cause more internal circulation.
 
-[open the stages experiment](/?level=2&try=stageExperiment) and record product purity, light recovery and circulation/feed.
+[Open the stages experiment](/?level=2&try=stageExperiment).
 
-Then [adjust stages](/?level=2&try=stageControls): change Ideal countercurrent stages, then Feed stage, separately. More stages is not a promise that all three measures improve together.
+1. Select Isotope separation.
+2. Record product purity, light recovery and circulation/feed.
+3. [Change Ideal countercurrent stages](/?level=2&try=stageControls).
+4. Compare the three quantities.
+5. Change only Feed stage.
 
-This is ideal routing with assumed stage behavior, not a timed plant simulation. It cannot predict kilograms per hour from a closed-vessel snapshot.
+More stages can give lower recovery or higher circulation. This reference uses ideal routing and stage assumptions. It cannot give plant transients or kilograms per hour from a closed-vessel state.
 
-## What limits the gas entering a process?
+## How much gas can enter a process?
 
-The pump and inlet pipe both restrict flow. This separate reference calculates upstream pressure for a prescribed rotating gas state:
+The pump and inlet pipe each have a flow limit. This reference gives the necessary upstream pressure for a specified rotating gas state:
 
 ```math
 Q=S p_w,\qquad p_u=p_a+Q/C,\qquad S_{\mathrm{eff}}=Q/p_u.
 ```
 
-S is outer pump speed, C inlet conductance (both m³/s); p is pressure (Pa). Gas load Q has units Pa·m³/s. Subscripts w, a and u mean wall, axis and upstream.
+S is outer pump speed. C is inlet conductance, the gas-load capacity per pressure difference. Both have units m³/s. Pressure p has units Pa. Gas load Q has units Pa·m³/s. Subscripts w, a and u identify wall, axis and upstream pressures.
 
-[open the pumping experiment](/?level=2&try=pumpingExperiment), then choose Differential pumping.
+[Open the pumping experiment](/?level=2&try=pumpingExperiment).
 
-Now [adjust pump speed](/?level=2&try=pumpControls): increase S while holding C fixed. Gas load grows because this reference permits higher required upstream pressure; effective inlet speed approaches C. Then increase C separately. Do not interpret this as fixed-upstream-pressure throughput or feedback on the closed-vessel rotor.
+1. Select Differential pumping.
+2. [Increase S](/?level=2&try=pumpControls) with no change to C.
+3. Compare gas load, upstream pressure and effective inlet speed.
+4. Increase only C.
 
-[Routing and pumping implementation](../src/fuel-centrifuge.ts) · [Next: 05 · why fusion needs separation](UNDERSTANDING-MASS-SPINNER-05.md)
+At larger S, the necessary upstream pressure and gas load are higher. Effective inlet speed approaches C. This is not flow at fixed upstream pressure or feedback on closed-vessel rotation.
+
+[Routing and pumping implementation](../src/fuel-centrifuge.ts) · [Next: 05 · Fusion fuel cycle](UNDERSTANDING-MASS-SPINNER-05.md)
