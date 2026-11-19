@@ -8,6 +8,8 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  const start=page.getByRole('button',{name:'Start here',exact:true});
  const [docsBox,startBox]=await Promise.all([button.boundingBox(),start.boundingBox()]);
  expect(docsBox&&startBox&&docsBox.x>=startBox.x+startBox.width).toBeTruthy();
+ const sceneBox=await page.locator('.world-stage>.world-group:not([hidden])').boundingBox();
+ expect(docsBox&&sceneBox&&docsBox.y+docsBox.height<=sceneBox.y).toBeTruthy();
  await button.focus();const opened=page.waitForEvent('popup');await button.press('Enter');const reader=await opened;
  await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
  for(const href of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/how-it-works.html','/equilibrium.html','/qualification.html'])await expect(reader.locator(`main a[href="${href}"]`)).toBeVisible();
