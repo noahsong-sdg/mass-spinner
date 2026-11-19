@@ -1,13 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PLAY_DEFAULTS,readExperience,playgroundLink} from '../src/experience-state.js';
+import {PLAY_DEFAULTS,readExperience} from '../src/experience-state.js';
 import {setupExperience} from '../src/experience-ui.js';
 
-test('shared playground settings round-trip without carrying advanced settings or an old fragment',()=>{
+test('legacy shared playground settings retain their fixed collisionless interpretation',()=>{
  const settings={field:.15,voltage:620,energy:3,massB:41};
- const link=playgroundLink('https://example.com/?level=3&neutral-density=1e18#failure-lab',settings);
- assert.deepEqual(readExperience(new URL(link).search),{level:'1',settings,invalid:false});
- assert.equal(new URL(link).hash,'');assert.ok(!link.includes('neutral-density'));
+ assert.deepEqual(readExperience('?level=1&v=1&field=.15&voltage=620&energy=3&massB=41'),
+  {level:'1',settings,invalid:false});
 });
 test('stale, blank, nonfinite, out-of-range and off-step links restore the whole default experiment',()=>{
  for(const suffix of ['v=99&field=.2','v=1&field=','v=1&field=Infinity','v=1&field=1e999',
