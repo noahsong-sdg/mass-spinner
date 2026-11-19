@@ -38,7 +38,7 @@ export function setupPreciseControls(root: ParentNode & Node,{describeRange=()=>
   const reset=()=>{range.step=originalStep;range.value=initial;emit();if(!editor.hidden){input.value=String(toPhysical(Number(range.value)));error.textContent='';input.removeAttribute('aria-invalid');}};
   editor.append(input,button('Apply',`Apply ${name}`,commit),button('Reset',`Reset ${name}`,reset),button('×',`Cancel ${name}`,close),error);box.append(editor);
   const open=()=>{if(range.disabled)return;editor.hidden=false;input.value=String(toPhysical(Number(range.value)));output.setAttribute('aria-expanded','true');input.focus();input.select();};
-  output.tabIndex=0;output.setAttribute('role','button');output.setAttribute('aria-label',`Set ${name} precisely`);output.title='Enter exact value';
+  output.tabIndex=0;output.setAttribute('role','button');output.setAttribute('aria-label',`Set the exact value of ${name}`);output.title='Enter the exact value';
   output.addEventListener('click',event=>{event.preventDefault();open();});output.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});
   input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();commit();}else if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close();}});
   const restoreStep=()=>{const before=range.value;range.step=originalStep;if(range.value!==before)emit();};

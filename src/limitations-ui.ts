@@ -10,7 +10,7 @@ const element=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{cons
 const fields: [keyof FailureBudgetConfig,string,string,number,number,number,boolean?][]=[
  ['neutralDensityM3','Neutral density','m⁻³',14,21,.1,true],
  ['cxCrossSectionM2','Assumed CX cross section','m²',-22,-17,.1,true],
- ['pathLengthM','Actual assumed ion path','m',0,10,.1],
+ ['pathLengthM','Specified ion path length','m',0,10,.1],
  ['residenceS','Assumed residence time','s',-6,-2,.1,true],
  ['electronDensityM3','Electron density','m⁻³',14,21,.1,true],
  ['recombinationM3S','Assumed recombination coefficient','m³/s',-22,-12,.1,true],
@@ -26,21 +26,21 @@ const fields: [keyof FailureBudgetConfig,string,string,number,number,number,bool
 /** Status is attached to the current result; integration success is not validation. */
 /** The model dispatcher pairs the selected mechanism with its accepted result. */
 export function modelValidity(selected:string,settings:unknown,result:unknown){
- if(!result)return 'No current result. Physical assumptions and numerical convergence must be assessed separately.';
+ if(!result)return 'No current result. Examine physical assumptions and numerical convergence separately.';
  if(selected==='doublewell-dynamics'){
   const c=settings as Pick<DoublewellConfig,'collisionMethod'>,r=result as Pick<ReturnType<typeof simulateDoublewell>,'regimeSummary'|'regimeHistory'|'conservation'>;
-  return `Exploratory ${c.collisionMethod??'fixed'}-cell kinetics · local regime ${r.regimeSummary.status} · ${r.regimeSummary.unresolvedSnapshots}/${r.regimeHistory.length} unresolved snapshots · max raw Pθ residual ${format(r.conservation.maxMomentumResidual)} of positive scale. Counts are not calibrated purity. Corrected torque bookkeeping does not repair paths.`;
+  return `Experimental ${c.collisionMethod??'fixed'}-cell kinetics. Local regime: ${r.regimeSummary.status}. Unresolved snapshots: ${r.regimeSummary.unresolvedSnapshots}/${r.regimeHistory.length}. Maximum raw Pθ residual: ${format(r.conservation.maxMomentumResidual)} of positive scale. Counts do not give calibrated purity. Torque-account corrections do not repair particle paths.`;
  }
  if(selected==='centrifuge'&&typeof result==='object'&&'model' in result&&result.model==='coupled-magnetic-gaussian'){
   const r=result as MagneticCentrifugeResult;
-  return `Bounded magnetic equilibrium · ${r.magneticBoundary} B boundary · Ampère residual ${format(r.maxRelativeAmpereResidual)} · omitted electron-inertia ratio ${format(r.maxElectronInertiaRatio)}. Density and rotation are prescribed; stability and discharge evolution are unsolved.`;
+  return `Bounded magnetic equilibrium · ${r.magneticBoundary} B boundary · Ampère residual ${format(r.maxRelativeAmpereResidual)} · omitted electron-inertia ratio ${format(r.maxElectronInertiaRatio)}. Density and rotation are inputs. Stability and discharge evolution are not calculated.`;
  }
- if(selected==='centrifuge')return 'Static prescribed equilibrium. Inventory enrichment is not extracted recovery; relaxation, instability, source and loss budgets are unsolved.';
+ if(selected==='centrifuge')return 'Static equilibrium with specified inputs. Inventory enrichment does not give extracted recovery. Relaxation, instability, source and loss accounts are not calculated.';
  if(selected==='curved'){
   const outside=(result as GeometryResult).metrics.some(m=>m.label.endsWith('rho / curvature radius')?m.value>=1:m.label.endsWith('gyroperiods during bend')&&m.value<=1);
-  return (outside?'Outside guiding-centre approximation: rho/R ≥ 1 or at most one gyroperiod in the bend. Plotted deflection is an extrapolation. ':'Guiding-centre approximation; inspect the scale ratios below. ')+ 'Requires rho ≪ R and many gyroperiods. This is not a full-orbit collection calculation.';
+  return (outside?'Outside the guiding-center approximation: rho/R ≥ 1, or at most one gyroperiod in the bend. The plotted deflection uses extrapolation. ':'Guiding-center approximation. Examine the scale ratios below. ')+ 'Requires rho ≪ R and many gyroperiods. This is not a full-orbit collection calculation.';
  }
- return 'Prescribed-field model. Finite-device trajectories and source sampling do not establish atomic, turbulent or experimental validity. See the Section III coverage below.';
+ return 'Specified-field model. Finite-device paths and source sampling do not establish atomic, turbulent or experimental accuracy. See the Section III coverage below.';
 }
 
 export function setupFailureLaboratory(){
@@ -49,7 +49,7 @@ export function setupFailureLaboratory(){
   const detail=element('details'),summary=element('summary'),title=element('span',`${issue.subsection} · ${issue.title}`);
   const badge=element('span',({partial:'Partly modeled',diagnostic:'Diagnostics only',omitted:'Not coupled'})[issue.status]);badge.className='coverage-status';
   summary.append(title,badge);detail.append(summary,element('p',issue.mechanism));
-  for(const [label,text]of [['II C',issue.iic],['II D',issue.iid],['Still required',issue.nextRequirement]]){
+  for(const [label,text]of [['II C',issue.iic],['II D',issue.iid],['Missing physics',issue.nextRequirement]]){
    const p=element('p'),strong=element('strong',label+' · ');p.append(strong,element('span',text));detail.append(p);
   }
   host.append(detail);

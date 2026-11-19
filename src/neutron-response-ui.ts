@@ -6,9 +6,9 @@ const fmt=(x:number)=>x===0?'0':Number(x.toPrecision(4)).toString();
 export function setupNeutronResponse(host:HTMLElement,packet:NeutronResponsePacket){
  const panel=make('details'),controls=make('div'),plot=make('div'),metrics=make('div'),status=make('p'),info=make('details'),uncertainty=make('p');
  panel.className='fusion-model-notes';controls.className='instrument-controls';plot.className='live-plots';metrics.className='fusion-readouts';status.setAttribute('role','status');
- info.append(make('summary','Data & uncertainty'),make('p','OpenMC 0.16 · NJOY2016 · ENDF/B-VIII.1 H1. Isotropic 14.1 MeV births; free H1 at 293.6 K and assumed 6×10²⁸ atoms/m³. Cylinder radius 10 cm, front gap 10 cm. This separate reference does not calibrate LiT, the live source spectrum, shielding, dose or activation.'),make('p','MC SE is statistical error from independent transport runs. Holdout residuals are observed midpoint interpolation discrepancies, not guaranteed error bounds or nuclear-data uncertainty.'));
+ info.append(make('summary','Data & uncertainty'),make('p','OpenMC 0.16 · NJOY2016 · ENDF/B-VIII.1 H1. This reference emits 14.1 MeV neutrons equally in all directions. It uses free H1 at 293.6 K and a specified density of 6×10²⁸ atoms/m³. The cylinder radius and front gap are each 10 cm. This separate reference does not give experimental calibration for LiT, the live source spectrum, shielding, dose or activation.'),make('p','MC SE means Monte Carlo standard error from separate transport runs. Holdout residuals measure interpolation errors at test points unused in the interpolation. They do not give guaranteed error bounds or nuclear-data uncertainty.'));
  info.append(uncertainty);
- info.append(make('p','The original 4 cm midpoint failed its interpolation gates. It became a training node; this refinement uses five fresh holdouts. The original failure remains archived. The synthetic scatter control accounts explicitly for OpenMC’s documented zero-cross-section floor.'));
+ info.append(make('p','The original 4 cm test point failed its interpolation limits. The interpolation now includes that point and uses five new test points. The original failure remains in the records. The synthetic scattering control includes the minimum cross section specified by OpenMC.'));
  const exportButton=make('button','Export response ↓');exportButton.type='button';exportButton.className='text-button';exportButton.disabled=true;
  panel.append(make('summary','Multiple scattering · H1 reference'),controls,metrics,plot,status,info,exportButton);host.append(panel);
  const reads=new Map<string,()=>number>();let latest:ReturnType<typeof evaluateNeutronResponse>|null=null;
@@ -22,7 +22,7 @@ export function setupNeutronResponse(host:HTMLElement,packet:NeutronResponsePack
    }
    const x=Array.from({length:41},(_,i)=>2+i*.4),scan=x.map(cm=>evaluateNeutronResponse(packet,cm/100,14.1,sourceRateS));
    renderPlots(plot,([['absorption','Absorptions per emitted neutron'],['total','Collisions per emitted neutron']] as const).map(([key,label])=>({label:'Full transport · MC ±1 SE',x,y:scan.map(r=>r.scores[key].mean),low:scan.map(r=>r.scores[key].mean-r.scores[key].stdError),high:scan.map(r=>r.scores[key].mean+r.scores[key].stdError),xLabel:'H1 thickness (cm)',yLabel:label,selectedX:thicknessM*100})));
-   uncertainty.textContent='Per emitted neutron · '+(['absorption','total'] as const).map(key=>`${key}: MC SE ${fmt(result.scores[key].stdError)}; max observed holdout residual ${fmt(result.scores[key].maxObservedHoldoutResidual)}`).join(' · ');status.textContent='';
+   uncertainty.textContent='Per emitted neutron · '+(['absorption','total'] as const).map(key=>`${key}: MC SE ${fmt(result.scores[key].stdError)}; maximum observed holdout residual ${fmt(result.scores[key].maxObservedHoldoutResidual)}`).join(' · ');status.textContent='';
    exportButton.disabled=false;
   }catch(error){latest=null;metrics.replaceChildren();renderPlots(plot,[]);status.textContent=error instanceof Error?error.message:String(error);}
  }

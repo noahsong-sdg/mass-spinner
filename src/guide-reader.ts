@@ -1,4 +1,4 @@
-/** The standalone reader links work without this enhancement; embeds use native app actions. */
+/** Links in the separate reader work without this script. Embedded readers use application actions. */
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
@@ -7,14 +7,14 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  let capability='',instance='',probe:number|undefined,attempts=0;
  let pending:{type:string;action?:string;view?:string;requestId:string;sent:boolean}|undefined;
  const report=(message:string)=>{if(status)status.textContent=message;};
- try{capability=browser.sessionStorage.getItem(capabilityKey)??'';}catch{/* Storage can be disabled; the current authorized connection still works. */}
+ try{capability=browser.sessionStorage.getItem(capabilityKey)??'';}catch{/* Without storage, the current authorized connection still works. */}
  const stopProbe=()=>{browser.clearInterval(probe);probe=undefined;};
  const hello=()=>{
-  if(!simulatorWindow||simulatorWindow.closed){stopProbe();report('The simulator is closed. Try this action again to open it.');return;}
+  if(!simulatorWindow||simulatorWindow.closed){stopProbe();report('The simulator is closed. Select the action again to open it.');return;}
   if(attempts++>=120){
    stopProbe();
-   if(pending?.sent)report('The simulator has not confirmed this action. It may still finish; check its tab before trying again.');
-   else{pending=undefined;report('The simulator did not become ready. Reload the simulator tab, then try again.');}
+   if(pending?.sent)report('The simulator sent no final action result. The action can still finish. Examine its tab before you try again.');
+   else{pending=undefined;report('The simulator is not ready. Reload the simulator tab. Then select the action again.');}
    return;
   }
   simulatorWindow.postMessage({type:'mass-spinner:guide-hello',capability},origin);
@@ -29,13 +29,13 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    const interrupted=pending?.sent&&instance!==data.instance;
    instance=data.instance;capability=data.capability;
    try{browser.sessionStorage.setItem(capabilityKey,capability);}catch{/* Do not broaden authorization when persistence is unavailable. */}
-   if(interrupted){pending=undefined;stopProbe();report('Interrupted by simulator reload. The action may have executed; check its tab before trying again.');return;}
-   if(pending&&!pending.sent){pending.sent=true;report('Applying in the simulator…');simulatorWindow!.postMessage(pending,origin);}
+   if(interrupted){pending=undefined;stopProbe();report('The simulator reloaded. The action status is unknown. Examine its tab before you try again.');return;}
+   if(pending&&!pending.sent){pending.sent=true;report('Waiting for the action result…');simulatorWindow!.postMessage(pending,origin);}
    else if(!pending){stopProbe();report('Simulator ready.');}
   }else if(data.type==='mass-spinner:guide-result'&&'requestId' in data&&data.requestId===pending?.requestId&&'status' in data){
-   if(data.status==='waiting'&&probe!==undefined)report('Waiting for the computed run and controls…');
+   if(data.status==='waiting'&&probe!==undefined)report('Waiting for the calculated run and controls…');
    else if(data.status==='executed'||data.status==='rejected'){
-    report(data.status==='executed'?'Opened in the simulator.':('message' in data&&typeof data.message==='string'?data.message:'The simulator could not apply this action.'));
+    report(data.status==='executed'?'Opened in the simulator.':('message' in data&&typeof data.message==='string'?data.message:'The simulator cannot apply this action.'));
     pending=undefined;stopProbe();
    }
   }
@@ -49,7 +49,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  });
  const heat=doc.querySelector<HTMLElement>('[data-heat-example]');
  if(heat){
-  const descriptions={gas:'Temperature falls outward → conductive heat flows outward.',wall:'Temperature rises outward → conductive heat flows inward.',equal:'No temperature gradient → no conductive heat flow.'};
+  const descriptions={gas:'Temperature decreases outward → heat flows outward by conduction.',wall:'Temperature increases outward → heat flows inward by conduction.',equal:'Uniform temperature → no heat flow by conduction.'};
   for(const button of heat.querySelectorAll<HTMLButtonElement>('[data-heat-select]')){
    button.disabled=false;button.addEventListener('click',()=>{
     const choice=button.dataset.heatSelect as keyof typeof descriptions;heat.dataset.case=choice;
@@ -77,15 +77,15 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    collection.querySelector<HTMLElement>('[data-cut-light-bar]')!.style.transform=`scaleX(${light/50})`;
    collection.querySelector<HTMLElement>('[data-cut-heavy-bar]')!.style.transform=`scaleX(${heavy/50})`;
    collection.querySelector('[data-cut-purity]')!.textContent=percent(purity);collection.querySelector('[data-cut-recovery]')!.textContent=percent(recovery);
-   collection.querySelector('[data-cut-reading]')!.textContent=index===0?'Empty cut: no sample, so purity is undefined.':index===100?'Whole vessel: purity equals the 50% feed; all light inventory is kept.':`Keep ${amount(light)} light + ${amount(heavy)} heavy units: ${percent(purity)} purity, ${percent(recovery)} light recovery.`;
+   collection.querySelector('[data-cut-reading]')!.textContent=index===0?'The cut contains no gas. Its purity is undefined.':index===100?'The whole vessel has the 50% feed purity. It contains all light atoms.':`Keep ${amount(light)} light + ${amount(heavy)} heavy units: ${percent(purity)} purity, ${percent(recovery)} light recovery.`;
   });
  }
  const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');
  if(drive){
   const descriptions={
-   current:'Current crosses the gas from the outer electrode to the inner electrode. The magnetic field points toward you.',
-   ions:'With the axial magnetic field, J × B pushes the charged gas sideways all around the cylinder: counterclockwise.',
-   gas:'Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.',
+   current:'Current flows through the gas from the outer electrode to the inner electrode. The magnetic field points toward you.',
+   ions:'With this axial magnetic field, J × B causes a tangential force. This force turns the charged gas counterclockwise.',
+   gas:'Ion–neutral collisions transfer rotation to the neutral gas. The electrodes stay still.',
   };
   const stages=drive.querySelectorAll<HTMLButtonElement>('[data-drive-stage]');
   for(const button of stages)button.addEventListener('click',()=>{
@@ -106,17 +106,17 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   const link=(event.target as Element).closest<HTMLAnchorElement>('a[data-guide-action],a[data-guide-view],a[data-guide-simulator]');if(!link)return;
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();stopProbe();
-  // Looking up a named window with a URL would navigate it and discard its current run.
+  // A URL in a named-window lookup navigates the window and removes its current run.
   if(!simulatorWindow||simulatorWindow.closed){
    simulatorWindow=win.open('','mass-spinner-simulator');
-   if(!simulatorWindow){if(status)status.textContent='Allow the simulator window to open, then try this action again.';return;}
+   if(!simulatorWindow){if(status)status.textContent='Allow the simulator window to open. Then select the action again.';return;}
    try{
     const url=simulatorWindow.location.href;
     if(url==='about:blank'){simulatorWindow.location.replace(link.href);pending=undefined;connect();return;}
-    if(new URL(url).origin!==win.location.origin){if(status)status.textContent='The named simulator tab is on another site. Close it or open Mass Spinner there, then try again.';simulatorWindow=null;return;}
+    if(new URL(url).origin!==win.location.origin){if(status)status.textContent='The named simulator tab is on another site. Close that tab. Then select the action again.';simulatorWindow=null;return;}
    }catch{
-    // Cross-origin window locations are intentionally unreadable; never navigate that tab.
-    if(status)status.textContent='The named simulator tab is on another site. Close it or open Mass Spinner there, then try again.';
+    // Cross-origin window locations are unreadable. Do not navigate that tab.
+    if(status)status.textContent='The named simulator tab is on another site. Close that tab. Then select the action again.';
     simulatorWindow=null;return;
    }
   }

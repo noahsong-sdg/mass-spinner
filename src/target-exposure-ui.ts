@@ -31,14 +31,14 @@ export function setupTargetExposure(host:HTMLElement,{active=true,simulate=simul
   input.addEventListener('input',()=>{readout();invalidate();});readout();
  }
  controls.append(advanced);
- const ledger=make('details'),ledgerPlot=make('div'),ledgerText=make('p');ledgerPlot.className='live-plots';ledger.append(make('summary','Thermal energy & fuel budget'),ledgerText,ledgerPlot);
- const notes=make('details'),list=make('ul');notes.append(make('summary','Model info'),make('p','Bulk thermal scenario with assumed properties; source yield stays fixed. Cₐ d(T − Tcool)/dt = q″ − h(T − Tcool). τ = Cₐ/h. Beam heat acts for the source exposure, then q″ = 0. h = 0 gives the exact adiabatic limit. Dashed plot marker = beam shutoff.'),list);
+ const ledger=make('details'),ledgerPlot=make('div'),ledgerText=make('p');ledgerPlot.className='live-plots';ledger.append(make('summary','Thermal energy & fuel balance'),ledgerText,ledgerPlot);
+ const notes=make('details'),list=make('ul');notes.append(make('summary','Model info'),make('p','This bulk thermal model uses specified properties and a fixed source yield. Cₐ d(T − Tcool)/dt = q″ − h(T − Tcool). τ = Cₐ/h. After the beam stops, q″ = 0. For h = 0, the model gives the exact adiabatic limit: no heat loss. The dashed plot marker shows beam shutoff.'),list);
  const exportButton=make('button','Export exposure calculation ↓');exportButton.type='button';exportButton.className='text-button';exportButton.disabled=true;
  const sources=make('p');for(const [name,url]of [['Thermal approximation','https://arxiv.org/abs/2412.16357'],['Target transport & lifetime','https://www.sandia.gov/research/publications/details/optimization-of-target-lifetime-for-production-of-14-mev-neutrons-2020-12-15/'],['Model scope','/MARATHON-TARGET-EXPOSURE.md']]){const a=make('a',name+' ↗');a.href=url;sources.append(a,document.createTextNode(' · '));}notes.append(sources);
  function calculate(){
   dirty=false;
   latest=null;plot.replaceChildren();ledgerPlot.replaceChildren();metrics.replaceChildren();ledgerText.textContent='';list.replaceChildren();exportButton.disabled=true;
-  if(!beam){status.textContent='No valid source.';return;}
+  if(!beam){status.textContent='No source result is available.';return;}
   try{
    const config={...DEFAULT_TARGET_EXPOSURE};for(const [key,read]of reads)config[key]=read();latest=simulate(beam,config);
    const temperature={...latest.curves[0],y:latest.curves[0].y.map(k=>k-273.15),yLabel:'Bulk assembly temperature (°C)'};renderPlots(plot,[temperature]);
@@ -46,7 +46,7 @@ export function setupTargetExposure(host:HTMLElement,{active=true,simulate=simul
    if(ledger.open)renderPlots(ledgerPlot,latest.curves.slice(1));
    for(const [label,value]of [['Peak bulk temperature',`${number(latest.peakTemperatureK-273.15)} °C`],['Thermal time constant',latest.thermalTimeConstantS===null?'Adiabatic':`${number(latest.thermalTimeConstantS)} s`]] as const){const row=make('div');row.append(make('span',label),make('strong',value));metrics.append(row);}
    const f=latest.final,fraction=latest.fusionOnlyConsumedFraction;
-   ledgerText.textContent=`Deposited ${number(f.depositedEnergyJ)} J · stored change ${number(f.storedEnergyJ)} J · heat to coolant ${number(f.heatToCoolantJ)} J (signed) · residual ${number(f.energyResidualJ)} J. Initial T inventory ${number(latest.initialTritiumNuclei)} nuclei; fusion consumes ${number(latest.fusionConsumedTritium)} (${fraction===null?'no loaded inventory':number(100*fraction)+'%'}). This omits exchange, diffusion and renewal; it is not target lifetime.`;
+   ledgerText.textContent=`Deposited energy: ${number(f.depositedEnergyJ)} J; stored-energy change: ${number(f.storedEnergyJ)} J. Heat to coolant: ${number(f.heatToCoolantJ)} J (signed); energy-balance residual: ${number(f.energyResidualJ)} J. The initial T inventory contains ${number(latest.initialTritiumNuclei)} nuclei; fusion consumes ${number(latest.fusionConsumedTritium)} (${fraction===null?'no loaded inventory':number(100*fraction)+'%'}). This model does not include isotope exchange, diffusion or renewal. It does not calculate target lifetime.`;
    list.replaceChildren(...latest.assumptions.map(text=>make('li',text)));
    status.textContent='';exportButton.disabled=false;
   }catch(error){latest=null;status.textContent=error instanceof Error?error.message:String(error);}

@@ -12,7 +12,7 @@ export function setupNeutronGeometry(host:HTMLElement){
  const controls=element('div'),metrics=element('div'),plot=element('div'),status=element('p');
  details.className='fusion-model-notes';controls.className='instrument-controls';metrics.className='fusion-readouts';plot.className='live-plots';
  status.setAttribute('role','status');
- const note=element('p','Isotropic point source → circular sample normal to its axis, in free flight. This reference does not solve the actual D–T angular spectrum, attenuation, scattering, detector response or isotope yield. Sample area differs from the beam footprint.');
+ const note=element('p','An isotropic point source emits neutrons equally in all directions. This reference calculates direct paths to a circular sample perpendicular to the source-to-sample axis. It does not include the D–T angular spectrum, attenuation, scattering, detector response or isotope yield. The sample area is different from the beam area.');
  const info=element('details');info.append(element('summary','Model info'),note);
  const rate=element('output','—'),current=element('output','—');
  for(const [label,out]of [['Neutrons crossing sample / s',rate],['Mean current through plane · n/m²/s',current]] as const){
@@ -21,7 +21,7 @@ export function setupNeutronGeometry(host:HTMLElement){
  let latest:NeutronGeometrySource|null=null;const reads=new Map<string,()=>number>();
  const update=()=>{
   rate.textContent='—';current.textContent='—';plot.replaceChildren();
-  if(!latest){status.textContent='No valid source.';return;}
+  if(!latest){status.textContent='No source result is available.';return;}
   try{
    const distanceM=reads.get('distance')!(),sampleAreaM2=reads.get('area')!()/1e4;
    const config={neutronRateS:latest.neutronRateS,distanceM,sampleAreaM2};
@@ -31,7 +31,7 @@ export function setupNeutronGeometry(host:HTMLElement){
    const y=x.map(d=>isotropicDiskReference({...config,distanceM:d}).meanPlaneCurrentM2S);
    renderPlots(plot,[{label:'Isotropic disk reference',x,y,xLabel:'Source to sample plane (m)',yLabel:'Mean incident current through plane (n/m²/s)',selectedX:distanceM,yDomain:[0,Math.max(...y)||1]}]);
    const ratio=Math.sqrt(latest.config.beamAreaM2/Math.PI)/distanceM;
-   status.textContent=ratio>.1?'Point-source limit: spot radius / distance > 0.1; finite-source geometry unresolved.':'';
+   status.textContent=ratio>.1?'Spot radius / distance > 0.1. The point-source approximation does not include the finite source size.':'';
   }catch(error){rate.textContent='—';current.textContent='—';plot.replaceChildren();status.textContent=error instanceof Error?error.message:String(error);}
  };
  for(const [key,title,unit,min,max,step,value]of [['distance','Source to sample plane','m',.1,3,.05,.5],['area','Circular sample area','cm²',1,100,1,10]] as const){

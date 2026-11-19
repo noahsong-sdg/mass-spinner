@@ -10,9 +10,9 @@ type Coefficient = keyof typeof PUBLIC_SENSITIVITY_COEFFICIENTS;
 /** Optional explicit reruns: one worker and one full trajectory resident at a time. */
 export function mountPublicSensitivity(host: HTMLElement,{request}: {request?: typeof requestSimulationWithIdentity}={}){
  const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
- const detail=el('details');detail.className='public-sensitivity';detail.append(el('summary','Sensitivity & tested inputs'));
- const coverage=el('p','Run the current setup to inspect its input coverage.');detail.append(coverage);
- detail.append(el('p','Choose your own coefficient bounds. Up to three coupled trajectories start from rest with the accepted setup and drive history. These are illustrative one-coefficient samples, not measured uncertainty or confidence bounds.'));
+ const detail=el('details');detail.className='public-sensitivity';detail.append(el('summary','Sensitivity & input checks'));
+ const coverage=el('p','Run the current setup to see its input coverage.');detail.append(coverage);
+ detail.append(el('p','Select the coefficient limits. Up to three coupled runs start from rest with the completed setup and drive history. The runs change one coefficient. Their range does not give measured uncertainty or confidence bounds.'));
  const evidence=el('a','Evidence & limits ↗');evidence.href='/qualification.html';evidence.target='_blank';evidence.rel='noopener';const record=el('p');record.append(evidence);detail.append(record);
  const label=el('label','Prescribed coefficient'),coefficient=el('select');coefficient.id='public-sensitivity-coefficient';label.htmlFor=coefficient.id;
  for(const [key,d]of Object.entries(PUBLIC_SENSITIVITY_COEFFICIENTS)){const option=el('option',`${d.label} (${d.unit})`);option.value=key;coefficient.append(option);}
@@ -54,14 +54,14 @@ export function mountPublicSensitivity(host: HTMLElement,{request}: {request?: t
     next.push(publicSensitivitySample(reply,base,config,plan.clocks));
    }
    samples=next;controller=null;cancel.hidden=true;ready();render();
-   status.textContent=`${samples.length} sampled settings · line = current coefficient; shading = sampled minimum/maximum, not an exhaustive envelope. Numerical and experimental accuracy remain unqualified.`;
+   status.textContent=`${samples.length} sampled settings. The line uses the current coefficient. Shading shows the sample limits, not all possible results. Numerical and experimental accuracy are not established.`;
   }catch(error){const failure=error as Error;if(!disposed&&id===revision){clear();ready();status.textContent=`Samples unavailable: ${failure.message}`;}}
  }
- run.addEventListener('click',()=>{void start();});cancel.addEventListener('click',()=>{clear();ready();status.textContent='Cancelled. No partial sample range retained.';});
+ run.addEventListener('click',()=>{void start();});cancel.addEventListener('click',()=>{clear();ready();status.textContent='Cancelled. No partial sample range was saved.';});
  detail.addEventListener('toggle',()=>{if(!detail.open&&controller){clear();ready();status.textContent='Cancelled.';}else render();});
  return {element:detail,run:start,get samples(){return samples;},
-  update(value: SensitivityAccepted){if(disposed)return;clear();accepted=value;coverage.textContent=publicInputCoverage(accepted.result).text+' Experimental accuracy: unqualified.';resetBounds();status.textContent='Bounds initially equal the current assumption; choose a range to explore.';ready();},
-  invalidate(){if(disposed)return;clear();accepted=null;coverage.textContent='Setup changed; awaiting an accepted result.';status.textContent='Previous sensitivity samples cleared.';ready();},
-  cancelPending(){if(controller){clear();ready();status.textContent='Cancelled. No partial sample range retained.';}},
+  update(value: SensitivityAccepted){if(disposed)return;clear();accepted=value;coverage.textContent=publicInputCoverage(accepted.result).text+' Experimental accuracy is not established.';resetBounds();status.textContent='The initial limits equal the current coefficient. Select a range for the comparison.';ready();},
+  invalidate(){if(disposed)return;clear();accepted=null;coverage.textContent='The setup changed. A new result is required.';status.textContent='Previous sensitivity samples cleared.';ready();},
+  cancelPending(){if(controller){clear();ready();status.textContent='Cancelled. No partial sample range was saved.';}},
   dispose(){disposed=true;clear();accepted=null;detail.remove();}};
 }

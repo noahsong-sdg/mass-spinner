@@ -99,7 +99,7 @@ function imposedFields(s:SurfaceSnapshot,c:RunConfig|DoublewellConfig|GeometryCo
  const model={...c,length:c.length,voltage:'mode' in c&&c.mode==='icr'?0:c.voltage,quadraticShape:'quadraticShape' in c?c.quadraticShape??1:1};
  requireValue(finite(model.voltage)&&finite(model.magneticT),'Missing imposed field inputs.');
  const samples=radii.map(r=>quartic?quarticFields([r,0,0],model):fields([r,0,0],model));
- const scope='Prescribed laboratory field; axisymmetric and axially uniform. Not a self-consistent plasma response.';
+ const scope='The laboratory field is a prescribed input. It has no axial or azimuthal variation. The plasma does not change these prescribed fields.';
  field(s,{id:'electric-radial',label:'Radial electric field',unit:'V/m',coordinate:'radius',measure:'point',region:'plasma',positionsM:radii,
   values:samples.map(v=>v.electric[0]),scope});
  field(s,{id:'magnetic-axial',label:'Axial magnetic field',unit:'T',coordinate:'radius',measure:'point',region:'plasma',positionsM:radii,
@@ -123,12 +123,12 @@ function orbit(s:SurfaceSnapshot,c:RunConfig,r:OrbitResult){
   });
   p.paths.forEach((path)=>{
    requireValue(Array.isArray(path.positions)&&path.positions.length>0&&path.positions.every(vector),'Invalid display path.');
-   s.tracks.push({speciesIndex:i,positionsM:path.positions,scope:'Sampled display trajectory; not a density or complete population.'});
+   s.tracks.push({speciesIndex:i,positionsM:path.positions,scope:'This sampled trajectory shows part of the population. It does not give density.'});
   });
  });
  s.timeS=c.duration;
- s.unsupported.push('Density, local heat flux and physical throughput: unweighted finite injected representatives do not supply these quantities.');
- if(s.model==='icr')s.unsupported.push('RF electric field is time dependent and transverse; the radial field map excludes RF.');
+ s.unsupported.push('The injected representatives have no physical particle weights. Thus, they do not give density, local heat flux, or physical throughput.');
+ if(s.model==='icr')s.unsupported.push('The RF electric field is transverse and changes with time. The radial field map does not include RF.');
 }
 function equilibrium(s:SurfaceSnapshot,c:EquilibriumConfig,r:EquilibriumResult){
  cylinder(s,c);
@@ -142,23 +142,23 @@ function equilibrium(s:SurfaceSnapshot,c:EquilibriumConfig,r:EquilibriumResult){
  requireValue((c.closure==='magnetic-gaussian'?model==='coupled-magnetic-gaussian':c.closure==='gaussian'?model==='prescribed-gaussian':!model),'Equilibrium closure mismatch.');
  if(gaussian)requireValue(gaussian.length===x.length&&gaussian.every((p,i:number)=>p.radius===x[i]&&positive(p.totalIonDensityM3)),'Mismatched Gaussian profiles.');
  for(let i=0;i<n;i++){
-  const scope='Radial equilibrium point samples; axisymmetric, no axial profile or collection prediction.';
+  const scope='These are radial equilibrium samples with no azimuthal variation. The model does not calculate an axial profile or collection.';
   field(s,{id:`fraction-${i}`,label:`Species ${i+1} number fraction`,unit:'fraction',coordinate:'radius',measure:'point',region:'plasma',positionsM:x,
    values:profiles.map((p,j:number)=>p.ionDensities[i]/sum[j]),speciesIndex:i,scope},[0,1]);
   field(s,{id:`density-${i}`,label:`Species ${i+1} density`,unit:gaussian?'m⁻³':'n / n_axis',coordinate:'radius',measure:'point',region:'plasma',positionsM:x,
    values:profiles.map((p,j:number)=>gaussian?gaussian[j].totalIonDensityM3*p.ionDensities[i]/sum[j]:p.ionDensities[i]),speciesIndex:i,scope});
  }
  field(s,{id:'effective-potential',label:'Rotating-frame potential ψ',unit:'V',coordinate:'radius',measure:'point',region:'plasma',positionsM:x,
-  values:profiles.map((p)=>p.effectivePotentialV),scope:'ψ = φ − Ω∫Bz r dr; not laboratory potential.'});
+  values:profiles.map((p)=>p.effectivePotentialV),scope:'ψ = φ − Ω∫Bz r dr. This is the rotating-frame potential, not the laboratory potential.'});
  if(gaussian){
   for(const [id,label,unit,property] of [
    ['potential','Laboratory potential','V','laboratoryPotentialV'],['electric-radial','Radial electric field','V/m','electricFieldVM'],
    ['current-azimuthal','Azimuthal current density','A/m²','currentDensityAM2'],['ion-velocity','Ion azimuthal velocity','m/s','ionVelocityMS']] as const)
-   field(s,{id,label,unit,coordinate:'radius',measure:'point',region:'plasma',positionsM:x,values:gaussian.map(p=>p[property]),scope:'Solved prescribed-Gaussian radial equilibrium.'});
+   field(s,{id,label,unit,coordinate:'radius',measure:'point',region:'plasma',positionsM:x,values:gaussian.map(p=>p[property]),scope:'This radial equilibrium uses a prescribed Gaussian density profile.'});
   field(s,{id:'magnetic-axial',label:'Axial magnetic field',unit:'T',coordinate:'radius',measure:'point',region:'plasma',positionsM:x,
-   values:gaussian.map((p)=>'magneticFieldT' in p?(p as MagneticCentrifugeProfile).magneticFieldT:c.magneticT!),scope:model==='coupled-magnetic-gaussian'?'Self-consistent radial B from the bounded equilibrium.':'Imposed uniform B; perturbation diagnostic is not fed back.'});
- }else s.unsupported.push('Absolute density, laboratory potential, electric and magnetic field: common-corotation closure exports only normalized density and ψ.');
- s.unsupported.push('Throughput, equilibration time, collector impacts and thermal engineering are not predicted by radial equilibrium.');
+   values:gaussian.map((p)=>'magneticFieldT' in p?(p as MagneticCentrifugeProfile).magneticFieldT:c.magneticT!),scope:model==='coupled-magnetic-gaussian'?'This bounded radial equilibrium includes the magnetic-field response.':'The magnetic field is uniform and prescribed. Its perturbation diagnostic does not change the solution.'});
+ }else s.unsupported.push('The common-corotation closure gives normalized density and ψ, without absolute density, laboratory potential, or electric and magnetic fields.');
+ s.unsupported.push('Radial equilibrium does not give throughput, equilibration time, collector impacts, or thermal engineering results.');
 }
 function doublewell(s:SurfaceSnapshot,c:DoublewellConfig,r:DoublewellResult){
  cylinder(s,c);counts(s,r.species,'active');injectedSpecies(c,r);imposedFields(s,c,true);s.timeS=c.duration;
@@ -168,7 +168,7 @@ function doublewell(s:SurfaceSnapshot,c:DoublewellConfig,r:DoublewellResult){
   requireValue(p.x.length===20&&p.x.every((v:number,j:number)=>close(v,c.radius*(j+.5)/20))&&p.y.every((v)=>finite(v)&&v>=0),'Invalid annular density samples.');
   field(s,{id:`density-${i}`,label:`Species ${i+1} final active density`,unit:'m⁻³',coordinate:'radius',measure:'cell-average',region:'plasma',
    positionsM:p.x,values:p.y,boundsM:Array.from({length:21},(_,j)=>c.radius*j/20),speciesIndex:i,
-   scope:'Final active marker density divided by exact annular volume and full column length; no axial/azimuthal detail.'});
+   scope:'The final active marker inventory uses the exact annular volume and full column length to give density. No axial or azimuthal detail is available.'});
   const species=r.species[i];requireValue(Array.isArray(species.impacts),'Missing double-well impacts.');
   const volume=Math.PI*c.radius**2*c.length;
   const support=c.initialState==='equilibrium'?volume:Math.PI*c.sourceRadius**2*c.length*c.pulseLengthFraction;
@@ -188,11 +188,11 @@ function doublewell(s:SurfaceSnapshot,c:DoublewellConfig,r:DoublewellResult){
   const occupied=a.y.map((v:number,i:number)=>v+b.y[i]>0);
   if(occupied.every(Boolean))field(s,{id:'fraction-1',label:'Species 2 active number fraction',unit:'fraction',coordinate:'radius',measure:'cell-average',region:'plasma',
    positionsM:a.x,values:a.y.map((v:number,i:number)=>b.y[i]/(v+b.y[i])),boundsM:Array.from({length:21},(_,j)=>c.radius*j/20),speciesIndex:1,
-   scope:'Ratio of final annular species inventories, axially averaged.'},[0,1]);
-  else s.unsupported.push('Full-domain composition: empty annuli have undefined number fraction; inspect species density instead.');
+   scope:'This ratio uses the final species inventories in each annulus. It is an axial average.'},[0,1]);
+  else s.unsupported.push('The number fraction is undefined in empty annuli. Use species density to examine those regions.');
  }
- s.unsupported.push('Impact azimuth and wall axial position were not retained; radius-only impacts cannot form local collector hotspots.');
- s.unsupported.push('Density is final axially averaged finite-marker output; collision transport qualification remains separate from rendering.');
+ s.unsupported.push('Without saved impact azimuth or axial wall positions, radius data cannot show local collector hotspots.');
+ s.unsupported.push('The final density is an axial average from finite markers, not evidence of accurate collision transport.');
 }
 function reduced(s:SurfaceSnapshot,c:GeometryConfig|TransportConfig,r:GeometryResult|TransportResult){
  requireValue(Array.isArray(r.curves)&&r.curves.length>0,'Missing reduced-model curves.');
@@ -200,24 +200,24 @@ function reduced(s:SurfaceSnapshot,c:GeometryConfig|TransportConfig,r:GeometryRe
  if(s.model==='gyro'){
   r.curves.forEach((p,i:number)=>{
    requireValue(p.xLabel==='Transverse x (m)'&&p.yLabel==='Transverse y (m)'&&p.x.length===p.y.length&&p.x.every(finite)&&p.y.every(finite),'Invalid gyro locus.');
-   s.tracks.push({speciesIndex:i,positionsM:p.x.map((x:number,j:number)=>[x,p.y[j],0]),scope:'Exact transverse monoenergetic locus in z=0 plane; not an axial trajectory or common-time endpoint.'});
+   s.tracks.push({speciesIndex:i,positionsM:p.x.map((x:number,j:number)=>[x,p.y[j],0]),scope:'This exact transverse locus uses one particle energy in the z=0 plane. It does not give axial trajectories or endpoints at one time.'});
   });
-  s.unsupported.push('No finite chamber, RF, population density or collection is solved for the gyro locus.');
+  s.unsupported.push('The gyro locus does not include a finite chamber, RF, population density, or collection calculation.');
  }else if(s.model==='doublewell'){
   r.curves.forEach((p,i:number)=>{
    requireValue(p.xLabel==='Radius (m)'&&p.yLabel==='Effective energy (eV)','Invalid effective-energy profile.');
    field(s,{id:`effective-energy-${i}`,label:`Species ${i+1} effective radial energy`,unit:'eV',coordinate:'radius',measure:'point',region:'plasma',
-    positionsM:p.x,values:p.y,speciesIndex:i,scope:'One canonical angular-momentum slice; inner-axis exclusion is a plot crop, not a physical wall.'});
+    positionsM:p.x,values:p.y,speciesIndex:i,scope:'This slice uses one canonical angular momentum. The plot does not show the inner-axis region. No physical wall is present there.'});
   });
   requireValue('radius' in c,'Missing effective-potential geometry.');imposedFields(s,{...c,quadraticShape:c.quadraticShape??1},true);
-  s.unsupported.push('Population density, collisional filling and product purity are not predicted by an effective-potential landscape.');
+  s.unsupported.push('An effective-potential profile does not give population density, collision transport into each well, or product purity.');
  }else if(s.model==='curved'){
   requireValue(r.curves.every((p)=>p.xLabel==='Arc length (m)'&&p.yLabel==='Cross-field deflection (m)'),'Invalid curved-field result.');
   s.domain={kind:'reference',lengthM:c.length};
-  s.unsupported.push('Guiding-centre arc-length/deflection curves are scalar diagnostics; full toroidal vector fields, channel cross-section and collector surfaces are not solved.');
+  s.unsupported.push('The guiding-center curves give arc length and deflection only. They do not calculate full toroidal vector fields, channel cross-section, or collector surfaces.');
  }else{
   s.domain={kind:'reference'};
-  s.unsupported.push('This reduced diagnostic has no defensible local surface field; its production curves remain available in plots.');
+  s.unsupported.push('This reduced calculation does not give a local surface field. Its result curves are available in the plots.');
  }
 }
 function target(s:SurfaceSnapshot,c:CoupledTargetConfig,r:TargetResult,selected:TargetResult['final'],source:FusionBeamConfig){
@@ -241,21 +241,21 @@ function target(s:SurfaceSnapshot,c:CoupledTargetConfig,r:TargetResult,selected:
   const width=region==='film'?c.filmThicknessM:c.backingThicknessM,cells=end-start;
   field(s,{id:`temperature-${region}`,label:`${region} temperature`,unit:'K',coordinate:'depth',measure:'cell-average',region,
    positionsM:thermal.slice(start,end),values:selected.temperatureK.slice(start,end),boundsM:Array.from({length:cells+1},(_,i)=>offset+i*width/cells),
-   scope:'Accepted 1D thermal cell average, uniform over the declared illuminated area; interface/contact jump preserved.'},fullThermalDomain);
+   scope:'This accepted 1D cell average is uniform across the specified illuminated area. The display does not smooth temperature differences across material interfaces or thermal contacts.'},fullThermalDomain);
  }
  for(const name of ['tritiumFraction','deuteriumFraction','vacancyFraction'] as const)field(s,{id:name,label:name.replace('Fraction',' site fraction'),unit:'fraction',coordinate:'depth',measure:'cell-average',region:'film',
-  positionsM:selected.depthM,values:selected[name],boundsM:Array.from({length:n+1},(_,i)=>i*c.filmThicknessM/n),scope:'Accepted film site occupancy; not a backing composition.'},[0,1+1e-12]);
+  positionsM:selected.depthM,values:selected[name],boundsM:Array.from({length:n+1},(_,i)=>i*c.filmThicknessM/n),scope:'This accepted site occupancy applies to the film, not the backing.'},[0,1+1e-12]);
  for(const [id,property,unit] of [['neutron-rate','neutronRateS','s⁻¹'],['assembly-heat','assemblyHeatW','W']] as const){
   requireValue(finite(selected[property])&&selected[property]>=0,'Invalid accepted target output.');
-  s.scalars.push({id,...(id==='neutron-rate'?{label:`${reaction.reaction} neutron rate`}:{}),value:selected[property],unit,scope:'Whole illuminated assembly output; no lateral distribution is resolved.'});
+  s.scalars.push({id,...(id==='neutron-rate'?{label:`${reaction.reaction} neutron rate`}:{}),value:selected[property],unit,scope:'This output applies to the complete illuminated assembly. It has no lateral distribution.'});
  }
  s.unsupported.push(reaction.limitation);
- s.unsupported.push('Lateral temperature hotspots, radial beam profile, backing isotope occupancy, deformation and stress are not solved by the 1D target model.');
+ s.unsupported.push('The 1D target model does not calculate lateral temperature hotspots, radial beam profile, backing isotope occupancy, deformation, or stress.');
 }
 
 /** Never publish stale output under new geometry/inputs. No fallback to a prior run. */
 export function surfaceState(request:SurfaceRequest):SurfaceState {
- if(request.pending)return {status:'pending',reason:'A current accepted solution is pending.'};
+ if(request.pending)return {status:'pending',reason:'The calculation for the current settings is not complete.'};
  try{
   const {model,settings:c,result:r}=request;
   requireValue(model===request.acceptedModel,'Accepted model differs from the current model.');
@@ -270,7 +270,7 @@ export function surfaceState(request:SurfaceRequest):SurfaceState {
    requireValue(key(request.source)===key(request.acceptedSource),'Accepted beam source differs from the current source.');
    target(s,c as CoupledTargetConfig,r as TargetResult,request.selectedState as TargetResult['final'],request.source as FusionBeamConfig);
   }else if(['gyro','curved','doublewell','mirror','centrifugal','poms','azimuthal','advection','diffusion','mobility','ionization','transit'].includes(model))reduced(s,c as GeometryConfig|TransportConfig,r as GeometryResult|TransportResult);
-  else if(['blanket','future-blanket','research','research-replay','reference'].includes(model))s.unsupported.push('Reference geometry/evidence only; no current spatial solution or live engineering prediction.');
+  else if(['blanket','future-blanket','research','research-replay','reference'].includes(model))s.unsupported.push('This view shows reference geometry and recorded evidence only. It does not give a spatial solution or engineering prediction for current inputs.');
   else throw new RangeError('Unknown surface model.');
   // Comparable species use a common colour scale for each quantity/unit.
   for(const prefix of ['density-','effective-energy-']){

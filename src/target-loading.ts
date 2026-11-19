@@ -154,11 +154,11 @@ export function simulateTargetLoading(source:LoadingSource,config:TargetLoadingC
    {label:'Evolving D–T neutron production',x:history.map(s=>s.timeS),y:history.map(s=>s.neutronRateS),xLabel:'Beam exposure time (s)',yLabel:'D–T neutrons (s⁻¹)'},
    {label:'Integrated D–T neutrons',x:history.map(s=>s.timeS),y:history.map(s=>s.cumulativeNeutrons),xLabel:'Beam exposure time (s)',yLabel:'D–T neutrons'}],
   assumptions:[
-   'Well-mixed fixed hydrogen-site capacity and fixed stopping matrix. The source energy trajectory supplies one effective optical depth; D/T/vacancy composition does not change stopping.',
-   'Fusion consumes one incident D and one target T, creating one vacancy. Non-fusing D makes a random replacement attempt with an explicitly assumed probability; it can replace T/D or fill a vacancy.',
-   'The coupled equations are advanced simultaneously with an adaptive Dormand–Prince 5(4) pair in nonnegative log-survival coordinates. Requested plot intervals do not select the physical timestep. Embedded local-error estimates are not global error certificates.',
-   'Independent scaled reaction ledgers preserve small fusion channels. Raw isotope and projectile residuals are reported and checked against a numerical budget; no negative population clipping or ledger projection is used.',
-   'Replacement probability is not measured LiT retention. No resolved implantation, diffusion, permeation, sputtering, target renewal, D–D reactions or thermal feedback is solved; this is not a target-lifetime prediction.',
-   'Evolving yield remains a separate reference; the initial steady source and constant-heat observer are unchanged.',
+   'The model uses a uniform mixture, fixed hydrogen-site capacity and a fixed stopping matrix. The source energy path gives one effective optical depth. D/T/vacancy composition does not change stopping.',
+   'Fusion consumes one incident D and one target T, and creates one vacancy. A D ion that does not fuse makes a random replacement attempt with a specified probability. It can replace T or D, or fill a vacancy.',
+   'An adaptive Dormand–Prince 5(4) method advances the coupled equations together in nonnegative log-survival coordinates. Plot intervals do not set the physical timestep. Global error can exceed the local-error estimate.',
+   'Separate scaled reaction balances keep small fusion channels. The solver reports raw isotope and projectile residuals and compares them with a numerical limit. It does not clip negative populations or project balances onto conservation constraints.',
+   'The replacement probability does not come from measured LiT retention. The model does not calculate implantation, diffusion, permeation, sputtering, target renewal, D–D reactions or thermal feedback. It does not give target lifetime.',
+   'The changing yield remains a separate reference. It does not change the initial steady source or the constant-heat observer.',
   ]};
 }

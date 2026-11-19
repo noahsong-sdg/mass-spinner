@@ -24,16 +24,16 @@ export function createReactorHeatInset(parent:HTMLElement){
   svg.replaceChildren();arrows=[];coolantW=null;direction='none';
   if(state.kind==='power-reference'||!state.heatGeometry){
    const reference=state.kind==='power-reference',power=state.kind==='beam'?state.depositedPowerW:0,area=state.kind==='beam'?state.areaM2:1;
-   caption.textContent=reference?'Heat · reference direction':'Heat · conditional stopping budget';
+   caption.textContent=reference?'Heat · reference direction':'Heat · conditional stopping balance';
    svg.setAttribute('aria-label',caption.textContent);
    node('text',{x:12,y:20},reference?'Plasma':'Target');node('text',{x:178,y:20},reference?'Blanket':'Stopping substrate');
    node('line',{x1:18,x2:270,y1:42,y2:42,stroke:'#516356','stroke-width':2});
    if(reference||power>0)for(const x of [65,130,195,260])arrow(x,reference?1e5:power/area);
-   readout.textContent=reference?'Direction only; no heat transport is calculated.':`If the transmitted beam stops here: ${fmt(power)} W. No depth temperature is predicted.`;
+   readout.textContent=reference?'Direction only; no heat transport is calculated.':`If the transmitted beam stops here, the heat input is ${fmt(power)} W. This view gives no depth temperature.`;
    direction=reference?'reference':power>0?'stopping budget':'none';tick(0);return {direction,coolantW};
   }
   const {faceDepthM,filmThicknessM,backingThicknessM}=state.heatGeometry,flux=state.heatFacesWM2;
-  caption.textContent='Heat flow · depth expanded separately';svg.setAttribute('aria-label','Film and backing heat flux at physical face depths, with each material expanded separately');
+  caption.textContent='Heat flow · enlarged depth view';svg.setAttribute('aria-label','Film and backing heat flux at physical face depths. Each material has a separate enlarged view.');
   for(const [title,start,width,x]of [['Film',0,filmThicknessM,12],['Backing',filmThicknessM,backingThicknessM,158]] as const){
    node('text',{x,y:17},`${title} · ${fmt(width*1e6)} µm`);
    node('rect',{x,y:30,width:114,height:24,fill:'#24382c',stroke:'#516356'});

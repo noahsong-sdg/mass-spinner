@@ -18,7 +18,7 @@ const finiteNonnegative=(x:number)=>Number.isFinite(x)&&x>=0;
 function interpolate(nodes:ResponseNode[],x:number,score:Score){
  const exact=nodes.find(n=>n.thicknessM===x);if(exact)return {...exact.scores[score],node:true};
  const upper=nodes.findIndex(n=>n.thicknessM>x),a=nodes[upper-1],b=nodes[upper];
- if(!a||!b)throw new Error('Outside the qualified thickness grid; extrapolation is withheld.');
+ if(!a||!b)throw new Error('The thickness is outside the qualified grid. The model does not use extrapolation.');
  const w=(x-a.thicknessM)/(b.thicknessM-a.thicknessM);
  return {mean:(1-w)*a.scores[score].mean+w*b.scores[score].mean,
   stdError:Math.hypot((1-w)*a.scores[score].stdError,w*b.scores[score].stdError),node:false};
@@ -36,7 +36,7 @@ export function evaluateNeutronResponse(packet:NeutronResponsePacket,thicknessM:
  const {nodes,holdouts,qualification:q}=packet;
  if(!packet.qualified||!q?.controlsPassed||q.scatterFloorCmInv!==1e-10||q.sigmaMultiplier!==4||q.absoluteTolerance?.absorption!==.000005||q.absoluteTolerance.total!==.0005
   ||!Array.isArray(nodes)||nodes.length!==6||!Array.isArray(holdouts)||holdouts.length!==nodes.length-1)
-  throw new Error('Response qualification is incomplete; results are withheld.');
+  throw new Error('Response qualification is incomplete. Results are not available.');
  const seeds=new Set<number>();
  for(const [i,node]of [...nodes,...holdouts].entries()){
   if(!finiteNonnegative(node.thicknessM)||!Number.isSafeInteger(node.seed)||seeds.has(node.seed))throw new Error('Invalid response node or reused Monte Carlo seed.');
@@ -53,18 +53,18 @@ export function evaluateNeutronResponse(packet:NeutronResponsePacket,thicknessM:
   for(const score of RESPONSE_SCORES){
    const prediction=interpolate(nodes,h.thicknessM,score),residual=Math.abs(prediction.mean-h.scores[score].mean);
    const noise=q.sigmaMultiplier*Math.hypot(prediction.stdError,h.scores[score].stdError);
-   if(residual>noise+q.absoluteTolerance[score])throw new Error('Independent interpolation holdout gate failed; results are withheld.');
+   if(residual>noise+q.absoluteTolerance[score])throw new Error('The interpolation holdout gate failed. Results are not available.');
    residuals[score].push(residual);
   }
  }
- if(!finiteNonnegative(thicknessM)||!finiteNonnegative(sourceRateS)||sourceEnergyMeV!==packet.source.energyMeV)throw new Error('Response requires a finite nonnegative source and the exact 14.1 MeV monoenergetic reference.');
- if(thicknessM<nodes[0].thicknessM||thicknessM>nodes.at(-1)!.thicknessM)throw new Error('Outside the qualified thickness grid; extrapolation is withheld.');
+ if(!finiteNonnegative(thicknessM)||!finiteNonnegative(sourceRateS)||sourceEnergyMeV!==packet.source.energyMeV)throw new Error('Thickness and source rate must be finite and nonnegative. The source energy must be the 14.1 MeV monoenergetic reference.');
+ if(thicknessM<nodes[0].thicknessM||thicknessM>nodes.at(-1)!.thicknessM)throw new Error('The thickness is outside the qualified grid. The model does not use extrapolation.');
  const scores=Object.fromEntries(RESPONSE_SCORES.map(score=>{
   const value=interpolate(nodes,thicknessM,score),rateS=value.mean*sourceRateS,rateStdErrorS=value.stdError*sourceRateS;
-  if(!Number.isFinite(rateS)||!Number.isFinite(rateStdErrorS))throw new Error('Scaled response exceeds the finite numerical domain.');
+  if(!Number.isFinite(rateS)||!Number.isFinite(rateStdErrorS))throw new Error('The scaled response is outside the finite numerical range.');
   return [score,{...value,rateS,rateStdErrorS,
    maxObservedHoldoutResidual:Math.max(...residuals[score]),interpolationAbsoluteGate:q.absoluteTolerance[score]}];
  }));
  return {family:packet.family,thicknessM,sourceRateS,sourceEnergyMeV,scores,
-  limitations:'Monte Carlo SE and observed midpoint interpolation residuals are separate; neither includes nuclear-data, geometry or source-spectrum uncertainty.'};
+  limitations:'Monte Carlo standard error and observed midpoint interpolation residuals give different error estimates. Neither includes nuclear-data, geometry or source-spectrum uncertainty.'};
 }

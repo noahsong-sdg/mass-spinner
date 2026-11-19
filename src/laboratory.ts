@@ -77,7 +77,7 @@ export function setupLaboratory(onInput: () => void){
  const directory=document.getElementById('method-directory')!;
  for(const g of METHOD_GUIDES.filter(item=>coreModes.includes(item.id))){
   const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent=`§${g.section} · ${g.title}`;details.append(summary);
-  appendGuide(details,g);const button=document.createElement('button');button.className='text-button';button.textContent=isInfo(g.id)?'Read method overview ↗':'Explore this model ↗';
+  appendGuide(details,g);const button=document.createElement('button');button.className='text-button';button.textContent=isInfo(g.id)?'Read the method description ↗':'Open this model ↗';
   button.addEventListener('click',()=>{system.value=g.id;system.dispatchEvent(new Event('change'));system.scrollIntoView({behavior:'smooth'});});details.append(button);directory.append(details);
  }
 }
@@ -94,7 +94,7 @@ export function showLaboratory(mode: string){
  for(const [key,{box}]of elements){
   box.hidden=!box.dataset.modes!.split(' ').includes(mode);
   if(mode==='diffusion'){const coulomb=(document.getElementById('diffusion-closure') as HTMLSelectElement).value==='coulomb-heavy-light';if(key==='collisionHz')box.hidden=coulomb;if(['densityM3','backgroundMassU','coulombLog'].includes(key))box.hidden=!coulomb;}
-  if(key==='duration')box.querySelector('label span')!.textContent=mode==='transit'?'Minimum plot horizon':'Observation time';
+  if(key==='duration')box.querySelector('label span')!.textContent=mode==='transit'?'Minimum plot duration':'Observation time';
   if(key==='temperatureEV')box.querySelector('label span')!.textContent=geometryModes.includes(mode)?'Reference transverse kinetic energy':'Ion temperature';
   if(key==='beamEV')box.querySelector('label span')!.textContent=['mirror','centrifugal'].includes(mode)?'Total injection kinetic energy':'Axial beam energy';
  }
@@ -245,7 +245,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
     return closest<0?`${series.label}: —`:`${series.label}: ${format(series.x[closest])}, ${format(series.y[closest])}`+(series.low?` [${format(series.low[closest])}, ${format(series.high?.[closest])}]`:'');
    }).join(' · ');
   };
-  svg.setAttribute('tabindex','0');svg.setAttribute('aria-label',caption.textContent+'. Arrow keys inspect samples; Home and End select endpoints.');
+  svg.setAttribute('tabindex','0');svg.setAttribute('aria-label',caption.textContent+'. Use the arrow keys to examine samples. Home and End select the endpoints.');
   svg.addEventListener('keydown',event=>{
    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
    event.preventDefault();const i=event.key==='Home'?0:event.key==='End'?samples.length-1:Math.max(0,Math.min(samples.length-1,sample+(event.key==='ArrowRight'?1:-1)));moveCursor(samples[i].x);inspect(samples[i].x,samples[i].y);sample=i;onSelect?.(samples[i].x);

@@ -42,11 +42,11 @@ export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoating
   ||c.lithiumNumberDensityM3<=0||c.heatCapacityPerLiJK<=0||c.referenceK<=0||c.depositionTemperatureK<=0
   ||c.depositionFluxM2S<0||c.erosionFluxM2S<0||c.depositedTritiumPerLi<0||c.depositedDeuteriumPerLi<0
   ||c.depositedTritiumPerLi+c.depositedDeuteriumPerLi>1||dtS<0)
-  throw new RangeError('Coating balance requires finite physical inputs, positive host capacity and nonnegative fluxes/loading.');
+  throw new RangeError('Use finite coating inputs, positive host capacity and nonnegative fluxes and isotope loading.');
  const n0=state.lithiumColumnM2,p=c.depositionFluxM2S,e=c.erosionFluxM2S,g=p-e,n1=n0+g*dtS;
- if(!Number.isFinite(n1)||n1<=0)throw new RangeError('Coating exhaustion is a model boundary; stop before the Li host reaches zero.');
+ if(!Number.isFinite(n1)||n1<=0)throw new RangeError('Coating exhaustion is outside the model domain. Stop before the Li host reaches zero.');
  const temperature0=c.referenceK+state.sensibleEnergyJm2/(n0*c.heatCapacityPerLiJK);
- if(!Number.isFinite(temperature0)||temperature0<=0)throw new RangeError('Coating sensible energy implies a nonpositive or nonfinite temperature.');
+ if(!Number.isFinite(temperature0)||temperature0<=0)throw new RangeError('The coating sensible energy gives a temperature that is nonpositive or nonfinite.');
  const x=g*dtS/n0,ratio=n1/n0,logRatio=x<-.5?Math.log(ratio):Math.log1p(x),r=x===0?1:logRatio/x;
  const exponent=p===0?0:-p*dtS/n0*r;
  // -expm1 is accurate for almost unchanged composition and near-balanced flux.
@@ -76,7 +76,7 @@ export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoating
  const temperatureK=c.referenceK+next.sensibleEnergyJm2/(n1*c.heatCapacityPerLiJK),thicknessM=n1/c.lithiumNumberDensityM3;
  if(![...Object.values(next) as number[],...Object.values<number>(deposited),...Object.values<number>(eroded),initialMassKgm2,massKgm2,depositedMassKgm2,erodedMassKgm2,temperatureK,thicknessM].every(Number.isFinite)
   ||temperatureK<=0||thicknessM<=0||packingExcess(next)>COATING_PACKING_ROUNDOFF_BOUND)
-  throw new RangeError('Coating balance exceeds the finite numeric domain.');
+  throw new RangeError('The coating balance is outside the finite numerical domain.');
  return {model:'external-well-mixed-Li-coating' as const,state:next,thicknessM,temperatureK,
   massKgm2,depositedMassKgm2,erodedMassKgm2,deposited,eroded,
   packing:{relativeExcess:Math.max(packingExcess(state),packingExcess(next)),roundoffAdmissionBound:COATING_PACKING_ROUNDOFF_BOUND,populationsModified:false as const},
@@ -85,9 +85,9 @@ export function advanceLithiumCoating(state:LithiumCoatingState,c:LithiumCoating
    deuteriumM2:state.deuteriumColumnM2+deposited.deuteriumM2-eroded.deuteriumM2-next.deuteriumColumnM2,
    sensibleEnergyJm2:state.sensibleEnergyJm2+deposited.sensibleEnergyJm2-eroded.sensibleEnergyJm2-next.sensibleEnergyJm2,
    massKgm2:initialMassKgm2+depositedMassKgm2-erodedMassKgm2-massKgm2},
-  coupling:'External inventory only; not coupled to stopping, nuclear reactions, diffusion or target conduction. No moving-interface remap is claimed.' as const,
-  assumptions:['User-assumed constant Li fluxes; well-mixed nonpreferential erosion and at most one D/T per Li.',
-   'Raw isotope columns are not normalized. Packing excess is admitted only within 64 machine epsilons of the Li column; larger excess rejects.',
-   'Fixed user-assumed Li-site density and heat capacity per Li. Mass uses Li-7, T-3 and D-2 mass numbers.',
-   'Sensible energy is relative to the supplied reference temperature. Chemical, latent, beam and reaction heat are excluded.']};
+  coupling:'This external inventory does not change stopping, nuclear reactions, diffusion or target conduction. The model does not remap a moving interface.' as const,
+  assumptions:['The Li fluxes are constant inputs. Erosion removes the uniform mixture without isotope preference. The combined D and T population is at most one atom per Li atom.',
+   'The calculation does not normalize isotope columns. It allows packing excess only within 64 machine epsilons of the Li column. It rejects larger excess.',
+   'Li-site density and heat capacity per Li are constant inputs. Mass uses Li-7, T-3 and D-2 mass numbers.',
+   'Sensible energy uses the supplied reference temperature. The calculation does not include chemical, latent, beam or reaction heat.']};
 }

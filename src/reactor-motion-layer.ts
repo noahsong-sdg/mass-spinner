@@ -50,7 +50,7 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   if(!current||!root)return;
   panel.dataset.pending=String(pending);
   heatInset.element.hidden=pending||!enabled.heat;
-  if(pending){summary.textContent='Inside · updating…';metrics.textContent='Waiting for current target inputs.';return;}
+  if(pending){summary.textContent='Inside · calculation in progress';metrics.textContent='The target calculation is in progress.';return;}
   const power=current.kind==='power-reference';
   const ions=power?0:motionPopulation(current.particleRateS,6.24e16,96),count=power?48:2*Math.ceil(motionPopulation(current.neutronRateS,1e11,64)/2);
   if(updateText){
@@ -86,10 +86,10 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   }
   if(panel.open&&enabled.heat)heatInset.tick(phase*.55);
   if(!updateText)return;
-  metrics.textContent=power?'Normalized D–T source → blanket · heat direction only. No beam source is attached.':
+  metrics.textContent=power?'The reference shows a normalized D–T source and heat direction toward the blanket. It has no beam source.':
    `${current.basis}${current.timeS===null?'':` · ${fmt(current.timeS)} s`} · ${current.particleRateS>0?`D⁺ ${fmt(ionSpeedMS(current))} m/s`:'beam off'} · ${fmt(current.neutronRateS)} n/s · ${fmt(current.depositedPowerW)} W deposited`;
-  scope.textContent=power?'Reference animation, not calculated plasma motion, neutron transport or heat flow. Does not change published TBR/yields.':
-   `Weighted angular samples, not individual reaction products; fusion sites amplified. Nonrelativistic mean-energy speeds; ions and neutrons slowed separately. Straight rays assume isotropic emission, no scattering or attenuation. Heat is a separately expanded depth inset, not coolant flow. ${si?'SI hardware; visual speed factors 2×10⁻⁷ (ions), 10⁻⁸ (neutrons).':'Illustrative Blender units, not physical transit time; footprint responds to area.'}`;
+  scope.textContent=power?'This reference animation does not calculate plasma motion, neutron transport or heat flow. It does not change the published TBR or yields.':
+   `Markers show weighted angular samples; bright fusion sites are display effects. Speeds use nonrelativistic mean energies; ions and neutrons have separate slow-motion factors. Straight paths use isotropic emission without scattering or attenuation. The separate enlarged depth view shows heat flux, not coolant flow. ${si?'SI hardware; visual speed factors 2×10⁻⁷ (ions), 10⁻⁸ (neutrons).':'The Blender units are illustrative; travel time is not physical. The footprint changes with beam area.'}`;
  }
  return {group,get running(){return !!state&&!!root&&!pending&&!paused&&!reduced?.matches&&([beam,neutrons,heat,reactions].some(b=>b.geometry.drawRange.count>0)||panel.open&&heatInset.running);},
   update(value:ReactorMotionState|null,current:THREE.Object3D|null,waiting=false){

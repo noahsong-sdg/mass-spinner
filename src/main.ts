@@ -149,7 +149,7 @@ function equilibriumControls(){
  $('gaussian-controls').hidden=$('centrifuge-closure').value==='corotating';
  $('magnetic-boundary-control').hidden=!coupled;
  $('gaussian-field-label').textContent=coupled?'Magnetic boundary B':'Imposed axial B';
- $('gaussian-closure-note').textContent=coupled?'Equal charges. Density and ion rotation are prescribed; B(r), current and potential are solved together. A wall boundary may have no regular nonzero-B solution. Electron inertia and discharge dynamics remain omitted.':'Equal charge states required. Density width and B are imposed. Required current, its estimated magnetic perturbation and omitted electron inertia are diagnostics.';
+ $('gaussian-closure-note').textContent=coupled?'Equal charges are required. Density and ion rotation are inputs. The model calculates B(r), current and potential together. A wall boundary can have no regular nonzero-B solution. Electron inertia and discharge dynamics are not calculated.':'Equal charge states are required. Density width and B are inputs. Results show required current, its magnetic perturbation estimate and the neglected electron-inertia force ratio.';
  if(mode()==='centrifuge')$('experiment-subtitle').textContent=equilibriumLabel();
  $('composition-label').textContent=$('composition-boundary').value==='bulk'?'Whole-cylinder A number fraction':'Central A number fraction';
 }
@@ -188,9 +188,9 @@ function updateReadouts() {
   $('cutoff-mark').style.left=`${Math.min(100,Math.max(0,(cutoff??150)-20))}%`;
   legacyRenderer?.updateFields();
   const frequencies=ions().map(s=>E_CHARGE*c.magneticT*s.chargeState/(s.massU*AMU)/(2*Math.PI));
-  $('frequency-readout').textContent=mode()==='centrifuge'?'Static composition boundary; this is not a flowing-feed or extraction calculation.':
+  $('frequency-readout').textContent=mode()==='centrifuge'?'Static composition boundary. This calculation has no flowing feed or extraction.':
     `Cyclotron: A ${frequencies[0].toFixed(0)} Hz · B ${frequencies[1].toFixed(0)} Hz · `+
-    (mode()==='icr'?`RF ${c.rfFrequencyHz.toFixed(0)} Hz`:`E×B drift limit ${ (-2*c.voltage/(c.radius**2*c.magneticT)/(2*Math.PI)).toFixed(0)} Hz (signed; exact ion branches below)`);
+    (mode()==='icr'?`RF ${c.rfFrequencyHz.toFixed(0)} Hz`:`E×B drift limit ${ (-2*c.voltage/(c.radius**2*c.magneticT)/(2*Math.PI)).toFixed(0)} Hz (signed, with exact ion branches below)`);
 }
 function invalidate() {
   clearTimeout(liveTimer);
@@ -206,7 +206,7 @@ function invalidate() {
   for(const id of ['end-stack','wall-stack','deposition'])$(id).replaceChildren();
   $('ledger').innerHTML='<tr><td>Run required</td><td>—</td><td>—</td></tr>';
   $('energy-error').textContent='Results cleared after input change.';
-  $('sampling-uncertainty').textContent='';renderPlots($('live-plots'),[]);$('model-metrics').replaceChildren();$('model-assumptions').replaceChildren();$('plot-status').textContent='Inputs changed · calculating when live updates are enabled.';
+  $('sampling-uncertainty').textContent='';renderPlots($('live-plots'),[]);$('model-metrics').replaceChildren();$('model-assumptions').replaceChildren();$('plot-status').textContent='Inputs changed. Enable live updates to recalculate automatically.';
   updateReadouts();
 }
 const percent=(a:number,b:number)=>b?`${(100*a/b).toFixed(1)}%`:'—';
@@ -227,7 +227,7 @@ function drawResults(result:OrbitResult) {
   const bars=result.species.map((s,j)=>s.wallAxialBins.map((n,i)=>`<rect x="${30+i*31+j*13}" y="${110-90*n/max}" width="12" height="${90*n/max}" fill="${j?'#d2956b':'#a4c4b1'}"><title>${s.massU} u · bin ${i+1}: ${n} ions</title></rect>`).join('')).join('');
   $('deposition').innerHTML=`<path d="M30 110H775" stroke="#4d5753"/>${bars}<g fill="#9eaaa4" font-size="12"><text x="30" y="135">Source · 0 m</text><text x="690" y="135">End · 2.8 m</text><text x="5" y="25">${max}</text></g>`;
   const summary=collectionSummary(result);
-  $('sampling-uncertainty').textContent=summary.species.map((s,i)=>`${['A','B'][i]}: `+(['end','wall','source','remaining'] as const).map(d=>`${d} ${(100*s.outcomes[d].fraction).toFixed(1)}% [${(100*s.outcomes[d].low).toFixed(1)}, ${(100*s.outcomes[d].high).toFixed(1)}]%`).join(' · ')).join(' | ')+'. Pointwise Wilson 95% intervals for sampled fractions; purity needs paired-batch resampling below. Model and timestep errors are separate.';
+  $('sampling-uncertainty').textContent=summary.species.map((s,i)=>`${['A','B'][i]}: `+(['end','wall','source','remaining'] as const).map(d=>`${d} ${(100*s.outcomes[d].fraction).toFixed(1)}% [${(100*s.outcomes[d].low).toFixed(1)}, ${(100*s.outcomes[d].high).toFixed(1)}]%`).join(' · ')).join(' | ')+'. Pointwise Wilson 95% intervals for sampled fractions. Purity needs paired-batch resampling below. Model and timestep errors are separate.';
   $('export').disabled=false;legacyRenderer?.drawPaths(result);
 }
 type SettingsByMode={rotating:RunConfig;icr:RunConfig;centrifuge:EquilibriumSettings;'doublewell-dynamics':DoublewellConfig}&Record<GeometryUiMode,GeometryConfig>&Record<TransportMode,TransportConfig>;
@@ -272,7 +272,7 @@ function equilibrium(result:EquilibriumResult) {
 }
 async function run() {
   clearTimeout(liveTimer);runController?.abort();
-  comparisonController?.abort();if(comparisonController){$('compare-status').textContent='Comparison superseded by a new run.';$('compare').disabled=false;}
+  comparisonController?.abort();if(comparisonController){$('compare-status').textContent='A new run replaced the comparison.';$('compare').disabled=false;}
   const selected=mode();if(isInfo(selected)){$('run-status').textContent='Overview only · no quantitative solver for this variant.';return;}
   const prepared=prepareRun(selected),id=++revision,controller=new AbortController();runController=controller;
   busy=true;latest=null;$('export').disabled=true;$('refine').disabled=true;$('run').disabled=true;
@@ -291,23 +291,23 @@ async function run() {
       for(const note of result.assumptions){const li=document.createElement('li');li.textContent=note;$('model-assumptions').append(li);}
     }else if(selected==='centrifuge'){
       equilibrium(result);const p=equilibriumPresentation(result,Number($('radial-cut').value));presentDiagnostics(p);plotSimulation(p.curves);
-      const radialFine=radialRefinementSettings(settings);$('refine').disabled=!radialFine;$('refinement-status').textContent=radialFine?`Compare equilibrium inventories at ${settings.bins} → ${radialFine.bins} radial intervals.`:'No finer supported grid; radial convergence unassessed.';
+      const radialFine=radialRefinementSettings(settings);$('refine').disabled=!radialFine;$('refinement-status').textContent=radialFine?`Compare equilibrium inventories at ${settings.bins} → ${radialFine.bins} radial intervals.`:'No finer grid is supported. Radial convergence is not established.';
     }
     else {
       drawResults(result);const p=selected==='rotating'?rotatingPresentation(settings,result):null;
       if(p)presentDiagnostics(p);plotSimulation([...arrivalCurves(result),...(p?.curves??[])]);
-      const canRefine=settings.duration/(settings.dt/2)<=100000;$('refine').disabled=!canRefine;if(!canRefine)$('refinement-status').textContent='Half-step run exceeds the browser step budget; choose a coarser timestep first.';
+      const canRefine=settings.duration/(settings.dt/2)<=100000;$('refine').disabled=!canRefine;if(!canRefine)$('refinement-status').textContent='The half-step run exceeds the browser step limit. First select a larger timestep.';
       $('energy-error').textContent=`Maximum work/loss-corrected energy residual: ${Math.max(...result.species.map(s=>s.maxRelativeEnergyError)).toExponential(2)} · impact residual ${Math.max(...result.species.map(s=>s.maxRelativeImpactEnergyError)).toExponential(2)}`;
       $('impact-diagnostics').textContent=result.species.map((s,i)=>`${['A','B'][i]}: ${s.collisions} elastic events · mean collected transit ${numeric(1e6*mean(s.impacts.map(p=>p.time)))} µs · mean impact ${numeric(mean(s.impacts.map(p=>p.kineticEV)))} eV · RF work/injected ion ${numeric(s.rfWorkEV/s.injected)} eV`).join(' | ');
     }
-    $('plot-status').textContent='Computed from the current settings · hover over curves to inspect values.';
+    $('plot-status').textContent='Calculated from the current settings. Point at the curves to see values.';
     if(selected==='doublewell-dynamics'){
      accepted.evidence=assessCollisionObservableEvidence(result,'outlet-fraction');
      $('model-validity').textContent=`Collisions: ${accepted.evidence.status} · continuum ${accepted.evidence.continuum}`;
      for(const text of accepted.evidence.reasons){const li=document.createElement('li');li.textContent=text;$('model-assumptions').append(li);}
      const study=document.createElement('li'),link=document.createElement('a');link.href='/convergence/browser-v38.summary.json';link.textContent='Browser-resolution study · qualification unresolved';study.append(link);$('model-assumptions').append(study);
     }
-    $('export').disabled=false;$('run-status').textContent=selected==='doublewell-dynamics'?`Complete · ${settings.particlesPerSpecies} particles per species · ${(settings.duration*1e6).toFixed(0)} µs · inspect torque and resolution diagnostics`:selected==='centrifuge'?`Complete · ${settings.bins+1} radial samples`:selected==='rotating'||selected==='icr'?`Complete · ${settings.particlesPerSpecies} ions per species · ${(settings.dt*1e9).toFixed(0)} ns step`:'Complete · reduced model diagnostics';
+    $('export').disabled=false;$('run-status').textContent=selected==='doublewell-dynamics'?`Complete · ${settings.particlesPerSpecies} particles per species · ${(settings.duration*1e6).toFixed(0)} µs · examine torque and resolution results`:selected==='centrifuge'?`Complete · ${settings.bins+1} radial samples`:selected==='rotating'||selected==='icr'?`Complete · ${settings.particlesPerSpecies} ions per species · ${(settings.dt*1e9).toFixed(0)} ns step`:'Complete · reduced model diagnostics';
   } catch(error) {if(id===revision)$('run-status').textContent=errorMessage(error);}
   finally {if(runController===controller){busy=false;$('run').disabled=false;}}
 }
@@ -320,12 +320,12 @@ function selectMode(){
  $('orbit-results').hidden=!orbital;$('equilibrium-results').hidden=selected!=='centrifuge';
  $('deposition-panel').hidden=!orbital;$('refine').hidden=!orbital&&selected!=='centrifuge';
  $('sampling-uncertainty').hidden=!orbital;
- $('refine').textContent=selected==='centrifuge'?'Check radial refinement ↗':'Check timestep refinement ↗';
+ $('refine').textContent=selected==='centrifuge'?'Compare radial grids ↗':'Compare timesteps ↗';
  document.querySelector<HTMLElement>('.viewport-tools')!.hidden=!orbital;
  workspace?.refreshMode();
  document.querySelector<HTMLElement>('.legend-note')!.hidden=!orbital;
  $('experiment-label').textContent='SECTION '+g.section;$('experiment-title').textContent=g.title;$('experiment-subtitle').textContent=info?'Overview · no quantitative solver':orbital?'Finite-device full ion orbits':selected==='centrifuge'?equilibriumLabel():selected==='doublewell-dynamics'?'Coupled kinetic model · prescribed fields':'Reduced physics diagnostics';
- $('system-scope').textContent=selected==='doublewell-dynamics'?'Exploratory collisional kinetics · inspect convergence':info?'Overview only':reduced?'Explicit reduced model · see fidelity notes':selected==='centrifuge'?'Equilibrium closure':'Prescribed-field orbits';
+ $('system-scope').textContent=selected==='doublewell-dynamics'?'Experimental collision model · examine convergence':info?'Overview only':reduced?'Reduced model · see model limits':selected==='centrifuge'?'Equilibrium closure':'Prescribed-field orbits';
  $('field-key').hidden=!orbital;
  $('field-key').textContent=selected==='icr'?'Copper = prescribed RF electric field at t = 0 · sage = axial B.':'Copper = radial E · sage = axial B · wire cylinder = ideal absorbing wall.';
  apparatus?.show(selected);tutorialInsights?.show(selected);
@@ -357,7 +357,7 @@ $('tune-rf').addEventListener('click',()=>{
 $('refine').addEventListener('click',()=>{void (async()=>{
   if(!latest||(latest.kind!=='centrifuge'&&latest.kind!=='rotating'&&latest.kind!=='icr'))return;
   const finerSettings=latest.kind==='centrifuge'?radialRefinementSettings(latest.settings):{...latest.settings,dt:latest.settings.dt/2};
-  if(!finerSettings){$('refine').disabled=true;$('refinement-status').textContent='No finer supported grid; radial convergence unassessed.';return;}
+  if(!finerSettings){$('refine').disabled=true;$('refinement-status').textContent='No finer grid is supported. Radial convergence is not established.';return;}
   const snapshot=latest,id=revision,controller=new AbortController();refinementController?.abort();refinementController=controller;$('refine').disabled=true;$('refinement-status').textContent=snapshot.kind==='centrifuge'?'Running finer radial grid…':'Running half-timestep comparison…';
   try {
     if(snapshot.kind==='centrifuge'){
@@ -365,7 +365,7 @@ $('refine').addEventListener('click',()=>{void (async()=>{
       const fine=await calculate('centrifuge',fineSettings,controller.signal);
       if(id!==revision)return;
       const cut=Number($('radial-cut').value),a=equilibriumPresentation(snapshot.result,cut).diagnostics,b=equilibriumPresentation(fine,cut).diagnostics;
-      $('refinement-status').textContent=`${snapshot.settings.bins} → ${fineSettings.bins} radial intervals · `+a.volumeMeanIonDensities.map((n,i)=>`${['A','B'][i]}: inventory relative change ${numeric(Math.abs(n-b.volumeMeanIonDensities[i])/b.volumeMeanIonDensities[i],5)} · bulk fraction change ${numeric(Math.abs(a.bulkNumberFractions[i]!-b.bulkNumberFractions[i]!),5)}`).join(' | ')+'. Radial quadrature check only; not experimental validation.';
+      $('refinement-status').textContent=`${snapshot.settings.bins} → ${fineSettings.bins} radial intervals · `+a.volumeMeanIonDensities.map((n,i)=>`${['A','B'][i]}: inventory relative change ${numeric(Math.abs(n-b.volumeMeanIonDensities[i])/b.volumeMeanIonDensities[i],5)} · bulk fraction change ${numeric(Math.abs(a.bulkNumberFractions[i]!-b.bulkNumberFractions[i]!),5)}`).join(' | ')+'. Radial quadrature check only. This does not establish experimental accuracy.';
       return;
     }
     const fine=await calculate(snapshot.kind,{...snapshot.settings,dt:snapshot.settings.dt/2},controller.signal);
@@ -382,7 +382,7 @@ $('compare').addEventListener('click',()=>{void (async()=>{
   const settings=prepared.map(value=>value.settings);
   const results=await Promise.allSettled(prepared.map(value=>calculateRun(value,controller.signal)));
   if(id===revision) {
-    $('compare-status').textContent='Independent operating points · observables differ by model; inspect each configuration.';
+    $('compare-status').textContent='Separate operating points. Models give different observables. Examine each configuration.';
     results.forEach((entry,i)=>{
       const card=document.createElement('div'),heading=document.createElement('h3'),p=document.createElement('p');heading.textContent=guide(modes[i])!.title;
       if(entry.status==='rejected')p.textContent=errorMessage(entry.reason);

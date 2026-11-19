@@ -9,7 +9,7 @@ export function setupResearchDistributions(fetcher=fetch){
  for(const [i,name] of ['x','y','z'].entries()){const option=make('option',`Velocity ${name}`);option.value=String(i);axis.append(option);}axis.value='0';axis.setAttribute('aria-label','Recorded velocity marginal axis');
  comparison.setAttribute('aria-label','Archived coarse and fine comparison');
  evidence.append(make('summary','Recorded convergence gates'),comparison,gateRows,
-  make('p','Unchanged archived decisions. v16 isotropic passes do not qualify the different v17 general-3D operator. A lower witness is not a full L¹ integral.'));
+  make('p','These saved decisions have not changed. Passing v16 isotropic checks does not establish the accuracy of the different v17 general-3D operator. A lower witness gives a lower bound, not the full L¹ integral.'));
  const raw=make('a','Raw arrays & source hashes');raw.href='/research-depth/recorded-distributions.json';raw.className='quiet-link';
  root.append(summary,button,axis,status,plots,evidence,raw);axis.hidden=true;
  let packet:DistributionPacket|null=null,caseId:string|undefined,step:number|undefined,pending:Promise<void>|null=null;
@@ -30,7 +30,7 @@ export function setupResearchDistributions(fetcher=fetch){
   if(!packet)return;
   try{
    const selected=distributionCurves(packet,caseId,step,Number(axis.value));renderPlots(plots,selected.curves);
-   status.textContent=`Saved positive-mixture marginals · ${caseId}, step ${step}. Physical entropy gate: ${selected.case.gates.physicalEntropy}; integration: ${selected.state.physicalEntropy.quadratureGate}. Integration sensitivity is an estimate, not a confidence interval or proof of an H theorem. Qualification withheld.`;
+   status.textContent=`Saved positive-mixture marginals · ${caseId}, step ${step}. Physical entropy gate: ${selected.case.gates.physicalEntropy}. Integration gate: ${selected.state.physicalEntropy.quadratureGate}. Integration sensitivity gives an estimate, not a confidence interval or proof of an H theorem. Accuracy is not established.`;
   }catch(error:unknown){renderPlots(plots,[]);status.textContent=error instanceof Error?error.message:String(error);}
  }
  button.addEventListener('click',()=>{void (async()=>{

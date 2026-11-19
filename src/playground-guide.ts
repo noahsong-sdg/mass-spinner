@@ -14,20 +14,20 @@ type GuideElements={
 };
 type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
-/** Optional guidance over existing live controls; no alternate simulation or physical presets. */
+/** Optional instructions for the existing controls. These instructions do not add simulation modes or physical presets. */
 export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,canUseCentrifuge=()=>true}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
  const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
  let capability='';
- try{capability=win.sessionStorage.getItem(capabilityKey)??'';}catch{/* An ephemeral connection must be explicitly reauthorized after reload. */}
+ try{capability=win.sessionStorage.getItem(capabilityKey)??'';}catch{/* After reload, the caller must authorize a new connection. */}
  if(!capability)capability=win.crypto.randomUUID();
- try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Preserve the same authorization boundary without storage. */}
+ try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Keep the same authorization boundary without storage. */}
  function openStandalone(){readerWindow=win.open('/learn.html','mass-spinner-start');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
- const intro=el('p','Seven small experiments. Your inputs stay as they are; Start from rest explicitly restarts the run.'),label=el('label','Explore'),choice=el('select');
+ const intro=el('p','Seven experiments. The controls keep your inputs. Start from rest starts a new run.'),label=el('label','Explore'),choice=el('select');
  choice.id='guide-step';label.htmlFor=choice.id;
  steps.forEach((step,i)=>{const option=el('option',`${i+1}. ${step.title}`);option.value=String(i);choice.append(option);});
  const reading=el('div'),content=el('div'),status=el('p'),nav=el('nav'),previous=el('button','Back'),next=el('button','Next →'),leave=el('button','Scene');reading.className='guide-reading';
@@ -58,7 +58,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function plot(value:string){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
-  if(option!.disabled){status.textContent=value==='lithium'?'Choose a lithium feed in Controls to use this plot.':'Choose Isotope separation in Controls to use this plot.';return false;}
+  if(option!.disabled){status.textContent=value==='lithium'?'To use this plot, select a lithium feed in Controls.':'To use this plot, select Isotope separation in Controls.';return false;}
   set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
   const target=value==='composition'?'#fuel-composition-readout':value==='profile'?'#fuel-density-reading':'#fuel-plots > .live-plots';
   doc.querySelector<HTMLElement>(target)!.scrollIntoView?.({block:'start'});return true;
@@ -86,7 +86,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
   apparatus.value=experiment.apparatus??'centrifuge';apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));
   if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result)&&!['spin','transport'].includes(node('fuel-motion-mode').value))set('fuel-motion-mode','transport');
-  // Beam references have their own accepted state; centrifuge actions wait on fuel-export.
+  // Beam references have their own accepted state. Centrifuge actions wait on fuel-export.
   if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
   if(experiment.panel==='target')doc.getElementById('coupled-tab-settings')!.click();
   let selector=experiment.control;
@@ -109,19 +109,19 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(Object.hasOwn(guideExperiments,key)){showExperiment(key);return;}
   if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
-  if(!canUseCentrifuge()){status.textContent='Choose Centrifuge to use its guide controls.';return;}
+  if(!canUseCentrifuge()){status.textContent='To use these guide controls, select Centrifuge.';return;}
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
-  // Pending/failed results must not be presented as a fresh experiment.
-  if(pending(key)){status.textContent='Wait for the run to finish. If it failed, open Controls and adjust the settings to retry.';return;}
+  // Do not show pending or failed results as a new experiment.
+  if(pending(key)){status.textContent='Wait for the run to finish. If it fails, open Controls. Change the settings to start the calculation again.';return;}
   if(Object.hasOwn(tutorialPlots,key)){plot(tutorialPlots[key]);return;}
   if(key==='newRun'){node('fuel-new-run').click();return;}
   if(key==='cutPower'){
    const power=node('fuel-power');
-   if(!['spin','transport'].includes(node('fuel-motion-mode').value)){status.textContent='Choose Coupled separation or Coupled spin-up before cutting power. The selected physical time sets when the current changes.';return;}
-   if(power.disabled){status.textContent='Power cannot be changed here. Choose a time below 60 s in an accepted coupled run.';return;}
-   if(power.getAttribute('aria-pressed')!=='true'){status.textContent='The discharge is already off. The moving gas can still coast and lose angular momentum to wall drag.';return;}
+   if(!['spin','transport'].includes(node('fuel-motion-mode').value)){status.textContent='Before you cut power, select Coupled separation or Coupled spin-up. The selected physical time sets when the current changes.';return;}
+   if(power.disabled){status.textContent='To change power, select a time below 60 s in an accepted coupled run.';return;}
+   if(power.getAttribute('aria-pressed')!=='true'){status.textContent='The discharge is already off. The gas can continue to turn while wall drag decreases its angular momentum.';return;}
    power.click();return;
   }
   if(key==='currentExperiment'){
@@ -154,8 +154,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  type Outcome={status:'waiting'|'executed'|'rejected';message?:string};
  const outcomes=new Map<string,Outcome>();
- // A capability is issued only to an explicit opener, Docs window, or embedded reader.
- // It lets that reader prove the previous authorization after this page reloads.
+ // Give a capability only to an explicit opener, Docs window, or embedded reader.
+ // The reader uses this capability for authorization after this page reloads.
  win.addEventListener('message',event=>{
   if(event.origin!==win.location.origin||!event.source)return;
   const data:unknown=event.data;
@@ -194,12 +194,12 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    return immediate||!pending(key);
   };
   if(ready()){execute();return;}
-  status.textContent='Waiting for the computed run and controls…';reply({status:'waiting'});
+  status.textContent='Waiting for the calculated run and controls…';reply({status:'waiting'});
   const observer=new win.MutationObserver(()=>{
    if(ready()){observer.disconnect();cancelLaunch=()=>{};execute();}
   });
-  cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};reply({status:'rejected',message:'A newer tutorial action replaced this request.'});};
-  // Controls are mounted asynchronously, so watch their insertion as well as acceptance.
+  cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};reply({status:'rejected',message:'A new tutorial action replaced this request.'});};
+  // The application adds controls asynchronously. Watch for new controls and accepted results.
   observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled']});
  }
  function render(focus=false){

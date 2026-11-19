@@ -23,7 +23,7 @@ $('model-source').href=modelSource;
 const definitions: ControlDefinition[]=[
  ['temperatureKeV','Initial temperature',.5,5,.1,x=>`${x.toFixed(1)} keV`],
  ['densityM3','Initial D density',20,23,.1,x=>`10${sup(x.toFixed(1))} m⁻³`,true],
- ['speedKmS','Each plasmoid speed',0,600,10,x=>`${x} km/s`],
+ ['speedKmS','Speed of each plasmoid',0,600,10,x=>`${x} km/s`],
  ['compression','Volume compression',1,30,.5,x=>`${x.toFixed(1)}×`],
  ['durationUs','Pulse duration',25,1000,5,x=>`${x} µs`],
  ['confinementUs','Energy confinement',50,2000,25,x=>`${x} µs`],
@@ -82,9 +82,9 @@ function updateResults(){
  $('charts').innerHTML=plot('Temperature','temperatureKeV','#d7b777',' keV')+plot('D density','densityM3','#b0c6ad',' m⁻³')+plot('D–D neutron rate','neutronRateS','#d4a891',' s⁻¹');
  const rows: [string,number | null][]=[['Plasma driver input',result.driverJ],['Expansion return',result.recoveredJ],['Auxiliary load',result.parasiticJ],['Nonfusion net',result.netNonfusionJ],['Charged fusion energy',result.chargedJ],['Neutron energy',result.neutronJ]];
  $('ledger').innerHTML=rows.map(([label,v])=>`<dt>${label}</dt><dd>${number(v===null?null:v/1000,' kJ')}</dd>`).join('');
- const note=result.unsupportedSteps?'D–D yield unavailable: part of this pulse leaves the 0.2–100 keV fit range.':
-  !result.diagnosticValid?'D–D yield exceeds the low-burn / negligible-heating approximation; coupled burn is required.':
-  'D–D yield: low-burn estimate. Fusion electricity is unsolved.';
+ const note=result.unsupportedSteps?'D–D yield is unavailable because part of this pulse does not stay within the 0.2–100 keV fit limits.':
+  !result.diagnosticValid?'The D–D yield exceeds the low-burn approximation, which uses negligible fusion heating. A coupled burn calculation is necessary.':
+  'D–D yield uses a low-burn estimate. The model does not calculate fusion electricity.';
  $('validity').textContent=note;
 }
 function draw(){

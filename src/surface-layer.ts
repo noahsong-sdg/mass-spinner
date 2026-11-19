@@ -124,7 +124,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
   legend.textContent='';scope.textContent='';readout.textContent='';
   if(show==='state'&&field){
    legend.textContent=`${number(field.domain[0])} – ${number(field.domain[1])} ${field.unit}`;scope.textContent=field.scope;
-   if(field.coordinate==='radius'&&['centrifuge','doublewell'].includes(snapshot.model))scope.textContent+=' Radial section; axial placement is illustrative, no axial variation is solved.';
+   if(field.coordinate==='radius'&&['centrifuge','doublewell'].includes(snapshot.model))scope.textContent+=' This is a radial section. Its axial position is an assumption. The model does not calculate axial variation.';
    samples.replaceChildren();field.positionsM.forEach((position,index)=>{const option=doc.createElement('option');option.value=String(index);option.textContent=`${number(position)} m`;samples.append(option);});
    selected=Math.min(selected,field.values.length-1);
    // Separate film/backing microscope strips: each region expands depth independently.
@@ -138,12 +138,12 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
      const mesh=new THREE.Mesh(new THREE.BoxGeometry(width*(b-a)*.98,r*.25,r*.05),new THREE.MeshBasicMaterial({color:surfaceColour(value,field.domain)}));
      mesh.position.set(width*((a+b)/2-.5),inspectionY,0);mesh.userData={fieldId:field.id,sampleIndex:index,componentId:field.region==='film'?'target':'substrate',expandedDepth:true};expanded!.add(mesh);
     });group.add(expanded);
-    scope.textContent+=` Depth microscope ×${number(width/(hi-lo))}; ${field.region} only. Hardware is true scale.`;
+    scope.textContent+=` Depth magnification ×${number(width/(hi-lo))}. Region: ${field.region}. The hardware keeps its physical scale.`;
    }
    inspect(selected,false);
-  }else if(show==='tracks')scope.textContent=snapshot.tracks.length?snapshot.tracks.map(t=>t.scope).filter((v,i,a)=>a.indexOf(v)===i).join(' '):'This solver does not export physical 3D trajectories.';
+  }else if(show==='tracks')scope.textContent=snapshot.tracks.length?snapshot.tracks.map(t=>t.scope).filter((v,i,a)=>a.indexOf(v)===i).join(' '):'This model does not give physical 3D trajectories.';
   else if(show==='impacts'){
-   scope.textContent=snapshot.impacts.some(e=>e.positionM)?'Exact exported boundary hits; one dot per representative. Colour identifies species. No area/time flux is inferred.':'No positioned impacts are exported by this model. Radius-only events remain aggregates in the ledger.';
+   scope.textContent=snapshot.impacts.some(e=>e.positionM)?'Each dot shows one representative particle at its calculated boundary impact. Color identifies the species. These dots do not give particle flux per area or time.':'This model does not give impact positions. Its inventory table includes impact counts with radius data only.';
   }
   render();
  }
@@ -165,7 +165,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
   if(!snapshot.fields.length&&view.value==='state')view.value=snapshot.tracks.length?'tracks':'hardware';
   ledger.textContent=[...snapshot.counts.map(c=>`Species ${c.speciesIndex+1}: wall ${c.wall}/${c.injected}, end ${c.end}/${c.injected}, source ${c.source}/${c.injected}, remaining ${c.remaining}/${c.injected}`),
    ...snapshot.scalars.map(s=>`${s.label??s.id.replaceAll('-',' ')} ${number(s.value)} ${s.unit} (whole assembly)`)].join(' · ');
-  limitsText.textContent=[...snapshot.unsupported,d.lengthM===undefined&&d.kind==='cylinder'?'Axial construction length 2.8 m is illustrative; this solver resolves radius only.':'','Windings, electrodes, ports and cooling fittings are illustrative construction; field realization, stress and coil current are not solved.'].filter(Boolean).join(' ');
+  limitsText.textContent=[...snapshot.unsupported,d.lengthM===undefined&&d.kind==='cylinder'?'The 2.8 m construction length is an assumption. This model calculates radial variation only.':'','The windings, electrodes, ports, and cooling fittings are construction assumptions. The model does not calculate their magnetic field, stress, or coil current.'].filter(Boolean).join(' ');
   draw();return changed;
  },pick(hit:THREE.Intersection|undefined){
   const sample:unknown=hit?.object.userData.sampleIndex??(hit?.face&&(hit.object as THREE.Mesh).geometry.getAttribute('sampleIndex')?.getX(hit.face.a));

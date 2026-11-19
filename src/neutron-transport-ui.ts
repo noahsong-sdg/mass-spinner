@@ -24,7 +24,7 @@ export function setupNeutronTransport(host:HTMLElement){
  panel.className='fusion-model-notes neutron-transport-panel';panel.append(make('summary','Neutron interactions'),body);
  metrics.className='fusion-readouts';plot.className='live-plots';status.setAttribute('role','status');
  const settings=make('details'),controls=make('div'),notes=make('details'),list=make('ul');
- controls.className='instrument-controls';settings.append(make('summary','Geometry & assumed material'),controls);
+ controls.className='instrument-controls';settings.append(make('summary','Geometry & material assumptions'),controls);
  const material=make('select'),materialLabel=make('label','Material');material.id='neutron-transport-material';materialLabel.htmlFor=material.id;
  for(const [value,label]of [['custom','Custom coefficients'],['endfb-h1','H-1 · ENDF/B-VIII.1']]){const option=make('option',label);option.value=value;material.append(option);}material.value='custom';controls.append(materialLabel,material);
  notes.append(make('summary','Model info'),list);
@@ -35,8 +35,8 @@ export function setupNeutronTransport(host:HTMLElement){
  for(const title of ['Case','First absorbed','OpenMC mean ± SE'])headRow.append(make('th',title));head.append(headRow);
  for(const record of recordedOpenMC.cases){const row=make('tr');row.dataset.case=record.name;for(const text of [record.name,fmt(record.firstFlight.firstAbsorbed),`${fmt(record.openmcAbsorption.mean)} ± ${fmt(record.openmcAbsorption.stdError)}`])row.append(make('td',text));rows.append(row);}
  table.append(caption,head,rows);reference.append(make('summary','OpenMC reference'),table,
-  make('p',`OpenMC ${recordedOpenMC.openmcVersion} · ${recordedOpenMC.historiesPerCase.toLocaleString()} histories/case. Recorded multiple-scattering runs with synthetic one-group coefficients; these are separate from the current sliders. SE is Monte Carlo standard error.`),
-  make('p','The live browser calculation resolves first collisions only. Mixed-case OpenMC absorption includes later collisions after scattering. Neither this reference nor evaluated H-1 data calibrates LiT, detector response, dose or displacement damage.'));
+  make('p',`OpenMC ${recordedOpenMC.openmcVersion} · ${recordedOpenMC.historiesPerCase.toLocaleString()} histories/case. These recorded multiple-scattering runs use synthetic one-group coefficients. The current sliders do not change them. SE means Monte Carlo standard error.`),
+  make('p','The live calculation includes first collisions only. Mixed-case OpenMC absorption also includes later collisions after scattering. These references and the evaluated H-1 data do not give experimental calibration for LiT, detector response, dose or displacement damage.'));
  const pendingNote=make('p');pendingNote.hidden=true;
  body.append(metrics,plot,status,pendingNote,settings,checks,reference,notes,exportButton);host.append(panel);
  setupDecayNetwork(body);
@@ -47,13 +47,13 @@ export function setupNeutronTransport(host:HTMLElement){
   ['distance','Source to front face','m',.05,3,.05,.5],
   ['area','Sample face area','cm²',1,1000,1,10],
   ['thickness','Layer thickness','cm',0,20,.1,1],
-  ['total','Assumed total coefficient Σₜ','m⁻¹',0,1000,1,0],
-  ['absorption','Assumed absorption coefficient Σₐ','m⁻¹',0,1000,1,0],
-  ['efficiency','Assumed detection probability per first absorption','',0,1,.01,0],
-  ['density','Assumed H-1 atom density','m⁻³',24,30,.1,28,true],
+  ['total','Total coefficient Σₜ (assumption)','m⁻¹',0,1000,1,0],
+  ['absorption','Absorption coefficient Σₐ (assumption)','m⁻¹',0,1000,1,0],
+  ['efficiency','Detection probability per first absorption (assumption)','',0,1,.01,0],
+  ['density','H-1 atom density (assumption)','m⁻³',24,30,.1,28,true],
  ];
  function config():{evaluated:ReturnType<typeof neutronHydrogenReference>|null;config:FirstFlightConfig}{
-  if(material.value==='endfb-h1'&&source!.sourceEnergyMeV===null)throw new Error('Beam off: H-1 coefficients need an emitted neutron energy. Select Custom for the zero-source reference.');
+  if(material.value==='endfb-h1'&&source!.sourceEnergyMeV===null)throw new Error('The beam is off. H-1 coefficients use the energy of emitted neutrons. For a zero-source reference, select Custom coefficients.');
   const evaluated=material.value==='endfb-h1'?neutronHydrogenReference(hydrogenData as HydrogenReferenceData,source!.sourceEnergyMeV!,reads.get('density')!()):null;
   return {evaluated,config:{sourceRateS:source!.sourceRateS,sourceEnergyMeV:source!.sourceEnergyMeV,
    distanceM:reads.get('distance')!(),sampleAreaM2:reads.get('area')!()/1e4,
@@ -65,23 +65,23 @@ export function setupNeutronTransport(host:HTMLElement){
   const accepted=latest,samples=[16,32,64,128,256],runs=samples.map(angularSamples=>simulateFirstFlightNeutrons({...accepted.config,angularSamples}));
   renderPlots(checkPlot,([['firstAbsorbed','First absorbed'],['firstScatteredUnresolved','First scattered · unresolved']] as const).map(([key,label])=>({
    label,x:runs.map(r=>r.convergence.angularSamples),y:runs.map(r=>r.fractions[key]),xLabel:'Angular quadrature samples',yLabel:'Fraction of source neutrons'})));
-  checkText.textContent='Quadrature sensitivity only; material data and later scattered paths remain unqualified.';
+  checkText.textContent='This comparison shows sensitivity to angular quadrature only. Material data and paths after the first scattering event remain unqualified.';
  }
  function calculate(){
   latest=null;metrics.replaceChildren();renderPlots(plot,[]);renderPlots(checkPlot,[]);checkText.textContent='';list.replaceChildren();exportButton.disabled=true;
-  if(!source){status.textContent='No valid source.';return;}
+  if(!source){status.textContent='No source result is available.';return;}
   try{
    const selected=config(),c=selected.config,result=simulateFirstFlightNeutrons(c);latest={...result,config:c,source:{...source},
     material:selected.evaluated?{type:'endfb-h1',...selected.evaluated}:{type:'custom',assumed:true},
     referenceEvidence:{...recordedOpenMC,appliesToCurrentControls:false}};
-   for(const [label,value]of [['First absorbed',result.rates.firstAbsorbed],['First scattered · unresolved',result.rates.firstScatteredUnresolved],['Detected · assumed response',result.detectionRateS]] as const){
+   for(const [label,value]of [['First absorbed',result.rates.firstAbsorbed],['First scattered · unresolved',result.rates.firstScatteredUnresolved],['Detected · assumptions response',result.detectionRateS]] as const){
     const row=make('div');row.append(make('span',label),make('output',`${fmt(value)} s⁻¹`));metrics.append(row);
    }
    const thickness=reads.get('thickness')!(),x=[...new Set([0,...Array.from({length:21},(_,i)=>i),thickness])].sort((a,b)=>a-b);
    const scan=x.map(cm=>simulateFirstFlightNeutrons({...c,layers:[{...c.layers[0],thicknessM:cm/100}]}));
    renderPlots(plot,([['firstAbsorbed','First absorbed'],['firstScatteredUnresolved','First scattered · unresolved'],['uncollidedEscaped','Uncollided escape']] as const).map(([key,label])=>({
     label,x,y:scan.map(r=>r.rates[key]),xLabel:'Layer thickness (cm)',yLabel:'Neutrons (s⁻¹)',selectedX:thickness})));
-   list.replaceChildren(make('li',selected.evaluated?`H-1 microscopic cross sections use the native ENDF/B-VIII.1 interpolation at ${fmt(source.sourceEnergyMeV!)} MeV. Atom density and first-absorption detection probability are assumed; this is not a LiT material model.`:'Custom coefficients are scenario inputs at the selected neutron energy, not a measured material or calibrated detector.'),
+   list.replaceChildren(make('li',selected.evaluated?`H-1 microscopic cross sections use ENDF/B-VIII.1 interpolation at ${fmt(source.sourceEnergyMeV!)} MeV. You specify atom density and detection probability per first absorption. These inputs do not form a LiT material model.`:'You specify custom coefficients at the selected neutron energy. These inputs do not describe a measured material or a calibrated detector.'),
     ...result.assumptions.map(text=>make('li',text)));
    if(selected.evaluated){const item=make('li'),link=make('a','NNDC evaluated source ↗');link.href=selected.evaluated.source.url;item.append(link);list.append(item);}
    status.textContent='';exportButton.disabled=pending;renderRefinement();
@@ -103,7 +103,7 @@ export function setupNeutronTransport(host:HTMLElement){
   a.href=url;a.download='mass-spinner-neutron-first-flight.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  });
  setMaterial();return {update(value:SourceNeutronState|null){source=value;calculate();},read:()=>latest,setPending(value:boolean){
-  pending=Boolean(value);pendingNote.hidden=!pending;pendingNote.textContent='Source update pending · showing the last completed source snapshot.';
+  pending=Boolean(value);pendingNote.hidden=!pending;pendingNote.textContent='The source calculation is in progress. The display shows the last completed source state.';
   panel.dataset.pending=String(pending);exportButton.disabled=pending||!latest;
  }};
 }

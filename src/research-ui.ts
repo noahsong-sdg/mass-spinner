@@ -33,7 +33,7 @@ export async function setupResearchViewer(fetcher=fetch){
  try{
   const response=await fetcher('/research-recordings.json');if(!response.ok)throw new Error('Recorded data could not be loaded.');
   const raw:unknown=await response.json();
-  if(!recordedMoments(raw)||raw.schemaVersion!=='mass-spinner-recorded-moments-v1'||raw.kind!=='recorded-offline-data'||!raw.cases.length)throw new Error('Unsupported recording packet.');
+  if(!recordedMoments(raw)||raw.schemaVersion!=='mass-spinner-recorded-moments-v1'||raw.kind!=='recorded-offline-data'||!raw.cases.length)throw new Error('This recording format is not supported.');
   const data=raw;
   const select=$('replay-case') as HTMLSelectElement,time=$('replay-time') as HTMLInputElement;
   const distributions=setupResearchDistributions(fetcher);
@@ -42,7 +42,7 @@ export async function setupResearchViewer(fetcher=fetch){
   function update(){
    const c=data.cases.find(c=>c.id===select.value)!,state=c.states[Number(time.value)];
    $('replay-time-value').textContent=`${(state.timeS*1e6).toPrecision(4)} µs · saved step ${state.step}`;
-   $('replay-status').textContent=`Recorded Julia run · ${c.id} · qualification WITHHELD. No solver runs when you scrub.`;
+   $('replay-status').textContent=`Saved Julia run · ${c.id}. Accuracy is not established. Moving the timeline does not run the solver.`;
    $('replay-scale').textContent=`40/84 u ions · V₀ = ${data.normalization.velocityMS.toPrecision(6)} m/s · density ${data.normalization.densityM3.toExponential(1)} m⁻³ per species · n=${c.config.nAxis}, q=${c.config.cubatureAxis}, α=${c.config.alpha}.`;
    const tensors=data.species.map((s,i)=>{
     const box=element('div'),pre=element('pre',state.temperatureTensorEV[i].map(row=>row.map(v=>v.toPrecision(5).padStart(11)).join(' ')).join('\n'));

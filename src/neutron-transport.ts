@@ -125,11 +125,11 @@ export function simulateFirstFlightNeutrons(config:FirstFlightConfig){
   perLayer,detectionRateS,fractionResidual,sourceEnergyMeV,
   convergence:{angularSamples:2*angularSamples,doubledSamplesMaxFractionChange},
   assumptions:[
-   'Isotropic monoenergetic point source on axis. Layers share the circular entrance radius; straight rays may leave the cylindrical side wall.',
-   'User-supplied macroscopic total/absorption cross sections apply at the declared source energy. Total = nonmultiplying scattering + absorption; fission and neutron multiplication are unsupported.',
-   'Only first interactions are resolved. First-scattered neutrons remain unresolved; they may subsequently escape, be absorbed or reach a detector. These outputs are not total flux or a complete shielding calculation.',
-   'Detection is an assumed conditional probability per first absorption. It excludes scattered-neutron response, background, dead time and electronics.',
-   'The source energy labels uncollided neutrons. No outgoing energy spectrum, secondary photons, deposited heat, activation, dose or displacement damage is predicted.',
-   'The doubled midpoint comparison estimates angular discretization sensitivity; it is not a certified error bound or nuclear-data uncertainty.',
+   'The on-axis point source emits neutrons with one energy equally in all directions. Layers share the circular entrance radius. Straight paths can leave the cylindrical side wall.',
+   'Specified macroscopic total/absorption cross sections apply at the source energy. Total = nonmultiplying scattering + absorption. The model does not include fission or neutron multiplication.',
+   'The calculation includes first interactions only. Paths after the first scattering event remain unresolved. Those neutrons can later escape, undergo absorption or reach a detector. These outputs do not give total flux or a complete shielding calculation.',
+   'Detection uses a specified probability per first absorption. It does not include scattered-neutron response, background, dead time or electronics.',
+   'The source energy applies to neutrons without collisions. The model does not calculate outgoing energy spectra, secondary photons, deposited heat, activation, dose or displacement damage.',
+   'The doubled midpoint comparison gives an estimate of angular discretization sensitivity. It does not give a certified error bound or nuclear-data uncertainty.',
   ]};
 }
