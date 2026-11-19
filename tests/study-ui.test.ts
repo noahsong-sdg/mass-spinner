@@ -74,7 +74,7 @@ test('cancelling a partially completed study publishes nothing and a subsequent 
  const late=h.pending[1];await h.get('cancel-study').click();
  assert.equal(late.signal.aborted,true);resolve(late);await cancelled;
  assert.equal(h.get('study-plots').children.length,0);
- assert.match(h.get('study-status').textContent,/cancelled; no partial result published/);
+ assert.match(h.get('study-status').textContent,/cancelled. No partial result was saved/);
  await h.get('export-study').fire('click');assert.equal(h.blobs.length,0);
 
  h.setConfig({...h.getConfig(),voltage:500});

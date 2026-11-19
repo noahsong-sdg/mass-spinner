@@ -11,7 +11,7 @@ test('tutorial reconnects after simulator reload and reports rejected actions ho
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
  await page.locator('#fuel-motion-mode').selectOption('equilibrium');
  await reader.locator('[data-guide-action="cutPower"]').click();
- await expect(reader.locator('#reader-status')).toContainText('Choose Coupled separation or Coupled spin-up');
+ await expect(reader.locator('#reader-status')).toContainText('Before you cut power, select Coupled separation or Coupled spin-up');
  await expect(page.locator('#fuel-motion-mode')).toHaveValue('equilibrium');expect(errors).toEqual([]);
  await reader.close();
 });
@@ -46,10 +46,10 @@ test('reloading while a tutorial action waits reports interruption rather than r
  // Hold the accepted-result gate closed without changing any physical input.
  await page.locator('#fuel-export').evaluate((button:HTMLButtonElement)=>{button.disabled=true;});
  await reader.locator('[data-guide-action="spin"]').first().click();
- await expect(reader.locator('#reader-status')).toHaveText('Waiting for the computed run and controls…');
+ await expect(reader.locator('#reader-status')).toHaveText('Waiting for the calculated run and controls…');
  await page.reload();
- await expect(reader.locator('#reader-status')).toContainText('Interrupted by simulator reload.');
+ await expect(reader.locator('#reader-status')).toContainText('The simulator reloaded.');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await expect(reader.locator('#reader-status')).toContainText('may have executed');
+ await expect(reader.locator('#reader-status')).toContainText('action status is unknown');
  await reader.close();
 });

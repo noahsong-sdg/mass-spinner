@@ -28,7 +28,7 @@ test('opening an optional explanation never launches a run',t=>{
  const explanation=doc.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
  explanation.open=true;assert.equal(explanation.open,true);assert.equal(opened,0);
  assert.equal(win.location.pathname,'/start.html');
- assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run may differ.*unpowered or short run/);
+ assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
 });
 
 test('the enhanced reader remains compatible with guide pages without experiment markup',t=>{

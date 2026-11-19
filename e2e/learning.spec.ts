@@ -33,7 +33,7 @@ test('heat and collection illustrations explain direction and inventory with acc
  await expect(heat.locator('[data-heat-reading]')).toContainText('flows inward');
  await heat.getByRole('button',{name:'Pause motion',exact:true}).click();await expect(heat).toHaveAttribute('data-motion','paused');
  await info.attach('heat-direction',{body:await heat.screenshot(),contentType:'image/png'});
- await heat.getByRole('button',{name:'Same temperature',exact:true}).click();await expect(heat.locator('[data-heat-reading]')).toContainText('no conductive heat flow');
+ await heat.getByRole('button',{name:'Same temperature',exact:true}).click();await expect(heat.locator('[data-heat-reading]')).toContainText('no heat flow by conduction');
  expect(await heat.locator('.heat-flow:visible').count()).toBe(0);
  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  await page.emulateMedia({reducedMotion:'reduce'});await page.reload();await expect(heat.locator('[data-heat-motion]')).toBeEnabled();

@@ -123,8 +123,8 @@ test('a current edit at another cursor branches from accepted history rather tha
 
 test('thermal trajectory explanations scope the reference and distinguish work from heat',async t=>{
  const f=fixture(t);await f.start();f.thermal(true);await f.ui.run();
- f.change('fuel-plot','separation','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/evolving gas temperature/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/reference retains its initial fixed temperature/);
- f.change('fuel-plot','heat','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/Mechanical ledger/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/numerical dissipation is not heat/);
+ f.change('fuel-plot','separation','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/Gas transport and temperature changes have an effect on radial separation/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/reference keeps its initial fixed temperature/);
+ f.change('fuel-plot','heat','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/Drive work supplies kinetic energy/);assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation').textContent,/Numerical dissipation is not heat/);
  const assumptions=f.ui.nodes.info.querySelector(':scope > ul');assert.ok(assumptions);
  assert.match(assumptions.textContent,/Uniform-inertia reference:/);assert.match(assumptions.textContent,/Coupled trajectory:/);
 });

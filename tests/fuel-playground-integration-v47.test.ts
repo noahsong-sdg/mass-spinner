@@ -77,7 +77,7 @@ test('native range serialization preserves exact log defaults without masking ge
 
 test('mode selection reveals its diagnostic geometry without rerunning physics or replacing the user camera',async t=>{
  const f=fixture(t);await f.start();const result=f.ui.latest.result,requests=f.requests.length,v=f.viewers[0],pose=clone(v.pose);
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue: ions'],['flow','tracers','dashed routes'],['transport','both','equal-count']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','azimuthal average']] as const){
   f.change('fuel-motion-mode',mode,'change');
   assert.equal(f.node('fuel-view-representation').value,representation);assert.equal(v.built.motion.group.visible,true);
   assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,representation==='both');
@@ -159,7 +159,7 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
  assert.ok(opened.includes('plots'));
  f.change('fuel-application','pump','change');await f.ui.run();action(5,'Open collection experiment');
- assert.match(f.node('guide-status').textContent,/Choose Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
+ assert.match(f.node('guide-status').textContent,/select Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
 test('reading links use accepted physics results and focus the real collision, drag and heat controls',async t=>{
@@ -200,7 +200,7 @@ test('reading links use accepted physics results and focus the real collision, d
 test('a standalone guide plot link waits for accepted results and cancels if another action is chosen',async t=>{
  const f=fixture(t);const host=f.window.document.createElement('div');f.window.document.body.append(host);
  const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated(){}});
- guide.launch('composition');assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);
+ guide.launch('composition');assert.match(f.node('guide-status').textContent,/Waiting for the calculated run/);
  await f.start();await flush();assert.equal(f.node('fuel-plot').value,'composition');
  f.change('fuel-currentA',.04);guide.launch('composition');guide.launch('current');
  f.change('fuel-plot','spin','change');await f.ui.run();await flush();
@@ -279,7 +279,7 @@ test('conditional comparison buttons leave accepted drive history and pinned bas
  for(const kind of ['temperature','rotation','collection']){
   f.node(`fuel-compare-${kind}`).click();assert.ok(f.node('fuel-learning-comparisons').querySelector('svg'));
   assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
-  assert.match(f.node('fuel-learning-comparisons').textContent,/no drive, heating or extraction prediction/);
+  assert.match(f.node('fuel-learning-comparisons').textContent,/do not predict drive, heating or extraction/);
  }
  assert.equal(JSON.stringify(f.ui.latest),before);assert.equal(f.requests.length,count);assert.equal(f.builds.length,buildCount);
  assert.equal(f.ui.nodes.render.classList.contains('fuel-comparing'),true);
@@ -405,11 +405,11 @@ test('transport seek updates the plotted profiles, cellwise probes and actual ne
  const light=sample.lightMass[cell]*sample.lightMass.length,heavy=sample.heavyMass[cell]*sample.heavyMass.length,total=x*light+(1-x)*heavy,probe=v.built.tools.sampleAt(radius);
  close(probe.densityM3,r.config.pressurePa/(1.380649e-23*r.config.gasK)*total);close(probe.lightFraction,x*light/total);close(probe.timeS,sample.timeS);close(probe.speedMS,sample.neutralRadS*radius);
  assert.equal(v.built.motion.group.children.filter((o:any)=>o.name==='Schematic throughput packets').every(o=>!o.visible),true);
- assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/no local fluid momentum or extraction solution/);
+ assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/does not calculate local fluid momentum or extraction/);
 });
 
 test('operating-map cells apply real accepted physical configurations and recompute meshes deliberately',async t=>{
- const f=fixture(t);await f.start();const generate=[...f.ui.nodes.view.querySelectorAll('button')].find(button=>button.textContent==='Generate')!;generate.click();await flush();
+ const f=fixture(t);await f.start();const generate=[...f.ui.nodes.view.querySelectorAll('button')].find(button=>button.textContent==='Calculate')!;generate.click();await flush();
  const request=f.requests.at(-1).record;assert.equal(request.kind,'fuel-operating-map');assert.equal(request.config.currentA,.03);
  const cells=[...f.ui.nodes.view.querySelectorAll('.fuel-map-cell')] as HTMLButtonElement[];assert.equal(cells.length,49);assert.equal(f.ui.latest.result.config.currentA,.03);
  const point=cells.find(button=>button.dataset.status==='valid'&&Number(button.dataset.ix)>0&&Number(button.dataset.iy)>0)!;assert.ok(point);assert.match(point.getAttribute('aria-label')!,/Magnetic field.*T.*Discharge current.*A/);
@@ -436,7 +436,7 @@ test('Transport cut plots show the current inventory rather than the final equil
  const f=fixture(t);await f.start();f.change('fuel-motion-mode','transport','change');f.change('fuel-plot','cut','change');f.change('fuel-motion-time',0);
  const metric=()=>parseFloat(f.ui.nodes.plots.querySelector('.fuel-metrics strong')!.textContent!);close(metric(),100*f.ui.latest.result.config.lightFraction,.001);
  f.change('fuel-motion-time',1);close(metric(),100*sampleFuelTransport(f.ui.latest.result.transport,1).collection.innerLightPurity!,.001);
- assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/Current closed-wall inventory/);
+ assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/Closed-wall inventory at the selected time/);
 });
 
 
@@ -448,7 +448,7 @@ test('a standalone pin link waits for native comparison readiness after result e
  const clear=f.window.document.querySelector<HTMLButtonElement>('.fuel-comparison-bar button:nth-child(2)')!;
  assert.ok(clear);assert.equal(f.node('fuel-export').disabled,false);
  pin.disabled=true;guide.launch('pin');
- assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);assert.equal(clear.disabled,true);
+ assert.match(f.node('guide-status').textContent,/Waiting for the calculated run/);assert.equal(clear.disabled,true);
  pin.disabled=false;await flush();assert.equal(clear.disabled,false,'pin only after accepted comparison tools are ready');
  assert.equal(f.node('guide-status').textContent,'');
 });

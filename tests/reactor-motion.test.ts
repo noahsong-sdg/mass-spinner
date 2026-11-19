@@ -71,7 +71,7 @@ test('live scene moves particles toward target and hides reactions independently
  f.layer.update({...f.state,particleRateS:0,neutronRateS:0,depositedPowerW:0},f.root);assert.equal(f.count(0),0);assert.equal(f.count(3),0);
 });
 test('pending, invalid, paused and reduced-motion states never keep moving stale quantitative output',t=>{
- const f=fixture(t);f.layer.update(f.state,f.root,true);assert.equal(f.layer.group.visible,false);assert.equal(f.layer.running,false);assert.match(f.panel.textContent!,/Waiting/);
+ const f=fixture(t);f.layer.update(f.state,f.root,true);assert.equal(f.layer.group.visible,false);assert.equal(f.layer.running,false);assert.match(f.panel.textContent!,/target calculation is in progress/);
  f.layer.update(null,f.root);assert.equal(f.panel.hidden,true);assert.equal(f.layer.group.visible,false);
  f.layer.update(f.state,f.root);f.panel.querySelector<HTMLButtonElement>('button')!.click();const before=f.positions(0);f.layer.tick(.05);assert.deepEqual(f.positions(0),before);assert.equal(f.layer.running,false);assert.ok(f.changes>0);
  const reduced=fixture(t,true),still=reduced.positions(0);reduced.layer.tick(.05);assert.deepEqual(reduced.positions(0),still);assert.equal(reduced.layer.running,false);assert.ok(reduced.count(0)>0,'static equivalent remains visible');
@@ -81,7 +81,7 @@ test('area changes beam radius; refinement cannot exceed fixed GPU buffers; reve
  const before=radius();f.layer.update({...f.state,areaM2:f.state.areaM2*4},f.root);assert.ok(Math.abs(radius()/before-2)<1e-6);
  const many:BeamMotionState={...f.state,heatFacesWM2:Array.from({length:1025},()=>-1000),heatGeometry:{faceDepthM:Array.from({length:1025},(_,i)=>i*2e-6/1024),filmThicknessM:1e-6,backingThicknessM:1e-6}};f.layer.update(many,f.root);
  const heat=f.layer.group.children[3] as THREE.LineSegments;assert.ok(heat.geometry.drawRange.count<=heat.geometry.getAttribute('position').count);assert.equal(f.panel.dataset.heatDirection,'toward target');
- f.layer.update({kind:'power-reference'},f.root);assert.equal(f.panel.dataset.basis,'power-reference');assert.equal(f.count(0),0);assert.match(f.panel.textContent!,/not calculated/);
+ f.layer.update({kind:'power-reference'},f.root);assert.equal(f.panel.dataset.basis,'power-reference');assert.equal(f.count(0),0);assert.match(f.panel.textContent!,/does not calculate plasma motion, neutron transport or heat flow/);
  assert.equal(f.panel.querySelector<HTMLInputElement>('[aria-label="Show beam"]')!.parentElement!.hidden,true);
 });
 

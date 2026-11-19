@@ -37,8 +37,8 @@ test('optional panel stays idle, samples actual coupled workers sequentially and
  f.resolve(2);await pending;
  assert.equal(f.view.samples!.length,3);assert.equal(f.doc.querySelectorAll('svg').length,3);
  assert.ok(f.view.samples!.every((s:any)=>s.rows.length===41&&!s.experimentallyQualified&&!s.numericallyQualified));
- assert.match(f.view.element.textContent!,/sampled minimum\/maximum, not an exhaustive envelope/);
- assert.match(f.view.element.textContent!,/Numerical and experimental accuracy remain unqualified/);
+ assert.match(f.view.element.textContent!,/sample limits, not all possible results/);
+ assert.match(f.view.element.textContent!,/Numerical and experimental accuracy are not established/);
  assert.equal(accepted.result.config.dragHz,2,'sensitivity leaves the accepted scenario unchanged');
 });
 
@@ -87,7 +87,7 @@ test('parent playground invalidates on sliders and cancels on deactivation and d
  button.click();assert.equal(f.requests.length,3);
  const gas=f.doc.getElementById('fuel-gasK') as HTMLInputElement;gas.value='600';gas.dispatchEvent(new f.window.Event('input'));
  assert.equal(f.requests[2].signal.aborted,true);f.resolve(2);await flush();assert.equal(detail.querySelectorAll('svg').length,0);
- assert.match(detail.textContent!,/Setup changed/);
+ assert.match(detail.textContent!,/setup changed/);
  pending=ui.run();f.resolve(3);await pending;button.click();assert.equal(f.requests.length,5);
  ui.dispose();assert.equal(f.requests[4].signal.aborted,true);f.resolve(4);await flush();
  assert.equal(f.doc.querySelector('.public-sensitivity'),null);assert.equal(f.requests.length,5);

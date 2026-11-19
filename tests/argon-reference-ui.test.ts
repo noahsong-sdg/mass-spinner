@@ -20,8 +20,8 @@ test('reference loads on demand, exposes every condition and plots actual stored
  const select=doc.querySelector('select')!;assert.equal(select.options.length,8);assert.equal(select.disabled,false);
  assert.equal(doc.querySelectorAll('svg').length,1);assert.match(doc.querySelector('svg')!.getAttribute('aria-label')!,/apparent speed.*Sightline offset/);
  select.value=select.options[7].value;select.dispatchEvent(new window.Event('change'));
- assert.match(view.element.textContent,/experimental accuracy unqualified/);assert.match(view.element.textContent,/not local gas speeds/);
- assert.match(view.element.textContent,/Lithium sliders do not change/);assert.match(view.element.textContent,/Ideal ring contacts/);
+ assert.match(view.element.textContent,/Experimental accuracy is not established/);assert.match(view.element.textContent,/not local gas speeds/);
+ assert.match(view.element.textContent,/Lithium sliders do not change/);assert.match(view.element.textContent,/ideal ring contacts/);
  assert.equal(doc.querySelector('code')!.textContent,'scientific/nonrigid-v98/evidence.tar.gz');
  await view.load();assert.equal(calls,1);view.dispose();assert.equal(doc.querySelector('.argon-reference'),null);
 });

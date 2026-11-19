@@ -103,7 +103,7 @@ test('gas display opens with 3D samples and a transparent longitudinal section, 
  const field=tools.group.getObjectByName('Axially uniform gas field')!;assert.equal(field.visible,true);
  for(const mesh of field.children as THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>[]){assert.equal(mesh.geometry.getIndex()!.count,6);assert.equal(mesh.material.transparent,true);assert.equal(mesh.material.depthWrite,false);}
  assert.equal((host.querySelector('#fuel-view-visible') as HTMLInputElement).checked,true);
- assert.equal(tools.legend.layer,'density');assert.match(host.textContent!,/not visible emission/);
+ assert.equal(tools.legend.layer,'density');assert.match(host.textContent!,/not visible light/);
  const representation=host.querySelector('#fuel-view-representation') as HTMLSelectElement;representation.value='field';representation.dispatchEvent(new dom.window.Event('change'));
  assert.equal(tools.motion.group.visible,false);assert.equal(tools.group.getObjectByName('Axially uniform gas field')!.visible,true);
  for(const mesh of field.children as THREE.Mesh<THREE.BufferGeometry,THREE.MeshBasicMaterial>[]){assert.ok(mesh.geometry.getIndex()!.count>6);assert.equal(mesh.material.transparent,false);assert.equal(mesh.material.depthWrite,true);}

@@ -18,7 +18,7 @@ const template=await new GLTFLoader().parseAsync(bytes.buffer.slice(bytes.byteOf
 test('external source clears the vessel and display base and describes inward conventional current',()=>{
  const circuit=createFuelCircuit(defaults),body=circuit.getObjectByName('Prescribed discharge current source')!,box=new THREE.Box3().setFromObject(body),R=defaults.radiusM;
  assert.ok(box.max.x<-1.3*R,'source outside the vessel radius on the camera-facing side');assert.ok(box.min.y>-1.3*R,'source above the display base');
- const description=FUEL_COMPONENTS.find(c=>c.id==='electrodes')!.purpose;assert.match(description,/inward from the wall anode/);
+ const description=FUEL_COMPONENTS.find(c=>c.id==='electrodes')!.purpose;assert.match(description,/inward, from the wall anode/);
  for(const sign of [-1,1]){const pin=circuit.getObjectByName(sign>0?'Positive supply terminal':'Negative supply terminal')!;assert.ok(pin.position.x>box.min.x&&pin.position.x<box.max.x);assert.ok(pin.position.y>box.max.y);}
  circuit.traverse((o:any)=>{o.geometry?.dispose();o.material?.dispose();});
 });

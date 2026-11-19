@@ -20,7 +20,7 @@ test('actual comparison CLI supports declared no-fit studies, blocks leakage and
  save();const output=join(dir,'valid.json'),accepted=run(output);
  assert.equal(accepted.status,0,accepted.stderr);
  const report=JSON.parse(readFileSync(output,'utf8'));assert.equal(report.status,'consistent');assert.equal(report.calibrationCount,0);
- assert.match(report.interpretation,/declarations.*not proof/);
+ assert.match(report.interpretation,/declarations.*do not show that inputs preceded exposure to measurements/);
  const original=readFileSync(output);assert.notEqual(run(output).status,0);assert.deepEqual(readFileSync(output),original);
  predictions.calibratedOn=['unfitted'];save();const blocked=join(dir,'blocked.json');
  assert.equal(run(blocked).status,0);assert.equal(JSON.parse(readFileSync(blocked,'utf8')).status,'blocked');

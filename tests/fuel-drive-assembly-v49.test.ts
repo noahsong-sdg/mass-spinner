@@ -84,7 +84,7 @@ test('cutaway presentation and drive controls leave accepted physics untouched a
  const wall=built.scene.getObjectByName('Vessel_pressure_wall')??built.scene.getObjectByName('Vessel pressure wall');
  assert.equal((wall as THREE.Mesh).material.clippingPlanes.length,1);
  const input=host.querySelector('#fuel-view-drive') as HTMLSelectElement;input.value='force';input.dispatchEvent(new dom.window.Event('change'));assert.equal(changes,1);
- assert.match(host.querySelector('.fuel-drive-legend')!.textContent!,/prescribed B and radial current/);assert.equal(built.tools.drive.group.getObjectByName('B').visible,false);
+ assert.match(host.querySelector('.fuel-drive-legend')!.textContent!,/B and radial current are specified inputs/);assert.equal(built.tools.drive.group.getObjectByName('B').visible,false);
  assert.equal(JSON.stringify(result),before);
  let disposed=0;built.tools.drive.group.traverse((o:any)=>{o.geometry?.addEventListener('dispose',()=>disposed++);});built.tools.dispose();assert.ok(disposed>0);const n=disposed;built.tools.dispose();assert.equal(disposed,n);release(built.scene);dom.window.close();
  const scene=new THREE.Group();assert.throws(()=>attachFuelAssembly(scene,new THREE.Group(),defaults),/Incomplete/);

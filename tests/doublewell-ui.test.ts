@@ -49,8 +49,8 @@ test('actual kinetic controls map SI values, log density and relative source siz
  assert.equal(initial.dt,DEFAULT_DOUBLEWELL.dt);assert.equal(initial.duration,DEFAULT_DOUBLEWELL.duration);
  assert.equal(initial.sourceRadius,DEFAULT_DOUBLEWELL.sourceRadius);
  assert.equal(initial.collisions,true);assert.equal(initial.boundary,'open');
- assert.match(registry.get('doublewell-controls')!.children[0].textContent,/spatial and particle convergence is not established/);
- assert.match(registry.get('doublewell-controls')!.children[0].textContent,/not calibrated product-purity/);
+ assert.match(registry.get('doublewell-controls')!.children[0].textContent,/no established spatial or particle convergence/);
+ assert.match(registry.get('doublewell-controls')!.children[0].textContent,/do not give experimentally calibrated product purity/);
  assert.ok(h.get('particlesPerSpecies').options.some(option=>option.value==='2048'));
  assert.ok(h.get('particlesPerSpecies').options.some(option=>option.value==='4096'));
  assert.equal(h.get('electronTemperatureEV').min,'0.5');

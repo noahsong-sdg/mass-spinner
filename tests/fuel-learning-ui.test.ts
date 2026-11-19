@@ -32,7 +32,7 @@ test('learning controls start pending without calculations, plots or a qualifica
  for(const button of f.buttons()){assert.equal(button.disabled,true);button.click();}
  assert.equal(f.comparisons,0);
  assert.equal(f.node('fuel-input-coverage').querySelector('a')!.getAttribute('href'),'/qualification');
- assert.match(f.node('fuel-input-coverage').textContent!,/Three input nodes, not a slider range/);
+ assert.match(f.node('fuel-input-coverage').textContent!,/These results do not show accuracy throughout the slider range or for local composition/);
 });
 
 test('coverage identifies only explicit historical input nodes and retains the independent-refinement limitation',t=>{
@@ -40,9 +40,9 @@ test('coverage identifies only explicit historical input nodes and retains the i
  for(const currentA of [.015,.03,.06]){
   f.tools.update(result({currentA}),{},'composition');
   assert.equal(f.node('fuel-input-coverage').dataset.match,'true');
-  assert.match(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Matches screened inputs/);
-  assert.match(f.node('fuel-input-coverage').textContent!,/this run has not been independently refined/);
-  assert.match(f.node('fuel-input-coverage').textContent!,/No experimental accuracy claim/);
+  assert.match(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Matches tested inputs/);
+  assert.match(f.node('fuel-input-coverage').textContent!,/does not include independent refinement of the current run/);
+  assert.match(f.node('fuel-input-coverage').textContent!,/Experimental accuracy is unknown/);
  }
  const candidates:any[]=[result({currentA:.04}),result({gasK:501}),result()];
  candidates[2].transport.cells=256;
@@ -51,8 +51,8 @@ test('coverage identifies only explicit historical input nodes and retains the i
  for(const candidate of candidates){
   f.tools.update(candidate,{},'composition');
   assert.equal(f.node('fuel-input-coverage').dataset.match,'false');
-  assert.match(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Exploratory inputs/);
-  assert.match(f.node('fuel-input-coverage').textContent!,/numerical accuracy for these settings is unqualified/);
+  assert.match(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Inputs outside the tested cases/);
+  assert.match(f.node('fuel-input-coverage').textContent!,/numerical accuracy is unknown/);
  }
 });
 
@@ -61,8 +61,8 @@ test('legacy results without operating metadata never inherit historical coverag
  for(const candidate of [legacy,simulateFuelCentrifuge({...DEFAULT_FUEL_CENTRIFUGE})]){
   f.tools.update(candidate,{},'composition');
   assert.equal(f.node('fuel-input-coverage').dataset.match,'false');
-  assert.doesNotMatch(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Matches screened/);
-  assert.match(f.node('fuel-input-coverage').textContent!,/No experimental accuracy claim/);
+  assert.doesNotMatch(f.node('fuel-input-coverage').querySelector('summary')!.textContent!,/Matches tested/);
+  assert.match(f.node('fuel-input-coverage').textContent!,/Experimental accuracy is unknown/);
  }
 });
 
@@ -70,16 +70,16 @@ test('local composition, density and inventory cuts distinguish evolving samples
  const f=fixture(t),r:any=result(),sample={neutralRadS:7000,timeS:.4,lightMass:[.2,.8],heavyMass:[.8,.2]};
  for(const topic of ['composition','profile','cut']){
   f.tools.update(r,sample,topic);
-  assert.match(f.node('fuel-result-scope').textContent!,/Evolving trajectory/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Time-dependent result/);
   assert.match(f.node('fuel-result-scope').textContent!,/Temperature fixed.*500 K/);
-  assert.match(f.node('fuel-result-scope').textContent!,/Closed inventory.*no extraction/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Closed vessel.*no extraction/);
   f.tools.update(r,{},topic);
   assert.match(f.node('fuel-result-scope').textContent!,/Equilibrium.*reference/);
-  assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Temperature evolves/);
+  assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Temperature changes/);
  }
  r.transport.operation.thermal.enabled=true;
  f.tools.update(r,{...sample,thermal:{gasK:650}},'composition');
- assert.match(f.node('fuel-result-scope').textContent!,/Temperature evolves/);
+ assert.match(f.node('fuel-result-scope').textContent!,/Temperature changes/);
 });
 
 test('thermal endpoint profiles retain trajectory and evolving-temperature scope even outside animated gas modes',t=>{
@@ -88,8 +88,8 @@ test('thermal endpoint profiles retain trajectory and evolving-temperature scope
   // An equilibrium/flow display state has no cell inventories, but these plots
   // still read the endpoint of the accepted thermal trajectory.
   f.tools.update(r,{neutralRadS:9000,timeS:1},topic);
-  assert.match(f.node('fuel-result-scope').textContent!,/Evolving trajectory/);
-  assert.match(f.node('fuel-result-scope').textContent!,/Temperature evolves/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Time-dependent result/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Temperature changes/);
   assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Temperature fixed/);
  }
 });
@@ -98,13 +98,13 @@ test('time-history and scenario labels follow the plotted calculation rather tha
  const f=fixture(t),r:any=result();r.transport.operation.thermal.enabled=true;
  for(const topic of ['separation','spin','heat','thermal','momentum','inertia']){
   f.tools.update(r,{},topic);
-  assert.match(f.node('fuel-result-scope').textContent!,/Evolving trajectory/);
-  assert.match(f.node('fuel-result-scope').textContent!,/Temperature evolves/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Time-dependent result/);
+  assert.match(f.node('fuel-result-scope').textContent!,/Temperature changes/);
  }
  f.tools.update(r,{},'pump');assert.match(f.node('fuel-result-scope').textContent!,/Conditional flow reference/);
- assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Closed inventory/);
- f.tools.update(r,{},'inventory');assert.match(f.node('fuel-result-scope').textContent!,/Fuel-loop scenario/);
- assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Closed inventory/);
+ assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Closed vessel/);
+ f.tools.update(r,{},'inventory');assert.match(f.node('fuel-result-scope').textContent!,/Fuel-loop reference/);
+ assert.doesNotMatch(f.node('fuel-result-scope').textContent!,/Closed vessel/);
 });
 
 test('one-click comparisons use accepted data, invoke pause deliberately and never alter inputs or sampled state',t=>{
@@ -116,7 +116,7 @@ test('one-click comparisons use accepted data, invoke pause deliberately and nev
   assert.equal(f.buttons().filter(b=>b.getAttribute('aria-pressed')==='true').length,1);
   assert.equal(f.node('fuel-learning-comparisons').querySelectorAll('svg').length,1);
   assert.match(f.node('fuel-learning-comparisons').textContent!,/Isothermal equilibrium references/);
-  assert.match(f.node('fuel-learning-comparisons').textContent!,/no drive, heating or extraction prediction/);
+  assert.match(f.node('fuel-learning-comparisons').textContent!,/do not predict drive, heating or extraction/);
   for(const path of f.node('fuel-learning-comparisons').querySelectorAll('path'))assert.doesNotMatch(path.getAttribute('d')??'',/NaN|Infinity/);
   assert.equal(JSON.stringify({r,sample}),before);
  }

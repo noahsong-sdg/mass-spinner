@@ -90,7 +90,7 @@ test('offered 8ns resolves the supported high charge/mass orbit point without we
 });
 test('grossly invalid curved-drift settings are labeled as extrapolation',()=>{
  const c={...DEFAULT_GEOMETRY,massA:200,magneticT:.02,temperatureEV:30,beamEV:2000,curvatureRadius:.2,length:.1};
- const result=geometry('curved',c);assert.match(modelValidity('curved',c,result),/Outside guiding-centre approximation/);
+ const result=geometry('curved',c);assert.match(modelValidity('curved',c,result),/Outside the guiding-center approximation/);
  assert.match(modelValidity('curved',DEFAULT_GEOMETRY,geometry('curved',DEFAULT_GEOMETRY)),/Requires rho/);
 });
 test('comparison cards retain the actual independent operating points and model boundaries',async t=>{
@@ -116,7 +116,7 @@ test('recorded case and time controls display exact saved tensors and prevent fa
  const viewer=await setupResearchViewer(async()=>({ok:true,json:async()=>data}));assert.ok(viewer);
  $('replay-case').value=data.cases[2].id;$('replay-case').events.change();
  $('replay-time').value='20';$('replay-time').events.input();
- assert.match($('replay-status').textContent,/Recorded Julia run/);assert.match($('replay-status').textContent,/WITHHELD/);
+ assert.match($('replay-status').textContent,/Saved Julia run/);assert.match($('replay-status').textContent,/Accuracy is not established/);
  assert.equal($('replay-tensors').children[0].children[1].textContent,data.cases[2].states[20].temperatureTensorEV[0].map((row:number[])=>row.map(v=>v.toPrecision(5).padStart(11)).join(' ')).join('\n'));
  assert.equal($('replay-plots').children.length,3);
  await setupResearchViewer(async()=>({ok:false}));assert.equal($('replay-case').disabled,true);assert.equal($('replay-plots').children.length,0);

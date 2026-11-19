@@ -82,6 +82,6 @@ test('III failure estimates disclose the absence of coupled transport and energy
  close(a.budgets.diffusionRMSM,Math.sqrt(.0008));
  assert.ok(b.budgets.noChargeExchangeProbability<1e-20);
  assert.ok(b.budgets.radiatedEVPerInitialIon>1e4);
- assert.match(b.assumptions.join(' '),/not a computed plasma temperature drop/);
+ assert.match(b.assumptions.join(' '),/not a calculated plasma temperature decrease/);
  assert.match(b.assumptions.join(' '),/do not modify/);
 });

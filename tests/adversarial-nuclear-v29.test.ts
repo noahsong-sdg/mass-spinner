@@ -85,7 +85,7 @@ test('decay dataset qualification stays in closed model info and preserves paper
  const previous=globalThis.document;globalThis.document=dom.window.document;
  try{
   setupBlanketExplorer(document.querySelector('main'));
-  const note=[...document.querySelectorAll('p')].find(p=>p.textContent?.includes('Decay inputs retain legacy'));
+  const note=[...document.querySelectorAll('p')].find(p=>p.textContent?.includes('The inputs combine older paper/ENSDF half-lives'));
   assert.ok(note);const details=note.closest('details');assert.ok(details);
   assert.equal(details.querySelector('summary')?.textContent,'Model info');assert.equal(details.open,false);
   assert.match(note.textContent!,/64\.14\(5\).*64\.93\(7\)/);

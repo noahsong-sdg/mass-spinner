@@ -17,8 +17,8 @@ test('energy readers explain the separation and cooling decision before introduc
   let lead='';for(let node=heading.nextElementSibling;node&&!node.classList.contains('equation');node=node.nextElementSibling)lead+=` ${node.textContent}`;
   assert.match(lead,/random thermal motion|random thermal\s+motion/);
   assert.match(lead,/same rotation speed|given rotation speed/,'temperature effect must be conditional on rotation');
-  assert.match(lead,/cooling/);assert.match(lead,/improve separation|weaker mass sorting/);
-  assert.match(lead,/does extra current|extra rotation outweighs/,'motivate a decision, not just an energy bookkeeping exercise');
+  assert.match(lead,/[Cc]ooling/);assert.match(lead,/decreases separation|less separation/);
+  assert.match(lead,/More current can increase speed and temperature|Does more current still increase separation when it increases temperature/,'motivate a decision, not just an energy bookkeeping exercise');
  }
 });
 
@@ -35,9 +35,9 @@ test('the website renders every guide equation and its derivation, with accessib
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
  }
  assert.match(doc.getElementById('drive-description')!.textContent!,/inward to the left.*counterclockwise torque/);
- assert.match(doc.getElementById('drive-description')!.textContent!,/Hollow circles represent ions; filled dots represent neutral atoms/);
- assert.match(doc.body.textContent!,/Ideal equilibrium example, not your run/);
- assert.match(doc.body.textContent!,/not a reconstruction/);
+ assert.match(doc.getElementById('drive-description')!.textContent!,/Hollow circles show ions and filled dots show neutral atoms/);
+ assert.match(doc.body.textContent!,/This ideal equilibrium example is not your run/);
+ assert.match(doc.body.textContent!,/not proprietary equipment or a fusion reactor/);
  for(const topic of guideTopics){
   assert.equal(doc.getElementById(topic.id)?.textContent,topic.heading);
   assert.equal(doc.getElementById(topic.id)!.nextElementSibling?.tagName,'P','motivate the question before showing diagrams and controls');
@@ -148,10 +148,10 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  receive(ready);
  const [request,target]=messages.at(-1)! as [{type:string;action:string;requestId:string},string];
  assert.equal(request.type,'mass-spinner:guide-action');assert.equal(request.action,'work');assert.ok(request.requestId);
- assert.equal(target,'https://example.org');assert.match(status.textContent!,/Applying in the simulator/);
+ assert.equal(target,'https://example.org');assert.match(status.textContent!,/Waiting for the action result/);
  const result={type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'};
  receive(result,parent,'https://wrong.example');receive(result,win as unknown as Window);
- assert.match(status.textContent!,/Applying in the simulator/);
+ assert.match(status.textContent!,/Waiting for the action result/);
  receive(result);assert.equal(status.textContent,'Opened in the simulator.');
  assert.ok(win.document.querySelector('a[href="/start.html"]'));
  win.document.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));

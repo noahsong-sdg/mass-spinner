@@ -57,7 +57,7 @@ test('linked material edits and rejected out-of-domain edits never notify solver
  f.change('fusion-materialColumnM2',18);
  assert.deepEqual([f.node('fusion-materialColumnM2').value,f.node('coupled-filmThicknessM').value],previous);
  assert.ok(seen.length>=3);for(const density of seen)assert.ok(Math.abs(density/expected-1)<1e-12);
- assert.match(f.doc.querySelector('.material-realism [role="alert"]')!.textContent!,/outside the solver control domain/);
+ assert.match(f.doc.querySelector('.material-realism [role="alert"]')!.textContent!,/linked geometry exceeds the control limits/);
 });
 
 test('uncommitted precision drafts are not registered target inputs; real invalid solver inputs still clear',async t=>{

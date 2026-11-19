@@ -23,7 +23,7 @@ test('accepted orbit data preserve solver xyz, actual impacts and injected denom
  assert.equal(s.tracks[0].positionsM,r.species[0].paths[0].positions);
  const electric=s.fields.find(f=>f.id==='electric-radial')!;
  close(electric.values.at(-1)!,fields([orbitConfig.radius,0,0],orbitConfig).electric[0]);
- assert.match(s.unsupported.join(' '),/unweighted/);
+ assert.match(s.unsupported.join(' '),/no physical particle weights/);
 });
 test('stale, pending, model-mismatched and nonfinite requests cannot publish surfaces',()=>{
  const r=simulate(orbitConfig),q=request('rotating',orbitConfig,r);

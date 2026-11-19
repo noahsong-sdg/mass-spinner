@@ -18,7 +18,7 @@ const source={sourceRateS:2e10,sourceEnergyMeV:14.1};
 
 test('first-flight UI uses a vacuum default and exact current selected-time source',t=>{
  const {host,ui,input}=mount(t);
- assert.equal(ui.read(),null);assert.match(host.querySelector('[role=status]')!.textContent!,/No valid source/);
+ assert.equal(ui.read(),null);assert.match(host.querySelector('[role=status]')!.textContent!,/No source result is available/);
  ui.update(source);const initial=ui.read()!;
  assert.equal(initial.config.layers[0].totalMInv,0);assert.equal(initial.config.layers[0].absorptionMInv,0);
  assert.equal(initial.rates.firstAbsorbed,0);assert.equal(initial.detectionRateS,0);
@@ -79,7 +79,7 @@ test('angular-refinement disclosure runs actual model at multiple quadrature cou
  const {host,ui,input,dom}=mount(t);ui.update(source);input('total',100);input('absorption',50);
  const disclosure=[...host.querySelectorAll('details')].find(d=>d.querySelector('summary')!.textContent==='Angular refinement')!;
  disclosure.open=true;disclosure.dispatchEvent(new dom.window.Event('toggle'));
- assert.ok(disclosure.querySelector('svg'));assert.match(disclosure.textContent!,/Quadrature sensitivity only/);
+ assert.ok(disclosure.querySelector('svg'));assert.match(disclosure.textContent!,/sensitivity to angular quadrature only/);
  // Each requested coarse count returns the doubled fine result; the axis must
  // describe the actual returned quadrature, whose final count is 512.
  assert.match(disclosure.querySelector('svg')!.textContent!,/512/);
@@ -140,8 +140,8 @@ test('recorded OpenMC reference distinguishes multiple scattering from the live 
  assert.match(table.querySelector('caption')!.textContent!,/Recorded OpenMC/);
  assert.match(table.querySelector('[data-case="pure-absorption"]')!.textContent!,/0.06635/);
  assert.match(table.querySelector('[data-case="mixed"]')!.textContent!,/0.03561/);
- assert.match(host.textContent!,/Recorded multiple-scattering runs/);
- assert.match(host.textContent!,/separate from the current sliders/);
+ assert.match(host.textContent!,/recorded multiple-scattering runs/);
+ assert.match(host.textContent!,/current sliders do not change them/);
  const reference=ui.read()!.referenceEvidence;
  assert.equal(reference.historiesPerCase,500000);assert.equal(reference.fullBrowserMonteCarlo,false);
  assert.equal(reference.experimentalValidation,false);assert.equal(reference.appliesToCurrentControls,false);

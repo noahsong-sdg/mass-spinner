@@ -26,7 +26,7 @@ test('coupled UI requires explicit material mode and preserves the reference mou
  const f=fixture(t),reference=f.window.document.createElement('button');reference.textContent='Reference control';f.ui.referenceHost.append(reference);
  f.ui.update(simulateFusionBeam(DEFAULT_FUSION_BEAM));await settle();
  assert.equal(f.ui.result,null);assert.equal(f.node('coupled-export').disabled,true);
- assert.match(f.node('coupled-status').textContent,/Material stopping required/);
+ assert.match(f.node('coupled-status').textContent,/Select material stopping/);
  f.host.querySelector('.target-mode-prompt button')!.click();assert.equal(f.materialActions(),1);
  assert.equal(f.ui.referenceHost.contains(reference),true);
  f.ui.update(source());await settle();
@@ -162,7 +162,7 @@ test('pending settings retain a labeled completed snapshot and block stale expor
  f.ui.update(source({beamCurrentA:.02}));
  assert.equal(f.ui.status.phase,'pending');assert.equal(f.ui.result,accepted);assert.equal(f.updates.length,acceptedUpdates);
  assert.equal(f.statuses.at(-1).snapshot.source.beamCurrentA,.01);assert.equal(f.node('coupled-export').disabled,true);
- assert.equal(f.host.querySelectorAll('svg').length,plots);assert.match(f.node('coupled-status').textContent,/last completed scenario.*0\.01 A/);
+ assert.equal(f.host.querySelectorAll('svg').length,plots);assert.match(f.node('coupled-status').textContent,/last completed case.*0\.01 A/);
  let exports=0;const create=URL.createObjectURL;URL.createObjectURL=()=>{exports++;return 'blob:unexpected';};t.after(()=>{URL.createObjectURL=create;});
  f.node('coupled-export').dispatchEvent(new f.window.Event('click'));assert.equal(exports,0);
  f.change('coupled-time',accepted.history.length-1);assert.match(f.node('coupled-status').textContent,new RegExp(`${accepted.final.timeS} s`));
@@ -192,7 +192,7 @@ test('recorded half-space histograms retain incident denominators and never beco
  const saved=JSON.stringify(data),f=fixture(t,undefined,data);f.ui.update(source());await settle();
  assert.ok(f.ui.result);assert.equal(f.ui.result.config.implantationWeights,undefined);
  const recorded=f.node('implantation-reference-case').parentElement;
- assert.match(recorded.textContent,/mismatch retained/);assert.match(recorded.textContent,/Not a film-retention law/);
+ assert.match(recorded.textContent,/mismatch retained/);assert.match(recorded.textContent,/does not give a film-retention law/);
  assert.match(recorded.textContent,/reflected 10%/);assert.match(recorded.textContent,/beyond validation grid 60%/);
  assert.match(recorded.querySelector('svg').getAttribute('aria-label'),/Fraction of incident ions per bin/);
  f.change('implantation-reference-case',1,'change');assert.match(recorded.textContent,/beyond validation grid 50%/);

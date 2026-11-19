@@ -17,7 +17,7 @@ test('calculator identity binds its own sources and the published equation page 
  const plugin=equilibriumIdentityPlugin(process.cwd()),source=plugin.transform('',`${process.cwd()}/src/equilibrium-identity.ts`)!;
  assert.match(source,/sourceHash/);assert.match(source,/fuel-equilibrium.ts/);assert.match(source,/array-shape.ts/);assert.doesNotMatch(source,/workerProducingCode/);
  const page=equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8'));assert.match(page,/class="katex/);assert.doesNotMatch(page,/```math|katex-error/);
- assert.match(page,/try=equilibrium/);assert.match(page,/not continuous extraction yields/);
+ assert.match(page,/try=equilibrium/);assert.match(page,/do not give continuous extraction yields/);
 });
 function accepted(){
  return freeze({config:{...DEFAULT_FUEL_CENTRIFUGE},samples:[{neutralRadS:6000}]});
@@ -58,7 +58,7 @@ test('prescribed calculator is lazy and can run before any accepted trajectory',
  assert.equal(f.panel.open,false);assert.equal(f.panel.querySelectorAll('svg').length,0);
  assert.equal(f.sample().disabled,true);assert.equal(f.save().disabled,true);
  f.open();assert.equal(f.panel.querySelectorAll('svg').length,2);assert.equal(f.save().disabled,false);
- assert.match(f.panel.textContent!,/Independent of the 3D timeline/);
+ assert.match(f.panel.textContent!,/3D timeline does not change these inputs/);
  assert.match(f.panel.querySelector('p')!.textContent!,/Ideal neutral-gas reference/);
  assert.equal(f.workers,0);
 });
@@ -99,7 +99,7 @@ test('explicit sampled import uses accepted speed and mean temperature but initi
  const inventory=r.config.pressurePa*Math.PI*r.config.radiusM**2*r.config.lengthM/(1.380649e-23*r.config.gasK);
  assert.equal(Number(f.input('totalParticles').value),inventory);
  assert.equal(Number(f.input('lightFraction').value),r.config.lightFraction);
- assert.match(f.node('equilibrium-status').textContent!,/spatial gas temperature replaced by its accepted mean/);
+ assert.match(f.node('equilibrium-status').textContent!,/this reference uses the mean gas temperature/);
  assert.equal(JSON.stringify({r,state}),before);
  f.tools.setPending();f.set('edgeSpeedMS',900);f.sample().dispatchEvent(new f.doc.defaultView!.Event('click'));
  assert.equal(f.input('edgeSpeedMS').value,'900','handler itself rejects stale imports, independently of disabled-button behavior');
@@ -138,14 +138,14 @@ test('export retains reproducible inputs, model, scenario cases, selected counts
  const data=f.exports[0];assert.equal(data.schemaVersion,1);assert.equal(data.pair,'lithium');
  // The source module is an explicit null placeholder; the deployment build injects its identity.
  assert.deepEqual(data.producingCode,equilibriumProducingCode);assert.equal(data.result.model.version,'neutral-cylinder-equilibrium-v1');
- assert.match(data.units,/number fractions/);assert.match(data.result.model.scope,/closed cylindrical inventory/);
+ assert.match(data.units,/number fractions/);assert.match(data.result.model.scope,/closed cylinder/);
  assert.equal(data.result.inputs.cutFraction,.4);assert.equal(data.result.inputs.edgeSpeedMS,1000);assert.equal(data.result.inputs.temperatureK,500);
  assert.equal(data.result.selected.radiusFraction,.4);assert.ok(data.result.profiles.length>200);
  assert.ok(data.result.selected.inner.totalParticles>0);assert.ok(data.result.selected.outer.totalParticles>0);
  assert.deepEqual(data.result.inputs.massesU,[6.0151228874,7.0160034366]);
  assert.equal(data.inputScenarios.cases.length,4);assert.equal(data.inputScenarios.speedPercent,10);assert.equal(data.inputScenarios.temperaturePercent,20);
  assert.deepEqual(data.inputScenarios.cases.map((c:any)=>[c.inputs.edgeSpeedMS,c.inputs.temperatureK]),[[900,400],[900,600],[1100,400],[1100,600]]);
- assert.match(data.scenarioScope,/not a guaranteed envelope or confidence interval/);
+ assert.match(data.scenarioScope,/not guaranteed bounds or a confidence interval/);
  assert.deepEqual(f.downloads,[{href:'blob:equilibrium-1',download:'mass-spinner-equilibrium.json'}]);
  f.set('cutFraction',.6);assert.deepEqual(f.revoked,['blob:equilibrium-1']);f.save().click();f.save().click();
  assert.deepEqual(f.revoked,['blob:equilibrium-1','blob:equilibrium-2']);

@@ -21,7 +21,7 @@ test('coverage describes frozen input nodes only and never promotes current-code
   assert.equal(coverage.historicalInputMatch,true);
   assert.equal(coverage.experimentallyQualified,false);
   assert.equal(coverage.numericalQualification,'not-established-for-this-run');
-  assert.match(coverage.text,/has not been independently refined/);
+  assert.match(coverage.text,/does not include independent refinement of the current run/);
   result.config.radialDiffusivityM2S=10**Math.log10(.02);
   assert.equal(publicInputCoverage(result).historicalInputMatch,true,'floating representation changes do not extend physical coverage');
   for(const patch of [{currentA:.030001},{pair:'dt'},{radiusM:.121},{gasK:510},{durationS:.9},{radialDiffusivityM2S:.020001}])

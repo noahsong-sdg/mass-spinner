@@ -41,9 +41,10 @@ test('the rewritten guide links to existing local explanations, evidence and imp
 
 
 test('the guide connects equation symbols, plot units and experiment histories to the real controls',()=>{
- for(const phrase of ['not the speed','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n','curve slope is power in watts',
-  'signed redistribution work','finite-step','even while','New run','does not move the 3D cut marker',
-  'setup slider instead starts a new run','demonstrated sustainable operating point'])
+ for(const phrase of ['not speed immediately','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n','Curve slope is power in watts',
+  'This energy difference increases or decreases gas thermal energy','numerical loss and physical heat as separate terms',
+  'also during a pause','New run','does not move the 3D collection marker',
+  'control changes that marker and starts a new run','do not show if the device can continue to operate'])
   assert.ok(source.includes(phrase)||source.replace(/\s+/g,' ').includes(phrase),phrase);
 });
 

@@ -42,7 +42,7 @@ test('production Marathon orchestration preserves one exposure and explicit mate
  assert.ok(f.models.target.referenceHost.contains(f.node('target-loading')));
  assert.ok(f.models.target.referenceHost.contains(f.node('target-exposure')));
  assert.equal(f.node('implantation-reference-case').options.length,6);
- assert.match(f.node('coupled-target').textContent,/homogeneous half-space, uncalibrated LiT/);
+ assert.match(f.node('coupled-target').textContent,/uniform half-space and LiT parameters without experimental calibration/);
  assert.equal(f.models.target.result,null);assert.equal(f.models.neutrons.read(),null);
  f.node('coupled-target').querySelector('.target-mode-prompt button').click();await settle();
  assert.equal(f.models.source.read().stoppingModel,'geant4-bragg');
@@ -63,7 +63,7 @@ test('production Marathon orchestration preserves one exposure and explicit mate
  const accepted=f.models.target.result,acceptedTransport=f.models.neutrons.read();
  f.change('coupled-replacementProbability',.5);
  assert.equal(f.models.target.result,accepted);assert.equal(f.models.neutrons.read(),acceptedTransport);
- assert.equal(f.models.target.status.phase,'pending');assert.match(f.node('coupled-status').textContent,/last completed scenario/);
+ assert.equal(f.models.target.status.phase,'pending');assert.match(f.node('coupled-status').textContent,/last completed case/);
  assert.equal(f.node('coupled-export').disabled,true);
  assert.equal(f.node('fusion-readouts').textContent,frozenReadouts);
  await settle();assert.ok(f.models.target.result);assert.notEqual(f.models.target.result,accepted);assert.ok(f.models.neutrons.read());

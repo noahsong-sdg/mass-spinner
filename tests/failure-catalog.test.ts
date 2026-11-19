@@ -14,5 +14,5 @@ test('the Section III failure inventory covers every actual A–K heading withou
  // Prevent a reference card or a supplied cross section from being relabeled
  // as a charge-changing collision operator in the coupled simulation.
  const cx=section3Coverage.find(s=>s.subsection==='III D')!;
- assert.equal(cx.status,'omitted');assert.match(cx.iid,/preserve/);
+ assert.equal(cx.status,'omitted');assert.match(cx.iid,/ion charge unchanged.*species identity unchanged/);
 });

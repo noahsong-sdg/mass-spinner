@@ -51,7 +51,7 @@ test('target actual beam-target alias maps both materials with separate true-dep
  const result=simulateCoupledTarget(source,c),value=surfaceState({model:'beam-target',settings:c,result,acceptedModel:'beam-target',acceptedSettings:c,selectedState:result.final,source,acceptedSource:source});
  assert.equal(value.status,'ready');const h=setup();h.layer.update(value,c);
  change(h,'Surface quantity','temperature-backing');
- assert.match(h.frame.textContent!,/backing only/);assert.match(h.frame.textContent!,/Hardware is true scale/);
+ assert.match(h.frame.textContent!,/Region: backing/);assert.match(h.frame.textContent!,/hardware keeps its physical scale/);
  const hardware=h.layer.group.getObjectByName('engineering-beam-target')!,microscope=h.layer.group.getObjectByName('Depth microscope: backing')!;
  h.layer.group.updateWorldMatrix(true,true);
  assert.ok(new THREE.Box3().setFromObject(microscope).min.y>new THREE.Box3().setFromObject(hardware).max.y,'depth microscope must clear housing occlusion');
@@ -64,7 +64,7 @@ test('target actual beam-target alias maps both materials with separate true-dep
  h.layer.update({status:'pending',reason:'Changed source'});assert.ok(h.layer.group.getObjectByName('engineering-beam-target'));
  assert.equal(h.layer.group.getObjectByName('Accepted numerical surfaces'),undefined);assert.equal(h.layer.group.getObjectByName('Depth microscope: film'),undefined);
  for(const select of h.frame.querySelectorAll('select'))assert.equal(select.hidden,true);
- assert.doesNotMatch(h.frame.textContent!,/backing only|Hardware is true scale|fraction/);
+ assert.doesNotMatch(h.frame.textContent!,/Region: backing|hardware keeps its physical scale|fraction/);
  h.layer.dispose();
 });
 

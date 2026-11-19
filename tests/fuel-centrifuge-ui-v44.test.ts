@@ -40,7 +40,7 @@ test('recorded spatial reference is mounted lazily and disposed with the playgro
  const f=fixture(t),reference=f.ui.nodes.info.querySelector('.argon-reference')! as HTMLDetailsElement;
  assert.ok(reference);assert.equal(reference.open,false);
  assert.match(reference.textContent!,/Lithium sliders do not change/);
- assert.match(reference.textContent!,/not experimentally qualified/);
+ assert.match(reference.textContent!,/Experimental accuracy is not established/);
  assert.match(reference.textContent!,/Contact potential and Joule heating are singular/);
  assert.equal(reference.querySelectorAll('svg').length,0);assert.equal(f.requests.length,0);
  f.ui.dispose();assert.equal(f.ui.nodes.info.querySelector('.argon-reference'),null);
@@ -49,8 +49,8 @@ test('recorded spatial reference is mounted lazily and disposed with the playgro
 test('dimension labels follow accepted chamber inputs and disclose unmeasured Marathon geometry',async t=>{
  const f=fixture(t,{reducedMotion:true});f.ui.setActive(true);await flush();
  assert.equal(f.loaded.at(-1).scaleLabel,'Assumed chamber · Ø 0.24 m × 0.8 m');
- assert.match(f.ui.nodes.info.textContent!,/not published Marathon measurements/);
- assert.match(f.ui.nodes.info.textContent!,/neither specifies an aspect ratio or measured machine/);
+ assert.match(f.ui.nodes.info.textContent!,/Chamber radius and length are simulator inputs/);
+ assert.match(f.ui.nodes.info.textContent!,/does not give chamber aspect ratios or measured dimensions/);
  f.change('fuel-radiusM',.2);await f.ui.run();
  assert.equal(f.loaded.at(-1).scaleLabel,'Assumed chamber · Ø 0.4 m × 0.8 m');
  assert.equal(f.loaded.at(-1).model.config.radiusM,.2);
@@ -132,9 +132,9 @@ test('plot topics render finite SVG paths and disclose conditional equilibrium a
  }
  f.change('fuel-plot','profile','change');assert.match(f.ui.nodes.plots.textContent!,/Closed-wall transport/);
  f.change('fuel-motion-mode','equilibrium','change');assert.match(f.ui.nodes.plots.textContent!,/not finite-time separation/);
- f.change('fuel-plot','heat','change');assert.match(f.ui.nodes.plots.textContent!,/not a thermal solution/);
- f.change('fuel-plot','field','change');assert.match(f.ui.nodes.plots.textContent!,/matched torque|Matched torque/);
- f.change('fuel-plot','inventory','change');assert.match(f.ui.nodes.plots.textContent!,/not a prediction of burn fraction/);
+ f.change('fuel-plot','heat','change');assert.match(f.ui.nodes.plots.textContent!,/does not give a thermal solution/);
+ f.change('fuel-plot','field','change');assert.match(f.ui.nodes.plots.textContent!,/same torque/);
+ f.change('fuel-plot','inventory','change');assert.match(f.ui.nodes.plots.textContent!,/does not predict the burn fraction/);
 });
 
 test('keyboard plot inspection reports the actual computed endpoint and returns to rest',async t=>{
@@ -226,7 +226,7 @@ test('single-stage, closed-inner-cut and pumping configurations remove their abs
 
 test('automatically selected plot and explanation remain coherent while a new application is pending',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();const accepted=f.ui.latest;
- f.change('fuel-plot','cascade','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/inner fraction moves forward/);
+ f.change('fuel-plot','cascade','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/inner fraction moves to the next stage/);
  f.change('fuel-application','pump','change');
  assert.equal(f.ui.latest,accepted);assert.equal(f.node('fuel-plot').value,'pump');
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/One outer outlet/);
@@ -304,12 +304,12 @@ test('disposing the playground prevents pending completion and further requests 
 
 test('the beginner guide explains every actual gas-view and plot menu option without launching a run',t=>{
  const f=fixture(t),guide=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
- const reference=guide.split('## What do the menu options mean?')[1].split('## Where do we go after this guide?')[0];
+ const reference=guide.split('## What do the menu options mean?')[1].split('## What comes next?')[0];
  for(const id of ['fuel-motion-mode','fuel-plot'])for(const option of f.node(id).options)
   assert.ok(reference.includes(`| ${option.textContent} |`),`missing explanation for ${id}: ${option.textContent}`);
- assert.match(reference,/same accepted coupled solution/);
- assert.match(reference,/not solved inlet\/outlet fluid motion/i);
- assert.match(reference,/not a fixed-current experiment/);
- assert.match(reference,/both share the local temperature/);
+ assert.match(reference,/same coupled solution/);
+ assert.match(reference,/does not calculate inlet\/outlet fluid motion/i);
+ assert.match(reference,/This differs from constant-current operation/);
+ assert.match(reference,/The two species have the same local temperature/);
  assert.equal(f.requests.length,0);
 });

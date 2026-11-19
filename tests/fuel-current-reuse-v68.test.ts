@@ -26,7 +26,7 @@ test('compiled electrical setup owns all inputs and resolves each new rotation w
  const changed=solveFuelCurrent({...setup,omegaRadS:Array(6).fill(0)});
  assert.ok(Math.abs(changed.jouleW-solve(Array(6).fill(0)).jouleW)>1);
  assert.throws(()=>solve([NaN,0,0,0,0,0]),/finite/);
- assert.throws(()=>solve([0]),/common-grid/);
+ assert.throws(()=>solve([0]),/Rotation values must be finite and use the current grid/);
  const result=solve([1,-2,3,-4,5,-6]);
  result.relativePotentialV.fill(NaN);result.potentialV.fill(Infinity);result.torqueNm.fill(1e99);
  const recovered=solve(Array(6).fill(0)),reference=solveFuelCurrent({...frozen,omegaRadS:Array(6).fill(0)});

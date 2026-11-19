@@ -61,9 +61,9 @@ test('reader retains only the latest startup action and never resends it on repe
  const requests=f.simulator.packets.filter(data=>data.type==='mass-spinner:guide-action');
  assert.equal(requests.length,1);assert.equal(requests[0].action,'current');
  assert.equal(f.dom.window.sessionStorage.getItem('mass-spinner:reader-capability'),'authorized-token');
- f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});assert.match(f.status()!,/computed run/);
+ f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});assert.match(f.status()!,/calculated run/);
  f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'rejected',message:'Choose Coupled separation before cutting power.'});
- assert.match(f.status()!,/Choose Coupled separation/);assert.doesNotMatch(f.status()!,/Opened|Sent/);
+ assert.match(f.status()!,/Before you cut power, select Coupled separation/);assert.doesNotMatch(f.status()!,/Opened|Sent/);
 });
 
 test('receiver returns rejected conditions and invalid allowlist actions to the requesting reader',t=>{
@@ -71,7 +71,7 @@ test('receiver returns rejected conditions and invalid allowlist actions to the 
  f.dom.window.document.body.insertAdjacentHTML('beforeend','<button id="fuel-export"></button><select id="fuel-motion-mode"><option value="equilibrium">Equilibrium</option></select><button id="fuel-power" aria-pressed="true"></button>');
  let cuts=0;f.dom.window.document.getElementById('fuel-power')!.addEventListener('click',()=>cuts++);
  f.send(r.window,{type:'mass-spinner:guide-action',action:'cutPower',requestId:'cut'});
- assert.equal(r.packets.at(-1)?.status,'rejected');assert.match(r.packets.at(-1)?.message??'',/Choose Coupled separation/);assert.equal(cuts,0);
+ assert.equal(r.packets.at(-1)?.status,'rejected');assert.match(r.packets.at(-1)?.message??'',/Before you cut power, select Coupled separation/);assert.equal(cuts,0);
  f.send(r.window,{type:'mass-spinner:guide-action',action:'not-an-action',requestId:'invalid'});
  assert.equal(r.packets.at(-1)?.status,'rejected');assert.match(r.packets.at(-1)?.message??'',/not available/);
 });
@@ -101,28 +101,28 @@ test('a receiver reload interrupts both waiting and unacknowledged requests with
   const before=f.simulator.packets.length;f.probe();
   assert.equal(f.simulator.packets.length,before+1);assert.equal(f.simulator.packets.at(-1)?.type,'mass-spinner:guide-hello');
   f.receive({...ready,instance:'after-reload'});
-  assert.match(f.status()!,/Interrupted by simulator reload.*may have executed/);assert.equal(f.isProbing(),false);
+  assert.match(f.status()!,/The simulator reloaded.*action status is unknown/);assert.equal(f.isProbing(),false);
   f.receive({...ready,instance:'after-reload'});
-  assert.match(f.status()!,/Interrupted by simulator reload/,'an in-flight ready cannot erase the warning');
+  assert.match(f.status()!,/The simulator reloaded/,'an in-flight ready cannot erase the warning');
   assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,1);
   f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});
-  assert.match(f.status()!,/Interrupted by simulator reload/,'an outcome from the abandoned request is ignored');
+  assert.match(f.status()!,/The simulator reloaded/,'an outcome from the abandoned request is ignored');
  }
 });
 
 test('an ambiguous action has a bounded probe lifetime and never claims execution',t=>{
  const f=reader(t);f.click('spin');f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'});
  for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/not confirmed.*may still finish/);
+ assert.equal(f.isProbing(),false);assert.match(f.status()!,/sent no final action result.*can still finish/);
  const requests=f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action');assert.equal(requests.length,1);
  f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});
- assert.match(f.status()!,/not confirmed.*may still finish/,'a late waiting receipt must not erase the timeout warning');
+ assert.match(f.status()!,/sent no final action result.*can still finish/,'a late waiting receipt must not erase the timeout warning');
 });
 
 test('an old receiver without readiness support tells the user to reload without sending or replaying',t=>{
  const f=reader(t);f.click('spin');
  for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/Reload the simulator tab, then try again/);
+ assert.equal(f.isProbing(),false);assert.match(f.status()!,/Reload the simulator tab. Then select the action again/);
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
  f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'updated-simulator'});
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'late readiness must not execute the expired action');

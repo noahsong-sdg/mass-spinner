@@ -30,7 +30,7 @@ test('coating zero flux exactly preserves fixed inventory, temperature and energ
  const r=advanceLithiumCoating(initial,config,1e8);assert.deepEqual(r.state,initial);
  assert.equal(r.thicknessM,1e-6);assert.equal(r.temperatureK,350);
  assert.ok(Object.values(r.eroded).every(x=>x===0));assert.ok(Object.values(r.residuals).every(x=>x===0));
- assert.match(r.coupling,/not coupled/);
+ assert.match(r.coupling,/does not change stopping, nuclear reactions, diffusion or target conduction/);
  assert.deepEqual(advanceLithiumCoating(initial,{...config,erosionFluxM2S:1e21},0).state,initial);
 });
 

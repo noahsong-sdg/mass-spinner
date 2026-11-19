@@ -51,7 +51,7 @@ test('real power intervention survives Copy link and production restoration at c
  const original=f.fuel.latest.result.transport;
  assert.deepEqual(original.operation.events,[{timeS:1,currentA:0}]);
  f.node('share-playground').click();await flush();
- assert.match(f.node('share-status').textContent,/Copied run link.*fresh solve.*calculator separate/);
+ assert.match(f.node('share-status').textContent,/Run link copied.*recalculates the run.*camera and calculator are separate/);
  const shared=readScenario(new URL(f.copied).search).scenario;
  assert.equal(shared.version,3);assert.equal(shared.fuelRun.initialCurrentA,.03);
  assert.equal(shared.controls['fuel-currentA'],0);

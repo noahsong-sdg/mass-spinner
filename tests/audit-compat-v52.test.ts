@@ -40,6 +40,6 @@ test('an invalid inactive thermal field cannot destroy the accepted bath result'
  change('fuel-thermal-wallCapacityJK','');
  change('fuel-currentA',.04);await ui.run();
  assert.ok(ui.latest,'A disabled thermal model must not send an invalid latent thermal setup and clear the accepted bath result.');
- if(ui.latest===accepted)assert.match(ui.nodes.render.textContent,/valid thermal settings/,'Invalid supplied settings should retain the old result with an actionable status.');
+ if(ui.latest===accepted)assert.match(ui.nodes.render.textContent,/permitted thermal settings/,'Invalid supplied settings should retain the old result with an actionable status.');
  else assert.equal(ui.latest.result.config.currentA,.04,'Ignoring disabled thermal values should still apply the valid bath change.');
 });

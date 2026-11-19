@@ -64,7 +64,7 @@ test('invalid thermal input retains accepted state and cutaway does not advertis
  f.change('fuel-view-representation','field','change');
  assert.doesNotMatch(f.doc.querySelector('.fuel-motion-legend')!.textContent!,/weighted/);
  f.node('fuel-thermal-enabled').checked=true;f.change('fuel-thermal-wallCapacityJK','');await f.ui.run();
- assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);
+ assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/permitted thermal settings/);
  f.change('fuel-thermal-wallCapacityJK',10);await f.ui.run();assert.ok(f.ui.latest.result.transport.snapshots.at(-1).thermal);
  f.change('fuel-view-representation','tracers','change');assert.match(f.doc.querySelector('.fuel-motion-legend')!.textContent!,/weighted/);
 });
@@ -81,7 +81,7 @@ test('enabled thermal number edits invalidate accepted ownership before validati
   assert.match(f.ui.nodes.render.textContent,/previous accepted state/,key);
   assert.equal(f.node('fuel-input-coverage').dataset.match,'pending',key);
   await settle();assert.equal(f.requests.length,count,key);assert.equal(f.ui.latest,accepted,key);
-  assert.equal(input.value,String(value),key);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/,key);
+  assert.equal(input.value,String(value),key);assert.match(f.ui.nodes.render.textContent,/permitted thermal settings.*Previous accepted state/,key);
   assert.match(f.node('fuel-result-scope').textContent,/Invalid settings.*previous accepted result/,key);
   f.change(input.id,valid);await settle();assert.equal(f.requests.length,count+1,key);assert.notEqual(f.ui.latest,accepted,key);assert.equal(f.node('fuel-export').disabled,false,key);
  }
@@ -114,7 +114,7 @@ test('invalid thermal edits abort pending ownership and late replies cannot make
  f.change('fuel-thermal-coolantK','');assert.equal(f.node('fuel-export').disabled,true);
  f.pending[0]();await pending;await settle();
  assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.equal(f.node('fuel-export').disabled,true);
- assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
+ assert.match(f.ui.nodes.render.textContent,/permitted thermal settings.*Previous accepted state/);
 });
 
 test('late graphics completion cannot revive playback or current-result scope after an invalid edit',async t=>{
@@ -123,7 +123,7 @@ test('late graphics completion cannot revive playback or current-result scope af
  f.node('fuel-thermal-enabled').checked=true;f.node('fuel-thermal-enabled').dispatchEvent(new f.doc.defaultView!.Event('change'));
  f.change('fuel-thermal-coolantK','');ready();await settle();
  assert.equal(f.animation,undefined);assert.equal(f.ui.nodes.render.querySelector('.fuel-motion').hidden,true);
- assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
+ assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/permitted thermal settings.*Previous accepted state/);
 });
 
 test('spatial mixture controls reach the solver and accepted gas profiles follow the shared cursor',async t=>{
@@ -144,7 +144,7 @@ test('spatial mixture controls reach the solver and accepted gas profiles follow
   f.node('fuel-locate-plot').click();assert.equal(f.node('fuel-motion-mode').value,'transport');assert.equal(Number(f.node('fuel-motion-time').value),.05);assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.05 s');
   assert.equal(f.requests.length,solvedCount,'Locating an accepted profile must not recompute physics.');
  }
- const accepted=f.ui.latest,count=f.requests.length;f.change('fuel-thermal-gasConductivityWMK','');await f.ui.run();assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/valid thermal settings/);
+ const accepted=f.ui.latest,count=f.requests.length;f.change('fuel-thermal-gasConductivityWMK','');await f.ui.run();assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);assert.match(f.ui.nodes.render.textContent,/permitted thermal settings/);
 });
 
 test('Inspect links to the canonical solver input and response buttons show the accepted endpoint without another solve',async t=>{
@@ -152,7 +152,7 @@ test('Inspect links to the canonical solver input and response buttons show the 
  const before=f.ui.latest.result.mechanics.torque,button=f.ui.nodes.inspect.querySelector('[data-show-response]');
  f.ui.nodes.inspect.querySelector<HTMLButtonElement>('[data-control=magneticT]')!.click();assert.equal(f.focused.at(-1),'#fuel-magneticT');
  f.change('fuel-magneticT',.75);assert.equal(button.disabled,true);
- assert.match(f.ui.nodes.inspect.textContent,/Recomputing/);await f.ui.run();
+ assert.match(f.ui.nodes.inspect.textContent,/Calculation in progress/);await f.ui.run();
  assert.equal(f.ui.latest.result.config.magneticT,.75);assert.equal(f.node('fuel-magneticT').value,'0.75');
  assert.ok(Math.abs(f.ui.latest.result.mechanics.torque/before-1.5)<1e-12);
  const count=f.requests.length;button.click();assert.equal(f.requests.length,count);
@@ -166,7 +166,7 @@ test('liner response distinguishes a fixed bath from enabled thermal evolution a
  f.change('fuel-linerK',1200);await f.ui.run();
  const count=f.requests.length;
  assert.equal(f.ui.latest.result.transport.operation.thermal.enabled,false);
- assert.match(f.ui.nodes.inspect.textContent,/not the fixed gas temperature/);
+ assert.match(f.ui.nodes.inspect.textContent,/does not change the fixed gas temperature/);
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'lithium');
  assert.equal(f.requests.length,count,'viewing a response must not submit another calculation');
  assert.match(f.ui.nodes.plots.querySelector('.plot-readout').textContent,/1200,/);

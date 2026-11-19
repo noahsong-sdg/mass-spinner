@@ -27,12 +27,12 @@ test('research panel stays lazy and uses its own voltage boundary controls and a
  const f=fixture(t);assert.equal(f.view.element.open,false);assert.equal(f.requests.length,0);
  await f.view.run();assert.equal(f.requests.length,0);
  f.view.element.open=true;assert.equal(f.requests.length,0);
- assert.match(f.view.element.textContent!,/Current is solved, not imposed/);
+ assert.match(f.view.element.textContent!,/The model calculates current from voltage/);
  assert.match(f.view.element.textContent!,/no ion–neutral slip control/);
  assert.match(f.view.element.textContent!,/4.63712%.*2.88464%/);
- assert.match(f.view.element.textContent!,/No electron energy/);
- assert.match(f.view.element.textContent!,/not validated continuum limits/);assert.match(f.view.element.textContent!,/low-density rarefaction/);
- assert.match(f.view.element.textContent!,/shorts the driven and grounded contacts/);
+ assert.match(f.view.element.textContent!,/does not calculate electron energy/);
+ assert.match(f.view.element.textContent!,/density control limits do not show where continuum equations apply/);assert.match(f.view.element.textContent!,/At low density, rarefaction/);
+ assert.match(f.view.element.textContent!,/At zero voltage, the contacts form a short circuit/);
  assert.match(f.doc.querySelector('select')!.textContent!,/First half, then shorted/);
  const pending=f.view.run();assert.equal(f.requests.length,1);
  assert.equal(f.requests[0].request.kind,'fuel-spatial-experiment');

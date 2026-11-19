@@ -74,9 +74,9 @@ test('all seven steps have a live action and retain the physical scope distincti
   assert.equal(f.node('window-guide').querySelector('h3').nextElementSibling.className,'guide-actions','put the action before the explanation');
   assert.equal(f.node('window-guide').querySelectorAll('ol li').length,playgroundSteps[i].do.length);assert.doesNotMatch(f.node('window-guide').innerHTML,/<strong>Watch for/);
  }
- f.step(3);assert.match(f.node('window-guide').textContent,/percentage or purity does not itself change by that factor/i);
- f.step(5);assert.match(f.node('window-guide').textContent,/do not simulate an extraction flow/);
- f.step(6);assert.match(f.node('window-guide').textContent,/not experimental accuracy/);
+ f.step(3);assert.match(f.node('window-guide').textContent,/percentage and purity do not change by these factors/i);
+ f.step(5);assert.match(f.node('window-guide').textContent,/do not calculate extraction flow/);
+ f.step(6);assert.match(f.node('window-guide').textContent,/do not show experimental accuracy/);
  f.node('window-guide').querySelector('.guide-navigation button:nth-child(2)').click();
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('open-docs'));
 });
@@ -195,7 +195,7 @@ test('investigation actions open the actual existing plots without changing inpu
 test('new plot links wait for accepted results and panel links remain available while updating',async t=>{
  const f=fixture(t),fuel=acceptedFuel(f);fuel.accepted.disabled=true;
  f.workspace.launchGuideAction('separationPlot');assert.equal(fuel.plot.value,'spin');
- assert.equal(f.node('window-plots').hidden,true);assert.match(f.node('guide-status').textContent,/Waiting for the computed run/);
+ assert.equal(f.node('window-plots').hidden,true);assert.match(f.node('guide-status').textContent,/Waiting for the calculated run/);
  fuel.accepted.disabled=false;await Promise.resolve();
  assert.equal(fuel.plot.value,'separation');assert.equal(f.node('window-plots').hidden,false);
  fuel.accepted.disabled=true;
@@ -211,9 +211,9 @@ test('cut power is a single explicit intervention, never a power-on or hidden re
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,time);assert.equal(restarts,0);
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/already off/);
  fuel.mode.value='equilibrium';fuel.power.setAttribute('aria-pressed','true');
- f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.mode.value,'equilibrium');assert.match(f.node('guide-status').textContent,/Choose Coupled separation/);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.mode.value,'equilibrium');assert.match(f.node('guide-status').textContent,/Before you cut power, select Coupled separation/);
  fuel.mode.value='transport';fuel.power.disabled=true;
- f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/cannot be changed here/);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/select a time below 60 s in an accepted coupled run/);
  f.workspace.launchGuideAction('newRun');assert.equal(restarts,1);
 });
 
@@ -224,7 +224,7 @@ test('new investigation actions preserve origin restrictions and cannot modify a
  const send=(origin:string,source:any)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action:'newRun'}}));
  send('https://foreign.example',frame.contentWindow);send('https://example.org',f.window);assert.equal(restarts,0);
  f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
- send('https://example.org',frame.contentWindow);assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/Choose Centrifuge/);
+ send('https://example.org',frame.contentWindow);assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/select Centrifuge/);
 });
 
 function experimentControls(f:ReturnType<typeof fixture>){
@@ -274,7 +274,7 @@ test('experiment entrypoints are available while computing and their plot action
  f.workspace.launchGuideAction('spatialHeatExperiment');assert.equal(f.node('window-controls').hidden,false);
  assert.equal(f.node('window-plots').hidden,true);assert.equal(f.doc.activeElement,f.node('fuel-thermal-enabled'));
  f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();
- assert.match(f.doc.querySelector('.guide-experiment [role=status]')!.textContent!,/Waiting for the computed run/);
+ assert.match(f.doc.querySelector('.guide-experiment [role=status]')!.textContent!,/Waiting for the calculated run/);
  fuel.accepted.disabled=false;await Promise.resolve();
  assert.equal(fuel.plot.value,'thermalProfile');assert.equal(f.node('window-plots').hidden,false);
  assert.equal(f.doc.querySelector('.guide-experiment [role=status]')!.textContent,'','clear the waiting note when the requested accepted plot opens');

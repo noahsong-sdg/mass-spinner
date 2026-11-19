@@ -50,11 +50,11 @@ test('dimension disclosures distinguish published models, inferred sizes and unk
  assert.deepEqual([d.majorRadiusM,d.minorRadiusM,d.elongation,d.triangularity],[4.2,1.2,1.6,.25]);
  assert.ok(Math.abs(d.inboardBreederM-(.750-(d.channelM-.005)))<1e-12);
  assert.ok(Math.abs(d.outboardBreederM-(1-(d.channelM-.005)))<1e-12);
- assert.equal(manifest.assets.blanket.geometryLabel,'Paper core · conceptual hardware');
+ assert.equal(manifest.assets.blanket.geometryLabel,'Paper core · assumed hardware');
  assert.equal(manifest.assets.blanket.renderSettings.samples,24);assert.equal(manifest.assets.blanket.renderSettings.denoising,true);
  assert.ok(manifest.assets.blanket.renderSettings.viewTransform);
- assert.match(manifest.assets.blanket.caption,/unknown.*omitted/i);assert.match(manifest.assets.blanket.caption,/not as-built/i);
- assert.match(manifest.assets['beam-target'].caption,/dimensions.*not published/i);
+ assert.match(manifest.assets.blanket.caption,/unknown.*omitted/i);assert.match(manifest.assets.blanket.caption,/not built Marathon hardware/i);
+ assert.match(manifest.assets['beam-target'].caption,/does not publish.*hardware dimensions/i);
  for(const [mode,asset]of Object.entries<any>(manifest.assets))assert.ok(asset.scaleLabel,`${mode} must identify scale provenance`);
 });
 

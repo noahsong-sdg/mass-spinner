@@ -114,7 +114,7 @@ test('temperature comparison holds the current sampled rotation fixed and does n
  assert.equal(JSON.stringify({r,state}),before);
  assert.deepEqual(comparison.cases.map((v:any)=>v.omega),[9000,9000]);
  assert.deepEqual(comparison.cases.map((v:any)=>v.temperatureK),[650,1300]);
- assert.match(comparison.scope,/rotation held/i);assert.match(comparison.scope,/no drive, heating or extraction prediction/i);
+ assert.match(comparison.scope,/rotation fixed/i);assert.match(comparison.scope,/do not predict drive, heating or extraction/i);
  for(const row of comparison.cases){
   const expected=equilibrium(r,row.omega,row.temperatureK);
   for(const point of row.profiles)close(point.lightFraction,expected.fraction((point.radiusM/r.config.radiusM)**2));
@@ -144,7 +144,7 @@ test('spatial-temperature comparisons explicitly replace the field by its accept
  const r=rotor({gasK:400}),state={neutralRadS:8000,thermal:{gasK:720,gas:{temperatureK:[500,900]}}};
  for(const kind of ['temperature','rotation','collection']){
   const result=fuelLearningComparison(r,state,kind);
-  assert.equal(result.cases[0].temperatureK,720);assert.match(result.scope,/spatial temperature.*mean/i);
+  assert.equal(result.cases[0].temperatureK,720);assert.match(result.scope,/mean gas temperature instead of spatial temperature differences/i);
  }
  const noSpatial=fuelLearningComparison(r,{neutralRadS:8000,thermal:{gasK:720}},'temperature');
  assert.doesNotMatch(noSpatial.scope,/spatial temperature/i);
@@ -164,7 +164,7 @@ test('collection comparisons integrate each normalized isotope inventory without
   close(result.curves[0].y[i],100*oracle.purity!);close(result.curves[1].y[i],100*oracle.recovery!);
  }
  const [outer,inner]=row.collections;assert.ok(inner.purity>outer.purity);assert.ok(inner.recovery<outer.recovery);
- assert.match(result.scope,/closed inventory/i);assert.match(result.scope,/no drive, heating or extraction prediction/i);
+ assert.match(result.scope,/closed inventory/i);assert.match(result.scope,/do not predict drive, heating or extraction/i);
 });
 
 test('empty collection and absent isotope domains remain undefined instead of inventing purity or recovery',()=>{
@@ -193,7 +193,7 @@ test('composition includes the accepted inventory feed and reference comparisons
  assert.deepEqual(feed.y,[7.59,7.59]);assert.equal(feed.dash,'4 4');
  for(const lightFraction of [0,.0759,1])for(const neutralRadS of [0,9000])for(const kind of ['temperature','rotation']){
   const comparison=fuelLearningComparison(rotor({lightFraction}),{neutralRadS},kind);
-  assert.match(comparison.scope,/Zoomed light-fraction axis.*feed.*percentage points/);
+  assert.match(comparison.scope,/Expanded light-fraction axis.*feed.*percentage points/);
   for(const curve of comparison.curves){
    assert.match(curve.yLabel,/%.*zoomed axis/);assert.ok(curve.yDomain[0]>=0&&curve.yDomain[1]<=100&&curve.yDomain[0]<curve.yDomain[1]);
    assert.ok(curve.yDomain[1]-curve.yDomain[0]<100);
@@ -202,5 +202,5 @@ test('composition includes the accepted inventory feed and reference comparisons
   }
  }
  const collection=fuelLearningComparison(r,state,'collection');
- assert.deepEqual(collection.curves[0].yDomain,[0,100]);assert.doesNotMatch(collection.scope,/Zoomed/);
+ assert.deepEqual(collection.curves[0].yDomain,[0,100]);assert.doesNotMatch(collection.scope,/Expanded/);
 });

@@ -37,7 +37,7 @@ test('all seven A–D models have distinct observables, boundaries and conceptua
  for(const mode of Object.keys(modelInsights)){
   const parts=modelComponents(mode);
   assert.deepEqual(parts.map(c=>c.id),['source','coils','vessel','electrodes','collectors','insulators','fittings','seals','supports']);
-  assert.ok(parts.every(c=>/unspecified/.test(c.material)&&/conceptual/.test(c.basis)));
+  assert.ok(parts.every(c=>/unknown/.test(c.material)&&/not an as-built device/.test(c.basis)));
  }
  assert.match(modelComponents('icr').find(c=>c.id==='coils')!.purpose,/not the RF antenna/);
  assert.match(modelComponents('centrifuge').find(c=>c.id==='collectors')!.purpose,/does not extract/);
@@ -53,7 +53,7 @@ test('context panel replaces mode content and hides itself outside the seven-mod
  (globalThis as unknown as {document:unknown}).document={createElement:()=>new El(),createTextNode:(s:string)=>Object.assign(new El(),{textContent:s})};
  t.after(()=>{(globalThis as unknown as {document?:unknown}).document=previous;});
  const host=new El(),ui=setupTutorialInsights(host),text=(el:El):string=>el.textContent+' '+el.children.map(text).join(' ');
- ui.show('curved');assert.match(text(host),/drift speeds match/);assert.equal(host.children[0].hidden,false);
- ui.show('centrifuge');assert.match(text(host),/thermal spreading/);assert.match(text(host),/Not natural lithium feed/);assert.doesNotMatch(text(host),/drift speeds match/);
+ ui.show('curved');assert.match(text(host),/drift speeds are equal/);assert.equal(host.children[0].hidden,false);
+ ui.show('centrifuge');assert.match(text(host),/thermal spreading/);assert.match(text(host),/not natural lithium feed/);assert.doesNotMatch(text(host),/drift speeds are equal/);
  ui.show('mirror');assert.equal(host.children[0].hidden,true);assert.doesNotMatch(text(host),/thermal spreading/);
 });

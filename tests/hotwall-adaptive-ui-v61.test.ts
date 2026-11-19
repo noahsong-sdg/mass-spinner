@@ -36,9 +36,9 @@ test('refined resolution is opt-in for spatial gas and owns the operation sent t
  const request=f.requests.at(-1);assert.deepEqual(request.operation.thermal.gas,{conductivityWMK:.1,accuracy});assert.equal(request.operation.thermal.spatial.cells,16);
  assert.equal(request.kind,'fuel-centrifuge');assert.equal(request.schemaVersion,1);assert.equal(request.includeTransport,true);
  assert.deepEqual(request.operation.thermal.gas.accuracy,{relativeTolerance:6.25e-7,temperatureToleranceK:1e-7});
- assert.equal(request.options,undefined);assert.match(f.ui.nodes.controls.textContent,/temporal error estimate; spatial refinement remains necessary/);
- assert.match(f.ui.nodes.controls.textContent,/Refined runs are slower/);
- assert.match(f.ui.nodes.info.textContent,/Temporal error estimate: BE step doubling; relative tolerance/);
+ assert.equal(request.options,undefined);assert.match(f.ui.nodes.controls.textContent,/timestep error estimate does not replace spatial refinement/);
+ assert.match(f.ui.nodes.controls.textContent,/Refined runs take longer/);
+ assert.match(f.ui.nodes.info.textContent,/Timestep error estimate: BE step doubling; relative tolerance/);
  assert.match(f.ui.nodes.info.textContent,/temperature tolerance.*K; 7 accepted pairs, 3 rejected steps, maximum accepted ratio 0.5/);
  assert.match(f.ui.nodes.info.textContent,/Counters since 0 s; retained prefix excluded/);
  f.change('fuel-motion-time','.4','input');f.change('fuel-currentA','.02','input');await f.ui.run();
@@ -46,7 +46,7 @@ test('refined resolution is opt-in for spatial gas and owns the operation sent t
  assert.match(f.ui.nodes.info.textContent,/Counters since 0.4 s; retained prefix excluded/);
  f.change('fuel-thermal-resolution','interactive');await f.ui.run();
  assert.equal(f.requests.at(-1).resume,undefined);assert.equal(f.requests.at(-1).operation.events.length,0);assert.equal(f.requests.at(-1).operation.thermal.gas.accuracy,undefined);
- assert.doesNotMatch(f.ui.nodes.info.textContent,/Temporal error estimate:/);
+ assert.doesNotMatch(f.ui.nodes.info.textContent,/Timestep error estimate:/);
  f.change('fuel-thermal-gasModel','lumped');assert.equal(resolution.disabled,true);assert.equal(resolution.parentElement.hidden,true);
 });
 
@@ -77,8 +77,8 @@ test('refined Export prepares gzip asynchronously and releases its download URL 
  URL.createObjectURL=(blob:Blob)=>{resolveDownload(blob);return 'blob:refined-download';};URL.revokeObjectURL=url=>{revoked.push(String(url));};
  anchors.click=function(){filename=this.download;};
  t.after(()=>{URL.createObjectURL=create;URL.revokeObjectURL=revoke;anchors.click=anchor;});
- f.node('fuel-export').click();assert.equal(f.node('fuel-export').disabled,true);assert.equal(f.node('fuel-export').textContent,'Preparing…');
- assert.match(f.ui.nodes.render.textContent,/Preparing compressed export/);
+ f.node('fuel-export').click();assert.equal(f.node('fuel-export').disabled,true);assert.equal(f.node('fuel-export').textContent,'Export in progress…');
+ assert.match(f.ui.nodes.render.textContent,/Compressed export in progress/);
  const blob=await downloaded;assert.equal(blob.type,'application/gzip');
  const payload=await new Response(blob.stream().pipeThrough(new DecompressionStream('gzip'))).text();
  assert.equal(payload,JSON.stringify({model:'marathon-centrifuge',...f.ui.latest}));assert.equal(filename,'mass-spinner-centrifuge.json.gz');

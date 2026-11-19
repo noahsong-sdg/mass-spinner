@@ -11,8 +11,8 @@ test('model evidence retains qualification limits and displays the measured-prof
  const detail=doc.querySelector('details')!;
  assert.equal(detail.open,false);assert.equal(doc.querySelectorAll('svg').length,0);
  assert.match(doc.querySelector('h3')!.textContent!,/unqualified/);
- assert.match(detail.textContent!,/not a matched prediction/);
- assert.match(detail.textContent!,/retrospective/);
+ assert.match(detail.textContent!,/do not describe your current settings/);
+ assert.match(detail.textContent!,/tests the assumed rotation profile/);
  assert.equal(doc.querySelectorAll('tbody tr').length,4);
  assert.ok([...doc.querySelectorAll('tbody td')].every(n=>n.textContent==='Excluded'));
  detail.open=true;detail.dispatchEvent(new window.Event('toggle'));

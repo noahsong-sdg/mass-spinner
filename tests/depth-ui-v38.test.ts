@@ -21,7 +21,7 @@ test('research distributions are lazy, retry failure, change exact saved keys an
  const window=dom(t),root=window.document.querySelector('main')!,packet=JSON.parse(readFileSync('web-assets/research-depth/recorded-distributions.json','utf8'));let requests=0;
  const viewer=setupResearchDistributions(async()=>({ok:++requests>1,json:async()=>packet}));root.append(viewer.element);viewer.update(packet.cases[0].id,0);assert.equal(requests,0);
  const button=root.querySelector('button')!;button.click();await new Promise(setImmediate);assert.match(root.textContent!,/could not be loaded/);assert.equal(button.disabled,false);
- button.click();await new Promise(setImmediate);assert.equal(requests,2);assert.equal(root.querySelectorAll('figure').length,2);assert.match(root.textContent!,/Qualification withheld/);
+ button.click();await new Promise(setImmediate);assert.equal(requests,2);assert.equal(root.querySelectorAll('figure').length,2);assert.match(root.textContent!,/Accuracy is not established/);
  const axis=root.querySelector('select')!;axis.value='2';axis.dispatchEvent(new window.Event('change'));assert.match(root.textContent!,/vz \/ V₀/);
  const comparison=root.querySelectorAll('select')[1];comparison.value=String(packet.refinements.findIndex((g:any)=>g.study==='v16 isotropic'));comparison.dispatchEvent(new window.Event('change'));assert.match(root.textContent!,/noneq-n128-a0015625 → noneq-n256-a0015625/);
  viewer.update(packet.cases[1].id,20);assert.match(root.textContent!,new RegExp(packet.cases[1].id));

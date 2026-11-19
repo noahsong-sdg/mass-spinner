@@ -33,7 +33,9 @@ test('zero step preserves canonical state and runtime property domains reject ex
  const {c,s}=fixture(),a=advanceFuelSpatialOperation(c,s,0);
  a.state.omegaRadS.forEach((v,i)=>assert.ok(Math.abs(v-s.omegaRadS[i])<1e-9));
  a.state.gasEnergyJ.forEach((v,i)=>assert.ok(Math.abs(v-s.gasEnergyJ[i])<1e-14));
- assert.equal(Math.abs(a.inputWorkJ),0);assert.throws(()=>fuelArgonNeutralTransport(299));assert.throws(()=>fuelArgonNeutralTransport(20001));
+ assert.equal(Math.abs(a.inputWorkJ),0);
+ for(const temperatureK of [299,20001])assert.throws(()=>fuelArgonNeutralTransport(temperatureK),
+  {name:'RangeError',message:'Neutral Ar table temperature must be 300–20000 K.'});
  assert.throws(()=>advanceFuelSpatialOperation({...c,electrical:{...c.electrical,radialEdgesM:[0,.002,.004,.006,.01]}},s,.01),/same equal-volume/);
 });
 test('local rotation SG force reduces exactly to the rigid closure for a constant field',()=>{

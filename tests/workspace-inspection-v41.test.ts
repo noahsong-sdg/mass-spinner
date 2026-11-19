@@ -37,7 +37,7 @@ for(const mobile of [false,true])test(`rendered component inspection and shortcu
   assert.match(readout.textContent!,/magnet|coil/i);
   const toolbar=readout.parentElement!.querySelector('.apparatus-toolbar')!;
   assert.equal(visible(toolbar),true);
-  assert.equal((toolbar.querySelector('[aria-label="Focus selected component"]') as HTMLButtonElement).disabled,false);
+  assert.equal((toolbar.querySelector('[aria-label="Focus on the selected component"]') as HTMLButtonElement).disabled,false);
   assert.ok(toolbar.querySelector('[aria-label="Reset 3D view"]'));
   assert.equal(readout.querySelectorAll('.component-actions').length,1);
   (readout.querySelector('.component-actions button') as HTMLButtonElement).click();

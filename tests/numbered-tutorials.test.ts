@@ -45,15 +45,19 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
 
 test('03–06 state the prerequisites and boundaries needed to interpret their experiments',()=>{
  const read=(part:string)=>readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${part}.md`,'utf8');
- assert.match(read('03'),/New run to clear earlier power switches/);
+ assert.match(read('03'),/New run to remove earlier power switches/);
  assert.match(read('03'),/Set Run duration to 1 s/);
- assert.match(read('03'),/Both species share one local temperature/);
- assert.match(read('04'),/0.08 means 8%, not 0.08%/);
- assert.match(read('04'),/higher required upstream pressure/);
+ assert.match(read('03'),/Both species have the same local temperature/);
+ assert.match(read('04'),/0.08 is 8%, not 0.08%/);
+ assert.match(read('04'),/necessary upstream pressure and gas load are higher/);
  assert.match(read('05'),/do not change lithium transport/);
  assert.match(read('05'),/not total plant inventory/);
- assert.match(read('06'),/not a confidence interval/);
- assert.match(read('06'),/not successful device validation/);
+ assert.match(read('05'),/Fusion thermal power to 1000 MW/);
+ assert.match(read('05'),/processing time to 100 s/);
+ assert.match(read('05'),/burn fraction to 0\.05/);
+ assert.match(read('05'),/positive power and time, and a burn fraction below one/);
+ assert.match(read('06'),/not a statistical confidence interval/);
+ assert.match(read('06'),/disagreement, not experimental accuracy/);
 });
 
 function reader(number:string){
@@ -66,7 +70,7 @@ test('heat-flow examples send energy down every temperature gradient and have no
  assert.equal(figure.dataset.motion,'paused','the unscripted explanation is static');
  assert.equal(figure.querySelectorAll('button:not([disabled])').length,0);
  setupGuideReader(dom.window);
- for(const [name,sign,phrase]of [['gas',1,/flows outward/],['wall',-1,/flows inward/],['equal',0,/no conductive heat flow/]] as const){
+ for(const [name,sign,phrase]of [['gas',1,/flows outward/],['wall',-1,/flows inward/],['equal',0,/no heat flow by conduction/]] as const){
   figure.querySelector<HTMLButtonElement>(`[data-heat-select="${name}"]`)!.click();
   assert.equal(figure.dataset.case,name);assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
   assert.match(figure.querySelector('[data-heat-reading]')!.textContent!,phrase);
@@ -81,7 +85,7 @@ test('heat-flow examples send energy down every temperature gradient and have no
    assert.equal(Math.sign(Number(end)-Number(start)),sign);
   }
  }
- assert.match(figure.textContent!,/not heat-flow rate/);assert.match(figure.textContent!,/interface temperature jumps are omitted/);
+ assert.match(figure.textContent!,/not the heat-flow rate/);assert.match(figure.textContent!,/excludes gas motion and temperature jumps at interfaces/);
 });
 
 test('heat motion respects reduced motion and keeps pause independent of the selected explanation',t=>{
@@ -112,7 +116,7 @@ test('the collection illustration uses cylindrical equilibrium integrals and pre
    assert.ok(Math.abs(cdf-(i+.5)/50)<2e-9,'visual samples follow the same radial inventory, not uniformly spaced radii');
   }
  }
- assert.match(figure.textContent!,/not your run/);assert.match(figure.textContent!,/No extraction flow is solved/);
+ assert.match(figure.textContent!,/not your run/);assert.match(figure.textContent!,/The model does not calculate extraction flow/);
 });
 
 test('the radius control updates the whole inner volume, counts, purity and recovery, including empty and full cuts',t=>{

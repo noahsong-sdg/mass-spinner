@@ -29,10 +29,10 @@ test('every exported separator mesh maps to an honest, explicit component descri
  const bytes=readFileSync('assets/separator.glb'),size=bytes.readUInt32LE(12),gltf=JSON.parse(bytes.subarray(20,20+size).toString());
  const nodes=gltf.nodes.filter((node:any)=>node.mesh!==undefined);assert.ok(nodes.length>100);
  for(const node of nodes)assert.ok(separatorComponentId(node.name),'Unmapped exported mesh: '+node.name);
- for(const c of separatorComponents){assert.match(c.basis,/illustration choices/);assert.ok(c.material.length>15);}
+ for(const c of separatorComponents){assert.match(c.basis,/materials do not come from a verified device parts list/);assert.ok(c.material.length>15);}
  assert.equal(separatorComponentId('unidentified object'),null);
  assert.equal(separatorComponentId('Vessel__rear_section'),'vessel');assert.equal(separatorComponentId('Source_electrical_break_004'),'insulators');
- assert.match(fusionComponents.find(c=>c.id==='substrate')!.material,/publicly unspecified/);
+ assert.match(fusionComponents.find(c=>c.id==='substrate')!.material,/does not specify/);
  assert.match(fusionComponents.find(c=>c.id==='target')!.basis,/Recycling does not create replacement tritium/);
 });
 test('native selector exposes function and material; highlights are restored without material leakage',()=>{
@@ -48,10 +48,10 @@ test('SVG hotspot keyboard and native selector use the same component state',()=
  const s=setup(),target=s.svg.children.find(node=>node.attributes['aria-label']==='Lithium-tritide target')!;
  let prevented=0;target.events.keydown({key:'Enter',preventDefault(){prevented++;}});
  assert.equal(prevented,1);assert.equal(target.attributes['aria-pressed'],'true');assert.match(text(s.fusion),/Lithium tritide \(LiT\)/);
- assert.match(text(s.fusion),/target regeneration/);assert.match(text(s.fusion),/not solved/);
+ assert.match(text(s.fusion),/target regeneration/);assert.match(text(s.fusion),/does not calculate/);
  assert.doesNotMatch(text(s.fusion),/fuel recovery/);assert.equal(s.fusion.children[0].children[2].children.at(-1)!.href,'https://www.marathonfusion.com/');
  const substrate=s.fusion.children[0].children[1].children[4];substrate.events.click();
- assert.equal(target.attributes['aria-pressed'],'false');assert.match(text(s.fusion.children[0].children[2]),/alloy and coolant are publicly unspecified/);
+ assert.equal(target.attributes['aria-pressed'],'false');assert.match(text(s.fusion.children[0].children[2]),/does not specify the substrate alloy or coolant/);
  target.events.keydown({key:'Tab',preventDefault(){prevented++;}});assert.equal(prevented,1);
 });
 test('production pointer handler raycasts geometry and rejects drag, cancelled and blocked picking',()=>{
@@ -67,5 +67,5 @@ test('3D dropdown, native inspector and live SVG preserve one component selectio
  choices.value='target';choices.events.change();assert.equal(choices.value,'target');assert.match(text(s.fusion),/Lithium tritide/);
  s.fusion.children[0].children[1].children[4].events.click();assert.equal(choices.value,'substrate');
  const source=s.svg.children.find(node=>node.attributes['aria-label']==='RF ion source')!;source.events.keydown({key:'Enter',preventDefault(){}});
- assert.equal(choices.value,'rf-source');assert.match(text(s.fusion.children[0].children[2]),/Radio-frequency power/);
+ assert.equal(choices.value,'rf-source');assert.match(text(s.fusion.children[0].children[2]),/Radio-frequency \(RF\) power/);
 });

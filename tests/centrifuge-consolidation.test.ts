@@ -11,9 +11,9 @@ test('help page keeps density linear in centrifugal radial force balance',()=>{
  const balance=[...doc.querySelectorAll('.equation')].find(node=>node.textContent?.startsWith('dp/dr'))!;
  assert.ok(balance);assert.match(balance.textContent!,/^dp\/dr = ρΩ²r/);
  assert.equal(balance.querySelectorAll('var')[2].textContent,'ρ','density must not be grouped under the square');
- assert.match(balance.nextElementSibling!.textContent!,/equilibrium references/);
- assert.match(balance.nextElementSibling!.textContent!,/does not solve radial fluid momentum or extraction/);
- assert.match(doc.querySelector('#physics')!.textContent!,/optional thermal evolution/);
+ assert.match(balance.nextElementSibling!.textContent!,/equilibrium reference/);
+ assert.match(balance.nextElementSibling!.nextElementSibling!.textContent!,/does not calculate radial fluid momentum or extraction/);
+ assert.match(doc.querySelector('#physics')!.textContent!,/Optional thermal evolution/);
 });
 
 function fixture(t:any,search='',mobile=false){

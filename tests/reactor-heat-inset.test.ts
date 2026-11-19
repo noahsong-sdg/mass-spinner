@@ -23,9 +23,9 @@ const sameExtent=(path:SVGPathElement,expected:number[])=>extent(path).forEach((
 
 test('heat inset expands film and backing separately but keeps true relative face depths',t=>{
  const f=fixture(t),state=selected();f.inset.update(state);
- assert.match(f.inset.element.querySelector('figcaption')!.textContent!,/depth expanded separately/i);
+ assert.match(f.inset.element.querySelector('figcaption')!.textContent!,/enlarged depth view/i);
  assert.match(f.inset.element.textContent!,/Film · 2 µm/);assert.match(f.inset.element.textContent!,/Backing · 4000 µm/);
- assert.match(f.inset.element.querySelector('svg')!.getAttribute('aria-label')!,/physical face depths.*each material expanded separately/);
+ assert.match(f.inset.element.querySelector('svg')!.getAttribute('aria-label')!,/physical face depths.*Each material has a separate enlarged view/);
  const strips=Array.from(f.inset.element.querySelectorAll<SVGRectElement>('rect'));
  assert.equal(strips.length,2);
  const bars=f.bars();assert.equal(bars.length,6,'the interface belongs to both separately expanded strips');
@@ -108,7 +108,7 @@ test('sparse nonzero boundary and internal fluxes survive visual sampling at ref
 test('initial-source conditional budget and power reference do not claim solved coolant transport',t=>{
  const f=fixture(t),source=selected({basis:'initial source',timeS:null,heatGeometry:null,heatFacesWM2:[],temperatureK:[],depositedPowerW:1000});
  const initial=f.inset.update(source);assert.equal(initial.direction,'stopping budget');assert.equal(initial.coolantW,null);
- assert.match(f.inset.element.textContent!,/conditional stopping budget.*If the transmitted beam stops here: 1000 W.*No depth temperature is predicted/);
+ assert.match(f.inset.element.textContent!,/conditional stopping balance.*If the transmitted beam stops here, the heat input is 1000 W.*This view gives no depth temperature/);
  assert.ok(f.paths().length>0);assert.doesNotMatch(f.inset.element.textContent!,/(To|From) coolant/);
  assert.equal(f.inset.update({...source,depositedPowerW:0}).direction,'none');assert.equal(f.paths().length,0);assert.equal(f.inset.running,false);
  const reference=f.inset.update({kind:'power-reference'});assert.equal(reference.direction,'reference');assert.equal(reference.coolantW,null);

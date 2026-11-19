@@ -34,7 +34,7 @@ test('comparison explains accepted changes, keeps A immutable and hides pending 
  assert.equal(reading.hidden,true);
  f.tools.accept(snapshot(.02));assert.equal(reading.hidden,true);f.buttons()[0].click();
  assert.equal(reading.hidden,false);assert.match(reading.textContent!,/Same accepted base inputs/);
- assert.match(reading.textContent!,/Drive\/thermal history unavailable/);
+ assert.match(reading.textContent!,/Drive and thermal histories are not available/);
  f.tools.accept(snapshot(.05));assert.match(reading.textContent!,/Initial discharge current: 0\.02 A → 0\.05 A/);
  assert.equal(f.tools.pinned!.config.currentA,.02);
  f.tools.accept(null);assert.equal(reading.hidden,true);assert.equal(reading.textContent,'');
@@ -60,8 +60,9 @@ test('comparison reports accepted thermal and current-history edits even when in
  f.tools.accept(a);f.buttons()[0].click();
  assert.equal(f.doc.querySelector('.fuel-comparison-inputs')!.textContent,'Same accepted base inputs.');
  const b={result:{...rotor,transport:simulateFuelOperation(rotor,{schemaVersion:1,events:[{timeS:.0005,currentA:0}],thermal:{...DEFAULT_FUEL_THERMAL,enabled:true,coolantK:550}},{cells:4,steps:4})}};
+ assert.doesNotMatch(b.result.transport.assumptions.join(' '),/Isothermal independent/,'A thermal run must not claim an external fixed-temperature bath.');
  f.tools.accept(b);const reading=f.doc.querySelector('.fuel-comparison-inputs')!.textContent!;
- assert.match(reading,/Current-switch history changed/);assert.match(reading,/Temperature evolution: off → on/);
+ assert.match(reading,/The current-switch history changed/);assert.match(reading,/Temperature evolution: off → on/);
  assert.match(reading,/Coolant temperature: 500 K → 550 K/);
  assert.doesNotMatch(reading,/Same accepted base inputs|unavailable/);
  f.buttons()[0].click();const equivalent=structuredClone(b);
@@ -102,7 +103,7 @@ test('known map source mismatch is rejected while legacy unknown provenance rema
  const f=fixture(t),known={...snapshot(),producingCode:{schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{source:'b'.repeat(64)}}};
  f.tools.accept(known);f.buttons()[2].click();const old=f.requests[0];
  old.resolve({result:computeFuelOperatingMap(old.record.config,{size:2}),producingCode:{...known.producingCode,sourceHash:'c'.repeat(64)}});await flush();
- assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,0);assert.match(f.doc.querySelector('[role=status]')!.textContent!,/Simulation code changed/);
+ assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,0);assert.match(f.doc.querySelector('[role=status]')!.textContent!,/The simulation code changed/);
  f.buttons()[2].click();const matching=f.requests[1];matching.resolve({result:computeFuelOperatingMap(matching.record.config,{size:2}),producingCode:known.producingCode});await flush();
  assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,4);
  f.tools.accept(snapshot());f.buttons()[2].click();const legacy=f.requests[2];

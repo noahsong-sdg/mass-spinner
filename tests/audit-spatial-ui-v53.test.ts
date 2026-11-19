@@ -35,7 +35,7 @@ test('spatial liner UI serializes geometry and disables the prescribed lumped he
 
 test('an inactive spatial draft does not affect a lumped or disabled thermal run',async t=>{
  const f=fixture(t);await f.start();await f.spatial();f.change('fuel-thermal-thicknessMm','');
- const accepted=f.ui.latest,count=f.requests.length;await f.ui.run();assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.match(f.ui.nodes.render.textContent,/Enter valid thermal settings/);
+ const accepted=f.ui.latest,count=f.requests.length;await f.ui.run();assert.equal(f.requests.length,count);assert.equal(f.ui.latest,accepted);assert.match(f.ui.nodes.render.textContent,/Before the run, enter permitted thermal settings/);
  f.change('fuel-thermal-model','lumped','change');await f.ui.run();assert.ok(f.ui.latest);assert.equal(f.requests.at(-1).operation.thermal.spatial,undefined);assert.equal(f.node('fuel-thermal-thicknessMm').disabled,true);
  assert.equal(f.ui.latest.result.transport.snapshots.at(-1).thermal.spatial,undefined);
  f.thermal(false);await f.ui.run();assert.ok(f.ui.latest);assert.equal(f.requests.at(-1).operation.thermal.enabled,false);assert.equal(f.requests.at(-1).operation.thermal.spatial,undefined);
@@ -47,7 +47,7 @@ test('thermal validation and serialization follow model selection even before di
  assert.equal(f.node('fuel-thermal-coolingWK').disabled,true,'Model selection precedes the presentation-attribute refresh.');
  f.node('fuel-thermal-coolingWK').value=-1;await f.ui.run();
  assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count,'A stale disabled attribute cannot hide an active out-of-domain input.');
- assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/valid thermal settings.*Previous accepted state/);
+ assert.equal(f.node('fuel-export').disabled,true);assert.match(f.ui.nodes.render.textContent,/permitted thermal settings.*Previous accepted state/);
  f.node('fuel-thermal-coolingWK').value=.5;f.node('fuel-thermal-wallCapacityJK').value=23;await f.ui.run();
  assert.equal(f.requests.at(-1).operation.thermal.wallCapacityJK,23);assert.equal(f.requests.at(-1).operation.thermal.coolingWK,.5);
 });
@@ -55,7 +55,7 @@ test('thermal validation and serialization follow model selection even before di
 test('spatial temperature plots and liner instruments use the accepted physical cursor',async t=>{
  const f=fixture(t);await f.start();await f.spatial();f.change('fuel-motion-time',.5);
  f.change('fuel-plot','thermal','change');const text=f.ui.nodes.plots.textContent;
- assert.match(text,/Inner liner cell/);assert.match(text,/Outer liner cell/);assert.match(text,/Lumped neutral gas/);
+ assert.match(text,/Inner liner cell/);assert.match(text,/Outer liner cell/);assert.match(text,/uniform-temperature gas/);
  f.change('fuel-plot','thermalProfile','change');const sample=sampleFuelTransport(f.ui.latest.result.transport,.5),spatial=sample.thermal!.spatial!,format=(n:number)=>n.toLocaleString(undefined,{maximumSignificantDigits:4});
  const values=[...f.ui.nodes.plots.querySelectorAll('.fuel-metrics strong')].map(n=>n.textContent);
  assert.deepEqual(values,['0.5 s',`${format(spatial.innerK)} K`,`${format(spatial.outerK)} K`,`${format(sample.thermal!.gasK)} K`]);

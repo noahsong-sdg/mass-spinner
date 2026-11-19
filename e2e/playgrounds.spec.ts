@@ -47,11 +47,11 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  await expect.poll(()=>page.locator('#fuel-plots').innerHTML()).not.toBe(start);
  await expect(page.locator('#fuel-plots svg').first()).toBeVisible();
  await page.getByRole('button',{name:'Close Plots',exact:true}).click();
- await page.getByRole('button',{name:'Inspect',exact:true}).click();
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
  await page.locator('#fuel-component').selectOption('coils');
  await expect(page.locator('#fuel-inspect')).toContainText('Materials & model');
- await page.getByRole('button',{name:'Frame component',exact:true}).click();
- await page.getByRole('button',{name:'Close Inspect',exact:true}).click();
+ await page.getByRole('button',{name:'Show component',exact:true}).click();
+ await page.getByRole('button',{name:'Close Examine',exact:true}).click();
  await expect(page.locator('body')).toHaveAttribute('data-level','2');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('centrifuge',{body:await page.screenshot(),contentType:'image/png'});
@@ -70,7 +70,7 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
  await page.getByRole('button',{name:'View',exact:true}).click();
  await page.locator('#fuel-view-representation').selectOption('both');
  await page.locator('#fuel-view-layer').selectOption('density');
- await page.getByRole('spinbutton',{name:'Axial position / length precisely'}).fill('0.25');
+ await page.getByRole('spinbutton',{name:'Axial position / length numeric value'}).fill('0.25');
  await expect(page.locator('#fuel-view-slice')).toHaveValue('0.25');
  await page.locator('#fuel-view details').getByText('Assembly',{exact:true}).click();
  await page.getByRole('button',{name:'Cutaway',exact:true}).click();
@@ -89,7 +89,7 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
 test('four gas modes reveal their geometry and explain their physical scope',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal settled'],['spin','tracers','Blue: ions'],['flow','tracers','dashed routes'],['transport','both','equal-count']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','azimuthal average']] as const){
   await page.locator('#fuel-motion-mode').selectOption(mode);
   if(mode==='spin'||mode==='transport')await page.locator('#fuel-motion-time').press('End');
   await expect(page.locator('#fuel-mode-reading')).toContainText(reading);
@@ -129,25 +129,25 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await expect(page.locator('#blanket-render canvas')).toBeVisible();
  const blanket=page.locator('#blanket-render');
  await expect(blanket.locator('.apparatus-scale')).toHaveCount(0);
- await expect(blanket.locator('.apparatus-scale-note')).toHaveText('Power reference · R 4.2 m · a 1.2 m · outer hardware conceptual');
+ await expect(blanket.locator('.apparatus-scale-note')).toHaveText('Power reference · R 4.2 m · a 1.2 m · assumed outer hardware');
  await blanket.getByLabel('Geometry and material fidelity',{exact:true}).click();
- await expect(blanket.locator('.apparatus-provenance')).toContainText('not as-built');
+ await expect(blanket.locator('.apparatus-provenance')).toContainText('not built Marathon hardware');
  await dimensionLabelsDoNotOverlap(page,'#blanket-render');
  await expect(blanket.getByRole('link',{name:'Dimension source ↗'})).toHaveAttribute('href','https://www.marathonfusion.com/alchemy.pdf#page=13');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  await info.attach('blanket-paper-dimensions',{body:await page.screenshot(),contentType:'image/png'});
- await page.getByRole('button',{name:'Inspect',exact:true}).click();
- await page.locator('#window-inspect [aria-label="Inspect a component"]:visible').selectOption('tf-coils');
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
+ await page.locator('#window-inspect [aria-label="Select a component"]:visible').selectOption('tf-coils');
  await expect(page.locator('#window-inspect')).toContainText('Toroidal-field magnets');
- await expect(page.locator('#window-inspect')).toContainText('unspecified');
- await page.getByRole('button',{name:'Close Inspect',exact:true}).click();
+ await expect(page.locator('#window-inspect')).toContainText('not specified');
+ await page.getByRole('button',{name:'Close Examine',exact:true}).click();
  await page.locator('#marathon-apparatus').selectOption('source');
  const beam=page.locator('#fusion-apparatus');
  await expect(beam.locator('canvas')).toBeVisible();
  await expect(beam.locator('.apparatus-scale')).toHaveCount(0);
  await expect(beam.locator('.apparatus-scale-note')).toHaveText('Assumed dimensions · not published');
  await beam.getByLabel('Geometry and material fidelity',{exact:true}).click();
- await expect(beam.locator('.apparatus-provenance')).toContainText('dimensions are not published');
+ await expect(beam.locator('.apparatus-provenance')).toContainText('does not publish beamline or target hardware dimensions');
  await dimensionLabelsDoNotOverlap(page,'#fusion-apparatus');
  await expect(beam.locator('.apparatus-provenance')).not.toContainText('210 mm');
  expect(errors).toEqual([]);
@@ -167,7 +167,7 @@ test('reactor internals respond to source controls and distinguish normalized po
  await page.locator('#fusion-beam-enabled').uncheck();await expect(processes).toHaveAttribute('data-beam-count','0');await expect(processes).toHaveAttribute('data-heat-w','0');
  await page.locator('#fusion-target-enabled').check();await page.locator('#fusion-beam-enabled').check();
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
- await processes.locator('summary').click();await expect(processes).toContainText('slowed separately');
+ await processes.locator('summary').click();await expect(processes).toContainText('separate slow-motion factors');
  await expect(processes.getByRole('button',{name:'Pause motion',exact:true})).toBeDisabled();
  await page.emulateMedia({reducedMotion:'no-preference'});
  await expect(processes.getByRole('button',{name:'Pause motion',exact:true})).toBeEnabled();
@@ -181,7 +181,7 @@ test('reactor internals respond to source controls and distinguish normalized po
  await page.getByRole('button',{name:'Close Target',exact:true}).click();
  await processes.locator('summary').click();
  await expect(processes.locator('.reactor-heat svg')).toBeVisible();
- await expect(processes.locator('.reactor-heat figcaption')).toHaveText('Heat flow · depth expanded separately');
+ await expect(processes.locator('.reactor-heat figcaption')).toHaveText('Heat flow · enlarged depth view');
  await expect(processes).toHaveAttribute('data-heat-direction','toward coolant');
  expect(Number(await processes.getAttribute('data-coolant-w'))).toBeGreaterThan(0);
  const heatWidth=await processes.locator('.reactor-heat svg').evaluate(node=>node.getBoundingClientRect().width);expect(heatWidth).toBeGreaterThanOrEqual(240);
@@ -189,7 +189,7 @@ test('reactor internals respond to source controls and distinguish normalized po
  await info.attach('beam-live-processes',{body:await page.screenshot(),contentType:'image/png'});
  await page.locator('#marathon-apparatus').selectOption('blanket');
  const reference=page.locator('#blanket-render .reactor-processes');await expect(reference).toHaveAttribute('data-basis','power-reference');
- await reference.locator('summary').click();await expect(reference).toContainText('not calculated');await expect(reference).toHaveAttribute('data-beam-count','0');
+ await reference.locator('summary').click();await expect(reference).toContainText('does not calculate plasma motion, neutron transport or heat flow');await expect(reference).toHaveAttribute('data-beam-count','0');
  await expect(reference.getByLabel('Show beam',{exact:true})).toBeHidden();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect(errors).toEqual([]);
@@ -198,7 +198,7 @@ test('reactor internals respond to source controls and distinguish normalized po
 test('guide: local links, native action and accessible reading layout',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');
- await page.getByRole('link',{name:'Every menu option is explained below'}).click();
+ await page.getByRole('link',{name:'The menu table'}).click();
  await expect(page).toHaveURL(/#views$/);
  await page.getByRole('link',{name:'§4',exact:true}).first().click();
  await expect(page).toHaveURL(/#momentum$/);
@@ -232,7 +232,7 @@ test('control tutorial changes the existing run through the separate reader',asy
  await reader.locator('[data-guide-action="endSpin"]').click();
  const zero=await exported(page);expect(zero.result.config.currentA).toBe(0);expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
  await reader.locator('[data-guide-action="currentExperiment"]').click();
- await page.getByRole('button',{name:'Set Radial discharge current precisely',exact:true}).click();
+ await page.getByRole('button',{name:'Set the exact value of Radial discharge current',exact:true}).click();
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});await current.fill('0.03');await current.press('Enter');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});await reader.locator('[data-guide-action="endSpin"]').click();
  const driven=await exported(page);expect(driven.result.config.currentA).toBe(.03);expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
@@ -242,19 +242,19 @@ test('control tutorial changes the existing run through the separate reader',asy
 test('Inspect: liner reference changes its response without changing gas temperature',async({page},info)=>{
  await page.goto('/?level=2');
  await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- await page.getByRole('button',{name:'Inspect',exact:true}).click();
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
  await page.locator('#fuel-component').selectOption('liner');
  await expect(page.locator('#fuel-inspect [data-effect]')).toContainText('Thermal evolution is off');
  await expect(page.locator('#fuel-inspect input')).toHaveCount(0);
  await page.locator('#fuel-inspect [data-control="linerK"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();
  await expect(page.locator('#fuel-linerK')).toBeFocused();
- await page.getByRole('button',{name:'Set Initial / reference liner temperature precisely',exact:true}).click();
+ await page.getByRole('button',{name:'Set the exact value of Initial / reference liner temperature',exact:true}).click();
  await page.getByRole('spinbutton',{name:'Initial / reference liner temperature (K)',exact:true}).fill('1200');
  await page.getByRole('button',{name:'Apply Initial / reference liner temperature',exact:true}).click();
  await expect(page.locator('#fuel-inspect [data-show-response]')).toBeEnabled({timeout:30_000});
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
- await page.getByRole('button',{name:'Inspect',exact:true}).click();
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
  await page.getByRole('button',{name:'Show liner vapor pressure',exact:true}).click();
  await expect(page.locator('#fuel-plot')).toHaveValue('lithium');
  await expect(page.locator('#fuel-plots .plot-readout')).toContainText('1200,');

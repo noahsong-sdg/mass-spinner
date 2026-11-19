@@ -64,7 +64,7 @@ test('collapsed geometry controls drive finite plots, warn for source size, and 
  assert.equal(host.children[0].className,'fusion-model-notes');
  assert.ok(host.children[0].children.some(e=>e.className==='live-plots'));
  assert.equal(host.children[0].children.at(-1)!.children[0].textContent,'Model info');
- assert.match(text(host),/No valid source/);panel.update(source);
+ assert.match(text(host),/No source result is available/);panel.update(source);
  const before=text(host);get('neutron-sample-distance').value=.1;get('neutron-sample-distance').fire('input');
  assert.notEqual(text(host),before);assert.match(text(host),/radius \/ distance > 0\.1/);
  for(const id of ['neutron-sample-distance','neutron-sample-area']){
@@ -75,7 +75,7 @@ test('collapsed geometry controls drive finite plots, warn for source size, and 
    for(const e of all(host))for(const value of Object.values(e.attributes))assert.doesNotMatch(value,/NaN|Infinity/);
   }
  }
- panel.update(null);assert.match(text(host),/No valid source/);assert.ok(!all(host).some(e=>e.tag==='svg'));
+ panel.update(null);assert.match(text(host),/No source result is available/);assert.ok(!all(host).some(e=>e.tag==='svg'));
  panel.update(source);get('neutron-sample-area').value=0;get('neutron-sample-area').fire('input');
  assert.match(text(host),/positive finite sample area/);assert.ok(!all(host).some(e=>e.tag==='svg'));
  get('neutron-sample-area').value=10;get('neutron-sample-area').fire('input');assert.ok(all(host).some(e=>e.tag==='svg'));
@@ -95,6 +95,6 @@ test('actual fusion callback updates geometry on beam/target toggles, invalidati
  get('fusion-beam-enabled').checked=true;get('fusion-beam-enabled').fire('change');assert.equal(last.neutronRateS,sourceRate);
  get('fusion-target-enabled').checked=false;get('fusion-target-enabled').fire('change');assert.equal(last.neutronRateS,0);
  get('fusion-target-enabled').checked=true;get('fusion-target-enabled').fire('change');
- get('fusion-stoppingFraction').value=1;lab.update();assert.equal(last,null);assert.match(text(host),/No valid source/);
+ get('fusion-stoppingFraction').value=1;lab.update();assert.equal(last,null);assert.match(text(host),/No source result is available/);
  get('fusion-stoppingFraction').value=.2;get('fusion-stoppingFraction').fire('input');assert.equal(last.neutronRateS,sourceRate);
 });

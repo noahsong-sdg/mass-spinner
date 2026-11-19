@@ -87,7 +87,7 @@ test('short actual collisionless run keeps sparse Coulomb diagnostics unresolved
  assert.equal(r.collisions.pairs,0);
  assert.equal(r.regimeSummary.status,'unresolved');
  assert.ok(r.regimeHistory.every(h=>h.assessment.status==='unresolved'));
- assert.match(r.assumptions.join(' '),/not proof between sampled times/);
+ assert.match(r.assumptions.join(' '),/give no proof between sample times/);
 });
 
 test('independent failure budgets preserve channel dimensions, linear energy and diffusive square-root scaling',()=>{
@@ -112,7 +112,7 @@ test('independent failure budgets preserve channel dimensions, linear energy and
 test('failure-budget domain rejects an overflowing displayed time even when all physical budgets are finite',()=>{
  const c={...DEFAULT_FAILURE_BUDGETS,neutralDensityM3:0,recombinationM3S:0,
   diffusionM2S:0,impurityFraction:0,wallFluxM2S:0};
- assert.throws(()=>failureBudgets({...c,residenceS:1e304}),/representable finite domain/);
+ assert.throws(()=>failureBudgets({...c,residenceS:1e304}),/outside the finite number range/);
  const r=failureBudgets({...c,residenceS:1e302});
  assert.ok(r.curves.every(curve=>[...curve.x,...curve.y].every(Number.isFinite)));
  close(r.curves[0].x.at(-1)!,1e308);

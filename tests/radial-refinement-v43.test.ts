@@ -33,7 +33,7 @@ test('actual radial click handler refuses the cap and names the two executed gri
   await new Promise<void>(resolve=>setImmediate(resolve));
   if(bins===2000){
    assert.deepEqual(executed,[]);assert.equal(elements.refine.disabled,true);
-   assert.match(elements['refinement-status'].textContent,/No finer supported grid; radial convergence unassessed/);
+   assert.match(elements['refinement-status'].textContent,/No finer grid is supported. Radial convergence is not established/);
    assert.doesNotMatch(elements['refinement-status'].textContent,/inventory relative change/);
   }else{
    assert.deepEqual(executed,[bins*2]);assert.equal(elements.refine.disabled,false);
