@@ -119,7 +119,7 @@ Charged-particle filters use more physics than this neutral-gas model includes.
 
 ## 3. How do we turn gas without a moving drum?
 
-Equilibrium assumes gas that already turns. A device also needs a drive that creates this rotation.
+Equilibrium assumes gas that already turns. A device also needs a drive that causes this rotation.
 Radial current crosses an axial magnetic field. The resulting force turns charged gas around electrodes that do not move:
 
 ```math
@@ -256,7 +256,7 @@ The Inner collection radius / a control changes that marker and starts a new run
 
 ## Which model parts are necessary, and what is missing?
 
-We must know which conclusions the model can support before we use its results. Each missing process limits those conclusions.
+We must know which conclusions the model permits before we use its results. Each missing process limits those conclusions.
 
 Drive changes rotation, heating decreases separation at the same speed, and transport changes the distribution over time.
 The collection radius selects the sample. Without these connections, more current can appear useful when it is not.
@@ -271,7 +271,7 @@ It does not show accurate Marathon or lithium results.
 
 ## What do the menu options mean?
 
-Different pictures can look like different physical models. Use this key to distinguish a calculated history from a reference.
+Different pictures can look like different physical models. Use this key to compare a calculated history with a reference.
 
 Gas view changes the display, not the physics. Use Controls to set optional models to on.
 

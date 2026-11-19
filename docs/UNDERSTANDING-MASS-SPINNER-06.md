@@ -46,7 +46,7 @@ Spatial argon reference shows saved mesh refinements, not experimental accuracy 
 
 ## Which predictions have sufficient evidence?
 
-A numerically stable model can predict the wrong experimental quantity. We must compare what the instrument measures under the same conditions.
+A numerically stable model can calculate a different quantity from the measurement. We must compare what the instrument measures under the same conditions.
 
 The comparison shows how diffusivity changes recovery under specified inputs, assumptions and time. Accuracy for a Marathon device is a different question. It is necessary to use its apparatus, operating conditions and measurement method.
 

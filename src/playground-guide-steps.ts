@@ -1,6 +1,6 @@
 /** Shared instructions for the separate guide and the older scene reader. */
 export const playgroundSteps=[
- {id:'machine',title:'What turns inside the vessel?',intro:'We want a sample with more light ⁶Li relative to heavy ⁷Li. First, identify which parts turn and which stay still.',
+ {id:'machine',title:'What turns inside the vessel?',intro:'We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.',
   do:[],
   notice:'Current across a magnetic field causes a sideways force on charged gas. Collisions transfer rotation to neutral atoms without a moving drum.',
   note:'Colors and weighted markers show calculated populations, not individual atoms. If a dimension has no published value, the model uses an assumption.',actions:[['look','Show gas & drive'],['coils','Show the coils']]},

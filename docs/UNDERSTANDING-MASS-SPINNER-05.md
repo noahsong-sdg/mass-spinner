@@ -4,7 +4,7 @@
 
 ## What are the three processes?
 
-Lithium enrichment alone cannot supply a D–T plasma with tritium. We must distinguish three processes to understand what a centrifuge can contribute:
+Lithium enrichment alone cannot supply a D–T plasma with tritium. Three processes show how a centrifuge can help:
 
 - Enrichment increases the lithium-6 fraction relative to lithium-7. The centrifuge changes the isotope distribution. It makes no tritium.
 - Breeding makes tritium through nuclear reactions in a blanket. One reaction is ⁶Li + n → ⁴He + T. The tritium yield changes with neutron transport, materials and losses.
@@ -14,7 +14,7 @@ The Reactor tab has a different model for a compact beam–target neutron source
 
 ## How much fuel stays in processing equipment?
 
-Fuel in processing equipment is unavailable to the plasma. We need its mass to estimate how much fuel the plant must have.
+Fuel in processing equipment is unavailable to the plasma. Its mass is part of the necessary plant inventory.
 
 Burn fraction is the number of tritium atoms used in fusion divided by the number injected in one pass. At fixed fusion power, more fuel circulation is necessary when burn fraction is lower. Longer processing time increases the fuel inventory outside the plasma:
 
@@ -47,7 +47,7 @@ These inputs do not change lithium transport.
 
 ## Does this give the total fuel inventory?
 
-An exhaust estimate covers only one fuel location. Before we use it to size a plant, we must identify the other inventories.
+An exhaust estimate includes only one fuel location. Before we use it for a plant, we must find the other inventories.
 
 For constant fuel flow, the equation gives exhaust-processing inventory, not total plant inventory. It does not include startup reserves, storage, decay, leakage or evolving breeding. It uses one processing time instead of a distribution of times. Zero processing inventory does not mean zero plant inventory. Lithium purity alone does not show sufficient tritium production for operation.
 
