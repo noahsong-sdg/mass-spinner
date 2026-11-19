@@ -1,5 +1,8 @@
 name: Deploy verified artifact
 on:
+  # Register feature-branch workflow revisions; pushes never prepare or deploy.
+  push:
+    paths: ['.github/workflows/deploy.yml']
   workflow_dispatch:
     inputs:
       verify_run_id:
@@ -17,11 +20,12 @@ on:
 permissions:
   contents: read
   actions: read
-concurrency:
-  group: production-deployment
-  cancel-in-progress: false
 jobs:
   deploy:
+    if: github.event_name == 'workflow_dispatch'
+    concurrency:
+      group: production-deployment
+      cancel-in-progress: false
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:

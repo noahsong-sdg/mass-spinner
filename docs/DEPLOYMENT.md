@@ -12,6 +12,8 @@ The selected Verify run supplies version-specific feature/physics qualification.
 
 Rollback uses the same command with an older `verify_run_id` and the **currently live** `previous_deploy_run_id`. Current release tooling admits the older artifact; the rollback preserves chunks needed by tabs from newer releases. The selected Verify run’s `verified-site` artifact must still exist (currently retained for 7 days).
 
+A push touching `deploy.yml` registers the workflow on a feature branch but skips the entire Deploy job. Only an explicit dispatch prepares or publishes a release. The `prepared-site` artifact is uploaded before the credentialed publication step; a failed publication does not qualify that run as a normal `previous_deploy_run_id`. An authorized manual publication from that artifact needs a fresh explicit bootstrap on the next Actions deployment.
+
 ## First deployment after a manual release
 
 A manual deployment has no `prepared-site` workflow artifact. Bootstrap it explicitly once using its original successful Verify run and a trusted SHA256 of its **prepared** manifest:
