@@ -22,17 +22,18 @@ test('reactor recalculation preserves a user-framed hardware view',async({page},
  await processes.locator(':scope > summary').click();
  await canvas.focus();await canvas.press('ArrowRight');await canvas.press('+');
  await expect(canvas).toBeFocused();
- const before=await canvas.screenshot();
+ // Locator screenshots composite HTML over the GPU canvas. Exclude its focus
+ // outline and the floating dock without changing either layout or camera.
+ const capture={style:'#fusion-apparatus canvas{outline:none!important}.world-dock{visibility:hidden!important}'};
+ const before=await canvas.screenshot(capture);
  await page.getByRole('button',{name:'Controls',exact:true}).click();
  const current=page.locator('#fusion-beamCurrentA'),oldCurrent=await current.inputValue();
  await current.press('ArrowRight');await expect(current).not.toHaveValue(oldCurrent);
  await expect(page.locator('.coupled-target')).toHaveAttribute('data-status','pending');
  await expect(page.locator('.coupled-target')).toHaveAttribute('data-status','accepted',{timeout:30_000});
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
- // The canvas's inset keyboard-focus outline is part of its screenshot.
- // Compare the same focus state as well as the same geometry and camera.
  await canvas.focus();await expect(canvas).toBeFocused();
- const after=await canvas.screenshot();
+ const after=await canvas.screenshot(capture);
  await info.attach('reactor-camera-before',{body:before,contentType:'image/png'});
  await info.attach('reactor-camera-after',{body:after,contentType:'image/png'});
  expect(after.equals(before),'same geometry must retain the orbit, zoom, pan and frame through pending and acceptance').toBe(true);
