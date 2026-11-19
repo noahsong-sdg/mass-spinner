@@ -42,10 +42,20 @@ test('the rewritten guide links to existing local explanations, evidence and imp
 
 test('the guide connects equation symbols, plot units and experiment histories to the real controls',()=>{
  for(const phrase of ['not speed immediately','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n','Curve slope is power in watts',
-  'This energy difference increases or decreases gas thermal energy','numerical loss and physical heat as separate terms',
+  'The thermal model assigns this energy difference to gas thermal energy','numerical loss and physical heat as separate terms',
   'also during a pause','New run','does not move the 3D collection marker',
   'control changes that marker and starts a new run','do not show if the device can continue to operate'])
   assert.ok(source.includes(phrase)||source.replace(/\s+/g,' ').includes(phrase),phrase);
+});
+
+test('the first experiment uses current status and window names before introducing momentum',()=>{
+ const introduction=source.split('## 1.')[0];
+ assert.match(introduction,/Wait until the calculation finishes/);
+ assert.match(introduction,/Ion speeds increase\. Collisions then increase neutral gas speed/);
+ assert.doesNotMatch(introduction,/Updating|angular momentum/);
+ assert.match(source,/Examine identifies parts and links to those controls/);
+ assert.doesNotMatch(source,/Inspect identifies/);
+ assert.match(source,/At the same radius and angular speed, heavier atoms need more inward force/);
 });
 
 

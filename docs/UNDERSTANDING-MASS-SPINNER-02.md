@@ -19,9 +19,9 @@ The [first guide](UNDERSTANDING-MASS-SPINNER.md) explains ions and neutral atoms
 
 1. [Start from rest & edit current](/?level=2&guide=physics&topic=goal&try=currentExperiment).
 2. Set Radial discharge current to 0 A.
-3. Wait until Updating stops.
+3. Wait until the calculation finishes.
 4. [Show end-of-run speeds](/?level=2&guide=physics&topic=goal&try=endSpin). The two populations must stay at rest.
-5. Do the same comparison with 0.03 A and the same other inputs. Ion speeds increase. Collisions move angular momentum to neutral atoms.
+5. Do the same comparison with 0.03 A and the same other inputs. Ion speeds increase. Collisions then increase neutral gas speed.
 6. Compare the speeds at the same physical time.
 
 The experiment removes earlier power switches and starts from rest.
@@ -31,6 +31,7 @@ Without thermal evolution, temperature stays constant. [§4 explains the motion]
 ## 1. Why does rotation separate masses?
 
 Circular motion is possible only with inward force. Pressure that increases from the axis to the wall supplies this force.
+At the same radius and angular speed, heavier atoms need more inward force.
 During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
 Random thermal motion decreases separation.
 
@@ -198,7 +199,7 @@ P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 
 Slip heating cannot be negative. Wall drag also changes rotational energy into heat.
 
-Mass movement changes rotational energy K = L²/(2ℐ). This energy difference increases or decreases gas thermal energy.
+Mass movement changes rotational energy K = L²/(2ℐ). The thermal model assigns this energy difference to gas thermal energy.
 At constant L, outward movement releases energy. Inward movement can remove heat.
 This does not calculate full fluid momentum and energy transport.
 
@@ -304,7 +305,7 @@ Parameter scans compare calculated values for different settings.
 
 ### Which controls affect physics?
 
-Controls changes physical inputs. Inspect identifies parts and links to those controls.
+Controls changes physical inputs. Examine identifies parts and links to those controls.
 Some inputs affect only active models. Others affect separate reference calculations.
 A parameter scan can keep the same curve while the selected marker moves.
 After a change, wait until the calculation finishes.

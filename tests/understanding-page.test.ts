@@ -22,6 +22,16 @@ test('energy readers explain the separation and cooling decision before introduc
  }
 });
 
+test('the heat reader introduces input power before stored energy and retains the heat-assignment assumption',()=>{
+ const heat=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-03.md','utf8');
+ const firstEquation=heat.indexOf('```math');
+ const inputPower=heat.indexOf('First calculate the energy supplied each second');
+ assert.ok(inputPower>=0&&inputPower<firstEquation);
+ assert.ok(heat.indexOf('The balance of energy input and removal sets the stored energy and temperature')>firstEquation);
+ assert.match(markdown,/The thermal model assigns this energy difference to gas thermal energy/);
+ assert.match(markdown,/This does not calculate full fluid momentum and energy transport/);
+});
+
 test('the website renders every guide equation and its derivation, with accessible schematic diagrams',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
  const count=[...markdown.matchAll(/^```math$/gm)].length;

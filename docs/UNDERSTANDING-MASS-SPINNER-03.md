@@ -8,7 +8,8 @@ The next question is if more current can increase gas temperature sufficiently t
 At the same rotation speed, hotter gas has more random thermal motion and less separation.
 Does more current increase separation when it increases temperature?
 To calculate Ω²/T, we must calculate speed and temperature. Cooling must remove net heat input to keep temperature constant.
-A temperature model calculates the energy that stays in the gas and liner:
+
+First calculate the energy supplied each second. Mechanical power turns ions. Electrical resistance produces heat:
 
 ```math
 P_{\mathrm{mech}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
@@ -18,6 +19,7 @@ Power is the energy rate, in watts. Torque τ and ion angular speed Ωᵢ give m
 Current I and electrical resistance Rₑ give resistive heat.
 At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
 Friction also changes rotational energy into heat.
+The balance of energy input and removal sets the stored energy and temperature.
 
 [Open the heat experiment](/?level=2&try=heatExperiment).
 
@@ -48,11 +50,13 @@ The minus sign gives heat flow from hot regions to cold regions.
 Calculate pressure p from number density n, temperature T and Boltzmann's constant k_B.
 
 1. [Open the spatial heat experiment](/?level=2&try=spatialHeatExperiment).
-2. Set Radial tungsten liner to on.
-3. Set Spatial mixture · experimental to on.
-4. [Show temperature profile](/?level=2&try=thermalProfile).
-5. Select one physical time.
-6. Compare gas and liner temperatures to identify the heat-flow direction.
+2. Set Evolve gas & liner temperature to on.
+3. In Liner model, select Radial tungsten liner.
+4. In Gas model, select Spatial mixture · experimental.
+5. Wait until the calculation finishes.
+6. [Show temperature profile](/?level=2&try=thermalProfile).
+7. Select one physical time.
+8. Compare gas and liner temperatures to identify the heat-flow direction.
 
 The two species have the same local temperature in this model.
 A cell with more atoms can contain more thermal energy without a higher temperature.

@@ -29,7 +29,7 @@ export function modelValidity(selected:string,settings:unknown,result:unknown){
  if(!result)return 'No current result. Examine physical assumptions and numerical convergence separately.';
  if(selected==='doublewell-dynamics'){
   const c=settings as Pick<DoublewellConfig,'collisionMethod'>,r=result as Pick<ReturnType<typeof simulateDoublewell>,'regimeSummary'|'regimeHistory'|'conservation'>;
-  return `Experimental ${c.collisionMethod??'fixed'}-cell kinetics. Local regime: ${r.regimeSummary.status}. Unresolved snapshots: ${r.regimeSummary.unresolvedSnapshots}/${r.regimeHistory.length}. Maximum raw Pθ residual: ${format(r.conservation.maxMomentumResidual)} of positive scale. Counts do not give calibrated purity. Torque-account corrections do not repair particle paths.`;
+  return `Experimental accuracy is not established for this ${c.collisionMethod??'fixed'}-cell collision calculation. Local regime: ${r.regimeSummary.status}. Unresolved snapshots: ${r.regimeSummary.unresolvedSnapshots}/${r.regimeHistory.length}. Maximum raw Pθ residual: ${format(r.conservation.maxMomentumResidual)} of positive scale. Counts do not give calibrated purity. Torque-account corrections do not repair particle paths.`;
  }
  if(selected==='centrifuge'&&typeof result==='object'&&'model' in result&&result.model==='coupled-magnetic-gaussian'){
   const r=result as MagneticCentrifugeResult;

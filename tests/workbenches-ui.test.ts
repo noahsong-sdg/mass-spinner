@@ -112,6 +112,7 @@ test('coupled closure routes through equilibrium adapter and exposes actual B an
 test('kinetic status reports the actual run regime and raw residual, without claiming validity',()=>{
  const c={...DEFAULT_DOUBLEWELL,particlesPerSpecies:8,duration:1e-6,collisions:false};
  const r=simulateDoublewell(c),message=modelValidity('doublewell-dynamics',c,r);
- assert.match(message,/Experimental/);assert.match(message,/raw Pθ residual/);assert.match(message,/do not give calibrated purity/);
+ assert.match(message,/Experimental accuracy is not established/);assert.match(message,/raw Pθ residual/);assert.match(message,/do not give calibrated purity/);
+ assert.match(readFileSync('src/main.ts','utf8'),/Collision model · accuracy not established/);
  assert.match(modelValidity('centrifuge',null,null),/No current result/);
 });

@@ -75,6 +75,10 @@ test('all seven steps have a live action and retain the physical scope distincti
   assert.equal(f.node('window-guide').querySelectorAll('ol li').length,playgroundSteps[i].do.length);assert.doesNotMatch(f.node('window-guide').innerHTML,/<strong>Watch for/);
  }
  f.step(3);assert.match(f.node('window-guide').textContent,/percentage and purity do not change by these factors/i);
+ const competition=f.node('window-guide').textContent!;
+ assert.match(competition,/Ω is angular speed, T is temperature, and α is the wall heavy\/light ratio divided by the axis ratio/);
+ assert.match(competition,/At constant speed, two times the temperature gives half this exponent/);
+ assert.match(competition,/At constant temperature, two times the speed gives four times this exponent/);
  f.step(5);assert.match(f.node('window-guide').textContent,/do not calculate extraction flow/);
  f.step(6);assert.match(f.node('window-guide').textContent,/do not show experimental accuracy/);
  f.node('window-guide').querySelector('.guide-navigation button:nth-child(2)').click();

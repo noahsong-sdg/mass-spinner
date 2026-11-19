@@ -23,4 +23,6 @@ test('published report is readable HTML with working evidence links and a local 
  assert.match(text,/current-spreading and voltage study/);
  assert.match(text,/21.10\/17.47\/13.46 V/);
  assert.match(text,/floating-wall\s+current redistribution/);
+ assert.match(text,/Integrated electrical work has numerical qualification only within this stationary, fixed-property angular model/);
+ assert.doesNotMatch(text,/Only integrated electrical work has numerical qualification/);
 });

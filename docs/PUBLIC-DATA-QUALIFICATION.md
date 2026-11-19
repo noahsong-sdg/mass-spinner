@@ -140,7 +140,7 @@ an assumption. The hollow cathode has a 4 mm inner radius; that dimension does
 not give its emitting width. The paired supports are illustrative alternatives, not measured uncertainty
 bounds or an isolated causal study of either contact.
 
-Only integrated electrical work has numerical qualification within this stationary,
+Integrated electrical work has numerical qualification only within this stationary,
 fixed-property angular model. That qualification does not include sharp-edge peak
 heating, equipotential metal electrodes, sheaths, thermal evolution and meridional
 flow. It does not include the live lithium model. Experimental qualification stays

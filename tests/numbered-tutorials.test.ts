@@ -48,6 +48,15 @@ test('03–06 state the prerequisites and boundaries needed to interpret their e
  assert.match(read('03'),/New run to remove earlier power switches/);
  assert.match(read('03'),/Set Run duration to 1 s/);
  assert.match(read('03'),/The two species have the same local temperature/);
+ const spatial=read('03').split('## Where does the heat go?')[1].split('## Can a field')[0];
+ const steps=[...spatial.matchAll(/^\d+\. (.+)$/gm)].map(match=>match[1]);
+ assert.deepEqual(steps.slice(1,5),[
+  'Set Evolve gas & liner temperature to on.',
+  'In Liner model, select Radial tungsten liner.',
+  'In Gas model, select Spatial mixture · experimental.',
+  'Wait until the calculation finishes.'
+ ]);
+ assert.doesNotMatch(spatial,/Set (?:Radial tungsten liner|Spatial mixture · experimental) to on/);
  assert.match(read('04'),/0.08 is 8%, not 0.08%/);
  assert.match(read('04'),/necessary upstream pressure and gas load are higher/);
  assert.match(read('05'),/do not change lithium transport/);
@@ -58,6 +67,9 @@ test('03–06 state the prerequisites and boundaries needed to interpret their e
  assert.match(read('05'),/positive power and time, and a burn fraction below one/);
  assert.match(read('06'),/not a statistical confidence interval/);
  assert.match(read('06'),/disagreement, not experimental accuracy/);
+ assert.match(read('06'),/combines light from different positions along that sightline/);
+ assert.match(read('06'),/Emission strength and the spectral estimator can affect the inferred velocity/);
+ assert.match(read('06'),/estimator is the method that converts the measured spectrum to velocity/);
 });
 
 function reader(number:string){
