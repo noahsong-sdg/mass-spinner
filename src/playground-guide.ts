@@ -190,7 +190,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    if(!canUseCentrifuge()&&!Object.hasOwn(guideExperiments,key))return true;
    if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
-   if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]!);
+   if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
    return immediate||!pending(key);
   };
   if(ready()){execute();return;}

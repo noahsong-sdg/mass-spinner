@@ -80,6 +80,31 @@ uncached samples.
 
 Two attempts to start the 10,000-checkpoint case were refused before guest
 execution by safe-dev's host memory-pressure guard; the kernel reported level 2.
-No stress-case timing is claimed, and the resource guard was not bypassed.
+The resource guard was not bypassed; the study subsequently ran in bounded remote CI below.
 Guest report files remain under `/work/home/playback-performance-*-20261119.*`.
 
+
+
+## Remote qualification
+
+[Run 44581803357](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44581803357)
+completed both sizes at revision `c85ddf0`, against immutable baseline `4558845`,
+in an offline Node 26.13.1 container limited to one CPU and 1 GiB. Receipts retain
+all batches and source hashes: [129 checkpoints](playback-performance-remote-129-20261119.json),
+[10,000 checkpoints](playback-performance-remote-10000-20261119.json).
+
+| Complete CPU path | Median paired current / baseline, 129 | 10,000 |
+|---|---:|---:|
+| Pinned spin | 0.861 | 0.619 |
+| Pinned energy | 1.073 | 0.931 |
+| Pinned separation | 2.311 | 0.929 |
+
+The counting trial confirms one constructor traversal, then zero full-history
+traversals for five cached frames, versus five traversals for the public sampler.
+Numerical equality and identical clocks, series and scene-node counts passed.
+Peak container memory was 522,620,928 bytes, with no OOM or runtime errors.
+
+Short-history results remain mixed. Separation was slower in the first three
+batches and faster in the last two; the CPU quota throttled 253 of 254 periods.
+These variable adapter timings establish neither a reliable common-case speedup
+nor a stable net regression. They do not measure browser or GPU frame rates.

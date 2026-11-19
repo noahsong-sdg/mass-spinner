@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 1,
+  "scope": "Synthetic immutable-history stress study; CPU adapter timings, not a physics benchmark or GPU/browser-frame measurement.",
+  "baselineRevision": "45588450bf35cb9abc4e3472ff6f30bf9b00d459",
+  "sourceHashes": {
+    "fuel-motion.ts": {
+      "baseline": "255905857c9a78f0b82b07839f9682d554dfdf937f6d75cc58ab073f76f0bc09",
+      "current": "e54fa2a584bb0ea8e59b279e0665d2bd664ebff8ac70f4f15eca4653c3c333f6"
+    },
+    "laboratory.ts": {
+      "baseline": "d5b48d888a34f8618187dbcca1b3f8cb453af896b612113837ca4a07fd16cbff",
+      "current": "3b95fdeab3db7a2104bf6f3205ad88735d2861a700702dfc123e79fc4bf5a250"
+    },
+    "fuel-centrifuge-geometry.ts": {
+      "baseline": "6388d3722fe27d1357777235ba73e638c0df4a3d865556f18ae2b3b513c33ee9",
+      "current": "6388d3722fe27d1357777235ba73e638c0df4a3d865556f18ae2b3b513c33ee9"
+    },
+    "fuel-centrifuge-ui.ts": {
+      "baseline": "6ae445f6d9c3ba31d6fa6ae29fff5653492d0c83c63d153b01cd0cf048b31df4",
+      "current": "6ae146c2dd822b3d52533add79b69131e0a86f8e7fb994c9e9b90d7c673bae9e"
+    }
+  },
+  "environment": {
+    "node": "v26.13.1",
+    "platform": "linux",
+    "arch": "x64",
+    "cpu": "Intel(R) Xeon(R) 6975P-C"
+  },
+  "options": {
+    "historySize": 129,
+    "cells": 16,
+    "solvedSteps": 128,
+    "rounds": 5,
+    "frames": 8,
+    "warmup": 4,
+    "microFrames": 128
+  },
+  "excluded": [
+    "worker solve and initial setup",
+    "Blender asset loading",
+    "GPU rasterization/shadows",
+    "browser layout/paint",
+    "apparatus viewer event handling"
+  ],
+  "hiddenSameSampler": {
+    "unit": "milliseconds per CPU update",
+    "batches": [
+      {
+        "baseline": 0.3988921796874987,
+        "current": 0.03289275781249934
+      },
+      {
+        "baseline": 0.03789512500000036,
+        "current": 0.030560640624999635
+      },
+      {
+        "baseline": 0.028393546874999842,
+        "current": 0.03195520312499944
+      },
+      {
+        "baseline": 0.5657774921875003,
+        "current": 0.05864463281250032
+      },
+      {
+        "baseline": 0.029306062500001673,
+        "current": 0.027120335937500073
+      }
+    ],
+    "baselineMedian": 0.03789512500000036,
+    "currentMedian": 0.03195520312499944,
+    "readCounts": {
+      "construction": {
+        "scans": 1,
+        "reads": 129
+      },
+      "cachedFiveUpdates": {
+        "scans": 0,
+        "reads": 0
+      },
+      "uncachedFiveUpdates": {
+        "scans": 5,
+        "reads": 645
+      }
+    }
+  },
+  "completeUIPlotAndScene": [
+    {
+      "topic": "spin",
+      "unit": "milliseconds per CPU update",
+      "batches": [
+        {
+          "baseline": 10.264811624999993,
+          "current": 21.467672625000034
+        },
+        {
+          "baseline": 9.89084250000002,
+          "current": 4.929047374999982
+        },
+        {
+          "baseline": 13.854960875000017,
+          "current": 11.935061625000003
+        },
+        {
+          "baseline": 19.98640887499994,
+          "current": 4.524063249999983
+        },
+        {
+          "baseline": 4.739923500000032,
+          "current": 6.924683875000028
+        }
+      ],
+      "baselineMedian": 10.264811624999993,
+      "currentMedian": 6.924683875000028,
+      "baselineEvidence": {
+        "elapsedS": 0.31012723116688584,
+        "svgSeries": 4,
+        "svgVisibleUntil": [
+          "0.31012723116688584"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 59
+      },
+      "currentEvidence": {
+        "elapsedS": 0.31012723116688584,
+        "svgSeries": 4,
+        "svgVisibleUntil": [
+          "0.31012723116688584"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 59
+      }
+    },
+    {
+      "topic": "heat",
+      "unit": "milliseconds per CPU update",
+      "batches": [
+        {
+          "baseline": 3.116913249999925,
+          "current": 2.983962750000046
+        },
+        {
+          "baseline": 2.9400920000000497,
+          "current": 5.50613374999989
+        },
+        {
+          "baseline": 2.9485908750000362,
+          "current": 18.624111374999984
+        },
+        {
+          "baseline": 2.892748249999954,
+          "current": 3.105095874999961
+        },
+        {
+          "baseline": 6.279083124999943,
+          "current": 2.9031645000000026
+        }
+      ],
+      "baselineMedian": 2.9485908750000362,
+      "currentMedian": 3.105095874999961,
+      "baselineEvidence": {
+        "elapsedS": 0.3980000000000001,
+        "svgSeries": 12,
+        "svgVisibleUntil": [
+          "0.3980000000000001"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 113
+      },
+      "currentEvidence": {
+        "elapsedS": 0.3980000000000001,
+        "svgSeries": 12,
+        "svgVisibleUntil": [
+          "0.3980000000000001"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 113
+      }
+    },
+    {
+      "topic": "separation",
+      "unit": "milliseconds per CPU update",
+      "batches": [
+        {
+          "baseline": 3.3553243750000092,
+          "current": 10.058181499999932
+        },
+        {
+          "baseline": 3.1714437499999804,
+          "current": 10.394398499999966
+        },
+        {
+          "baseline": 2.6318598749999182,
+          "current": 6.082683875000043
+        },
+        {
+          "baseline": 2.4076747499999556,
+          "current": 2.1526007500000333
+        },
+        {
+          "baseline": 2.4846157500001027,
+          "current": 2.1601927500000784
+        }
+      ],
+      "baselineMedian": 2.6318598749999182,
+      "currentMedian": 6.082683875000043,
+      "baselineEvidence": {
+        "elapsedS": 0.3980000000000001,
+        "svgSeries": 6,
+        "svgVisibleUntil": [
+          "0.3980000000000001"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 167
+      },
+      "currentEvidence": {
+        "elapsedS": 0.3980000000000001,
+        "svgSeries": 6,
+        "svgVisibleUntil": [
+          "0.3980000000000001"
+        ],
+        "worldNodes": 354,
+        "renderCalls": 167
+      }
+    }
+  ],
+  "memory": {
+    "before": {
+      "rss": 184291328,
+      "heapTotal": 69681152,
+      "heapUsed": 56839160,
+      "external": 16186980,
+      "arrayBuffers": 9374569
+    },
+    "after": {
+      "rss": 296648704,
+      "heapTotal": 123011072,
+      "heapUsed": 97644504,
+      "external": 30771325,
+      "arrayBuffers": 23939407
+    }
+  }
+}
