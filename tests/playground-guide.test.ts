@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {setupWorkspace} from '../src/workspace-ui.js';
+import {guideActions,guideExperiments,type GuideExperiment} from '../src/guide-topics.js';
 
 function fixture(t:any,mobile=false){
  const {window}=new JSDOM(readFileSync('index.html','utf8'),{url:'https://example.org/?level=2'}),doc=window.document;
@@ -19,7 +20,7 @@ function acceptedFuel(f:ReturnType<typeof fixture>){
  const mode=make('select','fuel-motion-mode');mode.innerHTML='<option value="transport">Coupled separation</option><option value="equilibrium">Equilibrium reference</option>';
  const time=make('input','fuel-motion-time');time.type='range';time.min='0';time.max='1';time.step='any';time.value='.4';
  const plot=make('select','fuel-plot');
- for(const value of ['spin','composition','separation','thermalProfile','gasEnergy','gasPressure','field','cascade','pump','inventory','lithium']){const option=f.doc.createElement('option');option.value=value;option.textContent=value;plot.append(option);}
+ for(const value of ['spin','composition','separation','thermal','heat','cut','momentum','inertia','thermalProfile','gasEnergy','gasPressure','field','cascade','pump','inventory','lithium']){const option=f.doc.createElement('option');option.value=value;option.textContent=value;plot.append(option);}
  const plotHost=make('div','fuel-plots');plotHost.innerHTML='<div class="live-plots"></div>';
  make('output','fuel-composition-readout');
  make('details','fuel-learning-comparisons');const accepted=make('button','fuel-export'),newRun=make('button','fuel-new-run'),power=make('button','fuel-power');
@@ -200,4 +201,84 @@ test('new investigation actions preserve origin restrictions and cannot modify a
  send('https://foreign.example',frame.contentWindow);send('https://example.org',f.window);assert.equal(restarts,0);
  f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
  send('https://example.org',frame.contentWindow);assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/Choose Centrifuge/);
+});
+
+function experimentControls(f:ReturnType<typeof fixture>){
+ const body=f.node('window-controls').querySelector('.world-window-body'),controls=f.doc.createElement('div');controls.id='fuel-controls';body.append(controls);
+ const make=(tag:string,id:string)=>{const element=f.doc.createElement(tag) as any;element.id=id;return element;};
+ const application=make('select','fuel-application');application.innerHTML='<option value="enrichment">Isotope separation</option><option value="pump">Differential pumping</option>';controls.append(application);
+ const pair=make('select','fuel-pair');pair.innerHTML='<option value="lithium">Lithium</option><option value="molecular">Molecular</option>';controls.append(pair);
+ for(const selector of new Set(Object.values(guideExperiments).filter((e:GuideExperiment)=>!e.apparatus).map(e=>e.control))){
+  if(f.doc.querySelector(selector))continue;
+  const section=f.doc.createElement('details'),summary=f.doc.createElement('summary'),input=make('input',selector.slice(1));summary.textContent=selector;
+  input.value='0.03';if(selector==='#fuel-thermal-enabled')input.type='checkbox';section.append(summary,input);controls.append(section);
+ }
+ const pumping=f.doc.createElement('details'),summary=f.doc.createElement('summary'),pump=make('input','fuel-pumpSpeedM3S');summary.textContent='Pumping';pumping.append(summary,pump);controls.append(pumping);
+ return {application,pair,controls};
+}
+
+test('every tutorial experiment reveals canonical controls and its result without editing physical inputs',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f),inputs=experimentControls(f);
+ const plots:Record<string,string>={thermalPlot:'thermal',thermalProfile:'thermalProfile',collection:'cut',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',separationPlot:'separation',spinPlot:'spin',magneticLeverage:'field',lithiumSurfaces:'lithium'};
+ let edits=0,restarts=0;inputs.controls.addEventListener('input',()=>edits++);fuel.newRun.addEventListener('click',()=>restarts++);
+ for(const [key,context]of Object.entries(guideExperiments) as [string,GuideExperiment][]){
+  assert.ok(guideActions.has(context.result),`${key}: result action registered`);if(context.apparatus)continue;
+  const input=f.doc.querySelector<HTMLInputElement>(context.control)!,before=input.value;
+  f.workspace.launchGuideAction(key);
+  assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,false);
+  assert.equal(fuel.plot.value,plots[context.result]);assert.equal(f.doc.activeElement,input);
+  assert.equal(input.value,before);assert.equal(input.closest('details')?.open??true,true);
+  assert.equal(f.doc.querySelectorAll('.guide-experiment').length,1,'replace the previous task instead of accumulating notes');
+  assert.match(f.doc.querySelector('.guide-experiment')!.textContent!,new RegExp(context.title));
+ }
+ assert.equal(edits,0);assert.equal(restarts,0);assert.equal(f.node('fuel-thermal-enabled').checked,false,'model enabling stays explicit');
+ assert.equal(inputs.application.value,'enrichment');assert.equal(inputs.pair.value,'lithium');
+});
+
+test('phone experiment links open controls first and give one direct route to the relevant plot',t=>{
+ const f=fixture(t,true),fuel=acceptedFuel(f);experimentControls(f);
+ f.workspace.launchGuideAction('inventoryExperiment');
+ assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,true);
+ assert.equal(f.doc.activeElement,f.node('fuel-burnFraction'));
+ f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();
+ assert.equal(f.node('window-controls').hidden,true);assert.equal(f.node('window-plots').hidden,false);assert.equal(fuel.plot.value,'inventory');
+ f.workspace.open('controls');assert.match(f.doc.querySelector('.guide-experiment')!.textContent!,/burn fraction/);
+});
+
+test('experiment entrypoints are available while computing and their plot action waits for acceptance',async t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);experimentControls(f);fuel.accepted.disabled=true;
+ f.workspace.launchGuideAction('spatialHeatExperiment');assert.equal(f.node('window-controls').hidden,false);
+ assert.equal(f.node('window-plots').hidden,true);assert.equal(f.doc.activeElement,f.node('fuel-thermal-enabled'));
+ f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();
+ assert.match(f.doc.querySelector('.guide-experiment [role=status]')!.textContent!,/Waiting for the computed run/);
+ fuel.accepted.disabled=false;await Promise.resolve();
+ assert.equal(fuel.plot.value,'thermalProfile');assert.equal(f.node('window-plots').hidden,false);
+});
+
+test('incompatible feed and application expose the prerequisite instead of focusing hidden or disabled controls',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f),inputs=experimentControls(f);
+ inputs.application.value='pump';fuel.plot.querySelector('option[value="cut"]')!.disabled=true;
+ f.node('fuel-cutFraction').closest('details').hidden=true;
+ f.workspace.launchGuideAction('collectionExperiment');assert.equal(f.doc.activeElement,inputs.application);
+ assert.equal(inputs.application.value,'pump');assert.match(f.doc.querySelector('.guide-experiment')!.textContent!,/Isotope separation/);
+ f.node('fuel-thermal-enabled').disabled=true;inputs.pair.value='molecular';
+ f.workspace.launchGuideAction('spatialHeatExperiment');assert.equal(f.doc.activeElement,inputs.pair);assert.equal(inputs.pair.value,'molecular');
+ fuel.plot.querySelector('option[value="lithium"]')!.disabled=true;
+ f.workspace.launchGuideAction('surfaceExperiment');assert.equal(f.doc.activeElement,inputs.pair);
+ assert.match(f.doc.querySelector('.guide-experiment')!.textContent!,/atomic lithium feed/);
+});
+
+test('beam exercises switch apparatus and reveal actual source ledger or target settings without changing source inputs',t=>{
+ const f=fixture(t);const current=f.doc.createElement('input');current.id='fusion-beamCurrentA';current.value='.01';f.node('fusion-controls').append(current);
+ const initial=f.doc.createElement('details'),summary=f.doc.createElement('summary');initial.id='initial-source-reference';summary.textContent='Initial source';initial.append(summary,f.node('fusion-plots').closest('details'));f.node('window-plots').querySelector('.world-window-body').append(initial);
+ const target=f.doc.createElement('div');target.id='coupled-target';target.innerHTML='<button id="coupled-tab-settings">Settings</button><button id="coupled-tab-dynamics">Dynamics</button><div id="coupled-view-settings" hidden><input id="coupled-pulseDuty" value="1"></div><div id="coupled-view-dynamics"><select id="coupled-plot"><option>Source</option></select></div>';
+ f.node('window-target').querySelector('.world-window-body').append(target);
+ const settings=f.node('coupled-view-settings'),dynamics=f.node('coupled-view-dynamics');
+ f.node('coupled-tab-settings').addEventListener('click',()=>{settings.hidden=false;dynamics.hidden=true;});f.node('coupled-tab-dynamics').addEventListener('click',()=>{settings.hidden=true;dynamics.hidden=false;});
+ let edits=0;current.addEventListener('input',()=>edits++);
+ f.workspace.launchGuideAction('beamSource');assert.equal(f.node('marathon-apparatus').value,'source');assert.equal(f.doc.activeElement,current);
+ assert.equal(initial.open,true);assert.equal(f.node('fusion-plots').closest('details').open,true);
+ f.workspace.launchGuideAction('beamTarget');assert.equal(f.node('window-target').hidden,false);assert.equal(settings.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-pulseDuty'));
+ f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();assert.equal(settings.hidden,true);assert.equal(dynamics.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-plot'));
+ assert.equal(current.value,'.01');assert.equal(edits,0);
 });

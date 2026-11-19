@@ -23,6 +23,7 @@ test('learning sequence publishes six freely selectable questions and usable sec
 test('each experiment motivates a prediction, preserves optional feedback and asks a new transfer case',()=>{
  for(const module of learningPath)for(const e of module.experiments){
   assert.ok(e.baseline&&e.predict&&e.steps.length&&e.observe&&e.explain&&e.boundary&&e.transfer[0]&&e.transfer[1]);
+  assert.ok(e.actions.length>0,`${module.id}/${e.id}: every Try it needs an actionable destination`);
   const dom=new JSDOM(learningPages()[`learn-${module.id}.html`]);const section=dom.window.document.querySelector(`[aria-labelledby="${e.id}"]`)!;
   assert.match(section.textContent!,/Baseline\./);assert.match(section.textContent!,/Predict\./);
   for(const detail of section.querySelectorAll<HTMLDetailsElement>('details[data-learning-explanation],.learning-transfer details'))assert.equal(detail.open,false,'answers must not be compulsory or pre-revealed without enhancement');
@@ -40,7 +41,8 @@ test('learning sequence distinguishes model boundaries instead of promising unsu
  assert.match(pages['learn-beam.html'],/choose Reactor in the header/);
  assert.match(pages['learn-beam.html'],/Initial source → Target depth &amp; full energy ledger/,'the named energy readouts require opening the nested ledger');
  assert.doesNotMatch(pages['learn-beam.html'],/href="\/guide.html#goal"/,'beam questions must not lead to the centrifuge goal as their equations');
- assert.doesNotMatch(pages['learn-beam.html'],/data-guide-action=/);
+ assert.match(pages['learn-beam.html'],/data-guide-action="beamSource"/);
+ assert.match(pages['learn-beam.html'],/data-guide-action="beamTarget"/);
  assert.match(pages['learn-beam.html'],/not measured LiT stopping/);
  assert.match(pages['learn-beam.html'],/does not solve full neutron transport, shielding or dose/);
  assert.match(pages['learn-collection.html'],/id="fuel"/);

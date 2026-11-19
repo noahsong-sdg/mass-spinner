@@ -32,7 +32,7 @@ test('the website renders every guide equation and its derivation, with accessib
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[data-guide-action]')){
   assert.ok(guideActions.has(link.dataset.guideAction!));
   const url=new URL(link.getAttribute('href')!,'https://example.org');
-  assert.equal(url.searchParams.get('guide'),'physics');assert.equal(url.searchParams.get('try'),link.dataset.guideAction);
+  assert.equal(url.searchParams.get('level'),'2');assert.equal(url.searchParams.get('try'),link.dataset.guideAction);
  }
  assert.equal(doc.querySelector('link[href="/guide-katex/katex.min.css"]')?.getAttribute('rel'),'stylesheet');
  assert.deepEqual([...doc.querySelectorAll('script')].map(node=>node.getAttribute('src')),['/guide-reader.js']);

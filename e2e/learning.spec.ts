@@ -129,3 +129,34 @@ test('an independently opened reader reconnects across guide navigation without 
  await expect(page.locator('#reader-status')).toContainText('Sent to the simulator');
  await simulator.close();
 });
+
+test('tutorial experiment links put relevant controls and results within one action on desktop and phone',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const opened=page.waitForEvent('popup');await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await opened;
+ await reader.goto('/tutorial-03.html#budget');const current=await page.locator('#fuel-currentA').inputValue();
+ await reader.locator('[data-guide-action="heatExperiment"]').click();
+ await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
+ await expect(page.locator('#fuel-thermal-enabled')).not.toBeChecked();await expect(page.locator('#fuel-currentA')).toHaveValue(current);
+ await page.getByRole('button',{name:'Show temperature',exact:true}).click();
+ await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#fuel-plot')).toHaveValue('thermal');
+ await reader.locator('[data-guide-action="spatialHeatExperiment"]').click();
+ await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('.guide-experiment')).toContainText('Spatial mixture');
+ await expect(page.locator('#fuel-thermal-model')).toBeVisible();await expect(page.locator('#fuel-thermal-gasModel')).toBeVisible();
+ await reader.goto('/tutorial-04.html#stages');await reader.locator('[data-guide-action="stageExperiment"]').click();
+ await expect(page.locator('#fuel-stages')).toBeFocused();await page.getByRole('button',{name:'Show stages',exact:true}).click();
+ await expect(page.locator('#fuel-plot')).toHaveValue('cascade');await expect(page.locator('#window-plots')).toBeVisible();
+ await reader.locator('[data-guide-action="pumpingExperiment"]').click();
+ await expect(page.locator('#fuel-application')).toBeFocused();await expect(page.locator('#fuel-pumpSpeedM3S')).toBeVisible();
+ await reader.goto('/tutorial-05.html#inventory');await reader.locator('[data-guide-action="inventoryExperiment"]').click();
+ await expect(page.locator('#fuel-burnFraction')).toBeFocused();await expect(page.locator('#fuel-loopTimeS')).toBeVisible();
+ await info.attach('tutorial-controls-ready',{body:await page.locator('#window-controls').screenshot(),contentType:'image/png'});
+ await page.getByRole('button',{name:'Show fuel inventory',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('inventory');
+ await reader.goto('/learn-beam.html');await reader.locator('[data-guide-action="beamSource"]').click();
+ await expect(page.locator('#fusion-beamCurrentA')).toBeFocused();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
+ await page.getByRole('button',{name:'Show source energy ledger',exact:true}).click();await expect(page.locator('#fusion-plots')).toBeVisible();
+ await reader.locator('[data-guide-action="beamTarget"]').click();
+ await expect(page.locator('#coupled-pulseDuty')).toBeFocused();await expect(page.locator('#coupled-view-settings')).toBeVisible();
+ await page.getByRole('button',{name:'Show target dynamics',exact:true}).click();await expect(page.locator('#coupled-view-dynamics')).toBeVisible();
+ expect(errors).toEqual([]);await reader.close();
+});

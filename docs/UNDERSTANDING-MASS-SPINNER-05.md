@@ -23,7 +23,7 @@ M_{\mathrm{exhaust}}=m_T\dot N_T\left(\frac{1}{f_b}-1\right)\tau_p.
 
 P_f is fusion thermal power in watts; E_DT = 17.6 MeV is energy per D–T reaction, converted to joules in the calculation. One tritium atom is burned per reaction. Its mass is m_T; f_b is single-pass burn fraction, and τ_p is exhaust processing time in seconds. The result M is kilograms of unburned tritium held in processing.
 
-**Try it:** in Centrifuge, [show D–T fuel inventory](/?level=2&try=fuelInventory). Read the baseline unburned exhaust inventory.
+**Try it:** [open the fuel inventory experiment](/?level=2&try=inventoryExperiment). Read the baseline unburned exhaust inventory.
 
 Then [open fuel inventory controls](/?level=2&try=inventoryControls):
 

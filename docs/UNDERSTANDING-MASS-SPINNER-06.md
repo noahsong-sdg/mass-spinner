@@ -18,7 +18,7 @@ Conserving atoms cannot prove the predicted rotation matches a real experiment. 
 
 The live model prescribes diffusivity, collision rate and conductivity. A sharply drawn curve can depend strongly on those choices. To learn which assumption matters, change one at a time.
 
-**Try one sensitivity experiment:**
+**Try one sensitivity experiment:** [open diffusivity and separation](/?level=2&try=diffusionExperiment).
 
 1. Choose a powered, mixed atomic feed in Coupled separation. Turn thermal evolution off. Rewind, set a nonzero current, then New run to clear power switches. Wait; choose a time strictly inside the run and [pin A](/?level=2&try=pin).
 2. [Adjust only radial diffusivity](/?level=2&try=diffusion), then choose New run. Return to the same physical time in both cases. Check the accepted-input comparison for unintended changes.

@@ -1,4 +1,5 @@
-import {guideActions,guideTopics} from './guide-topics.js';
+import {guideActions,guideTopics,guideExperiments} from './guide-topics.js';
+import type {GuideExperiment} from './guide-topics.js';
 
 import {playgroundSteps as steps} from './playground-guide-steps.js';
 
@@ -71,10 +72,37 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');
  const pending=(key:string)=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton()!.disabled);
  let cancelLaunch=()=>{};
+ const experimentNote=el('aside'),experimentTitle=el('strong'),experimentHint=el('p'),experimentResult=el('button'),experimentStatus=el('p');
+ experimentNote.className='guide-experiment';experimentNote.setAttribute('aria-label','Current tutorial experiment');
+ experimentResult.type='button';experimentStatus.setAttribute('role','status');experimentNote.append(experimentTitle,experimentHint,experimentResult,experimentStatus);
+ let experimentResultAction='';
+ experimentResult.addEventListener('click',()=>{launch(experimentResultAction);experimentStatus.textContent=status.textContent;});
+ function showExperiment(key:string){
+  const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
+  apparatus.value=experiment.apparatus??'centrifuge';apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));
+  // Beam references have their own accepted state; centrifuge actions wait on fuel-export.
+  if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
+  if(experiment.panel==='target')doc.getElementById('coupled-tab-settings')!.click();
+  let selector=experiment.control;
+  if(['#fuel-cutFraction','#fuel-stages'].includes(selector)&&(doc.getElementById('fuel-application') as HTMLSelectElement).value==='pump')selector='#fuel-application';
+  if(selector==='#fuel-thermal-enabled'&&(doc.getElementById('fuel-thermal-enabled') as HTMLInputElement).disabled)selector='#fuel-pair';
+  if(key==='surfaceExperiment'&&(doc.getElementById('fuel-pair') as HTMLSelectElement).value!=='lithium')selector='#fuel-pair';
+  const target=doc.querySelector<HTMLElement>(selector)!;
+  experimentTitle.textContent=experiment.title;experimentHint.textContent=experiment.hint;experimentResult.textContent=experiment.label;experimentResultAction=experiment.result;experimentStatus.textContent='';
+  const section=target.closest('details');
+  if(section)section.querySelector('summary')!.after(experimentNote);
+  else target.closest('#fuel-controls,.fusion-inputs,#coupled-target')!.prepend(experimentNote);
+  if(key==='pumpingExperiment')focusRelated('controls','#fuel-pumpSpeedM3S');
+  focusRelated(experiment.panel??'controls',selector);
+  experimentNote.scrollIntoView?.({block:'nearest'});
+ }
  function action(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();
   status.textContent='';
+  if(Object.hasOwn(guideExperiments,key)){showExperiment(key);return;}
+  if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
+  if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
   if(node('start-here')?.hidden){status.textContent='Choose Centrifuge to use its guide controls.';return;}
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
@@ -130,7 +158,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function launch(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();const accepted=node('fuel-export');
-  if(key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo'].includes(key)||!accepted||!pending(key)){action(key);return;}
+  if(Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key)||!accepted||!pending(key)){action(key);return;}
   status.textContent='Waiting for the computed run and controls…';
   const observer=new win.MutationObserver(()=>{
    if(!pending(key)){cancelLaunch();if(!node('start-here')?.hidden)action(key);}

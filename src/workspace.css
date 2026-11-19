@@ -22,6 +22,10 @@ body.immersive{overflow:hidden;background:#101614}
 .guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-block:20px}
 .guide-actions button,.guide-navigation button,.guide-leave{min-height:44px;padding:10px 12px;font-size:13px;border:1px solid #566b5c;border-radius:6px;text-align:left}
 .guide-actions button{background:#26392e;color:#e3eee3}
+.guide-experiment{margin:0 0 16px;padding:12px 0;border-block:1px solid #566b5c;font-size:13px;line-height:1.6}
+.guide-experiment p{font-size:13px;margin:8px 0}
+.guide-experiment button{min-height:44px;padding:8px 12px;border:1px solid #708675;border-radius:6px;color:#edbe90}
+.guide-experiment [role=status]:empty{display:none}
 .playground-guide .guide-note{font-size:12px;color:#b9c7bd;border-top:1px solid #394b3f;padding-top:16px}
 .guide-navigation{display:flex;flex:none;justify-content:space-between;gap:6px;padding:10px 12px;border-top:1px solid #394b3f}
 .guide-navigation button:disabled{opacity:.4}

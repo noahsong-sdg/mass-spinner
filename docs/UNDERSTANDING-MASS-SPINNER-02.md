@@ -263,7 +263,7 @@ t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
 
 D is diffusivity in m²/s. Boundaries and rotation also matter; this is not an
-exact settling time. **Rewind Composition** to see whether your run approaches
+exact settling time. [Open diffusivity and separation](/?level=2&try=diffusionExperiment) to see whether your run approaches
 equilibrium. Longer duration permits redistribution without changing the
 fixed-speed, fixed-temperature equilibrium itself.
 
@@ -280,7 +280,7 @@ inside a radius gives two distinct measures:
 N counts atoms. A smaller inner cut generally raises purity but lowers recovery.
 These are closed-inventory counts, not outlet flow or kilograms per hour.
 
-**Try one collection cut:** [show end-of-run cuts](/?level=2&guide=physics&topic=collection&try=collection).
+**Try one collection cut:** [open the collection experiment](/?level=2&try=collectionExperiment).
 Click the curve at a small radius, then a larger one, and read purity and recovery
 below it. Arrow keys also move the probe; Home/End select axis/wall.
 The probe does not move the 3D cut marker;
@@ -333,18 +333,18 @@ profiles show the selected instant; parameter scans compare hypothetical setting
 | Ion–neutral spin-up | Ion and neutral edge speeds (m/s) versus time. [§4](#momentum) |
 | Drive & work | Mechanical energies (J); slopes are power (W). Ohmic power is separate. [§5](#energy) |
 | Temperature | Mean gas/liner temperatures; evolution requires thermal physics enabled. [§5](#energy) |
-| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. [Try thermal limits](/learn-thermal.html). |
-| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. [Try thermal limits](/learn-thermal.html). |
-| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. [Try thermal limits](/learn-thermal.html). |
+| Temperature profile | Radial temperatures: requires radial liner; gas curve also needs Spatial mixture. No axial structure. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
+| Species energy profile | Cell internal energies with Spatial mixture; more atoms can mean more energy: both share the local temperature. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
+| Gas pressure profile | Local nkT with Spatial mixture, not solved local force balance. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
 | Angular momentum | Drive impulse minus wall impulse; internal collision transfer cancels. [§4](#momentum) |
 | Gas inertia | Mass redistribution’s effect on resistance to turning, versus time. [§4](#momentum) |
 | Species density | Each isotope’s density divided by its own volume mean; 1× is average. Evolving in coupled views, equilibrium in reference views. [§1](#composition) |
 | Purity & recovery | Inventory fractions versus cut radius, not throughput. [§6](#collection) |
-| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. [Try collection and processes](/learn-collection.html). |
-| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. [Try collection and processes](/learn-collection.html). |
-| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. [Try thermal limits](/learn-thermal.html). |
-| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. [Explore fuel accounting](/learn-collection.html#fuel). |
-| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. [Try thermal limits](/learn-thermal.html). |
+| Countercurrent stages | Ideal stage routing, recovery and circulation; assumed equal turnover, not transient plant flow. [Open stages experiment](/?level=2&try=stageExperiment). |
+| Differential pumping | Reference pressures/load versus pump and inlet settings; select that application. No open-flow rotor feedback. [Open pumping experiment](/?level=2&try=pumpingExperiment). |
+| Magnetic leverage | Resistive heat at matched reference torque, not a fixed-current experiment. [Open magnetic leverage](/?level=2&try=fieldExperiment). |
+| D–T fuel inventory | Separate steady fuel-loop accounting from burn fraction and delay; not a lithium-centrifuge burn prediction. [Open fuel inventory](/?level=2&try=inventoryExperiment). |
+| Lithium vapor & surfaces | Gas/liner conditions compared with saturation references; not evolved phase exchange. [Open surface reference](/?level=2&try=surfaceExperiment). |
 
 ### Which controls affect physics?
 
