@@ -18,7 +18,7 @@ test('energy readers explain the separation and cooling decision before introduc
   assert.match(lead,/random thermal motion|random thermal\s+motion/);
   assert.match(lead,/same rotation speed|given rotation speed/,'temperature effect must be conditional on rotation');
   assert.match(lead,/[Cc]ooling/);assert.match(lead,/decreases separation|less separation/);
-  assert.match(lead,/More current can increase speed and temperature|Does more current still increase separation when it increases temperature/,'motivate a decision, not just an energy bookkeeping exercise');
+  assert.match(lead,/More current can increase speed and temperature|Does more current increase separation when it increases temperature/,'motivate a decision, not just an energy bookkeeping exercise');
  }
 });
 
