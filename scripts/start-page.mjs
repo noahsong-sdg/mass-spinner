@@ -13,7 +13,7 @@ export function startPage(){
  <h2 id="${step.id}">${escape(step.title)}</h2><p>${escape(step.intro)}</p>
  <div class="try-actions" role="group" aria-label="Try ${escape(step.title)}">${step.actions.map(([action,label])=>`<a data-guide-action="${action}" href="/?level=2&try=${action}">${escape(label)} ↗</a>`).join('')}</div>
  ${step.do.map(text=>`<p>${escape(text)}</p>`).join('')}
- ${guideDiagram(({machine:'drive',current:'spin',composition:'composition',competition:'bias',heat:'energy',collection:'inventory-cut',compare:'compare'})[step.id])}
+ ${guideDiagram(step.diagram)}
  <details data-learning-explanation><summary>Explanation</summary><p>${escape(step.notice)}</p><p>${escape(step.note)}</p></details>
  </section>`).join('')}
  </main><footer><a href="/guide.html">Physics & equations →</a> · <a href="/learn.html">Docs & tutorials</a></footer></body></html>`;

@@ -256,7 +256,7 @@ The Inner collection radius / a control changes that marker and starts a new run
 
 ## Which model parts are necessary, and what is missing?
 
-We must know which conclusions the model permits before we use its results. Each missing process limits those conclusions.
+We must know which conclusions the model can show before we use its results. Each missing process limits those conclusions.
 
 Drive changes rotation, heating decreases separation at the same speed, and transport changes the distribution over time.
 The collection radius selects the sample. Without these connections, more current can appear useful when it is not.
