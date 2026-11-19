@@ -20,7 +20,7 @@ The model uses diffusivity, collision rate and conductivity as inputs. Changes t
 
 [Open the diffusivity experiment](/?level=2&try=diffusionExperiment).
 
-Use Coupled separation with both atomic isotopes and thermal evolution off.
+Use Coupled separation with the two atomic isotopes and thermal evolution off.
 
 1. Select Rewind.
 2. Set a nonzero current.
@@ -34,9 +34,9 @@ Use Coupled separation with both atomic isotopes and thermal evolution off.
 10. [Open separation over time](/?level=2&try=separationPlot).
 11. Compare the speed history also.
 
-Diffusivity changes radial transport and thus gas inertia. The two runs can therefore have different speeds. This gives sensitivity to a selected input, not a measured uncertainty interval.
+Diffusivity changes radial transport and thus gas inertia. The two runs can thus have different speeds. This gives sensitivity to a selected input, not a measured uncertainty interval.
 
-Model info → Sensitivity & tested inputs calculates results for selected coefficient values between the Lower and Upper bounds. Each case uses the same drive history. The shading shows calculated cases, not a statistical confidence interval or every intermediate value.
+Model info → Sensitivity & tested inputs calculates results for selected coefficient values between the Lower and Upper bounds. Each case uses the same drive history. The shading shows calculated cases, not a statistical confidence interval or all intermediate values.
 
 Spatial argon reference shows saved mesh refinements, not experimental accuracy or a live lithium mesh control. The live thermal Refined option gives a timestep-error estimate, not spatial convergence.
 
@@ -44,7 +44,7 @@ Spatial argon reference shows saved mesh refinements, not experimental accuracy 
 
 The comparison shows how diffusivity changes recovery under specified inputs, assumptions and time. Accuracy for a Marathon device is a different question. It is necessary to use its apparatus, operating conditions and measurement method.
 
-A Doppler instrument uses wavelength changes in emitted light to calculate velocity along a line of sight. Its indication can differ from local neutral speed. A comparison with local velocity can therefore use the incorrect quantity. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records disagreement, not experimental accuracy.
+A Doppler instrument uses wavelength changes in emitted light to calculate velocity along a line of sight. Its indication can differ from local neutral speed. A comparison with local velocity can thus use the incorrect quantity. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records disagreement, not experimental accuracy.
 
 Export the accepted run with its physical time, plot and selected coefficients. Operating maps and saved references do not show an experimentally verified operating range.
 

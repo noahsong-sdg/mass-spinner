@@ -17,7 +17,7 @@ N is the number of atoms. The symbols ℓ and h identify the light and heavy iso
 [Open the collection experiment](/?level=2&try=collectionExperiment).
 
 1. Select Isotope separation.
-2. Select Coupled separation with both isotopes in the feed.
+2. Select Coupled separation with the two isotopes in the feed.
 3. Select two radii on the collection curve.
 4. Read the purity and recovery below the plot.
 
@@ -47,7 +47,7 @@ The pump and inlet pipe each have a flow limit. This reference gives the necessa
 Q=S p_w,\qquad p_u=p_a+Q/C,\qquad S_{\mathrm{eff}}=Q/p_u.
 ```
 
-S is outer pump speed. C is inlet conductance, the gas-load capacity per pressure difference. Both have units m³/s. Pressure p has units Pa. Gas load Q has units Pa·m³/s. Subscripts w, a and u identify wall, axis and upstream pressures.
+S is outer pump speed. C is inlet conductance, the gas-load capacity per pressure difference. The two have units m³/s. Pressure p has units Pa. Gas load Q has units Pa·m³/s. Subscripts w, a and u identify wall, axis and upstream pressures.
 
 [Open the pumping experiment](/?level=2&try=pumpingExperiment).
 

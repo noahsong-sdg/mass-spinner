@@ -83,7 +83,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const drive=doc.querySelector<HTMLElement>('[data-drive-diagram]');
  if(drive){
   const descriptions={
-   current:'Current flows through the gas from the outer electrode to the inner electrode. The magnetic field points toward you.',
+   current:'Current flows through the gas from the outer electrode to the inner electrode. The magnetic field points to you.',
    ions:'With this axial magnetic field, J × B causes a tangential force. This force turns the charged gas counterclockwise.',
    gas:'Ion–neutral collisions transfer rotation to the neutral gas. The electrodes stay still.',
   };

@@ -81,7 +81,7 @@ test('collection radius, upstream inlet conductance and downstream pump speed fo
 
 test('radial colors carry the accepted equilibrium fractions and no particle-trajectory claim',()=>{
  const scene=build();const samples=members(scene,'profile');assert.equal(samples.length,12);
- samples.forEach((mesh,i)=>{const accepted=profiles()[i+1];close(mesh.userData.radiusM,accepted.radiusM);close(mesh.userData.lightFraction,accepted.lightFraction);assert.match(mesh.userData.purpose,/does not calculate extraction during a finite residence time/);assert.match(mesh.userData.materialBasis,/no physical material/);});
+ samples.forEach((mesh,i)=>{const accepted=profiles()[i+1];close(mesh.userData.radiusM,accepted.radiusM);close(mesh.userData.lightFraction,accepted.lightFraction);assert.match(mesh.userData.purpose,/does not calculate extraction during a finite residence time/);assert.match(mesh.userData.materialBasis,/without physical material/);});
  assert.notEqual((samples[0].material as THREE.MeshStandardMaterial).color.getHex(),(samples.at(-1)!.material as THREE.MeshStandardMaterial).color.getHex());release(scene);
 });
 
@@ -104,7 +104,7 @@ test('unresolved composition remains null and visibly neutral rather than invent
 
 test('every visible construction and overlay is pickable with honest material and geometry metadata',()=>{
  const scene=build(),ids=new Set(FUEL_COMPONENTS.map(c=>c.id));let meshes=0;
- scene.traverse((node:any)=>{if(!node.isMesh)return;meshes++;assert.ok(ids.has(node.userData.componentId),node.name);assert.equal(typeof node.userData.materialBasis,'string',node.name);assert.equal(typeof node.userData.purpose,'string',node.name);assert.match(node.userData.geometryBasis,/illustrative/i,node.name);
+ scene.traverse((node:any)=>{if(!node.isMesh)return;meshes++;assert.ok(ids.has(node.userData.componentId),node.name);assert.equal(typeof node.userData.materialBasis,'string',node.name);assert.equal(typeof node.userData.purpose,'string',node.name);assert.match(node.userData.geometryBasis,/Dimensions and construction are for illustration/,node.name);
   for(const attribute of Object.values(node.geometry.attributes) as THREE.BufferAttribute[])for(const value of attribute.array)assert.ok(Number.isFinite(value),node.name);
  });assert.ok(meshes>100);release(scene);
 });

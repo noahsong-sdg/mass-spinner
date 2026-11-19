@@ -74,7 +74,7 @@ export function setupNeutronTransport(host:HTMLElement){
    const selected=config(),c=selected.config,result=simulateFirstFlightNeutrons(c);latest={...result,config:c,source:{...source},
     material:selected.evaluated?{type:'endfb-h1',...selected.evaluated}:{type:'custom',assumed:true},
     referenceEvidence:{...recordedOpenMC,appliesToCurrentControls:false}};
-   for(const [label,value]of [['First absorbed',result.rates.firstAbsorbed],['First scattered · unresolved',result.rates.firstScatteredUnresolved],['Detected · assumptions response',result.detectionRateS]] as const){
+   for(const [label,value]of [['First absorbed',result.rates.firstAbsorbed],['First scattered · unresolved',result.rates.firstScatteredUnresolved],['Detected · response assumption',result.detectionRateS]] as const){
     const row=make('div');row.append(make('span',label),make('output',`${fmt(value)} s⁻¹`));metrics.append(row);
    }
    const thickness=reads.get('thickness')!(),x=[...new Set([0,...Array.from({length:21},(_,i)=>i),thickness])].sort((a,b)=>a-b);

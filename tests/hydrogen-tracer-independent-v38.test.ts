@@ -56,7 +56,7 @@ test('fast neutral ray intersection remains exact close to the wall, including i
  assert.equal(neutralHydrogenExit(c,[0,0,c.lengthM*(1+Number.EPSILON)],[0,0,1000]).timeS,0);
  assert.throws(()=>neutralHydrogenExit(c,[c.radiusM*(1+1e-10),0,.1],[10000,0,1000]),/outside/);
  assert.throws(()=>neutralHydrogenExit(c,[0,0,c.lengthM*(1+1e-10)],[0,0,1000]),/outside/);
- assert.throws(()=>neutralHydrogenExit(c,[0,0,.1],[0,0,0]),/forward/);
+ assert.throws(()=>neutralHydrogenExit(c,[0,0,.1],[0,0,0]),/finite neutral ray with a positive axial velocity/);
 });
 
 test('both nuclear products are required for canonical angular closure; mechanical angular exchange equals external B torque',()=>{

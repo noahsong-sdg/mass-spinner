@@ -178,7 +178,8 @@ test('the rotation chapter motivates one drive-and-coast experiment instead of e
  assert.ok(equations.at(-1)!.compareDocumentPosition(links[0])&dom.window.Node.DOCUMENT_POSITION_FOLLOWING,'introduce torque before asking the reader to drive the gas');
  const steps=links.map(link=>link.closest('li')!);
  assert.equal(new Set(steps).size,3,'each action belongs to its own explained step');
- for(const step of steps){assert.ok(step);assert.ok(step.textContent!.length>100,'each step states what to observe');}
+ const observations=[/Ion speeds increase first\. Collisions then increase neutral gas speed/,/gas continues to turn because it has angular momentum/,/Total angular momentum equals drive impulse minus wall impulse/];
+ for(const [i,step]of steps.entries()){assert.ok(step);assert.match(step.textContent!,observations[i],`step ${i+1} states its physical observation`);}
  assert.equal(doc.querySelectorAll('[data-guide-action="currentExperiment"]').length,1,'do not repeat the introductory current experiment');
  for(const action of ['axis','wall','density','inertia','collisions','drag','duration','diffusion','pin','thermal','thermalPlot']){
   assert.equal(doc.querySelector(`[data-guide-action="${action}"]`),null,'specialist shortcuts stay out of the main experiment sequence');

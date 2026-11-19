@@ -65,7 +65,7 @@ test('panels and all component inspectors remain usable without overlay pileup',
   assert.equal(f.node('inspector').hidden,false);assert.equal(f.node('component-name').textContent,name);
   assert.equal(f.document.activeElement,f.node('inspector').querySelector('button'));
  }
- assert.match(f.node('model').textContent,/not a computed trajectory/);
+ assert.match(f.node('model').textContent,/Translation shows pulse phases, not a calculated path/);
  assert.match(f.node('ledger').textContent,/Nonfusion net/);assert.match(f.node('validity').textContent,/model does not calculate fusion electricity/);
 });
 test('compression geometry, phase visibility, picking targets and finite field contours follow the pulse',()=>{

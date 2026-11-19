@@ -37,7 +37,7 @@ test('all seven A–D models have distinct observables, boundaries and conceptua
  for(const mode of Object.keys(modelInsights)){
   const parts=modelComponents(mode);
   assert.deepEqual(parts.map(c=>c.id),['source','coils','vessel','electrodes','collectors','insulators','fittings','seals','supports']);
-  assert.ok(parts.every(c=>/unknown/.test(c.material)&&/not an as-built device/.test(c.basis)));
+  assert.ok(parts.every(c=>/unknown/.test(c.material)&&/does not give an as-built device or a verified parts list/.test(c.basis)));
  }
  assert.match(modelComponents('icr').find(c=>c.id==='coils')!.purpose,/not the RF antenna/);
  assert.match(modelComponents('centrifuge').find(c=>c.id==='collectors')!.purpose,/does not extract/);

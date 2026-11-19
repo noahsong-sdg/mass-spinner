@@ -13,7 +13,7 @@ test('response interpolation keeps MC and holdout residual distinct with exact s
  const r=evaluateNeutronResponse(fixture(),.03,14.1,2e10),s=r.scores as Record<string,{mean:number;stdError:number;rateS:number;maxObservedHoldoutResidual:number}>;
  assert.ok(Math.abs(s.total.mean-.03)<1e-15);assert.equal(s.total.rateS,s.total.mean*2e10);
  assert.ok(Math.abs(s.total.stdError-Math.SQRT1_2*.0001)<1e-18);assert.ok(s.total.maxObservedHoldoutResidual<1e-15);
- assert.match(r.limitations,/separate/);assert.equal((evaluateNeutronResponse(fixture(),.02,14.1,0).scores as any).total.rateS,0);
+ assert.match(r.limitations,/Monte Carlo standard error and observed midpoint interpolation residuals give different error estimates/);assert.equal((evaluateNeutronResponse(fixture(),.02,14.1,0).scores as any).total.rateS,0);
 });
 test('stale identity, unsupported energy/geometry and out-of-grid results are withheld',()=>{
  for(const x of [.019,.181,NaN])assert.throws(()=>evaluateNeutronResponse(fixture(),x,14.1,1));
@@ -22,7 +22,7 @@ test('stale identity, unsupported energy/geometry and out-of-grid results are wi
  const geometry=fixture();geometry.geometry.radiusM=.2;assert.throws(()=>evaluateNeutronResponse(geometry,.04,14.1,1),/identity/);
  const data=fixture();data.material.processedSHA256='g'.repeat(64);assert.throws(()=>evaluateNeutronResponse(data,.04,14.1,1));
  const overflow=fixture();for(const n of [...overflow.nodes,...overflow.holdouts])n.scores.total.mean*=1000;
- assert.throws(()=>evaluateNeutronResponse(overflow,.04,14.1,Number.MAX_VALUE),/finite numerical domain/);
+ assert.throws(()=>evaluateNeutronResponse(overflow,.04,14.1,Number.MAX_VALUE),/scaled response is outside the finite numerical range/);
 });
 test('qualification flag cannot hide failed, missing or correlated holdouts',()=>{
  const failed=fixture();failed.holdouts[0].scores.total.mean=.2;assert.throws(()=>evaluateNeutronResponse(failed,.04,14.1,1),/gate failed/);

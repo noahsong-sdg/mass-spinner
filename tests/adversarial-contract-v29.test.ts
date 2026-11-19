@@ -43,13 +43,13 @@ test('fully deuterated fixed sites have zero modeled D–T yield, with explicit 
 test('actual loading DOM qualifies its integrated yield and clears an invalid or removed source',t=>{
  const {document}=dom(t),host=document.getElementById('target-loading')!,ui=setupTargetLoading(host);
  ui.update(depleted);
- assert.match(host.textContent!,/Integrated D–T neutrons 0/);
+ assert.match(host.textContent!,/Total D–T neutrons: 0/);
  assert.match(host.textContent!,/D–T neutron-total change zero yield/);
  assert.equal(host.querySelector('button')!.disabled,false);
  assert.ok(host.querySelectorAll('svg').length>0);
  ui.update({...depleted,config:{...depleted.config,targetColumnM2:2e21}});
  assert.equal(host.querySelectorAll('svg').length,0);assert.equal(host.querySelector('button')!.disabled,true);
- assert.doesNotMatch(host.textContent!,/Integrated D–T neutrons/);
+ assert.doesNotMatch(host.textContent!,/Total D–T neutrons/);
  ui.update(depleted);assert.equal(host.querySelector('button')!.disabled,false);
  ui.update(null);assert.equal(host.querySelectorAll('svg').length,0);
  assert.equal(host.querySelector('button')!.disabled,true);

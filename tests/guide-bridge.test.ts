@@ -62,8 +62,10 @@ test('reader retains only the latest startup action and never resends it on repe
  assert.equal(requests.length,1);assert.equal(requests[0].action,'current');
  assert.equal(f.dom.window.sessionStorage.getItem('mass-spinner:reader-capability'),'authorized-token');
  f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});assert.match(f.status()!,/calculated run/);
- f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'rejected',message:'Choose Coupled separation before cutting power.'});
- assert.match(f.status()!,/Before you cut power, select Coupled separation/);assert.doesNotMatch(f.status()!,/Opened|Sent/);
+ // Keep the rejection text from an older receiver unchanged.
+ const rejection='Choose Coupled separation before cutting power.';
+ f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'rejected',message:rejection});
+ assert.equal(f.status(),rejection);assert.doesNotMatch(f.status()!,/Opened|Sent/);
 });
 
 test('receiver returns rejected conditions and invalid allowlist actions to the requesting reader',t=>{

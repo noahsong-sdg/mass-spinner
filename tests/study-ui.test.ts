@@ -83,7 +83,7 @@ test('cancelling a partially completed study publishes nothing and a subsequent 
  await complete;
  assert.equal(h.pending.length,6);assert.ok(h.get('study-plots').children.length>0);
  assert.equal(h.get('export-study').disabled,false);assert.equal(h.get('cancel-study').disabled,true);
- assert.match(h.get('study-status').textContent,/Complete · 4 independent batches/);
+ assert.match(h.get('study-status').textContent,/Complete · 4 separate batches per operating point/);
  await h.get('export-study').click();
  assert.equal(h.blobs.length,1);assert.equal(h.anchors.at(-1)!.download,'mass-spinner-study.json');
  const payload=JSON.parse(await h.blobs[0].text());

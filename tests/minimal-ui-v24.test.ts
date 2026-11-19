@@ -23,7 +23,7 @@ test('scientific limits remain available while active errors and diagnostics sta
  const sourceInfo=html.match(/<details class="fusion-model-notes model-info">([\s\S]*?)<\/details>/)![1];
  assert.match(sourceInfo,/^<summary>Model info<\/summary>/);
  assert.ok(sourceInfo.includes('not a calibrated Marathon machine'));
- assert.ok(sourceInfo.includes('Neither is a measured LiT energy scan'));
+ assert.ok(sourceInfo.includes('Neither gives a measured LiT energy scan'));
  assert.ok(sourceInfo.includes('Surface regeneration and fuel recycling do not produce replacement tritium'));
  assert.ok(sourceInfo.includes('https://www.marathonfusion.com/beam-driven-fusion/'));
  const statuses=new Set(['fusion-status','plot-status','model-validity','run-status','replay-status','share-status']);

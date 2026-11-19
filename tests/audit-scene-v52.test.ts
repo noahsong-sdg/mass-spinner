@@ -115,7 +115,7 @@ test('hardware descriptions distinguish evolving lumped temperatures from prescr
   try{
    const liner=built.scene.getObjectByName('Lithium refractory sub-vessel')!;
    assert.equal(liner.userData.temperatureK,result.config.linerK);
-   assert.match(liner.userData.purpose,enabled?/Initial liner .*evolving liner temperature is a lumped reservoir/:/Prescribed reference liner .*no temperature evolution/);
+   assert.match(liner.userData.purpose,enabled?/Initial liner temperature: .*evolving liner temperature describes one reservoir/:/Specified reference liner temperature: .*does not calculate temperature evolution/);
    assert.match(liner.userData.purpose,/spatial thermal field/);
    const s=result.transport.snapshots.at(-1)!;
    assert.equal(sampleFuelField(result,0,s).scope,'Coupled rotor and radial transport · reflecting wall');

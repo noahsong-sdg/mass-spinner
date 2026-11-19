@@ -30,7 +30,7 @@ Without thermal evolution, temperature stays constant. [§4 explains the motion]
 
 ## 1. Why does rotation separate masses?
 
-Circular motion is possible only with force towards the axis. Pressure that increases towards the wall supplies this force.
+Circular motion is possible only with inward force. Pressure that increases from the axis to the wall supplies this force.
 During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
 Random thermal motion decreases separation.
 
@@ -166,7 +166,7 @@ Integration of rIB dr across the driven region gives the torque. Thus, electrode
 Use the powered run from the first experiment.
 
 1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin). The plot adds speeds when physical time increases. Ion speeds increase first. Collisions then increase neutral gas speed.
-2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it still has angular momentum.
+2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it has angular momentum.
 3. [Show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum). Total angular momentum equals drive impulse minus wall impulse. Each impulse is torque integrated over time.
    After the power stops, wall drag decreases total angular momentum. Collisions only move it between populations.
 
@@ -176,7 +176,7 @@ Replay keeps the power switches. The first experiment removes those switches and
 ## 5. Where does the energy go?
 
 At the same rotation speed, more random thermal motion decreases separation. Equilibrium separation increases with Ω²/T.
-More current can increase speed and temperature. Heating can remove the separation gain from faster rotation.
+More current can increase speed and temperature. Heating can remove the increase in separation from faster rotation.
 
 For constant temperature, cooling must remove net heat input.
 Thus, we must calculate separation and cooling power. The drive supplies mechanical power and resistive heat:
@@ -322,7 +322,7 @@ After a change, wait until the calculation finishes.
 | Collection radius | Selected gas in the closed vessel. Purity & recovery marker and values. No extraction. |
 | Stages; feed stage | Separate ideal routing between stages. Countercurrent stages. |
 | Pump speed; inlet conductance | Separate equilibrium pumping calculation. Differential pumping. |
-| Liner temperature | Initial wall temperature with thermal evolution. Otherwise, only a saturation reference. |
+| Liner temperature | Initial wall temperature with thermal evolution. With thermal evolution off, only a saturation reference. |
 | Reference liner → gas conductance | Reference heat demand only. This control is not active when thermal evolution calculates heat exchange. |
 | Thermal switches; storage; conductances; coolant | Temperature changes, heat exchange and cooling. Temperature. The spatial tungsten model uses material heat capacity. |
 | Liner thickness; gas conductivity | Spatial heat transport when active. Temperature profile. Cell count and timestep change numerical accuracy, not the physical model. |
@@ -338,7 +338,7 @@ Read [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
 [06 · accuracy](UNDERSTANDING-MASS-SPINNER-06.md).
 The [documentation index](/learn.html) links all six tutorials and the technical references.
 
-## Equations and further reading
+## Equations and more reading
 
 - Implementation: [mechanics/equilibrium](../src/fuel-centrifuge.ts),
   [composition/inertia](../src/fuel-transport.ts), [thermal evolution](../src/fuel-operation.ts).

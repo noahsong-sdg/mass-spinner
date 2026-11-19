@@ -17,7 +17,7 @@ test('calculator identity binds its own sources and the published equation page 
  const plugin=equilibriumIdentityPlugin(process.cwd()),source=plugin.transform('',`${process.cwd()}/src/equilibrium-identity.ts`)!;
  assert.match(source,/sourceHash/);assert.match(source,/fuel-equilibrium.ts/);assert.match(source,/array-shape.ts/);assert.doesNotMatch(source,/workerProducingCode/);
  const page=equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8'));assert.match(page,/class="katex/);assert.doesNotMatch(page,/```math|katex-error/);
- assert.match(page,/try=equilibrium/);assert.match(page,/do not give continuous extraction yields/);
+ assert.match(page,/try=equilibrium/);assert.match(page,/do not\s+give continuous extraction yields/);
 });
 function accepted(){
  return freeze({config:{...DEFAULT_FUEL_CENTRIFUGE},samples:[{neutralRadS:6000}]});
@@ -108,7 +108,7 @@ test('explicit sampled import uses accepted speed and mean temperature but initi
 test('invalid input and out-of-screen scenarios clear all results and prevent stale export',t=>{
  const f=fixture(t);f.open();f.save().click();assert.equal(f.exports.length,1);
  for(const [key,value,pattern]of [
-  ['temperatureK','',/valid values/],['edgeSpeedMS',200000,/screened numerical domain/],['temperaturePercent',50,/Temperature.*\[100, 10000\]/],
+  ['temperatureK','',/permitted values/],['edgeSpeedMS',200000,/numerical domain has the limit β ≤ 100 for the heavy species/],['temperaturePercent',50,/Temperature.*\[100, 10000\]/],
  ] as const){
   f.set('edgeSpeedMS',1000);f.set('temperatureK',100);f.set('temperaturePercent',0);
   f.set(key,value);assert.equal(f.save().disabled,true);assert.equal(f.panel.querySelectorAll('svg').length,0);

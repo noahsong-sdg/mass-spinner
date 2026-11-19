@@ -268,7 +268,7 @@ test('comparison snapshots pause at the displayed off-redraw time and probe anno
  const time=Number(f.node('fuel-motion-time').value),expected=sampleFuelTransport(f.ui.latest.result.transport,time).neutralRadS;
  assert.equal(f.node('fuel-composition-readout').getAttribute('aria-live'),'off');
  f.node('fuel-compare-temperature').click();
- assert.match(f.node('fuel-learning-comparisons').textContent,new RegExp(`rotation held at ${Number(expected.toPrecision(4))} rad/s`));
+ assert.match(f.node('fuel-learning-comparisons').textContent,new RegExp(`rotation fixed at ${Number(expected.toPrecision(4))} rad/s`));
  assert.equal(f.node('fuel-composition-readout').getAttribute('aria-live'),'polite');assert.equal(v.animation,null);
 });
 

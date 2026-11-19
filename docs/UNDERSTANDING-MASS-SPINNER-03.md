@@ -1,12 +1,12 @@
 # Tutorial 3 · Heating and cooling
 
 [02: rotation and separation](UNDERSTANDING-MASS-SPINNER-02.md) connected rotation with separation.
-The next question is if more current can heat the gas sufficiently to remove the separation gain.
+The next question is if more current can increase gas temperature sufficiently to remove the increase in separation.
 
 ## Why add a temperature model?
 
 At the same rotation speed, hotter gas has more random thermal motion and less separation.
-Does more current still increase separation when it increases temperature?
+Does more current increase separation when it increases temperature?
 To calculate Ω²/T, we must calculate speed and temperature. Cooling must remove net heat input to keep temperature constant.
 A temperature model calculates the energy that stays in the gas and liner:
 
@@ -70,7 +70,7 @@ The [surface reference](/?level=2&try=surfaceExperiment) compares gas and liner 
 It does not calculate evaporation or condensation over time.
 
 Conductivity, heat exchange and heat deposition are specified.
-Joint spatial and timestep refinement is necessary to test wall boundary-layer accuracy.
+Use joint spatial and timestep refinement for a wall boundary-layer accuracy test.
 The model does not calculate the electrical discharge or radial fluid momentum.
 
 [Implementation and assumptions](../src/fuel-operation.ts) · [Next: 04 · a useful process](UNDERSTANDING-MASS-SPINNER-04.md)

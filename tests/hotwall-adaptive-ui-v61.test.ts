@@ -38,12 +38,12 @@ test('refined resolution is opt-in for spatial gas and owns the operation sent t
  assert.deepEqual(request.operation.thermal.gas.accuracy,{relativeTolerance:6.25e-7,temperatureToleranceK:1e-7});
  assert.equal(request.options,undefined);assert.match(f.ui.nodes.controls.textContent,/timestep error estimate does not replace spatial refinement/);
  assert.match(f.ui.nodes.controls.textContent,/Refined runs take longer/);
- assert.match(f.ui.nodes.info.textContent,/Timestep error estimate: BE step doubling; relative tolerance/);
- assert.match(f.ui.nodes.info.textContent,/temperature tolerance.*K; 7 accepted pairs, 3 rejected steps, maximum accepted ratio 0.5/);
- assert.match(f.ui.nodes.info.textContent,/Counters since 0 s; retained prefix excluded/);
+ assert.match(f.ui.nodes.info.textContent,/Timestep error estimate: BE step doubling. Relative tolerance/);
+ assert.match(f.ui.nodes.info.textContent,/temperature tolerance.*K. 7 accepted pairs; 3 rejected steps; maximum accepted ratio 0.5/);
+ assert.match(f.ui.nodes.info.textContent,/Counters start at 0 s and do not include an earlier history/);
  f.change('fuel-motion-time','.4','input');f.change('fuel-currentA','.02','input');await f.ui.run();
  assert.equal(f.requests.at(-1).resume.timeS,.4);assert.deepEqual(f.requests.at(-1).operation.thermal.gas.accuracy,accuracy);
- assert.match(f.ui.nodes.info.textContent,/Counters since 0.4 s; retained prefix excluded/);
+ assert.match(f.ui.nodes.info.textContent,/Counters start at 0.4 s and do not include an earlier history/);
  f.change('fuel-thermal-resolution','interactive');await f.ui.run();
  assert.equal(f.requests.at(-1).resume,undefined);assert.equal(f.requests.at(-1).operation.events.length,0);assert.equal(f.requests.at(-1).operation.thermal.gas.accuracy,undefined);
  assert.doesNotMatch(f.ui.nodes.info.textContent,/Timestep error estimate:/);

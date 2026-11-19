@@ -20,14 +20,14 @@ Electrical drive → ion rotation → neutral rotation
                         heat       radial redistribution
 ```
 
-Both isotope densities can increase from the axis to the wall. The heavier isotope can have a larger wall-to-axis density ratio.
+The two isotope densities can increase from the axis to the wall. The heavier isotope can have a larger wall-to-axis density ratio.
 Thus, the light isotope can have a larger share near the axis. The isotopes do not change. No fusion occurs.
 
 ## Why calculate more than rotation?
 
 - The electrical drive adds angular momentum. Wall drag removes angular momentum. Ions and neutral atoms can turn at different speeds.
 - Faster rotation can increase equilibrium separation. Higher gas temperature can decrease it.
-- Separation does not occur immediately. A small inner sample can have higher light-isotope purity but contain little of the available light isotope.
+- Separation does not occur immediately. A small inner sample can have higher light-isotope purity but contain only a small fraction of the available light isotope.
 
 A fixed-temperature model uses a constant gas temperature. Thermal control must keep this temperature constant.
 An inventory sample does not give an extraction rate.
@@ -40,7 +40,7 @@ An inventory sample does not give an extraction rate.
 |---|---|---|
 | Browser | Bulk ion and neutral rotation, radial species transport, optional gas and wall heat flow | No local fluid momentum or extraction solution |
 | 3D scene | Apparatus and calculated quantities | Each tracer is a display marker for many particles. Some dimensions are assumptions. |
-| Research backend | Axisymmetric density, flow, current and heat transport | Separate from the browser. Numerical differences and differences from measurements still occur. |
+| Research backend | Axisymmetric density, flow, current and heat transport | Separate from the browser. Numerical differences and differences from measurements continue to occur. |
 
 Browser inputs go through [worker.ts](../src/worker.ts) to the
 [mechanics](../src/fuel-centrifuge.ts), [transport](../src/fuel-transport.ts),
@@ -51,7 +51,7 @@ The time simulation calculates how the condition changes.
 ## What can the results show?
 
 A closure is a model for physics that the calculation does not calculate directly.
-Collision rate and conductivity are examples. Sliders change model inputs. These assumptions are still necessary.
+Collision rate and conductivity are examples. Sliders change model inputs. These assumptions continue to be necessary.
 Electron, gas, and wall temperatures are different quantities.
 
 Verification is a check of the implementation. Convergence studies compare results with smaller time steps or grid cells.

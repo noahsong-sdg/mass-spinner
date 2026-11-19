@@ -47,7 +47,7 @@ test('03–06 state the prerequisites and boundaries needed to interpret their e
  const read=(part:string)=>readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${part}.md`,'utf8');
  assert.match(read('03'),/New run to remove earlier power switches/);
  assert.match(read('03'),/Set Run duration to 1 s/);
- assert.match(read('03'),/Both species have the same local temperature/);
+ assert.match(read('03'),/The two species have the same local temperature/);
  assert.match(read('04'),/0.08 is 8%, not 0.08%/);
  assert.match(read('04'),/necessary upstream pressure and gas load are higher/);
  assert.match(read('05'),/do not change lithium transport/);

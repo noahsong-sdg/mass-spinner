@@ -55,7 +55,7 @@ test('roundoff-scale grazing-wall positions absorb now while exterior inputs are
  const result=neutralHydrogenExit(defaults,p,v);assert.equal(result.timeS,0);assert.equal(result.destination,'wall');
  assert.throws(()=>neutralHydrogenExit(defaults,[.2*(1+1e-10),0,.3],v),/outside/);
  assert.throws(()=>neutralHydrogenExit(defaults,[0,0,.6*(1+1e-10)],v),/outside/);
- assert.throws(()=>neutralHydrogenExit(defaults,[0,0,.3],[0,0,-1]),/forward/);
+ assert.throws(()=>neutralHydrogenExit(defaults,[0,0,.3],[0,0,-1]),/finite neutral ray with a positive axial velocity/);
  const inside=neutralHydrogenExit(defaults,[.2*(1-1e-10),0,.3],[100,0,1]);assert.ok(inside.timeS>0);
  for(const magneticT of [-.003242784133898351,.003242784133898351])for(const energyEVPerU of [.1,10,20]){
   const c={...defaults,magneticT:magneticT*Math.sqrt(energyEVPerU/10),energyEVPerU};

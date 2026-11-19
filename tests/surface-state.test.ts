@@ -73,7 +73,7 @@ test('each core reduced model carries its actual output without invented particl
   const c={...DEFAULT_GEOMETRY,duration:1e-6},r=geometry(model,c),s=ready(request(model,c,r));
   assert.equal(s.impacts.length,0);assert.equal(s.counts.length,0);
   if(model==='gyro'){assert.equal(s.tracks[0].positionsM[4][0],r.curves[0].x[4]);assert.equal(s.tracks[0].positionsM[4][2],0);}
-  if(model==='curved'){assert.equal(s.domain.kind,'reference');assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/scalar/);}
+  if(model==='curved'){assert.equal(s.domain.kind,'reference');assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/arc length and deflection only/);}
   if(model==='doublewell'){assert.equal(s.fields.find(f=>f.id==='effective-energy-0')!.values,r.curves[0].y);assert.ok(!s.fields.some(f=>f.id.startsWith('density')));}
  }
  const c={...DEFAULT_GEOMETRY,duration:1e-6};assert.equal(surfaceState(request('curved',c,geometry('gyro',c))).status,'invalid');
@@ -130,6 +130,6 @@ test('reference and non-spatial diagnostic modes explicitly decline surface pred
  const t=ready(request('diffusion',DEFAULT_TRANSPORT,transport('diffusion',DEFAULT_TRANSPORT)));
  assert.equal(t.domain.kind,'reference');assert.equal(t.fields.length,0);
  for(const model of ['future-blanket','research-replay']){
-  const s=ready(request(model,{},{}));assert.equal(s.fields.length,0);assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/Reference/);
+  const s=ready(request(model,{},{}));assert.equal(s.fields.length,0);assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/reference geometry and recorded evidence only/);
  }
 });
