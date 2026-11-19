@@ -210,9 +210,18 @@ return to the first experiment’s **Start from rest & edit current**.
 
 ## 5. Where does the energy go?
 
-More current can increase rotation **and heating**. Because temperature weakens
-separation, we need an energy account before calling stronger drive better.
-Mechanical power turns ions; electrical resistance produces heat:
+**The goal here is isotope enrichment, not heating a fusion plasma.** More current can increase
+both rotation and heating. Rotation sorts the masses; random thermal
+motion opposes that sorting. At the same rotation speed, hotter gas gives
+less equilibrium enrichment: recall the competition Ω²/T.
+
+If heating grows too much, faster gas need not separate better. Holding its
+temperature fixed instead requires cooling that removes the net heat input.
+We therefore ask: **does extra current improve separation, and what cooling
+does that improvement require?**
+
+To answer, first separate the power that turns ions from the power deposited
+as resistive heat:
 
 ```math
 P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
@@ -235,7 +244,9 @@ the thermal model deposits **signed redistribution work** in the gas. Outward
 motion at fixed L releases energy; inward motion can draw heat. This is a
 reduced-model closure, not resolved fluid momentum and energy.
 
-For the closed vessel, the intended continuous energy account is
+A temperature rise needs an energy source; keeping temperature steady needs
+heating and cooling to balance. For the closed vessel, the intended continuous
+energy account is
 
 ```math
 \frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})

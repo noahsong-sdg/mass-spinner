@@ -1,12 +1,12 @@
 # 03 · Can faster rotation stay cool?
 
-[02: rotation and separation](UNDERSTANDING-MASS-SPINNER-02.md) showed why rotation helps sorting. But the drive also supplies energy. Before increasing current, ask where that energy goes.
+[02: rotation and separation](UNDERSTANDING-MASS-SPINNER-02.md) showed why faster rotation helps sorting. Can increasing current heat the gas enough to undo that gain?
 
 ## Why add a temperature model?
 
-A flat temperature curve can mean an imposed thermal bath, not an absence of heating. We need to let the gas and wall store energy to see the cost of driving them.
+At a given rotation speed, hotter gas has more random thermal motion and weaker mass sorting. A fixed-temperature run hides this tradeoff: it assumes thermal control holds temperature steady, however much heat the drive supplies.
 
-Mechanical power turns the ions; resistance heats the gas:
+With energy storage and cooling, we can ask **whether the extra rotation outweighs the heating, and how much heat cooling must remove**. These power terms tell us where energy enters:
 
 ```math
 P_{\mathrm{mech}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
@@ -23,7 +23,7 @@ Power is joules per second. Torque τ times ion angular speed Ωᵢ gives mechan
 
 ## Where does the heat go?
 
-A mean temperature cannot show a hot inner wall beside a cooler outer wall. A spatial model divides the gas and liner into cells and transfers heat between neighbors.
+The average temperature can hide a thin hot layer beside a cooler wall. Heat must cross that layer to leave the gas, so an average alone cannot tell us the heat flow or hottest temperature. A spatial model divides the gas and liner into cells and transfers heat between neighbors.
 
 ```math
 q_r=-k\frac{\partial T}{\partial r},\qquad
@@ -41,7 +41,7 @@ Both species share one local temperature here. A cell with more atoms can contai
 
 The [Magnetic leverage experiment](/?level=2&try=fieldExperiment) asks a different question from changing B alone: it adjusts current to hold reference torque fixed. Then I ∝ 1/B, so resistive heating scales as 1/B². It does not establish that arbitrarily large fields are practical.
 
-For a lithium feed, the separate [surface reference](/?level=2&try=surfaceExperiment) compares conditions with saturation; it does not evolve evaporation or condensation.
+Colder is not always better either: a lithium-vapor separator needs its working material to remain in the gas phase. The [surface reference](/?level=2&try=surfaceExperiment) compares conditions with saturation to explore that constraint; it does not evolve evaporation or condensation.
 
 **Boundary:** conductivity, heat exchange and deposition remain prescribed. Early wall layers require joint cell/time refinement; a smooth picture is not evidence of resolution. There is no solved discharge or radial fluid momentum.
 

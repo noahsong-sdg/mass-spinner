@@ -3,11 +3,24 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {understandingPage} from '../scripts/understanding-page.mjs';
-import {guideTopics,guideActions} from '../src/guide-topics.js';
+import {guideTopics,guideActions,numberedTutorials} from '../src/guide-topics.js';
 import {setupGuideReader} from '../src/guide-reader.js';
 
 const markdown=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
 const revision='8cab091a3458a050142049f9227238d18e51b53d';
+
+test('energy readers explain the separation and cooling decision before introducing power equations',t=>{
+ for(const tutorial of [undefined,numberedTutorials[0]]){
+  const source=tutorial?readFileSync('docs/UNDERSTANDING-MASS-SPINNER-03.md','utf8'):markdown;
+  const dom=new JSDOM(understandingPage(source,revision,tutorial));t.after(()=>dom.window.close());
+  const heading=dom.window.document.getElementById(tutorial?'budget':'energy')!;
+  let lead='';for(let node=heading.nextElementSibling;node&&!node.classList.contains('equation');node=node.nextElementSibling)lead+=` ${node.textContent}`;
+  assert.match(lead,/random thermal motion|random thermal\s+motion/);
+  assert.match(lead,/same rotation speed|given rotation speed/,'temperature effect must be conditional on rotation');
+  assert.match(lead,/cooling/);assert.match(lead,/improve separation|weaker mass sorting/);
+  assert.match(lead,/does extra current|extra rotation outweighs/,'motivate a decision, not just an energy bookkeeping exercise');
+ }
+});
 
 test('the website renders every guide equation and its derivation, with accessible schematic diagrams',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;

@@ -84,7 +84,7 @@ export const learningPath = [
  },
  {
   id:'thermal',title:'Why not keep increasing current?',
-  question:'If stronger drive can help rotation, what else changes when you turn it up?',
+  question:'Does extra current improve enrichment once heating and the required cooling are included?',
   scope:'Centrifuge · mechanical work, heat storage and cooling; spatial models require explicit enabling.',
   equation:'energy',experiments:[
    {
@@ -94,7 +94,7 @@ export const learningPath = [
     steps:['Show Drive & work. Energies are joules; their slopes are watts. Resistive heating is a separate contribution.','In Thermal model enable Evolve gas & liner temperature. Wait for the accepted result and inspect Temperature and its budget at the same physical time.'],
     actions:[['heatExperiment','Open heat experiment'],['pin','Pin accepted run A'],['work','Show drive work']],
     observe:'The bath calculation constrains temperature. Thermal evolution instead balances heating, storage and signed heat exchange; the temperature response depends on the initial wall and coolant conditions.',
-    explain:'A warmer gas can oppose mass sorting at a given rotation. In the coupled run, temperature, density and inertia interact, so the fixed-speed Ω²/T law alone does not predict a current-change purity.',
+    explain:'Hotter gas has more random thermal motion, weakening sorting at a given rotation speed. Holding temperature fixed instead requires cooling to remove net heat input. In the coupled run, temperature, density and inertia interact, so Ω²/T alone does not predict a current-change purity.',
     boundary:'Heat transfer and deposition are model assumptions. Numerical dissipation belongs to the numerical ledger; it is not deposited as physical heat.',
     transfer:['Could gas cool while the drive is on?','Yes, if cooling exceeds net heating under that state and those boundary conditions. Read the signed energy budget rather than infer temperature from current alone.'],
    },
