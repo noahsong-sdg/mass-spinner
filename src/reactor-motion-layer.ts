@@ -86,7 +86,7 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
   }
   if(panel.open&&enabled.heat)heatInset.tick(phase*.55);
   if(!updateText)return;
-  metrics.textContent=power?'The reference shows a normalized D–T source and heat direction toward the blanket. It has no beam source.':
+  metrics.textContent=power?'The reference shows a normalized D–T source and heat flow to the blanket. It has no beam source.':
    `${current.basis}${current.timeS===null?'':` · ${fmt(current.timeS)} s`} · ${current.particleRateS>0?`D⁺ ${fmt(ionSpeedMS(current))} m/s`:'beam off'} · ${fmt(current.neutronRateS)} n/s · ${fmt(current.depositedPowerW)} W deposited`;
   scope.textContent=power?'This reference animation does not calculate plasma motion, neutron transport or heat flow. It does not change the published TBR or yields.':
    `Markers show weighted angular samples; bright fusion sites are display effects. Speeds use nonrelativistic mean energies; ions and neutrons have separate slow-motion factors. Straight paths use isotropic emission without scattering or attenuation. The separate enlarged depth view shows heat flux, not coolant flow. ${si?'SI hardware; visual speed factors 2×10⁻⁷ (ions), 10⁻⁸ (neutrons).':'The Blender units are illustrative; travel time is not physical. The footprint changes with beam area.'}`;

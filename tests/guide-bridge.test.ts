@@ -115,10 +115,10 @@ test('a receiver reload interrupts both waiting and unacknowledged requests with
 test('an ambiguous action has a bounded probe lifetime and never claims execution',t=>{
  const f=reader(t);f.click('spin');f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'});
  for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/sent no final action result.*can still finish/);
+ assert.equal(f.isProbing(),false);assert.match(f.status()!,/sent no final action result.*can finish later/);
  const requests=f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action');assert.equal(requests.length,1);
  f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});
- assert.match(f.status()!,/sent no final action result.*can still finish/,'a late waiting receipt must not erase the timeout warning');
+ assert.match(f.status()!,/sent no final action result.*can finish later/,'a late waiting receipt must not erase the timeout warning');
 });
 
 test('an old receiver without readiness support tells the user to reload without sending or replaying',t=>{

@@ -81,7 +81,7 @@ export const METHOD_GUIDES: MethodGuide[] = [
   {
     id: 'mirror', section: 'II E', title: 'Magnetic centrifugal mass filter (MCMF)',
     mechanism: 'A small-radius centrifugal end plug lets light ions escape more easily. A large-radius magnetic mirror has a rotation-modified loss cone that can favor heavy-ion escape.',
-    advantages: ['Different conditions at the two ends can send light and heavy species toward different outlets.', 'The tutorial describes a possible improvement on uniform-field separation.'],
+    advantages: ['Different conditions at the two ends can send light and heavy species to different outlets.', 'The tutorial describes a possible improvement on uniform-field separation.'],
     disadvantages: ['Collisions must refill loss cones without causing excessive perpendicular transport.', 'The tutorial reported no experimental results for these variable-field configurations in 2018.'],
     fidelity: 'The mirror and barrier calculations use adiabatic invariants and specified rotation. They do not give a complete MCMF, pitch-angle replenishment, end sheaths or experimental performance.',
     parameters: ['Mirror ratio', 'Radius ratio', 'Angular velocity', 'Pitch angle', 'Parallel and perpendicular energy', 'Collision rate'],

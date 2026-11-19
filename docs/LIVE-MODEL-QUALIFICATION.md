@@ -131,7 +131,7 @@ limits. It is research evidence and has not replaced the live equations.
 
 The [V100 spatial repairs](../SPATIAL-FLOW-V100.md) correct contact/shear flux
 diffusion and misplaced local viscous heating. Ten spatial comparisons and the
-experimental comparison still have errors above their limits. These repairs do not qualify
+experimental comparison have errors above their limits. These repairs do not qualify
 use of the model in the live simulator.
 
 The [V101 source-aligned refinement](../SPATIAL-FLOW-V101.md) reduces the failed

@@ -119,7 +119,7 @@ export function simulateFuelSpatialExperiment(input:Partial<FuelSpatialExperimen
    gasWallWK:.1,linerThicknessM:.001,linerMaterial:'tungsten' as const,coolingWK:0},
   assumptions:['This voltage-driven argon cell is a concept model. It does not match a Wijnakker apparatus or Marathon machine.',
    'The common Ω(r) does not depend on z. Electrical fields depend on r and z. Equal-mass passive labels do not calculate isotope enrichment or separate ion and neutral velocities.',
-   'The outer cylinder has the prescribed voltage. The grounded upper disk covers exactly half the end area on every allowed mesh. Other faces insulate total current.',
+   'The outer cylinder has the prescribed voltage. The grounded upper disk covers exactly half the end area on all permitted meshes. Other faces insulate total current.',
    'After a pulse, both contacts connect to ground. This makes a shorted circuit, not an open circuit or discharge quench. Stored switch samples use right-continuous voltage and current.',
    'Diagonal electrical conductivity, diffusion and the gas–wall film are prescribed inputs. Neutral transport depends on temperature within the source bounds. The model does not calculate electron energy, chemistry or Hall force.',
    'Joule heating adds energy directly to the common gas. The model does not calculate the energy division between electrons and heavy particles.',

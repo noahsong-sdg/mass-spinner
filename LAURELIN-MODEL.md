@@ -7,7 +7,7 @@ It does not include a magnetohydrodynamic (MHD) calculation or electrical breake
 
 ## State and equations
 
-Compression can increase temperature, but energy losses can remove that gain.
+Compression can increase temperature, but energy losses can remove that increase.
 The model tracks plasma volume and thermal energy to show this competition.
 
 Two fully ionized deuterium plasmoids have a combined fixed deuteron inventory `N=n₀V₀`.

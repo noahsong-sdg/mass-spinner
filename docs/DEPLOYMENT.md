@@ -20,7 +20,7 @@ The workflow examines each literal same-origin 301 redirect. For this check, it 
 
 Deploy then uses `e2e/deployment-health.spec.ts` for desktop and phone checks of the canvas, current control, plots, and page overflow. It does not use newer tutorial or feature assertions during rollback.
 
-For rollback, use the same command with an older `verify_run_id` and the live `previous_deploy_run_id`. The release tools accept that artifact and keep chunks necessary for tabs from newer releases. The selected run must still have its `verified-site` artifact, which stays available for 7 days.
+For rollback, use the same command with an older `verify_run_id` and the live `previous_deploy_run_id`. The release tools accept that artifact and keep chunks necessary for tabs from newer releases. The selected run must have its `verified-site` artifact, which stays available for 7 days.
 
 A push that changes `deploy.yml` registers the branch workflow. It does not start the Deploy job. Only an explicit dispatch prepares or publishes a release. The workflow uploads `prepared-site` before the publication step that uses credentials.
 

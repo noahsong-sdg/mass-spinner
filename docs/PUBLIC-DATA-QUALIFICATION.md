@@ -132,7 +132,7 @@ At imposed 100 A, narrow/middle/broad hypotheses give current-weighted port
 voltages of 21.86/18.12/14.11 V. These are not independent experimental voltage
 predictions. The inherited conductivity ratio corresponds to Hall parameter 3.
 That value came from earlier electrical observations. The emission footprints
-and corrected-voltage operator are still unknown. No new parameter fitting
+and corrected-voltage operator are unknown. No new parameter fitting
 removes this inherited calibration.
 
 The 2 cm anode band has a metal-geometry basis, but uniform current on it is
@@ -166,7 +166,7 @@ plasma potential and the raw fixed-field V–I correction are unknown. The study
 adds no measured probe points or experimental score.
 
 Inherited Hall calibration, missing sheath/emission laws and omitted floating-wall
-current redistribution still prevent experimental qualification. A physical
+current redistribution prevent experimental qualification. A physical
 basis for finite cathode/anode current footprints and plasma-port voltage mapping
 is necessary. The next predictions must also include matched non-rigid neutral/ion
 momentum, meridional transport and energy.

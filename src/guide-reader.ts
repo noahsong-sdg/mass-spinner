@@ -7,13 +7,13 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  let capability='',instance='',probe:number|undefined,attempts=0;
  let pending:{type:string;action?:string;view?:string;requestId:string;sent:boolean}|undefined;
  const report=(message:string)=>{if(status)status.textContent=message;};
- try{capability=browser.sessionStorage.getItem(capabilityKey)??'';}catch{/* Without storage, the current authorized connection still works. */}
+ try{capability=browser.sessionStorage.getItem(capabilityKey)??'';}catch{/* Without storage, the current authorized connection works. */}
  const stopProbe=()=>{browser.clearInterval(probe);probe=undefined;};
  const hello=()=>{
   if(!simulatorWindow||simulatorWindow.closed){stopProbe();report('The simulator is closed. Select the action again to open it.');return;}
   if(attempts++>=120){
    stopProbe();
-   if(pending?.sent)report('The simulator sent no final action result. The action can still finish. Examine its tab before you try again.');
+   if(pending?.sent)report('The simulator sent no final action result. The action can finish later. Examine its tab before you try again.');
    else{pending=undefined;report('The simulator is not ready. Reload the simulator tab. Then select the action again.');}
    return;
   }
