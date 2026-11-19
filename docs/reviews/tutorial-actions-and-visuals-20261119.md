@@ -14,7 +14,7 @@
 
 The new spin-up curves solve an exact two-population reference. The populations have equal, constant inertias and linear collision coupling. There is no wall drag or radial redistribution. Collisions conserve total angular momentum. After power stops, the speed difference decreases without a change to total angular momentum.
 
-The separation bars compare the equilibrium exponent, not purity. The magnetic bars hold torque, geometry and conductivity constant. They do not describe a constant-current experiment. The inventory bars include only steady unburned exhaust at fixed fusion power. Routing diagrams show direction, not flow rate. The diagnostic diagram shows sightline geometry without a prescribed emission profile.
+The separation bars compare the equilibrium exponent, not purity. The magnetic bars hold torque, geometry and conductivity constant. They do not describe a constant-current experiment. The inventory bars include only steady unburned exhaust at fixed fusion power. Routing diagrams show direction, not flow rate. The diagnostic diagram uses an offset sightline. A center chord would have no rotation signal for axisymmetric azimuthal flow. It assumes no emission profile. Motion controls appear only for diagram states with animated paths.
 
 The tutorial text states these conditions beside each example. Existing equation blocks, action IDs and anchors stay the same. Technical names and equations remain unchanged during the STE wording check. The review uses ASD-STE100 Issue 9; it is not a formal compliance certificate.
 

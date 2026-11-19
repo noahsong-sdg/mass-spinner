@@ -70,9 +70,23 @@ test('diagram choices affect only their own figure and motion starts paused when
    assert.equal(figure.querySelector('[data-concept-reading]')!.textContent,figure.querySelector<HTMLTemplateElement>(`[data-concept-description="${choice.dataset.conceptSelect}"]`)!.content.textContent);
   }
   const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
-  if(motion){motion.click();assert.equal(figure.dataset.motion,'running');motion.click();assert.equal(figure.dataset.motion,'paused');}
+  if(motion&&!motion.hidden){motion.click();assert.equal(figure.dataset.motion,'running');motion.click();assert.equal(figure.dataset.motion,'paused');}
  }
  const css=readFileSync('web-assets/guide.css','utf8');
  assert.match(css,/\[data-concept-panel\]\[hidden\]\{display:none\}/);
  assert.match(css,/concept-reveal/,'the two speed curves must reveal the same time range');
+});
+
+
+test('the Doppler reference uses an offset chord and offers motion only for states with animated paths',t=>{
+ const dom=new JSDOM(conceptDiagram('diagnostic')!,{url:'https://example.org/tutorial-06.html'});t.after(()=>dom.window.close());
+ setupGuideReader(dom.window);const doc=dom.window.document,motion=doc.querySelector<HTMLButtonElement>('[data-concept-motion]')!;
+ assert.equal(motion.hidden,true);
+ doc.querySelector<HTMLButtonElement>('[data-concept-select="1"]')!.click();assert.equal(motion.hidden,false);
+ const panel=doc.querySelector('[data-concept-panel="1"]')!;
+ const axisY=Number(panel.querySelector('.concept-vessel')!.getAttribute('cy'));
+ const chordY=Number(/M25 (\d+)H250/.exec(panel.querySelector('.concept-flow')!.getAttribute('d')!)![1]);
+ assert.notEqual(chordY,axisY,'a center chord has zero line-of-sight velocity for pure axisymmetric rotation');
+ for(const point of panel.querySelectorAll('.concept-sample'))assert.equal(Number(point.getAttribute('cy')),chordY);
+ doc.querySelector<HTMLButtonElement>('[data-concept-select="0"]')!.click();assert.equal(motion.hidden,true);
 });

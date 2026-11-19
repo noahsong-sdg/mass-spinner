@@ -46,15 +46,18 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  browser.addEventListener('pagehide',stopProbe);
 
  for(const figure of doc.querySelectorAll<HTMLElement>('[data-concept-example]')){
+  const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
+  const showMotion=()=>{if(motion)motion.hidden=!figure.querySelector('[data-concept-panel]:not([hidden])')?.querySelector('.concept-flow,.concept-trace');};
   for(const button of figure.querySelectorAll<HTMLButtonElement>('[data-concept-select]')){
    button.disabled=false;button.addEventListener('click',()=>{
     const selected=button.dataset.conceptSelect!;figure.dataset.state=selected;
     for(const choice of figure.querySelectorAll('[data-concept-select]'))choice.setAttribute('aria-pressed',String(choice===button));
     for(const panel of figure.querySelectorAll<SVGElement>('[data-concept-panel]'))panel.toggleAttribute('hidden',panel.dataset.conceptPanel!==selected);
     figure.querySelector('[data-concept-reading]')!.textContent=figure.querySelector<HTMLTemplateElement>(`[data-concept-description="${selected}"]`)!.content.textContent;
+    showMotion();
    });
   }
-  const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
+  showMotion();
   if(motion){
    const pause=(paused:boolean)=>{figure.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play motion':'Pause motion';};
    pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);motion.disabled=false;
