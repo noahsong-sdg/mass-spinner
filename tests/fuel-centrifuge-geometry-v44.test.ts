@@ -105,7 +105,9 @@ test('unresolved composition remains null and visibly neutral rather than invent
 test('every visible construction and overlay is pickable with honest material and geometry metadata',()=>{
  const scene=build(),ids=new Set(FUEL_COMPONENTS.map(c=>c.id));let meshes=0;
  scene.traverse((node:any)=>{if(!node.isMesh)return;meshes++;assert.ok(ids.has(node.userData.componentId),node.name);assert.equal(typeof node.userData.materialBasis,'string',node.name);assert.equal(typeof node.userData.purpose,'string',node.name);
-  const basis=node.userData.quantitativeOnly?/Accepted chamber SI dimensions\. Arrow widths and display positions are schematic/:node.parent?.name==='Discharge circuit'?/Schematic external circuit connections\. This drawing does not specify manufactured wiring or electrical ratings/:/Dimensions and construction are for illustration/;
+  const basis=node.userData.quantitativeOnly
+   ?node.isInstancedMesh?/Accepted SI centre positions; enlarged marker dimensions are illustrative/:/Accepted chamber SI dimensions\. Arrow widths and display positions are schematic/
+   :node.parent?.name==='Discharge circuit'?/Schematic external circuit connections\. This drawing does not specify manufactured wiring or electrical ratings/:/Dimensions and construction are for illustration/;
   assert.match(node.userData.geometryBasis,basis,node.name);
   for(const attribute of Object.values(node.geometry.attributes) as THREE.BufferAttribute[])for(const value of attribute.array)assert.ok(Number.isFinite(value),node.name);
  });assert.ok(meshes>100);release(scene);
