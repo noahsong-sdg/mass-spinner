@@ -92,8 +92,8 @@ test('all investigation pages open independently with working navigation and no 
   await page.goto(`/${name}.html`);await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('iframe')).toHaveCount(0);
   await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
-  const last=page.locator('.guide-contents a').last();
-  if(await last.count()){const target=await last.getAttribute('href');await last.click();await expect(page.locator(target!)).toBeInViewport();}
+  const last=page.locator('.guide-contents a').last(),target=await last.getAttribute('href');
+  await last.click();await expect(page.locator(target!)).toBeInViewport();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  }
