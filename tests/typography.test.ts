@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {readFileSync,readdirSync} from 'node:fs';
 import {createHash} from 'node:crypto';
 import {documentationPage} from '../scripts/documentation-page.mjs';
 import {startPage} from '../scripts/start-page.mjs';
@@ -27,5 +27,8 @@ test('interface fonts are local WOFF2 resources with pinned provenance and origi
 
 test('application and standalone readers load shared typography without remote font imports',()=>{
  for(const html of [readFileSync('index.html','utf8'),readFileSync('laurelin.html','utf8'),readFileSync('web-assets/how-it-works.html','utf8'),documentationPage(),startPage()])assert.match(html,/<link rel="stylesheet" href="\/fonts.css">/);
- for(const path of ['src/style.css','web-assets/guide.css','web-assets/how-it-works.html'])assert.doesNotMatch(readFileSync(path,'utf8'),/fonts\.googleapis\.com|DM Sans|Manrope/);
+ const styles=readdirSync('src',{recursive:true}).filter(path=>path.endsWith('.css')).map(path=>`src/${path}`);
+ for(const path of [...styles,'web-assets/guide.css','web-assets/how-it-works.html'])assert.doesNotMatch(readFileSync(path,'utf8'),/fonts\.googleapis\.com|DM Sans|Manrope|font-family:Lab/);
+ assert.match(readFileSync('src/workspace.css','utf8'),/\.world-window-bar h2\{font:500 13px 'Commissioner',sans-serif/);
+ assert.match(readFileSync('src/laurelin.css','utf8'),/font-family:'Commissioner',sans-serif/);
 });

@@ -89,7 +89,7 @@ body.immersive{overflow:hidden;background:#101614}
 .world-resizer-horizontal:after{height:2px;width:36px;left:calc(50% - 18px);margin-top:5px}
 .world-dock .world-layout-reset{min-width:44px;font-size:18px;padding-inline:12px;border-left:1px solid #425449;border-radius:0 7px 7px 0}
 .world-window-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:4px 8px 4px 20px;border-bottom:1px solid #394b3f;flex:none}
-.world-window-bar h2{font:500 13px 'DM Sans',sans-serif;letter-spacing:0;margin:0}
+.world-window-bar h2{font:500 13px 'Commissioner',sans-serif;letter-spacing:0;margin:0}
 .world-close{font-size:23px;width:40px;height:40px;color:#b6c6bb}
 .world-window-body{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;padding:20px}
 .world-window .world-group:empty{display:none}
