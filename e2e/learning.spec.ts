@@ -66,26 +66,26 @@ test('numbered tutorials 03–06 render independently with readable diagrams, ma
  await info.attach('numbered-evidence-tutorial',{body:await page.screenshot(),contentType:'image/png'});expect(errors).toEqual([]);
 });
 
-test('optional guidance preserves predictions and gives keyboard access to explanations',async({page},info)=>{
+test('one tutorial flow preserves predictions and gives keyboard access to optional explanations',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/start.html');
- const mode=page.locator('#learning-mode');await expect(mode).toBeVisible();
- await expect(mode).toHaveValue('show');
+ await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
  const current=page.locator('section[aria-labelledby="current"]');
- await mode.selectOption('investigate');
+ await expect(current.locator('[data-learning-hint]')).toHaveAttribute('open','');
  await expect(current.locator('[data-learning-explanation]')).not.toHaveAttribute('open','');
  await current.locator('textarea').fill('The ions turn first; the neutrals follow.');
  const explanation=current.locator('[data-learning-explanation] summary');
  await explanation.focus();await explanation.press('Enter');
  await expect(current.locator('[data-learning-explanation]')).toHaveAttribute('open','');
- await mode.selectOption('explore');await mode.selectOption('show');
+ await explanation.press('Enter');
+ await expect(current.locator('[data-learning-explanation]')).not.toHaveAttribute('open','');
  await expect(current.locator('textarea')).toHaveValue('The ions turn first; the neutrals follow.');
  await page.locator('#guide-chapter').selectOption('collection');
  await expect(page).toHaveURL(/#collection$/);
  await expect(current.locator('textarea')).toHaveValue('The ions turn first; the neutrals follow.');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
- await info.attach('optional-guidance',{body:await page.screenshot(),contentType:'image/png'});
+ await info.attach('single-tutorial-flow',{body:await page.screenshot(),contentType:'image/png'});
  expect(errors).toEqual([]);
 });
 
@@ -95,6 +95,7 @@ test('all investigation pages open independently with working navigation and no 
  for(const name of ['learn','learn-controls','learn-transport','learn-thermal','learn-beam','learn-collection','learn-evidence']){
   await page.goto(`/${name}.html`);await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('iframe')).toHaveCount(0);
+  await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
   const last=page.locator('#guide-chapter option').last(),target=await last.getAttribute('value');
   await page.locator('#guide-chapter').selectOption(target!);
   await expect(page.locator(`#${target}`)).toBeInViewport();

@@ -8,7 +8,6 @@ export function startPage(){
  <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/guide.html">Physics & equations →</a><a href="/learn.html">More investigations →</a></header>
  <main><h1>Make the gas turn.<br>Keep a useful sample.</h1><p class="walkthrough-intro">Can an inner sample become richer in lithium-6 while retaining enough of it? Keep this page beside the simulator. Follow current → rotation → mixture → collection.</p>
  <p id="reader-status" role="status" aria-live="polite"></p>
- <div data-learning-controls hidden><label for="learning-mode">Guidance</label><select id="learning-mode"><option value="show" selected>Show me</option><option value="investigate">Investigate</option><option value="explore">Explore</option></select><p id="learning-mode-description" role="status"></p></div>
  <p class="learning-notes" id="learning-notes">Predictions are optional. Notes stay in this page and disappear on reload; copy anything you want to keep.</p>
  <nav aria-label="Walkthrough chapters"><label for="guide-chapter">Your next experiment</label><select id="guide-chapter">${playgroundSteps.map((step,i)=>`<option value="${step.id}">${i+1}. ${escape(step.title)}</option>`).join('')}</select></nav>
  ${playgroundSteps.map((step,i)=>`<section aria-labelledby="${step.id}" class="walkthrough-step">
