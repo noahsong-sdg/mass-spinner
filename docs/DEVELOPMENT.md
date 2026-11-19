@@ -1,12 +1,12 @@
 # Development
 
-The full checkout retains scientific evidence and exceeds safe-dev's 512 MiB input limit. `scripts/dev-snapshot.py` copies the maintained web build/test inputs into a separate directory. It leaves the checkout, historical campaigns and Git history untouched.
+The full checkout contains scientific evidence and is larger than the safe-dev input limit of 512 MiB. `scripts/dev-snapshot.py` makes a separate copy of web build and test inputs from its approved list: the development snapshot. It does not change the checkout, historical studies, or Git history.
 
-The reviewed allowlist is in the script: application source, tools, tests, docs, web assets, Blender inputs and the scientific fixtures read by the web test suite. It includes tracked files and non-ignored new files within those paths; credentials and symlinks are refused or excluded. It does **not** support rerunning every historical scientific campaign.
+The approved input list includes application source, tools, tests, documentation, web assets, Blender inputs, and scientific test data. Within these paths, the script includes tracked files and new files that Git does not ignore. The script rejects symbolic links and credential paths in its denylist. Historical studies can have inputs outside this snapshot.
 
 ## Prepare an isolated workspace
 
-Run only source preparation on the host; execute dependencies, tests and builds in the guest. Use a new destination:
+Use the host only to prepare source files. Use the guest for dependency installation, tests, and builds. Use a new destination:
 
 ```sh
 python3 scripts/dev-snapshot.py /private/tmp/mass-spinner-dev-inputs
@@ -14,9 +14,13 @@ python3 scripts/dev-snapshot.py /private/tmp/mass-spinner-dev-inputs --verify
 safe-dev -C /private/tmp/mass-spinner-dev-inputs --memory 1G init
 ```
 
-`dev-inputs.json` records every input's size and SHA256, the package-lock SHA256 and the original base commit. Save the printed manifest SHA256 with verification results. Verification requires an exact file inventory and refuses added source, tests, secrets or symlinks. Run it before creating `.git`, `node_modules` or build output; it deliberately has no post-install exclusions. Working-tree changes are represented by their actual file hashes; the base commit alone does not identify those changes. Regenerate the snapshot after editing source; it is an immutable input set, not a live mount.
+The input manifest `dev-inputs.json` records each file's size and SHA256, the package-lock hash, and the base commit. Save the printed manifest hash with verification results.
 
-The current safe-dev image has Node 22; this project requires Node 26.13.1 / npm 11.20.0. Install the official ARM64 distribution inside the guest (use `linux-x64` on an x86 guest):
+Before you make `.git`, `node_modules`, or build output, do the snapshot verification. Verification accepts only the recorded file inventory and hashes. It rejects added files from dependency installation.
+
+File hashes identify working-tree changes outside the base commit. After source changes, make a new snapshot. The snapshot does not receive later checkout changes.
+
+The safe-dev image for this procedure has Node 22. This project uses Node 26.13.1 / npm 11.20.0. For an ARM64 guest, install the official ARM64 distribution in the guest. For an x86 guest, use `linux-x64`:
 
 ```sh
 safe-dev -C /private/tmp/mass-spinner-dev-inputs --memory 1G run --online -- sh -eu -c '
@@ -39,11 +43,11 @@ safe-dev -C /private/tmp/mass-spinner-dev-inputs --memory 1G run --online -- sh 
 '
 ```
 
-The raw commit object preserves the real base revision needed by the build's source links. This is an **incomplete development checkout**, not a replacement Git repository or production release source. Commit parents and omitted scientific blobs are absent. Use the complete checkout in CI for publication.
+The raw commit object keeps the base revision for the source links in the build. The development checkout does not contain commit parents or all scientific file objects. Use this checkout only for development. Use the full checkout in CI for publication.
 
-## Check a change
+## Change verification
 
-Prefix guest commands with:
+Use this command structure for guest tests:
 
 ```sh
 safe-dev -C /private/tmp/mass-spinner-dev-inputs --memory 1G run -- \
@@ -54,10 +58,21 @@ safe-dev -C /private/tmp/mass-spinner-dev-inputs --memory 1G run -- \
   '
 ```
 
-Choose the relevant test instead of repeating the example. At the final gate, run the offline test/build sequence from [verify.yml](../.github/workflows/verify.yml): all typechecks, lint, Python checks, serial TypeScript tests, build and asset/site/release checks. Browser checks additionally need the pinned Chromium image from `ci/Dockerfile.browser`; the small safe-dev source snapshot does not install a browser. Scientific qualification jobs use their dedicated pinned images and full inputs.
+Select the test applicable to the change. Before publication, do the offline [verify.yml](../.github/workflows/verify.yml) sequence: all typechecks, lint, Python checks, serial TypeScript tests, build, and asset/site/release checks.
 
-After source changes, build another fresh snapshot. Before `safe-dev sync --replace-guest`, export any unique guest results for review: sync deletes guest edits, dependencies and the temporary Git identity. Repeat verification, Git bootstrap and `npm ci` after syncing. Tools under `/work/home` survive. Coordinate guest use; never remove another task's VM lock or running volume.
+For browser checks, use the Chromium image with the version specified in `ci/Dockerfile.browser`. The development snapshot does not install a browser. Scientific qualification jobs use their specified images and full inputs.
+
+Before `safe-dev sync --replace-guest`, export guest results that have no other copy. This command deletes guest changes, dependencies, and the temporary Git identity. Tools in `/work/home` stay in place. After this command, do snapshot verification again. Prepare the Git identity again. Use `npm ci` again.
+
+Make a plan with other task owners before you operate a shared guest. Do not remove another task's VM lock or active volume.
 
 ## Scientific evidence
 
-Keep existing evidence in place. For future large results, archive immutable artifacts separately from the hot development inputs, with a catalog entry containing the source commit, input/lock hashes, tool versions or image digest, invocation, artifact SHA256, individual result hashes and qualification scope. Verify downloaded checksums before reading results and test a restored artifact before any migration. Keep failed studies and unique raw measurements; a passing web build does not establish experimental accuracy.
+Keep existing evidence in place. For future large results, keep archive files separate from the development inputs. Do not change archive files after their creation. For each archive, record:
+
+- The source commit and input and lockfile hashes
+- The tool versions or image hash
+- The command and artifact SHA256
+- Each result hash and the qualification scope.
+
+Before you read downloaded results, compare their checksums with the recorded values. Before a data migration, do a test with a restored artifact. Keep failed studies and raw measurements that have no other copy. A web build with no errors is not proof of experimental accuracy.

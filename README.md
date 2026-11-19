@@ -1,9 +1,9 @@
-pedagogical plasma mass separation sim made by astra. i read a couple of the marathon fusion papers + [this tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf).
+Astra made this simulator for education about plasma mass separation. I read Marathon Fusion papers and [this tutorial](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf).
 
-[link to sim](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev)
+[Open the simulator](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev)
 
-current status:
+Project status:
 
-- [experimental accuracy](docs/LIVE-MODEL-QUALIFICATION.md)
-- [thermal refinement](docs/LOCAL-THERMAL-REFINEMENT-V69.md)
-- [optical diagnostic research](docs/DIAGNOSTIC-V71.md)
+- [Experimental accuracy](docs/LIVE-MODEL-QUALIFICATION.md)
+- [Thermal refinement](docs/LOCAL-THERMAL-REFINEMENT-V69.md)
+- [Optical diagnostic research](docs/DIAGNOSTIC-V71.md).
