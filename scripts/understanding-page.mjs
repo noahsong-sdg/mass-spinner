@@ -1,3 +1,4 @@
+import {guideContents} from './guide-contents.mjs';
 import {Marked,Renderer} from 'marked';
 import katex from 'katex';
 import {tsImport} from 'tsx/esm/api';
@@ -13,7 +14,7 @@ const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').repla
 export function understandingPage(markdown,revision,tutorial){
  /** @type {readonly import('../src/guide-topics.js').GuideTopic[]} */
  const topics=tutorial?.topics??guideTopics;
- const title=tutorial?`${tutorial.number} · ${tutorial.title}`:'Physics guide';
+ const title=tutorial?`Tutorial ${Number(tutorial.number)} · ${tutorial.title}`:'Tutorial 2 · Rotation and separation';
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
  const sourceBase=releaseSourceBase(revision)+'docs/';
  let enhancement='';
@@ -40,7 +41,7 @@ export function understandingPage(markdown,revision,tutorial){
    const text=tokens.map(token=>token.raw).join(''),topic=topics.find(topic=>topic.heading===text);
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
    enhancement=topic?.diagram?guideDiagram(topic.diagram):'';
-   return heading;
+   return heading+(depth===1?guideContents(topics.map(topic=>[topic.id,topic.heading.replace(/^\d\. /,'')])):'');
   },
   paragraph({tokens}){
    const after=enhancement;enhancement='';
@@ -50,7 +51,6 @@ export function understandingPage(markdown,revision,tutorial){
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
- <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/start.html">Start here →</a><a href="/learn.html">Investigations →</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Read on its own ↗</a></header>
- <nav aria-label="Guide chapters"><label for="guide-chapter">Jump to</label><select id="guide-chapter">${topics.map(topic=>`<option value="${topic.id}">${escape(topic.heading.replace(/^\d\. /,''))}</option>`).join('')}</select></nav>
- <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/start.html">Try the seven experiments ↗</a></footer></body></html>`;
+ <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Read on its own ↗</a></header>
+<main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/learn.html">Docs & tutorials</a></footer></body></html>`;
 }

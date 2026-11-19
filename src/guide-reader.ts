@@ -63,9 +63,6 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);
   motion.addEventListener('click',()=>pause(drive.dataset.motion!=='paused'));
  }
- const chapters=doc.getElementById('guide-chapter') as HTMLSelectElement;
- function sync(){if([...chapters.options].some(option=>`#${option.value}`===win.location.hash))chapters.value=win.location.hash.slice(1);}
- chapters.addEventListener('change',()=>{win.location.hash=chapters.value;});win.addEventListener('hashchange',sync);sync();
  doc.addEventListener('click',event=>{
   const link=(event.target as Element).closest<HTMLAnchorElement>('a[data-guide-action],a[data-guide-view],a[data-guide-simulator]');if(!link)return;
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;

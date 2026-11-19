@@ -13,7 +13,7 @@ export type LearningModule = {
 
 export const learningPath = [
  {
-  id:'controls',title:'One change, one consequence',
+  id:'controls',title:'Controls and readouts',
   question:'Can you tell a change to the gas from a change to its picture?',
   scope:'Centrifuge · a closed gas inventory in a stationary vessel. Aim for an enriched sample that retains useful light-isotope inventory.',
   equation:'drive',experiments:[
@@ -42,7 +42,7 @@ export const learningPath = [
   ],investigation:['Find one edit that changes the picture and one that changes speed.','Name each input, show the corresponding readout, and explain why only one changes the physics.'],
  },
  {
-  id:'transport',title:'Spinning is not yet separation',
+  id:'transport',title:'Separation over time',
   question:'Why can the gas be turning before its composition changes much?',
   scope:'Centrifuge · distinguish finite-time redistribution from an ideal settled reference.',
   equationTerms:[{symbol:'Ω',meaning:'gas angular speed: read edge speed divided by vessel radius',action:'spinPlot'},{symbol:'T',meaning:'initial / bath gas temperature; the uniform equilibrium reference is not an evolved spatial temperature field',action:'gasTemperature'},{symbol:'Δm',meaning:'heavy minus light atomic mass: set by Feed',action:'controls'}],
@@ -83,7 +83,7 @@ export const learningPath = [
   ],investigation:['Diagnose weak separation without changing several knobs at once.','Pin the baseline, choose one intervention, compare at matched physical time, and explain the nearest consequence in speed or transport before interpreting purity.'],
  },
  {
-  id:'thermal',title:'Why not keep increasing current?',
+  id:'thermal',title:'Thermal transport',
   question:'Does extra current improve enrichment once heating and the required cooling are included?',
   scope:'Centrifuge · mechanical work, heat storage and cooling; spatial models require explicit enabling.',
   equation:'energy',experiments:[
@@ -112,7 +112,7 @@ export const learningPath = [
   ],investigation:['Explain a thermal tradeoff using an actual budget.','Choose one physical input, pin a baseline, and report speed, temperature and purity at matched time. State which thermal and transport assumptions remain imposed.'],
  },
  {
-  id:'beam',title:'Follow a deuteron’s energy',
+  id:'beam',title:'Beam and target',
   question:'What becomes of beam energy if only some incident ions fuse?',
   scope:'Beam reactor · a separate beam–target teaching model. The centrifuge separates isotopes; it does not produce fusion reactions.',
   equation:'',experiments:[
@@ -141,7 +141,7 @@ export const learningPath = [
   ],investigation:['Explain why a smaller beam spot can change the evolving target even at unchanged total incident power.','Record equal energy/current with two areas; distinguish initial total power from flux, fluence and later target state. The guide does not pin beam runs: write the two settings or export each calculation.'],
  },
  {
-  id:'collection',title:'Enriched is not the same as useful',
+  id:'collection',title:'Collection and processing',
   question:'How much of the light isotope do you retain when you keep only the center?',
   scope:'Centrifuge · first partition closed inventory, then examine explicitly separate process references.',
   equation:'collection',experiments:[
@@ -170,7 +170,7 @@ export const learningPath = [
   ],investigation:['Choose an honest collection tradeoff.','At one accepted time, find two nonempty cuts and report both purity and recovery. Choose a target within the actual curve, or explain why a desired target is unattainable under those inputs.'],
  },
  {
-  id:'evidence',title:'Which conclusion survives a changed assumption?',
+  id:'evidence',title:'Evidence and uncertainty',
   question:'What can this model support, and what would it take to trust a device prediction?',
   scope:'Interpret calculations as conditional predictions. Mechanism exploration, numerical verification and experimental agreement are separate achievements.',
   equation:'limits',experiments:[

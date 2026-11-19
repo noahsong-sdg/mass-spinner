@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {setupWorkspace} from '../src/workspace-ui.js';
+import {playgroundSteps} from '../src/playground-guide-steps.js';
 import {guideActions,guideExperiments,type GuideExperiment} from '../src/guide-topics.js';
 
 function fixture(t:any,mobile=false){
@@ -28,15 +29,16 @@ function acceptedFuel(f:ReturnType<typeof fixture>){
  return {mode,time,plot,accepted,newRun,power};
 }
 
-test('Start here opens a separate reader without changing panels, inputs or the current run',t=>{
+test('Docs opens the only reader entry without changing panels, inputs or the current run',t=>{
  const f=fixture(t),input=f.node('field');input.value='.17';
  let focuses=0;const reader={closed:false,focus:()=>focuses++} as unknown as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
- f.workspace.open('controls');f.node('start-here').click();
- assert.deepEqual(opened,[['/start.html','mass-spinner-start']]);
+ f.workspace.open('controls');f.node('open-docs').click();
+ assert.deepEqual(opened,[['/learn.html','mass-spinner-start']]);
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
  assert.equal(f.node('field'),input);assert.equal(input.value,'.17');
- assert.equal(f.node('start-here').getAttribute('aria-controls'),null);
- f.node('start-here').click();assert.equal(opened.length,1);assert.equal(focuses,1,'focus the existing reader without reloading its reading position');
+ assert.equal(f.node('open-docs').getAttribute('aria-controls'),null);
+ assert.equal(f.doc.getElementById('start-here'),null);
+ f.node('open-docs').click();assert.equal(opened.length,2,'Docs returns the named reader to the index');assert.equal(focuses,0);
  f.workspace.close('controls');
  const send=(origin:string,source:any,action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action}}));
  send('https://unrelated.example',reader,'current');send('https://example.org',f.window,'current');send('https://example.org',reader,'invalid');
@@ -60,7 +62,6 @@ test('Docs & tutorials stays available in every playground and connects its read
  f.workspace.close('controls');
  f.window.dispatchEvent(new f.window.MessageEvent('message',{origin:'https://example.org',source:reader,data:{type:'mass-spinner:guide-action',action:'current'}}));
  assert.equal(f.node('window-controls').hidden,false,'tutorial actions reach the original simulator');
- f.node('start-here').click();assert.equal(opened.length,1,'Start here focuses the reader instead of discarding its current chapter');
  button.click();assert.equal(opened.length,2,'Docs explicitly returns the reader to the index');
 });
 
@@ -69,13 +70,13 @@ test('all seven steps have a live action and retain the physical scope distincti
  for(let i=0;i<7;i++){
   f.step(i);assert.ok(f.doc.querySelectorAll('.guide-actions button').length>=2);
   assert.equal(f.node('window-guide').querySelector('h3').nextElementSibling.className,'guide-actions','put the action before the explanation');
-  assert.equal(f.node('window-guide').querySelectorAll('ol li').length,2);assert.match(f.node('window-guide').textContent,/Watch for/);
+  assert.equal(f.node('window-guide').querySelectorAll('ol li').length,playgroundSteps[i].do.length);assert.doesNotMatch(f.node('window-guide').innerHTML,/<strong>Watch for/);
  }
  f.step(3);assert.match(f.node('window-guide').textContent,/percentage or purity does not itself change by that factor/i);
  f.step(5);assert.match(f.node('window-guide').textContent,/do not simulate an extraction flow/);
  f.step(6);assert.match(f.node('window-guide').textContent,/not experimental accuracy/);
  f.node('window-guide').querySelector('.guide-navigation button:nth-child(2)').click();
- assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('start-here'));
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('open-docs'));
 });
 
 test('pending or missing results explain what to do instead of inventing a successful experiment',t=>{
@@ -90,11 +91,12 @@ test('the walkthrough respects the one-sheet mobile layout, Escape and context a
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-plots').hidden,false);
  f.workspace.open('guide');assert.equal(f.node('window-plots').hidden,true);
  f.node('window-guide').dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));
- assert.equal(f.doc.activeElement,f.node('start-here'));assert.equal(f.node('window-guide').hidden,true);
- for(const level of ['1','3','4']){f.workspace.setLevel(level);assert.equal(f.node('start-here').hidden,true);}
- f.workspace.setLevel('2');assert.equal(f.node('start-here').hidden,false);
+ assert.equal(f.doc.activeElement,f.node('open-docs'));assert.equal(f.node('window-guide').hidden,true);
+ for(const level of ['1','3','4']){f.workspace.setLevel(level);assert.equal(f.node('open-docs').hidden,false);f.workspace.open('guide');assert.equal(f.node('window-guide').hidden,true);}
+ f.workspace.setLevel('2');assert.equal(f.node('open-docs').hidden,false);
  f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
- assert.equal(f.node('start-here').hidden,true);assert.equal(f.node('window-guide').hidden,true);
+ assert.equal(f.node('open-docs').hidden,false);assert.equal(f.node('window-guide').hidden,true);
+ f.workspace.launchGuideAction('current');assert.equal(f.node('window-controls').hidden,true,'centrifuge actions remain unavailable in the source model');
 });
 
 test('physics reading loads on demand and preserves its place while controls or experiments are open',t=>{
@@ -130,7 +132,7 @@ test('only messages from the same-origin guide frame can operate native controls
  send('https://example.org',frame.contentWindow,'not-an-action');assert.equal(f.node('window-controls').hidden,true);
  send('https://example.org',frame.contentWindow,'current');assert.equal(f.node('window-controls').hidden,false);
  f.workspace.open('guide');send('https://example.org',frame.contentWindow,'','mass-spinner:guide-close');
- assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('start-here'));
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('open-docs'));
 });
 
 test('the current experiment rewinds before editing and compares endpoints without silently changing inputs',t=>{

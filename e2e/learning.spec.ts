@@ -5,9 +5,8 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const button=page.getByRole('button',{name:'Docs & tutorials',exact:true});await expect(button).toBeInViewport();
- const start=page.getByRole('button',{name:'Start here',exact:true});
- const [docsBox,startBox]=await Promise.all([button.boundingBox(),start.boundingBox()]);
- expect(docsBox&&startBox&&docsBox.x>=startBox.x+startBox.width).toBeTruthy();
+ await expect(page.getByRole('button',{name:'Docs & tutorials',exact:true})).toHaveCount(0);
+ const docsBox=await button.boundingBox();
  const sceneBox=await page.locator('.world-stage>.world-group:not([hidden])').boundingBox();
  expect(docsBox&&sceneBox&&docsBox.y+docsBox.height<=sceneBox.y).toBeTruthy();
  await button.focus();const opened=page.waitForEvent('popup');await button.press('Enter');const reader=await opened;
@@ -55,34 +54,31 @@ test('heat and collection illustrations explain direction and inventory with acc
 test('numbered tutorials 03–06 render independently with readable diagrams, math and mobile navigation',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  for(const part of ['03','04','05','06']){
-  await page.goto(`/tutorial-${part}.html`);await expect(page.locator('h1')).toContainText(part);
+  await page.goto(`/tutorial-${part}.html`);await expect(page.locator('h1')).toContainText(`Tutorial ${Number(part)}`);
   await expect(page.locator('figure svg')).not.toHaveCount(0);
   await expect(page.locator('.katex-error')).toHaveCount(0);
-  const target=await page.locator('#guide-chapter option').last().getAttribute('value');
-  await page.locator('#guide-chapter').selectOption(target!);await expect(page.locator(`#${target}`)).toBeInViewport();
+  const link=page.locator('.guide-contents a').last(),target=await link.getAttribute('href');
+  await link.click();await expect(page.locator(target!)).toBeInViewport();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  }
  await info.attach('numbered-evidence-tutorial',{body:await page.screenshot(),contentType:'image/png'});expect(errors).toEqual([]);
 });
 
-test('one tutorial flow preserves predictions and gives keyboard access to optional explanations',async({page},info)=>{
+test('concise tutorials have linked contents and keyboard access to optional explanations',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/start.html');
  await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
  const current=page.locator('section[aria-labelledby="current"]');
- await expect(current.locator('[data-learning-hint]')).toHaveAttribute('open','');
+ await expect(page.locator('textarea,[data-learning-hint],#guide-chapter')).toHaveCount(0);
  await expect(current.locator('[data-learning-explanation]')).not.toHaveAttribute('open','');
- await current.locator('textarea').fill('The ions turn first; the neutrals follow.');
  const explanation=current.locator('[data-learning-explanation] summary');
  await explanation.focus();await explanation.press('Enter');
  await expect(current.locator('[data-learning-explanation]')).toHaveAttribute('open','');
  await explanation.press('Enter');
  await expect(current.locator('[data-learning-explanation]')).not.toHaveAttribute('open','');
- await expect(current.locator('textarea')).toHaveValue('The ions turn first; the neutrals follow.');
- await page.locator('#guide-chapter').selectOption('collection');
+ await page.locator('.guide-contents a[href="#collection"]').click();
  await expect(page).toHaveURL(/#collection$/);
- await expect(current.locator('textarea')).toHaveValue('The ions turn first; the neutrals follow.');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  await info.attach('single-tutorial-flow',{body:await page.screenshot(),contentType:'image/png'});
@@ -96,9 +92,8 @@ test('all investigation pages open independently with working navigation and no 
   await page.goto(`/${name}.html`);await expect(page.locator('h1')).toBeVisible();
   await expect(page.locator('iframe')).toHaveCount(0);
   await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
-  const last=page.locator('#guide-chapter option').last(),target=await last.getAttribute('value');
-  await page.locator('#guide-chapter').selectOption(target!);
-  await expect(page.locator(`#${target}`)).toBeInViewport();
+  const last=page.locator('.guide-contents a').last();
+  if(await last.count()){const target=await last.getAttribute('href');await last.click();await expect(page.locator(target!)).toBeInViewport();}
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);
  }
@@ -108,9 +103,8 @@ test('all investigation pages open independently with working navigation and no 
 
 test('reader navigation keeps its simulator connection and tutorial plot actions preserve accepted inputs',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const pending=page.waitForEvent('popup');await page.getByRole('button',{name:'Start here',exact:true}).click();
+ const pending=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  const reader=await pending;
- await reader.getByRole('link',{name:'More investigations →',exact:true}).first().click();
  await reader.locator('a[href="/learn-transport.html"]').click();
  await reader.locator('[data-guide-action="separationPlot"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('separation');
@@ -158,7 +152,7 @@ test('an independently opened reader reconnects across guide navigation without 
 test('tutorial experiment links put relevant controls and results within one action on desktop and phone',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const opened=page.waitForEvent('popup');await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await opened;
+ const opened=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await opened;
  await reader.goto('/tutorial-03.html#budget');const current=await page.locator('#fuel-currentA').inputValue();
  await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();

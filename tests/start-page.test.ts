@@ -8,11 +8,14 @@ import {guideActions} from '../src/guide-topics.js';
 test('standalone walkthrough motivates each experiment before instructions and identifies expected outputs',t=>{
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('iframe').length,0);
+ assert.equal(doc.querySelector('h1')!.textContent,'Tutorial 1 · Using the simulator');
+ assert.equal(doc.querySelectorAll('.guide-contents a').length,7);
+ assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question/);
  assert.equal(doc.querySelectorAll('.walkthrough-step').length,7);
  for(const step of doc.querySelectorAll('.walkthrough-step')){
   assert.equal(step.querySelector('h2')!.nextElementSibling!.tagName,'P');
-  assert.equal(step.querySelectorAll('ol li').length,2);
-  assert.ok(step.querySelector('.walkthrough-observation'));
+  assert.equal(step.querySelector('[data-learning-hint],textarea,.learning-transfer'),null);
+  assert.equal(step.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!.open,false);
   for(const link of step.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(link.dataset.guideAction!)||['coils','controls'].includes(link.dataset.guideAction!));
    assert.equal(new URL(link.href).searchParams.get('try'),link.dataset.guideAction);

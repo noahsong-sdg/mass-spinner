@@ -7,7 +7,6 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
 .world-top .world-reading{display:flex;flex:none;gap:8px;margin-left:auto}
 .world-top .world-reading button{flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
-.world-top #start-here[aria-expanded=true]{background:#edbe90;color:#18211d}
 .world-window-body.playground-guide{display:flex;flex:1;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
 .guide-views{display:flex;flex:none;gap:6px;padding:10px 12px;border-bottom:1px solid #394b3f}
 .guide-views button{flex:1;min-height:44px;padding:8px;font-size:12px;border:1px solid #566b5c;border-radius:6px;color:#b9c7bd}

@@ -120,13 +120,13 @@ test('the density-gradient example follows the ideal-gas exponent and keeps the 
  assert.match(figure.textContent!,/not isotope percentages/);
 });
 
-test('the chapter picker remains reachable and leaves room for anchored headings',t=>{
+test('linked contents need no sticky picker and leave room for anchored headings',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
  const style=dom.window.document.createElement('style');style.textContent=readFileSync('web-assets/guide.css','utf8');dom.window.document.head.append(style);
- const nav=dom.window.getComputedStyle(dom.window.document.querySelector('nav')!);
- assert.equal(nav.position,'sticky');assert.equal(nav.top,'0px');
+ const nav=dom.window.getComputedStyle(dom.window.document.querySelector('.guide-contents')!);
+ assert.equal(nav.position,'static');assert.equal(dom.window.document.querySelector('#guide-chapter'),null);
  const heading=dom.window.getComputedStyle(dom.window.document.querySelector('h2')!);
- assert.equal(heading.scrollMarginTop,'104px');
+ assert.equal(heading.scrollMarginTop,'24px');
 });
 
 test('the embedded reader keeps actions in the parent simulator and Escape exits the reading window',t=>{
@@ -134,7 +134,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  const messages:any[]=[],win=dom.window;
  Object.defineProperty(win,'parent',{value:{postMessage:(...args:any[])=>messages.push(args)}});
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
- assert.equal((win.document.getElementById('guide-chapter') as HTMLSelectElement).value,'energy');
+ assert.ok(win.document.querySelector('.guide-contents a[href="#energy"]'));assert.equal(win.location.hash,'#energy');
  win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="work"]')!.click();
  assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-action',action:'work'},'https://example.org']);
  const status=win.document.getElementById('reader-status')!;
@@ -149,8 +149,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
 test('standalone reading retains ordinary links and does not impersonate an embedded simulator',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
  setupGuideReader(dom.window);assert.equal(dom.window.document.body.classList.contains('embedded'),false);
- const chapters=dom.window.document.getElementById('guide-chapter') as HTMLSelectElement;chapters.value='composition';chapters.dispatchEvent(new dom.window.Event('change'));
- assert.equal(dom.window.location.hash,'#composition');
+ assert.ok(dom.window.document.querySelector('.guide-contents a[href="#composition"]'));assert.equal(dom.window.document.querySelector('#guide-chapter'),null);
  assert.ok(dom.window.document.querySelector('a[href="/?level=2&guide=physics&topic=momentum&try=spin"]'));
 });
 
@@ -195,7 +194,7 @@ test('the model-building order and old deep links survive the guide rewrite',t=>
  }
  assert.ok(doc.querySelector('a[href="#views"]'));assert.ok(doc.querySelector('a[href="#path"]'));
  for(const id of ['views','path']){
-  assert.ok(doc.querySelector(`#guide-chapter option[value="${id}"]`));
+  assert.ok(doc.querySelector(`.guide-contents a[href="#${id}"]`));
   assert.notEqual(doc.getElementById(id)!.nextElementSibling?.className,'try-actions','reference sections should not emit empty action groups');
  }
 });

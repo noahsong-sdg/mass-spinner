@@ -102,13 +102,14 @@ test('four gas modes reveal their geometry and explain their physical scope',asy
  expect(errors).toEqual([]);
 });
 
-test('Start here opens a full-page walkthrough while preserving the running simulator',async({page},info)=>{
+test('Docs opens a full-page walkthrough while preserving the running simulator',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
  await page.getByRole('button',{name:'Plots',exact:true}).click();const before=await exported(page);await page.getByRole('button',{name:'Close Plots',exact:true}).click();
  const popup=page.waitForEvent('popup');
- await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await popup;
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
+ await reader.locator('main a[href="/start.html"]').click();
  await expect(reader).toHaveURL(/\/start(?:\.html)?$/);
- await expect(reader.getByRole('heading',{name:'Can the current make the gas turn?',exact:true})).toBeVisible();
+ await expect(reader.getByRole('heading',{name:'Tutorial 1 · Using the simulator',exact:true})).toBeVisible();
  await expect(reader.locator('iframe')).toHaveCount(0);await expect(page.locator('#window-guide')).toBeHidden();
  await reader.locator('[data-guide-action="endSpin"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#window-plots')).toBeVisible();
@@ -198,9 +199,9 @@ test('guide: local links, native action and accessible reading layout',async({pa
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/guide.html#goal');
  await page.getByRole('link',{name:'Every menu option is explained below'}).click();
- await expect(page.locator('#guide-chapter')).toHaveValue('views');
+ await expect(page).toHaveURL(/#views$/);
  await page.getByRole('link',{name:'§4',exact:true}).first().click();
- await expect(page.locator('#guide-chapter')).toHaveValue('momentum');
+ await expect(page).toHaveURL(/#momentum$/);
  await expect(page.locator('.try-actions')).toHaveCount(0);
  const steps=page.locator('ol').filter({has:page.locator('[data-guide-action="cutPower"]')});
  await expect(steps.locator('[data-guide-action]')).toHaveCount(3);
@@ -223,7 +224,8 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
 
 test('control tutorial changes the existing run through the separate reader',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Start here',exact:true}).click();const reader=await popup;
+ const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
+ await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#fuel-currentA')).toBeFocused();await page.locator('#fuel-currentA').press('Home');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});

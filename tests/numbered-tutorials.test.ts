@@ -14,7 +14,7 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
   const source=readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8');
   const dom=new JSDOM(understandingPage(source,revision,tutorial),{url:`https://example.org/tutorial-${tutorial.number}.html`});t.after(()=>dom.window.close());
   const doc=dom.window.document;
-  assert.match(doc.title,new RegExp(`^${tutorial.number}`));assert.equal(doc.querySelectorAll('h1').length,1);
+  assert.match(doc.title,new RegExp(`^Tutorial ${Number(tutorial.number)}`));assert.equal(doc.querySelectorAll('h1').length,1);
   assert.ok(doc.querySelector('#reader-status[role=status][aria-live=polite]'));
   assert.equal(doc.querySelectorAll('.equation math').length,[...source.matchAll(/^```math$/gm)].length);
   assert.equal(doc.querySelectorAll('.katex-error').length,0);
@@ -38,9 +38,8 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
   }
   for(const [,href]of source.matchAll(/\]\(([^)]+)\)/g))if(!href.startsWith('/')&&!href.startsWith('https:'))assert.ok(existsSync(resolve('docs',href.split('#')[0])));
   assert.equal(doc.querySelectorAll('a[href*="UNDERSTANDING-MASS-SPINNER-"]').length,0,'website reading links stay in the HTML readers');
-  setupGuideReader(dom.window);const chapter=doc.querySelector<HTMLSelectElement>('#guide-chapter')!;
-  chapter.value=tutorial.topics.at(-1)!.id;chapter.dispatchEvent(new dom.window.Event('change'));
-  assert.equal(dom.window.location.hash,`#${chapter.value}`);
+  setupGuideReader(dom.window);assert.equal(doc.querySelector('#guide-chapter'),null);
+  assert.deepEqual([...doc.querySelectorAll<HTMLAnchorElement>('.guide-contents a')].map(a=>a.hash),tutorial.topics.map(topic=>`#${topic.id}`));
  }
 });
 

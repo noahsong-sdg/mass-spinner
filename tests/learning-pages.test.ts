@@ -19,7 +19,7 @@ test('learning sequence publishes six freely selectable questions and usable sec
   const dom=new JSDOM(html,{url:`https://example.org/${name}`});t.after(()=>dom.window.close());const doc=dom.window.document;
   assert.ok(doc.querySelector('h1'));assert.ok(doc.querySelector('[data-guide-simulator]'));
   assert.equal(doc.querySelectorAll('iframe').length,0);
-  for(const option of doc.querySelectorAll<HTMLOptionElement>('#guide-chapter option'))assert.ok(doc.getElementById(option.value),`${name}: ${option.value}`);
+  for(const link of doc.querySelectorAll<HTMLAnchorElement>('.guide-contents a'))assert.ok(doc.getElementById(link.hash.slice(1)),`${name}: ${link.hash}`);
   for(const a of doc.querySelectorAll<HTMLAnchorElement>('a[href^="/learn"]'))assert.ok(pages[a.pathname.slice(1)],`${name}: ${a.pathname}`);
   for(const a of doc.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(a.dataset.guideAction!),`${name}: unknown action ${a.dataset.guideAction}`);
@@ -28,13 +28,14 @@ test('learning sequence publishes six freely selectable questions and usable sec
  }
 });
 
-test('each experiment motivates a prediction, preserves optional feedback and asks a new transfer case',()=>{
+test('each experiment keeps its baseline, direct actions and optional physics explanation',()=>{
  for(const module of learningPath)for(const e of module.experiments){
   assert.ok(e.baseline&&e.predict&&e.steps.length&&e.observe&&e.explain&&e.boundary&&e.transfer[0]&&e.transfer[1]);
   assert.ok(e.actions.length>0,`${module.id}/${e.id}: every Try it needs an actionable destination`);
   const dom=new JSDOM(learningPages()[`learn-${module.id}.html`]);const section=dom.window.document.querySelector(`[aria-labelledby="${e.id}"]`)!;
-  assert.match(section.textContent!,/Baseline\./);assert.match(section.textContent!,/Predict\./);
-  for(const detail of section.querySelectorAll<HTMLDetailsElement>('details[data-learning-explanation],.learning-transfer details'))assert.equal(detail.open,false,'answers must not be compulsory or pre-revealed without enhancement');
+  assert.ok(section.textContent!.includes(e.baseline));assert.equal(section.querySelector('textarea,[data-learning-hint],.learning-transfer,strong'),null);
+  assert.equal(section.querySelectorAll('ol li').length,e.steps.length);
+  for(const detail of section.querySelectorAll<HTMLDetailsElement>('details[data-learning-explanation]'))assert.equal(detail.open,false,'answers must not be compulsory or pre-revealed without enhancement');
   dom.window.close();
  }
 });

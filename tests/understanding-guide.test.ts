@@ -49,7 +49,7 @@ test('the guide connects equation symbols, plot units and experiment histories t
 
 
 test('the introductory experiment links directly to its live actions without a detour through menus',()=>{
- assert.match(source,/\[Start here walkthrough\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
+ assert.match(source,/\[Tutorial 1\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
  const introduction=source.split('## 1.')[0];
  assert.deepEqual([...introduction.matchAll(/try=([A-Za-z]+)\)/g)].map(match=>match[1]),['currentExperiment','endSpin']);
  assert.doesNotMatch(introduction,/In \*\*Start here\*\*, choose/);

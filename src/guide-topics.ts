@@ -16,22 +16,22 @@ export const guideTopics=[
 export type GuideTopicId = typeof guideTopics[number]['id'];
 /** Numbered readers continue 02; these are explanations, not new simulation modes. */
 export const numberedTutorials = [
- {number:'03',title:'Can faster rotation stay cool?',topics:[
+ {number:'03',title:'Heating and cooling',topics:[
   {id:'budget',heading:'Why add a temperature model?',diagram:'energy',actions:[['work','Show drive work'],['thermal','Open thermal controls'],['thermalPlot','Show temperature']]},
   {id:'flow',heading:'Where does the heat go?',diagram:'heat-flow',actions:[['thermalProfile','Show temperature profile'],['gasEnergy','Show species energy'],['gasPressure','Show gas pressure']]},
   {id:'limits',heading:'Can a field change avoid the heating?',actions:[['magneticLeverage','Show magnetic leverage'],['lithiumSurfaces','Show lithium surfaces']]},
  ]},
- {number:'04',title:'Does a purer sample make a useful process?',topics:[
+ {number:'04',title:'Purity and recovery',topics:[
   {id:'sample',heading:'How much useful material did you keep?',diagram:'inventory-cut',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve']]},
   {id:'stages',heading:'Why use more than one stage?',actions:[['cascade','Show stages reference'],['stageControls','Adjust stages']]},
   {id:'pumping',heading:'What limits the gas entering a process?',actions:[['pumping','Show pumping reference'],['pumpControls','Adjust pump speed']]},
  ]},
- {number:'05',title:'Why does fusion need separation?',topics:[
+ {number:'05',title:'Fusion fuel cycle',topics:[
   {id:'jobs',heading:'What are the three different jobs?',diagram:'fuel-cycle',actions:[]},
   {id:'inventory',heading:'Why keep fuel outside the plasma?',actions:[['fuelInventory','Show D–T fuel inventory'],['inventoryControls','Open fuel inventory controls']]},
   {id:'design',heading:'What would establish a workable fuel cycle?',actions:[['modelInfo','Open model assumptions']]},
  ]},
- {number:'06',title:'Which prediction should I trust?',topics:[
+ {number:'06',title:'Model accuracy',topics:[
   {id:'questions',heading:'What does a passing test establish?',diagram:'evidence',actions:[['modelInfo','Open qualification and evidence']]},
   {id:'sensitivity',heading:'Could an assumed input reverse the result?',actions:[['pin','Pin accepted run A'],['diffusion','Adjust diffusivity'],['newRun','New run'],['separationPlot','Show separation over time']]},
   {id:'prediction',heading:'What is a defensible claim here?',actions:[['modelInfo','Open measured-reference assessment']]},
