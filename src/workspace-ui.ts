@@ -55,7 +55,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  function separator(label:string,orientation:'vertical'|'horizontal',change:(delta:number|'min'|'max',input:'keyboard'|'pointer')=>void){
   const handle=make('div',`world-resizer world-resizer-${orientation}`);handle.tabIndex=0;handle.setAttribute('role','separator');
   handle.setAttribute('aria-label',label);handle.setAttribute('aria-orientation',orientation);handle.setAttribute('aria-valuemin','20');handle.setAttribute('aria-valuemax','80');
-  handle.title='Drag or use arrow keys to resize; Home and End set the bounds';
+  handle.title='Drag or use the arrow keys to change the size. Home and End select the limits.';
   handle.addEventListener('keydown',event=>{
    if(event.key==='Escape'){
     event.preventDefault();const side=handle.parentElement===rails.left?'left':'right';
@@ -108,9 +108,9 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   bar.append(heading,dismiss);panel.append(bar,body);panel.hidden=true;rails[side].append(panel);if(key!=='guide')dock.append(button);
   windows.set(key,{panel,button,body,heading,side,group:key==='target'?'target':side});return body;
  }
- const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Tutorials','left')};
+ const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Examine','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Tutorials','left')};
  const reading=make('div','world-reading'),docsButton=make('button','','Docs & tutorials ↗');
- docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Open tutorials and documentation in a separate tab';
+ docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Open the tutorials and documentation in a separate tab';
  docsButton.addEventListener('click',()=>guide.openStandalone());
  reading.append(docsButton);header.append(reading);
  const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseCentrifuge:()=>level==='2'&&marathon==='centrifuge'});
