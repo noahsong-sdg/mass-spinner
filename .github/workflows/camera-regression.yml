@@ -1,0 +1,66 @@
+name: Camera regression
+on:
+  push:
+    paths: ['.github/workflows/camera-regression.yml']
+  workflow_dispatch:
+    inputs:
+      candidate_run_id:
+        description: Verify run with a successful verify job and candidate-site artifact
+        default: '44586827476'
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  camera:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Admit immutable candidate from the successful offline gate
+        id: candidate
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.candidate_run_id || '44586827476' }}
+        run: |
+          echo "$GITHUB_SHA" > camera-probe-revision.txt
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID" > candidate-run.json
+          jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Verify" and .path == ".github/workflows/verify.yml" and .head_repository.full_name == $repo and (.head_sha | test("^[a-f0-9]{40}$"))' candidate-run.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID/jobs" | jq -e '[.jobs[] | select(.name == "verify" and .conclusion == "success")] | length == 1'
+          sha=$(jq -r .head_sha candidate-run.json)
+          gh api "repos/$GITHUB_REPOSITORY/contents/package-lock.json?ref=$sha" -H 'Accept: application/vnd.github.raw+json' > candidate-lock.json
+          cmp package-lock.json candidate-lock.json
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "lock=$(sha256sum candidate-lock.json | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+          echo "run_id=$RUN_ID" >> "$GITHUB_OUTPUT"
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          name: candidate-site
+          path: release/
+          run-id: ${{ steps.candidate.outputs.run_id }}
+          github-token: ${{ github.token }}
+      - name: Prepare isolated pinned browser tooling
+        run: |
+          docker build -t camera-browser -f ci/Dockerfile.browser .
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp camera-browser npm ci --ignore-scripts --no-audit --no-fund
+      - name: Exercise camera only against the admitted artifact offline
+        env:
+          SOURCE_SHA: ${{ steps.candidate.outputs.sha }}
+          LOCK_HASH: ${{ steps.candidate.outputs.lock }}
+        run: |
+          jq -e --arg sha "$SOURCE_SHA" --arg lock "$LOCK_HASH" '.sourceRevision == $sha and .lockSHA256 == $lock' release/release-manifest.json
+          docker run --rm --network none --memory 2g --cpus 4 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp camera-browser sh -eu -c 'npm run release:verify; npm run test:browser -- e2e/reactor-camera.spec.ts; npm run release:verify'
+      # Diagnostic evidence cannot qualify a release: only Verify emits verified-site.
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: camera-diagnostic
+          path: |
+            candidate-run.json
+            camera-probe-revision.txt
+            playwright-report/
+            test-results/
+          retention-days: 7
