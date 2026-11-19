@@ -118,3 +118,13 @@ test('an ambiguous action has a bounded probe lifetime and never claims executio
  f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});
  assert.match(f.status()!,/not confirmed.*may still finish/,'a late waiting receipt must not erase the timeout warning');
 });
+
+test('an old receiver without readiness support tells the user to reload without sending or replaying',t=>{
+ const f=reader(t);f.click('spin');
+ for(let i=0;i<120;i++)f.probe();
+ assert.equal(f.isProbing(),false);assert.match(f.status()!,/Reload the simulator tab, then try again/);
+ assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
+ f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'updated-simulator'});
+ assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'late readiness must not execute the expired action');
+ assert.match(f.status()!,/Reload the simulator tab/);
+});

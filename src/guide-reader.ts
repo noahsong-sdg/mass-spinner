@@ -11,7 +11,12 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const stopProbe=()=>{browser.clearInterval(probe);probe=undefined;};
  const hello=()=>{
   if(!simulatorWindow||simulatorWindow.closed){stopProbe();report('The simulator is closed. Try this action again to open it.');return;}
-  if(attempts++>=120){stopProbe();report(pending?.sent?'The simulator has not confirmed this action. It may still finish; check its tab before trying again.':'The simulator did not become ready. Wait for it to load, then try again.');return;}
+  if(attempts++>=120){
+   stopProbe();
+   if(pending?.sent)report('The simulator has not confirmed this action. It may still finish; check its tab before trying again.');
+   else{pending=undefined;report('The simulator did not become ready. Reload the simulator tab, then try again.');}
+   return;
+  }
   simulatorWindow.postMessage({type:'mass-spinner:guide-hello',capability},origin);
  };
  const connect=()=>{stopProbe();attempts=0;report('Waiting for the simulator…');probe=browser.setInterval(hello,250);hello();};
