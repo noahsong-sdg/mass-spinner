@@ -27,7 +27,7 @@ The plot probe does not move the 3D collection marker. Inner collection radius /
 
 ## Why use more than one stage?
 
-A cascade connects stages through inner and outer streams. More stages can give higher purity but cause more internal circulation.
+One stage may not give the required purity. A cascade connects stages through inner and outer streams. More stages can give higher purity but cause more internal circulation.
 
 [Open the stages experiment](/?level=2&try=stageExperiment).
 
@@ -40,6 +40,8 @@ A cascade connects stages through inner and outer streams. More stages can give 
 More stages can give lower recovery or higher circulation. This reference uses ideal routing and stage assumptions. It cannot give plant transients or kilograms per hour from a closed-vessel state.
 
 ## How much gas can enter a process?
+
+A pure sample does not give a production rate. A process also needs gas to enter and leave.
 
 The pump and inlet pipe each have a flow limit. This reference gives the necessary upstream pressure for a specified rotating gas state:
 

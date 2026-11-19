@@ -30,6 +30,8 @@ Without thermal evolution, temperature stays constant. [§4 explains the motion]
 
 ## 1. Why does rotation separate masses?
 
+Rotation is useful only if it changes the isotope mixture. We need to know which isotope becomes more common at each radius.
+
 Circular motion is possible only with inward force. Pressure that increases from the axis to the wall supplies this force.
 At the same radius and angular speed, heavier atoms need more inward force.
 During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
@@ -117,7 +119,7 @@ Charged-particle filters use more physics than this neutral-gas model includes.
 
 ## 3. How do we turn gas without a moving drum?
 
-Equilibrium does not explain how to turn the gas.
+Equilibrium assumes gas that already turns. A device also needs a drive that creates this rotation.
 Radial current crosses an axial magnetic field. The resulting force turns charged gas around electrodes that do not move:
 
 ```math
@@ -133,6 +135,8 @@ Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D 
 The dots show populations, not microscopic particle paths.
 
 ## 4. What sets the rotation speed?
+
+Useful separation needs sufficient speed within the available time. We must compare the drive with losses before we can predict that speed.
 
 Torque changes angular momentum L over time, not speed immediately.
 Moment of inertia ℐ measures resistance to rotation changes. For rigid rotation,
@@ -252,6 +256,8 @@ The Inner collection radius / a control changes that marker and starts a new run
 
 ## Which model parts are necessary, and what is missing?
 
+We must know which conclusions the model can support before we use its results. Each missing process limits those conclusions.
+
 Drive changes rotation, heating decreases separation at the same speed, and transport changes the distribution over time.
 The collection radius selects the sample. Without these connections, more current can appear useful when it is not.
 
@@ -264,6 +270,8 @@ The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.w
 It does not show accurate Marathon or lithium results.
 
 ## What do the menu options mean?
+
+Different pictures can look like different physical models. Use this key to distinguish a calculated history from a reference.
 
 Gas view changes the display, not the physics. Use Controls to set optional models to on.
 

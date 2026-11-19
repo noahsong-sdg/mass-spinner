@@ -1,31 +1,8 @@
 import {tsImport} from 'tsx/esm/api';
 const {equilibriumPoint}=/** @type {typeof import('../src/fuel-equilibrium.js')} */(await tsImport('../src/fuel-equilibrium.ts',import.meta.url));
 
-/** @type {Record<string,{title:string,description:string,caption:string,body:string}>} */
-const drawings={
- 'fuel-cycle':{title:'Fuel breeding and fuel recovery are separate processes',description:'A blanket can supply tritium through reactions between lithium and neutrons. A D–T fusion plasma consumes some fuel. Exhaust processing can return fuel that did not react. Lithium isotope enrichment occurs before breeding. The centrifuge does not cause fusion.',caption:'This diagram shows processes only. The arrows do not give breeding rates, return efficiency or plant inventory.',body:`
- <rect x="15" y="15" width="300" height="45" rx="5"/><text x="165" y="43" text-anchor="middle">lithium + neutrons → tritium</text>
- <path d="M74 62V96" class="force" marker-end="url(#fuel-cycle-force)"/><text x="88" y="83">make-up fuel</text>
- <rect x="15" y="105" width="118" height="49" rx="5"/><text x="74" y="135" text-anchor="middle">D–T fusion</text>
- <rect x="197" y="105" width="118" height="49" rx="5"/><text x="256" y="126" text-anchor="middle">exhaust</text><text x="256" y="144" text-anchor="middle">processing</text>
- <path d="M135 131H191" class="force" marker-end="url(#fuel-cycle-force)"/><text x="165" y="118" text-anchor="middle" style="font-size:10px">unburned</text>
- <path d="M256 156V210H74V160" class="current" marker-end="url(#fuel-cycle-current)"/><text x="165" y="237" text-anchor="middle">return unburned fuel</text>`},
- evidence:{title:'Three checks of a prediction',description:'Verification is a check of the code against the equations. Convergence is a check for changes with smaller cells and timesteps. Validation compares predictions with measurements under the same conditions. Each check needs separate evidence.',caption:'Numerical checks do not show experimental accuracy. Validation also needs measurements under the same conditions.',body:`
- <rect x="15" y="15" width="300" height="62" rx="5"/><text x="165" y="40" text-anchor="middle">Verification</text><text x="165" y="62" text-anchor="middle">Does the code solve the equations?</text>
- <rect x="15" y="100" width="300" height="62" rx="5"/><text x="165" y="125" text-anchor="middle">Convergence</text><text x="165" y="147" text-anchor="middle">Does refinement change the result?</text>
- <rect x="15" y="185" width="300" height="62" rx="5"/><text x="165" y="210" text-anchor="middle">Validation</text><text x="165" y="232" text-anchor="middle">Does the result agree with measurements?</text>`},
- energy:{title:'Drive energy supplies rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Electrical resistance causes Ohmic heating. Mechanical work changes rotation and the mass distribution. Ion–neutral speed differences and wall drag convert rotation energy to heat. Cooling removes heat.',caption:'These are energy paths in the model. The heating and cooling laws are assumptions.',body:`
- <rect x="91" y="14" width="148" height="37" rx="7"/><text x="165" y="38" text-anchor="middle">electrical input</text>
- <path d="M126 51L83 91M204 51L246 91" class="force" marker-end="url(#energy-force)"/>
- <rect x="12" y="96" width="141" height="42" rx="7"/><text x="82" y="122" text-anchor="middle">mechanical work</text>
- <rect x="179" y="96" width="139" height="42" rx="7"/><text x="248" y="122" text-anchor="middle">Ohmic heat</text>
- <path d="M80 138V175M248 138V175" class="force" marker-end="url(#energy-force)"/>
- <text x="82" y="196" text-anchor="middle">rotation ↔ redistribution</text>
- <text x="248" y="196" text-anchor="middle">gas / wall heat</text>
- <path d="M90 210Q130 246 207 210" class="force" marker-end="url(#energy-force)"/>
- <text x="165" y="255" text-anchor="middle">speed differences + drag → heat</text>
- <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">heat removed</text>`},
-};
+const {conceptDiagram}=/** @type {typeof import('./guide-concepts.js')} */(await tsImport('./guide-concepts.ts',import.meta.url));
+
 function heatDiagram(){
  /** @type {[string,string,number[]][]} */
  const cases=[['gas','Gas hotter',[900,800,600,400,300]],['wall','Wall hotter',[300,400,600,800,900]],['equal','Same temperature',[600,600,600,600,600]]];
@@ -170,9 +147,6 @@ export function guideDiagram(id){
  if(id==='inventory-cut')return collectionDiagram();
  if(id==='drive')return driveDiagram();
  if(id==='composition')return densityDiagram();
- const d=drawings[id];if(!d)throw new Error(`Unknown guide diagram: ${id}`);
- return `<figure><svg viewBox="0 0 330 ${id==='energy'?312:270}" role="img" aria-labelledby="${id}-title ${id}-description">
- <title id="${id}-title">${d.title}</title><desc id="${id}-description">${d.description}</desc>
- <defs>${['current','force'].map((kind,i)=>`<marker id="${id}-${kind}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${i?'#e4ac76':'#9bd8ce'}"/></marker>`).join('')}</defs>
- ${d.body}</svg><figcaption>${d.caption}</figcaption></figure>`;
+ const concept=conceptDiagram(id);if(concept)return concept;
+ throw new Error(`Unknown guide diagram: ${id}`);
 }

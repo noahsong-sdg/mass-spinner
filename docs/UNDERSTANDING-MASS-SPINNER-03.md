@@ -63,6 +63,8 @@ A cell with more atoms can contain more thermal energy without a higher temperat
 
 ## Can a field change decrease resistive heating?
 
+Higher current can increase resistive heating rapidly. We want the same torque with less heat, if a field change can provide it.
+
 The [Magnetic leverage experiment](/?level=2&try=fieldExperiment) changes current to keep reference torque constant.
 At constant conductivity and geometry, I ∝ 1/B and resistive heating ∝ 1/B².
 Two times B gives I/2 and one quarter of the resistive heat.

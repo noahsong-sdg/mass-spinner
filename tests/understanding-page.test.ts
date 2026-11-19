@@ -39,7 +39,7 @@ test('the website renders every guide equation and its derivation, with accessib
  for(const equation of doc.querySelectorAll('.equation'))assert.equal(equation.getAttribute('role'),'group');
  for(const table of doc.querySelectorAll('table')){assert.equal(table.getAttribute('tabindex'),'0');assert.ok(table.getAttribute('aria-label'));}
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
- assert.equal(doc.querySelectorAll('figure svg').length,4);
+ assert.equal(doc.querySelectorAll('figure svg').length,guideTopics.filter(topic=>'diagram' in topic).length+1);
  for(const svg of doc.querySelectorAll('figure svg')){
   assert.equal(svg.getAttribute('role'),'img');
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
@@ -147,6 +147,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  const receive=(data:unknown,source=parent,origin='https://example.org')=>win.dispatchEvent(new win.MessageEvent('message',{source,origin,data}));
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
  assert.deepEqual(messages.at(-1),[{type:'mass-spinner:guide-hello',capability:''},'https://example.org']);
+ assert.equal(win.document.getElementById('reader-status')!.textContent,'','initial authorization must not interrupt reading');
  assert.ok(win.document.querySelector('.guide-contents a[href="#energy"]'));assert.equal(win.location.hash,'#energy');
  win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="work"]')!.click();
  const status=win.document.getElementById('reader-status')!;

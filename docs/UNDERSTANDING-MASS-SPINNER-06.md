@@ -4,6 +4,8 @@ A curve alone does not show that a model is accurate. Different checks are neces
 
 ## What does a test show?
 
+A plot can look correct when its model or numerical solution is wrong. We need separate checks before we use a prediction.
+
 Atom conservation does not show that the calculated rotation agrees with measurements. Three questions have different evidence:
 
 | Question | Evidence | What it cannot show |
@@ -15,6 +17,8 @@ Atom conservation does not show that the calculated rotation agrees with measure
 [Open Model info](/?level=2&try=modelInfo). Read the qualification status beside the run assumptions. Agreement with inputs in a numerical study does not show agreement with Marathon measurements. Read the mesh and wall-layer warnings.
 
 ## Which input can change the result?
+
+Some transport coefficients are specified, not measured for this device. If their uncertainty changes the conclusion, one run is insufficient.
 
 The model uses diffusivity, collision rate and conductivity as inputs. Changes to these selected coefficients show which assumptions have a large effect on the result.
 
@@ -41,6 +45,8 @@ Model info → Sensitivity & tested inputs calculates results for selected coeff
 Spatial argon reference shows saved mesh refinements, not experimental accuracy or a live lithium mesh control. The live thermal Refined option gives a timestep-error estimate, not spatial convergence.
 
 ## Which predictions have sufficient evidence?
+
+A numerically stable model can predict the wrong experimental quantity. We must compare what the instrument measures under the same conditions.
 
 The comparison shows how diffusivity changes recovery under specified inputs, assumptions and time. Accuracy for a Marathon device is a different question. It is necessary to use its apparatus, operating conditions and measurement method.
 

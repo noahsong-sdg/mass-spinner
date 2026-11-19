@@ -23,7 +23,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  try{capability=win.sessionStorage.getItem(capabilityKey)??'';}catch{/* After reload, the caller must authorize a new connection. */}
  if(!capability)capability=win.crypto.randomUUID();
  try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Keep the same authorization boundary without storage. */}
- function openStandalone(){readerWindow=win.open('/learn.html','mass-spinner-start');}
+ function openStandalone(){readerWindow=win.open('/learn.html','_blank');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
@@ -114,6 +114,10 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
+  if(key==='look'){
+   set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);return;
+  }
+  if(key==='coils'){set('fuel-component','coils');open('inspect',true);return;}
   // Do not show pending or failed results as a new experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it fails, open Controls. Change the settings to start the calculation again.';return;}
   if(Object.hasOwn(tutorialPlots,key)){plot(tutorialPlots[key]);return;}
@@ -129,10 +133,6 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    index=1;render();showExplore();set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
   }else if(key==='endSpin'){
    endpoint();plot('spin');
-  }else if(key==='look'){
-   set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);
-  }else if(key==='coils'){
-   set('fuel-component','coils');open('inspect',true);
   }else if(key==='spin'){
    set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();
@@ -192,6 +192,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
    if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
+   if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-drive'].every(id=>doc.getElementById(id));
+   if(key==='coils')return !!node('fuel-component');
    return immediate||!pending(key);
   };
   if(ready()){execute();return;}

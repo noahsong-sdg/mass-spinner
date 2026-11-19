@@ -32,6 +32,7 @@
     "scripts/build.mjs",
     "scripts/check-site.mjs",
     "scripts/guide-diagrams.mjs",
+    "scripts/guide-concepts.ts",
     "scripts/understanding-page.mjs",
     "scripts/documentation-page.mjs",
     "scripts/qualification-page.mjs",

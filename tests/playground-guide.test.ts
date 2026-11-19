@@ -35,12 +35,12 @@ test('Docs opens the only reader entry without changing panels, inputs or the cu
  const f=fixture(t),input=f.node('field');input.value='.17';
  let focuses=0;const reader={closed:false,focus:()=>focuses++} as unknown as Window,opened:unknown[][]=[];f.window.open=(...args)=>{opened.push(args);return reader;};
  f.workspace.open('controls');f.node('open-docs').click();
- assert.deepEqual(opened,[['/learn.html','mass-spinner-start']]);
+ assert.deepEqual(opened,[['/learn.html','_blank']]);
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
  assert.equal(f.node('field'),input);assert.equal(input.value,'.17');
  assert.equal(f.node('open-docs').getAttribute('aria-controls'),null);
  assert.equal(f.doc.getElementById('start-here'),null);
- f.node('open-docs').click();assert.equal(opened.length,2,'Docs returns the named reader to the index');assert.equal(focuses,0);
+ f.node('open-docs').click();assert.equal(opened.length,2,'Docs opens a reader with the current simulator as its opener');assert.equal(focuses,0);
  f.workspace.close('controls');
  const send=(origin:string,source:any,action:string)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action}}));
  send('https://unrelated.example',reader,'current');send('https://example.org',f.window,'current');send('https://example.org',reader,'invalid');
@@ -58,13 +58,13 @@ test('Docs & tutorials stays available in every playground and connects its read
   f.workspace.setLevel(level);assert.equal(button.closest('[hidden]'),null);
  }
  f.workspace.setLevel('2');f.workspace.open('controls');button.click();
- assert.deepEqual(opened,[['/learn.html','mass-spinner-start']]);
+ assert.deepEqual(opened,[['/learn.html','_blank']]);
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
  assert.equal(input.value,'.17');
  f.workspace.close('controls');
  f.window.dispatchEvent(new f.window.MessageEvent('message',{origin:'https://example.org',source:reader,data:{type:'mass-spinner:guide-action',action:'current'}}));
  assert.equal(f.node('window-controls').hidden,false,'tutorial actions reach the original simulator');
- button.click();assert.equal(opened.length,2,'Docs explicitly returns the reader to the index');
+ button.click();assert.equal(opened.length,2,'Docs opens a reader for this simulator');
 });
 
 test('all seven steps have a live action and retain the physical scope distinctions',t=>{
@@ -348,4 +348,20 @@ test('beam exercises switch apparatus and reveal actual source ledger or target 
  f.workspace.launchGuideAction('beamTarget');assert.equal(f.node('window-target').hidden,false);assert.equal(settings.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-pulseDuty'));
  f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();assert.equal(settings.hidden,true);assert.equal(dynamics.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-plot'));
  assert.equal(current.value,'.01');assert.equal(edits,0);
+});
+
+
+test('visual tutorial actions need mounted view controls but no accepted physics result',async t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);fuel.accepted.disabled=true;
+ f.workspace.launchGuideAction('look');
+ assert.match(f.node('guide-status').textContent,/Waiting/);
+ for(const [id,value]of [['fuel-view-representation','both'],['fuel-view-cutaway','.62'],['fuel-view-drive','all'],['fuel-component','coils']]){
+  const n=f.doc.createElement(id==='fuel-view-cutaway'?'input':'select');n.id=id;
+  if(n instanceof f.window.HTMLSelectElement){const option=f.doc.createElement('option');option.value=value;n.append(option);}
+  f.doc.body.append(n);
+ }
+ await new Promise<void>(resolve=>setImmediate(resolve));
+ assert.equal(f.node('guide-status').textContent,'');assert.equal(f.node('fuel-view-drive').value,'all');
+ f.workspace.launchGuideAction('coils');assert.equal(f.node('window-inspect').hidden,false);
+ assert.equal(f.node('fuel-component').value,'coils');assert.equal(fuel.accepted.disabled,true);
 });

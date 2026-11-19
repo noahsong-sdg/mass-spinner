@@ -4,9 +4,12 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
  const browser=doc.defaultView!,origin=win.location.origin,status=doc.getElementById('reader-status');
  const capabilityKey='mass-spinner:reader-capability';
- let capability='',instance='',probe:number|undefined,attempts=0;
+ // Window names survive navigation. Session storage can be copied into a new tab.
+ if(!/^mass-spinner-reader-[a-f0-9-]{36}$/.test(browser.name))browser.name=`mass-spinner-reader-${browser.crypto.randomUUID()}`;
+ const simulatorName=`${browser.name}-simulator`;
+ let capability='',instance='',probe:number|undefined,attempts=0,quiet=false;
  let pending:{type:string;action?:string;view?:string;requestId:string;sent:boolean}|undefined;
- const report=(message:string)=>{if(status)status.textContent=message;};
+ const report=(message:string)=>{if(status&&!quiet)status.textContent=message;};
  try{capability=browser.sessionStorage.getItem(capabilityKey)??'';}catch{/* Without storage, the current authorized connection works. */}
  const stopProbe=()=>{browser.clearInterval(probe);probe=undefined;};
  const hello=()=>{
@@ -19,7 +22,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   }
   simulatorWindow.postMessage({type:'mass-spinner:guide-hello',capability},origin);
  };
- const connect=()=>{stopProbe();attempts=0;report('Waiting for the simulator…');probe=browser.setInterval(hello,250);hello();};
+ const connect=(silent=false)=>{stopProbe();attempts=0;quiet=silent;report('Waiting for the simulator…');probe=browser.setInterval(hello,250);hello();};
  win.addEventListener('message',event=>{
   if(event.origin!==origin||event.source!==simulatorWindow)return;
   const data:unknown=event.data;
@@ -31,7 +34,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    try{browser.sessionStorage.setItem(capabilityKey,capability);}catch{/* Do not broaden authorization when persistence is unavailable. */}
    if(interrupted){pending=undefined;stopProbe();report('The simulator reloaded. The action status is unknown. Examine its tab before you try again.');return;}
    if(pending&&!pending.sent){pending.sent=true;report('Waiting for the action result…');simulatorWindow!.postMessage(pending,origin);}
-   else if(!pending){stopProbe();report('Simulator ready.');}
+   else if(!pending){stopProbe();report('');}
   }else if(data.type==='mass-spinner:guide-result'&&'requestId' in data&&data.requestId===pending?.requestId&&'status' in data){
    if(data.status==='waiting'&&probe!==undefined)report('Waiting for the calculated run and controls…');
    else if(data.status==='executed'||data.status==='rejected'){
@@ -42,6 +45,22 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  });
  browser.addEventListener('pagehide',stopProbe);
 
+ for(const figure of doc.querySelectorAll<HTMLElement>('[data-concept-example]')){
+  for(const button of figure.querySelectorAll<HTMLButtonElement>('[data-concept-select]')){
+   button.disabled=false;button.addEventListener('click',()=>{
+    const selected=button.dataset.conceptSelect!;figure.dataset.state=selected;
+    for(const choice of figure.querySelectorAll('[data-concept-select]'))choice.setAttribute('aria-pressed',String(choice===button));
+    for(const panel of figure.querySelectorAll<SVGElement>('[data-concept-panel]'))panel.toggleAttribute('hidden',panel.dataset.conceptPanel!==selected);
+    figure.querySelector('[data-concept-reading]')!.textContent=figure.querySelector<HTMLTemplateElement>(`[data-concept-description="${selected}"]`)!.content.textContent;
+   });
+  }
+  const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
+  if(motion){
+   const pause=(paused:boolean)=>{figure.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play motion':'Pause motion';};
+   pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);motion.disabled=false;
+   motion.addEventListener('click',()=>pause(figure.dataset.motion!=='paused'));
+  }
+ }
  const density=doc.querySelector<HTMLElement>('[data-density-example]');
  if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
   density.dataset.case=button.dataset.densitySelect;
@@ -106,26 +125,28 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   const link=(event.target as Element).closest<HTMLAnchorElement>('a[data-guide-action],a[data-guide-view],a[data-guide-simulator]');if(!link)return;
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();stopProbe();
+  const instruction=link.closest('p,li,.try-actions')??link;
+  if(status)instruction.after(status);
+  pending=link.dataset.guideAction?{type:'mass-spinner:guide-action',action:link.dataset.guideAction,requestId:browser.crypto.randomUUID(),sent:false}
+   :link.dataset.guideView?{type:'mass-spinner:guide-view',view:'experiments',requestId:browser.crypto.randomUUID(),sent:false}:undefined;
   // A URL in a named-window lookup navigates the window and removes its current run.
   if(!simulatorWindow||simulatorWindow.closed){
-   simulatorWindow=win.open('','mass-spinner-simulator');
+   simulatorWindow=win.open('',simulatorName);
    if(!simulatorWindow){if(status)status.textContent='Allow the simulator window to open. Then select the action again.';return;}
    try{
     const url=simulatorWindow.location.href;
-    if(url==='about:blank'){simulatorWindow.location.replace(link.href);pending=undefined;connect();return;}
-    if(new URL(url).origin!==win.location.origin){if(status)status.textContent='The named simulator tab is on another site. Close that tab. Then select the action again.';simulatorWindow=null;return;}
+    if(url==='about:blank')simulatorWindow.location.replace(`${origin}/?level=2`);
+    else if(new URL(url).origin!==win.location.origin){if(status)status.textContent='The named simulator tab is on another site. Close that tab. Then select the action again.';simulatorWindow=null;return;}
    }catch{
     // Cross-origin window locations are unreadable. Do not navigate that tab.
     if(status)status.textContent='The named simulator tab is on another site. Close that tab. Then select the action again.';
     simulatorWindow=null;return;
    }
   }
-  pending=link.dataset.guideAction?{type:'mass-spinner:guide-action',action:link.dataset.guideAction,requestId:browser.crypto.randomUUID(),sent:false}
-   :link.dataset.guideView?{type:'mass-spinner:guide-view',view:'experiments',requestId:browser.crypto.randomUUID(),sent:false}:undefined;
   connect();
   if(!embedded)simulatorWindow.focus();
  });
- if(simulatorWindow&&!simulatorWindow.closed)connect();
+ if(simulatorWindow&&!simulatorWindow.closed)connect(true);
  doc.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'){event.preventDefault();win.parent.postMessage({type:'mass-spinner:guide-close'},win.location.origin);}});
 }
 if(typeof window!=='undefined')setupGuideReader();

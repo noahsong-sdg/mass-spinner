@@ -17,11 +17,12 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  await reader.locator('main a[href="/tutorial-03.html"]').click();await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Opened in the simulator.');
- await button.click();await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
- await reader.locator('main a[href="/how-it-works.html"]').click();await expect(reader.locator('h1')).toBeVisible();
+ const reopened=page.waitForEvent('popup');await button.click();const secondReader=await reopened;
+ await expect(secondReader.locator('h1')).toHaveText('Docs & tutorials');
+ await secondReader.locator('main a[href="/how-it-works.html"]').click();await expect(secondReader.locator('h1')).toBeVisible();
  await info.attach('main-page-docs-button',{body:await page.locator('.world-reading').screenshot(),contentType:'image/png'});
- await info.attach('full-page-documentation',{body:await reader.screenshot(),contentType:'image/png'});
- expect(errors).toEqual([]);await reader.close();
+ await info.attach('full-page-documentation',{body:await secondReader.screenshot(),contentType:'image/png'});
+ expect(errors).toEqual([]);await reader.close();await secondReader.close();
 });
 
 test('heat and collection illustrations explain direction and inventory with accessible working controls',async({page},info)=>{
@@ -187,4 +188,38 @@ test('tutorial experiment links put relevant controls and results within one act
  await expect(page.locator('#coupled-pulseDuty')).toBeFocused();await expect(page.locator('#coupled-view-settings')).toBeVisible();
  await page.getByRole('button',{name:'Show target dynamics',exact:true}).click();await expect(page.locator('#coupled-view-dynamics')).toBeVisible();
  expect(errors).toEqual([]);await reader.close();
+});
+
+
+test('local tutorial diagrams explain their cases and remain usable with reduced motion on desktop and phone',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.emulateMedia({reducedMotion:'reduce'});
+ for(const route of ['/start.html','/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html']){
+  await page.goto(route);await expect(page.locator('#reader-status')).toBeEmpty();
+  for(const figure of await page.locator('[data-concept-example]').all()){
+   await expect(figure).toHaveAttribute('data-motion','paused');
+   const choices=figure.locator('[data-concept-select]');
+   for(let i=0;i<await choices.count();i++){
+    await choices.nth(i).click();await expect(choices.nth(i)).toHaveAttribute('aria-pressed','true');
+    await expect(figure.locator('[data-concept-panel]:not([hidden])')).toHaveCount(1);
+    await expect(figure.locator('[data-concept-reading]')).not.toBeEmpty();
+   }
+   const motion=figure.locator('[data-concept-motion]');
+   if(await motion.count()){
+    await motion.click();await expect(figure).toHaveAttribute('data-motion','running');
+    await motion.click();await expect(figure).toHaveAttribute('data-motion','paused');
+   }
+  }
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+  await expect(page.locator('.katex-error')).toHaveCount(0);
+ }
+ await page.goto('/start.html#current');
+ const spin=page.locator('[data-concept-example="spin"]');await spin.getByRole('button',{name:'Power off at 2',exact:true}).click();
+ await expect(spin.locator('[data-concept-reading]')).toContainText('without changing its total');
+ await info.attach('spin-reference',{body:await spin.screenshot(),contentType:'image/png'});
+ await page.goto('/tutorial-03.html#limits');
+ const magnetic=page.locator('[data-concept-example="magnetic"]');await magnetic.getByRole('button',{name:'B ×2',exact:true}).click();
+ await expect(magnetic.locator('[data-concept-reading]')).toContainText('0.25');
+ await info.attach('fixed-torque-reference',{body:await magnetic.screenshot(),contentType:'image/png'});
+ expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);expect(errors).toEqual([]);
 });
