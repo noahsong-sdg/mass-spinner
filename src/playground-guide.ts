@@ -84,7 +84,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  experimentResult.addEventListener('click',()=>{launch(experimentResultAction);experimentStatus.textContent=status.textContent;});
  function showExperiment(key:string){
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
-  apparatus.value=experiment.apparatus??'centrifuge';apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));
+  const context=experiment.apparatus??'centrifuge';
+  if(apparatus.value!==context){apparatus.value=context;apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));}
   if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result)&&!['spin','transport'].includes(node('fuel-motion-mode').value))set('fuel-motion-mode','transport');
   // Beam references have their own accepted state. Centrifuge actions wait on fuel-export.
   if(experiment.apparatus||!pending(experiment.result))action(experiment.result);

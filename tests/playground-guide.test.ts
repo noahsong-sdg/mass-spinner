@@ -269,6 +269,21 @@ test('phone experiment links open controls first and give one direct route to th
  f.workspace.open('controls');assert.match(f.doc.querySelector('.guide-experiment')!.textContent!,/burn fraction/);
 });
 
+test('tutorial experiments change apparatus only when a different apparatus is needed',t=>{
+ const f=fixture(t,true);acceptedFuel(f);experimentControls(f);
+ const apparatus=f.node('marathon-apparatus'),changes:string[]=[];
+ apparatus.addEventListener('change',()=>changes.push(apparatus.value));
+ for(const key of ['heatExperiment','spatialHeatExperiment','stageExperiment','pumpingExperiment','inventoryExperiment'])f.workspace.launchGuideAction(key);
+ assert.deepEqual(changes,[],'opening controls in the current apparatus must not reload its geometry');
+ assert.equal(f.doc.activeElement,f.node('fuel-burnFraction'));
+ const current=f.doc.createElement('input');current.id='fusion-beamCurrentA';f.node('fusion-controls').append(current);
+ f.workspace.launchGuideAction('beamSource');
+ assert.deepEqual(changes,['source']);assert.equal(f.doc.activeElement,current);
+ f.workspace.launchGuideAction('beamSource');assert.deepEqual(changes,['source']);
+ f.workspace.launchGuideAction('inventoryExperiment');
+ assert.deepEqual(changes,['source','centrifuge']);assert.equal(f.doc.activeElement,f.node('fuel-burnFraction'));
+});
+
 test('experiment entrypoints are available while computing and their plot action waits for acceptance',async t=>{
  const f=fixture(t),fuel=acceptedFuel(f);experimentControls(f);fuel.accepted.disabled=true;
  f.workspace.launchGuideAction('spatialHeatExperiment');assert.equal(f.node('window-controls').hidden,false);
