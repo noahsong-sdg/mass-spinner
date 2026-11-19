@@ -129,6 +129,7 @@ test('equilibrium import samples the visible playback state even when the time-h
 
 test('guided experiments use the real accepted plots, timeline and probes without changing physical inputs',async t=>{
  const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const apparatus=f.window.document.createElement('select');apparatus.id='marathon-apparatus';apparatus.innerHTML='<option value="centrifuge">Centrifuge</option><option value="source">Beam reactor</option>';f.window.document.body.append(apparatus);
  const opened:string[]=[],focused:any[]=[];
  const guide=setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated:(...args)=>focused.push(args)});
  const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
@@ -151,12 +152,13 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  }
  action(4,'Show drive work');assert.equal(f.node('fuel-plot').value,'heat');
  assert.equal(f.node('fuel-learning-comparisons').open,false,'a new guided plot must not leave an unrelated comparison in front');
- action(4,'Open thermal controls');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
- action(5,'Show end-of-run cuts');assert.equal(f.node('fuel-plot').value,'cut');
+ action(4,'Open heat experiment');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ assert.equal(f.node('fuel-plot').value,'thermal');
+ action(5,'Open collection experiment');assert.equal(f.node('fuel-plot').value,'cut');
  action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
  assert.ok(opened.includes('plots'));
- f.change('fuel-application','pump','change');await f.ui.run();action(5,'Show end-of-run cuts');
+ f.change('fuel-application','pump','change');await f.ui.run();action(5,'Open collection experiment');
  assert.match(f.node('guide-status').textContent,/Choose Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 

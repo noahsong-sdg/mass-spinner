@@ -33,6 +33,7 @@ p=nk_B T.
 Heat flux qᵣ, in W/m², goes down the temperature gradient; k is thermal conductivity. Local pressure p depends on both number density n and temperature T. These relations motivate separate temperature, energy and pressure plots.
 
 **Try it:** [open the spatial heat experiment](/?level=2&try=spatialHeatExperiment). Enable **Radial tungsten liner**, then **Spatial mixture · experimental**.
+
 [Show temperature profile](/?level=2&try=thermalProfile) at one time: where is the gas warmer, and which way should heat flow?
 Both species share one local temperature here. A cell with more atoms can contain more energy without being hotter.
 
