@@ -131,15 +131,28 @@ test('linked contents need no sticky picker and leave room for anchored headings
 
 test('the embedded reader keeps actions in the parent simulator and Escape exits the reading window',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html#energy'});t.after(()=>dom.window.close());
- const messages:any[]=[],win=dom.window;
- Object.defineProperty(win,'parent',{value:{postMessage:(...args:any[])=>messages.push(args)}});
+ const messages:[unknown,string][]=[],win=dom.window;
+ const parent={closed:false,postMessage:(data:unknown,target:string)=>messages.push([data,target])} as unknown as Window;
+ Object.defineProperty(win,'parent',{value:parent});
+ const receive=(data:unknown,source=parent,origin='https://example.org')=>win.dispatchEvent(new win.MessageEvent('message',{source,origin,data}));
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
+ assert.deepEqual(messages.at(-1),[{type:'mass-spinner:guide-hello',capability:''},'https://example.org']);
  assert.ok(win.document.querySelector('.guide-contents a[href="#energy"]'));assert.equal(win.location.hash,'#energy');
  win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="work"]')!.click();
- assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-action',action:'work'},'https://example.org']);
  const status=win.document.getElementById('reader-status')!;
  assert.equal(status.getAttribute('role'),'status');assert.equal(status.getAttribute('aria-live'),'polite');
- assert.match(status.textContent!,/Sent to the simulator/);
+ const ready={type:'mass-spinner:guide-ready',capability:'authorized-parent',instance:'simulator-1'};
+ const before=messages.length;
+ receive(ready,parent,'https://wrong.example');receive(ready,win as unknown as Window);
+ assert.equal(messages.length,before);assert.match(status.textContent!,/Waiting for the simulator/);
+ receive(ready);
+ const [request,target]=messages.at(-1)! as [{type:string;action:string;requestId:string},string];
+ assert.equal(request.type,'mass-spinner:guide-action');assert.equal(request.action,'work');assert.ok(request.requestId);
+ assert.equal(target,'https://example.org');assert.match(status.textContent!,/Applying in the simulator/);
+ const result={type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'};
+ receive(result,parent,'https://wrong.example');receive(result,win as unknown as Window);
+ assert.match(status.textContent!,/Applying in the simulator/);
+ receive(result);assert.equal(status.textContent,'Opened in the simulator.');
  assert.ok(win.document.querySelector('a[href="/start.html"]'));
  win.document.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
  assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-close'},'https://example.org']);
