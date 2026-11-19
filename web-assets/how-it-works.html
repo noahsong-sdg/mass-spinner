@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#141815">
-  <meta name="description" content="The equations, numerical methods and accuracy limits behind Mass Spinner.">
+  <meta name="description" content="The equations, numerical methods and accuracy limits of Mass Spinner.">
   <title>How it works · Mass Spinner</title><link rel="stylesheet" href="/fonts.css">
   <style>
     :root{color-scheme:dark;--bg:#141815;--text:#e8e9df;--muted:#b0b9ae;--line:#3a433b;--accent:#e4b583;font-family:'Commissioner',sans-serif;background:var(--bg);color:var(--text)}
@@ -23,35 +23,36 @@
     <p class="lead">Electrical drive → gas rotation → mass separation.</p>
     <section id="physics" aria-labelledby="physics-title">
       <h2 id="physics-title">What moves, and why</h2>
-      <p>Current turns ions; collisions turn neutrals. Radial transport changes composition and inertia; optional thermal evolution tracks heat. The vessel stays still.</p>
+      <p>Current turns ions. Collisions give neutral atoms angular momentum. Radial transport moves particles between radii, so composition and rotational inertia change. Optional thermal evolution calculates temperature changes. The vessel stays still.</p>
       <p class="equation">d<var>p</var>/d<var>r</var> = <var>ρ</var><var>Ω</var>²<var>r</var><br><var>n</var><sub>s</sub>(<var>r</var>) ∝ exp[<var>m</var><sub>s</sub><var>Ω</var>²<var>r</var>²/(2<var>k</var><sub>B</sub><var>T</var>)]</p>
-      <p>These equilibrium references assume ideal, isothermal, rigidly rotating neutral gas. Heavier atoms favor the wall more strongly. Faster rotation helps sorting; heating opposes it. The live model does not solve radial fluid momentum or extraction.</p>
+      <p>The equilibrium reference uses ideal neutral gas at constant temperature and angular speed. During rotation, pressure increases from the axis to the wall. Its gradient gives the inward force for rotation. Heavier atoms then have a larger wall-to-axis density ratio. At constant temperature, faster rotation increases separation. At constant speed, higher temperature decreases separation.</p>
+      <p>The live model does not calculate radial fluid momentum or extraction.</p>
       <details><summary>Torque and heat</summary>
         <p class="equation">d<var>L</var><sub>i</sub>/d<var>t</var> = <var>τ</var><sub>em</sub> − <var>Γ</var>(<var>Ω</var><sub>i</sub> − <var>Ω</var><sub>n</sub>)<br>d<var>L</var><sub>n</sub>/d<var>t</var> = <var>Γ</var>(<var>Ω</var><sub>i</sub> − <var>Ω</var><sub>n</sub>) − <var>τ</var><sub>wall</sub></p>
-        <p>Angular momentum L = inertia × angular speed Ω. Coupling Γ transfers it between populations; wall torque removes it. Redistribution changes neutral inertia and speed. Numerical damping is separate from physical heat.</p>
-        <p><a href="/guide.html">The physics guide</a> motivates each equation and defines its symbols, assumptions and related controls.</p>
+        <p>Angular momentum L = rotational inertia × angular speed Ω. Γ is the coupling coefficient. Collision torque removes angular momentum from one population and adds it to the other. Wall torque removes angular momentum. Radial redistribution changes neutral inertia and speed. Numerical damping is separate from physical heat.</p>
+        <p><a href="/guide.html">The physics guide</a> gives the reason for each equation. It gives the symbols, assumptions and related controls.</p>
       </details>
       <details><summary>Advanced models</summary>
-        <p>Prescribed-field ion orbits use m dv/dt = q(E + v × B). The separate beam-target source uses deuteron stopping, cross sections and tritium loading to estimate neutrons—not neutrinos. Its conceptual blanket is not a complete reactor or net-electricity prediction.</p>
+        <p>Ion orbits use prescribed fields: m dv/dt = q(E + v × B). The separate beam-target model calculates neutron production from deuteron stopping, reaction cross sections and tritium loading. These are neutrons, not neutrinos. Its conceptual blanket is not a complete reactor or a net-electricity prediction.</p>
       </details>
     </section>
     <section id="computation" aria-labelledby="computation-title">
       <h2 id="computation-title">What the computer solves</h2>
-      <p>Inputs pass through a TypeScript worker to plots and Three.js. The centrifuge uses radial finite volumes, Scharfetter–Gummel fluxes and backward-Euler steps; ion orbits use Boris integration. Transport, conductivity and coupling are prescribed. Rendered particles represent populations.</p>
-      <p>A separate Python / NumPy / SciPy / FiPy backend studies axisymmetric density, momentum, current, energy and species transport. Research replay shows saved collision studies.</p>
+      <p>A TypeScript worker calculates results for the plots and Three.js display. The centrifuge uses radial finite volumes, Scharfetter–Gummel fluxes and backward-Euler steps. Ion orbits use Boris integration. Transport, conductivity and coupling are prescribed inputs. Display particles represent populations, not individual particle paths.</p>
+      <p>A separate Python / NumPy / SciPy / FiPy backend calculates axisymmetric density, momentum, current, energy and species transport. Research replay shows saved collision studies.</p>
     </section>
     <section id="accuracy" aria-labelledby="accuracy-title">
       <h2 id="accuracy-title">What deserves trust?</h2>
       <ol>
-        <li>Conservation, known limits and refinement check implementation and numerical error.</li>
-        <li>Experimental validation requires matched apparatus, inputs and diagnostics, with held-out predictions and no refitting.</li>
-        <li>Live qualification records tested browser-model limits and checks that controls, plots and 3D share results. It is a project label, not certification.</li>
+        <li>Conservation and exact limits give implementation checks. Refinement measures the change when grid cells or timesteps become smaller.</li>
+        <li>Apparatus-matched inputs and diagnostics are necessary for experimental validation. Prediction tests must use outputs withheld from model development, without refitting.</li>
+        <li>Live qualification records the tested input range and numerical limits. It includes checks that controls, plots and 3D use the same results. This project term does not mean certification.</li>
       </ol>
-      <p>The rigid-rotation family fails the historical argon-profile screen under the stated optical interpretation. Lithium predictions remain pedagogical and experimentally unqualified; passing numerical tests does not change that.</p>
+      <p>Rigid-rotation results are outside the historical argon-profile acceptance limit under the stated optical interpretation. Lithium predictions are learning tools without experimental qualification. Successful numerical tests do not change that limit.</p>
     </section>
     <section id="uses" aria-labelledby="uses-title">
       <h2 id="uses-title">What is it useful for?</h2>
-      <p>Use it for learning and reproducible mechanism comparisons. Experiment planning and hardware screening need bounded validation; safety needs separate evidence.</p>
+      <p>Use the simulator for comparisons between mechanisms. Compare results under stated assumptions. Validation within a defined range is necessary for experiment planning and hardware selection. Separate evidence is necessary for safety decisions.</p>
     </section>
     <div class="sources" aria-label="Sources and implementation"><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/LIVE-MODEL-QUALIFICATION.md">Qualification record ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/src/fuel-operation.ts">Live equations ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/scientific/mixture-axial-v75/PROTOCOL.md">Research protocol ↗</a><a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html">Verification vs validation ↗</a><a href="https://www.marathonfusion.com/fusion-energy/">Marathon’s fuel cycle ↗</a><a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon’s neutron source ↗</a></div>
     <footer><span>Mass Spinner · 18 November 2026</span><a href="/">Back to the playground ↗</a></footer>
