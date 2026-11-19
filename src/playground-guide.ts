@@ -18,7 +18,10 @@ type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-r
 export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
- function openStandalone(){if(readerWindow&&!readerWindow.closed){readerWindow.focus();return;}readerWindow=win.open('/start.html','mass-spinner-start');}
+ function openStandalone(page:'/start.html'|'/learn.html'='/start.html'){
+  if(page==='/start.html'&&readerWindow&&!readerWindow.closed){readerWindow.focus();return;}
+  readerWindow=win.open(page,'mass-spinner-start');
+ }
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');

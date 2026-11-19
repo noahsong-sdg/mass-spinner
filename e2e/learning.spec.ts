@@ -1,6 +1,28 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
+test('main-page Docs & tutorials opens full-page readers and keeps their controls connected',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const button=page.getByRole('button',{name:'Docs & tutorials',exact:true});await expect(button).toBeInViewport();
+ const start=page.getByRole('button',{name:'Start here',exact:true});
+ const [docsBox,startBox]=await Promise.all([button.boundingBox(),start.boundingBox()]);
+ expect(docsBox&&startBox&&docsBox.x>=startBox.x+startBox.width).toBeTruthy();
+ await button.focus();const opened=page.waitForEvent('popup');await button.press('Enter');const reader=await opened;
+ await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
+ for(const href of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/how-it-works.html','/equilibrium.html','/qualification.html'])await expect(reader.locator(`main a[href="${href}"]`)).toBeVisible();
+ expect(await reader.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ const current=await page.locator('#fuel-currentA').inputValue();
+ await reader.locator('main a[href="/tutorial-03.html"]').click();await reader.locator('[data-guide-action="heatExperiment"]').click();
+ await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
+ await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Sent to the simulator');
+ await button.click();await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
+ await reader.locator('main a[href="/how-it-works.html"]').click();await expect(reader.locator('h1')).toBeVisible();
+ await info.attach('main-page-docs-button',{body:await page.locator('.world-top').screenshot(),contentType:'image/png'});
+ await info.attach('full-page-documentation',{body:await reader.screenshot(),contentType:'image/png'});
+ expect(errors).toEqual([]);await reader.close();
+});
+
 test('heat and collection illustrations explain direction and inventory with accessible working controls',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.emulateMedia({reducedMotion:'no-preference'});

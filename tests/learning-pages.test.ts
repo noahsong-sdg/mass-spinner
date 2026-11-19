@@ -4,6 +4,14 @@ import {JSDOM} from 'jsdom';
 import {learningPages} from '../scripts/learning-pages.mjs';
 import {learningPath} from '../src/learning-path.js';
 import {guideActions} from '../src/guide-topics.js';
+import {numberedTutorials} from '../src/guide-topics.js';
+
+test('the documentation index exposes every tutorial and the technical references',t=>{
+ const dom=new JSDOM(learningPages()['learn.html']);t.after(()=>dom.window.close());
+ const doc=dom.window.document;
+ assert.equal(doc.querySelector('h1')!.textContent,'Docs & tutorials');
+ for(const href of ['/start.html','/guide.html',...numberedTutorials.map(tutorial=>`/tutorial-${tutorial.number}.html`),'/guide.html#views','/how-it-works.html','/equilibrium.html','/qualification.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
+});
 
 test('learning sequence publishes six freely selectable questions and usable section anchors',t=>{
  const pages=learningPages();assert.equal(Object.keys(pages).length,7);

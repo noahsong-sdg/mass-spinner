@@ -1,5 +1,6 @@
 import {tsImport} from 'tsx/esm/api';
 const {learningPath}=/** @type {typeof import('../src/learning-path.js')} */(await tsImport('../src/learning-path.ts',import.meta.url));
+const {numberedTutorials}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 /** @param {string} value */
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 /** @param {string} title @param {string} body @param {readonly (readonly [string,string])[]} chapters */
@@ -22,7 +23,10 @@ function modulePage(module){
 }
 /** Build-only content: no independent solver, remote content or learner tracking. @returns {Record<string,string>} */
 export function learningPages(){
- const intro='<p class="walkthrough-intro">Can you obtain a more enriched sample while retaining useful light-isotope inventory?</p><p>Follow one question at a time, or choose any experiment. Start with a prediction, change one thing and explain what moved. Keep the simulator beside this reader.</p><p><a href="/start.html">New here? Try the short walkthrough first →</a></p><p>Read the tutorials: <a href="/guide.html">02 · rotation</a> → <a href="/tutorial-03.html">03 · heat</a> → <a href="/tutorial-04.html">04 · process</a> → <a href="/tutorial-05.html">05 · fuel</a> → <a href="/tutorial-06.html">06 · evidence</a>.</p>';
+ const intro=`<p class="walkthrough-intro"><a href="/start.html">Start here: seven short experiments →</a></p>
+ <section><h2 id="tutorials">Tutorials</h2><ol><li><a href="/guide.html">02 · Why rotation separates masses</a></li>${numberedTutorials.map(tutorial=>`<li><a href="/tutorial-${tutorial.number}.html">${tutorial.number} · ${escape(tutorial.title)}</a></li>`).join('')}</ol></section>
+ <section><h2 id="documentation">Documentation</h2><ul><li><a href="/guide.html#views">Controls & plot reference</a></li><li><a href="/how-it-works.html">Simulation methods & assumptions</a></li><li><a href="/equilibrium.html">Equilibrium composition & collection</a></li><li><a href="/qualification.html">Experimental evidence & accuracy limits</a></li></ul></section>
+ <h2 id="experiments">Investigations</h2><p>Predict, change one thing and explain what moved. Keep the simulator beside this reader.</p>`;
  const contents=learningPath.map((module,i)=>`<section class="walkthrough-step"><span class="step-number">${i+1} / ${learningPath.length}</span><h2 id="${module.id}"><a href="/learn-${module.id}.html">${escape(module.title)} →</a></h2><p>${escape(module.question)}</p><p>${escape(module.scope)}</p></section>`).join('');
- return {'learn.html':page('Choose an experiment',intro+contents,learningPath.map(module=>[module.id,module.title])),...Object.fromEntries(learningPath.map(module=>[`learn-${module.id}.html`,modulePage(module)]))};
+ return {'learn.html':page('Docs & tutorials',intro+contents,[['tutorials','Tutorials'],['documentation','Documentation'],['experiments','Investigations'],...learningPath.map(module=>/** @type {[string,string]} */([module.id,module.title]))]),...Object.fromEntries(learningPath.map(module=>[`learn-${module.id}.html`,modulePage(module)]))};
 }

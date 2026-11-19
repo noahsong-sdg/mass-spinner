@@ -44,6 +44,26 @@ test('Start here opens a separate reader without changing panels, inputs or the 
  send('https://example.org',reader,'current');assert.equal(f.node('window-controls').hidden,false);
 });
 
+test('Docs & tutorials stays available in every playground and connects its reader without changing the run',t=>{
+ const f=fixture(t),input=f.node('field');input.value='.17';
+ const reader={closed:false,focus(){}} as unknown as Window,opened:unknown[][]=[];
+ f.window.open=(...args)=>{opened.push(args);return reader;};
+ const button=f.doc.querySelector<HTMLButtonElement>('.masthead #open-docs')!;
+ assert.equal(button.getAttribute('aria-label'),'Docs & tutorials');
+ for(const level of ['1','2','3','4'] as const){
+  f.workspace.setLevel(level);assert.equal(button.closest('[hidden]'),null);
+ }
+ f.workspace.setLevel('2');f.workspace.open('controls');button.click();
+ assert.deepEqual(opened,[['/learn.html','mass-spinner-start']]);
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);
+ assert.equal(input.value,'.17');
+ f.workspace.close('controls');
+ f.window.dispatchEvent(new f.window.MessageEvent('message',{origin:'https://example.org',source:reader,data:{type:'mass-spinner:guide-action',action:'current'}}));
+ assert.equal(f.node('window-controls').hidden,false,'tutorial actions reach the original simulator');
+ f.node('start-here').click();assert.equal(opened.length,1,'Start here focuses the reader instead of discarding its current chapter');
+ button.click();assert.equal(opened.length,2,'Docs explicitly returns the reader to the index');
+});
+
 test('all seven steps have a live action and retain the physical scope distinctions',t=>{
  const f=fixture(t);f.workspace.open('guide');
  for(let i=0;i<7;i++){

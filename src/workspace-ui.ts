@@ -109,7 +109,11 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   windows.set(key,{panel,button,body,heading,side,group:key==='target'?'target':side});return body;
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Inspect','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Start here','left')};
- const guideButton=windows.get('guide')!.button;guideButton.id='start-here';guideButton.textContent='Start here ↗';guideButton.setAttribute('aria-label','Start here');guideButton.title='Open the walkthrough in a separate tab';guideButton.removeAttribute('aria-controls');guideButton.removeAttribute('aria-expanded');header.append(guideButton);
+ const guideButton=windows.get('guide')!.button;guideButton.id='start-here';guideButton.textContent='Start here ↗';guideButton.setAttribute('aria-label','Start here');guideButton.title='Open the walkthrough in a separate tab';guideButton.removeAttribute('aria-controls');guideButton.removeAttribute('aria-expanded');
+ const reading=make('div','world-reading'),docsButton=make('button','','Docs & tutorials ↗');
+ docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Open tutorials and documentation in a separate tab';
+ docsButton.addEventListener('click',()=>guide.openStandalone('/learn.html'));
+ reading.append(guideButton,docsButton);header.append(reading);
  const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated});
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);

@@ -5,7 +5,8 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top{position:absolute;inset:0 0 auto;z-index:5;display:flex;align-items:center;height:var(--world-top);background:#141b18ee;border-bottom:1px solid #35413b}
 .world-top header.masthead{min-width:0;min-height:0;height:100%;padding:0 24px;gap:24px;flex:1;flex-wrap:nowrap;border:0;background:none}
 .world-top .brand{flex:none;font-size:15px;letter-spacing:0;white-space:nowrap}
-.world-top #start-here{margin-left:auto;flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
+.world-top .world-reading{display:flex;flex:none;gap:8px;margin-left:auto}
+.world-top .world-reading button{flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
 .world-top #start-here[aria-expanded=true]{background:#edbe90;color:#18211d}
 .world-window-body.playground-guide{display:flex;flex:1;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
 .guide-views{display:flex;flex:none;gap:6px;padding:10px 12px;border-bottom:1px solid #394b3f}
@@ -143,6 +144,7 @@ body.immersive{overflow:hidden;background:#101614}
 .world-stage .research-bench .live-plots{grid-template-columns:repeat(auto-fit,minmax(min(100%,450px),1fr))}
 @keyframes window-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:1000px){.world-top header.masthead{padding-inline:16px}.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding-inline:10px}}
+@media(max-width:1000px){.world-top .world-reading{position:absolute;top:76px;right:12px;padding:4px;background:#18211df5;border-radius:9px}}
 @media(max-width:740px){
  .sim-workspace{--world-bottom:80px}
  .world-top header.masthead{padding-inline:16px;gap:12px}.world-top .brand{font-size:13px}.world-top .learning-path{padding-right:16px;flex-wrap:nowrap}.world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2){padding:0 10px;font-size:11px}.world-top .level-actions .text-button{font-size:0;min-width:32px;min-height:44px}.world-top .level-actions .text-button:after{content:'↗';font-size:19px}
@@ -162,9 +164,8 @@ body.immersive{overflow:hidden;background:#101614}
  .world-top header.masthead{padding-inline:8px;gap:6px}.world-top .brand{font-size:11px}
  .world-top .level-navigation button,.world-top .level-navigation button:nth-child(-n+2),.advanced-simulators>summary{padding-inline:6px}
  .world-top .learning-path{padding-right:8px}
- .world-top #start-here{padding:8px;font-size:11px}
+ .world-top .world-reading button{padding:8px;font-size:11px}
 }
-@media(max-width:480px){.world-top #start-here{position:absolute;top:76px;right:12px;background:#18211df5}}
 /* Mode-specific controls and unavailable results retain the native hidden contract. */
 body.immersive .sim-workspace [hidden]{display:none!important}
 
