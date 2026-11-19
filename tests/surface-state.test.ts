@@ -107,6 +107,24 @@ test('target preserves all film/backing cell averages and film-only occupancy',(
  assert.equal(surfaceState({...q,selectedState:structuredClone(selected)}).status,'invalid');
  assert.equal(surfaceState({...q,source:{...source,beamAreaM2:.1}}).status,'invalid');
  const bad=structuredClone(r);bad.final.temperatureK.pop();assert.equal(surfaceState({...q,result:bad,selectedState:bad.final}).status,'invalid');
+ for(const thickness of ['1e-6',Infinity,-Infinity,NaN,0,-1e-6,null,undefined]){
+  const invalidConfig={...c,filmThicknessM:thickness};
+  assert.equal(surfaceState(request('beam-target',invalidConfig,{...r,config:invalidConfig},
+   {source,acceptedSource:source,selectedState:selected})).status,'invalid',`Film thickness ${String(thickness)}`);
+ }
+ for(const mutate of [
+  (v:typeof r)=>v.final.temperatureK[0]=NaN,
+  (v:typeof r)=>v.final.temperatureK[0]=0,
+  (v:typeof r)=>v.final.tritiumFraction[0]=2,
+  (v:typeof r)=>v.final.depthM.reverse(),
+  (v:typeof r)=>v.final.deuteriumFraction[0]+=0.1,
+  (v:typeof r)=>v.final.timeS=-1,
+ ]){
+  const invalid=structuredClone(r);mutate(invalid);
+  assert.equal(surfaceState({...q,result:invalid,selectedState:invalid.final}).status,'invalid');
+ }
+ const original=film.values[0];selected.temperatureK[0]+=1;
+ assert.equal(film.values[0],original,'accepted temperature surfaces retain copied cell averages');
 });
 test('reference and non-spatial diagnostic modes explicitly decline surface predictions',()=>{
  const t=ready(request('diffusion',DEFAULT_TRANSPORT,transport('diffusion',DEFAULT_TRANSPORT)));

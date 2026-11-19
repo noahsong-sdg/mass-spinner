@@ -83,10 +83,12 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
  let snapshot:SurfaceSnapshot|null=null,engineering:EngineeringGeometry|null=null,overlay:THREE.Group|null=null,geometryKey='',selected=0,expanded:THREE.Group|null=null,selection:THREE.LineSegments|null=null;
  function clearSelection(){if(selection)releaseSurfaceGroup(selection);selection=null;}
  function clearOverlay(){clearSelection();if(overlay)releaseSurfaceGroup(overlay);overlay=null;if(expanded)releaseSurfaceGroup(expanded);expanded=null;}
- function clear(){clearOverlay();engineering?.dispose();engineering=null;snapshot=null;geometryKey='';group.clear();panel.hidden=true;
+ // Pending inputs invalidate numerical layers, not the last accepted hardware shape.
+ function withholdResults(){clearOverlay();snapshot=null;panel.hidden=true;
   view.hidden=fields.hidden=samples.hidden=true;fields.replaceChildren();samples.replaceChildren();
   for(const node of [legend,readout,scope,ledger,limitsText])node.textContent='';
  }
+ function clear(){withholdResults();engineering?.dispose();engineering=null;geometryKey='';group.clear();}
  function inspect(index:number,open=true){
   const field=snapshot?.fields.find(f=>f.id===fields.value);if(!snapshot||!field||index<0||index>=field.values.length)return;
   // The coordinate is an accepted field sample, so it is inside validated support.
@@ -147,7 +149,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
  }
  fields.addEventListener('change',()=>{selected=0;draw();});view.addEventListener('change',draw);samples.addEventListener('change',()=>inspect(Number(samples.value)));
  return {group,panel,clear,get representation(){return {layer:view.value,numerical:Boolean(overlay?.children.length&&view.value!=='hardware')};},update(packet:SurfaceState|null|undefined,settings:SurfaceSettings={}){
-  if(packet?.status!=='ready'){clear();if(packet){panel.hidden=false;summary.textContent=packet.status==='pending'?'Updating…':'No surface state';scope.textContent=packet.reason;}render();return false;}
+  if(packet?.status!=='ready'){if(packet?.status==='pending')withholdResults();else clear();if(packet){panel.hidden=false;summary.textContent=packet.status==='pending'?'Updating…':'No surface state';scope.textContent=packet.reason;}render();return false;}
   snapshot=packet.snapshot;const d=snapshot.domain;
   const options={mode:snapshot.model==='marathon'||snapshot.model==='coupled-target'?'beam-target':snapshot.model,...d,
    radiusM:d.radiusM??settings.radius,lengthM:d.lengthM??(d.kind==='target'?.45:2.8),curvatureRadiusM:settings.curvatureRadius,boundary:settings.boundary,sourceRadiusM:settings.initialState==='equilibrium'?undefined:settings.sourceRadius};

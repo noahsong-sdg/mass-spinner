@@ -128,7 +128,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const center=new THREE.Vector3(),modelBounds=new THREE.Box3();let radius=1,representationKey='',loadStatus='reference';
  function reportRepresentation(){
   const acceptedRoot=root===stateLayer.group,representation:ViewerRepresentation={geometry:root?acceptedRoot?'accepted':'reference':'none',
-   status:acceptedRoot?'ready':loadStatus,...(acceptedRoot?stateLayer.representation:{layer:'reference',numerical:false})};
+   status:acceptedRoot?accepted?.packet.status??'reference':loadStatus,...(acceptedRoot?stateLayer.representation:{layer:'reference',numerical:false})};
   const key=JSON.stringify(representation);if(key!==representationKey){representationKey=key;onRepresentation(representation);}
  }
  function render(){if(!disposed&&root){
@@ -170,7 +170,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   const previousRoot=root;
   clearSelection();const changed=stateLayer.update(packet,settings);
   if(!referenceRoot)return;
-  referenceRoot.visible=packet?.status!=='ready'||stateLayer.group.children.length===0;loadStatus=packet?.status==='pending'?'pending':'reference';
+  referenceRoot.visible=stateLayer.group.children.length===0;loadStatus=packet?.status==='pending'?'pending':'reference';
   root=referenceRoot.visible?referenceRoot:stateLayer.group;
   if(changed||root!==previousRoot){fit();resize();reset();}else render();
   refreshReactor();

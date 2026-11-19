@@ -7,7 +7,7 @@ import {setupMaterialRealism} from '../src/material-realism-ui.js';
 import {setupWorkspace} from '../src/workspace-ui.js';
 import {setupApparatus} from '../src/apparatus-ui.js';
 import {setupBaseline} from '../src/baseline-ui.js';
-import {targetSceneState} from '../src/apparatus-state.js';
+import {surfaceState} from '../src/surface-state.js';
 import {simulateCoupledTarget} from '../src/coupled-target.js';
 import {setupPreciseControls} from '../src/precise-controls.js';
 
@@ -30,11 +30,17 @@ function marathonFixture(t:any,options:any={}){
 
 test('accepted scene samples use the exact selected time/plain source; pending retains them and invalid clears them',async t=>{
  let displayed:any=null,pending=false;
- const f=marathonFixture(t,{onState:(value:any)=>displayed=targetSceneState(value),onStatus:(value:any)=>pending=value.phase==='pending'});
+ const f=marathonFixture(t,{
+  onState:(value:any)=>displayed=value?surfaceState({model:'beam-target',settings:value.result.config,result:value.result,
+   acceptedModel:'beam-target',acceptedSettings:value.result.config,selectedState:value.state,
+   source:value.source,acceptedSource:value.source}):null,
+  onStatus:(value:any)=>pending=value.phase==='pending',
+ });
  f.change('fusion-stopping-model','geant4-bragg','change');await settle();assert.ok(displayed,f.node('coupled-status').textContent);
- assert.equal(displayed.beamEnergyKeV,100);assert.equal(displayed.beamAreaM2,f.models.source.read().beamAreaM2);
- assert.equal(displayed.cells.length,4);assert.equal(displayed.cells[0].temperatureK,f.models.target.result.history[0].temperatureK[0]);
- f.change('coupled-time',f.models.target.result.history.length-1);assert.equal(displayed.timeS,1);
+ assert.equal(displayed.status,'ready');assert.equal(displayed.snapshot.domain.beamAreaM2,f.models.source.read().beamAreaM2);
+ const film=displayed.snapshot.fields.find((field:any)=>field.id==='temperature-film');
+ assert.equal(film.values.length,4);assert.equal(film.values[0],f.models.target.result.history[0].temperatureK[0]);
+ f.change('coupled-time',f.models.target.result.history.length-1);assert.equal(displayed.snapshot.timeS,1);
  const previous=displayed;f.change('coupled-replacementProbability',.5);
  assert.equal(pending,true);assert.equal(displayed,previous);assert.equal(f.node('coupled-export').disabled,true);
  f.change('coupled-diffusivityM2S','');assert.equal(displayed,null);assert.equal(pending,false);assert.equal(f.models.neutrons.read(),null);

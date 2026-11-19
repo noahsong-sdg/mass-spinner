@@ -7,6 +7,8 @@ export interface PlotCurve {
  label: string; x: readonly number[]; y: readonly (number | null)[]; xLabel: string; yLabel: string;
  low?: readonly (number | null)[]; high?: readonly (number | null)[]; xDomain?: readonly [number, number]; yDomain?: readonly [number, number];
  selectedX?: number; equalAspect?: boolean; color?: string; dash?: string; muted?: boolean;
+ /** Reconstruct a chronological ordinate from canonical state between accepted knots. */
+ sampleAt?: (x: number) => number | null;
 }
 export interface PlotOptions {onSelect?: (x: number) => void; announce?: boolean; /** Reveal chronological history through this time; setCursor advances or rewinds it. */ revealUntil?: number}
 export interface PlotController {setCursor(value: number | undefined): void}
@@ -146,7 +148,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
    if(n&&series.x[n-1]<revealed){
     const fraction=(revealed-series.x[n-1])/(series.x[n]-series.x[n-1]);
     const interpolate=(values:readonly (number|null)[])=>finite(values[n-1])&&finite(values[n])?values[n-1]!+(values[n]-values[n-1]!)*fraction:null;
-    x.push(revealed);y.push(interpolate(series.y));if(low)low.push(interpolate(series.low!));if(high)high.push(interpolate(series.high!));
+    x.push(revealed);y.push(series.sampleAt?series.sampleAt(revealed):interpolate(series.y));if(low)low.push(interpolate(series.low!));if(high)high.push(interpolate(series.high!));
    }
    return {...series,x,y,low,high};
   }

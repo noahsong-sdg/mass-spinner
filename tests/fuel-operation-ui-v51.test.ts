@@ -197,3 +197,32 @@ test('reference scans mark exact selected inputs while the closed-vessel gas rem
  f.ui.nodes.inspect.querySelector('[data-show-response]').click();assert.equal(f.node('fuel-plot').value,'pump');
  assert.deepEqual(f.ui.latest.result.transport.snapshots.map(s=>({time:s.timeS,light:s.lightMass,heavy:s.heavyMass,omega:s.neutralRadS})),trajectory);
 });
+
+test('collection plots name the products and show percentages for reference and transient inventories, including empty and pure feeds',async t=>{
+ const f=fixture(t);await f.start();
+ const columns=[['innerLightPurity','Inner light purity'],['lightRecovery','Light recovery'],['outerHeavyPurity','Outer heavy purity']] as const;
+ for(const [lightFraction,cut]of [[.0759,.633],[.0759,0],[.0759,1],[0,.5],[1,.5]] as const){
+  f.change('fuel-lightFraction',lightFraction);f.change('fuel-cutFraction',cut);await f.ui.run();
+  const result=f.ui.latest.result;
+  for(const mode of ['equilibrium','transport']){
+   f.change('fuel-motion-mode',mode,'change');f.change('fuel-motion-time',.423456);f.change('fuel-plot','cut','change');
+   const collection=mode==='transport'?sampleFuelTransport(result.transport,.423456).collection:result.collection;
+   const metrics=[...f.ui.nodes.plots.querySelectorAll('.fuel-metrics>div')];
+   assert.deepEqual(metrics.map(row=>row.querySelector('span')!.textContent),columns.map(([,label])=>label));
+   assert.equal(f.ui.nodes.plots.querySelector('figcaption')!.textContent,'Inventory (%) against Inner cut radius / a');
+   const readout=f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!.split(' · ');
+   assert.equal(readout.length,columns.length);
+   columns.forEach(([key,label],index)=>{
+    const fraction=collection[key],percent=fraction===null?null:100*fraction;
+    const expectedMetric=percent===null?'—':percent.toLocaleString(undefined,{maximumSignificantDigits:4});
+    assert.equal(metrics[index]!.querySelector('strong')!.textContent,`${expectedMetric} %`,`${mode}, feed ${lightFraction}, cut ${cut}: ${label}`);
+    assert.ok(readout[index]!.startsWith(`${label}: `));
+    const [radius,value]=readout[index]!.slice(label.length+2).split(', ');
+    assert.equal(Number(radius),cut);
+    if(percent===null)assert.equal(value,'—');
+    else assert.equal(Number(value),Number(percent.toPrecision(4)),`${mode}: plotted ${label} must use percent`);
+   });
+   assert.doesNotMatch(f.ui.nodes.plots.textContent!,/innerLightPurity|lightRecovery|outerHeavyPurity|NaN|Infinity/);
+  }
+ }
+});

@@ -184,9 +184,9 @@ test('reading links use accepted physics results and focus the real collision, d
  assert.equal(f.window.document.activeElement,graph,'collection shortcut focuses the diagnostic, not the setup slider');
  const accepted=f.ui.latest.result,originalCut=f.node('fuel-cutFraction').value;
  graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
- assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/innerLightPurity: 0, —.*lightRecovery: 0, 0/);
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/Inner light purity: 0, —.*Light recovery: 0, 0/);
  graph.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
- assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/lightRecovery: 1, 1.*outerHeavyPurity: 1, —/);
+ assert.match(f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!,/Light recovery: 1, 100.*Outer heavy purity: 1, —/);
  assert.equal(f.ui.latest.result,accepted);assert.equal(f.node('fuel-cutFraction').value,originalCut);
  close(Number(f.node('fuel-motion-time').value),.37);
  send('collection');close(Number(f.node('fuel-motion-time').value),Number(f.node('fuel-motion-time').max));
@@ -434,8 +434,8 @@ test('Clear remains safe after a failed current computation with a pinned accept
 });
 test('Transport cut plots show the current inventory rather than the final equilibrium cut',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-motion-mode','transport','change');f.change('fuel-plot','cut','change');f.change('fuel-motion-time',0);
- const metric=()=>Number(f.ui.nodes.plots.querySelector('.fuel-metrics strong')!.textContent);close(metric(),f.ui.latest.result.config.lightFraction,.001);
- f.change('fuel-motion-time',1);close(metric(),sampleFuelTransport(f.ui.latest.result.transport,1).collection.innerLightPurity!,.001);
+ const metric=()=>parseFloat(f.ui.nodes.plots.querySelector('.fuel-metrics strong')!.textContent!);close(metric(),100*f.ui.latest.result.config.lightFraction,.001);
+ f.change('fuel-motion-time',1);close(metric(),100*sampleFuelTransport(f.ui.latest.result.transport,1).collection.innerLightPurity!,.001);
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/Current closed-wall inventory/);
 });
 
@@ -478,4 +478,28 @@ test('replayed histories draw only through shared physical time, including pinne
  const svg=history();assert.equal(svg.querySelectorAll('g[data-series]').length,8);
  assert.equal(svg.dataset.visibleUntil,'0.37');assert.ok(svg.textContent!.includes('A ·')&&svg.textContent!.includes('B ·'));
  assert.equal(f.requests.length,count);assert.equal(f.ui.latest.result,accepted);
+});
+
+test('comparison color bounds update on pin, result acceptance and clear without repainting every frame',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-view-layer','speed','change');
+ const a=f.ui.latest.result;
+ f.window.document.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]')!.click();await flush();
+ assert.equal(f.viewers.length,2);
+ f.change('fuel-currentA',.001);await f.ui.run();await flush();
+ const b=f.ui.latest.result,shared=comparisonDomain([a,b],'speed');
+ const current=f.viewers[0].built.tools,baseline=f.viewers[1].built.tools;
+ assert.deepEqual(current.legend.domain,shared);assert.deepEqual(baseline.legend.domain,shared);
+ let domainUpdates=0;
+ for(const tools of [current,baseline]){
+  const setDomains=tools.setDomains;tools.setDomains=(domains:any)=>{domainUpdates++;setDomains(domains);};
+ }
+ f.change('fuel-motion-mode','spin','change');f.change('fuel-view-layer','speed','change');f.node('fuel-motion-play').click();
+ assert.equal(typeof f.viewers[0].animation,'function');
+ for(let i=0;i<5;i++)f.viewers[0].animation(.01);
+ assert.equal(domainUpdates,0,'accepted color domains must not rescan/repaint during playback');
+ f.node('fuel-motion-play').click();
+ f.window.document.querySelector<HTMLButtonElement>('.fuel-comparison-bar button:nth-child(2)')!.click();await flush();
+ assert.equal(domainUpdates,1,'clear applies the single-run domain once');
+ assert.deepEqual(current.legend.domain,comparisonDomain([b],'speed'));
+ assert.ok(current.legend.domain[1]<shared[1],'clearing the faster pin must remove its color-range contribution');
 });

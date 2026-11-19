@@ -151,7 +151,7 @@ test('real OrbitControls retain the horizontal reference/accepted frame and cuta
  const target=h.controls.target.clone();h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));
  assert.ok(h.camera.position.distanceTo(before)>.01);assert.ok(h.controls.target.distanceTo(target)<1e-12);
  h.viewer.reset();assert.ok(h.camera.position.distanceTo(before)<1e-12);
- h.viewer.setPending(true);assert.equal(h.history.length,3);assert.deepEqual(h.camera.up.toArray(),[0,1,0]);
+ h.viewer.setPending(true);assert.equal(h.history.length,2);assert.ok(h.camera.up.distanceTo(new THREE.Vector3(0,0,-1))<1e-12);
 });
 
 test('resize refits both representations while retaining relative user zoom, orbit and target',async t=>{

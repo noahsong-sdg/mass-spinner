@@ -61,7 +61,8 @@ test('target actual beam-target alias maps both materials with separate true-dep
  change(h,'Surface quantity','tritiumFraction');assert.ok(h.layer.group.getObjectByName('Depth microscope: film'));
  assert.equal(h.layer.group.getObjectByName('Depth microscope: backing'),undefined);
  change(h,'Inspect an exact surface sample','2');assert.match(h.frame.textContent!,/fraction/);
- h.layer.update({status:'pending',reason:'Changed source'});assert.equal(h.layer.group.children.length,0);
+ h.layer.update({status:'pending',reason:'Changed source'});assert.ok(h.layer.group.getObjectByName('engineering-beam-target'));
+ assert.equal(h.layer.group.getObjectByName('Accepted numerical surfaces'),undefined);assert.equal(h.layer.group.getObjectByName('Depth microscope: film'),undefined);
  for(const select of h.frame.querySelectorAll('select'))assert.equal(select.hidden,true);
  assert.doesNotMatch(h.frame.textContent!,/backing only|Hardware is true scale|fraction/);
  h.layer.dispose();
@@ -96,7 +97,8 @@ test('viewer consumes accepted states, preserves camera on field/time update and
  const distance=camera.position.length();viewer.focus('source');assert.ok(camera.position.length()<distance,'component focus must let small parts be inspected');
  camera.position.add(new THREE.Vector3(.03,.01,0));const before=camera.position.clone();viewer.updateSurfaceState(packet(),config);
  assert.ok(camera.position.distanceTo(before)<1e-12,'accepted state refresh must preserve orbit camera');
- viewer.setPending(true);assert.equal(reference.visible,true);assert.equal(scene.getObjectByName('engineering-rotating'),undefined);
+ viewer.setPending(true);assert.equal(reference.visible,false);assert.ok(scene.getObjectByName('engineering-rotating'));
+ assert.equal(scene.getObjectByName('Accepted numerical surfaces'),undefined);
  viewer.updateSurfaceState(packet(),config);assert.equal(reference.visible,false);
  viewer.updateSurfaceState(null);assert.equal(reference.visible,true);assert.equal(scene.getObjectByName('engineering-rotating'),undefined);
  viewer.dispose();assert.equal(h.frame.children.length,0);
