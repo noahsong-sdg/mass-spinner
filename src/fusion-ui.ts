@@ -11,13 +11,13 @@ const byId=(id:string)=>document.getElementById(id)!;
 const fields:[BeamNumericKey,string,string,number,number,number,boolean?][]=[
  ['beamEnergyKeV','D⁺ laboratory energy','keV',20,500,5],
  ['beamCurrentA','D⁺ beam current','A',-5,0,.1,true],
- ['targetColumnM2','Tritium nuclei column','m⁻²',19,25,.1,true],
- ['stoppingFraction','Imposed fractional energy loss','',0,.9,.01],
- ['beamAreaM2','Illuminated target area','m²',-5,-1,.1,true],
- ['alphaDepositedFraction','Alpha energy deposited in target layer','',0,1,.05],
- ['acceleratorEfficiency','Assumed accelerator efficiency','',.1,1,.05],
+ ['targetColumnM2','Tritium column density','m⁻²',19,25,.1,true],
+ ['stoppingFraction','Specified energy-loss fraction','',0,.9,.01],
+ ['beamAreaM2','Beam area on target','m²',-5,-1,.1,true],
+ ['alphaDepositedFraction','Alpha energy fraction in target layer','',0,1,.05],
+ ['acceleratorEfficiency','Accelerator efficiency (assumption)','',.1,1,.05],
  ['exposureS','Exposure duration','s',0,100,1],
- ['materialColumnM2','Fixed Li/T formula-unit column','m⁻²',18,23,.1,true],
+ ['materialColumnM2','Li/T formula-unit column density','m⁻²',18,23,.1,true],
  ['tritiumSiteFraction','Initial tritium site fraction','',0,1,.05],
 ];
 
@@ -25,7 +25,7 @@ const fields:[BeamNumericKey,string,string,number,number,number,boolean?][]=[
 export function setupFusionLaboratory({onUpdate=()=>{},exposureHost}:FusionLaboratoryOptions={}){
  const reads=new Map<BeamNumericKey,()=>number>(),host=byId('fusion-controls');let latest:FusionBeamResult|null=null;
  const model=element('select'),modelLabel=element('label','Stopping model');model.id='fusion-stopping-model';modelLabel.htmlFor=model.id;
- for(const [value,label]of [['linear','Illustrative linear slowing'],['geant4-bragg','Geant4-derived Li/T estimate']]){const option=element('option',label);option.value=value;model.append(option);}model.value='linear';
+ for(const [value,label]of [['linear','Linear energy loss (assumption)'],['geant4-bragg','Li/T estimate from Geant4']]){const option=element('option',label);option.value=value;model.append(option);}model.value='linear';
  const assumptions=byId('fusion-assumption-controls');assumptions.append(modelLabel,model);
  const boxes=new Map<BeamNumericKey,HTMLDivElement>();
  const readConfig=()=>{
@@ -47,21 +47,21 @@ export function setupFusionLaboratory({onUpdate=()=>{},exposureHost}:FusionLabor
    byId('fusion-spot').setAttribute('fill-opacity',c.beamCurrentA>0?'.35':'0');
    byId('fusion-beam').setAttribute('visibility',c.beamCurrentA>0?'visible':'hidden');
    byId('fusion-neutrons').setAttribute('visibility',latest.neutronRateS>0?'visible':'hidden');
-   byId('fusion-spot-size').textContent=`Circular footprint · ${(2*playground.spotRadiusM*100).toPrecision(3)} cm diameter`;
+   byId('fusion-spot-size').textContent=`Circular beam area · ${(2*playground.spotRadiusM*100).toPrecision(3)} cm diameter`;
    byId('fusion-current-label').textContent=`${format(c.beamCurrentA*1000)} mA D⁺`;
    const metrics: [string,number|null,string][]=[['D–T reactions',latest.neutronRateS,'s⁻¹'],['Nuclear Q power',latest.nuclearPowerW,'W'],
     ['Incident beam power',latest.beamPowerW,'W'],['Accelerator wall-plug input',latest.wallPlugPowerW,'W'],
     ['Fusion / incident beam power',latest.beamGain,''],['Reaction probability / deuteron',latest.fusionProbability,''],
     ['Target-layer heat',latest.targetLayerHeatW,'W'],['Transmitted beam power',latest.transmittedBeamPowerW,'W'],
     ['Layer heat / illuminated area',latest.targetLayerHeatFluxWM2,'W/m²'],['D–T neutrons over exposure',latest.totalNeutrons,''],
-    ['If substrate stops remaining beam',latest.assemblyHeatIfTransmittedBeamStoppedW,'W'],['Energy ledger residual',latest.energyResidualW,'W']];
+    ['If substrate stops remaining beam',latest.assemblyHeatIfTransmittedBeamStoppedW,'W'],['Energy-balance residual',latest.energyResidualW,'W']];
    byId('fusion-metrics').replaceChildren(...metrics.map(([title,value,unit])=>{
     const row=element('div');row.append(element('span',title),element('strong',`${format(value)} ${unit}`));return row;
    }));
    byId('fusion-notes').replaceChildren(...latest.assumptions.map(note=>element('li',note)));
-   byId('fusion-status').textContent=playground.excludedEnergiesKeV.length?`Scan omits ${playground.excludedEnergiesKeV.length} energies outside the fit domain; starts at ${playground.curves[0].x[0]} keV.`:'';
+   byId('fusion-status').textContent=playground.excludedEnergiesKeV.length?`The scan does not include ${playground.excludedEnergiesKeV.length} energies beyond the fit limits. It starts at ${playground.curves[0].x[0]} keV.`:'';
    byId('fusion-energy-label').textContent=`D⁺ · ${format(c.beamEnergyKeV)} keV`;
-   byId('fusion-target-label').textContent=`Assumed T column ${format(c.targetColumnM2)} m⁻²`;
+   byId('fusion-target-label').textContent=`T column density (assumption): ${format(c.targetColumnM2)} m⁻²`;
    (byId('export-fusion') as HTMLButtonElement).disabled=false;
    onUpdate(latest);
   }catch(error){

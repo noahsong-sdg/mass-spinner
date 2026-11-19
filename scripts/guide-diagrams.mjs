@@ -3,18 +3,18 @@ const {equilibriumPoint}=/** @type {typeof import('../src/fuel-equilibrium.js')}
 
 /** @type {Record<string,{title:string,description:string,caption:string,body:string}>} */
 const drawings={
- 'fuel-cycle':{title:'Breeding fuel and recovering fuel are separate jobs',description:'A blanket can produce tritium from lithium and neutrons. A D–T fusion plasma consumes some injected fuel; exhaust processing returns unburned fuel. Lithium isotope enrichment is upstream of breeding, not fusion inside the centrifuge.',caption:'Process sketch. No breeding rate, return efficiency or plant inventory is predicted by these arrows.',body:`
+ 'fuel-cycle':{title:'Fuel breeding and fuel recovery are separate processes',description:'A blanket can supply tritium through reactions between lithium and neutrons. A D–T fusion plasma consumes some fuel. Exhaust processing can return fuel that did not react. Lithium isotope enrichment occurs before breeding. The centrifuge does not cause fusion.',caption:'This diagram shows processes only. The arrows do not give breeding rates, return efficiency or plant inventory.',body:`
  <rect x="15" y="15" width="300" height="45" rx="5"/><text x="165" y="43" text-anchor="middle">lithium + neutrons → tritium</text>
  <path d="M74 62V96" class="force" marker-end="url(#fuel-cycle-force)"/><text x="88" y="83">make-up fuel</text>
  <rect x="15" y="105" width="118" height="49" rx="5"/><text x="74" y="135" text-anchor="middle">D–T fusion</text>
  <rect x="197" y="105" width="118" height="49" rx="5"/><text x="256" y="126" text-anchor="middle">exhaust</text><text x="256" y="144" text-anchor="middle">processing</text>
  <path d="M135 131H191" class="force" marker-end="url(#fuel-cycle-force)"/><text x="165" y="118" text-anchor="middle" style="font-size:10px">unburned</text>
  <path d="M256 156V210H74V160" class="current" marker-end="url(#fuel-cycle-current)"/><text x="165" y="237" text-anchor="middle">return unburned fuel</text>`},
- evidence:{title:'Three separate questions about a prediction',description:'Verification checks implementation against equations. Convergence checks sensitivity to numerical resolution. Validation checks matched measurements. Passing one does not establish the others.',caption:'Independent evidence requirements; passing numerical checks does not establish experimental accuracy.',body:`
- <rect x="15" y="15" width="300" height="62" rx="5"/><text x="165" y="40" text-anchor="middle">Verification</text><text x="165" y="62" text-anchor="middle">Did we implement the equations?</text>
- <rect x="15" y="100" width="300" height="62" rx="5"/><text x="165" y="125" text-anchor="middle">Convergence</text><text x="165" y="147" text-anchor="middle">Did cells and steps distort the answer?</text>
- <rect x="15" y="185" width="300" height="62" rx="5"/><text x="165" y="210" text-anchor="middle">Validation</text><text x="165" y="232" text-anchor="middle">Does it match a measured device?</text>`},
- energy:{title:'Drive energy becomes rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Mechanical work changes rotation or is dissipated by ion-neutral slip and wall drag; cooling removes heat.',caption:'Energy routes in the simplified model. Deposition and cooling laws remain assumptions.',body:`
+ evidence:{title:'Three checks of a prediction',description:'Verification is a check of the code against the equations. Convergence is a check for changes with smaller cells and timesteps. Validation compares predictions with measurements under the same conditions. Each check needs separate evidence.',caption:'Numerical checks do not show experimental accuracy. Validation also needs measurements under the same conditions.',body:`
+ <rect x="15" y="15" width="300" height="62" rx="5"/><text x="165" y="40" text-anchor="middle">Verification</text><text x="165" y="62" text-anchor="middle">Does the code solve the equations?</text>
+ <rect x="15" y="100" width="300" height="62" rx="5"/><text x="165" y="125" text-anchor="middle">Convergence</text><text x="165" y="147" text-anchor="middle">Does refinement change the result?</text>
+ <rect x="15" y="185" width="300" height="62" rx="5"/><text x="165" y="210" text-anchor="middle">Validation</text><text x="165" y="232" text-anchor="middle">Does the result agree with measurements?</text>`},
+ energy:{title:'Drive energy supplies rotation and heat',description:'Electrical input supplies mechanical work and Ohmic heat. Electrical resistance causes Ohmic heating. Mechanical work changes rotation and the mass distribution. Ion–neutral speed differences and wall drag convert rotation energy to heat. Cooling removes heat.',caption:'These are energy paths in the model. The heating and cooling laws are assumptions.',body:`
  <rect x="91" y="14" width="148" height="37" rx="7"/><text x="165" y="38" text-anchor="middle">electrical input</text>
  <path d="M126 51L83 91M204 51L246 91" class="force" marker-end="url(#energy-force)"/>
  <rect x="12" y="96" width="141" height="42" rx="7"/><text x="82" y="122" text-anchor="middle">mechanical work</text>
@@ -23,18 +23,18 @@ const drawings={
  <text x="82" y="196" text-anchor="middle">rotation ↔ redistribution</text>
  <text x="248" y="196" text-anchor="middle">gas / wall heat</text>
  <path d="M90 210Q130 246 207 210" class="force" marker-end="url(#energy-force)"/>
- <text x="165" y="255" text-anchor="middle">slip + drag convert rotation to heat</text>
- <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">cooling out</text>`},
+ <text x="165" y="255" text-anchor="middle">speed differences + drag → heat</text>
+ <path d="M248 205V273" class="force" marker-end="url(#energy-force)"/><text x="248" y="296" text-anchor="middle">heat removed</text>`},
 };
 function heatDiagram(){
  /** @type {[string,string,number[]][]} */
  const cases=[['gas','Gas hotter',[900,800,600,400,300]],['wall','Wall hotter',[300,400,600,800,900]],['equal','Same temperature',[600,600,600,600,600]]];
  return `<figure class="heat-example" data-heat-example data-case="gas" data-motion="paused">
- <div class="drive-heading"><span>The slope tells you which way heat flows.</span><button type="button" data-heat-motion disabled>Play motion</button></div>
+ <div class="drive-heading"><span>Heat flows from higher to lower temperature.</span><button type="button" data-heat-motion disabled>Play motion</button></div>
  <div class="diagram-cases" role="group" aria-label="Compare heat-flow directions">${cases.map(([id,label])=>`<button type="button" data-heat-select="${id}" aria-pressed="${id==='gas'}" disabled>${label}</button>`).join('')}</div>
  <svg viewBox="0 0 360 330" role="img" aria-labelledby="heat-title heat-description">
- <title id="heat-title">Conduction follows the temperature gradient, not a fixed outward direction</title>
- <desc id="heat-description">A temperature profile above a radial strip of gas, liner and coolant. A hot gas sends heat outward; a hotter wall and exterior send heat inward. At uniform temperature there is no conductive heat flux. These are prescribed example profiles, not a thermal simulation.</desc>
+ <title id="heat-title">The temperature gradient sets the conduction direction</title>
+ <desc id="heat-description">The temperature profile is above a radial strip of gas, liner and coolant. If temperature decreases outward, heat flows outward by conduction. If temperature increases outward, heat flows inward. At uniform temperature, no heat flows by conduction. These example profiles are prescribed, not calculated from a thermal simulation.</desc>
  <defs><marker id="heat-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e4ac76"/></marker></defs>
  <text x="16" y="20">Temperature (K)</text>
  ${[300,600,900].map(T=>`<path d="M50 ${200-(T-300)/5}H320" class="diagram-grid"/><text x="42" y="${204-(T-300)/5}" text-anchor="end">${T}</text>`).join('')}
@@ -46,21 +46,21 @@ function heatDiagram(){
  ${cases.filter(([id])=>id!=='equal').map(([id])=>`<g data-heat-case="${id}" class="heat-flow" data-direction="${id==='gas'?1:-1}"><path d="M${id==='gas'?'80 262H210':'210 262H80'}" marker-end="url(#heat-arrow)"/><path d="M${id==='gas'?'240 262H310':'310 262H240'}" marker-end="url(#heat-arrow)"/><circle class="heat-packet" cx="${id==='gas'?90:185}" cy="262" r="4"/></g>`).join('')}
  <text x="140" y="308" text-anchor="middle">gas</text><text x="255" y="308" text-anchor="middle">liner</text><text x="311" y="308" text-anchor="middle">coolant</text>
  </svg>
- <p class="diagram-reading" data-heat-reading aria-live="polite">Temperature falls outward → conductive heat flows outward.</p>
- <figcaption>Prescribed profiles, not your run. Motion shows direction, not heat-flow rate. Gas motion and interface temperature jumps are omitted.</figcaption></figure>`;
+ <p class="diagram-reading" data-heat-reading aria-live="polite">Temperature decreases outward → heat flows outward by conduction.</p>
+ <figcaption>These prescribed profiles are examples, not your run. Motion shows the direction, not the heat-flow rate. This diagram excludes gas motion and temperature jumps at interfaces.</figcaption></figure>`;
 }
 
 function collectionDiagram(){
- // Normalize a generic ideal mixture to 100 inventory units; reuse the qualified
- // cylindrical integrals, including their r dr volume weighting and empty cut.
+ // Use 100 inventory units for the ideal mixture. The cylindrical integrals
+ // retain the r dr volume weighting and the empty-cut case.
  const config={massesU:/** @type {[number,number]} */([20,40]),edgeSpeedMS:1000,temperatureK:500,radiusM:.1,lengthM:.5,totalParticles:100,lightFraction:.5,cutFraction:.65};
  /** @type {[number,number,number|null,number|null][]} */
  const samples=Array.from({length:101},(_,i)=>{const s=equilibriumPoint(config,i/100).inner;return [s.speciesParticles[0],s.speciesParticles[1],s.lightPurity,s.lightRecovery];});
  const selected=samples[65];
  /** @param {number|null} value */
  const percent=value=>value===null?'undefined':`${(value*100).toFixed(1)}%`;
- // Equal-weight quantile samples depict the same radial inventories. They are
- // visual samples, not discrete atom counts or simulated particle trajectories.
+ // Equal-weight quantile samples show the same radial inventories.
+ // These samples are not atom counts or simulated particle paths.
  const particles=[0,1].flatMap(species=>Array.from({length:50},(_,i)=>{
   let lo=0,hi=1;const target=(i+.5)/50;
   for(let j=0;j<32;j++){const mid=(lo+hi)/2;if(equilibriumPoint(config,mid).inner.speciesFractions[species]<target)lo=mid;else hi=mid;}
@@ -68,31 +68,31 @@ function collectionDiagram(){
   return `<circle data-cut-particle="${r}" cx="${140+110*r*Math.cos(angle)}" cy="${140+110*r*Math.sin(angle)}" r="3" class="cut-${species?'heavy':'light'}${r>.65?' cut-outside':''}"/>`;
  })).join('');
  return `<figure class="collection-example" data-collection-example data-cut-values='${JSON.stringify(samples)}'>
- <strong>A purer sample can leave most of your light atoms behind.</strong>
- <label class="cut-control" for="example-cut-radius">Keep everything inside <output for="example-cut-radius" data-cut-radius-label>0.65 R</output></label>
+ <strong>A high-purity sample can contain few of the light atoms.</strong>
+ <label class="cut-control" for="example-cut-radius">Keep all gas inside <output for="example-cut-radius" data-cut-radius-label>0.65 R</output></label>
  <input id="example-cut-radius" type="range" min="0" max="100" step="1" value="65" aria-label="Example collection radius, percent of vessel radius" disabled>
  <div class="collection-views"><svg viewBox="0 0 280 280" role="img" aria-labelledby="cut-title cut-description">
- <title id="cut-title">A radius cut keeps an entire inner cylinder, not a thin ring</title>
- <desc id="cut-description">End view of an ideal rotating mixture. Green markers show lighter atoms and amber markers heavier atoms; positions are equal-weight samples of the computed radial distributions. Markers outside the cut fade. Readouts integrate the density continuously, rather than counting these markers.</desc>
+ <title id="cut-title">A radius cut keeps all gas inside the selected radius</title>
+ <desc id="cut-description">This end view shows an ideal rotating mixture. Green markers show lighter atoms. Amber markers show heavier atoms. These equal-weight samples show the calculated radial distributions. Markers outside the cut have lower brightness. The values come from density integrals, not marker counts.</desc>
  <circle cx="140" cy="140" r="110" class="cut-vessel"/>
  <circle data-cut-area cx="140" cy="140" r="71.5" class="cut-area"/>
  ${particles}
  <circle data-cut-boundary cx="140" cy="140" r="71.5" class="cut-boundary"/>
- <text x="140" y="19" text-anchor="middle">End view · whole inner volume</text>
- <text x="140" y="269" text-anchor="middle">Dimmed = outside the cut</text>
+ <text x="140" y="19" text-anchor="middle">End view · all gas inside the cut</text>
+ <text x="140" y="269" text-anchor="middle">Lower brightness = outside the cut</text>
  </svg><div class="cut-inventory">
  <p class="cut-key"><span>● Light · 20 u</span><span>● Heavy · 40 u</span></p>
  <p>Of 50 light units, keep <b data-cut-light>${selected[0].toFixed(1)}</b></p><div class="cut-bar"><span data-cut-light-bar style="transform:scaleX(${selected[0]/50})"></span></div>
  <p>Of 50 heavy units, keep <b data-cut-heavy>${selected[1].toFixed(1)}</b></p><div class="cut-bar cut-heavy-bar"><span data-cut-heavy-bar style="transform:scaleX(${selected[1]/50})"></span></div>
- <dl><div><dt>Purity · light share of sample</dt><dd data-cut-purity>${percent(selected[2])}</dd></div><div><dt>Recovery · light inventory kept</dt><dd data-cut-recovery>${percent(selected[3])}</dd></div></dl>
+ <dl><div><dt>Purity · light fraction in sample</dt><dd data-cut-purity>${percent(selected[2])}</dd></div><div><dt>Recovery · light atoms kept</dt><dd data-cut-recovery>${percent(selected[3])}</dd></div></dl>
  </div></div>
- <p class="diagram-reading" data-cut-reading aria-live="polite">Move the cut toward the wall to keep more of both species.</p>
- <figcaption>Ideal equilibrium example, not your run; computed with the simulator’s equilibrium reference. Uniform 500 K, rigid rotation at 1,000 m/s at the wall, 50% light feed. Inventories normalized to 100 units; dots are distribution samples. No extraction flow is solved.</figcaption></figure>`;
+ <p class="diagram-reading" data-cut-reading aria-live="polite">Move the cut toward the wall to keep more atoms of both species.</p>
+ <figcaption>This ideal equilibrium example uses the simulator’s equilibrium reference, not your run. Temperature is uniform at 500 K. Rotation is rigid, with a wall speed of 1,000 m/s. The feed contains 50% light atoms, with 100 total inventory units. Dots are distribution samples. The model does not calculate extraction flow.</figcaption></figure>`;
 }
 
 function densityDiagram(){
  /** @type {[string,string,number,number][]} */
- const cases=[['rest','No spin',0,500],['spin','Spinning',1500,500],['warm','Warmer',1500,1000]];
+ const cases=[['rest','No rotation',0,500],['spin','Rotation',1500,500],['warm','Higher temperature',1500,1000]];
  const masses=[6.0151228874,7.0160034366],colors=['#9bd8ce','#e4ac76'];
  /** @param {number} speed @param {number} temperature */
  const curves=(speed,temperature)=>masses.map((mass,i)=>{
@@ -100,32 +100,32 @@ function densityDiagram(){
   return {beta,wall:Math.exp(beta),path:Array.from({length:65},(_,j)=>`${j?'L':'M'}${52+264*j/64} ${220-165*Math.exp(beta*(j/64)**2)/7}`).join(' '),color:colors[i]};
  });
  return `<figure class="density-example" data-density-example data-case="spin">
- <strong>Both crowd toward the wall. The heavier isotope crowds more.</strong>
+ <strong>Both densities increase toward the wall. The heavier isotope has a larger increase.</strong>
  <div class="density-cases" role="group" aria-label="Compare equilibrium density gradients">${cases.map(([id,label])=>`<button type="button" data-density-select="${id}" aria-pressed="${id==='spin'}">${label}</button>`).join('')}</div>
  <svg viewBox="0 0 360 278" role="img" aria-labelledby="composition-title composition-description">
- <title id="composition-title">Heavier atoms have a steeper equilibrium density gradient</title><desc id="composition-description">Each curve starts at one at the axis: density divided by that species' own axis density. With rotation both curves rise, lithium-7 more steeply than lithium-6. These ratios do not show mixture percentages or which species has more atoms. This is an ideal uniform-temperature example, not your live run.</desc>
- <text x="16" y="22">Density ÷ its own axis density</text>
+ <title id="composition-title">The heavier isotope has a steeper equilibrium density gradient</title><desc id="composition-description">Each curve shows density divided by the axis density of that species. With rotation, both curves increase outward. Lithium-7 has a steeper increase than lithium-6. These ratios do not show composition or total atom numbers. This ideal equilibrium example has a uniform temperature. It is not your live run.</desc>
+ <text x="16" y="22">Density ÷ axis density of that species</text>
  ${[1,3,5,7].map(y=>`<path d="M52 ${220-165*y/7}H316" stroke="#405749" stroke-width=".6"/><text x="42" y="${224-165*y/7}" text-anchor="end">${y}×</text>`).join('')}
  <path d="M52 45V220H316" fill="none" stroke="#82958a"/>
  ${cases.map(([id,,speed,temperature])=>`<g data-density-case="${id}">${curves(speed,temperature).map((c,i)=>`<path data-mass="${masses[i]}" data-beta="${c.beta}" data-wall="${c.wall}" d="${c.path}" stroke="${c.color}" stroke-width="3" ${i?'stroke-dasharray="6 3"':''} fill="none"/>`).join('')}</g>`).join('')}
  <text x="52" y="243">axis</text><text x="316" y="243" text-anchor="end">wall</text><text x="184" y="267" text-anchor="middle">distance from the axis →</text>
  </svg><div class="density-key"><span>━ ⁶Li · lighter</span><span>┄ ⁷Li · heavier</span></div>
- ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>Wall versus axis: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
- <figcaption>Ideal equilibrium example, not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference; these curves are not isotope percentages.</figcaption></figure>`;
+ ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>Wall ÷ axis density: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
+ <figcaption>This ideal equilibrium example is not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference. These curves are not isotope percentages.</figcaption></figure>`;
 }
 function driveDiagram(){
  /** @param {string} kind @param {number[][]} points */
  const particles=(kind,points)=>points.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="${kind==='ion'?4:5}"/>`).join('');
- const caption='Ion–neutral collisions pass rotation to the neutral gas. The electrodes stay still.';
+ const caption='Ion–neutral collisions transfer rotation to the neutral gas. The electrodes stay still.';
  return `<figure class="drive-illustration" data-drive-diagram data-stage="gas" data-motion="paused">
- <div class="drive-heading"><span>Spin the gas. Keep the cylinder still.</span><button type="button" data-drive-motion>Play motion</button></div>
- <div class="drive-stages" role="group" aria-label="Explore how the gas spins">
- ${[['current','Current'],['ions','Turn ions'],['gas','Turn gas']].map(([id,label],i)=>`<button type="button" data-drive-stage="${id}" aria-pressed="${id==='gas'}" aria-controls="drive-explanation"><span>${i+1}</span>${label}</button>`).join('')}</div>
+ <div class="drive-heading"><span>Turn the gas. Keep the cylinder still.</span><button type="button" data-drive-motion>Play motion</button></div>
+ <div class="drive-stages" role="group" aria-label="How the gas turns">
+ ${[['current','Current'],['ions','Turn the ions'],['gas','Turn the gas']].map(([id,label],i)=>`<button type="button" data-drive-stage="${id}" aria-pressed="${id==='gas'}" aria-controls="drive-explanation"><span>${i+1}</span>${label}</button>`).join('')}</div>
  <div class="drive-views">
  <div class="drive-view"><h3>The cylinder</h3>
  <svg viewBox="0 0 340 300" role="img" aria-labelledby="drive-cylinder-title drive-cylinder-description">
  <title id="drive-cylinder-title">A stationary cylindrical electrode around a central electrode</title>
- <desc id="drive-cylinder-description">Gas fills the annular gap. The magnetic field runs along the cylinder toward the viewer. The end view beside it shows current and force in that gap.</desc>
+ <desc id="drive-cylinder-description">Gas fills the gap between the electrodes. The magnetic field points along the cylinder axis toward you. The end view shows current and force in that gap.</desc>
  <defs><linearGradient id="drive-metal" x2="1" y2="1"><stop stop-color="#81948c"/><stop offset=".45" stop-color="#354b42"/><stop offset="1" stop-color="#192a23"/></linearGradient><marker id="drive-axis-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#b5c5cf"/></marker></defs>
  <path d="M105 76L230 28A65 87 0 0 1 230 202L105 250Z" fill="url(#drive-metal)" stroke="#7e9588"/>
  <ellipse cx="230" cy="115" rx="65" ry="87" fill="#294037" stroke="#7e9588"/>
@@ -141,10 +141,10 @@ function driveDiagram(){
  <path d="M88 112L37 58H16" class="drive-leader"/><text x="12" y="45">Gas in the gap</text>
  <text x="125" y="284" text-anchor="middle" class="drive-muted">View from this end</text>
  </svg></div>
- <div class="drive-view"><h3>Looking into the end</h3>
+ <div class="drive-view"><h3>End view</h3>
  <svg viewBox="0 0 320 320" role="img" aria-labelledby="drive-title drive-description">
  <title id="drive-title">How radial current turns the gas</title>
- <desc id="drive-description">At the right, current points inward to the left, magnetic field points out of the page, and J cross B points up, giving counterclockwise torque. The same tangential force acts around the annulus. Hollow circles represent ions; filled dots represent neutral atoms, matching the 3D view's marker shapes. Motion illustrates bulk rotation, not microscopic trajectories or measured speeds.</desc>
+ <desc id="drive-description">At the right, current points inward to the left. The magnetic field points out of the page. J cross B points up and causes counterclockwise torque. This force acts tangentially around the gap. Hollow circles show ions and filled dots show neutral atoms, as in the 3D view. Motion shows bulk rotation, not particle paths or measured speeds.</desc>
  <defs>${[['current','#9bd8ce'],['force','#e4ac76']].map(([kind,color])=>`<marker id="drive-${kind}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="${color}"/></marker>`).join('')}</defs>
  <circle cx="160" cy="160" r="116" fill="#1d3329" stroke="#a1b3a4" stroke-width="3"/>
  ${[58,84,104].map(r=>`<circle cx="160" cy="160" r="${r}" class="drive-track"/>`).join('')}
@@ -161,7 +161,7 @@ function driveDiagram(){
  </svg></div></div>
  <div class="drive-key" role="group" aria-label="Diagram key"><span><i class="drive-ion-key"></i>Ions</span><span><i class="drive-neutral-key"></i>Neutral atoms</span><span class="drive-force-key">↗ Sideways force</span></div>
  <p id="drive-explanation" class="drive-explanation" aria-live="polite">${caption}</p>
- <figcaption>Illustrative bulk motion · slowed down · not simulated particle paths. Geometry is schematic.</figcaption>
+ <figcaption>This slow motion shows bulk rotation, not simulated particle paths. The geometry is schematic.</figcaption>
  </figure>`;
 }
 /** @param {string} id */

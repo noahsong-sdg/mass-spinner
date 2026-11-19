@@ -48,7 +48,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   reactor?.setAttribute('aria-pressed',String(level==='2'&&!centrifuge));
   if(advanced)advanced.dataset.active=String(level!=='2');
   $('level-title').textContent=centrifuge?'Marathon centrifuge':level==='2'?(apparatus?.value==='blanket'?'Fusion power reference':'Marathon beam reactor'):copy[level];$('share-playground').hidden=false;
-  $('share-playground').title=centrifuge?'Rerun inputs and drive history at the selected time. Camera and independent equilibrium calculator are separate.':'';
+  $('share-playground').title=centrifuge?'Recalculate the run from its inputs and drive history at the selected time. The camera and equilibrium calculator are separate.':'';
   sync();if(notifyLevel)onLevelChange?.(level);revealActiveLevel();
  }
  function enter(next:ExperienceLevel,reset=false,dispatchEvents=true){
@@ -79,7 +79,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  }
  function shareable(value:unknown):asserts value is Scenario {scenarioLink(location.href,value);}
  function restore(scenario:unknown){
-  try{shareable(scenario);}catch{$('share-status').textContent='Unsupported scenario.';return false;}
+  try{shareable(scenario);}catch{$('share-status').textContent='This scenario format is not supported.';return false;}
   const previous=capture({validate:false}),previousModels=savedModels;
   hydrating=true;
   try{
@@ -99,7 +99,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
    savedModels=previousModels;enter(previous.level,true,false);
    cancelDeferred=restoreScenario(document,previous,{validateDomains:false});
    if(previous.level==='2'&&apparatus?.value==='centrifuge')fuelCentrifuge?.restoreRun(previous.fuelRun);
-   $('share-status').textContent='Unsupported scenario; previous settings retained.';return false;
+   $('share-status').textContent='This scenario format is not supported. The previous settings remain.';return false;
   }finally{hydrating=false;}
  }
  for(const button of levelButtons)button.addEventListener('click',()=>{
@@ -125,7 +125,7 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   let href;
   try{href=scenarioLink(location.href,capture());}catch(error){$('share-status').textContent=error&&typeof error==='object'&&'message' in error?String(error.message):'';return;}
   const revision=shareRevision;$('share-link').value=href;$('share-link').hidden=false;
-  try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent=level==='2'&&apparatus?.value==='centrifuge'?'Copied run link · fresh solve; camera and calculator separate.':'Copied experiment link.';}
+  try{await navigator.clipboard.writeText(href);if(revision===shareRevision)$('share-status').textContent=level==='2'&&apparatus?.value==='centrifuge'?'Run link copied. Opening it recalculates the run. The camera and calculator are separate.':'Experiment link copied.';}
   catch{if(revision===shareRevision)$('share-status').textContent='Select and copy the experiment link below.';}
  })();});
  function reset(){
@@ -142,6 +142,6 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
  }
  enter(shared.scenario?.level??initial.level);
  if(shared.scenario)restore(shared.scenario);
- if(shared.invalid||initial.invalid)$('share-status').textContent='Unsupported experiment link; the default settings are loaded.';
+ if(shared.invalid||initial.invalid)$('share-status').textContent='This experiment link is not supported. The default settings are loaded.';
  return {refresh,sync,capture,restore,reset,dispose(){view?.removeEventListener('resize',revealActiveLevel);cancelDeferred();},get level(){return level;}};
 }

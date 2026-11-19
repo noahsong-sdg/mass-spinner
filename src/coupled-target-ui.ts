@@ -59,7 +59,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  const metrics=make('div');metrics.className='coupled-target-metrics';
  const dynamics=make('div'),depth=make('div');dynamics.className='live-plots';depth.className='live-plots';
  const plotChoice=make('select'),plotLabel=make('label','Plot');plotChoice.id='coupled-plot';plotLabel.htmlFor=plotChoice.id;
- for(const [value,title]of [['source','Neutrons & temperature'],['isotopes','Isotopes'],['energy','Energy budget']]){const option=make('option',title);option.value=value;plotChoice.append(option);}plotChoice.value='source';
+ for(const [value,title]of [['source','Neutrons & temperature'],['isotopes','Isotopes'],['energy','Energy balance']]){const option=make('option',title);option.value=value;plotChoice.append(option);}plotChoice.value='source';
  const plotBar=make('div');plotBar.className='target-plot-choice';plotBar.append(plotLabel,plotChoice);panels.get('dynamics')!.append(plotBar,dynamics);
  const depthBar=make('div'),depthLabel=make('label','Temperature'),depthScope=make('select');depthBar.className='target-plot-choice';depthScope.id='coupled-depth-range';depthLabel.htmlFor=depthScope.id;
  for(const [value,title]of [['film','Film'],['assembly','Film & backing']]){const option=make('option',title);option.value=value;depthScope.append(option);}depthScope.value='film';depthBar.append(depthLabel,depthScope);panels.get('depth')!.append(depthBar,depth);
@@ -67,7 +67,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  settings.append(durationHost);
  function section(title:string){const details=make('details'),body=make('div');details.append(make('summary',title),body);body.className='target-settings-grid';settings.append(details);return body;}
  const operating=make('div');operating.className='target-settings-grid';settings.append(operating);
- const thermal=section('Thermal properties · assumed'),kinetics=section('Material transport · assumed'),numerics=section('Numerics');
+ const thermal=section('Thermal properties · assumptions'),kinetics=section('Material transport · assumptions'),numerics=section('Numerics');
  function field(parent:HTMLElement,key:TargetNumberKey,title:string,unit:string,min:number,max:number,step:number,{log=false,celsius=false}:{log?:boolean;celsius?:boolean}={}){
   const box=make('div'),label=make('label'),output=make('output'),input=make('input');box.className='control';
   Object.assign(input,{id:`coupled-${key}`,type:'range',min:String(min),max:String(max),step:String(step)});
@@ -78,7 +78,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
   const readout=()=>{const physical=read();output.textContent=`${format(physical-(celsius?273.15:0))} ${unit}`.trim();input.setAttribute('aria-valuetext',output.textContent);};
   input.addEventListener('input',()=>{readout();schedule();});readout();return input;
  }
- field(operating,'replacementProbability','D replacement probability','',0,1,.01);
+ field(operating,'replacementProbability','D replacement probability (assumption)','',0,1,.01);
  field(operating,'pulseDuty','Beam duty','',0,1,.05);
  field(operating,'pulsePeriodS','Pulse period','s',-2,1,.05,{log:true});
  field(operating,'cooldownS','Cooldown','s',0,30,1);
@@ -94,10 +94,10 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  field(thermal,'contactResistanceM2KPerW','Film/backing contact resistance','m² K W⁻¹',0,.0001,.000001);
  // Explicit zeros retain absent processes; no invented nonzero LiT coefficients.
  for(const [key,title,unit,max]of [
-  ['diffusivityM2S','Diffusivity prefactor','m² s⁻¹',1],['diffusionActivationEV','Diffusion activation','eV',10],
-  ['releaseAttemptRateS','Release prefactor','s⁻¹',1e16],['releaseActivationEV','Release activation','eV',10],
-  ['surfaceReleaseVelocityMS','Front release speed','m s⁻¹',1e3],['surfaceReleaseActivationEV','Front release activation','eV',10],
-  ['backPermeationVelocityMS','Back permeation speed','m s⁻¹',1e3],['backPermeationActivationEV','Back permeation activation','eV',10],
+  ['diffusivityM2S','Diffusivity prefactor','m² s⁻¹',1],['diffusionActivationEV','Diffusion activation energy','eV',10],
+  ['releaseAttemptRateS','Release prefactor','s⁻¹',1e16],['releaseActivationEV','Release activation energy','eV',10],
+  ['surfaceReleaseVelocityMS','Front release speed','m s⁻¹',1e3],['surfaceReleaseActivationEV','Front release activation energy','eV',10],
+  ['backPermeationVelocityMS','Back permeation speed','m s⁻¹',1e3],['backPermeationActivationEV','Back permeation activation energy','eV',10],
   ['renewalRateS','Renewal rate','s⁻¹',1e6],['renewalTritiumFraction','Renewal T fraction','',1]] as const){
   const box=make('div'),label=make('label'),input=make('input');box.className='control';Object.assign(input,{id:`coupled-${key}`,type:'number',min:'0',max:String(max),step:'any',value:String(DEFAULT_COUPLED_TARGET[key])});
   numericInputs.push(input);
@@ -116,10 +116,10 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
   recorded.append(make('summary','Implantation benchmark'),caseLabel,caseSelect,scope,readout,recordedPlot);references.append(recorded);
   const data=implantationReference;
   if(data.schemaVersion!==1||data.geometry!=='HOMOGENEOUS_HALFSPACE'||data.experimentallyValidatedLiT!==false||data.finiteFilmRetentionLaw!==false||data.assumptions?.electronicStoppingMode!=='INTERPOLATED'){
-   scope.textContent='Unsupported implantation reference.';caseSelect.disabled=true;
+   scope.textContent='The implantation reference has an unsupported format.';caseSelect.disabled=true;
   }else{
    for(const [index,sample]of data.cases.entries()){const option=make('option',`${sample.energyKeV} keV · seed ${sample.seed}`);option.value=String(index);caseSelect.append(option);}caseSelect.value='0';
-   scope.textContent=`Recorded homogeneous half-space, uncalibrated LiT. Not a film-retention law. Upstream smoke: ${data.upstreamExample.roundedReferenceMatch?'matched':'mismatch retained'}.`;
+   scope.textContent=`This recorded case uses a uniform half-space and LiT parameters without experimental calibration. It does not give a film-retention law. Upstream example: ${data.upstreamExample.roundedReferenceMatch?'matched':'mismatch retained'}.`;
    const raw=make('a','Recorded data ↗');raw.href='/marathon-reference/implantation-v35.json';recorded.append(raw);
    const show=()=>{
     const sample=data.cases[Number(caseSelect.value)];
@@ -134,16 +134,16 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  panel.append(header,tabs,prompt,status,snapshot,metrics,...panels.values(),ledger,info,exportButton,references);host.append(panel);
  function selectTab(key:TargetTab){active=key;for(const [name,body]of panels){body.hidden=name!==key;buttons.get(name)!.setAttribute('aria-selected',String(name===key));buttons.get(name)!.tabIndex=name===key?0:-1;}if(latest)renderSelected();}
  const currentSnapshot=()=>latest?{result:latest,state:latest.history[selected],source:acceptedSource!}:null;
- const pendingText=()=>latest?`Updating… Showing last completed scenario at ${format(latest.history[selected].timeS)} s; source ${format(acceptedSource!.beamEnergyKeV)} keV, ${format(acceptedSource!.beamCurrentA)} A. Inputs in Balances.`:'Updating…';
+ const pendingText=()=>latest?`Calculation in progress. The display shows the last completed case at ${format(latest.history[selected].timeS)} s. Its source uses ${format(acceptedSource!.beamEnergyKeV)} keV and ${format(acceptedSource!.beamCurrentA)} A. Balances contains its inputs.`:'Calculation in progress.';
  function report(){panel.dataset.status=phase;onStatus({phase,revision,snapshot:currentSnapshot()});}
  function cancel(){revision++;controller?.abort();controller=null;clearTimeout(timer??undefined);timer=null;exportButton.disabled=true;}
  function clear(message:string){latest=null;acceptedSource=null;phase='invalid';time.disabled=true;timeOutput.textContent='—';beamState.textContent='';metrics.replaceChildren();renderPlots(dynamics,[]);renderPlots(depth,[]);ledgerText.textContent='';infoList.replaceChildren();status.textContent=message;onUpdate(null);report();}
  function readConfig(){const config={...DEFAULT_COUPLED_TARGET};for(const [key,read]of reads)config[key]=read();config.absoluteTolerance=config.relativeTolerance*.0001;return config;}
  function schedule(){
   cancel();prompt.hidden=!beam||beam.config.stoppingModel==='geant4-bragg';
-  if(!beam){clear('No valid source.');return;}
-  if(beam.config.stoppingModel!=='geant4-bragg'){clear('Material stopping required.');return;}
-  if(numericInputs.some(input=>!input.checkValidity()||!Number.isFinite(input.valueAsNumber))){clear('Enter valid material settings.');return;}
+  if(!beam){clear('The source settings are not correct.');return;}
+  if(beam.config.stoppingModel!=='geant4-bragg'){clear('Select material stopping.');return;}
+  if(numericInputs.some(input=>!input.checkValidity()||!Number.isFinite(input.valueAsNumber))){clear('Enter correct material settings.');return;}
   phase='pending';status.textContent=pendingText();report();timer=setTimeout(calculate,250);
  }
  async function calculate(){
@@ -151,7 +151,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
   try{
    const result=await request({id,kind:'coupled-target',schemaVersion:1,beam:source,config},current.signal);
    if(id!==revision)return;
-   if(result?.model!=='coupled-depth-target-scenario'||!Array.isArray(result.history)||!result.history.length)throw new Error('Unsupported coupled-target result.');
+   if(result?.model!=='coupled-depth-target-scenario'||!Array.isArray(result.history)||!result.history.length)throw new Error('The coupled-target result has an unsupported format.');
    latest=result;acceptedSource=source;phase='accepted';selected=0;time.max=String(latest.history.length-1);time.value='0';time.disabled=false;exportButton.disabled=false;
    infoList.replaceChildren(...latest.assumptions.map(text=>make('li',text)));status.textContent='';renderSelected();
    if(id===revision)time.dispatchEvent(new time.ownerDocument.defaultView!.Event('coupled-accepted',{bubbles:true}));

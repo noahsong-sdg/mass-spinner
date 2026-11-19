@@ -33,7 +33,7 @@ export function setupBaseline(host: HTMLElement,{capture,restore}: BaselineOptio
  }
  return {update(curves,identity,metadata={}){
    let scenario: Scenario | undefined;captureError='';
-   if(curves)try{scenario=capture!();}catch(error){captureError=error&&typeof error==='object'&&'message' in error&&typeof error.message==='string'?error.message:'Scenario capture failed.';}
+   if(curves)try{scenario=capture!();}catch(error){captureError=error&&typeof error==='object'&&'message' in error&&typeof error.message==='string'?error.message:'The scenario could not be saved.';}
    current=curves?{scenario,identity,curves,metadata}:null;pending=false;draw();return current?combined():[];
   },setPending(value){pending=!!value;draw();},clearCurrent(){current=null;pending=false;captureError='';draw();},get pinned(){return store.read();}};
 }

@@ -15,7 +15,7 @@ export function setupCollectorAcceptance(container: HTMLElement){
   const row=make('label',label),valueText=make('output');row.htmlFor=input.id;row.append(valueText,input);values.push(valueText);controls.append(row);
  }
  const kind=make('label','Surface');kind.htmlFor=destination.id;kind.append(destination);controls.prepend(kind);
- const info=make('p','Passive aperture · saved impacts only. Recovery uses all injected ions; purity uses accepted simulated counts. No field feedback or throughput prediction.');info.className='instrument-note';
+ const info=make('p','This passive aperture selects saved impacts only; it does not change the fields. Recovery uses all injected ions; purity uses accepted simulated counts. The calculation does not give throughput.');info.className='instrument-note';
  panel.append(summary,controls,output,info);container.append(panel);let result: CollectorResult | null | undefined;
  function render(){
   const radius=result?.config?.radius;
@@ -26,7 +26,7 @@ export function setupCollectorAcceptance(container: HTMLElement){
   try{
    const value=collectorAcceptance(result.species,{destination:destination.value as Destination,innerRadiusM:Number(inner.value)*radius,outerRadiusM:Number(outer.value)*radius});
    output.textContent=value.species.map(s=>`${s.massU} u: ${s.accepted}/${s.injected} accepted · recovery ${(100*s.recovery).toFixed(1)}% · purity ${s.purity===null?'undefined (empty collector)':(100*s.purity).toFixed(1)+'%'}`).join(' | ');
-  }catch(error){output.textContent=`Collection unavailable: ${error instanceof Error?error.message:String(error)}`;}
+  }catch(error){output.textContent=`Cannot calculate collection: ${error instanceof Error?error.message:String(error)}`;}
  }
  for(const input of [inner,outer,destination])input.addEventListener(input===destination?'change':'input',()=>{
   if(Number(inner.value)>Number(outer.value)){if(input===inner)outer.value=inner.value;else inner.value=outer.value;}render();

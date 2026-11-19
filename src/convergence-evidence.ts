@@ -10,7 +10,7 @@ const fraction=(interval:SeedInterval)=>interval.mean===null?'undefined':percent
 
 /** Frozen offline evidence is explicitly separate from live slider results. */
 export function renderConvergenceEvidence(evidence:ConvergenceEvidence){
- document.getElementById('convergence-status')!.textContent=`Recorded ${evidence.horizonUS} µs case · ${evidence.runCount} whole runs · ${evidence.seedCount} independent seeds/level · gate ${evidence.status.toUpperCase()}. Static audit evidence; changing sliders does not rerun this matrix.`;
+ document.getElementById('convergence-status')!.textContent=`Recorded ${evidence.horizonUS} µs case · ${evidence.runCount} complete runs · ${evidence.seedCount} independent seeds/level · gate ${evidence.status.toUpperCase()}. These are recorded results. Slider changes do not repeat this study.`;
  document.getElementById('convergence-identity')!.textContent=`Model ${evidence.modelVersion} · executed source ${evidence.sourceHash} · ${evidence.inference}`;
  const body=document.getElementById('convergence-rows')!;body.replaceChildren();
  for(const level of evidence.levels){

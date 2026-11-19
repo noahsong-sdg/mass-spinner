@@ -9,7 +9,7 @@ export const DEUTERON_STOPPING_PROVENANCE={
  upstream:'Geant4 v11.4.0',commit:'b4a16de652ec244f7a0ecc0a5cacfee21930bf75',
  license:'/GEANT4-LICENSE.txt',projectileMassU:2,lithiumMassU:7,tritiumMassU:3,
  minimumEnergyKeV:.5/.6,maximumEnergyKeV:500,
- assumptions:'Atomic Bragg sum for Li:T=1:1; isotope mass-number approximation; no measured LiT chemical correction, angular scattering, straggling or charge-state evolution.',
+ assumptions:'The atomic Bragg sum uses Li:T=1:1 and isotope mass numbers. It does not include measured LiT chemical corrections, angular scattering, straggling or charge-state changes.',
 } as const;
 const UNIT_KEV_M2=1e-22; // eV/(10^15 atoms/cm²) → keV m² per atom
 const COEFFICIENTS={

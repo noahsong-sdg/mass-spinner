@@ -25,7 +25,7 @@ export function evolveDecayNetwork(network:DecayNetwork,initial:number[],duratio
  const ids=new Map(nodes.map((node,i)=>[node.id,i]));
  if(ids.size!==n||nodes.some(node=>!node.id||!nonnegative(node.decayRateS)))throw new Error('Invalid or duplicate decay node.');
  const source=network.productionAtomsS??Array<number>(n).fill(0);
- if(source.length!==n||!source.every(nonnegative))throw new Error('Production requires nonnegative atoms/s per node.');
+ if(source.length!==n||!source.every(nonnegative))throw new Error('Production must have one nonnegative atoms/s value for each node.');
  const initialTotal=initial.reduce((sum,x)=>sum+x,0),sourceTotal=source.reduce((sum,x)=>sum+x,0);
  if(!Number.isFinite(initialTotal)||!Number.isFinite(sourceTotal))throw new Error('Aggregate inventory or production exceeds the finite numerical domain.');
  // Explicit lost-inventory sink and constant reservoir retain affine production without cancellation.
@@ -51,7 +51,7 @@ export function evolveDecayNetwork(network:DecayNetwork,initial:number[],duratio
  if(irradiating)for(let i=0;i<n;i++)a[i][reservoir]=source[i]/scale;
  const q=Math.max(...a.map((row,i)=>-row[i]),irradiating?sourceTotal/scale:0);
  const opticalTime=q*durationS;
- if(!Number.isFinite(opticalTime)||opticalTime>1e6)throw new Error('Rate × time exceeds the bounded 10⁶ numerical domain; split the interval or use a stiff depletion backend.');
+ if(!Number.isFinite(opticalTime)||opticalTime>1e6)throw new Error('Rate × time is more than the 10⁶ numerical limit. Divide the interval or use a stiff depletion backend.');
  let exponential=identity(size);
  if(opticalTime>0){
   const squarings=Math.max(0,Math.ceil(Math.log2(opticalTime))),u=opticalTime/2**squarings;

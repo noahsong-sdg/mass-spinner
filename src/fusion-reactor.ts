@@ -121,15 +121,14 @@ export function simulateFusionBeam(config:FusionBeamConfig){
   transmittedBeamPowerW,escapingAlphaPowerW,energyResidualW,
   relativeEnergyResidual:beamPowerW+nuclearPowerW>0?energyResidualW/(beamPowerW+nuclearPowerW):null,
   assumptions:[
-   'Educational beam-target model inspired by the publicly described D+ → lithium-tritide architecture; no Marathon operating point or digital twin is claimed.',
-   'The default current, target column, energy loss, area, efficiency and alpha deposition are illustrative inputs, not Marathon measurements.',
-   'Cold stationary tritium; monoenergetic singly charged D+; Ecm=3/5 Elab. No molecular-ion, beam-spread, angular-scattering or target-depletion model.',
-   material?'Energy evolves through a fixed 1:1 Li/T matrix using a Geant4-derived Bragg-additive electronic plus nuclear stopping estimate. Compound chemistry, straggling and angular scattering are omitted; it is not measured LiT data. Target isotope replacement does not update this matrix.':
-   'Energy decreases linearly across a homogeneous tritium column. This imposed stopping law is not a measured lithium-tritide stopping curve; fully stopped ions below the fit domain are unsupported.',
-   'Target-layer heat includes imposed stopping and the specified deposited alpha fraction. Transmitted beam energy remains a separate output; substrate cooling, secondary electrons and sputtering are not modeled.',
-   'The conditional assembly-heat output adds all transmitted beam energy as heat in a stopping substrate; it does not predict temperatures, coolant performance or target lifetime.',
-   'Nuclear power is reaction Q only. Product powers also include incident energy carried into fusion. Approximate mass-number/isotropic-CM mean product energies conserve the stated energy budget.',
-   'Neutron count is production only. Spatial neutron transport, detector flux, shielding, blanket breeding/transmutation, target lifetime and net electric output are not predicted.',
+   'This teaching model uses the public D+ → lithium-tritide architecture. It does not give a Marathon operating point or an experimentally validated device model.',
+   'The default current, target column, energy loss, area, efficiency and alpha deposition are example inputs. They are not Marathon measurements.',
+   'The model uses cold stationary tritium and singly charged D+ ions with one energy: Ecm=3/5 Elab. It does not include molecular ions, beam-energy spread, angular scattering or target depletion.',
+   material?'The fixed 1:1 Li/T matrix uses a Bragg-additive stopping estimate from Geant4, with electronic and nuclear contributions. It does not include compound chemistry, straggling or angular scattering. It does not use measured LiT stopping data. Target isotope replacement does not change this matrix.':'Energy decreases linearly across a uniform tritium column. This specified stopping law does not use a measured lithium-tritide stopping curve. The model does not include fully stopped ions below the fit limit.',
+   'Target-layer heat includes beam stopping and the specified alpha-deposition fraction. Transmitted beam energy remains a separate output. The model does not include substrate cooling, secondary electrons or sputtering.',
+   'The conditional assembly-heat output adds all transmitted beam energy as heat in a stopping substrate. It does not calculate temperatures, coolant performance or target lifetime.',
+   'Nuclear power uses reaction Q only. Product powers also include incident energy carried into fusion. The energy balance uses approximate mass numbers and isotropic center-of-mass mean product energies.',
+   'The neutron count gives production only. The model does not calculate spatial neutron transport, detector flux, shielding, blanket breeding, transmutation, target lifetime or net electric output.',
   ],sources:[
    'https://www.marathonfusion.com/beam-driven-fusion/',
    'https://doi.org/10.1088/0029-5515/32/4/I07',

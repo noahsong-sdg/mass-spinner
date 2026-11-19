@@ -30,7 +30,7 @@ const selectors: readonly [SelectorField,string,readonly (readonly [string|numbe
  ['collisionSourceAligned','Fixed faces at initial source interfaces',[['false','Uniform grid · comparison'],['true','Source-fitted grid · pulse only']],'collision'],
  ['collisionTarget','Adaptive target markers per cell',[[16,'16'],[32,'32'],[64,'64'],[128,'128'],[256,'256']],'collision'],
  ['particlesPerSpecies','Particles per species',[[64,'64 · coarse'],[128,'128 · quick, coarse'],[256,'256'],[512,'512'],[1024,'1024 · refinement'],[2048,'2048 · refinement'],[4096,'4096 · browser limit']],'collision'],
- ['cellsAcross','Cartesian cells across / annular radial cells',[[2,'2 · coarse'],[3,'3 · coarse pulse grid'],[4,'4'],[6,'6 · co-refine particles'],[8,'8 · co-refine particles'],[12,'12 · co-refine particles']],'collision'],
+ ['cellsAcross','Cartesian cells across / annular radial cells',[[2,'2 · coarse'],[3,'3 · coarse pulse grid'],[4,'4'],[6,'6 · increase particles with cells'],[8,'8 · increase particles with cells'],[12,'12 · increase particles with cells']],'collision'],
  ['collisionAxialCells','Annular axial cells',[[0,'Coupled to radial grid · baseline'],[3,'3'],[6,'6'],[9,'9'],[18,'18'],[36,'36'],[72,'72']],'collision'],
  ['dt','Physical timestep',[[2.5e-8,'25 ns'],[5e-8,'50 ns'],[1e-7,'100 ns'],[2e-7,'200 ns']],'collision'],
  ['duration','Observation duration',[[5e-5,'50 µs'],[1e-4,'100 µs'],[2e-4,'200 µs'],[5e-4,'500 µs'],[1e-3,'1 ms']],'collision'],
@@ -49,15 +49,15 @@ function synchronize(changed?: string){
  $('collisionAxialCells').disabled=$('collisionMethod').value!=='axisymmetric';
  $('collisionSourceAligned').disabled=$('collisionMethod').value!=='axisymmetric'||equilibrium;
  document.getElementById('doublewell-initial-note')!.textContent=equilibrium
-  ? 'The equilibrium benchmark uses common ion rotation and temperature in a closed column. Selecting it sets closed boundaries, common rotation and zero axial drift; pulse size does not apply.'
-  : 'Both species start with equal physical particle weights in a finite cylindrical pulse at t = 0. There is no continuous reservoir. Zero-mean-Pθ rotation is species dependent; collisions may exchange that angular momentum.';
+  ? 'The equilibrium benchmark uses one ion rotation rate and temperature in a closed column. This selection sets closed boundaries, common rotation and zero axial drift. Pulse size does not apply.'
+  : 'Both species start with equal physical particle weights in a finite cylindrical pulse at t = 0. There is no continuous reservoir. For zero-mean-Pθ rotation, the rotation rate depends on the species. Collisions can exchange angular momentum between species.';
  updates.forEach(update=>update());
 }
 export function setupDoublewellControls(onInput: () => void){
  reads.clear();updates.length=0;
  const host=document.getElementById('doublewell-controls')!,groups=new Map<ControlGroup,HTMLDetailsElement>();
  const notice=document.createElement('p');notice.className='kinetic-validation-note';
- notice.textContent='Exploratory kinetic model: spatial and particle convergence is not established. The fast default uses a coarse pulse grid. Check collision-cell torque and local-regime diagnostics, and refine particles together with cells. Outlet counts are not calibrated product-purity predictions.';
+ notice.textContent='This kinetic model has no established spatial or particle convergence. The default uses a coarse pulse grid. Examine collision-cell torque and local-regime diagnostics. Increase the particle count with the cell count. Outlet counts do not give experimentally calibrated product purity.';
  host.append(notice);
  for(const [key,title]of [['geometry','Column & shaped potential'],['source','Initial mixture & boundaries'],['collision','Coulomb scattering & resolution']] satisfies [ControlGroup,string][]){
   const details=document.createElement('details'),summary=document.createElement('summary');

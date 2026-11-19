@@ -9,7 +9,7 @@ import {releaseSourceBase} from './release-links.mjs';
 /** @param {string} value */
 const escape=value=>value.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
 
-/** Render the same reviewed guide as GitHub, with math compiled at build time. */
+/** Render the same guide as GitHub. Compile equations during the build. */
 /** @param {string} markdown @param {string} revision @param {{title:string;number:string;topics:readonly import('../src/guide-topics.js').GuideTopic[]}=} tutorial */
 export function understandingPage(markdown,revision,tutorial){
  /** @type {readonly import('../src/guide-topics.js').GuideTopic[]} */
@@ -20,8 +20,8 @@ export function understandingPage(markdown,revision,tutorial){
  let enhancement='';
  const baseRenderer=new Renderer();
  const parser=new Marked({renderer:{
-  code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation, scroll horizontally if needed">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
-  table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table, scroll horizontally if needed">');},
+  code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation. If necessary, scroll horizontally.">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
+  table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table. If necessary, scroll horizontally.">');},
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
    if(href.startsWith('/?')){
@@ -51,6 +51,6 @@ export function understandingPage(markdown,revision,tutorial){
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
- <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Read on its own ↗</a></header>
+ <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Open separate page ↗</a></header>
 <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/learn.html">Docs & tutorials</a></footer></body></html>`;
 }

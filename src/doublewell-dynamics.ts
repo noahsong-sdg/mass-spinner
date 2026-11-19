@@ -61,12 +61,12 @@ export function validateDoublewell(config:DoublewellConfig,executionMode:Doublew
   ||c.collisionSourceAligned!==undefined&&typeof c.collisionSourceAligned!=='boolean'
   ||!Number.isInteger(c.collisionTarget??32)||(c.collisionTarget??32)<16||(c.collisionTarget??32)>256
   ||!Number.isInteger(c.collisionMaxDepth??15)||(c.collisionMaxDepth??15)<3||(c.collisionMaxDepth??15)>24)
-  throw new Error('Collision locality requires fixed/adaptive/axisymmetric mode, target 16–256 and depth 3–24.');
+  throw new Error('For collision locality, use fixed, adaptive or axisymmetric mode, target 16–256 and depth 3–24.');
  if(!['takizuka-abe','nanbu'].includes(c.collisionScattering??'takizuka-abe')
   ||c.collisionAxialCells!==undefined&&(!Number.isSafeInteger(c.collisionAxialCells)||c.collisionAxialCells<1||c.collisionAxialCells>1024))
   throw new Error('Use TA or Nanbu scattering and 1–1024 axial ring cells.');
  if(c.initialState==='equilibrium'&&(c.boundary!=='closed'||c.rotationMode!=='common'||c.beamEV!==0))
-  throw new Error('The equilibrium benchmark requires closed boundaries, common rotation and zero axial beam.');
+  throw new Error('For the equilibrium benchmark, use closed boundaries, common rotation and zero axial beam.');
 }
 
 /** Stated initial-state regime, not a solved electron response or measured log Λ. */
@@ -244,7 +244,7 @@ export function simulateDoublewell(c:DoublewellConfig,executionMode:DoublewellEx
     }
     const nx=p.position[0]/c.radius,ny=p.position[1]/c.radius,dot=p.velocity[0]*nx+p.velocity[1]*ny;
     p.velocity=[p.velocity[0]-2*dot*nx,p.velocity[1]-2*dot*ny,p.velocity[2]];
-    if(++events>4)throw new Error('Unresolved repeated wall reflection: reduce timestep.');
+    if(++events>4)throw new Error('The timestep cannot resolve repeated wall reflection. Decrease the timestep.');
    }
    if(c.boundary==='closed')p.position[2]=((p.position[2]%c.length)+c.length)%c.length;
   }
@@ -323,24 +323,24 @@ export function simulateDoublewell(c:DoublewellConfig,executionMode:DoublewellEx
    initial:initialSpatialDensity,final:collisionDensityDiagnostics(collisionCells(),weight)},
   assumptions:[
    `Sampled local Coulomb-regime assessment: ${regimeSummary.status}. ${regimeSummary.reasons.join(' ')}`,
-   'Exploratory equal-weight prescribed-field multispecies kinetic model. No self-consistent electrons, potential, magnetic field, source circuit, instability or calibrated apparatus prediction.',
-   c.boundary==='closed'?'Closed column: specular radial wall and periodic axial boundary; no collector purity is defined.':'Open finite initial pulse: uniform disk and finite axial slug at t=0, then absorbing source/wall/end. This is not continuous injection or steady throughput.',
-   ...(c.collisionScattering==='nanbu'?['Nanbu cumulative pair scattering uses s=2 times the TA half-angle variance and a Langevin-parameter exponential angular law. Its first angular moment is exp(−s), and its large-s limit is isotropic. Higher angular moments and nonlinear Landau evolution remain finite-step approximations; timestep convergence is still required.']:[]),
+   'This exploratory kinetic model uses multiple species with equal-weight particles and prescribed fields. It does not include self-consistent electrons, potential, magnetic field, source circuit or instabilities. It does not give calibrated apparatus predictions.',
+   c.boundary==='closed'?'The closed column has a specular radial wall and periodic axial boundary. Collector purity is undefined.':'The initial pulse occupies a uniform disk and finite axial length at t=0. Source, wall and end boundaries then absorb particles. This is not continuous injection or steady throughput.',
+   ...(c.collisionScattering==='nanbu'?['Nanbu cumulative pair scattering uses s=2 times the TA half-angle variance and a Langevin-parameter exponential angular law. Its first angular moment is exp(−s). The large-s limit is isotropic. Higher angular moments and nonlinear Landau evolution use finite-step approximations. Timestep convergence is still necessary.']:[]),
    c.collisionMethod==='axisymmetric'
-    ?'Axisymmetric ring reduction: exact annular r-z volumes; each velocity is transformed into its own cylindrical frame for scattering and local-regime estimates. This requires the present axisymmetric fields and source distribution; azimuthal fluctuations are not represented. Finite radial cells still inject measured (ra-rb)Δpθ torque; radial/axial/particle refinement remains required. No angular-momentum projection is applied.'
+    ?'The axisymmetric ring model uses exact annular r-z volumes. Each velocity uses its own cylindrical frame for scattering and local-regime estimates. These estimates depend on the specified axisymmetric fields and source distribution. The model does not include azimuthal fluctuations. Finite radial cells still add measured (ra-rb)Δpθ torque, so radial, axial and particle refinement are necessary. The model applies no angular-momentum projection.'
     :c.collisionMethod==='adaptive'
-    ?'Experimental adaptive geometric bisection: exact cylinder-cut leaf volumes and unchanged mixed-pair generator. Position-selected leaves can bias density. Target occupancy and spatial depth must converge jointly; the baseline fixed grid is retained for comparison. No continuum convergence is claimed.'
-    :'Density is inferred from active equal-weight representatives and exact cylinder-cut Cartesian cell volumes. Finite cell occupancy and spatially separated collision partners bias relaxation and inject measured numerical torque. Refine cells together with particle count.',
+    ?'Experimental adaptive geometric bisection uses exact cylinder-cut leaf volumes and the same mixed-pair generator. Leaves selected by position can bias density. Target occupancy and spatial depth must converge together. The fixed grid stays available for comparison. These results do not show continuum convergence.'
+    :'Active equal-weight representatives and exact cylinder-cut Cartesian cell volumes give density. Finite cell occupancy and spatial separation between collision partners bias relaxation and add measured numerical torque. Cell and particle-count refinement must occur together.',
    ...(c.collisionMethod==='axisymmetric'?[c.collisionSourceAligned&&c.initialState==='pulse'
-    ?'Fixed source-fitted mesh: faces are inserted at the declared initial source radius and pulse end. Full physical annular volumes remain in the rate. This removes initial sharp-support averaging, not finite-count noise or later evolving-profile smoothing; no particle-dependent support estimate or density renormalization is used.'
-    :'Uniform annular mesh: a sharp pulse partly filling a ring cell remains diluted over the full physical cell. Source fitting is a separate explicit numerical setting.']:[]),
+    ?'The fixed source-fitted mesh has faces at the declared initial source radius and pulse end. The rate uses full physical annular volumes. This removes initial averaging across the sharp source boundary. Finite-count noise and later profile smoothing stay present. The model uses no particle-dependent support estimate or density renormalization.'
+    :'In the uniform annular mesh, a sharp pulse that partly fills a ring cell is diluted over the full physical cell. Source fitting is a separate numerical setting.']:[]),
    c.collisionMethod==='axisymmetric'
-    ?`${c.collisionScattering==='nanbu'?'Nanbu cumulative':'Takizuka–Abe'} rotations preserve pair energy and momentum in the common cylindrical frame, including axial momentum. Cartesian transverse point-pair momentum is not an invariant of this ring representation. Finite radial separation prevents exact physical angular conservation. Time/seed convergence and finite-step angular-variance diagnostics remain required.`
-    :`${c.collisionScattering==='nanbu'?'Nanbu cumulative':'Takizuka–Abe small-angle'} pair rotations preserve pair energy and linear momentum. Finite timestep approximates Landau scattering; large angular variances are reported without a relative-speed floor. Time/seed convergence is required.`,
-   'Absolute pair-torque sums reveal cancellation but can grow under time refinement for stochastic impulses. The torque quadratic-variation scale is a diagnostic, not a confidence bound; raw signed Pθ drift remains the measured conservation error.',
-   'Sampling errors are correlated by collisions. Outlet fractions are descriptive counts; independent seed ensembles are required for uncertainty, not independent-ion Wilson purity bands.',
-   'Initial screening uses a conservative species-peak/charge-density bound and declared temperatures. Sampled local checks remove each species mean drift and require four representatives per present species. Sparse cells are unresolved; violations flag the run rather than modifying trajectories. This is not proof between sampled times. Electron temperature and supplied Coulomb logarithm remain prescribed.',
-   'Survivor flow/temperature/radius are conditional on remaining particles; a fitted rigid-rotation subtraction is a diagnostic, not a local thermodynamic temperature. Empty survivor populations are undefined.',
-   'Species-specific zero-canonical mean rotation is only an initial flow; thermal velocity gives a distribution of Pθ. Interspecies collisions exchange angular momentum; no thermostat forces species toward their separate effective-well Boltzmann profiles.',
+    ?`${c.collisionScattering==='nanbu'?'Nanbu cumulative':'Takizuka–Abe'} rotations preserve pair energy and momentum in the common cylindrical frame, including axial momentum. Cartesian transverse point-pair momentum is not an invariant of this ring model. Finite radial separation prevents exact physical angular-momentum conservation. Time and seed convergence and finite-step angular-variance diagnostics are still necessary.`
+    :`${c.collisionScattering==='nanbu'?'Nanbu cumulative':'Takizuka–Abe small-angle'} pair rotations preserve pair energy and linear momentum. The finite timestep approximates Landau scattering. The model reports large angular variances without a relative-speed floor. Time and seed convergence are necessary.`,
+   'Absolute pair-torque sums show cancellation but can increase during time refinement for stochastic impulses. The torque quadratic-variation scale is a diagnostic, not a confidence bound. Raw signed Pθ drift is still the measured conservation error.',
+   'Collisions correlate sampling errors. Outlet fractions are descriptive counts. Uncertainty estimates must use independently seeded ensembles, not independent-ion Wilson purity bands.',
+   'Initial screening uses a conservative species-peak/charge-density bound and declared temperatures. Sampled local checks subtract each species mean drift and use at least four representatives per present species. Sparse cells are unresolved. Domain violations identify the run without changes to trajectories. These checks give no proof between sample times. Electron temperature and the Coulomb logarithm are prescribed inputs.',
+   'Survivor flow, temperature and radius apply only to the particles that stay in the domain. Fitted rigid-rotation subtraction is a diagnostic, not a local thermodynamic temperature. Empty survivor populations have undefined properties.',
+   'Species-specific zero-canonical mean rotation gives only the initial flow. Thermal velocity gives a distribution of Pθ. Interspecies collisions exchange angular momentum. No thermostat drives species toward their separate effective-well Boltzmann profiles.',
   ]};
 }

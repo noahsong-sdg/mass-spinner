@@ -5,12 +5,12 @@ import {renderPlots} from './laboratory.js';
 export function mountArgonReference(host: HTMLElement,{fetcher=fetch}: {fetcher?: typeof fetch}={}){
  const doc=host.ownerDocument,el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  const detail=el('details');detail.className='argon-reference';detail.append(el('summary','Spatial argon reference'));
- const status=el('p','Recorded scikit-fem solution · not experimentally qualified. Open to load.');status.setAttribute('role','status');
+ const status=el('p','Saved scikit-fem solution. Experimental accuracy is not established. Open this section to load it.');status.setAttribute('role','status');
  const label=el('label','Recorded condition'),select=el('select');select.id='argon-reference-case';label.htmlFor=select.id;select.disabled=true;
  const retry=el('button','Retry reference');retry.type='button';retry.hidden=true;
  const plot=el('div');plot.className='live-plots';
- const scope=el('p','100 A per branch · 0.13 T · 6 cm radius · 48 cm length. Steady, angular-only argon flow; no evolving density, heat or meridional flow. Ideal ring contacts and prescribed transport are assumptions. Contact potential and Joule heating are singular in this ideal-contact model; these records cannot supply a thermal or electron-energy closure.');
- const diagnostic=el('p','Uniform-emissivity Doppler centroids at 11 saved sightlines—not local gas speeds or the experiment’s unresolved spectral estimator. Lines only join recorded samples. Lithium sliders do not change these records.');
+ const scope=el('p','100 A per branch · 0.13 T · 6 cm radius · 48 cm length. The argon flow is steady and only azimuthal. Density, heat and meridional flow do not evolve. The model uses ideal ring contacts and specified transport coefficients. Contact potential and Joule heating are singular at these ideal contacts. These records cannot give a thermal or electron-energy solution.');
+ const diagnostic=el('p','The 11 saved sightlines give Doppler centroids with uniform emissivity, or equal light emission per volume. These are not local gas speeds. The experimental spectral estimator is unknown. Lines join saved samples. Lithium sliders do not change these records.');
  const evidence=el('details');evidence.append(el('summary','Reference identity'));
  const link=el('a','Numerical protocol ↗');link.href='https://github.com/noahsong-sdg/mass-spinner/blob/main/NONRIGID-FLOW-V98.md';link.target='_blank';link.rel='noopener';
  evidence.append(link);detail.append(status,label,select,retry,scope,diagnostic,plot,evidence);host.append(detail);
@@ -33,7 +33,7 @@ export function mountArgonReference(host: HTMLElement,{fetcher=fetch}: {fetcher?
    for(const s of data.scenarios)for(const a of [.07,.08]){
     const option=el('option',`${s.shape} property profile · Te ${s.electronTemperatureEV} eV · anode z ${Math.round(a*100)} cm`);option.value=`${s.name}/${a}`;select.append(option);
    }
-   select.disabled=false;status.textContent='Recorded non-rigid reference · numerical screens passed; experimental accuracy unqualified.';
+   select.disabled=false;status.textContent='Saved non-rigid reference. Numerical checks passed. Experimental accuracy is not established.';
    for(const [name,value]of Object.entries(data.origin)){const p=el('p');p.append(el('span',`${name}: `),el('code',value));evidence.append(p);}
    render();return data;
   }).catch(error=>{

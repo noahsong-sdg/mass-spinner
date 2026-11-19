@@ -37,22 +37,22 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  provenance.className='apparatus-provenance';provenanceTitle.textContent='Concept model';
  provenanceTitle.setAttribute('aria-label','Geometry and material fidelity');dimensionSource.textContent='Dimension source ↗';dimensionSource.target='_blank';dimensionSource.rel='noopener';dimensionSource.hidden=true;provenance.append(provenanceTitle,provenanceText,dimensionSource);
  figure.className='apparatus';frame.className='apparatus-frame';toolbar.className='apparatus-toolbar';
- choices.setAttribute('aria-label','Inspect a component');reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
+ choices.setAttribute('aria-label','Select a component');reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
  readout.className='component-description';readout.setAttribute('aria-live','polite');
  retry.type='button';retry.textContent='Retry 3D';retry.hidden=true;retry.addEventListener('click',()=>{void start();});
  toolbar.append(choices,retry,reset);figure.append(frame,toolbar,readout,provenance);host.replaceChildren(figure);
- const focus=doc.createElement('button');focus.type='button';focus.textContent='⌖';focus.disabled=true;focus.setAttribute('aria-label','Focus selected component');toolbar.append(focus);
+ const focus=doc.createElement('button');focus.type='button';focus.textContent='⌖';focus.disabled=true;focus.setAttribute('aria-label','Focus on the selected component');toolbar.append(focus);
  let records: Component[]=[],asset: ApparatusAsset | null | undefined=null,viewer: ApparatusDisplay | null=null,pending: Promise<ViewerModule> | null=null,visible=false,disposed=false,selected='',acceptedState: unknown=null,statePending=false,surface: {packet: SurfaceState | null | undefined; settings?: SurfaceSettings} | null=null;
  let reactorState:ReactorMotionState|null=null;
  let loadedAsset:ApparatusAsset|null=null,loadingAsset:ApparatusAsset|null=null;
  function describeRepresentation({geometry,status,layer,numerical=false}: Pick<ViewerRepresentation, 'geometry' | 'status'> & Partial<Pick<ViewerRepresentation, 'layer' | 'numerical'>>){
   if(disposed||!asset)return;
-  if(geometry==='none'){provenanceText.textContent=status==='loading'?'Loading 3D geometry.':'3D unavailable; no geometry is displayed.';return;}
+  if(geometry==='none'){provenanceText.textContent=status==='loading'?'Loading 3D geometry.':'3D is not available. No geometry is shown.';return;}
   if(geometry==='reference'){
-   provenanceText.textContent=(status==='pending'?'Updating; numerical surfaces withheld. ':'')+asset.caption;return;
+   provenanceText.textContent=(status==='pending'?'Calculation in progress. Numerical surfaces are hidden. ':'')+asset.caption;return;
   }
-  const content=numerical?layer==='tracks'?'accepted trajectories shown':layer==='impacts'?'accepted impacts shown':'accepted numerical fields shown':'hardware only; numerical layers hidden';
-  provenanceText.textContent=`SI geometry from simulator inputs; ${content}. Dimensions, construction and material choices are assumptions, not measured Marathon hardware.`;
+  const content=numerical?layer==='tracks'?'Completed ion paths are shown':layer==='impacts'?'Completed impact results are shown':'Completed numerical fields are shown':'Only hardware is shown. Numerical layers are hidden';
+  provenanceText.textContent=`Dimensions follow the simulation inputs in SI units. ${content}. Construction and materials are for illustration. Marathon hardware dimensions are not verified here.`;
  }
  function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.updateReactorState?.(reactorState);current.setPending?.(statePending);current.setActive?.(visible);if(selected)current.select(selected);}
  function select(id: string,notify=true,part: SelectionPart | null=null,name=''){
@@ -101,7 +101,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   provenanceTitle.textContent=asset.geometryLabel??'Concept model';dimensionSource.hidden=!asset.dimensionSource;dimensionSource.href=asset.dimensionSource??'';
   provenance.open=false;describeRepresentation({geometry:'reference',status:'reference'});
   records=components??modelComponents(mode);selected='';focus.disabled=true;choices.replaceChildren();readout.replaceChildren();
-  const prompt=doc.createElement('option');prompt.value='';prompt.textContent='Inspect…';prompt.disabled=true;choices.append(prompt);
+  const prompt=doc.createElement('option');prompt.value='';prompt.textContent='Select a component…';prompt.disabled=true;choices.append(prompt);
   for(const c of records){const option=doc.createElement('option');option.value=c.id;option.textContent=c.name;choices.append(option);}choices.value='';
   if(visible)void start();
  }

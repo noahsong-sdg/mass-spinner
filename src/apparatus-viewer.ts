@@ -89,7 +89,7 @@ export function createApparatusViewer<Model>(frame:HTMLElement,options:Apparatus
 export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError=()=>{},onRepresentation=()=>{},onCamera=()=>{},onResize=()=>{},onHover=()=>{},pickFilter=()=>true,onDrag=()=>false,displayFactory:makeDisplay=displayFactory,
  controlsFactory=(camera,canvas)=>new OrbitControls(camera,canvas),loader=new GLTFLoader()}:ApparatusViewerOptions<unknown>={}):ApparatusViewer<unknown>{
  const doc=frame.ownerDocument,canvas=doc.createElement('canvas'),status=doc.createElement('p');
- canvas.tabIndex=0;canvas.setAttribute('aria-label','3D apparatus. Drag to rotate, scroll to zoom. Arrow keys rotate; plus and minus zoom.');
+ canvas.tabIndex=0;canvas.setAttribute('aria-label','3D apparatus. Drag to turn the view. Scroll to zoom. Use the arrow keys to turn, or plus and minus to zoom.');
  status.setAttribute('role','status');status.className='apparatus-status';frame.replaceChildren(canvas,status);
  const scaleNote=doc.createElement('output');scaleNote.className='apparatus-scale-note';scaleNote.hidden=true;frame.append(scaleNote);
  const display=makeDisplay(canvas),renderer=display.renderer,scene=new THREE.Scene();

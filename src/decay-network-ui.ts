@@ -5,7 +5,7 @@ const make=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string):HTMLEleme
 export function setupDecayNetwork(host:HTMLElement){
  const panel=make('details'),controls=make('div'),plot=make('div'),status=make('p');
  panel.className='fusion-model-notes';controls.className='instrument-controls';plot.className='live-plots';status.setAttribute('role','status');
- panel.append(make('summary','Irradiation & cooldown'),make('p','Generic parent → daughter → stable chain. Rates are scenario inputs, not isotope data or production yield.'),controls,plot,status);host.append(panel);
+ panel.append(make('summary','Irradiation & cooldown'),make('p','This generic decay chain has a parent, a daughter and a stable product. You specify rates; the calculation does not use isotope-specific data.'),controls,plot,status);host.append(panel);
  const read=new Map<string,()=>number>();let latest:{network:Parameters<typeof evolveDecayNetwork>[0];beamDurationS:number;cooldownS:number;times:number[];rows:ReturnType<typeof evolveDecayNetwork>[]} | null=null;
  function calculate(){
   latest=null;renderPlots(plot,[]);

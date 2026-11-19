@@ -2,7 +2,7 @@
 export function floatingPlayback(panel:HTMLElement){
  const doc=panel.ownerDocument,win=doc.defaultView!,parent=panel.parentElement!;
  const grip=doc.createElement('button');grip.type='button';grip.className='fuel-motion-grip';grip.textContent='⠿';
- grip.setAttribute('aria-label','Move playback panel');grip.title='Drag to move · arrow keys move · Home or double-click resets';panel.prepend(grip);
+ grip.setAttribute('aria-label','Move playback panel');grip.title='Drag the panel or use the arrow keys. To reset its position, press Home or double-click.';panel.prepend(grip);
  const key='mass-spinner-playback-v1';
  type Position={x:number;y:number};
  type Drag={id:number;x:number;y:number;left:number;top:number};

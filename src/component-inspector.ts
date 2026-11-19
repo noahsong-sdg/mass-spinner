@@ -63,7 +63,7 @@ export function setupComponentInspectors({THREE,canvas,getHardware,getCamera,can
   if(notify)onInspect?.(id);
  });
  const regions=new Map<string, SVGRectElement>(),svg=doc.querySelector<SVGSVGElement>('.beam-schematic')!;
- svg.setAttribute('role','group');svg.setAttribute('aria-label','Conceptual beamline. Select a component to inspect its function and materials.');
+ svg.setAttribute('role','group');svg.setAttribute('aria-label','Beamline illustration. Select a component to examine its function and materials.');
  for(const [id,x,y,width,height]of [['rf-source',58,65,154,125],['accelerator',260,60,172,135],['beam',437,110,217,34],['target',660,60,25,134],['substrate',687,54,65,148],['neutrons',770,60,160,145]] satisfies [string, number, number, number, number][]){
   const region=doc.createElementNS('http://www.w3.org/2000/svg','rect');
   for(const [key,value]of Object.entries({x,y,width,height,rx:4,fill:'transparent',class:'component-hotspot',tabindex:0,role:'button','aria-label':fusionComponents.find(c=>c.id===id)!.name,'aria-pressed':'false'}))region.setAttribute(key,String(value));

@@ -21,7 +21,7 @@ export function collectorAcceptance(species:Inventory[],mask:CollectorMask){
   for(const destination of ['end','wall','source'] as const)if(s.impacts.filter(hit=>hit.destination===destination).length!==s[destination])throw new Error('Impact destinations disagree with inventory.');
   let accepted=0;
   for(const hit of s.impacts){
-   if(!hit.position||hit.position.length!==3||!hit.position.every(Number.isFinite))throw new Error('Complete impact positions are required; binned or sampled paths cannot define acceptance.');
+   if(!hit.position||hit.position.length!==3||!hit.position.every(Number.isFinite))throw new Error('Complete impact positions are necessary. Binned or sampled paths cannot define acceptance.');
    const r=Math.hypot(hit.position[0],hit.position[1]);
    if(hit.destination===mask.destination&&mask.outerRadiusM>mask.innerRadiusM&&inBounds(r,mask.innerRadiusM,mask.outerRadiusM)&&inBounds(hit.position[2],minZ,maxZ))accepted++;
   }
