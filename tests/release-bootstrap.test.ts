@@ -13,6 +13,7 @@ async function fixture(){
  for(const [directory,label]of [[base,'current'],[old,'older']] as const){
   await mkdir(join(directory,'assets'),{recursive:true});
   await writeFile(join(directory,'index.html'),label);await writeFile(join(directory,'data.json'),label);
+  await writeFile(join(directory,'_redirects'),'/old /index.html 301\n');await writeFile(join(directory,'_headers'),'/*\n  X-Test: qualified\n');
   await writeFile(join(directory,`assets/lazy-${label}12345678.js`),`export const label='${label}';`);
   await sealRelease(directory,(label==='current'?'a':'b').repeat(40));
  }
@@ -23,7 +24,13 @@ async function fixture(){
 
 test('explicit bootstrap admits all pinned prepared generations against the qualified base',async t=>{
  const f=await fixture();t.after(()=>rm(f.root,{recursive:true,force:true}));
- const restored=await bootstrapRelease(f.base,f.destination,hash(f.bytes),f.download);
+ const requested:string[]=[];
+ const restored=await bootstrapRelease(f.base,f.destination,hash(f.bytes),async name=>{
+  requested.push(name);if(name==='_redirects'||name==='_headers')throw new Error('HTTP 404: deployment control');return f.download(name);
+ });
+ assert.ok(!requested.includes('_redirects')&&!requested.includes('_headers'));
+ assert.equal(await readFile(join(f.destination,'_redirects'),'utf8'),await readFile(join(f.base,'_redirects'),'utf8'));
+ assert.equal(await readFile(join(f.destination,'_headers'),'utf8'),await readFile(join(f.base,'_headers'),'utf8'));
  assert.deepEqual(restored,await verifyRelease(f.prepared));
  assert.equal(await readFile(join(f.destination,'index.html'),'utf8'),'current');
  assert.match(await readFile(join(f.destination,'assets/lazy-older12345678.js'),'utf8'),/older/);
@@ -36,6 +43,8 @@ test('bootstrap rejects stale identities, changed/missing base files, unqualifie
   ['lock',m=>{m.lockSHA256='c'.repeat(64);},/identity differs/],
   ['node',m=>{m.node='another runtime';},/identity differs/],
   ['base changed',m=>{m.files['index.html']='c'.repeat(64);},/base digest differs/],
+  ['control changed',m=>{m.files['_redirects']='c'.repeat(64);},/base digest differs/],
+  ['control missing',m=>{delete m.files['_headers'];},/base digest differs/],
   ['base missing',m=>{delete m.files['data.json'];},/base digest differs/],
   ['old HTML',m=>{m.files['old.html']='c'.repeat(64);},/unqualified entrypoint or data/],
   ['old data',m=>{m.files['stale.json']='c'.repeat(64);},/unqualified entrypoint or data/],

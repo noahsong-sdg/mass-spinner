@@ -47,6 +47,8 @@ export async function verifyRelease(directory:string):Promise<ReleaseManifest>{
  return value;
 }
 
+// Workers consumes these root files as deployment configuration, never as assets.
+export const isDeploymentControlFile=(name:string)=>name==='_redirects'||name==='_headers';
 export const isRetainableAsset=(name:string)=>/^assets\/(?:[^/]+\/)*[^/]+-[A-Za-z0-9_-]{8,}\.(?:js|css|wasm)$/.test(name);
 
 /** Retain only content-hashed Vite chunks; never carry old HTML or unhashed data. */

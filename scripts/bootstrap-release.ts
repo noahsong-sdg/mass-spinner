@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
-import {mkdir,writeFile,rm} from 'node:fs/promises';
+import {mkdir,writeFile,readFile,rm} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
-import {isRetainableAsset,readReleaseManifest,verifyRelease} from './release-manifest.ts';
+import {isDeploymentControlFile,isRetainableAsset,readReleaseManifest,verifyRelease} from './release-manifest.ts';
 import {downloadReleaseFile} from './release-download.ts';
 
 const digest=(bytes:Uint8Array)=>createHash('sha256').update(bytes).digest('hex');
@@ -24,7 +24,7 @@ export async function bootstrapRelease(verifiedDirectory:string,directory:string
   const names=Object.keys(prepared.files);let next=0;
   const workers=await Promise.allSettled(Array.from({length:4},async()=>{
    while(next<names.length){
-    const name=names[next++]!,content=await download(name);
+    const name=names[next++]!,content=isDeploymentControlFile(name)?await readFile(resolve(verifiedDirectory,name)):await download(name);
     if(digest(content)!==prepared.files[name])throw new Error(`Bootstrap asset digest mismatch: ${name}`);
     await mkdir(dirname(resolve(root,name)),{recursive:true});await writeFile(resolve(root,name),content);
    }
