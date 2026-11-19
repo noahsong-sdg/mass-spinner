@@ -4,7 +4,7 @@
 
 ## What are the three different jobs?
 
-Lithium enrichment, tritium breeding and exhaust recovery act on different material streams. Understanding their connection does not require pretending they are one machine.
+Separation supports fusion through three distinct material streams:
 
 - Enrichment: sort lithium-6 from lithium-7. The centrifuge redistributes existing isotopes; it creates no tritium.
 - Breeding: neutrons interact with lithium in a blanket, potentially producing tritium. A simplified lithium-6 channel is ⁶Li + n → ⁴He + T. Actual breeding depends on transport, materials and losses.
@@ -14,14 +14,14 @@ The Reactor tab's compact beam–target neutron source is also a separate model.
 
 ## Why keep fuel outside the plasma?
 
-At a specified fusion power, the reaction rate sets how fast tritium burns. If a smaller fraction burns per pass, more must circulate. If processing takes longer, more fuel waits in that loop.
+At fixed fusion power, lower burn fraction requires more circulating fuel. Longer processing ties up more of that fuel:
 
 ```math
 \dot N_T=\frac{P_f}{E_{DT}},\qquad
 M_{\mathrm{exhaust}}=m_T\dot N_T\left(\frac{1}{f_b}-1\right)\tau_p.
 ```
 
-P_f is fusion thermal power in watts; E_DT = 17.6 MeV is energy per D–T reaction, converted to joules in the calculation. One tritium atom is burned per reaction. Its mass is m_T; f_b is single-pass burn fraction, and τ_p is exhaust processing time in seconds. The result M is kilograms of unburned tritium held in processing.
+P_f is fusion thermal power (W); E_DT = 17.6 MeV per reaction, converted to joules. Each reaction burns one tritium atom of mass m_T. Burn fraction f_b and processing time τ_p (s) give unburned inventory M (kg).
 
 [open the fuel inventory experiment](/?level=2&try=inventoryExperiment). Read the baseline unburned exhaust inventory.
 
@@ -33,8 +33,6 @@ Then [open fuel inventory controls](/?level=2&try=inventoryControls):
 
 ## What would establish a workable fuel cycle?
 
-This steady reference explains processing holdup, not total plant inventory. It omits startup reserve, storage, decay, leakage, breeding dynamics and real equipment residence-time distributions. A zero processing time giving zero loop holdup does not mean zero tritium is needed by a plant.
-
-would excellent lithium purity alone establish tritium self-sufficiency? No: breeding, extraction, recycling, losses and inventory must also close.
+This is steady processing holdup, not total plant inventory. Startup reserve, storage, decay, leakage, breeding dynamics and equipment residence-time distributions are omitted. Zero loop holdup does not mean a plant needs no tritium. Lithium purity alone cannot establish fuel self-sufficiency.
 
 [Fuel accounting implementation](../src/fuel-centrifuge.ts) · [Inventory experiment](/learn-collection.html#fuel) · [Next: 06 · which prediction to trust](UNDERSTANDING-MASS-SPINNER-06.md)

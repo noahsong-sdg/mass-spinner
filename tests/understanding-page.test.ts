@@ -199,12 +199,12 @@ test('the model-building order and old deep links survive the guide rewrite',t=>
  }
 });
 
-test('the reading plan links every implemented investigation and motivates its place',t=>{
+test('the reading plan uses the documentation index instead of duplicating its experiment directory',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
- const rows=doc.querySelector('#path ~ table')!.querySelectorAll('tbody tr');
- assert.equal(rows.length,6);
- assert.deepEqual([...rows].map(row=>row.querySelector('a')!.getAttribute('href')),['/learn-controls.html','/learn-transport.html','/learn-thermal.html','/learn-beam.html','/learn-collection.html','/learn-evidence.html']);
- for(const row of rows)assert.ok(row.querySelectorAll('td')[1].textContent!.trim(),'each link explains why the investigation matters');
+ const path=doc.getElementById('path')!;
+ assert.equal(path.nextElementSibling?.tagName,'P');
+ assert.equal(doc.querySelector('#path ~ table'),null,'the experiment directory belongs only in Docs & tutorials');
+ for(const href of ['/learn.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
 });
 
 

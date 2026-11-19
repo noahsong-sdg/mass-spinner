@@ -5,9 +5,9 @@ then [Part 2: from rotation to a prediction](UNDERSTANDING-MASS-SPINNER-02.md).
 
 ## What rotates?
 
-The gas rotates inside stationary electrodes. An ion is a charged atom or molecule; a neutral has
-no net charge. A partially ionized gas contains both, plus electrons.
-Isotopes share an element but differ in mass: our example is lithium-6 and lithium-7.
+Gas rotates inside stationary electrodes. Ions carry charge; neutrals do not.
+The gas also contains electrons. Lithium-6 and lithium-7 are isotopes: the same
+element with different masses.
 
 Current crosses the gas radially; a magnetic field points along the chamber.
 Their interaction produces sideways force, **J × B**, turning charged gas.
@@ -20,19 +20,15 @@ Electrical drive → ion rotation → neutral rotation
 ```
 
 Both isotopes can become denser toward the wall, the heavier one more strongly.
-The inner gas becomes relatively light-rich. This redistributes atoms; it
-neither changes isotopes nor computes a fusion reaction.
+The center becomes relatively light-rich. No isotopes change and no fusion occurs.
 
 ## Why simulate more than rotation?
 
-- Torque adds angular momentum; wall drag removes it.
-  Ions and neutrals need not initially turn together.
-- Ideal equilibrium sorting strengthens
-  with speed squared and weakens with temperature. Heating can erode faster
-  rotation’s benefit. Fixed temperature assumes external thermal control.
-- Equilibrium may not be reached. A small light-rich
-  sample can have high purity but retain little of the available light isotope.
-  Inventory cuts are not extraction rates.
+- Drive adds angular momentum; wall drag removes it. Ions and neutrals can differ in speed.
+- Ideal sorting strengthens with speed squared and weakens with temperature.
+  Heating can offset faster rotation; fixed temperature assumes thermal control.
+- Separation takes time. A small light-rich cut can retain little light inventory;
+  cutting inventory does not predict extraction rate.
 
 [Part 2](UNDERSTANDING-MASS-SPINNER-02.md) derives these relationships and
 connects each to a control and plot.
@@ -52,14 +48,14 @@ Equilibrium overlays and evolving distributions answer different questions.
 
 ## What deserves trust?
 
-A **closure** prescribes unresolved physics, such as collision rate or
-conductivity. Moving a slider recalculates that model; it does not make its
-assumptions self-consistent. Electron, gas and wall temperatures are distinct.
+A closure prescribes unresolved physics, such as collision rate or conductivity.
+Sliders recalculate those assumptions rather than resolve them. Electron, gas
+and wall temperatures remain distinct.
 
-**Verification** tests equations and conservation; **convergence** tests smaller
-cells/timesteps; **validation** tests matched measurements. Numerical success
-alone is not experimental accuracy. The [argon assessment](LIVE-MODEL-QUALIFICATION.md)
-rejects the live rigid-rotation family under its stated optical interpretation.
+Verification checks implementation; convergence checks refinement; validation
+checks matched measurements. The [argon assessment](LIVE-MODEL-QUALIFICATION.md)
+rejects live rigid rotation under its stated optical interpretation. Numerical
+success does not establish experimental accuracy.
 
 Use the playground to learn conditional cause and effect. Accurate hardware
 rotation, enrichment and throughput need separate evidence.

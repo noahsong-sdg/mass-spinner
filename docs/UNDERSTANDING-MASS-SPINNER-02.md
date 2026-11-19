@@ -2,27 +2,18 @@
 
 ## What are we trying to predict?
 
-Can rotation make a sample near the cylinder’s axis richer in lithium-6 than
-the starting mixture? We move light ⁶Li and heavy ⁷Li atoms; we do not change
-one isotope into another. We want both enrichment and useful inventory.
+Can the gas near the axis become richer in lithium-6 while retaining enough
+material? For example, taking 10 light atoms and 90 heavy ones from a mixture
+of 76 light and 924 heavy atoms raises purity from 7.6% to 10%, but recovers
+only 10/76 of the light atoms. Separation rearranges isotopes; it creates none.
 
-Imagine 76 light and 924 heavy atoms: 7.6% light. A sample with 10 light and
-90 heavy atoms is 10% light, but recovers only 10/76 of the light atoms.
-These invented counts distinguish purity from recovery.
+Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/)
+motivates this model. The centrifuge is not the fusion reactor or a reconstruction
+of proprietary hardware. Follow drive → rotation → heating → separation → collection.
 
-Marathon’s [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/)
-motivates this question: lithium in fusion blankets helps produce tritium fuel.
-The centrifuge processes material; it is not the fusion reactor. This playground
-is not a reconstruction of Marathon’s proprietary apparatus.
-
-Follow one chain: rotation sorts masses → electrical drive creates rotation
-→ losses and heating limit it → time and collection determine the sample.
-Use Coupled separation. Each experiment below opens the plot it needs;
-you do not need to learn every menu first. [Every menu option is explained below](#views);
-[the reading plan](#path) lists later topics.
-The [first guide](UNDERSTANDING-MASS-SPINNER.md) introduces ions and neutrals;
+Use Coupled separation. [Every menu option is explained below](#views).
 [Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
-lets you try the controls alongside this explanation.
+introduces the controls; the [first guide](UNDERSTANDING-MASS-SPINNER.md) defines ions and neutrals.
 
 ### First, change one real control
 
@@ -32,21 +23,19 @@ lets you try the controls alongside this explanation.
 3. Repeat with 0.03 A, leaving other inputs unchanged. Ions now accelerate;
    collisions make neutrals follow. Compare at the same physical time.
 
-The preparation clears earlier current steps and restarts from rest. An ordinary
-current edit after time zero, even while paused, changes the drive of already moving gas.
-Click a control’s number to enter an exact value. With thermal evolution off,
-this experiment changes speed, not temperature. [§4 explains why](#momentum).
+Preparation clears power switches and starts from rest. A later current edit,
+even while paused, changes the drive history. With thermal evolution off,
+temperature stays fixed. [§4 explains the motion](#momentum).
 
 ## 1. Why does rotation separate masses?
 
-First ask where atoms would settle if rotation were already available.
-Like gravity making air denser at lower heights, rotation favors one region:
-the wall. Thermal motion opposes that sorting. Heavier atoms develop a steeper
-equilibrium density gradient, so the inner gas becomes relatively light-rich.
+Like gravity making air denser at lower heights, rotation favors the wall.
+Thermal motion opposes sorting. Heavier atoms develop a steeper equilibrium
+density gradient, leaving the inner gas relatively light-rich.
 
-Start with ideal neutral gas at uniform temperature and rigid rotation:
-every radius has angular speed Ω, measured in radians per second. Farther from
-the axis, atoms travel farther each turn, so tangential speed is
+Assume ideal neutral gas at uniform temperature and rigid rotation: every
+radius has angular speed Ω (radians per second). Tangential speed increases
+with radius:
 
 ```math
 v_\theta(r)=\Omega r.
@@ -59,33 +48,26 @@ At equilibrium, the density of either species s obeys
 =\exp\!\left(\frac{m_s\Omega^2r^2}{2k_BT}\right).
 ```
 
-Here r is radius, n atoms per volume, m mass per atom, T temperature in kelvin,
-and k_B Boltzmann’s constant. exp means e raised to the bracketed number.
-Each species’ fixed inventory sets its normalization.
-
-Both densities rise outward; separation means their ratio changes. Local
-composition asks what fraction of atoms here are light:
+Here r is radius, n atoms per volume, m mass per atom, T kelvin and k_B
+Boltzmann's constant. Each species' inventory fixes its normalization.
+Both densities rise outward, but their ratio changes. Local light fraction is
 
 ```math
 x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
 ```
 
-A radial composition profile plots this fraction against distance from the axis.
-The center can be light-rich yet contain fewer light atoms per volume than the wall.
-
-in the example above, compare No spin, Spinning and Warmer.
-“6×” means six times that species’ axis density, not 6% of the mixture.
-Then [show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
-Read “In 1,000 atoms here…” and click the profile near the axis, then near the wall.
-Compare with the feed, not 50%. The light-percentage axis is
-zoomed; the heavy percentage is the remainder. Species density instead uses
-1× = that species’ volume mean. The example assumes equilibrium; your run may not.
+The center can have a higher light percentage yet fewer light atoms per volume.
+In the diagram, compare No spin, Spinning and Warmer: “6×” is a density ratio,
+not a percentage. Then [show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition)
+and probe axis and wall. Compare with feed, not 50%. The composition axis is
+zoomed; heavy fraction is the remainder. Species density uses 1× = its volume
+mean. The diagram's equilibrium need not match your finite-time run.
 
 <details>
 <summary>Where does the exponential come from?</summary>
 
-Circular motion needs inward acceleration. Outward-increasing pressure supplies
-the inward pressure force. For steady neutral circular flow,
+Circular motion needs inward acceleration. Outward-rising pressure supplies
+the inward force. For steady neutral circular flow,
 
 ```math
 -\frac{dp}{dr}=-\rho\frac{v_\theta^2}{r},
@@ -93,8 +75,8 @@ the inward pressure force. For steady neutral circular flow,
 \frac{dp}{dr}=\rho\Omega^2r.
 ```
 
-p is pressure and ρ mass per volume. For each ideal neutral species at uniform
-temperature and diffusive equilibrium, substitute its partial pressure:
+With p pressure, ρ mass density and each species at diffusive equilibrium,
+substitute ideal partial pressure:
 
 ```math
 p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
@@ -109,8 +91,7 @@ is not a complete transient momentum equation.
 
 ## 2. How strong is the separation?
 
-A correctly sloping curve could still mean negligible enrichment. To measure
-sorting independently of overall density, compare the heavy/light ratio at
+A slope can represent tiny enrichment. Compare the heavy/light ratio at
 the wall with that at the axis:
 
 ```math
@@ -121,46 +102,41 @@ the wall with that at the axis:
 ```
 
 R is vessel radius; v_wall = ΩR is gas speed, not the speed of the stationary
-vessel. The exponent compares rotational energy associated with the mass
-difference against thermal energy. α = 1 means no ratio contrast; α = 2 means
-the wall’s heavy/light ratio is twice the axis’s, not twice the product purity.
+vessel. The exponent compares rotational energy from the mass difference with
+thermal energy. α = 2 doubles the heavy/light ratio, not product purity.
 
-For Δm ≈ 1 atomic mass unit, 1,000 m/s and 500 K, α ≈ 1.13: a 13% ratio
-contrast, not 13 percentage points of enrichment. These are illustrative inputs.
+For Δm ≈ 1 u, 1,000 m/s and 500 K, α ≈ 1.13: a 13% ratio contrast,
+not 13 percentage points of enrichment.
 
 1. What if the gas turned twice as fast? [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation).
    At fixed temperature, the exponent quadruples: the composition contrast grows.
 2. Now oppose that sorting with more thermal motion. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature).
    At fixed rotation, the exponent halves: the composition contrast shrinks.
 
-These ideal equilibrium overlays do not change your run or predict the power
-needed. This neutral-gas result does not describe every charged-particle filter
-in the plasma separation tutorial.
+These equilibrium overlays leave your run unchanged and predict no required
+power. Charged-particle filters need physics beyond this neutral-gas result.
 
 ## 3. How do we spin a gas without spinning a drum?
 
-An equilibrium speed is an assumption, not a drive mechanism. Electrodes and
-a magnetic field must produce that motion. The electrodes stay still;
-current crosses the gas radially, while the field points along the axis.
-Their interaction pushes charged gas around the cylinder:
+Assuming rotation does not explain how to produce it. Radial current crosses
+an axial magnetic field, pushing charged gas around stationary electrodes:
 
 ```math
 \mathbf{f}=\mathbf{J}\times\mathbf{B}.
 ```
 
 f is force per volume, J current per area and B magnetic field. The force is
-perpendicular to both; reversing current reverses it. Neutrals feel no direct
-Lorentz force: collisions transfer the ions’ rotation to them.
+perpendicular to both; reversing current reverses it. Collisions pass ion
+rotation to neutrals, which feel no direct Lorentz force.
 
-step through Current → Turn ions → Turn gas in the diagram.
-Compare cylinder and end views. Dots represent populations, not microscopic orbits.
-Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) to locate the same field and force arrows in the apparatus.
+Step through Current → Turn ions → Turn gas in the diagram, then
+[show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D apparatus.
+The dots represent populations, not microscopic orbits.
 
 ## 4. What sets the rotation speed?
 
-Force produces acceleration, not an instant speed. We therefore track angular
-momentum L. Moment of inertia ℐ measures how hard a mass distribution is to
-spin; moving mass outward increases it. For one rigidly rotating population,
+Force changes motion over time. Track angular momentum L, with moment of
+inertia ℐ measuring how hard the mass distribution is to turn. For rigid rotation,
 
 ```math
 L=\mathcal{I}\Omega,
@@ -176,11 +152,10 @@ L=\mathcal{I}\Omega,
 \frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
 ```
 
-The collision-rate control sets Γ = ℐᵢνᵢₙ, in kg·m²/s. Ion inertia stays
-prescribed; neutral inertia evolves. Collisions slow leading ions and speed
-neutrals by equal opposite torques, so they cancel in total angular momentum.
+The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is prescribed;
+neutral inertia evolves. Collision torques cancel in total angular momentum.
 Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
-Stronger coupling reduces lag; it need not raise steady neutral speed.
+Stronger coupling reduces lag but need not raise steady neutral speed.
 
 For radial current I through an annulus in uniform axial field B,
 
@@ -188,8 +163,8 @@ For radial current I through an annulus in uniform axial field B,
 \tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
 ```
 
-I is current, distinct from inertia ℐ. Integrating the radial strip torque
-rIB dr between the driven radii gives this lever arm. It assumes that geometry.
+I is current, distinct from inertia ℐ. Integrating rIB dr across the driven
+annulus gives this geometry-dependent lever arm.
 
 Use the powered run from the first experiment.
 
@@ -201,26 +176,19 @@ Use the powered run from the first experiment.
    Total angular momentum follows Drive minus wall impulse. After power is cut,
    wall drag removes it; collisions only transfer it between populations.
 
-At fixed L, moving mass outward increases inertia and slows rotation.
-Constant speed therefore requires steady inertia as well as balanced torques.
-Replay preserves power switches. To repeat from the original powered state,
-return to the first experiment’s Start from rest & edit current.
+At fixed L, outward redistribution increases inertia and slows rotation.
+Replay preserves power switches; return to the first experiment to restart
+from the original powered state.
 
 ## 5. Where does the energy go?
 
-The goal here is isotope enrichment, not heating a fusion plasma. Atoms
-share a rotation around the axis, but also move randomly relative to the gas.
-Faster shared rotation strengthens mass sorting; faster random thermal motion
-weakens the composition difference at the same rotation speed. More current
-can increase both. Our equilibrium reference captures the competition in Ω²/T.
+Shared rotation strengthens sorting; random thermal motion weakens it at the
+same rotation speed. More current can increase both. The equilibrium competition
+is Ω²/T: faster gas need not improve separation if it also gets hotter.
 
-If heating grows too much, faster gas need not separate better. Holding its
-temperature fixed instead requires cooling that removes the net heat input.
-We therefore ask: does extra current improve separation, and what cooling
-does that improvement require?
-
-To answer, first separate the power that turns ions from the power deposited
-as resistive heat:
+Holding temperature fixed requires cooling to remove net heat input. We ask:
+does extra current improve separation, and what cooling does it require?
+First separate mechanical power from resistive heat:
 
 ```math
 P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
@@ -228,57 +196,52 @@ P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
 P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
 ```
 
-Power is energy per second. At fixed geometry and conductivity, doubling current
-doubles torque but quadruples resistive heat. Resistance here excludes the
-motion-induced voltage; total drive power also supplies mechanical work.
+Power is energy per second. At fixed geometry and conductivity, doubling
+current doubles torque but quadruples resistive heating. Electrical resistance
+excludes motion-induced voltage; the drive also supplies mechanical work.
 Collisions dissipate relative rotation:
 
 ```math
 P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 ```
 
-Friction torque times relative speed gives the nonnegative square. Wall drag
-also dissipates rotation. Redistribution changes kinetic energy K = L²/(2ℐ):
-the thermal model deposits signed redistribution work in the gas. Outward
-motion at fixed L releases energy; inward motion can draw heat. This is a
-reduced-model closure, not resolved fluid momentum and energy.
+The square is nonnegative. Wall drag also dissipates rotation. Redistribution
+changes K = L²/(2ℐ); the thermal closure deposits signed redistribution work
+in the gas. Outward motion at fixed L releases energy; inward motion can draw
+heat. This does not resolve fluid momentum and energy.
 
-A temperature rise needs an energy source; keeping temperature steady needs
-heating and cooling to balance. For the closed vessel, the intended continuous
-energy account is
+For the closed vessel, the intended continuous energy account is
 
 ```math
 \frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
 =P_{\mathrm{mechanical}}+P_{\mathrm{Ohmic}}-P_{\mathrm{cooling}}.
 ```
 
-U is thermal energy. Slip and wall friction convert energy internally; their
-heat destinations are assumptions. The finite-step ledger separately subtracts
+U is thermal energy. Slip and wall friction transfer energy internally;
+heat destinations are assumed. The finite-step ledger separately subtracts
 numerical damping, which should shrink with refinement; it is not physical heat.
 
-[show drive work](/?level=2&guide=physics&topic=energy&try=work).
-Curve height is energy in joules; curve slope is power in watts. Ohmic power is a
-separate readout. Work can rise while temperature stays fixed: the default bath
-assumes thermal control. [Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) removes
-that assumption in a controlled comparison; it does not solve separate
-electron/ion temperatures or ionization.
+[Show drive work](/?level=2&guide=physics&topic=energy&try=work): curve height is
+energy in joules; curve slope is power in watts. Ohmic power is separate.
+The default bath holds temperature fixed despite work input.
+[Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) enables thermal evolution;
+it does not solve ionization or separate electron/ion temperatures.
 
 ## 6. Why do we need time and collection, too?
 
-Fast rotation does not guarantee separation: atoms need time to redistribute.
-Diffusion spreads a distance roughly √(Dt), giving the scale
+Rotation takes time to redistribute atoms. Diffusion spreads a distance
+roughly √(Dt), giving the timescale
 
 ```math
 t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
 
-D is diffusivity in m²/s. Boundaries and rotation also matter; this is not an
-exact settling time. [Open diffusivity and separation](/?level=2&try=diffusionExperiment) to see whether your run approaches
-equilibrium. Longer duration permits redistribution without changing the
-fixed-speed, fixed-temperature equilibrium itself.
+D is diffusivity (m²/s); boundaries and rotation also affect settling.
+[Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare
+finite-time redistribution with equilibrium.
 
-Even an enriched region might contain little useful material. Keeping all gas
-inside a radius gives two distinct measures:
+An enriched region can contain little material. Keeping all gas inside a
+radius gives two measures:
 
 ```math
 \mathrm{purity}=\frac{N_{\ell,\mathrm{inside}}}
@@ -287,35 +250,26 @@ inside a radius gives two distinct measures:
 \mathrm{recovery}=\frac{N_{\ell,\mathrm{inside}}}{N_{\ell,\mathrm{whole\ vessel}}}.
 ```
 
-N counts atoms. A smaller inner cut generally raises purity but lowers recovery.
-These are closed-inventory counts, not outlet flow or kilograms per hour.
+N counts atoms. Smaller inner cuts generally raise purity but lower recovery;
+these are inventory fractions, not outlet flow.
 
-[open the collection experiment](/?level=2&try=collectionExperiment).
-Click the curve at a small radius, then a larger one, and read purity and recovery
-below it. Arrow keys also move the probe; Home/End select axis/wall.
-The probe does not move the 3D cut marker;
+[Open the collection experiment](/?level=2&try=collectionExperiment) and probe
+two radii. At the wall, purity equals feed and recovery is one. Empty-cut purity
+and absent-light-species recovery are undefined. The probe does not move the 3D cut marker;
 the Inner collection radius / a setup slider instead starts a new run.
-At the wall, purity equals feed and recovery is one. Empty cuts have undefined
-purity; an absent light species has undefined recovery.
 
 ## Why these pieces, and what is still missing?
 
-Drive supplies torque; torque changes rotation; work can heat gas; rotation
-and temperature set the sorting preference. Transport time and a collection
-cut turn that preference into a sample. Omitting a link can reverse a claim
-such as “more current improves separation.”
+Drive changes rotation; heating opposes sorting; transport and the collection
+cut determine the sample. Omitting a link can reverse “more current helps.”
 
-The browser uses bulk angular speeds, prescribed transport and gas-only inputs,
-not a demonstrated sustainable operating point. It does not solve shear,
-meridional circulation, phase exchange or discharge sustainment. The separate
-research solver does not automatically replace it.
+The browser's bulk speeds and prescribed transport are not a demonstrated
+sustainable operating point. It does not solve shear, meridional circulation,
+phase exchange or discharge sustainment. The research solver is separate.
 
-Verification checks conservation and known limits; convergence checks
-smaller cells and timesteps; validation checks matched measurements without
-refitting. Passing the first two does not establish the third.
-The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html)
-records unresolved argon-profile disagreement, not validation of Marathon’s
-machine or lithium enrichment. Use this model to explore conditional mechanisms.
+Conservation and refinement test the numerical solution; matched measurements
+test the physical model. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html)
+records unresolved argon-profile disagreement, not validated Marathon or lithium performance.
 
 ## What do the menu options mean?
 
@@ -386,27 +340,12 @@ while its selected marker moves. After editing, wait for the accepted result.
 
 ## Where do we go after this guide?
 
-Continue with [03 · thermal limits](UNDERSTANDING-MASS-SPINNER-03.md),
-[04 · useful processes](UNDERSTANDING-MASS-SPINNER-04.md),
-[05 · fusion fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
-[06 · what to trust](UNDERSTANDING-MASS-SPINNER-06.md).
-
-The [investigation path](/learn.html) turns the ideas above into short experiments.
-Choose any question; the order below builds toward an enriched, useful inventory.
-
-| Investigation | Why it comes next |
-|---|---|
-| [Controls and evidence](/learn-controls.html) | Connect a physical change to motion and a plot; distinguish display changes. |
-| [Spin-up and separation](/learn-transport.html) | Turning quickly does not imply that the mixture has redistributed. |
-| [Thermal limits](/learn-thermal.html) | More drive can also mean more heating; follow where energy goes. |
-| [Beam and target](/learn-beam.html) | A separate machine: follow deuteron energy into neutrons and heat. |
-| [Collection and processes](/learn-collection.html) | Trade purity against recovery, then distinguish inventory from throughput. |
-| [Trust and reproducibility](/learn-evidence.html) | Identify what the model calculates, assumes and has evidence for. |
-
-The [first explanation](UNDERSTANDING-MASS-SPINNER.md) introduces ions and
-neutrals. This page supplies the equations; the investigations provide optional
-practice. Detailed plant design, self-consistent ionization and experimentally
-validated device prediction remain outside these tutorials.
+Continue with [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
+[04 · collection](UNDERSTANDING-MASS-SPINNER-04.md),
+[05 · fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
+[06 · accuracy](UNDERSTANDING-MASS-SPINNER-06.md).
+The [documentation index](/learn.html) also links optional experiments using
+the same controls and plots.
 
 ## Equations and further reading
 

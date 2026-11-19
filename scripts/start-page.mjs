@@ -15,7 +15,7 @@ export function startPage(){
  ${step.do.map(text=>`<p>${escape(text)}</p>`).join('')}
  ${i===0?guideDiagram('drive'):''}
  <details data-learning-explanation><summary>Explanation</summary><p>${escape(step.notice)}</p><p>${escape(step.note)}</p></details>
- ${i<playgroundSteps.length-1?`<a class="walkthrough-next" href="#${playgroundSteps[i+1].id}">Next: ${escape(playgroundSteps[i+1].title)} →</a>`:'<a href="/learn.html">Choose your next investigation →</a>'}
+ ${i<playgroundSteps.length-1?`<a class="walkthrough-next" href="#${playgroundSteps[i+1].id}">Next: ${escape(playgroundSteps[i+1].title)} →</a>`:'<a href="/learn.html">Docs & tutorials →</a>'}
  </section>`).join('')}
  </main><footer><a href="/guide.html">Physics & equations →</a> · <a href="/learn.html">Docs & tutorials</a></footer></body></html>`;
 }

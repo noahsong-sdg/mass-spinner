@@ -1,31 +1,19 @@
 # Learning path
 
-The optional `/learn.html` reader follows a single goal: obtain an enriched sample
-while retaining useful light-isotope inventory. Six pages connect real controls
-to plots, mechanism explanations and model limits. The beam-target page is a
-separate energy-and-inventory story, not a claim that fusion occurs in the centrifuge.
+[Docs & tutorials](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/learn.html)
+contains six tutorials: controls, rotation/separation, heat, collection, fuel inventory
+and model accuracy. Equations and diagrams link directly to relevant simulator controls.
 
-Each experiment provides a baseline, prediction, one controlled intervention,
-optional explanatory feedback and a new transfer question. Investigations ask for
-an accepted comparison or recorded/exported settings rather than a decorative score.
-The reader uses the existing same-origin simulator action bridge; it has no solver
-of its own and collects no learner data. The text remains available without JavaScript.
+Experiments are optional comparisons using the same simulator, not extra models.
+Each gives a baseline, one change, readouts and an optional explanation. Beam–target
+physics is separate from the centrifuge. Inspect identifies parts; physical edits
+open their canonical Controls inputs.
 
-Numbered readers 03–06 add concise motivations, rendered equations, diagrams and
-real-control links: thermal limits, collection/processes, fusion fuel inventory,
-and evidence. They are published as `/tutorial-03.html` through `/tutorial-06.html`,
-linked from 02 and the investigation index. Inspect now identifies parts and
-opens their canonical Controls inputs; it has no duplicate physical editors.
+The reader uses the same-origin action bridge, has no solver or learner tracking,
+and remains readable without JavaScript.
 
-Design rationale: [guided discovery](https://doi.org/10.1037/a0021017),
-[productive failure](https://doi.org/10.3102/00346543211019105),
-[linked representations](https://doi.org/10.1016/j.learninstruc.2006.03.001),
-[PhET implicit scaffolding](https://arxiv.org/abs/1306.6544) and
-[retrieval practice](https://doi.org/10.1126/science.1199327).
-These studies motivate the design; they do not validate this project's learning impact.
-
-Next evaluation: observe beginners explaining the difference between a display edit
-and physical input, spin-up and redistribution, local fraction and density, and
-purity and recovery. Use unfamiliar before/after questions and a later transfer task.
-A small usability pilot identifies confusion; a controlled comparison is needed
-to attribute learning gains to a particular design.
+[Guided discovery](https://doi.org/10.1037/a0021017),
+[linked representations](https://doi.org/10.1016/j.learninstruc.2006.03.001) and
+[PhET scaffolding](https://arxiv.org/abs/1306.6544) inform the design; learning impact
+has not been measured. Test whether beginners can distinguish display from physics,
+speed from redistribution, density from composition, and purity from recovery.

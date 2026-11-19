@@ -4,36 +4,24 @@ Started 16 November 2026. Scope frozen before new campaign execution. No author
 requests, parameter fitting, relaxed historical gates or Marathon-device claims.
 The live rigid-rotation model and spatial research references remain distinct.
 
-**Current result: component and angular-reference numerical checks pass; the
-model still misses the published rotation/electrical observations. Its extra
-pressure-shape closure also disagrees. Experimental qualification remains false.**
+Component and angular-reference checks pass, but rotation, electrical and
+conditional pressure predictions disagree with observations. Experimental
+qualification remains false.
 
 ## Work and acceptance criteria
 
-1. **Published observations:** retain existing five-point neutral rotation
-   extraction, and admit additional observations only with apparatus identity,
-   source/crop hashes, raw pixel coordinates and extraction ranges. Unknown
-   experimental uncertainty stays unknown. Different cathodes/conditions stay
-   separate. Previously inspected observations are retrospective evidence.
-2. **Component verification:** run production paths against exact mechanical,
-   equilibrium, electrical and heat controls. Reuse established tolerances and
-   adjacent refinement suites; discrete algebra checks are not continuum tests.
-3. **Independent reference:** compare FEniCSx and the established scikit-fem
-   angular/current reference with identical equations, coefficients, contacts,
-   boundary conditions and sampling. Require conservation and refinement; code
-   agreement does not validate the experiment. Audit the public notebook before
-   reuse and document any necessary corrections.
-4. **Unknown-input sensitivity:** retain all original V82 source alternatives
-   and diagnostic controls. Summarize envelope/conditional trends without
-   selecting the best residual or calling discrete alternatives a probability
-   distribution. Retain the original optical numerical and point-match gates.
-   Pressure comparisons without a justified observation/uncertainty model are
-   diagnostics, not newly invented experimental pass/fail gates.
-5. **Playground:** show explicitly selected coefficient sensitivity through the
-   live backend, with shared clocks, current-setting identity and stale-result
-   invalidation. No invented physical ranges or confidence labels. Existing
-   numerical evidence qualifies only its tested nodes and settings, not the
-   continuous slider domain or experimental fidelity.
+Retain traceable apparatus-matched observations, original tolerances, V82 input
+alternatives and optical gates. Previously inspected data are retrospective;
+unknown uncertainty remains unknown. Pressure diagnostics have no invented
+experimental pass/fail threshold.
+
+Verify production components against exact limits, then compare independent
+FEniCSx/scikit-fem implementations with identical physics and boundaries.
+Require conservation and refinement; agreement between codes is not validation.
+
+Live sensitivity uses accepted inputs, shared clocks and stale-result
+invalidation. Samples establish neither confidence intervals nor accuracy
+between tested settings. Protocols and receipts below retain the full criteria.
 
 ## Interpretation boundaries
 
@@ -45,18 +33,13 @@ transfer recorded argon predictions to the live lithium scenario.
 
 ## Execution and documentation
 
-Scientific calculations, tests and builds run inside resource-limited isolated
-containers, not on the host. Record source hashes, dependency versions, commands,
-outputs, failures and exclusions. This document is the entry point; supporting
-protocols and review receipts retain detail. README remains unchanged.
+Protocols and run receipts below preserve isolated execution, source hashes,
+dependencies, commands, failures and exclusions.
 
 ## Results — 16 November 2026
 
-**Numerical checks passed; experimental qualification remains false.** No new
-parameters were fitted and no historical acceptance gate was relaxed. This is a
-retrospective diagnosis of published argon observations, not a Marathon-device
-validation. The existing spatial V82 fields were authenticated and reanalysed;
-their field-producing PDE solve was not rerun in this campaign.
+This retrospective argon diagnosis reused authenticated V82 fields; it did not
+rerun their PDE solve, fit parameters, relax gates or validate a Marathon device.
 
 | Workstream | Observed result | What it establishes |
 |---|---|---|
@@ -114,12 +97,9 @@ also validate a thermal prediction.
   The workflow `.github/workflows/public-data-qualification.yml` reproduces the
   isolated checks on explicit dispatch; its existence is not a successful CI run.
 
-Application verification: the final integrated candidate passed **1,357 tests**,
-all **11 targeted sensitivity tests**, `npm run typecheck`, `npm run build`,
-`npm run check:site` and `npm run check:assets`. The full suite was rerun after
-the final UI identity/evidence-link additions. See RUN.md for exact receipts.
-Build warns about the existing large main bundle.
-These checks do not establish experimental fidelity.
+The campaign candidate passed 1,357 tests, 11 targeted sensitivity tests,
+typecheck, build, site and asset checks. RUN.md preserves exact receipts and
+the large-bundle warning; these checks do not establish experimental fidelity.
 
 ## What remains
 

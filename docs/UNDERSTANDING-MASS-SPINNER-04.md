@@ -1,10 +1,10 @@
 # Tutorial 4 · Purity and recovery
 
-An enriched region is useful only if it contains enough material. [03](UNDERSTANDING-MASS-SPINNER-03.md) considered the energy cost; now ask what you collect and what a continuing process would require.
+After the [energy cost](UNDERSTANDING-MASS-SPINNER-03.md), ask what you can collect: enrichment is useful only if enough material remains.
 
 ## How much useful material did you keep?
 
-Keeping a small central sample can improve its isotope mix while discarding most of the isotope you wanted. Purity and recovery answer those different questions.
+A small central sample can be light-rich yet retain few light atoms. Track both:
 
 ```math
 x_{\ell,\mathrm{cut}}=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{cut}}+N_{h,\mathrm{cut}}},
@@ -20,7 +20,7 @@ Probing does not move the 3D collection marker. Its setup control, Inner collect
 
 ## Why use more than one stage?
 
-One modest enrichment can be insufficient. A cascade routes one stage's inner and outer streams through neighboring stages to repeat the sorting, with a cost in internal circulation.
+A cascade repeats modest enrichment by routing inner and outer streams between stages. This costs internal circulation.
 
 [open the stages experiment](/?level=2&try=stageExperiment) and record product purity, light recovery and circulation/feed.
 
@@ -30,7 +30,7 @@ This is ideal routing with assumed stage behavior, not a timed plant simulation.
 
 ## What limits the gas entering a process?
 
-A pump and the pipe leading to it can both restrict effective pumping. This separate reference calculates the upstream pressure required for a prescribed rotating gas state:
+The pump and inlet pipe both restrict flow. This separate reference calculates upstream pressure for a prescribed rotating gas state:
 
 ```math
 Q=S p_w,\qquad p_u=p_a+Q/C,\qquad S_{\mathrm{eff}}=Q/p_u.

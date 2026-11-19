@@ -1,6 +1,6 @@
 # Tutorial 6 · Model accuracy
 
-The preceding tutorials added heat, process and fuel constraints. Those calculations help only if we distinguish a correct equation, an adequate numerical solution and an adequate model of a device.
+A plausible curve can still be wrong. Check the equations, their numerical solution and their agreement with measurements separately.
 
 ## What does a passing test establish?
 
@@ -16,7 +16,7 @@ Conserving atoms cannot prove the predicted rotation matches a real experiment. 
 
 ## Could an assumed input reverse the result?
 
-The live model prescribes diffusivity, collision rate and conductivity. A sharply drawn curve can depend strongly on those choices. To learn which assumption matters, change one at a time.
+Diffusivity, collision rate and conductivity are prescribed. Change one at a time to see which assumptions control the answer.
 
 [open diffusivity and separation](/?level=2&try=diffusionExperiment).
 
@@ -24,9 +24,9 @@ The live model prescribes diffusivity, collision rate and conductivity. A sharpl
 2. [Adjust only radial diffusivity](/?level=2&try=diffusion), then choose New run. Return to the same physical time in both cases. Check the accepted-input comparison for unintended changes.
 3. [Show separation over time](/?level=2&try=separationPlot), then compare the speed history too. Diffusivity changes redistribution; redistribution also changes gas inertia, so speed need not be identical. Report the observed sensitivity without calling it a measured uncertainty interval.
 
-For sampled ranges, open Model info → Sensitivity & tested inputs. Choose one coefficient and explicit Lower/Upper bounds around its current value, then Run samples. The shading covers only sampled cases, not a confidence interval or every value in between. It preserves the accepted drive history.
+Model info → Sensitivity & tested inputs samples a coefficient between chosen Lower/Upper bounds, preserving drive history. Its shading covers sampled cases, not a confidence interval or every intermediate value.
 
-Under Model info, Spatial argon reference offers saved mesh refinements for one recorded condition. Overlap is useful numerical evidence for that separate reference, not a resolution control or validation of your live lithium run. The live spatial thermal model's Refined option estimates temporal error; spatial refinement is still needed.
+Spatial argon reference shows saved mesh refinements, not validation or a resolution control for live lithium. The live thermal Refined option estimates timestep error; spatial refinement is still needed.
 
 ## What is a defensible claim here?
 
@@ -34,6 +34,6 @@ Under Model info, Spatial argon reference offers saved mesh refinements for one 
 
 A Doppler instrument measures emission along a sightline, not automatically the local neutral speed. Comparing a local simulated velocity directly to that measurement can test the wrong quantity. The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records remaining disagreement, not successful device validation.
 
-export the accepted run, note the physical time and plot, and name the important closures. Operating maps and saved references answer their labeled conditional questions; they do not replace that run or certify an operating region.
+Export the accepted run with its physical time, plot and prescribed coefficients. Operating maps and saved references do not certify an operating region.
 
 [Qualification implementation](../src/fuel-qualification-ui.ts) · [More evidence experiments](/learn-evidence.html) · [Back to the physics guide](UNDERSTANDING-MASS-SPINNER-02.md)

@@ -10,6 +10,8 @@ test('the documentation index exposes every tutorial and the technical reference
  const dom=new JSDOM(learningPages()['learn.html']);t.after(()=>dom.window.close());
  const doc=dom.window.document;
  assert.equal(doc.querySelector('h1')!.textContent,'Docs & tutorials');
+ assert.match(doc.querySelector('#experiments')!.nextElementSibling!.textContent!,/same simulator/);
+ assert.doesNotMatch(doc.body.textContent!,/investigations/i);
  for(const href of ['/start.html','/guide.html',...numberedTutorials.map(tutorial=>`/tutorial-${tutorial.number}.html`),'/guide.html#views','/how-it-works.html','/equilibrium.html','/qualification.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
 });
 
@@ -30,7 +32,9 @@ test('learning sequence publishes six freely selectable questions and usable sec
 
 test('each experiment keeps its baseline, direct actions and optional physics explanation',()=>{
  for(const module of learningPath)for(const e of module.experiments){
-  assert.ok(e.baseline&&e.predict&&e.steps.length&&e.observe&&e.explain&&e.boundary&&e.transfer[0]&&e.transfer[1]);
+  assert.ok(e.baseline&&e.steps.length&&e.observe&&e.explain&&e.boundary);
+  assert.equal('predict' in e,false,'removed prediction UI must not leave duplicate prompt data');
+  assert.equal('transfer' in e,false,'removed transfer UI must not leave duplicate prompt data');
   assert.ok(e.actions.length>0,`${module.id}/${e.id}: every Try it needs an actionable destination`);
   const dom=new JSDOM(learningPages()[`learn-${module.id}.html`]);const section=dom.window.document.querySelector(`[aria-labelledby="${e.id}"]`)!;
   assert.ok(section.textContent!.includes(e.baseline));assert.equal(section.querySelector('textarea,[data-learning-hint],.learning-transfer,strong'),null);

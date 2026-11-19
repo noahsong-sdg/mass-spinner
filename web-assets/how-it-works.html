@@ -38,21 +38,21 @@
     </section>
     <section id="computation" aria-labelledby="computation-title">
       <h2 id="computation-title">What the computer solves</h2>
-      <p><strong>Live:</strong> inputs → TypeScript worker → history → plots and Three.js. The centrifuge uses radial finite volumes, Scharfetter–Gummel fluxes and backward-Euler steps; ion orbits use Boris integration. Transport, conductivity and coupling remain prescribed. Rendered particles represent populations, not resolved 3D plasma.</p>
-      <p><strong>Offline:</strong> Python / NumPy / SciPy / FiPy solve axisymmetric density, momentum, current, energy and species transport. This research backend is separate; Research replay shows saved collision studies.</p>
+      <p>Inputs pass through a TypeScript worker to plots and Three.js. The centrifuge uses radial finite volumes, Scharfetter–Gummel fluxes and backward-Euler steps; ion orbits use Boris integration. Transport, conductivity and coupling are prescribed. Rendered particles represent populations.</p>
+      <p>A separate Python / NumPy / SciPy / FiPy backend studies axisymmetric density, momentum, current, energy and species transport. Research replay shows saved collision studies.</p>
     </section>
     <section id="accuracy" aria-labelledby="accuracy-title">
       <h2 id="accuracy-title">What deserves trust?</h2>
       <ol>
-        <li><strong>Verification:</strong> conservation, known limits and mesh/timestep refinement check the numerical solution.</li>
-        <li><strong>Validation:</strong> match apparatus, inputs and diagnostics; predict held-out measurements without refitting.</li>
-        <li><strong>Live qualification:</strong> establish limits for the browser engine, then check controls, plots and 3D share its results. This is a project label, not certification.</li>
+        <li>Conservation, known limits and refinement check implementation and numerical error.</li>
+        <li>Experimental validation requires matched apparatus, inputs and diagnostics, with held-out predictions and no refitting.</li>
+        <li>Live qualification records tested browser-model limits and checks that controls, plots and 3D share results. It is a project label, not certification.</li>
       </ol>
       <p>The rigid-rotation family fails the historical argon-profile screen under the stated optical interpretation. Lithium predictions remain pedagogical and experimentally unqualified; passing numerical tests does not change that.</p>
     </section>
     <section id="uses" aria-labelledby="uses-title">
       <h2 id="uses-title">What is it useful for?</h2>
-      <p>Now: learning and reproducible mechanism exploration. After bounded validation: sensitivity studies, experiment planning and operating-point screening. Hardware performance and safety require separate evidence.</p>
+      <p>Use it for learning and reproducible mechanism comparisons. Experiment planning and hardware screening need bounded validation; safety needs separate evidence.</p>
     </section>
     <div class="sources" aria-label="Sources and implementation"><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/LIVE-MODEL-QUALIFICATION.md">Qualification record ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/src/fuel-operation.ts">Live equations ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/scientific/mixture-axial-v75/PROTOCOL.md">Research protocol ↗</a><a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html">Verification vs validation ↗</a><a href="https://www.marathonfusion.com/fusion-energy/">Marathon’s fuel cycle ↗</a><a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon’s neutron source ↗</a></div>
     <footer><span>Mass Spinner · 18 November 2026</span><a href="/">Back to the playground ↗</a></footer>
