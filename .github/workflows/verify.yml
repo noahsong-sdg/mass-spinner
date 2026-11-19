@@ -31,6 +31,7 @@ jobs:
             python3 -m unittest discover -s scientific/electron-applicability -p test_screen.py -v
             python3 -m unittest discover -s tests -p test_argon_reference_export.py -v
             python3 -m unittest discover -s tests -p test_dev_snapshot.py -v
+            python3 -m unittest discover -s tests -p test_deploy_credentials.py -v
             node --import tsx --test --test-concurrency=1 tests/*.test.ts
             npm run build
             cp output/equilibrium-qualification.json release/equilibrium-qualification.json

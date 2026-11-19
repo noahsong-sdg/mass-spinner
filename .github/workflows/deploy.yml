@@ -21,7 +21,19 @@ permissions:
   contents: read
   actions: read
 jobs:
+  credential-guard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare existing pinned test image without credentials
+        run: docker build -t release-guard -f ci/Dockerfile .
+      - name: Exercise actual deployment guards offline
+        run: docker run --rm --network none --memory 256m --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work:ro" -w /work release-guard python3 -B -m unittest discover -s tests -p test_deploy_credentials.py -v
   deploy:
+    needs: credential-guard
     if: github.event_name == 'workflow_dispatch'
     concurrency:
       group: production-deployment
@@ -126,7 +138,8 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          test -n "$CLOUDFLARE_API_TOKEN" && test -n "$CLOUDFLARE_ACCOUNT_ID"
+          test -n "$CLOUDFLARE_API_TOKEN"
+          test -n "$CLOUDFLARE_ACCOUNT_ID"
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e CLOUDFLARE_API_TOKEN -e CLOUDFLARE_ACCOUNT_ID deploy-browser node_modules/.bin/wrangler deploy
       - name: Verify every served artifact byte and stable production controls
         env:
