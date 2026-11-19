@@ -1,5 +1,8 @@
-name: Profile playback manually
+name: Profile playback
 on:
+  # Qualify changes to the study itself on feature branches before registration on main.
+  push:
+    paths: ['.github/workflows/profile-playback.yml']
   workflow_dispatch:
     inputs:
       baseline_revision:
@@ -20,7 +23,7 @@ jobs:
       - name: Admit and fetch immutable baseline sources
         env:
           GH_TOKEN: ${{ github.token }}
-          BASELINE: ${{ inputs.baseline_revision }}
+          BASELINE: ${{ inputs.baseline_revision || '45588450bf35cb9abc4e3472ff6f30bf9b00d459' }}
         run: |
           [[ "$BASELINE" =~ ^[a-f0-9]{40}$ ]]
           gh api "repos/$GITHUB_REPOSITORY/actions/workflows/verify.yml/runs?head_sha=$BASELINE&status=success&per_page=100" > baseline-runs.json
