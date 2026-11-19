@@ -5,36 +5,58 @@ on:
       verify_run_id:
         description: Successful Verify run to deploy (an earlier run performs rollback)
         required: true
-      previous_run_id:
-        description: Currently deployed Verify run whose hashed chunks should remain available
+      previous_deploy_run_id:
+        description: Successful Deploy run currently live, containing prepared-site
+        required: false
+      bootstrap_verify_run_id:
+        description: One-time migration only — Verify run underlying the current manual deployment
+        required: false
+      bootstrap_manifest_sha256:
+        description: One-time migration only — trusted SHA256 of the current prepared manifest
         required: false
 permissions:
   contents: read
   actions: read
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
 jobs:
   deploy:
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
-      - name: Admit successful same-repository verification run
+      - name: Admit candidate and exactly one current-release source
         id: identity
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_ID: ${{ inputs.verify_run_id }}
-          PREVIOUS_ID: ${{ inputs.previous_run_id }}
+          PREVIOUS_ID: ${{ inputs.previous_deploy_run_id }}
+          BOOTSTRAP_ID: ${{ inputs.bootstrap_verify_run_id }}
+          BOOTSTRAP_HASH: ${{ inputs.bootstrap_manifest_sha256 }}
         run: |
-          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
-          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID" > run.json
-          jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Verify" and .conclusion == "success" and .head_repository.full_name == $repo' run.json
-          echo "sha=$(jq -r .head_sha run.json)" >> "$GITHUB_OUTPUT"
+          admit_verify() {
+            [[ "$1" =~ ^[0-9]+$ ]]
+            gh api "repos/$GITHUB_REPOSITORY/actions/runs/$1" > run.json
+            jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Verify" and .path == ".github/workflows/verify.yml" and .conclusion == "success" and .head_repository.full_name == $repo and (.head_sha | test("^[a-f0-9]{40}$"))' run.json
+            local sha lock
+            sha=$(jq -r .head_sha run.json)
+            echo "$2_sha=$sha" >> "$GITHUB_OUTPUT"
+            lock=$(gh api "repos/$GITHUB_REPOSITORY/contents/package-lock.json?ref=$sha" -H 'Accept: application/vnd.github.raw+json' | sha256sum | cut -d ' ' -f 1)
+            echo "$2_lock=$lock" >> "$GITHUB_OUTPUT"
+          }
+          admit_verify "$RUN_ID" candidate
           if [ -n "$PREVIOUS_ID" ]; then
+            test -z "$BOOTSTRAP_ID" && test -z "$BOOTSTRAP_HASH"
             [[ "$PREVIOUS_ID" =~ ^[0-9]+$ ]]
             gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PREVIOUS_ID" > previous.json
-            jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Verify" and .conclusion == "success" and .head_repository.full_name == $repo' previous.json
+            jq -e --arg repo "$GITHUB_REPOSITORY" '.name == "Deploy verified artifact" and .path == ".github/workflows/deploy.yml" and .event == "workflow_dispatch" and .conclusion == "success" and .head_repository.full_name == $repo' previous.json
+          else
+            [[ "$BOOTSTRAP_HASH" =~ ^[a-f0-9]{64}$ ]]
+            admit_verify "$BOOTSTRAP_ID" bootstrap
           fi
+      # Keep release tooling at this workflow revision, including for old-artifact rollbacks.
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
-          ref: ${{ steps.identity.outputs.sha }}
           persist-credentials: false
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
@@ -43,26 +65,58 @@ jobs:
           run-id: ${{ inputs.verify_run_id }}
           github-token: ${{ github.token }}
       - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
-        if: inputs.previous_run_id != ''
+        if: inputs.previous_deploy_run_id != ''
+        with:
+          name: prepared-site
+          path: previous-release/
+          run-id: ${{ inputs.previous_deploy_run_id }}
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        if: inputs.bootstrap_verify_run_id != ''
         with:
           name: verified-site
-          path: previous-release/
-          run-id: ${{ inputs.previous_run_id }}
+          path: previous-verified/
+          run-id: ${{ inputs.bootstrap_verify_run_id }}
           github-token: ${{ github.token }}
       - name: Install pinned release tooling without deployment credentials
         run: |
           docker build -t deploy-browser -f ci/Dockerfile.browser .
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp deploy-browser npm ci --ignore-scripts --no-audit --no-fund
-      - name: Verify and assemble retained chunks offline
+      - name: Verify artifact digests and admitted source identities offline
         env:
-          PREVIOUS_ID: ${{ inputs.previous_run_id }}
-          SOURCE_SHA: ${{ steps.identity.outputs.sha }}
+          SOURCE_SHA: ${{ steps.identity.outputs.candidate_sha }}
+          LOCK_HASH: ${{ steps.identity.outputs.candidate_lock }}
+          BOOTSTRAP_ID: ${{ inputs.bootstrap_verify_run_id }}
+          BOOTSTRAP_SHA: ${{ steps.identity.outputs.bootstrap_sha }}
+          BOOTSTRAP_LOCK: ${{ steps.identity.outputs.bootstrap_lock }}
         run: |
-          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e PREVIOUS_ID -e SOURCE_SHA deploy-browser sh -eu -c '
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e BOOTSTRAP_ID deploy-browser sh -eu -c '
             npm run release:verify
-            if test -n "$PREVIOUS_ID"; then node --import tsx scripts/release-manifest.ts retain release previous-release; fi
+            if test -n "$BOOTSTRAP_ID"; then node --import tsx scripts/release-manifest.ts verify previous-verified; else node --import tsx scripts/release-manifest.ts verify previous-release; fi
           '
-          test "$(jq -r .sourceRevision release/release-manifest.json)" = "$SOURCE_SHA"
+          jq -e --arg sha "$SOURCE_SHA" --arg lock "$LOCK_HASH" '.sourceRevision == $sha and .lockSHA256 == $lock' release/release-manifest.json
+          if [ -n "$BOOTSTRAP_ID" ]; then
+            jq -e --arg sha "$BOOTSTRAP_SHA" --arg lock "$BOOTSTRAP_LOCK" '.sourceRevision == $sha and .lockSHA256 == $lock' previous-verified/release-manifest.json
+          fi
+      - name: Bootstrap explicitly pinned manual deployment without deployment credentials
+        if: inputs.bootstrap_verify_run_id != ''
+        env:
+          BOOTSTRAP_HASH: ${{ inputs.bootstrap_manifest_sha256 }}
+        run: |
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e BOOTSTRAP_HASH deploy-browser sh -eu -c 'node --import tsx scripts/bootstrap-release.ts previous-verified previous-release "$BOOTSTRAP_HASH"'
+      - name: Reject stale previous-release selections
+        run: |
+          curl --fail --silent --show-error --retry 3 --max-time 60 https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/release-manifest.json -o current-live-manifest.json
+          diff -u <(jq -S . previous-release/release-manifest.json) <(jq -S . current-live-manifest.json)
+      - name: Assemble retained generations offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp deploy-browser node --import tsx scripts/release-manifest.ts retain release previous-release
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: prepared-site
+          path: release/
+          retention-days: 90
+          if-no-files-found: error
       - name: Deploy admitted artifact with project-pinned Wrangler
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -70,20 +124,19 @@ jobs:
         run: |
           test -n "$CLOUDFLARE_API_TOKEN" && test -n "$CLOUDFLARE_ACCOUNT_ID"
           docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e CLOUDFLARE_API_TOKEN -e CLOUDFLARE_ACCOUNT_ID deploy-browser node_modules/.bin/wrangler deploy
-      - name: Reopen deployment and check production controls
+      - name: Verify every served artifact byte and stable production controls
         env:
           PLAYWRIGHT_BASE_URL: https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev
-          SOURCE_SHA: ${{ steps.identity.outputs.sha }}
         run: |
-          curl --fail --retry 3 "$PLAYWRIGHT_BASE_URL/release-manifest.json" -o deployed-manifest.json
-          test "$(jq -r .sourceRevision deployed-manifest.json)" = "$SOURCE_SHA"
-          docker run --rm --memory 2g --cpus 4 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e PLAYWRIGHT_BASE_URL deploy-browser npm run test:browser
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp deploy-browser node --import tsx scripts/verify-deployed-release.ts release
+          docker run --rm --memory 2g --cpus 4 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp -e PLAYWRIGHT_BASE_URL deploy-browser npm run test:browser -- e2e/deployment-health.spec.ts
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: always()
         with:
           name: deployment-evidence
           path: |
             release/release-manifest.json
+            current-live-manifest.json
             deployed-manifest.json
             playwright-report/
             test-results/

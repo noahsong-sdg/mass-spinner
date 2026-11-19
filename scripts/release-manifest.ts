@@ -24,14 +24,22 @@ export async function sealRelease(directory:string,sourceRevision:string):Promis
  return manifest;
 }
 
-export async function verifyRelease(directory:string):Promise<ReleaseManifest>{
+export async function readReleaseManifest(directory:string):Promise<ReleaseManifest>{
  const root=resolve(directory),manifest:unknown=JSON.parse(await readFile(resolve(root,'release-manifest.json'),'utf8'));
  if(!manifest||typeof manifest!=='object')throw new Error('Missing release manifest.');
  const value=manifest as ReleaseManifest;
- if(value.schemaVersion!==1||!/^[a-f0-9]{40}$/.test(value.sourceRevision)||!/^[a-f0-9]{64}$/.test(value.lockSHA256)||!value.files||typeof value.files!=='object'||Array.isArray(value.files)||typeof value.node!=='string')throw new Error('Invalid release identity.');
+ if(value.schemaVersion!==1||typeof value.sourceRevision!=='string'||!/^[a-f0-9]{40}$/.test(value.sourceRevision)||typeof value.lockSHA256!=='string'||!/^[a-f0-9]{64}$/.test(value.lockSHA256)||!value.files||typeof value.files!=='object'||Array.isArray(value.files)||typeof value.node!=='string')throw new Error('Invalid release identity.');
  for(const [name,hash]of Object.entries(value.files)){
   const path=resolve(root,name);
-  if(relative(root,path).startsWith('..')||name!==relative(root,path).split(sep).join('/')||!/^[a-f0-9]{64}$/.test(hash))throw new Error('Invalid release path or digest.');
+  if(!name||relative(root,path).startsWith('..')||name!==relative(root,path).split(sep).join('/')||typeof hash!=='string'||!/^[a-f0-9]{64}$/.test(hash))throw new Error('Invalid release path or digest.');
+ }
+ return value;
+}
+
+export async function verifyRelease(directory:string):Promise<ReleaseManifest>{
+ const root=resolve(directory),value=await readReleaseManifest(root);
+ for(const [name,hash]of Object.entries(value.files)){
+  const path=resolve(root,name);
   if(!(await lstat(path)).isFile()||digest(await readFile(path))!==hash)throw new Error(`Release digest mismatch: ${name}`);
  }
  const current=await inventory(root);
@@ -39,11 +47,13 @@ export async function verifyRelease(directory:string):Promise<ReleaseManifest>{
  return value;
 }
 
+export const isRetainableAsset=(name:string)=>/^assets\/(?:[^/]+\/)*[^/]+-[A-Za-z0-9_-]{8,}\.(?:js|css|wasm)$/.test(name);
+
 /** Retain only content-hashed Vite chunks; never carry old HTML or unhashed data. */
 export async function retainAssets(directory:string,previous:string){
  const current=await verifyRelease(directory),old=await verifyRelease(previous);
  for(const [name,hash]of Object.entries(old.files)){
-  if(!/^assets\/(?:[^/]+\/)*[^/]+-[A-Za-z0-9_-]{8,}\.(?:js|css|wasm)$/.test(name))continue;
+  if(!isRetainableAsset(name))continue;
   if(current.files[name]){
    if(current.files[name]!==hash)throw new Error(`Hashed asset collision: ${name}`);
    continue;

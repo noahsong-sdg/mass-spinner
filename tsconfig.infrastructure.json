@@ -13,6 +13,9 @@
   },
   "include": [
     "scripts/release-manifest.ts",
+    "scripts/bootstrap-release.ts",
+    "scripts/release-download.ts",
+    "scripts/verify-deployed-release.ts",
     "scripts/check-dependencies.ts",
     "scripts/check-gltf.ts",
     "scripts/export-thermal-toolchain.ts",
@@ -20,6 +23,9 @@
     "playwright.config.ts",
     "e2e/**/*.ts",
     "tests/release-manifest.test.ts",
+    "tests/release-bootstrap.test.ts",
+    "tests/deployed-release.test.ts",
+    "tests/release-download.test.ts",
     "tests/dependency-review.test.ts",
     "tests/scenario-schema.test.ts",
     "tests/worker-client.test.ts",
@@ -34,6 +40,7 @@
     "scripts/equilibrium-identity-plugin.mjs",
     "scripts/worker-identity-plugin.mjs",
     "vite.config.mjs",
-    "scripts/qualify-gltf.ts"
+    "scripts/qualify-gltf.ts",
+    "scripts/study-playback-performance.ts"
   ]
 }
