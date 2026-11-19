@@ -253,6 +253,13 @@ test('experiment entrypoints are available while computing and their plot action
  assert.match(f.doc.querySelector('.guide-experiment [role=status]')!.textContent!,/Waiting for the computed run/);
  fuel.accepted.disabled=false;await Promise.resolve();
  assert.equal(fuel.plot.value,'thermalProfile');assert.equal(f.node('window-plots').hidden,false);
+ assert.equal(f.doc.querySelector('.guide-experiment [role=status]')!.textContent,'','clear the waiting note when the requested accepted plot opens');
+});
+
+test('transient tutorial entrypoints leave a reference view without changing physical inputs',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);experimentControls(f);fuel.mode.value='equilibrium';
+ f.workspace.launchGuideAction('diffusionExperiment');assert.equal(fuel.mode.value,'transport');assert.equal(fuel.plot.value,'separation');
+ assert.equal(f.node('fuel-radialDiffusivityM2S').value,'0.03');
 });
 
 test('incompatible feed and application expose the prerequisite instead of focusing hidden or disabled controls',t=>{

@@ -80,6 +80,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function showExperiment(key:string){
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
   apparatus.value=experiment.apparatus??'centrifuge';apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));
+  if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result)&&!['spin','transport'].includes(node('fuel-motion-mode').value))set('fuel-motion-mode','transport');
   // Beam references have their own accepted state; centrifuge actions wait on fuel-export.
   if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
   if(experiment.panel==='target')doc.getElementById('coupled-tab-settings')!.click();
@@ -99,7 +100,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function action(key:string){
   if(!allowed.has(key))return;
   cancelLaunch();
-  status.textContent='';
+  status.textContent='';experimentStatus.textContent='';
   if(Object.hasOwn(guideExperiments,key)){showExperiment(key);return;}
   if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
