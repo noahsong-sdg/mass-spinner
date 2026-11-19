@@ -131,7 +131,8 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
  if(!await page.locator('#window-view').isVisible())await page.getByRole('button',{name:'View',exact:true}).click();
  await expect(page.locator('.fuel-comparison-inputs')).toBeVisible();
- await expect(page.locator('.fuel-comparison-inputs')).toContainText('Assumed radial diffusivity');
+ await expect(page.locator('.fuel-comparison-inputs')).toContainText('Changed A → B: Radial diffusivity:');
+ await expect(page.locator('.fuel-comparison-inputs')).toContainText(`→ ${10**Number(await diffusivity.inputValue())} m²/s`);
  await reader.close();
 });
 
