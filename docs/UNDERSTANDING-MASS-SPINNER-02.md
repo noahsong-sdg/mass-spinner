@@ -8,8 +8,8 @@ of 76 light and 924 heavy atoms raises purity from 7.6% to 10%, but recovers
 only 10/76 of the light atoms. Separation rearranges isotopes; it creates none.
 
 Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/)
-motivates this model. The centrifuge is not the fusion reactor or a reconstruction
-of proprietary hardware. Follow drive → rotation → heating → separation → collection.
+motivates this centrifuge model. It is not a reconstruction of proprietary hardware
+or a fusion reactor. Follow drive → rotation → heating → separation → collection.
 
 Use Coupled separation. [Every menu option is explained below](#views).
 [Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html)
