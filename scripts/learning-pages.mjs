@@ -24,7 +24,7 @@ function modulePage(module){
 /** Build-only content: no independent solver, remote content or learner tracking. @returns {Record<string,string>} */
 export function learningPages(){
  const intro=`<p class="walkthrough-intro"><a href="/start.html">Start here: seven short experiments →</a></p>
- <section><h2 id="tutorials">Tutorials</h2><ol><li><a href="/guide.html">02 · Why rotation separates masses</a></li>${numberedTutorials.map(tutorial=>`<li><a href="/tutorial-${tutorial.number}.html">${tutorial.number} · ${escape(tutorial.title)}</a></li>`).join('')}</ol></section>
+ <section><h2 id="tutorials">Tutorials</h2><ul><li><a href="/guide.html">02 · Why rotation separates masses</a></li>${numberedTutorials.map(tutorial=>`<li><a href="/tutorial-${tutorial.number}.html">${tutorial.number} · ${escape(tutorial.title)}</a></li>`).join('')}</ul></section>
  <section><h2 id="documentation">Documentation</h2><ul><li><a href="/guide.html#views">Controls & plot reference</a></li><li><a href="/how-it-works.html">Simulation methods & assumptions</a></li><li><a href="/equilibrium.html">Equilibrium composition & collection</a></li><li><a href="/qualification.html">Experimental evidence & accuracy limits</a></li></ul></section>
  <h2 id="experiments">Investigations</h2><p>Predict, change one thing and explain what moved. Keep the simulator beside this reader.</p>`;
  const contents=learningPath.map((module,i)=>`<section class="walkthrough-step"><span class="step-number">${i+1} / ${learningPath.length}</span><h2 id="${module.id}"><a href="/learn-${module.id}.html">${escape(module.title)} →</a></h2><p>${escape(module.question)}</p><p>${escape(module.scope)}</p></section>`).join('');

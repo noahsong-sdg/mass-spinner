@@ -18,7 +18,7 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Sent to the simulator');
  await button.click();await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
  await reader.locator('main a[href="/how-it-works.html"]').click();await expect(reader.locator('h1')).toBeVisible();
- await info.attach('main-page-docs-button',{body:await page.locator('.world-top').screenshot(),contentType:'image/png'});
+ await info.attach('main-page-docs-button',{body:await page.locator('.world-reading').screenshot(),contentType:'image/png'});
  await info.attach('full-page-documentation',{body:await reader.screenshot(),contentType:'image/png'});
  expect(errors).toEqual([]);await reader.close();
 });
