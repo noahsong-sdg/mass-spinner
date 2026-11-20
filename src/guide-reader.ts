@@ -2,6 +2,7 @@
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  const origin=win.location.origin,status=doc.getElementById('reader-status'),browser=doc.defaultView!;
+ if(embedded)for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href]'))if(['http:','https:'].includes(link.protocol)&&link.origin!==origin){link.target='_blank';link.relList.add('noopener');}
  let requestId='';
  win.addEventListener('message',event=>{
   if(!embedded||event.origin!==origin||event.source!==win.parent)return;

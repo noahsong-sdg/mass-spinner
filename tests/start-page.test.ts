@@ -110,3 +110,15 @@ test('action feedback stays inside its ordered instruction and Escape closes onl
  const direct=standalone(t);direct.win.document.dispatchEvent(new direct.win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
  assert.deepEqual(direct.navigated,[]);assert.equal(direct.external(),0);
 });
+
+
+test('embedded web citations open separately while reading links and standalone links stay native',t=>{
+ const html='<a id="external" href="https://github.com/noahsong-sdg/mass-spinner" rel="noreferrer">Source</a><a id="local" href="/guide.html">Guide</a><a id="fragment" href="#part">Section</a><a id="email" href="mailto:example@example.org">Email</a>';
+ const reader=embedded(t,html),doc=reader.win.document;
+ assert.equal(doc.querySelector<HTMLAnchorElement>('#external')!.target,'_blank');
+ assert.equal(doc.querySelector<HTMLAnchorElement>('#external')!.rel,'noreferrer noopener');
+ for(const id of ['local','fragment','email'])assert.equal(doc.querySelector<HTMLAnchorElement>(`#${id}`)!.target,'');
+ const dom=new JSDOM(html,{url:`${origin}/start.html`});t.after(()=>dom.window.close());setupGuideReader(dom.window);
+ assert.equal(dom.window.document.querySelector<HTMLAnchorElement>('#external')!.target,'');
+ assert.equal(dom.window.document.querySelector<HTMLAnchorElement>('#external')!.rel,'noreferrer');
+});

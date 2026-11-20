@@ -100,6 +100,9 @@ test('reference pages use the existing simulator rather than nesting a second ap
  const frame=await reader(page),pages=context.pages().length,current=await page.locator('#fuel-currentA').inputValue();
  await frame.goto('/equilibrium.html');await frame.getByRole('link',{name:'Open calculator'}).click();
  await expect(page.locator('#fuel-equilibrium-calculator')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
+ await frame.goto('/how-it-works.html');await expect(frame.locator('.sources a').first()).toHaveAttribute('target','_blank');
+ await frame.locator('.brand').click();await expect(page.locator('#window-guide')).toBeHidden();
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  await frame.goto('/qualification.html');await frame.getByRole('link',{name:'Mass Spinner'}).click();
  await expect(page.locator('#window-guide')).toBeHidden();await expect(page.locator('#fuel-currentA')).toHaveValue(current);
  expect(context.pages().length).toBe(pages);await expect(page.locator('.sim-workspace')).toHaveCount(1);

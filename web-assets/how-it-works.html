@@ -14,10 +14,11 @@
     @media(max-width:560px){.bar{padding-inline:20px;gap:14px;align-items:flex-start;flex-direction:column;padding-top:16px;padding-bottom:4px}nav{gap:22px}.brand{min-height:24px}main{padding-inline:20px}html{scroll-padding-top:140px}h1{max-width:14ch}.lead{font-size:18px}section{margin-top:30px;padding-top:26px}p,li,dd{font-size:15px}footer{flex-wrap:wrap}}
     @media print{:root{color-scheme:light;--bg:#fff;--text:#151a16;--muted:#343d35;--line:#aaa;--accent:#674015}header{position:static}main{padding-top:28px}nav,.skip{display:none}h1{font-size:36px}section{break-inside:avoid}a{text-decoration:none}}
   </style>
+  <script type="module" src="/guide-reader.js"></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
-  <header><div class="bar"><a class="brand" href="/">Mass Spinner ↗</a><nav aria-label="On this page"><a href="#physics">Physics</a><a href="#computation">Computation</a><a href="#accuracy">Accuracy</a><a href="#uses">Uses</a></nav></div></header>
+  <header><div class="bar"><a class="brand" href="/" data-guide-simulator>Mass Spinner ↗</a><nav aria-label="On this page"><a href="#physics">Physics</a><a href="#computation">Computation</a><a href="#accuracy">Accuracy</a><a href="#uses">Uses</a></nav></div></header>
   <main id="main"><article class="reading">
     <h1>How Mass Spinner works</h1>
     <p class="lead">Electrical drive → gas rotation → mass separation.</p>
@@ -55,7 +56,7 @@
       <p>Use the simulator for comparisons between mechanisms. Compare results under stated assumptions. Validation within a defined range is necessary for experiment planning and hardware selection. Separate evidence is necessary for safety decisions.</p>
     </section>
     <div class="sources" aria-label="Sources and implementation"><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/docs/LIVE-MODEL-QUALIFICATION.md">Qualification record ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/src/fuel-operation.ts">Live equations ↗</a><a href="https://github.com/noahsong-sdg/mass-spinner/blob/main/scientific/mixture-axial-v75/PROTOCOL.md">Research protocol ↗</a><a href="https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html">Verification vs validation ↗</a><a href="https://www.marathonfusion.com/fusion-energy/">Marathon’s fuel cycle ↗</a><a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon’s neutron source ↗</a></div>
-    <footer><span>Mass Spinner · 18 November 2026</span><a href="/">Back to the playground ↗</a></footer>
+    <footer><span>Mass Spinner · 18 November 2026</span><a href="/" data-guide-simulator>Back to the playground ↗</a></footer>
   </article></main>
 </body>
 </html>
