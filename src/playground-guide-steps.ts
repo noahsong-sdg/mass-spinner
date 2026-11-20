@@ -2,7 +2,15 @@
 export const playgroundSteps=[
  {id:'machine',diagram:'drive',title:'What turns inside the vessel?',intro:'We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.',
   do:[],
-  notice:'Current across a magnetic field causes a sideways force on charged gas. Collisions transfer rotation to neutral atoms without a moving drum.',
+  notice:`A mechanical centrifuge uses a drum: a cylinder whose wall turns. Contact with the wall makes the gas turn. This model uses electrical drive. Its vessel and electrodes stay still.
+
+Electric current is charge in motion. Ions are atoms or molecules with electric charge. The gas contains positive ions, negative electrons and neutral atoms. A voltage between the electrodes causes charge to move across the gas. The current arrow gives the direction of positive-charge flow. Electrons can move in the opposite direction.
+
+A magnetic field applies a force to a charge that moves across it. The force acts at right angles to both the charge motion and the field. This is the magnetic part of the Lorentz force law. Experiments show this force. The field changes the direction of charge motion. A magnetic force alone does not increase the charge's speed.
+
+Here, current crosses the gas toward the inner electrode. The magnetic field points along the cylinder. Their combined effect gives the charged gas a force around the cylinder. At the right of the end view, inward current and a field toward you give an upward force. Around the gap, these forces give torque: a turning effect about the axis.
+
+Collisions transfer some of this motion from ions to neutral atoms. Thus, neutral gas can turn although it has no net electric charge. The electrical supply supplies energy for rotation and heat.`,
   note:'Colors and weighted markers show calculated populations, not individual atoms. If a dimension has no published value, the model uses an assumption.',actions:[['look','Show gas & drive'],['coils','Show the coils']]},
  {id:'current',diagram:'spin',title:'Can the current make the gas turn?',intro:'Before we use current to improve separation, check that it turns the gas. Compare powered and unpowered runs from rest.',
   do:["Compare 0 A with 0.03 A from rest. Keep the magnetic field and collision rate constant. Compare at the same physical time."],

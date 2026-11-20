@@ -14,7 +14,7 @@ export function startPage(){
  <div class="try-actions" role="group" aria-label="Try ${escape(step.title)}">${step.actions.map(([action,label])=>`<a data-guide-action="${action}" href="/?level=2&try=${action}">${escape(label)} ↗</a>`).join('')}</div>
  ${step.do.map(text=>`<p>${escape(text)}</p>`).join('')}
  ${guideDiagram(step.diagram)}
- <details data-learning-explanation><summary>Explanation</summary><p>${escape(step.notice)}</p><p>${escape(step.note)}</p></details>
+ <details data-learning-explanation><summary>Explanation</summary>${step.notice.split('\n\n').map(text=>`<p>${escape(text)}</p>`).join('')}<p>${escape(step.note)}</p></details>
  </section>`).join('')}
  </main><footer><a href="/guide.html">Physics & equations →</a> · <a href="/learn.html">Docs & tutorials</a></footer></body></html>`;
 }

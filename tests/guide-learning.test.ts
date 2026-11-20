@@ -32,6 +32,24 @@ test('opening an optional explanation never launches a run',t=>{
  assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
 });
 
+test('the machine explanation separates the drum, charge force and neutral coupling',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const explanation=dom.window.document.getElementById('machine')!.parentElement!.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
+ const paragraphs=[...explanation.querySelectorAll('p')].map(p=>p.textContent!);
+ const drum=paragraphs.findIndex(text=>text.includes('a cylinder whose wall turns'));
+ const current=paragraphs.findIndex(text=>text.includes('current is charge in motion'));
+ const force=paragraphs.findIndex(text=>text.includes('Lorentz force law'));
+ const torque=paragraphs.findIndex(text=>text.includes('turning effect about the axis'));
+ const collisions=paragraphs.findIndex(text=>text.includes('Collisions transfer some of this motion'));
+ assert.ok(drum>=0&&current>drum&&force>current&&torque>force&&collisions>torque,'explain each step in its own paragraph');
+ assert.match(paragraphs[current],/Electrons can move in the opposite direction/);
+ assert.match(paragraphs[force],/right angles to both the charge motion and the field/);
+ assert.match(paragraphs[force],/magnetic force alone does not increase the charge's speed/);
+ assert.match(paragraphs[torque],/right of the end view.*inward current.*field toward you.*upward force/);
+ assert.match(paragraphs[collisions],/electrical supply supplies energy/);
+ assert.equal(explanation.open,false,'keep the detailed explanation optional');
+});
+
 test('the enhanced reader remains compatible with guide pages without experiment markup',t=>{
  const dom=new JSDOM('<nav aria-label="Contents"><a href="#goal">Goal</a></nav><h1 id="goal">Goal</h1><a href="/?level=2&try=spin" data-guide-action="spin">Try spin-up</a>',{url:'https://example.org/guide.html'});
  t.after(()=>dom.window.close());const win=dom.window,sent:unknown[][]=[];

@@ -214,7 +214,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   for(const [key,text]of step.actions){const button=el('button',text);button.type='button';button.addEventListener('click',()=>action(key));actions.append(button);}
   const blocks:HTMLElement[]=[el('p',step.intro)];
   const instructions=el('ol');for(const text of step.do)instructions.append(el('li',text));blocks.push(instructions);
-  const observation=el('p');observation.append(doc.createTextNode(step.notice));blocks.push(observation);
+  for(const text of step.notice.split('\n\n'))blocks.push(el('p',text));
   const note=el('p',step.note);note.className='guide-note';
   content.replaceChildren(heading,actions,...blocks,note);
   previous.disabled=index===0;next.textContent=index===steps.length-1?'Finish':'Next →';

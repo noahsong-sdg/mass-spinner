@@ -117,18 +117,53 @@ The ratio increases by 13%. Purity does not increase by 13 percentage points.
 These equilibrium curves do not change your run or calculate the necessary power.
 Charged-particle filters use more physics than this neutral-gas model includes.
 
-## 3. How do we turn gas without a moving drum?
+## 3. How does electricity turn the gas?
 
 Equilibrium assumes gas that already turns. A device also needs a drive that causes this rotation.
-Radial current crosses an axial magnetic field. The resulting force turns charged gas around electrodes that do not move:
+A mechanical centrifuge uses a drum: a cylinder whose wall turns and makes the gas turn.
+Here, the vessel and electrodes stay still. Electrical drive turns the gas between them.
+
+Electric current is charge in motion. A voltage between the electrodes causes charge to move across the gas.
+The voltage gives an electric field that pushes charged particles through the gas.
+The current arrow gives the direction of positive-charge flow. Electrons have negative charge and can move in the opposite direction.
+
+Experiments show that a magnetic field applies force to a charge that moves across it.
+The force acts at right angles to both the motion and the field.
+This is the magnetic part of the Lorentz force law:
+
+```math
+\mathbf{F}_{B}=q\,\mathbf{v}\times\mathbf{B}.
+```
+
+Here, F_B is the magnetic force on one charge, q is its signed electric charge, and v is its velocity.
+B is magnetic field. The cross product, ×, gives a direction perpendicular to both vectors.
+The force magnitude is |q|vB sin θ, where θ is the angle between motion and field.
+Motion along the field gives zero magnetic force. Motion across the field gives the largest force at the same speed.
+Negative charge reverses the force direction for the same velocity.
+
+The magnetic force changes the direction of motion. It does not directly increase the charge's speed.
+The electrical supply supplies energy for rotation and heat. The magnetic field does not supply this energy.
+
+For many charges, their combined motion gives current density J: electric current per area.
+The magnetic force on the charged gas per unit volume is
 
 ```math
 \mathbf{f}=\mathbf{J}\times\mathbf{B}.
 ```
 
-The symbol f is force density (N/m³), J is current density (A/m²), and B is magnetic field.
-The force is perpendicular to the current and field. Reversing current reverses force.
-Collisions move angular momentum from ions to neutral atoms, which receive no direct Lorentz force.
+The symbol f is magnetic force density (N/m³). J has units of A/m². B has units of tesla (T).
+The force acts at right angles to both current and field. This equation adds the magnetic forces from ions and electrons.
+It does not require all particles to move in the current direction.
+
+Here, radial current points toward the inner electrode. The axial field points along the cylinder.
+The force thus points around the cylinder, in the tangential direction.
+At the right of the end view, current points left and the field points toward you. The force points up.
+At other positions around the gap, the forces have different directions but the same turning effect about the axis.
+This turning effect is torque. Reversing current or field reverses it.
+
+Collisions transfer angular momentum from ions to neutral atoms. Angular momentum measures rotational motion.
+Neutral atoms have zero net charge and receive no direct force of the form qv × B.
+They turn because collisions transfer motion to them. Thus, the gas can turn while the metal parts stay still.
 
 Select Current, Turn the ions and Turn the gas in sequence in the diagram.
 Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.

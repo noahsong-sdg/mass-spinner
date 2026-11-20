@@ -4,6 +4,8 @@ import {existsSync,readFileSync} from 'node:fs';
 import {dirname,resolve} from 'node:path';
 import {documentationPage} from '../scripts/documentation-page.mjs';
 import {guideActions} from '../src/guide-topics.js';
+import {understandingPage} from '../scripts/understanding-page.mjs';
+import {JSDOM} from 'jsdom';
 
 const path='docs/UNDERSTANDING-MASS-SPINNER-02.md';
 const source=readFileSync(path,'utf8');
@@ -73,4 +75,24 @@ test('tutorial prose omits bold label prefixes',()=>{
   const text=readFileSync(`docs/UNDERSTANDING-MASS-SPINNER${suffix}.md`,'utf8');
   assert.doesNotMatch(text,/\*\*[^*\n]+[.:]\*\*/);
  }
+});
+
+test('the drive explanation connects one-charge force to current, torque and supply energy',t=>{
+ const dom=new JSDOM(understandingPage(source,'a'.repeat(40)));t.after(()=>dom.window.close());
+ const doc=dom.window.document,drive=doc.getElementById('drive')!;
+ assert.equal(drive.textContent,'3. How does electricity turn the gas?','the contents and diagram retain the drive anchor');
+ const content=[];let node=drive.nextElementSibling;
+ while(node&&node.tagName!=='H2'){content.push(node);node=node.nextElementSibling;}
+ const text=content.map(node=>node.textContent).join(' ');
+ assert.match(text,/a drum: a cylinder whose wall turns/);
+ assert.match(text,/force on one charge.*signed electric charge/);
+ assert.match(text,/Motion along the field gives zero magnetic force/);
+ assert.match(text,/Negative charge reverses the force direction for the same velocity/);
+ assert.match(text,/electrical supply supplies energy for rotation and heat/);
+ assert.match(text,/current density J: electric current per area/);
+ assert.match(text,/adds the magnetic forces from ions and electrons/);
+ assert.match(text,/right of the end view.*current points left.*field points toward you.*force points up/);
+ assert.match(text,/Neutral atoms have zero net charge/);
+ assert.equal(content.filter(node=>node.matches('.equation')).length,2);
+ assert.equal(doc.querySelector('.katex-error'),null);
 });
