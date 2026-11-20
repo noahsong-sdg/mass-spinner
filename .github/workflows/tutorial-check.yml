@@ -1,0 +1,20 @@
+name: Tutorial checks
+on: push
+permissions:
+  contents: read
+jobs:
+  tutorial:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - run: |
+          docker build -t mass-spinner-check -f ci/Dockerfile .
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp mass-spinner-check npm ci --ignore-scripts --no-audit --no-fund
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp mass-spinner-check sh -eu -c '
+            npm run typecheck
+            npm run typecheck:tests
+            node --import tsx --test --test-concurrency=1 tests/guide-bridge.test.ts tests/playground-guide.test.ts tests/understanding-page.test.ts tests/tutorial-presentation.test.ts tests/workspace-*.test.ts
+          '

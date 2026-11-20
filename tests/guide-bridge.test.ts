@@ -22,13 +22,11 @@ function app(t:TestContext,capability?:string){
 }
 function reader(t:TestContext){
  const dom=new JSDOM('<body><a href="/?level=2&try=spin" data-guide-action="spin">Spin</a><a href="/?level=2&try=current" data-guide-action="current">Current</a><p id="reader-status"></p></body>',{url:`${origin}/guide.html`});t.after(()=>dom.window.close());
- let tick=()=>{},probing=false;
- dom.window.setInterval=handler=>{assert.equal(typeof handler,'function');tick=handler as ()=>void;probing=true;return 1;};
- dom.window.clearInterval=()=>{probing=false;};
- const simulator=peer();Object.defineProperty(dom.window,'opener',{value:simulator.window});setupGuideReader(dom.window);
+ const simulator=peer(),opener=peer();Object.defineProperty(dom.window,'parent',{value:simulator.window});Object.defineProperty(dom.window,'opener',{value:opener.window});
+ dom.window.open=()=>{throw new Error('Embedded actions must not open a tab');};setupGuideReader(dom.window);
  const click=(action:string)=>dom.window.document.querySelector<HTMLAnchorElement>(`[data-guide-action="${action}"]`)!.click();
  const receive=(data:Packet,source=simulator.window,from=origin)=>dom.window.dispatchEvent(new dom.window.MessageEvent('message',{source,data,origin:from}));
- return {dom,simulator,click,receive,probe:()=>{assert.ok(probing);tick();},isProbing:()=>probing,status:()=>dom.window.document.getElementById('reader-status')!.textContent};
+ return {dom,simulator,opener,click,receive,status:()=>dom.window.document.getElementById('reader-status')!.textContent};
 }
 
 test('reload reconnects only a previously authorized reader, never an unknown same-origin hello',t=>{
@@ -48,24 +46,6 @@ test('reload reconnects only a previously authorized reader, never an unknown sa
  reloaded.send(reader.window,{type:'mass-spinner:guide-hello',capability});
  reloaded.send(reader.window,{type:'mass-spinner:guide-action',action:'current',requestId:'current-1'});
  assert.deepEqual(reloaded.opened,['controls'],'hello and duplicate request cannot repeat an action');
-});
-
-test('reader retains only the latest startup action and never resends it on repeated readiness',t=>{
- const f=reader(t);f.click('spin');f.click('current');
- assert.equal(f.simulator.packets.filter(data=>data.type==='mass-spinner:guide-action').length,0);
- assert.match(f.status()!,/Waiting/);
- const ready={type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'};
- f.receive(ready,peer().window);f.receive(ready,f.simulator.window,'https://wrong.example');
- assert.equal(f.simulator.packets.filter(data=>data.type==='mass-spinner:guide-action').length,0);
- f.receive(ready);f.receive(ready);
- const requests=f.simulator.packets.filter(data=>data.type==='mass-spinner:guide-action');
- assert.equal(requests.length,1);assert.equal(requests[0].action,'current');
- assert.equal(f.dom.window.sessionStorage.getItem('mass-spinner:reader-capability'),'authorized-token');
- f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});assert.match(f.status()!,/calculated run/);
- // Keep the rejection text from an older receiver unchanged.
- const rejection='Choose Coupled separation before cutting power.';
- f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'rejected',message:rejection});
- assert.equal(f.status(),rejection);assert.doesNotMatch(f.status()!,/Opened|Sent/);
 });
 
 test('receiver returns rejected conditions and invalid allowlist actions to the requesting reader',t=>{
@@ -92,79 +72,6 @@ test('an action arriving before live controls mount waits for their accepted sta
  assert.equal(runs,1);
 });
 
-test('a receiver reload interrupts both waiting and unacknowledged requests without replay',t=>{
- for(const waiting of [false,true]){
-  const f=reader(t);f.click('spin');
-  const ready={type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'before-reload'};
-  f.receive(ready);
-  const request=f.simulator.packets.find(packet=>packet.type==='mass-spinner:guide-action')!;
-  if(waiting)f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'waiting'});
-  assert.equal(f.isProbing(),true,'readiness probes continue until a terminal action outcome');
-  const before=f.simulator.packets.length;f.probe();
-  assert.equal(f.simulator.packets.length,before+1);assert.equal(f.simulator.packets.at(-1)?.type,'mass-spinner:guide-hello');
-  f.receive({...ready,instance:'after-reload'});
-  assert.match(f.status()!,/The simulator reloaded.*action status is unknown/);assert.equal(f.isProbing(),false);
-  f.receive({...ready,instance:'after-reload'});
-  assert.match(f.status()!,/The simulator reloaded/,'an in-flight ready cannot erase the warning');
-  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,1);
-  f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});
-  assert.match(f.status()!,/The simulator reloaded/,'an outcome from the abandoned request is ignored');
- }
-});
-
-test('an ambiguous action has a bounded probe lifetime and never claims execution',t=>{
- const f=reader(t);f.click('spin');f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'});
- for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/sent no final action result.*can finish later/);
- const requests=f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action');assert.equal(requests.length,1);
- f.receive({type:'mass-spinner:guide-result',requestId:requests[0].requestId,status:'waiting'});
- assert.match(f.status()!,/sent no final action result.*can finish later/,'a late waiting receipt must not erase the timeout warning');
-});
-
-test('an old receiver without readiness support offers recovery without sending or replaying',t=>{
- const f=reader(t);f.click('spin');
- for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/did not reply.*Open a new simulator/);
- assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
- f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'updated-simulator'});
- assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'late readiness must not execute the expired action');
- assert.match(f.status()!,/did not reply/);
-});
-
-test('an unresponsive older simulator offers a direct action without waiting for background timers',t=>{
- const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};
- f.click('spin');
- const reconnect=f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-reconnect]')!;
- assert.ok(reconnect);assert.equal(reconnect.hidden,false);
- assert.equal(reconnect.href,`${origin}/?level=2&try=spin`);
- assert.equal(reconnect.target,'_blank');assert.equal(reconnect.rel,'noopener');
- assert.equal(focuses,0,'keep the recovery link visible until the action succeeds');
- assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
- for(let i=0;i<120;i++)f.probe();
- assert.equal(reconnect.hidden,false,'recovery remains available after the connection expires');
- const current=peer();f.dom.window.open=(url,target)=>{assert.equal(url,`${origin}/?level=2`);assert.equal(target,'_blank');return current.window;};reconnect.click();
- assert.match(current.window.name,/^mass-spinner-reader-[a-f0-9-]+-simulator-recovery-[a-f0-9-]+$/);
- assert.equal(f.isProbing(),true);assert.equal(reconnect.hidden,true);
- f.receive({type:'mass-spinner:guide-ready',capability:'late-token',instance:'old-tab'});
- assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'recovery cancels the older pending action');
- f.receive({type:'mass-spinner:guide-ready',capability:'current-token',instance:'current-tab'},current.window);
- const request=current.packets.find(packet=>packet.type==='mass-spinner:guide-action')!;assert.equal(request.action,'spin');
- f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'},current.window);
- assert.equal(f.status(),'Opened in the simulator.');
- f.click('current');assert.equal(reconnect.hidden,false);f.receive({type:'mass-spinner:guide-ready',capability:'current-token',instance:'current-tab'},current.window);
- assert.equal(current.packets.filter(packet=>packet.type==='mass-spinner:guide-action').at(-1)?.action,'current');
-});
-
-test('an authorized action hides recovery before it can execute twice',t=>{
- const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};f.click('current');
- const reconnect=f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-reconnect]')!;
- f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'});
- assert.equal(reconnect.hidden,true);assert.equal(focuses,0);
- const request=f.simulator.packets.find(packet=>packet.type==='mass-spinner:guide-action')!;
- f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});
- assert.equal(focuses,1);
-});
-
 test('coils wait for the asynchronously populated component options before acknowledging execution',async t=>{
  const f=app(t),r=peer();f.dom.window.open=()=>r.window;f.guide.openStandalone();
  const component=f.dom.window.document.createElement('select');component.id='fuel-component';f.dom.window.document.body.append(component);
@@ -175,9 +82,60 @@ test('coils wait for the asynchronously populated component options before ackno
  assert.equal(component.value,'coils');assert.deepEqual(f.opened,['inspect']);assert.equal(r.packets.at(-1)?.status,'executed');
 });
 
-test('the Simulator header link still focuses the connected tab without a tutorial command',t=>{
- const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};
- f.dom.window.document.body.insertAdjacentHTML('beforeend','<a href="/?level=2" data-guide-simulator>Simulator</a>');
- f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-simulator]')!.click();
- assert.equal(focuses,1);assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
+test('embedded reader sends each action once to its exact parent without a readiness handshake',t=>{
+ const f=reader(t);assert.equal(f.status(),'');assert.deepEqual(f.simulator.packets,[]);
+ f.click('spin');f.click('current');
+ assert.deepEqual(f.simulator.packets.map(packet=>[packet.type,packet.action]),[['mass-spinner:guide-action','spin'],['mass-spinner:guide-action','current']]);
+ const [first,second]=f.simulator.packets;assert.ok(first.requestId);assert.ok(second.requestId);assert.notEqual(first.requestId,second.requestId);
+ assert.deepEqual(f.opener.packets,[],'the standalone page opener is not the active simulator');
+ f.receive({type:'mass-spinner:guide-ready',capability:'old-capability',instance:'old-receiver'});
+ assert.equal(f.simulator.packets.length,2,'an old handshake cannot replay an action');
+ assert.equal(f.dom.window.location.pathname,'/guide.html');assert.equal(f.status(),'');
+});
+
+test('embedded reader ignores unsolicited, foreign and stale action receipts',t=>{
+ const f=reader(t);
+ f.receive({type:'mass-spinner:guide-result',requestId:'',status:'rejected',message:'Unsolicited receipt'});
+ assert.equal(f.status(),'','a receipt needs an active nonempty request');
+ f.click('spin');const older=f.simulator.packets.at(-1)!;
+ f.receive({type:'mass-spinner:guide-result',requestId:older.requestId,status:'waiting'});assert.match(f.status()!,/calculated run/);
+ f.click('current');const current=f.simulator.packets.at(-1)!;assert.equal(f.status(),'');
+ f.receive({type:'mass-spinner:guide-result',requestId:older.requestId,status:'rejected',message:'Older request'});assert.equal(f.status(),'');
+ const waiting={type:'mass-spinner:guide-result',requestId:current.requestId,status:'waiting'};
+ f.receive(waiting,peer().window);f.receive(waiting,f.simulator.window,'https://wrong.example');f.receive(waiting,f.opener.window);
+ assert.equal(f.status(),'','only the exact same-origin parent can report an action outcome');
+ f.receive({...waiting,status:'not-a-status',message:'Invalid outcome'});assert.equal(f.status(),'');
+ f.receive(waiting);assert.match(f.status()!,/calculated run/);
+ f.receive({...waiting,status:'executed'});assert.equal(f.status(),'','success leaves the reading view clear');
+ f.receive(waiting);assert.equal(f.status(),'','a late waiting receipt cannot reopen a completed request');
+});
+
+test('embedded reader preserves rejection details and ignores later receipts for that request',t=>{
+ const f=reader(t);f.click('current');const request=f.simulator.packets.at(-1)!;
+ const rejection='Select an atomic feed before thermal evolution.';
+ f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'waiting'});assert.match(f.status()!,/calculated run/);
+ f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'rejected',message:rejection});assert.equal(f.status(),rejection);
+ f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});assert.equal(f.status(),rejection);
+ f.click('spin');assert.equal(f.status(),'','a new action clears the previous rejection');
+ const next=f.simulator.packets.at(-1)!;
+ f.receive({type:'mass-spinner:guide-result',requestId:next.requestId,status:'rejected'});
+ assert.equal(f.status(),'The simulator cannot apply this action.');
+});
+
+test('embedded reader Escape closes reading without navigating or opening another simulator',t=>{
+ const f=reader(t),event=new f.dom.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true});
+ f.dom.window.document.dispatchEvent(event);
+ assert.equal(event.defaultPrevented,true);assert.deepEqual(f.simulator.packets,[{type:'mass-spinner:guide-close'}]);
+ assert.equal(f.dom.window.location.pathname,'/guide.html');assert.deepEqual(f.opener.packets,[]);
+});
+
+test('the simulator accepts commands only from its own reader frame and returns deduplicated outcomes',t=>{
+ const f=app(t);f.guide.showReader('/start.html');
+ const frame=f.dom.window.document.getElementById('physics-guide-frame') as HTMLIFrameElement;
+ const source=frame.contentWindow!,responses:Packet[]=[];Object.defineProperty(source,'postMessage',{value:(data:Packet,target:string)=>{assert.equal(target,origin);responses.push(data);}});
+ const request={type:'mass-spinner:guide-action',action:'current',requestId:'frame-current'};
+ f.send(peer().window,request);f.send(source,request,'https://wrong.example');assert.deepEqual(f.opened,['guide']);assert.deepEqual(responses,[]);
+ f.send(source,request);assert.equal(responses.at(-1)?.status,'executed');assert.deepEqual(f.opened,['guide','controls']);
+ f.send(source,request);assert.deepEqual(f.opened,['guide','controls'],'a repeated request must not repeat the control action');
+ assert.equal(responses.length,2);assert.deepEqual(responses[0],responses[1]);
 });

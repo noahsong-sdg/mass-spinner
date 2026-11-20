@@ -1,110 +1,60 @@
-import {test,expect} from '@playwright/test';
+import {test,expect,type Page} from '@playwright/test';
 
-test('tutorial reconnects after simulator reload and reports rejected actions honestly',async({page})=>{
+async function reader(page:Page){
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
+ const view=page.frameLocator('#physics-guide-frame');await expect(view.locator('h1')).toBeVisible();
+ return page.frames().find(frame=>frame.parentFrame()===page.mainFrame())!;
+}
+
+test('all six tutorials share one simulator and expose a specific observation',async({page,context},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
- await expect(reader.locator('#reader-status')).toBeEmpty();
- await expect.poll(()=>reader.evaluate(()=>sessionStorage.getItem('mass-spinner:reader-capability'))).toBeTruthy();
- await page.reload();await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await reader.goto('/guide.html#momentum');await reader.locator('[data-guide-action="spin"]').first().click();
- await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
- await page.locator('#fuel-motion-mode').selectOption('equilibrium');
- await reader.locator('[data-guide-action="cutPower"]').click();
- await expect(reader.locator('#reader-status')).toContainText('Before you cut power, select Coupled separation or Coupled spin-up');
- await expect(page.locator('#fuel-motion-mode')).toHaveValue('equilibrium');expect(errors).toEqual([]);
- await reader.close();
+ const frame=await reader(page);const count=context.pages().length;
+ const input=await page.locator('#fuel-currentA').inputValue();
+ for(const [route,action,plot]of [['/start.html','look',''],['/guide.html','momentum','momentum'],['/tutorial-03.html','work','heat'],['/tutorial-04.html','cut','cut'],['/tutorial-05.html','fuelInventory','inventory'],['/tutorial-06.html','separationPlot','separation']]){
+  await frame.goto(route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
+  await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to watch'})).toBeVisible();
+  if(plot)await expect(page.locator('#fuel-plot')).toHaveValue(plot);
+  await expect(page.locator('#fuel-currentA')).toHaveValue(input);expect(context.pages().length).toBe(count);
+ }
+ await info.attach('shared-tutorial-workspace',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});expect(errors).toEqual([]);
 });
 
-test('tutorial action waits through delayed simulator startup without duplicating a command',async({page})=>{
+test('gas view clears unrelated windows and stages field, current, force and gas without changing inputs',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
- await expect(reader.locator('#reader-status')).toBeEmpty();await reader.goto('/guide.html#momentum');
- await expect.poll(()=>reader.evaluate(()=>sessionStorage.getItem('mass-spinner:reader-capability'))).toBeTruthy();
- let unblock!:()=>void,blocked!:()=>void;
- const release=new Promise<void>(resolve=>{unblock=resolve;}),requested=new Promise<void>(resolve=>{blocked=resolve;});
- let held=false;
- await page.route('**/*',async route=>{
-  if(!held&&route.request().resourceType()==='script'){held=true;blocked();await release;}
-  await route.continue();
- });
- const reload=page.reload({waitUntil:'domcontentloaded'});
- await requested;
- await reader.locator('[data-guide-action="spin"]').first().click();
- await reader.locator('[data-guide-action="momentum"]').click();
- await expect(reader.locator('#reader-status')).toHaveText('Waiting for the simulator…');
- unblock();await reload;
- await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await expect(page.locator('#fuel-plot')).toHaveValue('momentum');
- await reader.close();
+ const frame=await reader(page);await frame.goto('/start.html');
+ await frame.locator('[data-guide-action="coils"]').click();await expect(page.locator('#fuel-component')).toHaveValue('coils');
+ const current=await page.locator('#fuel-currentA').inputValue();
+ await frame.locator('[data-guide-action="look"]').click();
+ await expect(page.locator('#window-inspect')).toBeHidden();await expect(page.locator('#window-guide')).toBeVisible();
+ await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');
+ const cue=page.getByRole('complementary',{name:'What to watch'});
+ for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
+  await cue.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('#fuel-view-drive')).toHaveValue(value);
+ }
+ await expect(page.locator('#fuel-currentA')).toHaveValue(current);
+ await cue.getByRole('button',{name:'Replay motion',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('spin');
+ await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
+ await info.attach('gas-drive-focus',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
 });
 
-test('reloading while a tutorial action waits reports interruption rather than replaying it',async({page})=>{
- await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
- await expect(reader.locator('#reader-status')).toBeEmpty();await reader.goto('/guide.html#momentum');
- await expect.poll(()=>reader.evaluate(()=>sessionStorage.getItem('mass-spinner:reader-capability'))).toBeTruthy();
- // Hold the accepted-result gate closed without changing any physical input.
+test('direct reading action opens the same-tab workspace at its clicked section',async({page,context})=>{
+ await page.goto('/start.html#current');const count=context.pages().length;
+ await page.locator('[data-guide-action="look"]').click();await expect(page).toHaveURL(/lesson=%2Fstart.html%23machine/);
+ await expect(page.locator('#window-guide')).toBeVisible();await expect(page.frameLocator('#physics-guide-frame').locator('#machine')).toBeVisible();
+ await expect(page.locator('#fuel-view-drive')).toHaveValue('all');expect(context.pages().length).toBe(count);
+});
+
+test('a delayed accepted result waits and a newer command replaces it without replay',async({page})=>{
+ await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});const frame=await reader(page);await frame.goto('/guide.html');
  await page.locator('#fuel-export').evaluate((button:HTMLButtonElement)=>{button.disabled=true;});
- await reader.locator('[data-guide-action="spin"]').first().click();
- await expect(reader.locator('#reader-status')).toHaveText('Waiting for the calculated run and controls…');
- await page.reload();
- await expect(reader.locator('#reader-status')).toContainText('The simulator reloaded.');
- await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await expect(reader.locator('#reader-status')).toContainText('action status is unknown');
- await reader.close();
+ await frame.locator('[data-guide-action="spin"]').first().click();await expect(frame.locator('#reader-status')).toContainText('Waiting for the calculated run');
+ await frame.locator('[data-guide-action="momentum"]').click();
+ await page.locator('#fuel-export').evaluate((button:HTMLButtonElement)=>{button.disabled=false;});
+ await expect(page.locator('#fuel-plot')).toHaveValue('momentum');await expect(frame.locator('#reader-status')).toBeEmpty();
 });
 
-
-test('direct tutorial links open the requested view and acknowledge the first action',async({page})=>{
- await page.goto('/start.html');await expect(page.locator('#reader-status')).toBeEmpty();
- const popup=page.waitForEvent('popup');await page.locator('[data-guide-action="look"]').click();const simulator=await popup;
- await expect(page.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await expect(simulator.locator('#fuel-view-representation')).toHaveValue('both');
- await expect(simulator.locator('#fuel-view-drive')).toHaveValue('all');
- await page.locator('[data-guide-action="coils"]').click();
- await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
- await expect(simulator.getByRole('region',{name:'Examine',exact:true})).toBeVisible();
- await expect(page.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await simulator.close();
-});
-
-test('each simulator opens a reader connected to itself rather than an older named reader',async({page,context})=>{
- await page.goto('/?level=2');
- const firstPopup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const first=await firstPopup;
- const secondSimulator=await context.newPage();await secondSimulator.goto('/?level=2');
- const secondPopup=secondSimulator.waitForEvent('popup');await secondSimulator.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const second=await secondPopup;
- expect(second).not.toBe(first);await expect(second.locator('#reader-status')).toBeEmpty();
- await second.goto('/start.html');await second.locator('[data-guide-action="coils"]').click();
- await expect(second.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await expect(secondSimulator.locator('#fuel-component')).toHaveValue('coils');
- await expect(secondSimulator.getByRole('region',{name:'Examine',exact:true})).toBeVisible();
- await first.close();await second.close();await secondSimulator.close();
-});
-
-test('a tutorial opened by an older simulator can open its action in a current simulator',async({page})=>{
- // This earlier receiver has no guide-hello handler. Keep its existing run unchanged.
- await page.route('**/older-simulator.html',route=>route.fulfill({contentType:'text/html',body:'<button onclick="window.open(\'/start.html\',\'_blank\')">Docs</button><p>Existing run</p>'}));
- await page.goto('/older-simulator.html');
- const readerPopup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs',exact:true}).click();const reader=await readerPopup;
- await reader.locator('[data-guide-action="look"]').click();
- await expect(reader.locator('#reader-status')).toHaveText('Waiting for the simulator…');
- const reconnect=reader.getByRole('link',{name:'Open new simulator with default inputs ↗',exact:true});
- await expect(reconnect).toBeVisible();await expect(reconnect).toHaveAttribute('href',/try=look$/);
- const simulatorPopup=reader.waitForEvent('popup');await reconnect.click();const simulator=await simulatorPopup;
- await expect(simulator.locator('#fuel-view-representation')).toHaveValue('both');
- await expect(simulator.locator('#fuel-view-drive')).toHaveValue('all');
- await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');
- await expect(page.getByText('Existing run',{exact:true})).toBeVisible();
- await expect(page).toHaveURL(/older-simulator.html$/);
- await reader.locator('[data-guide-action="coils"]').click();
- await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
- await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');await expect(reconnect).toBeHidden();
- await test.info().attach('recovered-simulator',{body:await simulator.screenshot(),contentType:'image/png'});
- await reader.goto('/guide.html');await reader.locator('[data-guide-action="work"]').click();
- await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');await expect(simulator.locator('#fuel-plot')).toHaveValue('heat');
- await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
- await simulator.close();await reader.close();
+test('untrusted reader routes cannot replace the tutorial document',async({page})=>{
+ await page.goto('/?level=2&lesson=https://example.org/');await expect(page.locator('#window-guide')).toBeHidden();
+ await expect(page.locator('#physics-guide-frame')).not.toHaveAttribute('src');
 });

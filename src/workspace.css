@@ -182,3 +182,55 @@ body.immersive .sim-workspace [hidden]{display:none!important}
  .sim-workspace[data-context="blanket"] .apparatus-provenance,
  .sim-workspace[data-context="source"] .apparatus-provenance{top:116px}
 }
+
+/* The reader and live scene share one workspace. Result windows stay below the scene. */
+.sim-workspace{--tutorial-width:40vw;--tutorial-deck:0px}
+.sim-workspace.tutorial-open{--world-left-reserve:var(--tutorial-width)!important;--world-right-reserve:0px!important}
+#window-guide{position:absolute;top:var(--world-top);bottom:0;left:0;width:var(--tutorial-width);border-radius:0;border-width:0 1px 0 0;z-index:4}
+#window-guide>.world-window-bar a{margin-left:auto;font-size:12px;color:#edbe90;text-decoration:none;white-space:nowrap}
+#window-guide>.world-resizer{right:-6px;left:auto;top:0;bottom:0;height:auto}
+#window-guide .guide-physics{display:flex;height:100%}
+.tutorial-open.tutorial-deck{--tutorial-deck:36dvh}
+.tutorial-open .world-stage{bottom:calc(var(--tutorial-deck) + var(--world-bottom))}
+.tutorial-open .world-rail{top:auto;bottom:var(--world-bottom);height:var(--tutorial-deck);max-height:none;width:calc(100% - var(--tutorial-width) - 24px)!important;left:calc(var(--tutorial-width) + 12px);right:12px;gap:0}
+.tutorial-open.tutorial-pair .world-rail{width:calc((100% - var(--tutorial-width) - 36px)/2)!important}
+.tutorial-open.tutorial-pair .world-rail-right{left:auto;right:12px}
+.tutorial-open .world-rail>.world-resizer{display:none}
+.tutorial-open .world-window{border-radius:4px;max-height:100%}
+.tutorial-open .world-stage .fuel-motion{bottom:12px;left:12px;right:12px;max-width:none;box-shadow:none;padding:6px 8px;gap:4px}
+.tutorial-open .fuel-motion :is(.fuel-motion-legend,.fuel-drive-key,output,p){display:none}
+.tutorial-open .fuel-motion select{max-width:190px}
+.tutorial-open .fuel-motion input{max-width:none}
+.tutorial-open .apparatus-status{display:none}
+.tutorial-focus{position:absolute;z-index:3;top:calc(var(--world-top) + 12px);left:calc(var(--world-left-reserve,0px) + 16px);right:calc(var(--world-right-reserve,0px) + 16px);max-width:760px;background:#17221cf5;padding:12px 16px;border:1px solid #526658;pointer-events:auto}
+.tutorial-focus p{margin:0;font-size:14px;line-height:1.5}.tutorial-focus p+p{font-size:12px;color:#b6c7bc;margin-top:5px}
+.tutorial-drive-stages{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.tutorial-drive-stages button{min-height:36px;padding:4px 10px;font-size:12px;border:1px solid #526658}.tutorial-drive-stages button[aria-pressed=true]{color:#edbe90;background:#26392e}
+@media(max-width:740px){
+ .sim-workspace.tutorial-open{--world-left-reserve:0px!important;--world-right-reserve:0px!important;--tutorial-deck:0px}
+ #window-guide{top:var(--world-top);height:38dvh;bottom:auto;width:100%;max-height:none}
+ #window-guide>.world-resizer{display:none}
+ .tutorial-open .world-stage{top:calc(var(--world-top) + 38dvh);bottom:var(--world-bottom)}
+ .tutorial-open .world-stage>.world-group{inset:0}
+ .tutorial-open .tutorial-focus{top:calc(var(--world-top) + 38dvh + 4px);left:8px;right:8px;padding:6px 8px}
+ .tutorial-open .tutorial-focus p{font-size:12px}.tutorial-open .tutorial-focus p+p{font-size:11px}
+ .tutorial-open.tutorial-deck .world-rail{height:32dvh;max-height:none;left:8px;right:8px;width:auto!important;z-index:6}
+ .tutorial-open.tutorial-deck .world-stage{bottom:calc(var(--world-bottom) + 32dvh)}
+ .tutorial-open.tutorial-deck #window-guide{height:26dvh}
+ .tutorial-open.tutorial-deck .world-stage{top:calc(var(--world-top) + 26dvh)}
+ .tutorial-open.tutorial-deck .tutorial-focus{top:calc(var(--world-top) + 26dvh + 4px)}
+ .tutorial-open.tutorial-deck .tutorial-focus p+p{display:none}
+ .tutorial-open .fuel-motion select{max-width:125px}.tutorial-open .fuel-motion button{min-height:32px;padding:2px 5px;font-size:11px}
+}
+
+.tutorial-focus-close{position:absolute;right:4px;top:4px;min-width:32px;min-height:32px;color:#b6c7bc}.tutorial-focus{padding-right:38px}
+@media(max-width:740px){
+ .sim-workspace.tutorial-open{display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+ .tutorial-open .world-top{position:sticky;top:0;flex:none;order:0;min-height:var(--world-top)}
+ .tutorial-open #window-guide{position:relative;top:auto;bottom:auto;left:auto;width:100%;height:42dvh!important;min-height:250px;max-height:none;flex:none;order:1}
+ .tutorial-open .tutorial-focus{position:relative;top:auto!important;left:auto;right:auto;margin:8px;flex:none;order:2}
+ .tutorial-open .world-stage{position:relative;inset:auto;min-height:50dvh;flex:none;order:3;width:100%}
+ .tutorial-open .world-rail{position:relative;inset:auto!important;width:100%!important;height:55dvh!important;min-height:300px;max-height:none;flex:none;order:4;padding:8px}
+ .tutorial-open .world-dock{position:sticky;inset:auto;bottom:0;transform:none;align-self:center;flex:none;order:5}
+ .tutorial-open .world-stage .fuel-motion{bottom:8px}
+ .tutorial-open.tutorial-deck .tutorial-focus p+p{display:block}
+}

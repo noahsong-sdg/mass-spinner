@@ -42,7 +42,7 @@ export function createFuelViewTools({document:doc,host,onChange=()=>{},onCamera=
  ghost.addEventListener('change',()=>{state.ghost=ghost.checked;onChange({...state});});staging.append(ghost,ghostLabel);
  const circuit=el('input'),circuitLabel=el('label','Discharge circuit');circuit.type='checkbox';circuit.id='fuel-view-circuit';circuitLabel.htmlFor=circuit.id;
  circuit.addEventListener('change',()=>{state.circuit=circuit.checked;onChange({...state});});staging.append(circuit,circuitLabel);
- for(const [label,direction]of [['Cutaway',[.55,1.25,.8]],['Axial',[1,0,0]],['Side',[0,1,0]]] as const){const button=el('button',label);button.addEventListener('click',()=>onCamera(direction));staging.append(button);}
+ for(const [label,direction]of [['Cutaway',[.55,1.25,.8]],['Axial',[1,0,0]],['Side',[0,1,0]]] as const){const button=el('button',label);button.id=`fuel-camera-${label.toLowerCase()}`;button.addEventListener('click',()=>onCamera(direction));staging.append(button);}
  function updateLegend(tools: FuelSceneTools | null | undefined){if(!tools)return;const l=tools.legend,text=`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(4))).join(' → ')} ${l.unit}`;if(legend.textContent!==text)legend.textContent=text;legend.className='fuel-field-legend';legend.style.borderImage=`linear-gradient(to right,${l.colors.join(',')}) 1`;if(tools.drive){const d=tools.drive.state,text=`B ${d.fieldT.toPrecision(3)} T · I ${d.currentA.toPrecision(3)} A · τ ${d.torqueNm.toExponential(2)} N·m. Arrows show directions. B and radial current are specified inputs.`;if(driveLegend.textContent!==text)driveLegend.textContent=text;}}
  function apply(tools: FuelSceneTools | null | undefined){
   if(!tools)return;tools.group.visible=state.visible;

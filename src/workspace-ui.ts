@@ -1,4 +1,5 @@
 import {clamp,defaultWorkspaceLayout,readWorkspaceLayout,workspaceGeometry,workspaceLayoutKey,type WorkspaceStorage} from './workspace-layout.js';
+import {tutorialPresentation} from './tutorial-presentation.js';
 import {setupPlaygroundGuide} from './playground-guide.js';
 
 import type {ExperienceLevel} from './experience-state.js';
@@ -30,11 +31,13 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  const persist=()=>{try{storage?.setItem(workspaceLayoutKey,JSON.stringify(layout));}catch{}};
  const reset=make('button','world-layout-reset','↺');reset.type='button';reset.setAttribute('aria-label','Reset window layout');
  reset.addEventListener('click',()=>{layout={...defaultWorkspaceLayout};try{storage?.removeItem(workspaceLayoutKey);}catch{}arrange();});
- const isOpen=(side:Side)=>[...windows.values()].some(item=>item.side===side&&!item.panel.hidden);
+ const isOpen=(side:Side)=>[...windows.entries()].some(([key,item])=>key!=='guide'&&item.side===side&&!item.panel.hidden);
  function arrange(){
   const dockHeight=dock.getBoundingClientRect().height;
   if(dockHeight>0)shell.style.setProperty('--world-bottom',`${Math.ceil(dockHeight+(parseFloat(win.getComputedStyle(dock).bottom)||0)+12)}px`);
+  const tutorial=!windows.get('guide')?.panel.hidden;shell.classList.toggle('tutorial-open',tutorial);
   const leftOpen=isOpen('left'),rightOpen=isOpen('right'),width=win.innerWidth;
+  shell.classList.toggle('tutorial-deck',tutorial&&(leftOpen||rightOpen));shell.classList.toggle('tutorial-pair',leftOpen&&rightOpen);
   const sizes=workspaceGeometry(layout,width,leftOpen,rightOpen);
   for(const side of ['left','right'] as const){
    const visible=isOpen(side);rails[side].hidden=!visible;
@@ -93,7 +96,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  function open(key:string,focus=false){
   const item=windows.get(key);if(!item||item.button.hidden)return;
-  for(const [other,entry]of windows)if(other!==key&&(mobile.matches||entry.group===item.group))close(other);
+  for(const [other,entry]of windows)if(other!==key&&other!=='guide'&&key!=='guide'&&(mobile.matches||entry.group===item.group))close(other);
   item.panel.hidden=false;item.button.setAttribute('aria-expanded','true');
   arrange();
   if(focus)item.heading.focus();
@@ -103,17 +106,33 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   panel.id=`window-${key}`;heading.id=`window-title-${key}`;heading.tabIndex=-1;
   panel.setAttribute('aria-labelledby',heading.id);dismiss.type='button';dismiss.setAttribute('aria-label',`Close ${title}`);
   button.type='button';button.setAttribute('aria-controls',panel.id);button.setAttribute('aria-expanded','false');
-  button.addEventListener('click',()=>{if(key==='guide')guide.openStandalone();else if(panel.hidden)open(key,true);else close(key,true);});dismiss.addEventListener('click',()=>close(key,true));
+  button.addEventListener('click',()=>{if(key==='guide')guide.showReader();else if(panel.hidden)open(key,true);else close(key,true);});dismiss.addEventListener('click',()=>close(key,true));
   panel.addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();close(key,true);}});
   bar.append(heading,dismiss);panel.append(bar,body);panel.hidden=true;rails[side].append(panel);if(key!=='guide')dock.append(button);
   windows.set(key,{panel,button,body,heading,side,group:key==='target'?'target':side});return body;
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Examine','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Tutorials','left')};
- const reading=make('div','world-reading'),docsButton=make('button','','Docs & tutorials ↗');
- docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Open the tutorials and documentation in a separate tab';
- docsButton.addEventListener('click',()=>guide.openStandalone());
+ const reading=make('div','world-reading'),docsButton=make('button','','Docs & tutorials');
+ docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Read beside the live simulator';docsButton.setAttribute('aria-controls','window-guide');
+ docsButton.addEventListener('click',()=>{if(windows.get('guide')!.panel.hidden)guide.showReader();else close('guide',true);});
  reading.append(docsButton);header.append(reading);
- const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus});
+ const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus,present});
+ const tutorialPanel=windows.get('guide')!.panel;shell.append(tutorialPanel);
+ const readFull=make('a','','Reading page ↗');readFull.href='/learn.html';readFull.target='_blank';readFull.rel='noopener';
+ const readerFrame=panels.guide.querySelector<HTMLIFrameElement>('iframe')!;
+ readerFrame.addEventListener('load',()=>{const path=readerFrame.contentDocument?.location;readFull.href=path?path.pathname+path.hash:'/learn.html';});
+ tutorialPanel.querySelector('.world-window-bar')!.append(readFull);
+ let readerWidth=.4;const readerHandle=separator('Resize tutorial and simulator','vertical',delta=>{readerWidth=delta==='min'?.28:delta==='max'?.6:clamp(readerWidth+delta/win.innerWidth,.28,.6);shell.style.setProperty('--tutorial-width',`${readerWidth*100}vw`);readerHandle.setAttribute('aria-valuenow',String(Math.round(readerWidth*100)));win.dispatchEvent(new win.Event('resize'));});
+ readerHandle.setAttribute('aria-valuemin','28');readerHandle.setAttribute('aria-valuemax','60');readerHandle.setAttribute('aria-valuenow','40');tutorialPanel.append(readerHandle);
+ const cue=make('aside','tutorial-focus'),watch=make('p',''),note=make('p',''),stages=make('div','tutorial-drive-stages');cue.hidden=true;cue.setAttribute('aria-label','What to watch');cue.append(watch,note,stages);shell.append(cue);const dismissCue=make('button','tutorial-focus-close','×');dismissCue.type='button';dismissCue.setAttribute('aria-label','Close learning prompt');dismissCue.addEventListener('click',()=>{cue.hidden=true;});cue.append(dismissCue);
+ for(const [label,layer,text]of [['Field','B','The magnetic field points along the cylinder axis.'],['Current','J','Current crosses the gas toward the inner electrode.'],['Force','force','Current across the field gives a tangential force.'],['Gas','all','Collisions transfer rotation from ions to neutral gas.']] as const){const button=make('button','',label);button.type='button';button.addEventListener('click',()=>{const input=doc.getElementById('fuel-view-drive') as HTMLSelectElement;input.value=layer;input.dispatchEvent(new win.Event('change'));note.textContent=text;for(const sibling of stages.querySelectorAll('button'))sibling.setAttribute('aria-pressed',String(sibling===button));});stages.append(button);}
+ const replay=make('button','','Replay motion');replay.type='button';replay.addEventListener('click',()=>guide.launch('spin'));stages.append(replay);
+ function present(key:string){
+  for(const name of ['controls','plots','target','inspect','view','info'])close(name);
+  const view=tutorialPresentation(key);cue.hidden=!view;if(!view)return;watch.textContent=view.watch;note.textContent=view.note;stages.hidden=key!=='look';
+  for(const button of stages.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.textContent==='Gas'));
+ }
+
  dock.append(reset);
  const methods=make('a','world-methods','?');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';methods.setAttribute('aria-label','How Mass Spinner works');methods.title='How Mass Spinner works';dock.append(methods);
  function group(parent:HTMLElement,levels:readonly ExperienceLevel[],selectors:readonly string[],context?:string){
@@ -158,12 +177,12 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   context.hidden=level!=='2'||marathon==='centrifuge';
   for(const {wrapper,levels,context}of groups)wrapper.hidden=!levels.includes(level)||(!!context&&context!==marathon);
   const allowed=level==='4'?['controls']:level==='2'?(marathon==='source'?['controls','plots','target','inspect','info']:marathon==='centrifuge'?['controls','plots','inspect','view','info','guide']:['plots','inspect']):level==='1'?['controls','plots','inspect','view']:['controls','plots','inspect','view','info'];
-  for(const [key,{button}]of windows){const available=allowed.includes(key)&&(key!=='view'||level==='2'&&marathon==='centrifuge'||!doc.querySelector<HTMLElement>('.viewport-tools')!.hidden);if(!available)close(key);button.hidden=!available;}
+  for(const [key,{button}]of windows){const available=(key==='guide'||allowed.includes(key))&&(key!=='view'||level==='2'&&marathon==='centrifuge'||!doc.querySelector<HTMLElement>('.viewport-tools')!.hidden);if(!available)close(key);button.hidden=!available;}
   if(doc.activeElement?.closest('[hidden]'))(context.hidden?[...windows.values()].find(item=>!item.button.hidden)?.button:switcher)?.focus();
   arrange();
   onContextChange({level,marathon});
  }
- const onMobile=()=>{if(mobile.matches){let kept=false;for(const [key,{panel}]of windows)if(!panel.hidden){if(kept)close(key);kept=true;}}arrange();};
+ const onMobile=()=>{if(mobile.matches){let kept=false;for(const [key,{panel}]of windows)if(key!=='guide'&&!panel.hidden){if(kept)close(key);kept=true;}}arrange();};
  mobile.addEventListener('change',onMobile);
  win.addEventListener('resize',arrange);
  if(win.ResizeObserver)new win.ResizeObserver(arrange).observe(dock);
@@ -175,5 +194,5 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   const node=selector?item.body.querySelector<HTMLElement>(selector):null;
   if(node){for(let parent=node.parentElement;parent&&parent!==item.body;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;node.scrollIntoView?.({block:'nearest'});node.focus?.({preventScroll:true});}
  }
- return {open,close,focusRelated,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
+ return {open,close,focusRelated,openTutorial:guide.showReader,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
 }

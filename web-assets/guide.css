@@ -67,3 +67,5 @@ h1,h2,h3{font-family:Literata,serif;font-optical-sizing:auto}
 @keyframes concept-flow{to{stroke-dashoffset:-24}}@keyframes concept-reveal{0%{transform:scaleX(0)}85%,100%{transform:scaleX(1)}}
 @media(max-width:480px){.concept-example{padding:14px}.concept-example .drive-heading{align-items:flex-start}.concept-example .diagram-cases button{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.concept-example[data-motion=paused] .concept-flow,.concept-example[data-motion=paused] .concept-reveal{animation:none}}
+
+body.embedded{max-width:none;padding:16px 24px;margin:0}body.embedded main{max-width:760px;margin:auto}body.embedded header{display:flex;flex-wrap:wrap;gap:12px;font-size:12px}body.embedded .try-actions a{font-size:13px;min-height:40px;padding:8px 12px}body.embedded h1{font-size:28px}body.embedded h2{font-size:24px}body.embedded .walkthrough-step{padding:24px 0}

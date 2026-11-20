@@ -1,9 +1,10 @@
+import {tutorialPresentation,tutorialRoute} from './tutorial-presentation.js';
 import {guideActions,guideTopics,guideExperiments} from './guide-topics.js';
 import type {GuideExperiment} from './guide-topics.js';
 
 import {playgroundSteps as steps} from './playground-guide-steps.js';
 
-export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void};
+export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void};
 type GuideElements={
  'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
  'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;'fuel-new-run':HTMLButtonElement;
@@ -15,7 +16,7 @@ type GuideElements={
 type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
 /** Optional instructions for the existing controls. These instructions do not add simulation modes or physical presets. */
-export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,canUseApparatus=()=>true}:PlaygroundGuideOptions){
+export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,present=()=>{},canUseApparatus=()=>true}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
  const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
@@ -24,6 +25,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  if(!capability)capability=win.crypto.randomUUID();
  try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Keep the same authorization boundary without storage. */}
  function openStandalone(){readerWindow=win.open('/learn.html','_blank');}
+ function showReader(route?:string){const safe=tutorialRoute(route??frame.getAttribute('src')??'/learn.html');if(!safe)return;reading.hidden=true;reader.hidden=false;views.hidden=true;nav.hidden=true;if(frame.getAttribute('src')!==safe)frame.src=safe;open('guide');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
@@ -43,7 +45,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function showPhysics(topic?:string){
   reading.hidden=true;reader.hidden=false;previous.hidden=true;next.hidden=true;
   explore.setAttribute('aria-pressed','false');physics.setAttribute('aria-pressed','true');
-  if(!frame.hasAttribute('src')||topic){const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';frame.src=`/guide.html#${id}`;}
+  const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';showReader(topic||!frame.hasAttribute('src')?`/guide.html#${id}`:frame.getAttribute('src')!);
  }
  function showExplore(){
   reading.hidden=false;reader.hidden=true;previous.hidden=false;next.hidden=false;
@@ -111,13 +113,13 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
   if(!canUseApparatus('centrifuge')){status.textContent='To use these guide controls, select Centrifuge.';return;}
-  if(Object.hasOwn(controlFocus,key)){focusRelated('controls',controlFocus[key]);return;}
+  if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key))plot(view.plot);focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   if(key==='look'){
-   set('fuel-view-representation','both');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');close('guide',true);return;
+   set('fuel-view-representation','tracers');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');doc.getElementById('fuel-camera-axial')?.click();return;
   }
-  if(key==='coils'){set('fuel-component','coils');open('inspect',true);return;}
+  if(key==='coils'){set('fuel-component','coils');open('inspect',true);doc.getElementById('fuel-focus-component')?.click();return;}
   // Do not show pending or failed results as a new experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it fails, open Controls. Change the settings to start the calculation again.';return;}
   if(Object.hasOwn(tutorialPlots,key)){plot(tutorialPlots[key]);return;}
@@ -130,7 +132,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    power.click();return;
   }
   if(key==='currentExperiment'){
-   index=1;render();showExplore();set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
+   set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
   }else if(key==='endSpin'){
    endpoint();plot('spin');
   }else if(key==='spin'){
@@ -179,20 +181,20 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string'){
    if(allowed.has(data.action))launch(data.action,reply);
    else reply({status:'rejected',message:'This tutorial action is not available.'});
-  }else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments'){showExplore();reply({status:'executed'});}
+  }else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments'){showReader('/start.html');reply({status:'executed'});}
   else if(data.type==='mass-spinner:guide-close')close('guide',true);
  });
  function launch(key:string,reply:(outcome:Outcome)=>void=()=>{}){
   if(!allowed.has(key))return;
   cancelLaunch();
-  const execute=()=>{action(key);reply(status.textContent?{status:'rejected',message:status.textContent}:{status:'executed'});};
+  const execute=()=>{present(key);action(key);reply(status.textContent?{status:'rejected',message:status.textContent}:{status:'executed'});};
   const immediate=Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key);
   const ready=()=>{
    if(!canUseApparatus('centrifuge')&&!Object.hasOwn(guideExperiments,key))return true;
    if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
    if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
-   if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-drive'].every(id=>doc.getElementById(id));
+   if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-drive'].every(id=>doc.getElementById(id))&&!!node('fuel-component')?.querySelector('option[value="coils"]');
    if(key==='coils')return !!node('fuel-component')?.querySelector('option[value="coils"]');
    return immediate||!pending(key);
   };
@@ -223,5 +225,5 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  next.addEventListener('click',()=>{if(index===steps.length-1)close('guide',true);else{index++;render(true);}});
  leave.addEventListener('click',()=>close('guide',true));
  render();
- return {showPhysics,showExplore,openStandalone,launch};
+ return {showPhysics,showExplore,showReader,openStandalone,launch};
 }
