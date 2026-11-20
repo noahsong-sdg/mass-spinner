@@ -4,6 +4,16 @@ import {readFile} from 'node:fs/promises';
 import {gunzipSync} from 'node:zlib';
 import type {AcceptedFuelSnapshot} from '../src/fuel-comparison-ui.ts';
 
+async function openReader(page:Page){
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
+ await expect(page.locator('#window-guide')).toBeVisible();
+ const iframe=await page.locator('#physics-guide-frame').elementHandle();
+ const reader=await iframe!.contentFrame();
+ if(!reader)throw new Error('Missing simulator tutorial frame.');
+ await expect(reader.locator('h1')).toBeVisible();
+ return reader;
+}
+
 async function dimensionLabelsDoNotOverlap(page:Page,host:string){
  const note=await page.locator(`${host} .apparatus-scale-note`).boundingBox(),disclosure=await page.locator(`${host} .apparatus-provenance`).boundingBox();
  expect(note).not.toBeNull();expect(disclosure).not.toBeNull();
@@ -102,21 +112,22 @@ test('four gas modes reveal their geometry and explain their physical scope',asy
  expect(errors).toEqual([]);
 });
 
-test('Docs opens a full-page walkthrough while preserving the running simulator',async({page},info)=>{
+test('Docs opens an attached walkthrough while preserving the running simulator',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
  await page.getByRole('button',{name:'Plots',exact:true}).click();const before=await exported(page);await page.getByRole('button',{name:'Close Plots',exact:true}).click();
- const popup=page.waitForEvent('popup');
- await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
+ const pages=page.context().pages().length,reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
- await expect(reader).toHaveURL(/\/start(?:\.html)?$/);
+ await expect.poll(()=>reader.url()).toMatch(/\/start(?:\.html)?$/);
  await expect(reader.getByRole('heading',{name:'Tutorial 1 · Using the simulator',exact:true})).toBeVisible();
- await expect(reader.locator('iframe')).toHaveCount(0);await expect(page.locator('#window-guide')).toBeHidden();
+ await expect(reader.locator('iframe')).toHaveCount(0);await expect(page.locator('#window-guide')).toBeVisible();
  await reader.locator('[data-guide-action="endSpin"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#window-plots')).toBeVisible();
  const after=await exported(page);expect(after.result).toEqual(before.result);
  expect(await reader.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
- expect((await new AxeBuilder({page:reader}).analyze()).violations).toEqual([]);
- await info.attach('standalone-start-guide',{body:await reader.screenshot(),contentType:'image/png'});await reader.close();
+ await expect(page.locator('#window-guide')).toBeVisible();await expect(reader.locator('#reader-status')).toBeEmpty();
+ expect(page.context().pages()).toHaveLength(pages);
+ expect((await new AxeBuilder({page}).include('#window-guide').analyze()).violations).toEqual([]);
+ await info.attach('attached-start-guide',{body:await page.screenshot(),contentType:'image/png'});
 });
 
 test('Marathon reference geometry discloses paper dimensions and unknown hardware size',async({page},info)=>{
@@ -210,9 +221,11 @@ test('guide: local links, native action and accessible reading layout',async({pa
  await expect(page.locator('.katex-error')).toHaveCount(0);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);
- const popup=page.waitForEvent('popup');await page.locator('a[href*="topic=momentum&try=spin"]').click();const simulator=await popup;
- await expect(simulator.locator('#fuel-plot')).toHaveValue('spin');await expect(simulator.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- expect(errors).toEqual([]);await simulator.close();
+ const pages=page.context().pages().length;await page.locator('a[href*="topic=momentum&try=spin"]').click();
+ await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ expect(new URL(page.url()).searchParams.get('lesson')).toBe('/guide.html#momentum');
+ await expect(page.locator('#window-guide')).toBeVisible();expect(page.context().pages()).toHaveLength(pages);
+ expect(errors).toEqual([]);
 });
 
 for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its production module`,async({page})=>{
@@ -222,9 +235,9 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  expect(errors).toEqual([]);
 });
 
-test('control tutorial changes the existing run through the separate reader',async({page})=>{
+test('control tutorial changes the existing run through the attached reader',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const popup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await popup;
+ const reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#fuel-currentA')).toBeFocused();await page.locator('#fuel-currentA').press('Home');
@@ -236,7 +249,8 @@ test('control tutorial changes the existing run through the separate reader',asy
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});await current.fill('0.03');await current.press('Enter');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});await reader.locator('[data-guide-action="endSpin"]').click();
  const driven=await exported(page);expect(driven.result.config.currentA).toBe(.03);expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
- expect(driven.result.config.durationS).toBe(zero.result.config.durationS);await expect(page.locator('#window-guide')).toBeHidden();await reader.close();
+ expect(driven.result.config.durationS).toBe(zero.result.config.durationS);await expect(page.locator('#window-guide')).toBeVisible();
+ await expect(reader.locator('#reader-status')).toBeEmpty();
 });
 
 test('Inspect: liner reference changes its response without changing gas temperature',async({page},info)=>{

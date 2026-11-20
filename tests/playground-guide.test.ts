@@ -355,3 +355,16 @@ test('visual tutorial actions need mounted view controls but no accepted physics
  f.workspace.launchGuideAction('coils');assert.equal(f.node('window-inspect').hidden,false);
  assert.equal(f.node('fuel-component').value,'coils');assert.equal(fuel.accepted.disabled,true);
 });
+
+
+test('the tutorial divider resizes the reader and Escape closes only the reader',t=>{
+ const f=fixture(t);f.workspace.openTutorial('/start.html');f.workspace.open('plots');
+ const handle=f.doc.querySelector<HTMLElement>('[aria-label="Resize tutorial and simulator"]')!;handle.focus();
+ handle.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ assert.equal(handle.getAttribute('aria-valuenow'),'60');
+ handle.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
+ assert.equal(handle.getAttribute('aria-valuenow'),'28');
+ handle.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-plots').hidden,false);
+ assert.equal(f.doc.activeElement,f.node('open-docs'));
+});

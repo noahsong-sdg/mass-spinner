@@ -83,7 +83,7 @@ test('coils wait for the asynchronously populated component options before ackno
 });
 
 test('embedded reader sends each action once to its exact parent without a readiness handshake',t=>{
- const f=reader(t);assert.equal(f.status(),'');assert.deepEqual(f.simulator.packets,[]);
+ const f=reader(t);assert.equal(f.status(),'');assert.equal(f.simulator.packets.length,0);
  f.click('spin');f.click('current');
  assert.deepEqual(f.simulator.packets.map(packet=>[packet.type,packet.action]),[['mass-spinner:guide-action','spin'],['mass-spinner:guide-action','current']]);
  const [first,second]=f.simulator.packets;assert.ok(first.requestId);assert.ok(second.requestId);assert.notEqual(first.requestId,second.requestId);
@@ -134,7 +134,7 @@ test('the simulator accepts commands only from its own reader frame and returns 
  const frame=f.dom.window.document.getElementById('physics-guide-frame') as HTMLIFrameElement;
  const source=frame.contentWindow!,responses:Packet[]=[];Object.defineProperty(source,'postMessage',{value:(data:Packet,target:string)=>{assert.equal(target,origin);responses.push(data);}});
  const request={type:'mass-spinner:guide-action',action:'current',requestId:'frame-current'};
- f.send(peer().window,request);f.send(source,request,'https://wrong.example');assert.deepEqual(f.opened,['guide']);assert.deepEqual(responses,[]);
+ f.send(peer().window,request);f.send(source,request,'https://wrong.example');assert.deepEqual(f.opened,['guide']);assert.equal(responses.length,0);
  f.send(source,request);assert.equal(responses.at(-1)?.status,'executed');assert.deepEqual(f.opened,['guide','controls']);
  f.send(source,request);assert.deepEqual(f.opened,['guide','controls'],'a repeated request must not repeat the control action');
  assert.equal(responses.length,2);assert.deepEqual(responses[0],responses[1]);

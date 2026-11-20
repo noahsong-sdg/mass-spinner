@@ -61,7 +61,8 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   handle.title='Drag or use the arrow keys to change the size. Home and End select the limits.';
   handle.addEventListener('keydown',event=>{
    if(event.key==='Escape'){
-    event.preventDefault();const side=handle.parentElement===rails.left?'left':'right';
+    event.preventDefault();if(handle.parentElement?.id==='window-guide'){close('guide',true);return;}
+    const side=handle.parentElement===rails.left?'left':'right';
     for(const [key,item]of windows)if(item.side===side)close(key,true);return;
    }
    const delta:Record<string,number>=orientation==='vertical'?{ArrowLeft:-24,ArrowRight:24}:{ArrowUp:-.05,ArrowDown:.05};

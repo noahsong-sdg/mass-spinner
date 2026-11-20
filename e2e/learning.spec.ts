@@ -1,7 +1,21 @@
-import {test,expect} from '@playwright/test';
+import {test,expect,type Page} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('main-page Docs & tutorials opens full-page readers and keeps their controls connected',async({page},info)=>{
+async function readerFrame(page:Page){
+ await expect(page.locator('#window-guide')).toBeVisible();
+ const iframe=await page.locator('#physics-guide-frame').elementHandle();
+ const reader=await iframe!.contentFrame();
+ if(!reader)throw new Error('Missing simulator tutorial frame.');
+ await expect(reader.locator('h1')).toBeVisible();
+ return reader;
+}
+
+async function openReader(page:Page){
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
+ return readerFrame(page);
+}
+
+test('main-page Docs & tutorials keeps the reader and controls in one workspace',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const button=page.getByRole('button',{name:'Docs & tutorials',exact:true});await expect(button).toBeInViewport();
@@ -9,20 +23,25 @@ test('main-page Docs & tutorials opens full-page readers and keeps their control
  const docsBox=await button.boundingBox();
  const sceneBox=await page.locator('.world-stage>.world-group:not([hidden])').boundingBox();
  expect(docsBox&&sceneBox&&docsBox.y+docsBox.height<=sceneBox.y).toBeTruthy();
- await button.focus();const opened=page.waitForEvent('popup');await button.press('Enter');const reader=await opened;
+ const pages=page.context().pages().length;
+ await button.focus();await button.press('Enter');const reader=await readerFrame(page);
+ expect(page.context().pages()).toHaveLength(pages);
  await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
  for(const href of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/how-it-works.html','/equilibrium.html','/qualification.html'])await expect(reader.locator(`main a[href="${href}"]`)).toBeVisible();
  expect(await reader.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const current=await page.locator('#fuel-currentA').inputValue();
  await reader.locator('main a[href="/tutorial-03.html"]').click();await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
- await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toContainText('Opened in the simulator.');
- const reopened=page.waitForEvent('popup');await button.click();const secondReader=await reopened;
- await expect(secondReader.locator('h1')).toHaveText('Docs & tutorials');
- await secondReader.locator('main a[href="/how-it-works.html"]').click();await expect(secondReader.locator('h1')).toBeVisible();
+ await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(reader.locator('#reader-status')).toBeEmpty();
+ await expect(page.locator('#window-guide')).toBeVisible();
+ await button.click();await expect(page.locator('#window-guide')).toBeHidden();
+ await button.click();await expect(page.locator('#window-guide')).toBeVisible();
+ await expect(reader.locator('h1')).toContainText('Tutorial 3');
+ await reader.goto('/learn.html');
+ await reader.locator('main a[href="/how-it-works.html"]').click();await expect(reader.locator('h1')).toBeVisible();
  await info.attach('main-page-docs-button',{body:await page.locator('.world-reading').screenshot(),contentType:'image/png'});
- await info.attach('full-page-documentation',{body:await secondReader.screenshot(),contentType:'image/png'});
- expect(errors).toEqual([]);await reader.close();await secondReader.close();
+ await info.attach('attached-documentation',{body:await reader.locator('body').screenshot(),contentType:'image/png'});
+ expect(page.context().pages()).toHaveLength(pages);expect(errors).toEqual([]);
 });
 
 test('heat and collection illustrations explain direction and inventory with accessible working controls',async({page},info)=>{
@@ -110,8 +129,7 @@ test('documentation index omits investigations and loads local typography withou
 
 test('reader navigation keeps its simulator connection and tutorial plot actions preserve accepted inputs',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const pending=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
- const reader=await pending;
+ const reader=await openReader(page);
  await reader.locator('a[href="/tutorial-06.html"]').click();
  await reader.locator('[data-guide-action="separationPlot"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('separation');
@@ -122,7 +140,8 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await reader.locator('[data-guide-action="momentum"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('momentum');
  await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
- await expect(reader.locator('#reader-status')).toContainText('Opened in the simulator.');
+ await expect(reader.locator('#reader-status')).toBeEmpty();
+ await expect(page.locator('#window-guide')).toBeVisible();
  await reader.goto('/tutorial-06.html#sensitivity');
  await reader.locator('[data-guide-action="pin"]').click();
  await reader.locator('[data-guide-action="diffusion"]').click();
@@ -134,35 +153,36 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
  await expect(page.locator('.fuel-comparison-inputs')).toBeVisible();
  await expect(page.locator('.fuel-comparison-inputs')).toContainText('Changed A → B: Radial diffusivity:');
  await expect(page.locator('.fuel-comparison-inputs')).toContainText(`→ ${10**Number(await diffusivity.inputValue())} m²/s`);
- await reader.close();
 });
 
-test('an independently opened reader reconnects across guide navigation without resetting its simulator',async({page})=>{
- await page.goto('/start.html');
- const pending=page.waitForEvent('popup');await page.getByRole('link',{name:'Simulator ↗',exact:true}).click();
- const simulator=await pending;
- await expect(simulator.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await simulator.getByRole('button',{name:'Controls',exact:true}).click();
- const current=simulator.locator('#fuel-currentA'),before=await current.inputValue();
+test('a standalone tutorial enters one workspace and keeps accepted inputs across reader navigation',async({page})=>{
+ await page.goto('/start.html');const pages=page.context().pages().length;
+ await page.locator('[data-guide-action="look"]').click();
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ expect(new URL(page.url()).searchParams.get('lesson')).toBe('/start.html#machine');
+ expect(new URL(page.url()).searchParams.get('try')).toBe('look');
+ expect(page.context().pages()).toHaveLength(pages);
+ const reader=await readerFrame(page);
+ await page.getByRole('button',{name:'Controls',exact:true}).click();
+ const current=page.locator('#fuel-currentA'),before=await current.inputValue();
  await current.focus();await current.press('ArrowRight');await expect(current).not.toHaveValue(before);
- await expect(simulator.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const edited=await current.inputValue();
- await simulator.getByRole('button',{name:'Close Controls',exact:true}).click();
- await expect(simulator.locator('#window-controls')).not.toBeVisible();let navigations=0;
- simulator.on('framenavigated',frame=>{if(frame===simulator.mainFrame())navigations++;});
- await page.getByRole('banner').getByRole('link',{name:'Physics & equations →',exact:true}).click();
- await page.locator('[data-guide-action="work"]').click();
- await expect(simulator.locator('#window-plots')).toBeVisible();
- await expect(simulator.locator('#fuel-plot')).toHaveValue('heat');
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await expect(page.locator('#window-controls')).not.toBeVisible();let navigations=0;
+ page.on('framenavigated',frame=>{if(frame===page.mainFrame())navigations++;});
+ await reader.goto('/guide.html#energy');
+ await reader.locator('[data-guide-action="work"]').click();
+ await expect(page.locator('#window-plots')).toBeVisible();
+ await expect(page.locator('#fuel-plot')).toHaveValue('heat');
  await expect(current).toHaveValue(edited);expect(navigations).toBe(0);
- await expect(page.locator('#reader-status')).toContainText('Opened in the simulator.');
- await simulator.close();
+ await expect(reader.locator('#reader-status')).toBeEmpty();await expect(page.locator('#window-guide')).toBeVisible();
 });
 
 test('tutorial experiment links put relevant controls and results within one action on desktop and phone',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const opened=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();const reader=await opened;
+ const reader=await openReader(page);
  await reader.goto('/tutorial-03.html#budget');const current=await page.locator('#fuel-currentA').inputValue();
  await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#fuel-thermal-enabled')).toBeFocused();
@@ -187,7 +207,7 @@ test('tutorial experiment links put relevant controls and results within one act
  await page.goto('/?level=2&try=beamTarget');
  await expect(page.locator('#coupled-pulseDuty')).toBeFocused();await expect(page.locator('#coupled-view-settings')).toBeVisible();
  await page.getByRole('button',{name:'Show target dynamics',exact:true}).click();await expect(page.locator('#coupled-view-dynamics')).toBeVisible();
- expect(errors).toEqual([]);await reader.close();
+ expect(errors).toEqual([]);
 });
 
 
