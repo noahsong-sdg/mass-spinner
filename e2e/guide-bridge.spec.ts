@@ -38,6 +38,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  const cue=page.getByRole('complementary',{name:'What to look for'});
  for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
   await cue.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('#fuel-view-drive')).toHaveValue(value);
+  if(value==='force')await info.attach('force-direction-glyphs',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
  }
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);
  await cue.getByRole('button',{name:'Replay motion',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('spin');

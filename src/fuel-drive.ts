@@ -22,23 +22,23 @@ export function createFuelDrive(config: FuelDriveConfig){
  const {radiusM:R,lengthM:L,driveInnerFraction:f}=config,group=new THREE.Group(),layers: Record<FuelDriveLayer, THREE.Group>={B:new THREE.Group(),J:new THREE.Group(),force:new THREE.Group()};
  group.name='Prescribed electromagnetic drive';group.userData={nonPickable:true,quantitativeOnly:true,scope:'Uniform axial B; Jr = −I/(2πrL) in a specified annulus. Fixed-length arrows show directions. The model does not calculate field lines.'};
  for(const name of ['B','J','force'] as const){layers[name].name=name;group.add(layers[name]);}
- const colors={B:0x9bb8cf,J:0xe0a36c,force:0xe0e6be};
+ const colors={B:0x6fcaff,J:0xffc06a,force:0xff6868};
  function arrow(layer: FuelDriveLayer,position: VectorTuple,vector: VectorTuple,length: number,value: number,unit: string){
   const direction=new THREE.Vector3(...vector);if(direction.lengthSq()===0)return;
-  const head=Math.min(R*.1,length*.35),glyph=new THREE.ArrowHelper(direction.normalize(),new THREE.Vector3(...position),length,colors[layer],head,Math.min(R*.055,length*.2));
+  const head=Math.min(R*.1,length*.35),glyph=new THREE.ArrowHelper(direction.normalize(),new THREE.Vector3(...position),length,colors[layer],head,Math.min(R*.085,length*.28));
   // ArrowHelper constructs its cone with one MeshBasicMaterial; its declaration widens this to Mesh.
   const cone=glyph.cone as THREE.Mesh<THREE.BufferGeometry, THREE.MeshBasicMaterial>;
   // ArrowHelper shares global geometries; each accepted/pinned scene owns disposal.
   glyph.line.geometry=glyph.line.geometry.clone();cone.geometry=cone.geometry.clone();
-  const width=Math.min(R*.009,length*.06),shaft=new THREE.Mesh(new THREE.CylinderGeometry(width,width,length-head,8),new THREE.MeshBasicMaterial({color:colors[layer],toneMapped:false}));
+  const width=Math.min(R*.025,length*.12),shaft=new THREE.Mesh(new THREE.CylinderGeometry(width,width,length-head,8),new THREE.MeshBasicMaterial({color:colors[layer],toneMapped:false}));
   shaft.position.y=Math.max(length-head,0)/2;glyph.add(shaft);glyph.line.visible=false;cone.material.toneMapped=false;
   glyph.traverse(node=>{
    node.userData.quantitativeOnly=true;
    // Direction arrows must stay visible through hardware, like the gas-motion diagnostics.
    if(node instanceof THREE.Mesh||node instanceof THREE.Line){
     node.renderOrder=3;
-   const materials=node.material as THREE.Material|THREE.Material[];
-   for(const material of Array.isArray(materials)?materials:[materials]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
+    const materials=node.material as THREE.Material|THREE.Material[];
+    for(const material of Array.isArray(materials)?materials:[materials]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
    }
   });
   glyph.userData={physicalMagnitude:value,unit,directionOnly:true};layers[layer].add(glyph);
