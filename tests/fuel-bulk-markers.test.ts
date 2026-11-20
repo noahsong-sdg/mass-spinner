@@ -50,7 +50,7 @@ test('rendered instance centres follow accepted shell inventories and angular ph
      assert.ok(local.z>=0&&local.z<=result.config.lengthM,'no invented axial flow');
     }
     const phase=cloud.userData.ion?sample.ionPhaseRad:sample.neutralPhaseRad;
-    assert.equal(cloud.rotation.z,mode==='spin'?phase%(2*Math.PI):0);
+    assert.equal(cloud.rotation.z,phase%(2*Math.PI),'the default resolved clock retains the accepted physical phase in both coupled modes');
     const trail=cloud.children[1] as THREE.LineSegments;
     assert.equal(trail.visible,mode==='spin'&&time>0);
     if(trail.visible){
