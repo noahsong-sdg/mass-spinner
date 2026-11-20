@@ -41,10 +41,10 @@ export function createFuelMotionGlyphs(result: FuelRenderResult){
   head.line.geometry=head.line.geometry.clone();head.cone.geometry=head.cone.geometry.clone();flow.add(line,head);
  }
  function update(state:FuelMotionState,mode:FuelMotionMode,quantile:(species:number,p:number)=>number,exposure:{ion:number;neutral:number;seconds:number}){
-  rotation.visible=mode==='spin'||mode==='equilibrium';migration.visible=mode==='transport';flow.visible=mode==='flow'&&state.turnoverHz>0;
+  rotation.visible=true;migration.visible=mode==='transport';flow.visible=mode==='flow'&&state.turnoverHz>0;
   for(const {kind,rotor,arc,head,n}of rotors){
    const speed=state.speeds[kind],direction=Math.sign(speed),sweep=exposure[kind];
-   rotor.visible=speed!==0&&(mode==='spin'||kind==='neutral');rotor.rotation.z=state.phases[kind]%(2*Math.PI);head.rotation.z=direction<0?Math.PI:0;
+   rotor.visible=speed!==0;rotor.rotation.z=state.phases[kind]%(2*Math.PI);head.rotation.z=direction<0?Math.PI:0;
    rotor.userData.angularSpeedRadS=speed;rotor.userData.exposureS=exposure.seconds;rotor.userData.angularDisplacementRad=sweep;
    const a=arc.geometry.getAttribute('position');
    for(let i=0;i<=n;i++)for(let side=0;side<2;side++){

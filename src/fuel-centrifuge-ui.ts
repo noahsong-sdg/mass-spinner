@@ -130,10 +130,10 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  motionBar.append(play,power,restart,newRun,seek,legend,driveKey,clock);
  const modeReading=el('p');modeReading.id='fuel-mode-reading';modeReading.className='fuel-mode-reading';motionBar.append(modeReading);
  const modeDescriptions:Record<FuelMotionMode,string>={
-  equilibrium:'Ideal equilibrium density, not the final state of this run. The cream arrow shows neutral rotation.',
-  transport:'The display shows the azimuthal average. Arrows show displacement of equal-population gas shells from their initial radii. 3D samples show the calculated neutral density.',
+  equilibrium:'Ideal equilibrium density, not the final state of this run. Blue arrows show ions; cream arrows show gas.',
+  transport:'Rotation uses a slower display clock. Radii and plots use physical time. Straight arrows show gas-shell displacement from the initial radii.',
   spin:'The same coupled run at a slower display speed. Blue arrows show ions; cream arrows show gas. Arcs show up to ½ screen second of rotation.',
-  flow:'Dashed routes show reference throughput. The model does not calculate chamber flow.'
+  flow:'Dashed routes show reference throughput. Rotation uses a slower display clock. The model does not calculate chamber flow.'
  };
  const playbackPosition=floatingPlayback(motionBar);
  clock.setAttribute('aria-live','off');
@@ -278,7 +278,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(!latest)return;
   const field=views.state.representation==='field',l=tools?.legend;
   modeReading.hidden=field;
-  const labels=field?[l?`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`:'Gas cutaway']:[`● ${latest.result.pair.light}`,`● ${latest.result.pair.heavy}`,`○ ions · weighted${['transport','flow'].includes(motionMode.value)?' · rotation averaged':''}`];
+  const labels=field?[l?`${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`:'Gas cutaway']:[`● ${latest.result.pair.light}`,`● ${latest.result.pair.heavy}`,`○ ions · weighted${['transport','flow'].includes(motionMode.value)?' · rotation slowed':''}`];
   if(views.state.representation==='both'&&l)labels.push(`Section · ${l.label}: ${l.domain.map(n=>Number(n.toPrecision(3))).join(' → ')} ${l.unit}`);
   const key=JSON.stringify(labels);if(legend.dataset.key===key)return;legend.dataset.key=key;
   legend.replaceChildren(...labels.map((text,i)=>{const node=el('span',text);if((field||i===3)&&l){node.style.borderBottom='3px solid';node.style.borderImage=`linear-gradient(to right,${l.colors.join(',')}) 1`;}else node.className=`fuel-gas-${i}`;return node;}));
@@ -298,9 +298,11 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(!motion||!latest||dirty||updating)return;
   const mode=motionMode.value as FuelMotionMode,transient=mode==='spin'||mode==='transport';
   if(modeReading.dataset.mode!==mode){modeReading.dataset.mode=mode;modeReading.textContent=modeDescriptions[mode];}
-  let suggested=motion.update(elapsed,mode).secondsPerScreenSecond;
-  if(baselineMotion)suggested=Math.min(suggested,baselineMotion.update(elapsed,mode).secondsPerScreenSecond);
-  // Fast real rotation is azimuthally averaged in transport mode so diffusion can be explored in seconds.
+  const initial=motion.update(elapsed,mode),baseline=baselineMotion?.update(elapsed,mode);
+  let suggested=Math.min(initial.secondsPerScreenSecond,baseline?.secondsPerScreenSecond??Infinity);
+  const rotationClock=Math.min(initial.rotationSecondsPerScreenSecond,baseline?.rotationSecondsPerScreenSecond??Infinity);
+  // Keep the transport timeline fast. Rotation has a separate, shared display clock.
+
   if(mode==='transport')suggested=Math.min(latest.result.config.durationS/8,1);
   timeScales[motionMode.value]??=suggested;
   // Preserve slider comparisons; retime only outside the visual sampling budget.
@@ -308,7 +310,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   elapsed+=dt*scale;
   const c=latest.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
   if((transient||pinned)&&elapsed>=limit){elapsed=limit;playing=false;}
-  const state=motion.update(elapsed,mode,scale);
+  const state=motion.update(elapsed,mode,scale,rotationClock);
   play.textContent=playing?'Pause':'Play';play.setAttribute('aria-pressed',String(playing));seek.hidden=!transient;seek.max=String(limit);seek.value=String(elapsed);seek.setAttribute('aria-valuetext',`${fmt(elapsed)} s`);
   const diagnostic=diagnosticState(latest.result);tools?.update(diagnostic);views.refreshSample(tools);refreshComposition(diagnostic);
   const current=diagnostic.currentA??c.currentA;tools?.drive?.setCurrent?.(current);power.textContent=current>0?'Cut power':'Power on';power.setAttribute('aria-pressed',String(current>0));
@@ -323,7 +325,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(transient&&['separation','momentum','inertia'].includes(selector.value)&&latest.result.transport){const sample=sampleFuelTransport(latest.result.transport,elapsed),rows=metrics.querySelectorAll('strong');if(rows.length===3){rows[0].textContent=`${fmt(sample.timeS)} s`;rows[1].textContent=`${fmt(sample.neutralInertiaRatio)} × initial inertia`;}}
   if(pinned&&baselineMotion&&comparison){
    const timeS=Math.min(elapsed,comparison.timeLimitS);
-   baselineMotion.update(timeS,mode,scale);const baselineState=diagnosticState(pinned.result);baselineTools?.update(baselineState);baselineTools?.drive?.setCurrent?.(baselineState.currentA??pinned.result.config.currentA);
+   baselineMotion.update(timeS,mode,scale,rotationClock);const baselineState=diagnosticState(pinned.result);baselineTools?.update(baselineState);baselineTools?.drive?.setCurrent?.(baselineState.currentA??pinned.result.config.currentA);
    comparisonLabel.textContent=`${transient?`A pinned · B current · ${fmt(timeS)} s`:'A/B final references'} · shared SI camera/colors${comparison.sameGeometry?'':' · geometry differs'}${comparison.sameProducingCode?'':' · source identities differ/unavailable'}`;
    baselineViewer?.refresh();
   }
@@ -340,7 +342,13 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  function playback(){
   animateGas();viewer?.refresh();viewer?.setAnimation(active&&!dirty&&!updating&&playing&&motion?animateGas:null);
  }
- play.addEventListener('click',()=>{playing=!playing;playback();});
+ play.addEventListener('click',()=>{
+  if(!playing&&latest){
+   const limit=pinned?Math.min(latest.result.config.durationS,pinned.config.durationS):latest.result.config.durationS;
+   if((pinned||['spin','transport'].includes(motionMode.value))&&elapsed>=limit)elapsed=0;
+  }
+  playing=!playing;playback();
+ });
  restart.addEventListener('click',()=>{elapsed=0;playback();});
  newRun.addEventListener('click',()=>{changed();void run();});
  power.addEventListener('click',()=>{if(power.disabled||!latest)return;const current=sampleFuelTransport(latest.result.transport!,elapsed).currentA??latest.result.config.currentA;if(current>0)lastPoweredCurrent=current;controls.get('currentA')!.input.value=String(current>0?0:lastPoweredCurrent);changed({target:controls.get('currentA')!.input});});

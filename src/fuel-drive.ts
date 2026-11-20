@@ -44,11 +44,12 @@ export function createFuelDrive(config: FuelDriveConfig){
   glyph.userData={physicalMagnitude:value,unit,directionOnly:true};layers[layer].add(glyph);
  }
  const r=R*(f+1)/2;
- for(const angle of [Math.PI*.15,Math.PI*.7,Math.PI*1.3]){
-  const s=fuelDriveAt({...config,currentA:config.currentA||1},r,angle),position: VectorTuple=[r*Math.cos(angle),r*Math.sin(angle),L*.53];
+ for(let station=0;station<2;station++)for(let i=0;i<8;i++){
+  const angle=(i+station/2)*Math.PI/4;
+  const s=fuelDriveAt({...config,currentA:config.currentA||1},r,angle),position: VectorTuple=[r*Math.cos(angle),r*Math.sin(angle),L*(.30+station*.44)];
   arrow('J',position,s.current,R*(1-f)*.4,Math.abs(s.currentDensityAM2),'A/m²');
   arrow('force',position,s.force,R*Math.min(.25,Math.sqrt(1-(r/R)**2)*.8),s.forceDensityNM3,'N/m³');
-  arrow('B',[position[0],position[1],L*.24],s.field,L*.43,s.fieldT,'T');
+  arrow('B',[position[0],position[1],L*(.12+station*.44)],s.field,L*.32,s.fieldT,'T');
  }
  let state=fuelDriveAt(config,r),selectedLayer: FuelDriveSelection='all';
  group.userData.torqueNm=state.torqueNm;

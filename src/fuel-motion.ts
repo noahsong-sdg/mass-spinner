@@ -33,7 +33,7 @@ function transportSpeedBound(result:FuelRenderResult){
  for(const sample of result.transport?.checkpoints??result.transport?.snapshots??[])speed=Math.max(speed,Math.abs(sample.ionRadS),Math.abs(sample.neutralRadS));
  return speed;
 }
-/** A display adapter, not a new transport solver. Every clock uses physical seconds. */
+/** A display adapter, not a new transport solver. Phases and speeds retain SI units. */
 export function fuelMotionState(result: FuelRenderResult,timeS: number,mode: FuelMotionMode='equilibrium'){
  return motionState(result,timeS,mode);
 }
@@ -48,9 +48,10 @@ function motionState(result:FuelRenderResult,timeS:number,mode:FuelMotionMode,sp
  const turnoverHz=result.pumping.gasLoadPaM3S/(K*c.gasK*neutralNumber);
  let resolvedSpeed=Math.max(Math.abs(end.ionRadS),Math.abs(end.neutralRadS));
  if(coupled)resolvedSpeed=speedBound??transportSpeedBound(result);
- return {speeds,phases,beta,neutralNumber,turnoverHz,
-  // One common slow-motion scale bounds angular change to 1.8 rad / screen s.
-  secondsPerScreenSecond:mode==='flow'?Math.min(1,.25/Math.max(turnoverHz,.25)):Math.min(1,1.8/Math.max(resolvedSpeed,TAU*turnoverHz,1.8))};
+ // Both populations use one rotation clock, bounded at 1.8 rad per screen second.
+ const rotationSecondsPerScreenSecond=Math.min(1,1.8/Math.max(resolvedSpeed,TAU*turnoverHz,1.8));
+ return {speeds,phases,beta,neutralNumber,turnoverHz,rotationSecondsPerScreenSecond,
+  secondsPerScreenSecond:mode==='flow'?Math.min(1,.25/Math.max(turnoverHz,.25)):rotationSecondsPerScreenSecond};
 }
 
 /** Weighted bulk samples, not microscopic trajectories or predicted emission. */
@@ -104,9 +105,14 @@ export function createFuelMotion(result: FuelRenderResult){
   points.userData={packetNumber:reference.neutralNumber*share/12,species};return {path,points,species};
  }));
  let previousMode: FuelMotionMode='equilibrium';
- function update(timeS: number,mode: FuelMotionMode='equilibrium',secondsPerScreenSecond?: number){
+ function update(timeS: number,mode: FuelMotionMode='equilibrium',secondsPerScreenSecond?: number,rotationSecondsPerScreenSecond?:number){
   const state=stateAt(timeS,mode);
   if(secondsPerScreenSecond!==undefined)state.secondsPerScreenSecond=secondsPerScreenSecond;
+  if(rotationSecondsPerScreenSecond!==undefined)state.rotationSecondsPerScreenSecond=Math.min(state.rotationSecondsPerScreenSecond,rotationSecondsPerScreenSecond);
+  // Transport and throughput need faster timelines. Compress only their rotation.
+  // A constant phase factor preserves direction, speed ratios, and frame independence.
+  const phaseScale=mode==='transport'||mode==='flow'?Math.min(1,state.rotationSecondsPerScreenSecond/state.secondsPerScreenSecond):1;
+  const displayPhases={ion:state.phases.ion*phaseScale,neutral:state.phases.neutral*phaseScale};
   // Hidden tracers still supply physical clocks/readouts. Rebuild from the
   // current state when shown; previousMode records the last displayed state.
   if(!group.visible)return state;
@@ -114,14 +120,15 @@ export function createFuelMotion(result: FuelRenderResult){
   const quantile=(species:number,p:number)=>populationQuantile(coupled?.[species?'heavyCDF':'lightCDF'],state.beta[species],p);
   // A trailing arc integrates the accepted phase history, rather than using
   // endpoint speed × exposure during acceleration. Never invent pre-run motion.
-  const exposureS=mode==='spin'?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
-  const before=mode==='spin'?stateAt(timeS-exposureS,mode).phases:null;
-  glyphs.update(state,mode,quantile,{seconds:exposureS,ion:before?state.phases.ion-before.ion:state.speeds.ion*exposureS,neutral:before?state.phases.neutral-before.neutral:state.speeds.neutral*exposureS});
-  const history=mode==='spin'||mode==='equilibrium'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
+  const transient=mode==='spin'||mode==='transport';
+  const exposureS=transient?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
+  const before=stateAt(timeS-exposureS,mode).phases;
+  glyphs.update({...state,phases:displayPhases},mode,quantile,{seconds:exposureS,ion:(state.phases.ion-before.ion)*phaseScale,neutral:(state.phases.neutral-before.neutral)*phaseScale});
+  const history=Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
    const time=timeS-exposureS*(1-j/TRAIL_SEGMENTS),frame=stateAt(time,mode);
-   const sample=mode==='spin'&&result.transport?sampleFuelTransport(result.transport,time):null;
+   const sample=transient&&result.transport?sampleFuelTransport(result.transport,time):null;
    return {...frame,cdf:[sample?.lightCDF,sample?.heavyCDF]};
-  }):[];
+  });
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){
@@ -131,10 +138,9 @@ export function createFuelMotion(result: FuelRenderResult){
      a.setXY(i,radius*Math.cos(angle),radius*Math.sin(angle));
     }syncFuelBulkMarkers(points);
    }
-   const kind=ion?'ion':'neutral',averaged=['flow','transport'].includes(mode)&&state.speeds[kind]!==0;rotor.rotation.z=averaged?0:state.phases[kind]%TAU;
-   // At the transport clock a revolution is unresolved. Show an azimuthally
-   // uniform ensemble, not one full wire hoop per sample or aliased rotation.
-   rotor.userData.azimuthAveraged=averaged;
+   const kind=ion?'ion':'neutral';rotor.rotation.z=displayPhases[kind]%TAU;
+   rotor.userData.azimuthAveraged=false;
+   rotor.userData.rotationPhaseScale=phaseScale;rotor.userData.physicalPhaseRad=state.phases[kind];
    points.visible=true;lines.visible=history.length>0&&state.speeds[kind]!==0&&exposureS>0;
    lines.userData.exposureS=exposureS;
    if(lines.visible){
@@ -142,7 +148,7 @@ export function createFuelMotion(result: FuelRenderResult){
     for(let i=0;i<n;i+=TRAIL_STRIDE)for(let j=0;j<TRAIL_SEGMENTS;j++)for(let end=0;end<2;end++){
      const frame=history[j+end],p=(i+.5)/n;
      const radius=ion?Math.hypot(a.getX(i),a.getY(i)):R*Math.sqrt(populationQuantile(frame.cdf[species],frame.beta[species],p));
-     const angle=tracerAngle(i,species,ion)+frame.phases[kind]-state.phases[kind];
+     const angle=tracerAngle(i,species,ion)+(frame.phases[kind]-state.phases[kind])*phaseScale;
      b.setXYZ((i/TRAIL_STRIDE*TRAIL_SEGMENTS+j)*2+end,radius*Math.cos(angle),radius*Math.sin(angle),a.getZ(i));
     }
     b.needsUpdate=true;

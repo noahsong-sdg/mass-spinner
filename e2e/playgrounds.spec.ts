@@ -71,7 +71,7 @@ test('centrifuge: accepted controls, timeline, plots, hardware and keyboard navi
  expect(errors).toEqual([]);
 });
 
-test('gas cutaway: live density, movable slice and rotation-averaged samples',async({page},info)=>{
+test('gas cutaway: live density, movable slice and slow-rotation samples',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');
  await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
@@ -90,7 +90,7 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
  await page.getByRole('button',{name:'View',exact:true}).click();
  await page.locator('#fuel-view-representation').selectOption('tracers');
  await page.getByRole('button',{name:'Close View',exact:true}).click();
- await expect(page.locator('.fuel-gas-2')).toContainText('rotation averaged');
+ await expect(page.locator('.fuel-gas-2')).toContainText('rotation slowed');
  await info.attach('gas-density-samples',{body:await page.screenshot(),contentType:'image/png'});
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  expect(errors).toEqual([]);
@@ -99,7 +99,7 @@ test('gas cutaway: live density, movable slice and rotation-averaged samples',as
 test('four gas modes reveal their geometry and explain their physical scope',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','azimuthal average']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','slower display clock']] as const){
   await page.locator('#fuel-motion-mode').selectOption(mode);
   if(mode==='spin'||mode==='transport')await page.locator('#fuel-motion-time').press('End');
   await expect(page.locator('#fuel-mode-reading')).toContainText(reading);
@@ -110,6 +110,20 @@ test('four gas modes reveal their geometry and explain their physical scope',asy
   await info.attach(`gas-mode-${mode}`,{body:await page.screenshot(),contentType:'image/png'});
  }
  expect(errors).toEqual([]);
+});
+
+test('Play restarts completed coupled runs and advances their physical time',async({page})=>{
+ await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ for(const mode of ['transport','spin']){
+  await page.locator('#fuel-motion-mode').selectOption(mode);
+  await page.locator('#fuel-motion-time').press('End');
+  const end=Number(await page.locator('#fuel-motion-time').inputValue());expect(end).toBeGreaterThan(0);
+  await page.locator('#fuel-motion-play').click();
+  await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
+  await expect.poll(async()=>Number(await page.locator('#fuel-motion-time').inputValue())).toBeGreaterThan(0);
+  expect(Number(await page.locator('#fuel-motion-time').inputValue())).toBeLessThan(end);
+  await page.locator('#fuel-motion-play').click();
+ }
 });
 
 test('Docs opens an attached walkthrough while preserving the running simulator',async({page},info)=>{

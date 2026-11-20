@@ -34,9 +34,9 @@ test('direction glyphs retain SI magnitudes, do not pick like hardware, and vani
  for(const config of [defaults,{...defaults,currentA:0},{...defaults,magneticT:0}]){
   const drive=createFuelDrive(config);assert.equal(drive.group.userData.nonPickable,true);
   const layers=Object.fromEntries(drive.group.children.map(o=>[o.name,o]));
-  assert.equal(layers.J.children.length,3);assert.equal(layers.B.children.length,config.magneticT===0?0:3);
+  assert.equal(layers.J.children.length,16);assert.equal(layers.B.children.length,config.magneticT===0?0:16);
   assert.equal(layers.J.visible,config.currentA>0);assert.equal(layers.force.visible,config.currentA>0);
-  assert.equal(layers.force.children.length,config.magneticT===0?0:3);
+  assert.equal(layers.force.children.length,config.magneticT===0?0:16);
   for(const glyph of layers.J.children)assert.equal(glyph.userData.directionOnly,true);
   drive.group.traverse(node=>{
    if(!(node instanceof THREE.Mesh||node instanceof THREE.Line))return;

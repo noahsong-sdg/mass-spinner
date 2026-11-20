@@ -21,10 +21,10 @@ test('all four modes expose different, correctly scoped diagnostic geometry',()=
   const rotation=motion.group.getObjectByName('Resolved bulk rotation')!,migration=motion.group.getObjectByName('Population-shell displacement')!,flow=motion.group.getObjectByName('Reference throughput routes')!;
   for(const mode of ['equilibrium','transport','spin','flow'] as const){
    motion.update(.2,mode);
-   assert.equal(rotation.visible,mode==='equilibrium'||mode==='spin');assert.equal(migration.visible,mode==='transport');assert.equal(flow.visible,mode==='flow');
+   assert.equal(rotation.visible,true);assert.equal(migration.visible,mode==='transport');assert.equal(flow.visible,mode==='flow');
    for(const packet of motion.group.children.filter(n=>n.name==='Schematic throughput packets'))assert.equal(packet.visible,mode==='flow');
   }
-  motion.update(.2,'equilibrium');assert.equal(motion.group.getObjectByName('Ion rotation arrow')!.visible,false);
+  motion.update(.2,'equilibrium');assert.equal(motion.group.getObjectByName('Ion rotation arrow')!.visible,true);
   motion.group.getObjectByName('Gas mode diagnostics')!.traverse(node=>{
    if(node instanceof THREE.Mesh||node instanceof THREE.Line){assert.equal(node.renderOrder,3);for(const material of [node.material].flat()){assert.equal(material.depthTest,false);assert.equal(material.depthWrite,false);assert.equal(material.transparent,true);}}
   });

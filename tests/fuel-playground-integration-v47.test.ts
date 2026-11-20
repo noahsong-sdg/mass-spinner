@@ -77,7 +77,7 @@ test('native range serialization preserves exact log defaults without masking ge
 
 test('mode selection reveals its diagnostic geometry without rerunning physics or replacing the user camera',async t=>{
  const f=fixture(t);await f.start();const result=f.ui.latest.result,requests=f.requests.length,v=f.viewers[0],pose=clone(v.pose);
- for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','azimuthal average']] as const){
+ for(const [mode,representation,reading]of [['equilibrium','both','Ideal equilibrium'],['spin','tracers','Blue arrows show ions'],['flow','tracers','Dashed routes'],['transport','both','slower display clock']] as const){
   f.change('fuel-motion-mode',mode,'change');
   assert.equal(f.node('fuel-view-representation').value,representation);assert.equal(v.built.motion.group.visible,true);
   assert.equal(v.built.tools.group.getObjectByName('Axially uniform gas field').visible,representation==='both');
@@ -398,8 +398,8 @@ test('transport seek updates the plotted profiles, cellwise probes and actual ne
  for(const cloud of clouds){
   const species=cloud.userData.species,mass=species?sample.heavyMass:sample.lightMass,points=(cloud.children[0] as THREE.InstancedMesh).geometry.attributes.samplePosition,n=cloud.userData.tracers;
   for(let i=0;i<n;i+=Math.max(1,Math.floor(n/11))){const radius=Math.hypot(points.getX(i),points.getY(i));close(fuelTransportCDF(mass,Math.min(1,radius/R)),(i+.5)/n,2e-6);}
-  assert.equal(cloud.children[0].visible,true,'azimuth-averaged gas samples must use the transported radii');
-  assert.equal(cloud.userData.azimuthAveraged,true);assert.equal(cloud.children.length,2);
+  assert.equal(cloud.children[0].visible,true,'rotating gas samples must use the transported radii');
+  assert.equal(cloud.userData.azimuthAveraged,false);assert.equal(cloud.children.length,2);
  }
  const radius=R*.8,cell=Math.min(sample.lightMass.length-1,Math.floor((radius/R)**2*sample.lightMass.length)),x=r.config.lightFraction;
  const light=sample.lightMass[cell]*sample.lightMass.length,heavy=sample.heavyMass[cell]*sample.heavyMass.length,total=x*light+(1-x)*heavy,probe=v.built.tools.sampleAt(radius);
