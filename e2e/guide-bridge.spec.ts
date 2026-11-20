@@ -83,3 +83,23 @@ test('each simulator opens a reader connected to itself rather than an older nam
  await expect(secondSimulator.getByRole('region',{name:'Examine',exact:true})).toBeVisible();
  await first.close();await second.close();await secondSimulator.close();
 });
+
+test('a tutorial opened by an older simulator can open its action in a current simulator',async({page})=>{
+ // This earlier receiver has no guide-hello handler. Keep its existing run unchanged.
+ await page.route('**/older-simulator.html',route=>route.fulfill({contentType:'text/html',body:'<button onclick="window.open(\'/start.html\',\'_blank\')">Docs</button><p>Existing run</p>'}));
+ await page.goto('/older-simulator.html');
+ const readerPopup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs',exact:true}).click();const reader=await readerPopup;
+ await reader.locator('[data-guide-action="look"]').click();
+ await expect(reader.locator('#reader-status')).toHaveText('Waiting for the simulator…');
+ const reconnect=reader.getByRole('link',{name:'Open in new simulator ↗',exact:true});
+ await expect(reconnect).toBeVisible();await expect(reconnect).toHaveAttribute('href',/try=look$/);
+ const simulatorPopup=reader.waitForEvent('popup');await reconnect.click();const simulator=await simulatorPopup;
+ await expect(simulator.locator('#fuel-view-representation')).toHaveValue('both');
+ await expect(simulator.locator('#fuel-view-drive')).toHaveValue('all');
+ await expect(reader.locator('#reader-status')).toHaveText('The new simulator uses default inputs.');
+ await expect(page.getByText('Existing run',{exact:true})).toBeVisible();
+ await expect(page).toHaveURL(/older-simulator.html$/);
+ await reader.locator('[data-guide-action="coils"]').click();
+ await expect(reconnect).toHaveAttribute('href',/try=coils$/);
+ await simulator.close();await reader.close();
+});

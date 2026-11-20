@@ -130,3 +130,29 @@ test('an old receiver without readiness support tells the user to reload without
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'late readiness must not execute the expired action');
  assert.match(f.status()!,/Reload the simulator tab/);
 });
+
+test('an unresponsive older simulator offers a direct action without waiting for background timers',t=>{
+ const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};
+ f.click('spin');
+ const reconnect=f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-reconnect]')!;
+ assert.ok(reconnect);assert.equal(reconnect.hidden,false);
+ assert.equal(reconnect.href,`${origin}/?level=2&try=spin`);
+ assert.equal(reconnect.target,'_blank');assert.equal(reconnect.rel,'noopener');
+ assert.equal(focuses,0,'keep the recovery link visible until the action succeeds');
+ assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
+ reconnect.addEventListener('click',event=>event.preventDefault());reconnect.click();
+ assert.equal(f.isProbing(),false);assert.equal(reconnect.hidden,true);
+ f.receive({type:'mass-spinner:guide-ready',capability:'late-token',instance:'old-tab'});
+ assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'recovery cancels the older pending action');
+ assert.equal(f.status(),'The new simulator uses default inputs.');
+});
+
+test('an authorized action hides recovery before it can execute twice',t=>{
+ const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};f.click('current');
+ const reconnect=f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-reconnect]')!;
+ f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'simulator-1'});
+ assert.equal(reconnect.hidden,true);assert.equal(focuses,0);
+ const request=f.simulator.packets.find(packet=>packet.type==='mass-spinner:guide-action')!;
+ f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});
+ assert.equal(focuses,1);
+});

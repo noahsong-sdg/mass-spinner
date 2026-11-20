@@ -3,6 +3,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
  const browser=doc.defaultView!,origin=win.location.origin,status=doc.getElementById('reader-status');
+ const reconnect=doc.createElement('a');reconnect.textContent='Open in new simulator ↗';reconnect.target='_blank';reconnect.rel='noopener';reconnect.hidden=true;reconnect.dataset.guideReconnect='';
  const capabilityKey='mass-spinner:reader-capability';
  // Window names survive navigation. Session storage can be copied into a new tab.
  if(!/^mass-spinner-reader-[a-f0-9-]{36}$/.test(browser.name))browser.name=`mass-spinner-reader-${browser.crypto.randomUUID()}`;
@@ -33,17 +34,19 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    instance=data.instance;capability=data.capability;
    try{browser.sessionStorage.setItem(capabilityKey,capability);}catch{/* Do not broaden authorization when persistence is unavailable. */}
    if(interrupted){pending=undefined;stopProbe();report('The simulator reloaded. The action status is unknown. Examine its tab before you try again.');return;}
-   if(pending&&!pending.sent){pending.sent=true;report('Waiting for the action result…');simulatorWindow!.postMessage(pending,origin);}
+   if(pending&&!pending.sent){reconnect.hidden=true;pending.sent=true;report('Waiting for the action result…');simulatorWindow!.postMessage(pending,origin);}
    else if(!pending){stopProbe();report('');}
   }else if(data.type==='mass-spinner:guide-result'&&'requestId' in data&&data.requestId===pending?.requestId&&'status' in data){
    if(data.status==='waiting'&&probe!==undefined)report('Waiting for the calculated run and controls…');
    else if(data.status==='executed'||data.status==='rejected'){
     report(data.status==='executed'?'Opened in the simulator.':('message' in data&&typeof data.message==='string'?data.message:'The simulator cannot apply this action.'));
+    if(data.status==='executed'&&!embedded)simulatorWindow!.focus();
     pending=undefined;stopProbe();
    }
   }
  });
  browser.addEventListener('pagehide',stopProbe);
+ reconnect.addEventListener('click',()=>{stopProbe();pending=undefined;reconnect.hidden=true;report('The new simulator uses default inputs.');});
 
  for(const figure of doc.querySelectorAll<HTMLElement>('[data-concept-example]')){
   const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
@@ -132,7 +135,9 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   if(status){
    if(instruction.tagName==='LI')instruction.append(status);
    else instruction.after(status);
+   status.after(reconnect);
   }
+  reconnect.href=link.href;reconnect.hidden=embedded||!link.dataset.guideAction;
   pending=link.dataset.guideAction?{type:'mass-spinner:guide-action',action:link.dataset.guideAction,requestId:browser.crypto.randomUUID(),sent:false}
    :link.dataset.guideView?{type:'mass-spinner:guide-view',view:'experiments',requestId:browser.crypto.randomUUID(),sent:false}:undefined;
   // A URL in a named-window lookup navigates the window and removes its current run.
@@ -150,7 +155,6 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    }
   }
   connect();
-  if(!embedded)simulatorWindow.focus();
  });
  if(simulatorWindow&&!simulatorWindow.closed)connect(true);
  doc.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'){event.preventDefault();win.parent.postMessage({type:'mass-spinner:guide-close'},win.location.origin);}});
