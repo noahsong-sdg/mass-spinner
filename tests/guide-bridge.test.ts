@@ -174,3 +174,10 @@ test('coils wait for the asynchronously populated component options before ackno
  await new Promise<void>(resolve=>setImmediate(resolve));
  assert.equal(component.value,'coils');assert.deepEqual(f.opened,['inspect']);assert.equal(r.packets.at(-1)?.status,'executed');
 });
+
+test('the Simulator header link still focuses the connected tab without a tutorial command',t=>{
+ const f=reader(t);let focuses=0;f.simulator.window.focus=()=>{focuses++;};
+ f.dom.window.document.body.insertAdjacentHTML('beforeend','<a href="/?level=2" data-guide-simulator>Simulator</a>');
+ f.dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-simulator]')!.click();
+ assert.equal(focuses,1);assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
+});

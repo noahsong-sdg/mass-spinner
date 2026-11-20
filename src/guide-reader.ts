@@ -167,6 +167,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    }
   }
   connect();
+  if(!embedded&&link.hasAttribute('data-guide-simulator'))simulatorWindow.focus();
  });
  if(simulatorWindow&&!simulatorWindow.closed)connect(true);
  doc.addEventListener('keydown',event=>{if(embedded&&event.key==='Escape'){event.preventDefault();win.parent.postMessage({type:'mass-spinner:guide-close'},win.location.origin);}});
