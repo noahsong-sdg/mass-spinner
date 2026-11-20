@@ -3,7 +3,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  let simulatorWindow:Window|null=embedded?win.parent:win.opener as Window|null;
  const browser=doc.defaultView!,origin=win.location.origin,status=doc.getElementById('reader-status');
- const reconnect=doc.createElement('a');reconnect.textContent='Open in new simulator ↗';reconnect.target='_blank';reconnect.rel='noopener';reconnect.hidden=true;reconnect.dataset.guideReconnect='';
+ const reconnect=doc.createElement('a');reconnect.textContent='Open new simulator with default inputs ↗';reconnect.target='_blank';reconnect.rel='noopener';reconnect.hidden=true;reconnect.dataset.guideReconnect='';
  const capabilityKey='mass-spinner:reader-capability';
  // Window names survive navigation. Session storage can be copied into a new tab.
  if(!/^mass-spinner-reader-[a-f0-9-]{36}$/.test(browser.name))browser.name=`mass-spinner-reader-${browser.crypto.randomUUID()}`;
@@ -18,7 +18,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   if(attempts++>=120){
    stopProbe();
    if(pending?.sent)report('The simulator sent no final action result. The action can finish later. Examine its tab before you try again.');
-   else{pending=undefined;report('The simulator is not ready. Reload the simulator tab. Then select the action again.');}
+   else report('The simulator did not reply. Open a new simulator with the link below.');
    return;
   }
   simulatorWindow.postMessage({type:'mass-spinner:guide-hello',capability},origin);
@@ -29,7 +29,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   const data:unknown=event.data;
   if(!data||typeof data!=='object'||!('type' in data))return;
   if(data.type==='mass-spinner:guide-ready'&&'capability' in data&&typeof data.capability==='string'&&'instance' in data&&typeof data.instance==='string'){
-   if(!pending&&probe===undefined)return;
+   if(probe===undefined)return;
    const interrupted=pending?.sent&&instance!==data.instance;
    instance=data.instance;capability=data.capability;
    try{browser.sessionStorage.setItem(capabilityKey,capability);}catch{/* Do not broaden authorization when persistence is unavailable. */}

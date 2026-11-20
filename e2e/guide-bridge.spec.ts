@@ -91,7 +91,7 @@ test('a tutorial opened by an older simulator can open its action in a current s
  const readerPopup=page.waitForEvent('popup');await page.getByRole('button',{name:'Docs',exact:true}).click();const reader=await readerPopup;
  await reader.locator('[data-guide-action="look"]').click();
  await expect(reader.locator('#reader-status')).toHaveText('Waiting for the simulator…');
- const reconnect=reader.getByRole('link',{name:'Open in new simulator ↗',exact:true});
+ const reconnect=reader.getByRole('link',{name:'Open new simulator with default inputs ↗',exact:true});
  await expect(reconnect).toBeVisible();await expect(reconnect).toHaveAttribute('href',/try=look$/);
  const simulatorPopup=reader.waitForEvent('popup');await reconnect.click();const simulator=await simulatorPopup;
  await expect(simulator.locator('#fuel-view-representation')).toHaveValue('both');

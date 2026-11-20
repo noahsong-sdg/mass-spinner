@@ -121,14 +121,14 @@ test('an ambiguous action has a bounded probe lifetime and never claims executio
  assert.match(f.status()!,/sent no final action result.*can finish later/,'a late waiting receipt must not erase the timeout warning');
 });
 
-test('an old receiver without readiness support tells the user to reload without sending or replaying',t=>{
+test('an old receiver without readiness support offers recovery without sending or replaying',t=>{
  const f=reader(t);f.click('spin');
  for(let i=0;i<120;i++)f.probe();
- assert.equal(f.isProbing(),false);assert.match(f.status()!,/Reload the simulator tab. Then select the action again/);
+ assert.equal(f.isProbing(),false);assert.match(f.status()!,/did not reply.*Open a new simulator/);
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
  f.receive({type:'mass-spinner:guide-ready',capability:'authorized-token',instance:'updated-simulator'});
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'late readiness must not execute the expired action');
- assert.match(f.status()!,/Reload the simulator tab/);
+ assert.match(f.status()!,/did not reply/);
 });
 
 test('an unresponsive older simulator offers a direct action without waiting for background timers',t=>{
@@ -140,6 +140,8 @@ test('an unresponsive older simulator offers a direct action without waiting for
  assert.equal(reconnect.target,'_blank');assert.equal(reconnect.rel,'noopener');
  assert.equal(focuses,0,'keep the recovery link visible until the action succeeds');
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
+ for(let i=0;i<120;i++)f.probe();
+ assert.equal(reconnect.hidden,false,'recovery remains available after the connection expires');
  const current=peer();f.dom.window.open=(url,target)=>{assert.equal(url,`${origin}/?level=2`);assert.equal(target,'_blank');return current.window;};reconnect.click();
  assert.equal(f.isProbing(),true);assert.equal(reconnect.hidden,true);
  f.receive({type:'mass-spinner:guide-ready',capability:'late-token',instance:'old-tab'});
