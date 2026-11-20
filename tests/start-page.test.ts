@@ -125,3 +125,13 @@ test("an old global reader name and copied storage cannot join a different reade
  dom.window.document.querySelector<HTMLAnchorElement>('[data-guide-action="look"]')!.click();
  assert.match(target,/^mass-spinner-reader-[0-9a-f-]+-simulator$/);assert.notEqual(target,'old-global-window');
 });
+
+
+test('action feedback inside an ordered instruction keeps the list content valid',t=>{
+ const dom=new JSDOM('<p id="reader-status" role="status"></p><ol><li><a href="/?level=2&try=coils" data-guide-action="coils">Show the coils</a></li></ol>',{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ dom.window.open=()=>null;setupGuideReader(dom.window);
+ dom.window.document.querySelector<HTMLAnchorElement>('a')!.click();
+ assert.equal(dom.window.document.querySelector('ol')!.children.length,1);
+ assert.equal(dom.window.document.getElementById('reader-status')!.parentElement!.tagName,'LI');
+ assert.match(dom.window.document.querySelector('li')!.textContent!,/Allow the simulator window/);
+});

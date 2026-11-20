@@ -129,7 +129,10 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();stopProbe();
   const instruction=link.closest('p,li,.try-actions')??link;
-  if(status)instruction.after(status);
+  if(status){
+   if(instruction.tagName==='LI')instruction.append(status);
+   else instruction.after(status);
+  }
   pending=link.dataset.guideAction?{type:'mass-spinner:guide-action',action:link.dataset.guideAction,requestId:browser.crypto.randomUUID(),sent:false}
    :link.dataset.guideView?{type:'mass-spinner:guide-view',view:'experiments',requestId:browser.crypto.randomUUID(),sent:false}:undefined;
   // A URL in a named-window lookup navigates the window and removes its current run.
