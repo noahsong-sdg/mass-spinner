@@ -7,7 +7,9 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  const capabilityKey='mass-spinner:reader-capability';
  // Window names survive navigation. Session storage can be copied into a new tab.
  if(!/^mass-spinner-reader-[a-f0-9-]{36}$/.test(browser.name))browser.name=`mass-spinner-reader-${browser.crypto.randomUUID()}`;
- const simulatorName=`${browser.name}-simulator`;
+ const recoveryKey=`${browser.name}:recovered`;
+ let simulatorName=`${browser.name}-simulator`;
+ try{if(!embedded&&browser.sessionStorage.getItem(recoveryKey)==='true'){simulatorName+='-recovery';simulatorWindow=null;}}catch{/* The current document can connect without storage. */}
  let capability='',instance='',probe:number|undefined,attempts=0,quiet=false;
  let pending:{type:string;action?:string;view?:string;requestId:string;sent:boolean}|undefined;
  const report=(message:string)=>{if(status&&!quiet)status.textContent=message;};
@@ -48,9 +50,11 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
  browser.addEventListener('pagehide',stopProbe);
  reconnect.addEventListener('click',event=>{
   event.preventDefault();if(!pending||pending.sent)return;
-  const next=win.open(`${origin}/?level=2`,'_blank');
+  const nextName=`${browser.name}-simulator-recovery`,next=win.open(`${origin}/?level=2`,nextName);
   if(!next){report('Allow the simulator window to open. Then select the action again.');return;}
-  simulatorWindow=next;capability='';instance='';reconnect.hidden=true;connect();
+  simulatorName=nextName;simulatorWindow=next;capability='';instance='';
+  try{browser.sessionStorage.setItem(recoveryKey,'true');}catch{/* Keep the current document connected. */}
+  reconnect.hidden=true;connect();
  });
 
  for(const figure of doc.querySelectorAll<HTMLElement>('[data-concept-example]')){
