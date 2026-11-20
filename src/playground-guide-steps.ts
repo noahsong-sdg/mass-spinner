@@ -1,6 +1,8 @@
 /** Shared instructions for the separate guide and the older scene reader. */
 export const playgroundSteps=[
- {id:'machine',diagram:'drive',title:'What turns inside the vessel?',intro:'We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.',
+ {id:'machine',diagram:'drive',title:'What turns inside the vessel?',intro:`We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.
+
+Electric current is charge in motion. Ions are atoms or molecules with electric charge. Current across the axial magnetic field gives the charged gas a force around the cylinder. Collisions transfer rotation to neutral atoms. The vessel and electrodes stay still.`,
   do:[],
   notice:`A mechanical centrifuge uses a drum: a cylinder whose wall turns. Contact with the wall makes the gas turn. This model uses electrical drive. Its vessel and electrodes stay still.
 
@@ -12,25 +14,39 @@ Here, current crosses the gas toward the inner electrode. The magnetic field poi
 
 Collisions transfer some of this motion from ions to neutral atoms. Thus, neutral gas can turn although it has no net electric charge. The electrical supply supplies energy for rotation and heat.`,
   note:'Colors and weighted markers show calculated populations, not individual atoms. If a dimension has no published value, the model uses an assumption.',actions:[['look','Show gas & drive'],['coils','Show the coils']]},
- {id:'current',diagram:'spin',title:'Can the current make the gas turn?',intro:'Before we use current to improve separation, check that it turns the gas. Compare powered and unpowered runs from rest.',
+ {id:'current',diagram:'spin',title:'Can the current make the gas turn?',intro:`Before we use current to improve separation, check that it turns the gas. Compare powered and unpowered runs from rest.
+
+Current and magnetic field give the charged gas torque: a turning effect about the axis. Ions accelerate first. Collisions then accelerate neutral atoms.`,
   do:["Compare 0 A with 0.03 A from rest. Keep the magnetic field and collision rate constant. Compare at the same physical time."],
   notice:'From rest at 0 A, both speeds stay zero. With a magnetic field and ion–neutral collisions, current accelerates ions. The collisions then accelerate neutral atoms.',
   note:'This experiment starts a new run. During a run, a current change acts at the selected time. Gas continues to turn after power stops.',actions:[['currentExperiment','Start from rest & edit current'],['endSpin','Show end-of-run speeds']]},
- {id:'composition',diagram:'composition',title:'Does rotation change the atom distribution?',intro:'Fast gas is useful only if its isotope fractions change. Compare the mixture near the axis and wall to find useful sampling locations.',
+ {id:'composition',diagram:'composition',title:'Does rotation change the atom distribution?',intro:`Separation needs different isotope fractions near the axis and wall. Compare No rotation with Rotation first. Then compare Higher temperature at the same rotation speed. Temperature measures random atom motion, which opposes this separation.
+
+Density is the number of atoms per volume. Composition is each isotope's local percentage. With rotation and uniform temperature, equilibrium densities increase toward the wall. The heavier density increases more sharply. Thus, the light percentage decreases toward the wall.
+
+In this diagram, 1× is each isotope's axis density. Show composition opens percentages instead. Show species density uses each isotope's vessel mean as 1×. Read the reference before comparing curve heights.`,
   do:[],
-  notice:'At equilibrium with a uniform temperature, both species have higher density near the wall. The increase is larger for the heavier species. The center thus has a higher light fraction than the feed. A finite-time run can differ. A short or unpowered run can show almost no change. Compare the result with the feed fraction, not with 50%.',
-  note:'Composition is the local percentage of each species. Density is the number of atoms per volume. Both densities can increase outward while the light percentage decreases. Composition is undefined where the model cannot resolve density. Large color changes can show small composition changes.',actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall'],['density','Show species density']]},
- {id:'competition',diagram:'bias',title:'Why not increase the rotation speed?',intro:'More speed requires drive power. Before we increase it, compare the expected separation increase with the decrease from higher temperature.',
+  notice:`An outward increase in gas pressure supplies the inward force that keeps the gas turning. With the same number of atoms per volume, hotter gas has higher pressure. At the same rotation speed, a smaller relative density increase can supply the necessary inward force. Thus, the normalized equilibrium density curves become less steep. The isotope fractions also differ less between the axis and wall.
+
+A finite-time run can differ. A short or unpowered run can show almost no change. Compare the result with the feed fraction, not with 50%.`,
+  note:'Composition is undefined where the model cannot resolve density. Large color changes can show small composition changes.',actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall'],['density','Show species density']]},
+ {id:'competition',diagram:'bias',title:'Why not increase the rotation speed?',intro:`More speed requires drive power. Before we increase it, compare the expected separation increase with the decrease from higher temperature.
+
+Compare the wall heavy/light ratio with the axis heavy/light ratio. Their quotient is α. A value of 1 means no composition difference. Larger values mean a larger relative difference. The example below starts at 1.20.`,
   do:[],
   notice:'Here, Ω is angular speed, T is temperature, and α is the wall heavy/light ratio divided by the axis ratio. The equilibrium separation exponent, ln α, is proportional to Ω²/T. At constant speed, two times the temperature gives half this exponent. At constant temperature, two times the speed gives four times this exponent.',
   note:'The percentage and purity do not change by these factors. These equilibrium references use a uniform temperature. They do not calculate the separation time or necessary drive power.',actions:[['temperature','Compare 2× temperature'],['rotation','Compare 2× rotation']]},
- {id:'heat',diagram:'energy',title:'Will the drive also heat the gas?',intro:'We want enrichment, which means a higher light fraction, rather than speed alone. More drive can increase rotation and temperature. At a specified rotation speed, higher temperature decreases separation.',
-  do:["Select Evolve gas & liner temperature to calculate heating instead of holding the temperature constant."],
-  notice:'The default thermal bath holds the temperature constant. With thermal evolution, compare the separation increase from rotation with the decrease from heating. The energy model also calculates the heat that cooling must remove.',
-  note:'Numerical damping is not physical heat. The heat-transfer and transport inputs are assumptions.',actions:[['heatExperiment','Open heat experiment'],['work','Show drive work']]},
- {id:'collection',diagram:'inventory-cut',title:'Which part of the gas do we want to keep?',intro:'A sample with a high light fraction can contain few light atoms. We need purity and recovery to choose how much gas to keep.',
+ {id:'heat',diagram:'energy',title:'Will the drive also heat the gas?',intro:`We want enrichment, which means a higher light fraction, rather than speed alone. More drive can increase rotation and temperature. At a specified rotation speed, higher temperature decreases separation.
+
+The supply gives energy for rotation and resistive heating. Collisions and wall drag can change rotational energy into heat. Cooling removes heat. The balance of these energy paths sets temperature.`,
+  do:["With thermal evolution off, select a physical time and pin run A. Keep the drive inputs unchanged. Enable Evolve gas & liner temperature. After calculation, select the same physical time. Compare temperature, speed and composition with A."],
+  notice:'The default thermal bath holds the temperature constant. Thermal evolution changes both temperature and the coupled motion. The comparison shows their combined effect on separation. Use Compare 2× temperature to isolate temperature at fixed rotation. Drive & work shows mechanical energy; its curves do not include the complete thermal account.',
+  note:'Numerical damping is not physical heat. The heat-transfer and transport inputs are assumptions.',actions:[['heatExperiment','Open heat experiment'],['pin','Pin A'],['thermalPlot','Show temperature'],['compositionPlot','Compare composition']]},
+ {id:'collection',diagram:'inventory-cut',title:'Which part of the gas do we want to keep?',intro:`A sample with a high light fraction can contain few light atoms. We need purity and recovery to choose how much gas to keep.
+
+Purity is the light percentage in the sample. Recovery is the percentage of all light atoms that the sample contains. Each cut keeps all gas inside its radius.`,
   do:["Probe two radii. Each cut includes all gas inside its radius."],
-  notice:'Purity is the light percentage in the sample. Recovery is the percentage of all light atoms that the sample contains. Smaller cuts generally increase purity but decrease recovery. The whole vessel gives the feed purity and full recovery.',
+  notice:'Smaller cuts generally increase purity but decrease recovery. The whole vessel gives the feed purity and full recovery.',
   note:'Cuts divide the closed inventory. They do not calculate extraction flow. A plot probe does not move the 3D cut marker. The cut slider starts a new run. Recovery is undefined when the feed has no light atoms.',actions:[['collectionExperiment','Open collection experiment'],['cut','Probe collection curve'],['equilibrium','Open equilibrium calculator']]},
  {id:'compare',diagram:'compare',title:'Ask one question of your own',intro:'Changing several inputs can hide the cause of a result. Change one input and compare at the same physical time.',
   do:["Select Pin A. Change one physical input. Select New run. Compare at the same physical time."],

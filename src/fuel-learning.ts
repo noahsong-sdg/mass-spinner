@@ -68,7 +68,9 @@ export function fuelLearningComparison(result: FuelFieldResult, state: FuelField
   const values=[100*x,...curves.flatMap(curve=>curve.y).filter((v): v is number => typeof v==='number'&&Number.isFinite(v))],lo=Math.min(...values),hi=Math.max(...values);
   const padding=Math.max(.05,(hi-lo)*.08),domain: [number, number]=[Math.max(0,lo-padding),Math.min(100,hi+padding)];
   for(const curve of curves)curve.yDomain=domain;
+  curves.push({label:`${result.pair.light} feed`,x:[0,100*R],y:[100*x,100*x],xLabel:'Radius (cm)',yLabel:curves[0].yLabel,yDomain:domain,dash:'4 4'});
  }
- return {cases,curves,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation fixed at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
- Closed inventory. These references do not predict drive, heating or extraction.${kind==='collection'?'':` Expanded light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' These references use the mean gas temperature instead of spatial temperature differences.':''}${omega===0?' At zero rotation, there is no centrifugal separation.':''}`};
+ const needsRotation=kind!=='collection'&&omega===0;
+ return {cases,curves,needsRotation,scope:`Isothermal equilibrium references · ${kind==='temperature'?`rotation fixed at ${fmt(omega)} rad/s`:kind==='rotation'?`temperature held at ${fmt(temperature)} K`:`same gas state · ${fmt(omega)} rad/s · ${fmt(temperature)} K`}.
+ Closed inventory. These references do not predict drive, heating or extraction.${kind==='temperature'?' Each curve shows light percentage against radius at one uniform temperature. At the same rotation speed, random atom motion reduces separation as temperature increases.':''}${kind==='collection'?'':` Expanded light-fraction axis; feed ${fmt(100*x)}%. Read differences in percentage points.`}${state.thermal?.gas?' These references use the mean gas temperature instead of spatial temperature differences.':''}${omega===0?' At zero rotation, there is no centrifugal separation.':''}`};
 }

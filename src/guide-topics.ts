@@ -18,7 +18,7 @@ export type GuideTopicId = typeof guideTopics[number]['id'];
 export const numberedTutorials = [
  {number:'03',title:'Heating and cooling',topics:[
   {id:'budget',heading:'Why add a temperature model?',diagram:'energy',actions:[['work','Show drive work'],['thermal','Open thermal controls'],['thermalPlot','Show temperature']]},
-  {id:'flow',heading:'Where does the heat go?',diagram:'heat-flow',actions:[['thermalProfile','Show temperature profile'],['gasEnergy','Show species energy'],['gasPressure','Show gas pressure']]},
+  {id:'flow',heading:'Where does the heat go?',diagram:'heat-flow',actions:[['thermalProfile','Show temperature profile'],['gasEnergy','Show species energy']]},
   {id:'limits',heading:'Can a field change decrease resistive heating?',diagram:'magnetic',actions:[['magneticLeverage','Show magnetic leverage'],['lithiumSurfaces','Show lithium surfaces']]},
  ]},
  {number:'04',title:'Purity and recovery',topics:[
@@ -33,7 +33,7 @@ export const numberedTutorials = [
  ]},
  {number:'06',title:'Model accuracy',topics:[
   {id:'questions',heading:'What does a test show?',diagram:'evidence',actions:[['modelInfo','Open qualification and evidence']]},
-  {id:'sensitivity',heading:'Which input can change the result?',diagram:'compare',actions:[['pin','Pin accepted run A'],['diffusion','Adjust diffusivity'],['newRun','New run'],['separationPlot','Show separation over time']]},
+  {id:'sensitivity',heading:'Which input can change the result?',actions:[['pin','Pin accepted run A'],['diffusion','Adjust diffusivity'],['newRun','New run'],['separationPlot','Show separation over time']]},
   {id:'prediction',heading:'Which predictions have sufficient evidence?',diagram:'diagnostic',actions:[['modelInfo','Open measured-reference assessment']]},
  ]},
 ] as const satisfies readonly {number:string;title:string;topics:readonly GuideTopic[]}[];

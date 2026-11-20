@@ -17,11 +17,17 @@ export function understandingPage(markdown,revision,tutorial){
  const title=tutorial?`Tutorial ${Number(tutorial.number)} · ${tutorial.title}`:'Tutorial 2 · Rotation and separation';
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
  const sourceBase=releaseSourceBase(revision)+'docs/';
- let enhancement='';
+ const diagrams=new Set(topics.flatMap(topic=>topic.diagram?[topic.diagram]:[])),usedDiagrams=new Set();
  const baseRenderer=new Renderer();
  const parser=new Marked({renderer:{
   code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation. If necessary, scroll horizontally.">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
   table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table. If necessary, scroll horizontally.">');},
+  html({text}){
+   if(!text.startsWith('<!-- diagram:'))return false;
+   const marker=/^<!-- diagram:([a-z][a-z-]*) -->\s*$/.exec(text),id=marker?.[1];
+   if(!id||!diagrams.has(id)||usedDiagrams.has(id))throw new Error(`Invalid or repeated guide diagram: ${text.trim()}`);
+   usedDiagrams.add(id);return guideDiagram(id);
+  },
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
    if(href.startsWith('/?')){
@@ -40,12 +46,7 @@ export function understandingPage(markdown,revision,tutorial){
   heading({tokens,depth}){
    const text=tokens.map(token=>token.raw).join(''),topic=topics.find(topic=>topic.heading===text);
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
-   enhancement=topic?.diagram?guideDiagram(topic.diagram):'';
    return heading+(depth===1?guideContents(topics.map(topic=>[topic.id,topic.heading.replace(/^\d\. /,'')])):'');
-  },
-  paragraph({tokens}){
-   const after=enhancement;enhancement='';
-   return `<p>${this.parser.parseInline(tokens)}</p>`+after;
   },
  }});
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">

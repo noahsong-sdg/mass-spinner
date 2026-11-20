@@ -12,8 +12,9 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{},samp
  scope.id='fuel-result-scope';scope.className='fuel-result-scope';coverage.id='fuel-input-coverage';
  coverage.append(coverageTitle,coverageText,el('p','Numerical studies tested three default lithium cases: 0.015, 0.03 and 0.06 A. Each used 1 s, 64 cells, 512 intervals, fixed temperature and no current switches. These results do not show accuracy throughout the slider range or for local composition.'));
  const link=el('a','Qualification evidence');link.href='/qualification';coverage.append(link);
- const comparisons=el('details'),bar=el('div'),description=el('p'),plots=el('div');comparisons.id='fuel-learning-comparisons';
- comparisons.append(el('summary','Compare'),bar,description,plots);bar.className='fuel-learning-actions';plots.className='live-plots';
+ const comparisons=el('details'),bar=el('div'),instruction=el('p'),description=el('p'),plots=el('div');comparisons.id='fuel-learning-comparisons';
+ instruction.id='fuel-comparison-instruction';instruction.setAttribute('role','status');instruction.hidden=true;
+ comparisons.append(el('summary','Compare'),bar,instruction,description,plots);bar.className='fuel-learning-actions';plots.className='live-plots';
  const buttons=new Map<FuelLearningKind, HTMLButtonElement>();let result: FuelFieldResult | null=null,state: FuelFieldState={},kind: FuelLearningKind | null=null,pending=true;
  for(const [key,label]of [['temperature','Warmer gas'],['rotation','Faster rotation'],['collection','Collection radius']] as const){
   const button=el('button',label);button.type='button';button.id=`fuel-compare-${key}`;button.disabled=true;button.setAttribute('aria-pressed','false');
@@ -25,13 +26,15 @@ export function createFuelLearningTools({document:doc,host,onCompare=()=>{},samp
   for(const [key,button]of buttons)button.setAttribute('aria-pressed',String(kind===key));
   if(!kind||!result||pending)return;
   const comparison=fuelLearningComparison(result,state,kind);description.textContent=comparison.scope;
+  instruction.hidden=!comparison.needsRotation;
+  instruction.textContent=comparison.needsRotation?'The gas is at rest. Both curves overlap. Select Play, or move Physical time to a rotating state. With no drive, start a powered run first.':'';
   renderPlots(plots,comparison.curves,{announce:false});
  }
  function setPending(message='Calculation in progress · previous accepted result'){
   equilibrium.setPending();
   pending=true;kind=null;scope.textContent=message;coverageTitle.textContent='Coverage pending';coverageText.textContent='Wait for an accepted result.';
   coverage.dataset.match='pending';for(const button of buttons.values()){button.disabled=true;button.setAttribute('aria-pressed','false');}
-  description.textContent='';renderPlots(plots,[]);
+  instruction.hidden=true;instruction.textContent='';description.textContent='';renderPlots(plots,[]);
  }
  function update(next: FuelFieldResult,nextState: FuelFieldState,topic: string){
   equilibrium.update(next,nextState);

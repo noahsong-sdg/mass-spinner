@@ -12,6 +12,18 @@ async function reader(page:Page){
  return readerFrame(page);
 }
 
+test('a fresh temperature comparison explains zero rotation and follows the selected rotating state',async({page})=>{
+ await page.goto('/?level=2&try=temperature&lesson=/start.html%23competition');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const message=page.locator('#fuel-comparison-instruction'),time=page.locator('#fuel-motion-time');
+ await expect(message).toBeVisible();await expect(message).toContainText('Both curves overlap');
+ await expect(time).toHaveValue('0');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','false');
+ const current=await page.locator('#fuel-currentA').inputValue();
+ await time.press('End');await expect(message).toBeHidden();
+ await expect(page.locator('#fuel-learning-comparisons')).toContainText('⁶Li feed');
+ await expect(page.locator('#fuel-currentA')).toHaveValue(current);
+});
+
 test('playback reaches the tutorial scene bottom and stays clear of the dock',async({page},info)=>{
  await page.goto('/?level=2&lesson=/guide.html%23rotation&try=momentum');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});

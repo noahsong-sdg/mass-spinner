@@ -70,6 +70,9 @@ function collectionDiagram(){
 function densityDiagram(){
  /** @type {[string,string,number,number][]} */
  const cases=[['rest','No rotation',0,500],['spin','Rotation',1500,500],['warm','Higher temperature',1500,1000]];
+ const readings={rest:'Without rotation, neither isotope needs an outward density increase. Both curves stay at 1×.',
+  spin:'Rotation needs an inward pressure force. Both densities increase toward the wall. The heavier isotope needs a larger increase.',
+  warm:'The rotation speed stays at 1,500 m/s at the wall. With the same number of atoms per volume, hotter gas has higher pressure. A smaller relative density increase supplies the necessary inward force. These normalized density curves become less steep.'};
  const masses=[6.0151228874,7.0160034366],colors=['#9bd8ce','#e4ac76'];
  /** @param {number} speed @param {number} temperature */
  const curves=(speed,temperature)=>masses.map((mass,i)=>{
@@ -77,7 +80,7 @@ function densityDiagram(){
   return {beta,wall:Math.exp(beta),path:Array.from({length:65},(_,j)=>`${j?'L':'M'}${52+264*j/64} ${220-165*Math.exp(beta*(j/64)**2)/7}`).join(' '),color:colors[i]};
  });
  return `<figure class="density-example" data-density-example data-case="spin">
- <strong>Both densities increase toward the wall. The heavier isotope has a larger increase.</strong>
+ <strong>Compare rotation first. Then increase temperature at the same speed.</strong>
  <div class="density-cases" role="group" aria-label="Compare equilibrium density gradients">${cases.map(([id,label])=>`<button type="button" data-density-select="${id}" aria-pressed="${id==='spin'}">${label}</button>`).join('')}</div>
  <svg viewBox="0 0 360 278" role="img" aria-labelledby="composition-title composition-description">
  <title id="composition-title">The heavier isotope has a steeper equilibrium density gradient</title><desc id="composition-description">Each curve shows density divided by the axis density of that species. With rotation, both curves increase outward. Lithium-7 has a steeper increase than lithium-6. These ratios do not show composition or total atom numbers. This ideal equilibrium example has a uniform temperature. It is not your live run.</desc>
@@ -87,7 +90,7 @@ function densityDiagram(){
  ${cases.map(([id,,speed,temperature])=>`<g data-density-case="${id}">${curves(speed,temperature).map((c,i)=>`<path data-mass="${masses[i]}" data-beta="${c.beta}" data-wall="${c.wall}" d="${c.path}" stroke="${c.color}" stroke-width="3" ${i?'stroke-dasharray="6 3"':''} fill="none"/>`).join('')}</g>`).join('')}
  <text x="52" y="243">axis</text><text x="316" y="243" text-anchor="end">wall</text><text x="184" y="267" text-anchor="middle">distance from the axis →</text>
  </svg><div class="density-key"><span>━ ⁶Li · lighter</span><span>┄ ⁷Li · heavier</span></div>
- ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>Wall ÷ axis density: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
+ ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>${readings[/** @type {keyof typeof readings} */(id)]}</p><p>Wall ÷ axis density: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
  <figcaption>This ideal equilibrium example is not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference. These curves are not isotope percentages.</figcaption></figure>`;
 }
 function driveDiagram(){

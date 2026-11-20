@@ -8,6 +8,8 @@ Purity is their percentage in the sample. Recovery is their fraction of the init
 From 76 light and 924 heavy atoms, collect 10 light and 90 heavy atoms.
 Purity increases from 7.6% to 10%, but recovery is only 10/76. Separation moves isotopes. It does not make them.
 
+<!-- diagram:goal -->
+
 This centrifuge model explains Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/), not proprietary equipment or a fusion reactor.
 It connects drive, rotation, heating, separation and collection.
 
@@ -35,7 +37,10 @@ Rotation is useful only if it changes the isotope mixture. We need to know which
 Circular motion is possible only with inward force. Pressure that increases from the axis to the wall supplies this force.
 At the same radius and angular speed, heavier atoms need more inward force.
 During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
-Random thermal motion decreases separation.
+Temperature measures random atom motion. This motion competes with separation, so speed alone cannot tell us how much separation to expect.
+With the same number of atoms per volume, hotter gas has higher pressure.
+At the same rotation speed and uniform temperature, a smaller density increase toward the wall can supply the necessary inward force.
+Both normalized density curves become less steep, and the isotope fractions differ less between the axis and wall.
 
 Use an ideal neutral gas at one temperature, with rigid rotation: angular speed Ω is the same at each radius.
 Tangential speed increases with radius:
@@ -61,13 +66,20 @@ x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
 ```
 
 The center can have a higher light percentage but fewer light atoms in a unit volume.
+The diagram divides each density by that isotope's axis density. Thus, 1× means its value at the axis.
 
-Compare No rotation, Rotation and Higher temperature in the diagram. The label “6×” is a density ratio, not a percentage.
+<!-- diagram:composition -->
+
+First, compare No rotation with Rotation in the diagram. Then select Higher temperature.
+The last two cases have the same rotation speed. Only temperature changes.
+The curves show density against distance from the axis. The label “6×” is a density ratio, not a percentage.
+The heavier density increases more sharply. Thus, the light percentage decreases toward the wall.
 [Show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
 Select the axis and then the wall. Compare each percentage with the feed percentage, not 50%.
 
 Composition enlarges the percentage range. The heavy percentage is the remainder.
-Species density uses each species' volume mean as 1×. Your run might not become equal to the diagram's equilibrium.
+[Show species density](/?level=2&try=density) to compare each density with its volume mean.
+Here, 1× means that isotope's vessel mean, rather than its axis value. Your run might not reach the diagram's equilibrium.
 
 <details>
 <summary>Where does the exponential come from?</summary>
@@ -111,10 +123,15 @@ When α = 2, the wall heavy/light ratio is two times the axis ratio, not two tim
 For Δm ≈ 1 u, a gas speed of 1,000 m/s and a temperature of 500 K, α ≈ 1.13.
 The ratio increases by 13%. Purity does not increase by 13 percentage points.
 
+<!-- diagram:bias -->
+
 1. [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation). At constant temperature, the exponent becomes four times its initial value and separation increases.
 2. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature). At constant rotation speed, the exponent becomes half its initial value and separation decreases.
 
 These equilibrium curves do not change your run or calculate the necessary power.
+If the curves overlap at 0 s, advance a powered run to a time with nonzero rotation.
+[Open the equilibrium calculator](/?level=2&try=equilibrium) for an independent calculation.
+To compare with your run, select Use sampled state first. This imports the selected values once.
 Charged-particle filters use more physics than this neutral-gas model includes.
 
 ## 3. How does electricity turn the gas?
@@ -167,6 +184,8 @@ Collisions transfer angular momentum from ions to neutral atoms. Angular momentu
 Neutral atoms have zero net charge and receive no direct force of the form qv × B.
 They turn because collisions transfer motion to them. Thus, the gas can turn while the metal parts stay still.
 
+<!-- diagram:drive -->
+
 Select Current, Turn the ions and Turn the gas in sequence in the diagram.
 Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.
 The dots show populations, not microscopic particle paths.
@@ -204,6 +223,8 @@ For radial current I through an annular region in constant axial field B,
 
 The symbol I is current. ℐ is inertia.
 Integration of rIB dr across the driven region gives the torque. Thus, electrode radii change the drive.
+
+<!-- diagram:spin -->
 
 Use the powered run from the first experiment.
 
@@ -255,8 +276,11 @@ U is thermal energy. Slip and wall friction move energy inside the system. Speci
 Time stepping also removes numerical energy. The energy account records numerical loss and physical heat as separate terms.
 Smaller timesteps give a convergence check for this numerical loss.
 
+<!-- diagram:energy -->
+
 [Show drive work](/?level=2&guide=physics&topic=energy&try=work). Curve height is energy in joules. Curve slope is power in watts.
-Ohmic power is separate. The default bath keeps temperature constant.
+This plot accounts for mechanical energy. Ohmic power is a separate value. Temperature shows cooling energy when thermal evolution is on.
+These separate values do not form a complete thermal-energy plot. The default bath keeps temperature constant.
 
 [Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) adds temperature changes.
 It does not calculate ionization or separate electron and ion temperatures.
@@ -284,6 +308,8 @@ Enriched gas can contain few atoms. For all gas inside a collection radius,
 N counts atoms. With light enrichment near the axis, a smaller inner sample can increase purity but decrease recovery.
 These fractions measure gas in the vessel, not gas flow through an outlet.
 
+<!-- diagram:inventory-cut -->
+
 [Open the collection experiment](/?level=2&try=collectionExperiment).
 Select two probe radii. At the wall, purity is the feed percentage and recovery is one.
 An empty sample has no defined purity. If the vessel contains no light species, recovery has no defined value.
@@ -306,6 +332,8 @@ Conservation and refinement tests identify numerical errors. Measurement compari
 The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records remaining differences from an argon experiment.
 It does not show accurate Marathon or lithium results.
 
+<!-- diagram:evidence -->
+
 ## What do the menu options mean?
 
 Different pictures can look like different physical models. Use this key to compare a calculated history with a reference.
@@ -327,6 +355,8 @@ Cut power adds a current step at the selected time. Reference views do not compa
 
 Time plots add data as physical time increases. Radial profiles show values at the selected time.
 Parameter scans compare calculated values for different settings.
+
+<!-- diagram:views -->
 
 | Plot | Meaning |
 |---|---|

@@ -18,3 +18,18 @@ test('reader routes accept all six tutorials but reject external or executable r
  for(const path of ['/start.html#current','/guide#energy','/learn.html','/how-it-works.html','/equilibrium.html','/qualification.html',...['03','04','05','06'].map(n=>`/tutorial-${n}.html#limits`)])assert.equal(tutorialRoute(path),path);
  for(const path of [null,'','//example.org/start.html','https://example.org/start.html','javascript:alert(1)','/index.html','/start.html?x=1','/start.html#<script>','/start.html/../index.html'])assert.equal(tutorialRoute(path),null);
 });
+
+test('prompts separate physical temperature changes, fixed-speed references and independent calculators',()=>{
+ assert.match(tutorialPresentation('gasTemperature')!.note,/initial pressure.*inventory and inertia.*speed can change/s);
+ assert.match(tutorialPresentation('temperature')!.watch,/same rotation speed/);
+ assert.match(tutorialPresentation('equilibrium')!.watch,/Use sampled state first/);
+ assert.match(tutorialPresentation('equilibrium')!.note,/imports.*once.*independent inputs/);
+ for(const key of ['work','thermalPlot','separationPlot','spinPlot','current','collisions','drag']){
+  const cue=tutorialPresentation(key)!;
+  assert.match(cue.note,/plot shows coupled history.*reference view.*3D uses a separate state/);
+  assert.equal(cue.replay,true);
+ }
+ assert.match(tutorialPresentation('thermal')!.watch,/Enable Evolve gas & liner temperature/);
+ assert.match(tutorialPresentation('work')!.note,/does not include all resistive heat and cooling energy/);
+ assert.match(tutorialPresentation('density')!.note,/vessel mean.*axis density/);
+});

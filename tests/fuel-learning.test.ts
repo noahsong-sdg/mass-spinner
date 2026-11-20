@@ -115,6 +115,8 @@ test('temperature comparison holds the current sampled rotation fixed and does n
  assert.deepEqual(comparison.cases.map((v:any)=>v.omega),[9000,9000]);
  assert.deepEqual(comparison.cases.map((v:any)=>v.temperatureK),[650,1300]);
  assert.match(comparison.scope,/rotation fixed/i);assert.match(comparison.scope,/do not predict drive, heating or extraction/i);
+ assert.match(comparison.scope,/light percentage against radius at one uniform temperature/);
+ assert.match(comparison.scope,/same rotation speed, random atom motion reduces separation/);
  for(const row of comparison.cases){
   const expected=equilibrium(r,row.omega,row.temperatureK);
   for(const point of row.profiles)close(point.lightFraction,expected.fraction((point.radiusM/r.config.radiusM)**2));
@@ -194,6 +196,11 @@ test('composition includes the accepted inventory feed and reference comparisons
  for(const lightFraction of [0,.0759,1])for(const neutralRadS of [0,9000])for(const kind of ['temperature','rotation']){
   const comparison=fuelLearningComparison(rotor({lightFraction}),{neutralRadS},kind);
   assert.match(comparison.scope,/Expanded light-fraction axis.*feed.*percentage points/);
+  const reference=comparison.curves.at(-1)!;
+  assert.equal(reference.label,`${r.pair.light} feed`);assert.equal(reference.dash,'4 4');
+  assert.deepEqual(reference.y,[100*lightFraction,100*lightFraction]);
+  assert.deepEqual(reference.yDomain,comparison.curves[0].yDomain);
+  assert.equal(comparison.needsRotation,neutralRadS===0);
   for(const curve of comparison.curves){
    assert.match(curve.yLabel,/%.*zoomed axis/);assert.ok(curve.yDomain[0]>=0&&curve.yDomain[1]<=100&&curve.yDomain[0]<curve.yDomain[1]);
    assert.ok(curve.yDomain[1]-curve.yDomain[0]<100);

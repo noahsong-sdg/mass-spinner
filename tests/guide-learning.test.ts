@@ -32,6 +32,15 @@ test('opening an optional explanation never launches a run',t=>{
  assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
 });
 
+test('the distribution section explains temperature before the comparison and connects it to the plotted gradients',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const section=dom.window.document.getElementById('composition')!.parentElement!;
+ const intro=section.querySelector('p')!.textContent!;
+ assert.match(intro,/No rotation with Rotation first.*Higher temperature at the same rotation speed.*random atom motion/);
+ const explanation=section.querySelector('[data-learning-explanation]')!.textContent!;
+ assert.match(explanation,/same number of atoms per volume.*hotter gas has higher pressure.*same rotation speed.*density curves become less steep.*isotope fractions also differ less/s);
+});
+
 test('the machine explanation separates the drum, charge force and neutral coupling',t=>{
  const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
  const explanation=dom.window.document.getElementById('machine')!.parentElement!.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
@@ -63,4 +72,18 @@ test('the enhanced reader remains compatible with guide pages without experiment
  assert.equal(win.location.pathname,'/guide.html');assert.equal(win.document.querySelector('#reader-status'),null);
  assert.equal(win.document.querySelector('nav a')!.getAttribute('href'),'#goal');
  assert.equal(win.document.body.dataset.learningMode,undefined);
+});
+
+
+test('necessary definitions precede diagrams and heating provides a direct pin action',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const doc=dom.window.document,section=doc.getElementById('composition')!.parentElement!;
+ let before='';
+ for(let n=section.firstElementChild;n&&n.tagName!=='FIGURE';n=n.nextElementSibling)before+=` ${n.textContent}`;
+ assert.match(before,/[Dd]ensity.*atoms per volume.*[Cc]omposition.*local percentage/s);
+ assert.match(before,/1×.*axis density.*vessel mean/s);
+ const heat=doc.getElementById('heat')!.parentElement!;
+ assert.ok(heat.querySelector('[data-guide-action="pin"]'));
+ assert.ok(heat.querySelector('[data-guide-action="compositionPlot"]'));
+ assert.match(heat.textContent!,/same physical time.*temperature, speed and composition/s);
 });

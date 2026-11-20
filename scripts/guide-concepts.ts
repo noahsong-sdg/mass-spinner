@@ -29,14 +29,16 @@ function spinDiagram(id:string):Concept{
 function ratioDiagram(id:string):Concept{
  const magnetic=id==='magnetic';
  const cases=magnetic?[['B ×1',1],['B ×2',.25]] as const:[['Reference',1],['Speed ×2',4],['Temperature ×2',.5]] as const;
- return {title:magnetic?'Keep torque constant. Compare resistive heat.':'Compare the separation exponent, not purity.',
-  description:magnetic?'At fixed torque, geometry and conductivity, doubling the magnetic field halves current and divides resistive heat by four.':'At fixed mass difference and radius, the equilibrium exponent is proportional to angular speed squared divided by temperature.',
-  caption:magnetic?'Constant-torque reference, not a constant-current run. This does not include coil power, magnetic limits or discharge changes.':'Uniform-temperature equilibrium reference. The exponent is ln α. These factors do not multiply purity or recovery.',
-  states:cases.map(([label,factor])=>({label,reading:magnetic?`Resistive heat / reference heat = ${factor}. Current changes to keep torque constant.`:`Separation exponent / reference exponent = ${factor}. Other inputs stay constant.`,
-   body:`${text(180,35,magnetic?'Resistive heat / reference heat':'Separation exponent / reference exponent')}
+ return {title:magnetic?'Keep torque constant. Compare resistive heat.':'Compare heavy/light ratios at the wall and axis.',
+  description:magnetic?'At fixed torque, geometry and conductivity, doubling the magnetic field halves current and divides resistive heat by four.':'The wall heavy/light ratio divided by the axis heavy/light ratio is α. The initial example has α = 1.20. Speed and temperature change this ratio.',
+  caption:magnetic?'Constant-torque reference, not a constant-current run. This does not include coil power, magnetic limits or discharge changes.':'Example equilibrium ratios, not your run. Temperature is uniform. Mass difference and radius stay fixed. Exponent factors do not multiply purity or recovery.',
+  states:cases.map(([label,factor])=>{
+   const ratio=magnetic?factor:1.2**factor;
+   return {label,reading:magnetic?`Resistive heat / reference heat = ${factor}. Current changes to keep torque constant.`:`The wall heavy/light ratio is ${ratio.toFixed(2)} times the axis ratio. ${factor===1?'This is the initial example.':factor===4?'Speed doubles while temperature stays constant.':'Temperature doubles while speed stays constant.'}`,
+   body:`${text(180,35,magnetic?'Resistive heat / reference heat':'Wall heavy/light ratio ÷ axis ratio')}
    <rect x="40" y="80" width="280" height="40" class="concept-bar-background"/>
-   <rect x="40" y="80" width="${280*factor/(magnetic?1:4)}" height="40" class="concept-bar" data-ratio="${factor}"/>
-   ${text(180,155,`${factor} × reference`)}${text(180,195,magnetic?'Same torque · different current':'Different exponent ≠ same change in purity')}`})),};
+   <rect x="40" y="80" width="${280*ratio/(magnetic?1:2.2)}" height="40" class="concept-bar" data-ratio="${ratio}"/>
+   ${text(180,155,magnetic?`${factor} × reference`:`α = ${ratio.toFixed(2)}`)}${text(180,195,magnetic?'Same torque · different current':'1 means no composition difference')}`};}),};
 }
 function routingDiagram(id:string):Concept|undefined{
  const scenarios:Record<string,Concept>={

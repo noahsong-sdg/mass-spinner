@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import {setupGuideReader} from '../src/guide-reader.js';
 import {setupPlaygroundGuide} from '../src/playground-guide.js';
+import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 
 const origin='https://example.org';
 type Packet={type:string;capability?:string;instance?:string;requestId?:string;action?:string;status?:string;message?:string};
@@ -80,6 +81,58 @@ test('coils wait for the asynchronously populated component options before ackno
  component.innerHTML='<option value="vessel">Vessel</option><option value="coils">Coils</option>';
  await new Promise<void>(resolve=>setImmediate(resolve));
  assert.equal(component.value,'coils');assert.deepEqual(f.opened,['inspect']);assert.equal(r.packets.at(-1)?.status,'executed');
+});
+
+test('a failed calculation rejects its pending reader action without a late replay and a new request can recover',async t=>{
+ const f=app(t),r=peer();f.dom.window.open=()=>r.window;f.guide.openStandalone();
+ const doc=f.dom.window.document;
+ doc.body.insertAdjacentHTML('beforeend','<button id="fuel-export" data-calculation-state="pending" disabled></button><button id="fuel-new-run"></button>');
+ const accepted=doc.getElementById('fuel-export') as HTMLButtonElement;
+ let runs=0;doc.getElementById('fuel-new-run')!.addEventListener('click',()=>runs++);
+ f.send(r.window,{type:'mass-spinner:guide-action',action:'newRun',requestId:'failed-run'});
+ assert.equal(r.packets.at(-1)?.status,'waiting');
+ await new Promise<void>(resolve=>setImmediate(resolve));
+ assert.equal(r.packets.at(-1)?.status,'waiting','an unfinished calculation is not a failure');
+ accepted.dataset.calculationError='The thermal solve did not converge.';accepted.dataset.calculationState='failed';
+ await new Promise<void>(resolve=>setImmediate(resolve));
+ assert.equal(r.packets.at(-1)?.status,'rejected');assert.match(r.packets.at(-1)?.message??'',/thermal solve did not converge.*Open Controls/);
+ assert.deepEqual(f.opened,['controls']);assert.equal(runs,0);
+ const receipts=r.packets.length;
+ accepted.dataset.calculationState='pending';delete accepted.dataset.calculationError;
+ accepted.dataset.calculationState='accepted';accepted.disabled=false;
+ await new Promise<void>(resolve=>setImmediate(resolve));
+ assert.equal(r.packets.length,receipts,'recovery cannot replay a rejected request');assert.equal(runs,0);
+ f.send(r.window,{type:'mass-spinner:guide-action',action:'newRun',requestId:'recovered-run'});
+ assert.equal(r.packets.at(-1)?.status,'executed');assert.equal(runs,1);
+});
+
+test('a reader action rejects an existing calculation failure and still permits control actions',t=>{
+ const f=app(t),r=peer();f.dom.window.open=()=>r.window;f.guide.openStandalone();
+ f.dom.window.document.body.insertAdjacentHTML('beforeend','<button id="fuel-export" data-calculation-state="failed" data-calculation-error="Invalid thermal settings." disabled></button>');
+ f.send(r.window,{type:'mass-spinner:guide-action',action:'thermalPlot',requestId:'failed-before-click'});
+ assert.equal(r.packets.length,1);assert.equal(r.packets[0].status,'rejected');assert.match(r.packets[0].message??'',/Invalid thermal settings/);
+ f.send(r.window,{type:'mass-spinner:guide-action',action:'current',requestId:'edit-input'});
+ assert.equal(r.packets.at(-1)?.status,'executed');assert.deepEqual(f.opened,['controls','controls']);
+});
+
+test('the actual worker rejection publishes its failed state to the waiting tutorial action',async t=>{
+ const f=app(t),r=peer();f.dom.window.open=()=>r.window;f.guide.openStandalone();
+ const previous=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:f.dom.window.document,configurable:true});
+ const reject:((reason:Error)=>void)[]=[];
+ const ui=setupFuelCentrifuge({document:f.dom.window.document,request:()=>new Promise<never>((_resolve,fail)=>{reject.push(fail);})});
+ try{
+  f.dom.window.document.body.append(...Object.values(ui.nodes));
+  const accepted=f.dom.window.document.getElementById('fuel-export') as HTMLButtonElement;
+  assert.equal(accepted.dataset.calculationState,'pending');
+  const superseded=ui.run(),run=ui.run();
+  f.send(r.window,{type:'mass-spinner:guide-action',action:'thermalPlot',requestId:'worker-failure'});
+  assert.equal(r.packets.at(-1)?.status,'waiting');
+  reject[0](new Error('An older run failed.'));await superseded;await new Promise<void>(resolve=>setImmediate(resolve));
+  assert.equal(accepted.dataset.calculationState,'pending');assert.equal(r.packets.at(-1)?.status,'waiting','an obsolete request cannot reject the current calculation');
+  reject[1](new Error('The energy solver failed.'));await run;await new Promise<void>(resolve=>setImmediate(resolve));
+  assert.equal(accepted.dataset.calculationState,'failed');assert.equal(accepted.disabled,true);
+  assert.equal(r.packets.at(-1)?.status,'rejected');assert.match(r.packets.at(-1)?.message??'',/energy solver failed.*Open Controls/);
+ }finally{ui.dispose();if(previous)Object.defineProperty(globalThis,'document',previous);else Reflect.deleteProperty(globalThis,'document');}
 });
 
 test('embedded reader sends each action once to its exact parent without a readiness handshake',t=>{

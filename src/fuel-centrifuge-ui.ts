@@ -187,7 +187,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  probeControls.append(probeLabel,probeRadius,probeEnds);probeRadius.addEventListener('input',()=>sampleRadius(Number(probeRadius.value)));
  function sampleRadius(fraction:number){playing=false;selectProbe(fraction);playback();}
  densityReading.id='fuel-density-reading';densityReading.hidden=true;
- metrics.className='fuel-metrics';plotHost.className='live-plots';explanation.className='fuel-explanation';exportButton.id='fuel-export';exportButton.disabled=true;
+ metrics.className='fuel-metrics';plotHost.className='live-plots';explanation.className='fuel-explanation';exportButton.id='fuel-export';exportButton.disabled=true;exportButton.dataset.calculationState='pending';
  nodes.plots.append(metrics,explanation,compositionReadout,probeControls,densityReading,plotHost,exportButton);selector.addEventListener('change',draw);
  const locate=el('button','Show in 3D');locate.id='fuel-locate-plot';nodes.plots.insertBefore(locate,metrics);
  function locatePlot(preserveTime=false){
@@ -383,7 +383,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    if(elapsed>=operatingConfig.durationS){operatingConfig.durationS=Math.min(60,operatingConfig.durationS+Math.max(.1,latest!.result.config.durationS));controls.get('durationS')!.input.value=String(operatingConfig.durationS);}
   }else{currentEvents=[];operatingConfig=null;resume=null;elapsed=0;}
   dependencies();sensitivity.invalidate();
-  cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;
+  cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;exportButton.dataset.calculationState='pending';delete exportButton.dataset.calculationError;
   draw();
   status.textContent=latest?'Calculation in progress · previous accepted state':'Calculation in progress…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
   viewer?.setAnimation(null);motionBar.hidden=true;
@@ -467,16 +467,16 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(invalidThermal){
    if(!dirty){changed();clearTimeout(timer);}
    updating=false;status.textContent=`Before the run, enter permitted thermal settings.${latest?' Previous accepted state.':''}`;
-   learning.setPending(latest?'Invalid settings · previous accepted result':'Before the run, enter permitted settings.');return;
+   learning.setPending(latest?'Invalid settings · previous accepted result':'Before the run, enter permitted settings.');exportButton.dataset.calculationError='Enter permitted thermal settings.';exportButton.dataset.calculationState='failed';return;
   }
-  cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;status.textContent='Calculation in progress…';
+  cancelExport();clearTimeout(timer);controller?.abort();controller=new AbortController();const id=++revision;dirty=false;exportButton.disabled=true;exportButton.dataset.calculationState='pending';delete exportButton.dataset.calculationError;status.textContent='Calculation in progress…';
   updating=true;
   learning.setPending();
   viewer?.setAnimation(null);motionBar.hidden=true;
   try{
    const operation={schemaVersion:1 as const,events:structuredClone(currentEvents),thermal:thermalRead()};
    const reply=await request({kind:'fuel-centrifuge',schemaVersion:1,id,config:operatingConfig??read(),includeTransport:true,operation,...(resume?{resume}:{} )},controller.signal);
-   if(disposed||id!==revision)return;updating=false;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};refreshComparison();exportButton.disabled=false;sensitivity.update(latest);
+   if(disposed||id!==revision)return;updating=false;latest={result:reply.result,producingCode:producingCode(reply.producingCode)};refreshComparison();exportButton.dataset.calculationState='accepted';exportButton.disabled=false;sensitivity.update(latest);
    const r=latest.result,notes=['Uniform-inertia equilibrium reference'];
    eventHistory.replaceChildren(el('summary','Drive history'),...currentEvents.map(e=>el('p',`${fmt(e.timeS)} s → ${fmt(e.currentA)} A`)));if(!currentEvents.length)eventHistory.append(el('p',`Initial current ${fmt(r.config.currentA)} A`));
    if(r.config.durationS<r.mechanics.radialDiffusionTimeS)notes.push('spin time < a²/D');
@@ -486,7 +486,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    status.dataset.reference=status.textContent;
    const timeControl=r.transport?.timeControl;
    assumptions.replaceChildren(...[...r.assumptions.map(text=>`Uniform-inertia reference: ${text}`),...(r.transport?.assumptions??[]).map(text=>`Coupled trajectory: ${text}`),...(r.transport?[`Transport grid: ${r.transport.cells} equal-volume radial cells, ${r.transport.steps} nominal time intervals${r.transport.checkpoints?`, ${r.transport.checkpoints.length-1} retained intervals`:''}. Maximum centrifugal exponent per cell: ${fmt(r.transport.maxCellExponent)}. Values above one show a wall layer finer than the grid. Refinement studies apply to tested cases, not all slider combinations.`]:[]),...(timeControl?[`Timestep error estimate: ${timeControl.method}. Relative tolerance ${fmt(timeControl.relativeTolerance)}; temperature tolerance ${fmt(timeControl.temperatureToleranceK)} K. ${timeControl.acceptedPairs} accepted pairs; ${timeControl.rejectedSteps} rejected steps; maximum accepted ratio ${fmt(timeControl.maxErrorRatio)}. Counters start at ${fmt(timeControl.startTimeS)} s and do not include an earlier history.`]:[])].map(text=>el('li',text)));draw();
-  }catch(error){if(disposed||id!==revision||(error instanceof Error?error.name:undefined)==='AbortError')return;updating=false;latest=null;frame.hidden=true;motion=null;exportButton.disabled=true;renderPlots(plotHost,[]);metrics.replaceChildren();compositionReadout.hidden=true;probeControls.hidden=true;densityReading.hidden=true;learning.setPending('No accepted result');status.textContent=message(error);}
+  }catch(error){if(disposed||id!==revision||(error instanceof Error?error.name:undefined)==='AbortError')return;updating=false;latest=null;frame.hidden=true;motion=null;exportButton.disabled=true;renderPlots(plotHost,[]);metrics.replaceChildren();compositionReadout.hidden=true;probeControls.hidden=true;densityReading.hidden=true;learning.setPending('No accepted result');status.textContent=message(error);exportButton.dataset.calculationError=status.textContent;exportButton.dataset.calculationState='failed';}
   if(latest&&id===revision)try{await showGeometry(latest);}catch(error){if(!disposed&&id===revision)status.textContent=`3D unavailable: ${message(error)}`;}
  }
  function draw(source:AcceptedFuel|Event|null=latest,capture=false):PlotCurve[]|undefined{

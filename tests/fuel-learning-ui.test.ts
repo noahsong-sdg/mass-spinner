@@ -24,6 +24,18 @@ function fixture(t:any){
  return {doc,tools,node,buttons,get comparisons(){return comparisons;}};
 }
 
+test('a comparison at rest explains overlapping curves without changing time or inputs',t=>{
+ const f=fixture(t),r=freeze(result()),state=freeze({neutralRadS:0,timeS:0}),before=JSON.stringify({r,state});
+ f.tools.update(r,state,'composition');
+ (f.node('fuel-compare-temperature') as HTMLButtonElement).click();
+ const instruction=f.node('fuel-comparison-instruction');
+ assert.equal(instruction.hidden,false);assert.match(instruction.textContent!,/gas is at rest.*curves overlap.*Select Play.*Physical time/);
+ assert.equal(JSON.stringify({r,state}),before);
+ f.tools.update(r,{neutralRadS:9000,timeS:1},'composition');
+ assert.equal(instruction.hidden,true);assert.equal(instruction.textContent,'');
+ f.tools.setPending();assert.equal(instruction.hidden,true);
+});
+
 test('learning controls start pending without calculations, plots or a qualification claim',t=>{
  const f=fixture(t);
  assert.equal(f.doc.querySelectorAll('svg').length,0);assert.equal(f.comparisons,0);

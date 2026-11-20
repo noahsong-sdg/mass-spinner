@@ -10,7 +10,7 @@ export function startPage(){
  <main><h1>Tutorial 1 · Using the simulator</h1><p id="reader-status" role="status" aria-live="polite"></p>
  ${guideContents(playgroundSteps.map(step=>[step.id,step.title]))}
  ${playgroundSteps.map(step=>`<section aria-labelledby="${step.id}" class="walkthrough-step">
- <h2 id="${step.id}">${escape(step.title)}</h2><p>${escape(step.intro)}</p>
+ <h2 id="${step.id}">${escape(step.title)}</h2>${step.intro.split('\n\n').map(text=>`<p>${escape(text)}</p>`).join('')}
  <div class="try-actions" role="group" aria-label="Try ${escape(step.title)}">${step.actions.map(([action,label])=>`<a data-guide-action="${action}" href="/?level=2&try=${action}">${escape(label)} ↗</a>`).join('')}</div>
  ${step.do.map(text=>`<p>${escape(text)}</p>`).join('')}
  ${guideDiagram(step.diagram)}

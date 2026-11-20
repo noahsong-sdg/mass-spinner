@@ -125,7 +125,12 @@ test('the density-gradient example follows the ideal-gas exponent and keeps the 
   const curves=[...figure.querySelectorAll<SVGPathElement>(`g[data-density-case="${id}"] path`)];
   for(const curve of curves){const m=Number(curve.dataset.mass)*1.66053906892e-27,beta=m*v*v/(2*1.380649e-23*T);assert.ok(Math.abs(Number(curve.dataset.beta)-beta)<1e-14);assert.ok(Math.abs(Number(curve.dataset.wall)-Math.exp(beta))<1e-12);}
   if(v>0)assert.ok(Number(curves[1].dataset.wall)>Number(curves[0].dataset.wall));
+  const reading=figure.querySelector(`div[data-density-case="${id}"]`)!.textContent!;
+  if(id==='rest')assert.match(reading,/Without rotation.*Both curves stay at 1×/);
+  if(id==='warm')assert.match(reading,/speed stays.*same number of atoms per volume.*hotter gas has higher pressure.*These normalized density curves become less steep/);
  }
+ const walls=(id:string)=>[...figure.querySelectorAll<SVGPathElement>(`g[data-density-case="${id}"] path`)].map(curve=>Number(curve.dataset.wall));
+ walls('warm').forEach((value,i)=>assert.ok(Math.abs(Math.log(value)-Math.log(walls('spin')[i])/2)<1e-14,'doubling temperature halves the density exponent at fixed speed'));
  assert.match(figure.textContent!,/equal-size volumes.*not whole rings/);
  assert.match(figure.textContent!,/not isotope percentages/);
 });
@@ -190,7 +195,7 @@ test('the rotation chapter motivates one drive-and-coast experiment instead of e
  for(const [i,step]of steps.entries()){assert.ok(step);assert.match(step.textContent!,observations[i],`step ${i+1} states its physical observation`);}
  assert.equal(doc.querySelectorAll('[data-guide-action="currentExperiment"]').length,1,'do not repeat the introductory current experiment');
  for(const action of ['axis','wall','density','inertia','collisions','drag','duration','diffusion','pin','thermal','thermalPlot']){
-  assert.equal(doc.querySelector(`[data-guide-action="${action}"]`),null,'specialist shortcuts stay out of the main experiment sequence');
+  assert.equal(links.find(link=>link.dataset.guideAction===action),undefined,'specialist shortcuts stay out of the rotation experiment sequence');
   assert.ok(guideActions.has(action),'previously shared simulator deep links remain valid');
  }
 });
@@ -236,4 +241,16 @@ test('condensed reference tables explain each entry once',t=>{
   const labels=[...table.querySelectorAll('tbody tr')].map(row=>row.querySelector('td')!.textContent!.trim());
   assert.equal(new Set(labels).size,labels.length,'duplicate reference entry');
  }
+});
+
+
+test('explicit diagram markers follow definitions and reject unknown or repeated diagrams',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
+ const section=dom.window.document.getElementById('composition')!;
+ let before='';
+ for(let n=section.nextElementSibling;n&&n.tagName!=='FIGURE';n=n.nextElementSibling)before+=` ${n.textContent}`;
+ assert.match(before,/number density \(atoms\/m³\)/s);
+ assert.match(before,/local light fraction.*n.*axis density/s);
+ for(const text of ['<!-- diagram:unknown -->','<!-- diagram:drive -->\n\n<!-- diagram:drive -->'])
+  assert.throws(()=>understandingPage(text,revision),/Invalid or repeated guide diagram/);
 });

@@ -28,7 +28,7 @@ test('the animated spin reference solves the driven two-population equations and
 });
 
 test('reference factors preserve the fixed conditions and distinguish exponent from purity',t=>{
- for(const [id,expected]of [['bias',[1,4,.5]],['magnetic',[1,.25]],['inventory',[1,39/19,2]]] as const){
+ for(const [id,expected]of [['bias',[1.2,1.2**4,Math.sqrt(1.2)]],['magnetic',[1,.25]],['inventory',[1,39/19,2]]] as const){
   const dom=new JSDOM(conceptDiagram(id)!);t.after(()=>dom.window.close());
   assert.deepEqual([...dom.window.document.querySelectorAll('[data-ratio]')].map(n=>Number(n.getAttribute('data-ratio'))),expected);
   assert.match(dom.window.document.querySelector('figcaption')!.textContent!,id==='bias'?/do not multiply purity/:id==='magnetic'?/Constant-torque/:/Steady-flow/);
@@ -45,6 +45,12 @@ test('every instructional section has a local visual with unique accessible SVG 
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
    if(heading.id==='path')continue; // This section links to further reading.
+   if(doc.title.startsWith('Tutorial 6')&&heading.id==='sensitivity'){
+    const section=doc.body.textContent!;
+    assert.match(section,/Diffusivity changes how fast atoms move.*mass distribution and gas inertia/s);
+    assert.ok(doc.querySelector('[data-guide-action="pin"]'));assert.ok(doc.querySelector('[data-guide-action="diffusion"]'));
+    assert.equal(doc.querySelector('[data-concept-example="compare"]'),null,'the collision example cannot explain diffusivity');continue;
+   }
    let visual=false;
    for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling){if(n.matches('figure')||n.querySelector('figure'))visual=true;}
    assert.ok(visual,heading.textContent!);

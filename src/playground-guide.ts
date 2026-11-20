@@ -201,13 +201,21 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    return immediate||!pending(key);
   };
   if(ready()){execute();return;}
+  const rejectFailure=()=>{
+   const calculation=node('fuel-export');
+   if(calculation?.dataset.calculationState!=='failed')return false;
+   status.textContent=`Calculation failed. ${calculation.dataset.calculationError??'No accepted result is available.'} Open Controls. Correct the settings to start a new calculation.`;
+   focusRelated('controls',null);reply({status:'rejected',message:status.textContent});return true;
+  };
+  if(rejectFailure())return;
   status.textContent='Waiting for the calculated run and controls…';reply({status:'waiting'});
   const observer=new win.MutationObserver(()=>{
    if(ready()){observer.disconnect();cancelLaunch=()=>{};execute();}
+   else if(rejectFailure()){observer.disconnect();cancelLaunch=()=>{};}
   });
   cancelLaunch=()=>{observer.disconnect();cancelLaunch=()=>{};reply({status:'rejected',message:'A new tutorial action replaced this request.'});};
   // The application adds controls asynchronously. Watch for new controls and accepted results.
-  observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled']});
+  observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','data-calculation-state']});
  }
  function render(focus=false){
   const step=steps[index];choice.value=String(index);status.textContent='';

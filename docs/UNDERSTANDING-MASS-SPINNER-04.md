@@ -14,6 +14,8 @@ x_{\ell,\mathrm{cut}}=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{cut}}+N_{h,\m
 
 N is the number of atoms. The symbols ℓ and h identify the light and heavy isotopes. Purity is the light-isotope number fraction in the sample. Recovery is the fraction of the vessel's light atoms in the sample. A fraction of 0.08 is 8%, not 0.08%.
 
+<!-- diagram:inventory-cut -->
+
 [Open the collection experiment](/?level=2&try=collectionExperiment).
 
 1. Select Isotope separation.
@@ -28,6 +30,12 @@ The plot probe does not move the 3D collection marker. Inner collection radius /
 ## Why use more than one stage?
 
 One stage may not give the required purity. A cascade connects stages through inner and outer streams. More stages can give higher purity but cause more internal circulation.
+
+This stage reference uses equilibrium distributions at the uniform-inertia model's final speed and the specified initial gas temperature.
+It does not use the coupled run's selected finite-time distribution. Each ideal stage uses these same routing probabilities.
+Thus, it does not connect resolved outlet flows between physical machines.
+
+<!-- diagram:stages -->
 
 [Open the stages experiment](/?level=2&try=stageExperiment).
 
@@ -50,6 +58,8 @@ Q=S p_w,\qquad p_u=p_a+Q/C,\qquad S_{\mathrm{eff}}=Q/p_u.
 ```
 
 S is outer pump speed. C is inlet conductance, the gas-load capacity per pressure difference. The two have units m³/s. Pressure p has units Pa. Gas load Q has units Pa·m³/s. Subscripts w, a and u identify wall, axis and upstream pressures.
+
+<!-- diagram:pumping -->
 
 [Open the pumping experiment](/?level=2&try=pumpingExperiment).
 

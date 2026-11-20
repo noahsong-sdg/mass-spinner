@@ -130,6 +130,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  const cue=make('aside','tutorial-focus'),watch=make('p',''),note=make('p',''),stages=make('div','tutorial-drive-stages');cue.hidden=true;cue.setAttribute('aria-label','What to look for');cue.append(watch,note,stages);shell.append(cue);const dismissCue=make('button','tutorial-focus-close','×');dismissCue.type='button';dismissCue.setAttribute('aria-label','Close learning prompt');dismissCue.addEventListener('click',()=>{cue.hidden=true;});cue.append(dismissCue);
  for(const [label,layer,text]of [['Field','B','The magnetic field points along the cylinder axis.'],['Current','J','Current crosses the gas toward the inner electrode.'],['Force','force','Current across the field gives a tangential force.'],['Gas','all','Collisions make the neutral gas turn.']] as const){const button=make('button','',label);button.type='button';button.addEventListener('click',()=>{const input=doc.getElementById('fuel-view-drive') as HTMLSelectElement;input.value=layer;input.dispatchEvent(new win.Event('change'));note.textContent=text;for(const sibling of stages.querySelectorAll('button'))sibling.setAttribute('aria-pressed',String(sibling===button));});stages.append(button);}
  const replay=make('button','','Replay motion');replay.type='button';replay.addEventListener('click',()=>guide.launch('spin'));stages.append(replay);
+ const replayHistory=make('button','','Replay spin-up');replayHistory.type='button';replayHistory.hidden=true;replayHistory.addEventListener('click',()=>guide.launch('spin'));cue.append(replayHistory);
  function prepareReaderAction(key:string){
   if(level!=='2')doc.querySelector<HTMLButtonElement>('button[data-level="2"]')!.click();
   const experiment:GuideExperiment|undefined=guideExperiments[key as keyof typeof guideExperiments];
@@ -140,7 +141,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  function present(key:string){
   for(const name of ['controls','plots','target','inspect','view','info'])close(name);
   cue.dataset.context=`${level}/${marathon}`;
-  const view=tutorialPresentation(key);cue.hidden=!view;if(!view)return;watch.textContent=view.watch;note.textContent=view.note;stages.hidden=key!=='look';
+  const view=tutorialPresentation(key);cue.hidden=!view;if(!view)return;watch.textContent=view.watch;note.textContent=view.note;stages.hidden=key!=='look';replayHistory.hidden=!view.replay;
   for(const button of stages.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.textContent==='Gas'));
  }
 
