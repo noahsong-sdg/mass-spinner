@@ -12,6 +12,21 @@ async function reader(page:Page){
  return readerFrame(page);
 }
 
+test('playback reaches the tutorial scene bottom and stays clear of the dock',async({page},info)=>{
+ await page.goto('/?level=2&lesson=/guide.html%23rotation&try=momentum');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#window-plots')).toBeVisible();
+ const grip=page.getByRole('button',{name:'Move playback panel',exact:true});
+ await grip.focus();for(let i=0;i<40;i++)await grip.press('ArrowDown');
+ const panel=await page.locator('.fuel-motion').boundingBox(),scene=await page.locator('#fuel-render').boundingBox(),dock=await page.locator('.world-dock').boundingBox();
+ expect(panel).not.toBeNull();expect(scene).not.toBeNull();expect(dock).not.toBeNull();
+ const bottom=scene!.y+scene!.height,overlap=dock!.y<bottom&&dock!.y+dock!.height>scene!.y;
+ const expected=overlap?Math.min(bottom-8,dock!.y-12):bottom-8;
+ expect(Math.abs(panel!.y+panel!.height-expected)).toBeLessThan(2);
+ await info.attach('playback-at-scene-bottom',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+ await grip.press('Home');await expect(page.locator('.fuel-motion')).not.toHaveClass(/fuel-motion-moved/);
+});
+
 test('all six tutorials share one simulator and expose a specific observation',async({page,context},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
