@@ -61,9 +61,9 @@ body.embedded{padding:16px;font-size:14px}.embedded header>a:first-child{display
 
 h1,h2,h3{font-family:Literata,serif;font-optical-sizing:auto}
 
-.concept-example{padding:20px;background:#14231c;border-color:#405749}.concept-example svg{max-height:360px}.concept-example [data-concept-panel][hidden]{display:none}.concept-example .diagram-reading{min-height:3.2em}.concept-example figcaption{border-top:1px solid #405749;padding-top:12px}
+.concept-example{padding:20px;background:#14231c;border-color:#405749}.concept-example button{min-height:44px;color:inherit;cursor:pointer}.concept-example svg{max-height:360px}.concept-example [data-concept-panel][hidden]{display:none}.concept-example .diagram-reading{min-height:3.2em}.concept-example figcaption{border-top:1px solid #405749;padding-top:12px}
 .concept-flow{fill:none;stroke:#e4ac76;stroke-width:2;stroke-dasharray:7 5;animation:concept-flow 1.4s linear infinite}.concept-trace{fill:none;stroke-width:3}.concept-reveal{transform-box:fill-box;transform-origin:left;animation:concept-reveal 6s linear infinite}.concept-ion{stroke:#9bd8ce}.concept-neutral{stroke:#e4ac76;stroke-dasharray:6 4}.concept-cut{fill:none;stroke:#c0d0c2;stroke-dasharray:4 4}.concept-key text:first-child{fill:#9bd8ce}.concept-key text:last-child{fill:#e4ac76}
 .concept-bar{fill:#e4ac76;stroke:none}.concept-bar-background{fill:#2c3c32;stroke:none}.concept-vessel{fill:#1d3329;stroke:#90a393;stroke-width:2}.concept-sample{fill:#9bd8ce}.concept-example[data-motion=paused] .concept-flow,.concept-example[data-motion=paused] .concept-reveal{animation:none}
 @keyframes concept-flow{to{stroke-dashoffset:-24}}@keyframes concept-reveal{0%{transform:scaleX(0)}85%,100%{transform:scaleX(1)}}
-@media(max-width:480px){.concept-example{padding:14px}.concept-example .drive-heading{align-items:flex-start}.concept-example .diagram-cases button{font-size:12px}.concept-example svg text{font-size:12px}}
+@media(max-width:480px){.concept-example{padding:14px}.concept-example .drive-heading{align-items:flex-start}.concept-example .diagram-cases button{font-size:12px}}
 @media(prefers-reduced-motion:reduce){.concept-example[data-motion=paused] .concept-flow,.concept-example[data-motion=paused] .concept-reveal{animation:none}}

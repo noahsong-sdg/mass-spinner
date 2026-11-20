@@ -206,6 +206,7 @@ test('local tutorial diagrams explain their cases and remain usable with reduced
    }
    const motion=figure.locator('[data-concept-motion]');
    if(await motion.count()&&await motion.isVisible()){
+    expect((await motion.boundingBox())?.height??0).toBeGreaterThanOrEqual(44);
     await motion.click();await expect(figure).toHaveAttribute('data-motion','running');
     await motion.click();await expect(figure).toHaveAttribute('data-motion','paused');
    }
