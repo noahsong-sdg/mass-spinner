@@ -73,6 +73,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  const frame=await reader(page);await frame.goto('/start.html#current');
  await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
+ if(info.project.name==='phone')for(const panel of ['#window-controls','#window-plots'])await expect.poll(()=>page.locator(panel).evaluate(element=>element.getBoundingClientRect().width)).toBeGreaterThan(page.viewportSize()!.width-24);
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-clock')).toBeVisible();
  await frame.locator('a[href="#machine"]').click();
  const full=page.getByRole('link',{name:'Reading page'});

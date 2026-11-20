@@ -214,7 +214,7 @@ body.immersive .sim-workspace [hidden]{display:none!important}
  .tutorial-open .tutorial-focus{position:relative;top:auto!important;left:auto;right:auto;margin:8px;flex:none;order:2}
  .tutorial-open .world-stage{position:relative;inset:auto;min-height:50dvh;flex:none;order:3;width:100%}
  .tutorial-open .world-stage>.world-group{inset:0}
- .tutorial-open .world-rail{position:relative;inset:auto!important;width:100%!important;height:55dvh!important;min-height:300px;max-height:none;flex:none;order:4;padding:8px}
+ .tutorial-open .world-rail,.tutorial-open.tutorial-pair .world-rail{position:relative;inset:auto!important;width:100%!important;height:55dvh!important;min-height:300px;max-height:none;flex:none;order:4;padding:8px}
  .tutorial-open .world-dock{position:sticky;inset:auto;bottom:0;transform:none;align-self:center;flex:none;order:5}
  .tutorial-open #window-guide>.world-resizer{display:none}
  .tutorial-open .world-stage .fuel-motion{bottom:8px}
