@@ -139,6 +139,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  function present(key:string){
   for(const name of ['controls','plots','target','inspect','view','info'])close(name);
+  cue.dataset.context=`${level}/${marathon}`;
   const view=tutorialPresentation(key);cue.hidden=!view;if(!view)return;watch.textContent=view.watch;note.textContent=view.note;stages.hidden=key!=='look';
   for(const button of stages.querySelectorAll('button'))button.setAttribute('aria-pressed',String(button.textContent==='Gas'));
  }
@@ -184,6 +185,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  switcher.addEventListener('change',()=>{marathon=switcher.value;refresh();});
  function refresh(){
   shell.dataset.level=level;shell.dataset.context=marathon;
+  if(cue.dataset.context!==`${level}/${marathon}`)cue.hidden=true;
   context.hidden=level!=='2'||marathon==='centrifuge';
   for(const {wrapper,levels,context}of groups)wrapper.hidden=!levels.includes(level)||(!!context&&context!==marathon);
   const allowed=level==='4'?['controls']:level==='2'?(marathon==='source'?['controls','plots','target','inspect','info']:marathon==='centrifuge'?['controls','plots','inspect','view','info','guide']:['plots','inspect']):level==='1'?['controls','plots','inspect','view']:['controls','plots','inspect','view','info'];

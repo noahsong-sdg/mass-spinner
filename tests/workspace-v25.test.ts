@@ -251,6 +251,18 @@ test('Reactor navigation exposes distinct beam and power-reference scenes withou
 });
 
 
+test('a tutorial prompt belongs only to the apparatus and level that presented it',t=>{
+ const f=fixture(t);t.after(()=>f.window.close());
+ const cue=f.document.querySelector<HTMLElement>('[aria-label="What to look for"]')!,select=f.node('marathon-apparatus') as HTMLSelectElement;
+ f.workspace.launchTutorialAction('beamLedger');assert.equal(cue.hidden,false);
+ f.workspace.refreshMode();assert.equal(cue.hidden,false);
+ select.value='centrifuge';select.dispatchEvent(new f.window.Event('change'));assert.equal(cue.hidden,true);
+ f.workspace.launchTutorialAction('controls');assert.equal(cue.hidden,false);
+ select.value='blanket';select.dispatchEvent(new f.window.Event('change'));assert.equal(cue.hidden,true);
+ f.workspace.launchTutorialAction('controls');assert.equal(cue.hidden,false);
+ f.setLevel('3');assert.equal(cue.hidden,true);
+});
+
 test('a desktop tutorial divider releases keyboard focus when the phone layout hides it',t=>{
  const f=fixture(t);t.after(()=>f.window.close());f.workspace.openTutorial('/start.html');
  const handle=f.document.querySelector<HTMLElement>('[aria-label="Resize tutorial and simulator"]')!;handle.focus();

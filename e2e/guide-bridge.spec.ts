@@ -93,8 +93,12 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
 
 test('tutorial actions return from the reactor to the centrifuge without replacing its inputs',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/tutorial-05.html');
+ const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/start.html');
+ await frame.locator('[data-guide-action="look"]').click();
+ await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
+ await frame.goto('/tutorial-05.html');
  await page.getByRole('button',{name:'Reactor',exact:true}).click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
+ await expect(page.getByRole('complementary',{name:'What to look for'})).toBeHidden();
  await expect(page.locator('#window-guide')).toBeVisible();
  await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
  await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
