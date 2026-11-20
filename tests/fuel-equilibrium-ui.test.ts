@@ -6,6 +6,7 @@ import {createFuelLearningTools} from '../src/fuel-learning-ui.js';
 import {DEFAULT_FUEL_CENTRIFUGE} from '../src/fuel-centrifuge.ts';
 import {equilibriumProducingCode} from '../src/equilibrium-identity.ts';
 import {equilibriumIdentityPlugin} from '../scripts/equilibrium-identity-plugin.mjs';
+import {setupGuideReader} from '../src/guide-reader.js';
 import {equilibriumPage} from '../scripts/equilibrium-page.mjs';
 import {readFileSync} from 'node:fs';
 
@@ -150,4 +151,15 @@ test('export retains reproducible inputs, model, scenario cases, selected counts
  f.set('cutFraction',.6);assert.deepEqual(f.revoked,['blob:equilibrium-1']);f.save().click();f.save().click();
  assert.deepEqual(f.revoked,['blob:equilibrium-1','blob:equilibrium-2']);
  f.dispose();assert.deepEqual(f.revoked,['blob:equilibrium-1','blob:equilibrium-2','blob:equilibrium-3']);assert.equal(f.doc.getElementById('fuel-equilibrium-calculator'),null);
+});
+
+
+test('the equation page opens the calculator in its parent simulator',t=>{
+ const dom=new JSDOM(equilibriumPage('# Equilibrium'),{url:'https://example.org/equilibrium.html'});t.after(()=>dom.window.close());
+ const sent:unknown[][]=[];Object.defineProperty(dom.window,'parent',{value:{postMessage:(...args:unknown[])=>sent.push(args)}});
+ assert.equal(dom.window.document.querySelector('script')?.getAttribute('src'),'/guide-reader.js');
+ setupGuideReader(dom.window);dom.window.document.querySelector<HTMLAnchorElement>('header a')!.click();
+ assert.equal(sent.length,1);const packet=sent[0][0] as {type:string;action:string;requestId:string};
+ assert.equal(packet.type,'mass-spinner:guide-action');assert.equal(packet.action,'equilibrium');assert.ok(packet.requestId);assert.equal(sent[0][1],'https://example.org');
+ assert.equal(dom.window.location.pathname,'/equilibrium.html');
 });

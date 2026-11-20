@@ -3,7 +3,7 @@ import {guideExperiments} from './guide-topics.js';
 /** Reader routes are local documents. Query strings and external locations are not reader routes. */
 export function tutorialRoute(value:string|null):string|null{
  if(!value)return null;
- return /^\/(?:learn|start|guide|tutorial-0[3-6])(?:\.html)?(?:#[a-z][a-z0-9-]*)?$/.test(value)?value:null;
+ return /^\/(?:learn|start|guide|tutorial-0[3-6]|how-it-works|equilibrium|qualification)(?:\.html)?(?:#[a-z][a-z0-9-]*)?$/.test(value)?value:null;
 }
 
 export type TutorialPresentation={watch:string;note:string;plot?:string;component?:string};

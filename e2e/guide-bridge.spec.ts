@@ -93,3 +93,14 @@ test('standalone beam entry and advanced navigation keep the reader with the cor
  await frame.locator('[data-guide-action="current"]').first().click();
  await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');await expect(page.locator('#window-guide')).toBeVisible();await expect(page.locator('#fuel-currentA')).toBeFocused();
 });
+
+
+test('reference pages use the existing simulator rather than nesting a second app',async({page,context})=>{
+ await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const frame=await reader(page),pages=context.pages().length,current=await page.locator('#fuel-currentA').inputValue();
+ await frame.goto('/equilibrium.html');await frame.getByRole('link',{name:'Open calculator'}).click();
+ await expect(page.locator('#fuel-equilibrium-calculator')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
+ await frame.goto('/qualification.html');await frame.getByRole('link',{name:'Mass Spinner'}).click();
+ await expect(page.locator('#window-guide')).toBeHidden();await expect(page.locator('#fuel-currentA')).toHaveValue(current);
+ expect(context.pages().length).toBe(pages);await expect(page.locator('.sim-workspace')).toHaveCount(1);
+});

@@ -15,6 +15,6 @@ test('every tutorial action has a specific observation and physical scope',()=>{
 });
 
 test('reader routes accept all six tutorials but reject external or executable routes',()=>{
- for(const path of ['/start.html#current','/guide#energy','/learn.html',...['03','04','05','06'].map(n=>`/tutorial-${n}.html#limits`)])assert.equal(tutorialRoute(path),path);
+ for(const path of ['/start.html#current','/guide#energy','/learn.html','/how-it-works.html','/equilibrium.html','/qualification.html',...['03','04','05','06'].map(n=>`/tutorial-${n}.html#limits`)])assert.equal(tutorialRoute(path),path);
  for(const path of [null,'','//example.org/start.html','https://example.org/start.html','javascript:alert(1)','/index.html','/start.html?x=1','/start.html#<script>','/start.html/../index.html'])assert.equal(tutorialRoute(path),null);
 });
