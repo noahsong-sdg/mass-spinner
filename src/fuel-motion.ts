@@ -109,9 +109,9 @@ export function createFuelMotion(result: FuelRenderResult){
   const state=stateAt(timeS,mode);
   if(secondsPerScreenSecond!==undefined)state.secondsPerScreenSecond=secondsPerScreenSecond;
   if(rotationSecondsPerScreenSecond!==undefined)state.rotationSecondsPerScreenSecond=Math.min(state.rotationSecondsPerScreenSecond,rotationSecondsPerScreenSecond);
-  // Transport and throughput need faster timelines. Compress only their rotation.
+  // Coupled and throughput views need faster timelines. Compress only their rotation.
   // A constant phase factor preserves direction, speed ratios, and frame independence.
-  const phaseScale=mode==='transport'||mode==='flow'?Math.min(1,state.rotationSecondsPerScreenSecond/state.secondsPerScreenSecond):1;
+  const phaseScale=mode!=='equilibrium'?Math.min(1,state.rotationSecondsPerScreenSecond/state.secondsPerScreenSecond):1;
   const displayPhases={ion:state.phases.ion*phaseScale,neutral:state.phases.neutral*phaseScale};
   // Hidden tracers still supply physical clocks/readouts. Rebuild from the
   // current state when shown; previousMode records the last displayed state.
@@ -124,7 +124,7 @@ export function createFuelMotion(result: FuelRenderResult){
   const exposureS=transient?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
   const before=stateAt(timeS-exposureS,mode).phases;
   glyphs.update({...state,phases:displayPhases},mode,quantile,{seconds:exposureS,ion:(state.phases.ion-before.ion)*phaseScale,neutral:(state.phases.neutral-before.neutral)*phaseScale});
-  const history=mode==='spin'||mode==='equilibrium'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
+  const history=mode!=='flow'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
    const time=timeS-exposureS*(1-j/TRAIL_SEGMENTS),frame=stateAt(time,mode);
    const sample=transient&&result.transport?sampleFuelTransport(result.transport,time):null;
    return {...frame,cdf:[sample?.lightCDF,sample?.heavyCDF]};

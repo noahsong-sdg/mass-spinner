@@ -73,6 +73,8 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const frame=await reader(page);await frame.goto('/start.html#current');
  await frame.locator('[data-guide-action="currentExperiment"]').click();
+ await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');
+ await expect(page.locator('#fuel-view-drive')).toHaveValue('off');
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
  if(info.project.name==='phone')for(const panel of ['#window-controls','#window-plots']){
   const bounds=await page.locator(panel).boundingBox(),width=page.viewportSize()!.width;

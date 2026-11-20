@@ -139,6 +139,9 @@ test('the current experiment rewinds before editing and compares endpoints witho
  const time=make('input','fuel-motion-time','.6');time.type='range';time.min='0';time.max='1';time.step='any';time.value='.6';
  const plot=make('select','fuel-plot','');plot.innerHTML='<option value="composition">Composition</option><option value="spin">Spin-up</option>';
  const plotHost=make('div','fuel-plots','');plotHost.innerHTML='<div class="live-plots"></div>';
+ for(const [id,values]of [['fuel-view-representation',['both','tracers']],['fuel-view-drive',['all','off']]] as const){
+  const select=make('select',id,'');select.innerHTML=values.map(value=>`<option>${value}</option>`).join('');
+ }
  make('details','fuel-learning-comparisons','');make('button','fuel-export','');
  let restarted=0;make('button','fuel-new-run','').addEventListener('click',()=>restarted++);
  const seen:number[]=[];time.addEventListener('input',()=>seen.push(Number(time.value)));

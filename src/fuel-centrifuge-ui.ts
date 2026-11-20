@@ -132,7 +132,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const modeDescriptions:Record<FuelMotionMode,string>={
   equilibrium:'Ideal equilibrium density, not the final state of this run. Blue arrows show ions; cream arrows show gas.',
   transport:'Rotation uses a slower display clock. Radii and plots use physical time. Straight arrows show gas-shell displacement from the initial radii.',
-  spin:'The same coupled run at a slower display speed. Blue arrows show ions; cream arrows show gas. Arcs show up to ½ screen second of rotation.',
+  spin:'The same coupled run. Blue arrows show ions; cream arrows show gas. Rotation uses a slower display clock.',
   flow:'Dashed routes show reference throughput. Rotation uses a slower display clock. The model does not calculate chamber flow.'
  };
  const playbackPosition=floatingPlayback(motionBar);
@@ -301,11 +301,11 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const initial=motion.update(elapsed,mode),baseline=baselineMotion?.update(elapsed,mode);
   let suggested=Math.min(initial.secondsPerScreenSecond,baseline?.secondsPerScreenSecond??Infinity);
   const rotationClock=Math.min(initial.rotationSecondsPerScreenSecond,baseline?.rotationSecondsPerScreenSecond??Infinity);
-  // Keep the transport timeline fast. Rotation has a separate, shared display clock.
-  if(mode==='transport')suggested=Math.min(latest.result.config.durationS/8,1);
+  // Both coupled views use one timeline. Rotation has a separate, shared display clock.
+  if(transient)suggested=Math.min(latest.result.config.durationS/8,1);
   timeScales[motionMode.value]??=suggested;
   // Preserve slider comparisons; retime only outside the visual sampling budget.
-  const scale=Math.min(timeScales[motionMode.value],suggested*(mode==='flow'?2:mode==='transport'?8:1));
+  const scale=Math.min(timeScales[motionMode.value],suggested*(mode==='flow'?2:transient?8:1));
   elapsed+=dt*scale;
   const c=latest.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
   if((transient||pinned)&&elapsed>=limit){elapsed=limit;playing=false;}
@@ -337,7 +337,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const timing=transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:mode==='flow'?`Reference Q ${fmt(latest.result.pumping.gasLoadPaM3S)} Pa·m³/s · 1 s screen = ${timeUnit}`:'Final reference';
   const rotationScale=Math.min(scale,state.rotationSecondsPerScreenSecond);
   const rotationUnit=rotationScale>=.001?`${fmt(rotationScale*1000)} ms`:`${fmt(rotationScale*1e6)} µs`;
-  clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}${mode==='transport'||mode==='flow'?` · rotation: ${rotationUnit}/screen s`:''}`;
+  clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}${transient||mode==='flow'?` · rotation: ${rotationUnit}/screen s`:''}`;
   if(!playing)viewer?.setAnimation(null);
  }
  function playback(){

@@ -133,8 +133,10 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   }
   if(key==='currentExperiment'){
    set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
+   set('fuel-view-representation','tracers');set('fuel-view-drive','off');
   }else if(key==='endSpin'){
    endpoint();plot('spin');
+   set('fuel-view-representation','tracers');set('fuel-view-drive','off');
   }else if(key==='spin'){
    set('fuel-motion-mode','spin');set('fuel-motion-time',0,'input');plot('spin');set('fuel-view-representation','tracers');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();

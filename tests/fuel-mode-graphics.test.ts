@@ -98,7 +98,7 @@ test('species focus dims the corresponding shell arrows and survives mode change
 test('fast views rotate both populations on one bounded clock without changing physical phase or radial transport',()=>{
  const result=fixture(),motion=createFuelMotion(result),once=createFuelMotion(result),before=JSON.stringify(result);
  try{
-  for(const mode of ['transport','flow'] as const){
+  for(const mode of ['transport','spin','flow'] as const){
    const physicalClock=.125,rotationClock=.0001,time=.025;
    motion.update(time/2,mode,physicalClock,rotationClock);const state=motion.update(time,mode,physicalClock,rotationClock);
    once.update(time,mode,physicalClock,rotationClock);
@@ -107,10 +107,10 @@ test('fast views rotate both populations on one bounded clock without changing p
     const kind=cloud.userData.ion?'ion':'neutral';
     close(cloud.rotation.z,(state.phases[kind]*rotationClock/physicalClock)%(2*Math.PI));
     assert.ok(cloud.rotation.z>0);close(cloud.rotation.z,others[i].rotation.z);
-    assert.equal(cloud.children[1].visible,false);
+    assert.equal(cloud.children[1].visible,mode!=='flow');
     assert.equal(motion.group.getObjectByName(cloud.userData.ion?'Ion rotation arrow':'Neutral rotation arrow')!.visible,true);
    }
-   close(state.phases.ion,mode==='transport'?sampleFuelTransport(result.transport,time).ionPhaseRad:result.samples.at(-1)!.ionRadS*time);
+   close(state.phases.ion,mode!=='flow'?sampleFuelTransport(result.transport,time).ionPhaseRad:result.samples.at(-1)!.ionRadS*time);
    if(mode==='transport'){
     const sample=sampleFuelTransport(result.transport,time);
     for(const cloud of clouds.filter(c=>!c.userData.ion)){
@@ -122,6 +122,26 @@ test('fast views rotate both populations on one bounded clock without changing p
   }
   assert.equal(JSON.stringify(result),before);
  }finally{release(motion.group);release(once.group);}
+});
+
+test('transport trails follow the accepted history on the same slow rotation clock, with no motion before rest',()=>{
+ const result=fixture(),motion=createFuelMotion(result),R=result.config.radiusM;
+ try{
+  const time=.025,clock=.125,rotation=.0001,scale=rotation/clock;
+  const state=motion.update(time,'transport',clock,rotation);
+  for(const cloud of motion.group.children.filter(c=>c.userData.tracers)){
+   const kind=cloud.userData.ion?'ion':'neutral',lines=cloud.children[1] as THREE.LineSegments;
+   assert.equal(lines.visible,true);
+   close(lines.userData.exposureS,time);
+   const a=lines.geometry.getAttribute('position'),points=(cloud.children[0] as THREE.Mesh).geometry.getAttribute('samplePosition');
+   const start=Math.atan2(a.getY(0),a.getX(0)),end=Math.atan2(a.getY(15),a.getX(15));
+   close(end-start,state.phases[kind]*scale);
+   close(a.getX(15),points.getX(0));close(a.getY(15),points.getY(0));
+   if(!cloud.userData.ion)assert.ok(Math.abs(Math.hypot(a.getX(0),a.getY(0))-R*Math.sqrt(.5/points.count))<1e-7);
+  }
+  motion.update(0,'transport',clock,rotation);
+  for(const cloud of motion.group.children.filter(c=>c.userData.tracers))assert.equal(cloud.children[1].visible,false);
+ }finally{release(motion.group);}
 });
 
 

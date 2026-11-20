@@ -106,11 +106,15 @@ test('a stronger drive keeps resolved rotation within the shared angular samplin
  const f=fixture(t);await f.start();f.change('fuel-motion-mode','spin','change');
  const oldScale=fuelMotionState(f.ui.latest.result,0,'spin').secondsPerScreenSecond;
  f.change('fuel-currentA',.12);await f.ui.run();await flush();
- const expected=fuelMotionState(f.ui.latest.result,0,'spin').secondsPerScreenSecond;
- assert.ok(expected<oldScale/2,'the prior display clock would exceed the angular sampling budget');
+ const rotationClock=fuelMotionState(f.ui.latest.result,0,'spin').secondsPerScreenSecond;
+ assert.ok(rotationClock<oldScale/2,'the prior display clock would exceed the angular sampling budget');
+ const expected=f.ui.latest.result.config.durationS/8;
  if(f.node('fuel-motion-play').getAttribute('aria-pressed')!=='true')f.node('fuel-motion-play').click();
  f.viewers[0].animation(1);close(Number(f.node('fuel-motion-time').value),expected);
  const arrow=f.viewers[0].built.motion.group.getObjectByName('Ion rotation arrow');close(arrow.userData.exposureS,expected/2);
+ const cloud=f.viewers[0].built.motion.group.children.find((o:THREE.Object3D)=>o.userData.tracers&&o.userData.ion);
+ assert.ok(cloud.userData.rotationPhaseScale<1);
+ close(cloud.userData.rotationPhaseScale,rotationClock/expected);
 });
 
 test('equilibrium import samples the visible playback state even when the time-history plot has not redrawn',async t=>{
@@ -140,6 +144,7 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  guide.launch('spin');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
  assert.equal(f.node('fuel-motion-mode').value,'spin','use the same accepted run with resolved slow-motion rotation');
  action(1,'Show end-of-run speeds');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ assert.equal(f.node('fuel-view-representation').value,'tracers');assert.equal(f.node('fuel-view-drive').value,'off');
  assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  action(2,'Show end-of-run composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
@@ -160,6 +165,17 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  assert.ok(opened.includes('plots'));
  f.change('fuel-application','pump','change');await f.ui.run();action(5,'Open collection experiment');
  assert.match(f.node('guide-status').textContent,/select Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
+});
+
+test('the current tutorial shows gas motion without field overlays and preserves physical inputs',async t=>{
+ const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
+ const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated(){}});
+ const inputs=JSON.stringify(f.ui.read());
+ guide.launch('currentExperiment');await flush();
+ assert.equal(f.node('fuel-view-representation').value,'tracers');
+ assert.equal(f.node('fuel-view-drive').value,'off');
+ assert.equal(f.node('fuel-motion-time').value,'0');
+ assert.equal(JSON.stringify(f.ui.read()),inputs);
 });
 
 test('reading links use accepted physics results and focus the real collision, drag and heat controls',async t=>{
@@ -525,7 +541,12 @@ test('Play at the end restarts each finite coupled run without rerunning the sol
   assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
   assert.equal(Number(f.node('fuel-motion-time').value),0);
   assert.equal(typeof f.viewers[0].animation,'function');f.viewers[0].animation(.1);
-  assert.ok(Number(f.node('fuel-motion-time').value)>0);
+  close(Number(f.node('fuel-motion-time').value),result.config.durationS/80);
+  const cloud=f.viewers[0].built.motion.group.children.find((o:THREE.Object3D)=>o.userData.tracers&&o.userData.ion);
+  assert.ok(cloud.rotation.z>0,'the gas must turn during the first screen frame');
+  f.viewers[0].animation(7.9);
+  close(Number(f.node('fuel-motion-time').value),result.config.durationS);
+  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  }
  assert.equal(f.requests.length,requests);assert.equal(f.ui.latest.result,result);
 });

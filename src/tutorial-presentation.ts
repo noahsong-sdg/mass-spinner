@@ -8,7 +8,7 @@ export function tutorialRoute(value:string|null):string|null{
 
 export type TutorialPresentation={watch:string;note:string;plot?:string;component?:string};
 const composition={watch:'Compare the light fraction at the center and wall.',note:'Composition is a local percentage. Density is the number of particles per volume.',plot:'composition'};
-const spin={watch:'Compare ion speed with neutral-gas speed at the same time.',note:'The drive acts on charged gas. Collisions make the neutral gas turn.',plot:'spin'};
+const spin={watch:'Select Play. The gas turns in the stationary vessel.',note:'Blue arrows show ions. Cream arrows show neutral gas. Compare their speeds in the plot. Short lines show the movement of gas samples. The display uses slow rotation.',plot:'spin'};
 const heat={watch:'Compare the supplied energy with stored energy and energy losses.',note:'Numerical dissipation is not physical heat. Fixed temperature does not calculate heating.',plot:'heat'};
 const cut={watch:'Move along the collection curve. Compare purity with recovery.',note:'Each cut includes all gas inside its radius. The model does not extract gas.',plot:'cut'};
 export const tutorialPresentations:Readonly<Record<string,TutorialPresentation>>={
