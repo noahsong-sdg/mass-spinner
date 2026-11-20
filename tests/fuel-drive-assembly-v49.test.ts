@@ -38,6 +38,13 @@ test('direction glyphs retain SI magnitudes, do not pick like hardware, and vani
   assert.equal(layers.J.visible,config.currentA>0);assert.equal(layers.force.visible,config.currentA>0);
   assert.equal(layers.force.children.length,config.magneticT===0?0:3);
   for(const glyph of layers.J.children)assert.equal(glyph.userData.directionOnly,true);
+  drive.group.traverse(node=>{
+   if(!(node instanceof THREE.Mesh||node instanceof THREE.Line))return;
+   assert.equal(node.renderOrder,3,'direction arrows must draw above hardware');
+   for(const material of Array.isArray(node.material)?node.material:[node.material]){
+    assert.equal(material.depthTest,false);assert.equal(material.depthWrite,false);assert.equal(material.transparent,true);
+   }
+  });
   drive.setLayer('J');assert.equal(layers.J.visible,config.currentA>0);assert.equal(layers.B.visible,false);
   drive.setCurrent(.04);assert.equal(layers.J.visible,true);assert.equal(drive.state.currentA,.04);for(const glyph of layers.J.children)assert.equal(glyph.userData.physicalMagnitude,Math.abs(drive.state.currentDensityAM2));
   drive.setCurrent(0);assert.equal(layers.J.visible,false);drive.setLayer('off');assert.equal(drive.group.visible,false);

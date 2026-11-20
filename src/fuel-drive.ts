@@ -32,7 +32,14 @@ export function createFuelDrive(config: FuelDriveConfig){
   glyph.line.geometry=glyph.line.geometry.clone();cone.geometry=cone.geometry.clone();
   const width=Math.min(R*.009,length*.06),shaft=new THREE.Mesh(new THREE.CylinderGeometry(width,width,length-head,8),new THREE.MeshBasicMaterial({color:colors[layer],toneMapped:false}));
   shaft.position.y=Math.max(length-head,0)/2;glyph.add(shaft);glyph.line.visible=false;cone.material.toneMapped=false;
-  glyph.traverse(node=>{node.userData.quantitativeOnly=true;});
+  glyph.traverse(node=>{
+   node.userData.quantitativeOnly=true;
+   // Direction arrows must stay visible through hardware, like the gas-motion diagnostics.
+   if(node instanceof THREE.Mesh||node instanceof THREE.Line){
+    node.renderOrder=3;
+    for(const material of Array.isArray(node.material)?node.material:[node.material]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
+   }
+  });
   glyph.userData={physicalMagnitude:value,unit,directionOnly:true};layers[layer].add(glyph);
  }
  const r=R*(f+1)/2;
