@@ -37,7 +37,8 @@ export function createFuelDrive(config: FuelDriveConfig){
    // Direction arrows must stay visible through hardware, like the gas-motion diagnostics.
    if(node instanceof THREE.Mesh||node instanceof THREE.Line){
     node.renderOrder=3;
-    for(const material of Array.isArray(node.material)?node.material:[node.material]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
+   const materials=node.material as THREE.Material|THREE.Material[];
+   for(const material of Array.isArray(materials)?materials:[materials]){material.depthTest=false;material.depthWrite=false;material.transparent=true;}
    }
   });
   glyph.userData={physicalMagnitude:value,unit,directionOnly:true};layers[layer].add(glyph);
