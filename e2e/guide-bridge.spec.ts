@@ -14,7 +14,7 @@ test('all six tutorials share one simulator and expose a specific observation',a
  const input=await page.locator('#fuel-currentA').inputValue(),time=await page.locator('#fuel-motion-time').inputValue(),duration=await page.locator('#fuel-durationS').inputValue();
  for(const [route,action,plot]of [['/start.html','look',''],['/guide.html','momentum','momentum'],['/tutorial-03.html','work','heat'],['/tutorial-04.html','cut','cut'],['/tutorial-05.html','fuelInventory','inventory'],['/tutorial-06.html','separationPlot','separation']]){
   await frame.goto(route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
-  await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to watch'})).toBeVisible();
+  await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
   if(plot)await expect(page.locator('#fuel-plot')).toHaveValue(plot);
   await expect(page.locator('#fuel-currentA')).toHaveValue(input);await expect(page.locator('#fuel-durationS')).toHaveValue(duration);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);await expect(page.locator('#fuel-motion-clock')).toBeVisible();expect(context.pages().length).toBe(count);
  }
@@ -29,7 +29,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  await frame.locator('[data-guide-action="look"]').click();
  await expect(page.locator('#window-inspect')).toBeHidden();await expect(page.locator('#window-guide')).toBeVisible();
  await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('.fuel-motion-legend')).toBeVisible();
- const cue=page.getByRole('complementary',{name:'What to watch'});
+ const cue=page.getByRole('complementary',{name:'What to look for'});
  for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
   await cue.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('#fuel-view-drive')).toHaveValue(value);
  }
