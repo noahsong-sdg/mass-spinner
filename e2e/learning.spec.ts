@@ -159,8 +159,8 @@ test('a standalone tutorial enters one workspace and keeps accepted inputs acros
  await page.goto('/start.html');const pages=page.context().pages().length;
  await page.locator('[data-guide-action="look"]').click();
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- expect(new URL(page.url()).searchParams.get('lesson')).toBe('/start.html#machine');
- expect(new URL(page.url()).searchParams.get('try')).toBe('look');
+ await expect(page.getByRole('link',{name:'Reading page'})).toHaveAttribute('href','/start.html#machine');
+ await expect(page.locator('#fuel-view-drive')).toHaveValue('all');
  expect(page.context().pages()).toHaveLength(pages);
  const reader=await readerFrame(page);
  await page.getByRole('button',{name:'Controls',exact:true}).click();

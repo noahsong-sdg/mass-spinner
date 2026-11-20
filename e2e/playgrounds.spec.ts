@@ -223,7 +223,7 @@ test('guide: local links, native action and accessible reading layout',async({pa
  const audit=await new AxeBuilder({page}).analyze();expect(audit.violations).toEqual([]);
  const pages=page.context().pages().length;await page.locator('a[href*="topic=momentum&try=spin"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
- expect(new URL(page.url()).searchParams.get('lesson')).toBe('/guide.html#momentum');
+ await expect(page.getByRole('link',{name:'Reading page'})).toHaveAttribute('href','/guide.html#momentum');
  await expect(page.locator('#window-guide')).toBeVisible();expect(page.context().pages()).toHaveLength(pages);
  expect(errors).toEqual([]);
 });

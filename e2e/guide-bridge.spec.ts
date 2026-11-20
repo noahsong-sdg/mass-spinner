@@ -1,9 +1,15 @@
 import {test,expect,type Page} from '@playwright/test';
 
+async function readerFrame(page:Page){
+ await expect(page.locator('#window-guide')).toBeVisible();
+ const iframe=await page.locator('#physics-guide-frame').elementHandle(),frame=await iframe!.contentFrame();
+ if(!frame)throw new Error('Missing simulator tutorial frame.');
+ await expect(frame.locator('h1')).toBeVisible();return frame;
+}
+
 async function reader(page:Page){
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
- const view=page.frameLocator('#physics-guide-frame');await expect(view.locator('h1')).toBeVisible();
- return page.frames().find(frame=>frame.parentFrame()===page.mainFrame())!;
+ return readerFrame(page);
 }
 
 test('all six tutorials share one simulator and expose a specific observation',async({page,context},info)=>{
@@ -12,7 +18,7 @@ test('all six tutorials share one simulator and expose a specific observation',a
  const frame=await reader(page);const count=context.pages().length;
  await page.locator('#fuel-motion-time').press('End');
  const input=await page.locator('#fuel-currentA').inputValue(),time=await page.locator('#fuel-motion-time').inputValue(),duration=await page.locator('#fuel-durationS').inputValue();
- for(const [route,action,plot]of [['/start.html','look',''],['/guide.html','momentum','momentum'],['/tutorial-03.html','work','heat'],['/tutorial-04.html','cut','cut'],['/tutorial-05.html','fuelInventory','inventory'],['/tutorial-06.html','separationPlot','separation']]){
+ for(const [route,action,plot]of [['/start.html','look',''],['/guide.html','momentum','momentum'],['/tutorial-03.html','work','heat'],['/tutorial-04.html','collectionExperiment','cut'],['/tutorial-05.html','inventoryExperiment','inventory'],['/tutorial-06.html','separationPlot','separation']]){
   await frame.goto(route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
   await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
   if(plot)await expect(page.locator('#fuel-plot')).toHaveValue(plot);
@@ -41,8 +47,9 @@ test('gas view clears unrelated windows and stages field, current, force and gas
 
 test('direct reading action opens the same-tab workspace at its clicked section',async({page,context})=>{
  await page.goto('/start.html#current');const count=context.pages().length;
- await page.locator('[data-guide-action="look"]').click();await expect(page).toHaveURL(/lesson=%2Fstart(?:\.html)?%23machine/);
- await expect(page.locator('#window-guide')).toBeVisible();await expect(page.frameLocator('#physics-guide-frame').locator('#machine')).toBeVisible();
+ await page.locator('[data-guide-action="look"]').click();
+ const frame=await readerFrame(page);await expect.poll(()=>frame.url()).toMatch(/\/start(?:\.html)?#machine$/);
+ await expect(frame.locator('#machine')).toBeInViewport();
  await expect(page.locator('#fuel-view-drive')).toHaveValue('all');expect(context.pages().length).toBe(count);
 });
 
@@ -64,7 +71,7 @@ test('untrusted reader routes cannot replace the tutorial document',async({page}
 test('tutorial controls keep their plot, clock and current reading section',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const frame=await reader(page);await frame.goto('/start.html#current');
- await frame.locator('[data-guide-action="current"]').first().click();
+ await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-clock')).toBeVisible();
  await frame.locator('a[href="#machine"]').click();
@@ -78,8 +85,9 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
 test('tutorial actions return from the reactor to the centrifuge without replacing its inputs',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/tutorial-05.html');
- await frame.locator('[data-guide-action="beamSource"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
- await frame.locator('[data-guide-action="fuelInventory"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
+ await page.getByRole('button',{name:'Reactor',exact:true}).click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
+ await expect(page.locator('#window-guide')).toBeVisible();
+ await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
  await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
 });
 
@@ -89,8 +97,8 @@ test('standalone beam entry and advanced navigation keep the reader with the cor
  await expect(page.locator('#marathon-apparatus')).toHaveValue('source');await expect(page.locator('#coupled-plot')).toHaveValue('source');await expect(page.locator('#window-guide')).toBeVisible();
  await page.getByText('Advanced',{exact:true}).click();await page.getByRole('button',{name:'Models',exact:true}).click();
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
- const frame=page.frames().find(frame=>frame.parentFrame()===page.mainFrame())!;await frame.goto('/guide.html');
- await frame.locator('[data-guide-action="current"]').first().click();
+ const frame=await readerFrame(page);await frame.goto('/guide.html');
+ await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');await expect(page.locator('#window-guide')).toBeVisible();await expect(page.locator('#fuel-currentA')).toBeFocused();
 });
 
@@ -98,7 +106,8 @@ test('standalone beam entry and advanced navigation keep the reader with the cor
 test('reference pages use the existing simulator rather than nesting a second app',async({page,context})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const frame=await reader(page),pages=context.pages().length,current=await page.locator('#fuel-currentA').inputValue();
- await frame.goto('/equilibrium.html');await frame.getByRole('link',{name:'Open calculator'}).click();
+ await frame.goto('/equilibrium.html');const calculator=frame.getByRole('link',{name:'← Open calculator',exact:true});
+ await expect(calculator).toBeVisible();await calculator.click();
  await expect(page.locator('#fuel-equilibrium-calculator')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
  await frame.goto('/how-it-works.html');await expect(frame.locator('.sources a').first()).toHaveAttribute('target','_blank');
  await frame.locator('.brand').click();await expect(page.locator('#window-guide')).toBeHidden();

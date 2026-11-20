@@ -158,7 +158,9 @@ test('the equation page opens the calculator in its parent simulator',t=>{
  const dom=new JSDOM(equilibriumPage('# Equilibrium'),{url:'https://example.org/equilibrium.html'});t.after(()=>dom.window.close());
  const sent:unknown[][]=[];Object.defineProperty(dom.window,'parent',{value:{postMessage:(...args:unknown[])=>sent.push(args)}});
  assert.equal(dom.window.document.querySelector('script')?.getAttribute('src'),'/guide-reader.js');
- setupGuideReader(dom.window);dom.window.document.querySelector<HTMLAnchorElement>('header a')!.click();
+ const style=dom.window.document.createElement('style');style.textContent=readFileSync('web-assets/guide.css','utf8');dom.window.document.head.append(style);
+ setupGuideReader(dom.window);const link=dom.window.document.querySelector<HTMLAnchorElement>('header a')!;
+ assert.notEqual(dom.window.getComputedStyle(link).display,'none','the calculator action must stay visible in the embedded reader');link.click();
  assert.equal(sent.length,1);const packet=sent[0][0] as {type:string;action:string;requestId:string};
  assert.equal(packet.type,'mass-spinner:guide-action');assert.equal(packet.action,'equilibrium');assert.ok(packet.requestId);assert.equal(sent[0][1],'https://example.org');
  assert.equal(dom.window.location.pathname,'/equilibrium.html');
