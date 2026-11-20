@@ -198,7 +198,7 @@ body.immersive .sim-workspace [hidden]{display:none!important}
 .tutorial-open .world-rail>.world-resizer{display:none}
 .tutorial-open .world-window{border-radius:4px;max-height:100%}
 .tutorial-open .world-stage .fuel-motion{bottom:12px;left:12px;right:12px;max-width:none;box-shadow:none;padding:6px 8px;gap:4px}
-.tutorial-open .fuel-motion :is(.fuel-motion-legend,.fuel-drive-key,p){display:none}
+.tutorial-open .fuel-motion :is(.fuel-drive-key,p){display:none}
 .tutorial-open .fuel-motion select{max-width:190px}
 .tutorial-open .fuel-motion input{max-width:none}
 .tutorial-open .apparatus-status{display:none}
@@ -223,4 +223,4 @@ body.immersive .sim-workspace [hidden]{display:none!important}
  .tutorial-open.tutorial-deck .tutorial-focus p+p{display:block}
 }
 
-.tutorial-open #fuel-motion-clock{font-size:11px;line-height:1.4}
+.tutorial-open :is(#fuel-motion-clock,.fuel-motion-legend){font-size:11px;line-height:1.4}

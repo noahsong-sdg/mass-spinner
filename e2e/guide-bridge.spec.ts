@@ -28,7 +28,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  const current=await page.locator('#fuel-currentA').inputValue();
  await frame.locator('[data-guide-action="look"]').click();
  await expect(page.locator('#window-inspect')).toBeHidden();await expect(page.locator('#window-guide')).toBeVisible();
- await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');
+ await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('.fuel-motion-legend')).toBeVisible();
  const cue=page.getByRole('complementary',{name:'What to watch'});
  for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
   await cue.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('#fuel-view-drive')).toHaveValue(value);
