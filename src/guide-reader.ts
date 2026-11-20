@@ -104,7 +104,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    browser.location.assign(target.href);return;
   }
   const instruction=link.closest('p,li,.try-actions')??link;
-  if(status){instruction.after(status);status.textContent='';}
+  if(status){if(instruction.matches('li'))instruction.append(status);else instruction.after(status);status.textContent='';}
   requestId=browser.crypto.randomUUID();
   if(link.dataset.guideAction)win.parent.postMessage({type:'mass-spinner:guide-action',action:link.dataset.guideAction,requestId},origin);
   else if(link.dataset.guideView)win.parent.postMessage({type:'mass-spinner:guide-view',view:'experiments',requestId},origin);

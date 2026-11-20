@@ -24,9 +24,10 @@ test('every reader has ordinary contents links and omits repetitive learning sca
 
 test('opening an optional explanation never launches a run',t=>{
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const win=dom.window,doc=win.document;
- let opened=0;win.open=()=>{opened++;return null;};setupGuideReader(win);
+ let opened=0,sent=0;win.open=()=>{opened++;return null;};
+ Object.defineProperty(win,'parent',{value:{postMessage(){sent++;}}});setupGuideReader(win);
  const explanation=doc.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
- explanation.open=true;assert.equal(explanation.open,true);assert.equal(opened,0);
+ explanation.open=true;assert.equal(explanation.open,true);assert.equal(opened,0);assert.equal(sent,0);
  assert.equal(win.location.pathname,'/start.html');
  assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
 });
@@ -34,11 +35,14 @@ test('opening an optional explanation never launches a run',t=>{
 test('the enhanced reader remains compatible with guide pages without experiment markup',t=>{
  const dom=new JSDOM('<nav aria-label="Contents"><a href="#goal">Goal</a></nav><h1 id="goal">Goal</h1><a href="/?level=2&try=spin" data-guide-action="spin">Try spin-up</a>',{url:'https://example.org/guide.html'});
  t.after(()=>dom.window.close());const win=dom.window,sent:unknown[][]=[];
- Object.defineProperty(win,'opener',{value:{closed:false,postMessage:(...args:unknown[])=>sent.push(args),focus(){}}});
- setupGuideReader(win);win.document.querySelector<HTMLAnchorElement>('[data-guide-action]')!.click();
- assert.equal((sent[0][0] as {type:string}).type,'mass-spinner:guide-hello');
- win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source:win.opener,data:{type:'mass-spinner:guide-ready',capability:'authorized-reader',instance:'simulator-1'}}));
- const request=sent.find(([packet])=>(packet as {type:string}).type==='mass-spinner:guide-action')!;
- assert.equal((request[0] as {action:string}).action,'spin');assert.equal(request[1],'https://example.org');
+ const parent={postMessage:(...args:unknown[])=>sent.push(args)} as unknown as Window;
+ Object.defineProperty(win,'parent',{value:parent});Object.defineProperty(win,'opener',{value:{postMessage(){throw new Error('The opener is not this reader’s simulator');}}});
+ win.open=()=>{throw new Error('An embedded reader must not open a tab');};
+ setupGuideReader(win);assert.deepEqual(sent,[]);win.document.querySelector<HTMLAnchorElement>('[data-guide-action]')!.click();
+ assert.equal(sent.length,1);const request=sent[0][0] as {type:string;action:string;requestId:string};
+ assert.equal(request.type,'mass-spinner:guide-action');assert.equal(request.action,'spin');assert.ok(request.requestId);assert.equal(sent[0][1],'https://example.org');
+ win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source:parent,data:{type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'}}));
+ assert.equal(win.location.pathname,'/guide.html');assert.equal(win.document.querySelector('#reader-status'),null);
+ assert.equal(win.document.querySelector('nav a')!.getAttribute('href'),'#goal');
  assert.equal(win.document.body.dataset.learningMode,undefined);
 });
