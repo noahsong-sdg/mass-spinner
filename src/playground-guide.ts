@@ -4,19 +4,19 @@ import type {GuideExperiment} from './guide-topics.js';
 
 import {playgroundSteps as steps} from './playground-guide-steps.js';
 
-export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void};
+export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void;prepareReaderAction?:(key:string)=>void};
 type GuideElements={
  'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
  'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;'fuel-new-run':HTMLButtonElement;
  'fuel-equilibrium-calculator':HTMLDetailsElement;'fuel-locate-plot':HTMLButtonElement;
- 'fuel-view-representation':HTMLSelectElement;'fuel-view-cutaway':HTMLInputElement;'fuel-view-drive':HTMLSelectElement;
+ 'fuel-view-representation':HTMLSelectElement;'fuel-view-cutaway':HTMLInputElement;'fuel-view-explode':HTMLInputElement;'fuel-view-drive':HTMLSelectElement;
  'fuel-component':HTMLSelectElement;'fuel-view-radius':HTMLInputElement;'fuel-compare-temperature':HTMLButtonElement;'fuel-compare-rotation':HTMLButtonElement;
  'fuel-power':HTMLButtonElement;
 };
-type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
+type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-explode'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
 /** Optional instructions for the existing controls. These instructions do not add simulation modes or physical presets. */
-export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,present=()=>{},canUseApparatus=()=>true}:PlaygroundGuideOptions){
+export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,present=()=>{},prepareReaderAction=()=>{},canUseApparatus=()=>true}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
  const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
@@ -61,7 +61,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function plot(value:string){
   const select=node('fuel-plot'),option=[...select.options].find(option=>option.value===value);
   if(option!.disabled){status.textContent=value==='lithium'?'To use this plot, select a lithium feed in Controls.':'To use this plot, select Isotope separation in Controls.';return false;}
-  set('fuel-plot',value);node('fuel-learning-comparisons').open=false;open('plots');
+  set('fuel-plot',value);node('fuel-plot').dispatchEvent(new win.Event('mass-spinner:focus-plot',{bubbles:true}));node('fuel-learning-comparisons').open=false;open('plots');
   const target=value==='composition'?'#fuel-composition-readout':value==='profile'?'#fuel-density-reading':'#fuel-plots > .live-plots';
   doc.querySelector<HTMLElement>(target)!.scrollIntoView?.({block:'start'});return true;
  }
@@ -72,7 +72,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function transient(){
   if(!['spin','transport'].includes(node('fuel-motion-mode').value))endpoint();
  }
- function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
+ function composition(){transient();plot('composition');}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
  const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-burnFraction',controls:null};
  const tutorialPlots:Readonly<Record<string,string>>={spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'};
@@ -117,7 +117,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   if(key==='look'){
-   set('fuel-view-representation','tracers');set('fuel-view-cutaway',.62,'input');set('fuel-view-drive','all');doc.getElementById('fuel-camera-axial')?.click();return;
+   set('fuel-view-representation','tracers');set('fuel-view-cutaway',.62,'input');set('fuel-view-explode',0,'input');set('fuel-view-drive','all');doc.getElementById('fuel-reset-view')?.click();doc.getElementById('fuel-camera-axial')?.click();return;
   }
   if(key==='coils'){set('fuel-component','coils');open('inspect',true);doc.getElementById('fuel-focus-component')?.click();return;}
   // Do not show pending or failed results as a new experiment.
@@ -136,7 +136,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   }else if(key==='endSpin'){
    endpoint();plot('spin');
   }else if(key==='spin'){
-   set('fuel-motion-mode','spin');set('fuel-motion-time',0,'input');plot('spin');
+   set('fuel-motion-mode','spin');set('fuel-motion-time',0,'input');plot('spin');set('fuel-view-representation','tracers');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();
   }else if(['composition','axis','wall','temperature','rotation'].includes(key)){
    if(key==='composition')endpoint();
@@ -146,7 +146,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }
-  }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);if(key==='density')node('fuel-locate-plot').click();}
+  }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);}
   else if(key==='work')plot('heat');
   else if(key==='thermalPlot')plot('thermal');
   else if(key==='collection'){endpoint();plot('cut');}
@@ -179,7 +179,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   };
   if(requestId&&outcomes.has(requestId)){reply(outcomes.get(requestId)!);return;}
   if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string'){
-   if(allowed.has(data.action))launch(data.action,reply);
+   if(allowed.has(data.action)){prepareReaderAction(data.action);launch(data.action,reply);}
    else reply({status:'rejected',message:'This tutorial action is not available.'});
   }else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments'){showReader('/start.html');reply({status:'executed'});}
   else if(data.type==='mass-spinner:guide-close')close('guide',true);
@@ -194,7 +194,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    if(Object.hasOwn(guideExperiments,key))return !!doc.getElementById('marathon-apparatus')&&!!doc.querySelector(guideExperiments[key as keyof typeof guideExperiments].control);
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
    if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
-   if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-drive'].every(id=>doc.getElementById(id))&&!!node('fuel-component')?.querySelector('option[value="coils"]');
+   if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-explode','fuel-view-drive'].every(id=>doc.getElementById(id))&&!!node('fuel-component')?.querySelector('option[value="coils"]');
    if(key==='coils')return !!node('fuel-component')?.querySelector('option[value="coils"]');
    return immediate||!pending(key);
   };

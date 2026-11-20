@@ -1,4 +1,5 @@
 import {clamp,defaultWorkspaceLayout,readWorkspaceLayout,workspaceGeometry,workspaceLayoutKey,type WorkspaceStorage} from './workspace-layout.js';
+import {guideExperiments,type GuideExperiment} from './guide-topics.js';
 import {tutorialPresentation} from './tutorial-presentation.js';
 import {setupPlaygroundGuide} from './playground-guide.js';
 
@@ -91,14 +92,14 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  });split.classList.add('world-results-split');split.hidden=true;rails.right.append(split);
  function close(key:string,restore=false){
   const item=windows.get(key);if(!item||item.panel.hidden)return;
-  const focused=item.panel.contains(doc.activeElement);item.panel.hidden=true;item.button.setAttribute('aria-expanded','false');
+  const focused=item.panel.contains(doc.activeElement);item.panel.hidden=true;(key==='guide'?docsButton:item.button).setAttribute('aria-expanded','false');
   arrange();
   if(restore||focused)(key==='guide'?docsButton:item.button).focus();
  }
  function open(key:string,focus=false){
   const item=windows.get(key);if(!item||item.button.hidden)return;
   for(const [other,entry]of windows)if(other!==key&&other!=='guide'&&key!=='guide'&&(mobile.matches&&windows.get('guide')!.panel.hidden||entry.group===item.group))close(other);
-  item.panel.hidden=false;item.button.setAttribute('aria-expanded','true');
+  item.panel.hidden=false;(key==='guide'?docsButton:item.button).setAttribute('aria-expanded','true');
   arrange();
   if(focus)item.heading.focus();
  }
@@ -114,10 +115,10 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  const panels={controls:windowPanel('controls','Controls','left'),plots:windowPanel('plots','Plots','right'),target:windowPanel('target','Target','right'),inspect:windowPanel('inspect','Examine','left'),view:windowPanel('view','View','left'),info:windowPanel('info','Model info','right'),guide:windowPanel('guide','Tutorials','left')};
  const reading=make('div','world-reading'),docsButton=make('button','','Docs & tutorials');
- docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Read beside the live simulator';docsButton.setAttribute('aria-controls','window-guide');
+ docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Read beside the live simulator';docsButton.setAttribute('aria-controls','window-guide');docsButton.setAttribute('aria-expanded','false');
  docsButton.addEventListener('click',()=>{if(windows.get('guide')!.panel.hidden)guide.showReader();else close('guide',true);});
  reading.append(docsButton);header.append(reading);
- const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus,present});
+ const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus,present,prepareReaderAction});
  const tutorialPanel=windows.get('guide')!.panel;shell.append(tutorialPanel);
  const readFull=make('a','','Reading page ↗');readFull.href='/learn.html';readFull.target='_blank';readFull.rel='noopener';
  const readerFrame=panels.guide.querySelector<HTMLIFrameElement>('iframe')!;
@@ -129,6 +130,13 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  const cue=make('aside','tutorial-focus'),watch=make('p',''),note=make('p',''),stages=make('div','tutorial-drive-stages');cue.hidden=true;cue.setAttribute('aria-label','What to watch');cue.append(watch,note,stages);shell.append(cue);const dismissCue=make('button','tutorial-focus-close','×');dismissCue.type='button';dismissCue.setAttribute('aria-label','Close learning prompt');dismissCue.addEventListener('click',()=>{cue.hidden=true;});cue.append(dismissCue);
  for(const [label,layer,text]of [['Field','B','The magnetic field points along the cylinder axis.'],['Current','J','Current crosses the gas toward the inner electrode.'],['Force','force','Current across the field gives a tangential force.'],['Gas','all','Collisions transfer rotation from ions to neutral gas.']] as const){const button=make('button','',label);button.type='button';button.addEventListener('click',()=>{const input=doc.getElementById('fuel-view-drive') as HTMLSelectElement;input.value=layer;input.dispatchEvent(new win.Event('change'));note.textContent=text;for(const sibling of stages.querySelectorAll('button'))sibling.setAttribute('aria-pressed',String(sibling===button));});stages.append(button);}
  const replay=make('button','','Replay motion');replay.type='button';replay.addEventListener('click',()=>guide.launch('spin'));stages.append(replay);
+ function prepareReaderAction(key:string){
+  if(level!=='2')doc.querySelector<HTMLButtonElement>('button[data-level="2"]')!.click();
+  const experiment:GuideExperiment|undefined=guideExperiments[key as keyof typeof guideExperiments];
+  const apparatus=experiment?.apparatus??(['beamLedger','beamDynamics'].includes(key)?'source':'centrifuge');
+  if(switcher.value!==apparatus){switcher.value=apparatus;switcher.dispatchEvent(new win.Event('change',{bubbles:true}));}
+  guide.showReader();
+ }
  function present(key:string){
   for(const name of ['controls','plots','target','inspect','view','info'])close(name);
   const view=tutorialPresentation(key);cue.hidden=!view;if(!view)return;watch.textContent=view.watch;note.textContent=view.note;stages.hidden=key!=='look';

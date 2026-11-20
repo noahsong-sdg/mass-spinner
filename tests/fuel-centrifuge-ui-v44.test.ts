@@ -177,7 +177,22 @@ test('stage count constrains feed stage before dispatch and exact component meta
  assert.match(f.ui.nodes.inspect.textContent!,/Perforated cathode/);assert.match(f.ui.nodes.inspect.textContent!,/Perforated tungsten body/);
  assert.match(f.ui.nodes.inspect.textContent!,/Illustrative disclosed material/);
  f.change('fuel-component','coils','change');assert.equal(f.selected.at(-1),'coils');assert.match(f.ui.nodes.inspect.textContent!,/Copper winding/);
- [...f.ui.nodes.inspect.querySelectorAll('button')].find(button=>button.textContent==='Reset 3D view')!.click();assert.equal(f.resets(),1);
+ assert.equal(f.node('fuel-reset-view').textContent,'Reset 3D view');f.node('fuel-reset-view').click();assert.equal(f.resets(),1);
+});
+
+test('tutorial plot focus selects the matching scene field without changing physical time, mode or inputs',async t=>{
+ const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
+ f.change('fuel-motion-time',.3);const accepted=f.ui.latest,count=f.requests.length;
+ for(const [topic,layer]of [['spin','speed'],['momentum','speed'],['inertia','density'],['composition','composition'],['profile','density']]){
+  f.change('fuel-plot',topic,'change');f.node('fuel-plot').dispatchEvent(new f.window.Event('mass-spinner:focus-plot',{bubbles:true}));
+  assert.equal(f.node('fuel-view-layer').value,layer);assert.equal(f.node('fuel-view-representation').value,'both');assert.equal(f.selected.at(-1),'slice');
+  assert.equal(f.node('fuel-motion-mode').value,'transport');assert.equal(Number(f.node('fuel-motion-time').value),.3);
+  assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);
+ }
+ f.change('fuel-motion-mode','equilibrium','change');f.change('fuel-plot','spin','change');
+ f.node('fuel-plot').dispatchEvent(new f.window.Event('mass-spinner:focus-plot',{bubbles:true}));
+ assert.equal(f.node('fuel-motion-mode').value,'equilibrium');assert.equal(Number(f.node('fuel-motion-time').value),0);
+ assert.equal(f.requests.length,count);
 });
 
 test('default inspector description does not recolor the apparatus before a user selects a component',async t=>{

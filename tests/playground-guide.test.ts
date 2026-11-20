@@ -218,7 +218,8 @@ test('new investigation actions preserve origin restrictions and cannot modify a
  const send=(origin:string,source:any)=>f.window.dispatchEvent(new f.window.MessageEvent('message',{origin,source,data:{type:'mass-spinner:guide-action',action:'newRun'}}));
  send('https://foreign.example',frame.contentWindow);send('https://example.org',f.window);assert.equal(restarts,0);
  f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
- send('https://example.org',frame.contentWindow);assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/select Centrifuge/);
+ f.workspace.launchGuideAction('newRun');assert.equal(restarts,0);assert.match(f.node('guide-status').textContent,/select Centrifuge/);
+ send('https://example.org',frame.contentWindow);assert.equal(restarts,1);assert.equal(f.node('marathon-apparatus').value,'centrifuge');assert.equal(f.node('window-guide').hidden,false);
 });
 
 function experimentControls(f:ReturnType<typeof fixture>){
@@ -343,15 +344,16 @@ test('beam exercises switch apparatus and reveal actual source ledger or target 
 
 test('visual tutorial actions need mounted view controls but no accepted physics result',async t=>{
  const f=fixture(t),fuel=acceptedFuel(f);fuel.accepted.disabled=true;
+ const camera:string[]=[];for(const id of ['fuel-reset-view','fuel-camera-axial']){const button=f.doc.createElement('button');button.id=id;button.addEventListener('click',()=>camera.push(id));f.doc.body.append(button);}
  f.workspace.launchGuideAction('look');
  assert.match(f.node('guide-status').textContent,/Waiting/);
- for(const [id,value]of [['fuel-view-representation','both'],['fuel-view-cutaway','.62'],['fuel-view-drive','all'],['fuel-component','coils']]){
-  const n=f.doc.createElement(id==='fuel-view-cutaway'?'input':'select');n.id=id;
+ for(const [id,value]of [['fuel-view-representation','tracers'],['fuel-view-cutaway','.62'],['fuel-view-explode','0'],['fuel-view-drive','all'],['fuel-component','coils']]){
+  const n=f.doc.createElement(['fuel-view-cutaway','fuel-view-explode'].includes(id)?'input':'select');n.id=id;
   if(n instanceof f.window.HTMLSelectElement){const option=f.doc.createElement('option');option.value=value;n.append(option);}
   f.doc.body.append(n);
  }
  await new Promise<void>(resolve=>setImmediate(resolve));
- assert.equal(f.node('guide-status').textContent,'');assert.equal(f.node('fuel-view-drive').value,'all');
+ assert.equal(f.node('guide-status').textContent,'');assert.equal(f.node('fuel-view-drive').value,'all');assert.deepEqual(camera,['fuel-reset-view','fuel-camera-axial']);
  f.workspace.launchGuideAction('coils');assert.equal(f.node('window-inspect').hidden,false);
  assert.equal(f.node('fuel-component').value,'coils');assert.equal(fuel.accepted.disabled,true);
 });

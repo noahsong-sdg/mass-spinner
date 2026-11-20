@@ -11,18 +11,18 @@ const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sou
 const flush=async()=>{for(let i=0;i<30;i++)await Promise.resolve();};
 const settle=async()=>{await new Promise(resolve=>setTimeout(resolve,160));await flush();};
 function fixture(t:any,hold=false,graphicsReady=Promise.resolve()){
- const dom=new JSDOM('<main></main>',{url:'https://example.org/?level=2'}),doc=dom.window.document,requests:any[]=[],pending:any[]=[];let selected:any,animation:any,opened=0;const focused:string[]=[];
+ const dom=new JSDOM('<main></main>',{url:'https://example.org/?level=2'}),doc=dom.window.document,requests:any[]=[],pending:any[]=[];let selected:any,animation:any,opened=0;const focused:string[]=[],focusedComponents:string[]=[];
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const solve=(r:any)=>{const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};};
- const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
+ const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},focus(id:string){focusedComponents.push(id);},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
   {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'},...['coils','liner','light-outlet','pump','feed'].map(id=>({id,name:id,purpose:'Fixture component',material:'Illustrative',basis:'Not engineering CAD'}))],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,onControls:selector=>focused.push(selector),request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};
  const start=async()=>{ui.setActive(true);if(hold)pending.shift()();await flush();assert.ok(ui.latest);};
  t.after(()=>{ui.dispose();dom.window.close();if(old)Object.defineProperty(globalThis,'document',old);else Reflect.deleteProperty(globalThis,'document');});
- return {ui,doc,node,change,start,requests,pending,focused,get selected(){return selected;},get animation(){return animation;},get opened(){return opened;}};
+ return {ui,doc,node,change,start,requests,pending,focused,focusedComponents,get selected(){return selected;},get animation(){return animation;},get opened(){return opened;}};
 }
 
 test('actual power control continues accepted momenta/distributions, branches past history and extends at the end',async t=>{
@@ -139,8 +139,13 @@ test('spatial mixture controls reach the solver and accepted gas profiles follow
  f.change('fuel-plot','thermalProfile','change');assert.match(f.ui.nodes.plots.textContent,/Neutral gas/);f.node('fuel-locate-plot').click();assert.equal(f.node('fuel-view-layer').value,'temperature');
  f.change('fuel-plot','spin','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'thermalProfile','A resolved temperature surface opens its accepted radial profile.');
  const solvedCount=f.requests.length;
+ f.node('fuel-plot').dispatchEvent(new f.doc.defaultView!.Event('mass-spinner:focus-plot',{bubbles:true}));
+ assert.equal(f.node('fuel-motion-mode').value,'transport');assert.equal(Number(f.node('fuel-motion-time').value),.025);assert.equal(f.focusedComponents.at(-1),'slice');
  for(const mode of ['equilibrium','flow']){
   f.change('fuel-motion-mode',mode,'change');f.change('fuel-plot','thermalProfile','change');assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.05 s');
+  const time=f.node('fuel-motion-time').value;
+  f.node('fuel-plot').dispatchEvent(new f.doc.defaultView!.Event('mass-spinner:focus-plot',{bubbles:true}));
+  assert.equal(f.node('fuel-motion-mode').value,mode);assert.equal(f.node('fuel-motion-time').value,time);assert.equal(f.focusedComponents.at(-1),'liner','A reference mode cannot show a finite-time gas temperature surface.');
   f.node('fuel-locate-plot').click();assert.equal(f.node('fuel-motion-mode').value,'transport');assert.equal(Number(f.node('fuel-motion-time').value),.05);assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.05 s');
   assert.equal(f.requests.length,solvedCount,'Locating an accepted profile must not recompute physics.');
  }

@@ -190,20 +190,24 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  metrics.className='fuel-metrics';plotHost.className='live-plots';explanation.className='fuel-explanation';exportButton.id='fuel-export';exportButton.disabled=true;
  nodes.plots.append(metrics,explanation,compositionReadout,probeControls,densityReading,plotHost,exportButton);selector.addEventListener('change',draw);
  const locate=el('button','Show in 3D');locate.id='fuel-locate-plot';nodes.plots.insertBefore(locate,metrics);
- locate.addEventListener('click',()=>{
+ function locatePlot(preserveTime=false){
   const layer={separation:'composition',composition:'composition',profile:'density',spin:'speed',momentum:'speed',inertia:'density'}[selector.value];
   if(layer){for(const [key,value]of [['representation','both'],['layer',layer]]){const input=nodes.view.querySelector<HTMLSelectElement>(`#fuel-view-${key}`)!;input.value=value;input.dispatchEvent(new doc.defaultView!.Event('change'));}viewer?.select('slice');viewer?.focus?.('slice',{animate:true});}
-  else if(['thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&latest?.result.transport?.operation?.thermal?.gas){
-   if(!['spin','transport'].includes(motionMode.value))elapsed=pinned?Math.min(latest.result.config.durationS,pinned.config.durationS):latest.result.config.durationS;
-   motionMode.value='transport';playing=false;
+  else if(['thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&latest?.result.transport?.operation?.thermal?.gas&&(!preserveTime||['spin','transport'].includes(motionMode.value))){
+   if(!preserveTime){
+    if(!['spin','transport'].includes(motionMode.value))elapsed=pinned?Math.min(latest.result.config.durationS,pinned.config.durationS):latest.result.config.durationS;
+    motionMode.value='transport';playing=false;
+   }
    for(const [key,value]of [['representation','both'],['layer','temperature']]){const input=nodes.view.querySelector<HTMLSelectElement>(`#fuel-view-${key}`)!;input.value=value;input.dispatchEvent(new doc.defaultView!.Event('change'));}
    draw();playback();viewer?.select('slice');viewer?.focus?.('slice',{animate:true});
   }
-  else{const id={heat:'electrodes',thermal:latest?.result.config.pair==='lithium'?'liner':'vessel',thermalProfile:latest?.result.config.pair==='lithium'?'liner':'vessel',cut:'light-outlet',cascade:'stages',pump:'pump',field:'coils',inventory:'pump',lithium:'liner'}[selector.value];if(id){viewer?.select(id);viewer?.focus?.(id,{animate:true});}}
- });
+  else{const wall=latest?.result.config.pair==='lithium'?'liner':'vessel',id={heat:'electrodes',thermal:wall,thermalProfile:wall,gasEnergy:preserveTime?wall:undefined,gasPressure:preserveTime?wall:undefined,cut:'light-outlet',cascade:'stages',pump:'pump',field:'coils',inventory:'pump',lithium:'liner'}[selector.value];if(id){viewer?.select(id);viewer?.focus?.(id,{animate:true});}}
+ }
+ locate.addEventListener('click',()=>locatePlot());
+ nodes.plots.addEventListener('mass-spinner:focus-plot',()=>locatePlot(true));
  nodes.inspect.append(el('p','Select a component to see its materials and response. Use Controls to change physical inputs.'));
  const inspectSelect=makeSelect(nodes.inspect,'fuel-component','Component',[]),description=el('div'),reset=el('button','Reset 3D view');nodes.inspect.append(reset,description);
- reset.addEventListener('click',()=>viewer?.reset());inspectSelect.addEventListener('change',()=>describe(inspectSelect.value));
+ reset.id='fuel-reset-view';reset.addEventListener('click',()=>viewer?.reset());inspectSelect.addEventListener('change',()=>describe(inspectSelect.value));
  const focus=el('button','Show component');focus.id='fuel-focus-component';focus.addEventListener('click',()=>viewer?.focus?.(inspectSelect.value,{animate:true}));nodes.inspect.insertBefore(focus,description);
  nodes.info.append(el('h3','Published concept · conditional model'));
  const sources=[['Patent WO2026064411A1','https://patents.google.com/patent/WO2026064411A1/en'],['Newer patent text · mirror','https://eureka.patsnap.com/patent/WO2026136752A2'],['Marathon fuel cycle','https://www.marathonfusion.com/fusion-energy/'],['Tritium-Lean paper · §VII.2','https://arxiv.org/html/2410.05238v2#S7.SS2'],['External centrifuge thermal study','https://arxiv.org/abs/2607.28208'],['NIST lithium vapor pressure','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7439932&Mask=4'],['NIST solid tungsten heat capacity','https://webbook.nist.gov/cgi/cbook.cgi?ID=C7440337&Mask=2'],['Tungsten thermal properties · Tolias','https://arxiv.org/abs/1703.06302']];
