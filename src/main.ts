@@ -425,7 +425,7 @@ $('replay-retry').addEventListener('click',()=>{void showResearch();});
 workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
 experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch:()=>{void showResearch();},onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 const lesson=guideQuery.get('lesson');if(lesson)workspace.openTutorial(lesson);
-if(guideAction)workspace.launchGuideAction(guideAction);
+if(guideAction)workspace.launchTutorialAction(guideAction);
 else if(guideOnLoad==='start'||guideOnLoad==='physics'){
  workspace.open('guide');
  if(guideOnLoad==='physics')workspace.openPhysics(guideTopic??undefined);

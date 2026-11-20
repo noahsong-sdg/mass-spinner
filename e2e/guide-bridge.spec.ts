@@ -82,3 +82,14 @@ test('tutorial actions return from the reactor to the centrifuge without replaci
  await frame.locator('[data-guide-action="fuelInventory"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
  await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
 });
+
+
+test('standalone beam entry and advanced navigation keep the reader with the correct apparatus',async({page})=>{
+ await page.goto('/?level=2&try=beamDynamics&lesson=/tutorial-05.html%23beam');
+ await expect(page.locator('#marathon-apparatus')).toHaveValue('source');await expect(page.locator('#coupled-plot')).toHaveValue('source');await expect(page.locator('#window-guide')).toBeVisible();
+ await page.getByText('Advanced',{exact:true}).click();await page.getByRole('button',{name:'Models',exact:true}).click();
+ await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
+ const frame=page.frames().find(frame=>frame.parentFrame()===page.mainFrame())!;await frame.goto('/guide.html');
+ await frame.locator('[data-guide-action="current"]').first().click();
+ await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');await expect(page.locator('#window-guide')).toBeVisible();await expect(page.locator('#fuel-currentA')).toBeFocused();
+});

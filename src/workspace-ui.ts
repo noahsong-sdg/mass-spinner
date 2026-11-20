@@ -204,5 +204,5 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   const node=selector?item.body.querySelector<HTMLElement>(selector):null;
   if(node){for(let parent=node.parentElement;parent&&parent!==item.body;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;node.scrollIntoView?.({block:'nearest'});node.focus?.({preventScroll:true});}
  }
- return {open,close,focusRelated,openTutorial:guide.showReader,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
+ return {open,close,focusRelated,openTutorial:guide.showReader,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchTutorialAction(key:string){prepareReaderAction(key);guide.launch(key);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
 }

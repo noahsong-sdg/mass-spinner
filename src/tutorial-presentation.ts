@@ -48,7 +48,7 @@ export const tutorialPresentations:Readonly<Record<string,TutorialPresentation>>
  inspect:{watch:'Select a component to read its role and material assumptions.',note:'Use Controls to change physical inputs.'},
  gasTemperature:{watch:'Compare separation at two gas temperatures.',note:'At fixed rotation, higher temperature weakens the ideal equilibrium bias.',plot:'composition'},
  beamLedger:{watch:'Compare incident beam power with fusion output and heat.',note:'This beam–target source is separate from the centrifuge and the future power reactor.'},
- beamDynamics:{watch:'Compare target loading and temperature at the same physical time.',note:'The target model is conditional on its material and stopping assumptions.'},
+ beamDynamics:{watch:'Compare neutron output and target temperature over time.',note:'The target model is conditional on its material and stopping assumptions.'},
 };
 export function tutorialPresentation(key:string):TutorialPresentation|undefined{
  const experiment=guideExperiments[key as keyof typeof guideExperiments];

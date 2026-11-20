@@ -110,8 +110,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   cancelLaunch();
   status.textContent='';experimentStatus.textContent='';
   if(Object.hasOwn(guideExperiments,key)){showExperiment(key);return;}
-  if(key==='beamLedger'){focusRelated('plots','#fusion-plots');return;}
-  if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();focusRelated('target','#coupled-plot');return;}
+  if(key==='beamLedger'){focusRelated('plots','#fusion-metrics');return;}
+  if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();const choice=doc.getElementById('coupled-plot') as HTMLSelectElement;choice.value='source';choice.dispatchEvent(new win.Event('change'));focusRelated('target','#coupled-plot');return;}
   if(!canUseApparatus('centrifuge')){status.textContent='To use these guide controls, select Centrifuge.';return;}
   if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key))plot(view.plot);focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}

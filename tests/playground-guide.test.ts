@@ -329,14 +329,14 @@ test('incompatible feed and application expose the prerequisite instead of focus
 test('beam exercises switch apparatus and reveal actual source ledger or target settings without changing source inputs',t=>{
  const f=fixture(t);const current=f.doc.createElement('input');current.id='fusion-beamCurrentA';current.value='.01';f.node('fusion-controls').append(current);
  const initial=f.doc.createElement('details'),summary=f.doc.createElement('summary');initial.id='initial-source-reference';summary.textContent='Initial source';initial.append(summary,f.node('fusion-plots').closest('details'));f.node('window-plots').querySelector('.world-window-body').append(initial);
- const target=f.doc.createElement('div');target.id='coupled-target';target.innerHTML='<button id="coupled-tab-settings">Settings</button><button id="coupled-tab-dynamics">Dynamics</button><div id="coupled-view-settings" hidden><input id="coupled-pulseDuty" value="1"></div><div id="coupled-view-dynamics"><select id="coupled-plot"><option>Source</option></select></div>';
+ const target=f.doc.createElement('div');target.id='coupled-target';target.innerHTML='<button id="coupled-tab-settings">Settings</button><button id="coupled-tab-dynamics">Dynamics</button><div id="coupled-view-settings" hidden><input id="coupled-pulseDuty" value="1"></div><div id="coupled-view-dynamics"><select id="coupled-plot"><option value="source">Neutrons &amp; temperature</option><option value="isotopes" selected>Isotopes</option></select></div>';
  f.node('window-target').querySelector('.world-window-body').append(target);
  const settings=f.node('coupled-view-settings'),dynamics=f.node('coupled-view-dynamics');
  f.node('coupled-tab-settings').addEventListener('click',()=>{settings.hidden=false;dynamics.hidden=true;});f.node('coupled-tab-dynamics').addEventListener('click',()=>{settings.hidden=true;dynamics.hidden=false;});
  let edits=0;current.addEventListener('input',()=>edits++);
  f.workspace.launchGuideAction('beamSource');assert.equal(f.node('marathon-apparatus').value,'source');assert.equal(f.doc.activeElement,current);
  assert.equal(initial.open,true);assert.equal(f.node('fusion-plots').closest('details').open,true);
- f.workspace.launchGuideAction('beamTarget');assert.equal(f.node('window-target').hidden,false);assert.equal(settings.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-pulseDuty'));
+ f.workspace.launchGuideAction('beamTarget');assert.equal(f.node('coupled-plot').value,'source');assert.equal(f.node('window-target').hidden,false);assert.equal(settings.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-pulseDuty'));
  f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();assert.equal(settings.hidden,true);assert.equal(dynamics.hidden,false);assert.equal(f.doc.activeElement,f.node('coupled-plot'));
  assert.equal(current.value,'.01');assert.equal(edits,0);
 });
