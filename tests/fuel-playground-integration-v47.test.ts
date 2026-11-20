@@ -155,10 +155,15 @@ test('guided experiments use the real accepted plots, timeline and probes withou
   assert.equal(f.node('fuel-learning-comparisons').open,true,'the computed comparison must be visible, not hidden in a closed disclosure');
   assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
  }
- action(4,'Show drive work');assert.equal(f.node('fuel-plot').value,'heat');
+ guide.launch('work');assert.equal(f.node('fuel-plot').value,'heat');
  assert.equal(f.node('fuel-learning-comparisons').open,false,'a new guided plot must not leave an unrelated comparison in front');
  action(4,'Open heat experiment');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
  assert.equal(f.node('fuel-plot').value,'thermal');
+ const time=f.node('fuel-motion-time').value;
+ action(4,'Pin A');assert.equal(opened.at(-1),'view');
+ action(4,'Show temperature');assert.equal(f.node('fuel-plot').value,'thermal');
+ action(4,'Compare composition');assert.equal(f.node('fuel-plot').value,'composition');
+ assert.equal(f.node('fuel-motion-time').value,time,'heating comparisons keep the selected physical time');
  action(5,'Open collection experiment');assert.equal(f.node('fuel-plot').value,'cut');
  action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
