@@ -123,7 +123,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  const readFull=make('a','','Reading page ↗');readFull.href='/learn.html';readFull.target='_blank';readFull.rel='noopener';
  const readerFrame=panels.guide.querySelector<HTMLIFrameElement>('iframe')!;
  const syncReadingPage=()=>{const path=readerFrame.contentDocument?.location;readFull.href=path?path.pathname+path.hash:'/learn.html';};
- readerFrame.addEventListener('load',syncReadingPage);readFull.addEventListener('click',syncReadingPage);
+ readerFrame.addEventListener('load',()=>{syncReadingPage();if(mobile.matches&&!tutorialPanel.hidden)tutorialPanel.scrollIntoView({block:'start',inline:'nearest'});});readFull.addEventListener('click',syncReadingPage);
  tutorialPanel.querySelector('.world-window-bar')!.append(readFull);
  let readerWidth=.4;const readerHandle=separator('Resize tutorial and simulator','vertical',delta=>{readerWidth=delta==='min'?.28:delta==='max'?.6:clamp(readerWidth+delta/win.innerWidth,.28,.6);shell.style.setProperty('--tutorial-width',`${readerWidth*100}vw`);readerHandle.setAttribute('aria-valuenow',String(Math.round(readerWidth*100)));win.dispatchEvent(new win.Event('resize'));});
  readerHandle.setAttribute('aria-valuemin','28');readerHandle.setAttribute('aria-valuemax','60');readerHandle.setAttribute('aria-valuenow','40');tutorialPanel.append(readerHandle);

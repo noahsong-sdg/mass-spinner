@@ -269,3 +269,13 @@ for(const mobile of [false,true])test(`closing the tutorial restores ${mobile?'o
  assert.equal(input.value,'75');assert.equal(f.document.querySelector('.sim-workspace')!.classList.contains('tutorial-open'),false);
  assert.equal(f.document.activeElement,f.node('open-docs'));
 });
+
+for(const mobile of [false,true])test(`reader document load reveals only an open phone reader (${mobile})`,t=>{
+ const f=fixture(t,mobile);t.after(()=>f.window.close());f.workspace.openTutorial('/start.html#machine');
+ const calls:ScrollIntoViewOptions[]=[];f.node('window-guide').scrollIntoView=options=>calls.push(options as ScrollIntoViewOptions);
+ f.node('physics-guide-frame').dispatchEvent(new f.window.Event('load'));
+ assert.deepEqual(calls,mobile?[{block:'start',inline:'nearest'}]:[]);
+ assert.equal(f.node('physics-guide-frame').getAttribute('src'),'/start.html#machine');
+ f.workspace.close('guide');f.node('physics-guide-frame').dispatchEvent(new f.window.Event('load'));
+ assert.equal(calls.length,mobile?1:0);
+});

@@ -208,7 +208,7 @@ body.immersive .sim-workspace [hidden]{display:none!important}
 
 .tutorial-focus-close{position:absolute;right:4px;top:4px;min-width:32px;min-height:32px;color:#b6c7bc}.tutorial-focus{padding-right:38px}
 @media(max-width:740px){
- .sim-workspace.tutorial-open{--world-left-reserve:0px!important;--world-right-reserve:0px!important;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
+ .sim-workspace.tutorial-open{--world-left-reserve:0px!important;--world-right-reserve:0px!important;display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain;scroll-padding-top:var(--world-top)}
  .tutorial-open .world-top{position:sticky;top:0;flex:none;order:0;min-height:var(--world-top)}
  .tutorial-open #window-guide{position:relative;top:auto;bottom:auto;left:auto;width:100%;height:42dvh!important;min-height:250px;max-height:none;flex:none;order:1}
  .tutorial-open .tutorial-focus{position:relative;top:auto!important;left:auto;right:auto;margin:8px;flex:none;order:2}
