@@ -371,6 +371,17 @@ test('pinned real apparatus stays immutable while both viewers share camera, phy
   const expected=comparisonDomain([a.asset.model.result,b.asset.model.result],layer as any);
   assert.deepEqual(a.built.tools.legend.domain,expected);assert.deepEqual(b.built.tools.legend.domain,expected);
  }
+ for(const mode of ['transport','flow'] as const){
+  f.change('fuel-motion-mode',mode,'change');
+  f.node('fuel-motion-play').click();b.animation(.1);
+  const current=b.built.motion.group.children.find((o:THREE.Object3D)=>o.userData.tracers&&o.userData.ion);
+  const baseline=a.built.motion.group.children.find((o:THREE.Object3D)=>o.userData.tracers&&o.userData.ion);
+  close(current.userData.rotationPhaseScale,baseline.userData.rotationPhaseScale);
+  const expected=current.userData.physicalPhaseRad/baseline.userData.physicalPhaseRad;
+  close(current.rotation.z/baseline.rotation.z,expected);
+  assert.match(f.node('fuel-motion-clock').textContent,/rotation: [\d.]+ (?:µs|ms)\/screen s/);
+  f.node('fuel-motion-play').click();
+ }
  assert.match(f.ui.nodes.render.querySelector('.fuel-comparison-label')!.textContent!,/shared SI camera\/colors/);
  assert.deepEqual(original.config,config);
 });

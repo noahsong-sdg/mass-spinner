@@ -302,7 +302,6 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   let suggested=Math.min(initial.secondsPerScreenSecond,baseline?.secondsPerScreenSecond??Infinity);
   const rotationClock=Math.min(initial.rotationSecondsPerScreenSecond,baseline?.rotationSecondsPerScreenSecond??Infinity);
   // Keep the transport timeline fast. Rotation has a separate, shared display clock.
-
   if(mode==='transport')suggested=Math.min(latest.result.config.durationS/8,1);
   timeScales[motionMode.value]??=suggested;
   // Preserve slider comparisons; retime only outside the visual sampling budget.
@@ -336,7 +335,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   setStatus(transient?`Closed vessel · ${diagnostic.thermal?'temperature changes':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;
   const timing=transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:mode==='flow'?`Reference Q ${fmt(latest.result.pumping.gasLoadPaM3S)} Pa·m³/s · 1 s screen = ${timeUnit}`:'Final reference';
-  clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}`;
+  const rotationUnit=state.rotationSecondsPerScreenSecond>=.001?`${fmt(state.rotationSecondsPerScreenSecond*1000)} ms`:`${fmt(state.rotationSecondsPerScreenSecond*1e6)} µs`;
+  clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}${mode==='transport'||mode==='flow'?` · rotation: ${rotationUnit}/screen s`:''}`;
   if(!playing)viewer?.setAnimation(null);
  }
  function playback(){
