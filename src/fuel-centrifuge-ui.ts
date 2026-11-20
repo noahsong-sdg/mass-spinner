@@ -335,7 +335,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   setStatus(transient?`Closed vessel · ${diagnostic.thermal?'temperature changes':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;
   const timing=transient?`${fmt(elapsed)} s · 1 s screen = ${timeUnit}`:mode==='flow'?`Reference Q ${fmt(latest.result.pumping.gasLoadPaM3S)} Pa·m³/s · 1 s screen = ${timeUnit}`:'Final reference';
-  const rotationUnit=state.rotationSecondsPerScreenSecond>=.001?`${fmt(state.rotationSecondsPerScreenSecond*1000)} ms`:`${fmt(state.rotationSecondsPerScreenSecond*1e6)} µs`;
+  const rotationScale=Math.min(scale,state.rotationSecondsPerScreenSecond);
+  const rotationUnit=rotationScale>=.001?`${fmt(rotationScale*1000)} ms`:`${fmt(rotationScale*1e6)} µs`;
   clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}${mode==='transport'||mode==='flow'?` · rotation: ${rotationUnit}/screen s`:''}`;
   if(!playing)viewer?.setAnimation(null);
  }

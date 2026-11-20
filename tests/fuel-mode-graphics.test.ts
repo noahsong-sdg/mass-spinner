@@ -123,3 +123,21 @@ test('fast views rotate both populations on one bounded clock without changing p
   assert.equal(JSON.stringify(result),before);
  }finally{release(motion.group);release(once.group);}
 });
+
+
+test('a faster throughput clock never speeds rotation above the physical angle or invents motion at rest',()=>{
+ const result=fixture(),motion=createFuelMotion(result);
+ try{
+  for(const mode of ['transport','flow'] as const){
+   const time=.01,state=motion.update(time,mode,1e-6,.001);
+   for(const cloud of motion.group.children.filter(c=>c.userData.tracers)){
+    const kind=cloud.userData.ion?'ion':'neutral';
+    assert.equal(cloud.userData.rotationPhaseScale,1);close(cloud.rotation.z,state.phases[kind]%(2*Math.PI));
+   }
+  }
+  motion.update(0,'transport',.125,.0001);
+  for(const cloud of motion.group.children.filter(c=>c.userData.tracers)){
+   assert.equal(cloud.rotation.z,0);assert.equal(cloud.children[1].visible,false);
+  }
+ }finally{release(motion.group);}
+});
