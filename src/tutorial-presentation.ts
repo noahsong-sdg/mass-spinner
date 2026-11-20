@@ -7,21 +7,21 @@ export function tutorialRoute(value:string|null):string|null{
 }
 
 export type TutorialPresentation={watch:string;note:string;plot?:string;component?:string};
-const composition={watch:'Compare the light fraction at the center and wall.',note:'Composition is a local percentage. Density is the number of atoms per volume.',plot:'composition'};
+const composition={watch:'Compare the light fraction at the center and wall.',note:'Composition is a local percentage. Density is the number of particles per volume.',plot:'composition'};
 const spin={watch:'Compare ion speed with neutral-gas speed at the same time.',note:'The drive acts on charged gas. Collisions transfer rotation to neutral gas.',plot:'spin'};
 const heat={watch:'Compare energy supplied with energy stored and lost.',note:'Numerical dissipation is not physical heat. Fixed temperature does not calculate heating.',plot:'heat'};
 const cut={watch:'Move along the collection curve. Compare purity with recovery.',note:'Each cut includes all gas inside its radius. The model does not extract gas.',plot:'cut'};
 export const tutorialPresentations:Readonly<Record<string,TutorialPresentation>>={
- look:{watch:'Watch the gas turn while the vessel stays still.',note:'Arrows show drive directions. Markers show calculated bulk motion, not individual atom paths.'},
+ look:{watch:'Find the gas between the stationary electrodes.',note:'Use Field, Current and Force to see the drive directions. Use Replay motion to see the gas turn.'},
  coils:{watch:'Find the coils around the stationary vessel.',note:'The coils supply an axial magnetic field. They do not mechanically turn the gas.',component:'coils'},
- current:spin,currentExperiment:spin,spin,endSpin:spin,spinPlot:spin,collisions:spin,drag:spin,
+ current:spin,currentExperiment:spin,spin:{...spin,note:'Slow motion uses calculated bulk speeds, not individual atom paths. Collisions transfer rotation from ions to neutral gas.'},endSpin:spin,spinPlot:spin,collisions:spin,drag:spin,
  composition,compositionPlot:composition,axis:composition,wall:composition,
  density:{watch:'Compare both species at the same radius.',note:'Both densities can increase outward while the light fraction decreases.',plot:'profile'},
  momentum:{watch:'Compare total angular momentum with drive minus wall impulse.',note:'Collisions transfer angular momentum between populations. They do not create it.',plot:'momentum'},
  inertia:{watch:'Compare gas inertia as mass moves radially.',note:'Mass farther from the axis needs more angular momentum for the same angular speed.',plot:'inertia'},
  work:heat,thermal:{watch:'Enable thermal evolution to calculate heating.',note:'The default thermal bath holds temperature constant. A fixed-temperature run has no thermal evolution.',plot:'thermal'},
  thermalPlot:{watch:'Compare gas and liner temperatures over time.',note:'Read results at the same physical time. Thermal evolution must be enabled.',plot:'thermal'},
- thermalProfile:{watch:'Compare gas and wall temperature across the radius.',note:'A spatial profile requires the spatial thermal model. Uniform temperature gives no conductive heat flow.',plot:'thermalProfile'},
+ thermalProfile:{watch:'Compare gas and wall temperature across the radius.',note:'A temperature gradient drives heat flow. The spatial thermal model resolves radial temperatures.',plot:'thermalProfile'},
  gasEnergy:{watch:'Compare the species energy profiles across the radius.',note:'These are modeled bulk energies, not electron temperatures.',plot:'gasEnergy'},
  gasPressure:{watch:'Compare gas pressure across the radius.',note:'Pressure depends on number density and temperature.',plot:'gasPressure'},
  temperature:{watch:'Compare the equilibrium reference at twice the temperature.',note:'At fixed rotation, twice the temperature halves ln α. It does not halve purity.',plot:'composition'},

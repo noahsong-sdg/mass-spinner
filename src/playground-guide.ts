@@ -74,7 +74,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  }
  function composition(){transient();plot('composition');node('fuel-locate-plot').click();}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
- const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-fusionMW',controls:null};
+ const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-burnFraction',controls:null};
  const tutorialPlots:Readonly<Record<string,string>>={spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'};
  const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');
  const pending=(key:string)=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton()!.disabled);
@@ -129,14 +129,14 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    if(!['spin','transport'].includes(node('fuel-motion-mode').value)){status.textContent='Before you cut power, select Coupled separation or Coupled spin-up. The selected physical time sets when the current changes.';return;}
    if(power.disabled){status.textContent='To change power, select a time below 60 s in an accepted coupled run.';return;}
    if(power.getAttribute('aria-pressed')!=='true'){status.textContent='The discharge is already off. The gas can continue to turn while wall drag decreases its angular momentum.';return;}
-   power.click();return;
+   plot('spin');power.click();return;
   }
   if(key==='currentExperiment'){
    set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
   }else if(key==='endSpin'){
    endpoint();plot('spin');
   }else if(key==='spin'){
-   set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');
+   set('fuel-motion-mode','spin');set('fuel-motion-time',0,'input');plot('spin');
    if(node('fuel-motion-play').getAttribute('aria-pressed')!=='true')node('fuel-motion-play').click();
   }else if(['composition','axis','wall','temperature','rotation'].includes(key)){
    if(key==='composition')endpoint();

@@ -97,7 +97,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  }
  function open(key:string,focus=false){
   const item=windows.get(key);if(!item||item.button.hidden)return;
-  for(const [other,entry]of windows)if(other!==key&&other!=='guide'&&key!=='guide'&&(mobile.matches||entry.group===item.group))close(other);
+  for(const [other,entry]of windows)if(other!==key&&other!=='guide'&&key!=='guide'&&(mobile.matches&&windows.get('guide')!.panel.hidden||entry.group===item.group))close(other);
   item.panel.hidden=false;item.button.setAttribute('aria-expanded','true');
   arrange();
   if(focus)item.heading.focus();
@@ -121,7 +121,8 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  const tutorialPanel=windows.get('guide')!.panel;shell.append(tutorialPanel);
  const readFull=make('a','','Reading page ↗');readFull.href='/learn.html';readFull.target='_blank';readFull.rel='noopener';
  const readerFrame=panels.guide.querySelector<HTMLIFrameElement>('iframe')!;
- readerFrame.addEventListener('load',()=>{const path=readerFrame.contentDocument?.location;readFull.href=path?path.pathname+path.hash:'/learn.html';});
+ const syncReadingPage=()=>{const path=readerFrame.contentDocument?.location;readFull.href=path?path.pathname+path.hash:'/learn.html';};
+ readerFrame.addEventListener('load',syncReadingPage);readFull.addEventListener('click',syncReadingPage);
  tutorialPanel.querySelector('.world-window-bar')!.append(readFull);
  let readerWidth=.4;const readerHandle=separator('Resize tutorial and simulator','vertical',delta=>{readerWidth=delta==='min'?.28:delta==='max'?.6:clamp(readerWidth+delta/win.innerWidth,.28,.6);shell.style.setProperty('--tutorial-width',`${readerWidth*100}vw`);readerHandle.setAttribute('aria-valuenow',String(Math.round(readerWidth*100)));win.dispatchEvent(new win.Event('resize'));});
  readerHandle.setAttribute('aria-valuemin','28');readerHandle.setAttribute('aria-valuemax','60');readerHandle.setAttribute('aria-valuenow','40');tutorialPanel.append(readerHandle);
@@ -183,7 +184,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   arrange();
   onContextChange({level,marathon});
  }
- const onMobile=()=>{if(mobile.matches){let kept=false;for(const [key,{panel}]of windows)if(key!=='guide'&&!panel.hidden){if(kept)close(key);kept=true;}}arrange();};
+ const onMobile=()=>{if(mobile.matches&&windows.get('guide')!.panel.hidden){let kept=false;for(const [key,{panel}]of windows)if(key!=='guide'&&!panel.hidden){if(kept)close(key);kept=true;}}arrange();};
  mobile.addEventListener('change',onMobile);
  win.addEventListener('resize',arrange);
  if(win.ResizeObserver)new win.ResizeObserver(arrange).observe(dock);

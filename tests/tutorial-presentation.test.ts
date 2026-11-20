@@ -7,7 +7,7 @@ import {playgroundSteps} from '../src/playground-guide-steps.js';
 test('every tutorial action has a specific observation and physical scope',()=>{
  const actions=new Set([...guideActions,...playgroundSteps.flatMap(s=>s.actions.map(([key])=>key)),...numberedTutorials.flatMap(t=>t.topics.flatMap(s=>s.actions.map(([key])=>key)))]);
  for(const key of actions){const cue=tutorialPresentation(key);assert.ok(cue,key);assert.ok(cue.watch.length>10,key);assert.ok(cue.note.length>10,key);}
- assert.match(tutorialPresentation('look')!.note,/not individual atom paths/);
+ assert.match(tutorialPresentation('spin')!.note,/not individual atom paths/);
  assert.match(tutorialPresentation('cut')!.note,/does not extract/);
  assert.match(tutorialPresentation('magneticLeverage')!.note,/adjusts current/);
  assert.match(tutorialPresentation('modelInfo')!.note,/does not establish experimental accuracy/);

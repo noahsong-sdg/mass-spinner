@@ -34,7 +34,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  }
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);
  await cue.getByRole('button',{name:'Replay motion',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('spin');
- await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
+ await expect(page.locator('#fuel-motion-mode')).toHaveValue('spin');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
  await info.attach('gas-drive-focus',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
 });
 

@@ -160,7 +160,7 @@ test('temperature equation term focuses the temperature input without changing i
 
 test('numbered tutorial process links expand their section and focus the canonical input without editing',t=>{
  const f=fixture(t),body=f.node('window-controls').querySelector('.world-window-body');
- for(const [action,id]of Object.entries({stageControls:'fuel-stages',pumpControls:'fuel-pumpSpeedM3S',inventoryControls:'fuel-fusionMW'})){
+ for(const [action,id]of Object.entries({stageControls:'fuel-stages',pumpControls:'fuel-pumpSpeedM3S',inventoryControls:'fuel-burnFraction'})){
   const section=f.doc.createElement('details'),input=f.doc.createElement('input');input.id=id;input.value='3';section.append(input);body.append(section);
   let edits=0;input.addEventListener('input',()=>edits++);
   f.workspace.launchGuideAction(action);
@@ -202,7 +202,7 @@ test('cut power is a single explicit intervention, never a power-on or hidden re
  const f=fixture(t),fuel=acceptedFuel(f),time=fuel.time.value;let cuts=0,restarts=0;
  fuel.power.addEventListener('click',()=>{cuts++;fuel.power.setAttribute('aria-pressed','false');});
  fuel.newRun.addEventListener('click',()=>restarts++);
- f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,time);assert.equal(restarts,0);
+ f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.time.value,time);assert.equal(restarts,0);assert.equal(fuel.plot.value,'spin');assert.equal(f.node('window-plots').hidden,false);
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.match(f.node('guide-status').textContent,/already off/);
  fuel.mode.value='equilibrium';fuel.power.setAttribute('aria-pressed','true');
  f.workspace.launchGuideAction('cutPower');assert.equal(cuts,1);assert.equal(fuel.mode.value,'equilibrium');assert.match(f.node('guide-status').textContent,/Before you cut power, select Coupled separation/);
@@ -367,4 +367,13 @@ test('the tutorial divider resizes the reader and Escape closes only the reader'
  handle.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
  assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-plots').hidden,false);
  assert.equal(f.doc.activeElement,f.node('open-docs'));
+});
+
+
+test('mobile tutorial controls keep their result plot and preserve the run',t=>{
+ const f=fixture(t,true),fuel=acceptedFuel(f),time=fuel.time.value;
+ f.workspace.openTutorial('/start.html');f.workspace.launchGuideAction('current');
+ assert.equal(f.node('window-guide').hidden,false);assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,false);
+ assert.equal(fuel.plot.value,'spin');assert.equal(fuel.time.value,time);
+ f.workspace.close('guide');f.workspace.open('controls');assert.equal(f.node('window-plots').hidden,true,'ordinary phone windows retain one-sheet behavior');
 });
