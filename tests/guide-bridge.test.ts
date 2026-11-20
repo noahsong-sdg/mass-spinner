@@ -142,7 +142,8 @@ test('an unresponsive older simulator offers a direct action without waiting for
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
  for(let i=0;i<120;i++)f.probe();
  assert.equal(reconnect.hidden,false,'recovery remains available after the connection expires');
- const current=peer();f.dom.window.open=(url,target)=>{assert.equal(url,`${origin}/?level=2`);assert.match(target!,/^mass-spinner-reader-[a-f0-9-]+-simulator-recovery$/);return current.window;};reconnect.click();
+ const current=peer();f.dom.window.open=(url,target)=>{assert.equal(url,`${origin}/?level=2`);assert.equal(target,'_blank');return current.window;};reconnect.click();
+ assert.match(current.window.name,/^mass-spinner-reader-[a-f0-9-]+-simulator-recovery-[a-f0-9-]+$/);
  assert.equal(f.isProbing(),true);assert.equal(reconnect.hidden,true);
  f.receive({type:'mass-spinner:guide-ready',capability:'late-token',instance:'old-tab'});
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'recovery cancels the older pending action');
