@@ -329,7 +329,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   }
   const scanInput=scanInputs[selector.value];
   if(selector.value!=='composition')plotCursor?.setCursor(scanInput?c[scanInput]:transient&&['spin','heat','thermal','separation','momentum','inertia'].includes(selector.value)?elapsed:NaN);
-  if(transient&&['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&Math.abs(elapsed-lastProfileTime)>=c.durationS/80){lastProfileTime=elapsed;draw();}
+  if(transient&&['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(selector.value)&&(!playing||Math.abs(elapsed-lastProfileTime)>=c.durationS/80)){lastProfileTime=elapsed;draw();}
   acceptComparison();
   setStatus(transient?`Closed vessel · ${diagnostic.thermal?'temperature changes':'thermal bath'}${(latest.result.transport?.maxCellExponent??0)>1?' · wall layer finer than radial grid':''}`:status.dataset.reference??status.textContent);
   const timeUnit=scale>=.001?`${fmt(scale*1000)} ms`:`${fmt(scale*1e6)} µs`;

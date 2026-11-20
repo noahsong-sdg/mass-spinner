@@ -135,6 +135,17 @@ test('spatial mixture controls reach the solver and accepted gas profiles follow
  for(const topic of ['thermalProfile','gasEnergy','gasPressure']){
   f.change('fuel-plot',topic,'change');assert.ok(f.ui.nodes.plots.querySelector('svg'),topic);assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.025 s');
   for(const path of f.ui.nodes.plots.querySelectorAll('path'))assert.doesNotMatch(path.getAttribute('d')??'',/NaN|Infinity/,topic);
+  f.change('fuel-motion-time',0);f.node('fuel-motion-play').click();
+  const tick=f.animation;assert.equal(typeof tick,'function');tick(.001);
+  const rate=Number(f.node('fuel-motion-time').value)/.001;
+  tick((.04975-Number(f.node('fuel-motion-time').value))/rate);
+  assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.04975 s');
+  tick(.00026/rate);
+  assert.equal(f.animation,null);assert.equal(Number(f.node('fuel-motion-time').value),.05);
+  assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.05 s','The endpoint must bypass the profile redraw interval.');
+  f.change('fuel-motion-time',.025);f.node('fuel-motion-play').click();f.animation(.0001/rate);f.node('fuel-motion-play').click();
+  assert.equal(f.ui.nodes.plots.querySelector('.fuel-metrics strong').textContent,'0.0251 s','Pause must show the exact selected time.');
+  f.change('fuel-motion-time',.025);
  }
  f.change('fuel-plot','thermalProfile','change');assert.match(f.ui.nodes.plots.textContent,/Neutral gas/);f.node('fuel-locate-plot').click();assert.equal(f.node('fuel-view-layer').value,'temperature');
  f.change('fuel-plot','spin','change');f.selected.onSelect('slice',{},'Gas');assert.equal(f.node('fuel-plot').value,'thermalProfile','A resolved temperature surface opens its accepted radial profile.');
