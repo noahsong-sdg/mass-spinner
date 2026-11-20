@@ -138,6 +138,7 @@ This is the magnetic part of the Lorentz force law:
 Here, F_B is the magnetic force on one charge, q is its signed electric charge, and v is its velocity.
 B is magnetic field. The cross product, ×, gives a direction perpendicular to both vectors.
 The force magnitude is |q|vB sin θ, where θ is the angle between motion and field.
+
 Motion along the field gives zero magnetic force. Motion across the field gives the largest force at the same speed.
 Negative charge reverses the force direction for the same velocity.
 
@@ -157,6 +158,7 @@ It does not require all particles to move in the current direction.
 
 Here, radial current points toward the inner electrode. The axial field points along the cylinder.
 The force thus points around the cylinder, in the tangential direction.
+
 At the right of the end view, current points left and the field points toward you. The force points up.
 At other positions around the gap, the forces have different directions but the same turning effect about the axis.
 This turning effect is torque. Reversing current or field reverses it.
