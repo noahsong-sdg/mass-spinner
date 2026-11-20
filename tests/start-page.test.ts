@@ -79,7 +79,7 @@ test('modified clicks keep native link behavior instead of sending or navigating
 });
 
 test('embedded actions send only to their parent, without a handshake or popup, and keep feedback beside the instruction',t=>{
- const reader=embedded(t);assert.deepEqual(reader.sent,[]);assert.equal(reader.status().textContent,'');
+ const reader=embedded(t);assert.equal(reader.sent.length,0);assert.equal(reader.status().textContent,'');
  reader.click('currentExperiment');const first=reader.sent[0];
  assert.equal(first.origin,origin);assert.equal(first.packet.type,'mass-spinner:guide-action');assert.equal(first.packet.action,'currentExperiment');assert.ok(first.packet.requestId);
  assert.equal(reader.win.document.querySelector('[data-guide-action="currentExperiment"]')!.closest('.try-actions')!.nextElementSibling,reader.status());
