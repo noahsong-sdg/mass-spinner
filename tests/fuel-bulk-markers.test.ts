@@ -52,7 +52,7 @@ test('rendered instance centres follow accepted shell inventories and angular ph
     const phase=cloud.userData.ion?sample.ionPhaseRad:sample.neutralPhaseRad;
     assert.equal(cloud.rotation.z,phase%(2*Math.PI),'the default resolved clock retains the accepted physical phase in both coupled modes');
     const trail=cloud.children[1] as THREE.LineSegments;
-    assert.equal(trail.visible,mode==='spin'&&time>0);
+    assert.equal(trail.visible,time>0);
     if(trail.visible){
      const p=trail.geometry.getAttribute('position'),past=sampleFuelTransport(result.transport,time-(trail.userData.exposureS as number));
      const pastPhase=cloud.userData.ion?past.ionPhaseRad:past.neutralPhaseRad;
