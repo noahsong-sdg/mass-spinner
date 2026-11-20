@@ -22,7 +22,7 @@ The tutorial text states these conditions beside each example. Existing equation
 
 The local memory guard refused an isolated runtime because host memory pressure was not normal. No project tests or build ran on the host.
 
-Static checks passed: `git diff --check` and comparison of all 20 existing tutorial equation blocks with the earlier source. The rendered concept descriptions, readings and captions have no sentence above 25 words. This length check supplements the rules and dictionary review.
+Static checks passed: `git diff --check` and comparison of all 20 existing tutorial equation blocks with the earlier source. The rendered concept descriptions, readings and captions have no sentence above 25 words. The rules and dictionary review are separate checks.
 
 [Verify run 44643120593](https://github.com/noahsong-sdg/mass-spinner/actions/runs/44643120593) passed for source `2dddae01aee1ebf2e5bd689389b876f8cc1dca48`.
 
@@ -66,4 +66,4 @@ The live reference controls gave the expected results: power-off spin-up, 0.25 r
 
 The native viewport control kept a 1280 px layout after a 390 px request. Thus, the live native check covers desktop. Phone evidence comes from CI Chromium on the exact published bytes. The native test tab reported two Electron startup errors from `node:electron/js2c/sandbox_bundle`. No app-source error appeared in that log. The temporary viewport setting was reset. All test tabs from this task were closed.
 
-These checks verify tutorial behavior and the stated reference equations. They do not establish experimental accuracy.
+These checks verify tutorial behavior and the stated reference equations. They do not show experimental accuracy.
