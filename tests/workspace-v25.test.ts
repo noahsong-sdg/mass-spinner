@@ -249,3 +249,13 @@ test('Reactor navigation exposes distinct beam and power-reference scenes withou
  f.document.querySelector<HTMLButtonElement>('button[data-level="3"]')!.click();f.node('show-reactor').click();
  assert.equal(f.document.body.dataset.level,'2');assert.equal(select.value,'source');
 });
+
+
+test('a desktop tutorial divider releases keyboard focus when the phone layout hides it',t=>{
+ const f=fixture(t);t.after(()=>f.window.close());f.workspace.openTutorial('/start.html');
+ const handle=f.document.querySelector<HTMLElement>('[aria-label="Resize tutorial and simulator"]')!;handle.focus();
+ assert.equal(handle.hidden,false);f.media.matches=true;f.resize();
+ assert.equal(handle.hidden,true);assert.notEqual(f.document.activeElement,handle);
+ assert.equal(f.node('window-guide').hidden,false);assert.equal(f.document.activeElement,f.node('window-title-guide'));
+ f.media.matches=false;f.resize();assert.equal(handle.hidden,false);
+});

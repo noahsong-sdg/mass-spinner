@@ -51,7 +51,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
    shell.style.setProperty(`--world-${side}-reserve`,`${!mobile.matches&&visible?sizes[side]+32:0}px`);
   }
   const pair=!mobile.matches&&!windows.get('target')?.panel.hidden&&['plots','info'].some(key=>!windows.get(key)?.panel.hidden);
-  split.hidden=!pair;split.setAttribute('aria-valuenow',String(Math.round(layout.split*100)));
+  readerHandle.hidden=mobile.matches;split.hidden=!pair;split.setAttribute('aria-valuenow',String(Math.round(layout.split*100)));
   split.setAttribute('aria-valuetext',`${Math.round(layout.split*100)}% results, ${Math.round((1-layout.split)*100)}% target`);
   for(const [key,item]of windows)if(item.side==='right')item.panel.style.flex=`${pair?(key==='target'?1-layout.split:layout.split):1} 1 0px`;
   if(doc.activeElement?.matches('.world-resizer[hidden]'))[...windows.values()].find(item=>!item.panel.hidden)?.heading.focus();
