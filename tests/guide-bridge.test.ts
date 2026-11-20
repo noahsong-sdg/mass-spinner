@@ -164,3 +164,13 @@ test('an authorized action hides recovery before it can execute twice',t=>{
  f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'});
  assert.equal(focuses,1);
 });
+
+test('coils wait for the asynchronously populated component options before acknowledging execution',async t=>{
+ const f=app(t),r=peer();f.dom.window.open=()=>r.window;f.guide.openStandalone();
+ const component=f.dom.window.document.createElement('select');component.id='fuel-component';f.dom.window.document.body.append(component);
+ f.send(r.window,{type:'mass-spinner:guide-action',action:'coils',requestId:'coils'});
+ assert.equal(r.packets.at(-1)?.status,'waiting');assert.deepEqual(f.opened,[]);
+ component.innerHTML='<option value="vessel">Vessel</option><option value="coils">Coils</option>';
+ await new Promise<void>(resolve=>setImmediate(resolve));
+ assert.equal(component.value,'coils');assert.deepEqual(f.opened,['inspect']);assert.equal(r.packets.at(-1)?.status,'executed');
+});

@@ -193,7 +193,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    if(key==='equilibrium')return !!node('fuel-equilibrium-calculator');
    if(Object.hasOwn(controlFocus,key))return !controlFocus[key]||!!doc.querySelector(controlFocus[key]);
    if(key==='look')return ['fuel-view-representation','fuel-view-cutaway','fuel-view-drive'].every(id=>doc.getElementById(id));
-   if(key==='coils')return !!node('fuel-component');
+   if(key==='coils')return !!node('fuel-component')?.querySelector('option[value="coils"]');
    return immediate||!pending(key);
   };
   if(ready()){execute();return;}

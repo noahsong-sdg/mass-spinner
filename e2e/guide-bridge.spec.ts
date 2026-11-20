@@ -102,6 +102,7 @@ test('a tutorial opened by an older simulator can open its action in a current s
  await reader.locator('[data-guide-action="coils"]').click();
  await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
  await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');await expect(reconnect).toBeHidden();
+ await test.info().attach('recovered-simulator',{body:await simulator.screenshot(),contentType:'image/png'});
  await reader.goto('/guide.html');await reader.locator('[data-guide-action="work"]').click();
  await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');await expect(simulator.locator('#fuel-plot')).toHaveValue('heat');
  await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
