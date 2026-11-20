@@ -93,3 +93,33 @@ test('species focus dims the corresponding shell arrows and survives mode change
   }
  }finally{release(motion.group);}
 });
+
+
+test('fast views rotate both populations on one bounded clock without changing physical phase or radial transport',()=>{
+ const result=fixture(),motion=createFuelMotion(result),once=createFuelMotion(result),before=JSON.stringify(result);
+ try{
+  for(const mode of ['transport','flow'] as const){
+   const physicalClock=.125,rotationClock=.0001,time=.025;
+   motion.update(time/2,mode,physicalClock,rotationClock);const state=motion.update(time,mode,physicalClock,rotationClock);
+   once.update(time,mode,physicalClock,rotationClock);
+   const clouds=motion.group.children.filter(c=>c.userData.tracers),others=once.group.children.filter(c=>c.userData.tracers);
+   for(const [i,cloud]of clouds.entries()){
+    const kind=cloud.userData.ion?'ion':'neutral';
+    close(cloud.rotation.z,(state.phases[kind]*rotationClock/physicalClock)%(2*Math.PI));
+    assert.ok(cloud.rotation.z>0);close(cloud.rotation.z,others[i].rotation.z);
+    assert.equal(cloud.children[1].visible,true);
+    assert.equal(motion.group.getObjectByName(cloud.userData.ion?'Ion rotation arrow':'Neutral rotation arrow')!.visible,true);
+   }
+   close(state.phases.ion,mode==='transport'?sampleFuelTransport(result.transport,time).ionPhaseRad:result.samples.at(-1)!.ionRadS*time);
+   if(mode==='transport'){
+    const sample=sampleFuelTransport(result.transport,time);
+    for(const cloud of clouds.filter(c=>!c.userData.ion)){
+     const a=(cloud.children[0] as THREE.Mesh).geometry.getAttribute('samplePosition'),cdf=cloud.userData.species?sample.heavyCDF:sample.lightCDF;
+     const y=(a.getX(0)**2+a.getY(0)**2)/result.config.radiusM**2,j=Math.floor(y*(cdf.length-1));
+     assert.ok(Math.abs(cdf[j]+(cdf[j+1]-cdf[j])*(y*(cdf.length-1)-j)-.5/a.count)<1e-6);
+    }
+   }
+  }
+  assert.equal(JSON.stringify(result),before);
+ }finally{release(motion.group);release(once.group);}
+});

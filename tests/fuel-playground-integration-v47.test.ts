@@ -503,3 +503,18 @@ test('comparison color bounds update on pin, result acceptance and clear without
  assert.deepEqual(current.legend.domain,comparisonDomain([b],'speed'));
  assert.ok(current.legend.domain[1]<shared[1],'clearing the faster pin must remove its color-range contribution');
 });
+
+
+test('Play at the end restarts each finite coupled run without rerunning the solver',async t=>{
+ const f=fixture(t);await f.start();const requests=f.requests.length,result=f.ui.latest.result;
+ for(const mode of ['transport','spin']){
+  f.change('fuel-motion-mode',mode,'change');
+  f.change('fuel-motion-time',result.config.durationS);
+  f.node('fuel-motion-play').click();
+  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
+  assert.equal(Number(f.node('fuel-motion-time').value),0);
+  assert.equal(typeof f.viewers[0].animation,'function');f.viewers[0].animation(.1);
+  assert.ok(Number(f.node('fuel-motion-time').value)>0);
+ }
+ assert.equal(f.requests.length,requests);assert.equal(f.ui.latest.result,result);
+});

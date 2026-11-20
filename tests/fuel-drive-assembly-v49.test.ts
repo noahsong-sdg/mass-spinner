@@ -53,6 +53,25 @@ test('direction glyphs retain SI magnitudes, do not pick like hardware, and vani
  for(const radius of [0,defaults.radiusM*1.01])assert.throws(()=>fuelDriveAt(defaults,radius),RangeError);
 });
 
+test('each drive layer covers the circumference and more than one axial station',()=>{
+ const drive=createFuelDrive(defaults);
+ try{
+  for(const layer of drive.group.children){
+   assert.equal(layer.children.length,16,layer.name);
+   const stations=new Set(layer.children.map(g=>g.position.z));assert.equal(stations.size,2);
+   const angles=layer.children.map(g=>(Math.atan2(g.position.y,g.position.x)+2*Math.PI)%(2*Math.PI)).sort((a,b)=>a-b);
+   for(let i=0;i<angles.length;i++)assert.ok((angles[(i+1)%angles.length]-angles[i]+2*Math.PI)%(2*Math.PI)<=Math.PI/4+1e-12);
+   for(const glyph of layer.children){
+    const angle=Math.atan2(glyph.position.y,glyph.position.x),sample=fuelDriveAt(defaults,Math.hypot(glyph.position.x,glyph.position.y),angle);
+    const vector=layer.name==='B'?sample.field:layer.name==='J'?sample.current:sample.force;
+    const direction=new THREE.Vector3(0,1,0).applyQuaternion(glyph.quaternion);
+    assert.ok(direction.dot(new THREE.Vector3(...vector).normalize())>1-1e-12);
+    assert.ok(glyph.position.z>=0&&glyph.position.z<=defaults.lengthM);
+   }
+  }
+ }finally{release(drive.group);}
+});
+
 test('real Blender GLB has nine SI modules and independently editable engineering details',()=>{
  const modules=template.scene.children;assert.equal(modules.length,9);
  let count=0;template.scene.traverse((o:any)=>{if(o.isMesh){count++;assert.ok(FUEL_COMPONENTS.some(c=>c.id===o.userData.componentId),o.name);assert.match(o.userData.materialBasis,/Assumed/);assert.match(o.userData.geometryBasis,/illustrative/);for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])for(const v of a.array)assert.ok(Number.isFinite(v));}});
