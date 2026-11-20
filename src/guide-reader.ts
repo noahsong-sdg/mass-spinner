@@ -46,7 +46,12 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   }
  });
  browser.addEventListener('pagehide',stopProbe);
- reconnect.addEventListener('click',()=>{stopProbe();pending=undefined;reconnect.hidden=true;report('The new simulator uses default inputs.');});
+ reconnect.addEventListener('click',event=>{
+  event.preventDefault();if(!pending||pending.sent)return;
+  const next=win.open(`${origin}/?level=2`,'_blank');
+  if(!next){report('Allow the simulator window to open. Then select the action again.');return;}
+  simulatorWindow=next;capability='';instance='';reconnect.hidden=true;connect();
+ });
 
  for(const figure of doc.querySelectorAll<HTMLElement>('[data-concept-example]')){
   const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');

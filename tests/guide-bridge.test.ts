@@ -140,11 +140,16 @@ test('an unresponsive older simulator offers a direct action without waiting for
  assert.equal(reconnect.target,'_blank');assert.equal(reconnect.rel,'noopener');
  assert.equal(focuses,0,'keep the recovery link visible until the action succeeds');
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0);
- reconnect.addEventListener('click',event=>event.preventDefault());reconnect.click();
- assert.equal(f.isProbing(),false);assert.equal(reconnect.hidden,true);
+ const current=peer();f.dom.window.open=(url,target)=>{assert.equal(url,`${origin}/?level=2`);assert.equal(target,'_blank');return current.window;};reconnect.click();
+ assert.equal(f.isProbing(),true);assert.equal(reconnect.hidden,true);
  f.receive({type:'mass-spinner:guide-ready',capability:'late-token',instance:'old-tab'});
  assert.equal(f.simulator.packets.filter(packet=>packet.type==='mass-spinner:guide-action').length,0,'recovery cancels the older pending action');
- assert.equal(f.status(),'The new simulator uses default inputs.');
+ f.receive({type:'mass-spinner:guide-ready',capability:'current-token',instance:'current-tab'},current.window);
+ const request=current.packets.find(packet=>packet.type==='mass-spinner:guide-action')!;assert.equal(request.action,'spin');
+ f.receive({type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'},current.window);
+ assert.equal(f.status(),'Opened in the simulator.');
+ f.click('current');assert.equal(reconnect.hidden,false);f.receive({type:'mass-spinner:guide-ready',capability:'current-token',instance:'current-tab'},current.window);
+ assert.equal(current.packets.filter(packet=>packet.type==='mass-spinner:guide-action').at(-1)?.action,'current');
 });
 
 test('an authorized action hides recovery before it can execute twice',t=>{

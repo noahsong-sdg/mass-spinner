@@ -96,10 +96,11 @@ test('a tutorial opened by an older simulator can open its action in a current s
  const simulatorPopup=reader.waitForEvent('popup');await reconnect.click();const simulator=await simulatorPopup;
  await expect(simulator.locator('#fuel-view-representation')).toHaveValue('both');
  await expect(simulator.locator('#fuel-view-drive')).toHaveValue('all');
- await expect(reader.locator('#reader-status')).toHaveText('The new simulator uses default inputs.');
+ await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');
  await expect(page.getByText('Existing run',{exact:true})).toBeVisible();
  await expect(page).toHaveURL(/older-simulator.html$/);
  await reader.locator('[data-guide-action="coils"]').click();
- await expect(reconnect).toHaveAttribute('href',/try=coils$/);
+ await expect(simulator.locator('#fuel-component')).toHaveValue('coils');
+ await expect(reader.locator('#reader-status')).toHaveText('Opened in the simulator.');await expect(reconnect).toBeHidden();
  await simulator.close();await reader.close();
 });
