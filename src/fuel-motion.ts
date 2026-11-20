@@ -124,11 +124,11 @@ export function createFuelMotion(result: FuelRenderResult){
   const exposureS=transient?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
   const before=stateAt(timeS-exposureS,mode).phases;
   glyphs.update({...state,phases:displayPhases},mode,quantile,{seconds:exposureS,ion:(state.phases.ion-before.ion)*phaseScale,neutral:(state.phases.neutral-before.neutral)*phaseScale});
-  const history=Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
+  const history=mode==='spin'||mode==='equilibrium'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
    const time=timeS-exposureS*(1-j/TRAIL_SEGMENTS),frame=stateAt(time,mode);
    const sample=transient&&result.transport?sampleFuelTransport(result.transport,time):null;
    return {...frame,cdf:[sample?.lightCDF,sample?.heavyCDF]};
-  });
+  }):[];
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
   if((mode!==previousMode||['spin','transport'].includes(mode))&&!ion){

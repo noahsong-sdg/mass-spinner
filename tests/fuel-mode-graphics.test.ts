@@ -107,7 +107,7 @@ test('fast views rotate both populations on one bounded clock without changing p
     const kind=cloud.userData.ion?'ion':'neutral';
     close(cloud.rotation.z,(state.phases[kind]*rotationClock/physicalClock)%(2*Math.PI));
     assert.ok(cloud.rotation.z>0);close(cloud.rotation.z,others[i].rotation.z);
-    assert.equal(cloud.children[1].visible,true);
+    assert.equal(cloud.children[1].visible,false);
     assert.equal(motion.group.getObjectByName(cloud.userData.ion?'Ion rotation arrow':'Neutral rotation arrow')!.visible,true);
    }
    close(state.phases.ion,mode==='transport'?sampleFuelTransport(result.transport,time).ionPhaseRad:result.samples.at(-1)!.ionRadS*time);

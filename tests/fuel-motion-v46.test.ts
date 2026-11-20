@@ -106,7 +106,7 @@ test('flow view keeps true rates and uses one bounded rotation scale for both po
  for(const cloud of motion.group.children.filter(o=>o.userData.tracers)){
   const kind=cloud.userData.ion?'ion':'neutral',scale=Math.min(1,state.rotationSecondsPerScreenSecond/state.secondsPerScreenSecond);
   close(cloud.rotation.z,(state.speeds[kind]*state.secondsPerScreenSecond*scale)%(2*Math.PI));
-  assert.ok(cloud.rotation.z>0);assert.equal(cloud.children[0].visible,true);assert.equal(cloud.children[1].visible,true);
+  assert.ok(cloud.rotation.z>0);assert.equal(cloud.children[0].visible,true);assert.equal(cloud.children[1].visible,false);
   assert.equal(cloud.userData.azimuthAveraged,false);assert.equal(cloud.children.length,2,'no orbit hoops allocated');
  }
  motion.update(.01,'equilibrium');for(const cloud of motion.group.children.filter(o=>o.userData.tracers)){assert.equal(cloud.children[0].visible,true);assert.equal(cloud.userData.azimuthAveraged,false);}

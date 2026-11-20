@@ -76,7 +76,7 @@ test('rotating density samples follow Transport→Flow and Transport→Equilibri
    motion.update(.137,'flow');
    for(const cloud of clouds(motion)){
     assert.equal(cloud.children.length,2);assert.equal(cloud.children[0].visible,true);
-    assert.equal(cloud.children[1].visible,true);assert.equal(cloud.userData.azimuthAveraged,false);
+    assert.equal(cloud.children[1].visible,false);assert.equal(cloud.userData.azimuthAveraged,false);
     if(!cloud.userData.ion){
      const beta=fuelMotionState(result,0,'equilibrium').beta[cloud.userData.species],a=positions(cloud);
      for(let i=0;i<a.count;i+=29){
