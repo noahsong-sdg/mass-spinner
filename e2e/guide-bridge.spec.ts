@@ -77,7 +77,9 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
   const bounds=await page.locator(panel).boundingBox(),width=page.viewportSize()!.width;
   expect(bounds!.width).toBeGreaterThan(width-24);expect(bounds!.x).toBeGreaterThanOrEqual(-1);expect(bounds!.x+bounds!.width).toBeLessThanOrEqual(width+1);
  }
- await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-clock')).toBeVisible();
+ await expect(page.locator('#fuel-plot')).toHaveValue('spin');
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-motion-clock')).toBeVisible();
  await frame.locator('a[href="#machine"]').click();
  const full=page.getByRole('link',{name:'Reading page'});
  await full.evaluate(link=>link.addEventListener('click',event=>event.preventDefault(),{once:true}));await full.click();await expect(full).toHaveAttribute('href',/^\/start(?:\.html)?#machine$/);
