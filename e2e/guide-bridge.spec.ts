@@ -73,13 +73,18 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  const frame=await reader(page);await frame.goto('/start.html#current');
  await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
- if(info.project.name==='phone')for(const panel of ['#window-controls','#window-plots'])await expect.poll(()=>page.locator(panel).evaluate(element=>element.getBoundingClientRect().width)).toBeGreaterThan(page.viewportSize()!.width-24);
+ if(info.project.name==='phone')for(const panel of ['#window-controls','#window-plots']){
+  const bounds=await page.locator(panel).boundingBox(),width=page.viewportSize()!.width;
+  expect(bounds!.width).toBeGreaterThan(width-24);expect(bounds!.x).toBeGreaterThanOrEqual(-1);expect(bounds!.x+bounds!.width).toBeLessThanOrEqual(width+1);
+ }
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#fuel-motion-clock')).toBeVisible();
  await frame.locator('a[href="#machine"]').click();
  const full=page.getByRole('link',{name:'Reading page'});
  await full.evaluate(link=>link.addEventListener('click',event=>event.preventDefault(),{once:true}));await full.click();await expect(full).toHaveAttribute('href',/^\/start(?:\.html)?#machine$/);
  await page.locator('#window-controls').scrollIntoViewIfNeeded();
  await info.attach('tutorial-controls-and-results',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+ await page.getByRole('button',{name:'Close Tutorials',exact:true}).click();await expect(page.locator('#window-guide')).toBeHidden();
+ await expect(page.locator('#window-controls')).toBeVisible();if(info.project.name==='phone')await expect(page.locator('#window-plots')).toBeHidden();else await expect(page.locator('#window-plots')).toBeVisible();
 });
 
 

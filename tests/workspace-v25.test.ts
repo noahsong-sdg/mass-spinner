@@ -259,3 +259,13 @@ test('a desktop tutorial divider releases keyboard focus when the phone layout h
  assert.equal(f.node('window-guide').hidden,false);assert.equal(f.document.activeElement,f.node('window-title-guide'));
  f.media.matches=false;f.resize();assert.equal(handle.hidden,false);
 });
+
+for(const mobile of [false,true])test(`closing the tutorial restores ${mobile?'one phone sheet':'desktop tiles'} without changing inputs`,t=>{
+ const f=fixture(t,mobile);t.after(()=>f.window.close());f.setLevel('2');f.workspace.openTutorial('/start.html');
+ f.workspace.open('controls');f.workspace.open('plots');const input=f.node('fusion-beamEnergyKeV');input.value='75';
+ assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,false);
+ f.workspace.close('guide',true);
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,mobile);
+ assert.equal(input.value,'75');assert.equal(f.document.querySelector('.sim-workspace')!.classList.contains('tutorial-open'),false);
+ assert.equal(f.document.activeElement,f.node('open-docs'));
+});

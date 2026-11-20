@@ -93,7 +93,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  function close(key:string,restore=false){
   const item=windows.get(key);if(!item||item.panel.hidden)return;
   const focused=item.panel.contains(doc.activeElement);item.panel.hidden=true;(key==='guide'?docsButton:item.button).setAttribute('aria-expanded','false');
-  arrange();
+  if(key==='guide')onMobile();else arrange();
   if(restore||focused)(key==='guide'?docsButton:item.button).focus();
  }
  function open(key:string,focus=false){
@@ -192,7 +192,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   arrange();
   onContextChange({level,marathon});
  }
- const onMobile=()=>{if(mobile.matches&&windows.get('guide')!.panel.hidden){let kept=false;for(const [key,{panel}]of windows)if(key!=='guide'&&!panel.hidden){if(kept)close(key);kept=true;}}arrange();};
+ function onMobile(){if(mobile.matches&&windows.get('guide')!.panel.hidden){let kept=false;for(const [key,{panel}]of windows)if(key!=='guide'&&!panel.hidden){if(kept)close(key);kept=true;}}arrange();}
  mobile.addEventListener('change',onMobile);
  win.addEventListener('resize',arrange);
  if(win.ResizeObserver)new win.ResizeObserver(arrange).observe(dock);
