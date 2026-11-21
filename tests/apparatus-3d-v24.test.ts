@@ -114,6 +114,17 @@ test('apparatus wrapper exposes actual asset-error retry and keyboard component 
  assert.match(w.readout.children[2].children[1].textContent,/material|copper|steel/i);
 });
 
+test('component choices stay disabled until the current model has loaded, including obsolete and failed loads',async t=>{
+ const first=deferred(),second=deferred();let loads=0;
+ const w=wrapper(t,async()=>({createApparatusViewer:()=>({load:()=>++loads===1?first.promise:loads===2?second.promise:Promise.resolve(false),select(){},dispose(){}})}));
+ w.ui.show('gyro');assert.equal(w.choices.disabled,true);w.visible(true);await settle();
+ w.ui.show('rotating');first.resolve(true);await settle();
+ assert.equal(loads,2);assert.equal(w.choices.disabled,true,'an obsolete completion cannot enable the new menu');
+ second.resolve(true);await settle();assert.equal(w.choices.disabled,false);
+ w.visible(false);w.visible(true);await settle();assert.equal(w.choices.disabled,false);
+ w.ui.show('curved');await settle();assert.equal(w.choices.disabled,true,'a failed load cannot enable component actions');
+});
+
 test('apparatus wrapper cancels deferred construction after disposal',async t=>{
  const module=deferred();let created=0;const w=wrapper(t,()=>module.promise);w.ui.show('gyro');w.visible(true);w.ui.dispose();
  module.resolve({createApparatusViewer:()=>{created++;}});await settle();assert.equal(created,0);assert.equal(w.host.children.length,0);assert.equal(w.disconnected,1);

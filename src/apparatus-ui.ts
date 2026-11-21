@@ -38,7 +38,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  provenance.className='apparatus-provenance';provenanceTitle.textContent='Concept model';
  provenanceTitle.setAttribute('aria-label','Geometry and material fidelity');dimensionSource.textContent='Dimension source ↗';dimensionSource.target='_blank';dimensionSource.rel='noopener';dimensionSource.hidden=true;provenance.append(provenanceTitle,provenanceText,dimensionSource);
  figure.className='apparatus';frame.className='apparatus-frame';toolbar.className='apparatus-toolbar';
- choices.setAttribute('aria-label','Select a component');reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
+ choices.setAttribute('aria-label','Select a component');choices.disabled=true;reset.type='button';reset.textContent='↺';reset.setAttribute('aria-label','Reset 3D view');
  readout.className='component-description';readout.setAttribute('aria-live','polite');
  retry.type='button';retry.textContent='Retry 3D';retry.hidden=true;retry.addEventListener('click',()=>{void start();});
  toolbar.append(choices,retry,reset);figure.append(frame,toolbar,readout,provenance);host.replaceChildren(figure);
@@ -55,7 +55,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   const content=numerical?layer==='tracks'?'Completed ion paths are shown':layer==='impacts'?'Completed impact results are shown':'Completed numerical fields are shown':'Only hardware is shown. Numerical layers are hidden';
   provenanceText.textContent=`Dimensions follow the simulation inputs in SI units. ${content}. Construction and materials are for illustration. Marathon hardware dimensions are not verified here.`;
  }
- function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.updateReactorState?.(reactorState);current.setPending?.(statePending);current.setActive?.(visible);if(selected)current.select(selected);}
+ function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.updateReactorState?.(reactorState);current.setPending?.(statePending);current.setActive?.(visible);if(selected)current.select(selected);choices.disabled=loadedAsset!==asset;}
  function select(id: string,notify=true,part: SelectionPart | null=null,name=''){
   const c=records.find(c=>c.id===id);if(!c)return;
   selected=id;choices.value=id;viewer?.select(id);if(notify)viewer?.explode?.(id);focus.disabled=false;
@@ -101,7 +101,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
   host.hidden=!asset?.model;if(!asset?.model)return;
   provenanceTitle.textContent=asset.geometryLabel??'Concept model';dimensionSource.hidden=!asset.dimensionSource;dimensionSource.href=asset.dimensionSource??'';
   provenance.open=false;describeRepresentation({geometry:'reference',status:'reference'});
-  records=components??modelComponents(mode);selected='';focus.disabled=true;choices.replaceChildren();readout.replaceChildren();
+  records=components??modelComponents(mode);selected='';focus.disabled=true;choices.disabled=true;choices.replaceChildren();readout.replaceChildren();
   const prompt=doc.createElement('option');prompt.value='';prompt.textContent='Select a component…';prompt.disabled=true;choices.append(prompt);
   for(const c of records){const option=doc.createElement('option');option.value=c.id;option.textContent=c.name;choices.append(option);}choices.value='';
   if(visible)void start();
