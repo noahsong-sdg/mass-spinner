@@ -79,13 +79,14 @@ For each species s, the equilibrium density is
 Here, r is radius, n is number density (atoms/m³), m is one atom's mass, and T is temperature in kelvin.
 The symbol k_B is Boltzmann's constant.
 Each species' total atom count sets its density scale. The two densities increase outwards, but their ratio changes.
+To obtain composition, count light atoms as a share of all atoms in the same small volume.
 The local light fraction is
 
 ```math
 x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
 ```
 
-The equation gives a density ratio, not an isotope percentage.
+The exponential density equation gives a density ratio, not an isotope percentage.
 For example, a heavy density increase of 6× and a light density increase of 4× increase the heavy/light ratio by 1.5×.
 Both isotope densities increase toward the wall, but the heavy fraction increases more.
 The center can have a higher light percentage but fewer light atoms in a unit volume.
@@ -267,13 +268,14 @@ The collision terms have opposite signs because each transfer removes angular mo
 Stronger coupling decreases the speed difference, but does not necessarily increase the neutral speed after acceleration stops.
 When drive torque equals wall-loss torque, total angular momentum stops increasing. The gas can then keep turning at constant speeds.
 
+Force farther from the axis gives more torque. Thus, the drive depends on where current crosses the gas.
 For radial current I through an annular region in constant axial field B,
 
 ```math
 \tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
 ```
 
-The symbol I is current. ℐ is inertia.
+The symbol I is current. ℐ is inertia. The inner radius r_in marks the inner edge of the driven gas region.
 Integration of rIB dr across the driven region gives the torque. Thus, electrode radii change the drive.
 
 <!-- diagram:spin -->
