@@ -30,11 +30,12 @@ export function sampleDiagram(){
 export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof globalThis){
  const range=figure.querySelector<HTMLInputElement>('input')!,play=figure.querySelector<HTMLButtonElement>('[data-sample-play]')!,replay=figure.querySelector<HTMLButtonElement>('[data-sample-replay]')!;
  const atoms=[...figure.querySelectorAll<SVGElement>('[data-sample-atom]')];
+ const flight=12,end=99+flight;
  let progress=0,frame:number|null=null,last:number|undefined,running=false,started=false;
  const reduced=win.matchMedia?.('(prefers-reduced-motion: reduce)');
  function paint(announce=false){
-  const count=Math.floor(progress),s=sampleInventory(count);
-  for(const atom of atoms){const p=Math.max(0,Math.min(1,progress-Number(atom.dataset.sampleAtom))),ease=p*p*(3-2*p);atom.setAttribute('transform',`translate(${Number(atom.dataset.dx)*ease} ${Number(atom.dataset.dy)*ease})`);}
+  const count=Math.max(0,Math.floor(progress-flight+1)),s=sampleInventory(count);
+  for(const atom of atoms){const p=Math.max(0,Math.min(1,(progress-Number(atom.dataset.sampleAtom))/flight)),ease=p*p*(3-2*p);atom.setAttribute('transform',`translate(${Number(atom.dataset.dx)*ease} ${Number(atom.dataset.dy)*ease})`);}
   range.value=String(count);figure.dataset.collected=String(count);
   figure.querySelector('[data-sample-count]')!.textContent=`${count} / 100`;
   figure.querySelector('[data-sample-left]')!.textContent=`${s.remainingLight} light + ${s.remainingHeavy} heavy`;
@@ -43,17 +44,17 @@ export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof global
   figure.querySelector('[data-sample-recovery]')!.textContent=`${s.light} / 76 = ${(100*s.recovery).toFixed(1)}%`;
   if(announce)figure.querySelector('[data-sample-reading]')!.textContent=count===0?'The original mixture is 76 / 1,000 = 7.6% light. The sample is empty. Its purity is undefined.':count===100?'The sample has 10% purity, above the original 7.6%. But it keeps only 10 of 76 light atoms: 13.2% recovery.':`${s.light} light atoms and ${s.heavy} heavy atoms have arrived. All other atoms remain outside the sample.`;
  }
- function pause(){running=false;figure.dataset.motion='paused';play.textContent=progress===100?'Replay collection':'Play collection';last=undefined;if(frame!==null)win.cancelAnimationFrame(frame);frame=null;}
+ function pause(){running=false;figure.dataset.motion='paused';play.textContent=progress===end?'Replay collection':'Play collection';last=undefined;if(frame!==null)win.cancelAnimationFrame(frame);frame=null;}
  function tick(now:number){
   frame=null;if(!running)return;
-  if(last!==undefined)progress=Math.min(100,progress+Math.min(64,now-last)/50);last=now;paint();
-  if(progress===100){pause();paint(true);}else frame=win.requestAnimationFrame(tick);
+  if(last!==undefined)progress=Math.min(end,progress+Math.min(64,now-last)/50);last=now;paint();
+  if(progress===end){pause();paint(true);}else frame=win.requestAnimationFrame(tick);
  }
- function start(){if(progress===100)progress=0;running=started=true;figure.dataset.motion='running';play.textContent='Pause collection';last=undefined;paint();frame=win.requestAnimationFrame(tick);}
+ function start(){if(progress===end)progress=0;running=started=true;figure.dataset.motion='running';play.textContent='Pause collection';last=undefined;paint();frame=win.requestAnimationFrame(tick);}
  range.disabled=play.disabled=replay.disabled=false;paint();
  play.addEventListener('click',()=>running?pause():start());
  replay.addEventListener('click',()=>{pause();progress=0;start();});
- range.addEventListener('input',()=>{pause();progress=range.valueAsNumber;paint(true);});
+ range.addEventListener('input',()=>{progress=range.valueAsNumber===0?0:range.valueAsNumber+flight-1;pause();paint(true);});
  win.document.addEventListener('visibilitychange',()=>{if(win.document.hidden)pause();});
  reduced?.addEventListener?.('change',()=>{if(reduced.matches)pause();});
  // Start only when the reader reaches this figure. Do not animate off-screen.

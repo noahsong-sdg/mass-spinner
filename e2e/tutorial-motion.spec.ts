@@ -13,8 +13,9 @@ test('tutorial animations move atoms, conserve inventory and expose pause and re
  await sample.getByRole('button',{name:'Replay',exact:true}).click();
  await expect.poll(()=>range.inputValue()).not.toBe('0');
  await sample.getByRole('button',{name:'Pause collection',exact:true}).click();
- const paused=await sample.locator('[data-sample-atom="99"]').getAttribute('transform');
- await page.waitForTimeout(100);expect(await sample.locator('[data-sample-atom="99"]').getAttribute('transform')).toBe(paused);
+ const positions=()=>sample.locator('[data-sample-atom]').evaluateAll(atoms=>atoms.map(a=>a.getAttribute('transform')));
+ const paused=await positions();
+ await page.waitForTimeout(100);expect(await positions()).toEqual(paused);
  await range.press('Home');await expect(sample.locator('[data-sample-purity]')).toHaveText('0 / 0 · undefined');
  const density=page.locator('[data-density-example]');await expect(density.locator('.density-dot')).toHaveCount(96);
  await density.getByRole('button',{name:'No rotation',exact:true}).click();

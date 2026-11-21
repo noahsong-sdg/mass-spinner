@@ -30,7 +30,10 @@ test('the sample slider, playback, pause and replay move the same conserved atom
  assert.match(doc.querySelector('[data-sample-recovery]')!.textContent!,/10 \/ 76 = 13.2%/);
  for(const atom of sampleAtoms.filter(a=>a.order>=0))assert.equal(doc.querySelector(`[data-sample-atom="${atom.order}"]`)!.getAttribute('transform'),`translate(${atom.dx} ${atom.dy})`);
  doc.querySelector<HTMLButtonElement>('[data-sample-replay]')!.click();assert.equal(figure.dataset.collected,'0');assert.equal(figure.dataset.motion,'running');
- callback!(0);callback!(50);assert.equal(figure.dataset.collected,'1');
+ callback!(0);callback!(50);assert.equal(figure.dataset.collected,'0','a moving atom counts only after arrival');
+ assert.notEqual(doc.querySelector('[data-sample-atom="0"]')!.getAttribute('transform'),'translate(0 0)');
+ for(let time=100;time<=600;time+=50)callback!(time);
+ assert.equal(figure.dataset.collected,'1');
  play.click();assert.equal(callback,undefined);assert.equal(figure.dataset.motion,'paused');
  range.value='0';range.dispatchEvent(new win.Event('input'));assert.match(doc.querySelector('[data-sample-purity]')!.textContent!,/undefined/);
  play.click();callback!(0);callback!(50);Object.defineProperty(doc,'hidden',{value:true});doc.dispatchEvent(new win.Event('visibilitychange'));
