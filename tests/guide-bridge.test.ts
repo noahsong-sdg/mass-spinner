@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import {setupGuideReader} from '../src/guide-reader.js';
 import {setupPlaygroundGuide} from '../src/playground-guide.js';
+import {setupPreciseControls} from '../src/precise-controls.js';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
 
 const origin='https://example.org';
@@ -15,7 +16,8 @@ function peer(){
 function app(t:TestContext,capability?:string){
  const dom=new JSDOM('<body><div id="guide"></div></body>',{url:origin});t.after(()=>dom.window.close());
  if(capability)dom.window.sessionStorage.setItem('mass-spinner:guide-capability',capability);
- dom.window.document.body.insertAdjacentHTML('beforeend','<input id="fuel-currentA">');
+ dom.window.document.body.insertAdjacentHTML('beforeend','<div class="control"><label for="fuel-currentA"><span>Radial discharge current</span><output>0.03 A</output></label><input id="fuel-currentA" type="range" min="0" max="0.2" step="0.001" value="0.03" data-unit="A"></div>');
+ setupPreciseControls(dom.window.document);
  const opened:string[]=[];
  const guide=setupPlaygroundGuide({document:dom.window.document,host:dom.window.document.getElementById('guide')!,open:key=>opened.push(key),close(){},focusRelated:key=>opened.push(key)});
  const send=(source:Window,data:Packet,from=origin)=>dom.window.dispatchEvent(new dom.window.MessageEvent('message',{source,data,origin:from}));
@@ -44,6 +46,7 @@ test('reload reconnects only a previously authorized reader, never an unknown sa
  assert.notEqual(reader.packets.at(-1)?.instance,instance,'reload creates a distinct receiver instance');
  reloaded.send(reader.window,{type:'mass-spinner:guide-action',action:'current',requestId:'current-1'});
  assert.equal(reader.packets.at(-1)?.status,'executed');assert.deepEqual(reloaded.opened,['controls']);
+ assert.equal(reloaded.dom.window.document.activeElement?.getAttribute('aria-label'),'Radial discharge current (A)');
  reloaded.send(reader.window,{type:'mass-spinner:guide-hello',capability});
  reloaded.send(reader.window,{type:'mass-spinner:guide-action',action:'current',requestId:'current-1'});
  assert.deepEqual(reloaded.opened,['controls'],'hello and duplicate request cannot repeat an action');

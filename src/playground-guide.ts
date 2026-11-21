@@ -75,6 +75,11 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  function composition(){transient();plot('composition');}
  const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
  const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-burnFraction',controls:null};
+ function editCurrent(){
+  focusRelated('controls','#fuel-currentA');
+  doc.querySelector<HTMLInputElement>('#fuel-currentA')!.closest('.control')!.querySelector('output')!.click();
+  doc.activeElement?.scrollIntoView?.({block:'nearest'});
+ }
  const tutorialPlots:Readonly<Record<string,string>>={spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'};
  const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');
  const pending=(key:string)=>!node('fuel-export')||node('fuel-export').disabled||key==='pin'&&(!pinButton()||pinButton()!.disabled);
@@ -113,7 +118,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='beamLedger'){focusRelated('plots','#fusion-metrics');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();const choice=doc.getElementById('coupled-plot') as HTMLSelectElement;choice.value='source';choice.dispatchEvent(new win.Event('change'));focusRelated('target','#coupled-plot');return;}
   if(!canUseApparatus('centrifuge')){status.textContent='To use these guide controls, select Centrifuge.';return;}
-  if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key))plot(view.plot);focusRelated('controls',controlFocus[key]);return;}
+  if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key))plot(view.plot);if(key==='current')editCurrent();else focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   if(key==='look'){
@@ -132,7 +137,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    plot('spin');power.click();return;
   }
   if(key==='currentExperiment'){
-   set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();focusRelated('controls','#fuel-currentA');
+   set('fuel-motion-mode','transport');set('fuel-motion-time',0,'input');plot('spin');node('fuel-new-run').click();editCurrent();
    set('fuel-view-representation','tracers');set('fuel-view-drive','off');
   }else if(key==='endSpin'){
    endpoint();plot('spin');

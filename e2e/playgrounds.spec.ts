@@ -254,13 +254,14 @@ test('control tutorial changes the existing run through the attached reader',asy
  const reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
- await expect(page.locator('#fuel-currentA')).toBeFocused();await page.locator('#fuel-currentA').press('Home');
+ const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
+ await expect(current).toBeFocused();await expect(current).toHaveValue('0.03');
+ await current.fill('0');await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).click();
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await reader.locator('[data-guide-action="endSpin"]').click();
  const zero=await exported(page);expect(zero.result.config.currentA).toBe(0);expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
  await reader.locator('[data-guide-action="currentExperiment"]').click();
- await page.getByRole('button',{name:'Set the exact value of Radial discharge current',exact:true}).click();
- const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});await current.fill('0.03');await current.press('Enter');
+ await expect(current).toBeFocused();await current.fill('0.03');await current.press('Enter');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});await reader.locator('[data-guide-action="endSpin"]').click();
  const driven=await exported(page);expect(driven.result.config.currentA).toBe(.03);expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
  expect(driven.result.config.durationS).toBe(zero.result.config.durationS);await expect(page.locator('#window-guide')).toBeVisible();

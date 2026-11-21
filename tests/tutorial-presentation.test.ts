@@ -33,3 +33,9 @@ test('prompts separate physical temperature changes, fixed-speed references and 
  assert.match(tutorialPresentation('work')!.note,/does not include all resistive heat and cooling energy/);
  assert.match(tutorialPresentation('density')!.note,/vessel mean.*axis density/);
 });
+
+test('current prompts explain exact entry, application and the time of a change',()=>{
+ assert.match(tutorialPresentation('currentExperiment')!.watch,/amperes \(A\).*Apply.*Play/);
+ assert.match(tutorialPresentation('current')!.watch,/amperes \(A\).*Apply/);
+ assert.match(tutorialPresentation('current')!.note,/selected physical time/);
+});

@@ -172,15 +172,26 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  assert.match(f.node('guide-status').textContent,/select Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
-test('the current tutorial shows gas motion without field overlays and preserves physical inputs',async t=>{
+test('the current tutorial opens exact current entry without changing physical inputs',async t=>{
  const f=fixture(t);await f.start();const host=f.window.document.createElement('div');f.window.document.body.append(host);
  const guide=setupPlaygroundGuide({document:f.window.document,host,open(){},close(){},focusRelated(){}});
+ setupPreciseControls(f.window.document);
  const inputs=JSON.stringify(f.ui.read());
  guide.launch('currentExperiment');await flush();
  assert.equal(f.node('fuel-view-representation').value,'tracers');
  assert.equal(f.node('fuel-view-drive').value,'off');
  assert.equal(f.node('fuel-motion-time').value,'0');
  assert.equal(JSON.stringify(f.ui.read()),inputs);
+ const editor=f.node('fuel-currentA').closest('.control').querySelector('.precise-editor'),input=editor.querySelector('input');
+ assert.equal(editor.hidden,false);assert.equal(f.window.document.activeElement,input);assert.equal(input.value,'0.03');
+ input.value='0.025';editor.querySelector('button').click();await f.ui.run();
+ assert.equal(f.ui.read().currentA,.025);assert.equal(f.ui.latest.result.config.currentA,.025);assert.equal(editor.hidden,true);
+ guide.launch('currentExperiment');await flush();
+ assert.equal(editor.hidden,false);assert.equal(input.value,'0.025');assert.equal(f.window.document.activeElement,input);
+ input.value='0.3';editor.querySelector('button').click();
+ assert.equal(input.getAttribute('aria-invalid'),'true');assert.equal(f.ui.read().currentA,.025);
+ input.value='0';editor.querySelector('button').click();await f.ui.run();
+ assert.equal(f.ui.latest.result.transport.snapshots.at(-1).neutralRadS,0);
 });
 
 test('reading links use accepted physics results and focus the real collision, drag and heat controls',async t=>{
