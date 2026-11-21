@@ -28,6 +28,9 @@ test('03–06 are self-contained readers with rendered math, diagrams, valid con
   }
   for(const link of doc.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(link.dataset.guideAction!));assert.equal(new URL(link.href).searchParams.get('try'),link.dataset.guideAction);
+   assert.equal(link.target,'_top','before the reader starts, an action must not open a simulator inside the frame');
+   const section=[...doc.querySelectorAll('h2[id]')].filter(heading=>heading.compareDocumentPosition(link)&dom.window.Node.DOCUMENT_POSITION_FOLLOWING).at(-1)!;
+   assert.equal(new URL(link.href).searchParams.get('lesson'),`/tutorial-${tutorial.number}.html#${section.id}`);
    const instruction=link.closest('p,li')!;assert.ok(instruction,'actions belong to their motivating instructions');
    assert.equal(instruction.querySelectorAll('[data-guide-action]').length,1,'introduce only one action in an instruction');
   }

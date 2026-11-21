@@ -176,7 +176,9 @@ test('standalone reading retains ordinary links and does not impersonate an embe
  const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
  setupGuideReader(dom.window);assert.equal(dom.window.document.body.classList.contains('embedded'),false);
  assert.ok(dom.window.document.querySelector('.guide-contents a[href="#composition"]'));assert.equal(dom.window.document.querySelector('#guide-chapter'),null);
- assert.ok(dom.window.document.querySelector('a[href="/?level=2&guide=physics&topic=momentum&try=spin"]'));
+ const link=dom.window.document.querySelector<HTMLAnchorElement>('a[data-guide-action="spin"]')!;
+ assert.equal(new URL(link.href).searchParams.get('lesson'),'/guide.html#momentum');
+ assert.equal(link.target,'_top');
 });
 
 test('the rotation chapter motivates one drive-and-coast experiment instead of emitting a shortcut bank',t=>{
@@ -205,7 +207,9 @@ test('only explicitly authored, allowlisted local actions become simulator links
  const dom=new JSDOM(understandingPage(source,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('[data-guide-action]').length,1);
  const link=doc.querySelector<HTMLAnchorElement>('[data-guide-action]')!;
- assert.equal(link.dataset.guideAction,'spin');assert.equal(link.getAttribute('href'),'/?level=2&try=spin');assert.equal(link.hasAttribute('target'),false);
+ assert.equal(link.dataset.guideAction,'spin');assert.equal(link.target,'_top');
+ const target=new URL(link.href,'https://example.org');
+ assert.equal(target.searchParams.get('try'),'spin');assert.equal(target.searchParams.get('lesson'),'/guide.html#momentum');
  assert.equal(doc.getElementById('momentum')!.nextElementSibling!.textContent,'First explain torque.');
  for(const href of ['/?level=2&try=notAnAction','/?level=3&try=spin','/?level=2'])assert.throws(()=>understandingPage(`[Go](${href})`,revision),/Unknown guide action/);
 });

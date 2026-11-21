@@ -4,13 +4,32 @@ async function readerFrame(page:Page){
  await expect(page.locator('#window-guide')).toBeVisible();
  const iframe=await page.locator('#physics-guide-frame').elementHandle(),frame=await iframe!.contentFrame();
  if(!frame)throw new Error('Missing simulator tutorial frame.');
- await expect(frame.locator('h1')).toBeVisible();return frame;
+ await expect(frame.locator('h1')).toBeVisible();await expect(frame.locator('body')).toHaveClass(/embedded/);return frame;
 }
 
 async function reader(page:Page){
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  return readerFrame(page);
 }
+
+test('an action used before the reader script starts cannot nest the simulator',async({page})=>{
+ await page.route('**/guide-reader.js',route=>route.abort());
+ for(const [route,action,section]of [['/start.html','look','machine'],['/tutorial-06.html','diffusionExperiment','sensitivity']]){
+  await page.goto(`/?level=2&lesson=${encodeURIComponent(route)}`);
+  const frame=page.frameLocator('#physics-guide-frame');
+  await expect(frame.locator('h1')).toBeVisible();await expect(frame.locator('body')).not.toHaveClass(/embedded/);
+  await frame.locator(`[data-guide-action="${action}"]`).click();
+  await expect(page).toHaveURL(url=>url.searchParams.get('try')===action&&url.searchParams.get('lesson')===`${route}#${section}`);
+  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+  await expect(page.locator('#window-guide')).toBeVisible();
+  await expect(page.frameLocator('#physics-guide-frame').locator('h1')).toHaveText(route==='/start.html'?'Tutorial 1 · Using the simulator':'Tutorial 6 · Model accuracy');
+  if(action==='look'){
+   await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('#fuel-view-drive')).toHaveValue('all');
+  }else{
+   await expect(page.locator('#fuel-plot')).toHaveValue('separation');await expect(page.locator('#window-controls')).toBeVisible();
+  }
+ }
+});
 
 test('a fresh temperature comparison explains zero rotation and follows the selected rotating state',async({page})=>{
  await page.goto('/?level=2&try=temperature&lesson=/start.html%23competition');

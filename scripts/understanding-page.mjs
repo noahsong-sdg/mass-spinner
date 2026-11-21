@@ -16,6 +16,7 @@ export function understandingPage(markdown,revision,tutorial){
  const topics=tutorial?.topics??guideTopics;
  const title=tutorial?`Tutorial ${Number(tutorial.number)} · ${tutorial.title}`:'Tutorial 2 · Rotation and separation';
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
+ let section='';
  const sourceBase=releaseSourceBase(revision)+'docs/';
  const diagrams=new Set(topics.flatMap(topic=>topic.diagram?[topic.diagram]:[])),usedDiagrams=new Set();
  const baseRenderer=new Renderer();
@@ -31,9 +32,10 @@ export function understandingPage(markdown,revision,tutorial){
   link({href,tokens}){
    const label=this.parser.parseInline(tokens);
    if(href.startsWith('/?')){
-    const params=new URL(href,'https://mass-spinner.invalid').searchParams,action=params.get('try');
+    const target=new URL(href,'https://mass-spinner.invalid'),params=target.searchParams,action=params.get('try');
     if(params.get('level')!=='2'||!action||!guideActions.has(action))throw new Error(`Unknown guide action: ${href}`);
-    return `<a data-guide-action="${action}" href="${escape(href)}">${label}</a>`;
+    params.set('lesson',ownPath+(section?`#${section}`:''));
+    return `<a data-guide-action="${action}" target="_top" href="${escape(target.pathname+target.search)}">${label}</a>`;
    }
    const part=href.match(/^UNDERSTANDING-MASS-SPINNER-(0[2-6])\.md(#[\w-]+)?$/);
    if(part)return `<a href="${part[1]==='02'?'/guide.html':`/tutorial-${part[1]}.html`}${part[2]??''}">${label}</a>`;
@@ -45,6 +47,7 @@ export function understandingPage(markdown,revision,tutorial){
   },
   heading({tokens,depth}){
    const text=tokens.map(token=>token.raw).join(''),topic=topics.find(topic=>topic.heading===text);
+   if(depth===2)section=topic?.id??'';
    const heading=`<h${depth}${topic?` id="${topic.id}"`:''}>${this.parser.parseInline(tokens)}</h${depth}>`;
    return heading+(depth===1?guideContents(topics.map(topic=>[topic.id,topic.heading.replace(/^\d\. /,'')])):'');
   },
@@ -52,6 +55,6 @@ export function understandingPage(markdown,revision,tutorial){
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
  <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
- <header><a href="/?level=2" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Open separate page ↗</a></header>
+ <header><a href="/?level=2" target="_top" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Open separate page ↗</a></header>
 <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/learn.html">Docs & tutorials</a></footer></body></html>`;
 }

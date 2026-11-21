@@ -48,6 +48,8 @@ test('standalone walkthrough motivates each experiment before instructions and i
   for(const link of step.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(link.dataset.guideAction!)||['coils','controls'].includes(link.dataset.guideAction!));
    assert.equal(new URL(link.href).searchParams.get('try'),link.dataset.guideAction);
+   assert.equal(link.target,'_top');
+   assert.equal(new URL(link.href).searchParams.get('lesson'),`/start.html#${step.querySelector('h2')!.id}`);
   }
  }
  assert.match(doc.querySelector('#current')!.parentElement!.textContent!,/0 A.*0.03 A/);

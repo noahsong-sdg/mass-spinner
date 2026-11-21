@@ -268,3 +268,16 @@ They also check zero-speed overlap, feed references, diagram order, valid marker
 Workspace tests, all four typecheck commands, lint and build passed in safe-dev.
 The build retains its existing large-chunk warning.
 Full CI and live verification are recorded separately after deployment.
+
+## Additional live finding: reader load order
+
+Live checks found that a question can be visible before the reader module starts.
+An action used in this interval followed normal navigation inside the frame.
+This loaded a second simulator. The same action worked after the reader started.
+
+Generated simulator links now target the top page before script interception.
+Tutorial actions also carry their page and section in the URL.
+Thus, an early action opens the simulator and retains its tutorial context.
+After the reader starts, its existing message path preserves the current run.
+No new message authorization or action is added.
+A browser regression test blocks the reader module and checks this path.
