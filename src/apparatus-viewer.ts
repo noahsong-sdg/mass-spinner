@@ -120,6 +120,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function finishAssembly(){
   assembly?.apply(assemblyAmount=assemblyTarget);
+  if(renderer.shadowMap)renderer.shadowMap.needsUpdate=true;
   canvas.setAttribute('data-assembly-state',assemblyTarget?'exploded':'assembled');
   if(!assemblyTarget){assembly=null;assemblyBar.hidden=true;select(selectedComponent);fit();reset();refreshReactor();}
   render();
@@ -127,7 +128,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function explode(id:string|null){
   if(!root||disposed)return;
   if(id){
-   assembly??=createAssemblyLayout(root);if(!assembly.has(id)){if(!assemblyTarget)assembly=null;return;}
+   assembly??=createAssemblyLayout(root);if(!assembly.has(id)){if(assemblyTarget)explode(null);else assembly=null;return;}
    assemblyLabel.textContent='Exploded view · display only';assemblyBar.hidden=false;
    canvas.setAttribute('data-assembly-component',id);
    const alreadyOpen=assemblyTarget===1;assemblyTarget=1;select(id);if(alreadyOpen)return;

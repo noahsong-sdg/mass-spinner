@@ -70,7 +70,8 @@ test('selection animates separation, switches parts without drift, and assembles
 test('reduced motion separates and restores hardware without animation callbacks',async t=>{
  const f=fixture(t,true),position=f.coils.position.clone();await f.viewer.load({model:'assembly'});
  f.viewer.explode('coils');assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'exploded');assert.equal(f.frames.size,0);
- f.viewer.explode(null);assert.deepEqual(f.coils.position,position);assert.equal(f.gas.layers.mask,3);
+ f.viewer.select('slice');f.viewer.explode('slice');assert.deepEqual(f.coils.position,position);assert.equal(f.gas.layers.mask,3);
+ assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'assembled','a numerical view restores assembled hardware');
 });
 
 test('interrupted transitions, reload and disposal restore hardware without late callbacks',async t=>{
