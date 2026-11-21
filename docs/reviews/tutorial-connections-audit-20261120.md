@@ -281,3 +281,16 @@ Thus, an early action opens the simulator and retains its tutorial context.
 After the reader starts, its existing message path preserves the current run.
 No new message authorization or action is added.
 A browser regression test blocks the reader module and checks this path.
+
+## Additional browser finding: repeated initialization draws
+
+The phone trace showed a reactor-to-centrifuge action that completed after its five-second check.
+The delay coincided with the first reactor mesh load. The trace does not contain a CPU profile.
+Thus, shader compilation as its cause remains an inference.
+
+Source review did establish redundant GPU draws during one viewer initialization.
+Camera setup, surface setup and reactor setup each requested a draw.
+The viewer now holds these intermediate draws and draws the complete scene once.
+Ordinary camera actions remain synchronous. Exception cleanup releases the hold.
+The 43 focused viewer, reactor-motion and apparatus tests passed in safe-dev.
+The browser test keeps its existing time limit. Its next result is a separate verification gate.

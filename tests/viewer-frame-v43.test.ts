@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {createApparatusViewer,screenSpacePointHit} from '../src/apparatus-viewer.js';
+import {createApparatusViewer,screenSpacePointHit,type ApparatusViewer} from '../src/apparatus-viewer.js';
 
 const snapshot=()=>({model:'rotating',domain:{kind:'cylinder',radiusM:.2,lengthM:1},timeS:0,
  fields:[{id:'electric-radial',coordinate:'radius',positionsM:[0,.1,.2],values:[0,1,2],domain:[0,2],unit:'V/m',label:'E',scope:'Prescribed field'}],
  counts:[],scalars:[],unsupported:[],impacts:[],tracks:[]});
-async function fixture(t:any,options:any={}){
+async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)=>void){
  const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
  let hidden=false,rafId=0;const frames=new Map<number,FrameRequestCallback>();
  Object.defineProperty(dom.window.document,'hidden',{get:()=>hidden});
@@ -27,6 +27,7 @@ async function fixture(t:any,options:any={}){
   }});
  t.after(()=>{viewer.dispose();dom.window.close();(globalThis as any).ResizeObserver=previous;});
  viewer.canvas.getBoundingClientRect=bounds;
+ beforeLoad?.(viewer);
  await viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
  return {dom,frame,viewer,selected,representations,history,reference,frames,
   step(now:number){const callbacks=[...frames.values()];frames.clear();for(const fn of callbacks)fn(now);},visibility(value:boolean){hidden=value;dom.window.document.dispatchEvent(new dom.window.Event('visibilitychange'));},
@@ -97,6 +98,26 @@ test('camera synchronization uses SI vectors without echoing updates and clippin
  assert.ok(new THREE.Vector3(...h.viewer.cameraPose().position).distanceTo(new THREE.Vector3(...pose.position))<1e-12);assert.deepEqual(h.viewer.cameraPose().target,pose.target);assert.equal(cameras.length,before);
  h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));assert.ok(cameras.length>before);
  h.click(500,300);assert.deepEqual(h.selected,[]);
+});
+test('loading draws once after the final camera pose is set',async t=>{
+ const h=await fixture(t);
+ assert.equal(h.renders,1);
+ assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+test('loading draws the accepted surface without an intermediate reference frame',async t=>{
+ const h=await fixture(t,{},viewer=>viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1}));
+ assert.equal(h.renders,1);
+ assert.equal(h.reference.visible,false);
+ assert.ok(h.scene.getObjectByName('SI engineering assembly'));
+ assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+test('failed initialization releases the draw hold before a retry',async t=>{
+ const h=await fixture(t);h.reference.clear();
+ assert.equal(await h.viewer.load({model:'empty.glb'}),false);
+ h.reference.add(new THREE.Mesh(new THREE.BoxGeometry(1,.18,.18),new THREE.MeshStandardMaterial()));
+ const before=h.renders;
+ assert.equal(await h.viewer.load({model:'retry.glb'}),true);
+ assert.equal(h.renders-before,1);
 });
 test('internal camera transactions draw once after OrbitControls has applied the final pose',async t=>{
  const h=await fixture(t);

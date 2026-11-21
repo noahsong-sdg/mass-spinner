@@ -102,7 +102,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const camera=new THREE.PerspectiveCamera(35,1,.001,1000);let controls=controlsFactory(camera,canvas);
  controls.enableDamping=false;
  let root:THREE.Object3D|null=null,referenceRoot:THREE.Object3D|null=null,generation=0,disposed=false,asset:ViewerAsset|null=null,pointer:{id:number;x:number;y:number}|null=null,highlights:[THREE.Mesh,THREE.Material|THREE.Material[],THREE.Material[]][]=[],accepted:{packet:SurfaceState;settings:SurfaceSettings}|null=null;
- let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown;
+ let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown,initializing=false;
  const win=doc.defaultView!;
  function cameraPose():CameraPose{return {position:camera.position.toArray(),target:controls.target.toArray(),up:camera.up.toArray()};}
  let settingCamera=false,dragging:number|null=null,pristineCamera=true;
@@ -131,7 +131,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    status:acceptedRoot?accepted?.packet.status??'reference':loadStatus,...(acceptedRoot?stateLayer.representation:{layer:'reference',numerical:false})};
   const key=JSON.stringify(representation);if(key!==representationKey){representationKey=key;onRepresentation(representation);}
  }
- function render(){if(!disposed&&root){
+ function render(){if(!disposed&&!initializing&&root){
   if(root.userData.shadowRevision!==shadowRevision){shadowRevision=root.userData.shadowRevision;updateShadows();}
   renderer.render(scene,camera);reportRepresentation();
  }}
@@ -268,9 +268,14 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   try{
    const gltf=await loader.loadAsync(next.model);
    if(disposed||token!==generation){release(gltf.scene);return false;}
-   root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();status.textContent='';settingCamera=true;resize();reset();settingCamera=false;
-   if(accepted)updateSurfaceState(accepted.packet,accepted.settings);
-   refreshReactor();
+   initializing=true;
+   try{
+    root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();status.textContent='';settingCamera=true;
+    try{resize();reset();}finally{settingCamera=false;}
+    if(accepted)updateSurfaceState(accepted.packet,accepted.settings);
+    refreshReactor();
+   }finally{initializing=false;}
+   render();
    if(preserveOwnership)pristineCamera=previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
