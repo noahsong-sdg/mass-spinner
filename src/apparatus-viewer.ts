@@ -19,6 +19,7 @@ export interface ViewerControls {
 }
 export interface ViewerRenderer {
  localClippingEnabled?:boolean;shadowMap?:{needsUpdate:boolean};
+ compileAsync?(scene:THREE.Scene,camera:THREE.PerspectiveCamera):Promise<unknown>;
  render(scene:THREE.Scene,camera:THREE.PerspectiveCamera):void;clear():void;setSize(width:number,height:number,updateStyle?:boolean):void;
 }
 export interface DisplayAdapter {renderer:ViewerRenderer;environment?:THREE.Texture;dispose():void}
@@ -102,7 +103,8 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  const camera=new THREE.PerspectiveCamera(35,1,.001,1000);let controls=controlsFactory(camera,canvas);
  controls.enableDamping=false;
  let root:THREE.Object3D|null=null,referenceRoot:THREE.Object3D|null=null,generation=0,disposed=false,asset:ViewerAsset|null=null,pointer:{id:number;x:number;y:number}|null=null,highlights:[THREE.Mesh,THREE.Material|THREE.Material[],THREE.Material[]][]=[],accepted:{packet:SurfaceState;settings:SurfaceSettings}|null=null;
- let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown,initializing=false;
+ let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown;
+ let preparingGeneration:number|null=null,preparationChanged=false;
  const win=doc.defaultView!;
  function cameraPose():CameraPose{return {position:camera.position.toArray(),target:controls.target.toArray(),up:camera.up.toArray()};}
  let settingCamera=false,dragging:number|null=null,pristineCamera=true;
@@ -116,10 +118,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function setAnimation(callback:((dt:number)=>void)|null){
   if(animationFrame!==null)win.cancelAnimationFrame(animationFrame);
   animationFrame=null;lastFrame=null;animation=disposed?null:callback;
-  if(animation&&!doc.hidden)animationFrame=win.requestAnimationFrame(tick);
+  if(animation&&!doc.hidden&&preparingGeneration===null)animationFrame=win.requestAnimationFrame(tick);
  }
  function tick(now:number){
-  animationFrame=null;if(!animation||disposed||doc.hidden)return;
+  animationFrame=null;if(!animation||disposed||doc.hidden||preparingGeneration!==null)return;
   const callback=animation,dt=lastFrame===null?0:(now-lastFrame)/1000;lastFrame=now;
   callback(dt);render();
   if(animation===callback)animationFrame=win.requestAnimationFrame(tick);
@@ -131,7 +133,9 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    status:acceptedRoot?accepted?.packet.status??'reference':loadStatus,...(acceptedRoot?stateLayer.representation:{layer:'reference',numerical:false})};
   const key=JSON.stringify(representation);if(key!==representationKey){representationKey=key;onRepresentation(representation);}
  }
- function render(){if(!disposed&&!initializing&&root){
+ function render(){
+  if(preparingGeneration!==null){preparationChanged=true;return;}
+  if(!disposed&&root){
   if(root.userData.shadowRevision!==shadowRevision){shadowRevision=root.userData.shadowRevision;updateShadows();}
   renderer.render(scene,camera);reportRepresentation();
  }}
@@ -268,18 +272,22 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   try{
    const gltf=await loader.loadAsync(next.model);
    if(disposed||token!==generation){release(gltf.scene);return false;}
-   initializing=true;
+   preparingGeneration=token;
    try{
-    root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();status.textContent='';settingCamera=true;
+    root=referenceRoot=gltf.scene;loadStatus='reference';fit();scene.add(root);describeScale();settingCamera=true;
     try{resize();reset();}finally{settingCamera=false;}
     if(accepted)updateSurfaceState(accepted.packet,accepted.settings);
     refreshReactor();
-   }finally{initializing=false;}
-   render();
-   if(preserveOwnership)pristineCamera=previousOwnership;return true;
+    if(renderer.compileAsync)do{
+     preparationChanged=false;await renderer.compileAsync(scene,camera);
+     if(disposed||token!==generation)return false;
+    }while(preparationChanged);
+   }finally{if(preparingGeneration===token)preparingGeneration=null;}
+   status.textContent='';render();setAnimation(animation);
+   if(preserveOwnership)pristineCamera=pristineCamera&&previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
-   scaleNote.hidden=true;
+   setAnimation(null);scaleNote.hidden=true;
    if(referenceRoot){clearSelection();release(referenceRoot);root=referenceRoot=null;}loadStatus='error';reportRepresentation();status.textContent='3D unavailable';onError(error);return false;
   }
  }

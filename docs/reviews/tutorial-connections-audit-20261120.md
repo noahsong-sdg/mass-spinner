@@ -294,3 +294,31 @@ The viewer now holds these intermediate draws and draws the complete scene once.
 Ordinary camera actions remain synchronous. Exception cleanup releases the hold.
 The 43 focused viewer, reactor-motion and apparatus tests passed in safe-dev.
 The browser test keeps its existing time limit. Its next result is a separate verification gate.
+
+## Measured browser delay
+
+The complete d7b887c source check passed 1,639 TypeScript tests and 28 Python tests.
+Its desktop and phone browser checks failed the new early-reader test.
+That test incorrectly required an automatic result after an experiment opened during calculation.
+The existing contract keeps controls available. Its result button waits for acceptance.
+The corrected test checks that button, the resulting plot, top-level navigation and tutorial context.
+
+The desktop run also exceeded the existing reactor-to-centrifuge action time limit.
+A temporary diagnostic used the same immutable runtime, locked dependencies, Chromium settings and resource limits.
+CPU profiles showed native WebGL synchronization during model initialization.
+Desktop shader-log queries blocked for about 4.7 s. A canvas resize blocked for about 3.0 s.
+Phone profiles showed the same call sites. The full desktop container recorded no memory-limit or out-of-memory event.
+These measurements identify blocking calls, not the duration of each queued GPU operation.
+They do not implicate the physics calculation or tutorial authorization checks.
+
+The temporary workflow and profiler are removed after evidence collection.
+The ordinary browser tests retain their original assertions and time limits.
+
+The viewer now uses Three.js asynchronous shader preparation before its first draw.
+Scene or camera changes during preparation trigger another preparation pass.
+A generation token prevents an obsolete load from drawing or releasing a replacement load.
+Disposal and shader failure prevent animation restart. A failed load can be retried.
+This keeps the existing renderer and shader diagnostics. It adds no timer or retry policy.
+Three.js does not prepare classic depth-shadow shaders through this method.
+The existing browser time limits remain the test for residual first-draw delays.
+An independent source review found no blocking lifecycle issue.

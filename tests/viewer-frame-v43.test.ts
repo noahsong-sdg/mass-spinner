@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {createApparatusViewer,screenSpacePointHit,type ApparatusViewer} from '../src/apparatus-viewer.js';
+import {createApparatusViewer,screenSpacePointHit,type ApparatusViewer,type ViewerRenderer} from '../src/apparatus-viewer.js';
 
 const snapshot=()=>({model:'rotating',domain:{kind:'cylinder',radiusM:.2,lengthM:1},timeS:0,
  fields:[{id:'electric-radial',coordinate:'radius',positionsM:[0,.1,.2],values:[0,1,2],domain:[0,2],unit:'V/m',label:'E',scope:'Prescribed field'}],
  counts:[],scalars:[],unsupported:[],impacts:[],tracks:[]});
-async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)=>void){
+async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)=>void,preparation?:{compileAsync:NonNullable<ViewerRenderer['compileAsync']>;defer:boolean}){
  const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
  let hidden=false,rafId=0;const frames=new Map<number,FrameRequestCallback>();
  Object.defineProperty(dom.window.document,'hidden',{get:()=>hidden});
@@ -20,7 +20,7 @@ async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)
  const reference=new THREE.Group(),body=new THREE.Mesh(new THREE.BoxGeometry(1,.18,.18),new THREE.MeshStandardMaterial());
  body.userData.componentId='vessel';reference.add(body);
  const viewer=createApparatusViewer(frame,{...options,loader:{loadAsync:async()=>({scene:reference})},onSelect:(id:string)=>selected.push(id),onRepresentation:(v:any)=>representations.push(v),
-  displayFactory:()=>({renderer:{render(s:THREE.Scene,c:THREE.PerspectiveCamera){renders++;scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();renderedCamera=[...c.matrixWorld.elements,...c.projectionMatrix.elements];},clear(){},setSize(){}},dispose(){}}),
+  displayFactory:()=>({renderer:{compileAsync:preparation?.compileAsync,render(s:THREE.Scene,c:THREE.PerspectiveCamera){renders++;scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();renderedCamera=[...c.matrixWorld.elements,...c.projectionMatrix.elements];},clear(){},setSize(){}},dispose(){}}),
   controlsFactory:(c:THREE.PerspectiveCamera,canvas:HTMLCanvasElement)=>{
    canvas.setPointerCapture=()=>{};canvas.releasePointerCapture=()=>{};
    camera=c;controls=new OrbitControls(c,canvas);history.push(controls);return controls;
@@ -28,8 +28,9 @@ async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)
  t.after(()=>{viewer.dispose();dom.window.close();(globalThis as any).ResizeObserver=previous;});
  viewer.canvas.getBoundingClientRect=bounds;
  beforeLoad?.(viewer);
- await viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
- return {dom,frame,viewer,selected,representations,history,reference,frames,
+ const loading=viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
+ if(!preparation?.defer)await loading;
+ return {dom,frame,viewer,loading,selected,representations,history,reference,frames,
   step(now:number){const callbacks=[...frames.values()];frames.clear();for(const fn of callbacks)fn(now);},visibility(value:boolean){hidden=value;dom.window.document.dispatchEvent(new dom.window.Event('visibilitychange'));},
   get scene(){return scene!;},get camera(){return camera!;},get controls(){return controls!;},get renders(){return renders;},get renderedCamera(){return renderedCamera;},
   resize(width:number,height:number){size={width,height};viewer.resize();},click(x:number,y:number){
@@ -118,6 +119,45 @@ test('failed initialization releases the draw hold before a retry',async t=>{
  const before=h.renders;
  assert.equal(await h.viewer.load({model:'retry.glb'}),true);
  assert.equal(h.renders-before,1);
+});
+function deferredCompilation(){
+ const pending:{resolve:()=>void;reject:(error:Error)=>void}[]=[];
+ return {pending,defer:true,compileAsync:()=>new Promise<void>((resolve,reject)=>pending.push({resolve,reject}))};
+}
+test('shader preparation keeps new surfaces and camera inputs, with no early draw or animation',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ assert.equal(preparation.pending.length,1);assert.equal(h.renders,0);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'Loading 3D…');
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
+ const pose={position:[.5,1,.6] as [number,number,number],target:[.02,0,0] as [number,number,number]};h.viewer.setCamera(pose);
+ h.viewer.setAnimation(()=>{});assert.equal(h.frames.size,0);assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();await Promise.resolve();
+ assert.equal(preparation.pending.length,1,'changed surfaces need preparation before their first draw');assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();assert.equal(await h.loading,true);
+ assert.equal(h.renders,1);assert.equal(h.frames.size,1);assert.equal(h.reference.visible,false);
+ assert.ok(new THREE.Vector3(...h.viewer.cameraPose().position).distanceTo(new THREE.Vector3(...pose.position))<1e-12);assert.deepEqual(h.viewer.cameraPose().target,pose.target);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'');
+});
+test('obsolete shader preparation cannot draw or release a replacement load',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ const replacement=h.viewer.load({model:'replacement.glb'});await Promise.resolve();
+ assert.equal(preparation.pending.length,2);preparation.pending.shift()!.resolve();assert.equal(await h.loading,false);
+ h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]});assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();await Promise.resolve();assert.equal(preparation.pending.length,1);
+ preparation.pending.shift()!.resolve();assert.equal(await replacement,true);assert.equal(h.renders,1);
+});
+test('disposal during shader preparation cannot draw or restart animation',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ h.viewer.setAnimation(()=>{});h.viewer.dispose();preparation.pending.shift()!.resolve();
+ assert.equal(await h.loading,false);assert.equal(h.renders,0);assert.equal(h.frames.size,0);assert.equal(h.frame.children.length,0);
+});
+test('shader preparation failure reports an error and permits retry',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ h.viewer.setAnimation(()=>{});preparation.pending.shift()!.reject(new Error('Shader preparation failed'));
+ assert.equal(await h.loading,false);assert.equal(h.renders,0);assert.equal(h.frames.size,0);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'3D unavailable');
+ const retry=h.viewer.load({model:'retry.glb'});await Promise.resolve();preparation.pending.shift()!.resolve();
+ assert.equal(await retry,true);assert.equal(h.renders,1);
 });
 test('internal camera transactions draw once after OrbitControls has applied the final pose',async t=>{
  const h=await fixture(t);
