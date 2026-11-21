@@ -6,6 +6,7 @@ import {createSurfaceLayer, type SurfaceSettings} from './surface-layer.js';
 import type {SurfaceState} from './surface-state.js';
 import {createReactorMotionLayer} from './reactor-motion-layer.js';
 import type {ReactorMotionState} from './reactor-motion.js';
+import {createAssemblyLayout} from './assembly-layout.js';
 
 export type CameraVector=[number,number,number];
 export interface CameraPose {position:CameraVector;target:CameraVector;up?:CameraVector}
@@ -38,6 +39,7 @@ export interface ApparatusViewerOptions<Model=string> {
 export interface ApparatusViewer<Model=unknown> {
  canvas:HTMLCanvasElement;load(asset:ViewerAsset<Model>,options?:{preserveOwnership?:boolean}):Promise<boolean>;
  select(id:string|null):void;focus(id:string,options?:{animate?:boolean}):void;reset():void;resize():void;refresh():void;
+ explode(id:string|null):void;
  setAnimation(callback:((dt:number)=>void)|null):void;cameraPose():CameraPose;
  updateReactorState(value:ReactorMotionState|null):void;setActive(value:boolean):void;
  setCamera(pose:CameraPose|null|undefined,options?:{preserveOwnership?:boolean}):void;
@@ -106,6 +108,47 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown;
  let preparingGeneration:number|null=null,preparationChanged=false;
  const win=doc.defaultView!;
+ const assemblyBar=doc.createElement('div'),assemblyLabel=doc.createElement('span'),assemble=doc.createElement('button');
+ assemblyBar.className='assembly-view';assemblyBar.hidden=true;assemblyLabel.setAttribute('role','status');
+ assemble.type='button';assemble.textContent='Assemble';assemblyBar.append(assemblyLabel,assemble);frame.append(assemblyBar);
+ let assembly:ReturnType<typeof createAssemblyLayout>|null=null,assemblyFrame:number|null=null,assemblyAmount=0,assemblyTarget=0,selectedComponent:string|null=null;
+ const reducedAssemblyMotion=win?.matchMedia?.('(prefers-reduced-motion: reduce)');
+ function stopAssembly(){if(assemblyFrame!==null)win.cancelAnimationFrame(assemblyFrame);assemblyFrame=null;}
+ function clearAssembly(){
+  stopAssembly();assembly?.apply(0);assembly=null;assemblyAmount=assemblyTarget=0;assemblyBar.hidden=true;
+  canvas.setAttribute('data-assembly-state','assembled');canvas.removeAttribute?.('data-assembly-component');
+ }
+ function finishAssembly(){
+  assembly?.apply(assemblyAmount=assemblyTarget);
+  canvas.setAttribute('data-assembly-state',assemblyTarget?'exploded':'assembled');
+  if(!assemblyTarget){assembly=null;assemblyBar.hidden=true;select(selectedComponent);fit();reset();refreshReactor();}
+  render();
+ }
+ function explode(id:string|null){
+  if(!root||disposed)return;
+  if(id){
+   assembly??=createAssemblyLayout(root);if(!assembly.has(id)){if(!assemblyTarget)assembly=null;return;}
+   assemblyLabel.textContent='Exploded view · display only';assemblyBar.hidden=false;
+   canvas.setAttribute('data-assembly-component',id);
+   const alreadyOpen=assemblyTarget===1;assemblyTarget=1;select(id);if(alreadyOpen)return;
+   // Frame the final bounds before parts move, so the outer parts stay in view.
+   fit(assembly.bounds);reset();
+  }else{if(!assembly)return;assemblyTarget=0;canvas.removeAttribute?.('data-assembly-component');}
+  stopAssembly();canvas.setAttribute('data-assembly-state',assemblyTarget?'separating':'assembling');
+  if(reducedAssemblyMotion?.matches){finishAssembly();return;}
+  const from=assemblyAmount;let started:number|undefined;
+  function step(now:number){
+   assemblyFrame=null;if(disposed||!assembly)return;started??=now;
+   const t=Math.min(1,(now-started)/(assemblyTarget?450:320)),ease=1-(1-t)**4;
+   assembly.apply(assemblyAmount=from+(assemblyTarget-from)*ease);
+   if(renderer.shadowMap)renderer.shadowMap.needsUpdate=true;
+   if(t===1)finishAssembly();else{render();assemblyFrame=win.requestAnimationFrame(step);}
+  }
+  assemblyFrame=win.requestAnimationFrame(step);
+ }
+ assemble.addEventListener('click',()=>explode(null));
+ const settleAssembly=()=>{if(assemblyFrame!==null){stopAssembly();finishAssembly();}};
+ reducedAssemblyMotion?.addEventListener?.('change',settleAssembly);
  function cameraPose():CameraPose{return {position:camera.position.toArray(),target:controls.target.toArray(),up:camera.up.toArray()};}
  let settingCamera=false,dragging:number|null=null,pristineCamera=true;
  function cameraChanged(){if(settingCamera)return;render();pristineCamera=false;onCamera(cameraPose());}
@@ -126,7 +169,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   callback(dt);render();
   if(animation===callback)animationFrame=win.requestAnimationFrame(tick);
  }
- const visibility=()=>{if(doc.hidden)stopFlight();setAnimation(animation);};doc.addEventListener('visibilitychange',visibility);
+ const visibility=()=>{if(doc.hidden){stopFlight();settleAssembly();}setAnimation(animation);};doc.addEventListener('visibilitychange',visibility);
  const center=new THREE.Vector3(),modelBounds=new THREE.Box3();let radius=1,representationKey='',loadStatus='reference';
  function reportRepresentation(){
   const acceptedRoot=root===stateLayer.group,representation:ViewerRepresentation={geometry:root?acceptedRoot?'accepted':'reference':'none',
@@ -136,6 +179,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function render(){
   if(preparingGeneration!==null){preparationChanged=true;return;}
   if(!disposed&&root){
+  if(assembly&&reactorLayer)reactorLayer.group.visible=false;
   if(root.userData.shadowRevision!==shadowRevision){shadowRevision=root.userData.shadowRevision;updateShadows();}
   renderer.render(scene,camera);reportRepresentation();
  }}
@@ -153,8 +197,8 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!root||!asset?.scaleLabel;}
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
- function fit(){
-  root!.updateWorldMatrix(true,true);const bounds=modelBounds.setFromObject(root!);
+ function fit(expanded?:THREE.Box3){
+  root!.updateWorldMatrix(true,true);const bounds=expanded?modelBounds.copy(expanded):modelBounds.setFromObject(root!);
   radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
   if(!Number.isFinite(radius)||radius<=0)throw new Error('3D model has no finite geometry.');
   bounds.getCenter(center);radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
@@ -171,6 +215,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function updateSurfaceState(packet:SurfaceState|null|undefined,settings:SurfaceSettings={}){
   if(disposed)return;accepted=packet?{packet,settings}:null;
+  clearAssembly();
   const previousRoot=root;
   clearSelection();const changed=stateLayer.update(packet,settings);
   if(!referenceRoot)return;
@@ -255,10 +300,15 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  function clearSelection(){for(const [mesh,original,selected]of highlights){mesh.material=original;for(const material of selected)material.dispose();}highlights=[];}
  function select(id:string|null){
+  if(id===null){const wasExploded=!!assembly;clearAssembly();if(wasExploded){fit();reset();}refreshReactor();}
+  selectedComponent=id;
   clearSelection();root?.traverse(mesh=>{
-   if(!isMesh(mesh)||componentId(mesh)!==id)return;
+   if(!isMesh(mesh))return;const chosen=componentId(mesh)===id;if(!chosen&&!assemblyTarget)return;
    const original=mesh.material,selected=(Array.isArray(original)?original:[original]).map(material=>{
-    const copy=material.clone() as THREE.Material & {emissive?:THREE.Color;emissiveIntensity?:number};copy.emissive?.setHex(0x986033);copy.emissiveIntensity=.45;return copy;
+    const copy=material.clone() as THREE.Material & {color?:THREE.Color;emissive?:THREE.Color;emissiveIntensity?:number};
+    if(chosen){copy.emissive?.setHex(0x986033);copy.emissiveIntensity=.7;if(assemblyTarget){copy.opacity=1;copy.transparent=false;copy.depthWrite=true;copy.clippingPlanes=[];}}
+    else{copy.color?.multiplyScalar(.4);copy.emissiveIntensity=0;}
+    return copy;
    });mesh.material=Array.isArray(original)?selected:selected[0];highlights.push([mesh,original,selected]);
   });render();
  }
@@ -267,7 +317,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   setAnimation(null);
   reactorLayer?.dispose();reactorLayer=null;
   if(next.reactor){reactorLayer=createReactorMotionLayer(frame,refreshReactor);scene.add(reactorLayer.group);}
-  stopFlight();
+  stopFlight();clearAssembly();
   stateLayer.clear();clearSelection();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;loadStatus='loading';reportRepresentation();renderer.clear();status.textContent='Loading 3D…';
   try{
    const gltf=await loader.loadAsync(next.model);
@@ -324,9 +374,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    const impact=hits.filter(hit=>isPoints(hit.object)&&hit.object.userData.impactIndices&&(hit.object.material as THREE.PointsMaterial).depthTest===false)
     .sort((a,b)=>b.index!-a.index!)[0],hit=impact??hits[0];
    if(stateLayer.pick(hit))return;
-   const id=hit&&componentId(hit.object);if(hit&&id){select(id);onSelect(id,hit.object.userData,hit.object.name,hit);}
+   const id=hit&&componentId(hit.object);if(hit&&id){select(id);explode(id);onSelect(id,hit.object.userData,hit.object.name,hit);}
   },
   keydown:event=>{
+   if(event.key==='Escape'&&assembly){event.preventDefault();explode(null);return;}
    if(event.key==='Escape'&&dragging!==null){event.preventDefault();cancelDrag();return;}
    if(!root||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','+','-','='].includes(event.key))return;
    stopFlight();pristineCamera=false;
@@ -346,10 +397,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  for(const [name,handler]of Object.entries(handlers))canvas.addEventListener(name,handler as EventListener);
  controls.addEventListener('change',cameraChanged);
  const observer=new ResizeObserver(resize);observer.observe(frame);
- return {canvas,load,select,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,
+ return {canvas,load,select,explode,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,
  updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(asset?.reactor)refreshReactor();},
  setPending:value=>{reactorPending=value;if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});refreshReactor();},dispose(){
-  if(disposed)return;disposed=true;stopFlight();setAnimation(null);reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
+  if(disposed)return;disposed=true;stopFlight();clearAssembly();reducedAssemblyMotion?.removeEventListener?.('change',settleAssembly);setAnimation(null);reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
   for(const [name,handler]of Object.entries(handlers))canvas.removeEventListener(name,handler as EventListener);
   clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
  }};

@@ -13,6 +13,7 @@ type SelectionPart = Record<string, unknown>;
 export interface ApparatusDisplay {
  load(asset: ApparatusAsset): Promise<unknown>;
  select(id: string): void;
+ explode?(id:string|null):void;
  reset(): void;
  dispose(): void;
  focus?(id: string): void;
@@ -57,7 +58,7 @@ export function setupApparatus(host: HTMLElement,{components,onSelect,onInspect,
  function publish(current: ApparatusDisplay){current.updateState?.(acceptedState);if(surface)current.updateSurfaceState?.(surface.packet,surface.settings);current.updateReactorState?.(reactorState);current.setPending?.(statePending);current.setActive?.(visible);if(selected)current.select(selected);}
  function select(id: string,notify=true,part: SelectionPart | null=null,name=''){
   const c=records.find(c=>c.id===id);if(!c)return;
-  selected=id;choices.value=id;viewer?.select(id);focus.disabled=false;
+  selected=id;choices.value=id;viewer?.select(id);if(notify)viewer?.explode?.(id);focus.disabled=false;
   if(notify)onSelect?.(id);
   const title=doc.createElement('h3'),purpose=doc.createElement('p'),material=doc.createElement('p'),info=doc.createElement('details'),summary=doc.createElement('summary'),basis=doc.createElement('p');
   title.textContent=name||c.name;purpose.textContent=c.purpose;material.textContent=typeof part?.materialBasis==='string'?part.materialBasis:c.material;

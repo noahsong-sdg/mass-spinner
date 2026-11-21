@@ -24,7 +24,7 @@ export function releaseSurfaceGroup(group:THREE.Object3D){
 }
 /** Exact raw values: rings are nearest-sample Voronoi supports, not interpolated solutions. */
 export function buildSurfaceOverlay(snapshot:SurfaceSnapshot,fieldId:string,view:SurfaceView='state',{sectionZM=(snapshot.domain.lengthM??0)/2}:{sectionZM?:number}={}){
- const group=new THREE.Group();group.name='Accepted numerical surfaces';
+ const group=new THREE.Group();group.name='Accepted numerical surfaces';group.userData.quantitativeOnly=true;
  const field=snapshot.fields.find(value=>value.id===fieldId);
  if(view==='state'&&field){
   const radius=snapshot.domain.radiusM??Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI);
@@ -132,7 +132,7 @@ export function createSurfaceLayer(frame:HTMLElement,{render=()=>{},onSelect=()=
    if(field.coordinate==='depth'){
     const r=Math.sqrt(snapshot.domain.beamAreaM2!/Math.PI),lo=field.boundsM![0],hi=field.boundsM!.at(-1)!,width=r*2;
     const inspectionY=new THREE.Box3().setFromObject(engineering.group).max.y+r*.5;
-    expanded=new THREE.Group();expanded.name=`Depth microscope: ${field.region}`;
+    expanded=new THREE.Group();expanded.name=`Depth microscope: ${field.region}`;expanded.userData.quantitativeOnly=true;
     field.values.forEach((value,index)=>{
      const a=(field.boundsM![index]-lo)/(hi-lo),b=(field.boundsM![index+1]-lo)/(hi-lo);
      const mesh=new THREE.Mesh(new THREE.BoxGeometry(width*(b-a)*.98,r*.25,r*.05),new THREE.MeshBasicMaterial({color:surfaceColour(value,field.domain)}));

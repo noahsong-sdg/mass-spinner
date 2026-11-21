@@ -96,6 +96,27 @@ test('gas cutaway: live density, movable slice and slow-rotation samples',async(
  expect(errors).toEqual([]);
 });
 
+test('component selection separates the assembly and Assemble restores the live scene',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');
+ const canvas=page.locator('#fuel-render canvas');await expect(canvas).toBeVisible({timeout:30_000});
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
+ await page.locator('#fuel-component').selectOption('coils');
+ await expect(canvas).toHaveAttribute('data-assembly-state','exploded');
+ await expect(canvas).toHaveAttribute('data-assembly-component','coils');
+ await expect(page.locator('#fuel-render .assembly-view')).toContainText('display only');
+ await page.locator('#fuel-component').selectOption('electrodes');
+ await expect(canvas).toHaveAttribute('data-assembly-component','electrodes');
+ await page.getByRole('button',{name:'Close Examine',exact:true}).click();
+ await info.attach('exploded-assembly',{body:await page.screenshot(),contentType:'image/png'});
+ await page.locator('#fuel-render').getByRole('button',{name:'Assemble',exact:true}).click();
+ await expect(canvas).toHaveAttribute('data-assembly-state','assembled');
+ await expect(page.locator('#fuel-render .assembly-view')).toBeHidden();
+ await expect(page.locator('#fuel-currentA')).toHaveValue('0.03');
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ expect(errors).toEqual([]);
+});
+
 test('four gas modes reveal their geometry and explain their physical scope',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2');await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});

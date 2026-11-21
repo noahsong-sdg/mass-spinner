@@ -398,7 +398,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  function describe(id:string,part?:Record<string,unknown>,name?:string,highlight=true){
   const record=graphics?.[1].FUEL_COMPONENTS.find(c=>c.id===id);if(!record)return;
   if(highlight)hasSelection=true;
-  inspectSelect.value=id;viewer?.select(hasSelection?id:null);
+  inspectSelect.value=id;viewer?.select(hasSelection?id:null);if(highlight)viewer?.explode?.(id);
   if(description.dataset.component===id){description.querySelector('h3')!.textContent=name||record.name;[typeof part?.purpose==='string'?part.purpose:record.purpose,typeof part?.materialBasis==='string'?part.materialBasis:record.material,record.basis].forEach((text,i)=>description.querySelectorAll('details p')[i].textContent=text);refreshInstrument();return;}
   description.dataset.component=id;description.replaceChildren(el('h3',name||record.name));
   for(const key of FUEL_COMPONENT_CONTROLS[id]??[]){
