@@ -26,7 +26,10 @@ test('an action used before the reader script starts cannot nest the simulator',
   if(action==='look'){
    await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('#fuel-view-drive')).toHaveValue('all');
   }else{
-   await expect(page.locator('#fuel-plot')).toHaveValue('separation');await expect(page.locator('#window-controls')).toBeVisible();
+   await expect(page.locator('#window-controls')).toBeVisible();
+   await expect(page.locator('.guide-experiment')).toContainText('Time to separate');
+   await page.locator('.guide-experiment').getByRole('button',{name:'Show separation over time',exact:true}).click();
+   await expect(page.locator('#fuel-plot')).toHaveValue('separation');
   }
  }
 });
@@ -139,17 +142,24 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
 });
 
 
-test('tutorial actions return from the reactor to the centrifuge without replacing its inputs',async({page})=>{
+test('tutorial actions return from the reactor to the centrifuge without replacing its inputs',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/start.html');
  await frame.locator('[data-guide-action="look"]').click();
  await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
  await frame.goto('/tutorial-05.html');
- await page.getByRole('button',{name:'Reactor',exact:true}).click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
- await expect(page.getByRole('complementary',{name:'What to look for'})).toBeHidden();
- await expect(page.locator('#window-guide')).toBeVisible();
- await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
- await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
+ const profiler=await page.context().newCDPSession(page);
+ await profiler.send('Profiler.enable');await profiler.send('Profiler.setSamplingInterval',{interval:1000});await profiler.send('Profiler.start');
+ try{
+  await page.getByRole('button',{name:'Reactor',exact:true}).click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
+  await expect(page.getByRole('complementary',{name:'What to look for'})).toBeHidden();
+  await expect(page.locator('#window-guide')).toBeVisible();
+  await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
+  await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
+ }finally{
+  const {profile}=await profiler.send('Profiler.stop');
+  await info.attach('reactor-transition.cpuprofile',{body:Buffer.from(JSON.stringify(profile)),contentType:'application/json'});await profiler.detach();
+ }
 });
 
 
