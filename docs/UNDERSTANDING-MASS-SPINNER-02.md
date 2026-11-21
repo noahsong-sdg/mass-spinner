@@ -3,6 +3,10 @@
 ## What do we want to calculate?
 
 The goal is to collect more light-isotope atoms at a higher percentage.
+Isotopes are atoms of the same element with different masses. Here, ⁶Li is lighter than ⁷Li.
+Separation is useful when a later process needs more ⁶Li relative to ⁷Li.
+The centrifuge must change where these atoms are before we can collect an enriched sample.
+
 Purity is their percentage in the sample. Recovery is their fraction of the initial light-isotope count.
 
 From 76 light and 924 heavy atoms, collect 10 light and 90 heavy atoms.
@@ -12,6 +16,11 @@ Purity increases from 7.6% to 10%, but recovery is only 10/76. Separation moves 
 
 This centrifuge model explains Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/), not proprietary equipment or a fusion reactor.
 It connects drive, rotation, heating, separation and collection.
+
+We examine them in that order because each process changes the conditions for the next one.
+Current gives torque. Torque changes rotation. Rotation changes the atom distribution.
+Heating can weaken that redistribution, and the collection radius determines which atoms we keep.
+Thus, a fast gas does not necessarily give a useful product.
 
 Use Coupled separation. [The menu table](#views) explains the other options.
 [Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html) shows the controls.
@@ -34,9 +43,17 @@ Without thermal evolution, temperature stays constant. [§4 explains the motion]
 
 Rotation is useful only if it changes the isotope mixture. We need to know which isotope becomes more common at each radius.
 
+An atom moving in a straight line would leave a circular path. Inward force continually changes its direction.
+A turning gas contains random atom motion as well as motion around the axis.
+The model describes the mean motion of many atoms. It does not put each atom on a perfect circular orbit.
+
 Circular motion is possible only with inward force. Pressure that increases from the axis to the wall supplies this force.
+Pressure acts on both sides of a small gas volume. Higher pressure on its outer side gives a net inward force.
+Thus, pressure must increase toward the wall to maintain circular motion.
+
 At the same radius and angular speed, heavier atoms need more inward force.
 During equilibrium rotation, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a higher light-isotope percentage.
+
 Temperature measures random atom motion. This motion competes with separation, so speed alone cannot tell us how much separation to expect.
 With the same number of atoms per volume, hotter gas has higher pressure.
 At the same rotation speed and uniform temperature, a smaller density increase toward the wall can supply the necessary inward force.
@@ -49,6 +66,9 @@ Tangential speed increases with radius:
 v_\theta(r)=\Omega r.
 ```
 
+Equilibrium means that the distribution no longer changes, even though atoms continue to move.
+For each isotope, inward diffusion balances the rotational tendency toward the wall. There is no net radial transport.
+We need the density at each radius to calculate how many atoms lie inside a collection radius.
 For each species s, the equilibrium density is
 
 ```math
@@ -65,6 +85,9 @@ The local light fraction is
 x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
 ```
 
+The equation gives a density ratio, not an isotope percentage.
+For example, a heavy density increase of 6× and a light density increase of 4× increase the heavy/light ratio by 1.5×.
+Both isotope densities increase toward the wall, but the heavy fraction increases more.
 The center can have a higher light percentage but fewer light atoms in a unit volume.
 The diagram divides each density by that isotope's axis density. Thus, 1× means its value at the axis.
 
@@ -72,10 +95,18 @@ The diagram divides each density by that isotope's axis density. Thus, 1× means
 
 First, compare No rotation with Rotation in the diagram. Then select Higher temperature.
 The last two cases have the same rotation speed. Only temperature changes.
+
 The curves show density against distance from the axis. The label “6×” is a density ratio, not a percentage.
 The heavier density increases more sharply. Thus, the light percentage decreases toward the wall.
+
 [Show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
 Select the axis and then the wall. Compare each percentage with the feed percentage, not 50%.
+
+With a feed light fraction of 7.59%, a local value of 8% is enrichment.
+It means about 80 light atoms in 1,000 atoms at that location, compared with about 76 in the feed.
+It does not mean that this location contains 8% of the vessel's light atoms.
+
+An outer ring also has more volume than an inner ring of the same thickness. Density alone does not give its atom count.
 
 Composition enlarges the percentage range. The heavy percentage is the remainder.
 [Show species density](/?level=2&try=density) to compare each density with its volume mean.
@@ -107,7 +138,10 @@ Integration from the axis to r gives the exponential. This is not a complete mom
 
 ## 2. How strong is the separation?
 
-A clear slope can show a small isotope change. Compare the heavy/light ratio at the wall with the axis ratio:
+A steep density curve can suggest strong separation even when the isotope fractions change little.
+Most of the increase can be common to both isotopes.
+To remove that common increase, divide the heavy density by the light density at each location.
+Then compare the wall ratio with the axis ratio:
 
 ```math
 \alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}},
@@ -117,11 +151,17 @@ A clear slope can show a small isotope change. Compare the heavy/light ratio at 
 ```
 
 R is vessel radius. The speed v_wall = ΩR is gas speed at the wall, which does not move. Ω has units of rad/s.
-The exponent compares the rotational energy difference with thermal energy.
+
+The exponent compares the rotational energy difference between isotopes with thermal energy.
+Only the mass difference Δm appears because both isotopes share most of their response to rotation.
+At zero speed or zero mass difference, ln α = 0 and α = 1. There is no composition difference.
 When α = 2, the wall heavy/light ratio is two times the axis ratio, not two times the purity.
 
 For Δm ≈ 1 u, a gas speed of 1,000 m/s and a temperature of 500 K, α ≈ 1.13.
-The ratio increases by 13%. Purity does not increase by 13 percentage points.
+The wall heavy/light ratio is about 13% higher than the axis ratio. Purity does not increase by 13 percentage points.
+If α starts at 1.20, doubling speed gives α = 1.20⁴ ≈ 2.074 at the same temperature.
+Doubling temperature gives α = √1.20 ≈ 1.095 at the same speed.
+The factors four and one half apply to ln α, not to α or purity.
 
 <!-- diagram:bias -->
 
@@ -190,12 +230,21 @@ Select Current, Turn the ions and Turn the gas in sequence in the diagram.
 Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.
 The dots show populations, not microscopic particle paths.
 
+Find the gas between the two electrodes. Follow an inward current arrow, then the force arrow at the same location.
+The force points around the axis, not toward the inner electrode.
+The neutral markers then turn because collisions transfer motion. No metal drum needs to turn.
+
 ## 4. What sets the rotation speed?
 
 Useful separation needs sufficient speed within the available time. We must compare the drive with losses before we can predict that speed.
 
+The drive continually adds rotational motion. Collisions pass some of it from ions to neutral atoms, while wall drag removes it.
+We need a quantity that counts this motion so that we can track transfers and losses. That quantity is angular momentum.
+
 Torque changes angular momentum L over time, not speed immediately.
-Moment of inertia ℐ measures resistance to rotation changes. For rigid rotation,
+Moment of inertia ℐ measures resistance to rotation changes.
+The same mass farther from the axis has greater inertia. It needs more angular momentum for the same angular speed.
+For rigid rotation,
 
 ```math
 L=\mathcal{I}\Omega,
@@ -213,7 +262,10 @@ The symbol τ is torque. The symbol d/dt means rate of change. For ions and neut
 
 The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is specified. Neutral inertia changes with mass location.
 Collisions exchange angular momentum without changing its total. Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
+
+The collision terms have opposite signs because each transfer removes angular momentum from one population and adds it to the other.
 Stronger coupling decreases the speed difference, but does not necessarily increase the neutral speed after acceleration stops.
+When drive torque equals wall-loss torque, total angular momentum stops increasing. The gas can then keep turning at constant speeds.
 
 For radial current I through an annular region in constant axial field B,
 
@@ -233,13 +285,22 @@ Use the powered run from the first experiment.
 3. [Show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum). Total angular momentum equals drive impulse minus wall impulse. Each impulse is torque integrated over time.
    After the power stops, wall drag decreases total angular momentum. Collisions only move it between populations.
 
+The spin-up plot has time on the horizontal axis and speed on the vertical axis.
+A rising curve means acceleration. A flat curve means constant speed, not stationary gas.
+After power stops, a falling total-angular-momentum curve shows loss to the wall. Ion–neutral transfer alone cannot cause this total loss.
+
 At constant L, outward mass movement increases inertia and decreases angular speed.
+Thus, redistribution can change speed even when the total angular momentum stays the same.
 Replay keeps the power switches. The first experiment removes those switches and starts from rest.
 
 ## 5. Where does the energy go?
 
 At the same rotation speed, more random thermal motion decreases separation. Equilibrium separation increases with Ω²/T.
 More current can increase speed and temperature. Heating can remove the increase in separation from faster rotation.
+
+This does not mean all heat is harmful. Lithium must remain in the gas phase, which also requires sufficient temperature.
+The separation question is whether the increase in Ω² exceeds the increase in T.
+For example, two times Ω and two times T give two times Ω²/T. Two times T alone gives half that ratio.
 
 For constant temperature, cooling must remove net heat input.
 Thus, we must calculate separation and cooling power. The drive supplies mechanical power and resistive heat:
@@ -250,7 +311,10 @@ P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
 P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
 ```
 
-Power is the energy rate, in watts.
+Power is the energy rate, in watts. One watt supplies one joule each second.
+Mechanical power is torque times angular speed because the torque does work as the gas turns.
+A nonzero torque at the instant of rest gives zero instantaneous mechanical power, but it starts acceleration.
+
 At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
 Resistance does not include motion-induced voltage. The source also supplies mechanical work.
 Collisions change relative rotational energy into heat:
@@ -259,7 +323,9 @@ Collisions change relative rotational energy into heat:
 P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 ```
 
-Slip heating cannot be negative. Wall drag also changes rotational energy into heat.
+Slip heating cannot be negative. Collisions decrease the speed difference between populations and convert some organized rotation into random motion.
+When both populations have the same angular speed, this slip-heating term is zero.
+Wall drag also changes rotational energy into heat.
 
 Mass movement changes rotational energy K = L²/(2ℐ). In the thermal model, this energy difference increases or decreases gas thermal energy.
 At constant L, outward movement releases energy. Inward movement can remove heat.
@@ -280,20 +346,29 @@ Smaller timesteps give a convergence check for this numerical loss.
 
 [Show drive work](/?level=2&guide=physics&topic=energy&try=work). Curve height is energy in joules. Curve slope is power in watts.
 This plot accounts for mechanical energy. Ohmic power is a separate value. Temperature shows cooling energy when thermal evolution is on.
+
 These separate values do not form a complete thermal-energy plot. The default bath keeps temperature constant.
+It assumes an external heat source or sink supplies or removes the necessary heat.
+
+With thermal evolution on, compare gas temperature, liner temperature and cooling energy.
+A hotter liner can heat the gas. A colder liner can remove heat. Temperature need not increase just because current is positive.
 
 [Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) adds temperature changes.
 It does not calculate ionization or separate electron and ion temperatures.
 
 ## 6. How do time and collection change the result?
 
-Separation takes time. Diffusion moves atoms a typical distance √(Dt), which gives the approximate time
+Equilibrium tells us a possible final distribution. It does not tell us whether a one-second run reaches that distribution.
+Atoms need time to move across the vessel. Diffusivity D describes how quickly their random motion spreads them over distance.
+Diffusion moves atoms a typical distance √(Dt), which gives the approximate time
 
 ```math
 t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
 
 D is diffusivity (m²/s). Boundaries and rotation also change the time to equilibrium.
+Doubling radius gives four times this diffusion timescale at the same D. Doubling D gives half the timescale.
+This is a scale estimate, not the calculated completion time.
 [Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare the calculated distribution with equilibrium.
 
 Enriched gas can contain few atoms. For all gas inside a collection radius,
@@ -306,6 +381,12 @@ Enriched gas can contain few atoms. For all gas inside a collection radius,
 ```
 
 N counts atoms. With light enrichment near the axis, a smaller inner sample can increase purity but decrease recovery.
+Purity divides by all atoms in the sample. Recovery divides by all light atoms in the vessel.
+
+Suppose the vessel contains 100 light atoms. A sample with 10 light and 90 heavy atoms has 10% purity and 10% recovery.
+A smaller sample with 5 light and 20 heavy atoms has 20% purity but only 5% recovery.
+Higher purity alone therefore does not show that a cut is better.
+
 These fractions measure gas in the vessel, not gas flow through an outlet.
 
 <!-- diagram:inventory-cut -->
@@ -320,6 +401,8 @@ The Inner collection radius / a control changes that marker and starts a new run
 ## Which model parts are necessary, and what is missing?
 
 We must know which conclusions the model can show before we use its results. Each missing process limits those conclusions.
+The browser can answer, “What does this specified drive do within this model?”
+It cannot yet answer, “What voltage and power will a particular Marathon machine need for this measured production rate?”
 
 Drive changes rotation, heating decreases separation at the same speed, and transport changes the distribution over time.
 The collection radius selects the sample. Without these connections, more current can appear useful when it is not.
@@ -338,6 +421,7 @@ It does not show accurate Marathon or lithium results.
 
 Different pictures can look like different physical models. Use this key to compare a calculated history with a reference.
 
+Start with Coupled separation and one plot related to your question. The other views answer different questions about the same equipment.
 Gas view changes the display, not the physics. Use Controls to set optional models to on.
 
 | Gas view | Meaning and limit |
@@ -355,6 +439,11 @@ Cut power adds a current step at the selected time. Reference views do not compa
 
 Time plots add data as physical time increases. Radial profiles show values at the selected time.
 Parameter scans compare calculated values for different settings.
+
+For a time plot, move along the horizontal axis to read what happens next.
+For a radial profile, move along it to read a different location at the same time.
+For a parameter scan, move along it to compare different calculations, not later times.
+This distinction explains why Play changes some plots but leaves a reference scan unchanged.
 
 <!-- diagram:views -->
 
