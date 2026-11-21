@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
+import {setupPreciseControls} from '../src/precise-controls.js';
 import {setupWorkspace} from '../src/workspace-ui.js';
 import {playgroundSteps} from '../src/playground-guide-steps.js';
 import {guideActions,guideExperiments,type GuideExperiment} from '../src/guide-topics.js';
@@ -13,7 +14,9 @@ function fixture(t:any,mobile=false){
  t.after(()=>window.close());
  workspace.setLevel('2');
  // Canonical current input is mounted by the live centrifuge before a control action is ready.
- const current=doc.createElement('input');current.id='fuel-currentA';doc.querySelector('#window-controls .world-window-body')!.append(current);
+ const control=doc.createElement('div');control.className='control';
+ control.innerHTML='<label for="fuel-currentA"><span>Radial discharge current</span><output>0.03 A</output></label><input id="fuel-currentA" type="range" min="0" max="0.2" step="0.001" value="0.03" data-unit="A">';
+ doc.querySelector('#window-controls .world-window-body')!.append(control);setupPreciseControls(control);
  return {doc,window,workspace,node,step(index:number){node('guide-step').value=String(index);node('guide-step').dispatchEvent(new window.Event('change'));}};
 }
 
@@ -146,9 +149,9 @@ test('the current experiment rewinds before editing and compares endpoints witho
  let restarted=0;make('button','fuel-new-run','').addEventListener('click',()=>restarted++);
  const seen:number[]=[];time.addEventListener('input',()=>seen.push(Number(time.value)));
  f.doc.querySelector<HTMLButtonElement>('.guide-actions button')!.click();
- assert.equal(mode.value,'transport');assert.equal(time.value,'0');assert.equal(input.value,'.07');
+ assert.equal(mode.value,'transport');assert.equal(time.value,'0');assert.equal(input.valueAsNumber,.07);
  assert.equal(restarted,1,'preparation explicitly clears old drive history through New run');
- assert.equal(f.doc.activeElement,input);assert.equal(f.node('window-controls').hidden,false);
+ assert.equal(f.doc.activeElement,input.closest('.control').querySelector('.precise-editor input'));assert.equal(f.node('window-controls').hidden,false);
  assert.match(f.node('window-guide').textContent,/0 A.*0.03 A/);
  f.doc.querySelectorAll<HTMLButtonElement>('.guide-actions button')[1].click();
  assert.equal(time.value,'1');assert.equal(plot.value,'spin');assert.deepEqual(seen,[0,1]);
