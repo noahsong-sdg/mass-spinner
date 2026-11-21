@@ -249,13 +249,16 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  expect(errors).toEqual([]);
 });
 
-test('control tutorial changes the existing run through the attached reader',async({page})=>{
+test('control tutorial changes the existing run through the attached reader',async({page},info)=>{
+ if(info.project.name==='desktop')await page.setViewportSize({width:756,height:834});
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
  await expect(current).toBeFocused();await expect(current).toHaveValue('0.03');
+ expect((await current.boundingBox())!.width).toBeGreaterThanOrEqual(100);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await current.fill('0');await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).click();
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await reader.locator('[data-guide-action="endSpin"]').click();
