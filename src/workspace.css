@@ -176,12 +176,14 @@ body.immersive .sim-workspace [hidden]{display:none!important}
 /* Keep the reactor chooser above the model scale disclosure. */
 .sim-workspace[data-context="blanket"] .apparatus-scale-note,
 .sim-workspace[data-context="source"] .apparatus-scale-note{top:64px}
+.sim-workspace:is([data-context="blanket"],[data-context="source"]) .assembly-view{top:104px}
 
 @media(max-width:480px){.world-reactor-context select{max-width:calc(100vw - 124px)}}
 
 @media(max-width:740px){
  .sim-workspace[data-context="blanket"] .apparatus-provenance,
  .sim-workspace[data-context="source"] .apparatus-provenance{top:116px}
+ .sim-workspace:is([data-context="blanket"],[data-context="source"]):has(.assembly-view:not([hidden])) .apparatus-provenance{top:172px}
 }
 
 /* The reader and live scene share one workspace. Result windows stay below the scene. */

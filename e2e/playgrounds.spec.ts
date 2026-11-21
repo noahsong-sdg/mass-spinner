@@ -20,6 +20,15 @@ async function dimensionLabelsDoNotOverlap(page:Page,host:string){
  expect(note!.x+note!.width<=disclosure!.x||disclosure!.x+disclosure!.width<=note!.x||note!.y+note!.height<=disclosure!.y||disclosure!.y+disclosure!.height<=note!.y).toBe(true);
 }
 
+async function assemblyControlsDoNotOverlap(page:Page,host:string){
+ const button=page.locator(host).getByRole('button',{name:'Assemble',exact:true});
+ await expect(button).toBeVisible();const a=(await button.boundingBox())!;
+ for(const selector of ['.apparatus-scale-note','.apparatus-provenance']){
+  const b=(await page.locator(`${host} ${selector}`).boundingBox())!;
+  expect(a.x+a.width<=b.x||b.x+b.width<=a.x||a.y+a.height<=b.y||b.y+b.height<=a.y).toBe(true);
+ }
+}
+
 async function exported(page:Page){
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const pending=page.waitForEvent('download');await page.locator('#fuel-export').click();
@@ -109,8 +118,7 @@ test('component selection separates the assembly and Assemble restores the live 
  await expect(canvas).toHaveAttribute('data-assembly-component','electrodes');
  await page.getByRole('button',{name:'Close Examine',exact:true}).click();
  const assembleButton=page.locator('#fuel-render').getByRole('button',{name:'Assemble',exact:true});
- const assemblyBox=await assembleButton.boundingBox(),dimensionsBox=await page.locator('#fuel-render .apparatus-provenance').boundingBox();
- expect(assemblyBox&&dimensionsBox&&assemblyBox.x<dimensionsBox.x+dimensionsBox.width&&assemblyBox.x+assemblyBox.width>dimensionsBox.x&&assemblyBox.y<dimensionsBox.y+dimensionsBox.height&&assemblyBox.y+assemblyBox.height>dimensionsBox.y).toBe(false);
+ await assemblyControlsDoNotOverlap(page,'#fuel-render');
  await info.attach('exploded-assembly',{body:await page.screenshot(),contentType:'image/png'});
  await assembleButton.click();
  await expect(canvas).toHaveAttribute('data-assembly-state','assembled');
@@ -190,6 +198,8 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await expect(page.locator('#window-inspect')).toContainText('Toroidal-field magnets');
  await expect(page.locator('#window-inspect')).toContainText('not specified');
  await page.getByRole('button',{name:'Close Examine',exact:true}).click();
+ await assemblyControlsDoNotOverlap(page,'#blanket-render');
+ await blanket.getByRole('button',{name:'Assemble',exact:true}).click();
  await page.locator('#marathon-apparatus').selectOption('source');
  const beam=page.locator('#fusion-apparatus');
  await expect(beam.locator('canvas')).toBeVisible();
@@ -199,6 +209,11 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await expect(beam.locator('.apparatus-provenance')).toContainText('does not publish beamline or target hardware dimensions');
  await dimensionLabelsDoNotOverlap(page,'#fusion-apparatus');
  await expect(beam.locator('.apparatus-provenance')).not.toContainText('210 mm');
+ await page.getByRole('button',{name:'Examine',exact:true}).click();
+ await page.locator('#window-inspect [aria-label="Select a component"]:visible').selectOption('source');
+ await page.getByRole('button',{name:'Close Examine',exact:true}).click();
+ await assemblyControlsDoNotOverlap(page,'#fusion-apparatus');
+ await beam.getByRole('button',{name:'Assemble',exact:true}).click();
  expect(errors).toEqual([]);
 });
 
