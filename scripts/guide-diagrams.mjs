@@ -79,19 +79,33 @@ function densityDiagram(){
   const beta=mass*1.66053906892e-27*speed**2/(2*1.380649e-23*temperature);
   return {beta,wall:Math.exp(beta),path:Array.from({length:65},(_,j)=>`${j?'L':'M'}${52+264*j/64} ${220-165*Math.exp(beta*(j/64)**2)/7}`).join(' '),color:colors[i]};
  });
- return `<figure class="density-example" data-density-example data-case="spin">
- <strong>Compare rotation first. Then increase temperature at the same speed.</strong>
+ // Invert the cylindrical number CDF, which includes the r dr volume factor.
+ const particles=masses.flatMap((mass,species)=>Array.from({length:48},(_,j)=>{
+  const q=(j+.5)/48,angle=j*2.399963229728653+species*1.1;
+  const positions=cases.map(([id,,speed,temperature])=>{
+   const beta=mass*1.66053906892e-27*speed**2/(2*1.380649e-23*temperature);
+   const r=90*Math.sqrt(beta===0?q:Math.log1p(q*Math.expm1(beta))/beta);
+   return `--${id}-x:${r*Math.cos(angle)}px;--${id}-y:${r*Math.sin(angle)}px`;
+  }).join(';');
+  return `<circle cx="180" cy="112" r="3" class="density-dot density-${species?'heavy':'light'}" style="${positions}"/>`;
+ })).join('');
+ return `<figure class="density-example" data-density-example data-case="spin" data-motion="paused">
+ <div class="drive-heading"><span>Compare rotation first. Then increase temperature at the same speed.</span><button type="button" data-density-motion disabled>Play rotation</button></div>
  <div class="density-cases" role="group" aria-label="Compare equilibrium density gradients">${cases.map(([id,label])=>`<button type="button" data-density-select="${id}" aria-pressed="${id==='spin'}">${label}</button>`).join('')}</div>
- <svg viewBox="0 0 360 278" role="img" aria-labelledby="composition-title composition-description">
+ <div class="density-views"><svg viewBox="0 0 360 278" role="img" aria-labelledby="composition-title composition-description">
  <title id="composition-title">The heavier isotope has a steeper equilibrium density gradient</title><desc id="composition-description">Each curve shows density divided by the axis density of that species. With rotation, both curves increase outward. Lithium-7 has a steeper increase than lithium-6. These ratios do not show composition or total atom numbers. This ideal equilibrium example has a uniform temperature. It is not your live run.</desc>
  <text x="16" y="22">Density ÷ axis density of that species</text>
  ${[1,3,5,7].map(y=>`<path d="M52 ${220-165*y/7}H316" stroke="#405749" stroke-width=".6"/><text x="42" y="${224-165*y/7}" text-anchor="end">${y}×</text>`).join('')}
  <path d="M52 45V220H316" fill="none" stroke="#82958a"/>
  ${cases.map(([id,,speed,temperature])=>`<g data-density-case="${id}">${curves(speed,temperature).map((c,i)=>`<path data-mass="${masses[i]}" data-beta="${c.beta}" data-wall="${c.wall}" d="${c.path}" stroke="${c.color}" stroke-width="3" ${i?'stroke-dasharray="6 3"':''} fill="none"/>`).join('')}</g>`).join('')}
  <text x="52" y="243">axis</text><text x="316" y="243" text-anchor="end">wall</text><text x="184" y="267" text-anchor="middle">distance from the axis →</text>
- </svg><div class="density-key"><span>━ ⁶Li · lighter</span><span>┄ ⁷Li · heavier</span></div>
+ </svg><svg viewBox="0 0 360 250" role="img" aria-labelledby="density-atoms-title density-atoms-description">
+ <title id="density-atoms-title">The same atom inventory at each equilibrium</title><desc id="density-atoms-description">Each isotope has 48 equal-weight distribution markers. Rotation concentrates both species near the wall. Higher temperature spreads them inward at the same rotation speed. This is an ideal equilibrium comparison, not a transient simulation.</desc>
+ <circle cx="180" cy="112" r="90" class="density-vessel"/><circle cx="180" cy="112" r="45" class="drive-track"/>
+ <g class="density-orbit">${particles}</g><text x="180" y="231" text-anchor="middle">End view · same inventory in all cases</text>
+ </svg></div><div class="density-key"><span>━ ⁶Li · lighter</span><span>┄ ⁷Li · heavier</span></div>
  ${cases.map(([id,,speed,temperature])=>{const [l,h]=curves(speed,temperature);return `<div data-density-case="${id}" class="density-result"><p>${speed.toLocaleString('en-US')} m/s at the wall · ${temperature} K throughout</p><p>${readings[/** @type {keyof typeof readings} */(id)]}</p><p>Wall ÷ axis density: <b>⁶Li ${l.wall.toFixed(2)}×</b> · <b>⁷Li ${h.wall.toFixed(2)}×</b></p></div>`;}).join('')}
- <figcaption>This ideal equilibrium example is not your run. Compare equal-size volumes at different radii, not whole rings. Each isotope has its own axis reference. These curves are not isotope percentages.</figcaption></figure>`;
+ <figcaption>This ideal equilibrium example is not your run. Each isotope has 48 equal-weight distribution markers. Equal marker counts do not specify the isotope fractions. Motion connects separate equilibria; it does not show transient transport or atom paths. Compare equal-size volumes, not whole rings. Each curve uses its own axis density, not isotope percentages.</figcaption></figure>`;
 }
 function driveDiagram(){
  /** @param {string} kind @param {number[][]} points */

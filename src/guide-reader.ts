@@ -1,3 +1,4 @@
+import {setupSampleDiagram} from './guide-sample.js';
 /** Links in the separate reader work without this script. Embedded readers use application actions. */
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
@@ -34,11 +35,18 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
    motion.addEventListener('click',()=>pause(figure.dataset.motion!=='paused'));
   }
  }
+ for(const sample of doc.querySelectorAll<HTMLElement>('[data-sample-example]'))setupSampleDiagram(sample,browser);
  const density=doc.querySelector<HTMLElement>('[data-density-example]');
  if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
   density.dataset.case=button.dataset.densitySelect;
   for(const choice of density.querySelectorAll('[data-density-select]'))choice.setAttribute('aria-pressed',String(choice===button));
  });
+ if(density){
+  const motion=density.querySelector<HTMLButtonElement>('[data-density-motion]')!;
+  const pause=(paused:boolean)=>{density.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play rotation':'Pause rotation';};
+  pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);motion.disabled=false;
+  motion.addEventListener('click',()=>pause(density.dataset.motion!=='paused'));
+ }
  const heat=doc.querySelector<HTMLElement>('[data-heat-example]');
  if(heat){
   const descriptions={gas:'Temperature decreases outward → heat flows outward by conduction.',wall:'Temperature increases outward → heat flows inward by conduction.',equal:'Uniform temperature → no heat flow by conduction.'};

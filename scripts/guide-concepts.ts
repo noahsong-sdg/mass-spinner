@@ -1,8 +1,9 @@
+import {sampleDiagram} from '../src/guide-sample.js';
 type State={label:string;reading:string;body:string};
 type Concept={title:string;description:string;caption:string;states:State[]};
 const text=(x:number,y:number,value:string)=>`<text x="${x}" y="${y}" text-anchor="middle">${value}</text>`;
 const box=(x:number,y:number,label:string)=>`<rect x="${x}" y="${y}" width="104" height="46" rx="5"/>${text(x+52,y+28,label)}`;
-const route=(id:string,path:string)=>`<path d="${path}" class="concept-flow" marker-end="url(#concept-${id}-arrow)"/>`;
+const route=(id:string,path:string)=>`<path d="${path}" class="concept-flow" marker-end="url(#concept-${id}-arrow)"/><circle r="3.5" class="concept-packet" style="offset-path:path('${path}')"/>`;
 
 /** An exact two-population reference with equal, constant inertias and no wall drag. */
 export function spinReference(time:number,coupling=1,cut=Infinity){
@@ -10,13 +11,19 @@ export function spinReference(time:number,coupling=1,cut=Infinity){
  const difference=-Math.expm1(-2*coupling*driven)/(2*coupling)*Math.exp(-2*coupling*(time-driven));
  return {ion:(sum+difference)/2,neutral:(sum-difference)/2,total:sum};
 }
+/** Integrals of the same reference speeds, in scaled display-angle units. */
+export function spinAngles(time:number,coupling=1,cut=Infinity){
+ const d=Math.min(time,cut),after=time-d,rate=2*coupling,a=-Math.expm1(-rate*d);
+ const sum=d*d/2+d*after,difference=d/rate-a/rate**2+a*(-Math.expm1(-rate*after))/rate**2;
+ return {ion:(sum+difference)/2,neutral:(sum-difference)/2};
+}
 function spinDiagram(id:string):Concept{
  const compare=id==='compare';
  const states=compare?[{label:'Coupling ×1',coupling:1,cut:Infinity},{label:'Coupling ×2',coupling:2,cut:Infinity}]
   :[{label:'Drive stays on',coupling:1,cut:Infinity},{label:'Power off at 2',coupling:1,cut:2}];
  return {title:compare?'Change one input. Compare at the same time.':'Ions accelerate first. Collisions accelerate neutral gas.',
   description:'Curves show an exact two-population reference. Both populations have equal, constant inertias. Collision torque is proportional to their speed difference. Without wall drag, total angular momentum increases only while drive is on.',
-  caption:'Analytic reference, not your run. Time and speed use fixed reference scales. Inertias are equal and constant. No wall drag or radial transport.',
+  caption:'Analytic reference, not your run. Time and speed use fixed reference scales. Turning markers show scaled bulk rotation, not atom paths. Inertias are equal and constant. No wall drag or radial transport.',
   states:states.map(({label,coupling,cut})=>({label,reading:compare?`Coupling ×${coupling}: collisions change the speed difference. They do not change total angular momentum.`
    :cut===Infinity?'While power stays on, total angular momentum increases.':'After power stops at time 2, collisions exchange angular momentum without changing its total.',
    body:`${text(180,18,'Speed / reference speed')}<path d="M42 36V190H328" class="diagram-axis"/>
@@ -24,7 +31,9 @@ function spinDiagram(id:string):Concept{
    ${[0,2,4].map(t=>text(42+t*70,210,String(t))).join('')}${text(185,233,'Time / reference time')}
    <g clip-path="url(#concept-${id}-reveal)">${(['ion','neutral'] as const).map((kind,i)=>`<path class="concept-trace ${i?'concept-neutral':'concept-ion'}" d="${Array.from({length:81},(_,j)=>{const t=j/20,v=spinReference(t,coupling,cut)[kind];return `${j?'L':'M'}${42+t*70} ${190-65*v}`;}).join(' ')}"/>`).join('')}
    </g>${cut===Infinity?'':`<path d="M182 36V190" class="concept-cut"/>${text(230,50,'power off →')}`}
-   <g class="concept-key">${text(100,265,'━ Ions')}${text(240,265,'┄ Neutral gas')}</g>`})),};
+   <g class="concept-key">${text(100,265,'━ Ions')}${text(240,265,'┄ Neutral gas')}</g>
+   <style>${(['ion','neutral'] as const).map(kind=>`@keyframes rotor-${id}-${coupling}-${Number.isFinite(cut)?cut:'on'}-${kind}{${Array.from({length:81},(_,j)=>`${85*j/80}%{transform:rotate(${-180*spinAngles(j/20,coupling,cut)[kind]}deg)}`).join('')}100%{transform:rotate(${-180*spinAngles(4,coupling,cut)[kind]}deg)}}`).join('')}</style>
+   ${(['ion','neutral'] as const).map((kind,i)=>`<circle cx="${i?260:100}" cy="327" r="35" class="concept-vessel"/><g class="concept-rotor concept-${kind}" style="transform-origin:${i?260:100}px 327px;animation-name:rotor-${id}-${coupling}-${Number.isFinite(cut)?cut:'on'}-${kind}">${[0,1,2,3,4,5].map(j=>`<circle cx="${(i?260:100)+27*Math.cos(j*Math.PI/3)}" cy="${327+27*Math.sin(j*Math.PI/3)}" r="4"/>`).join('')}</g>${text(i?260:100,385,i?'Neutral gas':'Ions')}`).join('')}`})),};
 }
 function ratioDiagram(id:string):Concept{
  const magnetic=id==='magnetic';
@@ -42,9 +51,6 @@ function ratioDiagram(id:string):Concept{
 }
 function routingDiagram(id:string):Concept|undefined{
  const scenarios:Record<string,Concept>={
-  goal:{title:'A higher percentage does not mean more light atoms.',description:'A sample can have a higher light-isotope fraction but contain few of the original light atoms. Compare purity and recovery.',caption:'Atom-count example, not your run. A sample cut does not calculate extraction flow.',states:[
-   {label:'Whole vessel',reading:'76 light atoms out of 1,000 atoms give 7.6% purity. The vessel contains all 76 original light atoms.',body:`${text(180,65,'76 light + 924 heavy atoms')}${box(128,95,'7.6% purity')}${text(180,185,'100% light recovery')}`},
-   {label:'Sample',reading:'10 light atoms out of 100 atoms give 10% purity. Light recovery is only 10 / 76, approximately 13.2%.',body:`${text(180,65,'10 light + 90 heavy atoms')}${box(128,95,'10% purity')}${text(180,185,'13.2% light recovery')}`},]},
   energy:{title:'Follow energy from the supply to cooling.',description:'Electrical input gives mechanical work and Ohmic heat. Collisions and wall drag change rotational energy into heat. Cooling removes heat.',caption:'Energy paths, not measured rates. Heat deposition and cooling are model assumptions.',states:[
    {label:'Supply',reading:'The supply must give both mechanical work and resistive heat.',body:`${box(128,22,'Supply')}${box(18,134,'Rotation')}${box(238,134,'Heat')}${route(id,'M150 68L70 128')}${route(id,'M210 68L290 128')}`},
    {label:'Heat',reading:'Collisions and wall drag can change rotational energy into heat. More rotation is not the only result of drive.',body:`${box(18,90,'Rotation')}${box(238,90,'Heat')}${route(id,'M126 112H232')}${text(180,165,'speed difference + wall drag')}`},
@@ -83,6 +89,7 @@ function inventoryDiagram():Concept{
    ${text(180,158,'Exhaust inventory / initial inventory')}<rect x="40" y="180" width="${260*ratio/2.1}" height="24" class="concept-bar" data-ratio="${ratio}"/>${text(180,234,`${ratio.toFixed(2)} × initial inventory`)}`};}),};
 }
 export function conceptDiagram(id:string):string|null{
+ if(id==='goal')return sampleDiagram();
  let concept:Concept|undefined;
  if(id==='spin'||id==='compare')concept=spinDiagram(id);
  else if(id==='bias'||id==='magnetic')concept=ratioDiagram(id);
@@ -93,7 +100,7 @@ export function conceptDiagram(id:string):string|null{
  return `<figure class="concept-example" data-concept-example="${id}" data-state="0" data-motion="paused">
  <div class="drive-heading"><span>${concept.title}</span>${moving?'<button type="button" data-concept-motion disabled>Play motion</button>':''}</div>
  <div class="diagram-cases" role="group" aria-label="${concept.title}">${concept.states.map((state,i)=>`<button type="button" data-concept-select="${i}" aria-pressed="${i===0}" disabled>${state.label}</button>`).join('')}</div>
- <svg viewBox="0 0 360 282" role="img" aria-labelledby="concept-${id}-title concept-${id}-description">
+ <svg viewBox="0 0 360 ${id==='spin'||id==='compare'?402:282}" role="img" aria-labelledby="concept-${id}-title concept-${id}-description">
  <title id="concept-${id}-title">${concept.title}</title><desc id="concept-${id}-description">${concept.description}</desc>
  <defs><clipPath id="concept-${id}-reveal"><rect x="0" y="0" width="360" height="282" class="concept-reveal"/></clipPath><marker id="concept-${id}-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#e4ac76"/></marker></defs>
  ${concept.states.map((state,i)=>`<g data-concept-panel="${i}"${i?' hidden':''}>${state.body}</g>`).join('')}

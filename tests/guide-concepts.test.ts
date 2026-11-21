@@ -2,13 +2,37 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
-import {conceptDiagram,spinReference} from '../scripts/guide-concepts.js';
+import {conceptDiagram,spinReference,spinAngles} from '../scripts/guide-concepts.js';
 import {startPage} from '../scripts/start-page.mjs';
 import {understandingPage} from '../scripts/understanding-page.mjs';
 import {guideTopics,numberedTutorials} from '../src/guide-topics.js';
 import {setupGuideReader} from '../src/guide-reader.js';
+import {guideDiagram} from '../scripts/guide-diagrams.mjs';
 
 const near=(a:number,b:number,tolerance=2e-9)=>assert.ok(Math.abs(a-b)<tolerance,`${a} != ${b}`);
+test('density markers preserve cylindrical inventory across rotation and temperature cases',t=>{
+ const dom=new JSDOM(guideDiagram('composition'));t.after(()=>dom.window.close());
+ const doc=dom.window.document,dots=doc.querySelectorAll<SVGElement>('.density-dot');assert.equal(dots.length,96);
+ for(const [species,mass]of [['light',6.0151228874],['heavy',7.0160034366]] as const){
+  const points=[...doc.querySelectorAll<SVGElement>(`.density-${species}`)];assert.equal(points.length,48);
+  for(const [j,dot]of points.entries()){
+   const radii:Record<string,number>={};
+   for(const [id,speed,temperature]of [['rest',0,500],['spin',1500,500],['warm',1500,1000]] as const){
+    const x=parseFloat(dot.style.getPropertyValue(`--${id}-x`)),y=parseFloat(dot.style.getPropertyValue(`--${id}-y`));
+    const r2=(x*x+y*y)/90**2,beta=mass*1.66053906892e-27*speed**2/(2*1.380649e-23*temperature);
+    near(beta===0?r2:Math.expm1(beta*r2)/Math.expm1(beta),(j+.5)/48);
+    assert.ok(r2>0&&r2<1);radii[id]=r2;
+   }
+   assert.ok(radii.spin>radii.warm&&radii.warm>radii.rest);
+  }
+ }
+});
+test('turning markers integrate the same speeds as the spin-up curves',()=>{
+ for(const k of [1,2])for(const cut of [2,Infinity])for(const time of [.01,.5,1.9,2.1,3.9]){
+  const h=1e-5,a=spinAngles(time-h,k,cut),b=spinAngles(time+h,k,cut),speed=spinReference(time,k,cut);
+  for(const kind of ['ion','neutral'] as const)near((b[kind]-a[kind])/(2*h),speed[kind]);
+ }
+});
 test('the animated spin reference solves the driven two-population equations and conserves collision momentum',()=>{
  for(const coupling of [1,2])for(const cut of [2,Infinity]){
   assert.deepEqual(spinReference(0,coupling,cut),{ion:0,neutral:0,total:0});
