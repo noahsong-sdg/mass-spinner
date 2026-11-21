@@ -210,7 +210,7 @@ test('Marathon reference geometry discloses paper dimensions and unknown hardwar
  await dimensionLabelsDoNotOverlap(page,'#fusion-apparatus');
  await expect(beam.locator('.apparatus-provenance')).not.toContainText('210 mm');
  await page.getByRole('button',{name:'Examine',exact:true}).click();
- await page.locator('#window-inspect [aria-label="Select a component"]:visible').selectOption('source');
+ await page.locator('#window-inspect [aria-label="Select a component"]:visible').selectOption({label:'RF ion source'});
  await page.getByRole('button',{name:'Close Examine',exact:true}).click();
  await assemblyControlsDoNotOverlap(page,'#fusion-apparatus');
  await beam.getByRole('button',{name:'Assemble',exact:true}).click();
