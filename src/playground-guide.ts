@@ -77,8 +77,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-burnFraction',controls:null};
  function editCurrent(){
   focusRelated('controls','#fuel-currentA');
-  doc.querySelector<HTMLInputElement>('#fuel-currentA')!.closest('.control')!.querySelector('output')!.click();
-  doc.activeElement?.scrollIntoView?.({block:'nearest'});
+  const control=doc.querySelector<HTMLInputElement>('#fuel-currentA')!.closest<HTMLElement>('.control')!;
+  control.querySelector('output')!.click();control.scrollIntoView?.({block:'nearest'});
  }
  const tutorialPlots:Readonly<Record<string,string>>={spinPlot:'spin',compositionPlot:'composition',separationPlot:'separation',thermalProfile:'thermalProfile',gasEnergy:'gasEnergy',gasPressure:'gasPressure',magneticLeverage:'field',cascade:'cascade',pumping:'pump',fuelInventory:'inventory',lithiumSurfaces:'lithium'};
  const pinButton=()=>doc.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]');

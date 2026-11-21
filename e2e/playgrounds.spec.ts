@@ -258,6 +258,8 @@ test('control tutorial changes the existing run through the attached reader',asy
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
  await expect(current).toBeFocused();await expect(current).toHaveValue('0.03');
  expect((await current.boundingBox())!.width).toBeGreaterThanOrEqual(100);
+ const body=(await page.locator('#window-controls .world-window-body').boundingBox())!,apply=(await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).boundingBox())!;
+ expect(apply.y).toBeGreaterThanOrEqual(body.y);expect(apply.y+apply.height).toBeLessThanOrEqual(body.y+body.height+1);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  await current.fill('0');await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).click();
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
