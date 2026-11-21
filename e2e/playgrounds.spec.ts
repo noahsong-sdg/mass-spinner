@@ -108,8 +108,11 @@ test('component selection separates the assembly and Assemble restores the live 
  await page.locator('#fuel-component').selectOption('electrodes');
  await expect(canvas).toHaveAttribute('data-assembly-component','electrodes');
  await page.getByRole('button',{name:'Close Examine',exact:true}).click();
+ const assembleButton=page.locator('#fuel-render').getByRole('button',{name:'Assemble',exact:true});
+ const assemblyBox=await assembleButton.boundingBox(),dimensionsBox=await page.locator('#fuel-render .apparatus-provenance').boundingBox();
+ expect(assemblyBox&&dimensionsBox&&assemblyBox.x<dimensionsBox.x+dimensionsBox.width&&assemblyBox.x+assemblyBox.width>dimensionsBox.x&&assemblyBox.y<dimensionsBox.y+dimensionsBox.height&&assemblyBox.y+assemblyBox.height>dimensionsBox.y).toBe(false);
  await info.attach('exploded-assembly',{body:await page.screenshot(),contentType:'image/png'});
- await page.locator('#fuel-render').getByRole('button',{name:'Assemble',exact:true}).click();
+ await assembleButton.click();
  await expect(canvas).toHaveAttribute('data-assembly-state','assembled');
  await expect(page.locator('#fuel-render .assembly-view')).toBeHidden();
  await expect(page.locator('#fuel-currentA')).toHaveValue('0.03');
