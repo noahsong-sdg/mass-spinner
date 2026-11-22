@@ -54,7 +54,7 @@ export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof global
  range.disabled=play.disabled=replay.disabled=false;paint();
  play.addEventListener('click',()=>running?pause():start());
  replay.addEventListener('click',()=>{pause();progress=0;start();});
- range.addEventListener('input',()=>{progress=range.valueAsNumber===0?0:range.valueAsNumber+flight-1;pause();paint(true);});
+ range.addEventListener('input',()=>{started=true;progress=range.valueAsNumber===0?0:range.valueAsNumber+flight-1;pause();paint(true);});
  win.document.addEventListener('visibilitychange',()=>{if(win.document.hidden)pause();});
  reduced?.addEventListener?.('change',()=>{if(reduced.matches)pause();});
  // Start only when the reader reaches this figure. Do not animate off-screen.
