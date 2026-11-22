@@ -50,7 +50,7 @@ export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof global
   if(last!==undefined)progress=Math.min(end,progress+Math.min(64,now-last)/50);last=now;paint();
   if(progress===end){pause();paint(true);}else frame=win.requestAnimationFrame(tick);
  }
- function start(){if(progress===end)progress=0;running=started=true;figure.dataset.motion='running';play.textContent='Pause collection';last=undefined;paint();frame=win.requestAnimationFrame(tick);}
+ function start(){if(progress===end)progress=0;running=started=true;figure.dataset.motion='running';play.textContent='Pause collection';last=undefined;figure.querySelector('[data-sample-reading]')!.textContent='Compare purity with recovery. Purity uses the sample count. Recovery uses the original light-atom count.';paint();frame=win.requestAnimationFrame(tick);}
  range.disabled=play.disabled=replay.disabled=false;paint();
  play.addEventListener('click',()=>running?pause():start());
  replay.addEventListener('click',()=>{pause();progress=0;start();});
