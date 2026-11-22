@@ -59,6 +59,6 @@ export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof global
  reduced?.addEventListener?.('change',()=>{if(reduced.matches)pause();});
  // Start only when the reader reaches this figure. Do not animate off-screen.
  if(typeof win.IntersectionObserver==='function')new win.IntersectionObserver(entries=>{
-  if(entries.some(entry=>entry.isIntersecting)){if(!started&&!reduced?.matches)start();}else pause();
+  if(entries.some(entry=>entry.isIntersecting&&entry.intersectionRatio>=.25)){if(!started&&!reduced?.matches)start();}else pause();
  },{threshold:.25}).observe(figure);
 }

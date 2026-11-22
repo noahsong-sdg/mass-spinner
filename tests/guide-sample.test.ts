@@ -16,6 +16,21 @@ test('sample collection preserves each isotope at every integer cut',()=>{
  for(const n of [-1,101,.5,NaN,Infinity])assert.throws(()=>sampleInventory(n),RangeError);
 });
 
+test('collection starts only after a quarter of the figure is visible and pauses off-screen',t=>{
+ const dom=new JSDOM(sampleDiagram());t.after(()=>dom.window.close());
+ const win=dom.window as unknown as Window & typeof globalThis,figure=win.document.querySelector<HTMLElement>('figure')!;
+ let notify:IntersectionObserverCallback|undefined;
+ Object.defineProperty(win,'IntersectionObserver',{value:class{constructor(fn:IntersectionObserverCallback){notify=fn;}observe(){}}});
+ Object.defineProperty(win,'matchMedia',{value:()=>({matches:false})});
+ win.requestAnimationFrame=()=>1;win.cancelAnimationFrame=()=>{};
+ setupSampleDiagram(figure,win);
+ const visible=(ratio:number)=>notify!([{isIntersecting:ratio>0,intersectionRatio:ratio} as IntersectionObserverEntry],{} as IntersectionObserver);
+ visible(.01);assert.equal(figure.dataset.motion,'paused');
+ visible(.25);assert.equal(figure.dataset.motion,'running');
+ visible(0);assert.equal(figure.dataset.motion,'paused');
+ visible(.5);assert.equal(figure.dataset.motion,'paused','re-entry does not override a pause');
+});
+
 test('the sample slider, playback, pause and replay move the same conserved atoms',t=>{
  const dom=new JSDOM(sampleDiagram(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());
  const win=dom.window as unknown as Window & typeof globalThis,doc=win.document;

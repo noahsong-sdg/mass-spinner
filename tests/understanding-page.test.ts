@@ -39,7 +39,9 @@ test('the website renders every guide equation and its derivation, with accessib
  for(const equation of doc.querySelectorAll('.equation'))assert.equal(equation.getAttribute('role'),'group');
  for(const table of doc.querySelectorAll('table')){assert.equal(table.getAttribute('tabindex'),'0');assert.ok(table.getAttribute('aria-label'));}
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
- assert.equal(doc.querySelectorAll('figure svg').length,guideTopics.filter(topic=>'diagram' in topic).length+1);
+ assert.equal(doc.querySelectorAll('figure').length,guideTopics.filter(topic=>'diagram' in topic).length);
+ assert.equal(doc.querySelectorAll('[data-drive-diagram] svg').length,2);
+ assert.equal(doc.querySelectorAll('[data-density-example] svg').length,2);
  for(const svg of doc.querySelectorAll('figure svg')){
   assert.equal(svg.getAttribute('role'),'img');
   for(const id of svg.getAttribute('aria-labelledby')!.split(' '))assert.ok(doc.getElementById(id)?.textContent);
