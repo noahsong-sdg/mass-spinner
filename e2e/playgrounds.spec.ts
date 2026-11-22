@@ -288,27 +288,31 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
  expect(errors).toEqual([]);
 });
 
-test('control tutorial changes the existing run through the attached reader',async({page},info)=>{
+for(const currentA of [0,.03])test(`control tutorial applies ${currentA} A through the attached reader`,async({page},info)=>{
  if(info.project.name==='desktop')await page.setViewportSize({width:756,height:834});
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ const duration=await page.locator('#fuel-durationS').inputValue();
+ if(currentA>0){
+  await page.getByRole('button',{name:'Controls',exact:true}).click();await page.locator('#fuel-currentA').press('Home');
+  await expect(page.locator('#fuel-currentA')).toHaveValue('0');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ }
  const reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
- await expect(current).toBeFocused();await expect(current).toHaveValue('0.03');
+ await expect(current).toBeFocused();await expect(current).toHaveValue(currentA>0?'0':'0.03');
  expect((await current.boundingBox())!.width).toBeGreaterThanOrEqual(100);
  const body=(await page.locator('#window-controls .world-window-body').boundingBox())!,apply=(await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).boundingBox())!;
  expect(apply.y).toBeGreaterThanOrEqual(body.y);expect(apply.y+apply.height).toBeLessThanOrEqual(body.y+body.height+1);
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
- await current.fill('0');await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).click();
+ await current.fill(String(currentA));
+ if(currentA===0)await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).click();else await current.press('Enter');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await reader.locator('[data-guide-action="endSpin"]').click();
- const zero=await exported(page);expect(zero.result.config.currentA).toBe(0);expect(zero.result.transport!.snapshots.at(-1)!.neutralRadS).toBe(0);
- await reader.locator('[data-guide-action="currentExperiment"]').click();
- await expect(current).toBeFocused();await current.fill('0.03');await current.press('Enter');
- await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});await reader.locator('[data-guide-action="endSpin"]').click();
- const driven=await exported(page);expect(driven.result.config.currentA).toBe(.03);expect(driven.result.transport!.snapshots.at(-1)!.neutralRadS).toBeGreaterThan(0);
- expect(driven.result.config.durationS).toBe(zero.result.config.durationS);await expect(page.locator('#window-guide')).toBeVisible();
+ const run=await exported(page);expect(run.result.config.currentA).toBe(currentA);
+ const speed=run.result.transport!.snapshots.at(-1)!.neutralRadS;
+ if(currentA===0)expect(speed).toBe(0);else expect(speed).toBeGreaterThan(0);
+ expect(run.result.config.durationS).toBe(Number(duration));await expect(page.locator('#window-guide')).toBeVisible();
  await expect(reader.locator('#reader-status')).toBeEmpty();
 });
 
