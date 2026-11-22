@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 test('tutorial animations move atoms, conserve inventory and expose pause and replay',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/start.html');
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/guide.html');
  const sample=page.locator('[data-sample-example]'),range=sample.getByRole('slider');
  await expect(range).toBeEnabled();await expect(sample).toHaveAttribute('data-motion','paused');
  await range.focus();await range.press('End');
