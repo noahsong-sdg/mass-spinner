@@ -30,7 +30,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   }
   showMotion();
   if(motion){
-   const pause=(paused:boolean)=>{figure.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play motion':'Pause motion';};
+   const pause=(paused:boolean)=>{if(!paused)figure.dataset.motionStarted='true';figure.dataset.motion=paused?'paused':'running';motion.textContent=paused?'Play motion':'Pause motion';};
    pause(win.matchMedia?.('(prefers-reduced-motion: reduce)').matches??false);motion.disabled=false;
    motion.addEventListener('click',()=>pause(figure.dataset.motion!=='paused'));
   }

@@ -90,6 +90,7 @@ test('diagram choices affect only their own figure and motion starts paused when
  const figures=dom.window.document.querySelectorAll<HTMLElement>('[data-concept-example]');assert.ok(figures.length>=3);
  for(const figure of figures){
   assert.equal(figure.dataset.motion,'paused');
+  assert.equal(figure.dataset.motionStarted,undefined);
   const choices=figure.querySelectorAll<HTMLButtonElement>('[data-concept-select]');
   for(const choice of choices){
    assert.equal(choice.disabled,false);choice.click();
@@ -100,11 +101,13 @@ test('diagram choices affect only their own figure and motion starts paused when
    assert.equal(figure.querySelector('[data-concept-reading]')!.textContent,figure.querySelector<HTMLTemplateElement>(`[data-concept-description="${choice.dataset.conceptSelect}"]`)!.content.textContent);
   }
   const motion=figure.querySelector<HTMLButtonElement>('[data-concept-motion]');
-  if(motion&&!motion.hidden){motion.click();assert.equal(figure.dataset.motion,'running');motion.click();assert.equal(figure.dataset.motion,'paused');}
+  if(motion&&!motion.hidden){motion.click();assert.equal(figure.dataset.motion,'running');assert.equal(figure.dataset.motionStarted,'true');motion.click();assert.equal(figure.dataset.motion,'paused');assert.equal(figure.dataset.motionStarted,'true');}
  }
  const css=readFileSync('web-assets/guide.css','utf8');
  assert.match(css,/\[data-concept-panel\]\[hidden\]\{display:none\}/);
  assert.match(css,/concept-reveal/,'the two speed curves must reveal the same time range');
+ assert.match(css,/\.concept-example\[data-motion=paused\] \.concept-rotor,\.concept-example\[data-motion=paused\] \.concept-packet\{animation-play-state:paused\}/);
+ assert.match(css,/\.concept-example:not\(\[data-motion-started\]\) \.concept-reveal\{animation:none\}/,'show the full static reference before a reduced-motion reader starts playback');
 });
 
 

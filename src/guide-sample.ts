@@ -25,7 +25,7 @@ export function sampleDiagram(){
  <div class="sample-controls"><label>Atoms in sample <output data-sample-count>0 / 100</output><input type="range" min="0" max="100" step="1" value="0" aria-label="Atoms collected in example sample" disabled></label><button type="button" data-sample-replay disabled>Replay</button></div>
  <dl class="sample-metrics"><div><dt>Purity · light / all atoms in sample</dt><dd data-sample-purity>0 / 0 · undefined</dd></div><div><dt>Light recovery · kept / original light</dt><dd data-sample-recovery>0 / 76 = 0.0%</dd></div></dl>
  <p class="diagram-reading" data-sample-reading aria-live="polite">The original mixture is 76 / 1,000 = 7.6% light. Collect a sample to compare its purity and recovery.</p>
- <figcaption>This prescribed sample shows atom counts, not your run or an extraction-flow calculation. Positions and motion are illustrative. Atoms in transit remain outside the sample until arrival.</figcaption></figure>`;
+ <figcaption>This sample shows atom counts. It does not show your run or calculate extraction flow. Positions and motion are examples. Count an atom in the sample only after it enters.</figcaption></figure>`;
 }
 export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof globalThis){
  const range=figure.querySelector<HTMLInputElement>('input')!,play=figure.querySelector<HTMLButtonElement>('[data-sample-play]')!,replay=figure.querySelector<HTMLButtonElement>('[data-sample-replay]')!;

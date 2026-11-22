@@ -23,7 +23,7 @@ function spinDiagram(id:string):Concept{
   :[{label:'Drive stays on',coupling:1,cut:Infinity},{label:'Power off at 2',coupling:1,cut:2}];
  return {title:compare?'Change one input. Compare at the same time.':'Ions accelerate first. Collisions accelerate neutral gas.',
   description:'Curves show an exact two-population reference. Both populations have equal, constant inertias. Collision torque is proportional to their speed difference. Without wall drag, total angular momentum increases only while drive is on.',
-  caption:'Analytic reference, not your run. Time and speed use fixed reference scales. Turning markers show scaled bulk rotation, not atom paths. Inertias are equal and constant. No wall drag or radial transport.',
+  caption:'Analytic reference, not your run. Time and speed use fixed reference scales. Markers show slow bulk rotation, not atom paths. Inertias are equal and constant. No wall drag or radial transport.',
   states:states.map(({label,coupling,cut})=>({label,reading:compare?`Coupling ×${coupling}: collisions change the speed difference. They do not change total angular momentum.`
    :cut===Infinity?'While power stays on, total angular momentum increases.':'After power stops at time 2, collisions exchange angular momentum without changing its total.',
    body:`${text(180,18,'Speed / reference speed')}<path d="M42 36V190H328" class="diagram-axis"/>
