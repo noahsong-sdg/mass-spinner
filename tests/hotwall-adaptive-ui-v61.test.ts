@@ -71,7 +71,7 @@ test('invalid refined scenarios reject atomically without changing existing sett
 });
 
 test('refined Export prepares gzip asynchronously and releases its download URL on disposal',{timeout:5000},async t=>{
- const f=fixture(t);restoreScenario(f.doc,scenario({...spatialControls,'fuel-thermal-resolution':'refined'}));await f.ui.run();
+ const f=fixture(t);restoreScenario(f.doc,scenario({...spatialControls,'fuel-thermal-resolution':'refined','fuel-failure-pressurePa':1}));await f.ui.run();
  const create=URL.createObjectURL,revoke=URL.revokeObjectURL,anchors=f.doc.defaultView!.HTMLAnchorElement.prototype,anchor=anchors.click;
  let resolveDownload:(blob:Blob)=>void,filename='';const downloaded=new Promise<Blob>(resolve=>{resolveDownload=resolve;});const revoked:string[]=[];
  URL.createObjectURL=(blob:Blob)=>{resolveDownload(blob);return 'blob:refined-download';};URL.revokeObjectURL=url=>{revoked.push(String(url));};
@@ -81,7 +81,12 @@ test('refined Export prepares gzip asynchronously and releases its download URL 
  assert.match(f.ui.nodes.render.textContent,/Compressed export in progress/);
  const blob=await downloaded;assert.equal(blob.type,'application/gzip');
  const payload=await new Response(blob.stream().pipeThrough(new DecompressionStream('gzip'))).text();
- assert.equal(payload,JSON.stringify({model:'marathon-centrifuge',...f.ui.latest}));assert.equal(filename,'mass-spinner-centrifuge.json.gz');
+ const {failureIllustration,...accepted}=JSON.parse(payload);
+ assert.equal(JSON.stringify(accepted),JSON.stringify({model:'marathon-centrifuge',...f.ui.latest}));assert.equal(filename,'mass-spinner-centrifuge.json.gz');
+ assert.deepEqual(failureIllustration.limits,{pressurePa:1,externalPa:0,linerK:1800});
+ assert.equal(failureIllustration.event.timeS,0);assert.equal(failureIllustration.event.pressurePa,10);
+ assert.deepEqual(failureIllustration.event.causes,['pressure']);
+ assert.match(failureIllustration.scope,/States after the event do not describe failed equipment/);
  assert.equal(f.node('fuel-export').disabled,false);assert.equal(f.node('fuel-export').textContent,'Export');
  f.ui.dispose();assert.deepEqual(revoked,['blob:refined-download']);
 });
