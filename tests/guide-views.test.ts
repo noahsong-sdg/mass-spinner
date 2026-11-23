@@ -31,6 +31,7 @@ test('the four views preserve coupled data, distinguish references, and reveal p
  const select=(mode:string)=>figure.querySelector<HTMLButtonElement>(`[data-view-mode="${mode}"]`)!.click();
  const line=()=>figure.querySelector('[data-view-line="0"]')!.getAttribute('d');
  assert.equal(figure.dataset.motion,'paused','no automatic motion, including with reduced motion');
+ assert.match(figure.querySelector('[data-view-reading]')!.textContent!,/total gas density, not isotope percentage/);
  assert.equal(line(),'M48 210');
  time.value='.5';time.dispatchEvent(new dom.window.Event('input'));
  const snapshot=figure.querySelector('[data-view-gas]')!.innerHTML,speed=figure.querySelector('[data-view-speeds]')!.textContent,path=line();

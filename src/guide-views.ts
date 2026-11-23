@@ -1,7 +1,7 @@
 export type Frame={time:number;ion:number;gas:number;ionPhase:number;gasPhase:number;cdf:number[][]};
 export type ViewData={frames:Frame[];reference:Frame;turnoverHz:number};
 const modes=[
- {id:'transport',label:'Coupled separation',question:'Where does the gas collect during the run?',reading:'The shaded rings show density. Straight arrows show gas-shell displacement from the initial radii. They do not show force.'},
+ {id:'transport',label:'Coupled separation',question:'Where does the gas collect during the run?',reading:'The shaded rings show total gas density, not isotope percentage. Straight arrows show gas-shell displacement from the initial radii. They do not show force.'},
  {id:'spin',label:'Coupled spin-up',question:'How fast do ions and neutral gas turn?',reading:'Open markers show ions. Filled markers show neutral gas. Without the density surface, the motion is easier to see. The calculated state stays the same.'},
  {id:'equilibrium',label:'Equilibrium reference',question:'What does the ideal equilibrium predict?',reading:'This distribution uses the final speed of the uniform-inertia reference. It does not show the coupled run at the selected time.'},
  {id:'flow',label:'Flow · reference',question:'Does a pumping estimate calculate chamber flow?',reading:'No. The moving packet below the vessel shows reference throughput. It does not give a chamber velocity or an extraction path.'},
@@ -66,7 +66,7 @@ export function setupViewsDiagram(figure:HTMLElement){
   put('[data-view-speeds]',`${coupled?'Selected time':'Final bulk reference'}: ions ${s.ion.toFixed(0)} / gas ${s.gas.toFixed(0)} m/s`);
   const density=neutralDensity(s.cdf);
   const rings=figure.querySelector<SVGGElement>('[data-view-density]')!;rings.style.display=mode.id==='spin'||mode.id==='flow'?'none':'';
-  rings.innerHTML=density.map((d,i)=>{const n=density.length,r0=105*Math.sqrt(i/n),r1=105*Math.sqrt((i+1)/n);return `<circle cx="160" cy="140" r="${(r0+r1)/2}" fill="none" stroke="#9bd8ce" stroke-width="${r1-r0+.1}" opacity="${.7*d/densityMax}"/>`;}).join('');
+  rings.innerHTML=density.map((d,i)=>{const n=density.length,r0=105*Math.sqrt(i/n),r1=105*Math.sqrt((i+1)/n);return `<circle cx="160" cy="140" r="${(r0+r1)/2}" fill="none" stroke="#90a393" stroke-width="${r1-r0+.1}" opacity="${.7*d/densityMax}"/>`;}).join('');
   for(const [kind,count]of [['gas',80],['ions',20]] as const){
    figure.querySelector(`[data-view-${kind}]`)!.innerHTML=Array.from({length:count},(_,i)=>{
     const light=i<Math.round(count*.0759),species=light?0:1,within=light?i:i-Math.round(count*.0759),amount=light?Math.round(count*.0759):count-Math.round(count*.0759);
