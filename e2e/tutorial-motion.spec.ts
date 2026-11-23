@@ -51,6 +51,8 @@ test('tutorial animations move atoms, conserve inventory and expose pause and re
  const start=await packet.evaluate(n=>getComputedStyle(n).offsetDistance);await page.waitForTimeout(150);
  expect(await packet.evaluate(n=>getComputedStyle(n).offsetDistance)).not.toBe(start);
  await energy.getByRole('button',{name:'Pause motion',exact:true}).click();
+ await expect(packet).toHaveCSS('animation-play-state','paused');
+ await packet.evaluate(async node=>{await Promise.all(node.getAnimations().map(animation=>animation.ready));});
  const stoppedPacket=await packet.evaluate(n=>getComputedStyle(n).offsetDistance);await page.waitForTimeout(150);
  expect(await packet.evaluate(n=>getComputedStyle(n).offsetDistance)).toBe(stoppedPacket);
  await energy.getByRole('button',{name:'Play motion',exact:true}).click();

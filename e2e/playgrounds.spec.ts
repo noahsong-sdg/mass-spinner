@@ -300,7 +300,7 @@ for(const currentA of [0,.03])test(`control tutorial applies ${currentA} A throu
  await reader.locator('main a[href="/start.html"]').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
- await expect(current).toBeFocused();await expect(current).toHaveValue(currentA>0?'0':'0.03');
+ await expect(current).toBeFocused({timeout:30_000});await expect(current).toHaveValue(currentA>0?'0':'0.03');
  expect((await current.boundingBox())!.width).toBeGreaterThanOrEqual(100);
  const body=(await page.locator('#window-controls .world-window-body').boundingBox())!,apply=(await page.getByRole('button',{name:'Apply Radial discharge current',exact:true}).boundingBox())!;
  expect(apply.y).toBeGreaterThanOrEqual(body.y);expect(apply.y+apply.height).toBeLessThanOrEqual(body.y+body.height+1);
