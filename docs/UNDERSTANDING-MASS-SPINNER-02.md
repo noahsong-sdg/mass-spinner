@@ -623,17 +623,22 @@ It does not show accuracy for Marathon equipment or lithium gas.
 
 ## What do the menu options mean?
 
-Different pictures can look like different physical models. Use this key to compare a calculated history with a reference.
+Use the two coupled views to answer different questions about one run. Use the reference views to examine separate assumptions.
 
 Start with Coupled separation and one plot related to your question. The other views answer different questions about the same equipment.
 Gas view changes the display, not the physics. Use Controls to set optional models to on.
 
+<!-- diagram:views -->
+
 | Gas view | Meaning and limit |
 |---|---|
 | Equilibrium reference | Ideal equilibrium at the bulk reference's last speed. This is not the coupled model's last state. |
-| Coupled separation | Coupled time history. Rings show mean rotation. Dots show weighted populations, not particle paths. |
-| Coupled spin-up | The same coupled solution, with slower displayed rotation. The distribution continues to change with physical time. |
+| Coupled separation | Density shading and gas-shell displacement during the run. Open rings show ions. Filled dots show neutral gas. |
+| Coupled spin-up | The same speeds, radial distributions and rotation clock. The density surface is hidden so you can see the markers. |
 | Flow · reference | A schematic reference. It does not calculate inlet/outlet fluid motion or changes in rotor motion caused by flow. |
+
+Both coupled views show rotation at a lower display rate so you can see it. This display scale does not change the calculated speed.
+A change of Gas view returns playback to time zero. For a comparison, select the same physical time again.
 
 The time slider selects physical seconds. The label “1 s screen = …” gives the playback scale.
 Read the speed in m/s. Do not count displayed turns.
@@ -648,8 +653,6 @@ For a time plot, move along the horizontal axis to read what happens next.
 For a radial profile, move along it to read a different location at the same time.
 For a parameter scan, move along it to compare different calculations, not later times.
 This distinction explains why Play changes some plots but leaves a reference scan unchanged.
-
-<!-- diagram:views -->
 
 | Plot | Meaning |
 |---|---|

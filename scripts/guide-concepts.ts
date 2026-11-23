@@ -1,3 +1,5 @@
+import {viewsDiagram} from '../src/guide-views.js';
+import {viewExampleData} from './guide-view-data.js';
 import {sampleDiagram} from '../src/guide-sample.js';
 import {forceDiagram} from '../src/guide-force.js';
 import {densityScanDiagram} from '../src/guide-density.js';
@@ -73,9 +75,6 @@ function routingDiagram(id:string):Concept|undefined{
   diagnostic:{title:'The instrument receives light along a sightline.',description:'Local gas speed is not always the measured Doppler velocity. Light from different positions and the spectral estimator can change the calculated value.',caption:'Diagnostic geometry only. No emission profile, measured velocity or agreement is assumed.',states:[
    {label:'Local motion',reading:'Gas at each position has a local velocity. The instrument measures the component along its sightline.',body:`<circle cx="135" cy="116" r="75" class="concept-vessel"/>${[75,135,195].map(x=>`<circle cx="${x}" cy="116" r="5" class="concept-sample"/>`).join('')}${text(135,220,'positions inside the gas')}`},
    {label:'Collected light',reading:'Light reaches the detector from several positions. The spectrum includes that light. The velocity estimate uses the spectrum.',body:`<circle cx="105" cy="116" r="70" class="concept-vessel"/><circle cx="105" cy="116" r="2"/>${route(id,'M25 90H250')}${box(252,68,'Detector')}${[55,105,155].map(x=>`<circle cx="${x}" cy="90" r="5" class="concept-sample"/>`).join('')}${text(150,220,'offset sightline · multiple positions')}`},]},
-  views:{title:'A view changes the display. Controls change the run.',description:'Coupled separation and coupled spin-up display the same solution. Equilibrium and flow references answer different questions.',caption:'View key only. These shapes are not new simulation results.',states:[
-   {label:'Coupled',reading:'One calculated history gives rotation, composition and heat. Physical time selects a state. The two coupled views show the same solution.',body:`${box(128,22,'One run')}${box(18,145,'Separation')}${box(238,145,'Spin-up')}${route(id,'M150 74L70 138')}${route(id,'M210 74L290 138')}`},
-   {label:'References',reading:'Equilibrium gives an ideal final distribution. Flow shows a prescribed path. Neither view adds fluid dynamics to the coupled solution.',body:`${box(18,90,'Equilibrium')}${box(238,90,'Flow path')}${text(180,178,'separate reference assumptions')}`},]},
  };
  return scenarios[id];
 }
@@ -87,6 +86,7 @@ function inventoryDiagram():Concept{
    ${text(180,158,'Exhaust inventory / initial inventory')}<rect x="40" y="180" width="${260*ratio/2.1}" height="24" class="concept-bar" data-ratio="${ratio}"/>${text(180,234,`${ratio.toFixed(2)} × initial inventory`)}`};}),};
 }
 export function conceptDiagram(id:string):string|null{
+ if(id==='views')return viewsDiagram(viewExampleData());
  if(id==='goal')return sampleDiagram();
  if(id==='turning')return forceDiagram();
  if(id==='density-scan')return densityScanDiagram();

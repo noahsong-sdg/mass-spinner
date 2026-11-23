@@ -1,3 +1,4 @@
+import {setupViewsDiagram} from './guide-views.js';
 import {setupSampleDiagram} from './guide-sample.js';
 import {setupForceDiagram} from './guide-force.js';
 import {setupDensityScan} from './guide-density.js';
@@ -6,6 +7,7 @@ import {setupEquationPlots} from './equation-dialog.js';
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
  setupEquationPlots(doc);
+ for(const figure of doc.querySelectorAll<HTMLElement>('[data-view-example]'))setupViewsDiagram(figure);
  const origin=win.location.origin,status=doc.getElementById('reader-status'),browser=doc.defaultView!;
  if(embedded)for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href]'))if(['http:','https:'].includes(link.protocol)&&link.origin!==origin){link.target='_blank';link.relList.add('noopener');}
  let requestId='';
