@@ -237,7 +237,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  let motion:Geometry['motion']|null=null,tools:Geometry['tools']|null=null,baselineViewer:ApparatusViewer<FuelModel>|null=null,baselineMotion:Geometry['motion']|null=null,baselineTools:Geometry['tools']|null=null,pinned:PinnedFuelSnapshot|null=null,plotCursor:ReturnType<typeof renderPlots>|null=null,lastProfileTime=-Infinity,dragCut:number|null=null,elapsed=0,playing=!doc.defaultView!.matchMedia?.('(prefers-reduced-motion: reduce)').matches;const timeScales:Record<string,number>={};
  let burst:Geometry['burst']|null=null,baselineBurst:Geometry['burst']|null=null,failureAge=0,activeFailure:FuelFailure|null=null;
  let failureLimits={...DEFAULT_FUEL_FAILURE},failureCache=new WeakMap<FuelResult,FuelFailure|null>();
- const failureUI=createFuelFailureUI(doc,nodes.controls,nodes.render,()=>changed(),()=>{elapsed=0;playing=false;playback();draw();});
+ const failureUI=createFuelFailureUI(doc,nodes.controls,nodes.render,()=>changed(),()=>{elapsed=0;playing=false;playback();draw();},onControls);
  function failureFor(result:FuelResult){
   if(!failureCache.has(result))failureCache.set(result,firstFuelFailure(result,failureLimits));
   return failureCache.get(result)!;

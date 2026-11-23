@@ -14,7 +14,7 @@ The check uses accepted coupled-run states. It stops at the first retained state
 
 After the stop, the 3D display moves the existing assembly parts apart. This motion is an illustration. The model does not calculate fracture, gas release, debris speed, electron pressure, chemical reactions or external-pressure buckling. The temperature limit is not a tungsten melting point. The supported solid-property range is 300–1900 K.
 
-Coupled spin-up and coupled separation use the same failure time. Plots and the time slider stop there. Equilibrium and flow references remain available as reference calculations. Rewind restores intact hardware before a later event. An excessive initial load requires an input change.
+Coupled spin-up and coupled separation use the same failure time. Plots and the time slider stop there. Equilibrium and flow references remain available as reference calculations. Rewind restores intact hardware before a later event. An excessive initial load requires an input change. Change limits opens the related input. Rewind is not available at time zero.
 
 Pinned comparisons use the earliest failure time of either run under the selected limits. The failed run shows the burst. Export includes the limits and event beside the full closed-vessel calculation. States after the event do not describe failed equipment. Copy link includes the limits. Older links use the defaults.
 

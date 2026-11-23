@@ -14,10 +14,12 @@ test('assumed failure limits stop the model, show the cause and restore the hard
  await expect(page.locator('#fuel-motion-play')).toHaveText('Play');await expect(page.locator('#fuel-power')).toBeDisabled();
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();
  await expect(page.locator('#fuel-failure')).toBeVisible();await expect(page.locator('#fuel-render .apparatus-frame').first()).toHaveAttribute('data-failure-state','failed');
+ await expect(page.locator('#fuel-failure').getByRole('button',{name:'Rewind',exact:true})).toBeDisabled();
  await info.attach('failure-illustration',{body:await page.screenshot(),contentType:'image/png'});
  await page.locator('#fuel-motion-mode').selectOption('equilibrium');await expect(page.locator('#fuel-failure')).toBeHidden();
  await page.locator('#fuel-motion-mode').selectOption('transport');await expect(page.locator('#fuel-failure')).toBeVisible();
- await page.getByRole('button',{name:'Controls',exact:true}).click();
+ await page.locator('#fuel-failure').getByRole('button',{name:'Change limits',exact:true}).click();
+ await expect(pressure).toBeFocused();
  await pressure.fill('1000');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await expect(page.locator('#fuel-failure')).toBeHidden();
  await liner.fill('900');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
