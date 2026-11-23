@@ -92,7 +92,6 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);
  await cue.getByRole('button',{name:'Replay motion',exact:true}).click();await expect(page.locator('#fuel-plot')).toHaveValue('spin');
  await expect(page.locator('#fuel-motion-mode')).toHaveValue('spin');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
- await info.attach('gas-drive-focus',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
 });
 
 test('direct reading action opens the same-tab workspace at its clicked section',async({page,context})=>{
@@ -122,6 +121,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const frame=await reader(page);await frame.goto('/start.html#current');
  await frame.locator('[data-guide-action="currentExperiment"]').click();
+ await expect(page.locator('.guide-experiment')).toBeVisible({timeout:30_000});
  await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');
  await expect(page.locator('#fuel-view-drive')).toHaveValue('off');
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
