@@ -121,7 +121,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const frame=await reader(page);await frame.goto('/start.html#current');
  await frame.locator('[data-guide-action="currentExperiment"]').click();
- await expect(page.locator('.guide-experiment')).toBeVisible({timeout:30_000});
+ await expect(page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true})).toBeVisible({timeout:30_000});
  await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');
  await expect(page.locator('#fuel-view-drive')).toHaveValue('off');
  await expect(page.locator('#window-controls')).toBeVisible();await expect(page.locator('#window-plots')).toBeVisible();await expect(page.locator('#window-guide')).toBeVisible();
