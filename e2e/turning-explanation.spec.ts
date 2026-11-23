@@ -14,7 +14,10 @@ test('the inward-force explanation shows motion, pressure and density in separat
  await expect(figure.locator('[data-turning-free]')).toHaveAttribute('cy','65');
  await figure.getByRole('button',{name:'2 Pressure',exact:true}).click();
  await expect(slider).toHaveValue('0');await expect(figure.locator('[data-turning-panel="0"]')).toBeHidden();
- await expect(figure.locator('[data-pressure-net]')).toBeVisible();
+ await expect(figure.locator('[data-turning-panel="1"] svg').last()).toBeVisible();
+ const net=figure.locator('[data-pressure-net]');
+ await expect(net).toHaveAttribute('x1','170');await expect(net).toHaveAttribute('x2','140');
+ expect(await net.evaluate(node=>getComputedStyle(node).strokeWidth)).toBe('3px');
  await info.attach('inward-pressure-balance',{body:await figure.screenshot(),contentType:'image/png'});
  await figure.getByRole('button',{name:'3 Density',exact:true}).click();await slider.press('End');
  await expect(figure.locator('[data-turning-ratios]')).toContainText('⁶Li 5.09× · ⁷Li 6.68×');
