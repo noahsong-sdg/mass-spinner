@@ -1,4 +1,5 @@
 import {setupSampleDiagram} from './guide-sample.js';
+import {setupForceDiagram} from './guide-force.js';
 /** Links in the separate reader work without this script. Embedded readers use application actions. */
 export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'location'|'matchMedia'|'addEventListener'|'open'>=window){
  const doc=win.document,embedded=win.parent!==win;doc.body.classList.toggle('embedded',embedded);
@@ -36,6 +37,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   }
  }
  for(const sample of doc.querySelectorAll<HTMLElement>('[data-sample-example]'))setupSampleDiagram(sample,browser);
+ for(const figure of doc.querySelectorAll<HTMLElement>('[data-turning-example]'))setupForceDiagram(figure,browser);
  const density=doc.querySelector<HTMLElement>('[data-density-example]');
  if(density)for(const button of density.querySelectorAll<HTMLButtonElement>('[data-density-select]'))button.addEventListener('click',()=>{
   density.dataset.case=button.dataset.densitySelect;

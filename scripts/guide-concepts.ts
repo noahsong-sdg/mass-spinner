@@ -1,4 +1,5 @@
 import {sampleDiagram} from '../src/guide-sample.js';
+import {forceDiagram} from '../src/guide-force.js';
 type State={label:string;reading:string;body:string};
 type Concept={title:string;description:string;caption:string;states:State[]};
 const text=(x:number,y:number,value:string)=>`<text x="${x}" y="${y}" text-anchor="middle">${value}</text>`;
@@ -90,6 +91,7 @@ function inventoryDiagram():Concept{
 }
 export function conceptDiagram(id:string):string|null{
  if(id==='goal')return sampleDiagram();
+ if(id==='turning')return forceDiagram();
  let concept:Concept|undefined;
  if(id==='spin'||id==='compare')concept=spinDiagram(id);
  else if(id==='bias'||id==='magnetic')concept=ratioDiagram(id);

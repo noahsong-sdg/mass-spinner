@@ -18,7 +18,7 @@ export function understandingPage(markdown,revision,tutorial){
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
  let section='';
  const sourceBase=releaseSourceBase(revision)+'docs/';
- const diagrams=new Set(topics.flatMap(topic=>topic.diagram?[topic.diagram]:[])),usedDiagrams=new Set();
+ const diagrams=new Set(topics.flatMap(topic=>topic.diagram??[])),usedDiagrams=new Set();
  const baseRenderer=new Renderer();
  const parser=new Marked({renderer:{
   code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation. If necessary, scroll horizontally.">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},

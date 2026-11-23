@@ -39,7 +39,7 @@ test('the website renders every guide equation and its derivation, with accessib
  for(const equation of doc.querySelectorAll('.equation'))assert.equal(equation.getAttribute('role'),'group');
  for(const table of doc.querySelectorAll('table')){assert.equal(table.getAttribute('tabindex'),'0');assert.ok(table.getAttribute('aria-label'));}
  assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
- assert.equal(doc.querySelectorAll('figure').length,guideTopics.filter(topic=>'diagram' in topic).length);
+ assert.equal(doc.querySelectorAll('figure').length,guideTopics.flatMap(topic=>'diagram' in topic?topic.diagram:[]).length);
  assert.equal(doc.querySelectorAll('[data-drive-diagram] svg').length,2);
  assert.equal(doc.querySelectorAll('[data-density-example] svg').length,2);
  for(const svg of doc.querySelectorAll('figure svg')){
@@ -254,7 +254,8 @@ test('explicit diagram markers follow definitions and reject unknown or repeated
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
  const section=dom.window.document.getElementById('composition')!;
  let before='';
- for(let n=section.nextElementSibling;n&&n.tagName!=='FIGURE';n=n.nextElementSibling)before+=` ${n.textContent}`;
+ for(let n=section.nextElementSibling;n&&!n.matches('[data-density-example]');n=n.nextElementSibling)if(n.tagName!=='FIGURE')before+=` ${n.textContent}`;
+ assert.ok(section.nextElementSibling?.nextElementSibling?.matches('[data-turning-example]'),'the force explanation follows the motivation');
  assert.match(before,/number density \(atoms\/m³\)/s);
  assert.match(before,/local light fraction.*n.*axis density/s);
  for(const text of ['<!-- diagram:unknown -->','<!-- diagram:drive -->\n\n<!-- diagram:drive -->'])

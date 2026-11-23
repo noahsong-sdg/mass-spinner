@@ -48,6 +48,8 @@ Without thermal evolution, temperature stays constant. [§4 explains the motion]
 
 Rotation is useful only if it changes the isotope mixture. We need to know which isotope becomes more common at each radius.
 
+<!-- diagram:turning -->
+
 An atom moving in a straight line would leave a circular path. Inward force continually changes its direction.
 A turning gas contains random atom motion as well as motion around the axis.
 The model describes the mean motion of many atoms. It does not put each atom on a perfect circular orbit.
