@@ -24,9 +24,9 @@ export function createFuelFailureUI(doc:Document,controls:HTMLElement,host:HTMLE
   show(failure:FuelFailure|null,error?:string,pinned=false){
    const next=JSON.stringify([failure,error,pinned]);if(next===key)return;key=next;panel.hidden=!failure&&!error;
    panel.dataset.state=error?'invalid':failure?'failed':'intact';rewind.hidden=!failure;
-   displayed=failure;edit.hidden=!failure;rewind.disabled=failure?.timeS===0;rewind.title=rewind.disabled?'The initial state is above a limit. Change the inputs.':'';
+   displayed=failure;edit.hidden=!failure;rewind.disabled=failure?.timeS===0;rewind.title=rewind.disabled?'The initial load is more than a limit. Change the inputs.':'';
    title.textContent=error?'Check failure limits':pinned?'Pinned run stopped':'Run stopped';scope.hidden=!!error;
-   reading.textContent=error??(failure?`${failure.causes.includes('pressure')?`Pressure difference ${fmt(failure.pressurePa-failure.limits.externalPa)} Pa > ${fmt(failure.limits.pressurePa)} Pa. `:''}${failure.causes.includes('temperature')?`Liner ${fmt(failure.linerK!)} K > ${fmt(failure.limits.linerK)} K. `:''}First stored state above the limit: ${fmt(failure.timeS)} s.`:'');
+   reading.textContent=error??(failure?`${failure.causes.includes('pressure')?`Pressure difference ${fmt(failure.pressurePa-failure.limits.externalPa)} Pa > ${fmt(failure.limits.pressurePa)} Pa. `:''}${failure.causes.includes('temperature')?`Liner ${fmt(failure.linerK!)} K > ${fmt(failure.limits.linerK)} K. `:''}First stored state with a load more than its limit: ${fmt(failure.timeS)} s.`:'');
   },
  };
 }

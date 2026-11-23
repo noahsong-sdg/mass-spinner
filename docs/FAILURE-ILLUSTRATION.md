@@ -10,11 +10,11 @@ Controls → Failure limits sets three assumptions:
 
 These values are not Marathon equipment ratings. The vessel stays still while the gas rotates. Gas speed alone does not specify a vessel burst limit.
 
-The check uses accepted coupled-run states. It stops at the first retained state above either limit. It does not calculate the exact crossing time. Pressure equals local neutral number density times Boltzmann's constant times local gas temperature. The outer cell gives a volume average, not resolved wall traction. A coarse grid can miss the wall layer.
+The check uses accepted coupled-run states. It stops at the first retained state with a load more than either limit. It does not calculate the exact crossing time. Pressure equals local neutral number density times Boltzmann's constant times local gas temperature. The outer cell gives a volume average, not resolved wall traction. A coarse grid can miss the wall layer.
 
 After the stop, the 3D display moves the existing assembly parts apart. This motion is an illustration. The model does not calculate fracture, gas release, debris speed, electron pressure, chemical reactions or external-pressure buckling. The temperature limit is not a tungsten melting point. The supported solid-property range is 300–1900 K.
 
-Coupled spin-up and coupled separation use the same failure time. Plots and the time slider stop there. Equilibrium and flow references remain available as reference calculations. Rewind restores intact hardware before a later event. An excessive initial load requires an input change. Change limits opens the related input. Rewind is not available at time zero.
+Coupled spin-up and coupled separation use the same failure time. Plots and the time slider stop there. Equilibrium and flow references remain available as reference calculations. Rewind restores intact hardware before a later event. If an initial load is more than its limit, change an input. Change limits opens the related input. Rewind is not available at time zero.
 
 Pinned comparisons use the earliest failure time of either run under the selected limits. The failed run shows the burst. Export includes the limits and event beside the full closed-vessel calculation. States after the event do not describe failed equipment. Copy link includes the limits. Older links use the defaults.
 

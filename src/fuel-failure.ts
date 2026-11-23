@@ -17,7 +17,7 @@ export function fuelFailureLoad(result:FuelRenderResult,state:FuelTransportCheck
  if(!Number.isFinite(pressurePa)||pressurePa<0||linerK!==null&&(!Number.isFinite(linerK)||linerK<=0))throw new RangeError('Failure assessment requires finite accepted pressure and temperature.');
  return {pressurePa,linerK};
 }
-/** Report the first retained state above a specified limit, without claiming an exact fracture time. */
+/** Report the first retained state with a load more than its limit, without claiming an exact fracture time. */
 export function firstFuelFailure(result:FuelRenderResult,limits:FuelFailureLimits):FuelFailure|null{
  validateFuelFailureLimits(limits);
  for(const state of result.transport?.checkpoints??result.transport?.snapshots??[]){
