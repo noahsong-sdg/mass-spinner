@@ -121,11 +121,33 @@ The curves show density against distance from the axis. The label “6×” is a
 The heavier density increases more sharply. Thus, the light percentage decreases toward the wall.
 
 [Show your end-of-run composition](/?level=2&guide=physics&topic=composition&try=composition).
-Select the axis and then the wall. Compare each percentage with the feed percentage, not 50%.
+Select the axis and then the wall.
 
-With a feed light fraction of 7.59%, a local value of 8% is enrichment.
-It means about 80 light atoms in 1,000 atoms at that location, compared with about 76 in the feed.
-It does not mean that this location contains 8% of the vessel's light atoms.
+The feed is the gas mixture before separation. Its light fraction is the number of light atoms divided by the number of all atoms.
+A feed light fraction of 7.59% means that 7.59% of its atoms are light. The other 92.41% are heavy.
+
+“Local” means within a small region at the selected radius. For an example, use a local light fraction of 8%.
+Compare equal groups of 10,000 atoms:
+
+| Group | Light atoms | Heavy atoms | Light percentage |
+| --- | ---: | ---: | ---: |
+| Feed before separation | 759 | 9,241 | 7.59% |
+| Small region after separation | 800 | 9,200 | 8% |
+
+The second group has more light atoms for the same total atom count. This increase in light percentage is called enrichment.
+Compare the local percentage with the feed percentage, not 50%. A region can be enriched in light atoms while most atoms there remain heavy.
+
+The two groups in the table can have different volumes. They compare mixtures, not the sizes of regions.
+To calculate how many light atoms a region contains, you also need its volume and light-atom density.
+
+The local 8% divides light atoms in that region by **all atoms in that region**.
+To find the region's share of the vessel's light atoms, divide its light-atom count by **all light atoms in the vessel**.
+These are different totals.
+
+If the whole vessel contains 100,000 light atoms, the region's 800 light atoms are 800 / 100,000 = 0.8% of that total.
+Its local light fraction is still 8%, because 800 of its 10,000 atoms are light.
+
+In this closed vessel, separation moves atoms between regions. It does not create light atoms.
 
 An outer ring also has more volume than an inner ring of the same thickness. Density alone does not give its atom count.
 

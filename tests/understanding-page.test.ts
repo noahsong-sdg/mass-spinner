@@ -249,6 +249,25 @@ test('condensed reference tables explain each entry once',t=>{
  }
 });
 
+test('the composition example compares equal atom counts and defines both percentage totals',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
+ const doc=dom.window.document;
+ const table=[...doc.querySelectorAll('table')].find(node=>node.textContent!.includes('Feed before separation'))!;
+ const rows=[...table.querySelectorAll('tbody tr')];
+ assert.equal(rows.length,2);
+ for(const row of rows){
+  const cells=[...row.querySelectorAll('td')].map(cell=>cell.textContent!.trim());
+  const [light,heavy]=cells.slice(1,3).map(value=>Number(value.replaceAll(',','')));
+  assert.equal(light!+heavy!,10_000);
+  assert.equal(light!/(light!+heavy!)*100,Number(cells[3]!.replace('%','')));
+ }
+ assert.match(doc.body.textContent!,/The feed is the gas mixture before separation/);
+ assert.match(doc.body.textContent!,/all atoms in that region/);
+ assert.match(doc.body.textContent!,/all light atoms in the vessel/);
+ assert.match(doc.body.textContent!,/can have different volumes/);
+ assert.match(doc.body.textContent!,/800 \/ 100,000 = 0\.8%/);
+});
+
 
 test('explicit diagram markers follow definitions and reject unknown or repeated diagrams',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
