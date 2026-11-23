@@ -322,7 +322,7 @@ test('the beginner guide explains every actual gas-view and plot menu option wit
  const reference=guide.split('## What do the menu options mean?')[1].split('## What comes next?')[0];
  for(const id of ['fuel-motion-mode','fuel-plot'])for(const option of f.node(id).options)
   assert.ok(reference.includes(`| ${option.textContent} |`),`missing explanation for ${id}: ${option.textContent}`);
- assert.match(reference,/same coupled solution/);
+ assert.match(reference,/Coupled spin-up \| The same speeds, radial distributions and rotation clock/);
  assert.match(reference,/does not calculate inlet\/outlet fluid motion/i);
  assert.match(reference,/This differs from constant-current operation/);
  assert.match(reference,/The two species have the same local temperature/);

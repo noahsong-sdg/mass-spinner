@@ -64,32 +64,19 @@ test('the rewritten guide links to existing local explanations, evidence and imp
 
 
 test('the guide connects equation symbols, plot units and experiment histories to the real controls',()=>{
- for(const phrase of ['not speed immediately','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n','Curve slope is power in watts',
-  'In the thermal model, this energy difference increases or decreases gas thermal energy','numerical loss and physical heat as separate terms',
-  'also during a pause','New run','does not move the 3D collection marker',
-  'control changes that marker and starts a new run','do not show if the device can continue to operate'])
+ for(const phrase of ['not speed immediately','Γ = ℐᵢνᵢₙ','τ_wall = ν_wall L_n',
+  'also during a pause','New run','do not show if the device can continue to operate'])
   assert.ok(source.includes(phrase)||source.replace(/\s+/g,' ').includes(phrase),phrase);
 });
 
-test('the first experiment uses current status and window names before introducing momentum',()=>{
+test('the physics introduction links to the practical tutorial without another current procedure',()=>{
  const introduction=source.split('## 1.')[0];
- assert.match(introduction,/Wait until the calculation finishes/);
- assert.match(introduction,/Ion speeds increase\. Collisions then increase neutral gas speed/);
- assert.doesNotMatch(introduction,/Updating|angular momentum/);
+ assert.match(introduction,/\[Tutorial 1\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
+ assert.doesNotMatch(introduction,/try=currentExperiment|First, change one real control/);
  assert.match(source,/Examine identifies parts and links to those controls/);
  assert.doesNotMatch(source,/Inspect identifies/);
  assert.match(source,/At the same radius and angular speed, heavier atoms need more inward force/);
 });
-
-
-test('the introductory experiment links directly to its live actions without a detour through menus',()=>{
- assert.match(source,/\[Tutorial 1\]\(https:\/\/fieldwork-plasma-lab\.fieldwork-plasma-lab\.workers\.dev\/start\.html\)/);
- const introduction=source.split('## 1.')[0];
- assert.deepEqual([...introduction.matchAll(/try=([A-Za-z]+)\)/g)].map(match=>match[1]),['currentExperiment','endSpin']);
- assert.doesNotMatch(introduction,/In \*\*Start here\*\*, choose/);
- assert.doesNotMatch(source,/Start here → Experiments|reopen \*\*Start here\*\* to return/);
-});
-
 
 test('tutorial prose omits bold label prefixes',()=>{
  for(const suffix of ['', '-02', '-03', '-04', '-05', '-06']){

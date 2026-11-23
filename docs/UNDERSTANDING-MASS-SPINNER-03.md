@@ -20,13 +20,47 @@ First calculate the energy supplied each second. Mechanical power turns ions. El
 <!-- equation:power -->
 
 ```math
-P_{\mathrm{mech}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
+P_{\mathrm{mechanical}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
 ```
 
 Power is the energy rate, in watts. Torque τ and ion angular speed Ωᵢ give mechanical power.
 Current I and electrical resistance Rₑ give resistive heat.
+One watt supplies one joule each second.
+
+Mechanical power is torque times angular speed because the torque does work as the gas turns.
+A nonzero torque at the instant of rest gives zero instantaneous mechanical power, but it starts acceleration.
+
 At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
-Friction also changes rotational energy into heat.
+Resistance does not include motion-induced voltage. The source also supplies mechanical work.
+Collisions change relative rotational energy into heat.
+The angular speeds Ωᵢ and Ωₙ describe ions and neutral gas. The coefficient Γ sets the collision torque for their angular-speed difference:
+
+<!-- equation:slip -->
+
+```math
+P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
+```
+
+Slip heating cannot be negative. Collisions decrease the speed difference between populations and convert some organized rotation into random motion.
+When both populations have the same angular speed, this slip-heating term is zero.
+Wall drag also changes rotational energy into heat.
+
+Angular momentum L and moment of inertia ℐ set rotational energy K = L²/(2ℐ). Mass movement changes ℐ. In the thermal model, this energy difference increases or decreases gas thermal energy.
+At constant L, outward movement releases energy. Inward movement can remove heat.
+This does not calculate full fluid momentum and energy transport.
+
+For the closed vessel, the continuous energy balance is
+
+<!-- equation:energy -->
+
+```math
+\frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
+=P_{\mathrm{mechanical}}+P_{\mathrm{Ohmic}}-P_{\mathrm{cooling}}.
+```
+
+U is thermal energy. Slip and wall friction move energy inside the system. Specified heat fractions set its destination.
+Time stepping also removes numerical energy. The energy account records numerical loss and physical heat as separate terms.
+Smaller timesteps give a convergence check for this numerical loss.
 
 The balance of energy input and removal sets the gas and liner thermal energy and temperatures.
 Thermal energy is stored energy, while heat flow is energy transfer caused by a temperature difference.
@@ -142,5 +176,6 @@ It does not calculate evaporation or condensation over time.
 Conductivity, heat exchange and heat deposition are specified.
 Use joint spatial and timestep refinement for a wall boundary-layer accuracy test.
 The model does not calculate the electrical discharge or radial fluid momentum.
+It does not calculate ionization or separate electron and ion temperatures.
 
 [Implementation and assumptions](../src/fuel-operation.ts) · [Next: 04 · a useful process](UNDERSTANDING-MASS-SPINNER-04.md)

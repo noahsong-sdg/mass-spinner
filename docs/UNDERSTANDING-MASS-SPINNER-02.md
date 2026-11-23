@@ -43,18 +43,8 @@ Use Coupled separation. [The menu table](#views) explains the other options.
 [Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html) shows the controls.
 The [first guide](UNDERSTANDING-MASS-SPINNER.md) explains ions and neutral atoms.
 
-### First, change one real control
-
-1. [Start from rest & edit current](/?level=2&guide=physics&topic=goal&try=currentExperiment).
-2. Set Radial discharge current to 0 A.
-3. Wait until the calculation finishes.
-4. [Show end-of-run speeds](/?level=2&guide=physics&topic=goal&try=endSpin). The two populations must stay at rest.
-5. Do the same comparison with 0.03 A and the same other inputs. Ion speeds increase. Collisions then increase neutral gas speed.
-6. Compare the speeds at the same physical time.
-
-The experiment removes earlier power switches and starts from rest.
-Later current changes change the drive history, also during a pause.
-Without thermal evolution, temperature stays constant. [§4 explains the motion](#momentum).
+This tutorial gives the physics behind the controls. Tutorial 1 gives the powered and unpowered comparison from rest.
+For the physics of that comparison, start with [electrical drive](#drive), then [rotation speed](#momentum).
 
 ## 1. Why does rotation separate masses?
 
@@ -463,7 +453,7 @@ Integration of rIB dr across the driven region gives the torque. Thus, electrode
 
 <!-- diagram:spin -->
 
-Use the powered run from the first experiment.
+Use the powered run from Tutorial 1.
 
 1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin). The plot adds speeds when physical time increases. Ion speeds increase first. Collisions then increase neutral gas speed.
 2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it has angular momentum.
@@ -476,78 +466,19 @@ After power stops, a falling total-angular-momentum curve shows loss to the wall
 
 At constant L, outward mass movement increases inertia and decreases angular speed.
 Thus, redistribution can change speed even when the total angular momentum stays the same.
-Replay keeps the power switches. The first experiment removes those switches and starts from rest.
+Replay keeps the power switches. Start from rest & edit current removes those switches and starts from rest.
+Later current changes change the drive history, also during a pause.
 
 ## 5. Where does the energy go?
 
-At the same rotation speed, more random thermal motion decreases separation. Equilibrium separation increases with Ω²/T.
-More current can increase speed and temperature. Heating can remove the increase in separation from faster rotation.
+More current can increase speed and temperature. At the same rotation speed, more random thermal motion decreases separation.
+Thus, speed alone does not show whether stronger drive gives a better result.
 
-This does not mean all heat is harmful. Lithium must remain in the gas phase, which also requires sufficient temperature.
-The separation question is whether the increase in Ω² exceeds the increase in T.
-For example, two times Ω and two times T give two times Ω²/T. Two times T alone gives half that ratio.
+The fixed-temperature model assumes that an external system supplies or removes the necessary heat.
+[Tutorial 3: heating and cooling](UNDERSTANDING-MASS-SPINNER-03.md#budget) gives the energy balance and the conditions where temperature changes matter.
+It includes drive power, collision heating, wall heat flow and the thermal experiment.
 
-For constant temperature, cooling must remove net heat input.
-Thus, we must calculate separation and cooling power. The drive supplies mechanical power and resistive heat:
-
-<!-- equation:power -->
-
-```math
-P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
-\qquad
-P_{\mathrm{Ohmic}}=I^2R_{\mathrm{electrical}}.
-```
-
-Power is the energy rate, in watts. One watt supplies one joule each second.
-Mechanical power is torque times angular speed because the torque does work as the gas turns.
-A nonzero torque at the instant of rest gives zero instantaneous mechanical power, but it starts acceleration.
-
-At constant field, geometry and conductivity, two times the current gives two times the torque but four times the resistive heat.
-Resistance does not include motion-induced voltage. The source also supplies mechanical work.
-Collisions change relative rotational energy into heat:
-
-<!-- equation:slip -->
-
-```math
-P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
-```
-
-Slip heating cannot be negative. Collisions decrease the speed difference between populations and convert some organized rotation into random motion.
-When both populations have the same angular speed, this slip-heating term is zero.
-Wall drag also changes rotational energy into heat.
-
-Mass movement changes rotational energy K = L²/(2ℐ). In the thermal model, this energy difference increases or decreases gas thermal energy.
-At constant L, outward movement releases energy. Inward movement can remove heat.
-This does not calculate full fluid momentum and energy transport.
-
-For the closed vessel, the continuous energy balance is
-
-<!-- equation:energy -->
-
-```math
-\frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
-=P_{\mathrm{mechanical}}+P_{\mathrm{Ohmic}}-P_{\mathrm{cooling}}.
-```
-
-U is thermal energy. Slip and wall friction move energy inside the system. Specified heat fractions set its destination.
-Time stepping also removes numerical energy. The energy account records numerical loss and physical heat as separate terms.
-Smaller timesteps give a convergence check for this numerical loss.
-
-<!-- diagram:energy -->
-
-[Show drive work](/?level=2&guide=physics&topic=energy&try=work). Curve height is energy in joules. Curve slope is power in watts.
-This plot accounts for mechanical energy. Ohmic power is a separate value. Temperature shows cooling energy when thermal evolution is on.
-
-These separate values do not form a complete thermal-energy plot. The default bath keeps temperature constant.
-It assumes an external heat source or sink supplies or removes the necessary heat.
-
-With thermal evolution on, compare gas temperature, liner temperature and cooling energy.
-A hotter liner can heat the gas. A colder liner can remove heat. Temperature need not increase just because current is positive.
-
-[Tutorial 03](UNDERSTANDING-MASS-SPINNER-03.md) adds temperature changes.
-It does not calculate ionization or separate electron and ion temperatures.
-
-## 6. How do time and collection change the result?
+## 6. How long does separation take?
 
 Equilibrium tells us a possible final distribution. It does not tell us whether a one-second run reaches that distribution.
 Atoms need time to move across the vessel. Diffusivity D describes how quickly their random motion spreads them over distance.
@@ -564,34 +495,9 @@ Doubling radius gives four times this diffusion timescale at the same D. Doublin
 This is a scale estimate, not the calculated completion time.
 [Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare the calculated distribution with equilibrium.
 
-Enriched gas can contain few atoms. For all gas inside a collection radius,
-
-<!-- equation:collection -->
-
-```math
-\mathrm{purity}=\frac{N_{\ell,\mathrm{inside}}}
-{N_{\ell,\mathrm{inside}}+N_{h,\mathrm{inside}}},
-\qquad
-\mathrm{recovery}=\frac{N_{\ell,\mathrm{inside}}}{N_{\ell,\mathrm{whole\ vessel}}}.
-```
-
-N counts atoms. With light enrichment near the axis, a smaller inner sample can increase purity but decrease recovery.
-Purity divides by all atoms in the sample. Recovery divides by all light atoms in the vessel.
-
-Suppose the vessel contains 100 light atoms. A sample with 10 light and 90 heavy atoms has 10% purity and 10% recovery.
-A smaller sample with 5 light and 20 heavy atoms has 20% purity but only 5% recovery.
-Higher purity alone therefore does not show that a cut is better.
-
-These fractions measure gas in the vessel, not gas flow through an outlet.
-
-<!-- diagram:inventory-cut -->
-
-[Open the collection experiment](/?level=2&try=collectionExperiment).
-Select two probe radii. At the wall, purity is the feed percentage and recovery is one.
-An empty sample has no defined purity. If the vessel contains no light species, recovery has no defined value.
-
-The probe does not move the 3D collection marker.
-The Inner collection radius / a control changes that marker and starts a new run.
+After enough separation time, the amount of gas selected determines the product quantity.
+[Tutorial 4: purity and recovery](UNDERSTANDING-MASS-SPINNER-04.md#sample) gives the sample calculations and the collection controls.
+Its stages and pumping sections distinguish a closed-vessel sample from a continuous process.
 
 ## Which model parts are necessary, and what is missing?
 
@@ -606,20 +512,10 @@ The browser uses bulk speeds and specified transport coefficients. These do not 
 It does not calculate velocity shear, circulation in the radial–axial plane, evaporation, condensation or the discharge energy supply.
 The research solver is separate.
 
-We use three checks before we use a prediction:
-
-- In this closed vessel, each isotope must have the same total atom count before and after a run.
-  A change in that count shows an error in the calculation, not separation.
-- We calculate the same physical problem again with smaller cells and time steps. The results should approach stable values.
-  This checks numerical error, not the physical assumptions.
-- We compare a prediction with a measurement from the same apparatus and operating conditions.
-  We compare the quantity that the instrument measures.
-  This checks whether the physical model describes that experiment.
-
-Passing the first two checks does not show agreement with measurements.
+[Tutorial 6: model accuracy](UNDERSTANDING-MASS-SPINNER-06.md#questions) gives conservation checks, numerical refinement and comparison with measurements.
+These checks answer different questions. Correct numerical calculations alone do not show experimental accuracy.
 Our [argon comparison](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) still disagrees with measurements.
 It does not show accuracy for Marathon equipment or lithium gas.
-[Tutorial 6](UNDERSTANDING-MASS-SPINNER-06.md#questions) explains these checks and their limits.
 
 ## What do the menu options mean?
 

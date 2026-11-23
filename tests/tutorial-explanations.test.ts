@@ -19,27 +19,17 @@ test('the introductory explanations distinguish local fractions, sample counts a
  assert.match(section('heat'),/hot liner can heat the gas.*same physical time.*combined effect/s);
 });
 
-test('the written alpha example applies changes to the logarithm, not to purity',()=>{
- const text=playgroundSteps.find(step=>step.id==='competition')!.notice;
- const values=/initial α of ([\d.]+),.*about (\d+\.\d+) and (\d+\.\d+)/s.exec(text)!;
- assert.ok(values,'the example gives the initial alpha and both conditional comparisons');
- const [initial,warm,fast]=values.slice(1).map(Number);
- assert.ok(Math.abs(warm-Math.sqrt(initial))<.0005);
- assert.ok(Math.abs(fast-initial**4)<.0005);
- assert.match(text,/constant speed.*two times the temperature.*constant temperature.*two times the speed/s);
-});
-
-test('the collection worked examples keep purity and recovery denominators distinct',()=>{
- for(const text of [read('02'),read('04'),playgroundSteps.find(step=>step.id==='collection')!.notice]){
-  const total=Number(/vessel contains (\d+) light atoms/.exec(text)![1]);
-  const samples=[...text.matchAll(/sample with (\d+) light and (\d+) heavy atoms has (\d+)% purity (?:and|but only) (\d+)% recovery/g)];
-  assert.equal(samples.length,2);
-  for(const [,lightText,heavyText,purityText,recoveryText] of samples){
-   const [light,heavy,purity,recovery]=[lightText,heavyText,purityText,recoveryText].map(Number);
-   assert.equal(light/(light+heavy)*100,purity);
-   assert.equal(light/total*100,recovery);
-  }
+test('the detailed collection calculation appears only in Tutorial 4 and retains both denominators',()=>{
+ const text=read('04');
+ const total=Number(/vessel contains (\d+) light atoms/.exec(text)![1]);
+ const samples=[...text.matchAll(/sample with (\d+) light and (\d+) heavy atoms has (\d+)% purity (?:and|but only) (\d+)% recovery/g)];
+ assert.equal(samples.length,2);
+ for(const [,lightText,heavyText,purityText,recoveryText] of samples){
+  const [light,heavy,purity,recovery]=[lightText,heavyText,purityText,recoveryText].map(Number);
+  assert.equal(light/(light+heavy)*100,purity);
+  assert.equal(light/total*100,recovery);
  }
+ for(const other of [read('02'),playgroundSteps.find(step=>step.id==='collection')!.notice])assert.doesNotMatch(other,/vessel contains 100 light atoms/);
 });
 
 test('advanced readers explain the experimental conditions and what each plot axis means',t=>{

@@ -69,6 +69,12 @@ test('tutorial visuals have unique accessible names and text-only accuracy secti
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
    if(heading.id==='path')continue; // This section links to further reading.
+   if(doc.title.startsWith('Tutorial 2')&&['energy','collection'].includes(heading.id)){
+    const target=heading.id==='energy'?'/tutorial-03.html#budget':'/tutorial-04.html#sample';
+    let linked=false;
+    for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)if(n.querySelector(`a[href="${target}"]`))linked=true;
+    assert.ok(linked,'a short transition must link to its full explanation');continue;
+   }
    if((doc.title.startsWith('Tutorial 2')&&heading.id==='limits')||(doc.title.startsWith('Tutorial 6')&&heading.id==='questions'))continue;
    if(doc.title.startsWith('Tutorial 6')&&heading.id==='sensitivity'){
     const section=doc.body.textContent!;

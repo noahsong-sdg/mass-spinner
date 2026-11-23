@@ -9,7 +9,7 @@ import {setupGuideReader} from '../src/guide-reader.js';
 const markdown=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
 const revision='8cab091a3458a050142049f9227238d18e51b53d';
 
-test('accuracy sections explain concrete checks without the generic evidence diagram',t=>{
+test('accuracy checks have one detailed explanation and a link from the physics scope',t=>{
  for(const tutorial of [undefined,numberedTutorials[3]]){
   const source=tutorial?readFileSync('docs/UNDERSTANDING-MASS-SPINNER-06.md','utf8'):markdown;
   const dom=new JSDOM(understandingPage(source,revision,tutorial));t.after(()=>dom.window.close());
@@ -17,13 +17,15 @@ test('accuracy sections explain concrete checks without the generic evidence dia
   for(let node=heading.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)nodes.push(node);
   assert.equal(nodes.some(node=>node.matches('figure')||node.querySelector('figure')),false);
   const text=nodes.map(node=>node.textContent).join(' ');
-  assert.match(text,/same.*atom|atom.*same|conserve every atom/);
-  assert.match(text,/smaller.*timesteps|smaller.*time steps/);
-  assert.match(text,/same.*conditions|same operating conditions/);
-  assert.ok(nodes.some(node=>node.querySelector('a[data-guide-action="modelInfo"]')||node.querySelector('a[href$="qualification.html"]')));
-  if(!tutorial){
+  if(tutorial){
+   assert.match(text,/same.*atom|atom.*same|conserve every atom/);
+   assert.match(text,/smaller.*timesteps|smaller.*time steps/);
+   assert.match(text,/same.*conditions|same operating conditions/);
+   assert.ok(nodes.some(node=>node.querySelector('a[data-guide-action="modelInfo"]')));
+  }else{
    assert.match(text,/does not show accuracy for Marathon equipment or lithium gas/);
    assert.ok(nodes.some(node=>node.querySelector('a[href="/tutorial-06.html#questions"]')));
+   assert.equal(nodes.some(node=>node.tagName==='UL'||node.tagName==='TABLE'),false,'full accuracy checks belong to Tutorial 6');
   }
  }
 });
@@ -36,7 +38,8 @@ test('energy readers explain the separation and cooling decision before introduc
   let lead='';for(let node=heading.nextElementSibling;node&&!node.classList.contains('equation');node=node.nextElementSibling)lead+=` ${node.textContent}`;
   assert.match(lead,/random thermal motion|random thermal\s+motion/);
   assert.match(lead,/same rotation speed|given rotation speed/,'temperature effect must be conditional on rotation');
-  assert.match(lead,/[Cc]ooling/);assert.match(lead,/decreases separation|less separation/);
+  if(tutorial)assert.match(lead,/[Cc]ooling/);
+  assert.match(lead,/decreases separation|less separation/);
   assert.match(lead,/More current can increase speed and temperature|Does more current increase separation when it increases temperature/,'motivate a decision, not just an energy bookkeeping exercise');
  }
 });
@@ -75,8 +78,9 @@ test('the heat reader introduces input power before stored energy and retains th
  const inputPower=heat.indexOf('First calculate the energy supplied each second');
  assert.ok(inputPower>=0&&inputPower<firstEquation);
  assert.ok(heat.indexOf('The balance of energy input and removal sets the gas and liner thermal energy and temperatures')>firstEquation);
- assert.match(markdown,/In the thermal model, this energy difference increases or decreases gas thermal energy/);
- assert.match(markdown,/This does not calculate full fluid momentum and energy transport/);
+ assert.match(heat,/In the thermal model, this energy difference increases or decreases gas thermal energy/);
+ assert.match(heat,/This does not calculate full fluid momentum and energy transport/);
+ assert.match(heat,/numerical loss and physical heat as separate terms/);
 });
 
 test('the website renders every guide equation and its derivation, with accessible schematic diagrams',t=>{
@@ -194,7 +198,7 @@ test('linked contents need no sticky picker and leave room for anchored headings
 });
 
 test('the embedded reader keeps actions in the parent simulator and Escape exits the reading window',t=>{
- const dom=new JSDOM(understandingPage(markdown,revision),{url:'https://example.org/guide.html#energy'});t.after(()=>dom.window.close());
+ const dom=new JSDOM(understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-03.md','utf8'),revision,numberedTutorials[0]),{url:'https://example.org/tutorial-03.html#budget'});t.after(()=>dom.window.close());
  const messages:[unknown,string][]=[],win=dom.window;
  const parent={closed:false,postMessage:(data:unknown,target:string)=>messages.push([data,target])} as unknown as Window;
  Object.defineProperty(win,'parent',{value:parent});win.open=()=>{throw new Error('A tutorial action must stay in its simulator');};
@@ -202,7 +206,7 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  setupGuideReader(win);assert.ok(win.document.body.classList.contains('embedded'));
  assert.deepEqual(messages,[],'the simulator owns the reader frame; no opener handshake is needed');
  assert.equal(win.document.getElementById('reader-status')!.textContent,'');
- assert.ok(win.document.querySelector('.guide-contents a[href="#energy"]'));assert.equal(win.location.hash,'#energy');
+ assert.ok(win.document.querySelector('.guide-contents a[href="#budget"]'));assert.equal(win.location.hash,'#budget');
  win.document.querySelector<HTMLAnchorElement>('a[data-guide-action="work"]')!.click();
  const status=win.document.getElementById('reader-status')!;
  assert.equal(status.getAttribute('role'),'status');assert.equal(status.getAttribute('aria-live'),'polite');
@@ -215,10 +219,10 @@ test('the embedded reader keeps actions in the parent simulator and Escape exits
  receive(waiting);assert.match(status.textContent!,/Waiting for the calculated run and controls/);
  receive({...waiting,status:'executed'});assert.equal(status.textContent,'');
  receive(waiting);assert.equal(status.textContent,'','a completed action cannot return to the waiting state');
- assert.ok(win.document.querySelector('a[href="/start.html"]'));
+ assert.ok(win.document.querySelector('a[href="/guide.html"]'));
  win.document.dispatchEvent(new win.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true}));
  assert.deepEqual(messages.pop(),[{type:'mass-spinner:guide-close'},'https://example.org']);
- assert.equal(win.location.pathname,'/guide.html');
+ assert.equal(win.location.pathname,'/tutorial-03.html');
 });
 
 test('standalone reading retains ordinary links and does not impersonate an embedded simulator',t=>{
@@ -244,7 +248,7 @@ test('the rotation chapter motivates one drive-and-coast experiment instead of e
  assert.equal(new Set(steps).size,3,'each action belongs to its own explained step');
  const observations=[/Ion speeds increase first\. Collisions then increase neutral gas speed/,/gas continues to turn because it has angular momentum/,/Total angular momentum equals drive impulse minus wall impulse/];
  for(const [i,step]of steps.entries()){assert.ok(step);assert.match(step.textContent!,observations[i],`step ${i+1} states its physical observation`);}
- assert.equal(doc.querySelectorAll('[data-guide-action="currentExperiment"]').length,1,'do not repeat the introductory current experiment');
+ assert.equal(doc.querySelectorAll('[data-guide-action="currentExperiment"]').length,0,'the introductory current experiment belongs to Tutorial 1');
  for(const action of ['axis','wall','density','inertia','collisions','drag','duration','diffusion','pin','thermal','thermalPlot']){
   assert.equal(links.find(link=>link.dataset.guideAction===action),undefined,'specialist shortcuts stay out of the rotation experiment sequence');
   assert.ok(guideActions.has(action),'previously shared simulator deep links remain valid');
