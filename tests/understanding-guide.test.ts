@@ -16,6 +16,7 @@ test('the equilibrium reader explains lithium use and checks each assumption aga
  assert.match(source,/Lithium-7 can also make tritium.*high-energy neutrons/);
  assert.match(source,/centrifuge increases the lithium-6 percentage; it does not make tritium/);
  assert.match(source,/higher angular speed and lower temperature.*fixed radius and fixed isotope masses/);
+ assert.match(source,/collection radius changes purity and recovery\. The available atom count limits how much product we can collect/);
  assert.ok(doc.querySelector('a[href="#equilibrium-assumptions"]'));
  const heading=doc.getElementById('equilibrium-assumptions')!,content=[];
  assert.equal(heading.tagName,'H3');
