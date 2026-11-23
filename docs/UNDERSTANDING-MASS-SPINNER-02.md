@@ -287,7 +287,9 @@ The factors four and one half apply to ln α, not to α or purity.
 Thus, higher angular speed and lower temperature increase ideal equilibrium separation at a fixed radius and fixed isotope masses.
 This is not an instruction to increase drive without limit or cool lithium without limit.
 More drive can increase heating and wall pressure. Too much cooling can remove lithium vapor through condensation.
-The collection radius and available atom count also change product purity and recovery. A larger equilibrium factor alone does not give more collected product.
+
+The collection radius changes purity and recovery. The available atom count limits how much product we can collect.
+A larger equilibrium factor alone does not give more collected product.
 
 <!-- diagram:bias -->
 
