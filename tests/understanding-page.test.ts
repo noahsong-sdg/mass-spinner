@@ -9,6 +9,25 @@ import {setupGuideReader} from '../src/guide-reader.js';
 const markdown=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8');
 const revision='8cab091a3458a050142049f9227238d18e51b53d';
 
+test('accuracy sections explain concrete checks without the generic evidence diagram',t=>{
+ for(const tutorial of [undefined,numberedTutorials[3]]){
+  const source=tutorial?readFileSync('docs/UNDERSTANDING-MASS-SPINNER-06.md','utf8'):markdown;
+  const dom=new JSDOM(understandingPage(source,revision,tutorial));t.after(()=>dom.window.close());
+  const doc=dom.window.document,heading=doc.getElementById(tutorial?'questions':'limits')!,nodes:Element[]=[];
+  for(let node=heading.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)nodes.push(node);
+  assert.equal(nodes.some(node=>node.matches('figure')||node.querySelector('figure')),false);
+  const text=nodes.map(node=>node.textContent).join(' ');
+  assert.match(text,/same.*atom|atom.*same|conserve every atom/);
+  assert.match(text,/smaller.*timesteps|smaller.*time steps/);
+  assert.match(text,/same.*conditions|same operating conditions/);
+  assert.ok(nodes.some(node=>node.querySelector('a[data-guide-action="modelInfo"]')||node.querySelector('a[href$="qualification.html"]')));
+  if(!tutorial){
+   assert.match(text,/does not show accuracy for Marathon equipment or lithium gas/);
+   assert.ok(nodes.some(node=>node.querySelector('a[href="/tutorial-06.html#questions"]')));
+  }
+ }
+});
+
 test('energy readers explain the separation and cooling decision before introducing power equations',t=>{
  for(const tutorial of [undefined,numberedTutorials[0]]){
   const source=tutorial?readFileSync('docs/UNDERSTANDING-MASS-SPINNER-03.md','utf8'):markdown;

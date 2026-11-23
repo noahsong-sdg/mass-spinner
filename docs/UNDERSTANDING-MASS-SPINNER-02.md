@@ -606,11 +606,20 @@ The browser uses bulk speeds and specified transport coefficients. These do not 
 It does not calculate velocity shear, circulation in the radial–axial plane, evaporation, condensation or the discharge energy supply.
 The research solver is separate.
 
-Conservation and refinement tests identify numerical errors. Measurement comparisons give a physical-model validation check.
-The [public-data assessment](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) records remaining differences from an argon experiment.
-It does not show accurate Marathon or lithium results.
+We use three checks before we use a prediction:
 
-<!-- diagram:evidence -->
+- In this closed vessel, each isotope must have the same total atom count before and after a run.
+  A change in that count shows an error in the calculation, not separation.
+- We calculate the same physical problem again with smaller cells and time steps. The results should approach stable values.
+  This checks numerical error, not the physical assumptions.
+- We compare a prediction with a measurement from the same apparatus and operating conditions.
+  We compare the quantity that the instrument measures.
+  This checks whether the physical model describes that experiment.
+
+Passing the first two checks does not show agreement with measurements.
+Our [argon comparison](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) still disagrees with measurements.
+It does not show accuracy for Marathon equipment or lithium gas.
+[Tutorial 6](UNDERSTANDING-MASS-SPINNER-06.md#questions) explains these checks and their limits.
 
 ## What do the menu options mean?
 

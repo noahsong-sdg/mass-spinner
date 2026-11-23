@@ -23,8 +23,6 @@ For convergence, repeat the same physical problem with smaller timesteps and cel
 For validation, compare a predicted quantity with an independent measurement under the same operating conditions.
 A failure in any one check limits a different part of the prediction.
 
-<!-- diagram:evidence -->
-
 [Open Model info](/?level=2&try=modelInfo). Read the qualification status beside the run assumptions. Agreement with inputs in a numerical study does not show agreement with Marathon measurements. Read the mesh and wall-layer warnings.
 
 ## Which input can change the result?

@@ -59,7 +59,7 @@ test('reference factors preserve the fixed conditions and distinguish exponent f
  }
 });
 
-test('every instructional section has a local visual with unique accessible SVG names',t=>{
+test('tutorial visuals have unique accessible names and text-only accuracy sections need no figure',t=>{
  const revision='8cab091a3458a050142049f9227238d18e51b53d';
  const readers=[startPage(),understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision),
   ...numberedTutorials.map(part=>understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${part.number}.md`,'utf8'),revision,part))];
@@ -69,6 +69,7 @@ test('every instructional section has a local visual with unique accessible SVG 
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
    if(heading.id==='path')continue; // This section links to further reading.
+   if((doc.title.startsWith('Tutorial 2')&&heading.id==='limits')||(doc.title.startsWith('Tutorial 6')&&heading.id==='questions'))continue;
    if(doc.title.startsWith('Tutorial 6')&&heading.id==='sensitivity'){
     const section=doc.body.textContent!;
     assert.match(section,/Diffusivity changes how fast atoms move.*mass distribution and gas inertia/s);

@@ -9,7 +9,7 @@ export const guideTopics=[
  {id:'momentum',heading:'4. What sets the rotation speed?',diagram:'spin',actions:[['currentExperiment','Try the current experiment'],['endSpin','Show end-of-run speeds'],['spin','Replay spin-up'],['momentum','Show angular momentum'],['inertia','Show gas inertia'],['current','Adjust current'],['collisions','Adjust collisions'],['drag','Adjust wall drag']]},
  {id:'energy',heading:'5. Where does the energy go?',diagram:'energy',actions:[['work','Show drive work'],['thermal','Open thermal controls'],['thermalPlot','Show temperature']]},
  {id:'collection',heading:'6. How do time and collection change the result?',diagram:'inventory-cut',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve'],['diffusion','Adjust diffusivity'],['duration','Adjust run duration']]},
- {id:'limits',heading:'Which model parts are necessary, and what is missing?',diagram:'evidence',actions:[['pin','Pin this run as A']]},
+ {id:'limits',heading:'Which model parts are necessary, and what is missing?',actions:[['pin','Pin this run as A']]},
  {id:'views',heading:'What do the menu options mean?',diagram:'views',actions:[]},
  {id:'path',heading:'What comes next?',actions:[]},
 ] as const satisfies readonly GuideTopic[];
@@ -32,7 +32,7 @@ export const numberedTutorials = [
   {id:'design',heading:'Does this give the total fuel inventory?',diagram:'scope',actions:[['modelInfo','Open model assumptions']]},
  ]},
  {number:'06',title:'Model accuracy',topics:[
-  {id:'questions',heading:'What does a test show?',diagram:'evidence',actions:[['modelInfo','Open qualification and evidence']]},
+  {id:'questions',heading:'What does a test show?',actions:[['modelInfo','Open qualification and evidence']]},
   {id:'sensitivity',heading:'Which input can change the result?',actions:[['pin','Pin accepted run A'],['diffusion','Adjust diffusivity'],['newRun','New run'],['separationPlot','Show separation over time']]},
   {id:'prediction',heading:'Which predictions have sufficient evidence?',diagram:'diagnostic',actions:[['modelInfo','Open measured-reference assessment']]},
  ]},
