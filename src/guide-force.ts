@@ -2,8 +2,8 @@
 export function turningReference(angle:number){
  return {x:Math.cos(angle),y:-Math.sin(angle),vx:-Math.sin(angle),vy:-Math.cos(angle),ax:-Math.cos(angle),ay:Math.sin(angle),freeX:1,freeY:-angle};
 }
-/** Ideal neutral equilibrium at 1,500 m/s wall speed and uniform 500 K. */
-export function turningDensity(radius:number,massU:number){return Math.exp(massU*1.66053906892e-27*1500**2*radius**2/(2*1.380649e-23*500));}
+/** Ideal neutral equilibrium at 1,500 m/s wall speed. Radius is divided by vessel radius. */
+export function turningDensity(radius:number,massU:number,temperature=500){return Math.exp(massU*1.66053906892e-27*1500**2*radius**2/(2*1.380649e-23*temperature));}
 const steps=[
  {label:'1 Motion',reading:'Velocity gives speed and direction of motion. Both points start with the same velocity. Inward force changes that direction. Without this force, the point follows the tangent: a straight line.',note:'Motion example, not individual atom paths. The dashed circle is a reference path, not a wall. Arrows show direction, not a shared scale. Real gas atoms also have random motion.'},
  {label:'2 Pressure',reading:'Pressure is force per unit area. It acts on both sides of a small gas volume. Higher pressure on the outer side gives a larger inward force. The difference gives a net inward force, which turns the gas.',note:'The enlarged gas volume shows radial forces only. Arrow lengths are examples. The net pressure force supplies the inward force. It is not an extra force.'},

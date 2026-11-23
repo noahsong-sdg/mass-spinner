@@ -85,7 +85,14 @@ For each species s, the equilibrium density is
 
 Here, r is radius, n is number density (atoms/m³), m is one atom's mass, and T is temperature in kelvin.
 The symbol k_B is Boltzmann's constant.
-Each species' total atom count sets its density scale. The two densities increase outwards, but their ratio changes.
+Each species' total atom count sets its density scale.
+
+<!-- diagram:density-scan -->
+
+Increase temperature to make the radial curves less steep. Move the selected radius toward the axis to approach a density ratio of 1.
+Each ratio compares one isotope with its own axis density. It does not give the isotope percentage.
+
+The two densities increase outwards, but their ratio changes.
 To obtain composition, count light atoms as a share of all atoms in the same small volume.
 The local light fraction is
 
