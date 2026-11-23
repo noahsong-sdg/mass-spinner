@@ -1,6 +1,6 @@
 import {equationGroups,equationPlots,sampleEquation,type EquationGroupId,type EquationPlotId,type EquationPlot} from './equation-plots.js';
 
-const format=(n:number)=>n!==0&&(Math.abs(n)<.001||Math.abs(n)>=1e6)?n.toExponential(2):Number(n.toPrecision(4)).toLocaleString('en-US');
+const format=(n:number)=>n===0?'0':Math.abs(n)<.001||Math.abs(n)>=1e6?n.toExponential(2):n.toLocaleString('en-US',{maximumSignificantDigits:4});
 export function setupEquationPlots(doc:Document){
  const triggers=doc.querySelectorAll<HTMLButtonElement>('[data-equation-plot]');
  if(!triggers.length)return;
@@ -27,14 +27,14 @@ export function setupEquationPlots(doc:Document){
   const data=sampleEquation(id,values),all=data.flatMap(p=>p.y).filter((y):y is number=>y!==null);
   const low=Math.min(0,...all),high=Math.max(0,...all),span=high-low||1;
   const yMin=low<0?low-span*.06:0,yMax=high>0?high+span*.06:low<0?0:1;
-  const x=(v:number)=>68+458*(v-plot.x.min)/(plot.x.max-plot.x.min),y=(v:number)=>260-226*(v-yMin)/(yMax-yMin);
+  const x=(v:number)=>112+414*(v-plot.x.min)/(plot.x.max-plot.x.min),y=(v:number)=>260-226*(v-yMin)/(yMax-yMin);
   const selected=values[plot.x.key],selectedY=plot.values(selected,values);
   const text=(x:number,y:number,s:string,anchor='middle')=>`<text x="${x}" y="${y}" text-anchor="${anchor}">${s}</text>`;
   node('[data-equation-chart]').innerHTML=Array.from({length:5},(_,i)=>{
-   const v=yMin+(yMax-yMin)*i/4;return `<path d="M68 ${y(v)}H526" class="diagram-grid"/>${text(60,y(v)+4,format(v),'end')}`;
-  }).join('')+`<path d="M68 34V260H526" class="diagram-axis"/>`+
+   const v=yMin+(yMax-yMin)*i/4;return `<path d="M112 ${y(v)}H526" class="diagram-grid"/>${text(104,y(v)+4,format(v),'end')}`;
+  }).join('')+`<path d="M112 34V260H526" class="diagram-axis"/>`+
   Array.from({length:5},(_,i)=>{const v=plot.x.min+(plot.x.max-plot.x.min)*i/4;return text(x(v),282,format(v));}).join('')+
-  text(298,312,plot.x.label)+`<path d="M${x(selected)} 34V260" class="density-scan-cursor"/>`+
+  text(319,312,plot.x.label)+`<path d="M${x(selected)} 34V260" class="density-scan-cursor"/>`+
   plot.labels.map((_,j)=>{
    let pen=false;const path=data.map(p=>{const v=p.y[j];if(v===null){pen=false;return '';}const segment=`${pen?'L':'M'}${x(p.x)} ${y(v)}`;pen=true;return segment;}).join('');
    return `<path d="${path}" class="equation-line equation-line-${j}"/>${selectedY[j]===null?'':`<circle cx="${x(selected)}" cy="${y(selectedY[j])}" r="4" class="equation-point-${j}"/>`}`;

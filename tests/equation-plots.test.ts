@@ -62,7 +62,7 @@ test('neutral radial references obey force balance, temperature scaling and cyli
  near(at('normalization',b)[0]!,integral,1e-8);
  for(const r of [0,3,6,12]){
   near(at('species-cut',r,{omega:0})[0]!,100*(r/12)**2);
-  near(at('composition',r,{omega:0})[0]!,7.59);
+  near(at('composition',r,{omega:0})[0]!,7.59);assert.equal(at('composition',r).length,1,'show the light fraction without a dominant complementary curve');
  }
  assert.equal(at('collection',0)[0],null);
  near(at('collection',12)[0]!,7.59);near(at('collection',12)[1]!,100);
@@ -118,6 +118,7 @@ test('equation dialog updates curves, preserves undefined results and returns fo
  const source=doc.querySelector('button')!;source.click();
  const dialog=doc.querySelector('dialog')!,radius=dialog.querySelector<HTMLInputElement>('[name="radius"]')!;
  assert.equal(dialog.open,true);assert.match(dialog.textContent!,/Equation reference, not your run/);
+ assert.equal(dialog.querySelector('[name="feed"]')!.previousElementSibling!.querySelector('output')!.textContent,'0.0759');
  const path=dialog.querySelector('.equation-line-0')!.getAttribute('d');
  const omega=dialog.querySelector<HTMLInputElement>('[name="omega"]')!;omega.value='0';omega.dispatchEvent(new dom.window.Event('input'));
  assert.notEqual(dialog.querySelector('.equation-line-0')!.getAttribute('d'),path);

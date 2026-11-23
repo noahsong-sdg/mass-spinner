@@ -25,7 +25,12 @@ test('every displayed equation opens its working plot on the same page',async({p
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
  }
  expect(opened).toBe(28);expect(errors).toEqual([]);
- await page.goto('/guide.html#composition');await page.locator('[data-equation-plot="density"]').click();
+ await page.goto('/guide.html#composition');await page.locator('[data-equation-plot="composition"]').click();
+ await expect(page.locator('[name="feed"]')).toHaveValue('0.0759');
+ await expect(page.locator('[data-equation-controls] label').last().locator('output')).toHaveText('0.0759');
+ await expect(page.locator('.equation-line-1')).toHaveCount(0);
+ await page.getByRole('button',{name:'Close equation plot'}).click();
+ await page.locator('[data-equation-plot="density"]').click();
  const dialog=page.getByRole('dialog'),path=dialog.locator('.equation-line-0'),initial=await path.getAttribute('d');
  await dialog.getByRole('slider',{name:'Temperature (K)',exact:true}).press('End');await expect(path).not.toHaveAttribute('d',initial!);
  const rect=await dialog.boundingBox();expect(rect!.x).toBeGreaterThanOrEqual(0);expect(rect!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
