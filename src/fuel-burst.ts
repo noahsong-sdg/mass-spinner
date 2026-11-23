@@ -23,7 +23,10 @@ export function createFuelBurst(scene:THREE.Object3D,c:Pick<FuelConfig,'radiusM'
  function setVisible(value:boolean){
   if(value===active)return;active=value;group.visible=value;
   if(value)for(const node of scene.children){if(node===group)continue;hidden.set(node,node.visible);node.visible=false;}
-  else{for(const [node,visible]of hidden)node.visible=visible;hidden.clear();}
+  else{
+   for(const [node,visible]of hidden)node.visible=visible;hidden.clear();
+   for(const {node,position,rotation}of parts){node.position.copy(position);node.quaternion.copy(rotation);}
+  }
   scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
  }
  return {
@@ -37,6 +40,7 @@ export function createFuelBurst(scene:THREE.Object3D,c:Pick<FuelConfig,'radiusM'
    for(let i=0;i<count;i++){const ray=rays[i],r=c.radiusM*(.8+2.2*t)*(1+(i%7)/14);positions[i*3]=ray.x*r;positions[i*3+1]=ray.y*r;positions[i*3+2]=c.lengthM*(i/count)+ray.z*c.radiusM*t;}
    geometry.attributes.position.needsUpdate=true;material.opacity=.6*Math.max(0,1-t/1.6);
    group.userData.elapsedS=t;
+   scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
   },
   dispose(){setVisible(false);group.removeFromParent();geometry.dispose();material.dispose();},
  };

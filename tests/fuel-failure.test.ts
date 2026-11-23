@@ -67,6 +67,7 @@ test('burst keeps authored orientations, shares mesh resources and restores prio
  assert.equal(construction.visible,false);assert.equal(burst.group.visible,true);
  burst.update(1.6);assert.ok(copy.position.distanceTo(part.position)>.1);
  burst.update(null);assert.equal(construction.visible,true);assert.equal(hidden.visible,false);assert.equal(burst.group.visible,false);
+ assert.deepEqual(copy.position.toArray(),part.position.toArray(),'Hidden burst parts must not enlarge the camera bounds after rewind.');
  burst.update(0);assert.deepEqual(copy.position.toArray(),part.position.toArray());assert.deepEqual(copy.quaternion.toArray(),part.quaternion.toArray());
  burst.dispose();assert.equal(construction.visible,true);assert.equal(scene.children.includes(burst.group),false);
  part.geometry.dispose();(part.material as THREE.Material).dispose();
