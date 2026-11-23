@@ -1,6 +1,6 @@
 import {guideContents} from './guide-contents.mjs';
 import {Marked,Renderer} from 'marked';
-import katex from 'katex';
+import {equationMarkup} from './equation-links.mjs';
 import {tsImport} from 'tsx/esm/api';
 const {guideTopics,guideActions}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 import {guideDiagram} from './guide-diagrams.mjs';
@@ -16,14 +16,15 @@ export function understandingPage(markdown,revision,tutorial){
  const topics=tutorial?.topics??guideTopics;
  const title=tutorial?`Tutorial ${Number(tutorial.number)} · ${tutorial.title}`:'Tutorial 2 · Rotation and separation';
  const ownPath=tutorial?`/tutorial-${tutorial.number}.html`:'/guide.html';
- let section='';
+ let section='',equationPlot='';
  const sourceBase=releaseSourceBase(revision)+'docs/';
  const diagrams=new Set(topics.flatMap(topic=>topic.diagram??[])),usedDiagrams=new Set();
  const baseRenderer=new Renderer();
  const parser=new Marked({renderer:{
-  code({lang,text}){return lang==='math'?`<div class="equation" role="group" tabindex="0" aria-label="Equation. If necessary, scroll horizontally.">${katex.renderToString(text,{displayMode:true,throwOnError:true,trust:false})}</div>`:false;},
+  code({lang,text}){if(lang!=='math')return false;const html=equationMarkup(text,equationPlot);equationPlot='';return html;},
   table(token){return baseRenderer.table.call(this,token).replace('<table>','<table tabindex="0" aria-label="Comparison table. If necessary, scroll horizontally.">');},
   html({text}){
+   if(text.startsWith('<!-- equation:')){const marker=/^<!-- equation:([a-z][a-z-]*) -->\s*$/.exec(text);if(!marker)throw new Error('Invalid equation marker');equationPlot=marker[1];return '';}
    if(!text.startsWith('<!-- diagram:'))return false;
    const marker=/^<!-- diagram:([a-z][a-z-]*) -->\s*$/.exec(text),id=marker?.[1];
    if(!id||!diagrams.has(id)||usedDiagrams.has(id))throw new Error(`Invalid or repeated guide diagram: ${text.trim()}`);
@@ -53,7 +54,7 @@ export function understandingPage(markdown,revision,tutorial){
   },
  }});
  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
- <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css">
+ <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css"><link rel="stylesheet" href="/equation-plots.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
  <header><a href="/?level=2" target="_top" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Open separate page ↗</a></header>
 <main><p id="reader-status" role="status" aria-live="polite"></p>${parser.parse(markdown)}</main><footer><a href="/learn.html">Docs & tutorials</a></footer></body></html>`;

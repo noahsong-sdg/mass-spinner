@@ -34,6 +34,8 @@ For example, inject 100 tritium atoms and consume five. The burn fraction is 0.0
 Injected flow equals consumed flow divided by burn fraction. Subtract consumed flow to find unburned flow.
 Multiplying unburned flow by processing time gives the number of atoms held in processing equipment.
 
+<!-- equation:fuel -->
+
 ```math
 \dot N_T=\frac{P_f}{E_{DT}},\qquad
 M_{\mathrm{exhaust}}=m_T\dot N_T\left(\frac{1}{f_b}-1\right)\tau_p.

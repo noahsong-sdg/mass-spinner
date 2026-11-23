@@ -10,6 +10,8 @@ Purity asks, “Of all atoms in my sample, what fraction are light?”
 Recovery asks, “Of all light atoms that I started with, what fraction did I keep?”
 The denominators differ because the questions differ:
 
+<!-- equation:collection -->
+
 ```math
 x_{\ell,\mathrm{cut}}=\frac{N_{\ell,\mathrm{cut}}}{N_{\ell,\mathrm{cut}}+N_{h,\mathrm{cut}}},
 \qquad
@@ -73,6 +75,8 @@ A closed-vessel sample has an atom count. A continuous process needs an atom flo
 A pumping calculation connects pressures to gas load, which is one part of that missing flow description.
 
 The pump and inlet pipe each have a flow limit. This reference gives the necessary upstream pressure for a specified rotating gas state:
+
+<!-- equation:pumping -->
 
 ```math
 Q=S p_w,\qquad p_u=p_a+Q/C,\qquad S_{\mathrm{eff}}=Q/p_u.

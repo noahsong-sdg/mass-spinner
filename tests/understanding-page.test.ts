@@ -115,7 +115,7 @@ test('the end-view force arrows give the same counterclockwise torque in all fou
 });
 
 test('a malformed equation fails the build instead of publishing raw or broken mathematics',()=>{
- assert.throws(()=>understandingPage('```math\n\\notARealCommand{1}\n```',revision),/Undefined control sequence/);
+ assert.throws(()=>understandingPage('<!-- equation:speed -->\n\n```math\n\\notARealCommand{1}\n```',revision),/Undefined control sequence/);
 });
 
 test('the density-gradient example follows the ideal-gas exponent and keeps the three cases distinct',t=>{

@@ -69,6 +69,8 @@ Both normalized density curves become less steep, and the isotope fractions diff
 Use an ideal neutral gas at one temperature, with rigid rotation: angular speed Ω is the same at each radius.
 Tangential speed increases with radius:
 
+<!-- equation:speed -->
+
 ```math
 v_\theta(r)=\Omega r.
 ```
@@ -77,6 +79,8 @@ Equilibrium means that the distribution no longer changes, even though atoms con
 For each isotope, inward diffusion balances the rotational tendency toward the wall. There is no net radial transport.
 We need the density at each radius to calculate how many atoms lie inside a collection radius.
 For each species s, the equilibrium density is
+
+<!-- equation:density -->
 
 ```math
 \frac{n_s(r)}{n_s(0)}
@@ -95,6 +99,8 @@ Each ratio compares one isotope with its own axis density. It does not give the 
 The two densities increase outwards, but their ratio changes.
 To obtain composition, count light atoms as a share of all atoms in the same small volume.
 The local light fraction is
+
+<!-- equation:composition -->
 
 ```math
 x_\ell(r)=\frac{n_\ell(r)}{n_\ell(r)+n_h(r)}.
@@ -132,6 +138,8 @@ Here, 1× means that isotope's vessel mean, rather than its axis value. Your run
 
 Pressure that increases outwards gives inward acceleration. For constant circular motion of neutral gas,
 
+<!-- equation:pressure -->
+
 ```math
 -\frac{dp}{dr}=-\rho\frac{v_\theta^2}{r},
 \qquad\text{so}\qquad
@@ -140,6 +148,8 @@ Pressure that increases outwards gives inward acceleration. For constant circula
 
 Here, p is pressure and ρ is mass density. At diffusive equilibrium, each species has no net diffusion.
 Its ideal partial pressure gives
+
+<!-- equation:gas-law -->
 
 ```math
 p_s=n_sk_BT,\qquad \rho_s=m_sn_s,
@@ -157,6 +167,8 @@ A steep density curve can suggest strong separation even when the isotope fracti
 Most of the increase can be common to both isotopes.
 To remove that common increase, divide the heavy density by the light density at each location.
 Then compare the wall ratio with the axis ratio:
+
+<!-- equation:separation -->
 
 ```math
 \alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}},
@@ -203,6 +215,8 @@ Experiments show that a magnetic field applies force to a charge that moves acro
 The force acts at right angles to both the motion and the field.
 This is the magnetic part of the Lorentz force law:
 
+<!-- equation:magnetic-force -->
+
 ```math
 \mathbf{F}_{B}=q\,\mathbf{v}\times\mathbf{B}.
 ```
@@ -219,6 +233,8 @@ The electrical supply supplies energy for rotation and heat. The magnetic field 
 
 For many charges, their combined motion gives current density J: electric current per area.
 The magnetic force on the charged gas per unit volume is
+
+<!-- equation:force-density -->
 
 ```math
 \mathbf{f}=\mathbf{J}\times\mathbf{B}.
@@ -261,6 +277,8 @@ Moment of inertia ℐ measures resistance to rotation changes.
 The same mass farther from the axis has greater inertia. It needs more angular momentum for the same angular speed.
 For rigid rotation,
 
+<!-- equation:momentum -->
+
 ```math
 L=\mathcal{I}\Omega,
 \qquad
@@ -268,6 +286,8 @@ L=\mathcal{I}\Omega,
 ```
 
 The symbol τ is torque. The symbol d/dt means rate of change. For ions and neutral gas,
+
+<!-- equation:coupled -->
 
 ```math
 \frac{dL_i}{dt}=\tau_{\mathrm{drive}}-\Gamma(\Omega_i-\Omega_n),
@@ -284,6 +304,8 @@ When drive torque equals wall-loss torque, total angular momentum stops increasi
 
 Force farther from the axis gives more torque. Thus, the drive depends on where current crosses the gas.
 For radial current I through an annular region in constant axial field B,
+
+<!-- equation:torque -->
 
 ```math
 \tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
@@ -321,6 +343,8 @@ For example, two times Ω and two times T give two times Ω²/T. Two times T alo
 For constant temperature, cooling must remove net heat input.
 Thus, we must calculate separation and cooling power. The drive supplies mechanical power and resistive heat:
 
+<!-- equation:power -->
+
 ```math
 P_{\mathrm{mechanical}}=\tau_{\mathrm{drive}}\Omega_i,
 \qquad
@@ -335,6 +359,8 @@ At constant field, geometry and conductivity, two times the current gives two ti
 Resistance does not include motion-induced voltage. The source also supplies mechanical work.
 Collisions change relative rotational energy into heat:
 
+<!-- equation:slip -->
+
 ```math
 P_{\mathrm{slip}}=\Gamma(\Omega_i-\Omega_n)^2.
 ```
@@ -348,6 +374,8 @@ At constant L, outward movement releases energy. Inward movement can remove heat
 This does not calculate full fluid momentum and energy transport.
 
 For the closed vessel, the continuous energy balance is
+
+<!-- equation:energy -->
 
 ```math
 \frac{d}{dt}(K_{\mathrm{rotation}}+U_{\mathrm{gas}}+U_{\mathrm{wall}})
@@ -378,6 +406,8 @@ Equilibrium tells us a possible final distribution. It does not tell us whether 
 Atoms need time to move across the vessel. Diffusivity D describes how quickly their random motion spreads them over distance.
 Diffusion moves atoms a typical distance √(Dt), which gives the approximate time
 
+<!-- equation:diffusion -->
+
 ```math
 t_{\mathrm{diffusion}}\sim\frac{R^2}{D}.
 ```
@@ -388,6 +418,8 @@ This is a scale estimate, not the calculated completion time.
 [Open diffusivity and separation](/?level=2&try=diffusionExperiment) to compare the calculated distribution with equilibrium.
 
 Enriched gas can contain few atoms. For all gas inside a collection radius,
+
+<!-- equation:collection -->
 
 ```math
 \mathrm{purity}=\frac{N_{\ell,\mathrm{inside}}}

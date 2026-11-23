@@ -21,6 +21,8 @@ or nuclei. For He/D₂, molecule recovery equals deuterium-nuclei recovery.
 Pressure increases with radius to give the inward force for circular motion.
 For species s, partial pressure nₛkT gives this equilibrium force balance:
 
+<!-- equation:pressure -->
+
 ```math
 kT\frac{d n_s}{dr}=n_s m_s\Omega^2 r.
 ```
@@ -29,12 +31,16 @@ Here, nₛ is number density, mₛ is particle mass and k is Boltzmann’s const
 During rotation, heavier particles have a larger wall-to-axis density ratio at the same temperature and angular speed.
 With volume coordinate y = r²/R², integration and normalization give:
 
+<!-- equation:normalization -->
+
 ```math
 \beta_s=\frac{m_s v^2}{2kT},\qquad Z(b)=\int_0^1e^{by}\,dy=\frac{e^b-1}{b},\qquad Z(0)=1.
 ```
 
 Each species keeps its inventory. With qₛ = exp(βₛy)/Z(βₛ), densities and local
 light fraction are:
+
+<!-- equation:species-density -->
 
 ```math
 n_L=\frac{Nx}{\pi R^2L}q_L,\quad n_H=\frac{N(1-x)}{\pi R^2L}q_H,\qquad X_L(r)=\frac{n_L}{n_L+n_H}.
@@ -50,12 +56,16 @@ densities increase with radius.
 A cut divides the inventory into inner and outer samples. For cut radius cR,
 the fraction of species s inside is:
 
+<!-- equation:species-cut -->
+
 ```math
 F_s(c)=\frac{e^{\beta_s c^2}-1}{e^{\beta_s}-1},\qquad F_s(c)=c^2\ \text{when}\ \beta_s=0.
 ```
 
 Light purity is the light-particle fraction in the inner sample. Light recovery
 is the fraction of all light particles that the sample contains:
+
+<!-- equation:collection -->
 
 ```math
 P_L=\frac{xF_L}{xF_L+(1-x)F_H},\qquad \mathcal R_L=F_L.

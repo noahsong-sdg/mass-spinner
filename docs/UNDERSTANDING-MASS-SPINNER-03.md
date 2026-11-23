@@ -17,6 +17,8 @@ We therefore need an energy account before we can decide whether more drive help
 
 First calculate the energy supplied each second. Mechanical power turns ions. Electrical resistance produces heat:
 
+<!-- equation:power -->
+
 ```math
 P_{\mathrm{mech}}=\tau\Omega_i,\qquad P_{\mathrm{Ohmic}}=I^2R_e.
 ```
@@ -75,6 +77,8 @@ A boundary layer is a narrow region where temperature changes rapidly near a sur
 A mean temperature does not show hot boundary layers, which can control heat loss.
 
 The spatial model divides the gas and liner into cells. It calculates heat flow between cells and a temperature for each cell:
+
+<!-- equation:conduction -->
 
 ```math
 q_r=-k\frac{\partial T}{\partial r}.
