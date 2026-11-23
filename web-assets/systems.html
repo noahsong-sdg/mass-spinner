@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Centrifuge and reactors · Mass Spinner</title>
+<link rel="stylesheet" href="/fonts.css">
+<link rel="stylesheet" href="/guide.css">
+</head>
+<body>
+<header><a href="/?level=2" target="_top">Simulator ↗</a><a href="/learn.html">Docs & tutorials</a></header>
+<main>
+<h1>Centrifuge and reactors</h1>
+<p>These three systems do different work. The centrifuge separates isotopes. The beam reactor supplies neutrons. A power reactor would supply heat for electricity production.</p>
+<nav aria-label="Contents"><ol>
+<li><a href="#centrifuge">Centrifuge</a></li>
+<li><a href="#beam">Beam reactor</a></li>
+<li><a href="#power">Power reactor</a></li>
+</ol></nav>
+
+<section aria-labelledby="centrifuge">
+<h2 id="centrifuge">Centrifuge</h2>
+<p>A fusion plant needs fuel with the correct isotope mixture. Isotopes are atoms of the same element with different masses.</p>
+<p>The centrifuge turns gas to change this mixture. Electrical current crosses a magnetic field and produces a sideways force on charged gas. Collisions cause neutral atoms to turn. These atoms have no electric charge. The vessel and electrodes stay still.</p>
+<p>When temperature and angular speed are uniform and constant, heavier atoms have a larger wall-to-axis density ratio. The gas near the axis has a larger percentage of light atoms. Collection from different regions can give different mixtures. Separation does not create atoms or cause fusion.</p>
+<p>The simulator calculates rotation, radial composition, and optional temperature changes. Its collection calculation divides the atoms in the vessel into regions. It does not calculate extraction flow or show the performance of a Marathon machine.</p>
+<p><a href="/?level=2" target="_top">Open the centrifuge ↗</a> · <a href="https://www.marathonfusion.com/fusion-energy/">Marathon fuel-cycle description</a></p>
+</section>
+
+<section aria-labelledby="beam">
+<h2 id="beam">Beam reactor</h2>
+<p>A compact neutron source can supply neutrons for material tests. A neutron is a nuclear particle with no electric charge.</p>
+<p>Deuterium and tritium are hydrogen isotopes. An ion is an atom with an electric charge. An electric field increases the energy of charged deuterium atoms and directs them into a solid lithium tritide target. This target contains tritium. The nucleus is the central part of an atom. Fusion between deuterium and tritium nuclei produces a helium nucleus, a fast neutron, and released energy.</p>
+<p>Most beam ions slow in the target without fusion. They heat the target, so the target needs cooling. Target composition also changes during exposure. These effects can limit neutron output and target operation.</p>
+<p>The simulator calculates beam slowing, neutron production, and target heat and tritium content under specified assumptions. It does not show net electrical power production. This source is separate from the future power-reactor concept.</p>
+<p><a href="/?level=2&amp;try=beamSource" target="_top">Open the beam reactor ↗</a> · <a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon beam-reactor description</a></p>
+</section>
+
+<section aria-labelledby="power">
+<h2 id="power">Power reactor</h2>
+<p>A power reactor must supply more electrical power than its equipment uses. Fusion energy alone does not show this result.</p>
+<p>This concept uses a hot deuterium–tritium plasma. A plasma contains ions and free electrons. Electrons have a negative electric charge. Magnetic fields help keep the plasma inside the chamber. Fusion neutrons enter a structure around the plasma called the blanket.</p>
+<p>The blanket absorbs neutron energy as heat. A coolant would carry heat to equipment that produces electricity. Neutron reactions with lithium can also produce tritium to replace consumed fuel.</p>
+<p>Marathon’s proposal also includes mercury reactions that produce gold in a power-reactor blanket. This proposal is separate from the compact beam reactor. A centrifuge can prepare enriched lithium or separate used fuel for a fusion plant. It does not produce fusion power.</p>
+<p>The site shows a blanket reference and radioactive-decay calculations. Some dimensions come from the published blanket model. Other hardware shows a concept. The site does not calculate a complete power plant or calculate net electricity production.</p>
+<p><a href="/?level=2&amp;v=2&amp;scenario=%7B%22version%22%3A2%2C%22level%22%3A%222%22%2C%22controls%22%3A%7B%22marathon-apparatus%22%3A%22blanket%22%7D%7D" target="_top">Open the power-reactor reference ↗</a> · <a href="https://www.marathonfusion.com/alchemy.pdf">Marathon blanket paper</a></p>
+</section>
+</main>
+<footer><a href="/start.html">Tutorial 1</a> · <a href="/how-it-works.html">Simulation methods & assumptions</a></footer>
+</body>
+</html>

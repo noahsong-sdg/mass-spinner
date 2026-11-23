@@ -10,6 +10,6 @@ function page(title,body,chapters){
 /** Build the documentation index. @returns {string} */
 export function documentationPage(){
  const tutorials=`<section><h2 id="tutorials">Tutorials</h2><ul><li><a href="/start.html">Tutorial 1 · Using the simulator</a></li><li><a href="/guide.html">Tutorial 2 · Rotation and separation</a></li>${numberedTutorials.map(tutorial=>`<li><a href="/tutorial-${tutorial.number}.html">Tutorial ${Number(tutorial.number)} · ${escape(tutorial.title)}</a></li>`).join('')}</ul></section>`;
- const documentation='<section><h2 id="documentation">Documentation</h2><ul><li><a href="/guide.html#views">Controls & plot reference</a></li><li><a href="/how-it-works.html">Simulation methods & assumptions</a></li><li><a href="/equilibrium.html">Equilibrium composition & collection</a></li><li><a href="/qualification.html">Experimental evidence & accuracy limits</a></li></ul></section>';
+ const documentation='<section><h2 id="documentation">Documentation</h2><ul><li><a href="/systems.html">Centrifuge and reactors</a></li><li><a href="/guide.html#views">Controls & plot reference</a></li><li><a href="/how-it-works.html">Simulation methods & assumptions</a></li><li><a href="/equilibrium.html">Equilibrium composition & collection</a></li><li><a href="/qualification.html">Experimental evidence & accuracy limits</a></li></ul></section>';
  return page('Docs & tutorials',tutorials+documentation,[['tutorials','Tutorials'],['documentation','Documentation']]);
 }
