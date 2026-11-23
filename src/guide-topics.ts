@@ -27,7 +27,7 @@ export const numberedTutorials = [
   {id:'pumping',heading:'How much gas can enter a process?',diagram:'pumping',actions:[['pumping','Show pumping reference'],['pumpControls','Adjust pump speed']]},
  ]},
  {number:'05',title:'Fusion fuel cycle',topics:[
-  {id:'jobs',heading:'What are the three processes?',diagram:'fuel-cycle',actions:[]},
+  {id:'jobs',heading:'What are the three processes?',actions:[]},
   {id:'inventory',heading:'How much fuel stays in processing equipment?',diagram:'inventory',actions:[['fuelInventory','Show D–T fuel inventory'],['inventoryControls','Open fuel inventory controls']]},
   {id:'design',heading:'Does this give the total fuel inventory?',diagram:'scope',actions:[['modelInfo','Open model assumptions']]},
  ]},

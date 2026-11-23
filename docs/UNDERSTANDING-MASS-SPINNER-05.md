@@ -10,17 +10,21 @@ Lithium enrichment alone cannot supply a D–T plasma with tritium. A D–T fusi
 Deuterium and tritium are hydrogen isotopes, not lithium isotopes. Lithium can help supply tritium through a different nuclear reaction.
 The three processes below therefore have different inputs and outputs:
 
-- Enrichment increases the lithium-6 fraction relative to lithium-7. The centrifuge changes the isotope distribution. It makes no tritium.
-- Breeding makes tritium through nuclear reactions in a blanket. One reaction is ⁶Li + n → ⁴He + T. The tritium yield changes with neutron transport, materials and losses.
-- Exhaust recovery collects unburned D–T fuel. This fuel goes through processing equipment and back into the plasma.
+| Process | What enters | What leaves |
+|---|---|---|
+| Lithium enrichment | A mixture of ⁶Li and ⁷Li | A ⁶Li-rich stream and a ⁶Li-poor stream |
+| Tritium breeding (one reaction) | ⁶Li + a neutron | ⁴He + tritium (T) |
+| Exhaust recovery | Unburned deuterium and tritium from the plasma | Recovered deuterium and tritium for return to the plasma |
+
+The rich stream has a higher ⁶Li percentage than the feed. The poor stream has a lower percentage.
+Enrichment does not make tritium.
+Only the breeding row makes new tritium. Exhaust recovery returns fuel that did not react.
+The breeding rate depends on neutron transport, materials and losses.
 
 The Reactor tab has a different model for a compact beam–target neutron source. Neutron output does not show net electric power or sufficient tritium production for operation.
 
-In the diagram, follow two paths separately. Lithium enrichment supplies lithium for a breeding blanket.
-Exhaust recovery returns unburned hydrogen fuel to the plasma.
+Lithium enrichment supplies lithium for a breeding blanket.
 A change in lithium purity does not directly change the exhaust-processing delay or the single-pass tritium burn fraction.
-
-<!-- diagram:fuel-cycle -->
 
 ## How much fuel stays in processing equipment?
 

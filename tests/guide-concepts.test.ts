@@ -59,7 +59,7 @@ test('reference factors preserve the fixed conditions and distinguish exponent f
  }
 });
 
-test('tutorial visuals have unique accessible names and text-only accuracy sections need no figure',t=>{
+test('tutorial sections use a diagram, a comparison table or a direct explanation as needed',t=>{
  const revision='8cab091a3458a050142049f9227238d18e51b53d';
  const readers=[startPage(),understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision),
   ...numberedTutorials.map(part=>understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${part.number}.md`,'utf8'),revision,part))];
@@ -69,6 +69,11 @@ test('tutorial visuals have unique accessible names and text-only accuracy secti
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
    if(heading.id==='path')continue; // This section links to further reading.
+   if(doc.title.startsWith('Tutorial 5')&&heading.id==='jobs'){
+    let table:Element|null=null;
+    for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)if(n.tagName==='TABLE')table=n;
+    assert.equal(table?.querySelectorAll('tbody tr').length,3,'compare the three processes without a decorative animation');continue;
+   }
    if(doc.title.startsWith('Tutorial 2')&&['energy','collection'].includes(heading.id)){
     const target=heading.id==='energy'?'/tutorial-03.html#budget':'/tutorial-04.html#sample';
     let linked=false;
