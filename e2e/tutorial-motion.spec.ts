@@ -5,6 +5,10 @@ test('tutorial animations move atoms, conserve inventory and expose pause and re
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/guide.html');
  const sample=page.locator('[data-sample-example]'),range=sample.getByRole('slider');
  await expect(range).toBeEnabled();await expect(sample).toHaveAttribute('data-motion','paused');
+ await page.emulateMedia({reducedMotion:'no-preference'});await sample.scrollIntoViewIfNeeded();
+ await expect(sample).toHaveAttribute('data-motion','paused');
+ await expect(sample.locator('[data-sample-region]')).toBeVisible();
+ await expect(sample).toContainText('Collect all 100, not only the light atoms.');
  await range.focus();await range.press('End');
  await expect(sample.locator('[data-sample-purity]')).toHaveText('10 / 100 · 10.0%');
  await expect(sample.locator('[data-sample-recovery]')).toHaveText('10 / 76 = 13.2%');
@@ -17,6 +21,7 @@ test('tutorial animations move atoms, conserve inventory and expose pause and re
  const paused=await positions();
  await page.waitForTimeout(100);expect(await positions()).toEqual(paused);
  await range.press('Home');await expect(sample.locator('[data-sample-purity]')).toHaveText('0 / 0 · undefined');
+ await page.emulateMedia({reducedMotion:'reduce'});
  const density=page.locator('[data-density-example]');await expect(density.locator('.density-dot')).toHaveCount(96);
  await density.getByRole('button',{name:'No rotation',exact:true}).click();
  const dot=density.locator('.density-dot').first(),rest=await dot.evaluate(n=>getComputedStyle(n).transform);

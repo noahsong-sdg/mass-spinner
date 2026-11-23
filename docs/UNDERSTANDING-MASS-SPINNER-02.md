@@ -9,8 +9,13 @@ The centrifuge must change where these atoms are before we can collect an enrich
 
 Purity is their percentage in the sample. Recovery is their fraction of the initial light-isotope count.
 
-From 76 light and 924 heavy atoms, collect 10 light and 90 heavy atoms.
-Purity increases from 7.6% to 10%, but recovery is only 10/76. Separation moves isotopes. It does not make them.
+Rotation can increase the light-isotope percentage near the axis. We can then collect this inner gas, including both isotopes.
+We select a region of gas, not individual light atoms.
+
+The diagram starts after separation. Its example counts are 76 light and 924 heavy atoms in the vessel.
+The marked inner gas contains 10 light and 90 heavy atoms. Collect all 100 atoms from that region.
+Purity increases from 7.6% to 10%, but light recovery is only 10/76, or 13.2%.
+Most light atoms remain in the outer gas. A higher percentage does not mean that we collect more light atoms.
 
 <!-- diagram:goal -->
 
