@@ -22,6 +22,34 @@ test('energy readers explain the separation and cooling decision before introduc
  }
 });
 
+
+test('the separation reader motivates its factor with equal-volume counts before optional equations',t=>{
+ const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());
+ const doc=dom.window.document,heading=doc.getElementById('bias')!,nodes:Element[]=[];
+ for(let node=heading.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)nodes.push(node);
+ const table=nodes.find(node=>node.tagName==='TABLE')!;
+ const rows=[...table.querySelectorAll('tbody tr')].map(row=>[...row.querySelectorAll('td')].map(cell=>cell.textContent!.trim()));
+ const light=rows[0]!.slice(1).map(Number),heavy=rows[1]!.slice(1).map(Number);
+ assert.deepEqual(light,[10,20]);assert.deepEqual(heavy,[90,360]);
+ const ratios=heavy.map((count,i)=>count/light[i]!);
+ assert.deepEqual(ratios,[9,18]);assert.equal(ratios[1]!/ratios[0]!,2);
+ for(let i=0;i<2;i++){
+  assert.equal(Number(rows[2]![i+1]!.split('=')[1]),ratios[i]);
+  const percent=Number(rows[3]![i+1]!.split(/=|≈/)[1]!.replace('%',''));
+  assert.ok(Math.abs(percent-100*light[i]!/(light[i]!+heavy[i]!))<.05);
+ }
+ const equation=nodes.find(node=>node.tagName==='DETAILS'&&node.querySelector('[data-equation-plot="separation"]'))!;
+ assert.ok(nodes.indexOf(table)<nodes.indexOf(equation));assert.equal(equation.hasAttribute('open'),false);
+ const lead=nodes.slice(0,nodes.indexOf(equation)).map(node=>node.textContent).join(' ');
+ assert.match(lead,/same size/);assert.match(lead,/both isotope densities increase by the same factor.*percentages stay the same/);
+ assert.match(lead,/It does not mean twice the light percentage/);assert.match(lead,/axis value is not the feed percentage/);
+ assert.doesNotMatch(lead,/ln α|1\.20⁴|√1\.20/);
+ assert.match(equation.textContent!,/ideal neutral gas, rigid rotation, uniform temperature and diffusive equilibrium/);
+ const scaling=nodes.find(node=>node.tagName==='DETAILS'&&node.textContent!.includes('natural logarithm'))!;
+ assert.ok(scaling);assert.equal(scaling.hasAttribute('open'),false);
+ for(const action of ['rotation','temperature','equilibrium'])assert.ok(nodes.some(node=>node.querySelector(`[data-guide-action="${action}"]`)));
+});
+
 test('the heat reader introduces input power before stored energy and retains the heat-assignment assumption',()=>{
  const heat=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-03.md','utf8');
  const firstEquation=heat.indexOf('```math');
@@ -38,7 +66,7 @@ test('the website renders every guide equation and its derivation, with accessib
  assert.equal(doc.querySelectorAll('.equation').length,count);assert.equal(doc.querySelectorAll('math').length,count);
  for(const equation of doc.querySelectorAll('.equation'))assert.equal(equation.getAttribute('role'),'group');
  for(const table of doc.querySelectorAll('table')){assert.equal(table.getAttribute('tabindex'),'0');assert.ok(table.getAttribute('aria-label'));}
- assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,2);
+ assert.equal(doc.querySelectorAll('.katex-error').length,0);assert.equal(doc.querySelectorAll('details math').length,3);
  assert.equal(doc.querySelectorAll('figure').length,guideTopics.flatMap(topic=>'diagram' in topic?topic.diagram:[]).length);
  assert.equal(doc.querySelectorAll('[data-drive-diagram] svg').length,2);
  assert.equal(doc.querySelectorAll('[data-density-example] svg').length,2);

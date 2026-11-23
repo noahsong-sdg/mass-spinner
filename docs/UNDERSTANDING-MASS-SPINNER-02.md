@@ -257,49 +257,95 @@ The [plasma separation tutorial, §III](https://w3.pppl.gov/~fisch/fischpapers/2
 
 ## 2. How strong is the separation?
 
-A steep density curve can suggest strong separation even when the isotope fractions change little.
-Most of the increase can be common to both isotopes.
-To remove that common increase, divide the heavy density by the light density at each location.
-Then compare the wall ratio with the axis ratio:
+We want a different isotope mixture near the axis so that collection can give a richer sample.
+A larger number of atoms per volume is not sufficient.
+If both isotope densities increase by the same factor, their percentages stay the same. There is denser gas, but no separation.
+
+Compare two small gas volumes of the same size: one near the axis and one near the wall.
+The counts below are an example, not a prediction for your run.
+
+| Quantity in each small volume | Near the axis | Near the wall |
+| --- | ---: | ---: |
+| Light atoms | 10 | 20 |
+| Heavy atoms | 90 | 360 |
+| Heavy atoms per light atom | 90 / 10 = 9 | 360 / 20 = 18 |
+| Light percentage | 10 / 100 = 10% | 20 / 380 ≈ 5.3% |
+
+The wall sample contains more atoms of both isotopes. But it has more heavy atoms for each light atom.
+Its heavy/light ratio is 18, compared with 9 near the axis.
+Divide these ratios: 18 / 9 = 2. We call this result the separation factor, α.
+
+Thus, α = 2 means twice as many heavy atoms per light atom at the wall as near the axis.
+It does not mean twice the light percentage. In this example, the light percentage is higher near the axis: 10% compared with about 5.3%.
+The axis value is not the feed percentage. The feed is the initial mixture before separation.
+
+When α = 1, the two locations have the same isotope percentages. A larger α means a larger wall-to-axis change in the heavy/light ratio.
+The factor compares locations; it does not tell us how many light atoms we can collect.
+
+<details>
+<summary>How does rotation set this factor?</summary>
+
+The previous section gives a density increase for each isotope.
+The heavier isotope has the larger increase. Dividing the two increases leaves a result that contains their mass difference, Δm.
+
+The equation below makes the same comparison as the table.
+Here, n_h and n_ℓ are heavy and light number densities. Their ratio equals the count ratio in one small volume.
+The subscripts r = R and r = 0 select the wall and axis.
 
 <!-- equation:separation -->
 
 ```math
-\alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}},
-\qquad
-\ln\alpha=\frac{(m_h-m_\ell)\Omega^2R^2}{2k_BT}
-=\frac{\Delta m\,v_{\mathrm{wall}}^2}{2k_BT}.
+\alpha=\frac{[n_h/n_\ell]_{r=R}}{[n_h/n_\ell]_{r=0}}
+=\exp\!\left(\frac{\Delta m\,\Omega^2R^2}{2k_BT}\right).
 ```
 
-R is vessel radius. The speed v_wall = ΩR is gas speed at the wall, which does not move. Ω has units of rad/s.
+Δm = m_h − m_ℓ is the mass difference between one heavy atom and one light atom.
+Ω is angular speed in rad/s. R is vessel radius. T is absolute gas temperature in kelvin.
+The constant k_B converts temperature to a thermal energy scale.
+The function exp(x) means e raised to the power x, where e ≈ 2.718.
 
-The exponent compares the rotational energy difference between isotopes with thermal energy.
-Only the mass difference Δm appears because both isotopes share most of their response to rotation.
-At zero speed or zero mass difference, ln α = 0 and α = 1. There is no composition difference.
-When α = 2, the wall heavy/light ratio is two times the axis ratio, not two times the purity.
+The gas speed at the wall is v_wall = ΩR. The vessel wall itself stays still.
+The quantity Δm v_wall² / 2 is the difference in rotational kinetic energy between the isotopes at that speed.
+The quantity k_B T sets the scale of random thermal motion.
+Dividing this energy difference by k_B T gives the exponent. A larger exponent gives a larger separation factor.
 
-For Δm ≈ 1 u, a gas speed of 1,000 m/s and a temperature of 500 K, α ≈ 1.13.
-The wall heavy/light ratio is about 13% higher than the axis ratio. Purity does not increase by 13 percentage points.
-If α starts at 1.20, doubling speed gives α = 1.20⁴ ≈ 2.074 at the same temperature.
-Doubling temperature gives α = √1.20 ≈ 1.095 at the same speed.
-The factors four and one half apply to ln α, not to α or purity.
+At zero rotation or zero mass difference, the exponent is zero and α = 1. There is no composition difference.
+This equation assumes ideal neutral gas, rigid rotation, uniform temperature and diffusive equilibrium.
+[Read the assumption checks](#equilibrium-assumptions) before using it to describe real equipment.
 
-Thus, higher angular speed and lower temperature increase ideal equilibrium separation at a fixed radius and fixed isotope masses.
-This is not an instruction to increase drive without limit or cool lithium without limit.
-More drive can increase heating and wall pressure. Too much cooling can remove lithium vapor through condensation.
+</details>
 
-The collection radius changes purity and recovery. The available atom count limits how much product we can collect.
-A larger equilibrium factor alone does not give more collected product.
+At fixed radius and isotope masses, higher angular speed or lower temperature gives stronger ideal equilibrium separation.
+The reference below starts at α = 1.20. Compare one change at a time.
 
 <!-- diagram:bias -->
 
-1. [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation). At constant temperature, the exponent becomes four times its initial value and separation increases.
-2. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature). At constant rotation speed, the exponent becomes half its initial value and separation decreases.
+1. [Compare 2× rotation](/?level=2&guide=physics&topic=bias&try=rotation). Keep temperature constant. The heavy/light ratios become more different.
+2. [Compare 2× temperature](/?level=2&guide=physics&topic=bias&try=temperature). Keep rotation speed constant. The heavy/light ratios become less different.
+
+<details>
+<summary>Why does twice the speed not give twice the separation factor?</summary>
+
+Speed is squared inside the exponential function. Twice the speed makes the exponent four times as large.
+It gives the fourth power of the initial separation factor.
+Starting from α = 1.20, the new factor is 1.20⁴ ≈ 2.074.
+
+Twice the temperature makes the exponent half as large. The new factor is the square root of the initial factor.
+Starting from α = 1.20, the new factor is √1.20 ≈ 1.095.
+
+The natural logarithm, ln α, is the exponent in the equation. The factors four and one half apply to ln α.
+They do not directly multiply α, purity or recovery.
+
+</details>
 
 These equilibrium curves do not change your run or calculate the necessary power.
 If the curves overlap at 0 s, advance a powered run to a time with nonzero rotation.
 [Open the equilibrium calculator](/?level=2&try=equilibrium) for an independent calculation.
 To compare with your run, select Use sampled state first. This imports the selected values once.
+
+Stronger drive can also increase heating and wall pressure. Too much cooling can cause lithium to condense on surfaces.
+The collection radius changes purity and recovery. The available atom count limits how much product we can collect.
+A larger equilibrium factor alone does not give more collected product.
 Charged-particle filters use more physics than this neutral-gas model includes.
 
 ## 3. How does electricity turn the gas?
