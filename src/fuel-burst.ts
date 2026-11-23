@@ -5,9 +5,18 @@ import type {FuelConfig} from './fuel-centrifuge.js';
 export function createFuelBurst(scene:THREE.Object3D,c:Pick<FuelConfig,'radiusM'|'lengthM'>){
  const group=new THREE.Group();group.name='Failure illustration';group.visible=false;group.userData.nonPickable=true;
  const source=scene.getObjectByName('construction')!,parts:{node:THREE.Object3D;position:THREE.Vector3;rotation:THREE.Quaternion;direction:THREE.Vector3}[]=[];
+ const materials=new Map<THREE.Material,THREE.Material>();
  const turn=new THREE.Quaternion(),angles=new THREE.Euler();let housing:THREE.Object3D|null=null;
  function prepare(){
   if(housing)return;housing=source.clone(true);group.add(housing);
+  housing.traverse(node=>{if(node instanceof THREE.Mesh){
+   const copy=(material:THREE.Material)=>{
+    if(!materials.has(material)){const clone=material.clone();clone.clippingPlanes=null;materials.set(material,clone);}
+    return materials.get(material)!;
+   };
+   const material=node.material as THREE.Material|THREE.Material[];
+   node.material=Array.isArray(material)?material.map(copy):copy(material);
+  }});
   for(const [i,node]of housing.children.entries()){
    const angle=i*2.399963229728653,position=node.position.clone(),z=(position.z-c.lengthM/2)/c.lengthM;
    parts.push({node,position,rotation:node.quaternion.clone(),direction:new THREE.Vector3(Math.cos(angle),Math.sin(angle)*.7,z*1.8||((i%2)*2-1)*.4)});
@@ -34,14 +43,14 @@ export function createFuelBurst(scene:THREE.Object3D,c:Pick<FuelConfig,'radiusM'
   update(seconds:number|null){
    if(seconds!==null)prepare();
    setVisible(seconds!==null);if(seconds===null)return;
-   const t=Math.min(1.6,Math.max(0,seconds)),distance=c.radiusM*2.3*(1-Math.exp(-2*t));
+   const t=Math.min(1.6,Math.max(0,seconds)),distance=c.radiusM*.9*(1-Math.exp(-2*t));
    for(const node of hidden.keys())node.visible=false;
-   for(const {node,position,rotation,direction}of parts){node.position.copy(position).addScaledVector(direction,distance);node.quaternion.copy(rotation).multiply(turn.setFromEuler(angles.set(Math.sin(position.z*11)*t*.22,t*.18,0)));}
+   for(const {node,position,rotation,direction}of parts){node.position.copy(position).addScaledVector(direction,distance);node.quaternion.copy(rotation).multiply(turn.setFromEuler(angles.set(Math.sin(position.z*11)*t*.08,t*.08,0)));}
    for(let i=0;i<count;i++){const ray=rays[i],r=c.radiusM*(.8+2.2*t)*(1+(i%7)/14);positions[i*3]=ray.x*r;positions[i*3+1]=ray.y*r;positions[i*3+2]=c.lengthM*(i/count)+ray.z*c.radiusM*t;}
    geometry.attributes.position.needsUpdate=true;material.opacity=.6*Math.max(0,1-t/1.6);
    group.userData.elapsedS=t;
    scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
   },
-  dispose(){setVisible(false);group.removeFromParent();geometry.dispose();material.dispose();},
+  dispose(){setVisible(false);group.removeFromParent();geometry.dispose();material.dispose();for(const clone of materials.values())clone.dispose();},
  };
 }

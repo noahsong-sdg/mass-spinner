@@ -56,19 +56,24 @@ test('invalid limits and nonfinite accepted loads are errors, not explosion even
  assert.throws(()=>firstFuelFailure(broken,DEFAULT_FUEL_FAILURE),/finite accepted/);
 });
 
-test('burst keeps authored orientations, shares mesh resources and restores prior visibility',()=>{
+test('burst keeps authored orientations, shares geometry, removes diagnostic clipping and restores prior visibility',()=>{
  const scene=new THREE.Group(),construction=new THREE.Group(),part=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshBasicMaterial());
  construction.name='construction';part.rotation.set(.2,.4,.6);part.position.set(.1,.2,.3);construction.add(part);scene.add(construction);
  const hidden=new THREE.Group();hidden.visible=false;scene.add(hidden);
+ const material=part.material as THREE.Material;material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(1,0,0),0)];
+ let originalDisposed=false,copyDisposed=false;material.addEventListener('dispose',()=>{originalDisposed=true;});
  const burst=createFuelBurst(scene,{radiusM:.12,lengthM:.8});
  assert.equal(burst.group.children.length,1,'Do not duplicate the assembly before a failure.');
  burst.update(0);const copy=burst.group.children[1].children[0] as THREE.Mesh;
- assert.deepEqual(copy.quaternion.toArray(),part.quaternion.toArray());assert.equal(copy.geometry,part.geometry);assert.equal(copy.material,part.material);
+ assert.deepEqual(copy.quaternion.toArray(),part.quaternion.toArray());assert.equal(copy.geometry,part.geometry);assert.notEqual(copy.material,part.material);
+ assert.equal((copy.material as THREE.Material).clippingPlanes,null);assert.equal(material.clippingPlanes.length,1);
+ (copy.material as THREE.Material).addEventListener('dispose',()=>{copyDisposed=true;});
  assert.equal(construction.visible,false);assert.equal(burst.group.visible,true);
- burst.update(1.6);assert.ok(copy.position.distanceTo(part.position)>.1);
+ burst.update(1.6);assert.ok(copy.position.distanceTo(part.position)>.05);assert.ok(copy.position.distanceTo(part.position)<.15,'Keep display motion close to the assembly.');
  burst.update(null);assert.equal(construction.visible,true);assert.equal(hidden.visible,false);assert.equal(burst.group.visible,false);
  assert.deepEqual(copy.position.toArray(),part.position.toArray(),'Hidden burst parts must not enlarge the camera bounds after rewind.');
  burst.update(0);assert.deepEqual(copy.position.toArray(),part.position.toArray());assert.deepEqual(copy.quaternion.toArray(),part.quaternion.toArray());
  burst.dispose();assert.equal(construction.visible,true);assert.equal(scene.children.includes(burst.group),false);
+ assert.equal(copyDisposed,true);assert.equal(originalDisposed,false,'Burst disposal must keep the intact materials usable.');
  part.geometry.dispose();(part.material as THREE.Material).dispose();
 });
