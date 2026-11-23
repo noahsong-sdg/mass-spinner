@@ -10,7 +10,7 @@ function plot(kind:'radius'|'temperature'){
  return `<div><h3>Against ${kind}</h3><p data-density-held="${kind}"></p>
  <svg viewBox="0 0 400 304" role="img" aria-labelledby="density-${kind}-title density-${kind}-description">
  <title id="density-${kind}-title">Density ratio against ${kind}</title>
- <desc id="density-${kind}-description">${radial?'Temperature stays constant along each curve.':'Radius stays constant along each curve. Temperature is uniform throughout each equilibrium.'} Both isotope curves use their own axis density. The marked points show the selected radius and temperature.</desc>
+ <desc id="density-${kind}-description">${radial?'Temperature stays constant along each curve.':'Radius stays constant along each curve. Temperature is uniform throughout each equilibrium.'} Both isotope curves use their own axis density. The points show the selected radius and temperature.</desc>
  ${text(210,22,'Density ÷ its own axis density')}<g data-density-grid="${kind}"></g>
  <path d="M${left} ${top}V${bottom}H${right}" class="diagram-axis"/>
  ${ticks.map(value=>text(x(value),272,String(value))).join('')}${text(213,297,radial?'Radius r (cm)':'Temperature T (K)')}
@@ -22,7 +22,7 @@ function plot(kind:'radius'|'temperature'){
 export function densityScanDiagram(){
  return `<figure class="density-scan" id="density-equation" data-density-scan>
  <div class="drive-heading">Change radius and temperature.</div>
- <p class="diagram-reading">Each curve shows the density equation above. Move either slider. The marked points show the same selected state on both plots.</p>
+ <p class="diagram-reading">Each curve shows the density equation above. Move either slider. The points show the same selected state on both plots.</p>
  <div class="density-scan-controls">
  <label>Temperature <output data-density-temperature>500 K</output><input type="range" min="250" max="1500" step="10" value="500" aria-label="Equilibrium temperature (K)" disabled></label>
  <label>Radius <output data-density-radius>12.0 cm · wall</output><input type="range" min="0" max="12" step="0.1" value="12" aria-label="Equilibrium radius (cm)" disabled></label>
@@ -32,7 +32,7 @@ export function densityScanDiagram(){
  <figcaption>Ideal neutral equilibrium, not your run. Assumed vessel radius: 12 cm. Angular speed stays at Ω = 12,500 rad/s, giving 1,500 m/s at the wall. Temperature is uniform within each equilibrium. Each curve uses its own axis density; the ratios are not isotope percentages. The vertical scale changes with the inputs.</figcaption></figure>`;
 }
 
-/** Sample the same equilibrium equation along two parameter slices. */
+/** Calculate two parameter scans from the same equilibrium equation. */
 export function densityScan(radiusCm:number,temperature:number){
  const radius=radiusCm/12;
  return {
