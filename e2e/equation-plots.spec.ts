@@ -1,4 +1,5 @@
 import {test,expect} from '@playwright/test';
+import AxeBuilder from '@axe-core/playwright';
 
 test('every displayed equation opens its working plot on the same page',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
@@ -23,6 +24,7 @@ test('every displayed equation opens its working plot on the same page',async({p
    await dialog.getByRole('button',{name:'Close equation plot'}).click();await expect(dialog).not.toBeVisible();await expect(trigger).toBeFocused();
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+  expect((await new AxeBuilder({page}).include('.equation').withRules(['label-content-name-mismatch']).analyze()).violations).toEqual([]);
  }
  expect(opened).toBe(28);expect(errors).toEqual([]);
  await page.goto('/guide.html#composition');await page.locator('[data-equation-plot="composition"]').click();

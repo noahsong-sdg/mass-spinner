@@ -20,7 +20,7 @@ test('every displayed tutorial, calculator and summary equation has an explicit 
   const dom=new JSDOM(understandingPage(source,revision,tutorial));t.after(()=>dom.window.close());
   const buttons=dom.window.document.querySelectorAll<HTMLButtonElement>('.equation button');
   assert.equal(buttons.length,[...source.matchAll(/^```math$/gm)].length);
-  for(const button of buttons){assert.ok(Object.hasOwn(equationGroups,button.dataset.equationPlot!));assert.match(button.textContent!,/Plot ↗/);assert.ok(button.querySelector('math'));}
+  for(const button of buttons){assert.ok(Object.hasOwn(equationGroups,button.dataset.equationPlot!));assert.match(button.textContent!,/Plot ↗/);assert.ok(button.querySelector('math'));assert.equal(button.hasAttribute('aria-label'),false,'the button name must include its visible equation');assert.match(button.title,/^Plot: /);}
   count+=buttons.length;
  }
  const calculator=new JSDOM(equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));t.after(()=>calculator.window.close());
