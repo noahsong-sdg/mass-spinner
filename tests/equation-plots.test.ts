@@ -7,6 +7,8 @@ import {setupEquationPlots} from '../src/equation-dialog.js';
 import {understandingPage} from '../scripts/understanding-page.mjs';
 import {equilibriumPage} from '../scripts/equilibrium-page.mjs';
 import {numberedTutorials} from '../src/guide-topics.js';
+import {equationDerivations} from '../src/equation-derivations.js';
+import {equationMarkup,withEquationDerivations} from '../scripts/equation-links.mjs';
 
 const near=(a:number,b:number,tolerance=1e-9)=>assert.ok(Math.abs(a-b)<=tolerance*Math.max(1,Math.abs(b)),`${a} != ${b}`);
 const defaults=(id:EquationPlotId)=>Object.fromEntries(equationPlots[id].inputs.map(c=>[c.key,c.value]));
@@ -20,16 +22,34 @@ test('every displayed tutorial, calculator and summary equation has an explicit 
   const dom=new JSDOM(understandingPage(source,revision,tutorial));t.after(()=>dom.window.close());
   const buttons=dom.window.document.querySelectorAll<HTMLButtonElement>('.equation button');
   assert.equal(buttons.length,[...source.matchAll(/^```math$/gm)].length);
-  for(const button of buttons){assert.ok(Object.hasOwn(equationGroups,button.dataset.equationPlot!));assert.match(button.textContent!,/Plot ↗/);assert.ok(button.querySelector('math'));assert.equal(button.hasAttribute('aria-label'),false,'the button name must include its visible equation');assert.match(button.title,/^Plot: /);}
+  for(const button of buttons){assert.ok(Object.hasOwn(equationGroups,button.dataset.equationPlot!));assert.match(button.textContent!,/Plot \+ derivation ↗/);assert.ok(button.querySelector('math'));assert.equal(button.hasAttribute('aria-label'),false,'the button name must include its visible equation');assert.match(button.title,/^Plot: /);assert.equal((button.nextElementSibling as HTMLTemplateElement).dataset.equationDerivation,button.dataset.equationPlot);}
   count+=buttons.length;
  }
  const calculator=new JSDOM(equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));t.after(()=>calculator.window.close());
  assert.equal(calculator.window.document.querySelectorAll('.equation button[data-equation-plot]').length,5);
  assert.equal(count,21);
- const summary=new JSDOM(readFileSync('web-assets/how-it-works.html','utf8'));t.after(()=>summary.window.close());
+ const summary=new JSDOM(withEquationDerivations(readFileSync('web-assets/how-it-works.html','utf8')));t.after(()=>summary.window.close());
  assert.equal(summary.window.document.querySelectorAll('.equation button[data-equation-plot]').length,2);
+ assert.equal(summary.window.document.querySelectorAll('template[data-equation-derivation]').length,2);
+ assert.ok(summary.window.document.querySelector('link[href="/guide-katex/katex.min.css"]'));
  assert.throws(()=>understandingPage('```math\nx=1\n```',revision),/known plot marker/);
  assert.throws(()=>understandingPage('<!-- equation:missing -->\n\n```math\nx=1\n```',revision),/known plot marker/);
+});
+
+test('every equation group has a motivated, typeset derivation with assumptions and calculation steps',t=>{
+ assert.deepEqual(Object.keys(equationDerivations).sort(),Object.keys(equationGroups).sort());
+ for(const [id,d]of Object.entries(equationDerivations)){
+  const dom=new JSDOM(equationMarkup('x=1',id));t.after(()=>dom.window.close());
+  const template=dom.window.document.querySelector<HTMLTemplateElement>('template')!;
+  assert.equal(template.dataset.equationDerivation,id);
+  assert.equal(template.content.querySelector('h3')!.textContent,d.title);
+  assert.ok(template.content.textContent!.includes(d.why));assert.ok(template.content.textContent!.includes(d.symbols));
+  assert.equal(template.content.querySelector('.equation-assumptions')!.textContent,d.assumptions);
+  assert.ok(d.steps.length>=3);assert.equal(template.content.querySelectorAll('li math').length,d.steps.length);
+  assert.equal(template.content.querySelectorAll('script,.katex-error').length,0);
+  assert.equal(dom.window.document.querySelectorAll('math').length,1,'template equations must stay inert until the dialog opens');
+ }
+ assert.throws(()=>withEquationDerivations('<button data-equation-plot="missing">x</button>'),/known derivation/);
 });
 
 test('every plot stays finite throughout its exposed input domain',()=>{
@@ -110,7 +130,7 @@ test('pumping and fuel references use the stated boundary conditions and consume
 });
 
 test('equation dialog updates curves, preserves undefined results and returns focus',t=>{
- const dom=new JSDOM('<button data-equation-plot="collection">Equation</button>',{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
+ const dom=new JSDOM(equationMarkup(String.raw`P_\ell=N_\ell/N`,'collection')+equationMarkup(String.raw`v=r\Omega`,'speed'),{url:'https://example.org/guide.html'});t.after(()=>dom.window.close());
  const doc=dom.window.document;
  dom.window.HTMLDialogElement.prototype.showModal=function(){this.open=true;};
  dom.window.HTMLDialogElement.prototype.close=function(){this.open=false;this.dispatchEvent(new dom.window.Event('close'));};
@@ -125,7 +145,23 @@ test('equation dialog updates curves, preserves undefined results and returns fo
  radius.value='0';radius.dispatchEvent(new dom.window.Event('input'));
  assert.match(dialog.querySelector('[data-equation-reading]')!.textContent!,/Light purity: undefined/);
  assert.doesNotMatch(dialog.innerHTML,/NaN|Infinity/);
+ const tabs=[...dialog.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+ tabs[1].click();assert.equal(tabs[1].getAttribute('aria-selected'),'true');
+ assert.equal(dialog.querySelector<HTMLElement>('#equation-plot-panel')!.hidden,true);
+ assert.equal(dialog.querySelector<HTMLElement>('#equation-derivation-panel')!.hidden,false);
+ assert.equal(dialog.querySelector('#equation-derivation-panel h3')!.textContent,equationDerivations.collection.title);
+ tabs[1].focus();tabs[1].dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true}));
+ assert.equal(doc.activeElement,tabs[0]);assert.equal(tabs[0].getAttribute('aria-selected'),'true');
+ assert.equal(radius.value,'0','tab switches must preserve plot inputs');
+ for(const [key,index]of [['End',1],['Home',0],['ArrowLeft',1]] as const){
+  doc.activeElement!.dispatchEvent(new dom.window.KeyboardEvent('keydown',{key,bubbles:true}));assert.equal(doc.activeElement,tabs[index]);
+ }
  let escaped=false;doc.addEventListener('keydown',()=>{escaped=true;});
  dialog.dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true}));assert.equal(escaped,false);
  dialog.querySelector<HTMLButtonElement>('[data-equation-close]')!.click();assert.equal(dialog.open,false);assert.equal(doc.activeElement,source);
+ const second=doc.querySelectorAll<HTMLButtonElement>('[data-equation-plot]')[1];second.click();
+ assert.equal(tabs[0].getAttribute('aria-selected'),'true','a new equation starts on its plot');
+ assert.equal(dialog.querySelector('#equation-derivation-panel h3')!.textContent,equationDerivations.speed.title,'a new equation must replace the previous derivation');
+ assert.equal(dialog.querySelectorAll('#equation-derivation-panel li').length,3);
+ assert.equal(doc.querySelectorAll('template')[0].content.querySelectorAll('li').length,4,'opening a derivation must not consume its template');
 });

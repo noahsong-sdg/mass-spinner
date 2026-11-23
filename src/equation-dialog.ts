@@ -5,14 +5,28 @@ export function setupEquationPlots(doc:Document){
  const triggers=doc.querySelectorAll<HTMLButtonElement>('[data-equation-plot]');
  if(!triggers.length)return;
  const dialog=doc.createElement('dialog');dialog.className='equation-dialog';dialog.setAttribute('aria-labelledby','equation-plot-title');
- dialog.innerHTML=`<header><h2 id="equation-plot-title"></h2><button type="button" data-equation-close aria-label="Close equation plot">Close ×</button></header>
+ dialog.innerHTML=`<header><h2 id="equation-plot-title"></h2><button type="button" data-equation-close aria-label="Close equation">Close ×</button></header>
+ <div role="tablist" aria-label="Equation views"><button type="button" role="tab" id="equation-plot-tab" aria-controls="equation-plot-panel" aria-selected="true">Plot</button><button type="button" role="tab" id="equation-derivation-tab" aria-controls="equation-derivation-panel" aria-selected="false" tabindex="-1">Derivation</button></div>
+ <div role="tabpanel" id="equation-plot-panel" aria-labelledby="equation-plot-tab">
  <label data-equation-choice>Plot <select aria-label="Equation plot"></select></label>
  <div data-equation-controls></div><p data-equation-y></p>
  <svg viewBox="0 0 560 325" role="img" aria-labelledby="equation-chart-title equation-chart-description"><title id="equation-chart-title"></title><desc id="equation-chart-description"></desc><g data-equation-chart></g></svg>
- <p data-equation-key></p><p data-equation-reading aria-live="polite"></p><p data-equation-note></p>`;
+ <p data-equation-key></p><p data-equation-reading aria-live="polite"></p><p data-equation-note></p></div>
+ <div role="tabpanel" id="equation-derivation-panel" aria-labelledby="equation-derivation-tab" hidden></div>`;
  doc.body.append(dialog);
  const node=(s:string)=>dialog.querySelector<HTMLElement>(s)!;
  const select=dialog.querySelector<HTMLSelectElement>('select')!;
+ const tabs=[...dialog.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+ function showView(index:number){
+  tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;node(`#${tab.getAttribute('aria-controls')}`).hidden=i!==index;});
+ }
+ tabs.forEach((tab,i)=>tab.addEventListener('click',()=>showView(i)));
+ node('[role="tablist"]').addEventListener('keydown',event=>{
+  if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
+  event.preventDefault();const selected=tabs.indexOf(doc.activeElement as HTMLButtonElement);
+  const index=event.key==='Home'?0:event.key==='End'?tabs.length-1:(selected+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
+  showView(index);tabs[index].focus();
+ });
  let id:EquationPlotId='speed',source:HTMLButtonElement;
  const close=()=>dialog.close();
  node('[data-equation-close]').addEventListener('click',close);
@@ -56,7 +70,9 @@ export function setupEquationPlots(doc:Document){
  select.addEventListener('change',showPlot);
  for(const trigger of triggers)trigger.addEventListener('click',()=>{
   source=trigger;const group=equationGroups[trigger.dataset.equationPlot as EquationGroupId];
+  const template=trigger.nextElementSibling as HTMLTemplateElement;
+  node('#equation-derivation-panel').replaceChildren(template.content.cloneNode(true));
   select.replaceChildren(...group.map(key=>{const option=doc.createElement('option');option.value=key;option.textContent=equationPlots[key].title;return option;}));
-  node('[data-equation-choice]').hidden=group.length===1;showPlot();dialog.showModal();
+  node('[data-equation-choice]').hidden=group.length===1;showView(0);showPlot();dialog.showModal();dialog.scrollTop=0;
  });
 }

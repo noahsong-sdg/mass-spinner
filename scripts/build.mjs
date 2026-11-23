@@ -10,6 +10,7 @@ import {understandingPage} from './understanding-page.mjs';
 import {tsImport} from 'tsx/esm/api';
 const {numberedTutorials}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
 import {equilibriumPage} from './equilibrium-page.mjs';
+import {withEquationDerivations} from './equation-links.mjs';
 import {pinReleaseLinks,releaseSourceBase} from './release-links.mjs';
 const source=spawnSync('git',['rev-parse','--verify','HEAD'],{encoding:'utf8'});
 if(source.status!==0)throw new Error('Cannot identify the producing release revision.');
@@ -26,7 +27,7 @@ if(build.status===0){
  writeFileSync('release/learn.html',documentationPage());
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  for(const tutorial of numberedTutorials)writeFileSync(`release/tutorial-${tutorial.number}.html`,understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8'),revision,tutorial));
- writeFileSync('release/how-it-works.html',pinReleaseLinks(readFileSync('web-assets/how-it-works.html','utf8'),revision));
+ writeFileSync('release/how-it-works.html',pinReleaseLinks(withEquationDerivations(readFileSync('web-assets/how-it-works.html','utf8')),revision));
  for(const name of ['guide-reader','guide-sample','guide-force','guide-density','equation-dialog','equation-plots','fuel-equilibrium','fuel-centrifuge','array-shape'])writeFileSync(`release/${name}.js`,transpileModule(readFileSync(`src/${name}.ts`,'utf8'),{fileName:`${name}.ts`,compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
  const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');
  mkdirSync('release/guide-katex',{recursive:true});

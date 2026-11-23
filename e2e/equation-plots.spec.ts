@@ -1,7 +1,9 @@
 import {test,expect} from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import {equationDerivations} from '../src/equation-derivations.js';
+import type {EquationGroupId} from '../src/equation-plots.js';
 
-test('every displayed equation opens its working plot on the same page',async({page},info)=>{
+test('every displayed equation opens its working plot and derivation on the same page',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  let opened=0;
  for(const url of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/equilibrium.html','/how-it-works.html']){
@@ -21,7 +23,15 @@ test('every displayed equation opens its working plot on the same page',async({p
     await expect(dialog.locator('[data-equation-reading]')).not.toHaveText(first);
     expect(await dialog.locator('[data-equation-chart]').innerHTML()).not.toMatch(/NaN|Infinity/);
    }
-   await dialog.getByRole('button',{name:'Close equation plot'}).click();await expect(dialog).not.toBeVisible();await expect(trigger).toBeFocused();
+   const group=await trigger.getAttribute('data-equation-plot') as EquationGroupId;
+   await dialog.getByRole('tab',{name:'Derivation',exact:true}).click();
+   const derivation=dialog.getByRole('tabpanel',{name:'Derivation',exact:true});
+   await expect(derivation.getByRole('heading',{level:3})).toHaveText(equationDerivations[group].title);
+   await expect(derivation.locator('li math')).toHaveCount(equationDerivations[group].steps.length);
+   await expect(derivation.locator('.equation-assumptions')).toHaveText(equationDerivations[group].assumptions);
+   expect(await derivation.evaluate(el=>el.scrollWidth<=el.clientWidth)).toBe(true);
+   expect((await new AxeBuilder({page}).include('.equation-dialog').withRules(['aria-required-attr','aria-required-children','aria-required-parent','aria-valid-attr-value','scrollable-region-focusable']).analyze()).violations).toEqual([]);
+   await dialog.getByRole('button',{name:'Close equation'}).click();await expect(dialog).not.toBeVisible();await expect(trigger).toBeFocused();
   }
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect((await new AxeBuilder({page}).include('.equation').withRules(['label-content-name-mismatch']).analyze()).violations).toEqual([]);
@@ -31,11 +41,18 @@ test('every displayed equation opens its working plot on the same page',async({p
  await expect(page.locator('[name="feed"]')).toHaveValue('0.0759');
  await expect(page.locator('[data-equation-controls] label').last().locator('output')).toHaveText('0.0759');
  await expect(page.locator('.equation-line-1')).toHaveCount(0);
- await page.getByRole('button',{name:'Close equation plot'}).click();
+ await page.getByRole('button',{name:'Close equation'}).click();
  await page.locator('[data-equation-plot="density"]').click();
  const dialog=page.getByRole('dialog'),path=dialog.locator('.equation-line-0'),initial=await path.getAttribute('d');
  await dialog.getByRole('slider',{name:'Temperature (K)',exact:true}).press('End');await expect(path).not.toHaveAttribute('d',initial!);
  const rect=await dialog.boundingBox();expect(rect!.x).toBeGreaterThanOrEqual(0);expect(rect!.width).toBeLessThanOrEqual(page.viewportSize()!.width);
  await info.attach('equation-plot',{body:await dialog.screenshot(),contentType:'image/png'});
+ await dialog.getByRole('tab',{name:'Plot',exact:true}).focus();await page.keyboard.press('ArrowRight');
+ await expect(dialog.getByRole('tab',{name:'Derivation',exact:true})).toBeFocused();
+ await expect(dialog.getByRole('tabpanel',{name:'Derivation',exact:true})).toBeVisible();
+ await info.attach('equation-derivation',{body:await dialog.screenshot(),contentType:'image/png'});
+ await page.keyboard.press('ArrowLeft');
+ await expect(dialog.getByRole('tabpanel',{name:'Plot',exact:true})).toBeVisible();
+ await expect(dialog.getByRole('slider',{name:'Temperature (K)',exact:true})).toHaveValue('1500');
  await dialog.press('Escape');await expect(dialog).not.toBeVisible();
 });
