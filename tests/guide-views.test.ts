@@ -62,7 +62,9 @@ test('the four views preserve coupled data, distinguish references, and reveal p
  assert.match(figure.querySelector('[data-view-reading]')!.textContent!,/does not give a chamber velocity or an extraction path/);
  assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
  select('transport');assert.equal(time.disabled,false);assert.equal(line(),path);
- time.value='1';time.dispatchEvent(new dom.window.Event('input'));select('flow');
+ time.value='1';time.dispatchEvent(new dom.window.Event('input'));
+ assert.equal(play.textContent,'Replay example','seeking to the end must update the action label');
+ select('flow');
  assert.equal(play.textContent,'Play example','reference mode must not inherit the coupled replay label');
  const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
 });

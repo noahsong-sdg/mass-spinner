@@ -104,7 +104,7 @@ export function setupViewsDiagram(figure:HTMLElement){
   if(time===1&&(mode.id==='transport'||mode.id==='spin'))time=0;
   figure.dataset.motion='running';play.textContent='Pause example';frame=win.requestAnimationFrame(tick);
  });
- input.addEventListener('input',()=>{pause();time=input.valueAsNumber;paint();});
+ input.addEventListener('input',()=>{time=input.valueAsNumber;pause();paint();});
  for(const button of figure.querySelectorAll<HTMLButtonElement>('[data-view-mode]')){
   button.disabled=false;button.addEventListener('click',()=>{mode=modes.find(m=>m.id===button.dataset.viewMode)!;pause();
    for(const choice of figure.querySelectorAll('[data-view-mode]'))choice.setAttribute('aria-pressed',String(choice===button));
