@@ -22,7 +22,7 @@ test('the system overview separates model scope and provides valid simulator des
  t.after(()=>dom.window.close());const doc=dom.window.document;
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('nav a'))assert.ok(doc.querySelector(link.hash));
  const sections=[...doc.querySelectorAll('main section')];assert.equal(sections.length,3);
- assert.match(sections[0]!.textContent!,/Separation does not create atoms or cause fusion/);
+ assert.match(sections[0]!.textContent!,/Separation does not make atoms or cause fusion/);
  assert.match(sections[1]!.textContent!,/does not show net electrical power production/);
  assert.match(sections[2]!.textContent!,/does not calculate a complete power plant/);
  const links=sections.map(section=>section.querySelector<HTMLAnchorElement>('a[target="_top"]')!);
