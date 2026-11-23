@@ -24,7 +24,8 @@ export function sampleInventory(count:number){
 export function sampleDiagram(){
  return `<figure class="sample-example" data-sample-example data-motion="paused">
  <div class="drive-heading"><span>Collect gas near the axis.</span><button type="button" data-sample-play disabled>Play collection</button></div>
- <p class="diagram-reading">The circle shows the gas from one end. Rotation increases the light-isotope percentage near the axis. Collect the marked inner gas, including both isotopes.</p>
+ <p class="diagram-reading">Separation changes the mixture inside the vessel. Collection removes some of that mixture for use. The circle shows the gas from one end.</p>
+ <p class="diagram-reading">An outlet near the axis can remove gas with a higher light-isotope percentage. It takes both isotopes, not only light atoms. Here, the marked inner gas becomes the sample.</p>
  <p class="sample-key"><span>● Light</span><span>● Heavy</span><span>Each dot = one atom</span></p>
  <svg viewBox="0 0 600 330" role="img" aria-labelledby="sample-title sample-description">
  <title id="sample-title">A richer sample can contain few of the original light atoms</title>
@@ -41,7 +42,7 @@ export function sampleDiagram(){
  <div class="sample-controls"><label>Atoms in sample <output data-sample-count>0 / 100</output><input type="range" min="0" max="100" step="1" value="0" aria-label="Atoms collected in example sample" disabled></label><button type="button" data-sample-replay disabled>Replay</button></div>
  <dl class="sample-metrics"><div><dt>Purity · light / all atoms in sample</dt><dd data-sample-purity>0 / 0 · undefined</dd></div><div><dt>Light recovery · kept / original light</dt><dd data-sample-recovery>0 / 76 = 0.0%</dd></div></dl>
  <p class="diagram-reading" data-sample-reading aria-live="polite">The marked inner gas contains 10 light and 90 heavy atoms. Collect all 100, not only the light atoms.</p>
- <figcaption>This example starts after separation. The counts explain purity and recovery; they are not predictions for your run. The dot positions and marked radius are examples. Playback takes about 22 seconds. Count an atom in the sample only after it enters.</figcaption></figure>`;
+ <figcaption>The moving dots show atom counts, not paths through an outlet. A real outlet changes the gas left inside. This closed-vessel example does not calculate that flow or replacement gas. The counts, dot positions and marked radius are examples, not predictions for your run. Playback takes about 22 seconds. Count an atom in the sample only after it enters.</figcaption></figure>`;
 }
 export function setupSampleDiagram(figure:HTMLElement,win:Window & typeof globalThis){
  const range=figure.querySelector<HTMLInputElement>('input')!,play=figure.querySelector<HTMLButtonElement>('[data-sample-play]')!,replay=figure.querySelector<HTMLButtonElement>('[data-sample-replay]')!;

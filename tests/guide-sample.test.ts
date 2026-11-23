@@ -51,6 +51,10 @@ test('collection selects the entire inner region, including both isotopes',()=>{
  assert.ok(new Set(light.map(a=>Math.round((a.x+a.dx-445)/12))).size>=4,'light atoms do not form a sorted column');
  assert.ok(new Set(light.map(a=>Math.round((a.y+a.dy-114)/12))).size>=4,'light atoms do not form a sorted row');
  assert.match(sampleDiagram(),/We select|Collect all 100, not only the light atoms/);
+ assert.match(sampleDiagram(),/Collection removes some of that mixture for use/);
+ assert.match(sampleDiagram(),/An outlet near the axis.*both isotopes, not only light atoms/);
+ assert.match(sampleDiagram(),/atom counts, not paths through an outlet/);
+ assert.match(sampleDiagram(),/does not calculate that flow or replacement gas/);
 });
 
 test('the sample slider, playback, pause and replay move the same conserved atoms',t=>{

@@ -15,6 +15,9 @@ test('the inward-force explanation shows motion, pressure and density in separat
  await figure.getByRole('button',{name:'2 Pressure',exact:true}).click();
  await expect(slider).toHaveValue('0');await expect(figure.locator('[data-turning-panel="0"]')).toBeHidden();
  await expect(figure.locator('[data-turning-panel="1"] svg').last()).toBeVisible();
+ await expect(figure.locator('[data-pressure-inner]')).toHaveAttribute('aria-label','Outward force from pressure on the inner face');
+ await expect(figure.locator('[data-pressure-outer]')).toHaveAttribute('aria-label','Inward force from pressure on the outer face');
+ await expect(figure.locator('[data-turning-note]')).toContainText('not an extra force');
  const net=figure.locator('[data-pressure-net]');
  await expect(net).toHaveAttribute('x1','170');await expect(net).toHaveAttribute('x2','140');
  expect(await net.evaluate(node=>getComputedStyle(node).strokeWidth)).toBe('3px');

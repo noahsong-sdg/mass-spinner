@@ -7,10 +7,22 @@ Isotopes are atoms of the same element with different masses. Here, ⁶Li is lig
 Separation is useful when a later process needs more ⁶Li relative to ⁷Li.
 The centrifuge must change where these atoms are before we can collect an enriched sample.
 
-Purity is their percentage in the sample. Recovery is their fraction of the initial light-isotope count.
+Lithium has a role in the supply of fusion fuel. A D–T reactor uses deuterium and tritium, which are hydrogen isotopes.
+Neutrons from fusion can react with lithium-6 in a surrounding blanket to make tritium and helium.
+Increasing the lithium-6 percentage can help a blanket supply tritium. The necessary percentage changes with the blanket materials and neutron energies.
+Lithium-7 can also make tritium through reactions with high-energy neutrons.
+
+The centrifuge increases the lithium-6 percentage; it does not make tritium.
+The [ITER blanket handbook, §9.7.2](https://www.iter.org/sites/default/files/media/2026-02/vol.1_ch.09_gaps_to_fill_beyond_iter_e5ynb7.pdf) explains why some blanket designs use enriched lithium.
+[Tutorial 5](UNDERSTANDING-MASS-SPINNER-05.md#jobs) connects enrichment, breeding and fuel recovery.
+
+Purity is the light-isotope percentage in the sample. Recovery is the collected fraction of the initial light-isotope count.
 
 Rotation can increase the light-isotope percentage near the axis. We can then collect this inner gas, including both isotopes.
 We select a region of gas, not individual light atoms.
+
+An outlet near the axis can remove this gas. Its location selects the mixture; it does not distinguish the isotopes.
+Actual extraction can change pressure and composition. This animation explains sample counts, not outlet flow or the gas supply during extraction.
 
 The diagram starts after separation. Its example counts are 76 light and 924 heavy atoms in the vessel.
 The marked inner gas contains 10 light and 90 heavy atoms. Collect all 100 atoms from that region.
@@ -67,6 +79,7 @@ At the same rotation speed and uniform temperature, a smaller density increase t
 Both normalized density curves become less steep, and the isotope fractions differ less between the axis and wall.
 
 Use an ideal neutral gas at one temperature, with rigid rotation: angular speed Ω is the same at each radius.
+[The assumption checks below](#equilibrium-assumptions) explain when this reference can describe real gas.
 Tangential speed increases with radius:
 
 <!-- equation:speed -->
@@ -183,6 +196,65 @@ Integration from the axis to r gives the exponential. This is not a complete mom
 
 </details>
 
+<h3 id="equilibrium-assumptions">When can we use these assumptions?</h3>
+
+These assumptions let us calculate the effect of rotation on composition. They are conditions for the exponential equation, not verified Marathon operating conditions.
+A correct equation can give an incorrect equipment prediction when its conditions do not apply.
+
+#### Ideal neutral gas
+
+The ideal gas law gives pressure from number density and temperature.
+It does not include corrections from atom size or interactions between collisions.
+The equation describes neutral atoms, which have no net electric charge. It does not describe the ion or electron equilibrium.
+This approximation can describe a dilute atomic vapor that stays in the gas phase.
+Ionization, molecules and condensation can change its composition and pressure.
+
+Cooling can cause condensation: lithium leaves the gas and collects on a surface.
+The 500 K examples prescribe atomic lithium gas. They are not verified conditions for stable lithium vapor at the specified pressure.
+[NIST's lithium data](https://www.nist.gov/publications/melting-points-and-boiling-points-alkali-metals) give the connection between vapor pressure and temperature.
+[Open the surface reference](/?level=2&try=surfaceExperiment) to examine this limit. It does not calculate condensation during your run.
+
+An ideal gas law is not sufficient evidence for accurate diffusion or heat transport.
+The mean free path is the average distance between collisions. For fluid transport, this distance must be small compared with the flow scales.
+These scales include the widths of density and temperature gradients, not only the vessel radius.
+The [NIST gas-flow review, §2](https://srd.nist.gov/jpcrdreprint/1.556019.pdf) explains this separate condition through the Knudsen number.
+
+#### Rigid rotation
+
+Rigid rotation means the same angular speed at all locations in one population. It does not mean that the vessel wall turns.
+This approximation can describe gas when momentum exchange keeps angular-speed differences small under drive and wall braking.
+Wall braking and uneven drive can instead cause velocity shear: adjacent gas regions turn at different angular speeds.
+The measured speed profile must be close to Ωr before this assumption can describe an experiment.
+
+The live coupled model keeps one angular speed for ions and one for neutral gas. These two speeds can differ.
+It does not calculate shear within either population.
+Our [argon comparison](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification.html) does not qualify this assumption for that experiment.
+
+#### Uniform temperature
+
+Here, uniform temperature means the same temperature at every location in the gas. It can still change with time.
+This approximation can work when heat transport keeps temperature differences small with heating and cooling.
+A hot gas interior and a cold wall can instead give a large radial temperature difference.
+One mean temperature then cannot describe the local pressure or separation everywhere.
+
+The equilibrium reference uses one temperature. Optional spatial gas energy transport calculates radial temperatures, but still uses rigid rotation.
+[Open the temperature-profile experiment](/?level=2&try=spatialHeatExperiment) to compare the interior with the wall.
+This comparison checks the effect within our model; it does not replace temperature measurements.
+
+#### Diffusive equilibrium
+
+Diffusion is atom motion that changes the mixture between regions. At diffusive equilibrium, each isotope has zero net radial diffusion.
+Atoms still move and collide. Their distribution stays constant because opposing transport effects balance.
+Redistribution must have sufficient time, with rotation and temperature almost constant during that time.
+An outlet, a changing drive or a short run can prevent this state.
+
+Coupled separation calculates a changing distribution. The last point of a run can still have radial transport.
+[Open the diffusion experiment](/?level=2&try=diffusionExperiment) to compare distributions at the same physical time with different diffusivities.
+Diffusivity sets the rate of radial redistribution in this model.
+
+These conditions permit reference calculations for learning and numerical checks. They do not show experimental accuracy.
+The [plasma separation tutorial, §III](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf) discusses additional effects from charge, neutral gas, collisions and electric fields.
+
 ## 2. How strong is the separation?
 
 A steep density curve can suggest strong separation even when the isotope fractions change little.
@@ -211,6 +283,11 @@ The wall heavy/light ratio is about 13% higher than the axis ratio. Purity does 
 If α starts at 1.20, doubling speed gives α = 1.20⁴ ≈ 2.074 at the same temperature.
 Doubling temperature gives α = √1.20 ≈ 1.095 at the same speed.
 The factors four and one half apply to ln α, not to α or purity.
+
+Thus, higher angular speed and lower temperature increase ideal equilibrium separation at a fixed radius and fixed isotope masses.
+This is not an instruction to increase drive without limit or cool lithium without limit.
+More drive can increase heating and wall pressure. Too much cooling can remove lithium vapor through condensation.
+The collection radius and available atom count also change product purity and recovery. A larger equilibrium factor alone does not give more collected product.
 
 <!-- diagram:bias -->
 

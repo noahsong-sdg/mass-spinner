@@ -9,6 +9,8 @@ test('tutorial animations move atoms, conserve inventory and expose pause and re
  await expect(sample).toHaveAttribute('data-motion','paused');
  await expect(sample.locator('[data-sample-region]')).toBeVisible();
  await expect(sample).toContainText('Collect all 100, not only the light atoms.');
+ await expect(sample).toContainText('It takes both isotopes, not only light atoms.');
+ await expect(sample.locator('figcaption')).toContainText('not paths through an outlet');
  await range.focus();await range.press('End');
  await expect(sample.locator('[data-sample-purity]')).toHaveText('10 / 100 · 10.0%');
  await expect(sample.locator('[data-sample-recovery]')).toHaveText('10 / 76 = 13.2%');

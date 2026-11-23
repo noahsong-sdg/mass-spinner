@@ -10,6 +10,26 @@ import {JSDOM} from 'jsdom';
 const path='docs/UNDERSTANDING-MASS-SPINNER-02.md';
 const source=readFileSync(path,'utf8');
 
+test('the equilibrium reader explains lithium use and checks each assumption against live model scope',t=>{
+ const dom=new JSDOM(understandingPage(source,'a'.repeat(40)));t.after(()=>dom.window.close());
+ const doc=dom.window.document;
+ assert.match(source,/Lithium-7 can also make tritium.*high-energy neutrons/);
+ assert.match(source,/centrifuge increases the lithium-6 percentage; it does not make tritium/);
+ assert.match(source,/higher angular speed and lower temperature.*fixed radius and fixed isotope masses/);
+ assert.ok(doc.querySelector('a[href="#equilibrium-assumptions"]'));
+ const heading=doc.getElementById('equilibrium-assumptions')!,content=[];
+ assert.equal(heading.tagName,'H3');
+ for(let node=heading.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)content.push(node);
+ assert.deepEqual(content.filter(node=>node.tagName==='H4').map(node=>node.textContent),['Ideal neutral gas','Rigid rotation','Uniform temperature','Diffusive equilibrium']);
+ const text=content.map(node=>node.textContent).join(' ');
+ for(const phrase of ['not verified Marathon operating conditions','does not describe the ion or electron equilibrium',
+  'not sufficient evidence for accurate diffusion or heat transport','not only the vessel radius',
+  'one angular speed for ions and one for neutral gas','spatial gas energy transport calculates radial temperatures, but still uses rigid rotation',
+  'zero net radial diffusion','last point of a run can still have radial transport'])assert.ok(text.includes(phrase),phrase);
+ for(const action of ['surfaceExperiment','spatialHeatExperiment','diffusionExperiment'])assert.ok(content.some(node=>node.querySelector(`a[data-guide-action="${action}"]`)));
+ for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]'))assert.ok(doc.getElementById(link.hash.slice(1)),link.hash);
+});
+
 test('the understanding guide marks display equations as GitHub math, not literal code',()=>{
  let equations=0;
  const prose=source.replace(/^```([^\n]*)\n([\s\S]*?)^```\s*$/gm,(_,language,body)=>{

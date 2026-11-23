@@ -31,6 +31,10 @@ test('the pressure diagram combines unequal opposing forces into an inward net f
  const line=(selector:string)=>{const n=dom.window.document.querySelector(selector)!;return Number(n.getAttribute('x2'))-Number(n.getAttribute('x1'));};
  assert.equal(line('[data-pressure-inner]'),36);assert.equal(line('[data-pressure-outer]'),-66);
  assert.equal(line('[data-pressure-net]'),line('[data-pressure-inner]')+line('[data-pressure-outer]'));
+ assert.equal(dom.window.document.querySelector('[data-pressure-inner]')!.getAttribute('aria-label'),'Outward force from pressure on the inner face');
+ assert.equal(dom.window.document.querySelector('[data-pressure-outer]')!.getAttribute('aria-label'),'Inward force from pressure on the outer face');
+ const pressure=dom.window.document.querySelector('[data-turning-panel="1"] svg:last-child')!;
+ assert.match(pressure.textContent!,/Axis side.*Wall side.*Lower pressure.*Higher pressure.*Outward force.*Inward force/);
  assert.match(dom.window.document.querySelector('[data-turning-note]')!.textContent!,/not a wall/);
 });
 test('each force step starts paused and supports exact scrubbing, replay and visibility pause',t=>{
@@ -49,6 +53,10 @@ test('each force step starts paused and supports exact scrubbing, replay and vis
   choice.click();assert.equal(figure.dataset.motion,'paused');assert.equal(range.value,'0');
   assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
   const visible=[...figure.querySelectorAll<HTMLElement>('[data-turning-panel]')].filter(p=>!p.hidden);assert.equal(visible.length,1);assert.equal(visible[0].dataset.turningPanel,choice.dataset.turningStep);
+  if(choice.dataset.turningStep==='1'){
+   assert.match(figure.querySelector('[data-turning-reading]')!.textContent!,/inner face outward.*outer face inward/);
+   assert.match(figure.querySelector('[data-turning-note]')!.textContent!,/equal area.*not an extra force.*electrical drive supplies torque/);
+  }
   range.value='100';range.dispatchEvent(new win.Event('input'));assert.equal(play.textContent,'Replay motion');
  }
  assert.match(figure.querySelector('[data-turning-ratios]')!.textContent!,/5.09×.*6.68×/);
