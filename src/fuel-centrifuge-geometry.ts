@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import {createFuelBurst} from './fuel-burst.js';
 import {annulus,buildEngineeringGeometry,machinedMetal} from './engineering-geometry.js';
 import {finishFuelHardware} from './fuel-finishes.js';
 import {createFuelCircuit} from './fuel-circuit.js';
@@ -143,5 +144,6 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
  // The cloud replaces the opaque equilibrium slice; keep the slice inspectable in the model source.
  scene.traverse(node=>{if(node.name==='Equilibrium composition sample')node.visible=false;});
  const tools=diagnostics?createFuelSceneTools({scene,result:r}):null;if(tools){tools.group.visible=false;tools.circuit=circuit;tools.motion=motion;}
- return {scene,motion,tools};
+ const burst=createFuelBurst(scene,c);
+ return {scene,motion,tools,burst};
 }

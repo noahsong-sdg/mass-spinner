@@ -18,6 +18,8 @@ import {mountPublicSensitivity} from './public-sensitivity-ui.js';
 import {sampleFuelField} from './fuel-field.js';
 import {fuelCompositionCurves,fuelDensityCurves,zoomCompositionCurves} from './fuel-learning.js';
 import {createFuelLearningTools} from './fuel-learning-ui.js';
+import {DEFAULT_FUEL_FAILURE,firstFuelFailure,type FuelFailure} from './fuel-failure.js';
+import {createFuelFailureUI} from './fuel-failure-ui.js';
 
 import type {FuelConfig} from './fuel-centrifuge.js';
 import type {FuelTransportCheckpoint,FuelTransportSnapshot} from './fuel-transport.js';
@@ -233,10 +235,23 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  let currentEvents:FuelCurrentEvent[]=[],operatingConfig:FuelConfig|null=null,resume:FuelResume|null=null,lastPoweredCurrent=DEFAULT_FUEL_CENTRIFUGE.currentA;
  const eventHistory=el('details');eventHistory.append(el('summary','Drive history'));nodes.plots.append(eventHistory);
  let motion:Geometry['motion']|null=null,tools:Geometry['tools']|null=null,baselineViewer:ApparatusViewer<FuelModel>|null=null,baselineMotion:Geometry['motion']|null=null,baselineTools:Geometry['tools']|null=null,pinned:PinnedFuelSnapshot|null=null,plotCursor:ReturnType<typeof renderPlots>|null=null,lastProfileTime=-Infinity,dragCut:number|null=null,elapsed=0,playing=!doc.defaultView!.matchMedia?.('(prefers-reduced-motion: reduce)').matches;const timeScales:Record<string,number>={};
+ let burst:Geometry['burst']|null=null,baselineBurst:Geometry['burst']|null=null,failureAge=0,activeFailure:FuelFailure|null=null;
+ let failureLimits={...DEFAULT_FUEL_FAILURE},failureCache=new WeakMap<FuelResult,FuelFailure|null>();
+ const failureUI=createFuelFailureUI(doc,nodes.controls,nodes.render,()=>changed(),()=>{elapsed=0;playing=false;playback();draw();});
+ function failureFor(result:FuelResult){
+  if(!failureCache.has(result))failureCache.set(result,firstFuelFailure(result,failureLimits));
+  return failureCache.get(result)!;
+ }
+ function timelineLimit(result:FuelResult){
+  const coupled=['spin','transport'].includes(motionMode.value);
+  const end=(r:FuelResult)=>Math.min(r.config.durationS,coupled?(failureFor(r)?.timeS??Infinity):Infinity);
+  return pinned?Math.min(end(result),end(pinned.result)):end(result);
+ }
+ function clearFailure(){burst?.update(null);baselineBurst?.update(null);activeFailure=null;failureAge=0;failureUI.show(null);delete frame.dataset.failureState;}
  const learning=createFuelLearningTools({document:doc,host:nodes.plots,sampleState:r=>diagnosticState(r),onCompare:()=>{playing=false;playback();draw();}});
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-result-scope')!,metrics);
  nodes.plots.insertBefore(nodes.plots.querySelector('#fuel-input-coverage')!,metrics);
- const views=createFuelViewTools({document:doc,host:nodes.view,onChange:()=>{applyViews();draw();viewer?.refresh();baselineViewer?.refresh();},onCamera:direction=>{const pose=viewer?.cameraPose?.();if(!pose)return;const distance=Math.hypot(...pose.position.map((v,i)=>v-pose.target[i])),norm=Math.hypot(...direction),next:CameraPose={...pose,position:direction.map((v,i)=>pose.target[i]+v*distance/norm) as CameraVector};viewer!.setCamera(next);baselineViewer?.setCamera?.(next);}});
+ const views=createFuelViewTools({document:doc,host:nodes.view,onChange:()=>{applyViews();draw();playback();viewer?.refresh();baselineViewer?.refresh();},onCamera:direction=>{const pose=viewer?.cameraPose?.();if(!pose)return;const distance=Math.hypot(...pose.position.map((v,i)=>v-pose.target[i])),norm=Math.hypot(...direction),next:CameraPose={...pose,position:direction.map((v,i)=>pose.target[i]+v*distance/norm) as CameraVector};viewer!.setCamera(next);baselineViewer?.setCamera?.(next);}});
  let comparison:ReturnType<typeof comparisonFrame>|null=null,colorDomains:FuelColorDomains={};
  function refreshComparison(){
   comparison=pinned&&latest?comparisonFrame(pinned,latest,0):null;
@@ -246,11 +261,11 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   for(const value of [tools,baselineTools])value?.setDomains(colorDomains);
   views.updateLegend(tools);
  }
- const comparisons=createFuelComparisonTools({document:doc,host:nodes.view,request,onApply:applyConfig,onPin:value=>{pinned=value;refreshComparison();void showBaseline();draw();},onClear:()=>{pinned=null;baselineTools?.dispose();baselineTools=null;baselineViewer?.dispose();baselineViewer=null;baselineMotion=null;baselineFrame.hidden=true;comparisonLabel.hidden=true;nodes.render.classList.remove('fuel-comparing');refreshComparison();viewer?.resize();draw();}});
+ const comparisons=createFuelComparisonTools({document:doc,host:nodes.view,request,onApply:applyConfig,onPin:value=>{pinned=value;refreshComparison();void showBaseline();draw();},onClear:()=>{pinned=null;baselineBurst?.dispose();baselineBurst=null;baselineTools?.dispose();baselineTools=null;baselineViewer?.dispose();baselineViewer=null;baselineMotion=null;baselineFrame.hidden=true;comparisonLabel.hidden=true;nodes.render.classList.remove('fuel-comparing');refreshComparison();viewer?.resize();draw();playback();}});
  function acceptComparison(){comparisons.accept(latest?{...latest,camera:viewer?.cameraPose?.(),timeS:Math.min(elapsed,latest.result.config.durationS),mode:motionMode.value}:null);}
  function applyConfig(config:FuelConfig){for(const [key,c]of controls){if(c.input.dataset.integer!=='true')c.input.step='any';c.input.value=String(c.input.dataset.rangeScale==='log10'?Math.log10(config[key]):config[key]);}pair.value=config.pair;application.value=config.application;seed.checked=config.lithiumSeed;changed();}
  function syncProbes(){const radius=views.state.radius*(latest?.result.config.radiusM??tools?.radiusM??0);tools?.setProbe?.(views.state.radius);if(baselineTools)baselineTools.setProbe(Math.min(1,radius/baselineTools.radiusM));}
- function applyViews(){if(hasSelection)viewer?.select(null);for(const value of [tools,baselineTools])views.apply(value);syncProbes();if(hasSelection)viewer?.select(inspectSelect.value);for(const value of [motion,baselineMotion])value?.setSpecies?.(views.state.species);for(const label of driveKey.querySelectorAll<HTMLElement>('[data-layer]'))label.hidden=views.state.drive!=='all'&&views.state.drive!==label.dataset.layer;views.refreshSample(tools);refreshGasLegend();}
+ function applyViews(){burst?.update(null);baselineBurst?.update(null);if(hasSelection)viewer?.select(null);for(const value of [tools,baselineTools])views.apply(value);syncProbes();if(hasSelection)viewer?.select(inspectSelect.value);for(const value of [motion,baselineMotion])value?.setSpecies?.(views.state.species);for(const label of driveKey.querySelectorAll<HTMLElement>('[data-layer]'))label.hidden=views.state.drive!=='all'&&views.state.drive!==label.dataset.layer;views.refreshSample(tools);refreshGasLegend();}
  function refreshComposition(state?:DiagnosticState){
   if(!latest||selector.value!=='composition')return;
   const r=latest.result,s=sampleFuelField(r,views.state.radius*r.config.radiusM,state??diagnosticState(r));
@@ -269,7 +284,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  function selectProbe(fraction:number){views.selectRadius(fraction);syncProbes();views.refreshSample(tools);refreshComposition();viewer?.refresh();baselineViewer?.refresh();}
  function diagnosticState(result:FuelResult):DiagnosticState{
-  if(['spin','transport'].includes(motionMode.value)&&result.transport)return {...sampleFuelTransport(result.transport,elapsed),scope:`Coupled rotor and radial transport · ${result.transport.operation?.thermal?.enabled?'time-dependent temperatures':'fixed temperature'}`};
+  if(['spin','transport'].includes(motionMode.value)&&result.transport)return {...sampleFuelTransport(result.transport,Math.min(elapsed,timelineLimit(result))),scope:`Coupled rotor and radial transport · ${result.transport.operation?.thermal?.enabled?'time-dependent temperatures':'fixed temperature'}`};
   if(motionMode.value==='spin'){const m=result.mechanics,response=rotorResponse(m.ii,m.nn,m.gamma,m.drag,m.torque,elapsed);return {ionRadS:response.ion,profiles:result.profiles.map(p=>({...p,lightDensityRatio:1,heavyDensityRatio:1})),neutralRadS:response.neutral,timeS:elapsed,scope:'Spin-up only · uniform density'};}
   const end=result.samples.at(-1)!;
   return {timeS:end.timeS,ionRadS:end.ionRadS,neutralRadS:end.neutralRadS,currentA:end.currentA??result.config.currentA,scope:'Final equilibrium reference · not finite-time transport'};
@@ -286,8 +301,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  async function showBaseline(){
   if(!pinned||!graphics||!active)return;const accepted=pinned;
   baselineFrame.hidden=false;comparisonLabel.hidden=false;nodes.render.classList.add('fuel-comparing');
-  baselineTools?.dispose();baselineTools=null;
-  if(!baselineViewer)baselineViewer=graphics[0].createApparatusViewer<FuelModel>(baselineFrame,{loader:{loadAsync:(value:FuelModel)=>{const built=graphics![1].buildFuelCentrifugeGeometry({...value,diagnostics:true});baselineMotion=built.motion;baselineTools=built.tools;return Promise.resolve(built);}},onCamera:pose=>viewer?.setCamera?.(pose),onResize:()=>baselineViewer?.setCamera?.(viewer?.cameraPose?.(),{preserveOwnership:true}),pickFilter:hit=>baselineTools?.visibleHit(hit)??true,onError:error=>{comparisonLabel.textContent=message(error);}});
+  baselineBurst?.dispose();baselineBurst=null;baselineTools?.dispose();baselineTools=null;
+  if(!baselineViewer)baselineViewer=graphics[0].createApparatusViewer<FuelModel>(baselineFrame,{loader:{loadAsync:(value:FuelModel)=>{const built=graphics![1].buildFuelCentrifugeGeometry({...value,diagnostics:true});baselineMotion=built.motion;baselineTools=built.tools;baselineBurst=built.burst??null;return Promise.resolve(built);}},onCamera:pose=>viewer?.setCamera?.(pose),onResize:()=>baselineViewer?.setCamera?.(viewer?.cameraPose?.(),{preserveOwnership:true}),pickFilter:hit=>!activeFailure&&(baselineTools?.visibleHit(hit)??true),onError:error=>{comparisonLabel.textContent=message(error);}});
   await baselineViewer.load({model:{config:accepted.result.config,result:accepted.result},scaleLabel:geometryScale(accepted.result.config),modelCamera:{position:[.55,1.25,.8],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.85}},{preserveOwnership:true});
   if(pinned!==accepted||disposed)return;
   (baselineTools as Geometry['tools']|null)?.setDomains(colorDomains);
@@ -307,7 +322,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   // Preserve slider comparisons; retime only outside the visual sampling budget.
   const scale=Math.min(timeScales[motionMode.value],suggested*(mode==='flow'?2:transient?8:1));
   elapsed+=dt*scale;
-  const c=latest.result.config,limit=pinned?Math.min(c.durationS,pinned.config.durationS):c.durationS;
+  const c=latest.result.config,limit=timelineLimit(latest.result);
   if((transient||pinned)&&elapsed>=limit){elapsed=limit;playing=false;}
   const state=motion.update(elapsed,mode,scale,rotationClock);
   play.textContent=playing?'Pause':'Play';play.setAttribute('aria-pressed',String(playing));seek.hidden=!transient;seek.max=String(limit);seek.value=String(elapsed);seek.setAttribute('aria-valuetext',`${fmt(elapsed)} s`);
@@ -338,14 +353,23 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const rotationScale=Math.min(scale,state.rotationSecondsPerScreenSecond);
   const rotationUnit=rotationScale>=.001?`${fmt(rotationScale*1000)} ms`:`${fmt(rotationScale*1e6)} µs`;
   clock.textContent=`${timing} · ions ${fmt(state.speeds.ion*c.radiusM)} / gas ${fmt(state.speeds.neutral*c.radiusM)} m/s${diagnostic.thermal?` · ${fmt(diagnostic.thermal.gasK)} K`:''}${transient||mode==='flow'?` · rotation: ${rotationUnit}/screen s`:''}`;
-  if(!playing)viewer?.setAnimation(null);
+  const event=transient?failureFor(latest.result):null,pinnedEvent=transient&&pinned?failureFor(pinned.result):null;
+  const failed=event&&elapsed>=event.timeS?event:pinnedEvent&&elapsed>=pinnedEvent.timeS?pinnedEvent:null;
+  if(failed){
+   if(activeFailure!==failed){viewer?.select(null);baselineViewer?.select(null);activeFailure=failed;failureAge=reducedMotion?.matches?1.6:0;}
+   failureAge=Math.min(1.6,failureAge+dt);playing=false;play.textContent='Play';play.setAttribute('aria-pressed','false');power.disabled=true;
+   burst?.update(event&&elapsed>=event.timeS?failureAge:null);baselineBurst?.update(pinnedEvent&&elapsed>=pinnedEvent.timeS?failureAge:null);
+   frame.dataset.failureState='failed';failureUI.show(failed,undefined,failed===pinnedEvent&&failed!==event);
+   setStatus('Run stopped at a failure limit.');
+  }else clearFailure();
+  if(!playing&&(!activeFailure||failureAge>=1.6))viewer?.setAnimation(null);
  }
  function playback(){
-  animateGas();viewer?.refresh();viewer?.setAnimation(active&&!dirty&&!updating&&playing&&motion?animateGas:null);
+  animateGas();viewer?.refresh();viewer?.setAnimation(active&&!dirty&&!updating&&(playing||activeFailure&&failureAge<1.6)&&motion?animateGas:null);
  }
  play.addEventListener('click',()=>{
   if(!playing&&latest){
-   const limit=pinned?Math.min(latest.result.config.durationS,pinned.config.durationS):latest.result.config.durationS;
+   const limit=timelineLimit(latest.result);
    if((pinned||['spin','transport'].includes(motionMode.value))&&elapsed>=limit)elapsed=0;
   }
   playing=!playing;playback();
@@ -375,14 +399,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  function changed(event?:Event|{target:HTMLInputElement}){
   if(disposed)return;
-  const intervention=event?.target===controls.get('currentA')!.input&&latest?.result.transport?.operation&&elapsed>0&&['spin','transport'].includes(motionMode.value);
+  const intervention=!activeFailure&&event?.target===controls.get('currentA')!.input&&latest?.result.transport?.operation&&elapsed>0&&['spin','transport'].includes(motionMode.value);
   if(intervention){
    try{currentEvents=fuelCurrentIntervention(latest!.result.transport!.operation!.events,elapsed,controls.get('currentA')!.read());}
    catch(error){const control=controls.get('currentA')!,current=sampleFuelTransport(latest!.result.transport!,elapsed).currentA??latest!.result.config.currentA;control.input.value=String(current);control.refresh();playing=false;playback();setStatus(`${message(error)} Start a new run to reset drive history.`);return;}
    operatingConfig={...latest!.result.config};resume={transport:latest!.result.transport!,timeS:elapsed};
    if(elapsed>=operatingConfig.durationS){operatingConfig.durationS=Math.min(60,operatingConfig.durationS+Math.max(.1,latest!.result.config.durationS));controls.get('durationS')!.input.value=String(operatingConfig.durationS);}
   }else{currentEvents=[];operatingConfig=null;resume=null;elapsed=0;}
-  dependencies();sensitivity.invalidate();
+  clearFailure();dependencies();sensitivity.invalidate();
   cancelExport();dirty=true;revision++;controller?.abort();exportButton.disabled=true;exportButton.dataset.calculationState='pending';delete exportButton.dataset.calculationError;
   draw();
   status.textContent=latest?'Calculation in progress · previous accepted state':'Calculation in progress…';clearTimeout(timer);if(active)timer=setTimeout(run,120);
@@ -434,14 +458,14 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   graphics??=await loadGraphics();if(disposed||!active||dirty||updating||snapshot!==latest)return;
   if(!viewer){
    const [{createApparatusViewer},{buildFuelCentrifugeGeometry}]=graphics;
-   viewer=createApparatusViewer<FuelModel>(frame,{loader:{loadAsync:(value:FuelModel)=>{const built=buildFuelCentrifugeGeometry({...value,diagnostics:true});motion=built.motion;tools=built.tools;return Promise.resolve(built);}},onCamera:pose=>baselineViewer?.setCamera?.(pose),onResize:pose=>baselineViewer?.setCamera?.(pose,{preserveOwnership:true}),pickFilter:hit=>tools?.visibleHit(hit)??true,onHover:hit=>{if(hit?.object.userData.componentId==='slice')views.showSample(tools!.sampleWorld(hit.point));},onDrag:event=>{
+   viewer=createApparatusViewer<FuelModel>(frame,{loader:{loadAsync:(value:FuelModel)=>{const built=buildFuelCentrifugeGeometry({...value,diagnostics:true});motion=built.motion;tools=built.tools;burst=built.burst??null;return Promise.resolve(built);}},onCamera:pose=>baselineViewer?.setCamera?.(pose),onResize:pose=>baselineViewer?.setCamera?.(pose,{preserveOwnership:true}),pickFilter:hit=>!activeFailure&&(tools?.visibleHit(hit)??true),onHover:hit=>{if(hit?.object.userData.componentId==='slice')views.showSample(tools!.sampleWorld(hit.point));},onDrag:event=>{
     if(event.phase==='start'){if(event.hits[0]?.object.userData.controlKey!=='cutFraction')return false;dragCut=tools!.projectCut(event.ray);return true;}
     if(event.phase==='move'&&dragCut!==null){const next=tools!.projectCut(event.ray);if(next!==null){dragCut=next;tools!.setCut(next);}return true;}
    if(event.phase==='cancel'){dragCut=null;tools?.setCut(latest!.result.config.cutFraction);return false;}
    if(event.phase==='end'&&dragCut!==null){controls.get('cutFraction')!.input.value=String(dragCut);dragCut=null;changed();}return false;
    },onSelect:(id,part,name,hit)=>{if(id==='slice'){const sample=hit&&tools?.sampleWorld(hit.point);if(sample)selectProbe(sample.radiusM/latest!.result.config.radiusM);playing=false;selector.value=views.state.layer==='temperature'?(latest?.result.transport?.operation?.thermal?.gas?'thermalProfile':'thermal'):'composition';draw();playback();onResults();return;}describe(id,part,name);onInspect();},onError:error=>{status.textContent=`3D unavailable: ${message(error)}`;}});
   }
-  const pose=tools?viewer.cameraPose?.():null;if(tools)viewer.select(null);tools?.dispose();tools=null;
+  const pose=tools?viewer.cameraPose?.():null;if(tools)viewer.select(null);burst?.dispose();burst=null;tools?.dispose();tools=null;
   await viewer.load({model:{config:snapshot.result.config,result:snapshot.result},scaleLabel:geometryScale(snapshot.result.config),modelCamera:{position:[.55,1.25,.8],portraitPosition:[1,.65,.45],target:[0,0,0],up:[0,1,0],fitScale:.85}},{preserveOwnership:!!pose});
   if(pose&&snapshot.result.config.radiusM)viewer.setCamera?.(pose,{preserveOwnership:true});
   if(disposed||!active||dirty||updating||snapshot!==latest)return;
@@ -463,6 +487,8 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   if(thermalEnable.checked&&thermalModel.value==='spatial'){
    activeThermalInputs.push(thickness);if(gasModel.value==='spatial')activeThermalInputs.push(gasConductivity);
   }
+  try{failureLimits=failureUI.read();failureCache=new WeakMap();}
+  catch(error){updating=false;failureUI.show(null,message(error));status.textContent=message(error);exportButton.disabled=true;exportButton.dataset.calculationState='failed';return;}
   const invalidThermal=activeThermalInputs.some(invalid);
   if(invalidThermal){
    if(!dirty){changed();clearTimeout(timer);}
@@ -491,8 +517,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  function draw(source:AcceptedFuel|Event|null=latest,capture=false):PlotCurve[]|undefined{
   if(!source||!('result' in source)||!source.result)source=latest;if(!source)return;frame.hidden=false;const r=source.result,c=r.config,m=r.mechanics,end=r.samples.at(-1)!,topic=selector.value;
-  const transient=['spin','transport'].includes(motionMode.value),transport=r.transport,limit=pinned?Math.min(latest!.result.config.durationS,pinned.config.durationS):c.durationS;
-  const sampleTime=transient?elapsed:limit;
+  const transient=['spin','transport'].includes(motionMode.value),transport=r.transport,limit=timelineLimit(r);
+  if(transient&&!capture)elapsed=Math.min(elapsed,limit);
+  const sampleTime=transient?Math.min(elapsed,limit):limit;
   const rows=transport?[...(transport.checkpoints??transport.snapshots).filter(s=>s.timeS<limit),sampleFuelTransport(transport,limit)]:null;
   const curve=<X extends string,Y extends string>(label:string,rows:readonly (Record<X,number>&Record<Y,number|null>)[],xKey:X,yKey:Y,xLabel:string,yLabel:string):PlotCurve=>({label,x:rows.map(v=>v[xKey]),y:rows.map(v=>v[yKey]),xLabel,yLabel});
   let curves:PlotCurve[]=[],values:[string,number|null,string][]=[];if(!capture)explanation.textContent=topics[topic][1];
@@ -529,7 +556,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    }
   }
   if(topic==='cut'){
-   const collection=transient&&transport?sampleFuelTransport(transport,elapsed):null;
+   const collection=transient&&transport?sampleFuelTransport(transport,sampleTime):null;
    const cuts=[...new Set([...r.cuts.map(p=>p.radiusFraction),c.cutFraction])].sort((a,b)=>a-b);
    const data=collection?cuts.map(radiusFraction=>({radiusFraction,...fuelTransportCollection(collection.lightMass,collection.heavyMass,c.lightFraction,radiusFraction)}))
     :[...r.cuts.filter(p=>p.radiusFraction!==c.cutFraction).map(p=>({...p,innerLightPurity:p.lightPurity})),{radiusFraction:c.cutFraction,...r.collection}].sort((a,b)=>a.radiusFraction-b.radiusFraction);
@@ -561,7 +588,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   exportController=preparation;exportButton.disabled=true;
   if(gzip){exportButton.textContent='Export in progress…';setStatus('Compressed export in progress…');}
   try{
-   const packet={model:'marathon-centrifuge',...accepted};
+   const packet={model:'marathon-centrifuge',...accepted,failureIllustration:{limits:{...failureLimits},event:failureFor(accepted.result),scope:'Assumed load limits. The stored closed-vessel trajectory does not model fracture or gas release. States after the event do not describe failed equipment.'}};
    const blob=gzip?await fuelExportGzipBlob(packet,{signal:preparation.signal}):fuelExportBlob(packet);
    if(disposed||preparation.signal.aborted||latest!==accepted||id!==revision)return;
    const url=URL.createObjectURL(blob),a=el('a');exportURL=url;a.href=url;a.download=`mass-spinner-centrifuge.json${gzip?'.gz':''}`;a.click();
@@ -586,5 +613,5 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   motionMode.value=saved?.mode??'transport';elapsed=saved?.timeS??0;playing=false;playback();
  }
  dependencies();
- return {nodes,read,run,captureRun,restoreRun,get latest(){return latest;},setActive(value:boolean){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${message(error)}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);sensitivity.cancelPending();}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();learning.dispose();comparisons.dispose();qualification.dispose();argonReference.dispose();spatialExperiment.dispose();sensitivity.dispose();if(tools)viewer?.select(null);tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
+ return {nodes,read,run,captureRun,restoreRun,get latest(){return latest;},setActive(value:boolean){if(disposed)return;active=!!value;if(active){if(dirty)void run();else if(latest)void showGeometry(latest).catch(error=>{if(!disposed)status.textContent=`3D unavailable: ${message(error)}`;});}else{clearTimeout(timer);viewer?.setAnimation(null);sensitivity.cancelPending();}},dispose(){disposed=true;active=false;revision++;cancelExport();clearTimeout(timer);controller?.abort();reducedMotion?.removeEventListener('change',reduce);playbackPosition.dispose();learning.dispose();comparisons.dispose();qualification.dispose();argonReference.dispose();spatialExperiment.dispose();sensitivity.dispose();if(tools)viewer?.select(null);burst?.dispose();baselineBurst?.dispose();tools?.dispose();baselineTools?.dispose();baselineViewer?.dispose();viewer?.dispose();}};
 }

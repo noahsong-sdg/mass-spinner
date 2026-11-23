@@ -19,7 +19,7 @@ const close=(a:number,b:number,tolerance=1e-9)=>assert.ok(Math.abs(a-b)<=toleran
 const flush=async()=>{for(let i=0;i<40;i++)await Promise.resolve();};
 
 /** Only browser display I/O is fake. Geometry, tracers, diagnostic adapters and worker calculations are real. */
-function fixture(t:any,nativeRangePrecision=false){
+function fixture(t:any,nativeRangePrecision=false,reducedMotion=true){
  const dom=new JSDOM('<!doctype html><main></main>',{url:'https://example.org/?level=2'}),{window}=dom;
  if(nativeRangePrecision){
   const descriptor=Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype,'value')!;
@@ -27,7 +27,7 @@ function fixture(t:any,nativeRangePrecision=false){
    descriptor.set!.call(this,this.type==='range'&&Number.isFinite(Number(value))?Number(value).toPrecision(15):value);
   }});
  }
- Object.defineProperty(window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
+ Object.defineProperty(window,'matchMedia',{value:()=>({matches:reducedMotion,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:window.document,configurable:true});
  const requests:any[]=[],viewers:any[]=[],builds:any[]=[];let failNext=false;
  function release(scene:THREE.Group|undefined){
@@ -565,4 +565,55 @@ test('Play at the end restarts each finite coupled run without rerunning the sol
   assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  }
  assert.equal(f.requests.length,requests);assert.equal(f.ui.latest.result,result);
+});
+
+test('an exceeded load limit stops the shared timeline and bursts actual assembly parts; reference and reset restore them',async t=>{
+ const f=fixture(t);await f.start();
+ f.change('fuel-failure-pressurePa',1);await f.ui.run();
+ const built=f.builds.at(-1),panel=f.node('fuel-failure');
+ assert.equal(panel.hidden,false);assert.match(panel.textContent,/Pressure difference.*First stored state/);
+ assert.equal(Number(f.node('fuel-motion-time').max),0);assert.equal(Number(f.node('fuel-motion-time').value),0);
+ assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.node('fuel-power').disabled,true);
+ assert.equal(built.burst.group.visible,true);assert.equal(built.burst.group.userData.elapsedS,1.6,'Reduced motion shows the final state without animation.');
+ assert.equal(built.scene.getObjectByName('construction').visible,false);
+ assert.equal(f.viewers[0].options.pickFilter({object:new THREE.Object3D()}),false);
+ f.change('fuel-motion-mode','equilibrium','change');assert.equal(panel.hidden,true);assert.equal(built.burst.group.visible,false);assert.equal(built.scene.getObjectByName('construction').visible,true);
+ f.change('fuel-motion-mode','transport','change');assert.equal(panel.hidden,false);
+ f.change('fuel-failure-pressurePa',1000);await f.ui.run();assert.equal(panel.hidden,true);assert.equal(f.builds.at(-1).burst.group.visible,false);
+ const count=f.requests.length;f.change('fuel-failure-pressurePa','');await f.ui.run();
+ assert.equal(f.requests.length,count);assert.match(panel.textContent,/Check failure limits/);assert.equal(f.node('fuel-export').disabled,true);
+ f.change('fuel-failure-pressurePa',1000);f.failOnce();await f.ui.run();
+ assert.equal(panel.hidden,true);assert.equal(f.ui.latest,null);assert.match(f.ui.nodes.render.textContent,/Explicit worker failure/);
+});
+
+
+test('a later pressure crossing animates on display time while physics stops; rewind restores the intact vessel',async t=>{
+ const f=fixture(t,false,false);await f.start();f.node('fuel-motion-play').click();
+ const r=f.ui.latest.result,states=r.transport.snapshots,c=r.config,n=states[0].lightMass.length;
+ const pressure=(s:any)=>c.pressurePa*n*(c.lightFraction*s.lightMass[n-1]+(1-c.lightFraction)*s.heavyMass[n-1]);
+ const threshold=(pressure(states[0])+pressure(states.at(-1)))/2;
+ assert.ok(threshold>c.pressurePa);
+ f.change('fuel-failure-pressurePa',threshold);await f.ui.run();
+ const v=f.viewers[0],built=f.builds.at(-1);
+ assert.equal(f.node('fuel-failure').hidden,true);f.change('fuel-motion-time',1);
+ const stopped=Number(f.node('fuel-motion-time').value);assert.ok(stopped>0&&stopped<1);
+ assert.equal(built.burst.group.visible,true);assert.equal(built.burst.group.userData.elapsedS,0);
+ assert.ok(v.animation);v.animation(.4);assert.equal(Number(f.node('fuel-motion-time').value),stopped);assert.equal(built.burst.group.userData.elapsedS,.4);
+ v.animation(2);assert.equal(v.animation,null);assert.equal(built.burst.group.userData.elapsedS,1.6);
+ f.change('fuel-view-drive','force','change');assert.equal(f.node('fuel-failure').hidden,false);assert.equal(built.burst.group.visible,true);
+ f.node('fuel-motion-restart').click();assert.equal(Number(f.node('fuel-motion-time').value),0);assert.equal(f.node('fuel-failure').hidden,true);assert.equal(built.burst.group.visible,false);
+ f.change('fuel-failure-pressurePa',1000);f.change('fuel-failure-linerK',900);await f.ui.run();
+ assert.match(f.node('fuel-failure').textContent,/Liner.*1,000 K > 900 K/);
+ assert.doesNotMatch(f.node('fuel-failure').textContent,/Pressure difference/);
+});
+
+
+test('the earliest pinned failure clips both runs and clearing the pin removes its failure state',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-failure-pressurePa',5);await f.ui.run();
+ f.ui.nodes.view.querySelector<HTMLButtonElement>('[aria-label="Pin accepted experiment as comparison A"]')!.click();await flush();
+ f.change('fuel-pressurePa',0);await f.ui.run();
+ assert.match(f.node('fuel-failure').textContent,/Pinned run stopped/);
+ assert.equal(Number(f.node('fuel-motion-time').max),0);assert.equal(f.builds.at(-1).burst.group.visible,true);
+ f.ui.nodes.view.querySelector<HTMLButtonElement>('.fuel-comparison-bar button:nth-child(2)')!.click();await flush();
+ assert.equal(f.node('fuel-failure').hidden,true);assert.ok(Number(f.node('fuel-motion-time').max)>0);
 });

@@ -1,0 +1,32 @@
+import {test,expect} from '@playwright/test';
+
+test('assumed failure limits stop the model, show the cause and restore the hardware after input correction',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+ await page.goto('/?level=2');
+ await expect(page.locator('#fuel-render canvas')).toBeVisible({timeout:30_000});
+ await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Controls',exact:true}).click();
+ await page.locator('#fuel-controls').getByText('Failure limits',{exact:true}).click();
+ const pressure=page.locator('#fuel-failure-pressurePa'),liner=page.locator('#fuel-failure-linerK');
+ await pressure.fill('1');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-failure')).toContainText('Pressure difference');
+ await expect(page.locator('#fuel-motion-time')).toHaveValue('0');
+ await expect(page.locator('#fuel-motion-play')).toHaveText('Play');await expect(page.locator('#fuel-power')).toBeDisabled();
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();
+ await expect(page.locator('#fuel-failure')).toBeVisible();await expect(page.locator('#fuel-render .apparatus-frame').first()).toHaveAttribute('data-failure-state','failed');
+ await info.attach('failure-illustration',{body:await page.screenshot(),contentType:'image/png'});
+ await page.locator('#fuel-motion-mode').selectOption('equilibrium');await expect(page.locator('#fuel-failure')).toBeHidden();
+ await page.locator('#fuel-motion-mode').selectOption('transport');await expect(page.locator('#fuel-failure')).toBeVisible();
+ await page.getByRole('button',{name:'Controls',exact:true}).click();
+ await pressure.fill('1000');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-failure')).toBeHidden();
+ await liner.fill('900');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-failure')).toContainText('Liner 1,000 K > 900 K');
+ await liner.fill('1800');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await expect(page.locator('#fuel-failure')).toBeHidden();
+ await pressure.fill('');await expect(page.locator('#fuel-failure')).toContainText('Check failure limits');await expect(page.locator('#fuel-export')).toBeDisabled();
+ await pressure.fill('1000');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
+ await page.getByRole('button',{name:'Close Controls',exact:true}).click();await expect(page.locator('#fuel-failure')).toBeHidden();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
+ expect(errors).toEqual([]);
+});

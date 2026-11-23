@@ -100,3 +100,6 @@ body[data-level="1"] :is(.system-bar,.controls .source-controls,.controls .live-
 #fuel-info details{margin-block:16px}
 
 .brand,h1,h2,.atlas-grid h3{font-family:Literata,serif}
+
+.fuel-failure{position:absolute;top:72px;left:50%;transform:translateX(-50%);z-index:8;width:min(390px,calc(100% - 32px));padding:14px 18px;border:1px solid #d59c68;border-radius:10px;background:#201c18f5;box-shadow:0 8px 32px #0006;font-size:12px;pointer-events:auto}
+.fuel-failure[hidden]{display:none}.fuel-failure strong{font-size:17px;color:#edb685}.fuel-failure p{margin:8px 0}.fuel-failure button{min-height:36px}
