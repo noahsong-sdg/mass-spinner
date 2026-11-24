@@ -8,29 +8,13 @@ body.immersive{overflow:hidden;background:#101614}
 .world-top .world-reading{display:flex;flex:none;gap:8px;margin-left:auto}
 .world-top .world-reading button{flex:none;min-height:44px;padding:8px 14px;font-size:12px;color:#edbe90;border:1px solid #80664d;border-radius:7px;white-space:nowrap}
 .world-window-body.playground-guide{display:flex;flex:1;flex-direction:column;overflow:hidden;padding:0;font-size:14px;line-height:1.65}
-.guide-views{display:flex;flex:none;gap:6px;padding:10px 12px;border-bottom:1px solid #394b3f}
-.guide-views button{flex:1;min-height:44px;padding:8px;font-size:12px;border:1px solid #566b5c;border-radius:6px;color:#b9c7bd}
-.guide-views button[aria-pressed=true]{background:#26392e;color:#edbe90}
 .guide-physics{flex:1;min-height:0;display:flex}.guide-physics iframe{width:100%;flex:1;min-height:0;border:0;background:#111b16}
-.guide-reading{flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;padding:20px}
-.guide-reading>p:first-child{color:#b9c7bd;margin:0 0 16px;font-size:12px}
-.guide-reading>label{display:block;color:#b9c7bd;font-size:12px}
-.guide-reading>select{width:100%;min-height:44px;margin:6px 0 20px;font-size:13px}
-.world-window .playground-guide h3{font-size:21px;line-height:1.25;margin:0 0 16px;letter-spacing:0}
 .playground-guide p{margin:0 0 16px;font-size:14px;line-height:1.65}
 .playground-guide strong{color:#e7eee4;font-weight:600}
-.guide-actions{display:flex;flex-wrap:wrap;gap:8px;margin-block:20px}
-.guide-actions button,.guide-navigation button,.guide-leave{min-height:44px;padding:10px 12px;font-size:13px;border:1px solid #566b5c;border-radius:6px;text-align:left}
-.guide-actions button{background:#26392e;color:#e3eee3}
 .guide-experiment{margin:0 0 16px;padding:12px 0;border-block:1px solid #566b5c;font-size:13px;line-height:1.6}
 .guide-experiment p{font-size:13px;margin:8px 0}
 .guide-experiment button{min-height:44px;padding:8px 12px;border:1px solid #708675;border-radius:6px;color:#edbe90}
 .guide-experiment [role=status]:empty{display:none}
-.playground-guide .guide-note{font-size:12px;color:#b9c7bd;border-top:1px solid #394b3f;padding-top:16px}
-.guide-navigation{display:flex;flex:none;justify-content:space-between;gap:6px;padding:10px 12px;border-top:1px solid #394b3f}
-.guide-navigation button:disabled{opacity:.4}
-.guide-leave{color:#b9c7bd}
-.guide-reading>a{display:block;min-height:44px;padding-block:10px;color:#b9c7bd;font-size:12px}
 .playground-guide #guide-status:empty{display:none}
 .playground-guide #guide-status{flex:none;margin:0;padding:10px 16px;color:#edbe90;font-size:12px}
 .world-top .learning-path{flex:none;min-width:0;min-height:0;padding:0 24px 0 0;gap:0;border:0;background:none}

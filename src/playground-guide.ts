@@ -2,7 +2,6 @@ import {tutorialPresentation,tutorialRoute} from './tutorial-presentation.js';
 import {guideActions,guideTopics,guideExperiments} from './guide-topics.js';
 import type {GuideExperiment} from './guide-topics.js';
 
-import {playgroundSteps as steps} from './playground-guide-steps.js';
 
 export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void;prepareReaderAction?:(key:string)=>void};
 type GuideElements={
@@ -25,35 +24,18 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  if(!capability)capability=win.crypto.randomUUID();
  try{win.sessionStorage.setItem(capabilityKey,capability);}catch{/* Keep the same authorization boundary without storage. */}
  function openStandalone(){readerWindow=win.open('/learn.html','_blank');}
- function showReader(route?:string){const safe=tutorialRoute(route??frame.getAttribute('src')??'/learn.html');if(!safe)return;reading.hidden=true;reader.hidden=false;views.hidden=true;nav.hidden=true;if(frame.getAttribute('src')!==safe)frame.src=safe;open('guide');}
+ function showReader(route?:string){const safe=tutorialRoute(route??frame.getAttribute('src')??'/learn.html');if(!safe)return;reader.hidden=false;if(frame.getAttribute('src')!==safe)frame.src=safe;open('guide');}
 
  const el=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const n=doc.createElement(tag);if(text!==undefined)n.textContent=text;return n;};
  host.classList.add('playground-guide');
- const intro=el('p','Seven experiments. The controls keep your inputs. Start from rest starts a new run.'),label=el('label','Explore'),choice=el('select');
- choice.id='guide-step';label.htmlFor=choice.id;
- steps.forEach((step,i)=>{const option=el('option',`${i+1}. ${step.title}`);option.value=String(i);choice.append(option);});
- const reading=el('div'),content=el('div'),status=el('p'),nav=el('nav'),previous=el('button','Back'),next=el('button','Next →'),leave=el('button','Scene');reading.className='guide-reading';
- status.id='guide-status';status.setAttribute('role','status');nav.setAttribute('aria-label','Walkthrough steps');nav.className='guide-navigation';leave.className='guide-leave';
- for(const button of [previous,next,leave])button.type='button';
- leave.setAttribute('aria-label','Back to the scene');
- const methods=el('a','Equations & accuracy limits ↗');methods.href='/how-it-works.html';methods.target='_blank';methods.rel='noopener';
- const views=el('div'),explore=el('button','Tutorial 1'),physics=el('button','Physics & equations'),reader=el('div'),frame=el('iframe');
- views.className='guide-views';views.setAttribute('role','group');views.setAttribute('aria-label','Guide view');
+ const status=el('p'),reader=el('div'),frame=el('iframe');
+ status.id='guide-status';status.setAttribute('role','status');
  reader.className='guide-physics';reader.hidden=true;frame.title='Mass Spinner physical guide with equations and diagrams';frame.id='physics-guide-frame';reader.append(frame);
- for(const button of [explore,physics])button.type='button';
- explore.setAttribute('aria-pressed','true');physics.setAttribute('aria-pressed','false');views.append(explore,physics);
+ host.append(reader,status);
  function showPhysics(topic?:string){
-  reading.hidden=true;reader.hidden=false;previous.hidden=true;next.hidden=true;
-  explore.setAttribute('aria-pressed','false');physics.setAttribute('aria-pressed','true');
-  const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';showReader(topic||!frame.hasAttribute('src')?`/guide.html#${id}`:frame.getAttribute('src')!);
+  const id=guideTopics.find(entry=>entry.id===topic)?.id??'goal';
+  showReader(topic||!frame.hasAttribute('src')?`/guide.html#${id}`:frame.getAttribute('src')!);
  }
- function showExplore(){
-  reading.hidden=false;reader.hidden=true;previous.hidden=false;next.hidden=false;
-  explore.setAttribute('aria-pressed','true');physics.setAttribute('aria-pressed','false');
- }
- explore.addEventListener('click',showExplore);physics.addEventListener('click',()=>showPhysics());
- nav.append(previous,next,leave);reading.append(intro,label,choice,content,methods);host.append(views,reading,reader,status,nav);
- let index=0;
  const node=<K extends keyof GuideElements>(id:K)=>doc.getElementById(id) as GuideElements[K];
  function set(id:GuideValueId,value:string|number,type='change'){
   const input=node(id);input.value=String(value);input.dispatchEvent(new win.Event(type,{bubbles:true}));
@@ -73,7 +55,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(!['spin','transport'].includes(node('fuel-motion-mode').value))endpoint();
  }
  function composition(){transient();plot('composition');}
- const allowed=new Set([...guideActions,...steps.flatMap(step=>step.actions.map(([key])=>key))]);
+ const allowed=new Set([...guideActions,'coils']);
  const controlFocus:Record<string,string|null>={current:'#fuel-currentA',collisions:'#fuel-collisionHz',drag:'#fuel-dragHz',diffusion:'#fuel-radialDiffusivityM2S',thermal:'#fuel-thermal-enabled',gasTemperature:'#fuel-gasK',duration:'#fuel-durationS',stageControls:'#fuel-stages',pumpControls:'#fuel-pumpSpeedM3S',inventoryControls:'#fuel-burnFraction',controls:null};
  function editCurrent(){
   focusRelated('controls','#fuel-currentA');
@@ -222,23 +204,5 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   // The application adds controls asynchronously. Watch for new controls and accepted results.
   observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','data-calculation-state']});
  }
- function render(focus=false){
-  const step=steps[index];choice.value=String(index);status.textContent='';
-  const heading=el('h3',step.title);heading.tabIndex=-1;
-  const actions=el('div');actions.className='guide-actions';
-  for(const [key,text]of step.actions){const button=el('button',text);button.type='button';button.addEventListener('click',()=>action(key));actions.append(button);}
-  const blocks:HTMLElement[]=[el('p',step.intro)];
-  const instructions=el('ol');for(const text of step.do)instructions.append(el('li',text));blocks.push(instructions);
-  for(const text of step.notice.split('\n\n'))blocks.push(el('p',text));
-  const note=el('p',step.note);note.className='guide-note';
-  content.replaceChildren(heading,actions,...blocks,note);
-  previous.disabled=index===0;next.textContent=index===steps.length-1?'Finish':'Next →';
-  if(focus){heading.focus();heading.scrollIntoView?.({block:'nearest'});}
- }
- choice.addEventListener('change',()=>{index=Number(choice.value);render(true);});
- previous.addEventListener('click',()=>{index--;render(true);});
- next.addEventListener('click',()=>{if(index===steps.length-1)close('guide',true);else{index++;render(true);}});
- leave.addEventListener('click',()=>close('guide',true));
- render();
- return {showPhysics,showExplore,showReader,openStandalone,launch};
+ return {showPhysics,showReader,openStandalone,launch};
 }

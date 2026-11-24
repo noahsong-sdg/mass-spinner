@@ -1,10 +1,37 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {existsSync,readFileSync,readdirSync} from 'node:fs';
+import {dirname,relative,resolve} from 'node:path';
+import ts from 'typescript';
 
 const workflow=readFileSync('.github/workflows/verify.yml','utf8');
 const jobs=Object.fromEntries([...workflow.matchAll(/^  ([\w-]+):\n([\s\S]*?)(?=^  [\w-]+:\n|$(?![\s\S]))/gm)]
  .map(([,name,body])=>[name,body]));
+
+test('browser checkout includes its runtime imports without copying research results',()=>{
+ const checkout=jobs.browser.split('      - uses: actions/download-artifact@')[0];
+ const sparse=/          sparse-checkout: \|\n((?:            [^\n]+\n)+)/.exec(checkout)?.[1].trim().split(/\n\s*/);
+ assert.deepEqual(sparse,['ci','e2e','scripts','src']);
+ assert.doesNotMatch(checkout,/sparse-checkout-cone-mode: false/,'cone mode retains root package and configuration files');
+ const included=(path:string)=>!path.includes('/')||sparse!.some(directory=>path===directory||path.startsWith(`${directory}/`));
+ assert.equal(included('scientific/results.json'),false);assert.equal(included('web-assets/models/centrifuge-assembly.glb'),false);
+ const visited=new Set<string>();
+ function inspect(path:string){
+  if(visited.has(path))return;visited.add(path);
+  assert.ok(included(path),`Browser checkout must include ${path}`);
+  const source=ts.createSourceFile(path,readFileSync(path,'utf8'),ts.ScriptTarget.Latest,true);
+  for(const statement of source.statements){
+   if(!ts.isImportDeclaration(statement)||statement.importClause?.isTypeOnly||!ts.isStringLiteral(statement.moduleSpecifier))continue;
+   const specifier=statement.moduleSpecifier.text;if(!specifier.startsWith('.'))continue;
+   const imported=relative(process.cwd(),resolve(dirname(path),specifier));
+   const resolved=[imported,imported.replace(/\.js$/,'.ts')].find(candidate=>existsSync(candidate));
+   assert.ok(resolved,`Missing imported file ${imported}`);inspect(resolved);
+  }
+ }
+ for(const path of ['vite.config.mjs','scripts/release-manifest.ts',...readdirSync('e2e').filter(name=>name.endsWith('.spec.ts')).map(name=>`e2e/${name}`)])inspect(path);
+ for(const path of ['package.json','package-lock.json','playwright.config.ts','ci/Dockerfile.browser'])assert.ok(included(path),path);
+ assert.ok(visited.has('src/equation-derivations.ts'));assert.ok(visited.has('scripts/worker-identity-plugin.mjs'));
+});
 
 test('isolated browser projects retain all tests and independent evidence within existing limits',()=>{
  const browser=jobs.browser;

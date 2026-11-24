@@ -4,7 +4,6 @@ import {readFileSync} from 'node:fs';
 import {JSDOM} from 'jsdom';
 import {setupPreciseControls} from '../src/precise-controls.js';
 import {setupWorkspace} from '../src/workspace-ui.js';
-import {playgroundSteps} from '../src/playground-guide-steps.js';
 import {guideActions,guideExperiments,type GuideExperiment} from '../src/guide-topics.js';
 
 function fixture(t:any,mobile=false){
@@ -17,7 +16,7 @@ function fixture(t:any,mobile=false){
  const control=doc.createElement('div');control.className='control';
  control.innerHTML='<label for="fuel-currentA"><span>Radial discharge current</span><output>0.03 A</output></label><input id="fuel-currentA" type="range" min="0" max="0.2" step="0.001" value="0.03" data-unit="A">';
  doc.querySelector('#window-controls .world-window-body')!.append(control);setupPreciseControls(control);
- return {doc,window,workspace,node,step(index:number){node('guide-step').value=String(index);node('guide-step').dispatchEvent(new window.Event('change'));}};
+ return {doc,window,workspace,node};
 }
 
 /** Native controls mounted by the centrifuge after the workspace exists. */
@@ -60,27 +59,19 @@ test('the same reader remains available in every playground without changing phy
  assert.equal(f.node('window-guide').hidden,false);
 });
 
-test('all seven steps have a live action and retain the physical scope distinctions',t=>{
- const f=fixture(t);f.workspace.open('guide');
- for(let i=0;i<7;i++){
-  f.step(i);assert.ok(f.doc.querySelectorAll('.guide-actions button').length>=2);
-  assert.equal(f.node('window-guide').querySelector('h3').nextElementSibling.className,'guide-actions','put the action before the explanation');
-  assert.equal(f.node('window-guide').querySelectorAll('ol li').length,playgroundSteps[i].do.length);assert.doesNotMatch(f.node('window-guide').innerHTML,/<strong>Watch for/);
- }
- f.step(3);assert.match(f.node('window-guide').textContent,/percentage and purity do not change by these factors/i);
- const competition=f.node('window-guide').textContent!;
- assert.match(competition,/wall heavy\/light ratio with the axis heavy\/light ratio/);
- assert.match(competition,/not a product quantity/);
- f.step(5);assert.match(f.node('window-guide').textContent,/do not calculate extraction flow/);
- f.step(6);assert.match(f.node('window-guide').textContent,/do not show experimental accuracy/);
- f.node('window-guide').querySelector('.guide-navigation button:nth-child(2)').click();
- assert.equal(f.node('window-guide').hidden,true);assert.equal(f.doc.activeElement,f.node('open-docs'));
+test('the guide has one reader and no hidden legacy controls',t=>{
+ const f=fixture(t);f.node('open-docs').click();
+ const host=f.node('window-guide');
+ assert.equal(host.querySelectorAll('iframe').length,1);
+ for(const selector of ['#guide-step','.guide-actions','.guide-views','.guide-reading','.guide-navigation'])assert.equal(host.querySelector(selector),null,selector);
+ assert.equal(f.node('physics-guide-frame').getAttribute('src'),'/learn.html');
+ assert.equal(host.querySelector('#guide-status').textContent,'');
 });
 
-test('pending or missing results explain what to do instead of inventing a successful experiment',t=>{
- const f=fixture(t);f.workspace.open('guide');f.step(1);
- f.doc.querySelector<HTMLButtonElement>('.guide-actions button')!.click();
- assert.match(f.node('guide-status').textContent,/Wait for the run to finish/);
+test('a missing accepted run waits without claiming a successful experiment',t=>{
+ const f=fixture(t);f.workspace.openTutorial('/start.html#current');
+ f.workspace.launchGuideAction('endSpin');
+ assert.match(f.node('guide-status').textContent,/Waiting for the calculated run/);
  assert.equal(f.node('window-plots').hidden,true);
 });
 
@@ -101,13 +92,11 @@ test('physics reading loads on demand and preserves its place while controls or 
  const f=fixture(t);f.workspace.open('guide');const frame=f.node('physics-guide-frame');
  assert.equal(frame.hasAttribute('src'),false,'do not load the full reading and math fonts before requested');
  f.workspace.openPhysics('energy');assert.equal(frame.getAttribute('src'),'/guide.html#energy');
- assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(f.doc.querySelector('.guide-reading').hidden,true);
+ assert.equal(f.doc.querySelector('.guide-physics').hidden,false);
  f.workspace.open('controls');f.workspace.open('guide');
  assert.equal(f.doc.querySelector('.guide-physics').hidden,false);assert.equal(frame.getAttribute('src'),'/guide.html#energy');
- const buttons=[...f.doc.querySelectorAll<HTMLButtonElement>('.guide-views button')];
- buttons[0].click();assert.equal(f.doc.querySelector('.guide-reading').hidden,false);
- buttons[1].click();assert.equal(frame.getAttribute('src'),'/guide.html#energy');
- assert.equal(buttons[1].getAttribute('aria-pressed'),'true');
+ f.workspace.openTutorial('/start.html#current');assert.equal(frame.getAttribute('src'),'/start.html#current');
+ f.workspace.openPhysics('energy');assert.equal(frame.getAttribute('src'),'/guide.html#energy');
 });
 
 test('the mobile physics reader has a panel height instead of the iframe intrinsic height',t=>{
@@ -118,8 +107,8 @@ test('the mobile physics reader has a panel height instead of the iframe intrins
  const mobile=[...style.sheet!.cssRules].find(rule=>rule instanceof f.window.CSSMediaRule&&rule.conditionText.replace(/\s/g,'')==='(max-width:740px)') as CSSMediaRule;
  const reader=[...mobile.cssRules].find(rule=>(rule as CSSStyleRule).selectorText===selector) as CSSStyleRule;
  assert.equal(reader.style.height,'58dvh');
- f.doc.querySelector<HTMLButtonElement>('.guide-views button')!.click();
- assert.equal(f.doc.querySelector(selector),null,'short experiment cards must retain their intrinsic size');
+ f.workspace.openTutorial('/start.html#current');
+ assert.equal(f.doc.querySelector(selector),f.node('window-guide'),'every tutorial uses the same full-height reader');
 });
 
 test('only messages from the same-origin guide frame can operate native controls or close the guide',t=>{
@@ -134,7 +123,7 @@ test('only messages from the same-origin guide frame can operate native controls
 });
 
 test('the current experiment rewinds before editing and compares endpoints without silently changing inputs',t=>{
- const f=fixture(t);f.workspace.open('guide');f.step(1);
+ const f=fixture(t);f.workspace.openTutorial('/start.html#current');
  const input=f.node('fuel-currentA');input.value='.07';
  const make=(tag:string,id:string,value:string)=>{const n=f.doc.createElement(tag) as any;n.id=id;n.value=value;f.doc.body.append(n);return n;};
  const mode=make('select','fuel-motion-mode','');mode.innerHTML='<option value="equilibrium">Reference</option><option value="transport">Coupled</option>';mode.value='equilibrium';
@@ -147,12 +136,11 @@ test('the current experiment rewinds before editing and compares endpoints witho
  make('details','fuel-learning-comparisons','');make('button','fuel-export','');
  let restarted=0;make('button','fuel-new-run','').addEventListener('click',()=>restarted++);
  const seen:number[]=[];time.addEventListener('input',()=>seen.push(Number(time.value)));
- f.doc.querySelector<HTMLButtonElement>('.guide-actions button')!.click();
+ f.workspace.launchGuideAction('currentExperiment');
  assert.equal(mode.value,'transport');assert.equal(time.value,'0');assert.equal(input.valueAsNumber,.07);
  assert.equal(restarted,1,'preparation explicitly clears old drive history through New run');
  assert.equal(f.doc.activeElement,input.closest('.control').querySelector('.precise-editor input'));assert.equal(f.node('window-controls').hidden,false);
- assert.match(f.node('window-guide').textContent,/0 A.*0.03 A/);
- f.doc.querySelectorAll<HTMLButtonElement>('.guide-actions button')[1].click();
+ f.workspace.launchGuideAction('endSpin');
  assert.equal(time.value,'1');assert.equal(plot.value,'spin');assert.deepEqual(seen,[0,1]);
 });
 
