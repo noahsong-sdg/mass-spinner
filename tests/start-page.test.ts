@@ -38,18 +38,19 @@ test('standalone walkthrough motivates each experiment before instructions and i
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('iframe').length,0);
  assert.equal(doc.querySelector('h1')!.textContent,'Tutorial 1 · Using the simulator');
- assert.equal(doc.querySelectorAll('.guide-contents a').length,7);
+ assert.equal(doc.querySelectorAll('.guide-contents a').length,4);
  assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question|Next:/);
  assert.equal(doc.querySelectorAll('.walkthrough-step').length,7);
  for(const step of doc.querySelectorAll('.walkthrough-step')){
-  assert.equal(step.querySelector('h2')!.nextElementSibling!.tagName,'P');
+  const heading=step.querySelector('h2,h3')!;
+  assert.equal(heading.nextElementSibling!.tagName,'P');
   assert.equal(step.querySelector('[data-learning-hint],textarea,.learning-transfer'),null);
   assert.equal(step.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!.open,false);
   for(const link of step.querySelectorAll<HTMLAnchorElement>('[data-guide-action]')){
    assert.ok(guideActions.has(link.dataset.guideAction!)||['coils','controls'].includes(link.dataset.guideAction!));
    assert.equal(new URL(link.href).searchParams.get('try'),link.dataset.guideAction);
    assert.equal(link.target,'_top');
-   assert.equal(new URL(link.href).searchParams.get('lesson'),`/start.html#${step.querySelector('h2')!.id}`);
+   assert.equal(new URL(link.href).searchParams.get('lesson'),`/start.html#${heading.id}`);
   }
  }
  assert.match(doc.querySelector('#current')!.parentElement!.textContent!,/0 A.*0.03 A/);

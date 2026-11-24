@@ -117,7 +117,7 @@ export function setupGuideReader(win:Pick<Window,'document'|'parent'|'opener'|'l
   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
   event.preventDefault();
   if(!embedded){
-   const section=[...doc.querySelectorAll('h2[id]')].filter(heading=>heading.compareDocumentPosition(link)&browser.Node.DOCUMENT_POSITION_FOLLOWING).at(-1)?.id;
+   const section=[...doc.querySelectorAll('h2[id],h3[id]')].filter(heading=>heading.compareDocumentPosition(link)&browser.Node.DOCUMENT_POSITION_FOLLOWING).at(-1)?.id;
    const lesson=new URL(browser.location.href);if(section)lesson.hash=section;
    const target=new URL(link.href);target.searchParams.set('lesson',lesson.pathname+lesson.hash);
    browser.location.assign(target.href);return;

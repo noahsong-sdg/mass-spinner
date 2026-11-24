@@ -477,7 +477,7 @@ test('Clear remains safe after a failed current computation with a pinned accept
 });
 test('Transport cut plots show the current inventory rather than the final equilibrium cut',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-motion-mode','transport','change');f.change('fuel-plot','cut','change');f.change('fuel-motion-time',0);
- const metric=()=>parseFloat(f.ui.nodes.plots.querySelector('.fuel-metrics strong')!.textContent!);close(metric(),100*f.ui.latest.result.config.lightFraction,.001);
+ const metric=()=>parseFloat([...f.ui.nodes.plots.querySelectorAll('.fuel-metrics > div')].find(row=>row.querySelector('span')!.textContent==='Inner light purity')!.querySelector('strong')!.textContent!);close(metric(),100*f.ui.latest.result.config.lightFraction,.001);
  f.change('fuel-motion-time',1);close(metric(),100*sampleFuelTransport(f.ui.latest.result.transport,1).collection.innerLightPurity!,.001);
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/Closed-wall inventory at the selected time/);
 });
