@@ -347,9 +347,9 @@ test('beam exercises switch apparatus and reveal actual source ledger or target 
 });
 
 
-test('visual tutorial actions need mounted view controls but no accepted physics result',async t=>{
+test('gas tutorial uses the open side instead of looking through the end plate, without needing an accepted result',async t=>{
  const f=fixture(t),fuel=acceptedFuel(f);fuel.accepted.disabled=true;
- const camera:string[]=[];for(const id of ['fuel-reset-view','fuel-camera-axial']){const button=f.doc.createElement('button');button.id=id;button.addEventListener('click',()=>camera.push(id));f.doc.body.append(button);}
+ const camera:string[]=[];for(const id of ['fuel-reset-view','fuel-camera-cutaway','fuel-camera-axial']){const button=f.doc.createElement('button');button.id=id;button.addEventListener('click',()=>camera.push(id));f.doc.body.append(button);}
  f.workspace.launchGuideAction('look');
  assert.match(f.node('guide-status').textContent,/Waiting/);
  for(const [id,value]of [['fuel-view-representation','tracers'],['fuel-view-cutaway','.62'],['fuel-view-explode','0'],['fuel-view-drive','all'],['fuel-component','coils']]){
@@ -358,7 +358,7 @@ test('visual tutorial actions need mounted view controls but no accepted physics
   f.doc.body.append(n);
  }
  await new Promise<void>(resolve=>setImmediate(resolve));
- assert.equal(f.node('guide-status').textContent,'');assert.equal(f.node('fuel-view-drive').value,'all');assert.deepEqual(camera,['fuel-reset-view','fuel-camera-axial']);
+ assert.equal(f.node('guide-status').textContent,'');assert.equal(f.node('fuel-view-drive').value,'all');assert.deepEqual(camera,['fuel-reset-view','fuel-camera-cutaway']);
  f.workspace.launchGuideAction('coils');assert.equal(f.node('window-inspect').hidden,false);
  assert.equal(f.node('fuel-component').value,'coils');assert.equal(fuel.accepted.disabled,true);
 });

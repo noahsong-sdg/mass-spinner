@@ -122,7 +122,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   if(key==='look'){
-   set('fuel-view-representation','tracers');set('fuel-view-cutaway',.62,'input');set('fuel-view-explode',0,'input');set('fuel-view-drive','all');doc.getElementById('fuel-reset-view')?.click();doc.getElementById('fuel-camera-axial')?.click();return;
+   set('fuel-view-representation','tracers');set('fuel-view-cutaway',.62,'input');set('fuel-view-explode',0,'input');set('fuel-view-drive','all');doc.getElementById('fuel-reset-view')?.click();doc.getElementById('fuel-camera-cutaway')?.click();return;
   }
   if(key==='coils'){set('fuel-component','coils');open('inspect',true);doc.getElementById('fuel-focus-component')?.click();return;}
   // Do not show pending or failed results as a new experiment.
