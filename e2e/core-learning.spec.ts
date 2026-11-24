@@ -2,7 +2,7 @@ import {test,expect,type Page} from '@playwright/test';
 
 async function accepted(page:Page){
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await expect(page.locator('#fuel-render canvas')).toBeVisible();
+ await expect(page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline) canvas')).toBeVisible();
 }
 
 test('the first session connects current, equilibrium, heat and collection in one workspace',async({page},info)=>{

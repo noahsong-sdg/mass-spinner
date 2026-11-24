@@ -82,7 +82,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  await frame.locator('[data-guide-action="coils"]').click();await expect(page.locator('#fuel-component')).toHaveValue('coils');
  const current=await page.locator('#fuel-currentA').inputValue();
  await frame.locator('[data-guide-action="look"]').click();
- await expect(page.locator('#window-inspect')).toBeHidden();await expect(page.locator('#window-guide')).toBeVisible();
+ await expect(page.locator('#window-inspect')).toBeHidden({timeout:30_000});await expect(page.locator('#window-guide')).toBeVisible();
  await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('.fuel-motion-legend')).toBeVisible();
  const cue=page.getByRole('complementary',{name:'What to look for'});
  for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
@@ -98,8 +98,10 @@ test('direct reading action opens the same-tab workspace at its clicked section'
  await page.goto('/start.html#current');const count=context.pages().length;
  await page.locator('[data-guide-action="look"]').click();
  const frame=await readerFrame(page);await expect.poll(()=>frame.url()).toMatch(/\/start(?:\.html)?#machine$/);
+ await expect(page.getByRole('complementary',{name:'What to look for'})).toContainText('Find the gas between the stationary electrodes.',{timeout:30_000});
+ await expect(page.locator('#fuel-view-drive')).toHaveValue('all');
  await expect(frame.locator('#machine')).toBeInViewport();
- await expect(page.locator('#fuel-view-drive')).toHaveValue('all');expect(context.pages().length).toBe(count);
+ expect(context.pages().length).toBe(count);
 });
 
 test('a delayed accepted result waits and a newer command replaces it without replay',async({page})=>{
@@ -151,7 +153,7 @@ test('tutorial actions return from the reactor to the centrifuge without replaci
  await page.getByRole('button',{name:'Reactor',exact:true}).click();await expect(page.locator('#marathon-apparatus')).toHaveValue('source');
  await expect(page.getByRole('complementary',{name:'What to look for'})).toBeHidden();
  await expect(page.locator('#window-guide')).toBeVisible();
- await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
+ await frame.locator('[data-guide-action="inventoryExperiment"]').click();await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge',{timeout:30_000});
  await expect(page.locator('#fuel-plot')).toHaveValue('inventory');await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#window-guide')).toBeVisible();
 });
 

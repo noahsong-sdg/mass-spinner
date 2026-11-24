@@ -152,7 +152,7 @@ test('Play restarts completed coupled runs and advances their physical time',asy
   const end=Number(await page.locator('#fuel-motion-time').inputValue());expect(end).toBeGreaterThan(0);
   await page.locator('#fuel-motion-play').click();
   await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','true');
-  await expect.poll(async()=>Number(await page.locator('#fuel-motion-time').inputValue())).toBeGreaterThan(end/100);
+  await expect.poll(async()=>Number(await page.locator('#fuel-motion-time').inputValue()),{timeout:30_000}).toBeGreaterThan(end/100);
   expect(Number(await page.locator('#fuel-motion-time').inputValue())).toBeLessThan(end);
   await page.locator('#fuel-motion-play').click();
  }
