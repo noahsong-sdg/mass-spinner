@@ -323,3 +323,19 @@ test('inactive hardware withholds queued draws and draws current state when acti
  h.viewer.setActive(true);assert.equal(h.frames.size,1);h.step(100);
  assert.equal(h.renders,before+1);assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
 });
+
+test('vessel focus and component selection exclude the laboratory context',async t=>{
+ const plain=await fixture(t),room=await fixture(t),context=new THREE.Group(),nested=new THREE.Group();
+ context.userData={viewContext:true,nonPickable:true};context.add(nested);room.reference.add(context);
+ const material=new THREE.MeshStandardMaterial(),floor=new THREE.Mesh(new THREE.BoxGeometry(100,1,100),material);
+ floor.position.y=-10;floor.userData.componentId='vessel';nested.add(floor);
+ for(const h of [plain,room]){
+  const coil=new THREE.Mesh(new THREE.BoxGeometry(.1,.3,.3),new THREE.MeshStandardMaterial());coil.userData.componentId='coils';h.reference.add(coil);
+  h.viewer.select('vessel');h.viewer.focus('vessel');h.step(100);
+ }
+ assert.deepEqual(room.viewer.cameraPose(),plain.viewer.cameraPose(),'focus uses the vessel bounds instead of room bounds');
+ assert.equal(floor.material,material,'vessel selection does not highlight the floor');
+ room.viewer.explode('coils');room.step(200);room.step(650);
+ assert.equal(floor.material,material,'an exploded component view does not dim the room');
+ room.viewer.select(null);room.step(700);assert.equal(floor.material,material);
+});

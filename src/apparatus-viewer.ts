@@ -53,6 +53,7 @@ function isPoints(node:THREE.Object3D):node is THREE.Points {return 'isPoints' i
 function isLine(node:THREE.Object3D):node is THREE.Line {return 'isLine' in node&&node.isLine===true;}
 function isTexture(value:unknown):value is THREE.Texture {return typeof value==='object'&&value!==null&&'isTexture' in value&&value.isTexture===true;}
 function materialIsTransparent(material:THREE.Material|THREE.Material[]) {return Array.isArray(material)?undefined:material.transparent;}
+function isViewContext(node:THREE.Object3D){for(let parent:THREE.Object3D|null=node;parent;parent=parent.parent)if(parent.userData.viewContext)return true;return false;}
 
 
 export function componentId(object:THREE.Object3D|null|undefined):string|null{
@@ -211,8 +212,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function fit(expanded?:THREE.Box3){
   root!.updateWorldMatrix(true,true);const bounds=expanded?modelBounds.copy(expanded):modelBounds.makeEmpty();
   if(!expanded)root!.traverse(node=>{
-   if(!isMesh(node)&&!isLine(node)&&!isPoints(node))return;
-   for(let parent:THREE.Object3D|null=node;parent;parent=parent.parent)if(parent.userData.viewContext)return;
+   if(isViewContext(node)||!isMesh(node)&&!isLine(node)&&!isPoints(node))return;
    bounds.expandByObject(node);
   });
   radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
@@ -299,7 +299,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function focus(id:string,{animate=false}:{animate?:boolean}={}){
   if(!root||disposed)return;
   stopFlight();
-  const bounds=new THREE.Box3();root.traverse(node=>{if(isMesh(node)&&node.visible&&componentId(node)===id&&(id==='slice'||!node.userData.quantitativeOnly))bounds.expandByObject(node);});
+  const bounds=new THREE.Box3();root.traverse(node=>{if(isMesh(node)&&!isViewContext(node)&&node.visible&&componentId(node)===id&&(id==='slice'||!node.userData.quantitativeOnly))bounds.expandByObject(node);});
   if(bounds.isEmpty())return;
   pristineCamera=false;
   const target=bounds.getCenter(new THREE.Vector3()),r=bounds.getBoundingSphere(new THREE.Sphere()).radius;
@@ -319,7 +319,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   if(id===null){const wasExploded=!!assembly;clearAssembly();if(wasExploded){fit();reset();}refreshReactor();}
   selectedComponent=id;
   clearSelection();root?.traverse(mesh=>{
-   if(!isMesh(mesh))return;const chosen=componentId(mesh)===id;if(!chosen&&!assemblyTarget)return;
+   if(!isMesh(mesh)||isViewContext(mesh))return;const chosen=componentId(mesh)===id;if(!chosen&&!assemblyTarget)return;
    const original=mesh.material,selected=(Array.isArray(original)?original:[original]).map(material=>{
     const copy=material.clone() as THREE.Material & {color?:THREE.Color;emissive?:THREE.Color;emissiveIntensity?:number};
     if(chosen){copy.emissive?.setHex(0x986033);copy.emissiveIntensity=.7;if(assemblyTarget){copy.opacity=1;copy.transparent=false;copy.depthWrite=true;copy.clippingPlanes=[];}}
