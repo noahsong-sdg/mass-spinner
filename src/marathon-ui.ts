@@ -10,6 +10,7 @@ import {setupFiniteFilmReference} from './finite-film-ui.js';
 import type {CoupledTargetOptions} from './coupled-target-ui.js';
 
 export interface MarathonModelsOptions {
+ active?:boolean;coalesceInputs?:boolean;
  onSource?:FusionLaboratoryOptions['onUpdate'];
  onState?:CoupledTargetOptions['onUpdate'];
  onStatus?:CoupledTargetOptions['onStatus'];
@@ -18,7 +19,7 @@ export interface MarathonModelsOptions {
 }
 
 /** One source, one evolving target, and explicitly separate frozen references. */
-export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=>{},transformPlots,requestTarget}:MarathonModelsOptions={}){
+export function setupMarathonModels({active=true,coalesceInputs=false,onState=()=>{},onStatus=()=>{},onSource=()=>{},transformPlots,requestTarget}:MarathonModelsOptions={}){
  let currentSource:Parameters<NonNullable<FusionLaboratoryOptions['onUpdate']>>[0]=null;
  const node=(id:string)=>document.getElementById(id)!;
  const geometry=setupNeutronGeometry(node('neutron-geometry'));
@@ -31,8 +32,9 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=
  const targetHost=document.createElement('div'),neutronHost=document.createElement('div');
  targetHost.id='coupled-target';neutronHost.id='neutron-transport';
  node('target-exposure').before(targetHost);initial.after(neutronHost);
- const neutrons=setupNeutronTransport(neutronHost);
+ const neutrons=setupNeutronTransport(neutronHost,{active,deferWhenClosed:true});
  const target=setupCoupledTarget(targetHost,{
+  active,deferReferences:true,
   request:requestTarget,
   implantationReference,
   transformPlots,
@@ -50,13 +52,16 @@ export function setupMarathonModels({onState=()=>{},onStatus=()=>{},onSource=()=
  });
  target.referenceHost.append(node('target-exposure'),node('target-loading'));
  target.references.addEventListener('toggle',()=>{
-  exposure.setActive(target.references.open);loading.setActive(target.references.open);
+  exposure.setActive(active&&target.references.open);loading.setActive(active&&target.references.open);
  });
  setupFiniteFilmReference(target.referenceHost,finiteFilmReference);
- const source=setupFusionLaboratory({exposureHost:target.durationHost,onUpdate(value){
+ const source=setupFusionLaboratory({active,coalesceInputs,exposureHost:target.durationHost,onUpdate(value){
   currentSource=value;
   onSource(value);
   geometry.update(value);exposure.update(value);loading.update(value);target.update(value);
  }});
- return {source,target,neutrons,geometry,exposure,loading};
+ return {source,target,neutrons,geometry,exposure,loading,setActive(value:boolean){
+  active=value;source.setActive(value);target.setActive(value);neutrons.setActive(value);
+  exposure.setActive(active&&target.references.open);loading.setActive(active&&target.references.open);
+ }};
 }

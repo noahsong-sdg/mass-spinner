@@ -410,7 +410,7 @@ const blanketExplorer=setupBlanketExplorer($('blanket-explorer'));
 setupApparatus(blanketExplorer.render,{components:blanketComponents,onInspect:()=>workspace?.open('inspect')}).show('blanket');
 setupLaboratory(changed);setupDoublewellControls(changed);setupReferenceAtlas();setupFailureLaboratory();
 setupHydrogenTracer($('failure-lab'));
-const marathon=setupMarathonModels({transformPlots:targetPlots,onSource:value=>fusionApparatus.updateReactorState(sourceMotionState(value)),onState:value=>{
+const marathon=setupMarathonModels({active:false,coalesceInputs:true,transformPlots:targetPlots,onSource:value=>fusionApparatus.updateReactorState(sourceMotionState(value)),onState:value=>{
  fusionApparatus.updateSurfaceState(value?surfaceState({model:'beam-target',settings:value.result.config,result:value.result,acceptedModel:'beam-target',acceptedSettings:value.result.config,selectedState:value.state,source:value.source,acceptedSource:value.source}):null);
  if(value)fusionApparatus.updateReactorState(targetMotionState(value));
 },onStatus:value=>{
@@ -422,7 +422,7 @@ const collectorHost=document.createElement('div');$('orbit-results').after(colle
 setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'} as Record<string,string>)[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence as ConvergenceEvidence);studyUI=setupStudies(mode,()=>orbitConfig(mode()==='icr'?'icr':'rotating'),(selected,settings,signal)=>calculate(selected as OrbitMode,settings,signal));
 baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',()=>{void showResearch();});
-workspace=setupWorkspace({onContextChange:({level,marathon})=>fuelCentrifuge.setActive(level==='2'&&marathon==='centrifuge')});
+workspace=setupWorkspace({onContextChange:({level,marathon:apparatus})=>{fuelCentrifuge.setActive(level==='2'&&apparatus==='centrifuge');marathon.setActive(level==='2'&&apparatus==='source');}});
 experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch:()=>{void showResearch();},onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 const lesson=guideQuery.get('lesson');if(lesson)workspace.openTutorial(lesson);
 if(guideAction)workspace.launchTutorialAction(guideAction);

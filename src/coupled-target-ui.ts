@@ -18,6 +18,7 @@ export interface ImplantationReference {
   beyondDisplayHistogramFraction?:number;displayPerIncidentDepthFractions?:number[];perIncidentDepthFractions:number[]}[];
 }
 export interface CoupledTargetOptions {
+ active?:boolean;deferReferences?:boolean;
  onUpdate?:(snapshot:(CoupledTargetSnapshot & {status:'accepted'})|null)=>void;
  onStatus?:(status:CoupledTargetStatus)=>void;onPlot?:(plot:CoupledPlot)=>void;
  transformPlots?:(curves:PlotCurve[],context:CoupledPlotContext)=>PlotCurve[];
@@ -35,7 +36,7 @@ const requestTarget=async(record:CoupledTargetRequest,signal:AbortSignal):Promis
 };
 
 /** One evolving target, with historical observers kept under References. */
-export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()=>{},onPlot=()=>{},transformPlots=curves=>curves,onMaterialMode=()=>{},request=requestTarget,implantationReference}:CoupledTargetOptions={}){
+export function setupCoupledTarget(host:HTMLElement,{active:enabled=true,deferReferences=false,onUpdate=()=>{},onStatus=()=>{},onPlot=()=>{},transformPlots=curves=>curves,onMaterialMode=()=>{},request=requestTarget,implantationReference}:CoupledTargetOptions={}){
  const panel=make('section'),header=make('div'),badge=make('span','Scenario');panel.className='coupled-target';
  header.className='coupled-target-heading';badge.className='scenario-badge';header.append(badge);
  const tabs=make('div'),panels=new Map<TargetTab,HTMLDivElement>(),buttons=new Map<TargetTab,HTMLButtonElement>();tabs.className='target-tabs';tabs.setAttribute('role','tablist');tabs.setAttribute('aria-label','Target views');
@@ -50,7 +51,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
    if(next){event.preventDefault();selectTab(next);buttons.get(next)!.focus();}
   });
  }
- let active:TargetTab='dynamics',beam:ReturnType<typeof simulateFusionBeam>|null=null,latest:CoupledTargetResult|null=null,acceptedSource:FusionBeamConfig|null=null,phase:CoupledTargetStatus['phase']='invalid',timer:ReturnType<typeof setTimeout>|null=null,selected=0,revision=0,controller:AbortController|null=null;
+ let active:TargetTab='dynamics',beam:ReturnType<typeof simulateFusionBeam>|null=null,latest:CoupledTargetResult|null=null,acceptedSource:FusionBeamConfig|null=null,phase:CoupledTargetStatus['phase']='invalid',timer:ReturnType<typeof setTimeout>|null=null,selected=0,revision=0,controller:AbortController|null=null,dirty=false;
  const prompt=make('div'),materialButton=make('button','Use material model');prompt.className='target-mode-prompt';materialButton.type='button';materialButton.addEventListener('click',onMaterialMode);prompt.append(materialButton);
  const status=make('p');status.id='coupled-status';status.className='target-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const snapshot=make('div'),timeLabel=make('label'),timeOutput=make('output'),time=make('input'),beamState=make('span');snapshot.className='target-snapshot';
@@ -110,6 +111,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  const ledger=make('details'),ledgerText=make('pre');ledger.append(make('summary','Balances'),ledgerText);
  const info=make('details'),infoList=make('ul'),link=make('a','Equations & evidence ↗');link.href='/COUPLED-TARGET-V35.md';info.append(make('summary','Model info'),infoList,link);
  const references=make('details'),referenceHost=make('div');references.className='target-references';references.append(make('summary','References'),referenceHost);
+ let refreshReference=()=>{};
  if(implantationReference){
   const recorded=make('details'),recordedPlot=make('div'),readout=make('p'),scope=make('p'),caseSelect=make('select'),caseLabel=make('label','Recorded case');
   recordedPlot.className='live-plots';caseSelect.id='implantation-reference-case';caseLabel.htmlFor=caseSelect.id;
@@ -127,7 +129,12 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
     readout.textContent=`${sample.incidentCount} incident ions · reflected ${format(100*sample.reflectedFraction)}% · beyond validation grid ${format(100*sample.beyondHistogramFraction)}% · unclassified ${format(100*sample.unclassifiedFraction)}%.${display?` Extended display only · beyond display ${format(100*sample.beyondDisplayHistogramFraction!)}%.`:''}`;
     renderPlots(recordedPlot,[{label:`${sample.energyKeV} keV · seed ${sample.seed}${display?' · extended display':''}`,x:edges.slice(1).map((edge,i)=>(edge+edges[i])/2*1e6),y:display?sample.displayPerIncidentDepthFractions!:sample.perIncidentDepthFractions,xLabel:'Deposited depth (µm)',yLabel:'Fraction of incident ions per bin'}]);
    };
-   caseSelect.addEventListener('change',show);show();
+   let shown:string|null=null;
+   refreshReference=()=>{
+    if(!enabled||deferReferences&&(!references.open||!recorded.open)||shown===caseSelect.value)return;
+    show();shown=caseSelect.value;
+   };
+   caseSelect.addEventListener('change',refreshReference);recorded.addEventListener('toggle',refreshReference);references.addEventListener('toggle',refreshReference);refreshReference();
   }
  }
  const exportButton=make('button','Export');exportButton.type='button';exportButton.className='text-button';exportButton.id='coupled-export';exportButton.disabled=true;
@@ -140,7 +147,7 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  function clear(message:string){latest=null;acceptedSource=null;phase='invalid';time.disabled=true;timeOutput.textContent='—';beamState.textContent='';metrics.replaceChildren();renderPlots(dynamics,[]);renderPlots(depth,[]);ledgerText.textContent='';infoList.replaceChildren();status.textContent=message;onUpdate(null);report();}
  function readConfig(){const config={...DEFAULT_COUPLED_TARGET};for(const [key,read]of reads)config[key]=read();config.absoluteTolerance=config.relativeTolerance*.0001;return config;}
  function schedule(){
-  cancel();prompt.hidden=!beam||beam.config.stoppingModel==='geant4-bragg';
+  cancel();dirty=true;if(!enabled)return;dirty=false;prompt.hidden=!beam||beam.config.stoppingModel==='geant4-bragg';
   if(!beam){clear('The source settings are not correct.');return;}
   if(beam.config.stoppingModel!=='geant4-bragg'){clear('Select material stopping.');return;}
   if(numericInputs.some(input=>!input.checkValidity()||!Number.isFinite(input.valueAsNumber))){clear('Enter correct material settings.');return;}
@@ -182,6 +189,11 @@ export function setupCoupledTarget(host:HTMLElement,{onUpdate=()=>{},onStatus=()
  }
  time.addEventListener('input',()=>{if(!latest)return;selected=Number(time.value);renderSelected();});plotChoice.addEventListener('change',()=>{if(latest)renderSelected();});
  depthScope.addEventListener('change',()=>{if(latest)renderSelected();});
- exportButton.addEventListener('click',()=>{if(!latest||phase!=='accepted')return;const payload={schemaVersion:1,source:acceptedSource,selectedTimeS:latest.history[selected].timeS,...latest,producingCode:producingCode(latest.producingCode)},url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-coupled-target.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
- selectTab('dynamics');schedule();return {durationHost,referenceHost,references,focusSetting(selector:string){selectTab('settings');const input=settings.querySelector<HTMLElement>(selector);if(input){for(let parent=input.parentElement;parent&&parent!==settings;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;input.scrollIntoView?.({block:'nearest'});input.focus();}},update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;schedule();},get result(){return latest;},get status(){return {phase,revision,snapshot:currentSnapshot()};}};
+ exportButton.addEventListener('click',()=>{if(dirty||!latest||phase!=='accepted')return;const payload={schemaVersion:1,source:acceptedSource,selectedTimeS:latest.history[selected].timeS,...latest,producingCode:producingCode(latest.producingCode)},url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-coupled-target.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
+ selectTab('dynamics');schedule();return {durationHost,referenceHost,references,setActive(value:boolean){
+  if(enabled===value)return;enabled=value;
+  if(!enabled&&phase==='pending'){dirty=true;cancel();phase=latest?'accepted':'invalid';report();}
+  if(enabled&&dirty)schedule();
+  if(enabled)refreshReference();
+ },focusSetting(selector:string){selectTab('settings');const input=settings.querySelector<HTMLElement>(selector);if(input){for(let parent=input.parentElement;parent&&parent!==settings;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;input.scrollIntoView?.({block:'nearest'});input.focus();}},update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;schedule();},get result(){return latest;},get status(){return {phase,revision,snapshot:currentSnapshot()};}};
 }

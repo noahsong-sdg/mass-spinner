@@ -19,7 +19,7 @@ export type NeutronTransportSnapshot=Omit<ReturnType<typeof simulateFirstFlightN
 };
 
 /** First-flight scenario with optional evaluated H-1 data; density/response remain assumed. */
-export function setupNeutronTransport(host:HTMLElement){
+export function setupNeutronTransport(host:HTMLElement,{active=true,deferWhenClosed=false}:{active?:boolean;deferWhenClosed?:boolean}={}){
  const panel=make('details'),body=make('div'),metrics=make('div'),plot=make('div'),status=make('p');
  panel.className='fusion-model-notes neutron-transport-panel';panel.append(make('summary','Neutron interactions'),body);
  metrics.className='fusion-readouts';plot.className='live-plots';status.setAttribute('role','status');
@@ -39,10 +39,12 @@ export function setupNeutronTransport(host:HTMLElement){
   make('p','The live calculation includes first collisions only. Mixed-case OpenMC absorption also includes later collisions after scattering. These references and the evaluated H-1 data do not give experimental calibration for LiT, detector response, dose or displacement damage.'));
  const pendingNote=make('p');pendingNote.hidden=true;
  body.append(metrics,plot,status,pendingNote,settings,checks,reference,notes,exportButton);host.append(panel);
- setupDecayNetwork(body);
- setupNeutronResponse(body,responseData as NeutronResponsePacket);
+ const referencesActive=()=>active&&(!deferWhenClosed||panel.open);
+ const decay=setupDecayNetwork(body,{active:referencesActive(),deferWhenClosed});
+ const response=setupNeutronResponse(body,responseData as NeutronResponsePacket,{active:referencesActive(),deferWhenClosed});
+ const refreshReferences=()=>{decay.setActive(referencesActive());response.setActive(referencesActive());};
  const reads=new Map<string,()=>number>(),boxes=new Map<string,HTMLDivElement>();
- let source:SourceNeutronState|null=null,latest:NeutronTransportSnapshot|null=null,pending=false;
+ let source:SourceNeutronState|null=null,latest:NeutronTransportSnapshot|null=null,pending=false,dirty=true;
  const fields:[string,string,string,number,number,number,number,boolean?][]=[
   ['distance','Source to front face','m',.05,3,.05,.5],
   ['area','Sample face area','cm²',1,1000,1,10],
@@ -61,13 +63,14 @@ export function setupNeutronTransport(host:HTMLElement){
     totalMInv:evaluated?.totalMInv??reads.get('total')!(),absorptionMInv:evaluated?.absorptionMInv??reads.get('absorption')!(),detectorEfficiency:reads.get('efficiency')!()}],angularSamples:128}};
  }
  function renderRefinement(){
-  renderPlots(checkPlot,[]);checkText.textContent='';if(!latest||!checks.open)return;
+  renderPlots(checkPlot,[]);checkText.textContent='';if(dirty||!latest||!checks.open)return;
   const accepted=latest,samples=[16,32,64,128,256],runs=samples.map(angularSamples=>simulateFirstFlightNeutrons({...accepted.config,angularSamples}));
   renderPlots(checkPlot,([['firstAbsorbed','First absorbed'],['firstScatteredUnresolved','First scattered · unresolved']] as const).map(([key,label])=>({
    label,x:runs.map(r=>r.convergence.angularSamples),y:runs.map(r=>r.fractions[key]),xLabel:'Angular quadrature samples',yLabel:'Fraction of source neutrons'})));
   checkText.textContent='This comparison shows sensitivity to angular quadrature only. Material data and paths after the first scattering event remain unqualified.';
  }
  function calculate(){
+  dirty=false;
   latest=null;metrics.replaceChildren();renderPlots(plot,[]);renderPlots(checkPlot,[]);checkText.textContent='';list.replaceChildren();exportButton.disabled=true;
   if(!source){status.textContent='No source result is available.';return;}
   try{
@@ -87,23 +90,26 @@ export function setupNeutronTransport(host:HTMLElement){
    status.textContent='';exportButton.disabled=pending;renderRefinement();
   }catch(error){latest=null;metrics.replaceChildren();renderPlots(plot,[]);renderPlots(checkPlot,[]);checkText.textContent='';list.replaceChildren();status.textContent=error instanceof Error?error.message:String(error);}
  }
+ function refresh(){if(!source||active&&dirty&&(!deferWhenClosed||panel.open))calculate();}
+ function invalidate(){dirty=true;exportButton.disabled=true;refresh();}
  for(const [key,title,unit,min,max,step,value,log]of fields){
   const box=make('div'),caption=make('label'),output=make('output'),input=make('input');box.className='control';
   Object.assign(input,{id:`neutron-transport-${key}`,type:'range',min,max,step,value});caption.htmlFor=input.id;caption.append(make('span',title),output);box.append(caption,input);controls.append(box);
   input.dataset.rangeScale=log?'log10':'linear';input.dataset.unit=unit;
   boxes.set(key,box);reads.set(key,()=>log?10**Number(input.value):Number(input.value));
   const readout=()=>{output.textContent=`${fmt(reads.get(key)!())} ${unit}`.trim();input.setAttribute('aria-valuetext',output.textContent);};
-  input.addEventListener('input',()=>{readout();calculate();});readout();
+  input.addEventListener('input',()=>{readout();invalidate();});readout();
  }
- function setMaterial(){const evaluated=material.value==='endfb-h1';for(const key of ['total','absorption'])boxes.get(key)!.hidden=evaluated;boxes.get('density')!.hidden=!evaluated;calculate();}
+ function setMaterial(){const evaluated=material.value==='endfb-h1';for(const key of ['total','absorption'])boxes.get(key)!.hidden=evaluated;boxes.get('density')!.hidden=!evaluated;invalidate();}
  material.addEventListener('change',setMaterial);
+ panel.addEventListener('toggle',()=>{refreshReferences();refresh();});
  checks.addEventListener('toggle',renderRefinement);
  exportButton.addEventListener('click',()=>{
-  if(!latest||pending)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,...latest},null,2)],{type:'application/json'})),a=make('a');
+  if(dirty||!latest||pending)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,...latest},null,2)],{type:'application/json'})),a=make('a');
   a.href=url;a.download='mass-spinner-neutron-first-flight.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  });
- setMaterial();return {update(value:SourceNeutronState|null){source=value;calculate();},read:()=>latest,setPending(value:boolean){
+ setMaterial();return {update(value:SourceNeutronState|null){source=value?{...value}:null;invalidate();},read:()=>dirty?null:latest,setActive(value:boolean){active=value;refreshReferences();refresh();},setPending(value:boolean){
   pending=Boolean(value);pendingNote.hidden=!pending;pendingNote.textContent='The source calculation is in progress. The display shows the last completed source state.';
-  panel.dataset.pending=String(pending);exportButton.disabled=pending||!latest;
+  panel.dataset.pending=String(pending);exportButton.disabled=pending||dirty||!latest;
  }};
 }

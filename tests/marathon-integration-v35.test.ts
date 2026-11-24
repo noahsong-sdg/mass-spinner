@@ -14,6 +14,8 @@ function fixture(t:any,requestTarget=async(request:any)=>simulateCoupledTarget(r
  const states:any[]=[],sources:any[]=[];const models=setupMarathonModels({onState:state=>states.push(state),onSource:source=>sources.push(source),
   requestTarget});
  const node=(id:string)=>window.document.getElementById(id)! as any;
+ const neutronPanel=window.document.querySelector<HTMLDetailsElement>('.neutron-transport-panel')!;
+ neutronPanel.open=true;neutronPanel.dispatchEvent(new window.Event('toggle'));
  const change=(id:string,value:string|number,event='input')=>{
   node(id).value=String(value);node(id).dispatchEvent(new window.Event(event,{bubbles:true}));
  };

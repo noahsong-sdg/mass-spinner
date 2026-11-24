@@ -1,12 +1,12 @@
 import {DEFAULT_FUSION_BEAM,simulateFusionBeam,type FusionBeamConfig} from './fusion-reactor.js';
 import {renderPlots} from './laboratory.js';
-import {fusionPlaygroundData} from './fusion-playground.js';
+import {createFusionPlaygroundData} from './fusion-playground.js';
 
 const element=<K extends keyof HTMLElementTagNameMap>(tag:K,text?:string)=>{const el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;};
 const format=(value:number|null)=>value===null||!Number.isFinite(value)?'—':value===0?'0':Math.abs(value)<.001||Math.abs(value)>=1e5?value.toExponential(3):Number(value.toPrecision(4)).toString();
 type BeamNumericKey = Exclude<keyof FusionBeamConfig,'stoppingModel'> | 'tritiumSiteFraction';
 export type FusionBeamResult = ReturnType<typeof simulateFusionBeam>;
-export interface FusionLaboratoryOptions {onUpdate?:(result:FusionBeamResult|null)=>void;exposureHost?:HTMLElement}
+export interface FusionLaboratoryOptions {onUpdate?:(result:FusionBeamResult|null)=>void;exposureHost?:HTMLElement;active?:boolean;coalesceInputs?:boolean}
 const byId=(id:string)=>document.getElementById(id)!;
 const fields:[BeamNumericKey,string,string,number,number,number,boolean?][]=[
  ['beamEnergyKeV','D⁺ laboratory energy','keV',20,500,5],
@@ -22,8 +22,9 @@ const fields:[BeamNumericKey,string,string,number,number,number,boolean?][]=[
 ];
 
 /** This independent panel does not reuse the mass separator's hardware or state. */
-export function setupFusionLaboratory({onUpdate=()=>{},exposureHost}:FusionLaboratoryOptions={}){
+export function setupFusionLaboratory({onUpdate=()=>{},exposureHost,active=true,coalesceInputs=false}:FusionLaboratoryOptions={}){
  const reads=new Map<BeamNumericKey,()=>number>(),host=byId('fusion-controls');let latest:FusionBeamResult|null=null;
+ const playgroundData=createFusionPlaygroundData();let dirty=true,scheduled:number|null=null;
  const model=element('select'),modelLabel=element('label','Stopping model');model.id='fusion-stopping-model';modelLabel.htmlFor=model.id;
  for(const [value,label]of [['linear','Linear energy loss (assumption)'],['geant4-bragg','Li/T estimate from Geant4']]){const option=element('option',label);option.value=value;model.append(option);}model.value='linear';
  const assumptions=byId('fusion-assumption-controls');assumptions.append(modelLabel,model);
@@ -34,10 +35,18 @@ export function setupFusionLaboratory({onUpdate=()=>{},exposureHost}:FusionLabor
   if(model.value==='geant4-bragg')c.targetColumnM2=(byId('fusion-target-enabled') as HTMLInputElement).checked?c.materialColumnM2!*c.tritiumSiteFraction!:0;
   delete c.tritiumSiteFraction;return c;
  };
+ const cancelFrame=()=>{if(scheduled!==null){document.defaultView!.cancelAnimationFrame(scheduled);scheduled=null;}};
+ const schedule=()=>{
+  dirty=true;(byId('export-fusion') as HTMLButtonElement).disabled=true;if(!active)return;
+  if(!coalesceInputs){update();return;}
+  byId('fusion-status').textContent='Calculation in progress. The display shows the last completed source state.';
+  if(scheduled===null)scheduled=document.defaultView!.requestAnimationFrame(()=>{scheduled=null;if(active&&dirty)update();});
+ };
  const update=()=>{
+  cancelFrame();dirty=true;(byId('export-fusion') as HTMLButtonElement).disabled=true;if(!active)return;dirty=false;
   try{
    const c=readConfig();latest=simulateFusionBeam(c);
-   const playground=fusionPlaygroundData(latest);
+   const playground=playgroundData(latest);
    renderPlots(byId('fusion-plots'),playground.profiles);
    renderPlots(byId('marathon-energy-plots'),playground.curves);
    byId('fusion-readouts').replaceChildren(...playground.metrics.map(([title,value,unit])=>{
@@ -84,22 +93,22 @@ export function setupFusionLaboratory({onUpdate=()=>{},exposureHost}:FusionLabor
   if(key==='exposureS'&&exposureHost)controls=exposureHost;
   controls.append(box);
   const read=()=>log?10**Number(input.value):Number(input.value);reads.set(key,read);
-  const readout=()=>{output.textContent=`${format(read())} ${unit}`;input.setAttribute('aria-valuetext',output.textContent.trim());};readout();input.addEventListener('input',()=>{readout();update();});
+  const readout=()=>{output.textContent=`${format(read())} ${unit}`;input.setAttribute('aria-valuetext',output.textContent.trim());};readout();input.addEventListener('input',()=>{readout();schedule();});
  }
  const setMode=()=>{
   const material=model.value==='geant4-bragg';
   for(const key of ['targetColumnM2','stoppingFraction'])boxes.get(key as BeamNumericKey)!.hidden=material;
   for(const key of ['materialColumnM2','tritiumSiteFraction'])boxes.get(key as BeamNumericKey)!.hidden=!material;
  };
- model.addEventListener('change',()=>{setMode();update();});setMode();
+ model.addEventListener('change',()=>{setMode();schedule();});setMode();
  for(const [id,key]of [['fusion-beam-enabled','beamCurrentA'],['fusion-target-enabled','targetColumnM2']] as const){
   const toggle=byId(id) as HTMLInputElement,input=byId('fusion-'+key) as HTMLInputElement,read=reads.get(key)!;toggle.checked=true;
   reads.set(key,()=>toggle.checked?read():0);
-  toggle.addEventListener('change',()=>{input.disabled=!toggle.checked;if(key==='targetColumnM2')(byId('fusion-tritiumSiteFraction') as HTMLInputElement).disabled=!toggle.checked;update();});
+  toggle.addEventListener('change',()=>{input.disabled=!toggle.checked;if(key==='targetColumnM2')(byId('fusion-tritiumSiteFraction') as HTMLInputElement).disabled=!toggle.checked;schedule();});
  }
  byId('export-fusion').addEventListener('click',()=>{
-  if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,...latest},null,2)],{type:'application/json'}));
+  if(dirty)update();if(!latest||dirty)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,...latest},null,2)],{type:'application/json'}));
   const a=element('a');a.href=url;a.download='mass-spinner-beam-target.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  });
- update();return {read:readConfig,update};
+ update();return {read:readConfig,update,setActive(value:boolean){active=value;cancelFrame();if(active&&dirty)update();}};
 }
