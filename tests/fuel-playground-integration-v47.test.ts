@@ -17,6 +17,7 @@ const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sou
 const clone=<T>(value:T):T=>structuredClone(value);
 const close=(a:number,b:number,tolerance=1e-9)=>assert.ok(Math.abs(a-b)<=tolerance*Math.max(1,Math.abs(b)),`${a} ≠ ${b}`);
 const flush=async()=>{for(let i=0;i<40;i++)await Promise.resolve();};
+const settle=async()=>{await new Promise(resolve=>setTimeout(resolve,160));await flush();};
 
 /** Only browser display I/O is fake. Geometry, tracers, diagnostic adapters and worker calculations are real. */
 function fixture(t:any,nativeRangePrecision=false,reducedMotion=true){
@@ -359,8 +360,8 @@ test('picked pump stays read-only while its canonical control updates the engine
  v.options.onSelect('pump',pump.userData,pump.name);
  assert.equal(f.ui.nodes.inspect.querySelectorAll('input').length,0);
  const count=f.requests.length,history=f.ui.latest.result.transport.snapshots;
- const input=f.node('fuel-pumpSpeedM3S');input.focus();f.change(input.id,Math.log10(.04));await f.ui.run();
- assert.equal(f.requests.length,count,'Pump references update without a worker solve.');assert.equal(f.ui.latest.result.transport.snapshots,history);close(f.ui.latest.result.config.pumpSpeedM3S,.04);
+ const input=f.node('fuel-pumpSpeedM3S');input.focus();f.change(input.id,Math.log10(.04));
+ assert.equal(f.requests.length,count,'Pump references update without a worker solve.');assert.equal(f.ui.latest.result.transport.snapshots,history);close(f.ui.latest.result.config.pumpSpeedM3S,.04);await settle();
  assert.equal(f.window.document.activeElement,input);assert.ok(f.ui.nodes.inspect.querySelector('[data-control=pumpSpeedM3S]'));
  close(v.built.scene.getObjectByName('Downstream exhaust pump').userData.prescribedSpeedM3S,.04);
 });

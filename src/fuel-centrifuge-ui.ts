@@ -227,7 +227,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   ['Tradeoffs','Stronger drive increases equilibrium mass separation and heat losses; more drag decreases rotation. Higher B decreases resistive heating only at the same torque. Small product cuts can increase purity but decrease recovery; more stages increase internal circulation. At fixed rotation, lower gas temperature increases equilibrium separation. Lithium surfaces must manage vapor transport. Inlet conductance limits centrifugal pumping.'],
  ]){const d=el('details');d.append(el('summary',title),el('p',text));nodes.info.append(d);}
  const assumptions=el('ul');nodes.info.append(assumptions);
- let active=false,dirty=true,updating=false,referenceChanged=false,timer:ReturnType<typeof setTimeout>|undefined,controller:AbortController|undefined,revision=0,latest:AcceptedFuel|null=null,viewer:ApparatusViewer<FuelModel>|null=null,graphics:Graphics|null=null,disposed=false,hasSelection=false;
+ let active=false,dirty=true,updating=false,timer:ReturnType<typeof setTimeout>|undefined,controller:AbortController|undefined,revision=0,latest:AcceptedFuel|null=null,viewer:ApparatusViewer<FuelModel>|null=null,graphics:Graphics|null=null,disposed=false,hasSelection=false;
  let exportController:AbortController|null=null,exportURL:string|null=null,exportTimer:ReturnType<typeof setTimeout>|undefined;
  function cancelExport(){
   exportController?.abort();exportController=null;clearTimeout(exportTimer);
@@ -422,13 +422,12 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   latest={...latest,result:updateFuelReferences(latest.result,next,currentEvents)};
   if(operatingConfig)operatingConfig={...next};
   resume=null;cancelExport();exportButton.disabled=false;exportButton.dataset.calculationState='accepted';delete exportButton.dataset.calculationError;revision++;controller?.abort();sensitivity.update(latest);refreshComparison();refreshAcceptedDescription(latest.result);
-  clearTimeout(timer);referenceChanged=true;const accepted=latest;
-  timer=setTimeout(()=>{referenceChanged=false;void showGeometry(accepted).catch(error=>{if(!disposed&&latest===accepted)setStatus(`3D unavailable: ${message(error)}`);});},120);
+  clearTimeout(timer);const accepted=latest;
+  timer=setTimeout(()=>{void showGeometry(accepted).catch(error=>{if(!disposed&&latest===accepted)setStatus(`3D unavailable: ${message(error)}`);});},120);
   draw();playback();refreshInstrument();return true;
  }
  function changed(event?:Event|{target:HTMLInputElement}){
   if(disposed||updateReferences(event?.target))return;
-  referenceChanged=false;
   const intervention=!activeFailure&&event?.target===controls.get('currentA')!.input&&latest?.result.transport?.operation&&elapsed>0&&['spin','transport'].includes(motionMode.value);
   if(intervention){
    try{currentEvents=fuelCurrentIntervention(latest!.result.transport!.operation!.events,elapsed,controls.get('currentA')!.read());}
@@ -511,7 +510,6 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  async function run(){
   if(disposed)return;
-  if(referenceChanged&&!dirty&&!updating&&latest){referenceChanged=false;clearTimeout(timer);await showGeometry(latest);return;}
   sensitivity.invalidate();
   const invalid=(input:HTMLInputElement)=>input.value===''||!Number.isFinite(Number(input.value))||Number(input.value)<Number(input.min)||Number(input.value)>Number(input.max);
   const activeThermalInputs=thermalEnable.checked?[...thermalControls].filter(([key])=>key!=='wallCapacityJK'||thermalModel.value!=='spatial').map(([,input])=>input):[];

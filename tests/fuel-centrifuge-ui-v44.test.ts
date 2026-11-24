@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import {readFileSync} from 'node:fs';
 import {setupFuelCentrifuge} from '../src/fuel-centrifuge-ui.js';
-import {simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
+import {simulateFuelCentrifuge,type FuelConfig} from '../src/fuel-centrifuge.ts';
+import {isFuelReferenceInput} from '../src/fuel-reference-update.js';
 import {fuelMotionState} from '../src/fuel-motion.js';
 import {simulateFuelTransport} from '../src/fuel-transport.ts';
 
@@ -96,10 +97,10 @@ test('pending, failed and inactive states stop gas playback and accepted results
 test('flow clock preserves pump-speed comparisons and bounds extreme packet sampling rates',async t=>{
  const f=fixture(t,{motion:true});f.ui.setActive(true);await flush();f.change('fuel-motion-mode','flow','change');
  const scale=f.motionCalls.at(-1).scale;
- f.change('fuel-pumpSpeedM3S',Math.log10(.04));await f.ui.run();
+ f.change('fuel-pumpSpeedM3S',Math.log10(.04));await settle();
  assert.ok(Math.abs(f.motionCalls.at(-1).scale/scale-1)<=8*Number.EPSILON,'ordinary pump comparisons preserve the clock to floating-point roundoff');
  const doubled=fuelMotionState(f.motionCalls.at(-1).result,0,'flow').turnoverHz*scale;assert.ok(Math.abs(doubled-.5)<1e-12);
- f.change('fuel-pumpSpeedM3S',0);await f.ui.run();const last=f.motionCalls.at(-1);
+ f.change('fuel-pumpSpeedM3S',0);await settle();const last=f.motionCalls.at(-1);
  assert.ok(last.scale<scale);assert.ok(fuelMotionState(last.result,0,'flow').turnoverHz*last.scale<=.500000000001);
 });
 
@@ -123,7 +124,7 @@ test('changing all declared parameters accepts their actual values without touch
  for(const input of controls){
   const key=input.id.slice(5),old=f.ui.read()[key],next=key==='stages'?6:key==='feedStage'?2:Number(input.min)+(Number(input.max)-Number(input.min))*.4;
   if(input.dataset.integer==='true')f.change(input.id,Math.round(next));else f.change(input.id,next);
-  await f.ui.run();
+  if(isFuelReferenceInput(key as keyof FuelConfig))await settle();else await f.ui.run();
   const requested=f.ui.latest.result.config[key],coordinate=Number(input.value);
   assert.equal(requested,input.dataset.rangeScale==='log10'?10**coordinate:coordinate,key);
   assert.notEqual(requested,old,key);
@@ -184,7 +185,7 @@ test('pump and molecular feed retain independent composition while disabling inc
 
 test('stage count constrains feed stage before dispatch and exact component metadata is inspectable',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();
- f.change('fuel-stages',2);await f.ui.run();
+ f.change('fuel-stages',2);await settle();
  assert.equal(f.node('fuel-feedStage').max,'2');assert.equal(f.ui.latest.result.config.feedStage,2);
  f.viewerOptions.onSelect('source',{purpose:'Hot electron injection',materialBasis:'Perforated tungsten body'},'Perforated cathode');
  assert.equal(f.inspected(),1);assert.equal(f.node('fuel-component').value,'source');
@@ -237,15 +238,15 @@ test('component menu describes only accepted topology and clears a removed lithi
 test('single-stage, closed-inner-cut and pumping configurations remove their absent components',async t=>{
  const f=fixture(t),ids=()=>[...f.node('fuel-component').options].map((option:any)=>option.value);
  f.ui.setActive(true);await flush();f.change('fuel-component','stages','change');
- f.change('fuel-stages',1);await f.ui.run();
+ f.change('fuel-stages',1);await settle();
  assert.equal(ids().includes('stages'),false);assert.notEqual(f.node('fuel-component').value,'stages');
  assert.doesNotMatch(f.ui.nodes.inspect.textContent!,/Metal dividers/);assert.equal(ids().includes('light-outlet'),true);
- f.change('fuel-component','light-outlet','change');f.change('fuel-cutFraction',0);await f.ui.run();
+ f.change('fuel-component','light-outlet','change');f.change('fuel-cutFraction',0);await settle();
  assert.equal(ids().includes('light-outlet'),false);assert.notEqual(f.node('fuel-component').value,'light-outlet');
  assert.equal(ids().includes('heavy-outlet'),true);
- f.change('fuel-cutFraction',.65);f.change('fuel-stages',3);await f.ui.run();
+ f.change('fuel-cutFraction',.65);f.change('fuel-stages',3);await settle();
  assert.equal(ids().includes('light-outlet'),true);assert.equal(ids().includes('stages'),true);
- f.change('fuel-component','stages','change');f.change('fuel-application','pump','change');await f.ui.run();
+ f.change('fuel-component','stages','change');f.change('fuel-application','pump','change');await settle();
  assert.equal(ids().includes('light-outlet'),false);assert.equal(ids().includes('stages'),false);
  assert.equal(ids().includes('heavy-outlet'),true);assert.equal(ids().includes('liner'),true);
  assert.notEqual(f.node('fuel-component').value,'stages');assert.doesNotMatch(f.ui.nodes.inspect.textContent!,/Metal dividers/);

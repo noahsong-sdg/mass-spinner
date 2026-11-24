@@ -68,8 +68,8 @@ test('exposure keeps units, live results and local errors with scientific scope 
  assert.match(text(modelInfo[0]),/lifetime/i);assert.ok(descendants(modelInfo[0]).some(e=>e.tag==='a'));
  assert.equal(descendants(h).find(e=>e.tag==='h3')!.textContent,'Exposure');
  assert.match(get('target-arealHeatCapacityJm2K').attributes['aria-valuetext'],/J m⁻² K⁻¹/);
- const previousPlot=plots(h)[0].children[0],previousDrawing=previousPlot.children[1].children;change('fusion-exposureS',25);
- assert.equal(source.config.exposureS,25);assert.equal(plots(h)[0].children[0],previousPlot);assert.notEqual(previousPlot.children[1].children,previousDrawing);
+ const previousPlot=plots(h)[0].children[0];change('fusion-exposureS',25);
+ assert.equal(source.config.exposureS,25);assert.ok(plots(h)[0].children[0]!==previousPlot,'A new exposure calculation replaces the explicitly cleared chart.');
  assert.equal(status(h).textContent,'');assert.equal(exportButton.disabled,false);
  change('target-coolantK',-274);
  assert.match(status(h).textContent,/positive heat capacity\/absolute temperatures/);

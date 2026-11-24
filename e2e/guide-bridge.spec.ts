@@ -12,6 +12,15 @@ async function reader(page:Page){
  return readerFrame(page);
 }
 
+async function playbackDetails(page:Page){
+ const details=page.locator('.fuel-motion-details');
+ if(!await details.evaluate((node:HTMLDetailsElement)=>node.open))await details.locator('summary').click();
+}
+
+async function visibleClock(page:Page){
+ await expect(page.locator('#fuel-motion-time-label:visible, #fuel-motion-clock:visible').first()).toBeVisible();
+}
+
 test('an action used before the reader script starts cannot nest the simulator',async({page})=>{
  await page.route('**/guide-reader.js',route=>route.abort());
  for(const [route,action,section]of [['/start.html','look','machine'],['/tutorial-06.html','diffusionExperiment','sensitivity']]){
@@ -71,7 +80,7 @@ test('all six tutorials share one simulator and expose a specific observation',a
   await frame.goto(route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
   await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
   if(plot)await expect(page.locator('#fuel-plot')).toHaveValue(plot);
-  await expect(page.locator('#fuel-currentA')).toHaveValue(input);await expect(page.locator('#fuel-durationS')).toHaveValue(duration);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);await expect(page.locator('#fuel-motion-clock')).toBeVisible();expect(context.pages().length).toBe(count);
+  await expect(page.locator('#fuel-currentA')).toHaveValue(input);await expect(page.locator('#fuel-durationS')).toHaveValue(duration);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);await visibleClock(page);expect(context.pages().length).toBe(count);
  }
  await info.attach('shared-tutorial-workspace',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});expect(errors).toEqual([]);
 });
@@ -83,7 +92,7 @@ test('gas view clears unrelated windows and stages field, current, force and gas
  const current=await page.locator('#fuel-currentA').inputValue();
  await frame.locator('[data-guide-action="look"]').click();
  await expect(page.locator('#window-inspect')).toBeHidden({timeout:30_000});await expect(page.locator('#window-guide')).toBeVisible();
- await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('.fuel-motion-legend')).toBeVisible();
+ await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await playbackDetails(page);await expect(page.locator('.fuel-motion-legend')).toBeVisible();
  const cue=page.getByRole('complementary',{name:'What to look for'});
  for(const [label,value]of [['Field','B'],['Current','J'],['Force','force'],['Gas','all']]){
   await cue.getByRole('button',{name:label,exact:true}).click();await expect(page.locator('#fuel-view-drive')).toHaveValue(value);
@@ -133,7 +142,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  }
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- await expect(page.locator('#fuel-motion-clock')).toBeVisible();
+ await visibleClock(page);
  await frame.locator('a[href="#machine"]').click();
  const full=page.getByRole('link',{name:'Reading page'});
  await full.evaluate(link=>link.addEventListener('click',event=>event.preventDefault(),{once:true}));await full.click();await expect(full).toHaveAttribute('href',/^\/start(?:\.html)?#machine$/);

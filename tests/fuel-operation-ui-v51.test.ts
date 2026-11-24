@@ -251,7 +251,7 @@ test('reference edits preserve physical time and drive history without another w
  f.change('fuel-motion-time',.6);
  const accepted=f.ui.latest.result.transport,count=f.requests.length,events=f.ui.captureRun().events;
  for(const [key,value]of [['stages',12],['feedStage',8],['pumpSpeedM3S',-1],['fusionMW',2000],['cutFraction',.4]] as const){
-  f.change(`fuel-${key}`,value);await f.ui.run();
+  f.change(`fuel-${key}`,value);
   assert.equal(f.requests.length,count,key);
   assert.equal(Number(f.node('fuel-motion-time').value),.6,key);
   assert.deepEqual(f.ui.captureRun().events,events,key);
@@ -281,16 +281,17 @@ test('a reference edit restores Export after cancelling a compressed export',asy
  await new Promise(resolve=>setTimeout(resolve,20));assert.equal(downloads,0);assert.equal(f.node('fuel-export').disabled,false);
 });
 
-test('reference refresh updates pump warnings and consumes only the immediate explicit run',async t=>{
+test('reference edits update warnings immediately while explicit runs always submit the solver',async t=>{
  const f=fixture(t);await f.start();f.change('fuel-motion-mode','flow','change');const count=f.requests.length;
- f.change('fuel-application','pump','change');f.change('fuel-pumpSpeedM3S',0);await f.ui.run();
+ f.change('fuel-application','pump','change');f.change('fuel-pumpSpeedM3S',0);
  assert.equal(f.requests.length,count);
  const fast=f.ui.latest.result;
  assert.ok(fast.pumping.turnoverS<fast.mechanics.radialDiffusionTimeS);
  assert.match(f.ui.nodes.render.textContent,/turnover < a²\/D/);
- f.change('fuel-pumpSpeedM3S',-3);await f.ui.run();
+ f.change('fuel-pumpSpeedM3S',-3);
  const slow=f.ui.latest.result;assert.ok(slow.pumping.turnoverS>=slow.mechanics.radialDiffusionTimeS);
  assert.doesNotMatch(f.ui.nodes.render.textContent,/turnover < a²\/D/);
  assert.equal(f.requests.length,count);
- await f.ui.run();assert.equal(f.requests.length,count+1,'An explicit run after the reference update must still submit the solver.');
+ await f.ui.run();assert.equal(f.requests.length,count+1,'An immediate explicit run still submits the solver.');
+ await settle();await f.ui.run();assert.equal(f.requests.length,count+2,'A later explicit run also submits the solver.');
 });
