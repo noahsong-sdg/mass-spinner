@@ -33,31 +33,39 @@ function transportSpeedBound(result:FuelRenderResult){
  for(const sample of result.transport?.checkpoints??result.transport?.snapshots??[])speed=Math.max(speed,Math.abs(sample.ionRadS),Math.abs(sample.neutralRadS));
  return speed;
 }
+function motionClock(result:FuelRenderResult,mode:FuelMotionMode,speedBound?:number){
+ const c=result.config,end=result.samples.at(-1)!;
+ const neutralNumber=c.pressurePa*Math.PI*c.radiusM**2*c.lengthM/(K*c.gasK);
+ const turnoverHz=result.pumping.gasLoadPaM3S/(K*c.gasK*neutralNumber);
+ const coupled=(mode==='spin'||mode==='transport')&&result.transport;
+ const resolvedSpeed=coupled?speedBound??transportSpeedBound(result):Math.max(Math.abs(end.ionRadS),Math.abs(end.neutralRadS));
+ // Both populations use one rotation clock, bounded at 1.8 rad per screen second.
+ const rotationSecondsPerScreenSecond=Math.min(1,1.8/Math.max(resolvedSpeed,TAU*turnoverHz,1.8));
+ return {neutralNumber,turnoverHz,rotationSecondsPerScreenSecond,
+  secondsPerScreenSecond:mode==='flow'?Math.min(1,.25/Math.max(turnoverHz,.25)):rotationSecondsPerScreenSecond};
+}
 /** A display adapter, not a new transport solver. Phases and speeds retain SI units. */
 export function fuelMotionState(result: FuelRenderResult,timeS: number,mode: FuelMotionMode='equilibrium'){
  return motionState(result,timeS,mode);
 }
-function motionState(result:FuelRenderResult,timeS:number,mode:FuelMotionMode,speedBound?:number){
+function motionState(result:FuelRenderResult,timeS:number,mode:FuelMotionMode,speedBound?:number,sample?:ReturnType<typeof sampleFuelTransport>|null){
  const {config:c,mechanics:m}=result,end=result.samples.at(-1)!;
  const args=[m.ii,m.nn,m.gamma,m.drag,m.torque] as const,spin=mode==='spin'||mode==='transport';
- const transport=result.transport,coupled=spin&&transport?sampleFuelTransport(transport,timeS):null;
+ const transport=result.transport,coupled=sample===undefined?(spin&&transport?sampleFuelTransport(transport,timeS):null):sample;
  const speeds=coupled?{ion:coupled.ionRadS,neutral:coupled.neutralRadS}:spin?rotorResponse(...args,timeS):{ion:end.ionRadS,neutral:end.neutralRadS};
  const phases=coupled?{ion:coupled.ionPhaseRad,neutral:coupled.neutralPhaseRad}:spin?rotorPhase(...args,timeS):{ion:end.ionRadS*timeS,neutral:end.neutralRadS*timeS};
  const beta=result.pair.masses.map(mass=>spin?0:mass*U*end.neutralMS**2/(2*K*c.gasK));
- const neutralNumber=c.pressurePa*Math.PI*c.radiusM**2*c.lengthM/(K*c.gasK);
- const turnoverHz=result.pumping.gasLoadPaM3S/(K*c.gasK*neutralNumber);
- let resolvedSpeed=Math.max(Math.abs(end.ionRadS),Math.abs(end.neutralRadS));
- if(coupled)resolvedSpeed=speedBound??transportSpeedBound(result);
- // Both populations use one rotation clock, bounded at 1.8 rad per screen second.
- const rotationSecondsPerScreenSecond=Math.min(1,1.8/Math.max(resolvedSpeed,TAU*turnoverHz,1.8));
- return {speeds,phases,beta,neutralNumber,turnoverHz,rotationSecondsPerScreenSecond,
-  secondsPerScreenSecond:mode==='flow'?Math.min(1,.25/Math.max(turnoverHz,.25)):rotationSecondsPerScreenSecond};
+ return {speeds,phases,beta,...motionClock(result,mode,speedBound)};
 }
 
 /** Weighted bulk samples, not microscopic trajectories or predicted emission. */
 export function createFuelMotion(result: FuelRenderResult){
  // The accepted result is immutable for this renderer's lifetime; standalone calls remain uncached.
  const speedBound=transportSpeedBound(result),stateAt=(timeS:number,mode:FuelMotionMode='equilibrium')=>motionState(result,timeS,mode,speedBound);
+ function frameAt(timeS:number,mode:FuelMotionMode){
+  const sample=(mode==='spin'||mode==='transport')&&result.transport?sampleFuelTransport(result.transport,timeS):null;
+  return {state:motionState(result,timeS,mode,speedBound,sample),sample};
+ }
  const {config:c}=result,R=c.radiusM,L=c.lengthM,group=new THREE.Group(),clouds: FuelCloud[]=[];
  group.name='Gas motion';group.userData.nonPickable=true;
  const sprites=new Map<boolean, THREE.DataTexture>();
@@ -106,7 +114,7 @@ export function createFuelMotion(result: FuelRenderResult){
  }));
  let previousMode: FuelMotionMode='equilibrium';
  function update(timeS: number,mode: FuelMotionMode='equilibrium',secondsPerScreenSecond?: number,rotationSecondsPerScreenSecond?:number){
-  const state=stateAt(timeS,mode);
+  const current=frameAt(timeS,mode),state=current.state;
   if(secondsPerScreenSecond!==undefined)state.secondsPerScreenSecond=secondsPerScreenSecond;
   if(rotationSecondsPerScreenSecond!==undefined)state.rotationSecondsPerScreenSecond=Math.min(state.rotationSecondsPerScreenSecond,rotationSecondsPerScreenSecond);
   // Coupled and throughput views need faster timelines. Compress only their rotation.
@@ -116,18 +124,17 @@ export function createFuelMotion(result: FuelRenderResult){
   // Hidden tracers still supply physical clocks/readouts. Rebuild from the
   // current state when shown; previousMode records the last displayed state.
   if(!group.visible)return state;
-  const coupled=(mode==='spin'||mode==='transport')&&result.transport?sampleFuelTransport(result.transport,timeS):null;
+  const coupled=current.sample;
   const quantile=(species:number,p:number)=>populationQuantile(coupled?.[species?'heavyCDF':'lightCDF'],state.beta[species],p);
   // A trailing arc integrates the accepted phase history, rather than using
   // endpoint speed × exposure during acceleration. Never invent pre-run motion.
   const transient=mode==='spin'||mode==='transport';
   const exposureS=transient?Math.min(timeS,state.secondsPerScreenSecond*.5):state.secondsPerScreenSecond*.5;
-  const before=stateAt(timeS-exposureS,mode).phases;
-  glyphs.update({...state,phases:displayPhases},mode,quantile,{seconds:exposureS,ion:(state.phases.ion-before.ion)*phaseScale,neutral:(state.phases.neutral-before.neutral)*phaseScale});
+  const before=exposureS===0?current:frameAt(timeS-exposureS,mode);
+  glyphs.update({...state,phases:displayPhases},mode,quantile,{seconds:exposureS,ion:(state.phases.ion-before.state.phases.ion)*phaseScale,neutral:(state.phases.neutral-before.state.phases.neutral)*phaseScale});
   const history=mode!=='flow'?Array.from({length:TRAIL_SEGMENTS+1},(_,j)=>{
-   const time=timeS-exposureS*(1-j/TRAIL_SEGMENTS),frame=stateAt(time,mode);
-   const sample=transient&&result.transport?sampleFuelTransport(result.transport,time):null;
-   return {...frame,cdf:[sample?.lightCDF,sample?.heavyCDF]};
+   const frame=j===TRAIL_SEGMENTS||exposureS===0?current:j===0?before:frameAt(timeS-exposureS*(1-j/TRAIL_SEGMENTS),mode);
+   return {...frame.state,cdf:[frame.sample?.lightCDF,frame.sample?.heavyCDF]};
   }):[];
   for(const cloud of clouds){
    const {rotor,points,lines,ion,species,n}=cloud;
@@ -161,7 +168,10 @@ export function createFuelMotion(result: FuelRenderResult){
   }
   previousMode=mode;return state;
  }
- update(0);return {group,update,setSpecies(value: FuelSpecies){glyphs.setSpecies(value);for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.35:.02;}}};
+ update(0);return {group,update,clock(mode:FuelMotionMode='equilibrium'){
+  const {secondsPerScreenSecond,rotationSecondsPerScreenSecond}=motionClock(result,mode,speedBound);
+  return {secondsPerScreenSecond,rotationSecondsPerScreenSecond};
+ },setSpecies(value: FuelSpecies){glyphs.setSpecies(value);for(const cloud of clouds){const selected=value==='all'||cloud.species===(value==='light'?0:1);cloud.points.material.opacity=selected?(cloud.ion?1:.85):.08;cloud.lines.material.opacity=selected?.35:.02;}}};
 }
 
 export type FuelMotion = ReturnType<typeof createFuelMotion>;

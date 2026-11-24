@@ -6,7 +6,7 @@ import type {FuelRenderResult, FuelSpecies, createFuelMotion} from './fuel-motio
 import type {FuelFieldState, FuelFieldSample} from './fuel-field.js';
 import type {FuelConfig} from './fuel-centrifuge.js';
 export type {FuelSpecies} from './fuel-motion.js';
-import {sampleFuelField,validateProfiles} from './fuel-field.js';
+import {createFuelFieldSampler} from './fuel-field.js';
 export {sampleFuelField} from './fuel-field.js';
 
 export type FuelFieldLayer = 'composition' | 'enrichment' | 'density' | 'speed' | 'temperature';
@@ -50,13 +50,13 @@ export function visibleFuelHit(hit: FuelHit){
 export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=>{}}: SceneOptions){
  const c=result.config,R=c.radiusM,L=c.lengthM;
  if(!Number.isFinite(R)||R<=0||!Number.isFinite(L)||L<=0)throw new RangeError('Positive finite gas dimensions required.');
- validateProfiles(result.profiles,R);
  const group=new THREE.Group();group.name='Gas diagnostic slice';group.userData={componentId:'slice',quantitativeOnly:true,purpose:'Axial position changes the display only. The radial model is uniform along z.',materialBasis:'Numerical diagnostic; no physical material'};
  const rings: FieldMesh[]=[],owned: FieldMesh[]=[],originals: ShellClone[]=[],coilCovers: ShellClone[]=[],exploded: ExplodedMesh[]=[];
  const coilMaterials=new Map<THREE.MeshStandardMaterial,THREE.MeshStandardMaterial>();
  const gasField=new THREE.Group();gasField.name='Axially uniform gas field';gasField.userData={componentId:'slice',quantitativeOnly:true,purpose:'The display extends the calculated density section along the uniform axis. It does not predict optical emission.',materialBasis:'Numerical diagnostic; no physical material'};group.add(gasField);
- let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0,sectionOnly=false;
- const peak=Math.max(...result.profiles.map(p=>sampleFuelField(result,p.radiusM).densityM3));
+ let state: FuelFieldState={},layer: FuelFieldLayer='composition',species: FuelSpecies='all',slice=.5,disposed=false,fieldCells=0,sectionOnly=false,fieldDirty=true;
+ let sampleField=createFuelFieldSampler(result);
+ const peak=Math.max(...result.profiles.map(p=>sampleField(p.radiusM).densityM3));
  let domains: Record<FuelFieldLayer,FuelColorDomain>={composition:[0,1],enrichment:[-.01,.01],density:[0,peak],speed:[0,Math.abs(result.samples.at(-1)!.neutralRadS)*R],temperature:[c.gasK,c.gasK]};
  const low=new THREE.Color(COLORS[0]),high=new THREE.Color(COLORS[1]);
  const edge=new THREE.Mesh(new THREE.TorusGeometry(R,R*.004,6,96),new THREE.MeshBasicMaterial({color:0xc3d5cc,transparent:true,opacity:.8,depthWrite:false}));
@@ -97,7 +97,7 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
  const drive=createFuelDrive(c);scene.add(drive.group);
  const cutFaces=createFuelCutFaces(scene,originals,R);
 
- function sampleAt(radiusM: number): FuelDiagnosticSample{return {...sampleFuelField(result,radiusM,state),axialM:slice*L,radiusFraction:radiusM/R,axialUniform:true};}
+ function sampleAt(radiusM: number): FuelDiagnosticSample{return {...sampleField(radiusM),axialM:slice*L,radiusFraction:radiusM/R,axialUniform:true};}
  function rebuildField(cells: number){
   if(cells===fieldCells)return;fieldCells=cells;
   for(const mesh of [...rings,...gasField.children as FieldMesh[]]){mesh.geometry.dispose();mesh.material.dispose();mesh.removeFromParent();}rings.length=0;
@@ -135,51 +135,66 @@ export function createFuelSceneTools({scene,result,onSample=()=>{},onControl=()=
   return low.clone().lerp(high,fraction);
  }
  function repaint(){
+  if(!fieldDirty||!group.visible)return;
   rebuildField(state.lightMass?.length??64);
-  const domain=domains[layer];
-  for(const ring of [...rings,...gasField.children as FieldMesh[]]){
+  const domain=domains[layer],samples=rings.map(ring=>{
    const sample=sampleAt(ring.userData.radiusM as number),value=fieldValue(sample);
-   ring.material.color.copy(fieldColor(value,domain));
-   ring.userData={...ring.userData,...sample,value,layer,unit:LAYERS[layer].unit,purpose:`${sample.scope}. Uniform along z. Colors show calculated values, not optical emission.`};
+   return {...sample,value,layer,unit:LAYERS[layer].unit,purpose:`${sample.scope}. Uniform along z. Colors show calculated values, not optical emission.`};
+  }),colors=samples.map(sample=>fieldColor(sample.value,domain));
+  for(const mesh of [...rings,...gasField.children as FieldMesh[]]){
+   const cell=mesh.userData.cell as number;
+   mesh.material.color.copy(colors[cell]);mesh.userData={...mesh.userData,...samples[cell]};
   }
   group.userData={...group.userData,layer,timeS:state.timeS??result.samples.at(-1)!.timeS,scope:state.scope??(state.lightMass?TRANSIENT:EQUILIBRIUM)};
+  fieldDirty=false;
  }
- function setSlice(fraction: number){slice=bounded(fraction,0,1,'Slice');group.position.z=slice*L;gasField.position.z=-slice*L;repaint();return slice;}
- function setLayer(value: string){if(!isLayer(value))throw new RangeError('Unknown field layer.');layer=value;repaint();return layer;}
- function setSpecies(value: FuelSpecies){if(!['all','light','heavy'].includes(value))throw new RangeError('Unknown species display.');species=value;repaint();}
+ function setSlice(fraction: number){
+  bounded(fraction,0,1,'Slice');if(slice!==fraction){slice=fraction;fieldDirty=true;}
+  group.position.z=slice*L;gasField.position.z=-slice*L;repaint();return slice;
+ }
+ function setLayer(value: string){if(!isLayer(value))throw new RangeError('Unknown field layer.');if(layer!==value){layer=value;fieldDirty=true;}repaint();return layer;}
+ function setSpecies(value: FuelSpecies){if(!['all','light','heavy'].includes(value))throw new RangeError('Unknown species display.');if(species!==value){species=value;fieldDirty=true;}repaint();}
  function setVolumeVisible(value:boolean,section=false){
   gasField.visible=value;
-  if(sectionOnly!==section){sectionOnly=section;fieldCells=0;repaint();}
+  if(sectionOnly!==section){sectionOnly=section;fieldCells=0;fieldDirty=true;}repaint();
  }
  function setDomains(next: FuelColorDomains){
   for(const [key,range] of Object.entries(next)){
    if(!isLayer(key)||!Array.isArray(range)||range.length!==2||!range.every(Number.isFinite)||key!=='enrichment'&&range[0]<0||range[1]<range[0]||key==='composition'&&(range[0]!==0||range[1]!==1)||key==='enrichment'&&(range[0]!==-.01||range[1]!==.01))throw new RangeError('Ordered finite physical color domains required; composition uses [0, 1] and enrichment uses [-0.01, 0.01].');
+   if(domains[key][0]!==range[0]||domains[key][1]!==range[1])fieldDirty=true;
   }
   domains={...domains,...Object.fromEntries(Object.entries(next).map(([k,v])=>[k,[...v]]))};repaint();
  }
  function update(next: FuelFieldState={}){
-  validateProfiles(next.profiles??result.profiles,R);
-  if(next.timeS!==undefined)bounded(next.timeS,0,Number.MAX_VALUE,'Physical time');
-  sampleFuelField(result,0,next);
-  state={...next};repaint();
+  const nextState={...next},nextSampler=createFuelFieldSampler(result,nextState);nextSampler(0);
+  state=nextState;sampleField=nextSampler;fieldDirty=true;repaint();
  }
+ let stagingMatrix: THREE.Matrix4 | undefined;
  function setStaging({cutaway=0,ghost=false,explode=0}: FuelStaging={}){
   bounded(cutaway,0,1,'Cutaway');bounded(explode,0,1,'Explode');
-  const previous=group.userData.staging as FuelStaging|undefined;if(!previous||previous.cutaway!==cutaway||previous.ghost!==ghost||previous.explode!==explode)scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
+  const previous=group.userData.staging as FuelStaging|undefined;
+  const changed=!previous||previous.cutaway!==cutaway||previous.ghost!==ghost||previous.explode!==explode;
   scene.updateMatrixWorld(true);
-  // A planar opening in the illustrative shell, never a new gas boundary.
-  const plane=new THREE.Plane(new THREE.Vector3(0,-1,0),R*(1-2*cutaway)).applyMatrix4(scene.matrixWorld);
-  for(const {clones,original} of originals)for(let i=0;i<clones.length;i++){
-   const material=clones[i],base=Array.isArray(original)?original[i]:original;
-   material.clippingPlanes=cutaway>0?[plane]:base.clippingPlanes;material.clipShadows=cutaway>0||base.clipShadows;
-   material.transparent=ghost||base.transparent;material.opacity=ghost?Math.min(.14,base.opacity):base.opacity;material.depthWrite=ghost?false:base.depthWrite;material.needsUpdate=true;
+  const transformed=!stagingMatrix?.equals(scene.matrixWorld);
+  if(!changed&&!transformed)return;
+  if(changed)scene.userData.shadowRevision=((scene.userData.shadowRevision as number|undefined)??0)+1;
+  stagingMatrix=scene.matrixWorld.clone();
+  const surfaceChanged=!previous||previous.cutaway!==cutaway||previous.ghost!==ghost;
+  if(surfaceChanged||transformed){
+   // A planar opening in the illustrative shell, never a new gas boundary.
+   const plane=new THREE.Plane(new THREE.Vector3(0,-1,0),R*(1-2*cutaway)).applyMatrix4(scene.matrixWorld),updated=new Set<THREE.Material>();
+   const clippingChanged=!previous||((previous.cutaway??0)>0)!==(cutaway>0);
+   for(const {clones,original} of [...originals,...coilCovers])for(let i=0;i<clones.length;i++){
+    const material=clones[i],base=Array.isArray(original)?original[i]:original;
+    if(updated.has(material))continue;updated.add(material);
+    material.clippingPlanes=cutaway>0?[plane]:base.clippingPlanes;material.clipShadows=cutaway>0||base.clipShadows;
+    const shell=originals.some(shell=>shell.clones.includes(material));
+    if(shell){material.transparent=ghost||base.transparent;material.opacity=ghost?Math.min(.14,base.opacity):base.opacity;material.depthWrite=ghost?false:base.depthWrite;}
+    if(clippingChanged||shell&&previous?.ghost!==ghost)material.needsUpdate=true;
+   }
   }
-  for(const {original,clones} of coilCovers)for(let i=0;i<clones.length;i++){
-   const material=clones[i],base=Array.isArray(original)?original[i]:original;
-   material.clippingPlanes=cutaway>0?[plane]:base.clippingPlanes;material.clipShadows=cutaway>0||base.clipShadows;material.needsUpdate=true;
-  }
-  for(const {mesh,position,offset} of exploded)mesh.position.copy(position).addScaledVector(offset,explode);
-  cutFaces.update(cutaway,ghost);
+  if(!previous||previous.explode!==explode)for(const {mesh,position,offset} of exploded)mesh.position.copy(position).addScaledVector(offset,explode);
+  if(surfaceChanged)cutFaces.update(cutaway,ghost);
   group.userData.staging={cutaway,ghost,explode,scope:'Display only. Numerical gas surfaces stay fixed.'};
  }
  function setCut(fraction: number,{commit=false}: {commit?: boolean}={}){

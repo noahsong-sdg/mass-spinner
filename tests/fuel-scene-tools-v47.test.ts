@@ -93,3 +93,41 @@ test('spatial gas temperature and pressure probes preserve the accepted cell sta
  }
  tools.update({lightMass:state.lightMass,heavyMass:state.heavyMass,thermal:{gasK:600}});const lumped=tools.sampleAt(R*.6);assert.equal(lumped.temperatureK,600);close(lumped.pressurePa,lumped.densityM3*1.380649e-23*600);tools.dispose();
 });
+
+test('hidden gas fields defer mesh changes but retain current probes and refresh when shown',()=>{
+ const {tools,result}=fixture(),oldRings=tools.group.children.filter(o=>o.name==='Radial field sample');
+ const oldTime=oldRings[0].userData.timeS;
+ tools.group.visible=false;tools.update({lightMass:[.1,.9],heavyMass:[.9,.1],timeS:.25,neutralRadS:30});
+ tools.setLayer('speed');tools.setSlice(.2);
+ assert.equal(tools.group.children.filter(o=>o.name==='Radial field sample').length,oldRings.length);
+ assert.equal(oldRings[0].userData.timeS,oldTime);
+ assert.equal(tools.sampleAt(result.config.radiusM).timeS,.25);
+ assert.throws(()=>tools.update({lightMass:[1],heavyMass:[1]}),RangeError);
+ assert.equal(tools.sampleAt(result.config.radiusM).timeS,.25);
+ tools.group.visible=true;tools.setVolumeVisible(true);
+ const rings=tools.group.children.filter(o=>o.name==='Radial field sample');assert.equal(rings.length,2);
+ const volume=tools.group.children.find(o=>o.name==='Axially uniform gas field')!;
+ for(const ring of rings){
+  assert.equal(ring.userData.timeS,.25);assert.equal(ring.userData.axialM,result.config.lengthM*.2);
+  for(const mesh of volume.children.filter(o=>o.userData.cell===ring.userData.cell)){
+   assert.equal(mesh.userData.value,ring.userData.value);assert.equal(mesh.userData.radiusM,ring.userData.radiusM);
+  }
+ }
+ tools.dispose();
+});
+
+test('unchanged staging and explosion do not invalidate material programs, while transformed clipping remains correct',()=>{
+ const {tools,scene,shell,coil,result}=fixture();
+ const staging={cutaway:.5,ghost:true,explode:0};tools.setStaging(staging);
+ const shellMaterial=shell.material as THREE.Material,coilMaterial=coil.material as THREE.Material;
+ const versions=[shellMaterial.version,coilMaterial.version],revision=scene.userData.shadowRevision;
+ tools.setStaging(staging);assert.deepEqual([shellMaterial.version,coilMaterial.version],versions);assert.equal(scene.userData.shadowRevision,revision);
+ tools.setStaging({...staging,explode:.5});assert.deepEqual([shellMaterial.version,coilMaterial.version],versions);
+ tools.setStaging({...staging,cutaway:.6});assert.deepEqual([shellMaterial.version,coilMaterial.version],versions);
+ scene.position.y+=2;tools.setStaging({...staging,cutaway:.6});assert.deepEqual([shellMaterial.version,coilMaterial.version],versions);
+ const hidden=scene.localToWorld(new THREE.Vector3(0,result.config.radiusM*.5,.2));
+ assert.equal(tools.visibleHit({object:shell,point:hidden}),false);
+ tools.setStaging({cutaway:0,ghost:false,explode:0});
+ assert.equal(shellMaterial.version,versions[0]+1);assert.equal(coilMaterial.version,versions[1]+1);
+ tools.dispose();
+});

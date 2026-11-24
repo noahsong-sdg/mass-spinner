@@ -81,6 +81,17 @@ test('real Blender GLB has nine SI modules and independently editable engineerin
  for(const turn of turns)assert.deepEqual(turn.geometry.getAttribute('position').array,turns[0].geometry.getAttribute('position').array,'identical turns use object transforms so lossless mesh sharing preserves their detail');
 });
 
+test('small authored parts retain engineering detail within the measured triangle budget',()=>{
+ let triangles=0,washers=0,turns=0;
+ template.scene.traverse(node=>{
+  if(!(node instanceof THREE.Mesh))return;
+  const count=(node.geometry.index?.count??node.geometry.getAttribute('position').count)/3;triangles+=count;
+  if(node.userData.renderName==='Captive washer'){washers++;assert.ok(count<=600,'tiny washers do not need thousands of triangles');}
+  if(node.userData.renderName==='Copper solenoid turn'){turns++;assert.ok(count<=2400,'retain the helical turn without the old excess tessellation');}
+ });
+ assert.equal(washers,64);assert.equal(turns,28);assert.ok(triangles<450_000,`${triangles} instantiated triangles exceed the assembly budget`);
+});
+
 test('the authored pressure shell closes the full circumference and feedthroughs have real cover bores',()=>{
  template.scene.updateMatrixWorld(true);
  const wall=template.scene.getObjectByName('Vessel_pressure_wall')!;
@@ -139,7 +150,25 @@ test('authored assembly follows accepted SI radius and length without stretching
   const after=built.scene.worldToLocal(coil.getWorldPosition(new THREE.Vector3()));close(after.z-before.z,Math.sign(before.z-lengthM/2)*radiusM*.65);
   built.tools.setStaging({explode:0});close(built.scene.worldToLocal(coil.getWorldPosition(new THREE.Vector3())).z,before.z);
  }
- const ids=new Set<unknown>();for(const b of builds){b.scene.traverse((n:any)=>{if(n.isMesh){assert.ok(!ids.has(n.geometry));ids.add(n.geometry);}});b.tools.dispose();release(b.scene);}
+ const ids=new Set<unknown>();for(const b of builds){
+  const owned=new Set<THREE.BufferGeometry>();b.scene.traverse((n:any)=>{if(n.isMesh)owned.add(n.geometry);});
+  for(const geometry of owned){assert.ok(!ids.has(geometry),'separate apparatus instances own separate geometry');ids.add(geometry);}
+  b.tools.dispose();release(b.scene);
+ }
+});
+
+test('authored repeated shapes share owned geometry without sharing the template or another apparatus',()=>{
+ const result=simulateFuelCentrifuge(defaults),a=buildFuelCentrifugeGeometry({config:defaults,result,assembly:template.scene,diagnostics:true}),b=buildFuelCentrifugeGeometry({config:defaults,result,assembly:template.scene,diagnostics:true});
+ const turns=(root:THREE.Object3D)=>{const values:THREE.Mesh[]=[];root.traverse(node=>{if(node instanceof THREE.Mesh&&node.userData.renderName==='Copper solenoid turn')values.push(node);});return values;};
+ const source=turns(template.scene),first=turns(a.scene),second=turns(b.scene);
+ assert.equal(first.length,28);assert.equal(second.length,28);
+ for(const part of first)assert.equal(part.geometry,first[0].geometry);
+ assert.notEqual(first[0].geometry,source[0].geometry);assert.notEqual(first[0].geometry,second[0].geometry);
+ assert.notEqual(first[0].material,source[0].material);assert.notEqual(first[0].material,second[0].material,'each apparatus owns its finish and clipping materials');
+ let disposed=0,templateDisposed=0,comparisonDisposed=0;
+ first[0].geometry.addEventListener('dispose',()=>disposed++);source[0].geometry.addEventListener('dispose',()=>templateDisposed++);second[0].geometry.addEventListener('dispose',()=>comparisonDisposed++);
+ a.tools.dispose();release(a.scene);assert.equal(disposed,1);assert.equal(templateDisposed,0);assert.equal(comparisonDisposed,0);
+ b.tools.dispose();release(b.scene);assert.equal(comparisonDisposed,1);assert.equal(templateDisposed,0);
 });
 
 test('cutaway presentation and drive controls leave accepted physics untouched and dispose overlay resources',()=>{

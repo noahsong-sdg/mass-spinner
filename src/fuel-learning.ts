@@ -1,15 +1,15 @@
 import {radialPDF,radialCDF} from './fuel-centrifuge.js';
-import {sampleFuelField, type FuelFieldResult, type FuelFieldState} from './fuel-field.js';
+import {createFuelFieldSampler, type FuelFieldResult, type FuelFieldState} from './fuel-field.js';
 import type {PlotCurve} from './laboratory.js';
 export type FuelLearningKind = 'temperature' | 'rotation' | 'collection';
 
 /** Shared 3D sampler, preserving the finite-volume jumps rather than smoothing percentages. */
 function profileSamples(result: FuelFieldResult, state: FuelFieldState){
- const R=result.config.radiusM,n=state.lightMass?.length;
+ const R=result.config.radiusM,n=state.lightMass?.length,sampleAt=createFuelFieldSampler(result,state);
  return n?Array.from({length:n},(_,i)=>{
-  const lo=R*Math.sqrt(i/n),hi=R*Math.sqrt((i+1)/n),sample=sampleFuelField(result,(lo+hi)/2,state);
+  const lo=R*Math.sqrt(i/n),hi=R*Math.sqrt((i+1)/n),sample=sampleAt((lo+hi)/2);
   return [{...sample,radiusM:lo},{...sample,radiusM:hi}];
- }).flat():result.profiles.map(p=>sampleFuelField(result,p.radiusM,state));
+ }).flat():result.profiles.map(p=>sampleAt(p.radiusM));
 }
 export function fuelCompositionCurves(result: FuelFieldResult, state: FuelFieldState = {}): PlotCurve[] {
  const R=result.config.radiusM,samples=profileSamples(result,state);

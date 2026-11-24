@@ -41,6 +41,10 @@ export function attachFuelAssembly(scene: THREE.Object3D,source: THREE.Object3D,
  const unused=new Set<THREE.BufferGeometry | THREE.Material | THREE.Texture>();for(const node of detached)for(const resource of resources(node))unused.add(resource);
  for(const resource of unused)if(!retained.has(resource))resource.dispose();
  const parent=scene.getObjectByName('construction')!,scale=config.radiusM/metadata[0].referenceRadiusM;
+ const geometries=new Map<THREE.BufferGeometry,THREE.BufferGeometry>();
+ const ownGeometry=(source:THREE.BufferGeometry)=>{
+  let owned=geometries.get(source);if(!owned){owned=source.clone();geometries.set(source,owned);}return owned;
+ };
  for(const [index,authored] of modules.entries()){
   const node=authored.clone(true),data=metadata[index];
   node.position.set(0,0,data.anchorFraction*config.lengthM);
@@ -51,7 +55,7 @@ export function attachFuelAssembly(scene: THREE.Object3D,source: THREE.Object3D,
    // The bundled authored GLB uses named, single-material meshes (qualified by its asset tests).
    const mesh=child as THREE.Mesh<THREE.BufferGeometry,THREE.Material>;
    const data=mesh.userData as {renderName: string};
-   mesh.name=data.renderName;mesh.geometry=mesh.geometry.clone();mesh.material=mesh.material.clone();mesh.material.side=THREE.DoubleSide;
+   mesh.name=data.renderName;mesh.geometry=ownGeometry(mesh.geometry);mesh.material=mesh.material.clone();mesh.material.side=THREE.DoubleSide;
   }});
   parent.add(node);
  }
@@ -62,7 +66,7 @@ export function attachFuelAssembly(scene: THREE.Object3D,source: THREE.Object3D,
   const context=authoredContext.clone(true),span=config.lengthM+.6,width=Math.max(.9,bed.max.x-bed.min.x+.12);
   context.traverse(child=>{if(child instanceof THREE.Mesh){
    const mesh=child as THREE.Mesh<THREE.BufferGeometry,THREE.Material>;
-   mesh.geometry=mesh.geometry.clone();mesh.material=mesh.material.clone();
+   mesh.geometry=ownGeometry(mesh.geometry);mesh.material=mesh.material.clone();
    child.position.x=child.userData.stationXFraction*width;
    child.position.z=child.userData.stationZFraction*span;
    if(child.userData.stationWidthStretch)child.scale.x=width/.9;

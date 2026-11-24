@@ -109,6 +109,8 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown;
  let preparingGeneration:number|null=null,preparationChanged=false,drawFrame:number|null=null;
  const win=doc.defaultView!;
+ let hoverFrame:number|null=null,hoverEvent:PointerEvent|null=null;
+ function cancelHover(){if(hoverFrame!==null)win.cancelAnimationFrame(hoverFrame);hoverFrame=null;hoverEvent=null;}
  const assemblyBar=doc.createElement('div'),assemblyLabel=doc.createElement('span'),assemble=doc.createElement('button');
  assemblyBar.className='assembly-view';assemblyBar.hidden=true;assemblyLabel.setAttribute('role','status');
  assemble.type='button';assemble.textContent='Assemble';assemblyBar.append(assemblyLabel,assemble);frame.append(assemblyBar);
@@ -173,7 +175,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   callback(dt);render();flushRender();
   if(animation===callback)animationFrame=win.requestAnimationFrame(tick);
  }
- const visibility=()=>{if(doc.hidden){cancelRender();stopFlight();settleAssembly();}setAnimation(animation);if(!doc.hidden)render();};doc.addEventListener('visibilitychange',visibility);
+ const visibility=()=>{if(doc.hidden){cancelHover();cancelRender();stopFlight();settleAssembly();}setAnimation(animation);if(!doc.hidden)render();};doc.addEventListener('visibilitychange',visibility);
  const center=new THREE.Vector3(),modelBounds=new THREE.Box3();let radius=1,representationKey='',loadStatus='reference';
  function reportRepresentation(){
   const acceptedRoot=root===stateLayer.group,representation:ViewerRepresentation={geometry:root?acceptedRoot?'accepted':'reference':'none',
@@ -330,6 +332,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  async function load(next:ViewerAsset,{preserveOwnership=false}:{preserveOwnership?:boolean}={}){
   if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;scaleNote.hidden=true;
+  cancelHover();
   setAnimation(null);cancelRender();
   reactorLayer?.dispose();reactorLayer=null;
   if(next.reactor){reactorLayer=createReactorMotionLayer(frame,refreshReactor);scene.add(reactorLayer.group);}
@@ -363,11 +366,17 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   point.set(2*(event.clientX-bounds.left)/bounds.width-1,1-2*(event.clientY-bounds.top)/bounds.height);
   camera.updateMatrixWorld();root.updateWorldMatrix(true,true);ray.setFromCamera(point,camera);
   ray.params.Points.threshold=2*(camera.position.distanceTo(controls.target)+radius)*Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*4/bounds.height;
-  return ray.intersectObjects(root===stateLayer.group?[root]:[root,stateLayer.group],true).filter(hit=>{
-   if(isLine(hit.object)&&!componentId(hit.object))return false;
-   for(let node:THREE.Object3D|null=hit.object;node;node=node.parent)if(!node.visible||node.userData.nonPickable)return false;
-   return pickFilter(hit)&&screenSpacePointHit(hit,camera,point,bounds);
-  });
+  const candidates:THREE.Object3D[]=[];
+  function collect(node:THREE.Object3D){
+   if(!node.visible||node.userData.nonPickable)return;
+   if(!isLine(node)||componentId(node))candidates.push(node);
+   for(const child of node.children)collect(child);
+  }
+  for(const tree of root===stateLayer.group?[root]:[root,stateLayer.group]){
+   let allowed=true;for(let parent=tree.parent;parent;parent=parent.parent)if(!parent.visible||parent.userData.nonPickable){allowed=false;break;}
+   if(allowed)collect(tree);
+  }
+  return ray.intersectObjects(candidates,false).filter(hit=>pickFilter(hit)&&screenSpacePointHit(hit,camera,point,bounds));
  }
  const handlers: { [K in keyof ViewerEvents]: (event:ViewerEvents[K])=>void }={
   webglcontextrestored:render,
@@ -375,13 +384,15 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   wheel:stopFlight,
   pointermove:event=>{
    if(dragging!==null&&event.pointerId!==dragging)return;
-   const hits=intersections(event);onHover(hits[0]??null);
-   if(dragging!==null){onDrag({phase:'move',ray:ray.ray,hits});render();return;}
+   if(dragging!==null){const hits=intersections(event);onHover(hits[0]??null);onDrag({phase:'move',ray:ray.ray,hits});render();return;}
    if(pointer?.id===event.pointerId&&Math.hypot(event.clientX-pointer.x,event.clientY-pointer.y)>5)pointer=null;
+   hoverEvent=event;
+   hoverFrame??=win.requestAnimationFrame(()=>{hoverFrame=null;const latest=hoverEvent;hoverEvent=null;if(latest&&!disposed&&active&&!doc.hidden)onHover(intersections(latest)[0]??null);});
   },
-  pointercancel:event=>{if(dragging!==null&&event.pointerId===dragging)cancelDrag();pointer=null;},
+  pointercancel:event=>{cancelHover();if(dragging!==null&&event.pointerId===dragging)cancelDrag();pointer=null;},
   lostpointercapture:event=>{if(dragging!==null&&event.pointerId===dragging)cancelDrag();},
   pointerup:event=>{
+   cancelHover();
    if(dragging!==null){if(event.pointerId!==dragging)return;dragging=null;controls.enabled=true;pointer=null;onDrag({phase:'end'});return;}
    const start=pointer;pointer=null;
    if(!root||!start||start.id!==event.pointerId||Math.hypot(event.clientX-start.x,event.clientY-start.y)>5)return;
@@ -408,15 +419,15 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  };
  // Capture handle drags before OrbitControls sees the same pointer event.
  function cancelDrag(){dragging=null;controls.enabled=true;pointer=null;onDrag({phase:'cancel'});render();}
- const dragStart=(event:PointerEvent)=>{if(event.button!==0||event.isPrimary===false||dragging!==null)return;const hits=intersections(event);if(onDrag({phase:'start',ray:ray.ray,hits})){dragging=event.pointerId;controls.enabled=false;canvas.setPointerCapture?.(event.pointerId);}};
+ const dragStart=(event:PointerEvent)=>{if(event.button!==0||event.isPrimary===false||dragging!==null)return;cancelHover();const hits=intersections(event);if(onDrag({phase:'start',ray:ray.ray,hits})){dragging=event.pointerId;controls.enabled=false;canvas.setPointerCapture?.(event.pointerId);}};
  canvas.addEventListener('pointerdown',dragStart,true);
  for(const [name,handler]of Object.entries(handlers))canvas.addEventListener(name,handler as EventListener);
  controls.addEventListener('change',cameraChanged);
  const observer=new ResizeObserver(resize);observer.observe(frame);
  return {canvas,load,select,explode,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,
- updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(!active)cancelRender();if(asset?.reactor)refreshReactor();else if(active)render();},
+  updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(!active){cancelHover();cancelRender();}if(asset?.reactor)refreshReactor();else if(active)render();},
  setPending:value=>{reactorPending=value;if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});refreshReactor();},dispose(){
-  if(disposed)return;disposed=true;stopFlight();clearAssembly();reducedAssemblyMotion?.removeEventListener?.('change',settleAssembly);setAnimation(null);cancelRender();reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
+  if(disposed)return;disposed=true;cancelHover();stopFlight();clearAssembly();reducedAssemblyMotion?.removeEventListener?.('change',settleAssembly);setAnimation(null);cancelRender();reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
   for(const [name,handler]of Object.entries(handlers))canvas.removeEventListener(name,handler as EventListener);
   clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
  }};

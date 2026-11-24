@@ -55,3 +55,33 @@ test('checkpoint history takes precedence over display snapshots for the motion 
  assert.equal(motion.update(0,'spin').secondsPerScreenSecond,1.8/peak.neutralRadS);
  assert.deepEqual(motion.update(0,'spin'),fuelMotionState(accepted,0,'spin'));
 });
+
+test('clock reads do not sample transport or change displayed geometry',t=>{
+ const result=fixture(),motion=createFuelMotion(result);t.after(()=>dispose(motion));
+ const points=motion.group.children.filter(node=>node.userData.tracers).map(node=>node.children[0] as THREE.InstancedMesh);
+ const before=points.map(node=>node.geometry.getAttribute('samplePosition').array.slice());
+ const checkpoints=result.transport.checkpoints;let samples=0;
+ Object.defineProperty(result.transport,'checkpoints',{get(){samples++;return checkpoints;}});
+ for(const mode of ['spin','transport','equilibrium','flow'] as const){
+  const expected=fuelMotionState(result,.137,mode);samples=0;
+  for(let i=0;i<4;i++)assert.deepEqual(motion.clock(mode),{
+   secondsPerScreenSecond:expected.secondsPerScreenSecond,
+   rotationSecondsPerScreenSecond:expected.rotationSecondsPerScreenSecond,
+  });
+  assert.equal(samples,0,'clock lookup must not read transport checkpoints');
+ }
+ points.forEach((node,i)=>assert.deepEqual(node.geometry.getAttribute('samplePosition').array,before[i]));
+});
+
+test('motion shares one conservative sample per distinct trail time and retains rewind state',t=>{
+ const result=fixture(),motion=createFuelMotion(result);t.after(()=>dispose(motion));
+ const checkpoints=result.transport.checkpoints;let samples=0;
+ Object.defineProperty(result.transport,'checkpoints',{get(){samples++;return checkpoints;}});
+ for(const mode of ['spin','transport'] as const)for(const time of [.137,.5,.137,0]){
+  const expected=fuelMotionState(result,time,mode);samples=0;
+  assert.deepEqual(motion.update(time,mode),expected);
+  assert.equal(samples,time===0?1:9,'current, exposure start and trail geometry must share accepted samples');
+ }
+ motion.group.visible=false;samples=0;
+ motion.update(.137,'transport');assert.equal(samples,1,'hidden motion must supply state without building trails');
+});

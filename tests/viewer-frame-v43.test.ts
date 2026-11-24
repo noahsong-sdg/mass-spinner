@@ -84,6 +84,26 @@ test('bulk tracers cannot steal hardware inspection clicks',async t=>{
  const points=new THREE.Points(geometry,new THREE.PointsMaterial({size:8}));points.userData.componentId='motion';overlay.add(points);h.reference.add(overlay);
  h.click(500,300);assert.equal(h.selected.at(-1),'vessel');
 });
+test('picking prunes hidden and excluded branches before invoking their raycasts',async t=>{
+ const h=await fixture(t),hidden=new THREE.Group(),excluded=new THREE.Group(),line=new THREE.Line();
+ hidden.visible=false;excluded.userData.nonPickable=true;
+ const meshes=[new THREE.Mesh(),new THREE.Mesh()];hidden.add(meshes[0]);excluded.add(meshes[1]);
+ let calls=0;for(const node of [...meshes,line])node.raycast=()=>{calls++;};
+ h.reference.add(hidden,excluded,line);h.click(500,300);assert.equal(calls,0);assert.equal(h.selected.at(-1),'vessel');
+ hidden.visible=true;delete excluded.userData.nonPickable;h.click(500,300);assert.ok(calls>0,'visibility and exclusion changes take effect without a model reload');
+});
+test('idle hover samples the latest pointer once per frame and cancels on model replacement or disposal',async t=>{
+ const hover:unknown[]=[],h=await fixture(t,{onHover:(hit:unknown)=>hover.push(hit)}),body=h.reference.children[0];
+ let raycasts=0;const original=body.raycast;body.raycast=function(ray,hits){raycasts++;original.call(this,ray,hits);};
+ function move(x:number){const event=new h.dom.window.MouseEvent('pointermove',{clientX:x,clientY:300});Object.defineProperty(event,'pointerId',{value:1});h.viewer.canvas.dispatchEvent(event);}
+ for(let x=450;x<=500;x++)move(x);
+ move(100);
+ assert.equal(raycasts,0);assert.equal(hover.length,0);assert.equal(h.frames.size,1);
+ h.step(16);assert.equal(raycasts,1);assert.deepEqual(hover,[null],'only the latest pointer position is inspected');
+ move(500);h.step(32);assert.equal(raycasts,2);assert.ok(hover[1]);
+ move(500);await h.viewer.load({model:'replacement.glb'});h.step(48);assert.equal(hover.length,2,'old hover must not inspect replacement geometry');
+ move(500);h.viewer.dispose();assert.equal(h.frames.size,0);h.step(64);assert.equal(hover.length,2);
+});
 function projectedAxis(camera:THREE.Camera,a:THREE.Vector3,b:THREE.Vector3){return b.clone().project(camera).sub(a.clone().project(camera));}
 test('captured component drag belongs to one pointer and Escape/cancel/lost capture never commit',async t=>{
  const events:string[]=[],h=await fixture(t,{onDrag:({phase}:any)=>{events.push(phase);return phase==='start';}});
