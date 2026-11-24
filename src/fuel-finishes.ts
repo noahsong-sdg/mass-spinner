@@ -1,8 +1,24 @@
 import * as THREE from 'three';
 
+function hasUsableFinishUV(geometry:THREE.BufferGeometry){
+ const uv=geometry.getAttribute('uv'),position=geometry.getAttribute('position'),index=geometry.getIndex();
+ if(!uv||uv.count!==position.count)return false;
+ for(let i=0;i<uv.count;i++)if(!Number.isFinite(uv.getX(i))||!Number.isFinite(uv.getY(i)))return false;
+ const ab=new THREE.Vector3(),ac=new THREE.Vector3();
+ for(let i=0;i<(index?.count??position.count);i+=3){
+  const a=index?index.getX(i):i,b=index?index.getX(i+1):i+1,c=index?index.getX(i+2):i+2;
+  const area=(uv.getX(b)-uv.getX(a))*(uv.getY(c)-uv.getY(a))-(uv.getY(b)-uv.getY(a))*(uv.getX(c)-uv.getX(a));
+  if(area!==0)continue;
+  ab.set(position.getX(b)-position.getX(a),position.getY(b)-position.getY(a),position.getZ(b)-position.getZ(a));
+  ac.set(position.getX(c)-position.getX(a),position.getY(c)-position.getY(a),position.getZ(c)-position.getZ(a));
+  if(ab.cross(ac).lengthSq()>0)return false;
+ }
+ return true;
+}
+
 /** Deterministic optical microfinish, never a temperature, erosion or alloy prediction. */
 export function finishFuelHardware(scene: THREE.Object3D){
- const finishes=new Map<string,THREE.MeshPhysicalMaterial>(),replaced=new Set<THREE.Material>();
+ const finishes=new Map<string,THREE.MeshPhysicalMaterial>(),replaced=new Set<THREE.Material>(),prepared=new Set<THREE.BufferGeometry>();
  scene.traverse(mesh=>{
   if(!(mesh instanceof THREE.Mesh))return;
   const hardware=mesh as THREE.Mesh<THREE.BufferGeometry,THREE.Material|THREE.Material[]>;
@@ -11,7 +27,8 @@ export function finishFuelHardware(scene: THREE.Object3D){
   const original=hardware.material;if(Array.isArray(original)||!(original instanceof THREE.MeshStandardMaterial))return;
   const name=original.name.toLowerCase(),kind=name.includes('copper')?'copper':name.includes('alumina')?'ceramic':name.includes('stainless')?'steel':null;
   if(!kind)return;
-  if(!hardware.geometry.getAttribute('uv')){
+  // Normal maps and anisotropic reflections need a nonzero UV area on real triangles.
+  if(!prepared.has(hardware.geometry)&&!hasUsableFinishUV(hardware.geometry)){
    hardware.geometry.computeBoundingBox();const box=hardware.geometry.boundingBox!,size=box.getSize(new THREE.Vector3()),p=hardware.geometry.getAttribute('position'),n=hardware.geometry.getAttribute('normal'),uv=[];
    for(let i=0;i<p.count;i++){
     const flat=Math.abs(n.getZ(i))>.8;
@@ -19,6 +36,7 @@ export function finishFuelHardware(scene: THREE.Object3D){
    }
    hardware.geometry.setAttribute('uv',new THREE.Float32BufferAttribute(uv,2));
   }
+  prepared.add(hardware.geometry);
   if(!finishes.has(name)){
    const material=new THREE.MeshPhysicalMaterial();THREE.MeshStandardMaterial.prototype.copy.call(material,original);
    const data=new Uint8Array(128*64*4),normal=new Uint8Array(data.length);
