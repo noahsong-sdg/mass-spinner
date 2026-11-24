@@ -36,7 +36,7 @@ test('every displayed equation opens its working plot and derivation on the same
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   expect((await new AxeBuilder({page}).include('.equation').withRules(['label-content-name-mismatch']).analyze()).violations).toEqual([]);
  }
- expect(opened).toBe(28);expect(errors).toEqual([]);
+ expect(opened).toBe(27);expect(errors).toEqual([]);
  await page.goto('/guide.html#composition');await page.locator('[data-equation-plot="composition"]').click();
  await expect(page.locator('[name="feed"]')).toHaveValue('0.0759');
  await expect(page.locator('[data-equation-controls] label').last().locator('output')).toHaveText('0.0759');

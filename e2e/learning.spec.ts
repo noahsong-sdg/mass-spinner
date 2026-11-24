@@ -172,6 +172,7 @@ test('a standalone tutorial enters one workspace and keeps accepted inputs acros
  await expect(page.locator('#window-controls')).not.toBeVisible();let navigations=0;
  page.on('framenavigated',frame=>{if(frame===page.mainFrame())navigations++;});
  await reader.goto('/guide.html#energy');
+ await reader.getByRole('link',{name:'Tutorial 3: heating and cooling',exact:true}).click();
  await reader.locator('[data-guide-action="work"]').click();
  await expect(page.locator('#window-plots')).toBeVisible();
  await expect(page.locator('#fuel-plot')).toHaveValue('heat');

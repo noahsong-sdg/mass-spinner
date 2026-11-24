@@ -162,6 +162,7 @@ test('standalone beam entry and advanced navigation keep the reader with the cor
  await page.getByText('Advanced',{exact:true}).click();await page.getByRole('button',{name:'Models',exact:true}).click();
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  const frame=await readerFrame(page);await frame.goto('/guide.html');
+ await frame.getByRole('link',{name:'Tutorial 1',exact:true}).click();
  await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true})).toBeFocused();
 });
