@@ -11,7 +11,8 @@ DIRECTORIES = ('src/', 'scripts/', 'tests/', 'e2e/', 'schemas/', 'web-assets/',
                'assets/', 'blender/', 'ci/', '.github/', 'docs/', 'security/')
 ROOT_FILES = ('package.json', 'package-lock.json', 'vite.config.mjs', 'eslint.config.mjs',
               'playwright.config.ts', 'wrangler.jsonc', 'index.html', 'laurelin.html',
-              '.node-version', '.gitignore', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'README.md')
+              '.node-version', '.gitignore', 'LICENSE', 'THIRD_PARTY_NOTICES.md', 'README.md',
+              'LAURELIN-MODEL.md')
 SCIENCE = (
     'scientific/electron-applicability/', 'scientific/equilibrium-composition/oracle.py',
     'scientific/experimental-v64/metrics.ts', 'scientific/experimental-v64/data/markers-corrected.json',

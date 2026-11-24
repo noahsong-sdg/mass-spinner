@@ -27,7 +27,7 @@ test('the first session connects current, equilibrium, heat and collection in on
  await reader.locator('[data-guide-action="heatExperiment"]').click();
  await expect(page.locator('.guide-experiment')).toContainText('pin A');
  await page.locator('#fuel-motion-time').press('End');
- await reader.locator('[data-guide-action="pin"]').click();
+ await reader.locator('[aria-labelledby="heat"] [data-guide-action="pin"]').click();
  await reader.locator('[data-guide-action="heatExperiment"]').click();
  await page.locator('#fuel-thermal-enabled').check();await accepted(page);
  await page.locator('#fuel-motion-time').press('End');

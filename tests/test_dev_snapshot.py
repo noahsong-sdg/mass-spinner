@@ -40,6 +40,7 @@ class DevSnapshotTest(unittest.TestCase):
     def test_working_inputs_preserve_real_revision_without_copying_history(self):
         self.write('src/model.ts', 'export const n=2;\n')
         self.write('tests/new.test.ts', 'new regression\n')
+        self.write('LAURELIN-MODEL.md', 'required by the Laurelin UI import\n')
         self.write('src/.env.local', 'credential')
         self.write('docs/private.key', 'credential')
         self.write('docs/.ssh/config', 'credential')
@@ -47,6 +48,7 @@ class DevSnapshotTest(unittest.TestCase):
         self.assertEqual(result['sourceRevision'], self.git('rev-parse', 'HEAD'))
         self.assertEqual((self.destination / 'src/model.ts').read_text(), 'export const n=2;\n')
         self.assertTrue((self.destination / 'tests/new.test.ts').exists())
+        self.assertEqual((self.destination / 'LAURELIN-MODEL.md').read_text(), 'required by the Laurelin UI import\n')
         for name in ('.git', 'scientific/old-campaign', 'src/.env.local', 'docs/private.key', 'docs/.ssh'):
             self.assertFalse((self.destination / name).exists())
         self.assertEqual((self.root / 'scientific/old-campaign/unique.txt').read_text(), 'irreplaceable evidence\n')
