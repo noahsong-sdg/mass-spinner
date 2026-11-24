@@ -23,7 +23,7 @@ function fixture(t:any,options:any={}){
   {id:'light-outlet',name:'Inner product outlet',purpose:'Extract inner stream',material:'Metal duct',basis:'Conditional enrichment topology'},
   {id:'heavy-outlet',name:'Outer outlet',purpose:'Extract outer stream',material:'Metal duct',basis:'Common outer outlet'},
   {id:'stages',name:'Cascade partitions',purpose:'Route interstage streams',material:'Metal dividers',basis:'Conditional cascade topology'}],
-  buildFuelCentrifugeGeometry:(value:any)=>{built.push(value);return {scene:{name:'verified fixture geometry'},motion:options.motion?{update:(time:number,mode:string,scale?:number)=>{motionCalls.push({time,mode,scale,result:value.result});return {...fuelMotionState(value.result,time,mode),...(scale===undefined?{}:{secondsPerScreenSecond:scale})};}}:undefined};}};
+  buildFuelCentrifugeGeometry:(value:any)=>{built.push(value);return {scene:{name:'verified fixture geometry'},motion:options.motion?{clock:(mode:string)=>fuelMotionState(value.result,0,mode),update:(time:number,mode:string,scale?:number)=>{motionCalls.push({time,mode,scale,result:value.result});return {...fuelMotionState(value.result,time,mode),...(scale===undefined?{}:{secondsPerScreenSecond:scale})};}}:undefined};}};
  const graphics=[{createApparatusViewer:(_frame:any,config:any)=>{
   viewerOptions=config;return {load:async(asset:any)=>{animation=null;loaded.push(asset);await config.loader.loadAsync(asset.model);},setAnimation(fn:any){animation=fn;},refresh(){},select:(id:string)=>selected.push(id),reset:()=>resets++,dispose:()=>disposed++};
  }},geometry];
@@ -72,12 +72,13 @@ test('dimension labels follow accepted chamber inputs and disclose unmeasured Ma
 test('gas playback pauses, seeks exact physical time, respects reduced motion and never recalculates physics for display controls',async t=>{
  const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
  assert.equal(f.animation,null);assert.equal(f.node('fuel-motion-play').textContent,'Play');assert.equal(f.ui.nodes.render.querySelector('.fuel-motion')!.hasAttribute('hidden'),false);
- f.node('fuel-motion-play').click();assert.equal(typeof f.animation,'function');f.animation(.5);
+ f.node('fuel-motion-play').click();assert.equal(typeof f.animation,'function');const calls=f.motionCalls.length;f.animation(.5);
+ assert.equal(f.motionCalls.length,calls+1,'One playback tick must update geometry once; clock reads are separate.');
  assert.ok(f.motionCalls.at(-1).time>0);assert.equal(f.motionCalls.at(-1).mode,'transport');assert.match(f.node('fuel-motion-clock').textContent,/ms.*ions.*gas.*m\/s/);
  const before=f.motionCalls.at(-1).time;f.node('fuel-motion-play').click();assert.equal(f.animation,null);assert.equal(f.motionCalls.at(-1).time,before);
  f.change('fuel-motion-mode','spin','change');assert.equal(f.node('fuel-motion-time').hidden,false);
- f.change('fuel-motion-time',.3);assert.equal(f.motionCalls.at(-1).time,.3);assert.equal(f.motionCalls.at(-1).mode,'spin');assert.equal(f.animation,null);
- f.change('fuel-motion-mode','flow','change');assert.equal(f.node('fuel-motion-time').hidden,true);assert.equal(f.motionCalls.at(-1).mode,'flow');assert.match(f.node('fuel-motion-clock').textContent,/^Reference Q [\d.]+ Pa·m³\/s · 1 s screen =.*ions.*gas.*m\/s/);
+ f.change('fuel-motion-time',.3);assert.equal(f.motionCalls.at(-1).time,.3);assert.equal(f.motionCalls.at(-1).mode,'spin');assert.equal(f.animation,null);assert.equal(f.node('fuel-motion-time-label').textContent,'0.3 s');
+ f.change('fuel-motion-mode','flow','change');assert.equal(f.node('fuel-motion-time').hidden,true);assert.equal(f.motionCalls.at(-1).mode,'flow');assert.equal(f.node('fuel-motion-time-label').textContent,'Reference');assert.match(f.node('fuel-motion-clock').textContent,/^Reference Q [\d.]+ Pa·m³\/s · 1 s screen =.*ions.*gas.*m\/s/);
  f.node('fuel-motion-restart').click();assert.equal(f.motionCalls.at(-1).time,0);
  f.node('fuel-motion-play').click();f.reduce();assert.equal(f.animation,null);assert.equal(f.requests.length,1);
 });
@@ -115,7 +116,7 @@ test('centrifuge stays idle until activated and physical logarithmic coordinates
  assert.equal(f.ui.nodes.plots.querySelectorAll('svg').length,1);
 });
 
-test('changing all declared parameters dispatches their actual values without touching beam-target state',async t=>{
+test('changing all declared parameters accepts their actual values without touching beam-target state',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();
  const controls=[...f.ui.nodes.controls.querySelectorAll('input[type=range]')] as HTMLInputElement[];
  assert.equal(controls.length,24);
@@ -123,7 +124,7 @@ test('changing all declared parameters dispatches their actual values without to
   const key=input.id.slice(5),old=f.ui.read()[key],next=key==='stages'?6:key==='feedStage'?2:Number(input.min)+(Number(input.max)-Number(input.min))*.4;
   if(input.dataset.integer==='true')f.change(input.id,Math.round(next));else f.change(input.id,next);
   await f.ui.run();
-  const requested=f.requests.at(-1).record.config[key],coordinate=Number(input.value);
+  const requested=f.ui.latest.result.config[key],coordinate=Number(input.value);
   assert.equal(requested,input.dataset.rangeScale==='log10'?10**coordinate:coordinate,key);
   assert.notEqual(requested,old,key);
   assert.ok(f.ui.latest,`${key}: ${f.ui.nodes.render.textContent}`);
@@ -252,14 +253,14 @@ test('single-stage, closed-inner-cut and pumping configurations remove their abs
  assert.equal(f.node('fuel-component').value,'heavy-outlet');assert.match(f.ui.nodes.inspect.textContent!,/Common outer outlet/);
 });
 
-test('automatically selected plot and explanation remain coherent while a new application is pending',async t=>{
+test('application reference changes select a coherent plot without discarding the physical run',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();const accepted=f.ui.latest;
  f.change('fuel-plot','cascade','change');assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/inner fraction moves to the next stage/);
  f.change('fuel-application','pump','change');
- assert.equal(f.ui.latest,accepted);assert.equal(f.node('fuel-plot').value,'pump');
+ assert.equal(f.ui.latest.result.config.application,'pump');assert.equal(f.ui.latest.result.transport.snapshots,accepted.result.transport.snapshots);assert.equal(f.node('fuel-plot').value,'pump');
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/One outer outlet/);
  assert.match(f.ui.nodes.plots.querySelector('svg')!.getAttribute('aria-label')!,/Partial pressure/);
- assert.match(f.ui.nodes.render.textContent!,/previous accepted state/);
+ assert.equal(f.node('fuel-export').disabled,false);
 });
 
 test('new settings disable stale exports and superseded responses cannot overwrite current physics or meshes',async t=>{
@@ -340,4 +341,32 @@ test('the beginner guide explains every actual gas-view and plot menu option wit
  assert.match(reference,/This differs from constant-current operation/);
  assert.match(reference,/The two species have the same local temperature/);
  assert.equal(f.requests.length,0);
+});
+
+
+test('Composition retains real keyboard focus across probe changes',async t=>{
+ const f=fixture(t);f.ui.setActive(true);await flush();
+ f.change('fuel-plot','composition','change');
+ const svg=f.ui.nodes.plots.querySelector<SVGSVGElement>('svg')!;
+ svg.focus();assert.equal(f.window.document.activeElement,svg);
+ for(const key of ['Home','ArrowRight','ArrowRight']){
+  svg.dispatchEvent(new f.window.KeyboardEvent('keydown',{key,bubbles:true,cancelable:true}));
+  assert.equal(f.window.document.activeElement,svg);
+  assert.equal(f.ui.nodes.plots.querySelector('svg'),svg);
+ }
+ assert.ok(Number(f.node('fuel-composition-readout').dataset.radiusM)>0);
+});
+
+test('closed plots defer radial redraws and open at the current physical time',async t=>{
+ const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
+ f.change('fuel-plot','composition','change');
+ const parent=f.window.document.createElement('section');f.window.document.body.append(parent);parent.append(f.ui.nodes.plots);
+ const svg=f.ui.nodes.plots.querySelector('svg')!,before=svg.innerHTML;
+ parent.hidden=true;f.change('fuel-motion-time',.5);
+ assert.equal(svg.innerHTML,before);
+ assert.equal(f.ui.nodes.plots.querySelector('svg'),svg);
+ parent.hidden=false;parent.dispatchEvent(new f.window.Event('mass-spinner:panel-visibility',{bubbles:true}));
+ assert.equal(f.ui.nodes.plots.querySelector('svg'),svg);
+ assert.equal(Number(f.node('fuel-composition-readout').dataset.timeS),.5);
+ assert.notEqual(svg.innerHTML,before);
 });

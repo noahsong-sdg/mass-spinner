@@ -137,38 +137,35 @@ test('guided experiments use the real accepted plots, timeline and probes withou
  const opened:string[]=[],focused:any[]=[];
  const guide=setupPlaygroundGuide({document:f.window.document,host,open:key=>opened.push(key),close(){},focusRelated:(...args)=>focused.push(args)});
  const before=JSON.stringify(f.ui.read()),requests=f.requests.length;
- const action=(step:number,label:string)=>{
-  const choice=f.node('guide-step');choice.value=String(step);choice.dispatchEvent(new f.window.Event('change'));
-  const button=[...host.querySelectorAll<HTMLButtonElement>('.guide-actions button')].find(b=>b.textContent===label);assert.ok(button,label);button.click();
- };
+ const action=(key:string)=>guide.launch(key);
  guide.launch('spin');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');
  assert.equal(f.node('fuel-motion-mode').value,'spin','use the same accepted run with resolved slow-motion rotation');
- action(1,'Show end-of-run speeds');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
+ action('endSpin');assert.equal(f.node('fuel-plot').value,'spin');assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
  assert.equal(f.node('fuel-view-representation').value,'tracers');assert.equal(f.node('fuel-view-drive').value,'off');
  assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
- action(2,'Show end-of-run composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
+ action('composition');assert.equal(f.node('fuel-plot').value,'composition');assert.equal(f.node('fuel-motion-time').value,f.node('fuel-motion-time').max);
  assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'false');
- action(2,'Probe axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
- action(2,'Probe wall');close(Number(f.node('fuel-composition-readout').dataset.radiusM),f.ui.latest.result.config.radiusM);
- for(const [label,key]of [['Compare 2× temperature','temperature'],['Compare 2× rotation','rotation']]){
-  action(3,label);assert.equal(f.node(`fuel-compare-${key}`).getAttribute('aria-pressed'),'true');
+ action('axis');assert.equal(f.node('fuel-composition-readout').dataset.radiusM,'0');
+ action('wall');close(Number(f.node('fuel-composition-readout').dataset.radiusM),f.ui.latest.result.config.radiusM);
+ for(const key of ['temperature','rotation']){
+  action(key);assert.equal(f.node(`fuel-compare-${key}`).getAttribute('aria-pressed'),'true');
   assert.equal(f.node('fuel-learning-comparisons').open,true,'the computed comparison must be visible, not hidden in a closed disclosure');
   assert.match(f.node('fuel-learning-comparisons').textContent,/Isothermal equilibrium references/);
  }
  guide.launch('work');assert.equal(f.node('fuel-plot').value,'heat');
  assert.equal(f.node('fuel-learning-comparisons').open,false,'a new guided plot must not leave an unrelated comparison in front');
- action(4,'Open heat experiment');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
+ action('heatExperiment');assert.deepEqual(focused.at(-1),['controls','#fuel-thermal-enabled']);assert.equal(f.node('fuel-thermal-enabled').checked,false);
  assert.equal(f.node('fuel-plot').value,'thermal');
  const time=f.node('fuel-motion-time').value;
- action(4,'Pin A');assert.equal(opened.at(-1),'view');
- action(4,'Show temperature');assert.equal(f.node('fuel-plot').value,'thermal');
- action(4,'Compare composition');assert.equal(f.node('fuel-plot').value,'composition');
+ action('pin');assert.equal(opened.at(-1),'view');
+ action('thermalPlot');assert.equal(f.node('fuel-plot').value,'thermal');
+ action('compositionPlot');assert.equal(f.node('fuel-plot').value,'composition');
  assert.equal(f.node('fuel-motion-time').value,time,'heating comparisons keep the selected physical time');
- action(5,'Open collection experiment');assert.equal(f.node('fuel-plot').value,'cut');
- action(6,'Open controls');assert.deepEqual(focused.at(-1),['controls',null]);
+ action('collectionExperiment');assert.equal(f.node('fuel-plot').value,'cut');
+ action('controls');assert.deepEqual(focused.at(-1),['controls',null]);
  assert.equal(JSON.stringify(f.ui.read()),before);assert.equal(f.requests.length,requests,'guidance must never rerun or replace the accepted simulation');
  assert.ok(opened.includes('plots'));
- f.change('fuel-application','pump','change');await f.ui.run();action(5,'Open collection experiment');
+ f.change('fuel-application','pump','change');await f.ui.run();action('collectionExperiment');
  assert.match(f.node('guide-status').textContent,/select Isotope separation/);assert.notEqual(f.node('fuel-plot').value,'cut');
 });
 
@@ -361,8 +358,9 @@ test('picked pump stays read-only while its canonical control updates the engine
  const f=fixture(t);await f.start();const v=f.viewers[0],pump=v.built.scene.getObjectByName('Downstream exhaust pump');assert.ok(pump);
  v.options.onSelect('pump',pump.userData,pump.name);
  assert.equal(f.ui.nodes.inspect.querySelectorAll('input').length,0);
+ const count=f.requests.length,history=f.ui.latest.result.transport.snapshots;
  const input=f.node('fuel-pumpSpeedM3S');input.focus();f.change(input.id,Math.log10(.04));await f.ui.run();
- close(f.requests.at(-1).record.config.pumpSpeedM3S,.04);close(f.ui.latest.result.config.pumpSpeedM3S,.04);
+ assert.equal(f.requests.length,count,'Pump references update without a worker solve.');assert.equal(f.ui.latest.result.transport.snapshots,history);close(f.ui.latest.result.config.pumpSpeedM3S,.04);
  assert.equal(f.window.document.activeElement,input);assert.ok(f.ui.nodes.inspect.querySelector('[data-control=pumpSpeedM3S]'));
  close(v.built.scene.getObjectByName('Downstream exhaust pump').userData.prescribedSpeedM3S,.04);
 });

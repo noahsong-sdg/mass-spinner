@@ -1,8 +1,15 @@
 /** Move presentation controls without intercepting inputs or changing simulation state. */
-export function floatingPlayback(panel:HTMLElement){
+export function floatingPlayback(panel:HTMLElement,{details=[]}:{details?:readonly HTMLElement[]}={}){
  const doc=panel.ownerDocument,win=doc.defaultView!,parent=panel.parentElement!;
  const grip=doc.createElement('button');grip.type='button';grip.className='fuel-motion-grip';grip.textContent='⠿';
  grip.setAttribute('aria-label','Move playback panel');grip.title='Drag the panel or use the arrow keys. To reset its position, press Home or double-click.';panel.prepend(grip);
+ const disclosure=details.length?doc.createElement('details'):null;
+ if(disclosure){
+  const summary=doc.createElement('summary'),body=doc.createElement('div');
+  disclosure.className='fuel-motion-details';summary.textContent='Details';summary.setAttribute('aria-label','Playback details');body.className='fuel-motion-details-body';
+  panel.insertBefore(disclosure,details[0]);body.append(...details);disclosure.append(summary,body);
+ }
+ let compact:boolean|undefined;
  const key='mass-spinner-playback-v1';
  type Position={x:number;y:number};
  type Drag={id:number;x:number;y:number;left:number;top:number};
@@ -18,7 +25,7 @@ export function floatingPlayback(panel:HTMLElement){
  }
  function reservePlayback(){
   let inset=0;
-  const mobile=win.matchMedia?.('(max-width:600px)').matches??win.innerWidth<=600;
+  const mobile=parent.getBoundingClientRect().width<=520||(win.matchMedia?.('(max-width:600px)').matches??win.innerWidth<=600);
   if(mobile&&!position&&!panel.hidden&&!parent.classList.contains('fuel-comparing')){
    const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect();
    // Reserve the entire bottom footprint, including the dock below the panel.
@@ -27,6 +34,17 @@ export function floatingPlayback(panel:HTMLElement){
   const value=`${inset}px`;if(parent.style.getPropertyValue('--fuel-playback-inset')!==value)parent.style.setProperty('--fuel-playback-inset',value);
  }
  function apply(){
+  const p=parent.getBoundingClientRect(),narrow=p.width<=520||(win.matchMedia?.('(max-width:600px)').matches??win.innerWidth<=600);
+  if(disclosure&&narrow!==compact){
+   const summary=disclosure.querySelector('summary')!;
+   if(narrow){panel.classList.add('fuel-motion-compact');if(disclosure.contains(doc.activeElement))summary.focus({preventScroll:true});disclosure.open=false;}
+   else{disclosure.open=true;if(doc.activeElement===summary)(disclosure.querySelector<HTMLButtonElement>('button:not([disabled])')??grip).focus({preventScroll:true});panel.classList.remove('fuel-motion-compact');}
+   compact=narrow;
+  }
+  if(disclosure&&!position){
+   if(narrow&&!panel.hidden&&p.height>0){const bottom=parent.classList.contains('fuel-comparing')?8:Math.max(8,p.bottom-panel.getBoundingClientRect().bottom);panel.style.maxHeight=`${Math.max(0,p.height-bottom-8)}px`;}
+   else panel.style.removeProperty('max-height');
+  }
   const dock=parent.closest('.sim-workspace')?.querySelector('.world-dock');if(dock)observer?.observe(dock);
   if(position&&!panel.hidden){const b=bounds();panel.classList.add('fuel-motion-moved');
    panel.style.left=`${8+position.x*b.x}px`;panel.style.top=`${b.top+position.y*b.y}px`;
@@ -51,7 +69,8 @@ export function floatingPlayback(panel:HTMLElement){
  grip.addEventListener('pointerdown',down);grip.addEventListener('pointermove',moving);
  for(const type of ['pointerup','pointercancel','lostpointercapture'] as const)grip.addEventListener(type,end);
  grip.addEventListener('keydown',keyboard);grip.addEventListener('dblclick',reset);win.addEventListener('resize',apply);
+ disclosure?.addEventListener('toggle',apply);
  const observer=win.ResizeObserver?new win.ResizeObserver(apply):null;observer?.observe(parent);observer?.observe(panel);apply();
  const visibility=new win.MutationObserver(apply);visibility.observe(panel,{attributes:true,attributeFilter:['hidden']});visibility.observe(parent,{attributes:true,attributeFilter:['class']});
- return {refresh:apply,reset,dispose(){observer?.disconnect();visibility.disconnect();win.removeEventListener('resize',apply);parent.style.removeProperty('--fuel-playback-inset');grip.remove();}};
+ return {refresh:apply,reset,dispose(){observer?.disconnect();visibility.disconnect();win.removeEventListener('resize',apply);disclosure?.removeEventListener('toggle',apply);parent.style.removeProperty('--fuel-playback-inset');panel.classList.remove('fuel-motion-compact');grip.remove();if(disclosure){disclosure.replaceWith(...details);}}};
 }

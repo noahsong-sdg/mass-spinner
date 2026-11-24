@@ -15,5 +15,5 @@ export default {
   ]},
   build:{outDir:'release',emptyOutDir:true,target:'es2022',
     rollupOptions:{input:{main:resolve('index.html'),laurelin:resolve('laurelin.html')}}},
-  worker:{format:'es',plugins:()=>[workerIdentityPlugin(process.cwd())]},
+  worker:{format:'es',plugins:()=>[workerIdentityPlugin(process.cwd(),['src/fuel-reference-update.ts'])]},
 };

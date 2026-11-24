@@ -15,9 +15,12 @@ export function setupPreciseControls(root: ParentNode & Node,{describeRange=()=>
   const unit=descriptor.unit??range.dataset.unit??'',integer=descriptor.integer??range.dataset.integer==='true';
   const name=descriptor.label??box.querySelector('label span')?.textContent??range.getAttribute('aria-label')??range.id;
   const originalStep=range.step||'1',initial=range.value,toPhysical=(value: number)=>scale==='log10'?10**value:value;
-  const min=Number(range.min||0),max=Number(range.max||100),physicalMin=toPhysical(min),physicalMax=toPhysical(max);
   const editor=doc.createElement('div'),input=doc.createElement('input'),error=doc.createElement('span');
-  editor.className='precise-editor';editor.hidden=true;input.type='number';input.step='any';input.min=String(physicalMin);input.max=String(physicalMax);
+  editor.className='precise-editor';editor.hidden=true;input.type='number';input.step='any';
+  const bounds=()=>{
+   const min=Number(range.min||0),max=Number(range.max||100),physicalMin=toPhysical(min),physicalMax=toPhysical(max);
+   input.min=String(physicalMin);input.max=String(physicalMax);return {min,max,physicalMin,physicalMax};
+  };bounds();
   input.setAttribute('aria-label',`${name}${unit?` (${unit})`:''}`);error.className='precise-error';error.setAttribute('role','alert');
   const errorId=`${range.id}-precision-error`;error.id=errorId;input.setAttribute('aria-describedby',errorId);
   const button=(text: string,label: string,action: () => void)=>{const node=doc.createElement('button');node.type='button';node.textContent=text;node.setAttribute('aria-label',label);node.addEventListener('click',action);return node;};
@@ -29,24 +32,28 @@ export function setupPreciseControls(root: ParentNode & Node,{describeRange=()=>
    range.step='any';range.value=String(value);emit();
   };
   const commit=()=>{
+   if(range.disabled)return;
+   const {physicalMin,physicalMax}=bounds();
    const value=input.valueAsNumber;
    if(!Number.isFinite(value)||value<physicalMin||value>physicalMax||(scale==='log10'&&value<=0)||(integer&&!Number.isInteger(value))){
     error.textContent=`Enter ${integer?'an integer':'a number'} from ${physicalMin} to ${physicalMax}${unit?' '+unit:''}.`;input.setAttribute('aria-invalid','true');input.focus();return;
    }
    setValue(scale==='log10'?Math.log10(value):value);close();
   };
-  const reset=()=>{range.step=originalStep;range.value=initial;emit();if(!editor.hidden){input.value=String(toPhysical(Number(range.value)));error.textContent='';input.removeAttribute('aria-invalid');}};
-  editor.append(input,button('Apply',`Apply ${name}`,commit),button('Reset',`Reset ${name}`,reset),button('×',`Cancel ${name}`,close),error);box.append(editor);
-  const open=()=>{if(range.disabled)return;editor.hidden=false;input.value=String(toPhysical(Number(range.value)));output.setAttribute('aria-expanded','true');input.focus();input.select();};
+  const reset=()=>{range.step=originalStep;range.value=initial;emit();if(!editor.hidden){bounds();input.value=String(toPhysical(Number(range.value)));error.textContent='';input.removeAttribute('aria-invalid');}};
+  editor.append(input,button('Apply',`Apply ${name}`,commit),button('Reset',`Reset ${name}`,()=>{if(!range.disabled)reset();}),button('×',`Cancel ${name}`,close),error);box.append(editor);
+  const open=()=>{if(range.disabled)return;bounds();editor.hidden=false;input.value=String(toPhysical(Number(range.value)));output.setAttribute('aria-expanded','true');input.focus();input.select();};
   output.tabIndex=0;output.setAttribute('role','button');output.setAttribute('aria-label',`Set the exact value of ${name}`);output.title='Enter the exact value';
   output.addEventListener('click',event=>{event.preventDefault();open();});output.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();open();}});
   input.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();commit();}else if(event.key==='Escape'){event.preventDefault();event.stopPropagation();close();}});
-  const restoreStep=()=>{const before=range.value;range.step=originalStep;if(range.value!==before)emit();};
+  const restoreStep=()=>{if(range.disabled)return;const before=range.value;range.step=originalStep;if(range.value!==before)emit();};
   range.addEventListener('pointerdown',restoreStep);
   range.addEventListener('keydown',event=>{
+   if(range.disabled)return;
    const direction=({ArrowLeft:-1,ArrowDown:-1,ArrowRight:1,ArrowUp:1,PageDown:-10,PageUp:10} as Record<string, number | undefined>)[event.key];
    if(direction===undefined&&!['Home','End'].includes(event.key))return;
    const step=Number(originalStep);if(!Number.isFinite(step)||step<=0)return;event.preventDefault();
+   const {min,max}=bounds();
    const value=event.key==='Home'?min:event.key==='End'?max:min+(Math.round((Number(range.value)-min)/step)+direction!)*step;
    range.step=originalStep;range.value=String(Math.max(min,Math.min(max,value)));emit();
   });

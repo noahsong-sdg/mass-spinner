@@ -94,6 +94,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   const item=windows.get(key);if(!item||item.panel.hidden)return;
   const focused=item.panel.contains(doc.activeElement);item.panel.hidden=true;(key==='guide'?docsButton:item.button).setAttribute('aria-expanded','false');
   if(key==='guide')onMobile();else arrange();
+  item.body.dispatchEvent(new win.Event('mass-spinner:panel-visibility',{bubbles:true}));
   if(restore||focused)(key==='guide'?docsButton:item.button).focus();
  }
  function open(key:string,focus=false){
@@ -101,6 +102,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   for(const [other,entry]of windows)if(other!==key&&other!=='guide'&&key!=='guide'&&(mobile.matches&&windows.get('guide')!.panel.hidden||entry.group===item.group))close(other);
   item.panel.hidden=false;(key==='guide'?docsButton:item.button).setAttribute('aria-expanded','true');
   arrange();
+  item.body.dispatchEvent(new win.Event('mass-spinner:panel-visibility',{bubbles:true}));
   if(focus)item.heading.focus();
  }
  function windowPanel(key:WorkspaceWindowKey,title:string,side:Side){

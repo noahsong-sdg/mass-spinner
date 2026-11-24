@@ -13,7 +13,7 @@ function fixture(t:any){
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const graphics=[{createApparatusViewer:(_frame:any,value:any)=>{viewerOptions=value;return {load:async(asset:any)=>value.loader.loadAsync(asset.model),select(){},focus(id:string){focused.push(id);},refresh(){},resize(){},setAnimation(){},dispose(){}};}},
-  {FUEL_COMPONENTS:[{id:'liner',name:'Liner',purpose:'Solid boundary',material:'Illustrative tungsten',basis:'Concept model'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
+  {FUEL_COMPONENTS:[{id:'liner',name:'Liner',purpose:'Solid boundary',material:'Illustrative tungsten',basis:'Concept model'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},clock:()=>({secondsPerScreenSecond:.001,rotationSecondsPerScreenSecond:.001}),update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>graphics,request:async(r:any)=>{requests.push(r);const rotor=simulateFuelCentrifuge(r.config,r.operation?.events);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{cells:8,steps:32},r.resume)},producingCode:identity};}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};

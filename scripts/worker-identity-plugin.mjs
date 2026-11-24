@@ -6,9 +6,9 @@ const marker='__MASS_SPINNER_WORKER_IDENTITY_V1__';
 /** @param {string | Uint8Array} value */
 const hash=value=>createHash('sha256').update(value).digest('hex');
 
-/** Runs in Vite's worker build, whose module IDs are the producing import graph. */
-/** @param {string} root @returns {import("vite").Plugin} */
-export function workerIdentityPlugin(root){
+/** Bind the worker graph and any result calculations performed outside the worker. */
+/** @param {string} root @param {readonly string[]} additionalSources @returns {import("vite").Plugin} */
+export function workerIdentityPlugin(root,additionalSources=[]){
  const identityModule=resolve(root,'src/worker-identity.ts');
  return {
   name:'worker-producing-code',
@@ -19,6 +19,7 @@ export function workerIdentityPlugin(root){
    if(!code.includes(marker))return;
    const files=new Set([...this.getModuleIds()].filter(id=>id.startsWith(root+'/')&&!id.includes('?')));
    for(const file of ['package.json','package-lock.json','vite.config.mjs','scripts/worker-identity-plugin.mjs'])files.add(resolve(root,file));
+   for(const file of additionalSources)files.add(resolve(root,file));
    const sourceFiles=Object.fromEntries([...files].sort().map(file=>[relative(root,file),hash(readFileSync(file))]));
    const identity={schemaVersion:1,algorithm:'sha256',sourceHash:hash(JSON.stringify(sourceFiles)),sourceFiles};
    const updated=code.replace(new RegExp(`(["'])${marker}\\1`,'g'),()=>JSON.stringify(identity));

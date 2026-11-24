@@ -16,7 +16,7 @@ function fixture(t:any,hold=false,graphicsReady=Promise.resolve()){
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const solve=(r:any)=>{const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};};
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>{selected=options;return {load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},focus(id:string){focusedComponents.push(id);},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}};}},
-  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'},...['coils','liner','light-outlet','pump','feed'].map(id=>({id,name:id,purpose:'Fixture component',material:'Illustrative',basis:'Not engineering CAD'}))],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
+  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Inward radial current',material:'Metal and ceramic',basis:'Prescribed source'},...['coils','liner','light-outlet','pump','feed'].map(id=>({id,name:id,purpose:'Fixture component',material:'Illustrative',basis:'Not engineering CAD'}))],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},clock:()=>({secondsPerScreenSecond:.001,rotationSecondsPerScreenSecond:.001}),update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>{await graphicsReady;return graphics;},onResults:()=>opened++,onControls:selector=>focused.push(selector),request:(r:any)=>{requests.push(structuredClone(r));return hold?new Promise((resolve,reject)=>pending.push(()=>{try{resolve(solve(r));}catch(error){reject(error);}})):Promise.resolve(solve(r));}});
  const node=(id:string)=>doc.getElementById(id) as any;
  const change=(id:string,value:string|number,type='input')=>{node(id).value=String(value);node(id).dispatchEvent(new dom.window.Event(type,{bubbles:true}));};
@@ -243,4 +243,54 @@ test('collection plots name the products and show percentages for reference and 
    assert.doesNotMatch(f.ui.nodes.plots.textContent!,/innerLightPurity|lightRecovery|outerHeavyPurity|NaN|Infinity/);
   }
  }
+});
+
+
+test('reference edits preserve physical time and drive history without another worker solve',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-time',.4);f.change('fuel-currentA',.04);await f.ui.run();
+ f.change('fuel-motion-time',.6);
+ const accepted=f.ui.latest.result.transport,count=f.requests.length,events=f.ui.captureRun().events;
+ for(const [key,value]of [['stages',12],['feedStage',8],['pumpSpeedM3S',-1],['fusionMW',2000],['cutFraction',.4]] as const){
+  f.change(`fuel-${key}`,value);await f.ui.run();
+  assert.equal(f.requests.length,count,key);
+  assert.equal(Number(f.node('fuel-motion-time').value),.6,key);
+  assert.deepEqual(f.ui.captureRun().events,events,key);
+  const current=f.ui.latest.result.transport;
+  current.checkpoints.forEach((state:any,i:number)=>{
+   for(const field of ['lightMass','heavyMass','energy','angularMomentum','ionPhaseRad','neutralPhaseRad'])assert.deepEqual(state[field],accepted.checkpoints[i][field],`${key}: ${field}`);
+  });
+ }
+ assert.equal(f.ui.latest.result.config.feedStage,8);
+ f.node('fuel-power').click();await f.ui.run();
+ assert.equal(f.requests.length,count+1);
+ assert.equal(f.requests.at(-1).resume.timeS,.6);
+ assert.deepEqual(f.ui.latest.result.transport.operation.events,[...events,{timeS:.6,currentA:0}]);
+});
+
+
+test('a reference edit restores Export after cancelling a compressed export',async t=>{
+ const f=fixture(t);await f.start();
+ // Choose the asynchronous export path without running a costly refined thermal solve.
+ f.ui.latest.result.transport.timeControl={method:'fixture',relativeTolerance:1e-3,temperatureToleranceK:.1,acceptedPairs:1,rejectedSteps:0,maxErrorRatio:.5,startTimeS:0};
+ const create=URL.createObjectURL,revoke=URL.revokeObjectURL;let downloads=0;
+ URL.createObjectURL=()=>{downloads++;return 'blob:cancelled';};URL.revokeObjectURL=()=>{};
+ t.after(()=>{URL.createObjectURL=create;URL.revokeObjectURL=revoke;});
+ f.node('fuel-export').click();assert.equal(f.node('fuel-export').disabled,true);
+ f.change('fuel-stages',12);
+ assert.equal(f.node('fuel-export').disabled,false);assert.equal(f.node('fuel-export').dataset.calculationState,'accepted');
+ await new Promise(resolve=>setTimeout(resolve,20));assert.equal(downloads,0);assert.equal(f.node('fuel-export').disabled,false);
+});
+
+test('reference refresh updates pump warnings and consumes only the immediate explicit run',async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-motion-mode','flow','change');const count=f.requests.length;
+ f.change('fuel-application','pump','change');f.change('fuel-pumpSpeedM3S',0);await f.ui.run();
+ assert.equal(f.requests.length,count);
+ const fast=f.ui.latest.result;
+ assert.ok(fast.pumping.turnoverS<fast.mechanics.radialDiffusionTimeS);
+ assert.match(f.ui.nodes.render.textContent,/turnover < a²\/D/);
+ f.change('fuel-pumpSpeedM3S',-3);await f.ui.run();
+ const slow=f.ui.latest.result;assert.ok(slow.pumping.turnoverS>=slow.mechanics.radialDiffusionTimeS);
+ assert.doesNotMatch(f.ui.nodes.render.textContent,/turnover < a²\/D/);
+ assert.equal(f.requests.length,count);
+ await f.ui.run();assert.equal(f.requests.length,count+1,'An explicit run after the reference update must still submit the solver.');
 });

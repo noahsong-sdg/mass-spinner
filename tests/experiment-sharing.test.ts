@@ -30,7 +30,7 @@ function fixture(t:any){
   t.after(()=>{if(previous)Object.defineProperty(globalThis,key,previous);else Reflect.deleteProperty(globalThis,key);});
  }
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>({load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},setAnimation(fn:any){animation=fn;},dispose(){}})},
-  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Drive',material:'Metal',basis:'Prescribed source'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
+  {FUEL_COMPONENTS:[{id:'supply',name:'Discharge supply',purpose:'Drive',material:'Metal',basis:'Prescribed source'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},clock:()=>({secondsPerScreenSecond:.001,rotationSecondsPerScreenSecond:.001}),update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const fuel=setupFuelCentrifuge({document:doc,loadGraphics:async()=>graphics,request:async(r:any)=>{
   const rotor=simulateFuelCentrifuge(r.config,r.operation?.events);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:identity};
  }});

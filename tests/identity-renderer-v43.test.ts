@@ -24,10 +24,11 @@ test('real Vite worker graph binds emitted result identity to transitive source 
    'src/main.js':`new Worker(new URL('./worker.js',import.meta.url),{type:'module'});`,
    'src/worker-identity.ts':'export const workerProducingCode=null;',
    'src/solver.js':'export const solve=()=>41;',
+   'src/reference.js':'export const project=value=>value;',
    'src/worker.js':`import {solve} from './solver.js';import {workerProducingCode} from './worker-identity.ts';self.onmessage=()=>self.postMessage({result:solve(),producingCode:workerProducingCode});`,
   }))await writeFile(resolve(root,file),text);
   const run=async()=>{
-   await build({root,configFile:false,logLevel:'silent',worker:{format:'es',plugins:()=>[workerIdentityPlugin(root)]},build:{outDir:'out',emptyOutDir:true}});
+   await build({root,configFile:false,logLevel:'silent',worker:{format:'es',plugins:()=>[workerIdentityPlugin(root,['src/reference.js'])]},build:{outDir:'out',emptyOutDir:true}});
    const worker=(await readdir(resolve(root,'out/assets'))).find(file=>file.startsWith('worker-'))!;
    const emitted=await readFile(resolve(root,'out/assets',worker),'utf8');
    let reply:any;const self={onmessage:null as any,postMessage:(value:unknown)=>{reply=value;}};
@@ -38,12 +39,15 @@ test('real Vite worker graph binds emitted result identity to transitive source 
   const first=await run();assert.equal(first.schemaVersion,1);
   assert.equal(first.sourceFiles['src/solver.js'],createHash('sha256').update(await readFile(resolve(root,'src/solver.js'))).digest('hex'));
   assert.ok(first.sourceFiles['src/worker.js']);assert.ok(first.sourceFiles['package-lock.json']);
+  assert.equal(first.sourceFiles['src/reference.js'],createHash('sha256').update(await readFile(resolve(root,'src/reference.js'))).digest('hex'));
   assert.equal(first.sourceHash,createHash('sha256').update(JSON.stringify(first.sourceFiles)).digest('hex'));
   assert.deepEqual(await run(),first);
   await writeFile(resolve(root,'src/solver.js'),'export const solve=()=>41; // changed producing solver');
   const second=await run();assert.notEqual(second.sourceHash,first.sourceHash);
   await writeFile(resolve(root,'package-lock.json'),'{"lockfileVersion":3,"packages":{}}');
-  assert.notEqual((await run()).sourceHash,second.sourceHash);
+  const third=await run();assert.notEqual(third.sourceHash,second.sourceHash);
+  await writeFile(resolve(root,'src/reference.js'),'export const project=value=>value; // changed projection');
+  assert.notEqual((await run()).sourceHash,third.sourceHash);
  }finally{await rm(root,{recursive:true,force:true});}
 });
 
