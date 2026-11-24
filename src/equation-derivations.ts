@@ -22,7 +22,7 @@ const radial:Derivation={
 export const equationDerivations={
  'plant-electricity':{
   title:'From recoverable heat to net electricity',why:'Fusion energy release does not give electric output directly. Conversion losses and internal electric use reduce the power available to the grid.',
-  symbols:'Pth is recoverable thermal power delivered to the converter. η is conversion efficiency. Pgross is generated electricity; Pplant is internal electric use. Pnet is net electric output.',
+  symbols:'Pth is recoverable thermal power delivered to the converter. η is conversion efficiency. Pgross is generated electricity. Pplant is internal electric use. Pnet is net electric output.',
   assumptions:'Use the same system boundary and averaging interval for all powers. Thermal power already includes its deposited energy sources. No measured Marathon performance is assumed.',
   steps:[step('Multiply recoverable thermal power by conversion efficiency to find gross electricity.',math`P_{\rm gross}=\eta P_{\rm th}`),step('The converter rejects the thermal power that does not become electricity. This is not the complete site heat account.',math`P_{\rm reject,converter}=(1-\eta)P_{\rm th}`),step('Subtract all internal electric use. Negative net output means the plant imports electricity.',math`P_{\rm net}=P_{\rm gross}-P_{\rm plant}=\eta P_{\rm th}-P_{\rm plant}`)],
  },

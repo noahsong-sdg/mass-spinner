@@ -7,10 +7,11 @@
 A fuel cycle has a startup problem: fusion needs tritium, but breeding needs fusion neutrons.
 An initial tritium supply from outside the plant permits startup. Bred tritium can replace consumed fuel later.
 The centrifuge gas, fusion fuel and blanket materials occupy separate equipment. They are not one gas mixture.
+The blanket surrounds the fusion chamber. Its materials absorb neutron energy and can breed tritium.
 
 <!-- diagram:plant-cycle -->
 
-The sequence includes Marathon’s proposed mercury multiplier. Mercury is optional; other blanket designs use different materials.
+The sequence includes Marathon’s proposed mercury multiplier. Mercury is optional. Other blanket designs use different materials.
 An (n,2n) reaction has one incoming neutron and two outgoing neutrons. It needs sufficient incident energy.
 The outgoing neutrons have less energy available. They cannot multiply indefinitely through this reaction.
 The mercury product undergoes radioactive decay later. Gold production and tritium breeding therefore have different material paths and timescales.
@@ -76,7 +77,7 @@ The purge gas can contain added hydrogen to help release tritium. Tritium can le
 In a liquid lead–lithium design, the liquid carries dissolved tritium to an extraction unit.
 One method uses a metal membrane. Hydrogen isotopes diffuse through the metal toward a vacuum side with low hydrogen pressure.
 The bulk liquid stays on its side and returns to the blanket. A vacuum pump removes the released gas.
-[This permeator experiment](https://www.mdpi.com/1996-1073/16/7/3022) used hydrogen as a test gas; it does not establish a complete tritium plant.
+[This permeator experiment](https://www.mdpi.com/1996-1073/16/7/3022) used hydrogen as a test gas. It does not establish a complete tritium plant.
 
 Extraction recovers tritium from its carrier. Fuel processing then removes impurities and prepares the required hydrogen isotope mixture.
 Depending on chemical form, processing can need chemical conversion and hydrogen isotope separation.
@@ -89,7 +90,7 @@ Breeding more tritium than fusion consumes is insufficient if too little becomes
 
 ## When does the plant supply net electricity?
 
-Heat is energy transfer, not a separate source of energy. Fusion releases nuclear energy; particles deposit energy in surrounding materials.
+Heat is energy transfer, not a separate source of energy. Fusion releases nuclear energy. Particles deposit energy in surrounding materials.
 The plant must convert recoverable heat into electricity. It cannot convert all that heat.
 Some electricity must operate the driver, pumps, cooling, magnets where applicable, and fuel-processing equipment.
 
@@ -105,7 +106,7 @@ Do not add fusion power to a thermal-power value that already includes that fusi
 
 For an example, 1,000 MW of recoverable thermal power at 40% efficiency gives 400 MW of gross electricity.
 If internal electric use is 150 MW, net output is 250 MW. The conversion system rejects 600 MW of heat.
-Internal plant electricity ultimately also becomes heat or other energy outputs; that 600 MW is not the complete site heat account.
+Internal plant electricity also becomes heat or other energy outputs. That 600 MW is not the complete site heat account.
 At 450 MW of internal use, the same generator gives net output of −50 MW: the plant imports electricity.
 
 Fusion gain compares fusion energy with a specified input. A gain above one at the plasma or target does not establish net plant electricity.
@@ -162,7 +163,7 @@ This ratio applies only with positive power and time, and a burn fraction below 
 These inputs do not change lithium transport.
 
 In the plot, the horizontal axis is burn fraction, not elapsed time.
-The selected point gives the inventory for your inputs. Changing processing time changes the inventory curve; it does not animate lithium separation.
+The selected point gives the inventory for your inputs. Changing processing time changes the inventory curve. It does not animate lithium separation.
 
 ## Does this give the total fuel inventory?
 
