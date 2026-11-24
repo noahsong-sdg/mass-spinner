@@ -9,9 +9,11 @@ export function floatingPlayback(panel:HTMLElement){
  let position:Position|null=null,drag:Drag|null=null,storage:Storage|undefined;
  try{storage=win.localStorage;const saved:unknown=JSON.parse(storage.getItem(key)??'null');if(saved&&typeof saved==='object'&&'version' in saved&&saved.version===1&&'x' in saved&&typeof saved.x==='number'&&Number.isFinite(saved.x)&&saved.x>=0&&saved.x<=1&&'y' in saved&&typeof saved.y==='number'&&Number.isFinite(saved.y)&&saved.y>=0&&saved.y<=1)position={x:saved.x,y:saved.y};}catch{}
  function bounds(){
-  const p=parent.getBoundingClientRect(),b=panel.getBoundingClientRect(),workspace=parent.closest('.sim-workspace');
+  const p=parent.getBoundingClientRect(),workspace=parent.closest('.sim-workspace');
   const d=workspace?.querySelector('.world-dock')?.getBoundingClientRect(),top=workspace?64:8;
   const bottom=d&&d.height>0&&d.bottom>p.top&&d.top<p.bottom?Math.max(8,p.bottom-d.top+12):8;
+  if(position)panel.style.maxHeight=`${Math.max(0,p.height-top-bottom)}px`;
+  const b=panel.getBoundingClientRect();
   return {top,x:Math.max(0,p.width-b.width-16),y:Math.max(0,p.height-b.height-top-bottom)};
  }
  function reservePlayback(){
@@ -32,7 +34,7 @@ export function floatingPlayback(panel:HTMLElement){
   reservePlayback();
  }
  function save(){try{if(position)storage?.setItem(key,JSON.stringify({version:1,...position}));else storage?.removeItem(key);}catch{}}
- function reset(){position=null;panel.classList.remove('fuel-motion-moved');panel.style.removeProperty('left');panel.style.removeProperty('top');save();apply();}
+ function reset(){position=null;panel.classList.remove('fuel-motion-moved');panel.style.removeProperty('left');panel.style.removeProperty('top');panel.style.removeProperty('max-height');save();apply();}
  function move(x:number,y:number){const b=bounds();position={x:b.x?Math.max(0,Math.min(1,(x-8)/b.x)):0,y:b.y?Math.max(0,Math.min(1,(y-b.top)/b.y)):0};apply();}
  const down=(e:PointerEvent)=>{
   if(e.button!==0||e.isPrimary===false||drag)return;
