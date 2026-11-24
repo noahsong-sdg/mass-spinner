@@ -7,5 +7,5 @@ export function fuelHistoryCurve(
  ordinate:(sample:FuelTransportCheckpoint)=>number|null,
 ):PlotCurve{
  return {label,x:rows.map(row=>row.timeS),y:rows.map(ordinate),xLabel:'Time (s)',yLabel,
-  sampleAt:time=>ordinate(sampleFuelTransport(transport,time))};
+  eventX:transport.operation?.events.map(event=>event.timeS),sampleAt:time=>ordinate(sampleFuelTransport(transport,time))};
 }

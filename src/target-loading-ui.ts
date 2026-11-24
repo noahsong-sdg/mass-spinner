@@ -23,7 +23,7 @@ export function setupTargetLoading(host:HTMLElement,{active=true,deferWhenClosed
  const config=()=>({replacementProbability:Number(input.value),intervals:200,relativeTolerance:Number(resolution.value),absoluteTolerance:Number(resolution.value)*.01});
  function calculate(){
   dirty=false;
-  latest=null;plots.replaceChildren();extraPlots.replaceChildren();budget.textContent='';numerics.textContent='';list.replaceChildren();exportButton.disabled=true;
+  latest=null;renderPlots(plots,[]);renderPlots(extraPlots,[]);budget.textContent='';numerics.textContent='';list.replaceChildren();exportButton.disabled=true;
   output.textContent=fmt(Number(input.value));input.setAttribute('aria-valuetext',output.textContent+' replacement probability');
   if(!source){status.textContent='Select correct source settings to calculate loading.';return;}
   try{
@@ -45,7 +45,7 @@ export function setupTargetLoading(host:HTMLElement,{active=true,deferWhenClosed
  function invalidate(){dirty=true;latest=null;exportButton.disabled=!source;refresh();}
  input.addEventListener('input',invalidate);resolution.addEventListener('change',invalidate);
  panel.addEventListener('toggle',refresh);
- ledger.addEventListener('toggle',()=>{extraPlots.replaceChildren();if(ledger.open&&latest)renderPlots(extraPlots,[...latest.curves.slice(1,3),latest.curves[4]]);});
+ ledger.addEventListener('toggle',()=>{renderPlots(extraPlots,[]);if(ledger.open&&latest)renderPlots(extraPlots,[...latest.curves.slice(1,3),latest.curves[4]]);});
  exportButton.addEventListener('click',()=>{if(dirty)calculate();if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,source:source!.config,...latest},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-target-loading.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
  refresh();return {update(value:LoadingSource|null){source=value;invalidate();},setActive(value:boolean){active=value;refresh();}};
 }

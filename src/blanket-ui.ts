@@ -22,7 +22,7 @@ export function setupBlanketExplorer(host:HTMLElement){
  metrics.className='fusion-readouts';plot.className='live-plots';status.setAttribute('role','status');
  for(const [title,output]of [['¹⁹⁷Hg',mercury],['¹⁹⁷ᵐHg',metastable],['¹⁹⁷Au',gold]] as const){const row=element('div');row.append(element('span',title),output);metrics.append(row);}
  const update=()=>{
-  mercury.textContent='—';metastable.textContent='—';gold.textContent='—';plot.replaceChildren();
+  mercury.textContent='—';metastable.textContent='—';gold.textContent='—';renderPlots(plot,[]);
   try{
    const hours=Number(input.value),fraction=Number(isotopeInput.value),result=mercury197Batch(hours,fraction);time.textContent=`${hours} h`;isotopeOut.textContent=percent(fraction);
    mercury.textContent=percent(result.mercury197);metastable.textContent=percent(result.mercury197m);gold.textContent=percent(result.gold197);
@@ -37,7 +37,7 @@ export function setupBlanketExplorer(host:HTMLElement){
  opticalControls.className='instrument-controls';opticalBox.className='control';opticalPlot.className='live-plots';opticalInput.id='blanket-optical-depth';opticalInput.type='range';opticalInput.min='0';opticalInput.max='8';opticalInput.step='.05';opticalInput.value='1';
  opticalLabel.htmlFor=opticalInput.id;opticalLabel.append(element('span','Optical depth τ = σ n ℓ (assumption)'),opticalOut);opticalBox.append(opticalLabel,opticalInput);opticalControls.append(opticalBox);
  const opticalStatus=element('p');opticalStatus.setAttribute('role','status');
- const updateOptical=()=>{opticalPlot.replaceChildren();try{
+ const updateOptical=()=>{renderPlots(opticalPlot,[]);try{
   const tau=Number(opticalInput.value),result=blanketOpticalDepth(tau);opticalOut.textContent=tau.toFixed(2);
   opticalStatus.textContent=`Reaction fraction η = ${percent(result.interceptedFraction)} · utilization Ξ = ${result.inventoryUtilization.toFixed(4)}`;
   const x=[...new Set([...Array.from({length:81},(_,i)=>i/10),tau])].sort((a,b)=>a-b),common={x,xLabel:'Optical depth τ (assumption)',yLabel:'Dimensionless reference factor',selectedX:tau,yDomain:[0,1] as const};

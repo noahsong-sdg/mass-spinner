@@ -37,7 +37,7 @@ export function setupTargetExposure(host:HTMLElement,{active=true,simulate=simul
  const sources=make('p');for(const [name,url]of [['Thermal approximation','https://arxiv.org/abs/2412.16357'],['Target transport & lifetime','https://www.sandia.gov/research/publications/details/optimization-of-target-lifetime-for-production-of-14-mev-neutrons-2020-12-15/'],['Model scope','/MARATHON-TARGET-EXPOSURE.md']]){const a=make('a',name+' ↗');a.href=url;sources.append(a,document.createTextNode(' · '));}notes.append(sources);
  function calculate(){
   dirty=false;
-  latest=null;plot.replaceChildren();ledgerPlot.replaceChildren();metrics.replaceChildren();ledgerText.textContent='';list.replaceChildren();exportButton.disabled=true;
+  latest=null;renderPlots(plot,[]);renderPlots(ledgerPlot,[]);metrics.replaceChildren();ledgerText.textContent='';list.replaceChildren();exportButton.disabled=true;
   if(!beam){status.textContent='No source result is available.';return;}
   try{
    const config={...DEFAULT_TARGET_EXPOSURE};for(const [key,read]of reads)config[key]=read();latest=simulate(beam,config);
@@ -53,7 +53,7 @@ export function setupTargetExposure(host:HTMLElement,{active=true,simulate=simul
  }
  function refresh(){if(active&&dirty)calculate();}
  function invalidate(){dirty=true;latest=null;exportButton.disabled=!beam;refresh();}
- ledger.addEventListener('toggle',()=>{ledgerPlot.replaceChildren();if(ledger.open&&latest)renderPlots(ledgerPlot,latest.curves.slice(1));});
+ ledger.addEventListener('toggle',()=>{renderPlots(ledgerPlot,[]);if(ledger.open&&latest)renderPlots(ledgerPlot,latest.curves.slice(1));});
  exportButton.addEventListener('click',()=>{if(dirty)calculate();if(!latest)return;const url=URL.createObjectURL(new Blob([JSON.stringify({schemaVersion:1,source:beam!.config,...latest},null,2)],{type:'application/json'})),a=make('a');a.href=url;a.download='mass-spinner-target-exposure.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
  body.append(controls,plot);panel.append(heading,metrics,body,status,ledger,notes,exportButton);host.append(panel);refresh();
  return {durationHost,update(value:ReturnType<typeof simulateFusionBeam>|null){beam=value;invalidate();},setActive(value:boolean){active=value;refresh();}};

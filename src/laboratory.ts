@@ -9,6 +9,8 @@ export interface PlotCurve {
  selectedX?: number; equalAspect?: boolean; color?: string; dash?: string; muted?: boolean;
  /** Reconstruct a chronological ordinate from canonical state between accepted knots. */
  sampleAt?: (x: number) => number | null;
+ /** Keep physical event knots and their neighboring samples in dense history displays. */
+ eventX?: readonly number[];
 }
 export interface PlotOptions {onSelect?: (x: number) => void; announce?: boolean; /** Reveal chronological history through this time; setCursor advances or rewinds it. */ revealUntil?: number}
 export interface PlotController {setCursor(value: number | undefined): void}
@@ -113,7 +115,48 @@ export function reducedConfig(mode: string,ions: readonly IonSpecies[]): Reduced
 const NS='http://www.w3.org/2000/svg';
 function svgElement<K extends keyof SVGElementTagNameMap>(tag: K,attributes: Record<string, string | number>={},text?: string): SVGElementTagNameMap[K] {const el=document.createElementNS(NS,tag);for(const [key,value]of Object.entries(attributes))el.setAttribute(key,String(value));if(text!==undefined)el.textContent=text;return el;}
 const format=(n: number | null | undefined)=>!finite(n)?'—':n===0?'0':Math.abs(n)>=1e4||Math.abs(n)<.001?n.toExponential(2):Number(n.toPrecision(4)).toString();
-const plotObservers=new WeakMap<HTMLElement, ResizeObserver[]>();
+type PlotGroupController={figure:HTMLElement;setCursor(value:number|undefined):void;update(group:PlotCurve[],options:PlotOptions):void;dispose():void};
+const plotGroups=new WeakMap<HTMLElement,Map<string,PlotGroupController>>();
+function upperBound(values:readonly number[],target:number){
+ let low=0,high=values.length;
+ while(low<high){const middle=(low+high)>>>1;if(values[middle]<=target)low=middle+1;else high=middle;}
+ return low;
+}
+/** Reduce display paths only. Keep extrema, missing-data boundaries, and physical events. */
+function displayCurve(series:PlotCurve,pixels:number):PlotCurve{
+ const {x,y,low,high}=series,n=x.length,buckets=Math.max(1,Math.floor(pixels));
+ if(series.equalAspect||series.xLabel!=='Time (s)'||n<=buckets*4)return series;
+ for(let i=0;i<n;i++)if(!finite(x[i])||i>0&&x[i]<x[i-1])return series;
+ const span=x[n-1]-x[0];if(!(span>0))return series;
+ const keep=new Set<number>([0,n-1]),ordinates=[y,...(low?[low]:[]),...(high?[high]:[])];
+ let start=0;
+ while(start<n){
+  const bucket=Math.floor((x[start]-x[0])/span*buckets);let end=start+1;
+  while(end<n&&Math.floor((x[end]-x[0])/span*buckets)===bucket)end++;
+  keep.add(start);keep.add(end-1);
+  for(const values of ordinates){
+   let min=-1,max=-1;
+   for(let i=start;i<end;i++)if(finite(values[i])){if(min<0||values[i]!<values[min]!)min=i;if(max<0||values[i]!>values[max]!)max=i;}
+   if(min>=0)keep.add(min);if(max>=0)keep.add(max);
+  }
+  start=end;
+ }
+ for(let i=1;i<n;i++)if(x[i]===x[i-1]||ordinates.some(values=>finite(values[i])!==finite(values[i-1]))){keep.add(i-1);keep.add(i);}
+ for(const event of series.eventX??[]){const next=upperBound(x,event);for(const i of [next-2,next-1,next])if(i>=0&&i<n)keep.add(i);}
+ const indices=[...keep].sort((a,b)=>a-b);
+ return {...series,x:indices.map(i=>x[i]),y:indices.map(i=>y[i]),low:low&&indices.map(i=>low[i]),high:high&&indices.map(i=>high[i])};
+}
+function plotData(group:readonly PlotCurve[]){
+ let xmin=Infinity,xmax=-Infinity,ymin=Infinity,ymax=-Infinity;
+ const abscissas=new Set<number>(),spatial:{x:number;y:number}[]=[];
+ const include=(x:number,y:number|null|undefined)=>{if(finite(y)){xmin=Math.min(xmin,x);xmax=Math.max(xmax,x);ymin=Math.min(ymin,y);ymax=Math.max(ymax,y);abscissas.add(x);}};
+ for(const series of group)for(let i=0;i<series.x.length;i++){
+  const x=series.x[i];if(!finite(x))continue;
+  include(x,series.y[i]);include(x,series.low?.[i]);include(x,series.high?.[i]);
+  if(group[0].equalAspect&&finite(series.y[i]))spatial.push({x,y:series.y[i]!});
+ }
+ return {xmin,xmax,ymin,ymax,samples:group[0].equalAspect?spatial:[...abscissas].sort((a,b)=>a-b).map(x=>({x,y:undefined}))};
+}
 // SVG user units track CSS pixels. Hidden figures use the existing finite
 // layout until ResizeObserver supplies their visible content-box width.
 function plotWidth(figure: HTMLElement){
@@ -134,29 +177,43 @@ function plotLines(text: string,width: number){
  }
  if(line)lines.push(line);return lines;
 }
-export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSelect,announce=true,revealUntil}: PlotOptions={}): PlotController {
- for(const observer of plotObservers.get(host)??[])observer.disconnect();
- const observers: ResizeObserver[]=[];plotObservers.set(host,observers);
- host.replaceChildren();const groups=new Map<string, PlotCurve[]>(),cursors: ((value: number | undefined) => void)[]=[];
- for(const c of curves){const key=c.xLabel+'|'+c.yLabel+'|'+!!c.equalAspect;if(!groups.has(key))groups.set(key,[]);groups.get(key)!.push(c);}
- for(const group of groups.values()){
-  const c=group[0];let revealed=revealUntil;const updates:(()=>void)[]=[];
-  function visible(series:PlotCurve):PlotCurve{
+export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],options: PlotOptions={}): PlotController {
+ const groups=new Map<string,PlotCurve[]>(),previous=plotGroups.get(host)??new Map<string,PlotGroupController>(),current=new Map<string,PlotGroupController>();
+ for(const curve of curves){const key=JSON.stringify([curve.xLabel,curve.yLabel,!!curve.equalAspect]);if(!groups.has(key))groups.set(key,[]);groups.get(key)!.push(curve);}
+ for(const [key,group]of groups){
+  if(!group.some(series=>series.x.some((x,i)=>finite(x)&&[series.y[i],series.low?.[i],series.high?.[i]].some(finite))))continue;
+  const view=previous.get(key);
+  if(view&&Array.from(host.children).includes(view.figure)){view.update(group,options);current.set(key,view);}
+  else{view?.dispose();const created=createPlotGroup(host,group,options);if(created)current.set(key,created);}
+ }
+ for(const [key,view]of previous)if(!current.has(key)){view.dispose();view.figure.remove();}
+ let index=0;for(const view of current.values()){if(host.children[index]!==view.figure)host.insertBefore(view.figure,host.children[index]??null);index++;}
+ plotGroups.set(host,current);
+ return {setCursor(value){for(const view of current.values())view.setCursor(value);}};
+}
+function createPlotGroup(host:HTMLElement,initialGroup:PlotCurve[],options:PlotOptions):PlotGroupController|undefined{
+  let group=initialGroup,c=group[0],{onSelect,announce=true,revealUntil}=options,revealed=revealUntil;
+  const updates:(()=>void)[]=[];
+  let chronological=new Set(group.filter(series=>series.xLabel==='Time (s)'&&series.x.every((x,i)=>finite(x)&&(i===0||x>=series.x[i-1]))));
+  function point(series:PlotCurve,time:number){
+   const next=upperBound(series.x,time),last=next-1;
+   if(last<0||next>=series.x.length||series.x[last]===time)return {x:series.x[Math.max(0,last)],y:series.y[Math.max(0,last)],low:series.low?.[Math.max(0,last)],high:series.high?.[Math.max(0,last)]};
+   const fraction=(time-series.x[last])/(series.x[next]-series.x[last]);
+   const interpolate=(values:readonly (number|null)[]|undefined)=>values&&finite(values[last])&&finite(values[next])?values[last]+(values[next]-values[last])*fraction:null;
+   return {x:time,y:series.sampleAt?series.sampleAt(time):interpolate(series.y),low:interpolate(series.low),high:interpolate(series.high)};
+  }
+  function visible(series:PlotCurve,source=series):PlotCurve{
    if(!finite(revealed))return series;
-   const n=series.x.findIndex(x=>x>revealed!);if(n<0)return series;
-   const x=series.x.slice(0,n),y=series.y.slice(0,n),low=series.low?.slice(0,n),high=series.high?.slice(0,n);
-   if(n&&series.x[n-1]<revealed){
-    const fraction=(revealed-series.x[n-1])/(series.x[n]-series.x[n-1]);
-    const interpolate=(values:readonly (number|null)[])=>finite(values[n-1])&&finite(values[n])?values[n-1]!+(values[n]-values[n-1]!)*fraction:null;
-    x.push(revealed);y.push(series.sampleAt?series.sampleAt(revealed):interpolate(series.y));if(low)low.push(interpolate(series.low!));if(high)high.push(interpolate(series.high!));
-   }
+   const n=upperBound(series.x,revealed);if(n===series.x.length)return series;
+   const x=series.x.slice(0,n),y=series.y.slice(0,n),low=series.low?.slice(0,n),high=series.high?.slice(0,n),next=upperBound(source.x,revealed);
+   if(next&&next<source.x.length&&(!n||series.x[n-1]<revealed)){const endpoint=point(source,revealed);x.push(endpoint.x);y.push(endpoint.y);if(low)low.push(endpoint.low??null);if(high)high.push(endpoint.high??null);}
    return {...series,x,y,low,high};
   }
   const left=75;let width=800,height=c.equalAspect?800:310,bottom=height-60,top=45,right=750,xmin=0,xmax=0,ymin=0,ymax=0,sx: ((x: number) => number) | undefined,sy: (y: number) => number;
   const figure=document.createElement('figure'),caption=document.createElement('figcaption'),svg=svgElement('svg',{preserveAspectRatio:'xMidYMid meet',role:'img'});
   caption.textContent=c.yLabel+' against '+c.xLabel+(c.equalAspect?' · equal spatial scale':'');svg.setAttribute('aria-label',caption.textContent);
-  const pairs=group.flatMap(s=>s.x.flatMap((x,i)=>[s.y[i],s.low?.[i],s.high?.[i]].map(y=>[x,y] as const))).filter((p): p is readonly [number,number]=>p.every(finite));
-  if(!pairs.length)continue;
+  let data=plotData(group);
+  if(!finite(data.xmin))return;
   const draw=(nextWidth: number)=>{
   width=nextWidth;svg.replaceChildren();updates.length=0;
   const columns=Math.max(1,Math.floor((width-100)/220)),columnWidth=(width-100)/columns;
@@ -174,8 +231,7 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   svg.setAttribute('viewBox',`0 0 ${width} ${height}`);
   svg.setAttribute('style',`width:100%;min-width:180px;height:${height}px;display:block`);
   figure.setAttribute('style','overflow-x:auto');
-  xmin=Infinity;xmax=-Infinity;ymin=Infinity;ymax=-Infinity;
-  for(const [x,y] of pairs){xmin=Math.min(xmin,x);xmax=Math.max(xmax,x);ymin=Math.min(ymin,y);ymax=Math.max(ymax,y);}
+  ({xmin,xmax,ymin,ymax}=data);
   if(c.yDomain)[ymin,ymax]=c.yDomain;
   if(c.xDomain)[xmin,xmax]=c.xDomain;
   if(c.equalAspect){
@@ -201,8 +257,8 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   group.forEach((series,index)=>{
    const color=series.color??['#a4c4b1','#d2956b','#95b3d4','#d1bc87'][index%4],dash=series.dash??'';
    const layer=revealUntil===undefined?svg:svgElement('g',{'data-series':series.label});if(layer!==svg)svg.append(layer);
-   const source=series,update=()=>{
-   const series=visible(source);if(layer!==svg)layer.replaceChildren();let path='',connected=false;
+   const source=series,display=displayCurve(series,right-left),update=()=>{
+   const series=visible(display,source);if(layer!==svg)layer.replaceChildren();let path='',connected=false;
    if(series.low&&series.high){
     // Each finite contiguous segment gets its own uncertainty band; missing
     // bootstrap bounds must not be connected across an undefined collector.
@@ -229,29 +285,36 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   };
   let cursor: SVGPathElement | undefined,selected=c.selectedX??revealUntil;
   function updateCursor(value: number | undefined){selected=value;if(!cursor||!sx)return;cursor.setAttribute('d',finite(value)&&value>=xmin&&value<=xmax?`M${sx(value)} ${top}V${bottom}`:'');}
-  function moveCursor(value: number | undefined){if(revealUntil!==undefined&&finite(value)){revealed=value;svg.dataset.visibleUntil=String(value);for(const update of updates)update();}updateCursor(value);}
-  cursors.push(value=>{moveCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}});
+  function moveCursor(value: number | undefined){if(revealUntil!==undefined&&finite(value)&&value!==revealed){revealed=value;svg.dataset.visibleUntil=String(value);for(const update of updates)update();}updateCursor(value);}
+  const setCursor=(value:number|undefined)=>{moveCursor(value);if(finite(value)){readout.setAttribute('aria-live','off');inspect(value);}};
   const readout=document.createElement('p');readout.className='plot-readout';readout.setAttribute('aria-live',announce?'polite':'off');
-  const samples: {x: number; y?: number}[]=c.equalAspect?group.flatMap(series=>series.x.flatMap((x,i)=>{const y=series.y[i];return finite(x)&&finite(y)?[{x,y}]:[];})):
-   [...new Set(pairs.map(p=>p[0]))].sort((a,b)=>a-b).map(x=>({x}));let sample=0;
+  let samples: {x:number;y?:number}[]=data.samples,sample=0;
   const inspect=(target: number,targetY?: number)=>{
    const distance=(x: number,y?: number | null)=>c.equalAspect?Math.hypot(x-target,y!-targetY!):Math.abs(x-target);
-   sample=samples.reduce((best,p,i)=>distance(p.x,p.y)<distance(samples[best].x,samples[best].y)?i:best,0);
+   if(c.equalAspect)sample=samples.reduce((best,p,i)=>distance(p.x,p.y)<distance(samples[best].x,samples[best].y)?i:best,0);
+   else{let low=0,high=samples.length;while(low<high){const middle=(low+high)>>>1;if(samples[middle].x<=target)low=middle+1;else high=middle;}sample=low===0?0:low===samples.length?low-1:target-samples[low-1].x<=samples[low].x-target?low-1:low;}
    readout.textContent=group.map(source=>{
+    if(!c.equalAspect&&chronological.has(source)){
+     const end=finite(revealed)?upperBound(source.x,revealed):source.x.length,next=upperBound(source.x,target),before=Math.min(end-1,next-1),after=next<end?Math.min(end-1,upperBound(source.x,source.x[next])-1):-1;
+     let closest=before;
+     if(after>=0&&(closest<0||distance(source.x[after])<distance(source.x[closest])))closest=after;
+     let selected=closest>=0?{x:source.x[closest],y:source.y[closest],low:source.low?.[closest],high:source.high?.[closest]}:null;
+     if(finite(revealed)&&end>0&&end<source.x.length&&source.x[end-1]<revealed&&(!selected||distance(revealed)<distance(selected.x)))selected=point(source,revealed);
+     return !selected?`${source.label}: —`:`${source.label}: ${format(selected.x)}, ${format(selected.y)}`+(source.low?` [${format(selected.low)}, ${format(selected.high)}]`:'');
+    }
     const series=visible(source);let closest=-1,best=Infinity;
-    // A response discontinuity uses the last (post-event) value at a repeated
-    // abscissa, matching the right-continuous cumulative-incidence producer.
-    series.x.forEach((x,i)=>{if(!Number.isFinite(x)||(c.equalAspect&&!Number.isFinite(series.y[i])))return;const d=distance(x,series.y[i]);if(d<best||(!c.equalAspect&&d===best&&x===series.x[closest])){best=d;closest=i;}});
+    // Repeated abscissas use the post-event value.
+    series.x.forEach((x,i)=>{if(!finite(x)||(c.equalAspect&&!finite(series.y[i])))return;const d=distance(x,series.y[i]);if(d<best||(!c.equalAspect&&d===best&&x===series.x[closest])){best=d;closest=i;}});
     return closest<0?`${series.label}: —`:`${series.label}: ${format(series.x[closest])}, ${format(series.y[closest])}`+(series.low?` [${format(series.low[closest])}, ${format(series.high?.[closest])}]`:'');
    }).join(' · ');
   };
   svg.setAttribute('tabindex','0');svg.setAttribute('aria-label',caption.textContent+'. Use the arrow keys to examine samples. Home and End select the endpoints.');
   svg.addEventListener('keydown',event=>{
    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;
-   event.preventDefault();const i=event.key==='Home'?0:event.key==='End'?samples.length-1:Math.max(0,Math.min(samples.length-1,sample+(event.key==='ArrowRight'?1:-1)));moveCursor(samples[i].x);inspect(samples[i].x,samples[i].y);sample=i;onSelect?.(samples[i].x);
+   event.preventDefault();const i=event.key==='Home'?0:event.key==='End'?samples.length-1:Math.max(0,Math.min(samples.length-1,sample+(event.key==='ArrowRight'?1:-1))),before=samples,chosen=samples[i];moveCursor(chosen.x);inspect(chosen.x,chosen.y);sample=i;onSelect?.(chosen.x);
    // A shared-clock callback may silently update this same readout. Announce
    // the deliberate keyboard sample after that callback, never every RAF tick.
-   readout.setAttribute('aria-live','polite');readout.textContent='';inspect(samples[i].x,samples[i].y);sample=i;
+   readout.setAttribute('aria-live','polite');readout.textContent='';inspect(chosen.x,chosen.y);if(samples===before)sample=i;
   });
   const inspectPointer=(event: PointerEvent)=>{
    const bounds=svg.getBoundingClientRect(),scale=Math.min(bounds.width/width,bounds.height/height);
@@ -268,14 +331,21 @@ export function renderPlots(host: HTMLElement,curves: readonly PlotCurve[],{onSe
   figure.append(caption,svg,readout);host.append(figure);
   const measured=plotWidth(figure);draw(Number.isFinite(measured)&&measured>0?Math.max(180,measured):800);
   const Observer=figure.ownerDocument?.defaultView?.ResizeObserver??globalThis.ResizeObserver;
+  let observer:ResizeObserver|undefined;
   if(Observer){
-   const observer=new Observer(entries=>{
+   observer=new Observer(entries=>{
     const measured=entries.find(entry=>entry.target===figure)?.contentRect.width;
     if(finite(measured)&&measured>0&&Math.abs(Math.max(180,measured)-width)>.5)draw(Math.max(180,measured));
-   });observer.observe(figure);observers.push(observer);
+   });observer.observe(figure);
   }
- }
- return {setCursor(value: number | undefined){for(const cursor of cursors)cursor(value);}};
+  return {figure,setCursor,update(nextGroup,nextOptions){
+   group=nextGroup;c=group[0];chronological=new Set(group.filter(series=>series.xLabel==='Time (s)'&&series.x.every((x,i)=>finite(x)&&(i===0||x>=series.x[i-1]))));({onSelect,announce=true,revealUntil}=nextOptions);revealed=revealUntil;selected=c.selectedX??revealed??selected;
+   caption.textContent=c.yLabel+' against '+c.xLabel+(c.equalAspect?' · equal spatial scale':'');
+   data=plotData(group);samples=data.samples;
+   readout.setAttribute('aria-live',announce?'polite':'off');
+   if(finite(revealed))svg.dataset.visibleUntil=String(revealed);else delete svg.dataset.visibleUntil;
+   draw(width);if(samples.length)inspect(finite(selected)?selected:samples[0].x,samples[0].y);
+  },dispose(){observer?.disconnect();}};
 }
 export function orbitCurves(result: {species: readonly Pick<SpeciesResult, 'impacts'>[]}): PlotCurve[]{
  const curves: PlotCurve[]=[];

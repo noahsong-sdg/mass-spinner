@@ -63,7 +63,7 @@ export function setupFailureLaboratory(){
    document.getElementById('failure-notes')!.replaceChildren(...latest.assumptions.map(note=>element('li',note)));
    document.getElementById('failure-status')!.textContent='Independent estimates updated. These inputs do not change the separator runs above.';
    (document.getElementById('export-failure') as HTMLButtonElement).disabled=false;
-  }catch(error:unknown){latest=null;document.getElementById('failure-plots')!.replaceChildren();document.getElementById('failure-metrics')!.textContent='';document.getElementById('failure-status')!.textContent=error instanceof Error?error.message:String(error);(document.getElementById('export-failure') as HTMLButtonElement).disabled=true;}
+  }catch(error:unknown){latest=null;renderPlots(document.getElementById('failure-plots')!,[]);document.getElementById('failure-metrics')!.textContent='';document.getElementById('failure-status')!.textContent=error instanceof Error?error.message:String(error);(document.getElementById('export-failure') as HTMLButtonElement).disabled=true;}
  };
  for(const [key,title,unit,min,max,step,log]of fields){
   const box=element('div'),label=element('label'),input=element('input'),output=element('output');box.className='control';

@@ -7,12 +7,16 @@ import {setupBlanketExplorer} from '../src/blanket-ui.js';
 
 // Source-unit DOM: production event handlers and plots, not browser/GPU verification.
 class El{
+ dataset:Record<string,string>={};
+ parentElement:El|null=null;
  private identifier='';value:string|number='';type='';checked=false;disabled=false;hidden=false;open=false;textContent='';className='';
  min:string|number='';max:string|number='';step:string|number='';htmlFor='';children:El[]=[];
  attributes:Record<string,string>={};events=new Map<string,()=>void>();
  constructor(readonly tag:string,private registry:Map<string,El>){}
  set id(id:string){this.identifier=id;this.registry.set(id,this);}get id(){return this.identifier;}
- append(...children:El[]){this.children.push(...children);}replaceChildren(...children:El[]){this.children=children;}
+ append(...children:El[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:El[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:El,before:El|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,fn:()=>void){this.events.set(k,fn);}
  fire(k:string){this.events.get(k)!();}
 }
@@ -64,8 +68,8 @@ test('exposure keeps units, live results and local errors with scientific scope 
  assert.match(text(modelInfo[0]),/lifetime/i);assert.ok(descendants(modelInfo[0]).some(e=>e.tag==='a'));
  assert.equal(descendants(h).find(e=>e.tag==='h3')!.textContent,'Exposure');
  assert.match(get('target-arealHeatCapacityJm2K').attributes['aria-valuetext'],/J m⁻² K⁻¹/);
- const previousPlot=plots(h)[0].children[0];change('fusion-exposureS',25);
- assert.equal(source.config.exposureS,25);assert.notEqual(plots(h)[0].children[0],previousPlot);
+ const previousPlot=plots(h)[0].children[0],previousDrawing=previousPlot.children[1].children;change('fusion-exposureS',25);
+ assert.equal(source.config.exposureS,25);assert.equal(plots(h)[0].children[0],previousPlot);assert.notEqual(previousPlot.children[1].children,previousDrawing);
  assert.equal(status(h).textContent,'');assert.equal(exportButton.disabled,false);
  change('target-coolantK',-274);
  assert.match(status(h).textContent,/positive heat capacity\/absolute temperatures/);

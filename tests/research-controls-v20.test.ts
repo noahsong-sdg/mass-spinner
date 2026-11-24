@@ -4,11 +4,15 @@ import {readFileSync} from 'node:fs';
 import {createResearchLoader,setupResearchViewer} from '../src/research-ui.js';
 
 class Node {
+ dataset:Record<string,string>={};
+ parentElement:Node|null=null;
  children:Node[]=[];attributes:Record<string,string>={};events:Record<string,()=>void>={};
  textContent='';value='';disabled=false;
  constructor(public tag='div'){}
- append(...children:Node[]){this.children.push(...children);}
- replaceChildren(...children:Node[]){this.children=children;}
+ append(...children:Node[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}
+ replaceChildren(...children:Node[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:Node,before:Node|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(key:string,value:string){this.attributes[key]=value;}
  addEventListener(key:string,handler:()=>void){this.events[key]=handler;}
 }

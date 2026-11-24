@@ -10,9 +10,12 @@ import {setupResearchViewer} from '../src/research-ui.js';
 import * as THREE from 'three';
 
 class Node{
- children:Node[]=[];attributes:Record<string,string>={};events:Record<string,(e?:any)=>unknown>={};textContent='';value='';disabled=false;
+ children:Node[]=[];parentElement:Node|null=null;dataset:Record<string,string>={};attributes:Record<string,string>={};events:Record<string,(e?:any)=>unknown>={};textContent='';value='';disabled=false;
  constructor(public tag='div'){}
- append(...nodes:Node[]){this.children.push(...nodes);}replaceChildren(...nodes:Node[]){this.children=nodes;}
+ append(...nodes:Node[]){for(const node of nodes){node.remove();node.parentElement=this;this.children.push(node);}}
+ replaceChildren(...nodes:Node[]){for(const node of this.children)node.parentElement=null;this.children=[];this.append(...nodes);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(node:Node,before:Node|null){node.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,node);node.parentElement=this;return node;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,f:(e?:any)=>unknown){this.events[k]=f;}
 }
 function dom(t:any){

@@ -66,6 +66,6 @@ export async function setupResearchViewer(fetcher=fetch){
  }catch(error:unknown){
   $('replay-status').textContent=error instanceof Error?error.message:String(error);($('replay-case') as HTMLSelectElement).disabled=true;($('replay-time') as HTMLInputElement).disabled=true;
   $('replay-time-value').textContent='—';$('replay-scale').textContent='';
-  $('replay-tensors').replaceChildren();$('replay-plots').replaceChildren();return null;
+  $('replay-tensors').replaceChildren();renderPlots($('replay-plots'),[]);return null;
  }
 }

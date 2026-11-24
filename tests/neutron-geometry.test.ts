@@ -39,12 +39,16 @@ test('geometric domain rejects undefined areas and nonfinite inputs without inve
 // Actual production UI callbacks with a source-unit DOM; no browser/GPU claim.
 const registry=new Map<string,Element>();
 class Element{
+ dataset:Record<string,string>={};
+ parentElement:Element|null=null;
  private identifier='';children:Element[]=[];attributes:Record<string,string>={};value:string|number='';
  textContent='';className='';type='';disabled=false;checked=true;min:string|number='';max:string|number='';step:string|number='';htmlFor='';open=false;
  events=new Map<string,()=>void>();
  constructor(public tag='div'){}
  set id(id:string){this.identifier=id;registry.set(id,this);}get id(){return this.identifier;}
- append(...children:Element[]){this.children.push(...children);}replaceChildren(...children:Element[]){this.children=children;}
+ append(...children:Element[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:Element[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:Element,before:Element|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(key:string,value:string){this.attributes[key]=value;}
  addEventListener(key:string,listener:()=>void){this.events.set(key,listener);}
  fire(key:string){this.events.get(key)!();}

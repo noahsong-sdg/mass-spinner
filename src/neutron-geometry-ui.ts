@@ -20,7 +20,7 @@ export function setupNeutronGeometry(host:HTMLElement){
  }
  let latest:NeutronGeometrySource|null=null;const reads=new Map<string,()=>number>();
  const update=()=>{
-  rate.textContent='—';current.textContent='—';plot.replaceChildren();
+  rate.textContent='—';current.textContent='—';renderPlots(plot,[]);
   if(!latest){status.textContent='No source result is available.';return;}
   try{
    const distanceM=reads.get('distance')!(),sampleAreaM2=reads.get('area')!()/1e4;
@@ -32,7 +32,7 @@ export function setupNeutronGeometry(host:HTMLElement){
    renderPlots(plot,[{label:'Isotropic disk reference',x,y,xLabel:'Source to sample plane (m)',yLabel:'Mean incident current through plane (n/m²/s)',selectedX:distanceM,yDomain:[0,Math.max(...y)||1]}]);
    const ratio=Math.sqrt(latest.config.beamAreaM2/Math.PI)/distanceM;
    status.textContent=ratio>.1?'Spot radius / distance > 0.1. The point-source approximation does not include the finite source size.':'';
-  }catch(error){rate.textContent='—';current.textContent='—';plot.replaceChildren();status.textContent=error instanceof Error?error.message:String(error);}
+  }catch(error){rate.textContent='—';current.textContent='—';renderPlots(plot,[]);status.textContent=error instanceof Error?error.message:String(error);}
  };
  for(const [key,title,unit,min,max,step,value]of [['distance','Source to sample plane','m',.1,3,.05,.5],['area','Circular sample area','cm²',1,100,1,10]] as const){
   const box=element('div'),label=element('label'),out=element('output'),input=element('input');box.className='control';

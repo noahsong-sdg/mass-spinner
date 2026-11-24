@@ -7,12 +7,16 @@ import {setupNeutronGeometry} from '../src/neutron-geometry-ui.js';
 
 // Source-unit DOM only: runs production handlers, not a browser/GPU substitute.
 class El{
+ dataset:Record<string,string>={};
+ parentElement:El|null=null;
  private identifier='';value:string|number='';type='';checked=false;disabled=false;hidden=false;open=false;textContent='';className='';
  min:string|number='';max:string|number='';step:string|number='';htmlFor='';children:El[]=[];
  attributes:Record<string,string>={};events=new Map<string,()=>void>();
  constructor(private registry:Map<string,El>){}
  set id(id:string){this.identifier=id;this.registry.set(id,this);}get id(){return this.identifier;}
- append(...children:El[]){this.children.push(...children);}replaceChildren(...children:El[]){this.children=children;}
+ append(...children:El[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:El[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:El,before:El|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,fn:()=>void){this.events.set(k,fn);}
  fire(k:string){this.events.get(k)!();}
 }
@@ -85,8 +89,8 @@ test('actual loading observer keeps its errors local, resolution live, and share
  assert.equal(geometryPlot.children[0],priorGeometry);assert.equal(get('export-fusion').disabled,false);
  assert.equal(l.export.disabled,true);assert.equal(l.plot.children.length,0);assert.match(l.status.textContent,/replacement probability 0–1/);
  change('loading-replacement',.2);assert.equal(l.export.disabled,false);assert.ok(l.plot.children.length>0);
- const priorLoading=l.plot.children[0];change('loading-tolerance',1e-9,'change');
- assert.notEqual(l.plot.children[0],priorLoading);assert.equal(l.status.textContent,'');assert.match(text(loadingHost),/Relative tolerance 1.000e-9 → 1.000e-10/);
+ const priorLoading=l.plot.children[0],priorDrawing=priorLoading.children[1].children;change('loading-tolerance',1e-9,'change');
+ assert.equal(l.plot.children[0],priorLoading);assert.notEqual(priorLoading.children[1].children,priorDrawing);assert.equal(l.status.textContent,'');assert.match(text(loadingHost),/Relative tolerance 1.000e-9 → 1.000e-10/);
  assert.equal(get('loading-replacement').attributes['aria-valuetext'],'0.2 replacement probability');
  change('fusion-exposureS',25);
  assert.equal(source.config.exposureS,25);assert.equal(l.status.textContent,'');assert.equal(h.status.textContent,'');
@@ -132,8 +136,8 @@ test('actual loading tolerance controls simultaneous high-dose solve and refinem
  change('fusion-materialColumnM2',19);change('fusion-exposureS',100);change('loading-replacement',1);
  assert.ok(source);assert.equal(l.export.disabled,false);assert.ok(l.plot.children.length>0);
  assert.equal(l.status.textContent,'');assert.match(text(loadingHost),/Relative tolerance 1.000e-11 → 1.000e-12/);
- const previous=l.plot.children[0],previousSource=source;change('loading-tolerance',1e-7,'change');
- assert.notEqual(l.plot.children[0],previous);assert.equal(source,previousSource);
+ const previous=l.plot.children[0],previousDrawing=previous.children[1].children,previousSource=source;change('loading-tolerance',1e-7,'change');
+ assert.equal(l.plot.children[0],previous);assert.notEqual(previous.children[1].children,previousDrawing);assert.equal(source,previousSource);
  assert.equal(l.status.textContent,'');assert.match(text(loadingHost),/Relative tolerance 1.000e-7 → 1.000e-8/);
  assert.equal(l.export.disabled,false);assert.ok(l.plot.children.length>0);
  assert.match(text(loadingHost),/Maximum scaled conservation residual/);

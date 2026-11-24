@@ -12,7 +12,7 @@ const pct=(n: number | null)=>n===null?'undefined':`${(100*n).toFixed(1)}%`;
 export function setupStudies(getMode: () => string,getConfig: () => RunConfig,compute: (mode: string,config: RunConfig,signal: AbortSignal) => Promise<OrbitResult>){
  let active: AbortController | null | undefined,latest: {modelVersion: number; kind: string; settings: RunConfig; result: Awaited<ReturnType<typeof runOrbitStudy>>} | null | undefined;
  const resetButtons=()=>{$('repeat-study').disabled=false;$('scan-study').disabled=false;$('cancel-study').disabled=true;};
- const invalidate=()=>{active?.abort();active=null;latest=null;resetButtons();$('export-study').disabled=true;$('study-plots').replaceChildren();$('study-metrics').textContent='';$('study-status').textContent='Settings changed · study results cleared.';};
+ const invalidate=()=>{active?.abort();active=null;latest=null;resetButtons();$('export-study').disabled=true;renderPlots($('study-plots'),[]);$('study-metrics').textContent='';$('study-status').textContent='Settings changed · study results cleared.';};
  const range=()=>{
   const [a,b]=({voltage:[200,600],magneticT:[.06,.16],massB:[40,120]})[$('scan-parameter').value as Study['parameter']];
   $('scan-min').value=String(a);$('scan-max').value=String(b);
