@@ -6,6 +6,7 @@ test('the published plant sequence and extraction controls load and respond',asy
  const plant=page.locator('[data-plant-cycle]');
  await plant.getByRole('button',{name:'Next: start fusion',exact:true}).click();
  await expect(plant.locator('[data-plant-title]')).toHaveText('Supply energy and start D–T fusion');
+ await expect(plant.locator('[data-plant-title]')).toBeInViewport();
  await plant.getByRole('button',{name:'Play paths',exact:true}).click();
  await expect(plant).toHaveAttribute('data-motion','running');
  await plant.getByRole('button',{name:'Pause paths',exact:true}).click();

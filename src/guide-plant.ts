@@ -14,6 +14,7 @@ export function plantCycleDiagram(){
  return `<figure class="plant-cycle" data-plant-cycle data-motion="paused">
  <div class="drive-heading"><span>From startup to continued operation</span><button type="button" data-plant-motion disabled>Play paths</button></div>
  <p data-plant-position>1 of ${stages.length} · ${stages[0].where}</p><h3 data-plant-title>${stages[0].title}</h3>
+ <div class="plant-navigation"><button type="button" data-plant-previous disabled>Previous</button><button type="button" data-plant-next disabled>Next: start fusion</button></div>
  <p data-plant-reading aria-live="polite">${stages[0].reading}</p>
  <div class="plant-views"><svg viewBox="0 0 360 340" role="img" aria-labelledby="plant-section-title plant-section-description">
  <title id="plant-section-title">Separate chamber, mercury layer and lithium blanket</title><desc id="plant-section-description">A generic section through the chamber and surrounding layers. Mercury is an optional multiplier proposed by Marathon. The centrifuge is separate equipment. This drawing does not specify the shape of a confinement device.</desc>
@@ -41,7 +42,6 @@ export function plantCycleDiagram(){
  ${label(90,324,'↓ Heat sink')}${label(180,152,'Unburned exhaust →')}${label(270,48,'Fuel return')}
  </svg></div>
  <p class="plant-reaction" data-plant-reaction>${stages[0].reaction}</p><p data-plant-result>${stages[0].result}</p>
- <div class="plant-navigation"><button type="button" data-plant-previous disabled>Previous</button><button type="button" data-plant-next disabled>Next: start fusion</button></div>
  <figcaption>Generic D–T plant with Marathon’s proposed mercury layer. The sequence gives dependencies, not a clock. Path motion gives direction, not rate. No plant performance is calculated.</figcaption></figure>`;
 }
 const extractionMethods=[
@@ -61,7 +61,7 @@ export function tritiumExtractionDiagram(){
  <path d="M95 135H280V210" class="extraction-track"/>
  <circle cx="95" cy="135" r="10" class="plant-tritium" data-extraction-dot/><text x="95" y="139" text-anchor="middle" class="extraction-t" data-extraction-t>T</text>
  ${label(255,243,'↓ To recovery equipment')}<text x="98" y="35" text-anchor="middle" data-extraction-material>${extractionMethods[0].material}</text>
- </svg><div class="extraction-processing"><h4>After extraction</h4><ol><li>Collect tritium-bearing material from the carrier stream.</li><li>Remove impurities and recover hydrogen from chemical compounds where necessary.</li><li>Separate hydrogen isotopes where necessary.</li><li>Store fuel and supply the chamber or new fuel targets.</li></ol><p>Neither the carrier stream nor blanket material goes directly into the fusion fuel.</p></div></div>
+ </svg><div class="extraction-processing"><h3>After extraction</h3><ol><li>Collect tritium-bearing material from the carrier stream.</li><li>Remove impurities and recover hydrogen from chemical compounds where necessary.</li><li>Separate hydrogen isotopes where necessary.</li><li>Store fuel and supply the chamber or new fuel targets.</li></ol><p>Neither the carrier stream nor blanket material goes directly into the fusion fuel.</p></div></div>
  <label class="extraction-progress">Path progress <input type="range" min="0" max="100" value="0" aria-label="Tritium extraction path progress" disabled></label>
  <p data-extraction-note>${extractionMethods[0].note}</p>
  <figcaption>Design examples, not Marathon equipment. Follow one T atom through changing chemical forms. The eight-second path gives order, not an extraction time or atom trajectory.</figcaption></figure>`;

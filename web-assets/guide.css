@@ -113,7 +113,7 @@ body.embedded{max-width:none;padding:16px 24px;margin:0}body.embedded main{max-w
 .extraction-material{fill:#304a3c;stroke:#8ca594}.extraction-interface{fill:#a0acb8;stroke:#c1cbd1}
 .extraction-track{fill:none;stroke:#9bd8ce;stroke-dasharray:4 5;stroke-width:2}
 .extraction-views .extraction-t{fill:#14231c;font-size:10px;font-weight:700}
-.extraction-processing h4{margin:12px 0}.extraction-processing{font-size:14px}.extraction-processing ol{padding-left:22px}
+.extraction-processing h3{margin:12px 0}.extraction-processing{font-size:14px}.extraction-processing ol{padding-left:22px}
 .extraction-progress{display:flex;align-items:center;gap:16px;font-size:13px}.extraction-progress input{width:100%;min-width:0;min-height:44px;accent-color:#e4ac76}
 @media(max-width:600px){.plant-views,.extraction-views{grid-template-columns:1fr}.plant-cycle,.tritium-extraction{padding:12px}.plant-cycle .drive-heading,.tritium-extraction .drive-heading{align-items:start}.plant-navigation button{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.plant-cycle .plant-route{animation:none!important}}
