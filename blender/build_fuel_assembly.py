@@ -49,7 +49,7 @@ def module(name, anchor, kind='radius'):
     modules.append(obj)
     return obj
 
-def finish(obj, name, material, component, parent, bevel=.0003):
+def finish(obj, name, material, component, parent, bevel=.0003, bevel_segments=3):
     obj.name = name
     obj.parent = parent
     obj.data.materials.append(materials[material])
@@ -64,12 +64,12 @@ def finish(obj, name, material, component, parent, bevel=.0003):
         obj.data.use_auto_smooth = True
     if bevel:
         modifier = obj.modifiers.new('Machined edge radii', 'BEVEL')
-        modifier.width, modifier.segments = bevel, 3
+        modifier.width, modifier.segments = bevel, bevel_segments
         modifier = obj.modifiers.new('Face-weighted normals', 'WEIGHTED_NORMAL')
         modifier.keep_sharp = True
     return obj
 
-def ring(name, ri, ro, depth, z, material, component, parent, opening=False, rise=0, segments=96):
+def ring(name, ri, ro, depth, z, material, component, parent, opening=False, rise=0, segments=96, bevel_segments=3):
     start, span = (TAU * .5, TAU * .5) if opening else (0, TAU)
     n, vertices, faces = segments, [], []
     closed = not opening and not rise
@@ -89,7 +89,7 @@ def ring(name, ri, ro, depth, z, material, component, parent, opening=False, ris
     obj = bpy.data.objects.new(name, mesh)
     bpy.context.collection.objects.link(obj)
     obj.location.z = z
-    return finish(obj, name, material, component, parent)
+    return finish(obj, name, material, component, parent, bevel_segments=bevel_segments)
 
 def cylinder(name, radius, depth, pos, material, component, parent, vertices=48):
     bpy.ops.mesh.primitive_cylinder_add(vertices=vertices, radius=radius, depth=depth, location=pos)
@@ -128,7 +128,8 @@ for anchor in [0, 1]:
         x, y = R*1.12*math.cos(a), R*1.12*math.sin(a)
         cylinder('Flange stud', .0018, .034, (x,y,0), 'Stainless steel', 'vessel', end)
         for sign in [-1,1]:
-            washer = ring('Captive washer', .0019, .0034, .0007, sign*(.01335 if sign == direction else .007), 'Seal alloy', 'vessel', end)
+            # At 24 sides, a 3.4 mm washer has less than 0.030 mm radial error.
+            washer = ring('Captive washer', .0019, .0034, .0007, sign*(.01335 if sign == direction else .007), 'Seal alloy', 'vessel', end, segments=24, bevel_segments=1)
             washer.location.x, washer.location.y = x, y
             nut = ring('Hex flange nut', .0018, .003, .0028, sign*(.0152 if sign == direction else .009), 'Stainless steel', 'vessel', end, segments=6)
             nut.location.x, nut.location.y = x, y
@@ -146,14 +147,15 @@ for anchor in [.18,.4,.6,.82]:
     coil = module('Solenoid pack', anchor)
     ring('Grooved alumina former', R*1.06, R*1.13, .036, 0, 'Alumina', 'coils', coil)
     for i in range(7):
-        ring('Turn insulation', R*1.129, R*1.231, .0039, (i-3)*.0048, 'Winding insulation', 'coils', coil, rise=.0048)
-        ring('Copper solenoid turn', R*1.13, R*1.23, .0035, (i-3)*.0048, 'Copper', 'coils', coil, rise=.0048)
+        # Preserve the helical rise. The radial chord error stays below 0.18 mm.
+        ring('Turn insulation', R*1.129, R*1.231, .0039, (i-3)*.0048, 'Winding insulation', 'coils', coil, rise=.0048, segments=64, bevel_segments=2)
+        ring('Copper solenoid turn', R*1.13, R*1.23, .0035, (i-3)*.0048, 'Copper', 'coils', coil, rise=.0048, segments=64, bevel_segments=2)
     for z in [-.02,.02]:
         ring('Solenoid retaining cheek', R*1.065, R*1.25, .002, z, 'Structural steel', 'coils', coil)
     for sign in [-1,1]:
         box('Coil bus tab', (.023,.008,.004), (R*1.27,0,sign*.0168), 'Copper', 'coils', coil)
         cylinder('Coil binding post', .003, .014, (R*1.35,0,sign*.0168), 'Copper', 'coils', coil, 6)
-        washer = ring('Terminal isolation washer', .0031, .006, .002, sign*.023, 'Alumina', 'insulators', coil)
+        washer = ring('Terminal isolation washer', .0031, .006, .002, sign*.023, 'Alumina', 'insulators', coil, segments=32, bevel_segments=1)
         washer.location.x = R*1.35
 for anchor in [.18,.82]:
     saddle = module('Isolation saddle', anchor)
