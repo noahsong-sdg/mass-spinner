@@ -55,5 +55,20 @@ export function attachFuelAssembly(scene: THREE.Object3D,source: THREE.Object3D,
   }});
   parent.add(node);
  }
+ const authoredContext=source.children.find(node=>node.userData.viewContext);
+ if(authoredContext){
+  scene.updateWorldMatrix(true,true);
+  const bed=new THREE.Box3().setFromObject(scene.getObjectByName('Support bed')!);
+  const context=authoredContext.clone(true),span=config.lengthM+.6,width=Math.max(.9,bed.max.x-bed.min.x+.12);
+  context.traverse(child=>{if(child instanceof THREE.Mesh){
+   const mesh=child as THREE.Mesh<THREE.BufferGeometry,THREE.Material>;
+   mesh.geometry=mesh.geometry.clone();mesh.material=mesh.material.clone();
+   child.position.x=child.userData.stationXFraction*width;
+   child.position.z=child.userData.stationZFraction*span;
+   if(child.userData.stationWidthStretch)child.scale.x=width/.9;
+   if(child.userData.stationStretch)child.scale.z=span/1.4;
+  }});
+  context.position.set(0,bed.min.y,config.lengthM/2);scene.add(context);
+ }
  scene.userData.authoredAssembly={tool:'Blender',modules:modules.length,source:'/models/centrifuge-assembly.glb',basis:'Parametric mesh assembly with illustrative construction. It is not fabrication CAD.'};
 }

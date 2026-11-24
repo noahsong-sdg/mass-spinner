@@ -50,6 +50,7 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
  if(assembly){attachFuelAssembly(scene,assembly,c);finishFuelHardware(scene);}
  const records=new Map(FUEL_COMPONENTS.map(x=>[x.id,x]));
  scene.traverse(mesh=>{if('isMesh' in mesh&&mesh.isMesh){
+  for(let parent:THREE.Object3D|null=mesh;parent;parent=parent.parent)if(parent.userData.viewContext)return;
   const componentId:unknown=mesh.userData.componentId;
   const id=typeof componentId==='string'&&records.has(componentId)?componentId:'vessel';
   mesh.userData={...mesh.userData,componentId:id,purpose:records.get(id)!.purpose,geometryBasis:BASIS};
@@ -89,9 +90,9 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
   cathode.userData.currentEndpointM=f*R;anode.userData.currentEndpointM=R;
  }
  if(assembly)for(const end of [0,1]){
-  const z=L*end,ringZ=L*(end===0?.06:.94),s=R/.12*envelopeScale;
+  const z=L*end,ringZ=L*(end===0?.06:.94),s=R/.12*envelopeScale,direction=end===0?-1:1;
   for(const [x,radius]of [[-.62,f],[.62,1]]){
-   tube('Insulated drive connection',[[x*R*envelopeScale,-R*.84*envelopeScale,z-.059*s],[x*R*envelopeScale,-R*.84*envelopeScale,z-.065*s],[radius*R,0,z-.065*s],[radius*R,0,ringZ]],'electrodes',R*.018);
+   tube('Insulated drive connection',[[x*R*envelopeScale,-R*.64*envelopeScale,z+direction*.0065*s],[x*R*envelopeScale,-R*.64*envelopeScale,z-direction*.015*s],[radius*R,0,z-direction*.015*s],[radius*R,0,ringZ]],'electrodes',R*.018);
   }
  }
  tube('Working-gas feed inlet',[[0,0,-R*.95],[0,0,-R*.5],[0,0,L*.08]],'feed',cathodeR*.9);
@@ -117,7 +118,7 @@ export function buildFuelCentrifugeGeometry({config:c,result:r,diagnostics=false
   }
  }
  if(c.pair==='lithium'){
-  const liner=annulus(R,R*1.012,L*.86,Math.PI*.75,Math.PI*1.5,96);
+  const liner=annulus(R,R*1.012,L*.86,0,Math.PI*2,96);
   const mesh=add('Lithium refractory sub-vessel',liner,refractory,'liner',[0,0,L/2]);mesh.userData.temperatureK=c.linerK;mesh.userData.gasBoundaryRadiusM=R;
   const options=r.transport?.operation?.thermal;
   const thermal=!!options&&typeof options==='object'&&'enabled' in options&&options.enabled===true;

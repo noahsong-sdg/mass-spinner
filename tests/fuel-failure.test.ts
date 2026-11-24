@@ -60,6 +60,7 @@ test('burst keeps authored orientations, shares geometry, removes diagnostic cli
  const scene=new THREE.Group(),construction=new THREE.Group(),part=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshBasicMaterial());
  construction.name='construction';part.rotation.set(.2,.4,.6);part.position.set(.1,.2,.3);construction.add(part);scene.add(construction);
  const hidden=new THREE.Group();hidden.visible=false;scene.add(hidden);
+ const station=new THREE.Group();station.userData.viewContext=true;scene.add(station);
  const material=part.material as THREE.Material;material.clippingPlanes=[new THREE.Plane(new THREE.Vector3(1,0,0),0)];
  let originalDisposed=false,copyDisposed=false;material.addEventListener('dispose',()=>{originalDisposed=true;});
  const burst=createFuelBurst(scene,{radiusM:.12,lengthM:.8});
@@ -69,11 +70,13 @@ test('burst keeps authored orientations, shares geometry, removes diagnostic cli
  assert.equal((copy.material as THREE.Material).clippingPlanes,null);assert.equal(material.clippingPlanes.length,1);
  (copy.material as THREE.Material).addEventListener('dispose',()=>{copyDisposed=true;});
  assert.equal(construction.visible,false);assert.equal(burst.group.visible,true);
+ assert.equal(station.visible,true,'The workbench remains visible during the failure illustration.');
  burst.update(1.6);assert.ok(copy.position.distanceTo(part.position)>.05);assert.ok(copy.position.distanceTo(part.position)<.15,'Keep display motion close to the assembly.');
  burst.update(null);assert.equal(construction.visible,true);assert.equal(hidden.visible,false);assert.equal(burst.group.visible,false);
  assert.deepEqual(copy.position.toArray(),part.position.toArray(),'Hidden burst parts must not enlarge the camera bounds after rewind.');
  burst.update(0);assert.deepEqual(copy.position.toArray(),part.position.toArray());assert.deepEqual(copy.quaternion.toArray(),part.quaternion.toArray());
  burst.dispose();assert.equal(construction.visible,true);assert.equal(scene.children.includes(burst.group),false);
+ assert.equal(station.visible,true);
  assert.equal(copyDisposed,true);assert.equal(originalDisposed,false,'Burst disposal must keep the intact materials usable.');
  part.geometry.dispose();(part.material as THREE.Material).dispose();
 });

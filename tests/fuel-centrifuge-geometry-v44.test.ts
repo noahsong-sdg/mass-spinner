@@ -42,10 +42,14 @@ test('lithium hot liner follows gas radius, separated from the outer vacuum enve
  const helium=build({pair:'helium'});assert.equal(members(helium,'liner').length,0);assert.equal(named(helium,'Vessel pressure wall').parent!.scale.x,1);release(helium);
 });
 
-test('lithium liner cutaway opens toward the same inspection direction as the engineering shell',()=>{
- const scene=build(),liner=named(scene,'Lithium refractory sub-vessel'),center=scene.localToWorld(new THREE.Vector3(0,0,config.lengthM/2));
+test('the complete lithium liner opens toward the inspection direction only through display clipping',()=>{
+ const {scene,tools}=buildFuelCentrifugeGeometry({config,result:simulateFuelCentrifuge(config),diagnostics:true});
+ const liner=named(scene,'Lithium refractory sub-vessel'),center=scene.localToWorld(new THREE.Vector3(0,0,config.lengthM/2));
  const open=new THREE.Vector3(0,1,0).transformDirection(scene.matrixWorld),closed=open.clone().negate();
- assert.equal(new THREE.Raycaster(center,open).intersectObject(liner).length,0);assert.ok(new THREE.Raycaster(center,closed).intersectObject(liner).length>0);release(scene);
+ const hits=(direction:THREE.Vector3)=>new THREE.Raycaster(center,direction).intersectObject(liner).filter(tools.visibleHit);
+ assert.ok(hits(open).length>0);assert.ok(hits(closed).length>0);
+ tools.setStaging({cutaway:.5});assert.equal(hits(open).length,0);assert.ok(hits(closed).length>0);
+ tools.setStaging({cutaway:0});assert.ok(hits(open).length>0);assert.ok(hits(closed).length>0);tools.dispose();release(scene);
 });
 
 test('spatial thermal liner inspection distinguishes solved temperatures from illustrative shell shading',()=>{

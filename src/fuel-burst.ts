@@ -31,7 +31,7 @@ export function createFuelBurst(scene:THREE.Object3D,c:Pick<FuelConfig,'radiusM'
  const hidden=new Map<THREE.Object3D,boolean>();let active=false;
  function setVisible(value:boolean){
   if(value===active)return;active=value;group.visible=value;
-  if(value)for(const node of scene.children){if(node===group)continue;hidden.set(node,node.visible);node.visible=false;}
+  if(value)for(const node of scene.children){if(node===group||node.userData.viewContext)continue;hidden.set(node,node.visible);node.visible=false;}
   else{
    for(const [node,visible]of hidden)node.visible=visible;hidden.clear();
    for(const {node,position,rotation}of parts){node.position.copy(position);node.quaternion.copy(rotation);}

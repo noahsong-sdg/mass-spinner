@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "blender": "5.2.4 LTS",
+  "basis": "Marathon patent topology; illustrative construction, not as-built dimensions or fabrication CAD.",
+  "coordinateSystem": "SI xyz, axial z",
+  "modules": [
+    {
+      "name": "Pressure boundary",
+      "anchorFraction": 0.5,
+      "scaleMode": "length"
+    },
+    {
+      "name": "Vacuum end assembly",
+      "anchorFraction": 0,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Vacuum end assembly.001",
+      "anchorFraction": 1,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Solenoid pack",
+      "anchorFraction": 0.18,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Solenoid pack.001",
+      "anchorFraction": 0.4,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Solenoid pack.002",
+      "anchorFraction": 0.6,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Solenoid pack.003",
+      "anchorFraction": 0.82,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Isolation saddle",
+      "anchorFraction": 0.18,
+      "scaleMode": "radius"
+    },
+    {
+      "name": "Isolation saddle.001",
+      "anchorFraction": 0.82,
+      "scaleMode": "radius"
+    }
+  ],
+  "meshes": 316
+}

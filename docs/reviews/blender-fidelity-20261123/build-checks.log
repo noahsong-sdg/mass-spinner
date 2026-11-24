@@ -1,0 +1,88 @@
+
+> typecheck
+> tsc --noEmit --checkers 1 && tsc --noEmit --checkers 1 -p tsconfig.contracts.json
+
+
+> typecheck:infrastructure
+> tsc --noEmit --checkers 1 -p tsconfig.infrastructure.json
+
+
+> typecheck:boundaries
+> tsc --noEmit --checkers 1 -p tsconfig.boundaries.json
+
+
+> typecheck:tests
+> tsc --noEmit --checkers 1 -p tsconfig.tests.json
+
+
+> lint
+> eslint src --max-warnings 0
+
+
+> build
+> tsx scripts/qualify-gltf.ts && node scripts/build.mjs
+
+{"kind":"lossless-accessor-mesh-dedup","source":"web-assets/models/centrifuge-assembly.glb","sourceBytes":1012804,"bytes":1012804,"savedFraction":0,"elapsedMS":15.523708,"peakRSSKiB":158784,"timings":[{"file":"web-assets/models/centrifuge-assembly.glb","parseMS":2.855415999999991},{"file":"output/gltf-trial/centrifuge-assembly.glb","parseMS":1.7542499999999848}],"selectableNodes":316,"geometryStreamsExact":true,"validation":{"uri":"output/gltf-trial/centrifuge-assembly.glb","mimeType":"model/gltf-binary","validatorVersion":"2.0.0-dev.3.10","validatedAt":"2026-11-24T03:14:34.278Z","issues":{"numErrors":0,"numWarnings":0,"numInfos":30,"numHints":0,"messages":[{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/0/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/1/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/2/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/3/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/4/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/5/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/6/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/7/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/8/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/9/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/11/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/12/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/13/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/14/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/16/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/17/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/27/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/28/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/29/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/30/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/31/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/32/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/38/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/39/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/40/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/41/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/42/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/43/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/44/primitives/0/attributes/TEXCOORD_0"},{"code":"UNUSED_OBJECT","message":"This object may be unused.","severity":2,"pointer":"/meshes/45/primitives/0/attributes/TEXCOORD_0"}],"truncated":false},"info":{"version":"2.0","generator":"glTF-Transform v4.5.1","resources":[{"pointer":"/buffers/0","mimeType":"application/gltf-buffer","storage":"glb","byteLength":873760}],"animationCount":0,"materialCount":8,"hasMorphTargets":false,"hasSkins":false,"hasTextures":false,"hasDefaultScene":true,"drawCallCount":46,"totalVertexCount":34432,"totalTriangleCount":63988,"maxUVs":1,"maxInfluences":0,"maxAttributes":3}},"scope":"NodeIO warm filesystem parsing; not browser cold-load latency, GPU memory or frame performance. Build copies this qualified asset into release/models. No quantization or decoder extension."}
+vite v8.3.8 building client environment for production...
+transforming...
+✓ 264 modules transformed.
+rendering chunks...
+computing gzip size...
+release/laurelin.html                                  4.60 kB │ gzip:   1.94 kB
+release/assets/LAURELIN-MODEL-C0PI6VRB.md              7.36 kB
+release/index.html                                    37.06 kB │ gzip:  11.94 kB
+release/assets/worker-H-rQuK8Q.js                    193.94 kB
+release/assets/laurelin-DT7nLmN6.css                   4.50 kB │ gzip:   1.55 kB
+release/assets/main-BQomhHSG.css                      83.80 kB │ gzip:  16.23 kB
+release/assets/RoomEnvironment-CtB2zCOf.js             2.04 kB │ gzip:   0.88 kB
+release/assets/engineering-geometry-1NzD-SJV.js       11.91 kB │ gzip:   5.27 kB
+release/assets/laurelin-BjfeoJ5m.js                   15.40 kB │ gzip:   7.31 kB
+release/assets/OrbitControls-Chc-6QNR.js              20.07 kB │ gzip:   4.42 kB
+release/assets/apparatus-viewer-b4UOnuP5.js           35.19 kB │ gzip:  13.99 kB
+release/assets/fuel-centrifuge-geometry-BU0BfjFm.js   40.32 kB │ gzip:  15.10 kB
+release/assets/GLTFLoader-BglcfB7q.js                 50.67 kB │ gzip:  14.57 kB
+release/assets/three.core-Cp1OPh_Y.js                263.58 kB │ gzip:  69.32 kB
+release/assets/three.module-_8TIrO2D.js              352.60 kB │ gzip:  84.33 kB
+release/assets/legacy-renderer-BKslvrSp.js           617.22 kB │ gzip: 171.81 kB
+release/assets/main-XVRwSpHN.js                      750.18 kB │ gzip: 249.00 kB
+
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 306ms
+
+> check:site
+> node scripts/check-site.mjs
+
+Built modules parse; HTML resources, physics worker and deployment assets exist. Not a browser runtime check.
+
+> check:assets
+> python3 blender/check_assets.py
+
+GLB v2: 176 meshes; PNG 1600×1000; Blender scene present
+Authored centrifuge: nine SI hardware modules and one illustrative laboratory context
+
+> check:gltf
+> tsx scripts/check-gltf.ts
+
+assets/separator.glb: 5643464 bytes; 0 warnings; zero validation errors
+web-assets/models/centrifuge-assembly.glb: 1012804 bytes; 0 warnings; zero validation errors
+release/models/centrifuge-assembly.glb: 1012804 bytes; 0 warnings; zero validation errors
+web-assets/models/gas-cell.glb: 12048 bytes; 0 warnings; zero validation errors
+release/models/gas-cell.glb: 12048 bytes; 0 warnings; zero validation errors
+web-assets/models/gas-markers.glb: 10916 bytes; 0 warnings; zero validation errors
+release/models/gas-markers.glb: 10916 bytes; 0 warnings; zero validation errors
+web-assets/models/blanket.glb: 6768236 bytes; 0 warnings; zero validation errors
+release/models/blanket.glb: 6768236 bytes; 0 warnings; zero validation errors
+
+> release:seal
+> tsx scripts/release-manifest.ts seal
+
+45588450bf35cb9abc4e3472ff6f30bf9b00d459: 266 verified files
+
+> release:verify
+> tsx scripts/release-manifest.ts verify
+
+45588450bf35cb9abc4e3472ff6f30bf9b00d459: 266 verified files

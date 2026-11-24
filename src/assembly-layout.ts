@@ -12,6 +12,7 @@ export function createAssemblyLayout(root:THREE.Object3D){
   if(!('geometry' in node))return;
   let id:string|undefined;
   for(let parent:THREE.Object3D|null=node;parent;parent=parent.parent){
+   if(parent.userData.viewContext)return;
    if(parent.userData.quantitativeOnly||parent.userData.nonPickable){hidden.push({node,mask:node.layers.mask});return;}
    if(!parent.visible)return;
    id??=typeof parent.userData.componentId==='string'?parent.userData.componentId:undefined;

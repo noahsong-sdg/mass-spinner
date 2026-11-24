@@ -199,7 +199,12 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function describeScale(){scaleNote.textContent=asset?.scaleLabel??'';scaleNote.hidden=!root||!asset?.scaleLabel;}
  function modelUp(){const up=asset?.modelCamera?.up??[0,1,0];return root===stateLayer.group?new THREE.Vector3(1,0,0).transformDirection(root.matrixWorld):new THREE.Vector3(up[0],up[1],up[2]);}
  function fit(expanded?:THREE.Box3){
-  root!.updateWorldMatrix(true,true);const bounds=expanded?modelBounds.copy(expanded):modelBounds.setFromObject(root!);
+  root!.updateWorldMatrix(true,true);const bounds=expanded?modelBounds.copy(expanded):modelBounds.makeEmpty();
+  if(!expanded)root!.traverse(node=>{
+   if(!isMesh(node)&&!isLine(node)&&!isPoints(node))return;
+   for(let parent:THREE.Object3D|null=node;parent;parent=parent.parent)if(parent.userData.viewContext)return;
+   bounds.expandByObject(node);
+  });
   radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;
   if(!Number.isFinite(radius)||radius<=0)throw new Error('3D model has no finite geometry.');
   bounds.getCenter(center);radius=bounds.getBoundingSphere(new THREE.Sphere()).radius;

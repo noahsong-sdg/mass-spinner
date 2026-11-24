@@ -73,11 +73,51 @@ test('each drive layer covers the circumference and more than one axial station'
 });
 
 test('real Blender GLB has nine SI modules and independently editable engineering details',()=>{
- const modules=template.scene.children;assert.equal(modules.length,9);
- let count=0;template.scene.traverse((o:any)=>{if(o.isMesh){count++;assert.ok(FUEL_COMPONENTS.some(c=>c.id===o.userData.componentId),o.name);assert.match(o.userData.materialBasis,/Assumed/);assert.match(o.userData.geometryBasis,/illustrative/);for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])for(const v of a.array)assert.ok(Number.isFinite(v));}});
- assert.equal(count,261);for(const name of ['Hex flange nut','Recessed metallic seal','HV alumina feedthrough','Copper solenoid turn','Coil bus tab','Ceramic isolation pad'])assert.ok(modules.some(o=>o.getObjectByName(name.replaceAll(' ','_'))||o.getObjectByName(name)),name);
+ const modules=template.scene.children.filter(o=>o.userData.assemblyModule);assert.equal(modules.length,9);
+ template.scene.traverse((o:any)=>{if(o.isMesh){assert.ok(FUEL_COMPONENTS.some(c=>c.id===o.userData.componentId),o.name);assert.match(o.userData.materialBasis,/Assumed/);assert.match(o.userData.geometryBasis,/illustrative/i);for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])for(const v of a.array)assert.ok(Number.isFinite(v));}});
+ for(const name of ['Hex flange nut','Recessed metallic seal','HV alumina feedthrough','Copper solenoid turn','Coil bus tab','Ceramic isolation pad'])assert.ok(modules.some(o=>o.getObjectByName(name.replaceAll(' ','_'))||o.getObjectByName(name)),name);
  const turns:any[]=[];template.scene.traverse(o=>{if(o.userData.renderName==='Copper solenoid turn')turns.push(o);});assert.equal(turns.length,28);
  for(const turn of turns){turn.geometry.computeBoundingBox();assert.ok(turn.geometry.boundingBox.max.z-turn.geometry.boundingBox.min.z>.008,'a turn must rise along z and join the next turn, rather than be a disconnected shorted ring');}
+ for(const turn of turns)assert.deepEqual(turn.geometry.getAttribute('position').array,turns[0].geometry.getAttribute('position').array,'identical turns use object transforms so lossless mesh sharing preserves their detail');
+});
+
+test('the authored pressure shell closes the full circumference and feedthroughs have real cover bores',()=>{
+ template.scene.updateMatrixWorld(true);
+ const wall=template.scene.getObjectByName('Vessel_pressure_wall')!;
+ for(let i=0;i<72;i++){
+  const angle=i*Math.PI/36,ray=new THREE.Raycaster(new THREE.Vector3(0,0,.4),new THREE.Vector3(Math.cos(angle),Math.sin(angle),0));
+  const hit=ray.intersectObject(wall)[0];assert.ok(hit,`Missing wall at angle ${angle}`);
+  const radius=Math.hypot(hit.point.x,hit.point.y);assert.ok(radius>=.12*Math.cos(Math.PI/96)-1e-8&&radius<=.12+1e-8,'the 96-sided shell bounds the gas radius');
+ }
+ const covers:THREE.Object3D[]=[];template.scene.traverse(node=>{if(node.userData.renderName==='End retaining plate')covers.push(node);});
+ assert.equal(covers.length,2);
+ for(const cover of covers)for(const x of [-.12*.62,.12*.62]){
+  const z=cover.getWorldPosition(new THREE.Vector3()).z;
+  const ray=new THREE.Raycaster(new THREE.Vector3(x,-.12*.64,z-.1),new THREE.Vector3(0,0,1));
+  assert.equal(ray.intersectObject(cover).length,0,'the ceramic feedthrough passes through a bore');
+  ray.ray.origin.x+=.02;assert.ok(ray.intersectObject(cover).length>0,'metal surrounds the bore');
+ }
+});
+
+test('station context keeps SI height and owned resources while its span follows chamber length',()=>{
+ for(const radiusM of [.08,.3])for(const lengthM of [.3,1.8]){
+  const c={...defaults,radiusM,lengthM},r=simulateFuelCentrifuge(c),built=buildFuelCentrifugeGeometry({config:c,result:r,assembly:template.scene,diagnostics:true});
+  const context=built.scene.children.find(node=>node.userData.viewContext)!;assert.ok(context);assert.equal(context.userData.nonPickable,true);
+  const table=context.getObjectByName('Workbench_top') as THREE.Mesh,leg=context.getObjectByName('Bench_leg') as THREE.Mesh;
+  const source=template.scene.getObjectByName('Bench_leg') as THREE.Mesh;
+  assert.notEqual(leg.geometry,source.geometry);assert.notEqual(leg.material,source.material);
+  close(table.scale.z,(lengthM+.6)/1.4);close(leg.scale.y,1);close(leg.scale.z,1);
+  built.scene.updateMatrixWorld(true);
+  const bed=new THREE.Box3().setFromObject(built.scene.getObjectByName('Support bed')!);
+  const top=new THREE.Box3().setFromObject(table),floor=new THREE.Box3().setFromObject(context.getObjectByName('Laboratory_floor')!);
+  close(top.max.y,bed.min.y);assert.ok(top.min.z<=bed.min.z&&top.max.z>=bed.max.z,'the workbench supports the full bed width');
+  context.traverse(node=>{
+   if(node instanceof THREE.Mesh)assert.equal(node.userData.geometryBasis,'Illustrative laboratory setting. This is not a Marathon facility.');
+   if(node.userData.renderName==='Leveling foot')close(new THREE.Box3().setFromObject(node).min.y,floor.max.y);
+  });
+  const before=context.position.clone();built.tools.setStaging({cutaway:1,ghost:true,explode:1});assert.deepEqual(context.position,before);
+  built.tools.dispose();release(built.scene);
+ }
 });
 
 test('authored assembly follows accepted SI radius and length without stretching fastener shapes with chamber length',()=>{

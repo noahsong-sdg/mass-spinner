@@ -74,6 +74,17 @@ test('reduced motion separates and restores hardware without animation callbacks
  assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'assembled','a numerical view restores assembled hardware');
 });
 
+test('room context does not change camera framing or move and disappear during part separation',async t=>{
+ const plain=fixture(t),room=fixture(t);
+ const context=new THREE.Group();context.userData={viewContext:true,nonPickable:true};room.root.add(context);
+ const floor=new THREE.Mesh(new THREE.BoxGeometry(100,1,100),new THREE.MeshStandardMaterial());floor.position.set(0,-10,0);context.add(floor);
+ await plain.viewer.load({model:'plain'});await room.viewer.load({model:'room'});
+ assert.deepEqual(room.viewer.cameraPose(),plain.viewer.cameraPose());
+ const position=floor.position.clone();room.viewer.explode('coils');room.step(0);room.step(450);
+ assert.deepEqual(floor.position,position);assert.equal(floor.layers.mask,1);assert.equal(context.visible,true);
+ room.viewer.explode(null);room.step(500);room.step(820);assert.deepEqual(floor.position,position);
+});
+
 test('interrupted transitions, reload and disposal restore hardware without late callbacks',async t=>{
  const g=fixture(t);await g.viewer.load({model:'assembly'});const initial=g.coils.position.clone();
  g.viewer.explode('coils');g.step(0);g.step(100);g.viewer.explode(null);g.step(120);g.step(440);
