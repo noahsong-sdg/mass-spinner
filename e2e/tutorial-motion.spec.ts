@@ -1,5 +1,26 @@
 import {test,expect} from '@playwright/test';
 
+test('the published plant sequence and extraction controls load and respond',async({page})=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/tutorial-05.html#chronology');
+ const plant=page.locator('[data-plant-cycle]');
+ await plant.getByRole('button',{name:'Next: start fusion',exact:true}).click();
+ await expect(plant.locator('[data-plant-title]')).toHaveText('Supply energy and start D–T fusion');
+ await plant.getByRole('button',{name:'Play paths',exact:true}).click();
+ await expect(plant).toHaveAttribute('data-motion','running');
+ await plant.getByRole('button',{name:'Pause paths',exact:true}).click();
+ await expect(plant).toHaveAttribute('data-motion','paused');
+ const extraction=page.locator('[data-tritium-extraction]');
+ await extraction.getByRole('button',{name:'Liquid lead–lithium',exact:true}).click();
+ await expect(extraction.locator('[data-extraction-interface]')).toBeVisible();
+ await extraction.getByRole('slider').press('End');
+ await expect(extraction.getByRole('button',{name:'Replay path',exact:true})).toBeEnabled();
+ await extraction.getByRole('button',{name:'Ceramic breeder',exact:true}).click();
+ await expect(extraction.getByRole('button',{name:'Show path',exact:true})).toBeEnabled();
+ await expect(extraction.locator('[data-extraction-interface]')).toBeHidden();
+ expect(errors).toEqual([]);
+});
+
 test('tutorial animations move atoms, conserve inventory and expose pause and replay',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/guide.html');

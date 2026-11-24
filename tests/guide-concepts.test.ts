@@ -69,6 +69,10 @@ test('tutorial sections use a diagram, a comparison table or a direct explanatio
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
    if(heading.id==='path')continue; // This section links to further reading.
+   if(doc.title.startsWith('Tutorial 5')&&['architecture','electricity'].includes(heading.id)){
+    let content='';for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)content+=n.outerHTML;
+    assert.match(content,heading.id==='architecture'?/Stellarator[\s\S]*Inertial confinement/:/data-equation-plot="plant-electricity"/);continue;
+   }
    if(doc.title.startsWith('Tutorial 5')&&heading.id==='jobs'){
     let table:Element|null=null;
     for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)if(n.tagName==='TABLE')table=n;

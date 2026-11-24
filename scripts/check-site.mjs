@@ -1,6 +1,17 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
+import {createSourceFile,ScriptTarget,isImportDeclaration,isExportDeclaration,isStringLiteral} from 'typescript';
+import {resolve} from 'node:path';
+for(const name of readdirSync('release').filter(name=>name.endsWith('.js'))){
+ const module=createSourceFile(name,readFileSync(`release/${name}`,'utf8'),ScriptTarget.ES2022);
+ for(const statement of module.statements){
+  if(!isImportDeclaration(statement)&&!isExportDeclaration(statement))continue;
+  const specifier=statement.moduleSpecifier;
+  if(specifier&&isStringLiteral(specifier)&&specifier.text.startsWith('.'))
+   assert.ok(existsSync(resolve('release',specifier.text)),`Missing module imported by ${name}: ${specifier.text}`);
+ }
+}
 const html=readFileSync('release/index.html','utf8');
 const ids=new Set([...html.matchAll(/id="([^"]+)"/g)].map(match=>match[1]));
 for(const file of ['src/main.ts','src/legacy-renderer.ts','src/study-ui.ts']){

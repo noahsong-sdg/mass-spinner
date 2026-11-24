@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
+import {readFileSync} from 'node:fs';
 import {documentationPage} from '../scripts/documentation-page.mjs';
 import {startPage} from '../scripts/start-page.mjs';
 import {setupGuideReader} from '../src/guide-reader.js';
+import {understandingPage} from '../scripts/understanding-page.mjs';
 
 test('every reader has ordinary contents links and omits repetitive learning scaffolding',t=>{
  for(const [name,html] of Object.entries({'start.html':startPage(),'learn.html':documentationPage()})){
@@ -37,25 +39,23 @@ test('the distribution section explains temperature before the comparison and co
  const section=dom.window.document.getElementById('composition')!.parentElement!;
  const intro=section.querySelector('p')!.textContent!;
  assert.match(intro,/No rotation with Rotation first.*Higher temperature at the same rotation speed.*random atom motion/);
- const explanation=section.querySelector('[data-learning-explanation]')!.textContent!;
- assert.match(explanation,/same number of atoms per volume.*hotter gas has higher pressure.*same rotation speed.*density curves become less steep.*isotope fractions also differ less/s);
+ assert.ok(section.querySelector('a[href="/guide.html#composition"]'));
+ const detailed=new JSDOM(understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),'a'.repeat(40)));t.after(()=>detailed.window.close());
+ assert.match(detailed.window.document.body.textContent!,/same number of atoms per volume.*hotter gas has higher pressure.*same rotation speed.*density curves become less steep.*isotope fractions differ less/s);
 });
 
 test('the machine explanation separates the drum, charge force and neutral coupling',t=>{
  const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
- const explanation=dom.window.document.getElementById('machine')!.parentElement!.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
- const paragraphs=[...explanation.querySelectorAll('p')].map(p=>p.textContent!);
- const drum=paragraphs.findIndex(text=>text.includes('a cylinder whose wall turns'));
- const current=paragraphs.findIndex(text=>text.includes('current is charge in motion'));
- const force=paragraphs.findIndex(text=>text.includes('Lorentz force law'));
- const torque=paragraphs.findIndex(text=>text.includes('turning effect about the axis'));
- const collisions=paragraphs.findIndex(text=>text.includes('Collisions transfer some of this motion'));
- assert.ok(drum>=0&&current>drum&&force>current&&torque>force&&collisions>torque,'explain each step in its own paragraph');
- assert.match(paragraphs[current],/Electrons can move in the opposite direction/);
- assert.match(paragraphs[force],/right angles to both the charge motion and the field/);
- assert.match(paragraphs[force],/magnetic force alone does not increase the charge's speed/);
- assert.match(paragraphs[torque],/right of the end view.*inward current.*field toward you.*upward force/);
- assert.match(paragraphs[collisions],/electrical supply supplies energy/);
+ const section=dom.window.document.getElementById('machine')!.parentElement!,explanation=section.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
+ assert.ok(section.querySelector('a[href="/guide.html#drive"]'));
+ const detailed=new JSDOM(understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),'a'.repeat(40)));t.after(()=>detailed.window.close());
+ const text=detailed.window.document.getElementById('drive')!.parentElement!.textContent!;
+ assert.match(text,/a cylinder whose wall turns.*current is charge in motion.*Lorentz force law.*turning effect about the axis.*Collisions transfer angular momentum/s);
+ assert.match(text,/Electrons have negative charge and can move in the opposite direction/);
+ assert.match(text,/right angles to both the motion and the field/);
+ assert.match(text,/does not directly increase the charge's speed/);
+ assert.match(text,/right of the end view, current points left and the field points toward you. The force points up/);
+ assert.match(text,/electrical supply supplies energy/);
  assert.equal(explanation.open,false,'keep the detailed explanation optional');
 });
 

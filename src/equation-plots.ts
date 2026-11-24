@@ -24,6 +24,7 @@ const rotorNote='Exact two-population solution from rest. Each inertia is 10⁻�
 const plot=(title:string,x:Input,y:string,labels:readonly string[],inputs:readonly Input[],note:string,values:EquationPlot['values']):EquationPlot=>({title,x,y,labels,inputs,note,values});
 
 export const equationPlots={
+ 'plant-electricity':plot('Plant electricity balance',input('internal','Internal electric use (MW)',0,1000,10,150),'Power (MW)',['Gross electricity','Net electricity','Conversion heat rejection'],[input('thermal','Recoverable thermal power (MW)',0,2000,10,1000),input('efficiency','Conversion efficiency (%)',0,100,1,40)],'Conditional plant account, not a Marathon prediction. Thermal power includes energy delivered to the converter. Internal use includes all plant electric loads. Conversion heat rejection is not total site heat rejection.',(internal,p)=>{const gross=p.thermal*p.efficiency/100;return [gross,gross-internal,p.thermal-gross];}),
  speed:plot('Tangential speed',radius,'Speed (m/s)',['Gas speed'],[omega],'Rigid rotation: angular speed stays constant. Speed increases with distance from the axis.',(r,p)=>[p.omega*r/100]),
  density:plot('Density relative to the axis',radius,'Density / own axis density',['⁶Li','⁷Li'],[temperature,omega],neutral+' These ratios are not isotope percentages.',(r,p)=>[6.0151228874,7.0160034366].map(m=>Math.exp(m*1.66053906892e-27*p.omega**2*(r/100)**2/(2*k*p.temperature)))),
  composition:plot('Local isotope composition',radius,'Local light fraction (%)',['⁶Li'],equilibriumInputs,neutral+' The heavy percentage is 100 minus the light percentage. The curve shows local composition, not an inventory fraction.',(r,p)=>[100*point(r,p).lightFraction]),
@@ -59,6 +60,7 @@ export const equationPlots={
 
 export type EquationPlotId=keyof typeof equationPlots;
 export const equationGroups={
+ 'plant-electricity':['plant-electricity'],
  'radial-balance':['pressure','density'],speed:['speed'],density:['density'],composition:['composition'],pressure:['pressure','density-gradient'],
  'gas-law':['gas-pressure','mass-density','log-gradient'],separation:['separation'],
  'magnetic-force':['magnetic-force'],'force-density':['force-density'],momentum:['momentum','momentum-time'],

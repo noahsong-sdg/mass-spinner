@@ -28,7 +28,7 @@ if(build.status===0){
  writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
  for(const tutorial of numberedTutorials)writeFileSync(`release/tutorial-${tutorial.number}.html`,understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8'),revision,tutorial));
  writeFileSync('release/how-it-works.html',pinReleaseLinks(withEquationDerivations(readFileSync('web-assets/how-it-works.html','utf8')),revision));
- for(const name of ['guide-reader','guide-views','guide-sample','guide-force','guide-density','equation-dialog','equation-plots','fuel-equilibrium','fuel-centrifuge','array-shape'])writeFileSync(`release/${name}.js`,transpileModule(readFileSync(`src/${name}.ts`,'utf8'),{fileName:`${name}.ts`,compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
+ for(const name of ['guide-reader','guide-views','guide-sample','guide-force','guide-density','guide-plant','equation-dialog','equation-plots','fuel-equilibrium','fuel-centrifuge','array-shape'])writeFileSync(`release/${name}.js`,transpileModule(readFileSync(`src/${name}.ts`,'utf8'),{fileName:`${name}.ts`,compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
  const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');
  mkdirSync('release/guide-katex',{recursive:true});
  copyFileSync(resolve(katexDist,'katex.min.css'),'release/guide-katex/katex.min.css');

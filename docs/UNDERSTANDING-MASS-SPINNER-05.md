@@ -1,8 +1,23 @@
 # Tutorial 5 · Fusion fuel cycle
 
-[Tutorial 4](UNDERSTANDING-MASS-SPINNER-04.md) shows the difference between product purity and quantity. A fusion plant must also have sufficient fuel available. Processing equipment holds some fuel outside the plasma.
-This tutorial explains why faster processing can reduce the required fuel supply, even when fusion power stays the same.
-It also distinguishes a lithium isotope separator from a fusion reactor.
+[Tutorial 4](UNDERSTANDING-MASS-SPINNER-04.md) gives product purity and quantity. Here, follow the materials from lithium preparation to fusion, replacement fuel and electricity.
+
+## How does the plant start and keep operating?
+
+A fuel cycle has a startup problem: fusion needs tritium, but breeding needs fusion neutrons.
+An initial tritium supply from outside the plant permits startup. Bred tritium can replace consumed fuel later.
+The centrifuge gas, fusion fuel and blanket materials occupy separate equipment. They are not one gas mixture.
+
+<!-- diagram:plant-cycle -->
+
+The sequence includes Marathon’s proposed mercury multiplier. Mercury is optional; other blanket designs use different materials.
+An (n,2n) reaction has one incoming neutron and two outgoing neutrons. It needs sufficient incident energy.
+The outgoing neutrons have less energy available. They cannot multiply indefinitely through this reaction.
+The mercury product undergoes radioactive decay later. Gold production and tritium breeding therefore have different material paths and timescales.
+
+At startup, the stages have an order of dependency. During operation, fusion, breeding, extraction, exhaust recovery and cooling occur together.
+Not every neutron follows the illustrated reactions. Scattering, absorption in other materials and leakage affect the result.
+[Marathon’s blanket paper, §§2–4](https://arxiv.org/pdf/2507.13461), gives the proposed reaction paths and neutron-transport calculations.
 
 ## What are the three processes?
 
@@ -25,6 +40,78 @@ The Reactor tab has a different model for a compact beam–target neutron source
 
 Lithium enrichment supplies lithium for a breeding blanket.
 A change in lithium purity does not directly change the exhaust-processing delay or the single-pass tritium burn fraction.
+
+## Must the power plant use a tokamak?
+
+No. A power plant is the complete system that supplies useful power. A tokamak is one type of fusion device inside that system.
+For D–T fuel, the same fusion reaction supplies neutrons in several device types. Confinement, heating, fuel delivery and blanket geometry differ.
+
+| Fusion device | How it holds or compresses fuel | What changes in the plant |
+|---|---|---|
+| Tokamak | Magnetic fields hold plasma in a ring. Plasma current contributes to the field. | Plasma-current control, heating, fuel delivery and pulse operation where applicable |
+| Stellarator | External coils produce a twisted magnetic field that holds plasma. | Different coils, chamber shape, access and blanket geometry |
+| Inertial confinement | A driver compresses small fuel targets for short fusion pulses. | Target manufacture and injection, driver efficiency, pulse frequency and chamber recovery |
+
+[IPP gives tokamak and stellarator plant concepts](https://www.ipp.mpg.de/16427/stand).
+[LLNL gives an inertial fusion energy concept](https://lmf.llnl.gov/science/energy-security).
+The mercury paper models particular blanket configurations. It does not establish their performance in every fusion device.
+
+The compact beam–target source in the Reactor tab is a separate architecture.
+It accelerates deuterium ions into lithium tritide that already contains tritium. Fusion near the target surface supplies neutrons.
+This source does not establish net electric output. [Marathon gives the source architecture here](https://www.marathonfusion.com/beam-driven-fusion/).
+
+## How does new tritium leave the blanket?
+
+Breeding changes a lithium nucleus into tritium and helium. It does not automatically deliver usable fuel to the chamber.
+The new tritium interacts with the surrounding material. Its release depends on temperature, diffusion and chemical reactions.
+Extraction equipment must remove it before fuel processing can prepare it for use.
+
+<!-- diagram:tritium-extraction -->
+
+In a ceramic breeder, tritium moves through grains and pores, then leaves the surface.
+A helium purge gas flows through the pebble bed and carries tritium-bearing molecules to recovery equipment.
+The purge gas can contain added hydrogen to help release tritium. Tritium can leave as hydrogen molecules or in water-bearing forms.
+[Ceramic breeder experiments](https://doi.org/10.1016/j.fusengdes.2024.114302) show why gas composition affects release.
+
+In a liquid lead–lithium design, the liquid carries dissolved tritium to an extraction unit.
+One method uses a metal membrane. Hydrogen isotopes diffuse through the metal toward a vacuum side with low hydrogen pressure.
+The bulk liquid stays on its side and returns to the blanket. A vacuum pump removes the released gas.
+[This permeator experiment](https://www.mdpi.com/1996-1073/16/7/3022) used hydrogen as a test gas; it does not establish a complete tritium plant.
+
+Extraction recovers tritium from its carrier. Fuel processing then removes impurities and prepares the required hydrogen isotope mixture.
+Depending on chemical form, processing can need chemical conversion and hydrogen isotope separation.
+This separation concerns hydrogen isotopes, not lithium isotopes. The lithium centrifuge does not perform every fuel-processing task.
+[ITER’s fuel-processing description](https://www.iter.org/machine/supporting-systems/fuelling) separates purification, isotope separation, storage and delivery.
+
+These are design examples, not a verified Marathon extraction system. The public material checked here does not specify that complete system.
+Extraction delay, trapped tritium, leakage and radioactive decay affect the available fuel supply.
+Breeding more tritium than fusion consumes is insufficient if too little becomes usable fuel in time.
+
+## When does the plant supply net electricity?
+
+Heat is energy transfer, not a separate source of energy. Fusion releases nuclear energy; particles deposit energy in surrounding materials.
+The plant must convert recoverable heat into electricity. It cannot convert all that heat.
+Some electricity must operate the driver, pumps, cooling, magnets where applicable, and fuel-processing equipment.
+
+<!-- equation:plant-electricity -->
+
+```math
+P_{\mathrm{net,electric}}=\eta_{\mathrm{conversion}}P_{\mathrm{recoverable,thermal}}-P_{\mathrm{plant,electric}}.
+```
+
+P_recoverable,thermal is heat delivered to the power-conversion system. Efficiency η_conversion gives the fraction converted to gross electricity.
+P_plant,electric includes all internal electric use. It is not only energy delivered to the fuel.
+Do not add fusion power to a thermal-power value that already includes that fusion energy.
+
+For an example, 1,000 MW of recoverable thermal power at 40% efficiency gives 400 MW of gross electricity.
+If internal electric use is 150 MW, net output is 250 MW. The conversion system rejects 600 MW of heat.
+Internal plant electricity ultimately also becomes heat or other energy outputs; that 600 MW is not the complete site heat account.
+At 450 MW of internal use, the same generator gives net output of −50 MW: the plant imports electricity.
+
+Fusion gain compares fusion energy with a specified input. A gain above one at the plasma or target does not establish net plant electricity.
+For pulses, compare energy over a complete operating cycle, including charging and recovery between pulses.
+Positive net output is necessary for electricity export. Commercial viability also needs acceptable construction cost, operating cost, component lifetime and availability.
+Isotope sales can add revenue. They do not change this energy balance.
 
 ## How much fuel stays in processing equipment?
 

@@ -27,7 +27,7 @@ test('every displayed tutorial, calculator and summary equation has an explicit 
  }
  const calculator=new JSDOM(equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));t.after(()=>calculator.window.close());
  assert.equal(calculator.window.document.querySelectorAll('.equation button[data-equation-plot]').length,5);
- assert.equal(count,21);
+ assert.equal(count,20);
  const summary=new JSDOM(withEquationDerivations(readFileSync('web-assets/how-it-works.html','utf8')));t.after(()=>summary.window.close());
  assert.equal(summary.window.document.querySelectorAll('.equation button[data-equation-plot]').length,2);
  assert.equal(summary.window.document.querySelectorAll('template[data-equation-derivation]').length,2);

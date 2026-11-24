@@ -3,6 +3,7 @@ import {viewExampleData} from './guide-view-data.js';
 import {sampleDiagram} from '../src/guide-sample.js';
 import {forceDiagram} from '../src/guide-force.js';
 import {densityScanDiagram} from '../src/guide-density.js';
+import {plantCycleDiagram,tritiumExtractionDiagram} from '../src/guide-plant.js';
 type State={label:string;reading:string;body:string};
 type Concept={title:string;description:string;caption:string;states:State[]};
 const text=(x:number,y:number,value:string)=>`<text x="${x}" y="${y}" text-anchor="middle">${value}</text>`;
@@ -82,6 +83,8 @@ function inventoryDiagram():Concept{
    ${text(180,158,'Exhaust inventory / initial inventory')}<rect x="40" y="180" width="${260*ratio/2.1}" height="24" class="concept-bar" data-ratio="${ratio}"/>${text(180,234,`${ratio.toFixed(2)} × initial inventory`)}`};}),};
 }
 export function conceptDiagram(id:string):string|null{
+ if(id==='plant-cycle')return plantCycleDiagram();
+ if(id==='tritium-extraction')return tritiumExtractionDiagram();
  if(id==='views')return viewsDiagram(viewExampleData());
  if(id==='goal')return sampleDiagram();
  if(id==='turning')return forceDiagram();
