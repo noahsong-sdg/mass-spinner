@@ -36,6 +36,19 @@ function fixture(t:any,options:any={}){
  return {window,ui,node,change,requests,loaded,selected,built,motionCalls,get animation(){return animation;},reduce:()=>reduceListener?.({matches:true}),get viewerOptions(){return viewerOptions;},inspected:()=>inspected,resets:()=>resets,disposed:()=>disposed};
 }
 
+test('collection summaries identify their configured radius independently of plot inspection',async t=>{
+ const f=fixture(t);await f.ui.run();f.change('fuel-plot','cut','change');
+ const metrics=f.ui.nodes.plots.querySelector('.fuel-metrics')!;
+ assert.match(metrics.textContent!,/Configured cut radius \/ a/);
+ const label=[...metrics.querySelectorAll('span')].find(node=>node.textContent==='Configured cut radius / a')!;
+ assert.equal(Number(label.nextElementSibling!.textContent),Number(f.node('fuel-cutFraction').value));
+ const before=metrics.textContent;
+ const plot=f.ui.nodes.plots.querySelector<SVGSVGElement>('.live-plots svg')!;
+ plot.dispatchEvent(new f.window.KeyboardEvent('keydown',{key:'End',bubbles:true}));
+ assert.equal(metrics.textContent,before,'a plot probe must not change the configured collection');
+ assert.equal(Number(f.node('fuel-cutFraction').value),Number(label.nextElementSibling!.textContent));
+});
+
 test('recorded spatial reference is mounted lazily and disposed with the playground',t=>{
  const f=fixture(t),reference=f.ui.nodes.info.querySelector('.argon-reference')! as HTMLDetailsElement;
  assert.ok(reference);assert.equal(reference.open,false);

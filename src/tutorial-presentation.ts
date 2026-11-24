@@ -12,7 +12,7 @@ const spin={watch:'Select Play. The gas turns in the stationary vessel.',note:'B
 const historyView='The plot shows coupled history. In a reference view, the 3D uses a separate state. Use Replay spin-up to see coupled motion.';
 const spinHistory={...spin,note:`${spin.note} ${historyView}`,replay:true};
 const heat={watch:'Compare mechanical work with rotational energy and mechanical losses.',note:`This plot does not include all resistive heat and cooling energy. Numerical dissipation is not physical heat. ${historyView}`,plot:'heat',replay:true};
-const cut={watch:'Move along the collection curve. Compare purity with recovery.',note:'Each cut includes all gas inside its radius. The model does not extract gas.',plot:'cut'};
+const cut={watch:'Move along the collection curve. Read purity and recovery in the plot readout.',note:'A larger cut includes more outer gas. This usually increases light recovery and decreases light purity. Summary values describe the configured cut. The model does not extract gas.',plot:'cut'};
 export const tutorialPresentations:Readonly<Record<string,TutorialPresentation>>={
  look:{watch:'Find the gas between the stationary electrodes.',note:'Use Field, Current and Force to see the drive directions. Use Replay motion to see the gas turn.'},
  coils:{watch:'Find the coils around the stationary vessel.',note:'The coils supply an axial magnetic field. They do not mechanically turn the gas.',component:'coils'},

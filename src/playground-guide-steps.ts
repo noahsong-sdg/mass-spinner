@@ -1,6 +1,6 @@
 /** Shared instructions for the separate guide and the older scene reader. */
 export const playgroundSteps=[
- {id:'machine',diagram:'drive',title:'What turns inside the vessel?',intro:`We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.
+ {id:'machine',diagram:'drive',title:'What turns the gas?',intro:`We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.
 
 Electric current is charge in motion. Ions are atoms or molecules with electric charge. Current across the axial magnetic field gives the charged gas a force around the cylinder. Collisions transfer rotation to neutral atoms. The vessel and electrodes stay still.
 
@@ -24,7 +24,7 @@ In Ion–neutral spin-up, the horizontal axis is physical time. Each curve gives
 
 When drive and losses balance, the speeds stop increasing. When power stops, angular momentum keeps the gas turning. Wall drag then decreases the total angular momentum.`,
   note:'This experiment starts a new run. During a run, a current change acts at the selected time. Gas continues to turn after power stops.',reading:['/guide.html#momentum','Torque, angular momentum and losses'],actions:[['currentExperiment','Start from rest & edit current'],['endSpin','Show end-of-run speeds']]},
- {id:'composition',diagram:'composition',title:'Does rotation change the atom distribution?',intro:`Separation needs different isotope fractions near the axis and wall. Compare No rotation with Rotation first. Then compare Higher temperature at the same rotation speed. Temperature measures random atom motion, which opposes this separation.
+ {id:'composition',diagram:'composition',title:'Does rotation change composition?',intro:`Separation needs different isotope fractions near the axis and wall. Compare No rotation with Rotation first. Then compare Higher temperature at the same rotation speed. Temperature measures random atom motion, which opposes this separation.
 
 Density is the number of atoms per volume. Composition is each isotope's local percentage. With rotation and uniform temperature, equilibrium densities increase toward the wall. The heavier density increases more sharply. Thus, the light percentage decreases toward the wall.
 
@@ -44,9 +44,11 @@ Compare the wall heavy/light ratio with the axis heavy/light ratio. Their quotie
 
 Read the curve as a ratio change between axis and wall. Then read Composition for the actual local percentages. These are different quantities because the feed fraction also sets the percentages.`,
   note:'The percentage and purity do not change by these factors. These equilibrium references use a uniform temperature. They do not calculate the separation time or necessary drive power.',reading:['/guide.html#bias','The separation factor and its equations'],actions:[['temperature','Compare 2× temperature'],['rotation','Compare 2× rotation']]},
- {id:'heat',diagram:'energy',title:'Will the drive also heat the gas?',intro:`We want enrichment, which means a higher light fraction, rather than speed alone. More drive can increase rotation and temperature. At a specified rotation speed, higher temperature decreases separation.
+ {id:'heat',diagram:'energy',title:'What changes when temperature can evolve?',intro:`We want enrichment, which means a higher light fraction, rather than speed alone. More drive can increase rotation and temperature. At a specified rotation speed, higher temperature decreases separation.
 
-The supply gives energy for rotation and resistive heating. Collisions and wall drag can change rotational energy into heat. Cooling removes heat. The balance of these energy paths sets temperature.`,
+The supply gives energy for rotation and resistive heating. Collisions and wall drag can change rotational energy into heat. Cooling removes heat. The balance of these energy paths sets temperature.
+
+The default liner starts at 1,000 K. The gas starts at 500 K. Heat can flow from the liner into the gas. This comparison includes that heat. It does not isolate drive heating.`,
   do:["With thermal evolution off, select a physical time and pin run A. Keep the drive inputs unchanged. Enable Evolve gas & liner temperature. After calculation, select the same physical time. Compare temperature, speed and composition with A."],
   notice:`The default thermal bath holds the temperature constant. This assumes that an external system removes or supplies the necessary heat. Thermal evolution instead calculates temperature changes. A hot liner can heat the gas even when drive heating is small. The initial default liner is hotter than the gas.
 
@@ -54,10 +56,12 @@ Compare temperature first, then speed, then composition at the same physical tim
 
 Drive & work shows mechanical energy; its curves do not include the complete thermal account. A rising work curve means continued energy input, not necessarily rising speed.`,
   note:'Numerical damping is not physical heat. The heat-transfer and transport inputs are assumptions.',reading:['/tutorial-03.html#budget','Heating, cooling and the energy balance'],actions:[['heatExperiment','Open heat experiment'],['pin','Pin A'],['thermalPlot','Show temperature'],['compositionPlot','Compare composition']]},
- {id:'collection',diagram:'inventory-cut',title:'Which part of the gas do we want to keep?',intro:`A sample with a high light fraction can contain few light atoms. We need purity and recovery to choose how much gas to keep.
+ {id:'collection',diagram:'inventory-cut',title:'How much light isotope can we keep?',intro:`A sample with a high light fraction can contain few light atoms. We need purity and recovery to choose how much gas to keep.
 
-Purity is the light percentage in the sample. Recovery is the percentage of all light atoms that the sample contains. Each cut keeps all gas inside its radius.`,
-  do:["Probe two radii. Each cut includes all gas inside its radius."],
+Purity is the light percentage in the sample. Recovery is the percentage of all light atoms that the sample contains. Each cut keeps all gas inside its radius.
+
+Select a radius on the plot. Read the values in the plot readout. This reads a sample; it does not extract gas. The summary values describe the configured cut.`,
+  do:["Compare a small radius with the vessel wall. At the wall, recovery is 100% and purity equals the feed fraction."],
   notice:`The Composition plot describes gas at one radius. A collected sample contains all gas inside a radius. These differ because density changes with radius and outer rings have more volume than inner rings of equal thickness.
 
 In Purity & recovery, move from a small radius toward the wall. You include more gas, so recovery increases. Purity generally decreases as the sample includes more heavy-rich outer gas. The whole vessel gives the feed purity and full recovery.

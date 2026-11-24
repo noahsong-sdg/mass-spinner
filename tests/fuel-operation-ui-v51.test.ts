@@ -223,7 +223,9 @@ test('collection plots name the products and show percentages for reference and 
   for(const mode of ['equilibrium','transport']){
    f.change('fuel-motion-mode',mode,'change');f.change('fuel-motion-time',.423456);f.change('fuel-plot','cut','change');
    const collection=mode==='transport'?sampleFuelTransport(result.transport,.423456).collection:result.collection;
-   const metrics=[...f.ui.nodes.plots.querySelectorAll('.fuel-metrics>div')];
+   const [configured,...metrics]=f.ui.nodes.plots.querySelectorAll('.fuel-metrics>div');
+   assert.equal(configured.querySelector('span')!.textContent,'Configured cut radius / a');
+   assert.equal(Number(configured.querySelector('strong')!.textContent),cut);
    assert.deepEqual(metrics.map(row=>row.querySelector('span')!.textContent),columns.map(([,label])=>label));
    assert.equal(f.ui.nodes.plots.querySelector('figcaption')!.textContent,'Inventory (%) against Inner cut radius / a');
    const readout=f.ui.nodes.plots.querySelector('.plot-readout')!.textContent!.split(' · ');

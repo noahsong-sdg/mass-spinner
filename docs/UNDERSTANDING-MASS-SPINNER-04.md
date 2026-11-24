@@ -35,7 +35,9 @@ Outer rings have more volume, so an average of equally spaced radial percentages
 1. Select Isotope separation.
 2. Select Coupled separation with the two isotopes in the feed.
 3. Select two radii on the collection curve.
-4. Read the purity and recovery below the plot.
+4. Read the purity and recovery in the plot readout.
+
+The summary values describe the configured cut radius. A plot probe reads a different radius without changing that cut.
 
 Each cut includes all gas inside its radius. Smaller cuts usually give higher purity and lower recovery. At the wall, purity is the feed light fraction and recovery is 1 (100%). An empty cut has no defined purity. With no light atoms, light recovery is undefined.
 

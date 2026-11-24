@@ -34,6 +34,18 @@ test('opening an optional explanation never launches a run',t=>{
  assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
 });
 
+test('the first session has four connected questions and retains all older section addresses',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.deepEqual([...doc.querySelectorAll('.guide-contents a')].map(link=>link.getAttribute('href')),['#machine','#composition','#heat','#collection']);
+ assert.deepEqual([...doc.querySelectorAll('[data-core-question]')].map(group=>[...group.querySelectorAll('.walkthrough-step')].map(section=>section.getAttribute('aria-labelledby'))),[['machine','current'],['composition','competition'],['heat'],['collection']]);
+ assert.equal(doc.querySelectorAll('h2').length,4);
+ for(const id of ['machine','current','composition','competition','heat','collection','compare'])assert.ok(doc.getElementById(id),id);
+ assert.ok(doc.querySelector('aside #compare'));
+ const heat=doc.getElementById('heat')!.parentElement!;
+ const before=heat.textContent!.slice(0,heat.textContent!.indexOf('Open heat experiment'));
+ assert.match(before,/liner starts at 1,000 K.*gas starts at 500 K.*does not isolate drive heating/s);
+});
+
 test('the distribution section explains temperature before the comparison and connects it to the plotted gradients',t=>{
  const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
  const section=dom.window.document.getElementById('composition')!.parentElement!;

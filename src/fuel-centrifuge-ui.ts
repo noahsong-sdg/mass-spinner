@@ -563,7 +563,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
    const labels=[['innerLightPurity','Inner light purity'],['lightRecovery','Light recovery'],['outerHeavyPurity','Outer heavy purity']] as const;
    curves=labels.map(([key,label])=>({...curve(label,data,'radiusFraction',key,'Inner cut radius / a','Inventory (%)'),y:data.map(row=>row[key]===null?null:100*row[key])}));
    const selected=collection?.collection??r.collection;
-   values=labels.map(([key,label])=>[label,selected[key]===null?null:100*selected[key],'%']);
+   values=[['Configured cut radius / a',c.cutFraction,''],...labels.map(([key,label]):[string,number|null,string]=>[label,selected[key]===null?null:100*selected[key],'%'])];
    if(collection&&!capture)explanation.textContent='Closed-wall inventory at the selected time. Cuts divide the inventory. The model does not calculate extraction flow.';
   }
   if(topic==='cascade'){curves=(['purity','recovery'] as const).map(k=>curve(k,r.cascades,'stages',k,'Ideal stages','Fraction'));values=[['Product light purity',r.cascade.productLightPurity,''],['Light recovery',r.cascade.lightRecovery,''],['Internal circulation / feed',r.cascade.circulationPerFeed,''],['Worst species balance',Math.max(Math.abs(r.cascade.lightBalance),Math.abs(r.cascade.heavyBalance)),'']];}

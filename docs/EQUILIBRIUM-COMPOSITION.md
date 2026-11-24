@@ -80,6 +80,12 @@ give continuous extraction yields, separation times, throughput or power.
 
 ## Numerical qualification
 
+The prediction target is composition and sample inventory at a specified neutral-gas equilibrium.
+Inputs are the two particle masses, speed, temperature, geometry, total inventory, feed fraction and cut radius.
+The outputs are radial composition, sample purity, recovery and particle counts.
+This conditional prediction applies only when the stated assumptions describe the gas.
+It does not predict which speed or temperature a real discharge reaches.
+
 Numerical qualification means results within specified numerical limits. Input
 limits are masses 1–250 u (light ≤ heavy), T 100–10,000 K and speed
 0–200,000 m/s, with βH ≤100. Other limits are R 0.001–10 m, L 0.001–100 m,
