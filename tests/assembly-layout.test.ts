@@ -67,9 +67,9 @@ test('selection animates separation, switches parts without drift, and assembles
  assert.equal(f.gas.layers.mask,3);assert.equal(f.frame.querySelector<HTMLElement>('.assembly-view')!.hidden,true);
 });
 
-test('reduced motion separates and restores hardware without animation callbacks',async t=>{
+test('reduced motion changes hardware at once and schedules only its display frame',async t=>{
  const f=fixture(t,true),position=f.coils.position.clone();await f.viewer.load({model:'assembly'});
- f.viewer.explode('coils');assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'exploded');assert.equal(f.frames.size,0);
+ f.viewer.explode('coils');assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'exploded');assert.equal(f.frames.size,1);f.step(0);assert.equal(f.frames.size,0);
  f.viewer.select('slice');f.viewer.explode('slice');assert.deepEqual(f.coils.position,position);assert.equal(f.gas.layers.mask,3);
  assert.equal(f.viewer.canvas.getAttribute('data-assembly-state'),'assembled','a numerical view restores assembled hardware');
 });
@@ -89,7 +89,7 @@ test('interrupted transitions, reload and disposal restore hardware without late
  const g=fixture(t);await g.viewer.load({model:'assembly'});const initial=g.coils.position.clone();
  g.viewer.explode('coils');g.step(0);g.step(100);g.viewer.explode(null);g.step(120);g.step(440);
  assert.deepEqual(g.coils.position,initial);assert.equal(g.frames.size,0);
- g.viewer.explode('coils');g.step(500);g.viewer.select(null);assert.equal(g.frames.size,0);assert.deepEqual(g.coils.position,initial);
+ g.viewer.explode('coils');g.step(500);g.viewer.select(null);assert.equal(g.frames.size,1);g.step(600);assert.equal(g.frames.size,0);assert.deepEqual(g.coils.position,initial);
  g.viewer.explode('coils');await g.viewer.load({model:'assembly'});assert.equal(g.frames.size,0);assert.deepEqual(g.coils.position,initial);
  g.viewer.explode('coils');g.viewer.dispose();assert.equal(g.frames.size,0);g.step(1000);assert.deepEqual(g.coils.position,initial);
 });

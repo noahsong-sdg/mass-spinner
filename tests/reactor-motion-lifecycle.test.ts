@@ -31,7 +31,7 @@ test('live updates preserve the RAF clock; document hiding pauses without replay
  const beforeHidden=positions();Object.defineProperty(doc,'hidden',{value:true});doc.dispatchEvent(new dom.window.Event('visibilitychange'));assert.equal(frames.size,0);
  Object.defineProperty(doc,'hidden',{value:false});doc.dispatchEvent(new dom.window.Event('visibilitychange'));advance(10000);
  assert.deepEqual(positions(),beforeHidden,'resuming starts a fresh clock instead of adding hidden elapsed time');advance(10016);assert.notDeepEqual(positions(),beforeHidden);
- media.matches=true;for(const listener of listeners)listener();assert.equal(frames.size,0);
+ media.matches=true;for(const listener of listeners)listener();advance(10032);assert.equal(frames.size,0);
  media.matches=false;for(const listener of listeners)listener();assert.equal(frames.size,1);
  viewer.setActive(false);assert.equal(frames.size,0);viewer.setActive(true);assert.equal(frames.size,1);
  viewer.dispose();assert.equal(frames.size,0);assert.equal(listeners.size,0);

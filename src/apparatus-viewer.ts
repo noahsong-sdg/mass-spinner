@@ -106,7 +106,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  controls.enableDamping=false;
  let root:THREE.Object3D|null=null,referenceRoot:THREE.Object3D|null=null,generation=0,disposed=false,asset:ViewerAsset|null=null,pointer:{id:number;x:number;y:number}|null=null,highlights:[THREE.Mesh,THREE.Material|THREE.Material[],THREE.Material[]][]=[],accepted:{packet:SurfaceState;settings:SurfaceSettings}|null=null;
  let animation:((dt:number)=>void)|null=null,animationFrame:number|null=null,lastFrame:number|null=null,flight:number|null=null,shadowRevision:unknown;
- let preparingGeneration:number|null=null,preparationChanged=false;
+ let preparingGeneration:number|null=null,preparationChanged=false,drawFrame:number|null=null;
  const win=doc.defaultView!;
  const assemblyBar=doc.createElement('div'),assemblyLabel=doc.createElement('span'),assemble=doc.createElement('button');
  assemblyBar.className='assembly-view';assemblyBar.hidden=true;assemblyLabel.setAttribute('role','status');
@@ -144,8 +144,9 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
    assembly.apply(assemblyAmount=from+(assemblyTarget-from)*ease);
    if(renderer.shadowMap)renderer.shadowMap.needsUpdate=true;
    if(t===1)finishAssembly();else{render();assemblyFrame=win.requestAnimationFrame(step);}
+   if(animationFrame===null)flushRender();
   }
-  assemblyFrame=win.requestAnimationFrame(step);
+  cancelRender();assemblyFrame=win.requestAnimationFrame(step);
  }
  assemble.addEventListener('click',()=>explode(null));
  const settleAssembly=()=>{if(assemblyFrame!==null){stopAssembly();finishAssembly();}};
@@ -162,28 +163,37 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  function setAnimation(callback:((dt:number)=>void)|null){
   if(animationFrame!==null)win.cancelAnimationFrame(animationFrame);
   animationFrame=null;lastFrame=null;animation=disposed?null:callback;
+  if(animation)cancelRender();
   if(animation&&!doc.hidden&&preparingGeneration===null)animationFrame=win.requestAnimationFrame(tick);
  }
  function tick(now:number){
   animationFrame=null;if(!animation||disposed||doc.hidden||preparingGeneration!==null)return;
   const callback=animation,dt=lastFrame===null?0:(now-lastFrame)/1000;lastFrame=now;
-  callback(dt);render();
+  callback(dt);render();flushRender();
   if(animation===callback)animationFrame=win.requestAnimationFrame(tick);
  }
- const visibility=()=>{if(doc.hidden){stopFlight();settleAssembly();}setAnimation(animation);};doc.addEventListener('visibilitychange',visibility);
+ const visibility=()=>{if(doc.hidden){cancelRender();stopFlight();settleAssembly();}setAnimation(animation);if(!doc.hidden)render();};doc.addEventListener('visibilitychange',visibility);
  const center=new THREE.Vector3(),modelBounds=new THREE.Box3();let radius=1,representationKey='',loadStatus='reference';
  function reportRepresentation(){
   const acceptedRoot=root===stateLayer.group,representation:ViewerRepresentation={geometry:root?acceptedRoot?'accepted':'reference':'none',
    status:acceptedRoot?accepted?.packet.status??'reference':loadStatus,...(acceptedRoot?stateLayer.representation:{layer:'reference',numerical:false})};
   const key=JSON.stringify(representation);if(key!==representationKey){representationKey=key;onRepresentation(representation);}
  }
- function render(){
-  if(preparingGeneration!==null){preparationChanged=true;return;}
-  if(!disposed&&root){
+ function cancelRender(){if(drawFrame!==null)win.cancelAnimationFrame(drawFrame);drawFrame=null;}
+ function flushRender(){
+  cancelRender();
+  if(disposed||!root||!active||doc.hidden||preparingGeneration!==null)return;
   if(assembly&&reactorLayer)reactorLayer.group.visible=false;
   if(root.userData.shadowRevision!==shadowRevision){shadowRevision=root.userData.shadowRevision;updateShadows();}
   renderer.render(scene,camera);reportRepresentation();
- }}
+ }
+ // Several controls can change one scene before the next screen frame.
+ function render(){
+  if(preparingGeneration!==null){preparationChanged=true;return;}
+  if(disposed||!root)return;
+  reportRepresentation();
+  if(active&&!doc.hidden&&drawFrame===null&&animationFrame===null)drawFrame=win.requestAnimationFrame(flushRender);
+ }
  const stateLayer=createSurfaceLayer(frame,{render,onSelect});scene.add(stateLayer.group);
  let reactorState:ReactorMotionState|null=null,reactorPending=false,active=true,reactorLayer:ReturnType<typeof createReactorMotionLayer>|null=null;
  const animateReactor=(dt:number)=>reactorLayer?.tick(dt);
@@ -299,10 +309,10 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
   const startPosition=camera.position.clone(),startTarget=controls.target.clone();let started:number|undefined;
   function step(now:number){
    if(disposed)return;started??=now;const t=Math.min(1,(now-started)/350),ease=1-(1-t)**3;
-   camera.position.lerpVectors(startPosition,end,ease);controls.target.lerpVectors(startTarget,target,ease);controls.update();render();
+   camera.position.lerpVectors(startPosition,end,ease);controls.target.lerpVectors(startTarget,target,ease);controls.update();render();if(animationFrame===null)flushRender();
    flight=t<1?win.requestAnimationFrame(step):null;
   }
-  flight=win.requestAnimationFrame(step);
+  cancelRender();flight=win.requestAnimationFrame(step);
  }
  function clearSelection(){for(const [mesh,original,selected]of highlights){mesh.material=original;for(const material of selected)material.dispose();}highlights=[];}
  function select(id:string|null){
@@ -320,7 +330,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  }
  async function load(next:ViewerAsset,{preserveOwnership=false}:{preserveOwnership?:boolean}={}){
   if(disposed)return false;const previousOwnership=pristineCamera,token=++generation;asset=next;pristineCamera=true;scaleNote.hidden=true;
-  setAnimation(null);
+  setAnimation(null);cancelRender();
   reactorLayer?.dispose();reactorLayer=null;
   if(next.reactor){reactorLayer=createReactorMotionLayer(frame,refreshReactor);scene.add(reactorLayer.group);}
   stopFlight();clearAssembly();
@@ -339,7 +349,7 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
      if(disposed||token!==generation)return false;
     }while(preparationChanged);
    }finally{if(preparingGeneration===token)preparingGeneration=null;}
-   status.textContent='';render();setAnimation(animation);
+   status.textContent='';flushRender();setAnimation(animation);
    if(preserveOwnership)pristineCamera=pristineCamera&&previousOwnership;return true;
   }catch(error){
    if(disposed||token!==generation)return false;
@@ -404,9 +414,9 @@ export function createApparatusViewer(frame:HTMLElement,{onSelect=()=>{},onError
  controls.addEventListener('change',cameraChanged);
  const observer=new ResizeObserver(resize);observer.observe(frame);
  return {canvas,load,select,explode,focus,reset,resize,refresh:render,setAnimation,cameraPose,setCamera,updateSurfaceState,
- updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(asset?.reactor)refreshReactor();},
+ updateReactorState:value=>{reactorState=value;refreshReactor();},setActive:value=>{active=value;if(!active)cancelRender();if(asset?.reactor)refreshReactor();else if(active)render();},
  setPending:value=>{reactorPending=value;if(value)updateSurfaceState({status:'pending',reason:'Current inputs are calculating. Quantitative surfaces are withheld.'});refreshReactor();},dispose(){
-  if(disposed)return;disposed=true;stopFlight();clearAssembly();reducedAssemblyMotion?.removeEventListener?.('change',settleAssembly);setAnimation(null);reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
+  if(disposed)return;disposed=true;stopFlight();clearAssembly();reducedAssemblyMotion?.removeEventListener?.('change',settleAssembly);setAnimation(null);cancelRender();reactorLayer?.dispose();doc.removeEventListener('visibilitychange',visibility);generation++;observer.disconnect();controls.removeEventListener('change',cameraChanged);controls.dispose();canvas.removeEventListener('pointerdown',dragStart,true);
   for(const [name,handler]of Object.entries(handlers))canvas.removeEventListener(name,handler as EventListener);
   clearSelection();stateLayer.dispose();if(referenceRoot)release(referenceRoot);root=referenceRoot=null;key.shadow.dispose();display.dispose();frame.replaceChildren();
  }};

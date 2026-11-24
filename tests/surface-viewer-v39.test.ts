@@ -16,7 +16,7 @@ import {simulateDoublewell,DEFAULT_DOUBLEWELL} from '../src/doublewell-dynamics.
 const config={...DEFAULT_CONFIG,length:.02,particlesPerSpecies:4,dt:2e-8,duration:1e-5};
 const packet=()=>surfaceState({model:'rotating',settings:config,result:simulate(config),acceptedModel:'rotating',acceptedSettings:config});
 function ready(){const p=packet();assert.equal(p.status,'ready');return (p as any).snapshot;}
-function setup(){const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;return {dom,frame,layer:createSurfaceLayer(frame)};}
+function setup(){const dom=new JSDOM('<main></main>',{pretendToBeVisual:true}),frame=dom.window.document.querySelector('main')!;return {dom,frame,layer:createSurfaceLayer(frame)};}
 function change(h:any,label:string,value:string){const control=h.frame.querySelector(`select[aria-label="${label}"]`) as HTMLSelectElement;control.value=value;control.dispatchEvent(new h.dom.window.Event('change'));return control;}
 
 test('actual accepted orbit mesh uses one batched quantitative draw, exact SI supports and raw sample picking',()=>{

@@ -13,7 +13,7 @@ function snapshot(radiusM=.2,lengthM=1):SurfaceSnapshot {
   counts:[],scalars:[],unsupported:[],impacts:[],tracks:[]};
 }
 async function fixture(t:TestContext){
- const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
+ const dom=new JSDOM('<main></main>',{pretendToBeVisual:true}),frame=dom.window.document.querySelector('main')!;
  frame.getBoundingClientRect=()=>({width:1000,height:600,left:0,top:0,right:1000,bottom:600,x:0,y:0,toJSON(){}});
  const previous=globalThis.ResizeObserver;
  globalThis.ResizeObserver=class {observe(){}unobserve(){}disconnect(){}};

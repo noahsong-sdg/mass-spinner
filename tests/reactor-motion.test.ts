@@ -119,7 +119,8 @@ test('viewer publishes pre-load reactor state and stops RAF while hidden, pendin
  await viewer.load({model:'beam.glb',reactor:'beam'});assert.equal(frames.size,1);
  assert.equal(f.frame.querySelector<HTMLElement>('.reactor-processes')!.dataset.basis,'initial source');
  viewer.setActive(false);assert.equal(frames.size,0);viewer.setActive(true);assert.equal(frames.size,1);
- viewer.setPending(true);assert.equal(frames.size,0);viewer.setPending(false);assert.equal(frames.size,1);
- viewer.updateReactorState(null);assert.equal(frames.size,0);viewer.updateReactorState(f.state);assert.equal(frames.size,1);
+ const draw=()=>{assert.equal(frames.size,1);const [id,callback]=frames.entries().next().value!;frames.delete(id);callback(0);};
+ viewer.setPending(true);draw();assert.equal(frames.size,0);viewer.setPending(false);assert.equal(frames.size,1);
+ viewer.updateReactorState(null);draw();assert.equal(frames.size,0);viewer.updateReactorState(f.state);assert.equal(frames.size,1);
  viewer.dispose();assert.equal(frames.size,0);assert.equal(f.frame.children.length,0);
 });

@@ -130,7 +130,8 @@ test('apparatus wrapper cancels deferred construction after disposal',async t=>{
  module.resolve({createApparatusViewer:()=>{created++;}});await settle();assert.equal(created,0);assert.equal(w.host.children.length,0);assert.equal(w.disconnected,1);
 });
 function harness(t:any,loader:any){
- const doc:any={createElement:()=>new Element(doc),addEventListener(){},removeEventListener(){}},frame=new Element(doc),old=(globalThis as any).ResizeObserver;
+ let frameId=0;const frames=new Map<number,FrameRequestCallback>();
+ const doc:any={defaultView:{requestAnimationFrame(fn:FrameRequestCallback){frames.set(++frameId,fn);return frameId;},cancelAnimationFrame(id:number){frames.delete(id);}},createElement:()=>new Element(doc),addEventListener(){},removeEventListener(){}},frame=new Element(doc),old=(globalThis as any).ResizeObserver;
  let disconnected=0; (globalThis as any).ResizeObserver=class {observe(){}disconnect(){disconnected++;}};
  t.after(()=>{(globalThis as any).ResizeObserver=old;});
  let camera:any,scene:any,rendered=0,displayDisposed=0,controlsDisposed=0;const sizes:any[]=[],selected:string[]=[],errors:any[]=[];
@@ -143,7 +144,7 @@ function harness(t:any,loader:any){
  const click=(drag=0)=>{const canvas:any=viewer.canvas;canvas.dispatch('pointerdown',{pointerId:1,button:0,clientX:400,clientY:300});
   if(drag)canvas.dispatch('pointermove',{pointerId:1,clientX:400+drag,clientY:300});
   canvas.dispatch('pointerup',{pointerId:1,clientX:400+drag,clientY:300});};
- return {viewer,frame,controls,key,click,selected,errors,sizes,get camera(){return camera;},get scene(){return scene;},
+ return {viewer,frame,controls,key,click,selected,errors,sizes,step(){const callbacks=[...frames.values()];frames.clear();for(const fn of callbacks)fn(0);},get camera(){return camera;},get scene(){return scene;},
   get rendered(){return rendered;},get displayDisposed(){return displayDisposed;},get controlsDisposed(){return controlsDisposed;},get disconnected(){return disconnected;}};
 }
 
@@ -201,7 +202,7 @@ test('3D camera controls rotate, zoom within bounds, reset and resize without an
  const before=distance();h.key('+');assert.ok(distance()<before);h.key('-');assert.ok(Math.abs(distance()-before)<1e-10);
  for(let i=0;i<100;i++)h.key('+');assert.ok(distance()>=h.controls.minDistance-1e-10);
  for(let i=0;i<100;i++)h.key('-');assert.ok(distance()<=h.controls.maxDistance+1e-10);
- assert.equal(h.key('a'),false);const beforeRestore=h.rendered;(h.viewer.canvas as any).dispatch('webglcontextrestored');assert.equal(h.rendered,beforeRestore+1);
+ assert.equal(h.key('a'),false);const beforeRestore=h.rendered;(h.viewer.canvas as any).dispatch('webglcontextrestored');h.step();assert.equal(h.rendered,beforeRestore+1);
  const renders=h.rendered;h.viewer.dispose();h.key('ArrowRight');(h.viewer.canvas as any).dispatch('webglcontextrestored');assert.equal(h.rendered,renders);
  assert.equal(h.frame.children.length,0);
 });
