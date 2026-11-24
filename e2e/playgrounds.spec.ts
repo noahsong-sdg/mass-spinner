@@ -289,6 +289,8 @@ for(const level of ['1','3','4'])test(`Advanced playground ${level} loads its pr
 });
 
 for(const currentA of [0,.03])test(`control tutorial applies ${currentA} A through the attached reader`,async({page},info)=>{
+ // Software rendering can spend 35 s on setup before this multi-step export flow.
+ test.setTimeout(180_000);
  if(info.project.name==='desktop')await page.setViewportSize({width:756,height:834});
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const duration=await page.locator('#fuel-durationS').inputValue();

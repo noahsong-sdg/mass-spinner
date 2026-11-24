@@ -38,9 +38,9 @@ test('the first session connects current, equilibrium, heat and collection in on
  await expect(page.locator('#fuel-plots > .live-plots')).toContainText('Neutral gas');
 
  await reader.locator('[data-guide-action="collectionExperiment"]').click();
+ await expect(page.locator('.fuel-metrics')).toContainText('Configured cut radius / a');
  const plot=page.locator('#fuel-plots > .live-plots svg').first();
  const summary=await page.locator('.fuel-metrics').innerText(),configured=await page.locator('#fuel-cutFraction').inputValue();
- await expect(page.locator('.fuel-metrics')).toContainText('Configured cut radius / a');
  await plot.press('Home');await expect(page.locator('#fuel-plots > .live-plots .plot-readout')).toContainText('Inner light purity: 0, —');
  await plot.press('End');await expect(page.locator('#fuel-plots > .live-plots .plot-readout')).toContainText('Light recovery: 1, 100');
  expect(await page.locator('.fuel-metrics').innerText()).toBe(summary);
