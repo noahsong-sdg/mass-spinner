@@ -43,7 +43,7 @@ for(const [key,name,min,max,step,format,log]of definitions){
  input.addEventListener('input',()=>{const value=Number(input.value);config[key]=log?10**value:value;output.value=format(value);recalculate();});
  label.append(line,input);$('sliders').append(label);controls.push({input,output,key,format,log});
 }
-let result=simulateLaurelin(config),fraction=0,playing=false,lastTime: number | null=null,scene: LaurelinSceneController | undefined;
+let result=simulateLaurelin(config),fraction=0,playing=false,lastTime: number | null=null,frameQueued=false,scene: LaurelinSceneController | undefined;
 function openPanel(id: 'controls' | 'plots' | 'model' | 'inspector' | null){
  for(const key of ['controls','plots','model','inspector'] as const)$(key).hidden=key!==id;
  for(const button of document.querySelectorAll<HTMLButtonElement>('[data-panel]'))button.setAttribute('aria-expanded',String(button.dataset.panel===id));
@@ -61,7 +61,7 @@ for(const button of document.querySelectorAll<HTMLButtonElement>('[data-panel]')
 for(const button of document.querySelectorAll('[data-close]'))button.addEventListener('click',()=>openPanel(null));
 try{scene=createScene($('reactor'),inspectComponent);}catch(error){console.error('Laurelin graphics initialization failed',error);$('graphics-error').hidden=false;}
 $('home').addEventListener('click',()=>scene?.home());
-$('play').addEventListener('click',()=>{if(fraction>=1)fraction=0;playing=!playing;$('play').textContent=playing?'Pause':'Play';lastTime=null;});
+$('play').addEventListener('click',()=>{if(fraction>=1)fraction=0;playing=!playing;$('play').textContent=playing?'Pause':'Play';lastTime=null;scheduleFrame();});
 $('restart').addEventListener('click',()=>{fraction=0;playing=false;$('play').textContent='Play';draw();});
 $('timeline').addEventListener('input',()=>{fraction=Number($('timeline').value);playing=false;$('play').textContent='Play';draw();});
 $('reset').addEventListener('click',()=>{
@@ -95,10 +95,12 @@ function draw(){
  scene?.update(state,config);
 }
 function frame(time: number){
- if(playing&&lastTime!==null){fraction=Math.min(1,fraction+(time-lastTime)/10000);if(fraction===1){playing=false;$('play').textContent='Play';}}
- lastTime=time;draw();requestFrame(frame);
+ frameQueued=false;if(!playing){lastTime=null;return;}
+ if(lastTime!==null){fraction=Math.min(1,fraction+(time-lastTime)/10000);if(fraction===1){playing=false;$('play').textContent='Play';}}
+ lastTime=time;draw();scheduleFrame();
 }
-updateResults();draw();requestFrame(frame);
+function scheduleFrame(){if(playing&&!frameQueued){frameQueued=true;requestFrame(frame);}}
+updateResults();draw();
 return {get result(){return result;},get fraction(){return fraction;}};
 }
 
