@@ -168,7 +168,7 @@ test('the beam-source reader distinguishes incident ions, fusion probability, he
  assert.match(content('loading'),/same physical time/);
  assert.match(content('loading'),/coefficients are nonzero/);
  assert.match(content('limits'),/not a measured lithium-tritide stopping curve/);
- assert.match(content('limits'),/Positive fusion power alone does not establish a positive electrical balance/);
+ assert.match(content('limits'),/Positive fusion power alone does not show a positive electrical balance/);
  assert.deepEqual([...doc.querySelectorAll<HTMLElement>('[data-guide-action]')].map(node=>node.dataset.guideAction),['beamSource','beamSource','beamTarget']);
  assert.equal(doc.querySelectorAll('figure svg').length,1);
  assert.match(doc.querySelector('figcaption')!.textContent!,/Paths, not relative amounts/);

@@ -15,14 +15,14 @@ These inputs answer different questions: how much energy does each ion carry, an
 
 ## Why do most ions heat the target?
 
-A useful source must produce neutrons without excessive target heating. Thus, we must track energy loss as well as fusion.
+A useful source must produce neutrons without too much target heating. Thus, we must calculate energy loss and neutron output.
 
 An ion transfers energy to the target as it moves through it. This energy loss is called stopping.
 The ion can leave a thin target with energy remaining. A sufficiently thick target can stop it.
 Fusion is a separate possibility along that path; energy loss does not mean that fusion occurred.
 
 The fusion cross section describes the reaction probability for an ion passing target nuclei.
-It changes with collision energy. The model therefore calculates energy loss and reaction probability along the path through the target.
+It changes with collision energy. The model thus calculates energy loss and reaction probability along the path through the target.
 For the example inputs, only a small fraction of incident ions fuse.
 
 <figure>
@@ -45,7 +45,7 @@ The cross section, energy loss, target thickness and accelerator efficiency all 
 ## What changes when beam current increases?
 
 Higher neutron output can come from more incident ions, even when each ion has the same reaction probability.
-We need to distinguish these two causes before we judge source efficiency.
+More neutrons do not always mean a higher source efficiency.
 
 [Open the source example](/?level=2&try=beamSource). Keep beam energy and the initial target state constant. Increase beam current.
 
@@ -58,7 +58,7 @@ The evolving target can heat and change its tritium content. Its later reaction 
 
 ## Why does output change during a pulse?
 
-A fixed-target result describes one target state. It cannot show whether the source maintains that output during operation.
+A fixed-target result describes one target state. It cannot show whether the source keeps that output during operation.
 
 Incident deuterium, fusion and the selected transport processes can change the target's local isotope content.
 Temperature also changes as deposited energy moves through the target and backing toward the coolant.
@@ -71,15 +71,15 @@ At a lower duty, the beam supplies energy for less time. The off-time permits he
 The temperature response also depends on the target, backing, contact and cooling inputs.
 
 Replacement, release, diffusion and renewal affect loading only when their selected coefficients are nonzero.
-These are assumed material inputs. The model does not establish measured lithium-tritide loading or target lifetime.
+These are assumed material inputs. The model does not show measured accuracy for lithium-tritide loading or target lifetime.
 
 ## What does this source tell us about a power plant?
 
-Neutron output is useful for a neutron source. It does not establish that the system supplies net electricity.
+Neutron output is useful for a neutron source. It does not show that the system supplies net electricity.
 
-The source calculation tracks beam energy, fusion output and target heat.
+The source calculation gives beam energy, fusion output and target heat.
 A power plant also needs energy conversion, cooling, fuel recovery and all electrical loads.
-Positive fusion power alone does not establish a positive electrical balance.
+Positive fusion power alone does not show a positive electrical balance.
 
 The stopping estimate uses an approximate material model. It is not a measured lithium-tritide stopping curve.
 The source does not calculate neutron shielding, a breeding blanket, a complete fuel cycle or commercial performance.

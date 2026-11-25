@@ -116,7 +116,7 @@ test('tutorial sections use a diagram, a comparison table or a direct explanatio
       assert.match(text,/Compare Dynamics at the same physical time/);
       assert.match(text,/off-time permits heat flow without more beam heating/);break;
      case 'limits':
-      assert.match(text,/Positive fusion power alone does not establish a positive electrical balance/);
+      assert.match(text,/Positive fusion power alone does not show a positive electrical balance/);
       assert.match(text,/not a measured lithium-tritide stopping curve/);
       assert.ok(nodes.some(node=>node.querySelector('a[href$="/src/fusion-reactor.ts"]')));
       assert.ok(nodes.some(node=>node.querySelector('a[href$="/docs/COUPLED-TARGET-V35.md"]')));break;
