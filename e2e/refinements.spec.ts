@@ -81,3 +81,14 @@ test('scene and plot identify their coupled state and distinguish independent re
  await expect(plot).toHaveAttribute('data-model','Separate reference calculation');await expect(plot).not.toHaveAttribute('data-time-s');
  await expect(page.locator('#fuel-plot optgroup')).toHaveCount(4);
 });
+
+
+test('a narrow tutorial window places the prompt outside the 3D stage',async({page})=>{
+ await page.setViewportSize({width:850,height:900});
+ await page.goto('/?level=2&try=currentExperiment&lesson=/guide.html%23momentum');await accepted(page);
+ const cue=page.locator('.tutorial-focus'),stage=page.locator('.world-stage');
+ await expect(cue).toBeVisible();
+ const boxes=await page.evaluate(()=>{const cue=document.querySelector('.tutorial-focus')!.getBoundingClientRect(),stage=document.querySelector('.world-stage')!.getBoundingClientRect();return {cueBottom:cue.bottom,stageTop:stage.top,stageHeight:stage.height};});
+ expect(boxes.stageTop).toBeGreaterThanOrEqual(boxes.cueBottom);expect(boxes.stageHeight).toBeGreaterThanOrEqual(450);
+ await expect(page.locator('.fuel-motion #fuel-scene-state')).toBeVisible();
+});

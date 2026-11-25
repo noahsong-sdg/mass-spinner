@@ -197,7 +197,7 @@ body.immersive .sim-workspace [hidden]{display:none!important}
 .tutorial-drive-stages{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}.tutorial-drive-stages button{min-height:36px;padding:4px 10px;font-size:12px;border:1px solid #526658}.tutorial-drive-stages button[aria-pressed=true]{color:#edbe90;background:#26392e}
 
 .tutorial-focus-close{position:absolute;right:4px;top:4px;min-width:32px;min-height:32px;color:#b6c7bc}.tutorial-focus{padding-right:38px}
-@media(max-width:740px){
+@media(max-width:900px){
  .sim-workspace.tutorial-open{--world-left-reserve:0px!important;--world-right-reserve:0px!important;display:flex;flex-direction:column;overflow-y:auto;overflow-anchor:none;overscroll-behavior:contain;scroll-padding-top:var(--world-top)}
  .tutorial-open .world-top{position:sticky;top:0;flex:none;order:0;min-height:var(--world-top)}
  .tutorial-open #window-guide{position:relative;top:auto;bottom:auto;left:auto;width:100%;height:42dvh!important;min-height:250px;max-height:none;flex:none;order:1}
