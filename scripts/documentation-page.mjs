@@ -9,8 +9,8 @@ function page(title,body,chapters){
 }
 /** Build the documentation index. @returns {string} */
 export function documentationPage(){
- const scope=['Energy balance and spatial heat flow.','Sample counts, stages and pumping.','Enrichment, breeding and fuel inventory.','Numerical checks, uncertainty and measurements.'];
- const tutorials=`<section><h2 id="tutorials">Tutorials</h2><ul><li><a href="/start.html">Tutorial 1 · Fusion and its fuel supply</a> — Fusion, the plant, and Marathon’s equipment.</li><li><a href="/guide.html">Tutorial 2 · Rotation and separation</a> — Drive, rotation and radial composition.</li>${numberedTutorials.map((tutorial,index)=>`<li><a href="/tutorial-${tutorial.number}.html">Tutorial ${Number(tutorial.number)} · ${escape(tutorial.title)}</a> — ${scope[index]}</li>`).join('')}</ul></section>`;
+ const scope={'03':'Energy balance and spatial heat flow.','04':'Sample counts, stages and pumping.','05':'Enrichment, breeding and fuel inventory.','06':'Numerical checks, uncertainty and measurements.','07':'Beam stopping, neutron output and target heat.'};
+ const tutorials=`<section><h2 id="tutorials">Tutorials</h2><ul><li><a href="/start.html">Tutorial 1 · Fusion and its fuel supply</a> — Fusion, the plant, and Marathon’s equipment.</li><li><a href="/guide.html">Tutorial 2 · Rotation and separation</a> — Drive, rotation and radial composition.</li>${numberedTutorials.map(tutorial=>`<li><a href="/tutorial-${tutorial.number}.html">Tutorial ${Number(tutorial.number)} · ${escape(tutorial.title)}</a> — ${scope[tutorial.number]}</li>`).join('')}</ul></section>`;
  const documentation='<section><h2 id="documentation">Documentation</h2><ul><li><a href="/systems.html">Centrifuge and reactors</a></li><li><a href="/guide.html#views">Controls & plot reference</a></li><li><a href="/how-it-works.html">Simulation methods & assumptions</a></li><li><a href="/equilibrium.html">Equilibrium composition & collection</a></li><li><a href="/qualification.html">Experimental evidence & accuracy limits</a></li></ul></section>';
  return page('Docs & tutorials',tutorials+documentation,[['tutorials','Tutorials'],['documentation','Documentation']]);
 }

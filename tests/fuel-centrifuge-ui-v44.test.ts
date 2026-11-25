@@ -7,6 +7,7 @@ import {simulateFuelCentrifuge,type FuelConfig} from '../src/fuel-centrifuge.ts'
 import {isFuelReferenceInput} from '../src/fuel-reference-update.js';
 import {fuelMotionState} from '../src/fuel-motion.js';
 import {simulateFuelTransport} from '../src/fuel-transport.ts';
+import {simulateFuelOperation} from '../src/fuel-operation.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const reply=(record:any)=>{const result=simulateFuelCentrifuge(record.config);return {result:{...result,...(record.includeTransport?{transport:simulateFuelTransport(result)}:{})},producingCode:identity};};
@@ -137,7 +138,10 @@ test('changing all declared parameters accepts their actual values without touch
 test('plot topics render finite SVG paths and disclose conditional equilibrium and thermal semantics',async t=>{
  const f=fixture(t);f.ui.setActive(true);await flush();
  const topics=[...f.node('fuel-plot').options].map((option:any)=>option.value);
- assert.deepEqual(topics,['separation','composition','spin','heat','thermal','thermalProfile','gasEnergy','gasPressure','momentum','inertia','profile','cut','cascade','pump','field','inventory','lithium']);
+ assert.deepEqual([...f.node('fuel-plot').querySelectorAll('optgroup')].map((group:any)=>[group.label,[...group.children].map((option:any)=>option.value)]),[
+  ['Rotation',['spin','momentum','inertia']],['Composition',['separation','composition','profile','cut']],['Heat',['heat','thermal','thermalProfile','gasEnergy','gasPressure']],['Reference calculations',['cascade','pump','field','inventory','lithium']],
+ ]);
+ assert.equal(new Set(topics).size,17);
  for(const topic of topics){
   f.change('fuel-plot',topic,'change');
   assert.equal(f.ui.nodes.plots.querySelectorAll('svg').length>0,!['thermalProfile','gasEnergy','gasPressure'].includes(topic),topic);
@@ -262,6 +266,39 @@ test('application reference changes select a coherent plot without discarding th
  assert.match(f.ui.nodes.plots.querySelector('.fuel-explanation')!.textContent!,/One outer outlet/);
  assert.match(f.ui.nodes.plots.querySelector('svg')!.getAttribute('aria-label')!,/Partial pressure/);
  assert.equal(f.node('fuel-export').disabled,false);
+});
+
+test('scene and plot identify their actual model and time, including mismatched reference views and pending inputs',async t=>{
+ const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
+ f.change('fuel-motion-time',.3);
+ assert.match(f.node('fuel-scene-state').textContent,/Coupled run · 0.3 s/);
+ assert.match(f.node('fuel-plot-state').textContent,/Coupled run · 0.3 s/);
+ f.change('fuel-motion-mode','equilibrium','change');
+ assert.match(f.node('fuel-scene-state').textContent,/Equilibrium reference · 1 s rotor endpoint/);
+ assert.match(f.node('fuel-plot-state').textContent,/Coupled run · 1 s endpoint/,'A history plot keeps its coupled source when the scene is an equilibrium reference.');
+ f.change('fuel-plot','composition','change');assert.match(f.node('fuel-plot-state').textContent,/Equilibrium reference/);
+ f.change('fuel-plot','pump','change');assert.equal(f.node('fuel-plot-state').textContent,'Separate reference calculation');assert.equal(f.node('fuel-plot-state').dataset.timeS,undefined);
+ f.change('fuel-motion-mode','transport','change');f.change('fuel-motion-time',.3);f.change('fuel-plot','composition','change');
+ f.change('fuel-gasK',600);
+ assert.match(f.node('fuel-scene-state').textContent,/Previous result · Coupled run · 0.3 s/,'The frozen scene retains its displayed time while a new run is pending.');
+ assert.equal(f.node('fuel-scene-state').dataset.calculationState,'previous');
+ assert.match(f.node('fuel-plot-state').textContent,/Previous result · Coupled run · 0 s/);
+ await f.ui.run();assert.equal(f.node('fuel-plot-state').dataset.calculationState,'accepted');assert.doesNotMatch(f.node('fuel-scene-state').textContent,/Previous/);
+});
+
+test('the actual editor states current-step, new-run and reference-only effects without replacing accepted history',async t=>{
+ const f=fixture(t,{motion:true,reducedMotion:true,request:(record:any)=>{const result=simulateFuelCentrifuge(record.config);return Promise.resolve({result:{...result,transport:simulateFuelOperation(result,record.operation)},producingCode:identity});}});f.ui.setActive(true);await flush();
+ f.node('fuel-currentA').focus();assert.equal(f.node('fuel-currentA-effect').hidden,false);assert.match(f.node('fuel-currentA-effect').textContent,/new run from 0 s/);
+ f.change('fuel-motion-time',.3);assert.match(f.node('fuel-currentA-effect').textContent,/Apply at 0.3 s. Add a current step/);
+ f.node('fuel-gasK').focus();assert.equal(f.node('fuel-currentA-effect').hidden,true);assert.match(f.node('fuel-gasK-effect').textContent,/new run from 0 s/);
+ f.node('fuel-pumpSpeedM3S').focus();assert.match(f.node('fuel-pumpSpeedM3S-effect').textContent,/Update reference/);
+ const history=f.ui.latest.result.transport.snapshots,count=f.requests.length;
+ f.change('fuel-pumpSpeedM3S',Math.log10(.04));
+ assert.equal(f.requests.length,count);assert.equal(f.ui.latest.result.transport.snapshots,history);assert.equal(f.node('fuel-scene-state').dataset.timeS,'0.3');
+ assert.match(f.node('fuel-experiment-name').textContent,/Ideal gas experiment/);
+ const accepted=f.ui.latest;f.node('fuel-temperature-reference').click();
+ assert.equal(f.node('fuel-plot').value,'lithium');assert.equal(f.ui.latest,accepted);assert.equal(f.requests.length,count);
+ f.change('fuel-pair','dt','change');assert.equal(f.node('fuel-temperature-reference').hidden,true);
 });
 
 test('new settings disable stale exports and superseded responses cannot overwrite current physics or meshes',async t=>{

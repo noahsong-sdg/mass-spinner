@@ -3,10 +3,10 @@
 export type GuideTopic = {id:string;heading:string;diagram?:string|readonly string[];actions:readonly (readonly [string,string])[]};
 export const guideTopics=[
  {id:'goal',heading:'What do we want to calculate?',diagram:'goal',actions:[['spin','Replay spin-up']]},
- {id:'composition',heading:'1. Why does rotation separate masses?',diagram:['turning','density-scan','composition'],actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall'],['density','Show species density']]},
- {id:'bias',heading:'2. How strong is the separation?',diagram:'bias',actions:[['temperature','Compare 2× temperature'],['rotation','Compare 2× rotation'],['equilibrium','Open equilibrium calculator']]},
- {id:'drive',heading:'3. How does electricity turn the gas?',diagram:'drive',actions:[['look','Show gas & drive'],['current','Adjust current']]},
- {id:'momentum',heading:'4. What sets the rotation speed?',diagram:'spin',actions:[['currentExperiment','Try the current experiment'],['endSpin','Show end-of-run speeds'],['spin','Replay spin-up'],['momentum','Show angular momentum'],['inertia','Show gas inertia'],['current','Adjust current'],['collisions','Adjust collisions'],['drag','Adjust wall drag']]},
+ {id:'drive',heading:'1. How does electricity turn the gas?',diagram:'drive',actions:[['look','Show gas & drive'],['current','Adjust current']]},
+ {id:'momentum',heading:'2. What sets the rotation speed?',diagram:'spin',actions:[['currentExperiment','Try the current experiment'],['endSpin','Show end-of-run speeds'],['spin','Replay spin-up'],['momentum','Show angular momentum'],['inertia','Show gas inertia'],['current','Adjust current'],['collisions','Adjust collisions'],['drag','Adjust wall drag']]},
+ {id:'composition',heading:'3. Why does rotation separate masses?',diagram:['turning','density-scan','composition'],actions:[['composition','Show end-of-run composition'],['axis','Probe axis'],['wall','Probe wall'],['density','Show species density']]},
+ {id:'bias',heading:'4. How strong is the separation?',diagram:'bias',actions:[['temperature','Compare 2× temperature'],['rotation','Compare 2× rotation'],['equilibrium','Open equilibrium calculator']]},
  {id:'energy',heading:'5. Where does the energy go?',actions:[['work','Show drive work'],['thermal','Open thermal controls'],['thermalPlot','Show temperature']]},
  {id:'collection',heading:'6. How long does separation take?',actions:[['collection','Show end-of-run cuts'],['cut','Probe collection curve'],['diffusion','Adjust diffusivity'],['duration','Adjust run duration']]},
  {id:'limits',heading:'Which model parts are necessary, and what is missing?',actions:[['pin','Pin this run as A']]},
@@ -39,6 +39,13 @@ export const numberedTutorials = [
   {id:'questions',heading:'What does a test show?',actions:[['modelInfo','Open qualification and evidence']]},
   {id:'sensitivity',heading:'Which input can change the result?',actions:[['pin','Pin accepted run A'],['diffusion','Adjust diffusivity'],['newRun','New run'],['separationPlot','Show separation over time']]},
   {id:'prediction',heading:'Which predictions have sufficient evidence?',diagram:'diagnostic',actions:[['modelInfo','Open measured-reference assessment']]},
+ ]},
+ {number:'07',title:'Beam-driven neutron source',topics:[
+  {id:'source',heading:'Why does the source use a beam?',actions:[['beamSource','Open the source example']]},
+  {id:'stopping',heading:'Why do most ions heat the target?',actions:[]},
+  {id:'current',heading:'What changes when beam current increases?',actions:[['beamSource','Open the source example']]},
+  {id:'loading',heading:'Why does output change during a pulse?',actions:[['beamTarget','Open the target example']]},
+  {id:'limits',heading:'What does this source tell us about a power plant?',actions:[]},
  ]},
 ] as const satisfies readonly {number:string;title:string;topics:readonly GuideTopic[]}[];
 /** Additional actions for the numbered tutorials. */

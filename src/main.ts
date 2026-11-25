@@ -7,6 +7,7 @@ import './target-loading.css';
 import './minimal.css';
 import './workspace.css';
 import {setupWorkspace} from './workspace-ui.js';
+import {captureGuideDefaults} from './guide-examples.js';
 import './coupled-target.css';
 import './precise-controls.css';
 import {setupPreciseControls} from './precise-controls.js';
@@ -422,7 +423,8 @@ const collectorHost=document.createElement('div');$('orbit-results').after(colle
 setupPreciseControls(document,{describeRange:range=>range.id==='gaussian-density'?{scale:'log10',unit:'m⁻³',label:'Axis ion density'}:{unit:({'field':'T','voltage':'V','energy':'eV','parallel':'eV','source-radius':'cm','axial-temperature':'eV','rf-amplitude':'V/m','gaussian-field':'T','gaussian-width':'m','rotation':'rad/s','ion-temperature':'eV','electron-temperature':'eV','axis-fraction':'%','play-mass-b':'u'} as Record<string,string>)[range.id]??range.dataset.unit}});renderConvergenceEvidence(convergenceEvidence as ConvergenceEvidence);studyUI=setupStudies(mode,()=>orbitConfig(mode()==='icr'?'icr':'rotating'),(selected,settings,signal)=>calculate(selected as OrbitMode,settings,signal));
 baseline=setupBaseline($('live-plots'),baselineOptions);
 $('replay-retry').addEventListener('click',()=>{void showResearch();});
-workspace=setupWorkspace({onContextChange:({level,marathon:apparatus})=>{fuelCentrifuge.setActive(level==='2'&&apparatus==='centrifuge');marathon.setActive(level==='2'&&apparatus==='source');}});
+const guideDefaults=captureGuideDefaults(document);
+workspace=setupWorkspace({examples:{defaults:guideDefaults,capture:()=>experience!.capture({requireAccepted:false}),restore:scenario=>experience!.restore(scenario)},onContextChange:({level,marathon:apparatus})=>{fuelCentrifuge.setActive(level==='2'&&apparatus==='centrifuge');marathon.setActive(level==='2'&&apparatus==='source');}});
 experience=setupExperience({fuelCentrifuge,selectMode,invalidate,showView,showResearch:()=>{void showResearch();},onLevelChange:level=>{workspace.setLevel(level);sceneVisibility();void legacyScene.ensure();}});
 const lesson=guideQuery.get('lesson');if(lesson)workspace.openTutorial(lesson);
 if(guideAction)workspace.launchTutorialAction(guideAction);

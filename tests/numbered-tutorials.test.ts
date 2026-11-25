@@ -8,8 +8,8 @@ import {understandingPage} from '../scripts/understanding-page.mjs';
 import {setupGuideReader} from '../src/guide-reader.js';
 
 const revision='8cab091a3458a050142049f9227238d18e51b53d';
-test('03–06 are self-contained readers with rendered math, diagrams, valid control actions and sequential links',t=>{
- assert.deepEqual(numberedTutorials.map(part=>part.number),['03','04','05','06']);
+test('03–07 are self-contained readers with rendered math, diagrams, valid control actions and sequential links',t=>{
+ assert.deepEqual(numberedTutorials.map(part=>part.number),['03','04','05','06','07']);
  for(const tutorial of numberedTutorials){
   const source=readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8');
   const dom=new JSDOM(understandingPage(source,revision,tutorial),{url:`https://example.org/tutorial-${tutorial.number}.html`});t.after(()=>dom.window.close());
@@ -148,4 +148,28 @@ test('the radius control updates the whole inner volume, counts, purity and reco
   for(const dot of figure.querySelectorAll<SVGElement>('[data-cut-particle]'))assert.equal(dot.classList.contains('cut-outside'),Number(dot.dataset.cutParticle)>index/100);
   assert.equal(figure.querySelector('[data-cut-reading]')!.getAttribute('aria-live'),'polite');
  }
+});
+
+
+test('the beam-source reader distinguishes incident ions, fusion probability, heat and evolving loading',t=>{
+ const dom=reader('07');t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.deepEqual([...doc.querySelectorAll('main h2[id]')].map(node=>node.id),['source','stopping','current','loading','limits']);
+ const content=(id:string)=>{
+  const heading=doc.getElementById(id)!;let text='';
+  for(let node=heading.nextElementSibling;node&&node.tagName!=='H2';node=node.nextElementSibling)text+=` ${node.textContent}`;
+  return text;
+ };
+ assert.match(content('source'),/Beam energy is the kinetic energy of one incident ion/);
+ assert.match(content('source'),/Beam current sets how many singly charged deuterium ions arrive each second/);
+ assert.match(content('stopping'),/energy loss does not mean that fusion occurred/);
+ assert.match(content('stopping'),/Their later energy transfer needs a separate transport calculation/);
+ assert.match(content('current'),/fixed-target calculation, reaction probability per ion stays constant/);
+ assert.match(content('current'),/at the same energy and target state/);
+ assert.match(content('loading'),/same physical time/);
+ assert.match(content('loading'),/coefficients are nonzero/);
+ assert.match(content('limits'),/not a measured lithium-tritide stopping curve/);
+ assert.match(content('limits'),/Positive fusion power alone does not establish a positive electrical balance/);
+ assert.deepEqual([...doc.querySelectorAll<HTMLElement>('[data-guide-action]')].map(node=>node.dataset.guideAction),['beamSource','beamSource','beamTarget']);
+ assert.equal(doc.querySelectorAll('figure svg').length,1);
+ assert.match(doc.querySelector('figcaption')!.textContent!,/Paths, not relative amounts/);
 });

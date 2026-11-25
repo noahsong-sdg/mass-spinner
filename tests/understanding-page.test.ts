@@ -256,7 +256,7 @@ test('the rotation chapter motivates one drive-and-coast experiment instead of e
 });
 
 test('only explicitly authored, allowlisted local actions become simulator links',t=>{
- const source='## 4. What sets the rotation speed?\n\nFirst explain torque.\n\n[Replay now](/?level=2&try=spin)';
+ const source='## 2. What sets the rotation speed?\n\nFirst explain torque.\n\n[Replay now](/?level=2&try=spin)';
  const dom=new JSDOM(understandingPage(source,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('[data-guide-action]').length,1);
  const link=doc.querySelector<HTMLAnchorElement>('[data-guide-action]')!;
@@ -270,7 +270,10 @@ test('only explicitly authored, allowlisted local actions become simulator links
 
 test('the model-building order and old deep links survive the guide rewrite',t=>{
  const dom=new JSDOM(understandingPage(markdown,revision));t.after(()=>dom.window.close());const doc=dom.window.document;
- assert.deepEqual([...doc.querySelectorAll('main h2[id]')].map(node=>node.id),['goal','composition','bias','drive','momentum','energy','collection','limits','views','path']);
+ assert.deepEqual([...doc.querySelectorAll('main h2[id]')].map(node=>node.id),['goal','drive','momentum','composition','bias','energy','collection','limits','views','path']);
+ const menu=doc.getElementById('views')!.nextElementSibling!.nextElementSibling!;
+ assert.equal(menu.tagName,'DETAILS');assert.equal(menu.hasAttribute('open'),false,'long menu reference is available on request');
+ assert.ok(menu.querySelector('table'));
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')){
   assert.ok(doc.getElementById(link.hash.slice(1)),`missing same-page destination: ${link.hash}`);
   assert.equal(link.hasAttribute('target'),false,'embedded chapter links stay in the reader');
@@ -288,7 +291,7 @@ test('the reading plan uses the documentation index instead of duplicating its e
  const path=doc.getElementById('path')!;
  assert.equal(path.nextElementSibling?.tagName,'P');
  assert.equal(doc.querySelector('#path ~ table'),null,'the experiment directory belongs only in Docs & tutorials');
- for(const href of ['/learn.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
+ for(const href of ['/learn.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/tutorial-07.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
 });
 
 

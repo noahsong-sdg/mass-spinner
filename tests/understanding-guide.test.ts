@@ -88,7 +88,7 @@ test('tutorial prose omits bold label prefixes',()=>{
 test('the drive explanation connects one-charge force to current, torque and supply energy',t=>{
  const dom=new JSDOM(understandingPage(source,'a'.repeat(40)));t.after(()=>dom.window.close());
  const doc=dom.window.document,drive=doc.getElementById('drive')!;
- assert.equal(drive.textContent,'3. How does electricity turn the gas?','the contents and diagram retain the drive anchor');
+ assert.equal(drive.textContent,'1. How does electricity turn the gas?','the contents and diagram retain the drive anchor');
  const content=[];let node=drive.nextElementSibling;
  while(node&&node.tagName!=='H2'){content.push(node);node=node.nextElementSibling;}
  const text=content.map(node=>node.textContent).join(' ');

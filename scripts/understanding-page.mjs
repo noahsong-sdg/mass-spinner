@@ -38,7 +38,7 @@ export function understandingPage(markdown,revision,tutorial){
     params.set('lesson',ownPath+(section?`#${section}`:''));
     return `<a data-guide-action="${action}" target="_top" href="${escape(target.pathname+target.search)}">${label}</a>`;
    }
-   const part=href.match(/^UNDERSTANDING-MASS-SPINNER-(0[2-6])\.md(#[\w-]+)?$/);
+   const part=href.match(/^UNDERSTANDING-MASS-SPINNER-(0[2-7])\.md(#[\w-]+)?$/);
    if(part)return `<a href="${part[1]==='02'?'/guide.html':`/tutorial-${part[1]}.html`}${part[2]??''}">${label}</a>`;
    if(href.startsWith('#'))return `<a href="${escape(href)}">${label}</a>`;
    if(href.endsWith('/start.html'))return `<a href="/start.html">${label}</a>`;

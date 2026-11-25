@@ -27,7 +27,7 @@ test('main-page Docs & tutorials keeps the reader and controls in one workspace'
  await button.focus();await button.press('Enter');const reader=await readerFrame(page);
  expect(page.context().pages()).toHaveLength(pages);
  await expect(reader.locator('h1')).toHaveText('Docs & tutorials');
- for(const href of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/how-it-works.html','/equilibrium.html','/qualification.html'])await expect(reader.locator(`main a[href="${href}"]`)).toBeVisible();
+ for(const href of ['/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/tutorial-07.html','/how-it-works.html','/equilibrium.html','/qualification.html'])await expect(reader.locator(`main a[href="${href}"]`)).toBeVisible();
  expect(await reader.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
  const current=await page.locator('#fuel-currentA').inputValue();
  await reader.locator('main a[href="/tutorial-03.html"]').click();await reader.locator('[data-guide-action="heatExperiment"]').click();
@@ -71,10 +71,10 @@ test('heat and collection illustrations explain direction and inventory with acc
  expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);expect(errors).toEqual([]);
 });
 
-test('numbered tutorials 03–06 render independently with readable diagrams, math and mobile navigation',async({page},info)=>{
+test('all seven tutorials render independently with readable diagrams, math and mobile navigation',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
- for(const part of ['03','04','05','06']){
-  await page.goto(`/tutorial-${part}.html`);await expect(page.locator('h1')).toContainText(`Tutorial ${Number(part)}`);
+ for(const [number,route]of [[1,'/start.html'],[2,'/guide.html'],[3,'/tutorial-03.html'],[4,'/tutorial-04.html'],[5,'/tutorial-05.html'],[6,'/tutorial-06.html'],[7,'/tutorial-07.html']] as const){
+  await page.goto(route);await expect(page.locator('h1')).toContainText(`Tutorial ${number}`);
   await expect(page.locator('figure svg')).not.toHaveCount(0);
   await expect(page.locator('.katex-error')).toHaveCount(0);
   const link=page.locator('.guide-contents a').last(),target=await link.getAttribute('href');
@@ -215,7 +215,7 @@ test('tutorial experiment links put relevant controls and results within one act
 test('local tutorial diagrams explain their cases and remain usable with reduced motion on desktop and phone',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.emulateMedia({reducedMotion:'reduce'});
- for(const route of ['/start.html','/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html']){
+ for(const route of ['/start.html','/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html','/tutorial-07.html']){
   await page.goto(route);await expect(page.locator('#reader-status')).toBeEmpty();
   if(route==='/start.html')await page.locator('#exercises > summary').click();
   for(const figure of await page.locator('[data-concept-example]').all()){

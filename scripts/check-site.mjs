@@ -19,7 +19,7 @@ for(const file of ['src/main.ts','src/legacy-renderer.ts','src/study-ui.ts']){
  for(const match of source.matchAll(/\$\('([a-z][a-z0-9-]*)'\)/g))
   assert.ok(ids.has(match[1]),`Missing application control in ${file}: ${match[1]}`);
 }
-for(const name of ['index.html','laurelin.html','systems.html','how-it-works.html','guide.html','tutorial-03.html','tutorial-04.html','tutorial-05.html','tutorial-06.html','start.html','equilibrium.html','learn.html']){
+for(const name of ['index.html','laurelin.html','systems.html','how-it-works.html','guide.html','tutorial-03.html','tutorial-04.html','tutorial-05.html','tutorial-06.html','tutorial-07.html','start.html','equilibrium.html','learn.html']){
  const page=readFileSync(`release/${name}`,'utf8');
  for(const match of page.matchAll(/(?:src|href)="(\/[^"#]+)"/g)){
   const path=new URL(match[1],'https://example.org').pathname;
@@ -34,7 +34,7 @@ assert.ok(existsSync('release/_redirects'),'Missing retired-reader redirects');
 for(const [,font]of readFileSync('release/guide-katex/katex.min.css','utf8').matchAll(/url\((fonts\/[^)]+)\)/g))
  assert.ok(existsSync(`release/guide-katex/${font}`),`Missing guide math font: ${font}`);
 const sourceRevisions=new Set();
-for(const name of ['guide.html','tutorial-03.html','tutorial-04.html','tutorial-05.html','tutorial-06.html','qualification.html','how-it-works.html']){
+for(const name of ['guide.html','tutorial-03.html','tutorial-04.html','tutorial-05.html','tutorial-06.html','tutorial-07.html','qualification.html','how-it-works.html']){
  const links=[...readFileSync(`release/${name}`,'utf8').matchAll(/href="https:\/\/github.com\/noahsong-sdg\/mass-spinner\/blob\/([^"?#]+)"/g)];
  assert.ok(links.length,`Missing source links in ${name}`);
  for(const [,path]of links){

@@ -2,15 +2,16 @@ import {clamp,defaultWorkspaceLayout,readWorkspaceLayout,workspaceGeometry,works
 import {guideExperiments,type GuideExperiment} from './guide-topics.js';
 import {tutorialPresentation} from './tutorial-presentation.js';
 import {setupPlaygroundGuide} from './playground-guide.js';
+import type {GuideExampleAccess} from './guide-examples.js';
 
 import type {ExperienceLevel} from './experience-state.js';
 export type WorkspaceWindowKey='controls'|'plots'|'target'|'inspect'|'view'|'info'|'guide';
 type Side='left'|'right';
 type WorkspaceWindow={panel:HTMLElement;button:HTMLButtonElement;body:HTMLDivElement;heading:HTMLHeadingElement;side:Side;group:string};
-export type WorkspaceOptions={document?:Document;matchMedia?:Window['matchMedia'];storage?:WorkspaceStorage|null;onContextChange?:(context:{level:ExperienceLevel;marathon:string})=>void};
+export type WorkspaceOptions={examples?:GuideExampleAccess;document?:Document;matchMedia?:Window['matchMedia'];storage?:WorkspaceStorage|null;onContextChange?:(context:{level:ExperienceLevel;marathon:string})=>void};
 
 /** Reuse the live simulation nodes: opening a window never rebuilds its controls. */
-export function setupWorkspace({document:doc=document,matchMedia=window.matchMedia.bind(window),storage,onContextChange=()=>{}}:WorkspaceOptions={}){
+export function setupWorkspace({document:doc=document,matchMedia=window.matchMedia.bind(window),storage,examples,onContextChange=()=>{}}:WorkspaceOptions={}){
  const make=<K extends keyof HTMLElementTagNameMap>(tag:K,cls:string,text?:string)=>{const el=doc.createElement(tag);el.className=cls;if(text)el.textContent=text;return el;};
  const win=doc.defaultView!;
  const originalMain=doc.querySelector('main')!;
@@ -120,7 +121,7 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
  docsButton.id='open-docs';docsButton.type='button';docsButton.setAttribute('aria-label','Docs & tutorials');docsButton.title='Read beside the live simulator';docsButton.setAttribute('aria-controls','window-guide');docsButton.setAttribute('aria-expanded','false');
  docsButton.addEventListener('click',()=>{if(windows.get('guide')!.panel.hidden)guide.showReader();else close('guide',true);});
  reading.append(docsButton);header.append(reading);
- const guide=setupPlaygroundGuide({document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus,present,prepareReaderAction});
+ const guide=setupPlaygroundGuide({examples,document:doc,host:panels.guide,open,close,focusRelated,canUseApparatus:apparatus=>level==='2'&&marathon===apparatus,present,prepareReaderAction});
  const tutorialPanel=windows.get('guide')!.panel;shell.append(tutorialPanel);
  const readFull=make('a','','Reading page ↗');readFull.href='/learn.html';readFull.target='_blank';readFull.rel='noopener';
  const readerFrame=panels.guide.querySelector<HTMLIFrameElement>('iframe')!;
@@ -209,5 +210,5 @@ export function setupWorkspace({document:doc=document,matchMedia=window.matchMed
   const node=selector?item.body.querySelector<HTMLElement>(selector):null;
   if(node){for(let parent=node.parentElement;parent&&parent!==item.body;parent=parent.parentElement)if(parent.tagName==='DETAILS')(parent as HTMLDetailsElement).open=true;node.scrollIntoView?.({block:'nearest'});node.focus?.({preventScroll:true});}
  }
- return {open,close,focusRelated,openTutorial:guide.showReader,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchTutorialAction(key:string){prepareReaderAction(key);guide.launch(key);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
+ return {open,close,focusRelated,openTutorial:guide.showReader,openPhysics(topic?:string){open('guide');guide.showPhysics(topic);},launchTutorialAction(key:string){guide.prepareAction(key);prepareReaderAction(key);guide.launch(key);},launchGuideAction:guide.launch,refreshMode:refresh,setLevel(next:ExperienceLevel){for(const key of windows.keys())close(key);level=next;refresh();}};
 }

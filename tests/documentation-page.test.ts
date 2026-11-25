@@ -6,11 +6,13 @@ import {documentationPage} from '../scripts/documentation-page.mjs';
 import {numberedTutorials} from '../src/guide-topics.js';
 import {readScenario} from '../src/scenario-state.js';
 
-test('the documentation index contains six tutorials and technical references without optional investigations',t=>{
+test('the documentation index contains seven tutorials and technical references without optional investigations',t=>{
  const dom=new JSDOM(documentationPage());t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelector('h1')!.textContent,'Docs & tutorials');
  assert.deepEqual([...doc.querySelectorAll('.guide-contents a')].map(a=>a.getAttribute('href')),['#tutorials','#documentation']);
  assert.equal(doc.querySelectorAll('main section').length,2);
+ assert.doesNotMatch(doc.body.textContent!,/undefined/);
+ assert.match(doc.querySelector('a[href="/tutorial-07.html"]')!.parentElement!.textContent!,/Beam stopping, neutron output and target heat/);
  for(const href of ['/start.html','/guide.html',...numberedTutorials.map(tutorial=>`/tutorial-${tutorial.number}.html`),'/systems.html','/guide.html#views','/how-it-works.html','/equilibrium.html','/qualification.html'])assert.ok(doc.querySelector(`main a[href="${href}"]`),href);
  for(const link of doc.querySelectorAll<HTMLAnchorElement>('.guide-contents a'))assert.ok(doc.getElementById(link.hash.slice(1)));
  assert.equal(doc.querySelector('iframe,[data-guide-action],a[href^="/learn-"]'),null);

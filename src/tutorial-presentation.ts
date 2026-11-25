@@ -3,13 +3,13 @@ import {guideExperiments} from './guide-topics.js';
 /** Reader routes are local documents. Query strings and external locations are not reader routes. */
 export function tutorialRoute(value:string|null):string|null{
  if(!value)return null;
- return /^\/(?:learn|start|guide|tutorial-0[3-6]|how-it-works|equilibrium|qualification)(?:\.html)?(?:#[a-z][a-z0-9-]*)?$/.test(value)?value:null;
+ return /^\/(?:learn|start|guide|tutorial-0[3-7]|how-it-works|equilibrium|qualification)(?:\.html)?(?:#[a-z][a-z0-9-]*)?$/.test(value)?value:null;
 }
 
 export type TutorialPresentation={watch:string;note:string;plot?:string;component?:string;replay?:boolean};
 const composition={watch:'Compare the light fraction at the center and wall.',note:'Composition is a local percentage. Density is the number of particles per volume.',plot:'composition'};
 const spin={watch:'Select Play. The gas turns in the stationary vessel.',note:'Blue arrows show ions. Cream arrows show neutral gas. Compare their speeds in the plot. Short lines show the movement of gas samples. The display uses slow rotation.',plot:'spin'};
-const historyView='The plot shows coupled history. In a reference view, the 3D uses a separate state. Use Replay spin-up to see coupled motion.';
+const historyView='The plot and 3D use the coupled run. The time marker selects the same physical time in both.';
 const spinHistory={...spin,note:`${spin.note} ${historyView}`,replay:true};
 const heat={watch:'Compare mechanical work with rotational energy and mechanical losses.',note:`This plot does not include all resistive heat and cooling energy. Numerical dissipation is not physical heat. ${historyView}`,plot:'heat',replay:true};
 const cut={watch:'Move along the collection curve. Read purity and recovery in the plot readout.',note:'A larger cut includes more outer gas. This usually increases light recovery and decreases light purity. Summary values describe the configured cut. The model does not extract gas.',plot:'cut'};

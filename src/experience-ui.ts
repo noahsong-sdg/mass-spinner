@@ -70,11 +70,12 @@ export function setupExperience({selectMode,invalidate,showView,showResearch,onL
   const url=new URL(location.href);url.search='';url.hash='';url.searchParams.set('level',level);
   history.replaceState(null,'',url);
  }
- function capture(options:{validate:false}):ScenarioDraft;
- function capture(options?:{validate?:true}):Scenario;
- function capture(options:{validate:boolean}):ScenarioDraft;
- function capture({validate=true}:{validate?:boolean}={}):ScenarioDraft{
-  const fuelRun=level==='2'&&apparatus?.value==='centrifuge'?fuelCentrifuge?.captureRun({validate}):undefined;
+ function capture(options:{validate:false;requireAccepted?:boolean}):ScenarioDraft;
+ function capture(options?:{validate?:true;requireAccepted?:boolean}):Scenario;
+ function capture(options:{validate:boolean;requireAccepted?:boolean}):ScenarioDraft;
+ function capture({validate=true,requireAccepted=true}:{validate?:boolean;requireAccepted?:boolean}={}):ScenarioDraft{
+  // Tutorial undo stores validated inputs and history. It does not store solver outputs.
+  const fuelRun=level==='2'&&apparatus?.value==='centrifuge'?fuelCentrifuge?.captureRun({validate:validate&&requireAccepted}):undefined;
   return captureScenario(document,level,{validate,fuelRun});
  }
  function shareable(value:unknown):asserts value is Scenario {scenarioLink(location.href,value);}

@@ -32,7 +32,7 @@ Most light atoms remain in the outer gas. A higher percentage does not mean that
 <!-- diagram:goal -->
 
 This centrifuge model explains Marathon's [lithium-enrichment application](https://www.marathonfusion.com/fusion-energy/), not proprietary equipment or a fusion reactor.
-It connects drive, rotation, heating, separation and collection.
+It connects drive, rotation, separation, heating and collection.
 
 We examine them in that order because each process changes the conditions for the next one.
 Current gives torque. Torque changes rotation. Rotation changes the atom distribution.
@@ -40,13 +40,143 @@ Heating can weaken that redistribution, and the collection radius determines whi
 Thus, a fast gas does not necessarily give a useful product.
 
 Use Coupled separation. [The menu table](#views) explains the other options.
-[Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html) shows the controls.
+[Tutorial 1](https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/start.html) explains the fusion plant and its fuel supply.
 The [first guide](UNDERSTANDING-MASS-SPINNER.md) explains ions and neutral atoms.
 
-This tutorial gives the physics behind the controls. Tutorial 1 gives the powered and unpowered comparison from rest.
-For the physics of that comparison, start with [electrical drive](#drive), then [rotation speed](#momentum).
+This tutorial follows [electrical drive](#drive), [rotation speed](#momentum), redistribution, separation strength, heating and collection.
 
-## 1. Why does rotation separate masses?
+## 1. How does electricity turn the gas?
+
+The gas needs a drive before it can turn. We first need to understand how that drive applies force.
+A mechanical centrifuge uses a drum: a cylinder whose wall turns and makes the gas turn.
+Here, the vessel and electrodes stay still. Electrical drive turns the gas between them.
+
+Electric current is charge in motion. A voltage between the electrodes causes charge to move across the gas.
+The voltage gives an electric field that pushes charged particles through the gas.
+The current arrow gives the direction of positive-charge flow. Electrons have negative charge and can move in the opposite direction.
+
+Experiments show that a magnetic field applies force to a charge that moves across it.
+The force acts at right angles to both the motion and the field.
+This is the magnetic part of the Lorentz force law:
+
+<!-- equation:magnetic-force -->
+
+```math
+\mathbf{F}_{B}=q\,\mathbf{v}\times\mathbf{B}.
+```
+
+Here, F_B is the magnetic force on one charge, q is its signed electric charge, and v is its velocity.
+B is magnetic field. The cross product, ×, gives a direction perpendicular to both vectors.
+The force magnitude is |q|vB sin θ, where θ is the angle between motion and field.
+
+Motion along the field gives zero magnetic force. Motion across the field gives the largest force at the same speed.
+Negative charge reverses the force direction for the same velocity.
+
+The magnetic force changes the direction of motion. It does not directly increase the charge's speed.
+The electrical supply supplies energy for rotation and heat. The magnetic field does not supply this energy.
+
+For many charges, their combined motion gives current density J: electric current per area.
+The magnetic force on the charged gas per unit volume is
+
+<!-- equation:force-density -->
+
+```math
+\mathbf{f}=\mathbf{J}\times\mathbf{B}.
+```
+
+The symbol f is magnetic force density (N/m³). J has units of A/m². B has units of tesla (T).
+The force acts at right angles to both current and field. This equation adds the magnetic forces from ions and electrons.
+It does not require all particles to move in the current direction.
+
+Here, radial current points toward the inner electrode. The axial field points along the cylinder.
+The force thus points around the cylinder, in the tangential direction.
+
+At the right of the end view, current points left and the field points toward you. The force points up.
+At other positions around the gap, the forces have different directions but the same turning effect about the axis.
+This turning effect is torque. Reversing current or field reverses it.
+
+Collisions transfer angular momentum from ions to neutral atoms. Angular momentum measures rotational motion.
+Neutral atoms have zero net charge and receive no direct force of the form qv × B.
+They turn because collisions transfer motion to them. Thus, the gas can turn while the metal parts stay still.
+
+<!-- diagram:drive -->
+
+Select Current, Turn the ions and Turn the gas in sequence in the diagram.
+Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.
+The dots show populations, not microscopic particle paths.
+
+Find the gas between the two electrodes. Follow an inward current arrow, then the force arrow at the same location.
+The force points around the axis, not toward the inner electrode.
+The neutral markers then turn because collisions transfer motion. No metal drum needs to turn.
+
+## 2. What sets the rotation speed?
+
+Useful separation needs sufficient speed within the available time. We must compare the drive with losses before we can predict that speed.
+
+The drive continually adds rotational motion. Collisions pass some of it from ions to neutral atoms, while wall drag removes it.
+We need a quantity that counts this motion so that we can track transfers and losses. That quantity is angular momentum.
+
+Torque changes angular momentum L over time, not speed immediately.
+Moment of inertia ℐ measures resistance to rotation changes.
+The same mass farther from the axis has greater inertia. It needs more angular momentum for the same angular speed.
+For rigid rotation,
+
+<!-- equation:momentum -->
+
+```math
+L=\mathcal{I}\Omega,
+\qquad
+\frac{dL}{dt}=\tau_{\mathrm{in}}-\tau_{\mathrm{loss}}.
+```
+
+The symbol τ is torque. The symbol d/dt means rate of change. For ions and neutral gas,
+
+<!-- equation:coupled -->
+
+```math
+\frac{dL_i}{dt}=\tau_{\mathrm{drive}}-\Gamma(\Omega_i-\Omega_n),
+\qquad
+\frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
+```
+
+The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is specified. Neutral inertia changes with mass location.
+Collisions exchange angular momentum without changing its total. Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
+
+The collision terms have opposite signs because each transfer removes angular momentum from one population and adds it to the other.
+Stronger coupling decreases the speed difference, but does not necessarily increase the neutral speed after acceleration stops.
+When drive torque equals wall-loss torque, total angular momentum stops increasing. The gas can then keep turning at constant speeds.
+
+Force farther from the axis gives more torque. Thus, the drive depends on where current crosses the gas.
+For radial current I through an annular region in constant axial field B,
+
+<!-- equation:torque -->
+
+```math
+\tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
+```
+
+The symbol I is current. ℐ is inertia. The inner radius r_in marks the inner edge of the driven gas region.
+Integration of rIB dr across the driven region gives the torque. Thus, electrode radii change the drive.
+
+<!-- diagram:spin -->
+
+Use the powered run from Tutorial 1.
+
+1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin). The plot adds speeds when physical time increases. Ion speeds increase first. Collisions then increase neutral gas speed.
+2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it has angular momentum.
+3. [Show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum). Total angular momentum equals drive impulse minus wall impulse. Each impulse is torque integrated over time.
+   After the power stops, wall drag decreases total angular momentum. Collisions only move it between populations.
+
+The spin-up plot has time on the horizontal axis and speed on the vertical axis.
+A rising curve means acceleration. A flat curve means constant speed, not stationary gas.
+After power stops, a falling total-angular-momentum curve shows loss to the wall. Ion–neutral transfer alone cannot cause this total loss.
+
+At constant L, outward mass movement increases inertia and decreases angular speed.
+Thus, redistribution can change speed even when the total angular momentum stays the same.
+Replay keeps the power switches. Start from rest & edit current removes those switches and starts from rest.
+Later current changes change the drive history, also during a pause.
+
+## 3. Why does rotation separate masses?
 
 Rotation is useful only if it changes the isotope mixture. We need to know which isotope becomes more common at each radius.
 
@@ -245,7 +375,7 @@ Diffusivity sets the rate of radial redistribution in this model.
 These conditions permit reference calculations for learning and numerical checks. They do not show experimental accuracy.
 The [plasma separation tutorial, §III](https://w3.pppl.gov/~fisch/fischpapers/2018/Zweben_PMF_POP18.pdf) discusses additional effects from charge, neutral gas, collisions and electric fields.
 
-## 2. How strong is the separation?
+## 4. How strong is the separation?
 
 We want a different isotope mixture near the axis so that collection can give a richer sample.
 A larger number of atoms per volume is not sufficient.
@@ -338,137 +468,6 @@ The collection radius changes purity and recovery. The available atom count limi
 A larger equilibrium factor alone does not give more collected product.
 Charged-particle filters use more physics than this neutral-gas model includes.
 
-## 3. How does electricity turn the gas?
-
-Equilibrium assumes gas that already turns. A device also needs a drive that causes this rotation.
-A mechanical centrifuge uses a drum: a cylinder whose wall turns and makes the gas turn.
-Here, the vessel and electrodes stay still. Electrical drive turns the gas between them.
-
-Electric current is charge in motion. A voltage between the electrodes causes charge to move across the gas.
-The voltage gives an electric field that pushes charged particles through the gas.
-The current arrow gives the direction of positive-charge flow. Electrons have negative charge and can move in the opposite direction.
-
-Experiments show that a magnetic field applies force to a charge that moves across it.
-The force acts at right angles to both the motion and the field.
-This is the magnetic part of the Lorentz force law:
-
-<!-- equation:magnetic-force -->
-
-```math
-\mathbf{F}_{B}=q\,\mathbf{v}\times\mathbf{B}.
-```
-
-Here, F_B is the magnetic force on one charge, q is its signed electric charge, and v is its velocity.
-B is magnetic field. The cross product, ×, gives a direction perpendicular to both vectors.
-The force magnitude is |q|vB sin θ, where θ is the angle between motion and field.
-
-Motion along the field gives zero magnetic force. Motion across the field gives the largest force at the same speed.
-Negative charge reverses the force direction for the same velocity.
-
-The magnetic force changes the direction of motion. It does not directly increase the charge's speed.
-The electrical supply supplies energy for rotation and heat. The magnetic field does not supply this energy.
-
-For many charges, their combined motion gives current density J: electric current per area.
-The magnetic force on the charged gas per unit volume is
-
-<!-- equation:force-density -->
-
-```math
-\mathbf{f}=\mathbf{J}\times\mathbf{B}.
-```
-
-The symbol f is magnetic force density (N/m³). J has units of A/m². B has units of tesla (T).
-The force acts at right angles to both current and field. This equation adds the magnetic forces from ions and electrons.
-It does not require all particles to move in the current direction.
-
-Here, radial current points toward the inner electrode. The axial field points along the cylinder.
-The force thus points around the cylinder, in the tangential direction.
-
-At the right of the end view, current points left and the field points toward you. The force points up.
-At other positions around the gap, the forces have different directions but the same turning effect about the axis.
-This turning effect is torque. Reversing current or field reverses it.
-
-Collisions transfer angular momentum from ions to neutral atoms. Angular momentum measures rotational motion.
-Neutral atoms have zero net charge and receive no direct force of the form qv × B.
-They turn because collisions transfer motion to them. Thus, the gas can turn while the metal parts stay still.
-
-<!-- diagram:drive -->
-
-Select Current, Turn the ions and Turn the gas in sequence in the diagram.
-Then [show gas & drive](/?level=2&guide=physics&topic=drive&try=look) in the 3D equipment.
-The dots show populations, not microscopic particle paths.
-
-Find the gas between the two electrodes. Follow an inward current arrow, then the force arrow at the same location.
-The force points around the axis, not toward the inner electrode.
-The neutral markers then turn because collisions transfer motion. No metal drum needs to turn.
-
-## 4. What sets the rotation speed?
-
-Useful separation needs sufficient speed within the available time. We must compare the drive with losses before we can predict that speed.
-
-The drive continually adds rotational motion. Collisions pass some of it from ions to neutral atoms, while wall drag removes it.
-We need a quantity that counts this motion so that we can track transfers and losses. That quantity is angular momentum.
-
-Torque changes angular momentum L over time, not speed immediately.
-Moment of inertia ℐ measures resistance to rotation changes.
-The same mass farther from the axis has greater inertia. It needs more angular momentum for the same angular speed.
-For rigid rotation,
-
-<!-- equation:momentum -->
-
-```math
-L=\mathcal{I}\Omega,
-\qquad
-\frac{dL}{dt}=\tau_{\mathrm{in}}-\tau_{\mathrm{loss}}.
-```
-
-The symbol τ is torque. The symbol d/dt means rate of change. For ions and neutral gas,
-
-<!-- equation:coupled -->
-
-```math
-\frac{dL_i}{dt}=\tau_{\mathrm{drive}}-\Gamma(\Omega_i-\Omega_n),
-\qquad
-\frac{dL_n}{dt}=\Gamma(\Omega_i-\Omega_n)-\tau_{\mathrm{wall}}.
-```
-
-The collision control sets Γ = ℐᵢνᵢₙ (kg·m²/s). Ion inertia is specified. Neutral inertia changes with mass location.
-Collisions exchange angular momentum without changing its total. Wall drag removes it: τ_wall = ν_wall L_n, with ν_wall in s⁻¹.
-
-The collision terms have opposite signs because each transfer removes angular momentum from one population and adds it to the other.
-Stronger coupling decreases the speed difference, but does not necessarily increase the neutral speed after acceleration stops.
-When drive torque equals wall-loss torque, total angular momentum stops increasing. The gas can then keep turning at constant speeds.
-
-Force farther from the axis gives more torque. Thus, the drive depends on where current crosses the gas.
-For radial current I through an annular region in constant axial field B,
-
-<!-- equation:torque -->
-
-```math
-\tau_{\mathrm{drive}}=\frac{IB}{2}(R^2-r_{\mathrm{in}}^2).
-```
-
-The symbol I is current. ℐ is inertia. The inner radius r_in marks the inner edge of the driven gas region.
-Integration of rIB dr across the driven region gives the torque. Thus, electrode radii change the drive.
-
-<!-- diagram:spin -->
-
-Use the powered run from Tutorial 1.
-
-1. [Replay spin-up](/?level=2&guide=physics&topic=momentum&try=spin). The plot adds speeds when physical time increases. Ion speeds increase first. Collisions then increase neutral gas speed.
-2. During rotation, [cut power](/?level=2&guide=physics&topic=momentum&try=cutPower). The gas continues to turn because it has angular momentum.
-3. [Show angular momentum](/?level=2&guide=physics&topic=momentum&try=momentum). Total angular momentum equals drive impulse minus wall impulse. Each impulse is torque integrated over time.
-   After the power stops, wall drag decreases total angular momentum. Collisions only move it between populations.
-
-The spin-up plot has time on the horizontal axis and speed on the vertical axis.
-A rising curve means acceleration. A flat curve means constant speed, not stationary gas.
-After power stops, a falling total-angular-momentum curve shows loss to the wall. Ion–neutral transfer alone cannot cause this total loss.
-
-At constant L, outward mass movement increases inertia and decreases angular speed.
-Thus, redistribution can change speed even when the total angular momentum stays the same.
-Replay keeps the power switches. Start from rest & edit current removes those switches and starts from rest.
-Later current changes change the drive history, also during a pause.
-
 ## 5. Where does the energy go?
 
 More current can increase speed and temperature. At the same rotation speed, more random thermal motion decreases separation.
@@ -521,6 +520,9 @@ It does not show accuracy for Marathon equipment or lithium gas.
 
 Use the two coupled views to answer different questions about one run. Use the reference views to examine separate assumptions.
 
+<details>
+<summary>Controls & plot reference</summary>
+
 Start with Coupled separation and one plot related to your question. The other views answer different questions about the same equipment.
 Gas view changes the display, not the physics. Use Controls to set optional models to on.
 
@@ -553,16 +555,16 @@ This distinction explains why Play changes some plots but leaves a reference sca
 | Plot | Meaning |
 |---|---|
 | Separation over time | Sample purity and recovery against time, not extraction rate. [§6](#collection) |
-| Composition | Local light percentage against radius. The heavy percentage is the remainder. [§1](#composition) |
-| Ion–neutral spin-up | Ion and neutral gas speeds at the wall (m/s) against time. [§4](#momentum) |
+| Composition | Local light percentage against radius. The heavy percentage is the remainder. [§3](#composition) |
+| Ion–neutral spin-up | Ion and neutral gas speeds at the wall (m/s) against time. [§2](#momentum) |
 | Drive & work | Mechanical energy (J). Slopes give power (W). Ohmic power is separate. [§5](#energy) |
 | Temperature | Mean gas and liner temperatures. Temperature changes occur only with thermal evolution. [§5](#energy) |
 | Temperature profile | Radial temperatures use Radial tungsten liner. The gas curve also uses Spatial mixture. No axial temperature structure. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
 | Species energy profile | Internal energy in each cell with Spatial mixture. The two species have the same local temperature. More atoms can give more energy without a higher temperature. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
 | Gas pressure profile | Local nkT with Spatial mixture. This does not calculate local force balance. [Open heat experiment](/?level=2&try=spatialHeatExperiment). |
-| Angular momentum | Drive impulse minus wall impulse. Collision torques move angular momentum between populations without changing the total. [§4](#momentum) |
-| Gas inertia | Resistance to changes in rotation, against time. Mass movement changes this inertia. [§4](#momentum) |
-| Species density | Each isotope's density divided by its own volume mean. 1× is the mean. Coupled views change with time. Reference views show equilibrium. [§1](#composition) |
+| Angular momentum | Drive impulse minus wall impulse. Collision torques move angular momentum between populations without changing the total. [§2](#momentum) |
+| Gas inertia | Resistance to changes in rotation, against time. Mass movement changes this inertia. [§2](#momentum) |
+| Species density | Each isotope's density divided by its own volume mean. 1× is the mean. Coupled views change with time. Reference views show equilibrium. [§3](#composition) |
 | Purity & recovery | Fractions of atoms in a sample, against collection radius. No outlet flow. [§6](#collection) |
 | Countercurrent stages | Ideal routing between stages, with recovery and circulation. Equal turnover times are specified. Plant flow changes are not calculated. [Open stages experiment](/?level=2&try=stageExperiment). |
 | Differential pumping | Reference pressures and gas load for pump and inlet settings. Select that application. No flow-induced changes in rotor motion. [Open pumping experiment](/?level=2&try=pumpingExperiment). |
@@ -598,13 +600,16 @@ After a change, wait until the calculation finishes.
 | Lithium-seeded CIV reference | A reported critical ionization velocity reference. This does not calculate ionization or enforce a speed limit. |
 | View; gas view; time | Display and selected time only. These controls do not change physical inputs. |
 
+</details>
+
 ## What comes next?
 
 Read [03 · heat](UNDERSTANDING-MASS-SPINNER-03.md),
 [04 · collection](UNDERSTANDING-MASS-SPINNER-04.md),
 [05 · fuel](UNDERSTANDING-MASS-SPINNER-05.md) and
 [06 · accuracy](UNDERSTANDING-MASS-SPINNER-06.md).
-The [documentation index](/learn.html) links all six tutorials and the technical references.
+[07 · beam-driven neutron source](UNDERSTANDING-MASS-SPINNER-07.md) explains the separate beam–target system.
+The [documentation index](/learn.html) links all tutorials and the technical references.
 
 ## Equations and more reading
 

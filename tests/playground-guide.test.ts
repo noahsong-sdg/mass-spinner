@@ -5,10 +5,12 @@ import {JSDOM} from 'jsdom';
 import {setupPreciseControls} from '../src/precise-controls.js';
 import {setupWorkspace} from '../src/workspace-ui.js';
 import {guideActions,guideExperiments,type GuideExperiment} from '../src/guide-topics.js';
+import type {GuideExampleAccess} from '../src/guide-examples.js';
+import type {Scenario} from '../src/scenario-state.js';
 
-function fixture(t:any,mobile=false){
+function fixture(t:any,mobile=false,examples?:GuideExampleAccess){
  const {window}=new JSDOM(readFileSync('index.html','utf8'),{url:'https://example.org/?level=2'}),doc=window.document;
- const workspace=setupWorkspace({document:doc,matchMedia:()=>({matches:mobile,addEventListener(){}}),storage:null});
+ const workspace=setupWorkspace({examples,document:doc,matchMedia:()=>({matches:mobile,addEventListener(){}}),storage:null});
  const node=(id:string)=>doc.getElementById(id)! as any;
  t.after(()=>window.close());
  workspace.setLevel('2');
@@ -171,7 +173,7 @@ test('investigation actions open the actual existing plots without changing inpu
   assert.equal(fuel.time.value,time);assert.equal(fuel.mode.value,'transport');assert.equal(f.node('field').value,'.17');
  }
  fuel.mode.value='equilibrium';f.workspace.launchGuideAction('spinPlot');
- assert.equal(fuel.time.value,time);assert.equal(fuel.mode.value,'equilibrium','opening a speed plot must not switch or replay a reference view');assert.equal(f.node('field').value,'.17');
+ assert.equal(fuel.time.value,time);assert.equal(fuel.mode.value,'transport','a tutorial history selects the coupled scene');assert.equal(f.node('field').value,'.17');
  fuel.plot.querySelector('option[value="lithium"]')!.disabled=true;fuel.plot.value='spin';
  f.workspace.launchGuideAction('lithiumSurfaces');
  assert.equal(fuel.plot.value,'spin');assert.match(f.node('guide-status').textContent,/lithium feed/);
@@ -371,4 +373,55 @@ test('mobile tutorial controls keep their result plot and preserve the run',t=>{
  assert.equal(f.node('window-guide').hidden,false);assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,false);
  assert.equal(fuel.plot.value,'spin');assert.equal(fuel.time.value,time);
  f.workspace.close('guide');f.workspace.open('controls');assert.equal(f.node('window-plots').hidden,true,'ordinary phone windows retain one-sheet behavior');
+});
+
+const exampleDefaults:Scenario={version:2,level:'2',controls:{'marathon-apparatus':'centrifuge','fuel-currentA':.03,'fuel-durationS':1,'fuel-thermal-enabled':false,'fuel-thermal-model':'lumped','fuel-thermal-gasModel':'lumped','fuel-application':'enrichment','fuel-pair':'lithium','fuel-plot':'spin'}};
+const guideButton=(doc:Document,text:string)=>[...doc.querySelectorAll<HTMLButtonElement>('.guide-experiment button')].find(button=>button.textContent===text)!;
+
+test('an explicit example restores full defaults and can restore the prior history without silent replacement',t=>{
+ let current:Scenario={version:3,level:'2',controls:{...exampleDefaults.controls,'fuel-currentA':.07,'fuel-thermal-enabled':true,'fuel-thermal-model':'spatial','fuel-thermal-gasModel':'spatial','fuel-thermal-coolantK':700,'fuel-failure-pressurePa':77},fuelRun:{initialCurrentA:.06,events:[{timeS:.2,currentA:.07}],mode:'spin',timeS:.4}};
+ const previous=structuredClone(current),restored:Scenario[]=[];
+ const f=fixture(t,false,{defaults:exampleDefaults,capture:()=>structuredClone(current),restore:value=>{current=structuredClone(value);restored.push(current);f.workspace.setLevel('2');return true;}});
+ acceptedFuel(f);experimentControls(f);
+ f.workspace.launchGuideAction('spatialHeatExperiment');
+ assert.deepEqual(current,previous,'opening a link does not replace inputs or history');
+ guideButton(f.doc,'Use my run').click();assert.equal(restored.length,0);
+ assert.equal(guideButton(f.doc,'Restore previous run').disabled,true);
+ guideButton(f.doc,'Load example').click();
+ assert.equal(f.node('window-guide').hidden,false,'loading reopens the same reader after experience restoration closes panels');
+ assert.equal(current.controls['fuel-currentA'],.03);assert.equal(current.controls['fuel-thermal-enabled'],true);
+ assert.equal(current.controls['fuel-thermal-gasModel'],'spatial');assert.equal(current.controls['fuel-failure-pressurePa'],undefined);
+ assert.equal(current.version,3);if(current.version===3)assert.deepEqual(current.fuelRun,{initialCurrentA:.03,events:[],mode:'transport',timeS:0});
+ guideButton(f.doc,'Restore previous run').click();assert.deepEqual(current,previous);assert.equal(f.node('window-guide').hidden,false);
+ assert.equal(guideButton(f.doc,'Restore previous run').disabled,true);
+});
+
+test('a tutorial captures the previous apparatus before switching context',t=>{
+ const original:Scenario={version:2,level:'2',controls:{...exampleDefaults.controls,'marathon-apparatus':'source','fusion-beamCurrentA':-2}};
+ const restored:Scenario[]=[];let f:ReturnType<typeof fixture>;
+ f=fixture(t,false,{defaults:exampleDefaults,capture:()=>({...structuredClone(original),controls:{...original.controls,'marathon-apparatus':f.node('marathon-apparatus').value}}),restore:value=>{restored.push(structuredClone(value));return true;}});
+ acceptedFuel(f);experimentControls(f);f.node('marathon-apparatus').value='source';f.node('marathon-apparatus').dispatchEvent(new f.window.Event('change'));
+ f.workspace.launchTutorialAction('collectionExperiment');assert.equal(f.node('marathon-apparatus').value,'centrifuge');
+ guideButton(f.doc,'Load example').click();guideButton(f.doc,'Restore previous run').click();
+ assert.deepEqual(restored.at(-1),original);
+});
+
+test('invalid input captures and rejected loads keep the last successful restore point',t=>{
+ let pending=false,reject=false;const previous=structuredClone(exampleDefaults),restored:Scenario[]=[];
+ const f=fixture(t,false,{defaults:exampleDefaults,capture:()=>{if(pending)throw new Error('pending');return structuredClone(previous);},restore:value=>{if(reject)return false;restored.push(structuredClone(value));return true;}});
+ acceptedFuel(f);experimentControls(f);f.workspace.launchGuideAction('dragExperiment');guideButton(f.doc,'Load example').click();
+ pending=true;f.workspace.launchGuideAction('collectionExperiment');guideButton(f.doc,'Load example').click();
+ assert.match(f.doc.querySelector('.guide-experiment [role=status]')!.textContent!,/Cannot save the current inputs/);assert.equal(restored.length,1);
+ pending=false;reject=true;guideButton(f.doc,'Load example').click();assert.equal(guideButton(f.doc,'Restore previous run').disabled,false);
+ reject=false;guideButton(f.doc,'Restore previous run').click();assert.deepEqual(restored.at(-1),previous);
+});
+
+test('tutorial history actions synchronize the scene without changing physical time or replaying',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f);experimentControls(f);
+ // Native mode changes rewind. The tutorial must restore the selected physical time.
+ fuel.mode.addEventListener('change',()=>{fuel.time.value='0';});
+ for(const key of ['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','work','thermalPlot','current','drag','diffusion']){
+  fuel.mode.value='equilibrium';fuel.time.value='.4';f.workspace.launchGuideAction(key);
+  assert.equal(fuel.mode.value,'transport',key);assert.equal(fuel.time.valueAsNumber,.4,key);
+ }
 });

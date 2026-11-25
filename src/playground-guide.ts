@@ -1,9 +1,11 @@
 import {tutorialPresentation,tutorialRoute} from './tutorial-presentation.js';
 import {guideActions,guideTopics,guideExperiments} from './guide-topics.js';
 import type {GuideExperiment} from './guide-topics.js';
+import {guideExample,type GuideExampleAccess,type GuideExampleKey} from './guide-examples.js';
+import type {Scenario} from './scenario-state.js';
 
 
-export type PlaygroundGuideOptions={document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void;prepareReaderAction?:(key:string)=>void};
+export type PlaygroundGuideOptions={examples?:GuideExampleAccess;document?:Document;host:HTMLElement;canUseApparatus?:(apparatus:'centrifuge'|'source')=>boolean;open:(key:string,focus?:boolean)=>void;close:(key:string,restore?:boolean)=>void;focusRelated:(key:string,selector?:string|null)=>void;present?:(key:string)=>void;prepareReaderAction?:(key:string)=>void};
 type GuideElements={
  'fuel-plot':HTMLSelectElement;'fuel-learning-comparisons':HTMLDetailsElement;'fuel-motion-mode':HTMLSelectElement;
  'fuel-motion-time':HTMLInputElement;'fuel-motion-play':HTMLButtonElement;'fuel-export':HTMLButtonElement;'fuel-new-run':HTMLButtonElement;
@@ -14,8 +16,8 @@ type GuideElements={
 };
 type GuideValueId='fuel-plot'|'fuel-motion-mode'|'fuel-motion-time'|'fuel-view-representation'|'fuel-view-cutaway'|'fuel-view-explode'|'fuel-view-drive'|'fuel-component'|'fuel-view-radius';
 
-/** Optional instructions for the existing controls. These instructions do not add simulation modes or physical presets. */
-export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,present=()=>{},prepareReaderAction=()=>{},canUseApparatus=()=>true}:PlaygroundGuideOptions){
+/** Tutorial actions use native controls. Physical examples require an explicit load. */
+export function setupPlaygroundGuide({document:doc=document,host,open,close,focusRelated,present=()=>{},prepareReaderAction=()=>{},canUseApparatus=()=>true,examples}:PlaygroundGuideOptions){
  const win=doc.defaultView!;
  let readerWindow=win.opener as Window|null;
  const capabilityKey='mass-spinner:guide-capability',instance=win.crypto.randomUUID();
@@ -52,7 +54,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   set('fuel-motion-time',node('fuel-motion-time').max,'input');
  }
  function transient(){
-  if(!['spin','transport'].includes(node('fuel-motion-mode').value))endpoint();
+  if(node('fuel-motion-mode').value==='transport')return;
+  const time=node('fuel-motion-time').value;set('fuel-motion-mode','transport');set('fuel-motion-time',time,'input');
  }
  function composition(){transient();plot('composition');}
  const allowed=new Set([...guideActions,'coils']);
@@ -69,13 +72,51 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  const experimentNote=el('aside'),experimentTitle=el('strong'),experimentHint=el('p'),experimentResult=el('button'),experimentStatus=el('p');
  experimentNote.className='guide-experiment';experimentNote.setAttribute('aria-label','Current tutorial experiment');
  experimentResult.type='button';experimentStatus.setAttribute('role','status');experimentNote.append(experimentTitle,experimentHint,experimentResult,experimentStatus);
+ const choices=el('div'),loadExample=el('button','Load example'),useRun=el('button','Use my run'),restoreRun=el('button','Restore previous run'),exampleInputs=el('details'),inputList=el('dl');
+ choices.className='guide-example-actions';choices.hidden=!examples;exampleInputs.hidden=!examples;
+ for(const button of [loadExample,useRun,restoreRun])button.type='button';restoreRun.disabled=true;
+ choices.append(loadExample,useRun,restoreRun);exampleInputs.append(el('summary','Example inputs'),inputList);experimentNote.append(exampleInputs,choices);
+ let selectedExample:GuideExampleKey|null=null,preparedKey:string|null=null,entryRun:Scenario|null=null,previousRun:Scenario|null=null;
+ function prepareAction(key:string){
+  if(!examples||!Object.hasOwn(guideExperiments,key))return;
+  preparedKey=key;entryRun=null;
+  try{entryRun=examples.capture();}catch{/* Invalid inputs cannot replace the existing restore point. */}
+ }
+ function describeExample(scenario:Scenario){
+  inputList.replaceChildren();
+  for(const [id,value]of Object.entries(scenario.controls)){
+   const input=doc.getElementById(id) as HTMLInputElement|HTMLSelectElement|null;
+   const label=doc.querySelector<HTMLLabelElement>(`label[for="${id}"]`);
+   const name=label?.querySelector('span')?.textContent??label?.textContent??id;
+   let display=String(value);
+   if(input?.tagName==='SELECT')display=[...(input as HTMLSelectElement).options].find(option=>option.value===value)?.textContent??display;
+   else if(input?.dataset.rangeScale==='log10'&&typeof value==='number')display=Number((10**value).toPrecision(5)).toString();
+   inputList.append(el('dt',name),el('dd',`${display}${input?.dataset.unit?' '+input.dataset.unit:''}`));
+  }
+ }
+ loadExample.addEventListener('click',()=>{
+  if(!examples||!selectedExample)return;
+  let before:Scenario;
+  try{before=entryRun??examples.capture();}catch{experimentStatus.textContent='Cannot save the current inputs. Correct the settings before loading an example.';return;}
+  const next=guideExample(selectedExample,examples.defaults);
+  if(!examples.restore(next)){experimentStatus.textContent='The example did not load. The previous restore point remains.';return;}
+  previousRun=before;entryRun=null;restoreRun.disabled=false;showReader();showExperiment(selectedExample);
+  experimentStatus.textContent='Example loaded. The model uses the listed initial state and default inputs.';
+ });
+ useRun.addEventListener('click',()=>{entryRun=null;if(selectedExample)showExperiment(selectedExample);});
+ restoreRun.addEventListener('click',()=>{
+  if(!examples||!previousRun)return;
+  if(!examples.restore(previousRun)){experimentStatus.textContent='The previous run did not restore.';return;}
+  previousRun=null;restoreRun.disabled=true;entryRun=null;showReader();status.textContent='Previous inputs, drive history and physical time restored. The model calculates the run again.';experimentStatus.textContent=status.textContent;
+ });
  let experimentResultAction='';
  experimentResult.addEventListener('click',()=>{launch(experimentResultAction);experimentStatus.textContent=status.textContent;});
  function showExperiment(key:string){
+  selectedExample=key as GuideExampleKey;if(examples)describeExample(guideExample(selectedExample,examples.defaults));
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
   const context=experiment.apparatus??'centrifuge';
   if(apparatus.value!==context||!canUseApparatus(context)){apparatus.value=context;apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));}
-  if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result)&&!['spin','transport'].includes(node('fuel-motion-mode').value))set('fuel-motion-mode','transport');
+  if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result))transient();
   // Beam references have their own accepted state. Centrifuge actions wait on fuel-export.
   if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
   if(experiment.panel==='target')doc.getElementById('coupled-tab-settings')!.click();
@@ -100,7 +141,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='beamLedger'){focusRelated('plots','#fusion-metrics');return;}
   if(key==='beamDynamics'){doc.getElementById('coupled-tab-dynamics')!.click();const choice=doc.getElementById('coupled-plot') as HTMLSelectElement;choice.value='source';choice.dispatchEvent(new win.Event('change'));focusRelated('target','#coupled-plot');return;}
   if(!canUseApparatus('centrifuge')){status.textContent='To use these guide controls, select Centrifuge.';return;}
-  if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key))plot(view.plot);if(key==='current')editCurrent();else focusRelated('controls',controlFocus[key]);return;}
+  if(Object.hasOwn(controlFocus,key)){const view=tutorialPresentation(key);if(view?.plot&&!pending(key)){if(['current','collisions','drag','diffusion','thermal','gasTemperature','duration'].includes(key))transient();plot(view.plot);}if(key==='current')editCurrent();else focusRelated('controls',controlFocus[key]);return;}
   if(key==='inspect'||key==='view'||key==='modelInfo'){focusRelated(key==='modelInfo'?'info':key,key==='inspect'?'#fuel-component':null);return;}
   if(key==='equilibrium'){open('plots');const calculator=node('fuel-equilibrium-calculator');calculator.open=true;calculator.scrollIntoView?.({block:'nearest'});calculator.querySelector('input')?.focus();return;}
   if(key==='look'){
@@ -109,7 +150,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   if(key==='coils'){set('fuel-component','coils');open('inspect',true);doc.getElementById('fuel-focus-component')?.click();return;}
   // Do not show pending or failed results as a new experiment.
   if(pending(key)){status.textContent='Wait for the run to finish. If it fails, open Controls. Change the settings to start the calculation again.';return;}
-  if(Object.hasOwn(tutorialPlots,key)){plot(tutorialPlots[key]);return;}
+  if(Object.hasOwn(tutorialPlots,key)){if(['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure'].includes(key))transient();plot(tutorialPlots[key]);return;}
   if(key==='newRun'){node('fuel-new-run').click();return;}
   if(key==='cutPower'){
    const power=node('fuel-power');
@@ -132,12 +173,13 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    composition();
    if(key==='axis'||key==='wall')set('fuel-view-radius',key==='axis'?0:1,'input');
    if(key==='temperature'||key==='rotation'){
+    set('fuel-motion-mode','equilibrium');
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }
   }else if(['momentum','inertia','density'].includes(key)){transient();plot(key==='density'?'profile':key);}
-  else if(key==='work')plot('heat');
-  else if(key==='thermalPlot')plot('thermal');
+  else if(key==='work'){transient();plot('heat');}
+  else if(key==='thermalPlot'){transient();plot('thermal');}
   else if(key==='collection'){endpoint();plot('cut');}
   else if(key==='cut'){transient();set('fuel-motion-time',node('fuel-motion-time').value,'input');if(plot('cut'))doc.querySelector<SVGSVGElement>('#fuel-plots > .live-plots svg')?.focus();}
   else if(key==='pin'){
@@ -168,13 +210,14 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   };
   if(requestId&&outcomes.has(requestId)){reply(outcomes.get(requestId)!);return;}
   if(data.type==='mass-spinner:guide-action'&&'action' in data&&typeof data.action==='string'){
-   if(allowed.has(data.action)){prepareReaderAction(data.action);launch(data.action,reply);}
+   if(allowed.has(data.action)){prepareAction(data.action);prepareReaderAction(data.action);launch(data.action,reply);}
    else reply({status:'rejected',message:'This tutorial action is not available.'});
   }else if(data.type==='mass-spinner:guide-view'&&'view' in data&&data.view==='experiments'){showReader('/start.html');reply({status:'executed'});}
   else if(data.type==='mass-spinner:guide-close')close('guide',true);
  });
  function launch(key:string,reply:(outcome:Outcome)=>void=()=>{}){
   if(!allowed.has(key))return;
+  if(preparedKey!==key)prepareAction(key);preparedKey=null;
   cancelLaunch();
   const execute=()=>{present(key);action(key);reply(status.textContent?{status:'rejected',message:status.textContent}:{status:'executed'});};
   const immediate=Object.hasOwn(guideExperiments,key)||key==='equilibrium'||Object.hasOwn(controlFocus,key)||['inspect','view','modelInfo','beamLedger','beamDynamics'].includes(key);
@@ -204,5 +247,5 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   // The application adds controls asynchronously. Watch for new controls and accepted results.
   observer.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['disabled','data-calculation-state']});
  }
- return {showPhysics,showReader,openStandalone,launch};
+ return {showPhysics,showReader,openStandalone,prepareAction,launch};
 }
