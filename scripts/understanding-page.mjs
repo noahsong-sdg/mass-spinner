@@ -53,7 +53,7 @@ export function understandingPage(markdown,revision,tutorial){
    return heading+(depth===1?guideContents(topics.map(topic=>[topic.id,topic.heading.replace(/^\d\. /,'')])):'');
   },
  }});
- return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="darkreader-lock"><meta name="viewport" content="width=device-width, initial-scale=1">
  <title>${escape(title)} · Mass Spinner</title><link rel="stylesheet" href="/fonts.css"><link rel="stylesheet" href="/guide-katex/katex.min.css"><link rel="stylesheet" href="/guide.css"><link rel="stylesheet" href="/equation-plots.css">
  <script type="module" src="/guide-reader.js"></script></head><body>
  <header><a href="/?level=2" target="_top" data-guide-simulator>Simulator ↗</a><a href="/learn.html">Docs & tutorials</a><a class="standalone" href="${ownPath}" target="_blank" rel="noopener">Open separate page ↗</a></header>

@@ -77,6 +77,7 @@ test('the plant account gives export, break-even, import and converter heat reje
 test('the tutorial includes chronology, extraction, device alternatives and a clickable plant balance',t=>{
  const source=readFileSync('docs/UNDERSTANDING-MASS-SPINNER-05.md','utf8'),part=numberedTutorials.find(p=>p.number==='05')!;
  const dom=new JSDOM(understandingPage(source,'a'.repeat(40),part));t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.ok(doc.head.querySelector('meta[name="darkreader-lock"]'),'Keep the dark diagram colors when Dark Reader is installed.');
  for(const id of ['chronology','jobs','architecture','extraction','electricity','inventory','design'])assert.ok(doc.getElementById(id));
  assert.ok(doc.querySelector('[data-plant-cycle]'));assert.ok(doc.querySelector('[data-tritium-extraction]'));
  assert.ok(doc.querySelector('[data-equation-plot="plant-electricity"]'));
