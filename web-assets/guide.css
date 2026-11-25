@@ -88,32 +88,27 @@ body.embedded{max-width:none;padding:16px 24px;margin:0}body.embedded main{max-w
 @media(max-width:580px){.view-example{padding:14px}.view-panels{grid-template-columns:1fr}.view-panels svg{max-height:300px}.view-example .diagram-cases button{font-size:12px}}
 .plant-cycle,.tritium-extraction{padding:20px;background:#14231c}
 .plant-cycle h3{margin:8px 0}.plant-cycle [data-plant-position]{font-size:13px;color:#b6c7bc;margin:16px 0 0}
-.plant-views,.extraction-views{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
-.plant-views svg,.extraction-views svg{max-height:none;width:100%;height:auto}
-.plant-views svg text,.extraction-views svg text{font-size:12px}
-.plant-views [data-plant-region]{opacity:.4}.plant-views [data-plant-region].is-active{opacity:1}
+.plant-views{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.plant-views svg,.tritium-extraction svg{max-height:none;width:100%;height:auto}
+.plant-views svg text,.tritium-extraction svg text{font-size:14px}
+.plant-views [data-plant-region]{opacity:.65}.plant-views [data-plant-region].is-active{opacity:1}
+.plant-boundary{fill:none;stroke:#8ca594;stroke-width:1.5;stroke-dasharray:2 5;stroke-linecap:round}
 .plant-views .plant-breeder{fill:#254b3e;stroke:#9bd8ce;stroke-width:2}
 .plant-views .plant-mercury{fill:#34414b;stroke:#b1bdce;stroke-width:2}
 .plant-views .plant-core{fill:#172125;stroke:#b6c7bc;stroke-width:1.5}
 .plant-leader{fill:none;stroke:#b6c7bc}
-.plant-route{fill:none;stroke-width:2;opacity:.15}.plant-route.is-active{opacity:1}
+.plant-route{fill:none;stroke-width:2;opacity:.4}.plant-route.is-active{opacity:1}
 .plant-fuel,.plant-neutron,.plant-heat,.plant-electric{fill:none;stroke-width:2.5}
 .plant-fuel{stroke:#9bd8ce}.plant-fuel-head{fill:#9bd8ce}
 .plant-neutron{stroke:#e4c8ed;stroke-dasharray:4 3;marker-end:url(#plant-neutron)}.plant-neutron-dot{fill:#e4c8ed}.plant-neutron-head{fill:#e4c8ed}
 .plant-heat{stroke:#e4ac76}.plant-heat-head{fill:#e4ac76}
 .plant-electric{stroke:#efdc8b}.plant-electric-head{fill:#efdc8b}
 .plant-tritium{fill:#9bd8ce;stroke:#14231c;stroke-width:1}.plant-helium{fill:#e4ac76}
-.plant-views [hidden],.extraction-views [hidden]{display:none}
-.plant-reaction{border-block:1px solid #405749;padding:14px 0;color:#edbe90}
+.plant-views [hidden],.tritium-extraction [hidden]{display:none}
 .plant-navigation{display:flex;justify-content:space-between;gap:12px}.plant-navigation button,.tritium-extraction button{min-height:44px;font:inherit;color:inherit;cursor:pointer}
 .plant-navigation button{padding:8px 12px;background:#223b2b;border:1px solid #566b5c;border-radius:5px}
 .plant-cycle button:disabled{opacity:.4;cursor:default}
-.plant-cycle[data-motion=running] .plant-route.is-active{stroke-dasharray:6 5;animation:plant-path 2s linear infinite}
-@keyframes plant-path{to{stroke-dashoffset:-22}}
 .extraction-material{fill:#304a3c;stroke:#8ca594}.extraction-interface{fill:#a0acb8;stroke:#c1cbd1}
-.extraction-track{fill:none;stroke:#9bd8ce;stroke-dasharray:4 5;stroke-width:2}
-.extraction-views .extraction-t{fill:#14231c;font-size:10px;font-weight:700}
-.extraction-processing h3{margin:12px 0}.extraction-processing{font-size:14px}.extraction-processing ol{padding-left:22px}
-.extraction-progress{display:flex;align-items:center;gap:16px;font-size:13px}.extraction-progress input{width:100%;min-width:0;min-height:44px;accent-color:#e4ac76}
-@media(max-width:600px){.plant-views,.extraction-views{grid-template-columns:1fr}.plant-cycle,.tritium-extraction{padding:12px}.plant-cycle .drive-heading,.tritium-extraction .drive-heading{align-items:start}.plant-navigation button{font-size:13px}}
-@media(prefers-reduced-motion:reduce){.plant-cycle .plant-route{animation:none!important}}
+.tritium-extraction>svg{display:block;max-width:460px;margin:0 auto}
+.extraction-track{fill:none;stroke:#9bd8ce;stroke-width:2}
+@media(max-width:600px){.plant-views{grid-template-columns:1fr}.plant-cycle,.tritium-extraction{padding:12px}.plant-cycle .drive-heading,.tritium-extraction .drive-heading{align-items:start}.plant-navigation button{font-size:13px}}

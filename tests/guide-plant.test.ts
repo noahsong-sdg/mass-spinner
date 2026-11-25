@@ -10,47 +10,55 @@ import {numberedTutorials} from '../src/guide-topics.js';
 test('the plant sequence follows startup dependencies and keeps physical locations separate',t=>{
  const dom=new JSDOM(plantCycleDiagram());t.after(()=>dom.window.close());const doc=dom.window.document;
  setupPlantGuide(doc);
- const next=doc.querySelector<HTMLButtonElement>('[data-plant-next]')!,previous=doc.querySelector<HTMLButtonElement>('[data-plant-previous]')!,motion=doc.querySelector<HTMLButtonElement>('[data-plant-motion]')!;
+ const next=doc.querySelector<HTMLButtonElement>('[data-plant-next]')!,previous=doc.querySelector<HTMLButtonElement>('[data-plant-previous]')!;
  assert.equal(previous.disabled,true);assert.equal(next.disabled,false);
- const readings:string[]=[],reactions:string[]=[];
+ assert.equal(doc.querySelectorAll('[data-plant-motion]').length,0);
+ const readings:string[]=[];
  for(let i=0;i<7;i++){
   assert.match(doc.querySelector('[data-plant-position]')!.textContent!,new RegExp(`^${i+1} of 7`));
   const scenes=[...doc.querySelectorAll('[data-plant-scene]')].filter(n=>!n.hasAttribute('hidden'));assert.equal(scenes.length,1);
   assert.ok(doc.querySelector('[data-plant-region].is-active'));
-  readings.push(doc.querySelector('[data-plant-reading]')!.textContent!);reactions.push(doc.querySelector('[data-plant-reaction]')!.textContent!);
-  if(!motion.disabled){motion.click();assert.equal(doc.querySelector('figure')!.dataset.motion,'running');}
-  if(i<6){next.click();assert.equal(doc.querySelector('figure')!.dataset.motion,'paused');}
+  readings.push(doc.querySelector('[data-plant-reading]')!.textContent!);
+  if(i<6)next.click();
  }
  assert.equal(next.disabled,true);assert.match(readings[0],/separate initial tritium supply/);
- assert.match(reactions[1],/D \+ T → ⁴He \+ n/);assert.match(reactions[2],/¹⁹⁸Hg \+ n → ¹⁹⁷Hg \+ 2n/);
- assert.match(reactions[3],/⁶Li \+ n → T \+ ⁴He/);assert.match(readings[4],/leave the breeding material.*extraction unit.*Fuel processing/);
+ assert.match(readings[1],/D \+ T → ⁴He \+ n/);assert.match(readings[2],/¹⁹⁸Hg \+ n → ¹⁹⁷Hg \+ 2n/);
+ assert.match(readings[3],/⁶Li \+ n → T \+ ⁴He/);assert.match(readings[4],/leave the breeding material.*extraction unit.*Fuel processing/);
  assert.match(readings[6],/operate together.*did not burn.*new tritium/);
  for(let i=0;i<6;i++)previous.click();assert.equal(previous.disabled,true);assert.equal(next.disabled,false);
- assert.match(doc.querySelector('figcaption')!.textContent!,/direction, not rate.*No plant performance/);
+ assert.equal(doc.querySelectorAll('figcaption,[data-plant-result],[data-plant-reaction]').length,0);
+ assert.match(doc.querySelector('#plant-loops-description')!.textContent!,/not specify a shared room.*not rates.*No plant performance/);
+ const vessel=doc.querySelector('[data-plant-location="vessel"]')!,external=doc.querySelector('[data-plant-location="external"]')!;
+ assert.ok(vessel.classList.contains('plant-boundary'));assert.ok(external.querySelector('.plant-boundary'));
+ assert.equal(external.querySelectorAll('rect:not(.plant-boundary)').length,5);
+ assert.equal(external.querySelectorAll('circle').length,0);
+ for(const name of ['Lithium blanket','Mercury (optional)','Fusion chamber']){
+  const label=[...doc.querySelectorAll('text')].find(node=>node.textContent===name)!;
+  assert.ok(label);assert.equal(label.closest('[data-plant-region]'),null,'Stage opacity must not dim location labels.');
+ }
 });
 
-test('extraction methods show material boundaries and pause, scrub and replay without changing the plant',t=>{
+test('static extraction cases show retained material and fuel processing without playback controls',t=>{
  const dom=new JSDOM(plantCycleDiagram()+tritiumExtractionDiagram());t.after(()=>dom.window.close());
  const win=dom.window as unknown as Window & typeof globalThis,doc=win.document;
- let callback:FrameRequestCallback|undefined;
- win.requestAnimationFrame=fn=>{callback=fn;return 1;};win.cancelAnimationFrame=()=>{callback=undefined;};setupPlantGuide(doc);
- const figure=doc.querySelector<HTMLElement>('[data-tritium-extraction]')!,range=figure.querySelector('input')!,play=figure.querySelector<HTMLButtonElement>('[data-extraction-play]')!;
- assert.equal(figure.dataset.motion,'paused');assert.equal(range.disabled,false);
- play.click();callback!(0);callback!(50);assert.ok(Number(range.value)>0);play.click();assert.equal(callback,undefined);
- range.value='70';range.dispatchEvent(new win.Event('input'));assert.equal(figure.querySelector('[data-extraction-dot]')!.getAttribute('cx'),'280');
- range.value='100';range.dispatchEvent(new win.Event('input'));assert.equal(play.textContent,'Replay path');assert.equal(figure.querySelector('[data-extraction-dot]')!.getAttribute('cy'),'210');
- play.click();callback!(0);assert.equal(range.value,'0');
- for(let now=50;now<=8000;now+=50)callback!(now);
- assert.equal(figure.dataset.motion,'paused');assert.equal(range.value,'100');
+ win.requestAnimationFrame=()=>{assert.fail('Static extraction must not schedule animation frames.');};setupPlantGuide(doc);
+ const figure=doc.querySelector<HTMLElement>('[data-tritium-extraction]')!;
+ assert.equal(figure.querySelectorAll('input,[data-extraction-play],figcaption').length,0);
+ assert.equal(figure.hasAttribute('data-motion'),false);
+ assert.match(figure.querySelector('[data-extraction-reading]')!.textContent!,/ceramic surface.*purge gas.*ceramic stays/);
+ assert.equal(figure.querySelector('[data-extraction-retained]')!.textContent,'Stays in blanket');
  const methods=[...figure.querySelectorAll<HTMLButtonElement>('[data-extraction-method]')];methods[1].click();
- assert.equal(range.value,'0');assert.equal(play.textContent,'Show path');assert.equal(figure.querySelector('[data-extraction-interface]')!.hasAttribute('hidden'),false);
- assert.match(figure.querySelector('[data-extraction-reading]')!.textContent!,/hydrogen isotopes pass through a metal membrane.*vacuum/);
- assert.match(figure.querySelector('[data-extraction-note]')!.textContent!,/not bulk liquid/);
+ assert.equal(figure.querySelector('[data-extraction-interface]')!.hasAttribute('hidden'),false);
+ assert.equal(figure.querySelector('[data-extraction-membrane]')!.hasAttribute('hidden'),false);
+ assert.match(figure.querySelector('[data-extraction-reading]')!.textContent!,/hydrogen isotopes pass through a metal membrane.*vacuum.*bulk liquid returns/);
+ assert.equal(figure.querySelector('[data-extraction-transport]')!.textContent,'Gas removed');
  methods[0].click();assert.equal(figure.querySelector('[data-extraction-interface]')!.hasAttribute('hidden'),true);
- assert.match(figure.querySelector('[data-extraction-note]')!.textContent!,/not the helium-4/);
- play.click();Object.defineProperty(doc,'hidden',{value:true});doc.dispatchEvent(new win.Event('visibilitychange'));assert.equal(callback,undefined);
+ assert.equal(figure.querySelector('[data-extraction-membrane]')!.hasAttribute('hidden'),true);
+ assert.equal(figure.querySelector('[data-extraction-carrier]')!.textContent,'Helium purge gas');
  assert.match(doc.querySelector('[data-plant-position]')!.textContent!,/^1 of 7/);
  assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
+ assert.match(figure.querySelector('desc')!.textContent!,/not an atom trajectory.*not verified Marathon.*not helium produced by breeding/);
+ assert.match(figure.textContent!,/Fuel processing/);
 });
 
 test('the plant account gives export, break-even, import and converter heat rejection',()=>{

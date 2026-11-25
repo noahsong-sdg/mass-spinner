@@ -1,24 +1,42 @@
 import {test,expect} from '@playwright/test';
 
-test('the published plant sequence and extraction controls load and respond',async({page})=>{
+test('the plant has visible location boundaries and static extraction cases',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/tutorial-05.html#chronology');
  const plant=page.locator('[data-plant-cycle]');
  await plant.getByRole('button',{name:'Next: start fusion',exact:true}).click();
  await expect(plant.locator('[data-plant-title]')).toHaveText('Supply energy and start D–T fusion');
  await expect(plant.locator('[data-plant-title]')).toBeInViewport();
- await plant.getByRole('button',{name:'Play paths',exact:true}).click();
- await expect(plant).toHaveAttribute('data-motion','running');
- await plant.getByRole('button',{name:'Pause paths',exact:true}).click();
- await expect(plant).toHaveAttribute('data-motion','paused');
+ await expect(plant.locator('[data-plant-motion]')).toHaveCount(0);
  const extraction=page.locator('[data-tritium-extraction]');
  await extraction.getByRole('button',{name:'Liquid lead–lithium',exact:true}).click();
  await expect(extraction.locator('[data-extraction-interface]')).toBeVisible();
- await extraction.getByRole('slider').press('End');
- await expect(extraction.getByRole('button',{name:'Replay path',exact:true})).toBeEnabled();
+ await expect(extraction.locator('[data-extraction-membrane]')).toBeVisible();
+ await expect(extraction).toContainText('Liquid returns');
+ await expect(extraction.getByRole('slider')).toHaveCount(0);
+ await expect(extraction.getByRole('button',{name:/path/i})).toHaveCount(0);
  await extraction.getByRole('button',{name:'Ceramic breeder',exact:true}).click();
- await expect(extraction.getByRole('button',{name:'Show path',exact:true})).toBeEnabled();
+ await expect(extraction).toContainText('Stays in blanket');
  await expect(extraction.locator('[data-extraction-interface]')).toBeHidden();
+ await expect(plant.locator('figcaption,[data-plant-result],[data-plant-reaction]')).toHaveCount(0);
+ await expect(plant.locator('.plant-boundary')).toHaveCount(2);
+ for(const boundary of await plant.locator('.plant-boundary').all())await expect(boundary).toHaveCSS('stroke-dasharray','2px, 5px');
+ for(let i=1;i<7;i++){
+  for(const label of await plant.locator('.plant-views svg text:not([hidden] *)').all()){
+   await expect(label).toHaveCSS('opacity','1');
+  }
+  const collisions=await plant.locator('.plant-views svg').evaluateAll(svgs=>svgs.flatMap(svg=>{
+   const labels=[...svg.querySelectorAll('text')].filter(label=>!label.closest('[hidden]'));
+   return labels.flatMap((label,i)=>labels.slice(i+1).filter(other=>{
+    const a=label.getBoundingClientRect(),b=other.getBoundingClientRect();
+    return Math.min(a.right,b.right)>Math.max(a.left,b.left)&&Math.min(a.bottom,b.bottom)>Math.max(a.top,b.top);
+   }).map(other=>[label.textContent,other.textContent]));
+  }));expect(collisions).toEqual([]);
+  if(i<6)await plant.locator('[data-plant-next]').click();
+ }
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);expect(overflow).toBe(false);
+ await info.attach('plant-locations',{body:await plant.screenshot(),contentType:'image/png'});
+ await info.attach('static-extraction',{body:await extraction.screenshot(),contentType:'image/png'});
  expect(errors).toEqual([]);
 });
 
