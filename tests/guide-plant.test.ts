@@ -21,7 +21,7 @@ test('the plant sequence follows startup dependencies and keeps physical locatio
   readings.push(doc.querySelector('[data-plant-reading]')!.textContent!);
   if(i<6)next.click();
  }
- assert.equal(next.disabled,true);assert.match(readings[0],/separate initial tritium supply/);
+ assert.equal(next.disabled,true);assert.match(readings[0],/initial tritium supply from outside the plant/);
  assert.match(readings[1],/D \+ T → ⁴He \+ n/);assert.match(readings[2],/¹⁹⁸Hg \+ n → ¹⁹⁷Hg \+ 2n/);
  assert.match(readings[3],/⁶Li \+ n → T \+ ⁴He/);assert.match(readings[4],/leave the breeding material.*extraction unit.*Fuel processing/);
  assert.match(readings[6],/operate together.*did not burn.*new tritium/);
@@ -50,7 +50,7 @@ test('static extraction cases show retained material and fuel processing without
  const methods=[...figure.querySelectorAll<HTMLButtonElement>('[data-extraction-method]')];methods[1].click();
  assert.equal(figure.querySelector('[data-extraction-interface]')!.hasAttribute('hidden'),false);
  assert.equal(figure.querySelector('[data-extraction-membrane]')!.hasAttribute('hidden'),false);
- assert.match(figure.querySelector('[data-extraction-reading]')!.textContent!,/hydrogen isotopes pass through a metal membrane.*vacuum.*bulk liquid returns/);
+ assert.match(figure.querySelector('[data-extraction-reading]')!.textContent!,/hydrogen isotopes pass through a metal membrane.*vacuum.*bulk liquid goes back/);
  assert.equal(figure.querySelector('[data-extraction-transport]')!.textContent,'Gas removed');
  methods[0].click();assert.equal(figure.querySelector('[data-extraction-interface]')!.hasAttribute('hidden'),true);
  assert.equal(figure.querySelector('[data-extraction-membrane]')!.hasAttribute('hidden'),true);
@@ -59,6 +59,11 @@ test('static extraction cases show retained material and fuel processing without
  assert.equal(figure.querySelectorAll('[aria-pressed=true]').length,1);
  assert.match(figure.querySelector('desc')!.textContent!,/not an atom trajectory.*not verified Marathon.*not helium produced by breeding/);
  assert.match(figure.textContent!,/Fuel processing/);
+ const arrows=[...figure.querySelectorAll('path.extraction-track')];assert.equal(arrows.length,2);
+ for(const arrow of arrows){
+  assert.equal(arrow.getAttribute('marker-end'),'url(#extraction-arrow)');
+  assert.equal(arrow.getAttribute('d')!.match(/M/g)!.length,1,'Each transfer needs its own arrowhead.');
+ }
 });
 
 test('the plant account gives export, break-even, import and converter heat rejection',()=>{

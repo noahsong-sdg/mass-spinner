@@ -1,11 +1,11 @@
 const stages=[
- {title:'Prepare the blanket and initial fuel',where:'Before startup',reading:'The centrifuge supplies enriched lithium for the blanket. A separate initial tritium supply joins deuterium fuel. Lithium stays outside the fusion chamber.',regions:['lithium'],routes:['feed','return']},
+ {title:'Prepare the blanket and initial fuel',where:'Before startup',reading:'The centrifuge supplies enriched lithium for the blanket. An initial tritium supply from outside the plant mixes with deuterium. Lithium stays outside the fusion chamber.',regions:['lithium'],routes:['feed','return']},
  {title:'Supply energy and start D–T fusion',where:'Fusion chamber',reading:'External equipment supplies energy to the fuel. D + T → ⁴He + n releases 17.6 MeV. Fusion supplies neutrons for the blanket.',regions:['core'],routes:['feed','return']},
  {title:'Multiply neutrons in the optional mercury layer',where:'Mercury layer',reading:'An energetic neutron can cause ¹⁹⁸Hg + n → ¹⁹⁷Hg + 2n. This reaction consumes kinetic energy. Mercury-197 later decays into gold-197.',regions:['mercury'],routes:[]},
- {title:'Breed replacement tritium',where:'Lithium blanket',reading:'The reaction ⁶Li + n → T + ⁴He releases about 4.8 MeV. The new tritium remains in the blanket material until extraction.',regions:['lithium'],routes:[]},
+ {title:'Breed replacement tritium',where:'Lithium blanket',reading:'The reaction ⁶Li + n → T + ⁴He releases about 4.8 MeV. The new tritium stays in the blanket material until extraction.',regions:['lithium'],routes:[]},
  {title:'Extract and process the new tritium',where:'Blanket and external fuel equipment',reading:'Tritium must leave the breeding material. An extraction unit collects it. Fuel processing removes impurities and prepares hydrogen isotopes for fuel delivery.',regions:['lithium'],routes:['extraction','return']},
- {title:'Remove heat and generate electricity',where:'Vessel and external power equipment',reading:'Coolant removes heat from the chamber and blanket. Power conversion changes part of that heat into electricity. The plant uses some electricity and rejects heat.',regions:['core','mercury','lithium'],routes:['heat','electric']},
- {title:'Operate the loops together',where:'The operating plant',reading:'Fusion, breeding, extraction and cooling operate together. Exhaust recovery returns fuel that did not burn. Breeding supplies new tritium to replace consumed fuel.',regions:['core','mercury','lithium'],routes:['feed','extraction','return','exhaust','heat','electric']},
+ {title:'Remove heat and generate electricity',where:'Vessel and external power equipment',reading:'Coolant removes heat from the chamber and blanket. Power conversion changes part of that heat into electricity. The plant uses some electricity and releases unused heat.',regions:['core','mercury','lithium'],routes:['heat','electric']},
+ {title:'Operate the loops together',where:'The operating plant',reading:'Fusion, breeding, extraction and cooling operate together. Exhaust recovery sends fuel that did not burn back to the chamber. Breeding supplies new tritium to replace tritium used in fusion.',regions:['core','mercury','lithium'],routes:['feed','extraction','return','exhaust','heat','electric']},
 ] as const;
 const label=(x:number,y:number,text:string)=>`<text x="${x}" y="${y}" text-anchor="middle">${text}</text>`;
 const equipment=(x:number,y:number,w:number,name:string)=>`<rect x="${x}" y="${y}" width="${w}" height="40" rx="5"/>${label(x+w/2,y+25,name)}`;
@@ -29,7 +29,7 @@ export function plantCycleDiagram(){
  <g data-plant-scene="prepare"></g>
  <g data-plant-scene="fusion" hidden><circle cx="125" cy="242" r="7" class="plant-helium"/>${label(105,266,'⁴He')}
  <path d="M156 238L190 254" class="plant-neutron"/><circle cx="172" cy="246" r="5" class="plant-neutron-dot"/>${label(187,272,'n')}</g>
- <g data-plant-scene="multiply" hidden><path d="M177 245H204M204 245L226 227M204 245L226 263" class="plant-neutron"/>
+ <g data-plant-scene="multiply" hidden><path d="M177 245H204" class="plant-neutron"/><path d="M204 245L226 227" class="plant-neutron"/><path d="M204 245L226 263" class="plant-neutron"/>
  <circle cx="204" cy="245" r="6" class="plant-neutron-dot"/>${label(179,269,'1 n')}${label(251,250,'2 n')}</g>
  <g data-plant-scene="breed" hidden><path d="M200 245H231" class="plant-neutron"/><circle cx="231" cy="245" r="7" class="plant-tritium"/>${label(253,251,'T')}</g>
  <g data-plant-scene="extract" hidden><circle cx="231" cy="245" r="7" class="plant-tritium"/><path d="M240 245H327" class="plant-fuel" marker-end="url(#plant-fuel)"/></g>
@@ -51,8 +51,8 @@ export function plantCycleDiagram(){
  </g></svg></div></figure>`;
 }
 const extractionMethods=[
- {name:'Ceramic breeder',reading:'Tritium leaves the ceramic surface. Helium purge gas carries tritium-bearing molecules to fuel processing. The ceramic stays in the blanket.',material:'Ceramic grain',carrier:'Helium purge gas',retained:'Stays in blanket',transport:'Carries tritium'},
- {name:'Liquid lead–lithium',reading:'In this extraction method, hydrogen isotopes pass through a metal membrane toward a vacuum. The bulk liquid returns to the blanket.',material:'Lead–lithium',carrier:'Vacuum side',retained:'Liquid returns',transport:'Gas removed'},
+ {name:'Ceramic breeder',reading:'Tritium leaves the ceramic surface. Helium purge gas moves tritium-bearing molecules to fuel processing. The ceramic stays in the blanket.',material:'Ceramic grain',carrier:'Helium purge gas',retained:'Stays in blanket',transport:'Moves tritium'},
+ {name:'Liquid lead–lithium',reading:'In this extraction method, hydrogen isotopes pass through a metal membrane to the vacuum side. The bulk liquid goes back to the blanket.',material:'Lead–lithium',carrier:'Vacuum side',retained:'Liquid goes back',transport:'Gas removed'},
 ] as const;
 export function tritiumExtractionDiagram(){
  return `<figure class="tritium-extraction" data-tritium-extraction>
@@ -67,7 +67,7 @@ export function tritiumExtractionDiagram(){
  <rect x="150" y="35" width="10" height="140" class="extraction-interface" data-extraction-interface hidden/>
  <text x="80" y="63" text-anchor="middle" data-extraction-material>${extractionMethods[0].material}</text>
  <text x="265" y="63" text-anchor="middle" data-extraction-carrier>${extractionMethods[0].carrier}</text>
- <path d="M105 110H240M265 175V224" class="extraction-track" marker-end="url(#extraction-arrow)"/>
+ <path d="M105 110H240" class="extraction-track" marker-end="url(#extraction-arrow)"/><path d="M265 175V224" class="extraction-track" marker-end="url(#extraction-arrow)"/>
  ${label(199,97,'Tritium')}
  <text x="80" y="155" text-anchor="middle" data-extraction-retained>${extractionMethods[0].retained}</text>
  <text x="265" y="155" text-anchor="middle" data-extraction-transport>${extractionMethods[0].transport}</text>

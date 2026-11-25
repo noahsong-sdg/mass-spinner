@@ -12,7 +12,7 @@ test('the plant has visible location boundaries and static extraction cases',asy
  await extraction.getByRole('button',{name:'Liquid lead–lithium',exact:true}).click();
  await expect(extraction.locator('[data-extraction-interface]')).toBeVisible();
  await expect(extraction.locator('[data-extraction-membrane]')).toBeVisible();
- await expect(extraction).toContainText('Liquid returns');
+ await expect(extraction).toContainText('Liquid goes back');
  await expect(extraction.getByRole('slider')).toHaveCount(0);
  await expect(extraction.getByRole('button',{name:/path/i})).toHaveCount(0);
  await extraction.getByRole('button',{name:'Ceramic breeder',exact:true}).click();
