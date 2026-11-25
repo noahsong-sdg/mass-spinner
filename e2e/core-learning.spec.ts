@@ -9,7 +9,7 @@ test('the first session connects current, equilibrium, heat and collection in on
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await page.goto('/?level=2&try=currentExperiment&lesson=/start.html%23current');await accepted(page);
  const reader=page.frameLocator('#physics-guide-frame');
- await expect(reader.locator('.guide-contents a')).toHaveCount(4);
+ await expect(reader.locator('#exercises > .guide-contents a')).toHaveCount(4);
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
  await current.fill('0');await current.press('Enter');await accepted(page);
  await page.locator('#fuel-motion-time').press('End');
