@@ -110,25 +110,22 @@ test('the authored pressure shell closes the full circumference and feedthroughs
  }
 });
 
-test('station context keeps SI height and owned resources while its span follows chamber length',()=>{
+test('the live assembly contains hardware only, including when an older asset contains room context',()=>{
+ const context=template.scene.children.find(node=>node.userData.viewContext)!;
+ assert.ok(context.getObjectByName('Workbench_top'));
+ assert.ok(context.getObjectByName('Laboratory_floor'));
  for(const radiusM of [.08,.3])for(const lengthM of [.3,1.8]){
   const c={...defaults,radiusM,lengthM},r=simulateFuelCentrifuge(c),built=buildFuelCentrifugeGeometry({config:c,result:r,assembly:template.scene,diagnostics:true});
-  const context=built.scene.children.find(node=>node.userData.viewContext)!;assert.ok(context);assert.equal(context.userData.nonPickable,true);
-  const table=context.getObjectByName('Workbench_top') as THREE.Mesh,leg=context.getObjectByName('Bench_leg') as THREE.Mesh;
-  const source=template.scene.getObjectByName('Bench_leg') as THREE.Mesh;
-  assert.notEqual(leg.geometry,source.geometry);assert.notEqual(leg.material,source.material);
-  close(table.scale.z,(lengthM+.6)/1.4);close(leg.scale.y,1);close(leg.scale.z,1);
-  built.scene.updateMatrixWorld(true);
-  const bed=new THREE.Box3().setFromObject(built.scene.getObjectByName('Support bed')!);
-  const top=new THREE.Box3().setFromObject(table),floor=new THREE.Box3().setFromObject(context.getObjectByName('Laboratory_floor')!);
-  close(top.max.y,bed.min.y);assert.ok(top.min.z<=bed.min.z&&top.max.z>=bed.max.z,'the workbench supports the full bed width');
-  context.traverse(node=>{
-   if(node instanceof THREE.Mesh)assert.equal(node.userData.geometryBasis,'Illustrative laboratory setting. This is not a Marathon facility.');
-   if(node.userData.renderName==='Leveling foot')close(new THREE.Box3().setFromObject(node).min.y,floor.max.y);
+  built.scene.traverse(node=>{
+   assert.equal(node.userData.viewContext,undefined,'Do not attach laboratory context to the live scene.');
+   assert.doesNotMatch(node.name,/Workbench|Bench leg|Bench rail|Lower shelf|Leveling foot|Laboratory floor/i);
   });
-  const before=context.position.clone();built.tools.setStaging({cutaway:1,ghost:true,explode:1});assert.deepEqual(context.position,before);
+  assert.equal(built.scene.userData.authoredAssembly.modules,9);
+  assert.ok(built.scene.getObjectByName('Support bed'),'Keep the apparatus support bed.');
+  assert.ok(built.scene.getObjectByName('Vessel pressure wall'));
   built.tools.dispose();release(built.scene);
  }
+ assert.equal(context.parent,template.scene,'Keep the cached template intact.');
 });
 
 test('authored assembly follows accepted SI radius and length without stretching fastener shapes with chamber length',()=>{
