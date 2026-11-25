@@ -270,6 +270,7 @@ test('application reference changes select a coherent plot without discarding th
 
 test('scene and plot identify their actual model and time, including mismatched reference views and pending inputs',async t=>{
  const f=fixture(t,{motion:true,reducedMotion:true});f.ui.setActive(true);await flush();
+ assert.equal(f.node('fuel-scene-state').parentElement,f.ui.nodes.render.querySelector('.fuel-motion'),'Keep state identity inside playback so tutorial overlays cannot cover it.');
  f.change('fuel-motion-time',.3);
  assert.match(f.node('fuel-scene-state').textContent,/Coupled run · 0.3 s/);
  assert.match(f.node('fuel-plot-state').textContent,/Coupled run · 0.3 s/);

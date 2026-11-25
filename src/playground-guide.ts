@@ -173,7 +173,8 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    composition();
    if(key==='axis'||key==='wall')set('fuel-view-radius',key==='axis'?0:1,'input');
    if(key==='temperature'||key==='rotation'){
-    set('fuel-motion-mode','equilibrium');
+    const time=node('fuel-motion-time').value;
+    set('fuel-motion-mode','equilibrium');set('fuel-motion-time',time,'input');
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }

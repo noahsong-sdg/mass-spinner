@@ -206,6 +206,8 @@ test('reading links use accepted physics results and focus the real collision, d
  f.change('fuel-motion-time',.37);
  for(const [key,topic]of [['axis','composition'],['wall','composition'],['temperature','composition'],['rotation','composition'],['momentum','momentum'],['inertia','inertia'],['density','profile'],['cut','cut']]){
   send(key);assert.equal(f.node('fuel-plot').value,topic);close(Number(f.node('fuel-motion-time').value),.37);
+  if(key==='temperature'||key==='rotation')assert.equal(f.node('fuel-motion-mode').value,'equilibrium','fixed-speed comparisons must show the equilibrium reference');
+  if(['momentum','inertia','density','cut'].includes(key))assert.equal(f.node('fuel-motion-mode').value,'transport','history diagnostics must return to the same coupled state');
   if(key==='axis'||key==='wall')close(Number(f.node('fuel-composition-readout').dataset.timeS),.37);
  }
  f.node('fuel-motion-play').click();assert.equal(f.node('fuel-motion-play').getAttribute('aria-pressed'),'true');

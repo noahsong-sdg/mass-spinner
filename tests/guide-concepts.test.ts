@@ -95,6 +95,35 @@ test('tutorial sections use a diagram, a comparison table or a direct explanatio
     assert.ok(doc.querySelector('[data-guide-action="pin"]'));assert.ok(doc.querySelector('[data-guide-action="diffusion"]'));
     assert.equal(doc.querySelector('[data-concept-example="compare"]'),null,'the collision example cannot explain diffusivity');continue;
    }
+   if(doc.title.startsWith('Tutorial 7')&&heading.id!=='stopping'){
+    const nodes:Element[]=[];
+    for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)nodes.push(n);
+    const text=nodes.map(node=>node.textContent).join(' ');
+    assert.equal(nodes[0]?.tagName,'P','explain why the source question matters before giving instructions');
+    const action=heading.id==='loading'?'beamTarget':'beamSource';
+    if(heading.id!=='limits')assert.ok(nodes.some(node=>node.querySelector(`[data-guide-action="${action}"]`)),'connect the explanation to its source or target controls');
+    switch(heading.id){
+     case 'source':
+      assert.match(text,/electric field accelerates deuterium ions toward a target that contains tritium/);
+      assert.match(text,/Beam energy is the kinetic energy of one incident ion/);
+      assert.match(text,/Beam current sets how many singly charged deuterium ions arrive each second/);break;
+     case 'current':
+      assert.match(text,/fixed-target calculation, reaction probability per ion stays constant/);
+      assert.match(text,/Neutron rate, incident beam power and deposited beam power increase in proportion to current/);
+      assert.match(text,/evolving target can heat and change its tritium content/);break;
+     case 'loading':
+      assert.match(text,/temperature.*changes as deposited energy moves through the target and backing toward the coolant/i);
+      assert.match(text,/Compare Dynamics at the same physical time/);
+      assert.match(text,/off-time permits heat flow without more beam heating/);break;
+     case 'limits':
+      assert.match(text,/Positive fusion power alone does not establish a positive electrical balance/);
+      assert.match(text,/not a measured lithium-tritide stopping curve/);
+      assert.ok(nodes.some(node=>node.querySelector('a[href$="/src/fusion-reactor.ts"]')));
+      assert.ok(nodes.some(node=>node.querySelector('a[href$="/docs/COUPLED-TARGET-V35.md"]')));break;
+     default:assert.fail(`Add a teaching requirement for beam section ${heading.id}.`);
+    }
+    continue;
+   }
    let visual=false;
    for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling){if(n.matches('figure')||n.querySelector('figure'))visual=true;}
    assert.ok(visual,heading.textContent!);

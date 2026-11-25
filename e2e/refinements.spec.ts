@@ -64,8 +64,10 @@ for(const [action,plot]of examples)test(`${action} preserves a shared run until 
 });
 
 test('scene and plot identify their coupled state and distinguish independent references',async({page})=>{
- await page.goto('/?level=2&try=momentum');await accepted(page);
+ await page.goto('/?level=2&try=momentum&lesson=/guide.html%23momentum');await accepted(page);
+ await expect(page.locator('.fuel-motion #fuel-scene-state')).toBeVisible();
  const scene=page.locator('#fuel-scene-state'),plot=page.locator('#fuel-plot-state');
+ await page.locator('#fuel-plots .live-plots svg').first().scrollIntoViewIfNeeded();await expect(plot).toBeInViewport();
  for(const mode of ['transport','spin']){
   await page.locator('#fuel-motion-mode').selectOption(mode);await page.locator('#fuel-motion-time').press('End');
   await expect(scene).toHaveAttribute('data-calculation-state','accepted');await expect(plot).toHaveAttribute('data-calculation-state','accepted');

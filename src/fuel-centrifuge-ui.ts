@@ -114,7 +114,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  const baselineFrame=el('div');baselineFrame.className='apparatus-frame fuel-baseline';baselineFrame.hidden=true;nodes.render.append(baselineFrame);
  const comparisonLabel=el('p');comparisonLabel.className='fuel-comparison-label';comparisonLabel.hidden=true;nodes.render.append(comparisonLabel);
  const status=el('p');status.setAttribute('role','status');status.className='fuel-status';nodes.render.append(status);
- const sceneIdentity=el('output','No accepted run');sceneIdentity.id='fuel-scene-state';sceneIdentity.className='fuel-scene-state';sceneIdentity.setAttribute('aria-live','off');nodes.render.append(sceneIdentity);
+ const sceneIdentity=el('output','No accepted run');sceneIdentity.id='fuel-scene-state';sceneIdentity.className='fuel-scene-state';sceneIdentity.setAttribute('aria-live','off');
  const setStatus=(text:string)=>{if(status.textContent!==text)status.textContent=text;};
  const motionBar=el('div');motionBar.className='fuel-motion';motionBar.hidden=true;nodes.render.append(motionBar);
  const makeSelect=(host:HTMLElement,id:string,label:string,options:readonly(readonly[string,string])[])=>{
@@ -142,6 +142,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  };
  const timeLabel=el('output');timeLabel.id='fuel-motion-time-label';timeLabel.setAttribute('aria-live','off');motionBar.insertBefore(timeLabel,legend);
  const playbackPosition=floatingPlayback(motionBar,{details:[restart,newRun,legend,driveKey,clock,modeReading]});
+ motionBar.append(sceneIdentity);
  clock.setAttribute('aria-live','off');
  const pair=makeSelect(nodes.controls,'fuel-pair','Feed',Object.entries(FUEL_PAIRS).map(([id,p])=>[id,p.label]));
  const controls=new Map<NumericFuelKey,NumericControl>(),sections=new Map<string,HTMLDetailsElement>(),controlEffects=new Map<NumericFuelKey,HTMLParagraphElement>();
