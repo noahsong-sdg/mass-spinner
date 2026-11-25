@@ -22,9 +22,8 @@ test('reactor recalculation preserves a user-framed hardware view',async({page},
  await processes.locator(':scope > summary').click();
  await canvas.focus();await canvas.press('ArrowRight');await canvas.press('+');
  await expect(canvas).toBeFocused();
- // Locator screenshots composite HTML over the GPU canvas. Exclude its focus
- // outline and the floating dock without changing either layout or camera.
- const capture={style:'#fusion-apparatus canvas{outline:none!important}.world-dock{visibility:hidden!important}'};
+ // Hide HTML overlays during capture. Keep the layout and camera unchanged.
+ const capture={style:'#fusion-apparatus *,.world-context,.world-dock{visibility:hidden!important}#fusion-apparatus canvas{visibility:visible!important;outline:none!important}'};
  const before=await canvas.screenshot(capture);
  await page.getByRole('button',{name:'Controls',exact:true}).click();
  const current=page.locator('#fusion-beamCurrentA'),oldCurrent=await current.inputValue();

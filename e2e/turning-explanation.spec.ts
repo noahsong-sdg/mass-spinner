@@ -26,6 +26,7 @@ test('the inward-force explanation shows motion, pressure and density in separat
  await expect(figure.locator('[data-turning-ratios]')).toContainText('⁶Li 5.09× · ⁷Li 6.68×');
  await expect(figure.locator('[data-turning-panel="1"]')).toBeHidden();
  await figure.getByRole('button',{name:'Replay',exact:true}).click();await expect(figure).toHaveAttribute('data-motion','running');
+ await expect.poll(async()=>Number(await slider.inputValue())).toBeGreaterThan(0);
  await slider.press('Home');await expect(figure).toHaveAttribute('data-motion','paused');
  await expect(figure.locator('[data-turning-ratios]')).toContainText('⁶Li 1.00× · ⁷Li 1.00×');
  expect(errors).toEqual([]);
