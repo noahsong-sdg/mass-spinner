@@ -87,7 +87,7 @@ test('numbered tutorials 03–06 render independently with readable diagrams, ma
 
 test('concise tutorials have linked contents and keyboard access to optional explanations',async({page},info)=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
- await page.goto('/start.html');
+ await page.goto('/start.html#current');
  await expect(page.locator('#learning-mode,[data-learning-controls]')).toHaveCount(0);
  const current=page.locator('section[aria-labelledby="current"]');
  await expect(page.locator('textarea,[data-learning-hint],#guide-chapter')).toHaveCount(0);
@@ -156,7 +156,7 @@ test('reader navigation keeps its simulator connection and tutorial plot actions
 });
 
 test('a standalone tutorial enters one workspace and keeps accepted inputs across reader navigation',async({page})=>{
- await page.goto('/start.html');const pages=page.context().pages().length;
+ await page.goto('/start.html#machine');const pages=page.context().pages().length;
  await page.locator('[data-guide-action="look"]').click();
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await expect(page.getByRole('link',{name:'Reading page'})).toHaveAttribute('href','/start.html#machine');
@@ -217,6 +217,7 @@ test('local tutorial diagrams explain their cases and remain usable with reduced
  await page.emulateMedia({reducedMotion:'reduce'});
  for(const route of ['/start.html','/guide.html','/tutorial-03.html','/tutorial-04.html','/tutorial-05.html','/tutorial-06.html']){
   await page.goto(route);await expect(page.locator('#reader-status')).toBeEmpty();
+  if(route==='/start.html')await page.locator('#exercises > summary').click();
   for(const figure of await page.locator('[data-concept-example]').all()){
    await expect(figure).toHaveAttribute('data-motion','paused');
    const choices=figure.locator('[data-concept-select]');
