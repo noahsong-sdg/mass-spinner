@@ -77,7 +77,7 @@ test('all seven tutorials render independently with readable diagrams, math and 
   await page.goto(route);await expect(page.locator('h1')).toContainText(`Tutorial ${number}`);
   await expect(page.locator('figure svg')).not.toHaveCount(0);
   await expect(page.locator('.katex-error')).toHaveCount(0);
-  const link=page.locator('.guide-contents a').last(),target=await link.getAttribute('href');
+  const link=page.locator('.guide-contents').first().getByRole('link').last(),target=await link.getAttribute('href');
   await link.click();await expect(page.locator(target!)).toBeInViewport();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
   expect((await new AxeBuilder({page}).analyze()).violations).toEqual([]);

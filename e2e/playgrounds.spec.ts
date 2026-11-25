@@ -265,7 +265,8 @@ test('guide: local links, native action and accessible reading layout',async({pa
  await page.goto('/guide.html#goal');
  await page.getByRole('link',{name:'The menu table'}).click();
  await expect(page).toHaveURL(/#views$/);
- await page.getByRole('link',{name:'§4',exact:true}).first().click();
+ await page.locator('summary').filter({hasText:/^Controls & plot reference$/}).click();
+ await page.locator('table a[href="#momentum"]').first().click();
  await expect(page).toHaveURL(/#momentum$/);
  await expect(page.locator('.try-actions')).toHaveCount(0);
  const steps=page.locator('ol').filter({has:page.locator('[data-guide-action="cutPower"]')});

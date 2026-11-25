@@ -8,6 +8,8 @@
 | --- | --- | --- |
 | Tutorial 2 introduced separation before its drive. | Markdown and topic metadata kept a different order from the physical sequence. The reader met an effect before its cause. | Put drive, momentum, distribution, separation strength, heat and collection in that order. Keep existing anchors and equations. |
 | An example could open unsuitable retained settings. | Links opened controls without a known input set. Old settings could hide the intended comparison. | Add explicit Load example, Use my run and Restore previous run. Reuse validated scenarios instead of a second input-restoration system. Save inputs and history before a context change, including while a run is pending. Use my run keeps that restore point. Sharing still requires an accepted result. |
+| A loaded example could retain the old current. | A reference callback copied accepted current into the input batch before the new drive invalidated it. The old result replaced a new input. | Notify the incoming drive first. Mark restored input events so they cannot append an intervention or extend the old duration. Keep ordinary input events for other listeners. |
+| A collection example could start at different times. | Its result action selected the endpoint only when the calculation had already finished. Calculation speed changed the displayed starting state. | Loading now shows the preset plot at its declared time, zero. The separate result button still selects the endpoint. Do not tie the initial state to worker timing. |
 | A history plot could describe a different state from the scene. | Plot selection and gas-view selection had separate paths. The picture could show a reference beside coupled history. | Synchronize tutorial history actions and preserve selected time. Label both outputs. Use the selected coupled state for fixed-speed equilibrium comparisons. An endpoint reference would otherwise use final speed at time zero and hide the at-rest explanation. Ordinary manual selection remains available. |
 | Focused control help could stop the next exact editor from opening. | Hiding help during pointer focus moved the next control between pointer-down and click. The click then missed its target. | Use an anchored, noninteractive note outside normal layout. Keep control positions stable without changing editor event handling. |
 | Expanded phone playback covered too much of the model. | The new state label added a row to an unbounded details body. | Limit the compact details body and permit scrolling inside it. Keep the state label and primary controls visible. |
@@ -27,7 +29,7 @@ The model calculates each restored run again.
 
 Safe-dev checks passed on 25 November 2026:
 
-- Focused regressions: 137 passed, zero failures.
+- Initial focused checks: 137 passed. Final restore and interface regressions: 110 passed. No failures.
 - Application, infrastructure, boundary and test typechecks: passed.
 - ESLint: passed.
 - Production build, site-resource checks and Blender asset checks: passed.

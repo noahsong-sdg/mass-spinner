@@ -12,6 +12,8 @@ import {publicInputCoverage} from '../src/public-sensitivity.ts';
 import {setupPlaygroundGuide} from '../src/playground-guide.js';
 import {fuelMotionState} from '../src/fuel-motion.js';
 import {setupPreciseControls} from '../src/precise-controls.js';
+import {restoreScenario,type Scenario} from '../src/scenario-state.js';
+import {DEFAULT_FUEL_THERMAL} from '../src/fuel-operation.js';
 
 const identity={schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{'src/fuel-centrifuge.ts':'b'.repeat(64)}};
 const clone=<T>(value:T):T=>structuredClone(value);
@@ -617,4 +619,23 @@ test('the earliest pinned failure clips both runs and clearing the pin removes i
  assert.equal(Number(f.node('fuel-motion-time').max),0);assert.equal(f.builds.at(-1).burst.group.visible,true);
  f.ui.nodes.view.querySelector<HTMLButtonElement>('.fuel-comparison-bar button:nth-child(2)')!.click();await flush();
  assert.equal(f.node('fuel-failure').hidden,true);assert.ok(Number(f.node('fuel-motion-time').max)>0);
+});
+
+
+for(const version of [2,3] as const)test(`v${version} inactive restoration at the prior endpoint preserves incoming current, duration and history`,async t=>{
+ const f=fixture(t);await f.start();f.change('fuel-currentA',.031);await f.ui.run();await flush();
+ const result=f.ui.latest.result,{currentA,durationS,...setup}=result.config;
+ // Supply the production operating metadata omitted by this test's fast transport request.
+ result.transport.operation={schemaVersion:1,events:[],thermal:{...DEFAULT_FUEL_THERMAL},setup,initialCurrentA:currentA};
+ f.change('fuel-motion-mode','transport','change');f.change('fuel-motion-time',durationS);f.ui.setActive(false);
+ assert.equal(f.ui.latest.result.config.currentA,.031);const requests=f.requests.length;
+ const controls={'fuel-application':'enrichment','fuel-pair':'lithium','fuel-gasK':500,'fuel-durationS':.5,'fuel-currentA':.03};
+ const scenario:Scenario=version===2?{version:2,level:'2',controls}:{version:3,level:'2',controls:{...controls,'marathon-apparatus':'centrifuge'},fuelRun:{initialCurrentA:.03,events:[],mode:'transport',timeS:.25}};
+ if(version===3){const apparatus=f.window.document.createElement('select');apparatus.id='marathon-apparatus';apparatus.innerHTML='<option value="centrifuge">Centrifuge</option>';f.window.document.body.append(apparatus);}
+ restoreScenario(f.window.document,scenario);
+ assert.equal(f.ui.read().currentA,.03);assert.equal(f.node('fuel-currentA').valueAsNumber,.03);assert.equal(f.ui.read().durationS,.5);
+ assert.deepEqual(f.ui.captureRun({validate:false}).events,[],'restoring setup must not create a prior-run intervention');
+ f.ui.restoreRun(scenario.version===3?scenario.fuelRun:undefined);
+ const restored=f.ui.captureRun({validate:false});assert.equal(restored.initialCurrentA,.03);assert.equal(restored.timeS,version===3?.25:0);
+ assert.equal(f.ui.read().durationS,.5);assert.equal(f.requests.length,requests,'inactive restoration does not run a solver to correct the input');
 });

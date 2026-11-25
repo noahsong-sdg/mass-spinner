@@ -118,3 +118,16 @@ test('Models retains selected mechanism and source across 01; explicit reset res
   assert.equal((d.getElementById('share-playground') as HTMLButtonElement).hidden,false);ui.reset();assert.equal(system.value,'centrifuge');assert.equal((d.getElementById('mass-a') as HTMLInputElement).value,'40');
  }finally{Object.assign(globalThis,saved);dom.window.close();}
 });
+
+
+test('incoming fuel current notifies before reference controls without changing reference-only imports',()=>{
+ const {window}=fixture(),d=window.document;
+ for(const [id,tag,content]of [['fuel-application','select','<option value="enrichment">Separation</option>'],['fuel-currentA','input','']] as const){
+  const input=d.createElement(tag);input.id=id;input.innerHTML=content;if(input instanceof window.HTMLInputElement){input.type='number';input.min='0';input.max='.2';input.value='.031';}d.body.append(input);
+ }
+ const current=d.getElementById('fuel-currentA') as HTMLInputElement,application=d.getElementById('fuel-application')!,order:string[]=[];
+ let invalidated=false;current.addEventListener('input',event=>{assert.equal((event as CustomEvent).detail,'mass-spinner:scenario-restore');invalidated=true;order.push('current');});application.addEventListener('change',()=>{order.push('reference');if(!invalidated)current.value='.031';});
+ restoreScenario(d,{version:2,level:'2',controls:{'fuel-application':'enrichment','fuel-currentA':.03}});
+ assert.deepEqual(order,['current','reference']);assert.equal(current.valueAsNumber,.03);
+ order.length=0;restoreScenario(d,{version:2,level:'2',controls:{'fuel-application':'enrichment'}});assert.deepEqual(order,['reference']);
+});

@@ -454,3 +454,16 @@ test('equilibrium comparisons use the selected coupled speed and physical time',
   }
  }
 });
+
+
+test('loading the collection example reveals its explicit initial state regardless of result readiness',t=>{
+ for(const pending of [false,true]){
+  const f=fixture(t,false,{defaults:exampleDefaults,capture:()=>structuredClone(exampleDefaults),restore:()=>true}),fuel=acceptedFuel(f);experimentControls(f);
+  f.workspace.launchGuideAction('collectionExperiment');
+  fuel.time.value='0';fuel.accepted.disabled=pending;
+  guideButton(f.doc,'Load example').click();
+  assert.equal(fuel.time.valueAsNumber,0);assert.equal(fuel.plot.value,'cut');
+  fuel.accepted.disabled=false;f.doc.querySelector<HTMLButtonElement>('.guide-experiment button')!.click();
+  assert.equal(fuel.time.valueAsNumber,1,'the explicit end-of-run result action still selects the endpoint');
+ }
+});

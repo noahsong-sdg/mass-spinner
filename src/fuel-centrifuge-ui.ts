@@ -455,7 +455,9 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
  }
  function changed(event?:Event|{target:HTMLInputElement}){
   if(disposed||updateReferences(event?.target))return;
-  const intervention=isCurrentIntervention(event?.target);
+  // Restored setup values must not append a drive event or extend the previous run.
+  const restoring=event instanceof doc.defaultView!.CustomEvent&&event.detail==='mass-spinner:scenario-restore';
+  const intervention=!restoring&&isCurrentIntervention(event?.target);
   if(intervention){
    try{currentEvents=fuelCurrentIntervention(latest!.result.transport!.operation!.events,elapsed,controls.get('currentA')!.read());}
    catch(error){const control=controls.get('currentA')!,current=sampleFuelTransport(latest!.result.transport!,elapsed).currentA??latest!.result.config.currentA;control.input.value=String(current);control.refresh();playing=false;playback();setStatus(`${message(error)} Start a new run to reset drive history.`);return;}

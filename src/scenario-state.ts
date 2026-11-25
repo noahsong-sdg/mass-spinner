@@ -82,8 +82,8 @@ function accepts(node: ScenarioControl, value: unknown) {
  return (node.min===''||value>=Number(node.min))&&(node.max===''||value<=Number(node.max));
 }
 function dispatch(node: ScenarioControl) {
- const EventType=node.ownerDocument.defaultView!.Event;
- node.dispatchEvent(new EventType(node.tagName==='SELECT'||node.type==='checkbox'?'change':'input',{bubbles:true}));
+ const EventType=node.ownerDocument.defaultView!.CustomEvent;
+ node.dispatchEvent(new EventType(node.tagName==='SELECT'||node.type==='checkbox'?'change':'input',{bubbles:true,detail:'mass-spinner:scenario-restore'}));
 }
 function validateMask(document: Document, controls: ScenarioControls){
  const [inner,outer]=collector;
@@ -202,7 +202,8 @@ export function restoreScenario(document: Document, scenario: unknown, {includeM
    if(isInput(node)&&node.type==='range'&&!selectedTimes.has(node.id))node.step='any';
    node.value=String(value);
   }
-  const priority=['material-geometry-mode','material-number-density','fusion-stopping-model'];
+  // Invalidate the incoming drive before reference callbacks can copy an old accepted current into the batch.
+  const priority=['material-geometry-mode','material-number-density','fusion-stopping-model','fuel-currentA'];
   const rank=(node: ScenarioControl)=>priority.includes(node.id)?priority.indexOf(node.id):100;
   if(dispatchEvents)for(const [node]of [...entries].sort(([a],[b])=>rank(a)-rank(b)))dispatch(node);
  };

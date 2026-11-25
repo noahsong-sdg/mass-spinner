@@ -100,7 +100,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   try{before=entryRun??examples.capture();}catch{experimentStatus.textContent='Cannot save the current inputs. Correct the settings before loading an example.';return;}
   const next=guideExample(selectedExample,examples.defaults);
   if(!examples.restore(next)){experimentStatus.textContent='The example did not load. The previous restore point remains.';return;}
-  previousRun=before;entryRun=null;restoreRun.disabled=false;showReader();showExperiment(selectedExample);
+  previousRun=before;entryRun=null;restoreRun.disabled=false;showReader();showExperiment(selectedExample,false);
   experimentStatus.textContent='Example loaded. The model uses the listed initial state and default inputs.';
  });
  useRun.addEventListener('click',()=>{if(selectedExample)showExperiment(selectedExample);});
@@ -111,14 +111,15 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
  });
  let experimentResultAction='';
  experimentResult.addEventListener('click',()=>{launch(experimentResultAction);experimentStatus.textContent=status.textContent;});
- function showExperiment(key:string){
+ function showExperiment(key:string,runResult=true){
   selectedExample=key as GuideExampleKey;if(examples)describeExample(guideExample(selectedExample,examples.defaults));
   const experiment:GuideExperiment=guideExperiments[key as keyof typeof guideExperiments],apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;
   const context=experiment.apparatus??'centrifuge';
   if(apparatus.value!==context||!canUseApparatus(context)){apparatus.value=context;apparatus.dispatchEvent(new win.Event('change',{bubbles:true}));}
   if(['thermalPlot','thermalProfile','separationPlot','spinPlot'].includes(experiment.result))transient();
   // Beam references have their own accepted state. Centrifuge actions wait on fuel-export.
-  if(experiment.apparatus||!pending(experiment.result))action(experiment.result);
+  if(experiment.apparatus||runResult&&!pending(experiment.result))action(experiment.result);
+  if(!experiment.apparatus&&!runResult)plot(node('fuel-plot').value);
   if(experiment.panel==='target')doc.getElementById('coupled-tab-settings')!.click();
   let selector=experiment.control;
   if(['#fuel-cutFraction','#fuel-stages'].includes(selector)&&(doc.getElementById('fuel-application') as HTMLSelectElement).value==='pump')selector='#fuel-application';
