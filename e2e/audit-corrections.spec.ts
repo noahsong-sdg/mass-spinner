@@ -18,6 +18,10 @@ test('compact playback retains primary controls, usable scene space and focus ac
  const closedInset=await inset();expect(closedInset).toBeGreaterThan(0);
  await summary.click();await expect(details).toHaveAttribute('open','');
  await expect(page.locator('#fuel-motion-clock')).toBeVisible();await expect(page.locator('.fuel-motion-legend')).toBeVisible();
+ const expanded=(await panel.boundingBox())!,body=(await details.locator('.fuel-motion-details-body').boundingBox())!;
+ expect(body.width).toBeGreaterThan(expanded.width-24);
+ expect(expanded.height).toBeLessThan(360);
+ expect((await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox())!.height).toBeGreaterThan(200);
  await expect.poll(inset).toBeGreaterThan(closedInset);
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
  await page.locator('#fuel-motion-restart').focus();
@@ -29,6 +33,19 @@ test('compact playback retains primary controls, usable scene space and focus ac
  await summary.click();await expect(details).toHaveAttribute('open','');
  await expect.poll(async()=>{const a=(await panel.boundingBox())!,b=(await page.locator('#fuel-render').boundingBox())!;return a.y-b.y;}).toBeGreaterThanOrEqual(7);
  await info.attach('compact-playback-landscape',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
+});
+
+test('saved playback placement remains bounded when full-width details expand',async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.addInitScript(()=>localStorage.setItem('mass-spinner-playback-v1',JSON.stringify({version:1,x:.95,y:.95})));
+ await page.goto('/?level=2');await accepted(page);
+ const panel=page.locator('.fuel-motion'),details=panel.locator('.fuel-motion-details');
+ await details.locator('summary').click();await expect(details).toHaveAttribute('open','');
+ await expect.poll(async()=>{
+  const p=(await panel.boundingBox())!,scene=(await page.locator('#fuel-render').boundingBox())!,dock=(await page.locator('.world-dock').boundingBox())!;
+  return p.x>=scene.x+7&&p.x+p.width<=scene.x+scene.width-7&&p.y>=scene.y+63&&p.y+p.height<=dock.y-8;
+ }).toBe(true);
+ expect((await details.locator('.fuel-motion-details-body').boundingBox())!.width).toBeGreaterThan((await panel.boundingBox())!.width-24);
 });
 
 test('reference controls use current exact limits and Composition retains keyboard focus',async({page})=>{

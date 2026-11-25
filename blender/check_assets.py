@@ -43,9 +43,9 @@ assert not assembly.get('cameras') and not assembly.get('animations')
 modules = [n for n in assembly['nodes'] if n.get('extras', {}).get('assemblyModule')]
 assert len(modules) == 9
 contexts = [n for n in assembly['nodes'] if n.get('extras', {}).get('viewContext')]
-assert len(contexts) == 1 and contexts[0]['extras']['nonPickable']
+assert not contexts, 'Laboratory context must not enter the hardware asset'
 assert sum(bool(n['extras'].get('coilPack')) for n in modules) == 4
 for node in assembly['nodes']:
     if 'mesh' in node:
         assert all(key in node['extras'] for key in ['componentId', 'renderName', 'materialBasis', 'geometryBasis'])
-print('Authored centrifuge: nine SI hardware modules and one illustrative laboratory context')
+print('Authored centrifuge: nine SI hardware modules; no laboratory context')

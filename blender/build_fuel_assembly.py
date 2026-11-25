@@ -25,8 +25,6 @@ for name, color, metal, rough in [
     ('Seal alloy', (.13, .16, .17, 1), .9, .4),
     ('Structural steel', (.045, .065, .06, 1), .8, .4),
     ('Winding insulation', (.19, .105, .045, 1), 0, .48),
-    ('Bench surface', (.19, .23, .22, 1), .15, .6),
-    ('Concrete floor', (.12, .145, .14, 1), 0, .88),
 ]:
     mat = bpy.data.materials.new(name)
     mat.use_nodes = True
@@ -165,34 +163,6 @@ for anchor in [.18,.82]:
         box('Ceramic isolation pad', (.033,.004,.05), (x,-R*1.44,0), 'Alumina', 'vessel', saddle)
         bolt = cylinder('Saddle fixing bolt', .003, .047, (x,-R*1.2,0), 'Stainless steel', 'vessel', saddle, 6)
         bolt.rotation_euler.x = math.pi/2
-
-# The room context keeps fixed SI height. Runtime adapts only the table span.
-station = bpy.data.objects.new('Illustrative laboratory station', None)
-bpy.context.collection.objects.link(station)
-station['viewContext'] = True
-station['nonPickable'] = True
-station['geometryBasis'] = 'Illustrative laboratory setting. This is not a Marathon facility.'
-span = L + .6
-def station_box(name, size, pos, material, stretch=False, stretch_width=False):
-    obj = box(name, size, pos, material, 'vessel', station)
-    obj['geometryBasis'] = station['geometryBasis']
-    obj['stationZFraction'] = pos[2]/span if pos[2] else 0
-    obj['stationXFraction'] = pos[0]/.9 if pos[0] else 0
-    obj['stationStretch'] = stretch
-    obj['stationWidthStretch'] = stretch_width
-    return obj
-
-station_box('Workbench top', (.9,.03,span), (0,-.015,0), 'Bench surface', True, True)
-station_box('Lower shelf', (.82,.018,span-.12), (0,-.70,0), 'Structural steel', True, True)
-for x in [-.39,.39]:
-    station_box('Longitudinal bench rail', (.04,.06,span-.1), (x,-.06,0), 'Structural steel', True)
-    for z in [-span*.44,span*.44]:
-        station_box('Bench leg', (.04,.84,.04), (x,-.48,z), 'Structural steel')
-        station_box('Leveling foot', (.065,.015,.065), (x,-.9075,z), 'Seal alloy')
-for z in [-span*.44,span*.44]:
-    station_box('Bench cross rail', (.82,.06,.04), (0,-.06,z), 'Structural steel', stretch_width=True)
-station_box('Laboratory floor', (6,.06,6), (0,-.945,0), 'Concrete floor')
-station.location = (0,-.19,L/2)
 
 scene = bpy.context.scene
 scene.unit_settings.system = 'METRIC'

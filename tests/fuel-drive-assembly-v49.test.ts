@@ -74,6 +74,8 @@ test('each drive layer covers the circumference and more than one axial station'
 
 test('real Blender GLB has nine SI modules and independently editable engineering details',()=>{
  const modules=template.scene.children.filter(o=>o.userData.assemblyModule);assert.equal(modules.length,9);
+ assert.equal(template.scene.children.length,9,'Export hardware modules only.');
+ template.scene.traverse(node=>assert.equal(node.userData.viewContext,undefined));
  template.scene.traverse((o:any)=>{if(o.isMesh){assert.ok(FUEL_COMPONENTS.some(c=>c.id===o.userData.componentId),o.name);assert.match(o.userData.materialBasis,/Assumed/);assert.match(o.userData.geometryBasis,/illustrative/i);for(const a of Object.values(o.geometry.attributes) as THREE.BufferAttribute[])for(const v of a.array)assert.ok(Number.isFinite(v));}});
  for(const name of ['Hex flange nut','Recessed metallic seal','HV alumina feedthrough','Copper solenoid turn','Coil bus tab','Ceramic isolation pad'])assert.ok(modules.some(o=>o.getObjectByName(name.replaceAll(' ','_'))||o.getObjectByName(name)),name);
  const turns:any[]=[];template.scene.traverse(o=>{if(o.userData.renderName==='Copper solenoid turn')turns.push(o);});assert.equal(turns.length,28);
@@ -111,11 +113,12 @@ test('the authored pressure shell closes the full circumference and feedthroughs
 });
 
 test('the live assembly contains hardware only, including when an older asset contains room context',()=>{
- const context=template.scene.children.find(node=>node.userData.viewContext)!;
- assert.ok(context.getObjectByName('Workbench_top'));
- assert.ok(context.getObjectByName('Laboratory_floor'));
+ const older=template.scene.clone(true),context=new THREE.Group();
+ context.userData={viewContext:true,nonPickable:true};
+ for(const name of ['Workbench_top','Laboratory_floor']){const mesh=new THREE.Mesh(new THREE.BoxGeometry(),new THREE.MeshBasicMaterial());mesh.name=name;context.add(mesh);}
+ older.add(context);
  for(const radiusM of [.08,.3])for(const lengthM of [.3,1.8]){
-  const c={...defaults,radiusM,lengthM},r=simulateFuelCentrifuge(c),built=buildFuelCentrifugeGeometry({config:c,result:r,assembly:template.scene,diagnostics:true});
+  const c={...defaults,radiusM,lengthM},r=simulateFuelCentrifuge(c),built=buildFuelCentrifugeGeometry({config:c,result:r,assembly:older,diagnostics:true});
   built.scene.traverse(node=>{
    assert.equal(node.userData.viewContext,undefined,'Do not attach laboratory context to the live scene.');
    assert.doesNotMatch(node.name,/Workbench|Bench leg|Bench rail|Lower shelf|Leveling foot|Laboratory floor/i);
@@ -125,7 +128,8 @@ test('the live assembly contains hardware only, including when an older asset co
   assert.ok(built.scene.getObjectByName('Vessel pressure wall'));
   built.tools.dispose();release(built.scene);
  }
- assert.equal(context.parent,template.scene,'Keep the cached template intact.');
+ assert.equal(context.parent,older,'Keep the cached template intact.');
+ assert.equal(context.children.length,2);release(context);
 });
 
 test('authored assembly follows accepted SI radius and length without stretching fastener shapes with chamber length',()=>{
