@@ -26,9 +26,9 @@ test('compact playback retains primary controls, usable scene space and focus ac
  await expect.poll(inset).toBeGreaterThan(closedInset);
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
  await page.locator('#fuel-motion-restart').focus();
- await page.setViewportSize({width:1000,height:844});await expect(details).toHaveAttribute('open','');
+ await page.setViewportSize({width:1000,height:844});await expect(panel).not.toHaveClass(/fuel-motion-compact/);await expect(details).toHaveAttribute('open','');
  await page.setViewportSize({width:390,height:844});await expect(details).not.toHaveAttribute('open');await expect(summary).toBeFocused();
- await page.setViewportSize({width:1000,height:844});await expect(page.locator('#fuel-motion-restart')).toBeFocused();
+ await page.setViewportSize({width:1000,height:844});await expect(panel).not.toHaveClass(/fuel-motion-compact/);await expect(page.locator('#fuel-motion-restart')).toBeFocused();
  await page.setViewportSize({width:520,height:390});await expect(panel).toHaveClass(/fuel-motion-compact/);
  await expect.poll(async()=>{const a=(await panel.boundingBox())!,b=(await page.locator('#fuel-render').boundingBox())!;return a.y-b.y;}).toBeGreaterThanOrEqual(7);
  await summary.click();await expect(details).toHaveAttribute('open','');
