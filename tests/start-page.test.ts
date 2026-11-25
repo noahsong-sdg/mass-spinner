@@ -131,6 +131,7 @@ test('Tutorial 1 motivates lithium separation from fusion and keeps controls opt
  const dom=new JSDOM(startPage());t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.deepEqual([...doc.querySelectorAll('main > section > h2')].map(node=>node.id),['fusion','plant','lithium','marathon']);
  const sections=['fusion','plant','lithium','marathon'].map(id=>doc.getElementById(id)!.parentElement!.textContent!);
+ for(const text of sections)assert.doesNotMatch(text,/;/,'the STE overview must use separate sentences instead of semicolons');
  assert.match(sections[0],/nucleus.*protons.*neutrons.*Deuterium.*Tritium.*Helium nucleus.*Neutron/s);
  assert.doesNotMatch(sections[0],/lithium/i,'establish fusion before introducing lithium');
  assert.match(sections[1],/Chamber.*Blanket.*Cooling and generator.*Fuel processing/s);
