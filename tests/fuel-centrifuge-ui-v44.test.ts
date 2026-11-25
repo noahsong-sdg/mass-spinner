@@ -290,7 +290,7 @@ test('scene and plot identify their actual model and time, including mismatched 
 test('the actual editor states current-step, new-run and reference-only effects without replacing accepted history',async t=>{
  const f=fixture(t,{motion:true,reducedMotion:true,request:(record:any)=>{const result=simulateFuelCentrifuge(record.config);return Promise.resolve({result:{...result,transport:simulateFuelOperation(result,record.operation)},producingCode:identity});}});f.ui.setActive(true);await flush();
  f.node('fuel-currentA').focus();assert.equal(f.node('fuel-currentA-effect').hidden,false);assert.match(f.node('fuel-currentA-effect').textContent,/new run from 0 s/);
- f.change('fuel-motion-time',.3);assert.match(f.node('fuel-currentA-effect').textContent,/Apply at 0.3 s. Add a current step/);
+ f.change('fuel-motion-time',.3);assert.match(f.node('fuel-currentA-effect').textContent,/Current step at 0.3 s. Keep prior history/);
  f.node('fuel-gasK').focus();assert.equal(f.node('fuel-currentA-effect').hidden,true);assert.match(f.node('fuel-gasK-effect').textContent,/new run from 0 s/);
  f.node('fuel-pumpSpeedM3S').focus();assert.match(f.node('fuel-pumpSpeedM3S-effect').textContent,/Update reference/);
  const history=f.ui.latest.result.transport.snapshots,count=f.requests.length;

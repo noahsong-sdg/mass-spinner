@@ -48,6 +48,10 @@ test('a fresh temperature comparison explains zero rotation and follows the sele
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  const message=page.locator('#fuel-comparison-instruction'),time=page.locator('#fuel-motion-time');
  await expect(message).toBeVisible();await expect(message).toContainText('Both curves overlap');
+ await expect(page.locator('#fuel-motion-mode')).toHaveValue('transport');
+ await expect(page.locator('#fuel-scene-state')).toHaveAttribute('data-model','Coupled run');
+ await expect(page.locator('#fuel-plot-state')).toHaveAttribute('data-model','Coupled run');
+ await expect(page.locator('#fuel-learning-comparisons')).toContainText('Isothermal equilibrium references');
  await expect(time).toHaveValue('0');await expect(page.locator('#fuel-motion-play')).toHaveAttribute('aria-pressed','false');
  const current=await page.locator('#fuel-currentA').inputValue();
  await time.press('End');await expect(message).toBeHidden();

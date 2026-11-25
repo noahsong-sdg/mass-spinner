@@ -103,7 +103,7 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
   previousRun=before;entryRun=null;restoreRun.disabled=false;showReader();showExperiment(selectedExample);
   experimentStatus.textContent='Example loaded. The model uses the listed initial state and default inputs.';
  });
- useRun.addEventListener('click',()=>{entryRun=null;if(selectedExample)showExperiment(selectedExample);});
+ useRun.addEventListener('click',()=>{if(selectedExample)showExperiment(selectedExample);});
  restoreRun.addEventListener('click',()=>{
   if(!examples||!previousRun)return;
   if(!examples.restore(previousRun)){experimentStatus.textContent='The previous run did not restore.';return;}
@@ -173,8 +173,6 @@ export function setupPlaygroundGuide({document:doc=document,host,open,close,focu
    composition();
    if(key==='axis'||key==='wall')set('fuel-view-radius',key==='axis'?0:1,'input');
    if(key==='temperature'||key==='rotation'){
-    const time=node('fuel-motion-time').value;
-    set('fuel-motion-mode','equilibrium');set('fuel-motion-time',time,'input');
     const comparison=node('fuel-learning-comparisons');comparison.open=true;node(`fuel-compare-${key}`).click();
     comparison.scrollIntoView?.({block:'nearest'});
    }

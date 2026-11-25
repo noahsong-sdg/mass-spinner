@@ -48,7 +48,7 @@ for(const [action,plot]of examples)test(`${action} preserves a shared run until 
   await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');
   await expect(page.locator('#fuel-application')).toHaveValue(action==='pumpingExperiment'?'pump':'enrichment');
   await expect(page.locator('#fuel-plot')).toHaveValue(plot);await expect(page.locator('#fuel-motion-mode')).toHaveValue('transport');
-  await expect(page.locator('#fuel-motion-time')).toHaveValue('0');
+  await expect(page.locator('#fuel-motion-time')).toHaveValue(action==='collectionExperiment'?'1':'0');
   await expect(page.locator('#fuel-thermal-enabled')).toBeChecked({checked:action==='spatialHeatExperiment'});
   if(action==='spatialHeatExperiment'){
    await expect(page.locator('#fuel-thermal-model')).toHaveValue('spatial');await expect(page.locator('#fuel-thermal-gasModel')).toHaveValue('spatial');

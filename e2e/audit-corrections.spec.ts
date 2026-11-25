@@ -21,6 +21,7 @@ test('compact playback retains primary controls, usable scene space and focus ac
  const expanded=(await panel.boundingBox())!,body=(await details.locator('.fuel-motion-details-body').boundingBox())!;
  expect(body.width).toBeGreaterThan(expanded.width-24);
  expect(expanded.height).toBeLessThan(360);
+ await expect(page.locator('#fuel-scene-state')).toBeVisible();await expect(page.locator('#fuel-scene-state')).toContainText('Coupled run');
  expect((await page.locator('#fuel-render > .apparatus-frame:not(.fuel-baseline)').boundingBox())!.height).toBeGreaterThan(200);
  await expect.poll(inset).toBeGreaterThan(closedInset);
  await expect(page.locator('#fuel-currentA')).toHaveValue(current);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
@@ -56,7 +57,9 @@ test('reference controls use current exact limits and Composition retains keyboa
  await page.getByRole('button',{name:'Set the exact value of Ideal countercurrent stages',exact:true}).click();
  const stages=page.getByRole('spinbutton',{name:'Ideal countercurrent stages',exact:true});await stages.fill('12');await stages.press('Enter');
  await expect(page.locator('#fuel-feedStage')).toHaveAttribute('max','12');
- await page.getByRole('button',{name:'Set the exact value of Feed stage',exact:true}).click();
+ const feedOutput=page.getByRole('button',{name:'Set the exact value of Feed stage',exact:true}),beforeFocus=(await feedOutput.boundingBox())!;
+ await feedOutput.focus();expect((await feedOutput.boundingBox())!.y).toBeCloseTo(beforeFocus.y,1);
+ await feedOutput.click();
  const feed=page.getByRole('spinbutton',{name:'Feed stage',exact:true});await expect(feed).toHaveAttribute('max','12');await feed.fill('8');await feed.press('Enter');
  await expect(page.locator('#fuel-feedStage')).toHaveValue('8');await expect(page.locator('#fuel-motion-time')).toHaveValue(time);
  await page.getByRole('button',{name:'Close Controls',exact:true}).click();await page.getByRole('button',{name:'Plots',exact:true}).click();

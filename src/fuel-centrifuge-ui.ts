@@ -159,7 +159,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   const read=()=>log?(input.value===initialCoordinate?DEFAULT_FUEL_CENTRIFUGE[key]:10**Number(input.value)):Number(input.value);
   const refresh=()=>{output.textContent=`${fmt(read())} ${unit}`;input.setAttribute('aria-valuetext',output.textContent);};refresh();
   controls.set(key,{input,read,refresh});input.addEventListener('input',changed);
-  const effect=el('p');effect.id=`fuel-${key}-effect`;effect.hidden=true;controlEffects.set(key,effect);box.append(effect);input.setAttribute('aria-describedby',effect.id);
+  const effect=el('p');effect.id=`fuel-${key}-effect`;effect.className='fuel-control-effect';effect.hidden=true;controlEffects.set(key,effect);box.append(effect);input.setAttribute('aria-describedby',effect.id);
   box.addEventListener('focusin',()=>{focusedControl=key;refreshControlEffect();});
   box.addEventListener('focusout',event=>{if(event.relatedTarget instanceof doc.defaultView!.Node&&box.contains(event.relatedTarget))return;focusedControl=null;effect.hidden=true;});
  }
@@ -475,7 +475,7 @@ export function setupFuelCentrifuge({document:doc=document,request=requestSimula
   for(const [key,effect]of controlEffects){
    effect.hidden=key!==focusedControl;if(effect.hidden)continue;
    const reference=latest&&!dirty&&!updating&&isFuelReferenceInput(key,latest.result.transport?.operation?.thermal.enabled??false);
-   effect.textContent=reference?'Update reference. The accepted run stays unchanged.':isCurrentIntervention(controls.get(key)!.input)?`Apply at ${fmt(elapsed)} s. Add a current step.`:'Start a new run from 0 s.';
+   effect.textContent=reference?'Update reference. Keep the accepted run.':isCurrentIntervention(controls.get(key)!.input)?`Current step at ${fmt(elapsed)} s. Keep prior history.`:'Start a new run from 0 s.';
   }
  }
  pair.addEventListener('change',changed);application.addEventListener('change',changed);

@@ -406,6 +406,18 @@ test('a tutorial captures the previous apparatus before switching context',t=>{
  assert.deepEqual(restored.at(-1),original);
 });
 
+test('Use my run keeps the original apparatus, drive history and time for example undo',t=>{
+ const original:Scenario={version:3,level:'2',controls:{...exampleDefaults.controls,'fuel-currentA':.07,'fuel-thermal-enabled':true,'fuel-thermal-coolantK':700},fuelRun:{initialCurrentA:.06,events:[{timeS:.2,currentA:.07}],mode:'spin',timeS:.4}};
+ const restored:Scenario[]=[];let f:ReturnType<typeof fixture>;
+ f=fixture(t,false,{defaults:exampleDefaults,capture:()=>({...structuredClone(original),controls:{...original.controls,'marathon-apparatus':f.node('marathon-apparatus').value}}),restore:value=>{restored.push(structuredClone(value));return true;}});
+ acceptedFuel(f);experimentControls(f);
+ const current=f.doc.createElement('input');current.id='fusion-beamCurrentA';f.node('fusion-controls').append(current);
+ f.workspace.launchTutorialAction('beamSource');assert.equal(f.node('marathon-apparatus').value,'source');
+ guideButton(f.doc,'Use my run').click();assert.equal(restored.length,0);
+ guideButton(f.doc,'Load example').click();guideButton(f.doc,'Restore previous run').click();
+ assert.deepEqual(restored.at(-1),original);
+});
+
 test('invalid input captures and rejected loads keep the last successful restore point',t=>{
  let pending=false,reject=false;const previous=structuredClone(exampleDefaults),restored:Scenario[]=[];
  const f=fixture(t,false,{defaults:exampleDefaults,capture:()=>{if(pending)throw new Error('pending');return structuredClone(previous);},restore:value=>{if(reject)return false;restored.push(structuredClone(value));return true;}});
@@ -423,5 +435,22 @@ test('tutorial history actions synchronize the scene without changing physical t
  for(const key of ['spinPlot','compositionPlot','separationPlot','thermalProfile','gasEnergy','gasPressure','work','thermalPlot','current','drag','diffusion']){
   fuel.mode.value='equilibrium';fuel.time.value='.4';f.workspace.launchGuideAction(key);
   assert.equal(fuel.mode.value,'transport',key);assert.equal(fuel.time.valueAsNumber,.4,key);
+ }
+});
+
+
+test('equilibrium comparisons use the selected coupled speed and physical time',t=>{
+ const f=fixture(t),fuel=acceptedFuel(f),selected:{mode:string;time:number}[]=[];
+ const current=f.node('fuel-currentA');current.value='.07';let restarts=0;fuel.newRun.addEventListener('click',()=>restarts++);
+ fuel.mode.addEventListener('change',()=>{fuel.time.value='0';});
+ for(const key of ['temperature','rotation']){
+  const button=f.doc.createElement('button');button.id=`fuel-compare-${key}`;f.node('fuel-learning-comparisons').append(button);
+  button.addEventListener('click',()=>selected.push({mode:fuel.mode.value,time:fuel.time.valueAsNumber}));
+  for(const time of [0,.4]){
+   fuel.mode.value='equilibrium';fuel.time.value=String(time);f.workspace.launchGuideAction(key);
+   assert.deepEqual(selected.at(-1),{mode:'transport',time},`${key}: compare the selected coupled sample`);
+   assert.equal(fuel.plot.value,'composition');assert.equal(f.node('fuel-learning-comparisons').open,true);
+   assert.equal(current.valueAsNumber,.07);assert.equal(restarts,0);
+  }
  }
 });
