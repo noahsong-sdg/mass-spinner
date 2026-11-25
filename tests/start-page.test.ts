@@ -37,8 +37,8 @@ function standalone(t:TestContext,stale=false){
 test('standalone walkthrough motivates each experiment before instructions and identifies expected outputs',t=>{
  const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const doc=dom.window.document;
  assert.equal(doc.querySelectorAll('iframe').length,0);
- assert.equal(doc.querySelector('h1')!.textContent,'Tutorial 1 · Using the simulator');
- assert.equal(doc.querySelectorAll('.guide-contents a').length,4);
+ assert.equal(doc.querySelector('h1')!.textContent,'Tutorial 1 · Fusion and its fuel supply');
+ assert.equal(doc.querySelectorAll('main > .guide-contents a').length,5);
  assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question|Next:/);
  assert.equal(doc.querySelectorAll('.walkthrough-step').length,7);
  for(const step of doc.querySelectorAll('.walkthrough-step')){
@@ -124,4 +124,25 @@ test('embedded web citations open separately while reading links and standalone 
  const dom=new JSDOM(html,{url:`${origin}/start.html`});t.after(()=>dom.window.close());setupGuideReader(dom.window);
  assert.equal(dom.window.document.querySelector<HTMLAnchorElement>('#external')!.target,'');
  assert.equal(dom.window.document.querySelector<HTMLAnchorElement>('#external')!.rel,'noreferrer');
+});
+
+
+test('Tutorial 1 motivates lithium separation from fusion and keeps controls optional',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.deepEqual([...doc.querySelectorAll('main > section > h2')].map(node=>node.id),['fusion','plant','lithium','marathon']);
+ const sections=['fusion','plant','lithium','marathon'].map(id=>doc.getElementById(id)!.parentElement!.textContent!);
+ assert.match(sections[0],/nucleus.*protons.*neutrons.*Deuterium.*Tritium.*Helium nucleus.*Neutron/s);
+ assert.doesNotMatch(sections[0],/lithium/i,'establish fusion before introducing lithium');
+ assert.match(sections[1],/Chamber.*Blanket.*Cooling and generator.*Fuel processing/s);
+ assert.match(sections[1],/more electricity than its equipment uses/);
+ assert.match(sections[2],/consumes tritium.*very small.*replacement tritium.*lithium.*tritium breeding/s);
+ assert.match(sections[2],/Lithium-7 also has a breeding reaction/);
+ assert.match(sections[2],/does not turn lithium-7 into lithium-6/);
+ assert.match(sections[2],/lithium remains in the blanket.*extracts and processes.*initial tritium supply/s);
+ assert.match(sections[3],/centrifuge is not a fusion reactor.*does not need fusion temperatures/s);
+ assert.match(sections[3],/Beam source.*solid lithium tritide target.*does not predict net electrical power/s);
+ const exercises=doc.querySelector<HTMLDetailsElement>('#exercises')!;
+ assert.equal(exercises.open,false);
+ assert.equal(exercises.querySelectorAll('.walkthrough-step').length,7);
+ assert.ok(doc.querySelector('meta[name="darkreader-lock"]'));
 });

@@ -163,8 +163,9 @@ test('Docs opens an attached walkthrough while preserving the running simulator'
  await page.getByRole('button',{name:'Plots',exact:true}).click();const before=await exported(page);await page.getByRole('button',{name:'Close Plots',exact:true}).click();
  const pages=page.context().pages().length,reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
+ await reader.locator('#exercises > summary').click();
  await expect.poll(()=>reader.url()).toMatch(/\/start(?:\.html)?$/);
- await expect(reader.getByRole('heading',{name:'Tutorial 1 · Using the simulator',exact:true})).toBeVisible();
+ await expect(reader.getByRole('heading',{name:'Tutorial 1 · Fusion and its fuel supply',exact:true})).toBeVisible();
  await expect(reader.locator('iframe')).toHaveCount(0);await expect(page.locator('#window-guide')).toBeVisible();
  await reader.locator('[data-guide-action="endSpin"]').click();
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');await expect(page.locator('#window-plots')).toBeVisible();
@@ -300,6 +301,7 @@ for(const currentA of [0,.03])test(`control tutorial applies ${currentA} A throu
  }
  const reader=await openReader(page);
  await reader.locator('main a[href="/start.html"]').click();
+ await reader.locator('#exercises > summary').click();
  await reader.locator('[data-guide-action="currentExperiment"]').click();
  const current=page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true});
  await expect(current).toBeFocused({timeout:30_000});await expect(current).toHaveValue(currentA>0?'0':'0.03');

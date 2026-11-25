@@ -36,9 +36,9 @@ test('opening an optional explanation never launches a run',t=>{
 
 test('the first session has four connected questions and retains all older section addresses',t=>{
  const dom=new JSDOM(startPage());t.after(()=>dom.window.close());const doc=dom.window.document;
- assert.deepEqual([...doc.querySelectorAll('.guide-contents a')].map(link=>link.getAttribute('href')),['#machine','#composition','#heat','#collection']);
+ assert.deepEqual([...doc.querySelectorAll('#exercises > .guide-contents a')].map(link=>link.getAttribute('href')),['#machine','#composition','#heat','#collection']);
  assert.deepEqual([...doc.querySelectorAll('[data-core-question]')].map(group=>[...group.querySelectorAll('.walkthrough-step')].map(section=>section.getAttribute('aria-labelledby'))),[['machine','current'],['composition','competition'],['heat'],['collection']]);
- assert.equal(doc.querySelectorAll('h2').length,4);
+ assert.equal(doc.querySelectorAll('#exercises h2').length,4);
  for(const id of ['machine','current','composition','competition','heat','collection','compare'])assert.ok(doc.getElementById(id),id);
  assert.ok(doc.querySelector('aside #compare'));
  const heat=doc.getElementById('heat')!.parentElement!;

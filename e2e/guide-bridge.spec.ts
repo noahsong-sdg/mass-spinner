@@ -24,14 +24,14 @@ async function visibleClock(page:Page){
 test('an action used before the reader script starts cannot nest the simulator',async({page})=>{
  await page.route('**/guide-reader.js',route=>route.abort());
  for(const [route,action,section]of [['/start.html','look','machine'],['/tutorial-06.html','diffusionExperiment','sensitivity']]){
-  await page.goto(`/?level=2&lesson=${encodeURIComponent(route)}`);
+  await page.goto(`/?level=2&lesson=${encodeURIComponent(`${route}#${section}`)}`);
   const frame=page.frameLocator('#physics-guide-frame');
   await expect(frame.locator('h1')).toBeVisible();await expect(frame.locator('body')).not.toHaveClass(/embedded/);
   await frame.locator(`[data-guide-action="${action}"]`).click();
   await expect(page).toHaveURL(url=>url.searchParams.get('try')===action&&url.searchParams.get('lesson')===`${route}#${section}`);
   await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
   await expect(page.locator('#window-guide')).toBeVisible();
-  await expect(page.frameLocator('#physics-guide-frame').locator('h1')).toHaveText(route==='/start.html'?'Tutorial 1 · Using the simulator':'Tutorial 6 · Model accuracy');
+  await expect(page.frameLocator('#physics-guide-frame').locator('h1')).toHaveText(route==='/start.html'?'Tutorial 1 · Fusion and its fuel supply':'Tutorial 6 · Model accuracy');
   if(action==='look'){
    await expect(page.locator('#fuel-view-representation')).toHaveValue('tracers');await expect(page.locator('#fuel-view-drive')).toHaveValue('all');
   }else{
@@ -77,7 +77,7 @@ test('all six tutorials share one simulator and expose a specific observation',a
  await page.locator('#fuel-motion-time').press('End');
  const input=await page.locator('#fuel-currentA').inputValue(),time=await page.locator('#fuel-motion-time').inputValue(),duration=await page.locator('#fuel-durationS').inputValue();
  for(const [route,action,plot]of [['/start.html','look',''],['/guide.html','momentum','momentum'],['/tutorial-03.html','work','heat'],['/tutorial-04.html','collectionExperiment','cut'],['/tutorial-05.html','inventoryExperiment','inventory'],['/tutorial-06.html','separationPlot','separation']]){
-  await frame.goto(route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
+  await frame.goto(route==='/start.html'?`${route}#machine`:route);await frame.locator(`[data-guide-action="${action}"]`).first().click();
   await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
   if(plot)await expect(page.locator('#fuel-plot')).toHaveValue(plot);
   await expect(page.locator('#fuel-currentA')).toHaveValue(input);await expect(page.locator('#fuel-durationS')).toHaveValue(duration);await expect(page.locator('#fuel-motion-time')).toHaveValue(time);await visibleClock(page);expect(context.pages().length).toBe(count);
@@ -87,7 +87,7 @@ test('all six tutorials share one simulator and expose a specific observation',a
 
 test('gas view clears unrelated windows and stages field, current, force and gas without changing inputs',async({page},info)=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const frame=await reader(page);await frame.goto('/start.html');
+ const frame=await reader(page);await frame.goto('/start.html#machine');
  await frame.locator('[data-guide-action="coils"]').click();await expect(page.locator('#fuel-component')).toHaveValue('coils');
  const current=await page.locator('#fuel-currentA').inputValue();
  await frame.locator('[data-guide-action="look"]').click();
@@ -143,7 +143,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
  await expect(page.locator('#fuel-plot')).toHaveValue('spin');
  await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
  await visibleClock(page);
- await frame.locator('a[href="#machine"]').click();
+ await frame.locator('#exercises a[href="#machine"]').click();
  const full=page.getByRole('link',{name:'Reading page'});
  await full.evaluate(link=>link.addEventListener('click',event=>event.preventDefault(),{once:true}));await full.click();await expect(full).toHaveAttribute('href',/^\/start(?:\.html)?#machine$/);
  await page.locator('#window-controls').scrollIntoViewIfNeeded();
@@ -155,7 +155,7 @@ test('tutorial controls keep their plot, clock and current reading section',asyn
 
 test('tutorial actions return from the reactor to the centrifuge without replacing its inputs',async({page})=>{
  await page.goto('/?level=2');await expect(page.locator('#fuel-export')).toBeEnabled({timeout:30_000});
- const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/start.html');
+ const current=await page.locator('#fuel-currentA').inputValue(),frame=await reader(page);await frame.goto('/start.html#machine');
  await frame.locator('[data-guide-action="look"]').click();
  await expect(page.getByRole('complementary',{name:'What to look for'})).toBeVisible();
  await frame.goto('/tutorial-05.html');
@@ -174,6 +174,7 @@ test('standalone beam entry and advanced navigation keep the reader with the cor
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();
  const frame=await readerFrame(page);await frame.goto('/guide.html');
  await frame.getByRole('link',{name:'Tutorial 1',exact:true}).click();
+ await frame.locator('#exercises > summary').click();
  await frame.locator('[data-guide-action="currentExperiment"]').click();
  await expect(page.locator('#marathon-apparatus')).toHaveValue('centrifuge');await expect(page.locator('#window-guide')).toBeVisible();await expect(page.getByRole('spinbutton',{name:'Radial discharge current (A)',exact:true})).toBeFocused();
 });
@@ -191,4 +192,20 @@ test('reference pages use the existing simulator rather than nesting a second ap
  await frame.goto('/qualification.html');await frame.getByRole('link',{name:'Mass Spinner'}).click();
  await expect(page.locator('#window-guide')).toBeHidden();await expect(page.locator('#fuel-currentA')).toHaveValue(current);
  expect(context.pages().length).toBe(pages);await expect(page.locator('.sim-workspace')).toHaveCount(1);
+});
+
+
+test('Tutorial 1 starts with fusion and reveals centrifuge exercises only when requested',async({page},info)=>{
+ await page.goto('/start.html');
+ await expect(page.getByRole('heading',{name:'Tutorial 1 · Fusion and its fuel supply',exact:true})).toBeVisible();
+ await expect(page.locator('#exercises')).not.toHaveAttribute('open','');
+ await expect(page.locator('[data-guide-action="look"]')).toBeHidden();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ await page.locator('main > nav a[href="#lithium"]').click();
+ await expect(page.locator('#lithium')).toBeInViewport();
+ await expect(page.locator('#lithium').locator('..')).toContainText('It does not turn lithium-7 into lithium-6.');
+ await page.locator('section[aria-labelledby="marathon"] a[href="#machine"]').click();
+ await expect(page.locator('#exercises')).toHaveAttribute('open','');
+ await expect(page.locator('#machine')).toBeInViewport();
+ await info.attach('fusion-before-centrifuge-controls',{body:await page.screenshot({fullPage:true}),contentType:'image/png'});
 });

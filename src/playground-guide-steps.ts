@@ -1,6 +1,6 @@
 /** Shared instructions for the separate guide and the older scene reader. */
 export const playgroundSteps=[
- {id:'machine',diagram:'drive',title:'What turns the gas?',intro:`We want a sample with more light ⁶Li relative to heavy ⁷Li. First, find which parts turn and which stay still.
+ {id:'machine',diagram:'drive',title:'What turns the gas?',intro:`The blanket needs a suitable lithium isotope mixture. The centrifuge changes this mixture by turning gas. First, find which parts turn and which stay still.
 
 Electric current is charge in motion. Ions are atoms or molecules with electric charge. Current across the axial magnetic field gives the charged gas a force around the cylinder. Collisions transfer rotation to neutral atoms. The vessel and electrodes stay still.
 

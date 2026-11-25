@@ -68,6 +68,10 @@ test('tutorial sections use a diagram, a comparison table or a direct explanatio
   assert.doesNotMatch(doc.body.textContent!,/Next: .*→/,'adjacent sections need no next links');
   const ids=[...doc.querySelectorAll('[id]')].map(n=>n.id);assert.equal(ids.length,new Set(ids).size);
   for(const heading of doc.querySelectorAll('h2[id]')){
+   if(doc.title.startsWith('Tutorial 1')&&['plant','lithium','marathon'].includes(heading.id)){
+    const section=heading.parentElement!;
+    assert.ok(section.querySelector('dl')||section.querySelector('a[href="/tutorial-05.html#chronology"]'),'the overview uses equipment descriptions or a fuel-cycle handoff');continue;
+   }
    if(heading.id==='path')continue; // This section links to further reading.
    if(doc.title.startsWith('Tutorial 5')&&['architecture','electricity'].includes(heading.id)){
     let content='';for(let n=heading.nextElementSibling;n&&n.tagName!=='H2';n=n.nextElementSibling)content+=n.outerHTML;
