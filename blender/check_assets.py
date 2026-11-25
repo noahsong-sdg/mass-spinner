@@ -44,6 +44,9 @@ modules = [n for n in assembly['nodes'] if n.get('extras', {}).get('assemblyModu
 assert len(modules) == 9
 contexts = [n for n in assembly['nodes'] if n.get('extras', {}).get('viewContext')]
 assert not contexts, 'Laboratory context must not enter the hardware asset'
+used = {index for mesh in assembly['meshes'] for primitive in mesh['primitives']
+        for index in [*primitive['attributes'].values(), primitive['indices']]}
+assert used == set(range(len(assembly['accessors']))), 'Unused geometry remains in the hardware asset'
 assert sum(bool(n['extras'].get('coilPack')) for n in modules) == 4
 for node in assembly['nodes']:
     if 'mesh' in node:
