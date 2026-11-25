@@ -144,5 +144,8 @@ test('Tutorial 1 motivates lithium separation from fusion and keeps controls opt
  const exercises=doc.querySelector<HTMLDetailsElement>('#exercises')!;
  assert.equal(exercises.open,false);
  assert.equal(exercises.querySelectorAll('.walkthrough-step').length,7);
+ exercises.open=true;
+ const navigationNames=[...doc.querySelectorAll('nav')].map(nav=>nav.getAttribute('aria-label'));
+ assert.equal(new Set(navigationNames).size,navigationNames.length,'open exercises must have distinct navigation landmark names');
  assert.ok(doc.querySelector('meta[name="darkreader-lock"]'));
 });

@@ -67,7 +67,7 @@ export function startPage(){
  <p><a href="https://www.marathonfusion.com/fusion-energy/">Marathon: fuel cycle</a> · <a href="https://www.marathonfusion.com/beam-driven-fusion/">Marathon: beam source</a> · <a href="https://arxiv.org/abs/2507.13461">Marathon: blanket proposal</a></p>
  </section>
  <details id="exercises" class="centrifuge-exercises"><summary>Centrifuge exercises</summary>
- ${guideContents(questions.map(([step])=>[step.id,step.title]))}
+ ${guideContents(questions.map(([step])=>[step.id,step.title]),'Centrifuge exercises')}
  ${questions.map(steps=>`<div data-core-question="${steps[0].id}">${steps.map((step,i)=>section(step,i?'h3':'h2')).join('')}</div>`).join('')}
  <aside aria-labelledby="compare">${section(compare,'h3')}</aside>
  </details>
