@@ -17,7 +17,7 @@ test('compact playback retains primary controls, usable scene space and focus ac
  const inset=()=>page.locator('#fuel-render').evaluate(node=>parseFloat((node as HTMLElement).style.getPropertyValue('--fuel-playback-inset')));
  const closedInset=await inset();expect(closedInset).toBeGreaterThan(0);
  await summary.click();await expect(details).toHaveAttribute('open','');
- await expect(page.locator('#fuel-motion-clock')).toBeVisible();await expect(page.locator('.fuel-motion-legend')).toBeVisible();
+ await expect(page.locator('#fuel-motion-clock')).toBeVisible();await expect(page.locator('#fuel-motion-time-label')).not.toBeVisible();await expect(page.locator('.fuel-motion-legend')).toBeVisible();
  const expanded=(await panel.boundingBox())!,body=(await details.locator('.fuel-motion-details-body').boundingBox())!;
  expect(body.width).toBeGreaterThan(expanded.width-24);
  expect(expanded.height).toBeLessThan(360);
