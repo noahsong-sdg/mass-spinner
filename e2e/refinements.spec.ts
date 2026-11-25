@@ -9,7 +9,7 @@ const examples=[
 
 function previousRun(action:string){
  const scenario={version:3,level:'2',controls:{'marathon-apparatus':'centrifuge','fuel-pair':'dt','fuel-application':'pump',
-  'fuel-currentA':.031,'fuel-gasK':700,'fuel-durationS':1,'fusion-beamCurrentA':Math.log10(.017),'fusion-beamEnergyKeV':120},
+  'fuel-currentA':.031,'fuel-gasK':700,'fuel-durationS':1,'fusion-beamCurrentA':-1.5,'fusion-beamEnergyKeV':120},
  fuelRun:{initialCurrentA:.031,events:[],mode:'transport',timeS:.25}};
  return `/?${new URLSearchParams({level:'2',v:'3',scenario:JSON.stringify(scenario),try:action,lesson:action.startsWith('beam')?'/tutorial-07.html#current':'/guide.html#drive'})}`;
 }
@@ -19,7 +19,7 @@ async function accepted(page:Page,beam=false){
 async function retainedInputs(page:Page){
  await expect(page.locator('#fuel-currentA')).toHaveValue('0.031');await expect(page.locator('#fuel-gasK')).toHaveValue('700');
  await expect(page.locator('#fuel-pair')).toHaveValue('dt');await expect(page.locator('#fuel-application')).toHaveValue('pump');
- await expect(page.locator('#fusion-beamCurrentA')).toHaveValue(String(Math.log10(.017)));await expect(page.locator('#fusion-beamEnergyKeV')).toHaveValue('120');
+ await expect(page.locator('#fusion-beamCurrentA')).toHaveValue('-1.5');await expect(page.locator('#fusion-beamEnergyKeV')).toHaveValue('120');
 }
 
 for(const [action,plot]of examples)test(`${action} preserves a shared run until explicit example replacement and restores it`,async({page})=>{
