@@ -1,0 +1,27 @@
+import {performance} from 'node:perf_hooks';
+import {DEFAULT_FUEL_CENTRIFUGE,simulateFuelCentrifuge} from '../src/fuel-centrifuge.js';
+import {simulateFuelOperation} from '../src/fuel-operation.js';
+import {sampleFuelTransport} from '../src/fuel-transport.js';
+import {createFuelMotion} from '../src/fuel-motion.js';
+import {sampleFuelField,createFuelFieldSampler} from '../src/fuel-field.js';
+function bench(name:string,fn:(i:number)=>void,n=180){
+ for(let i=0;i<30;i++)fn(i);
+ const samples=[];for(let i=0;i<n;i++){const start=performance.now();fn(i);samples.push(performance.now()-start);}
+ samples.sort((a,b)=>a-b);
+ return {name,n,meanMS:samples.reduce((a,b)=>a+b,0)/n,p50MS:samples[Math.floor(n*.5)],p95MS:samples[Math.floor(n*.95)]};
+}
+for(const cells of [64,256]){
+ const rotor=simulateFuelCentrifuge({...DEFAULT_FUEL_CENTRIFUGE});
+ const start=performance.now(),transport=simulateFuelOperation(rotor,{schemaVersion:1,events:[]},{cells});
+ const solveMS=performance.now()-start,result={...rotor,transport},motion=createFuelMotion(result);
+ const at=(i:number)=>.11+(i%180)/231;
+ const one=bench('transport sampler',i=>{sampleFuelTransport(transport,at(i));});
+ const update=bench('motion update once',i=>{motion.update(at(i),'transport',.125);});
+ const double=bench('UI motion update pair',i=>{motion.update(at(i),'transport');motion.update(at(i)+.0001,'transport',.125);});
+ const state=sampleFuelTransport(transport,.500123);
+ const field=bench('3 samples per field cell',()=>{for(let side=0;side<3;side++)for(let i=0;i<cells;i++)sampleFuelField(result,result.config.radiusM*Math.sqrt((i+.5)/cells),state);});
+ const actual=bench('UI clock and one update',i=>{motion.clock('transport');motion.update(at(i),'transport',.125);});
+ const fieldCurrent=bench('validated sampler once per field cell',()=>{const sample=createFuelFieldSampler(result,state);for(let i=0;i<cells;i++)sample(result.config.radiusM*Math.sqrt((i+.5)/cells));});
+ const copy=bench('structuredClone full result',()=>{structuredClone(result);},10);
+ console.log(JSON.stringify({cells,steps:transport.steps,checkpoints:transport.checkpoints?.length,snapshots:transport.snapshots.length,solveMS,resultJSONBytes:Buffer.byteLength(JSON.stringify(result)),benchmarks:[one,update,double,actual,field,fieldCurrent,copy]}));
+}
