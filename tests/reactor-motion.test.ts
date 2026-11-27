@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import {JSDOM} from 'jsdom';
 import {DEFAULT_FUSION_BEAM,simulateFusionBeam} from '../src/fusion-reactor.js';
 import {DEFAULT_COUPLED_TARGET,simulateCoupledTarget} from '../src/coupled-target.js';
-import {ionSpeedMS,motionPopulation,neutronDirection,sourceMotionState,targetMotionState,type BeamMotionState} from '../src/reactor-motion.js';
+import {ionSpeedMS,motionPopulation,neutronDirection,reactionDepthQuantile,sourceMotionState,targetMotionState,type BeamMotionState} from '../src/reactor-motion.js';
 import {createReactorMotionLayer} from '../src/reactor-motion-layer.js';
 import {createApparatusViewer} from '../src/apparatus-viewer.js';
 
@@ -18,8 +18,16 @@ test('beam visuals follow calculated current, energy, loading and stopping witho
  const noT=sourceMotionState(simulateFusionBeam({...DEFAULT_FUSION_BEAM,targetColumnM2:0}))!;
  assert.equal(noT.neutronRateS,0);assert.ok(noT.depositedPowerW>0);assert.equal(noT.particleRateS,initial.particleRateS);
  assert.equal(sourceMotionState(null),null);assert.deepEqual(initial.temperatureK,[],'initial source does not predict temperatures');
+ assert.equal(initial.reactionDepthCDF?.at(0)?.cumulativeFraction,0);assert.equal(initial.reactionDepthCDF?.at(-1)?.cumulativeFraction,1);
  for(const rate of [0,1,1e12,1e20])assert.ok(motionPopulation(rate,1e11,64)<=64);
  assert.equal(motionPopulation(0,1e11,64),0);assert.ok(motionPopulation(1e10,1e11,64)<motionPopulation(1e12,1e11,64));
+});
+
+test('reaction sites invert the solver cumulative depth profile instead of flashing on one plane',()=>{
+ const cdf=[{depthFraction:0,cumulativeFraction:0},{depthFraction:.25,cumulativeFraction:.8},{depthFraction:1,cumulativeFraction:1}];
+ assert.ok(Math.abs(reactionDepthQuantile(cdf,.4)-.125)<1e-12);
+ assert.ok(Math.abs(reactionDepthQuantile(cdf,.9)-.625)<1e-12);
+ assert.equal(reactionDepthQuantile(null,.5),0);
 });
 
 test('neutron directions cover solid angle without an artificial forward beam',()=>{

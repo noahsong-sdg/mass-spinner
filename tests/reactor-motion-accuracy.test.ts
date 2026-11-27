@@ -10,11 +10,11 @@ const CHARGE=1.602176634e-19,ATOMIC_MASS=1.66053906660e-27;
 const close=(actual:number,expected:number,tolerance=5e-6)=>assert.ok(Math.abs(actual-expected)<tolerance,`${actual} ≠ ${expected}`);
 
 /** Real animation buffers on a known SI beam axis; no WebGL mock decides their positions. */
-function fixture(t:TestContext,span=10){
+function fixture(t:TestContext,span=10,filmThickness=1e-6){
  const dom=new JSDOM('<div id="frame"></div>'),frame=dom.window.document.querySelector<HTMLDivElement>('#frame')!;
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:false,addEventListener(){},removeEventListener(){}})});
  const root=new THREE.Group();root.name='SI engineering assembly';
- for(const [id,x,depth]of [['target',.0000005,.000001],['accelerator',-span-.01,.02]] as const){
+ for(const [id,x,depth]of [['target',filmThickness/2,filmThickness],['accelerator',-span-.01,.02]] as const){
   const mesh=new THREE.Mesh(new THREE.BoxGeometry(depth,.12,.12),new THREE.MeshBasicMaterial());
   mesh.userData.componentId=id;mesh.position.x=x;root.add(mesh);
  }
@@ -27,6 +27,11 @@ function fixture(t:TestContext,span=10){
  const coordinates=(index:number)=>Array.from(object(index).geometry.getAttribute('position').array);
  return {layer,state,root,frame,point,count,coordinates};
 }
+
+test('reaction sites stay inside films thinner than one micrometre',t=>{
+ const thickness=1e-7,f=fixture(t,10,thickness);
+ for(let i=0;i<f.count(4);i++)assert.ok(f.point(4,i).x>0&&f.point(4,i).x<=thickness);
+});
 
 test('SI particle displacement follows kinetic speed, not the length of the display geometry',t=>{
  const short=fixture(t,10),long=fixture(t,20),dt=.01;
@@ -84,11 +89,7 @@ function neutronPairs(f:ReturnType<typeof fixture>){
   const direction=f.point(2,2*i+1).sub(f.point(2,2*i)).normalize();
   const opposite=f.point(2,2*(i+1)+1).sub(f.point(2,2*(i+1))).normalize();
   close(direction.length(),1,1e-6);close(opposite.length(),1,1e-6);close(opposite.dot(direction),-1,1e-5);
-  let birth=a.clone().add(b).multiplyScalar(.5);
-  if(Math.abs(direction.x)>1e-6){
-   const originA=a.clone().addScaledVector(direction,-a.x/direction.x),originB=b.clone().addScaledVector(opposite,-b.x/opposite.x);
-   close(originA.distanceTo(originB),0,1e-5);birth=originA.add(originB).multiplyScalar(.5);
-  }
+  const birth=a.clone().add(b).multiplyScalar(.5);
   close(a.distanceTo(birth),b.distanceTo(birth),1e-5);
   result.push({birth:birth.clone(),direction},{birth:birth.clone(),direction:opposite});
  }
@@ -99,7 +100,9 @@ test('runtime neutron source has no radial or transverse emission bias and resol
  const f=fixture(t);f.layer.update({...f.state,neutronRateS:1e30},f.root);assert.equal(f.count(1),64);
  const samples=neutronPairs(f),radius=Math.sqrt(f.state.areaM2/Math.PI),n=samples.length;
  const average=(fn:(sample:typeof samples[number])=>number)=>samples.reduce((sum,s)=>sum+fn(s),0)/n;
- close(average(s=>s.birth.x),0,1e-7);
+ const birthDepths=samples.map(sample=>sample.birth.x);
+ assert.ok(Math.min(...birthDepths)>0&&Math.max(...birthDepths)<=1e-6,'birth depths stay inside the modeled target');
+ assert.ok(Math.max(...birthDepths)-Math.min(...birthDepths)>1e-7,'birth depths sample the solved reaction profile');
  close(average(s=>(s.birth.y**2+s.birth.z**2)/radius**2),.5,.025);
  for(let axis=0;axis<3;axis++){
   close(average(s=>s.direction.getComponent(axis)),0,1e-5);

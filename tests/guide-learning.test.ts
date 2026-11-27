@@ -13,6 +13,10 @@ test('every reader has ordinary contents links and omits repetitive learning sca
   assert.equal(doc.querySelector('#guide-chapter,#learning-mode,textarea,[data-learning-hint],.learning-transfer'),null,name);
   assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question or control/);
   assert.ok(doc.querySelectorAll('.guide-contents a').length>0,`${name}: contents must be present`);
+  for(const contents of doc.querySelectorAll<HTMLElement>('.guide-contents')){
+   assert.ok(contents.querySelector('.guide-contents-title'),`${name}: contents needs a visible title`);
+   assert.equal(contents.querySelector('a span')?.textContent,'01',`${name}: contents needs numbered landmarks`);
+  }
   for(const link of doc.querySelectorAll<HTMLAnchorElement>('.guide-contents a'))assert.ok(doc.getElementById(link.hash.slice(1)),`${name}: ${link.hash}`);
   const before=[...doc.querySelectorAll<HTMLDetailsElement>('details')].map(detail=>detail.open);
   setupGuideReader(dom.window);
