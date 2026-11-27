@@ -10,11 +10,11 @@ const CHARGE=1.602176634e-19,ATOMIC_MASS=1.66053906660e-27;
 const close=(actual:number,expected:number,tolerance=5e-6)=>assert.ok(Math.abs(actual-expected)<tolerance,`${actual} ≠ ${expected}`);
 
 /** Real animation buffers on a known SI beam axis; no WebGL mock decides their positions. */
-function fixture(t:TestContext,span=10){
+function fixture(t:TestContext,span=10,filmThickness=1e-6){
  const dom=new JSDOM('<div id="frame"></div>'),frame=dom.window.document.querySelector<HTMLDivElement>('#frame')!;
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:false,addEventListener(){},removeEventListener(){}})});
  const root=new THREE.Group();root.name='SI engineering assembly';
- for(const [id,x,depth]of [['target',.0000005,.000001],['accelerator',-span-.01,.02]] as const){
+ for(const [id,x,depth]of [['target',filmThickness/2,filmThickness],['accelerator',-span-.01,.02]] as const){
   const mesh=new THREE.Mesh(new THREE.BoxGeometry(depth,.12,.12),new THREE.MeshBasicMaterial());
   mesh.userData.componentId=id;mesh.position.x=x;root.add(mesh);
  }
@@ -27,6 +27,11 @@ function fixture(t:TestContext,span=10){
  const coordinates=(index:number)=>Array.from(object(index).geometry.getAttribute('position').array);
  return {layer,state,root,frame,point,count,coordinates};
 }
+
+test('reaction sites stay inside films thinner than one micrometre',t=>{
+ const thickness=1e-7,f=fixture(t,10,thickness);
+ for(let i=0;i<f.count(4);i++)assert.ok(f.point(4,i).x>0&&f.point(4,i).x<=thickness);
+});
 
 test('SI particle displacement follows kinetic speed, not the length of the display geometry',t=>{
  const short=fixture(t,10),long=fixture(t,20),dt=.01;

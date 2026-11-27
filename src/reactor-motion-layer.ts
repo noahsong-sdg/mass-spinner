@@ -101,7 +101,7 @@ export function createReactorMotionLayer(frame:HTMLElement,changed:()=>void){
     si=root.name==='SI engineering assembly';
     // The accepted target front is solver z=0, not the centre of its cutaway or depth microscope.
     target=si?root.localToWorld(target.set(0,0,0)):b.getCenter(target);
-    end=si?target.x:b.min.x;target.x=end;targetDepth=si?Math.max(b.max.x-b.min.x,.000001):Math.max(b.max.x-b.min.x,.001);start=accelerator.max.x;span=Math.max(end-start,.001);
+    end=si?target.x:b.min.x;target.x=end;targetDepth=b.max.x-b.min.x;start=accelerator.max.x;span=Math.max(end-start,.001);
     // Reference units are illustrative; the full UI area range fits the .24-unit downstream bore.
     radius=si?Math.sqrt(state.areaM2/Math.PI):.2*Math.sqrt(state.areaM2/.1);
    }
