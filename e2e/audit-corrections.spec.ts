@@ -70,7 +70,8 @@ test('saved right-edge playback stays usable when the tutorial opens and the sce
   return elapsed>0&&scene.dataset.model==='Coupled run'&&plot.dataset.model==='Coupled run'
    &&Number(scene.dataset.timeS)===elapsed&&Number(plot.dataset.timeS)===elapsed;
  }),{timeout:30_000}).toBe(true);
- if(await play.getAttribute('aria-pressed')==='true')await play.click();
+ await play.evaluate(button=>{if(button.getAttribute('aria-pressed')==='true')(button as HTMLButtonElement).click();});
+ await expect(play).toHaveAttribute('aria-pressed','false');
  const elapsed=await time.inputValue();
  await page.getByRole('button',{name:'Close Tutorials',exact:true}).click();await expect(page.locator('#window-guide')).toBeHidden();await expect.poll(bounded).toBe(true);
  await page.getByRole('button',{name:'Docs & tutorials',exact:true}).click();await expect(page.locator('#window-guide')).toBeVisible();await expect.poll(bounded).toBe(true);
