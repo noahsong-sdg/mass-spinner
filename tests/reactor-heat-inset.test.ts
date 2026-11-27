@@ -6,7 +6,7 @@ import type {BeamMotionState} from '../src/reactor-motion.js';
 
 function selected(overrides:Partial<BeamMotionState>={}):BeamMotionState{
  return {kind:'beam',basis:'selected target state',timeS:1,energyKeV:100,areaM2:.02,
-  particleRateS:0,neutronRateS:0,neutronEnergyMeV:null,depositedPowerW:0,
+  particleRateS:0,neutronRateS:0,neutronEnergyMeV:null,depositedPowerW:0,reactionDepthCDF:null,
   temperatureK:[700,600,450,400],heatFacesWM2:[0,100,1000,10000,100000],
   heatGeometry:{faceDepthM:[0,.5e-6,2e-6,.001002,.004002],filmThicknessM:2e-6,backingThicknessM:.004},...overrides};
 }
