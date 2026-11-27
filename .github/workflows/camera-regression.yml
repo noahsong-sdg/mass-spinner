@@ -1,12 +1,9 @@
 name: Camera regression
 on:
-  push:
-    paths: ['.github/workflows/camera-regression.yml']
   workflow_dispatch:
     inputs:
       candidate_run_id:
         description: Verify run with a successful verify job and candidate-site artifact
-        default: '44586827476'
         required: true
 permissions:
   contents: read
@@ -23,7 +20,7 @@ jobs:
         id: candidate
         env:
           GH_TOKEN: ${{ github.token }}
-          RUN_ID: ${{ inputs.candidate_run_id || '44586827476' }}
+          RUN_ID: ${{ inputs.candidate_run_id }}
         run: |
           echo "$GITHUB_SHA" > camera-probe-revision.txt
           [[ "$RUN_ID" =~ ^[0-9]+$ ]]

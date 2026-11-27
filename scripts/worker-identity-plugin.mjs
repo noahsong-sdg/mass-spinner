@@ -1,5 +1,5 @@
 import {createHash} from 'node:crypto';
-import {readFileSync} from 'node:fs';
+import {readFileSync,realpathSync} from 'node:fs';
 import {relative,resolve} from 'node:path';
 
 const marker='__MASS_SPINNER_WORKER_IDENTITY_V1__';
@@ -9,6 +9,7 @@ const hash=value=>createHash('sha256').update(value).digest('hex');
 /** Bind the worker graph and any result calculations performed outside the worker. */
 /** @param {string} root @param {readonly string[]} additionalSources @returns {import("vite").Plugin} */
 export function workerIdentityPlugin(root,additionalSources=[]){
+ root=realpathSync(root);
  const identityModule=resolve(root,'src/worker-identity.ts');
  return {
   name:'worker-producing-code',
