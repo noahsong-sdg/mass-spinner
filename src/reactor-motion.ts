@@ -8,6 +8,8 @@ export interface BeamMotionState {
  energyKeV:number;areaM2:number;particleRateS:number;neutronRateS:number;neutronEnergyMeV:number|null;
  depositedPowerW:number;heatFacesWM2:number[];temperatureK:number[];
  heatGeometry:{faceDepthM:number[];filmThicknessM:number;backingThicknessM:number}|null;
+ /** Normalized cumulative D–T reaction probability through the modeled slab. */
+ reactionDepthCDF:{depthFraction:number;cumulativeFraction:number}[]|null;
 }
 export type ReactorMotionState=BeamMotionState|{kind:'power-reference'};
 const ATOMIC_MASS_KG=1.66053906660e-27;
@@ -17,10 +19,12 @@ export const ionSpeedMS=(s:BeamMotionState)=>kineticSpeedMS(s.energyKeV*1000*E_C
 
 export function sourceMotionState(result:ReturnType<typeof simulateFusionBeam>|null):BeamMotionState|null{
  if(!result)return null;
+ const total=result.fusionProbability;
  return {kind:'beam',basis:'initial source',timeS:null,energyKeV:result.config.beamEnergyKeV,areaM2:result.config.beamAreaM2,
   particleRateS:result.particleRateS,neutronRateS:result.neutronRateS,
   neutronEnergyMeV:result.neutronRateS>0?result.neutronPowerW/result.neutronRateS/E_CHARGE/1e6:null,
-  depositedPowerW:result.assemblyHeatIfTransmittedBeamStoppedW,heatFacesWM2:[],temperatureK:[],heatGeometry:null};
+  depositedPowerW:result.assemblyHeatIfTransmittedBeamStoppedW,heatFacesWM2:[],temperatureK:[],heatGeometry:null,
+  reactionDepthCDF:total>0?result.profiles.map(profile=>({depthFraction:profile.depthFraction,cumulativeFraction:profile.fusionProbability/total})):null};
 }
 
 /** Reuse the thermal solver's face conductances, including contact/Robin resistances.
@@ -36,7 +40,16 @@ export function targetMotionState({result,state,source}:CoupledTargetSnapshot):B
   particleRateS:state.beamOn?source.beamCurrentA/E_CHARGE:0,neutronRateS:state.neutronRateS,
   neutronEnergyMeV:state.neutronMeanEnergyMeV,depositedPowerW:state.assemblyHeatW,
   heatFacesWM2:heat.faceFluxWM2,temperatureK:[...state.temperatureK],
-  heatGeometry:{faceDepthM:[0,...cells.map((_,i)=>i<n?c.filmThicknessM*((i+1)/n):c.filmThicknessM+c.backingThicknessM*((i-n+1)/c.backingCells))],filmThicknessM:c.filmThicknessM,backingThicknessM:c.backingThicknessM}};
+  heatGeometry:{faceDepthM:[0,...cells.map((_,i)=>i<n?c.filmThicknessM*((i+1)/n):c.filmThicknessM+c.backingThicknessM*((i-n+1)/c.backingCells))],filmThicknessM:c.filmThicknessM,backingThicknessM:c.backingThicknessM},reactionDepthCDF:null};
+}
+
+export function reactionDepthQuantile(cdf:BeamMotionState['reactionDepthCDF'],quantile:number){
+ if(!cdf?.length||!Number.isFinite(quantile)||quantile<0||quantile>1)return 0;
+ for(let i=1;i<cdf.length;i++)if(quantile<=cdf[i].cumulativeFraction){
+  const left=cdf[i-1],right=cdf[i],span=right.cumulativeFraction-left.cumulativeFraction;
+  return span>0?left.depthFraction+(right.depthFraction-left.depthFraction)*(quantile-left.cumulativeFraction)/span:right.depthFraction;
+ }
+ return cdf.at(-1)!.depthFraction;
 }
 
 /** Fixed display scales: bounded populations, never one glyph per physical particle. */

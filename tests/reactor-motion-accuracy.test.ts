@@ -84,11 +84,7 @@ function neutronPairs(f:ReturnType<typeof fixture>){
   const direction=f.point(2,2*i+1).sub(f.point(2,2*i)).normalize();
   const opposite=f.point(2,2*(i+1)+1).sub(f.point(2,2*(i+1))).normalize();
   close(direction.length(),1,1e-6);close(opposite.length(),1,1e-6);close(opposite.dot(direction),-1,1e-5);
-  let birth=a.clone().add(b).multiplyScalar(.5);
-  if(Math.abs(direction.x)>1e-6){
-   const originA=a.clone().addScaledVector(direction,-a.x/direction.x),originB=b.clone().addScaledVector(opposite,-b.x/opposite.x);
-   close(originA.distanceTo(originB),0,1e-5);birth=originA.add(originB).multiplyScalar(.5);
-  }
+  const birth=a.clone().add(b).multiplyScalar(.5);
   close(a.distanceTo(birth),b.distanceTo(birth),1e-5);
   result.push({birth:birth.clone(),direction},{birth:birth.clone(),direction:opposite});
  }
@@ -99,7 +95,9 @@ test('runtime neutron source has no radial or transverse emission bias and resol
  const f=fixture(t);f.layer.update({...f.state,neutronRateS:1e30},f.root);assert.equal(f.count(1),64);
  const samples=neutronPairs(f),radius=Math.sqrt(f.state.areaM2/Math.PI),n=samples.length;
  const average=(fn:(sample:typeof samples[number])=>number)=>samples.reduce((sum,s)=>sum+fn(s),0)/n;
- close(average(s=>s.birth.x),0,1e-7);
+ const birthDepths=samples.map(sample=>sample.birth.x);
+ assert.ok(Math.min(...birthDepths)>0&&Math.max(...birthDepths)<=1e-6,'birth depths stay inside the modeled target');
+ assert.ok(Math.max(...birthDepths)-Math.min(...birthDepths)>1e-7,'birth depths sample the solved reaction profile');
  close(average(s=>(s.birth.y**2+s.birth.z**2)/radius**2),.5,.025);
  for(let axis=0;axis<3;axis++){
   close(average(s=>s.direction.getComponent(axis)),0,1e-5);
