@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtemp,readFile,writeFile,mkdir,rm,readdir} from 'node:fs/promises';
+import {mkdtemp,readFile,writeFile,mkdir,rm,readdir,symlink} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {productionSource,productionFunctions,productionEvent,productionScopeTail} from './helpers/production-code.js';
@@ -27,8 +27,10 @@ test('real Vite worker graph binds emitted result identity to transitive source 
    'src/reference.js':'export const project=value=>value;',
    'src/worker.js':`import {solve} from './solver.js';import {workerProducingCode} from './worker-identity.ts';self.onmessage=()=>self.postMessage({result:solve(),producingCode:workerProducingCode});`,
   }))await writeFile(resolve(root,file),text);
+  const alias=resolve(root,'project-alias');
+  await symlink(root,alias,'dir');
   const run=async()=>{
-   await build({root,configFile:false,logLevel:'silent',worker:{format:'es',plugins:()=>[workerIdentityPlugin(root,['src/reference.js'])]},build:{outDir:'out',emptyOutDir:true}});
+   await build({root,configFile:false,logLevel:'silent',worker:{format:'es',plugins:()=>[workerIdentityPlugin(alias,['src/reference.js'])]},build:{outDir:'out',emptyOutDir:true}});
    const worker=(await readdir(resolve(root,'out/assets'))).find(file=>file.startsWith('worker-'))!;
    const emitted=await readFile(resolve(root,'out/assets',worker),'utf8');
    let reply:any;const self={onmessage:null as any,postMessage:(value:unknown)=>{reply=value;}};
