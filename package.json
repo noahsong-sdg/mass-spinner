@@ -34,7 +34,7 @@
     "typescript-eslint": "8.73.0",
     "@playwright/test": "1.65.1",
     "@axe-core/playwright": "4.14.0",
-    "wrangler": "4.164.0",
+    "wrangler": "4.167.0",
     "ajv": "8.20.0",
     "gltf-validator": "2.0.0-dev.3.10",
     "@gltf-transform/core": "4.5.1",
