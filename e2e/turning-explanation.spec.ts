@@ -1,0 +1,33 @@
+import {test,expect} from '@playwright/test';
+
+test('the inward-force explanation shows motion, pressure and density in separate controllable steps',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/guide.html#composition');
+ const figure=page.locator('[data-turning-example]'),slider=figure.getByRole('slider',{name:'Force explanation progress'});
+ await expect(slider).toBeEnabled();await expect(figure).toHaveAttribute('data-motion','paused');
+ await figure.getByRole('button',{name:'Play motion',exact:true}).click();
+ const dot=figure.locator('[data-turning-dot]');
+ await expect.poll(()=>dot.getAttribute('cx')).not.toBe('225');
+ await figure.getByRole('button',{name:'Pause motion',exact:true}).click();
+ const stopped=await dot.getAttribute('cx');await page.waitForTimeout(150);expect(await dot.getAttribute('cx')).toBe(stopped);
+ await slider.press('End');await expect(figure).toHaveAttribute('data-motion','paused');
+ await expect(figure.locator('[data-turning-free]')).toHaveAttribute('cy','65');
+ await figure.getByRole('button',{name:'2 Pressure',exact:true}).click();
+ await expect(slider).toHaveValue('0');await expect(figure.locator('[data-turning-panel="0"]')).toBeHidden();
+ await expect(figure.locator('[data-turning-panel="1"] svg').last()).toBeVisible();
+ await expect(figure.locator('[data-pressure-inner]')).toHaveAttribute('aria-label','Outward force from pressure on the inner face');
+ await expect(figure.locator('[data-pressure-outer]')).toHaveAttribute('aria-label','Inward force from pressure on the outer face');
+ await expect(figure.locator('[data-turning-note]')).toContainText('not an extra force');
+ const net=figure.locator('[data-pressure-net]');
+ await expect(net).toHaveAttribute('x1','170');await expect(net).toHaveAttribute('x2','140');
+ expect(await net.evaluate(node=>getComputedStyle(node).strokeWidth)).toBe('3px');
+ await info.attach('inward-pressure-balance',{body:await figure.screenshot(),contentType:'image/png'});
+ await figure.getByRole('button',{name:'3 Density',exact:true}).click();await slider.press('End');
+ await expect(figure.locator('[data-turning-ratios]')).toContainText('⁶Li 5.09× · ⁷Li 6.68×');
+ await expect(figure.locator('[data-turning-panel="1"]')).toBeHidden();
+ await figure.getByRole('button',{name:'Replay',exact:true}).click();await expect(figure).toHaveAttribute('data-motion','running');
+ await expect.poll(async()=>Number(await slider.inputValue())).toBeGreaterThan(0);
+ await slider.press('Home');await expect(figure).toHaveAttribute('data-motion','paused');
+ await expect(figure.locator('[data-turning-ratios]')).toContainText('⁶Li 1.00× · ⁷Li 1.00×');
+ expect(errors).toEqual([]);
+});

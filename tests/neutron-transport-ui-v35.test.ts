@@ -18,7 +18,7 @@ const source={sourceRateS:2e10,sourceEnergyMeV:14.1};
 
 test('first-flight UI uses a vacuum default and exact current selected-time source',t=>{
  const {host,ui,input}=mount(t);
- assert.equal(ui.read(),null);assert.match(host.querySelector('[role=status]')!.textContent!,/No valid source/);
+ assert.equal(ui.read(),null);assert.match(host.querySelector('[role=status]')!.textContent!,/No source result is available/);
  ui.update(source);const initial=ui.read()!;
  assert.equal(initial.config.layers[0].totalMInv,0);assert.equal(initial.config.layers[0].absorptionMInv,0);
  assert.equal(initial.rates.firstAbsorbed,0);assert.equal(initial.detectionRateS,0);
@@ -40,7 +40,7 @@ test('actual material controls produce interactions with explicitly assumed resp
  assert.ok(result.rates.firstAbsorbed>0);assert.ok(result.rates.firstScatteredUnresolved>result.rates.firstAbsorbed);
  assert.ok(result.detectionRateS>0);assert.ok(result.detectionRateS<source.sourceRateS);
  assert.ok(Math.abs(Object.values(result.fractions).reduce((a,b)=>a+(b as number),0)-1)<1e-12);
- assert.match(host.textContent!,/scenario inputs/);assert.match(host.textContent!,/unresolved/);
+ assert.match(host.textContent!,/You specify custom coefficients at the selected neutron energy/);assert.match(host.textContent!,/unresolved/);
  assert.equal(host.querySelector<HTMLButtonElement>('button')!.disabled,false);
 });
 
@@ -79,7 +79,7 @@ test('angular-refinement disclosure runs actual model at multiple quadrature cou
  const {host,ui,input,dom}=mount(t);ui.update(source);input('total',100);input('absorption',50);
  const disclosure=[...host.querySelectorAll('details')].find(d=>d.querySelector('summary')!.textContent==='Angular refinement')!;
  disclosure.open=true;disclosure.dispatchEvent(new dom.window.Event('toggle'));
- assert.ok(disclosure.querySelector('svg'));assert.match(disclosure.textContent!,/Quadrature sensitivity only/);
+ assert.ok(disclosure.querySelector('svg'));assert.match(disclosure.textContent!,/sensitivity to angular quadrature only/);
  // Each requested coarse count returns the doubled fine result; the axis must
  // describe the actual returned quadrature, whose final count is 512.
  assert.match(disclosure.querySelector('svg')!.textContent!,/512/);
@@ -125,7 +125,7 @@ test('evaluated H-1 withholds energyless and unsupported states then recovers wi
  const select=host.querySelector<HTMLSelectElement>('#neutron-transport-material')!;
  select.value='endfb-h1';select.dispatchEvent(new dom.window.Event('change'));assert.ok(ui.read());
  ui.update({sourceRateS:0,sourceEnergyMeV:null});assert.equal(ui.read(),null);
- assert.match(host.querySelector('[role=status]')!.textContent!,/Beam off/);
+ assert.match(host.querySelector('[role=status]')!.textContent!,/The beam is off\. H-1 coefficients use the energy of emitted neutrons/);
  assert.equal(host.querySelector<HTMLButtonElement>('button')!.disabled,true);assert.equal(host.querySelector('.live-plots')!.children.length,0);
  ui.update({...source,sourceEnergyMeV:.05});assert.equal(ui.read(),null);
  assert.equal(host.querySelector<HTMLButtonElement>('button')!.disabled,true);
@@ -140,8 +140,8 @@ test('recorded OpenMC reference distinguishes multiple scattering from the live 
  assert.match(table.querySelector('caption')!.textContent!,/Recorded OpenMC/);
  assert.match(table.querySelector('[data-case="pure-absorption"]')!.textContent!,/0.06635/);
  assert.match(table.querySelector('[data-case="mixed"]')!.textContent!,/0.03561/);
- assert.match(host.textContent!,/Recorded multiple-scattering runs/);
- assert.match(host.textContent!,/separate from the current sliders/);
+ assert.match(host.textContent!,/recorded multiple-scattering runs/);
+ assert.match(host.textContent!,/current sliders do not change them/);
  const reference=ui.read()!.referenceEvidence;
  assert.equal(reference.historiesPerCase,500000);assert.equal(reference.fullBrowserMonteCarlo,false);
  assert.equal(reference.experimentalValidation,false);assert.equal(reference.appliesToCurrentControls,false);

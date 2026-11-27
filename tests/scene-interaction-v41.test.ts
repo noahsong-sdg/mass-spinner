@@ -14,7 +14,7 @@ const snapshot=(length=1)=>({model:'rotating',domain:{kind:'cylinder',radiusM:.2
  counts:[],scalars:[],unsupported:[],impacts:[],tracks:[{speciesIndex:0,positionsM:[[.1,.15,0],[.1,.15,length]],scope:'Interior trajectory'}]});
 
 async function viewerFixture(t:any){
- const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
+ const dom=new JSDOM('<main></main>',{pretendToBeVisual:true}),frame=dom.window.document.querySelector('main')!;
  const original=(globalThis as any).ResizeObserver;(globalThis as any).ResizeObserver=class{observe(){}disconnect(){}};
  frame.getBoundingClientRect=()=>bounds;
  let camera:THREE.PerspectiveCamera,controls:any,scene:THREE.Scene;
@@ -43,6 +43,7 @@ test('hardware picking ignores non-actionable trajectories across apparatus scal
   for(const name of ['pointerdown','pointerup'])h.viewer.canvas.dispatchEvent(new h.dom.window.MouseEvent(name,{clientX:400,clientY:300,button:0}));
   assert.equal(h.selected.length,before+1,'each scale must produce a new hardware selection');
   assert.equal(h.selected.at(-1),'vessel',`trajectory must not consume a hardware click at scale ${scale}`);
+  assert.equal(h.viewer.canvas.getAttribute('data-assembly-state'),'separating');
  }
 });
 

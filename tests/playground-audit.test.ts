@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {renderPlots} from '../src/laboratory.js';
+import {productionSource,productionFunctions,productionAssignment,productionMethodCall,productionEventBody} from './helpers/production-code.js';
+import {renderPlots,geometryModes,transportModes} from '../src/laboratory.js';
 import {simulate,DEFAULT_CONFIG} from '../src/physics.js';
 import {geometry,DEFAULT_GEOMETRY} from '../src/geometries.js';
 import {modelValidity} from '../src/limitations-ui.js';
@@ -9,9 +10,12 @@ import {setupResearchViewer} from '../src/research-ui.js';
 import * as THREE from 'three';
 
 class Node{
- children:Node[]=[];attributes:Record<string,string>={};events:Record<string,(e?:any)=>unknown>={};textContent='';value='';disabled=false;
+ children:Node[]=[];parentElement:Node|null=null;dataset:Record<string,string>={};attributes:Record<string,string>={};events:Record<string,(e?:any)=>unknown>={};textContent='';value='';disabled=false;
  constructor(public tag='div'){}
- append(...nodes:Node[]){this.children.push(...nodes);}replaceChildren(...nodes:Node[]){this.children=nodes;}
+ append(...nodes:Node[]){for(const node of nodes){node.remove();node.parentElement=this;this.children.push(node);}}
+ replaceChildren(...nodes:Node[]){for(const node of this.children)node.parentElement=null;this.children=[];this.append(...nodes);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(node:Node,before:Node|null){node.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,node);node.parentElement=this;return node;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,f:(e?:any)=>unknown){this.events[k]=f;}
 }
 function dom(t:any){
@@ -32,9 +36,8 @@ test('survival scales are physical and exact samples can be inspected with the k
  assert.equal(prevented,4);key('Tab');assert.equal(prevented,4);
 });
 test('production resize observer preserves camera validity across hidden levels',()=>{
- const source=readFileSync('src/main.js','utf8'),endMarker="observer.observe($('stage'));";
- const start=source.indexOf('observer=new ResizeObserver('),end=source.indexOf(endMarker,start);
- assert.ok(start>=0&&end>start,'Production scene owns and registers its resize observer');
+ const source=productionSource('src/legacy-renderer.ts');
+ const resizeObserver=productionAssignment(source,'observer')+productionMethodCall(source,'observer','observe');
  let bounds={width:0,height:0},projections=0;
  let callback:()=>void=()=>assert.fail('Resize callback was not registered');
  const sizes:unknown[][]=[],observed:unknown[]=[];
@@ -44,8 +47,8 @@ test('production resize observer preserves camera validity across hidden levels'
  const renderer={setSize:(...size:unknown[])=>sizes.push(size)};
  const stage={getBoundingClientRect:()=>bounds},$=(id:string)=>{assert.equal(id,'stage');return stage;};
  class Observer {constructor(notify:()=>void){callback=notify;}observe(target:unknown){observed.push(target);}}
- const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('async function initScene()'));
- new Function('$','renderer','camera','controls','THREE','ResizeObserver',`let observer;const legacyRadius=2;${helpers}${source.slice(start,end+endMarker.length)}`)($,renderer,camera,controls,THREE,Observer);
+ const helpers=productionFunctions(source,['legacyFitDistance','resetCamera','resizeScene']);
+ new Function('$','renderer','camera','controls','THREE','ResizeObserver',`let observer;const legacyRadius=2;${helpers}${resizeObserver}`)($,renderer,camera,controls,THREE,Observer);
  assert.deepEqual(observed,[stage]);callback();assert.equal(camera.aspect,1);assert.equal(sizes.length,0);assert.equal(projections,0);
  bounds={width:640,height:480};callback();assert.equal(camera.aspect,4/3);assert.deepEqual(sizes,[[640,480,false]]);assert.equal(projections,1);
  for(const hidden of [{width:0,height:0},{width:0,height:480},{width:640,height:0}]){
@@ -54,8 +57,8 @@ test('production resize observer preserves camera validity across hidden levels'
 });
 
 test('actual legacy first-use fit contains the hardware at narrow aspect and resize preserves user framing',()=>{
- const source=readFileSync('src/main.js','utf8');
- const helpers=source.slice(source.indexOf('function legacyFitDistance()'),source.indexOf('async function initScene()'));
+ const source=productionSource('src/legacy-renderer.ts');
+ const helpers=productionFunctions(source,['legacyFitDistance','resetCamera','resizeScene']);
  const hardware=new THREE.Group();hardware.add(new THREE.Mesh(new THREE.BoxGeometry(4,1.8,1.6),new THREE.MeshBasicMaterial()));hardware.position.set(.2,.1,-.1);hardware.updateMatrixWorld(true);
  const box=new THREE.Box3().setFromObject(hardware),sphere=box.getBoundingSphere(new THREE.Sphere()),legacyCenter=sphere.center,legacyRadius=sphere.radius;
  const camera=new THREE.PerspectiveCamera(33,1,.05,100),controls={target:new THREE.Vector3(),minDistance:2,maxDistance:10,update(){camera.lookAt(this.target);camera.updateMatrixWorld();}};
@@ -65,9 +68,7 @@ test('actual legacy first-use fit contains the hardware at narrow aspect and res
  const inside=()=>{for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const point=new THREE.Vector3(x,y,z).project(camera);assert.ok(Math.abs(point.x)<1&&Math.abs(point.y)<1,`legacy hardware clipped at ${bounds.width}x${bounds.height}: ${point.toArray()}`);}};
  inside();assert.ok(controls.maxDistance>=camera.position.distanceTo(controls.target)-1e-12);
  assert.ok(camera.position.distanceTo(controls.target)>10,'narrow first-use fit exceeds the former fixed keyboard limit');
- const keyStart=source.indexOf('keyboard=event=>{'),keyEnd=source.indexOf("};$('scene').addEventListener",keyStart);
- assert.ok(keyStart>=0&&keyEnd>keyStart);
- const key=new Function('camera','controls','THREE',`let keyboard;${source.slice(keyStart,keyEnd+2)}return keyboard;`)(camera,controls,THREE);
+ const key=new Function('camera','controls','THREE',`let keyboard;${productionAssignment(source,'keyboard')}return keyboard;`)(camera,controls,THREE);
  const resetDistance=camera.position.distanceTo(controls.target);key({key:'-',preventDefault(){}});
  assert.ok(camera.position.distanceTo(controls.target)>resetDistance,'minus immediately zooms outward after a narrow reset');
  assert.ok(camera.position.distanceTo(controls.target)<=controls.maxDistance+1e-12);assert.ok(camera.far>controls.maxDistance);
@@ -92,18 +93,19 @@ test('offered 8ns resolves the supported high charge/mass orbit point without we
 });
 test('grossly invalid curved-drift settings are labeled as extrapolation',()=>{
  const c={...DEFAULT_GEOMETRY,massA:200,magneticT:.02,temperatureEV:30,beamEV:2000,curvatureRadius:.2,length:.1};
- const result=geometry('curved',c);assert.match(modelValidity('curved',c,result),/Outside guiding-centre approximation/);
+ const result=geometry('curved',c);assert.match(modelValidity('curved',c,result),/Outside the guiding-center approximation/);
  assert.match(modelValidity('curved',DEFAULT_GEOMETRY,geometry('curved',DEFAULT_GEOMETRY)),/Requires rho/);
 });
 test('comparison cards retain the actual independent operating points and model boundaries',async t=>{
- const {$,document}=dom(t),source=readFileSync('src/main.js','utf8');
- const marker="$('compare').addEventListener('click',async()=>{",start=source.indexOf(marker)+marker.length;
- const body=source.slice(start,source.indexOf("\n});\n$('export')",start));
+ const {$,document}=dom(t),source=productionSource('src/main.ts');
+ const body=`const ions=()=>[],reducedConfig=selected=>config(selected);${productionFunctions(source,['prepareRun','calculateRun'])}${productionEventBody(source,'compare')}`;
  const AsyncFunction=Object.getPrototypeOf(async()=>{}).constructor;
- const handler=new AsyncFunction('revision','comparisonController','coreModes','config','calculate','isReduced','guide','numeric','modelValidity','$','document','workspace',body);
+ const handler=new AsyncFunction('revision','comparisonController','coreModes','config','calculate','isReduced','guide','numeric','modelValidity','$','document','workspace','geometryModes','transportModes',body);
  const modes=['curved','doublewell'],configs=modes.map((_,i)=>({...DEFAULT_GEOMETRY,magneticT:.1+i*.1}));
  const opened:string[]=[];
- await handler(0,undefined,modes,(s:string)=>configs[modes.indexOf(s)],(s:any,c:any)=>Promise.resolve(geometry(s,c)),()=>true,(s:string)=>({title:s,fidelity:'limits'}),String,modelValidity,$,document,{open:(key:string)=>opened.push(key)});
+ await handler(0,undefined,modes,(s:string)=>configs[modes.indexOf(s)],(s:any,c:any,_signal:any,withIdentity:boolean)=>{assert.equal(withIdentity,true);return Promise.resolve({result:geometry(s,c),producingCode:null});},()=>true,(s:string)=>({title:s,fidelity:'limits'}),String,modelValidity,$,document,{open:(key:string)=>opened.push(key)},geometryModes,transportModes);
+ // DOM listeners intentionally return void; drain the resolved worker microtasks.
+ await new Promise<void>(resolve=>setImmediate(resolve));
  assert.deepEqual(opened,['plots']);
  const cards=$('comparison-results').children;assert.equal(cards.length,2);
  for(let i=0;i<2;i++){
@@ -117,7 +119,7 @@ test('recorded case and time controls display exact saved tensors and prevent fa
  const viewer=await setupResearchViewer(async()=>({ok:true,json:async()=>data}));assert.ok(viewer);
  $('replay-case').value=data.cases[2].id;$('replay-case').events.change();
  $('replay-time').value='20';$('replay-time').events.input();
- assert.match($('replay-status').textContent,/Recorded Julia run/);assert.match($('replay-status').textContent,/WITHHELD/);
+ assert.match($('replay-status').textContent,/Saved Julia run/);assert.match($('replay-status').textContent,/Accuracy is not established/);
  assert.equal($('replay-tensors').children[0].children[1].textContent,data.cases[2].states[20].temperatureTensorEV[0].map((row:number[])=>row.map(v=>v.toPrecision(5).padStart(11)).join(' ')).join('\n'));
  assert.equal($('replay-plots').children.length,3);
  await setupResearchViewer(async()=>({ok:false}));assert.equal($('replay-case').disabled,true);assert.equal($('replay-plots').children.length,0);

@@ -34,7 +34,7 @@ test('differential pumping has one outer outlet and one stage; isotope separatio
 });
 
 test('lithium hot liner follows gas radius, separated from the outer vacuum envelope and independently chosen gas temperature',()=>{
- const lithium=build({linerK:1100});const liner=named(lithium,'Lithium refractory sub-vessel');assert.equal(liner.userData.temperatureK,1100);assert.match(liner.userData.purpose,/no temperature evolution or spatial thermal field is solved/);assert.match(liner.userData.materialBasis,/tungsten/);close(liner.userData.gasBoundaryRadiusM,config.radiusM);
+ const lithium=build({linerK:1100});const liner=named(lithium,'Lithium refractory sub-vessel');assert.equal(liner.userData.temperatureK,1100);assert.match(liner.userData.purpose,/does not calculate temperature evolution or a spatial thermal field/);assert.match(liner.userData.materialBasis,/tungsten/);close(liner.userData.gasBoundaryRadiusM,config.radiusM);
  const p=liner.geometry.getAttribute('position'),radii=Array.from({length:p.count},(_,i)=>Math.hypot(p.getX(i),p.getY(i)));
  close(Math.min(...radii),config.radiusM);close(Math.max(...radii),config.radiusM*1.012);
  assert.ok(Math.max(...radii)<lithium.userData.vacuumEnvelopeRadiusM,'illustrative thickness extends outward, preserving the gas bore');
@@ -42,22 +42,26 @@ test('lithium hot liner follows gas radius, separated from the outer vacuum enve
  const helium=build({pair:'helium'});assert.equal(members(helium,'liner').length,0);assert.equal(named(helium,'Vessel pressure wall').parent!.scale.x,1);release(helium);
 });
 
-test('lithium liner cutaway opens toward the same inspection direction as the engineering shell',()=>{
- const scene=build(),liner=named(scene,'Lithium refractory sub-vessel'),center=scene.localToWorld(new THREE.Vector3(0,0,config.lengthM/2));
+test('the complete lithium liner opens toward the inspection direction only through display clipping',()=>{
+ const {scene,tools}=buildFuelCentrifugeGeometry({config,result:simulateFuelCentrifuge(config),diagnostics:true});
+ const liner=named(scene,'Lithium refractory sub-vessel'),center=scene.localToWorld(new THREE.Vector3(0,0,config.lengthM/2));
  const open=new THREE.Vector3(0,1,0).transformDirection(scene.matrixWorld),closed=open.clone().negate();
- assert.equal(new THREE.Raycaster(center,open).intersectObject(liner).length,0);assert.ok(new THREE.Raycaster(center,closed).intersectObject(liner).length>0);release(scene);
+ const hits=(direction:THREE.Vector3)=>new THREE.Raycaster(center,direction).intersectObject(liner).filter(tools.visibleHit);
+ assert.ok(hits(open).length>0);assert.ok(hits(closed).length>0);
+ tools.setStaging({cutaway:.5});assert.equal(hits(open).length,0);assert.ok(hits(closed).length>0);
+ tools.setStaging({cutaway:0});assert.ok(hits(open).length>0);assert.ok(hits(closed).length>0);tools.dispose();release(scene);
 });
 
 test('spatial thermal liner inspection distinguishes solved temperatures from illustrative shell shading',()=>{
  const result={...simulateFuelCentrifuge(config),profiles:profiles(),transport:{operation:{thermal:{enabled:true,spatial:{material:'tungsten',thicknessM:.001,cells:16}}}}};
  const {scene}=buildFuelCentrifugeGeometry({config,result});const liner=named(scene,'Lithium refractory sub-vessel');
  assert.equal(liner.userData.temperatureBasis,'Initial radial liner temperature');
- assert.match(liner.userData.purpose,/radial temperatures evolve/);assert.match(liner.userData.purpose,/shading remain illustrative/);assert.doesNotMatch(liner.userData.purpose,/evolving liner temperature is a lumped reservoir/);release(scene);
+ assert.match(liner.userData.purpose,/Radial temperatures evolve/);assert.match(liner.userData.purpose,/shading are for illustration/);assert.doesNotMatch(liner.userData.purpose,/evolving liner temperature describes one reservoir/);release(scene);
 });
 
 test('hollow cathode has actual gas openings and annular current drive follows chosen radius',()=>{
  const scene=build({driveInnerFraction:.7});const jacket=named(scene,'Perforated tungsten cathode jacket');assert.ok(jacket.geometry.getIndex()!.count<48*16*6);
- assert.ok(named(scene,'LaB₆ thermionic emitter'));assert.match(jacket.userData.purpose,/not the modeled radial-current endpoint/);
+ assert.ok(named(scene,'LaB₆ thermionic emitter'));assert.match(jacket.userData.purpose,/not the radial-current endpoint in the model/);
  const inner=named(scene,'Inner annular drive cathode'),outer=named(scene,'Outer wall drive anode');
  function radii(mesh:THREE.Mesh){const p=mesh.geometry.getAttribute('position');let lo=Infinity,hi=0;for(let i=0;i<p.count;i++){const radius=Math.hypot(p.getX(i),p.getY(i));lo=Math.min(lo,radius);hi=Math.max(hi,radius);}return [lo,hi];}
  close(radii(inner)[1],.7*config.radiusM);close(radii(outer)[0],config.radiusM);assert.ok(radii(inner)[1]<radii(outer)[0]);
@@ -81,7 +85,7 @@ test('collection radius, upstream inlet conductance and downstream pump speed fo
 
 test('radial colors carry the accepted equilibrium fractions and no particle-trajectory claim',()=>{
  const scene=build();const samples=members(scene,'profile');assert.equal(samples.length,12);
- samples.forEach((mesh,i)=>{const accepted=profiles()[i+1];close(mesh.userData.radiusM,accepted.radiusM);close(mesh.userData.lightFraction,accepted.lightFraction);assert.match(mesh.userData.purpose,/No finite-residence extraction prediction/);assert.match(mesh.userData.materialBasis,/no physical material/);});
+ samples.forEach((mesh,i)=>{const accepted=profiles()[i+1];close(mesh.userData.radiusM,accepted.radiusM);close(mesh.userData.lightFraction,accepted.lightFraction);assert.match(mesh.userData.purpose,/does not calculate extraction during a finite residence time/);assert.match(mesh.userData.materialBasis,/without physical material/);});
  assert.notEqual((samples[0].material as THREE.MeshStandardMaterial).color.getHex(),(samples.at(-1)!.material as THREE.MeshStandardMaterial).color.getHex());release(scene);
 });
 
@@ -89,7 +93,7 @@ test('schematic routing is an outline and numerical composition colors are indep
  const scene=build();
  for(const mesh of scene.getObjectsByProperty('name','Stage partition') as THREE.Mesh[]){
   assert.equal(mesh.geometry.type,'TorusGeometry');assert.equal((mesh.material as THREE.MeshBasicMaterial).isMeshBasicMaterial,true);assert.equal((mesh.material as THREE.Material).transparent,true);
-  assert.match(mesh.userData.geometryBasis,/Routing overlay only/);
+  assert.match(mesh.userData.geometryBasis,/Routing illustration only/);
  }
  for(const mesh of members(scene,'profile')){assert.equal((mesh.material as THREE.MeshBasicMaterial).isMeshBasicMaterial,true);assert.equal((mesh.material as THREE.Material).depthWrite,false);}
  release(scene);
@@ -104,7 +108,11 @@ test('unresolved composition remains null and visibly neutral rather than invent
 
 test('every visible construction and overlay is pickable with honest material and geometry metadata',()=>{
  const scene=build(),ids=new Set(FUEL_COMPONENTS.map(c=>c.id));let meshes=0;
- scene.traverse((node:any)=>{if(!node.isMesh)return;meshes++;assert.ok(ids.has(node.userData.componentId),node.name);assert.equal(typeof node.userData.materialBasis,'string',node.name);assert.equal(typeof node.userData.purpose,'string',node.name);assert.match(node.userData.geometryBasis,/illustrative/i,node.name);
+ scene.traverse((node:any)=>{if(!node.isMesh)return;meshes++;assert.ok(ids.has(node.userData.componentId),node.name);assert.equal(typeof node.userData.materialBasis,'string',node.name);assert.equal(typeof node.userData.purpose,'string',node.name);
+  const basis=node.userData.quantitativeOnly
+   ?node.isInstancedMesh?/Accepted SI centre positions; enlarged marker dimensions are illustrative/:/Accepted chamber SI dimensions\. Arrow widths and display positions are schematic/
+   :node.parent?.name==='Discharge circuit'?/Schematic external circuit connections\. This drawing does not specify manufactured wiring or electrical ratings/:/Dimensions and construction are for illustration/;
+  assert.match(node.userData.geometryBasis,basis,node.name);
   for(const attribute of Object.values(node.geometry.attributes) as THREE.BufferAttribute[])for(const value of attribute.array)assert.ok(Number.isFinite(value),node.name);
  });assert.ok(meshes>100);release(scene);
 });

@@ -1,0 +1,52 @@
+name: Public data qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-data:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare isolated dependencies
+        run: |
+          docker build -t public-data - <<'DOCKERFILE'
+          FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv && rm -rf /var/lib/apt/lists/*
+          RUN python3 -m venv /opt/science && /opt/science/bin/pip install numpy==2.4.6 matplotlib==3.10.8
+          ENV PATH="/opt/science/bin:$PATH"
+          DOCKERFILE
+          docker build -t public-fenics scientific/public-fenicsx-reference
+          docker image inspect public-data public-fenics --format '{{.Id}}'
+          docker run --rm --cpus 1 --memory 1g --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work --env HOME=/tmp public-data npm ci --ignore-scripts --no-audit --no-fund
+      - name: Execute offline public-data and component checks
+        run: |
+          mkdir campaign-results
+          docker run --rm --network none --cpus 1 --memory 1g --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work --env HOME=/tmp --env MPLCONFIGDIR=/tmp/matplotlib --env OPENBLAS_NUM_THREADS=1 public-data sh -eu -c '
+            python3 -m unittest discover -s scientific/public-data-campaign -p "test_*.py" -v
+            python3 scientific/public-data-campaign/study.py campaign-results/public-data
+            node --import tsx --test --test-concurrency=1 tests/public-components.test.ts tests/public-sensitivity.test.ts tests/public-sensitivity-ui.test.ts
+            node --import tsx scripts/qualify-public-components.mjs campaign-results/components.json
+            npm run typecheck
+            npm run build
+            npm run check:site
+          '
+      - name: Execute independent angular reference offline
+        run: |
+          docker run --rm --network none --cpus 1 --memory 2g --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work --env HOME=/tmp public-fenics sh -eu -c '
+            python3 -m unittest discover -s scientific/public-fenicsx-reference -p "test_*.py" -v
+            python3 scientific/public-fenicsx-reference/reference.py campaign-results/fenics-reference.json
+            python3 -m unittest discover -s scientific/finite-contact-reference -p "test_*.py" -v
+            python3 scientific/finite-contact-reference/campaign.py campaign-results/finite-contacts.json
+            python3 -m unittest discover -s scientific/voltage-footprint-reference -p "test_*.py" -v
+            python3 scientific/voltage-footprint-reference/voltage_campaign.py campaign-results/voltage-footprint.json
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: public-data-qualification
+          path: campaign-results/
+          if-no-files-found: error

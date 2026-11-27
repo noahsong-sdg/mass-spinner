@@ -60,26 +60,26 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
  const {durationS:_duration,currentA:_current,...setup}=c;
  model.operation={schemaVersion:1,events:structuredClone(operation.events),thermal:{...thermal},setup,initialCurrentA:c.currentA};
  model.assumptions=[...model.assumptions.filter(s=>!thermal.enabled||!s.startsWith('Isothermal independent')),
-  'Current events preserve inventories and angular momenta; setup, B, ion inertia, friction, drag frequency, conductivity and D remain prescribed. Editing the past branches the recorded experiment.',
-  'Playback retains every accepted integration knot; between knots it interpolates canonical inventories, momenta and energy ledgers. This first-order time approximation does not resolve physics faster than the chosen integration step. Legacy histories retain conservative global resolution bounds when prefix diagnostics are unavailable.',
-  'Every operation mode resolves startup, resumed starts and current switches with rotor-relaxation substeps. Nominal intervals bound the slower transport evolution; refinement remains necessary.',
+  'Current switches preserve inventories and angular momenta. Setup, B, ion inertia, friction, drag frequency, conductivity and D stay fixed. A change to an earlier current event starts a new branch of the recorded experiment.',
+  'Playback keeps each accepted integration time. Between these times, it interpolates inventories, momenta and energy balances. This first-order approximation cannot show physics faster than the integration step. Legacy histories use conservative global resolution bounds when earlier diagnostics are not available.',
+  'Each operation mode uses rotor-relaxation substeps at startup, resumed starts and current switches. Nominal intervals limit the slower transport steps. Refinement is necessary.',
   ...(thermal.enabled?[
-   liner?'Lumped monatomic neutral gas coupled to radial cylindrical tungsten conduction: fixed reference mass/geometry, NIST solid enthalpy and Tolias conductivity, 300–1900 K solid-property domain. Gas and coolant film conductances include half-cell solid resistance. Wall drag is deposited in the innermost cell; slip, Ohmic and signed redistribution work enter gas. Axial heat flow, radiation, thermal expansion and discharge ion/electron temperatures are not solved. Deposition and film coefficients are assumptions, not device calibration.':
-   'Two lumped thermal reservoirs: monatomic neutral Cv=3NkB/2, prescribed liner heat capacity and conductances. Ohmic and slip losses and signed redistribution work enter the gas; wall drag enters the liner. Electron/ion temperature, ionization and temperature-dependent transport coefficients are not solved. This deposition partition is assumed, not calibrated.',
-   'Fixed particle inventory: mean neutral pressure evolves as initial pressure × T/Tinitial. Numerical mechanical dissipation remains a separate ledger entry, never physical heat. Implicit endpoint temperature changes centrifugal transport; no optical emission prediction.'
+   liner?'Lumped monatomic neutral gas exchanges heat with a radial tungsten liner of fixed reference mass and geometry. Solid properties use NIST enthalpy and Tolias conductivity from 300–1900 K. Gas and coolant film conductances include half-cell solid resistance. Wall drag heats the innermost cell; slip, Ohmic and signed redistribution work change gas energy. The model does not calculate axial heat flow, radiation, thermal expansion or discharge ion/electron temperatures. Deposition and film coefficients are assumptions, not device calibration.':
+   'Two uniform-temperature reservoirs use monatomic neutral Cv=3NkB/2 and specified liner heat capacity and conductances. Ohmic heat, slip heat and signed redistribution work change gas energy. Wall drag heats the liner. The model does not calculate electron/ion temperature, ionization or temperature-dependent transport coefficients. Heat deposition is an assumption, not a calibrated result.',
+   'Fixed particle inventory: mean neutral pressure equals initial pressure × T/Tinitial. Numerical mechanical dissipation is a separate balance entry, not physical heat. Implicit endpoint temperature changes centrifugal transport. The model does not predict optical emission.'
   ]:[])];
  const m=rotor.mechanics,n=model.cells,number=c.pressurePa*Math.PI*c.radiusM**2*c.lengthM/(K*c.gasK),capacity=1.5*number*K;
  if(thermal.gas){
   model.thermalGas={number,lengthM:c.lengthM};
   model.assumptions=model.assumptions.filter(s=>!s.startsWith('Lumped monatomic')&&!s.startsWith('Fixed particle inventory:'));
-  model.assumptions.push('Experimental overdamped ideal-monatomic mixture: local common temperature, pressure-driven SG species flow, enthalpy transport and Fourier heat conduction. Radial inertia, acoustics, Maxwell–Stefan diffusion, Soret/Dufour effects, chemistry and local azimuthal momentum are not solved. D, conductivity, friction and interface film conductance are prescribed, not calibrated. The uniform-pressure v57 material-shell model is not used in a rotating vessel.',
-   'The same accepted species transfers evolve neutral inertia and carry species enthalpy. Centrifugal work is split between adjacent gas cells and equals the signed rotor redistribution work once. Slip and Ohmic heat are distributed by endpoint particle inventory; drag heats the innermost tungsten cell. Mechanical backward-Euler dissipation is excluded from physical heat. Spatial gas retains quadratic base time knots and resolves startup, resumed starts and each current switch with additional rotor-timescale steps. Every accepted step is retained for playback; refinement remains necessary. The isothermal free-energy proxy is unavailable for nonuniform temperature.');
+  model.assumptions.push('The spatial gas model uses an overdamped ideal-monatomic mixture with one local temperature, pressure-driven SG species flow, enthalpy transport and Fourier heat conduction. It does not calculate radial inertia, acoustics, Maxwell–Stefan diffusion, Soret/Dufour effects, chemistry or local azimuthal momentum. D, conductivity, friction and interface film conductance are specified inputs, not calibrated values. The rotating-vessel calculation does not use the uniform-pressure v57 material-shell model.',
+   'Accepted species transfers change neutral inertia and carry species enthalpy. Adjacent gas cells share centrifugal work, which equals the signed rotor redistribution work without duplication. Endpoint particle inventory sets slip and Ohmic heat deposition; drag heats the innermost tungsten cell. Physical heat does not include backward-Euler numerical dissipation. Spatial gas uses quadratic base times and extra rotor-timescale steps at startup, resumed starts and current switches. Playback keeps each accepted step; refinement remains necessary, and nonuniform temperature has no isothermal free-energy proxy.');
  }
- if(accuracy)model.assumptions.push('Temporal control compares one backward-Euler step with two half steps and accepts the conservative half-step path, retaining both knots. Heating-relative gas/solid temperature, spin, phase, species CDF and energy-ledger estimates control time only; spatial and global accuracy still require independent refinement. Time-control counters apply only from startTimeS, excluding a resumed prefix.');
+ if(accuracy)model.assumptions.push('Timestep control compares one backward-Euler step with two half steps. It accepts the conservative half-step path and keeps both times. Error estimates use heating-relative gas/solid temperature, spin, phase, species CDF and energy balances. These estimates control time only. Spatial and global accuracy make independent refinement necessary. Counters start at startTimeS and do not include an earlier history.');
  let linerEnergy=liner?initialFuelLinerEnergy(liner,c.linerK):undefined;
  let gasEnergy=thermal.gas?Array<number>(n).fill(capacity*c.gasK/n):undefined;
  const initialGas=c.gasK,initialWall=c.linerK,initialEnergy=capacity*initialGas+(linerEnergy?linerEnergy.reduce((a,b)=>a+b,0):thermal.wallCapacityJK*initialWall);
- let state:FuelCoupledState={lightMass:Array(n).fill(1/n),heavyMass:Array(n).fill(1/n),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
+ let state:FuelCoupledState={lightMass:Array<number>(n).fill(1/n),heavyMass:Array<number>(n).fill(1/n),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
  const ledger:FuelLedger={driveWorkJ:0,slipDissipationJ:0,dragDissipationJ:0,redistributionWorkJ:0,numericalDissipationJ:0,
   driveImpulseKgM2S:0,dragImpulseKgM2S:0,ionPhaseRad:0,neutralPhaseRad:0};
  let gasK=initialGas,wallK=initialWall,ohmicEnergyJ=0,coolingEnergyJ=0,current=c.currentA,eventIndex=0,start=0;
@@ -163,7 +163,8 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
    const gasEnergyJ=gas?.energyJ??capacity*gasK,linerEnergyJ=spatial?.energyJ??thermal.wallCapacityJK*wallK;
    const residualJ=s.energy.kineticJ+gasEnergyJ+linerEnergyJ-initialEnergy-ledger.driveWorkJ-ohmicEnergyJ+coolingEnergyJ+ledger.numericalDissipationJ;
    const scale=initialEnergy+Math.abs(ledger.driveWorkJ)+ohmicEnergyJ+Math.abs(coolingEnergyJ)+s.energy.kineticJ;
-   s.thermal={gasK,linerK:wallK,pressurePa:c.pressurePa*gasK/initialGas,gasEnergyJ,linerEnergyJ,ohmicEnergyJ,coolingEnergyJ,residualJ,relativeResidual:Math.abs(residualJ)/scale};
+   s.thermal={gasK,linerK:wallK,pressurePa:gas?gas.pressurePa.reduce((total,p)=>total+p,0)/n:c.pressurePa*gasK/initialGas,
+    gasEnergyJ,linerEnergyJ,ohmicEnergyJ,coolingEnergyJ,residualJ,relativeResidual:Math.abs(residualJ)/scale};
    if(spatial)s.thermal.spatial=spatial;
    if(gas)s.thermal.gas=gas;
    if(s.thermal.relativeResidual>2e-8)throw new RangeError('Thermal energy budget failed; refine the time step.');
@@ -182,8 +183,8 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
   const at=(temperature:number)=>advanceFuelCoupledStep({...parameters,gasK:temperature},state,dtS);
   let next;
   if(thermal.gas&&liner&&linerEnergy&&gasEnergy){
-   const coupled=advanceFuelMixtureThermal(liner,linerEnergy,gasEnergy,number,c.lightFraction,c.radiusM,c.lengthM,dtS,thermal,{...thermal.gas,lightMass:state.lightMass,heavyMass:state.heavyMass},temperatures=>{
-    const result=advanceFuelCoupledStep({...parameters,gasTemperaturesK:temperatures},state,dtS),e=result.energyIncrement;
+   const coupled=advanceFuelMixtureThermal(liner,linerEnergy,gasEnergy,number,c.lightFraction,c.radiusM,c.lengthM,dtS,thermal,{...thermal.gas,lightMass:state.lightMass,heavyMass:state.heavyMass},(temperatures,gasTemperatureBasis)=>{
+    const result=advanceFuelCoupledStep({...parameters,gasTemperaturesK:temperatures,gasTemperatureBasis},state,dtS),e=result.energyIncrement;
     const fractions=result.lightMass.map((p,i)=>c.lightFraction*p+(1-c.lightFraction)*result.heavyMass[i]);
     const gasSourceJ=fractions.map(p=>p*(e.slipDissipationJ+ohmic));
     let work=0;
@@ -215,7 +216,7 @@ export function simulateFuelOperation(rotor:Rotor,operation:FuelOperation,option
     return {temperature,wall,residual,result};
    };
    // Positive-temperature bracket; signed inward redistribution can draw heat.
-   let lo=1e-6,hi=Math.max(gasK,wallK,thermal.coolantK,1),low=evaluate(lo),high=evaluate(hi),iterations=0;
+   let lo=1e-6,hi=Math.max(gasK,wallK,thermal.coolantK,1);const low=evaluate(lo);let high=evaluate(hi),iterations=0;
    while(high.residual<0&&iterations++<60){hi*=2;high=evaluate(hi);}
    if(low.residual>0||high.residual<0||!Number.isFinite(high.residual))throw new RangeError('Thermal closure has no positive-temperature bracket.');
    const tolerance=Math.max(2e-12*Math.max(capacity*gasK,Math.abs(high.result.energyIncrement.driveWorkJ),ohmic,1e-20),

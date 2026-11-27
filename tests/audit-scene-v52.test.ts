@@ -44,7 +44,7 @@ async function fixture(t:any){
 }
 
 test('accepted physics refresh without an orbit preserves automatic portrait composition',async t=>{
- const f=await fixture(t);closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(0,1,.65).normalize());
+ const f=await fixture(t);closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(.55,1.25,.8).normalize());
  f.change('fuel-magneticT',.6);await f.ui.run();await flush();
  f.resize(320,740);
  closeDirection(direction(f.viewers[0].cameraPose()),new THREE.Vector3(1,.65,.45).normalize());
@@ -115,7 +115,7 @@ test('hardware descriptions distinguish evolving lumped temperatures from prescr
   try{
    const liner=built.scene.getObjectByName('Lithium refractory sub-vessel')!;
    assert.equal(liner.userData.temperatureK,result.config.linerK);
-   assert.match(liner.userData.purpose,enabled?/Initial liner .*evolving liner temperature is a lumped reservoir/:/Prescribed reference liner .*no temperature evolution/);
+   assert.match(liner.userData.purpose,enabled?/Initial liner temperature: .*evolving liner temperature describes one reservoir/:/Specified reference liner temperature: .*does not calculate temperature evolution/);
    assert.match(liner.userData.purpose,/spatial thermal field/);
    const s=result.transport.snapshots.at(-1)!;
    assert.equal(sampleFuelField(result,0,s).scope,'Coupled rotor and radial transport · reflecting wall');

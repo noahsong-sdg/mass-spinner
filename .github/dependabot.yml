@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: {interval: weekly}
+    open-pull-requests-limit: 5
+    groups:
+      compiler: {patterns: [typescript, '@typescript/*', typescript-eslint, '@typescript-eslint/*']}
+      rendering: {patterns: [three, '@types/three']}
+      browser: {patterns: ['@playwright/test', '@axe-core/playwright']}
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: weekly}
+  - package-ecosystem: docker
+    directory: /ci
+    schedule: {interval: weekly}

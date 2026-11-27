@@ -1,0 +1,17 @@
+{
+  "source": "https://www.marathonfusion.com/alchemy.pdf#page=13",
+  "basis": "Published neutronics model, not as-built Marathon hardware. Table 1 and section 4.1; selected 210 mm channel case.",
+  "majorRadiusM": 4.2,
+  "minorRadiusM": 1.2,
+  "elongation": 1.6,
+  "triangularity": 0.25,
+  "armorM": 0.005,
+  "innerStructureM": 0.01,
+  "channelM": 0.21,
+  "outerStructureM": 0.03,
+  "inboardBreederM": 0.545,
+  "outboardBreederM": 0.795,
+  "tankM": 0.03,
+  "derived": "At 210 mm channel width, fixed outer build gives inboard FLiBe = 750 - (210 - 5) = 545 mm; outboard = 1000 - (210 - 5) = 795 mm.",
+  "reconstruction": "Miller D-shaped contour, normal-offset layers and cosine interpolation of inboard/outboard FLiBe thickness are visualization assumptions. Plasma-to-wall clearance is unknown and omitted. A 270 degree display cutaway is not the paper's 90 degree reflective simulation sector. Added plasma location marker, coils, cryostat, supports and service interfaces are conceptual; their sizes, count and materials are not specified by Marathon. They do not represent an engineered plant or a solved magnetic equilibrium. Optical finishes are illustrative."
+}

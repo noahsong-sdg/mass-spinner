@@ -12,7 +12,7 @@ function fixture(t:any){
  Object.defineProperty(dom.window,'matchMedia',{value:()=>({matches:true,addEventListener(){},removeEventListener(){}})});
  const old=Object.getOwnPropertyDescriptor(globalThis,'document');Object.defineProperty(globalThis,'document',{value:doc,configurable:true});
  const graphics=[{createApparatusViewer:(_frame:any,options:any)=>({load:async(asset:any)=>options.loader.loadAsync(asset.model),select(){},refresh(){},resize(){},setAnimation(){},dispose(){}})},
-  {FUEL_COMPONENTS:[{id:'supply',name:'Supply',purpose:'Drive',material:'Concept',basis:'Prescribed'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
+  {FUEL_COMPONENTS:[{id:'supply',name:'Supply',purpose:'Drive',material:'Concept',basis:'Prescribed'}],buildFuelCentrifugeGeometry:()=>({motion:{group:{visible:true},setSpecies(){},clock:()=>({secondsPerScreenSecond:.001,rotationSecondsPerScreenSecond:.001}),update:()=>({secondsPerScreenSecond:.001,speeds:{ion:0,neutral:0}})}})}];
  const ui=setupFuelCentrifuge({document:doc,loadGraphics:async()=>graphics,request:async(r:any)=>{
   const rotor=simulateFuelCentrifuge(r.config);return {result:{...rotor,transport:simulateFuelOperation(rotor,r.operation,{},r.resume)},producingCode:null};
  }});
@@ -40,6 +40,6 @@ test('an invalid inactive thermal field cannot destroy the accepted bath result'
  change('fuel-thermal-wallCapacityJK','');
  change('fuel-currentA',.04);await ui.run();
  assert.ok(ui.latest,'A disabled thermal model must not send an invalid latent thermal setup and clear the accepted bath result.');
- if(ui.latest===accepted)assert.match(ui.nodes.render.textContent,/valid thermal settings/,'Invalid supplied settings should retain the old result with an actionable status.');
+ if(ui.latest===accepted)assert.match(ui.nodes.render.textContent,/permitted thermal settings/,'Invalid supplied settings should retain the old result with an actionable status.');
  else assert.equal(ui.latest.result.config.currentA,.04,'Ignoring disabled thermal values should still apply the valid bath change.');
 });

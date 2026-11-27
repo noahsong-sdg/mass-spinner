@@ -23,7 +23,7 @@ test('accepted orbit data preserve solver xyz, actual impacts and injected denom
  assert.equal(s.tracks[0].positionsM,r.species[0].paths[0].positions);
  const electric=s.fields.find(f=>f.id==='electric-radial')!;
  close(electric.values.at(-1)!,fields([orbitConfig.radius,0,0],orbitConfig).electric[0]);
- assert.match(s.unsupported.join(' '),/unweighted/);
+ assert.match(s.unsupported.join(' '),/no physical particle weights/);
 });
 test('stale, pending, model-mismatched and nonfinite requests cannot publish surfaces',()=>{
  const r=simulate(orbitConfig),q=request('rotating',orbitConfig,r);
@@ -73,7 +73,7 @@ test('each core reduced model carries its actual output without invented particl
   const c={...DEFAULT_GEOMETRY,duration:1e-6},r=geometry(model,c),s=ready(request(model,c,r));
   assert.equal(s.impacts.length,0);assert.equal(s.counts.length,0);
   if(model==='gyro'){assert.equal(s.tracks[0].positionsM[4][0],r.curves[0].x[4]);assert.equal(s.tracks[0].positionsM[4][2],0);}
-  if(model==='curved'){assert.equal(s.domain.kind,'reference');assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/scalar/);}
+  if(model==='curved'){assert.equal(s.domain.kind,'reference');assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/arc length and deflection only/);}
   if(model==='doublewell'){assert.equal(s.fields.find(f=>f.id==='effective-energy-0')!.values,r.curves[0].y);assert.ok(!s.fields.some(f=>f.id.startsWith('density')));}
  }
  const c={...DEFAULT_GEOMETRY,duration:1e-6};assert.equal(surfaceState(request('curved',c,geometry('gyro',c))).status,'invalid');
@@ -107,11 +107,29 @@ test('target preserves all film/backing cell averages and film-only occupancy',(
  assert.equal(surfaceState({...q,selectedState:structuredClone(selected)}).status,'invalid');
  assert.equal(surfaceState({...q,source:{...source,beamAreaM2:.1}}).status,'invalid');
  const bad=structuredClone(r);bad.final.temperatureK.pop();assert.equal(surfaceState({...q,result:bad,selectedState:bad.final}).status,'invalid');
+ for(const thickness of ['1e-6',Infinity,-Infinity,NaN,0,-1e-6,null,undefined]){
+  const invalidConfig={...c,filmThicknessM:thickness};
+  assert.equal(surfaceState(request('beam-target',invalidConfig,{...r,config:invalidConfig},
+   {source,acceptedSource:source,selectedState:selected})).status,'invalid',`Film thickness ${String(thickness)}`);
+ }
+ for(const mutate of [
+  (v:typeof r)=>v.final.temperatureK[0]=NaN,
+  (v:typeof r)=>v.final.temperatureK[0]=0,
+  (v:typeof r)=>v.final.tritiumFraction[0]=2,
+  (v:typeof r)=>v.final.depthM.reverse(),
+  (v:typeof r)=>v.final.deuteriumFraction[0]+=0.1,
+  (v:typeof r)=>v.final.timeS=-1,
+ ]){
+  const invalid=structuredClone(r);mutate(invalid);
+  assert.equal(surfaceState({...q,result:invalid,selectedState:invalid.final}).status,'invalid');
+ }
+ const original=film.values[0];selected.temperatureK[0]+=1;
+ assert.equal(film.values[0],original,'accepted temperature surfaces retain copied cell averages');
 });
 test('reference and non-spatial diagnostic modes explicitly decline surface predictions',()=>{
  const t=ready(request('diffusion',DEFAULT_TRANSPORT,transport('diffusion',DEFAULT_TRANSPORT)));
  assert.equal(t.domain.kind,'reference');assert.equal(t.fields.length,0);
  for(const model of ['future-blanket','research-replay']){
-  const s=ready(request(model,{},{}));assert.equal(s.fields.length,0);assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/Reference/);
+  const s=ready(request(model,{},{}));assert.equal(s.fields.length,0);assert.equal(s.tracks.length,0);assert.match(s.unsupported[0],/reference geometry and recorded evidence only/);
  }
 });

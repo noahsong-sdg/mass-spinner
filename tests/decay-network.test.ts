@@ -23,7 +23,7 @@ test('closed cycles remain positive and conserve inventory at stiff qualified bo
 test('time splitting agrees and domain failures are explicit',()=>{
  const n={nodes:[{id:'A',decayRateS:.8}],productionAtomsS:[3]},one=evolveDecayNetwork(n,[5],4,true),half=evolveDecayNetwork(n,[5],2,true);
  close(evolveDecayNetwork(n,half.populations,2,true).populations[0],one.populations[0]);
- assert.throws(()=>evolveDecayNetwork(n,[-1],2,true));assert.throws(()=>evolveDecayNetwork(n,[1],2e6,true),/bounded/);
+ assert.throws(()=>evolveDecayNetwork(n,[-1],2,true));assert.throws(()=>evolveDecayNetwork(n,[1],2e6,true),/Rate × time is more than the 10⁶ numerical limit/);
  assert.throws(()=>evolveDecayNetwork({nodes:[{id:'A',decayRateS:1,products:[{to:'A',fraction:1}]}]},[1],1,false));
  assert.throws(()=>evolveDecayNetwork({nodes:[{id:'A',decayRateS:0},{id:'B',decayRateS:0}]},[1e308,1e308],0,false),/Aggregate/);
  assert.throws(()=>evolveDecayNetwork({nodes:[{id:'A',decayRateS:2}]},[1e308],0,false),/Nonfinite/);

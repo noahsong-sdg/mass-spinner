@@ -1,0 +1,103 @@
+import {test,expect} from '@playwright/test';
+
+test('the plant has visible location boundaries and static extraction cases',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/tutorial-05.html#chronology');
+ const plant=page.locator('[data-plant-cycle]');
+ await plant.getByRole('button',{name:'Next: start fusion',exact:true}).click();
+ await expect(plant.locator('[data-plant-title]')).toHaveText('Supply energy and start D–T fusion');
+ await expect(plant.locator('[data-plant-title]')).toBeInViewport();
+ await expect(plant.locator('[data-plant-motion]')).toHaveCount(0);
+ const extraction=page.locator('[data-tritium-extraction]');
+ await extraction.getByRole('button',{name:'Liquid lead–lithium',exact:true}).click();
+ await expect(extraction.locator('[data-extraction-interface]')).toBeVisible();
+ await expect(extraction.locator('[data-extraction-membrane]')).toBeVisible();
+ await expect(extraction).toContainText('Liquid goes back');
+ await expect(extraction.getByRole('slider')).toHaveCount(0);
+ await expect(extraction.getByRole('button',{name:/path/i})).toHaveCount(0);
+ await extraction.getByRole('button',{name:'Ceramic breeder',exact:true}).click();
+ await expect(extraction).toContainText('Stays in blanket');
+ await expect(extraction.locator('[data-extraction-interface]')).toBeHidden();
+ await expect(plant.locator('figcaption,[data-plant-result],[data-plant-reaction]')).toHaveCount(0);
+ await expect(plant.locator('.plant-boundary')).toHaveCount(2);
+ for(const boundary of await plant.locator('.plant-boundary').all())await expect(boundary).toHaveCSS('stroke-dasharray','2px, 5px');
+ for(let i=1;i<7;i++){
+  for(const label of await plant.locator('.plant-views svg text:not([hidden] *)').all()){
+   await expect(label).toHaveCSS('opacity','1');
+  }
+  const collisions=await plant.locator('.plant-views svg').evaluateAll(svgs=>svgs.flatMap(svg=>{
+   const labels=[...svg.querySelectorAll('text')].filter(label=>!label.closest('[hidden]'));
+   return labels.flatMap((label,i)=>labels.slice(i+1).filter(other=>{
+    const a=label.getBoundingClientRect(),b=other.getBoundingClientRect();
+    return Math.min(a.right,b.right)>Math.max(a.left,b.left)&&Math.min(a.bottom,b.bottom)>Math.max(a.top,b.top);
+   }).map(other=>[label.textContent,other.textContent]));
+  }));expect(collisions).toEqual([]);
+  if(i<6)await plant.locator('[data-plant-next]').click();
+ }
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);expect(overflow).toBe(false);
+ await info.attach('plant-locations',{body:await plant.screenshot(),contentType:'image/png'});
+ await info.attach('static-extraction',{body:await extraction.screenshot(),contentType:'image/png'});
+ expect(errors).toEqual([]);
+});
+
+test('tutorial animations move atoms, conserve inventory and expose pause and replay',async({page},info)=>{
+ const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.emulateMedia({reducedMotion:'reduce'});await page.goto('/guide.html');
+ const sample=page.locator('[data-sample-example]'),range=sample.getByRole('slider');
+ await expect(range).toBeEnabled();await expect(sample).toHaveAttribute('data-motion','paused');
+ await page.emulateMedia({reducedMotion:'no-preference'});await sample.scrollIntoViewIfNeeded();
+ await expect(sample).toHaveAttribute('data-motion','paused');
+ await expect(sample.locator('[data-sample-region]')).toBeVisible();
+ await expect(sample).toContainText('Collect all 100, not only the light atoms.');
+ await expect(sample).toContainText('It takes both isotopes, not only light atoms.');
+ await expect(sample.locator('figcaption')).toContainText('not paths through an outlet');
+ await range.focus();await range.press('End');
+ await expect(sample.locator('[data-sample-purity]')).toHaveText('10 / 100 · 10.0%');
+ await expect(sample.locator('[data-sample-recovery]')).toHaveText('10 / 76 = 13.2%');
+ await expect(sample.locator('circle')).toHaveCount(1000);
+ await info.attach('conserved-sample',{body:await sample.screenshot(),contentType:'image/png'});
+ await sample.getByRole('button',{name:'Replay',exact:true}).click();
+ await expect.poll(()=>range.inputValue()).not.toBe('0');
+ await sample.getByRole('button',{name:'Pause collection',exact:true}).click();
+ const positions=()=>sample.locator('[data-sample-atom]').evaluateAll(atoms=>atoms.map(a=>a.getAttribute('transform')));
+ const paused=await positions();
+ await page.waitForTimeout(100);expect(await positions()).toEqual(paused);
+ await range.press('Home');await expect(sample.locator('[data-sample-purity]')).toHaveText('0 / 0 · undefined');
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const density=page.locator('[data-density-example]');await expect(density.locator('.density-dot')).toHaveCount(96);
+ await density.getByRole('button',{name:'No rotation',exact:true}).click();
+ const dot=density.locator('.density-dot').first(),rest=await dot.evaluate(n=>getComputedStyle(n).transform);
+ await density.getByRole('button',{name:'Rotation',exact:true}).click();
+ const spin=await dot.evaluate(n=>getComputedStyle(n).transform);expect(spin).not.toBe(rest);
+ await density.getByRole('button',{name:'Higher temperature',exact:true}).click();
+ expect(await dot.evaluate(n=>getComputedStyle(n).transform)).not.toBe(spin);
+ await expect(density.locator('.density-dot')).toHaveCount(96);
+ await density.getByRole('button',{name:'Play rotation',exact:true}).click();
+ await expect(density.locator('.density-orbit')).toHaveCSS('animation-play-state','running');
+ await page.goto('/guide.html');
+ const spinFigure=page.locator('[data-concept-example="spin"]');
+ await spinFigure.getByRole('button',{name:'Play motion',exact:true}).click();
+ const rotor=spinFigure.locator('[data-concept-panel="0"] .concept-rotor').first();
+ await expect(rotor).not.toHaveCSS('animation-name','none');
+ const a=await rotor.evaluate(n=>getComputedStyle(n).transform);await page.waitForTimeout(150);
+ expect(await rotor.evaluate(n=>getComputedStyle(n).transform)).not.toBe(a);
+ await spinFigure.getByRole('button',{name:'Pause motion',exact:true}).click();
+ const spinState=()=>spinFigure.locator('[data-concept-panel="0"] .concept-rotor,.concept-reveal').evaluateAll(nodes=>nodes.map(n=>getComputedStyle(n).transform));
+ const stoppedSpin=await spinState();await page.waitForTimeout(150);expect(await spinState()).toEqual(stoppedSpin);
+ await spinFigure.getByRole('button',{name:'Play motion',exact:true}).click();
+ await expect.poll(spinState).not.toEqual(stoppedSpin);
+ await page.goto('/tutorial-03.html');
+ const energy=page.locator('[data-concept-example="energy"]');
+ await energy.getByRole('button',{name:'Play motion',exact:true}).click();
+ const packet=energy.locator('[data-concept-panel="0"] .concept-packet').first();
+ const start=await packet.evaluate(n=>getComputedStyle(n).offsetDistance);await page.waitForTimeout(150);
+ expect(await packet.evaluate(n=>getComputedStyle(n).offsetDistance)).not.toBe(start);
+ await energy.getByRole('button',{name:'Pause motion',exact:true}).click();
+ await expect(packet).toHaveCSS('animation-play-state','paused');
+ await packet.evaluate(async node=>{await Promise.all(node.getAnimations().map(animation=>animation.ready));});
+ const stoppedPacket=await packet.evaluate(n=>getComputedStyle(n).offsetDistance);await page.waitForTimeout(150);
+ expect(await packet.evaluate(n=>getComputedStyle(n).offsetDistance)).toBe(stoppedPacket);
+ await energy.getByRole('button',{name:'Play motion',exact:true}).click();
+ await expect.poll(()=>packet.evaluate(n=>getComputedStyle(n).offsetDistance)).not.toBe(stoppedPacket);
+ expect(errors).toEqual([]);
+});

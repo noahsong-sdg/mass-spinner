@@ -1,0 +1,28 @@
+[
+  {
+    "package": "@fontsource-variable/commissioner",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource-variable/commissioner/-/commissioner-5.3.0.tgz",
+    "integrity": "sha512-0IEvi8SO1slc5Pc9tA4OtA01I8UiCcEq/uh12oNjfHuABU9Lnz61l2V8o2cMPUUo3BAo5MbISVK2I/DSpBRw7Q==",
+    "license": "OFL-1.1",
+    "assetsSha256": {
+      "commissioner-greek-wght-normal.woff2": "75d4734b1d207892feee610186e34fe02912d604025906fdeca5c7b8c295a622",
+      "commissioner-latin-ext-wght-normal.woff2": "bd6c9bcd8fddfa16facc4398d075d0dfdf1286fc08334b94e8ea0c94beb1e0ff",
+      "commissioner-latin-wght-normal.woff2": "e3d539b926881fbb3592788297eee24d6d179c1c06dbad36805fc722775247ce"
+    },
+    "licenseSha256": "f4bab37ac72f638eeaec7a38cf8f5cc4e91299d763e6befc38e224044730ed8a"
+  },
+  {
+    "package": "@fontsource-variable/literata",
+    "version": "5.3.0",
+    "source": "https://registry.npmjs.org/@fontsource-variable/literata/-/literata-5.3.0.tgz",
+    "integrity": "sha512-1Jw7xvOcoGyB83lxB2nG4bfNbqtX2/TTbdh9sHAOmU064SvmSdulDtA5RBu5JYWf64fdaKX7xU+z3GO1T2bCHA==",
+    "license": "OFL-1.1",
+    "assetsSha256": {
+      "literata-greek-wght-normal.woff2": "393643556e420af45f8f0854c30f00e17ac52e85f1df4fd4ae2f2a29e0d279f1",
+      "literata-latin-ext-wght-normal.woff2": "46792f7cd10b28fb512161caeaaa11b049feb2221ccaa72bb4d4ccc286199155",
+      "literata-latin-wght-normal.woff2": "9adbeac5b167fe5ad6c49d9e29aa0c76e2f1bb3b46bf4ebf12a9eca7d3525384"
+    },
+    "licenseSha256": "9895ebc015226accf416b758ac1ca02a2fb4f83a89d316791ef697c3dc0852aa"
+  }
+]

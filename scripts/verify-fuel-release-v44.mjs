@@ -15,7 +15,7 @@ for(const pair of Object.keys(FUEL_PAIRS))for(const application of ['enrichment'
  const reply=replies.at(-1);assert.equal(reply.id,id);assert.equal(reply.kind,'fuel-centrifuge');assert.equal(reply.schemaVersion,1);assert.equal(reply.error,undefined,JSON.stringify(config));
  assert.deepEqual(reply.result.config,config);assert.equal(reply.result.samples.length,101);
  const identity=reply.producingCode;assert.equal(identity.sourceHash,hash(JSON.stringify(identity.sourceFiles)));
- assert.ok(identity.sourceFiles['src/fuel-centrifuge.ts']);
+ assert.ok(identity.sourceFiles['src/fuel-centrifuge.ts']);assert.ok(identity.sourceFiles['src/fuel-reference-update.ts']);
  for(const [path,digest]of Object.entries(identity.sourceFiles)){assert.ok(!path.startsWith('/')&&!path.split('/').includes('..'));assert.equal(hash(readFileSync(path)),digest,path);}
  const result=reply.result;assert.ok(Math.abs(result.cascade.lightBalance)<1e-12);assert.ok(Math.abs(result.cascade.heavyBalance)<1e-12);
  assert.equal(result.transport.cells,64);assert.equal(result.transport.steps,512);assert.ok(result.transport.maxBalanceError<2e-8);

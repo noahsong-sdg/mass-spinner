@@ -8,7 +8,7 @@ import {createApparatusViewer} from '../src/apparatus-viewer.js';
 const desktop=[0,1,.65],portrait=[1,.65,.45];
 const closeVector=(a:THREE.Vector3,b:THREE.Vector3)=>assert.ok(a.distanceTo(b)<1e-10,`${a.toArray()} ≠ ${b.toArray()}`);
 async function fixture(t:any,{width=1000,height=600,optIn=true}={}){
- const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
+ const dom=new JSDOM('<main></main>',{pretendToBeVisual:true}),frame=dom.window.document.querySelector('main')!;
  let size={width,height};const rectangle=()=>({...size,left:0,top:0,right:size.width,bottom:size.height,x:0,y:0,toJSON(){}});
  frame.getBoundingClientRect=rectangle;
  const old=(globalThis as any).ResizeObserver;(globalThis as any).ResizeObserver=class{observe(){}disconnect(){}};

@@ -121,3 +121,24 @@ test('inward redistribution draws signed rotor work from gas without inventing h
  const moved=masses.map(m=>advanceFuelGasMass(old,result.gasTemperatureK,m,omega,R,.001,dt));
  assert.ok(entropy(result.gasTemperatureK,moved[0].mass,moved[1].mass)>=entropy(initial,old,old)-1e-14);
 });
+
+test('tiny fixed-mass heat resolves the analytical two-cell BE flux across background temperatures',()=>{
+ const count=1e18,capacity=1.5*K*count/2,dt=.01,k=.2,link=dt*4*Math.PI*L*k;
+ const expectedFraction=link/(capacity+2*link);
+ for(const background of [400,1000,1700])for(const q of [1e-15,-1e-15]){
+  const cells=[.5,.5],old=cells.map(()=>capacity*background);
+  const result=advanceFuelMixtureThermal(grid,initialFuelLinerEnergy(grid,background),old,count,.5,R,L,dt,
+   {...boundary,coolantK:background},{conductivityWMK:k,lightMass:cells,heavyMass:cells},()=>({
+    lightMass:cells,heavyMass:cells,faceTransfers:[[0],[0]],gasSourceJ:[q,0],dragEnergyJ:0,payload:undefined}));
+  // Exact linear FV solution; no nonlinear/tungsten approximation is involved.
+  assert.ok(Math.abs(result.gasFaceEnergyJ[0]/q-expectedFraction)<.02*Math.abs(expectedFraction),
+   `T=${background}, Q=${q}: face heat ${result.gasFaceEnergyJ[0]}, expected ${q*expectedFraction}`);
+ }
+});
+
+test('zero time preserves the exact stored gas and solid energies after temperature inversion',()=>{
+ const solid=initialFuelLinerEnergy(grid,713.123456789),old=energies([401.1234567,512.3456789,623.4567891,734.5678912,845.6789123,956.7891234]);
+ const result=advanceFuelMixtureThermal(grid,solid,old,N,x,R,L,0,{...boundary,gasWallWK:.1},
+  {conductivityWMK:.2,lightMass:uniform(),heavyMass:uniform()},()=>source());
+ assert.deepEqual(result.gasEnergyJ,old);assert.deepEqual(result.cellEnergyJ,solid);
+});

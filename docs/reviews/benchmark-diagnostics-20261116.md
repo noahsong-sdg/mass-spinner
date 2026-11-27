@@ -1,0 +1,52 @@
+# Diagnostic admission for an experimental benchmark
+
+Independent review, 2026-11-16. Scope: whether published rotation, temperature and electrical observations can test three distinct predictions without outcome fitting. Primary PDFs and retained diagnostic reviews were inspected; no scientific solver was executed.
+
+**Verdict:** no simultaneous three-observable benchmark is admitted by this review. Wijnakker remains the closest direct rotation/heavy-temperature candidate, with unresolved optical and electrical observation operators. UT-Austin provides useful boundary-temperature and composition measurements, but does not supply an independently measured rotation target. A failed admission is missing identification, not evidence that an otherwise convenient approximation is experimentally accurate.
+
+## Evidence and exclusions
+
+### Wijnakker and Granneman, 1980
+
+The experiment uses a pressure-scanned Fabry–Perot spectrometer for lateral Doppler shifts and widths. Predominantly neutral lines are used; argon neutral 4702 Å and ion 4807 Å are identified. Spectra are not Abel inverted. Estimated uncorrected velocities are 30–40% low, central temperatures about 30% low, and off-axis temperature errors can exceed a factor of two because shift and width mix along a chord. Series bars describe relative accuracy; approximately 15% reproducibility is separately reported without an assigned statistical distribution. Measurements concern the diffuse 100 A mode; a second, weaker-rotation mode can exist. The 1980 tungsten cathodes differ from the earlier apparatus. [Original paper, §§2–3, printed pp.884–887](https://www.degruyterbrill.com/document/doi/10.1515/zna-1980-0815/pdf).
+
+**Inference:** these diagnostic warnings do not justify multiplicative corrections, local-field comparisons or silently borrowed contacts.
+
+**Unresolved:** actual line-fit/peak/centroid estimator, optical aperture, instrument response and usable same-line emissivity information; a same-condition work-conjugate electrical port and its uncertainty. A bounded parsed-text search for “voltage” did not recover an electrical series in this paper; this is not a claim that no such measurements exist elsewhere.
+
+The retained 1979 audits identify a further distinction: 58.0±0.5 V terminal arc voltage and 18.5±2 V after an electrode-fall correction are different observables. The correction procedure and finite contact-current footprint remain insufficiently identified in the checked evidence. Midplane potential differences are not automatically either voltage. This paragraph reports retained source-review findings, not a fresh verification of the 1979 PDF. See [voltage provenance](../../scientific/boundary-v84/VOLTAGE-SOURCES.md), [footprint provenance](../../scientific/boundary-v84/FOOTPRINT-SOURCES.md), and [optical audit](../../OPTICAL-DIAGNOSTIC-V80.md).
+
+### Hood-McFadden, Kotla and Underwood, 2026 v2
+
+This paper contains new UT-Austin measurements and comparisons against earlier Wijnakker and Kaneko experiments; those are different datasets. In the new apparatus, thermocouples measure boundary temperatures. High-speed images show rotating emission structures, not a calibrated bulk velocity measurement. The enlarged-reactor Ar/Kr comparison obtains approximately 75 m/s by matching measured composition with an isothermal rigid-rotation model; it is inferred from the target and cannot independently validate the same separation model. Fig.14 wall-temperature bars are steady-state standard deviations. The Kaneko comparison reconstructs velocity-squared/temperature from pressure, which is not two independent velocity and temperature measurements. The paper also explicitly treats Saha ionization as an approximate upper limit and neglects detailed inelastic chemistry. [Primary paper, §§2–4, especially pp.13–21](https://arxiv.org/pdf/2607.28208v2).
+
+**Inference:** a UT wall-thermal benchmark may be useful after adding sensor location/contact and external cooling, but comparing gas temperature directly to those thermocouples would test the wrong observable. Its low-field null pressure response is a useful negative control, not a resolved rotation profile. New UT targets are not untouched holdouts if inspected during this selection.
+
+### Alternatives checked
+
+PCX 2014 independently measures electron temperature with Langmuir probes and optical line ratios, and flow with a Mach probe. However, the argon ion temperature in the cited cases/table is fitted from flow; the radial-potential comparison also uses a fitted velocity profile. Electron temperature is not the common heavy-particle temperature. Its unmagnetized core and edge drive differ from the current centrifuge approximation. This is a promising conditional force-balance/diagnostic benchmark, not an independent three-channel replacement. [Collins et al., §§II–V, Figs.2–7 and Table I](https://wippl.wisc.edu/pub_files/journal/Collins1007.pdf).
+
+PCX/BRB 2020 adds chord-integrated Fabry–Perot ion temperature/flow, with stated calibration-dependent precision; Fig.3 separately states approximately 20 m/s Bayesian PCX flow uncertainty and approximately 100 m/s BRB Mach-probe error. Hall-driven magnetic amplification/expulsion is central. The authors explicitly distinguish qualitative NIMROD comparisons from direct quantitative reproduction. **Inference:** substituting this dataset would require evolving magnetic fields and an appropriate plasma closure, rather than applying the present prescribed-field heavy-fluid model. [Flanagan et al., pp.2–3 and Fig.3](https://plasma2.physics.wisc.edu/pub_files/journal/Flanagan1316.pdf).
+
+## Acceptance contract
+
+These requirements are proposed admission rules, not additional experimental facts or relaxed convergence gates.
+
+1. **Label every datum.** Record measured/input/inferred/fitted status, species and charge state, apparatus revision, discharge mode, run/condition identity, location, sampling interval and units. Same pressure/current labels do not establish simultaneous observations. Temperature must explicitly mean electron, ion, neutral or solid-sensor temperature.
+2. **Make one electrical variable an input.** In a current-driven run, imposed current is not a predicted pass. Predict the corresponding independently measured voltage, with terminal versus bulk distinction, contact support, current allocation and electrode falls stated. Conversely, voltage drive tests current. A port-potential average must use its actual current weighting. Do not claim terminal power agreement from bulk Joule heat alone.
+3. **Compare through the instrument.** For a spectral species/transition, construct a chord spectrum
+
+   `S_b(ν) = R_instrument * ∫ ε_s(x) L_s(ν − ν₀ − ν₀ v_los(x)/c; T_s(x), …) dl`.
+
+   Apply the experimentally documented estimator to this spectrum. A full-line centroid is only admissible if that is the estimator; a peak, fitted line center and centroid generally differ. Width includes thermal motion, unresolved velocity variation and instrument broadening. Chord-dependent temperature cannot be replaced by the local simulated value.
+4. **Constrain emissivity independently.** Use the same line and the correct photon-area/peak-intensity definition. Brightness inversion, excitation and optical response uncertainty must be declared. Choosing an emissivity or a linewidth reduction rule because it matches measured velocity is fitting, even if the fluid solver parameters are unchanged. If the estimator cannot be recovered, publish a sensitivity comparison, not a uniquely validated prediction.
+5. **Match thermocouples to solids.** Include sensor position, contact/response and thermal boundary conditions for a thermocouple target. A prescribed measured wall temperature can condition gas predictions, but cannot simultaneously validate predicted wall temperature. Mach-probe targets likewise require their sound-speed/calibration operator, including its dependence on measured electron temperature.
+6. **Keep error sources separate.** For each observable report numerical refinement error, digitization/extraction repeatability, instrument/reproducibility uncertainty, missing-input uncertainty and model discrepancy. Preserve existing gates. A proposed admission budget is numerical and extraction error each below 5% of a resolved signal, leaving room inside a 20% first-order target; this budget is not permission to reinterpret experimental bars or add arbitrary normalization floors. Unresolved near-zero signals are null controls, not fractional-error passes. Missing uncertainty is unknown, not zero; correlated points do not create independent evidence.
+7. **Freeze before testing.** Freeze source version, condition IDs, geometry, transport data, missing-input bounds, observation operator and gates before evaluating targets. Preserve all failures and report sensitivity without selecting its most favorable member. A no-fit comparison may condition on independently measured density or temperature, but must state which prediction this removes from the validation claim.
+8. **Use honest exposure labels.** Existing Wijnakker curves have already informed development; new execution without explicit fitting does not make them untouched heldout data. Reserve “prospective heldout” for genuinely unexposed observations after a recorded freeze. A prediction hash alone does not establish that history. Different points from one already-inspected figure are an internal split, not a new independent experiment.
+
+## Smallest useful next step
+
+Select one Wijnakker diffuse-mode condition as a **retrospective diagnostic reconstruction**, recover its Fabry–Perot reduction and spectral/emissivity constraints, then compare synthetic spectra/derived observables without tuning velocities. Independently recover the finite-contact electrical correction before attempting the electrical gate. In parallel request or locate same-run UT raw spectra/flow diagnostics, thermocouple mounting details and current/voltage traces; their absence currently prevents a joint admission. Do not delay a clearly labeled pedagogical playground for those missing measurements, and do not promote it to experimental qualification because numerical refinement passes.
+
+Verification performed: primary-PDF reading and bounded source searches; retained provenance-review inspection. No host scientific execution, convergence rerun, raw-data acquisition, deployed-site check or three-channel experimental qualification was performed by this review.

@@ -23,10 +23,15 @@ not manufacturer CAD or verified engineering dimensions.
   Q22 values and explicit pi multiplier from Mutation++ v1.0.5's
   [collision database](https://github.com/mutationpp/Mutationpp/blob/v1.0.5/data/transport/collisions.xml),
   attributed there to Wright 2005. No Mutation++ solver is bundled.
+- Commissioner and Literata: variable fonts distributed by Fontsource 5.3.0
+  under SIL OFL 1.1. Original licenses and asset hashes are retained in
+  [fonts](web-assets/fonts/provenance.json).
 - **Research literature:** Source papers are cited in the model documentation.
   Full downloaded papers and extracted article text are excluded from this
   repository. Derived benchmark markers are identified as digitized/reproduced
   observations rather than raw instrument data.
 
-No project-wide software license has been selected. Public availability does not
-replace the licenses or attribution requirements of third-party material.
+Our original code is available under the [MIT license](LICENSE). This does not
+relicense third-party software, datasets, papers or retained upstream source.
+Their respective licenses and attribution requirements continue to apply.
+Historical OpenFOAM material retains its included GPLv3 license.

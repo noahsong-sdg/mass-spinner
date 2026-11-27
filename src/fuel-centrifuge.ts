@@ -1,3 +1,4 @@
+import {isArrayShape} from './array-shape.js';
 /** Conditional, neutral-gas rotor model; not a calibrated Marathon device. SI throughout. */
 const U=1.66053906892e-27,K=1.380649e-23,E=1.602176634e-19;
 export const FUEL_PAIRS={
@@ -30,7 +31,7 @@ function validate(c:FuelConfig){
 /** Current is the only scheduled input; setup remains fixed within a run. */
 export function validateFuelCurrentEvents(events:readonly{timeS:number;currentA:number}[],durationS:number){
  finite(durationS,'durationS',0);
- if(!Array.isArray(events)||events.length>128)throw new RangeError('Unsupported operating history.');
+ if(!isArrayShape(events)||events.length>128)throw new RangeError('Unsupported operating history.');
  let last=-1;
  for(const event of events){
   if(!event||!Number.isFinite(event.timeS)||event.timeS<0||event.timeS>durationS||event.timeS<=last||!Number.isFinite(event.currentA)||event.currentA<0||event.currentA>.2)
@@ -92,9 +93,9 @@ export function lithiumVaporPressurePa(temperatureK:number){
 export function idealCascade(probability:number,stages:number,feedStage:number){
  finite(probability,'routing probability',0,1);
  if(!Number.isSafeInteger(stages)||stages<1||stages>12||!Number.isSafeInteger(feedStage)||feedStage<1||feedStage>stages)throw new RangeError('Invalid cascade.');
- const p=probability,q=1-p,diagonal=Array(stages).fill(1),rhs=Array(stages).fill(0);rhs[feedStage-1]=1;
+ const p=probability,q=1-p,diagonal=Array<number>(stages).fill(1),rhs=Array<number>(stages).fill(0);rhs[feedStage-1]=1;
  for(let i=1;i<stages;i++){const multiplier=-p/diagonal[i-1];diagonal[i]-=multiplier*(-q);rhs[i]-=multiplier*rhs[i-1];}
- const visits=Array(stages).fill(0);visits[stages-1]=rhs[stages-1]/diagonal[stages-1];
+ const visits=Array<number>(stages).fill(0);visits[stages-1]=rhs[stages-1]/diagonal[stages-1];
  for(let i=stages-2;i>=0;i--)visits[i]=(rhs[i]+q*visits[i+1])/diagonal[i];
  return {product:p*visits[stages-1],tails:q*visits[0],visits};
 }
@@ -111,7 +112,8 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  const torquePerAmp=c.magneticT*c.radiusM**2*(1-c.driveInnerFraction**2)/2;
  const torque=c.currentA*c.magneticT*c.radiusM**2*(1-c.driveInnerFraction**2)/2;
  const ohmicW=c.currentA**2*Math.log(1/c.driveInnerFraction)/(2*Math.PI*c.lengthM*c.conductivitySm);
- const civ=c.lithiumSeed?Math.sqrt(2*5.3917*E/(7.0160034366*U)):Math.min(...pair.ionEV.map((v,i)=>Math.sqrt(2*v*E/masses[i])));
+ const presentCriticalSpeeds=pair.ionEV.map((v,i)=>Math.sqrt(2*v*E/masses[i])).filter((_,i)=>(i===0?x:1-x)>0);
+ const civ=c.lithiumSeed?Math.sqrt(2*5.3917*E/(7.0160034366*U)):Math.min(...presentCriticalSpeeds);
  function referenceAt(timeS:number){
   let {ion,neutral}=rotorResponse(ii,nn,gamma,drag,torque,timeS),currentA=c.currentA,previousTorque=torque;
   for(const event of currentEvents){
@@ -167,13 +169,13 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  });
  const cuts=Array.from({length:81},(_,i)=>{
   const fraction=i/80,l=radialCDF(beta[0],fraction**2),h=radialCDF(beta[1],fraction**2),flow=x*l+(1-x)*h;
-  return {radiusFraction:fraction,lightRecovery:l,lightPurity:ratio(x*l,flow),outerHeavyPurity:ratio((1-x)*(1-h),1-flow)};
+  return {radiusFraction:fraction,lightRecovery:x>0?l:null,lightPurity:ratio(x*l,flow),outerHeavyPurity:ratio((1-x)*(1-h),1-flow)};
  });
  const l=radialCDF(beta[0],c.cutFraction**2),h=radialCDF(beta[1],c.cutFraction**2),cut=x*l+(1-x)*h;
  const light=idealCascade(l,c.stages,c.feedStage),heavy=idealCascade(h,c.stages,c.feedStage),product=x*light.product+(1-x)*heavy.product;
  const cascades=Array.from({length:c.stages-c.feedStage+1},(_,i)=>{
   const n=c.feedStage+i,a=idealCascade(l,n,c.feedStage),b=idealCascade(h,n,c.feedStage),p=x*a.product+(1-x)*b.product;
-  return {stages:n,feedStage:c.feedStage,purity:ratio(x*a.product,p),recovery:a.product};
+  return {stages:n,feedStage:c.feedStage,purity:ratio(x*a.product,p),recovery:x>0?a.product:null};
  });
  const axis=c.pressurePa*(x*radialPDF(beta[0],0)+(1-x)*radialPDF(beta[1],0));
  const wall=c.pressurePa*(x*radialPDF(beta[0],1)+(1-x)*radialPDF(beta[1],1));
@@ -188,9 +190,9 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
  const result={schemaVersion:1,config:{...c},pair,samples,profiles,cuts,cascades,
   mechanics:{ii,nn,gamma,drag,torque,ohmicW,criticalVelocityMS:civ,slipCIV:Math.abs(end.ionMS-end.neutralMS)/civ,wallCIV:end.neutralMS/civ,
    requiredCoolingW:end.slipW+end.dragW+end.ohmicW+linerHeatW,linerHeatW,radialDiffusionTimeS:c.radiusM**2/c.radialDiffusivityM2S},
-  collection:{innerLightPurity:ratio(x*l,cut),lightRecovery:l,innerFraction:cut,outerHeavyPurity:ratio((1-x)*(1-h),1-cut),
+  collection:{innerLightPurity:ratio(x*l,cut),lightRecovery:x>0?l:null,innerFraction:cut,outerHeavyPurity:ratio((1-x)*(1-h),1-cut),
    logHeavyLightSeparation:beta[1]-beta[0],lightBalance:l+(1-l)-1,heavyBalance:h+(1-h)-1},
-  cascade:{productLightPurity:ratio(x*light.product,product),lightRecovery:light.product,productFraction:product,
+  cascade:{productLightPurity:ratio(x*light.product,product),lightRecovery:x>0?light.product:null,productFraction:product,
    lightBalance:light.product+light.tails-1,heavyBalance:heavy.product+heavy.tails-1,light,heavy,
    circulationPerFeed:x*light.visits.reduce((a,b)=>a+b,0)+(1-x)*heavy.visits.reduce((a,b)=>a+b,0)},
   pumping:{axisPa:axis,wallPa:wall,upstreamPa:upstream,gasLoadPaM3S:gasLoad,effectiveSpeedM3S:ratio(gasLoad,upstream),
@@ -199,12 +201,12 @@ export function simulateFuelCentrifuge(c:FuelConfig,currentEvents:readonly{timeS
   lithium:{wallVaporPressurePa:wallVapor,wallSaturationRatio:wallVapor===null?null:wall/wallVapor,gasVaporPressurePa:c.pair==='lithium'?lithiumVaporPressurePa(c.gasK):null},
   fuelCycle:{burnTritonsS,exhaustTritiumKg:massT*burnTritonsS*(1/c.burnFraction-1)*c.loopTimeS,
    grossTritiumKg:massT*burnTritonsS/c.burnFraction*c.loopTimeS},
-  assumptions:['Uniform-density two-rotor mechanics; neutral pressure fixes neutral inventory. Prescribed ion fraction, reciprocal collision rate, neutral drag and conductivity.',
-   ...(currentEvents.length?['Uniform-inertia reference follows the scheduled discharge-current steps by exact linear superposition. Radial equilibrium, cascade and pumping references use its final speed at the initial gas temperature; they are not evolving extraction or thermal predictions. Mechanics torque and Ohmic power retain the initial-current reference for setup identity and matched-torque scans.']:[]),
-   'Fixed gas temperature: required cooling is a load, not an evolved thermal solution. No ionization or electron energy balance.',
-   'Radial profiles are neutral isothermal equilibrium references at the computed speed, not transient separation or solved axial extraction.',
-   'Cascade assumes its incoming composition equals the reference vessel bulk composition, and assigns inventory fractions to routing probabilities with equal turnover; identical ideal stages retain both exit streams. Geometry partitions are schematic routing overlays: length and mechanics describe one reference vessel, not a dimensioned cascade envelope.',
-   'Pumping uses equilibrium pressure, Q=S p_wall and p_up=p_axis+Q/C with common species-independent S and C; flow back-reaction, thermal/rarefaction corrections and conductance validity are not solved.',
-   'CIV is a contextual slip-speed diagnostic, not a hard limit. Geometry, materials and coefficients are illustrative, not an as-built specification.']};
+  assumptions:['Two-rotor reference with uniform densities. Neutral pressure sets neutral inventory. Ion fraction, reciprocal collision rate, neutral drag and conductivity are specified inputs.',
+   ...(currentEvents.length?['The uniform-inertia reference uses exact linear superposition for discharge-current steps. Radial equilibrium, cascade and pumping references use its final speed at the initial gas temperature. They do not predict time-dependent extraction or temperature. Setup torque and Ohmic power use the initial current for setup identity and equal-torque scans.']:[]),
+   'At fixed gas temperature, required cooling is a heat load. It is not a calculated temperature history. The model does not include ionization or an electron energy balance.',
+   'Radial profiles show neutral isothermal equilibrium at the calculated speed. They do not predict time-dependent separation or axial extraction.',
+   'The cascade input composition equals the reference vessel bulk composition. Inventory fractions set routing probabilities with equal turnover times. Identical ideal stages include both exit streams. Geometry sections show schematic routing. Length and mechanics describe one reference vessel, not a complete cascade.',
+   'Pumping uses equilibrium pressure, Q=S p_wall and p_up=p_axis+Q/C. Both species use the same S and C. Flow does not change rotation. The calculation does not include thermal or rarefaction corrections or show where the conductance relation applies.',
+   'Critical ionization velocity (CIV) is a slip-speed reference, not a motion limit. Geometry, materials and coefficients are assumptions. They do not specify manufactured hardware.']};
  requireFiniteState(result);return result;
 }

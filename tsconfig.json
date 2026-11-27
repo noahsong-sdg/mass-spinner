@@ -3,8 +3,10 @@
     "target": "ES2022",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
-    "lib": ["ES2022", "DOM"],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "strict": true,
+    "resolveJsonModule": true,
+    "types": ["vite/client"],
     "noEmitOnError": true,
     "rootDir": "src",
     "outDir": "public/engine"

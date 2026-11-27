@@ -68,10 +68,10 @@ export const FUEL_MAP_AXES={
  pressurePa:{label:'Neutral pressure',unit:'Pa',domain:[1,100],scale:'log'},
 } as const;
 export const FUEL_MAP_METRICS={
- purity:{label:'Inner inventory purity',unit:'fraction',scope:'Equilibrium inventory cut; not flowing product purity.'},
- recovery:{label:'Inner inventory recovery',unit:'fraction',scope:'Equilibrium inventory cut; not flowing product recovery.'},
- power:{label:'Input power',unit:'W',scope:'Instantaneous mechanical plus Ohmic power at the selected duration.'},
- throughput:{label:'Outer gas load',unit:'Pa·m³/s',scope:'Conditional one-outlet pressure-flow model; no flow back-reaction.'},
+ purity:{label:'Inner inventory purity',unit:'fraction',scope:'Equilibrium inventory cut. This value does not predict flowing product purity.'},
+ recovery:{label:'Inner inventory recovery',unit:'fraction',scope:'Equilibrium inventory cut. This value does not predict flowing product recovery.'},
+ power:{label:'Input power',unit:'W',scope:'Mechanical plus Ohmic power at the selected duration.'},
+ throughput:{label:'Outer gas load',unit:'Pa·m³/s',scope:'One-outlet pressure-flow reference. Flow does not change rotation.'},
 } as const;
 type Axis=keyof typeof FUEL_MAP_AXES;
 type Metric=keyof typeof FUEL_MAP_METRICS;
@@ -122,5 +122,5 @@ export function computeFuelOperatingMap(config:FuelConfig,options:MapOptions={},
  const values=points.flatMap(p=>p.status==='valid'&&p.value!==null?[p.value]:[]);
  const domain:Domain=metric==='purity'||metric==='recovery'?[0,1]:[0,Math.max(0,...values)];
  return {schemaVersion:1 as const,config:{...config},x,y,size,metric,...FUEL_MAP_METRICS[metric],domain,points,
-  interpretation:'Uniform-inertia equilibrium reference; not the coupled transient. Diagnostic warnings are not validated physical failure thresholds.'};
+  interpretation:'Equilibrium reference with fixed uniform inertia. It does not use the coupled time-dependent model. Diagnostic warnings do not establish physical failure limits.'};
 }

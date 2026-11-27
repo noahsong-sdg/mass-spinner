@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "checkJs": true,
+    "types": ["node", "jsdom", "vite/client"]
+  },
+  "include": ["tests/**/*.ts", "scripts/**/*.mjs", "vite.config.mjs"]
+}

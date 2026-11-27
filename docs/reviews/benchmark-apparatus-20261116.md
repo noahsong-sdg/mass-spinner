@@ -1,0 +1,38 @@
+# Apparatus identifiability audit — 2026-11-16
+
+**Conclusion:** none of the four reopened sources establishes a fully identified, same-condition, no-fit rotation–temperature–electrical benchmark. The 1979 diffuse argon discharge is the strongest joint historical lead. Its measurements can test a declared conditional model; missing boundary inputs prevent promoting that comparison to an identified prediction of the apparatus. This is an evidence boundary, not evidence that the physical model is correct.
+
+## What the primary sources establish
+
+| Source | Measured/reported apparatus and controls | What is actually observed; unresolved inputs |
+|---|---|---|
+| [Wijnakker et al. 1979](https://doi.org/10.1515/zna-1979-0602), pp. 673, 678–679 | 24 stainless rings; 48 cm cathode gap; 12 cm midplane bore; 14 cm anode gap. **Tantalum hollow cathodes, 4 mm inner radius.** 100 A per source; pressure 1 Torr behind cathodes. Diffuse branch: B = 0.13 T. | Midplane Fabry–Perot ion/neutral Doppler rotation and line widths; near-wall corrected W–Rh thermocouple; static-pressure probe. Table 1 reports terminal 58 ± 0.5 V and electrode-fall-corrected 18.5 ± 2 V, central heavy-particle T = 5950 ± 1300 K. Central neutral density assumes 0.4 Torr; it is not independently measured inventory. Cathode aperture does not measure current footprint. Axial heat/current fields and a reproducible bulk-voltage measurement operator remain unidentified. |
+| [Wijnakker & Granneman 1980](https://www.degruyterbrill.com/document/doi/10.1515/zna-1980-0815/pdf), pp. 884–885, 890 | Same reported bore/gaps, but **tungsten cathodes, 1.5 cm diameter**, with indirect electron heating. 100 A discharge, axial B ≤ 0.26 T; 1–10 Torr filling-pressure range. | All diagnostics are midplane. Fig. 3 supplies neutral rotation at 3 Torr, 100 A, 0.17 T. Optical observations lack Abel inversion: authors estimate velocity underestimation of 30–40%, central T about 30%, and off-axis T errors exceeding a factor of two. These estimates are not measured correction factors. The 400 K wall belongs to the theoretical calculation, not a measured thermal boundary. No matching voltage observation recovered. |
+| [Kaneko et al. 1978](https://doi.org/10.1088/0032-1028/20/11/007) | Publisher abstract confirms weakly ionized He–Ar separation: B = 0.75 T, total current 1 A, outer-electrode enrichment 1.55 relative to before rotation; stated pressure-independence over 0.6–20 Torr. | Original full text was not accessible in this check. Geometry, same-shot temperature, terminal voltage, thermal boundaries and inventory are therefore **not admitted**. Do not substitute the different pure-Ar pressure case discussed in later literature. |
+| [Hood-McFadden et al. 2026 v2](https://arxiv.org/pdf/2607.28208v2), §§3–4.1.3 | Compact electrode radii 2.5/10 mm; enlarged 6/32 mm. Mean B ≈ 0.15 T at capillaries; 3 SCCM feed; 15–250 mA. Outer assembly cooled, interior uncooled; boundary thermocouples. Compact pressure samples near r = 5/8 mm at axial midpoint. | Calibrated capillary/RGA pressure and composition; compact inner/outer pressure ratio near unity. Camera condition: 1.5 Torr, 100 mA, 0.15 T. Optical ≈2 km/s is **ionization-wave phase speed**, not measured bulk rotation. Boundary T does not identify bulk T. The Ar/Kr 75 m/s value is fitted; exclude it. Reported power ranges and supply rating are not a matching independent voltage trace. |
+
+**A newly verified incompatibility:** the 1979 and 1980 cathodes differ in material, dimensions and heating. The later source calls the earlier device *similar*. Pooling 1979 electrical values with the 1980 thermal field sweep would silently invent a shared operating condition. Keep separate apparatus manifests and diagnostic operators.
+
+## Admissible no-fit protocol
+
+1. Use only the 1979 **diffuse** case for the first joint comparison. Declare each supply current and electrical return separately; never replace two 100 A branches with an unexplained 100 A whole-device input.
+2. Prescribe documented geometry, B, supply currents and pressure location. Treat current footprint, axial heat removal, electrode falls and emissivity as unresolved inputs with externally justified ranges. Do not select them using measured velocities, temperatures or voltage.
+3. Predict terminal voltage only with an electrode/sheath model; predict corrected voltage only with the source's documented probe/correction operator. A solver potential difference is not automatically either experimental observable. Using a measured voltage as drive consumes that observable; it cannot then validate the electrical prediction.
+4. Forward-model the optical chord/line response. Report unknown emissivity explicitly; do not convert published bias estimates into fitted pointwise corrections. Preserve separate ion/neutral outputs.
+5. Freeze inputs, operators and acceptance rules before scoring. Show rotation, temperature and electrical discrepancies together, including failed predictions. A broad interval containing data is compatibility, not identification.
+
+These are inference-based admission rules. They address the root cause—missing independent inputs and mismatched observables—more directly than adding transport coefficients or revisiting already-rejected parameter sweeps.
+
+## Better data lead, not a recovered benchmark
+
+The MIT/DOE [data-management plan, DOI 10.48321/D10930DB2F](https://doi.org/10.48321/D10930DB2F), for *Advancing Selective Isotope Pumping Using a Partial Ionization Plasma Centrifuge*, describes Marathon diagnostics and planned CSV/TXT releases through Zenodo, including spectra, pressure, thermocouples, magnetic field and electrical traces. That is a materially better route to an identifiable condition. A bounded search with the independent data reviewer did **not** recover an actual centrifuge deposit. A plan is not released data; this is not a claim of global nonexistence.
+
+## Evidence and limits
+
+### 1979 transport coefficients are two different dependency paths
+
+Pages 682–685 must not be conflated. The pointwise parallel conductivities 1070/950 S/m and electron/ion Hall parameters 100/38 and 0.94/0.18 come from measured electron temperature and Stark ion density, measured heavy-particle temperature, extrapolated pressure, and chosen collision cross-sections (Spitzer electron–ion, electron–Ar 4 × 10⁻²⁰ m², charge exchange 6 × 10⁻¹⁹ m²). This path gives an effective Hall parameter around 12–14. It is conditional on those diagnostic inputs; it does not predict their temperature or inventory.
+
+**Separately, the effective Hall parameters 3 and 9 used for theoretical rotation curves were inferred using the measured fall-corrected 18.5 ± 2 V**, assumed viscosity and Spitzer conductivity at electron temperatures 1/2.5 eV. Replaying those curves without a new fit still reuses voltage calibration; it cannot validate an independent voltage prediction. The tabulated neutral densities 4.3 × 10²⁰ and 4.5 × 10²¹ m⁻³ depend on assumed central 0.4 Torr and measured temperature/pressure. They are not measured total inventory. The thermocouple's flow correction also couples its reported temperature to rotation. [Original study](https://doi.org/10.1515/zna-1979-0602).
+
+Reopened the 1980 publisher PDF, 2026 primary manuscript and Kaneko publisher abstract; inspected the retained 1979 original by text extraction because its publisher PDF did not reopen. Retained file: `scientific/optical-v80/sources/journal.pdf`, SHA-256 `a40b59b092d6671cba93a8f22506257a27ed0fc982985479962d2babc48a6795`. Reviewed prior V64/V84/V85 reports to identify, rather than repeat, already-tested assumptions. No scientific solver, fitted coefficient or numerical benchmark was executed for this apparatus audit.

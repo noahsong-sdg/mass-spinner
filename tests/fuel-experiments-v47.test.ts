@@ -98,7 +98,7 @@ test('undefined cut purity, invalid solver inputs, and contextual diagnostics re
  const contextual=(c:FuelConfig)=>{const r=simulateFuelCentrifuge(c);r.mechanics.slipCIV=2;return r;};
  const civ=computeFuelOperatingMap(DEFAULT_FUEL_CENTRIFUGE,{size:2},contextual);
  assert.ok(civ.points.every(p=>p.status==='valid'&&p.diagnostics.includes('civ-reference-exceeded')));
- assert.match(civ.interpretation,/not validated physical failure thresholds/);
+ assert.match(civ.interpretation,/Diagnostic warnings do not establish physical failure limits/);
  assert.throws(()=>computeFuelOperatingMap(DEFAULT_FUEL_CENTRIFUGE,{size:2},()=>{throw new TypeError('regression');}),/regression/);
 });
 

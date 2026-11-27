@@ -1,0 +1,58 @@
+import {renderPlots} from './laboratory.js';
+import {publicInputCoverage} from './public-sensitivity.js';
+import {fuelLearningComparison, type FuelLearningKind} from './fuel-learning.js';
+import type {FuelFieldResult, FuelFieldState} from './fuel-field.js';
+import {createEquilibriumCalculator, type FuelSampleState} from './fuel-equilibrium-ui.js';
+export type FuelLearningOptions = {document: Document; host: HTMLElement; onCompare?: () => void; sampleState?: FuelSampleState};
+
+/** Result-owned scope and conditional comparisons, independent of pending slider values. */
+export function createFuelLearningTools({document:doc,host,onCompare=()=>{},sampleState}: FuelLearningOptions){
+ const el=<K extends keyof HTMLElementTagNameMap>(tag: K,text?: string)=>{const node=doc.createElement(tag);if(text!==undefined)node.textContent=text;return node;};
+ const scope=el('div'),coverage=el('details'),coverageTitle=el('summary'),coverageText=el('p');
+ scope.id='fuel-result-scope';scope.className='fuel-result-scope';coverage.id='fuel-input-coverage';
+ coverage.append(coverageTitle,coverageText,el('p','Numerical studies tested three default lithium cases: 0.015, 0.03 and 0.06 A. Each used 1 s, 64 cells, 512 intervals, fixed temperature and no current switches. These results do not show accuracy throughout the slider range or for local composition.'));
+ const link=el('a','Qualification evidence');link.href='/qualification';coverage.append(link);
+ const comparisons=el('details'),bar=el('div'),instruction=el('p'),description=el('p'),plots=el('div');comparisons.id='fuel-learning-comparisons';
+ instruction.id='fuel-comparison-instruction';instruction.setAttribute('role','status');instruction.hidden=true;
+ comparisons.append(el('summary','Compare'),bar,instruction,description,plots);bar.className='fuel-learning-actions';plots.className='live-plots';
+ const buttons=new Map<FuelLearningKind, HTMLButtonElement>();let result: FuelFieldResult | null=null,state: FuelFieldState={},kind: FuelLearningKind | null=null,pending=true;
+ for(const [key,label]of [['temperature','Warmer gas'],['rotation','Faster rotation'],['collection','Collection radius']] as const){
+  const button=el('button',label);button.type='button';button.id=`fuel-compare-${key}`;button.disabled=true;button.setAttribute('aria-pressed','false');
+  button.addEventListener('click',()=>{if(pending||!result)return;kind=key;onCompare();drawComparison();});bar.append(button);buttons.set(key,button);
+ }
+ host.append(scope,coverage,comparisons);
+ const equilibrium=createEquilibriumCalculator({document:doc,host,sampleState});
+ function drawComparison(){
+  for(const [key,button]of buttons)button.setAttribute('aria-pressed',String(kind===key));
+  if(!kind||!result||pending)return;
+  const comparison=fuelLearningComparison(result,state,kind);description.textContent=comparison.scope;
+  instruction.hidden=!comparison.needsRotation;
+  instruction.textContent=comparison.needsRotation?'The gas is at rest. Both curves overlap. Select Play, or move Physical time to a rotating state. With no drive, start a powered run first.':'';
+  renderPlots(plots,comparison.curves,{announce:false});
+ }
+ function setPending(message='Calculation in progress · previous accepted result'){
+  equilibrium.setPending();
+  pending=true;kind=null;scope.textContent=message;coverageTitle.textContent='Coverage pending';coverageText.textContent='Wait for an accepted result.';
+  coverage.dataset.match='pending';for(const button of buttons.values()){button.disabled=true;button.setAttribute('aria-pressed','false');}
+  instruction.hidden=true;instruction.textContent='';description.textContent='';renderPlots(plots,[]);
+ }
+ function update(next: FuelFieldResult,nextState: FuelFieldState,topic: string){
+  equilibrium.update(next,nextState);
+  result=next;state=nextState;pending=false;
+  const timeSeries=['separation','spin','heat','thermal','momentum','inertia'].includes(topic)&&result.transport;
+  const local=['composition','profile','cut','thermalProfile','gasEnergy','gasPressure'].includes(topic);
+  const thermalEndpoint=['thermalProfile','gasEnergy','gasPressure'].includes(topic)&&result.transport;
+  const evolving=timeSeries||thermalEndpoint||local&&Boolean(state.lightMass),thermalSetup=result.transport?.operation?.thermal;
+  const thermal=evolving&&typeof thermalSetup==='object'&&thermalSetup!==null&&'enabled' in thermalSetup&&thermalSetup.enabled;
+  const labels=[evolving?'Time-dependent result':'Equilibrium / input reference',thermal?'Temperature changes':`Temperature fixed · ${result.config.gasK} K`,
+   topic==='pump'?'Conditional flow reference':topic==='inventory'?'Fuel-loop reference':'Closed vessel · no extraction'];
+  scope.replaceChildren(...labels.map(text=>el('span',text)));
+  const coverageResult=publicInputCoverage(result);coverage.dataset.match=String(coverageResult.historicalInputMatch);
+  coverageTitle.textContent=coverageResult.historicalInputMatch?'Matches tested inputs':'Inputs outside the tested cases';
+  coverageText.textContent=`${coverageResult.text} Experimental accuracy is unknown.`;
+  for(const button of buttons.values())button.disabled=false;
+  drawComparison();
+ }
+ setPending('Run the simulator to see results.');
+ return {update,setPending,dispose(){equilibrium.dispose();renderPlots(plots,[]);scope.remove();coverage.remove();comparisons.remove();}};
+}

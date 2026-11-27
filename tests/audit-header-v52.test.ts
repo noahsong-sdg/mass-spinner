@@ -11,11 +11,11 @@ test('active playground remains in its own navigation viewport after refresh and
   Object.defineProperty(globalThis,key,{value,configurable:true});
   t.after(()=>{if(previous)Object.defineProperty(globalThis,key,previous);else Reflect.deleteProperty(globalThis,key);});
  }
- const navigation=document.querySelector<HTMLElement>('.level-navigation')!,primary=navigation.querySelector<HTMLButtonElement>(':scope > button')!,advanced=document.getElementById('advanced-simulators') as HTMLDetailsElement,summary=advanced.querySelector('summary')!;
+ const navigation=document.querySelector<HTMLElement>('.level-navigation')!,primary=navigation.querySelector<HTMLButtonElement>(':scope > button')!,advanced=document.getElementById('advanced-simulators') as HTMLDetailsElement,summary=advanced.querySelector('summary')!,reactor=document.getElementById('show-reactor')!;
  let width=300;
  Object.defineProperties(navigation,{clientWidth:{get:()=>width},clientLeft:{value:2}});
  navigation.getBoundingClientRect=()=>({left:20,right:24+width}) as DOMRect;
- for(const [node,offset,itemWidth]of [[primary,0,100],[summary,100,80]] as const)node.getBoundingClientRect=()=>{
+ for(const [node,offset,itemWidth]of [[primary,0,100],[reactor,100,80],[summary,180,80]] as const)node.getBoundingClientRect=()=>{
   const left=22+offset-navigation.scrollLeft;return {left,right:left+itemWidth} as DOMRect;
  };
  for(const button of advanced.querySelectorAll<HTMLButtonElement>('button[data-level]'))button.getBoundingClientRect=()=>{assert.fail('Closed Advanced choices must reveal their visible summary, not a hidden button.');};
@@ -35,10 +35,10 @@ test('active playground remains in its own navigation viewport after refresh and
  navigation.scrollLeft=230;ui.refresh();assert.equal(navigation.scrollLeft,0,'Refreshing reveals the primary choice clipped on the left.');
  advanced.open=true;advanced.querySelector<HTMLButtonElement>('[data-level="3"]')!.click();
  assert.equal(advanced.open,false);assert.equal(document.activeElement,summary);
- assert.equal(navigation.scrollLeft,80,'An advanced playground reveals the visible Advanced summary.');
- window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,80,'An already visible summary must stay still.');
- navigation.scrollLeft=230;ui.refresh();assert.equal(navigation.scrollLeft,100,'Refreshing must reveal an active tab clipped on the left.');
- width=60;window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,100,'An oversized tab aligns to its start.');
- window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,100,'An oversized tab must not oscillate between edges.');
+ assert.equal(navigation.scrollLeft,160,'An advanced playground reveals the visible Advanced summary.');
+ window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,160,'An already visible summary must stay still.');
+ navigation.scrollLeft=230;ui.refresh();assert.equal(navigation.scrollLeft,180,'Refreshing must reveal an active tab clipped on the left.');
+ width=60;window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,180,'An oversized tab aligns to its start.');
+ window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,180,'An oversized tab must not oscillate between edges.');
  ui.dispose();navigation.scrollLeft=0;window.dispatchEvent(new window.Event('resize'));assert.equal(navigation.scrollLeft,0,'Disposal removes the resize listener.');
 });

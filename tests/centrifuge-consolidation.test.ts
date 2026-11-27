@@ -11,9 +11,9 @@ test('help page keeps density linear in centrifugal radial force balance',()=>{
  const balance=[...doc.querySelectorAll('.equation')].find(node=>node.textContent?.startsWith('dp/dr'))!;
  assert.ok(balance);assert.match(balance.textContent!,/^dp\/dr = ρΩ²r/);
  assert.equal(balance.querySelectorAll('var')[2].textContent,'ρ','density must not be grouped under the square');
- assert.match(balance.nextElementSibling!.textContent!,/equilibrium references/);
- assert.match(balance.nextElementSibling!.textContent!,/does not solve radial fluid momentum or extraction/);
- assert.match(doc.querySelector('#physics')!.textContent!,/optional thermal evolution/);
+ assert.match(balance.nextElementSibling!.textContent!,/equilibrium reference/);
+ assert.match(balance.nextElementSibling!.nextElementSibling!.textContent!,/does not calculate radial fluid momentum or extraction/);
+ assert.match(doc.querySelector('#physics')!.textContent!,/Optional thermal evolution/);
 });
 
 function fixture(t:any,search='',mobile=false){
@@ -35,15 +35,16 @@ for(const mobile of [false,true])test(`centrifuge-first navigation preserves adv
  assert.equal(f.ui.level,'2');assert.equal(f.contexts.at(-1).marathon,'centrifuge');
  assert.equal(primary.dataset.level,'2');assert.equal(f.advanced.open,false);
  assert.equal(f.node('level-title').textContent,'Marathon centrifuge');
- assert.ok(f.advanced.contains(f.apparatus));assert.equal(f.apparatus.closest('[hidden]'),null);
+ assert.ok(!f.advanced.contains(f.apparatus));assert.equal(f.apparatus.closest<HTMLElement>('.world-context')!.hidden,true);
+ assert.ok(f.doc.querySelector('.level-navigation')!.contains(f.node('show-reactor')));
  for(const level of ['1','3','4'])assert.ok(f.advanced.contains(f.doc.querySelector(`[data-level="${level}"]`)));
  const models=f.doc.querySelector<HTMLButtonElement>('[data-level="3"]')!;
  models.click();const field=f.node('field') as HTMLInputElement;field.value='.17';
  primary.click();
  for(const scene of ['source','blanket']){
-  f.advanced.open=true;f.apparatus.value=scene;f.apparatus.dispatchEvent(new f.window.Event('change'));
+  f.node('show-reactor').click();f.apparatus.focus();f.apparatus.value=scene;f.apparatus.dispatchEvent(new f.window.Event('change'));
   assert.equal(f.ui.level,'2');assert.equal(f.contexts.at(-1).marathon,scene);assert.equal(primary.getAttribute('aria-pressed'),'false');
-  assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.advanced.querySelector('summary'));
+  assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.apparatus);
   primary.click();assert.equal(f.contexts.at(-1).marathon,'centrifuge');assert.equal(f.apparatus.value,'centrifuge');assert.equal(f.advanced.open,false);
  }
  models.click();
@@ -52,7 +53,7 @@ for(const mobile of [false,true])test(`centrifuge-first navigation preserves adv
  assert.equal(f.ui.level,'2','choosing another Marathon system from an advanced playground enters its scene');
  assert.equal(f.contexts.at(-1).marathon,'source');
  f.advanced.open=true;const escape=new f.window.KeyboardEvent('keydown',{key:'Escape',bubbles:true,cancelable:true});
- f.apparatus.dispatchEvent(escape);assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.advanced.querySelector('summary'));
+ f.advanced.querySelector('summary')!.dispatchEvent(escape);assert.equal(f.advanced.open,false);assert.equal(f.doc.activeElement,f.advanced.querySelector('summary'));
 });
 
 test('same-level apparatus changes preserve compatible panels and close unavailable target controls',t=>{

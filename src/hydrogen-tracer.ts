@@ -16,7 +16,7 @@ const plus=(a:Vec,b:Vec):Vec=>a.map((x,i)=>x+b[i]) as Vec;
 const ptheta=(p:Vec,v:Vec,charge:0|1,b:number)=>mass*(p[0]*v[1]-p[1]*v[0])+charge*E_CHARGE*b*(p[0]**2+p[1]**2)/2;
 
 export function validateHydrogenTracer(c:HydrogenTracerConfig){
- if(c.atomicIdentity!=='H-1'||c.electricFieldVM!==0||c.rfAmplitudeVM!==0)throw new Error('This H-1 first-capture tracer requires E=0 and RF=0; accelerated/general-ion transport is unsupported.');
+ if(c.atomicIdentity!=='H-1'||c.electricFieldVM!==0||c.rfAmplitudeVM!==0)throw new Error('This H-1 first-capture tracer uses E=0 and RF=0. It does not calculate accelerated or general-ion transport.');
  if(![c.radiusM,c.lengthM,c.magneticT,c.energyEVPerU,c.pitchDeg,c.neutralDensityM3].every(Number.isFinite)||c.radiusM<.001||c.lengthM<.01||c.radiusM>2||c.lengthM>10
   ||Math.abs(c.magneticT)>.05||c.energyEVPerU<.1||c.energyEVPerU>20||c.pitchDeg<0||c.pitchDeg>85||c.neutralDensityM3<0||c.neutralDensityM3>1e20)
   throw new Error('Tracer domain: radius 0.001–2 m, length 0.01–10 m, |B|≤0.05 T, energy 0.1–20 eV/u, pitch 0–85°, density 0–1e20 m⁻³.');
@@ -46,7 +46,7 @@ export function uninterruptedHydrogenExit(c:HydrogenTracerConfig,velocity:Vec){
 
 /** Forward ray intersection; a roundoff-admitted absorbing boundary exits at zero time. */
 export function neutralHydrogenExit(c:HydrogenTracerConfig,position:Vec,velocity:Vec){
- if(!position.every(Number.isFinite)||!velocity.every(Number.isFinite)||velocity[2]<=0)throw new Error('Finite forward neutral ray required.');
+ if(!position.every(Number.isFinite)||!velocity.every(Number.isFinite)||velocity[2]<=0)throw new Error('Use a finite neutral ray with a positive axial velocity.');
  const a=velocity[0]**2+velocity[1]**2,b=2*(position[0]*velocity[0]+position[1]*velocity[1]);
  const d=position[0]**2+position[1]**2-c.radiusM**2;
  // At a tangent helix contact the radial gap is second order in time and
@@ -74,7 +74,7 @@ export interface HydrogenTrace {
 /** One exact first-event realization. No product scattering is inferred from the total fit. */
 export function traceHydrogenFirstCapture(c:HydrogenTracerConfig,uniform:number,azimuth=0):HydrogenTrace{
  validateHydrogenTracer(c);
- if(!Number.isFinite(azimuth))throw new Error('Finite launch azimuth required.');
+ if(!Number.isFinite(azimuth))throw new Error('Use a finite launch azimuth.');
  const speed=Math.sqrt(2*c.energyEVPerU*E_CHARGE/AMU),pitch=c.pitchDeg*Math.PI/180;
  const initialVelocity:Vec=[speed*Math.sin(pitch)*Math.cos(azimuth),speed*Math.sin(pitch)*Math.sin(azimuth),speed*Math.cos(pitch)];
  const exit=uninterruptedHydrogenExit(c,initialVelocity),hazard=hydrogenCaptureHazard(initialVelocity,c.neutralDensityM3);
@@ -132,13 +132,13 @@ export function simulateHydrogenTracer(c:HydrogenTracerConfig){
   finalNuclearKineticJ:traces.reduce((sum,t)=>sum+.5*mass*dot(t.exitVelocity,t.exitVelocity),0),
   maxNormalizedCanonicalAngularError:Math.max(...traces.map(t=>Math.abs(t.ledger.canonicalAngularError)/angularScale))};
  return {kind:'restricted-H1-first-capture-tracer' as const,config:{...c},randomSource:RANDOM_STREAM_VERSION,
-  qualification:'Conditional first-capture approximation; not full physical transport.',
-  scope:['H-1 only; uniform B, E=RF=0; on-axis monoenergetic launch at z=0.02 L.',
-   'Total capture fit supplies event probability, not a validated differential nuclear-scattering law.',
-   'Straight-through capture products; fast neutral ballistic; slow ion has prescribed-field-only motion.',
-   'Further neutral scattering, secondary reactions, ion-ion collisions, electron inertia and gas/plasma response are not modeled.',
-   'Full 3D display is withheld beyond 4096 segments at ≤0.05 rad phase/segment; the exact transverse footprint omits identical repeated turns.',
-   'No cross section is extrapolated to the stationary slow ion; its subsequent atomic kinetics remain unresolved.'],
+  qualification:'This conditional first-capture approximation does not calculate full physical transport.',
+  scope:['The tracer uses H-1, uniform B and E=RF=0. Particles start on the axis at z=0.02 L with the same kinetic energy.',
+   'The total capture fit gives the event probability. It does not give a validated differential nuclear-scattering law.',
+   'Capture preserves the fast particle direction. The fast neutral moves on a straight line. Only the prescribed field acts on the slow ion.',
+   'The model does not calculate further neutral scattering, secondary reactions, ion-ion collisions, electron inertia or gas/plasma response.',
+   'The full 3D display stops above 4096 segments at ≤0.05 rad phase/segment. The exact transverse footprint does not show identical repeated turns.',
+   'The model does not extrapolate a cross section to the stationary slow ion. It does not calculate later atomic kinetics.'],
   horizonS:uninterrupted.endTimeS,primary,ledger,traces,paths:traces.slice(0,12).map(t=>drawPath(c,t)),
   expectedCaptureFraction:-Math.expm1(-rate*uninterrupted.timeS),
   curves:[{label:'Analytic survival for prescribed fit',x:times.map(t=>t*1e6),y:times.map(t=>Math.exp(-rate*t)),xLabel:'Time before uninterrupted exit (µs)',yLabel:'Uncaptured tagged fraction',color:'#a4c4b1'},

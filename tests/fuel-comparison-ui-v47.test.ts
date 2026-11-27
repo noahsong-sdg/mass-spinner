@@ -5,6 +5,7 @@ import {JSDOM} from 'jsdom';
 import {createFuelComparisonTools} from '../src/fuel-comparison-ui.js';
 import {computeFuelOperatingMap} from '../src/fuel-experiments.ts';
 import {DEFAULT_FUEL_CENTRIFUGE,simulateFuelCentrifuge} from '../src/fuel-centrifuge.ts';
+import {DEFAULT_FUEL_THERMAL,simulateFuelOperation} from '../src/fuel-operation.js';
 
 const flush=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
 const snapshot=(currentA=.03)=>({result:simulateFuelCentrifuge({...DEFAULT_FUEL_CENTRIFUGE,currentA}),producingCode:null});
@@ -26,6 +27,47 @@ test('comparison pin retains accepted data after later accepts and clear release
  f.tools.accept(snapshot(.05));assert.equal(f.tools.pinned!.config.currentA,.02);
  assert.match(f.doc.querySelector('output')!.textContent!,/0\.02 A/);
  f.buttons()[1].click();assert.equal(f.tools.pinned,null);assert.equal(f.doc.querySelector('output')!.textContent,'');
+});
+
+test('comparison explains accepted changes, keeps A immutable and hides pending or cleared input differences',t=>{
+ const f=fixture(t),reading=f.doc.querySelector<HTMLOutputElement>('.fuel-comparison-inputs')!;
+ assert.equal(reading.hidden,true);
+ f.tools.accept(snapshot(.02));assert.equal(reading.hidden,true);f.buttons()[0].click();
+ assert.equal(reading.hidden,false);assert.match(reading.textContent!,/Same accepted base inputs/);
+ assert.match(reading.textContent!,/Drive and thermal histories are not available/);
+ f.tools.accept(snapshot(.05));assert.match(reading.textContent!,/Initial discharge current: 0\.02 A → 0\.05 A/);
+ assert.equal(f.tools.pinned!.config.currentA,.02);
+ f.tools.accept(null);assert.equal(reading.hidden,true);assert.equal(reading.textContent,'');
+ assert.equal(f.buttons()[0].disabled,true);
+ f.tools.accept(snapshot(.02));assert.match(reading.textContent!,/Same accepted base inputs/);
+ f.buttons()[1].click();assert.equal(reading.hidden,true);assert.equal(reading.textContent,'');
+});
+
+test('comparison identifies changed feed, collection cut and physical dimensions rather than implying equivalent samples',t=>{
+ const f=fixture(t);f.tools.accept(snapshot());f.buttons()[0].click();
+ f.tools.accept({result:simulateFuelCentrifuge({...DEFAULT_FUEL_CENTRIFUGE,pair:'dt',radiusM:.2,lengthM:1,cutFraction:.4})});
+ const reading=f.doc.querySelector('.fuel-comparison-inputs')!.textContent!;
+ assert.match(reading,/Feed: ⁶Li \/ ⁷Li → D \/ T/);
+ assert.match(reading,/Vessel radius: 0\.12 m → 0\.2 m/);
+ assert.match(reading,/Vessel length: 0\.8 m → 1 m/);
+ assert.match(reading,/Collection radius \/ a: 0\.65 → 0\.4/);
+ assert.match(f.doc.querySelector('.fuel-comparison-delta')!.textContent!,/Inventory cuts\/species differ/);
+});
+
+test('comparison reports accepted thermal and current-history edits even when initial base inputs match',t=>{
+ const f=fixture(t),rotor=simulateFuelCentrifuge({...DEFAULT_FUEL_CENTRIFUGE,durationS:.001});
+ const a={result:{...rotor,transport:simulateFuelOperation(rotor,{schemaVersion:1,events:[],thermal:DEFAULT_FUEL_THERMAL},{cells:4,steps:4})}};
+ f.tools.accept(a);f.buttons()[0].click();
+ assert.equal(f.doc.querySelector('.fuel-comparison-inputs')!.textContent,'Same accepted base inputs.');
+ const b={result:{...rotor,transport:simulateFuelOperation(rotor,{schemaVersion:1,events:[{timeS:.0005,currentA:0}],thermal:{...DEFAULT_FUEL_THERMAL,enabled:true,coolantK:550}},{cells:4,steps:4})}};
+ assert.doesNotMatch(b.result.transport.assumptions.join(' '),/Isothermal independent/,'A thermal run must not claim an external fixed-temperature bath.');
+ f.tools.accept(b);const reading=f.doc.querySelector('.fuel-comparison-inputs')!.textContent!;
+ assert.match(reading,/The current-switch history changed/);assert.match(reading,/Temperature evolution: off → on/);
+ assert.match(reading,/Coolant temperature: 500 K → 550 K/);
+ assert.doesNotMatch(reading,/Same accepted base inputs|unavailable/);
+ f.buttons()[0].click();const equivalent=structuredClone(b);
+ equivalent.result.transport.operation!.events=[{currentA:0,timeS:.0005}];f.tools.accept(equivalent);
+ assert.equal(f.doc.querySelector('.fuel-comparison-inputs')!.textContent,'Same accepted base inputs.');
 });
 
 test('map requests use accepted config, cells expose units and require deliberate apply',async t=>{
@@ -61,7 +103,7 @@ test('known map source mismatch is rejected while legacy unknown provenance rema
  const f=fixture(t),known={...snapshot(),producingCode:{schemaVersion:1,algorithm:'sha256',sourceHash:'a'.repeat(64),sourceFiles:{source:'b'.repeat(64)}}};
  f.tools.accept(known);f.buttons()[2].click();const old=f.requests[0];
  old.resolve({result:computeFuelOperatingMap(old.record.config,{size:2}),producingCode:{...known.producingCode,sourceHash:'c'.repeat(64)}});await flush();
- assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,0);assert.match(f.doc.querySelector('[role=status]')!.textContent!,/Simulation code changed/);
+ assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,0);assert.match(f.doc.querySelector('[role=status]')!.textContent!,/The simulation code changed/);
  f.buttons()[2].click();const matching=f.requests[1];matching.resolve({result:computeFuelOperatingMap(matching.record.config,{size:2}),producingCode:known.producingCode});await flush();
  assert.equal(f.doc.querySelectorAll('.fuel-map-cell').length,4);
  f.tools.accept(snapshot());f.buttons()[2].click();const legacy=f.requests[2];

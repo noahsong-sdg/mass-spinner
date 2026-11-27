@@ -1,0 +1,57 @@
+name: Profile playback
+on:
+  # Qualify changes to the study itself on feature branches before registration on main.
+  push:
+    paths: ['.github/workflows/profile-playback.yml']
+  workflow_dispatch:
+    inputs:
+      baseline_revision:
+        description: Full source SHA with a successful same-repository Verify run
+        required: true
+        default: 45588450bf35cb9abc4e3472ff6f30bf9b00d459
+permissions:
+  contents: read
+  actions: read
+jobs:
+  profile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Admit and fetch immutable baseline sources
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASELINE: ${{ inputs.baseline_revision || '45588450bf35cb9abc4e3472ff6f30bf9b00d459' }}
+        run: |
+          [[ "$BASELINE" =~ ^[a-f0-9]{40}$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/verify.yml/runs?head_sha=$BASELINE&status=success&per_page=100" > baseline-runs.json
+          jq -e --arg sha "$BASELINE" --arg repo "$GITHUB_REPOSITORY" '.workflow_runs | any(.head_sha == $sha and .name == "Verify" and .path == ".github/workflows/verify.yml" and .conclusion == "success" and .head_repository.full_name == $repo)' baseline-runs.json
+          mkdir playback-baseline playback-study-results
+          echo "$BASELINE" > playback-baseline/REVISION
+          echo "$GITHUB_SHA" > playback-study-results/CURRENT_REVISION
+          for file in fuel-motion.ts laboratory.ts fuel-centrifuge-geometry.ts fuel-centrifuge-ui.ts; do
+            gh api "repos/$GITHUB_REPOSITORY/contents/src/$file?ref=$BASELINE" -H 'Accept: application/vnd.github.raw+json' > "playback-baseline/$file"
+          done
+      - name: Install pinned tools without study credentials
+        run: |
+          docker build -t playback-study -f ci/Dockerfile .
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp playback-study npm ci --ignore-scripts --no-audit --no-fund
+      - name: Profile both history sizes offline within one GiB and one CPU
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp playback-study sh -eu -c '
+            status=0
+            for history in 129 10000; do
+              node --import tsx scripts/study-playback-performance.ts --baseline-dir playback-baseline --history "$history" > "playback-study-results/history-$history.json" 2> "playback-study-results/history-$history.log" || status=$?
+            done
+            awk '\''{print FILENAME ": " $0}'\'' /sys/fs/cgroup/memory.peak /sys/fs/cgroup/memory.events /sys/fs/cgroup/cpu.max /sys/fs/cgroup/cpu.stat > playback-study-results/container-resources.txt
+            exit "$status"
+          ' 2>&1 | tee playback-study-results/container.log
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: playback-performance
+          path: playback-study-results/
+          if-no-files-found: warn
+          retention-days: 7

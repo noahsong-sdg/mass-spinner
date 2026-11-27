@@ -34,6 +34,6 @@ test('zero assumed rates recover no-reaction and no-loss limits without changing
 test('failure estimates enforce units/domain and report overflow rather than fabricate a budget',()=>{
  for(const change of [{residenceS:0},{ionDensityM3:0},{impurityFraction:1.01},
   {diffusionM2S:-1},{cxCrossSectionM2:NaN},{wallFluxM2S:Infinity}])
-  assert.throws(()=>failureBudgets({...DEFAULT_FAILURE_BUDGETS,...change}),/require/);
- assert.throws(()=>failureBudgets({...DEFAULT_FAILURE_BUDGETS,coolingCoefficientWM3:1e308}),/representable/);
+  assert.throws(()=>failureBudgets({...DEFAULT_FAILURE_BUDGETS,...change}),/finite nonnegative SI inputs.*Ion density and residence time must be positive.*Impurity fraction must be in \[0,1\]/);
+ assert.throws(()=>failureBudgets({...DEFAULT_FAILURE_BUDGETS,coolingCoefficientWM3:1e308}),/Failure-budget products are outside the finite number range/);
 });

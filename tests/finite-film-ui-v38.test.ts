@@ -15,10 +15,10 @@ test('native finite-film reference stays collapsed and shows source-specific par
  const ui=setupFiniteFilmReference(host,data);
  assert.equal(ui.panel.open,false);assert.equal(ui.select.options.length,2);
  assert.match(host.textContent!,/Recorded 100 keV/);assert.match(host.textContent!,/Upstream escape/);assert.match(host.textContent!,/Downstream escape/);
- assert.match(host.textContent!,/Wilson/);assert.match(host.textContent!,/exclude material\/model uncertainty/);
+ assert.match(host.textContent!,/Wilson/);assert.match(host.textContent!,/do not include material or model uncertainty/);
  ui.select.value='backing';ui.select.dispatchEvent(new dom.window.Event('change'));
  assert.match(host.textContent!,/70/);assert.match(host.textContent!,/10 µm W/);assert.match(host.textContent!,/Seed 3801/);
- assert.match(host.textContent!,/Projectile-energy gate: pass/);assert.match(host.textContent!,/no live loading kernel/);
+ assert.match(host.textContent!,/Projectile-energy gate: pass/);assert.match(host.textContent!,/These cases do not change live loading/);
 });
 
 test('reference preserves failed energy status and rejects incomplete incident partitions',()=>{
@@ -26,6 +26,6 @@ test('reference preserves failed energy status and rejects incomplete incident p
  const failed=structuredClone(data);failed.cases[0].energy.passed=false;setupFiniteFilmReference(host,failed);
  assert.match(host.textContent!,/Projectile-energy gate: fail/);
  const invalid=structuredClone(data);invalid.cases[0].partition.transmitted=79;
- assert.throws(()=>setupFiniteFilmReference(host,invalid),/complete incident partition/);
- assert.throws(()=>setupFiniteFilmReference(host,{...data,schema:0}),/Unsupported/);
+ assert.throws(()=>setupFiniteFilmReference(host,invalid),/must assign each incident ion to one outcome/);
+ assert.throws(()=>setupFiniteFilmReference(host,{...data,schema:0}),/has an unsupported format/);
 });

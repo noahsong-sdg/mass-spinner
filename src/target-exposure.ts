@@ -74,10 +74,10 @@ export function simulateTargetExposure(beam:ReturnType<typeof simulateFusionBeam
    x:history.map(s=>s.timeS),y:history.map(s=>s[key]),
    xLabel:'Time from beam start (s)',yLabel:'Energy (J)',selectedX:onS}))],
   assumptions:[
-   'Single bulk assembly node with assumed constant areal heat capacity and effective cooling. Coefficients are scenario inputs, not Marathon measurements or a verified LiT material model.',
-   'Uses conditional assembly heat: all transmitted beam stops in the backing. The film and backing are not separate thermal nodes; no surface hotspot, contact resistance, spatial conduction, coolant hydraulics, phase change or radiation is solved.',
-   'A constant beam acts for the source exposure duration, then switches off for cooldown. Cooling bath temperature stays fixed. Beam current is beam-on current; cooling time produces no additional neutrons.',
-   'The source and stopping matrix stay frozen. Temperature does not change neutron yield, tritium loading or stopping. Negative heat-to-coolant means the bath is warming an initially colder assembly.',
-   'Fusion consumption counts one tritium nucleus per reaction. It omits isotope exchange, implantation, diffusion, permeation, sputtering, radioactive decay and target renewal; this is not a target-lifetime or safe-temperature calculation.',
+   'One bulk assembly node uses constant areal heat capacity and effective cooling. These coefficients are scenario inputs. They are not Marathon measurements or a verified LiT material model.',
+   'The conditional assembly heat includes all transmitted beam energy as heat in the backing. Film and backing share one thermal node. The model does not include surface hotspots, contact resistance, spatial conduction, coolant hydraulics, phase change or radiation.',
+   'The beam stays constant during the specified exposure, then stops for cooldown. The coolant temperature stays fixed. Beam current means beam-on current. Cooldown produces no additional neutrons.',
+   'The source and stopping matrix stay fixed. Temperature does not change neutron yield, tritium loading or stopping. Negative heat-to-coolant means that the coolant supplies heat to an initially colder assembly.',
+   'Fusion consumes one tritium nucleus per reaction. This count does not include isotope exchange, implantation, diffusion, permeation, sputtering, radioactive decay or target renewal. It does not give target lifetime or a safe temperature.',
   ]};
 }

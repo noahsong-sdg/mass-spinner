@@ -10,7 +10,7 @@ export type FuelCurrentSetup=Omit<FuelCurrentInput,'omegaRadS'>;
 type Link={a:number;b:number|null;voltage:number;resistance:number;parts:{cell:number;resistance:number;torquePerAmp:number}[]};
 const sum=(a:readonly number[])=>a.reduce((s,v)=>s+v,0),dot=(a:readonly number[],b:readonly number[])=>sum(a.map((v,i)=>v*b[i]));
 function edges(e:readonly number[],radial:boolean){
- if(e.length<3||e.some((v,i)=>!Number.isFinite(v)||(i>0&&v<=e[i-1]))||(radial&&e[0]<0))throw new RangeError('Need at least two ordered finite cells per coordinate.');
+ if(e.length<3||e.some((v,i)=>!Number.isFinite(v)||(i>0&&v<=e[i-1]))||(radial&&e[0]<0))throw new RangeError('Each coordinate must have at least two ordered finite cells.');
 }
 
 /** Own a copied, fixed conductance problem; only rotation varies between solves. */
@@ -22,9 +22,9 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
  const c=structuredClone(input);
  edges(c.radialEdgesM,true);edges(c.axialEdgesM,false);
  const nr=c.radialEdgesM.length-1,nz=c.axialEdgesM.length-1,n=nr*nz,r=c.radialEdgesM,z=c.axialEdgesM;
- if(!Number.isFinite(c.magneticT)||[c.sigmaPerpSM,c.sigmaParallelSM].some(a=>a.length!==n||a.some(v=>!Number.isFinite(v)||v<=0)))throw new RangeError('Current needs positive cell conductivities and finite common-grid rotation/field.');
+ if(!Number.isFinite(c.magneticT)||[c.sigmaPerpSM,c.sigmaParallelSM].some(a=>a.length!==n||a.some(v=>!Number.isFinite(v)||v<=0)))throw new RangeError('Cell conductivities must be positive. Conductivity arrays must use the same grid. The magnetic field must be finite.');
  const walls=[c.innerVoltageV,c.outerVoltageV,c.lowerVoltageV,c.upperVoltageV];
- if(walls.some((a,i)=>a.length!==(i<2?nz:nr)||a.some(v=>v!==null&&!Number.isFinite(v)))||!walls.some(a=>a.some(v=>v!==null)))throw new RangeError('Need finite electrode voltages or insulating null faces, and an electrode reference.');
+ if(walls.some((a,i)=>a.length!==(i<2?nz:nr)||a.some(v=>v!==null&&!Number.isFinite(v)))||!walls.some(a=>a.some(v=>v!==null)))throw new RangeError('Boundary arrays must match the grid. Use finite electrode voltages or null for insulation. At least one electrode reference is necessary.');
  if(r[0]===0&&c.innerVoltageV.some(v=>v!==null))throw new RangeError('The axis cannot be an electrode surface.');
  const voltageReferenceV=walls.flat().find((v):v is number=>v!==null)!;
  // Collocate Ω at the r² midpoint used by gas inertia. Both half-cell
@@ -36,7 +36,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
   torquePerAmp:-c.magneticT*(b-a)*(b+a)/2});
  const append=(a:number,b:number|null,voltage:number,parts:Link['parts'])=>{
   const resistance=sum(parts.map(p=>p.resistance));
-  if(!Number.isFinite(resistance)||resistance<=0)throw new RangeError('Current geometry exceeds the finite resistance domain.');
+  if(!Number.isFinite(resistance)||resistance<=0)throw new RangeError('The current geometry gives resistance outside the finite numerical range.');
   links.push({a,b,voltage:b===null?voltage-voltageReferenceV:0,resistance,parts});
  };
  for(let j=0;j<nz;j++)for(let i=0;i<nr;i++){
@@ -72,10 +72,10 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
   for(const e of links){const t=(v[e.a]-(e.b===null?0:v[e.b]))/e.resistance;out[e.a]+=t;if(e.b!==null)out[e.b]-=t;}return out;};
  let previousPotential:number[]|undefined;
  return (omegaRadS:readonly number[])=>{
- if(omegaRadS.length!==n||omegaRadS.some(v=>!Number.isFinite(v)))throw new RangeError('Current needs finite common-grid rotation.');
+ if(omegaRadS.length!==n||omegaRadS.some(v=>!Number.isFinite(v)))throw new RangeError('Rotation values must be finite and use the current grid.');
  const rhs=Array<number>(n).fill(0),emfs=links.map(e=>-sum(e.parts.map(p=>p.torquePerAmp*omegaRadS[p.cell])));
  for(let i=0;i<links.length;i++){const e=links[i],g=1/e.resistance;
-  if(!Number.isFinite(emfs[i]))throw new RangeError('Current geometry exceeds the finite resistance domain.');
+  if(!Number.isFinite(emfs[i]))throw new RangeError('The current geometry gives resistance outside the finite numerical range.');
   rhs[e.a]-=g*emfs[i];if(e.b===null)rhs[e.a]+=g*e.voltage;else rhs[e.b]+=g*emfs[i];}
  // Reuse IC(0), retaining the original true residual and physical face ledgers.
  const scale=Math.hypot(...rhs),tolerance=relativeTolerance*scale;
@@ -84,7 +84,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
  const priorResidual=previousPotential?apply(previousPotential).map((v,i)=>rhs[i]-v):undefined;
  const usePrior=priorResidual!==undefined&&Math.hypot(...priorResidual)<scale;
  const potentialV=usePrior?[...previousPotential!]:Array<number>(n).fill(0);
- let residual=usePrior?priorResidual!:[...rhs],pre=precondition(residual),direction=[...pre],rz=dot(residual,pre),iterations=0;
+ const residual=usePrior?priorResidual:[...rhs];let pre=precondition(residual),direction=[...pre],rz=dot(residual,pre),iterations=0;
  for(;Math.hypot(...residual)>tolerance&&iterations<Math.max(100,8*n);iterations++){
   const ap=apply(direction),denominator=dot(direction,ap);
   if(!Number.isFinite(denominator)||denominator<=0)throw new RangeError('Current SPD solve failed.');
@@ -94,7 +94,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
   direction=pre.map((v,i)=>v+beta*direction[i]);
  }
  const trueResidual=apply(potentialV).map((v,i)=>v-rhs[i]);
- if(potentialV.some(v=>!Number.isFinite(v))||Math.hypot(...trueResidual)>20*relativeTolerance*scale)throw new RangeError('Current solve did not converge; refine or improve the electrical conditioning.');
+ if(potentialV.some(v=>!Number.isFinite(v))||Math.hypot(...trueResidual)>20*relativeTolerance*scale)throw new RangeError('The current solution did not converge. Refine the grid or improve the electrical conditioning.');
  const torqueNm=Array<number>(n).fill(0),jouleByCellW=Array<number>(n).fill(0),cellCurrentResidualA=Array<number>(n).fill(0),boundaryCurrentsA:number[]=[];
  let electrodePowerW=0,mechanicalW=0,jouleW=0;
  for(let i=0;i<links.length;i++){const e=links[i],current=(potentialV[e.a]-(e.b===null?e.voltage:potentialV[e.b])+emfs[i])/e.resistance;
@@ -104,7 +104,7 @@ export function createFuelCurrentSolver(input:FuelCurrentSetup,relativeTolerance
    jouleByCellW[p.cell]+=heat;torqueNm[p.cell]+=torque;jouleW+=heat;mechanicalW+=torque*omegaRadS[p.cell];}
  }
  const energyResidualW=electrodePowerW-jouleW-mechanicalW;
- if([electrodePowerW,mechanicalW,jouleW,energyResidualW,...torqueNm,...jouleByCellW].some(v=>!Number.isFinite(v)))throw new RangeError('Electrical power exceeds the finite domain.');
+ if([electrodePowerW,mechanicalW,jouleW,energyResidualW,...torqueNm,...jouleByCellW].some(v=>!Number.isFinite(v)))throw new RangeError('Electrical power is outside the finite numerical range.');
  previousPotential=[...potentialV];
  return {potentialV:potentialV.map(v=>v+voltageReferenceV),relativePotentialV:potentialV,voltageReferenceV,
   torqueNm,jouleByCellW,jouleW,mechanicalW,electrodePowerW,energyResidualW,cellCurrentResidualA,

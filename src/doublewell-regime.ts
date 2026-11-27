@@ -93,7 +93,7 @@ export function inspectDoublewellRegime(c:DoublewellConfig,cells:RegimeCell[],in
   if(local.minEstimatedCoulombLog!==null)minEstimatedCoulombLog=Math.min(minEstimatedCoulombLog,local.minEstimatedCoulombLog);
   if(local.maxEncounterMagnetization===null)undefinedEncounter=true;else maxEncounterMagnetization=Math.max(maxEncounterMagnetization,local.maxEncounterMagnetization);
  }
- let status:Status=reasons.size?'outside-supported-domain':unresolvedRepresentatives||!resolvedCells?'unresolved':'within-supported-domain';
+ const status:Status=reasons.size?'outside-supported-domain':unresolvedRepresentatives||!resolvedCells?'unresolved':'within-supported-domain';
  if(unresolvedRepresentatives)reasons.add('Some occupied cells lack four representatives in a present species; all representatives in those cells are unresolved.');
  if(!occupiedCells)reasons.add('No active occupied cells remain; local kinetic-regime estimates are undefined.');
  const finite=(x:number)=>Number.isFinite(x)?x:null;

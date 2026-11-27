@@ -230,3 +230,64 @@ test('Escape on a resizer dismisses its rail, and unavailable actions cannot str
  f.setLevel('3');f.workspace.open('view',true);f.document.querySelector<HTMLElement>('.viewport-tools')!.hidden=true;f.workspace.refreshMode();
  assert.ok(!f.document.activeElement?.closest('[hidden]'),'removing View moves focus to a visible action');
 });
+
+test('Reactor navigation exposes distinct beam and power-reference scenes without changing saved apparatus values',t=>{
+ const f=fixture(t);setupExperience({selectMode(){},invalidate(){},showView(){},showResearch(){},onLevelChange:level=>f.workspace.setLevel(level)});
+ const select=f.node('marathon-apparatus') as HTMLSelectElement;
+ f.node('show-reactor').click();
+ assert.equal(select.value,'source');assert.equal(f.document.body.dataset.level,'2');
+ assert.equal(f.node('show-reactor').getAttribute('aria-pressed'),'true');
+ assert.equal(f.node('fusion-apparatus').parentElement!.hidden,false);
+ assert.equal(select.closest<HTMLElement>('.world-context')!.hidden,false);
+ assert.equal(select.closest('#advanced-marathon'),null);
+ select.value='blanket';select.dispatchEvent(new f.window.Event('change'));
+ assert.equal(f.node('blanket-render').parentElement!.hidden,false);
+ assert.equal(f.node('level-title').textContent,'Fusion power reference');
+ f.document.querySelector<HTMLButtonElement>('button[data-level="2"]')!.click();
+ assert.equal(select.value,'centrifuge');assert.equal(select.closest<HTMLElement>('.world-context')!.hidden,true);
+ assert.equal(f.node('show-reactor').getAttribute('aria-pressed'),'false');
+ f.document.querySelector<HTMLButtonElement>('button[data-level="3"]')!.click();f.node('show-reactor').click();
+ assert.equal(f.document.body.dataset.level,'2');assert.equal(select.value,'source');
+});
+
+
+test('a tutorial prompt belongs only to the apparatus and level that presented it',t=>{
+ const f=fixture(t);t.after(()=>f.window.close());
+ const cue=f.document.querySelector<HTMLElement>('[aria-label="What to look for"]')!,select=f.node('marathon-apparatus') as HTMLSelectElement;
+ f.workspace.launchTutorialAction('beamLedger');assert.equal(cue.hidden,false);
+ f.workspace.refreshMode();assert.equal(cue.hidden,false);
+ select.value='centrifuge';select.dispatchEvent(new f.window.Event('change'));assert.equal(cue.hidden,true);
+ f.workspace.launchTutorialAction('controls');assert.equal(cue.hidden,false);
+ select.value='blanket';select.dispatchEvent(new f.window.Event('change'));assert.equal(cue.hidden,true);
+ f.workspace.launchTutorialAction('controls');assert.equal(cue.hidden,false);
+ f.setLevel('3');assert.equal(cue.hidden,true);
+});
+
+test('a desktop tutorial divider releases keyboard focus when the phone layout hides it',t=>{
+ const f=fixture(t);t.after(()=>f.window.close());f.workspace.openTutorial('/start.html');
+ const handle=f.document.querySelector<HTMLElement>('[aria-label="Resize tutorial and simulator"]')!;handle.focus();
+ assert.equal(handle.hidden,false);f.media.matches=true;f.resize();
+ assert.equal(handle.hidden,true);assert.notEqual(f.document.activeElement,handle);
+ assert.equal(f.node('window-guide').hidden,false);assert.equal(f.document.activeElement,f.node('window-title-guide'));
+ f.media.matches=false;f.resize();assert.equal(handle.hidden,false);
+});
+
+for(const mobile of [false,true])test(`closing the tutorial restores ${mobile?'one phone sheet':'desktop tiles'} without changing inputs`,t=>{
+ const f=fixture(t,mobile);t.after(()=>f.window.close());f.setLevel('2');f.workspace.openTutorial('/start.html');
+ f.workspace.open('controls');f.workspace.open('plots');const input=f.node('fusion-beamEnergyKeV');input.value='75';
+ assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,false);
+ f.workspace.close('guide',true);
+ assert.equal(f.node('window-guide').hidden,true);assert.equal(f.node('window-controls').hidden,false);assert.equal(f.node('window-plots').hidden,mobile);
+ assert.equal(input.value,'75');assert.equal(f.document.querySelector('.sim-workspace')!.classList.contains('tutorial-open'),false);
+ assert.equal(f.document.activeElement,f.node('open-docs'));
+});
+
+for(const mobile of [false,true])test(`reader document load reveals only an open phone reader (${mobile})`,t=>{
+ const f=fixture(t,mobile);t.after(()=>f.window.close());f.workspace.openTutorial('/start.html#machine');
+ const calls:ScrollIntoViewOptions[]=[];f.node('window-guide').scrollIntoView=options=>calls.push(options as ScrollIntoViewOptions);
+ f.node('physics-guide-frame').dispatchEvent(new f.window.Event('load'));
+ assert.deepEqual(calls,mobile?[{block:'start',inline:'nearest'}]:[]);
+ assert.equal(f.node('physics-guide-frame').getAttribute('src'),'/start.html#machine');
+ f.workspace.close('guide');f.node('physics-guide-frame').dispatchEvent(new f.window.Event('load'));
+ assert.equal(calls.length,mobile?1:0);
+});

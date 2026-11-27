@@ -1,13 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {PLAY_DEFAULTS,readExperience,playgroundLink} from '../src/experience-state.js';
+import {PLAY_DEFAULTS,readExperience} from '../src/experience-state.js';
 import {setupExperience} from '../src/experience-ui.js';
+import {readFileSync} from 'node:fs';
+import {JSDOM} from 'jsdom';
+import type {FuelRunState} from '../src/scenario-state.js';
 
-test('shared playground settings round-trip without carrying advanced settings or an old fragment',()=>{
+test('legacy shared playground settings retain their fixed collisionless interpretation',()=>{
  const settings={field:.15,voltage:620,energy:3,massB:41};
- const link=playgroundLink('https://example.com/?level=3&neutral-density=1e18#failure-lab',settings);
- assert.deepEqual(readExperience(new URL(link).search),{level:'1',settings,invalid:false});
- assert.equal(new URL(link).hash,'');assert.ok(!link.includes('neutral-density'));
+ assert.deepEqual(readExperience('?level=1&v=1&field=.15&voltage=620&energy=3&massB=41'),
+  {level:'1',settings,invalid:false});
 });
 test('stale, blank, nonfinite, out-of-range and off-step links restore the whole default experiment',()=>{
  for(const suffix of ['v=99&field=.2','v=1&field=','v=1&field=Infinity','v=1&field=1e999',
@@ -56,4 +58,28 @@ test('playground pins its source, cancels old work and clears stale asynchronous
  const before=runs;buttons[1].events.get('click')();
  assert.equal(ui.level,'2');assert.equal(node('live-update').checked,false);assert.equal(runs,before);
  assert.equal(cancelled,3);
+});
+
+
+test('tutorial undo validates pending inputs and history before context changes while sharing still requires acceptance',async t=>{
+ const dom=new JSDOM(readFileSync('index.html','utf8'),{url:'https://example.org/?level=2'}),doc=dom.window.document;
+ const controls=doc.createElement('div');controls.innerHTML='<select id="marathon-apparatus"><option value="centrifuge">Centrifuge</option><option value="source">Source</option></select><input id="fuel-currentA" type="number" min="0" max="0.2" value="0.031"><input id="fuel-durationS" type="number" min="0" max="60" value="1"><input id="fuel-thermal-enabled" type="checkbox" checked>';doc.body.append(controls);
+ for(const [key,value]of Object.entries({document:doc,location:dom.window.location,history:dom.window.history,navigator:dom.window.navigator})){
+  const previous=Object.getOwnPropertyDescriptor(globalThis,key);Object.defineProperty(globalThis,key,{value,configurable:true,writable:true});
+  t.after(()=>{if(previous)Object.defineProperty(globalThis,key,previous);else Reflect.deleteProperty(globalThis,key);});
+ }
+ let history:FuelRunState={initialCurrentA:.03,events:[{timeS:.1,currentA:.031}],mode:'transport',timeS:.25};
+ const flags:boolean[]=[];const ui=setupExperience({selectMode(){},invalidate(){},showView(){},fuelCentrifuge:{captureRun({validate=true}={}){flags.push(validate);if(validate)throw new Error('Wait for an accepted centrifuge run before sharing.');return structuredClone(history);},restoreRun(saved){if(saved)history=structuredClone(saved);}}});
+ t.after(()=>{ui.dispose();dom.window.close();});
+ const originalHistory=structuredClone(history);
+ assert.throws(()=>ui.capture(),/accepted centrifuge run/);
+ const saved=ui.capture({requireAccepted:false});assert.equal(saved.version,3);if(saved.version===3)assert.deepEqual(saved.fuelRun,originalHistory);
+ assert.equal(saved.controls['fuel-currentA'],.031);assert.equal(saved.controls['fuel-thermal-enabled'],true);
+ const apparatus=doc.getElementById('marathon-apparatus') as HTMLSelectElement;apparatus.value='source';apparatus.dispatchEvent(new dom.window.Event('change'));
+ history={initialCurrentA:0,events:[],mode:'equilibrium',timeS:0};
+ assert.equal(ui.restore(saved),true);assert.equal(apparatus.value,'centrifuge');assert.deepEqual(history,originalHistory);
+ const current=doc.getElementById('fuel-currentA') as HTMLInputElement;current.value='.3';assert.throws(()=>ui.capture({requireAccepted:false}),/Invalid setting/);
+ current.value='.031';history.events=[{timeS:2,currentA:.031}];assert.throws(()=>ui.capture({requireAccepted:false}),/Current events/);
+ history=structuredClone(originalHistory);doc.getElementById('share-playground')!.click();await Promise.resolve();
+ assert.match(doc.getElementById('share-status')!.textContent!,/accepted centrifuge run/);assert.equal(flags.at(-1),true);
 });

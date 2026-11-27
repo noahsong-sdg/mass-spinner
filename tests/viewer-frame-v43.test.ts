@@ -3,12 +3,12 @@ import assert from 'node:assert/strict';
 import {JSDOM} from 'jsdom';
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
-import {createApparatusViewer,screenSpacePointHit} from '../src/apparatus-viewer.js';
+import {createApparatusViewer,screenSpacePointHit,type ApparatusViewer,type ViewerRenderer} from '../src/apparatus-viewer.js';
 
 const snapshot=()=>({model:'rotating',domain:{kind:'cylinder',radiusM:.2,lengthM:1},timeS:0,
  fields:[{id:'electric-radial',coordinate:'radius',positionsM:[0,.1,.2],values:[0,1,2],domain:[0,2],unit:'V/m',label:'E',scope:'Prescribed field'}],
  counts:[],scalars:[],unsupported:[],impacts:[],tracks:[]});
-async function fixture(t:any,options:any={}){
+async function fixture(t:any,options:any={},beforeLoad?:(viewer:ApparatusViewer)=>void,preparation?:{compileAsync:NonNullable<ViewerRenderer['compileAsync']>;defer:boolean}){
  const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;
  let hidden=false,rafId=0;const frames=new Map<number,FrameRequestCallback>();
  Object.defineProperty(dom.window.document,'hidden',{get:()=>hidden});
@@ -16,21 +16,23 @@ async function fixture(t:any,options:any={}){
  let size={width:1000,height:600};const bounds=()=>({...size,left:0,top:0,right:size.width,bottom:size.height,x:0,y:0,toJSON(){}});
  frame.getBoundingClientRect=bounds;const previous=(globalThis as any).ResizeObserver;
  (globalThis as any).ResizeObserver=class{observe(){}disconnect(){}};
- let scene:THREE.Scene,camera:THREE.PerspectiveCamera,controls:OrbitControls;const history:OrbitControls[]=[],selected:string[]=[],representations:any[]=[];
+ let scene:THREE.Scene,camera:THREE.PerspectiveCamera,controls:OrbitControls,renders=0,renderedCamera:number[]=[];const history:OrbitControls[]=[],selected:string[]=[],representations:any[]=[];
  const reference=new THREE.Group(),body=new THREE.Mesh(new THREE.BoxGeometry(1,.18,.18),new THREE.MeshStandardMaterial());
  body.userData.componentId='vessel';reference.add(body);
  const viewer=createApparatusViewer(frame,{...options,loader:{loadAsync:async()=>({scene:reference})},onSelect:(id:string)=>selected.push(id),onRepresentation:(v:any)=>representations.push(v),
-  displayFactory:()=>({renderer:{render(s:THREE.Scene,c:THREE.PerspectiveCamera){scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();},clear(){},setSize(){}},dispose(){}}),
+  displayFactory:()=>({renderer:{compileAsync:preparation?.compileAsync,render(s:THREE.Scene,c:THREE.PerspectiveCamera){renders++;scene=s;camera=c;s.updateMatrixWorld(true);c.updateMatrixWorld();renderedCamera=[...c.matrixWorld.elements,...c.projectionMatrix.elements];},clear(){},setSize(){}},dispose(){}}),
   controlsFactory:(c:THREE.PerspectiveCamera,canvas:HTMLCanvasElement)=>{
    canvas.setPointerCapture=()=>{};canvas.releasePointerCapture=()=>{};
    camera=c;controls=new OrbitControls(c,canvas);history.push(controls);return controls;
   }});
  t.after(()=>{viewer.dispose();dom.window.close();(globalThis as any).ResizeObserver=previous;});
  viewer.canvas.getBoundingClientRect=bounds;
- await viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
- return {dom,frame,viewer,selected,representations,history,reference,frames,
+ beforeLoad?.(viewer);
+ const loading=viewer.load({model:'reference.glb',modelCamera:{position:[-.2,.25,1],target:[0,0,0],up:[0,1,0]}});
+ if(!preparation?.defer)await loading;
+ return {dom,frame,viewer,loading,selected,representations,history,reference,frames,
   step(now:number){const callbacks=[...frames.values()];frames.clear();for(const fn of callbacks)fn(now);},visibility(value:boolean){hidden=value;dom.window.document.dispatchEvent(new dom.window.Event('visibilitychange'));},
-  get scene(){return scene!;},get camera(){return camera!;},get controls(){return controls!;},
+  get scene(){return scene!;},get camera(){return camera!;},get controls(){return controls!;},get renders(){return renders;},get renderedCamera(){return renderedCamera;},
   resize(width:number,height:number){size={width,height};viewer.resize();},click(x:number,y:number){
    for(const type of ['pointerdown','pointerup']){
     const event=new dom.window.MouseEvent(type,{clientX:x,clientY:y,button:0});Object.defineProperty(event,'pointerId',{value:1});viewer.canvas.dispatchEvent(event);
@@ -47,12 +49,32 @@ test('animation clock freezes across visibility, pause, reload and disposal; no 
  h.viewer.setAnimation(()=>{});h.viewer.dispose();assert.equal(h.frames.size,0);
 });
 
+test('replacement releases instanced particle GPU allocations, as well as their geometry and material',async t=>{
+ const h=await fixture(t),mesh=new THREE.InstancedMesh(new THREE.SphereGeometry(.001),new THREE.MeshStandardMaterial(),4);
+ let instances=0,geometries=0,materials=0;
+ mesh.addEventListener('dispose',()=>instances++);mesh.geometry.addEventListener('dispose',()=>geometries++);mesh.material.addEventListener('dispose',()=>materials++);
+ h.reference.add(mesh);await h.viewer.load({model:'replacement.glb'});
+ assert.equal(instances,1);assert.equal(geometries,1);assert.equal(materials,1);
+ mesh.removeFromParent();h.viewer.dispose();assert.equal(instances,1);
+});
+
+test('dimension provenance is visible without a human and clears stale labels during asset changes',async t=>{
+ const h=await fixture(t),note=h.frame.querySelector<HTMLOutputElement>('.apparatus-scale-note')!;
+ await h.viewer.load({model:'assumed.glb',scaleLabel:'Assumed dimensions'});assert.equal(note.hidden,false);
+ assert.equal(h.frame.querySelector('.apparatus-scale'),null);assert.equal(h.scene.getObjectByName('5 foot 9 scale person'),undefined);
+ assert.equal(note.textContent,'Assumed dimensions');
+ const next=h.viewer.load({model:'paper.glb',scaleLabel:'Paper model · R 4.2 m'});assert.equal(note.hidden,true,'old dimensions withheld while loading');
+ await next;assert.equal(note.hidden,false);assert.equal(note.textContent,'Paper model · R 4.2 m');
+ await h.viewer.load({model:'unlabelled.glb'});assert.equal(note.hidden,true);assert.equal(note.textContent,'');
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb',scaleLabel:'Must not appear'}),false);assert.equal(note.hidden,true);
+});
+
 test('component framing eases to its SI target, respects reduced motion and yields to user input',async t=>{
  const h=await fixture(t),initial=h.viewer.cameraPose();h.viewer.focus('vessel',{animate:true});assert.equal(h.frames.size,1);
  assert.deepEqual(h.viewer.cameraPose(),initial);h.step(100);h.step(275);assert.notDeepEqual(h.viewer.cameraPose(),initial);h.step(450);assert.equal(h.frames.size,0);
  const focused=h.viewer.cameraPose();h.viewer.reset();h.viewer.focus('vessel',{animate:true});h.step(500);h.step(600);
  h.viewer.canvas.dispatchEvent(new h.dom.window.WheelEvent('wheel'));assert.equal(h.frames.size,0);
- Object.defineProperty(h.dom.window,'matchMedia',{value:()=>({matches:true}),configurable:true});h.viewer.reset();h.viewer.focus('vessel',{animate:true});assert.equal(h.frames.size,0);assert.deepEqual(h.viewer.cameraPose(),focused);
+ Object.defineProperty(h.dom.window,'matchMedia',{value:()=>({matches:true}),configurable:true});h.viewer.reset();h.viewer.focus('vessel',{animate:true});h.step(700);assert.equal(h.frames.size,0);assert.deepEqual(h.viewer.cameraPose(),focused);
  Object.defineProperty(h.dom.window,'matchMedia',{value:()=>({matches:false}),configurable:true});h.viewer.reset();h.viewer.focus('vessel',{animate:true});h.visibility(true);assert.equal(h.frames.size,0);
 });
 
@@ -61,6 +83,26 @@ test('bulk tracers cannot steal hardware inspection clicks',async t=>{
  const p=h.camera.position.clone().normalize().multiplyScalar(.3),geometry=new THREE.BufferGeometry();geometry.setAttribute('position',new THREE.Float32BufferAttribute(p.toArray(),3));
  const points=new THREE.Points(geometry,new THREE.PointsMaterial({size:8}));points.userData.componentId='motion';overlay.add(points);h.reference.add(overlay);
  h.click(500,300);assert.equal(h.selected.at(-1),'vessel');
+});
+test('picking prunes hidden and excluded branches before invoking their raycasts',async t=>{
+ const h=await fixture(t),hidden=new THREE.Group(),excluded=new THREE.Group(),line=new THREE.Line();
+ hidden.visible=false;excluded.userData.nonPickable=true;
+ const meshes=[new THREE.Mesh(),new THREE.Mesh()];hidden.add(meshes[0]);excluded.add(meshes[1]);
+ let calls=0;for(const node of [...meshes,line])node.raycast=()=>{calls++;};
+ h.reference.add(hidden,excluded,line);h.click(500,300);assert.equal(calls,0);assert.equal(h.selected.at(-1),'vessel');
+ hidden.visible=true;delete excluded.userData.nonPickable;h.click(500,300);assert.ok(calls>0,'visibility and exclusion changes take effect without a model reload');
+});
+test('idle hover samples the latest pointer once per frame and cancels on model replacement or disposal',async t=>{
+ const hover:unknown[]=[],h=await fixture(t,{onHover:(hit:unknown)=>hover.push(hit)}),body=h.reference.children[0];
+ let raycasts=0;const original=body.raycast;body.raycast=function(ray,hits){raycasts++;original.call(this,ray,hits);};
+ function move(x:number){const event=new h.dom.window.MouseEvent('pointermove',{clientX:x,clientY:300});Object.defineProperty(event,'pointerId',{value:1});h.viewer.canvas.dispatchEvent(event);}
+ for(let x=450;x<=500;x++)move(x);
+ move(100);
+ assert.equal(raycasts,0);assert.equal(hover.length,0);assert.equal(h.frames.size,1);
+ h.step(16);assert.equal(raycasts,1);assert.deepEqual(hover,[null],'only the latest pointer position is inspected');
+ move(500);h.step(32);assert.equal(raycasts,2);assert.ok(hover[1]);
+ move(500);await h.viewer.load({model:'replacement.glb'});h.step(48);assert.equal(hover.length,2,'old hover must not inspect replacement geometry');
+ move(500);h.viewer.dispose();assert.equal(h.frames.size,0);h.step(64);assert.equal(hover.length,2);
 });
 function projectedAxis(camera:THREE.Camera,a:THREE.Vector3,b:THREE.Vector3){return b.clone().project(camera).sub(a.clone().project(camera));}
 test('captured component drag belongs to one pointer and Escape/cancel/lost capture never commit',async t=>{
@@ -77,6 +119,74 @@ test('camera synchronization uses SI vectors without echoing updates and clippin
  assert.ok(new THREE.Vector3(...h.viewer.cameraPose().position).distanceTo(new THREE.Vector3(...pose.position))<1e-12);assert.deepEqual(h.viewer.cameraPose().target,pose.target);assert.equal(cameras.length,before);
  h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));assert.ok(cameras.length>before);
  h.click(500,300);assert.deepEqual(h.selected,[]);
+});
+test('loading draws once after the final camera pose is set',async t=>{
+ const h=await fixture(t);
+ assert.equal(h.renders,1);
+ assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+test('loading draws the accepted surface without an intermediate reference frame',async t=>{
+ const h=await fixture(t,{},viewer=>viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1}));
+ assert.equal(h.renders,1);
+ assert.equal(h.reference.visible,false);
+ assert.ok(h.scene.getObjectByName('SI engineering assembly'));
+ assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+test('failed initialization releases the draw hold before a retry',async t=>{
+ const h=await fixture(t);h.reference.clear();
+ assert.equal(await h.viewer.load({model:'empty.glb'}),false);
+ h.reference.add(new THREE.Mesh(new THREE.BoxGeometry(1,.18,.18),new THREE.MeshStandardMaterial()));
+ const before=h.renders;
+ assert.equal(await h.viewer.load({model:'retry.glb'}),true);
+ assert.equal(h.renders-before,1);
+});
+function deferredCompilation(){
+ const pending:{resolve:()=>void;reject:(error:Error)=>void}[]=[];
+ return {pending,defer:true,compileAsync:()=>new Promise<void>((resolve,reject)=>pending.push({resolve,reject}))};
+}
+test('shader preparation keeps new surfaces and camera inputs, with no early draw or animation',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ assert.equal(preparation.pending.length,1);assert.equal(h.renders,0);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'Loading 3D…');
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
+ const pose={position:[.5,1,.6] as [number,number,number],target:[.02,0,0] as [number,number,number]};h.viewer.setCamera(pose);
+ h.viewer.setAnimation(()=>{});assert.equal(h.frames.size,0);assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();await Promise.resolve();
+ assert.equal(preparation.pending.length,1,'changed surfaces need preparation before their first draw');assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();assert.equal(await h.loading,true);
+ assert.equal(h.renders,1);assert.equal(h.frames.size,1);assert.equal(h.reference.visible,false);
+ assert.ok(new THREE.Vector3(...h.viewer.cameraPose().position).distanceTo(new THREE.Vector3(...pose.position))<1e-12);assert.deepEqual(h.viewer.cameraPose().target,pose.target);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'');
+});
+test('obsolete shader preparation cannot draw or release a replacement load',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ const replacement=h.viewer.load({model:'replacement.glb'});await Promise.resolve();
+ assert.equal(preparation.pending.length,2);preparation.pending.shift()!.resolve();assert.equal(await h.loading,false);
+ h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]});assert.equal(h.renders,0);
+ preparation.pending.shift()!.resolve();await Promise.resolve();assert.equal(preparation.pending.length,1);
+ preparation.pending.shift()!.resolve();assert.equal(await replacement,true);assert.equal(h.renders,1);
+});
+test('disposal during shader preparation cannot draw or restart animation',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ h.viewer.setAnimation(()=>{});h.viewer.dispose();preparation.pending.shift()!.resolve();
+ assert.equal(await h.loading,false);assert.equal(h.renders,0);assert.equal(h.frames.size,0);assert.equal(h.frame.children.length,0);
+});
+test('shader preparation failure reports an error and permits retry',async t=>{
+ const preparation=deferredCompilation(),h=await fixture(t,{},undefined,preparation);
+ h.viewer.setAnimation(()=>{});preparation.pending.shift()!.reject(new Error('Shader preparation failed'));
+ assert.equal(await h.loading,false);assert.equal(h.renders,0);assert.equal(h.frames.size,0);
+ assert.equal(h.frame.querySelector('[role="status"]')!.textContent,'3D unavailable');
+ const retry=h.viewer.load({model:'retry.glb'});await Promise.resolve();preparation.pending.shift()!.resolve();
+ assert.equal(await retry,true);assert.equal(h.renders,1);
+});
+test('internal camera transactions draw once after OrbitControls has applied the final pose',async t=>{
+ const h=await fixture(t);
+ for(const change of [()=>h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]}),()=>h.resize(500,600),()=>h.viewer.reset()]){
+  const before=h.renders;change();assert.equal(h.renders,before,'camera changes wait for the next frame');h.step(100);assert.equal(h.renders-before,1,'internal OrbitControls change must not draw an intermediate frame');
+  assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements],'draw uses the final view and projection matrices');
+ }
+ const before=h.renders;h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));
+ h.step(200);assert.ok(h.renders>before,'user camera gestures still draw');
 });
 test('paired SI cameras resize independently without relaying programmatic fits or compounding zoom',async t=>{
  let a:any,b:any;const events:any[]=[];
@@ -97,6 +207,16 @@ function inside(root:THREE.Object3D,camera:THREE.Camera){
  }
 }
 
+test('apparatus-only framing preserves SI dimensions and fits desktop and phone views',async t=>{
+ const h=await fixture(t),before=new THREE.Box3().setFromObject(h.reference).clone();
+ inside(h.reference,h.camera);h.resize(390,844);h.step(100);inside(h.reference,h.camera);
+ assert.deepEqual(new THREE.Box3().setFromObject(h.reference),before);
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});h.step(116);
+ inside(h.scene.getObjectByName('SI engineering assembly')!,h.camera);
+ assert.equal(h.scene.getObjectByName('5 foot 9 scale person'),undefined);
+ h.reference.clear();assert.equal(await h.viewer.load({model:'empty.glb'}),false);
+});
+
 test('real OrbitControls retain the horizontal reference/accepted frame and cutaway sightline',async t=>{
  const h=await fixture(t),axis=projectedAxis(h.camera,new THREE.Vector3(-.5,0,0),new THREE.Vector3(.5,0,0));
  assert.ok(axis.x>0&&Math.abs(axis.y)<axis.x*.2,'reference source→target points screen-right');
@@ -112,7 +232,7 @@ test('real OrbitControls retain the horizontal reference/accepted frame and cuta
  const target=h.controls.target.clone();h.viewer.canvas.dispatchEvent(new h.dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));
  assert.ok(h.camera.position.distanceTo(before)>.01);assert.ok(h.controls.target.distanceTo(target)<1e-12);
  h.viewer.reset();assert.ok(h.camera.position.distanceTo(before)<1e-12);
- h.viewer.setPending(true);assert.equal(h.history.length,3);assert.deepEqual(h.camera.up.toArray(),[0,1,0]);
+ h.viewer.setPending(true);assert.equal(h.history.length,2);assert.ok(h.camera.up.distanceTo(new THREE.Vector3(0,0,-1))<1e-12);
 });
 
 test('resize refits both representations while retaining relative user zoom, orbit and target',async t=>{
@@ -175,4 +295,67 @@ test('the actual ray/pixel path selects displayed rear impacts before hardware w
  h.click(510,300);assert.equal(h.selected.at(-1),'vessel','away from dots, ordinary hardware picking remains available');
  assert.equal(h.representations.at(-1).layer,'impacts');assert.equal(h.representations.at(-1).numerical,true);
  view.value='hardware';view.dispatchEvent(new h.dom.window.Event('change'));assert.equal(h.representations.at(-1).numerical,false);
+});
+
+test('paused display changes share one draw with the final camera and surface state',async t=>{
+ const h=await fixture(t),before=h.renders;
+ h.viewer.select('vessel');h.viewer.refresh();h.viewer.resize();h.viewer.refresh();
+ h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]});
+ h.viewer.updateSurfaceState({status:'ready',snapshot:snapshot()},{radius:.2,length:1});
+ assert.equal(h.renders,before);assert.equal(h.frames.size,1);
+ h.step(100);assert.equal(h.renders,before+1);assert.equal(h.frames.size,0);
+ assert.equal(h.reference.visible,false);assert.ok(h.scene.getObjectByName('SI engineering assembly'));
+ assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+test('animation draws its latest state once in the same frame and leaves no extra draw after pause',async t=>{
+ const h=await fixture(t),before=h.renders;let count=0;
+ h.viewer.refresh();h.viewer.setAnimation(()=>{
+  h.reference.position.x=++count;h.viewer.refresh();h.viewer.refresh();
+  if(count===2)h.viewer.setAnimation(null);
+ });
+ assert.equal(h.frames.size,1);
+ h.step(100);assert.equal(h.renders,before+1);assert.equal(h.reference.matrixWorld.elements[12],1);assert.equal(h.frames.size,1);
+ h.step(116);assert.equal(h.renders,before+2);assert.equal(h.reference.matrixWorld.elements[12],2);assert.equal(h.frames.size,0);
+});
+test('hidden, replacement and disposed viewers do not submit queued stale draws',async t=>{
+ const h=await fixture(t),before=h.renders;
+ h.viewer.refresh();h.visibility(true);assert.equal(h.frames.size,0);h.step(100);assert.equal(h.renders,before);
+ h.viewer.refresh();assert.equal(h.frames.size,0);
+ h.visibility(false);assert.equal(h.frames.size,1);h.step(200);assert.equal(h.renders,before+1);
+ h.viewer.refresh();await h.viewer.load({model:'replacement.glb'});assert.equal(h.frames.size,0);assert.equal(h.renders,before+2);
+ h.viewer.refresh();h.viewer.dispose();assert.equal(h.frames.size,0);h.step(300);assert.equal(h.renders,before+2);
+});
+
+test('component camera motion submits one final camera per animation frame',async t=>{
+ const h=await fixture(t),before=h.renders;
+ h.viewer.focus('vessel',{animate:true});
+ for(const [i,time]of [100,275,450].entries()){
+  h.step(time);assert.equal(h.renders,before+i+1);
+  assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+ }
+ assert.equal(h.frames.size,0);
+});
+
+test('inactive hardware withholds queued draws and draws current state when activated',async t=>{
+ const h=await fixture(t),before=h.renders;
+ h.viewer.refresh();h.viewer.setActive(false);h.viewer.refresh();assert.equal(h.frames.size,0);
+ h.viewer.setCamera({position:[.5,1,.6],target:[.02,0,0]});assert.equal(h.frames.size,0);
+ h.viewer.setActive(true);assert.equal(h.frames.size,1);h.step(100);
+ assert.equal(h.renders,before+1);assert.deepEqual(h.renderedCamera,[...h.camera.matrixWorld.elements,...h.camera.projectionMatrix.elements]);
+});
+
+test('vessel focus and component selection exclude the laboratory context',async t=>{
+ const plain=await fixture(t),room=await fixture(t),context=new THREE.Group(),nested=new THREE.Group();
+ context.userData={viewContext:true,nonPickable:true};context.add(nested);room.reference.add(context);
+ const material=new THREE.MeshStandardMaterial(),floor=new THREE.Mesh(new THREE.BoxGeometry(100,1,100),material);
+ floor.position.y=-10;floor.userData.componentId='vessel';nested.add(floor);
+ for(const h of [plain,room]){
+  const coil=new THREE.Mesh(new THREE.BoxGeometry(.1,.3,.3),new THREE.MeshStandardMaterial());coil.userData.componentId='coils';h.reference.add(coil);
+  h.viewer.select('vessel');h.viewer.focus('vessel');h.step(100);
+ }
+ assert.deepEqual(room.viewer.cameraPose(),plain.viewer.cameraPose(),'focus uses the vessel bounds instead of room bounds');
+ assert.equal(floor.material,material,'vessel selection does not highlight the floor');
+ room.viewer.explode('coils');room.step(200);room.step(650);
+ assert.equal(floor.material,material,'an exploded component view does not dim the room');
+ room.viewer.select(null);room.step(700);assert.equal(floor.material,material);
 });

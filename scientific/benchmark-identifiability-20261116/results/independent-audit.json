@@ -1,0 +1,9 @@
+{
+  "opticalRowsChecked": 4320,
+  "electricalRowsChecked": 60,
+  "arithmeticAuditPassed": true,
+  "experimentalQualification": false,
+  "jointQualification": false,
+  "temperaturePredictionAvailable": false,
+  "replaySHA256": "1089053e7d062aff912fac838d36a0fd4a9a879170511ea3498b8732409633cc"
+}

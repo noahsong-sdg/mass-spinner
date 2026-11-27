@@ -69,7 +69,7 @@ function diffuse(rhs:number[],loss:number[],faces:number[],dt:number){
 /** Fixed-cell composition, RK4 energy path and midpoint reaction quadrature. */
 function depthBeam(beam:FusionBeamConfig,c:CoupledTargetConfig,state:State,recordPacking:(residual:number)=>void):BeamPlan{
  const n=c.depthCells,siteStep=beam.materialColumnM2!/n/4;
- const reaction=Array(n).fill(0),heat=Array(n+c.backingCells).fill(0);
+ const reaction=Array<number>(n).fill(0),heat=Array<number>(n+c.backingCells).fill(0);
  let energy=beam.beamEnergyKeV,survival=1,neutron=0,alphaEscape=0;
  for(let i=0;i<n;i++){
   const occupied=state.t[i]+state.d[i],total=occupied+state.v[i],residual=Math.abs(total-1);
@@ -104,7 +104,7 @@ function conductionConfig(c:CoupledTargetConfig):TargetConductionConfig{
  const cells=Array.from({length:c.depthCells},()=>({widthM:c.filmThicknessM/c.depthCells,
   conductivityWMK:c.filmConductivityWMK,volumetricHeatCapacityJm3K:c.filmHeatCapacityJm3K}));
  for(let i=0;i<c.backingCells;i++)cells.push({widthM:c.backingThicknessM/c.backingCells,conductivityWMK:c.backingConductivityWMK,volumetricHeatCapacityJm3K:c.backingHeatCapacityJm3K});
- const contact=Array(c.depthCells+c.backingCells-1).fill(0);contact[c.depthCells-1]=c.contactResistanceM2KPerW;
+ const contact=Array<number>(c.depthCells+c.backingCells-1).fill(0);contact[c.depthCells-1]=c.contactResistanceM2KPerW;
  return {cells,contactResistanceM2KPerW:contact,coolantK:c.coolantK,backHeatTransferWM2K:c.backHeatTransferWM2K};
 }
 
@@ -124,12 +124,12 @@ export function simulateCoupledTarget(beam:FusionBeamConfig,config:CoupledTarget
   ||Math.ceil(beam.exposureS/c.pulsePeriodS)>4096)
   throw new RangeError('Coupled target requires finite physical coefficients, valid material capacity, 2–32 depth cells, 10–1000 samples, bounded tolerances and at most 4096 pulse periods.');
  if(c.implantationWeights!==undefined&&!Array.isArray(c.implantationWeights))throw new RangeError('Implantation weights must be an array when supplied.');
- const weights=normalizeImplantationWeights(c.implantationWeights===undefined?Array(n).fill(1):c.implantationWeights);
+ const weights=normalizeImplantationWeights(c.implantationWeights===undefined?Array<number>(n).fill(1):c.implantationWeights);
  if(weights.length!==n)throw new RangeError('Implantation weights must match the target depth cells.');
  const flux=beam.beamCurrentA/E_CHARGE/area,dz=c.filmThicknessM/n,totalS=beam.exposureS+c.cooldownS;
- const f0=beam.targetColumnM2/column,thermal=conductionConfig(c),initialTemperature=Array(n+c.backingCells).fill(c.initialK);
- const zeros=()=>Array(n).fill(0);
- let state:State={t:Array(n).fill(f0),d:Array(n).fill(1-f0),v:zeros(),temperature:initialTemperature,
+ const f0=beam.targetColumnM2/column,thermal=conductionConfig(c),initialTemperature=Array<number>(n+c.backingCells).fill(c.initialK);
+ const zeros=()=>Array<number>(n).fill(0);
+ let state:State={t:Array<number>(n).fill(f0),d:Array<number>(n).fill(1-f0),v:zeros(),temperature:initialTemperature,
   fused:0,incident:0,retained:0,unretained:0,releasedT:0,releasedD:0,addedT:0,addedD:0,beamOnS:0,
   incidentEnergy:0,nuclearEnergy:0,depositedEnergy:0,neutronEnergy:0,escapingAlphaEnergy:0,coolantEnergy:0};
  let maxPackingRoundoff=0;
@@ -144,7 +144,7 @@ export function simulateCoupledTarget(beam:FusionBeamConfig,config:CoupledTarget
  let acceptedSteps=0,rejectedSteps=0,maxErrorRatio=0;
 
  function advance(s:State,dt:number,on:boolean):State|null{
-  const plan=on?beamAt(s):{reaction:zeros(),heat:Array(n+c.backingCells).fill(0),neutron:0,alphaEscape:0,probability:0};
+  const plan=on?beamAt(s):{reaction:zeros(),heat:Array<number>(n+c.backingCells).fill(0),neutron:0,alphaEscape:0,probability:0};
   const j=on?flux:0,fusion=plan.reaction.map(p=>dt*j*p*n/column);
   if(fusion.some((f,i)=>f>s.t[i]))return null;
   const b=weights.map(w=>j*(1-plan.probability)*c.replacementProbability*w*n/column);
@@ -237,14 +237,14 @@ export function simulateCoupledTarget(beam:FusionBeamConfig,config:CoupledTarget
   curves:[{label:'Evolving D–T neutron production',x:history.map(s=>s.timeS),y:history.map(s=>s.neutronRateS),xLabel:'Time (s)',yLabel:DT_ONLY_OUTPUT.rateLabel},
    {label:'Film surface-cell temperature',x:history.map(s=>s.timeS),y:history.map(s=>s.temperatureK[0]),xLabel:'Time (s)',yLabel:'Temperature (K)'}],
   assumptions:[
-   'Illustrative one-dimensional fixed Li-site film and depth-resolved backing; dimensions, thermal properties, diffusion, release, implantation weights and renewal are scenario inputs, not measured Marathon/LiT data.',
-   'Atomic Li + fD D + fT T stopping is recomputed at every substep. Compound chemistry, straggling, charge exchange, physical implantation ranges, sputtering, radiation damage and phase changes are not solved.',
-   'Non-fusing arrivals make an assumed random replacement attempt distributed by declared normalized depth weights. Weights specify conditional replacement locations, not a BCA implantation prediction or reflected fraction.',
-   'D/T/vacancies share an equal-coefficient no-flux Fick diffusion operator. Arrhenius prefactors/activation energies and replacement/renewal rates are uncalibrated; default diffusion, release and renewal are zero.',
-   'Bulk release is an assumed volumetric loss. Optional front release and back permeation use boundary velocities divided by cell width; both create vacancies and exported isotopes. No measured LiT surface or permeation law is claimed.',
-   'Renewal replaces sites from an external D/T supply and exports the old occupancy; no tritium breeding is implied. Released-isotope enthalpy and binding/reaction heat are omitted from the fixed-host thermal scenario.',
-   'Surviving beam energy is absorbed at a zero-range backing-side interface. The massless face source is split by film/contact and backing half-cell resistances; this is a declared interface approximation, not a resolved or calibrated backing stopping range. Non-retained projectiles are an isotope-retention ledger, not energy escaping the assembly. Neutrons and undeclared alpha deposition escape; no return radiation is modeled.',
-   'Conservative first-order IMEX stepping uses full-versus-two-half error estimates and accepts the positive half-step state. Pulse edges and shutoff are exact step boundaries; local estimates are not global error certificates.',
-   'Atomic stopping uses normalized composition only when raw T/D/vacancy packing differs from one by at most 64 machine epsilons times the film-cell count. Raw populations and isotope ledgers remain unmodified; larger packing errors reject.',
+   'This one-dimensional film has fixed Li sites and a backing with depth cells. Dimensions, thermal properties, diffusion, release, implantation weights and renewal are scenario inputs. They are not measured Marathon/LiT data.',
+   'The solver calculates atomic Li + fD D + fT T stopping at each substep. It does not include compound chemistry, straggling, charge exchange, physical implantation ranges, sputtering, radiation damage or phase changes.',
+   'Arrivals that do not fuse make a random replacement attempt with a specified probability. Normalized depth weights give conditional replacement locations. They do not give a BCA implantation prediction or a reflected fraction.',
+   'D/T/vacancies use Fick diffusion with equal coefficients and no flux at the boundaries. Arrhenius prefactors, activation energies and replacement/renewal rates have no experimental calibration. Default diffusion, release and renewal are zero.',
+   'Bulk release uses a specified volumetric loss. Optional front release and back permeation use boundary velocities divided by cell width. Both create vacancies and remove isotopes. These inputs do not give a measured LiT surface or permeation law.',
+   'Renewal replaces site contents from an external D/T supply and removes the old contents. It does not create tritium through breeding. The fixed-host thermal calculation does not include released-isotope enthalpy or binding/reaction heat.',
+   'Surviving beam energy stops at a zero-range interface on the backing side. Film/contact and backing half-cell resistances divide this massless face source. This approximation does not give a resolved or calibrated stopping range in the backing. The isotope balance counts non-retained projectiles; it does not assign their energy to assembly escape. Neutrons and alpha energy without specified deposition escape. The model does not include return radiation.',
+   'The conservative first-order IMEX method compares one full step with two half steps and accepts the positive half-step state. Steps end exactly at pulse edges and beam shutoff. Global error can exceed the local-error estimate.',
+   'Atomic stopping uses normalized composition only for small raw T/D/vacancy packing errors. The maximum difference from one is 64 machine epsilons times the film-cell count. Raw populations and isotope balances stay unchanged. Larger packing errors cause rejection.',
   ]};
 }

@@ -1,0 +1,78 @@
+name: Retained heat postprocessing
+on:
+  push:
+    branches: [codex/heat-postprocessing]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  assess:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - run: '43861655611'
+            producer: '8631723313bca31cf6abfc0b2b9e0b47cd2728b4'
+          - run: '43863009813'
+            producer: '1c03f1487d1778191e5d5773e93359be4204ca5c'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          ref: '${{ matrix.producer }}'
+          path: producer
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            src
+            scripts/probe-fuel-nested-coupling.ts
+            package-lock.json
+            .github/workflows/nested-coupling.yml
+            .github/workflows/thermal-precision.yml
+      - name: Wait for immutable producer artifact
+        env:
+          GH_TOKEN: '${{ github.token }}'
+          PRODUCER_RUN: '${{ matrix.run }}'
+          PRODUCER_SHA: '${{ matrix.producer }}'
+        run: |
+          while [ "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN" --jq .status)" != completed ]; do sleep 15; done
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN" > producer-run.json
+          jq -e --arg sha "$PRODUCER_SHA" '.head_sha == $sha' producer-run.json
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$PRODUCER_RUN/artifacts" > producer-artifacts.json
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
+        with:
+          github-token: '${{ github.token }}'
+          run-id: '${{ matrix.run }}'
+          name: heat-precision
+          path: retained
+      - name: Prepare locked tools
+        run: |
+          docker build -t heat-check - <<'DOCKERFILE'
+          FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+          DOCKERFILE
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check npm ci --ignore-scripts --no-audit --no-fund
+      - name: Assess and independently audit retained bytes offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp heat-check sh -eu -c '
+            npm run typecheck
+            node --import tsx --test tests/nested-heat-reuse.test.ts
+            node --import tsx scripts/probe-fuel-nested-coupling.ts retained/nested-output --assess-only
+            python3 scientific/spatial-argon-20261116/audit_nested.py retained/nested-output --source-root producer --output retained/nested-output/independent-reassessment.json
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: 'heat-postprocessed-${{ matrix.run }}'
+          path: |
+            retained/nested-output/index.json
+            retained/nested-output/assessment.json
+            retained/nested-output/independent-reassessment.json
+            retained/heat-output/
+            producer-run.json
+            producer-artifacts.json
+          if-no-files-found: error

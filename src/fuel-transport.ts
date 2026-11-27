@@ -1,12 +1,13 @@
+import type {FuelThermalOptions} from './fuel-operation.js';
 import {simulateFuelCentrifuge} from './fuel-centrifuge.js';
 import {fuelLinerState,type FuelLinerGrid,type FuelLinerState} from './fuel-thermal.js';
-import {advanceFuelGasMass,fuelGasState,type FuelGasState} from './fuel-gas.js';
+import {advanceFuelGasMass,fuelGasState,type FuelGasState,type FuelGasTemperatureBasis} from './fuel-gas.js';
 
 const U=1.66053906892e-27,K=1.380649e-23;
 type RotorResult=ReturnType<typeof simulateFuelCentrifuge>;
 export type FuelTransportOptions={cells?:number;steps?:number};
 export type FuelCoupledParameters={radiusM:number;gasK:number;lightFraction:number;diffusivityM2S:number;
- gasTemperaturesK?:readonly number[];
+ gasTemperaturesK?:readonly number[];gasTemperatureBasis?:FuelGasTemperatureBasis;
  speciesMassKg:number[];mechanics:Pick<RotorResult['mechanics'],'ii'|'nn'|'gamma'|'drag'|'torque'>};
 export type FuelCoupledState={lightMass:number[];heavyMass:number[];
  ionAngularMomentumKgM2S:number;neutralAngularMomentumKgM2S:number};
@@ -44,7 +45,7 @@ export type FuelTransportResult={
  thermalGas?:{number:number;lengthM:number};
  timeControl?:{method:'BE step doubling';relativeTolerance:number;temperatureToleranceK:number;startTimeS:number;
   acceptedPairs:number;rejectedSteps:number;maxErrorRatio:number};
- operation?:{schemaVersion:1;events:{timeS:number;currentA:number}[];thermal:unknown;setup:unknown;initialCurrentA:number};
+ operation?:{schemaVersion:1;events:{timeS:number;currentA:number}[];thermal:FuelThermalOptions;setup:Omit<RotorResult['config'],'durationS'|'currentA'>;initialCurrentA:number};
 };
 
 function nonnegative(value:number,name:string){
@@ -103,6 +104,7 @@ function relativeError(error:number,scale:number){return scale>0?Math.abs(error)
  * Ion geometry and Γ stay prescribed; neutral dragHz=initial drag/initial inertia.
  */
 export function advanceFuelCoupledStep(model:FuelCoupledParameters,state:FuelCoupledState,dtS:number){
+ if(model.gasTemperatureBasis&&!model.gasTemperaturesK)throw new RangeError('A gas temperature basis requires spatial endpoint temperatures.');
  const {ii,nn,gamma,drag,torque}=model.mechanics,n=state.lightMass.length;
  resolution(n,'radial cells',2,1024);nonnegative(dtS,'time step');
  for(const [name,value] of Object.entries({ii,nn,radiusM:model.radiusM,gasK:model.gasK}))
@@ -122,7 +124,7 @@ export function advanceFuelCoupledStep(model:FuelCoupledParameters,state:FuelCou
  const target=ln0+h*u,scale=Math.abs(target),rate=4*model.diffusivityM2S/model.radiusM**2;
  function evaluate(speed:number){
   const coefficient=speed**2*model.radiusM**2/(2*K*model.gasK);
-  const spatial=model.gasTemperaturesK?model.speciesMassKg.map((mass,i)=>advanceFuelGasMass(i?state.heavyMass:state.lightMass,model.gasTemperaturesK!,mass,speed,model.radiusM,model.diffusivityM2S,dtS)):undefined;
+  const spatial=model.gasTemperaturesK?model.speciesMassKg.map((mass,i)=>advanceFuelGasMass(i?state.heavyMass:state.lightMass,model.gasTemperaturesK!,mass,speed,model.radiusM,model.diffusivityM2S,dtS,model.gasTemperatureBasis)):undefined;
   const lightMass=spatial?.[0].mass??advanceFuelRadialMass(state.lightMass,model.speciesMassKg[0]*coefficient,rate,dtS);
   const heavyMass=spatial?.[1].mass??advanceFuelRadialMass(state.heavyMass,model.speciesMassKg[1]*coefficient,rate,dtS);
   const neutralInertiaKgM2=inertia(model,lightMass,heavyMass);
@@ -216,12 +218,12 @@ export function simulateFuelTransport(result:RotorResult,options:FuelTransportOp
   maxCellExponent:0,
   radiusEdgesM:Array.from({length:cells+1},(_,i)=>c.radiusM*Math.sqrt(i/cells)),mechanics:{ii,nn,gamma,drag,torque},
   assumptions:[
-   'Reflecting axis and wall; fixed species inventories, initially uniform volume densities. Cuts partition the current inventory; they are not extraction rates.',
-   'Neutral inertia follows the evolving mass-weighted radial second moment. Ion and neutral angular momenta evolve with reciprocal friction, applied torque and neutral drag; dragHz is fixed, so the neutral drag coefficient scales with its current inertia. Ion geometry/inertia and the collision torque coefficient remain prescribed.',
-   'Isothermal independent-species Smoluchowski closure with common prescribed D and instantaneous rigid rotation. An external thermal bath maintains temperature. Zero barycentric diffusive mass flux, local angular-momentum transport, pressure/temperature evolution, axial flow, extraction and pump depletion are not solved.',
-   'Finite-volume exponential SG flux and backward-Euler angular-momentum equations share a nonlinear endpoint speed. Positive conservative inventory; drive-minus-drag impulse closes the rotor budget. First-order time/phase accuracy requires refinement. Cellwise constant radial reconstruction.',
-   'Redistribution work and backward-Euler numerical dissipation are reported separately. Neither is presented as a measured heat load. The fixed-uniform-inertia result remains a separate reference benchmark.',
-   'Transport coefficient is a user-prescribed phenomenological input, not a validated binary gas diffusion coefficient. Not a fully coupled multicomponent neutral-fluid calculation.'
+   'No species flux crosses the axis or wall. Species inventories stay fixed; initial volume densities are uniform. Cuts divide the current inventory. They do not give extraction rates.',
+   'The gas distribution sets neutral inertia. Reciprocal friction, applied torque and neutral drag change ion and neutral angular momenta. The fixed drag frequency makes the neutral drag coefficient proportional to current inertia. Ion geometry, ion inertia and the collision torque coefficient are specified inputs.',
+   'Isothermal independent-species Smoluchowski closure uses one specified D and instantaneous rigid rotation. An external thermal bath keeps temperature fixed. The model does not keep total diffusive mass flux at zero. It does not calculate local angular-momentum transport, pressure/temperature changes, axial flow, extraction or pump depletion.',
+   'Finite-volume exponential SG flux and backward-Euler angular-momentum equations use the same nonlinear endpoint speed. Species inventories stay nonnegative and conserved. Drive impulse minus drag impulse gives the angular-momentum change. Refinement is necessary for first-order time and phase accuracy. Radial density is constant within each cell.',
+   'The model gives redistribution work and backward-Euler numerical dissipation separately. Neither quantity is a measured heat load. The fixed-uniform-inertia result is a separate reference benchmark.',
+   'The user supplies the transport coefficient. It is not a validated binary gas diffusion coefficient. This model is not a fully coupled multicomponent neutral-fluid calculation.'
   ]};
  let state:FuelCoupledState={lightMass:Array<number>(cells).fill(1/cells),heavyMass:Array<number>(cells).fill(1/cells),ionAngularMomentumKgM2S:0,neutralAngularMomentumKgM2S:0};
  const ledger:Ledger={driveImpulseKgM2S:0,dragImpulseKgM2S:0,ionPhaseRad:0,neutralPhaseRad:0,

@@ -1,0 +1,90 @@
+{
+  "checkedDate": "2026-11-16",
+  "scope": "Public source/data search; no experimental bundle admitted; no scientific execution; no author contact",
+  "sources": [
+    {
+      "sourceURL": "https://dmphub.uc3prd.cdlib.net/narratives/1c0a47d59819c6a8.pdf",
+      "filename": "mit-dmp.pdf",
+      "bytes": 125513,
+      "sha256": "6da2155e09ac95bcf317bbd0e903c1105fab04d8c19f0abb5339150752682247",
+      "inspection": "Release plan; not experimental data"
+    },
+    {
+      "sourceURL": "https://api.dmphub.uc3prd.cdlib.net/dmps/10.48321/D10930DB2F",
+      "filename": "dmp.json",
+      "bytes": 6389,
+      "sha256": "80e0f4a171bb09e5e64bca49bb863dc695cf7c9d5544a99809b386b539b632d8",
+      "inspection": "Structured DMP; generic dataset"
+    },
+    {
+      "sourceURL": "https://api.datacite.org/dois/10.48321/D10930DB2F",
+      "filename": "dmp-datacite.json",
+      "bytes": 12562,
+      "sha256": "e9d308c8e16cddface912d5b7ca315a133952d09d27a672c984b42a40dcfe7a9",
+      "inspection": "DOI metadata and narrative links"
+    },
+    {
+      "sourceURL": "https://inis.iaea.org/records/ymfdn-qv182/files/12582976.pdf",
+      "filename": "wijnakker-thesis.pdf",
+      "bytes": 1785432,
+      "sha256": "99e21f93355a518b06e02a68901b4598a7c31a2c43f6a7e932021b8d5fb7127c",
+      "inspection": "111-page historical thesis; printed pages 102-103 visually inspected"
+    },
+    {
+      "sourceURL": "https://wippl.wisc.edu/pub_files/theses/thesisMilhone147_2020.pdf",
+      "filename": "milhone.pdf",
+      "bytes": 27870025,
+      "sha256": "4945cfd8b5c9818d7882096becd28095ff56b4b1d9a9ec43ddb8a00b2738ca0d",
+      "inspection": "Acquisition chapter and bounded text search; not a full thesis audit"
+    },
+    {
+      "sourceURL": "https://wippl.wisc.edu/pub_files/theses/thesisFlanagan145_2020.pdf",
+      "filename": "flanagan.pdf",
+      "bytes": 63750327,
+      "sha256": "e8715d0a4a03d3e90769f5143afc1e310b0ecfec192d0ff6aed5d9ece8914b23",
+      "inspection": "Bounded text search; not a full thesis audit"
+    },
+    {
+      "sourceURL": "https://raw.githubusercontent.com/RemDelaporteMathurin/plasma-centrifuge/6ad77b4b3f2d4ba478a8574556e6da8095361132/main.ipynb",
+      "filename": "mit-main.ipynb",
+      "bytes": 380369,
+      "sha256": "ef9210a8ced07054be2318cdaee269eb6a8fac7de26333c704c8e4f9c079b63c",
+      "inspection": "Source inspection only; not executed"
+    },
+    {
+      "sourceURL": "https://api.github.com/repos/RemDelaporteMathurin/plasma-centrifuge/pulls/4",
+      "filename": "mit-pr4-metadata.json",
+      "bytes": 18387,
+      "sha256": "375907920a69c89fdf3ff2fc1e6cb2a1621436ac40f4daf87d7807b9576979b3",
+      "inspection": "Open, unmerged; referenced Marathon-Fusion head repository returned 404"
+    },
+    {
+      "sourceURL": "https://api.github.com/repos/RemDelaporteMathurin/plasma-centrifuge/pulls/4/files?per_page=100",
+      "filename": "mit-pr4-files.json",
+      "bytes": 17214,
+      "sha256": "079ac581df3b412c289f8693059ba005faac3f85a738a7f944ead5ed827a73d2",
+      "inspection": "File metadata; no notebook patch supplied"
+    },
+    {
+      "sourceURL": "https://zenodo.org/api/records?q=%22plasma%20centrifuge%22&size=20",
+      "filename": "zenodo-search.json",
+      "bytes": 7408,
+      "sha256": "1fe00996e0d6d23fce2a5b2ead796bab5f6404de19d626258d8d62691f4e22e8",
+      "inspection": "One returned record screened as unrelated"
+    },
+    {
+      "sourceURL": "https://api.datacite.org/dois?query=titles.title:%22plasma%20centrifuge%22&page[size]=25",
+      "filename": "datacite-search.json",
+      "bytes": 6944,
+      "sha256": "ff0c6275c90e5e730d8472efdec51e934688cbf502714ff72029d77213f35c82",
+      "inspection": "Two returned records: DMP and unrelated medical record"
+    },
+    {
+      "sourceURL": "https://zenodo.org/api/records?q=creators.name:Milhone&size=10",
+      "filename": "zenodo-milhone.json",
+      "bytes": 447,
+      "sha256": "f05d41f91eaed5c6b5d4c887972022d21a3e4025e8ac254696db41e5d6ff7982",
+      "inspection": "No records returned for this query"
+    }
+  ]
+}

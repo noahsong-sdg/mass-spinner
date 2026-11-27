@@ -59,6 +59,7 @@ test('zero drive and duration retain exact rest and reject nonphysical coupled-s
  assert.throws(()=>advanceFuelCoupledStep({...p,gasK:0},rest,.01),RangeError);
  assert.throws(()=>advanceFuelCoupledStep({...p,diffusivityM2S:-1},rest,.01),RangeError);
  assert.throws(()=>advanceFuelCoupledStep(p,rest,-1),RangeError);
+ assert.throws(()=>advanceFuelCoupledStep({...p,gasTemperatureBasis:{referenceK:[p.gasK,p.gasK],incrementK:[0,0]}},rest,0),/requires spatial/);
 });
 
 test('physical root bracket honors accepted inventory roundoff without renormalizing the state',()=>{

@@ -4,11 +4,15 @@ import {readFileSync} from 'node:fs';
 import {createResearchLoader,setupResearchViewer} from '../src/research-ui.js';
 
 class Node {
+ dataset:Record<string,string>={};
+ parentElement:Node|null=null;
  children:Node[]=[];attributes:Record<string,string>={};events:Record<string,()=>void>={};
  textContent='';value='';disabled=false;
  constructor(public tag='div'){}
- append(...children:Node[]){this.children.push(...children);}
- replaceChildren(...children:Node[]){this.children=children;}
+ append(...children:Node[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}
+ replaceChildren(...children:Node[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:Node,before:Node|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(key:string,value:string){this.attributes[key]=value;}
  addEventListener(key:string,handler:()=>void){this.events[key]=handler;}
 }
@@ -45,7 +49,7 @@ test('failed replay clears stale moments and retry restores exact saved data',as
  succeeds=true;assert.ok(await load());assert.equal(get('replay-case').disabled,false);assert.equal(get('replay-time').disabled,false);
  get('replay-case').value=data.cases[2].id;get('replay-case').events.change();get('replay-time').value='20';get('replay-time').events.input();
  assert.equal(get('replay-tensors').children[0].children[1].textContent,data.cases[2].states[20].temperatureTensorEV[0].map((row:number[])=>row.map(v=>v.toPrecision(5).padStart(11)).join(' ')).join('\n'));
- assert.match(get('replay-status').textContent,/WITHHELD/);
+ assert.match(get('replay-status').textContent,/Accuracy is not established/);
 });
 
 test('all six replay components have distinct plotted and legend styles',async t=>{
@@ -59,4 +63,14 @@ test('all six replay components have distinct plotted and legend styles',async t
   const legends=svg.children.filter(n=>n.tag==='path'&&n.attributes.d.endsWith('h20'));
   assert.deepEqual(legends.map(n=>`${n.attributes.stroke}|${n.attributes['stroke-dasharray']??''}`),expected);
  }
+});
+
+test('malformed saved-moment arrays clear previously displayed replay data',async t=>{
+ const get=dom(t),data=packet();assert.ok(await setupResearchViewer(async()=>({ok:true,json:async()=>data})));
+ const malformed={...data,cases:[{...data.cases[0],states:[{...data.cases[0].states[0],means:[null]}]}]};
+ assert.equal(await setupResearchViewer(async()=>({ok:true,json:async()=>malformed})),null);
+ assert.match(get('replay-status').textContent,/This recording format is not supported/);
+ assert.equal(get('replay-case').disabled,true);assert.equal(get('replay-time').disabled,true);
+ assert.equal(get('replay-time-value').textContent,'—');assert.equal(get('replay-scale').textContent,'');
+ assert.equal(get('replay-tensors').children.length,0);assert.equal(get('replay-plots').children.length,0);
 });

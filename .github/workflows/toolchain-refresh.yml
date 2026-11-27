@@ -1,0 +1,56 @@
+name: Toolchain refresh
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/stack-modernization]
+    paths: [.github/workflows/toolchain-refresh.yml]
+permissions:
+  contents: read
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Resolve reviewed packages in isolation
+        run: |
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 sh -eu -c '
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+            npm ci --ignore-scripts --no-audit --no-fund
+            mkdir -p toolchain-report
+            cp package-lock.json toolchain-report/
+            npm audit --json > toolchain-report/npm-audit.json || test "$?" = 1
+            node --import tsx scripts/qualify-gltf.ts > toolchain-report/gltf-trial.log 2>&1 || touch toolchain-report/gltf-trial-failed
+            cp -R output/gltf-trial toolchain-report/
+            npm run typecheck:tests > toolchain-report/maintained-tests.log 2>&1 || touch toolchain-report/maintained-tests-failed
+            npm run typecheck:infrastructure > toolchain-report/infrastructure.log 2>&1 || touch toolchain-report/infrastructure-failed
+            npm run typecheck > toolchain-report/typecheck.log 2>&1 || touch toolchain-report/typecheck-failed
+            node --import tsx --test --test-concurrency=1 tests/surface-state.test.ts tests/surface-independent-v39.test.ts tests/surface-viewer-v39.test.ts tests/scenario-schema.test.ts tests/worker-client.test.ts tests/release-manifest.test.ts tests/dependency-review.test.ts > toolchain-report/regressions.log 2>&1 || touch toolchain-report/regressions-failed
+            if test -f tsconfig.tooling.json; then node node_modules/@typescript/native/bin/tsc --noEmit --checkers 1 -p tsconfig.tooling.json > toolchain-report/tooling-types.log 2>&1 || touch toolchain-report/tooling-types-failed; fi
+            if test -f eslint.config.mjs; then npm run lint > toolchain-report/lint.log 2>&1 || touch toolchain-report/lint-failed; fi
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: toolchain-report
+          path: toolchain-report/
+          if-no-files-found: error
+          retention-days: 3
+
+  science-lock:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Resolve proposed scientific upgrade in isolation
+        run: |
+          docker build -t science-lock -f ci/Dockerfile.science .
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp science-lock uv lock --project scientific/active
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: proposed-science-lock
+          path: scientific/active/uv.lock
+          retention-days: 3

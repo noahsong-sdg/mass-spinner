@@ -40,5 +40,5 @@ test('stopping rejects unsupported tail/incident energies rather than silently e
   assert.throws(()=>litStoppingCrossSection(value),RangeError);
  assert.throws(()=>litStoppingCrossSection(100,0),RangeError);
  assert.throws(()=>litStoppingCrossSection(100,7,Infinity),RangeError);
- assert.match(p.assumptions,/no measured LiT/);
+ assert.match(p.assumptions,/does not include measured LiT chemical corrections/);
 });

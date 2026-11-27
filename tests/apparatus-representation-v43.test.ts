@@ -25,29 +25,30 @@ function fixture(t:any,{inspectors=false,failImport=false}={}){
 }
 
 test('apparatus caption follows reported displayed geometry through reference, ready, hardware, pending and error states',async t=>{
- const f=fixture(t);assert.match(f.caption(),/layer thickness exaggerated/);
+ const f=fixture(t);assert.match(f.caption(),/target layer has exaggerated thickness/);
  f.visible();assert.equal(f.caption(),'Loading 3D geometry.');await settle();
- assert.match(f.caption(),/layer thickness exaggerated/);
+ assert.match(f.caption(),/target layer has exaggerated thickness/);
  // A ready input alone does not establish that an asynchronous viewer has displayed it.
- f.ui.updateSurfaceState({status:'ready'});assert.match(f.caption(),/layer thickness exaggerated/);
+ f.ui.updateSurfaceState({status:'ready'});assert.match(f.caption(),/target layer has exaggerated thickness/);
  f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer:'state',numerical:true});
- assert.match(f.caption(),/True-scale SI hardware; accepted numerical fields shown/);
- assert.match(f.caption(),/material choices are illustrative assumptions/);
- assert.doesNotMatch(f.caption(),/layer thickness exaggerated|Hardware only/);
- for(const [layer,word]of [['tracks','trajectories'],['impacts','impacts']]){
-  f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer,numerical:true});assert.match(f.caption(),new RegExp(`accepted ${word} shown`));
+ assert.match(f.caption(),/Dimensions follow the simulation inputs in SI units. Completed numerical fields are shown/);
+ assert.match(f.caption(),/Marathon hardware dimensions are not verified here/);
+ assert.match(f.caption(),/Construction and materials are for illustration/);
+ assert.doesNotMatch(f.caption(),/target layer has exaggerated thickness|Hardware only/);
+ for(const [layer,word]of [['tracks','ion paths'],['impacts','impact results']]){
+  f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer,numerical:true});assert.match(f.caption(),new RegExp(`Completed ${word} are shown`));
  }
  f.callbacks.onRepresentation({geometry:'accepted',status:'ready',layer:'hardware',numerical:false});
- assert.match(f.caption(),/hardware only; numerical layers hidden/);
+ assert.match(f.caption(),/Only hardware is shown. Numerical layers are hidden/);
  f.callbacks.onRepresentation({geometry:'reference',status:'pending',numerical:false});
- assert.match(f.caption(),/Updating; numerical surfaces withheld/);assert.match(f.caption(),/layer thickness exaggerated/);
+ assert.match(f.caption(),/Calculation in progress. Numerical surfaces are hidden/);assert.match(f.caption(),/target layer has exaggerated thickness/);
  f.callbacks.onRepresentation({geometry:'none',status:'error',numerical:false});
- assert.equal(f.caption(),'3D unavailable; no geometry is displayed.');
+ assert.equal(f.caption(),'3D is not available. No geometry is shown.');
 });
 
 test('failed viewer import discloses unavailable geometry rather than retaining an asset-only caption',async t=>{
  const f=fixture(t,{failImport:true});f.visible();await settle();
- assert.equal(f.caption(),'3D unavailable; no geometry is displayed.');
+ assert.equal(f.caption(),'3D is not available. No geometry is shown.');
 });
 
 test('real engineering part callbacks survive the generic inspector sync and keyboard selection clears stale part details',async t=>{
@@ -65,5 +66,5 @@ test('real engineering part callbacks survive the generic inspector sync and key
  }
  const choice=f.host.querySelector('select')!;choice.value='substrate';choice.dispatchEvent(new f.doc.defaultView!.Event('change'));
  assert.equal(f.ui.readout.querySelector('h3').textContent,fusionComponents.find(c=>c.id==='substrate')!.name);
- assert.match(f.ui.readout.textContent,/publicly unspecified/);assert.doesNotMatch(f.ui.readout.textContent,/Vacuum flange/);
+ assert.match(f.ui.readout.textContent,/public page does not specify the substrate alloy or coolant/);assert.doesNotMatch(f.ui.readout.textContent,/Vacuum flange/);
 });

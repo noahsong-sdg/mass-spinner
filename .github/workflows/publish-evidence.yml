@@ -1,0 +1,50 @@
+name: Publish immutable evidence
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful Active science environment or Blender LTS qualification run
+        required: true
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Admit and download completed evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          [[ "$RUN_ID" =~ ^[0-9]+$ ]]
+          gh api "repos/$GITHUB_REPOSITORY/actions/runs/$RUN_ID" > run.json
+          jq -e --arg repo "$GITHUB_REPOSITORY" '.conclusion == "success" and .head_repository.full_name == $repo and (.name == "Active science environment" or .name == "Blender LTS qualification")' run.json
+          case "$(jq -r .name run.json)" in
+            'Active science environment') artifact=active-science-evidence ;;
+            'Blender LTS qualification') artifact=blender-lts-evidence ;;
+          esac
+          gh run download "$RUN_ID" -R "$GITHUB_REPOSITORY" -n "$artifact" -D evidence-input
+      - name: Prepare isolated packaging tools
+        run: |
+          docker build -t evidence-tools -f ci/Dockerfile.science .
+      - name: Package checksummed evidence offline
+        env:
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          mkdir -p evidence-release
+          sha=$(jq -r .head_sha run.json)
+          run_url=$(jq -r .html_url run.json)
+          workflow=$(jq -r .name run.json)
+          url="https://github.com/$GITHUB_REPOSITORY/releases/download/evidence-run-$RUN_ID/evidence.tar.gz"
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" -v "$PWD:/work" -w /work -e HOME=/tmp evidence-tools python3 scientific/active/evidence.py package evidence-input evidence-release/evidence.tar.gz evidence-release/catalog.json "$url" "$sha" "$run_url" "$workflow; see individual reports for physical qualification limits"
+      - name: Publish once; never overwrite an existing evidence release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ inputs.run_id }}
+        run: |
+          gh release create "evidence-run-$RUN_ID" evidence-release/evidence.tar.gz evidence-release/catalog.json --repo "$GITHUB_REPOSITORY" --target "$(jq -r .head_sha run.json)" --title "Evidence run $RUN_ID" --notes "Immutable numerical/rendering evidence. Catalog includes source identity, run URL, bundle and per-file SHA-256. Tool verification is not experimental qualification."

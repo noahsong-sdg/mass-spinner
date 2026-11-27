@@ -21,7 +21,7 @@ export function assessCollisionObservableEvidence(result:Result,observable:Colli
  const settings={particlesPerSpecies:c.particlesPerSpecies,dt:c.dt,duration:c.duration,seed:c.seed};
  if(!c.collisions)return {observable,status:'ideal-orbit',sampledDomain:'not-applicable',
   rawAngularMomentum:'not-applicable',continuum:'not-applicable',unresolvedExposure:null,settings,
-  reasons:['Collision-free prescribed-field orbit model; collisional transport is disabled.']};
+  reasons:['The orbit model uses prescribed fields without collisions. Collision transport is disabled.']};
  let exposure=0,unresolved=0,complete=result.history.length===result.regimeHistory.length&&result.history.length>1
   &&result.history[0]?.time===0&&result.history.at(-1)?.time===c.duration;
  for(let i=1;i<result.regimeHistory.length;i++){
@@ -46,11 +46,11 @@ export function assessCollisionObservableEvidence(result:Result,observable:Colli
  const rawAngularMomentum=!Number.isFinite(residual)||residual<0?'unresolved':residual>.001?'budget-exceeded':'within-budget';
  const status=outside?'outside-domain':rawAngularMomentum==='budget-exceeded'?'budget-exceeded':
   sampledDomain==='unresolved'||rawAngularMomentum==='unresolved'?'unresolved':'preview';
- const reasons=[outside?'A sampled local state leaves the binary collision model domain.':
-  sampledDomain==='unresolved'?'Local collision sampling is unresolved or exceeds the 1% exposure budget.':
-  'Sampled local collision diagnostics meet the 1% exposure budget; states between saved frames remain unchecked.'];
- if(rawAngularMomentum==='budget-exceeded')reasons.push('Raw angular-momentum error exceeds 0.1%; no torque correction is accepted.');
- if(rawAngularMomentum==='unresolved')reasons.push('Raw angular-momentum error is unavailable.');
- reasons.push('Single-realization preview: no matched continuum-bias bound qualifies this observable at these settings.');
+ const reasons=[outside?'A sampled local state is outside the domain of the binary collision model.':
+  sampledDomain==='unresolved'?'The local collision assessment is unresolved, or unresolved exposure is more than 1%.':
+  'The sampled local collision diagnostics are within the 1% exposure limit. States between saved frames have no check.'];
+ if(rawAngularMomentum==='budget-exceeded')reasons.push('The raw angular-momentum error is more than 0.1%. The model applies no torque correction.');
+ if(rawAngularMomentum==='unresolved')reasons.push('The raw angular-momentum error is not available.');
+ reasons.push('This preview uses one random realization. No continuum-bias bound gives an accuracy limit for this quantity at these settings.');
  return {observable,status,sampledDomain,rawAngularMomentum,continuum:'unqualified',unresolvedExposure,settings,reasons};
 }

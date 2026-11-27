@@ -27,7 +27,7 @@ test('component instruments show actions first and preserve part-specific materi
  details.open=true;ui.select('substrate');
  assert.equal(ui.readout.querySelector('details').open,false);
  assert.doesNotMatch(ui.readout.textContent,/Specific film/);
- assert.match(ui.readout.querySelector('details').textContent,/publicly unspecified/);
+ assert.match(ui.readout.querySelector('details').textContent,/does not specify/);
 });
 
 function comparison(t:any){
@@ -51,7 +51,7 @@ test('A/B difference follows the shared physical time and withholds stale in-fli
  const value=100*(sb.collection.innerLightPurity!-sa.collection.innerLightPurity!);
  const fmt=(v:number)=>`${v>0?'+':''}${v.toLocaleString(undefined,{maximumSignificantDigits:3})}`;
  assert.match(f.delta().textContent!,new RegExp(`Δ inner light ${fmt(value).replace(/[+.*]/g,'\\$&')} pp`));
- assert.equal(f.delta().hidden,false);assert.match(f.delta().title,/Matched physical time/);
+ assert.equal(f.delta().hidden,false);assert.match(f.delta().title,/Same physical time/);
  f.tools.accept(null);assert.equal(f.delta().hidden,true);assert.equal(f.delta().textContent,'');
  assert.ok(f.tools.pinned,'pending input must not discard the accepted baseline');
  f.tools.accept({...b,timeS:0});assert.match(f.delta().textContent!,/Δ gas 0 m\/s/);
@@ -62,9 +62,9 @@ test('comparison labels reference-only scope and rejects unlike cuts as a purity
  const f=comparison(t),a=experiment(.01),b=experiment(.03);
  f.tools.accept(a);f.pin();
  f.tools.accept({...b,mode:'equilibrium'});assert.match(f.delta().textContent!,/final reference/);
- assert.match(f.delta().title,/Uniform-inertia final-equilibrium/);
+ assert.match(f.delta().title,/Final equilibrium inventory with fixed uniform inertia/);
  f.tools.accept({...b,result:{...b.result,config:{...b.result.config,cutFraction:.9}}});
  assert.match(f.delta().textContent!,/Inventory cuts\/species differ/);assert.doesNotMatch(f.delta().textContent!,/Δ inner light/);
  const {transport,...legacy}=b.result;f.tools.accept({...b,result:legacy});
- assert.equal(f.delta().textContent,'Transient comparison unavailable');
+ assert.equal(f.delta().textContent,'The time-dependent comparison is not available');
 });

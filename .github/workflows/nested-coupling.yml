@@ -1,0 +1,42 @@
+name: Nested coupled transport
+on:
+  push:
+    branches: [codex/multigrid-coupling]
+permissions:
+  contents: read
+jobs:
+  study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          git fetch --depth=1 origin d2ce072558342ed44f4bd48c667f874df2b842dc
+          git show d2ce072558342ed44f4bd48c667f874df2b842dc:src/fuel-spatial-operation.ts > src/.baseline-operation.ts
+          git show d2ce072558342ed44f4bd48c667f874df2b842dc:src/fuel-spatial-experiment.ts | sed 's|./fuel-spatial-operation.js|./.baseline-operation.js|' > src/.baseline-experiment.ts
+          docker build -t nested-check - <<'DOCKERFILE'
+          FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+          DOCKERFILE
+          docker image inspect nested-check --format '{{.Id}}'
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test and study offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp nested-check sh -eu -c '
+            node --import tsx --test --test-concurrency=1 tests/fuel-radial-projection.test.ts tests/fuel-spatial-operation-v66.test.ts tests/fuel-spatial-convergence.test.ts
+            node --import tsx scripts/check-fuel-same-grid.ts
+            python3 scientific/spatial-argon-20261116/audit_nested.py --self-test
+            study_status=0
+            node --import tsx scripts/probe-fuel-nested-coupling.ts nested-output || study_status=1
+            python3 scientific/spatial-argon-20261116/audit_nested.py nested-output --source-root /work --output nested-output/independent-accounting.json || study_status=1
+            exit "$study_status"
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: nested-coupling
+          path: nested-output/
+          if-no-files-found: error

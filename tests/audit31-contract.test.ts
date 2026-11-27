@@ -29,7 +29,7 @@ test('research UI displays every saved tensor without turning the replay into a 
    time.value=String(i);time.dispatchEvent(new p.window.Event('input'));
    const tensors=p.window.document.querySelectorAll('#replay-tensors pre');
    for(let s=0;s<2;s++)assert.equal(tensors[s].textContent,c.states[i].temperatureTensorEV[s].map((row:number[])=>row.map(v=>v.toPrecision(5).padStart(11)).join(' ')).join('\n'));
-   assert.match(p.window.document.getElementById('replay-status')!.textContent!,/qualification WITHHELD.*No solver runs/);
+   assert.match(p.window.document.getElementById('replay-status')!.textContent!,/Accuracy is not established.*Moving the timeline does not run the solver/);
    assert.equal(p.window.document.querySelectorAll('#replay-plots figure').length,3);
    checked++;
   }
@@ -41,7 +41,7 @@ test('frozen convergence display identifies its source and does not claim a live
  const p=page(t),evidence=JSON.parse(readFileSync('web-assets/convergence/display.json','utf8'));
  renderConvergenceEvidence(evidence);
  const status=p.window.document.getElementById('convergence-status')!.textContent!;
- assert.match(status,/Static audit evidence; changing sliders does not rerun this matrix/);
+ assert.match(status,/These are recorded results. Slider changes do not repeat this study/);
  assert.ok(status.includes(evidence.status.toUpperCase()));
  assert.ok(p.window.document.getElementById('convergence-identity')!.textContent!.includes(evidence.sourceHash));
  assert.equal(p.window.document.querySelectorAll('#convergence-rows tr').length,evidence.levels.length);

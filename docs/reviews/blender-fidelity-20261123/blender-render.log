@@ -1,0 +1,648 @@
+/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/blender/build_fuel_assembly.py:32: DeprecationWarning: 'Material.use_nodes' is expected to be removed in Blender 6.0
+  mat.use_nodes = True
+Info: Saved as "centrifuge-assembly.blend"
+INFO Draco is available, use library at /private/tmp/mass-spinner-blender-5.2.4-mount/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_draco_bridge.dylib
+INFO MeshOptimizer is available, use library at /private/tmp/mass-spinner-blender-5.2.4-mount/Blender.app/Contents/Resources/5.2/scripts/addons_core/io_scene_gltf2/libbf_intern_meshopt_bridge.dylib
+19:13:12 | INFO: Starting glTF 2.0 export
+19:13:12 | INFO: Extracting primitive: Cube.029
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.030
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.020
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.022
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.025
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.027
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.031
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.021
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.023
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.026
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.028
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.019
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.024
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.018
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.017
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.010
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.012
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.009
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.011
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.048
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.049
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Vessel saddle strap
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.014
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.016
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.013
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.015
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.050
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.051
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Vessel saddle strap.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Vessel pressure wall
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.040
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.041
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.004
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.005
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.006
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Grooved alumina former
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.004
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.005
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.006
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.042
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.043
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.004
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.007
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.008
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.009
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.010
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.011
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.012
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.013
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Grooved alumina former.001
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.007
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.008
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.009
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.010
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.011
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.012
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.013
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.044
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.045
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.005
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.006
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.014
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.015
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.016
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.017
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.018
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.019
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.020
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Grooved alumina former.002
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.004
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.005
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.004
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.005
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.014
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.015
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.016
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.017
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.018
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.019
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.020
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.046
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cylinder.047
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.007
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Cube.008
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.021
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.022
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.023
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.024
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.025
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.026
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Copper solenoid turn.027
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Grooved alumina former.003
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.006
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Solenoid retaining cheek.007
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.006
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Terminal isolation washer.007
+19:13:12 | INFO: Primitives created: 1
+19:13:12 | INFO: Extracting primitive: Turn insulation.021
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.022
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.023
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.024
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.025
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.026
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Turn insulation.027
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Axial service port
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Beveled vacuum flange
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.004
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.005
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.006
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.007
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.008
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.009
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.010
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.011
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.012
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.013
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.014
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.015
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.016
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.017
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.018
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.019
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.020
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.021
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.022
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.023
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.024
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.025
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.026
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.027
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.028
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.029
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.030
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.031
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.004
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.005
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.018
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.019
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: End retaining plate
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.004
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.005
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.006
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.007
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.008
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.009
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.010
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.011
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.012
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.013
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.014
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.015
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.016
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.017
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.004
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.005
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.006
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.007
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.008
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.009
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.010
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.011
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.012
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.013
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.014
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.015
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.016
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.017
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.018
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.019
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.020
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.021
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.022
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.023
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.024
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.025
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.026
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.027
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.028
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.029
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.030
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.031
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV alumina feedthrough
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV alumina feedthrough.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV feedthrough flange
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV feedthrough flange.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Recessed metallic seal
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Service compression nut
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Axial service port.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Beveled vacuum flange.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.032
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.033
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.034
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.035
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.036
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.037
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.038
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.039
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.040
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.041
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.042
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.043
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.044
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.045
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.046
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.047
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.048
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.049
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.050
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.051
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.052
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.053
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.054
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.055
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.056
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.057
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.058
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.059
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.060
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.061
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.062
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Captive washer.063
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.006
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.007
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.008
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.009
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.010
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Ceramic creepage rib.011
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.038
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.039
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: End retaining plate.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.022
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.023
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.024
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.025
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.026
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.027
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.028
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.029
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.030
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.031
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.032
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.033
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.034
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.035
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.036
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Cylinder.037
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.032
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.033
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.034
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.035
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.036
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.037
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.038
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.039
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.040
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.041
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.042
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.043
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.044
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.045
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.046
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.047
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.048
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.049
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.050
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.051
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.052
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.053
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.054
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.055
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.056
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.057
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.058
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.059
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.060
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.061
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.062
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Hex flange nut.063
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV alumina feedthrough.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV alumina feedthrough.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV feedthrough flange.002
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: HV feedthrough flange.003
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Recessed metallic seal.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Extracting primitive: Service compression nut.001
+19:13:13 | INFO: Primitives created: 1
+19:13:13 | INFO: Finished glTF 2.0 export in 0.5775249004364014 s
+
+FUEL_ASSEMBLY {"modules": 9, "meshes": 316}
+/Users/noahs/.codex/visualizations/2026/11/06/01a1b24c-d476-72f2-9877-6d32127334f6/blender/build_fuel_assembly.py:219: DeprecationWarning: 'World.use_nodes' is expected to be removed in Blender 6.0
+  scene.world.use_nodes = True
+00:31.779  render           | Saved: '/private/tmp/mass-spinner-blender-fidelity-20261123-v6/centrifuge-assembly.png'
+Info: Saved as "centrifuge-assembly.blend"
+Blender 5.2.4 LTS (hash cd5dc428cce1 built 2026-11-10 01:31:20)
+
+Blender quit

@@ -6,7 +6,7 @@ import {fuelLithiumNeutralTransport} from './fuel-momentum.js';
 const temperatures=[300,500,1000,2000,4000,5000,6000,8000,10000,15000,20000];
 const q22=[12.88,11.12,9.66,8.60,7.57,7.23,6.96,6.53,6.20,5.60,5.17];
 export function fuelArgonNeutralTransport(temperatureK:number){
- if(!Number.isFinite(temperatureK)||temperatureK<300||temperatureK>20000)throw new RangeError('Neutral Ar table requires300–20000K.');
+ if(!Number.isFinite(temperatureK)||temperatureK<300||temperatureK>20000)throw new RangeError('Neutral Ar table temperature must be 300–20000 K.');
  let i=0;while(i<temperatures.length-2&&temperatureK>temperatures[i+1])i++;
  const fraction=(temperatureK-temperatures[i])/(temperatures[i+1]-temperatures[i]);
  const collisionIntegralM2=Math.PI*1e-20*(q22[i]+fraction*(q22[i+1]-q22[i]));

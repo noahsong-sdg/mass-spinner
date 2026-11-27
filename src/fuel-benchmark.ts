@@ -72,8 +72,8 @@ export function fuelBenchmarkReport(){
  const q=points.map(p=>p.velocityMS/p.radiusM),lo=Math.min(...q),hi=Math.max(...q);
  return {source:FUEL_BENCHMARK_SOURCE,points,cases,nominalMinimaxFraction:(hi-lo)/(hi+lo),
   experimentallyQualified:false,absolutePrediction:'unavailable' as const,
-  observationOperator:'Rigid rotation predicts Doppler speed Ω × sightline offset for an optically thin full-line centroid, independent of positive emissivity. The original spectral estimator/transfer is unknown.',
-  blockers:['No matched argon preset, local temperature field, current footprint or independently measured drag/collision coefficients in the live model.',
-   'The actual live model imposes rigid rotation; no local shear, meridional flow or evolving extraction is solved.',
-   'Optical estimator and apparatus mapping are unresolved; this is a conditional structural challenge, not a measured-performance prediction.']};
+  observationOperator:'For rigid rotation, the optically thin full-line Doppler centroid gives speed Ω × sightline offset. This relation does not depend on positive emissivity. The original spectral estimator and transfer are unknown.',
+  blockers:['The live model has no matched argon preset, local temperature field, current footprint or independently measured drag and collision coefficients.',
+   'The live model imposes rigid rotation. It does not calculate local shear, meridional flow or extraction over time.',
+   'The optical estimator and apparatus mapping are unresolved. This comparison examines rigid rotation under the stated optical interpretation. It is not a measured-performance prediction.']};
 }

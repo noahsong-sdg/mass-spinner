@@ -110,3 +110,15 @@ test('adding stages in a parameter scan holds feed location fixed instead of cha
  assert.ok(r.cascades[1].recovery<r.cascades[0].recovery);
  const single=simulateFuelCentrifuge({...r.config,stages:1,feedStage:1});assert.equal(single.cascades.length,1);
 });
+
+test('failure assumptions roundtrip and old links restore the documented defaults atomically',t=>{
+ const f=fixture(t),controls={'marathon-apparatus':'centrifuge','fuel-failure-pressurePa':40,'fuel-failure-externalPa':10,'fuel-failure-linerK':1200};
+ restoreScenario(f.doc,{version:2,level:'2',controls});
+ const saved=captureScenario(f.doc,'2');assert.equal(saved.controls['fuel-failure-pressurePa'],40);
+ restoreScenario(f.doc,readScenario(new URL(scenarioLink('https://example.org',saved)).search).scenario);
+ assert.equal(f.input('fuel-failure-externalPa').value,'10');assert.equal(f.input('fuel-failure-linerK').value,'1200');
+ assert.throws(()=>restoreScenario(f.doc,{version:2,level:'2',controls:{...controls,'fuel-failure-pressurePa':-1}}),/Out-of-domain/);
+ assert.equal(f.input('fuel-failure-pressurePa').value,'40');
+ restoreScenario(f.doc,{version:2,level:'2',controls:{'marathon-apparatus':'centrifuge'}});
+ assert.equal(f.input('fuel-failure-pressurePa').value,'1000');assert.equal(f.input('fuel-failure-externalPa').value,'0');assert.equal(f.input('fuel-failure-linerK').value,'1800');
+});

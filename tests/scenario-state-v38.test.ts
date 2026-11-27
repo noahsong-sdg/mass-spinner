@@ -36,6 +36,25 @@ test('unknown ids, cross-playground ids, stale versions and oversized links fail
  assert.equal(readScenario('?v=2&level=2&scenario='+ 'a'.repeat(25000)).invalid,true);
  assert.deepEqual(readScenario('?v=1&field=.15'),{scenario:null,invalid:false});
 });
+test('v3 centrifuge links preserve bounded drive histories and reject malformed histories',()=>{
+ const scenario={version:3,level:'2',controls:{'marathon-apparatus':'centrifuge','fuel-currentA':0,'fuel-durationS':2},fuelRun:{initialCurrentA:.03,events:[{timeS:1,currentA:0}],mode:'transport',timeS:1}};
+ const url=scenarioLink('https://example.org/',scenario);
+ assert.equal(new URL(url).searchParams.get('v'),'3');
+ assert.deepEqual(readScenario(new URL(url).search),{scenario,invalid:false});
+ const invalidRuns=[null,{}, {...scenario.fuelRun,initialCurrentA:-.01},{...scenario.fuelRun,initialCurrentA:.21},
+  {...scenario.fuelRun,events:[{timeS:3,currentA:0}]}, {...scenario.fuelRun,events:[{timeS:.5,currentA:.21}]},
+  {...scenario.fuelRun,events:[{timeS:1,currentA:0},{timeS:.5,currentA:.03}]},
+  {...scenario.fuelRun,events:[{timeS:1,currentA:0},{timeS:1,currentA:.03}]},
+  {...scenario.fuelRun,events:[{timeS:1,currentA:0,resume:{}}]},
+  {...scenario.fuelRun,events:Array.from({length:129},(_,i)=>({timeS:i/100,currentA:0}))},
+  {...scenario.fuelRun,mode:'obsolete'},{...scenario.fuelRun,timeS:3},{...scenario.fuelRun,timeS:-1}];
+ for(const fuelRun of invalidRuns)assert.throws(()=>scenarioLink('https://example.org/',{...scenario,fuelRun}));
+ assert.throws(()=>scenarioLink('https://example.org/',{...scenario,level:'3'}));
+ assert.throws(()=>scenarioLink('https://example.org/',{...scenario,controls:{...scenario.controls,'marathon-apparatus':'source'}}));
+ assert.equal(readScenario(new URL(url.replace('v=3','v=2')).search).invalid,true);
+ const old={version:2,level:'2',controls:scenario.controls};
+ assert.deepEqual(readScenario(new URL(scenarioLink('https://example.org/',old)).search),{scenario:old,invalid:false});
+});
 test('restore validates every current domain before mutation and uses coherent native events',()=>{
  const {window}=fixture(),d=window.document,field=d.getElementById('field') as HTMLInputElement;
  let notifications=0;field.addEventListener('input',()=>{notifications++;assert.equal((d.getElementById('mass-b') as HTMLInputElement).value,'100');});
@@ -98,4 +117,17 @@ test('Models retains selected mechanism and source across 01; explicit reset res
   (d.getElementById('mass-a') as HTMLInputElement).value='190';
   assert.equal((d.getElementById('share-playground') as HTMLButtonElement).hidden,false);ui.reset();assert.equal(system.value,'centrifuge');assert.equal((d.getElementById('mass-a') as HTMLInputElement).value,'40');
  }finally{Object.assign(globalThis,saved);dom.window.close();}
+});
+
+
+test('incoming fuel current notifies before reference controls without changing reference-only imports',()=>{
+ const {window}=fixture(),d=window.document;
+ for(const [id,tag,content]of [['fuel-application','select','<option value="enrichment">Separation</option>'],['fuel-currentA','input','']] as const){
+  const input=d.createElement(tag);input.id=id;input.innerHTML=content;if(input instanceof window.HTMLInputElement){input.type='number';input.min='0';input.max='.2';input.value='.031';}d.body.append(input);
+ }
+ const current=d.getElementById('fuel-currentA') as HTMLInputElement,application=d.getElementById('fuel-application')!,order:string[]=[];
+ let invalidated=false;current.addEventListener('input',event=>{assert.equal((event as CustomEvent).detail,'mass-spinner:scenario-restore');invalidated=true;order.push('current');});application.addEventListener('change',()=>{order.push('reference');if(!invalidated)current.value='.031';});
+ restoreScenario(d,{version:2,level:'2',controls:{'fuel-application':'enrichment','fuel-currentA':.03}});
+ assert.deepEqual(order,['current','reference']);assert.equal(current.valueAsNumber,.03);
+ order.length=0;restoreScenario(d,{version:2,level:'2',controls:{'fuel-application':'enrichment'}});assert.deepEqual(order,['reference']);
 });

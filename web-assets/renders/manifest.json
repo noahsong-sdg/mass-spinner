@@ -7,7 +7,7 @@
       "image": "/renders/beam-target.webp",
       "png": "/renders/beam-target.png",
       "title": "Compact beam\u2013target source",
-      "caption": "Conceptual RF source, acceleration electrodes and LiT on a cooled substrate. Hardware only; layer thickness exaggerated. Unspecified alloys and dimensions are illustrative.",
+      "caption": "This example shows an RF source, acceleration electrodes, and lithium tritide (LiT) on a cooled substrate. The target layer has exaggerated thickness. The checked Marathon source does not publish beamline or target hardware dimensions. Unspecified alloys and dimensions are assumptions. Numerical target surfaces use the selected area and column inputs, not measured Marathon dimensions.",
       "hotspots": [
         {
           "id": "rf-source",
@@ -108,13 +108,16 @@
         "beam",
         "neutrons"
       ],
-      "modelSHA256": "4eb4952ca1106b3384a23b550132e570f319d16e0d60fa4e606bea691c6dd1f5"
+      "modelSHA256": "4eb4952ca1106b3384a23b550132e570f319d16e0d60fa4e606bea691c6dd1f5",
+      "scaleLabel": "Assumed dimensions \u00b7 not published",
+      "geometryLabel": "Assumed dimensions",
+      "dimensionSource": "https://www.marathonfusion.com/beam-driven-fusion/"
     },
     "gyro": {
       "image": "/renders/gyro.webp",
       "png": "/renders/gyro.png",
       "title": "Gyro-orbit separation",
-      "caption": "Conceptual transverse injection across an axial magnetic field, with segmented collectors in the gyro plane. Hardware only; no calculated orbit or field is embedded. All apparatus dimensions and optical finishes are illustrative.",
+      "caption": "This example shows transverse injection across an axial magnetic field and segmented collectors in the gyro plane. The static hardware view contains no calculated orbit or field. The apparatus dimensions and optical finishes are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -202,13 +205,14 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "e45793c58a574484991a3e24d8a5eff48c25db42828c6ae273fc07ce458d9f39"
+      "modelSHA256": "e45793c58a574484991a3e24d8a5eff48c25db42828c6ae273fc07ce458d9f39",
+      "scaleLabel": "Assumed dimensions"
     },
     "icr": {
       "image": "/renders/icr.webp",
       "png": "/renders/icr.png",
       "title": "Resonant ion heating",
-      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "caption": "This static hardware view does not contain calculated density, fields, or particle paths. The source, electrodes, and collection geometry are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -296,13 +300,14 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "4dca79e7219e70949b4aaa9402b00de476cf88787d8b7c6e34e47ace72a70061"
+      "modelSHA256": "4dca79e7219e70949b4aaa9402b00de476cf88787d8b7c6e34e47ace72a70061",
+      "scaleLabel": "Assumed dimensions"
     },
     "curved": {
       "image": "/renders/curved.webp",
       "png": "/renders/curved.png",
       "title": "Curved magnetic guide",
-      "caption": "Conceptual bent magnetic guide and source/collector. No self-generated electric field or calculated drift track is drawn; the solver remains a guiding-centre diagnostic.",
+      "caption": "This example shows a curved magnetic guide, source, and collector. It contains no self-generated electric field or calculated drift path. The calculation gives a guiding-center diagnostic only.",
       "hotspots": [
         {
           "id": "source",
@@ -382,13 +387,14 @@
         "vessel"
       ],
       "modelRegionComponentIds": [],
-      "modelSHA256": "7b649d0f0c3ecd2cbe12f39121cd2bb568e65540c653d573f7207a1fc51c262e"
+      "modelSHA256": "7b649d0f0c3ecd2cbe12f39121cd2bb568e65540c653d573f7207a1fc51c262e",
+      "scaleLabel": "Assumed dimensions"
     },
     "centrifuge": {
       "image": "/renders/centrifuge.webp",
       "png": "/renders/centrifuge.png",
       "title": "Rotating plasma centrifuge",
-      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "caption": "This static hardware view does not contain calculated density, fields, or particle paths. The source, electrodes, and collection geometry are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -477,13 +483,14 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "e455b37e446c0b0bc80470baee193e4e531ce7f1470754efe52f05c75ac719f9"
+      "modelSHA256": "e455b37e446c0b0bc80470baee193e4e531ce7f1470754efe52f05c75ac719f9",
+      "scaleLabel": "Assumed dimensions"
     },
     "rotating": {
       "image": "/renders/rotating.webp",
       "png": "/renders/rotating.png",
       "title": "Uniform-field rotating filter",
-      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "caption": "This static hardware view does not contain calculated density, fields, or particle paths. The source, electrodes, and collection geometry are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -572,13 +579,14 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "47153a1dec97df7bff46b3135b5b666d068b3f54f78fb8cd81cddf2ea9a3b045"
+      "modelSHA256": "47153a1dec97df7bff46b3135b5b666d068b3f54f78fb8cd81cddf2ea9a3b045",
+      "scaleLabel": "Assumed dimensions"
     },
     "doublewell": {
       "image": "/renders/doublewell.webp",
       "png": "/renders/doublewell.png",
       "title": "Shaped-potential double-well filter",
-      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "caption": "This static hardware view does not contain calculated density, fields, or particle paths. The source, electrodes, and collection geometry are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -667,116 +675,139 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0",
+      "scaleLabel": "Assumed dimensions"
     },
     "blanket": {
       "image": "/renders/blanket.webp",
       "png": "/renders/blanket.png",
-      "title": "Future power-plant blanket concept",
-      "caption": "Separate alchemy-paper concept, not the compact source. Paper-model material sequence with both inner/outer V-alloy walls. Relative radial layers only; not to scale, no neutronics/depletion result. Empty core denotes the plasma region; optical finishes are illustrative.",
+      "title": "Fusion power reference",
+      "caption": "Published neutronics reference: Table 1, section 4.1, selected 210 mm channel case, not built Marathon hardware. Fixed outer build: inboard FLiBe = 750 - (210 - 5) = 545 mm, outboard = 1000 - (210 - 5) = 795 mm. The Miller D-shaped contour, normal-offset layers, and cosine interpolation of inboard and outboard FLiBe thickness are display assumptions. Unknown plasma-to-wall clearance is omitted, and the 270 degree display cutaway differs from the paper's 90 degree reflective simulation sector. The added plasma marker, coils, cryostat, supports, service interfaces, their sizes, count, materials, and optical finishes are assumptions. This is not an engineered plant or a calculated magnetic equilibrium.",
       "hotspots": [
         {
           "id": "plasma",
-          "label": "Plasma source region",
-          "xPct": 68.18,
-          "yPct": 60.9
+          "label": "Plasma region",
+          "xPct": 63.82138729095459,
+          "yPct": 55.086749792099
         },
         {
           "id": "armor",
           "label": "Tungsten armor",
-          "xPct": 68.18,
-          "yPct": 52.97
+          "xPct": 64.64118361473083,
+          "yPct": 55.38846552371979
         },
         {
           "id": "structure",
-          "label": "V4Cr4Ti structure",
-          "xPct": 63.36,
-          "yPct": 57.55
+          "label": "Inner V alloy",
+          "xPct": 64.66150879859924,
+          "yPct": 55.3959459066391
         },
         {
           "id": "multiplier",
-          "label": "Hg-Li multiplier",
-          "xPct": 68.18,
-          "yPct": 73.32
+          "label": "Hg\u2013Li channel",
+          "xPct": 64.95961546897888,
+          "yPct": 55.50566017627716
         },
         {
           "id": "breeder",
-          "label": "FLiBe region",
-          "xPct": 77.82,
-          "yPct": 67.59
+          "label": "FLiBe",
+          "xPct": 66.26045107841492,
+          "yPct": 55.984413623809814
         },
         {
           "id": "tank",
           "label": "Eurofer97 tank",
-          "xPct": 68.18,
-          "yPct": 40.03
+          "xPct": 67.52063632011414,
+          "yPct": 56.448206305503845
         }
       ],
       "model": "/models/blanket.glb",
       "modelBounds": {
         "min": [
-          -3.24,
-          -1.24,
-          -3.24
+          -7.460000038146973,
+          -4.440000057220459,
+          -7.460000038146973
         ],
         "max": [
-          3.239926,
-          1.24,
-          3.239926
+          7.460000038146973,
+          3.9700000286102295,
+          7.925000190734863
         ],
         "center": [
-          -3.700000000006476e-05,
           0.0,
-          -3.700000000006476e-05
+          -0.23500001430511475,
+          0.2325000762939453
         ],
         "size": [
-          6.479926000000001,
-          2.48,
-          6.479926000000001
+          14.920000076293945,
+          8.410000085830688,
+          15.385000228881836
         ]
       },
       "modelCamera": {
         "position": [
-          6.0,
-          6.0,
-          8.0
+          1,
+          0.65,
+          0.45
         ],
         "target": [
-          1.902222,
-          1.833927,
-          2.536297
+          0,
+          0,
+          0
         ],
         "up": [
           0,
           1,
           0
-        ]
+        ],
+        "fitScale": 0.86
       },
       "componentIds": [
         "armor",
         "breeder",
+        "cryostat",
         "multiplier",
+        "pf-coils",
+        "plant-services",
+        "plant-supports",
         "plasma",
         "structure",
-        "tank"
+        "tank",
+        "tf-coils"
       ],
       "modelMeshComponentIds": [
         "armor",
         "breeder",
+        "cryostat",
         "multiplier",
+        "pf-coils",
+        "plant-services",
+        "plant-supports",
+        "plasma",
         "structure",
-        "tank"
+        "tank",
+        "tf-coils"
       ],
-      "modelRegionComponentIds": [
-        "plasma"
-      ],
-      "modelSHA256": "61efc7c51ee32f4c8fc0496c0738cbee1a10f346bc6ae56794400b74ac711d6b"
+      "modelRegionComponentIds": [],
+      "modelSHA256": "9318c9533100e4d0f7ae013a51c792ce09ae3fa4a4dd6d3adefd4a23d71f254b",
+      "scaleLabel": "Power reference \u00b7 R 4.2 m \u00b7 a 1.2 m \u00b7 assumed outer hardware",
+      "geometryBuilder": "blender/build_paper_blanket.py",
+      "geometryBuilderSHA256": "6e6ef1063082c1601916988acfa2bf34d67857566edea904ef8de50e200a43c5",
+      "dimensionSource": "https://www.marathonfusion.com/alchemy.pdf#page=13",
+      "geometryLabel": "Paper core \u00b7 assumed hardware",
+      "blenderVersion": "5.2.4 LTS",
+      "renderSettings": {
+        "engine": "Cycles CPU",
+        "samples": 24,
+        "denoising": true,
+        "viewTransform": "AgX"
+      }
     },
     "doublewell-dynamics": {
       "image": "/renders/doublewell.webp",
       "png": "/renders/doublewell.png",
       "title": "Collisional double-well apparatus",
-      "caption": "Conceptual apparatus for the selected mechanism. Static hardware illustration: no calculated density, field or trajectory is embedded; source, electrodes and collection geometry are illustrative.",
+      "caption": "This static hardware view does not contain calculated density, fields, or particle paths. The source, electrodes, and collection geometry are assumptions.",
       "hotspots": [
         {
           "id": "source",
@@ -865,7 +896,8 @@
       "modelRegionComponentIds": [
         "collectors"
       ],
-      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0"
+      "modelSHA256": "b9dbc59b8180a9876588923237e974f5d21494cff04c5c2ddc1494f99e9ff2e0",
+      "scaleLabel": "Assumed dimensions"
     }
   },
   "sourceSHA256": "db29e522f560f3ffdeb02eb811c162a810a4d574f5e2eb3d25a1cbef189e2969",

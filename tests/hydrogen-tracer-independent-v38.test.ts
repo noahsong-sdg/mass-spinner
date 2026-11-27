@@ -56,7 +56,7 @@ test('fast neutral ray intersection remains exact close to the wall, including i
  assert.equal(neutralHydrogenExit(c,[0,0,c.lengthM*(1+Number.EPSILON)],[0,0,1000]).timeS,0);
  assert.throws(()=>neutralHydrogenExit(c,[c.radiusM*(1+1e-10),0,.1],[10000,0,1000]),/outside/);
  assert.throws(()=>neutralHydrogenExit(c,[0,0,c.lengthM*(1+1e-10)],[0,0,1000]),/outside/);
- assert.throws(()=>neutralHydrogenExit(c,[0,0,.1],[0,0,0]),/forward/);
+ assert.throws(()=>neutralHydrogenExit(c,[0,0,.1],[0,0,0]),/finite neutral ray with a positive axial velocity/);
 });
 
 test('both nuclear products are required for canonical angular closure; mechanical angular exchange equals external B torque',()=>{
@@ -104,8 +104,8 @@ test('population ledgers close while qualification stays restricted to the presc
  assert.equal(l.incomingTaggedNuclei+l.incomingReservoirNuclei,l.outgoingTaggedNuclei+l.retainedReservoirIons);
  assert.equal(l.incomingChargeE,l.outgoingChargeE+l.retainedChargeE);relative(l.initialNuclearKineticJ,l.finalNuclearKineticJ);
  assert.equal(value.primary.wall+value.primary.end,c.particles);assert.equal(value.primary.remaining,0);assert.ok(l.retainedReservoirIons>0);
- assert.match(value.qualification,/approximation; not full physical transport/);assert.match(value.scope.join(' '),/differential nuclear-scattering/);
- assert.match(value.scope.join(' '),/secondary reactions/);assert.match(value.scope.join(' '),/subsequent atomic kinetics remain unresolved/);
+ assert.match(value.qualification,/approximation does not calculate full physical transport/);assert.match(value.scope.join(' '),/differential nuclear-scattering/);
+ assert.match(value.scope.join(' '),/secondary reactions/);assert.match(value.scope.join(' '),/does not calculate later atomic kinetics/);
  assert.throws(()=>validateHydrogenTracer(config({electricFieldVM:1})),/E=0/);assert.throws(()=>validateHydrogenTracer(config({atomicIdentity:'Ar-40'})),/H-1/);
 });
 

@@ -72,7 +72,7 @@ test('actual adaptive pulse preserves source/sink inventories and signed flux bu
  assert.equal(r.metrics.find(m=>m.label==='Adaptive target occupancy')!.value,32);
  const active=r.species.reduce((sum,s)=>sum+s.active,0),weight=r.spatialCollision.initial.representedInventory/128;
  assert.equal(r.spatialCollision.final.representedInventory,active*weight);
- assert.ok(r.assumptions.some(s=>s.includes('Position-selected leaves can bias density')));
+ assert.ok(r.assumptions.some(s=>s.includes('Leaves selected by position can bias density')));
 });
 
 test('density moment export separates empirical self-counting and preserves undefined empty-cell estimates',()=>{

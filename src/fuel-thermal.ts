@@ -1,3 +1,4 @@
+import {isArrayShape} from './array-shape.js';
 /** Cylindrical, fixed-geometry solid tungsten liner. Gas remains a lumped reservoir.
  * Cp: NIST solid Shomate, https://webbook.nist.gov/cgi/inchi?ID=C7440337&Mask=2
  * k and reference density: Tolias (2017), https://arxiv.org/abs/1703.06302
@@ -14,9 +15,10 @@ export type FuelLinerBoundary={gasWallWK:number;coolingWK:number;coolantK:number
 
 function temperature(value:number){
  if(!Number.isFinite(value)||value<FUEL_LINER_MIN_K||value>FUEL_LINER_MAX_K)
-  throw new RangeError('Solid tungsten liner supports 300–1900 K; refine the step or change the thermal setup.');
+  throw new RangeError('Solid tungsten liner temperature must be 300–1900 K. Decrease the timestep or change the thermal setup.');
 }
-function meanHeatCapacity(a:number,b:number){
+/** Exact interval average of the solid Shomate heat capacity, in J/(kg K). */
+export function meanHeatCapacity(a:number,b:number){
  return (A+B*(a+b)/2+C*(a*a+a*b+b*b)/3+D*(a**3+a*a*b+a*b*b+b**3)/4+E/(a*b))/MOLAR_KG;
 }
 function enthalpy(value:number){return (value-FUEL_LINER_MIN_K)*meanHeatCapacity(value,FUEL_LINER_MIN_K);}
@@ -50,7 +52,7 @@ export function invertTungstenEnthalpy(value:number){
 export function createFuelLiner({radiusM,lengthM,thicknessM,cells,radiusEdgesM:edges}:{radiusM:number;lengthM:number;thicknessM:number;cells:number;radiusEdgesM?:readonly number[]}):FuelLinerGrid{
  if([radiusM,lengthM,thicknessM].some(value=>!Number.isFinite(value)||value<=0)||!Number.isSafeInteger(cells)||cells<2||cells>128)
   throw new RangeError('Liner geometry must be positive, with 2–128 radial cells.');
- if(edges!==undefined&&!Array.isArray(edges))throw new RangeError('Explicit liner edges must be an array.');
+ if(edges!==undefined&&!isArrayShape(edges))throw new RangeError('Explicit liner edges must be an array.');
  const radiusEdgesM=edges===undefined?Array.from({length:cells+1},(_,i)=>radiusM+thicknessM*i/cells):[...edges];
  if(radiusEdgesM.length!==cells+1||edges!==undefined&&(radiusEdgesM[0]!==radiusM||radiusEdgesM[cells]!==radiusM+thicknessM)||
   radiusEdgesM.some((value,i)=>!Number.isFinite(value)||i>0&&value<=radiusEdgesM[i-1]))
@@ -65,12 +67,25 @@ export function initialFuelLinerEnergy(grid:FuelLinerGrid,value:number){
  const h=tungstenThermalProperties(value).specificEnthalpyJKg;return grid.massesKg.map(mass=>mass*h);
 }
 
-export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[]):FuelLinerState{
+export function fuelLinerState(grid:FuelLinerGrid,cellEnergyJ:readonly number[],correctionJ?:readonly number[]):FuelLinerState{
  if(cellEnergyJ.length!==grid.massesKg.length)throw new RangeError('Liner energy state must match its radial grid.');
- const temperatureK=cellEnergyJ.map((energy,i)=>invertTungstenEnthalpy(energy/grid.massesKg[i]));
+ if(correctionJ!==undefined){
+  if(!isArrayShape(correctionJ)||correctionJ.length!==cellEnergyJ.length)
+   throw new RangeError('Liner energy corrections must be finite normalized high/low pairs on the same grid.');
+  for(let i=0;i<cellEnergyJ.length;i++){
+   // Preserve the existing inversion's upper endpoint roundoff allowance.
+   // Compare both words: adding them first can hide a tiny domain violation.
+   const energy=cellEnergyJ[i],low=correctionJ[i],maximum=grid.massesKg[i]*enthalpy(FUEL_LINER_MAX_K)*(1+8*Number.EPSILON);
+   if(!Number.isFinite(low)||energy+low!==energy)
+    throw new RangeError('Liner energy corrections must be finite normalized high/low pairs on the same grid.');
+   if(energy<0||energy===0&&low<0||energy>maximum||energy===maximum&&low>0)
+    throw new RangeError('Paired liner energy leaves the solid tungsten enthalpy domain.');
+  }
+ }
+ const temperatureK=cellEnergyJ.map((energy,i)=>invertTungstenEnthalpy(energy/grid.massesKg[i]+(correctionJ?.[i]??0)/grid.massesKg[i]));
  return {cellEnergyJ:[...cellEnergyJ],temperatureK,radiusM:[...grid.radiusCentersM],
   meanK:sum(temperatureK.map((value,i)=>value*grid.massesKg[i]))/sum(grid.massesKg),
-  innerK:temperatureK[0],outerK:temperatureK.at(-1)!,energyJ:sum(cellEnergyJ),minK:Math.min(...temperatureK),maxK:Math.max(...temperatureK)};
+  innerK:temperatureK[0],outerK:temperatureK.at(-1)!,energyJ:sum(cellEnergyJ)+(correctionJ?sum(correctionJ):0),minK:Math.min(...temperatureK),maxK:Math.max(...temperatureK)};
 }
 
 export function conductances(grid:FuelLinerGrid,values:readonly number[],boundary:FuelLinerBoundary){

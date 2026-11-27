@@ -13,12 +13,16 @@ import {readFileSync} from 'node:fs';
 // Source-unit DOM exercise; no browser, origin request, native worker or GPU.
 const registry=new Map<string,Element>();
 class Element{
+ dataset:Record<string,string>={};
+ parentElement:Element|null=null;
  private identifier='';children:Element[]=[];attributes:Record<string,string>={};value:string|number='';
  textContent='';className='';type='';disabled=false;checked=true;min:number|string='';max:number|string='';step:number|string='';htmlFor='';
  events=new Map<string,()=>void>();
  constructor(public tag='div'){}
  set id(id:string){this.identifier=id;registry.set(id,this);}get id(){return this.identifier;}
- append(...children:Element[]){this.children.push(...children);}replaceChildren(...children:Element[]){this.children=children;}
+ append(...children:Element[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:Element[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:Element,before:Element|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(key:string,value:string){this.attributes[key]=value;}
  addEventListener(key:string,listener:()=>void){this.events.set(key,listener);}
 }
@@ -37,11 +41,11 @@ const text=(e:Element):string=>e.textContent+e.children.map(text).join(' ');
 test('actual failure controls update plotted estimates without pretending to update separator dynamics',t=>{
  dom(t);const lab=setupFailureLaboratory();
  assert.equal(registry.get('failure-coverage')!.children.length,11);
- const before=text(registry.get('failure-metrics')!),plots=registry.get('failure-plots')!.children;
+ const before=text(registry.get('failure-metrics')!),plot=registry.get('failure-plots')!.children[0],drawing=plot.children[1].children;
  registry.get('failure-neutralDensityM3')!.value=20;registry.get('failure-neutralDensityM3')!.events.get('input')!();
  assert.equal(lab.read().neutralDensityM3,1e20);
  assert.notEqual(text(registry.get('failure-metrics')!),before);
- assert.notDeepEqual(registry.get('failure-plots')!.children,plots);
+ assert.equal(registry.get('failure-plots')!.children[0],plot);assert.notEqual(plot.children[1].children,drawing);
  assert.match(registry.get('failure-status')!.textContent,/do not change the separator/);
  registry.get('failure-residenceS')!.value=NaN;lab.update();
  assert.equal(registry.get('failure-plots')!.children.length,0);assert.equal(registry.get('export-failure')!.disabled,true);
@@ -73,7 +77,7 @@ test('published convergence table displays the frozen failed case and preserves 
  assert.equal(evidence.sourceHash,compact.sourceHash);assert.equal(evidence.status,compact.summary.status);
  renderConvergenceEvidence(evidence);
  assert.match(registry.get('convergence-status')!.textContent,/gate FAIL/);
- assert.match(registry.get('convergence-status')!.textContent,/Static audit evidence/);
+ assert.match(registry.get('convergence-status')!.textContent,/These are recorded results. Slider changes do not repeat this study/);
  assert.equal(registry.get('convergence-rows')!.children.length,compact.plan.levels.length);
  assert.match(registry.get('convergence-identity')!.textContent,/not independent-ion|No independent-ion/);
  const altered=structuredClone(evidence);altered.levels[0].endA.halfWidth95=null;
@@ -106,12 +110,13 @@ test('coupled closure routes through equilibrium adapter and exposes actual B an
  assert.equal(result.model,'coupled-magnetic-gaussian');
  assert.ok(p.curves.some(curve=>curve.yLabel==='Axial magnetic field (T)'));
  assert.ok(p.curves.some(curve=>curve.label==='ψ = φ − Ω ∫ B(r)r dr'));
- assert.match(modelValidity('centrifuge',c,result),/stability and discharge evolution are unsolved/);
+ assert.match(modelValidity('centrifuge',c,result),/Stability and discharge evolution are not calculated/);
 });
 
 test('kinetic status reports the actual run regime and raw residual, without claiming validity',()=>{
  const c={...DEFAULT_DOUBLEWELL,particlesPerSpecies:8,duration:1e-6,collisions:false};
  const r=simulateDoublewell(c),message=modelValidity('doublewell-dynamics',c,r);
- assert.match(message,/Exploratory/);assert.match(message,/raw Pθ residual/);assert.match(message,/not calibrated purity/);
+ assert.match(message,/Experimental accuracy is unknown/);assert.match(message,/raw Pθ residual/);assert.match(message,/do not give calibrated purity/);
+ assert.match(readFileSync('src/main.ts','utf8'),/Collision model · accuracy unknown/);
  assert.match(modelValidity('centrifuge',null,null),/No current result/);
 });

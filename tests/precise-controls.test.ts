@@ -54,3 +54,48 @@ test('Escape first cancels a numeric draft without closing its containing window
  f.output.click();f.input.value='.75';f.key(f.input,'Escape');assert.equal(f.editor.hidden,true);assert.equal(f.range.valueAsNumber,.4);assert.equal(windowCloses,0);
  f.key(f.output,'Escape');assert.equal(windowCloses,1);
 });
+
+test('exact entry uses limits expanded or reduced after setup',t=>{
+ const f=fixture(t,'min="1" max="5" step="1" value="4" data-integer="true"');
+ f.range.max='12';f.output.click();assert.equal(f.input.min,'1');assert.equal(f.input.max,'12');
+ f.input.value='8';f.key(f.input,'Enter');assert.equal(f.range.valueAsNumber,8);assert.deepEqual(f.changes,[8]);
+ f.range.max='2';const clipped=f.range.valueAsNumber;f.enter('4');
+ assert.equal(f.input.max,'2');assert.equal(f.range.valueAsNumber,clipped);assert.deepEqual(f.changes,[8]);
+ assert.match(f.editor.textContent!,/Enter an integer from 1 to 2/);
+ f.input.value='2';f.key(f.input,'Enter');assert.equal(f.range.valueAsNumber,2);assert.deepEqual(f.changes,[8,2]);
+});
+
+test('an open exact editor checks the current limits at commit',t=>{
+ const f=fixture(t,'min="1" max="5" step="1" value="4" data-integer="true"');
+ f.output.click();f.input.value='4';f.range.max='2';f.key(f.input,'Enter');
+ assert.equal(f.input.max,'2');assert.equal(f.changes.length,0);assert.equal(f.editor.hidden,false);
+ f.input.value='8';f.range.max='12';f.key(f.input,'Enter');
+ assert.equal(f.input.max,'12');assert.equal(f.range.valueAsNumber,8);assert.deepEqual(f.changes,[8]);
+});
+
+test('keyboard range edits use current bounds and their step origin',t=>{
+ const f=fixture(t,'min="1" max="5" step="2" value="3"');
+ f.range.min='2';f.range.max='12';f.key(f.range,'End');assert.equal(f.range.valueAsNumber,12);
+ f.key(f.range,'Home');assert.equal(f.range.valueAsNumber,2);
+ f.key(f.range,'ArrowRight');assert.equal(f.range.valueAsNumber,4);
+ f.range.max='6';f.key(f.range,'PageUp');assert.equal(f.range.valueAsNumber,6);
+ assert.deepEqual(f.changes,[12,2,4,6]);
+});
+
+test('logarithmic entry refreshes physical bounds after setup and while open',t=>{
+ const f=fixture(t,'min="-8" max="-4" step="0.05" value="-6" data-range-scale="log10"');
+ f.range.max='-2';f.output.click();assert.equal(f.input.max,'0.01');f.input.value='0.001';
+ f.range.max='-5';f.key(f.input,'Enter');assert.ok(Math.abs(Number(f.input.max)-1e-5)<1e-18);
+ assert.equal(f.changes.length,0);assert.equal(f.input.getAttribute('aria-invalid'),'true');
+ f.range.min='-9';f.input.value='1e-9';f.key(f.input,'Enter');
+ assert.equal(f.input.min,'1e-9');assert.equal(f.range.valueAsNumber,-9);assert.deepEqual(f.changes,[-9]);
+});
+
+test('an editor cannot commit or reset after its range becomes disabled',t=>{
+ const f=fixture(t);f.enter('.8');f.output.click();f.input.value='.9';f.range.disabled=true;
+ f.key(f.input,'Enter');(f.editor.querySelector('[aria-label="Apply Parameter"]')! as HTMLButtonElement).click();
+ (f.editor.querySelector('[aria-label="Reset Parameter"]')! as HTMLButtonElement).click();f.key(f.range,'Home');
+ assert.equal(f.range.valueAsNumber,.8);assert.deepEqual(f.changes,[.8]);
+ f.api.reset();assert.equal(f.range.valueAsNumber,.4);assert.deepEqual(f.changes,[.8,.4]);
+ assert.equal(f.input.valueAsNumber,.4);f.key(f.input,'Escape');f.output.click();assert.equal(f.editor.hidden,true);
+});

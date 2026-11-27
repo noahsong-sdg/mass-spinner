@@ -1,8 +1,39 @@
+import {transpileModule,ScriptTarget,ModuleKind} from 'typescript';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
+import { copyFileSync,cpSync,mkdirSync,readFileSync,writeFileSync } from 'node:fs';
+import {qualificationPage} from './qualification-page.mjs';
+import {startPage} from './start-page.mjs';
+import {documentationPage} from './documentation-page.mjs';
+import {understandingPage} from './understanding-page.mjs';
+import {tsImport} from 'tsx/esm/api';
+const {numberedTutorials}=/** @type {typeof import('../src/guide-topics.js')} */(await tsImport('../src/guide-topics.ts',import.meta.url));
+import {equilibriumPage} from './equilibrium-page.mjs';
+import {withEquationDerivations} from './equation-links.mjs';
+import {pinReleaseLinks,releaseSourceBase} from './release-links.mjs';
+const source=spawnSync('git',['rev-parse','--verify','HEAD'],{encoding:'utf8'});
+if(source.status!==0)throw new Error('Cannot identify the producing release revision.');
+const revision=source.stdout.trim();
+releaseSourceBase(revision);
 const require=createRequire(import.meta.url);
-// The project-local prefix supports this host's demonstrated npm prune failure.
-const vite=dirname(require.resolve('vite/package.json',{paths:[process.cwd(),resolve('.tools/frontend')]}));
+const vite=dirname(require.resolve('vite/package.json'));
 const build=spawnSync(process.execPath,[resolve(vite,'bin/vite.js'),'build'],{stdio:'inherit'});
+if(build.status===0){
+ copyFileSync('output/gltf-trial/centrifuge-assembly.glb','release/models/centrifuge-assembly.glb');
+ copyFileSync('output/gltf-trial/report.json','release/asset-qualification.json');
+ writeFileSync('release/equilibrium.html',equilibriumPage(readFileSync('docs/EQUILIBRIUM-COMPOSITION.md','utf8')));
+ writeFileSync('release/start.html',startPage());
+ writeFileSync('release/learn.html',documentationPage());
+ writeFileSync('release/guide.html',understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),revision));
+ for(const tutorial of numberedTutorials)writeFileSync(`release/tutorial-${tutorial.number}.html`,understandingPage(readFileSync(`docs/UNDERSTANDING-MASS-SPINNER-${tutorial.number}.md`,'utf8'),revision,tutorial));
+ writeFileSync('release/how-it-works.html',pinReleaseLinks(withEquationDerivations(readFileSync('web-assets/how-it-works.html','utf8')),revision));
+ for(const name of ['guide-reader','guide-views','guide-sample','guide-force','guide-density','guide-plant','equation-dialog','equation-plots','fuel-equilibrium','fuel-centrifuge','array-shape'])writeFileSync(`release/${name}.js`,transpileModule(readFileSync(`src/${name}.ts`,'utf8'),{fileName:`${name}.ts`,compilerOptions:{target:ScriptTarget.ES2022,module:ModuleKind.ESNext}}).outputText);
+ const katexDist=resolve(dirname(require.resolve('katex/package.json')),'dist');
+ mkdirSync('release/guide-katex',{recursive:true});
+ copyFileSync(resolve(katexDist,'katex.min.css'),'release/guide-katex/katex.min.css');
+ cpSync(resolve(katexDist,'fonts'),'release/guide-katex/fonts',{recursive:true});
+ writeFileSync('release/qualification.html',qualificationPage(readFileSync('docs/PUBLIC-DATA-QUALIFICATION.md','utf8'),revision));
+ copyFileSync('scientific/public-data-campaign/results/comparison.png','release/qualification-comparison.png');
+}
 process.exit(build.status??1);

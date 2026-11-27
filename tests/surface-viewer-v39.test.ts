@@ -16,7 +16,7 @@ import {simulateDoublewell,DEFAULT_DOUBLEWELL} from '../src/doublewell-dynamics.
 const config={...DEFAULT_CONFIG,length:.02,particlesPerSpecies:4,dt:2e-8,duration:1e-5};
 const packet=()=>surfaceState({model:'rotating',settings:config,result:simulate(config),acceptedModel:'rotating',acceptedSettings:config});
 function ready(){const p=packet();assert.equal(p.status,'ready');return (p as any).snapshot;}
-function setup(){const dom=new JSDOM('<main></main>'),frame=dom.window.document.querySelector('main')!;return {dom,frame,layer:createSurfaceLayer(frame)};}
+function setup(){const dom=new JSDOM('<main></main>',{pretendToBeVisual:true}),frame=dom.window.document.querySelector('main')!;return {dom,frame,layer:createSurfaceLayer(frame)};}
 function change(h:any,label:string,value:string){const control=h.frame.querySelector(`select[aria-label="${label}"]`) as HTMLSelectElement;control.value=value;control.dispatchEvent(new h.dom.window.Event('change'));return control;}
 
 test('actual accepted orbit mesh uses one batched quantitative draw, exact SI supports and raw sample picking',()=>{
@@ -51,7 +51,7 @@ test('target actual beam-target alias maps both materials with separate true-dep
  const result=simulateCoupledTarget(source,c),value=surfaceState({model:'beam-target',settings:c,result,acceptedModel:'beam-target',acceptedSettings:c,selectedState:result.final,source,acceptedSource:source});
  assert.equal(value.status,'ready');const h=setup();h.layer.update(value,c);
  change(h,'Surface quantity','temperature-backing');
- assert.match(h.frame.textContent!,/backing only/);assert.match(h.frame.textContent!,/Hardware is true scale/);
+ assert.match(h.frame.textContent!,/Region: backing/);assert.match(h.frame.textContent!,/hardware keeps its physical scale/);
  const hardware=h.layer.group.getObjectByName('engineering-beam-target')!,microscope=h.layer.group.getObjectByName('Depth microscope: backing')!;
  h.layer.group.updateWorldMatrix(true,true);
  assert.ok(new THREE.Box3().setFromObject(microscope).min.y>new THREE.Box3().setFromObject(hardware).max.y,'depth microscope must clear housing occlusion');
@@ -61,9 +61,10 @@ test('target actual beam-target alias maps both materials with separate true-dep
  change(h,'Surface quantity','tritiumFraction');assert.ok(h.layer.group.getObjectByName('Depth microscope: film'));
  assert.equal(h.layer.group.getObjectByName('Depth microscope: backing'),undefined);
  change(h,'Inspect an exact surface sample','2');assert.match(h.frame.textContent!,/fraction/);
- h.layer.update({status:'pending',reason:'Changed source'});assert.equal(h.layer.group.children.length,0);
+ h.layer.update({status:'pending',reason:'Changed source'});assert.ok(h.layer.group.getObjectByName('engineering-beam-target'));
+ assert.equal(h.layer.group.getObjectByName('Accepted numerical surfaces'),undefined);assert.equal(h.layer.group.getObjectByName('Depth microscope: film'),undefined);
  for(const select of h.frame.querySelectorAll('select'))assert.equal(select.hidden,true);
- assert.doesNotMatch(h.frame.textContent!,/backing only|Hardware is true scale|fraction/);
+ assert.doesNotMatch(h.frame.textContent!,/Region: backing|hardware keeps its physical scale|fraction/);
  h.layer.dispose();
 });
 
@@ -96,7 +97,8 @@ test('viewer consumes accepted states, preserves camera on field/time update and
  const distance=camera.position.length();viewer.focus('source');assert.ok(camera.position.length()<distance,'component focus must let small parts be inspected');
  camera.position.add(new THREE.Vector3(.03,.01,0));const before=camera.position.clone();viewer.updateSurfaceState(packet(),config);
  assert.ok(camera.position.distanceTo(before)<1e-12,'accepted state refresh must preserve orbit camera');
- viewer.setPending(true);assert.equal(reference.visible,true);assert.equal(scene.getObjectByName('engineering-rotating'),undefined);
+ viewer.setPending(true);assert.equal(reference.visible,false);assert.ok(scene.getObjectByName('engineering-rotating'));
+ assert.equal(scene.getObjectByName('Accepted numerical surfaces'),undefined);
  viewer.updateSurfaceState(packet(),config);assert.equal(reference.visible,false);
  viewer.updateSurfaceState(null);assert.equal(reference.visible,true);assert.equal(scene.getObjectByName('engineering-rotating'),undefined);
  viewer.dispose();assert.equal(h.frame.children.length,0);

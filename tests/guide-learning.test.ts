@@ -1,0 +1,101 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
+import {readFileSync} from 'node:fs';
+import {documentationPage} from '../scripts/documentation-page.mjs';
+import {startPage} from '../scripts/start-page.mjs';
+import {setupGuideReader} from '../src/guide-reader.js';
+import {understandingPage} from '../scripts/understanding-page.mjs';
+
+test('every reader has ordinary contents links and omits repetitive learning scaffolding',t=>{
+ for(const [name,html] of Object.entries({'start.html':startPage(),'learn.html':documentationPage()})){
+  const dom=new JSDOM(html,{url:`https://example.org/${name}`});t.after(()=>dom.window.close());const doc=dom.window.document;
+  assert.equal(doc.querySelector('#guide-chapter,#learning-mode,textarea,[data-learning-hint],.learning-transfer'),null,name);
+  assert.doesNotMatch(doc.body.textContent!,/How to try it|Predictions are optional|Choose any question or control/);
+  assert.ok(doc.querySelectorAll('.guide-contents a').length>0,`${name}: contents must be present`);
+  for(const link of doc.querySelectorAll<HTMLAnchorElement>('.guide-contents a'))assert.ok(doc.getElementById(link.hash.slice(1)),`${name}: ${link.hash}`);
+  const before=[...doc.querySelectorAll<HTMLDetailsElement>('details')].map(detail=>detail.open);
+  setupGuideReader(dom.window);
+  assert.deepEqual([...doc.querySelectorAll<HTMLDetailsElement>('details')].map(detail=>detail.open),before,'enhancement preserves native disclosure defaults');
+  for(const step of doc.querySelectorAll('.walkthrough-step')){
+   assert.ok(step.querySelector('[data-guide-action]'));
+   assert.equal(step.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!.open,false);
+  }
+ }
+});
+
+test('opening an optional explanation never launches a run',t=>{
+ const dom=new JSDOM(startPage(),{url:'https://example.org/start.html'});t.after(()=>dom.window.close());const win=dom.window,doc=win.document;
+ let opened=0,sent=0;win.open=()=>{opened++;return null;};
+ Object.defineProperty(win,'parent',{value:{postMessage(){sent++;}}});setupGuideReader(win);
+ const explanation=doc.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
+ explanation.open=true;assert.equal(explanation.open,true);assert.equal(opened,0);assert.equal(sent,0);
+ assert.equal(win.location.pathname,'/start.html');
+ assert.match(doc.getElementById('composition')!.parentElement!.textContent!,/finite-time run can differ.*short or unpowered run/);
+});
+
+test('the first session has four connected questions and retains all older section addresses',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());const doc=dom.window.document;
+ assert.deepEqual([...doc.querySelectorAll('#exercises > .guide-contents a')].map(link=>link.getAttribute('href')),['#machine','#composition','#heat','#collection']);
+ assert.deepEqual([...doc.querySelectorAll('[data-core-question]')].map(group=>[...group.querySelectorAll('.walkthrough-step')].map(section=>section.getAttribute('aria-labelledby'))),[['machine','current'],['composition','competition'],['heat'],['collection']]);
+ assert.equal(doc.querySelectorAll('#exercises h2').length,4);
+ for(const id of ['machine','current','composition','competition','heat','collection','compare'])assert.ok(doc.getElementById(id),id);
+ assert.ok(doc.querySelector('aside #compare'));
+ const heat=doc.getElementById('heat')!.parentElement!;
+ const before=heat.textContent!.slice(0,heat.textContent!.indexOf('Open heat experiment'));
+ assert.match(before,/liner starts at 1,000 K.*gas starts at 500 K.*does not isolate drive heating/s);
+});
+
+test('the distribution section explains temperature before the comparison and connects it to the plotted gradients',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const section=dom.window.document.getElementById('composition')!.parentElement!;
+ const intro=section.querySelector('p')!.textContent!;
+ assert.match(intro,/No rotation with Rotation first.*Higher temperature at the same rotation speed.*random atom motion/);
+ assert.ok(section.querySelector('a[href="/guide.html#composition"]'));
+ const detailed=new JSDOM(understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),'a'.repeat(40)));t.after(()=>detailed.window.close());
+ assert.match(detailed.window.document.body.textContent!,/same number of atoms per volume.*hotter gas has higher pressure.*same rotation speed.*density curves become less steep.*isotope fractions differ less/s);
+});
+
+test('the machine explanation separates the drum, charge force and neutral coupling',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const section=dom.window.document.getElementById('machine')!.parentElement!,explanation=section.querySelector<HTMLDetailsElement>('[data-learning-explanation]')!;
+ assert.ok(section.querySelector('a[href="/guide.html#drive"]'));
+ const detailed=new JSDOM(understandingPage(readFileSync('docs/UNDERSTANDING-MASS-SPINNER-02.md','utf8'),'a'.repeat(40)));t.after(()=>detailed.window.close());
+ const text=detailed.window.document.getElementById('drive')!.parentElement!.textContent!;
+ assert.match(text,/a cylinder whose wall turns.*current is charge in motion.*Lorentz force law.*turning effect about the axis.*Collisions transfer angular momentum/s);
+ assert.match(text,/Electrons have negative charge and can move in the opposite direction/);
+ assert.match(text,/right angles to both the motion and the field/);
+ assert.match(text,/does not directly increase the charge's speed/);
+ assert.match(text,/right of the end view, current points left and the field points toward you. The force points up/);
+ assert.match(text,/electrical supply supplies energy/);
+ assert.equal(explanation.open,false,'keep the detailed explanation optional');
+});
+
+test('the enhanced reader remains compatible with guide pages without experiment markup',t=>{
+ const dom=new JSDOM('<nav aria-label="Contents"><a href="#goal">Goal</a></nav><h1 id="goal">Goal</h1><a href="/?level=2&try=spin" data-guide-action="spin">Try spin-up</a>',{url:'https://example.org/guide.html'});
+ t.after(()=>dom.window.close());const win=dom.window,sent:unknown[][]=[];
+ const parent={postMessage:(...args:unknown[])=>sent.push(args)} as unknown as Window;
+ Object.defineProperty(win,'parent',{value:parent});Object.defineProperty(win,'opener',{value:{postMessage(){throw new Error('The opener is not this reader’s simulator');}}});
+ win.open=()=>{throw new Error('An embedded reader must not open a tab');};
+ setupGuideReader(win);assert.deepEqual(sent,[]);win.document.querySelector<HTMLAnchorElement>('[data-guide-action]')!.click();
+ assert.equal(sent.length,1);const request=sent[0][0] as {type:string;action:string;requestId:string};
+ assert.equal(request.type,'mass-spinner:guide-action');assert.equal(request.action,'spin');assert.ok(request.requestId);assert.equal(sent[0][1],'https://example.org');
+ win.dispatchEvent(new win.MessageEvent('message',{origin:'https://example.org',source:parent,data:{type:'mass-spinner:guide-result',requestId:request.requestId,status:'executed'}}));
+ assert.equal(win.location.pathname,'/guide.html');assert.equal(win.document.querySelector('#reader-status'),null);
+ assert.equal(win.document.querySelector('nav a')!.getAttribute('href'),'#goal');
+ assert.equal(win.document.body.dataset.learningMode,undefined);
+});
+
+
+test('necessary definitions precede diagrams and heating provides a direct pin action',t=>{
+ const dom=new JSDOM(startPage());t.after(()=>dom.window.close());
+ const doc=dom.window.document,section=doc.getElementById('composition')!.parentElement!;
+ let before='';
+ for(let n=section.firstElementChild;n&&n.tagName!=='FIGURE';n=n.nextElementSibling)before+=` ${n.textContent}`;
+ assert.match(before,/[Dd]ensity.*atoms per volume.*[Cc]omposition.*local percentage/s);
+ assert.match(before,/1×.*axis density.*vessel mean/s);
+ const heat=doc.getElementById('heat')!.parentElement!;
+ assert.ok(heat.querySelector('[data-guide-action="pin"]'));
+ assert.ok(heat.querySelector('[data-guide-action="compositionPlot"]'));
+ assert.match(heat.textContent!,/same physical time.*temperature, speed and composition/s);
+});

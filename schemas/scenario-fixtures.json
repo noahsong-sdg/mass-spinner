@@ -1,0 +1,87 @@
+[
+  {
+    "name": "legacy-setup",
+    "valid": true,
+    "value": {
+      "version": 2,
+      "level": "1",
+      "controls": {
+        "field": 0.1
+      }
+    }
+  },
+  {
+    "name": "current-operating-history",
+    "valid": true,
+    "value": {
+      "version": 3,
+      "level": "2",
+      "controls": {
+        "marathon-apparatus": "centrifuge",
+        "fuel-durationS": 2
+      },
+      "fuelRun": {
+        "initialCurrentA": 0.03,
+        "events": [
+          {
+            "timeS": 1,
+            "currentA": 0
+          }
+        ],
+        "mode": "transport",
+        "timeS": 1
+      }
+    }
+  },
+  {
+    "name": "unsupported-version",
+    "valid": false,
+    "value": {
+      "version": 9,
+      "level": "1",
+      "controls": {}
+    }
+  },
+  {
+    "name": "truncated-history",
+    "valid": false,
+    "value": {
+      "version": 3,
+      "level": "2",
+      "controls": {}
+    }
+  },
+  {
+    "name": "nested-control",
+    "valid": false,
+    "value": {
+      "version": 2,
+      "level": "1",
+      "controls": {
+        "field": [
+          0.1
+        ]
+      }
+    }
+  },
+  {
+    "name": "unknown-root-field",
+    "valid": false,
+    "value": {
+      "version": 2,
+      "level": "1",
+      "controls": {},
+      "extra": 1
+    }
+  },
+  {
+    "name": "history-in-legacy",
+    "valid": false,
+    "value": {
+      "version": 2,
+      "level": "1",
+      "controls": {},
+      "fuelRun": {}
+    }
+  }
+]

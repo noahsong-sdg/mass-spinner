@@ -7,12 +7,16 @@ import {setupBlanketExplorer} from '../src/blanket-ui.js';
 
 // Source-unit DOM: production event handlers and plots, not browser/GPU verification.
 class El{
+ dataset:Record<string,string>={};
+ parentElement:El|null=null;
  private identifier='';value:string|number='';type='';checked=false;disabled=false;hidden=false;open=false;textContent='';className='';
  min:string|number='';max:string|number='';step:string|number='';htmlFor='';children:El[]=[];
  attributes:Record<string,string>={};events=new Map<string,()=>void>();
  constructor(readonly tag:string,private registry:Map<string,El>){}
  set id(id:string){this.identifier=id;this.registry.set(id,this);}get id(){return this.identifier;}
- append(...children:El[]){this.children.push(...children);}replaceChildren(...children:El[]){this.children=children;}
+ append(...children:El[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:El[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:El,before:El|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,fn:()=>void){this.events.set(k,fn);}
  fire(k:string){this.events.get(k)!();}
 }
@@ -45,7 +49,7 @@ test('source success is quiet while fit exclusions and invalid-source errors rem
  assert.ok(source.neutronRateS>0);assert.match(text(get('fusion-notes')),/fixed|Bragg|additivity/i);
  // A thick high-energy material slab is valid, but some scan energies leave the fit domain.
  change('fusion-beamEnergyKeV',500);change('fusion-materialColumnM2',23);
- assert.ok(source);assert.match(get('fusion-status').textContent,/Scan omits .*outside the fit domain/);
+ assert.ok(source);assert.match(get('fusion-status').textContent,/The scan does not include .* energies beyond the fit limits/);
  assert.ok(get('marathon-energy-plots').children.length>0);
  change('fusion-beamEnergyKeV',20);
  assert.equal(source,null);assert.match(get('fusion-status').textContent,/exits the D–T fit domain/);
@@ -60,12 +64,12 @@ test('exposure keeps units, live results and local errors with scientific scope 
  const exportButton=descendants(h).find(e=>e.textContent==='Export exposure calculation ↓')!;
  assert.equal(status(h).textContent,'');assert.ok(plots(h)[0].children.length>0);
  const modelInfo=info(h);assert.equal(modelInfo.length,1);assert.equal(modelInfo[0].open,false);
- assert.match(text(modelInfo[0]),/source yield stays fixed/);assert.match(text(modelInfo[0]),/Cₐ/);
+ assert.match(text(modelInfo[0]),/fixed source yield/);assert.match(text(modelInfo[0]),/Cₐ/);
  assert.match(text(modelInfo[0]),/lifetime/i);assert.ok(descendants(modelInfo[0]).some(e=>e.tag==='a'));
  assert.equal(descendants(h).find(e=>e.tag==='h3')!.textContent,'Exposure');
  assert.match(get('target-arealHeatCapacityJm2K').attributes['aria-valuetext'],/J m⁻² K⁻¹/);
  const previousPlot=plots(h)[0].children[0];change('fusion-exposureS',25);
- assert.equal(source.config.exposureS,25);assert.notEqual(plots(h)[0].children[0],previousPlot);
+ assert.equal(source.config.exposureS,25);assert.ok(plots(h)[0].children[0]!==previousPlot,'A new exposure calculation replaces the explicitly cleared chart.');
  assert.equal(status(h).textContent,'');assert.equal(exportButton.disabled,false);
  change('target-coolantK',-274);
  assert.match(status(h).textContent,/positive heat capacity\/absolute temperatures/);
@@ -78,14 +82,14 @@ test('exposure keeps units, live results and local errors with scientific scope 
 test('sample geometry stays quiet only inside its declared point-source regime',t=>{
  const {host,change}=dom(t),h=host(),geometry=setupNeutronGeometry(h);
  setupFusionLaboratory({onUpdate:(r:any)=>geometry.update(r)});
- assert.match(status(h).textContent,/Point-source limit/);
+ assert.match(status(h).textContent,/Spot radius \/ distance > 0\.1/);
  change('neutron-sample-distance',1);
  assert.equal(status(h).textContent,'');assert.ok(plots(h)[0].children.length>0);
  const modelInfo=info(h);assert.equal(modelInfo.length,1);assert.equal(modelInfo[0].open,false);
- assert.match(text(modelInfo[0]),/does not solve.*angular spectrum/);
+ assert.match(text(modelInfo[0]),/does not include the D–T angular spectrum/);
  assert.match(text(h),/n\/m²\/s/);
  change('neutron-sample-distance',.1);
- assert.match(status(h).textContent,/finite-source geometry unresolved/);
+ assert.match(status(h).textContent,/point-source approximation does not include the finite source size/);
  change('neutron-sample-distance',-1);
  assert.match(status(h).textContent,/nonnegative source rate and distance/);
  assert.equal(plots(h)[0].children.length,0);
@@ -98,8 +102,8 @@ test('blanket numerical outputs remain live while scope is collapsed and errors 
  assert.equal(panel.children[0].textContent,'Blanket');assert.equal(status(h).textContent,'');
  const modelInfo=info(h);assert.equal(modelInfo.length,2);assert.ok(modelInfo.every(e=>!e.open));
  const scope=modelInfo.find(e=>/compact LiT beamline/.test(text(e)))!;
- assert.ok(scope);assert.match(text(scope),/initial mixture is assumed/);
- assert.match(text(scope),/no product purity, usable yield or release date/);
+ assert.ok(scope);assert.match(text(scope),/You select the initial mixture/);
+ assert.match(text(scope),/does not calculate product purity, usable yield or a release date/);
  assert.ok(descendants(scope).some(e=>e.tag==='a'));
  assert.ok(!panel.children.some((e:El)=>e.tag==='p'&&e.attributes.role!=='status'),'only real status messages may appear outside disclosures');
  const mercury=descendants(h).find(e=>e.children[0]?.textContent==='¹⁹⁷Hg')!,gold=descendants(h).find(e=>e.children[0]?.textContent==='¹⁹⁷Au')!;

@@ -1,0 +1,22 @@
+{
+  "scripts/qualify-public-components.mjs": "837a9f4b0af45e713b9ade39782a48bd013755f5e639a062240d558d25a3c954",
+  "src/public-sensitivity.ts": "a4e7564cb338a61de4ba22933f84759172d229f1cf1db54e2b242533872131fd",
+  "src/public-sensitivity-ui.js": "cebe53e5445d114d108d27f550013305a95f11c2ea6223950be6006cf3b09f2f",
+  "src/fuel-centrifuge-ui.js": "8fde63aaf097e27933158970c7b6107b11ffdc103def37468dbac93affdbbf70",
+  "src/fuel-playground.css": "489434853961fb3150617f90986dabf2b4539a198ea5a377aad7f2f0252f04a4",
+  "tests/public-components.test.ts": "f04ebf452d8c80a718d94e52669fa07b53e8ac37911da24069ba8ec4927b8273",
+  "tests/public-sensitivity.test.ts": "aec3debfffe1cd9a2818ca4e00b05e888ad3332a21c16c34ae6771e51b6cd0eb",
+  "tests/public-sensitivity-ui.test.ts": "5203db136225ed3574e90d8639a12a3b0e45ce0fe9d7d615671eb5f251627e24",
+  "scientific/public-data-campaign/study.py": "f64c62f1b5f9de0923999f113fb405c726ad2686d5a5c4bedd25762a07482015",
+  "scientific/public-data-campaign/observations.json": "0d5a37560e507fe9873a5c1d5dc06404c8cdd8ce0b43d8220e43d86c0f106b20",
+  "scientific/public-fenicsx-reference/reference.py": "b6f3883a8f4b1e68f37c95156ca1114b0c47aebbe2dfc1daae5f9874133dc0f6",
+  "scientific/public-fenicsx-reference/PROTOCOL.md": "021d79ad539120a95d0b92b0b48bb630d74795e12efcd86f7157a96ac43502d6",
+  "scientific/public-fenicsx-reference/test_reference.py": "ab708e7ce5f52df093bc03f9ca6cb4ef338dddf04544875bdfd59d4692e60bd0",
+  "scripts/build.mjs": "ed933637c52ea7ca2ee9419b426014751940c29814b7546c37962784012a1181",
+  "scripts/check-site.mjs": "351b2c0e5d25ffe3ac79123fd5d3c25149151ead07ced33145e286c23828ed40",
+  "package-lock.json": "aacc229fbf7412afa3c6160164c7ac0e05d4499547d752911b023bed504b6718",
+  "scripts/qualification-page.mjs": "d27787081527dbc6a6729efce12ba434c7bd6fde31a2e7c92b98e35be30d7b27",
+  "tests/qualification-page.test.ts": "374d820f743ef3f55d12489971e79612a18c11a0b60ed07e06398917ed629d02",
+  "package.json": "731bad74f2263585a2c06db2360e64e81292d8d4c0667f1568f0a257e02ad3ce",
+  "docs/PUBLIC-DATA-QUALIFICATION.md": "9f9042279dc256f6b83ea394b2c07196f1c726664c8f9bae2372dc411494dd62"
+}

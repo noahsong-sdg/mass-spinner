@@ -27,7 +27,7 @@ const exportButton=(host:Element)=>[...host.querySelectorAll('button')].find(but
 
 test('nested Exposure precise editor uses physical capacity, bounds/reset, linear units and Celsius',async t=>{
  const f=fixture(t,readFileSync('index.html','utf8')),models=setupMarathonModels();t.after(()=>models.target.update(null));
- const reference=models.target.referenceHost as HTMLDetailsElement;f.toggle(reference,true);setupPreciseControls(f.doc);
+ const reference=models.target.references;f.toggle(reference,true);setupPreciseControls(f.doc);
  const host=f.doc.getElementById('target-exposure')!,button=exportButton(host);
  const editor=(id:string)=>{
   const range=f.doc.getElementById(id) as HTMLInputElement,box=range.closest('.control')!;
@@ -83,10 +83,18 @@ test('closed Loading defers both tolerance solves and redraws until open or curr
 
 test('Marathon wires both reference visibility boundaries without stale restore results',t=>{
  const f=fixture(t,readFileSync('index.html','utf8')),models=setupMarathonModels();t.after(()=>models.target.update(null));
- const references=models.target.referenceHost as HTMLDetailsElement,exposure=f.doc.getElementById('target-exposure')!,loading=f.doc.getElementById('target-loading')!;
+ const references=models.target.references,exposure=f.doc.getElementById('target-exposure')!,loading=f.doc.getElementById('target-loading')!;
+ assert.ok(references instanceof f.dom.window.HTMLDetailsElement);
+ assert.ok(models.target.referenceHost instanceof f.dom.window.HTMLDivElement);
+ assert.equal(models.target.referenceHost.parentElement,references,'the existing inner div remains the reference append host');
+ assert.equal(f.doc.querySelectorAll('#coupled-target .target-references').length,1);
+ models.target.referenceHost.dispatchEvent(new f.dom.window.Event('toggle'));
+ assert.equal(exposure.querySelector('svg'),null,'only the enclosing native details activates references');
  f.change('fusion-beamEnergyKeV',200);f.change('fusion-beamEnergyKeV',300);
  assert.equal(exposure.querySelector('svg'),null);assert.equal(loading.querySelector('svg'),null);
  f.toggle(references,true);assert.ok(exposure.querySelector('svg'));assert.equal(loading.querySelector('svg'),null);
+ const clean=exposure.querySelector('svg');
+ for(let i=0;i<3;i++){f.toggle(references,false);f.toggle(references,true);assert.equal(exposure.querySelector('svg'),clean,'clean reopens reuse the reference solve and plot');}
  f.toggle(loading.querySelector('details')!,true);assert.ok(loading.querySelector('svg'));
  const prior=exposure.querySelector('svg');f.toggle(references,false);f.change('fusion-beamEnergyKeV',400);
  assert.equal(exposure.querySelector('svg'),prior);f.toggle(references,true);assert.notEqual(exposure.querySelector('svg'),prior);

@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "url": "https://github.com/noahsong-sdg/mass-spinner/releases/download/evidence-run-44211854088/evidence.tar.gz",
+  "sha256": "83e53102ec03e818fbc74f685e8e24c1961472c4ca216e1bd290a69a4322eead",
+  "bytes": 227878,
+  "sourceRevision": "219253c4465acfb9d69e4642b119e921a95e73ff",
+  "runUrl": "https://github.com/noahsong-sdg/mass-spinner/actions/runs/44211854088",
+  "scope": "Python 3.15 scientific toolchain qualification: active/public diagnostic tests, cached Snakemake admission and bounded thermal time integration; not full reactor or experimental qualification. Packaged from the admitted CI artifact using trusted host standard-library archival tools; production retrieval is checked in isolated CI.",
+  "files": {
+    "science-evidence/container.json": "eeb49377a9ade62420ec06069538e2feda370cdbeb33dedef9281ae4e9fb0ad3",
+    "science-evidence/runtime.txt": "1036563d491ead0469c4647599c5ee3113a873bbaa71d85a6745cd5e369454b4",
+    "science-evidence/thermal-comparison.json": "9eea22946bfde4517f85ba10e42c62c8b870d7cf856103b15626b4a7ba50215f",
+    "science-evidence/thermal-live.json": "291a34aff687838fcf3abba9abb2cefb17f8aeca665536740f01e0bf4aa88097",
+    "science-evidence/typescript6.txt": "9a3af745872fc86c34c347ed44ea9e7ea37f313d512cb17402aab3877f4080db",
+    "science-evidence/typescript7.txt": "956a1bcd1a51fcd5aacab35b14afe4e6b58f59b8f625555cde602510ead8d035",
+    "science-evidence/uv.lock": "29d7bf70e53be7e40f064ed30ba9662fb0d4bd57b99e9996ccf472410b6343a2",
+    "scientific/active/results/16a0a05e0c2a4364779b19c41b84d8642b778bb60aaeb40ffd4494efa0a65641/comparison.png": "c77ec810319ad14082f19448c6fb72d712e2904dec20acf2500428d6d4580960",
+    "scientific/active/results/16a0a05e0c2a4364779b19c41b84d8642b778bb60aaeb40ffd4494efa0a65641/diagnosis.json": "85d83f3bade066192b0be0b15a802d8a83773f192db87e1d40d76f2dba967bba",
+    "scientific/active/results/16a0a05e0c2a4364779b19c41b84d8642b778bb60aaeb40ffd4494efa0a65641/manifest.json": "8b2a020d0a80a96cc4d4e1d9ebe223d356be2339d6e285b84f27c4c643fdf232"
+  }
+}

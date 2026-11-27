@@ -1,0 +1,45 @@
+name: Radial transport precision
+on:
+  push:
+    branches: [codex/radial-density]
+permissions:
+  contents: read
+jobs:
+  precision:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          docker build -t radial-check - <<'DOCKERFILE'
+          FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+          DOCKERFILE
+          docker image inspect radial-check --format '{{.Id}}'
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp radial-check npm ci --ignore-scripts --no-audit --no-fund
+          mkdir radial-input
+          tar -xzf scientific/spatial-argon-20261116/three-probes-93.tar.gz -C radial-input graded-output/histories.json
+      - name: Replay and independently assess offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp radial-check sh -eu -c '
+            python3 -m unittest discover -s scientific/spatial-argon-20261116 -p test_precision_oracle.py -v
+            python3 scientific/spatial-argon-20261116/audit_source.py --self-test
+            node --import tsx --test --test-concurrency=1 tests/fuel-gas.test.ts tests/fuel-spatial-convergence.test.ts
+            node --import tsx scripts/probe-fuel-gas-precision.ts precision-output
+            python3 scientific/spatial-argon-20261116/precision_oracle.py precision-output/precision-input.json
+            source_status=0
+            node --import tsx scripts/probe-fuel-radial-source.ts source-output || source_status=1
+            python3 scientific/spatial-argon-20261116/audit_source.py source-output --source-root /work --output source-output/independent-accounting.json || source_status=1
+            exit "$source_status"
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: radial-precision
+          path: |
+            precision-output/
+            source-output/
+          if-no-files-found: error

@@ -3,8 +3,8 @@ export const polynomialAdd=(a:Polynomial,b:Polynomial)=>Array.from({length:Math.
 export const polynomialScale=(a:Polynomial,s:number)=>a.map(v=>v*s);
 export const polynomialShift=(a:Polynomial)=>[0,...a];
 export function polynomialMultiply(a:Polynomial,b:Polynomial){
- const result=Array(a.length+b.length-1).fill(0);
- a.forEach((x,i)=>b.forEach((y,j)=>result[i+j]+=x*y));return result as Polynomial;
+ const result=Array<number>(a.length+b.length-1).fill(0);
+ a.forEach((x,i)=>b.forEach((y,j)=>result[i+j]+=x*y));return result;
 }
 export const polynomialValue=(a:Polynomial,t:number)=>a.reduceRight((sum,x)=>sum*t+x,0);
 export const polynomialDerivative=(a:Polynomial)=>a.slice(1).map((v,i)=>v*(i+1));

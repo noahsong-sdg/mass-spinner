@@ -58,8 +58,8 @@ test('hidden-to-visible and subsequent resize preserve selected values, exact in
  svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Home'}));
  assert.match(readout.textContent!,/Response: 0, 0/);
  observers[0].resize(0);assert.equal(svg.getAttribute('viewBox'),'0 0 500 310','Hiding a panel must retain finite coordinates');
- renderPlots(host,[curve]);assert.equal(observers[0].disconnected,true);
- assert.equal(observers.length,2);renderPlots(host,[]);assert.equal(observers[1].disconnected,true);
+ renderPlots(host,[curve]);assert.equal(observers[0].disconnected,false);
+ assert.equal(host.querySelector('svg'),svg);assert.equal(observers.length,1);renderPlots(host,[]);assert.equal(observers[0].disconnected,true);
 });
 
 test('narrow legends wrap without reducing type, spatial scale remains equal and uncertainty gaps survive resize',t=>{
@@ -78,4 +78,76 @@ test('narrow legends wrap without reducing type, spatial scale remains equal and
  observers.at(-1).resize(240);
  assert.equal(host.querySelectorAll('polygon').length,2);
  assert.equal((host.querySelector('path[stroke-width="2"]')!.getAttribute('d')!.match(/M/g)||[]).length,2);
+});
+
+
+test('a scalar probe preserves undefined purity at an empty cut instead of borrowing a neighboring value',t=>{
+ const {host,window}=fixture(t,300);
+ renderPlots(host,[
+  {label:'Purity',x:[0,.5,1],y:[null,.4,.3],xLabel:'Cut radius',yLabel:'Fraction'},
+  {label:'Recovery',x:[0,.5,1],y:[0,.6,1],xLabel:'Cut radius',yLabel:'Fraction'},
+ ]);
+ const svg=host.querySelector('svg')!,readout=host.querySelector('.plot-readout')!;
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));
+ assert.equal(readout.textContent,'Purity: 0, — · Recovery: 0, 0');
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
+ assert.equal(readout.textContent,'Purity: 1, 0.3 · Recovery: 1, 1');
+});
+
+
+test('chronological plots grow and rewind without future paths, readouts or focus loss',t=>{
+ const {host,window,observers}=fixture(t,300),selected:number[]=[];
+ const history={...curve,xLabel:'Time (s)'};
+ const control=renderPlots(host,[history],{revealUntil:0,onSelect:time=>{selected.push(time);}});
+ const svg=host.querySelector('svg')!,readout=host.querySelector('.plot-readout')!;
+ const line=()=>svg.querySelector('g[data-series="Response"] path')!;
+ assert.equal(points(line()).length,1);svg.focus();
+ control.setCursor(.25);assert.deepEqual(points(line()),[[75,250],[126.25,198.75]]);
+ assert.match(readout.textContent!,/Response: 0.25, 0.25/);
+ assert.equal(window.document.activeElement,svg);assert.equal(host.querySelector('svg'),svg);
+ assert.equal(svg.dataset.visibleUntil,'0.25');
+ // Hovering beyond the exposed history must not reveal future numerical values.
+ svg.getBoundingClientRect=()=>({width:300,height:310,left:0,top:0} as DOMRect);
+ svg.dispatchEvent(new window.MouseEvent('pointermove',{clientX:280,clientY:100}));
+ assert.match(readout.textContent!,/Response: 0.25, 0.25/);assert.deepEqual(selected,[]);
+ // Explicit keyboard seeking still reaches the complete accepted timeline.
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End'}));assert.deepEqual(selected,[1]);assert.equal(points(line()).length,3);assert.match(readout.textContent!,/Response: 1, 1/);
+ svg.dispatchEvent(new window.MouseEvent('pointerdown',{clientX:177.5,clientY:100}));assert.equal(svg.dataset.visibleUntil,'0.5');assert.equal(points(line()).length,2);assert.match(readout.textContent!,/Response: 0.5, 0.5/);
+ control.setCursor(0);assert.equal(points(line()).length,1);assert.match(readout.textContent!,/Response: 0, 0/);
+ observers[0].resize(450);assert.equal(points(line()).length,1,'resizing must not expose future data');
+ assert.deepEqual(history.y,[0,.5,1],'the accepted trajectory stays immutable');
+});
+
+test('progressive histories retain gaps and right-continuous event values',t=>{
+ const {host}=fixture(t,300);
+ const control=renderPlots(host,[{...curve,x:[0,.4,.4,.6,1],y:[0,1,2,null,4]}],{revealUntil:.4});
+ const line=()=>host.querySelector('g[data-series] path')!;
+ assert.equal(points(line()).length,3,'both sides of the event are retained');
+ control.setCursor(.8);assert.equal(points(line()).length,3,'no interpolation across missing data');
+ control.setCursor(1);assert.equal((line().getAttribute('d')!.match(/M/g)??[]).length,2);
+ control.setCursor(.4);assert.match(host.querySelector('.plot-readout')!.textContent!,/Response: 0.4, 2/);
+});
+
+
+test('data refresh preserves the focused chart and uses current samples, callbacks and observer',t=>{
+ const {host,window,observers}=fixture(t,300),selected:number[]=[];
+ renderPlots(host,[curve],{onSelect:value=>selected.push(value)});
+ const svg=host.querySelector('svg')!,figure=host.querySelector('figure'),readout=host.querySelector('.plot-readout');svg.focus();
+ renderPlots(host,[{...curve,x:[0,.25,1],y:[0,4,2]}],{onSelect:value=>selected.push(value*10)});
+ assert.equal(host.querySelector('svg'),svg);assert.equal(host.querySelector('figure'),figure);assert.equal(host.querySelector('.plot-readout'),readout);
+ assert.equal(window.document.activeElement,svg);assert.equal(observers.length,1);assert.equal(observers[0].disconnected,false);
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Home'}));svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'ArrowRight'}));
+ assert.deepEqual(selected,[0,2.5]);assert.match(readout!.textContent!,/Response: 0.25, 4/);assert.equal(window.document.activeElement,svg);
+ renderPlots(host,[{...curve,y:[null,null,null]}]);assert.equal(host.querySelector('svg'),null);assert.equal(observers[0].disconnected,true);
+});
+
+
+test('a keyboard callback can replace data with fewer samples without replacing the focused SVG',t=>{
+ const {host,window}=fixture(t,300);
+ renderPlots(host,[curve],{onSelect:()=>{renderPlots(host,[{...curve,x:[0,1],y:[0,2]}]);}});
+ const svg=host.querySelector('svg')!;svg.focus();
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'End'}));
+ assert.equal(window.document.activeElement,svg);assert.equal(host.querySelector('svg'),svg);
+ assert.match(host.querySelector('.plot-readout')!.textContent!,/Response: 1, 2/);
+ svg.dispatchEvent(new window.KeyboardEvent('keydown',{key:'Home'}));assert.match(host.querySelector('.plot-readout')!.textContent!,/Response: 0, 0/);
 });

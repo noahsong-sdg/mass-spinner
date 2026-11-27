@@ -5,19 +5,48 @@
   "scripts": {
     "dev": "vite",
     "test": "tsx --test tests/*.test.ts",
-    "typecheck": "tsc --noEmit",
-    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit --checkers 1 && tsc --noEmit --checkers 1 -p tsconfig.contracts.json",
+    "build": "tsx scripts/qualify-gltf.ts && node scripts/build.mjs",
     "check:assets": "python3 blender/check_assets.py",
     "check:site": "node scripts/check-site.mjs",
-    "render:host": ".tools/blender36/Blender/Blender.app/Contents/MacOS/Blender --background --gpu-backend opengl --factory-startup --python-exit-code 1 --python blender/build_separator.py"
+    "lint": "eslint src --max-warnings 0",
+    "typecheck:infrastructure": "tsc --noEmit --checkers 1 -p tsconfig.infrastructure.json",
+    "test:browser": "playwright test",
+    "check:gltf": "tsx scripts/check-gltf.ts",
+    "release:seal": "tsx scripts/release-manifest.ts seal",
+    "release:verify": "tsx scripts/release-manifest.ts verify",
+    "render:assembly": "python3 blender/render.py assembly",
+    "typecheck:tests": "tsc --noEmit --checkers 1 -p tsconfig.tests.json",
+    "typecheck:boundaries": "tsc --noEmit --checkers 1 -p tsconfig.boundaries.json"
   },
   "devDependencies": {
-    "jsdom": "31.0.0",
-    "tsx": "4.20.6",
-    "typescript": "5.9.3",
-    "vite": "8.3.6"
+    "@types/three": "0.187.0",
+    "jsdom": "31.0.1",
+    "katex": "0.19.1",
+    "marked": "18.2.1",
+    "tsx": "4.23.15",
+    "typescript": "npm:@typescript/typescript6@6.0.2",
+    "vite": "8.3.8",
+    "@typescript/native": "npm:typescript@7.0.2",
+    "@types/node": "26.6.6",
+    "@types/jsdom": "30.0.0",
+    "eslint": "10.15.0",
+    "typescript-eslint": "8.73.0",
+    "@playwright/test": "1.65.1",
+    "@axe-core/playwright": "4.14.0",
+    "wrangler": "4.164.0",
+    "ajv": "8.20.0",
+    "gltf-validator": "2.0.0-dev.3.10",
+    "@gltf-transform/core": "4.5.1",
+    "@gltf-transform/functions": "4.5.1"
   },
   "dependencies": {
     "three": "0.187.0"
-  }
+  },
+  "engines": {
+    "node": ">=26.13.1 <27",
+    "npm": ">=11.20.0 <12"
+  },
+  "packageManager": "npm@11.20.0",
+  "license": "MIT"
 }

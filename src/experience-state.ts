@@ -22,10 +22,3 @@ export function readExperience(search:string){
  }
  return {level,settings,invalid:false};
 }
-
-export function playgroundLink(href:string,settings:PlaySettings){
- const url=new URL(href);url.search='';url.hash='';
- url.searchParams.set('level','1');url.searchParams.set('v','1');
- for(const [key,value] of Object.entries(settings))url.searchParams.set(key,String(value));
- return url.href;
-}

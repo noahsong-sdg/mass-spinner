@@ -11,7 +11,7 @@ function fixture(overrides={}){
  return {...rotor,transport:simulateFuelTransport(rotor,{cells:64,steps:256})};
 }
 const clouds=(motion:any)=>motion.group.children.filter((o:any)=>o.userData.tracers);
-const positions=(cloud:any)=>cloud.children[0].geometry.attributes.position as THREE.BufferAttribute;
+const positions=(cloud:any)=>cloud.children[0].geometry.attributes.samplePosition as THREE.BufferAttribute;
 function close(a:number,b:number,tolerance=3e-7){assert.ok(Number.isFinite(a)&&Math.abs(a-b)<=tolerance,`${a} != ${b}`);}
 function dispose(motion:any){motion.group.traverse((o:any)=>{o.geometry?.dispose();o.material?.dispose();});}
 
@@ -31,11 +31,6 @@ function massesAt(result:ReturnType<typeof fixture>,time:number,species:number){
  if(time>=result.config.durationS)return snapshots.at(-1)![key];
  const upper=snapshots.findIndex(p=>p.timeS>=time),a=snapshots[upper-1],b=snapshots[upper],f=(time-a.timeS)/(b.timeS-a.timeS);
  return a[key].map((v,i)=>v*(1-f)+b[key][i]*f);
-}
-function ringRadiiMatchPoints(cloud:any){
- const a=positions(cloud),b=cloud.children[2].geometry.attributes.position as THREE.BufferAttribute;
- assert.equal(b.count,a.count*96);
- for(let i=0;i<a.count;i++)close(Math.hypot(b.getX(i*96),b.getY(i*96)),Math.hypot(a.getX(i),a.getY(i)),3e-8);
 }
 
 test('transport tracer radii invert the solved cell inventories and reproduce physical-radius cuts',()=>{
@@ -72,7 +67,7 @@ test('closed-wall Transport never presents equilibrium pumping packets as solved
  }finally{dispose(motion);}
 });
 
-test('averaged ring geometry follows Transport→Flow and Transport→Equilibrium→Flow transitions',()=>{
+test('rotating density samples follow Transport→Flow and Transport→Equilibrium→Flow transitions',()=>{
  const result=fixture(),motion=createFuelMotion(result),R=result.config.radiusM;
  try{
   for(const intermediate of [false,true]){
@@ -80,8 +75,8 @@ test('averaged ring geometry follows Transport→Flow and Transport→Equilibriu
    if(intermediate)motion.update(.137,'equilibrium');
    motion.update(.137,'flow');
    for(const cloud of clouds(motion)){
-    ringRadiiMatchPoints(cloud);
-    assert.equal(cloud.children[2].visible,true);
+    assert.equal(cloud.children.length,2);assert.equal(cloud.children[0].visible,true);
+    assert.equal(cloud.children[1].visible,false);assert.equal(cloud.userData.azimuthAveraged,false);
     if(!cloud.userData.ion){
      const beta=fuelMotionState(result,0,'equilibrium').beta[cloud.userData.species],a=positions(cloud);
      for(let i=0;i<a.count;i+=29){
@@ -112,21 +107,21 @@ test('zero-drive Transport has finite stationary geometry and a genuinely consta
  }finally{dispose(motion);}
 });
 
-test('species focus persists when averaged rings are created and restores both species on All',()=>{
+test('species focus persists through averaging transitions and restores both species on All',()=>{
  const result=fixture(),motion=createFuelMotion(result);
  try{
-  // Focus before rings exist: lazy geometry creation must retain the selection.
+  // A mode transition must retain the selected statistical ensemble.
   motion.setSpecies('light');motion.update(.5,'transport');
   for(const ion of [false,true]){
    const pair=clouds(motion).filter((o:any)=>o.userData.ion===ion);
-   assert.ok(pair[0].children[2].material.opacity>pair[1].children[2].material.opacity*3);
+   assert.ok(pair[0].children[0].material.opacity>pair[1].children[0].material.opacity*3);
   }
   for(const focus of ['heavy','light','all']){
    motion.setSpecies(focus);motion.update(.5,'flow');
    for(const cloud of clouds(motion)){
     const selected=focus==='all'||cloud.userData.species===(focus==='light'?0:1);
     close(cloud.children[0].material.opacity,selected?(cloud.userData.ion?1:.85):.08);
-    assert.ok(selected?cloud.children[2].material.opacity>.01:cloud.children[2].material.opacity<.01);
+    assert.equal(cloud.children.length,2,'no full-orbit line buffers');
    }
   }
  }finally{dispose(motion);}

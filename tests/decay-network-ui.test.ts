@@ -17,7 +17,7 @@ test('pending neutron source retains completed snapshot and disables stale expor
  const dom=new JSDOM('<main></main>'),previous=globalThis.document;Object.assign(globalThis,{document:dom.window.document});
  t.after(()=>{Object.assign(globalThis,{document:previous});dom.window.close();});
  const host=dom.window.document.querySelector('main')!,ui=setupNeutronTransport(host);ui.update({sourceRateS:2e10,sourceEnergyMeV:14.1});const accepted=ui.read();
- ui.setPending(true);assert.equal(ui.read(),accepted);assert.ok(host.querySelector<HTMLButtonElement>('button')!.disabled);assert.match(host.textContent!,/last completed source snapshot/);
+ ui.setPending(true);assert.equal(ui.read(),accepted);assert.ok(host.querySelector<HTMLButtonElement>('button')!.disabled);assert.match(host.textContent!,/display shows the last completed source state/);
  ui.setPending(false);assert.equal(host.querySelector<HTMLButtonElement>('button')!.disabled,false);ui.update(null);assert.equal(ui.read(),null);assert.ok(host.querySelector<HTMLButtonElement>('button')!.disabled);
 });
 test('neutron and irradiation plot refresh disconnect observers before clearing',t=>{

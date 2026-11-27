@@ -7,13 +7,13 @@ import {buildLaurelinAssembly,LAURELIN_COMPONENTS} from '../src/laurelin-scene.j
 import {simulateLaurelin,LAURELIN_DEFAULTS} from '../src/laurelin-physics.js';
 function fixture(t:any){
  const {window}=new JSDOM(readFileSync('laurelin.html','utf8'),{url:'https://example.com/laurelin.html'}),{document}=window;
- let inspect:(id:string)=>void,frame:(time:number)=>void,state:any,home=0;
- const app=mountLaurelin({document,modelSource:'/assets/model.md',requestFrame:(f:any)=>{frame=f;},
-  createScene:(_canvas:any,onInspect:any)=>{inspect=onInspect;return {update:(s:any)=>{state=s;},home:()=>home++};}});
+ let inspect:(id:string)=>void,state:any,home=0,draws=0;const frames:((time:number)=>void)[]=[];
+ const app=mountLaurelin({document,modelSource:'/assets/model.md',requestFrame:(f:any)=>{frames.push(f);},
+  createScene:(_canvas:any,onInspect:any)=>{inspect=onInspect;return {update:(s:any)=>{state=s;draws++;},home:()=>home++};}});
  const node=(id:string)=>document.getElementById(id) as any;
  const click=(id:string)=>node(id).click();
  const slide=(id:string,value:number)=>{node(id).value=String(value);node(id).dispatchEvent(new window.Event('input'));};
- t.after(()=>window.close());return {document,node,click,slide,app,inspect:(id:string)=>inspect(id),tick:(time:number)=>frame(time),state:()=>state,homes:()=>home};
+ t.after(()=>window.close());return {document,node,click,slide,app,inspect:(id:string)=>inspect(id),tick:(time:number)=>frames.shift()?.(time),queued:()=>frames.length,draws:()=>draws,state:()=>state,homes:()=>home};
 }
 test('every parameter is wired to the live model; reset restores state and finite plots',t=>{
  const f=fixture(t),baseline=f.app.result;
@@ -37,6 +37,17 @@ test('timeline, plot cursors and rendered state use the same physical sample',t=
  f.slide('timeline',.12);f.tick(5000);assert.equal(f.app.fraction,.12);
  f.click('restart');assert.equal(f.app.fraction,0);assert.equal(f.node('play').textContent,'Play');
  f.click('home');assert.equal(f.homes(),1);
+});
+test('paused playback draws only on demand and restart never creates duplicate frame queues',t=>{
+ const f=fixture(t);assert.equal(f.queued(),0);assert.equal(f.draws(),1);
+ f.slide('timeline',.2);assert.equal(f.draws(),2);assert.equal(f.queued(),0);
+ f.slide('parameter-temperatureKeV',2);assert.equal(f.draws(),3);assert.equal(f.queued(),0);
+ f.click('play');assert.equal(f.queued(),1);f.tick(100);assert.equal(f.queued(),1);assert.equal(f.draws(),4);
+ f.click('play');const pausedDraws=f.draws();f.tick(200);assert.equal(f.queued(),0);assert.equal(f.draws(),pausedDraws);
+ f.click('play');assert.equal(f.queued(),1);f.click('restart');assert.equal(f.queued(),1);assert.equal(f.app.fraction,0);
+ f.click('play');assert.equal(f.queued(),1,'The queued callback serves resumed playback.');f.tick(300);assert.equal(f.queued(),1);
+ f.slide('timeline',.8);const scrubbedDraws=f.draws();f.tick(400);assert.equal(f.queued(),0);assert.equal(f.draws(),scrubbedDraws);
+ f.click('play');f.tick(500);f.tick(2500);assert.equal(f.app.fraction,1);assert.equal(f.queued(),0);
 });
 test('full-pulse plot maxima are explicitly labeled and stay distinct from the selected state',t=>{
  const f=fixture(t),captions=[...f.document.querySelectorAll('figcaption')].map(c=>c.textContent);
@@ -65,8 +76,8 @@ test('panels and all component inspectors remain usable without overlay pileup',
   assert.equal(f.node('inspector').hidden,false);assert.equal(f.node('component-name').textContent,name);
   assert.equal(f.document.activeElement,f.node('inspector').querySelector('button'));
  }
- assert.match(f.node('model').textContent,/not a computed trajectory/);
- assert.match(f.node('ledger').textContent,/Nonfusion net/);assert.match(f.node('validity').textContent,/Fusion electricity is unsolved/);
+ assert.match(f.node('model').textContent,/Translation shows pulse phases, not a calculated path/);
+ assert.match(f.node('ledger').textContent,/Nonfusion net/);assert.match(f.node('validity').textContent,/model does not calculate fusion electricity/);
 });
 test('compression geometry, phase visibility, picking targets and finite field contours follow the pulse',()=>{
  const model=buildLaurelinAssembly(),r=simulateLaurelin();

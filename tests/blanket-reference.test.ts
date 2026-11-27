@@ -48,10 +48,14 @@ test('optical-depth limits expose capture saturation versus declining per-invent
 });
 
 class Node{
+ dataset:Record<string,string>={};
+ parentElement:Node|null=null;
  children:Node[]=[];attributes:Record<string,string>={};events=new Map<string,()=>void>();
  textContent='';className='';id='';htmlFor='';type='';min:string|number='';max:string|number='';step:string|number='';value:string|number='';open=false;href='';
  constructor(public tag='div'){}
- append(...children:Node[]){this.children.push(...children);}replaceChildren(...children:Node[]){this.children=children;}
+ append(...children:Node[]){for(const child of children){child.remove();child.parentElement=this;this.children.push(child);}}replaceChildren(...children:Node[]){for(const child of this.children)child.parentElement=null;this.children=[];this.append(...children);}
+ remove(){if(this.parentElement){const siblings=this.parentElement.children;siblings.splice(siblings.indexOf(this),1);this.parentElement=null;}}
+ insertBefore(child:Node,before:Node|null){child.remove();const index=before?this.children.indexOf(before):this.children.length;if(index<0)throw new Error('Reference node is not a child.');this.children.splice(index,0,child);child.parentElement=this;return child;}
  setAttribute(k:string,v:string){this.attributes[k]=v;}addEventListener(k:string,f:()=>void){this.events.set(k,f);}
 }
 const all=(n:Node):Node[]=>[n,...n.children.flatMap(all)];
@@ -63,7 +67,7 @@ test('actual optional explorer handler updates both decay fractions and clears s
  t.after(()=>{if(previous)Object.defineProperty(globalThis,'document',previous);else Reflect.deleteProperty(globalThis,'document');});
  const host=new Node(),view=setupBlanketExplorer(host),input=all(host).find(n=>n.id==='blanket-cooldown-hours')!;
  assert.equal(view.panel.tag,'details');assert.equal(view.panel.open,false);assert.equal(view.render.id,'blanket-render');
- assert.match(text(host),/Ground-state/);assert.match(text(host),/initial mixture is assumed/);assert.match(text(host),/not recalculated/);
+ assert.match(text(host),/The ground-state half-life/);assert.match(text(host),/You select the initial mixture/);assert.match(text(host),/controls do not change the published results/);
  const outputs=()=>all(host).filter(n=>n.tag==='output');assert.equal(outputs()[2].textContent,'100.000%');assert.equal(outputs()[4].textContent,'0.000%');
  for(const endpoint of [0,500,HG197_HALF_LIFE_HOURS]){
   input.value=endpoint;input.events.get('input')!();
@@ -73,10 +77,10 @@ test('actual optional explorer handler updates both decay fractions and clears s
   for(const n of all(host))for(const v of Object.values(n.attributes))assert.doesNotMatch(v,/NaN|Infinity/);
  }
  input.value=-1;input.events.get('input')!();assert.equal(outputs()[2].textContent,'—');assert.equal(outputs()[4].textContent,'—');
- assert.match(text(host),/requires finite nonnegative/);assert.equal(all(host).filter(n=>n.tag==='svg').length,2,'independent reference plots remain');
+ assert.match(text(host),/Use a finite nonnegative cooldown time in hours/);assert.equal(all(host).filter(n=>n.tag==='svg').length,2,'independent reference plots remain');
  input.value=64.14;input.events.get('input')!();assert.equal(outputs()[4].textContent,'50.000%');assert.equal(all(host).filter(n=>n.tag==='svg').length,3);
  const isomer=all(host).find(n=>n.id==='blanket-isomer-fraction')!;isomer.value=1;isomer.events.get('input')!();assert.notEqual(outputs()[4].textContent,'50.000%');
- const depth=all(host).find(n=>n.id==='blanket-optical-depth')!;const before=text(host).split('Frozen transport')[1].split('These figures')[0];
- for(const tau of [0,8]){depth.value=tau;depth.events.get('input')!();assert.equal(text(host).split('Frozen transport')[1].split('These figures')[0],before);}
- depth.value=-1;depth.events.get('input')!();assert.match(text(host),/Optical depth requires/);assert.equal(all(host).filter(n=>n.tag==='svg').length,2);
+ const depth=all(host).find(n=>n.id==='blanket-optical-depth')!;const before=text(host).split('The transport calculation gives')[1].split('These controls')[0];
+ for(const tau of [0,8]){depth.value=tau;depth.events.get('input')!();assert.equal(text(host).split('The transport calculation gives')[1].split('These controls')[0],before);}
+ depth.value=-1;depth.events.get('input')!();assert.match(text(host),/Use a finite nonnegative optical depth/);assert.equal(all(host).filter(n=>n.tag==='svg').length,2);
 });

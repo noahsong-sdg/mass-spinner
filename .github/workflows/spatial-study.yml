@@ -1,0 +1,49 @@
+name: Spatial convergence study
+on:
+  push:
+    branches: [codex/spatial-convergence]
+permissions:
+  contents: read
+jobs:
+  study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          git fetch --no-tags --depth=1 origin c2769b2e9d327d43fc87c55e96a5f9ba981a6f0e
+          docker pull node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          docker image inspect node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 --format '{{.Id}}'
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 npm ci --ignore-scripts --no-audit --no-fund
+      - name: Execute offline characterization
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49 sh -eu -c '
+            regression=$(mktemp -d)
+            cp -R src tests "$regression/"
+            cp package.json "$regression/"
+            ln -s /work/node_modules "$regression/node_modules"
+            git show c2769b2e9d327d43fc87c55e96a5f9ba981a6f0e:src/fuel-spatial-convergence.ts > "$regression/src/fuel-spatial-convergence.ts"
+            if node --import tsx --test --test-name-pattern "quantized responses|ULP-sized contraction" "$regression/tests/fuel-spatial-convergence.test.ts"; then
+              echo "Expected the pre-fix representation regressions to fail"
+              exit 1
+            fi
+            rm -rf "$regression"
+            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-convergence.test.ts tests/fuel-spatial-experiment.test.ts tests/fuel-spatial-study-cli.test.ts
+            study_status=0
+            node --import tsx scripts/study-fuel-spatial.ts study-output uniform || study_status=1
+            node --import tsx scripts/study-fuel-spatial.ts graded-output upper-graded || study_status=1
+            node --import tsx scripts/study-fuel-spatial.ts tight-output tight-current || study_status=1
+            exit "$study_status"
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: spatial-convergence
+          path: |
+            study-output/
+            graded-output/
+            tight-output/
+          if-no-files-found: error

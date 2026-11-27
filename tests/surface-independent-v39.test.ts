@@ -213,7 +213,7 @@ test('actual surface layer recovers after unsupported geometry and withholds sta
  layer.update(invalidGeometry,curved);assert.match(layer.panel.textContent!,/outside display domain/);
  layer.update(packet,c);assert.ok(layer.group.getObjectByName('engineering-rotating'),'same accepted geometry must rebuild after failed construction');
  layer.update({status:'pending',reason:'independent pending witness'},c);
- assert.equal(layer.group.children.length,0);
+ assert.ok(layer.group.getObjectByName('engineering-rotating'));assert.equal(layer.group.getObjectByName('Accepted numerical surfaces'),undefined);
  for(const select of layer.panel.querySelectorAll('select') as NodeListOf<HTMLSelectElement>)
   assert.ok(select.hidden||select.disabled||select.closest('[hidden]'),'pending sample controls must not expose prior values');
  layer.dispose();assert.equal(frame.children.length,0);

@@ -26,13 +26,13 @@ function solveTridiagonal(lower:number[],diagonal:number[],upper:number[],rhs:nu
  for(let i=1;i<n;i++){
   const ratio=lower[i]/d[i-1];d[i]-=ratio*upper[i-1];r[i]-=ratio*r[i-1];
  }
- const f=Array(n).fill(0);f[n-1]=r[n-1]/d[n-1];
+ const f=Array<number>(n).fill(0);f[n-1]=r[n-1]/d[n-1];
  for(let i=n-2;i>=0;i--)f[i]=(r[i]-upper[i]*f[i+1])/d[i];
  if(f.some(x=>!Number.isFinite(x)||x<0))throw new Error('Landau reference left the finite positive domain.');
  return f;
 }
 function potentials(f:number[],dx:number){
- const n=f.length,m2=[0],m4=[0],tail=Array(n+1).fill(0);
+ const n=f.length,m2=[0],m4=[0],tail=Array<number>(n+1).fill(0);
  for(let i=0;i<n;i++){
   const l=i*dx,r=(i+1)*dx;
   m2.push(m2[i]+f[i]*(r**3-l**3)/3);
@@ -96,7 +96,7 @@ export function simulateLandauReference(config:LandauReferenceConfig){
  while(time<duration){
   const step=Math.min(dt,duration-time),pots=distributions.map(f=>potentials(f,dx));
   distributions=distributions.map((f,a)=>{
-   const alpha=Array(n+1).fill(0),beta=Array(n+1).fill(0);
+   const alpha=Array<number>(n+1).fill(0),beta=Array<number>(n+1).fill(0);
    for(let j=1;j<n;j++){
     let diffusion=0,drag=0;
     ss.forEach((b,k)=>{

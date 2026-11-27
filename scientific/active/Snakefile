@@ -1,0 +1,18 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path("scientific/active").resolve()))
+from admission import admit
+from campaign_inputs import content_key, sources
+
+CASE = content_key(sources())
+RESULT = f"scientific/active/results/{CASE}"
+
+rule all:
+    input: RESULT + "/manifest.json"
+    run:
+        admit(RESULT)
+
+rule public_diagnostic:
+    input: list(sources())
+    output: RESULT + "/manifest.json", RESULT + "/diagnosis.json", RESULT + "/comparison.png"
+    shell: "{sys.executable:q} scientific/active/campaign.py produce {RESULT:q}"

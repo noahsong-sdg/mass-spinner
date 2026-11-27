@@ -1,0 +1,20 @@
+{
+  "url": "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev",
+  "checkedUTC": "2026-11-16T21:06:51.290745+00:00",
+  "rootHTTP": {
+    "status": 403,
+    "reason": "Forbidden"
+  },
+  "browserVerification": "Reopened final simulator; ran three wall-drag settings through real worker; keyboard endpoint 0.07891 [0.07694,0.08195]. Followed Evidence & limits to rendered HTML; final1357-test count and loaded comparison image observed; mobile report width390/document390. No byte-level HTTP equality claim.",
+  "initialCloudflareVersion": "1c8ad085-44c2-4787-b583-70a839ccbb09",
+  "cloudflareVersion": "9d3bc48a-3a4a-4222-afb5-1e381db4d4dd",
+  "sourceCommit": "52d510f0f20eda6a390141e9f6ed80c1ac8c7e5a",
+  "finalReportSourceSHA256": "9f9042279dc256f6b83ea394b2c07196f1c726664c8f9bae2372dc411494dd62",
+  "reportURL": "https://fieldwork-plasma-lab.fieldwork-plasma-lab.workers.dev/qualification",
+  "screenshots": [
+    "browser/final-desktop.jpg",
+    "browser/final-mobile.jpg",
+    "browser/final-report.jpg",
+    "browser/final-report-mobile.jpg"
+  ]
+}

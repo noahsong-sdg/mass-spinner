@@ -4,7 +4,7 @@ import {createHash} from 'node:crypto';
 import {JSDOM} from 'jsdom';
 import {GLTFExporter} from 'three/addons/exporters/GLTFExporter.js';
 import {surfaceState} from '../src/surface-state.ts';
-import {createSurfaceLayer} from '../src/surface-layer.js';
+import {createSurfaceLayer} from '../src/surface-layer.ts';
 import {DEFAULT_CONFIG,simulate} from '../src/physics.ts';
 import {solveEquilibrium} from '../src/equilibrium-model.ts';
 import {DEFAULT_COUPLED_TARGET,simulateCoupledTarget} from '../src/coupled-target.ts';
@@ -34,5 +34,5 @@ const target={...DEFAULT_COUPLED_TARGET,depthCells:8,backingCells:4,samples:10,c
 const result=simulateCoupledTarget(source,target),extra={selectedState:result.final,source,acceptedSource:source};
 await save('target-backing-temperature','beam-target',target,result,'temperature-backing',extra);
 await save('target-tritium','beam-target',target,result,'tritiumFraction',extra);
-const sources={};for(const name of ['src/engineering-geometry.js','src/surface-state.ts','src/surface-layer.js','scripts/export-surface-evidence-v39.mjs'])sources[name]=sha(await fs.readFile(name));
+const sources={};for(const name of ['src/engineering-geometry.ts','src/surface-state.ts','src/surface-layer.ts','scripts/export-surface-evidence-v39.mjs'])sources[name]=sha(await fs.readFile(name));
 await fs.writeFile(`${output}/manifest.json`,JSON.stringify({records,sources},null,2)+'\n');console.log(JSON.stringify({output,states:records.length}));

@@ -1,0 +1,36 @@
+name: Persistent liner heat
+on:
+  push:
+    branches: [codex/liner-energy-storage,codex/liner-state-validation]
+permissions:
+  contents: read
+jobs:
+  storage:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Prepare locked tools
+        run: |
+          docker build -t liner-check - <<'DOCKERFILE'
+          FROM node:26.13.1-bookworm@sha256:b7087bc4d973034b30854b378ba107f9fab622b47514cb7e2592e41b8bab8d49
+          RUN apt-get update && apt-get install -y --no-install-recommends python3 && rm -rf /var/lib/apt/lists/*
+          DOCKERFILE
+          docker run --rm --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp liner-check npm ci --ignore-scripts --no-audit --no-fund
+      - name: Check persistent storage and independent references offline
+        run: |
+          docker run --rm --network none --memory 1g --cpus 1 --cap-drop ALL --security-opt no-new-privileges --user "$(id -u):$(id -g)" --volume "$PWD:/work" --workdir /work --env HOME=/tmp liner-check sh -eu -c '
+            node --import tsx --test --test-concurrency=1 tests/fuel-spatial-operation-v66.test.ts tests/fuel-gas-thermal.test.ts tests/fuel-spatial-experiment.test.ts
+            python3 scientific/spatial-argon-20261116/liner_storage_oracle.py --self-test
+            python3 scientific/spatial-argon-20261116/audit_nested.py --self-test
+            node --import tsx scripts/probe-fuel-liner-storage.ts liner-storage-output
+            python3 scientific/spatial-argon-20261116/liner_storage_oracle.py liner-storage-output/liner-storage-input.json
+          '
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        if: always()
+        with:
+          name: liner-storage
+          path: liner-storage-output/
+          if-no-files-found: error
